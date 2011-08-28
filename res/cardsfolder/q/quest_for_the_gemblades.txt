@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Quest_for_the_Gemblades.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/177.jpg
+Oracle:Whenever a creature you control deals combat damage to a creature, you may put a quest counter on Quest for the Gemblades.\nRemove a quest counter from Quest for the Gemblades and sacrifice it: Put four +1/+1 counters on target creature.
 End

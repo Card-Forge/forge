@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ 1 | Defined$ Self | Amount$ 1 | SpellDescription$ Pr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revered_elder.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/43.jpg
+Oracle:{1}: Prevent the next 1 damage that would be dealt to Revered Elder this turn.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protomatter_powder.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/53.jpg
+Oracle:{4}{W}, {T}, Sacrifice Protomatter Powder: Return target artifact card from your graveyard to the battlefield.
 End

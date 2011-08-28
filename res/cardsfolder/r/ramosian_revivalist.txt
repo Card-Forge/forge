@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 6 T | TgtPrompt$ Choose target Rebel permanent card wit
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_revivalist.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/30.jpg
+Oracle:{6}, {T}: Return target Rebel permanent card with converted mana cost 5 or less from your graveyard to the battlefield.
 End

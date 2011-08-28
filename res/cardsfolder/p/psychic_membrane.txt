@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/46.jpg
+Oracle:Defender (This creature can't attack.)\nWhenever Psychic Membrane blocks, you may draw a card.
 End

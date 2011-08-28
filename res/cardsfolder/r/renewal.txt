@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renewal.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/66.jpg
+Oracle:As an additional cost to cast Renewal, sacrifice a land.\nSearch your library for a basic land card and put that card onto the battlefield. Then shuffle your library.\nDraw a card at the beginning of the next turn's upkeep.
 End

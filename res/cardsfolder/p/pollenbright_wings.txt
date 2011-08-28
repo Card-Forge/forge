@@ -11,4 +11,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollenbright_wings.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/219.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.\nWhenever enchanted creature deals combat damage to a player, put that many 1/1 green Saproling creature tokens onto the battlefield.
 End

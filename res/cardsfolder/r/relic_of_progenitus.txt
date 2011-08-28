@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_of_progenitus.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/218.jpg
+Oracle:{T}: Target player exiles a card from his or her graveyard.\n{1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
 End

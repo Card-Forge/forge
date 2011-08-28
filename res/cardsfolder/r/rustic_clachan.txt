@@ -7,4 +7,5 @@ A:AB$ PutCounter | Cost$ 1 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtProm
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustic_clachan.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/150.jpg
+Oracle:As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nReinforce 1-{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_spellbomb.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/191.jpg
+Oracle:{T}, Sacrifice Panic Spellbomb: Target creature can't block this turn.\nWhen Panic Spellbomb is put into a graveyard from the battlefield, you may pay {R}. If you do, draw a card.
 End

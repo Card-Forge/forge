@@ -9,4 +9,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/155.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/74.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/155.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/169.jpg
+Oracle:Destroy all creatures you don't control. They can't be regenerated.
 End

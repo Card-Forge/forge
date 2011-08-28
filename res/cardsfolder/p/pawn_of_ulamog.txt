@@ -10,4 +10,5 @@ SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pawn_of_ulamog.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/122.jpg
+Oracle:Whenever Pawn of Ulamog or another nontoken creature you control dies, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_and_sow.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/81.jpg
+Oracle:Choose one - Destroy target land; or search your library for a land card, put that card onto the battlefield, then shuffle your library.\nEntwine {1}{G} (Choose both if you pay the entwine cost.)
 End

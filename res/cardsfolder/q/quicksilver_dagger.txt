@@ -10,4 +10,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_dagger.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/118.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target player. You draw a card."
 End

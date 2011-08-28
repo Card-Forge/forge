@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resplendent_mentor.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/19.jpg
+Oracle:White creatures you control have "{T}: You gain 1 life."
 End

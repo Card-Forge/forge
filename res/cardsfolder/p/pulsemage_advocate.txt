@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulsemage_advocate.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/19.jpg
+Oracle:{T}: Return three target cards from an opponent's graveyard to his or her hand. Return target creature card from your graveyard to the battlefield.
 End

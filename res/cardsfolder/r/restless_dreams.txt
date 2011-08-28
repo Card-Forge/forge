@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_dreams.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/79.jpg
+Oracle:As an additional cost to cast Restless Dreams, discard X cards.\nReturn X target creature cards from your graveyard to your hand.
 End

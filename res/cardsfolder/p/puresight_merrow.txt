@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puresight_merrow.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/146.jpg
+Oracle:{W/U}, {Q}: Look at the top card of your library. You may exile that card. ({Q} is the untap symbol.)
 End

@@ -10,4 +10,5 @@ A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Fungus.Creature+YouCtrl,Sap
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pallid_mycoderm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/10.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.\nRemove three spore counters from Pallid Mycoderm: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Fungus and/or Saproling creatures you control get +1/+1 until end of turn.
 End

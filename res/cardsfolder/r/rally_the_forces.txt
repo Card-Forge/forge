@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ Fi
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_forces.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/73.jpg
+Oracle:Attacking creatures get +1/+0 and gain first strike until end of turn.
 End

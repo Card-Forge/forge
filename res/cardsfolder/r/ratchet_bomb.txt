@@ -8,4 +8,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ratchet_bomb.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/196.jpg
+Oracle:{T}: Put a charge counter on Ratchet Bomb.\n{T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb.
 End

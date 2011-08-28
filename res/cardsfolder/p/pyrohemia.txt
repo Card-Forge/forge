@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122436.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/132.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/119.jpg
+Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pyrohemia.\n{R}: Pyrohemia deals 1 damage to each creature and each player.
 End

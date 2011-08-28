@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromania.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/112.jpg
+Oracle:{1}{R}, Discard a card at random: Pyromania deals 1 damage to target creature or player.\n{1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to target creature or player.
 End

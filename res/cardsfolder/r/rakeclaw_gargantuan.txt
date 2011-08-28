@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target c
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakeclaw_gargantuan.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/186.jpg
+Oracle:{1}: Target creature with power 5 or greater gains first strike until end of turn.
 End

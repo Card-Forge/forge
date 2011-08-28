@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49061.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/48.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/83.jpg
+Oracle:Return target permanent to its owner's hand.
 End

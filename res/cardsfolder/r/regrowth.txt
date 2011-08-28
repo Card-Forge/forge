@@ -9,4 +9,5 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/123.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/123.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/121.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/123.jpg
+Oracle:Return target card from your graveyard to your hand.
 End

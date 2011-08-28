@@ -7,4 +7,5 @@ SVar:DB1:DB$PutCounter | Defined$ Targeted | CounterType$ M1M1 | CounterNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puncture_bolt.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/102.jpg
+Oracle:Puncture Bolt deals 1 damage to target creature. Put a -1/-1 counter on that creature.
 End

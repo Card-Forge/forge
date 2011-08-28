@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_totem.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/261.jpg
+Oracle:{T}: Add {B} to your mana pool.\n{2}{B}: Phyrexian Totem becomes a 5/5 black Horror artifact creature with trample until end of turn.\nWhenever Phyrexian Totem is dealt damage, if it's a creature, sacrifice that many permanents.
 End

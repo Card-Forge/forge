@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_negator.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/65.jpg
+Oracle:Trample\nWhenever Phyrexian Negator is dealt damage, sacrifice that many permanents.
 End

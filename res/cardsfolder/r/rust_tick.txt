@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust_tick.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/198.jpg
+Oracle:You may choose not to untap Rust Tick during your untap step.\n{1}, {T}: Tap target artifact. It doesn't untap during its controller's untap step for as long as Rust Tick remains tapped.
 End

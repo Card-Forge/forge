@@ -7,4 +7,5 @@ A:SP$ Destroy | Cost$ G | ValidTgts$ Enchantment | TgtPrompt$ Select target ench
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_revelation.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/20.jpg
+Oracle:Destroy target enchantment.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

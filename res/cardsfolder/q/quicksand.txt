@@ -10,4 +10,5 @@ SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/166.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/323.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/140.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/356.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Quicksand: Target attacking creature without flying gets -1/-2 until end of turn.
 End

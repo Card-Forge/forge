@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_portal.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/311.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/308.jpg
+Oracle:{6}, {T}: Search your library for a card and put that card into your hand. Then shuffle your library.
 End

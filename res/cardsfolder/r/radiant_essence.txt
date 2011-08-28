@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_essence.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/336.jpg
+Oracle:Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.
 End

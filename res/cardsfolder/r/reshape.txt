@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reshape.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/31.jpg
+Oracle:As an additional cost to cast Reshape, sacrifice an artifact.\nSearch your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
 End

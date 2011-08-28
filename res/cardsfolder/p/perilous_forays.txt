@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_forays.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/176.jpg
+Oracle:{1}, Sacrifice a creature: Search your library for a land card with a basic land type and put it onto the battlefield tapped. Then shuffle your library.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peach_garden_oath.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/34.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/15.jpg
+Oracle:You gain 2 life for each creature you control.
 End

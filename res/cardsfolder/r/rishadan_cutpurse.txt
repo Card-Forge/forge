@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_cutpurse.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/93.jpg
+Oracle:When Rishadan Cutpurse enters the battlefield, each opponent sacrifices a permanent unless he or she pays {1}.
 End

@@ -8,4 +8,5 @@ A:AB$ Token | Cost$ R T | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Cr
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakka_mar.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/71.jpg
+Oracle:Haste\n{R}, {T}: Put a 3/1 red Elemental creature token with haste onto the battlefield.
 End

@@ -9,4 +9,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_pilferer.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/60.jpg
+Oracle:Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.\nMorph {U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

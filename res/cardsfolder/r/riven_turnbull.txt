@@ -7,4 +7,5 @@ A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1680.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/294.jpg
+Oracle:{T}: Add {B} to your mana pool.
 End

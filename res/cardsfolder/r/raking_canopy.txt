@@ -7,4 +7,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raking_canopy.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/127.jpg
+Oracle:Whenever a creature with flying attacks you, Raking Canopy deals 4 damage to it.
 End

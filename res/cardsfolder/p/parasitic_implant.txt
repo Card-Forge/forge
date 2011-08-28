@@ -10,4 +10,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Myr | TokenTypes$ Artifact,C
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_implant.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/67.jpg
+Oracle:Enchant creature\nAt the beginning of your upkeep, enchanted creature's controller sacrifices it and you put a 1/1 colorless Myr artifact creature token onto the battlefield.
 End

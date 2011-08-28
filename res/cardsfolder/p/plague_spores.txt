@@ -7,4 +7,5 @@ SVar:DestroyLand:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | NoRegen$ True | TgtPr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_spores.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/260.jpg
+Oracle:Destroy target nonblack creature and target land. They can't be regenerated.
 End

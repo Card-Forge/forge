@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentavus.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/226.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/213.jpg
+Oracle:Pentavus enters the battlefield with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Pentavus: Put a 1/1 colorless Pentavite artifact creature token with flying onto the battlefield.\n{1}, Sacrifice a Pentavite: Put a +1/+1 counter on Pentavus.
 End

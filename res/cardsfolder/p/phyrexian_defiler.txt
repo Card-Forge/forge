@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_defiler.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/60.jpg
+Oracle:{T}, Sacrifice Phyrexian Defiler: Target creature gets -3/-3 until end of turn.
 End

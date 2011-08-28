@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_cause.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/51.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/29.jpg
+Oracle:Whenever a creature attacks, you gain 1 life.
 End

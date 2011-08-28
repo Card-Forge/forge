@@ -9,4 +9,5 @@ SVar:X:Count$Valid Card.Self+countersGE4QUEST
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_renewal.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/110.jpg
+Oracle:Whenever a creature you control becomes tapped, you may put a quest counter on Quest for Renewal.\nAs long as there are four or more quest counters on Quest for Renewal, untap all creatures you control during each other player's untap step.
 End

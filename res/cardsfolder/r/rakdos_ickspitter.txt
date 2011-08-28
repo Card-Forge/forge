@@ -8,4 +8,5 @@ SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ickspitter.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/128.jpg
+Oracle:{T}: Rakdos Ickspitter deals 1 damage to target creature and that creature's controller loses 1 life.
 End

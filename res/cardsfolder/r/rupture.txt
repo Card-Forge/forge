@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/97.jpg
+Oracle:Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player.
 End

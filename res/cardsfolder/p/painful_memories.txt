@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painful_memories.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/147.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/31.jpg
+Oracle:Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.
 End

@@ -12,4 +12,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_wings.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/49.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/46.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Phantom Wings: Return enchanted creature to its owner's hand.
 End

@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/141.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/23.jpg
+Oracle:Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
 End

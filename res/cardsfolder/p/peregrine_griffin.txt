@@ -8,4 +8,5 @@ K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_griffin.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/29.jpg
+Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)
 End

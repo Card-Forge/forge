@@ -17,4 +17,5 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/28.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/72.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/109.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/71.jpg
+Oracle:Pirate Ship can't attack unless defending player controls an Island.\n{T}: Pirate Ship deals 1 damage to target creature or player.\nWhen you control no Islands, sacrifice Pirate Ship.
 End

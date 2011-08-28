@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pact_of_the_titan.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/103.jpg
+Oracle:Pact of the Titan is red.\nPut a 4/4 red Giant creature token onto the battlefield.\nAt the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
 End

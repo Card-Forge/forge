@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_earthquake.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/122.jpg
+Oracle:Rolling Earthquake deals X damage to each creature without horsemanship and each player.
 End

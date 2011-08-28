@@ -6,4 +6,5 @@ A:SP$ DestroyAll | Cost$ 3 W W W | ValidCards$ Permanent.nonLand | SpellDescript
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/24.jpg
+Oracle:Destroy all nonland permanents.
 End

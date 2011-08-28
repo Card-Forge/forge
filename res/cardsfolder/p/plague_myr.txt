@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_myr.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/125.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{T}: Add {1} to your mana pool.
 End

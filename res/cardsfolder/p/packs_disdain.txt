@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/packs_disdain.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/73.jpg
+Oracle:Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
 End

@@ -7,4 +7,5 @@ SVar:DBPoison:DB$Poison | Cost$ 0 | Defined$ TargetedController | Num$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pistus_strike.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/86.jpg
+Oracle:Destroy target creature with flying. Its controller gets a poison counter.
 End

@@ -11,4 +11,5 @@ SVar:Y:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repercussion.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/95.jpg
+Oracle:Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
 End

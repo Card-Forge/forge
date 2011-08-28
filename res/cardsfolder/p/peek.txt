@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peek.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/91.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/94.jpg
+Oracle:Look at target player's hand.\nDraw a card.
 End

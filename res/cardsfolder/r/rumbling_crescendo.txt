@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_crescendo.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/210.jpg
+Oracle:At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.\n{R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.
 End

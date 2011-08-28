@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_ogre.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/98.jpg
+Oracle:Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.
 End

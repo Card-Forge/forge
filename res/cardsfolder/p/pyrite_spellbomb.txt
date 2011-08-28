@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrite_spellbomb.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/232.jpg
+Oracle:{R}, Sacrifice Pyrite Spellbomb: Pyrite Spellbomb deals 2 damage to target creature or player.\n{1}, Sacrifice Pyrite Spellbomb: Draw a card.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimewind_cryomancer.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/43.jpg
+Oracle:{1}, {T}: Counter target activated ability. Activate this ability only if you control four or more snow permanents. (Mana abilities can't be targeted.)
 End

@@ -9,4 +9,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 2 | Origin$ Library | Destination$ Exi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_thief.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/40.jpg
+Oracle:{U}: Rootwater Thief gains flying until end of turn.\nWhenever Rootwater Thief deals combat damage to a player, you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles his or her library.
 End

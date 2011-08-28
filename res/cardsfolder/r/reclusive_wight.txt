@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclusive_wight.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/153.jpg
+Oracle:At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
 End

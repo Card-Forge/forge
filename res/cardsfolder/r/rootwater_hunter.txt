@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_hunter.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/82.jpg
+Oracle:{T}: Rootwater Hunter deals 1 damage to target creature or player.
 End

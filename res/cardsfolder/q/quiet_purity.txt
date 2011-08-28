@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target ench
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_purity.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/39.jpg
+Oracle:Destroy target enchantment.
 End

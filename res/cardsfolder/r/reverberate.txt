@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverberate.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/155.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/152.jpg
+Oracle:Copy target instant or sorcery spell. You may choose new targets for the copy.
 End

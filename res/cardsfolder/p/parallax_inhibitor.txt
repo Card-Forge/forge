@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_inhibitor.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/134.jpg
+Oracle:{1}, {T}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_ranger.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/67.jpg
+Oracle:Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
 End

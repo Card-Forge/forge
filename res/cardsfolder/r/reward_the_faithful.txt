@@ -7,4 +7,5 @@ SVar:X:Count$MaxCMCYouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reward_the_faithful.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/22.jpg
+Oracle:Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
 End

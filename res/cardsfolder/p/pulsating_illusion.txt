@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulsating_illusion.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/96.jpg
+Oracle:Flying\nDiscard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate this ability only once each turn.
 End

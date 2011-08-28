@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_flame.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/96.jpg
+Oracle:Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
 End

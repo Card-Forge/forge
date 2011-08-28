@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Quest_for_the_Gravelord.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/108.jpg
+Oracle:Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.\nRemove three quest counters from Quest for the Gravelord and sacrifice it: Put a 5/5 black Zombie Giant creature token onto the battlefield.
 End

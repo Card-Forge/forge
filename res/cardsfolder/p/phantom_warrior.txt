@@ -15,4 +15,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/66.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/85.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/48.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/44.jpg
+Oracle:Phantom Warrior is unblockable.
 End

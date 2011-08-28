@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_debaser.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/59.jpg
+Oracle:Flying\n{T}, Sacrifice Phyrexian Debaser: Target creature gets -2/-2 until end of turn.
 End

@@ -13,4 +13,5 @@ SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/89.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/84.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/70.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/69.jpg
+Oracle:Enchant land\nAs Phantasmal Terrain enters the battlefield, choose a basic land type.\nEnchanted land is the chosen type.
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ PB | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_souleater.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/149.jpg
+Oracle:{B/P}: Pestilent Souleater gains infect until end of turn. ({B/P} can be paid with either {B} or 2 life. A creature with infect deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/80.jpg
+Oracle:Destroy target nonblack creature. You gain 3 life.
 End

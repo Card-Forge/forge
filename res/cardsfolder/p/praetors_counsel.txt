@@ -5,4 +5,5 @@ Text:Return all cards from your graveyard to your hand. Exile CARDNAME. You have
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/praetors_counsel.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/88.jpg
+Oracle:Return all cards from your graveyard to your hand. Exile Praetor's Counsel. You have no maximum hand size for the rest of the game.
 End

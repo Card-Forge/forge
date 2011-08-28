@@ -8,4 +8,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Each | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_slum.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/126.jpg
+Oracle:At the beginning of your upkeep, Rumbling Slum deals 1 damage to each player.
 End

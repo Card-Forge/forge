@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_drake.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/88.jpg
+Oracle:Flying\nWhen Peregrine Drake enters the battlefield, untap up to five lands.
 End

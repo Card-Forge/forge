@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card136285.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/278.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/263.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/294.jpg
+Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
 End

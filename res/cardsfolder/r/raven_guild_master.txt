@@ -9,4 +9,5 @@ K:Morph:2 U U
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raven_guild_master.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/47.jpg
+Oracle:Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of his or her library.\nMorph {2}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

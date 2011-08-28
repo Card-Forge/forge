@@ -8,4 +8,5 @@ SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_urabrask.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/90.jpg
+Oracle:When Priest of Urabrask enters the battlefield, add {R}{R}{R} to your mana pool.
 End

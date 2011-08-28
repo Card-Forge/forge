@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/70.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/58.jpg
+Oracle:Return target creature to its owner's hand.\nDraw a card.
 End

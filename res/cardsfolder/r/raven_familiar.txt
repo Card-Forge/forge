@@ -10,4 +10,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | ChangeNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raven_familiar.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/39.jpg
+Oracle:Flying\nEcho {2}{U} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Raven Familiar enters the battlefield, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 End

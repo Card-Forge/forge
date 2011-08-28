@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razormane_masticore.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/146.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/340.jpg
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.\nAt the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
 End

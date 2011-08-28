@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_abomination.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/80.jpg
+Oracle:Defender\nWhen Phantasmal Abomination becomes the target of a spell or ability, sacrifice it.
 End

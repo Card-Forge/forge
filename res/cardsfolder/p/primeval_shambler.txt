@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_shambler.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/156.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/152.jpg
+Oracle:{B}: Primeval Shambler gets +1/+1 until end of turn.
 End

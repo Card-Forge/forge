@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychosis_crawler.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/126.jpg
+Oracle:Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life.
 End

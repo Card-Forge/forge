@@ -8,4 +8,5 @@ K:Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustrazor_butcher.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/105.jpg
+Oracle:First strike\nWither (This deals damage to creatures in the form of -1/-1 counters.)
 End

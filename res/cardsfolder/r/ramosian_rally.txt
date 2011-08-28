@@ -7,4 +7,5 @@ A:SP$ PumpAll | Cost$ tapXType<1/Creature> | ValidCards$ Creature.YouCtrl | NumA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_rally.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/38.jpg
+Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Ramosian Rally's mana cost.\nCreatures you control get +1/+1 until end of turn.
 End

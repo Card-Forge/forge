@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pinpoint_avalanche.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/221.jpg
+Oracle:Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
 End

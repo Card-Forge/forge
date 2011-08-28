@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_captain.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/35.jpg
+Oracle:First strike\n{5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
 End

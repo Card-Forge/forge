@@ -9,4 +9,5 @@ K:Shroud
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagnoth.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/150.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nShroud (This permanent can't be the target of spells or abilities.)\nWhen a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
 End

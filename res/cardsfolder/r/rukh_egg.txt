@@ -12,4 +12,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/rukh_egg.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/216.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/214.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/52.jpg|2
+Oracle:When Rukh Egg dies, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
 End

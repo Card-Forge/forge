@@ -8,4 +8,5 @@ SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveka_wizard_savant.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/47.jpg
+Oracle:{T}: Reveka, Wizard Savant deals 2 damage to target creature or player and doesn't untap during your next untap step.
 End

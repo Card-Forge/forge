@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/rootbound_crag.j
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/227.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/227.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/228.jpg
+Oracle:Rootbound Crag enters the battlefield tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G} to your mana pool.
 End

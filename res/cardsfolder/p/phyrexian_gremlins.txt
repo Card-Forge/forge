@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_gremlins.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/48.jpg
+Oracle:You may choose not to untap Phyrexian Gremlins during your untap step.\n{T}: Tap target artifact. It doesn't untap during its controller's untap step for as long as Phyrexian Gremlins remains tapped.
 End

@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rashida_scalebane.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/239.jpg
+Oracle:{T}: Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
 End

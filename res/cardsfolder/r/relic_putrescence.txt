@@ -9,4 +9,5 @@ SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ TriggeredCardController | Num$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/77.jpg
+Oracle:Enchant artifact\nWhenever enchanted artifact becomes tapped, its controller gets a poison counter.
 End

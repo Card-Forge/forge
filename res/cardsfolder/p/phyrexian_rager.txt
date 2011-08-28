@@ -11,4 +11,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27660.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/49.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/51.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/167.jpg
+Oracle:When Phyrexian Rager enters the battlefield, you draw a card and you lose 1 life.
 End

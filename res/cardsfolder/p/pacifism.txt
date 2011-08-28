@@ -19,4 +19,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/33.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/28.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/47.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/236.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block.
 End

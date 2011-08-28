@@ -7,4 +7,5 @@ K:Suspend:1:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rift_bolt.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/176.jpg
+Oracle:Rift Bolt deals 3 damage to target creature or player.\nSuspend 1-{R} (Rather than cast this card from your hand, you may pay {R} and exile it with a time counter on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 End

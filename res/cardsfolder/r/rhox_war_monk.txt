@@ -7,4 +7,5 @@ K:Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_war_monk.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/188.jpg
+Oracle:Lifelink
 End

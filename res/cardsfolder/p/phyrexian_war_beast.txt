@@ -9,4 +9,5 @@ SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_war_beast.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/169.jpg|2
+Oracle:When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
 End

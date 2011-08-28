@@ -7,4 +7,5 @@ K:Soulshift:7
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promised_kannushi.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/141.jpg
+Oracle:Soulshift 7 (When this creature dies, you may return target Spirit card with converted mana cost 7 or less from your graveyard to your hand.)
 End

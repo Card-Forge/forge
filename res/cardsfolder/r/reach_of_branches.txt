@@ -8,4 +8,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/132.jpg
+Oracle:Put a 2/5 green Treefolk Shaman creature token onto the battlefield.\nWhenever a Forest enters the battlefield under your control, you may return Reach of Branches from your graveyard to your hand.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reito_lantern.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/267.jpg
+Oracle:{3}: Put target card from a graveyard on the bottom of its owner's library.
 End

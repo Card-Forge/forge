@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41153.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/50.jpg
+Oracle:You gain 6 life.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)\nWhen you cycle Renewed Faith, you may gain 2 life.
 End

@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_exiled.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/135.jpg
+Oracle:Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.\n{B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
 End

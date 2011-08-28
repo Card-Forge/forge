@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_kami.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/183.jpg
+Oracle:{X}{R}, Sacrifice Pain Kami: Pain Kami deals X damage to target creature.
 End

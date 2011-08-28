@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reconstruction.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/77.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/56.jpg
+Oracle:Return target artifact card from your graveyard to your hand.
 End

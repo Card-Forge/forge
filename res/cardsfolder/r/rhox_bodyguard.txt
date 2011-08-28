@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/122.jpg
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhen Rhox Bodyguard enters the battlefield, you gain 3 life.
 End

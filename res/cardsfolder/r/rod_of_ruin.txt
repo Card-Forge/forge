@@ -17,4 +17,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/219.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/309.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/273.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/269.jpg
+Oracle:{3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
 End

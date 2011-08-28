@@ -8,4 +8,5 @@ A:AB$ Token | Cost$ 3 R | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_guildmage.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/145.jpg
+Oracle:({B/R} can be paid with either {B} or {R}.)\n{3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.\n{3}{R}: Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
 End

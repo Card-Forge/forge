@@ -8,4 +8,5 @@ K:Exalted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_charger.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/145.jpg
+Oracle:Trample\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 End

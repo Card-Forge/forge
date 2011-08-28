@@ -6,4 +6,5 @@ A:AB$ Counter | Cost$ 3 T | TargetType$ Spell | ValidTgts$ Instant,Aura | Target
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_immortals.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/238.jpg
+Oracle:{3}, {T}: Counter target instant or Aura spell that targets a permanent you control.
 End

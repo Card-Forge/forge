@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pilgrims_eye.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/128.jpg
+Oracle:Flying\nWhen Pilgrim's Eye enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
 End

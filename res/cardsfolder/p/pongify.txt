@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pongify.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/44.jpg
+Oracle:Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token onto the battlefield.
 End

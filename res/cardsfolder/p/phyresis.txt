@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Infect | Descr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyresis.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/49.jpg
+Oracle:Enchant creature\nEnchanted creature has infect. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

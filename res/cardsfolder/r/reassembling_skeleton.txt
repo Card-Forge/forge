@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reassembling_skeleton.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/112.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/104.jpg
+Oracle:{1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.
 End

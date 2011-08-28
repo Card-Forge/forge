@@ -8,4 +8,5 @@ SVar:DBBuyback:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Sel
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_stampede.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/14.jpg
+Oracle:Buyback-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut a 1/1 white Pegasus creature token with flying onto the battlefield.
 End

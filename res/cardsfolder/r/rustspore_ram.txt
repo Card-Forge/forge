@@ -8,4 +8,5 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Equipment | TgtPrompt$ Select target Eq
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustspore_ram.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/235.jpg
+Oracle:When Rustspore Ram enters the battlefield, destroy target Equipment.
 End

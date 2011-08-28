@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Relic_Crush.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/179.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/168.jpg
+Oracle:Destroy target artifact or enchantment and up to one other target artifact or enchantment.
 End

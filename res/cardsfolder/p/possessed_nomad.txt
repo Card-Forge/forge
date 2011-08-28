@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_nomad.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/13.jpg
+Oracle:Vigilance\nThreshold - As long as seven or more cards are in your graveyard, Possessed Nomad gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target white creature."
 End

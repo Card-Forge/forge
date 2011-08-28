@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_medallion.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/295.jpg
+Oracle:Red spells you cast cost {1} less to cast.
 End

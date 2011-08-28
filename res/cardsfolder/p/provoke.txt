@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/provoke.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/63.jpg
+Oracle:Untap target creature you don't control. That creature blocks this turn if able.\nDraw a card.
 End

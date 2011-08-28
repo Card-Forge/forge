@@ -8,4 +8,5 @@ K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuff
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/progenitus.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/121.jpg
+Oracle:Protection from everything\nIf Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.
 End

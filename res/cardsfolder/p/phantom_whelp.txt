@@ -10,4 +10,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_whelp.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/93.jpg
+Oracle:When Phantom Whelp attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/pillage.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/198.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/113.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/207.jpg
+Oracle:Destroy target artifact or land. It can't be regenerated.
 End

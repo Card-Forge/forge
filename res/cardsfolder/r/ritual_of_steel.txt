@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_steel.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/240.jpg
+Oracle:Enchant creature\nWhen Ritual of Steel enters the battlefield, draw a card at the beginning of the next turn's upkeep.\nEnchanted creature gets +0/+2.
 End

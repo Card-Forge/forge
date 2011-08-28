@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/136.jpg
+Oracle:Flash\nAny player may play Sliver cards as though they had flash.
 End

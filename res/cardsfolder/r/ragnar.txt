@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragnar.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/290.jpg
+Oracle:{G}{W}{U}, {T}: Regenerate target creature.
 End

@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_spasm.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/81.jpg
+Oracle:Choose one - Tap X target permanents; or untap X target permanents.
 End

@@ -15,4 +15,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture_spire.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/285.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/144.jpg
+Oracle:Rupture Spire enters the battlefield tapped.\nWhen Rupture Spire enters the battlefield, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color to your mana pool.
 End

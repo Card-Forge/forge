@@ -8,4 +8,5 @@ SVar:X:Count$OppLifeTotal
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_fields.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/11.jpg
+Oracle:You gain 4 life. Then if an opponent has more life than you, return Pulse of the Fields to its owner's hand.
 End

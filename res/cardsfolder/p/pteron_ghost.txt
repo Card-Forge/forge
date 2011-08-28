@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pteron_ghost.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/10.jpg
+Oracle:Flying\nSacrifice Pteron Ghost: Regenerate target artifact.
 End

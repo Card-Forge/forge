@@ -14,4 +14,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/199.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/263.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/235.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/158.jpg
+Oracle:Pyrotechnics deals 4 damage divided as you choose among any number of target creatures and/or players.
 End

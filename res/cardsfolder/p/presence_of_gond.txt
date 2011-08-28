@@ -9,4 +9,5 @@ SVar:Token:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenT
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_gond.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/125.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: Put a 1/1 green Elf Warrior creature token onto the battlefield."
 End

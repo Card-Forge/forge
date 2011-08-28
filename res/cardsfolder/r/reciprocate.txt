@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtP
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reciprocate.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/40.jpg
+Oracle:Exile target creature that dealt damage to you this turn.
 End

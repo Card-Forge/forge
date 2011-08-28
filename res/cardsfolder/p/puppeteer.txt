@@ -11,4 +11,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/94.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/97.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/91.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/98.jpg
+Oracle:{U}, {T}: You may tap or untap target creature.
 End

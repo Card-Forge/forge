@@ -11,4 +11,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_behemoth.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/30.jpg
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Quicksilver Behemoth attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 End

@@ -13,4 +13,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/219.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/217.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/294.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/218.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from red. This effect doesn't remove Red Ward.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridged_kusite.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/78.jpg
+Oracle:{1}{B}, {T}, Discard a card: Target creature gets +1/+0 and gains first strike until end of turn.
 End

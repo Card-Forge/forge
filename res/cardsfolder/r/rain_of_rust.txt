@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_rust.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/76.jpg
+Oracle:Choose one - Destroy target artifact; or destroy target land.\nEntwine {3}{R} (Choose both if you pay the entwine cost.)
 End

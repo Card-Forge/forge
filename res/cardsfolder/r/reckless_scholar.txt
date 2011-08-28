@@ -8,4 +8,5 @@ SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_scholar.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/60.jpg
+Oracle:{T}: Target player draws a card, then discards a card.
 End

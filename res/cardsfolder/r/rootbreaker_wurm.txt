@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4785.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/145.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/267.jpg
+Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
 End

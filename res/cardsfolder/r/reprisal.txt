@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/reprisal.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/37.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/144.jpg|2
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/33.jpg
+Oracle:Destroy target creature with power 4 or greater. It can't be regenerated.
 End

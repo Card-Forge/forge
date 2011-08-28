@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rusted_slasher.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/128.jpg
+Oracle:Sacrifice an artifact: Regenerate Rusted Slasher.
 End

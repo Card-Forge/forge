@@ -10,4 +10,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/209.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/150.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/98.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/207.jpg
+Oracle:Up to three target creatures can't block this turn.
 End

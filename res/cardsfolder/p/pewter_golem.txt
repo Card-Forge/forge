@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pewter_golem.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/227.jpg
+Oracle:{1}{B}: Regenerate Pewter Golem.
 End

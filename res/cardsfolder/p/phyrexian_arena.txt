@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_arena.
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/152.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/47.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/152.jpg
+Oracle:At the beginning of your upkeep, you draw a card and you lose 1 life.
 End

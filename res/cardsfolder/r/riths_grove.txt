@@ -9,4 +9,5 @@ SVar:NeedsToPlay:Land.nonLair+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riths_grove.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/141.jpg
+Oracle:When Rith's Grove enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {R}, {G}, or {W} to your mana pool.
 End

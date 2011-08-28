@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_scarred_demon.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/106.jpg
+Oracle:Flying\nWhen Rune-Scarred Demon enters the battlefield, search your library for a card, put it into your hand, then shuffle your library.
 End

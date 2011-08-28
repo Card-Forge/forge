@@ -6,4 +6,5 @@ A:SP$ Regenerate | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regenerate.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/202.jpg
+Oracle:Regenerate target creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
 End

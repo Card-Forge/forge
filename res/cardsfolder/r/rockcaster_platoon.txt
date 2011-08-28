@@ -7,4 +7,5 @@ A:AB$ DamageAll | Cost$ 4 G | ValidCards$ Creature.withFlying | ValidPlayers$ Ea
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rockcaster_platoon.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/23.jpg
+Oracle:{4}{G}: Rockcaster Platoon deals 2 damage to each creature with flying and each player.
 End

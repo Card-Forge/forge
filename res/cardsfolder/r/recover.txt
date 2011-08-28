@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/122.jpg
+Oracle:Return target creature card from your graveyard to your hand.\nDraw a card.
 End

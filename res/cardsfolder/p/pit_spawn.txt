@@ -10,4 +10,5 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Batt
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_spawn.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/70.jpg
+Oracle:First strike\nAt the beginning of your upkeep, sacrifice Pit Spawn unless you pay {B}{B}.\nWhenever Pit Spawn deals damage to a creature, exile that creature.
 End

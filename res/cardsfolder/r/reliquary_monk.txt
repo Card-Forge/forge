@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_monk.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/14.jpg
+Oracle:When Reliquary Monk dies, destroy target artifact or enchantment.
 End

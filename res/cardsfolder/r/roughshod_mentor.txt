@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/128.jpg
+Oracle:Green creatures you control have trample.
 End

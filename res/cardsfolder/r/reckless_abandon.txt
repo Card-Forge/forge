@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_abandon.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/94.jpg
+Oracle:As an additional cost to cast Reckless Abandon, sacrifice a creature.\nReckless Abandon deals 4 damage to target creature or player.
 End

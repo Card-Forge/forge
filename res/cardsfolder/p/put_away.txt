@@ -7,4 +7,5 @@ SVar:DBChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | Val
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/put_away.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/48.jpg
+Oracle:Counter target spell. You may shuffle up to one target card from your graveyard into your library.
 End

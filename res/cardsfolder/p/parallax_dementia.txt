@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_dementia.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/62.jpg
+Oracle:Enchant creature\nFading 1 (This enchantment enters the battlefield with one fade counter on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nEnchanted creature gets +3/+2.\nWhen Parallax Dementia leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
 End

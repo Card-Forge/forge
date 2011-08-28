@@ -7,4 +7,5 @@ A:SP$ Discard | Cost$ B Discard<1/Land> | NumCards$ 1 | ValidTgts$ Player | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_crime.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/41.jpg
+Oracle:Target player discards a card.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_egg.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/25.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/32.jpg
+Oracle:Defender (This creature can't attack.)\nWhen Roc Egg dies, put a 3/3 white Bird creature token with flying onto the battlefield.
 End

@@ -7,4 +7,5 @@ K:Suspend:4:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/174.jpg
+Oracle:Destroy target artifact or land.\nSuspend 4-{1}{R} (Rather than cast this card from your hand, you may pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 End

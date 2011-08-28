@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_augermage.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/127.jpg
+Oracle:First strike\n{T}: Reveal your hand and discard a card of target opponent's choice. Then that player reveals his or her hand and discards a card of your choice. Activate this ability only any time you could cast a sorcery.
 End

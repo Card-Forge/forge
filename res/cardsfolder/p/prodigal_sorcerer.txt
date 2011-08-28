@@ -15,4 +15,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/88.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/75.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/112.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/74.jpg
+Oracle:{T}: Prodigal Sorcerer deals 1 damage to target creature or player.
 End

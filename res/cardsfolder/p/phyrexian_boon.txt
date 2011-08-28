@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_boon.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/22.jpg|2
+Oracle:Enchant creature\nEnchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
 End

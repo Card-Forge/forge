@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_amulet.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/214.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/130.jpg
+Oracle:{4}, {T}: You may put a creature card from your hand onto the battlefield.
 End

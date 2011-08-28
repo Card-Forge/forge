@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raze.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/207.jpg
+Oracle:As an additional cost to cast Raze, sacrifice a land.\nDestroy target land.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rashka_the_slayer.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/115.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever Rashka the Slayer blocks one or more black creatures, Rashka gets +1/+2 until end of turn.
 End

@@ -44,4 +44,5 @@ SetInfo:M10|Land|http://magiccards.info/scans/en/m10/230.jpg|4
 SetInfo:M12|Land|http://magiccards.info/scans/en/m12/230.jpg|4
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/282.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/289.jpg|3
+Oracle:W
 End

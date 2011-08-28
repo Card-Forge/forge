@@ -10,4 +10,5 @@ SVar:X:Count$Valid Land.YouDontCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rivalry.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/90.jpg
+Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to him or her.
 End

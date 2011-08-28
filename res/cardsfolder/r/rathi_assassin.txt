@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_assassin.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/67.jpg
+Oracle:{1}{B}{B}, {T}: Destroy target tapped nonblack creature.\n{3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
 End

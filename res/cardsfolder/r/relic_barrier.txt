@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_barrier.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/147.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/237.jpg
+Oracle:{T}: Tap target artifact.
 End

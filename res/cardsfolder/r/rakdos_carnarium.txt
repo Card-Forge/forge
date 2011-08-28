@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_carnarium.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/284.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/178.jpg
+Oracle:Rakdos Carnarium enters the battlefield tapped.\nWhen Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {B}{R} to your mana pool.
 End

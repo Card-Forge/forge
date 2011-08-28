@@ -10,4 +10,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/125.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_spoil.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/179.jpg
+Oracle:Destroy target land. If {B} was spent to cast Rolling Spoil, all creatures get -1/-1 until end of turn.
 End

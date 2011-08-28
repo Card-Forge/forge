@@ -10,4 +10,5 @@ SetInfo:USG|Common|http://magiccards.info/scans/en/us/29.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/138.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/21.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/183.jpg
+Oracle:Destroy target creature. Its owner gains 4 life.
 End

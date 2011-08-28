@@ -9,4 +9,5 @@ SVar:X:Targeted$CardSumPT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phthisis.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/122.jpg
+Oracle:Destroy target creature. Its controller loses life equal to its power plus its toughness.\nSuspend 5-{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 End

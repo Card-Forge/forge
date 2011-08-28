@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ponder.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/68.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/73.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/79.jpg
+Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle your library.\nDraw a card.
 End

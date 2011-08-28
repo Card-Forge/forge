@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_delver.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/115.jpg
+Oracle:When Phyrexian Delver enters the battlefield, return target creature card from your graveyard to the battlefield. You lose life equal to that card's converted mana cost.
 End

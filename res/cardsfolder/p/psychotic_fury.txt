@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_fury.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/68.jpg
+Oracle:Target multicolored creature gains double strike until end of turn.\nDraw a card.
 End

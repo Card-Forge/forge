@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | ValidTgts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rescue.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/44.jpg
+Oracle:Return target permanent you control to its owner's hand.
 End

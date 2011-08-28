@@ -9,4 +9,5 @@ SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCardController | Cha
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pattern_of_rebirth.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/115.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, that creature's controller may search his or her library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles his or her library.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/41.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/148.jpg
+Oracle:Destroy all green creatures. They can't be regenerated.
 End

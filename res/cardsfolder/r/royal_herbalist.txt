@@ -7,4 +7,5 @@ A:AB$ GainLife | Cost$ 2 ExileFromTop<1/Card> | LifeAmount$ 1 | SpellDescription
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/royal_herbalist.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/147.jpg|2
+Oracle:{2}, Exile the top card of your library: You gain 1 life.
 End

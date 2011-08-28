@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorjaw_oni.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/87.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/94.jpg
+Oracle:Black creatures can't block.
 End

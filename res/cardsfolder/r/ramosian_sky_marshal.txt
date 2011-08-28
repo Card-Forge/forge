@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_sky_marshal.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/40.jpg
+Oracle:Flying\n{7}, {T}: Search your library for a Rebel permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
 End

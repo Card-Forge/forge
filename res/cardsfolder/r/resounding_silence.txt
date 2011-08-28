@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_silence.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/22.jpg
+Oracle:Exile target attacking creature.\nCycling {5}{G}{W}{U} ({5}{G}{W}{U}, Discard this card: Draw a card.)\nWhen you cycle Resounding Silence, exile up to two target attacking creatures.
 End

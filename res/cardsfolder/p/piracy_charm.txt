@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piracy_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/58.jpg
+Oracle:Choose one - Target creature gains islandwalk until end of turn; or target creature gets +2/-1 until end of turn; or target player discards a card.
 End

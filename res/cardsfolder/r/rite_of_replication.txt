@@ -7,4 +7,5 @@ A:SP$CopyPermanent | Cost$ 2 U U | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_replication.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/61.jpg
+Oracle:Kicker {5} (You may pay an additional {5} as you cast this spell.)\nPut a token onto the battlefield that's a copy of target creature. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
 End

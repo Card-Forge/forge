@@ -9,4 +9,5 @@ SVar:GreenCreats:Count$ThisTurnEntered Battlefield Creature.Green+YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permafrost_trap.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/34.jpg
+Oracle:If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 End

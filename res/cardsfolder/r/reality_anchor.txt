@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_anchor.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/140.jpg
+Oracle:Target creature loses shadow until end of turn.\nDraw a card.
 End

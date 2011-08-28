@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefaction.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/153.jpg
+Oracle:Whenever a player casts a green or white spell, that player discards a card.
 End

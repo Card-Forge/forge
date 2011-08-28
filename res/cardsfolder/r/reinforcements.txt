@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reinforcements.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/142.jpg|2
+Oracle:Put up to three target creature cards from your graveyard on top of your library.
 End

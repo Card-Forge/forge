@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riddlesmith.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/40.jpg
+Oracle:Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
 End

@@ -10,4 +10,5 @@ SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/292.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/312.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/306.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/150.jpg
+Oracle:
 End

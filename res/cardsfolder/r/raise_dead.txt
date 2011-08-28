@@ -18,4 +18,5 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/32.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/53.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/85.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/31.jpg
+Oracle:Return target creature card from your graveyard to your hand.
 End

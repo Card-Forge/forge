@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ 2 R | KW$ First Strike | SpellDescription$ CARDNAME gains fir
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_kathari.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/50.jpg
+Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\n{2}{R}: Pestilent Kathari gains first strike until end of turn.
 End

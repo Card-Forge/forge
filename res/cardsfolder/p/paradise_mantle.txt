@@ -12,4 +12,5 @@ SVar:ManaG:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your man
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradise_mantle.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/142.jpg
+Oracle:Equipped creature has "{T}: Add one mana of any color to your mana pool."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 End

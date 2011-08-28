@@ -6,4 +6,5 @@ A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Creature.powerGE4 | NoRegen$ True | S
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retribution_of_the_meek.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/119.jpg
+Oracle:Destroy all creatures with power 4 or greater. They can't be regenerated.
 End

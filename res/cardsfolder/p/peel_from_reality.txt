@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87951.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/61.jpg
+Oracle:Return target creature you control and target creature you don't control to their owners' hands.
 End

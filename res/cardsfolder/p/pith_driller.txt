@@ -8,4 +8,5 @@ SVar:TrigPutCounter:DB$PutCounter | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pith_driller.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/69.jpg
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nWhen Pith Driller enters the battlefield, put a -1/-1 counter on target creature.
 End

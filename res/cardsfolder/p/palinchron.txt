@@ -10,4 +10,5 @@ A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | Spell
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palinchron.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/38.jpg
+Oracle:Flying\nWhen Palinchron enters the battlefield, untap up to seven lands.\n{2}{U}{U}: Return Palinchron to its owner's hand.
 End

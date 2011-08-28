@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwalla.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/146.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/268.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/293.jpg
+Oracle:{1}{G}: Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.
 End

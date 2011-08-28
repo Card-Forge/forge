@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_weaver.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/159.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/223.jpg
+Oracle:{2}: Target black or green creature gains haste until end of turn. (It can attack and {T} this turn.)
 End

@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phelddagrif.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/196.jpg
+Oracle:{G}: Phelddagrif gains trample until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.\n{W}: Phelddagrif gains flying until end of turn. Target opponent gains 2 life.\n{U}: Return Phelddagrif to its owner's hand. Target opponent may draw a card.
 End

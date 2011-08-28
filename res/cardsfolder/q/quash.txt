@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quash.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/42.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/47.jpg
+Oracle:Counter target instant or sorcery spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
 End

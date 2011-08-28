@@ -8,4 +8,5 @@ K:Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rendclaw_trow.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/127.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 End

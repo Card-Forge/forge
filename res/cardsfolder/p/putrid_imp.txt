@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_imp.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/77.jpg
+Oracle:Discard a card: Putrid Imp gains flying until end of turn.\nThreshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
 End

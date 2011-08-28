@@ -10,4 +10,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_angel.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/9.jpg
+Oracle:Flying\nAs long as Pristine Angel is untapped, it has protection from artifacts and from all colors.\nWhenever you cast a spell, you may untap Pristine Angel.
 End

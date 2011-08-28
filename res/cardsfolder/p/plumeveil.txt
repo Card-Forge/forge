@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plumeveil.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/218.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/145.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender, flying
 End

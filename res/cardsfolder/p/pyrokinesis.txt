@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrokinesis.jpg
 SVar:Rarity:Uncommon
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/115.jpg
+Oracle:You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.\nPyrokinesis deals 4 damage divided as you choose among any number of target creatures.
 End

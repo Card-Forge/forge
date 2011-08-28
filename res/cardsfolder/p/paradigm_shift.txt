@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradigm_shift.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/46.jpg
+Oracle:Exile all cards from your library. Then shuffle your graveyard into your library.
 End

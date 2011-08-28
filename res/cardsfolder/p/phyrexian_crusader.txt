@@ -10,4 +10,5 @@ K:Infect
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_crusader.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/50.jpg
+Oracle:First strike, protection from red and from white\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

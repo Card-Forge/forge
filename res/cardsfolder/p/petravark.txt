@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/109.jpg
+Oracle:When Petravark enters the battlefield, exile target land.\nWhen Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 End

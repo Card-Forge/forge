@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plow_under.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/272.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/117.jpg
+Oracle:Put two target lands on top of their owners' libraries.
 End

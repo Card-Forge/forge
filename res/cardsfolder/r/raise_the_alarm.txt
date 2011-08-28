@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 1 W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Crea
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/16.jpg
+Oracle:Put two 1/1 white Soldier creature tokens onto the battlefield.
 End

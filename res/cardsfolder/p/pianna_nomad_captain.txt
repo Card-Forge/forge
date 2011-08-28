@@ -8,4 +8,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | NumAtt$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pianna_nomad_captain.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/39.jpg
+Oracle:Whenever Pianna, Nomad Captain attacks, attacking creatures get +1/+1 until end of turn.
 End

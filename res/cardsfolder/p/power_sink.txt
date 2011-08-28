@@ -18,4 +18,5 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/87.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/74.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/83.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/73.jpg
+Oracle:Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.
 End

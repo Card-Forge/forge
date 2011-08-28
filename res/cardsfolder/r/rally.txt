@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/272.jpg
+Oracle:Blocking creatures get +1/+1 until end of turn.
 End

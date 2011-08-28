@@ -10,4 +10,5 @@ SVar:BuffedBy:Swamp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_sickness.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/111.jpg
+Oracle:Enchant creature\nEnchanted creature gets -1/-1 for each Swamp you control.
 End

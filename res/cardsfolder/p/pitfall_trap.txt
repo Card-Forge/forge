@@ -2,9 +2,10 @@ Name:Pitfall Trap
 ManaCost:2 W
 Types:Instant Trap
 Text:no text
-A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.attacking+withoutFlying | IsPresent$ Creature.attacking | PresentCompare$ EQ1 | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ If exactly one creature is attacking, you may pay W rather than pay CARDNAME mana cost. 
+A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.attacking+withoutFlying | IsPresent$ Creature.attacking | PresentCompare$ EQ1 | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ If exactly one creature is attacking, you may pay W rather than pay CARDNAME mana cost.
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Destroy target attacking creature without flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitfall_trap.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/32.jpg
+Oracle:If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.\nDestroy target attacking creature without flying.
 End

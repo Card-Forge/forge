@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rot_wolf.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/90.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever a creature dealt damage by Rot Wolf this turn dies, you may draw a card.
 End

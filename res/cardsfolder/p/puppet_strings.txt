@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_strings.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/294.jpg
+Oracle:{2}, {T}: You may tap or untap target creature.
 End

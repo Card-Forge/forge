@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repeal.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/32.jpg
+Oracle:Return target nonland permanent with converted mana cost X to its owner's hand.\nDraw a card.
 End

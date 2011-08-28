@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | KW$ First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_spider.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/67.jpg
+Oracle:Whenever Root Spider blocks, it gets +1/+0 and gains first strike until end of turn.
 End

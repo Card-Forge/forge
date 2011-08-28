@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_obliterator.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/68.jpg
+Oracle:Trample\nWhenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
 End

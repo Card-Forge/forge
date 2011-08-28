@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_kavu.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/88.jpg
+Oracle:When Pygmy Kavu enters the battlefield, draw a card for each black creature your opponents control.
 End

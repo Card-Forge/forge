@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repopulate.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/111.jpg
+Oracle:Shuffle all creature cards from target player's graveyard into that player's library.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

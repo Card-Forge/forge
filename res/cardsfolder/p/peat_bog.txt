@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/peat_bog.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/322.jpg
+Oracle:Peat Bog enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Peat Bog: Add {B}{B} to your mana pool. If there are no depletion counters on Peat Bog, sacrifice it.
 End

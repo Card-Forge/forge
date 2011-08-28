@@ -8,4 +8,5 @@ SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | Defined$ TriggeredAttackerContro
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riddlekeeper.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/59.jpg
+Oracle:Whenever a creature attacks you or a planeswalker you control, that creature's controller puts the top two cards of his or her library into his or her graveyard.
 End

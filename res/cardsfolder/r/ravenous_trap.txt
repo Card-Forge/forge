@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_trap.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/109.jpg
+Oracle:If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.\nExile all cards from target player's graveyard.
 End

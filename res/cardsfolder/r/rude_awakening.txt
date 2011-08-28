@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rude_awakening.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/92.jpg
+Oracle:Choose one - Untap all lands you control; or until end of turn, lands you control become 2/2 creatures that are still lands.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)
 End

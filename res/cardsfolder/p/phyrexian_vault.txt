@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_vault.
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/307.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/281.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/337.jpg
+Oracle:{2}, {T}, Sacrifice a creature: Draw a card.
 End

@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgt
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paleoloth.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/88.jpg
+Oracle:Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.
 End

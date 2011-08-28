@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_entity.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/95.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/67.jpg
+Oracle:{T}: Psionic Entity deals 2 damage to target creature or player and 3 damage to itself.
 End

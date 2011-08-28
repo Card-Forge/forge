@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_footpad.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/94.jpg
+Oracle:When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless he or she pays {2}.
 End

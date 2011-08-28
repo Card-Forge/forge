@@ -11,4 +11,5 @@ SetInfo:10E|Common|http://magiccards.info/scans/en/10e/168.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/64.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/154.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/155.jpg
+Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
 End

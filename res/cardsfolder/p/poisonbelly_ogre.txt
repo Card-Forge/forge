@@ -8,4 +8,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | Lif
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poisonbelly_ogre.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/57.jpg
+Oracle:Whenever another creature enters the battlefield, its controller loses 1 life.
 End

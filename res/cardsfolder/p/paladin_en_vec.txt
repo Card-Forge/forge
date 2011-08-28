@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_en_vec.j
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/12.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/32.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/32.jpg
+Oracle:First strike, protection from black and from red (This creature deals combat damage before creatures without first strike. It can't be blocked, targeted, dealt damage, or enchanted by anything black or red.)
 End

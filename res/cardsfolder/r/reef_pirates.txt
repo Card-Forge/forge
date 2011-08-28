@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reef_pirates.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/45.jpg|2
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/116.jpg
+Oracle:Whenever Reef Pirates deals damage to an opponent, that player puts the top card of his or her library into his or her graveyard.
 End

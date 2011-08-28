@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_aven.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/45.jpg
+Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Possessed Aven gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target blue creature."
 End

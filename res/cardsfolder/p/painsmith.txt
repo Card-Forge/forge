@@ -9,4 +9,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painsmith.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/74.jpg
+Oracle:Whenever you cast an artifact spell, you may have target creature get +2/+0 and gain deathtouch until end of turn.
 End

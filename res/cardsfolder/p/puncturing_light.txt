@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.powerLE3+attacking,Creature.powe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puncturing_light.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/41.jpg
+Oracle:Destroy target attacking or blocking creature with power 3 or less.
 End

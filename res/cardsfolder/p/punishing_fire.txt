@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/punishing_fire.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/142.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/131.jpg
+Oracle:Punishing Fire deals 2 damage to target creature or player.\nWhenever an opponent gains life, you may pay {R}. If you do, return Punishing Fire from your graveyard to your hand.
 End

@@ -10,4 +10,5 @@ SVar:LoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bane.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/76.jpg
+Oracle:Enchant artifact\nEnchanted artifact has "At the beginning of your upkeep, you lose 2 life."
 End

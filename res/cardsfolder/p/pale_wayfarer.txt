@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_wayfarer.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/17.jpg
+Oracle:{2}{W}{W}, {Q}: Target creature gains protection from the color of its controller's choice until end of turn. ({Q} is the untap symbol.)
 End

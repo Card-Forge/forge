@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/40.jpg
+Oracle:Return all artifacts to their owners' hands.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piety.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/291.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/64.jpg|2
+Oracle:Blocking creatures get +0/+3 until end of turn.
 End

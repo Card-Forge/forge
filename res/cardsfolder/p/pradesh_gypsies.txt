@@ -11,4 +11,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/179.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/244.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/149.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/111.jpg
+Oracle:{1}{G}, {T}: Target creature gets -2/-0 until end of turn.
 End

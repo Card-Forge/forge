@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancers_swath.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/104.jpg
+Oracle:If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.\nAt the beginning of each end step, discard your hand.
 End

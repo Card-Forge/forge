@@ -7,4 +7,5 @@ K:CantBeBlockedBy Creature.Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_run_dragoon.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/235.jpg
+Oracle:Raven's Run Dragoon can't be blocked by black creatures.
 End

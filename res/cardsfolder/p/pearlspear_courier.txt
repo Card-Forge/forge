@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pearlspear_courier.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/48.jpg
+Oracle:You may choose not to untap Pearlspear Courier during your untap step.\n{2}{W}, {T}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.
 End

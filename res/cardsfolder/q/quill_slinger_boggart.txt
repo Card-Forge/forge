@@ -8,4 +8,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quill_slinger_boggart.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/137.jpg
+Oracle:Whenever a player casts a Kithkin spell, you may have target player lose 1 life.
 End

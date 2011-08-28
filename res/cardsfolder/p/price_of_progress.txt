@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_progress.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/95.jpg
+Oracle:Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.
 End

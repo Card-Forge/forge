@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_bond.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/145.jpg
+Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Parasitic Bond deals 2 damage to that player.
 End

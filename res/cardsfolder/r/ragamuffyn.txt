@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragamuffyn.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/51.jpg
+Oracle:Hellbent - {T}, Sacrifice a creature or land: Draw a card. Activate this ability only if you have no cards in hand.
 End

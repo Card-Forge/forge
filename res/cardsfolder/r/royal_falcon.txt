@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Starter_1999/royal_falcon.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/24.jpg
 SetInfo:S00|Common|http://magiccards.info/scans/en/st2k/14.jpg
+Oracle:Flying
 End

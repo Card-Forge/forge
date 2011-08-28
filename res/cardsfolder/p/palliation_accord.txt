@@ -8,4 +8,5 @@ A:AB$ PreventDamage | Cost$ SubCounter<1/SHIELD> | Defined$ You | Amount$ 1 | Sp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palliation_accord.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/122.jpg
+Oracle:Whenever a creature an opponent controls becomes tapped, put a shield counter on Palliation Accord.\nRemove a shield counter from Palliation Accord: Prevent the next 1 damage that would be dealt to you this turn.
 End

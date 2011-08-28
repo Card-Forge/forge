@@ -13,4 +13,5 @@ SetInfo:LEB|Common|http://magiccards.info/scans/en/be/171.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/170.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/236.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/170.jpg
+Oracle:Choose one - Counter target blue spell; or destroy target blue permanent.
 End

@@ -5,10 +5,11 @@ Text:no text
 PT:5/4
 K:Fear
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0 
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Ogre.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painwracker_oni.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/136.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
 End

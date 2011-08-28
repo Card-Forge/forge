@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/109.jpg
+Oracle:Creatures you control get +2/+0 until end of turn.
 End

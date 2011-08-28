@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/penumbra_spider.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/167.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/210.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nWhen Penumbra Spider dies, put a 2/4 black Spider creature token with reach onto the battlefield.
 End

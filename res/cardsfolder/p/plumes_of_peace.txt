@@ -9,4 +9,5 @@ A:AB$ Tap | Cost$ W U | TgtPrompt$ Choose target creature | ValidTgts$ Creature 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plumes_of_peace.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/124.jpg
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nForecast - {W}{U}, Reveal Plumes of Peace from your hand: Tap target creature. (Activate this ability only during your upkeep and only once each turn.)
 End

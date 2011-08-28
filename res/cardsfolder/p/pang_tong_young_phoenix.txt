@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pang_tong_young_phoenix.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/14.jpg
+Oracle:{T}: Target creature gets +0/+2 until end of turn. Activate this ability only during your turn, before attackers are declared.
 End

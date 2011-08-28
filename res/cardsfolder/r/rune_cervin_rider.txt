@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ GW GW | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/20.jpg
+Oracle:Flying\n{G/W}{G/W}: Rune-Cervin Rider gets +1/+1 until end of turn.
 End

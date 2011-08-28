@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riding_red_hare.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/18.jpg
+Oracle:Target creature gets +3/+3 and gains horsemanship until end of turn. (It can't be blocked except by creatures with horsemanship.)
 End

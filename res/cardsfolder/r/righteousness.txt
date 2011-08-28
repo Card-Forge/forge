@@ -15,4 +15,5 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/36.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/27.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/221.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/221.jpg
+Oracle:Target blocking creature gets +7/+7 until end of turn.
 End

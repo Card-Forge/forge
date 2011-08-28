@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenType
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_redeemed.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/237.jpg
+Oracle:{2}{G/W}, {T}: Put a 1/1 green and white Elf Warrior creature token onto the battlefield.\n{4}{G/W}{G/W}, {T}: For each creature token you control, put a token that's a copy of that creature onto the battlefield.
 End

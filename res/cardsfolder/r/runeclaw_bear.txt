@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/runeclaw_bear.jp
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/195.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/203.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/193.jpg
+Oracle:
 End

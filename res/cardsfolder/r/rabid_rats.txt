@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.blocking | TgtPrompt$ Select target b
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_rats.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/17.jpg
+Oracle:{T}: Target blocking creature gets -1/-1 until end of turn.
 End

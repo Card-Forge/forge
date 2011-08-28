@@ -8,4 +8,5 @@ SVar:TrigUntapAll:AB$UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveille_squad.jpg
 SVar:Rarity:Uncommon
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/18.jpg
+Oracle:Whenever one or more creatures attack you, if Reveille Squad is untapped, you may untap all creatures you control.
 End

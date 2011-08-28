@@ -14,4 +14,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/256.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/222.jpg
+Oracle:When Prophetic Prism enters the battlefield, draw a card.\n{1}, {T}: Add one mana of any color to your mana pool.
 End

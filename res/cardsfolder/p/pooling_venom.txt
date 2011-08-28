@@ -10,4 +10,5 @@ A:AB$ Destroy | Cost$ 3 B | Defined$ Enchanted | SpellDescription$ Destroy encha
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pooling_venom.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/74.jpg
+Oracle:Enchant land\nWhenever enchanted land becomes tapped, its controller loses 2 life.\n{3}{B}: Destroy enchanted land.
 End

@@ -9,4 +9,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piranha_marsh.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/222.jpg
+Oracle:Piranha Marsh enters the battlefield tapped.\nWhen Piranha Marsh enters the battlefield, target player loses 1 life.\n{T}: Add {B} to your mana pool.
 End

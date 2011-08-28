@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_charge.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/215.jpg
+Oracle:Target creature gets +3/+0 and gains haste until end of turn.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

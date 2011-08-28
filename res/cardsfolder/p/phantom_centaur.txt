@@ -9,4 +9,5 @@ K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 coun
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/127.jpg
+Oracle:Protection from black\nPhantom Centaur enters the battlefield with three +1/+1 counters on it.\nIf damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
 End

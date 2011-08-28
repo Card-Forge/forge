@@ -9,4 +9,5 @@ SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poultice_sliver.jpg
 SVar:Rarity:Common
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/11.jpg
+Oracle:All Slivers have "{2}, {T}: Regenerate target Sliver."
 End

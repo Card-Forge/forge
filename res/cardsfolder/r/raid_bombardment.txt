@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raid_bombardment.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/161.jpg
+Oracle:Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to defending player.
 End

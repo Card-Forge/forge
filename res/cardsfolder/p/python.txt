@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card15392.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/18.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/150.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/28.jpg
+Oracle:
 End

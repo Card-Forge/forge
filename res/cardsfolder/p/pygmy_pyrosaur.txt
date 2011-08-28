@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_pyrosaur.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/87.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/208.jpg
+Oracle:Pygmy Pyrosaur can't block.\n{R}: Pygmy Pyrosaur gets +1/+0 until end of turn.
 End

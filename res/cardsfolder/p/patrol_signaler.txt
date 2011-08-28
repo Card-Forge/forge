@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 1 W Untap | TokenAmount$ 1 | TokenName$ Kithkin Soldier | To
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patrol_signaler.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/12.jpg
+Oracle:{1}{W}, {Q}: Put a 1/1 white Kithkin Soldier creature token onto the battlefield. ({Q} is the untap symbol.)
 End

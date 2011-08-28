@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_keeper.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/123.jpg
+Oracle:When Pit Keeper enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
 End

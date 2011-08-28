@@ -11,4 +11,5 @@ SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_hippogriff.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/17.jpg
+Oracle:Flying\nWhen Razor Hippogriff enters the battlefield, return target artifact card from your graveyard to your hand. You gain life equal to that card's converted mana cost.
 End

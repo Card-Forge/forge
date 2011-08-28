@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revoke_existence.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/18.jpg
+Oracle:Exile target artifact or enchantment.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palladium_myr.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/190.jpg
+Oracle:{T}: Add {2} to your mana pool.
 End

@@ -10,4 +10,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roots.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/68.jpg
+Oracle:Enchant creature without flying\nWhen Roots enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
 End

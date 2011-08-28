@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rescind.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/92.jpg
+Oracle:Return target permanent to its owner's hand.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/63.jpg
+Oracle:Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.\nDraw a card.
 End

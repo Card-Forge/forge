@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/41.jpg
+Oracle:Flying\n{2}{W}: Rappelling Scouts gains protection from the color of your choice until end of turn.
 End

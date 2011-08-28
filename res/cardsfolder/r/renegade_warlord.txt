@@ -9,4 +9,5 @@ SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_warlord.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/197.jpg
+Oracle:First strike\nWhenever Renegade Warlord attacks, each other attacking creature gets +1/+0 until end of turn.
 End

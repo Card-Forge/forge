@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoo
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recoil.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/264.jpg
+Oracle:Return target permanent to its owner's hand. Then that player discards a card.
 End

@@ -12,4 +12,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/108.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/90.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/71.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/70.jpg
+Oracle:Flying
 End

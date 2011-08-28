@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/98.jpg
+Oracle:Put target creature on top of its owner's library.
 End

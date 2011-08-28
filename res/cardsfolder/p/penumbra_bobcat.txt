@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat | TokenTypes
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26815.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/82.jpg
+Oracle:When Penumbra Bobcat dies, put a 2/1 black Cat creature token onto the battlefield.
 End

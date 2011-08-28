@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTyp
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_baloths.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/178.jpg
+Oracle:Trample\nLandfall - Whenever a land enters the battlefield under your control, you may put a 4/4 green Beast creature token onto the battlefield.
 End

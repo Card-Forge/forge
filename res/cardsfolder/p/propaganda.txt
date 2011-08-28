@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/propaganda.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/80.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/55.jpg
+Oracle:Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
 End

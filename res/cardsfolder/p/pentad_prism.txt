@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentad_prism.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/143.jpg
+Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Pentad Prism: Add one mana of any color to your mana pool.
 End

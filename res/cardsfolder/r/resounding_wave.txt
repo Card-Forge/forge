@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_wave.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/54.jpg
+Oracle:Return target permanent to its owner's hand.\nCycling {5}{W}{U}{B} ({5}{W}{U}{B}, Discard this card: Draw a card.)\nWhen you cycle Resounding Wave, return two target permanents to their owners' hands.
 End

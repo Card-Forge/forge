@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parch.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/86.jpg
+Oracle:Choose one - Parch deals 2 damage to target creature or player; or Parch deals 4 damage to target blue creature.
 End

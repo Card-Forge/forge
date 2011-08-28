@@ -11,4 +11,5 @@ SVar:BuffedBy:Creature.withFlying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_of_the_clouds.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/125.jpg
+Oracle:Flying\nPride of the Clouds gets +1/+1 for each other creature with flying on the battlefield.\nForecast - {2}{W}{U}, Reveal Pride of the Clouds from your hand: Put a 1/1 white and blue Bird creature token with flying onto the battlefield. (Activate this ability only during your upkeep and only once each turn.)
 End
