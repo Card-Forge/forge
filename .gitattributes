@@ -9766,6 +9766,7 @@ src/main/java/forge/gui/input/Input_PayManaCost_Ability.java svneol=native#text/
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/model/BuildInfo.java -text
+src/main/java/forge/model/FGameState.java -text
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain

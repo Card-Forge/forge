@@ -32,6 +32,7 @@ public class FModel {
     private final transient PrintStream oldSystemErr;
     private BuildInfo buildInfo;
     private ForgePreferences preferences;
+    private FGameState gameState;
 
     /**
      * Constructor.
@@ -143,5 +144,23 @@ public class FModel {
         this.preferences = neoPreferences;
     }
 
+    /**
+     * Getter for gameState.
+     * @return the game state
+     */
+    public final FGameState getGameState() {
+        return gameState;
+    }
+
+    /**
+     * Create and return a new game state.
+     * @return a fresh game state
+     */
+    public final FGameState resetGameState() {
+        gameState = new FGameState();
+        return gameState;
+    }
+
 
 }
+

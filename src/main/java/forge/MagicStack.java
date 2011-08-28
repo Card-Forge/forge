@@ -1032,9 +1032,14 @@ public class MagicStack extends MyObservable {
     /**
      * <p>chooseOrderOfSimultaneousStackEntryAll.</p>
      */
-    public void chooseOrderOfSimultaneousStackEntryAll() {
-        chooseOrderOfSimultaneousStackEntry(AllZone.getPhase().getPlayerTurn());
-        chooseOrderOfSimultaneousStackEntry(AllZone.getPhase().getPlayerTurn().getOpponent());
+    public final void chooseOrderOfSimultaneousStackEntryAll() {
+        final Player playerTurn = AllZone.getPhase().getPlayerTurn();
+
+        chooseOrderOfSimultaneousStackEntry(playerTurn);
+
+        if (playerTurn != null) {
+            chooseOrderOfSimultaneousStackEntry(playerTurn.getOpponent());
+        }
     }
 
     /**

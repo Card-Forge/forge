@@ -32,6 +32,10 @@ public final class Main {
             final FModel model = new FModel(null);
             Singletons.setModel(model);
 
+            // TODO: this code should go elsewhere, like wherever we start a new game.
+            // It is only here to maintain semantic equality with the current code base.
+            model.resetGameState();
+
             view.setModel(model);
 
         }
