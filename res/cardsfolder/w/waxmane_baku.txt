@@ -1,0 +1,14 @@
+Name:Waxmane Baku
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
+A:AB$ Tap | Cost$ 1 SubCounter<X/KI> | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap X target creatures.
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$CardCounters.KI
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/waxmane_baku.jpg
+End
