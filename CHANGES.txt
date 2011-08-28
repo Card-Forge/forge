@@ -162,6 +162,47 @@ Fixes/Features:
 - Hopefully fixed the "triggers for wrong player" bug. The Anodet Lurker/Slave of Bolas case works properly now, among others at least.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- View utils: Progress bar interface, Progress bar base class, Progress bar embedded class (extends base).
+- Embedded instance of progress bar in splash frame.
+- Minor fix.
+- Added a ThisTurnEntered equivalent for DefinedCards.
+- Added Count$OppDamageThisTurn and Count$YourDamageThisTurn.
+- Converted Farsight Mask to script.
+- Added the Frankenstein 1 deck.
+- Replaced the Gold dungeon special quest.
+- Converted Dance of the Dead upkeep ability to script. Fixes Human being prompted when it's under computer's control.
+- Fixed a trigger problem that arose when the new controller code autocorrected the zone of a card.
+- Removed some ambiguity in Triggers' parameter names.
+- Added limited support for "RememberChanged" parameter in AF Dig.
+- Initial checkin for Attach_KeepTapped.
+- Converted some Auras to KeepTapped Logic.
+- The random deck generators will now include colorless cards.
+- The random 3- and 5-color deck generators will now also include colorless cards.
+- Relabeled Error Dump to Crash Report in bug reporting window.
+- Change default Eclipse project settings to automatically generate code and comments that are more consistent with CheckStyle. These are all up for debate, so I can revert anything someone particularly hates.
+- Fixed default comment and body of setters to improve readability. Added TODO marker in body to remind programmer to change parameter's name.
+- Predicates are a needed part for new cards management.
+- View util package rename, class name underscores removed.
+- Converted Orcish Captain to script.
+- Forgot to add VELOCITY counters for Tornado.
+- New lightweight classes for cards management in deck editors and quest mode. (no other parts or project changed.)
+- mtg-data reference.
+- Fixed issue 174 - Error reporting bug: MCException - submit Issue - Error Type: APPLICATION ERROR #1300, Error Description: Custom field not found
+- Steps to Reproduce wasn't a custom field.
+- Bug: 154. Make progress in segregating game model data; move some fields from forge.AllZone to forge.model.FGameState.
+- Left delegate methods in AllZone, marking their Javadoc (in English) for future deprecation.
+- Added some rudimentary tests on forge.model.FModel's getGameState and resetGameState methods.
+- Initial checkin for AF DigUntil.
+- Convert Hermit Druid to Script.
+- Added an AbilityFactory for MoveCounter (doesn't support targeting. requires Source$ and Defined$ which both take Defined values.)
+- Java warning cleanup in CardReader.java.
+- Added Graft keyword as "Graft <value>". Added Aquastrand Spider (from Dissension) as an example of Graft.
+- Updated some SVars.
+- Converted Llanowar Reborn to Graft keyword.
+- A little cleanup on new classes, aimed to remove warnings due to unused imports.
+- carddb and manaparser less related to mtg-data.txt and support alternative sources of data.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
