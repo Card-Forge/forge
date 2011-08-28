@@ -1,0 +1,11 @@
+Name:Aquastrand Spider
+ManaCost:1 G
+Types:Creature Spider Mutant
+Text:no text
+PT:0/0
+K:Graft 2
+A:AB$ Pump | Cost$ G | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Reach | SpellDescription$ Target creature with a +1/+1 counter on it gains reach until end of turn. (It can block creatures with flying.)
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aquastrand_spider.jpg
+End
