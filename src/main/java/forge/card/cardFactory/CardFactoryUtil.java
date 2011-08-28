@@ -4892,15 +4892,20 @@ public class CardFactoryUtil {
 
         int bloodthirst = hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
-            final int count = Integer.parseInt(card.getKeyword().get(bloodthirst).split(" ")[1]);
+            final String numCounters = card.getKeyword().get(bloodthirst).split(" ")[1];
 
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = -1849308549161972508L;
 
                 public void execute() {
                     if (card.getController().getOpponent().getAssignedDamage() > 0) {
-
-                        card.addCounter(Counters.P1P1, count);
+                        int toAdd = -1;
+                        if (numCounters.equals("X")) {
+                            toAdd = card.getController().getOpponent().getAssignedDamage();
+                        } else {
+                            toAdd = Integer.parseInt(numCounters);
+                        }
+                        card.addCounter(Counters.P1P1, toAdd);
 
                     }
                 }

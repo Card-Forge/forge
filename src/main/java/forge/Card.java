@@ -1545,10 +1545,14 @@ public class Card extends MyObservable implements Comparable<Card> {
                     String kk[] = k.split(" ");
                     sbLong.append(keyword.get(i)).append(" (If an opponent was dealt damage this turn, this creature enters the battlefield with ");
                     sbLong.append(kk[1]).append(" +1/+1 counter");
-                    if (Integer.parseInt(kk[1]) > 1) {
-                        sbLong.append("s");
+                    if (kk[1].equals("X")){
+                        sbLong.append("s on it, where X is the damage dealt to your opponents this turn.)").append("\r\n");
+                    } else {
+                        if (Integer.parseInt(kk[1]) > 1) {
+                            sbLong.append("s");
+                        }
+                        sbLong.append(" on it.)").append("\r\n");
                     }
-                    sbLong.append(" on it.)").append("\r\n");
                 } else if (keyword.get(i).startsWith("Modular")) {
                     String numCounters = keyword.get(i).split(" ")[1];
                     sbLong.append(keyword.get(i));
