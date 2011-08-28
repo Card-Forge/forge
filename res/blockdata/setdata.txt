@@ -23,7 +23,7 @@ Index:19|Code2:WL|Code3:WTH|Name:Weatherlight
 Index:20|Code2:TE|Code3:TMP|Name:Tempest
 Index:21|Code2:SH|Code3:STH|Name:Stronghold
 Index:22|Code2:EX|Code3:EXO|Name:Exodus
-Index:23|Code2:P2|Code3:PO2|Name:Portal Second Age
+Index:23|Code2:P2|Code3:PO2|Name:Portal Second Age|Alias:P02
 Index:24|Code2:US|Code3:USG|Name:Urza's Saga
 Index:25|Code2:UL|Code3:ULG|Name:Urza's Legacy
 Index:26|Code2:6E|Code3:6ED|Name:Classic (Sixth Edition)
@@ -68,7 +68,7 @@ Index:60|Code2:10E|Code3:10E|Name:Core Set - Tenth Edition
 Index:61|Code2:LRW|Code3:LRW|Name:Lorwyn
 Index:62|Code2:MOR|Code3:MOR|Name:Morningtide
 Index:63|Code2:SHM|Code3:SHM|Name:Shadowmoor
-Index:64|Code2:EVE|Code3:EVE|Name:Eventide
+Index:64|Code2:EVE|Code3:EVE|Name:Eventide|Alias:EVT
 Index:65|Code2:ALA|Code3:ALA|Name:Shards of Alara
 Index:66|Code2:CFX|Code3:CFX|Name:Conflux|Alias:CON
 Index:67|Code2:ARB|Code3:ARB|Name:Alara Reborn

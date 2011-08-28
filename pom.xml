@@ -588,6 +588,11 @@
             <version>3.0.1</version>
         </dependency>
         <dependency>
+           <groupId>org.apache.commons</groupId>
+           <artifactId>commons-io</artifactId>
+           <version>1.3.2</version>
+        </dependency>
+        <dependency>
             <groupId>commons-discovery</groupId>
             <artifactId>commons-discovery</artifactId>
             <version>20040218.194635</version>

@@ -9543,6 +9543,7 @@ src/main/java/forge/GuiQuestFilter.java svneol=native#text/plain
 src/main/java/forge/Gui_BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/Gui_CardShop.java svneol=native#text/plain
 src/main/java/forge/Gui_DeckEditor.java svneol=native#text/plain
+src/main/java/forge/Gui_DeckEditorBase.java -text
 src/main/java/forge/Gui_DeckEditor_Menu.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPictures_LQ.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPrices.java svneol=native#text/plain

@@ -117,7 +117,7 @@ public abstract class Predicate<T> {
     }
     
     // Random - algorithm adapted from Braid's GeneratorFunctions
-    public final T random(final Iterable<T> source) { // 
+    public final T random(final Iterable<T> source) {
         int n = 0;
         T candidate = null;
         for (T item : source) {
@@ -126,7 +126,7 @@ public abstract class Predicate<T> {
         }
         return candidate;
     }
-    public final <U> U random(final Iterable<U> source, final Lambda1<T, U> accessor) { 
+    public final <U> U random(final Iterable<U> source, final Lambda1<T, U> accessor) {
         int n = 0;
         U candidate = null;
         for (U item : source) {
@@ -135,6 +135,28 @@ public abstract class Predicate<T> {
         }
         return candidate;
     }
+
+    // Get several random values
+    // should improve to make 1 pass over source and track N candidates at once
+    public final List<T> random(final Iterable<T> source, final int count) {
+        List<T> result = new ArrayList<T>();
+        for (int i = 0; i < count; ++i) {
+            T toAdd = random(source);
+            if (toAdd == null) { break; }
+            result.add(toAdd);
+        }
+        return result;
+    }
+    public final <U> List<U> random(final Iterable<U> source, final Lambda1<T, U> accessor, final int count) {
+        List<U> result = new ArrayList<U>();
+        for (int i = 0; i < count; ++i) {
+            U toAdd = random(source, accessor);
+            if (toAdd == null) { break; }
+            result.add(toAdd);
+        }
+        return result;
+    }
+
     // Static builder methods - they choose concrete implementation by themselves
     public static <T> Predicate<T> not(final Predicate<T> operand1) { return new Not<T>(operand1); }
     public static <T> Predicate<T> compose(final Predicate<T> operand1,
@@ -142,14 +164,14 @@ public abstract class Predicate<T> {
     {
         return new Node<T>(operand1, operator, operand2);
     }
-    public static <T> Predicate<T> and(final Predicate<T> operand1, final Predicate<T> operand2) {
-        return new NodeAnd<T>(operand1, operand2);
-    }
+    // Predefined operators: and, or
+    public static <T> Predicate<T> and(final Predicate<T> operand1, final Predicate<T> operand2) { return new NodeAnd<T>(operand1, operand2); }
     public static <T> Predicate<T> and(final Iterable<Predicate<T>> operand) { return new MultiNodeAnd<T>(operand); }
-    public static <T> Predicate<T> or(final Predicate<T> operand1, final Predicate<T> operand2) {
-        return new NodeOr<T>(operand1, operand2);
-    }
+    public static <T, U> Predicate<T> and(final Predicate<T> operand1, final Predicate<U> operand2, Lambda1<U, T> bridge) { return new NodeAndBridged<T, U>(operand1, operand2, bridge); } 
+
+    public static <T> Predicate<T> or(final Predicate<T> operand1, final Predicate<T> operand2) { return new NodeOr<T>(operand1, operand2); }
     public static <T> Predicate<T> or(final Iterable<Predicate<T>> operand) { return new MultiNodeOr<T>(operand); }
+    public static <T, U> Predicate<T> or(final Predicate<T> operand1, final Predicate<U> operand2, Lambda1<U, T> bridge) { return new NodeOrBridged<T, U>(operand1, operand2, bridge); }    
 
     // Concrete implementations
     // unary operators
@@ -195,6 +217,30 @@ public abstract class Predicate<T> {
             super(operand1, PredicatesOp.AND, operand2);
         }
         @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(card); }
+    }
+
+    // Bridged OR and AND
+    protected static final class NodeOrBridged<T,U> extends Predicate<T> {
+        private final Predicate<T> filter1;
+        private final Predicate<U> filter2;
+        private final Lambda1<U, T> bridge;
+        public NodeOrBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
+            filter1 = operand1;
+            filter2 = operand2;
+            bridge = accessor;
+        }
+        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) || filter2.isTrue(bridge.apply(card)); }
+    }
+    protected static final class NodeAndBridged<T,U> extends Predicate<T> {
+        private final Predicate<T> filter1;
+        private final Predicate<U> filter2;
+        private final Lambda1<U, T> bridge;
+        public NodeAndBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
+            filter1 = operand1;
+            filter2 = operand2;
+            bridge = accessor;
+        }
+        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(bridge.apply(card)); }
     }
 
     // multi-operand operators
