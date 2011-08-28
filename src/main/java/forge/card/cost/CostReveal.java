@@ -127,6 +127,8 @@ public class CostReveal extends CostPartWithList {
             
             sb.append(Cost.convertAmountTypeToWords(i, amount, desc.toString()));
         }
+        sb.append(" from your hand");
+        
         return sb.toString();
     }
 

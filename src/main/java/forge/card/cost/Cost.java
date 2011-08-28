@@ -390,8 +390,8 @@ public class Cost {
             if (part instanceof CostMana)
                 continue;
         	if (!first)
-        		cost.append("and ");
-        	cost.append(part.toString()).append(" ");
+        		cost.append(" and ");
+        	cost.append(part.toString());
         	first = false;
         }
 
