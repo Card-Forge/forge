@@ -1,10 +1,11 @@
 package forge.view.swing;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import forge.view.util.ProgressBar_Base;
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -23,6 +24,7 @@ import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
 
 /**
  * The main view for Forge: a java swing application.
+ * All view class instances should be accessible from here.
  */
 public class ApplicationView implements FView {
 
@@ -48,28 +50,30 @@ public class ApplicationView implements FView {
                 splashFrame.setVisible(true);
             }
         });
+        
     }
 
     /* (non-Javadoc)
      * @see forge.view.FView#getCardLoadingProgressMonitor()
      */
-    @Override
-    public final ProgressBar_Base getCardLoadingProgressMonitor() {
-        ProgressBar_Base result;
+    @Override   
+    public final BaseProgressMonitor getCardLoadingProgressMonitor() {
+        BaseProgressMonitor result;
 
         if (splashFrame == null) {
             result = null;
         }
         else {
-            result = splashFrame.getBar();
+            result = splashFrame.getMonitorModel();
         }
 
-        return result;
+        return result; 
     }
 
     /* (non-Javadoc)
      * @see forge.view.FView#setModel(forge.model.FModel)
      */
+   
     @Override
     public final void setModel(final FModel model) {
         try {
@@ -120,8 +124,6 @@ public class ApplicationView implements FView {
             SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
                 public void run() {
                     AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));
-
-                    getCardLoadingProgressMonitor().dispose();
 
                     // Enable only one of the following two lines. The second
                     // is useful for debugging.

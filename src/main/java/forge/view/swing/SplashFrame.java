@@ -11,8 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import forge.view.util.ProgressBar_Embedded;
-
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.SplashModelProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.SplashViewProgressMonitor;
 
 /**
  * Shows the splash frame as the application starts.
@@ -33,7 +34,8 @@ public class SplashFrame extends JFrame {
     private static final int    DISCLAIMER_FONT_SIZE    = 9;
     private static final Color  DISCLAIMER_COLOR        = Color.white;
     
-    private ProgressBar_Embedded bar;
+    private SplashModelProgressMonitor monitorModel = null;
+    private SplashViewProgressMonitor monitorView = null;
 
     /**
      * <p>Create the frame; this <strong>must</strong> be called from an event
@@ -67,7 +69,7 @@ public class SplashFrame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);    
 
-        // Add disclaimer and progress bar.
+        // Add disclaimer
         final JLabel lblDisclaimer = new JLabel("<html><center>Forge is not affiliated in any way with Wizards of the Coast.<br>Forge is open source software, released under the GNU Public License.</center></html>");
 
         lblDisclaimer.setBounds(PADDING_X, DISCLAIMER_TOP_PX,
@@ -78,15 +80,19 @@ public class SplashFrame extends JFrame {
         lblDisclaimer.setForeground(DISCLAIMER_COLOR);
         contentPane.add(lblDisclaimer);
        
-        bar = new ProgressBar_Embedded(1, 1); 
-        bar.setBounds(PADDING_X, splashHeightPx - PADDING_Y - BAR_HEIGHT_PX,
+        // Instantiate model and view and tie together.
+        monitorModel = new SplashModelProgressMonitor(1);
+        monitorView = new SplashViewProgressMonitor();
+    
+        monitorModel.setCurrentView(monitorView);
+        monitorView.setCurrentModel(monitorModel);
+        
+        // Add prog bar + message, bg image
+        monitorView.displayUpdate("Assembling file list...");
+        monitorView.setBounds(PADDING_X, splashHeightPx - PADDING_Y - BAR_HEIGHT_PX,
                 splashWidthPx - (2 * PADDING_X), BAR_HEIGHT_PX);
-                
-        contentPane.add(bar);
+        contentPane.add(monitorView);
         
-        bar.displayUpdate("Assembling file list...");
-        
-        // Add background image and close button
         contentPane.setOpaque(false);
         final JLabel bgLabel = new JLabel(bgIcon);
         
@@ -100,18 +106,19 @@ public class SplashFrame extends JFrame {
     }
 
     /**
-     * Getter for progress bar.
-     * @return the ProgressBar_Embedded object used in the splash frame.
+     * Getter for progress bar view.
+     * @return the SplashViewProgressMonitor progress bar used in the splash frame.
      */
-    public final ProgressBar_Embedded getBar() {
-        return bar;
+    public final SplashViewProgressMonitor getMonitorView() {
+        return monitorView;
+    }
+    
+    /**
+     * Getter for progress monitor model.
+     * @return the BaseProgressMonitor model used in the splash frame.
+     */
+    public final BaseProgressMonitor getMonitorModel() {
+        return monitorModel;
     }
 
-    /**
-     * Setter for progress bar.
-     * @param neoBar  the ProgressBar_Embedded used in the splash frame.
-     */
-    protected final void setBar(final ProgressBar_Embedded neoBar) {
-        this.bar = neoBar;
-    }
 }

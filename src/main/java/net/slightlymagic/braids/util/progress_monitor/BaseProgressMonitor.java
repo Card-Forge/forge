@@ -29,7 +29,16 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
 	public final int SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE;
 	public final int SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR;
 	
-
+	/**
+     * Convenience for 
+     * BaseProgressMonitor(numPhases, 1, 2.0f, null).
+     * 
+     * @see #BaseProgressMonitor(int,long,float,float[])
+     */
+    public BaseProgressMonitor(int numPhases) {
+        this(numPhases, 1L, 2.0f, null);
+    }
+	
 	/**
 	 * Convenience for 
 	 * BaseProgressMonitor(numPhases, totalUnitsFirstPhase, 2.0f, null).
@@ -285,6 +294,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
     public void incrementUnitsCompletedThisPhase(long numUnits) {
         this.unitsCompletedSoFarThisPhase += numUnits;
     }
+    
         
     /**
      * Subclasses must call this immediately after updating the UI, to 

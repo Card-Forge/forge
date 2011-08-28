@@ -19,7 +19,8 @@ import java.util.zip.ZipFile;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import forge.view.util.ProgressBar_Base;
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
@@ -167,7 +168,7 @@ public class CardReader
     /**
      * Reads the rest of ALL the cards into memory.  This is not lazy.
      */
-    public final void run() {
+    public final void run() { 
         loadCardsUntilYouFind(null);
     }
 
@@ -184,16 +185,20 @@ public class CardReader
     protected final Card loadCardsUntilYouFind(final String cardName) {
         Card result = null;
 
-        ProgressBar_Base monitor = null;
+        // Try to retrieve card loading progress monitor model.
+        // If no progress monitor present, output results to console.
+        BaseProgressMonitor monitor = null;
         final FView view = Singletons.getView();
         if (view != null) {
             monitor = view.getCardLoadingProgressMonitor();
         }
+        
+        if (monitor == null) {
+            monitor = new StderrProgressMonitor(1, 0L);
+        }
 
-        //if (monitor == null) {
-        //    monitor = new StderrProgressMonitor(1, 0L);
-        // }
-
+        // Iterate through txt files or zip archive.
+        // Report relevant numbers to progress monitor model.
         if (zip == null) {
             if (estimatedFilesRemaining == UNKNOWN_NUMBER_OF_FILES_REMAINING) {
                 final Generator<File> findNonDirsGen = new FindNonDirectoriesSkipDotDirectoriesGenerator(cardsfolder);
@@ -240,10 +245,6 @@ public class CardReader
             }
 
         } //endif
-
-        if (monitor != null) {
-            monitor.dispose();
-        }
 
         return result;
     } //loadCardsUntilYouFind(String)

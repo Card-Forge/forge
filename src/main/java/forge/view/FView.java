@@ -1,6 +1,6 @@
 package forge.view;
 
-import forge.view.util.ProgressBar_Base;
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 import forge.model.FModel;
 
 /**
@@ -21,6 +21,5 @@ public interface FView {
      * 
      * @return a progress monitor having only one phase; may be null
      */
-    ProgressBar_Base getCardLoadingProgressMonitor();
-
+    BaseProgressMonitor getCardLoadingProgressMonitor();
 }
