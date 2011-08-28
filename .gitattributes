@@ -9807,6 +9807,10 @@ src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
 src/main/java/forge/view/swing/SplashFrame.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
+src/main/java/forge/view/swing/util/ProgressBarBase.java -text
+src/main/java/forge/view/swing/util/ProgressBarEmbedded.java -text
+src/main/java/forge/view/swing/util/ProgressBarInterface.java -text
+src/main/java/forge/view/swing/util/package-info.java -text
 src/main/java/forge/view/util/ProgressBar_Base.java -text
 src/main/java/forge/view/util/ProgressBar_Embedded.java -text
 src/main/java/forge/view/util/ProgressBar_Interface.java -text
