@@ -1,7 +1,5 @@
 package forge.card;
 
-import forge.card.mana.ManaCost;
-
 public class CardManaCostShard {
 
     private final int shard;

@@ -8,17 +8,15 @@ package forge.card;
  */
 
 public enum CardRarity {
-    BasicLand(0, "L"),
-    Common(1, "C"),
-    Uncommon(2, "U"),
-    Rare(3, "R"),
-    MythicRare(4, "M"),
-    Special(10, "S"); // Timeshifted
+    BasicLand("L"),
+    Common("C"),
+    Uncommon("U"),
+    Rare("R"),
+    MythicRare("M"),
+    Special("S"); // Timeshifted
 
-    private final int rating;
     private final String strValue;
-    private CardRarity(final int value, final String sValue) {
-        rating = value;
+    private CardRarity(final String sValue) {
         strValue = sValue;
     }
 

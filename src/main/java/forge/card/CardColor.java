@@ -1,9 +1,5 @@
 package forge.card;
 
-import org.apache.tools.ant.taskdefs.Concat;
-
-import forge.Constant;
-
 /**
  * <p>CardColor class.</p>
  *

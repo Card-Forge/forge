@@ -308,7 +308,7 @@ public final class CardRules {
 
             @Override
             public boolean isTrue(final CardRules card) {
-                return card.getRarityFromLatestSet().equals(operand);
+                return card.getRarityFromLatestSet().equals(operand) == shouldBeEqual;
             }
 
             public PredicateLastesSetRarity(final CardRarity type, final boolean wantEqual) {
