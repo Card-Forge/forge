@@ -10,4 +10,5 @@ SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M1M1 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicker_warcrawler.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/269.jpg
+Oracle:Whenever Wicker Warcrawler attacks or blocks, put a -1/-1 counter on it at end of combat.
 End

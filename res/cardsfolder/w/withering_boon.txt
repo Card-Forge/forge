@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ 1 B PayLife<3> | TargetType$ Spell | TgtPrompt$ Select tar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_boon.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/50.jpg
+Oracle:As an additional cost to cast Withering Boon, pay 3 life.\nCounter target creature spell.
 End

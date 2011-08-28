@@ -7,4 +7,5 @@ K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/186.jpg
+Oracle:Destroy target land.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 End

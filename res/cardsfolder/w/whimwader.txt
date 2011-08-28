@@ -7,4 +7,5 @@ K:CARDNAME can't attack unless defending player controls a blue permanent.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whimwader.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/54.jpg
+Oracle:Whimwader can't attack unless defending player controls a blue permanent.
 End

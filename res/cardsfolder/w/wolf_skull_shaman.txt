@@ -6,4 +6,5 @@ PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolf_skull_shaman.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/140.jpg
+Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Wolf-Skull Shaman, you may reveal it. If you do, put a 2/2 green Wolf creature token onto the battlefield.
 End

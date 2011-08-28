@@ -11,4 +11,5 @@ SVar:X:Count$TimesKicked
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Voyager_Drake.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/45.jpg
+Oracle:Multikicker {U} (You may pay an additional {U} any number of times as you cast this spell.)\nFlying\nWhen Voyager Drake enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times Voyager Drake was kicked.
 End

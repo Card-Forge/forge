@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unifying_theory.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/112.jpg
+Oracle:Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
 End

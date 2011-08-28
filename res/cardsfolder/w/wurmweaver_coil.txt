@@ -9,4 +9,5 @@ A:SP$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Wurm | T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmweaver_coil.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/99.jpg
+Oracle:Enchant green creature\nEnchanted creature gets +6/+6.\n{G}{G}{G}, Sacrifice Wurmweaver Coil: Put a 6/6 green Wurm creature token onto the battlefield.
 End

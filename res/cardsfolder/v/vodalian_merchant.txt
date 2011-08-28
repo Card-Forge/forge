@@ -9,4 +9,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card26296.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/85.jpg
+Oracle:When Vodalian Merchant enters the battlefield, draw a card, then discard a card.
 End

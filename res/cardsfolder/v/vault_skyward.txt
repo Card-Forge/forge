@@ -7,4 +7,5 @@ SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_skyward.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/51.jpg
+Oracle:Target creature gains flying until end of turn. Untap it.
 End

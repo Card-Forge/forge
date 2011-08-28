@@ -11,4 +11,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/64.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/39.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/51.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/186.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{B}: Vampire Bats gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
 End

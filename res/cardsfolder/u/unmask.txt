@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmask.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/168.jpg
+Oracle:You may exile a black card from your hand rather than pay Unmask's mana cost.\nTarget player reveals his or her hand. You choose a nonland card from it. That player discards that card.
 End

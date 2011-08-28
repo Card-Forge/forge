@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_lacerator.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/115.jpg
+Oracle:At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.
 End

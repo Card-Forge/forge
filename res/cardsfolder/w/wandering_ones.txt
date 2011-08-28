@@ -6,4 +6,5 @@ PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50345.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/100.jpg
+Oracle:
 End

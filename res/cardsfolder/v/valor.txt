@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valor.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/16.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/32.jpg
+Oracle:First strike\nAs long as Valor is in your graveyard and you control a Plains, creatures you control have first strike.
 End

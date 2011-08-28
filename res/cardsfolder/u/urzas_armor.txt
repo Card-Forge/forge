@@ -6,4 +6,5 @@ K:stPreventDamage:You:Card:1:If a source would deal damage to you, prevent 1 of 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_armor.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/313.jpg
+Oracle:If a source would deal damage to you, prevent 1 of that damage.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/99.jpg
+Oracle:{3}{G}, {T}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_stronghold.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/137.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}{B}, {T}: Put target creature card from your graveyard on top of your library.
 End

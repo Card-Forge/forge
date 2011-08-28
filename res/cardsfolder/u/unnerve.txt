@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnerve.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/162.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/105.jpg
+Oracle:Each opponent discards two cards.
 End

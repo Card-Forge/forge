@@ -11,4 +11,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/449.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/329.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/83.jpg|4
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/102.jpg|4
+Oracle:{T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
 End

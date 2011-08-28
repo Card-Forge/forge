@@ -6,4 +6,5 @@ PT:1/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_embermage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/152.jpg
+Oracle:Radiance - {T}: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.
 End

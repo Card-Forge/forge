@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_lava.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/223.jpg
+Oracle:Defender (This creature can't attack.)\n{R}: Wall of Lava gets +1/+1 until end of turn.
 End

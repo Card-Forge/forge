@@ -7,4 +7,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whipstitched_zombie.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/81.jpg
+Oracle:At the beginning of your upkeep, sacrifice Whipstitched Zombie unless you pay {B}.
 End

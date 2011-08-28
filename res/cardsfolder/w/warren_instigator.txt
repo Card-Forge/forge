@@ -9,4 +9,5 @@ K:Double Strike
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_instigator.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/154.jpg
+Oracle:Double strike\nWhenever Warren Instigator deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.
 End

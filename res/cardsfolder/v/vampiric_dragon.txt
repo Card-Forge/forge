@@ -9,4 +9,5 @@ A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_dragon.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/296.jpg
+Oracle:Flying\nWhenever a creature dealt damage by Vampiric Dragon this turn dies, put a +1/+1 counter on Vampiric Dragon.\n{1}{R}: Vampiric Dragon deals 1 damage to target creature.
 End

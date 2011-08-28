@@ -10,4 +10,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/57.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/57.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/55.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/56.jpg
+Oracle:If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 End

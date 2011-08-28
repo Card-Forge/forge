@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ B | KW$ Infect | SpellDescription$ CARDNAME gains infect unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vector_asp.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/219.jpg
+Oracle:{B}: Vector Asp gains infect until end of turn. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artif
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdigris.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/158.jpg
+Oracle:Destroy target artifact.
 End

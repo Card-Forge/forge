@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ 
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10596.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/29.jpg
+Oracle:Creatures you control get +1/+1 until end of turn.
 End

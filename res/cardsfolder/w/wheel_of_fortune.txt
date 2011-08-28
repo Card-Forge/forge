@@ -11,4 +11,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/184.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/185.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/184.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/184.jpg
+Oracle:Each player discards his or her hand and draws seven cards.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Instant,Sorcery
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wee_dragonauts.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/137.jpg
+Oracle:Flying\nWhenever you cast an instant or sorcery spell, Wee Dragonauts gets +2/+0 until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomspout_brackus.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/295.jpg
+Oracle:{1}{G}, {T}: Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.\nMorph {3}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

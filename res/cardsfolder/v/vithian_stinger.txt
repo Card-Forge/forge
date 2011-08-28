@@ -8,4 +8,5 @@ K:Unearth:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_stinger.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/120.jpg
+Oracle:{T}: Vithian Stinger deals 1 damage to target creature or player.\nUnearth {1}{R} ({1}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
 End

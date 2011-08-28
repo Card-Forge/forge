@@ -7,4 +7,5 @@ K:CantBeBlockedBy Creature.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderbrine_rootcutters.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/178.jpg
+Oracle:Wanderbrine Rootcutters can't be blocked by green creatures.
 End

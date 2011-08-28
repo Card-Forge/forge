@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/238.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/139.jpg
+Oracle:Destroy target creature or land.
 End

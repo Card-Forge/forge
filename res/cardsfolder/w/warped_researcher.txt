@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying & Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_researcher.jpg
 SVar:Rarity:Uncommon
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/56.jpg
+Oracle:Whenever a player cycles a card, Warped Researcher gains flying and shroud until end of turn. (It can't be the target of spells or abilities.)
 End

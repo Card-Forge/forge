@@ -6,4 +6,5 @@ A:SP$ DamageAll | Cost$ 3 R | NumDmg$ 3 | ValidCards$ Creature.blocked,Creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warpath.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/226.jpg
+Oracle:Warpath deals 3 damage to each blocking creature and each blocked creature.
 End

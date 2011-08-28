@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/140.jpg
+Oracle:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature."
 End

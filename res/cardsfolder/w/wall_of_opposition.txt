@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_opposition.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/168.jpg
+Oracle:Defender (This creature can't attack.)\n{1}: Wall of Opposition gets +1/+0 until end of turn.
 End

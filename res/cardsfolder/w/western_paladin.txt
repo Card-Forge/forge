@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/western_paladin.
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/173.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/168.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/170.jpg
+Oracle:{B}{B}, {T}: Destroy target white creature.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ U | KW$ Prevent all combat damage that would be dealt to and 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_phantom.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/132.jpg
+Oracle:Urborg Phantom can't block.\n{U}: Prevent all combat damage that would be dealt to and dealt by Urborg Phantom this turn.
 End

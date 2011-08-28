@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/87.jpg
+Oracle:Target player discards a card.\nDraw a card.
 End

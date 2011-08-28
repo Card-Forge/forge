@@ -6,4 +6,5 @@ Loyalty:3
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_the_sojourner.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/135.jpg
+Oracle:[+2] Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.\n[-1] Creatures are unblockable this turn.\n[-8] You get an emblem with "Whenever you cast a spell, exile target permanent."
 End

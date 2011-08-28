@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venerated_teacher.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/93.jpg
+Oracle:When Venerated Teacher enters the battlefield, put two level counters on each creature you control with level up.
 End

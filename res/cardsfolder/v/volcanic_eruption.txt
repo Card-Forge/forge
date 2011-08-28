@@ -15,4 +15,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/89.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/89.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/112.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/89.jpg
+Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains destroyed this way.
 End

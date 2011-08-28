@@ -8,4 +8,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Wirefly | TokenTypes$ Creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirefly_hive.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/161.jpg
+Oracle:{3}, {T}: Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield. If you lose the flip, destroy all permanents named Wirefly.
 End

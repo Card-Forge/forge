@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fate.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/187.jpg
+Oracle:Wheel of Fate is red.\nSuspend 4-{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nEach player discards his or her hand, then draws seven cards.
 End

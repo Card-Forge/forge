@@ -8,4 +8,5 @@ K:Protection from blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windreaper_falcon.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/349.jpg
+Oracle:Flying, protection from blue
 End

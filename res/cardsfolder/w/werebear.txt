@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | Thres
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/werebear.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/282.jpg
+Oracle:{T}: Add {G} to your mana pool.\nThreshold - Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
 End

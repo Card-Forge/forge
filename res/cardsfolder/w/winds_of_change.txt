@@ -8,4 +8,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/275.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/250.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/162.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/169.jpg
+Oracle:Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
 End

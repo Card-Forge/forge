@@ -8,4 +8,5 @@ SVar:TrigPump:DB$Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weed_pruner_poplar.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/83.jpg
+Oracle:At the beginning of your upkeep, target creature other than Weed-Pruner Poplar gets -1/-1 until end of turn.
 End

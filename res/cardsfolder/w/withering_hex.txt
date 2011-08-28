@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_hex.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/181.jpg
+Oracle:Enchant creature\nWhenever a player cycles a card, put a plague counter on Withering Hex.\nEnchanted creature gets -1/-1 for each plague counter on Withering Hex.
 End

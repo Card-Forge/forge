@@ -8,4 +8,5 @@ K:Protection from black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_grace.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/54.jpg
+Oracle:Flying, protection from black
 End

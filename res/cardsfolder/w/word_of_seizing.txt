@@ -7,4 +7,5 @@ A:SP$ GainControl | Cost$ 3 R R | ValidTgts$ Permanent | TgtPrompt$ Select targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_seizing.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/188.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nUntap target permanent and gain control of it until end of turn. It gains haste until end of turn.
 End

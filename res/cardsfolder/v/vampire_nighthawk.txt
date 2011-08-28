@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nighthawk.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/116.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/106.jpg
+Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
 End

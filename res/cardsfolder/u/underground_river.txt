@@ -14,4 +14,5 @@ SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/326.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/357.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/362.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/330.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {U} or {B} to your mana pool. Underground River deals 1 damage to you.
 End

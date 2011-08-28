@@ -7,4 +7,5 @@ K:Cycling:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wipe_clean.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/26.jpg
+Oracle:Exile target enchantment.\nCycling {3} ({3}, Discard this card: Draw a card.)
 End

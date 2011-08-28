@@ -11,4 +11,5 @@ A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add G to your 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesper_ghoul.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/57.jpg
+Oracle:{T}, Pay 1 life: Add one mana of any color to your mana pool.
 End

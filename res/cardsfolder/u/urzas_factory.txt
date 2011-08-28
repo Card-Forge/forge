@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 7 T | TokenAmount$ 1 | TokenName$ Assembly-Worker | TokenTyp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_factory.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/280.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{7}, {T}: Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.
 End

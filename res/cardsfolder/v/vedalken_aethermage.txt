@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_aethermage.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/61.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Vedalken AEthermage enters the battlefield, return target Sliver to its owner's hand.\nWizardcycling {3} ({3}, Discard this card: Search your library for a Wizard card, reveal it, and put it into your hand. Then shuffle your library.)
 End

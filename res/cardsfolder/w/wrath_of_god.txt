@@ -17,4 +17,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/54.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/230.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/345.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/230.jpg
+Oracle:Destroy all creatures. They can't be regenerated.
 End

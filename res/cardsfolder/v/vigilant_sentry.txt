@@ -8,4 +8,5 @@ SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_sentry.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/33.jpg
+Oracle:Threshold - As long as seven or more cards are in your graveyard, Vigilant Sentry gets +1/+1 and has "{T}: Target attacking or blocking creature gets +3/+3 until end of turn."
 End

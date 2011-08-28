@@ -8,4 +8,5 @@ SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_longbow.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/270.jpg
+Oracle:Equipped creature has "{T}: This creature deals 1 damage to target creature or player."\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
 End

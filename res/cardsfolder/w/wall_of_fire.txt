@@ -17,4 +17,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/162.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/216.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/182.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/182.jpg
+Oracle:Defender (This creature can't attack.)\n{R}: Wall of Fire gets +1/+0 until end of turn.
 End

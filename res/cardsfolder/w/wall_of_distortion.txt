@@ -8,4 +8,5 @@ A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_distortion.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/171.jpg
+Oracle:Defender (This creature can't attack.)\n{2}{B}, {T}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
 End

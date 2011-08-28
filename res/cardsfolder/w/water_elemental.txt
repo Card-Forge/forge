@@ -11,4 +11,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/115.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/92.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/60.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/92.jpg
+Oracle:
 End

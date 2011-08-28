@@ -17,4 +17,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/124.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/105.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/90.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/90.jpg
+Oracle:Defender, flying (This creature can't attack, and it can block creatures with flying.)
 End

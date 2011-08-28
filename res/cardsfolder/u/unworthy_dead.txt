@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unworthy_dead.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/163.jpg
+Oracle:{B}: Regenerate Unworthy Dead.
 End

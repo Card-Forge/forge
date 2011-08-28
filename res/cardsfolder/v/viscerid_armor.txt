@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_armor.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/60.jpg|2
+Oracle:Enchant creature\nEnchanted creature gets +1/+1.\n{1}{U}: Return Viscerid Armor to its owner's hand.
 End

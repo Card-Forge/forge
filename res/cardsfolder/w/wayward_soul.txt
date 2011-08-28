@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination $ Library | Libra
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card5273.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/51.jpg
+Oracle:Flying\n{U}: Put Wayward Soul on top of its owner's library.
 End

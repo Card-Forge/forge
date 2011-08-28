@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/visions.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/304.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/210.jpg
+Oracle:Look at the top five cards of target player's library. You may then have that player shuffle that library.
 End

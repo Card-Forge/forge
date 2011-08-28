@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_harvest.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/125.jpg
+Oracle:Enchant artifact\nWhen enchanted artifact is put into a graveyard, you gain 6 life.
 End

@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ 3 G Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Sel
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_faerie.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/145.jpg
+Oracle:Flying\n{3}{G}, Sacrifice Uktabi Faerie: Destroy target artifact.
 End

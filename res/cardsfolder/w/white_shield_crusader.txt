@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 unti
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121216.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/24.jpg
+Oracle:Protection from black\n{W}: White Shield Crusader gains flying until end of turn.\n{W}{W}: White Shield Crusader gets +1/+0 until end of turn.
 End

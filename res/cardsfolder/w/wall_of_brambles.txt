@@ -13,4 +13,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/200.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/166.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/131.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/132.jpg
+Oracle:Defender (This creature can't attack.)\n{G}: Regenerate Wall of Brambles.
 End

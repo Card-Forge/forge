@@ -7,4 +7,5 @@ A:AB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic lan
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasteland.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/340.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Wasteland: Destroy target nonbasic land.
 End

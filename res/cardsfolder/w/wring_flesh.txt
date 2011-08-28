@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wring_flesh.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/118.jpg
+Oracle:Target creature gets -3/-1 until end of turn.
 End

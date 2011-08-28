@@ -6,4 +6,5 @@ A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whalebone_glider.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/324.jpg
+Oracle:{2}, {T}: Target creature with power 3 or less gains flying until end of turn.
 End

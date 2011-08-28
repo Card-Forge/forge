@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wargate.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/129.jpg
+Oracle:Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
 End

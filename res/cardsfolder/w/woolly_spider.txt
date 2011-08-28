@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_spider.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/167.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever Woolly Spider blocks a creature with flying, Woolly Spider gets +0/+2 until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/255.jpg
+Oracle:{T}: Add {B} to your mana pool.\n{T}: Target creature loses first strike or swampwalk until end of turn.
 End

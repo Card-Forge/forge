@@ -9,4 +9,5 @@ SVar:X:Count$Valid Land.nonBasic+YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilderness_elemental.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/134.jpg
+Oracle:Trample\nWilderness Elemental's power is equal to the number of nonbasic lands your opponents control.
 End

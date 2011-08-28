@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.nonLand+YouCtrl | AffectedZone$ Hand,Graveya
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_orrery.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/163.jpg
+Oracle:You may cast nonland cards as though they had flash.
 End

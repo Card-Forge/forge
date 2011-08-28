@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivisection.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/38.jpg
+Oracle:As an additional cost to cast Vivisection, sacrifice a creature.\nDraw three cards.
 End

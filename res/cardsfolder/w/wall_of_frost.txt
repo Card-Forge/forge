@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_frost.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/79.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/80.jpg
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
 End

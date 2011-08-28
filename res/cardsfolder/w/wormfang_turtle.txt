@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_turtle.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/60.jpg
+Oracle:When Wormfang Turtle enters the battlefield, exile a land you control.\nWhen Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 End

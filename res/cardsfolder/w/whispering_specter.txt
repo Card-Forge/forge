@@ -11,4 +11,5 @@ SVar:X:Count$OppPoisonCounters
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispering_specter.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/77.jpg
+Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever Whispering Specter deals combat damage to a player, you may sacrifice it. If you do, that player discards a card for each poison counter he or she has.
 End

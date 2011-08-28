@@ -7,4 +7,5 @@ SVar:DBBounce:DB$ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPrese
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/view_from_above.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/38.jpg
+Oracle:Target creature gains flying until end of turn. If you control a white permanent, return View from Above to its owner's hand.
 End

@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_omens.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/37.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/53.jpg
+Oracle:Defender\nWhen Wall of Omens enters the battlefield, draw a card.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiptail_moloch.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/79.jpg
+Oracle:When Whiptail Moloch enters the battlefield, it deals 3 damage to target creature you control.
 End

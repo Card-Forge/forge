@@ -12,4 +12,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_whelm.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/69.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/96.jpg
+Oracle:Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

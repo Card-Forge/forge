@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ B B R R R G G | TargetMin$ 3 | TargetMax$ 3 | ValidTgts$ P
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_ultimatum.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/206.jpg
+Oracle:Destroy three target permanents.
 End

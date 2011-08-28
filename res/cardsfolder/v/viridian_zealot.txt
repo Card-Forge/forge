@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | Tg
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/90.jpg
+Oracle:{1}{G}, Sacrifice Viridian Zealot: Destroy target artifact or enchantment.
 End

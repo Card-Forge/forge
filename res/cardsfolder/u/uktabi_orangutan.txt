@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_orangutan.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/73.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/260.jpg
+Oracle:When Uktabi Orangutan enters the battlefield, destroy target artifact.
 End

@@ -7,4 +7,5 @@ K:CARDNAME can't be countered.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wreak_havoc.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/139.jpg
+Oracle:Wreak Havoc can't be countered by spells or abilities.\nDestroy target artifact or land.
 End

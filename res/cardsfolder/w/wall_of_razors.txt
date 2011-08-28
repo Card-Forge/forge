@@ -8,4 +8,5 @@ K:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_razors.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/100.jpg
+Oracle:Defender (This creature can't attack.)\nFirst strike
 End

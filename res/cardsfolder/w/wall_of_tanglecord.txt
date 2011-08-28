@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ G | KW$ Reach | SpellDescription$ CARDNAME gains reach until 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tanglecord.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/222.jpg
+Oracle:Defender\n{G}: Wall of Tanglecord gains reach until end of turn. (It can block creatures with flying.)
 End

@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_heartstoker.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/107.jpg
+Oracle:When Vulshok Heartstoker enters the battlefield, target creature gets +2/+0 until end of turn.
 End

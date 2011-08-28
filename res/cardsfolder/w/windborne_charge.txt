@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 2 W W | TargetMin$ 2 | TargetMax$ 2 | KW$ Flying | NumAtt$ +2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windborne_charge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/38.jpg
+Oracle:Two target creatures you control each get +2/+2 and gain flying until end of turn.
 End

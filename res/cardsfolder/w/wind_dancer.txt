@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/104.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/113.jpg
+Oracle:Flying\n{T}: Target creature gains flying until end of turn.
 End

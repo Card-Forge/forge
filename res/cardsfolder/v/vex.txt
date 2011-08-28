@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1 | OptionalDecide
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/36.jpg
+Oracle:Counter target spell. That spell's controller may draw a card.
 End

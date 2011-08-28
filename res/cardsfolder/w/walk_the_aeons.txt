@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walk_the_aeons.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/93.jpg
+Oracle:Buyback-Sacrifice three Islands. (You may sacrifice three Islands in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget player takes an extra turn after this one.
 End

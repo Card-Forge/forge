@@ -6,4 +6,5 @@ A:AB$RegenerateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | SpellDescription
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/141.jpg
+Oracle:Regenerate each creature you control.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicked_pact.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/92.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/40.jpg
+Oracle:Destroy two target nonblack creatures. You lose 5 life.
 End

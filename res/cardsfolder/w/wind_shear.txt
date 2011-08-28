@@ -7,4 +7,5 @@ SVar:DBDebuff:DB$ DebuffAll | ValidCards$ Creature.withFlying+attacking | Keywor
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_shear.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/75.jpg
+Oracle:Attacking creatures with flying get -2/-2 and lose flying until end of turn.
 End

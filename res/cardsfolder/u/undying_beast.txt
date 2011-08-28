@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4242.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/36.jpg
+Oracle:When Undying Beast dies, put it on top of its owner's library.
 End

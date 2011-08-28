@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_elf.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/115.jpg
+Oracle:{T}: Target creature gains forestwalk until end of turn.
 End

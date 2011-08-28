@@ -7,4 +7,5 @@ SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vapor_snag.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/48.jpg
+Oracle:Return target creature to its owner's hand. Its controller loses 1 life.
 End

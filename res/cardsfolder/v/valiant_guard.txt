@@ -6,4 +6,5 @@ PT:0/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valiant_guard.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/19.jpg
+Oracle:
 End

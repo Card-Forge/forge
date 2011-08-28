@@ -9,4 +9,5 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/221.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/221.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/160.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/345.jpg
+Oracle:Equipped creature is unblockable.\nEquipped creature has shroud. (It can't be the target of spells or abilities.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 End

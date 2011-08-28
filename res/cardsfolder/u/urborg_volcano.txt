@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_volcano.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/327.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/330.jpg
+Oracle:Urborg Volcano enters the battlefield tapped.\n{T}: Add {B} or {R} to your mana pool.
 End

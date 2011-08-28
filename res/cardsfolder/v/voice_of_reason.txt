@@ -8,4 +8,5 @@ K:Protection from blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_reason.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/24.jpg
+Oracle:Flying, protection from blue
 End

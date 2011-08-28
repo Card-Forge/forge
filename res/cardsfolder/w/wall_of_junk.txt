@@ -10,4 +10,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_junk.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/315.jpg
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Junk blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 End

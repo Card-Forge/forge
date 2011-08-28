@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Sorcery
 Text:no text
 A:SP$ Sacrifice | Cost$ 4 R R | Defined$ Each | SacValid$ Land | Amount$ 4 | SpellDescription$ Each player sacrifices four lands. CARDNAME deals 4 damage to each creature. | SubAbility$ SVar=DBDamage
-SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature 
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire.jpg
@@ -11,4 +11,5 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/228.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/120.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/228.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/228.jpg
+Oracle:Each player sacrifices four lands. Wildfire deals 4 damage to each creature.
 End

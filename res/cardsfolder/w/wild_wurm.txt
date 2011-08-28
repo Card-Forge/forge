@@ -9,4 +9,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_wurm.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/212.jpg
+Oracle:When Wild Wurm enters the battlefield, flip a coin. If you lose the flip, return Wild Wurm to its owner's hand.
 End

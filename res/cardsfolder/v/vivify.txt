@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivify.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/281.jpg
+Oracle:Target land becomes a 3/3 creature until end of turn. It's still a land.\nDraw a card.
 End

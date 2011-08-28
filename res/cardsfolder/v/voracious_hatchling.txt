@@ -12,4 +12,5 @@ SVar:BuffedBy:Card.White,Card.Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/97.jpg
+Oracle:Lifelink\nVoracious Hatchling enters the battlefield with four -1/-1 counters on it.\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
 End

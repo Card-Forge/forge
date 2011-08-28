@@ -13,4 +13,5 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_dragonfly.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/282.jpg
+Oracle:Flying\nWhenever Venomous Dragonfly blocks or becomes blocked by a creature, destroy that creature at end of combat.
 End

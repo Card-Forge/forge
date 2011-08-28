@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/white_suns_zenith.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/19.jpg
+Oracle:Put X 2/2 white Cat creature tokens onto the battlefield. Shuffle White Sun's Zenith into its owner's library.
 End

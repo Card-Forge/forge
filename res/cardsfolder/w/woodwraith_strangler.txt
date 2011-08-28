@@ -7,5 +7,5 @@ A:AB$ Regenerate | Cost$ ExileFromGrave<1/Creature> | SpellDescription$ Regenera
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodwraith_strangler.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/241.jpg
+Oracle:Exile a creature card from your graveyard: Regenerate Woodwraith Strangler.
 End
-

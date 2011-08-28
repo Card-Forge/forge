@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_storm.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/135.jpg
+Oracle:Wing Storm deals damage to each player equal to twice the number of creatures with flying that player controls.
 End

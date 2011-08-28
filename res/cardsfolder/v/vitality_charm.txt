@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitality_charm.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/296.jpg
+Oracle:Choose one - Put a 1/1 green Insect creature token onto the battlefield; or target creature gets +1/+1 and gains trample until end of turn; or regenerate target Beast.
 End

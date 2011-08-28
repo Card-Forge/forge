@@ -9,4 +9,5 @@ SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_heretic.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/95.jpg
+Oracle:{1}{R}, {T}: Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
 End

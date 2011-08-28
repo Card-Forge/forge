@@ -10,4 +10,5 @@ SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/29.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/28.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/198.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/54.jpg
+Oracle:Destroy target tapped creature.
 End

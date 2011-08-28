@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_blasting
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/276.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/228.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/224.jpg
+Oracle:Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
 End

@@ -9,4 +9,5 @@ SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay 1 and retur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veinfire_borderpost.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/48.jpg
+Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Veinfire Borderpost's mana cost.\nVeinfire Borderpost enters the battlefield tapped.\n{T}: Add {B} or {R} to your mana pool.
 End

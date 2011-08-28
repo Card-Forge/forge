@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/windborn_muse.jp
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/28.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/38.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/60.jpg
+Oracle:Flying\nCreatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
 End

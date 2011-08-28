@@ -9,4 +9,5 @@ SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_field.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/130.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Target creature gets +1/+1 until end of turn."
 End

@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ G | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashivan_dragon.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/140.jpg
+Oracle:Flying\n{R}: Viashivan Dragon gets +1/+0 until end of turn.\n{G}: Viashivan Dragon gets +0/+1 until end of turn.
 End

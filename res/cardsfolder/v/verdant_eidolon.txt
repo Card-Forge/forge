@@ -14,4 +14,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_eidolon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/100.jpg
+Oracle:{G}, Sacrifice Verdant Eidolon: Add three mana of any one color to your mana pool.\nWhenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.
 End

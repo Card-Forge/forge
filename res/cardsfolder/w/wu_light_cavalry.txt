@@ -7,4 +7,5 @@ K:Horsemanship
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_light_cavalry.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/60.jpg
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)
 End

@@ -10,4 +10,5 @@ SVar:Y:Count$Valid Land.YouCtrl+untapped
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_brawlers.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/106.jpg
+Oracle:Veteran Brawlers can't attack if defending player controls an untapped land.\nVeteran Brawlers can't block if you control an untapped land.
 End

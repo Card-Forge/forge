@@ -12,4 +12,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/407.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/42.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/374.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/323.jpg
+Oracle:Defender (This creature can't attack.)\nFirst strike
 End

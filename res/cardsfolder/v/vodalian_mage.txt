@@ -7,4 +7,5 @@ A:AB$ Counter | Cost$ U T | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_mage.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/59.jpg|3
+Oracle:{U}, {T}: Counter target spell unless its controller pays {1}.
 End

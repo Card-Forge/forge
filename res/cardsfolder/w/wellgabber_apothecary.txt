@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all damage that would be dealt to CA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellgabber_apothecary.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/47.jpg
+Oracle:{1}{W}: Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creature this turn.
 End

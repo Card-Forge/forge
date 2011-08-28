@@ -11,4 +11,5 @@ SVar:DBToken:DB$Token | TokenImage$ C 3 3 Wurm Lifelink | TokenColors$ Colorless
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmcoil_engine.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/223.jpg
+Oracle:Deathtouch, lifelink\nWhen Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
 End

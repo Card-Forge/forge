@@ -9,4 +9,5 @@ SVar:BuffedBy:Elf
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/300.jpg
+Oracle:{T}: You gain 1 life for each Elf on the battlefield.
 End

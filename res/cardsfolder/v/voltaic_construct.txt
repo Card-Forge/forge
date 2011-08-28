@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_construct.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/156.jpg
+Oracle:{2}: Untap target artifact creature.
 End

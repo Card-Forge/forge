@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_herald.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/302.jpg
+Oracle:When Wirewood Herald dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle your library.
 End

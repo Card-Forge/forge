@@ -9,4 +9,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urabrask_the_hidden.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/98.jpg
+Oracle:Creatures you control have haste.\nCreatures your opponents control enter the battlefield tapped.
 End

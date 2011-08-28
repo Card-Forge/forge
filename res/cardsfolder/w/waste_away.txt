@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 4 B Discard<1/Card> | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waste_away.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/88.jpg
+Oracle:As an additional cost to cast Waste Away, discard a card.\nTarget creature gets -5/-5 until end of turn.
 End

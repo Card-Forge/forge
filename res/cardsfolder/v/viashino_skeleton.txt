@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_skeleton.jpg
 SVar:Rarity:Common
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/118.jpg
+Oracle:{1}{B}, Discard a card: Regenerate Viashino Skeleton.
 End

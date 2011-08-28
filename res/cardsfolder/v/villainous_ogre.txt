@@ -10,4 +10,5 @@ SVar:X:Count$Valid Demon.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80520.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/148.jpg
+Oracle:Villainous Ogre can't block.\nAs long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre."
 End

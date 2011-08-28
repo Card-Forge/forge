@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wail_of_the_nim.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/81.jpg
+Oracle:Choose one - Regenerate each creature you control; or Wail of the Nim deals 1 damage to each creature and each player.\nEntwine {B} (Choose both if you pay the entwine cost.)
 End

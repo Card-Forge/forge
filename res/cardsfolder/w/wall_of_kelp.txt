@@ -8,4 +8,5 @@ A:AB$ Token | Cost$ U U T | TokenAmount$ 1 | TokenName$ Plant Wall | TokenTypes$
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2959.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/50.jpg
+Oracle:Defender (This creature can't attack.)\n{U}{U}, {T}: Put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.
 End

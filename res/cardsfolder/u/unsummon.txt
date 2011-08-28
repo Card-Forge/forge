@@ -19,4 +19,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/103.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/79.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/37.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/87.jpg
+Oracle:Return target creature to its owner's hand.
 End

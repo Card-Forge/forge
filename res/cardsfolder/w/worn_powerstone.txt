@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worn_powerstone.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/318.jpg
+Oracle:Worn Powerstone enters the battlefield tapped.\n{T}: Add {2} to your mana pool.
 End

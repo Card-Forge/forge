@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unearthly_blizzard.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/196.jpg
+Oracle:Up to three target creatures can't block this turn.
 End

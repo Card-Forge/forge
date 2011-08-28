@@ -12,4 +12,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/91.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/91.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/114.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/91.jpg
+Oracle:Defender (This creature can't attack.)\n{U}: Wall of Water gets +1/+0 until end of turn.
 End

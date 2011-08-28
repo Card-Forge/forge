@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderers_twig.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/265.jpg
+Oracle:{1}, Sacrifice Wanderer's Twig: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
 End

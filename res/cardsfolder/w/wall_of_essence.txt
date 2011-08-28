@@ -10,4 +10,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_essence.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/122.jpg
+Oracle:Defender (This creature can't attack.)\nWhenever Wall of Essence is dealt combat damage, you gain that much life.
 End

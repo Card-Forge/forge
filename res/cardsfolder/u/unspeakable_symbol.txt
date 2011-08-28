@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unspeakable_symbol.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/79.jpg
+Oracle:Pay 3 life: Put a +1/+1 counter on target creature.
 End

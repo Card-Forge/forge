@@ -12,4 +12,5 @@ SVar:DBUntap:DB$Untap | Defined$ Enchanted
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellspring.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/348.jpg
+Oracle:Enchant land\nWhen Wellspring enters the battlefield, gain control of enchanted land until end of turn.\nAt the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
 End

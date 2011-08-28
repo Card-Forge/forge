@@ -8,4 +8,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/295.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/301.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/305.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/301.jpg
+Oracle:
 End

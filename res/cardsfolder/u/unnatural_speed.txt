@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_speed.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/197.jpg
+Oracle:Target creature gains haste until end of turn.
 End

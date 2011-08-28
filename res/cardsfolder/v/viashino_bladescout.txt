@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_bladescout.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/185.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Viashino Bladescout enters the battlefield, target creature gains first strike until end of turn.
 End

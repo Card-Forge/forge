@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmcalling.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/234.jpg
+Oracle:Buyback {2}{G} (You may pay an additional {2}{G} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut an X/X green Wurm creature token onto the battlefield.
 End

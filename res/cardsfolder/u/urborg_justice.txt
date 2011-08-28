@@ -7,4 +7,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_justice.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/26.jpg
+Oracle:Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
 End

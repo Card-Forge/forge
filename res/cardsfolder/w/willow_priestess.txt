@@ -8,4 +8,5 @@ PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/willow_priestess.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/75.jpg
+Oracle:{T}: You may put a Faerie permanent card from your hand onto the battlefield.\n{2}{G}: Target green creature gains protection from black until end of turn.
 End

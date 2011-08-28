@@ -14,4 +14,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_vow.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/142.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{T}: Add one mana of any color to your mana pool."
 End

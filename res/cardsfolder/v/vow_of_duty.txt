@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+YouDontCtrl | AddKeyword$ HI
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vow_of_duty.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/36.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can't attack you or a planeswalker you control.
 End

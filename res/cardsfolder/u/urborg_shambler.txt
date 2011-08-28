@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_shambler.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/133.jpg
+Oracle:Other black creatures get -1/-1.
 End

@@ -9,4 +9,5 @@ SVar:TrigKicker:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Sele
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_emissary.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/131.jpg
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Urborg Emissary enters the battlefield, if it was kicked, return target permanent to its owner's hand.
 End

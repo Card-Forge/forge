@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_woods.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/297.jpg
+Oracle:Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
 End

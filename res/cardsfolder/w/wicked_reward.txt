@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicked_reward.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/25.jpg
+Oracle:As an additional cost to cast Wicked Reward, sacrifice a creature.\nTarget creature gets +4/+2 until end of turn.
 End

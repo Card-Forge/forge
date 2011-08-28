@@ -9,4 +9,5 @@ SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victual_sliver.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/143.jpg
+Oracle:All Slivers have "{2}, Sacrifice this permanent: You gain 4 life."
 End

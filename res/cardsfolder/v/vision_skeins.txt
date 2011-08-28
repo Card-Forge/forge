@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_skeins.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/67.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/36.jpg
+Oracle:Each player draws two cards.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/updraft.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/133.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/105.jpg
+Oracle:Target creature gains flying until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
 End

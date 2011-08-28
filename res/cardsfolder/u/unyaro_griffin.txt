@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_griffin.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/49.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/248.jpg
+Oracle:Flying\nSacrifice Unyaro Griffin: Counter target red instant or sorcery spell.
 End

@@ -16,4 +16,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/377.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/318.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/281.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/277.jpg
+Oracle:Whenever a player casts a green spell, you may pay {1}. If you do, you gain 1 life.
 End

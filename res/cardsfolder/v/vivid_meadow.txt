@@ -14,4 +14,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_meadow.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/297.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/279.jpg
+Oracle:Vivid Meadow enters the battlefield tapped with two charge counters on it.\n{T}: Add {W} to your mana pool.\n{T}, Remove a charge counter from Vivid Meadow: Add one mana of any color to your mana pool.
 End

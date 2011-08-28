@@ -9,4 +9,5 @@ SVar:AntiBuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_anurid.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/183.jpg
+Oracle:Whenever another creature enters the battlefield, you lose 1 life.
 End

@@ -8,4 +8,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ Random
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_research.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/72.jpg
+Oracle:{1}{W}: Search your library for an enchantment card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.\n{1}{U}: Search your library for an instant card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.
 End

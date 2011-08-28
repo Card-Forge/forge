@@ -9,4 +9,5 @@ SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_mongrel.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/283.jpg
+Oracle:Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
 End

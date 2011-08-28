@@ -11,4 +11,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredCard | Permanent$ True | KW$
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorinclex_voice_of_hunger.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/127.jpg
+Oracle:Trample\nWhenever you tap a land for mana, add one mana to your mana pool of any type that land produced.\nWhenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
 End

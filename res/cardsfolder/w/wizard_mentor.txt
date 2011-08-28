@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizard_mentor.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/112.jpg
+Oracle:{T}: Return Wizard Mentor and target creature you control to their owner's hand.
 End

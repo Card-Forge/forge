@@ -18,4 +18,5 @@ SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/279.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/264.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/130.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/131.jpg
+Oracle:Whenever you cast an enchantment spell, you may draw a card.
 End

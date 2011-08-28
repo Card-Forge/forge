@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unbender_tine.jpg
 SVar:Rarity:Uncommon
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/15.jpg
+Oracle:{T}: Untap another target permanent.
 End

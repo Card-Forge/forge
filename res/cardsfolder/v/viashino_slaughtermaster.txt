@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ B G | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_slaughtermaster.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/73.jpg
+Oracle:Double strike\n{B}{G}: Viashino Slaughtermaster gets +1/+1 until end of turn. Activate this ability only once each turn.
 End

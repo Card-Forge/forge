@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTyp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_splicer.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/50.jpg
+Oracle:When Wing Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.\nGolem creatures you control have flying.
 End

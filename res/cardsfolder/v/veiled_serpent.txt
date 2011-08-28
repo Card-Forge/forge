@@ -8,4 +8,5 @@ K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_serpent.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/110.jpg
+Oracle:When an opponent casts a spell, if Veiled Serpent is an enchantment, Veiled Serpent becomes a 4/4 Serpent creature that can't attack unless defending player controls an Island.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

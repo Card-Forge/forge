@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/56.jpg
+Oracle:Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
 End

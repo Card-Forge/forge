@@ -7,4 +7,5 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_certarch.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/52.jpg
+Oracle:Metalcraft - {T}: Tap target artifact, creature, or land. Activate this ability only if you control three or more artifacts.
 End

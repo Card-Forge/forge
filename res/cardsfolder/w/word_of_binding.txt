@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_binding.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/17.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/56.jpg
+Oracle:Tap X target creatures.
 End

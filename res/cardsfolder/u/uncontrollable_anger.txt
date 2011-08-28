@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uncontrollable_anger.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/195.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/244.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +2/+2 and attacks each turn if able.
 End

@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_hawk.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/25.jpg
+Oracle:Flying\nWhen Welkin Hawk dies, you may search your library for a card named Welkin Hawk, reveal that card, put it into your hand, then shuffle your library.
 End

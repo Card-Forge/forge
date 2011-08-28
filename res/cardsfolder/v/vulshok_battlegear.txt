@@ -6,4 +6,5 @@ K:eqPump 3:+3/+3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_battlegear.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/272.jpg
+Oracle:Equipped creature gets +3/+3.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
 End

@@ -6,4 +6,5 @@ A:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witchs_mist.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/92.jpg
+Oracle:{2}{B}, {T}: Destroy target creature that was dealt damage this turn.
 End

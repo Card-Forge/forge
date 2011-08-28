@@ -7,4 +7,5 @@ K:Haste
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengevine.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/212.jpg
+Oracle:Haste\nWhenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_martyr.jpg
 SVar:Rarity:Uncommon
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/249.jpg
+Oracle:Sacrifice Vigilant Martyr: Regenerate target creature.\n{W}{W}, {T}, Sacrifice Vigilant Martyr: Counter target spell that targets an enchantment.
 End

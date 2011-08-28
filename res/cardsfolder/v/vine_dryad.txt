@@ -9,4 +9,5 @@ SVar:AltCost:Cost$ ExileFromHand<1/Card.Green> | Description$ You may exile one 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vine_dryad.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/284.jpg
+Oracle:Flash\nForestwalk\nYou may exile a green card from your hand rather than pay Vine Dryad's mana cost.
 End

@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_silk.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/225.jpg
+Oracle:Enchant creature\nEnchanted creature has reach. (It can block creatures with flying.)\n{G}: Return Whip Silk to its owner's hand.
 End

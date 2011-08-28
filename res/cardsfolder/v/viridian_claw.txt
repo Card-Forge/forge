@@ -6,4 +6,5 @@ K:eqPump 1:+1/+0/First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_claw.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/143.jpg
+Oracle:Equipped creature gets +1/+0 and has first strike.\nEquip {1}
 End

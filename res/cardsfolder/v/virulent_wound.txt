@@ -7,4 +7,5 @@ SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME is put into a graveyard this turn, its 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_wound.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/57.jpg
+Oracle:Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
 End

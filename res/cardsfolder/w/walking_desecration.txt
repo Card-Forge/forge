@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_desecration.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/180.jpg
+Oracle:{B}, {T}: Creatures of the creature type of your choice attack this turn if able.
 End

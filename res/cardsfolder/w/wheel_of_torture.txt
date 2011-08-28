@@ -8,4 +8,5 @@ SVar:X:Count$InOppHand/NMinus.3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_torture.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/138.jpg
+Oracle:At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
 End

@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | KW$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_guide.jpg
 SVar:Rarity:Common
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/30.jpg
+Oracle:Flying\nWhen Welkin Guide enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
 End

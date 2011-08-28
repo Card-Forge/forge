@@ -9,4 +9,5 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/90.jpg
+Oracle:{T}: Add {G}, {U}, or {B} to your mana pool.
 End

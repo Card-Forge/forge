@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying unti
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6057.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/52.jpg
+Oracle:{U}: Whiptongue Frog gains flying until end of turn.
 End

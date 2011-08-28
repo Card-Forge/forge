@@ -9,4 +9,5 @@ SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_guidance.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/243.jpg
+Oracle:Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)\nExile Woodland Guidance.
 End

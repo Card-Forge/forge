@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_uprising.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/53.jpg
+Oracle:Return up to two target creature cards from your graveyard to your hand.\nDraw a card.
 End

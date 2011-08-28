@@ -6,4 +6,5 @@ A:SP$ GainLife | Cost$ 1 G | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_surge.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/150.jpg
+Oracle:You gain 3 life.\nSplice onto Arcane {1}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
 End

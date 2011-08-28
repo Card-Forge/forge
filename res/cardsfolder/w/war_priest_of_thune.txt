@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Sele
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_priest_of_thune.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/38.jpg
+Oracle:When War Priest of Thune enters the battlefield, you may destroy target enchantment.
 End

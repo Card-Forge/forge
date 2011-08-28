@@ -8,4 +8,5 @@ SVar:X:Count$Valid Island.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_admiral.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/57.jpg
+Oracle:Wu Admiral gets +1/+1 as long as an opponent controls an Island.
 End

@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ W W | NumAtt$ +2 | ActivationLimit$ 1 | SpellDescription$ CAR
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_aesthir.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/154.jpg|2
+Oracle:Flying, first strike\n{W}{W}: Wild Aesthir gets +2/+0 until end of turn. Activate this ability only once each turn.
 End

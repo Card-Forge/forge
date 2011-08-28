@@ -9,4 +9,5 @@ SVar:X:Count$InOppHand/Minus.4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viseling.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/140.jpg
+Oracle:At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in his or her hand minus 4.
 End

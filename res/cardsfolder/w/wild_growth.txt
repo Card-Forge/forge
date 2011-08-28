@@ -18,4 +18,5 @@ SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/165.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/268.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/137.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/138.jpg
+Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool (in addition to the mana the land produces).
 End

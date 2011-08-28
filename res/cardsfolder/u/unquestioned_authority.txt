@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unquestioned_authority.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/31.jpg
+Oracle:Enchant creature\nWhen Unquestioned Authority enters the battlefield, draw a card.\nEnchanted creature has protection from creatures.
 End

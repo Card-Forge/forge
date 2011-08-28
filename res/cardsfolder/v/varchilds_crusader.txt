@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/120.jpg|2
+Oracle:{0}: Varchild's Crusader can't be blocked this turn except by Walls. Sacrifice Varchild's Crusader at the beginning of the next end step.
 End

@@ -13,4 +13,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/230.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/229.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/307.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/229.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from white. This effect doesn't remove White Ward.
 End

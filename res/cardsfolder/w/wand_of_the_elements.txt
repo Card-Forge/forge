@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_the_elements.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/158.jpg
+Oracle:{T}, Sacrifice an Island: Put a 2/2 blue Elemental creature token with flying onto the battlefield.\n{T}, Sacrifice a Mountain: Put a 3/3 red Elemental creature token onto the battlefield.
 End

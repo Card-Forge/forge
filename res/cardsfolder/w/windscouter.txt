@@ -11,4 +11,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windscouter.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/53.jpg
+Oracle:Flying\nWhenever Windscouter attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 End

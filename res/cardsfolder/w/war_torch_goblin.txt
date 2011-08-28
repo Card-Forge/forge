@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.blocking | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_torch_goblin.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/151.jpg
+Oracle:{R}, Sacrifice War-Torch Goblin: War-Torch Goblin deals 2 damage to target blocking creature.
 End

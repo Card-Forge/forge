@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_discovery.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/140.jpg
+Oracle:At the beginning of your end step, if you control no untapped lands, draw a card.
 End

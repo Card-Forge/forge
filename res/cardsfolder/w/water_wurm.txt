@@ -8,4 +8,5 @@ SVar:X:Count$Valid Island.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/water_wurm.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/37.jpg
+Oracle:Water Wurm gets +0/+1 as long as an opponent controls an Island.
 End

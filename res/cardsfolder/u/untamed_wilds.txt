@@ -13,4 +13,5 @@ SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/89.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/263.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/197.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/148.jpg
+Oracle:Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
 End

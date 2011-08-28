@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_aesthir.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/383.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has flying and first strike.
 End

@@ -10,4 +10,5 @@ SVar:DBSkipTurn:DB$AddTurn | Defined$ Opponent | NumTurns$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_hulk.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/115.jpg
+Oracle:Morph {3}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
 End

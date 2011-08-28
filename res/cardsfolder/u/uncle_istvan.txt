@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/uncle_istvan.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/51.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/16.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/49.jpg
+Oracle:Prevent all damage that would be dealt to Uncle Istvan by creatures.
 End

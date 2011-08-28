@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderguard_sentry.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/56.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/111.jpg
+Oracle:When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
 End

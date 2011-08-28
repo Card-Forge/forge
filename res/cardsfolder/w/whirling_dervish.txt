@@ -10,4 +10,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/203.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/90.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/172.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/125.jpg
+Oracle:Protection from black\nAt the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
 End

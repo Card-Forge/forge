@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ WB WB WB | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/96.jpg
+Oracle:Exile target creature.
 End

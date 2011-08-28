@@ -8,4 +8,5 @@ A:AB$ Draw | Cost$ G Sac<1/Wall> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_mulch.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/298.jpg
+Oracle:Defender (This creature can't attack.)\n{G}, Sacrifice a Wall: Draw a card.
 End

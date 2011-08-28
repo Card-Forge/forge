@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_dismisser.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/73.jpg
+Oracle:When Vedalken Dismisser enters the battlefield, put target creature on top of its owner's library.
 End

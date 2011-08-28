@@ -11,4 +11,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/133.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/132.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/167.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/133.jpg
+Oracle:Defender (This creature can't attack.)
 End

@@ -6,4 +6,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_puncture.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/133.jpg
+Oracle:Target creature you control deals damage equal to its power to target creature with flying.
 End

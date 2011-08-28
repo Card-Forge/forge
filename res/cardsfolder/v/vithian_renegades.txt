@@ -8,4 +8,5 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target art
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/64.jpg
+Oracle:When Vithian Renegades enters the battlefield, destroy target artifact.
 End

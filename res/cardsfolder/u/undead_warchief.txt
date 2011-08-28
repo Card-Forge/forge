@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/78.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/52.jpg
+Oracle:Zombie spells you cast cost {1} less to cast.\nZombie creatures you control get +2/+1.
 End

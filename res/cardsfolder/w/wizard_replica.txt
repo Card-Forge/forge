@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizard_replica.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/275.jpg
+Oracle:Flying\n{U}, Sacrifice Wizard Replica: Counter target spell unless its controller pays {2}.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20227.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/90.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/151.jpg
+Oracle:Swampwalk
 End

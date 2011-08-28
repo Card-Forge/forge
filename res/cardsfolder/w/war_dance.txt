@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.VERSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_dance.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/282.jpg
+Oracle:At the beginning of your upkeep, you may put a verse counter on War Dance.\nSacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
 End

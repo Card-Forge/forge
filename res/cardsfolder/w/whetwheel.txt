@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whetwheel.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/168.jpg
+Oracle:{X}{X}, {T}: Target player puts the top X cards of his or her library into his or her graveyard.\nMorph {3} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

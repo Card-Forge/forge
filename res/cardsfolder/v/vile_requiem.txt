@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.VERSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_requiem.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/167.jpg
+Oracle:At the beginning of your upkeep, you may put a verse counter on Vile Requiem.\n{1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
 End

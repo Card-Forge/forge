@@ -11,4 +11,5 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/115.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/38.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/167.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/184.jpg
+Oracle:Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
 End

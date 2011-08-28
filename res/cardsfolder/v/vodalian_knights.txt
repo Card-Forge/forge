@@ -12,4 +12,5 @@ SVar:NeedsToPlay:Island.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/58.jpg
+Oracle:First strike\nVodalian Knights can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Vodalian Knights.\n{U}: Vodalian Knights gains flying until end of turn.
 End

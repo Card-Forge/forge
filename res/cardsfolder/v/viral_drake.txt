@@ -9,4 +9,5 @@ A:AB$ Proliferate | Cost$ 3 U | SpellDescription$ Proliferate.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viral_drake.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/49.jpg
+Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{3}{U}: Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
 End
