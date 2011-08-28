@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_musher.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/75.jpg
+Oracle:Snow landwalk\n{S}: Regenerate Zombie Musher. ({S} can be paid with one mana from a snow permanent.)
 End

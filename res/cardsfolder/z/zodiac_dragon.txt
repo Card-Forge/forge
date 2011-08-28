@@ -8,4 +8,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zodiac_dragon.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/131.jpg
+Oracle:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
 End

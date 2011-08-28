@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_commander.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/253.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/18.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}{W}: Target Knight creature gets +1/+1 until end of turn.
 End

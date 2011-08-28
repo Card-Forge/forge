@@ -7,4 +7,5 @@ SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard this turn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yamabushis_flame.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/198.jpg
+Oracle:Yamabushi's Flame deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
 End

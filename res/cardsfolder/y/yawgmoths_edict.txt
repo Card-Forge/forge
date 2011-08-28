@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_edict.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/170.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/171.jpg
+Oracle:Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
 End

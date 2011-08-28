@@ -9,4 +9,5 @@ SVar:X:Count$Valid Permanent.nonLand+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealots_en_dal.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/26.jpg
+Oracle:At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
 End

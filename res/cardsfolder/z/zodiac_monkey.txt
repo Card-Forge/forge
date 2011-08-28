@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83237.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/160.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/285.jpg
+Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
 End

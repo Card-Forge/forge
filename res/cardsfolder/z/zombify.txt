@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83342.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/174.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/171.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/171.jpg
+Oracle:Return target creature card from your graveyard to the battlefield.
 End

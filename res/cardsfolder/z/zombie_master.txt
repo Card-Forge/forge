@@ -16,4 +16,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/58.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/162.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/46.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/46.jpg
+Oracle:Other Zombie creatures have swampwalk.\nOther Zombies have "{B}: Regenerate this permanent."
 End

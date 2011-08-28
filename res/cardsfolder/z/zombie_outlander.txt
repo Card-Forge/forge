@@ -7,4 +7,5 @@ K:Protection from green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_outlander.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/133.jpg
+Oracle:Protection from green
 End

@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/127.jpg
+Oracle:Enchant creature\nYou control enchanted creature.\nEnchanted creature gets +2/+2 and has trample.
 End

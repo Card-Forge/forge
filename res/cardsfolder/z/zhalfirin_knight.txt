@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ W W | KW$ First Strike | SpellDescription$ CARDNAME gains fir
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_knight.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/254.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{W}{W}: Zhalfirin Knight gains first strike until end of turn.
 End

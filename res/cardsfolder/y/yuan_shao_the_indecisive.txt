@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ HIDDEN CARDNAME ca
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shao_the_indecisive.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/128.jpg
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nEach creature you control can't be blocked by more than one creature.
 End

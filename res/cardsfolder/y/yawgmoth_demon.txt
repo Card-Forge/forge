@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoth_demon.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/170.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/51.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of your upkeep, you may sacrifice an artifact. If you don't, tap Yawgmoth Demon and it deals 2 damage to you.
 End

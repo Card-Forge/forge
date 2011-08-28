@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_trailblazer.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/89.jpg
+Oracle:Tap an untapped Zombie you control: Target land becomes a Swamp until end of turn.\nTap an untapped Zombie you control: Target creature gains swampwalk until end of turn.
 End

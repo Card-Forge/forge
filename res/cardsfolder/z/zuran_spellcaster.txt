@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_spellcaster.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/111.jpg
+Oracle:{T}: Zuran Spellcaster deals 1 damage to target creature or player.
 End

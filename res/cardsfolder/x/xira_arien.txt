@@ -8,4 +8,5 @@ A:AB$ Draw | Cost$ B R G T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xira_arien.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/310.jpg
+Oracle:Flying\n{B}{R}{G}, {T}: Target player draws a card.
 End

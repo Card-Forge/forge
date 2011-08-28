@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yore_tiller_nephilim.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/140.jpg
+Oracle:Whenever Yore-Tiller Nephilim attacks, return target creature card from your graveyard to the battlefield tapped and attacking.
 End

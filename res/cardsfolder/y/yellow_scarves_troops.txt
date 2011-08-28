@@ -7,4 +7,5 @@ K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10542.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/127.jpg
+Oracle:Yellow Scarves Troops can't block.
 End

@@ -7,4 +7,5 @@ SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.YouDontCtrl | NumAtt$ -1 | NumD
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_persecution.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/85.jpg
+Oracle:Until end of turn, creatures you control get +1/+1 and creatures your opponents control get -1/-1.
 End

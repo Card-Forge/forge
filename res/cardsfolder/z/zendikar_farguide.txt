@@ -7,4 +7,5 @@ K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zendikar_farguide.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/194.jpg
+Oracle:Forestwalk
 End

@@ -8,4 +8,5 @@ SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Creature.nonOgre+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yukora_the_prisoner.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/90.jpg
+Oracle:When Yukora, the Prisoner leaves the battlefield, sacrifice all non-Ogre creatures you control.
 End

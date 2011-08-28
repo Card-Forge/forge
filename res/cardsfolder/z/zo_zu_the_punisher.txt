@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zo_zu_the_punisher.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/200.jpg
+Oracle:Whenever a land enters the battlefield, Zo-Zu the Punisher deals 2 damage to that land's controller.
 End

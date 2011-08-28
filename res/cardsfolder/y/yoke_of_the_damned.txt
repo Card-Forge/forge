@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoke_of_the_damned.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/57.jpg
+Oracle:Enchant creature\nWhen a creature dies, destroy enchanted creature.
 End

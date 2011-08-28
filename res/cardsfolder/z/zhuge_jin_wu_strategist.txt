@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | KW$ HIDDEN Unblockable | ValidTgts$ Creature | TgtPrompt$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhuge_jin_wu_strategist.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/66.jpg
+Oracle:{T}: Target creature is unblockable this turn. Activate this ability only during your turn, before attackers are declared.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Creature.Red,Creature.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_kavu.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/291.jpg
+Oracle:Yavimaya Kavu's power is equal to the number of red creatures on the battlefield.\nYavimaya Kavu's toughness is equal to the number of green creatures on the battlefield.
 End

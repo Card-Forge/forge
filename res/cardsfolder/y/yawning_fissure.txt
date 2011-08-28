@@ -6,4 +6,5 @@ A:SP$ Sacrifice | Cost$ 4 R | Defined$ Opponent | SacValid$ Land | SacMessage$ L
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawning_fissure.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/164.jpg
+Oracle:Each opponent sacrifices a land.
 End

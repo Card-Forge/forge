@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Zektar_Shrine_Expedition.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/155.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.\nRemove three quest counters from Zektar Shrine Expedition and sacrifice it: Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
 End
