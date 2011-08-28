@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.apache.commons.lang3.StringUtils;
-
 
 /**
  * <p>CardManaCost class.</p>
@@ -14,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
  * @author Forge
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
-
 
 public final class CardManaCost implements Comparable<CardManaCost> {
     private final List<CardManaCostShard> shards = new ArrayList<CardManaCostShard>();
@@ -35,7 +32,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     public static final CardManaCost empty = new CardManaCost();
     
     public CardManaCost(final String cost) {
-        ParserMtgData parser = new ParserMtgData(cost);
+        this(new ParserMtgData(cost));
+    }
+    
+    public CardManaCost(final ManaParser parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
@@ -44,7 +44,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
             CardManaCostShard shard = parser.next();
             if (shard != null) { shards.add(shard); } // null is OK - that was generic mana
         }
-        genericCost = parser.getColorlessCost(); // collect generic mana here
+        genericCost = parser.getTotalColorlessCost(); // collect generic mana here
         stringValue = getSimpleString();
     }
 
@@ -93,7 +93,12 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         return stringValue;
     }
 
-    public class ParserMtgData implements Iterator<CardManaCostShard> {
+    public interface ManaParser extends Iterator<CardManaCostShard>
+    {
+        int getTotalColorlessCost(); 
+    }
+    
+    public static class ParserMtgData implements ManaParser {
         private final String cost;
 
         private int nextBracket;
@@ -107,7 +112,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
             colorlessCost = 0;
         }
         
-        public int getColorlessCost() { 
+        public int getTotalColorlessCost() { 
             if ( hasNext() ) { 
                 throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
             }

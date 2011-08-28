@@ -6,11 +6,17 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.FileUtil;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
 public final class MtgDataParser implements Iterator<CardRules> {
 
     private Iterator<String> it;
-    public MtgDataParser(final Iterable<String> data) {
-        it = data.iterator();
+    private final List<String> mtgDataLines; 
+    public MtgDataParser() {
+        mtgDataLines = FileUtil.readFile(ForgeProps.getFile(NewConstants.MTG_DATA));
+        it = mtgDataLines.iterator();
         skipSetList();
     }
 

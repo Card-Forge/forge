@@ -2,6 +2,7 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -10,16 +11,13 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.FileUtil;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 
 /**
- * <p>CardOracleDatabase class.</p>
+ * <p>CardDb class.</p>
  *
  * @author Forge
- * @version $Id: CardOracleDatabase.java 9708 2011-08-09 19:34:12Z jendave $
+ * @version $Id: CardDb.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardDb {
     private static volatile CardDb onlyInstance = null; // 'volatile' keyword makes this working
@@ -46,8 +44,10 @@ public final class CardDb {
 
 
     private CardDb() {
-        List<String> mtgDataLines = FileUtil.readFile(ForgeProps.getFile(NewConstants.MTG_DATA));
-        MtgDataParser parser = new MtgDataParser(mtgDataLines);
+       this(new MtgDataParser()); // I wish cardname.txt parser was be here.
+    }
+
+    private CardDb(final Iterator<CardRules> parser) { 
         while (parser.hasNext()) {
             addNewCard(parser.next());
         }
