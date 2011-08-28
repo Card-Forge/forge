@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135219.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/111.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/94.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/136.jpg
+Oracle:Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
 End

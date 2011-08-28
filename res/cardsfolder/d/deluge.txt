@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deluge.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/80.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/79.jpg
+Oracle:Tap all creatures without flying.
 End

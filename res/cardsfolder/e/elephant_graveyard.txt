@@ -7,4 +7,5 @@ A:AB$ Regenerate | ValidTgts$ Creature.Elephant | TgtPrompt$ Select target Eleph
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_graveyard.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/88.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Regenerate target Elephant.
 End

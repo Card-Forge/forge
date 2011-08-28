@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Battlefield | Ta
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Frontier_guide.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/161.jpg
+Oracle:{3}{G}, {T}: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 End

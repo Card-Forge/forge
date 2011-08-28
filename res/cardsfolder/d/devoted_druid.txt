@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_druid.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/110.jpg
+Oracle:{T}: Add {G} to your mana pool.\nPut a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
 End

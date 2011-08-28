@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eon_hub.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/120.jpg
+Oracle:Players skip their upkeep steps.
 End

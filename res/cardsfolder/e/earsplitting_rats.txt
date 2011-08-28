@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earsplitting_rats.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/65.jpg
+Oracle:When Earsplitting Rats enters the battlefield, each player discards a card.\nDiscard a card: Regenerate Earsplitting Rats.
 End

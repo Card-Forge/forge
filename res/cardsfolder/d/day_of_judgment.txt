@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/12.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/12.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/9.jpg
+Oracle:Destroy all creatures.
 End

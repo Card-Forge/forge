@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 RW | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/135.jpg
+Oracle:Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
 End

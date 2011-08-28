@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4700.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/77.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/63.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/73.jpg
+Oracle:Flying
 End

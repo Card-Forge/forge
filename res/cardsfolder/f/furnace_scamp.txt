@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredTarget
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_scamp.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/84.jpg
+Oracle:Whenever Furnace Scamp deals combat damage to a player, you may sacrifice it. If you do, Furnace Scamp deals 3 damage to that player.
 End

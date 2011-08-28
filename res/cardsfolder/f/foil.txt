@@ -7,4 +7,5 @@ SVar:AltCost:Cost$ Discard<1/Island> Discard<1/Card> | Description$ You may disc
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foil.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/34.jpg
+Oracle:You may discard an Island card and another card rather than pay Foil's mana cost.\nCounter target spell.
 End

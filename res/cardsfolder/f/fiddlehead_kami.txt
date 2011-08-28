@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiddlehead_kami.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/130.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, regenerate Fiddlehead Kami.
 End

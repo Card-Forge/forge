@@ -10,4 +10,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elephant | Token
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_guide.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/111.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature dies, put a 3/3 green Elephant creature token onto the battlefield.
 End

@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ BG SubCounter<1/M1M1> | SpellDescription$ Regenerate De
 SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/deity_of_scars.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/118.jpg
+Oracle:Trample\nDeity of Scars enters the battlefield with two -1/-1 counters on it.\n{B/G}, Remove a -1/-1 counter from Deity of Scars: Regenerate Deity of Scars.
 End

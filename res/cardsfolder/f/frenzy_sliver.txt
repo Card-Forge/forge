@@ -10,4 +10,5 @@ SVar:BuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzy_sliver.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/85.jpg
+Oracle:All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)
 End

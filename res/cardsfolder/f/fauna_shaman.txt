@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ G T Discard<1/Creature> | Origin$ Library | Destination
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/172.jpg
+Oracle:{G}, {T}, Discard a creature card: Search your library for a creature card, reveal it, and put it into your hand. Then shuffle your library.
 End

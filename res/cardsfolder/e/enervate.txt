@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enervate.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/84.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/67.jpg
+Oracle:Tap target artifact, creature, or land.\nDraw a card at the beginning of the next turn's upkeep.
 End

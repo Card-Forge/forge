@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escape_routes.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/25.jpg
+Oracle:{2}{U}: Return target white or black creature you control to its owner's hand.
 End

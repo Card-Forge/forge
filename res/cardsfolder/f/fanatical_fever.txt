@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 2 G G | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatical_fever.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/122.jpg
+Oracle:Target creature gets +3/+0 and gains trample until end of turn.
 End

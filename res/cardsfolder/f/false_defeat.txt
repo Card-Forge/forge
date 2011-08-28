@@ -4,6 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:Rarity:Common
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/false_defeat.jpg  
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/false_defeat.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/4.jpg
+Oracle:Return target creature card from your graveyard to the battlefield.
 End

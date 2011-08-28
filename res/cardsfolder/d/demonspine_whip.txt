@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonspine_whip.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/39.jpg
+Oracle:{X}: Equipped creature gets +X/+0 until end of turn.\nEquip {1}
 End

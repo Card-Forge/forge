@@ -4,8 +4,9 @@ Types:Creature Illusion
 Text:no text
 PT:4/4
 K:Flying
-A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.  
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ephemeron.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/31.jpg
+Oracle:Flying\nDiscard a card: Return Ephemeron to its owner's hand.
 End

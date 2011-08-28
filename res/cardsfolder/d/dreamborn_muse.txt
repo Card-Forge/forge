@@ -15,4 +15,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamborn_muse.j
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/36.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/44.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/82.jpg
+Oracle:At the beginning of each player's upkeep, that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.
 End

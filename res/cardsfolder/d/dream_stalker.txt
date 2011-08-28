@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/58.jpg
+Oracle:When Dream Stalker enters the battlefield, return a permanent you control to its owner's hand.
 End

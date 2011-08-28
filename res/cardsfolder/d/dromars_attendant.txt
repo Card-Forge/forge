@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_attendant.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/303.jpg
+Oracle:{1}, Sacrifice Dromar's Attendant: Add {W}{U}{B} to your mana pool.
 End

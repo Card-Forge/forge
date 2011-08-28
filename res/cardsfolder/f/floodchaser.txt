@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodchaser.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/34.jpg
+Oracle:Floodchaser enters the battlefield with six +1/+1 counters on it.\nFloodchaser can't attack unless defending player controls an Island.\n{U}, Remove a +1/+1 counter from Floodchaser: Target land becomes an Island until end of turn.
 End

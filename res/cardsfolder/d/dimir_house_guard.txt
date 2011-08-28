@@ -9,4 +9,5 @@ K:Transmute:1 B B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_house_guard.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/83.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSacrifice a creature: Regenerate Dimir House Guard.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
 End

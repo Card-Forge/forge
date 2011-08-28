@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 1 W T | ValidTgts$ Creature.Black | TgtPrompt$ Select targ
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exorcist.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/79.jpg
+Oracle:{1}{W}, {T}: Destroy target black creature.
 End

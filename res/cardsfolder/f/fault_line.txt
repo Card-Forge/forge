@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_line.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/185.jpg
+Oracle:Fault Line deals X damage to each creature without flying and each player.
 End

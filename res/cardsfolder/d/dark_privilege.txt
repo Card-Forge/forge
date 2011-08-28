@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_privilege.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/6.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice a creature: Regenerate enchanted creature.
 End

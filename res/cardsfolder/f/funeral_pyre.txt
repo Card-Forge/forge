@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_pyre.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/10.jpg
+Oracle:Exile target card from a graveyard. Its owner puts a 1/1 white Spirit creature token with flying onto the battlefield.
 End

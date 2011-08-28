@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_brood.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/84.jpg
+Oracle:{R}: Target creature can't be regenerated this turn.
 End

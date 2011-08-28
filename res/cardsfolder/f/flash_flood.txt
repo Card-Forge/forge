@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_flood.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/57.jpg
+Oracle:Choose one - Destroy target red permanent; or return target Mountain to its owner's hand.
 End

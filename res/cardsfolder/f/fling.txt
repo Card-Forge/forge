@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fling.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/139.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/134.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/82.jpg
+Oracle:As an additional cost to cast Fling, sacrifice a creature.\nFling deals damage equal to the sacrificed creature's power to target creature or player.
 End

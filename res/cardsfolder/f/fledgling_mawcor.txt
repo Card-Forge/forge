@@ -9,4 +9,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_mawcor.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/63.jpg
+Oracle:Flying\n{T}: Fledgling Mawcor deals 1 damage to target creature or player.\nMorph {U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

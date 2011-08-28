@@ -13,4 +13,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/320.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/204.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/209.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/205.jpg
+Oracle:Whenever a player casts a black spell, you may gain 1 life.
 End

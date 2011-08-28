@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20383.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/10.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/73.jpg
+Oracle:
 End

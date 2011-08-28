@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_appetite.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/106.jpg
+Oracle:Enchant creature you control\nEnchanted creature gets +3/+3.\nAt the beginning of your upkeep, sacrifice a creature.
 End

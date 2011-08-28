@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ Tg
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/86.jpg
+Oracle:Destroy target land. Its controller discards a card.
 End

@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_lyrist.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/238.jpg
+Oracle:{G}, {T}, Sacrifice Druid Lyrist: Destroy target enchantment.
 End

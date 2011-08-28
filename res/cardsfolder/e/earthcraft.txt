@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/116.jpg
+Oracle:Tap an untapped creature you control: Untap target basic land.
 End

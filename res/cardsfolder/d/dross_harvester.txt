@@ -11,4 +11,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_harvester.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/63.jpg
+Oracle:Protection from white\nAt the beginning of your end step, you lose 4 life.\nWhenever a creature dies, you gain 2 life.
 End

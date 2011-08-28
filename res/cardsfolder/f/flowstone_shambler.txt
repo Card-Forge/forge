@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_shambler.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/86.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/185.jpg
+Oracle:{R}: Flowstone Shambler gets +1/-1 until end of turn.
 End

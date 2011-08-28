@@ -12,4 +12,5 @@ SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/271.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/243.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/200.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/202.jpg
+Oracle:Regenerate target creature.
 End

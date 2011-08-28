@@ -6,4 +6,5 @@ K:eqPump 2:Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireshrieker.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/171.jpg
+Oracle:Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
 End

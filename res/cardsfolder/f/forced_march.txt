@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_march.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/136.jpg
+Oracle:Destroy all creatures with converted mana cost X or less.
 End

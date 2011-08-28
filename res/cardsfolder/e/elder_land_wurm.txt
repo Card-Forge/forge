@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_land_wurm.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/274.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/180.jpg
+Oracle:Defender, trample\nWhen Elder Land Wurm blocks, it loses defender.
 End

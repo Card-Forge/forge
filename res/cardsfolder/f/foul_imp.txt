@@ -12,4 +12,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/9.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/132.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/136.jpg
+Oracle:Flying\nWhen Foul Imp enters the battlefield, you lose 2 life.
 End

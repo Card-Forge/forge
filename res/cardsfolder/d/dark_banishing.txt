@@ -11,4 +11,5 @@ SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/127.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/122.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/7.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/13.jpg
+Oracle:Destroy target nonblack creature. It can't be regenerated.
 End

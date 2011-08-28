@@ -8,4 +8,5 @@ K:CARDNAME can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96949.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/48.jpg
+Oracle:Flying\nDaggerclaw Imp can't block.
 End

@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/derelor.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/17.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/120.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/10.jpg
+Oracle:Black spells you cast cost {B} more to cast.
 End

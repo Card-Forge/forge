@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_shoreline.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/32.jpg
+Oracle:{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.
 End

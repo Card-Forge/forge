@@ -14,4 +14,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_many.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/78.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/21.jpg
+Oracle:When Dance of Many enters the battlefield, put a token that's a copy of target nontoken creature onto the battlefield.\nWhen Dance of Many leaves the battlefield, exile the token.\nWhen the token leaves the battlefield, sacrifice Dance of Many.\nAt the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.
 End

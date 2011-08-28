@@ -8,4 +8,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flanking_troops.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/5.jpg
+Oracle:Whenever Flanking Troops attacks, you may tap target creature.
 End

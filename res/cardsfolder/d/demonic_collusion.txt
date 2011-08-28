@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_collusion.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/103.jpg
+Oracle:Buyback-Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nSearch your library for a card and put that card into your hand. Then shuffle your library.
 End

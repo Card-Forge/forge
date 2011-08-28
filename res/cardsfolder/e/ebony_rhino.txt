@@ -7,4 +7,5 @@ K:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2905.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/131.jpg
+Oracle:Trample
 End

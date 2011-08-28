@@ -5,4 +5,5 @@ Text:Choose target creature or player. The computer will randomly choose a nonla
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card12484.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/201.jpg
+Oracle:Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.
 End

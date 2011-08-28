@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/118.jpg
 SetInfo:ARN|Land|http://magiccards.info/scans/en/an/86.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
 End

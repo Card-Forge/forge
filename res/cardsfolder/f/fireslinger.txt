@@ -8,4 +8,5 @@ SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireslinger.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/173.jpg
+Oracle:{T}: Fireslinger deals 1 damage to target creature or player and 1 damage to you.
 End

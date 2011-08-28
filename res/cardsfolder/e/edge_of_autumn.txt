@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_autumn.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/144.jpg
+Oracle:If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\nCycling-Sacrifice a land. (Sacrifice a land, Discard this card: Draw a card.)
 End

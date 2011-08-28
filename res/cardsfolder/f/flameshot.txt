@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameshot.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/90.jpg
+Oracle:You may discard a Mountain card rather than pay Flameshot's mana cost.\nFlameshot deals 3 damage divided as you choose among one, two, or three target creatures.
 End

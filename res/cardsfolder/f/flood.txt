@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/flood.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/87.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/26.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/73.jpg
+Oracle:{U}{U}: Tap target creature without flying.
 End

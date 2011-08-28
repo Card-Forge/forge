@@ -7,4 +7,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_souls.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/230.jpg
+Oracle:Whenever a nontoken creature is put into your graveyard from the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
 End

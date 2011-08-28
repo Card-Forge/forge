@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddTou
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fencers_magemark.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/65.jpg
+Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1 and have first strike.
 End

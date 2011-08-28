@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/78.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/56.jpg
+Oracle:Counter target instant spell.
 End

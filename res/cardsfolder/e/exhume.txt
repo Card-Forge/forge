@@ -7,4 +7,5 @@ SVar:DBChangeZoneOpp:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefiel
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhume.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/134.jpg
+Oracle:Each player puts a creature card from his or her graveyard onto the battlefield.
 End

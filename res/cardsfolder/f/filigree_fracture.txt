@@ -7,4 +7,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Targeted | ConditionPrese
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_fracture.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/82.jpg
+Oracle:Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
 End

@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_stronghold.
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/416.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/324.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/180.jpg
+Oracle:Ebon Stronghold enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\n{T}, Sacrifice Ebon Stronghold: Add {B}{B} to your mana pool.
 End

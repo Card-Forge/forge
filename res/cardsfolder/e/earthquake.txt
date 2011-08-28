@@ -18,4 +18,5 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/147.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/223.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/121.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/147.jpg
+Oracle:Earthquake deals X damage to each creature without flying and each player.
 End

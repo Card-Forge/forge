@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/94.jpg
+Oracle:Evaporate deals 1 damage to each white and/or blue creature.
 End

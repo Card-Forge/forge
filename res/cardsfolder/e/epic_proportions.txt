@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 5 | AddToughness
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_proportions.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/209.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +5/+5 and has trample.
 End

@@ -10,4 +10,5 @@ SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_sea_kraken.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/56.jpg
+Oracle:Deep-Sea Kraken is unblockable.\nSuspend 9-{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with nine time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
 End

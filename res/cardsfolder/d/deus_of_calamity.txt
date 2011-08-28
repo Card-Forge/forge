@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.YouDontCtrl | TgtPrompt$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deus_of_calamity.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/204.jpg
+Oracle:Trample\nWhenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.
 End

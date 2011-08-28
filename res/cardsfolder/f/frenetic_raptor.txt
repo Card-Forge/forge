@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Beast | AddKeyword$ HIDDEN CARDNAME can'
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_raptor.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/93.jpg
+Oracle:Beasts can't block.
 End

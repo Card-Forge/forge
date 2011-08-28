@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/eye_spy.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/38.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/39.jpg
+Oracle:Look at the top card of target player's library. You may put that card into his or her graveyard.
 End

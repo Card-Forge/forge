@@ -9,4 +9,5 @@ SVar:BuffedBy:Mountain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_servant.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/134.jpg
+Oracle:Earth Servant gets +0/+1 for each Mountain you control.
 End

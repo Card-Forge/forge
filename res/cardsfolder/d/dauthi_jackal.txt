@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ B B Sac<1/CARDNAME> | ValidTgts$ Creature.blocking | TgtPr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_jackal.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/58.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{B}{B}, Sacrifice Dauthi Jackal: Destroy target blocking creature.
 End

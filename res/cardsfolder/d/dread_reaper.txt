@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/76.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/11.jpg
+Oracle:Flying\nWhen Dread Reaper enters the battlefield, you lose 5 life.
 End

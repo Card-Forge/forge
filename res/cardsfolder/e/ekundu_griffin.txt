@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ekundu_griffin.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/18.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/217.jpg
+Oracle:Flying, first strike
 End

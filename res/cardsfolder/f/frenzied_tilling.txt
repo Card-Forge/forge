@@ -7,4 +7,5 @@ SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Chang
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzied_tilling.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/247.jpg
+Oracle:Destroy target land. Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
 End

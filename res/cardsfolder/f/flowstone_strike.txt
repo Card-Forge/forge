@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_strike.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/84.jpg
+Oracle:Target creature gets +1/-1 and gains haste until end of turn.
 End

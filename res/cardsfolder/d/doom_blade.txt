@@ -9,4 +9,5 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/95.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/93.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/95.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/78.jpg
+Oracle:Destroy target nonblack creature.
 End

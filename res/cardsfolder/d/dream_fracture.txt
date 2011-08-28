@@ -8,4 +8,5 @@ SVar:DBDrawYou:DB$Draw | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_fracture.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/19.jpg
+Oracle:Counter target spell. Its controller draws a card.\nDraw a card.
 End

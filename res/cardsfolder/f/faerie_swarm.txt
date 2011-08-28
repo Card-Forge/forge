@@ -10,4 +10,5 @@ SVar:BuffedBy:Permanent.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/37.jpg
+Oracle:Flying\nFaerie Swarm's power and toughness are each equal to the number of blue permanents you control.
 End

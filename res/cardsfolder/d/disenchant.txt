@@ -19,4 +19,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/302.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/214.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/203.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/202.jpg
+Oracle:Destroy target artifact or enchantment.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_calm.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/2.jpg
+Oracle:Destroy target enchantment and all other enchantments with the same name as that enchantment.
 End

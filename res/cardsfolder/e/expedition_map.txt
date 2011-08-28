@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Ha
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expedition_map.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/201.jpg
+Oracle:{2}, {T}, Sacrifice Expedition Map: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
 End

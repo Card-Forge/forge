@@ -14,4 +14,5 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/138.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/136.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/131.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/150.jpg
+Oracle:Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\nFireball costs {1} more to cast for each target beyond the first.
 End

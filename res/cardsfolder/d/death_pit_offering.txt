@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pit_offering.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/124.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/56.jpg
+Oracle:When Death Pit Offering enters the battlefield, sacrifice all creatures you control.\nCreatures you control get +2/+2.
 End

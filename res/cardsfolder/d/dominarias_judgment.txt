@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominarias_judgment.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/4.jpg
+Oracle:Until end of turn, creatures you control gain protection from white if you control a Plains, from blue if you control an Island, from black if you control a Swamp, from red if you control a Mountain, and from green if you control a Forest.
 End

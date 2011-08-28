@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farseek.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/163.jpg
+Oracle:Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
 End

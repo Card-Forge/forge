@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fecundity.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/247.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/251.jpg
+Oracle:Whenever a creature dies, that creature's controller may draw a card.
 End

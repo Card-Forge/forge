@@ -22,4 +22,5 @@ SVar:GREEN:Count$Valid Creature.withProtection from green+notnamed Escaped Shape
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escaped_shapeshifter.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/62.jpg
+Oracle:As long as an opponent controls a creature with flying not named Escaped Shapeshifter, Escaped Shapeshifter has flying. The same is true for first strike, trample, and protection from any color.
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ B Discard<1/Card> | KW$ Flying | SpellDescription$ CARDNAME g
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_imp.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/137.jpg
+Oracle:{B}, Discard a card: Fledgling Imp gains flying until end of turn.
 End

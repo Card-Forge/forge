@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_ironwood.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/164.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/156.jpg
+Oracle:Enchant creature\nWhen Fists of Ironwood enters the battlefield, put two 1/1 green Saproling creature tokens onto the battlefield.\nEnchanted creature has trample.
 End

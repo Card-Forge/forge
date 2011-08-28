@@ -9,4 +9,5 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/128.jpg
+Oracle:{T}: Add {R}, {G}, or {W} to your mana pool.
 End

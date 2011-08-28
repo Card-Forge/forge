@@ -11,4 +11,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/282.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/246.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/335.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/14.jpg
+Oracle:{2}: Dragon Engine gets +1/+0 until end of turn.
 End

@@ -7,4 +7,5 @@ A:SP$ Destroy | Cost$ 5 R R | ValidTgts$ Land | TgtPrompt$ Select target land. |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_rift.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/189.jpg
+Oracle:Destroy target land.\nFlashback {5}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

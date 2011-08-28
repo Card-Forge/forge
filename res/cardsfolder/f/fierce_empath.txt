@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fierce_empath.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/119.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/155.jpg
+Oracle:When Fierce Empath enters the battlefield, you may search your library for a creature card with converted mana cost 6 or greater, reveal it, put it into your hand, then shuffle your library.
 End

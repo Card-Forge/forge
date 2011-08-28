@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_goblin
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/148.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/130.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/143.jpg
+Oracle:When Festering Goblin dies, target creature gets -1/-1 until end of turn.
 End

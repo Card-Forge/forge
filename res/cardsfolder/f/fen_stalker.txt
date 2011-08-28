@@ -9,4 +9,5 @@ SVar:BuffedBy:Card.nonLand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fen_stalker.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/64.jpg
+Oracle:Fen Stalker has fear as long as you control no untapped lands. (It can't be blocked except by artifact creatures and/or black creatures.)
 End

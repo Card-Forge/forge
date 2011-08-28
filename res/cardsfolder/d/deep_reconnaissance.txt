@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_reconnaissance.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/236.jpg
+Oracle:Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.\nFlashback {4}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

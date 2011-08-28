@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/familiars_ruse.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/64.jpg
+Oracle:As an additional cost to cast Familiar's Ruse, return a creature you control to its owner's hand.\nCounter target spell.
 End

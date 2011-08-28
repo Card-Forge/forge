@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Sac<1/Creature> | KW$ Flying | SpellDescription$ CARDNAME gai
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_hopper.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/60.jpg
+Oracle:Sacrifice a creature: Dross Hopper gains flying until end of turn.
 End

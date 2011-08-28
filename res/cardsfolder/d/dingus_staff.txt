@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/149.jpg
+Oracle:Whenever a creature dies, Dingus Staff deals 2 damage to that creature's controller.
 End

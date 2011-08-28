@@ -14,4 +14,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgazer.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/126.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/130.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/124.jpg
+Oracle:Whenever Deathgazer blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 End

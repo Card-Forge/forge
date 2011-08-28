@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/97.jpg
+Oracle:Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
 End

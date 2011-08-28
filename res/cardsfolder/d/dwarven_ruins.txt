@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_ruins.jp
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/415.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/323.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/179.jpg
+Oracle:Dwarven Ruins enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\n{T}, Sacrifice Dwarven Ruins: Add {R}{R} to your mana pool.
 End

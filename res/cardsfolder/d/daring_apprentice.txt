@@ -11,4 +11,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/62.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/60.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/72.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/68.jpg
+Oracle:{T}, Sacrifice Daring Apprentice: Counter target spell.
 End

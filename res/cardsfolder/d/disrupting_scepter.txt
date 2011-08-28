@@ -15,4 +15,5 @@ SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/295.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/281.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/245.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/243.jpg
+Oracle:{3}, {T}: Target player discards a card. Activate this ability only during your turn.
 End

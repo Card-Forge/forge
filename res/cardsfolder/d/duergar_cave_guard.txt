@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ RW | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_cave_guard.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/51.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{R/W}: Duergar Cave-Guard gets +1/+0 until end of turn.
 End

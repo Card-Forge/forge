@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_reality.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/60.jpg
+Oracle:Enchant creature\nEnchanted creature can't be blocked by Spirits.\n{1}{U}: Return Field of Reality to its owner's hand.
 End

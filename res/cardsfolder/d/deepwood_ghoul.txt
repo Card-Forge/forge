@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ PayLife<2> | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_ghoul.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/8e/127.jpg
+Oracle:Pay 2 life: Regenerate Deepwood Ghoul.
 End

@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_the_dead.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/11.jpg
+Oracle:Defender (This creature can't attack.)\nDrift of the Dead's power and toughness are each equal to the number of snow lands you control.
 End

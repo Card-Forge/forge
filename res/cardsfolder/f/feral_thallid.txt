@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ SubCounter<3/SPORE> | SpellDescription$ Regenerate CARD
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_thallid.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/78.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Feral Thallid.\nRemove three spore counters from Feral Thallid: Regenerate Feral Thallid.
 End

@@ -10,4 +10,5 @@ SVar:Y:Count$Valid Creature.Red+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/din_of_the_fireherd.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/184.jpg
+Oracle:Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
 End

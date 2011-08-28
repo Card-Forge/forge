@@ -12,4 +12,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_giant.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/59.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/57.jpg
+Oracle:Kicker {W}{W} (You may pay an additional {W}{W} as you cast this spell.)\nWhen Desolation Giant enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.
 End

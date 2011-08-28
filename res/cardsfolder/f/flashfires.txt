@@ -16,4 +16,5 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/180.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/151.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/231.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/152.jpg
+Oracle:Destroy all Plains.
 End

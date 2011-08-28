@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Islandwalk | SpellDescription$ CARDNAME gains islandw
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deeptread_merrow.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/57.jpg
+Oracle:{U}: Deeptread Merrow gains islandwalk until end of turn.
 End

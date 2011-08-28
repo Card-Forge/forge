@@ -10,4 +10,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_mastery.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/104.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has flying.\nWhenever enchanted creature deals damage to a player, that player discards two cards.
 End

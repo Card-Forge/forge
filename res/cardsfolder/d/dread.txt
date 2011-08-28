@@ -11,4 +11,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredSource
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/107.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever a creature deals damage to you, destroy it.\nWhen Dread is put into a graveyard from anywhere, shuffle it into its owner's library.
 End

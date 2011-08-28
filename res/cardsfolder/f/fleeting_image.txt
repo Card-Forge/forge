@@ -11,4 +11,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/79.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/74.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/31.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/78.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Return Fleeting Image to its owner's hand.
 End

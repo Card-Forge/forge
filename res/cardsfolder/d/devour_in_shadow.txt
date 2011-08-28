@@ -8,4 +8,5 @@ SVar:X:Targeted$CardToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/46.jpg
+Oracle:Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
 End

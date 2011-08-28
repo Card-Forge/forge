@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_sorceress.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/74.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/11.jpg
+Oracle:Dakmor Sorceress's power is equal to the number of Swamps you control.
 End

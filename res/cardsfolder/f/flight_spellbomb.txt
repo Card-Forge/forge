@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flight_spellbomb.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/155.jpg
+Oracle:{T}, Sacrifice Flight Spellbomb: Target creature gains flying until end of turn.\nWhen Flight Spellbomb is put into a graveyard from the battlefield, you may pay {U}. If you do, draw a card.
 End

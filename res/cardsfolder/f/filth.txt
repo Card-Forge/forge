@@ -9,4 +9,5 @@ SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/66.jpg
+Oracle:Swampwalk\nAs long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.
 End

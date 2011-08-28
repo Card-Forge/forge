@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:None
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23059.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/102.jpg
+Oracle:Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
 End

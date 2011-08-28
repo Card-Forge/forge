@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divebomber_griffin.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/14.jpg
+Oracle:Flying\n{T}, Sacrifice Divebomber Griffin: Divebomber Griffin deals 3 damage to target attacking or blocking creature.
 End

@@ -7,4 +7,5 @@ A:AB$ Draw | Cost$ B T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_astrolabe.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/41.jpg
+Oracle:Flash\n{B}, {T}, Sacrifice an artifact: Draw a card.
 End

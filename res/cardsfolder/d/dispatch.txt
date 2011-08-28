@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispatch.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/7.jpg
+Oracle:Tap target creature.\nMetalcraft - If you control three or more artifacts, exile that creature.
 End

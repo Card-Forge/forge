@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_of_the_dead.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/59.jpg
+Oracle:At the beginning of your upkeep, you lose 1 life.\nAt the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
 End

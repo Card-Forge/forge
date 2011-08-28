@@ -6,4 +6,5 @@ A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardVal
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/encroach.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/59.jpg
+Oracle:Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.
 End

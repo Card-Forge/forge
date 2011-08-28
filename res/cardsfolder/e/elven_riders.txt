@@ -12,4 +12,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/126.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/259.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/225.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/254.jpg
+Oracle:Elven Riders can't be blocked except by Walls and/or creatures with flying.
 End

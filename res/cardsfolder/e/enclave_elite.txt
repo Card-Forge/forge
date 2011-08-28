@@ -8,4 +8,5 @@ K:Multikicker 1 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_elite.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/27.jpg
+Oracle:Multikicker {1}{U} (You may pay an additional {1}{U} any number of times as you cast this spell.)\nIslandwalk\nEnclave Elite enters the battlefield with a +1/+1 counter on it for each time it was kicked.
 End

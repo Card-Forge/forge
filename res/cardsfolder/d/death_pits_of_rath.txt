@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pits_of_ra
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/125.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/21.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/123.jpg
+Oracle:Whenever a creature is dealt damage, destroy it. It can't be regenerated.
 End

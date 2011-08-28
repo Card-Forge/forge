@@ -8,4 +8,5 @@ SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_at_will.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/140.jpg
+Oracle:Fire at Will deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
 End

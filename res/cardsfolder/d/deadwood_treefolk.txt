@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadwood_treefolk.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/150.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/126.jpg
+Oracle:Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Deadwood Treefolk enters the battlefield or leaves the battlefield, return another target creature card from your graveyard to your hand.
 End

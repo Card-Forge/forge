@@ -10,4 +10,5 @@ SVar:DBDiscard:DB$Discard | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_shambler.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/100.jpg
+Oracle:Trample\nWhenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
 End

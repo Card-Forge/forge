@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_charm.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/56.jpg
+Oracle:Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_arch.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/135.jpg
+Oracle:{2}, {T}: You may put a multicolored creature card from your hand onto the battlefield.
 End

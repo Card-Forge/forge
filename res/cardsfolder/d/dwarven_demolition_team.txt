@@ -10,4 +10,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/184.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/143.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/144.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/143.jpg
+Oracle:{T}: Destroy target Wall.
 End

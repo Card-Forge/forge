@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/157.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/126.jpg
+Oracle:Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.\nDraw a card at the beginning of the next turn's upkeep.
 End

@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Gr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_macabre.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/66.jpg
+Oracle:Flying\nDiscard Faerie Macabre: Exile up to two target cards from graveyards.
 End

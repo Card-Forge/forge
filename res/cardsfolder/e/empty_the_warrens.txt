@@ -7,4 +7,5 @@ K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/152.jpg
+Oracle:Put two 1/1 red Goblin creature tokens onto the battlefield.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
 End

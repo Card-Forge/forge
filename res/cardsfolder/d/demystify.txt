@@ -11,4 +11,5 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/13.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/13.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/24.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/14.jpg
+Oracle:Destroy target enchantment.
 End

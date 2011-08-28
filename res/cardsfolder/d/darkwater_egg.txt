@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkwater_egg.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/299.jpg
+Oracle:{2}, {T}, Sacrifice Darkwater Egg: Add {U}{B} to your mana pool. Draw a card.
 End

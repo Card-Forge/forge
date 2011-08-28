@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_strand.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/316.jpg
+Oracle:{T}, Pay 1 life, Sacrifice Flooded Strand: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
 End

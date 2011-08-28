@@ -7,4 +7,5 @@ A:SP$ Draw | Cost$ 1 U PayLife<3> | ValidTgts$ Player | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_analysis.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/36.jpg
+Oracle:Target player draws two cards.\nFlashback-{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

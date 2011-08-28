@@ -8,4 +8,5 @@ SVar:TrigDamageAll:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_evil.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/10.jpg
+Oracle:At the beginning of your upkeep, Festering Evil deals 1 damage to each creature and each player.\n{B}{B}, Sacrifice Festering Evil: Festering Evil deals 3 damage to each creature and each player.
 End

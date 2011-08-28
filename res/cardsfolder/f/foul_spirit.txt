@@ -9,4 +9,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | ChangeNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_spirit.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/13.jpg
+Oracle:Flying\nWhen Foul Spirit enters the battlefield, sacrifice a land.
 End

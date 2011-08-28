@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination $ Library | Libra
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fencer_clique.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/33.jpg
+Oracle:Flying\n{U}: Put Fencer Clique on top of its owner's library.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnare.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/32.jpg
+Oracle:You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.\nTap all creatures.
 End

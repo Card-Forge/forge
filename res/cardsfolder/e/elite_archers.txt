@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_archers.jp
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/18.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/13.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/15.jpg
+Oracle:{T}: Elite Archers deals 3 damage to target attacking or blocking creature.
 End

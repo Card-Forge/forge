@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/107.jpg
+Oracle:When you cycle Esper Sojourners or it dies, you may tap or untap target permanent.\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)
 End

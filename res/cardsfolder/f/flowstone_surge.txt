@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/85.jpg
+Oracle:Creatures you control get +1/-1.
 End

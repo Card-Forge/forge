@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elixir_of_immortality.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/206.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/208.jpg
+Oracle:{2}, {T}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.
 End

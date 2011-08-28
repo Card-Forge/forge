@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/16.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/18.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/2.jpg
+Oracle:Whenever El-Hajjaj deals damage, you gain that much life.
 End

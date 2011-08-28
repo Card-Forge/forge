@@ -18,4 +18,5 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/79.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/68.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/53.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/59.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.
 End

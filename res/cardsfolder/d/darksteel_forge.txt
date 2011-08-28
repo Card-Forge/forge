@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ HIDDEN Indestructi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/110.jpg
+Oracle:Artifacts you control are indestructible. ("Destroy" effects and lethal damage don't destroy them.)
 End

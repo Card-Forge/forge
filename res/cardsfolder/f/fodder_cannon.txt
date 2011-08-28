@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/302.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/131.jpg
+Oracle:{4}, {T}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.
 End

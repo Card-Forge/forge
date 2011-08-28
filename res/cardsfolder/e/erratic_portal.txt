@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erratic_portal.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/132.jpg
+Oracle:{1}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
 End

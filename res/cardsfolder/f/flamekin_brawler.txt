@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_brawler.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/166.jpg
+Oracle:{R}: Flamekin Brawler gets +1/+0 until end of turn.
 End

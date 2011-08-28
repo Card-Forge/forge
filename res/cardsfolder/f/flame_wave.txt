@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_wave.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/81.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/182.jpg
+Oracle:Flame Wave deals 4 damage to target player and each creature he or she controls.
 End

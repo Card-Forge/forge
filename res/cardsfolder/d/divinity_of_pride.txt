@@ -10,4 +10,5 @@ SVar:X:Count$YourLifeTotal
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divinity_of_pride.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/86.jpg
+Oracle:Flying, lifelink\nDivinity of Pride gets +4/+4 as long as you have 25 or more life.
 End

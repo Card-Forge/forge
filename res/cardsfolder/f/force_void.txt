@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_void.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/70.jpg
+Oracle:Counter target spell unless its controller pays {1}.\nDraw a card at the beginning of the next turn's upkeep.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73578.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/65.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/124.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/205.jpg
+Oracle:Flying\n{R}: Furnace Whelp gets +1/+0 until end of turn.
 End

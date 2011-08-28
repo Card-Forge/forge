@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ G G | KW$ First Strike | SpellDescription$ CARDNAME gains fir
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_dragonfly.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/98.jpg
+Oracle:Flying\n{G}{G}: Emerald Dragonfly gains first strike until end of turn.
 End

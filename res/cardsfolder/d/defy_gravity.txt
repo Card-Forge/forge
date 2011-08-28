@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defy_gravity.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/38.jpg
+Oracle:Target creature gains flying until end of turn.\nFlashback {U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

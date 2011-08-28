@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armory.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/182.jpg
+Oracle:{2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
 End

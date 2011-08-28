@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falter.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/184.jpg
+Oracle:Creatures without flying can't block this turn.
 End

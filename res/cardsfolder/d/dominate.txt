@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominate.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/31.jpg
+Oracle:Gain control of target creature with converted mana cost X or less. (This effect lasts indefinitely.)
 End

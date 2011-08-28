@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ HIDDEN P
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dolmen_gate.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/256.jpg
+Oracle:Prevent all combat damage that would be dealt to attacking creatures you control.
 End

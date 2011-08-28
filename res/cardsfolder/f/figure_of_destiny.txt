@@ -9,4 +9,5 @@ A:AB$ Animate | Cost$ RW RW RW RW RW RW| IsPresent$ Card.Self+Warrior | PresentC
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/figure_of_destiny.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/139.jpg
+Oracle:{R/W}: Figure of Destiny becomes a 2/2 Kithkin Spirit.\n{R/W}{R/W}{R/W}: If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.\n{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}: If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.
 End

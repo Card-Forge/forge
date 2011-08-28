@@ -11,4 +11,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickerwisp.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/6.jpg
+Oracle:Flying\nWhen Flickerwisp enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_charm.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/167.jpg
+Oracle:Choose one - Destroy target enchantment; or draw two cards; or target player discards two cards.
 End

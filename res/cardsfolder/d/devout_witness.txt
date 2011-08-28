@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 1 W T Discard<1/Card> | ValidTgts$ Artifact,Enchantment | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_witness.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/17.jpg
+Oracle:{1}{W}, {T}, Discard a card: Destroy target artifact or enchantment.
 End

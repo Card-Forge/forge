@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/flare.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/230.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/176.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/185.jpg
+Oracle:Flare deals 1 damage to target creature or player.\nDraw a card at the beginning of the next turn's upkeep.
 End

@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fractured_loyalty.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/93.jpg
+Oracle:Enchant creature\nWhenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature. (This effect lasts indefinitely.)
 End

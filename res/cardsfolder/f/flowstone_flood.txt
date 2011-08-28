@@ -8,4 +8,5 @@ SVar:DBBuyback:DB$ ChangeZone | Cost$ 0 | Origin$ Stack | Destination$ Hand | Va
 SVar:Rarity:Uncommon
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/83.jpg
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_flood.jpg
+Oracle:Buyback-Pay 3 life, Discard a card at random. (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nDestroy target land.
 End

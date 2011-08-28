@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/electrolyze.jpg
 SVar:Rarity:Uncommon
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/111.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/197.jpg
+Oracle:Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.\nDraw a card.
 End

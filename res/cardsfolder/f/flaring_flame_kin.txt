@@ -9,4 +9,5 @@ SVar:EnchantMe:Once
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flaring_flame_kin.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/62.jpg
+Oracle:As long as Flaring Flame-Kin is enchanted, it gets +2/+2, has trample, and has "{R}: Flaring Flame-Kin gets +1/+0 until end of turn."
 End

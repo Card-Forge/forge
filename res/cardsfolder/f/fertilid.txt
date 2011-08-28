@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertilid.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/122.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/154.jpg
+Oracle:Fertilid enters the battlefield with two +1/+1 counters on it.\n{1}{G}, Remove a +1/+1 counter from Fertilid: Target player searches his or her library for a basic land card and puts it onto the battlefield tapped. Then that player shuffles his or her library.
 End

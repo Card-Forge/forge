@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darting_merfolk.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/72.jpg
+Oracle:{U}: Return Darting Merfolk to its owner's hand.
 End

@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadship_reef.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/271.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/271.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Put a storage counter on Dreadship Reef.\n{1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B} to your mana pool.
 End

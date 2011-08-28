@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_justice.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/8.jpg
+Oracle:Put X 4/4 white Angel creature tokens with flying onto the battlefield.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle Decree of Justice, you may pay {X}. If you do, put X 1/1 white Soldier creature tokens onto the battlefield.
 End

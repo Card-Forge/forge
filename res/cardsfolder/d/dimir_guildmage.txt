@@ -8,4 +8,5 @@ A:AB$ Discard | Cost$ 3 B | ValidTgts$ Player | Mode$ TgtChoose | NumCards$ 1 | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_guildmage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/245.jpg
+Oracle:({U/B} can be paid with either {U} or {B}.)\n{3}{U}: Target player draws a card. Activate this ability only any time you could cast a sorcery.\n{3}{B}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
 End

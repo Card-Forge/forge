@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frog_tongue.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/122.jpg
+Oracle:Enchant creature\nWhen Frog Tongue enters the battlefield, draw a card.\nEnchanted creature has reach. (It can block creatures with flying.)
 End

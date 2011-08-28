@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expendable_troops.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/8.jpg
+Oracle:{T}, Sacrifice Expendable Troops: Expendable Troops deals 2 damage to target attacking or blocking creature.
 End

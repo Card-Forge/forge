@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadfall.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/95.jpg
+Oracle:Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 End

@@ -11,4 +11,5 @@ K:Morph:2 W W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exalted_angel.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/28.jpg
+Oracle:Flying\nWhenever Exalted Angel deals damage, you gain that much life.\nMorph {2}{W}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

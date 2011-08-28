@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnaring_bridge
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/300.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/127.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/294.jpg
+Oracle:Creatures with power greater than the number of cards in your hand can't attack.
 End

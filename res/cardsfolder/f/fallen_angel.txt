@@ -13,4 +13,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/23.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/11.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/127.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/82.jpg
+Oracle:Flying\nSacrifice a creature: Fallen Angel gets +2/+1 until end of turn.
 End

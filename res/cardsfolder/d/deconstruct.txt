@@ -7,4 +7,5 @@ SVar:DBMana:DB$Mana | Produced$ G | Amount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deconstruct.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/118.jpg
+Oracle:Destroy target artifact. Add {G}{G}{G} to your mana pool.
 End

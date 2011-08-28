@@ -9,4 +9,5 @@ SVar:Pump:AB$Pump | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Sliver | TgtPrompt$ Cho
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firewake_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/238.jpg
+Oracle:All Sliver creatures have haste.\nAll Slivers have "{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
 End

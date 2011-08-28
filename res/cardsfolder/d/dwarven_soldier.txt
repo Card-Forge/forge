@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_soldier.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/221.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/107.jpg|3
+Oracle:Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
 End

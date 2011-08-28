@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughnes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feebleness.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/110.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets -2/-1.
 End

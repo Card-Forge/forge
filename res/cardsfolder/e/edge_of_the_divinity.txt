@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_the_divinity.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/87.jpg
+Oracle:Enchant creature\nAs long as enchanted creature is white, it gets +1/+2.\nAs long as enchanted creature is black, it gets +2/+1.
 End

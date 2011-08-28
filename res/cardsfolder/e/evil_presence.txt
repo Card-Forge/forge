@@ -12,4 +12,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/22.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/20.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/18.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/16.jpg
+Oracle:Enchant land\nEnchanted land is a Swamp.
 End

@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.namedDemigod o
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/183.jpg
+Oracle:Flying, haste\nWhen you cast Demigod of Revenge, return all cards named Demigod of Revenge from your graveyard to the battlefield.
 End

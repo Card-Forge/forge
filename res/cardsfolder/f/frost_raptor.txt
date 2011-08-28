@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/34.jpg
+Oracle:Flying\n{S}{S}: Frost Raptor gains shroud until end of turn. ({S} can be paid with one mana from a snow permanent.)
 End

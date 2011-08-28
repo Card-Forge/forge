@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonskull_summ
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/223.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/223.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/225.jpg
+Oracle:Dragonskull Summit enters the battlefield tapped unless you control a Swamp or a Mountain.\n{T}: Add {B} or {R} to your mana pool.
 End

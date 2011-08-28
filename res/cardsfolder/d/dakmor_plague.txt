@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/dakmor_plague.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/9.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/72.jpg
+Oracle:Dakmor Plague deals 3 damage to each creature and each player.
 End

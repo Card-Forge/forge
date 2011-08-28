@@ -8,4 +8,5 @@ SVar:X:Count$InYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmask_nezumi.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/66.jpg
+Oracle:As long as you have seven or more cards in hand, Deathmask Nezumi gets +2/+1 and has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 End

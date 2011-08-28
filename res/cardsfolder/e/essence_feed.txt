@@ -9,4 +9,5 @@ SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_feed.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/110.jpg
+Oracle:Target player loses 3 life. You gain 3 life and put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
 End

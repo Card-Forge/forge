@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_presence.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/39.jpg
+Oracle:Enchant creature\nEnchanted creature gets -1/-1 and has "{T}: Target creature gets -1/-1 until end of turn."
 End

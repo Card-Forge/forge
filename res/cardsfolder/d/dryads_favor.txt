@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Forestwalk | D
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/169.jpg
+Oracle:Enchant creature\nEnchanted creature has forestwalk. (It's unblockable as long as defending player controls a Forest.)
 End

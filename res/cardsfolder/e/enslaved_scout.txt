@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 | KW$ Mountainwalk | SpellDescription$ Enslaved Scout gains
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_scout.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/104.jpg|2
+Oracle:{2}: Enslaved Scout gains mountainwalk until end of turn.
 End

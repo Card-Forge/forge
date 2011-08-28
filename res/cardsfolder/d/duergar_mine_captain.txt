@@ -7,4 +7,5 @@ A:AB$ PumpAll | Cost$ 1 RW Q | ValidCards$ Creature.attacking | NumAtt$ +1 | Spe
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_mine_captain.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/138.jpg
+Oracle:{1}{R/W}, {Q}: Attacking creatures get +1/+0 until end of turn. ({Q} is the untap symbol.)
 End

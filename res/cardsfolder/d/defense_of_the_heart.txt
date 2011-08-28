@@ -8,4 +8,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Chang
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_of_the_heart.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/100.jpg
+Oracle:At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
 End

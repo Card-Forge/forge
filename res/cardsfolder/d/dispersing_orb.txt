@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersing_orb.jpg
 SVar:Rarity:Uncommon
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/80.jpg
+Oracle:{3}{U}, Sacrifice a permanent: Return target permanent to its owner's hand.
 End

@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fit_of_rage.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/102.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/178.jpg
+Oracle:Target creature gets +3/+3 and gains first strike until end of turn.
 End

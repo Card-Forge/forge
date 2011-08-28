@@ -11,4 +11,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/152.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/223.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/120.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/238.jpg
+Oracle:{3}{G}, {T}: You may tap or untap target artifact, creature, or land.
 End

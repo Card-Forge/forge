@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/dark_offering.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/12.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/75.jpg
+Oracle:Destroy target nonblack creature. You gain 3 life.
 End

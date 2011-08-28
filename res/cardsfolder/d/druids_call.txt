@@ -10,4 +10,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_call.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/239.jpg
+Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.
 End

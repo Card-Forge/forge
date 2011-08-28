@@ -9,4 +9,5 @@ SVar:TrigLoseLife5:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forsaken_wastes.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/23.jpg
+Oracle:Players can't gain life.\nAt the beginning of each player's upkeep, that player loses 1 life.\nWhenever Forsaken Wastes becomes the target of a spell, that spell's controller loses 5 life.
 End

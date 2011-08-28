@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_distraction.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/67.jpg
+Oracle:Target creature gets -1/-0 until end of turn.\nDraw a card.
 End

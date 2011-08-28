@@ -12,4 +12,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemaw_kavu.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/153.jpg
+Oracle:Echo {5}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Firemaw Kavu enters the battlefield, it deals 2 damage to target creature.\nWhen Firemaw Kavu leaves the battlefield, it deals 4 damage to target creature.
 End

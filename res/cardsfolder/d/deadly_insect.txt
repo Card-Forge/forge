@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_insect.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/64.jpg|2
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/238.jpg
+Oracle:Shroud (This permanent can't be the target of spells or abilities.)
 End

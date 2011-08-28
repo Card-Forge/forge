@@ -8,4 +8,5 @@ SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_groodion.jpg
 SVar:Rarity:Uncommon
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/204.jpg
+Oracle:{2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
 End

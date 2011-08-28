@@ -7,4 +7,5 @@ K:Cascade
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enlisted_wurm.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/68.jpg
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
 End

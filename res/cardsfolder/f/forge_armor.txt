@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forge_armor.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/92.jpg
+Oracle:As an additional cost to cast Forge Armor, sacrifice an artifact.\nPut X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
 End

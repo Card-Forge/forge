@@ -8,4 +8,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/101.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/101.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/101.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/101.jpg
+Oracle:You may play any number of additional lands on each of your turns.\nWhenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.
 End

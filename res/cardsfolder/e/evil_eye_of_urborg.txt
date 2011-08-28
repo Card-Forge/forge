@@ -9,4 +9,5 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_urborg.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/107.jpg
+Oracle:Non-Eye creatures you control can't attack.\nWhenever Evil Eye of Urborg becomes blocked by a creature, destroy that creature.
 End

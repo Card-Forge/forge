@@ -9,4 +9,5 @@ SVar:X:Count$Valid Creature.withShadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_warlord.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/59.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
 End

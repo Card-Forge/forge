@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domestication.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/61.jpg
+Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
 End

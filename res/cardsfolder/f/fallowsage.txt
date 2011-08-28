@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallowsage.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/63.jpg
+Oracle:Whenever Fallowsage becomes tapped, you may draw a card.
 End

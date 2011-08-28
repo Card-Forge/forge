@@ -9,4 +9,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/5.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, Fledgling Griffin gains flying until end of turn.
 End

@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_retreat.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/44.jpg
+Oracle:Put target creature on top of its owner's library.
 End

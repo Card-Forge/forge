@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_riders.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/88.jpg
+Oracle:Sacrifice a land: Fault Riders gets +2/+0 and gains first strike until end of turn. Activate this ability only once each turn.
 End

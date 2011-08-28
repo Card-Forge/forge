@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ramos.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/294.jpg
+Oracle:{T}: Add {U} to your mana pool.\nSacrifice Eye of Ramos: Add {U} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_lancer.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/71.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/126.jpg
+Oracle:When Dakmor Lancer enters the battlefield, destroy target nonblack creature.
 End

@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122428.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/145.jpg
+Oracle:Whenever another creature enters the battlefield, you gain 1 life.
 End

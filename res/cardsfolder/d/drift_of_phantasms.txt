@@ -9,4 +9,5 @@ K:Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_phantasms.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/46.jpg
+Oracle:Defender (This creature can't attack.)\nFlying\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
 End

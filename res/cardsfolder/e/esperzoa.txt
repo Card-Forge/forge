@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esperzoa.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/25.jpg
+Oracle:Flying\nAt the beginning of your upkeep, return an artifact you control to its owner's hand.
 End

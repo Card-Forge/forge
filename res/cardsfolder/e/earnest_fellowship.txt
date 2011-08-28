@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earnest_fellowship.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/21.jpg
+Oracle:Each creature has protection from its colors.
 End

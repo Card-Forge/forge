@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ Self | NumAtt$ +5 | NumDef$ +3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonsoul_knight.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/62.jpg
+Oracle:First strike\n{W}{U}{B}{R}{G}: Until end of turn, Dragonsoul Knight becomes a Dragon, gets +5/+3, and gains flying and trample.
 End

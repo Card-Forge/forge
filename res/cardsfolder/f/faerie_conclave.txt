@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_conclave.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/139.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/351.jpg
+Oracle:Faerie Conclave enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{1}{U}: Faerie Conclave becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land. (It can't be blocked except by creatures with flying or reach.)
 End

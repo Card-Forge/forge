@@ -17,4 +17,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/230.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/173.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/114.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/102.jpg
+Oracle:Prevent all combat damage that would be dealt this turn.
 End

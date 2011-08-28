@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 G | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_the_pines.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/123.jpg
+Oracle:{1}{G}: Folk of the Pines gets +1/+0 until end of turn.
 End

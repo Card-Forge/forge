@@ -10,4 +10,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flayed_nim.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/65.jpg
+Oracle:Whenever Flayed Nim deals combat damage to a creature, that creature's controller loses that much life.\n{2}{B}: Regenerate Flayed Nim.
 End

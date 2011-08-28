@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flourishing_defenses.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/114.jpg
+Oracle:Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
 End

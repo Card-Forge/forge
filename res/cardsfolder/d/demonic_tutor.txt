@@ -9,4 +9,5 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/13.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/13.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/13.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/13.jpg
+Oracle:Search your library for a card and put that card into your hand. Then shuffle your library.
 End

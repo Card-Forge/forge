@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTy
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonmaster_outcast.jpg
 SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/81.jpg
+Oracle:At the beginning of your upkeep, if you control six or more lands, put a 5/5 red Dragon creature token with flying onto the battlefield.
 End

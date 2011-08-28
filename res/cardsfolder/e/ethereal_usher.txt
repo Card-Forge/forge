@@ -8,4 +8,5 @@ K:Transmute:1 U U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_usher.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/47.jpg
+Oracle:{U}, {T}: Target creature is unblockable this turn.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
 End

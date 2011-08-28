@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Forced_Fruition.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/66.jpg
+Oracle:Whenever an opponent casts a spell, that player draws seven cards.
 End

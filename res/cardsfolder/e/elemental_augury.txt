@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elemental_augury.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/364.jpg
+Oracle:{3}: Look at the top three cards of target player's library, then put them back in any order.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_soldier.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/189.jpg
+Oracle:{1}: Flailing Soldier gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Soldier gets -1/-1 until end of turn. Any player may activate this ability.
 End

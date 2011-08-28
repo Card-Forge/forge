@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ 2 W | Origin$ Battlefield | Destination$ Hand | SpellDe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_worship.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/11.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack.\n{2}{W}: Return Forced Worship to its owner's hand.
 End

@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_pioneer.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/243.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/257.jpg
+Oracle:When Elvish Pioneer enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.
 End

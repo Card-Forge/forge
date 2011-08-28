@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamcatcher.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/34.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
 End

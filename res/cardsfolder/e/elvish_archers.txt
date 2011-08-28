@@ -14,4 +14,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/127.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/226.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/100.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/100.jpg
+Oracle:First strike
 End

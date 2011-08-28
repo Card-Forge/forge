@@ -9,4 +9,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ Opponent | NumCar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_mindripper.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/19.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Dauthi Mindripper attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
 End

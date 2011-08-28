@@ -12,4 +12,5 @@ SVar:BuffedBy:Cleric
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubtless_one.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/27.jpg
+Oracle:Doubtless One's power and toughness are each equal to the number of Clerics on the battlefield.\nWhenever Doubtless One deals damage, you gain that much life.
 End

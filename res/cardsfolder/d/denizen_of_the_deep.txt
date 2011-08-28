@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/denizen_of_the_d
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/35.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/36.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/80.jpg
+Oracle:When Denizen of the Deep enters the battlefield, return each other creature you control to its owner's hand.
 End

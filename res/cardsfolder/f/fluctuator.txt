@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/295.jpg
+Oracle:Cycling abilities you activate cost you up to {2} less to activate.
 End

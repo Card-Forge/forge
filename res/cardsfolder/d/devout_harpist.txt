@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Aura.enchanting | TgtPrompt$ Select target 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_harpist.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/6.jpg
+Oracle:{T}: Destroy target Aura attached to a creature.
 End

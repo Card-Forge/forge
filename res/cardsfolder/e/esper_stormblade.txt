@@ -9,4 +9,5 @@ SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/132.jpg
+Oracle:As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
 End

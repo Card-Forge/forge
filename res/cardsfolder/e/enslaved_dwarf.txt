@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R Sac<1/CARDNAME> | NumAtt$ +1 | KW$ First Strike | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_dwarf.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/96.jpg
+Oracle:{R}, Sacrifice Enslaved Dwarf: Target black creature gets +1/+0 and gains first strike until end of turn.
 End

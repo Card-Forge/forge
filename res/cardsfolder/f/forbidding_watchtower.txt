@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidding_watchtower.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/140.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/352.jpg
+Oracle:Forbidding Watchtower enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\n{1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
 End

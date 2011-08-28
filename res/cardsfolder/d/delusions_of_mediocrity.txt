@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delusions_of_mediocrity.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/30.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/70.jpg
+Oracle:When Delusions of Mediocrity enters the battlefield, you gain 10 life.\nWhen Delusions of Mediocrity leaves the battlefield, you lose 10 life.
 End

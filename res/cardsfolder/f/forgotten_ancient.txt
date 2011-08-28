@@ -9,4 +9,5 @@ A:AB$ PutCounter | Cost$ SubCounter<1/P1P1> | ValidTgts$ Creature.Other | TgtPro
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_ancient.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/120.jpg
+Oracle:Whenever a player casts a spell, you may put a +1/+1 counter on Forgotten Ancient.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.
 End

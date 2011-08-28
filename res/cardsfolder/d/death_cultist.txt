@@ -8,4 +8,5 @@ SVar:DB1:DB$GainLife | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/105.jpg
+Oracle:Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
 End

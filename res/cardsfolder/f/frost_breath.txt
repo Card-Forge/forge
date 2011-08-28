@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_breath.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/54.jpg
+Oracle:Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 End

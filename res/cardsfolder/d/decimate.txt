@@ -9,4 +9,5 @@ SVar:DestroyLand:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select tar
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decimate.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/287.jpg
+Oracle:Destroy target artifact, target creature, target enchantment, and target land.
 End

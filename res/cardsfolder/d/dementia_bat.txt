@@ -8,4 +8,5 @@ A:AB$ Discard | Cost$ Sac<1/CARDNAME> 4 B | ValidTgts$ Player | NumCards$ 2 | Mo
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_bat.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/55.jpg
+Oracle:Flying\n{4}{B}, Sacrifice Dementia Bat: Target player discards two cards.
 End

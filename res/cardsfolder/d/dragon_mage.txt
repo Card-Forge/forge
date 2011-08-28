@@ -10,4 +10,5 @@ SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_mage.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/87.jpg
+Oracle:Flying\nWhenever Dragon Mage deals combat damage to a player, each player discards his or her hand and draws seven cards.
 End

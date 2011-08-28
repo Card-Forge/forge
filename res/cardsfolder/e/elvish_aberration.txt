@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_aberration.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/118.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/151.jpg
+Oracle:{T}: Add {G}{G}{G} to your mana pool.\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, and put it into your hand. Then shuffle your library.)
 End

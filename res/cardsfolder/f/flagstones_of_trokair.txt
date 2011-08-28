@@ -9,4 +9,5 @@ SVar:SacMe:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flagstones_of_trokair.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/272.jpg
+Oracle:{T}: Add {W} to your mana pool.\nWhen Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
 End

@@ -9,4 +9,5 @@ SVar:Damage:AB$Pump | Cost$ T | Tgt$ TgtC | NumAtt$ +2 | NumDef$ +1 | SpellDescr
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_lore.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/124.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Target creature gets +2/+1 until end of turn."
 End

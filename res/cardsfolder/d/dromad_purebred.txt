@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromad_purebred.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/15.jpg
+Oracle:Whenever Dromad Purebred is dealt damage, you gain 1 life.
 End

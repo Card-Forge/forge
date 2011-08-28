@@ -9,4 +9,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/153.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/154.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/152.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/153.jpg
+Oracle:Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
 End

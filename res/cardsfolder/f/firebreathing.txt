@@ -19,4 +19,5 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/177.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/150.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/132.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/151.jpg
+Oracle:Enchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.
 End

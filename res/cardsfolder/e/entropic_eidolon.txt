@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entropic_eidolon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/45.jpg
+Oracle:{B}, Sacrifice Entropic Eidolon: Target player loses 1 life and you gain 1 life.\nWhenever you cast a multicolored spell, you may return Entropic Eidolon from your graveyard to your hand.
 End

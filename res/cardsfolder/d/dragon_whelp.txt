@@ -15,4 +15,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/133.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/142.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/120.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/142.jpg
+Oracle:Flying\n{R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
 End

@@ -10,4 +10,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/53.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/52.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/33.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/84.jpg
+Oracle:Counter target red or green spell.
 End

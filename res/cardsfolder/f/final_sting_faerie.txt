@@ -9,4 +9,5 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_sting_faerie.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/63.jpg
+Oracle:Flying\nWhen Final-Sting Faerie enters the battlefield, destroy target creature that was dealt damage this turn.
 End

@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pulse.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/137.jpg
+Oracle:Target creature gets -4/-4 until end of turn.\nCycling {1}{B}{B} ({1}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle Death Pulse, you may have target creature get -1/-1 until end of turn.
 End

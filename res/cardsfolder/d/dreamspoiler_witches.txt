@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamspoiler_witches.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/108.jpg
+Oracle:Flying\nWhenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.
 End

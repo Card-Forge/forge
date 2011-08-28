@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_horse.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/247.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/336.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/76.jpg
+Oracle:{2}, {T}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 End

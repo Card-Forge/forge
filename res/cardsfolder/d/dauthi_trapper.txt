@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_trapper.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/6.jpg
+Oracle:{T}: Target creature gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)
 End

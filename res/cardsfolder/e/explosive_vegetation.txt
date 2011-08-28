@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explosive_vegetation.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/263.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/153.jpg
+Oracle:Search your library for up to two basic land cards and put them onto the battlefield tapped. Then shuffle your library.
 End

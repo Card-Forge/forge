@@ -12,4 +12,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/338.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/285.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/248.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/77.jpg
+Oracle:{2}, {T}: Target creature gains flying until end of turn.
 End

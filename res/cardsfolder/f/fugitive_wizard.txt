@@ -9,4 +9,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/81.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/38.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/80.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/86.jpg
+Oracle:
 End

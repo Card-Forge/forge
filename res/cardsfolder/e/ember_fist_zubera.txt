@@ -9,4 +9,5 @@ PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80508.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/166.jpg
+Oracle:When Ember-Fist Zubera dies, it deals damage to target creature or player equal to the number of Zubera that died this turn.
 End

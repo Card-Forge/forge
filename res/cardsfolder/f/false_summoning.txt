@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creatur
 SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/false_summoning.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/40.jpg
+Oracle:Counter target creature spell.
 End

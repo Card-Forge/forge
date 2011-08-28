@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_ruin.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/59.jpg
+Oracle:Destroy target artifact and all other artifacts with the same name as that artifact.
 End

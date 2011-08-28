@@ -14,4 +14,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/158.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/130.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/104.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/104.jpg
+Oracle:Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.
 End

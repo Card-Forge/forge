@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 1 B B Sac<1/CARDNAME> | Origin$ Library | Destination$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshwrither.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/84.jpg
+Oracle:Transfigure {1}{B}{B} ({1}{B}{B}, Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield. Then shuffle your library. Transfigure only as a sorcery.)
 End

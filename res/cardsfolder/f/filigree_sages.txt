@@ -7,4 +7,5 @@ A:AB$ Untap | Cost$ 2 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_sages.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/44.jpg
+Oracle:{2}{U}: Untap target artifact.
 End

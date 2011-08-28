@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_champion.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/20.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/219.jpg
+Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.
 End

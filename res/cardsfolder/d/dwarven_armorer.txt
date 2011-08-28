@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armorer.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/104.jpg
+Oracle:{R}, {T}, Discard a card: Put a +0/+1 counter or a +1/+0 counter on target creature.
 End

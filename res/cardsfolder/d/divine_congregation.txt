@@ -8,4 +8,5 @@ SVar:X:TargetedPlayer$CreaturesInPlay/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_congregation.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/13.jpg
+Oracle:You gain 2 life for each creature target player controls.\nSuspend 5-{1}{W} (Rather than cast this card from your hand, you may pay {1}{W} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 End

@@ -8,4 +8,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_allergy.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/62.jpg
+Oracle:As an additional cost to cast Flesh Allergy, sacrifice a creature.\nDestroy target creature. Its controller loses life equal to the number of creatures that died this turn.
 End

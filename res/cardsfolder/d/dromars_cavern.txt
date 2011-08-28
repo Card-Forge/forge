@@ -9,4 +9,5 @@ SVar:NeedsToPlay:Land.nonLair+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_cavern.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/138.jpg
+Oracle:When Dromar's Cavern enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {W}, {U}, or {B} to your mana pool.
 End

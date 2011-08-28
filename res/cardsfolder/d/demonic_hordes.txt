@@ -11,4 +11,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/12.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/12.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/12.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/12.jpg
+Oracle:{T}: Destroy target land.\nAt the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
 End

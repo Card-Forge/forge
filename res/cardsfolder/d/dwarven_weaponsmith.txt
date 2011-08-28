@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_weaponsmith.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/144.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/90.jpg
+Oracle:{T}, Sacrifice an artifact: Put a +1/+1 counter on target creature. Activate this ability only during your upkeep.
 End

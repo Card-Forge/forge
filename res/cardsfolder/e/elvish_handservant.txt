@@ -9,4 +9,5 @@ SVar:BuffedBy:Giant
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_handservant.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/206.jpg
+Oracle:Whenever a player casts a Giant spell, you may put a +1/+1 counter on Elvish Handservant.
 End

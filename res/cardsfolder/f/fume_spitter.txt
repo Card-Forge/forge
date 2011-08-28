@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fume_spitter.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/63.jpg
+Oracle:Sacrifice Fume Spitter: Put a -1/-1 counter on target creature.
 End

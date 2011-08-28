@@ -8,4 +8,5 @@ SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | Tgt$ TgtC | IsCurse$ T
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshformer.jpg
 SVar:Rarity:Uncommon
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/45.jpg
+Oracle:{W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn. (A creature with fear can't be blocked except by artifact creatures and/or black creatures.)
 End

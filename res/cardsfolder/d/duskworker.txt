@@ -9,4 +9,5 @@ SVar:TrigRegen:AB$Regenerate | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskworker.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/166.jpg
+Oracle:Whenever Duskworker becomes blocked, regenerate it.\n{3}: Duskworker gets +1/+0 until end of turn.
 End

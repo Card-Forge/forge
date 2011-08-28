@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/donate.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/31.jpg
+Oracle:Target player gains control of target permanent you control.
 End

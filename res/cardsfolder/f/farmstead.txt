@@ -13,4 +13,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/203.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/205.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/203.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/204.jpg
+Oracle:Enchant land\nEnchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
 End

@@ -12,4 +12,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/16.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/14.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/9.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/9.jpg
+Oracle:{B}{B}: Counter target green spell.
 End

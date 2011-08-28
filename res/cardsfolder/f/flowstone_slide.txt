@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/83.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/186.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/203.jpg
+Oracle:All creatures get +X/-X until end of turn.
 End

@@ -12,4 +12,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameblast_dragon.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/133.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/100.jpg
+Oracle:Flying\nWhenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player.
 End

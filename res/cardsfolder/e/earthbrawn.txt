@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbrawn.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/119.jpg
+Oracle:Target creature gets +3/+3 until end of turn.\nReinforce 1-{1}{G} ({1}{G}, Discard this card: Put a +1/+1 counter on target creature.)
 End

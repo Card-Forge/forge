@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolution_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/127.jpg
+Oracle:Choose one - Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library; or return target creature card from your graveyard to your hand; or target creature gains flying until end of turn.
 End

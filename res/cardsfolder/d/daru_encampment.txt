@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_encampment.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/315.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{W}, {T}: Target Soldier creature gets +1/+1 until end of turn.
 End

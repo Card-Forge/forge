@@ -9,4 +9,5 @@ SVar:DBBounce:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disappear.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/30.jpg
+Oracle:Enchant creature\n{U}: Return enchanted creature and Disappear to their owners' hands.
 End

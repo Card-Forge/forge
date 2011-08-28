@@ -10,4 +10,5 @@ SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/99.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/337.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/297.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/369.jpg
+Oracle:{T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
 End

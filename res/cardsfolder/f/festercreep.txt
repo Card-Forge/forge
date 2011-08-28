@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festercreep.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/62.jpg
+Oracle:Festercreep enters the battlefield with a +1/+1 counter on it.\n{1}{B}, Remove a +1/+1 counter from Festercreep: All other creatures get -1/-1 until end of turn.
 End

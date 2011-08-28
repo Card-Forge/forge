@@ -8,4 +8,5 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | KW$ Trampl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_pathcutter.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/87.jpg
+Oracle:Whenever Fangren Pathcutter attacks, attacking creatures gain trample until end of turn.
 End

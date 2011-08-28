@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME ge
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_ripper.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/106.jpg
+Oracle:{2}{B}: Dross Ripper gets +1/+1 until end of turn.
 End

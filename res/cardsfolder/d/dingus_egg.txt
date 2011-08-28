@@ -16,4 +16,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/333.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/280.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/244.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/242.jpg
+Oracle:Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
 End

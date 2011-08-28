@@ -6,4 +6,5 @@ PT:8/8
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fusion_elemental.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/107.jpg
+Oracle:
 End

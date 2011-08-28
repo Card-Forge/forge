@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_brownie.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/231.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/130.jpg
+Oracle:{2}{G}, {T}: Untap target creature.
 End

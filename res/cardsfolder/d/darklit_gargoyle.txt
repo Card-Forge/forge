@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ B | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ CARDNAME gets
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/7.jpg
+Oracle:Flying\n{B}: Darklit Gargoyle gets +2/-1 until end of turn.
 End

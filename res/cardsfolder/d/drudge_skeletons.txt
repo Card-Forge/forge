@@ -18,4 +18,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/95.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/123.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/15.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/15.jpg
+Oracle:{B}: Regenerate Drudge Skeletons. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
 End

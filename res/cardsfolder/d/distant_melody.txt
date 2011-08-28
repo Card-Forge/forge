@@ -10,4 +10,5 @@ SVar:NeedsToPlay:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_melody.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/32.jpg
+Oracle:Choose a creature type. Draw a card for each permanent you control of that type.
 End

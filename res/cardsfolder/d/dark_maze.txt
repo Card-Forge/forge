@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_maze.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/30.jpg|2
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/80.jpg
+Oracle:Defender (This creature can't attack.)\n{0}: Dark Maze can attack this turn as though it didn't have defender.  Exile it at the beginning of the next end step.
 End

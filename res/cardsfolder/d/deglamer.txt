@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deglamer.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/118.jpg
+Oracle:Choose target artifact or enchantment. Its owner shuffles it into his or her library.
 End

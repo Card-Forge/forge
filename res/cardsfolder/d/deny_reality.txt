@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 3 U B | ValidTgts$ Permanent | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/19.jpg
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nReturn target permanent to its owner's hand.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_hedge_mage.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/195.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/137.jpg
+Oracle:When Duergar Hedge-Mage enters the battlefield, if you control two or more Mountains, you may destroy target artifact.\nWhen Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
 End

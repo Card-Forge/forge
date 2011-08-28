@@ -7,4 +7,5 @@ A:AB$ Counter | Cost$ U T Discard<1/Card> | TargetType$ Spell,Activated,Triggere
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_escort.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/74.jpg
+Oracle:{U}, {T}, Discard a card: Counter target spell or ability that targets a creature.
 End

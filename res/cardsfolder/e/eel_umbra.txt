@@ -10,4 +10,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eel_umbra.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/65.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +1/+1.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 End

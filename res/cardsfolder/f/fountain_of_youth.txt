@@ -9,4 +9,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/372.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/100.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/286.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/323.jpg
+Oracle:{2}, {T}: You gain 1 life.
 End

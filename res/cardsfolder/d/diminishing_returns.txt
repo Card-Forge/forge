@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diminishing_returns.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/65.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/39.jpg
+Oracle:Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.
 End

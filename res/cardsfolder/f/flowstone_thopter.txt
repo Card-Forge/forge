@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | KW$ Flying | SpellDescription$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_thopter.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/132.jpg
+Oracle:{1}: Flowstone Thopter gets +1/-1 and gains flying until end of turn.
 End

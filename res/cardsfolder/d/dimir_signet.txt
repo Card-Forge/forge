@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_signet.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/260.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/246.jpg
+Oracle:{1}, {T}: Add {U}{B} to your mana pool.
 End

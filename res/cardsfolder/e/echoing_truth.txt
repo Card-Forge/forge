@@ -5,4 +5,5 @@ Text:Return target nonland permanent and all other permanents with the same name
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46162.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/21.jpg
+Oracle:Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
 End

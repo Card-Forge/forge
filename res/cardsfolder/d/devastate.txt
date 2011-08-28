@@ -7,4 +7,5 @@ SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastate.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/87.jpg
+Oracle:Destroy target land. Devastate deals 1 damage to each creature and each player.
 End

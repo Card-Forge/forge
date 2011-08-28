@@ -7,4 +7,5 @@ K:eqPump 2:+2/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_axe.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/149.jpg
+Oracle:Darksteel Axe is indestructible. (Effects that say "destroy" don't destroy it.)\nEquipped creature gets +2/+0.\nEquip {2}
 End

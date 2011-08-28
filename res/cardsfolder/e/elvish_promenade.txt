@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_promenade.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/208.jpg
+Oracle:Put a 1/1 green Elf Warrior creature token onto the battlefield for each Elf you control.
 End

@@ -13,4 +13,5 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/93.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/91.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/92.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/77.jpg
+Oracle:Search your library for a card and put that card into your hand. Then shuffle your library.
 End

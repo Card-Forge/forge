@@ -11,4 +11,5 @@ SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/215.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/303.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/5.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/178.jpg
+Oracle:Destroy target artifact. You gain life equal to its converted mana cost.
 End

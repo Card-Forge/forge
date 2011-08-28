@@ -9,4 +9,5 @@ SVar:AltCost:Cost$ PayLife<6> Sac<3/Creature.Black> | Description$ You may pay 6
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demon_of_deaths_gate.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/92.jpg
+Oracle:You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost.\nFlying, trample
 End

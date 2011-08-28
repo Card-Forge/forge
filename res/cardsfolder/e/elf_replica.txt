@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elf_replica.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/167.jpg
+Oracle:{1}{G}, Sacrifice Elf Replica: Destroy target enchantment.
 End

@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card97221.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/49.jpg
+Oracle:Douse in Gloom deals 2 damage to target creature and you gain 2 life.
 End

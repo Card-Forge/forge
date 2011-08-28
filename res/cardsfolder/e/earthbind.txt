@@ -9,4 +9,5 @@ SetInfo:LEA|Common|http://magiccards.info/scans/en/al/146.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/147.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/146.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/146.jpg
+Oracle:Enchant creature\nWhen Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."
 End

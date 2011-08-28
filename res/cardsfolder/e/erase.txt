@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target e
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erase.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/7.jpg
+Oracle:Exile target enchantment.
 End

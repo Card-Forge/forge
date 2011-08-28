@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthshaker.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/165.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, Earthshaker deals 2 damage to each creature without flying.
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dry_spell.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/7.jpg|2
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/124.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/12.jpg
+Oracle:Dry Spell deals 1 damage to each creature and each player.
 End

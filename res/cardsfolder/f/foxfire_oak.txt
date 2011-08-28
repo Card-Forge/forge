@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ RG RG RG | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire_oak.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/115.jpg
+Oracle:{R/G}{R/G}{R/G}: Foxfire Oak gets +3/+0 until end of turn.
 End

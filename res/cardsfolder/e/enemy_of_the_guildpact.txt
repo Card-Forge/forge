@@ -7,4 +7,5 @@ K:Protection:Card.MultiColor:Protection from multicolored
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enemy_of_the_guildpact.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/44.jpg
+Oracle:Protection from multicolored
 End

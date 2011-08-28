@@ -15,4 +15,5 @@ SVar:Y:Count$Valid Card.Self+countersGE3LEVEL
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_cryptologist.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/66.jpg
+Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n0/1\n{T}: Draw a card, then discard a card.\nLEVEL 3+\n0/1\n{T}: Draw a card.
 End

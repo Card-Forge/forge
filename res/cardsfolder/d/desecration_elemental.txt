@@ -11,4 +11,5 @@ SVar:AntiBuffedBy:Card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_elemental.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/45.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever a player casts a spell, sacrifice a creature.
 End

@@ -8,4 +8,5 @@ K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_malice.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/139.jpg
+Oracle:Protection from white\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

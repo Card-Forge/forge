@@ -8,4 +8,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredTargetController | L
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_charmer.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/61.jpg
+Oracle:Whenever Death Charmer deals combat damage to a creature, that creature's controller loses 2 life unless he or she pays {2}.
 End

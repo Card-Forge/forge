@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolving_wilds.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/272.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/228.jpg
+Oracle:{T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 End

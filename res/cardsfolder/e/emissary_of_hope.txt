@@ -10,4 +10,5 @@ SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_hope.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/3.jpg
+Oracle:Flying\nWhenever Emissary of Hope deals combat damage to a player, you gain 1 life for each artifact that player controls.
 End

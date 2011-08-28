@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_march.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/11.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/26.jpg
+Oracle:Enchant creature\nWhen enchanted creature leaves the battlefield, its controller sacrifices a creature.
 End

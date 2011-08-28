@@ -7,4 +7,5 @@ K:Protection from green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dunerider_outlaw.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/86.jpg
+Oracle:Protection from green\nAt the beginning of each end step, if Dunerider Outlaw dealt damage to an opponent this turn, put a +1/+1 counter on it.
 End

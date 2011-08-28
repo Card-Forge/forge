@@ -12,4 +12,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/159.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/232.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/131.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/246.jpg
+Oracle:{T}: Add {G}{G} to your mana pool.
 End

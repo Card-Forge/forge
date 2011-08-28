@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fishliver_oil.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/77.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/17.jpg|2
+Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has islandwalk. (This creature is unblockable as long as defending player controls an Island.)
 End

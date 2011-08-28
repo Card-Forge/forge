@@ -9,4 +9,5 @@ SVar:BuffedBy:Card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_jester.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/42.jpg
+Oracle:Flying\nHellbent - Demon's Jester gets +2/+1 as long as you have no cards in hand.
 End

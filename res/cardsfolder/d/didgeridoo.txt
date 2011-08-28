@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/didgeridoo.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/130.jpg
+Oracle:{3}: You may put a Minotaur permanent card from your hand onto the battlefield.
 End

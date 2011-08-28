@@ -10,4 +10,5 @@ SVar:Y:Count$CardCounters.CHARGE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/200.jpg
+Oracle:Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\nLandfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
 End

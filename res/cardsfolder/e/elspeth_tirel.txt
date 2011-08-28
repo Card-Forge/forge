@@ -10,4 +10,5 @@ SVar:XLife:Count$TypeYouCtrl.Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/6.jpg
+Oracle:[+2] You gain 1 life for each creature you control.\n[-2] Put three 1/1 white Soldier creature tokens onto the battlefield.\n[-5] Destroy all other permanents except for lands and tokens. 
 End

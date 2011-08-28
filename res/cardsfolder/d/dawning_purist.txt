@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment.YouDontCtrl | Tgt
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawning_purist.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/22.jpg
+Oracle:Whenever Dawning Purist deals combat damage to a player, you may destroy target enchantment that player controls.\nMorph {1}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

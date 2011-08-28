@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/151.jpg
+Oracle:Enchant creature\nAs long as enchanted creature is green, it gets +1/+1 and has vigilance.\nAs long as enchanted creature is blue, it gets +1/+1 and has flying.
 End

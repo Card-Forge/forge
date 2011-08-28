@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_bomb.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/41.jpg
+Oracle:As an additional cost to cast Death Bomb, sacrifice a creature.\nDestroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
 End

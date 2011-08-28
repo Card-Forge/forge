@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungus_elemental.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/70.jpg
+Oracle:{G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate this ability only if Fungus Elemental entered the battlefield this turn.
 End

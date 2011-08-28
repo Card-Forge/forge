@@ -7,4 +7,5 @@ A:AB$ Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | V
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disruptive_student.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/69.jpg
+Oracle:{T}: Counter target spell unless its controller pays {1}.
 End

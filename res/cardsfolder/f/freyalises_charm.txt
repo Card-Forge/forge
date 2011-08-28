@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_charm.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/128.jpg
+Oracle:Whenever an opponent casts a black spell, you may pay {G}{G}. If you do, you draw a card.\n{G}{G}: Return Freyalise's Charm to its owner's hand.
 End

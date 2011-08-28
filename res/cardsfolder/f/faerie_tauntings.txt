@@ -7,4 +7,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_tauntings.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/112.jpg
+Oracle:Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life.
 End

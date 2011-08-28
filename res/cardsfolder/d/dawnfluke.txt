@@ -10,4 +10,5 @@ SVar:TrigPrevent:AB$ PreventDamage | Cost$ 0 | Tgt$ TgtCP | Amount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnfluke.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/12.jpg
+Oracle:Flash\nWhen Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to target creature or player this turn.\nEvoke {W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
 End

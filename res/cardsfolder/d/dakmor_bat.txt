@@ -7,4 +7,5 @@ K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_bat.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/8.jpg
+Oracle:Flying
 End

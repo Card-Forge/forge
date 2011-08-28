@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkwater_catacombs.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/319.jpg
+Oracle:{1}, {T}: Add {U}{B} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_urge.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/180.jpg
+Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, that player sacrifices a land.
 End

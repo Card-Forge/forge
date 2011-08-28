@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Batt
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flood_plain.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/291.jpg
+Oracle:Flood Plain enters the battlefield tapped.\n{T}, Sacrifice Flood Plain: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
 End

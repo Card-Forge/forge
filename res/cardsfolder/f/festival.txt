@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festival.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/81.jpg
+Oracle:Cast Festival only during an opponent's upkeep.\nCreatures can't attack this turn.
 End

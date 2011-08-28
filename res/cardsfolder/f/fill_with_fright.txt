@@ -7,4 +7,5 @@ SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fill_with_fright.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/50.jpg
+Oracle:Target player discards two cards.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 End

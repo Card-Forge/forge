@@ -6,6 +6,5 @@ A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Fe
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79094.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/108.jpg
+Oracle:Creatures you control get +1/+0 and gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
 End
-
-

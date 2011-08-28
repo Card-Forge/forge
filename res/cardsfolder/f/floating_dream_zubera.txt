@@ -9,4 +9,5 @@ PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80507.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/61.jpg
+Oracle:When Floating-Dream Zubera dies, draw a card for each Zubera that died this turn.
 End

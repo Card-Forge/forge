@@ -10,4 +10,5 @@ A:AB$ PutCounter | Cost$ 2 W | CounterType$ HEALING | CounterNum$ 1 | SpellDescr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fylgja.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/250.jpg
+Oracle:Enchant creature\nFylgja enters the battlefield with four healing counters on it.\nRemove a healing counter from Fylgja: Prevent the next 1 damage that would be dealt to enchanted creature this turn.\n{2}{W}: Put a healing counter on Fylgja.
 End

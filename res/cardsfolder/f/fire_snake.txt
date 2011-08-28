@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/fire_snake.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/132.jpg
+Oracle:When Fire Snake dies, destroy target land.
 End

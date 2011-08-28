@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_catacomb
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/224.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/224.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/226.jpg
+Oracle:Drowned Catacomb enters the battlefield tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B} to your mana pool.
 End

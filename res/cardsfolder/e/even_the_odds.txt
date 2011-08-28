@@ -7,4 +7,5 @@ SVar:X:Count$Valid Creature.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/even_the_odds.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/6.jpg
+Oracle:Cast Even the Odds only if you control fewer creatures than each opponent.\nPut three 1/1 white Soldier creature tokens onto the battlefield.
 End

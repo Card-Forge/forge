@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Choose targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_scorpion.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/164.jpg
+Oracle:Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.
 End

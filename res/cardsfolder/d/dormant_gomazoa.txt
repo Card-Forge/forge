@@ -11,4 +11,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dormant_gomazoa.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/62.jpg
+Oracle:Flying\nDormant Gomazoa enters the battlefield tapped.\nDormant Gomazoa doesn't untap during your untap step.\nWhenever you become the target of a spell, you may untap Dormant Gomazoa.
 End

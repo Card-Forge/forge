@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_savagery.jpg
 SVar:Rarity:Rare
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/115.jpg
+Oracle:Put four +1/+1 counters on each creature you control.\nCycling {4}{G}{G} ({4}{G}{G}, Discard this card: Draw a card.)\nWhen you cycle Decree of Savagery, you may put four +1/+1 counters on target creature.
 End

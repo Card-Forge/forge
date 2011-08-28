@@ -6,4 +6,5 @@ PT:4/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_servant.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/137.jpg
+Oracle:If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
 End

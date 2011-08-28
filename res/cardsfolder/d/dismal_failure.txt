@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ Tg
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismal_failure.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/39.jpg
+Oracle:Counter target spell. Its controller discards a card.
 End

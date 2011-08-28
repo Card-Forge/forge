@@ -7,4 +7,5 @@ K:Vanishing:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_grub.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/69.jpg
+Oracle:Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Deadly Grub dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)
 End

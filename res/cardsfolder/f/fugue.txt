@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fugue.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/62.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/137.jpg
+Oracle:Target player discards three cards.
 End

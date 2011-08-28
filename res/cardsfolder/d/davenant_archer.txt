@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/davenant_archer.
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/299.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/15.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/176.jpg
+Oracle:{T}: D'Avenant Archer deals 1 damage to target attacking or blocking creature.
 End

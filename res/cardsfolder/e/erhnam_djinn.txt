@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erhnam_djinn.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/32.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/113.jpg
+Oracle:At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
 End

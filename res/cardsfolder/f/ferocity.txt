@@ -10,4 +10,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredAttacker | Count
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocity.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/245.jpg
+Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
 End

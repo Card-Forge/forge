@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_mourning.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/134.jpg
+Oracle:Put target card from your graveyard on top of your library.
 End

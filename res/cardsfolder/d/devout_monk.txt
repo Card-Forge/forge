@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/devout_monk.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/14.jpg
+Oracle:When Devout Monk enters the battlefield, you gain 1 life.
 End

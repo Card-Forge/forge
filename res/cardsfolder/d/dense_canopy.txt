@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_canopy.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/125.jpg
+Oracle:Creatures with flying can block only creatures with flying.
 End

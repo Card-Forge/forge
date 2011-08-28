@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_branchbender.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/204.jpg
+Oracle:{T}: Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.
 End

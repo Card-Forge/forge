@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 PB PB | IsCurse$ True | Tgt$ TgtC | NumAtt$ -5 | NumDef$ -5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismember.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/57.jpg
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nTarget creature gets -5/-5 until end of turn.
 End

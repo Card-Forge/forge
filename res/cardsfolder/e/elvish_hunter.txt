@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hunter.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/72.jpg|3
+Oracle:{1}{G}, {T}: Target creature doesn't untap during its controller's next untap step.
 End

@@ -9,4 +9,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dying_wail.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/58.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, target player discards two cards.
 End

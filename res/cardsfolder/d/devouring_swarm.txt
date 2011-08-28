@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_swarm.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/91.jpg
+Oracle:Flying\nSacrifice a creature: Devouring Swarm gets +1/+1 until end of turn.
 End

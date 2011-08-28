@@ -8,4 +8,5 @@ A:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frostwind_invoker.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/68.jpg
+Oracle:Flying\n{8}: Creatures you control gain flying until end of turn.
 End

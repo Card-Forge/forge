@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_cave.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/317.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/273.jpg
+Oracle:Forgotten Cave enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\nCycling {R} ({R}, Discard this card: Draw a card.)
 End

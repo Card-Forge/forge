@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_battlemage.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/40.jpg
+Oracle:{W}, {T}: Prevent the next 2 damage that would be dealt to you this turn.\n{B}, {T}: Target creature gets -1/-1 until end of turn.
 End

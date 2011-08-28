@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_pendant.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/113.jpg
+Oracle:Darksteel Pendant is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\n{1}, {T}: Look at the top card of your library. You may put that card on the bottom of your library.
 End

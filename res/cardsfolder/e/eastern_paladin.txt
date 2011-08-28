@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/eastern_paladin.
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/131.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/133.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/132.jpg
+Oracle:{B}{B}, {T}: Destroy target green creature.
 End

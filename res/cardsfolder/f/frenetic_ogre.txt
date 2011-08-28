@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_ogre.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/195.jpg
+Oracle:{R}, Discard a card at random: Frenetic Ogre gets +3/+0 until end of turn.
 End

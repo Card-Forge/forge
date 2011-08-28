@@ -11,4 +11,5 @@ SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/121.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/179.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/196.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/132.jpg
+Oracle:Destroy target artifact or land.
 End

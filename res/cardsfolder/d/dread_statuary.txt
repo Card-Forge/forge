@@ -7,4 +7,5 @@ A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 4 | Toughness$ 2 | Types$ Creat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/135.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{4}: Dread Statuary becomes a 4/2 Golem artifact creature until end of turn. It's still a land.
 End

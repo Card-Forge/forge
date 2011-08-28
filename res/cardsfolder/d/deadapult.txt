@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/59.jpg
+Oracle:{R}, Sacrifice a Zombie: Deadapult deals 2 damage to target creature or player.
 End

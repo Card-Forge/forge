@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_celebration.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/90.jpg
+Oracle:Whenever you sacrifice another permanent, you may pay {2}. If you do, Furnace Celebration deals 2 damage to target creature or player.
 End
