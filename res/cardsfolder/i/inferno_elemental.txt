@@ -1,0 +1,10 @@
+Name:Inferno Elemental
+ManaCost:4 R R
+Types:Creature Elemental
+Text:no text
+PT:4/4
+T:Mode$ Blocks | ValidBlocked$ Card.Self | Execute$ TrigDealDamageAttack | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamageBlock | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
+SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3
+SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
+End
