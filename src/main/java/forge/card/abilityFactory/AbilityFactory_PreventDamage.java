@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class AbilityFactory_PreventDamage {
 
-    // Ex: A:SP$ PreventDamage | Cost$ W | Tgt$ TgtC | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn.
+    // Ex: A:SP$ PreventDamage | Cost$ W | Tgt$ TgtC | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to ...
     // http://www.slightlymagic.net/wiki/Forge_AbilityFactory#PreventDamage
 
     /**
@@ -216,7 +216,9 @@ public class AbilityFactory_PreventDamage {
                             flag |= CombatUtil.combatantWouldBeDestroyed(c);
                         } else if (o instanceof Player) {
                             Player p = (Player) o;
-                            flag |= (p.isComputer() && CombatUtil.lifeInDanger(AllZone.getCombat()));
+                            flag |= (p.isComputer() && 
+                                    ((CombatUtil.wouldLoseLife(AllZone.getCombat()) && sa.isAbility()) ||
+                                    CombatUtil.lifeInDanger(AllZone.getCombat()))) ;
                         }
                     }
 
