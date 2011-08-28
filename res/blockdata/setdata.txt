@@ -1,4 +1,4 @@
-Index:0|Code2:MBP|Code3:MBP|Name:Media Insert Promo
+Index:0|Code2:MBP|Code3:MBP|Name:Media Insert Promo|Alias:PRO
 Index:1|Code2:A|Code3:LEA|Name:Limited Edition Alpha
 Index:2|Code2:B|Code3:LEB|Name:Limited Edition Beta
 Index:3|Code2:U|Code3:2ED|Name:Unlimited
@@ -32,7 +32,7 @@ Index:28|Code2:P3|Code3:PTK|Name:Portal Three Kingdoms
 Index:29|Code2:ST|Code3:S99|Name:Starter 1999
 
 Index:30|Code2:MM|Code3:MMQ|Name:Mercadian Masques
-Index:31|Code2:NE|Code3:NMS|Name:Nemesis
+Index:31|Code2:NE|Code3:NMS|Name:Nemesis|Alias:NEM
 Index:32|Code2:S2K|Code3:S00|Name:Starter 2000
 Index:33|Code2:PY|Code3:PCY|Name:Prophecy
 Index:34|Code2:IN|Code3:INV|Name:Invasion
@@ -70,7 +70,7 @@ Index:62|Code2:MOR|Code3:MOR|Name:Morningtide
 Index:63|Code2:SHM|Code3:SHM|Name:Shadowmoor
 Index:64|Code2:EVE|Code3:EVE|Name:Eventide
 Index:65|Code2:ALA|Code3:ALA|Name:Shards of Alara
-Index:66|Code2:CFX|Code3:CFX|Name:Conflux
+Index:66|Code2:CFX|Code3:CFX|Name:Conflux|Alias:CON
 Index:67|Code2:ARB|Code3:ARB|Name:Alara Reborn
 Index:68|Code2:M10|Code3:M10|Name:Magic 2010
 Index:69|Code2:ZEN|Code3:ZEN|Name:Zendikar
