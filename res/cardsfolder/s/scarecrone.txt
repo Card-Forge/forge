@@ -5,7 +5,6 @@ Text:no text
 PT:1/2
 A:AB$ Draw | Cost$ 1 T Sac<1/Scarecrow> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ ChangeZone | Cost$ 4 T | TgtPrompt$ Choose target artifact creature card in your graveyard | ValidTgts$ Artifact.Creature+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target artifact creature card from your graveyard to the battlefield.
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarecrone.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/172.jpg

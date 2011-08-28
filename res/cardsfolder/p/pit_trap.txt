@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$ Destroy | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | NoRegen$ True | SpellDescription$ Destroy target attacking creature without flying. It can't be regenerated.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_trap.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/307.jpg

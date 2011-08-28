@@ -8,7 +8,7 @@ A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ U | SpellDescription$ Add U 
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentad_prism.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/143.jpg

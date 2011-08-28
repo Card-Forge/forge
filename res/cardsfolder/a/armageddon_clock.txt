@@ -8,6 +8,7 @@ A:AB$ RemoveCounter | Cost$ 4 | CounterType$ DOOM | CounterNum$ 1 | ActivationPh
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Each | NumDmg$ X
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DOOM | CounterNum$ 1
 SVar:X:Count$CardCounters.DOOM
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armageddon_clock.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/234.jpg

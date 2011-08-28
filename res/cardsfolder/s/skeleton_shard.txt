@@ -3,7 +3,8 @@ ManaCost:3
 Types:Artifact
 Text:no text
 A:AB$ ChangeZone | Cost$ 3 T | CostDesc$ You may pay 3,Tap:  | ChangeType$ Creature.Artifact+YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact creature card from your graveyard to your hand.
-A:AB$ ChangeZone | Cost$ B T | CostDesc$ or B,Tap:  | ChangeType$ Creature.Artifact+YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact creature card from your graveyard to your hand.
+A:AB$ ChangeZone | Cost$ B T | CostDesc$ or B, Tap:  | ChangeType$ Creature.Artifact+YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact creature card from your graveyard to your hand.
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_shard.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/242.jpg

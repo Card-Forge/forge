@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ConditionPresent$ Creature | ConditionCompare$ GE3 | Defined$ TriggeredCard | RememberChanged$ True | Origin$ Battlefield | Destination$ Exile
 SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/portcullis.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/133.jpg
