@@ -46,6 +46,11 @@ for root, dirnames, filenames in os.walk(folder):
         name = line.replace('Name:', '')
         search = '\n%s\n' % name
         found = mtgData.find(search)
+
+        if found == -1:
+            err.write(cleanName + '... NOT FOUND\n')
+            continue
+
         endFound = mtgData.find('\n\n', found)
 
         block = mtgData[found+1:endFound]
