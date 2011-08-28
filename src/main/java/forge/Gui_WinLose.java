@@ -166,10 +166,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void continueButton_actionPerformed(ActionEvent e) {
+        // issue 147 - keep battlefield up following win/loss
+        JFrame frame = (JFrame) AllZone.getDisplay();
+        frame.dispose();
+
         //open up "Game" screen
-        
         PrepareForNextRound();
         AllZone.getDisplay().setVisible(true);
+        frame.setEnabled(true);
         dispose();
     }
     
@@ -205,9 +209,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void restartButton_actionPerformed(ActionEvent e) {
+        // issue 147 - keep battlefield up following win/loss
+        JFrame frame = (JFrame) AllZone.getDisplay();
+        frame.dispose();
+        
         model.match.reset();
         PrepareForNextRound();
         AllZone.getDisplay().setVisible(true);
+        frame.setEnabled(true);
         dispose();
     }
 
@@ -324,6 +333,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void quitButton_actionPerformed(ActionEvent e) {
+        // issue 147 - keep battlefield up following win/loss
+        JFrame frame = (JFrame) AllZone.getDisplay();
+        frame.dispose();
+        frame.setEnabled(true);
+        
         //are we on a quest?
         if (AllZone.getQuestData() == null) {
             new OldGuiNewGame();
