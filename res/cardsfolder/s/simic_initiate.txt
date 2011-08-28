@@ -1,0 +1,10 @@
+Name:Simic Initiate
+ManaCost:G
+Types:Creature Human Mutant
+Text:no text
+PT:0/0
+K:Graft 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_initiate.jpg
+End
