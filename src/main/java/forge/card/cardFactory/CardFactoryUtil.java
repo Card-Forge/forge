@@ -2,10 +2,12 @@ package forge.card.cardFactory;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.*;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
@@ -4818,6 +4820,23 @@ public class CardFactoryUtil {
                     }
                 });
 
+            }
+
+        }// while shouldModular
+        
+        if (hasKeyword(card, "Graft") != -1) {
+            int n = hasKeyword(card, "Graft");
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+
+                final int m = Integer.parseInt(parse.substring(6));
+
+                final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Creature.Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.", card, true);
+                AbilityFactory af = new AbilityFactory();
+                myTrigger.setOverridingAbility(af.getAbility("AB$ MoveCounter | Cost$ 0 | Source$ Self | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1", card));
+                card.addTrigger(myTrigger);
+                
+                card.addIntrinsicKeyword("etbCounter:P1P1:"+m);
             }
 
         }// while shouldModular
