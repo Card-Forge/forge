@@ -23,18 +23,18 @@ public class CostDiscard extends CostPartWithList {
 	@Override
 	public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Discard");
+        sb.append("Discard ");
         
         Integer i = convertAmount();
         
         if (getThis()) {
-        	sb.append(" ").append(type);
+        	sb.append(type);
         } 
         else if (type.equals("Hand")) {
-        	sb.append(" your hand");
+        	sb.append("your hand");
         } 
         else if (type.equals("LastDrawn")) {
-        	sb.append(" last drawn card");
+        	sb.append("last drawn card");
         } 
         else {
         	StringBuilder desc = new StringBuilder();
