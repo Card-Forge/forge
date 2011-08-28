@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ G | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytospawn_shambler.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/82.jpg
 End

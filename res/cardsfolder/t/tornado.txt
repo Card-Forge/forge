@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.VELOCITY/Times.3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tornado.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/86.jpg
 End

@@ -9,4 +9,5 @@ SVar:DBTutor:DB$ ChangeZone | Defined$ TriggeredPlayer | Origin$ Library | Desti
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maralen_of_the_mornsong.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/65.jpg
 End

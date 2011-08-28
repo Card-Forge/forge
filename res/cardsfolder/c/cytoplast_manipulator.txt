@@ -8,4 +8,5 @@ A:AB$ GainControl | Cost$ U T | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoplast_manipulator.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/23.jpg
 End

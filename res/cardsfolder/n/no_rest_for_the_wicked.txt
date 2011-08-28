@@ -3,4 +3,6 @@ ManaCost:1 B
 Types:Enchantment
 Text:no text
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered Graveyard from Battlefield Card.Creature+YouCtrl
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/142.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/165.jpg
 End

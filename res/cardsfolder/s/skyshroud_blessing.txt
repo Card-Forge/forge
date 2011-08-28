@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_blessing.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/92.jpg
 End

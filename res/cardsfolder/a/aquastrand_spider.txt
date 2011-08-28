@@ -8,4 +8,6 @@ A:AB$ Pump | Cost$ G | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquastrand_spider.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/141.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/80.jpg
 End
