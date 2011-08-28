@@ -1,0 +1,14 @@
+Name:Goblin Archaeologist
+ManaCost:1 R
+Types:Creature Goblin Artificer
+Text:no text
+PT:1/2
+A:AB$ FlipACoin | Cost$ R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | WinSubAbility$ DBDestroy | LoseSubAbility$ DBSacSelf | SpellDescription$ Flip a coin. If you win the flip, destroy target artifact and untap Goblin Archaeologist. If you lose the flip, sacrifice Goblin Archaeologist.
+SVar:DBDestroy:DB$ Destroy | Cost$ 0 | Defined$ Targeted | SubAbility$ DBUntapSelf
+SVar:DBUntapSelf:DB$ Untap | Cost$ 0 | Defined$ Self
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_archaeologist.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/63.jpg
+End

@@ -3095,10 +3095,12 @@ res/cardsfolder/g/gnathosaur.txt svneol=native#text/plain
 res/cardsfolder/g/go_for_the_throat.txt svneol=native#text/plain
 res/cardsfolder/g/goatnapper.txt svneol=native#text/plain
 res/cardsfolder/g/gobhobbler_rats.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_archaeologist.txt -text
 res/cardsfolder/g/goblin_arsonist.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_artillery.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_assault.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_balloon_brigade.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_bangchuckers.txt -text
 res/cardsfolder/g/goblin_berserker.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bombardment.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_brigand.txt svneol=native#text/plain
@@ -6881,6 +6883,7 @@ res/cardsfolder/s/sky_ruin_drake.txt svneol=native#text/plain
 res/cardsfolder/s/sky_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/sky_swallower.txt svneol=native#text/plain
 res/cardsfolder/s/sky_weaver.txt svneol=native#text/plain
+res/cardsfolder/s/skyclaw_thrash.txt -text
 res/cardsfolder/s/skycloud_egg.txt svneol=native#text/plain
 res/cardsfolder/s/skycloud_expanse.txt svneol=native#text/plain
 res/cardsfolder/s/skyhunter_cub.txt svneol=native#text/plain
