@@ -10,5 +10,4 @@
   </fileset>
   <filter name="WriteProtectedFiles" enabled="true"/>
   <filter name="UnOpenedFiles" enabled="true"/>
-  <filter name="FilesInSync" enabled="true"/>
 </fileset-config>
