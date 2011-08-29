@@ -1,6 +1,10 @@
 package forge;
 
 
+import java.util.Iterator;
+import java.util.Map;
+
+import net.slightlymagic.braids.util.UtilFunctions;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.PreloadingCardFactory;
 import forge.card.mana.ManaPool;
@@ -9,16 +13,10 @@ import forge.deck.DeckManager;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.model.FGameState;
-import forge.model.FModel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
-
-import java.util.Iterator;
-import java.util.Map;
-
-import net.slightlymagic.braids.util.UtilFunctions;
-
+import forge.quest.data.QuestData;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -28,44 +26,59 @@ import net.slightlymagic.braids.util.UtilFunctions;
  * @author Forge
  * @version $Id$
  */
-public class AllZone implements NewConstants {
+public final class AllZone implements NewConstants {
     //only for testing, should read decks from local directory
-//  public static final IO IO = new IO("all-decks");
+    //  public static final IO IO = new IO("all-decks");
+
+    /**
+     * Do not instantiate.
+     */
+    private AllZone() {
+        // blank
+    }
 
 
-    /** Constant <code>QuestData</code> */
-    private static forge.quest.data.QuestData QuestData = null;
-    /** Constant <code>QuestAssignment</code> */
-    private static Quest_Assignment QuestAssignment = null;
-    /** Constant <code>NameChanger</code> */
-    private static final NameChanger NameChanger = new NameChanger();
-    /** Constant <code>ColorChanger</code> */
-    private static final ColorChanger colorChanger = new ColorChanger();
+    /** Global <code>questData</code>. */
+    private static forge.quest.data.QuestData questData = null;
+
+    /** Global <code>QuestAssignment</code>. */
+    private static Quest_Assignment questAssignment = null;
+
+    /** Constant <code>NAME_CHANGER</code>. */
+    private static final NameChanger NAME_CHANGER = new NameChanger();
+
+    /** Constant <code>COLOR_CHANGER</code>. */
+    private static final ColorChanger COLOR_CHANGER = new ColorChanger();
 
     // Phase is now a prerequisite for CardFactory
-    /** Constant <code>CardFactory</code> */
+    /** Global <code>cardFactory</code>. */
     private static CardFactoryInterface cardFactory = null;
 
-    /** Constant <code>InputControl</code> */
-    private static final InputControl InputControl = new InputControl();
-    
-    /** Game state observer <code>GameSummary</code> collects statistics and players' performance*/
+    /** Constant <code>inputControl</code>. */
+    private static final InputControl INPUT_CONTROL = new InputControl();
+
+    /** Game state observer <code>gameInfo</code> collects statistics and players' performance. */
     private static GameSummary gameInfo = new GameSummary();
-    /** Match State for quests are stored in a <code>QuestMatchState</code> class instance*/
+
+    /** 
+     * Match State for quests are stored in a <code>QuestMatchState</code> class instance.
+     * 
+     * @deprecated Variable 'matchState' must be private and have accessor methods.
+     */
     public static QuestMatchState matchState = new QuestMatchState();
 
     //initialized at Runtime since it has to be the last object constructed
 
-    /** Constant <code>Computer</code> */
-    private static ComputerAI_Input Computer;
+    /** Global <code>computer</code>. */
+    private static ComputerAI_Input computer;
 
     //shared between Input_Attack, Input_Block, Input_CombatDamage , InputState_Computer
 
-    /** Constant <code>Display</code> */
-    private static Display Display;
+    /** Global <code>display</code>. */
+    private static Display display;
 
-    /** Constant <code>DeckManager</code> */
-    private final static DeckManager dMgr = new DeckManager(ForgeProps.getFile(NEW_DECKS));
+    /** Constant <code>DECK_MGR</code>. */
+    private static final DeckManager DECK_MGR = new DeckManager(ForgeProps.getFile(NEW_DECKS));
 
     /**
      * <p>getHumanPlayer.</p>
@@ -104,17 +117,17 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static forge.quest.data.QuestData getQuestData() {
-        return QuestData;
+        return questData;
     }
 
     /**
      * <p>setQuestData.</p>
      *
-     * @param questData a {@link forge.quest.data.QuestData} object.
+     * @param questData0 a {@link forge.quest.data.QuestData} object.
      * @since 1.0.15
      */
-    public static void setQuestData(forge.quest.data.QuestData questData) {
-        QuestData = questData;
+    public static void setQuestData(final QuestData questData0) {
+        questData = questData0;
     }
 
     /**
@@ -124,7 +137,7 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static Quest_Assignment getQuestAssignment() {
-        return QuestAssignment;
+        return questAssignment;
     }
 
     /**
@@ -133,8 +146,8 @@ public class AllZone implements NewConstants {
      * @param assignment a {@link forge.Quest_Assignment} object.
      * @since 1.0.15
      */
-    public static void setQuestAssignment(Quest_Assignment assignment) {
-        QuestAssignment = assignment;
+    public static void setQuestAssignment(final Quest_Assignment assignment) {
+        questAssignment = assignment;
     }
 
     /**
@@ -144,7 +157,7 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static NameChanger getNameChanger() {
-        return NameChanger;
+        return NAME_CHANGER;
     }
 
     /**
@@ -208,18 +221,22 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static CardFactoryInterface getCardFactory() {
-    	if (cardFactory == null) {
-    		setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-    	}
+        if (cardFactory == null) {
+            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+        }
         return cardFactory;
     }
 
-    public static void setCardFactory(CardFactoryInterface factory) {
-    	UtilFunctions.checkNotNull("factory", factory);
-    	cardFactory = factory;
-	}
+    /**
+     * Setter for cardFactory.
+     * @param factory  the factory to set
+     */
+    public static void setCardFactory(final CardFactoryInterface factory) {
+        UtilFunctions.checkNotNull("factory", factory);
+        cardFactory = factory;
+    }
 
-	/**
+    /**
      * <p>getStack.</p>
      *
      * Will eventually be marked deprecated.
@@ -244,7 +261,7 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static InputControl getInputControl() {
-        return InputControl;
+        return INPUT_CONTROL;
     }
 
     /**
@@ -312,7 +329,7 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static ComputerAI_Input getComputer() {
-        return Computer;
+        return computer;
     }
 
     /**
@@ -321,8 +338,8 @@ public class AllZone implements NewConstants {
      * @param input a {@link forge.ComputerAI_Input} object.
      * @since 1.0.15
      */
-    public static void setComputer(ComputerAI_Input input) {
-        Computer = input;
+    public static void setComputer(final ComputerAI_Input input) {
+        computer = input;
     }
 
     /**
@@ -345,11 +362,10 @@ public class AllZone implements NewConstants {
      * @param attackers a {@link forge.Combat} object.
      * @since 1.0.15
      */
-    public static void setCombat(Combat attackers) {
+    public static void setCombat(final Combat attackers) {
         Singletons.getModel().getGameState().setCombat(attackers);
     }
 
-    //Human_Play, Computer_Play is different because Card.comesIntoPlay() is called when a card is added by PlayerZone.add(Card)
     /**
      * <p>getHumanBattlefield.</p>
      *
@@ -523,7 +539,7 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static ManaPool getComputerManaPool() {
-    	return AllZone.getComputerPlayer().getManaPool();
+        return AllZone.getComputerPlayer().getManaPool();
     }
 
     /**
@@ -533,17 +549,17 @@ public class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static Display getDisplay() {
-        return Display;
+        return display;
     }
 
     /**
      * <p>setDisplay.</p>
      *
-     * @param display a {@link forge.Display} object.
+     * @param display0 a {@link forge.Display} object.
      * @since 1.0.15
      */
-    public static void setDisplay(Display display) {
-        Display = display;
+    public static void setDisplay(final Display display0) {
+        display = display0;
     }
 
     /**
@@ -563,14 +579,15 @@ public class AllZone implements NewConstants {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.PlayerZone} object.
      */
-    public static PlayerZone getZone(Card c) {
+    public static PlayerZone getZone(final Card c) {
         Iterator<PlayerZone> it = getMap().values().iterator();
         PlayerZone p;
         while (it.hasNext()) {
             p = (PlayerZone) it.next();
 
-            if (AllZoneUtil.isCardInZone(p, c))
+            if (AllZoneUtil.isCardInZone(p, c)) {
                 return p;
+            }
         }
         return null;
     }
@@ -579,14 +596,23 @@ public class AllZone implements NewConstants {
      * <p>getZone.</p>
      *
      * @param zone a {@link java.lang.String} object.
-     * @param player a {@link forge.Player} object.
+     * @param finalPlayer a {@link forge.Player} object.
      * @return a {@link forge.PlayerZone} object.
      */
-    public static PlayerZone getZone(String zone, Player player) {
-        if (zone.equals("Stack")) player = null;
+    public static PlayerZone getZone(final String zone, final Player finalPlayer) {
+        Player player;
+        if (zone.equals("Stack")) {
+            player = null;
+        }
+        else {
+            player = finalPlayer;
+        }
+
         Object o = getMap().get(zone + player);
-        if (o == null)
+
+        if (o == null) {
             throw new RuntimeException("AllZone : getZone() invalid parameters " + zone + " " + player);
+        }
 
         return (PlayerZone) o;
     }
@@ -606,12 +632,13 @@ public class AllZone implements NewConstants {
         ((DefaultPlayerZone) getComputerBattlefield()).resetCardsAddedThisTurn();
         ((DefaultPlayerZone) getComputerGraveyard()).resetCardsAddedThisTurn();
     }
-    
+
     /** 
-     *  <p>getDeckManager.</p>
+     * <p>getDeckManager.</p>
+     * @return dMgr
      */
     public static DeckManager getDeckManager() {
-    	return dMgr;
+        return DECK_MGR;
     }
 
     /**
@@ -622,11 +649,11 @@ public class AllZone implements NewConstants {
      * @return the next timestamp
      */
     public static long getNextTimestamp() {
-    	return Singletons.getModel().getGameState().getNextTimestamp();
+        return Singletons.getModel().getGameState().getNextTimestamp();
     }
-    
+
     /**
-     * <p>Resets everything possible to set a new game</p>
+     * <p>Resets everything possible to set a new game.</p>
      */
     public static void newGameCleanup() {
 
@@ -661,17 +688,24 @@ public class AllZone implements NewConstants {
         // player.reset() now handles this
         //AllZone.getHumanPlayer().clearHandSizeOperations();
         //AllZone.getComputerPlayer().clearHandSizeOperations();
-        
+
         getTriggerHandler().clearRegistered();
 
     }
 
+    /**
+     * Getter for matchState.
+     * @return the matchState
+     */
     public static QuestMatchState getMatchState() {
         return matchState;
     }
 
+    /**
+     * Getter for colorChanger.
+     * @return the colorChanger
+     */
     public static ColorChanger getColorChanger() {
-        // TODO Auto-generated method stub
-        return colorChanger;
+        return COLOR_CHANGER;
     }
-}//AllZone
+} //AllZone
