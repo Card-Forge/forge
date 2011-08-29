@@ -1,13 +1,6 @@
 package forge.deck.generate;
 
-import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * <p>GenerateDeckUtil class.</p>

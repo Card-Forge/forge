@@ -20,10 +20,10 @@ public class Generate3ColorDeck {
     private String color2 = "";
     private String color3 = "";
     private Random r = null;
-    private Map<String, String> ClrMap = null;
+    private Map<String, String> crMap = null;
     private ArrayList<String> notColors = null;
-    private ArrayList<String> DL = null;
-    private Map<String, Integer> CardCounts = null;
+    private ArrayList<String> dL = null;
+    private Map<String, Integer> cardCounts = null;
 
     /**
      * <p>Constructor for Generate3ColorDeck.</p>
@@ -35,14 +35,14 @@ public class Generate3ColorDeck {
     public Generate3ColorDeck(String Clr1, String Clr2, String Clr3) {
         r = MyRandom.random;
 
-        CardCounts = new HashMap<String, Integer>();
+        cardCounts = new HashMap<String, Integer>();
 
-        ClrMap = new HashMap<String, String>();
-        ClrMap.put("white", "W");
-        ClrMap.put("blue", "U");
-        ClrMap.put("black", "B");
-        ClrMap.put("red", "R");
-        ClrMap.put("green", "G");
+        crMap = new HashMap<String, String>();
+        crMap.put("white", "W");
+        crMap.put("blue", "U");
+        crMap.put("black", "B");
+        crMap.put("red", "R");
+        crMap.put("green", "G");
 
         notColors = new ArrayList<String>();
         notColors.add("white");
@@ -75,10 +75,10 @@ public class Generate3ColorDeck {
         notColors.remove(color2);
         notColors.remove(color3);
 
-        DL = GenerateDeckUtil.getDualLandList(ClrMap.get(color1) + ClrMap.get(color2) + ClrMap.get(color3));
+        dL = GenerateDeckUtil.getDualLandList(crMap.get(color1) + crMap.get(color2) + crMap.get(color3));
         
-        for (int i = 0; i < DL.size(); i++) {
-            CardCounts.put(DL.get(i), 0);
+        for (int i = 0; i < dL.size(); i++) {
+            cardCounts.put(dL.get(i), 0);
         }
 
     }
@@ -119,7 +119,7 @@ public class Generate3ColorDeck {
         CardListFilter clrF = new CardListFilter() {
             public boolean addCard(Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
-                    if (c.getManaCost().contains(ClrMap.get(notColors.get(i))))
+                    if (c.getManaCost().contains(crMap.get(notColors.get(i))))
                         return false;
                 }
                 return true;
@@ -165,27 +165,27 @@ public class Generate3ColorDeck {
             for (int j = 0; j < i; j++) {
                 Card c = Cr1CMC.get(r.nextInt(Cr1CMC.size()));
                 Cr123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Cr2CMC.get(r.nextInt(Cr2CMC.size()));
                 Cr123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Cr3CMC.get(r.nextInt(Cr3CMC.size()));
                 Cr123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Sp1CMC.get(r.nextInt(Sp1CMC.size()));
                 Sp123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Sp2CMC.get(r.nextInt(Sp2CMC.size()));
                 Sp123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Sp3CMC.get(r.nextInt(Sp3CMC.size()));
                 Sp123.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
             }
 
             MinCMC[0] += 2;
@@ -215,7 +215,7 @@ public class Generate3ColorDeck {
             Card c = Cr123.get(r.nextInt(Cr123.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
                 c = Cr123.get(r.nextInt(Cr123.size()));
                 lc++;
             }
@@ -223,8 +223,8 @@ public class Generate3ColorDeck {
                 throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Cr123");
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
@@ -232,7 +232,7 @@ public class Generate3ColorDeck {
             Card c = Sp123.get(r.nextInt(Sp123.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
                 c = Sp123.get(r.nextInt(Sp123.size()));
                 lc++;
             }
@@ -240,8 +240,8 @@ public class Generate3ColorDeck {
                 throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Sp123");
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
@@ -255,25 +255,25 @@ public class Generate3ColorDeck {
 
         tmpDeck += "numLands:" + numLands + "\n";
 
-        int nDLands = (numLands / 4);
-        for (int i = 0; i < nDLands; i++) {
-            String s = DL.get(r.nextInt(DL.size()));
+        int ndLands = (numLands / 4);
+        for (int i = 0; i < ndLands; i++) {
+            String s = dL.get(r.nextInt(dL.size()));
 
             lc = 0;
-            while (CardCounts.get(s) > 3 || lc > 20) {
-                s = DL.get(r.nextInt(DL.size()));
+            while (cardCounts.get(s) > 3 || lc > 20) {
+                s = dL.get(r.nextInt(dL.size()));
                 lc++;
             }
             if (lc > 20)
-                throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- DL");
+                throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- dL");
 
             tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getHumanPlayer()));
-            int n = CardCounts.get(s);
-            CardCounts.put(s, n + 1);
+            int n = cardCounts.get(s);
+            cardCounts.put(s, n + 1);
             tmpDeck += s + "\n";
         }
 
-        numLands -= nDLands;
+        numLands -= ndLands;
 
         if (numLands > 0)    // attempt to optimize basic land counts according to color representation
         {
@@ -321,7 +321,7 @@ public class Generate3ColorDeck {
                     tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 
                     // just to prevent a null exception by the deck size fixing code
-                    CardCounts.put(ClrCnts[i].Color, nLand);
+                    cardCounts.put(ClrCnts[i].Color, nLand);
 
                     for (int j = 0; j <= nLand; j++)
                         tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
@@ -338,16 +338,16 @@ public class Generate3ColorDeck {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
                 lc = 0;
-                while (CardCounts.get(c.getName()) > 3 || lc > Size) {
+                while (cardCounts.get(c.getName()) > 3 || lc > Size) {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
                 if (lc > Size)
                     throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- undersize");
 
-                int n = CardCounts.get(c.getName());
+                int n = cardCounts.get(c.getName());
                 tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-                CardCounts.put(c.getName(), n + 1);
+                cardCounts.put(c.getName(), n + 1);
                 tmpDeck += "Added:" + c.getName() + "\n";
             }
         } else if (tDeck.size() > Size) {

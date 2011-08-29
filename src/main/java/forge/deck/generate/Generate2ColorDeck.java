@@ -19,10 +19,10 @@ public class Generate2ColorDeck {
     private String color1 = "";
     private String color2 = "";
     private Random r = null;
-    private Map<String, String> ClrMap = null;
+    private Map<String, String> clrMap = null;
     private ArrayList<String> notColors = null;
-    private ArrayList<String> DL = null;
-    private Map<String, Integer> CardCounts = null;
+    private ArrayList<String> dL = null;
+    private Map<String, Integer> cardCounts = null;
 
     /**
      * <p>Constructor for Generate2ColorDeck.</p>
@@ -33,14 +33,14 @@ public class Generate2ColorDeck {
     public Generate2ColorDeck(String Clr1, String Clr2) {
         r = MyRandom.random;
 
-        CardCounts = new HashMap<String, Integer>();
+        cardCounts = new HashMap<String, Integer>();
 
-        ClrMap = new HashMap<String, String>();
-        ClrMap.put("white", "W");
-        ClrMap.put("blue", "U");
-        ClrMap.put("black", "B");
-        ClrMap.put("red", "R");
-        ClrMap.put("green", "G");
+        clrMap = new HashMap<String, String>();
+        clrMap.put("white", "W");
+        clrMap.put("blue", "U");
+        clrMap.put("black", "B");
+        clrMap.put("red", "R");
+        clrMap.put("green", "G");
 
         notColors = new ArrayList<String>();
         notColors.add("white");
@@ -66,10 +66,10 @@ public class Generate2ColorDeck {
         notColors.remove(color1);
         notColors.remove(color2);
 
-        DL = GenerateDeckUtil.getDualLandList(ClrMap.get(color1) + ClrMap.get(color2));
+        dL = GenerateDeckUtil.getDualLandList(clrMap.get(color1) + clrMap.get(color2));
         
-        for (int i = 0; i < DL.size(); i++) {
-            CardCounts.put(DL.get(i), 0);
+        for (int i = 0; i < dL.size(); i++) {
+            cardCounts.put(dL.get(i), 0);
         }
 
     }
@@ -109,7 +109,7 @@ public class Generate2ColorDeck {
         CardListFilter clrF = new CardListFilter() {
             public boolean addCard(Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
-                    if (c.getManaCost().contains(ClrMap.get(notColors.get(i)))) {
+                    if (c.getManaCost().contains(clrMap.get(notColors.get(i)))) {
                         return false;
                     }
                 }
@@ -150,19 +150,19 @@ public class Generate2ColorDeck {
             for (int j = 0; j < i; j++) {
                 Card c = Cr1CMC.get(r.nextInt(Cr1CMC.size()));
                 Cr12.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Cr2CMC.get(r.nextInt(Cr2CMC.size()));
                 Cr12.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Sp1CMC.get(r.nextInt(Sp1CMC.size()));
                 Sp12.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
 
                 c = Sp2CMC.get(r.nextInt(Sp2CMC.size()));
                 Sp12.add(c);
-                CardCounts.put(c.getName(), 0);
+                cardCounts.put(c.getName(), 0);
             }
 
             MinCMC[0] += 2;
@@ -193,7 +193,7 @@ public class Generate2ColorDeck {
             Card c = Cr12.get(r.nextInt(Cr12.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
                 c = Cr12.get(r.nextInt(Cr12.size()));
                 lc++;
             }
@@ -202,8 +202,8 @@ public class Generate2ColorDeck {
             }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
@@ -211,7 +211,7 @@ public class Generate2ColorDeck {
             Card c = Sp12.get(r.nextInt(Sp12.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
                 c = Sp12.get(r.nextInt(Sp12.size()));
                 lc++;
             }
@@ -220,8 +220,8 @@ public class Generate2ColorDeck {
             }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
@@ -238,11 +238,11 @@ public class Generate2ColorDeck {
 
         int nDLands = (numLands / 6);
         for (int i = 0; i < nDLands; i++) {
-            String s = DL.get(r.nextInt(DL.size()));
+            String s = dL.get(r.nextInt(dL.size()));
 
             lc = 0;
-            while (CardCounts.get(s) > 3 || lc > 20) {
-                s = DL.get(r.nextInt(DL.size()));
+            while (cardCounts.get(s) > 3 || lc > 20) {
+                s = dL.get(r.nextInt(dL.size()));
                 lc++;
             }
             if (lc > 20) {
@@ -250,8 +250,8 @@ public class Generate2ColorDeck {
             }
 
             tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getHumanPlayer()));
-            int n = CardCounts.get(s);
-            CardCounts.put(s, n + 1);
+            int n = cardCounts.get(s);
+            cardCounts.put(s, n + 1);
             tmpDeck += s + "\n";
         }
 
@@ -308,7 +308,7 @@ public class Generate2ColorDeck {
                     tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 
                     // just to prevent a null exception by the deck size fixing code
-                    CardCounts.put(ClrCnts[i].Color, nLand);
+                    cardCounts.put(ClrCnts[i].Color, nLand);
 
                     for (int j = 0; j <= nLand; j++) {
                         tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
@@ -326,7 +326,7 @@ public class Generate2ColorDeck {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
                 lc = 0;
-                while (CardCounts.get(c.getName()) > 3 || lc > Size) {
+                while (cardCounts.get(c.getName()) > 3 || lc > Size) {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
@@ -334,9 +334,9 @@ public class Generate2ColorDeck {
                     throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- undersize");
                 }
 
-                int n = CardCounts.get(c.getName());
+                int n = cardCounts.get(c.getName());
                 tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-                CardCounts.put(c.getName(), n + 1);
+                cardCounts.put(c.getName(), n + 1);
                 tmpDeck += "Added:" + c.getName() + "\n";
             }
         } else if (tDeck.size() > Size) {
