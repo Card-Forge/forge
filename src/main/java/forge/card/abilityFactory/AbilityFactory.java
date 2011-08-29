@@ -23,7 +23,7 @@ public class AbilityFactory {
      *
      * @return a {@link forge.Card} object.
      */
-    public Card getHostCard() {
+    public final Card getHostCard() {
         return hostC;
     }
 
@@ -34,7 +34,7 @@ public class AbilityFactory {
      *
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<String, String> getMapParams() {
+    public final HashMap<String, String> getMapParams() {
         return mapParams;
     }
 
@@ -880,38 +880,45 @@ public class AbilityFactory {
                 SA = AbilityFactory_Combat.createDrawbackMustAttack(this);
             }
         }
-        
-        
-        if (SA == null)
+
+
+        if (SA == null) {
             throw new RuntimeException("AbilityFactory : SpellAbility was not created for " + hostCard.getName() + ". Looking for API: " + API);
+        }
 
         // *********************************************
         // set universal properties of the SpellAbility
 
         SA.setAbilityFactory(this);
 
-        if (hasSubAbility())
+        if (hasSubAbility()) {
             SA.setSubAbility(getSubAbility());
+        }
 
-        if (SA instanceof Spell_Permanent)
+        if (SA instanceof Spell_Permanent) {
         	SA.setDescription(SA.getSourceCard().getName());
+        }
         else if (hasSpDesc) {
             StringBuilder sb = new StringBuilder();
 
             if (!isDb) {    // SubAbilities don't have Costs or Cost descriptors
-                if (mapParams.containsKey("PrecostDesc"))
+                if (mapParams.containsKey("PrecostDesc")) {
                     sb.append(mapParams.get("PrecostDesc")).append(" ");
-                if (mapParams.containsKey("CostDesc"))
+                }
+                if (mapParams.containsKey("CostDesc")) {
                     sb.append(mapParams.get("CostDesc")).append(" ");
-                else
+                }
+                else {
                     sb.append(abCost.toString());
+                }
             }
 
             sb.append(mapParams.get("SpellDescription"));
 
             SA.setDescription(sb.toString());
-        } else
+        } else {
             SA.setDescription("");
+        }
 
         // StackDescriptions are overwritten by the AF type instead of through this
         //if (!isTargeted)
@@ -928,7 +935,7 @@ public class AbilityFactory {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private void makeRestrictions(SpellAbility sa) {
+    private void makeRestrictions(final SpellAbility sa) {
         // SpellAbility_Restrictions should be added in here
         SpellAbility_Restriction restrict = sa.getRestrictions();
         if (mapParams.containsKey("Flashback")) {
@@ -942,7 +949,7 @@ public class AbilityFactory {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private void makeConditions(SpellAbility sa) {
+    private void makeConditions(final SpellAbility sa) {
         // SpellAbility_Restrictions should be added in here
         SpellAbility_Condition condition = sa.getConditions();
         if (mapParams.containsKey("Flashback")) {
@@ -957,7 +964,7 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean checkConditional(SpellAbility sa) {
+    public static boolean checkConditional(final SpellAbility sa) {
         return sa.getConditions().checkConditions(sa);
     }
 
@@ -967,7 +974,7 @@ public class AbilityFactory {
      *
      * @return a {@link forge.card.spellability.Ability_Sub} object.
      */
-    public Ability_Sub getSubAbility() {
+    public final Ability_Sub getSubAbility() {
         Ability_Sub abSub = null;
 
         String sSub = getMapParams().get("SubAbility");
@@ -995,13 +1002,14 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean playReusable(SpellAbility sa) {
+    public static boolean playReusable(final SpellAbility sa) {
         // TODO probably also consider if winter orb or similar are out
 
-    	if (sa.getPayCosts() == null)
+    	if (sa.getPayCosts() == null) {
     		// This is only true for Drawbacks and triggers
     		return true;
-    	
+    	}
+
         return (sa.getPayCosts().isReusuableResource() && AllZone.getPhase().is(Constant.Phase.End_Of_Turn)
                 && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()));
     }
@@ -1013,7 +1021,7 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean waitForBlocking(SpellAbility sa) {
+    public static boolean waitForBlocking(final SpellAbility sa) {
 
         return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap()
                 && (AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Blockers_InstantAbility)
@@ -1026,11 +1034,13 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean isSorcerySpeed(SpellAbility sa) {
-        if (sa.isSpell())
+    public static boolean isSorcerySpeed(final SpellAbility sa) {
+        if (sa.isSpell()) {
             return sa.getSourceCard().isSorcery();
-        else if (sa.isAbility())
+        }
+        else if (sa.isAbility()) {
             return sa.getRestrictions().getSorcerySpeed();
+        }
 
         return false;
     }
@@ -1044,12 +1054,13 @@ public class AbilityFactory {
      * @param ability a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    public static int calculateAmount(Card card, String amount, SpellAbility ability) {
+    public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
 
-        if (amount == null)
+        if (amount == null) {
             return 0;
-        
+        }
+
         // If Amount is -X, strip the minus sign before looking for an SVar of that kind
         int multiplier = 1;
         if (amount.startsWith("-")) {
@@ -1058,15 +1069,18 @@ public class AbilityFactory {
         }
 
         if (!card.getSVar(amount).equals("")) {
-            String calcX[] = card.getSVar(amount).split("\\$");
-            if (calcX.length == 1 || calcX[1].equals("none"))
+            String[] calcX = card.getSVar(amount).split("\\$");
+            if (calcX.length == 1 || calcX[1].equals("none")) {
                 return 0;
+            }
 
-            if (calcX[0].startsWith("Count"))
+            if (calcX[0].startsWith("Count")) {
                 return CardFactoryUtil.xCount(card, calcX[1]) * multiplier;
-            
-            if (calcX[0].startsWith("Number"))
+            }
+
+            if (calcX[0].startsWith("Number")) {
                 return CardFactoryUtil.xCount(card, card.getSVar(amount)) * multiplier;
+            }
 
             else if (ability != null) {
                 //Player attribute counting
@@ -1087,12 +1101,15 @@ public class AbilityFactory {
 
                     for (Card c : list) {
                         Player p = c.getController();
-                        if (!players.contains(p))
+                        if (!players.contains(p)) {
                             players.add(p);
+                        }
                     }
                     for (SpellAbility s : sas) {
                         Player p = s.getSourceCard().getController();
-                        if (!players.contains(p)) players.add(p);
+                        if (!players.contains(p)) {
+                            players.add(p);
+                        }
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
@@ -1100,7 +1117,7 @@ public class AbilityFactory {
                 CardList list = new CardList();
                 if (calcX[0].startsWith("Sacrificed")) {
                     list = findRootAbility(ability).getPaidList("Sacrificed");
-                } else if (calcX[0].startsWith("Discarded")){
+                } else if (calcX[0].startsWith("Discarded")) {
                     list = findRootAbility(ability).getPaidList("Discarded");
                 } else if (calcX[0].startsWith("Exiled")) {
                     list = findRootAbility(ability).getPaidList("Exiled");
@@ -1146,14 +1163,16 @@ public class AbilityFactory {
                     // Add whole Remembered list to handlePaid
                     list = new CardList();
                     for (Object o : card.getRemembered()) {
-                        if (o instanceof Card)
+                        if (o instanceof Card) {
                             list.add(AllZoneUtil.getCardState((Card) o));
+                        }
                     }
                 } else if (calcX[0].startsWith("Imprinted")) {
                     // Add whole Imprinted list to handlePaid
                     list = new CardList();
-                    for (Card c : card.getImprinted())
+                    for (Card c : card.getImprinted()) {
                         list.add(AllZoneUtil.getCardState(c));
+                    }
                 } else if (calcX[0].startsWith("TriggerCount")) {
                     // TriggerCount is similar to a regular Count, but just pulls Integer Values from Trigger objects
                     String[] l = calcX[1].split("/");
@@ -1161,12 +1180,14 @@ public class AbilityFactory {
                     int count = (Integer) ability.getTriggeringObject(l[0]);
 
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
-                } else
+                } else {
                     return 0;
+                }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-            } else
+            } else {
                 return 0;
+            }
         }
 
         return Integer.parseInt(amount) * multiplier;
@@ -1184,20 +1205,23 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getDefinedCards(Card hostCard, String def, SpellAbility sa) {
+    public static ArrayList<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         ArrayList<Card> cards = new ArrayList<Card>();
         String defined = (def == null) ? "Self" : def;    // default to Self
 
         Card c = null;
 
-        if (defined.equals("Self"))
+        if (defined.equals("Self")) {
             c = hostCard;
+        }
 
-        else if (defined.equals("Equipped"))
+        else if (defined.equals("Equipped")) {
             c = hostCard.getEquippingCard();
+        }
 
-        else if (defined.equals("Enchanted"))
+        else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
+        }
 
         else if (defined.equals("Targeted")) {
             SpellAbility parent = findParentsTargetedCard(sa);
@@ -1210,8 +1234,9 @@ public class AbilityFactory {
             }
         } else if (defined.equals("Remembered")) {
             for (Object o : hostCard.getRemembered()) {
-                if (o instanceof Card)
+                if (o instanceof Card) {
                     cards.add(AllZoneUtil.getCardState((Card) o));
+                }
             }
         } else if (defined.equals("Clones")) {
             for (Card clone : hostCard.getClones()) {
@@ -1221,7 +1246,7 @@ public class AbilityFactory {
             for (Card imprint : hostCard.getImprinted()) {
                 cards.add(AllZoneUtil.getCardState(imprint));
             }
-        } else if(defined.startsWith("ThisTurnEntered")) {
+        } else if (defined.startsWith("ThisTurnEntered")) {
             String[] workingCopy = defined.split(" ");
             String destination, origin, validFilter;
 
@@ -1233,34 +1258,40 @@ public class AbilityFactory {
                 origin = "Any";
                 validFilter = workingCopy[2];
             }
-            for(Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard))
-            {
+            for (Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
                 cards.add(cl);
             }
         }
         else {
             CardList list = null;
-            if (defined.startsWith("Sacrificed"))
+            if (defined.startsWith("Sacrificed")) {
                 list = findRootAbility(sa).getPaidList("Sacrificed");
+            }
 
-            else if (defined.startsWith("Discarded"))
+            else if (defined.startsWith("Discarded")) {
                 list = findRootAbility(sa).getPaidList("Discarded");
+            }
 
-            else if (defined.startsWith("Exiled"))
+            else if (defined.startsWith("Exiled")) {
                 list = findRootAbility(sa).getPaidList("Exiled");
+            }
 
-            else if (defined.startsWith("Tapped"))
+            else if (defined.startsWith("Tapped")) {
                 list = findRootAbility(sa).getPaidList("Tapped");
+            }
 
-            else
+            else {
                 return cards;
+            }
 
-            for (Card cl : list)
+            for (Card cl : list) {
                 cards.add(cl);
+            }
         }
 
-        if (c != null)
+        if (c != null) {
             cards.add(c);
+        }
 
         return cards;
     }
@@ -1273,7 +1304,7 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Player> getDefinedPlayers(Card card, String def, SpellAbility sa) {
+    public static ArrayList<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         ArrayList<Player> players = new ArrayList<Player>();
         String defined = (def == null) ? "You" : def;
 
@@ -1283,8 +1314,10 @@ public class AbilityFactory {
 
             do {
 
-                if (!(parent instanceof Ability_Sub)) // did not find any targets
+                // did not find any targets
+                if (!(parent instanceof Ability_Sub)) {
                     return players;
+                }
                 parent = ((Ability_Sub) parent).getParent();
                 tgt = parent.getTarget();
             } while (tgt == null || tgt.getTargetPlayers().size() == 0);
@@ -1296,25 +1329,30 @@ public class AbilityFactory {
 
             for (Card c : list) {
                 Player p = c.getController();
-                if (!players.contains(p))
+                if (!players.contains(p)) {
                     players.add(p);
+                }
             }
             for (SpellAbility s : sas) {
                 Player p = s.getSourceCard().getController();
-                if (!players.contains(p)) players.add(p);
+                if (!players.contains(p)) {
+                    players.add(p);
+                }
             }
         } else if (defined.equals("TargetedOwner")) {
             ArrayList<Card> list = getDefinedCards(card, "Targeted", sa);
 
             for (Card c : list) {
                 Player p = c.getOwner();
-                if (!players.contains(p))
+                if (!players.contains(p)) {
                     players.add(p);
+                }
             }
         } else if (defined.equals("Remembered")) {
             for (Object rem : card.getRemembered()) {
-                if (rem instanceof Player)
+                if (rem instanceof Player) {
                     players.add((Player) rem);
+                }
             }
         } else if (defined.startsWith("Triggered")) {
             SpellAbility root = sa.getRootSpellAbility();
@@ -1343,32 +1381,39 @@ public class AbilityFactory {
             if (o != null) {
                 if (o instanceof Player) {
                     Player p = (Player) o;
-                    if (!players.contains(p))
+                    if (!players.contains(p)) {
                         players.add(p);
+                    }
                 }
             }
         } else if (defined.equals("EnchantedController")) {
             Player p = card.getEnchantingCard().getController();
-            if (!players.contains(p))
+            if (!players.contains(p)) {
                 players.add(p);
+            }
         } else if (defined.equals("EnchantedOwner")) {
             Player p = card.getEnchantingCard().getOwner();
-            if (!players.contains(p))
+            if (!players.contains(p)) {
                 players.add(p);
+            }
         } else if (defined.equals("AttackingPlayer")) {
             Player p = AllZone.getCombat().getAttackingPlayer();
-            if (!players.contains(p))
+            if (!players.contains(p)) {
                 players.add(p);
+            }
         } else if (defined.equals("DefendingPlayer")) {
             Player p = AllZone.getCombat().getDefendingPlayer();
-            if (!players.contains(p))
+            if (!players.contains(p)) {
                 players.add(p);
+            }
         } else {
-            if (defined.equals("You") || defined.equals("Each"))
+            if (defined.equals("You") || defined.equals("Each")) {
                 players.add(sa.getActivatingPlayer());
+            }
 
-            if (defined.equals("Opponent") || defined.equals("Each"))
+            if (defined.equals("Opponent") || defined.equals("Each")) {
                 players.add(sa.getActivatingPlayer().getOpponent());
+            }
         }
         return players;
     }
@@ -1381,7 +1426,9 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<SpellAbility> getDefinedSpellAbilities(Card card, String def, SpellAbility sa) {
+    public static ArrayList<SpellAbility> getDefinedSpellAbilities(final Card card, final String def,
+            final SpellAbility sa)
+    {
         ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
         String defined = (def == null) ? "Self" : def;    // default to Self
 
@@ -1395,18 +1442,21 @@ public class AbilityFactory {
             sas.addAll(parent.getTarget().getTargetSAs());
         } else if (defined.startsWith("Triggered")) {
         	SpellAbility root = sa.getRootSpellAbility();
-        	
+
             String triggeringType = defined.substring(9);
-            Object o = root.getTriggeringObject(triggeringType); 
-            if (o instanceof SpellAbility)
+            Object o = root.getTriggeringObject(triggeringType);
+            if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
+            }
         } else if (defined.startsWith("Imprinted")) {
-            for (Card imp : card.getImprinted())
+            for (Card imp : card.getImprinted()) {
                 sas.addAll(imp.getSpellAbilities());
+            }
         }
 
-        if (s != null)
+        if (s != null) {
             sas.add(s);
+        }
 
         return sas;
     }
@@ -1419,7 +1469,7 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Object> getDefinedObjects(Card card, String def, SpellAbility sa) {
+    public static ArrayList<Object> getDefinedObjects(final Card card, final String def, final SpellAbility sa) {
         ArrayList<Object> objects = new ArrayList<Object>();
         String defined = (def == null) ? "Self" : def;
 
@@ -1436,10 +1486,11 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility findRootAbility(SpellAbility sa) {
+    public static SpellAbility findRootAbility(final SpellAbility sa) {
         SpellAbility parent = sa;
-        while (parent instanceof Ability_Sub)
+        while (parent instanceof Ability_Sub) {
             parent = ((Ability_Sub) parent).getParent();
+        }
 
         return parent;
     }
@@ -1450,12 +1501,13 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility findParentsTargetedCard(SpellAbility sa) {
+    public static SpellAbility findParentsTargetedCard(final SpellAbility sa) {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub))
+            if (!(parent instanceof Ability_Sub)) {
                 return parent;
+            }
             parent = ((Ability_Sub) parent).getParent();
         } while (parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
 
@@ -1468,12 +1520,13 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static SpellAbility findParentsTargetedSpellAbility(SpellAbility sa) {
+    private static SpellAbility findParentsTargetedSpellAbility(final SpellAbility sa) {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub))
+            if (!(parent instanceof Ability_Sub)) {
                 return parent;
+            }
             parent = ((Ability_Sub) parent).getParent();
         } while (parent.getTarget() == null || parent.getTarget().getTargetSAs().size() == 0);
 
@@ -1486,12 +1539,13 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility findParentsTargetedPlayer(SpellAbility sa) {
+    public static SpellAbility findParentsTargetedPlayer(final SpellAbility sa) {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub))
+            if (!(parent instanceof Ability_Sub)) {
                 return parent;
+            }
             parent = ((Ability_Sub) parent).getParent();
         } while (parent.getTarget() == null || parent.getTarget().getTargetPlayers().size() == 0);
 
@@ -1501,13 +1555,15 @@ public class AbilityFactory {
     /**
      * <p>predictThreatenedObjects.</p>
      *
+     * @param saviourAf a AbilityFactory object
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(AbilityFactory saviourAf) {
+    public static ArrayList<Object> predictThreatenedObjects(final AbilityFactory saviourAf) {
         ArrayList<Object> objects = new ArrayList<Object>();
-        if (AllZone.getStack().size() == 0)
+        if (AllZone.getStack().size() == 0) {
             return objects;
+        }
 
         // check stack for something that will kill this
         SpellAbility topStack = AllZone.getStack().peekAbility();
@@ -1519,19 +1575,24 @@ public class AbilityFactory {
     /**
      * <p>predictThreatenedObjects.</p>
      *
+     * @param saviourAf a AbilityFactory object
      * @param topStack a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(AbilityFactory saviourAf, SpellAbility topStack) {
+    public static ArrayList<Object> predictThreatenedObjects(final AbilityFactory saviourAf,
+            final SpellAbility topStack)
+    {
         ArrayList<Object> objects = new ArrayList<Object>();
         ArrayList<Object> threatened = new ArrayList<Object>();
         String saviourApi = "";
-        if (saviourAf != null)
+        if (saviourAf != null) {
         	saviourApi = saviourAf.getAPI();
+        }
 
-        if (topStack == null)
+        if (topStack == null) {
             return objects;
+        }
 
         Card source = topStack.getSourceCard();
         AbilityFactory topAf = topStack.getAbilityFactory();
@@ -1550,85 +1611,99 @@ public class AbilityFactory {
 
             String threatApi = topAf.getAPI();
             HashMap<String, String> threatParams = topAf.getMapParams();
-            
+
             //Lethal Damage => prevent damage/regeneration/bounce
             if (threatApi.equals("DealDamage") || threatApi.equals("DamageAll")) {
                 // If PredictDamage is >= Lethal Damage
-                int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(), topAf.getMapParams().get("NumDmg"), topStack);
+                int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(),
+                        topAf.getMapParams().get("NumDmg"), topStack);
                 for (Object o : objects) {
                     if (o instanceof Card) {
                         Card c = (Card) o;
-                        
+
                         // indestructible
-                        if (c.hasKeyword("Indestructible"))
+                        if (c.hasKeyword("Indestructible")) {
                         	continue;
-                        
+                        }
+
                         //already regenerated
-                        if (c.getShield() > 0)
+                        if (c.getShield() > 0) {
                         	continue;
-                        
+                        }
+
                         //don't use it on creatures that can't be regenerated
-                        if (saviourApi.equals("Regenerate") && !c.canBeShielded())
+                        if (saviourApi.equals("Regenerate") && !c.canBeShielded()) {
                         	continue;
-                        
+                        }
+
                         //don't bounce or blink a permanent that the human player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken()))
+                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
                         	continue;
-                        
-                        if (c.predictDamage(dmg, source, false) >= c.getKillDamage())
+                        }
+
+                        if (c.predictDamage(dmg, source, false) >= c.getKillDamage()) {
                             threatened.add(c);
+                        }
                     } else if (o instanceof Player) {
                         Player p = (Player) o;
 
                         if (source.hasKeyword("Infect")) {
-                            if (p.predictDamage(dmg, source, false) >= p.getPoisonCounters())
+                            if (p.predictDamage(dmg, source, false) >= p.getPoisonCounters()) {
                                 threatened.add(p);
-                        } else if (p.predictDamage(dmg, source, false) >= p.getLife())
+                            }
+                        } else if (p.predictDamage(dmg, source, false) >= p.getLife()) {
                             threatened.add(p);
+                        }
                     }
-                } 
-            } 
+                }
+            }
             //Destroy => regeneration/bounce
             else if ((threatApi.equals("Destroy") || threatApi.equals("DestroyAll"))
             		&& ((saviourApi.equals("Regenerate") && !threatParams.containsKey("NoRegen"))
-            				|| saviourApi.equals("ChangeZone"))){
-            	for (Object o : objects)
+            				|| saviourApi.equals("ChangeZone")))
+            {
+            	for (Object o : objects) {
                     if (o instanceof Card) {
                         Card c = (Card) o;
                         // indestructible
-                        if (c.hasKeyword("Indestructible"))
+                        if (c.hasKeyword("Indestructible")) {
                         	continue;
-                        
+                        }
+
                         //already regenerated
-                        if (c.getShield() > 0)
+                        if (c.getShield() > 0) {
                         	continue;
-                        
+                        }
+
                         //don't bounce or blink a permanent that the human player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken()))
+                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
                         	continue;
-                        
+                        }
+
                         //don't use it on creatures that can't be regenerated
-                        if (saviourApi.equals("Regenerate") && !c.canBeShielded())
+                        if (saviourApi.equals("Regenerate") && !c.canBeShielded()) {
                         	continue;
-                        
+                        }
                         threatened.add(c);
                     }
-            	
+            	}
             }
             //Exiling => bounce
             else if ((threatApi.equals("ChangeZone") || threatApi.equals("ChangeZoneAll"))
-            		&& saviourApi.equals("ChangeZone") 
-            		&& threatParams.containsKey("Destination") && threatParams.get("Destination").equals("Exile")) {
-            	for (Object o : objects)
+            		&& saviourApi.equals("ChangeZone")
+            		&& threatParams.containsKey("Destination") && threatParams.get("Destination").equals("Exile"))
+            {
+            	for (Object o : objects) {
                     if (o instanceof Card) {
                         Card c = (Card) o;
-                        
                         //don't bounce or blink a permanent that the human player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken()))
+                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
                         	continue;
-                        
+                        }
+
                         threatened.add(c);
                     }
+            	}
             }
         }
 
@@ -1639,23 +1714,23 @@ public class AbilityFactory {
     /**
      * <p>handleRemembering.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
-    public static void handleRemembering(AbilityFactory AF) {
-        HashMap<String, String> params = AF.getMapParams();
+    public static void handleRemembering(final AbilityFactory af) {
+        HashMap<String, String> params = af.getMapParams();
         Card host;
 
         if (!params.containsKey("RememberTargets")) {
             return;
         }
 
-        host = AF.getHostCard();
+        host = af.getHostCard();
 
         if (params.containsKey("ForgetOtherTargets")) {
             host.clearRemembered();
         }
 
-        Target tgt = AF.getAbTgt();
+        Target tgt = af.getAbTgt();
 
         if (params.containsKey("RememberTargets")) {
             ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();
@@ -1668,14 +1743,15 @@ public class AbilityFactory {
 
     /**
      *
-     * @param list
-     * @param type
-     * @param sa
+     * @param list a CardList
+     * @param type a card type
+     * @param sa a SpellAbility
      * @return a {@link forge.CardList} object.
      */
-    public static CardList filterListByType(CardList list, String type, SpellAbility sa) {
-        if (type == null)
+    public static CardList filterListByType(final CardList list, String type, final SpellAbility sa) {
+        if (type == null) {
             return list;
+        }
 
         // Filter List Can send a different Source card in for things like Mishra and Lobotomy
 
@@ -1684,8 +1760,9 @@ public class AbilityFactory {
             Object o = sa.getTriggeringObject("Card");
 
             // I won't the card attached to the Triggering object
-            if (!(o instanceof Card))
+            if (!(o instanceof Card)) {
                 return new CardList();
+            }
 
             source = (Card) (o);
             type = type.replace("Triggered", "Card");
@@ -1700,8 +1777,9 @@ public class AbilityFactory {
                 }
             }
 
-            if (!hasRememberedCard)
+            if (!hasRememberedCard) {
                 return new CardList();
+            }
         }
 
         return list.getValidCards(type.split(","), sa.getActivatingPlayer(), source);
@@ -1730,13 +1808,14 @@ public class AbilityFactory {
 
         //The cost
         String unlessCost = params.get("UnlessCost").trim();
-        if (unlessCost.equals("X"))
+        if (unlessCost.equals("X")) {
             unlessCost = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost"), sa));
+        }
 
         Ability ability = new Ability(source, unlessCost) {
             @Override
             public void resolve() {
-                ;
+                //nothing to do
             }
         };
 
@@ -1745,8 +1824,9 @@ public class AbilityFactory {
 
             public void execute() {
                 resolveSubAbilities(sa);
-                if(usedStack)
+                if (usedStack) {
                 	AllZone.getStack().finishResolving(sa, false);
+                }
             }
         };
 
@@ -1755,10 +1835,13 @@ public class AbilityFactory {
 
             public void execute() {
                 sa.resolve();
-                if (params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.getHumanPlayer());
+                if (params.containsKey("PowerSink")) {
+                    GameActionUtil.doPowerSink(AllZone.getHumanPlayer());
+                }
                 resolveSubAbilities(sa);
-                if(usedStack)
+                if (usedStack) {
                 	AllZone.getStack().finishResolving(sa, false);
+                }
             }
         };
 
@@ -1769,14 +1852,18 @@ public class AbilityFactory {
             if (ComputerUtil.canPayCost(ability)) {
                 ComputerUtil.playNoStack(ability); //Unless cost was payed - no resolve
                 resolveSubAbilities(sa);
-                if(usedStack)
+                if (usedStack) {
                 	AllZone.getStack().finishResolving(sa, false);
+                }
             } else {
                 sa.resolve();
-                if (params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.getComputerPlayer());
+                if (params.containsKey("PowerSink")) {
+                    GameActionUtil.doPowerSink(AllZone.getComputerPlayer());
+                }
                 resolveSubAbilities(sa);
-                if(usedStack)
+                if (usedStack) {
                 	AllZone.getStack().finishResolving(sa, false);
+                }
             }
         }
     }
@@ -1787,10 +1874,12 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @param usedStack a boolean.
      */
-    public static void resolve(SpellAbility sa, boolean usedStack) {
-        if (sa == null) return;
+    public static void resolve(final SpellAbility sa, final boolean usedStack) {
+        if (sa == null) {
+            return;
+        }
         AbilityFactory af = sa.getAbilityFactory();
-        if(af == null) {
+        if (af == null) {
         	sa.resolve();
         	return;
         }
@@ -1804,11 +1893,15 @@ public class AbilityFactory {
 
                 //try to resolve subabilities (see null check above)
                 resolveSubAbilities(sa);
-                if(usedStack)
+                if (usedStack) {
                 	AllZone.getStack().finishResolving(sa, false);
-            } else passUnlessCost(sa, usedStack);
-        } else
+                }
+            } else {
+                passUnlessCost(sa, usedStack);
+            }
+        } else {
             resolveSubAbilities(sa);
+        }
     }
 
     /**
@@ -1817,9 +1910,11 @@ public class AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public static void resolveSubAbilities(SpellAbility sa) {
+    public static void resolveSubAbilities(final SpellAbility sa) {
         Ability_Sub abSub = sa.getSubAbility();
-        if (abSub == null || sa.isWrapper()) return;
+        if (abSub == null || sa.isWrapper()) {
+            return;
+        }
         //check conditions
         if (AbilityFactory.checkConditional(abSub)) {
             abSub.resolve();
@@ -1827,4 +1922,4 @@ public class AbilityFactory {
         resolveSubAbilities(abSub);
     }
 
-}//end class AbilityFactory
+} //end class AbilityFactory
