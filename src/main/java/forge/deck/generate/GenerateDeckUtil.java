@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * <p>Generate2ColorDeck class.</p>
+ * <p>GenerateDeckUtil class.</p>
  *
  * @author Forge
- * @version $Id: Generate2ColorDeck.java 10011 2011-08-28 12:20:52Z Sloth $
+ * @version $Id: GenerateDeckUtil.java 10011 2011-08-28 12:20:52Z Sloth $
  */
 public class GenerateDeckUtil {
     
@@ -21,6 +21,16 @@ public class GenerateDeckUtil {
     public static ArrayList<String> getDualLandList(String colors) {
         
         ArrayList<String> DLands = new ArrayList<String>();
+        
+        if (colors.length() > 3) {
+            DLands.add("Rupture Spire");
+            DLands.add("Undiscovered Paradise");
+        }
+        
+        if (colors.length() > 2) {
+            DLands.add("Evolving Wilds");
+            DLands.add("Terramorphic Expanse");
+        }
         
         if (colors.contains("W") && colors.contains("U")) {
             DLands.add("Tundra");
