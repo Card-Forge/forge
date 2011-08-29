@@ -5657,6 +5657,7 @@ res/cardsfolder/p/plagued_rusalka.txt svneol=native#text/plain
 res/cardsfolder/p/plaguemaw_beast.txt svneol=native#text/plain
 res/cardsfolder/p/plains.txt svneol=native#text/plain
 res/cardsfolder/p/planar_birth.txt svneol=native#text/plain
+res/cardsfolder/p/planar_chaos.txt -text
 res/cardsfolder/p/planar_cleansing.txt svneol=native#text/plain
 res/cardsfolder/p/planar_collapse.txt svneol=native#text/plain
 res/cardsfolder/p/planar_despair.txt svneol=native#text/plain
