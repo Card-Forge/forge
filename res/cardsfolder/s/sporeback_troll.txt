@@ -1,0 +1,11 @@
+Name:Sporeback Troll
+ManaCost:3 G
+Types:Creature Troll Mutant
+Text:no text
+PT:0/0
+K:Graft 2
+A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Regenerate target creature with a +1/+1 counter on it.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sporeback_troll.jpg
+End

@@ -7236,6 +7236,7 @@ res/cardsfolder/s/spore_burst.txt svneol=native#text/plain
 res/cardsfolder/s/spore_cloud.txt svneol=native#text/plain
 res/cardsfolder/s/spore_flower.txt svneol=native#text/plain
 res/cardsfolder/s/spore_frog.txt svneol=native#text/plain
+res/cardsfolder/s/sporeback_troll.txt -text
 res/cardsfolder/s/sporecap_spider.txt svneol=native#text/plain
 res/cardsfolder/s/sporesower_thallid.txt svneol=native#text/plain
 res/cardsfolder/s/sporoloth_ancient.txt svneol=native#text/plain
