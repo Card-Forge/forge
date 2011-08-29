@@ -1,9 +1,22 @@
 package forge.card.trigger;
 
-import forge.*;
+import forge.Card;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Player;
+import forge.CardList;
+import forge.Command;
+import forge.CommandArgs;
+import forge.GameActionUtil;
+import forge.ComputerUtil;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.Target;
 import forge.gui.input.Input;
 
 import java.util.ArrayList;
@@ -29,7 +42,7 @@ public class TriggerHandler {
      *
      * @param mode a {@link java.lang.String} object.
      */
-    public void suppressMode(String mode) {
+    public final void suppressMode(final String mode) {
         suppressedModes.add(mode);
     }
 
@@ -38,7 +51,7 @@ public class TriggerHandler {
      *
      * @param mode a {@link java.lang.String} object.
      */
-    public void clearSuppression(String mode) {
+    public final void clearSuppression(final String mode) {
         suppressedModes.remove(mode);
     }
 
@@ -48,9 +61,12 @@ public class TriggerHandler {
      * @param name a {@link java.lang.String} object.
      * @param trigParse a {@link java.lang.String} object.
      * @param host a {@link forge.Card} object.
+     * @param intrinsic a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(String name, String trigParse, Card host, boolean intrinsic) {
+    public static Trigger parseTrigger(final String name, final String trigParse,
+            final Card host, final boolean intrinsic)
+    {
         Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
         ret.setName(name);
         return ret;
@@ -61,9 +77,11 @@ public class TriggerHandler {
      *
      * @param trigParse a {@link java.lang.String} object.
      * @param host a {@link forge.Card} object.
+     * @param intrinsic a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(String trigParse, Card host, boolean intrinsic) {
+    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic)
+    {
         HashMap<String, String> mapParams = parseParams(trigParse);
         return parseTrigger(mapParams, host, intrinsic);
     }
@@ -73,9 +91,12 @@ public class TriggerHandler {
      *
      * @param mapParams a {@link java.util.HashMap} object.
      * @param host a {@link forge.Card} object.
+     * @param intrinsic a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(HashMap<String, String> mapParams, Card host, boolean intrinsic) {
+    public static Trigger parseTrigger(final HashMap<String, String> mapParams,
+            final Card host, final boolean intrinsic)
+    {
         Trigger ret = null;
 
         String mode = mapParams.get("Mode");
@@ -146,13 +167,14 @@ public class TriggerHandler {
      * @param trigParse a {@link java.lang.String} object.
      * @return a {@link java.util.HashMap} object.
      */
-    private static HashMap<String, String> parseParams(String trigParse) {
+    private static HashMap<String, String> parseParams(final String trigParse) {
         HashMap<String, String> mapParams = new HashMap<String, String>();
 
-        if (trigParse.length() == 0)
+        if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");
+        }
 
-        String params[] = trigParse.split("\\|");
+        String[] params = trigParse.split("\\|");
 
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].trim();
@@ -182,12 +204,13 @@ public class TriggerHandler {
      *
      * @param trig a {@link forge.card.trigger.Trigger} object.
      */
-    public void registerDelayedTrigger(Trigger trig) {
+    public final void registerDelayedTrigger(final Trigger trig) {
         delayedTriggers.add(trig);
 
         String mode = trig.getMapParams().get("Mode");
-        if (!registeredModes.contains(mode))
+        if (!registeredModes.contains(mode)) {
             registeredModes.add(mode);
+        }
     }
 
     /**
@@ -195,18 +218,19 @@ public class TriggerHandler {
      *
      * @param trig a {@link forge.card.trigger.Trigger} object.
      */
-    public void registerTrigger(Trigger trig) {
+    public final void registerTrigger(final Trigger trig) {
         registeredTriggers.add(trig);
 
         String mode = trig.getMapParams().get("Mode");
-        if (!registeredModes.contains(mode))
+        if (!registeredModes.contains(mode)) {
             registeredModes.add(mode);
+        }
     }
 
     /**
      * <p>clearRegistered.</p>
      */
-    public void clearRegistered() {
+    public final void clearRegistered() {
         delayedTriggers.clear();
         registeredTriggers.clear();
         registeredModes.clear();
@@ -217,17 +241,22 @@ public class TriggerHandler {
      *
      * @param trig a {@link forge.card.trigger.Trigger} object.
      */
-    public void removeRegisteredTrigger(Trigger trig) {
+    public final void removeRegisteredTrigger(final Trigger trig) {
         for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).equals(trig))
+            if (registeredTriggers.get(i).equals(trig)) {
                 registeredTriggers.remove(i);
+            }
         }
     }
-    
-    public void removeTemporaryTriggers() {
-    	for (int i = 0; i < registeredTriggers.size(); i++) {
+
+    /**
+     * <p>removeTemporaryTriggers.</p>
+     * 
+     */
+    public final void removeTemporaryTriggers() {
+        for (int i = 0; i < registeredTriggers.size(); i++) {
             if (registeredTriggers.get(i).isTemporary()) {
-            	registeredTriggers.get(i).hostCard.removeTrigger(registeredTriggers.get(i));
+                registeredTriggers.get(i).hostCard.removeTrigger(registeredTriggers.get(i));
                 registeredTriggers.remove(i);
             }
         }
@@ -238,7 +267,7 @@ public class TriggerHandler {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Trigger> getRegisteredTriggers() {
+    public final ArrayList<Trigger> getRegisteredTriggers() {
         return registeredTriggers;
     }
 
@@ -247,7 +276,7 @@ public class TriggerHandler {
      *
      * @param crd a {@link forge.Card} object.
      */
-    public void removeAllFromCard(Card crd) {
+    public final void removeAllFromCard(final Card crd) {
         for (int i = 0; i < registeredTriggers.size(); i++) {
             if (registeredTriggers.get(i).getHostCard().equals(crd)) {
                 registeredTriggers.remove(i);
@@ -262,19 +291,22 @@ public class TriggerHandler {
      * @param mode a {@link java.lang.String} object.
      * @param runParams a {@link java.util.Map} object.
      */
-    public void runTrigger(String mode, Map<String, Object> runParams) {
+    public final void runTrigger(final String mode, final Map<String, Object> runParams) {
         if (suppressedModes.contains(mode) || !registeredModes.contains(mode)) {
             return;
         }
+
+        Player playerAP = AllZone.getPhase().getPlayerTurn();
+
         //AP
-        for (int i=0;i<registeredTriggers.size();i++) {
-            if (registeredTriggers.get(i).getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn())) {
+        for (int i = 0; i < registeredTriggers.size(); i++) {
+            if (registeredTriggers.get(i).getHostCard().getController().equals(playerAP)) {
                 runSingleTrigger(registeredTriggers.get(i), mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggers.size(); i++) {
             Trigger deltrig = delayedTriggers.get(i);
-            if (deltrig.getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn())) {
+            if (deltrig.getHostCard().getController().equals(playerAP)) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggers.remove(i);
                     i--;
@@ -283,14 +315,14 @@ public class TriggerHandler {
         }
 
         //NAP
-        for (int i=0;i<registeredTriggers.size();i++) {
-            if (registeredTriggers.get(i).getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn().getOpponent())) {
+        for (int i = 0; i < registeredTriggers.size(); i++) {
+            if (registeredTriggers.get(i).getHostCard().getController().equals(playerAP.getOpponent())) {
                 runSingleTrigger(registeredTriggers.get(i), mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggers.size(); i++) {
             Trigger deltrig = delayedTriggers.get(i);
-            if (deltrig.getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn().getOpponent())) {
+            if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggers.remove(i);
                     i--;
@@ -310,8 +342,7 @@ public class TriggerHandler {
      * @return a boolean.
      */
     private boolean runSingleTrigger(final Trigger regtrig, final String mode, final Map<String, Object> runParams) {
-        if(!regtrig.getMapParams().get("Mode").equals(mode))
-        {
+        if (!regtrig.getMapParams().get("Mode").equals(mode)) {
             return false; //Not the right mode.
         }
         if (!regtrig.zonesCheck()) {
@@ -326,32 +357,30 @@ public class TriggerHandler {
         if (regtrig.getHostCard().isFaceDown() && regtrig.getIsIntrinsic()) {
             return false; //Morphed cards only have pumped triggers go off.
         }
-        if(regtrig instanceof Trigger_Always) {
-            if(AllZone.getStack().hasStateTrigger(regtrig.ID))
-            {
+        if (regtrig instanceof Trigger_Always) {
+            if (AllZone.getStack().hasStateTrigger(regtrig.ID)) {
                 return false; //State triggers that are already on the stack don't trigger again.
             }
         }
-        if (!regtrig.performTest(runParams))
-        {
+        if (!regtrig.performTest(runParams)) {
                 return false; //Test failed.
         }
-        
+
         //Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
-        
-        if(torporOrbs.size() != 0 && mode.equals("ChangesZone") && regtrig.getMapParams().get("ValidCard").contains("Creature"))
+
+        if (torporOrbs.size() != 0 && mode.equals("ChangesZone") && regtrig.getMapParams().get("ValidCard").contains("Creature"))
         {
             return false;
         }
-        if(torporOrbs.size() != 0 && regtrig.getMapParams().containsKey("Destination"))
+        if (torporOrbs.size() != 0 && regtrig.getMapParams().containsKey("Destination"))
         {
-            if(!regtrig.getMapParams().get("Destination").equals("Battlefield"))
+            if (!regtrig.getMapParams().get("Destination").equals("Battlefield"))
             {
                 return false;
             }
         }
-        
+
         HashMap<String, String> trigParams = regtrig.getMapParams();
         final Player[] decider = new Player[1];
 
@@ -363,16 +392,19 @@ public class TriggerHandler {
         //All tests passed, execute ability.
         if (regtrig instanceof Trigger_TapsForMana) {
             Ability_Mana abMana = (Ability_Mana) runParams.get("Ability_Mana");
-            if (null != abMana) abMana.setUndoable(false);
+            if (null != abMana) {
+                abMana.setUndoable(false);
+            }
         }
 
-        AbilityFactory AF = new AbilityFactory();
+        AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
         Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
 
-        if (host == null)
+        if (host == null) {
             host = regtrig.getHostCard();
+        }
         // This will fix the Oblivion Ring issue, but is this the right fix?
         for (Object o : regtrig.getHostCard().getRemembered()) {
             if (!host.getRemembered().contains(o)) {
@@ -389,7 +421,7 @@ public class TriggerHandler {
                     }
                 };
             } else {
-                sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host);
+                sa[0] = abilityFactory.getAbility(host.getSVar(trigParams.get("Execute")), host);
             }
         }
         sa[0].setTrigger(true);
@@ -409,13 +441,13 @@ public class TriggerHandler {
             mand = true;
 
             SpellAbility ability = sa[0];
-            while(ability != null){
-	            Target tgt = ability.getTarget();
+            while (ability != null) {
+                Target tgt = ability.getTarget();
 
-	            if (tgt != null) {
-	            	tgt.setMandatory(true);
-	            }
-	            ability = ability.getSubAbility();
+                if (tgt != null) {
+                    tgt.setMandatory(true);
+                }
+                ability = ability.getSubAbility();
             }
         }
         final boolean isMandatory = mand;
@@ -886,7 +918,7 @@ public class TriggerHandler {
             ////////////////////////////////////////
             @Override
             public void resolve() {
-                if(!(regtrig instanceof Trigger_Always)) //State triggers don't do the whole "Intervening If" thing.
+                if (!(regtrig instanceof Trigger_Always)) //State triggers don't do the whole "Intervening If" thing.
                 {
                     if (!regtrig.requirementsCheck()) {
                         return;
@@ -923,8 +955,8 @@ public class TriggerHandler {
 
                 //Add eventual delayed trigger.
                 if (regtrig.getMapParams().containsKey("DelayedTrigger")) {
-                    String SVarName = regtrig.getMapParams().get("DelayedTrigger");
-                    Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(SVarName), regtrig.getHostCard(),true);
+                    String sVarName = regtrig.getMapParams().get("DelayedTrigger");
+                    Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(sVarName), regtrig.getHostCard(), true);
                     deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
                     registerDelayedTrigger(deltrig);
                 }
@@ -948,19 +980,15 @@ public class TriggerHandler {
         //Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
         //System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
-        if(regtrig.getMapParams().containsKey("Static"))
-        {
-            if(regtrig.getMapParams().get("Static").equals("True"))
-            {
-                AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility,false);
+        if (regtrig.getMapParams().containsKey("Static")) {
+            if (regtrig.getMapParams().get("Static").equals("True")) {
+                AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility, false);
             }
-            else
-            {
+            else {
                 AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
             }
         }
-        else
-        {
+        else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         return true;
