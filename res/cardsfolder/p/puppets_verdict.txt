@@ -1,0 +1,12 @@
+Name:Puppet's Verdict
+ManaCost:1 R R
+Types:Instant
+Text:no text
+A:SP$ FlipACoin | Cost$ 1 R R | WinSubAbility$ DBDestorySmall | LoseSubAbility$ DBDestoryBig | SpellDescription$ Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater.
+SVar:DBDestorySmall:DB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.powerLE2
+SVar:DBDestoryBig:DB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.powerGE3
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/puppets_verdict.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/208.jpg
+End

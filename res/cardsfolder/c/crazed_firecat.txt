@@ -1,0 +1,13 @@
+Name:Crazed Firecat
+ManaCost:5 R R
+Types:Creature Elemental Cat
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | TriggerDescription$ When CARDNAME enters the battlefield, flip a coin until you lose a flip. Put a +1/+1 counter on CARDNAME for each flip you win.
+SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFlipAgain
+SVar:DBFlipAgain:DB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBPutCounter
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_firecat.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/94.jpg
+End

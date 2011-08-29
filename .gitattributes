@@ -1570,6 +1570,7 @@ res/cardsfolder/c/craw_wurm.txt svneol=native#text/plain
 res/cardsfolder/c/crawling_filth.txt svneol=native#text/plain
 res/cardsfolder/c/crawlspace.txt svneol=native#text/plain
 res/cardsfolder/c/crazed_armodon.txt svneol=native#text/plain
+res/cardsfolder/c/crazed_firecat.txt -text
 res/cardsfolder/c/crazed_goblin.txt svneol=native#text/plain
 res/cardsfolder/c/crazed_skirge.txt svneol=native#text/plain
 res/cardsfolder/c/creakwood_ghoul.txt svneol=native#text/plain
@@ -5817,6 +5818,7 @@ res/cardsfolder/p/puppet_conjurer.txt svneol=native#text/plain
 res/cardsfolder/p/puppet_strings.txt svneol=native#text/plain
 res/cardsfolder/p/puppeteer.txt svneol=native#text/plain
 res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
+res/cardsfolder/p/puppets_verdict.txt -text
 res/cardsfolder/p/puresight_merrow.txt svneol=native#text/plain
 res/cardsfolder/p/purge.txt svneol=native#text/plain
 res/cardsfolder/p/purify.txt svneol=native#text/plain
