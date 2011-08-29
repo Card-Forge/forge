@@ -390,7 +390,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     protected void giveBooster()
     {
         String[] boosterTypes = {"Legacy", "Extended", "Standard"};
-        String boosterType = GuiUtils.getChoice("Choose a format of cards for the prize booster", boosterTypes);
+        String boosterType = GuiUtils.getChoice("Choose prize booster format", boosterTypes);
         List<String> setsToGive = null;
         if (boosterTypes[2].equals(boosterType)) { // T2
             setsToGive = new ArrayList<String>();
@@ -405,6 +405,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
+        
     }
 
     protected void giveQuestRewards(final boolean wonMatch) {

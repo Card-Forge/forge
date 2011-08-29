@@ -639,7 +639,8 @@ public class GameAction {
             frame.setEnabled(false);
             //frame.dispose();
             Gui_WinLose gwl = new Gui_WinLose( AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestAssignment() );
-            gwl.setAlwaysOnTop(true);
+            //gwl.setAlwaysOnTop(true);
+            gwl.toFront();
             return;
         }
 

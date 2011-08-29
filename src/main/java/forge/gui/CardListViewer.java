@@ -98,6 +98,7 @@ public class CardListViewer {
         dialog.setSize(720,360);
         dialog.addWindowFocusListener(new CardListFocuser());
         dialog.setVisible(true);
+        dialog.toFront();
         
         dialog.dispose();
         called = true;
