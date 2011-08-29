@@ -8,4 +8,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamageBlock | Secondary
 SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3
 SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
 Oracle:Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/142.jpg
 End
