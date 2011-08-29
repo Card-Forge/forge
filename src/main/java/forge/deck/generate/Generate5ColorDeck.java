@@ -31,7 +31,6 @@ public class Generate5ColorDeck {
     private Random r = null;
     private Map<String, String> clrMap = null;
     private ArrayList<String> notColors = null;
-    private ArrayList<DLnd> dualLands = null;
     private ArrayList<String> dl = null;
     private Map<String, Integer> cardCounts = null;
 
@@ -72,28 +71,6 @@ public class Generate5ColorDeck {
         notColors.add("red");
         notColors.add("green");
 
-        dualLands = new ArrayList<DLnd>();
-        dualLands.add(new DLnd("Tundra", "WU"));
-        dualLands.add(new DLnd("Hallowed Fountain", "WU"));
-        dualLands.add(new DLnd("Underground Sea", "UB"));
-        dualLands.add(new DLnd("Watery Grave", "UB"));
-        dualLands.add(new DLnd("Badlands", "BR"));
-        dualLands.add(new DLnd("Blood Crypt", "BR"));
-        dualLands.add(new DLnd("Taiga", "RG"));
-        dualLands.add(new DLnd("Stomping Ground", "RG"));
-        dualLands.add(new DLnd("Savannah", "GW"));
-        dualLands.add(new DLnd("Temple Garden", "GW"));
-        dualLands.add(new DLnd("Scrubland", "WB"));
-        dualLands.add(new DLnd("Godless Shrine", "WB"));
-        dualLands.add(new DLnd("Volcanic Island", "UR"));
-        dualLands.add(new DLnd("Steam Vents", "UR"));
-        dualLands.add(new DLnd("Bayou", "BG"));
-        dualLands.add(new DLnd("Overgrown Tomb", "BG"));
-        dualLands.add(new DLnd("Plateau", "RW"));
-        dualLands.add(new DLnd("Sacred Foundry", "RW"));
-        dualLands.add(new DLnd("Tropical Island", "GU"));
-        dualLands.add(new DLnd("Breeding Pool", "GU"));
-
         color1 = clr1;
         color2 = clr2;
         color3 = clr3;
@@ -106,11 +83,10 @@ public class Generate5ColorDeck {
         notColors.remove(color4);
         notColors.remove(color5);
 
-        dl = new ArrayList<String>();
-        for (int i = 0; i < dualLands.size(); i++) {
-            DLnd d = dualLands.get(i);
-            dl.add(d.getName());
-            cardCounts.put(d.getName(), 0);
+        dl = GenerateDeckUtil.getDualLandList("WUBRG");
+        
+        for (int i = 0; i < dl.size(); i++) {
+            cardCounts.put(dl.get(i), 0);
         }
     }
 
@@ -476,24 +452,6 @@ public class Generate5ColorDeck {
          */
         public void setCount(int count) {
             this.count = count;
-        }
-    }
-
-    private class DLnd {
-        private String name;
-        //public String Mana;
-
-        /**
-         * 
-         * @return
-         */
-        public String getName() {
-            return this.name;
-        }
-
-        public DLnd(final String nm, final String mn) {
-            this.name = nm;
-            //Mana = mn;
         }
     }
 }

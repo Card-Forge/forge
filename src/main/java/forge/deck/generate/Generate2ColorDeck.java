@@ -21,7 +21,6 @@ public class Generate2ColorDeck {
     private Random r = null;
     private Map<String, String> ClrMap = null;
     private ArrayList<String> notColors = null;
-    private ArrayList<DLnd> DualLands = null;
     private ArrayList<String> DL = null;
     private Map<String, Integer> CardCounts = null;
 
@@ -50,28 +49,6 @@ public class Generate2ColorDeck {
         notColors.add("red");
         notColors.add("green");
 
-        DualLands = new ArrayList<DLnd>();
-        DualLands.add(new DLnd("Tundra", "WU"));
-        DualLands.add(new DLnd("Hallowed Fountain", "WU"));
-        DualLands.add(new DLnd("Underground Sea", "UB"));
-        DualLands.add(new DLnd("Watery Grave", "UB"));
-        DualLands.add(new DLnd("Badlands", "BR"));
-        DualLands.add(new DLnd("Blood Crypt", "BR"));
-        DualLands.add(new DLnd("Taiga", "RG"));
-        DualLands.add(new DLnd("Stomping Ground", "RG"));
-        DualLands.add(new DLnd("Savannah", "GW"));
-        DualLands.add(new DLnd("Temple Garden", "GW"));
-        DualLands.add(new DLnd("Scrubland", "WB"));
-        DualLands.add(new DLnd("Godless Shrine", "WB"));
-        DualLands.add(new DLnd("Volcanic Island", "UR"));
-        DualLands.add(new DLnd("Steam Vents", "UR"));
-        DualLands.add(new DLnd("Bayou", "BG"));
-        DualLands.add(new DLnd("Overgrown Tomb", "BG"));
-        DualLands.add(new DLnd("Plateau", "RW"));
-        DualLands.add(new DLnd("Sacred Foundry", "RW"));
-        DualLands.add(new DLnd("Tropical Island", "GU"));
-        DualLands.add(new DLnd("Breeding Pool", "GU"));
-
         if (Clr1.equals("AI")) {
             // choose first color
             color1 = notColors.get(r.nextInt(5));
@@ -89,13 +66,10 @@ public class Generate2ColorDeck {
         notColors.remove(color1);
         notColors.remove(color2);
 
-        DL = new ArrayList<String>();
-        for (int i = 0; i < DualLands.size(); i++) {
-            DLnd d = DualLands.get(i);
-            if (d.Mana.contains(ClrMap.get(color1)) && d.Mana.contains(ClrMap.get(color2))) {
-                DL.add(d.Name);
-                CardCounts.put(d.Name, 0);
-            }
+        DL = GenerateDeckUtil.getDualLandList(ClrMap.get(color1) + ClrMap.get(color2));
+        
+        for (int i = 0; i < DL.size(); i++) {
+            CardCounts.put(DL.get(i), 0);
         }
 
     }
@@ -395,16 +369,6 @@ public class Generate2ColorDeck {
         public CCnt(String clr, int cnt) {
             Color = clr;
             Count = cnt;
-        }
-    }
-
-    private class DLnd {
-        public String Name;
-        public String Mana;
-
-        public DLnd(String nm, String mn) {
-            Name = nm;
-            Mana = mn;
         }
     }
 }

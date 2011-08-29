@@ -4,6 +4,7 @@ Types:Artifact
 Text:no text
 A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunbeam_spellbomb.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/250.jpg
