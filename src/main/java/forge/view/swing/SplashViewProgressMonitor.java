@@ -1,7 +1,8 @@
-package net.slightlymagic.braids.util.progress_monitor;
+package forge.view.swing;
 
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
 /** 
  *  Swing component view, to be used with BaseProgressMonitor.

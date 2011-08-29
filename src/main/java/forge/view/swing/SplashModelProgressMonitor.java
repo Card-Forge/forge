@@ -1,4 +1,6 @@
-package net.slightlymagic.braids.util.progress_monitor;
+package forge.view.swing;
+
+import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
 /** 
  * TODO: Write javadoc for this type.

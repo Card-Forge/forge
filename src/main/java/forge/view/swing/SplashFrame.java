@@ -12,8 +12,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
-import net.slightlymagic.braids.util.progress_monitor.SplashModelProgressMonitor;
-import net.slightlymagic.braids.util.progress_monitor.SplashViewProgressMonitor;
 
 /**
  * Shows the splash frame as the application starts.
