@@ -203,6 +203,50 @@ Fixes/Features:
 - carddb and manaparser less related to mtg-data.txt and support alternative sources of data.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Aliases for sets (different data sources may have other names).
+- Separated model/view for splash frame preloader using Braids' progress monitor heirarchy. Possibly deprecated: forge/gui/MultiPhaseProgressMonitorWithETA. Possibly deprecated: forge/gui_progressbarwindow.
+- Random decks for the human will now include cards with RemAIDeck.
+- Little fix in the description of discard cost.
+- Fixed the description of the reveal cost.
+- Little fix in the description of additional costs of spells.
+- In Eclipse, turn on CheckStyle plugin checks for any file opened in the editor, even if it is already in synch with the repository. Otherwise, it is difficult to go back and fix style changes in a file you just committed. Because then it is in synch with the repository.
+- Fixed description of Hammer of Ruin.
+- Fixed Bloodcrazed Goblin PT.
+- Fixed description of Lighthouse Chronologist.
+- LazyCF, slight updates to classes - more parsing moved to appropiate class.
+- Fixed Blocks triggers.
+- Now we depend on apache.commons.io.
+- Updated set aliases.
+- More predicates for good use.
+- DeckEditorBase concept preview.
+- Issue 147, Explain reason for victory/win/lose/loss/defeat before closing battlefield window.
+- Delays dispose() on the battlefield screen until button clicks in Gui_WinLose.
+- Small improvement of AI in PreventDamage AF.
+- Fixed many CheckStyle and a few PMD violations in forge.MagicStack.
+- Minor cleanup in QuestPetHound.java.
+- Removed ActivatedOnly script key. Not needed after changes in Rev# 9882.
+- Added support for Bloodthirst X.
+- Fixed a bunch of CheckStyle things in AbilityFactory_Counters.java.
+- Added new OracleScript to add Oracle to cards.txt; in the future this script will replace setInfo scripts. This script depends on mtg-data.txt instead of magiccards.info.
+- Added Oracle text to A-C, D-F, G-I, J-L, M-O, P-R, S-T, U-W, X-Z.
+- Fixed Blind with Anger having the whole mtgdata.txt as Oracle Text
+- Fixed issue where if Name isn't found in mtgdata.txt an error is written and the card is skipped.
+- CheckStyle fixes in CardFactoryUtil.java.
+- Checkstyle fixes in Upkeep.java.
+- Checkstyle fixes in CardFactory_Auras.java.
+- CheckStyle fixes in AbilityFactory_Animate.java.
+- Issue 187: You win - window covers the booster select window.
+- Changed setAlwaysOnTop() to toFront().
+- Issue 188: Window title text truncated in *Choose a format of cards for the pr...* window.
+- Shortened window title to fit.
+- CheckStyle cleanup in AbilityFactory.java.
+- Fixed targeting of Noble Vestige and Shieldmate's Blessing.
+- Added SVar:RemRandomDeck:True to Execute.
+- Fixed targeting of some more cards using AF PreventDamage.
+- Cleanup for last commit.
+- Added old deck generators back due to popular demand.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
