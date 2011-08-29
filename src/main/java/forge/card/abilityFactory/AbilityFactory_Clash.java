@@ -355,8 +355,14 @@ public class AbilityFactory_Clash {
         //Run triggers
         //HashMap<String,Object> runParams = new HashMap<String,Object>();
         //runParams.put("Player", player);
+    	if (params.get("RememberAll") != null){
+    	    host.addRemembered(host);
+    	}
 
         if (victory) {
+            if (params.get("RememberWinner") != null){
+                host.addRemembered(host);
+            }
             if (params.containsKey("WinSubAbility")) {
                 SpellAbility win = AF_Outcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
@@ -367,6 +373,9 @@ public class AbilityFactory_Clash {
     		//runParams.put("Won","True");
     	}
     	else {
+    	    if (params.get("RememberLoser") != null){
+                host.addRemembered(host);
+            }
     		if(params.containsKey("LoseSubAbility")) {
     			SpellAbility lose = AF_Outcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
     			lose.setActivatingPlayer(player);
