@@ -158,7 +158,6 @@
                 <configuration>
                     <revisionOnScmFailure>0000</revisionOnScmFailure>
                     <providerImplementations>
-                        <svn>javasvn</svn>
                     </providerImplementations>
                 </configuration>
             </plugin>
@@ -595,7 +594,7 @@
         <dependency>
             <groupId>commons-discovery</groupId>
             <artifactId>commons-discovery</artifactId>
-            <version>20040218.194635</version>
+            <version>0.5</version>
         </dependency>
         <dependency>
             <groupId>axis</groupId>
