@@ -1,0 +1,14 @@
+Name:Goblin Bomb
+ManaCost:1 R
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigFlip | TriggerDescription$ At the beginning of your upkeep, you may flip a coin. If you win the flip, put a fuse counter on CARDNAME. If you lose the flip, remove a fuse counter from CARDNAME.
+SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBAddCounter | LoseSubAbility$ DBRemoveCounter
+SVar:DBAddCounter:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FUSE | CounterNum$ 1
+SVar:DBRemoveCounter:DB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FUSE | CounterNum$ 1
+A:AB$ DealDamage | Cost$ SubCounter<5/FUSE> Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$  Choose target player |  NumDmg$ 20 | SpellDescription$ CARDNAME deals 20 damage to target player.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bomb.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/103.jpg
+End

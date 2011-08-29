@@ -3106,6 +3106,7 @@ res/cardsfolder/g/goblin_assault.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_balloon_brigade.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bangchuckers.txt -text
 res/cardsfolder/g/goblin_berserker.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_bomb.txt -text
 res/cardsfolder/g/goblin_bombardment.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_brigand.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bully.txt svneol=native#text/plain
@@ -3137,10 +3138,12 @@ res/cardsfolder/g/goblin_grenadiers.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_guide.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_hero.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_king.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_kites.txt -text
 res/cardsfolder/g/goblin_lackey.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_legionnaire.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_lookout.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_lore.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_lyre.txt -text
 res/cardsfolder/g/goblin_marshal.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_masons.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_matron.txt svneol=native#text/plain
@@ -4883,6 +4886,7 @@ res/cardsfolder/m/molten_hydra.txt svneol=native#text/plain
 res/cardsfolder/m/molten_psyche.txt svneol=native#text/plain
 res/cardsfolder/m/molten_rain.txt svneol=native#text/plain
 res/cardsfolder/m/molten_ravager.txt svneol=native#text/plain
+res/cardsfolder/m/molten_sentry.txt -text
 res/cardsfolder/m/molten_slagheap.txt svneol=native#text/plain
 res/cardsfolder/m/molten_tail_masticore.txt svneol=native#text/plain
 res/cardsfolder/m/moltensteel_dragon.txt svneol=native#text/plain
@@ -8315,6 +8319,7 @@ res/cardsfolder/v/viashino_heretic.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_outrider.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_sandscout.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_sandstalker.txt svneol=native#text/plain
+res/cardsfolder/v/viashino_sandswimmer.txt -text
 res/cardsfolder/v/viashino_skeleton.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_slasher.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_slaughtermaster.txt svneol=native#text/plain

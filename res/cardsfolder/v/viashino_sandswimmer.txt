@@ -1,0 +1,13 @@
+Name:Viashino Sandswimmer
+ManaCost:2 R R
+Types:Creature Viashino
+Text:no text
+PT:3/2
+A:AB$ FlipACoin | Cost$ R | WinSubAbility$ DBReturn | LoseSubAbility$ DBSacrifice | SpellDescription$ Flip a coin. If you win the flip, return CARDNAME to its owner's hand. If you lose the flip, sacrifice CARDNAME.
+SVar:DBReturn:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
+SVar:DBSacrifice:DB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandswimmer.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/225.jpg
+End
