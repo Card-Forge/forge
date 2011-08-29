@@ -5,6 +5,7 @@ Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LT1 | Description$ CARDNAME can't attack unless an opponent has been dealt damage this turn.
 SVar:X:Count$OppDamageThisTurn
-Oracle:Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcrazed_goblin.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/125.jpg
+Oracle:Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn.
 End
