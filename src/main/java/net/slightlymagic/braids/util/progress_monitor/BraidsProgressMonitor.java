@@ -112,6 +112,12 @@ public interface BraidsProgressMonitor {
 	 * even if it would otherwise be too soon to update the UI.
 	 */
 	public abstract boolean shouldUpdateUI();
+	
+	/**
+     * Subclasses must call this immediately after updating the UI, to 
+     * preserve the integrity of the shouldUpdateUI method.
+     */
+	public abstract void justUpdatedUI();
 
 	/**
 	 * This is the only way to advance the phase number.

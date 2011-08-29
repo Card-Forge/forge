@@ -9876,8 +9876,6 @@ src/main/java/net/slightlymagic/braids/util/lambda/package-info.java svneol=nati
 src/main/java/net/slightlymagic/braids/util/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/util/progress_monitor/SplashModelProgressMonitor.java -text
-src/main/java/net/slightlymagic/braids/util/progress_monitor/SplashViewProgressMonitor.java -text
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text

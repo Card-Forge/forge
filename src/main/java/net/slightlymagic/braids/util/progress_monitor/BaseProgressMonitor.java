@@ -31,6 +31,16 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
 	
 	/**
      * Convenience for 
+     * BaseProgressMonitor(1, 1, 2.0f, null).
+     * 
+     * @see #BaseProgressMonitor(int,long,float,float[])
+     */
+    public BaseProgressMonitor() {
+        this(1, 1L, 2.0f, null);
+    }
+    
+	/**
+     * Convenience for 
      * BaseProgressMonitor(numPhases, 1, 2.0f, null).
      * 
      * @see #BaseProgressMonitor(int,long,float,float[])
@@ -300,7 +310,7 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
      * Subclasses must call this immediately after updating the UI, to 
      * preserve the integrity of the shouldUpdateUI method.
      */
-    protected void justUpdatedUI() {
+    public void justUpdatedUI() {
     	this.lastUIUpdateTime = new Date().getTime()/1000;
     }
         

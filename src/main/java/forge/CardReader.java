@@ -19,7 +19,7 @@ import java.util.zip.ZipFile;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 
 import com.google.code.jyield.Generator;
@@ -187,7 +187,7 @@ public class CardReader
 
         // Try to retrieve card loading progress monitor model.
         // If no progress monitor present, output results to console.
-        BaseProgressMonitor monitor = null;
+        BraidsProgressMonitor monitor = null;
         final FView view = Singletons.getView();
         if (view != null) {
             monitor = view.getCardLoadingProgressMonitor();
@@ -206,7 +206,9 @@ public class CardReader
                 findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
             }
 
-            monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
+            if(monitor!=null) {
+                monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
+            }
 
             for (File cardTxtFile : findNonDirsIterable) {
                 if (!cardTxtFile.getName().endsWith(CARD_FILE_DOT_EXTENSION)) {
