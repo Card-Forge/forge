@@ -40,7 +40,7 @@ class CardFactory_Auras {
      * @param c a {@link forge.Card} object.
      * @return a int.
      */
-    public final static int shouldCycle(Card c) {
+    public static final int shouldCycle(final Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).toString().startsWith("Cycling")) {
@@ -64,7 +64,8 @@ class CardFactory_Auras {
         if (cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")
                 || cardName.equals("Spreading Seas") || cardName.equals("Evil Presence")
                 || cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim")
-                || cardName.equals("Tainted Well")) {
+                || cardName.equals("Tainted Well"))
+        {
 
             final String[] newType = new String[1];
             final SpellAbility spell = new Spell(card) {
@@ -81,13 +82,16 @@ class CardFactory_Auras {
                     if (card.getName().equals("Spreading Seas")
                             || card.getName().equals("Lingering Mirage")
                             || card.getName().equals("Sea's Claim")
-                            || card.getName().equals("Phantasmal Terrain")) {
+                            || card.getName().equals("Phantasmal Terrain"))
+                    {
                         newType[0] = "Island";
                     } else if (card.getName().equals("Evil Presence")
-                            || card.getName().equals("Tainted Well")) {
+                            || card.getName().equals("Tainted Well"))
+                    {
                         newType[0] = "Swamp";
                     } else if (card.getName().equals("Convincing Mirage")
-                            || card.getName().equals("Phantasmal Terrain")) {
+                            || card.getName().equals("Phantasmal Terrain"))
+                    {
                         String[] landTypes = new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"};
                         HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
                         CardList humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
@@ -126,35 +130,40 @@ class CardFactory_Auras {
                     }
                     setTargetCard(list.get(0));
                     return true;
-                }//canPlayAI()
+                } //canPlayAI()
 
                 @Override
                 public void resolve() {
                     if (card.getName().equals("Spreading Seas")
                             || card.getName().equals("Lingering Mirage")
-                            || card.getName().equals("Sea's Claim")) {
+                            || card.getName().equals("Sea's Claim"))
+                    {
                         newType[0] = "Island";
                     } else if (card.getName().equals("Evil Presence")
-                            || card.getName().equals("Tainted Well")) {
+                            || card.getName().equals("Tainted Well"))
+                    {
                         newType[0] = "Swamp";
                     } else if (card.getName().equals("Convincing Mirage")
-                            || card.getName().equals("Phantasmal Terrain")) {
+                            || card.getName().equals("Phantasmal Terrain"))
+                    {
                         //Only query player, AI will have decided already.
                         if (card.getController().isHuman()) {
-                            newType[0] = GuiUtils.getChoice("Select land type.", "Plains", "Island", "Swamp", "Mountain", "Forest");
+                            newType[0] = GuiUtils.getChoice("Select land type.",
+                                    "Plains", "Island", "Swamp", "Mountain", "Forest");
                         }
                     }
                     AllZone.getGameAction().moveToPlay(card);
 
                     Card c = getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) 
-                            && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZoneUtil.isCardInPlay(c)
+                            && CardFactoryUtil.canTarget(card, c))
+                    {
                         card.enchantCard(c);
                     }
 
-                }//resolve()
-            };//SpellAbility
+                } //resolve()
+            }; //SpellAbility
 
 
             spell.setDescription("");
@@ -190,20 +199,20 @@ class CardFactory_Auras {
 
                             crd.addType(newType[0]);
                         } else {
-                            Card Other_Seas = null;
+                            Card otherSeas = null;
                             for (int i = 0; i < seas.size(); i++) {
                                 if (seas.get(i) != card) {
-                                    Other_Seas = seas.get(i);
+                                    otherSeas = seas.get(i);
                                 }
                             }
-                            SpellAbility[] Abilities = Other_Seas.getSpellAbility();
-                            for (int i = 0; i < Abilities.length; i++) {
-                                card.addSpellAbility(Abilities[i]);
+                            SpellAbility[] abilities = otherSeas.getSpellAbility();
+                            for (int i = 0; i < abilities.length; i++) {
+                                card.addSpellAbility(abilities[i]);
                             }
                         }
                     }
-                }//execute()
-            };//Command
+                } //execute()
+            }; //Command
 
             Command onUnEnchant = new Command() {
                 private static final long serialVersionUID = -202144631191180334L;
@@ -224,25 +233,25 @@ class CardFactory_Auras {
                             crd.removeType("Basic");
                             crd.removeType("Snow");
                             crd.removeType("Legendary");
-                            SpellAbility[] Card_Abilities = crd.getSpellAbility();
-                            for (int i = 0; i < Card_Abilities.length; i++) {
-                                if (Card_Abilities[i].isIntrinsic()) {
-                                    crd.removeSpellAbility(Card_Abilities[i]);
+                            SpellAbility[] cardAbilities = crd.getSpellAbility();
+                            for (int i = 0; i < cardAbilities.length; i++) {
+                                if (cardAbilities[i].isIntrinsic()) {
+                                    crd.removeSpellAbility(cardAbilities[i]);
                                 }
                             }
                             Card c = AllZone.getCardFactory().copyCard(crd);
                             ArrayList<String> types = c.getType();
-                            SpellAbility[] Abilities = card.getSpellAbility();
+                            SpellAbility[] abilities = card.getSpellAbility();
                             for (int i = 0; i < types.size(); i++) {
                                 crd.addType(types.get(i));
                             }
-                            for (int i = 0; i < Abilities.length; i++) {
-                                crd.addSpellAbility(Abilities[i]);
+                            for (int i = 0; i < abilities.length; i++) {
+                                crd.addSpellAbility(abilities[i]);
                             }
                         }
                     }
-                }//execute()
-            };//Command
+                } //execute()
+            }; //Command
 
             Command onLeavesPlay = new Command() {
 
@@ -272,7 +281,7 @@ class CardFactory_Auras {
                 }
             };
             spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
+        } //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -292,7 +301,7 @@ class CardFactory_Auras {
                     }
 
                     CardListFilter f = new CardListFilter() {
-                        public final boolean addCard(Card c) {
+                        public final boolean addCard(final Card c) {
                             return c.getNetDefense() - c.getDamage() <= 2;
                         }
                     };
@@ -308,7 +317,7 @@ class CardFactory_Auras {
                         }
                     }
                     return false;
-                }//canPlayAI()
+                } //canPlayAI()
 
                 @Override
                 public void resolve() {
@@ -317,12 +326,13 @@ class CardFactory_Auras {
                     Card c = getTargetCard();
 
                     if (AllZoneUtil.isCardInPlay(c)
-                            && CardFactoryUtil.canTarget(card, c)) {
+                            && CardFactoryUtil.canTarget(card, c))
+                    {
                         card.enchantCard(c);
                         Log.debug("Enchanted: " + getTargetCard());
                     }
-                }//resolve()
-            };//SpellAbility
+                } //resolve()
+            }; //SpellAbility
 
             card.addSpellAbility(spell);
 
@@ -343,8 +353,8 @@ class CardFactory_Auras {
                             badTarget[0] = true;
                         }
                     }
-                }//execute()
-            };//Command
+                } //execute()
+            }; //Command
 
             Command onUnEnchant = new Command() {
 
@@ -352,12 +362,13 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()
-                            && !badTarget[0]) {
+                            && !badTarget[0])
+                    {
                         Card crd = card.getEnchanting().get(0);
                         crd.addIntrinsicKeyword("Flying");
                     }
-                }//execute()
-            };//Command
+                } //execute()
+            }; //Command
 
             Command onLeavesPlay = new Command() {
 
@@ -374,7 +385,7 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-        }//*************** END ************ END **************************
+        } //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -407,7 +418,8 @@ class CardFactory_Auras {
                         for (int i = 0; i < list.size(); i++) {
                             if (CardFactoryUtil.canTarget(card, list.get(i))
                                     && (list.get(i).getNetAttack() >= list.get(i).getNetDefense())
-                                    && list.get(i).getNetAttack() >= 3) {
+                                    && list.get(i).getNetAttack() >= 3)
+                            {
                                 setTargetCard(list.get(i));
                                 return super.canPlayAI();
                             }
@@ -415,7 +427,7 @@ class CardFactory_Auras {
                     }
                     return false;
 
-                }//canPlayAI()
+                } //canPlayAI()
 
                 @Override
                 public void resolve() {
@@ -424,14 +436,15 @@ class CardFactory_Auras {
                     Card c = getTargetCard();
 
                     if (AllZoneUtil.isCardInPlay(c)
-                            && CardFactoryUtil.canTarget(aura, c)) {
-                    	aura.enchantCard(c);
+                            && CardFactoryUtil.canTarget(aura, c))
+                    {
+                        aura.enchantCard(c);
                     }
-                }//resolve()
-            };//SpellAbility
+                } //resolve()
+            }; //SpellAbility
 
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
+        } //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -458,8 +471,9 @@ class CardFactory_Auras {
                     CardList cList = getCreturesInGrave();
                     // AI will only target something that will stick in play.
                     cList = cList.filter(new CardListFilter() {
-                        public final boolean addCard(Card crd) {
-                            return CardFactoryUtil.canTarget(card, crd) && !CardFactoryUtil.hasProtectionFrom(card, crd);
+                        public final boolean addCard(final Card crd) {
+                            return CardFactoryUtil.canTarget(card, crd)
+                                        && !CardFactoryUtil.hasProtectionFrom(card, crd);
                         }
                     });
                     if (cList.size() == 0) {
@@ -471,7 +485,7 @@ class CardFactory_Auras {
                     setTargetCard(c);
                     boolean playable = 2 < c.getNetAttack() && 2 < c.getNetDefense() && super.canPlayAI();
                     return playable;
-                }//canPlayAI
+                } //canPlayAI
 
                 @Override
                 public void resolve() {
@@ -479,7 +493,7 @@ class CardFactory_Auras {
                     super.resolve();
                 }
 
-            };//addSpellAbility
+            }; //addSpellAbility
 
             // Target AbCost and Restriction are set here to get this working as expected
             Target tgt = new Target(card, "Select a creature in a graveyard", "Creature".split(","));
@@ -528,7 +542,7 @@ class CardFactory_Auras {
 
                     // Everything worked out perfectly.
                 }
-            };//Ability
+            }; //Ability
 
             final Command attachCmd = new Command() {
                 private static final long serialVersionUID = 3595188622377350327L;
@@ -551,7 +565,7 @@ class CardFactory_Auras {
                         AllZone.getGameAction().sacrifice(c);
                     }
                 }
-            };//Detach
+            }; //Detach
 
             final Command detachCmd = new Command() {
                 private static final long serialVersionUID = 2425333033834543422L;
@@ -567,7 +581,7 @@ class CardFactory_Auras {
 
                 }
             };
-            
+
             card.addSpellAbility(animate);
 
             attach.setStackDescription("Attaching " + cardName + " to creature in graveyard.");
@@ -575,7 +589,7 @@ class CardFactory_Auras {
             detach.setStackDescription(cardName + " left play. Sacrificing creature if still around.");
             card.addLeavesPlayCommand(detachCmd);
             card.addUnEnchantCommand(detachCmd);
-        }//*************** END ************ END **************************
+        } //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -583,7 +597,7 @@ class CardFactory_Auras {
             int n = CardFactoryUtil.hasKeyword(card, "enchant");
             if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
 
                 SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsMultiKicker(true);
