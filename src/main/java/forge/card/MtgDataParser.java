@@ -118,7 +118,9 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
         if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
 
-        return new CardRules(name, type, manaCost, ptOrLoyalty, strs.toArray(emptyArray), sets);
+        return new CardRules(name, type, manaCost, ptOrLoyalty, strs.toArray(emptyArray), sets,
+                // TODO: fix last two parameters
+                false, false);
     }
 
     private Map<String, CardInSet> getValidEditions(final String sets, final boolean isBasicLand) {

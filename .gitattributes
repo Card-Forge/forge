@@ -9611,11 +9611,13 @@ src/main/java/forge/card/CardDb.java -text
 src/main/java/forge/card/CardInSet.java -text
 src/main/java/forge/card/CardManaCost.java -text
 src/main/java/forge/card/CardManaCostShard.java -text
+src/main/java/forge/card/CardParsingException.java -text
 src/main/java/forge/card/CardPool.java -text
 src/main/java/forge/card/CardPoolView.java -text
 src/main/java/forge/card/CardPrinted.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRules.java -text
+src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
 src/main/java/forge/card/CardSet.java -text
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text

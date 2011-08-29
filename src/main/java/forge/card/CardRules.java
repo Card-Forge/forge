@@ -36,6 +36,9 @@ public final class CardRules {
 
     private Map<String, CardInSet> setsPrinted = null;
 
+    private boolean removedFromAIDecks = false;
+    private boolean removedFromRandomDecks = false;
+
     // Ctor and builders are needed here
     public String getName() { return name; }
     public CardType getType() { return type; }
@@ -50,6 +53,22 @@ public final class CardRules {
     public int getIntToughness() { return iToughness; }
     public String getLoyalty() { return loyalty; }
 
+    /**
+     * Getter for removedFromAIDecks.
+     * @return the removedFromAIDecks value
+     */
+    public final boolean isRemovedFromAIDecks() {
+        return removedFromAIDecks;
+    }
+
+    /**
+     * Getter for removedFromRandomDecks.
+     * @return the removedFromRandomDecks value
+     */
+    public final boolean isRemovedFromRandomDecks() {
+        return removedFromRandomDecks;
+    }
+
     public String getPTorLoyalty() {
         if (getType().isCreature()) { return power + "/" + toughness; }
         if (getType().isPlaneswalker()) { return loyalty; }
@@ -57,13 +76,17 @@ public final class CardRules {
     }
 
     public CardRules(final String cardName, final CardType cardType, final String manacost,
-            final String ptLine, final String[] cardRules, final Map<String, CardInSet> setsData)
+            final String ptLine, final String[] cardRules, final Map<String, CardInSet> setsData,
+            final boolean removedFromRandomDecks0, final boolean removedFromAIDecks0)
     {
         this.name = cardName;
         this.type = cardType;
         this.cost = manacost == null ? CardManaCost.empty : new CardManaCost(manacost);
         this.rules = cardRules;
         this.color = new CardColor(cost);
+        this.removedFromAIDecks = removedFromAIDecks0;
+        this.removedFromRandomDecks = removedFromRandomDecks0;
+
         if (cardType.isCreature()) {
             int slashPos = ptLine.indexOf('/');
             if (slashPos == -1) {
