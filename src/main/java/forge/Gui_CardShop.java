@@ -372,7 +372,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         NumberFormat formatter = new DecimalFormat("#0.00");
         String maxSellingPrice = "";
         if (questData.getWin() <= 50)
-            maxSellingPrice = "     Max selling price: 500";
+            maxSellingPrice = "     Max selling price: 1000";
         sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) + "% of value)"
                 + maxSellingPrice);
 
@@ -716,8 +716,8 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             questData.addCardToShopList(c);
 
             long price = (long) (multi * c.getValue());
-            if (questData.getWin() <= 50 && price > 500)
-                price = 500;
+            if (questData.getWin() <= 50 && price > 1000)
+                price = 1000;
 
             questData.addCredits(price);
             questData.removeCard(c);
