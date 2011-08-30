@@ -2088,7 +2088,8 @@ public class CombatUtil {
                             Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments, attacker, false);
                         }
                         if (Enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
-                            AllZone.getGameAction().moveToPlay(Enchantment);
+                            GameAction.changeZone(AllZone.getZone(Enchantment), 
+                                    AllZone.getZone(Constant.Zone.Battlefield, Enchantment.getOwner()), Enchantment);
                             Enchantment.enchantCard(attacker);
                         }
                         attacker.getController().shuffle();
@@ -2098,6 +2099,7 @@ public class CombatUtil {
                 StringBuilder sb4 = new StringBuilder();
                 sb4.append(c).append(" - (Exalted) searches library for an Aura card that could enchant that creature, ");
                 sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
+                ability4.setDescription(sb4.toString());
                 ability4.setStackDescription(sb4.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability4);
