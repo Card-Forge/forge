@@ -50,7 +50,7 @@ public class AbilityFactory_Turns {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return addTurnTriggerAI(af, this, mandatory);
             }
 
@@ -113,7 +113,7 @@ public class AbilityFactory_Turns {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return addTurnTriggerAI(af, this, mandatory);
             }
 
@@ -128,26 +128,31 @@ public class AbilityFactory_Turns {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String addTurnStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String addTurnStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
         int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        for (Player player : tgtPlayers)
+        for (Player player : tgtPlayers) {
             sb.append(player).append(" ");
+        }
 
         sb.append("takes ");
         if (numTurns > 1) {
@@ -156,7 +161,9 @@ public class AbilityFactory_Turns {
             sb.append("an");
         }
         sb.append(" extra turn");
-        if (numTurns > 1) sb.append("s");
+        if (numTurns > 1) {
+            sb.append("s");
+        }
         sb.append(" after this one.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -186,7 +193,7 @@ public class AbilityFactory_Turns {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         HashMap<String, String> params = af.getMapParams();
 
@@ -196,10 +203,13 @@ public class AbilityFactory_Turns {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            for (Player p : tgtPlayers)
-                if (p.isHuman() && !mandatory)
+            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(
+                    sa.getSourceCard(), params.get("Defined"), sa);
+            for (Player p : tgtPlayers) {
+                if (p.isHuman() && !mandatory) {
                     return false;
+                }
+            }
             // not sure if the AI should be playing with cards that give the Human more turns.
         }
         return true;
@@ -218,10 +228,12 @@ public class AbilityFactory_Turns {
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
@@ -232,4 +244,4 @@ public class AbilityFactory_Turns {
         }
     }
 
-}//end class AbilityFactory_Turns
+} //end class AbilityFactory_Turns
