@@ -928,7 +928,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return setLifeDoTriggerAI(af, this, mandatory);
             }
 
@@ -1001,7 +1001,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return setLifeDoTriggerAI(af, this, mandatory);
             }
 
@@ -1016,30 +1016,36 @@ public class AbilityFactory_AlterLife {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String setLifeStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String setLifeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" -");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         String conditionDesc = params.get("ConditionDescription");
-        if (conditionDesc != null)
+        if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
+        }
 
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        for (Player player : tgtPlayers)
+        for (Player player : tgtPlayers) {
             sb.append(player).append(" ");
+        }
 
         sb.append("life total becomes ").append(amount).append(".");
 
@@ -1067,12 +1073,14 @@ public class AbilityFactory_AlterLife {
         HashMap<String, String> params = af.getMapParams();
         String amountStr = params.get("LifeAmount");
 
-        if (!AllZone.getComputerPlayer().canGainLife())
+        if (!AllZone.getComputerPlayer().canGainLife()) {
             return false;
+        }
 
         //Don't use setLife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases")) {
             return false;
+        }
 
         // TODO handle proper calculation of X values based on Cost and what would be paid
         int amount;
@@ -1082,8 +1090,9 @@ public class AbilityFactory_AlterLife {
             int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
-        } else
+        } else {
             amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        }
 
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -1095,25 +1104,43 @@ public class AbilityFactory_AlterLife {
                 tgt.addTarget(AllZone.getHumanPlayer());
                 //if we can only target the human, and the Human's life would go up, don't play it.
                 //possibly add a combo here for Magister Sphinx and Higedetsu's (sp?) Second Rite
-                if (amount > hlife || !AllZone.getHumanPlayer().canLoseLife()) return false;
+                if (amount > hlife || !AllZone.getHumanPlayer().canLoseLife()) {
+                    return false;
+                }
             } else {
-                if (amount > life && life <= 10) tgt.addTarget(AllZone.getComputerPlayer());
-                else if (hlife > amount) tgt.addTarget(AllZone.getHumanPlayer());
-                else if (amount > life) tgt.addTarget(AllZone.getComputerPlayer());
-                else return false;
+                if (amount > life && life <= 10) {
+                    tgt.addTarget(AllZone.getComputerPlayer());
+                }
+                else if (hlife > amount) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
+                }
+                else if (amount > life) {
+                    tgt.addTarget(AllZone.getComputerPlayer());
+                }
+                else {
+                    return false;
+                }
             }
         } else {
             if (params.containsKey("Each") && params.get("Defined").equals("Each")) {
-                if (amount == 0) return false;
+                if (amount == 0) {
+                    return false;
+                }
                 else if (life > amount) { //will decrease computer's life
-                    if (life < 5 || ((life - amount) > (hlife - amount))) return false;
+                    if (life < 5 || ((life - amount) > (hlife - amount))) {
+                        return false;
+                    }
                 }
             }
-            if (amount < life) return false;
+            if (amount < life) {
+                return false;
+            }
         }
 
         //if life is in danger, always activate
-        if (life < 3 && amount > life) return true;
+        if (life < 3 && amount > life) {
+            return true;
+        }
 
         return ((r.nextFloat() < .6667) && chance);
     }
@@ -1126,14 +1153,17 @@ public class AbilityFactory_AlterLife {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean setLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean setLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         int life = AllZone.getComputerPlayer().getLife();
         int hlife = AllZone.getHumanPlayer().getLife();
         Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
         String amountStr = params.get("LifeAmount");
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)   // If there is a cost payment it's usually not mandatory
+
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
@@ -1141,25 +1171,39 @@ public class AbilityFactory_AlterLife {
             int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
-        } else
+        }
+        else {
             amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        }
 
-        if (source.getName().equals("Eternity Vessel") &&
-                (AllZoneUtil.isCardInPlay("Vampire Hexmage", AllZone.getHumanPlayer()) || (source.getCounters(Counters.CHARGE) == 0)))
+        if (source.getName().equals("Eternity Vessel")
+                && (AllZoneUtil.isCardInPlay("Vampire Hexmage", AllZone.getHumanPlayer())
+                || (source.getCounters(Counters.CHARGE) == 0)))
+        {
             return false;
+        }
 
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be handled better
         Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent())
+            if (tgt.canOnlyTgtOpponent()) {
                 tgt.addTarget(AllZone.getHumanPlayer());
+            }
             else {
-                if (amount > life && life <= 10) tgt.addTarget(AllZone.getComputerPlayer());
-                else if (hlife > amount) tgt.addTarget(AllZone.getHumanPlayer());
-                else if (amount > life) tgt.addTarget(AllZone.getComputerPlayer());
-                else return false;
+                if (amount > life && life <= 10) {
+                    tgt.addTarget(AllZone.getComputerPlayer());
+                }
+                else if (hlife > amount) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
+                }
+                else if (amount > life) {
+                    tgt.addTarget(AllZone.getComputerPlayer());
+                }
+                else {
+                    return false;
+                }
             }
         }
 
@@ -1185,14 +1229,18 @@ public class AbilityFactory_AlterLife {
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined"))
+        if (tgt != null && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        for (Player p : tgtPlayers)
-            if (tgt == null || p.canTarget(sa))
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canTarget(sa)) {
                 p.setLife(lifeAmount, sa.getSourceCard());
+            }
+        }
     }
 
-}//end class AbilityFactory_AlterLife
+} //end class AbilityFactory_AlterLife
