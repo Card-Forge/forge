@@ -2,34 +2,20 @@ package forge.card;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.Enumeration;
+//import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+//import java.util.zip.ZipEntry;
+//import java.util.zip.ZipFile;
 
-import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
-import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-
-import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.properties.NewConstants;
-import forge.view.FView;
 
 
 /**
@@ -60,17 +46,19 @@ public class CardRulesReader
     /** Special value for estimatedFilesRemaining. */
     protected static final int UNKNOWN_NUMBER_OF_FILES_REMAINING = -1; // NOPMD by Braids on 8/18/11 10:54 PM
 
-    private transient Map<String, CardRules> mapToFill;
-    private transient File cardsfolder;
+    //private transient Map<String, CardRules> mapToFill;
+    //private transient File cardsfolder;
 
-    private transient ZipFile zip;
+    //private transient ZipFile zip;
     private transient Charset charset;
 
-    private transient Enumeration<? extends ZipEntry> zipEnum;
+    //private transient Enumeration<? extends ZipEntry> zipEnum;
 
+    /*
     private transient long estimatedFilesRemaining = // NOPMD by Braids on 8/18/11 10:56 PM
             UNKNOWN_NUMBER_OF_FILES_REMAINING;
-
+     */
+    
     private transient Iterable<File> findNonDirsIterable; // NOPMD by Braids on 8/18/11 10:56 PM
 
 

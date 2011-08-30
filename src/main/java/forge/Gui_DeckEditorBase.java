@@ -8,9 +8,7 @@ import javax.swing.JFrame;
 
 import net.slightlymagic.maxmtg.Predicate;
 
-import forge.card.CardCoreType;
 import forge.card.CardRules;
-import forge.card.CardRules.Predicates;
 import forge.card.CardPoolView;
 
 public class Gui_DeckEditorBase extends JFrame  {

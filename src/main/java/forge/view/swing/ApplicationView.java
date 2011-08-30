@@ -1,11 +1,9 @@
 package forge.view.swing;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 import com.esotericsoftware.minlog.Log;

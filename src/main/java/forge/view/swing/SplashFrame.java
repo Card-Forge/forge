@@ -35,7 +35,7 @@ public class SplashFrame extends JFrame {
     private static final int    DISCLAIMER_FONT_SIZE    = 9;
     private static final Color  DISCLAIMER_COLOR        = Color.white;
     
-    private static final int    CLOSEBTN_PADDING_X      = 15;
+    //private static final int    CLOSEBTN_PADDING_X      = 15;
     private static final int    CLOSEBTN_PADDING_Y      = 15;
     private static final int    CLOSEBTN_SIDELENGTH     = 15;
     private static final Color  CLOSEBTN_COLOR          = new Color(215,208,188);
