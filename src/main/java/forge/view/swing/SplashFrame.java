@@ -3,15 +3,18 @@ package forge.view.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 /**
@@ -23,15 +26,19 @@ public class SplashFrame extends JFrame {
     // Inits: Visual changes can be made here.
     private static final String BG_ADDRESS = "res/images/ui/forgeSplash.jpg";
     
-    private static final int    PADDING_X               = 20;
-    private static final int    PADDING_Y               = 20;
+    private static final int    BAR_PADDING_X           = 20;
+    private static final int    BAR_PADDING_Y           = 20;
+    private static final int    BAR_HEIGHT              = 57;
     
-    private static final int    BAR_HEIGHT_PX           = 57;
-    private static final int    DISCLAIMER_HEIGHT_PX    = 20;
-    private static final int    DISCLAIMER_TOP_PX       = 300;
-    
+    private static final int    DISCLAIMER_HEIGHT       = 20;
+    private static final int    DISCLAIMER_TOP          = 300;
     private static final int    DISCLAIMER_FONT_SIZE    = 9;
     private static final Color  DISCLAIMER_COLOR        = Color.white;
+    
+    private static final int    CLOSEBTN_PADDING_X      = 15;
+    private static final int    CLOSEBTN_PADDING_Y      = 15;
+    private static final int    CLOSEBTN_SIDELENGTH     = 15;
+    private static final Color  CLOSEBTN_COLOR          = new Color(215,208,188);
     
     private SplashProgressModel monitorModel = null;
     private SplashProgressComponent monitorView = null;
@@ -71,14 +78,48 @@ public class SplashFrame extends JFrame {
         // Add disclaimer
         final JLabel lblDisclaimer = new JLabel("<html><center>Forge is not affiliated in any way with Wizards of the Coast.<br>Forge is open source software, released under the GNU Public License.</center></html>");
 
-        lblDisclaimer.setBounds(PADDING_X, DISCLAIMER_TOP_PX,
-                splashWidthPx - (2 * PADDING_X), DISCLAIMER_HEIGHT_PX);
+        lblDisclaimer.setBounds(0, DISCLAIMER_TOP,
+                splashWidthPx, DISCLAIMER_HEIGHT);
 
         lblDisclaimer.setFont(new Font("Tahoma", Font.PLAIN, DISCLAIMER_FONT_SIZE));
         lblDisclaimer.setHorizontalAlignment(SwingConstants.CENTER);
         lblDisclaimer.setForeground(DISCLAIMER_COLOR);
         contentPane.add(lblDisclaimer);
        
+        // Add close button
+        final JButton btnClose = new JButton("X");
+        btnClose.setBounds(splashWidthPx- (2 * CLOSEBTN_PADDING_Y),
+                CLOSEBTN_PADDING_Y,CLOSEBTN_SIDELENGTH,CLOSEBTN_SIDELENGTH);
+        btnClose.setForeground(CLOSEBTN_COLOR);
+        btnClose.setBorder(BorderFactory.createLineBorder(CLOSEBTN_COLOR));
+        btnClose.setOpaque(false);
+        btnClose.setBackground(new Color(0,0,0));
+        btnClose.setFocusPainted(false);
+        contentPane.add(btnClose);
+        
+        btnClose.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                dispose();
+            }
+        });
+        
+        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
+                btnClose.setForeground(Color.white);
+            }
+            
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClose.setBorder(BorderFactory.createLineBorder(CLOSEBTN_COLOR));
+                btnClose.setForeground(CLOSEBTN_COLOR);
+            }
+        });
+        
+        // BG fills up with progress bar???
+        
         // Instantiate model and view and tie together.
         monitorModel = new SplashProgressModel();
         monitorView = new SplashProgressComponent();
@@ -88,8 +129,8 @@ public class SplashFrame extends JFrame {
         
         // Add prog bar + message, bg image
         monitorView.displayUpdate("Assembling file list...");
-        monitorView.setBounds(PADDING_X, splashHeightPx - PADDING_Y - BAR_HEIGHT_PX,
-                splashWidthPx - (2 * PADDING_X), BAR_HEIGHT_PX);
+        monitorView.setBounds(BAR_PADDING_X, splashHeightPx - BAR_PADDING_Y - BAR_HEIGHT,
+                splashWidthPx - (2 * BAR_PADDING_X), BAR_HEIGHT);
         contentPane.add(monitorView);
         
         contentPane.setOpaque(false);
