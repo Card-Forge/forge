@@ -117,27 +117,35 @@ public class ApplicationView implements FView {
             }
         });
 
-        AllZone.getCardFactory(); // forces preloading of all cards
-        try {
-            Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
-            SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
-                public void run() {
-                    AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));
-
-                    // Enable only one of the following two lines. The second
-                    // is useful for debugging.
-
-                    splashFrame.dispose();
-                    //splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-
-                    splashFrame = null;
-                    new OldGuiNewGame();
-                }
-            });
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex);
+        // For the following two blocks, check if user has cancelled SplashFrame.
+        // Note: Error thrown sometimes because log file cannot be accessed
+        if(!splashFrame.getSplashHasBeenClosed()) {
+            AllZone.getCardFactory(); // forces preloading of all cards
         }
+        
+        if(!splashFrame.getSplashHasBeenClosed()) {
+            System.out.println("splashFrame still running");
+            try {
+                Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
+                SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
+                    public void run() {
+                        AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));
+    
+                        // Enable only one of the following two lines. The second
+                        // is useful for debugging.
+    
+                        splashFrame.dispose();
+                        //splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    
+    
+                        splashFrame = null;
+                        new OldGuiNewGame();
+                    }
+                });
+            } catch (Exception ex) {
+                ErrorViewer.showError(ex);
+            }
+        }  // End if(splashHasBeenClosed)
 
-    }
+    } // End ApplicationView()
 }

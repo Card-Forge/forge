@@ -42,6 +42,8 @@ public class SplashFrame extends JFrame {
     
     private SplashProgressModel monitorModel = null;
     private SplashProgressComponent monitorView = null;
+    
+    private boolean SplashHasBeenClosed = false;
 
     /**
      * <p>Create the frame; this <strong>must</strong> be called from an event
@@ -102,6 +104,7 @@ public class SplashFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae)
             {
+                setSplashHasBeenClosed(true);
                 dispose();
             }
         });
@@ -155,10 +158,26 @@ public class SplashFrame extends JFrame {
     
     /**
      * Getter for progress monitor model.
-     * @return the BaseProgressMonitor model used in the splash frame.
+     * @return the BraidsProgressMonitor model used in the splash frame.
      */
     public final BraidsProgressMonitor getMonitorModel() {
         return monitorModel;
+    }
+    
+    /**
+     * Returns state of splash frame, to determine if GUI should continue loading.
+     * @return SplashHasBeenClosed boolean.
+     */
+    public final boolean getSplashHasBeenClosed() {
+        return SplashHasBeenClosed;
+    }
+    
+    /**
+     * Sets state of splash frame, to determine if GUI should continue loading.
+     * @param SplashHasBeenClosed boolean.
+     */
+    public final void setSplashHasBeenClosed(boolean neoState) {
+        SplashHasBeenClosed = neoState;
     }
 
 }
