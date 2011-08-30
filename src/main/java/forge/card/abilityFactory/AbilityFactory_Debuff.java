@@ -6,7 +6,11 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * <p>AbilityFactory_Debuff class.</p>
@@ -14,7 +18,11 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Debuff {
+public final class AbilityFactory_Debuff {
+
+    private AbilityFactory_Debuff() {
+        throw new AssertionError();
+    }
     // *************************************************************************
     // ***************************** Debuff ************************************
     // *************************************************************************
@@ -45,7 +53,7 @@ public class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return debuffTriggerAI(af, this, mandatory);
             }
 
@@ -108,7 +116,7 @@ public class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return debuffTriggerAI(af, this, mandatory);
             }
 
@@ -122,7 +130,7 @@ public class AbilityFactory_Debuff {
      * @param params a {@link java.util.HashMap} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> getKeywords(HashMap<String, String> params) {
+    private static ArrayList<String> getKeywords(final HashMap<String, String> params) {
         ArrayList<String> kws = new ArrayList<String>();
         if (params.containsKey("Keywords")) {
             kws.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
@@ -137,7 +145,7 @@ public class AbilityFactory_Debuff {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String debuffStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String debuffStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         Card host = af.getHostCard();
         ArrayList<String> kws = getKeywords(params);
@@ -145,24 +153,32 @@ public class AbilityFactory_Debuff {
 
         ArrayList<Card> tgtCards;
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         if (tgtCards.size() > 0) {
-            if (sa instanceof Ability_Sub)
+            if (sa instanceof Ability_Sub) {
                 sb.append(" ");
-            else
+            } else {
                 sb.append(host).append(" - ");
+            }
 
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card tgtC = it.next();
-                if (tgtC.isFaceDown()) sb.append("Morph");
-                else sb.append(tgtC);
+                if (tgtC.isFaceDown()) {
+                    sb.append("Morph");
+                }
+                else {
+                    sb.append(tgtC);
+                }
 
-                if (it.hasNext()) sb.append(" ");
+                if (it.hasNext()) {
+                    sb.append(" ");
+                }
             }
             sb.append(" loses ");
             /*
@@ -197,20 +213,24 @@ public class AbilityFactory_Debuff {
     private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         Card source = sa.getSourceCard();
-        if (sa.getTarget() == null && !AllZoneUtil.isCardInPlay(source))
+        if (sa.getTarget() == null && !AllZoneUtil.isCardInPlay(source)) {
             return false;
+        }
 
         Cost cost = sa.getPayCosts();
-        
+
         // temporarily disabled until AI is improved
-        if (!CostUtil.checkCreatureSacrificeCost(cost, source)) 
+        if (!CostUtil.checkCreatureSacrificeCost(cost, source)) {
             return false;
-        
-        if (!CostUtil.checkLifeCost(cost, source, 40))
+        }
+
+        if (!CostUtil.checkLifeCost(cost, source, 40)) {
             return false;
-        
-        if (!CostUtil.checkRemoveCounterCost(cost, source))
+        }
+
+        if (!CostUtil.checkRemoveCounterCost(cost, source)) {
             return false;
+        }
 
         HashMap<String, String> params = af.getMapParams();
         SpellAbility_Restriction restrict = sa.getRestrictions();
@@ -218,8 +238,9 @@ public class AbilityFactory_Debuff {
         // Phase Restrictions
         if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_Begin)) {
             // Instant-speed pumps should not be cast outside of combat when the stack is empty
-            if (!AbilityFactory.isSorcerySpeed(sa))
+            if (!AbilityFactory.isSorcerySpeed(sa)) {
                 return false;
+            }
         }
 
         int activations = restrict.getNumberTurnActivations();
@@ -231,10 +252,12 @@ public class AbilityFactory_Debuff {
 
         if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
             ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-            if (cards.size() == 0)
+            if (cards.size() == 0) {
                 return false;
-        } else
+            }
+        } else {
             return debuffTgtAI(af, sa, getKeywords(params), false);
+        }
 
         return false;
     }
@@ -246,15 +269,16 @@ public class AbilityFactory_Debuff {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffDrawbackAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean debuffDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
             //TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
-        } else
+        } else {
             return debuffTgtAI(af, sa, getKeywords(params), false);
+        }
 
         return true;
-    }//debuffDrawbackAI()
+    } //debuffDrawbackAI()
 
     /**
      * <p>debuffTgtAI.</p>
@@ -265,10 +289,13 @@ public class AbilityFactory_Debuff {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean debuffTgtAI(AbilityFactory af, SpellAbility sa, ArrayList<String> kws, boolean mandatory) {
+    private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa,
+            final ArrayList<String> kws, final boolean mandatory)
+    {
         //this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility))
+        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
             return false;
+        }
 
         Target tgt = af.getAbTgt();
         tgt.resetTargets();
@@ -281,8 +308,9 @@ public class AbilityFactory_Debuff {
         //3. remove Indestructible keyword so it can be destroyed?
         //3a. remove Persist?
 
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return mandatory && debuffMandatoryTarget(af, sa, mandatory);
+        }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
@@ -290,8 +318,9 @@ public class AbilityFactory_Debuff {
 
             if (list.isEmpty()) {
                 if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0) {
-                    if (mandatory)
+                    if (mandatory) {
                         return debuffMandatoryTarget(af, sa, mandatory);
+                    }
 
                     tgt.resetTargets();
                     return false;
@@ -307,7 +336,7 @@ public class AbilityFactory_Debuff {
         }
 
         return true;
-    }//pumpTgtAI()
+    } //pumpTgtAI()
 
     /**
      * <p>getCurseCreatures.</p>
@@ -317,21 +346,23 @@ public class AbilityFactory_Debuff {
      * @param kws a {@link java.util.ArrayList} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getCurseCreatures(AbilityFactory af, SpellAbility sa, final ArrayList<String> kws) {
+    private static CardList getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
+            final ArrayList<String> kws)
+    {
         Card hostCard = af.getHostCard();
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
 
         if (!list.isEmpty()) {
             list = list.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
+                public boolean addCard(final Card c) {
                     return c.hasAnyKeyword(kws);    // don't add duplicate negative keywords
                 }
             });
         }
 
         return list;
-    }//getCurseCreatures()
+    } //getCurseCreatures()
 
     /**
      * <p>debuffMandatoryTarget.</p>
@@ -341,7 +372,9 @@ public class AbilityFactory_Debuff {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean debuffMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
         CardList list = AllZoneUtil.getCardsInPlay();
         Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -352,22 +385,25 @@ public class AbilityFactory_Debuff {
         }
 
         // Remove anything that's already been targeted
-        for (Card c : tgt.getTargetCards())
+        for (Card c : tgt.getTargetCards()) {
             list.remove(c);
+        }
 
         CardList pref = list.getController(AllZone.getHumanPlayer());
         CardList forced = list.getController(AllZone.getComputerPlayer());
         Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
-            if (pref.isEmpty())
+            if (pref.isEmpty()) {
                 break;
+            }
 
             Card c;
-            if (pref.getNotType("Creature").size() == 0)
+            if (pref.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.AI_getBestCreature(pref);
-            else
+            } else {
                 c = CardFactoryUtil.AI_getMostExpensivePermanent(pref, source, true);
+            }
 
             pref.remove(c);
 
@@ -375,15 +411,17 @@ public class AbilityFactory_Debuff {
         }
 
         while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            if (forced.isEmpty())
+            if (forced.isEmpty()) {
                 break;
+            }
 
             //TODO - if forced targeting, just pick something without the given keyword
             Card c;
-            if (forced.getNotType("Creature").size() == 0)
+            if (forced.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.AI_getWorstCreature(forced);
-            else
+            } else {
                 c = CardFactoryUtil.AI_getCheapestPermanent(forced, source, true);
+            }
 
             forced.remove(c);
 
@@ -396,7 +434,7 @@ public class AbilityFactory_Debuff {
         }
 
         return true;
-    }//pumpMandatoryTarget()
+    } //pumpMandatoryTarget()
 
     /**
      * <p>debuffTriggerAI.</p>
@@ -406,17 +444,19 @@ public class AbilityFactory_Debuff {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean debuffTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private static boolean debuffTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         HashMap<String, String> params = af.getMapParams();
 
         ArrayList<String> kws = getKeywords(params);
 
         if (sa.getTarget() == null) {
-            if (mandatory)
+            if (mandatory) {
                 return true;
+            }
         } else {
             return debuffTgtAI(af, sa, kws, mandatory);
         }
@@ -438,16 +478,19 @@ public class AbilityFactory_Debuff {
 
         ArrayList<Card> tgtCards;
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        }
 
         for (final Card tgtC : tgtCards) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(host, tgtC)) {
                 for (String kw : kws) {
-                    if (tgtC.getIntrinsicKeyword().contains(kw)) hadIntrinsic.add(kw);
+                    if (tgtC.getIntrinsicKeyword().contains(kw)) {
+                        hadIntrinsic.add(kw);
+                    }
                     tgtC.removeIntrinsicKeyword(kw);
                     tgtC.removeExtrinsicKeyword(kw);
                 }
@@ -467,7 +510,7 @@ public class AbilityFactory_Debuff {
             }
         }
 
-    }//debuffResolve
+    } //debuffResolve
 
 
     // *************************************************************************
@@ -501,11 +544,11 @@ public class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return debuffAllTriggerAI(af, this, mandatory);
             }
 
-        };//SpellAbility
+        }; //SpellAbility
 
         return abDebuffAll;
     }
@@ -535,7 +578,7 @@ public class AbilityFactory_Debuff {
             public void resolve() {
                 debuffAllResolve(af, this);
             }
-        };//SpellAbility
+        }; //SpellAbility
 
         return spDebuffAll;
     }
@@ -567,10 +610,10 @@ public class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return debuffAllTriggerAI(af, this, mandatory);
             }
-        };//SpellAbility
+        }; //SpellAbility
 
         return dbDebuffAll;
     }
@@ -582,7 +625,7 @@ public class AbilityFactory_Debuff {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffAllCanPlayAI(final AbilityFactory af, SpellAbility sa) {
+    private static boolean debuffAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         String valid = "";
         Random r = MyRandom.random;
         //final Card source = sa.getSourceCard();
@@ -604,20 +647,22 @@ public class AbilityFactory_Debuff {
 
         //only count creatures that can attack
         human = human.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
 
         //don't use DebuffAll after Combat_Begin until AI is improved
-        if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin))
+        if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin)) {
             return false;
+        }
 
-        if (comp.size() > human.size())
+        if (comp.size() > human.size()) {
             return false;
+        }
 
         return (r.nextFloat() < .6667) && chance;
-    }//debuffAllCanPlayAI()
+    } //debuffAllCanPlayAI()
 
     /**
      * <p>debuffAllResolve.</p>
@@ -625,14 +670,15 @@ public class AbilityFactory_Debuff {
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void debuffAllResolve(AbilityFactory af, SpellAbility sa) {
+    private static void debuffAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         Card hostCard = af.getHostCard();
         ArrayList<String> kws = getKeywords(params);
         String valid = "";
 
-        if (params.containsKey("ValidCards"))
+        if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
+        }
 
         CardList list = AllZoneUtil.getCardsInPlay();
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
@@ -641,7 +687,9 @@ public class AbilityFactory_Debuff {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
                 for (String kw : kws) {
-                    if (tgtC.getIntrinsicKeyword().contains(kw)) hadIntrinsic.add(kw);
+                    if (tgtC.getIntrinsicKeyword().contains(kw)) {
+                        hadIntrinsic.add(kw);
+                    }
                     tgtC.removeIntrinsicKeyword(kw);
                     tgtC.removeExtrinsicKeyword(kw);
                 }
@@ -660,7 +708,7 @@ public class AbilityFactory_Debuff {
                 });
             }
         }
-    }//debuffAllResolve()
+    } //debuffAllResolve()
 
     /**
      * <p>debuffAllTriggerAI.</p>
@@ -670,9 +718,10 @@ public class AbilityFactory_Debuff {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean debuffAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private static boolean debuffAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         return true;
     }
@@ -684,7 +733,7 @@ public class AbilityFactory_Debuff {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffAllChkDrawbackAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean debuffAllChkDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         return true;
     }
 
@@ -695,7 +744,7 @@ public class AbilityFactory_Debuff {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String debuffAllStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String debuffAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
@@ -706,10 +755,11 @@ public class AbilityFactory_Debuff {
             desc = params.get("DebuffAllDescription");
         }
 
-        if (sa instanceof Ability_Sub)
+        if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        else
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
+        }
 
         sb.append(desc);
 
@@ -719,6 +769,6 @@ public class AbilityFactory_Debuff {
         }
 
         return sb.toString();
-    }//debuffAllStackDescription()
+    } //debuffAllStackDescription()
 
-}//end class AbilityFactory_Debuff
+} //end class AbilityFactory_Debuff
