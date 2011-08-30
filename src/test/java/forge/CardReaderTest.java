@@ -99,7 +99,7 @@ public class CardReaderTest implements NewConstants {
     public final void test_ReadCard_findCard_nonzip() {
         final Map<String, Card> map = new HashMap<String, Card>();
         final File cardsfolder = ForgeProps.getFile(CARDSFOLDER);
-        final CardReader cardReader = new CardReader(cardsfolder, map, false);
+        final CardReader cardReader = new CardReader(cardsfolder, map, null, false);
 
         final Card savannahLions = cardReader.findCard("Savannah Lions");
 
@@ -111,7 +111,7 @@ public class CardReaderTest implements NewConstants {
     public final void test_ReadCard_run_nonzip() {
         final Map<String, Card> map = new HashMap<String, Card>(2 * ESTIMATED_CARDS_IN_FOLDER);
         final File cardsfolder = ForgeProps.getFile(CARDSFOLDER);
-        final CardReader cardReader = new CardReader(cardsfolder, map, false);
+        final CardReader cardReader = new CardReader(cardsfolder, map, null,false);
         cardReader.run();
         Assert.assertNotNull(map.get("Elvish Warrior"), "Elvish Warrior was loaded");
         Assert.assertNotNull(map.get("Savannah Lions"), "Savannah Lions were loaded");
