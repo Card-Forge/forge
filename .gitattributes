@@ -9507,11 +9507,11 @@ src/main/java/forge/CardFilter.java svneol=native#text/plain
 src/main/java/forge/CardList.java svneol=native#text/plain
 src/main/java/forge/CardListFilter.java svneol=native#text/plain
 src/main/java/forge/CardListUtil.java svneol=native#text/plain
+src/main/java/forge/CardPowerToughness.java svneol=native#text/plain
 src/main/java/forge/CardReader.java svneol=native#text/plain
 src/main/java/forge/CardShopTableModel.java svneol=native#text/plain
 src/main/java/forge/CardUtil.java svneol=native#text/plain
 src/main/java/forge/Card_Color.java svneol=native#text/plain
-src/main/java/forge/Card_PT.java svneol=native#text/plain
 src/main/java/forge/Card_Type.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
 src/main/java/forge/ColorChanger.java -text

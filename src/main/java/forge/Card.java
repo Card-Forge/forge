@@ -112,7 +112,7 @@ public class Card extends MyObservable implements Comparable<Card> {
 
     private int baseAttack = 0;
     private int baseDefense = 0;
-    private ArrayList<Card_PT> newPT = new ArrayList<Card_PT>(); // stack of set power/toughness
+    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>(); // stack of set power/toughness
     private int baseLoyalty = 0;
     private String baseAttackString = null;
     private String baseDefenseString = null;
@@ -3405,7 +3405,7 @@ public class Card extends MyObservable implements Comparable<Card> {
     	if (newPT.isEmpty())
     		return -1;
     	
-    	Card_PT latestPT = getLatestPT();
+    	CardPowerToughness latestPT = getLatestPT();
     	
     	return latestPT.getPower();
     }
@@ -3414,16 +3414,16 @@ public class Card extends MyObservable implements Comparable<Card> {
     	if (newPT.isEmpty())
     		return -1;
     	
-    	Card_PT latestPT = getLatestPT();
+    	CardPowerToughness latestPT = getLatestPT();
     	
     	return latestPT.getToughness();
     }
     
-    public Card_PT getLatestPT() {
-    	Card_PT latestPT = new Card_PT(-1,-1,0);
+    public CardPowerToughness getLatestPT() {
+    	CardPowerToughness latestPT = new CardPowerToughness(-1,-1,0);
     	long max = 0;
     	
-    	for (Card_PT pt : newPT) {
+    	for (CardPowerToughness pt : newPT) {
     		if (pt.getTimestamp() >= max) {
     			max = pt.getTimestamp();
     			latestPT = pt;
@@ -3434,12 +3434,12 @@ public class Card extends MyObservable implements Comparable<Card> {
     }
     
     public void addNewPT(int power, int toughness, long timestamp) {
-    	newPT.add(new Card_PT(power, toughness, timestamp));
+    	newPT.add(new CardPowerToughness(power, toughness, timestamp));
     }
     
     public void removeNewPT(long timestamp) {
     	for (int i = 0; i < newPT.size(); i++) {
-    		Card_PT cardPT = newPT.get(i);
+    		CardPowerToughness cardPT = newPT.get(i);
     		if (cardPT.getTimestamp() == timestamp)
     			newPT.remove(cardPT);
     	}

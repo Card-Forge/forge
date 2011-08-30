@@ -1,12 +1,12 @@
 package forge;
 
 /**
- * <p>Card_Color class.</p>
+ * <p>CardPowerToughness class.</p>
  *
  * @author Forge
  * @version $Id$
  */
-public class Card_PT {
+public class CardPowerToughness {
 
     private int power;
     private int toughness;
@@ -17,7 +17,7 @@ public class Card_PT {
      *
      * @return a long.
      */
-    public long getTimestamp() {
+    public final long getTimestamp() {
         return timeStamp;
     }
 
@@ -28,17 +28,27 @@ public class Card_PT {
      * @param newToughness a int.
      * @param stamp        a long.
      */
-    Card_PT(int newPower, int newToughness, long stamp) {
+    CardPowerToughness(final int newPower, final int newToughness, final long stamp) {
         power = newPower;
         toughness = newToughness;
         timeStamp = stamp;
     }
 
-    public int getPower() {
+    /**
+     * 
+     * Get Power.
+     * @return int
+     */
+    public final int getPower() {
         return power;
     }
 
-    public int getToughness() {
+    /**
+     * 
+     * Get Toughness.
+     * @return int
+     */
+    public final int getToughness() {
         return toughness;
     }
 
@@ -50,7 +60,7 @@ public class Card_PT {
      * @param stamp        a long.
      * @return a boolean.
      */
-    public boolean equals(int newPower, int newToughness, long stamp) {
+    public final boolean equals(final int newPower, final int newToughness, final long stamp) {
         return timeStamp == stamp && power == newPower && toughness == newToughness;
     }
 }
