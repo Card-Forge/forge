@@ -757,6 +757,10 @@ public abstract class Player extends MyObservable {
 		this.keywords.add(keyword);
 	}
 	
+	   public void removeKeyword(String keyword){
+	        this.keywords.remove(keyword);
+	    }
+	
 	public boolean hasKeyword(String keyword){
 		return this.keywords.contains(keyword);
 	}
@@ -1663,6 +1667,41 @@ public abstract class Player extends MyObservable {
     
     public void resetProwl() {
         prowl = new ArrayList<String>();
+    }
+    
+    public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
+        
+        String incR[] = Restriction.split("\\.");
+        
+        if (!incR[0].equals("Player") && 
+                !(incR[0].equals("Opponent") && !this.equals(sourceController)) &&
+                !(incR[0].equals("You") && this.equals(sourceController)))
+            return false;
+        
+        if (incR.length > 1) {
+            final String excR = incR[1];
+            String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
+            for (int j = 0; j < exR.length; j++)
+                if (hasProperty(exR[j], sourceController, source) == false) return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean hasProperty(String Property, final Player sourceController, final Card source) {
+        
+        if (Property.equals("You")) {
+            if (!this.equals(sourceController)) {
+                return false;
+            }
+        }        
+        else if (Property.equals("Opponent")) {
+            if (this.equals(sourceController)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     private ArrayList<HandSizeOp> handSizeOperations;

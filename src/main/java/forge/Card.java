@@ -4736,7 +4736,6 @@ public class Card extends MyObservable implements Comparable<Card> {
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
 
         if (getName().equals("Mana Pool") || isImmutable()) return false;
-        if (Restriction.equals("False")) return false;
 
         String incR[] = Restriction.split("\\."); // Inclusive restrictions are Card types
 
