@@ -22,6 +22,11 @@ import forge.card.spellability.Target;
  * @version $Id$
  */
 public class AbilityFactory_Combat {
+
+    private AbilityFactory_Combat() {
+        throw new AssertionError();
+    }
+
     //**************************************************************
     // ****************************** FOG **************************
     //**************************************************************
@@ -29,14 +34,12 @@ public class AbilityFactory_Combat {
     /**
      * <p>createAbilityFog.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityFog(final AbilityFactory AF) {
-        final SpellAbility abFog = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createAbilityFog(final AbilityFactory af) {
+        final SpellAbility abFog = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1933592438783630254L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -54,7 +57,7 @@ public class AbilityFactory_Combat {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return fogDoTriggerAI(af, this, mandatory);
             }
 
@@ -65,14 +68,12 @@ public class AbilityFactory_Combat {
     /**
      * <p>createSpellFog.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellFog(final AbilityFactory AF) {
-        final SpellAbility spFog = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellFog(final AbilityFactory af) {
+        final SpellAbility spFog = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -96,14 +97,12 @@ public class AbilityFactory_Combat {
     /**
      * <p>createDrawbackFog.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackFog(final AbilityFactory AF) {
-        final SpellAbility dbFog = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackFog(final AbilityFactory af) {
+        final SpellAbility dbFog = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public void resolve() {
@@ -116,7 +115,7 @@ public class AbilityFactory_Combat {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return fogDoTriggerAI(af, this, mandatory);
             }
 
@@ -131,13 +130,14 @@ public class AbilityFactory_Combat {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String fogStackDescription(AbilityFactory af, SpellAbility sa) {
+    public static String fogStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         sb.append(sa.getSourceCard().getController());
         sb.append(" prevents all combat damage this turn.");
@@ -157,20 +157,31 @@ public class AbilityFactory_Combat {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean fogCanPlayAI(final AbilityFactory af, SpellAbility sa) {
+    public static boolean fogCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's Declare Blockers phase
-        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer())) return false;
-        if (!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) return false;
+        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer())) {
+            return false;
+        }
+        if (!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+            return false;
+        }
 
         // Only cast when Stack is empty, so Human uses spells/abilities first
-        if (AllZone.getStack().size() != 0) return false;
+        if (AllZone.getStack().size() != 0) {
+            return false;
+        }
 
         // Don't cast it, if the effect is already in place
-        if (AllZone.getPhase().isPreventCombatDamageThisTurn()) return false;
+        if (AllZone.getPhase().isPreventCombatDamageThisTurn()) {
+            return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
-            if (!subAb.chkAI_Drawback()) return false;
+        if (subAb != null) {
+            if (!subAb.chkAI_Drawback()) {
+                return false;
+            }
+        }
 
         // Cast it if life is in danger
         return CombatUtil.lifeInDanger(AllZone.getCombat());
@@ -183,17 +194,19 @@ public class AbilityFactory_Combat {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean fogPlayDrawbackAI(final AbilityFactory af, SpellAbility sa) {
+    public static boolean fogPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance;
-        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
+        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
             chance = AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage);
-        else
+        } else {
             chance = AllZone.getPhase().isAfter(Constant.Phase.Combat_Damage);
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
     }
@@ -206,15 +219,18 @@ public class AbilityFactory_Combat {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    public static boolean fogDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)    // If there is a cost payment it's usually not mandatory
+    public static boolean fogDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+     // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         boolean chance;
-        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
+        if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
             chance = AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage);
-        else
+        } else {
             chance = AllZone.getPhase().isAfter(Constant.Phase.Combat_Damage);
+        }
 
         // check SubAbilities DoTrigger?
         Ability_Sub abSub = sa.getSubAbility();
@@ -236,15 +252,15 @@ public class AbilityFactory_Combat {
         // Expand Fog keyword here depending on what we need out of it.
         AllZone.getPhase().setPreventCombatDamageThisTurn(true);
     }
-    
+
     //**************************************************************
     //*********************** MUSTATTACK ***************************
     //**************************************************************
-    
+
     //AB$ MustAttack | Cost$ R T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | SpellDescription$ ...
 
     /**
-     * <p>createAbilityMustAttack</p>
+     * <p>createAbilityMustAttack.</p>
      *
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -253,9 +269,9 @@ public class AbilityFactory_Combat {
      */
     public static SpellAbility createAbilityMustAttack(final AbilityFactory af) {
         final SpellAbility abMustAttack = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-			private static final long serialVersionUID = 4559154732470225755L;
+            private static final long serialVersionUID = 4559154732470225755L;
 
-			@Override
+            @Override
             public String getStackDescription() {
                 return mustAttackStackDescription(af, this);
             }
@@ -271,7 +287,7 @@ public class AbilityFactory_Combat {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return mustAttackDoTriggerAI(af, this, mandatory);
             }
 
@@ -287,9 +303,9 @@ public class AbilityFactory_Combat {
      */
     public static SpellAbility createSpellMustAttack(final AbilityFactory af) {
         final SpellAbility spMustAttack = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-			private static final long serialVersionUID = 4103945257601008403L;
+            private static final long serialVersionUID = 4103945257601008403L;
 
-			@Override
+            @Override
             public String getStackDescription() {
                 return mustAttackStackDescription(af, this);
             }
@@ -316,9 +332,9 @@ public class AbilityFactory_Combat {
      */
     public static SpellAbility createDrawbackMustAttack(final AbilityFactory af) {
         final SpellAbility dbMustAttack = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
-			private static final long serialVersionUID = 1294949210616598158L;
+            private static final long serialVersionUID = 1294949210616598158L;
 
-			@Override
+            @Override
             public void resolve() {
                 mustAttackResolve(af, this);
             }
@@ -329,46 +345,49 @@ public class AbilityFactory_Combat {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return mustAttackDoTriggerAI(af, this, mandatory);
             }
 
         };
         return dbMustAttack;
     }
-    
-    private static String mustAttackStackDescription(AbilityFactory af, SpellAbility sa) {
-    	HashMap<String,String> params = af.getMapParams();
-    	Card host = af.getHostCard();
+
+    private static String mustAttackStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
         StringBuilder sb = new StringBuilder();
 
-        if(sa instanceof Ability_Sub)
-        	sb.append(" ");
-        else
-        	sb.append(sa.getSourceCard()).append(" - ");
-        
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
         //end standard pre-
-        
+
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        
-        String defender = null;
-        if(params.get("Defender").equals("Self")) {
-        	defender = host.toString();
-        }
-        else {
-        	//TODO - if more needs arise in the future
         }
 
-        for(Player player : tgtPlayers) {
-            sb.append("Creatures ").append(player).append(" controls attack ").append(defender).append(" during his or her next turn.");
+        String defender = null;
+        if (params.get("Defender").equals("Self")) {
+            defender = host.toString();
         }
-        
+        else {
+            //TODO - if more needs arise in the future
+        }
+
+        for (Player player : tgtPlayers) {
+            sb.append("Creatures ").append(player).append(" controls attack ");
+            sb.append(defender).append(" during his or her next turn.");
+        }
+
         //begin standard post-
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -377,32 +396,37 @@ public class AbilityFactory_Combat {
 
         return sb.toString();
     }
-    
-    private static boolean mustAttackCanPlayAI(final AbilityFactory af, SpellAbility sa) {
-    	//disabled for the AI for now.  Only for Gideon Jura at this time.
+
+    private static boolean mustAttackCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        //disabled for the AI for now.  Only for Gideon Jura at this time.
         return false;
     }
-    
-    private static boolean mustAttackPlayDrawbackAI(final AbilityFactory af, SpellAbility sa) {
+
+    private static boolean mustAttackPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance;
-        
+
         //TODO - implement AI
         chance = false;
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
     }
-    
-    private static boolean mustAttackDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)    // If there is a cost payment it's usually not mandatory
+
+    private static boolean mustAttackDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         boolean chance;
-        
+
         //TODO - implement AI
         chance = false;
 
@@ -414,32 +438,33 @@ public class AbilityFactory_Combat {
 
         return chance;
     }
-    
+
     private static void mustAttackResolve(final AbilityFactory af, final SpellAbility sa) {
-    	HashMap<String, String> params = af.getMapParams();
+        HashMap<String, String> params = af.getMapParams();
 
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined"))
+        if (tgt != null && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         for (final Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
-            	Object entity;
-            	if(params.get("Defender").equals("Self")) {
-                	entity = af.getHostCard();
+                Object entity;
+                if (params.get("Defender").equals("Self")) {
+                    entity = af.getHostCard();
                 }
                 else {
-                	entity = p.getOpponent();
+                    entity = p.getOpponent();
                 }
-            	//System.out.println("Setting mustAttackEntity to: "+entity);
+                //System.out.println("Setting mustAttackEntity to: "+entity);
                 p.setMustAttackEntity(entity);
             }
         }
-    	
-    }//mustAttackResolve()
-    
-}//end class AbilityFactory_Combat
+
+    } //mustAttackResolve()
+
+} //end class AbilityFactory_Combat
