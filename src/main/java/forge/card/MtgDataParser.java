@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FileUtil;
+import forge.card.CardManaCost.ManaParser;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -84,9 +85,12 @@ public final class MtgDataParser implements Iterator<CardRules> {
         String name = it.next();
 
         if (!it.hasNext()) { weHaveNext = false; return null; }
+
         String manaCost = it.next();
+        CardManaCost cost = CardManaCost.empty;
         CardType type = null;
         if (manaCost.startsWith("{")) {
+            cost = new CardManaCost(new ManaParserMtgData(manaCost));
             if (!it.hasNext()) { weHaveNext = false; return null; }
             type = CardType.parse(it.next());
         } else { // Land?
@@ -114,7 +118,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
         if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
 
-        return new CardRules(name, type, manaCost, ptOrLoyalty, strs.toArray(emptyArray), sets,
+        return new CardRules(name, type, cost, ptOrLoyalty, strs.toArray(emptyArray), sets,
                 // TODO: fix last two parameters
                 false, false);
     }
@@ -158,5 +162,64 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
     @Override public void remove() { }
 
+    
+    
+    public static class ManaParserMtgData implements ManaParser {
+        private final String cost;
+
+        private int nextBracket;
+        private int colorlessCost;
+
+
+        public ManaParserMtgData(final String cost) {
+            this.cost = cost;
+            // System.out.println(cost);
+            nextBracket = cost.indexOf('{');
+            colorlessCost = 0;
+        }
+        
+        public int getTotalColorlessCost() { 
+            if ( hasNext() ) { 
+                throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
+            }
+            return colorlessCost;
+        }
+
+        @Override
+        public boolean hasNext() { return nextBracket != -1; }
+
+        @Override
+        public CardManaCostShard next() {
+            int closeBracket = cost.indexOf('}', nextBracket);
+            String unparsed = cost.substring(nextBracket + 1, closeBracket);
+            nextBracket = cost.indexOf('{', closeBracket + 1);
+
+            // System.out.println(unparsed);
+            if (StringUtils.isNumeric(unparsed)) {
+                colorlessCost += Integer.parseInt(unparsed);
+                return null;
+            }
+
+            int atoms = 0;
+            for (int iChar = 0; iChar < unparsed.length(); iChar++) {
+                switch (unparsed.charAt(iChar)) {
+                    case 'W': atoms |= CardManaCostShard.Atom.WHITE; break;
+                    case 'U': atoms |= CardManaCostShard.Atom.BLUE; break;
+                    case 'B': atoms |= CardManaCostShard.Atom.BLACK; break;
+                    case 'R': atoms |= CardManaCostShard.Atom.RED; break;
+                    case 'G': atoms |= CardManaCostShard.Atom.GREEN; break;
+                    case '2': atoms |= CardManaCostShard.Atom.OR_2_COLORLESS; break;
+                    case 'P': atoms |= CardManaCostShard.Atom.OR_2_LIFE; break;
+                    case 'X': atoms |= CardManaCostShard.Atom.IS_X; break;
+                    default: break;
+                }
+            }
+            return CardManaCostShard.valueOf(atoms);
+        }
+
+        @Override
+        public void remove() { } // unsuported
+    }    
+    
 
 }

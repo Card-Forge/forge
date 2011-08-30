@@ -23,13 +23,19 @@ public final class CardDb {
     private static volatile CardDb onlyInstance = null; // 'volatile' keyword makes this working
     public static CardDb instance() {
         if (onlyInstance == null) {
-            synchronized (CardDb.class) {
-                if (onlyInstance == null) { // It's broken under 1.4 and below, on 1.5+ works again!
-                    onlyInstance = new CardDb();
-                }
-            }
+            throw new NullPointerException("CardDb has not yet been initialized, run setup() first"); 
         }
         return onlyInstance;
+    }
+    public static void setup(final Iterator<CardRules> list) {
+        if (onlyInstance != null) { 
+            throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
+        }
+        synchronized (CardDb.class) {
+            if (onlyInstance == null) { // It's broken under 1.4 and below, on 1.5+ works again!
+                onlyInstance = new CardDb(list);
+            }
+        }
     }
 
     // Here oracle cards
@@ -96,7 +102,7 @@ public final class CardDb {
         throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name)); 
     }
     // Advanced fetch by name+set
-    public CardPrinted getCard(final String name, final String set) { return getCard(name, set, 1); }
+    public CardPrinted getCard(final String name, final String set) { return getCard(name, set, 0); }
     public CardPrinted getCard(final String name, final String set, final int artIndex) {
         // 1. get set
         Map<String, CardPrinted[]> cardsFromset = allCardsBySet.get(set);
@@ -111,7 +117,7 @@ public final class CardDb {
             throw new NoSuchElementException(err);
         }
         // 3. Get the proper copy
-        if (artIndex > 0 && artIndex <= cards.length) { return cards[artIndex]; }
+        if (artIndex >= 0 && artIndex <= cards.length) { return cards[artIndex]; }
         String err = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy.", name, set, artIndex);
         throw new NoSuchElementException(err);
     }

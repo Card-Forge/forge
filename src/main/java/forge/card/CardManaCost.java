@@ -21,7 +21,8 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     
     private Float compareWeight = null;
     
-
+    public static final CardManaCost empty = new CardManaCost();
+    
     // pass mana cost parser here
     private CardManaCost() {
         isEmpty = true;
@@ -29,12 +30,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         stringValue = "";
     }
 
-    public static final CardManaCost empty = new CardManaCost();
-    
-    public CardManaCost(final String cost) {
-        this(new ParserMtgData(cost));
-    }
-    
+    // public ctor, should give it a mana parser
     public CardManaCost(final ManaParser parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
@@ -49,19 +45,19 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     }
 
     private String getSimpleString() {
-        if (shards.isEmpty()) return Integer.toString(genericCost);
-        
+        if (shards.isEmpty()) { return Integer.toString(genericCost); }
+
         StringBuilder sb = new StringBuilder();
         boolean isFirst = false;
         if (genericCost > 0) { sb.append(genericCost); isFirst = false; }
         for (CardManaCostShard s : shards) {
-            if ( !isFirst ) { sb.append(' '); }
+            if (!isFirst) { sb.append(' '); }
             else { isFirst = false; }
             sb.append(s.toString());
         }
         return sb.toString();
     }
-    
+
     public int getCMC() {
         int sum = 0;
         for (CardManaCostShard s : shards) { sum += s.cmc; }
@@ -98,61 +94,6 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         int getTotalColorlessCost(); 
     }
     
-    public static class ParserMtgData implements ManaParser {
-        private final String cost;
 
-        private int nextBracket;
-        private int colorlessCost;
-
-
-        public ParserMtgData(final String cost) {
-            this.cost = cost;
-            // System.out.println(cost);
-            nextBracket = cost.indexOf('{');
-            colorlessCost = 0;
-        }
-        
-        public int getTotalColorlessCost() { 
-            if ( hasNext() ) { 
-                throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
-            }
-            return colorlessCost;
-        }
-
-        @Override
-        public boolean hasNext() { return nextBracket != -1; }
-
-        @Override
-        public CardManaCostShard next() {
-            int closeBracket = cost.indexOf('}', nextBracket);
-            String unparsed = cost.substring(nextBracket + 1, closeBracket);
-            nextBracket = cost.indexOf('{', closeBracket + 1);
-
-            // System.out.println(unparsed);
-            if (StringUtils.isNumeric(unparsed)) {
-                colorlessCost += Integer.parseInt(unparsed);
-                return null;
-            }
-
-            int atoms = 0;
-            for (int iChar = 0; iChar < unparsed.length(); iChar++) {
-                switch (unparsed.charAt(iChar)) {
-                    case 'W': atoms |= CardManaCostShard.Atom.WHITE; break;
-                    case 'U': atoms |= CardManaCostShard.Atom.BLUE; break;
-                    case 'B': atoms |= CardManaCostShard.Atom.BLACK; break;
-                    case 'R': atoms |= CardManaCostShard.Atom.RED; break;
-                    case 'G': atoms |= CardManaCostShard.Atom.GREEN; break;
-                    case '2': atoms |= CardManaCostShard.Atom.OR_2_COLORLESS; break;
-                    case 'P': atoms |= CardManaCostShard.Atom.OR_2_LIFE; break;
-                    case 'X': atoms |= CardManaCostShard.Atom.IS_X; break;
-                    default: break;
-                }
-            }
-            return CardManaCostShard.valueOf(atoms);
-        }
-
-        @Override
-        public void remove() { } // unsuported
-    }
 }
 

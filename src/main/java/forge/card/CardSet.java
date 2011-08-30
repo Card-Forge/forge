@@ -1,5 +1,7 @@
 package forge.card;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 /**
  * <p>CardSet class.</p>
  *
@@ -23,6 +25,12 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     public String getCode() { return code; }
     public String getCode2() { return code2; }
     public int getIndex() { return index; }
+
+    
+    public static final Lambda1<String, CardSet> fnGetName = new Lambda1<String, CardSet>() {
+        @Override public String apply(final CardSet arg1) { return arg1.name; } };
+    public static final Lambda1<CardSet, CardSet> fn1 = new Lambda1<CardSet, CardSet>() {
+        @Override public CardSet apply(final CardSet arg1) { return arg1; } };
 
     @Override
     public int compareTo(final CardSet o) {

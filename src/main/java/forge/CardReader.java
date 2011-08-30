@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -25,6 +27,8 @@ import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 
+import forge.card.CardRules;
+import forge.card.CardRulesReader;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.properties.NewConstants;
@@ -59,10 +63,12 @@ public class CardReader
     protected static final int UNKNOWN_NUMBER_OF_FILES_REMAINING = -1; // NOPMD by Braids on 8/18/11 10:54 PM
 
     private transient Map<String, Card> mapToFill;
+    private transient List<CardRules> listRulesToFill;
     private transient File cardsfolder;
 
     private transient ZipFile zip;
     private transient Charset charset;
+    private transient CardRulesReader rulesReader;
 
     private transient Enumeration<? extends ZipEntry> zipEnum;
 
@@ -72,6 +78,10 @@ public class CardReader
     private transient Iterable<File> findNonDirsIterable; // NOPMD by Braids on 8/18/11 10:56 PM
 
 
+    
+    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill ) {
+        this(theCardsFolder, theMapToFill, null, true);
+    }
 
     /**
      * This is a convenience for CardReader(cardsfolder, mapToFill, true); .
@@ -82,8 +92,9 @@ public class CardReader
      * place the cards once read
      *
      */
-    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill) {
-        this(theCardsFolder, theMapToFill, true);
+    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill, 
+            final List<CardRules> listRules2Fill) {
+        this(theCardsFolder, theMapToFill, listRules2Fill, true);
     }
 
     /**
@@ -96,11 +107,16 @@ public class CardReader
      *
      * @param useZip  if true, attempts to load cards from a zip file, if one exists.
      */
-    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill, final boolean useZip) {
+    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill,
+            final List<CardRules> listRules2Fill, final boolean useZip)
+    {
         if (theMapToFill == null) {
             throw new NullPointerException("theMapToFill must not be null."); // NOPMD by Braids on 8/18/11 10:53 PM
         }
         this.mapToFill = theMapToFill;
+        // These read data for lightweight classes.
+        this.listRulesToFill = listRules2Fill == null ? new ArrayList<CardRules>() : listRules2Fill;
+        this.rulesReader = new CardRulesReader();
 
         if (!theCardsFolder.exists()) {
             throw new RuntimeException(// NOPMD by Braids on 8/18/11 10:53 PM
@@ -168,7 +184,7 @@ public class CardReader
     /**
      * Reads the rest of ALL the cards into memory.  This is not lazy.
      */
-    public final void run() { 
+    public final void run() {
         loadCardsUntilYouFind(null);
     }
 
@@ -294,6 +310,7 @@ public class CardReader
      */
     protected final Card loadCard(final InputStream inputStream) {
         final Card card = new Card();
+        rulesReader.reset();
 
         InputStreamReader inputStreamReader = null;
         BufferedReader reader = null;
@@ -303,6 +320,7 @@ public class CardReader
 
             String line = readLine(reader);
             while (!"End".equals(line)) {
+                rulesReader.parseLine(line);
                 if (line.charAt(0) == '#') { // NOPMD by Braids on 8/18/11 10:59 PM
                     //no need to do anything, this indicates a comment line
                 } else if (line.startsWith("Name:")) {
@@ -386,6 +404,7 @@ public class CardReader
             }
         }
 
+        listRulesToFill.add(rulesReader.getCard());
         mapToFill.put(card.getName(), card);
         return card;
     }

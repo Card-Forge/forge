@@ -2,11 +2,15 @@ package forge.card.cardFactory;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
+import forge.card.CardDb;
+import forge.card.CardRules;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -69,10 +73,13 @@ public class PreloadingCardFactory extends AbstractCardFactory {
     protected void readCards(File file) {
         getMap().clear();
 
-        CardReader read = new CardReader(ForgeProps.getFile(CARDSFOLDER), getMap());
+        List<CardRules> listCardRules = new ArrayList<CardRules>();
+        CardReader read = new CardReader(ForgeProps.getFile(CARDSFOLDER), getMap(), listCardRules);
+        
 
         // this fills in our map of card names to Card instances.
         read.run();
+        CardDb.setup(listCardRules.iterator());
     }// readCard()
 
 }

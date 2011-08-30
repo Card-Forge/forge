@@ -35,8 +35,8 @@ public final class CardRules {
 
     private Map<String, CardInSet> setsPrinted = null;
 
-    private boolean removedFromAIDecks = false;
-    private boolean removedFromRandomDecks = false;
+    private boolean isRemovedFromAIDecks = false;
+    private boolean isRemovedFromRandomDecks = false;
 
     // Ctor and builders are needed here
     public String getName() { return name; }
@@ -46,27 +46,13 @@ public final class CardRules {
     public String[] getRules() { return rules; }
     public Set<Entry<String, CardInSet>> getSetsPrinted() { return setsPrinted.entrySet(); }
 
-    public String getPower() { return power; }
-    public int getIntPower() { return iPower; }
-    public String getToughness() { return toughness; }
-    public int getIntToughness() { return iToughness; }
-    public String getLoyalty() { return loyalty; }
-
-    /**
-     * Getter for removedFromAIDecks.
-     * @return the removedFromAIDecks value
-     */
-    public final boolean isRemovedFromAIDecks() {
-        return removedFromAIDecks;
-    }
-
-    /**
-     * Getter for removedFromRandomDecks.
-     * @return the removedFromRandomDecks value
-     */
-    public final boolean isRemovedFromRandomDecks() {
-        return removedFromRandomDecks;
-    }
+    public final String getPower() { return power; }
+    public final int getIntPower() { return iPower; }
+    public final String getToughness() { return toughness; }
+    public final int getIntToughness() { return iToughness; }
+    public final String getLoyalty() { return loyalty; }
+    public final boolean getemovedFromAIDecks() { return isRemovedFromAIDecks; }
+    public final boolean getRemovedFromRandomDecks() { return isRemovedFromRandomDecks; }
 
     public String getPTorLoyalty() {
         if (getType().isCreature()) { return power + "/" + toughness; }
@@ -74,18 +60,20 @@ public final class CardRules {
         return "";
     }
 
-    public CardRules(final String cardName, final CardType cardType, final String manacost,
+    public CardRules(final String cardName, final CardType cardType, final CardManaCost manacost,
             final String ptLine, final String[] cardRules, final Map<String, CardInSet> setsData,
-            final boolean removedFromRandomDecks0, final boolean removedFromAIDecks0)
+            final boolean removedFromRandomDecks, final boolean removedFromAIDecks)
     {
         this.name = cardName;
         this.type = cardType;
-        this.cost = manacost == null ? CardManaCost.empty : new CardManaCost(manacost);
+        this.cost = manacost;
         this.rules = cardRules;
         this.color = new CardColor(cost);
-        this.removedFromAIDecks = removedFromAIDecks0;
-        this.removedFromRandomDecks = removedFromRandomDecks0;
+        this.isRemovedFromAIDecks = removedFromAIDecks;
+        this.isRemovedFromRandomDecks = removedFromRandomDecks;
 
+        //System.out.println(cardName);
+        
         if (cardType.isCreature()) {
             int slashPos = ptLine.indexOf('/');
             if (slashPos == -1) {
@@ -123,7 +111,11 @@ public final class CardRules {
         CardInSet cis = setsPrinted.get(getLatestSetPrinted());
         return cis.getRarity();
     }
-    
+
+    public String getAiStatus() {
+        return isRemovedFromAIDecks ? (isRemovedFromRandomDecks ? "AI ?" : "AI") : (isRemovedFromRandomDecks ? "?" :"");
+    }
+
     public abstract static class Predicates {
 
         // Static builder methods - they choose concrete implementation by themselves
