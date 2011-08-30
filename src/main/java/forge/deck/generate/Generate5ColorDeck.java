@@ -84,7 +84,7 @@ public class Generate5ColorDeck {
         notColors.remove(color5);
 
         dl = GenerateDeckUtil.getDualLandList("WUBRG");
-        
+
         for (int i = 0; i < dl.size(); i++) {
             cardCounts.put(dl.get(i), 0);
         }
@@ -93,10 +93,11 @@ public class Generate5ColorDeck {
     /**
      * <p>get3ColorDeck.</p>
      *
-     * @param Size a int.
+     * @param size a int.
+     * @param pt a PlayerType
      * @return a {@link forge.CardList} object.
      */
-    public CardList get5ColorDeck(int Size, final PlayerType pt) {
+    public final CardList get5ColorDeck(final int size, final PlayerType pt) {
         int lc = 0; // loop counter to prevent infinite card selection loops
         String tmpDeck = "";
         CardList tDeck = new CardList();
@@ -240,11 +241,11 @@ public class Generate5ColorDeck {
 
         // calculate card counts
         float p = (float) ((float) creatPercentage * .01);
-        int creatCnt = (int) (p * (float) Size);
+        int creatCnt = (int) (p * (float) size);
         tmpDeck += "Creature Count:" + creatCnt + "\n";
 
         p = (float) ((float) spellPercentage * .01);
-        int spellCnt = (int) (p * (float) Size);
+        int spellCnt = (int) (p * (float) size);
         tmpDeck += "Spell Count:" + spellCnt + "\n";
 
         // build deck from the card pools
@@ -288,9 +289,9 @@ public class Generate5ColorDeck {
         int numLands = 0;
         if (landsPercentage > 0) {
             p = (float) ((float) landsPercentage * .01);
-            numLands = (int) (p * (float) Size);
+            numLands = (int) (p * (float) size);
         } else {    // otherwise, just fill in the rest of the deck with basic lands
-            numLands = Size - tDeck.size();
+            numLands = size - tDeck.size();
         }
 
         tmpDeck += "numLands:" + numLands + "\n";
@@ -378,18 +379,18 @@ public class Generate5ColorDeck {
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
 
         // fix under-sized or over-sized decks, due to integer arithmetic
-        if (tDeck.size() < Size) {
-            int diff = Size - tDeck.size();
+        if (tDeck.size() < size) {
+            int diff = size - tDeck.size();
 
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
                 lc = 0;
-                while (cardCounts.get(c.getName()) > 3 || lc > Size) {
+                while (cardCounts.get(c.getName()) > 3 || lc > size) {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
-                if (lc > Size) {
+                if (lc > size) {
                     throw new RuntimeException("Generate5ColorDeck : get5ColorDeck -- looped too much -- undersize");
                 }
 
@@ -398,8 +399,8 @@ public class Generate5ColorDeck {
                 cardCounts.put(c.getName(), n + 1);
                 tmpDeck += "Added:" + c.getName() + "\n";
             }
-        } else if (tDeck.size() > Size) {
-            int diff = tDeck.size() - Size;
+        } else if (tDeck.size() > size) {
+            int diff = tDeck.size() - size;
 
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
@@ -450,7 +451,7 @@ public class Generate5ColorDeck {
          * 
          * @param color
          */
-        public void setCount(int count) {
+        public void setCount(final int count) {
             this.count = count;
         }
     }
