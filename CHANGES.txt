@@ -247,6 +247,40 @@ Fixes/Features:
 - Added old deck generators back due to popular demand.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Splash view/model renamed, moved to forge.view.swing folder.
+- Small fix to decouple interface from implementation.
+- Add dispatch thread test.
+- Updated javadoc.
+- Added LQ pic URL to Bloodcrazed Goblin; Gleancrawler; Inferno Elemental; No Rest for the Wicked; Second Sunrise and Twilight Shepherd.
+- Organized imports in src/test/java/forge/model/FModelTest.java.
+- Reduced CheckStyle violations in src/main/java/forge/AllZone.java.
+- Incremental check-in for forge.card.CardRulesReader and related classes.
+- Updated commons-discovery.
+- Moved from Braids directory.
+- Fixed the SplashFrame error.
+- Added Fetchlands to randomly generated decks.
+- Updated some SVars.
+- Picked off some low hanging CheckStyle fruit in TriggerHandler.
+- Added Evolving Wilds and Terramorphic Expanse to randomly generated decks with three or more colors.
+- Added Rupture Spire and Undiscovered Paradise to randomly generated decks with four or more colors.
+- Checkstyle madness.
+- Added RememberAll,RememberWinner,RememberLoser to Flip AF.
+- Modified Crazed Firecat to add counter after all the flips.
+- Deleted SplashModelProgressMonitor.java and SplashViewProgressMonitor.java.These files are now called SplashProgressModel and SplashProgressComponent.
+- Raised max sell price to 1000.
+- Added "close" button to splash frame.
+- Basic CheckStyle cleanup in AbilityFactory_Turns.java.
+- Clean up a bunch of java warnings.
+- Checkstyle fixes in AbilityFactory_Choose.
+- Some Checkstyle fixes in AF_AlterLife.
+- Checkstyle fixes.
+- Checkstyle.
+- Checkstyle fixes in AF_Reveal.
+- Checkstyle fixes in AF_Cleanup.
+- Checkstyle fices in AF_Debuff.
+- Fixed Ferocity.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
