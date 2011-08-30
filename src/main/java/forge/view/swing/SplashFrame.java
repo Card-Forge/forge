@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 /**
  * Shows the splash frame as the application starts.
@@ -32,8 +33,8 @@ public class SplashFrame extends JFrame {
     private static final int    DISCLAIMER_FONT_SIZE    = 9;
     private static final Color  DISCLAIMER_COLOR        = Color.white;
     
-    private SplashModelProgressMonitor monitorModel = null;
-    private SplashViewProgressMonitor monitorView = null;
+    private SplashProgressModel monitorModel = null;
+    private SplashProgressComponent monitorView = null;
 
     /**
      * <p>Create the frame; this <strong>must</strong> be called from an event
@@ -79,8 +80,8 @@ public class SplashFrame extends JFrame {
         contentPane.add(lblDisclaimer);
        
         // Instantiate model and view and tie together.
-        monitorModel = new SplashModelProgressMonitor(1);
-        monitorView = new SplashViewProgressMonitor();
+        monitorModel = new SplashProgressModel();
+        monitorView = new SplashProgressComponent();
     
         monitorModel.setCurrentView(monitorView);
         monitorView.setCurrentModel(monitorModel);
@@ -107,7 +108,7 @@ public class SplashFrame extends JFrame {
      * Getter for progress bar view.
      * @return the SplashViewProgressMonitor progress bar used in the splash frame.
      */
-    public final SplashViewProgressMonitor getMonitorView() {
+    public final SplashProgressComponent getMonitorView() {
         return monitorView;
     }
     
@@ -115,7 +116,7 @@ public class SplashFrame extends JFrame {
      * Getter for progress monitor model.
      * @return the BaseProgressMonitor model used in the splash frame.
      */
-    public final BaseProgressMonitor getMonitorModel() {
+    public final BraidsProgressMonitor getMonitorModel() {
         return monitorModel;
     }
 

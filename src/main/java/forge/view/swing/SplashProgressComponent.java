@@ -2,25 +2,40 @@ package forge.view.swing;
 
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 /** 
  *  Swing component view, to be used with BaseProgressMonitor.
  *
  */
 @SuppressWarnings("serial")
-public class SplashViewProgressMonitor extends JProgressBar {
+public class SplashProgressComponent extends JProgressBar {
     private BaseProgressMonitor currentModel;
     private double completed;
     private double total;
 
-    public SplashViewProgressMonitor() {
+    /**
+     * Constructor: Must be called from an event dispatch thread.
+     * 
+     */
+    public SplashProgressComponent() {
         super();
+        
+        if (!SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException("must be called from within an event dispatch thread");
+        }
+        
         setString("");
         setStringPainted(true);
     }
     
-    public final void incrementProgressBar() {
+    /**
+     * Updates progress bar stripe and text with current state of model.
+     * 
+     */
+    public final void updateProgressBar() {
         // Update bar "stripe"
         SwingUtilities.invokeLater(new Runnable() { 
             public void run() {
@@ -37,7 +52,7 @@ public class SplashViewProgressMonitor extends JProgressBar {
                  "Phase " + getCurrentModel().getCurrentPhase() + ". "
                  //+ getUnitsCompletedSoFarThisPhase() + " units processed. "
                  //+ "Overall: " + getTotalPercentCompleteAsString() + "% complete, "
-                 + "Overall ETA in " + getCurrentModel().getRelativeETAAsString() + "."
+                 + "Overall ETA in " + getCurrentModel().getRelativeETAAsString(true) + "."
                  );
             }
             else {
@@ -45,7 +60,7 @@ public class SplashViewProgressMonitor extends JProgressBar {
                  //"Overall: " +
                  getCurrentModel().getUnitsCompletedSoFarThisPhase() + " units processed; "
                  //+ "(" + getTotalPercentCompleteAsString() + "%); "
-                 + "ETA in " + getCurrentModel().getRelativeETAAsString() + "."
+                 + "ETA in " + getCurrentModel().getRelativeETAAsString(true) + "."
                  );
             }
            // getCurrentModel().justUpdatedUI();
@@ -100,11 +115,21 @@ public class SplashViewProgressMonitor extends JProgressBar {
         setValue(0);
     }
     
+    /**
+     * Retrieves the model from which this component uses data.
+     * 
+     * @param neoModel
+     */
     public void setCurrentModel(BaseProgressMonitor neoModel) {
         currentModel = neoModel;
     }
     
-    public BaseProgressMonitor getCurrentModel() {
+    /**
+     * Sets model from which this component uses data.
+     * 
+     * @return
+     */
+    public BraidsProgressMonitor getCurrentModel() {
         return currentModel;
     }
 }

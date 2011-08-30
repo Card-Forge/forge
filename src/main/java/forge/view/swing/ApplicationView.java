@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -57,8 +58,8 @@ public class ApplicationView implements FView {
      * @see forge.view.FView#getCardLoadingProgressMonitor()
      */
     @Override   
-    public final BaseProgressMonitor getCardLoadingProgressMonitor() {
-        BaseProgressMonitor result;
+    public final BraidsProgressMonitor getCardLoadingProgressMonitor() {
+        BraidsProgressMonitor result;
 
         if (splashFrame == null) {
             result = null;
