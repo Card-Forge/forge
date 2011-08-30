@@ -6,7 +6,6 @@ import java.util.Map;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.card.cardFactory.CardFactoryInterface;
-import forge.card.cardFactory.LazyCardFactory;
 import forge.card.cardFactory.PreloadingCardFactory;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerHandler;

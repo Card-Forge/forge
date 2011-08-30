@@ -119,8 +119,8 @@ public class TableSorter implements Comparator<Card>, NewConstants {
             bCom = getValue(b);
         } else if (column == 7 && col7mod == true)//Set
         {
-            aCom = SetInfoUtil.getSetIndex(a.getCurSetCode());
-            bCom = SetInfoUtil.getSetIndex(b.getCurSetCode());
+            aCom = SetInfoUtil.getIndexByCode(a.getCurSetCode());
+            bCom = SetInfoUtil.getIndexByCode(b.getCurSetCode());
         } else if (column == 8)//AI
         {
             aCom = getAI(a);

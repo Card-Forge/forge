@@ -1,7 +1,14 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+
+import net.slightlymagic.maxmtg.Predicate;
+
+import forge.card.CardSet;
 
 /**
  * <p>SetInfoUtil class.</p>
@@ -11,7 +18,8 @@ import java.util.HashMap;
  */
 public class SetInfoUtil {
     /** Constant <code>setData</code> */
-    private static ArrayList<HashMap<String, String>> setData = new ArrayList<HashMap<String, String>>();
+    private static HashMap<String, CardSet> setsByCode = new HashMap<String, CardSet>();
+    private static List<CardSet> allSets = new ArrayList<CardSet>();
 
     /**
      * <p>loadSetData.</p>
@@ -19,57 +27,51 @@ public class SetInfoUtil {
     private static void loadSetData() {
         ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
 
-        if (fData.size() > 0) {
-            for (int i = 0; i < fData.size(); i++) {
-                String s = fData.get(i);
-                if (s.length() > 5) {
-                    HashMap<String, String> sm = new HashMap<String, String>();
+        for (String s : fData) {
+            if (s.length() < 6) { continue; }
 
-                    String ss[] = s.split("\\|");
-                    for (int j = 0; j < ss.length; j++) {
-                        String kv[] = ss[j].split(":");
-                        sm.put(kv[0], kv[1]);
-                    }
+            String[] sParts = s.trim().split("\\|");
+            String code = null, code2 = null, name = null;
 
-                    setData.add(sm);
+            int index = -1;
+            String alias = null;
+            for (String sPart : sParts) {
+                String[] kv = sPart.split(":", 2);
+                String key = kv[0].toLowerCase();
+                if ("code3".equals(key)) {
+                    code = kv[1];
+                } else if ("code2".equals(key)) {
+                    code2 = kv[1];
+                } else if ("name".equals(key)) {
+                    name = kv[1];
+                } else if ("index".equals(key)) {
+                    index = Integer.parseInt(kv[1]);
+                } else if ("alias".equals(key)) {
+                    alias = kv[1];
                 }
             }
-
+            CardSet set = new CardSet(index, name, code, code2);
+            setsByCode.put(code, set);
+            if (alias != null) { setsByCode.put(alias, set); }
+            allSets.add(set);
         }
+        Collections.sort(allSets);
     }
 
-    /**
-     * <p>getSetCode2List.</p>
-     *
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> getSetCode2List() {
-        ArrayList<String> scl = new ArrayList<String>();
-
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            scl.add(setData.get(i).get("Code2"));
-
-        return scl;
+    public static CardSet getSetByCode(final String code) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        return setsByCode.get(code);
+    }
+    public static CardSet getSetByCodeOrThrow(final String code) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        CardSet set = setsByCode.get(code);
+        if (null == set) { throw new RuntimeException(String.format("Set with code '%s' not found", code)); }
+        return set;
     }
 
-    /**
-     * <p>getSetCode3List.</p>
-     *
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> getSetCode3List() {
-        ArrayList<String> scl = new ArrayList<String>();
-
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            scl.add(setData.get(i).get("Code3"));
-
-        return scl;
+    public static List<String> getCodeList() {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        return new ArrayList<String>(setsByCode.keySet());
     }
 
     /**
@@ -77,101 +79,26 @@ public class SetInfoUtil {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> getSetNameList() {
-        ArrayList<String> snl = new ArrayList<String>();
+    public static List<String> getNameList() {
+        if (setsByCode.isEmpty()) { loadSetData(); }
 
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            snl.add(setData.get(i).get("Name"));
-
-        return snl;
+        return Predicate.getTrue(CardSet.class).select(allSets, CardSet.fn1, CardSet.fnGetName);
     }
 
-    /**
-     * <p>getSetCode2_SetName.</p>
-     *
-     * @param SetName a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getSetCode2_SetName(String SetName) {
-        if (setData.size() == 0)
-            loadSetData();
+    public static String getCode3ByName(final String setName) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
 
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Name").equals(SetName))
-                return setData.get(i).get("Code2");
+        for (CardSet s : setsByCode.values()) {
+            if (s.getName().equals(setName)) { return s.getCode(); }
+        }
 
         return "";
     }
 
-    /**
-     * <p>getSetCode3_SetName.</p>
-     *
-     * @param SetName a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getSetCode3_SetName(String SetName) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Name").equals(SetName))
-                return setData.get(i).get("Code3");
-
-        return "";
-    }
-
-    /**
-     * <p>getSetCode2_SetCode3.</p>
-     *
-     * @param SetCode3 a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getSetCode2_SetCode3(String SetCode3) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Code3").equals(SetCode3))
-                return setData.get(i).get("Code2");
-
-        return "";
-    }
-
-    /**
-     * <p>getSetCode3_SetCode2.</p>
-     *
-     * @param SetCode2 a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getSetCode3_SetCode2(String SetCode2) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Code2").equals(SetCode2))
-                return setData.get(i).get("Code3");
-
-        return "";
-    }
-
-    /**
-     * <p>getSetName_SetCode2.</p>
-     *
-     * @param SetCode2 a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getSetName_SetCode2(String SetCode2) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Code2").equals(SetCode2))
-                return setData.get(i).get("Name");
-
-        return "";
+    public static String getCode2ByCode(final String code) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        CardSet set = setsByCode.get(code);
+        return set == null ? "" : set.getCode2();
     }
 
     /**
@@ -180,15 +107,10 @@ public class SetInfoUtil {
      * @param SetCode3 a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getSetName_SetCode3(String SetCode3) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++)
-            if (setData.get(i).get("Code3").equals(SetCode3))
-                return setData.get(i).get("Name");
-
-        return "";
+    public static String getNameByCode(String code) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        CardSet set = setsByCode.get(code);
+        return set == null ? "" : set.getName();
     }
 
     /**
@@ -197,28 +119,18 @@ public class SetInfoUtil {
      * @param alSI a {@link java.util.ArrayList} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getMostRecentSet(ArrayList<SetInfo> alSI) {
-        if (setData.size() == 0)
-            loadSetData();
+    public static String getMostRecentSet(final ArrayList<SetInfo> alSI) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
 
-        int mostRecent = -1;
+        int size = alSI.size();
+        if (size == 0) { return ""; }
+        if (size == 1) { return alSI.get(0).Code; }
 
-        for (SetInfo s : alSI) {
-            for (int j = 0; j < setData.size(); j++) {
-                if (setData.get(j).get("Code3").equals(s.Code)) {
-                    if (j > mostRecent) {
-                        mostRecent = j;
-                        break;
-                    }
-                }
-            }
+        CardSet[] sets = new CardSet[size];
+        for (int i = 0; i < size; i++) { sets[i] = setsByCode.get(alSI.get(i).Code); }
+        Arrays.sort(sets);
 
-        }
-
-        if (mostRecent > -1)
-            return setData.get(mostRecent).get("Code3");
-
-        return "";
+        return sets[sets.length - 1].getCode();
     }
 
     /**
@@ -233,8 +145,7 @@ public class SetInfoUtil {
 
         for (int i = 0; i < SetList.size(); i++) {
             si = SetList.get(i);
-            if (si.Code.equals(SetCode))
-                return si;
+            if (si.Code.equals(SetCode)) { return si; }
         }
 
         return null;
@@ -246,16 +157,10 @@ public class SetInfoUtil {
      * @param SetCode a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int getSetIndex(String SetCode) {
-        if (setData.size() == 0)
-            loadSetData();
-
-        for (int i = 0; i < setData.size(); i++) {
-            if (setData.get(i).get("Code3").equals(SetCode))
-                return Integer.parseInt(setData.get(i).get("Index"));
-        }
-
-        return 0;
+    public static int getIndexByCode(final String code) {
+        if (setsByCode.isEmpty()) { loadSetData(); }
+        CardSet set = setsByCode.get(code);
+        return set == null ? 0 : set.getIndex();
     }
 
     /** Constant <code>blockData</code> */

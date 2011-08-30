@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardPrinted;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
@@ -11,9 +12,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -489,80 +493,52 @@ public final class CardUtil {
      * @return a {@link java.lang.String} object.
      */
     public static String buildFilename(final Card card) {
-        File path = null;
-        if (card.isToken() && !card.isCopiedToken()) {
-            path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        } else {
-            path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-        }
+        boolean token = card.isToken() && !card.isCopiedToken();
+        return buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), token);
+    }
 
-        StringBuilder sbKey = new StringBuilder();
+    public static String buildFilename(final CardPrinted card) {
+        return buildFilename(card.getName(), card.getSet(), card.getArtIndex(), false);
+    }
+
+    private static String buildFilename(final String cardName, final String setName,
+            final int artIndex, final boolean isToken)
+    {
+        File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
+        String nn = artIndex > 0 ? Integer.toString(artIndex) : "";
+        String cleanCardName = GuiDisplayUtil.cleanString(cardName);
 
         File f = null;
-        if (!card.getCurSetCode().equals("")) {
-            String nn = "";
-            if (card.getRandomPicture() > 0) {
-                nn = Integer.toString(card.getRandomPicture());
-            }
+        if (StringUtils.isNotBlank(setName)) {
+            String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
 
-            //First try 3 letter set code with MWS filename format
-            sbKey.append(card.getCurSetCode() + "/");
-            sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
-
-            f = new File(path, sbKey.toString() + ".jpg");
-            if (f.exists()) {
-                return sbKey.toString();
-            }
-
-            sbKey = new StringBuilder();
+            //First, try 3 letter set code with MWS filename format
+            String mwsSet3 = String.format("%s/%s%s.full", setName, mwsCardName, nn);
+            f = new File(path, mwsSet3 + ".jpg");
+            if (f.exists()) { return mwsSet3; }
 
             //Second, try 2 letter set code with MWS filename format
-            sbKey.append(SetInfoUtil.getSetCode2_SetCode3(card.getCurSetCode()) + "/");
-            sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
-
-            f = new File(path, sbKey.toString() + ".jpg");
-            if (f.exists()) {
-                return sbKey.toString();
-            }
-
-            sbKey = new StringBuilder();
+            String mwsSet2 = String.format("%s/%s%s.full", SetInfoUtil.getCode2ByCode(setName), mwsCardName, nn);
+            f = new File(path, mwsSet2 + ".jpg");
+            if (f.exists()) { return mwsSet2; }
 
             //Third, try 3 letter set code with Forge filename format
-            sbKey.append(card.getCurSetCode() + "/");
-            sbKey.append(GuiDisplayUtil.cleanString(card.getName()) + nn);
-
-            f = new File(path, sbKey.toString() + ".jpg");
-            if (f.exists()) {
-                return sbKey.toString();
-            }
-
-            sbKey = new StringBuilder();
-
+            String forgeSet3 = String.format("%s/%s%s", setName, cleanCardName, nn);
+            f = new File(path, forgeSet3 + ".jpg");
+            if (f.exists()) { return forgeSet3; }
         }
 
         //Last, give up with set images, go with the old picture type
-        sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
-        if (card.getRandomPicture() > 1) {
-            sbKey.append(card.getRandomPicture());
-        }
+        String forgePlain = String.format("%s%s", cleanCardName, nn);
 
-        f = new File(path, sbKey.toString() + ".jpg");
-        if (f.exists()) {
-            return sbKey.toString();
-        }
+        f = new File(path, forgePlain + ".jpg");
+        if (f.exists()) { return forgePlain; }
 
-        sbKey = new StringBuilder();
-
-        //Really last-ditch effort, forget the picture number
-        sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
-
-        f = new File(path, sbKey.toString() + ".jpg");
-        if (f.exists()) {
-            return sbKey.toString();
-        }
+        // give up with art index
+        f = new File(path, cleanCardName + ".jpg");
+        if (f.exists()) { return cleanCardName; }
 
         //if still no file, download if option enabled?
-
         return "none";
     }
 

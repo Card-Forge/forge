@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -389,7 +390,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         String SC = "";
 
         if (!(searchSetCombo.getSelectedItem().toString().equals(""))) {
-            SC = SetInfoUtil.getSetCode3_SetName(searchSetCombo.getSelectedItem().toString());
+            SC = SetInfoUtil.getCode3ByName(searchSetCombo.getSelectedItem().toString());
 
             boolean result = false;
 
@@ -959,8 +960,11 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
 
         searchSetCombo.removeAllItems();
         searchSetCombo.addItem("");
-        for (int i = 0; i < SetInfoUtil.getSetNameList().size(); i++)
-            searchSetCombo.addItem(SetInfoUtil.getSetNameList().get(i));
+        List<String> allSetsNames = SetInfoUtil.getNameList();
+        for (String s : allSetsNames) {
+            searchSetCombo.addItem(s);
+        }
+        
         this.getContentPane().add(searchSetCombo, "wmin 150, grow");
 
         this.getContentPane().add(statsLabel2, "cell 0 4");
