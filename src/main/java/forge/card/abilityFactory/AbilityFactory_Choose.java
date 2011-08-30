@@ -1,9 +1,23 @@
 package forge.card.abilityFactory;
 
-import forge.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardUtil;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Player;
+
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.*;
 import forge.gui.GuiUtils;
+
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -48,7 +62,7 @@ public class AbilityFactory_Choose {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return chooseTypeTriggerAI(af, this, mandatory);
             }
 
@@ -111,7 +125,7 @@ public class AbilityFactory_Choose {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return chooseTypeTriggerAI(af, this, mandatory);
             }
 
@@ -126,22 +140,26 @@ public class AbilityFactory_Choose {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String chooseTypeStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String chooseTypeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         for (Player p : tgtPlayers) {
             sb.append(p).append(" ");
@@ -175,9 +193,12 @@ public class AbilityFactory_Choose {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         Target tgt = sa.getTarget();
 
@@ -185,10 +206,13 @@ public class AbilityFactory_Choose {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-            for (Player p : tgtPlayers)
-                if (p.isHuman() && !mandatory)
+            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(
+                    sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+            for (Player p : tgtPlayers) {
+                if (p.isHuman() && !mandatory) {
                     return false;
+                }
+            }
         }
         return true;
     }
@@ -211,10 +235,12 @@ public class AbilityFactory_Choose {
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
@@ -224,7 +250,9 @@ public class AbilityFactory_Choose {
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
                             Object o = GuiUtils.getChoice("Choose a card type", CardUtil.getCardTypes().toArray());
-                            if (null == o) return;
+                            if (null == o) {
+                                return;
+                            }
                             String choice = (String) o;
                             if (CardUtil.isACardType(choice) && !invalidTypes.contains(choice)) {
                                 valid = true;
@@ -233,7 +261,8 @@ public class AbilityFactory_Choose {
                         } else {
                             //TODO
                             //computer will need to choose a type
-                            //based on whether it needs a creature or land, otherwise, lib search for most common type left
+                            //based on whether it needs a creature or land,
+                            //otherwise, lib search for most common type left
                             //then, reveal chosenType to Human
                         }
                     }
@@ -244,26 +273,32 @@ public class AbilityFactory_Choose {
                         if (sa.getActivatingPlayer().isHuman()) {
                             chosenType = JOptionPane.showInputDialog(null, "Choose a creature type:", card.getName(),
                                     JOptionPane.QUESTION_MESSAGE);
-                        } else {
-                        	String chosen = "";
-                        	if (params.containsKey("AILogic")) {
-                        		String logic = params.get("AILogic");
-                        		if(logic.equals("MostProminentOnBattlefield"))
-                        			chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInPlay());
-                        		if(logic.equals("MostProminentComputerControls"))
-                        			chosen = CardFactoryUtil.getMostProminentCreatureType(
-                        					AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
-                        		if(logic.equals("MostProminentHumanControls"))
-                        			chosen = CardFactoryUtil.getMostProminentCreatureType(
-                        					AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer()));
-                        		if(logic.equals("MostProminentInComputerDeck"))
-                        			chosen = CardFactoryUtil.getMostProminentCreatureType(
-                        					AllZoneUtil.getCardsInGame().getController(AllZone.getComputerPlayer()));
-                        	}
-                        	if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen))
-                        		chosen = "Sliver";
-                        	GuiUtils.getChoice("Computer picked: ", chosen);
-                        	chosenType = chosen;
+                        }
+                        else {
+                            String chosen = "";
+                            if (params.containsKey("AILogic")) {
+                                String logic = params.get("AILogic");
+                                if (logic.equals("MostProminentOnBattlefield")) {
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInPlay());
+                                }
+                                if (logic.equals("MostProminentComputerControls")) {
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
+                                            AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+                                }
+                                if (logic.equals("MostProminentHumanControls")) {
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
+                                            AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer()));
+                                }
+                                if (logic.equals("MostProminentInComputerDeck")) {
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
+                                            AllZoneUtil.getCardsInGame().getController(AllZone.getComputerPlayer()));
+                                }
+                            }
+                            if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                                chosen = "Sliver";
+                            }
+                            GuiUtils.getChoice("Computer picked: ", chosen);
+                            chosenType = chosen;
                         }
                         if (CardUtil.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
                             valid = true;
@@ -307,7 +342,7 @@ public class AbilityFactory_Choose {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return chooseColorTriggerAI(af, this, mandatory);
             }
 
@@ -372,7 +407,7 @@ public class AbilityFactory_Choose {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return chooseColorTriggerAI(af, this, mandatory);
             }
 
@@ -387,21 +422,25 @@ public class AbilityFactory_Choose {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String chooseColorStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String chooseColorStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+        }
 
         for (Player p : tgtPlayers) {
             sb.append(p).append(" ");
@@ -435,9 +474,12 @@ public class AbilityFactory_Choose {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         Target tgt = sa.getTarget();
 
@@ -445,10 +487,13 @@ public class AbilityFactory_Choose {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-            for (Player p : tgtPlayers)
-                if (p.isHuman() && !mandatory)
+            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                    af.getMapParams().get("Defined"), sa);
+            for (Player p : tgtPlayers) {
+                if (p.isHuman() && !mandatory) {
                     return false;
+                }
+            }
         }
         return true;
     }
@@ -466,25 +511,30 @@ public class AbilityFactory_Choose {
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
-                    if (null == o) return;
+                    if (null == o) {
+                        return;
+                    }
                     String choice = (String) o;
                     card.setChosenColor(choice);
                 } else {
-                	//TODO - needs improvement
+                    //TODO - needs improvement
                     card.setChosenColor(Constant.Color.Black);
-                    JOptionPane.showMessageDialog(null, "Computer chooses "+Constant.Color.Black, ""+card, JOptionPane.PLAIN_MESSAGE); 
+                    String message = "Computer chooses " + Constant.Color.Black;
+                    JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
                 }
             }
         }
     }
 
-}//end class AbilityFactory_Choose
+} //end class AbilityFactory_Choose
