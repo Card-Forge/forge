@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.card.cardFactory.CardFactoryInterface;
+import forge.card.cardFactory.LazyCardFactory;
 import forge.card.cardFactory.PreloadingCardFactory;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerHandler;
@@ -78,7 +79,7 @@ public final class AllZone implements NewConstants {
     private static Display display;
 
     /** Constant <code>DECK_MGR</code>. */
-    private static final DeckManager DECK_MGR = new DeckManager(ForgeProps.getFile(NEW_DECKS));
+    private static DeckManager deckManager;
 
     /**
      * <p>getHumanPlayer.</p>
@@ -221,9 +222,10 @@ public final class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static CardFactoryInterface getCardFactory() {
-        if (cardFactory == null) {
-            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-        }
+    	if (cardFactory == null) {
+    	    //setCardFactory(new LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+    		setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+    	}
         return cardFactory;
     }
 
@@ -638,7 +640,8 @@ public final class AllZone implements NewConstants {
      * @return dMgr
      */
     public static DeckManager getDeckManager() {
-        return DECK_MGR;
+        if (deckManager == null) { deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));}
+        return deckManager;
     }
 
     /**
