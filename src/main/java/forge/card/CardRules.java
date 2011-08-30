@@ -51,8 +51,8 @@ public final class CardRules {
     public final String getToughness() { return toughness; }
     public final int getIntToughness() { return iToughness; }
     public final String getLoyalty() { return loyalty; }
-    public final boolean getemovedFromAIDecks() { return isRemovedFromAIDecks; }
-    public final boolean getRemovedFromRandomDecks() { return isRemovedFromRandomDecks; }
+    public final boolean getRemAIDecks() { return isRemovedFromAIDecks; }
+    public final boolean getRemRandomDecks() { return isRemovedFromRandomDecks; }
 
     public String getPTorLoyalty() {
         if (getType().isCreature()) { return power + "/" + toughness; }
@@ -114,6 +114,12 @@ public final class CardRules {
 
     public String getAiStatus() {
         return isRemovedFromAIDecks ? (isRemovedFromRandomDecks ? "AI ?" : "AI") : (isRemovedFromRandomDecks ? "?" :"");
+    }
+    public Integer getAiStatusComparable() {
+        if (isRemovedFromAIDecks && isRemovedFromRandomDecks) { return Integer.valueOf(3); }
+        else if (isRemovedFromAIDecks) { return Integer.valueOf(4); }
+        else if (isRemovedFromRandomDecks) { return Integer.valueOf(2); }
+        else { return Integer.valueOf(1); }
     }
 
     public abstract static class Predicates {
