@@ -12,12 +12,13 @@ import java.util.Map;
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
 //GainControl specific params:
-//	LoseControl - the lose control conditions (as a comma separated list)
+//  LoseControl - the lose control conditions (as a comma separated list)
 //			-Untap - source card becomes untapped
 //			-LoseControl - you lose control of source card
 //			-LeavesPlay - source card leaves the battlefield
 //			-PowerGT - (not implemented yet for Old Man of the Sea)
-//	AddKWs	- Keywords to add to the controlled card (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
+//	AddKWs	- Keywords to add to the controlled card
+//              (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
 //	Untap	- set to True if target card should untap when control is taken
 //	DestroyTgt - actions upon which the tgt should be destroyed.  same list as LoseControl
@@ -31,7 +32,7 @@ import java.util.Map;
  */
 public class AbilityFactory_GainControl {
 
-    private final Card movedCards[] = new Card[1];
+    private final Card[] movedCards = new Card[1];
 
     private AbilityFactory af = null;
     private HashMap<String, String> params = null;
@@ -48,7 +49,7 @@ public class AbilityFactory_GainControl {
      *
      * @param newAF a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
-    public AbilityFactory_GainControl(AbilityFactory newAF) {
+    public AbilityFactory_GainControl(final AbilityFactory newAF) {
         af = newAF;
         params = af.getMapParams();
         hostCard = af.getHostCard();
@@ -78,7 +79,7 @@ public class AbilityFactory_GainControl {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public SpellAbility getSpellGainControl() {
+    public final SpellAbility getSpellGainControl() {
         SpellAbility spControl = new Spell(hostCard, af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3125489644424832311L;
 
@@ -90,13 +91,13 @@ public class AbilityFactory_GainControl {
             @Override
             public void resolve() {
                 gainControlResolve(this);
-            }//resolve
+            } //resolve
 
             @Override
             public String getStackDescription() {
                 return gainControlStackDescription(this);
             }
-        };//SpellAbility
+        }; //SpellAbility
 
         return spControl;
     }
@@ -107,7 +108,7 @@ public class AbilityFactory_GainControl {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public SpellAbility getAbilityGainControl() {
+    public final SpellAbility getAbilityGainControl() {
 
         final SpellAbility abControl = new Ability_Activated(hostCard, af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4384705198674678831L;
@@ -128,10 +129,10 @@ public class AbilityFactory_GainControl {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return gainControlTgtAI(this);
             }
-        };//Ability_Activated
+        }; //Ability_Activated
 
         return abControl;
     }
@@ -142,7 +143,7 @@ public class AbilityFactory_GainControl {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public SpellAbility getDrawbackGainControl() {
+    public final SpellAbility getDrawbackGainControl() {
         SpellAbility dbControl = new Ability_Sub(hostCard, af.getAbTgt()) {
             private static final long serialVersionUID = -5577742598032345880L;
 
@@ -159,7 +160,7 @@ public class AbilityFactory_GainControl {
             @Override
             public void resolve() {
                 gainControlResolve(this);
-            }//resolve
+            } //resolve
 
             @Override
             public boolean chkAI_Drawback() {
@@ -167,10 +168,10 @@ public class AbilityFactory_GainControl {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return gainControlTriggerAI(this, mandatory);
             }
-        };//SpellAbility
+        }; //SpellAbility
 
         return dbControl;
     }
@@ -181,32 +182,39 @@ public class AbilityFactory_GainControl {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private String gainControlStackDescription(SpellAbility sa) {
+    private String gainControlStackDescription(final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
         }
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("NewController"), sa);
-        if (newController.size() == 0) newController.add(sa.getActivatingPlayer());
+        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                params.get("NewController"), sa);
+        if (newController.size() == 0) {
+            newController.add(sa.getActivatingPlayer());
+        }
 
         sb.append(newController).append(" gains control of ");
 
         for (Card c : tgtCards) {
             sb.append(" ");
-            if (c.isFaceDown()) sb.append("Morph");
-            else sb.append(c);
+            if (c.isFaceDown()) {
+                sb.append("Morph");
+            } else {
+                sb.append(c);
+            }
         }
         sb.append(".");
 
@@ -224,7 +232,7 @@ public class AbilityFactory_GainControl {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean gainControlTgtAI(SpellAbility sa) {
+    private boolean gainControlTgtAI(final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
@@ -241,26 +249,38 @@ public class AbilityFactory_GainControl {
         list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
         //AI won't try to grab cards that are filtered out of AI decks on purpose
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck") && CardFactoryUtil.canTarget(hostCard, c);
             }
         });
 
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return false;
+        }
 
         // Don't steal something if I can't Attack without, or prevent it from blocking at least
-        if (lose != null && lose.contains("EOT") && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers))
+        if (lose != null && lose.contains("EOT")
+                && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers))
+        {
             return false;
+        }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
             for (Card c : list) {
-                if (c.isCreature()) hasCreature = true;
-                if (c.isArtifact()) hasArtifact = true;
-                if (c.isLand()) hasLand = true;
-                if (c.isEnchantment()) hasEnchantment = true;
+                if (c.isCreature()) {
+                    hasCreature = true;
+                }
+                if (c.isArtifact()) {
+                    hasArtifact = true;
+                }
+                if (c.isLand()) {
+                    hasLand = true;
+                }
+                if (c.isEnchantment()) {
+                    hasEnchantment = true;
+                }
             }
 
             if (list.isEmpty()) {
@@ -273,11 +293,17 @@ public class AbilityFactory_GainControl {
                 }
             }
 
-            if (hasCreature) t = CardFactoryUtil.AI_getBestCreature(list);
-            else if (hasArtifact) t = CardFactoryUtil.AI_getBestArtifact(list);
-            else if (hasLand) t = CardFactoryUtil.AI_getBestLand(list);
-            else if (hasEnchantment) t = CardFactoryUtil.AI_getBestEnchantment(list, sa.getSourceCard(), true);
-            else t = CardFactoryUtil.AI_getMostExpensivePermanent(list, sa.getSourceCard(), true);
+            if (hasCreature) {
+                t = CardFactoryUtil.AI_getBestCreature(list);
+            } else if (hasArtifact) {
+                t = CardFactoryUtil.AI_getBestArtifact(list);
+            } else if (hasLand) {
+                t = CardFactoryUtil.AI_getBestLand(list);
+            } else if (hasEnchantment) {
+                t = CardFactoryUtil.AI_getBestEnchantment(list, sa.getSourceCard(), true);
+            } else {
+                t = CardFactoryUtil.AI_getMostExpensivePermanent(list, sa.getSourceCard(), true);
+            }
 
             tgt.addTarget(t);
             list.remove(t);
@@ -297,19 +323,22 @@ public class AbilityFactory_GainControl {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private void gainControlResolve(SpellAbility sa) {
+    private void gainControlResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
         }
         //tgtCards.add(hostCard);
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("NewController"), sa);
-        if (newController.size() == 0) newController.add(sa.getActivatingPlayer());
+        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                params.get("NewController"), sa);
+        if (newController.size() == 0) {
+            newController.add(sa.getActivatingPlayer());
+        }
 
         int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
@@ -322,9 +351,12 @@ public class AbilityFactory_GainControl {
             if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
 
                 tgtC.addController(hostCard);
-                //AllZone.getGameAction().changeController(new CardList(tgtC), tgtC.getController(), newController.get(0));
+                //AllZone.getGameAction().changeController(new CardList(tgtC),
+                //      tgtC.getController(), newController.get(0));
 
-                if (bUntap) tgtC.untap();
+                if (bUntap) {
+                    tgtC.untap();
+                }
 
                 if (null != kws) {
                     for (String kw : kws) {
@@ -366,7 +398,7 @@ public class AbilityFactory_GainControl {
             hostCard.clearGainControlReleaseCommands();
             hostCard.addGainControlReleaseCommand(getLoseControlCommand(0, originalController));
 
-        }//end foreach target
+        } //end foreach target
     }
 
     /**
@@ -376,13 +408,15 @@ public class AbilityFactory_GainControl {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private boolean gainControlTriggerAI(SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private boolean gainControlTriggerAI(final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         if (sa.getTarget() == null) {
-            if (mandatory)
+            if (mandatory) {
                 return true;
+            }
         } else {
             return gainControlTgtAI(sa);
         }
@@ -396,14 +430,15 @@ public class AbilityFactory_GainControl {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean gainControlDrawbackAI(SpellAbility sa) {
+    private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
             //all is good
-        } else
+        } else {
             return gainControlTgtAI(sa);
+        }
 
         return true;
-    }//pumpDrawbackAI()
+    } //pumpDrawbackAI()
 
     /**
      * <p>getDestroyCommand.</p>
@@ -429,7 +464,9 @@ public class AbilityFactory_GainControl {
                 };
                 StringBuilder sb = new StringBuilder();
                 sb.append(hostCard).append(" - destroy ").append(c.getName()).append(".");
-                if (bNoRegen) sb.append("  It can't be regenerated.");
+                if (bNoRegen) {
+                    sb.append("  It can't be regenerated.");
+                }
                 ability.setStackDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -453,27 +490,31 @@ public class AbilityFactory_GainControl {
             public void execute() {
                 Card c = movedCards[i];
                 //ArrayList<Card> c = hostCard.getGainControlTargets();
-                if (null == c) return;
+                if (null == c) {
+                    return;
+                }
 
                 if (AllZoneUtil.isCardInPlay(c)) {
                     c.removeController(hostCard);
                     //AllZone.getGameAction().changeController(new CardList(c), c.getController(), originalController);
 
-                    if (bTapOnLose) c.tap();
+                    if (bTapOnLose) {
+                        c.tap();
+                    }
 
                     if (null != kws) {
                         for (String kw : kws) {
                             c.removeExtrinsicKeyword(kw);
                         }
                     }
-                }//if
+                } //if
                 hostCard.clearGainControlTargets();
                 hostCard.clearGainControlReleaseCommands();
                 movedCards[i] = null;
-            }//execute()
+            } //execute()
         };
 
         return loseControl;
     }
 
-}//end class AbilityFactory_GainControl
+} //end class AbilityFactory_GainControl
