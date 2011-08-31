@@ -78,6 +78,8 @@ public class GameAction {
         else {
             copied = AllZone.getCardFactory().copyCard(c);
             copied.setControllerObjects(c.getControllerObjects());
+            copied.addTempAttackBoost(c.getTempAttackBoost());
+            copied.addTempDefenseBoost(c.getTempDefenseBoost());
 
             // todo: improve choices here
             // Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
