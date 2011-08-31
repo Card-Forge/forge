@@ -21,7 +21,7 @@ import forge.card.spellability.Target;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Combat {
+public final class AbilityFactory_Combat {
 
     private AbilityFactory_Combat() {
         throw new AssertionError();

@@ -9,7 +9,7 @@ package forge;
  */
 public class EndOfCombat implements java.io.Serializable {
 
-    /** Constant <code>serialVersionUID=3035250030566186842L</code> */
+    /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
     private static final long serialVersionUID = 3035250030566186842L;
 
     private CommandList at = new CommandList();
@@ -20,7 +20,7 @@ public class EndOfCombat implements java.io.Serializable {
      *
      * @param c a {@link forge.Command} object.
      */
-    public void addAt(Command c) {
+    public final void addAt(final Command c) {
         at.add(c);
     }
 
@@ -29,23 +29,23 @@ public class EndOfCombat implements java.io.Serializable {
      *
      * @param c a {@link forge.Command} object.
      */
-    public void addUntil(Command c) {
+    public final void addUntil(final Command c) {
         until.add(c);
     }
 
     /**
      * <p>executeAt.</p>
      */
-    public void executeAt() {
+    public final void executeAt() {
         //AllZone.getStateBasedEffects().rePopulateStateBasedList();
         execute(at);
-    }//executeAt()
+    } //executeAt()
 
 
     /**
      * <p>executeUntil.</p>
      */
-    public void executeUntil() {
+    public final void executeUntil() {
         execute(until);
     }
 
@@ -54,7 +54,7 @@ public class EndOfCombat implements java.io.Serializable {
      *
      * @return a int.
      */
-    public int sizeAt() {
+    public final int sizeAt() {
         return at.size();
     }
 
@@ -63,7 +63,7 @@ public class EndOfCombat implements java.io.Serializable {
      *
      * @return a int.
      */
-    public int sizeUntil() {
+    public final int sizeUntil() {
         return until.size();
     }
 
@@ -72,10 +72,12 @@ public class EndOfCombat implements java.io.Serializable {
      *
      * @param c a {@link forge.CommandList} object.
      */
-    private void execute(CommandList c) {
+    private void execute(final CommandList c) {
         int length = c.size();
 
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < length; i++) {
             c.remove(0).execute();
+        }
     }
-}
+
+} //end class EndOfCombat
