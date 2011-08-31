@@ -127,7 +127,8 @@ public class GameAction {
             copied = AllZone.getCardFactory().copyCard(copied);
         */
         //remove all counters from the card if destination is not the battlefield
-        if (!zone.is(Constant.Zone.Battlefield))
+        //UNLESS we're dealing with Skullbriar, the Walking Grave
+        if (!zone.is(Constant.Zone.Battlefield) && !(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone.is(Constant.Zone.Library)))
             copied.clearCounters();
         
         copied.setTimestamp(AllZone.getNextTimestamp());
