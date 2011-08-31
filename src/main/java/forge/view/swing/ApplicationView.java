@@ -124,7 +124,6 @@ public class ApplicationView implements FView {
         }
         
         if(!splashFrame.getSplashHasBeenClosed()) {
-            System.out.println("splashFrame still running");
             try {
                 Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
