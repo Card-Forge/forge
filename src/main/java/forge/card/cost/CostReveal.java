@@ -5,6 +5,7 @@ import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
+import forge.ComputerUtil;
 import forge.Constant;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
@@ -65,7 +66,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            list = AllZone.getGameAction().AI_discardNumType(c, type.split(";"), ability);
+            list = ComputerUtil.AI_discardNumType(c, type.split(";"), ability);
         }
         return list != null;
     }

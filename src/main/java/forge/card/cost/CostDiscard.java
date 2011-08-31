@@ -6,6 +6,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.ComputerUtil;
 import forge.Constant;
 import forge.Player;
 import forge.PlayerZone;
@@ -197,7 +198,7 @@ public class CostDiscard extends CostPartWithList {
                 list = CardListUtil.getRandomSubList(hand, c);
             }
             else{
-                list = AllZone.getGameAction().AI_discardNumType(c, type.split(";"), ability);
+                list = ComputerUtil.AI_discardNumType(c, type.split(";"), ability);
             }
         }
         return list != null;

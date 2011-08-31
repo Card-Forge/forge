@@ -484,34 +484,6 @@ public class GameAction {
             return moveToStack(c);
     }
 
-
-    /**
-     * <p>AI_discardNumType.</p>
-     *
-     * @param numDiscard a int.
-     * @param uTypes     an array of {@link java.lang.String} objects.
-     * @param sa         a {@link forge.card.spellability.SpellAbility} object.
-     * @return a CardList of discarded cards.
-     */
-    public CardList AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
-        CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
-        hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
-
-        if (hand.size() < numDiscard){
-            return null;
-        }
-        
-        CardList discard = new CardList();
-        
-        CardListUtil.sortCMC(hand);
-        hand.reverse();
-        for (int i = 0; i < numDiscard; i++){
-            discard.add(hand.get(i));
-        }
-        
-        return discard;
-    }
-
     /**
      * <p>discard_PutIntoPlayInstead.</p>
      *

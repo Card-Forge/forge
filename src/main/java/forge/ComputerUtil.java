@@ -922,6 +922,48 @@ public class ComputerUtil {
         for (int i = count; i < amount; i++) sacList.add(typeList.get(i));
         return sacList;
     }
+    
+
+
+    /**
+     * <p>AI_discardNumType.</p>
+     *
+     * @param numDiscard a int.
+     * @param uTypes     an array of {@link java.lang.String} objects.
+     * @param sa         a {@link forge.card.spellability.SpellAbility} object.
+     * @return a CardList of discarded cards.
+     */
+    static public CardList AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
+        CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+        hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+
+        if (hand.size() < numDiscard){
+            return null;
+        }
+        
+        CardList discardList = new CardList();
+        int count = 0;
+        
+        while (count < numDiscard) {
+            Card prefCard = getCardPreference(sa.getSourceCard(), "DiscardCost", hand);
+            if (prefCard != null) {
+                discardList.add(prefCard);
+                hand.remove(prefCard);
+                count++;
+            } else
+                break;
+        }
+        
+        int discardsLeft = numDiscard - count;
+        
+        CardListUtil.sortCMC(hand);
+        hand.reverse();
+        for (int i = 0; i < discardsLeft; i++){
+            discardList.add(hand.get(i));
+        }
+        
+        return discardList;
+    }
 
     /**
      * <p>chooseExileType.</p>
