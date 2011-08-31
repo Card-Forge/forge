@@ -661,5 +661,20 @@ public final class CardUtil {
 
         return res;
     }
+    
+    /**
+     * getLKICopy.
+     * @param c a Card.
+     * @return a copy of C with LastKnownInfo stuff retained.
+     */
+    public static Card getLKICopy(final Card c) {
+        Card res = AllZone.getCardFactory().copyCard(c);
+        res.setControllerObjects(c.getControllerObjects());
+        res.addTempAttackBoost(c.getTempAttackBoost());
+        res.addTempDefenseBoost(c.getTempDefenseBoost());
+        res.setCounters(c.getCounters());
+
+        return res;
+    }
 
 } //end class CardUtil

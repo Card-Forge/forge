@@ -71,15 +71,14 @@ public class GameAction {
         }
 
         Card copied = null;
+        Card lastKnownInfo = null; 
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering Battlefield
         if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield))
-            copied = c;
+            lastKnownInfo = copied = c;
         else {
             copied = AllZone.getCardFactory().copyCard(c);
-            copied.setControllerObjects(c.getControllerObjects());
-            copied.addTempAttackBoost(c.getTempAttackBoost());
-            copied.addTempDefenseBoost(c.getTempDefenseBoost());
+            lastKnownInfo = CardUtil.getLKICopy(c);
 
             // todo: improve choices here
             // Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
@@ -91,7 +90,7 @@ public class GameAction {
         // This is the fix for Isochron Scepter and friends, we need to test other situations
         // To make sure it doesn't break anything serious
         for (Trigger trigger : c.getTriggers())
-            trigger.setHostCard(copied);
+            trigger.setHostCard(lastKnownInfo);
 
         if (suppress)
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
@@ -103,7 +102,7 @@ public class GameAction {
             zone.remove(copied);
 
         HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", copied);
+        runParams.put("Card", lastKnownInfo);
         if (prev != null) {
             runParams.put("Origin", prev.getZoneName());
         } else {
@@ -123,10 +122,10 @@ public class GameAction {
             prev.remove(c);
         }
         
-        
+        /*
         if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) && !zone.is(Constant.Zone.Battlefield))
             copied = AllZone.getCardFactory().copyCard(copied);
-        
+        */
         //remove all counters from the card if destination is not the battlefield
         if (!zone.is(Constant.Zone.Battlefield))
             copied.clearCounters();
