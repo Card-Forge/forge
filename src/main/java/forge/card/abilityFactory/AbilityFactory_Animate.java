@@ -138,7 +138,7 @@ public class AbilityFactory_Animate {
             toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
         }
 
-        boolean permanent = params.containsKey("Permanent") ? true : false;
+        boolean permanent = params.containsKey("Permanent");
         final ArrayList<String> types = new ArrayList<String>();
         if (params.containsKey("Types")) {
             types.addAll(Arrays.asList(params.get("Types").split(",")));
@@ -197,17 +197,22 @@ public class AbilityFactory_Animate {
             sb.append("color of that player's choice");
         }
         else {
-        	for (int i = 0; i < colors.size(); i++) {
-        		sb.append(colors.get(i));
-        		if (i < (colors.size() - 1)) {
-        		    sb.append(" and ");
-        		}
-        	}
+            for (int i = 0; i < colors.size(); i++) {
+                sb.append(colors.get(i));
+                if (i < (colors.size() - 1)) {
+                    sb.append(" and ");
+                }
+            }
         }
         sb.append(" ");
-        for (int i = types.size() - 1; i >= 0; i--) {
-            sb.append(types.get(i));
-            sb.append(" ");
+        if (types.contains("ChosenType")) {
+            sb.append("type of player's choice ");
+        }
+        else {
+            for (int i = types.size() - 1; i >= 0; i--) {
+                sb.append(types.get(i));
+                sb.append(" ");
+            }
         }
         if (keywords.size() > 0) {
             sb.append("with ");
@@ -272,8 +277,8 @@ public class AbilityFactory_Animate {
 
         //don't use instant speed animate abilities outside humans Combat_Declare_Attackers_InstantAbility step
         if ((!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility)
-        		|| AllZone.getCombat().getAttackers().length == 0)
-        		&& AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer()))
+                || AllZone.getCombat().getAttackers().length == 0)
+                && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer()))
         {
             return false;
         }
@@ -300,7 +305,7 @@ public class AbilityFactory_Animate {
                     toughness = AbilityFactory.calculateAmount(source, params.get("Toughness"), sa);
                 }
                 if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
-                	bFlag = true;
+                    bFlag = true;
                 }
 
             }

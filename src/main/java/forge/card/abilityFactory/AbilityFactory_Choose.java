@@ -306,6 +306,26 @@ public class AbilityFactory_Choose {
                         }
                     }
                 }
+                else if (type.equals("Basic Land")) {
+                    boolean valid = false;
+                    while (!valid) {
+                        if (sa.getActivatingPlayer().isHuman()) {
+                            Object o = GuiUtils.getChoice("Choose a basic land type",
+                                    CardUtil.getBasicTypes().toArray());
+                            if (null == o) {
+                                return;
+                            }
+                            String choice = (String) o;
+                            if (CardUtil.isABasicLandType(choice) && !invalidTypes.contains(choice)) {
+                                valid = true;
+                                card.setChosenType(choice);
+                            }
+                        } else {
+                            //TODO
+                            //computer will need to choose a type
+                        }
+                    }
+                } //end if-else if
             }
         }
     }

@@ -411,7 +411,19 @@ public final class CardUtil {
         return types;
     }
 
+    /**
+     * <p>getCardTypes.</p>
+     *
+     * @return a {@link java.util.ArrayList} object.
+     * @since 1.1.3
+     */
+    public static ArrayList<String> getBasicTypes() {
+        ArrayList<String> types = new ArrayList<String>();
 
+        types.addAll(Constant.CardTypes.basicTypes[0].list);
+
+        return types;
+    }
 
     /**
      * <p>isASuperType.</p>

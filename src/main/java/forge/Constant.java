@@ -63,8 +63,8 @@ public interface Constant {
     //}
 
     public interface Ability {
-        public static final String Triggered = "Triggered";
-        public static final String Activated = "Activated";
+        String Triggered = "Triggered";
+        String Activated = "Activated";
     }
 
     public interface Phase {
@@ -90,81 +90,76 @@ public interface Constant {
     }
 
     public interface Zone {
-        public static final String Hand = "Hand";
-        public static final String Library = "Library";
-        public static final String Graveyard = "Graveyard";
-        public static final String Battlefield = "Battlefield";
-        public static final String Exile = "Exile";
-        public static final String Command = "Command";
-        public static final String Stack = "Stack";
+        String Hand = "Hand";
+        String Library = "Library";
+        String Graveyard = "Graveyard";
+        String Battlefield = "Battlefield";
+        String Exile = "Exile";
+        String Command = "Command";
+        String Stack = "Stack";
     }
 
     public interface Color {
-        public static final String Black = "black";
-        public static final String Blue = "blue";
-        public static final String Green = "green";
-        public static final String Red = "red";
-        public static final String White = "white";
+        String Black = "black";
+        String Blue = "blue";
+        String Green = "green";
+        String Red = "red";
+        String White = "white";
 
-        public static final String Colorless = "colorless";
+        String Colorless = "colorless";
         //color order "wubrg"
-        public static final String Colors[] = {White, Blue, Black, Red, Green, Colorless};
-        public static final String onlyColors[] = {White, Blue, Black, Red, Green};
+        String[] Colors = {White, Blue, Black, Red, Green, Colorless};
+        String[] onlyColors = {White, Blue, Black, Red, Green};
 
-        public static final String Snow = "snow";
-        public static final String ManaColors[] = {White, Blue, Black, Red, Green, Colorless, Snow};
+        String Snow = "snow";
+        String[] ManaColors = {White, Blue, Black, Red, Green, Colorless, Snow};
         
-        public static final boolean loaded[] = {false};
+        boolean[] loaded = {false};
         //public static final Constant_StringHashMap[] LandColor = new Constant_StringHashMap[1];
 
-        public static final String BasicLands[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+        String[] BasicLands = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
     }
 
     public interface Rarity {
-        public static final String Common = "Common";
-        public static final String Uncommon = "Uncommon";
-        public static final String Rare = "Rare";
-        public static final String Mythic = "Mythic";
-        public static final String Land = "Land";
+        String Common = "Common";
+        String Uncommon = "Uncommon";
+        String Rare = "Rare";
+        String Mythic = "Mythic";
+        String Land = "Land";
     }
 
     public interface Quest {
-        public static final boolean[] fantasyQuest = new boolean[1];
+        boolean[] fantasyQuest = new boolean[1];
 
         //public static final Quest_Assignment[] qa = new Quest_Assignment[1];
 
-        public static final CardList[] humanList = new CardList[1];
-        public static final CardList[] computerList = new CardList[1];
+        CardList[] humanList = new CardList[1];
+        CardList[] computerList = new CardList[1];
 
-        public static final int[] humanLife = new int[1];
-        public static final int[] computerLife = new int[1];
+        int[] humanLife = new int[1];
+        int[] computerLife = new int[1];
 
-        public static final String[] oppIconName = new String[1];
+        String[] oppIconName = new String[1];
     }
-    
+
     public interface CardTypes {
-    	public static final boolean loaded[] = {false}; 
-    	public static final Constant_StringArrayList cardTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList superTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList basicTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList landTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList creatureTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList instantTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList sorceryTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList enchantmentTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList artifactTypes[] = new Constant_StringArrayList[1];
-    	public static final Constant_StringArrayList walkerTypes[] = new Constant_StringArrayList[1];
+    	boolean[] loaded = {false}; 
+    	Constant_StringArrayList[] cardTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] superTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] basicTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] landTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] creatureTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] instantTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] sorceryTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] enchantmentTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] artifactTypes = new Constant_StringArrayList[1];
+    	Constant_StringArrayList[] walkerTypes = new Constant_StringArrayList[1];
     }
-    
+
     public interface Keywords {
-    	public static final boolean loaded[] = {false};
-    	public static final Constant_StringArrayList NonStackingList[] = new Constant_StringArrayList[1];
+    	boolean[] loaded = {false};
+    	Constant_StringArrayList[] NonStackingList = new Constant_StringArrayList[1];
     }
-    
-    
-    
 
 
-}//Constant
-
-
+} //Constant
