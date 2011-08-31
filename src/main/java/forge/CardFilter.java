@@ -27,8 +27,7 @@ public class CardFilter {
      * @param substring a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList cardListNameFilter(Iterable<Card> toBeFiltered, String substring) 
-    {
+    public CardList cardListNameFilter(Iterable<Card> toBeFiltered, String substring) {
         String s;
 
         CardList listFilter = new CardList();
@@ -48,23 +47,23 @@ public class CardFilter {
     /**
      * <p>CardListTextFilter.</p>
      *
-	 * TODO: style: rename this method so it starts with a lowercase letter
+	 * TODO style: rename this method so it starts with a lowercase letter
 	 * 
      * @param all a {@link forge.CardList} object.
      * @param name a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList CardListTextFilter(CardList all, String name) {
-        Card CardName;
+    public final CardList CardListTextFilter(CardList all, String name) {
+        Card cardName;
         String s;
         s = "";
         CardList listFilter = new CardList();
         for (int i = 0; i < all.size(); i++) {
-            CardName = all.getCard(i);
-            s = CardName.getText().toLowerCase();
+            cardName = all.getCard(i);
+            s = cardName.getText().toLowerCase();
 
             if (s.indexOf(name.toLowerCase()) >= 0) {
-                listFilter.add(CardName);
+                listFilter.add(cardName);
 
             }
 
@@ -77,13 +76,13 @@ public class CardFilter {
     /**
      * <p>CardListColorFilter.</p>
      *
-	 * TODO: style: rename this method so it starts with a lowercase letter
+	 * TODO style: rename this method so it starts with a lowercase letter
 	 * 
      * @param all a {@link forge.CardList} object.
      * @param name a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList CardListColorFilter(CardList all, String name) {
+    public final CardList CardListColorFilter(CardList all, String name) {
         Card CardName = new Card();
         CardList listFilter = new CardList();
 
@@ -153,7 +152,7 @@ public class CardFilter {
     /**
      * <p>CardListTypeFilter.</p>
      *
-	 * TODO: style: rename this method so it starts with a lowercase letter
+	 * TODO style: rename this method so it starts with a lowercase letter
 	 * 
      * @param all a {@link forge.CardList} object.
      * @param name a {@link java.lang.String} object.
@@ -239,33 +238,33 @@ public class CardFilter {
     /**
      * Filter a sequence Generator of cards by rarity.
      * 
-     * @param inputGenerator  the sequence to filter (at a later time); must 
+     * @param inputGenerator  the sequence to filter (at a later time); must
      * not be null
      * 
-     * @param rarity  a valid value for Card.getSVar("Rarity"); must not be 
+     * @param rarity  a valid value for Card.getSVar("Rarity"); must not be
      * null. If equal to Constant.Rarity.Rare, the result will also contain
      * mythic cards.
      * 
      * @return  a sequence Generator whose cards only have the given rarity
      */
-	public static Generator<Card> getRarity(Generator<Card> inputGenerator, final String rarity) {
+	public static Generator<Card> getRarity(final Generator<Card> inputGenerator, final String rarity) {
     	UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
     	UtilFunctions.checkNotNull("rarity", rarity);
 
-		Lambda1<Boolean,Card> predicate = new Lambda1<Boolean,Card>() {
-			public Boolean apply(Card c) {
+		Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+			public Boolean apply(final Card c) {
 				if (c == null) {
 					return false;
 				}
 
 				// TODO spin off Mythic from Rare when the time comes
 	            String r = c.getSVar("Rarity");
-	            return (r != null && 
-	            		(r.equals(rarity) ||
-	                     rarity.equals(Constant.Rarity.Rare) && r.equals(Constant.Rarity.Mythic)));
+	            return (r != null
+	                    && (r.equals(rarity) || rarity.equals(Constant.Rarity.Rare)
+	                            && r.equals(Constant.Rarity.Mythic)));
 			}
 		};
-		
+
 		return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
 	}
 
@@ -280,13 +279,14 @@ public class CardFilter {
 	 * @return a list of Cards that meet the filtering criteria; may be empty,
 	 * but never null
 	 */
-	public static CardList filter(Iterable<Card> iterable, CardListFilter filt) {
+	public static CardList filter(final Iterable<Card> iterable, final CardListFilter filt) {
 	    CardList result = new CardList();
-	    for (Card card : iterable)
+	    for (Card card : iterable) {
 	        if (filt.addCard(card)) {
-	        	result.add(card);
+	            result.add(card);
 	        }
-	
+	    }
+
 	    return result;
 	}
 
@@ -304,32 +304,31 @@ public class CardFilter {
 	 * @return a new Generator containing cards only of the desired color or
 	 * multicolored cards.
 	 */
-    public static Generator<Card> getColor(Generator<Card> inputGenerator, final String cardColor) 
-    {
-    	UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
-    	UtilFunctions.checkNotNull("cardColor", cardColor);
+	public static Generator<Card> getColor(final Generator<Card> inputGenerator, final String cardColor) {
+	    UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
+	    UtilFunctions.checkNotNull("cardColor", cardColor);
 
-    	final boolean weWantMulticolor = cardColor.equals("Multicolor");
-    	
-		Lambda1<Boolean,Card> predicate = new Lambda1<Boolean,Card>() {
-			public Boolean apply(Card c) {
-				if (c == null) {
-					return false;
-				}
-				
-				if (weWantMulticolor && c.getColor() != null && c.getColor().size() > 1) {
-					return true;
-				}
-				else if (c.isColor(cardColor) && c.getColor() != null && c.getColor().size() == 1) {
-					return true;
-				}
+	    final boolean weWantMulticolor = cardColor.equals("Multicolor");
 
-				return false;
-			}
-		};
-		
-		return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
-    }//getColor()
+	    Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+	        public Boolean apply(final Card c) {
+	            if (c == null) {
+	                return false;
+	            }
+
+	            if (weWantMulticolor && c.getColor() != null && c.getColor().size() > 1) {
+	                return true;
+	            }
+	            else if (c.isColor(cardColor) && c.getColor() != null && c.getColor().size() == 1) {
+	                return true;
+	            }
+
+	            return false;
+	        }
+	    };
+
+	    return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
+	} //getColor()
 
     /**
 	 * Filter a Generator of cards so that it contains only the ones that exist in certain sets.
@@ -340,13 +339,13 @@ public class CardFilter {
 	 * 
 	 * @return a {@link forge.CardList} object.
 	 */
-	public static Generator<Card> getSets(Generator<Card> inputGenerator, final List<String> sets)
+	public static Generator<Card> getSets(final Generator<Card> inputGenerator, final List<String> sets)
 	{
 		UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
 		UtilFunctions.checkNotNull("sets", sets);
 
 		Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
-			public Boolean apply(Card c) {
+			public Boolean apply(final Card c) {
 				if (c == null) {
 					return false;
 				}
@@ -362,7 +361,6 @@ public class CardFilter {
 		};
 
 		return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
-	}//getSets(Generator,ArrayList)
-
+	} //getSets(Generator,ArrayList)
 
 }

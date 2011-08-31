@@ -21,7 +21,7 @@ public class Card_Color {
      *
      * @return a boolean.
      */
-    public boolean getAdditional() {
+    public final boolean getAdditional() {
         return additional;
     }
 
@@ -33,12 +33,12 @@ public class Card_Color {
      *
      * @return a long.
      */
-    public long getStamp() {
+    public final long getStamp() {
         return stamp;
     }
 
     /**
-     * Constant <code>timeStamp=0</code>
+     * Constant <code>timeStamp=0</code>.
      */
     private static long timeStamp = 0;
 
@@ -59,14 +59,15 @@ public class Card_Color {
      * @param addToColors a boolean.
      * @param baseColor   a boolean.
      */
-    Card_Color(ManaCost mc, Card c, boolean addToColors, boolean baseColor) {
+    Card_Color(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
         additional = addToColors;
         col = Color.ConvertManaCostToColor(mc);
         effectingCard = c;
-        if (baseColor)
+        if (baseColor) {
             stamp = 0;
-        else
+        } else {
             stamp = timeStamp;
+        }
     }
 
     /**
@@ -74,7 +75,7 @@ public class Card_Color {
      *
      * @param c a {@link forge.Card} object.
      */
-    public Card_Color(Card c) {
+    public Card_Color(final Card c) {
         col = Color.Colorless();
         additional = false;
         stamp = 0;
@@ -87,7 +88,7 @@ public class Card_Color {
      * @param s a {@link java.lang.String} object.
      * @return a boolean.
      */
-    boolean addToCardColor(String s) {
+    final boolean addToCardColor(final String s) {
         Color c = Color.ConvertFromString(s);
         if (!col.contains(c)) {
             col.add(c);
@@ -99,9 +100,10 @@ public class Card_Color {
     /**
      * <p>fixColorless.</p>
      */
-    void fixColorless() {
-        if (col.size() > 1 && col.contains(Color.Colorless))
+    final void fixColorless() {
+        if (col.size() > 1 && col.contains(Color.Colorless)) {
             col.remove(Color.Colorless);
+        }
     }
 
     /**
@@ -120,7 +122,7 @@ public class Card_Color {
      * @param time        a long.
      * @return a boolean.
      */
-    public boolean equals(String cost, Card c, boolean addToColors, long time) {
+    public final boolean equals(final String cost, final Card c, final boolean addToColors, final long time) {
         return effectingCard == c && addToColors == additional && stamp == time;
     }
 
@@ -129,10 +131,11 @@ public class Card_Color {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> toStringArray() {
+    public final ArrayList<String> toStringArray() {
         ArrayList<String> list = new ArrayList<String>();
-        for (Color c : col)
+        for (Color c : col) {
             list.add(c.toString());
+        }
         return list;
     }
 }
