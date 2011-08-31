@@ -281,6 +281,35 @@ Fixes/Features:
 - Fixed Ferocity.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Fixed Sovereigns of Lost Alara.
+- Fixed Devouring Swarm.
+- Fixed Bitter Ordeal.
+- Checkstyle cleanup in AF_Combat.
+- Updated splash frame close functionality to also cancel preloading and gui creation process if user has closed splash frame.
+- Little cleanup in card class.
+- Added removeKeyword, isValid and hasProperty functions to the player class.
+- Added LQ picture url to Bitter Ordeal.
+- Solarion had missing P/T.
+- Parser for cardname.txt is ready, CardDb is initialized when PreloadFactory starts. Warning: this commit may break the build. I'll fix it right now if so the co does.
+- Previous commit did break the build, this is a patch.
+- deckManager has lazy initialization now. (In my private yet builds where Deck uses PrintedCards the decks loading before cardFactory caused NPEs)
+- Fixed typo in getter name, added comparable getter for AI support.
+- Removed redundant imports.
+- CardPrinted now supports getImageFinelame().
+- SetInfoUtil refactored, its dependencies updated.
+- Checkstyle fixes in CardFactory_Instants.java.
+- Checkstyle fixes in AF_GainControl.
+- Various Checkstyle fixes.
+- LKI is more accurate now. Fixes the Proper Burial bug described by Accountancy in bug topic.
+- Several Checkstyle fixes.
+- AllZoneUtil Checkstyle fixes.
+- A few Checkstyle fixes.
+- A few Checkstyle fixes.
+- Rarity fix: snow-covered lands were Lands in ICE and Common in CSP.
+- Added an AI cost preference for discard costs, the SVar is called "DiscardMe". Squee, Goblin Nabob is an example.
+- Added SVar:DiscardMe to four more cards.
+- Moved AI_discardNumType to ComputerUtil.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
