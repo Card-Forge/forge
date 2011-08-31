@@ -13,5 +13,5 @@ public interface CardListFilter {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean addCard(Card c);
+    boolean addCard(Card c);
 }
