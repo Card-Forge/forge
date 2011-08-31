@@ -867,6 +867,22 @@ public class ComputerUtil {
                 }
             }
         }
+        
+        if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
+            for (int ip = 0; ip < 9; ip++) {    // priority 0 is the lowest, priority 5 the highest
+                final int priority = 9 - ip;
+                CardList SacMeList = typeList.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        return (!c.getSVar("DiscardMe").equals("") && Integer.parseInt(c.getSVar("DiscardMe")) == priority);
+                    }
+                });
+                if (SacMeList.size() != 0) {
+                    SacMeList.shuffle();
+                    return SacMeList.get(0);
+                }
+            }
+        }
+        
         return null;
     }
 

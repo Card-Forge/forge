@@ -61,8 +61,15 @@ public class CostUtil {
     
     static public boolean checkDiscardCost(Cost cost, Card source){
         for(CostPart part : cost.getCostParts()){
-            if (part instanceof CostDiscard)
-                return false;
+            if (part instanceof CostDiscard) {
+                CostDiscard disc = (CostDiscard)part;
+                
+                String type = disc.getType();
+                CardList typeList = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+                if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null)
+                    return false;
+            }
         }
         return true;
     }
