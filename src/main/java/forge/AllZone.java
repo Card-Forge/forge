@@ -639,7 +639,9 @@ public final class AllZone implements NewConstants {
      * @return dMgr
      */
     public static DeckManager getDeckManager() {
-        if (deckManager == null) { deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));}
+        if (deckManager == null) {
+            deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
+        }
         return deckManager;
     }
 

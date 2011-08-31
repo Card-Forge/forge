@@ -19,7 +19,7 @@ public class AIPlayer extends Player {
      *
      * @param myName a {@link java.lang.String} object.
      */
-    public AIPlayer(String myName) {
+    public AIPlayer(final String myName) {
         this(myName, 20, 0);
     }
 
@@ -30,7 +30,7 @@ public class AIPlayer extends Player {
      * @param myLife a int.
      * @param myPoisonCounters a int.
      */
-    public AIPlayer(String myName, int myLife, int myPoisonCounters) {
+    public AIPlayer(final String myName, final int myLife, final int myPoisonCounters) {
         super(myName, myLife, myPoisonCounters);
     }
 
@@ -39,7 +39,7 @@ public class AIPlayer extends Player {
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getOpponent() {
+    public final Player getOpponent() {
         return AllZone.getHumanPlayer();
     }
 
@@ -54,7 +54,7 @@ public class AIPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean isHuman() {
+    public final boolean isHuman() {
         return false;
     }
 
@@ -63,7 +63,7 @@ public class AIPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean isComputer() {
+    public final boolean isComputer() {
         return true;
     }
 
@@ -80,16 +80,17 @@ public class AIPlayer extends Player {
     ////////////////////////////////
 
     /** {@inheritDoc} */
-    public CardList mayDrawCard() {
+    public final CardList mayDrawCard() {
         return mayDrawCards(1);
     }
 
     /** {@inheritDoc} */
-    public CardList mayDrawCards(int n) {
+    public final CardList mayDrawCards(final int n) {
         if (AllZone.getComputerLibrary().size() > n) {
             return drawCards(n);
+        } else {
+            return new CardList();
         }
-        else return new CardList();
     }
 
     /**
@@ -97,7 +98,7 @@ public class AIPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean dredge() {
+    public final boolean dredge() {
         CardList dredgers = getDredge();
         Random random = MyRandom.random;
 
@@ -127,7 +128,7 @@ public class AIPlayer extends Player {
     ////////////////////////////////
 
     /** {@inheritDoc} */
-    public CardList discard(final int num, final SpellAbility sa, boolean duringResolution) {
+    public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = AllZoneUtil.getPlayerHand(this).size();
         max = Math.min(max, num);
         CardList discarded = new CardList();
@@ -155,10 +156,10 @@ public class AIPlayer extends Player {
             }
         }
         return discarded;
-    }//end discard
+    } //end discard
 
     /** {@inheritDoc} */
-    public void discardUnless(int num, String uType, SpellAbility sa) {
+    public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         CardList hand = AllZoneUtil.getPlayerHand(this);
         CardList tHand = hand.getType(uType);
 
@@ -172,21 +173,22 @@ public class AIPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    public void handToLibrary(final int numToLibrary, final String libPosIn) {
+    public final void handToLibrary(final int numToLibrary, final String libPosIn) {
         String libPos = libPosIn;
 
         for (int i = 0; i < numToLibrary; i++) {
             int position;
-            if (libPos.equalsIgnoreCase("Top"))
+            if (libPos.equalsIgnoreCase("Top")) {
                 position = 0;
-            else if (libPos.equalsIgnoreCase("Bottom"))
+            } else if (libPos.equalsIgnoreCase("Bottom")) {
                 position = -1;
-            else {
+            } else {
                 Random r = MyRandom.random;
-                if (r.nextBoolean())
+                if (r.nextBoolean()) {
                     position = 0;
-                else
+                } else {
                     position = -1;
+                }
             }
             CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
 
@@ -217,15 +219,17 @@ public class AIPlayer extends Player {
     ///////////////////////////
 
     /** {@inheritDoc} */
-    protected void doScry(final CardList topN, final int N) {
-        int num = N;
+    protected final void doScry(final CardList topN, final int n) {
+        int num = n;
         for (int i = 0; i < num; i++) {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
                 CardList bl = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
                 bl = bl.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        if (c.isBasicLand()) return true;
+                    public boolean addCard(final Card c) {
+                        if (c.isBasicLand()) {
+                            return true;
+                        }
 
                         return false;
                     }
@@ -235,8 +239,10 @@ public class AIPlayer extends Player {
             } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
                 cl = cl.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        if (c.isCreature()) return true;
+                    public boolean addCard(final Card c) {
+                        if (c.isCreature()) {
+                            return true;
+                        }
 
                         return false;
                     }
@@ -251,8 +257,8 @@ public class AIPlayer extends Player {
             }
         }
         num = topN.size();
-        for (int i = 0; i < num; i++) // put the rest on top in random order
-        {
+        // put the rest on top in random order
+        for (int i = 0; i < num; i++)  {
             Random rndm = MyRandom.random;
             int r = rndm.nextInt(topN.size());
             Card c = topN.get(r);
@@ -262,7 +268,7 @@ public class AIPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    public void sacrificePermanent(String prompt, CardList choices) {
+    public final void sacrificePermanent(final String prompt, final CardList choices) {
         if (choices.size() > 0) {
             //TODO - this could probably use better AI
             Card c = CardFactoryUtil.AI_getWorstPermanent(choices, false, false, false, false);
@@ -271,15 +277,15 @@ public class AIPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    protected void clashMoveToTopOrBottom(Card c) {
+    protected final void clashMoveToTopOrBottom(final Card c) {
         //computer just puts the card back until such time it can make a smarter decision
         AllZone.getGameAction().moveToLibrary(c);
     }
 
-	@Override
-	protected void discard_Chains_of_Mephistopheles() {
-		discard(null);
-		drawCard();
-	}
+    @Override
+    protected final void discard_Chains_of_Mephistopheles() {
+        discard(null);
+        drawCard();
+    }
 
-}//end AIPlayer class
+} //end AIPlayer class
