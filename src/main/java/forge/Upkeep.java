@@ -135,7 +135,7 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Masticore();
         upkeep_Eldrazi_Monument();
         upkeep_Blaze_Counters();
-        upkeep_Dark_Confidant(); // keep this one semi-last
+        //upkeep_Dark_Confidant(); // keep this one semi-last
         upkeep_Power_Surge();
         upkeep_AI_Aluren();
         // experimental, AI abuse aluren
@@ -1957,7 +1957,7 @@ public class Upkeep implements java.io.Serializable {
     /**
      * <p>upkeep_Dark_Confidant.</p>
      */
-    private static void upkeep_Dark_Confidant() {
+    /*private static void upkeep_Dark_Confidant() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
@@ -1989,7 +1989,7 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Dark_Confidant()
+    } // upkeep_Dark_Confidant()*/
 
     /**
      * <p>upkeep_Suspend.</p>
