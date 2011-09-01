@@ -6,7 +6,7 @@ A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Card | Origin$ Graveyard | Desti
 SVar:DBChangeHand:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ SVar=DBExile
 SVar:DBExile:DB$Mill | Defined$ You | NumCards$ 10 | Destination$ Exile | SubAbility$ SVar=DBDraw | SpellDescription$ You exile the top ten cards of your library.
 SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7 | SpellDescription$ Then each player draws up to seven cards.
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diminishing_returns.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/65.jpg

@@ -7,6 +7,7 @@ K:Flying
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/31.jpg

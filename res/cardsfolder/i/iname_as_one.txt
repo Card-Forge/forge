@@ -8,7 +8,6 @@ SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlef
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidCard$ Card.Self | SubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | ChangeType$ Spirit.YouCtrl | ChangeNum$ 1
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_as_one.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/151.jpg

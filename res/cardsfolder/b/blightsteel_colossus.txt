@@ -7,7 +7,6 @@ K:Trample
 K:Infect
 K:Indestructible
 K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
-SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightsteel_colossus.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/99.jpg
