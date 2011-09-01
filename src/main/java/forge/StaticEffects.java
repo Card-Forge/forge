@@ -16,107 +16,141 @@ import java.util.HashMap;
  * @version $Id$
  */
 public class StaticEffects {
-	
-	//**************** StaticAbility system **************************
-	public ArrayList<StaticEffect> staticEffects;
-	
-	public void clearStaticEffects() {
+
+    //**************** StaticAbility system **************************
+    /**
+     * staticEffects.
+     */
+    public ArrayList<StaticEffect> staticEffects;
+
+    /**
+     * clearStaticEffect.
+     * TODO Write javadoc for this method.
+     */
+    public final void clearStaticEffects() {
         // remove all static effects
         for (int i = 0; i < staticEffects.size(); i++) {
             removeStaticEffect(staticEffects.get(i));
         }
-		staticEffects = new ArrayList<StaticEffect>();
-		
-    	AllZone.getTriggerHandler().removeTemporaryTriggers();
-	}
-	
-	public void addStaticEffect(StaticEffect staticEffect) {
-		staticEffects.add(staticEffect);
-	}
-	
-	void removeStaticEffect(StaticEffect se) {
+        staticEffects = new ArrayList<StaticEffect>();
+
+        AllZone.getTriggerHandler().removeTemporaryTriggers();
+    }
+
+    /**
+     * addStaticEffect.
+     * TODO Write javadoc for this method.
+     * @param staticEffect a StaticEffect
+     */
+    public final void addStaticEffect(final StaticEffect staticEffect) {
+        staticEffects.add(staticEffect);
+    }
+
+    /**
+     * removeStaticEffect
+     * TODO Write javadoc for this method.
+     * @param se a StaticEffect
+     */
+    final void removeStaticEffect(final StaticEffect se) {
         CardList affectedCards = se.getAffectedCards();
         HashMap<String, String> params = se.getParams();
 
         int powerBonus = 0;
         int toughnessBonus = 0;
-		boolean setPT = false;
-		String addKeywords[] = null;
-		String addColors = null;
-		
-		if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
-			setPT = true;
-		}
-        
-		if (params.containsKey("AddPower")) {
-			if (params.get("AddPower").equals("X")) {
-				powerBonus = se.getXValue();
-			} else if (params.get("AddPower").equals("Y")) {
-				powerBonus = se.getYValue();
-			} else 
-				powerBonus = Integer.valueOf(params.get("AddPower"));
-		}
-		
-		if (params.containsKey("AddToughness")) {
-			if (params.get("AddToughness").equals("X"))
-				toughnessBonus = se.getXValue();
-			else if (params.get("AddToughness").equals("Y"))
-				toughnessBonus = se.getYValue();
-			else toughnessBonus = Integer.valueOf(params.get("AddToughness"));
-		}
-		
-		if (params.containsKey("AddKeyword"))
-			addKeywords = params.get("AddKeyword").split(" & ");
-		
-		if (params.containsKey("AddColor"))
-			addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("AddColor").split(" & "))));
-		
-		if (params.containsKey("SetColor"))
-			addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("SetColor").split(" & "))));
-			
-		//modify the affected card
-		for (int i = 0; i < affectedCards.size(); i++) {
+        boolean setPT = false;
+        String[] addKeywords = null;
+        String addColors = null;
+
+        if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
+            setPT = true;
+        }
+
+        if (params.containsKey("AddPower")) {
+            if (params.get("AddPower").equals("X")) {
+                powerBonus = se.getXValue();
+            } else if (params.get("AddPower").equals("Y")) {
+                powerBonus = se.getYValue();
+            } else {
+                powerBonus = Integer.valueOf(params.get("AddPower"));
+            }
+        }
+
+        if (params.containsKey("AddToughness")) {
+            if (params.get("AddToughness").equals("X")) {
+                toughnessBonus = se.getXValue();
+            } else if (params.get("AddToughness").equals("Y")) {
+                toughnessBonus = se.getYValue();
+            } else {
+                toughnessBonus = Integer.valueOf(params.get("AddToughness"));
+            }
+        }
+
+        if (params.containsKey("AddKeyword")) {
+            addKeywords = params.get("AddKeyword").split(" & ");
+        }
+
+        if (params.containsKey("AddColor")) {
+            addColors = CardUtil.getShortColorsString(
+                    new ArrayList<String>(Arrays.asList(params.get("AddColor").split(" & "))));
+        }
+
+        if (params.containsKey("SetColor")) {
+            addColors = CardUtil.getShortColorsString(
+                    new ArrayList<String>(Arrays.asList(params.get("SetColor").split(" & "))));
+        }
+
+        //modify the affected card
+        for (int i = 0; i < affectedCards.size(); i++) {
             Card affectedCard = affectedCards.get(i);
-            
+
             //remove set P/T
-            if(!params.containsKey("CharacteristicDefining") && setPT)
-            	affectedCard.removeNewPT(se.getTimestamp());
-            
+            if (!params.containsKey("CharacteristicDefining") && setPT) {
+                affectedCard.removeNewPT(se.getTimestamp());
+            }
+
             //remove P/T bonus
             affectedCard.addSemiPermanentAttackBoost(powerBonus * -1);
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
-            
+
             //remove keywords
-            if (addKeywords != null)
-            	for (String keyword : addKeywords)
-            		affectedCard.removeExtrinsicKeyword(keyword);
-            
+            if (addKeywords != null) {
+                for (String keyword : addKeywords) {
+                    affectedCard.removeExtrinsicKeyword(keyword);
+                }
+            }
+
             //remove abilities
             if (params.containsKey("AddAbility")) {
-            	SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-                for (SpellAbility s : spellAbility)
-                    if (s.getType().equals("Temporary"))
+                SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+                for (SpellAbility s : spellAbility) {
+                    if (s.getType().equals("Temporary")) {
                         affectedCard.removeSpellAbility(s);
+                    }
+                }
             }
-            
+
             //remove Types
-            if (params.containsKey("AddType"))
-            	affectedCard.removeChangedCardTypes(se.getTimestamp());
-            
+            if (params.containsKey("AddType")) {
+                affectedCard.removeChangedCardTypes(se.getTimestamp());
+            }
+
             //remove colors
-            if (addColors != null)
-            	affectedCard.removeColor(addColors, affectedCard, !se.isOverwriteColors(), se.getTimestamp(affectedCard));
-		}
-		se.clearTimestamps();
+            if (addColors != null) {
+                affectedCard.removeColor(addColors, affectedCard,
+                        !se.isOverwriteColors(), se.getTimestamp(affectedCard));
+            }
+        }
+        se.clearTimestamps();
     }
-	
-	//**************** End StaticAbility system **************************
-	
+
+    //**************** End StaticAbility system **************************
+
     //this is used to keep track of all state-based effects in play:
     private HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
 
-    //this is used to define all cards that are state-based effects, and map the corresponding commands to their cardnames
-    /** Constant <code>cardToEffectsList</code> */
+    //this is used to define all cards that are state-based effects, and map the
+    //corresponding commands to their cardnames
+    /** Constant <code>cardToEffectsList</code>. */
     private static HashMap<String, String[]> cardToEffectsList = new HashMap<String, String[]>();
 
     /**
@@ -130,7 +164,7 @@ public class StaticEffects {
     /**
      * <p>initStateBasedEffectsList.</p>
      */
-    public void initStateBasedEffectsList() {
+    public final void initStateBasedEffectsList() {
         //value has to be an array, since certain cards have multiple commands associated with them
 
         cardToEffectsList.put("Avatar", new String[]{"Ajani_Avatar_Token"});
@@ -157,7 +191,7 @@ public class StaticEffects {
      *
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<String, String[]> getCardToEffectsList() {
+    public final HashMap<String, String[]> getCardToEffectsList() {
         return cardToEffectsList;
     }
 
@@ -166,11 +200,12 @@ public class StaticEffects {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void addStateBasedEffect(String s) {
-        if (stateBasedMap.containsKey(s))
+    public final void addStateBasedEffect(final String s) {
+        if (stateBasedMap.containsKey(s)) {
             stateBasedMap.put(s, stateBasedMap.get(s) + 1);
-        else
+        } else {
             stateBasedMap.put(s, 1);
+        }
     }
 
     /**
@@ -178,11 +213,12 @@ public class StaticEffects {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void removeStateBasedEffect(String s) {
+    public final void removeStateBasedEffect(final String s) {
         if (stateBasedMap.containsKey(s)) {
             stateBasedMap.put(s, stateBasedMap.get(s) - 1);
-            if (stateBasedMap.get(s) == 0)
+            if (stateBasedMap.get(s) == 0) {
                 stateBasedMap.remove(s);
+            }
         }
     }
 
@@ -191,21 +227,21 @@ public class StaticEffects {
      *
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<String, Integer> getStateBasedMap() {
+    public final HashMap<String, Integer> getStateBasedMap() {
         return stateBasedMap;
     }
 
     /**
      * <p>reset.</p>
      */
-    public void reset() {
+    public final void reset() {
         stateBasedMap.clear();
     }
 
     /**
      * <p>rePopulateStateBasedList.</p>
      */
-    public void rePopulateStateBasedList() {
+    public final void rePopulateStateBasedList() {
         reset();
 
         CardList cards = AllZoneUtil.getCardsInPlay();
@@ -229,4 +265,5 @@ public class StaticEffects {
         Log.debug("== End add state effects ==");
 
     }
-}
+
+} //end class StaticEffects

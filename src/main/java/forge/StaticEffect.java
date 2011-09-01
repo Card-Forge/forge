@@ -19,7 +19,7 @@ public class StaticEffect {
     private int xValue = 0;
     private int yValue = 0;
     private long timestamp = -1;
-    
+
     private String chosenType;
     private HashMap<String, String> mapParams = new HashMap<String, String>();
 
@@ -45,13 +45,23 @@ public class StaticEffect {
     private String colorDesc = "";
     private boolean overwriteColors = false;
     private HashMap<Card, Long> timestamps = new HashMap<Card, Long>();
-    
-    public void setTimestamp(long t) {
-    	timestamp = t;
+
+    /**
+     * setTimestamp
+     * TODO Write javadoc for this method.
+     * @param t a long
+     */
+    public final void setTimestamp(final long t) {
+        timestamp = t;
     }
-    
-    public long getTimestamp() {
-    	return timestamp;
+
+    /**
+     * getTimestamp.
+     * TODO Write javadoc for this method.
+     * @return a long
+     */
+    public final long getTimestamp() {
+        return timestamp;
     }
 
 
@@ -61,17 +71,17 @@ public class StaticEffect {
      *
      * @return a boolean.
      */
-    public boolean isOverwriteAbilities() {
+    public final boolean isOverwriteAbilities() {
         return overwriteAbilities;
     }
 
     /**
      * <p>Setter for the field <code>overwriteAbilities</code>.</p>
      *
-     * @param overwriteAbilities a boolean.
+     * @param overwriteAbilitiesIn a boolean.
      */
-    public void setOverwriteAbilities(boolean overwriteAbilities) {
-        this.overwriteAbilities = overwriteAbilities;
+    public final void setOverwriteAbilities(final boolean overwriteAbilitiesIn) {
+        this.overwriteAbilities = overwriteAbilitiesIn;
     }
 
     //original SAs
@@ -81,12 +91,14 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void addOriginalAbilities(Card c, SpellAbility sa) {
+    public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
         if (!originalAbilities.containsKey(c)) {
             ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
             list.add(sa);
             originalAbilities.put(c, list);
-        } else originalAbilities.get(c).add(sa);
+        } else {
+            originalAbilities.get(c).add(sa);
+        }
     }
 
     /**
@@ -95,7 +107,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.util.ArrayList} object.
      */
-    public void addOriginalAbilities(Card c, ArrayList<SpellAbility> s) {
+    public final void addOriginalAbilities(final Card c, final ArrayList<SpellAbility> s) {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>(s);
         if (!originalAbilities.containsKey(c)) {
             originalAbilities.put(c, list);
@@ -111,7 +123,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<SpellAbility> getOriginalAbilities(Card c) {
+    public final ArrayList<SpellAbility> getOriginalAbilities(final Card c) {
         ArrayList<SpellAbility> returnList = new ArrayList<SpellAbility>();
         if (originalAbilities.containsKey(c)) {
             returnList.addAll(originalAbilities.get(c));
@@ -124,7 +136,7 @@ public class StaticEffect {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void clearOriginalAbilities(Card c) {
+    public final void clearOriginalAbilities(final Card c) {
         if (originalAbilities.containsKey(c)) {
             originalAbilities.get(c).clear();
         }
@@ -133,7 +145,7 @@ public class StaticEffect {
     /**
      * <p>clearAllOriginalAbilities.</p>
      */
-    public void clearAllOriginalAbilities() {
+    public final void clearAllOriginalAbilities() {
         originalAbilities.clear();
     }
 
@@ -143,17 +155,17 @@ public class StaticEffect {
      *
      * @return a boolean.
      */
-    public boolean isOverwriteKeywords() {
+    public final boolean isOverwriteKeywords() {
         return overwriteKeywords;
     }
 
     /**
      * <p>Setter for the field <code>overwriteKeywords</code>.</p>
      *
-     * @param overwriteKeywords a boolean.
+     * @param overwriteKeywordsIn a boolean.
      */
-    public void setOverwriteKeywords(boolean overwriteKeywords) {
-        this.overwriteKeywords = overwriteKeywords;
+    public final void setOverwriteKeywords(final boolean overwriteKeywordsIn) {
+        this.overwriteKeywords = overwriteKeywordsIn;
     }
 
     //original keywords
@@ -163,12 +175,14 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.lang.String} object.
      */
-    public void addOriginalKeyword(Card c, String s) {
+    public final void addOriginalKeyword(final Card c, final String s) {
         if (!originalKeywords.containsKey(c)) {
             ArrayList<String> list = new ArrayList<String>();
             list.add(s);
             originalKeywords.put(c, list);
-        } else originalKeywords.get(c).add(s);
+        } else {
+            originalKeywords.get(c).add(s);
+        }
     }
 
     /**
@@ -177,7 +191,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.util.ArrayList} object.
      */
-    public void addOriginalKeywords(Card c, ArrayList<String> s) {
+    public final void addOriginalKeywords(final Card c, final ArrayList<String> s) {
         ArrayList<String> list = new ArrayList<String>(s);
         if (!originalKeywords.containsKey(c)) {
             originalKeywords.put(c, list);
@@ -193,7 +207,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getOriginalKeywords(Card c) {
+    public final ArrayList<String> getOriginalKeywords(final Card c) {
         ArrayList<String> returnList = new ArrayList<String>();
         if (originalKeywords.containsKey(c)) {
             returnList.addAll(originalKeywords.get(c));
@@ -206,7 +220,7 @@ public class StaticEffect {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void clearOriginalKeywords(Card c) {
+    public final void clearOriginalKeywords(final Card c) {
         if (originalKeywords.containsKey(c)) {
             originalKeywords.get(c).clear();
         }
@@ -215,7 +229,7 @@ public class StaticEffect {
     /**
      * <p>clearAllOriginalKeywords.</p>
      */
-    public void clearAllOriginalKeywords() {
+    public final void clearAllOriginalKeywords() {
         originalKeywords.clear();
     }
 
@@ -227,7 +241,7 @@ public class StaticEffect {
      * @param power a int.
      * @param toughness a int.
      */
-    public void addOriginalPT(Card c, int power, int toughness) {
+    public final void addOriginalPT(final Card c, final int power, final int toughness) {
         String pt = power + "/" + toughness;
         if (!originalPT.containsKey(c)) {
             originalPT.put(c, pt);
@@ -240,7 +254,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a int.
      */
-    public int getOriginalPower(Card c) {
+    public final int getOriginalPower(final Card c) {
         int power = -1;
         if (originalPT.containsKey(c)) {
             power = Integer.parseInt(originalPT.get(c).split("/")[0]);
@@ -254,7 +268,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a int.
      */
-    public int getOriginalToughness(Card c) {
+    public final int getOriginalToughness(final Card c) {
         int tough = -1;
         if (originalPT.containsKey(c)) {
             tough = Integer.parseInt(originalPT.get(c).split("/")[1]);
@@ -265,7 +279,7 @@ public class StaticEffect {
     /**
      * <p>clearAllOriginalPTs.</p>
      */
-    public void clearAllOriginalPTs() {
+    public final void clearAllOriginalPTs() {
         originalPT.clear();
     }
 
@@ -275,17 +289,17 @@ public class StaticEffect {
      *
      * @return a boolean.
      */
-    public boolean isOverwriteTypes() {
+    public final boolean isOverwriteTypes() {
         return overwriteTypes;
     }
 
     /**
      * <p>Setter for the field <code>overwriteTypes</code>.</p>
      *
-     * @param overwriteTypes a boolean.
+     * @param overwriteTypesIn a boolean.
      */
-    public void setOverwriteTypes(boolean overwriteTypes) {
-        this.overwriteTypes = overwriteTypes;
+    public final void setOverwriteTypes(final boolean overwriteTypesIn) {
+        this.overwriteTypes = overwriteTypesIn;
     }
 
     /**
@@ -293,17 +307,17 @@ public class StaticEffect {
      *
      * @return a boolean.
      */
-    public boolean isKeepSupertype() {
+    public final boolean isKeepSupertype() {
         return keepSupertype;
     }
 
     /**
      * <p>Setter for the field <code>keepSupertype</code>.</p>
      *
-     * @param keepSupertype a boolean.
+     * @param keepSupertypeIn a boolean.
      */
-    public void setKeepSupertype(boolean keepSupertype) {
-        this.keepSupertype = keepSupertype;
+    public final void setKeepSupertype(boolean keepSupertypeIn) {
+        this.keepSupertype = keepSupertypeIn;
     }
 
     //should we overwrite land types?
@@ -312,17 +326,17 @@ public class StaticEffect {
      *
      * @return a boolean.
      */
-    public boolean isRemoveSubTypes() {
+    public final boolean isRemoveSubTypes() {
         return removeSubTypes;
     }
 
     /**
      * <p>Setter for the field <code>removeSubTypes</code>.</p>
      *
-     * @param removeSubTypes a boolean.
+     * @param removeSubTypesIn a boolean.
      */
-    public void setRemoveSubTypes(boolean removeSubTypes) {
-        this.removeSubTypes = removeSubTypes;
+    public final void setRemoveSubTypes(final boolean removeSubTypesIn) {
+        this.removeSubTypes = removeSubTypesIn;
     }
 
     //original types
@@ -332,12 +346,14 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.lang.String} object.
      */
-    public void addOriginalType(Card c, String s) {
+    public final void addOriginalType(final Card c, final String s) {
         if (!originalTypes.containsKey(c)) {
             ArrayList<String> list = new ArrayList<String>();
             list.add(s);
             originalTypes.put(c, list);
-        } else originalTypes.get(c).add(s);
+        } else {
+            originalTypes.get(c).add(s);
+        }
     }
 
     /**
@@ -346,7 +362,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.util.ArrayList} object.
      */
-    public void addOriginalTypes(Card c, ArrayList<String> s) {
+    public final void addOriginalTypes(final Card c, final ArrayList<String> s) {
         ArrayList<String> list = new ArrayList<String>(s);
         if (!originalTypes.containsKey(c)) {
             originalTypes.put(c, list);
@@ -362,7 +378,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getOriginalTypes(Card c) {
+    public final ArrayList<String> getOriginalTypes(final Card c) {
         ArrayList<String> returnList = new ArrayList<String>();
         if (originalTypes.containsKey(c)) {
             returnList.addAll(originalTypes.get(c));
@@ -375,7 +391,7 @@ public class StaticEffect {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void clearOriginalTypes(Card c) {
+    public final void clearOriginalTypes(final Card c) {
         if (originalTypes.containsKey(c)) {
             originalTypes.get(c).clear();
         }
@@ -384,7 +400,7 @@ public class StaticEffect {
     /**
      * <p>clearAllOriginalTypes.</p>
      */
-    public void clearAllOriginalTypes() {
+    public final void clearAllOriginalTypes() {
         originalTypes.clear();
     }
 
@@ -395,12 +411,14 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param s a {@link java.lang.String} object.
      */
-    public void addType(Card c, String s) {
+    public final void addType(final Card c, final String s) {
         if (!types.containsKey(c)) {
             ArrayList<String> list = new ArrayList<String>();
             list.add(s);
             types.put(c, list);
-        } else types.get(c).add(s);
+        } else {
+            types.get(c).add(s);
+        }
     }
 
     /**
@@ -409,7 +427,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getTypes(Card c) {
+    public final ArrayList<String> getTypes(final Card c) {
         ArrayList<String> returnList = new ArrayList<String>();
         if (types.containsKey(c)) {
             returnList.addAll(types.get(c));
@@ -423,7 +441,7 @@ public class StaticEffect {
      * @param c a {@link forge.Card} object.
      * @param type a {@link java.lang.String} object.
      */
-    public void removeType(Card c, String type) {
+    public final void removeType(final Card c, final String type) {
         if (types.containsKey(c)) {
             types.get(c).remove(type);
         }
@@ -602,7 +620,7 @@ public class StaticEffect {
      *
      * @param y a int.
      */
-    public void setYValue(int y) {
+    public final void setYValue(final int y) {
         yValue = y;
     }
 
@@ -611,25 +629,34 @@ public class StaticEffect {
      *
      * @return a int.
      */
-    public int getYValue() {
+    public final int getYValue() {
         return yValue;
     }
-    
-    public void setParams(HashMap<String, String> params) {
-    	mapParams = params;
-    }
-    
-    public HashMap<String, String> getParams() {
-    	return mapParams;
-    }
-    
-    public void setChosenType(String type) {
-    	chosenType = type;
-    }
-    
-    public String getChosenType() {
-    	return chosenType;
-    }
-    
 
-}//end class StaticEffect
+    /**
+     * setParams.
+     * TODO Write javadoc for this method.
+     * @param params a HashMap
+     */
+    public final void setParams(HashMap<String, String> params) {
+        mapParams = params;
+    }
+
+    public HashMap<String, String> getParams() {
+        return mapParams;
+    }
+
+    public void setChosenType(String type) {
+        chosenType = type;
+    }
+
+    /**
+     * getChosenType.
+     * TODO Write javadoc for this method.
+     * @return
+     */
+    public String getChosenType() {
+        return chosenType;
+    }
+
+} //end class StaticEffect
