@@ -1,0 +1,13 @@
+Name:Baneful Omen
+ManaCost:4 B B B
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberChanged$ True | SubAbility$ DBLose
+SVar:DBLose:DB$LoseLife | LifeAmount$ X | Defined$ Opponent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/baneful_omen.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/96.jpg
+End
