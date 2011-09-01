@@ -362,7 +362,9 @@ public class Deck implements Comparable<Deck>, Serializable {
     public String getMetadata(String key) {
         if (metadata.containsKey(key))
             return metadata.get(key);
-
+        
+        System.err.println("In forge.deck/Deck.java, getMetadata() failed "+
+                "for property '"+key+"' in deck '"+getName()+"'.");
         return "";
     }
 

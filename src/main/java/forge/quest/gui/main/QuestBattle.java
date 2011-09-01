@@ -20,56 +20,72 @@ public class QuestBattle extends QuestSelectablePanel {
     /** Constant <code>serialVersionUID=3112668476017792084L</code> */
     private static final long serialVersionUID = 3112668476017792084L;
 
-    String deckName;
-
+    private String deckName;
+    
+    private static String       oppName;
+    private static String       oppDiff;
+    private static String       oppDesc;
+    private static String       oppIconAddress;
+    private static ImageIcon    icon;
+    private static Deck         oppDeck;
+    
+    /**
+     * <p>Constructor for QuestBattle.</p>
+     *
+     * @param name a {@link java.lang.String}, stores display name of opponent.
+     * @param diff a {@link java.lang.String} stores difficulty of opponent.
+     * @param description a {@link java.lang.String} stores description of opponent's deck.
+     * @param icon a {@link javax.swing.ImageIcon} stores opponent's icon.
+     */
+    private QuestBattle(String name, String deck, String diff, String desc, ImageIcon icon) {
+        super(name, diff, desc, icon);
+        this.deckName = deck;
+    }
+    
     /**
      * <p>getBattles.</p>
+     * 
+     * Returns list of QuestBattle objects storing data 
+     * of the battles currently available.
      *
      * @return a {@link java.util.List} object.
      */
+    
+    // There's got to be a better place for this method.
     public static List<QuestSelectablePanel> getBattles() {
         List<QuestSelectablePanel> opponentList = new ArrayList<QuestSelectablePanel>();
 
         String[] oppDecks = QuestBattleManager.getOpponents();
         for (String oppDeckName : oppDecks) {
-            // Get deck object, its properties, and icon for this opponent.
-            Deck oppDeck    = QuestBattleManager.getAIDeckNewFormat(oppDeckName);
+            // Get deck object and properties for this opponent.
+            oppDeck    = QuestBattleManager.getAIDeckNewFormat(oppDeckName);
             
-            String oppName  = oppDeckName.substring(0, oppDeckName.length() - 1).trim();
-            String oppDiff  = oppDeck.getMetadata("Difficulty");
-            String oppDesc  = oppDeck.getMetadata("Description");
-            ImageIcon icon  = GuiUtils.getIconFromFile(oppName + ".jpg");
+            oppName         = oppDeck.getMetadata("DisplayName");
+            oppDiff         = oppDeck.getMetadata("Difficulty");
+            oppDesc         = oppDeck.getMetadata("Description");
+            oppIconAddress  = oppDeck.getMetadata("Icon");
             
-            // SHOULD BE HANDLED IN getMetadata(), will be soon enough.
-            if(oppDiff.equals("")) { System.out.println(oppDeckName+" missing deck difficulty."); oppName = "<<Unknown>>"; }
-            if(oppDesc.equals("")) { System.out.println(oppDeckName+" missing deck description."); oppName = "<<Unknown>>"; }
+            icon  = GuiUtils.getIconFromFile(oppName + ".jpg");
+            
+            // If non-default icon defined, use it            
+            if(!oppIconAddress.equals("")) {
+                icon = GuiUtils.getIconFromFile(oppIconAddress + ".jpg");
+            }
             
             // Add to list of current quest opponents.
             opponentList.add(
-                    new QuestBattle(oppDeckName, oppDiff, oppDesc, icon)
+                    new QuestBattle(oppName, oppDeckName, oppDiff, oppDesc, icon)
             );
         }
 
         return opponentList;
     }
 
-    /**
-     * <p>Constructor for QuestBattle.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param difficulty a {@link java.lang.String} object.
-     * @param description a {@link java.lang.String} object.
-     * @param icon a {@link javax.swing.ImageIcon} object.
-     */
-    private QuestBattle(String name, String difficulty, String description, ImageIcon icon) {
-        super(name.substring(0, name.length() - 2), difficulty, description, icon);
-
-        this.deckName = name;
-    }
-
-    /** {@inheritDoc} */
+    /** {@inheritDoc}  */
     @Override
     public String getName() {
+        // Called by ???? to get deck name for image icon generation.
+        // Exception should be thrown somewhere if image can't be found.
         return deckName;
     }
 }
