@@ -15,22 +15,25 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_EndGameCondition {
+public final class AbilityFactory_EndGameCondition {
+
+    private AbilityFactory_EndGameCondition() {
+        throw new AssertionError();
+    }
+
     // ***********************************************************************************************
     // ***************************************** Wins Game *******************************************
     // ***********************************************************************************************
     /**
      * <p>createAbilityWinsGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityWinsGame(final AbilityFactory AF) {
+    public static SpellAbility createAbilityWinsGame(final AbilityFactory af) {
 
-        final SpellAbility abWinsGame = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abWinsGame = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -48,7 +51,7 @@ public class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return winsGameDoTriggerAI(af, this, mandatory);
             }
 
@@ -59,14 +62,12 @@ public class AbilityFactory_EndGameCondition {
     /**
      * <p>createSpellWinsGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellWinsGame(final AbilityFactory AF) {
-        final SpellAbility spWinsGame = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellWinsGame(final AbilityFactory af) {
+        final SpellAbility spWinsGame = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -93,14 +94,12 @@ public class AbilityFactory_EndGameCondition {
     /**
      * <p>createDrawbackWinsGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackWinsGame(final AbilityFactory AF) {
-        final SpellAbility dbWinsGame = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackWinsGame(final AbilityFactory af) {
+        final SpellAbility dbWinsGame = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -126,7 +125,7 @@ public class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return winsGameDoTriggerAI(af, this, mandatory);
             }
 
@@ -141,13 +140,14 @@ public class AbilityFactory_EndGameCondition {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String winsGameStackDescription(AbilityFactory af, SpellAbility sa) {
+    public static String winsGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         // Let the spell description also be the stack description
         sb.append(sa.getDescription());
@@ -168,12 +168,13 @@ public class AbilityFactory_EndGameCondition {
      * @return a boolean.
      */
     public static boolean winsGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        if (AllZone.getComputerPlayer().cantWin())
+        if (AllZone.getComputerPlayer().cantWin()) {
             return false;
+        }
 
-        // TODO: Check conditions are met on card (e.g. Coalition Victory)
+        // TODO Check conditions are met on card (e.g. Coalition Victory)
 
-        // TODO: Consider likelihood of SA getting countered
+        // TODO Consider likelihood of SA getting countered
 
         // In general, don't return true.
         // But this card wins the game, I can make an exception for that
@@ -188,9 +189,11 @@ public class AbilityFactory_EndGameCondition {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    public static boolean winsGameDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)    // If there is a cost payment it's usually not mandatory
+    public static boolean winsGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         // WinGame abilities usually don't have subAbilities but for consistency...
         Ability_Sub abSub = sa.getSubAbility();
@@ -213,8 +216,9 @@ public class AbilityFactory_EndGameCondition {
 
         ArrayList<Player> players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
 
-        for (Player p : players)
+        for (Player p : players) {
             p.altWinBySpellEffect(card.getName());
+        }
     }
 
     // ***********************************************************************************************
@@ -224,15 +228,13 @@ public class AbilityFactory_EndGameCondition {
     /**
      * <p>createAbilityLosesGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityLosesGame(final AbilityFactory AF) {
+    public static SpellAbility createAbilityLosesGame(final AbilityFactory af) {
 
-        final SpellAbility abLosesGame = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abLosesGame = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -250,7 +252,7 @@ public class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return losesGameDoTriggerAI(af, this, mandatory);
             }
 
@@ -261,14 +263,12 @@ public class AbilityFactory_EndGameCondition {
     /**
      * <p>createSpellLosesGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellLosesGame(final AbilityFactory AF) {
-        final SpellAbility spLosesGame = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellLosesGame(final AbilityFactory af) {
+        final SpellAbility spLosesGame = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -295,14 +295,12 @@ public class AbilityFactory_EndGameCondition {
     /**
      * <p>createDrawbackLosesGame.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackLosesGame(final AbilityFactory AF) {
-        final SpellAbility dbLosesGame = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackLosesGame(final AbilityFactory af) {
+        final SpellAbility dbLosesGame = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
-
-            final AbilityFactory af = AF;
 
             @Override
             public String getStackDescription() {
@@ -328,7 +326,7 @@ public class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return losesGameDoTriggerAI(af, this, mandatory);
             }
 
@@ -343,14 +341,15 @@ public class AbilityFactory_EndGameCondition {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String losesGameStackDescription(AbilityFactory af, SpellAbility sa) {
+    public static String losesGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         Card source = sa.getSourceCard();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(source.getName()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         Target tgt = sa.getTarget();
         ArrayList<Player> players = null;
@@ -382,8 +381,9 @@ public class AbilityFactory_EndGameCondition {
      * @return a boolean.
      */
     public static boolean losesGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        if (AllZone.getHumanPlayer().cantLose())
+        if (AllZone.getHumanPlayer().cantLose()) {
             return false;
+        }
 
         // Only one SA Lose the Game card right now, which is Door to Nothingness
 
@@ -406,15 +406,20 @@ public class AbilityFactory_EndGameCondition {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    public static boolean losesGameDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)    // If there is a cost payment it's usually not mandatory
+    public static boolean losesGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a specific turn, which can't be done yet)
 
-        if (!mandatory && AllZone.getHumanPlayer().cantLose())
+        if (!mandatory && AllZone.getHumanPlayer().cantLose()) {
             return false;
+        }
 
         Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -449,8 +454,9 @@ public class AbilityFactory_EndGameCondition {
             players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
         }
 
-        for (Player p : players)
-            p.loseConditionMet( GameLossReason.SpellEffect, card.getName());
+        for (Player p : players) {
+            p.loseConditionMet(GameLossReason.SpellEffect, card.getName());
+        }
     }
 
-}
+} //end class AbilityFactory_EndGameCondition
