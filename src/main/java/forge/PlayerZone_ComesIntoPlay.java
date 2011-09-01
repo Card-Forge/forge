@@ -11,7 +11,7 @@ import forge.card.spellability.SpellAbility;
  * @version $Id$
  */
 public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
-    /** Constant <code>serialVersionUID=5750837078903423978L</code> */
+    /** Constant <code>serialVersionUID=5750837078903423978L</code>. */
     private static final long serialVersionUID = 5750837078903423978L;
 
     private boolean trigger = true;
@@ -23,24 +23,30 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      * @param zone a {@link java.lang.String} object.
      * @param player a {@link forge.Player} object.
      */
-    public PlayerZone_ComesIntoPlay(String zone, Player player) {
+    public PlayerZone_ComesIntoPlay(final String zone, final Player player) {
         super(zone, player);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void add(Object o) {
-        if (o == null) throw new RuntimeException("PlayerZone_ComesInto Play : add() object is null");
+    public final void add(final Object o) {
+        if (o == null) {
+            throw new RuntimeException("PlayerZone_ComesInto Play : add() object is null");
+        }
 
         super.add(o);
 
         final Card c = (Card) o;
         final Player player = c.getController();
 
-        if (trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
+        if (trigger && ((CardFactoryUtil.oppHasKismet(c.getController())
+                            && (c.isLand() || c.isCreature() || c.isArtifact()))
                 || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c.isCreature())
                 || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
-                || (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent()))) c.tap();
+                || (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent())))
+        {
+            c.tap();
+        }
 
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
@@ -67,12 +73,13 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             if (eachPlayer) {
                 AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
                 AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
-            } else
+            } else {
                 c.getController().addMaxLandsToPlay(addMax);
+            }
         }
 
         if (trigger) {
-            c.setSickness(true);// summoning sickness
+            c.setSickness(true); // summoning sickness
             c.comesIntoPlay();
 
             if (c.isLand()) {
@@ -85,7 +92,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 });*/
 
                 list = list.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return c.hasKeyword("Landfall")
                                 || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
                     }
@@ -97,8 +104,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 /*
                 // Check for a mountain
                 if (!listValakut.isEmpty() && c.isType("Mountain") ) {
-                	for (int i = 0; i < listValakut.size(); i++) {
-                		boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
+                    for (int i = 0; i < listValakut.size(); i++) {
+                	    boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
                 		if (!b) {
                 			// Not enough mountains to activate Valakut -- stop the loop
                 			break;
@@ -116,7 +123,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         public void resolve() {
                             CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
                             lands = lands.filter(AllZoneUtil.lands);
-                            for (Card land : lands) land.tap();
+                            for (Card land : lands) {
+                                land.tap();
+                            }
                         }
                     };
                     StringBuilder sb = new StringBuilder();
@@ -136,7 +145,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         @Override
                         public void resolve() {
                             CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                            lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice", lands);
+                            lesLand.getOwner().sacrificePermanent(
+                                    source.getName() + " - Select a land to sacrifice", lands);
                         }
                     };
                     StringBuilder sb = new StringBuilder();
@@ -152,7 +162,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     }
                 }
 
-            }//isLand()
+            } //isLand()
         }
 
         if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
@@ -175,18 +185,19 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                             if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
                                 if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
                                         && AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                                        && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+                                        && c.getNetAttack() == 1 && c.getNetDefense() == 1)
+                                {
                                     AllZone.getGameAction().moveToPlay(crd);
 
                                     crd.equipCard(c);
                                 }
                             }
 
-                        } else //computer
-                        {
+                        } else {
                             if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
                                     && AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                                    && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+                                    && c.getNetAttack() == 1 && c.getNetDefense() == 1)
+                            {
                                 AllZone.getGameAction().moveToPlay(crd);
 
                                 crd.equipCard(c);
@@ -196,8 +207,10 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 };
 
                 StringBuilder sb = new StringBuilder();
-                sb.append("Sword of the Meek - Whenever a 1/1 creature enters the battlefield under your control, you may ");
-                sb.append("return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
+                sb.append(crd);
+                sb.append(" - Whenever a 1/1 creature enters the battlefield under your control, you may ");
+                sb.append("return Sword of the Meek from your graveyard to the battlefield, ");
+                sb.append("then attach it to that creature.");
                 ability.setStackDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -205,11 +218,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-    }// end add()
+    } // end add()
 
     /** {@inheritDoc} */
     @Override
-    public void remove(Object o) {
+    public final void remove(final Object o) {
 
         super.remove(o);
 
@@ -239,8 +252,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             if (eachPlayer) {
                 AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
                 AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
-            } else
+            } else {
                 c.getController().addMaxLandsToPlay(addMax);
+            }
         }
 
 
@@ -273,7 +287,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      *
      * @param b a boolean.
      */
-    public void setTrigger(boolean b) {
+    public final void setTrigger(final boolean b) {
         trigger = b;
     }
 
@@ -282,7 +296,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      *
      * @param b a boolean.
      */
-    public void setLeavesTrigger(boolean b) {
+    public final void setLeavesTrigger(final boolean b) {
         leavesTrigger = b;
     }
 
@@ -291,7 +305,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      *
      * @param b a boolean.
      */
-    public void setTriggers(boolean b) {
+    public final void setTriggers(final boolean b) {
         trigger = b;
         leavesTrigger = b;
     }

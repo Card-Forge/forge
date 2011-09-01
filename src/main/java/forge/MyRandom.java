@@ -9,7 +9,7 @@ import java.util.Random;
  * @version $Id$
  */
 public class MyRandom {
-    /** Constant <code>random</code> */
+    /** Constant <code>random</code>. */
     public static Random random = new Random();
 
     /**
@@ -18,7 +18,7 @@ public class MyRandom {
      * @param percent a int.
      * @return a boolean.
      */
-    public static boolean percentTrue(int percent) {
+    public static boolean percentTrue(final int percent) {
         return percent > random.nextInt(100);
     }
 }

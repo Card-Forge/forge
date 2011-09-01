@@ -17,7 +17,7 @@ import java.net.URL;
  * @version $Id$
  * @since 1.0.15
  */
-public class HttpUtil { 
+public class HttpUtil {
 
 	private static final String Boundary = "--7d021a37605f0";
 
@@ -27,15 +27,14 @@ public class HttpUtil {
      * @param sURL a {@link java.lang.String} object.
      * @param file a {@link java.lang.String} object.
      */
-    public void upload(String sURL, String file)
-    {
+    public final void upload(final String sURL, final String file) {
     	URL url = null;
 		try {
 			url = new URL(sURL);
 		} catch (MalformedURLException e) {
 			return;
 		}
-    	
+
         HttpURLConnection theUrlConnection = null;
 		try {
 			theUrlConnection = (HttpURLConnection) url.openConnection();
@@ -44,7 +43,7 @@ public class HttpUtil {
 		}
         theUrlConnection.setDoOutput(true);
         theUrlConnection.setDoInput(true);
-        theUrlConnection.setUseCaches(false);    
+        theUrlConnection.setUseCaches(false);
         theUrlConnection.setChunkedStreamingMode(1024);
 
         theUrlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + Boundary);
@@ -53,7 +52,7 @@ public class HttpUtil {
 		try {
 			httpOut = new DataOutputStream(theUrlConnection.getOutputStream());
 		} catch (IOException e1) {
-			return;			
+			return;
 		}
 
         File f = new File(file);
@@ -124,17 +123,18 @@ public class HttpUtil {
 		} catch (IOException e) {
 			return;
 		}
-        if (Constant.Runtime.DevMode[0])
-        	System.out.println(response.toString());
-    } 
-    
+        if (Constant.Runtime.DevMode[0]) {
+            System.out.println(response.toString());
+        }
+    }
+
     /**
      * <p>getURL.</p>
      *
      * @param sURL a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public String getURL(String sURL) {
+    public final String getURL(final String sURL) {
     	URL url = null;
 		try {
 			url = new URL(sURL);
@@ -151,12 +151,12 @@ public class HttpUtil {
     	StringBuffer buffer = new StringBuffer();
     	try {
 			while ((ptr = is.read()) != -1) {
-			    buffer.append((char)ptr);
+			    buffer.append((char) ptr);
 			}
 		} catch (IOException e) {
 			return "error 3";
 		}
-    	
+
     	return buffer.toString();
     }
-} 
+}

@@ -18,12 +18,12 @@ import java.io.File;
 public class ImagePreviewPanel extends JPanel implements PropertyChangeListener {
 
 
-    /** Constant <code>serialVersionUID=2163809931940286240L</code> */
+    /** Constant <code>serialVersionUID=2163809931940286240L</code>. */
     private static final long serialVersionUID = 2163809931940286240L;
     private int width, height;
     private ImageIcon icon;
     private Image image;
-    /** Constant <code>ACCSIZE=155</code> */
+    /** Constant <code>ACCSIZE=155</code>. */
     private static final int ACCSIZE = 155;
     private Color bg;
 
@@ -36,7 +36,7 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
     }
 
     /** {@inheritDoc} */
-    public void propertyChange(PropertyChangeEvent e) {
+    public final void propertyChange(final PropertyChangeEvent e) {
         String propertyName = e.getPropertyName();
 
         // Make sure we are responding to the right event.
@@ -44,8 +44,11 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
             File selection = (File) e.getNewValue();
             String name;
 
-            if (selection == null) return;
-            else name = selection.getAbsolutePath();
+            if (selection == null) {
+                return;
+            } else {
+                name = selection.getAbsolutePath();
+            }
 
             /*
             * Make reasonably sure we have an image format that AWT can
@@ -53,7 +56,8 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
             */
             if ((name != null)
                     && (name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".jpeg")
-                    || name.toLowerCase().endsWith(".gif") || name.toLowerCase().endsWith(".png"))) {
+                    || name.toLowerCase().endsWith(".gif") || name.toLowerCase().endsWith(".png")))
+            {
                 icon = new ImageIcon(name);
                 image = icon.getImage();
                 scaleImage();
@@ -96,7 +100,7 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
 
     /** {@inheritDoc} */
     @Override
-    public void paintComponent(Graphics g) {
+    public final void paintComponent(final Graphics g) {
         g.setColor(bg);
 
         /*

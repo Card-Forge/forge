@@ -14,14 +14,14 @@ public class HandSizeOp {
     /**
      * <p>Constructor for HandSizeOp.</p>
      *
-     * @param M a {@link java.lang.String} object.
-     * @param A a int.
-     * @param TS a int.
+     * @param m a {@link java.lang.String} object.
+     * @param a a int.
+     * @param ts a int.
      */
-    public HandSizeOp(String M, int A, int TS) {
-        Mode = M;
-        Amount = A;
-        hsTimeStamp = TS;
+    public HandSizeOp(final String m, final int a, final int ts) {
+        Mode = m;
+        Amount = a;
+        hsTimeStamp = ts;
     }
 
     /**
@@ -29,7 +29,7 @@ public class HandSizeOp {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
+    public final String toString() {
         return "Mode(" + Mode + ") Amount(" + Amount + ") Timestamp(" + hsTimeStamp + ")";
     }
 }

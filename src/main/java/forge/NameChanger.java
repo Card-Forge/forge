@@ -45,7 +45,7 @@ public class NameChanger implements NewConstants {
      *
      * @return a boolean.
      */
-    public boolean shouldChangeCardName() {
+    public final boolean shouldChangeCardName() {
         return changeCardName;
     }
 
@@ -54,7 +54,7 @@ public class NameChanger implements NewConstants {
      *
      * @param b a boolean.
      */
-    public void setShouldChangeCardName(boolean b) {
+    public final void setShouldChangeCardName(final boolean b) {
         changeCardName = b;
     }
 
@@ -62,23 +62,23 @@ public class NameChanger implements NewConstants {
      * This change's the inputGenerator's Card instances in place,
      * and returns a generator of those same changed instances.
      * 
-     * TODO: Should this method return void, because it side effects
+     * TODO Should this method return void, because it side effects
      * the contents of its inputGenerator?
      * 
      * @param inputGenerator a Generator of Card objects
      * @return a Generator of side-effected Card objects
      */
-    public Generator<Card> changeCard(Generator<Card> inputGenerator) {
-    	
+    public final Generator<Card> changeCard(final Generator<Card> inputGenerator) {
+
     	// Create a new Generator by applying a transform to the
     	// inputGenerator.
-    	
-    	Lambda1<Card,Card> transform = new Lambda1<Card,Card>() {
-    		public Card apply(Card toChange) {
+
+    	Lambda1<Card, Card> transform = new Lambda1<Card, Card>() {
+    		public Card apply(final Card toChange) {
     			return changeCard(toChange);
     		};
     	};
-    	
+
     	return GeneratorFunctions.transformGenerator(transform, inputGenerator);
     }
 
@@ -89,7 +89,7 @@ public class NameChanger implements NewConstants {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card changeCard(Card c) {
+    public final Card changeCard(final Card c) {
         //change name
         String newName = changeName(c.getName());
         c.setName(newName);
@@ -110,7 +110,7 @@ public class NameChanger implements NewConstants {
         }
 
         return c;
-    }//getMutatedCard()
+    } //getMutatedCard()
 
     /**
      * <p>changeString.</p>
@@ -119,9 +119,9 @@ public class NameChanger implements NewConstants {
      * @param in a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public String changeString(Card c, String in) {
+    public final String changeString(final Card c, final String in) {
         //String name = getOriginalName(c.getName()); // unused
-//    in = in.replaceAll(name, changeName(name));
+        //    in = in.replaceAll(name, changeName(name));
 
         return in;
     }
@@ -131,7 +131,7 @@ public class NameChanger implements NewConstants {
 	 * 
 	 * If not, we just return list.
 	 * 
-	 * TODO: Should this method return void, because it side effects the
+	 * TODO Should this method return void, because it side effects the
 	 * contents of its input list?
 	 * 
 	 * @param list
@@ -141,7 +141,7 @@ public class NameChanger implements NewConstants {
 	 * @return either list itself or a new list (possibly wasteful) containing
 	 *         the side effected cards
 	 */
-	public CardList changeCardsIfNeeded(CardList list) {
+	public final CardList changeCardsIfNeeded(CardList list) {
 		if (shouldChangeCardName()) {
             list = new CardList(changeCard(YieldUtils.toGenerator(list)));
         }
@@ -156,13 +156,15 @@ public class NameChanger implements NewConstants {
      * @param originalName a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public String changeName(String originalName) {
+    public final String changeName(final String originalName) {
         Object o = mutatedMap.get(originalName);
 
-        if (o == null) return originalName;
+        if (o == null) {
+            return originalName;
+        }
 
         return o.toString();
-    }//getMutatedName()
+    } //getMutatedName()
 
     //always returns the original cardname
     //if argument is a original name, it returns the same original name
@@ -172,13 +174,15 @@ public class NameChanger implements NewConstants {
      * @param mutatedName a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public String getOriginalName(String mutatedName) {
+    public final String getOriginalName(final String mutatedName) {
         Object o = originalMap.get(mutatedName);
 
-        if (o == null) return mutatedName;
+        if (o == null) {
+            return mutatedName;
+        }
 
         return o.toString();
-    }//getOriginalName()
+    } //getOriginalName()
 
     /**
      * <p>readFile.</p>
@@ -195,8 +199,8 @@ public class NameChanger implements NewConstants {
                 processLine(line.trim());
 
                 line = in.readLine();
-            }//while
-        }//try
+            } //while
+        } //try
         catch (Exception ex) {
 //~      throw new RuntimeException("NameMutator : readFile() error, " +ex);
 
@@ -210,7 +214,7 @@ public class NameChanger implements NewConstants {
                 //stop reading if end of file or blank line is read
                 while ((line = in.readLine()) != null && (line.trim().length() != 0)) {
                     processLine(line.trim());
-                }//while
+                } //while
             } catch (Exception ex2) {
                 // Show orig exception
                 ErrorViewer.showError(ex2);
@@ -218,7 +222,7 @@ public class NameChanger implements NewConstants {
             }
             //~
         }
-    }//readFile()
+    } //readFile()
 
     //line is formated "original card name : alias card name"
     /**
@@ -226,12 +230,13 @@ public class NameChanger implements NewConstants {
      *
      * @param line a {@link java.lang.String} object.
      */
-    private void processLine(String line) {
+    private void processLine(final String line) {
         StringTokenizer tok = new StringTokenizer(line, ":");
 
-        if (tok.countTokens() != 2)
+        if (tok.countTokens() != 2) {
             throw new RuntimeException(
                     "NameMutator : processLine() error, invalid line in file name-mutator.txt - " + line);
+        }
 
         String original = tok.nextToken().trim();
         String mutated = tok.nextToken().trim();
@@ -247,7 +252,7 @@ public class NameChanger implements NewConstants {
      */
     @SuppressWarnings("unused")
     // printMap
-    private void printMap(Map<String, String> map) {
+    private void printMap(final Map<String, String> map) {
         for (Entry<String, String> e : map.entrySet()) {
             System.out.println(e.getKey() + " : " + e.getValue());
         }

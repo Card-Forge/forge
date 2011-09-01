@@ -9,6 +9,6 @@ import java.util.Observer;
  * @author Forge
  * @version $Id$
  */
-abstract public class PlayerZone extends MyObservable implements IPlayerZone, Observer {
+public abstract class PlayerZone extends MyObservable implements IPlayerZone, Observer {
 
 }

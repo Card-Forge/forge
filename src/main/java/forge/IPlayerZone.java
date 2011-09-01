@@ -12,28 +12,28 @@ interface IPlayerZone {
      *
      * @param b a boolean.
      */
-    public void setUpdate(boolean b);
+    void setUpdate(boolean b);
 
     /**
      * <p>getUpdate.</p>
      *
      * @return a boolean.
      */
-    public boolean getUpdate();
+    boolean getUpdate();
 
     /**
      * <p>size.</p>
      *
      * @return a int.
      */
-    public int size();
+    int size();
 
     /**
      * <p>add.</p>
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void add(Object o);
+    void add(Object o);
 
     /**
      * <p>add.</p>
@@ -41,14 +41,14 @@ interface IPlayerZone {
      * @param c a {@link forge.Card} object.
      * @param index a int.
      */
-    public void add(Card c, int index);
+    void add(Card c, int index);
 
     /**
      * <p>addOnce.</p>
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void addOnce(Object o);
+    void addOnce(Object o);
 
     /**
      * <p>get.</p>
@@ -56,34 +56,34 @@ interface IPlayerZone {
      * @param index a int.
      * @return a {@link forge.Card} object.
      */
-    public Card get(int index);
+    Card get(int index);
 
     /**
      * <p>remove.</p>
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void remove(Object o);
+    void remove(Object o);
 
     /**
      * <p>setCards.</p>
      *
      * @param c an array of {@link forge.Card} objects.
      */
-    public void setCards(Card c[]);
+    void setCards(Card[] c);
 
     /**
      * <p>getCards.</p>
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getCards();
+    Card[] getCards();
 
     //removes all cards
     /**
      * <p>reset.</p>
      */
-    public void reset();
+    void reset();
 
     /**
      * <p>is.</p>
@@ -91,7 +91,7 @@ interface IPlayerZone {
      * @param zone a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean is(String zone);
+    boolean is(String zone);
 
     /**
      * <p>is.</p>
@@ -100,27 +100,27 @@ interface IPlayerZone {
      * @param player a {@link forge.Player} object.
      * @return a boolean.
      */
-    public boolean is(String zone, Player player);
+    boolean is(String zone, Player player);
 
     /**
      * <p>getPlayer.</p>
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getPlayer();//the Player that owns this zone
+    Player getPlayer(); //the Player that owns this zone
 
     /**
      * <p>getZoneName.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getZoneName();//returns the Zone's name like Graveyard
+    String getZoneName(); //returns the Zone's name like Graveyard
 
     /**
      * <p>toString.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String toString();
+    String toString();
 }
 
