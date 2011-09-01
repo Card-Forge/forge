@@ -35,17 +35,6 @@ public class QuestBattleManager {
     }
 
     /**
-     * <p>getAIDeckNames.</p>
-     *  Returns a list of decks stored in the
-     *  {@link forge.quest.gui.main.aiDecks} map. 
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public static List<String> getAIDeckNames() {
-        return new ArrayList<String>(aiDecks.keySet());
-    }
-
-    /**
      * <p>getOpponent.</p>
      *
      * Badly named; AllZoneUtil already has a method called getOpponents.
@@ -114,6 +103,19 @@ public class QuestBattleManager {
                 getOpponent(hardAIDecks, 2)};
     }
 
+    /**
+     * <p>getDeckFromFile.</p>
+     * Returns a deck object built from a file name.
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
+    public static Deck getAIDeckFromFile(String deckName) {
+        final File file = ForgeProps.getFile(NewConstants.QUEST.DECKS);
+        final DeckManager manager = new DeckManager(file);
+        return manager.getDeck(deckName);
+    }     
+    
     /**
      * <p>readFile.</p>
      * A reader util for accessing the AI deck list text files.
