@@ -1,6 +1,6 @@
 Name:Balthor the Defiled
 ManaCost:2 B B
-Types:Creature Zombie Dwarf
+Types:Legendary Creature Zombie Dwarf
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Minion | AddPower$ 1 | AddToughness$ 1 | Description$ Minion creatures get +1/+1.
