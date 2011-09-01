@@ -673,6 +673,10 @@ public final class CardUtil {
         res.addTempAttackBoost(c.getTempAttackBoost());
         res.addTempDefenseBoost(c.getTempDefenseBoost());
         res.setCounters(c.getCounters());
+        res.setExtrinsicKeyword(c.getExtrinsicKeyword());
+        res.setColor(c.getColor());
+        res.setChangedCardTypes(c.getChangedCardTypes());
+        res.setNewPT(c.getNewPT());
 
         return res;
     }

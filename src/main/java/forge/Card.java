@@ -3236,6 +3236,13 @@ public class Card extends MyObservable implements Comparable<Card> {
         return new ArrayList<String>(type);
     }
     
+    public void setChangedCardTypes(ArrayList<Card_Type> types) {
+        changedCardTypes = types;
+    }
+    
+    public ArrayList<Card_Type> getChangedCardTypes() {
+        return changedCardTypes;
+    }
         
     public void addChangedCardTypes(ArrayList<String> types, boolean removeSuperTypes, boolean removeCardTypes, 
     		boolean removeSubTypes, boolean removeCreatureTypes, long timestamp) {
@@ -3399,6 +3406,14 @@ public class Card extends MyObservable implements Comparable<Card> {
      */
     public void setBaseDefenseString(String s) {
         baseDefenseString = s;
+    }
+    
+    public void setNewPT(ArrayList<CardPowerToughness> pt) {
+        newPT = pt;
+    }
+    
+    public ArrayList<CardPowerToughness> getNewPT() {
+        return newPT;
     }
     
     public int getSetPower() {
