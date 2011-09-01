@@ -136,7 +136,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
      * @return an Iterator that does NOT support the remove method
      */
     @Override
-    public final Iterator<Card> iterator() {
+    public Iterator<Card> iterator() {
         return new ImmutableIterableFrom<Card>(allCards);
     }
 
