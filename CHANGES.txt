@@ -310,6 +310,43 @@ Fixes/Features:
 - Added SVar:DiscardMe to four more cards.
 - Moved AI_discardNumType to ComputerUtil.
 - Added the recent commit logs to changes.txt.
+- Added one copy of Brass Herald to the Frankenstein 2 and 3 decks.
+- Fixed and expanded LKI code.
+- Checkstyle fixes in AF_Copy.
+- Checkstyle fixes in Combat.java.
+- Reduced number of wins needed for gaining Packs for number of Wins.
+- QuestBattle.java fully updated to use [metadata] for description, difficulty, etc.
+- Removed from file: Hard-coded meta, exhaustive deck listing
+- Quest decks update: all meta for battle decks is now contained in [metadata] section.
+DisplayName field added to decouple file name from display.
+All 272 quest battle decks now contain:
+[metadata]
+Name=
+DisplayName=
+Difficulty=
+Description=
+Icon=
+Comment=
+[main]
+- Housecleaning on QuestBattle.java.
+- Updated Deck.java to indicate error if meta property not found.
+- Checkstyle fixes in AF_Protection.
+- ESC key can now close the splash frame.
+- Checkstyle fixes in AbstractCardFactory and PreloadingCardFactory.
+- Checkstyle fixes in AF_EndGameCondition.
+- Brief commenting added.
+- Reverted one checkstyle bit to get things to compile.
+- Checkstyle fixes in StaticEffect and StaticEffects.
+- checkstyle fixes in CardFactoryUtil.
+- Chesckstyle fixes in several files.
+- - Switched order of abilities of Maze of Ith (for AI).
+- Converted Dark Confidant and Tutelage to script.
+- Renamed "getAIDeckNewFormat()" to "getDeckFromFile()" and updated references in Quest area.
+- Renamed "getAIDeckNewFormat()" to "getAIDeckFromFile()" in quest area.
+- Renamed "getAIDeck()" to "getAIDeckFromMap()" in quest area.
+- Converted Augury Adept to script.
+- Fixed Balthor the Defiled.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
