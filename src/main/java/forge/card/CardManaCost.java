@@ -46,7 +46,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         if (shards.isEmpty()) { return Integer.toString(genericCost); }
 
         StringBuilder sb = new StringBuilder();
-        boolean isFirst = false;
+        boolean isFirst = true;
         if (genericCost > 0) { sb.append(genericCost); isFirst = false; }
         for (CardManaCostShard s : shards) {
             if (!isFirst) { sb.append(' '); }
