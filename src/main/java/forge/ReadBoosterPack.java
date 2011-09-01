@@ -159,7 +159,7 @@ public class ReadBoosterPack implements NewConstants {
 
         // Number of Packs granted
         int levelPacks = questLevel > 0 ? 8 / questLevel / 2 : 4;
-        int winPacks = numberWins / 15;
+        int winPacks = numberWins / 10;
 
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
