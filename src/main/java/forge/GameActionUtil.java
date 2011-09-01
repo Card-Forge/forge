@@ -1194,8 +1194,8 @@ public class GameActionUtil {
 
         if (c.getName().equals("Scalpelexis")) {
             playerCombatDamage_Scalpelexis(c);
-        } else if (c.getName().equals("Augury Adept")) {
-            playerCombatDamage_Augury_Adept(c);
+        /*} else if (c.getName().equals("Augury Adept")) {
+            playerCombatDamage_Augury_Adept(c);*/
         } else if (c.getName().equals("Spawnwrithe")) {
             playerCombatDamage_Spawnwrithe(c);
         } else if (c.getName().equals("Treva, the Renewer")) {
@@ -1458,7 +1458,7 @@ public class GameActionUtil {
      *
      * @param c a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Augury_Adept(final Card c) {
+    /*private static void playerCombatDamage_Augury_Adept(final Card c) {
         final Player[] player = new Player[1];
         final Card crd = c;
 
@@ -1495,7 +1495,7 @@ public class GameActionUtil {
             AllZone.getStack().addSimultaneousStackEntry(ability2);
 
         }
-    }
+    }*/
 
 
     /**
