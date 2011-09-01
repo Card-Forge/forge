@@ -17,12 +17,12 @@ import forge.properties.ForgeProps;
 /**
  * <p>CardFactory class.</p>
  *
- * TODO: The map field contains Card instances that have not gone through 
- * getCard2, and thus lack abilities.  However, when a new 
+ * TODO The map field contains Card instances that have not gone through
+ * getCard2, and thus lack abilities.  However, when a new
  * Card is requested via getCard, it is this map's values that serve as
  * the templates for the values it returns.  This class has another field,
  * allCards, which is another copy of the card database.  These cards have
- * abilities attached to them, and are owned by the human player by 
+ * abilities attached to them, and are owned by the human player by
  * default.  <b>It would be better memory-wise if we had only one or the
  * other.</b>  We may experiment in the future with using allCard-type
  * values for the map instead of the less complete ones that exist there
@@ -37,7 +37,7 @@ public class PreloadingCardFactory extends AbstractCardFactory {
      *
      * @param filename a {@link java.lang.String} object.
      */
-    public PreloadingCardFactory(String filename) {
+    public PreloadingCardFactory(final String filename) {
         this(new File(filename));
     }
 
@@ -46,9 +46,9 @@ public class PreloadingCardFactory extends AbstractCardFactory {
      *
      * @param file a {@link java.io.File} object.
      */
-    public PreloadingCardFactory(File file) {
-    	super(file);
-    	
+    public PreloadingCardFactory(final File file) {
+        super(file);
+
         try {
             readCards(file);
 
@@ -62,24 +62,23 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
         }
-    }// constructor
+    } // constructor
 
 
-	/**
+    /**
      * <p>readCards.</p>
      *
      * @param file a {@link java.io.File} object.
      */
-    protected void readCards(File file) {
+    protected final void readCards(final File file) {
         getMap().clear();
 
         List<CardRules> listCardRules = new ArrayList<CardRules>();
         CardReader read = new CardReader(ForgeProps.getFile(CARDSFOLDER), getMap(), listCardRules);
-        
 
         // this fills in our map of card names to Card instances.
         read.run();
         CardDb.setup(listCardRules.iterator());
-    }// readCard()
+    } // readCard()
 
-}
+} //end class PreloadingCardFactory

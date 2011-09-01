@@ -47,7 +47,7 @@ import java.io.File;
 /**
  * <p>AbstractCardFactory class.</p>
  *
- * TODO: The map field contains Card instances that have not gone through
+ * TODO The map field contains Card instances that have not gone through
  * getCard2, and thus lack abilities.  However, when a new
  * Card is requested via getCard, it is this map's values that serve as
  * the templates for the values it returns.  This class has another field,
@@ -136,7 +136,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
      * @return an Iterator that does NOT support the remove method
      */
     @Override
-    public Iterator<Card> iterator() {
+    public final Iterator<Card> iterator() {
         return new ImmutableIterableFrom<Card>(allCards);
     }
 
@@ -428,11 +428,11 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         //**************************************************
         // AbilityFactory cards
-        ArrayList<String> IA = card.getIntrinsicAbilities();
-        if (IA.size() > 0) {
-            for (int i = 0; i < IA.size(); i++) {
-                AbilityFactory AF = new AbilityFactory();
-                SpellAbility sa = AF.getAbility(IA.get(i), card);
+        ArrayList<String> ia = card.getIntrinsicAbilities();
+        if (ia.size() > 0) {
+            for (int i = 0; i < ia.size(); i++) {
+                AbilityFactory af = new AbilityFactory();
+                SpellAbility sa = af.getAbility(ia.get(i), card);
 
                 card.addSpellAbility(sa);
 
@@ -710,7 +710,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         Card c = library.get(0);
                         library.remove(c);
 
-                        // TODO: Necro really exiles face down, but for now we'll just do it this way
+                        // TODO Necro really exiles face down, but for now we'll just do it this way
                         // c.setIsFaceDown(true);
                         // AllZone.getGameAction().exile(c);
                         necroCards.add(c); //add card to necro so that it goes into hand at end of turn
@@ -1091,23 +1091,23 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         end = Math.min(lands.size(), limit);
                         //TODO - maybe pop a message box here that no basic lands found (if necessary)
                         for (int i = 1; i <= end; i++) {
-                            String Title = "Put on top of library: ";
+                            String title = "Put on top of library: ";
                             if (i == 2) {
-                                Title = "Put second from top of library: ";
+                                title = "Put second from top of library: ";
                             }
                             if (i == 3) {
-                                Title = "Put third from top of library: ";
+                                title = "Put third from top of library: ";
                             }
                             if (i == 4) {
-                                Title = "Put fourth from top of library: ";
+                                title = "Put fourth from top of library: ";
                             }
-                            Object o = GuiUtils.getChoiceOptional(Title, lands.toArray());
+                            Object o = GuiUtils.getChoiceOptional(title, lands.toArray());
                             if (o == null) {
                                 break;
                             }
-                            Card c_1 = (Card) o;
-                            lands.remove(c_1); //remove from the display list
-                            AllZone.getGameAction().moveToLibrary(c_1, i - 1);
+                            Card c1 = (Card) o;
+                            lands.remove(c1); //remove from the display list
+                            AllZone.getGameAction().moveToLibrary(c1, i - 1);
                         }
                     } else { //Computer
                         //based on current AI, computer should always target himself.
@@ -1296,8 +1296,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         //*************** START *********** START **************************
         else if (cardName.equals("Barl's Cage")) {
-            final String[] Tgts = {"Creature"};
-            Target target = new Target(card, "Select target creature.", Tgts, "1", "1");
+            final String[] tgts = {"Creature"};
+            Target target = new Target(card, "Select target creature.", tgts, "1", "1");
 
             final Cost cost = new Cost("3", card.getName(), true);
 
@@ -1342,88 +1342,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         } //*************** END ************ END **************************
 
 
-        //*************** START ************ START **************************
-        /*
-        else if (cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
-                || cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
-                || cardName.equals("White Mana Battery"))
-        {
-
-            final int[] num = new int[1];
-            String[] name = cardName.split(" ");
-            final String shortString = Input_PayManaCostUtil.getShortColorString(name[0].trim().toLowerCase());
-            StringBuilder desc = new StringBuilder();
-            desc.append("tap, Remove any number of charge counters from ").append(cardName);
-            desc.append(": Add ").append(shortString).append(" to your mana pool, then add an additional ");
-            desc.append(shortString).append(" to your mana pool for each charge counter removed this way.");
-
-            final Ability_Mana abMana = new Ability_Mana(card, "0", shortString) {
-                private static final long serialVersionUID = -4506828762302357781L;
-
-                @Override
-                public boolean canPlay() {
-                    return false;
-                }
-            };
-            abMana.setUndoable(false);
-
-            final Ability addMana = new Ability(card, "0", desc.toString()) {
-                @SuppressWarnings("unused")
-                private static final long serialVersionUID = -5356224416791741957L;
-
-                //@Override
-                public String mana() {
-                    StringBuilder mana = new StringBuilder();
-                    mana.append(shortString);
-                    for (int i = 0; i < num[0]; i++) {
-                        mana.append(" ").append(shortString);
-                    }
-                    return mana.toString();
-                }
-
-                @Override
-                public void resolve() {
-                    abMana.produceMana(mana(), card.getController());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -8808673510875540608L;
-
-                @Override
-                public void showMessage() {
-                    num[0] = card.getCounters(Counters.CHARGE);
-                    String[] choices = new String[num[0] + 1];
-                    for (int j = 0; j <= num[0]; j++) {
-                        choices[j] = "" + j;
-                    }
-                    String answer = (String) (GuiUtils.getChoiceOptional(
-                            "Charge counters to remove", choices));
-                    if (null != answer && !answer.equals("")) {
-                        num[0] = Integer.parseInt(answer);
-                        card.tap();
-                        card.subtractCounter(Counters.CHARGE, num[0]);
-                        stop();
-                        AllZone.getStack().add(addMana);
-                        return;
-                    }
-                    stop();
-                }
-            };
-
-            addMana.setDescription(desc.toString());
-            addMana.setBeforePayMana(runtime);
-            card.addSpellAbility(addMana);
-        }
-        */
-        //*************** END ************ END **************************
-
-
         //*************** START *********** START **************************
         else if (cardName.equals("Pithing Needle")) {
             final CardFactoryInterface factory = this;
@@ -1456,7 +1374,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                                 input[0] = cards.get(0).getName();
                             }
                         }
-                        //TODO: some more input validation, case-sensitivity, etc.
+                        //TODO some more input validation, case-sensitivity, etc.
 
                     } else {
                         //AI CODE WILL EVENTUALLY GO HERE!
@@ -1807,7 +1725,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             final SpellAbility loseGame = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    card.getController().loseConditionMet( GameLossReason.SpellEffect, card.getName());
+                    card.getController().loseConditionMet(GameLossReason.SpellEffect, card.getName());
                 }
             };
 
@@ -1834,7 +1752,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         //*************** START *********** START **************************
         else if (cardName.equals("Triangle of War")) {
 
-            Target t2 = new Target(card, "Select target creature an opponent controls", "Creature.YouDontCtrl".split(","));
+            Target t2 = new Target(card, "Select target creature an opponent controls",
+                    "Creature.YouDontCtrl".split(","));
             final Ability_Sub sub = new Ability_Sub(card, t2) {
                 private static final long serialVersionUID = -572849470457911366L;
 
@@ -1983,4 +1902,5 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         return CardFactoryUtil.postFactoryKeywords(card);
     } //getCard2
-}
+
+} //end class AbstractCardFactory
