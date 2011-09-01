@@ -402,45 +402,60 @@ public class CardFactoryUtil {
         value += c.getCMC() * 5;
 
         // Evasion keywords
-        if (c.hasKeyword("Flying"))
+        if (c.hasKeyword("Flying")) {
             value += power * 10;
-        if (c.hasKeyword("Horsemanship"))
+        }
+        if (c.hasKeyword("Horsemanship")) {
             value += power * 10;
-        if (c.hasKeyword("Unblockable"))
+        }
+        if (c.hasKeyword("Unblockable")) {
             value += power * 10;
-        if (c.hasKeyword("Fear"))
+        }
+        if (c.hasKeyword("Fear")) {
             value += power * 6;
-        if (c.hasKeyword("Intimidate"))
+        }
+        if (c.hasKeyword("Intimidate")) {
             value += power * 6;
-        if (c.hasStartOfKeyword("CARDNAME can't be blocked except by"))
+        }
+        if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) {
             value += power * 5;
-        if (c.hasStartOfKeyword("CARDNAME can't be blocked by"))
+        }
+        if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) {
             value += power * 2;
+        }
 
         // Battle stats increasing keywords
-        if (c.hasKeyword("Double Strike"))
+        if (c.hasKeyword("Double Strike")) {
             value += 10 + power * 15;
+        }
         value += c.getKeywordMagnitude("Bushido") * 16;
         value += c.getAmountOfKeyword("Flanking") * 15;
 
         // Other good keywords
-        if (c.hasKeyword("Deathtouch") && power > 0)
+        if (c.hasKeyword("Deathtouch") && power > 0) {
             value += 25;
+        }
         value += c.getAmountOfKeyword("Exalted") * 15;
-        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0)
+        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) {
             value += 10 + power * 5;
-        if (c.hasKeyword("Lifelink"))
+        }
+        if (c.hasKeyword("Lifelink")) {
             value += power * 10;
-        if (c.hasKeyword("Trample") && power > 1)
+        }
+        if (c.hasKeyword("Trample") && power > 1) {
             value += power * 3;
-        if (c.hasKeyword("Vigilance"))
+        }
+        if (c.hasKeyword("Vigilance")) {
             value += power * 5 + toughness * 5;
-        if (c.hasKeyword("Wither"))
+        }
+        if (c.hasKeyword("Wither")) {
             value += power * 10;
+        }
         value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
-        if (c.hasKeyword("Changeling"))
+        if (c.hasKeyword("Changeling")) {
             value += 5;
+        }
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.")
                 && power > 0)
             value += 2;
@@ -451,72 +466,101 @@ public class CardFactoryUtil {
             value += 10;
 
         // Defensive Keywords
-        if (c.hasKeyword("Reach"))
+        if (c.hasKeyword("Reach")) {
             value += 5;
-        if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow."))
+        }
+        if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
             value += 3;
+        }
 
         // Protection
-        if (c.hasKeyword("Indestructible"))
+        if (c.hasKeyword("Indestructible")) {
             value += 70;
-        if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME."))
+        }
+        if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
             value += 60;
-        if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME."))
+        }
+        if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) {
             value += 50;
-        if (c.hasKeyword("Shroud"))
+        }
+        if (c.hasKeyword("Shroud")) {
             value += 30;
-        if (c.hasKeyword("Hexproof"))
+        }
+        if (c.hasKeyword("Hexproof")) {
             value += 35;
-        if (c.hasStartOfKeyword("Protection"))
+        }
+        if (c.hasStartOfKeyword("Protection")) {
             value += 20;
-        if (c.hasStartOfKeyword("PreventAllDamageBy"))
+        }
+        if (c.hasStartOfKeyword("PreventAllDamageBy")) {
             value += 10;
+        }
         value += c.getKeywordMagnitude("Absorb") * 11;
 
         // Activated Abilities
-        if (c.hasStartOfKeyword("ab"))
+        if (c.hasStartOfKeyword("ab")) {
             value += 10;
+        }
 
         // Bad keywords
-        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack."))
+        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
             value -= power * 9 + 40;
-        if (c.hasKeyword("CARDNAME can't block."))
+        }
+        if (c.hasKeyword("CARDNAME can't block.")) {
             value -= 10;
-        if (c.hasKeyword("CARDNAME attacks each turn if able."))
+        }
+        if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
             value -= 10;
-        if (c.hasKeyword("CARDNAME can block only creatures with flying."))
+        }
+        if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= toughness * 5;
+        }
 
-        if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))
+        if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
             value -= (toughness - 1) * 9;
+        }
 
         if (c.hasKeyword("CARDNAME can't attack or block."))
+         {
             value = 50 + c.getCMC() * 5; // reset everything - useless
-        if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME."))
+        }
+        if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
             value -= 50;
-        if (c.hasKeyword("At the beginning of the end step, exile CARDNAME."))
+        }
+        if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
             value -= 50;
-        if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME."))
+        }
+        if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
             value -= 50;
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals"))
+        }
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= 20;
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay"))
+        }
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) {
             value -= 20;
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay"))
+        }
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
             value -= 20;
-        if (c.hasStartOfKeyword("Upkeep:"))
+        }
+        if (c.hasStartOfKeyword("Upkeep:")) {
             value -= 20;
-        if (c.hasStartOfKeyword("Cumulative upkeep"))
+        }
+        if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= 30;
-        if (c.hasStartOfKeyword("(Echo unpaid)"))
+        }
+        if (c.hasStartOfKeyword("(Echo unpaid)")) {
             value -= 10;
-        if (c.hasStartOfKeyword("Fading"))
+        }
+        if (c.hasStartOfKeyword("Fading")) {
             value -= 20; // not used atm
-        if (c.hasStartOfKeyword("Vanishing"))
+        }
+        if (c.hasStartOfKeyword("Vanishing")) {
             value -= 20; // not used atm
+        }
 
-        if (c.isUntapped())
+        if (c.isUntapped()) {
             value += 1;
+        }
 
         return value;
 
@@ -3011,24 +3055,29 @@ public class CardFactoryUtil {
 
         // Count$Metalcraft.<numMC>.<numNotMC>
         if (sq[0].contains("Metalcraft")) {
-            if (cardController.hasMetalcraft())
+            if (cardController.hasMetalcraft()) {
                 return doXMath(Integer.parseInt(sq[1]), m, c);
-            else
+            } else {
                 return doXMath(Integer.parseInt(sq[2]), m, c);
+            }
         }
 
         if (sq[0].contains("Threshold")) {
-            if (cardController.hasThreshold())
+            if (cardController.hasThreshold()) {
                 return doXMath(Integer.parseInt(sq[1]), m, c); // Have Threshold
-            else
+            }
+            else {
                 return doXMath(Integer.parseInt(sq[2]), m, c); // not Threshold
+            }
         }
 
         if (sq[0].contains("Landfall")) {
-            if (cardController.hasLandfall())
+            if (cardController.hasLandfall()) {
                 return doXMath(Integer.parseInt(sq[1]), m, c); // Have Landfall
-            else
+            }
+            else {
                 return doXMath(Integer.parseInt(sq[2]), m, c); // not Landfall
+            }
         }
 
         if (sq[0].contains("GraveyardWithGE20Cards")) {
