@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * <p>QuestQuest class.</p>
+ * 
+ * Manages QuestSelectablePanel instances for "quest" style matches.
  *
  * @author Forge
  * @version $Id$
@@ -95,7 +97,6 @@ public class QuestQuest extends QuestSelectablePanel {
                 Quest_Assignment qa = allAvailableQuests.get(i);
 
                 availableInts.add(qa.getId());
-
                 questsToDisplay.add(qa);
             }
             questData.setAvailableQuests(availableInts);

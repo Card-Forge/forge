@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * <p>QuestBattle class.</p>
+ * Manages QuestSelectablePanel instances for "battle" style matches.
  *
  * @author Forge
  * @version $Id$
