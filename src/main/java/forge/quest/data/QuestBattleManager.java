@@ -58,6 +58,8 @@ public class QuestBattleManager {
 
     /**
      * <p>getAIDeck.</p>
+     * Returns a deck object stored in the 
+     *{@link forge.quest.gui.main.aiDecks} map.
      *
      * @param deckName a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
@@ -70,17 +72,20 @@ public class QuestBattleManager {
 
         return aiDecks.get(deckName);
     }
-
+    
     /**
-     * <p>getAIDeckNewFormat.</p>
+     * <p>getDeckFromFile.</p>
+     * Returns a deck object built from a file name.
      *
      * @param deckName a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    public static Deck getAIDeckNewFormat(String deckName) {
-        return (new DeckManager(ForgeProps.getFile(NewConstants.QUEST.DECKS))).getDeck(deckName);
-    }
-
+    public static Deck getDeckFromFile(String deckName) {
+        final File file = ForgeProps.getFile(NewConstants.QUEST.DECKS);
+        final DeckManager manager = new DeckManager(file);
+        return manager.getDeck(deckName);
+    } 
+    
     /**
      * <p>getAIDeckNames.</p>
      *
