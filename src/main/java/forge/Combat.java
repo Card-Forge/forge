@@ -44,7 +44,7 @@ public class Combat {
     /**
      * <p>reset.</p>
      */
-    public void reset() {
+    public final void reset() {
         resetAttackers();
         blocked.clear();
 
@@ -71,12 +71,13 @@ public class Combat {
      *
      * @param defender a {@link forge.Player} object.
      */
-    public void initiatePossibleDefenders(Player defender) {
+    public final void initiatePossibleDefenders(final Player defender) {
         defenders.add(defender);
         CardList planeswalkers = AllZoneUtil.getPlayerCardsInPlay(defender);
         planeswalkers = planeswalkers.getType("Planeswalker");
-        for (Card pw : planeswalkers)
+        for (Card pw : planeswalkers) {
             defenders.add(pw);
+        }
     }
 
     /**
@@ -84,9 +85,10 @@ public class Combat {
      *
      * @return a {@link java.lang.Object} object.
      */
-    public Object nextDefender() {
-        if (nextDefender >= defenders.size())
+    public final Object nextDefender() {
+        if (nextDefender >= defenders.size()) {
             return null;
+        }
 
         currentDefender = nextDefender;
         nextDefender++;
@@ -99,7 +101,7 @@ public class Combat {
      *
      * @param def a int.
      */
-    public void setCurrentDefender(int def) {
+    public final void setCurrentDefender(final int def) {
         currentDefender = def;
     }
 
@@ -108,7 +110,7 @@ public class Combat {
      *
      * @return a int.
      */
-    public int getRemainingDefenders() {
+    public final int getRemainingDefenders() {
         return defenders.size() - nextDefender;
     }
 
@@ -117,7 +119,7 @@ public class Combat {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Object> getDefenders() {
+    public final ArrayList<Object> getDefenders() {
         return defenders;
     }
 
@@ -126,7 +128,7 @@ public class Combat {
      *
      * @param newDef a {@link java.util.ArrayList} object.
      */
-    public void setDefenders(ArrayList<Object> newDef) {
+    public final void setDefenders(ArrayList<Object> newDef) {
         defenders = newDef;
     }
 
@@ -135,7 +137,7 @@ public class Combat {
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getDefendingPlaneswalkers() {
+    public final Card[] getDefendingPlaneswalkers() {
         Card[] pwDefending = new Card[defenders.size() - 1];
 
         int i = 0;
@@ -155,7 +157,7 @@ public class Combat {
      *
      * @return a int.
      */
-    public int getDeclaredAttackers() {
+    public final int getDeclaredAttackers() {
         return attackerToDefender.size();
     }
 
@@ -164,7 +166,7 @@ public class Combat {
      *
      * @param player a {@link forge.Player} object.
      */
-    public void setAttackingPlayer(Player player) {
+    public final void setAttackingPlayer(final Player player) {
         attackingPlayer = player;
     }
 
@@ -173,7 +175,7 @@ public class Combat {
      *
      * @param player a {@link forge.Player} object.
      */
-    public void setDefendingPlayer(Player player) {
+    public final void setDefendingPlayer(final Player player) {
         defendingPlayer = player;
     }
 
@@ -182,7 +184,7 @@ public class Combat {
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getAttackingPlayer() {
+    public final Player getAttackingPlayer() {
         return attackingPlayer;
     }
 
@@ -191,7 +193,7 @@ public class Combat {
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getDefendingPlayer() {
+    public final Player getDefendingPlayer() {
         return defendingPlayer;
     }
 
@@ -200,7 +202,7 @@ public class Combat {
      *
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<Card, Integer> getDefendingDamageMap() {
+    public final HashMap<Card, Integer> getDefendingDamageMap() {
         return defendingDamageMap;
     }
 
@@ -209,14 +211,15 @@ public class Combat {
      *
      * @return a int.
      */
-    public int getTotalDefendingDamage() {
+    public final int getTotalDefendingDamage() {
         int total = 0;
 
         Collection<Integer> c = defendingDamageMap.values();
 
         Iterator<Integer> itr = c.iterator();
-        while (itr.hasNext())
+        while (itr.hasNext()) {
             total += itr.next();
+        }
 
         return total;
     }
@@ -224,23 +227,25 @@ public class Combat {
     /**
      * <p>setDefendingDamage.</p>
      */
-    public void setDefendingDamage() {
+    public final void setDefendingDamage() {
         defendingDamageMap.clear();
         CardList att = new CardList(getAttackers());
         // sum unblocked attackers' power
         for (int i = 0; i < att.size(); i++) {
             if (!isBlocked(att.get(i))
-                    || (getBlockers(att.get(i)).size() == 0 && att.get(i).hasKeyword("Trample"))) {
+                    || (getBlockers(att.get(i)).size() == 0 && att.get(i).hasKeyword("Trample")))
+            {
 
                 int damageDealt = att.get(i).getNetCombatDamage();
 
                 if (damageDealt > 0) {
                     //if the creature has first strike do not do damage in the normal combat phase
-                    if (!att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike())
+                    if (!att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()) {
                         addDefendingDamage(damageDealt, att.get(i));
+                    }
                 }
             } // ! isBlocked...
-        }// for
+        } // for
     }
 
 
@@ -249,7 +254,7 @@ public class Combat {
      *
      * @return a boolean.
      */
-    public boolean setDefendingFirstStrikeDamage() {
+    public final boolean setDefendingFirstStrikeDamage() {
         boolean needsFirstStrike = false;
         defendingDamageMap.clear();
         CardList att = new CardList(getAttackers());
@@ -279,7 +284,7 @@ public class Combat {
      * @param n a int.
      * @param source a {@link forge.Card} object.
      */
-    public void addDefendingDamage(int n, Card source) {
+    public final void addDefendingDamage(final int n, final Card source) {
         String slot = getDefenderByAttacker(source).toString();
         Object o = defenders.get(Integer.parseInt(slot));
 
@@ -290,9 +295,9 @@ public class Combat {
             return;
         }
 
-        if (!defendingDamageMap.containsKey(source))
+        if (!defendingDamageMap.containsKey(source)) {
             defendingDamageMap.put(source, n);
-        else {
+        } else {
             defendingDamageMap.put(source, defendingDamageMap.get(source) + n);
         }
     }
@@ -302,7 +307,7 @@ public class Combat {
      *
      * @param n a int.
      */
-    public void addAttackingDamage(int n) {
+    public final void addAttackingDamage(int n) {
         attackingDamage += n;
     }
 
@@ -311,7 +316,7 @@ public class Combat {
      *
      * @return a int.
      */
-    public int getAttackingDamage() {
+    public final int getAttackingDamage() {
         return attackingDamage;
     }
 
@@ -320,10 +325,11 @@ public class Combat {
      *
      * @return an array of {@link forge.CardList} objects.
      */
-    public CardList[] sortAttackerByDefender() {
-        CardList attackers[] = new CardList[defenders.size()];
-        for (int i = 0; i < attackers.length; i++)
+    public final CardList[] sortAttackerByDefender() {
+        CardList[] attackers = new CardList[defenders.size()];
+        for (int i = 0; i < attackers.length; i++) {
             attackers[i] = new CardList();
+        }
 
         for (Card atk : attackerToDefender.keySet()) {
             Object o = attackerToDefender.get(atk);
@@ -340,7 +346,7 @@ public class Combat {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean isAttacking(Card c) {
+    public final boolean isAttacking(final Card c) {
         return map.get(c) != null;
     }
 
@@ -349,7 +355,7 @@ public class Combat {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void addAttacker(Card c) {
+    public final void addAttacker(final Card c) {
         map.put(c, new CardList());
         attackerToDefender.put(c, currentDefender);
     }
@@ -360,14 +366,14 @@ public class Combat {
      * @param c a {@link forge.Card} object.
      * @return a {@link java.lang.Object} object.
      */
-    public Object getDefenderByAttacker(Card c) {
+    public final Object getDefenderByAttacker(final Card c) {
         return attackerToDefender.get(c);
     }
 
     /**
      * <p>resetAttackers.</p>
      */
-    public void resetAttackers() {
+    public final void resetAttackers() {
         map.clear();
         attackerToDefender.clear();
     }
@@ -377,7 +383,7 @@ public class Combat {
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getAttackers() {
+    public final Card[] getAttackers() {
         CardList out = new CardList();
         Iterator<Card> it = map.keySet().iterator();
 
@@ -386,7 +392,7 @@ public class Combat {
         }
 
         return out.toArray();
-    }// getAttackers()
+    } // getAttackers()
 
     /**
      * <p>isBlocked.</p>
@@ -394,7 +400,7 @@ public class Combat {
      * @param attacker a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean isBlocked(Card attacker) {
+    public final boolean isBlocked(final Card attacker) {
         return blocked.contains(attacker);
     }
 
@@ -404,7 +410,7 @@ public class Combat {
      * @param attacker a {@link forge.Card} object.
      * @param blocker a {@link forge.Card} object.
      */
-    public void addBlocker(Card attacker, Card blocker) {
+    public final void addBlocker(final Card attacker, final Card blocker) {
         blocked.add(attacker);
         getList(attacker).add(blocker);
     }
@@ -412,12 +418,13 @@ public class Combat {
     /**
      * <p>resetBlockers.</p>
      */
-    public void resetBlockers() {
+    public final void resetBlockers() {
         reset();
 
         CardList att = new CardList(getAttackers());
-        for (int i = 0; i < att.size(); i++)
+        for (int i = 0; i < att.size(); i++) {
             addAttacker(att.get(i));
+        }
     }
 
     /**
@@ -425,15 +432,16 @@ public class Combat {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getAllBlockers() {
+    public final CardList getAllBlockers() {
         CardList att = new CardList(getAttackers());
         CardList block = new CardList();
 
-        for (int i = 0; i < att.size(); i++)
+        for (int i = 0; i < att.size(); i++) {
             block.addAll(getBlockers(att.get(i)));
+        }
 
         return block;
-    }// getAllBlockers()
+    } // getAllBlockers()
 
     /**
      * <p>getBlockers.</p>
@@ -441,11 +449,12 @@ public class Combat {
      * @param attacker a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBlockers(Card attacker) {
-        if (getList(attacker) == null)
+    public final CardList getBlockers(final Card attacker) {
+        if (getList(attacker) == null) {
             return new CardList();
-        else
+        } else {
             return new CardList(getList(attacker));
+        }
     }
 
     /**
@@ -454,11 +463,13 @@ public class Combat {
      * @param blocker a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card getAttackerBlockedBy(Card blocker) {
+    public final Card getAttackerBlockedBy(final Card blocker) {
         CardList att = new CardList(getAttackers());
 
         for (int i = 0; i < att.size(); i++) {
-            if (getBlockers(att.get(i)).contains(blocker)) return att.get(i);
+            if (getBlockers(att.get(i)).contains(blocker)) {
+                return att.get(i);
+            }
         } // for
 
         return null;
@@ -470,7 +481,7 @@ public class Combat {
      * @param attacker a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getList(Card attacker) {
+    private CardList getList(final Card attacker) {
         return (CardList) map.get(attacker);
     }
 
@@ -479,25 +490,26 @@ public class Combat {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void removeFromCombat(Card c) {
+    public final void removeFromCombat(final Card c) {
         // is card an attacker?
         CardList att = new CardList(getAttackers());
         if (att.contains(c)) {
             map.remove(c);
             attackerToDefender.remove(c);
-        } else// card is a blocker
-        {
-            for (Card a : att)
+        } else { // card is a blocker
+            for (Card a : att) {
                 if (getBlockers(a).contains(c)) {
                     getList(a).remove(c);
                     // TODO if Declare Blockers and Declare Blockers (Abilities) merge this logic needs to be tweaked
-                    if (getBlockers(a).size() == 0 && AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers))
+                    if (getBlockers(a).size() == 0 && AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers)) {
                         blocked.remove(a);
+                    }
                 }
+            }
         }
         // update combat
         CombatUtil.showCombat();
-    }// removeFromCombat()
+    } // removeFromCombat()
 
     /**
      * <p>verifyCreaturesInPlay.</p>
@@ -507,15 +519,17 @@ public class Combat {
         all.addAll(getAttackers());
         all.addAll(getAllBlockers());
 
-        for (int i = 0; i < all.size(); i++)
-            if (!AllZoneUtil.isCardInPlay(all.get(i)))
+        for (int i = 0; i < all.size(); i++) {
+            if (!AllZoneUtil.isCardInPlay(all.get(i))) {
                 removeFromCombat(all.get(i));
-    }// verifyCreaturesInPlay()
+            }
+        }
+    } // verifyCreaturesInPlay()
 
     /**
      * <p>setUnblocked.</p>
      */
-    public void setUnblocked() {
+    public final void setUnblocked() {
         CardList attacking = new CardList(getAttackers());
 
         for (Card attacker : attacking) {
@@ -541,7 +555,7 @@ public class Combat {
      *
      * @return a boolean.
      */
-    public boolean setAssignedFirstStrikeDamage() {
+    public final boolean setAssignedFirstStrikeDamage() {
 
         boolean needFirstStrike = setDefendingFirstStrikeDamage();
 
@@ -569,24 +583,26 @@ public class Combat {
                 // this damage is assigned to a player by setDefendingFirstStrikeDamage()
             } else if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
                 needFirstStrike = true;
-                if (getAttackingPlayer().isHuman()) {// human attacks
-                    if (attacker.hasKeyword("Trample") || block.size() > 1)
+                if (getAttackingPlayer().isHuman()) { // human attacks
+                    if (attacker.hasKeyword("Trample") || block.size() > 1) {
                         AllZone.getDisplay().assignDamage(attacker, block, damageDealt);
-                    else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-                } else {// computer attacks
+                    } else {
+                        block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
+                    }
+                } else { // computer attacks
                     distributeAIDamage(attacker, block, damageDealt);
                 }
-            }// if(hasFirstStrike || doubleStrike)
-        }// for
+            } // if(hasFirstStrike || doubleStrike)
+        } // for
         return needFirstStrike;
-    }// setAssignedFirstStrikeDamage()
+    } // setAssignedFirstStrikeDamage()
 
     // set Card.setAssignedDamage() for all creatures in combat
     // also assigns player damage by setPlayerDamage()
     /**
      * <p>setAssignedDamage.</p>
      */
-    public void setAssignedDamage() {
+    public final void setAssignedDamage() {
         setDefendingDamage();
 
         CardList block;
@@ -610,20 +626,22 @@ public class Combat {
                 // this damage is assigned to a player by setDefendingDamage()
             } else if (!attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
 
-                if (getAttackingPlayer().isHuman()) {// human attacks
+                if (getAttackingPlayer().isHuman()) { // human attacks
 
-                    if (attacker.hasKeyword("Trample") || block.size() > 1)
+                    if (attacker.hasKeyword("Trample") || block.size() > 1) {
                         AllZone.getDisplay().assignDamage(attacker, block, damageDealt);
-                    else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-                } else {// computer attacks
+                    } else {
+                        block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
+                    }
+                } else { // computer attacks
                     distributeAIDamage(attacker, block, damageDealt);
                 }
-            }// if !hasFirstStrike ...
-        }// for
+            } // if !hasFirstStrike ...
+        } // for
 
         // should first strike affect the following?
 
-    }// assignDamage()
+    } // assignDamage()
 
     /**
      * <p>distributeAIDamage.</p>
@@ -632,7 +650,7 @@ public class Combat {
      * @param block a {@link forge.CardList} object.
      * @param damage a int.
      */
-    private void distributeAIDamage(Card attacker, CardList block, int damage) {
+    private void distributeAIDamage(final Card attacker, final CardList block, int damage) {
         Card c = attacker;
 
         if (block.size() == 1) {
@@ -644,25 +662,30 @@ public class Combat {
 
                 int damageNeeded = 0;
 
-                //TODO: if the human can be killed distribute only the minimum of damage to the blocker
+                //TODO if the human can be killed distribute only the minimum of damage to the blocker
 
                 damageNeeded = blocker.getEnoughDamageToKill(damage, attacker, true);
 
-                if (damageNeeded > damage)
+                if (damageNeeded > damage) {
                     damageNeeded = Math.min(blocker.getLethalDamage(), damage);
-                else
+                } else {
                     damageNeeded = Math.max(blocker.getLethalDamage(), damageNeeded);
+                }
 
                 int trample = damage - damageNeeded;
 
-                if (0 < trample)     // If Extra trample damage, assign to defending player/planeswalker
+                // If Extra trample damage, assign to defending player/planeswalker
+                if (0 < trample) {
                     this.addDefendingDamage(trample, attacker);
+                }
 
                 blocker.addAssignedDamage(damageNeeded, attacker);
-            } else blocker.addAssignedDamage(damage, attacker);
-        }// 1 blocker
+            } else {
+                blocker.addAssignedDamage(damage, attacker);
+            }
+        } // 1 blocker
         else {
-            boolean killsAllBlockers = true;//Does the attacker deal lethal damage to all blockers
+            boolean killsAllBlockers = true; //Does the attacker deal lethal damage to all blockers
             for (Card b : block) {
                 int enoughDamageToKill = b.getEnoughDamageToKill(damage, attacker, true);
                 if (enoughDamageToKill <= damage) {
@@ -671,8 +694,10 @@ public class Combat {
                     cl.add(attacker);
 
                     b.addAssignedDamage(enoughDamageToKill, c);
-                } else killsAllBlockers = false;
-            }// for
+                } else {
+                    killsAllBlockers = false;
+                }
+            } // for
 
             // if attacker has no trample, and there's damage left, assign the rest
             // to a random blocker
@@ -687,7 +712,7 @@ public class Combat {
                 this.addDefendingDamage(damage, c);
             }
         }
-    }// setAssignedDamage()
+    } // setAssignedDamage()
 
     /**
      * <p>dealAssignedDamage.</p>
@@ -708,11 +733,12 @@ public class Combat {
                 AllZone.getCombat().getUnblockedFirstStrikeAttackers());
 
         for (int j = 0; j < unblocked.size(); j++) {
-            if (bFirstStrike)
+            if (bFirstStrike) {
                 CombatUtil.checkUnblockedAttackers(unblocked.get(j));
-            else {
-                if (!unblocked.getCard(j).hasFirstStrike() && !unblocked.getCard(j).hasDoubleStrike())
+            } else {
+                if (!unblocked.getCard(j).hasFirstStrike() && !unblocked.getCard(j).hasDoubleStrike()) {
                     CombatUtil.checkUnblockedAttackers(unblocked.get(j));
+                }
             }
         }
 
@@ -728,8 +754,9 @@ public class Combat {
             c = combatants.get(i);
 
             // if no assigned damage to resolve, move to next
-            if (c.getTotalAssignedDamage() == 0)
+            if (c.getTotalAssignedDamage() == 0) {
                 continue;
+            }
 
             Map<Card, Integer> assignedDamageMap = c.getAssignedDamageMap();
             HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
@@ -754,7 +781,7 @@ public class Combat {
      * @param att a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean isUnblocked(Card att) {
+    public final boolean isUnblocked(final Card att) {
         return unblockedMap.containsKey(att);
     }
 
@@ -763,7 +790,7 @@ public class Combat {
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getUnblockedAttackers() {
+    public final Card[] getUnblockedAttackers() {
         CardList out = new CardList();
         Iterator<Card> it = unblockedMap.keySet().iterator();
         while (it.hasNext()) { // only add creatures without firstStrike to this
@@ -775,14 +802,14 @@ public class Combat {
         }
 
         return out.toArray();
-    }// getUnblockedAttackers()
+    } // getUnblockedAttackers()
 
     /**
      * <p>getUnblockedFirstStrikeAttackers.</p>
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getUnblockedFirstStrikeAttackers() {
+    public final Card[] getUnblockedFirstStrikeAttackers() {
         CardList out = new CardList();
         Iterator<Card> it = unblockedMap.keySet().iterator();
         while (it.hasNext()) { // only add creatures without firstStrike to this
@@ -794,15 +821,15 @@ public class Combat {
         }
 
         return out.toArray();
-    }// getUnblockedAttackers()
+    } // getUnblockedAttackers()
 
     /**
      * <p>addUnblockedAttacker.</p>
      *
      * @param c a {@link forge.Card} object.
      */
-    public void addUnblockedAttacker(Card c) {
+    public final void addUnblockedAttacker(final Card c) {
         unblockedMap.put(c, new CardList());
     }
 
-}// Class Combat
+} // Class Combat
