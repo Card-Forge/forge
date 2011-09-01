@@ -646,7 +646,7 @@ public final class AbilityFactory_Reveal {
         }
 
         sb.append("reveals cards from his or her library until revealing ");
-        sb.append(untilAmount).append(" ").append(desc);
+        sb.append(untilAmount).append(" ").append(desc).append(" card");
         if (untilAmount != 1) {
             sb.append("s");
         }
@@ -662,16 +662,14 @@ public final class AbilityFactory_Reveal {
             if (found.equals(Constant.Zone.Hand)) {
                 sb.append("into his or her hand ");
             }
-
-            sb.append("and all other cards ");
-        }
-        else {
-            sb.append("the revealed cards ");
         }
 
         String revealed = params.get("RevealedDestination");
         if (revealed.equals(Constant.Zone.Graveyard)) {
-            sb.append("into his or her graveyard.");
+            sb.append("and all other cards into his or her graveyard.");
+        }
+        if (revealed.equals(Constant.Zone.Exile)) {
+            sb.append("and exile all other cards revealed this way.");
         }
 
         Ability_Sub abSub = sa.getSubAbility();
