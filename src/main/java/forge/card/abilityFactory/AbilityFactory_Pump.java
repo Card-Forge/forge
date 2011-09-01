@@ -274,7 +274,7 @@ public class AbilityFactory_Pump {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if (!list.isEmpty()) {
+        else if (!list.isEmpty()) { 
             String KWpump[] = {"none"};
             if (!Keywords.get(0).equals("none"))
                 KWpump = Keywords.toArray(new String[Keywords.size()]);
@@ -409,7 +409,8 @@ public class AbilityFactory_Pump {
      * @return a boolean.
      */
     private boolean pumpTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory) {
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility) && !(AF.isCurse() && defense < 0))
+        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility) 
+                && !(AF.isCurse() && defense < 0))
             return false;
 
         Target tgt = AF.getAbTgt();
