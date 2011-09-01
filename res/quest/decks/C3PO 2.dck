@@ -1,6 +1,10 @@
-C3PO 2
-[general]
-constructed
+[metadata]
+Name=C3PO 2
+DisplayName=C3PO
+Difficulty=medium
+Description=BR Goblin deck with Goblin Ringleader, Kiki-Jiki, Mad Auntie and Sensation Gorger
+Deck Type=constructed
+Icon=
 [main]
 8 Mountain
 4 Swamp

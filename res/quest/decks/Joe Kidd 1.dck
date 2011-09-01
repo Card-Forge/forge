@@ -1,6 +1,10 @@
-Joe Kidd 1
-[general]
-constructed
+[metadata]
+Name=Joe Kidd 1
+DisplayName=Joe Kidd
+Difficulty=easy
+Description=WB deck with Voracious Hatchling and Nightsky Mimic
+Deck Type=constructed
+Icon=
 [main]
 4 Arcane Sanctum
 8 Swamp

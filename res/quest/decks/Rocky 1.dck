@@ -1,6 +1,10 @@
-Rocky 1
-[general]
-constructed
+[metadata]
+Name=Rocky 1
+DisplayName=Rocky
+Difficulty=easy
+Description=WUR Pro red deck with Flamebreak, Tremor, Pyroclasm
+Deck Type=constructed
+Icon=
 [main]
 4 Jungle Shrine
 2 Beasts of Bogardan

@@ -1,6 +1,10 @@
-King Goldemar 1
-[general]
-constructed
+[metadata]
+Name=King Goldemar 1
+DisplayName=King Goldemar
+Difficulty=easy
+Description=Mono R Kobold deck
+Deck Type=constructed
+Icon=
 [main]
 17 Mountain
 4 Kher Keep

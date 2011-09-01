@@ -1,6 +1,10 @@
-Hercules 3
-[general]
-constructed
+[metadata]
+Name=Hercules 3
+DisplayName=Hercules
+Difficulty=hard
+Description=GW Deck with Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade
+Deck Type=constructed
+Icon=
 [main]
 4 Bant Sureblade
 4 Naya Hushblade

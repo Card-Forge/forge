@@ -1,6 +1,10 @@
-Uncle Owen 3
-[general]
-constructed
+[metadata]
+Name=Uncle Owen 3
+DisplayName=Uncle Owen
+Difficulty=hard
+Description=WUB Control deck
+Deck Type=constructed
+Icon=
 [main]
 2 Underground Sea
 3 Polluted Delta

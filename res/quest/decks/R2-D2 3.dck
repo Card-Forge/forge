@@ -1,6 +1,10 @@
-R2-D2 3
-[general]
-constructed
+[metadata]
+Name=R2-D2 3
+DisplayName=R2-D2
+Difficulty=hard
+Description=Mono U Black Vise deck with bounce spells and Howling Mine
+Deck Type=constructed
+Icon=
 [main]
 20 Island
 1 The Tabernacle at Pendrell Vale

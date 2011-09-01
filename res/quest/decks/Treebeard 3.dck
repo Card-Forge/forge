@@ -1,6 +1,10 @@
-Treebeard 3
-[general]
-constructed
+[metadata]
+Name=Treebeard 3
+DisplayName=Treebeard
+Difficulty=hard
+Description=WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran
+Deck Type=constructed
+Icon=
 [main]
 13 Forest
 4 Bayou

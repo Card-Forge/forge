@@ -1,6 +1,10 @@
-The Thing 2
-[general]
-constructed
+[metadata]
+Name=The Thing 2
+DisplayName=The Thing
+Difficulty=medium
+Description=Mono W creatureless deck with Urza's Armor, Sphere of Purity, Copper Tablet and Ankh of Mishra
+Deck Type=constructed
+Icon=
 [main]
 10 Plains
 4 Mystifying Maze

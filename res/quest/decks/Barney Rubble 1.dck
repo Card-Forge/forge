@@ -1,6 +1,10 @@
-Barney Rubble 1
-[general]
-constructed
+[metadata]
+Name=Barney Rubble 1
+DisplayName=Barney Rubble
+Difficulty=easy
+Description=WU Sovereigns of Lost Alara deck with walls and auras
+Deck Type=constructed
+Icon=
 [main]
 4 Coastal Tower
 4 Boreal Shelf

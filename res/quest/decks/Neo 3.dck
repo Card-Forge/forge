@@ -1,6 +1,10 @@
-Neo 3
-[general]
-constructed
+[metadata]
+Name=Neo 3
+DisplayName=Neo
+Difficulty=hard
+Description=RG deck with Boartusk Liege, Jund Hackblade and Naya Hushblade
+Deck Type=constructed
+Icon=
 [main]
 4 Taiga
 4 Wooded Foothills

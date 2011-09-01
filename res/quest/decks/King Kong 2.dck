@@ -1,6 +1,10 @@
-King Kong 2
-[general]
-constructed
+[metadata]
+Name=King Kong 2
+DisplayName=King Kong
+Difficulty=medium
+Description=WBG Squirrel deck with tokens, changelings, Deranged Hermit and curse type auras
+Deck Type=constructed
+Icon=
 [main]
 8 Forest
 2 Plains

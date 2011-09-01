@@ -1,6 +1,10 @@
-Pointy Haired Boss 3
-[general]
-constructed
+[metadata]
+Name=Pointy Haired Boss 3
+DisplayName=Pointy Haired Boss
+Difficulty=hard
+Description=WUG Combo deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master
+Deck Type=constructed
+Icon=
 [main]
 3 Perimeter Captain
 4 Wall of Denial

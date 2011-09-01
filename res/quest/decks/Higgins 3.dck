@@ -1,6 +1,10 @@
-Higgins 3
-[general]
-constructed
+[metadata]
+Name=Higgins 3
+DisplayName=Higgins
+Difficulty=hard
+Description=UBR Grixis Control deck
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 2 Badlands

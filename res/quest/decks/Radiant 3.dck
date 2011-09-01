@@ -1,6 +1,10 @@
-Radiant 3
-[general]
-constructed
+[metadata]
+Name=Radiant 3
+DisplayName=Radiant
+Difficulty=hard
+Description=WU flying creature deck with Radiant, Archangel, Gravitational Shift and Moat
+Deck Type=constructed
+Icon=
 [main]
 2 Plains
 2 Island

@@ -1,6 +1,10 @@
-Reverend Lovejoy 2
-[general]
-constructed
+[metadata]
+Name=Reverend Lovejoy 2
+DisplayName=Reverend Lovejoy
+Difficulty=medium
+Description=WRG deck with Kavu Predator and Punishing Fire
+Deck Type=constructed
+Icon=
 [main]
 4 Grove of the Burnwillows
 4 Jungle Shrine

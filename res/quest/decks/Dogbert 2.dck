@@ -1,6 +1,10 @@
-Dogbert 2
-[general]
-constructed
+[metadata]
+Name=Dogbert 2
+DisplayName=Dogbert
+Difficulty=medium
+Description=WRG Berserker deck with Blade-Tribe Berserkers and Spiraling Duelist
+Deck Type=constructed
+Icon=
 [main]
 3 Elvish Berserker
 4 Jund Hackblade

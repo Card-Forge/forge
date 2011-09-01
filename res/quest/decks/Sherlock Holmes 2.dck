@@ -1,6 +1,10 @@
-Sherlock Holmes 2
-[general]
-constructed
+[metadata]
+Name=Sherlock Holmes 2
+DisplayName=Sherlock Holmes
+Difficulty=medium
+Description=Mono G deck with Baru, Fist of Krosa and lots of good green creatures
+Deck Type=constructed
+Icon=
 [main]
 22 Forest
 1 Emerald Medallion

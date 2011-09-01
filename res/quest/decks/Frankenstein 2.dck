@@ -1,6 +1,10 @@
-Frankenstein 2
-[general]
-constructed
+[metadata]
+Name=Frankenstein 2
+DisplayName=Frankenstein
+Difficulty=medium
+Description=WU Golem deck with several Splicers
+Deck Type=constructed
+Icon=
 [main]
 10 Plains
 10 Island

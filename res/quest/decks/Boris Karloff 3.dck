@@ -1,6 +1,10 @@
-Boris Karloff 3
-[general]
-constructed
+[metadata]
+Name=Boris Karloff 3
+DisplayName=Boris Karloff
+Difficulty=hard
+Description=WR Boros Aggro deck with Kors, levelers and threat removal
+Deck Type=constructed
+Icon=
 [main]
 4 Teetering Peaks
 2 Sacred Foundry

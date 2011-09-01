@@ -1,6 +1,10 @@
-Green Lantern 3
-[general]
-constructed
+[metadata]
+Name=Green Lantern 3
+DisplayName=Green Lantern
+Difficulty=hard
+Description=UBR Deathtouch deck with auras and several equipments
+Deck Type=constructed
+Icon=
 [main]
 4 Tidehollow Strix
 4 Grixis Grimblade

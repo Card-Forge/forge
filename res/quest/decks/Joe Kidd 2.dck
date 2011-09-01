@@ -1,6 +1,10 @@
-Joe Kidd 2
-[general]
-constructed
+[metadata]
+Name=Joe Kidd 2
+DisplayName=Joe Kidd
+Difficulty=medium
+Description=WB deck with Voracious Hatchling and Nightsky Mimic
+Deck Type=constructed
+Icon=
 [main]
 2 Mourning Thrull
 1 Pillory of the Sleepless

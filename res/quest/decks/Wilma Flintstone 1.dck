@@ -1,6 +1,10 @@
-Wilma Flintstone 1
-[general]
-constructed
+[metadata]
+Name=Wilma Flintstone 1
+DisplayName=Wilma Flintstone
+Difficulty=easy
+Description=BG deck with Noxious Hatchling and Woodlurker Mimic
+Deck Type=constructed
+Icon=
 [main]
 7 Forest
 7 Swamp

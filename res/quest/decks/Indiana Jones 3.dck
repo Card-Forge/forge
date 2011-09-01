@@ -1,6 +1,10 @@
-Indiana Jones 3
-[general]
-constructed
+[metadata]
+Name=Indiana Jones 3
+DisplayName=Indiana Jones
+Difficulty=hard
+Description=UBR Sol'kanar the Swamp King, buff and Terminate
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 3 Polluted Delta

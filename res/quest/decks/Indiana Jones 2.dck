@@ -1,6 +1,10 @@
-Indiana Jones 2
-[general]
-constructed
+[metadata]
+Name=Indiana Jones 2
+DisplayName=Indiana Jones
+Difficulty=medium
+Description=UBR Sol'kanar the Swamp King, buff and Raise Dead
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 8 Swamp

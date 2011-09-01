@@ -1,6 +1,10 @@
-Hercules 2
-[general]
-constructed
+[metadata]
+Name=Hercules 2
+DisplayName=Hercules
+Difficulty=medium
+Description=GW Deck with Bant Sureblade and Naya Hushblade
+Deck Type=constructed
+Icon=
 [main]
 2 Ancient Spider
 3 Bant Sureblade

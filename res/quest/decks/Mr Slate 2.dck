@@ -1,6 +1,10 @@
-Mr Slate 2
-[general]
-constructed
+[metadata]
+Name=Mr Slate 2
+DisplayName=Mr Slate
+Difficulty=medium
+Description=WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster
+Deck Type=constructed
+Icon=
 [main]
 4 Spreading Seas
 2 Cold-Eyed Selkie

@@ -1,6 +1,10 @@
-Crocodile Dundee 2
-[general]
-constructed
+[metadata]
+Name=Crocodile Dundee 2
+DisplayName=Crocodile Dundee
+Difficulty=medium
+Description=Mono R deck with Mudbrawler Cohort and Bloodmark Mentor
+Deck Type=constructed
+Icon=
 [main]
 22 Mountain
 1 Ruby Medallion

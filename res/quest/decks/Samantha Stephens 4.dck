@@ -1,6 +1,10 @@
-Samantha Stephens 4
-[general]
-constructed
+[metadata]
+Name=Samantha Stephens 4
+DisplayName=Samantha Stephens
+Difficulty=very hard
+Description=WU Painter's Servant - Grindstone combo
+Deck Type=constructed
+Icon=
 [main]
 2 Plains
 1 Karakas

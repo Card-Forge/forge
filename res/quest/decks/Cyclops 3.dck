@@ -1,6 +1,10 @@
-Cyclops 3
-[general]
-constructed
+[metadata]
+Name=Cyclops 3
+DisplayName=Cyclops
+Difficulty=hard
+Description=WUBRG Sliver deck with a few spells
+Deck Type=constructed
+Icon=
 [main]
 1 Underground Sea
 1 Plateau

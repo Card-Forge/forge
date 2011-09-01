@@ -1,6 +1,10 @@
-Riddler 4
-[general]
-constructed
+[metadata]
+Name=Riddler 4
+DisplayName=Riddler
+Difficulty=very hard
+Description=WR deck with mass damage spells, Stuffy Doll and Guilty Conscience
+Deck Type=constructed
+Icon=
 [main]
 4 Arid Mesa
 4 Plateau

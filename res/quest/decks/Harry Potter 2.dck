@@ -1,6 +1,10 @@
-Harry Potter 2
-[general]
-constructed
+[metadata]
+Name=Harry Potter 2
+DisplayName=Harry Potter
+Difficulty=medium
+Description=UB Mill and counter spell deck
+Deck Type=constructed
+Icon=
 [main]
 1 Vedalken Entrancer
 4 Underground Sea

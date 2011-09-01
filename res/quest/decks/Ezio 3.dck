@@ -1,6 +1,10 @@
-Ezio 3
-[general]
-constructed
+[metadata]
+Name=Ezio 3
+DisplayName=Ezio
+Difficulty=hard
+Description=Mono B Assassin deck
+Deck Type=constructed
+Icon=
 [main]
 4 Guul Draz Assassin|ROE
 4 Scarblade Elite|MOR

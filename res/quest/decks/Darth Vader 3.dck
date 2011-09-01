@@ -1,6 +1,10 @@
-Darth Vader 3
-[general]
-constructed
+[metadata]
+Name=Darth Vader 3
+DisplayName=Darth Vader
+Difficulty=hard
+Description=WU Battle of Wits style alternate win type deck with WoG
+Deck Type=constructed
+Icon=
 [main]
 31 Island
 31 Plains

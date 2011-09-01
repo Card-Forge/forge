@@ -1,6 +1,10 @@
-Hobbes 3
-[general]
-constructed
+[metadata]
+Name=Hobbes 3
+DisplayName=Hobbes
+Difficulty=hard
+Description=UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba
+Deck Type=constructed
+Icon=
 [main]
 1 Mox Emerald
 1 Mox Jet

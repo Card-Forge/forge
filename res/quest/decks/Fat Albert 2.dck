@@ -1,6 +1,10 @@
-Fat Albert 2
-[general]
-constructed
+[metadata]
+Name=Fat Albert 2
+DisplayName=Fat Albert
+Difficulty=medium
+Description=WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers
+Deck Type=constructed
+Icon=
 [main]
 4 Taiga
 4 Tropical Island

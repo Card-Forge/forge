@@ -1,6 +1,10 @@
-Alice in Wonderland 3
-[general]
-constructed
+[metadata]
+Name=Alice in Wonderland 3
+DisplayName=Alice in Wonderland
+Difficulty=hard
+Description=WG Lands deck with manlands, cycle lands and Life from the Loam
+Deck Type=constructed
+Icon=
 [main]
 4 Tranquil Thicket
 2 Secluded Steppe

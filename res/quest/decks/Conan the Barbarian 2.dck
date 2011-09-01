@@ -1,6 +1,10 @@
-Conan the Barbarian 2
-[general]
-constructed
+[metadata]
+Name=Conan the Barbarian 2
+DisplayName=Conan the Barbarian
+Difficulty=medium
+Description=BRG Barbarian deck with Lovisa Coldeyes, Balthor the Stout and weapons
+Deck Type=constructed
+Icon=
 [main]
 2 Shivan Zombie
 2 Yavimaya Barbarian

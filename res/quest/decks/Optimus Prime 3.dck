@@ -1,6 +1,10 @@
-Optimus Prime 3
-[general]
-constructed
+[metadata]
+Name=Optimus Prime 3
+DisplayName=Optimus Prime
+Difficulty=hard
+Description=Mono U deck with Modular creatures and proliferate spells
+Deck Type=constructed
+Icon=
 [main]
 4 Counterspell|7ED
 4 Arcbound Worker|DST

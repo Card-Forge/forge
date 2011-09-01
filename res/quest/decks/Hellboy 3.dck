@@ -1,6 +1,10 @@
-Hellboy 3
-[general]
-constructed
+[metadata]
+Name=Hellboy 3
+DisplayName=Hellboy
+Difficulty=hard
+Description=BR direct damage deck
+Deck Type=constructed
+Icon=
 [main]
 5 Swamp
 7 Mountain 

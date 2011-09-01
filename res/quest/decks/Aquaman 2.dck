@@ -1,6 +1,10 @@
-Aquaman 2
-[general]
-constructed
+[metadata]
+Name=Aquaman 2
+DisplayName=Aquaman
+Difficulty=medium
+Description=WU Caw-Blade deck
+Deck Type=constructed
+Icon=
 [main]
 1 Mortarpod
 1 Sword of Feast and Famine

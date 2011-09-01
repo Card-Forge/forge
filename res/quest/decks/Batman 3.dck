@@ -1,6 +1,10 @@
-Batman 3
-[general]
-constructed
+[metadata]
+Name=Batman 3
+DisplayName=Batman
+Difficulty=hard
+Description=RG Valakut Titan deck
+Deck Type=constructed
+Icon=
 [main]
 4 Wooded Foothills
 4 Arid Mesa

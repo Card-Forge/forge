@@ -1,6 +1,10 @@
-Cyclops 2
-[general]
-constructed
+[metadata]
+Name=Cyclops 2
+DisplayName=Cyclops
+Difficulty=medium
+Description=WUBRG Sliver deck with four copies of almost every sliver
+Deck Type=constructed
+Icon=
 [main]
 4 Darkheart Sliver|PLC
 4 Watery Grave|RAV

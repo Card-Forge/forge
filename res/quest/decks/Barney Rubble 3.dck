@@ -1,6 +1,10 @@
-Barney Rubble 3
-[general]
-constructed
+[metadata]
+Name=Barney Rubble 3
+DisplayName=Barney Rubble
+Difficulty=hard
+Description=WU Sovereigns of Lost Alara deck with walls and auras
+Deck Type=constructed
+Icon=
 [main]
 4 Ghostly Prison
 4 Sejiri Refuge

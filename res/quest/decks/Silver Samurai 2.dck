@@ -1,6 +1,10 @@
-Silver Samurai 2
-[general]
-constructed
+[metadata]
+Name=Silver Samurai 2
+DisplayName=Silver Samurai
+Difficulty=medium
+Description=Mono W Samurai deck
+Deck Type=constructed
+Icon=
 [main]
 2 Arrest|SOM
 3 Devoted Retainer|CHK

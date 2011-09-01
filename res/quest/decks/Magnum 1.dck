@@ -1,6 +1,10 @@
-Magnum 1
-[general]
-constructed
+[metadata]
+Name=Magnum 1
+DisplayName=Magnum
+Difficulty=easy
+Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Deck Type=constructed
+Icon=
 [main]
 3 Seaside Citadel
 8 Island

@@ -1,6 +1,10 @@
-Catwoman 2
-[general]
-constructed
+[metadata]
+Name=Catwoman 2
+DisplayName=Catwoman
+Difficulty=medium
+Description=WRG Cat deck with Lightning Helix
+Deck Type=constructed
+Icon=
 [main]
 4 Plateau
 4 Taiga

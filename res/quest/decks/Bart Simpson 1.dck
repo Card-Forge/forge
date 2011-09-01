@@ -1,6 +1,10 @@
-Bart Simpson 1
-[general]
-constructed
+[metadata]
+Name=Bart Simpson 1
+DisplayName=Bart Simpson
+Difficulty=easy
+Description=UBG deck with Rathi Trapper and Paralyzing Grasp
+Deck Type=constructed
+Icon=
 [main]
 4 Forest
 4 Island

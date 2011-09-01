@@ -1,6 +1,10 @@
-C3PO 1
-[general]
-constructed
+[metadata]
+Name=C3PO 1
+DisplayName=C3PO
+Difficulty=easy
+Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Sensation Gorger
+Deck Type=constructed
+Icon=
 [main]
 10 Mountain
 6 Swamp

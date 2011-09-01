@@ -1,6 +1,10 @@
-Redwall 2
-[general]
-constructed
+[metadata]
+Name=Redwall 2
+DisplayName=Redwall
+Difficulty=medium
+Description=Mono R Defender deck with Vent Sentinel
+Deck Type=constructed
+Icon=
 [main]
 4 Lightning Bolt|M11
 3 Pyroclasm|M11

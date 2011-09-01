@@ -1,6 +1,10 @@
-Wally 3
-[general]
-constructed
+[metadata]
+Name=Wally 3
+DisplayName=Wally
+Difficulty=hard
+Description=WB Artifact deck with Tempered Steel
+Deck Type=constructed
+Icon=
 [main]
 4 Memnite
 4 Ornithopter

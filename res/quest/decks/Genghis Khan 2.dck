@@ -1,7 +1,10 @@
-Genghis Khan 2
-[general]
-constructed
-constructed
+[metadata]
+Name=Genghis Khan 2
+DisplayName=Genghis Khan
+Difficulty=medium
+Description=WG deck with mana ramp, Armageddon and Terravore
+Deck Type=constructed
+Icon=
 [main]
 4 Stomping Ground
 4 Temple Garden

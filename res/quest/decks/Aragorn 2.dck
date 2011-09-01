@@ -1,6 +1,10 @@
-Aragorn 2
-[general]
-constructed
+[metadata]
+Name=Aragorn 2
+DisplayName=Aragorn
+Difficulty=medium
+Description=WUBRG Landfall deck
+Deck Type=constructed
+Icon=
 [main]
 1 Forest
 2 Plains

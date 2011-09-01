@@ -1,6 +1,10 @@
-Harry Potter 1
-[general]
-constructed
+[metadata]
+Name=Harry Potter 1
+DisplayName=Harry Potter
+Difficulty=easy
+Description=Mono U Mill and counter spell deck
+Deck Type=constructed
+Icon=
 [main]
 4 Vedalken Entrancer
 2 Remove Soul

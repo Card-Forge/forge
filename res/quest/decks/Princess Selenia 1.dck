@@ -1,6 +1,10 @@
-Princess Selenia 1
-[general]
-constructed
+[metadata]
+Name=Princess Selenia 1
+DisplayName=Princess Selenia
+Difficulty=easy
+Description=BUG Song of Serenity deck
+Deck Type=constructed
+Icon=
 [main]
 4 Savage Lands
 4 Seaside Citadel

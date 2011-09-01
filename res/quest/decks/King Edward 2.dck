@@ -1,6 +1,10 @@
-King Edward 2
-[general]
-constructed
+[metadata]
+Name=King Edward 2
+DisplayName=King Edward
+Difficulty=medium
+Description=WUBRG Elementals deck with Tribal Flames
+Deck Type=constructed
+Icon=
 [main]
 2 Wooded Foothills
 2 Scalding Tarn

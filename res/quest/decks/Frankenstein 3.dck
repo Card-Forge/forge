@@ -1,6 +1,10 @@
-Frankenstein 3
-[general]
-constructed
+[metadata]
+Name=Frankenstein 3
+DisplayName=Frankenstein
+Difficulty=hard
+Description=WUG Golem deck with several Splicers
+Deck Type=constructed
+Icon=
 [main]
 4 Tundra
 3 Savannah

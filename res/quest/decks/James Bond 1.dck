@@ -1,6 +1,10 @@
-James Bond 1
-[general]
-constructed
+[metadata]
+Name=James Bond 1
+DisplayName=James Bond
+Difficulty=easy
+Description=WG Sliver deck
+Deck Type=constructed
+Icon=
 [main]
 4 Elfhame Palace
 4 Arctic Flats

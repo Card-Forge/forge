@@ -1,6 +1,10 @@
-Aquaman 1
-[general]
-constructed
+[metadata]
+Name=Aquaman 1
+DisplayName=Aquaman
+Difficulty=easy
+Description=WU Control deck
+Deck Type=constructed
+Icon=
 [main]
 1 Accorder Paladin
 1 Caravan Escort

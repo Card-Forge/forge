@@ -1,6 +1,10 @@
-Morpheus 3
-[general]
-constructed
+[metadata]
+Name=Morpheus 3
+DisplayName=Morpheus
+Difficulty=hard
+Description=Mono G Elf deck with Overrun, Gaea's Anthem, Imperious Perfect and other pumps
+Deck Type=constructed
+Icon=
 [main]
 21 Forest
 1 Mox Emerald

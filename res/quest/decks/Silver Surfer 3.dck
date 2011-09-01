@@ -1,6 +1,10 @@
-Silver Surfer 3
-[general]
-constructed
+[metadata]
+Name=Silver Surfer 3
+DisplayName=Silver Surfer
+Difficulty=hard
+Description=BG deck with Hunted Wumpus and Iwamori of the Open Fist
+Deck Type=constructed
+Icon=
 [main]
 2 Bellowing Tanglewurm|SOM
 2 Go for the Throat|MBS

@@ -1,6 +1,10 @@
-Saruman 2
-[general]
-constructed
+[metadata]
+Name=Saruman 2
+DisplayName=Saruman
+Difficulty=medium
+Description=UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry 
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 4 Badlands

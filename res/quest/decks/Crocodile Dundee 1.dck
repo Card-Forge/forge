@@ -1,6 +1,10 @@
-Crocodile Dundee 1
-[general]
-constructed
+[metadata]
+Name=Crocodile Dundee 1
+DisplayName=Crocodile Dundee
+Difficulty=easy
+Description=Mono R deck with Mudbrawler Cohort and Bloodmark Mentor
+Deck Type=constructed
+Icon=
 [main]
 22 Mountain
 3 Bloodmark Mentor

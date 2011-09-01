@@ -1,6 +1,10 @@
-Ned Flanders 4
-[general]
-constructed
+[metadata]
+Name=Ned Flanders 4
+DisplayName=Ned Flanders
+Difficulty=very hard
+Description=Mono B reanimator deck with a few large creatures and some spells
+Deck Type=constructed
+Icon=
 [main]
 1 Blazing Archon
 21 Swamp

@@ -1,6 +1,10 @@
-Odin 3
-[general]
-constructed
+[metadata]
+Name=Odin 3
+DisplayName=Odin
+Difficulty=hard
+Description=WU deck with Thistledown Liege and Grand Arbiter Augustin IV
+Deck Type=constructed
+Icon=
 [main]
 4 Augury Adept
 4 Bant Sureblade

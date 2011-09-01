@@ -1,6 +1,10 @@
-Albert Einstein 2
-[general]
-constructed
+[metadata]
+Name=Albert Einstein 2
+DisplayName=Albert Einstein
+Difficulty=medium
+Description=WG deck with Garruk Wildspeaker, Needle Storm and Retribution of the Meek
+Deck Type=constructed
+Icon=
 [main]
 1 Isamaru, Hound of Konda
 2 Ancient Spider

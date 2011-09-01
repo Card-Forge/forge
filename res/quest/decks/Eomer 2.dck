@@ -1,6 +1,10 @@
-Eomer 2
-[general]
-constructed
+[metadata]
+Name=Eomer 2
+DisplayName=Eomer
+Difficulty=medium
+Description=Mono W flanking deck
+Deck Type=constructed
+Icon=
 [main]
 4 Cavalry Master|TSP
 2 Arid Mesa|ZEN

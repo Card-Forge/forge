@@ -1,6 +1,10 @@
-Homer Simpson 3
-[general]
-constructed
+[metadata]
+Name=Homer Simpson 3
+DisplayName=Homer Simpson
+Difficulty=hard
+Description=UBR Sacrifice deck with Mortician Beetle
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 4 Badlands

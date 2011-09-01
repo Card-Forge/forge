@@ -1,6 +1,10 @@
-Captain America 2
-[general]
-constructed
+[metadata]
+Name=Captain America 2
+DisplayName=Captain America
+Difficulty=medium
+Description=Bant Exalted deck
+Deck Type=constructed
+Icon=
 [main]
 1 Island|2ED
 4 Seaside Citadel|ALA

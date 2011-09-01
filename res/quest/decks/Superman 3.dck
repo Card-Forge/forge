@@ -1,6 +1,10 @@
-Superman 3
-[general]
-constructed
+[metadata]
+Name=Superman 3
+DisplayName=Superman
+Difficulty=hard
+Description=WRG counters deck with Borborygmos, Rushwood Elemental, Doubling Season and Titania's Boon
+Deck Type=constructed
+Icon=
 [main]
 2 Bloodhall Ooze
 2 Spike Drone

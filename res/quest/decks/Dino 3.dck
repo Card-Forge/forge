@@ -1,6 +1,10 @@
-Dino 3
-[general]
-constructed
+[metadata]
+Name=Dino 3
+DisplayName=Dino
+Difficulty=hard
+Description=Mono brown affinity deck with Affinity for artifacts and Modular cards
+Deck Type=constructed
+Icon=
 [main]
 1 Mox Emerald
 1 Mycosynth Golem

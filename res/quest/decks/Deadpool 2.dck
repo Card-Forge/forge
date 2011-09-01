@@ -1,6 +1,10 @@
-Deadpool 2
-[general]
-constructed
+[metadata]
+Name=Deadpool 2
+DisplayName=Deadpool
+Difficulty=medium
+Description=BR deck with Ashenmoor Liege and Grixis Grimblade
+Deck Type=constructed
+Icon=
 [main]
 2 Vicious Kavu
 2 Ashenmoor Gouger

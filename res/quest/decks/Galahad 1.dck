@@ -1,6 +1,10 @@
-Galahad 1
-[general]
-constructed
+[metadata]
+Name=Galahad 1
+DisplayName=Galahad
+Difficulty=easy
+Description=WB Knight deck with Kinsbaile Cavalier and Knight Exemplar
+Deck Type=constructed
+Icon=
 [main]
 1 Befoul
 2 White Shield Crusader

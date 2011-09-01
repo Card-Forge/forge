@@ -1,6 +1,10 @@
-Harry Potter 3
-[general]
-constructed
+[metadata]
+Name=Harry Potter 3
+DisplayName=Harry Potter
+Difficulty=hard
+Description=UB Mill and counter spell deck with card draw
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 4 Polluted Delta

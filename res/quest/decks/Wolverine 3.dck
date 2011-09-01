@@ -1,6 +1,10 @@
-Wolverine 3
-[general]
-constructed
+[metadata]
+Name=Wolverine 3
+DisplayName=Wolverine
+Difficulty=hard
+Description=BG deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach
+Deck Type=constructed
+Icon=
 [main]
 4 Bayou
 4 Overgrown Tomb

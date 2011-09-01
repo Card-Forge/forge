@@ -1,6 +1,10 @@
-Rocky 2
-[general]
-constructed
+[metadata]
+Name=Rocky 2
+DisplayName=Rocky
+Difficulty=medium
+Description=WUR Pro red deck with Flamebreak, Tremor, Pyroclasm
+Deck Type=constructed
+Icon=
 [main]
 4 Ancient Amphitheater
 4 Jungle Shrine

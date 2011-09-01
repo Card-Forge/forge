@@ -1,6 +1,10 @@
-Gold Finger 3
-[general]
-constructed
+[metadata]
+Name=Gold Finger 3
+DisplayName=Gold Finger
+Difficulty=hard
+Description=Mono U control deck with various counter spells, Serra Sphinx and Memnarch
+Deck Type=constructed
+Icon=
 [main]
 24 Island
 1 Mox Sapphire

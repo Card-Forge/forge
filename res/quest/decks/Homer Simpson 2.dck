@@ -1,6 +1,10 @@
-Homer Simpson 2
-[general]
-constructed
+[metadata]
+Name=Homer Simpson 2
+DisplayName=Homer Simpson
+Difficulty=medium
+Description=UBR Sacrifice deck with Mortician Beetle
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 4 Badlands

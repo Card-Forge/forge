@@ -1,6 +1,10 @@
-Bamm Bamm Rubble 1
-[general]
-constructed
+[metadata]
+Name=Bamm Bamm Rubble 1
+DisplayName=Bamm Bamm Rubble
+Difficulty=easy
+Description=WUBRG Domain deck
+Deck Type=constructed
+Icon=
 [main]
 3 Forest
 2 Island

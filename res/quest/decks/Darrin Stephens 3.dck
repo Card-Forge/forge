@@ -1,6 +1,10 @@
-Darrin Stephens 3
-[general]
-constructed
+[metadata]
+Name=Darrin Stephens 3
+DisplayName=Darrin Stephens
+Difficulty=hard
+Description=Mono U Affinity deck with Affinity for artifacts and Modular cards
+Deck Type=constructed
+Icon=
 [main]
 1 Ethersworn Adjudicator
 4 Thoughtcast

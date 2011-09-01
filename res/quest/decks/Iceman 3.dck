@@ -1,6 +1,10 @@
-Iceman 3
-[general]
-constructed
+[metadata]
+Name=Iceman 3
+DisplayName=Iceman
+Difficulty=hard
+Description=UB Bounce deck with Warped Devotion
+Deck Type=constructed
+Icon=
 [main]
 4 Underground Sea
 4 Polluted Delta

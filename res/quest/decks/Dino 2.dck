@@ -1,6 +1,10 @@
-Dino 2
-[general]
-constructed
+[metadata]
+Name=Dino 2
+DisplayName=Dino
+Difficulty=medium
+Description=Mono brown affinity deck with Affinity for artifacts and Modular cards
+Deck Type=constructed
+Icon=
 [main]
 1 Steel Wall
 1 Mycosynth Golem

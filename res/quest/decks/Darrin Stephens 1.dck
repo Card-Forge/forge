@@ -1,6 +1,10 @@
-Darrin Stephens 1
-[general]
-constructed
+[metadata]
+Name=Darrin Stephens 1
+DisplayName=Darrin Stephens
+Difficulty=easy
+Description=Mono U Affinity deck with Affinity for artifacts and Modular cards
+Deck Type=constructed
+Icon=
 [main]
 3 Thoughtcast
 1 Scepter of Insight

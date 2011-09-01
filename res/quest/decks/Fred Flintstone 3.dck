@@ -1,6 +1,10 @@
-Fred Flintstone 3
-[general]
-constructed
+[metadata]
+Name=Fred Flintstone 3
+DisplayName=Fred Flintstone
+Difficulty=hard
+Description=WUG deck with Phytohydra and Lorescale Coatl
+Deck Type=constructed
+Icon=
 [main]
 2 Savannah
 2 Tundra

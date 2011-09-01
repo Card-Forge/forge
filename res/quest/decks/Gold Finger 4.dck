@@ -1,6 +1,10 @@
-Gold Finger 4
-[general]
-constructed
+[metadata]
+Name=Gold Finger 4
+DisplayName=Gold Finger
+Difficulty=very hard
+Description=Mono U control deck with various counter spells
+Deck Type=constructed
+Icon=
 [main]
 24 Island
 1 Mox Sapphire

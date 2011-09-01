@@ -1,6 +1,10 @@
-Sherlock Holmes 3
-[general]
-constructed
+[metadata]
+Name=Sherlock Holmes 3
+DisplayName=Sherlock Holmes
+Difficulty=hard
+Description=Mono G deck with Baru, Fist of Krosa and lots of great green creatures
+Deck Type=constructed
+Icon=
 [main]
 21 Forest
 1 Mox Emerald

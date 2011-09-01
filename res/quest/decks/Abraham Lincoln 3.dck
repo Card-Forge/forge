@@ -1,6 +1,10 @@
-Abraham Lincoln 3
-[general]
-constructed
+[metadata]
+Name=Abraham Lincoln 3
+DisplayName=Abraham Lincoln
+Difficulty=hard
+Description=WUR flying creatures deck with Flamebreak and Earthquake
+Deck Type=constructed
+Icon=
 [main]
 4 Plateau
 2 Flooded Strand

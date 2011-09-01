@@ -1,6 +1,10 @@
-Fin Fang Foom 2
-[general]
-constructed
+[metadata]
+Name=Fin Fang Foom 2
+DisplayName=Fin Fang Foom
+Difficulty=medium
+Description=Mono G Infect deck
+Deck Type=constructed
+Icon=
 [main]
 3 Cystbearer|SOM
 2 Carrion Call|SOM

@@ -1,6 +1,10 @@
-Samwise Gamgee 2
-[general]
-constructed
+[metadata]
+Name=Samwise Gamgee 2
+DisplayName=Samwise Gamgee
+Difficulty=medium
+Description=Mono W Kithkin deck
+Deck Type=constructed
+Icon=
 [main]
 22 Plains
 3 Wizened Cenn

@@ -1,6 +1,10 @@
-White Knight 3
-[general]
-constructed
+[metadata]
+Name=White Knight 3
+DisplayName=White Knight
+Difficulty=hard
+Description=Mono W Knights deck
+Deck Type=constructed
+Icon=
 [main]
 4 Accorder Paladin
 4 Hero of Bladehold

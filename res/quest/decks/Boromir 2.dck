@@ -1,6 +1,10 @@
-Boromir 2
-[general]
-constructed
+[metadata]
+Name=Boromir 2
+DisplayName=Boromir
+Difficulty=medium
+Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
+Deck Type=constructed
+Icon=
 [main]
 22 Forest
 4 Elvish Piper

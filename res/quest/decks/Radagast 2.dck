@@ -1,6 +1,10 @@
-Radagast 2
-[general]
-constructed
+[metadata]
+Name=Radagast 2
+DisplayName=Radagast
+Difficulty=medium
+Description=Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens
+Deck Type=constructed
+Icon=
 [main]
 23 Forest
 4 Muraganda Petroglyphs

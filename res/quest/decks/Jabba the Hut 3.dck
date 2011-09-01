@@ -1,6 +1,10 @@
-Jabba the Hut 3
-[general]
-constructed
+[metadata]
+Name=Jabba the Hut 3
+DisplayName=Jabba the Hut
+Difficulty=hard
+Description=UB Infect deck
+Deck Type=constructed
+Icon=
 [main]
 3 Darksteel Axe
 3 Hand of the Praetors

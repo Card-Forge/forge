@@ -1,6 +1,10 @@
-Ratbert 2
-[general]
-constructed
+[metadata]
+Name=Ratbert 2
+DisplayName=Ratbert
+Difficulty=medium
+Description=Mono B Fear deck with Thran Lens
+Deck Type=constructed
+Icon=
 [main]
 23 Swamp
 4 Thran Lens

@@ -1,6 +1,10 @@
-Genghis Khan 1
-[general]
-constructed
+[metadata]
+Name=Genghis Khan 1
+DisplayName=Genghis Khan
+Difficulty=easy
+Description=WRG deck with mana ramp, Armageddon and Mungha Wurm
+Deck Type=constructed
+Icon=
 [main]
 4 Terramorphic Expanse
 2 Birds of Paradise

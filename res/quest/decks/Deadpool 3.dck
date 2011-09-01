@@ -1,6 +1,10 @@
-Deadpool 3
-[general]
-constructed
+[metadata]
+Name=Deadpool 3
+DisplayName=Deadpool
+Difficulty=hard
+Description=BR deck with Ashenmoor Liege and Grixis Grimblade
+Deck Type=constructed
+Icon=
 [main]
 4 Ashenmoor Gouger
 4 Ashenmoor Liege

@@ -1,6 +1,10 @@
-Oberon 1
-[general]
-constructed
+[metadata]
+Name=Oberon 1
+DisplayName=Oberon
+Difficulty=easy
+Description=UB Faerie deck
+Deck Type=constructed
+Icon=
 [main]
 2 Briarberry Cohort|SHM
 2 Faerie Swarm|SHM

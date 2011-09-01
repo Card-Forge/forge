@@ -1,6 +1,10 @@
-Kang 1
-[general]
-constructed
+[metadata]
+Name=Kang 1
+DisplayName=Kang
+Difficulty=easy
+Description=UB deck with Gravelgill Duo and Dire Undercurrents
+Deck Type=constructed
+Icon=
 [main]
 6 Island
 7 Swamp

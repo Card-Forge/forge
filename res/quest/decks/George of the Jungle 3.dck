@@ -1,6 +1,10 @@
-George of the Jungle 3
-[general]
-constructed
+[metadata]
+Name=George of the Jungle 3
+DisplayName=George of the Jungle
+Difficulty=hard
+Description=WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant
+Deck Type=constructed
+Icon=
 [main]
 1 Bull Cerodon
 4 Sacred Foundry

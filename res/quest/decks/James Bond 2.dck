@@ -1,6 +1,10 @@
-James Bond 2
-[general]
-constructed
+[metadata]
+Name=James Bond 2
+DisplayName=James Bond
+Difficulty=medium
+Description=WG Sliver deck
+Deck Type=constructed
+Icon=
 [main]
 4 Savannah
 4 Windswept Heath

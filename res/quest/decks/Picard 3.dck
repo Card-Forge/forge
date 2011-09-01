@@ -1,6 +1,10 @@
-Picard 3
-[general]
-constructed
+[metadata]
+Name=Picard 3
+DisplayName=Picard
+Difficulty=hard
+Description=WUG Elf deck with elf lords
+Deck Type=constructed
+Icon=
 [main]
 2 Wellwisher
 1 Mox Emerald

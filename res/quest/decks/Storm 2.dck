@@ -1,6 +1,10 @@
-Storm 2
-[general]
-constructed
+[metadata]
+Name=Storm 2
+DisplayName=Storm
+Difficulty=medium
+Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
+Deck Type=constructed
+Icon=
 [main]
 1 Bayou
 4 Savannah

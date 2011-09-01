@@ -1,6 +1,10 @@
-Electro 2
-[general]
-constructed
+[metadata]
+Name=Electro 2
+DisplayName=Electro
+Difficulty=medium
+Description=WRG Naya deck with creatures with power 5 or greater
+Deck Type=constructed
+Icon=
 [main]
 1 Lightning Bolt|M11
 2 Mountain|MBS

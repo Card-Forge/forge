@@ -1,6 +1,10 @@
-Magneto 3
-[general]
-constructed
+[metadata]
+Name=Magneto 3
+DisplayName=Magneto
+Difficulty=hard
+Description=Mono B Shriekmaw deck with creature removal and re-animation
+Deck Type=constructed
+Icon=
 [main]
 3 Big Game Hunter
 3 Bone Shredder

@@ -1,6 +1,10 @@
-Dilbert 3
-[general]
-constructed
+[metadata]
+Name=Dilbert 3
+DisplayName=Dilbert
+Difficulty=hard
+Description=BRG Ball Lightning deck with Smoke, Mighty Emergence and Kavu Lair
+Deck Type=constructed
+Icon=
 [main]
 3 Spark Elemental
 2 Deathgreeter

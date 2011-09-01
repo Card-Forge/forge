@@ -1,6 +1,10 @@
-Buffy 1
-[general]
-constructed
+[metadata]
+Name=Buffy 1
+DisplayName=Buffy
+Difficulty=easy
+Description=Mono B Zombie deck
+Deck Type=constructed
+Icon=
 [main]
 1 Blind Creeper|5DN
 1 Skulking Knight|TSP

@@ -1,6 +1,10 @@
-Aquaman 3
-[general]
-constructed
+[metadata]
+Name=Aquaman 3
+DisplayName=Aquaman
+Difficulty=hard
+Description=WU Caw-Blade deck
+Deck Type=constructed
+Icon=
 [main]
 4 Baneslayer Angel
 1 Linvala, Keeper of Silence

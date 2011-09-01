@@ -1,6 +1,10 @@
-Wyatt Earp 3
-[general]
-constructed
+[metadata]
+Name=Wyatt Earp 3
+DisplayName=Wyatt Earp
+Difficulty=hard
+Description=Mono W deck with Crovax, Ascendant Hero, Honor of the Pure and small to medium sized creatures.
+Deck Type=constructed
+Icon=
 [main]
 21 Plains
 1 Karakas

@@ -1,6 +1,10 @@
-Tarzan 2
-[general]
-constructed
+[metadata]
+Name=Tarzan 2
+DisplayName=Tarzan
+Difficulty=medium
+Description=WR Ape tribal deck with Ancient Silverback, Raking Canopy and Treetop Village
+Deck Type=constructed
+Icon=
 [main]
 3 Kird Ape
 2 Barbary Apes

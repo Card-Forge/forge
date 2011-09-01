@@ -1,6 +1,10 @@
-Wilma Flintstone 3
-[general]
-constructed
+[metadata]
+Name=Wilma Flintstone 3
+DisplayName=Wilma Flintstone
+Difficulty=hard
+Description=BG deck with Noxious Hatchling and Woodlurker Mimic
+Deck Type=constructed
+Icon=
 [main]
 2 Llanowar Dead
 1 Lord of Extinction

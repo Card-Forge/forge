@@ -1,6 +1,10 @@
-Bart Simpson 2
-[general]
-constructed
+[metadata]
+Name=Bart Simpson 2
+DisplayName=Bart Simpson
+Difficulty=medium
+Description=WUG deck with Minister of Impediments and Paralyzing Grasp
+Deck Type=constructed
+Icon=
 [main]
 4 Plains
 4 Forest

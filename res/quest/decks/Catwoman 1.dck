@@ -1,6 +1,10 @@
-Catwoman 1
-[general]
-constructed
+[metadata]
+Name=Catwoman 1
+DisplayName=Catwoman
+Difficulty=easy
+Description=WG Cat deck with Kjeldoran War Cry
+Deck Type=constructed
+Icon=
 [main]
 4 Elite Cat Warrior
 4 Kjeldoran War Cry

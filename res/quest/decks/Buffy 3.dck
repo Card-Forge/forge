@@ -1,6 +1,10 @@
-Buffy 3
-[general]
-constructed
+[metadata]
+Name=Buffy 3
+DisplayName=Buffy
+Difficulty=hard
+Description=Mono B Zombie deck
+Deck Type=constructed
+Icon=
 [main]
 1 Unholy Grotto|ONS
 1 Graveborn Muse|10E

@@ -1,6 +1,10 @@
-King Edward 3
-[general]
-constructed
+[metadata]
+Name=King Edward 3
+DisplayName=King Edward
+Difficulty=hard
+Description=WUBRG Elementals deck with Tribal Flames and Horde of Notions
+Deck Type=constructed
+Icon=
 [main]
 2 Plateau
 2 Taiga

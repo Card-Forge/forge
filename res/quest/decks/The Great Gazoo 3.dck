@@ -1,6 +1,10 @@
-The Great Gazoo 3
-[general]
-constructed
+[metadata]
+Name=The Great Gazoo 3
+DisplayName=The Great Gazoo
+Difficulty=hard
+Description=WR deck with, red damage all spells and pro from red creatures
+Deck Type=constructed
+Icon=
 [main]
 4 Sacred Foundry
 4 Plateau

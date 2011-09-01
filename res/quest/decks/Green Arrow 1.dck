@@ -1,6 +1,10 @@
-Green Arrow 1
-[general]
-constructed
+[metadata]
+Name=Green Arrow 1
+DisplayName=Green Arrow
+Difficulty=easy
+Description=WG Archer deck with Jagged-Scar Archers and Titania's Chosen
+Deck Type=constructed
+Icon=
 [main]
 1 Ezuri's Archers
 2 Skyshroud Archer

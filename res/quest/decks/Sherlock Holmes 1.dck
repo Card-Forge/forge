@@ -1,6 +1,10 @@
-Sherlock Holmes 1
-[general]
-constructed
+[metadata]
+Name=Sherlock Holmes 1
+DisplayName=Sherlock Holmes
+Difficulty=easy
+Description=Mono G deck with Baru, Fist of Krosa, land fetch and some buff cards
+Deck Type=constructed
+Icon=
 [main]
 22 Forest
 1 Sapseep Forest

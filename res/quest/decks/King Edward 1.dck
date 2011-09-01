@@ -1,6 +1,10 @@
-King Edward 1
-[general]
-constructed
+[metadata]
+Name=King Edward 1
+DisplayName=King Edward
+Difficulty=easy
+Description=WUBRG Elementals deck with Tribal Flames
+Deck Type=constructed
+Icon=
 [main]
 4 Arcane Sanctum
 4 Birds of Paradise

@@ -1,6 +1,10 @@
-Newton 3
-[general]
-constructed
+[metadata]
+Name=Newton 3
+DisplayName=Newton
+Difficulty=hard
+Description=WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares
+Deck Type=constructed
+Icon=
 [main]
 4 Marsh Flats
 4 Scrubland

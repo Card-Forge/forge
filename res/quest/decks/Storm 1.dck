@@ -1,6 +1,10 @@
-Storm 1
-[general]
-constructed
+[metadata]
+Name=Storm 1
+DisplayName=Storm
+Difficulty=easy
+Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
+Deck Type=constructed
+Icon=
 [main]
 4 Plains
 2 Forest

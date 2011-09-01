@@ -1,6 +1,10 @@
-Hans 3
-[general]
-constructed
+[metadata]
+Name=Hans 3
+DisplayName=Hans
+Difficulty=hard
+Description=WRG Allies deck
+Deck Type=constructed
+Icon=
 [main]
 4 Mountain|MBS
 2 Highland Berserker|ZEN

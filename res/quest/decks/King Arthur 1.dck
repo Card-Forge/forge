@@ -1,6 +1,10 @@
-King Arthur 1
-[general]
-constructed
+[metadata]
+Name=King Arthur 1
+DisplayName=King Arthur
+Difficulty=easy
+Description=WG Knight deck with Wilt-Leaf Cavaliers, Raven's Run Dragoon and Llanowar Knight
+Deck Type=constructed
+Icon=
 [main]
 3 Lionheart Maverick
 1 Leonin Scimitar

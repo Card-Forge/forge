@@ -1,6 +1,10 @@
-Endora 3
-[general]
-constructed
+[metadata]
+Name=Endora 3
+DisplayName=Endora
+Difficulty=hard
+Description=WG Enchantress deck with enchantments and cards with enchantment effects
+Deck Type=constructed
+Icon=
 [main]
 1 Hoofprints of the Stag
 1 Privileged Position

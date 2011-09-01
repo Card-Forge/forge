@@ -1,6 +1,10 @@
-Hagrid 2
-[general]
-constructed
+[metadata]
+Name=Hagrid 2
+DisplayName=Hagrid
+Difficulty=medium
+Description=Mono R Giants deck
+Deck Type=constructed
+Icon=
 [main]
 4 Pyroclasm|M11
 20 Mountain|MBS

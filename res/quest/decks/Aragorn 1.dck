@@ -1,6 +1,10 @@
-Aragorn 1
-[general]
-constructed
+[metadata]
+Name=Aragorn 1
+DisplayName=Aragorn
+Difficulty=medium
+Description=WBRG Landfall deck
+Deck Type=constructed
+Icon=
 [main]
 3 Forest
 2 Plains

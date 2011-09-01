@@ -1,6 +1,10 @@
-Magnum 2
-[general]
-constructed
+[metadata]
+Name=Magnum 2
+DisplayName=Magnum
+Difficulty=medium
+Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Deck Type=constructed
+Icon=
 [main]
 4 Tropical Island
 8 Island

@@ -1,6 +1,10 @@
-Bart Simpson 3
-[general]
-constructed
+[metadata]
+Name=Bart Simpson 3
+DisplayName=Bart Simpson
+Difficulty=hard
+Description=WUG deck with Harrier Griffin and Entangling Vines
+Deck Type=constructed
+Icon=
 [main]
 2 Island
 3 Plains

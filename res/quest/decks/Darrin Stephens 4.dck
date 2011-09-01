@@ -1,6 +1,10 @@
-Darrin Stephens 4
-[general]
-constructed
+[metadata]
+Name=Darrin Stephens 4
+DisplayName=Darrin Stephens
+Difficulty=very hard
+Description=Mono U Affinity deck
+Deck Type=constructed
+Icon=
 [main]
 5 Island
 4 Seat of the Synod

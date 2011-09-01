@@ -1,6 +1,10 @@
-Swan 2
-[general]
-constructed
+[metadata]
+Name=Swan 2
+DisplayName=Swan
+Difficulty=medium
+Description=Mono G Warrior/Elf hybrid deck with Bramblewood Paragon, Nath's Elite and Winnower Patrol
+Deck Type=constructed
+Icon=
 [main]
 2 Warren-Scourge Elf
 1 Wren's Run Packmaster

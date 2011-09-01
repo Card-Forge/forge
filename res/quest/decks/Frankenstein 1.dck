@@ -1,6 +1,10 @@
-Frankenstein 1
-[general]
-constructed
+[metadata]
+Name=Frankenstein 1
+DisplayName=Frankenstein
+Difficulty=easy
+Description=WG Golem deck with several Splicers
+Deck Type=constructed
+Icon=
 [main]
 12 Plains
 8 Forest

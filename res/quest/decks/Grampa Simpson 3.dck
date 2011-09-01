@@ -1,6 +1,10 @@
-Grampa Simpson 3
-[general]
-constructed
+[metadata]
+Name=Grampa Simpson 3
+DisplayName=Grampa Simpson
+Difficulty=hard
+Description=WRG Double Strike deck with equipments and auras
+Deck Type=constructed
+Icon=
 [main]
 2 Marisi's Twinclaws
 1 Kor Duelist

@@ -1,6 +1,10 @@
-Wyatt Earp 1
-[general]
-constructed
+[metadata]
+Name=Wyatt Earp 1
+DisplayName=Wyatt Earp
+Difficulty=easy
+Description=Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.
+Deck Type=constructed
+Icon=
 [main]
 22 Plains
 1 Angel's Feather

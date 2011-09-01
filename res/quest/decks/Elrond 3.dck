@@ -1,6 +1,10 @@
-Elrond 3
-[general]
-constructed
+[metadata]
+Name=Elrond 3
+DisplayName=Elrond
+Difficulty=hard
+Description=RGW Aura deck with Kor Spiritdancer
+Deck Type=constructed
+Icon=
 [main]
 1 Plains
 1 Forest

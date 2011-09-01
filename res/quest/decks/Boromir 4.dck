@@ -1,6 +1,10 @@
-Boromir 4
-[general]
-constructed
+[metadata]
+Name=Boromir 4
+DisplayName=Boromir
+Difficulty=very hard
+Description=UG Show and Tell deck with huge creatures
+Deck Type=constructed
+Icon=
 [main]
 4 Misty Rainforest
 4 Tropical Island

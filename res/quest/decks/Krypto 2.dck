@@ -1,6 +1,10 @@
-Krypto 2
-[general]
-constructed
+[metadata]
+Name=Krypto 2
+DisplayName=Krypto
+Difficulty=medium
+Description=BRG Bloodthirst deck with Honden of Infinite Rage, Kyren Sniper and Rumbling Slum
+Deck Type=constructed
+Icon=
 [main]
 4 Skarrgan Pit-Skulk
 1 Smash to Smithereens

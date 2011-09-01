@@ -1,6 +1,10 @@
-Barney Rubble 2
-[general]
-constructed
+[metadata]
+Name=Barney Rubble 2
+DisplayName=Barney Rubble
+Difficulty=medium
+Description=WU Sovereigns of Lost Alara deck with walls and auras
+Deck Type=constructed
+Icon=
 [main]
 4 Ghostly Prison
 1 Angelic Wall

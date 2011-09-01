@@ -1,6 +1,10 @@
-Grampa Simpson 1
-[general]
-constructed
+[metadata]
+Name=Grampa Simpson 1
+DisplayName=Grampa Simpson
+Difficulty=easy
+Description=WR Double and First Strike deck with equipments and auras
+Deck Type=constructed
+Icon=
 [main]
 4 Sacred Foundry
 8 Plains

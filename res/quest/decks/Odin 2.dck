@@ -1,6 +1,10 @@
-Odin 2
-[general]
-constructed
+[metadata]
+Name=Odin 2
+DisplayName=Odin
+Difficulty=medium
+Description=WU deck with Thistledown Duo, Thistledown Liege and Grand Arbiter Augustin IV
+Deck Type=constructed
+Icon=
 [main]
 3 Sejiri Refuge
 3 Glacial Fortress

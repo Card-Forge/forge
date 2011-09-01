@@ -1,6 +1,10 @@
-Pinky and the Brain 2
-[general]
-constructed
+[metadata]
+Name=Pinky and the Brain 2
+DisplayName=Pinky and the Brain
+Difficulty=medium
+Description=WB Royal Assassin deck with white tap abilities
+Deck Type=constructed
+Icon=
 [main]
 4 Royal Assassin
 4 King's Assassin

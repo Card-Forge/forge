@@ -1,6 +1,10 @@
-Pebbles Flintstone 3
-[general]
-constructed
+[metadata]
+Name=Pebbles Flintstone 3
+DisplayName=Pebbles Flintstone
+Difficulty=hard
+Description=WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance
+Deck Type=constructed
+Icon=
 [main]
 1 Tempest Drake
 1 Armored Griffin

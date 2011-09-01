@@ -1,6 +1,10 @@
-Frodo 1
-[general]
-constructed
+[metadata]
+Name=Frodo 1
+DisplayName=Frodo
+Difficulty=easy
+Description=WRG Zoo deck with some threat removal
+Deck Type=constructed
+Icon=
 [main]
 4 Sacred Foundry
 4 Stomping Ground

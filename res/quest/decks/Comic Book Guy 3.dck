@@ -1,6 +1,10 @@
-Comic Book Guy 3
-[general]
-constructed
+[metadata]
+Name=Comic Book Guy 3
+DisplayName=Comic Book Guy
+Difficulty=hard
+Description=WR deck with Roc and Rukh Eggs, Flamebrake, Earthquake and Auriok Champion
+Deck Type=constructed
+Icon=
 [main]
 4 Sacred Foundry
 4 Plateau

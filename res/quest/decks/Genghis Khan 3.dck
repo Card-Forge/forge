@@ -1,6 +1,10 @@
-Genghis Khan 3
-[general]
-constructed
+[metadata]
+Name=Genghis Khan 3
+DisplayName=Genghis Khan
+Difficulty=hard
+Description=WRG deck with mana ramp, Armageddon, and Terravore
+Deck Type=constructed
+Icon=
 [main]
 2 Taiga
 2 Savannah

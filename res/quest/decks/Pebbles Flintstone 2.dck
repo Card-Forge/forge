@@ -1,6 +1,10 @@
-Pebbles Flintstone 2
-[general]
-constructed
+[metadata]
+Name=Pebbles Flintstone 2
+DisplayName=Pebbles Flintstone
+Difficulty=medium
+Description=WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance
+Deck Type=constructed
+Icon=
 [main]
 1 Armored Griffin
 1 Tempest Drake

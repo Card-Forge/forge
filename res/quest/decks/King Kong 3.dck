@@ -1,6 +1,10 @@
-King Kong 3
-[general]
-constructed
+[metadata]
+Name=King Kong 3
+DisplayName=King Kong
+Difficulty=hard
+Description=WRG Squirrel deck with tokens, changelings, Deranged Hermit and threat removal
+Deck Type=constructed
+Icon=
 [main]
 4 Savannah
 4 Wooded Foothills

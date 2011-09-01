@@ -1,6 +1,10 @@
-Fin Fang Foom 3
-[general]
-constructed
+[metadata]
+Name=Fin Fang Foom 3
+DisplayName=Fin Fang Foom
+Difficulty=hard
+Description=GB Infect deck
+Deck Type=constructed
+Icon=
 [main]
 2 Ichor Rats|SOM
 2 Cystbearer|SOM

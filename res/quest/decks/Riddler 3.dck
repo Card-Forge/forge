@@ -1,6 +1,10 @@
-Riddler 3
-[general]
-constructed
+[metadata]
+Name=Riddler 3
+DisplayName=Riddler
+Difficulty=hard
+Description=WR deck with mass damage spells, Spitemare and Swans of Bryn Argoll
+Deck Type=constructed
+Icon=
 [main]
 4 Arid Mesa
 4 Plateau

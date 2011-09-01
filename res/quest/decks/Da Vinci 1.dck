@@ -1,6 +1,10 @@
-Da Vinci 1
-[general]
-constructed
+[metadata]
+Name=Da Vinci 1
+DisplayName=Da Vinci
+Difficulty=easy
+Description=Mono B deck with Ashenmoor Cohort, Badmoon and some Fear
+Deck Type=constructed
+Icon=
 [main]
 22 Swamp
 4 Ashenmoor Cohort

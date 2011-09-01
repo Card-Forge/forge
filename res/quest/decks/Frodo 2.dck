@@ -1,6 +1,10 @@
-Frodo 2
-[general]
-constructed
+[metadata]
+Name=Frodo 2
+DisplayName=Frodo
+Difficulty=medium
+Description=WRG Zoo deck with some threat removal and Glorious Anthem
+Deck Type=constructed
+Icon=
 [main]
 4 Plateau
 4 Taiga

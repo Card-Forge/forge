@@ -1,6 +1,10 @@
-Treebeard 2
-[general]
-constructed
+[metadata]
+Name=Treebeard 2
+DisplayName=Treebeard
+Difficulty=medium
+Description=WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran
+Deck Type=constructed
+Icon=
 [main]
 14 Forest
 4 Bayou

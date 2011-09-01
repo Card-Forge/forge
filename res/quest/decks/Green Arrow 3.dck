@@ -1,6 +1,10 @@
-Green Arrow 3
-[general]
-constructed
+[metadata]
+Name=Green Arrow 3
+DisplayName=Green Arrow
+Difficulty=hard
+Description=WRG Archer Aggro deck with Greatbow Doyen and Changelings
+Deck Type=constructed
+Icon=
 [main]
 3 Ezuri's Archers
 2 Thornweald Archer

@@ -1,6 +1,10 @@
-Hercules 1
-[general]
-constructed
+[metadata]
+Name=Hercules 1
+DisplayName=Hercules
+Difficulty=easy
+Description=GW Deck with Safehold Duo, Bant Sureblade and Naya Hushblade
+Deck Type=constructed
+Icon=
 [main]
 4 Safehold Duo
 2 Bant Sureblade

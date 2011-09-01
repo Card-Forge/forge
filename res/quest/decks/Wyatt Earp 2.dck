@@ -1,6 +1,10 @@
-Wyatt Earp 2
-[general]
-constructed
+[metadata]
+Name=Wyatt Earp 2
+DisplayName=Wyatt Earp
+Difficulty=medium
+Description=Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.
+Deck Type=constructed
+Icon=
 [main]
 22 Plains
 1 Pearl Medallion

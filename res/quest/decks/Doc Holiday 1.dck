@@ -1,6 +1,10 @@
-Doc Holiday 1
-[general]
-constructed
+[metadata]
+Name=Doc Holiday 1
+DisplayName=Doc Holiday
+Difficulty=easy
+Description=WUG Morph deck
+Deck Type=constructed
+Icon=
 [main]
 3 Aphetto Runecaster
 3 Aven Farseer

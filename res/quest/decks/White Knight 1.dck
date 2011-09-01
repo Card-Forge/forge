@@ -1,6 +1,10 @@
-White Knight 1
-[general]
-constructed
+[metadata]
+Name=White Knight 1
+DisplayName=White Knight
+Difficulty=easy
+Description=Mono W Knights deck
+Deck Type=constructed
+Icon=
 [main]
 4 Saltblast
 24 Plains

@@ -1,6 +1,10 @@
-Oberon 3
-[general]
-constructed
+[metadata]
+Name=Oberon 3
+DisplayName=Oberon
+Difficulty=hard
+Description=UB Faerie deck
+Deck Type=constructed
+Icon=
 [main]
 4 Scion of Oona|LRW
 4 Drowned Catacomb|M11

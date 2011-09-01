@@ -1,6 +1,10 @@
-Professor X 2
-[general]
-constructed
+[metadata]
+Name=Professor X 2
+DisplayName=Professor X
+Difficulty=medium
+Description=WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade
+Deck Type=constructed
+Icon=
 [main]
 4 Arcane Sanctum
 3 Sejiri Refuge

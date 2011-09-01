@@ -1,6 +1,10 @@
-Gimli 2
-[general]
-constructed
+[metadata]
+Name=Gimli 2
+DisplayName=Gimli
+Difficulty=medium
+Description=WB Indestructible permanents deck with mass removal
+Deck Type=constructed
+Icon=
 [main]
 5 Swamp
 5 Plains

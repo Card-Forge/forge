@@ -1,6 +1,10 @@
-Fat Albert 3
-[general]
-constructed
+[metadata]
+Name=Fat Albert 3
+DisplayName=Fat Albert
+Difficulty=hard
+Description=UG Winter Orb deck with Kalonian Behemoth and mana Elves/Slivers
+Deck Type=constructed
+Icon=
 [main]
 1 Scepter of Insight
 3 Birds of Paradise

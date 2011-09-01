@@ -1,6 +1,10 @@
-Endora 2
-[general]
-constructed
+[metadata]
+Name=Endora 2
+DisplayName=Endora
+Difficulty=medium
+Description=WG Enchantress deck with enchantments and cards with enchantment effects
+Deck Type=constructed
+Icon=
 [main]
 1 Femeref Enchantress
 1 Hoofprints of the Stag

@@ -1,6 +1,10 @@
-White Knight 2
-[general]
-constructed
+[metadata]
+Name=White Knight 2
+DisplayName=White Knight
+Difficulty=medium
+Description=Mono W Knights deck
+Deck Type=constructed
+Icon=
 [main]
 3 Veteran Cavalier
 3 Kabira Vindicator

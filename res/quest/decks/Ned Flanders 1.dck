@@ -1,6 +1,10 @@
-Ned Flanders 1
-[general]
-constructed
+[metadata]
+Name=Ned Flanders 1
+DisplayName=Ned Flanders
+Difficulty=easy
+Description=Mono B reanimator deck with a few large creatures and some spells
+Deck Type=constructed
+Icon=
 [main]
 1 Cranial Extraction
 1 Nightmare

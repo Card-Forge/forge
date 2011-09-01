@@ -1,6 +1,10 @@
-Indiana Jones 1
-[general]
-constructed
+[metadata]
+Name=Indiana Jones 1
+DisplayName=Indiana Jones
+Difficulty=easy
+Description=UBR Sol'kanar the Swamp King and buff
+Deck Type=constructed
+Icon=
 [main]
 4 Urborg Volcano
 4 Salt Marsh

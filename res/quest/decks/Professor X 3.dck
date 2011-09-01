@@ -1,6 +1,10 @@
-Professor X 3
-[general]
-constructed
+[metadata]
+Name=Professor X 3
+DisplayName=Professor X
+Difficulty=hard
+Description=WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade
+Deck Type=constructed
+Icon=
 [main]
 2 Underground Sea
 2 Polluted Delta

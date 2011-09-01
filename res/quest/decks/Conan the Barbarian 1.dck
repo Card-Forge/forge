@@ -1,6 +1,10 @@
-Conan the Barbarian 1
-[general]
-constructed
+[metadata]
+Name=Conan the Barbarian 1
+DisplayName=Conan the Barbarian
+Difficulty=easy
+Description=BRG Barbarian deck with Balthor the Stout and Spellgorger Barbarian
+Deck Type=constructed
+Icon=
 [main]
 1 Shivan Zombie
 1 Yavimaya Barbarian

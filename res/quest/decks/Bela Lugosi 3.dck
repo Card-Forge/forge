@@ -1,6 +1,10 @@
-Bela Lugosi 3
-[general]
-constructed
+[metadata]
+Name=Bela Lugosi 3
+DisplayName=Bela Lugosi
+Difficulty=hard
+Description=Mono B Vampire Aggro deck
+Deck Type=constructed
+Icon=
 [main]
 4 Vampire Nocturnus
 3 Anowon, the Ruin Sage

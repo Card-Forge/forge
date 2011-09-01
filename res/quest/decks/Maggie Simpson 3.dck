@@ -1,6 +1,10 @@
-Maggie Simpson 3
-[general]
-constructed
+[metadata]
+Name=Maggie Simpson 3
+DisplayName=Maggie Simpson
+Difficulty=hard
+Description=BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf
+Deck Type=constructed
+Icon=
 [main]
 1 Hellkite Overlord
 2 Taiga

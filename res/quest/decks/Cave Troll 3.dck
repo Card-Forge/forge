@@ -1,6 +1,10 @@
 [metadata]
 Name=Cave Troll 3
+DisplayName=Cave Troll
+Difficulty=hard
+Description=Mono B Quest for the Nihil Stone deck with The Rack, Bottomless Pit and Nyxathid
 Deck Type=constructed
+Icon=
 [main]
 2 Chainer's Edict|TOR
 2 Go for the Throat|MBS

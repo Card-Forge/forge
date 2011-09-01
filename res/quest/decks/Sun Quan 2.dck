@@ -1,6 +1,10 @@
-Sun Quan 2
-[general]
-constructed
+[metadata]
+Name=Sun Quan 2
+DisplayName=Sun Quan
+Difficulty=medium
+Description=Mono U Horsemanship deck
+Deck Type=constructed
+Icon=
 [main]
 2 Wu Scout|PTK
 1 Lu Xun, Scholar General|PTK

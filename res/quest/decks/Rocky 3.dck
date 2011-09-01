@@ -1,6 +1,10 @@
-Rocky 3
-[general]
-constructed
+[metadata]
+Name=Rocky 3
+DisplayName=Rocky
+Difficulty=hard
+Description=WUR Pro red deck with Flamebreak, Tremor, Pyroclasm
+Deck Type=constructed
+Icon=
 [main]
 4 Plateau
 1 Tundra

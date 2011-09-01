@@ -1,6 +1,10 @@
-Dr Strangelove 3
-[general]
-constructed
+[metadata]
+Name=Dr Strangelove 3
+DisplayName=Dr Strangelove
+Difficulty=hard
+Description=Mono U Sanity Grinding deck
+Deck Type=constructed
+Icon=
 [main]
 4 Sanity Grinding|EVE
 4 Counterspell|7ED

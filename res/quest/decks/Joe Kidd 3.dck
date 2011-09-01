@@ -1,6 +1,10 @@
-Joe Kidd 3
-[general]
-constructed
+[metadata]
+Name=Joe Kidd 3
+DisplayName=Joe Kidd
+Difficulty=hard
+Description=WB deck with Voracious Hatchling and Nightsky Mimic
+Deck Type=constructed
+Icon=
 [main]
 3 Mourning Thrull
 5 Swamp

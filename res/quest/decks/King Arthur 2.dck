@@ -1,6 +1,10 @@
-King Arthur 2
-[general]
-constructed
+[metadata]
+Name=King Arthur 2
+DisplayName=King Arthur
+Difficulty=medium
+Description=WG Hybrid Knight deck with Knight of New Alara and Knight of the Reliquary
+Deck Type=constructed
+Icon=
 [main]
 1 Lionheart Maverick
 1 Student of Warfare

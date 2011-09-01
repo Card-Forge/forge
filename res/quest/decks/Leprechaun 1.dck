@@ -1,6 +1,10 @@
-Leprechaun 1
-[general]
-constructed
+[metadata]
+Name=Leprechaun 1
+DisplayName=Leprechaun
+Difficulty=easy
+Description=WBG anti green deck with Aisling Leprechaun, Beast Within and Waiting in the Weeds
+Deck Type=constructed
+Icon=
 [main]
 8 Forest
 4 Murmuring Bosk

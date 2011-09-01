@@ -1,6 +1,10 @@
-Scotty 3
-[general]
-constructed
+[metadata]
+Name=Scotty 3
+DisplayName=Scotty
+Difficulty=hard
+Description=WBG protection from black Famine deck with Chameleon Colossus and Oversoul of Dusk
+Deck Type=constructed
+Icon=
 [main]
 3 Auriok Champion
 3 White Knight

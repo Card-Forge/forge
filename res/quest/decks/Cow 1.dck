@@ -1,6 +1,10 @@
-Cow 1
-[general]
-constructed
+[metadata]
+Name=Cow 1
+DisplayName=Cow
+Difficulty=easy
+Description=Mono R Minotaur deck
+Deck Type=constructed
+Icon=
 [main]
 24 Mountain
 4 Anaba Ancestor

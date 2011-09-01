@@ -1,6 +1,10 @@
-Alice in Wonderland 2
-[general]
-constructed
+[metadata]
+Name=Alice in Wonderland 2
+DisplayName=Alice in Wonderland
+Difficulty=medium
+Description=WG Lands deck with manlands, cycle lands and Life from the Loam
+Deck Type=constructed
+Icon=
 [main]
 4 Secluded Steppe
 4 Tranquil Thicket
