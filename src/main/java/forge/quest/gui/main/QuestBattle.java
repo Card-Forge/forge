@@ -56,7 +56,7 @@ public class QuestBattle extends QuestSelectablePanel {
     public static List<QuestSelectablePanel> getBattles() {
         List<QuestSelectablePanel> opponentList = new ArrayList<QuestSelectablePanel>();
 
-        String[] oppDecks = QuestBattleManager.getOpponents();
+        String[] oppDecks = QuestBattleManager.generateBattles();
         for (String oppDeckName : oppDecks) {
             // Get deck object and properties for this opponent.
             oppDeck    = QuestBattleManager.getAIDeckFromFile(oppDeckName);

@@ -40,6 +40,8 @@ public class QuestBattleManager {
 
     /**
      * <p>removeAIDeck.</p>
+     * Removes a deck object stored in the 
+     *{@link forge.quest.gui.main.aiDecks} map.
      *
      * @param deckName a {@link java.lang.String} object.
      */
@@ -49,6 +51,8 @@ public class QuestBattleManager {
 
     /**
      * <p>addAIDeck.</p>
+     * Adds a deck object stored in the 
+     *{@link forge.quest.gui.main.aiDecks} map.
      *
      * @param d a {@link forge.deck.Deck} object.
      */
@@ -74,6 +78,17 @@ public class QuestBattleManager {
     }
     
     /**
+     * <p>getAIDeckNames.</p>
+     *  Returns a list of decks stored in the
+     *  {@link forge.quest.gui.main.aiDecks} map. 
+     *
+     * @return a {@link java.util.List} object.
+     */
+    public static List<String> getAIDeckNames() {
+        return new ArrayList<String>(aiDecks.keySet());
+    }
+    
+    /**
      * <p>getDeckFromFile.</p>
      * Returns a deck object built from a file name.
      *
@@ -85,18 +100,12 @@ public class QuestBattleManager {
         final DeckManager manager = new DeckManager(file);
         return manager.getDeck(deckName);
     } 
-    
-    /**
-     * <p>getAIDeckNames.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public static List<String> getAIDeckNames() {
-        return new ArrayList<String>(aiDecks.keySet());
-    }
 
     /**
      * <p>getOpponent.</p>
+     * 
+     * Badly named; AllZoneUtil already has a method called getOpponents.
+     * ?????
      *
      * @param aiDeck a {@link java.util.List} object.
      * @param number a int.
@@ -108,16 +117,16 @@ public class QuestBattleManager {
         Collections.shuffle(deckListCopy, new Random(AllZone.getQuestData().getRandomSeed()));
 
         return deckListCopy.get(number);
-
     }
 
 
     /**
-     * <p>getOpponents.</p>
+     * <p>generateBattles.</p>
+     * Generates an array of new opponents based on current win conditions.
      *
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] getOpponents() {
+    public static String[] generateBattles() {
         int index = AllZone.getQuestData().getDifficultyIndex();
 
         if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForMediumAI(index)) {
@@ -163,6 +172,7 @@ public class QuestBattleManager {
 
     /**
      * <p>readFile.</p>
+     * A reader util for accessing the AI deck list text files.
      *
      * @param file a {@link java.io.File} object.
      * @param aiDecks a {@link java.util.List} object.
@@ -172,7 +182,7 @@ public class QuestBattleManager {
         ArrayList<String> list = FileUtil.readFile(file);
 
         //remove any blank lines
-        ArrayList<String> noBlankLines = new ArrayList<String>();
+         ArrayList<String> noBlankLines = new ArrayList<String>();
         String s;
         for (String aList : list) {
             s = aList.trim();
@@ -187,7 +197,6 @@ public class QuestBattleManager {
                     "QuestData : readFile() error, file %s is too short, it must contain at least 3 ai deck names",
                     file);
         }
-
 
         for (String aList : list) {
             if (!aiDecks.contains(aList)) {
