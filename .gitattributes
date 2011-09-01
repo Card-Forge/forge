@@ -9785,6 +9785,7 @@ src/main/java/forge/gui/deckeditor/Gui_BoosterDraft.java svneol=native#text/plai
 src/main/java/forge/gui/deckeditor/TableColumnInfo.java -text
 src/main/java/forge/gui/deckeditor/TableModel.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/TableSorter.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/TableSorterCascade.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
 src/main/java/forge/gui/game/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPanel.java svneol=native#text/plain

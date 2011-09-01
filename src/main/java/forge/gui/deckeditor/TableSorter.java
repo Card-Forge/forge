@@ -31,13 +31,12 @@ public class TableSorter implements Comparator<Entry<CardPrinted, Integer>> {
         this.field = field;
         ascending = in_ascending;
     }
-    
+
     @SuppressWarnings("rawtypes")
     public static final TableSorter byNameThenSet = new TableSorter(
         new Lambda1<Comparable, Entry<CardPrinted, Integer>>() {
         @Override public Comparable apply(final Entry<CardPrinted, Integer> from) { return from.getKey(); }
         }, true);
-
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -45,8 +44,6 @@ public class TableSorter implements Comparator<Entry<CardPrinted, Integer>> {
         Comparable obj1 = field.apply(arg0);
         Comparable obj2 = field.apply(arg1);
         //System.out.println(String.format("%s vs %s _______ %s vs %s", arg0, arg1, obj1, obj2));
-        if (ascending) { return obj1.compareTo(obj2); }
-        else { return obj2.compareTo(obj1); }
+        return ascending ? obj1.compareTo(obj2) : obj2.compareTo(obj1);
     }
-
 }

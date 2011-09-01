@@ -63,10 +63,6 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
     private static final long serialVersionUID = 130339644136746796L;
 
     public DeckEditorMenu customMenu;
-    public Gui_ProgressBarWindow gPBW = new Gui_ProgressBarWindow();
-
-    // private ImageIcon upIcon = Constant.IO.upIcon;
-    // private ImageIcon downIcon = Constant.IO.downIcon;
 
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
@@ -87,6 +83,8 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
     private JTextField txtCardRules = new JTextField();
     private JComboBox searchSetCombo = new JComboBox();
     private JButton clearFilterButton = new JButton();
+    
+    private boolean isConstructed = false;
 
     /** {@inheritDoc} */
     @Override
@@ -97,48 +95,19 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
     /** {@inheritDoc} */
     public void setDecks(CardPoolView topPool, CardPoolView bottomPool) {
         top = new CardPool(topPool);
-        bottom = bottomPool;
-
         topModel.clear();
-        bottomModel.clear();
-
-
-        if (gPBW.isVisible())
-            gPBW.setProgressRange(0, top.countDistinct() + bottom.countDistinct());
-
-        // this should have been called each step :)
-        if (gPBW.isVisible()) { gPBW.increment(); }
-
-        Predicate<CardRules> filter = buildFilter();
-        topModel.addCards(filter.select(top, CardPoolView.fnToCard));
-
-        // update bottom
-        bottomModel.addCards(bottom);
-
-        if (gPBW.isVisible())
-            gPBW.setTitle("Sorting Deck Editor");
-        
+        topModel.addCards(buildFilter().select(top, CardPoolView.fnToCard));
         topModel.resort();
         topTable.repaint();
+
+        bottom = bottomPool;
+        bottomModel.clear();
+        bottomModel.addCards(bottom);
         bottomModel.resort();
         bottomTable.repaint();
     }// updateDisplay
 
-    /**
-     * <p>
-     * updateDisplay.
-     * </p>
-     */
-    
 
-    /**
-     * <p>
-     * show.
-     * </p>
-     * 
-     * @param exitCommand
-     *            a {@link forge.Command} object.
-     */
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = 5210924838133689758L;
@@ -148,10 +117,6 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
                 exitCommand.execute();
             }
         };
-
-        // pm = new ProgressMonitor(this, "Loading Deck Editor", "", 0, 20000);
-        gPBW.setTitle("Loading Deck Editor");
-        gPBW.setVisible(true);
 
         customMenu = new DeckEditorMenu(this, exit);
         this.setJMenuBar(customMenu);
@@ -166,14 +131,16 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
 
         setup();
 
+        isConstructed = Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed); 
+
         // show cards, makes this user friendly
-        if (Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed))
+        if (isConstructed) {
             customMenu.newConstructed();
+        }
 
         topModel.sort(1, true);
         bottomModel.sort(1, true);
 
-        gPBW.dispose();
     }// show(Command)
 
 
@@ -464,6 +431,7 @@ public class DeckEditor extends DeckEditorBase implements NewConstants {
             if (!customMenu.getGameType().equals(Constant.GameType.Constructed)) {
                 top.remove(c);
                 topModel.removeCard(c);
+                topModel.resort();
             }
             fixSelection(topModel, topTable, n);
         }// if(valid row)        

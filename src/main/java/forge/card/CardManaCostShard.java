@@ -97,6 +97,7 @@ public class CardManaCostShard {
         if (0 != (shard & Atom.BLACK)) { cost += 0.0080f;  }
         if (0 != (shard & Atom.RED)) { cost += 0.0320f; }
         if (0 != (shard & Atom.GREEN)) { cost += 0.1280f; }
+        if (0 != (shard & Atom.OR_2_LIFE)) { cost += 0.00003f; }
         return cost;
     }
 

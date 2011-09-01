@@ -21,6 +21,7 @@ import java.awt.event.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Stack;
 
 
 /**
@@ -37,14 +38,74 @@ public class TableModel extends AbstractTableModel {
 
     @SuppressWarnings("rawtypes") // We use raw comparables to provide fields for sorting 
 
+    private final class SortOrders {
+        private class Order {
+            public final int sortColumn;
+            public boolean isSortAsc = true;
+            public Order(int col) { sortColumn = col; }
+        };
 
-    
-    private int sortColumn;
-    private boolean isSortAsc = true;
+        private final int MAX_DEPTH = 3;
+        Order[] orders = new Order[] {null, null, null};
+        private TableSorterCascade sorter = null;
+        private boolean isSorterReady = false;
+        private int indexOfColumn(final int column) {
+            int posColumn = orders.length - 1;
+            for (; posColumn >= 0; posColumn--) {
+                if (orders[posColumn] != null && orders[posColumn].sortColumn == column) {
+                    break;
+                }
+            }
+            return posColumn;
+        }
+
+        // index of column to sort by, desired direction
+        public void add(final int column, boolean wantAsc) {
+            add(column);
+            orders[0].isSortAsc = wantAsc;
+            isSorterReady = false;
+        }
+
+        // puts desired direction on top, set "asc"; if already was on top, inverts direction; 
+        public void add(final int column) {
+            int posColumn = indexOfColumn(column);
+            switch (posColumn) {
+                case -1: // no such column here - let's add then
+                    System.arraycopy(orders, 0, orders, 1, MAX_DEPTH - 1);
+                    orders[0] = new Order(column);
+                    break;
+                case 0: // found at top-level, should invert
+                    orders[0].isSortAsc ^= true; // invert
+                    break;
+                default: // found somewhere, move down others, set this one onto top;
+                    System.arraycopy(orders, 0, orders, 1, posColumn);
+                    orders[0] = new Order(column);
+                    break;
+            }
+            isSorterReady = false;
+        }
+
+        public TableSorterCascade getSorter() {
+            if (!isSorterReady) {
+                TableSorter[] oneColSorters = new TableSorter[MAX_DEPTH];
+                for (int i = 0; i < orders.length; i++) {
+                    Order order = orders[i];
+                    if (order == null) {
+                        oneColSorters[i] = null;
+                    } else {
+                        oneColSorters[i] = new TableSorter(columns.get(order.sortColumn).fnSort, order.isSortAsc);
+                    }
+                }
+                sorter = new TableSorterCascade(oneColSorters);
+            }
+            return sorter;
+        }
+    }
 
     private CardPool data = new CardPool();
     private final CardDisplay cardDisplay;
     private final List<TableColumnInfo<CardPrinted>> columns;
+    private final SortOrders sortOrders = new SortOrders();
 
     public TableModel(final CardDisplay cd, List<TableColumnInfo<CardPrinted>> columnsToShow ) { 
         cardDisplay = cd;
@@ -156,13 +217,9 @@ public class TableModel extends AbstractTableModel {
           int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
 
           if (modelIndex < 0) { return; }
-          if (sortColumn == modelIndex) {
-            isSortAsc = !isSortAsc;
-          }
-          else {
-              isSortAsc = true;
-              sortColumn = modelIndex;
-          }
+
+          // This will invert if needed
+          sortOrders.add(modelIndex);
 
           for (int i = 0; i < columns.size(); i++) {
             TableColumn column = colModel.getColumn(i);
@@ -215,16 +272,13 @@ public class TableModel extends AbstractTableModel {
     }//addCardListener()
 
 
-    public void resort() { 
-        TableSorter sorter = new TableSorter(columns.get(sortColumn).fnSort, isSortAsc);
-        Collections.sort(data.getOrderedList(), sorter);
+    public void resort() {
+        Collections.sort(data.getOrderedList(), sortOrders.getSorter());
     }
-       
-    public void sort( int iCol, boolean isAsc )
-    {        
-        sortColumn = iCol;
-        isSortAsc = isAsc;
-        resort(); 
+
+    public void sort( int iCol, boolean isAsc ) {
+        sortOrders.add(iCol, isAsc);
+        resort();
     }
 
 }//CardTableModel

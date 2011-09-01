@@ -163,7 +163,7 @@ public class Gui_BoosterDraft extends JFrame implements NewConstants, NewConstan
 
         //Use both so that when "un"maximizing, the frame isn't tiny
         setSize(1024, 740);
-        setExtendedState(Frame.MAXIMIZED_BOTH);
+        //setExtendedState(Frame.MAXIMIZED_BOTH);
     }//setupAndDisplay()
 
 
