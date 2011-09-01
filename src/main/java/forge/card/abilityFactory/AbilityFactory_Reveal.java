@@ -653,6 +653,7 @@ public final class AbilityFactory_Reveal {
         sb.append(". Put ");
 
         String found = params.get("FoundDestination");
+        String revealed = params.get("RevealedDestination");
         if (found != null) {
 
             sb.append(untilAmount > 1 ? "those cards" : "that card");
@@ -662,15 +663,20 @@ public final class AbilityFactory_Reveal {
             if (found.equals(Constant.Zone.Hand)) {
                 sb.append("into his or her hand ");
             }
+            
+            if (revealed.equals(Constant.Zone.Graveyard)) {
+                sb.append("and all other cards into his or her graveyard.");
+            }
+            if (revealed.equals(Constant.Zone.Exile)) {
+                sb.append("and exile all other cards revealed this way.");
+            }
+        } else {
+            if (revealed.equals(Constant.Zone.Hand)) {
+                sb.append("all cards revealed this way into his or her hand");
+            }
         }
 
-        String revealed = params.get("RevealedDestination");
-        if (revealed.equals(Constant.Zone.Graveyard)) {
-            sb.append("and all other cards into his or her graveyard.");
-        }
-        if (revealed.equals(Constant.Zone.Exile)) {
-            sb.append("and exile all other cards revealed this way.");
-        }
+
 
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
