@@ -2,11 +2,20 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * <p>AbilityFactory_Copy class.</p>
@@ -14,7 +23,11 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Copy {
+public final class AbilityFactory_Copy {
+
+    private AbilityFactory_Copy() {
+        throw new AssertionError();
+    }
 
     // *************************************************************************
     // ************************* CopyPermanent *********************************
@@ -47,7 +60,7 @@ public class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return copyPermanentTriggerAI(af, this, mandatory);
             }
 
@@ -110,7 +123,7 @@ public class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return copyPermanentTriggerAI(af, this, mandatory);
             }
 
@@ -125,28 +138,32 @@ public class AbilityFactory_Copy {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String copyPermanentStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String copyPermanentStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         HashMap<String, String> params = af.getMapParams();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         sb.append("Copy ");
         Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
             sb.append(it.next());
-            if (it.hasNext()) sb.append(", ");
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
         }
         sb.append(".");
 
@@ -166,7 +183,7 @@ public class AbilityFactory_Copy {
      * @return a boolean.
      */
     private static boolean copyPermanentCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-    	//Card source = sa.getSourceCard();
+        //Card source = sa.getSourceCard();
         //TODO - I'm sure someone can do this AI better
 
         HashMap<String, String> params = af.getMapParams();
@@ -174,12 +191,15 @@ public class AbilityFactory_Copy {
             return false;
         } else {
             double chance = .4;    // 40 percent chance with instant speed stuff
-            if (AbilityFactory.isSorcerySpeed(sa))
+            if (AbilityFactory.isSorcerySpeed(sa)) {
                 chance = .667;    // 66.7% chance for sorcery speed (since it will never activate EOT)
+            }
             Random r = MyRandom.random;
-            if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1))
-            	return copyPermanentTriggerAI(af, sa, false);
-            else return false;
+            if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
+                return copyPermanentTriggerAI(af, sa, false);
+            } else {
+                return false;
+            }
         }
     }
 
@@ -191,12 +211,15 @@ public class AbilityFactory_Copy {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean copyPermanentTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean copyPermanentTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
         //HashMap<String,String> params = af.getMapParams();
         Card source = sa.getSourceCard();
 
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         //////
         // Targeting
@@ -210,7 +233,9 @@ public class AbilityFactory_Copy {
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -227,7 +252,9 @@ public class AbilityFactory_Copy {
                 }
 
                 if (choice == null) {    // can't find anything left
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -271,10 +298,11 @@ public class AbilityFactory_Copy {
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         hostCard.clearClones();
 
@@ -287,7 +315,7 @@ public class AbilityFactory_Copy {
                 Card[] crds = new Card[multiplier];
 
                 for (int i = 0; i < multiplier; i++) {
-                    //TODO: Use central copy methods
+                    //TODO Use central copy methods
                     Card copy;
                     if (!c.isToken()) {
                         //copy creature and put it onto the battlefield
@@ -363,7 +391,8 @@ public class AbilityFactory_Copy {
                             //and the token shouldn't be sacrificed
                             if (AllZoneUtil.isCardInPlay(target[index])) {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
-                                    AllZone.getGameAction().sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+                                    //maybe do a setSacrificeAtEOT, but probably not.
+                                    AllZone.getGameAction().sacrifice(target[index]);
                                 } else if (params.get("AtEOT").equals("Exile")) {
                                     AllZone.getGameAction().exile(target[index]);
                                 }
@@ -381,16 +410,16 @@ public class AbilityFactory_Copy {
                             sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
                             AllZone.getStack().addSimultaneousStackEntry(sac);
                         }
-                    };//Command
+                    }; //Command
                     if (params.containsKey("AtEOT")) {
                         AllZone.getEndOfTurn().addAt(atEOT);
                     }
                     //end copied Kiki code
 
                 }
-            }//end canTarget
-        }//end foreach Card
-    }//end resolve
+            } //end canTarget
+        } //end foreach Card
+    } //end resolve
 
     // *************************************************************************
     // ************************* CopySpell *************************************
@@ -423,7 +452,7 @@ public class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return copySpellTriggerAI(af, this, mandatory);
             }
 
@@ -486,7 +515,7 @@ public class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return copySpellTriggerAI(af, this, mandatory);
             }
 
@@ -501,37 +530,39 @@ public class AbilityFactory_Copy {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String copySpellStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String copySpellStackDescription(final AbilityFactory af, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         HashMap<String, String> params = af.getMapParams();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         ArrayList<SpellAbility> tgtSpells;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
-        else
+        } else {
             tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         sb.append("Copy ");
         // TODO Someone fix this Description when Copying Charms
         Iterator<SpellAbility> it = tgtSpells.iterator();
         while (it.hasNext()) {
             sb.append(it.next().getSourceCard());
-            if (it.hasNext()) sb.append(", ");
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
         }
         int amount = 1;
-        if(params.containsKey("Amount"))
-        {
-            amount = AbilityFactory.calculateAmount(af.getHostCard(),params.get("Amount"),sa);
+        if (params.containsKey("Amount")) {
+            amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
         }
-        if(amount > 1)
-        {
+        if (amount > 1) {
             sb.append(amount).append(" times");
         }
         sb.append(".");
@@ -564,7 +595,7 @@ public class AbilityFactory_Copy {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean randomReturn = false;
 
         if (af.hasSubAbility()) {
@@ -587,38 +618,38 @@ public class AbilityFactory_Copy {
         Card card = af.getHostCard();
 
         int amount = 1;
-        if(params.containsKey("Amount"))
-        {
-            amount = AbilityFactory.calculateAmount(card,params.get("Amount"),sa);
+        if (params.containsKey("Amount")) {
+            amount = AbilityFactory.calculateAmount(card, params.get("Amount"), sa);
         }
 
         ArrayList<SpellAbility> tgtSpells;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
-        else
+        } else {
             tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        if (tgtSpells.size() == 0)
+        if (tgtSpells.size() == 0) {
             return;
+        }
 
         SpellAbility chosenSA = null;
-        if (tgtSpells.size() == 1)
+        if (tgtSpells.size() == 1) {
             chosenSA = tgtSpells.get(0);
-        else if (sa.getActivatingPlayer().isHuman())
+        } else if (sa.getActivatingPlayer().isHuman()) {
             chosenSA = (SpellAbility) GuiUtils.getChoice("Select a spell to copy", tgtSpells.toArray());
-        else
+        } else {
             chosenSA = tgtSpells.get(0);
-        
+        }
+
         chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
-        if (tgt == null || CardFactoryUtil.canTarget(card, chosenSA.getSourceCard()))
-        {
-            for(int i=0;i<amount;i++)
-            {
+        if (tgt == null || CardFactoryUtil.canTarget(card, chosenSA.getSourceCard())) {
+            for (int i = 0; i < amount; i++) {
                 AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }
         }
-    }//end resolve
+    } //end resolve
 
-}//end class AbilityFactory_Copy
+} //end class AbilityFactory_Copy
