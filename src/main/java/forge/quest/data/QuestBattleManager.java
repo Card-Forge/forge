@@ -57,17 +57,17 @@ public class QuestBattleManager {
     }
 
     /**
-     * <p>getAIDeck.</p>
+     * <p>getAIDeckFromMap.</p>
      * Returns a deck object stored in the 
      *{@link forge.quest.gui.main.aiDecks} map.
      *
      * @param deckName a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    public static Deck getAIDeck(String deckName) {
+    public static Deck getAIDeckFromMap(String deckName) {
         if (!aiDecks.containsKey(deckName)) {
             ErrorViewer.showError(new Exception(),
-                    "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
+                    "QuestData : getAIDeckFromMap(String deckName) error, deck name not found - %s", deckName);
         }
 
         return aiDecks.get(deckName);
@@ -80,7 +80,7 @@ public class QuestBattleManager {
      * @param deckName a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    public static Deck getDeckFromFile(String deckName) {
+    public static Deck getAIDeckFromFile(String deckName) {
         final File file = ForgeProps.getFile(NewConstants.QUEST.DECKS);
         final DeckManager manager = new DeckManager(file);
         return manager.getDeck(deckName);

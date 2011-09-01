@@ -611,7 +611,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 StringBuffer allText = new StringBuffer();
 
                 for (String aNameList : nameList) {
-                    deck = QuestBattleManager.getAIDeck(aNameList);
+                    deck = QuestBattleManager.getAIDeckFromMap(aNameList);
                     allText.append(deck.getName()).append("\r\n");
                     allText.append(getExportDeckText(deck));
                     allText.append("++++++++++++++++++++++++++++++++++++++++++++++++++++++ \r\n \r\n");
@@ -634,7 +634,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
 
                 setComputerPlayer(deckName);
 
-                Deck d = QuestBattleManager.getAIDeck(deckName);
+                Deck d = QuestBattleManager.getAIDeckFromMap(deckName);
                 CardList deck = new CardList();
 
                 for (int i = 0; i < d.countMain(); i++) {

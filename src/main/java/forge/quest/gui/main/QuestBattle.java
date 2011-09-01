@@ -59,7 +59,7 @@ public class QuestBattle extends QuestSelectablePanel {
         String[] oppDecks = QuestBattleManager.getOpponents();
         for (String oppDeckName : oppDecks) {
             // Get deck object and properties for this opponent.
-            oppDeck    = QuestBattleManager.getDeckFromFile(oppDeckName);
+            oppDeck    = QuestBattleManager.getAIDeckFromFile(oppDeckName);
             
             oppName         = oppDeck.getMetadata("DisplayName");
             oppDiff         = oppDeck.getMetadata("Difficulty");
