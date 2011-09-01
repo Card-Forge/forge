@@ -6,12 +6,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -99,16 +101,7 @@ public class SplashFrame extends JFrame {
         btnClose.setFocusPainted(false);
         contentPane.add(btnClose);
         
-        btnClose.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae)
-            {
-                setSplashHasBeenClosed(true);
-                dispose();
-            }
-        });
-        
+        // Action handler: button hover effect
         btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -121,7 +114,15 @@ public class SplashFrame extends JFrame {
             }
         });
         
-        // BG fills up with progress bar???
+        // Action handler: button close
+        btnClose.addActionListener(new closeAction());
+        
+        // Action handler: esc key close
+        contentPane.getInputMap().put(
+                KeyStroke.getKeyStroke( "ESCAPE" ), "escAction" );
+
+        contentPane.getActionMap().put("escAction", new closeAction());
+        
         
         // Instantiate model and view and tie together.
         monitorModel = new SplashProgressModel();
@@ -178,6 +179,19 @@ public class SplashFrame extends JFrame {
      */
     public final void setSplashHasBeenClosed(boolean neoState) {
         SplashHasBeenClosed = neoState;
+    }
+    
+    /**
+     * <p>closeAction</p>
+     * Closes the splash frame by toggling "has been closed" switch
+     * (to cancel preloading) and dispose() (to discard JFrame).
+     * @param SplashHasBeenClosed boolean.
+     */ 
+    private class closeAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
+            setSplashHasBeenClosed(true);
+            dispose();
+        }
     }
 
 }
