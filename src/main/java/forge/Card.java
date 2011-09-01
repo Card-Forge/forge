@@ -31,7 +31,7 @@ import forge.card.trigger.Trigger;
  * @author Forge
  * @version $Id$
  */
-public class Card extends MyObservable implements Comparable<Card> {
+public class Card extends GameEntity implements Comparable<Card> {
     private static int nextUniqueNumber = 1;
     private int uniqueNumber = nextUniqueNumber++;
 
@@ -120,7 +120,6 @@ public class Card extends MyObservable implements Comparable<Card> {
     private int damage;
 
     private int nShield; 	// regeneration
-    private int preventNextDamage = 0;
 
     private int turnInZone;
 
@@ -144,7 +143,6 @@ public class Card extends MyObservable implements Comparable<Card> {
 
     private Player owner = null;
     private ArrayList<Object> controllerObjects = new ArrayList<Object>();
-    private String name = "";
     private String imageName = "";
     private String rarity = "";
     private String text = "";
@@ -2032,51 +2030,6 @@ public class Card extends MyObservable implements Comparable<Card> {
         return res;
     }
 
-
-    //PreventNextDamage
-    /**
-     * <p>Setter for the field <code>preventNextDamage</code>.</p>
-     *
-     * @param n a int.
-     */
-    public void setpreventNextDamage(int n) {
-        preventNextDamage = n;
-    }
-
-    /**
-     * <p>Getter for the field <code>preventNextDamage</code>.</p>
-     *
-     * @return a int.
-     */
-    public int getPreventNextDamage() {
-        return preventNextDamage;
-    }
-
-    /**
-     * <p>addPreventNextDamage.</p>
-     *
-     * @param n a int.
-     */
-    public void addPreventNextDamage(int n) {
-        preventNextDamage += n;
-    }
-
-    /**
-     * <p>subtractPreventNextDamage.</p>
-     *
-     * @param n a int.
-     */
-    public void subtractPreventNextDamage(int n) {
-        preventNextDamage -= n;
-    }
-
-    /**
-     * <p>resetPreventNextDamage.</p>
-     */
-    public void resetPreventNextDamage() {
-        preventNextDamage = 0;
-    }
-
     //shield = regeneration
     /**
      * <p>setShield.</p>
@@ -2683,16 +2636,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      */
     public String getImageName() {
         if (!imageName.equals("")) return imageName;
-        return name;
-    }
-
-    /**
-     * <p>Getter for the field <code>name</code>.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getName() {
-        return name;
+        return getName();
     }
 
     /**
@@ -2791,16 +2735,6 @@ public class Card extends MyObservable implements Comparable<Card> {
     public void setControllerObjects(ArrayList<Object> in)
     {
         controllerObjects = in;
-    }
-
-    /**
-     * <p>Setter for the field <code>name</code>.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     */
-    public void setName(String s) {
-        name = s;
-        this.updateObservers();
     }
 
     /**
@@ -4748,6 +4682,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param source a {@link forge.Card} object.
      * @return a boolean.
      */
+    @Override
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
 
         if (getName().equals("Mana Pool") || isImmutable()) return false;
@@ -4783,6 +4718,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param source a {@link forge.Card} object.
      * @return a boolean.
      */
+    @Override
     public boolean hasProperty(String Property, final Player sourceController, final Card source) {
         //by name can also have color names, so needs to happen before colors.
         if (Property.startsWith("named")) {
@@ -5285,9 +5221,9 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @return a int.
      */
     public int getKillDamage() {
-        int killDamage = getLethalDamage() + preventNextDamage;
-        if (killDamage > preventNextDamage && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))
-            killDamage = 1 + preventNextDamage;
+        int killDamage = getLethalDamage() + getPreventNextDamage();
+        if (killDamage > getPreventNextDamage() && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))
+            killDamage = 1 + getPreventNextDamage();
 
         return killDamage;
     }
@@ -5433,26 +5369,6 @@ public class Card extends MyObservable implements Comparable<Card> {
         return restDamage;
     }
 
-    //This function helps the AI calculate the actual amount of damage an effect would deal
-    /**
-     * <p>predictDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
-     * @return a int.
-     */
-    public int predictDamage(final int damage, final Card source, final boolean isCombat) {
-
-        int restDamage = damage;
-
-        restDamage = staticReplaceDamage(restDamage, source, isCombat);
-
-        restDamage = staticDamagePrevention(restDamage, source, isCombat);
-
-        return restDamage;
-    }
-
     //This should be also usable by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>staticDamagePrevention.</p>
@@ -5483,6 +5399,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
@@ -5561,6 +5478,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int preventDamage(final int damage, Card source, boolean isCombat) {
 
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
@@ -5581,12 +5499,12 @@ public class Card extends MyObservable implements Comparable<Card> {
             this.subtractCounter(Counters.P1P1, 1);
         }
 
-        if (restDamage >= preventNextDamage) {
-            restDamage = restDamage - preventNextDamage;
-            preventNextDamage = 0;
+        if (restDamage >= getPreventNextDamage()) {
+            restDamage = restDamage - getPreventNextDamage();
+            setPreventNextDamage(0);
         } else {
+            setPreventNextDamage(getPreventNextDamage() - restDamage);
             restDamage = 0;
-            preventNextDamage = preventNextDamage - restDamage;
         }
 
         if (getName().equals("Phyrexian Hydra")) {
@@ -5606,6 +5524,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
 
         int restDamage = damage;
@@ -5676,6 +5595,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int replaceDamage(final int damage, Card source, boolean isCombat) {
 
         int restDamage = damage;
@@ -5712,37 +5632,6 @@ public class Card extends MyObservable implements Comparable<Card> {
         }
     }
 
-    //This is for noncombat damage
-    /**
-     * <p>addDamage.</p>
-     *
-     * @param damageIn a int.
-     * @param source a {@link forge.Card} object.
-     */
-    public void addDamage(final int damageIn, final Card source) {
-        int damageToAdd = damageIn;
-
-        damageToAdd = replaceDamage(damageToAdd, source, false);
-        damageToAdd = preventDamage(damageToAdd, source, false);
-
-        addDamageAfterPrevention(damageToAdd, source, false);
-
-    }
-
-    /**
-     * <p>addDamageWithoutPrevention.</p>
-     *
-     * @param damageIn a int.
-     * @param source a {@link forge.Card} object.
-     */
-    public void addDamageWithoutPrevention(final int damageIn, final Card source) {
-        int damageToAdd = damageIn;
-
-        damageToAdd = replaceDamage(damageToAdd, source, false);
-
-        addDamageAfterPrevention(damageToAdd, source, false);
-    }
-
     //This function handles damage after replacement and prevention effects are applied
     /**
      * <p>addDamageAfterPrevention.</p>
@@ -5751,6 +5640,7 @@ public class Card extends MyObservable implements Comparable<Card> {
      * @param source a {@link forge.Card} object.
      * @param isCombat a boolean.
      */
+    @Override
     public void addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
         int damageToAdd = damageIn;
         boolean wither = false;

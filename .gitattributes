@@ -9551,6 +9551,7 @@ src/main/java/forge/GUI_DeckAnalysis.java svneol=native#text/plain
 src/main/java/forge/GUI_ImportPicture.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
+src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GuiDisplay4.java svneol=native#text/plain
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/GuiFilter.java svneol=native#text/plain

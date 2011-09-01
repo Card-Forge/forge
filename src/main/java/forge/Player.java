@@ -16,12 +16,10 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public abstract class Player extends MyObservable {
-    protected String name;
+public abstract class Player extends GameEntity {
     protected int poisonCounters;
     protected int life;
     protected int assignedDamage;
-    protected int preventNextDamage;
     protected int numPowerSurgeLands;
 
     protected boolean altWin = false;
@@ -67,7 +65,7 @@ public abstract class Player extends MyObservable {
     public Player(String myName, int myLife, int myPoisonCounters) {
         reset();
         
-        name = myName;
+        setName(myName);
         life = myLife;
         poisonCounters = myPoisonCounters;
     }
@@ -79,7 +77,7 @@ public abstract class Player extends MyObservable {
         life = 20;
         poisonCounters = 0;
         assignedDamage = 0;
-        preventNextDamage = 0;
+        setPreventNextDamage(0);
         lastDrawnCard = null;
         numDrawnThisTurn = 0;
         slowtripList = new CardList();
@@ -98,15 +96,6 @@ public abstract class Player extends MyObservable {
         manaPool = new ManaPool(this);
         
         this.updateObservers();
-    }
-
-    /**
-     * <p>Getter for the field <code>name</code>.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -130,7 +119,7 @@ public abstract class Player extends MyObservable {
      * @return a boolean.
      */
     public boolean isPlayer(Player p1) {
-        return p1 != null && p1.getName().equals(this.name);
+        return p1 != null && p1.getName().equals(getName());
     }
 
     /**
@@ -322,35 +311,6 @@ public abstract class Player extends MyObservable {
     //
     //////////////////////////
 
-    /**
-     * <p>addDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     */
-    public void addDamage(final int damage, final Card source) {
-        int damageToDo = damage;
-
-        damageToDo = replaceDamage(damageToDo, source, false);
-        damageToDo = preventDamage(damageToDo, source, false);
-
-        addDamageAfterPrevention(damageToDo, source, false);
-    }
-
-    /**
-     * <p>addDamageWithoutPrevention.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     */
-    public void addDamageWithoutPrevention(final int damage, final Card source) {
-        int damageToDo = damage;
-
-        damageToDo = replaceDamage(damageToDo, source, false);
-
-        addDamageAfterPrevention(damageToDo, source, false);
-    }
-
     //This function handles damage after replacement and prevention effects are applied
     /**
      * <p>addDamageAfterPrevention.</p>
@@ -359,6 +319,7 @@ public abstract class Player extends MyObservable {
      * @param source a {@link forge.Card} object.
      * @param isCombat a boolean.
      */
+    @Override
     public void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         int damageToDo = damage;
 
@@ -420,6 +381,7 @@ public abstract class Player extends MyObservable {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
@@ -478,6 +440,7 @@ public abstract class Player extends MyObservable {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
 
         int restDamage = damage;
@@ -541,6 +504,7 @@ public abstract class Player extends MyObservable {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int replaceDamage(final int damage, Card source, boolean isCombat) {
 
         int restDamage = staticReplaceDamage(damage, source, isCombat);
@@ -578,6 +542,7 @@ public abstract class Player extends MyObservable {
      * @param isCombat a boolean.
      * @return a int.
      */
+    @Override
     public int preventDamage(final int damage, Card source, boolean isCombat) {
 
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
@@ -592,12 +557,12 @@ public abstract class Player extends MyObservable {
 
         restDamage = staticDamagePrevention(restDamage, source, isCombat);
 
-        if (restDamage >= preventNextDamage) {
-            restDamage = restDamage - preventNextDamage;
-            preventNextDamage = 0;
+        if (restDamage >= getPreventNextDamage()) {
+            restDamage = restDamage - getPreventNextDamage();
+            setPreventNextDamage(0);
         } else {
+            setPreventNextDamage(getPreventNextDamage() - restDamage);
             restDamage = 0;
-            preventNextDamage = preventNextDamage - restDamage;
         }
 
         return restDamage;
@@ -648,56 +613,6 @@ public abstract class Player extends MyObservable {
         if (damageToDo > 0) {
             GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
         }
-    }
-
-    //////////////////////////
-    //
-    // methods for handling Damage Prevention
-    //
-    //////////////////////////
-
-    //PreventNextDamage
-    /**
-     * <p>Setter for the field <code>preventNextDamage</code>.</p>
-     *
-     * @param n a int.
-     */
-    public void setpreventNextDamage(int n) {
-        preventNextDamage = n;
-    }
-
-    /**
-     * <p>Getter for the field <code>preventNextDamage</code>.</p>
-     *
-     * @return a int.
-     */
-    public int getPreventNextDamage() {
-        return preventNextDamage;
-    }
-
-    /**
-     * <p>addPreventNextDamage.</p>
-     *
-     * @param n a int.
-     */
-    public void addPreventNextDamage(int n) {
-        preventNextDamage += n;
-    }
-
-    /**
-     * <p>subtractPreventNextDamage.</p>
-     *
-     * @param n a int.
-     */
-    public void subtractPreventNextDamage(int n) {
-        preventNextDamage -= n;
-    }
-
-    /**
-     * <p>resetPreventNextDamage.</p>
-     */
-    public void resetPreventNextDamage() {
-        preventNextDamage = 0;
     }
 
     //////////////////////////
@@ -770,6 +685,7 @@ public abstract class Player extends MyObservable {
      * @param sa
      * @return  a boolean
      */
+	@Override
     public boolean canTarget(SpellAbility sa) {
     	if (hasKeyword("Shroud") ||
     			(!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof")))
@@ -1669,6 +1585,7 @@ public abstract class Player extends MyObservable {
         prowl = new ArrayList<String>();
     }
     
+    @Override
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
         
         String incR[] = Restriction.split("\\.");
@@ -1688,6 +1605,7 @@ public abstract class Player extends MyObservable {
         return true;
     }
     
+    @Override
     public boolean hasProperty(String Property, final Player sourceController, final Card source) {
         
         if (Property.equals("You")) {
@@ -1939,13 +1857,7 @@ public abstract class Player extends MyObservable {
     public boolean equals(Object o) {
         if (o instanceof Player) {
             Player p1 = (Player) o;
-            return p1.getName().equals(name);
+            return p1.getName().equals(getName());
         } else return false;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return name;
     }
 }
