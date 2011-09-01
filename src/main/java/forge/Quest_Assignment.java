@@ -2,6 +2,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.CardPrinted;
+
 /**
  * <p>Quest_Assignment class.</p>
  *
@@ -23,7 +25,7 @@ public class Quest_Assignment {
 
     private boolean repeatable;
 
-    private ArrayList<String> cardRewardList = new ArrayList<String>();
+    private ArrayList<CardPrinted> cardRewardList = new ArrayList<CardPrinted>();
 
     private CardList human = new CardList();
     private ArrayList<String> compy = new ArrayList<String>();
@@ -257,7 +259,7 @@ public class Quest_Assignment {
      *
      * @param cardRewardList a {@link java.util.ArrayList} object.
      */
-    public void setCardRewardList(ArrayList<String> cardRewardList) {
+    public void setCardRewardList(ArrayList<CardPrinted> cardRewardList) {
         this.cardRewardList = cardRewardList;
     }
 
@@ -266,7 +268,7 @@ public class Quest_Assignment {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getCardRewardList() {
+    public ArrayList<CardPrinted> getCardRewardList() {
         return cardRewardList;
     }
 }

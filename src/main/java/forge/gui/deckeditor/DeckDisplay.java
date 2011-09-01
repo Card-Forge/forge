@@ -1,4 +1,9 @@
-package forge;
+package forge.gui.deckeditor;
+
+import forge.CardList;
+import forge.card.CardPool;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,14 +13,14 @@ package forge;
  * @author Forge
  * @version $Id$
  */
-interface DeckDisplay {
+public interface DeckDisplay {
     /**
      * <p>updateDisplay.</p>
      *
      * @param top a {@link forge.CardList} object.
      * @param bottom a {@link forge.CardList} object.
      */
-    public void updateDisplay(CardList top, CardList bottom);
+    public void setDecks(CardPoolView top, CardPoolView bottom);
 
     //top shows available card pool
     //if constructed, top shows all cards
@@ -26,7 +31,7 @@ interface DeckDisplay {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getTop();
+    public CardPoolView getTop();
 
     //bottom shows cards that the user has chosen for his library
     /**
@@ -34,7 +39,7 @@ interface DeckDisplay {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBottom();
+    public CardPoolView getBottom();
 
     /**
      * <p>setTitle.</p>

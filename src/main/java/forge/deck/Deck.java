@@ -1,7 +1,10 @@
 package forge.deck;
 
-import forge.Card;
 import forge.Constant;
+import forge.card.CardDb;
+import forge.card.CardPool;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,8 +25,8 @@ public class Deck implements Comparable<Deck>, Serializable {
 
     private Map<String, String> metadata = new HashMap<String, String>();
 
-    private List<String> main;
-    private List<String> sideboard;
+    private CardPool main;
+    private CardPool sideboard;
 
     /** Constant <code>NAME="Name"</code> */
     public static final String NAME = "Name";
@@ -42,8 +45,8 @@ public class Deck implements Comparable<Deck>, Serializable {
      * <p>Constructor for Deck.</p>
      */
     public Deck() {
-        main = new ArrayList<String>();
-        sideboard = new ArrayList<String>();
+        main = new CardPool();
+        sideboard = new CardPool();
     }
 
     /**
@@ -58,8 +61,8 @@ public class Deck implements Comparable<Deck>, Serializable {
         setDeckType(deckType);
         setName(name);
 
-        this.main = main;
-        this.sideboard = sideboard;
+        this.main = new CardPool(main);
+        this.sideboard = new CardPool(sideboard);
     }
 
     /**
@@ -77,8 +80,8 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @return a {@link java.util.List} object.
      */
-    public List<String> getMain() {
-        return Collections.unmodifiableList(main);
+    public CardPoolView getMain() {
+        return main.getView();
     }
 
     /**
@@ -86,8 +89,8 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @return a {@link java.util.List} object.
      */
-    public List<String> getSideboard() {
-        return Collections.unmodifiableList(sideboard);
+    public CardPoolView getSideboard() {
+        return sideboard.getView();
     }
 
     /**
@@ -161,9 +164,10 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @param cardName a {@link java.lang.String} object.
      */
-    public void addMain(String cardName) {
-        main.add(cardName);
-    }
+    public void addMain(String cardName) { addMain( CardDb.instance().getCard(cardName) ); }
+    public void addMain(CardPrinted card) { main.add(card); }
+    public void addMain(CardPoolView list) { main.addAll(list); }
+
 
     /**
      * <p>countMain.</p>
@@ -171,27 +175,7 @@ public class Deck implements Comparable<Deck>, Serializable {
      * @return a int.
      */
     public int countMain() {
-        return main.size();
-    }
-
-    /**
-     * <p>Getter for the field <code>main</code>.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public String getMain(int index) {
-        return main.get(index);
-    }
-
-    /**
-     * <p>removeMain.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public String removeMain(int index) {
-        return main.remove(index);
+        return main.countAll();
     }
 
     /**
@@ -199,11 +183,8 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void removeMain(Card c) {
-        if (main.contains(c.getName())) {
-            int i = main.indexOf(c.getName());
-            main.remove(i);
-        }
+    public void removeMain(CardPrinted card) {
+        main.remove(card);
     }
 
     /**
@@ -211,9 +192,10 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @param cardName a {@link java.lang.String} object.
      */
-    public void addSideboard(String cardName) {
-        sideboard.add(cardName);
-    }
+    public final void addSideboard(final String cardName) { addSideboard(CardDb.instance().getCard(cardName)); }
+    public final void addSideboard(final CardPrinted card) { sideboard.add(card); }
+    public final void addSideboard(final CardPoolView cards) { sideboard.addAll(cards); }
+
 
     /**
      * <p>countSideboard.</p>
@@ -221,17 +203,7 @@ public class Deck implements Comparable<Deck>, Serializable {
      * @return a int.
      */
     public int countSideboard() {
-        return sideboard.size();
-    }
-
-    /**
-     * <p>Getter for the field <code>sideboard</code>.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public String getSideboard(int index) {
-        return sideboard.get(index);
+        return sideboard.countAll();
     }
 
     /**
@@ -240,8 +212,8 @@ public class Deck implements Comparable<Deck>, Serializable {
      * @param index a int.
      * @return a {@link java.lang.String} object.
      */
-    public String removeSideboard(int index) {
-        return sideboard.remove(index);
+    public void removeFromSideboard(CardPrinted card) {
+        sideboard.remove(card);
     }
 
     /**
@@ -377,4 +349,14 @@ public class Deck implements Comparable<Deck>, Serializable {
     public void addMetaData(String key, String value) {
         metadata.put(key, value);
     }
+
+    public void clearSideboard() {
+        sideboard.clear();
+    }
+
+    public void clearMain() {
+        main.clear();
+        
+    }
+
 }

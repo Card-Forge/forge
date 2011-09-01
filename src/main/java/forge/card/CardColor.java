@@ -50,13 +50,13 @@ public final class CardColor implements Comparable<CardColor> {
     @Override
     public String toString() {
         switch (myColor) {
-            case 0: return "";
-            case WHITE: return "White"; // Constant.Color.White;
-            case BLUE: return "Blue"; // Constant.Color.Blue;
-            case BLACK: return "Black"; // Constant.Color.Black;
-            case RED: return "Red"; // Constant.Color.Red;
-            case GREEN: return "Green"; // Constant.Color.Green;
-            default: return "Multi";
+            case 0: return "colorless";
+            case WHITE: return "white"; // Constant.Color.White;
+            case BLUE: return "blue"; // Constant.Color.Blue;
+            case BLACK: return "black"; // Constant.Color.Black;
+            case RED: return "red"; // Constant.Color.Red;
+            case GREEN: return "green"; // Constant.Color.Green;
+            default: return "multi";
         }
     }
 }

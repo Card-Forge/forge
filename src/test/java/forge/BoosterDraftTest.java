@@ -1,5 +1,7 @@
 package forge;
 
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import org.testng.annotations.Test;
 
@@ -28,14 +30,14 @@ public class BoosterDraftTest implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList nextChoice() {
+    public CardPoolView nextChoice() {
         n--;
         ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         return pack.getBoosterPack();
     }
 
     /** {@inheritDoc} */
-    public void setChoice(Card c) {
+    public void setChoice(CardPrinted c) {
         System.out.println(c.getName());
     }
 

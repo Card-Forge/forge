@@ -1,5 +1,7 @@
 package forge;
 
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,14 +18,14 @@ public interface BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList nextChoice();
+    public CardPoolView nextChoice();
 
     /**
      * <p>setChoice.</p>
      *
      * @param c a {@link forge.Card} object.
      */
-    public void setChoice(Card c);
+    public void setChoice(CardPrinted c);
 
     /**
      * <p>hasNextChoice.</p>

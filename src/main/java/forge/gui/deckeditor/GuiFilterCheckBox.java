@@ -1,4 +1,4 @@
-package forge;
+package forge.gui.deckeditor;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

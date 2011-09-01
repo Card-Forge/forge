@@ -1,6 +1,7 @@
 package forge;
 
 
+import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.abilityFactory.AbilityFactory_Attach;
 import forge.card.cardFactory.CardFactoryInterface;
@@ -25,6 +26,7 @@ import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>GameAction class.</p>
@@ -1052,102 +1054,95 @@ public class GameAction {
             Card.resetUniqueNumber();
 
             Random generator = MyRandom.random;
-
-            for (int i = 0; i < humanDeck.countMain(); i++) {
-            	Card card = new Card();
-            	
-                String cardName = humanDeck.getMain(i);
-                String setCode = "";
-                if (cardName.contains("|")) {
-                    String s[] = cardName.split("\\|", 2);
-                    cardName = s[0];
-                    setCode = s[1];
-                }
-
-                card = c.getCard(cardName, AllZone.getHumanPlayer());
-
-                if (!setCode.equals(""))
-                    card.setCurSetCode(setCode);
-                else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
-                    card.setRandomSetCode();
-
-                if (!card.getCurSetCode().equals("")) {
-                    int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
-                    if (n > 1)
-                        card.setRandomPicture(generator.nextInt(n - 1) + 1);
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-                }
-                
-                // Assign random foiling on approximately 1:20 cards
-                if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
-                	if (MyRandom.percentTrue(5))
-                		card.setFoil(MyRandom.random.nextInt(9) + 1);
-                }
-
-                //System.out.println("human random number:" + card.getRandomPicture());
-                //}
-
-                AllZone.getHumanLibrary().add(card);
-
-                for (Trigger trig : card.getTriggers()) {
-                    AllZone.getTriggerHandler().registerTrigger(trig);
+            for (Entry<CardPrinted, Integer> cardPile : humanDeck.getMain()) {
+                for (int i = 0; i < cardPile.getValue(); i++) {
+                    String cardName = cardPile.getKey().getName();
+                    String setCode = cardPile.getKey().getSet();
+    
+                    Card card = c.getCard(cardName, AllZone.getHumanPlayer());
+    
+                    if (!setCode.equals(""))
+                        card.setCurSetCode(setCode);
+                    else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
+                        card.setRandomSetCode();
+    
+                    if (!card.getCurSetCode().equals("")) {
+                        int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                        if (n > 1)
+                            card.setRandomPicture(generator.nextInt(n - 1) + 1);
+    
+                        card.setImageFilename(CardUtil.buildFilename(card));
+                    }
+                    
+                    // Assign random foiling on approximately 1:20 cards
+                    if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
+                    	if (MyRandom.percentTrue(5))
+                    		card.setFoil(MyRandom.random.nextInt(9) + 1);
+                    }
+                    // foiling for cards explicitly foiled in deck
+                    if (cardPile.getKey().isFoil()) { card.setFoil(MyRandom.random.nextInt(9) + 1); }
+    
+                    //System.out.println("human random number:" + card.getRandomPicture());
+                    //}
+    
+                    AllZone.getHumanLibrary().add(card);
+    
+                    for (Trigger trig : card.getTriggers()) {
+                        AllZone.getTriggerHandler().registerTrigger(trig);
+                    }
                 }
             }
 
             ArrayList<String> RAICards = new ArrayList<String>();
-            for (int i = 0; i < computerDeck.countMain(); i++) {
-            	Card card = new Card();
-            	
-                String cardName = computerDeck.getMain(i);
-                String setCode = "";
-                if (cardName.contains("|")) {
-                    String s[] = cardName.split("\\|", 2);
-                    cardName = s[0];
-                    setCode = s[1];
+            for (Entry<CardPrinted, Integer> cardPile : computerDeck.getMain()) {
+                for (int i = 0; i < cardPile.getValue(); i++) {
+
+                    String cardName = cardPile.getKey().getName();
+                    String setCode = cardPile.getKey().getSet();
+    
+                    Card card = c.getCard(cardName, AllZone.getComputerPlayer());
+    
+                    //if(card.isBasicLand()) {
+                    //String PC = card.getSVar("PicCount");
+                    //int n = 0;
+                    //if (PC.matches("[0-9][0-9]?"))
+                    //	n = Integer.parseInt(PC);
+                    //if (n > 1)
+                    //    card.setRandomPicture(generator.nextInt(n));
+                    //System.out.println("computer random number:" + card.getRandomPicture());
+                    //}
+    
+                    if (!setCode.equals(""))
+                        card.setCurSetCode(setCode);
+                    else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
+                        card.setRandomSetCode();
+    
+                    if (!card.getCurSetCode().equals("")) {
+                        int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                        if (n > 1)
+                            card.setRandomPicture(generator.nextInt(n - 1) + 1);
+    
+                        card.setImageFilename(CardUtil.buildFilename(card));
+                    }
+    
+                    // Assign random foiling on approximately 1:20 cards
+                    if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
+                    	if (MyRandom.percentTrue(5))
+                    		card.setFoil(MyRandom.random.nextInt(9) + 1);
+                    }
+                    if (cardPile.getKey().isFoil()) { card.setFoil(MyRandom.random.nextInt(9) + 1); }
+                    
+                    AllZone.getComputerLibrary().add(card);
+    
+                    for (Trigger trig : card.getTriggers()) {
+                        AllZone.getTriggerHandler().registerTrigger(trig);
+                    }
+    
+                    if (card.getSVar("RemAIDeck").equals("True"))
+                        RAICards.add(card.getName());
+                    //get card picture so that it is in the image cache
+                    // ImageCache.getImage(card);
                 }
-
-                card = c.getCard(cardName, AllZone.getComputerPlayer());
-
-                //if(card.isBasicLand()) {
-                //String PC = card.getSVar("PicCount");
-                //int n = 0;
-                //if (PC.matches("[0-9][0-9]?"))
-                //	n = Integer.parseInt(PC);
-                //if (n > 1)
-                //    card.setRandomPicture(generator.nextInt(n));
-                //System.out.println("computer random number:" + card.getRandomPicture());
-                //}
-
-                if (!setCode.equals(""))
-                    card.setCurSetCode(setCode);
-                else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
-                    card.setRandomSetCode();
-
-                if (!card.getCurSetCode().equals("")) {
-                    int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
-                    if (n > 1)
-                        card.setRandomPicture(generator.nextInt(n - 1) + 1);
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-                }
-
-                // Assign random foiling on approximately 1:20 cards
-                if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
-                	if (MyRandom.percentTrue(5))
-                		card.setFoil(MyRandom.random.nextInt(9) + 1);
-                }
-                
-                AllZone.getComputerLibrary().add(card);
-
-                for (Trigger trig : card.getTriggers()) {
-                    AllZone.getTriggerHandler().registerTrigger(trig);
-                }
-
-                if (card.getSVar("RemAIDeck").equals("True"))
-                    RAICards.add(card.getName());
-                //get card picture so that it is in the image cache
-                // ImageCache.getImage(card);
             }
 
             if (RAICards.size() > 0) {

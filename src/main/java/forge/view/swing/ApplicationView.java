@@ -99,8 +99,6 @@ public class ApplicationView implements FView {
             Log.error("Error loading preferences: " + exn);
         }
 
-        OldGuiNewGame.loadDynamicGamedata();
-
         SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
             public void run() {
                 final ForgePreferences finalPreferences = model.getPreferences();

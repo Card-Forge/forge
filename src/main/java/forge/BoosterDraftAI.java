@@ -37,22 +37,22 @@ public class BoosterDraftAI {
     /**
      * <p>choose.</p>
      *
-     * @param in_choose a {@link forge.CardList} object.
+     * @param chooseFrom a {@link forge.CardList} object.
      * @param player    a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList choose(final CardList in_choose, int player) {
+    public Card choose(final CardList chooseFrom, int player) {
         //in_choose should ONLY be on the RIGHT side of any equal sign
         //only 1 card should be removed from in_choose
 
         if (Constant.Runtime.DevMode[0])
-            System.out.println("Player[" + player + "] pack: " + in_choose.toString());
+            System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
 
-        CardList list = new CardList();
+        CardList wouldPick = new CardList();
         boolean hasPicked = false;
         Card pickedCard = new Card();
 
-        CardList AIPlayables = in_choose.filter(new CardListFilter() {
+        CardList AIPlayables = chooseFrom.filter(new CardListFilter() {
             public boolean addCard(Card c) {
             	if (c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"))
             		return false;
@@ -112,32 +112,32 @@ public class BoosterDraftAI {
                 if (typeList.size() > 0) {
                     typeList.sort(bestCreature);
                     typeList.reverse();
-                    list.add(typeList.get(0));
+                    wouldPick.add(typeList.get(0));
                     if (typeList.size() > 1)
-                        list.add(typeList.get(1));
+                        wouldPick.add(typeList.get(1));
                 }
 
                 typeList = colorList.getType("Instant");
                 typeList.addAll(colorList.getType("Sorcery"));
                 if (typeList.size() > 0) {
                     CardListUtil.sortCMC(typeList);
-                    list.add(typeList.get(typeList.size() / 2));
+                    wouldPick.add(typeList.get(typeList.size() / 2));
                 }
 
                 typeList = colorList.getType("Enchantment");
                 if (typeList.size() > 0) {
                     CardListUtil.sortCMC(typeList);
-                    list.add(typeList.get(0));
+                    wouldPick.add(typeList.get(0));
                 }
 
                 typeList = colorList.getType("Planeswalker");
                 if (typeList.size() > 0)
-                    list.add(typeList.get(0));
+                    wouldPick.add(typeList.get(0));
                 
                 typeList = colorList.getType("Artifact");
                 if (typeList.size() > 0) {
                     CardListUtil.sortCMC(typeList);
-                    list.add(typeList.get(0));
+                    wouldPick.add(typeList.get(0));
                 }
 
             } else {
@@ -177,7 +177,7 @@ public class BoosterDraftAI {
                         ArrayList<Ability_Mana> maList = typeList.get(i).getManaAbility();
                         for (int j = 0; j < maList.size(); j++) {
                             if (maList.get(j).canProduce(playerColors.get(player).Mana1) || maList.get(j).canProduce(playerColors.get(player).Mana2)) //|| maList.get(j).canProduce(playerColors.get(player).ManaS))
-                                list.add(typeList.get(i));
+                                wouldPick.add(typeList.get(i));
                         }
                     }
                 }
@@ -188,28 +188,27 @@ public class BoosterDraftAI {
         if (!hasPicked) {
             Random r = new Random();
 
-            if (list.size() > 0) {
-                list.shuffle();
-                pickedCard = list.get(r.nextInt(list.size()));
-                hasPicked = true;
+            if (wouldPick.size() > 0) {
+                wouldPick.shuffle();
+                pickedCard = wouldPick.get(r.nextInt(wouldPick.size()));
             } else {
-                in_choose.shuffle();
-                pickedCard = in_choose.get(r.nextInt(in_choose.size()));
-                hasPicked = true;
+                chooseFrom.shuffle();
+                pickedCard = chooseFrom.get(r.nextInt(chooseFrom.size()));
             }
-
+            
+            hasPicked = true;
         }
 
         if (hasPicked) {
-            in_choose.remove(pickedCard);
+            chooseFrom.remove(pickedCard);
             deck[player].add(pickedCard);
 
             if (Constant.Runtime.DevMode[0])
                 System.out.println("Player[" + player + "] picked " + pickedCard.getName() + " (" + pickedCard.getManaCost() + ") " + pickedCard.getType().toString() + "\n");
         }
 
-        return in_choose;
-    }//choose()
+        return pickedCard;
+    }
 
 /*
   I get some wierd error when I have this method, I don't know whats wrong

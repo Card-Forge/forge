@@ -152,25 +152,6 @@ public class DownloadDeck {
         return false;
     }
 
-    /**
-     * <p>getCardDownload.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param CardName a {@link java.lang.String} object.
-     * @return a {@link forge.Card} object.
-     */
-    public Card getCardDownload(Card c, String CardName) {
-    	// TODO: using AllZone.getCardFactory().getCard() would probably be much faster.
-    	
-        for (Card newCard : AllZone.getCardFactory()) {
-            if (CardName.equalsIgnoreCase(newCard.getName())) {
-                return newCard;
-            }
-        }
-
-        return null;
-
-    }
 
 }
 

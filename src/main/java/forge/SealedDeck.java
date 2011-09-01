@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardPool;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -169,11 +170,11 @@ public class SealedDeck {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getCardpool() {
-        CardList pool = new CardList();
+    public CardPool getCardpool() {
+        CardPool pool = new CardPool();
 
         for (int i = 0; i < packs.size(); i++)
-            pool.addAll(packs.get(i).getBoosterPack());
+            pool.addAllCards(packs.get(i).getBoosterPack());
 
         return pool;
     }

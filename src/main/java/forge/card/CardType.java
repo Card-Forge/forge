@@ -40,11 +40,11 @@ public final class CardType implements Comparable<CardType> {
         boolean hasMoreTypes = typeText.length() > 0;
         while (hasMoreTypes) {
             String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace );
-            if (!isMultiwordType(type)) {
+            hasMoreTypes = iSpace != -1;
+            if (!isMultiwordType(type) || !hasMoreTypes) {
                 iTypeStart = iSpace + 1;
                 result.parseAndAdd(type);
             }
-            hasMoreTypes = iSpace != -1;
             iSpace = typeText.indexOf(space, iSpace + 1);
         }
         return result;

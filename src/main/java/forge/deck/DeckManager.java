@@ -2,6 +2,7 @@ package forge.deck;
 
 
 import forge.Constant;
+import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 
 import java.io.*;
@@ -9,6 +10,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
@@ -348,9 +351,12 @@ public class DeckManager {
             Matcher m = p.matcher(line);
             m.matches();
             String s = m.group(2);
+            String cardName = m.group(3);
+            if (StringUtils.isBlank(cardName)) { continue; }
+
             int count = s == null ? 1 : parseInt(s);
             for (int i = 0; i < count; i++) {
-                d.addSideboard(m.group(3));
+                d.addSideboard(cardName);
             }
         }
     }
@@ -432,12 +438,12 @@ public class DeckManager {
         }
 
         out.write(format("%s%n", "[main]"));
-        for (Entry<String, Integer> e : count(d.getMain()).entrySet()) {
-            out.write(format("%d %s%n", e.getValue(), e.getKey()));
+        for (Entry<CardPrinted, Integer> e : d.getMain()) {
+            out.write(format("%d %s%n", e.getValue(), e.getKey().getName()));
         }
         out.write(format("%s%n", "[sideboard]"));
-        for (Entry<String, Integer> e : count(d.getSideboard()).entrySet()) {
-            out.write(format("%d %s%n", e.getValue(), e.getKey()));
+        for (Entry<CardPrinted, Integer> e : d.getSideboard()) {
+            out.write(format("%d %s%n", e.getValue(), e.getKey().getName()));
         }
     }
 

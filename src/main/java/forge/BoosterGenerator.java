@@ -1,11 +1,19 @@
 package forge;
 
+import forge.card.CardDb;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
+
+import net.slightlymagic.maxmtg.Predicate;
 
 /**
  * <p>BoosterGenerator class.</p>
@@ -14,11 +22,11 @@ import java.util.Random;
  * @version $Id$
  */
 public class BoosterGenerator {
-    private CardList commons = new CardList();
-    private CardList uncommons = new CardList();
-    private CardList rares = new CardList();
-    private CardList mythics = new CardList();
-    private CardList specials = new CardList();
+    private List<CardPrinted> commons = new ArrayList<CardPrinted>();
+    private List<CardPrinted> uncommons = new ArrayList<CardPrinted>();
+    private List<CardPrinted> rares = new ArrayList<CardPrinted>();
+    private List<CardPrinted> mythics = new ArrayList<CardPrinted>();
+    private List<CardPrinted> specials = new ArrayList<CardPrinted>();
 
     private int iCommons = 0;
     private int iUncommons = 0;
@@ -44,47 +52,14 @@ public class BoosterGenerator {
         numMythics = 0;
         numSpecials = 0;
 
-        for (Card c : AllZone.getCardFactory()) {
-            SetInfo si = SetInfoUtil.getSetInfo_Code(c.getSets(), SetInfoUtil.getMostRecentSet(c.getSets()));
-
-            addToRarity(c, si);
+        
+        for (CardPrinted c : CardDb.instance().getAllUniqueCards()) {
+            addToRarity(c);
         }
 
         shuffleAll();
-        
-/*        //reduce cardpool to approximate the size of a small set (175) for better drafting in full mode
-        tList.clear();
-        for (int i=0; i<100; i++)			// 8 x 11 x 3 commons = 264 cards with each card showing up about once per round
-        	tList.add(commons.get(i));
-        commons.clear();
-        commons.addAll(tList);
-        
-        tList.clear();
-        for (int i=0; i<50; i++)			// 8 x 3 x 3 uncommons = 72 cards with some cards showing up twice
-        	tList.add(uncommons.get(i));
-        uncommons.clear();
-        uncommons.addAll(tList);
-        
-        tList.clear();
-        for (int i=0; i<25; i++)			// 8 x 1 x 3 rares = 24 cards with no cards
-        	tList.add(rares.get(i));
-        rares.clear();
-        rares.addAll(tList);
-        
-        // don't worry about reducing the mythics
-*/    }
+    }
 
-    /**
-     * <p>Constructor for BoosterGenerator.</p>
-     *
-     * @param DeckFile a {@link java.lang.String} object.
-     * @param nCommons a int.
-     * @param nUncommons a int.
-     * @param nRares a int.
-     * @param nMythics a int.
-     * @param nSpecials a int.
-     * @param ignoreRarity a boolean.
-     */
     public BoosterGenerator(String DeckFile, int nCommons, int nUncommons, int nRares, int nMythics, int nSpecials, boolean ignoreRarity) {
         numCommons = nCommons;
         numUncommons = nUncommons;
@@ -98,41 +73,10 @@ public class BoosterGenerator {
         if (dPool == null)
             throw new RuntimeException("BoosterGenerator : deck not found - " + DeckFile);
 
-        CardList cList = new CardList();
-        List<String> tList = dPool.getMain();
-
-        for (int i = 0; i < tList.size(); i++) {
-            String cardName = tList.get(i);
-            String setCode = "";
-            if (cardName.contains("|")) {
-                String s[] = cardName.split("\\|", 2);
-                cardName = s[0];
-                setCode = s[1];
-            }
-
-            Card c = AllZone.getCardFactory().getCard(cardName, AllZone.getHumanPlayer());
-
-            if (!setCode.equals(""))
-                c.setCurSetCode(setCode);
-            else if ((c.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
-                c.setRandomSetCode();
-
-            cList.add(c);
-        }
-
-
-        for (int i = 0; i < cList.size(); i++) {
-            Card c = cList.get(i);
-            SetInfo si = null;
-            if (c.getCurSetCode().equals(""))
-                si = SetInfoUtil.getSetInfo_Code(c.getSets(), SetInfoUtil.getMostRecentSet(c.getSets()));
-            else
-                si = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode());
-
-            if (ignoreRarity)
-                commons.add(c);
-            else
-                addToRarity(c, si);
+        CardPoolView tList = dPool.getMain();
+        for (Entry<CardPrinted, Integer> e : tList) {
+            if (ignoreRarity) { commons.add(e.getKey()); }
+            else { addToRarity(e.getKey()); }
         }
 
         shuffleAll();
@@ -143,31 +87,24 @@ public class BoosterGenerator {
      *
      * @param SetCode a {@link java.lang.String} object.
      */
-    public BoosterGenerator(final String SetCode) {
+    public BoosterGenerator(final String setCode) {
         numCommons = 0;
         numUncommons = 0;
         numRares = 0;
         numMythics = 0;
         numSpecials = 0;
 
-        for (Card c : AllZone.getCardFactory()) {
-            SetInfo si = SetInfoUtil.getSetInfo_Code(c.getSets(), SetCode);
+        List<String> setsList = Arrays.asList(new String[]{ setCode });
+        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(setsList, true);
+        List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
-            if (si != null) {
-                c.setCurSetCode(SetCode);
-
-                Random r = new Random();
-                int n = si.PicCount;
-                if (n > 1)
-                    c.setRandomPicture(r.nextInt(n - 1) + 1);
-
-                addToRarity(c, si);
-            }
+        for (CardPrinted c : cardsInThisSet) {
+            addToRarity(c);
         }
 
         shuffleAll();
 
-        ArrayList<String> bpData = FileUtil.readFile("res/boosterdata/" + SetCode + ".pack");
+        ArrayList<String> bpData = FileUtil.readFile("res/boosterdata/" + setCode + ".pack");
 
         for (String line : bpData) {
             if (line.startsWith("Commons:")) {
@@ -195,45 +132,15 @@ public class BoosterGenerator {
     }
 
     /**
-     * <p>addToRarity.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param si a {@link forge.SetInfo} object.
-     */
-    private void addToRarity(Card c, SetInfo si) {
-        if (si != null) {
-            if (si.Rarity.equals("Common"))
-                commons.add(c);
-            else if (si.Rarity.equals("Uncommon"))
-                uncommons.add(c);
-            else if (si.Rarity.equals("Rare"))
-                rares.add(c);
-            else if (si.Rarity.equals("Mythic"))
-                mythics.add(c);
-            else if (si.Rarity.equals("Special"))
-                specials.add(c);
-        }
-    }
-
-    /**
      * <p>shuffleAll.</p>
      */
     private void shuffleAll() {
 
-        if (commons.size() > 0)
-            commons.shuffle();
-
-        if (uncommons.size() > 0)
-            uncommons.shuffle();
-
-        if (rares.size() > 0)
-            rares.shuffle();
-
-        if (mythics.size() > 0)
-            mythics.shuffle();
-
-        if (specials.size() > 0)
-            specials.shuffle();
+        if (!commons.isEmpty()) { Collections.shuffle(commons, MyRandom.random); }
+        if (!uncommons.isEmpty()) { Collections.shuffle(uncommons, MyRandom.random); }
+        if (!rares.isEmpty()) { Collections.shuffle(rares, MyRandom.random); }
+        if (!mythics.isEmpty()) { Collections.shuffle(mythics, MyRandom.random); }
+        if (!specials.isEmpty()) { Collections.shuffle(specials, MyRandom.random); }
 
         if (Constant.Runtime.DevMode[0]) {
             System.out.println("commons.size: " + commons.size());
@@ -249,8 +156,8 @@ public class BoosterGenerator {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBoosterPack() {
-        CardList temp = new CardList();
+    public List<CardPrinted> getBoosterPack() {
+        List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
         int i = 0;
 
@@ -317,4 +224,16 @@ public class BoosterGenerator {
     public int getBoosterPackSize() {
         return numCommons + numUncommons + numRares + numSpecials;
     }
+    
+    private void addToRarity(CardPrinted c) {
+        switch(c.getRarity()) {
+            case Common: commons.add(c); break;
+            case Uncommon: uncommons.add(c); break;
+            case Rare: rares.add(c); break;
+            case MythicRare: mythics.add(c); break;
+            case Special: specials.add(c); break;
+            default: return;
+        }
+    }
+
 }

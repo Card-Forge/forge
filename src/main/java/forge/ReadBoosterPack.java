@@ -5,9 +5,20 @@ package forge;
 //import java.io.File;
 //import java.io.FileReader;
 
+import forge.card.CardRules;
+import forge.card.CardDb;
+import forge.card.CardRules.Predicates;
+import forge.card.CardPool;
+import forge.card.CardPoolView;
+import forge.card.CardRarity;
+import forge.card.CardPrinted;
 import forge.properties.NewConstants;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import net.slightlymagic.maxmtg.Predicate;
 
 
 /**
@@ -18,72 +29,26 @@ import java.util.ArrayList;
  */
 public class ReadBoosterPack implements NewConstants {
 
-//    final private static String comment = "//";
-
-    private CardList commonCreatureList = new CardList();
-    private CardList commonNonCreatureList = new CardList();
-
-    private CardList commonList = new CardList();
-    private CardList uncommonList = new CardList();
-    private CardList rareList = new CardList();
-
-    /*
-    //average creature versus noncreature
-
-    ReadBoosterPack r = new ReadBoosterPack();
-    double n = 0; //total
-    int nCreature = 0;
-    int nSpell = 0;
-
-    for(int i = 0; i < 1000; i++)
-    {
-      CardList list = r.getBoosterPack();
-
-      int c = list.getType("Creature").size();
-      nCreature += c;
-      nSpell += (15 -c);
-
-      n += 15;
-    }
-    System.out.println(nCreature / n +" - " +nSpell / n);
-
-    System.exit(0);
-    */
-
+    
+    private List<CardPrinted> mythics;
+    private List<CardPrinted> rares;
+    private List<CardPrinted> uncommons;
+    private List<CardPrinted> commons;
+    
+    private List<CardPrinted> commonCreatures;
+    private List<CardPrinted> commonNonCreatures;
     /**
      * <p>Constructor for ReadBoosterPack.</p>
      */
     public ReadBoosterPack() {
-        setup();
-    }
+        mythics = CardPrinted.Predicates.Presets.isMythicRare.select(CardDb.instance().getAllUniqueCards()); 
+        rares = CardPrinted.Predicates.Presets.isRare.select(CardDb.instance().getAllUniqueCards());
+        commons = CardPrinted.Predicates.Presets.isCommon.select(CardDb.instance().getAllUniqueCards());
+        uncommons = CardPrinted.Predicates.Presets.isUncommon.select(CardDb.instance().getAllUniqueCards());
 
-    //returns "common", "uncommon", or "rare"
-    /**
-     * <p>getRarity.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public String getRarity(String cardName) {
-        if (commonList.containsName(cardName)) return "Common";
-        if (uncommonList.containsName(cardName)) return "Uncommon";
-        if (rareList.containsName(cardName)) return "Rare";
-
-        ArrayList<String> land = new ArrayList<String>();
-        land.add("Forest");
-        land.add("Plains");
-        land.add("Swamp");
-        land.add("Mountain");
-        land.add("Island");
-        land.add("Terramorphic Expanse");
-        land.add("Snow-Covered Forest");
-        land.add("Snow-Covered Plains");
-        land.add("Snow-Covered Swamp");
-        land.add("Snow-Covered Mountain");
-        land.add("Snow-Covered Island");
-        if (land.contains(cardName)) return "Land";
-
-        return "error";
+        commonCreatures = new ArrayList<CardPrinted>();
+        commonNonCreatures = new ArrayList<CardPrinted>();
+        CardRules.Predicates.Presets.isCreature.split(commons, CardPrinted.fnGetRules, commonCreatures, commonNonCreatures);
     }
 
     /**
@@ -91,58 +56,66 @@ public class ReadBoosterPack implements NewConstants {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBoosterPack5() {
-        CardList list = new CardList();
-        for (int i = 0; i < 5; i++)
-            list.addAll(getBoosterPack());
+    public CardPoolView getBoosterPack5() {
+        CardPool list = new CardPool();
+        for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
-        for (int i = 0; i < 20; i++) {
-            list.add(AllZone.getCardFactory().getCard("Forest", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Island", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Mountain", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Swamp", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Snow-Covered Forest", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Snow-Covered Island", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Snow-Covered Plains", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Snow-Covered Mountain", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Snow-Covered Swamp", AllZone.getHumanPlayer()));
-        }
+        addBasicLands(list, 20);
+        addBasicSnowLands(list, 20);
 
         for (int i = 0; i < 4; i++)
-            list.add(AllZone.getCardFactory().getCard("Terramorphic Expanse", AllZone.getHumanPlayer()));
+            list.add(CardDb.instance().getCard("Terramorphic Expanse", "M10"));
 
         return list;
     }//getBoosterPack5()
 
+    public static final void addBasicLands(final CardPool pool, final int count) {
+        for (int i = 0; i < count; i++) {
+            pool.add(CardDb.instance().getCard("Forest", "M10"));
+            pool.add(CardDb.instance().getCard("Island", "M10"));
+            pool.add(CardDb.instance().getCard("Plains", "M10"));
+            pool.add(CardDb.instance().getCard("Mountain", "M10"));
+            pool.add(CardDb.instance().getCard("Swamp", "M10"));
+        }
+    }
+    public static final void addBasicSnowLands(final CardPool pool, final int count) {
+        for (int i = 0; i < count; i++) {
+            pool.add(CardDb.instance().getCard("Snow-Covered Forest", "ICE"));
+            pool.add(CardDb.instance().getCard("Snow-Covered Island", "ICE"));
+            pool.add(CardDb.instance().getCard("Snow-Covered Plains", "ICE"));
+            pool.add(CardDb.instance().getCard("Snow-Covered Mountain", "ICE"));
+            pool.add(CardDb.instance().getCard("Snow-Covered Swamp", "ICE"));
+        }
+    }
+    
     /**
      * <p>getBoosterPack.</p>
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBoosterPack() {
-        CardList pack = new CardList();
+    public CardPoolView getBoosterPack() {
+        CardPool pack = new CardPool();
 
-        pack.add(getRandomCard(rareList));
+        pack.add(getRandomCard(rares));
 
         for (int i = 0; i < 3; i++)
-            pack.add(getRandomCard(uncommonList));
+            pack.add(getRandomCard(uncommons));
 
         //11 commons, 7 creature 4 noncreature
-        CardList variety;
+        List<CardPrinted> variety;
         for (int i = 0; i < 7; i++) {
-            variety = getVariety(commonCreatureList);
+            variety = getVariety(commonCreatures);
             pack.add(getRandomCard(variety));
         }
 
         for (int i = 0; i < 4; i++) {
-            variety = getVariety(commonNonCreatureList);
+            variety = getVariety(commonNonCreatures);
             pack.add(getRandomCard(variety));
         }
 
-        if (pack.size() != 15)
+        if (pack.countAll() != 15)
             throw new RuntimeException("ReadBoosterPack : getBoosterPack() error, pack is not 15 card - "
-                    + pack.size());
+                    + pack.countAll());
 
         return pack;
     }
@@ -154,8 +127,8 @@ public class ReadBoosterPack implements NewConstants {
      * @param questLevel a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getShopCards(int numberWins, int questLevel) {
-        CardList list = new CardList();
+    public CardPoolView getShopCards(int numberWins, int questLevel) {
+        CardPool list = new CardPool();
 
         // Number of Packs granted
         int levelPacks = questLevel > 0 ? 8 / questLevel / 2 : 4;
@@ -166,30 +139,17 @@ public class ReadBoosterPack implements NewConstants {
         for (int i = 0; i < totalPacks; i++) {
             // TODO: Balance CardPool Availability
             // Each "Pack" yields 1 Rare, 3 Uncommon, 7 Commons
-            list.add(getRandomCard(rareList));
+            list.add(getRandomCard(rares));
             for (int j = 0; j < 7; j++) {
                 if (j < 3)
-                    list.add(getRandomCard(uncommonList));
+                    list.add(getRandomCard(uncommons));
 
-                list.add(getRandomCard(commonList));
+                list.add(getRandomCard(commons));
             }
         }
 
-        for (int i = 0; i < 10; i++) {
-            // Add basic land availability
-            list.add(AllZone.getCardFactory().getCard("Forest", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Island", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Mountain", AllZone.getHumanPlayer()));
-            list.add(AllZone.getCardFactory().getCard("Swamp", AllZone.getHumanPlayer()));
-            if (i < 5) {
-                list.add(AllZone.getCardFactory().getCard("Snow-Covered Forest", AllZone.getHumanPlayer()));
-                list.add(AllZone.getCardFactory().getCard("Snow-Covered Island", AllZone.getHumanPlayer()));
-                list.add(AllZone.getCardFactory().getCard("Snow-Covered Plains", AllZone.getHumanPlayer()));
-                list.add(AllZone.getCardFactory().getCard("Snow-Covered Mountain", AllZone.getHumanPlayer()));
-                list.add(AllZone.getCardFactory().getCard("Snow-Covered Swamp", AllZone.getHumanPlayer()));
-            }
-        }
+        addBasicLands(list, 10);
+        addBasicSnowLands(list, 5);
 
         return list;
     }
@@ -201,16 +161,13 @@ public class ReadBoosterPack implements NewConstants {
      * @param in a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getVariety(CardList in) {
-        CardList out = new CardList();
+    private List<CardPrinted> getVariety(List<CardPrinted> in) {
+        List<CardPrinted> out = new ArrayList<CardPrinted>();
+        Collections.shuffle(in, MyRandom.random);
 
-        String color[] = Constant.Color.Colors;
-        Card check;
-        in.shuffle();
-
-        for (int i = 0; i < color.length; i++) {
-            check = findColor(in, color[i]);
-            if (check != null) out.add(check);
+        for (int i = 0; i < Constant.Color.Colors.length; i++) {
+            CardPrinted check = findColor(in, i);
+            if (check != null) { out.add(check); }
         }
 
         return out;
@@ -223,11 +180,19 @@ public class ReadBoosterPack implements NewConstants {
      * @param color a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    private Card findColor(CardList in, String color) {
-        for (int i = 0; i < in.size(); i++)
-            if (CardUtil.getColors(in.get(i)).contains(color)) return in.get(i);
-
-        return null;
+    private CardPrinted findColor(final List<CardPrinted> in, final int color) {
+        Predicate<CardRules> filter = null;
+        switch (color) {
+            case 0: filter = CardRules.Predicates.Presets.isWhite; break;
+            case 1: filter = CardRules.Predicates.Presets.isBlue; break;
+            case 2: filter = CardRules.Predicates.Presets.isBlack; break;
+            case 3: filter = CardRules.Predicates.Presets.isRed; break;
+            case 4: filter = CardRules.Predicates.Presets.isGreen; break;
+            case 5: filter = CardRules.Predicates.Presets.isColorless; break;
+            default: break;
+        }
+        if (null == filter) { return null; }
+        return filter.first(in, CardPrinted.fnGetRules);
     }
 
 
@@ -237,236 +202,12 @@ public class ReadBoosterPack implements NewConstants {
      * @param list a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    private Card getRandomCard(CardList list) {
+    private CardPrinted getRandomCard(List<CardPrinted> list) {
         for (int i = 0; i < 10; i++)
-            list.shuffle();
-
+            Collections.shuffle(list, MyRandom.random);
         int index = MyRandom.random.nextInt(list.size());
-
-        Card c = AllZone.getCardFactory().copyCard(list.get(index));
-        c.setRarity("rare");
-        return c;
+        return list.get(index);
     }//getRandomCard()
 
-    /**
-     * <p>setup.</p>
-     */
-    private void setup() {
-        //commonList = readFile(ForgeProps.getFile(REGULAR.COMMON));
-        //uncommonList = readFile(ForgeProps.getFile(REGULAR.UNCOMMON));
-        //rareList = readFile(ForgeProps.getFile(REGULAR.RARE));
-
-        //commonCreatureList = commonList.getType("Creature");
-        //commonNonCreatureList = commonList.filter(new CardListFilter() {
-        //    public boolean addCard(Card c) {
-        //        return !c.isCreature();
-        //    }
-        //});
-
-        for (Card aCard : AllZone.getCardFactory()) {
-            String rr = aCard.getSVar("Rarity");
-
-            if (rr.equals("Common")) {
-                commonList.add(aCard);
-                if (aCard.isCreature())
-                    commonCreatureList.add(aCard);
-                else
-                    commonNonCreatureList.add(aCard);
-            } else if (rr.equals("Uncommon")) {
-                uncommonList.add(aCard);
-            } else if (rr.equals("Rare")) {
-                rareList.add(aCard);
-            } else if (rr.equals("Mythic")) {
-                rareList.add(aCard);
-            }
-
-        }
-
-    }//setup()
-
-
-/*    private CardList readFile(File file) {
-        CardList cardList = new CardList();
-        
-        BufferedReader in;
-        try {
-            in = new BufferedReader(new FileReader(file));
-            String line = in.readLine();
-            
-            //stop reading if end of file or blank line is read
-            while(line != null && (line.trim().length() != 0)) {
-                Card c;
-                if(!line.startsWith(comment)) {
-                    c = AllZone.getCardFactory().getCard(line.trim(), AllZone.getHumanPlayer());
-                    cardList.add(c);
-                }
-                
-                line = in.readLine();
-            }//if
-            
-        } catch(Exception ex) {
-            ErrorViewer.showError(ex);
-            throw new RuntimeException("ReadBoosterPack : readFile error, " + ex);
-        }
-        
-        return cardList;
-    }//readFile()
-*/
 }
 
-/*
-import java.util.*;
-import java.io.*;
-
-public class ReadBoosterPack
-{
-//  final private String commonFilename   = Constant.IO.baseDir +"data/common.txt";
-//  final private String uncommonFilename = Constant.IO.baseDir +"data/uncommon.txt";
-//  final private String rareFilename     = Constant.IO.baseDir +"data/rare.txt";
-
-  final private String commonFilename   = "common.txt";
-  final private String uncommonFilename = "uncommon.txt";
-  final private String rareFilename     = "rare.txt";
-
-  final private String comment = "//";
-
-  private ArrayList commonList;
-  private ArrayList uncommonList;
-  private ArrayList rareList;
-
-
-  public static void main(String[] args)
-  {
-    ReadBoosterPack r = new ReadBoosterPack();
-    CardList list = r.getBoosterPack();
-    double n = 0; //total
-    int nCreature = 0;
-    int nSpell = 0;
-
-    for(int i = 0; i < 2; i++)
-    {
-      int c = list.getType("Creature").size();
-      nCreature += c;
-      nSpell += (15 -c);
-
-      n += 15;
-    }
-    System.out.println(nCreature / n +" - " +nSpell / n);
-
-    System.exit(0);
-  }//main()
-
-  public ReadBoosterPack() {setup();}
-
-  //returns "common", "uncommon", or "rare"
-  public String getRarity(String cardName)
-  {
-    if(commonList.contains(cardName))
-      return "Common";
-    if(uncommonList.contains(cardName))
-      return "Uncommon";
-    if(rareList.contains(cardName))
-      return "Rare";
-
-    ArrayList land = new ArrayList();
-    land.add("Forest");
-    land.add("Plains");
-    land.add("Swamp");
-    land.add("Mountain");
-    land.add("Island");
-    land.add("Terramorphic Expanse");
-    if(land.contains(cardName))
-      return "Land";
-
-    return "error";
-  }
-
-  public CardList getBoosterPack5()
-  {
-    CardList list = new CardList();
-    for(int i = 0; i < 5; i++)
-      list.addAll(getBoosterPack());
-
-    for(int i = 0; i < 40; i++)
-    {
-      list.add(AllZone.getCardFactory().getCard("Forest", AllZone.getHumanPlayer()));
-      list.add(AllZone.getCardFactory().getCard("Island", AllZone.getHumanPlayer()));
-      list.add(AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()));
-      list.add(AllZone.getCardFactory().getCard("Mountain", AllZone.getHumanPlayer()));
-      list.add(AllZone.getCardFactory().getCard("Swamp", AllZone.getHumanPlayer()));
-    }
-
-    for(int i = 0; i < 4; i++)
-      list.add(AllZone.getCardFactory().getCard("Terramorphic Expanse", AllZone.getHumanPlayer()));
-
-    return list;
-  }//getBoosterPack5()
-
-  public CardList getBoosterPack()
-  {
-    CardList pack = new CardList();
-
-    pack.add(getRandomCard(rareList));
-
-    for(int i = 0; i < 3; i++)
-      pack.add(getRandomCard(uncommonList));
-
-    for(int i = 0; i < 11; i++)
-      pack.add(getRandomCard(commonList));
-
-    return pack;
-  }
-  private Card getRandomCard(ArrayList list)
-  {
-    for(int i = 0; i < 10; i++)
-      Collections.shuffle(list, MyRandom.random);
-
-    int index = MyRandom.random.nextInt(list.size());
-    String name = list.get(index).toString();
-
-    Card c =  AllZone.getCardFactory().getCard(name, AllZone.getHumanPlayer());
-    c.setRarity("rare");
-    return c;
-  }//getRandomCard()
-
-  private void setup()
-  {
-    commonList   = readFile(commonFilename);
-    uncommonList = readFile(uncommonFilename);
-    rareList     = readFile(rareFilename);
-
-    checkName(commonList);
-    checkName(uncommonList);
-    checkName(rareList);
-  }
-  private void checkName(ArrayList name)
-  {
-    for(int i = 0; i < name.size(); i++)
-      AllZone.getCardFactory().getCard(name.get(i).toString(), AllZone.getHumanPlayer());
-  }
-
-  //returns an ArrayList of Strings, the names of the cards read
-  private ArrayList readFile(String filename)
-  {
-    ArrayList cardName = new ArrayList();
-
-    BufferedReader in;
-    try{
-      in = new BufferedReader(new FileReader(filename));
-      String line = in.readLine();
-
-      //stop reading if end of file or blank line is read
-      while(line != null && (line.trim().length() != 0))
-      {
-        if(! line.startsWith(comment))
-          cardName.add(line.trim());
-
-        line = in.readLine();
-      }//if
-
-    }catch(Exception ex){throw new RuntimeException("ReadBoosterPack : readFile error, " + ex);}
-
-    return cardName;
-  }//readFile()
-}
-*/

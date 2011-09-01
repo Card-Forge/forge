@@ -4,6 +4,8 @@ package forge.quest.gui.main;
 import forge.*;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
+import forge.gui.deckeditor.CardShop;
+import forge.gui.deckeditor.DeckEditorQuest;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestData;
 import forge.quest.data.item.QuestItemZeppelin;
@@ -588,7 +590,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        Gui_Quest_DeckEditor g = new Gui_Quest_DeckEditor();
+        DeckEditorQuest g = new DeckEditorQuest();
 
         g.show(exit);
         g.setVisible(true);
@@ -617,7 +619,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        Gui_CardShop g = new Gui_CardShop(questData);
+        CardShop g = new CardShop(questData);
 
         g.show(exit);
         g.setVisible(true);

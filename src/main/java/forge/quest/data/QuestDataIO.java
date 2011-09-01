@@ -1,7 +1,15 @@
 package forge.quest.data;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+
+import forge.card.CardDb;
+import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -55,6 +63,8 @@ public class QuestDataIO {
             }
 
             IgnoringXStream xStream = new IgnoringXStream();
+            xStream.registerConverter(new CardReferenceToXml());
+            xStream.alias("cref", CardPrinted.class);
             data = (QuestData) xStream.fromXML(xml.toString());
 
             if (data.versionNumber != QuestData.CURRENT_VERSION_NUMBER) {
@@ -109,6 +119,12 @@ public class QuestDataIO {
                         newData.inventory.setItemLevel("Zeppelin", 1);
                     }
                     break;
+                    
+                case 1:
+                    // card names are stored as plain text - need to read them from there
+                    
+                    break;
+                    
             }
 
             //mark the QD as the latest version
@@ -129,12 +145,20 @@ public class QuestDataIO {
             File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
             BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
             GZIPOutputStream zout = new GZIPOutputStream(bout);
+            
+            BufferedOutputStream bout_unp = new BufferedOutputStream(new FileOutputStream(f+".xml"));
 
             XStream xStream = new XStream();
+            xStream.registerConverter(new CardReferenceToXml());
+            xStream.alias("cref", CardPrinted.class);
             xStream.toXML(qd, zout);
+            xStream.toXML(qd, bout_unp);
 
             zout.flush();
             zout.close();
+            
+            bout_unp.flush();
+            bout_unp.close();
         } catch (Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
@@ -161,6 +185,33 @@ public class QuestDataIO {
                     return super.shouldSerializeMember(definedIn, fieldName);
                 }
             };
+        }
+    }
+
+    private static class CardReferenceToXml implements Converter {
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(Class clasz) {
+            return clasz.equals(CardPrinted.class);
+        }
+
+        @Override
+        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+            CardPrinted cref = (CardPrinted) source;
+            writer.addAttribute("s", cref.getSet());
+            writer.addAttribute("i", Integer.toString(cref.getArtIndex()));
+            if (cref.isFoil()) { writer.addAttribute("foil", "1"); }
+            writer.addAttribute("n", cref.getName());
+        }
+
+        @Override
+        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+            String name = reader.getAttribute("n");
+            String set = reader.getAttribute("s");
+            short index = Short.parseShort(reader.getAttribute("i"));
+            boolean foil = "1".equals(reader.getAttribute("foil"));
+            CardPrinted card = CardDb.instance().getCard(name, set, index);
+            return foil ? CardPrinted.makeFoiled(card) : card; 
         }
     }
 }

@@ -7,9 +7,7 @@ import java.util.Map.Entry;
 
 /**
  * <p>CardPool class.</p>
- *
- * @author Forge
- * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
+ * Represents a list of cards with amount of each
  */
 public final class CardPool extends CardPoolView  {
 
@@ -21,13 +19,12 @@ public final class CardPool extends CardPoolView  {
     @SuppressWarnings("unchecked")
     public CardPool(final CardPoolView from) {
         super();
-        cards = (Hashtable<CardPrinted, Integer>) ((Hashtable<CardPrinted, Integer>) (from.cards)).clone();
+        cards = new Hashtable<CardPrinted, Integer>();
+        cards.putAll(from.cards);
      }
     public CardPool(final Iterable<CardPrinted> list) {
         this(); addAllCards(list);
     }
-    
-
 
     // get
     public CardPoolView getView() { return new CardPoolView(Collections.unmodifiableMap(cards)); }
@@ -54,6 +51,7 @@ public final class CardPool extends CardPoolView  {
     public void remove(final CardPrinted card) { remove(card, 1); }
     public void remove(final CardPrinted card, final int amount) {
         int count = count(card);
+        if (count == 0) { return; }
         if (count <= amount) { cards.remove(card); }
         else { cards.put(card, count - amount); }
         isListInSync = false;

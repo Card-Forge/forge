@@ -3,6 +3,7 @@ package forge.view.swing;
 import arcane.ui.util.ManaSymbols;
 import com.esotericsoftware.minlog.Log;
 import forge.*;
+import forge.card.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.deck.generate.*;
@@ -10,6 +11,8 @@ import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.gui.deckeditor.Gui_BoosterDraft;
+import forge.gui.deckeditor.DeckEditor;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
@@ -53,7 +56,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     // with the new IO, there's no reason to use different instances
     private List<Deck> allDecks;
     /** Constant <code>editor</code>. */
-    private static Gui_DeckEditor editor;
+    private static DeckEditor editor;
 
     private JLabel titleLabel = new JLabel();
     private JLabel jLabel2 = new JLabel();
@@ -317,13 +320,11 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     "choice <<" + safeToString(o) + ">> does not equal any of the sealedTypes.");
         }
 
-        CardList sDeck = sd.getCardpool();
+        CardPool sDeck = sd.getCardpool();
 
-        if (sDeck.size() > 1) {
+        if (sDeck.countAll() > 1) {
 
-            for (int i = 0; i < sDeck.size(); i++) {
-                deck.addSideboard(sDeck.get(i).getName() + "|" + sDeck.get(i).getCurSetCode());
-            }
+            deck.addSideboard(sDeck);
 
             for (int i = 0; i < Constant.Color.BasicLands.length; i++) {
                 for (int j = 0; j < 18; j++) {
@@ -340,7 +341,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             Constant.Runtime.HumanDeck[0] = deck;
             Constant.Runtime.GameType[0] = Constant.GameType.Sealed;
 
-            Deck aiDeck = sd.buildAIDeck(sd.getCardpool());
+            Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.addMetaData("PlayerType", "AI");
             deckManager.addDeck(aiDeck);
@@ -625,7 +626,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     final void deckEditorButtonActionPerformed(final ActionEvent e) {
         if (editor == null) {
 
-            editor = new Gui_DeckEditor();
+            editor = new DeckEditor();
 
             Command exit = new Command() {
                 private static final long serialVersionUID = -9133358399503226853L;
@@ -645,8 +646,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         // this for real, feel free.
         // This make it so the second time you open the Deck Editor, typing a
         // card name and pressing enter will filter
-        javax.swing.JRootPane rootPane = editor.getRootPane();
-        rootPane.setDefaultButton(editor.filterButton);
+        //javax.swing.JRootPane rootPane = editor.getRootPane();
+        //rootPane.setDefaultButton(editor.filterButton);
 
         editor.setVisible(true);
 

@@ -204,6 +204,7 @@ public class ListChooser<T> {
         Object[] options;
         if (minChoices == 0) options = new Object[]{new JButton(ok), new JButton(cancel)};
         else options = new Object[]{new JButton(ok)};
+        if (maxChoices == 1) { jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); }
 
         p = new JOptionPane(new Object[]{message, new JScrollPane(jList)}, QUESTION_MESSAGE, DEFAULT_OPTION,
                 null, options, options[0]);

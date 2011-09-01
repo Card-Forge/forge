@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -77,6 +78,7 @@ import com.google.code.jyield.YieldUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
 
+import forge.card.CardPrinted;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
@@ -1588,11 +1590,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             if (Constant.Runtime.HumanDeck[0].countMain() > 1) {
                 HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
                 
-                for (String s : Constant.Runtime.HumanDeck[0].getMain()){
-                    if (deckMap.containsKey(s))
-                        deckMap.put(s, (Integer)(deckMap.get(s)) + 1);
-                    else
-                        deckMap.put(s, 1);
+                for (Entry<CardPrinted, Integer> s : Constant.Runtime.HumanDeck[0].getMain()){
+                    deckMap.put(s.getKey().getName(), s.getValue());
                 }
                 
                 String nl = System.getProperty("line.separator");

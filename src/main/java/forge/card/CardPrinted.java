@@ -98,7 +98,9 @@ public final class CardPrinted implements Comparable<CardPrinted> {
 
     @Override
     public String toString() {
-        return String.format("%s|%s", name, cardSet);
+        return name;
+        // cannot still decide, if this "name|set" format is needed anymore
+        //return String.format("%s|%s", name, cardSet);
     }
 
     public Card toForgeCard() {

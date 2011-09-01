@@ -1,6 +1,15 @@
-package forge;
+package forge.gui.deckeditor;
 
-
+import forge.AllZone;
+import forge.BoosterDraft;
+import forge.CardList;
+import forge.Constant;
+import forge.FileUtil;
+import forge.HttpUtil;
+import forge.Constant.GameType;
+import forge.Constant.Runtime;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -15,10 +24,10 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import java.awt.Color;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -28,7 +37,7 @@ import java.util.Random;
  * @author Forge
  * @version $Id$
  */
-public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConstants, NewConstants.LANG.Gui_BoosterDraft {
+public class Gui_BoosterDraft extends JFrame implements NewConstants, NewConstants.LANG.Gui_BoosterDraft {
     /**
      * Constant <code>serialVersionUID=-6055633915602448260L</code>
      */
@@ -48,8 +57,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
     private JScrollPane jScrollPane2 = new JScrollPane();
     private TitledBorder titledBorder1;
     private TitledBorder titledBorder2;
-    private Border border3;
-    private TitledBorder titledBorder3;
+
     private JLabel statsLabel = new JLabel();
     private JTable allCardTable = new JTable();
     private JTable deckTable = new JTable();
@@ -58,8 +66,8 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
     private GridLayout gridLayout1 = new GridLayout();
     private JLabel statsLabel2 = new JLabel();
     private JButton jButton1 = new JButton();
-    private CardDetailPanel detail = new CardDetailPanel(null);
-    private CardPicturePanel picture = new CardPicturePanel(null);
+
+    private CardViewPanelLite cardView = new CardViewPanelLite();
 
     /**
      * <p>showGui.</p>
@@ -102,18 +110,28 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         addListeners();
 //    setupMenu();
 
+        
+        List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
+        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, CardColumnPresets.fnQtyCompare, CardColumnPresets.fnQtyGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, CardColumnPresets.fnNameCompare, CardColumnPresets.fnNameGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, CardColumnPresets.fnCostCompare, CardColumnPresets.fnCostGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, CardColumnPresets.fnColorCompare, CardColumnPresets.fnColorGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, CardColumnPresets.fnTypeCompare, CardColumnPresets.fnTypeGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, CardColumnPresets.fnStatsCompare, CardColumnPresets.fnStatsGet));
+        columns.add(new TableColumnInfo<CardPrinted>("R", 35, CardColumnPresets.fnRarityCompare, CardColumnPresets.fnRarityGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, CardColumnPresets.fnSetCompare, CardColumnPresets.fnSetGet));
+        columns.add(new TableColumnInfo<CardPrinted>("AI", 30, CardColumnPresets.fnAiStatusCompare, CardColumnPresets.fnAiStatusGet));
+        
         //construct allCardTable, get all cards
-        allCardModel = new TableModel(new CardList(), this);
+        allCardModel = new TableModel(cardView, columns);
         allCardModel.addListeners(allCardTable);
         allCardTable.setModel(allCardModel);
-
         allCardModel.resizeCols(allCardTable);
 
         //construct deckModel
-        deckModel = new TableModel(this);
+        deckModel = new TableModel(cardView, columns);
         deckModel.addListeners(deckTable);
         deckTable.setModel(deckModel);
-
         deckModel.resizeCols(deckTable);
 
         //add cards to GUI from deck
@@ -121,7 +139,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
 
         allCardTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) jButton1_actionPerformed(null);
             }
         });//MouseListener
@@ -130,8 +148,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         //get stats from deck
         deckModel.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent ev) {
-                CardList deck = deckModel.getCards();
-                statsLabel.setText(getStats(deck));
+                statsLabel.setText(getStats(deckModel.getCards()));
             }
         });
 
@@ -139,8 +156,8 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         //get stats from all cards
         allCardModel.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent ev) {
-                CardList deck = allCardModel.getCards();
-                statsLabel2.setText(getStats(deck));
+
+                statsLabel2.setText(getStats(allCardModel.getCards()));
             }
         });
 
@@ -149,29 +166,11 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         setExtendedState(Frame.MAXIMIZED_BOTH);
     }//setupAndDisplay()
 
-    /**
-     * <p>getStats.</p>
-     *
-     * @param deck a {@link forge.CardList} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private String getStats(CardList deck) {
-        int total = deck.size();
-        int creature = deck.getType("Creature").size();
-        int land = deck.getType("Land").size();
 
-        StringBuffer show = new StringBuffer();
-        show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ").append(land);
-        String[] color = Constant.Color.Colors;
-        for (int i = 0; i < 5; i++)
-            show.append(", ").append(color[i]).append(" - ").append(CardListUtil.getColor(deck, color[i]).size());
+    private String getStats(final CardPoolView deck) {
+        return DeckEditorBase.getStats(deck);
+    }
 
-        return show.toString();
-    }//getStats()
-
-    /**
-     * <p>Constructor for Gui_BoosterDraft.</p>
-     */
     public Gui_BoosterDraft() {
         try {
             jbInit();
@@ -180,20 +179,6 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         }
     }
 
-    /**
-     * <p>getCard.</p>
-     *
-     * @return a {@link forge.Card} object.
-     */
-    public Card getCard() {
-        return detail.getCard();
-    }
-
-    /** {@inheritDoc} */
-    public void setCard(Card card) {
-        detail.setCard(card);
-        picture.setCard(card);
-    }
 
     /**
      * <p>jbInit.</p>
@@ -205,16 +190,16 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
                 "Previously Picked Cards");
         titledBorder2 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "Choose one card");
-        border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder3 = new TitledBorder(border3, "Card Detail");
+
         this.getContentPane().setLayout(null);
         jScrollPane1.setBorder(titledBorder2);
         jScrollPane1.setBounds(new Rectangle(19, 28, 661, 344));
         jScrollPane2.setBorder(titledBorder1);
         jScrollPane2.setBounds(new Rectangle(19, 478, 661, 184));
-        detail.setBorder(titledBorder3);
-        detail.setBounds(new Rectangle(693, 23, 239, 323));
-        picture.setBounds(new Rectangle(693, 348, 240, 340));
+
+        cardView.jbInit();
+        cardView.setBounds(new Rectangle(693, 23, 239, 665));
+
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel.setBounds(new Rectangle(19, 665, 665, 31));
@@ -237,8 +222,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
                 jButton1_actionPerformed(e);
             }
         });
-        this.getContentPane().add(detail, null);
-        this.getContentPane().add(picture, null);
+        this.getContentPane().add(cardView, null);
         this.getContentPane().add(jScrollPane1, null);
         this.getContentPane().add(statsLabel2, null);
         this.getContentPane().add(statsLabel, null);
@@ -258,13 +242,11 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         if (n != -1) {
             setTitle("Deck Editor - " + Constant.Runtime.HumanDeck[0].getName() + " - changed");
 
-            Card c = allCardModel.rowToCard(n);
+            CardPrinted c = allCardModel.rowToCard(n).getKey();
             deckModel.addCard(c);
             deckModel.resort();
 
-            if (limitedDeckEditor) {
-                allCardModel.removeCard(c);
-            }
+            allCardModel.removeCard(c);
 
             //3 conditions" 0 cards left, select the same row, select next row
             int size = allCardModel.getRowCount();
@@ -285,7 +267,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         if (n != -1) {
             setTitle("Deck Editor - " + Constant.Runtime.HumanDeck[0].getName() + " - changed");
 
-            Card c = deckModel.rowToCard(n);
+            CardPrinted c = deckModel.rowToCard(n).getKey();
             deckModel.removeCard(c);
 
             if (limitedDeckEditor) {
@@ -304,235 +286,6 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
 
     //if true, don't do anything else
 
-    /**
-     * <p>checkSaveDeck.</p>
-     *
-     * @return a boolean.
-     */
-    private boolean checkSaveDeck() {
-        //a crappy way of checking if the deck has been saved
-        if (getTitle().endsWith("changed")) {
-
-            int n = JOptionPane.showConfirmDialog(null, ForgeProps.getLocalized(SAVE_MESSAGE),
-                    ForgeProps.getLocalized(SAVE_TITLE), JOptionPane.YES_NO_CANCEL_OPTION);
-            if (n == JOptionPane.CANCEL_OPTION) return true;
-            else if (n == JOptionPane.YES_OPTION) saveItem_actionPerformed();
-        }
-        return false;
-    }//checkSaveDeck()
-
-    /**
-     * <p>newItem_actionPerformed.</p>
-     */
-    private void newItem_actionPerformed() {
-        if (checkSaveDeck()) return;
-
-        setTitle("Deck Editor");
-
-        Deck deck = Constant.Runtime.HumanDeck[0];
-        while (deck.countMain() != 0)
-            deck.addSideboard(deck.removeMain(0));
-
-        //refreshGui();
-    }//newItem_actionPerformed
-
-    /**
-     * <p>closeItem_actionPerformed.</p>
-     */
-    private void closeItem_actionPerformed() {
-        //check if saved, show dialog "yes, "no"
-        checkSaveDeck();
-        dispose();
-    }
-
-    /**
-     * <p>stats_actionPerformed.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     */
-    private void stats_actionPerformed(CardList list) {
-
-    }
-
-    /**
-     * <p>saveAsItem_actionPerformed.</p>
-     */
-    private void saveAsItem_actionPerformed() {
-    }//saveItem_actionPerformed()
-
-    /**
-     * <p>saveItem_actionPerformed.</p>
-     */
-    private void saveItem_actionPerformed() {
-    }
-
-    /**
-     * <p>openItem_actionPerformed.</p>
-     */
-    private void openItem_actionPerformed() {
-    }//openItem_actionPerformed()
-
-    /**
-     * <p>deleteItem_actionPerformed.</p>
-     */
-    public void deleteItem_actionPerformed() {
-    }
-
-    /**
-     * <p>renameItem_actionPerformed.</p>
-     */
-    public void renameItem_actionPerformed() {
-        String newName = "";
-        while (newName.equals("")) {
-            newName = JOptionPane.showInputDialog(null, ForgeProps.getLocalized(RENAME_MESSAGE),
-                    ForgeProps.getLocalized(RENAME_TITLE), JOptionPane.QUESTION_MESSAGE);
-            if (newName == null) break;
-        }
-
-        //when the user selects "Cancel"
-        if (newName != null) {
-            //String oldName = Constant.Runtime.HumanDeck[0].getName(); //unused
-
-            Constant.Runtime.HumanDeck[0].setName(newName);
-            setTitle("Deck Editor - " + newName + " - changed");
-        }
-    }
-
-    /**
-     * <p>setupMenu.</p>
-     */
-    @SuppressWarnings("unused")
-    // setupMenu
-    private void setupMenu() {
-        //final boolean[] isSaved = new boolean[1]; // unused
-
-        JMenuItem newItem = new JMenuItem("New");
-        JMenuItem openItem = new JMenuItem("Open");
-        JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem saveAsItem = new JMenuItem("Save As");
-        JMenuItem renameItem = new JMenuItem("Rename");
-        JMenuItem deleteItem = new JMenuItem("Delete");
-        JMenuItem statsPoolItem = new JMenuItem("Statistics - Card Pool");
-        JMenuItem statsDeckItem = new JMenuItem("Statistics - Deck");
-        JMenuItem closeItem = new JMenuItem("Close");
-
-        newItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                newItem_actionPerformed();
-            }
-        });
-        openItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                openItem_actionPerformed();
-            }
-        });
-        saveItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                saveItem_actionPerformed();
-            }
-        });
-        saveAsItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                saveAsItem_actionPerformed();
-            }
-        });
-        renameItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                renameItem_actionPerformed();
-            }
-        });
-        deleteItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                deleteItem_actionPerformed();
-            }
-        });
-        statsPoolItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                stats_actionPerformed(allCardModel.getCards());
-            }
-        });
-        statsDeckItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                stats_actionPerformed(deckModel.getCards());
-            }
-        });
-        closeItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                closeItem_actionPerformed();
-            }
-        });
-
-        JMenu fileMenu = new JMenu("Deck Actions");
-        fileMenu.add(newItem);
-        fileMenu.add(openItem);
-        fileMenu.add(saveItem);
-        fileMenu.add(saveAsItem);
-
-        fileMenu.addSeparator();
-        fileMenu.add(renameItem);
-        fileMenu.add(deleteItem);
-//    fileMenu.add(statsPoolItem);
-//    fileMenu.add(statsDeckItem);
-        fileMenu.addSeparator();
-        fileMenu.add(closeItem);
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.add(fileMenu);
-
-        this.setJMenuBar(menuBar);
-    }/*setupMenu();  */
-
-    //refresh Gui from deck, Gui shows the cards in the deck
-
-//    /**
-//     * <p>refreshGui.</p>
-//     */
-/*    private void refreshGui() {
-        Deck deck = Constant.Runtime.HumanDeck[0];
-        if (deck == null) //this is just a patch, i know
-            deck = new Deck(Constant.Runtime.GameType[0]);
-
-        allCardModel.clear();
-        deckModel.clear();
-
-        Card c;
-        //ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
-        for (int i = 0; i < deck.countMain(); i++) {
-            c = AllZone.getCardFactory().getCard(deck.getMain(i), AllZone.getHumanPlayer());
-
-            //add rarity to card if this is a sealed card pool
-            //if (!Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed))
-            //    c.setRarity(pack.getRarity(c.getName()));
-            //;
-
-
-            deckModel.addCard(c);
-        }//for
-
-        if (deck.isSealed() || deck.isRegular()) {
-            //add sideboard to GUI
-            for (int i = 0; i < deck.countSideboard(); i++) {
-                c = AllZone.getCardFactory().getCard(deck.getSideboard(i), AllZone.getHumanPlayer());
-                //c.setRarity(pack.getRarity(c.getName()));
-                allCardModel.addCard(c);
-            }
-        } else {
-            
-                * Braids: "getAllCards copies the entire array, but that does not
-                * seem to be needed here. Significant performance improvement is
-                * possible if this code used getCards instead (along with a for each
-                * loop instead of using get(i), if applicable)."
-                
-//            CardList all = AllZone.getCardFactory().getAllCards();
-//            for (int i = 0; i < all.size(); i++)
-//                allCardModel.addCard(all.get(i));
-        }
-
-        allCardModel.resort();
-        deckModel.resort();
-    }//refreshGui()
-*/
-    //updates Constant.Runtime.HumanDeck[0] from the cards shown in the GUI
 
     /**
      * <p>refreshDeck.</p>
@@ -546,15 +299,10 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         Constant.Runtime.HumanDeck[0] = deck;
 
         //update Deck with cards shown in GUI
-        CardList list = deckModel.getCards();
-        for (int i = 0; i < list.size(); i++)
-            deck.addMain(list.get(i).getName());
-
+        
+        deck.addMain(deckModel.getCards());
         if (deck.isSealed()) {
-            //add sideboard to deck
-            list = allCardModel.getCards();
-            for (int i = 0; i < list.size(); i++)
-                deck.addSideboard(list.get(i).getName());
+            deck.addSideboard(allCardModel.getCards());
         }
     }/* refreshDeck() */
 
@@ -569,7 +317,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         if (n == -1) //is valid selection?
             return;
 
-        Card c = allCardModel.rowToCard(n);
+        CardPrinted c = allCardModel.rowToCard(n).getKey();
 
         deckModel.addCard(c);
         deckModel.resort();
@@ -608,38 +356,9 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
      *
      * @param list a {@link forge.CardList} object.
      */
-    private void showChoices(CardList list) {
+    private void showChoices(CardPoolView list) {
         allCardModel.clear();
-
-        //ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
-        Card c;
-        for (int i = 0; i < list.size(); i++) {
-            c = list.get(i);
-            //c.setRarity(pack.getRarity(c.getName()));
-
-            //String PC = c.getSVar("PicCount");
-            Random r = MyRandom.random;
-            //int n = 0;
-            //if (PC.matches("[0-9][0-9]?"))
-            //	n = Integer.parseInt(PC);
-            //if (n > 1)
-            //   c.setRandomPicture(r.nextInt(n));
-
-            if (c.getCurSetCode().equals(""))
-                c.setCurSetCode(c.getMostRecentSet());
-
-            if (!c.getCurSetCode().equals("")) {
-                int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
-                if (n > 1)
-                    c.setRandomPicture(r.nextInt(n - 1) + 1);
-
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                c.setRarity(SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).Rarity);
-            }
-
-            allCardModel.addCard(c);
-        }
+        allCardModel.addCards(list);
         allCardModel.resort();
         allCardTable.setRowSelectionInterval(0, 0);
 
@@ -655,10 +374,8 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         Constant.Runtime.HumanDeck[0] = deck;
 
         //add sideboard to deck
-        CardList list = deckModel.getCards();
-        for (int i = 0; i < list.size(); i++)
-            deck.addSideboard(list.get(i).getName() + "|" + list.get(i).getCurSetCode());
-
+        CardPoolView list = deckModel.getCards();
+        deck.addSideboard(list);
 
         for (int i = 0; i < 20; i++) {
             deck.addSideboard("Forest|" + BoosterDraft.LandSetCode[0]);

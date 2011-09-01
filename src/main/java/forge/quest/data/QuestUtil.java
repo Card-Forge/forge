@@ -1,6 +1,7 @@
 package forge.quest.data;
 
 import forge.*;
+import forge.card.CardRarity;
 
 import java.util.ArrayList;
 
@@ -97,13 +98,11 @@ public class QuestUtil {
 
         int id = qa.getId();
 
-        Generator<Card> cards = YieldUtils.toGenerator(AllZone.getCardFactory());
-
         if (id == 1) //White Dungeon
         {
             qa.addCompy("Divine Presence");
 
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.White));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.White));
         } else if (id == 2) //Blue Dungeon
         {
             CardList humanList = new CardList();
@@ -118,17 +117,17 @@ public class QuestUtil {
             
             qa.addCompy("Forced Fruition");
 
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Blue));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Blue));
         } else if (id == 3) //Black Dungeon
         {
             qa.addCompy("Infernal Genesis");
             
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Black));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Black));
         } else if (id == 4) //Red Dungeon
         {
             qa.addCompy("Furnace of Rath");
 
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Red));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Red));
         } else if (id == 5) //Green Dungeon
         {
             CardList humanList = new CardList();
@@ -144,17 +143,17 @@ public class QuestUtil {
             qa.addCompy("Eladamri's Vineyard");
             qa.addCompy("Upwelling");
             
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Green));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Green));
         } else if (id == 6) //Colorless Dungeon
         {
             for (int i = 0; i < 3; i++)
                 qa.addCompy("Eon Hub");
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Colorless));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Colorless));
         } else if (id == 7) //Gold Dungeon
         {
             qa.addCompy("Darksteel Ingot");
             
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, "Multicolor"));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, "Multicolor"));
         } else if (id == 8) {
             CardList humanList = new CardList();
             for (int i = 0; i < 3; i++) {
@@ -179,7 +178,7 @@ public class QuestUtil {
                 humanList.add(c);
             }
             qa.setHuman(humanList);
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
         } else if (id == 9) {
             CardList humanList = new CardList();
             Card c = AllZone.getCardFactory().getCard("Trusty Machete", AllZone.getHumanPlayer());
@@ -194,7 +193,7 @@ public class QuestUtil {
             for (int i = 0; i < 3; i++)
                 qa.addCompy("Wall of Wood");
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Green));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Green));
         } else if (id == 10) {
             CardList humanList = new CardList();
 
@@ -232,7 +231,7 @@ public class QuestUtil {
                 qa.addCompy("Scathe Zombies");
             qa.addCompy("Mass of Ghouls");
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Black));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Black));
         } else if (id == 11)  // The King's Contest
         {
             CardList humanList = new CardList();
@@ -247,7 +246,7 @@ public class QuestUtil {
 
             qa.addCompy("Loyal Retainers");
 
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
         } else if (id == 12)  // Barroom Brawl
         {
             CardList humanList = new CardList();
@@ -278,7 +277,7 @@ public class QuestUtil {
 
             qa.addCompy("Lowland Giant");
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, null));
         } else if (id == 13)  // The Court Jester
         {
             CardList humanList = new CardList();
@@ -293,7 +292,7 @@ public class QuestUtil {
 
             qa.addCompy("Teferi's Puzzle Box");
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, "Multicolor"));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, "Multicolor"));
         } else if (id == 14)  // Ancient Battlefield
         {
             CardList humanList = new CardList();
@@ -315,7 +314,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, null));
         } else if (id == 15)  // Don't Play With Matches
         {
             CardList humanList = new CardList();
@@ -337,7 +336,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Red));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Red));
         } else if (id == 16)  // Mines of Kazum Durl
         {
             CardList humanList = new CardList();
@@ -360,7 +359,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Green));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Green));
         } else if (id == 17)  // House Party
         {
             CardList humanList = new CardList();
@@ -382,7 +381,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Colorless));
+            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Colorless));
         } else if (id == 18)  // Crows in the Field
         {
             CardList humanList = new CardList();
@@ -404,7 +403,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, null));
         } else if (id == 19)  // The Desert Caravan
         {
             CardList humanList = new CardList();
@@ -426,7 +425,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, null));
         } else if (id == 20)  // Blood Oath
         {
             CardList humanList = new CardList();
@@ -448,7 +447,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 
-            qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, Constant.Color.Colorless));
+            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, Constant.Color.Colorless));
         } else if (id == 21) // Private Domain
         {
             CardList humanList = new CardList();
@@ -467,7 +466,7 @@ public class QuestUtil {
             for (int i = 0; i < 5; i++)
                 qa.addCompy(compySetupCards[i]);
 
-            qa.setCardRewardList(pack.generateCards(cards, 6, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(6, CardRarity.Rare, null));
         } else if (id == 22) // Pied Piper
         {
             CardList humanList = new CardList();
@@ -488,7 +487,7 @@ public class QuestUtil {
             for (int i = 0; i < 2; i++)
                 qa.addCompy(compySetupCards[i]);
 
-            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));
+            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
         }
 
     }

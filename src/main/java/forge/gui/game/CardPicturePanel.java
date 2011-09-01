@@ -13,6 +13,7 @@ import arcane.ui.ScaledImagePanel.ScalingType;
 import forge.Card;
 import forge.CardContainer;
 import forge.ImageCache;
+import forge.card.CardPrinted;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +28,12 @@ import java.awt.event.ComponentEvent;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public class CardPicturePanel extends JPanel implements CardContainer {
+public final class CardPicturePanel extends JPanel implements CardContainer {
     /** Constant <code>serialVersionUID=-3160874016387273383L</code> */
     private static final long serialVersionUID = -3160874016387273383L;
 
     private Card card;
+    private CardPrinted cardPrinted;
 
     //    private JLabel           label;
 //    private ImageIcon        icon;
@@ -41,9 +43,9 @@ public class CardPicturePanel extends JPanel implements CardContainer {
     /**
      * <p>Constructor for CardPicturePanel.</p>
      *
-     * @param card a {@link forge.Card} object.
+     * @param c a {@link forge.Card} object.
      */
-    public CardPicturePanel(Card card) {
+    public CardPicturePanel(final Card c) {
         super(new BorderLayout());
 //        add(label = new JLabel(icon = new ImageIcon()));
         add(panel = new ScaledImagePanel());
@@ -53,33 +55,48 @@ public class CardPicturePanel extends JPanel implements CardContainer {
 
         addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentShown(ComponentEvent e) {
+            public void componentShown(final ComponentEvent e) {
                 update();
             }
 
             @Override
-            public void componentResized(ComponentEvent e) {
+            public void componentResized(final ComponentEvent e) {
                 update();
             }
         });
 
-        setCard(card);
+        setCard(c);
     }
 
     /**
      * <p>update.</p>
      */
-    public void update() {
-        setCard(getCard());
+    public void update() { setCard(getCard()); }
+
+    public void setCard(final CardPrinted cp) {
+        card = null;
+        cardPrinted = cp;
+        if (!isShowing()) { return; }
+
+        setImage();
     }
 
     /** {@inheritDoc} */
-    public void setCard(Card card) {
-        this.card = card;
-        if (!isShowing()) return;
+    public void setCard(final Card c) {
+        card = c;
+        cardPrinted = null;
+        if (!isShowing()) { return; }
+
+        setImage();
+    }
+
+    private void setImage() {
         Insets i = getInsets();
-        Image image = card == null ? null : ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight()
-                - i.top - i.bottom);
+        Image image = null;
+        if (cardPrinted != null) {
+            image = ImageCache.getImage(cardPrinted, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom); }
+        if (card != null && image == null) {
+            image = ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom); }
 
         if (image != currentImange) {
             currentImange = image;
@@ -103,6 +120,9 @@ public class CardPicturePanel extends JPanel implements CardContainer {
      * @return a {@link forge.Card} object.
      */
     public Card getCard() {
+        if ( card == null && cardPrinted != null ) {
+            card = cardPrinted.toForgeCard();
+        }
         return card;
     }
 }

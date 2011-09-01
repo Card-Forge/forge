@@ -1,6 +1,7 @@
 package forge.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -23,12 +24,12 @@ public final class CardDb {
     private static volatile CardDb onlyInstance = null; // 'volatile' keyword makes this working
     public static CardDb instance() {
         if (onlyInstance == null) {
-            throw new NullPointerException("CardDb has not yet been initialized, run setup() first"); 
+            throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
         }
         return onlyInstance;
     }
     public static void setup(final Iterator<CardRules> list) {
-        if (onlyInstance != null) { 
+        if (onlyInstance != null) {
             throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
         }
         synchronized (CardDb.class) {
@@ -57,6 +58,7 @@ public final class CardDb {
         while (parser.hasNext()) {
             addNewCard(parser.next());
         }
+        // TODO: consider using Collections.unmodifiableList wherever possible
     }
 
     public void addNewCard(final CardRules card) {
@@ -94,12 +96,12 @@ public final class CardDb {
     // Single fetch
     public CardPrinted getCard(final String name) {
         // Sometimes they read from decks things like "CardName|Set" - but we can handle it
-        int pipePos = name.indexOf('|'); 
-        if (pipePos >= 0) { return getCard(name.substring(0, pipePos), name.substring(pipePos+1)); }
+        int pipePos = name.indexOf('|');
+        if (pipePos >= 0) { return getCard(name.substring(0, pipePos), name.substring(pipePos + 1)); }
         // OK, plain name here
         CardPrinted card = uniqueCards.get(name);
         if (card != null) { return card; }
-        throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name)); 
+        throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
     }
     // Advanced fetch by name+set
     public CardPrinted getCard(final String name, final String set) { return getCard(name, set, 0); }
@@ -111,13 +113,13 @@ public final class CardDb {
             throw new NoSuchElementException(err);
         }
         // 2. Find the card itself
-        CardPrinted[] cards = cardsFromset.get(name);
-        if (null == cards) {
+        CardPrinted[] cardCopies = cardsFromset.get(name);
+        if (null == cardCopies) {
             String err = String.format("Asked for card '%s' from '%s': set found, but the card wasn't. :(", name, set);
             throw new NoSuchElementException(err);
         }
         // 3. Get the proper copy
-        if (artIndex >= 0 && artIndex <= cards.length) { return cards[artIndex]; }
+        if (artIndex >= 0 && artIndex <= cardCopies.length) { return cardCopies[artIndex]; }
         String err = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy.", name, set, artIndex);
         throw new NoSuchElementException(err);
     }

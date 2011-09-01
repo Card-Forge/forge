@@ -25,7 +25,7 @@ public class ReadPriceList implements NewConstants {
     /** Constant <code>comment="//"</code> */
     final private static String comment = "//";
 
-    private HashMap<String, Long> priceMap;
+    private HashMap<String, Integer> priceMap;
 
     /**
      * <p>Constructor for ReadPriceList.</p>
@@ -47,9 +47,9 @@ public class ReadPriceList implements NewConstants {
      * @param file a {@link java.io.File} object.
      * @return a {@link java.util.HashMap} object.
      */
-    private HashMap<String, Long> readFile(File file) {
+    private HashMap<String, Integer> readFile(File file) {
         BufferedReader in;
-        HashMap<String, Long> map = new HashMap<String, Long>();
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
         Random r = MyRandom.random;
         try {
 
@@ -66,7 +66,7 @@ public class ReadPriceList implements NewConstants {
                     //System.out.println("Name: " + name + ", Price: " + price);
 
                     try {
-                        long val = Long.parseLong(price.trim());
+                        int val = Integer.parseInt(price.trim());
 
                         if (!(name.equals("Plains") || name.equals("Island") || name.equals("Swamp") || name.equals("Mountain") || name.equals("Forest") ||
                                 name.equals("Snow-Covered Plains") || name.equals("Snow-Covered Island") || name.equals("Snow-Covered Swamp") || name.equals("Snow-Covered Mountain") || name.equals("Snow-Covered Forest"))) {
@@ -77,9 +77,9 @@ public class ReadPriceList implements NewConstants {
                                 ff = (float) r.nextInt(50) * (float) .01;
 
                             if (r.nextInt(100) < 50) // -ff%
-                                val = (long) ((float) val * ((float) 1 - ff));
+                                val = (int) ((float) val * ((float) 1 - ff));
                             else         // +ff%
-                                val = (long) ((float) val * ((float) 1 + ff));
+                                val = (int) ((float) val * ((float) 1 + ff));
                         }
 
                         map.put(name, val);
@@ -103,7 +103,7 @@ public class ReadPriceList implements NewConstants {
      *
      * @return a {@link java.util.Map} object.
      */
-    public Map<String, Long> getPriceList() {
+    public Map<String, Integer> getPriceList() {
         return priceMap;
     }
 }

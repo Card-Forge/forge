@@ -60,6 +60,7 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
         return result;
     }
     public final int countDistinct() { return cards.size(); }
+    public final boolean isEmpty() { return cards.isEmpty(); }
 
     public final List<Entry<CardPrinted, Integer>> getOrderedList() {
         if (!isListInSync) {

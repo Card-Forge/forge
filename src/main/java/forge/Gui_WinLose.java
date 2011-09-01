@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameEndReason;
 import forge.game.GameLossReason;
@@ -302,19 +303,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     }
 
     /**
-     * <p>getCardIcon.</p>
-     *
-     * @param fileName a {@link java.lang.String} object.
-     * @return a {@link javax.swing.ImageIcon} object.
-     */
-    private ImageIcon getCardIcon(String fileName) {
-        File base = ForgeProps.getFile(IMAGE_BASE);
-        File file = new File(base, fileName);
-        ImageIcon icon = new ImageIcon(file.toString());
-        return icon;
-    }
-
-    /**
      * <p>getIcon.</p>
      *
      * @param fileName a {@link java.lang.String} object.
@@ -352,9 +340,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
 
             //System.out.println("QuestData cardpoolsize:" + AllZone.getQuestData().getCardpool().size());
-            if (model.quest.getShopList() != null) {
-                model.quest.clearShopList();
-            }
+            model.quest.clearShopList();
+
 
             if (model.quest.getAvailableQuests() != null) {
                 model.quest.clearAvailableQuests();
@@ -401,7 +388,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}));
         }
 
-        ArrayList<String> cardsWon = model.quest.addCards(setsToGive);
+        ArrayList<CardPrinted> cardsWon = model.quest.addCards(setsToGive);
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
@@ -431,7 +418,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             int wins = model.quest.getWin();
             if (wins > 0 && wins % 80 == 0) // at every 80 wins, give 10 random rares
             {
-                ArrayList<String> randomRares = model.quest.addRandomRare(10);
+                ArrayList<CardPrinted> randomRares = model.quest.addRandomRare(10);
                 
                 ImageIcon icon = getIcon("BoxIcon.png");
                 String title = "You just won 10 random rares!";
@@ -444,7 +431,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (wonMatch && model.qa != null) {
             model.quest.addQuestsPlayed();
 
-            ArrayList<String> questRewardCards = model.qa.getCardRewardList();
+            ArrayList<CardPrinted> questRewardCards = model.qa.getCardRewardList();
             long questRewardCredits = model.qa.getCreditsReward();
 
             StringBuilder sb = new StringBuilder();
@@ -452,13 +439,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
             if (questRewardCards != null) {
                 sb.append("You won the following cards:\r\n\r\n");
-                for (String cardName : questRewardCards) {
-                    sb.append(cardName);
+                for (CardPrinted cardName : questRewardCards) {
+                    sb.append(cardName.getName());
                     sb.append("\r\n");
-
-                    model.quest.addCard(cardName);
                 }
-                model.quest.addToNewList(questRewardCards);
+                model.quest.addAllCards(questRewardCards);
                 sb.append("\r\n");
             }
             sb.append("Quest Bounty: ");
@@ -492,12 +477,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
         // Random rare given at 50% chance (65% with luck upgrade)
         if (model.quest.shouldAddAdditionalCards(wonMatch)) {
-            Card c = AllZone.getCardFactory().getCard(model.quest.addRandomRare(), AllZone.getHumanPlayer());
-            c.setCurSetCode(c.getMostRecentSet());
-            String fileName = CardUtil.buildFilename(c) + ".jpg";
-            ImageIcon icon = getCardIcon(fileName);
+            
+            CardPrinted card = model.quest.addRandomRare();
+            ArrayList<CardPrinted> rares = new ArrayList<CardPrinted>();
+            rares.add(card);
+
             String title = "You have won a random rare.";
-            JOptionPane.showMessageDialog(null, "", title, JOptionPane.INFORMATION_MESSAGE, icon);
+            ImageIcon icon = getIcon("BoxIcon.png");
+
+            CardListViewer c = new CardListViewer("Random rares", title, rares, icon);
+            c.show();
         }
     }
 }

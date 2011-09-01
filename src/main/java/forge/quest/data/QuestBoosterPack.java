@@ -3,14 +3,22 @@ package forge.quest.data;
 import forge.Card;
 import forge.CardFilter;
 import forge.Constant;
+import forge.card.CardDb;
+import forge.card.CardPrinted;
+import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.properties.NewConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
+import net.slightlymagic.maxmtg.Predicate;
 
 import com.google.code.jyield.Generator;
 
@@ -61,46 +69,40 @@ public class QuestBoosterPack implements NewConstants {
 	 * 
 	 * @return a {@link java.util.ArrayList} object.
 	 */
-    public ArrayList<String> getQuestStarterDeck(Generator<Card> allCards, int numCommon, int numUncommon, int numRare, boolean standardPool) {
-        ArrayList<String> names = new ArrayList<String>();
+    public List<CardPrinted> getQuestStarterDeck( final Predicate<CardPrinted> filter, 
+            int numCommon, int numUncommon, int numRare ) {
+        ArrayList<CardPrinted> names = new ArrayList<CardPrinted>();
 
         // Each color should have around the same amount of monocolored cards
         // There should be 3 Colorless cards for every 4 cards in a single color
         // There should be 1 Multicolor card for every 4 cards in a single color
 
-        ArrayList<String> started = new ArrayList<String>();
-        started.add("Multicolor");
+        List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
+        colorFilters.add(CardRules.Predicates.Presets.isMulticolor);
+
         for (int i = 0; i < 4; i++) {
-            if (i != 2)
-                started.add(Constant.Color.Colorless);
+            if (i != 2) { colorFilters.add(CardRules.Predicates.Presets.isColorless); }
 
-            started.addAll(Arrays.asList(Constant.Color.onlyColors));
+            colorFilters.add(CardRules.Predicates.Presets.isWhite);
+            colorFilters.add(CardRules.Predicates.Presets.isRed);
+            colorFilters.add(CardRules.Predicates.Presets.isBlue);
+            colorFilters.add(CardRules.Predicates.Presets.isBlack);
+            colorFilters.add(CardRules.Predicates.Presets.isGreen);
         }
 
-        if (standardPool) {
-            // filter Cards for cards appearing in Standard Sets
-            ArrayList<String> sets = new ArrayList<String>();
+        Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
-            //TODO: It would be handy if the list of any sets can be chosen
-            // Can someone clarify that? I don't understand it. -Braids
-            sets.add("M12");
-            sets.add("NPH");
-            sets.add("MBS");
-            sets.add("SOM");
-            sets.add("M11");
-            sets.add("ROE");
-            sets.add("WWK");
-            sets.add("ZEN");
-
-            allCards = CardFilter.getSets(allCards, sets);
-        }
-
-        names.addAll(generateCards(allCards, numCommon, Constant.Rarity.Common, null, started));
-        names.addAll(generateCards(allCards, numUncommon, Constant.Rarity.Uncommon, null, started));
-        names.addAll(generateCards(allCards, numRare, Constant.Rarity.Rare, null, started));
+        names.addAll(generateDefinetlyColouredCards(cardpool,
+                Predicate.and(filter, CardPrinted.Predicates.Presets.isCommon), numCommon, colorFilters));
+        names.addAll(generateDefinetlyColouredCards(cardpool,
+                Predicate.and(filter, CardPrinted.Predicates.Presets.isUncommon), numUncommon, colorFilters));
+        names.addAll(generateDefinetlyColouredCards(cardpool,
+                Predicate.and(filter, CardPrinted.Predicates.Presets.isRareOrMythic), numRare, colorFilters));
 
         return names;
     }
+    
+    
 
     /**
      * Create the list of card names at random from the given pool.
@@ -112,92 +114,114 @@ public class QuestBoosterPack implements NewConstants {
      * @param colorOrder  we shuffle this as a side effect of calling this method
      * @return a list of card names
      */
-    public ArrayList<String> generateCards(Generator<Card> allCards, int num, String rarity, String color, ArrayList<String> colorOrder) 
+    public ArrayList<CardPrinted> generateDefinetlyColouredCards(
+            Iterable<CardPrinted> source,
+            Predicate<CardPrinted> filter,
+            int cntNeeded,
+            List<Predicate<CardRules>> allowedColors)
     {
         // If color is null, use colorOrder progression to grab cards
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
 
-        int size = colorOrder.size();
-        Collections.shuffle(colorOrder);
+        int size = allowedColors == null ? 0 : allowedColors.size();
+        Collections.shuffle(allowedColors);
 
-        allCards = CardFilter.getRarity(allCards, rarity);
-        int count = 0, i = 0;
+        int cntMade = 0, iAttempt = 0;
 
-        while (count < num) {
-            String name = null;
+        // This will prevent endless loop @ wh
+        int allowedMisses = (2 + size + 2) * cntNeeded; // lol, 2+2 is not magic constant!
 
-            if (color == null) {
-                final String color2 = colorOrder.get(i % size);
+        while (cntMade < cntNeeded && allowedMisses > 0) {
+            CardPrinted card = null;
 
+            if (size > 0) {
+                final Predicate<CardRules> color2 = allowedColors.get(iAttempt % size);
                 if (color2 != null) {
-                    // Mantis Issue 77: avoid calling
-                    // getCardName(Generator<Card>, String) with null as 2nd
-                    // parameter.
-                    name = getCardName(allCards, color2);
+                    card = Predicate.and(filter, color2, CardPrinted.fnGetRules).random(source);
                 }
             }
 
-            if (name == null) {
+            if (card == null) {
                 // We can't decide on a color, so just pick a card.
-                name = getCardName(allCards);
+                card = filter.random(source);
             }
 
-            if (name != null && !names.contains(name)) {
-                names.add(name);
-                count++;
+            if (card != null && !result.contains(card)) {
+                result.add(card);
+                cntMade++;
             }
-            i++;
+            else { allowedMisses--; }
+            iAttempt++;
         }
 
-        return names;
+        return result;
     }
 
-    /**
-     * Convenience for generateCards(cards, num, rarity, color, this.choices);
-     *
-     * @see #generateCards(Generator, int, String, String, ArrayList)
-     */
-    public ArrayList<String> generateCards(Generator<Card> cards, int num, String rarity, String color) {
-        return generateCards(cards, num, rarity, color, choices);
-    }
 
-    /**
-     * Retrieve a card name at random from the given pool of cards;
-     * the card must have a specific color.
-     *
-     * This forces one evaluation of the allCards Generator.
-     *
-     * @param allCards  the card pool to use
-     * @param color a {@link java.lang.String} object.
-     * @return  a random card name with the given color from allCards
-     */
-    public String getCardName(Generator<Card> allCards, String color) {
-        return getCardName(CardFilter.getColor(allCards, color));
-    }
+    public ArrayList<CardPrinted> generateDistinctCards(
+            final Iterable<CardPrinted> source,
+            final Predicate<CardPrinted> filter,
+            final int cntNeeded)
+    {
+        ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
+        int cntMade = 0, iAttempt = 0;
 
-    /**
-     * Fetch a random card name from the given pool.
-     * 
-     * This forces one evaluation of the cards Generator.
-     *
-     * @param cards  the card pool from which to select
-     * @return a card name from cards
-     */
-    public String getCardName(Generator<Card> cards) {
-    	Card selected = null;
-    	try {
-    		selected = GeneratorFunctions.selectRandom(cards);
-    	} 
-    	catch (NoSuchElementException ignored) {
-    		;
-    	}
-        if (selected == null) {
-        	// Previously, it was thought that this 
-        	// Only should happen if something is programmed wrong
-        	// But empirical evidence contradicts this.
-        	return null;
+        // This will prevent endless loop @ wh
+        int allowedMisses = (2 + 2) * cntNeeded; // lol, 2+2 is not magic constant!
+
+        while (cntMade < cntNeeded && allowedMisses > 0) {
+            CardPrinted card = filter.random(source);
+
+            if (card != null && !result.contains(card)) {
+                result.add(card);
+                cntMade++;
+            }
+            else { allowedMisses--; }
+            iAttempt++;
         }
-        
-        return selected.getName();
+
+        return result;
     }
+
+
+    // Left if only for backwards compatibility
+    public ArrayList<CardPrinted> generateCards(int num, CardRarity rarity, String color) {
+        Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
+        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+    }
+
+    public ArrayList<CardPrinted> generateCards(Predicate<CardPrinted> filter, int num, CardRarity rarity, String color) {
+        Predicate<CardPrinted> whatYouWant = Predicate.and(filter, getPredicateForConditions(rarity, color));
+        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+    }
+
+    protected Predicate<CardPrinted> getPredicateForConditions(CardRarity rarity, String color)
+    {
+        Predicate<CardPrinted> rFilter;
+        switch (rarity) {
+            case Rare: rFilter = CardPrinted.Predicates.Presets.isRareOrMythic; break;
+            case Common: rFilter = CardPrinted.Predicates.Presets.isCommon; break;
+            case Uncommon: rFilter = CardPrinted.Predicates.Presets.isUncommon; break;
+            default: rFilter = Predicate.getTrue(CardPrinted.class);
+        }
+
+        Predicate<CardRules> colorFilter;
+        if (StringUtils.isBlank(color)) {
+            colorFilter = Predicate.getTrue(CardRules.class);
+        } else {
+            String col = color.toLowerCase();
+            if (col.startsWith("wh")) colorFilter = CardRules.Predicates.Presets.isWhite;
+            else if (col.startsWith("bla")) colorFilter = CardRules.Predicates.Presets.isBlack;
+            else if (col.startsWith("blu")) colorFilter = CardRules.Predicates.Presets.isBlue;
+            else if (col.startsWith("re")) colorFilter = CardRules.Predicates.Presets.isRed;
+            else if (col.startsWith("col")) colorFilter = CardRules.Predicates.Presets.isColorless;
+            else if (col.startsWith("gre")) colorFilter = CardRules.Predicates.Presets.isGreen;
+            else if (col.startsWith("mul")) colorFilter = CardRules.Predicates.Presets.isMulticolor;
+            else colorFilter = Predicate.getTrue(CardRules.class);
+        }
+        return Predicate.and(rFilter, colorFilter, CardPrinted.fnGetRules);
+    }
+
+
 }
+

@@ -8,6 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -24,6 +27,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
+
+import forge.card.CardManaCost;
+import forge.card.CardRules;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
+import forge.card.CardType;
+import forge.gui.deckeditor.TableModel;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -100,7 +110,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @param g
      *            a {@link javax.swing.JFrame} object.
      * @param tb
-     *            a {@link forge.TableModel} object.
+     *            a {@link forge.gui.deckeditor.TableModel} object.
      */
     public GUI_DeckAnalysis(JFrame g, TableModel tb) {
         super(g);
@@ -146,7 +156,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
                     int cArtifact, cCreature, cEnchant, cInstant, cLandType, cPlaneswalker, cSorcery;
                     int mZero, mOne, mTwo, mThree, mFour, mFive, mSixMore;
                     float tManaCost;
-                    Card c;
+                    CardRules c;
                     cBlack = 0;
                     cBlue = 0;
                     cGreen = 0;
@@ -170,188 +180,103 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
                     mFive = 0;
                     mSixMore = 0;
                     tManaCost = 0;
-                    CardList cList;
-                    cList = tModel.getCards();
-                    for (int i = 0; i < cList.size(); i++) {
-                        c = cList.getCard(i);
-                        if (CardUtil.getColors(c).size() > 1) {
-                            cMulticolor = cMulticolor + 1;
+                    CardPoolView cardList = tModel.getCards();
+                    
+                    for (Entry<CardPrinted, Integer> e : cardList) {
+                        c = e.getKey().getCard();
+                        int cnt = e.getValue();
+                        
+                        if (c.getColor().isMulticolor()) {
+                            cMulticolor = cMulticolor + cnt;
                         } else {
-                            if (CardUtil.getColors(c).contains(Constant.Color.Black)) {
-                                cBlack = cBlack + 1;
-                            }
-                            if (CardUtil.getColors(c).contains(Constant.Color.Blue)) {
-                                cBlue = cBlue + 1;
-                            }
-                            if (CardUtil.getColors(c).contains(Constant.Color.Green)) {
-                                cGreen = cGreen + 1;
-                            }
-                            if (CardUtil.getColors(c).contains(Constant.Color.Red)) {
-                                cRed = cRed + 1;
-                            }
-                            if (CardUtil.getColors(c).contains(Constant.Color.White)) {
-                                cWhite = cWhite + 1;
-                            }
-                            if (CardUtil.getColors(c).contains(Constant.Color.Colorless)) {
-                                if (c.isLand()) {
-                                    cLand = cLand + 1;
-                                } else {
-                                    cColorless = cColorless + 1;
-                                }
+                            if (c.getColor().isBlack()) { cBlack = cBlack + cnt; }
+                            if (c.getColor().isBlue()) { cBlue = cBlue + cnt; }
+                            if (c.getColor().isGreen()) { cGreen = cGreen + cnt; }
+                            if (c.getColor().isRed()) { cRed = cRed + cnt; }
+                            if (c.getColor().isWhite()) { cWhite = cWhite + cnt; }
+                            if (c.getColor().isColorless()) {
+                                if (c.getType().isLand()) { cLand = cLand + cnt; }
+                                else { cColorless = cColorless + cnt; }
                             }
                         }
 
-                    }
+                        // count card types
+                        CardType cType = c.getType();
+                        if (cType.isArtifact()) { cArtifact = cArtifact + cnt; }
+                        if (cType.isCreature()) { cCreature = cCreature + cnt; }
+                        if (cType.isEnchantment()) { cEnchant = cEnchant + cnt; }
+                        if (cType.isInstant()) { cInstant = cInstant + cnt; }
+                        if (cType.isLand()) { cLandType = cLandType + cnt; }
+                        if (cType.isPlaneswalker()) { cPlaneswalker = cPlaneswalker + cnt; }
+                        if (cType.isSorcery()) { cSorcery = cSorcery + cnt; }
 
-                    for (int i = 0; i < cList.size(); i++) {
-                        c = cList.getCard(i);
-                        if (c.isArtifact()) {
-                            cArtifact = cArtifact + 1;
-                        }
-                        if (c.isCreature()) {
-                            cCreature = cCreature + 1;
-                        }
-                        if (c.isEnchantment()) {
-                            cEnchant = cEnchant + 1;
-                        }
-                        if (c.isInstant()) {
-                            cInstant = cInstant + 1;
-                        }
-                        if (c.isLand()) {
-                            cLandType = cLandType + 1;
-                        }
-                        if (c.isPlaneswalker()) {
-                            cPlaneswalker = cPlaneswalker + 1;
-                        }
-                        if (c.isSorcery()) {
-                            cSorcery = cSorcery + 1;
-                        }
-                    }
 
-                    for (int i = 0; i < cList.size(); i++) {
-                        c = cList.getCard(i);
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 0) {
-                            mZero = mZero + 1;
+                        int cmc = c.getManaCost().getCMC();
+                        if (cmc == 0) {             mZero = mZero + cnt;
+                        } else if (cmc == 1) {      mOne = mOne + cnt;
+                        } else if (cmc == 2) {      mTwo = mTwo + cnt;
+                        } else if (cmc == 3) {      mThree = mThree + cnt;
+                        } else if (cmc == 4) {      mFour = mFour + cnt;
+                        } else if (cmc == 5) {      mFive = mFive + 1;
+                        } else if (cmc >= 6) {      mSixMore = mSixMore + 1;
                         }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 1) {
-                            mOne = mOne + 1;
-                        }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 2) {
-                            mTwo = mTwo + 1;
-                        }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 3) {
-                            mThree = mThree + 1;
-                        }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 4) {
-                            mFour = mFour + 1;
-                        }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) == 5) {
-                            mFive = mFive + 1;
-                        }
-                        if (CardUtil.getConvertedManaCost(c.getManaCost()) >= 6) {
-                            mSixMore = mSixMore + 1;
-                        }
-                    }
 
-                    for (int i = 0; i < cList.size(); i++) {
-                        c = cList.getCard(i);
-                        tManaCost = tManaCost + CardUtil.getConvertedManaCost(c.getManaCost());
+                        tManaCost = tManaCost + cmc * cnt;
                     }
-                    BigDecimal aManaCost = new BigDecimal(tManaCost / cList.size());
+                    int total = cardList.countAll();
+                    BigDecimal aManaCost = new BigDecimal(tManaCost / total);
                     aManaCost = aManaCost.setScale(2, BigDecimal.ROUND_HALF_UP);
-                    jLabelTotal.setText("Information about deck (total cards: " + cList.size() + "):");
+
+                    jLabelTotal.setText("Information about deck (total cards: " + total + "):");
                     jLabelManaCost.setText("Mana cost (ACC:" + aManaCost + ")");
                     Color cr = new Color(100, 100, 100);
-                    if (cBlack == 0) {
-                        jLabelBlack.setForeground(cr);
-                    }
-                    jLabelBlack.setText("Black: " + cBlack + " (" + cBlack * 100 / cList.size() + "%)");
-                    if (cBlue == 0) {
-                        jLabelBlue.setForeground(cr);
-                    }
-                    jLabelBlue.setText("Blue: " + cBlue + " (" + cBlue * 100 / cList.size() + "%)");
-                    if (cGreen == 0) {
-                        jLabelGreen.setForeground(cr);
-                    }
-                    jLabelGreen.setText("Green: " + cGreen + " (" + cGreen * 100 / cList.size() + "%)");
-                    if (cRed == 0) {
-                        jLabelRed.setForeground(cr);
-                    }
-                    jLabelRed.setText("Red: " + cRed + " (" + cRed * 100 / cList.size() + "%)");
-                    if (cWhite == 0) {
-                        jLabelWhite.setForeground(cr);
-                    }
-                    jLabelWhite.setText("White: " + cWhite + " (" + cWhite * 100 / cList.size() + "%)");
-                    if (cMulticolor == 0) {
-                        jLabelMultiColor.setForeground(cr);
-                    }
-                    jLabelMultiColor.setText("Multicolor: " + cMulticolor + " (" + cMulticolor * 100 / cList.size()
-                            + "%)");
-                    if (cColorless == 0) {
-                        jLabelColorless.setForeground(cr);
-                    }
-                    jLabelColorless.setText("Colorless: " + cColorless + " (" + cColorless * 100 / cList.size() + "%)");
-                    if (cLand == 0) {
-                        jLabelLand.setForeground(cr);
-                    }
-                    jLabelLand.setText("Land: " + cLand + " (" + cLand * 100 / cList.size() + "%)");
-                    if (cArtifact == 0) {
-                        jLabelArtifact.setForeground(cr);
-                    }
-                    jLabelArtifact.setText("Artifact: " + cArtifact + " (" + cArtifact * 100 / cList.size() + "%)");
-                    if (cCreature == 0) {
-                        jLabelCreature.setForeground(cr);
-                    }
-                    jLabelCreature.setText("Creature: " + cCreature + " (" + cCreature * 100 / cList.size() + "%)");
-                    if (cEnchant == 0) {
-                        jLabelEnchant.setForeground(cr);
-                    }
-                    jLabelEnchant.setText("Enchant: " + cEnchant + " (" + cEnchant * 100 / cList.size() + "%)");
-                    if (cInstant == 0) {
-                        jLabelInstant.setForeground(cr);
-                    }
-                    jLabelInstant.setText("Instant: " + cInstant + " (" + cInstant * 100 / cList.size() + "%)");
-                    if (cLandType == 0) {
-                        jLabelLandType.setForeground(cr);
-                    }
-                    jLabelLandType.setText("Land: " + cLandType + " (" + cLandType * 100 / cList.size() + "%)");
-                    if (cPlaneswalker == 0) {
-                        jLabelPlaneswalker.setForeground(cr);
-                    }
-                    jLabelPlaneswalker.setText("Planeswalker: " + cPlaneswalker + " (" + cPlaneswalker * 100
-                            / cList.size() + "%)");
-                    if (cSorcery == 0) {
-                        jLabelSorcery.setForeground(cr);
-                    }
-                    jLabelSorcery.setText("Sorcery: " + cSorcery + " (" + cSorcery * 100 / cList.size() + "%)");
-                    if (mZero == 0) {
-                        jLabelZeroMana.setForeground(cr);
-                    }
-                    jLabelZeroMana.setText("Zero mana: " + mZero + " (" + mZero * 100 / cList.size() + "%)");
-                    if (mOne == 0) {
-                        jLabelOneMana.setForeground(cr);
-                    }
-                    jLabelOneMana.setText("One mana: " + mOne + " (" + mOne * 100 / cList.size() + "%)");
-                    if (mTwo == 0) {
-                        jLabelTwoMana.setForeground(cr);
-                    }
-                    jLabelTwoMana.setText("Two mana: " + mTwo + " (" + mTwo * 100 / cList.size() + "%)");
-                    if (mThree == 0) {
-                        jLabelThreeMana.setForeground(cr);
-                    }
-                    jLabelThreeMana.setText("Three mana :" + mThree + " (" + mThree * 100 / cList.size() + "%)");
-                    if (mFour == 0) {
-                        jLabelFourMana.setForeground(cr);
-                    }
-                    jLabelFourMana.setText("Four mana: " + mFour + " (" + mFour * 100 / cList.size() + "%)");
-                    if (mFive == 0) {
-                        jLabelFiveMana.setForeground(cr);
-                    }
-                    jLabelFiveMana.setText("Five mana: " + mFive + " (" + mFive * 100 / cList.size() + "%)");
-                    if (mSixMore == 0) {
-                        jLabelSixMana.setForeground(cr);
-                    }
-                    jLabelSixMana.setText("Six and more: " + mSixMore + " (" + mSixMore * 100 / cList.size() + "%)");
+
+                    if (cBlack == 0) { jLabelBlack.setForeground(cr); }
+                    jLabelBlack.setText(formatStat("Black", cBlack, total));
+                    if (cBlue == 0) { jLabelBlue.setForeground(cr); }
+                    jLabelBlue.setText(formatStat("Blue", cBlue, total));
+                    if (cGreen == 0) { jLabelGreen.setForeground(cr); }
+                    jLabelGreen.setText(formatStat("Green", cGreen, total));
+                    if (cRed == 0) { jLabelRed.setForeground(cr); }
+                    jLabelRed.setText(formatStat("Red", cRed, total));
+                    if (cWhite == 0) { jLabelWhite.setForeground(cr); }
+                    jLabelWhite.setText(formatStat("White", cWhite, total));
+                    if (cMulticolor == 0) { jLabelMultiColor.setForeground(cr); }
+                    jLabelMultiColor.setText(formatStat("Multicolor", cMulticolor, total));
+                    if (cColorless == 0) { jLabelColorless.setForeground(cr); }
+                    jLabelColorless.setText(formatStat("Colorless", cColorless, total));
+
+                    if (cLand == 0) { jLabelLand.setForeground(cr); }
+                    jLabelLand.setText(formatStat("Land", cLand, total));
+                    if (cArtifact == 0) { jLabelArtifact.setForeground(cr); }
+                    jLabelArtifact.setText(formatStat("Artifact", cArtifact, total));
+                    if (cCreature == 0) { jLabelCreature.setForeground(cr); }
+                    jLabelCreature.setText(formatStat("Creature", cCreature, total));
+                    if (cEnchant == 0) { jLabelEnchant.setForeground(cr); }
+                    jLabelEnchant.setText(formatStat("Enchant", cEnchant, total));
+                    if (cInstant == 0) { jLabelInstant.setForeground(cr); }
+                    jLabelInstant.setText(formatStat("Instant", cInstant, total));
+                    if (cLandType == 0) { jLabelLandType.setForeground(cr); }
+                    jLabelLandType.setText(formatStat("Land", cLandType, total));
+                    if (cPlaneswalker == 0) { jLabelPlaneswalker.setForeground(cr); }
+                    jLabelPlaneswalker.setText(formatStat("Planeswalker", cPlaneswalker, total));
+
+                    if (cSorcery == 0) { jLabelSorcery.setForeground(cr); }
+                    jLabelSorcery.setText(formatStat("Sorcery", cSorcery, total));
+                    if (mZero == 0) { jLabelZeroMana.setForeground(cr); }
+                    jLabelZeroMana.setText(formatStat("Zero mana", mZero, total));
+                    if (mOne == 0) { jLabelOneMana.setForeground(cr); }
+                    jLabelOneMana.setText(formatStat("One mana", mOne, total));
+                    if (mTwo == 0) { jLabelTwoMana.setForeground(cr); }
+                    jLabelTwoMana.setText(formatStat("Two mana", mTwo, total));
+                    if (mThree == 0) { jLabelThreeMana.setForeground(cr); }
+                    jLabelThreeMana.setText(formatStat("Three mana", mThree, total));
+                    if (mFour == 0) { jLabelFourMana.setForeground(cr); }
+                    jLabelFourMana.setText(formatStat("Four mana", mFour, total));
+                    if (mFive == 0) { jLabelFiveMana.setForeground(cr); }
+                    jLabelFiveMana.setText(formatStat("Five mana", mFive, total));
+                    if (mSixMore == 0) { jLabelSixMana.setForeground(cr); }
+                    jLabelSixMana.setText(formatStat("Six and more", mSixMore, total));
                 }
             });
 
@@ -368,6 +293,11 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    private String formatStat(String statName, int value, int deckSize )
+    {
+        return String.format("%s: %d (%f%%)", statName, value, 100f * value / deckSize);
     }
 
     /**
@@ -991,31 +921,23 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JList} object.
      */
     private JList getJList1() {
-        CardList rList;
-        rList = tModel.getCards();
+        List<CardPrinted> rList = tModel.getCards().toFlatList();
 
-        rList.shuffle();
+        Collections.shuffle(rList, MyRandom.random);
+        Collections.shuffle(rList, MyRandom.random);
+
         ListModel jList1Model;
         if (jListFirstHand == null) {
-            if (rList.size() >= 40) {
-                jList1Model = new DefaultComboBoxModel(new String[] { rList.getCard(0).getName(),
-                        rList.getCard(1).getName(), rList.getCard(2).getName(), rList.getCard(3).getName(),
-                        rList.getCard(4).getName(), rList.getCard(5).getName(), rList.getCard(6).getName() });
-                jListFirstHand = new JList();
-            } else {
-                jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
-                jListFirstHand = new JList();
-            }
+            jListFirstHand = new JList();
+        }
+        
+        if (rList.size() >= 40) {
+            jList1Model = new DefaultComboBoxModel(new String[] { rList.get(0).getName(),
+                    rList.get(1).getName(), rList.get(2).getName(), rList.get(3).getName(),
+                    rList.get(4).getName(), rList.get(5).getName(), rList.get(6).getName() });
+        
         } else {
-            if (rList.size() >= 40) {
-                jList1Model = new DefaultComboBoxModel(new String[] { rList.getCard(0).getName(),
-                        rList.getCard(1).getName(), rList.getCard(2).getName(), rList.getCard(3).getName(),
-                        rList.getCard(4).getName(), rList.getCard(5).getName(), rList.getCard(6).getName() });
-
-            } else {
-                jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
-
-            }
+            jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
         }
 
         jListFirstHand.setModel(jList1Model);
@@ -1108,10 +1030,9 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JButton} object.
      */
     private JButton getJButton1() {
-        CardList rList;
-        rList = tModel.getCards();
+        CardPoolView rList = tModel.getCards();
         if (jButtonRegenerate == null) {
-            if (rList.size() >= 40) {
+            if (rList.countAll() >= 40) {
                 jButtonRegenerate = new JButton();
                 jButtonRegenerate.setLayout(null);
                 jButtonRegenerate.setText("Regenerate hand");
@@ -1186,15 +1107,14 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
                     "6th", "7th" });
 
             jTable1 = new JTable(dm);
-            CardList rList;
-            rList = tModel.getCards();
+            List<CardPrinted> rList = tModel.getCards().toFlatList();
             String[] cardsName = new String[rList.size()];
             int cCount;
             float fCount;
             float firstTurnF, secondTurnF, thirdTurnF, fourthTurnF, fivethTurnF, sixthTurnF, seventhTurnF;
 
             for (int i = 0; i < rList.size(); i++) {
-                cardsName[i] = rList.getCard(i).getName();
+                cardsName[i] = rList.get(i).getName();
             }
             Arrays.sort(cardsName);
             jTable1.setValueAt("Few cards.", 0, 0);

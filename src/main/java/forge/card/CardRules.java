@@ -46,13 +46,13 @@ public final class CardRules {
     public String[] getRules() { return rules; }
     public Set<Entry<String, CardInSet>> getSetsPrinted() { return setsPrinted.entrySet(); }
 
-    public final String getPower() { return power; }
-    public final int getIntPower() { return iPower; }
-    public final String getToughness() { return toughness; }
-    public final int getIntToughness() { return iToughness; }
-    public final String getLoyalty() { return loyalty; }
-    public final boolean getRemAIDecks() { return isRemovedFromAIDecks; }
-    public final boolean getRemRandomDecks() { return isRemovedFromRandomDecks; }
+    public String getPower() { return power; }
+    public int getIntPower() { return iPower; }
+    public String getToughness() { return toughness; }
+    public int getIntToughness() { return iToughness; }
+    public String getLoyalty() { return loyalty; }
+    public boolean getRemAIDecks() { return isRemovedFromAIDecks; }
+    public boolean getRemRandomDecks() { return isRemovedFromRandomDecks; }
 
     public String getPTorLoyalty() {
         if (getType().isCreature()) { return power + "/" + toughness; }
@@ -73,7 +73,7 @@ public final class CardRules {
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
 
         //System.out.println(cardName);
-        
+
         if (cardType.isCreature()) {
             int slashPos = ptLine.indexOf('/');
             if (slashPos == -1) {
@@ -90,7 +90,8 @@ public final class CardRules {
     }
 
     public boolean rulesContain(final String text) {
-        for (String r : rules) { if (r.contains(text)) { return true; } }
+        if (rules == null) { return false; }
+        for (String r : rules) { if (StringUtils.containsIgnoreCase(r, text)) { return true; } }
         return false;
     }
     public String getLatestSetPrinted() {
@@ -113,7 +114,7 @@ public final class CardRules {
     }
 
     public String getAiStatus() {
-        return isRemovedFromAIDecks ? (isRemovedFromRandomDecks ? "AI ?" : "AI") : (isRemovedFromRandomDecks ? "?" :"");
+        return isRemovedFromAIDecks ? (isRemovedFromRandomDecks ? "AI ?" : "AI") : (isRemovedFromRandomDecks ? "?" : "");
     }
     public Integer getAiStatusComparable() {
         if (isRemovedFromAIDecks && isRemovedFromRandomDecks) { return Integer.valueOf(3); }
@@ -122,6 +123,9 @@ public final class CardRules {
         else { return Integer.valueOf(1); }
     }
 
+    /**
+     * Filtering conditions specific for CardRules class, defined here along with some presets.
+     */
     public abstract static class Predicates {
 
         // Static builder methods - they choose concrete implementation by themselves
@@ -131,18 +135,23 @@ public final class CardRules {
         }
         // Power
         // Toughness
-        public static Predicate<CardRules> rules(final StringOp op, final String what)
-        {
+        public static Predicate<CardRules> rules(final StringOp op, final String what) {
             return new LeafString(LeafString.CardField.RULES, op, what);
         }
-        public static Predicate<CardRules> name(final StringOp op, final String what)
-        {
+        public static Predicate<CardRules> name(final StringOp op, final String what) {
             return new LeafString(LeafString.CardField.NAME, op, what);
         }
-        public static Predicate<CardRules> subType(final StringOp op, final String what)
-        {
+        public static Predicate<CardRules> subType(final StringOp op, final String what) {
             return new LeafString(LeafString.CardField.SUBTYPE, op, what);
         }
+        public static Predicate<CardRules> joinedType(final StringOp op, final String what) {
+            return new LeafString(LeafString.CardField.JOINED_TYPE, op, what);
+        }
+        
+        public static Predicate<CardRules> wasPrintedInSet(final String setCode) {
+            return new PredicateExitsInSet(setCode);
+        }
+        
         public static Predicate<CardRules> coreType(final boolean isEqual, final String what)
         {
             try { return coreType(isEqual, CardCoreType.valueOf(CardCoreType.class, what)); }
@@ -182,7 +191,8 @@ public final class CardRules {
             public enum CardField {
                 RULES,
                 NAME,
-                SUBTYPE
+                SUBTYPE,
+                JOINED_TYPE
             }
 
             private final String operand;
@@ -201,15 +211,17 @@ public final class CardRules {
                     case RULES:
                         shouldConatin = operator == StringOp.CONTAINS || operator == StringOp.EQUALS;
                         return shouldConatin == card.rulesContain(operand);
+                    case JOINED_TYPE:
+                        return op(card.getType().toString(), operand);
                     default:
                         return false;
                 }
             }
 
             private boolean op(final String op1, final String op2) {
-                if (operator == StringOp.CONTAINS) { return op1.contains(op2); }
-                if (operator == StringOp.NOT_CONTAINS) { return op1.contains(op2); }
-                if (operator == StringOp.EQUALS) { return op1.equals(op2); }
+                if (operator == StringOp.CONTAINS) { return StringUtils.containsIgnoreCase(op1, op2); }
+                if (operator == StringOp.NOT_CONTAINS) { return !StringUtils.containsIgnoreCase(op1, op2); }
+                if (operator == StringOp.EQUALS) { return op1.equalsIgnoreCase(op2); }
                 return false;
             }
 
@@ -335,6 +347,18 @@ public final class CardRules {
             }
         }
 
+        private static class PredicateExitsInSet extends Predicate<CardRules> {
+            private final String setCode;
+            public PredicateExitsInSet(final String setsCode) {
+                setCode = setsCode;
+            }
+
+            @Override
+            public boolean isTrue(final CardRules subject) {
+                return subject.setsPrinted.containsKey(setCode);
+            }
+        }
+
         public static class Presets {
             public static final Predicate<CardRules> isCreature = coreType(true, CardCoreType.Creature);
             public static final Predicate<CardRules> isArtifact = coreType(true, CardCoreType.Artifact);
@@ -353,10 +377,9 @@ public final class CardRules {
             public static final Predicate<CardRules> isRed = isColor(CardColor.RED);
             public static final Predicate<CardRules> isGreen = isColor(CardColor.GREEN);
 
-            
             public static final Predicate<CardRules> isColorless = hasCntColors((byte) 0);
             public static final Predicate<CardRules> isMulticolor = hasAtLeastCntColors((byte) 2);
-            
+
             public static final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
             static {
               colors.add(isWhite);

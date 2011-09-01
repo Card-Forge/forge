@@ -1,5 +1,9 @@
 package forge;
 
+import java.util.List;
+
+import forge.card.CardPool;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import org.testng.annotations.Test;
 
@@ -17,15 +21,17 @@ public class BoosterDraftAITest {
         Deck[] deck = ai.getDecks();
 
         for (int outer = 0; outer < 7; outer++) {
-            System.out.print(deck[outer].countMain() + " - ");
+            Deck thisDeck = deck[outer];
+            System.out.print(thisDeck.countMain() + " - ");
 
+            List<CardPrinted> cards = thisDeck.getMain().toFlatList();
             for (int i = 0; i < 16; i++)
-                System.out.print(deck[outer].getMain(i) + ", ");
+                System.out.print(cards.get(i) + ", ");
 
             System.out.println("");
 
             for (int i = 16; i < 22; i++)
-                System.out.print(deck[outer].getMain(i) + ", ");
+                System.out.print(cards.get(i) + ", ");
 
             System.out.println("\n");
         }//for outer
@@ -35,13 +41,14 @@ public class BoosterDraftAITest {
     public void runTest(BoosterDraftAI ai) {
         ReadDraftBoosterPack booster = new ReadDraftBoosterPack();
         for (int outer = 0; outer < 1; outer++) {
-            CardList allBooster = new CardList();
+            CardPool allBooster = new CardPool();
             for (int i = 0; i < 21; i++)
                 allBooster.addAll(booster.getBoosterPack());
-
-            int stop = allBooster.size();
+            
+            CardList forgeCardlist = allBooster.toForgeCardList();
+            int stop = forgeCardlist.size();
             for (int i = 0; i < stop; i++) {
-                ai.choose(allBooster, i);
+                forgeCardlist.remove(ai.choose(forgeCardlist, i));
             }
             //ai.checkDeckList(ai.deck);
         }

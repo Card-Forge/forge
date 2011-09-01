@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
+import forge.card.CardPrinted;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 
@@ -36,7 +37,7 @@ import static javax.swing.JOptionPane.*;
 public class CardListViewer {
 
     //Data and number of choices for the list
-    private List<String> list;
+    private List<CardPrinted> list;
 
     //Decoration
     private String title;
@@ -53,15 +54,15 @@ public class CardListViewer {
     private JOptionPane optionPane;
     private Action ok;
 
-    public CardListViewer(String title, List<String> list) {
+    public CardListViewer(String title, List<CardPrinted> list) {
         this(title, "", list, null);
     }
 
-    public CardListViewer(String title, String message, List<String> list) {
+    public CardListViewer(String title, String message, List<CardPrinted> list) {
         this(title, message, list, null);
     }
     
-    public CardListViewer(String title, String message, List<String> list, Icon dialogIcon) {
+    public CardListViewer(String title, String message, List<CardPrinted> list, Icon dialogIcon) {
         this.title = title;
         this.list = unmodifiableList(list);
         jList = new JList(new ChooserListModel());
@@ -128,7 +129,7 @@ public class CardListViewer {
             optionPane.setValue(value);
         }
     }
-
+    
     private class CardListFocuser implements WindowFocusListener {
 
         @Override
@@ -146,7 +147,7 @@ public class CardListViewer {
             int row = jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if (row >= 0 && row < list.size()) {
-                Card card = AllZone.getCardFactory().getCard(list.get(row) , null);
+                Card card = AllZone.getCardFactory().getCard(list.get(row).getName(), null);
                 card.setRandomSetCode();
                 card.setImageFilename(CardUtil.buildFilename(card));
                 detail.setCard(card);

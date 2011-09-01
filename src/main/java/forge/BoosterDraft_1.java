@@ -1,11 +1,16 @@
 package forge;
 
+import forge.card.CardPool;
+import forge.card.CardPoolView;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class BoosterDraft_1 implements BoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
@@ -14,7 +19,7 @@ public class BoosterDraft_1 implements BoosterDraft {
     private static int stopCount = 45; //boosterPackSize * 3;//should total of 45
 
     private int currentCount = 0;
-    private CardList[] pack;//size 8
+    private List<List<CardPrinted>> pack;//size 8
     //private BoosterGenerator packs[] = {new BoosterGenerator(), new BoosterGenerator(), new BoosterGenerator()};
     private ArrayList<BoosterGenerator> packs = new ArrayList<BoosterGenerator>();
     private int packNum = 0;
@@ -206,13 +211,12 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList nextChoice() {
-        if (pack[getMod()].size() == 0)
+    public CardPoolView nextChoice() {
+        if (pack.get(getCurrentBoosterIndex()).size() == 0)
             pack = get8BoosterPack();
 
         computerChoose();
-        CardList list = pack[getMod()];
-        return list;
+        return new CardPool(pack.get(getCurrentBoosterIndex()));
     }
 
     /**
@@ -220,25 +224,12 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return an array of {@link forge.CardList} objects.
      */
-    public CardList[] get8BoosterPack() {
-        CardList[] list = new CardList[]
-                {//nPlayers is 8
-                        new CardList(),
-                        new CardList(),
-                        new CardList(),
-                        new CardList(),
-
-                        new CardList(),
-                        new CardList(),
-                        new CardList(),
-                        new CardList(),
-                };
-        //ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
+    public List<List<CardPrinted>> get8BoosterPack() {
+        List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
 
         if (packNum < packs.size()) {
-            for (int i = 0; i < list.length; i++)
-                //list[i].addAll(pack.getBoosterPack());
-                list[i].addAll(packs.get(packNum).getBoosterPack());
+            for (int i = 0; i < 8; i++)
+                list.add(packs.get(packNum).getBoosterPack());
         }
 
         packNum++;
@@ -258,13 +249,29 @@ public class BoosterDraft_1 implements BoosterDraft {
     }
 
     private void computerChoose() {
-        int row[] = computerChoose[getMod()];
+        int row[] = computerChoose[getCurrentBoosterIndex()];
 
-        for (int i = 0; i < row.length; i++)
-            draftAI.choose(pack[row[i]], i);
+        for (int i = 0; i < row.length; i++) {
+            CardList forAi = new CardList();
+            List<CardPrinted> booster = pack.get(row[i]);
+            for (CardPrinted cr : booster) {
+                forAi.add(cr.toForgeCard());
+            }
+            // TODO: Please write this drafting code to work without heavy cards 
+            Card aiPick = draftAI.choose(forAi, i);
+            String pickedName = aiPick.getName();
+
+            for (int pick = booster.size()-1; pick >= 0; pick--) {
+                CardPrinted cp = booster.get(pick);
+                if (cp.getName().equalsIgnoreCase(pickedName)) {
+                    booster.remove(pick);
+                    break;
+                }
+            }
+        }
     }//computerChoose()
 
-    private int getMod() {
+    private int getCurrentBoosterIndex() {
         return currentCount % nPlayers;
     }
 
@@ -278,20 +285,20 @@ public class BoosterDraft_1 implements BoosterDraft {
     }
 
     /** {@inheritDoc} */
-    public void setChoice(Card c) {
-        CardList list = pack[getMod()];
+    public void setChoice(CardPrinted c) {
+        List<CardPrinted> thisBooster = pack.get(getCurrentBoosterIndex());
 
-        if (!list.contains(c))
-            throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c + " - booster pack = " + list);
+        if (!thisBooster.contains(c))
+            throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c + " - booster pack = " + thisBooster);
 
         if (Constant.Runtime.UpldDrft[0]) {
-            for (int i = 0; i < list.size(); i++) {
-                Card cc = list.get(i);
-                String CnBk = cc.getName() + "|" + cc.getCurSetCode();
+            for (int i = 0; i < thisBooster.size(); i++) {
+                CardPrinted cc = thisBooster.get(i);
+                String CnBk = cc.getName() + "|" + cc.getSet();
 
                 float pickValue = 0;
                 if (cc.equals(c))
-                    pickValue = (float)list.size() * (((((float)stopCount - (float)currentCount) * 100) / (float)stopCount) / 50);
+                    pickValue = thisBooster.size() * (1f - ((float) currentCount) / stopCount) * 2f;
                 else
                     pickValue = 0;
 
@@ -305,7 +312,7 @@ public class BoosterDraft_1 implements BoosterDraft {
             }
         }
 
-        list.remove(c);
+        thisBooster.remove(c);
         currentCount++;
     }//setChoice()
 }

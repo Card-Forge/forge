@@ -18,8 +18,6 @@ import java.util.*;
  * @version $Id$
  */
 public class QuestBattleManager {
-    /** Constant <code>aiDecks</code> */
-    private static transient Map<String, Deck> aiDecks = new HashMap<String, Deck>();
     /** Constant <code>easyAIDecks</code> */
     private static transient List<String> easyAIDecks;
     /** Constant <code>mediumAIDecks</code> */
@@ -30,53 +28,12 @@ public class QuestBattleManager {
     private static transient List<String> veryHardAIDecks;
 
     static {
-        List<String> aiDeckNames = getAIDeckNames();
-        easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
-        mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
-        hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
-        veryHardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.VERYHARD), aiDeckNames);
+        easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY));
+        mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM));
+        hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD));
+        veryHardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.VERYHARD));
     }
 
-
-    /**
-     * <p>removeAIDeck.</p>
-     * Removes a deck object stored in the 
-     *{@link forge.quest.gui.main.aiDecks} map.
-     *
-     * @param deckName a {@link java.lang.String} object.
-     */
-    public static void removeAIDeck(String deckName) {
-        aiDecks.remove(deckName);
-    }
-
-    /**
-     * <p>addAIDeck.</p>
-     * Adds a deck object stored in the 
-     *{@link forge.quest.gui.main.aiDecks} map.
-     *
-     * @param d a {@link forge.deck.Deck} object.
-     */
-    public static void addAIDeck(Deck d) {
-        aiDecks.put(d.getName(), d);
-    }
-
-    /**
-     * <p>getAIDeckFromMap.</p>
-     * Returns a deck object stored in the 
-     *{@link forge.quest.gui.main.aiDecks} map.
-     *
-     * @param deckName a {@link java.lang.String} object.
-     * @return a {@link forge.deck.Deck} object.
-     */
-    public static Deck getAIDeckFromMap(String deckName) {
-        if (!aiDecks.containsKey(deckName)) {
-            ErrorViewer.showError(new Exception(),
-                    "QuestData : getAIDeckFromMap(String deckName) error, deck name not found - %s", deckName);
-        }
-
-        return aiDecks.get(deckName);
-    }
-    
     /**
      * <p>getAIDeckNames.</p>
      *  Returns a list of decks stored in the
@@ -87,23 +44,10 @@ public class QuestBattleManager {
     public static List<String> getAIDeckNames() {
         return new ArrayList<String>(aiDecks.keySet());
     }
-    
-    /**
-     * <p>getDeckFromFile.</p>
-     * Returns a deck object built from a file name.
-     *
-     * @param deckName a {@link java.lang.String} object.
-     * @return a {@link forge.deck.Deck} object.
-     */
-    public static Deck getAIDeckFromFile(String deckName) {
-        final File file = ForgeProps.getFile(NewConstants.QUEST.DECKS);
-        final DeckManager manager = new DeckManager(file);
-        return manager.getDeck(deckName);
-    } 
 
     /**
      * <p>getOpponent.</p>
-     * 
+     *
      * Badly named; AllZoneUtil already has a method called getOpponents.
      * ?????
      *
@@ -178,11 +122,11 @@ public class QuestBattleManager {
      * @param aiDecks a {@link java.util.List} object.
      * @return a {@link java.util.List} object.
      */
-    private static List<String> readFile(File file, List<String> aiDecks) {
+    private static List<String> readFile(File file) {
         ArrayList<String> list = FileUtil.readFile(file);
 
         //remove any blank lines
-         ArrayList<String> noBlankLines = new ArrayList<String>();
+        ArrayList<String> noBlankLines = new ArrayList<String>();
         String s;
         for (String aList : list) {
             s = aList.trim();
@@ -196,12 +140,6 @@ public class QuestBattleManager {
             ErrorViewer.showError(new Exception(),
                     "QuestData : readFile() error, file %s is too short, it must contain at least 3 ai deck names",
                     file);
-        }
-
-        for (String aList : list) {
-            if (!aiDecks.contains(aList)) {
-                aiDecks.add(aList);
-            }
         }
 
         return list;

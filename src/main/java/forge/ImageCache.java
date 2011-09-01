@@ -6,6 +6,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
+
+import forge.card.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -139,6 +141,19 @@ public class ImageCache implements NewConstants {
         return getImage(key + "#" + scale);
     }
 
+    public static BufferedImage getImage(CardPrinted card, int width, int height) {
+        String key = card.getImageFilename();
+        BufferedImage original = getImage(key);
+        if (original == null) return null;
+
+        double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
+        //here would be the place to limit the scaling, scaling option in menu ?
+        if (scale > 1 && !scaleLargerThanOriginal) scale = 1;
+
+        return getImage(key + "#" + scale);
+    }
+    
+    
     /**
      * <p>getOriginalImage.</p>
      *
@@ -206,70 +221,7 @@ public class ImageCache implements NewConstants {
      * @return a {@link java.lang.String} object.
      */
     private static String getKey(Card card) {
-/*        String key = GuiDisplayUtil.cleanString(card.getImageName());
-        //if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
-        File path = null;
-        String tkn = "";
-        if (card.isToken() && !card.isCopiedToken())
-        {
-        	path = ForgeProps.getFile(IMAGE_TOKEN);
-        	tkn = TOKEN;
-        }
-        else
-        	path = ForgeProps.getFile(IMAGE_BASE);
-        
-        File  f = null;
-        if (!card.getCurSetCode().equals(""))
-        {
-            String nn = "";
-        	if (card.getRandomPicture() > 0)
-                nn = Integer.toString(card.getRandomPicture() + 1);
-        	
-        	StringBuilder sbKey = new StringBuilder();
-        	
-        	//First try 3 letter set code with MWS filename format 
-        	sbKey.append(card.getCurSetCode() + "/");
-        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
-        	
-        	f = new File(path, sbKey.toString() + ".jpg");
-        	if (f.exists())
-        		return sbKey.toString();
-        	
-        	sbKey = new StringBuilder();
-        	
-        	//Second, try 2 letter set code with MWS filename format
-        	sbKey.append(SetInfoUtil.getSetCode2_SetCode3(card.getCurSetCode()) + "/");
-        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
-        	
-        	f = new File(path, sbKey.toString() + ".jpg");
-        	if (f.exists())
-        		return sbKey.toString();
-        	
-        	sbKey = new StringBuilder();
-        	
-        	//Third, try 3 letter set code with Forge filename format
-        	sbKey.append(card.getCurSetCode() + "/");
-        	sbKey.append(GuiDisplayUtil.cleanString(card.getName()) + nn);
-        	
-        	f = new File(path, sbKey.toString() + ".jpg");
-        	if (f.exists())
-        		return sbKey.toString();
-        	
-        	//Last, give up with set images, go with the old picture type
-        	f = new File(path, key + nn + ".jpg");
-        	if (f.exists())
-        		return key;
-        	
-        	//if still no file, download if option enabled
-        }
-        
-        int n = card.getRandomPicture();
-        if (n > 0)
-        	key += n;
-        
-        key += tkn;
-//        key = GuiDisplayUtil.cleanString(key);
-*/
+
         if (card.isToken() && !card.isCopiedToken())
             return GuiDisplayUtil.cleanString(card.getImageName()) + TOKEN;
 

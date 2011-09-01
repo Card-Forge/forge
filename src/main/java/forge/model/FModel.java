@@ -78,12 +78,12 @@ public class FModel {
         Constant.Runtime.UpldDrft[0] = preferences.uploadDraftAI;
         Constant.Runtime.RndCFoil[0] = preferences.randCFoil;
 
-        final HttpUtil pinger = new HttpUtil();
+/*        final HttpUtil pinger = new HttpUtil();
         if (pinger.getURL("http://cardforge.org/draftAI/ping.php").equals("pong")) {
             Constant.Runtime.NetConn[0] = true;
-        } else {
+        } else {*/
             Constant.Runtime.UpldDrft[0] = false;
-        }
+      //  }
 
         setBuildInfo(new BuildInfo());
     }
