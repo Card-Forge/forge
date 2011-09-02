@@ -39,7 +39,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public final void add(final Object o) {
+    public void add(final Object o) {
         Card c = (Card) o;
 
         //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
@@ -163,7 +163,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @param c an Object
      */
-    public final void remove(final Object c) {
+    public void remove(final Object c) {
         cards.remove((Card) c);
         update();
     }
