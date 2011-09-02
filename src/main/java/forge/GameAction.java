@@ -76,9 +76,10 @@ public class GameAction {
         Card lastKnownInfo = null; 
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering Battlefield
-        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield))
-            lastKnownInfo = copied = c;
-        else {
+        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) {
+            lastKnownInfo = c;
+            copied = c;
+        } else {
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
@@ -92,7 +93,7 @@ public class GameAction {
         // This is the fix for Isochron Scepter and friends, we need to test other situations
         // To make sure it doesn't break anything serious
         for (Trigger trigger : c.getTriggers())
-            trigger.setHostCard(lastKnownInfo);
+            trigger.setHostCard(copied);
 
         if (suppress)
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
