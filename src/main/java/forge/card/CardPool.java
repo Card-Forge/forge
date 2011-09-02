@@ -32,6 +32,7 @@ public final class CardPool extends CardPoolView  {
     // Cards manipulation
     public void add(final CardPrinted card) { add(card, 1); }
     public void add(final CardPrinted card, final int amount) {
+        if (amount <= 0) { return; }
         cards.put(card, count(card) + amount);
         isListInSync = false;
     }
