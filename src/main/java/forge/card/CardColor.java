@@ -15,16 +15,20 @@ public final class CardColor implements Comparable<CardColor> {
     public static final byte GREEN = 1 << 5;
 
     private final byte myColor;
+    private final int orderWeight;
 
     // TODO: some cards state "CardName is %color%" (e.g. pacts of...) - fix this later
     public CardColor(final CardManaCost mana) {
         myColor = mana.getColorProfile();
+        orderWeight = getOrderWeight(); 
     }
 
     public boolean hasAnyColor(final byte colormask) { return (myColor & colormask) != 0; }
     public boolean hasAllColors(final byte colormask) { return (myColor & colormask) == colormask; }
 
     public int countColors() { byte v = myColor; int c = 0; for (; v != 0; c++) { v &= v - 1; } return c; } // bit count
+    // order has to be: W U B R G multi colorless - same as cards numbering through a set
+    public int getOrderWeight() { return myColor == 0 ? 0x400 : (countColors() == 1 ? myColor : 0x200); } 
 
     public boolean isColorless() { return myColor == 0; }
     public boolean isMulticolor() { return countColors() > 1; }
@@ -32,7 +36,9 @@ public final class CardColor implements Comparable<CardColor> {
     public boolean isEqual(final byte color) { return color == myColor; }
 
     @Override
-    public int compareTo(final CardColor other) { return myColor - other.myColor; }
+    public int compareTo(final CardColor other) {
+        return orderWeight - other.orderWeight;
+    }
 
     // Presets
     public boolean hasWhite() { return hasAnyColor(WHITE); }
