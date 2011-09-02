@@ -1,0 +1,11 @@
+Name:Blowfly Infestation
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.countersGE1M1M1| Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.
+SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blowfly_infestation.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/58.jpg
+End
