@@ -26,7 +26,7 @@ public class GuiInput extends MyObservable implements Observer {
     }
 
     /** {@inheritDoc} */
-    public void update(Observable observable, Object obj) {
+    public final void update(final Observable observable, final Object obj) {
         Input tmp = AllZone.getInputControl().updateInput();
         if (tmp != null) {
             setInput(tmp);
@@ -38,7 +38,7 @@ public class GuiInput extends MyObservable implements Observer {
      *
      * @param in a {@link forge.gui.input.Input} object.
      */
-    private void setInput(Input in) {
+    private void setInput(final Input in) {
         input = in;
         input.showMessage();
     }
@@ -46,21 +46,21 @@ public class GuiInput extends MyObservable implements Observer {
     /**
      * <p>showMessage.</p>
      */
-    public void showMessage() {
+    public final void showMessage() {
         input.showMessage();
     }
 
     /**
      * <p>selectButtonOK.</p>
      */
-    public void selectButtonOK() {
+    public final void selectButtonOK() {
         input.selectButtonOK();
     }
 
     /**
      * <p>selectButtonCancel.</p>
      */
-    public void selectButtonCancel() {
+    public final void selectButtonCancel() {
         input.selectButtonCancel();
     }
 
@@ -69,7 +69,7 @@ public class GuiInput extends MyObservable implements Observer {
      *
      * @param player a {@link forge.Player} object.
      */
-    public void selectPlayer(Player player) {
+    public final void selectPlayer(final Player player) {
         input.selectPlayer(player);
     }
 
@@ -79,13 +79,13 @@ public class GuiInput extends MyObservable implements Observer {
      * @param card a {@link forge.Card} object.
      * @param zone a {@link forge.PlayerZone} object.
      */
-    public void selectCard(Card card, PlayerZone zone) {
+    public final void selectCard(final Card card, final PlayerZone zone) {
         input.selectCard(card, zone);
     }
 
     /** {@inheritDoc} */
     @Override
-    public String toString() {
+    public final String toString() {
         return input.toString();
     }
 }
