@@ -84,7 +84,7 @@ public class StaticAbility {
     			|| mapParams.containsKey("AddTrigger"))
     		return 6;
     	
-    	if(mapParams.containsKey("AddColor") || mapParams.containsKey("RemoveColor"))
+    	if(mapParams.containsKey("AddColor") || mapParams.containsKey("RemoveColor") || mapParams.containsKey("SetColor"))
     		return 5;
     	
     	if(mapParams.containsKey("AddType") || mapParams.containsKey("RemoveCardType")
