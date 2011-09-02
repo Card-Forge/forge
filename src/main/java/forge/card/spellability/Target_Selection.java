@@ -158,6 +158,17 @@ public class Target_Selection {
         return false;
     }
 
+    public ArrayList<Object> getUniqueTargets(SpellAbility ability){
+        ArrayList<Object> targets = new ArrayList<Object>();
+        SpellAbility child = ability;
+        while(child instanceof Ability_Sub){
+            child = ((Ability_Sub)child).getParent();
+            targets.addAll(child.getTarget().getTargets());
+        }
+        
+        return targets;
+    }
+    
     // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much different than the original
 
@@ -177,17 +188,29 @@ public class Target_Selection {
 
         CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(target.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard());
 
+        ArrayList<Object> objects = new ArrayList<Object>();
+        if (tgt.isUniqueTargets()){
+            objects = getUniqueTargets(ability);
+            for (Object o : objects) {
+                if (o instanceof Card && objects.contains(o)){
+                    choices.remove((Card)o);
+                }
+            }
+        }
+        
         // Remove cards already targeted
         ArrayList<Card> targeted = tgt.getTargetCards();
         for (Card c : targeted) {
-            if (choices.contains(c))
+            if (choices.contains(c)){
                 choices.remove(c);
+            }
         }
-
+        
         if (zone.equals(Constant.Zone.Battlefield)) {
-            AllZone.getInputControl().setInput(input_targetSpecific(choices, true, mandatory));
-        } else
+            AllZone.getInputControl().setInput(input_targetSpecific(choices, true, mandatory, objects));
+        } else{
             chooseCardFromList(choices, true, mandatory);
+        }
     }//input_targetValid
 
     //CardList choices are the only cards the user can successful select
@@ -197,9 +220,10 @@ public class Target_Selection {
      * @param choices a {@link forge.CardList} object.
      * @param targeted a boolean.
      * @param mandatory a boolean.
+     * @param objects TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public Input input_targetSpecific(final CardList choices, final boolean targeted, final boolean mandatory) {
+    public Input input_targetSpecific(final CardList choices, final boolean targeted, final boolean mandatory, final ArrayList<Object> alreadyTargeted) {
         final SpellAbility sa = this.ability;
         final Target_Selection select = this;
         final Target tgt = this.target;
@@ -212,6 +236,9 @@ public class Target_Selection {
             public void showMessage() {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Targeted: ");
+                for(Object o : alreadyTargeted){
+                    sb.append(o).append(" ");
+                }
                 sb.append(tgt.getTargetedString());
                 sb.append("\n");
                 sb.append(tgt.getVTSelection());
@@ -254,6 +281,10 @@ public class Target_Selection {
 
             @Override
             public void selectPlayer(Player player) {
+                if (alreadyTargeted.contains(player)){
+                    return;
+                }
+                
                 if ((tgt.canTgtPlayer() || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer().getOpponent()))) &&
                         player.canTarget(sa)) {
                     tgt.addTarget(player);

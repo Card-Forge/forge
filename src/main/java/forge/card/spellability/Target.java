@@ -17,7 +17,7 @@ public class Target {
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this whole Target
     // Target Choices (which is specific for the StackInstance)
     private Card srcCard;
-
+    private boolean uniqueTargets = false;
     private Target_Choices choice = null;
 
     /**
@@ -490,5 +490,13 @@ public class Target {
         }
 
         return false;
+    }
+
+    public boolean isUniqueTargets() {
+        return uniqueTargets;
+    }
+
+    public void setUniqueTargets(boolean unique) {
+        this.uniqueTargets = unique;
     }
 }

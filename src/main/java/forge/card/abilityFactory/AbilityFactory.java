@@ -264,6 +264,10 @@ public class AbilityFactory {
             // TargetValidTargeting most for Counter: e.g. target spell that targets X.
             if (mapParams.containsKey("TargetValidTargeting"))
                 abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
+            
+            if (mapParams.containsKey("TargetUnique")){
+                abTgt.setUniqueTargets(true);
+            }
         }
 
         hasSubAb = mapParams.containsKey("SubAbility");
