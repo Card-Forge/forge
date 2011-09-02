@@ -2,7 +2,6 @@ package forge;
 
 
 import forge.card.CardRules;
-import forge.card.CardRules.Predicates;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
@@ -29,8 +28,8 @@ import net.slightlymagic.maxmtg.Predicate;
  */
 public class ReadDraftBoosterPack implements NewConstants {
 
-    /** Constant <code>comment="//"</code> */
-    final private static String comment = "//";
+    /** Constant <code>comment="//"</code>. */
+    private static final String comment = "//";
 
     private List<CardPrinted> commonCreatureList = new ArrayList<CardPrinted>();
     private List<CardPrinted> commonNonCreatureList = new ArrayList<CardPrinted>();
@@ -53,11 +52,12 @@ public class ReadDraftBoosterPack implements NewConstants {
         addBasicLands(list, 20);
         addBasicSnowLands(list, 20);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) {
             list.add(CardDb.instance().getCard("Terramorphic Expanse", "M10"));
+        }
 
         return list;
-    }//getBoosterPack5()
+    } //getBoosterPack5()
 
     public static final void addBasicLands(final CardPool pool, final int count) {
         CardDb db = CardDb.instance();
@@ -75,13 +75,13 @@ public class ReadDraftBoosterPack implements NewConstants {
         pool.add(db.getCard("Snow-Covered Plains", "ICE"), count);
         pool.add(db.getCard("Snow-Covered Mountain", "ICE"), count);
         pool.add(db.getCard("Snow-Covered Swamp", "ICE"), count);
-    }    
+    }
     /**
      * <p>getBoosterPack.</p>
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView getBoosterPack() {
+    public final CardPoolView getBoosterPack() {
         CardPool pack = new CardPool();
 
         pack.add(getRandomCard(rareList));
@@ -109,7 +109,7 @@ public class ReadDraftBoosterPack implements NewConstants {
     }
 
     //return CardList of 5 or 6 cards, one for each color and maybe an artifact
-    private List<CardPrinted> getVariety(List<CardPrinted> in) {
+    private List<CardPrinted> getVariety(final List<CardPrinted> in) {
         List<CardPrinted> out = new ArrayList<CardPrinted>();
         Collections.shuffle(in, MyRandom.random);
 
@@ -119,7 +119,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         }
 
         return out;
-    }//getVariety()
+    } //getVariety()
 
     private static CardPrinted findColor(final List<CardPrinted> in, final int color) {
         Predicate<CardRules> filter = null;
@@ -144,7 +144,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         }
         int index = MyRandom.random.nextInt(list.size());
         return list.get(index);
-    }//getRandomCard()
+    } //getRandomCard()
 
 
     /**
@@ -163,7 +163,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         CardRules.Predicates.Presets.isCreature.split(commonList, CardPrinted.fnGetRules,
                 commonCreatureList, commonNonCreatureList);
 
-    }//setup()
+    } //setup()
 
     private List<String> readFile(final File file) {
         List<String> cardList = new ArrayList<String>();
@@ -188,7 +188,5 @@ public class ReadDraftBoosterPack implements NewConstants {
         }
 
         return cardList;
-    }//readFile()
+    } //readFile()
 }
-
-
