@@ -236,10 +236,11 @@ public class AbilityFactory_Pump {
                         && AllZone.getCombat().isUnblocked(c) && attack > 0)
                     return true;
 
-                //is the creature in blocked and the blocker would survive
+                //is the creature blocked and the blocker would survive
                 if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers) && AllZone.getCombat().isAttacking(c)
                         && AllZone.getCombat().isBlocked(c)
-                        && CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0)))
+                        && AllZone.getCombat().getBlockers(c) != null
+                        && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0)))
                     return true;
 
                 //if the life of the computer is in danger, try to pump potential blockers before declaring blocks
