@@ -5,6 +5,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.CardList;
 import forge.Player;
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
@@ -414,32 +415,20 @@ public abstract class Trigger {
 
         }
 
-        if(mapParams.containsKey("CheckSVar")) {
-            String SVarName = mapParams.get("CheckSVar");
-            String operator = "GE";
-            String operand = "1";
-
-            if(mapParams.containsKey("SVarCompare"))
-            {
-                operator =  mapParams.get("SVarCompare").substring(0,2);
-                operand = mapParams.get("SVarCompare").substring(2);
+        if (mapParams.containsKey("CheckSVar")) {
+            int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), mapParams.get("CheckSVar"), null);
+            String comparator = "GE1";
+            if (mapParams.containsKey("SVarCompare")) {
+                comparator = mapParams.get("SVarCompare");
             }
-
-            int sVarResult = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(SVarName));
-            int operandResult = 0;
-            try {
-                operandResult = Integer.parseInt(operand);
-            }
-            catch ( Exception e) {
-                operandResult = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(operand));
-            }
-
-            if(!AllZoneUtil.compare(sVarResult,operator,operandResult))
-            {
+            String svarOperator = comparator.substring(0, 2);
+            String svarOperand = comparator.substring(2);
+            int operandValue = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), svarOperand, null);
+            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
-
         }
+
 
         return true;
     }
