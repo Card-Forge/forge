@@ -15,7 +15,7 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public class Deck implements Comparable<Deck>, Serializable {
+public final class Deck implements Comparable<Deck>, Serializable {
     /**
      *
      */
@@ -70,7 +70,7 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @param type a {@link java.lang.String} object.
      */
-    public Deck(String type) {
+    public Deck(final String type) {
         this();
         setDeckType(type);
     }
@@ -164,28 +164,12 @@ public class Deck implements Comparable<Deck>, Serializable {
      *
      * @param cardName a {@link java.lang.String} object.
      */
-    public void addMain(String cardName) { addMain( CardDb.instance().getCard(cardName) ); }
-    public void addMain(CardPrinted card) { main.add(card); }
-    public void addMain(CardPoolView list) { main.addAll(list); }
-
-
-    /**
-     * <p>countMain.</p>
-     *
-     * @return a int.
-     */
-    public int countMain() {
-        return main.countAll();
-    }
-
-    /**
-     * <p>removeMain.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    public void removeMain(CardPrinted card) {
-        main.remove(card);
-    }
+    public void addMain(final String cardName) { addMain(CardDb.instance().getCard(cardName)); }
+    public void addMain(final CardPrinted card) { main.add(card); }
+    public void addMain(final CardPoolView list) { main.addAll(list); }
+    public void removeMain(final CardPrinted card) { main.remove(card); }
+    public void removeMain(final CardPrinted card, final int amount) { main.remove(card, amount); }
+    public int countMain() { return main.countAll(); }
 
     /**
      * <p>addSideboard.</p>
@@ -196,7 +180,6 @@ public class Deck implements Comparable<Deck>, Serializable {
     public final void addSideboard(final CardPrinted card) { sideboard.add(card); }
     public final void addSideboard(final CardPrinted card, final int amount) { sideboard.add(card, amount); }
     public final void addSideboard(final CardPoolView cards) { sideboard.addAll(cards); }
-
 
     /**
      * <p>countSideboard.</p>

@@ -174,7 +174,11 @@ public abstract class Predicate<T> {
         return new Node<T>(operand1, operator, operand2);
     }
     // Predefined operators: and, or
-    public static <T> Predicate<T> and(final Predicate<T> operand1, final Predicate<T> operand2) { return new NodeAnd<T>(operand1, operand2); }
+    public static <T> Predicate<T> and(final Predicate<T> operand1, final Predicate<T> operand2) {
+        if (operand1.is1()) { return operand2; }
+        if (operand2.is1()) { return operand1; }
+        return new NodeAnd<T>(operand1, operand2);
+        }
     public static <T> Predicate<T> and(final Iterable<Predicate<T>> operand) { return new MultiNodeAnd<T>(operand); }
     public static <T, U> Predicate<T> and(final Predicate<T> operand1, final Predicate<U> operand2, Lambda1<U, T> bridge) { return new NodeAndBridged<T, U>(operand1, operand2, bridge); } 
 

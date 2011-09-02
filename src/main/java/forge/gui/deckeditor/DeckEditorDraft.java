@@ -11,6 +11,7 @@ import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
@@ -98,10 +99,11 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
+        
+        this.setSize(1024, 740);
+        GuiUtils.centerFrame(this);
+        this.setResizable(false);
 
-        //Use both so that when "un"maximizing, the frame isn't tiny
-        setSize(1024, 740);
-        //setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 
     public DeckEditorDraft() {

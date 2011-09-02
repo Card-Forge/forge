@@ -1,15 +1,16 @@
-package forge;
+package forge.quest.gui;
 
+import forge.AllZone;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
-import forge.quest.gui.QuestFrame;
+import forge.quest.data.QuestPreferences;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import java.awt.Color;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -21,11 +22,11 @@ import java.awt.event.WindowEvent;
  * @author Forge
  * @version $Id$
  */
-public class Gui_QuestOptions extends JFrame {
+public class QuestOptions extends JFrame {
     /** Constant <code>serialVersionUID=2018518804206822235L</code> */
     private static final long serialVersionUID = 2018518804206822235L;
 
-    private forge.quest.data.QuestData questData = new forge.quest.data.QuestData();
+    private QuestData questData = new QuestData();
 
     private JLabel jLabel1 = new JLabel();
     private JButton continueQuestButton = new JButton();
@@ -52,7 +53,7 @@ public class Gui_QuestOptions extends JFrame {
     /**
      * <p>Constructor for Gui_QuestOptions.</p>
      */
-    public Gui_QuestOptions() {
+    public QuestOptions() {
         try {
             jbInit();
         } catch (Exception ex) {
@@ -79,25 +80,29 @@ public class Gui_QuestOptions extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent ev) {
-                Gui_QuestOptions.this.dispose();
+                QuestOptions.this.dispose();
                 new OldGuiNewGame();
             }
         });
 
         //is there any saved data?
         if (!questData.hasSaveFile()) continueQuestButton.setEnabled(false);
-    }//setup()
+    } //setup()
 
     //show total number of games for each difficulty
     /**
      * <p>setupRadioButtonText.</p>
      */
     private void setupRadioButtonText() {
-        String[] diff = questData.getDifficultyChoices();
+        String[] diff = QuestPreferences.getDifficulty();
         JRadioButton[] b = {easyRadio, mediumRadio, hardRadio, veryHardRadio};
 
         for (int i = 0; i < diff.length; i++) {
-            b[i].setText(diff[i] + " - " + questData.getTotalNumberOfGames(i));
+            //-2 because you start a level 1, and the last level is secret
+            int numberLevels = QuestData.RANK_TITLES.length - 2;
+            int numGames = numberLevels * QuestPreferences.getWinsForRankIncrease(i);
+
+            b[i].setText(String.format("%s - %d", diff[i], numGames));
         }
 
     }//setupRadioButtonText()
@@ -215,7 +220,7 @@ public class Gui_QuestOptions extends JFrame {
     void continueQuestButton_actionPerformed(ActionEvent e) {
         //set global variable
         AllZone.setQuestData(QuestDataIO.loadData());
-        AllZone.getQuestData().setDifficultyIndex();
+        AllZone.getQuestData().guessDifficultyIndex();
         dispose();
 
         new QuestFrame();

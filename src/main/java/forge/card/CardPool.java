@@ -43,15 +43,11 @@ public final class CardPool extends CardPoolView  {
         for (Entry<CardPrinted, Integer> e : map) { add(e.getKey(), e.getValue()); }
         isListInSync = false;
     }
-    public void addAll(final Entry<CardPrinted, Integer>[] map) {
-        for (Entry<CardPrinted, Integer> e : map) { add(e.getKey(), e.getValue()); }
-        isListInSync = false;
-    }
 
     public void remove(final CardPrinted card) { remove(card, 1); }
     public void remove(final CardPrinted card, final int amount) {
         int count = count(card);
-        if (count == 0) { return; }
+        if (count == 0 || amount <= 0) { return; }
         if (count <= amount) { cards.remove(card); }
         else { cards.put(card, count - amount); }
         isListInSync = false;

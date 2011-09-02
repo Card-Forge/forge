@@ -280,13 +280,13 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 Deck newDeck = DeckManager.readDeck(file);
                 questData.addDeck(newDeck);
 
-                CardPool cardpool = new CardPool(questData.getCardpool());
+                CardPool cardpool = new CardPool(questData.getCards().getCardpool());
                 CardPool decklist = new CardPool();
                 for (Entry<CardPrinted, Integer> s : newDeck.getMain()) {
                     CardPrinted cp = s.getKey();
                     decklist.add(cp, s.getValue());
                     cardpool.add(cp, s.getValue());
-                    questData.getCardpool().add(cp, s.getValue());
+                    questData.getCards().getCardpool().add(cp, s.getValue());
                 }
                 deckDisplay.setDecks(cardpool, decklist);
 
@@ -347,7 +347,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             if (StringUtils.isBlank(deckName)) { return; }
 
             setPlayerDeckName(deckName);
-            CardPool cards = new CardPool(questData.getCardpool().getView());
+            CardPool cards = new CardPool(questData.getCards().getCardpool().getView());
             CardPoolView deck = questData.getDeck(deckName).getMain();
 
             // show in pool all cards except ones used in deck
@@ -358,7 +358,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
     private final ActionListener newDeckActionListener = new ActionListener() {
         public void actionPerformed(final ActionEvent a) {
-            deckDisplay.setDecks(questData.getCardpool().getView(), new CardPool());
+            deckDisplay.setDecks(questData.getCards().getCardpool().getView(), new CardPool());
             setPlayerDeckName("");
         }
     };
@@ -441,7 +441,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             questData.removeDeck(currentDeck.getName());
 
             //show card pool
-            deckDisplay.setDecks(questData.getCardpool().getView(), new CardPool());
+            deckDisplay.setDecks(questData.getCards().getCardpool().getView(), new CardPool());
 
             setPlayerDeckName("");
         }

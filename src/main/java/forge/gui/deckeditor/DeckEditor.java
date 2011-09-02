@@ -57,9 +57,6 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
     private JButton analysisButton = new JButton();
-    private JScrollPane jScrollPane3 = new JScrollPane();
-    private JPanel jPanel3 = new JPanel();
-    private GridLayout gridLayout1 = new GridLayout();
 
     private JLabel labelFilterName = new JLabel();
     private JLabel labelFilterType = new JLabel();
@@ -227,10 +224,6 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Deck Editor");
-        jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jPanel3.setLayout(gridLayout1);
-        gridLayout1.setColumns(1);
-        gridLayout1.setRows(0);
 
         Container pane = this.getContentPane();
         MigLayout layout = new MigLayout("fill");

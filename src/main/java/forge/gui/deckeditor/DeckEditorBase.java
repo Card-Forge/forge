@@ -1,6 +1,8 @@
 package forge.gui.deckeditor;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -84,6 +86,5 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     public void updateDisplay() {
         top.setFilter(buildFilter());
     }
-
 
 }

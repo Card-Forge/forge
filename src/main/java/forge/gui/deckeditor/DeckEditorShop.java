@@ -1,7 +1,5 @@
 package forge.gui.deckeditor;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -9,15 +7,15 @@ import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
@@ -27,6 +25,7 @@ import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.view.swing.OldGuiNewGame;
 
@@ -38,7 +37,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-public class DeckEditorShop extends DeckEditorBase {
+public final class DeckEditorShop extends DeckEditorBase {
 
     /** Constant <code>serialVersionUID=3988857075791576483L</code> */
     private static final long serialVersionUID = 3988857075791576483L;
@@ -46,9 +45,6 @@ public class DeckEditorShop extends DeckEditorBase {
     private JButton buyButton = new JButton();
     private JButton sellButton = new JButton();
 
-    private JScrollPane jScrollPane3 = new JScrollPane();
-    private JPanel jPanel3 = new JPanel();
-    private GridLayout gridLayout1 = new GridLayout();
     private JLabel creditsLabel = new JLabel();
     private JLabel jLabel1 = new JLabel();
     private JLabel sellPercentageLabel = new JLabel();
@@ -60,18 +56,9 @@ public class DeckEditorShop extends DeckEditorBase {
     // get pricelist:
     private ReadPriceList r = new ReadPriceList();
     private Map<String, Integer> mapPrices = r.getPriceList();
+    private Map<CardPrinted, Integer> decksUsingMyCards;
 
 
-    /** {@inheritDoc} */
-
-    /**
-     * <p>
-     * show.
-     * </p>
-     * 
-     * @param exitCommand
-     *            a {@link forge.Command} object.
-     */
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = -7428793574300520612L;
@@ -92,29 +79,46 @@ public class DeckEditorShop extends DeckEditorBase {
 
         setup();
 
-        multiplier = questData.getSellMutliplier();
+        decksUsingMyCards = countDecksForEachCard();
 
-        CardPoolView forSale = questData.getShopList();
+        multiplier = questData.getCards().getSellMutliplier();
+
+        CardPoolView forSale = questData.getCards().getShopList();
         if (forSale.isEmpty()) {
-            questData.generateCardsInShop();
-            forSale = questData.getShopList();
+            questData.getCards().generateCardsInShop();
+            forSale = questData.getCards().getShopList();
         }
-        CardPoolView owned = questData.getCardpool().getView();
+        CardPoolView owned = questData.getCards().getCardpool().getView();
 
         setDecks(forSale, owned);
 
         double multiPercent = multiplier * 100;
         NumberFormat formatter = new DecimalFormat("#0.00");
         String maxSellingPrice = "";
-        int maxSellPrice = questData.getSellPriceLimit();
+        int maxSellPrice = questData.getCards().getSellPriceLimit();
 
         if (maxSellPrice < Integer.MAX_VALUE) { maxSellingPrice = String.format("     Max selling price: %d", maxSellPrice); }
         sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) + "% of value)" + maxSellingPrice);
 
         top.sort(1, true);
         bottom.sort(1, true);
-    }// show(Command)
+    } // show(Command)
 
+    // fills number of decks using each card
+    private Map<CardPrinted, Integer> countDecksForEachCard() {
+        Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
+        for (String deckName : questData.getDeckNames()) {
+            Deck deck = questData.getDeck(deckName);
+            for (Entry<CardPrinted, Integer> e : deck.getMain()) {
+                CardPrinted card = e.getKey();
+                Integer iValue = result.get(card);
+                int cntDecks = iValue == null ? 1 : 1 + iValue.intValue();
+                result.put(card, Integer.valueOf(cntDecks));
+            }
+        }
+        return result;
+    }
+    
     /**
      * <p>
      * setup.
@@ -128,27 +132,21 @@ public class DeckEditorShop extends DeckEditorBase {
         columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
         columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
         columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<CardPrinted>("R", 30, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Set", 35, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+
+        List<TableColumnInfo<CardPrinted>> columnsBelow = new ArrayList<TableColumnInfo<CardPrinted>>(columns);
         columns.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
-
         top.setup(columns, cardView);
-        bottom.setup(columns, cardView);
 
-        setSize(1024, 768);
+        columnsBelow.add(new TableColumnInfo<CardPrinted>("#Dk", 30, fnDeckCompare, fnDeckGet));
+        columnsBelow.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
+        bottom.setup(columnsBelow, cardView);
+
+        this.setSize(1024, 768);
+        GuiUtils.centerFrame(this);
         this.setResizable(false);
-        Dimension screen = getToolkit().getScreenSize();
-        Rectangle bounds = getBounds();
-        bounds.width = 1024;
-        bounds.height = 768;
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        setBounds(bounds);
-        // TODO use this as soon the deck editor has resizable GUI
-        // //Use both so that when "un"maximizing, the frame isn't tiny
-        // setSize(1024, 740);
-        // setExtendedState(Frame.MAXIMIZED_BOTH);
-    }// setupAndDisplay()
+    }
 
     /**
      * <p>
@@ -211,12 +209,7 @@ public class DeckEditorShop extends DeckEditorBase {
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Card Shop");
-        jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setBounds(new Rectangle(6, 168, 225, 143));
-        jPanel3.setBounds(new Rectangle(7, 21, 224, 141));
-        jPanel3.setLayout(gridLayout1);
-        gridLayout1.setColumns(1);
-        gridLayout1.setRows(0);
+
         creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         creditsLabel.setText("Total credits: " + questData.getCredits());
         if (!OldGuiNewGame.useLAFFonts.isSelected())
@@ -227,6 +220,7 @@ public class DeckEditorShop extends DeckEditorBase {
             sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
+        
         this.getContentPane().add(cardView, null);
         this.getContentPane().add(top.getTableDecorated(), null);
         this.getContentPane().add(bottom.getTableDecorated(), null);
@@ -263,7 +257,7 @@ public class DeckEditorShop extends DeckEditorBase {
             bottom.addCard(c);
             top.removeCard(c);
 
-            questData.buyCard(c, value);
+            questData.getCards().buyCard(c, value);
 
             creditsLabel.setText("Total credits: " + questData.getCredits());
         } else {
@@ -271,14 +265,7 @@ public class DeckEditorShop extends DeckEditorBase {
         }
     }
 
-    /**
-     * <p>
-     * sellButton_actionPerformed.
-     * </p>
-     * 
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
+
     void sellButton_actionPerformed(ActionEvent e) {
         CardPrinted c = bottom.getSelectedCard();
         if (c == null) { return; }
@@ -286,20 +273,10 @@ public class DeckEditorShop extends DeckEditorBase {
         bottom.removeCard(c);
         top.addCard(c);
 
-        int price = Math.min((int) (multiplier * getCardValue(c)), questData.getSellPriceLimit());
-        questData.sellCard(c, price);
-        questData.addCardToShopList(c);
+        int price = Math.min((int) (multiplier * getCardValue(c)), questData.getCards().getSellPriceLimit());
+        questData.getCards().sellCard(c, price);
 
         creditsLabel.setText("Total credits: " + questData.getCredits());
-
-        int leftInPool = questData.getCardpool().count(c);
-        // remove sold cards from all decks:
-        for (String deckName : questData.getDeckNames()) {
-            Deck deck = questData.getDeck(deckName);
-            for (int cntInDeck = deck.getMain().count(c); cntInDeck > leftInPool; cntInDeck--) {
-                deck.removeMain(c);
-            }
-        }
     }
 
     @SuppressWarnings("rawtypes")
@@ -310,4 +287,17 @@ public class DeckEditorShop extends DeckEditorBase {
         new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
             public Object apply(final Entry<CardPrinted, Integer> from) { return getCardValue(from.getKey()); } };
 
+    @SuppressWarnings("rawtypes")
+    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnDeckCompare =
+        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
+            public Comparable apply(final Entry<CardPrinted, Integer> from) {
+                Integer iValue = decksUsingMyCards.get(from.getKey());
+                return iValue == null ? Integer.valueOf(0) : iValue;
+            } };
+    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnDeckGet =
+        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
+            public Object apply(final Entry<CardPrinted, Integer> from) {
+                Integer iValue = decksUsingMyCards.get(from.getKey());
+                return iValue == null ? "" : iValue.toString();
+            } };
 }

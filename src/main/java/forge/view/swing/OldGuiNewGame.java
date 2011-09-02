@@ -20,6 +20,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.MENU;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.OPTIONS;
+import forge.quest.gui.QuestOptions;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -277,7 +278,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // ActionListener
                 OldGuiNewGame.this.dispose();
 
-                new Gui_QuestOptions();
+                new QuestOptions();
             }
         });
     } // addListeners()

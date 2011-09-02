@@ -9,6 +9,7 @@ import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
 
@@ -42,24 +43,9 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     private JButton removeButton = new JButton();
     private JButton analysisButton = new JButton();
 
-    private GridLayout gridLayout1 = new GridLayout();
+    private JLabel labelSortHint = new JLabel();
 
-    private JLabel jLabel1 = new JLabel();
 
-    /** {@inheritDoc} */
-    @Override
-    public void setTitle(String message) {
-        super.setTitle(message);
-    }
-
-    /**
-     * <p>
-     * show.
-     * </p>
-     * 
-     * @param exitCommand
-     *            a {@link forge.Command} object.
-     */
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = -7428793574300520612L;
@@ -100,7 +86,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         CardPoolView bottomPool = deck.getMain();
         CardPool cardpool = new CardPool();
-        cardpool.addAll(AllZone.getQuestData().getCardpool());
+        cardpool.addAll(AllZone.getQuestData().getCards().getCardpool());
 
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(bottomPool);
@@ -136,21 +122,15 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
 
-        setSize(1024, 768);
+        this.setSize(1024, 768);
+        GuiUtils.centerFrame(this);
         this.setResizable(false);
-        Dimension screen = getToolkit().getScreenSize();
-        Rectangle bounds = getBounds();
-        bounds.width = 1024;
-        bounds.height = 768;
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        setBounds(bounds);
 
         // TODO use this as soon the deck editor has resizable GUI
         // //Use both so that when "un"maximizing, the frame isn't tiny
         // setSize(1024, 740);
         // setExtendedState(Frame.MAXIMIZED_BOTH);
-    }// setupAndDisplay()
+    } // setupAndDisplay()
 
     public DeckEditorQuest() {
         try {
@@ -167,7 +147,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
     private void jbInit() throws Exception {
         this.setLayout(null);
-        
+
         top.getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
         bottom.getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
 
@@ -205,7 +185,6 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         /**
          * Type filtering
          */
-        
         filterBoxes.land.setBounds(340, 400, 48, 20);
         filterBoxes.creature.setBounds(385, 400, 65, 20);
         filterBoxes.sorcery.setBounds(447, 400, 62, 20);
@@ -245,11 +224,9 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Deck Editor");
-        gridLayout1.setColumns(1);
-        gridLayout1.setRows(0);
 
-        jLabel1.setText("Click on the column name (like name or color) to sort the cards");
-        jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
+        labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
+        labelSortHint.setBounds(new Rectangle(20, 1, 400, 19));
 
         this.getContentPane().add(top.getTableDecorated(), null);
         this.getContentPane().add(bottom.getTableDecorated(), null);
@@ -258,7 +235,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         this.getContentPane().add(analysisButton, null);
         this.getContentPane().add(bottom.getLabel(), null);
         this.getContentPane().add(top.getLabel(), null);
-        this.getContentPane().add(jLabel1, null);
+        this.getContentPane().add(labelSortHint, null);
         this.getContentPane().add(cardView, null);
 
         for (JCheckBox box : filterBoxes.allTypes) {
@@ -268,6 +245,13 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         for (JCheckBox box : filterBoxes.allColors) {
             this.getContentPane().add(box, null);
         }
+
+        top.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == ' ') { addButtonActionPerformed(null); }
+            }
+        });
     }
 
 
@@ -295,7 +279,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
     public void addCheatCard(CardPrinted card) {
         top.addCard(card);
-        AllZone.getQuestData().getCardpool().add(card);
+        AllZone.getQuestData().getCards().getCardpool().add(card);
     }
 
 }

@@ -245,7 +245,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             GamePlayerRating humanRating = game.getPlayerRating(PlayerIndex.HUMAN);
             GameLossReason whyAiLost = aiRating.getLossReason();
 
-            int rewardAltWinCondition = q.getCreditsRewardForAltWin(whyAiLost);
+            int rewardAltWinCondition = q.getRewards().getCreditsRewardForAltWin(whyAiLost);
             if (rewardAltWinCondition > 0) {
                 String winConditionName = "Unknown (bug)";
                 if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
@@ -264,7 +264,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
 
             int winTurn = game.getTurnGameEnded();
-            int turnCredits = q.getCreditsRewardForWinByTurn(winTurn);
+            int turnCredits = q.getRewards().getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) { // this case should never happen - anyway, no reward if we got here
             } else if (winTurn == 1) { sb.append("Won in one turn!");
@@ -340,7 +340,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
 
             //System.out.println("QuestData cardpoolsize:" + AllZone.getQuestData().getCardpool().size());
-            model.quest.clearShopList();
+            model.quest.getCards().clearShopList();
 
 
             if (model.quest.getAvailableQuests() != null) {
@@ -388,7 +388,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}));
         }
 
-        ArrayList<CardPrinted> cardsWon = model.quest.addCards(setsToGive);
+        ArrayList<CardPrinted> cardsWon = model.quest.getCards().addCards(setsToGive);
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
@@ -397,13 +397,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
     protected void giveQuestRewards(final boolean wonMatch) {
         // Award a random booster, as frequent as set in difficulty setup
-        if (model.quest.shouldAddCards(wonMatch)) {
+        if (model.quest.getRewards().willGiveBooster(wonMatch)) {
             giveBooster();
         }
 
         // Award credits
         if (wonMatch) {
-            long creds = model.quest.getCreditsToAdd(model.match);
+            long creds = model.quest.getRewards().getCreditsToAdd(model.match);
             model.quest.addCredits(creds);
 
             String s = getCreditsAwardedText(creds, model.match, model.quest);
@@ -418,7 +418,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             int wins = model.quest.getWin();
             if (wins > 0 && wins % 80 == 0) // at every 80 wins, give 10 random rares
             {
-                ArrayList<CardPrinted> randomRares = model.quest.addRandomRare(10);
+                List<CardPrinted> randomRares = model.quest.getCards().addRandomRare(10);
                 
                 ImageIcon icon = getIcon("BoxIcon.png");
                 String title = "You just won 10 random rares!";
@@ -443,7 +443,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                     sb.append(cardName.getName());
                     sb.append("\r\n");
                 }
-                model.quest.addAllCards(questRewardCards);
+                model.quest.getCards().addAllCards(questRewardCards);
                 sb.append("\r\n");
             }
             sb.append("Quest Bounty: ");
@@ -476,9 +476,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
 
         // Random rare given at 50% chance (65% with luck upgrade)
-        if (model.quest.shouldAddAdditionalCards(wonMatch)) {
-            
-            CardPrinted card = model.quest.addRandomRare();
+        if (wonMatch && model.quest.getRewards().getLuckyCoinResult()) {
+            CardPrinted card = model.quest.getCards().addRandomRare();
             ArrayList<CardPrinted> rares = new ArrayList<CardPrinted>();
             rares.add(card);
 

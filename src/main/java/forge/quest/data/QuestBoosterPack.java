@@ -1,12 +1,9 @@
 package forge.quest.data;
 
-import forge.Constant;
 import forge.card.CardDb;
 import forge.card.CardPrinted;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.properties.NewConstants;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,49 +19,12 @@ import net.slightlymagic.maxmtg.Predicate;
  * @author Forge
  * @version $Id$
  */
-public class QuestBoosterPack implements NewConstants {
-    ArrayList<String> choices;
+public final class QuestBoosterPack {
 
-    /**
-     * <p>Constructor for QuestBoosterPack.</p>
-     */
-    public QuestBoosterPack() {
-        choices = new ArrayList<String>();
-        choices.add("Multicolor");
-
-        for (String s : Constant.Color.Colors) {
-            choices.add(s);
-            choices.add(s);
-        }
-    }
-
-	/**
-	 * <p>
-	 * getQuestStarterDeck.
-	 * </p>
-	 * 
-	 * @param allCards
-	 *            the card pool from which we can generate the deck
-	 * 
-	 * @param numCommon
-	 *            a int.
-	 * 
-	 * @param numUncommon
-	 *            a int.
-	 * 
-	 * @param numRare
-	 *            a int.
-	 * 
-	 * @param standardPool
-	 *            whether to restrict the card pool to what is currently
-	 *            considered the Standard block. To update the sets that are
-	 *            considered standard, modify this method.
-	 * 
-	 * @return a {@link java.util.ArrayList} object.
-	 */
-    public List<CardPrinted> getQuestStarterDeck( final Predicate<CardPrinted> filter, 
-            int numCommon, int numUncommon, int numRare ) {
-        ArrayList<CardPrinted> names = new ArrayList<CardPrinted>();
+    public static List<CardPrinted> getQuestStarterDeck(final Predicate<CardPrinted> filter,
+            final int numCommon, final int numUncommon, final int numRare)
+    {
+        ArrayList<CardPrinted> cards = new ArrayList<CardPrinted>();
 
         // Each color should have around the same amount of monocolored cards
         // There should be 3 Colorless cards for every 4 cards in a single color
@@ -85,14 +45,13 @@ public class QuestBoosterPack implements NewConstants {
 
         Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
-        names.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isCommon), numCommon, colorFilters));
-        names.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isUncommon), numUncommon, colorFilters));
-        names.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isRareOrMythic), numRare, colorFilters));
-
-        return names;
+        return cards;
     }
 
     /**
@@ -104,7 +63,7 @@ public class QuestBoosterPack implements NewConstants {
      * @param allowedColors a List<Predicate<CardRules>>
      * @return a list of card names
      */
-    public final ArrayList<CardPrinted> generateDefinetlyColouredCards(
+    private static ArrayList<CardPrinted> generateDefinetlyColouredCards(
             final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter,
             final int cntNeeded,
@@ -148,13 +107,13 @@ public class QuestBoosterPack implements NewConstants {
     }
 
 
-    public ArrayList<CardPrinted> generateDistinctCards(
+    private static ArrayList<CardPrinted> generateDistinctCards(
             final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter,
             final int cntNeeded)
     {
         ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
-        int cntMade = 0, iAttempt = 0;
+        int cntMade = 0;
 
         // This will prevent endless loop @ wh
         int allowedMisses = (2 + 2) * cntNeeded; // lol, 2+2 is not magic constant!
@@ -167,7 +126,6 @@ public class QuestBoosterPack implements NewConstants {
                 cntMade++;
             }
             else { allowedMisses--; }
-            iAttempt++;
         }
 
         return result;
@@ -175,17 +133,17 @@ public class QuestBoosterPack implements NewConstants {
 
 
     // Left if only for backwards compatibility
-    public ArrayList<CardPrinted> generateCards(int num, CardRarity rarity, String color) {
+    public ArrayList<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
         Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
         return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
 
-    public ArrayList<CardPrinted> generateCards(Predicate<CardPrinted> filter, int num, CardRarity rarity, String color) {
+    public static ArrayList<CardPrinted> generateCards(final Predicate<CardPrinted> filter, int num, CardRarity rarity, String color) {
         Predicate<CardPrinted> whatYouWant = Predicate.and(filter, getPredicateForConditions(rarity, color));
         return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
 
-    protected Predicate<CardPrinted> getPredicateForConditions(CardRarity rarity, String color)
+    private static Predicate<CardPrinted> getPredicateForConditions(final CardRarity rarity, final String color)
     {
         Predicate<CardPrinted> rFilter;
         switch (rarity) {

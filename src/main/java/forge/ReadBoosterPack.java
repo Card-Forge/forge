@@ -125,14 +125,11 @@ public class ReadBoosterPack implements NewConstants {
      * @param questLevel a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView getShopCards(int numberWins, int questLevel) {
+    public CardPoolView getShopCards(int totalPacks) {
         CardPool list = new CardPool();
 
         // Number of Packs granted
-        int levelPacks = questLevel > 0 ? 8 / questLevel / 2 : 4;
-        int winPacks = numberWins / 10;
 
-        int totalPacks = Math.min(levelPacks + winPacks, 6);
 
         for (int i = 0; i < totalPacks; i++) {
             // TODO: Balance CardPool Availability
@@ -153,57 +150,28 @@ public class ReadBoosterPack implements NewConstants {
     }
 
     //return CardList of 5 or 6 cards, one for each color and maybe an artifact
-    /**
-     * <p>getVariety.</p>
-     *
-     * @param in a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
     private List<CardPrinted> getVariety(List<CardPrinted> in) {
         List<CardPrinted> out = new ArrayList<CardPrinted>();
         Collections.shuffle(in, MyRandom.random);
 
         for (int i = 0; i < Constant.Color.Colors.length; i++) {
-            CardPrinted check = findColor(in, i);
+            CardPrinted check = findCardOfColor(in, i);
             if (check != null) { out.add(check); }
         }
 
         return out;
     }//getVariety()
 
-    /**
-     * <p>findColor.</p>
-     *
-     * @param in a {@link forge.CardList} object.
-     * @param color a {@link java.lang.String} object.
-     * @return a {@link forge.Card} object.
-     */
-    private CardPrinted findColor(final List<CardPrinted> in, final int color) {
-        Predicate<CardRules> filter = null;
-        switch (color) {
-            case 0: filter = CardRules.Predicates.Presets.isWhite; break;
-            case 1: filter = CardRules.Predicates.Presets.isBlue; break;
-            case 2: filter = CardRules.Predicates.Presets.isBlack; break;
-            case 3: filter = CardRules.Predicates.Presets.isRed; break;
-            case 4: filter = CardRules.Predicates.Presets.isGreen; break;
-            case 5: filter = CardRules.Predicates.Presets.isColorless; break;
-            default: break;
-        }
+    private CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
+        Predicate<CardRules> filter = CardRules.Predicates.Presets.colors.get(color);
         if (null == filter) { return null; }
         return filter.first(in, CardPrinted.fnGetRules);
     }
 
-
-    /**
-     * <p>getRandomCard.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
-     */
-    private CardPrinted getRandomCard(List<CardPrinted> list) {
-        for (int i = 0; i < 10; i++)
-            Collections.shuffle(list, MyRandom.random);
+    private CardPrinted getRandomCard(final List<CardPrinted> list) {
+        Collections.shuffle(list, MyRandom.random);
         int index = MyRandom.random.nextInt(list.size());
+        Collections.shuffle(list, MyRandom.random);
         return list.get(index);
     }//getRandomCard()
 

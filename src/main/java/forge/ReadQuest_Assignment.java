@@ -154,10 +154,7 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
                 qa.setComputerLife(100);
 
             s = readLine();
-            if (s.equals("Repeatable"))
-                qa.setRepeatable(true);
-            else
-                qa.setRepeatable(false);
+            qa.setRepeatable(s.equals("Repeatable"));
 
             s = readLine();
             int wins = Integer.valueOf(s);
