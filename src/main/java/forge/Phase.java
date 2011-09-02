@@ -682,7 +682,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     /**
      * <p>passPriority.</p>
      */
-    public void passPriority() {
+    public final void passPriority() {
         Player actingPlayer = getPriorityPlayer();
         Player lastToAct = getFirstPriority();
 
@@ -700,8 +700,9 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 needToNextPhase = true;
                 pPlayerPriority = getPlayerTurn();    // this needs to be set early as we exit the phase
             } else {
-                if (!AllZone.getStack().hasSimultaneousStackEntries())
+                if (!AllZone.getStack().hasSimultaneousStackEntries()) {
                     AllZone.getStack().resolveStack();
+                }
             }
             AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
         }
@@ -709,7 +710,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
 
     /** {@inheritDoc} */
     @Override
-    public void addObserver(Observer o) {
+    public final void addObserver(final Observer o) {
         super.deleteObservers();
         super.addObserver(o);
     }
@@ -721,7 +722,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param needToNextPhase a boolean.
      */
-    public void setNeedToNextPhase(boolean needToNextPhase) {
+    public final void setNeedToNextPhase(boolean needToNextPhase) {
         this.needToNextPhase = needToNextPhase;
     }
 
@@ -730,7 +731,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @return a boolean.
      */
-    public boolean isNeedToNextPhase() {
+    public final boolean isNeedToNextPhase() {
         return this.needToNextPhase;
     }
 
@@ -742,7 +743,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @return a boolean.
      */
-    public boolean isNeedToNextPhaseInit() {
+    public final boolean isNeedToNextPhaseInit() {
         needToNextPhaseInit++;
         if (needToNextPhaseInit <= 4) {
             return true;
@@ -756,7 +757,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      * @param player a {@link forge.Player} object.
      * @return a boolean.
      */
-    public static boolean canCastSorcery(Player player) {
+    public static boolean canCastSorcery(final Player player) {
         return AllZone.getPhase().isPlayerTurn(player) && (AllZone.getPhase().getPhase().equals(Constant.Phase.Main2) ||
                 AllZone.getPhase().getPhase().equals(Constant.Phase.Main1)) && AllZone.getStack().size() == 0;
     }
@@ -768,22 +769,25 @@ public class Phase extends MyObservable implements java.io.Serializable {
      * @param endPhase a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public String buildActivateString(String startPhase, String endPhase) {
+    public final String buildActivateString(final String startPhase, final String endPhase) {
         StringBuilder sb = new StringBuilder();
 
         boolean add = false;
         for (int i = 0; i < phaseOrder.length; i++) {
-            if (phaseOrder[i].equals(startPhase))
+            if (phaseOrder[i].equals(startPhase)) {
                 add = true;
+            }
 
             if (add) {
-                if (sb.length() != 0)
+                if (sb.length() != 0) {
                     sb.append(",");
+                }
                 sb.append(phaseOrder[i]);
             }
 
-            if (phaseOrder[i].equals(endPhase))
+            if (phaseOrder[i].equals(endPhase)) {
                 add = false;
+            }
         }
 
         return sb.toString();
@@ -794,7 +798,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param sp a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static void increaseSpellCount(SpellAbility sp) {
+    public static void increaseSpellCount(final SpellAbility sp) {
         incrementStormCount();
 
         if (sp.getActivatingPlayer().isHuman()) {
@@ -884,7 +888,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param stormCount a int.
      */
-    public static void setStormCount(int stormCount) {
+    public static void setStormCount(final int stormCount) {
         StormCount = stormCount;
     }
 
@@ -902,7 +906,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param gameBegins a int.
      */
-    public static void setGameBegins(int gameBegins) {
+    public static void setGameBegins(final int gameBegins) {
         GameBegins = gameBegins;
     }
 
@@ -922,7 +926,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param phaseID a {@link java.lang.String} object.
      */
-    public void setDevPhaseState(String phaseID) {
+    public final void setDevPhaseState(final String phaseID) {
         this.phaseIndex = findIndex(phaseID);
     }
 
@@ -940,7 +944,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setPlayerSpellCount(int i) {
+    static void setPlayerSpellCount(final int i) {
         PlayerSpellCount = (i);
     }
 
@@ -958,7 +962,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setPlayerCreatureSpellCount(int i) {
+    static void setPlayerCreatureSpellCount(final int i) {
         PlayerCreatureSpellCount = (i);
     }
 
@@ -976,7 +980,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setPlayerInstantSpellCount(int i) {
+    static void setPlayerInstantSpellCount(final int i) {
         PlayerInstantSpellCount = (i);
     }
 
@@ -994,7 +998,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setComputerSpellCount(int i) {
+    static void setComputerSpellCount(final int i) {
         ComputerSpellCount = (i);
     }
 
@@ -1012,7 +1016,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setComputerCreatureSpellCount(int i) {
+    static void setComputerCreatureSpellCount(final int i) {
         ComputerCreatureSpellCount = (i);
     }
 
@@ -1030,11 +1034,16 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *
      * @param i a int.
      */
-    static void setComputerInstantSpellCount(int i) {
+    static void setComputerInstantSpellCount(final int i) {
         ComputerInstantSpellCount = (i);
     }
 
-    public void setPreventCombatDamageThisTurn(boolean b) {
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param b a boolean
+     */
+    public final void setPreventCombatDamageThisTurn(final boolean b) {
         bPreventCombatDamageThisTurn = true;
     }
 }

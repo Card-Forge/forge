@@ -11,7 +11,7 @@ import java.util.Observable;
  * @version $Id$
  */
 public class DefaultPlayerZone extends PlayerZone implements java.io.Serializable {
-    /** Constant <code>serialVersionUID=-5687652485777639176L</code> */
+    /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
     private ArrayList<Card> cards = new ArrayList<Card>();
@@ -28,7 +28,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param zone a {@link java.lang.String} object.
      * @param inPlayer a {@link forge.Player} object.
      */
-    public DefaultPlayerZone(String zone, Player inPlayer) {
+    public DefaultPlayerZone(final String zone, final Player inPlayer) {
         zoneName = zone;
         player = inPlayer;
     }
@@ -39,11 +39,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void add(Object o) {
+    public final void add(final Object o) {
         Card c = (Card) o;
 
-        if (!c.isImmutable()) //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
-        {
+        //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
+        if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
             if (AllZone.getZone(c) != null) {
                 cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
@@ -62,7 +62,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         //slight difference from above I guess, the card gets put into the grave first, then shuffled into library.
         //key is that this would trigger abilities that trigger on cards hitting the graveyard
         else if (is("Graveyard")
-                && c.hasKeyword("When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.")) {
+                && c.hasKeyword("When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library."))
+        {
             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
@@ -79,8 +80,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
             lib.add(c);
-            for (Card gc : AllZoneUtil.getPlayerGraveyard(c.getOwner()))
+            for (Card gc : AllZoneUtil.getPlayerGraveyard(c.getOwner())) {
                 lib.add(gc);
+            }
             grave.reset();
             c.getOwner().shuffle();
             return;
@@ -108,11 +110,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void addOnce(Object o) {
+    public final void addOnce(final Object o) {
         Card c = (Card) o;
 
-        if (!c.isImmutable()) //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
-        {
+        //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
+        if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
             if (AllZone.getZone(c) != null) {
                 cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
@@ -129,10 +131,10 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     /**
      *
-     * @param ob
-     * @param object
+     * @param ob an Observable
+     * @param object an Object
      */
-    public void update(Observable ob, Object object) {
+    public final void update(final Observable ob, final Object object) {
         this.update();
     }
 
@@ -141,9 +143,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param c a {@link forge.Card} object.
      * @param index a int.
      */
-    public void add(Card c, int index) {
-        if (!c.isImmutable()) //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
-        {
+    public final void add(final Card c, final int index) {
+        //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
+        if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
             if (AllZone.getZone(c) != null) {
                 cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
@@ -159,9 +161,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     /**
      *
-     * @param c
+     * @param c an Object
      */
-    public void remove(Object c) {
+    public final void remove(final Object c) {
         cards.remove((Card) c);
         update();
     }
@@ -171,7 +173,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @param c an array of {@link forge.Card} objects.
      */
-    public void setCards(Card c[]) {
+    public final void setCards(final Card[] c) {
         cards = new ArrayList<Card>(Arrays.asList(c));
         update();
     }
@@ -180,7 +182,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /**
      * <p>reset.</p>
      */
-    public void reset() {
+    public final void reset() {
         cardsAddedThisTurn.clear();
         cardsAddedThisTurnSource.clear();
         cards.clear();
@@ -193,7 +195,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param zone a {@link java.lang.String} object.
      * @return a boolean
      */
-    public boolean is(String zone) {
+    public final boolean is(final String zone) {
         return zone.equals(zoneName);
     }
 
@@ -203,7 +205,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param player a {@link forge.Player} object.
      * @return a boolean
      */
-    public boolean is(String zone, Player player) {
+    public final boolean is(final String zone, final Player player) {
         return (zone.equals(zoneName) && player.isPlayer(player));
     }
 
@@ -212,7 +214,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
@@ -221,7 +223,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getZoneName() {
+    public final String getZoneName() {
         return zoneName;
     }
 
@@ -230,7 +232,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return a int.
      */
-    public int size() {
+    public final int size() {
         return cards.size();
     }
 
@@ -239,7 +241,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param index a int.
      * @return  a int
      */
-    public Card get(int index) {
+    public final Card get(final int index) {
         return (Card) cards.get(index);
     }
 
@@ -248,8 +250,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public Card[] getCards() {
-        Card c[] = new Card[cards.size()];
+    public final Card[] getCards() {
+        Card[] c = new Card[cards.size()];
         cards.toArray(c);
         return c;
     }
@@ -257,16 +259,17 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /**
      * <p>update.</p>
      */
-    public void update() {
-        if (update)
+    public final void update() {
+        if (update) {
             updateObservers();
+        }
     }
 
     /**
      *
      * @param b a boolean.
      */
-    public void setUpdate(boolean b) {
+    public final void setUpdate(final boolean b) {
         update = b;
     }
 
@@ -275,7 +278,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return a boolean.
      */
-    public boolean getUpdate() {
+    public final boolean getUpdate() {
         return update;
     }
 
@@ -284,10 +287,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
+    public final String toString() {
         StringBuilder sb = new StringBuilder();
-        if (player != null)
+        if (player != null) {
             sb.append(player.toString()).append(" ");
+        }
         sb.append(zoneName);
         return sb.toString();
     }
@@ -298,7 +302,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @param origin a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getCardsAddedThisTurn(String origin) {
+    public final CardList getCardsAddedThisTurn(final String origin) {
         System.out.print("Request cards put into " + getZoneName() + " from " + origin + ".Amount: ");
         CardList ret = new CardList();
         for (int i = 0; i < cardsAddedThisTurn.size(); i++) {
@@ -313,7 +317,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /**
      * <p>resetCardsAddedThisTurn.</p>
      */
-    public void resetCardsAddedThisTurn() {
+    public final void resetCardsAddedThisTurn() {
         cardsAddedThisTurn.clear();
         cardsAddedThisTurnSource.clear();
     }

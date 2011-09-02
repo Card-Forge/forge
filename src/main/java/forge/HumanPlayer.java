@@ -18,7 +18,7 @@ public class HumanPlayer extends Player {
      *
      * @param myName a {@link java.lang.String} object.
      */
-    public HumanPlayer(String myName) {
+    public HumanPlayer(final String myName) {
         this(myName, 20, 0);
     }
 
@@ -29,7 +29,7 @@ public class HumanPlayer extends Player {
      * @param myLife a int.
      * @param myPoisonCounters a int.
      */
-    public HumanPlayer(String myName, int myLife, int myPoisonCounters) {
+    public HumanPlayer(final String myName, final int myLife, final int myPoisonCounters) {
         super(myName, myLife, myPoisonCounters);
     }
 
@@ -38,7 +38,7 @@ public class HumanPlayer extends Player {
      *
      * @return a {@link forge.Player} object.
      */
-    public Player getOpponent() {
+    public final Player getOpponent() {
         return AllZone.getComputerPlayer();
     }
 
@@ -53,7 +53,7 @@ public class HumanPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean isHuman() {
+    public final boolean isHuman() {
         return true;
     }
 
@@ -62,7 +62,7 @@ public class HumanPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean isComputer() {
+    public final boolean isComputer() {
         return false;
     }
 
@@ -73,14 +73,16 @@ public class HumanPlayer extends Player {
     ///////////////
 
     /** {@inheritDoc} */
-    public CardList mayDrawCards(int n) {
-        if (canDraw() && GameActionUtil.showYesNoDialog(null, "Draw " + n + " cards?"))
+    public final CardList mayDrawCards(final int n) {
+        if (canDraw() && GameActionUtil.showYesNoDialog(null, "Draw " + n + " cards?")) {
             return drawCards(n);
-        else return new CardList();
+        } else {
+            return new CardList();
+        }
     }
 
     /** {@inheritDoc} */
-    public CardList mayDrawCard() {
+    public final CardList mayDrawCard() {
         return mayDrawCards(1);
     }
 
@@ -89,9 +91,9 @@ public class HumanPlayer extends Player {
      *
      * @return a boolean.
      */
-    public boolean dredge() {
+    public final boolean dredge() {
         boolean dredged = false;
-        String choices[] = {"Yes", "No"};
+        String[] choices = {"Yes", "No"};
         Object o = GuiUtils.getChoice("Do you want to dredge?", choices);
         if (o.equals("Yes")) {
             Card c = (Card) GuiUtils.getChoice("Select card to dredge", getDredge().toArray());
@@ -115,7 +117,7 @@ public class HumanPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    public CardList discard(final int num, final SpellAbility sa, boolean duringResolution) {
+    public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         AllZone.getInputControl().setInput(PlayerUtil.input_discard(num, sa), duringResolution);
 
         // why is CardList returned?
@@ -123,20 +125,23 @@ public class HumanPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    public void discardUnless(int num, String uType, SpellAbility sa) {
+    public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         AllZone.getInputControl().setInput(PlayerUtil.input_discardNumUnless(num, uType, sa));
     }
-    
+
     protected void discard_Chains_of_Mephistopheles() {
-    	AllZone.getInputControl().setInput(PlayerUtil.input_chainsDiscard(), true);
+        AllZone.getInputControl().setInput(PlayerUtil.input_chainsDiscard(), true);
     }
 
     /** {@inheritDoc} */
-    public void handToLibrary(final int numToLibrary, String libPos) {
-        if (libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
-        else {
+    public final void handToLibrary(final int numToLibrary, String libPos) {
+        if (libPos.equals("Top") || libPos.equals("Bottom")) {
+            libPos = libPos.toLowerCase();
+        } else {
             String s = "card";
-            if (numToLibrary > 1) s += "s";
+            if (numToLibrary > 1) {
+                s += "s";
+            }
 
             Object o = GuiUtils.getChoice("Do you want to put the " + s
                     + " on the top or bottom of your library?", new Object[]{"top", "bottom"});
@@ -146,16 +151,18 @@ public class HumanPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    protected void doScry(final CardList topN, final int N) {
-        int num = N;
+    protected final void doScry(final CardList topN, final int n) {
+        int num = n;
         for (int i = 0; i < num; i++) {
             Object o = GuiUtils.getChoiceOptional("Put on bottom of library.", topN.toArray());
             if (o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
                 AllZone.getGameAction().moveToBottomOfLibrary(c);
-            } else // no card chosen for the bottom
+            } else {
+                // no card chosen for the bottom
                 break;
+            }
         }
         num = topN.size();
         for (int i = 0; i < num; i++) {
@@ -171,15 +178,15 @@ public class HumanPlayer extends Player {
     }
 
     /** {@inheritDoc} */
-    public void sacrificePermanent(String prompt, CardList choices) {
+    public final void sacrificePermanent(final String prompt, final CardList choices) {
         Input in = PlayerUtil.input_sacrificePermanent(choices, prompt);
         AllZone.getInputControl().setInput(in);
     }
 
     /** {@inheritDoc} */
-    protected void clashMoveToTopOrBottom(Card c) {
+    protected final void clashMoveToTopOrBottom(final Card c) {
         String choice = "";
-        String choices[] = {"top", "bottom"};
+        String[] choices = {"top", "bottom"};
         AllZone.getDisplay().setCard(c);
         choice = (String) GuiUtils.getChoice(c.getName() + " - Top or bottom of Library", choices);
 

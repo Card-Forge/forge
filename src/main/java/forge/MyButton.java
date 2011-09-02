@@ -11,38 +11,38 @@ public interface MyButton {
     /**
      * <p>select.</p>
      */
-    public void select();
+    void select();
 
     /**
      * <p>setSelectable.</p>
      *
      * @param b a boolean.
      */
-    public void setSelectable(boolean b);
+    void setSelectable(boolean b);
 
     /**
      * <p>isSelectable.</p>
      *
      * @return a boolean.
      */
-    public boolean isSelectable();
+    boolean isSelectable();
 
     /**
      * <p>getText.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getText();
+    String getText();
 
     /**
      * <p>setText.</p>
      *
      * @param text a {@link java.lang.String} object.
      */
-    public void setText(String text);
+    void setText(String text);
 
     /**
      * <p>reset.</p>
      */
-    public void reset(); //resets the text and calls setSelectable(false)
+    void reset(); //resets the text and calls setSelectable(false)
 }
