@@ -130,6 +130,9 @@ public final class CardPrinted implements Comparable<CardPrinted> {
         }
         public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain)
         {
+            if (value == null || value.isEmpty()) {
+                return Predicate.getTrue(CardPrinted.class);
+            }
             return new PredicateSets(value, shouldContain);
         }
 

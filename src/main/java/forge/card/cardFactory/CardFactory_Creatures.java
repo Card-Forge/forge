@@ -3,6 +3,8 @@ package forge.card.cardFactory;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
+import forge.card.CardDb;
+import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
@@ -13,7 +15,11 @@ import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
 
 import javax.swing.*;
+
+import net.slightlymagic.maxmtg.Predicate;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -1840,22 +1846,17 @@ public class CardFactory_Creatures {
                         list.addAll(AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer()));
                         list.addAll(AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer()));
                         list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
+                            public boolean addCard(final Card c) {
                                 return !c.isLand() && !c.isUnCastable();
                             }
                         });
 
                         if (list.size() > 0) {
-                            CardList rare;
-                            rare = list;
-                            rare = rare.filter(new CardListFilter() {
-                                public boolean addCard(Card c) {
-                                    return c.getRarity().equals("Rare");
-                                }
-                            });
+                            Predicate<CardPrinted> isRare = CardPrinted.Predicates.Presets.isRareOrMythic;
+                            List<CardPrinted> rares = isRare.select(list, CardDb.fnGetCardPrintedByForgeCard, CardDb.fnGetCardPrintedByForgeCard);
 
-                            if (rare.size() > 0) {
-                                s = rare.get(CardUtil.getRandomIndex(rare)).getName();
+                            if (!rares.isEmpty()) {
+                                s = Predicate.getTrue(CardPrinted.class).random(rares).getName();
                             } else {
                                 Card c = list.get(CardUtil.getRandomIndex(list));
                                 //System.out.println(c + " - " + c.getRarity());

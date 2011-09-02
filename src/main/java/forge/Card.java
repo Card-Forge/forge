@@ -2603,24 +2603,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>Setter for the field <code>rarity</code>.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     */
-    public void setRarity(String s) {
-        rarity = s;
-    }
-
-    /**
-     * <p>Getter for the field <code>rarity</code>.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getRarity() {
-        return rarity;
-    }
-
-    /**
      * <p>Setter for the field <code>imageName</code>.</p>
      *
      * @param s a {@link java.lang.String} object.

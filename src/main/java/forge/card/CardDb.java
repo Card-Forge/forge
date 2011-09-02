@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Map.Entry;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
@@ -48,6 +50,10 @@ public final class CardDb {
     // this is the same list in flat storage
     private final List<CardPrinted> allCardsFlat = new ArrayList<CardPrinted>();
 
+    // Lambda to get rules for selects from list of printed cards
+    public static final Lambda1<CardPrinted, Card> fnGetCardPrintedByForgeCard = new Lambda1<CardPrinted, Card>() {
+        @Override public CardPrinted apply(final Card from) { return CardDb.instance().getCard(from.getName()); }
+    };
 
     private CardDb() {
        this(new MtgDataParser()); // I wish cardname.txt parser was be here.

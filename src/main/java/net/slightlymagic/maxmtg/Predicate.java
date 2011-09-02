@@ -43,35 +43,35 @@ public abstract class Predicate<T> {
     // selects are fun
     public final List<T> select(final Iterable<T> source) {
         ArrayList<T> result = new ArrayList<T>();
-        if (source != null) for (T c : source) { if (isTrue(c)) { result.add(c); } }
+        if (source != null) { for (T c : source) { if (isTrue(c)) { result.add(c); } } }
         return result;
     }
     public final <U> List<U> select(final Iterable<U> source, final Lambda1<T, U> accessor) {
         ArrayList<U> result = new ArrayList<U>();
-        if (source != null) for (U c : source) { if (isTrue(accessor.apply(c))) { result.add(c); } }
+        if (source != null) { for (U c : source) { if (isTrue(accessor.apply(c))) { result.add(c); } } }
         return result;
     }
     public final <U, V> List<V> select(final Iterable<U> source, final Lambda1<T, U> cardAccessor,
             final Lambda1<V, U> transformer)
     {
         ArrayList<V> result = new ArrayList<V>();
-        if (source != null) for (U c : source) { if (isTrue(cardAccessor.apply(c))) { result.add(transformer.apply(c)); } }
+        if (source != null) { for (U c : source) { if (isTrue(cardAccessor.apply(c))) { result.add(transformer.apply(c)); } } }
         return result;
     }
 
     // select top 1
     public final T first(final Iterable<T> source) {
-        if (source != null) for (T c : source) { if (isTrue(c)) { return c; } }
+        if (source != null) { for (T c : source) { if (isTrue(c)) { return c; } } }
         return null;
     }
     public final <U> U first(final Iterable<U> source, final Lambda1<T, U> accessor) {
-        if (source != null) for (U c : source) { if (isTrue(accessor.apply(c))) { return c; } }
+        if (source != null) { for (U c : source) { if (isTrue(accessor.apply(c))) { return c; } } }
         return null;
     }
     public final <U, V> V first(final Iterable<U> source, final Lambda1<T, U> cardAccessor,
             final Lambda1<V, U> transformer)
     {
-        if (source != null) for (U c : source) { if (isTrue(cardAccessor.apply(c))) { return transformer.apply(c); } }
+        if (source != null) { for (U c : source) { if (isTrue(cardAccessor.apply(c))) { return transformer.apply(c); } } }
         return null;
     }
 
@@ -79,43 +79,46 @@ public abstract class Predicate<T> {
     public final void split(final Iterable<T> source,
             final List<T> trueList, final List<T> falseList)
     {
-        if (source != null) for (T c : source) { if (isTrue(c)) { trueList.add(c); } else { falseList.add(c); } }
+        if (source == null) { return; }
+        for (T c : source) { if (isTrue(c)) { trueList.add(c); } else { falseList.add(c); } }
     }
     public final <U> void split(final Iterable<U> source, final Lambda1<T, U> accessor,
             final List<U> trueList, final List<U> falseList)
     {
-        if (source != null) for (U c : source) { if (isTrue(accessor.apply(c))) { trueList.add(c); } else { falseList.add(c); } }
+        if (source == null) { return; }
+        for (U c : source) { if (isTrue(accessor.apply(c))) { trueList.add(c); } else { falseList.add(c); } }
     }
     public final <U, V> void split(final Iterable<U> source, final Lambda1<T, U> cardAccessor,
             final Lambda1<V, U> transformer, final List<V> trueList, final List<V> falseList)
     {
-        if (source != null) for (U c : source) {
+        if (source == null) { return; }
+        for (U c : source) {
             if (isTrue(cardAccessor.apply(c))) { trueList.add(transformer.apply(c)); }
             else  { falseList.add(transformer.apply(c)); }
         }
     }
-    
+
     // Count
     public final int count(final Iterable<T> source) {
         int result = 0;
-        if (source != null) for (T c : source) { if (isTrue(c)) { result++; } }
+        if (source != null) { for (T c : source) { if (isTrue(c)) { result++; } } }
         return result;
     }
     public final <U> int count(final Iterable<U> source, final Lambda1<T, U> accessor) {
         int result = 0;
-        if (source != null) for (U c : source) { if (isTrue(accessor.apply(c))) { result++; } }
+        if (source != null) { for (U c : source) { if (isTrue(accessor.apply(c))) { result++; } } }
         return result;
     }
-    
+
     // Aggregates?
     public final <U> int aggregate(final Iterable<U> source, final Lambda1<T, U> accessor,
             final Lambda1<Integer, U> valueAccessor)
     {
         int result = 0;
-        if (source != null) for (U c : source) { if (isTrue(accessor.apply(c))) { result += valueAccessor.apply(c);  } }
+        if (source != null) { for (U c : source) { if (isTrue(accessor.apply(c))) { result += valueAccessor.apply(c); } } }
         return result;
     }
-    
+
     // Random - algorithm adapted from Braid's GeneratorFunctions
     public final T random(final Iterable<T> source) {
         int n = 0;
