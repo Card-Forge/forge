@@ -70,7 +70,7 @@ public class QuestDataIO {
             xStream.registerConverter(new CardPoolToXml());
             xStream.alias("CardPool", CardPool.class);
             data = (QuestData) xStream.fromXML(xml.toString());
-
+            
             if (data.versionNumber != QuestData.CURRENT_VERSION_NUMBER) {
                 updateSaveFile(data, xml.toString());
             }
@@ -122,12 +122,12 @@ public class QuestDataIO {
                     if (gearLevel == 2) {
                         newData.inventory.setItemLevel("Zeppelin", 1);
                     }
-                    break;
-                    
+                    // fall-through
                 case 1:
+                    // nothing to do here, everything is managed by CardPoolToXml deserializer
                     break;
-            default:
-                break;
+                default:
+                    break;
             }
 
             //mark the QD as the latest version
@@ -156,10 +156,10 @@ public class QuestDataIO {
             zout.flush();
             zout.close();
 
-            BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f + ".xml"));
-            xStream.toXML(qd, boutUnp);
-            boutUnp.flush();
-            boutUnp.close();
+            //BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f + ".xml"));
+            //xStream.toXML(qd, boutUnp);
+            //boutUnp.flush();
+            //boutUnp.close();
 
         } catch (Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
