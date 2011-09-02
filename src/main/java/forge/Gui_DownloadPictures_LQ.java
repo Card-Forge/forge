@@ -32,10 +32,10 @@ import static javax.swing.JOptionPane.PLAIN_MESSAGE;
  */
 public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements Runnable, NewConstants, NewConstants.LANG.Gui_DownloadPictures {
 
-    /** Constant <code>serialVersionUID=-7890794857949935256L</code> */
+    /** Constant <code>serialVersionUID=-7890794857949935256L</code>. */
     private static final long serialVersionUID = -7890794857949935256L;
 
-    /** Constant <code>types</code> */
+    /** Constant <code>types</code>. */
     public static final Proxy.Type[] types = Proxy.Type.values();
 
     //proxy
@@ -56,7 +56,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
      *
      * @param c an array of {@link forge.Gui_DownloadPictures_LQ.mCard} objects.
      */
-    private Gui_DownloadPictures_LQ(mCard[] c) {
+    private Gui_DownloadPictures_LQ(final mCard[] c) {
         this.cards = c;
         addr = new JTextField(ForgeProps.getLocalized(PROXY_ADDRESS));
         port = new JTextField(ForgeProps.getLocalized(PROXY_PORT));
@@ -75,7 +75,9 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
             rb.addChangeListener(new ProxyHandler(i));
             bg.add(rb);
             p0.add(rb);
-            if (i == 0) rb.setSelected(true);
+            if (i == 0) {
+                rb.setSelected(true);
+            }
         }
 
         //Proxy config
@@ -94,7 +96,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         final JButton b = new JButton(ForgeProps.getLocalized(BUTTONS.START));
         b.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 new Thread(Gui_DownloadPictures_LQ.this).start();
                 b.setEnabled(false);
             }
@@ -146,7 +148,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
      *
      * @param card a int.
      */
-    private void update(int card) {
+    private void update(final int card) {
         this.card = card;
         final class Worker implements Runnable {
             private int card;
@@ -162,7 +164,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                 System.out.println(card + "/" + cards.length);
             }
         }
-        ;
+
         EventQueue.invokeLater(new Worker(card));
     }
 
@@ -172,7 +174,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
      * @param frame a {@link javax.swing.JFrame} object.
      * @return a {@link javax.swing.JDialog} object.
      */
-    public JDialog getDlg(JFrame frame) {
+    public JDialog getDlg(final JFrame frame) {
         final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(TITLE));
         close.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -185,10 +187,10 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     /**
      * <p>Setter for the field <code>cancel</code>.</p>
      *
-     * @param cancel a boolean.
+     * @param cancelIn a boolean.
      */
-    public void setCancel(boolean cancel) {
-        this.cancel = cancel;
+    public void setCancel(final boolean cancelIn) {
+        this.cancel = cancelIn;
     }
 
 
@@ -202,14 +204,17 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         File base = ForgeProps.getFile(IMAGE_BASE);
 
         Proxy p = null;
-        if (type == 0) p = Proxy.NO_PROXY;
-        else try {
-            p = new Proxy(types[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(),
-                    port.getText());
-//            throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
-            return;
+        if (type == 0) {
+            p = Proxy.NO_PROXY;
+        } else {
+            try {
+                p = new Proxy(types[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
+            } catch (Exception ex) {
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(),
+                        port.getText());
+//              throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
+                return;
+            }
         }
 
         if (p != null) {
@@ -245,10 +250,10 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                                 f.delete();
 
                                 return;
-                            }//if - cancel
+                            } //if - cancel
 
                             out.write(buf, 0, len);
-                        }//while - read and write file
+                        } //while - read and write file
 
                         in.close();
                         out.flush();
@@ -264,17 +269,17 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                     Log.error("LQ Pictures", "Error downloading pictures", ex);
 
                 }
-            }//for
+            } //for
         }
         close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
-    }//run
+    } //run
 
     /**
      * <p>startDownload.</p>
      *
      * @param frame a {@link javax.swing.JFrame} object.
      */
-    public static void startDownload(JFrame frame) {
+    public static void startDownload(final JFrame frame) {
         final mCard[] card = getNeededCards();
 
         if (card.length == 0) {
@@ -287,7 +292,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         dlg.setVisible(true);
         dlg.dispose();
         download.setCancel(true);
-    }//startDownload()
+    } //startDownload()
 
     /**
      * <p>getNeededCards.</p>
@@ -299,19 +304,21 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         //mCard[] cardPlay = readFile(CARD_PICTURES);
         //mCard[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
 
-        ArrayList<mCard> CList = new ArrayList<mCard>();
+        ArrayList<mCard> cList = new ArrayList<mCard>();
 
         for (Card c : AllZone.getCardFactory()) {
             String url = c.getSVar("Picture");
             String[] URLs = url.split("\\\\");
 
             String iName = GuiDisplayUtil.cleanString(c.getImageName());
-            CList.add(new mCard(iName + ".jpg", URLs[0]));
+            cList.add(new mCard(iName + ".jpg", URLs[0]));
             //Log.error(iName + ".jpg" + "\t" + URLs[0]);
 
-            if (URLs.length > 1)
-                for (int j = 1; j < URLs.length; j++)
-                    CList.add(new mCard(iName + j + ".jpg", URLs[j]));
+            if (URLs.length > 1) {
+                for (int j = 1; j < URLs.length; j++) {
+                    cList.add(new mCard(iName + j + ".jpg", URLs[j]));
+                }
+            }
         }
 
         ArrayList<mCard> list = new ArrayList<mCard>();
@@ -319,12 +326,13 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
 
         File base = ForgeProps.getFile(IMAGE_BASE);
         mCard[] a = {new mCard("", "")};
-        mCard[] cardPlay = CList.toArray(a);
+        mCard[] cardPlay = cList.toArray(a);
         //check to see which cards we already have
         for (int i = 0; i < cardPlay.length; i++) {
             file = new File(base, cardPlay[i].name);
-            if (!file.exists())
+            if (!file.exists()) {
                 list.add(cardPlay[i]);
+            }
         }
 //        base = ForgeProps.getFile(IMAGE_TOKEN);
 //        for (int i = 0; i < cardTokenLQ.length; i++) {
@@ -339,7 +347,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
 //    for(int i = 0; i < out.length; i++)
 //      System.out.println(out[i].name +" " +out[i].url);
         return out;
-    }//getNeededCards()
+    } //getNeededCards()
 
 /*    *//**
      * <p>readFile.</p>
@@ -376,11 +384,11 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     private class ProxyHandler implements ChangeListener {
         private int type;
 
-        public ProxyHandler(int type) {
-            this.type = type;
+        public ProxyHandler(final int typeIn) {
+            this.type = typeIn;
         }
 
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
                 Gui_DownloadPictures_LQ.this.type = type;
                 addr.setEnabled(type != 0);
@@ -390,12 +398,12 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     }
 
     private static class mCard {
-        final public String name;
-        final public String url;
+        public final String name;
+        public final String url;
 
-        mCard(String cardName, String cardURL) {
+        mCard(final String cardName, final String cardURL) {
             name = cardName;
             url = cardURL;
         }
-    }//mCard
-} 
+    } //mCard
+}
