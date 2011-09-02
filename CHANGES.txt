@@ -339,13 +339,52 @@ Comment=
 - Checkstyle fixes in StaticEffect and StaticEffects.
 - checkstyle fixes in CardFactoryUtil.
 - Chesckstyle fixes in several files.
-- - Switched order of abilities of Maze of Ith (for AI).
+- Switched order of abilities of Maze of Ith (for AI).
 - Converted Dark Confidant and Tutelage to script.
 - Renamed "getAIDeckNewFormat()" to "getDeckFromFile()" and updated references in Quest area.
 - Renamed "getAIDeckNewFormat()" to "getAIDeckFromFile()" in quest area.
 - Renamed "getAIDeck()" to "getAIDeckFromMap()" in quest area.
 - Converted Augury Adept to script.
 - Fixed Balthor the Defiled.
+- Added the recent commit logs to changes.txt.
+- Renamed "getOpponents()" to "generateBattles()" in QuestBattleManager and QuestBattle. Note: AllZoneUtil already has a method called getOpponents.
+- Updated references.
+- Expanded and changed digUntilStackDescription.
+- Added some more variables to LastKnownInformation.
+- Added GameEntity class as parent of Card and Player class.
+- Updated deploy plugin.
+- Ignore .DS_STore for Git-SVN.
+- All deckeditors, decks, boosterdraft, quest switched to lightweight cardPrinted objects, have fun :)
+- Features dropped: glassPane on deckeditors, separate filter window in deckeditors.
+- Sorry, lost one method during merge - fixing now.
+- Updated some SVars.
+- tableModel now remembers up to 3 sortings. Like by name, set and then color) and remembers them. boosterDraft window should not be maximized on start. Totally removed progressbar from deckeditor. Mana comparison: R/P is now a bit greater than R.
+- Rolling back ping to DraftAI (removed ocasionally @10146).
+- Fixed manacost.toString typo.
+- questData: XML serialization for CardPool.
+- Checkstyle fixes in a couple GUI files.
+- Checkstyle fixes in GuiInput.java.
+- Checkstyle fixes in a few random files.
+- Clean up a bunch of Java warnings.
+- Deleted Mystic Compass until AF_Animate can handle it removing abilities.
+- Fixed Amber Prison not initially tapping targeted permanent.
+- Modified handling of CheckSVar in Trigger.java to be consistent with the other abilities.
+- Moved handling of Remembered and Imprint list in calculateAmount outside of the ability if statement.
+- Checkstyle fixes in several files.
+- Checkstyle and Java warnings cleanup in ReadDraftBoosterPack.java.
+- Several Checkstyle fixes.
+- Reverted a couple checkstyle fixes.
+- Little fix for Blowfly Infestation.
+- Fixed a possible NPE in getPumpCreatures (AF Pump).
+- Cardpool won't add 0 or negative number or any card.
+- Sorting order for colors is: W U B R G multi colorless, as they are numbered in a set.
+- Fixed EtB triggers.
+- Added support for older format of quest saves (a method for deserialization of CardPool)
+- Since color names are lowercases, I used constants from forge for their names.
+- Removed save of unpacked quest data.
+- Removed rarity from Card, use CardPrinted instead.
+- Predicate: stylechanges.
+- Acquiring legacy booster longer throws.
 - Added the recent commit logs to changes.txt.
 
 
