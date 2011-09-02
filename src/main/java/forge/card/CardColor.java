@@ -1,5 +1,7 @@
 package forge.card;
 
+import forge.Constant;
+
 /**
  * <p>CardColor class.</p>
  *
@@ -28,7 +30,7 @@ public final class CardColor implements Comparable<CardColor> {
 
     public int countColors() { byte v = myColor; int c = 0; for (; v != 0; c++) { v &= v - 1; } return c; } // bit count
     // order has to be: W U B R G multi colorless - same as cards numbering through a set
-    public int getOrderWeight() { return myColor == 0 ? 0x400 : (countColors() == 1 ? myColor : 0x200); } 
+    public int getOrderWeight() { return myColor == 0 ? 0x400 : (countColors() == 1 ? myColor : 0x200); }
 
     public boolean isColorless() { return myColor == 0; }
     public boolean isMulticolor() { return countColors() > 1; }
@@ -36,9 +38,7 @@ public final class CardColor implements Comparable<CardColor> {
     public boolean isEqual(final byte color) { return color == myColor; }
 
     @Override
-    public int compareTo(final CardColor other) {
-        return orderWeight - other.orderWeight;
-    }
+    public int compareTo(final CardColor other) { return orderWeight - other.orderWeight; }
 
     // Presets
     public boolean hasWhite() { return hasAnyColor(WHITE); }
@@ -56,12 +56,12 @@ public final class CardColor implements Comparable<CardColor> {
     @Override
     public String toString() {
         switch (myColor) {
-            case 0: return "colorless";
-            case WHITE: return "white"; // Constant.Color.White;
-            case BLUE: return "blue"; // Constant.Color.Blue;
-            case BLACK: return "black"; // Constant.Color.Black;
-            case RED: return "red"; // Constant.Color.Red;
-            case GREEN: return "green"; // Constant.Color.Green;
+            case 0: return Constant.Color.Colorless;
+            case WHITE: return Constant.Color.White;
+            case BLUE: return Constant.Color.Blue;
+            case BLACK: return Constant.Color.Black;
+            case RED: return Constant.Color.Red;
+            case GREEN: return Constant.Color.Green;
             default: return "multi";
         }
     }

@@ -125,9 +125,9 @@ public class QuestDataIO {
                     break;
                     
                 case 1:
-                    // card names are stored as plain text - need to read them from there
-                    
                     break;
+            default:
+                break;
             }
 
             //mark the QD as the latest version
@@ -223,10 +223,16 @@ public class QuestDataIO {
             CardPool result = new CardPool();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
-                CardPrinted cp = readCardPrinted(reader);
-                String sCnt = reader.getAttribute("n");
-                int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
-                result.add(cp, cnt);
+                String nodename = reader.getNodeName();
+                if("string".equals(nodename)) {
+                    CardPrinted cp = CardDb.instance().getCard(reader.getValue());
+                    result.add(cp);
+                } else { // new format
+                    CardPrinted cp = readCardPrinted(reader);
+                    String sCnt = reader.getAttribute("n");
+                    int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
+                    result.add(cp, cnt);
+                }
                 reader.moveUp();
             }
             return result;

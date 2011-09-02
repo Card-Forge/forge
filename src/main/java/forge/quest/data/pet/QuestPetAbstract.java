@@ -14,7 +14,8 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
 public abstract class QuestPetAbstract implements QuestStallPurchasable {
     int level;
     private int maxLevel;
-    private String name;
+    // transient here ?
+    private String name;  
     private String description;
 
     /**
