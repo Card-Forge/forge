@@ -23,7 +23,7 @@ import java.awt.event.WindowEvent;
  */
 public class ExternalPanel extends JPanel {
 
-    /** Constant <code>serialVersionUID=9098962430872706173L</code> */
+    /** Constant <code>serialVersionUID=9098962430872706173L</code>. */
     private static final long serialVersionUID = 9098962430872706173L;
     private Component child, head;
     private JFrame frame;
@@ -33,7 +33,7 @@ public class ExternalPanel extends JPanel {
      *
      * @param child a {@link java.awt.Component} object.
      */
-    public ExternalPanel(Component child) {
+    public ExternalPanel(final Component child) {
         this(child, BorderLayout.EAST);
     }
 
@@ -43,7 +43,7 @@ public class ExternalPanel extends JPanel {
      * @param child a {@link java.awt.Component} object.
      * @param side a {@link java.lang.String} object.
      */
-    public ExternalPanel(Component child, String side) {
+    public ExternalPanel(final Component child, final String side) {
         super(new BorderLayout());
         add(this.child = child);
         JButton b = new JButton();
@@ -59,15 +59,17 @@ public class ExternalPanel extends JPanel {
      *
      * @param side a {@link java.lang.String} object.
      */
-    public void setHeadSide(String side) {
+    public final void setHeadSide(final String side) {
         remove(head);
         add(head, side);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected void addImpl(Component comp, Object constraints, int index) {
-        if (comp != child && comp != head) throw new IllegalArgumentException();
+    protected final void addImpl(final Component comp, final Object constraints, final int index) {
+        if (comp != child && comp != head) {
+            throw new IllegalArgumentException();
+        }
         super.addImpl(comp, constraints, index);
     }
 
@@ -92,13 +94,16 @@ public class ExternalPanel extends JPanel {
             repaint();
         }
 
-        public void actionPerformed(ActionEvent e) {
-            if (frame == null) bringOut();
-            else bringIn();
+        public void actionPerformed(final ActionEvent e) {
+            if (frame == null) {
+                bringOut();
+            } else {
+                bringIn();
+            }
         }
 
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosing(final WindowEvent e) {
             bringIn();
         }
     }

@@ -20,9 +20,9 @@ public class FileFinder {
     private long totalLength = 0;
     private int filesNumber = 0;
     private long directoriesNumber = 0;
-    /** Constant <code>FILES=0</code> */
+    /** Constant <code>FILES=0</code>. */
     private static final int FILES = 0;
-    /** Constant <code>DIRECTORIES=1</code> */
+    /** Constant <code>DIRECTORIES=1</code>. */
     private static final int DIRECTORIES = 1;
     private ArrayList<String> fileNames;
     private ArrayList<String> fName;
@@ -42,8 +42,7 @@ public class FileFinder {
      * @return a {@link java.util.List} object.
      * @throws java.lang.Exception if any.
      */
-    public List<File> findFiles(String startPath, String mask)
-            throws Exception {
+    public final List<File> findFiles(final String startPath, final String mask) throws Exception {
         fileNames = new ArrayList<String>();
         fName = new ArrayList<String>();
         return findWithFull(startPath, mask, FILES);
@@ -55,7 +54,7 @@ public class FileFinder {
      *
      * @return a long.
      */
-    public long getDirectorySize() {
+    public final long getDirectorySize() {
         return totalLength;
     }
 
@@ -64,7 +63,7 @@ public class FileFinder {
      *
      * @return a int.
      */
-    public int getFilesNumber() {
+    public final int getFilesNumber() {
         return filesNumber;
     }
 
@@ -73,7 +72,7 @@ public class FileFinder {
      *
      * @return a long.
      */
-    public long getDirectoriesNumber() {
+    public final long getDirectoriesNumber() {
         return directoriesNumber;
     }
 
@@ -83,20 +82,15 @@ public class FileFinder {
      * @param name a {@link java.lang.String} object.
      * @return a boolean.
      */
-    private boolean accept(String name) {
+    private boolean accept(final String name) {
 
         if (p == null) {
-
             return true;
         }
 
         m = p.matcher(name);
 
-        if (m.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return m.matches();
     }
 
 
@@ -109,7 +103,7 @@ public class FileFinder {
      * @return a {@link java.util.List} object.
      * @throws java.lang.Exception if any.
      */
-    private List<File> findWithFull(String startPath, String mask, int objectType) throws Exception {
+    private List<File> findWithFull(final String startPath, final String mask, final int objectType) throws Exception {
 
         if (startPath == null || mask == null) {
             throw new Exception("Error");
@@ -141,7 +135,7 @@ public class FileFinder {
      * @param res a {@link java.util.List} object.
      * @param objectType a int.
      */
-    private void searchWithFull(File topDirectory, List<File> res, int objectType) {
+    private void searchWithFull(final File topDirectory, final List<File> res, final int objectType) {
 
         File[] list = topDirectory.listFiles();
 

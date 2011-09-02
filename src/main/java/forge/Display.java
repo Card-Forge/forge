@@ -13,21 +13,21 @@ public interface Display {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void showMessage(String s);
+    void showMessage(String s);
 
     /**
      * <p>getButtonOK.</p>
      *
      * @return a {@link forge.MyButton} object.
      */
-    public MyButton getButtonOK();
+    MyButton getButtonOK();
 
     /**
      * <p>getButtonCancel.</p>
      *
      * @return a {@link forge.MyButton} object.
      */
-    public MyButton getButtonCancel();
+    MyButton getButtonCancel();
 
     //    public void showStatus(String message);
     /**
@@ -35,14 +35,14 @@ public interface Display {
      *
      * @param message a {@link java.lang.String} object.
      */
-    public void showCombat(String message);
+    void showCombat(String message);
 
     /**
      * <p>setVisible.</p>
      *
      * @param b a boolean.
      */
-    public void setVisible(boolean b);
+    void setVisible(boolean b);
 
     //assigns combat damage, used by Combat.setAssignedDamage()
     /**
@@ -52,7 +52,7 @@ public interface Display {
      * @param blockers a {@link forge.CardList} object.
      * @param damage a int.
      */
-    public void assignDamage(Card attacker, CardList blockers, int damage);
+    void assignDamage(Card attacker, CardList blockers, int damage);
     //public void addAssignDamage(Card attacker, Card blocker, int damage);
     //public void addAssignDamage(Card attacker, int damage);
 
@@ -63,33 +63,33 @@ public interface Display {
      * @param phase a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean stopAtPhase(Player turn, String phase);
+    boolean stopAtPhase(Player turn, String phase);
 
     /**
      * <p>loadPrefs.</p>
      *
      * @return a boolean.
      */
-    public boolean loadPrefs();
+    boolean loadPrefs();
 
     /**
      * <p>savePrefs.</p>
      *
      * @return a boolean.
      */
-    public boolean savePrefs();
+    boolean savePrefs();
 
     /**
      * <p>canLoseByDecking.</p>
      *
      * @return a boolean.
      */
-    public boolean canLoseByDecking();
+    boolean canLoseByDecking();
 
     /**
      * <p>setCard.</p>
      *
      * @param c a {@link forge.Card} object.
      */
-    public void setCard(Card c);
+    void setCard(Card c);
 }
