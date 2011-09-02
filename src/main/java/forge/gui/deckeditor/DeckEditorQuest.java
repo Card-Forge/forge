@@ -3,6 +3,7 @@ package forge.gui.deckeditor;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
+import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id$
  */
-public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
+public final class DeckEditorQuest extends DeckEditorBase implements NewConstants {
     /** Constant <code>serialVersionUID=152061168634545L</code> */
     private static final long serialVersionUID = 152061168634545L;
 
@@ -50,23 +51,6 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
     public void setTitle(String message) {
         super.setTitle(message);
     }
-
-    /** {@inheritDoc} */
-    public void setDecks(CardPoolView top, CardPoolView bottom) {
-
-        this.top = new CardPool( top );
-        this.bottom = bottom;
-
-        topModel.clear();
-        topModel.addCards(top);
-
-        bottomModel.clear();
-        bottomModel.addCards(bottom);
-
-        topModel.resort();
-        bottomModel.resort();
-    }// updateDisplay
-
 
     /**
      * <p>
@@ -114,7 +98,7 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
         // tell Gui_Quest_DeckEditor the name of the deck
         customMenu.setPlayerDeckName(deck.getName());
 
-        CardPoolView bottomPool = deck.getMain();        
+        CardPoolView bottomPool = deck.getMain();
         CardPool cardpool = new CardPool();
         cardpool.addAll(AllZone.getQuestData().getCardpool());
 
@@ -125,10 +109,10 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
         setDecks(cardpool, bottomPool);
 
         // this affects the card pool
-        topModel.sort(4, true);// sort by type
-        topModel.sort(3, true);// then sort by color
+        top.sort(4, true);// sort by type
+        top.sort(3, true);// then sort by color
 
-        bottomModel.sort(1, true);
+        bottom.sort(1, true);
     }// show(Command)
 
 
@@ -139,17 +123,18 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
      */
     public void setup() {
         List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, CardColumnPresets.fnQtyCompare, CardColumnPresets.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, CardColumnPresets.fnNameCompare, CardColumnPresets.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, CardColumnPresets.fnCostCompare, CardColumnPresets.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, CardColumnPresets.fnColorCompare, CardColumnPresets.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, CardColumnPresets.fnTypeCompare, CardColumnPresets.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, CardColumnPresets.fnStatsCompare, CardColumnPresets.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, CardColumnPresets.fnRarityCompare, CardColumnPresets.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, CardColumnPresets.fnSetCompare, CardColumnPresets.fnSetGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         // Add NEW column here
-        setupTables(columns, true);
 
+        top.setup(columns, cardView);
+        bottom.setup(columns, cardView);
 
         setSize(1024, 768);
         this.setResizable(false);
@@ -168,8 +153,11 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
     }// setupAndDisplay()
 
     public DeckEditorQuest() {
-        super(true, false);
         try {
+            filterBoxes = new FilterCheckBoxes(false);
+            top = new TableWithCards("All Cards", true);
+            bottom = new TableWithCards("Your deck", true);
+            cardView = new CardPanelHeavy();
             jbInit();
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
@@ -178,11 +166,10 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
 
 
     private void jbInit() throws Exception {
-
-        jbInitTables("All Cards", "Your deck");
-
-        jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));
-        jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
+        this.setLayout(null);
+        
+        top.getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
+        bottom.getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
 
         removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
@@ -215,9 +202,6 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
             analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
 
-        cardView.jbInit();
-       
-
         /**
          * Type filtering
          */
@@ -246,7 +230,7 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
         filterBoxes.red.setBounds(460, 430, 40, 20);
         filterBoxes.green.setBounds(500, 430, 40, 20);
         filterBoxes.colorless.setBounds(540, 430, 40, 20);
-        
+
         for (JCheckBox box : filterBoxes.allColors) {
             box.setOpaque(false);
             box.addItemListener(itemListenerUpdatesDisplay);
@@ -255,30 +239,25 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
          * Other
          */
         cardView.setBounds(new Rectangle(765, 23, 239, 687));
+        top.getLabel().setBounds(new Rectangle(19, 365, 720, 31));
+        bottom.getLabel().setBounds(new Rectangle(19, 672, 720, 31));
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
-            statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
-        statsLabel.setBounds(new Rectangle(19, 672, 720, 31));
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Deck Editor");
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        statsLabel2.setBounds(new Rectangle(19, 365, 720, 31));
-        statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
-            statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
 
-        this.getContentPane().add(jScrollPane1, null);
-        this.getContentPane().add(jScrollPane2, null);
+        this.getContentPane().add(top.getTableDecorated(), null);
+        this.getContentPane().add(bottom.getTableDecorated(), null);
         this.getContentPane().add(addButton, null);
         this.getContentPane().add(removeButton, null);
         this.getContentPane().add(analysisButton, null);
-        this.getContentPane().add(statsLabel2, null);
-        this.getContentPane().add(statsLabel, null);
+        this.getContentPane().add(bottom.getLabel(), null);
+        this.getContentPane().add(top.getLabel(), null);
         this.getContentPane().add(jLabel1, null);
         this.getContentPane().add(cardView, null);
 
@@ -292,37 +271,31 @@ public class DeckEditorQuest extends DeckEditorBase implements NewConstants {
     }
 
 
-    final void addButtonActionPerformed(final ActionEvent e) {
+    private  void addButtonActionPerformed(final ActionEvent e) {
+        CardPrinted card = top.getSelectedCard();
+        if (card == null) { return; }
+
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
-        int n = topTable.getSelectedRow();
-        if (n == -1) { return; }
-
-        CardPrinted c = topModel.rowToCard(n).getKey();
-        bottomModel.addCard(c);
-        bottomModel.resort();
-
-        // remove from cardpool
-        top.remove(c);
-
-        // redraw top after deletion
-        updateDisplay();
-        fixSelection(topModel, topTable, n);
+        top.removeCard(card);
+        bottom.addCard(card);
     }
 
 
-    final void removeButtonActionPerformed(final ActionEvent e) {
+    private void removeButtonActionPerformed(final ActionEvent e) {
+        CardPrinted card = bottom.getSelectedCard();
+        if (card == null) { return; }
+
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
-        int n = bottomTable.getSelectedRow();
-        if (n == -1) { return; }
+        top.addCard(card);
+        bottom.removeCard(card);
+    }
 
-        CardPrinted c = bottomModel.rowToCard(n).getKey();
-        bottomModel.removeCard(c);
-        fixSelection(bottomModel, bottomTable, n);
 
-        top.add(c);
-        updateDisplay();
+    public void addCheatCard(CardPrinted card) {
+        top.addCard(card);
+        AllZone.getQuestData().getCardpool().add(card);
     }
 
 }

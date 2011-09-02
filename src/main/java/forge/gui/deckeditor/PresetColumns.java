@@ -10,7 +10,7 @@ import forge.card.CardPrinted;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class CardColumnPresets {
+public abstract class PresetColumns {
 
     @SuppressWarnings("rawtypes")
     public static final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnQtyCompare =

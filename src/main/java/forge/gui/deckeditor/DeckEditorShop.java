@@ -23,11 +23,11 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import forge.Command;
 import forge.ReadPriceList;
-import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.quest.data.QuestData;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -38,7 +38,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-public class CardShop extends DeckEditorBase {
+public class DeckEditorShop extends DeckEditorBase {
 
     /** Constant <code>serialVersionUID=3988857075791576483L</code> */
     private static final long serialVersionUID = 3988857075791576483L;
@@ -55,7 +55,7 @@ public class CardShop extends DeckEditorBase {
 
     private double multiplier;
 
-    private forge.quest.data.QuestData questData;
+    private QuestData questData;
 
     // get pricelist:
     private ReadPriceList r = new ReadPriceList();
@@ -63,20 +63,6 @@ public class CardShop extends DeckEditorBase {
 
 
     /** {@inheritDoc} */
-    public void setDecks(CardPoolView topParam, CardPoolView bottomParam) {
-        this.top = new CardPool(topParam);
-        this.bottom = bottomParam;
-
-        topModel.clear();
-        bottomModel.clear();
-
-        // update top
-        topModel.addCards(topParam);
-        bottomModel.addCards(bottomParam);
-
-        topModel.resort();
-        bottomModel.resort();
-    }// updateDisplay
 
     /**
      * <p>
@@ -91,7 +77,7 @@ public class CardShop extends DeckEditorBase {
             private static final long serialVersionUID = -7428793574300520612L;
 
             public void execute() {
-                CardShop.this.dispose();
+                DeckEditorShop.this.dispose();
                 exitCommand.execute();
             }
         };
@@ -125,8 +111,8 @@ public class CardShop extends DeckEditorBase {
         if (maxSellPrice < Integer.MAX_VALUE) { maxSellingPrice = String.format("     Max selling price: %d", maxSellPrice); }
         sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) + "% of value)" + maxSellingPrice);
 
-        topModel.sort(1, true);
-        bottomModel.sort(1, true);
+        top.sort(1, true);
+        bottom.sort(1, true);
     }// show(Command)
 
     /**
@@ -136,17 +122,18 @@ public class CardShop extends DeckEditorBase {
      */
     private void setup() {
         List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, CardColumnPresets.fnQtyCompare, CardColumnPresets.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, CardColumnPresets.fnNameCompare, CardColumnPresets.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, CardColumnPresets.fnCostCompare, CardColumnPresets.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, CardColumnPresets.fnColorCompare, CardColumnPresets.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, CardColumnPresets.fnTypeCompare, CardColumnPresets.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, CardColumnPresets.fnStatsCompare, CardColumnPresets.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, CardColumnPresets.fnRarityCompare, CardColumnPresets.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, CardColumnPresets.fnSetCompare, CardColumnPresets.fnSetGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
 
-        setupTables(columns, false);
+        top.setup(columns, cardView);
+        bottom.setup(columns, cardView);
 
         setSize(1024, 768);
         this.setResizable(false);
@@ -171,10 +158,13 @@ public class CardShop extends DeckEditorBase {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public CardShop(forge.quest.data.QuestData qd) {
-        super(false, false);
+    public DeckEditorShop(forge.quest.data.QuestData qd) {
         questData = qd;
         try {
+            filterBoxes = null;
+            top = new TableWithCards("Cards for sale", false);
+            bottom = new TableWithCards("Owned Cards", false);
+            cardView = new CardPanelLite();
             jbInit();
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
@@ -192,10 +182,9 @@ public class CardShop extends DeckEditorBase {
      */
     private void jbInit() throws Exception {
 
-        jbInitTables("Cards for sale", "Owned Cards");
-
-        jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));
-        jScrollPane2.setBounds(new Rectangle(19, 458, 726, 276));
+        this.setLayout(null);
+        top.getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
+        bottom.getTableDecorated().setBounds(new Rectangle(19, 458, 726, 276));
 
         sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
@@ -218,7 +207,6 @@ public class CardShop extends DeckEditorBase {
             buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
         buyButton.setBounds(new Rectangle(23, 403, 146, 49));
 
-        cardView.jbInit();
         cardView.setBounds(new Rectangle(765, 23, 239, 710));
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
@@ -240,8 +228,8 @@ public class CardShop extends DeckEditorBase {
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
         this.getContentPane().add(cardView, null);
-        this.getContentPane().add(jScrollPane1, null);
-        this.getContentPane().add(jScrollPane2, null);
+        this.getContentPane().add(top.getTableDecorated(), null);
+        this.getContentPane().add(bottom.getTableDecorated(), null);
         this.getContentPane().add(creditsLabel, null);
         this.getContentPane().add(buyButton, null);
         this.getContentPane().add(sellButton, null);
@@ -266,27 +254,22 @@ public class CardShop extends DeckEditorBase {
     }
 
     private void buyButton_actionPerformed(ActionEvent e) {
-        int n = topTable.getSelectedRow();
-        if (n != -1) {
-            CardPrinted c = topModel.rowToCard(n).getKey();
-            int value = getCardValue(c);
+        CardPrinted c = top.getSelectedCard();
+        if (c == null) { return; }
 
-            if (value <= questData.getCredits()) {
-                bottomModel.addCard(c);
-                bottomModel.resort();
+        int value = getCardValue(c);
 
-                topModel.removeCard(c);
+        if (value <= questData.getCredits()) {
+            bottom.addCard(c);
+            top.removeCard(c);
 
-                questData.buyCard(c, value);
+            questData.buyCard(c, value);
 
-                creditsLabel.setText("Total credits: " + questData.getCredits());
-                fixSelection(topModel, topTable, n);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Not enough credits!");
-            }
-        }// if(valid row)
-    }// buyButton_actionPerformed
+            creditsLabel.setText("Total credits: " + questData.getCredits());
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough credits!");
+        }
+    }
 
     /**
      * <p>
@@ -297,44 +280,34 @@ public class CardShop extends DeckEditorBase {
      *            a {@link java.awt.event.ActionEvent} object.
      */
     void sellButton_actionPerformed(ActionEvent e) {
+        CardPrinted c = bottom.getSelectedCard();
+        if (c == null) { return; }
 
-        int n = bottomTable.getSelectedRow();
-        if (n != -1) {
-            CardPrinted c = bottomModel.rowToCard(n).getKey();
-            bottomModel.removeCard(c);
+        bottom.removeCard(c);
+        top.addCard(c);
 
-            topModel.addCard(c);
-            topModel.resort();
+        int price = Math.min((int) (multiplier * getCardValue(c)), questData.getSellPriceLimit());
+        questData.sellCard(c, price);
+        questData.addCardToShopList(c);
 
-            // bottomModel.removeCard(c);
-            questData.addCardToShopList(c);
+        creditsLabel.setText("Total credits: " + questData.getCredits());
 
-            int price = Math.min((int) (multiplier * getCardValue(c)), questData.getSellPriceLimit());
-
-            questData.sellCard(c, price);
-            creditsLabel.setText("Total credits: " + questData.getCredits());
-
-            int leftInPool = questData.getCardpool().count(c);
-            // remove sold cards from all decks:
-            for (String deckName : questData.getDeckNames()) {
-                Deck deck = questData.getDeck(deckName);
-                for (int cntInDeck = deck.getMain().count(c); cntInDeck > leftInPool; cntInDeck--) {
-                    deck.removeMain(c);
-                }
+        int leftInPool = questData.getCardpool().count(c);
+        // remove sold cards from all decks:
+        for (String deckName : questData.getDeckNames()) {
+            Deck deck = questData.getDeck(deckName);
+            for (int cntInDeck = deck.getMain().count(c); cntInDeck > leftInPool; cntInDeck--) {
+                deck.removeMain(c);
             }
-
-            fixSelection(bottomModel, bottomTable, n);
-
-        }// if(valid row)
-    }// sellButton_actionPerformed
+        }
+    }
 
     @SuppressWarnings("rawtypes")
-    protected final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnPriceCompare =
+    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnPriceCompare =
         new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
             public Comparable apply(final Entry<CardPrinted, Integer> from) { return getCardValue(from.getKey()); } };
-    protected final Lambda1<Object, Entry<CardPrinted, Integer>> fnPriceGet =
+    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnPriceGet =
         new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
             public Object apply(final Entry<CardPrinted, Integer> from) { return getCardValue(from.getKey()); } };
-            
 
 }

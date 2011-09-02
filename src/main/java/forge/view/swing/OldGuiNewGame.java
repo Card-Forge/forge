@@ -11,7 +11,7 @@ import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
-import forge.gui.deckeditor.Gui_BoosterDraft;
+import forge.gui.deckeditor.DeckEditorDraft;
 import forge.gui.deckeditor.DeckEditor;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
@@ -365,7 +365,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * </p>
      */
     private void setupDraft() {
-        Gui_BoosterDraft draft = new Gui_BoosterDraft();
+        DeckEditorDraft draft = new DeckEditorDraft();
 
         // determine what kind of booster draft to run
         ArrayList<String> draftTypes = new ArrayList<String>();

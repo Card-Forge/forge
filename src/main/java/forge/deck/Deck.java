@@ -194,6 +194,7 @@ public class Deck implements Comparable<Deck>, Serializable {
      */
     public final void addSideboard(final String cardName) { addSideboard(CardDb.instance().getCard(cardName)); }
     public final void addSideboard(final CardPrinted card) { sideboard.add(card); }
+    public final void addSideboard(final CardPrinted card, final int amount) { sideboard.add(card, amount); }
     public final void addSideboard(final CardPoolView cards) { sideboard.addAll(cards); }
 
 

@@ -135,7 +135,6 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         deck.setName(filename.getName());
 
-
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(deck);
@@ -335,9 +334,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             if (c.show()) {
                 String cardName = c.getSelectedValue();
                 DeckEditorQuest g = (DeckEditorQuest) deckDisplay;
-                g.getTop().add(CardDb.instance().getCard(cardName));
-                AllZone.getQuestData().getCardpool().add(CardDb.instance().getCard(cardName));
-                g.updateDisplay();
+                g.addCheatCard(CardDb.instance().getCard(cardName));
             }
         }
     };

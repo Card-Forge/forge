@@ -235,38 +235,6 @@ public class CardFilter {
         return listFilter;
     }
 
-    /**
-     * Filter a sequence Generator of cards by rarity.
-     * 
-     * @param inputGenerator  the sequence to filter (at a later time); must
-     * not be null
-     * 
-     * @param rarity  a valid value for Card.getSVar("Rarity"); must not be
-     * null. If equal to Constant.Rarity.Rare, the result will also contain
-     * mythic cards.
-     * 
-     * @return  a sequence Generator whose cards only have the given rarity
-     */
-	public static Generator<Card> getRarity(final Generator<Card> inputGenerator, final String rarity) {
-    	UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
-    	UtilFunctions.checkNotNull("rarity", rarity);
-
-		Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
-			public Boolean apply(final Card c) {
-				if (c == null) {
-					return false;
-				}
-
-				// TODO spin off Mythic from Rare when the time comes
-	            String r = c.getSVar("Rarity");
-	            return (r != null
-	                    && (r.equals(rarity) || rarity.equals(Constant.Rarity.Rare)
-	                            && r.equals(Constant.Rarity.Mythic)));
-			}
-		};
-
-		return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
-	}
 
 	/**
 	 * Filter an iterable sequence of Cards; note this is a static method

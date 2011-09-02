@@ -99,7 +99,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
     // private ButtonGroup buttonGroup1;
 
     public CardList filterCardList;
-    public TableModel tModel;
+    public CardPoolView deck;
 
     /**
      * <p>
@@ -111,9 +111,9 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @param tb
      *            a {@link forge.gui.deckeditor.TableModel} object.
      */
-    public GUI_DeckAnalysis(JFrame g, TableModel tb) {
+    public GUI_DeckAnalysis(JFrame g, CardPoolView deckView) {
         super(g);
-        tModel = tb;
+        deck = deckView;
 
         jF = g;
         initGUI();
@@ -179,12 +179,11 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
                     mFive = 0;
                     mSixMore = 0;
                     tManaCost = 0;
-                    CardPoolView cardList = tModel.getCards();
-                    
-                    for (Entry<CardPrinted, Integer> e : cardList) {
+
+                    for (Entry<CardPrinted, Integer> e : deck) {
                         c = e.getKey().getCard();
                         int cnt = e.getValue();
-                        
+
                         if (c.getColor().isMulticolor()) {
                             cMulticolor = cMulticolor + cnt;
                         } else {
@@ -222,7 +221,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 
                         tManaCost = tManaCost + cmc * cnt;
                     }
-                    int total = cardList.countAll();
+                    int total = deck.countAll();
                     BigDecimal aManaCost = new BigDecimal(tManaCost / total);
                     aManaCost = aManaCost.setScale(2, BigDecimal.ROUND_HALF_UP);
 
@@ -920,7 +919,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JList} object.
      */
     private JList getJList1() {
-        List<CardPrinted> rList = tModel.getCards().toFlatList();
+        List<CardPrinted> rList = deck.toFlatList();
 
         Collections.shuffle(rList, MyRandom.random);
         Collections.shuffle(rList, MyRandom.random);
@@ -1029,9 +1028,9 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JButton} object.
      */
     private JButton getJButton1() {
-        CardPoolView rList = tModel.getCards();
+
         if (jButtonRegenerate == null) {
-            if (rList.countAll() >= 40) {
+            if (deck.countAll() >= 40) {
                 jButtonRegenerate = new JButton();
                 jButtonRegenerate.setLayout(null);
                 jButtonRegenerate.setText("Regenerate hand");
@@ -1106,7 +1105,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
                     "6th", "7th" });
 
             jTable1 = new JTable(dm);
-            List<CardPrinted> rList = tModel.getCards().toFlatList();
+            List<CardPrinted> rList = deck.toFlatList();
             String[] cardsName = new String[rList.size()];
             int cCount;
             float fCount;

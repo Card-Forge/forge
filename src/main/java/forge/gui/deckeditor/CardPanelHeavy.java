@@ -28,7 +28,7 @@ import forge.view.swing.OldGuiNewGame;
  * This panel is to be placed in the right part of a deck editor
  *
  */
-public class CardViewPanel extends JPanel implements CardDisplay {
+public class CardPanelHeavy extends CardPanelBase {
 
     private static final long serialVersionUID = -7134546689397508597L;
 
@@ -45,8 +45,7 @@ public class CardViewPanel extends JPanel implements CardDisplay {
     /** Constant <code>previousDirectory</code> */
     protected static File previousDirectory = null;
 
-
-    public void jbInit() {
+    public CardPanelHeavy() {
         changePictureButton.setText("Change picture...");
         changePictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {

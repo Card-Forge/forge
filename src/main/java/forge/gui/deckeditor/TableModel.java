@@ -9,8 +9,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
-
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
@@ -27,23 +25,21 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id$
  */
-public class TableModel extends AbstractTableModel {
+public final class TableModel extends AbstractTableModel {
     /**
      * 
      */
     private static final long serialVersionUID = -6896726613116254828L;
 
-    @SuppressWarnings("rawtypes") // We use raw comparables to provide fields for sorting 
-
     private final class SortOrders {
         private class Order {
             public final int sortColumn;
             public boolean isSortAsc = true;
-            public Order(int col) { sortColumn = col; }
+            public Order(final int col) { sortColumn = col; }
         };
 
         private final int MAX_DEPTH = 3;
-        Order[] orders = new Order[] {null, null, null};
+        private Order[] orders = new Order[] {null, null, null};
         private TableSorterCascade sorter = null;
         private boolean isSorterReady = false;
         private int indexOfColumn(final int column) {
@@ -57,13 +53,13 @@ public class TableModel extends AbstractTableModel {
         }
 
         // index of column to sort by, desired direction
-        public void add(final int column, boolean wantAsc) {
+        public void add(final int column, final boolean wantAsc) {
             add(column);
             orders[0].isSortAsc = wantAsc;
             isSorterReady = false;
         }
 
-        // puts desired direction on top, set "asc"; if already was on top, inverts direction; 
+        // puts desired direction on top, set "asc"; if already was on top, inverts direction;
         public void add(final int column) {
             int posColumn = indexOfColumn(column);
             switch (posColumn) {
@@ -100,32 +96,15 @@ public class TableModel extends AbstractTableModel {
     }
 
     private CardPool data = new CardPool();
-    private final CardDisplay cardDisplay;
+    private final CardPanelBase cardDisplay;
     private final List<TableColumnInfo<CardPrinted>> columns;
     private final SortOrders sortOrders = new SortOrders();
 
-    public TableModel(final CardDisplay cd, List<TableColumnInfo<CardPrinted>> columnsToShow ) { 
+    public TableModel(final CardPanelBase cd, final List<TableColumnInfo<CardPrinted>> columnsToShow) {
         cardDisplay = cd;
         columns = columnsToShow;
         columns.get(4).isMinMaxApplied = false;
     }
-
-    
-
-    @SuppressWarnings("rawtypes")
-    private final TableColumnInfo<CardPrinted> columnAI = new TableColumnInfo<CardPrinted>("AI", 30,
-        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() {
-            @Override public Comparable apply(final Entry<CardPrinted, Integer> from) {
-                return "n/a"; } },
-        new Lambda1<Object, Entry<CardPrinted, Integer>>() {
-            @Override public Object apply(final Entry<CardPrinted, Integer> from) {
-                return "n/a"; } });
-
-    /*
-        columnQty, columnName, columnCost,
-        columnColor, columnType, columnStats,
-        columnRarity, columnSet, columnAI
-    */
 
 
     public void resizeCols(final JTable table) {
@@ -133,13 +112,13 @@ public class TableModel extends AbstractTableModel {
         for (int i = 0; i < table.getColumnCount(); i++) {
             tableColumn = table.getColumnModel().getColumn(i);
             TableColumnInfo<CardPrinted> colInfo = columns.get(i);
-            
+
             tableColumn.setPreferredWidth(colInfo.nominalWidth);
             if (colInfo.isMinMaxApplied) {
                 tableColumn.setMinWidth(colInfo.minWidth);
                 tableColumn.setMaxWidth(colInfo.maxWidth);
             }
-        }//for
+        }
     }
 
     public void clear() { data.clear(); }
@@ -181,7 +160,8 @@ public class TableModel extends AbstractTableModel {
     }
 
     public Entry<CardPrinted, Integer> rowToCard(final int row) {
-        return data.getOrderedList().get(row);
+        List<Entry<CardPrinted, Integer>> model = data.getOrderedList();
+        return row >= 0 && row < model.size() ? model.get(row) : null;
     }
     public int getRowCount() {
         return data.countDistinct();
@@ -193,12 +173,12 @@ public class TableModel extends AbstractTableModel {
 
     /** {@inheritDoc} */
     @Override
-    public String getColumnName(int n) {
+    public String getColumnName(final int n) {
         return columns.get(n).getName();
     }
 
     /** {@inheritDoc} */
-    public Object getValueAt(int row, int column) {
+    public Object getValueAt(final int row, final int column) {
         return columns.get(column).fnDisplay.apply(rowToCard(row));
     }
 
@@ -206,9 +186,9 @@ public class TableModel extends AbstractTableModel {
     class ColumnListener extends MouseAdapter {
         protected JTable table;
 
-        public ColumnListener(JTable t) { table = t; }
+        public ColumnListener(final JTable t) { table = t; }
 
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(final MouseEvent e) {
           TableColumnModel colModel = table.getColumnModel();
           int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
           int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
@@ -229,17 +209,15 @@ public class TableModel extends AbstractTableModel {
           table.repaint();
         }
       }
-    
-    
-    public void showSelectedCard(JTable table)
-    {
+
+    public void showSelectedCard(final JTable table) {
         int row = table.getSelectedRow();
         if (row != -1) {
             CardPrinted cp = rowToCard(row).getKey();
             cardDisplay.showCard(cp);
-        }        
+        }
     }
-    
+
     /**
      * <p>addListeners.</p>
      *
@@ -250,20 +228,18 @@ public class TableModel extends AbstractTableModel {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
-            public void valueChanged(ListSelectionEvent arg0) {
+            public void valueChanged(final ListSelectionEvent arg0) {
                 showSelectedCard(table);
             }
         });
         table.addFocusListener(new FocusListener() {
-            
-            @Override public void focusLost(FocusEvent e) {}
-            @Override public void focusGained(FocusEvent e) {
+
+            @Override public void focusLost(final FocusEvent e) {}
+            @Override public void focusGained(final FocusEvent e) {
                 showSelectedCard(table);
             }
         });
 
-
-        
         table.getTableHeader().addMouseListener(new ColumnListener(table));
 
     }//addCardListener()

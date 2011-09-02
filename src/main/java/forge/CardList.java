@@ -415,23 +415,6 @@ public class CardList implements Iterable<Card> {
         });
     }
 
-    /**
-     * <p>getRarity.</p>
-     *
-     * @param rarity a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList getRarity(final String rarity) {
-        return this.filter(new CardListFilter() {
-            public boolean addCard(final Card c) {
-                // TODO spin off Mythic from Rare when the time comes
-                String r = c.getSVar("Rarity");
-                return r.equals(rarity)
-                        || rarity.equals(Constant.Rarity.Rare) && r.equals(Constant.Rarity.Mythic);
-            }
-        });
-    }
-
     //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     /**
      * <p>getType.</p>

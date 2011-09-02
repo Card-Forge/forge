@@ -16,11 +16,10 @@ public final class CardPool extends CardPoolView  {
     public CardPool(final List<String> names) { super(); addAllCards(CardDb.instance().getCards(names)); }
 
     // Copy ctor will create its own modifiable pool
-    @SuppressWarnings("unchecked")
     public CardPool(final CardPoolView from) {
         super();
         cards = new Hashtable<CardPrinted, Integer>();
-        cards.putAll(from.cards);
+        if (from != null) { cards.putAll(from.cards); }
      }
     public CardPool(final Iterable<CardPrinted> list) {
         this(); addAllCards(list);

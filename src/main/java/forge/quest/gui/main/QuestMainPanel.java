@@ -4,7 +4,7 @@ package forge.quest.gui.main;
 import forge.*;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
-import forge.gui.deckeditor.CardShop;
+import forge.gui.deckeditor.DeckEditorShop;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestData;
@@ -619,7 +619,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        CardShop g = new CardShop(questData);
+        DeckEditorShop g = new DeckEditorShop(questData);
 
         g.show(exit);
         g.setVisible(true);

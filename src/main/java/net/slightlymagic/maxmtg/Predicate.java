@@ -35,7 +35,13 @@ public abstract class Predicate<T> {
      */
     public enum StringOp { CONTAINS, NOT_CONTAINS, EQUALS }
 
+    // This is the main method, predicates were made for.
     public abstract boolean isTrue(T subject);
+    // These are checks against constants, they will let build simpler expressions
+    // Overloaded only in LeafConstant 
+    public boolean is1() { return false; }
+    public boolean is0() { return false; }
+
     // 1. operations on pure T ... check(T card), list.add(card)
     // 2. operations on something U containing CardOracles ... check(accessor(U)), list.add(U)
     // 3. gets T from U, saves U transformed into v ... check(accessor(U)), list.add(transformer(U))
@@ -269,8 +275,9 @@ public abstract class Predicate<T> {
     protected static class LeafConstant<T> extends Predicate<T> {
         private final boolean bValue;
 
-        @Override
-        public boolean isTrue(final T card) { return bValue; }
+        @Override public boolean is1() { return bValue; }
+        @Override public boolean is0() { return !bValue; }
+        @Override public boolean isTrue(final T card) { return bValue; }
         public LeafConstant(final boolean value) { bValue = value; }
     }
 
