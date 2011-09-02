@@ -8020,6 +8020,7 @@ res/cardsfolder/t/traumatize.txt svneol=native#text/plain
 res/cardsfolder/t/treacherous_link.txt svneol=native#text/plain
 res/cardsfolder/t/treacherous_urge.txt svneol=native#text/plain
 res/cardsfolder/t/treachery.txt svneol=native#text/plain
+res/cardsfolder/t/treasure_hunt.txt -text
 res/cardsfolder/t/treasure_hunter.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_mage.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_trove.txt svneol=native#text/plain
@@ -8114,7 +8115,6 @@ res/cardsfolder/t/twisted_image.txt svneol=native#text/plain
 res/cardsfolder/t/twitch.txt svneol=native#text/plain
 res/cardsfolder/t/typhoon.txt svneol=native#text/plain
 res/cardsfolder/t/tyrranax.txt svneol=native#text/plain
-res/cardsfolder/treasure_hunt.txt -text
 res/cardsfolder/u/uktabi_drake.txt svneol=native#text/plain
 res/cardsfolder/u/uktabi_efreet.txt svneol=native#text/plain
 res/cardsfolder/u/uktabi_faerie.txt svneol=native#text/plain
