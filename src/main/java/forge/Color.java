@@ -26,7 +26,7 @@ public enum Color {
      *
      * @param c a int.
      */
-    Color(int c) {
+    Color(final int c) {
         flag = c;
     }
 
@@ -53,8 +53,9 @@ public enum Color {
             colors.add(ConvertFromString(s[i]));
         }
 
-        if (colors.size() > 1)
+        if (colors.size() > 1) {
             colors.remove(Color.Colorless);
+        }
 
         return colors;
     }
@@ -67,16 +68,17 @@ public enum Color {
      */
     public static Color ConvertFromString(String s) {
         {
-            if (s.equals(Constant.Color.White))
+            if (s.equals(Constant.Color.White)) {
                 return Color.White;
-            else if (s.equals(Constant.Color.Green))
+            } else if (s.equals(Constant.Color.Green)) {
                 return Color.Green;
-            else if (s.equals(Constant.Color.Red))
+            } else if (s.equals(Constant.Color.Red)) {
                 return Color.Red;
-            else if (s.equals(Constant.Color.Black))
+            } else if (s.equals(Constant.Color.Black)) {
                 return Color.Black;
-            else if (s.equals(Constant.Color.Blue))
+            } else if (s.equals(Constant.Color.Blue)) {
                 return Color.Blue;
+            }
 
             return Color.Colorless;
         }
@@ -88,22 +90,28 @@ public enum Color {
      * @param m a {@link forge.card.mana.ManaCost} object.
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> ConvertManaCostToColor(ManaCost m) {
+    public static EnumSet<Color> ConvertManaCostToColor(final ManaCost m) {
         EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
-        if (m.isColor("W"))
+        if (m.isColor("W")) {
             colors.add(Color.White);
-        if (m.isColor("G"))
+        }
+        if (m.isColor("G")) {
             colors.add(Color.Green);
-        if (m.isColor("R"))
+        }
+        if (m.isColor("R")) {
             colors.add(Color.Red);
-        if (m.isColor("B"))
+        }
+        if (m.isColor("B")) {
             colors.add(Color.Black);
-        if (m.isColor("U"))
+        }
+        if (m.isColor("U")) {
             colors.add(Color.Blue);
+        }
 
-        if (colors.size() > 1)
+        if (colors.size() > 1) {
             colors.remove(Color.Colorless);
+        }
 
         return colors;
     }
@@ -114,17 +122,18 @@ public enum Color {
      * @return a {@link java.lang.String} object.
      */
     public String toString() {
-        if (this.equals(Color.White))
+        if (this.equals(Color.White)) {
             return Constant.Color.White;
-        else if (this.equals(Color.Green))
+        } else if (this.equals(Color.Green)) {
             return Constant.Color.Green;
-        else if (this.equals(Color.Red))
+        } else if (this.equals(Color.Red)) {
             return Constant.Color.Red;
-        else if (this.equals(Color.Black))
+        } else if (this.equals(Color.Black)) {
             return Constant.Color.Black;
-        else if (this.equals(Color.Blue))
+        } else if (this.equals(Color.Blue)) {
             return Constant.Color.Blue;
-        else
+        } else {
             return Constant.Color.Colorless;
+        }
     }
 }

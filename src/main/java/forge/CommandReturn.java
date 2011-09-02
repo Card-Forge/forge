@@ -12,5 +12,5 @@ public interface CommandReturn {
      *
      * @return a {@link java.lang.Object} object.
      */
-    public Object execute();
+    Object execute();
 }

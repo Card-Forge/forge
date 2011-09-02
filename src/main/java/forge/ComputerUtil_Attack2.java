@@ -26,7 +26,7 @@ public class ComputerUtil_Attack2 {
     private final int randomInt = random.nextInt();
 
     private CardList humanList;   //holds human player creatures
-    private CardList computerList;//holds computer creatures
+    private CardList computerList; //holds computer creatures
 
     private int aiAggression = 0; // added by Masher, how aggressive the ai attack will be depending on circumstances
 
@@ -48,7 +48,7 @@ public class ComputerUtil_Attack2 {
      * @param possibleBlockers a {@link forge.CardList} object.
      * @param blockerLife a int.
      */
-    public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife) {
+    public ComputerUtil_Attack2(final CardList possibleAttackers, CardList possibleBlockers, int blockerLife) {
         humanList = new CardList(possibleBlockers.toArray());
         humanList = humanList.getType("Creature");
 
@@ -60,7 +60,7 @@ public class ComputerUtil_Attack2 {
         attackers = getPossibleAttackers(possibleAttackers);
         blockers = getPossibleBlockers(possibleBlockers, attackers);
         this.blockerLife = blockerLife;
-    }//constructor
+    } //constructor
 
     /**
      * <p>sortAttackers.</p>
@@ -68,7 +68,7 @@ public class ComputerUtil_Attack2 {
      * @param in a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList sortAttackers(CardList in) {
+    public final CardList sortAttackers(final CardList in) {
         CardList list = new CardList();
 
         //Cards with triggers should come first (for Battle Cry)
@@ -76,17 +76,20 @@ public class ComputerUtil_Attack2 {
             ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
             for (Trigger trigger : registeredTriggers) {
                 HashMap<String, String> trigParams = trigger.getMapParams();
-                if (trigParams.get("Mode").equals("Attacks") && trigger.getHostCard().equals(attacker))
+                if (trigParams.get("Mode").equals("Attacks") && trigger.getHostCard().equals(attacker)) {
                     list.add(attacker);
+                }
             }
         }
 
         for (Card attacker : in) {
-            if (!list.contains(attacker)) list.add(attacker);
+            if (!list.contains(attacker)) {
+                list.add(attacker);
+            }
         }
 
         return list;
-    }//sortAttackers()
+    } //sortAttackers()
 
     //Is there any reward for attacking? (for 0/1 creatures there is not)
     /**
@@ -96,19 +99,27 @@ public class ComputerUtil_Attack2 {
      * @param combat a {@link forge.Combat} object.
      * @return a boolean.
      */
-    public boolean isEffectiveAttacker(Card attacker, Combat combat) {
+    public final boolean isEffectiveAttacker(final Card attacker, Combat combat) {
 
         //if the attacker will die when attacking don't attack
-        if (attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat) <= 0)
+        if (attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat) <= 0) {
             return false;
-        
-        if (CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) return true;
-        if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) return true;
-        
+        }
+
+        if (CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
+            return true;
+        }
+        if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
+            return true;
+        }
+
         ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers)
+        for (Trigger trigger : registeredTriggers) {
             if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)
-                    && trigger.getHostCard().getController().isComputer()) return true;
+                    && trigger.getHostCard().getController().isComputer()) {
+                return true;
+            }
+        }
 
         return false;
     }
@@ -122,12 +133,12 @@ public class ComputerUtil_Attack2 {
     public CardList getPossibleAttackers(CardList in) {
         CardList list = new CardList(in.toArray());
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
         return list;
-    }//getPossibleAttackers()
+    } //getPossibleAttackers()
 
     /**
      * <p>getPossibleBlockers.</p>
@@ -136,14 +147,18 @@ public class ComputerUtil_Attack2 {
      * @param attackers a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getPossibleBlockers(CardList blockers, CardList attackers) {
+    public final CardList getPossibleBlockers(CardList blockers, CardList attackers) {
         CardList possibleBlockers = new CardList(blockers.toArray());
         final CardList attackerList = new CardList(attackers.toArray());
         possibleBlockers = possibleBlockers.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if (!c.isCreature()) return false;
+            public boolean addCard(final Card c) {
+                if (!c.isCreature()) {
+                    return false;
+                }
                 for (Card attacker : attackerList) {
-                    if (CombatUtil.canBlock(attacker, c)) return true;
+                    if (CombatUtil.canBlock(attacker, c)) {
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -161,7 +176,7 @@ public class ComputerUtil_Attack2 {
      * @param combat a {@link forge.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList notNeededAsBlockers(CardList attackers, Combat combat) {
+    public final CardList notNeededAsBlockers(CardList attackers, Combat combat) {
         CardList notNeededAsBlockers = new CardList(attackers.toArray());
         CardListUtil.sortAttackLowFirst(attackers);
         int blockersNeeded = attackers.size();
@@ -173,7 +188,9 @@ public class ComputerUtil_Attack2 {
             if (!doesHumanAttackAndWin(i)) {
                 blockersNeeded = i;
                 break;
-            } else notNeededAsBlockers.remove(list.get(i));
+            } else {
+                notNeededAsBlockers.remove(list.get(i));
+            }
         }
 
         if (blockersNeeded == list.size()) {

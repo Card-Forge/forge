@@ -12,5 +12,5 @@ public interface CommandArgs extends java.io.Serializable {
      *
      * @param o a {@link java.lang.Object} object.
      */
-    public void execute(Object o);
+    void execute(Object o);
 }

@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 import forge.card.mana.ManaCost;
 
+/**
+ * class ColorChanger.
+ * TODO Write javadoc for this type.
+ *
+ */
 public class ColorChanger {
     private ArrayList<Card_Color> globalColorChanges = new ArrayList<Card_Color>();
-    
+
 
     /**
      * <p>addColorChanges.</p>
@@ -17,7 +22,9 @@ public class ColorChanger {
      * @param bIncrease a boolean.
      * @return a long.
      */
-    public long addColorChanges(String s, Card c, boolean addToColors, boolean bIncrease) {
+    public final long addColorChanges(final String s, final Card c, final boolean addToColors,
+            final boolean bIncrease)
+    {
         if (bIncrease) {
             Card_Color.increaseTimestamp();
         }
@@ -33,7 +40,7 @@ public class ColorChanger {
      * @param addTo a boolean.
      * @param timestamp a long.
      */
-    public final void removeColorChanges(String s, Card c, boolean addTo, long timestamp) {
+    public final void removeColorChanges(final String s, final Card c, final boolean addTo, final long timestamp) {
         Card_Color removeCol = null;
         for (Card_Color cc : globalColorChanges) {
             if (cc.equals(s, c, addTo, timestamp)) {

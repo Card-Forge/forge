@@ -19,12 +19,12 @@ public interface CardContainer {
      *
      * @param card a {@link forge.Card} object.
      */
-    public void setCard(Card card);
+    void setCard(Card card);
 
     /**
      * <p>getCard.</p>
      *
      * @return a {@link forge.Card} object.
      */
-    public Card getCard();
+    Card getCard();
 }

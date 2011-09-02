@@ -10,17 +10,26 @@ import java.util.Iterator;
  * @version $Id$
  */
 public class CommandList implements java.io.Serializable, Command, Iterable<Command> {
-    /** Constant <code>serialVersionUID=-1532687201812613302L</code> */
+    /** Constant <code>serialVersionUID=-1532687201812613302L</code>. */
     private static final long serialVersionUID = -1532687201812613302L;
 
     private ArrayList<Command> a = new ArrayList<Command>();
-    
+
+    /**
+     * default constructor
+     * TODO Write javadoc for Constructor.
+     */
     public CommandList() {
-    	;
+        //nothing to do
     }
-    
-    public CommandList(Command c) {
-    	a.add(c);
+
+    /**
+     * constructor
+     * TODO Write javadoc for Constructor.
+     * @param c a Command
+     */
+    public CommandList(final Command c) {
+        a.add(c);
     }
 
     /**
@@ -28,7 +37,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      *
      * @return a {@link java.util.Iterator} object.
      */
-    public Iterator<Command> iterator() {
+    public final Iterator<Command> iterator() {
         return a.iterator();
     }
 
@@ -40,7 +49,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      *
      * @param c a {@link forge.Command} object.
      */
-    public void add(Command c) {
+    public final void add(final Command c) {
         a.add(0, c);
     }
 
@@ -51,7 +60,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * @param i a int.
      * @return a {@link forge.Command} object.
      */
-    public Command get(int i) {
+    public final Command get(final int i) {
         return (Command) a.get(i);
     }
 
@@ -61,7 +70,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * @param i a int.
      * @return a {@link forge.Command} object.
      */
-    public Command remove(int i) {
+    public final Command remove(final int i) {
         return (Command) a.remove(i);
     }
 
@@ -70,23 +79,24 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      *
      * @return a int.
      */
-    public int size() {
+    public final int size() {
         return a.size();
     }
 
     /**
      * <p>clear.</p>
      */
-    public void clear() {
+    public final void clear() {
         a.clear();
     }
 
     /**
      * <p>execute.</p>
      */
-    public void execute() {
-        for (int i = 0; i < size(); i++)
+    public final void execute() {
+        for (int i = 0; i < size(); i++) {
             get(i).execute();
+        }
     }
 
 }

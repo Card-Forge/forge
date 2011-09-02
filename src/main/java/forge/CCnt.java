@@ -22,7 +22,7 @@ class CCnt {
      * @param clr a {@link java.lang.String} object.
      * @param cnt a int.
      */
-    public CCnt(String clr, int cnt) {
+    public CCnt(final String clr, final int cnt) {
         Color = clr;
         Count = cnt;
     }

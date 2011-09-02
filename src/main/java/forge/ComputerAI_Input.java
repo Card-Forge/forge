@@ -11,7 +11,7 @@ import forge.gui.input.Input;
  * @version $Id$
  */
 public class ComputerAI_Input extends Input {
-    /** Constant <code>serialVersionUID=-3091338639571662216L</code> */
+    /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
     private final Computer computer;
@@ -19,10 +19,10 @@ public class ComputerAI_Input extends Input {
     /**
      * <p>Constructor for ComputerAI_Input.</p>
      *
-     * @param i_computer a {@link forge.Computer} object.
+     * @param iComputer a {@link forge.Computer} object.
      */
-    public ComputerAI_Input(Computer i_computer) {
-        computer = i_computer;
+    public ComputerAI_Input(final Computer iComputer) {
+        computer = iComputer;
     }
 
     //wrapper method that ComputerAI_StackNotEmpty class calls
@@ -30,29 +30,30 @@ public class ComputerAI_Input extends Input {
     /**
      * <p>stackNotEmpty.</p>
      */
-    public void stackNotEmpty() {
+    public final void stackNotEmpty() {
         computer.stack_not_empty();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void showMessage() {
+    public final void showMessage() {
         /*
          * //put this back in
         ButtonUtil.disableAll();
         AllZone.getDisplay().showMessage("Phase: "
                 + AllZone.getPhase().getPhase()
-                + "\nAn error may have occurred. Please send the \"Stack Report\" and the \"Detailed Error Trace\" to the Forge forum.");
+                + "\nAn error may have occurred. Please send the \"Stack Report\" and the
+                \"Detailed Error Trace\" to the Forge forum.");
         */
         think();
-    }//getMessage();
+    } //getMessage();
 
     /**
      * <p>Getter for the field <code>computer</code>.</p>
      *
      * @return a {@link forge.Computer} object.
      */
-    public Computer getComputer() {
+    public final Computer getComputer() {
         return computer;
     }
 
@@ -60,12 +61,12 @@ public class ComputerAI_Input extends Input {
      * <p>think.</p>
      */
     private void think() {
-        //TODO: instead of setNextPhase, pass priority
+        //TODO instead of setNextPhase, pass priority
         final String phase = AllZone.getPhase().getPhase();
 
-        if (AllZone.getStack().size() > 0)
+        if (AllZone.getStack().size() > 0) {
             computer.stack_not_empty();
-        else if (phase.equals(Constant.Phase.Main1)) {
+        } else if (phase.equals(Constant.Phase.Main1)) {
             Log.debug("Computer main1");
             computer.main1();
         } else if (phase.equals(Constant.Phase.Combat_Begin)) {
@@ -81,8 +82,9 @@ public class ComputerAI_Input extends Input {
         } else if (phase.equals(Constant.Phase.Main2)) {
             Log.debug("Computer main2");
             computer.main2();
-        } else
+        } else {
             computer.stack_not_empty();
+        }
 
-    }//think
+    } //think
 }

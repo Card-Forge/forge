@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Card_Type implements Comparable<Card_Type> {
     // takes care of individual card types
-	private ArrayList<String> type = new ArrayList<String>();
+    private ArrayList<String> type = new ArrayList<String>();
     private boolean removeSuperTypes;
     private boolean removeCardTypes;
     private boolean removeSubTypes;
@@ -23,58 +23,85 @@ public class Card_Type implements Comparable<Card_Type> {
      *
      * @return a long.
      */
-    public long getTimestamp() {
+    public final long getTimestamp() {
         return timeStamp;
     }
 
     /**
      *
-     * @param types
-     * @param removeSuperType
-     * @param removeCardType
-     * @param removeSubType
-     * @param removeCreatureType
-     * @param stamp
+     * @param types an ArrayList<String>
+     * @param removeSuperType a boolean
+     * @param removeCardType a boolean
+     * @param removeSubType a boolean
+     * @param removeCreatureType a boolean
+     * @param stamp a long
      */
-    Card_Type(ArrayList<String> types, boolean removeSuperType, boolean removeCardType, boolean removeSubType, 
-    		boolean removeCreatureType, long stamp) {
-    	type = types;
-    	removeSuperTypes = removeSuperType;
+    Card_Type(final ArrayList<String> types, final boolean removeSuperType, final boolean removeCardType,
+            final boolean removeSubType, final boolean removeCreatureType, final long stamp)
+            {
+        type = types;
+        removeSuperTypes = removeSuperType;
         removeCardTypes = removeCardType;
         removeSubTypes = removeSubType;
         removeCreatureTypes = removeCreatureType;
-    	timeStamp = stamp;
+        timeStamp = stamp;
+            }
+
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return type
+     */
+    public final ArrayList<String> getType() {
+        return type;
     }
 
-    public ArrayList<String> getType() {
-    	return type;
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return removeSuperTypes
+     */
+    public final boolean isRemoveSuperTypes() {
+        return removeSuperTypes;
     }
 
-    public boolean isRemoveSuperTypes() {
-    	return removeSuperTypes;
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return removeCardTypes
+     */
+    public final boolean isRemoveCardTypes() {
+        return removeCardTypes;
     }
 
-    public boolean isRemoveCardTypes() {
-    	return removeCardTypes;
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return removeSubTypes
+     */
+    public final boolean isRemoveSubTypes() {
+        return removeSubTypes;
     }
 
-    public boolean isRemoveSubTypes() {
-    	return removeSubTypes;
-    }
-
-    public boolean isRemoveCreatureTypes() {
-    	return removeCreatureTypes;
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return removeCreatureTypes
+     */
+    public final boolean isRemoveCreatureTypes() {
+        return removeCreatureTypes;
     }
 
     @Override
-    public int compareTo(final Card_Type anotherCardType) {
+    public final int compareTo(final Card_Type anotherCardType) {
         int returnValue = 0;
         long anotherTimeStamp = anotherCardType.getTimestamp();
-        if (this.timeStamp < anotherTimeStamp)
+        if (this.timeStamp < anotherTimeStamp) {
             returnValue = -1;
-        else if (this.timeStamp > anotherTimeStamp)
+        } else if (this.timeStamp > anotherTimeStamp) {
             returnValue = 1;
-        return returnValue;    
+        }
+        return returnValue;
     }
 
 }
