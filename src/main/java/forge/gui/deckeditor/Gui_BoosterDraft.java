@@ -2,25 +2,19 @@ package forge.gui.deckeditor;
 
 import forge.AllZone;
 import forge.BoosterDraft;
-import forge.CardList;
 import forge.Constant;
 import forge.FileUtil;
 import forge.HttpUtil;
-import forge.Constant.GameType;
-import forge.Constant.Runtime;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -28,7 +22,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 /**

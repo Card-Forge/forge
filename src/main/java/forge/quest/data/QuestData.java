@@ -22,12 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.slightlymagic.maxmtg.Predicate;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
 
 
 //when you create QuestDataOld and AFTER you copy the AI decks over

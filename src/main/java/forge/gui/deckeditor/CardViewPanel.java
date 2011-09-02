@@ -1,9 +1,5 @@
 package forge.gui.deckeditor;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.LayoutManager2;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;

@@ -6,12 +6,9 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.Constant;
-import forge.Constant.GameType;
-import forge.card.CardRules;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.deck.DownloadDeck;
@@ -33,12 +30,8 @@ import java.net.Proxy;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-//import java.util.HashMap;
-//import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * <p>Gui_DeckEditor_Menu class.</p>

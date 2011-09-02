@@ -28,7 +28,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
-import forge.card.CardManaCost;
 import forge.card.CardRules;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;

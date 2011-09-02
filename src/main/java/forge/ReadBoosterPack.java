@@ -7,10 +7,8 @@ package forge;
 
 import forge.card.CardRules;
 import forge.card.CardDb;
-import forge.card.CardRules.Predicates;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
-import forge.card.CardRarity;
 import forge.card.CardPrinted;
 import forge.properties.NewConstants;
 

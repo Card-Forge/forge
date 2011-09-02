@@ -1,54 +1,22 @@
 package forge.gui.deckeditor;
 
 import forge.AllZone;
-import forge.Card;
-import forge.CardList;
 import forge.Command;
 import forge.Constant;
-import forge.GUI_DeckAnalysis;
-import forge.GuiDisplayUtil;
-import forge.ImageCache;
-import forge.ImagePreviewPanel;
-import forge.MyRandom;
-import forge.Constant.GameType;
-import forge.Constant.Runtime;
-import forge.card.CardRules;
-import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.filechooser.FileFilter;
-
-import net.slightlymagic.maxmtg.Predicate;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map.Entry;
-import java.util.Random;
 
 //import forge.quest.data.QuestBoosterPack;
 

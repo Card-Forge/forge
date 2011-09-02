@@ -1,7 +1,5 @@
 package forge.quest.data;
 
-import forge.Card;
-import forge.CardFilter;
 import forge.Constant;
 import forge.card.CardDb;
 import forge.card.CardPrinted;
@@ -10,17 +8,12 @@ import forge.card.CardRules;
 import forge.properties.NewConstants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
 import net.slightlymagic.maxmtg.Predicate;
-
-import com.google.code.jyield.Generator;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**
@@ -101,24 +94,21 @@ public class QuestBoosterPack implements NewConstants {
 
         return names;
     }
-    
-    
 
     /**
      * Create the list of card names at random from the given pool.
      *
-     * @param allCards  the card pool to use
-     * @param num  how many card names to add to the result
-     * @param rarity  only allow cards of this rarity
-     * @param color  may be null; if not null, only cards of this color may be added
-     * @param colorOrder  we shuffle this as a side effect of calling this method
+     * @param source  an Iterable<CardPrinted>
+     * @param filter  Predicate<CardPrinted>
+     * @param cntNeeded  an int
+     * @param allowedColors a List<Predicate<CardRules>>
      * @return a list of card names
      */
-    public ArrayList<CardPrinted> generateDefinetlyColouredCards(
-            Iterable<CardPrinted> source,
-            Predicate<CardPrinted> filter,
-            int cntNeeded,
-            List<Predicate<CardRules>> allowedColors)
+    public final ArrayList<CardPrinted> generateDefinetlyColouredCards(
+            final Iterable<CardPrinted> source,
+            final Predicate<CardPrinted> filter,
+            final int cntNeeded,
+            final List<Predicate<CardRules>> allowedColors)
     {
         // If color is null, use colorOrder progression to grab cards
         ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
@@ -210,14 +200,23 @@ public class QuestBoosterPack implements NewConstants {
             colorFilter = Predicate.getTrue(CardRules.class);
         } else {
             String col = color.toLowerCase();
-            if (col.startsWith("wh")) colorFilter = CardRules.Predicates.Presets.isWhite;
-            else if (col.startsWith("bla")) colorFilter = CardRules.Predicates.Presets.isBlack;
-            else if (col.startsWith("blu")) colorFilter = CardRules.Predicates.Presets.isBlue;
-            else if (col.startsWith("re")) colorFilter = CardRules.Predicates.Presets.isRed;
-            else if (col.startsWith("col")) colorFilter = CardRules.Predicates.Presets.isColorless;
-            else if (col.startsWith("gre")) colorFilter = CardRules.Predicates.Presets.isGreen;
-            else if (col.startsWith("mul")) colorFilter = CardRules.Predicates.Presets.isMulticolor;
-            else colorFilter = Predicate.getTrue(CardRules.class);
+            if (col.startsWith("wh")) {
+                colorFilter = CardRules.Predicates.Presets.isWhite;
+            } else if (col.startsWith("bla")) {
+                colorFilter = CardRules.Predicates.Presets.isBlack;
+            } else if (col.startsWith("blu")) {
+                colorFilter = CardRules.Predicates.Presets.isBlue;
+            } else if (col.startsWith("re")) {
+                colorFilter = CardRules.Predicates.Presets.isRed;
+            } else if (col.startsWith("col")) {
+                colorFilter = CardRules.Predicates.Presets.isColorless;
+            } else if (col.startsWith("gre")) {
+                colorFilter = CardRules.Predicates.Presets.isGreen;
+            } else if (col.startsWith("mul")) {
+                colorFilter = CardRules.Predicates.Presets.isMulticolor;
+            } else {
+                colorFilter = Predicate.getTrue(CardRules.class);
+            }
         }
         return Predicate.and(rFilter, colorFilter, CardPrinted.fnGetRules);
     }

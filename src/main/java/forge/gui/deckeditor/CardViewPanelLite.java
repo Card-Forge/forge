@@ -1,33 +1,15 @@
 package forge.gui.deckeditor;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.LayoutManager2;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
 
 import net.miginfocom.swing.MigLayout;
 
-import arcane.ui.CardPanel;
-import arcane.ui.ViewPanel;
-
 import forge.Card;
-import forge.GuiDisplayUtil;
-import forge.ImagePreviewPanel;
 import forge.card.CardPrinted;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.view.swing.OldGuiNewGame;
 
 /** 
  * This panel is to be placed in the right part of a deck editor

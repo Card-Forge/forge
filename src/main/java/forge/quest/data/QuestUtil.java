@@ -5,9 +5,6 @@ import forge.card.CardRarity;
 
 import java.util.ArrayList;
 
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-
 /**
  * <p>QuestUtil class.</p>
  *
@@ -22,7 +19,7 @@ public class QuestUtil {
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerCreatures(QuestData qd) {
+    public static CardList getComputerCreatures(final QuestData qd) {
         return new CardList();
     }
 
@@ -33,7 +30,7 @@ public class QuestUtil {
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerCreatures(QuestData qd, Quest_Assignment qa) {
+    public static CardList getComputerCreatures(final QuestData qd, Quest_Assignment qa) {
         CardList list = new CardList();
         if (qa != null) {
             ArrayList<String> compCards = qa.getCompy();
@@ -56,7 +53,7 @@ public class QuestUtil {
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanPlantAndPet(QuestData qd) {
+    public static CardList getHumanPlantAndPet(final QuestData qd) {
         CardList list = new CardList();
 
         if (qd.getPetManager().shouldPetBeUsed()) {
@@ -77,11 +74,12 @@ public class QuestUtil {
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanPlantAndPet(QuestData qd, Quest_Assignment qa) {
+    public static CardList getHumanPlantAndPet(final QuestData qd, Quest_Assignment qa) {
         CardList list = getHumanPlantAndPet(qd);
 
-        if (qa != null)
+        if (qa != null) {
             list.addAll(qa.getHuman());
+        }
 
         return list;
     }
@@ -340,7 +338,7 @@ public class QuestUtil {
         } else if (id == 16)  // Mines of Kazum Durl
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
+            String[] humanSetupCards = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
 
             for (int i = 0; i < 3; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -352,7 +350,7 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] =
+            String[] compySetupCards =
                     {"Wall of Earth", "Wall of Air", "Wall of Ice", "Wall of Light", "Carrion Wall", "Steel Wall"};
 
             for (int i = 0; i < 6; i++) {
@@ -363,7 +361,7 @@ public class QuestUtil {
         } else if (id == 17)  // House Party
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
+            String[] humanSetupCards = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
 
             for (int i = 0; i < 3; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -375,7 +373,7 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
+            String[] compySetupCards = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
 
             for (int i = 0; i < 3; i++) {
                 qa.addCompy(compySetupCards[i]);
@@ -385,7 +383,7 @@ public class QuestUtil {
         } else if (id == 18)  // Crows in the Field
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Straw Soldiers", "Femeref Archers", "Moonglove Extract"};
+            String[] humanSetupCards = {"Straw Soldiers", "Femeref Archers", "Moonglove Extract"};
 
             for (int i = 0; i < 3; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -397,7 +395,7 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Defiant Falcon", "Soulcatcher", "Storm Crow", "Hypnotic Specter"};
+            String[] compySetupCards = {"Defiant Falcon", "Soulcatcher", "Storm Crow", "Hypnotic Specter"};
 
             for (int i = 0; i < 4; i++) {
                 qa.addCompy(compySetupCards[i]);
@@ -407,7 +405,7 @@ public class QuestUtil {
         } else if (id == 19)  // The Desert Caravan
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Spidersilk Net", "Dromad Purebred"};
+            String[] humanSetupCards = {"Spidersilk Net", "Dromad Purebred"};
 
             for (int i = 0; i < 2; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -419,7 +417,7 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Ambush Party", "Ambush Party", "Gnat Alley Creeper", "Ambush Party", "Ambush Party"};
+            String[] compySetupCards = {"Ambush Party", "Ambush Party", "Gnat Alley Creeper", "Ambush Party", "Ambush Party"};
 
             for (int i = 0; i < 5; i++) {
                 qa.addCompy(compySetupCards[i]);
@@ -429,7 +427,7 @@ public class QuestUtil {
         } else if (id == 20)  // Blood Oath
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Counterbalance", "Hatching Plans", "Ley Druid"};
+            String[] humanSetupCards = {"Counterbalance", "Hatching Plans", "Ley Druid"};
 
             for (int i = 0; i < 3; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -441,7 +439,7 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Ior Ruin Expedition", "Oversold Cemetery", "Trapjaw Kelpie"};
+            String[] compySetupCards = {"Ior Ruin Expedition", "Oversold Cemetery", "Trapjaw Kelpie"};
 
             for (int i = 0; i < 3; i++) {
                 qa.addCompy(compySetupCards[i]);
@@ -461,16 +459,17 @@ public class QuestUtil {
 
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+            String[] compySetupCards = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++) {
                 qa.addCompy(compySetupCards[i]);
+            }
 
             qa.setCardRewardList(pack.generateCards(6, CardRarity.Rare, null));
         } else if (id == 22) // Pied Piper
         {
             CardList humanList = new CardList();
-            String humanSetupCards[] = {"Volunteer Militia", "Land Tax", "Elvish Farmer", "An-Havva Township"};
+            String[] humanSetupCards = {"Volunteer Militia", "Land Tax", "Elvish Farmer", "An-Havva Township"};
 
             for (int i = 0; i < 4; i++) {
                 Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
@@ -482,14 +481,15 @@ public class QuestUtil {
             }
             qa.setHuman(humanList);
 
-            String compySetupCards[] = {"Darksteel Citadel", "Relentless Rats"};
+            String[] compySetupCards = {"Darksteel Citadel", "Relentless Rats"};
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++) {
                 qa.addCompy(compySetupCards[i]);
+            }
 
             qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
         }
 
     }
 
-}//QuestUtil
+} //QuestUtil

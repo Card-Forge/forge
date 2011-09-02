@@ -9,7 +9,6 @@ import forge.gui.GuiUtils;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class BoosterDraft_1 implements BoosterDraft {

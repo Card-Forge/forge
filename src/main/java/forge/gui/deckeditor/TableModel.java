@@ -11,8 +11,6 @@ import javax.swing.table.TableColumnModel;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
-import forge.Card;
-import forge.SetInfoUtil;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
@@ -21,7 +19,6 @@ import java.awt.event.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Stack;
 
 
 /**
