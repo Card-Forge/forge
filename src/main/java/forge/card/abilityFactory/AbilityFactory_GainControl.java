@@ -350,12 +350,10 @@ public class AbilityFactory_GainControl {
 
             if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
 
-                if(newController.size() != 0)
-                {
+                if (params.containsKey("NewController")) {
                     tgtC.addController(newController.get(0));
                 }
-                else
-                {
+                else {
                     tgtC.addController(hostCard);
                 }
                 //AllZone.getGameAction().changeController(new CardList(tgtC),
