@@ -1,7 +1,7 @@
 package forge;
 
 import forge.deck.Deck;
-import forge.gui.deckeditor.Gui_BoosterDraft;
+import forge.gui.deckeditor.DeckEditorDraft;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,7 +22,7 @@ public class GuiBoosterDraftTest {
         Constant.Runtime.GameType[0] = Constant.GameType.Draft;
         Constant.Runtime.HumanDeck[0] = new Deck(Constant.GameType.Sealed);
 
-        Gui_BoosterDraft g = new Gui_BoosterDraft();
+        DeckEditorDraft g = new DeckEditorDraft();
         g.showGui(new BoosterDraft_1());
         Assert.assertNotNull(g);
         g.dispose();

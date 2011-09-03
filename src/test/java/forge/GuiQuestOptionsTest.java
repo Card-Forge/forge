@@ -3,6 +3,8 @@ package forge;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import forge.quest.gui.QuestOptions;
+
 /**
  * Created by IntelliJ IDEA.
  * User: dhudson
@@ -15,7 +17,7 @@ public class GuiQuestOptionsTest {
      */
     @Test(groups = {"UnitTest", "fast"})
     public void GuiQuestOptionsTest1() {
-        Gui_QuestOptions dialog = new Gui_QuestOptions();
+        QuestOptions dialog = new QuestOptions();
         dialog.setVisible(true);
         Assert.assertNotNull(dialog);
         dialog.dispose();
