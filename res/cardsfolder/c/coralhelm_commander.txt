@@ -5,8 +5,8 @@ Text:no text
 PT:2/2
 K:Level up:1
 K:maxLevel:4
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2+ 3/3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 4/4 Other Merfolk you control get +1/+1
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2+ 3/3 CARDNAME has Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ Flying 4/4 CARDNAME has Flying, Other Merfolk you control get +1/+1
 S:Mode$ Continuous | Affected$ Creature.Merfolk+YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ Y | SVarCompare$ EQ1
 SVar:X:Count$Valid Card.Self+countersGE2LEVEL
 SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
