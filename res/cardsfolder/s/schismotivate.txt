@@ -1,0 +1,10 @@
+Name:Schismotivate
+ManaCost:1 U R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
+SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature | TargetUnique$ True | NumAtt$ -4 | IsCurse$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/schismotivate.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/129.jpg
+End
