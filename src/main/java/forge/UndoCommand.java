@@ -10,10 +10,10 @@ public interface UndoCommand extends Command {
     /**
      * <p>execute.</p>
      */
-    public void execute();
+    void execute();
 
     /**
      * <p>undo.</p>
      */
-    public void undo();
+    void undo();
 }

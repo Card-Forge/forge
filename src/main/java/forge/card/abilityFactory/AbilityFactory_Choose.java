@@ -19,10 +19,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
 
-import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import javax.swing.JOptionPane;
 
 /**
  * <p>AbilityFactory_Choose class.</p>
@@ -31,6 +33,11 @@ import java.util.HashMap;
  * @version $Id$
  */
 public class AbilityFactory_Choose {
+
+    private AbilityFactory_Choose() {
+        throw new AssertionError();
+    }
+
     // *************************************************************************
     // ************************* ChooseType ************************************
     // *************************************************************************

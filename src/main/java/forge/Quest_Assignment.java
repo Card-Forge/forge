@@ -33,10 +33,10 @@ public class Quest_Assignment {
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
-     * @param id a int.
+     * @param idIn a int.
      */
-    public void setId(int id) {
-        this.id = id;
+    public final void setId(final int idIn) {
+        this.id = idIn;
     }
 
     /**
@@ -44,17 +44,17 @@ public class Quest_Assignment {
      *
      * @return a int.
      */
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
     /**
      * <p>Setter for the field <code>creditsReward</code>.</p>
      *
-     * @param creditsReward a long.
+     * @param creditsRewardIn a long.
      */
-    public void setCreditsReward(long creditsReward) {
-        this.creditsReward = creditsReward;
+    public final void setCreditsReward(final long creditsRewardIn) {
+        this.creditsReward = creditsRewardIn;
     }
 
     /**
@@ -62,17 +62,17 @@ public class Quest_Assignment {
      *
      * @return a long.
      */
-    public long getCreditsReward() {
+    public final long getCreditsReward() {
         return creditsReward;
     }
 
     /**
      * <p>Setter for the field <code>name</code>.</p>
      *
-     * @param name a {@link java.lang.String} object.
+     * @param nameIn a {@link java.lang.String} object.
      */
-    public void setName(String name) {
-        this.name = name;
+    public final void setName(final String nameIn) {
+        this.name = nameIn;
     }
 
     /**
@@ -80,17 +80,17 @@ public class Quest_Assignment {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
     /**
      * <p>Setter for the field <code>desc</code>.</p>
      *
-     * @param desc a {@link java.lang.String} object.
+     * @param descIn a {@link java.lang.String} object.
      */
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public final void setDesc(final String descIn) {
+        this.desc = descIn;
     }
 
     /**
@@ -98,17 +98,17 @@ public class Quest_Assignment {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getDesc() {
+    public final String getDesc() {
         return desc;
     }
 
     /**
      * <p>Setter for the field <code>difficulty</code>.</p>
      *
-     * @param difficulty a {@link java.lang.String} object.
+     * @param difficultyIn a {@link java.lang.String} object.
      */
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+    public final void setDifficulty(final String difficultyIn) {
+        this.difficulty = difficultyIn;
     }
 
     /**
@@ -116,17 +116,17 @@ public class Quest_Assignment {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getDifficulty() {
+    public final String getDifficulty() {
         return difficulty;
     }
 
     /**
      * <p>Setter for the field <code>repeatable</code>.</p>
      *
-     * @param repeatable a boolean.
+     * @param repeatableIn a boolean.
      */
-    public void setRepeatable(boolean repeatable) {
-        this.repeatable = repeatable;
+    public final void setRepeatable(final boolean repeatableIn) {
+        this.repeatable = repeatableIn;
     }
 
     /**
@@ -134,17 +134,17 @@ public class Quest_Assignment {
      *
      * @return a boolean.
      */
-    public boolean isRepeatable() {
+    public final boolean isRepeatable() {
         return repeatable;
     }
 
     /**
      * <p>Setter for the field <code>requiredNumberWins</code>.</p>
      *
-     * @param requiredNumberWins a int.
+     * @param requiredNumberWinsIn a int.
      */
-    public void setRequiredNumberWins(int requiredNumberWins) {
-        this.requiredNumberWins = requiredNumberWins;
+    public final void setRequiredNumberWins(final int requiredNumberWinsIn) {
+        this.requiredNumberWins = requiredNumberWinsIn;
     }
 
     /**
@@ -152,17 +152,17 @@ public class Quest_Assignment {
      *
      * @return a int.
      */
-    public int getRequiredNumberWins() {
+    public final int getRequiredNumberWins() {
         return requiredNumberWins;
     }
 
     /**
      * <p>Setter for the field <code>computerLife</code>.</p>
      *
-     * @param computerLife a int.
+     * @param computerLifeIn a int.
      */
-    public void setComputerLife(int computerLife) {
-        this.computerLife = computerLife;
+    public final void setComputerLife(final int computerLifeIn) {
+        this.computerLife = computerLifeIn;
     }
 
     /**
@@ -170,17 +170,17 @@ public class Quest_Assignment {
      *
      * @return a int.
      */
-    public int getComputerLife() {
+    public final int getComputerLife() {
         return computerLife;
     }
 
     /**
      * <p>Setter for the field <code>cardReward</code>.</p>
      *
-     * @param cardReward a {@link java.lang.String} object.
+     * @param cardRewardIn a {@link java.lang.String} object.
      */
-    public void setCardReward(String cardReward) {
-        this.cardReward = cardReward;
+    public final void setCardReward(final String cardRewardIn) {
+        this.cardReward = cardRewardIn;
     }
 
     /**
@@ -188,7 +188,7 @@ public class Quest_Assignment {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getCardReward() {
+    public final String getCardReward() {
         return cardReward;
     }
 
@@ -197,7 +197,7 @@ public class Quest_Assignment {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void setIconName(String s) {
+    public final void setIconName(final String s) {
         iconName = s;
     }
 
@@ -206,17 +206,17 @@ public class Quest_Assignment {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getIconName() {
+    public final String getIconName() {
         return iconName;
     }
 
     /**
      * <p>Setter for the field <code>human</code>.</p>
      *
-     * @param human a {@link forge.CardList} object.
+     * @param humanIn a {@link forge.CardList} object.
      */
-    public void setHuman(CardList human) {
-        this.human = human;
+    public final void setHuman(final CardList humanIn) {
+        this.human = humanIn;
     }
 
     /**
@@ -224,7 +224,7 @@ public class Quest_Assignment {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList getHuman() {
+    public final CardList getHuman() {
         return human;
     }
 
@@ -233,14 +233,14 @@ public class Quest_Assignment {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void addCompy(String s) {
+    public final void addCompy(final String s) {
         this.compy.add(s);
     }
 
     /**
      * <p>clearCompy.</p>
      */
-    public void clearCompy() {
+    public final void clearCompy() {
         this.compy.clear();
     }
 
@@ -250,17 +250,17 @@ public class Quest_Assignment {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getCompy() {
+    public final ArrayList<String> getCompy() {
         return compy;
     }
 
     /**
      * <p>Setter for the field <code>cardRewardList</code>.</p>
      *
-     * @param cardRewardList a {@link java.util.ArrayList} object.
+     * @param cardRewardListIn a {@link java.util.ArrayList} object.
      */
-    public void setCardRewardList(ArrayList<CardPrinted> cardRewardList) {
-        this.cardRewardList = cardRewardList;
+    public final void setCardRewardList(final ArrayList<CardPrinted> cardRewardListIn) {
+        this.cardRewardList = cardRewardListIn;
     }
 
     /**
@@ -268,7 +268,7 @@ public class Quest_Assignment {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<CardPrinted> getCardRewardList() {
+    public final ArrayList<CardPrinted> getCardRewardList() {
         return cardRewardList;
     }
 }

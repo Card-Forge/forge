@@ -6,11 +6,17 @@ import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+/**
+ * 
+ * TODO Write javadoc for this type.
+ *
+ */
 public class BoosterDraft_1 implements BoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
     private static final int nPlayers = 8;
@@ -18,7 +24,7 @@ public class BoosterDraft_1 implements BoosterDraft {
     private static int stopCount = 45; //boosterPackSize * 3;//should total of 45
 
     private int currentCount = 0;
-    private List<List<CardPrinted>> pack;//size 8
+    private List<List<CardPrinted>> pack; //size 8
     //private BoosterGenerator packs[] = {new BoosterGenerator(), new BoosterGenerator(), new BoosterGenerator()};
     private ArrayList<BoosterGenerator> packs = new ArrayList<BoosterGenerator>();
     private int packNum = 0;
@@ -26,7 +32,7 @@ public class BoosterDraft_1 implements BoosterDraft {
     //helps the computer choose which booster packs to pick from
     //the first row says "pick from boosters 1-7, skip 0" since the players picks from 0
     //the second row says "pick from 0 and 2-7 boosters, skip 1" - player chooses from 1
-    private final int computerChoose[][] = {
+    private final int[][] computerChoose = {
             {1, 2, 3, 4, 5, 6, 7},
             {0, 2, 3, 4, 5, 6, 7},
             {0, 1, 3, 4, 5, 6, 7},
@@ -37,6 +43,10 @@ public class BoosterDraft_1 implements BoosterDraft {
             {0, 1, 2, 3, 4, 5, 6}
     };
 
+    /**
+     * 
+     * TODO Write javadoc for Constructor.
+     */
     BoosterDraft_1() {
         pack = get8BoosterPack();
     }
@@ -52,19 +62,21 @@ public class BoosterDraft_1 implements BoosterDraft {
 
         if (draftType.equals("Full")) {    // Draft from all cards in Forge
             BoosterGenerator bpFull = new BoosterGenerator();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++) {
                 packs.add(bpFull);
+            }
 
             LandSetCode[0] = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
         } else if (draftType.equals("Block")) {    // Draft from cards by block or set
             ArrayList<String> bNames = SetInfoUtil.getBlockNameList();
             ArrayList<String> rbNames = new ArrayList<String>();
-            for (int i = bNames.size() - 1; i >= 0; i--)
+            for (int i = bNames.size() - 1; i >= 0; i--) {
                 rbNames.add(bNames.get(i));
+            }
 
             Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
 
-            ArrayList<String> blockSets = SetInfoUtil.getSets_BlockName(o.toString());
+            ArrayList<String> blockSets = SetInfoUtil.getSetsBlockName(o.toString());
             int nPacks = SetInfoUtil.getDraftPackCount(o.toString());
 
             ArrayList<String> setCombos = new ArrayList<String>();
@@ -100,7 +112,7 @@ public class BoosterDraft_1 implements BoosterDraft {
 
                 Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
 
-                String pp[] = p.toString().split("/");
+                String[] pp = p.toString().split("/");
                 int n = 0;
                 for (int i = 0; i < nPacks; i++) {
                     BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
@@ -112,17 +124,19 @@ public class BoosterDraft_1 implements BoosterDraft {
 
             LandSetCode[0] = SetInfoUtil.getLandCode(o.toString());
         } else if (draftType.equals("Custom")) {    // Draft from user-defined cardpools
-            String dList[];
+            String[] dList;
             ArrayList<CustomDraft> customs = new ArrayList<CustomDraft>();
             ArrayList<String> customList = new ArrayList<String>();
 
             // get list of custom draft files
             File dFolder = new File("res/draft/");
-            if (!dFolder.exists())
+            if (!dFolder.exists()) {
                 throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
+            }
 
-            if (!dFolder.isDirectory())
+            if (!dFolder.isDirectory()) {
                 throw new RuntimeException("BoosterDraft : not a folder -- " + dFolder.getAbsolutePath());
+            }
 
             dList = dFolder.list();
 
@@ -136,31 +150,43 @@ public class BoosterDraft_1 implements BoosterDraft {
 
                         String dfd = dfData.get(j);
 
-                        if (dfd.startsWith("Name:"))
+                        if (dfd.startsWith("Name:")) {
                             cd.Name = dfd.substring(5);
-                        if (dfd.startsWith("Type:"))
+                        }
+                        if (dfd.startsWith("Type:")) {
                             cd.Type = dfd.substring(5);
-                        if (dfd.startsWith("DeckFile:"))
+                        }
+                        if (dfd.startsWith("DeckFile:")) {
                             cd.DeckFile = dfd.substring(9);
-                        if (dfd.startsWith("IgnoreRarity:"))
+                        }
+                        if (dfd.startsWith("IgnoreRarity:")) {
                             cd.IgnoreRarity = dfd.substring(13).equals("True");
-                        if (dfd.startsWith("LandSetCode:"))
+                        }
+                        if (dfd.startsWith("LandSetCode:")) {
                             cd.LandSetCode = dfd.substring(12);
+                        }
 
-                        if (dfd.startsWith("NumCards:"))
+                        if (dfd.startsWith("NumCards:")) {
                             cd.NumCards = Integer.parseInt(dfd.substring(9));
-                        if (dfd.startsWith("NumSpecials:"))
+                        }
+                        if (dfd.startsWith("NumSpecials:")) {
                             cd.NumSpecials = Integer.parseInt(dfd.substring(12));
-                        if (dfd.startsWith("NumMythics:"))
+                        }
+                        if (dfd.startsWith("NumMythics:")) {
                             cd.NumMythics = Integer.parseInt(dfd.substring(11));
-                        if (dfd.startsWith("NumRares:"))
+                        }
+                        if (dfd.startsWith("NumRares:")) {
                             cd.NumRares = Integer.parseInt(dfd.substring(9));
-                        if (dfd.startsWith("NumUncommons:"))
+                        }
+                        if (dfd.startsWith("NumUncommons:")) {
                             cd.NumUncommons = Integer.parseInt(dfd.substring(13));
-                        if (dfd.startsWith("NumCommons:"))
+                        }
+                        if (dfd.startsWith("NumCommons:")) {
                             cd.NumCommons = Integer.parseInt(dfd.substring(11));
-                        if (dfd.startsWith("NumPacks:"))
+                        }
+                        if (dfd.startsWith("NumPacks:")) {
                             cd.NumPacks = Integer.parseInt(dfd.substring(9));
+                        }
 
                     }
 
@@ -173,23 +199,26 @@ public class BoosterDraft_1 implements BoosterDraft {
             CustomDraft chosenDraft = null;
 
             // present list to user
-            if (customs.size() < 1)
+            if (customs.size() < 1) {
                 JOptionPane.showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
-
-            else {
+            } else {
                 Object p = GuiUtils.getChoice("Choose Custom Draft", customList.toArray());
 
                 for (int i = 0; i < customs.size(); i++) {
                     CustomDraft cd = customs.get(i);
 
-                    if (cd.Name.equals(p.toString()))
+                    if (cd.Name.equals(p.toString())) {
                         chosenDraft = cd;
+                    }
                 }
 
-                if (chosenDraft.IgnoreRarity)
+                if (chosenDraft.IgnoreRarity) {
                     chosenDraft.NumCommons = chosenDraft.NumCards;
+                }
 
-                BoosterGenerator bpCustom = new BoosterGenerator(chosenDraft.DeckFile, chosenDraft.NumCommons, chosenDraft.NumUncommons, chosenDraft.NumRares, chosenDraft.NumMythics, chosenDraft.NumSpecials, chosenDraft.IgnoreRarity);
+                BoosterGenerator bpCustom = new BoosterGenerator(chosenDraft.DeckFile, chosenDraft.NumCommons,
+                        chosenDraft.NumUncommons, chosenDraft.NumRares, chosenDraft.NumMythics, chosenDraft.NumSpecials,
+                        chosenDraft.IgnoreRarity);
                 int n = 0;
                 for (int i = 0; i < chosenDraft.NumPacks; i++) {
                     packs.add(bpCustom);
@@ -210,9 +239,10 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView nextChoice() {
-        if (pack.get(getCurrentBoosterIndex()).size() == 0)
+    public final CardPoolView nextChoice() {
+        if (pack.get(getCurrentBoosterIndex()).size() == 0) {
             pack = get8BoosterPack();
+        }
 
         computerChoose();
         return new CardPool(pack.get(getCurrentBoosterIndex()));
@@ -223,18 +253,19 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return an array of {@link forge.CardList} objects.
      */
-    public List<List<CardPrinted>> get8BoosterPack() {
+    public final List<List<CardPrinted>> get8BoosterPack() {
         List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
 
         if (packNum < packs.size()) {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++) {
                 list.add(packs.get(packNum).getBoosterPack());
+            }
         }
 
         packNum++;
 
         return list;
-    }//get8BoosterPack()
+    } //get8BoosterPack()
 
     //size 7, all the computers decks
 
@@ -243,12 +274,12 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return an array of {@link forge.deck.Deck} objects.
      */
-    public Deck[] getDecks() {
+    public final Deck[] getDecks() {
         return draftAI.getDecks();
     }
 
     private void computerChoose() {
-        int row[] = computerChoose[getCurrentBoosterIndex()];
+        int[] row = computerChoose[getCurrentBoosterIndex()];
 
         for (int i = 0; i < row.length; i++) {
             CardList forAi = new CardList();
@@ -256,11 +287,11 @@ public class BoosterDraft_1 implements BoosterDraft {
             for (CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());
             }
-            // TODO: Please write this drafting code to work without heavy cards 
+            // TODO Please write this drafting code to work without heavy cards
             Card aiPick = draftAI.choose(forAi, i);
             String pickedName = aiPick.getName();
 
-            for (int pick = booster.size()-1; pick >= 0; pick--) {
+            for (int pick = booster.size() - 1; pick >= 0; pick--) {
                 CardPrinted cp = booster.get(pick);
                 if (cp.getName().equalsIgnoreCase(pickedName)) {
                     booster.remove(pick);
@@ -268,7 +299,7 @@ public class BoosterDraft_1 implements BoosterDraft {
                 }
             }
         }
-    }//computerChoose()
+    } //computerChoose()
 
     private int getCurrentBoosterIndex() {
         return currentCount % nPlayers;
@@ -279,39 +310,41 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return a boolean.
      */
-    public boolean hasNextChoice() {
+    public final boolean hasNextChoice() {
         return currentCount < stopCount;
     }
 
     /** {@inheritDoc} */
-    public void setChoice(CardPrinted c) {
+    public final void setChoice(final CardPrinted c) {
         List<CardPrinted> thisBooster = pack.get(getCurrentBoosterIndex());
 
-        if (!thisBooster.contains(c))
+        if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c + " - booster pack = " + thisBooster);
+        }
 
         if (Constant.Runtime.UpldDrft[0]) {
             for (int i = 0; i < thisBooster.size(); i++) {
                 CardPrinted cc = thisBooster.get(i);
-                String CnBk = cc.getName() + "|" + cc.getSet();
+                String cnBk = cc.getName() + "|" + cc.getSet();
 
                 float pickValue = 0;
-                if (cc.equals(c))
+                if (cc.equals(c)) {
                     pickValue = thisBooster.size() * (1f - ((float) currentCount) / stopCount) * 2f;
-                else
-                    pickValue = 0;
-
-                if (!draftPicks.containsKey(CnBk)) {
-                    draftPicks.put(CnBk, pickValue);
                 } else {
-                    float curValue = draftPicks.get(CnBk);
+                    pickValue = 0;
+                }
+
+                if (!draftPicks.containsKey(cnBk)) {
+                    draftPicks.put(cnBk, pickValue);
+                } else {
+                    float curValue = draftPicks.get(cnBk);
                     float newValue = (curValue + pickValue) / 2;
-                    draftPicks.put(CnBk, newValue);
+                    draftPicks.put(cnBk, newValue);
                 }
             }
         }
 
         thisBooster.remove(c);
         currentCount++;
-    }//setChoice()
+    } //setChoice()
 }

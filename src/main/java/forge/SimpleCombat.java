@@ -26,10 +26,11 @@ class SimpleCombat {
      *
      * @param attackingCreatures a {@link forge.CardList} object.
      */
-    public SimpleCombat(CardList attackingCreatures) {
+    public SimpleCombat(final CardList attackingCreatures) {
         CardList a = attackingCreatures;
-        for (int i = 0; i < a.size(); i++)
+        for (int i = 0; i < a.size(); i++) {
             addAttacker(a.get(i));
+        }
     }
 
     /**
@@ -46,7 +47,7 @@ class SimpleCombat {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void addAttacker(Card c) {
+    public void addAttacker(final Card c) {
         attackers.add(c);
         map.put(c, new CardList());
     }
@@ -57,7 +58,7 @@ class SimpleCombat {
      * @param attacker a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getBlockers(Card attacker) {
+    public CardList getBlockers(final Card attacker) {
         return map.get(attacker);
     }
 
@@ -67,9 +68,11 @@ class SimpleCombat {
      * @param attacker a {@link forge.Card} object.
      * @param blocker a {@link forge.Card} object.
      */
-    public void addBlocker(Card attacker, Card blocker) {
+    public void addBlocker(final Card attacker, final Card blocker) {
         CardList list = map.get(attacker);
-        if (list == null) throw new RuntimeException("SimpleCombat : addBlocker() attacker not found - " + attacker);
+        if (list == null) {
+            throw new RuntimeException("SimpleCombat : addBlocker() attacker not found - " + attacker);
+        }
 
         list.add(blocker);
     }
@@ -85,7 +88,9 @@ class SimpleCombat {
         while (it.hasNext()) {
             Card attack = it.next();
             CardList block = map.get(attack);
-            if (block.size() == 0) list.add(attack);
+            if (block.size() == 0) {
+                list.add(attack);
+            }
         }
 
         return list;
@@ -114,13 +119,17 @@ class SimpleCombat {
                 int blockerDamage = block.getNetCombatDamage();
                 int attackerDamage = attack.getNetCombatDamage();
 
-                if (attack.getNetDefense() <= blockerDamage) aDestroy.add(attack);
+                if (attack.getNetDefense() <= blockerDamage) {
+                    aDestroy.add(attack);
+                }
 
-                if (block.getNetDefense() <= attackerDamage) bDestroy.add(block);
+                if (block.getNetDefense() <= attackerDamage) {
+                    bDestroy.add(block);
+                }
             }
-        }//while
+        } //while
         return new CardList[]{aDestroy, bDestroy};
-    }//combatDamage()        
+    } //combatDamage()
 
     /** {@inheritDoc} */
     @Override
@@ -143,4 +152,4 @@ class SimpleCombat {
 
         return sb.toString();
     }
-}//Combat
+} //end class SimpleCombat

@@ -41,7 +41,7 @@ public class SealedDeck {
 
             Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
 
-            ArrayList<String> blockSets = SetInfoUtil.getSets_BlockName(o.toString());
+            ArrayList<String> blockSets = SetInfoUtil.getSetsBlockName(o.toString());
             int nPacks = SetInfoUtil.getSealedPackCount(o.toString());
 
             ArrayList<String> setCombos = new ArrayList<String>();

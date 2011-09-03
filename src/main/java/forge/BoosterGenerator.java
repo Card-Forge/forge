@@ -51,7 +51,6 @@ public class BoosterGenerator {
         numMythics = 0;
         numSpecials = 0;
 
-        
         for (CardPrinted c : CardDb.instance().getAllUniqueCards()) {
             addToRarity(c);
         }
@@ -59,7 +58,20 @@ public class BoosterGenerator {
         shuffleAll();
     }
 
-    public BoosterGenerator(String DeckFile, int nCommons, int nUncommons, int nRares, int nMythics, int nSpecials, boolean ignoreRarity) {
+    /**
+     * 
+     * TODO Write javadoc for Constructor.
+     * @param deckFile a String
+     * @param nCommons an int
+     * @param nUncommons an int
+     * @param nRares an int
+     * @param nMythics an int
+     * @param nSpecials an int
+     * @param ignoreRarity a boolean
+     */
+    public BoosterGenerator(final String deckFile, final int nCommons, final int nUncommons, final int nRares,
+            final int nMythics, final int nSpecials, final boolean ignoreRarity)
+    {
         numCommons = nCommons;
         numUncommons = nUncommons;
         numRares = nRares;
@@ -68,9 +80,10 @@ public class BoosterGenerator {
 
         //DeckManager dio = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
         DeckManager dio = AllZone.getDeckManager();
-        Deck dPool = dio.getDeck(DeckFile);
-        if (dPool == null)
-            throw new RuntimeException("BoosterGenerator : deck not found - " + DeckFile);
+        Deck dPool = dio.getDeck(deckFile);
+        if (dPool == null) {
+            throw new RuntimeException("BoosterGenerator : deck not found - " + deckFile);
+        }
 
         CardPoolView tList = dPool.getMain();
         for (Entry<CardPrinted, Integer> e : tList) {
@@ -84,7 +97,7 @@ public class BoosterGenerator {
     /**
      * <p>Constructor for BoosterGenerator.</p>
      *
-     * @param SetCode a {@link java.lang.String} object.
+     * @param setCode a {@link java.lang.String} object.
      */
     public BoosterGenerator(final String setCode) {
         numCommons = 0;
@@ -93,7 +106,7 @@ public class BoosterGenerator {
         numMythics = 0;
         numSpecials = 0;
 
-        List<String> setsList = Arrays.asList(new String[]{ setCode });
+        List<String> setsList = Arrays.asList(new String[]{setCode});
         Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(setsList, true);
         List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
@@ -155,15 +168,16 @@ public class BoosterGenerator {
      *
      * @return a {@link forge.CardList} object.
      */
-    public List<CardPrinted> getBoosterPack() {
+    public final List<CardPrinted> getBoosterPack() {
         List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
         int i = 0;
 
         if (commons.size() > numCommons) {
             for (i = 0; i < numCommons; i++) {
-                if (iCommons >= commons.size())
+                if (iCommons >= commons.size()) {
                     iCommons = 0;
+                }
 
                 temp.add(commons.get(iCommons++));
             }
@@ -171,8 +185,9 @@ public class BoosterGenerator {
 
         if (uncommons.size() > numUncommons) {
             for (i = 0; i < numUncommons; i++) {
-                if (iUncommons >= uncommons.size())
+                if (iUncommons >= uncommons.size()) {
                     iUncommons = 0;
+                }
 
                 temp.add(uncommons.get(iUncommons++));
             }
@@ -182,21 +197,24 @@ public class BoosterGenerator {
             if (numMythics > 0) {
                 if (mythics.size() > numMythics) {
                     if (MyRandom.random.nextInt(8) <= 1) {
-                        if (iMythics >= mythics.size())
+                        if (iMythics >= mythics.size()) {
                             iMythics = 0;
+                        }
 
                         temp.add(mythics.get(iMythics++));
                     } else {
-                        if (iRares >= rares.size())
+                        if (iRares >= rares.size()) {
                             iRares = 0;
+                        }
 
                         temp.add(rares.get(iRares++));
                     }
                 }
             } else {
                 if (rares.size() > numRares) {
-                    if (iRares >= rares.size())
+                    if (iRares >= rares.size()) {
                         iRares = 0;
+                    }
 
                     temp.add(rares.get(iRares++));
                 }
@@ -205,8 +223,9 @@ public class BoosterGenerator {
 
         if (specials.size() > numSpecials) {
             for (i = 0; i < numSpecials; i++) {
-                if (iSpecials >= specials.size())
+                if (iSpecials >= specials.size()) {
                     iSpecials = 0;
+                }
 
                 temp.add(specials.get(iSpecials++));
             }
@@ -220,11 +239,11 @@ public class BoosterGenerator {
      *
      * @return a int.
      */
-    public int getBoosterPackSize() {
+    public final int getBoosterPackSize() {
         return numCommons + numUncommons + numRares + numSpecials;
     }
-    
-    private void addToRarity(CardPrinted c) {
+
+    private void addToRarity(final CardPrinted c) {
         switch(c.getRarity()) {
             case Common: commons.add(c); break;
             case Uncommon: uncommons.add(c); break;

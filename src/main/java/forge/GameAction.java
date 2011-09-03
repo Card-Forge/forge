@@ -1068,7 +1068,7 @@ public class GameAction {
                         card.setRandomSetCode();
     
                     if (!card.getCurSetCode().equals("")) {
-                        int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                        int n = SetInfoUtil.getSetInfoCode(card.getSets(), card.getCurSetCode()).PicCount;
                         if (n > 1)
                             card.setRandomPicture(generator.nextInt(n - 1) + 1);
     
@@ -1119,7 +1119,7 @@ public class GameAction {
                         card.setRandomSetCode();
     
                     if (!card.getCurSetCode().equals("")) {
-                        int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                        int n = SetInfoUtil.getSetInfoCode(card.getSets(), card.getCurSetCode()).PicCount;
                         if (n > 1)
                             card.setRandomPicture(generator.nextInt(n - 1) + 1);
     

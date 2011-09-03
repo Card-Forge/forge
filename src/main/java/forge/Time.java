@@ -20,7 +20,7 @@ public class Time {
     /**
      * <p>start.</p>
      */
-    public void start() {
+    public final void start() {
         startTime = System.currentTimeMillis();
     }
 
@@ -29,7 +29,7 @@ public class Time {
      *
      * @return a double.
      */
-    public double stop() {
+    public final double stop() {
         stopTime = System.currentTimeMillis();
         return getTime();
     }
@@ -39,7 +39,7 @@ public class Time {
      *
      * @return a double.
      */
-    public double getTime() {
+    public final double getTime() {
         return (stopTime - startTime) / 1000.0;
     }
 }

@@ -661,7 +661,7 @@ public final class CardUtil {
 
         return res;
     }
-    
+
     /**
      * getLKICopy.
      * @param c a Card.

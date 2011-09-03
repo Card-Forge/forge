@@ -29,7 +29,7 @@ public class SetInfo {
      * @param r a {@link java.lang.String} object.
      * @param u a {@link java.lang.String} object.
      */
-    public SetInfo(String c, String r, String u) {
+    public SetInfo(final String c, final String r, final String u) {
         Code = c;
         Rarity = r;
         URL = u;
@@ -44,7 +44,7 @@ public class SetInfo {
      * @param u a {@link java.lang.String} object.
      * @param p a int.
      */
-    public SetInfo(String c, String r, String u, int p) {
+    public SetInfo(final String c, final String r, final String u, final int p) {
         Code = c;
         Rarity = r;
         URL = u;
@@ -56,15 +56,16 @@ public class SetInfo {
      *
      * @param parse a {@link java.lang.String} object.
      */
-    public SetInfo(String parse) {
+    public SetInfo(final String parse) {
         String[] pp = parse.split("\\|");
         Code = pp[0];
         Rarity = pp[1];
         URL = pp[2];
-        if (pp.length > 3)
+        if (pp.length > 3) {
             PicCount = Integer.parseInt(pp[3]);
-        else
+        } else {
             PicCount = 0;
+        }
     }
 
     /**
@@ -72,16 +73,18 @@ public class SetInfo {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
+    public final String toString() {
         return Code;
     }
 
     /** {@inheritDoc} */
-    public boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         if (o instanceof SetInfo) {
             SetInfo siO = (SetInfo) o;
             return Code.equals(siO.Code);
-        } else return false;
+        } else {
+            return false;
+        }
 
     }
 }

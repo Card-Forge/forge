@@ -16,8 +16,13 @@ import forge.card.CardSet;
  * @author Forge
  * @version $Id$
  */
-public class SetInfoUtil {
-    /** Constant <code>setData</code> */
+public final class SetInfoUtil {
+
+    private SetInfoUtil() {
+        throw new AssertionError();
+    }
+
+    /** Constant <code>setData</code>. */
     private static HashMap<String, CardSet> setsByCode = new HashMap<String, CardSet>();
     private static List<CardSet> allSets = new ArrayList<CardSet>();
 
@@ -58,10 +63,23 @@ public class SetInfoUtil {
         Collections.sort(allSets);
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param code a String
+     * @return a CardSet
+     */
     public static CardSet getSetByCode(final String code) {
         if (setsByCode.isEmpty()) { loadSetData(); }
         return setsByCode.get(code);
     }
+
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param code a String
+     * @return a CardSet
+     */
     public static CardSet getSetByCodeOrThrow(final String code) {
         if (setsByCode.isEmpty()) { loadSetData(); }
         CardSet set = setsByCode.get(code);
@@ -69,6 +87,11 @@ public class SetInfoUtil {
         return set;
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @return a List<String>
+     */
     public static List<String> getCodeList() {
         if (setsByCode.isEmpty()) { loadSetData(); }
         return new ArrayList<String>(setsByCode.keySet());
@@ -85,6 +108,12 @@ public class SetInfoUtil {
         return Predicate.getTrue(CardSet.class).select(allSets, CardSet.fn1, CardSet.fnGetName);
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param setName a String
+     * @return a String
+     */
     public static String getCode3ByName(final String setName) {
         if (setsByCode.isEmpty()) { loadSetData(); }
 
@@ -95,6 +124,12 @@ public class SetInfoUtil {
         return "";
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param code a String
+     * @return a String
+     */
     public static String getCode2ByCode(final String code) {
         if (setsByCode.isEmpty()) { loadSetData(); }
         CardSet set = setsByCode.get(code);
@@ -102,12 +137,12 @@ public class SetInfoUtil {
     }
 
     /**
-     * <p>getSetName_SetCode3.</p>
+     * <p>getNameByCode.</p>
      *
-     * @param SetCode3 a {@link java.lang.String} object.
+     * @param code a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getNameByCode(String code) {
+    public static String getNameByCode(final String code) {
         if (setsByCode.isEmpty()) { loadSetData(); }
         CardSet set = setsByCode.get(code);
         return set == null ? "" : set.getName();
@@ -134,27 +169,27 @@ public class SetInfoUtil {
     }
 
     /**
-     * <p>getSetInfo_Code.</p>
+     * <p>getSetInfoCode.</p>
      *
-     * @param SetList a {@link java.util.ArrayList} object.
-     * @param SetCode a {@link java.lang.String} object.
+     * @param setList a {@link java.util.ArrayList} object.
+     * @param setCode a {@link java.lang.String} object.
      * @return a {@link forge.SetInfo} object.
      */
-    public static SetInfo getSetInfo_Code(ArrayList<SetInfo> SetList, String SetCode) {
+    public static SetInfo getSetInfoCode(final ArrayList<SetInfo> setList, final String setCode) {
         SetInfo si;
 
-        for (int i = 0; i < SetList.size(); i++) {
-            si = SetList.get(i);
-            if (si.Code.equals(SetCode)) { return si; }
+        for (int i = 0; i < setList.size(); i++) {
+            si = setList.get(i);
+            if (si.Code.equals(setCode)) { return si; }
         }
 
         return null;
     }
 
     /**
-     * <p>getSetIndex.</p>
+     * <p>getIndexByCode.</p>
      *
-     * @param SetCode a {@link java.lang.String} object.
+     * @param code a {@link java.lang.String} object.
      * @return a int.
      */
     public static int getIndexByCode(final String code) {
@@ -163,7 +198,7 @@ public class SetInfoUtil {
         return set == null ? 0 : set.getIndex();
     }
 
-    /** Constant <code>blockData</code> */
+    /** Constant <code>blockData</code>. */
     private static ArrayList<HashMap<String, String>> blockData = new ArrayList<HashMap<String, String>>();
 
     /**
@@ -178,9 +213,9 @@ public class SetInfoUtil {
                 if (s.length() > 5) {
                     HashMap<String, String> sm = new HashMap<String, String>();
 
-                    String ss[] = s.split("\\|");
+                    String[] ss = s.split("\\|");
                     for (int j = 0; j < ss.length; j++) {
-                        String kv[] = ss[j].split(":");
+                        String[] kv = ss[j].split(":");
                         sm.put(kv[0], kv[1]);
                     }
 
@@ -199,37 +234,43 @@ public class SetInfoUtil {
     public static ArrayList<String> getBlockNameList() {
         ArrayList<String> bnl = new ArrayList<String>();
 
-        if (blockData.size() == 0)
+        if (blockData.size() == 0) {
             loadBlockData();
+        }
 
-        for (int i = 0; i < blockData.size(); i++)
+        for (int i = 0; i < blockData.size(); i++) {
             bnl.add(blockData.get(i).get("Name"));
+        }
 
         return bnl;
     }
 
     /**
-     * <p>getSets_BlockName.</p>
+     * <p>getSetsBlockName.</p>
      *
      * @param blockName a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> getSets_BlockName(String blockName) {
+    public static ArrayList<String> getSetsBlockName(final String blockName) {
         ArrayList<String> sets = new ArrayList<String>();
 
-        if (blockData.size() == 0)
+        if (blockData.size() == 0) {
             loadBlockData();
+        }
 
         for (int i = 0; i < blockData.size(); i++) {
             if (blockData.get(i).get("Name").equals(blockName)) {
-                if (blockData.get(i).containsKey("Set0"))
+                if (blockData.get(i).containsKey("Set0")) {
                     sets.add(blockData.get(i).get("Set0"));
+                }
 
-                if (blockData.get(i).containsKey("Set1"))
+                if (blockData.get(i).containsKey("Set1")) {
                     sets.add(blockData.get(i).get("Set1"));
+                }
 
-                if (blockData.get(i).containsKey("Set2"))
+                if (blockData.get(i).containsKey("Set2")) {
                     sets.add(blockData.get(i).get("Set2"));
+                }
             }
         }
 
@@ -242,13 +283,15 @@ public class SetInfoUtil {
      * @param blockName a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int getDraftPackCount(String blockName) {
-        if (blockData.size() == 0)
+    public static int getDraftPackCount(final String blockName) {
+        if (blockData.size() == 0) {
             loadBlockData();
+        }
 
         for (int i = 0; i < blockData.size(); i++) {
-            if (blockData.get(i).get("Name").equals(blockName))
+            if (blockData.get(i).get("Name").equals(blockName)) {
                 return Integer.parseInt(blockData.get(i).get("DraftPacks"));
+            }
         }
 
         return 0;
@@ -260,13 +303,15 @@ public class SetInfoUtil {
      * @param blockName a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int getSealedPackCount(String blockName) {
-        if (blockData.size() == 0)
+    public static int getSealedPackCount(final String blockName) {
+        if (blockData.size() == 0) {
             loadBlockData();
+        }
 
         for (int i = 0; i < blockData.size(); i++) {
-            if (blockData.get(i).get("Name").equals(blockName))
+            if (blockData.get(i).get("Name").equals(blockName)) {
                 return Integer.parseInt(blockData.get(i).get("SealedPacks"));
+            }
         }
 
         return 0;
@@ -278,23 +323,31 @@ public class SetInfoUtil {
      * @param blockName a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getLandCode(String blockName) {
-        if (blockData.size() == 0)
+    public static String getLandCode(final String blockName) {
+        if (blockData.size() == 0) {
             loadBlockData();
+        }
 
         for (int i = 0; i < blockData.size(); i++) {
-            if (blockData.get(i).get("Name").equals(blockName))
+            if (blockData.get(i).get("Name").equals(blockName)) {
                 return blockData.get(i).get("LandSetCode");
+            }
         }
 
         return "M11"; // default, should never happen IRL
     }
-    
-    public static ArrayList<String> getLegalSets(String fmt) {
-    	ArrayList<String> lglSets = new ArrayList<String>();
-    	
-    	lglSets = FileUtil.readFile("res/blockdata/" + fmt + ".txt");
-    	
-    	return lglSets;
+
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param fmt a String
+     * @return an ArrayList<String>
+     */
+    public static ArrayList<String> getLegalSets(final String fmt) {
+        ArrayList<String> lglSets = new ArrayList<String>();
+
+        lglSets = FileUtil.readFile("res/blockdata/" + fmt + ".txt");
+
+        return lglSets;
     }
 }

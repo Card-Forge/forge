@@ -20,7 +20,7 @@ public enum ZCTrigger {
      * @param text a {@link java.lang.String} object.
      * @param tofrom a {@link java.lang.String} object.
      */
-    ZCTrigger(String text, String tofrom) {
+    ZCTrigger(final String text, final String tofrom) {
         this.ruleText = text;
         this.triggerZones = tofrom.split(" > ");
     }
@@ -32,8 +32,9 @@ public enum ZCTrigger {
      * @param destintationZone a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean triggerOn(String sourceZone, String destintationZone) {
-        return ((triggerZones[0].equals("any") || triggerZones[0].equals(sourceZone)) && (triggerZones[1].equals("any") || triggerZones[0].equals(sourceZone)));
+    public boolean triggerOn(final String sourceZone, final String destintationZone) {
+        return ((triggerZones[0].equals("any") || triggerZones[0].equals(sourceZone))
+                && (triggerZones[1].equals("any") || triggerZones[0].equals(sourceZone)));
     }
 
     /**
@@ -42,9 +43,12 @@ public enum ZCTrigger {
      * @param description a {@link java.lang.String} object.
      * @return a {@link forge.ZCTrigger} object.
      */
-    public static ZCTrigger getTrigger(String description) {
-        for (ZCTrigger t : ZCTrigger.values())
-            if (t.ruleText.equals(description)) return t;
+    public static ZCTrigger getTrigger(final String description) {
+        for (ZCTrigger t : ZCTrigger.values()) {
+            if (t.ruleText.equals(description)) {
+                return t;
+            }
+        }
         return null;
     }
 

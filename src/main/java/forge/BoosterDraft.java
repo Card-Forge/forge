@@ -18,36 +18,36 @@ public interface BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView nextChoice();
+    CardPoolView nextChoice();
 
     /**
      * <p>setChoice.</p>
      *
      * @param c a {@link forge.Card} object.
      */
-    public void setChoice(CardPrinted c);
+    void setChoice(CardPrinted c);
 
     /**
      * <p>hasNextChoice.</p>
      *
      * @return a boolean.
      */
-    public boolean hasNextChoice();
+    boolean hasNextChoice();
 
     /**
      * <p>getDecks.</p>
      *
      * @return an array of {@link forge.deck.Deck} objects.
      */
-    public Deck[] getDecks(); //size 7, all the computers decks
+    Deck[] getDecks(); //size 7, all the computers decks
 
-    /** Constant <code>LandSetCode="{}"</code> */
+    /** Constant <code>LandSetCode="{}"</code>. */
     public String LandSetCode[] = {""};
     
-    /** Constant <code>draftFormat="{}"</code> */
+    /** Constant <code>draftFormat="{}"</code>. */
     public String draftFormat[] = {""};
     
-    /** Constant <code>draftPicks="{}"</code> */
+    /** Constant <code>draftPicks="{}"</code>. */
     public Map<String,Float> draftPicks = new TreeMap<String,Float>();
 }
 
