@@ -7,4 +7,5 @@ SVar:TrigDig:AB$DigUntil | Cost$ 1 | Valid$ Creature | ValidDescription$ creatur
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foster.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/247.jpg
+Oracle:Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
 End

@@ -14,4 +14,5 @@ SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_sliver.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/157.jpg
+Oracle:All Slivers have "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it."
 End

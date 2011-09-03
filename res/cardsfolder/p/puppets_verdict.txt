@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppets_verdict.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/208.jpg
+Oracle:Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater.
 End

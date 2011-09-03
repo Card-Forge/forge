@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blowfly_infestation.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/58.jpg
+Oracle:Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.
 End

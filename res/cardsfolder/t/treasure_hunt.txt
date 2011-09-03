@@ -6,4 +6,5 @@ A:SP$ DigUntil | Cost$ 1 U | Valid$ Card.nonLand | ValidDescription$ nonland | R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_hunt.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/42.jpg
+Oracle:Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.
 End

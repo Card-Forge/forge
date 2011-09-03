@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandswimmer.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/225.jpg
+Oracle:{R}: Flip a coin. If you win the flip, return Viashino Sandswimmer to its owner's hand. If you lose the flip, sacrifice Viashino Sandswimmer.
 End

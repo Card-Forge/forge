@@ -8,4 +8,5 @@ SVar:DBKicker:DB$ DealDamage | Cost$ 3 R Sac<2/Land> | ValidTgts$ Creature,Playe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_burst.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/66.jpg
+Oracle:Kicker-Sacrifice two lands. (You may sacrifice two lands in addition to any other costs as you cast this spell.)\nMagma Burst deals 3 damage to target creature or player. If Magma Burst was kicked, it deals 3 damage to another target creature or player.
 End

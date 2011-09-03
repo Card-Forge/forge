@@ -7,4 +7,5 @@ SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/schismotivate.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/129.jpg
+Oracle:Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
 End

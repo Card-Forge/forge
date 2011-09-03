@@ -8,4 +8,5 @@ SVar:DBDamage:DB$ DealDamage | Cost$ 0 |  ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jilt.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/27.jpg
+Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nReturn target creature to its owner's hand. If Jilt was kicked, it deals 2 damage to another target creature.
 End

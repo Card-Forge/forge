@@ -8,4 +8,5 @@ SVar:DBPutThree:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Selec
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incremental_blight.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/70.jpg
+Oracle:Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 End

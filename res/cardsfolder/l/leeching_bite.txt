@@ -7,4 +7,5 @@ SVar:DBPumpNeg:DB$ Pump | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select anoth
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_bite.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/113.jpg
+Oracle:Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
 End

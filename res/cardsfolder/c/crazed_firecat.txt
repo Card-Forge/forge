@@ -12,4 +12,5 @@ SVar:X:Remembered$Amount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_firecat.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/94.jpg
+Oracle:When Crazed Firecat enters the battlefield, flip a coin until you lose a flip. Put a +1/+1 counter on Crazed Firecat for each flip you win.
 End

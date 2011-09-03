@@ -10,4 +10,5 @@ SVar:X:Remembered$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baneful_omen.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/96.jpg
+Oracle:At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.
 End

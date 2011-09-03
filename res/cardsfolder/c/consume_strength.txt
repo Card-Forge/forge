@@ -7,4 +7,5 @@ SVar:DBPumpNeg:DB$ Pump | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select anoth
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_strength.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/93.jpg
+Oracle:Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
 End
