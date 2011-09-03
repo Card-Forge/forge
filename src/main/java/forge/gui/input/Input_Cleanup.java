@@ -1,6 +1,14 @@
 package forge.gui.input;
 
-import forge.*;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CombatUtil;
+import forge.Constant;
+import forge.PlayerZone;
+
+
 
 /**
  * <p>Input_Cleanup class.</p>
@@ -9,12 +17,12 @@ import forge.*;
  * @version $Id$
  */
 public class Input_Cleanup extends Input {
-    /** Constant <code>serialVersionUID=-4164275418971547948L</code> */
+    /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
 
     /** {@inheritDoc} */
     @Override
-    public void showMessage() {
+    public final void showMessage() {
         if (AllZone.getPhase().getPlayerTurn().isComputer()) {
             AI_CleanupDiscard();
             return;
@@ -34,19 +42,20 @@ public class Input_Cleanup extends Input {
             CombatUtil.removeAllDamage();
 
             AllZone.getPhase().setNeedToNextPhase(true);
-            AllZone.getPhase().nextPhase();    // TODO: keep an eye on this code, see if we can get rid of it.
+            AllZone.getPhase().nextPhase();    // TODO keep an eye on this code, see if we can get rid of it.
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public void selectCard(Card card, PlayerZone zone) {
+    public final void selectCard(final Card card, final PlayerZone zone) {
         if (zone.is(Constant.Zone.Hand, AllZone.getHumanPlayer())) {
             card.getController().discard(card, null);
-            if (AllZone.getStack().size() == 0)
+            if (AllZone.getStack().size() == 0) {
                 showMessage();
+            }
         }
-    }//selectCard()
+    } //selectCard()
 
 
     /**

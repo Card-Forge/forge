@@ -1,9 +1,16 @@
 package forge.gui.input;
 
-
-import forge.*;
-
 import java.util.ArrayList;
+
+import forge.AllZone;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardUtil;
+import forge.CombatUtil;
+import forge.Command;
+import forge.Constant;
+import forge.GameActionUtil;
+import forge.PlayerZone;
 
 
 /**
@@ -13,7 +20,7 @@ import java.util.ArrayList;
  * @version $Id$
  */
 public class Input_Block extends Input {
-    /** Constant <code>serialVersionUID=6120743598368928128L</code> */
+    /** Constant <code>serialVersionUID=6120743598368928128L</code>. */
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
@@ -24,13 +31,13 @@ public class Input_Block extends Input {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void removeFromAllBlocking(Card c) {
+    public final void removeFromAllBlocking(final Card c) {
         allBlocking.remove(c);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void showMessage() {
+    public final void showMessage() {
         //for Castle Raptors, since it gets a bonus if untapped
         for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
             Command com = GameActionUtil.commands.get(effect);
@@ -69,7 +76,7 @@ public class Input_Block extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectButtonOK() {
+    public final void selectButtonOK() {
         if (CombatUtil.finishedMandatotyBlocks(AllZone.getCombat())) {
             // Done blocking
             ButtonUtil.reset();
@@ -80,17 +87,18 @@ public class Input_Block extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectCard(Card card, PlayerZone zone) {
+    public final void selectCard(final Card card, final PlayerZone zone) {
         //is attacking?
         if (CardUtil.toList(AllZone.getCombat().getAttackers()).contains(card)) {
             currentAttacker = card;
         } else if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
-                && CombatUtil.canBlock(currentAttacker, card, AllZone.getCombat())) {
+                && CombatUtil.canBlock(currentAttacker, card, AllZone.getCombat()))
+        {
             if (currentAttacker != null && (!allBlocking.contains(card))) {
                 allBlocking.add(card);
                 AllZone.getCombat().addBlocker(currentAttacker, card);
             }
         }
         showMessage();
-    }//selectCard()
+    } //selectCard()
 }
