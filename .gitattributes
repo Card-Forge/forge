@@ -91,6 +91,7 @@ res/boosterdata/WTH.pack -text
 res/boosterdata/WWK.pack -text
 res/boosterdata/ZEN.pack -text
 res/card-pictures-token.txt -text
+res/cardTemplateScript.py -text
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
 res/cardsfolder/a/abbey_gargoyles.txt svneol=native#text/plain
 res/cardsfolder/a/abbey_matron.txt svneol=native#text/plain
