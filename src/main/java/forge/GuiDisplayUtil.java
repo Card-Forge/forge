@@ -18,8 +18,17 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.io.*;
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -29,7 +38,11 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class GuiDisplayUtil implements NewConstants {
+public final class GuiDisplayUtil implements NewConstants {
+
+    private GuiDisplayUtil() {
+        throw new AssertionError();
+    }
     /**
      * <p>getCardDetailMouse.</p>
      *
@@ -39,7 +52,7 @@ public class GuiDisplayUtil implements NewConstants {
     public static MouseMotionListener getCardDetailMouse(final CardContainer visual) {
         return new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent me) {
+            public void mouseMoved(final MouseEvent me) {
                 JPanel panel = (JPanel) me.getSource();
                 Object o = panel.getComponentAt(me.getPoint());
 
@@ -47,7 +60,7 @@ public class GuiDisplayUtil implements NewConstants {
                     CardContainer cardPanel = (CardContainer) o;
                     visual.setCard(cardPanel.getCard());
                 }
-            }//mouseMoved
+            } //mouseMoved
         };
     }
 
@@ -57,37 +70,33 @@ public class GuiDisplayUtil implements NewConstants {
      * @param card a {@link forge.Card} object.
      * @return a {@link javax.swing.border.Border} object.
      */
-    public static Border getBorder(Card card) {
+    public static Border getBorder(final Card card) {
         // color info
-        if (card == null)
+        if (card == null) {
             return BorderFactory.createEmptyBorder(2, 2, 2, 2);
+        }
         java.awt.Color color;
         ArrayList<String> list = CardUtil.getColors(card);
 
-        if (card.isFaceDown())
+        if (card.isFaceDown()) {
             color = Color.gray;
-
-        else if (list.size() > 1) color = Color.orange;
-
-        else if (list.get(0).equals(Constant.Color.Black))
+        } else if (list.size() > 1) {
+            color = Color.orange;
+        } else if (list.get(0).equals(Constant.Color.Black)) {
             color = Color.black;
-
-        else if (list.get(0).equals(Constant.Color.Green))
+        } else if (list.get(0).equals(Constant.Color.Green)) {
             color = new Color(0, 220, 39);
-
-        else if (list.get(0).equals(Constant.Color.White))
+        } else if (list.get(0).equals(Constant.Color.White)) {
             color = Color.white;
-
-        else if (list.get(0).equals(Constant.Color.Red))
+        } else if (list.get(0).equals(Constant.Color.Red)) {
             color = Color.red;
-
-        else if (list.get(0).equals(Constant.Color.Blue))
+        } else if (list.get(0).equals(Constant.Color.Blue)) {
             color = Color.blue;
-
-        else if (list.get(0).equals(Constant.Color.Colorless))
+        } else if (list.get(0).equals(Constant.Color.Colorless)) {
             color = Color.gray;
-
-        else color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
+        } else {
+            color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
+        }
 
         if (color != Color.gray) {
 
@@ -108,7 +117,9 @@ public class GuiDisplayUtil implements NewConstants {
             color = new Color(r, g, b);
 
             return BorderFactory.createLineBorder(color, 2);
-        } else return BorderFactory.createLineBorder(Color.gray, 2);
+        } else {
+            return BorderFactory.createLineBorder(Color.gray, 2);
+        }
     }
 
     /**
@@ -131,31 +142,39 @@ public class GuiDisplayUtil implements NewConstants {
      * @param card a {@link forge.Card} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String formatCardType(Card card) {
+    public static String formatCardType(final Card card) {
         ArrayList<String> list = card.getType();
         StringBuilder sb = new StringBuilder();
-        
+
         ArrayList<String> superTypes = new ArrayList<String>();
         ArrayList<String> cardTypes = new ArrayList<String>();
         ArrayList<String> subTypes = new ArrayList<String>();
-        for(String t : list) {
-        	if(CardUtil.isASuperType(t) && !superTypes.contains(t)) superTypes.add(t);
-        	if(CardUtil.isACardType(t) && !cardTypes.contains(t)) cardTypes.add(t);
-        	if(CardUtil.isASubType(t) && !subTypes.contains(t)) subTypes.add(t);
-        	
+        for (String t : list) {
+            if (CardUtil.isASuperType(t) && !superTypes.contains(t)) {
+                superTypes.add(t);
+            }
+            if (CardUtil.isACardType(t) && !cardTypes.contains(t)) {
+                cardTypes.add(t);
+            }
+            if (CardUtil.isASubType(t) && !subTypes.contains(t)) {
+                subTypes.add(t);
+            }
+
         }
-        
-        for(String type : superTypes) {
-        	sb.append(type).append(" ");
+
+        for (String type : superTypes) {
+            sb.append(type).append(" ");
         }
-        for(String type : cardTypes) {
-        	sb.append(type).append(" ");
+        for (String type : cardTypes) {
+            sb.append(type).append(" ");
         }
-        if(!subTypes.isEmpty()) sb.append("- ");
-        for(String type : subTypes) {
-        	sb.append(type).append(" ");
+        if (!subTypes.isEmpty()) {
+            sb.append("- ");
         }
-        
+        for (String type : subTypes) {
+            sb.append(type).append(" ");
+        }
+
         return sb.toString();
     }
 
@@ -165,13 +184,14 @@ public class GuiDisplayUtil implements NewConstants {
      * @param in a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String cleanString(String in) {
+    public static String cleanString(final String in) {
         StringBuffer out = new StringBuffer();
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if (c == ' ' || c == '-') out.append('_');
-            else if (Character.isLetterOrDigit(c) || c == '_') {
+            if (c == ' ' || c == '-') {
+                out.append('_');
+            } else if (Character.isLetterOrDigit(c) || c == '_') {
                 out.append(c);
             }
         }
@@ -184,19 +204,18 @@ public class GuiDisplayUtil implements NewConstants {
      * @return a {@link java.lang.String} object.
      * @param in a {@link java.lang.String} object.
      */
-    public static String cleanStringMWS(String in)
-    {
-    	StringBuffer out = new StringBuffer();
-    	char c;
-    	for (int i=0; i<in.length(); i++)
-    	{
-    		c = in.charAt(i);
-    		if (c == '"' || c == '/')
-    			out.append("");
-    		else
-    			out.append(c);
-    	}
-    	return out.toString();
+    public static String cleanStringMWS(final String in) {
+        StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if (c == '"' || c == '/') {
+                out.append("");
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
     }
 
     /**
@@ -205,20 +224,20 @@ public class GuiDisplayUtil implements NewConstants {
      * @param j a {@link javax.swing.JPanel} object.
      * @param c an array of {@link forge.Card} objects.
      */
-    public static void setupNoLandPanel(JPanel j, Card c[]) {
+    public static void setupNoLandPanel(final JPanel j, final Card[] c) {
         ArrayList<Card> a = new ArrayList<Card>();
         /*
         for(int i = 0; i < c.length; i++)
           if(c[i].isCreature() || c[i].isGlobalEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker())
             a.add(c[i]);
-        */
+         */
 
         /*
-        
+
         //creatures or planeswalkers
         for(int i = 0; i < c.length; i++)
-        	//!artifact because of Memnarch turning planeswalkers into artifacts. 
-        	if (c[i].isCreature() || (c[i].isPlaneswalker() && !c[i].isArtifact()))  
+        	//!artifact because of Memnarch turning planeswalkers into artifacts.
+        	if (c[i].isCreature() || (c[i].isPlaneswalker() && !c[i].isArtifact()))
         		a.add(c[i]);
         //(noncreature, non-enchantment,nonland) artifacts
         for(int i = 0; i < c.length; i++)
@@ -228,8 +247,8 @@ public class GuiDisplayUtil implements NewConstants {
         for(int i = 0; i < c.length; i++)
         	if (c[i].isGlobalEnchantment() && !c[i].isCreature())
         		a.add(c[i]);
-        
-        */
+
+         */
 
         for (int i = 0; i < c.length; i++) {
             a.add(c[i]);
@@ -244,14 +263,17 @@ public class GuiDisplayUtil implements NewConstants {
      * @param j a {@link javax.swing.JPanel} object.
      * @param c an array of {@link forge.Card} objects.
      */
-    public static void setupLandPanel(JPanel j, Card c[]) {
+    public static void setupLandPanel(final JPanel j, final Card[] c) {
         ArrayList<Card> a = new ArrayList<Card>();
-        for (int i = 0; i < c.length; i++)
-            if ((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker()) || (c[i].isLand()
-                    && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment()))
+        for (int i = 0; i < c.length; i++) {
+            if ((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker())
+                    || (c[i].isLand() && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment()))
                     && !AllZone.getGameAction().isAttachee(c[i])
-                    || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond"))) a.add(c[i]);
-
+                    || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond")))
+            {
+                a.add(c[i]);
+            }
+        }
         setupPanel(j, a, true);
     }
 
@@ -259,7 +281,7 @@ public class GuiDisplayUtil implements NewConstants {
     private static void setupPanel(JPanel p, ArrayList<Card> list) {
       setupPanel(p, list, false);
     }
-    */
+     */
 
     //list holds Card objects
     //puts local enchanments in the right order
@@ -271,7 +293,7 @@ public class GuiDisplayUtil implements NewConstants {
      * @param list a {@link java.util.ArrayList} object.
      * @param stack a boolean.
      */
-    private static void setupPanel(JPanel p, ArrayList<Card> list, boolean stack) {
+    private static void setupPanel(final JPanel p, ArrayList<Card> list, final boolean stack) {
 
         int maxY = 0;
         int maxX = 0;
@@ -300,10 +322,10 @@ public class GuiDisplayUtil implements NewConstants {
               list.add(i + 1, ca[inner]);
           }
         }
-        */
+         */
 
         if (stack) {
-            // add all Cards in list to the GUI, add arrows to Local Enchantments 
+            // add all Cards in list to the GUI, add arrows to Local Enchantments
 
             ArrayList<Card> manaPools = getManaPools(list);
             ArrayList<Card> enchantedLands = getEnchantedLands(list);
@@ -408,8 +430,9 @@ public class GuiDisplayUtil implements NewConstants {
                 }
 
 
-                if (c.isAura() && c.isEnchanting() && !nextEnchanted) startANewStack = false;
-                else if (c.isAura() && c.isEnchanting()) {
+                if (c.isAura() && c.isEnchanting() && !nextEnchanted) {
+                    startANewStack = false;
+                } else if (c.isAura() && c.isEnchanting()) {
                     startANewStack = true;
                     nextEnchanted = false;
                 }
@@ -420,22 +443,31 @@ public class GuiDisplayUtil implements NewConstants {
                 }
 
 
-                //very hacky, but this is to ensure enchantment stacking occurs correctly when a land is enchanted, and there are more lands of that same name
+                //very hacky, but this is to ensure enchantment stacking occurs correctly when
+                //a land is enchanted, and there are more lands of that same name
 
-                else if ((prevCard != null && c.isLand() && prevCard.isLand() && prevCard.isEnchanted() && prevCard.getName().equals(
-                        c.getName()))) startANewStack = true;
-                else if (prevCard != null && c.isLand() && prevCard.isLand()
-                        && !prevCard.getName().equals(c.getName())) startANewStack = true;
+                else if ((prevCard != null && c.isLand() && prevCard.isLand() && prevCard.isEnchanted()
+                        && prevCard.getName().equals(c.getName())))
+                {
+                    startANewStack = true;
+                } else if (prevCard != null && c.isLand() && prevCard.isLand()
+                        && !prevCard.getName().equals(c.getName()))
+                {
+                    startANewStack = true;
+                }
 
                 /*
                 if (c.getName().equals("Squirrel Nest")) {
                     startANewStack = true;
                     System.out.println("startANewStack: " + startANewStack);
                 }
-                */
-                if (c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool)
+                 */
+                if (c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool) {
                     startANewStack = true;
-                if (c instanceof ManaPool && prevCard instanceof ManaPool && prevCard.isSnow()) startANewStack = false;
+                }
+                if (c instanceof ManaPool && prevCard instanceof ManaPool && prevCard.isSnow()) {
+                    startANewStack = false;
+                }
 
                 if (startANewStack) {
                     setupConnectedCards(connectedCards);
@@ -444,7 +476,7 @@ public class GuiDisplayUtil implements NewConstants {
                     // Fixed distance if last was a stack, looks a bit nicer
                     if (atInStack > 1) {
                         x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height)
-                                + marginX;
+                        + marginX;
                     } else {
                         x = nextXIfNotStacked;
                     }
@@ -490,7 +522,7 @@ public class GuiDisplayUtil implements NewConstants {
 
             //System.out.println("x:" + maxX + ", y:" + maxY);
             if (maxX > 0 && maxY > 0) { //p.getSize().width || maxY > p.getSize().height) {
-//        p.setSize(new Dimension(maxX, maxY));
+                //              p.setSize(new Dimension(maxX, maxY));
                 p.setPreferredSize(new Dimension(maxX, maxY));
             }
 
@@ -503,13 +535,13 @@ public class GuiDisplayUtil implements NewConstants {
                   addPanel = getCardPanel(c, "<< " +c.getName());
                 else
                   addPanel = getCardPanel(c);
-                  */
+                 */
                 addPanel = new CardPanel(c);
 
                 p.add(addPanel);
             }
         }
-    }//setupPanel()
+    } //setupPanel()
 
     /**
      * <p>setupNoLandPermPanel.</p>
@@ -518,7 +550,7 @@ public class GuiDisplayUtil implements NewConstants {
      * @param list a {@link java.util.ArrayList} object.
      * @param stack a boolean.
      */
-    private static void setupNoLandPermPanel(JPanel p, ArrayList<Card> list, boolean stack) {
+    private static void setupNoLandPermPanel(final JPanel p, ArrayList<Card> list, final boolean stack) {
 
         int maxY = 0;
         int maxX = 0;
@@ -526,14 +558,15 @@ public class GuiDisplayUtil implements NewConstants {
         Card c;
 
         if (stack) {
-            // add all Cards in list to the GUI, add arrows to Local Enchantments 
+            // add all Cards in list to the GUI, add arrows to Local Enchantments
 
             ArrayList<Card> planeswalkers = getPlaneswalkers(list);
-            ArrayList<Card> equippedEnchantedCreatures = getEquippedEnchantedCreatures(list); //this will also fetch the equipment and/or enchantment
+            //this will also fetch the equipment and/or enchantment
+            ArrayList<Card> equippedEnchantedCreatures = getEquippedEnchantedCreatures(list);
             ArrayList<Card> nonTokenCreatures = getNonTokenCreatures(list);
             ArrayList<Card> tokenCreatures = getTokenCreatures(list);
 
-            //sort tokenCreatures by name (TODO: fix the warning message somehow)
+            //sort tokenCreatures by name (TODO fix the warning message somehow)
             Collections.sort(tokenCreatures, new Comparator<Card>() {
                 public int compare(Card c1, Card c2) {
                     return c1.getName().compareTo(c2.getName());
@@ -601,8 +634,10 @@ public class GuiDisplayUtil implements NewConstants {
 
 
                 if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())
-                        && !nextEquippedEnchanted) startANewStack = false;
-                else if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())) {
+                        && !nextEquippedEnchanted)
+                {
+                    startANewStack = false;
+                } else if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())) {
                     startANewStack = true;
                     nextEquippedEnchanted = false;
                 }
@@ -611,15 +646,24 @@ public class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                     nextEquippedEnchanted = true;
                 }
-                //very hacky, but this is to ensure equipment stacking occurs correctly when a token is equipped/enchanted, and there are more tokens of that same name
+                //very hacky, but this is to ensure equipment stacking occurs correctly when a token
+                //is equipped/enchanted, and there are more tokens of that same name
                 else if ((prevCard != null && c.isCreature() && prevCard.isCreature()
                         && (prevCard.isEquipped() || prevCard.isEnchanted()) && prevCard.getName().equals(
-                        c.getName()))) startANewStack = true;
-                else if (prevCard != null && c.isCreature() && prevCard.isCreature()
-                        && !prevCard.getName().equals(c.getName())) startANewStack = true;
+                                c.getName())))
+                {
+                    startANewStack = true;
+                } else if (prevCard != null && c.isCreature() && prevCard.isCreature()
+                        && !prevCard.getName().equals(c.getName()))
+                {
+                    startANewStack = true;
+                }
 
                 if (((c.isAura() && c.isEnchanting()) || (c.isEquipment() && c.isEquipping())) && prevCard != null
-                        && prevCard.isPlaneswalker()) startANewStack = true;
+                        && prevCard.isPlaneswalker())
+                {
+                    startANewStack = true;
+                }
 
                 if (startANewStack) {
                     setupConnectedCards(connectedCards);
@@ -628,7 +672,7 @@ public class GuiDisplayUtil implements NewConstants {
                     // Fixed distance if last was a stack, looks a bit nicer
                     if (atInStack > 1) {
                         x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height)
-                                + marginX;
+                        + marginX;
                     } else {
                         x = nextXIfNotStacked;
                     }
@@ -685,7 +729,7 @@ public class GuiDisplayUtil implements NewConstants {
                 p.add(addPanel);
             }
         }
-    }//setupPanel()
+    } //setupPanel()
 
     /**
      * <p>getPlaneswalkers.</p>
@@ -693,10 +737,12 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getPlaneswalkers(ArrayList<Card> cards) {
+    public static ArrayList<Card> getPlaneswalkers(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
-            if (c.isPlaneswalker() && !c.isArtifact()) ret.add(c);
+            if (c.isPlaneswalker() && !c.isArtifact()) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -707,12 +753,16 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getEquippedEnchantedCreatures(ArrayList<Card> cards) {
+    public static ArrayList<Card> getEquippedEnchantedCreatures(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             if (c.isCreature() && (c.isEquipped() || c.isEnchanted())) {
-                if (c.isEquipped()) ret.addAll(c.getEquippedBy());
-                if (c.isEnchanted()) ret.addAll(c.getEnchantedBy());
+                if (c.isEquipped()) {
+                    ret.addAll(c.getEquippedBy());
+                }
+                if (c.isEnchanted()) {
+                    ret.addAll(c.getEnchantedBy());
+                }
 
                 ret.add(c);
             }
@@ -728,10 +778,12 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getNonTokenCreatures(ArrayList<Card> cards) {
+    public static ArrayList<Card> getNonTokenCreatures(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
-            if (c.isCreature() && !c.isToken() && !c.isEquipped() && !c.isEnchanted()) ret.add(c);
+            if (c.isCreature() && !c.isToken() && !c.isEquipped() && !c.isEnchanted()) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -742,10 +794,12 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getTokenCreatures(ArrayList<Card> cards) {
+    public static ArrayList<Card> getTokenCreatures(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
-            if (c.isCreature() && c.isToken() && !c.isEquipped() && !c.isEnchanted()) ret.add(c);
+            if (c.isCreature() && c.isToken() && !c.isEquipped() && !c.isEnchanted()) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -757,11 +811,13 @@ public class GuiDisplayUtil implements NewConstants {
      * @param tokenName a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getTokenCreatures(ArrayList<Card> cards, String tokenName) {
+    public static ArrayList<Card> getTokenCreatures(final ArrayList<Card> cards, final String tokenName) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             String name = c.getName();
-            if (c.isCreature() && c.isToken() && name.equals(tokenName)) ret.add(c);
+            if (c.isCreature() && c.isToken() && name.equals(tokenName)) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -773,11 +829,13 @@ public class GuiDisplayUtil implements NewConstants {
      * @param moxName a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getMoxen(ArrayList<Card> cards, String moxName) {
+    public static ArrayList<Card> getMoxen(final ArrayList<Card> cards, final String moxName) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             String name = c.getName();
-            if (name.equals(moxName) && !c.isCreature()) ret.add(c);
+            if (name.equals(moxName) && !c.isCreature()) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -788,14 +846,17 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getNonCreatureArtifacts(ArrayList<Card> cards) {
+    public static ArrayList<Card> getNonCreatureArtifacts(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             String name = c.getName();
             if (c.isArtifact() && !c.isCreature() && !c.isLand() && !c.isGlobalEnchantment()
                     && !(c.isEquipment() && c.isEquipping()) && !name.equals("Mox Emerald")
                     && !name.equals("Mox Jet") && !name.equals("Mox Pearl") && !name.equals("Mox Ruby")
-                    && !name.equals("Mox Sapphire")) ret.add(c);
+                    && !name.equals("Mox Sapphire"))
+            {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -806,10 +867,12 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getGlobalEnchantments(ArrayList<Card> cards) {
+    public static ArrayList<Card> getGlobalEnchantments(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
-            if (c.isGlobalEnchantment() && !c.isCreature()) ret.add(c);
+            if (c.isGlobalEnchantment() && !c.isCreature()) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -821,10 +884,12 @@ public class GuiDisplayUtil implements NewConstants {
      * @param name a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getCard(ArrayList<Card> cards, String name) {
+    public static ArrayList<Card> getCard(final ArrayList<Card> cards, final String name) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
-            if (c.getName().equals(name)) ret.add(c);
+            if (c.getName().equals(name)) {
+                ret.add(c);
+            }
         }
         return ret;
     }
@@ -835,7 +900,7 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getEnchantedLands(ArrayList<Card> cards) {
+    public static ArrayList<Card> getEnchantedLands(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             if (c.isLand() && c.isEnchanted()) {
@@ -855,13 +920,15 @@ public class GuiDisplayUtil implements NewConstants {
      * @param color a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getBasics(ArrayList<Card> cards, String color) {
+    public static ArrayList<Card> getBasics(final ArrayList<Card> cards, final String color) {
         ArrayList<Card> ret = new ArrayList<Card>();
 
         for (Card c : cards) {
             String name = c.getName();
 
-            if (c.isEnchanted()) ;//do nothing
+            if (c.isEnchanted()) {
+                //do nothing
+            }
 
             else if (name.equals("Swamp") || name.equals("Bog")) {
                 if (color == Constant.Color.Black) {
@@ -898,7 +965,7 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getNonBasics(ArrayList<Card> cards) {
+    public static ArrayList<Card> getNonBasics(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
 
         for (Card c : cards) {
@@ -913,7 +980,8 @@ public class GuiDisplayUtil implements NewConstants {
                         || name.equals("Plateau") || name.equals("Scrubland") || name.equals("Savannah")
                         || name.equals("Taiga") || name.equals("Tropical Island") || name.equals("Tundra")
                         || name.equals("Underground Sea") || name.equals("Volcanic Island")
-                        || name.startsWith("Mox") || c instanceof ManaPool) {
+                        || name.startsWith("Mox") || c instanceof ManaPool)
+                {
                     // do nothing.
                 } else {
                     ret.add(c);
@@ -931,11 +999,14 @@ public class GuiDisplayUtil implements NewConstants {
      * @param landName a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getNonBasicLand(ArrayList<Card> cards, String landName) {
+    public static ArrayList<Card> getNonBasicLand(final ArrayList<Card> cards, final String landName) {
         ArrayList<Card> ret = new ArrayList<Card>();
 
-        for (Card c : cards)
-            if (c.getName().equals(landName)) ret.add(c);
+        for (Card c : cards) {
+            if (c.getName().equals(landName)) {
+                ret.add(c);
+            }
+        }
 
         return ret;
     }
@@ -946,7 +1017,7 @@ public class GuiDisplayUtil implements NewConstants {
      * @param cards a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Card> getManaPools(ArrayList<Card> cards) {
+    public static ArrayList<Card> getManaPools(final ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for (Card c : cards) {
             if (c instanceof ManaPool) {
@@ -962,22 +1033,15 @@ public class GuiDisplayUtil implements NewConstants {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean isStackable(Card c) {
-
-        /*String name = c.getName();
-        if( name.equals("Swamp") || name.equals("Bog") || 
-            name.equals("Forest") || name.equals("Grass") || 
-            name.equals("Plains") || name.equals("White Sand") || 
-            name.equals("Mountain") || name.equals("Rock") ||
-            name.equals("Island") || name.equals("Underwater")) {
-          return true;
-        }
-        */
+    public static boolean isStackable(final Card c) {
         if (c.isLand() || (c.getName().startsWith("Mox") && !c.getName().equals("Mox Diamond"))
                 || (c.isLand() && c.isEnchanted()) || (c.isAura() && c.isEnchanting())
                 || (c.isToken() && CardFactoryUtil.multipleControlled(c))
                 || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
-                || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow())) return true;
+                || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow()))
+        {
+            return true;
+        }
 
         return false;
     }
@@ -988,7 +1052,7 @@ public class GuiDisplayUtil implements NewConstants {
      *
      * @param connectedCards a {@link java.util.ArrayList} object.
      */
-    public static void setupConnectedCards(ArrayList<CardPanel> connectedCards) {
+    public static void setupConnectedCards(final ArrayList<CardPanel> connectedCards) {
         for (int i = connectedCards.size() - 1; i > 0; i--) {
             //System.out.println("We should have a stack");
             CardPanel cp = connectedCards.get(i);
@@ -1003,16 +1067,17 @@ public class GuiDisplayUtil implements NewConstants {
      * @param p a {@link arcane.ui.PlayArea} object.
      * @param c an array of {@link forge.Card} objects.
      */
-    public static void setupPlayZone(PlayArea p, Card c[]) {
+    public static void setupPlayZone(final PlayArea p, final Card[] c) {
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
-        for (arcane.ui.CardPanel cpa : p.cardPanels)
+        for (arcane.ui.CardPanel cpa : p.cardPanels) {
             tmp.add(cpa.gameCard);
+        }
         diff = new ArrayList<Card>(tmp);
         diff.removeAll(Arrays.asList(c));
-        if (diff.size() == p.cardPanels.size())
+        if (diff.size() == p.cardPanels.size()) {
             p.clear();
-        else {
+        } else {
             for (Card card : diff) {
                 p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
             }
@@ -1040,8 +1105,9 @@ public class GuiDisplayUtil implements NewConstants {
                 ArrayList<Card> enchants = card.getEnchantedBy();
                 for (Card e : enchants) {
                     arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
-                    if (cardE != null)
+                    if (cardE != null) {
                         toPanel.attachedPanels.add(cardE);
+                    }
                 }
             }
 
@@ -1049,8 +1115,9 @@ public class GuiDisplayUtil implements NewConstants {
                 ArrayList<Card> enchants = card.getEquippedBy();
                 for (Card e : enchants) {
                     arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
-                    if (cardE != null)
+                    if (cardE != null) {
                         toPanel.attachedPanels.add(cardE);
+                    }
                 }
             }
 
@@ -1058,7 +1125,9 @@ public class GuiDisplayUtil implements NewConstants {
                 toPanel.attachedToPanel = p.getCardPanel(card.getEnchanting().get(0).getUniqueNumber());
             } else if (card.isEquipping()) {
                 toPanel.attachedToPanel = p.getCardPanel(card.getEquipping().get(0).getUniqueNumber());
-            } else toPanel.attachedToPanel = null;
+            } else {
+                toPanel.attachedToPanel = null;
+            }
 
             toPanel.setCard(toPanel.gameCard);
         }
@@ -1099,8 +1168,9 @@ public class GuiDisplayUtil implements NewConstants {
         String wd = ".";
         JFileChooser fc = new JFileChooser(wd);
         int rc = fc.showDialog(null, "Select Game State File");
-        if (rc != JFileChooser.APPROVE_OPTION)
+        if (rc != JFileChooser.APPROVE_OPTION) {
             return;
+        }
 
         try {
             FileInputStream fstream = new FileInputStream(fc.getSelectedFile().getAbsolutePath());
@@ -1110,44 +1180,47 @@ public class GuiDisplayUtil implements NewConstants {
             String temp = "";
 
             while ((temp = br.readLine()) != null) {
-                String[] temp_data = temp.split("=");
+                String[] tempData = temp.split("=");
 
-                if (temp_data.length < 2)
+                if (tempData.length < 2) {
                     continue;
-                if (temp_data[0].toCharArray()[0] == '#')
+                }
+                if (tempData[0].toCharArray()[0] == '#') {
                     continue;
+                }
 
-                String categoryName = temp_data[0];
-                String categoryValue = temp_data[1];
+                String categoryName = tempData[0];
+                String categoryValue = tempData[1];
 
-                if (categoryName.toLowerCase().equals("humanlife"))
+                if (categoryName.toLowerCase().equals("humanlife")) {
                     t_humanLife = categoryValue;
-                else if (categoryName.toLowerCase().equals("ailife"))
+                } else if (categoryName.toLowerCase().equals("ailife")) {
                     t_computerLife = categoryValue;
-                else if (categoryName.toLowerCase().equals("humancardsinplay"))
+                } else if (categoryName.toLowerCase().equals("humancardsinplay")) {
                     t_humanSetupCardsInPlay = categoryValue;
-                else if (categoryName.toLowerCase().equals("aicardsinplay"))
+                } else if (categoryName.toLowerCase().equals("aicardsinplay")) {
                     t_computerSetupCardsInPlay = categoryValue;
-                else if (categoryName.toLowerCase().equals("humancardsinhand"))
+                } else if (categoryName.toLowerCase().equals("humancardsinhand")) {
                     t_humanSetupCardsInHand = categoryValue;
-                else if (categoryName.toLowerCase().equals("aicardsinhand"))
+                } else if (categoryName.toLowerCase().equals("aicardsinhand")) {
                     t_computerSetupCardsInHand = categoryValue;
-                else if (categoryName.toLowerCase().equals("humancardsingraveyard"))
+                } else if (categoryName.toLowerCase().equals("humancardsingraveyard")) {
                     t_humanSetupGraveyard = categoryValue;
-                else if (categoryName.toLowerCase().equals("aicardsingraveyard"))
+                } else if (categoryName.toLowerCase().equals("aicardsingraveyard")) {
                     t_computerSetupGraveyard = categoryValue;
-                else if (categoryName.toLowerCase().equals("humancardsinlibrary"))
+                } else if (categoryName.toLowerCase().equals("humancardsinlibrary")) {
                     t_humanSetupLibrary = categoryValue;
-                else if (categoryName.toLowerCase().equals("aicardsinlibrary"))
+                } else if (categoryName.toLowerCase().equals("aicardsinlibrary")) {
                     t_computerSetupLibrary = categoryValue;
-                else if (categoryName.toLowerCase().equals("humancardsinexile"))
+                } else if (categoryName.toLowerCase().equals("humancardsinexile")) {
                     t_humanSetupExile = categoryValue;
-                else if (categoryName.toLowerCase().equals("aicardsinexile"))
+                } else if (categoryName.toLowerCase().equals("aicardsinexile")) {
                     t_computerSetupExile = categoryValue;
-                else if (categoryName.toLowerCase().equals("activeplayer"))
+                } else if (categoryName.toLowerCase().equals("activeplayer")) {
                     t_changePlayer = categoryValue;
-                else if (categoryName.toLowerCase().equals("activephase"))
+                } else if (categoryName.toLowerCase().equals("activephase")) {
                     t_changePhase = categoryValue;
+                }
             }
 
             in.close();
@@ -1161,16 +1234,16 @@ public class GuiDisplayUtil implements NewConstants {
         int setHumanLife = Integer.parseInt(t_humanLife);
         int setComputerLife = Integer.parseInt(t_computerLife);
 
-        String humanSetupCardsInPlay[] = t_humanSetupCardsInPlay.split(";");
-        String computerSetupCardsInPlay[] = t_computerSetupCardsInPlay.split(";");
-        String humanSetupCardsInHand[] = t_humanSetupCardsInHand.split(";");
-        String computerSetupCardsInHand[] = t_computerSetupCardsInHand.split(";");
-        String humanSetupGraveyard[] = t_humanSetupGraveyard.split(";");
-        String computerSetupGraveyard[] = t_computerSetupGraveyard.split(";");
-        String humanSetupLibrary[] = t_humanSetupLibrary.split(";");
-        String computerSetupLibrary[] = t_computerSetupLibrary.split(";");
-        String humanSetupExile[] = t_humanSetupExile.split(";");
-        String computerSetupExile[] = t_computerSetupExile.split(";");
+        String[] humanSetupCardsInPlay = t_humanSetupCardsInPlay.split(";");
+        String[] computerSetupCardsInPlay = t_computerSetupCardsInPlay.split(";");
+        String[] humanSetupCardsInHand = t_humanSetupCardsInHand.split(";");
+        String[] computerSetupCardsInHand = t_computerSetupCardsInHand.split(";");
+        String[] humanSetupGraveyard = t_humanSetupGraveyard.split(";");
+        String[] computerSetupGraveyard = t_computerSetupGraveyard.split(";");
+        String[] humanSetupLibrary = t_humanSetupLibrary.split(";");
+        String[] computerSetupLibrary = t_computerSetupLibrary.split(";");
+        String[] humanSetupExile = t_humanSetupExile.split(";");
+        String[] computerSetupExile = t_computerSetupExile.split(";");
 
         CardList humanDevSetup = new CardList();
         CardList computerDevSetup = new CardList();
@@ -1196,35 +1269,45 @@ public class GuiDisplayUtil implements NewConstants {
             AllZone.getPhase().setDevPhaseState(t_changePhase);
         }
 
-        if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none"))
+        if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
             humanDevSetup = devProcessCardsForZone(humanSetupCardsInPlay, AllZone.getHumanPlayer());
+        }
 
-        if (!t_humanSetupCardsInHand.trim().toLowerCase().equals("none"))
+        if (!t_humanSetupCardsInHand.trim().toLowerCase().equals("none")) {
             humanDevHandSetup = devProcessCardsForZone(humanSetupCardsInHand, AllZone.getHumanPlayer());
+        }
 
-        if (!t_computerSetupCardsInPlay.trim().toLowerCase().equals("none"))
+        if (!t_computerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
             computerDevSetup = devProcessCardsForZone(computerSetupCardsInPlay, AllZone.getComputerPlayer());
+        }
 
-        if (!t_computerSetupCardsInHand.trim().toLowerCase().equals("none"))
+        if (!t_computerSetupCardsInHand.trim().toLowerCase().equals("none")) {
             computerDevHandSetup = devProcessCardsForZone(computerSetupCardsInHand, AllZone.getComputerPlayer());
+        }
 
-        if (!t_computerSetupGraveyard.trim().toLowerCase().equals("none"))
+        if (!t_computerSetupGraveyard.trim().toLowerCase().equals("none")) {
             computerDevGraveyardSetup = devProcessCardsForZone(computerSetupGraveyard, AllZone.getComputerPlayer());
+        }
 
-        if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none"))
+        if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none")) {
             humanDevGraveyardSetup = devProcessCardsForZone(humanSetupGraveyard, AllZone.getHumanPlayer());
+        }
 
-        if (!t_humanSetupLibrary.trim().toLowerCase().equals("none"))
+        if (!t_humanSetupLibrary.trim().toLowerCase().equals("none")) {
             humanDevLibrarySetup = devProcessCardsForZone(humanSetupLibrary, AllZone.getHumanPlayer());
+        }
 
-        if (!t_computerSetupLibrary.trim().toLowerCase().equals("none"))
+        if (!t_computerSetupLibrary.trim().toLowerCase().equals("none")) {
             computerDevLibrarySetup = devProcessCardsForZone(computerSetupLibrary, AllZone.getComputerPlayer());
+        }
 
-        if (!t_humanSetupExile.trim().toLowerCase().equals("none"))
+        if (!t_humanSetupExile.trim().toLowerCase().equals("none")) {
             humanDevExileSetup = devProcessCardsForZone(humanSetupExile, AllZone.getHumanPlayer());
+        }
 
-        if (!t_computerSetupExile.trim().toLowerCase().equals("none"))
+        if (!t_computerSetupExile.trim().toLowerCase().equals("none")) {
             computerDevExileSetup = devProcessCardsForZone(computerSetupExile, AllZone.getComputerPlayer());
+        }
 
         AllZone.getTriggerHandler().suppressMode("ChangesZone");
         AllZone.getCombat().reset();
@@ -1240,32 +1323,42 @@ public class GuiDisplayUtil implements NewConstants {
             c.setSickness(false);
         }
 
-        if (computerDevGraveyardSetup.size() > 0)
+        if (computerDevGraveyardSetup.size() > 0) {
             AllZone.getComputerGraveyard().setCards(computerDevGraveyardSetup.toArray());
-        if (humanDevGraveyardSetup.size() > 0)
+        }
+        if (humanDevGraveyardSetup.size() > 0) {
             AllZone.getHumanGraveyard().setCards(humanDevGraveyardSetup.toArray());
+        }
 
-        if (computerDevHandSetup.size() > 0)
+        if (computerDevHandSetup.size() > 0) {
             AllZone.getComputerHand().setCards(computerDevHandSetup.toArray());
-        if (humanDevHandSetup.size() > 0)
+        }
+        if (humanDevHandSetup.size() > 0) {
             AllZone.getHumanHand().setCards(humanDevHandSetup.toArray());
+        }
 
-        if (humanDevLibrarySetup.size() > 0)
+        if (humanDevLibrarySetup.size() > 0) {
             AllZone.getHumanLibrary().setCards(humanDevLibrarySetup.toArray());
-        if (computerDevLibrarySetup.size() > 0)
+        }
+        if (computerDevLibrarySetup.size() > 0) {
             AllZone.getComputerLibrary().setCards(computerDevLibrarySetup.toArray());
+        }
 
-        if (humanDevExileSetup.size() > 0)
+        if (humanDevExileSetup.size() > 0) {
             AllZone.getHumanExile().setCards(humanDevExileSetup.toArray());
-        if (computerDevExileSetup.size() > 0)
+        }
+        if (computerDevExileSetup.size() > 0) {
             AllZone.getComputerExile().setCards(computerDevExileSetup.toArray());
+        }
 
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");
 
-        if (setComputerLife > 0)
+        if (setComputerLife > 0) {
             AllZone.getComputerPlayer().setLife(setComputerLife, null);
-        if (setHumanLife > 0)
+        }
+        if (setHumanLife > 0) {
             AllZone.getHumanPlayer().setLife(setHumanLife, null);
+        }
 
         AllZone.getGameAction().checkStateEffects();
         AllZone.getPhase().updateObservers();
@@ -1288,41 +1381,33 @@ public class GuiDisplayUtil implements NewConstants {
      * @param player a {@link forge.Player} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList devProcessCardsForZone(String[] data, Player player) {
+    public static CardList devProcessCardsForZone(final String[] data, final Player player) {
         CardList cl = new CardList();
         for (int i = 0; i < data.length; i++) {
-            String cardinfo[] = data[i].trim().split("\\|");
+            String[] cardinfo = data[i].trim().split("\\|");
 
             Card c = AllZone.getCardFactory().getCard(cardinfo[0], player);
 
             boolean hasSetCurSet = false;
-            for(String info : cardinfo)
-            {
-                if(info.startsWith("Set:"))
-                {
-                    c.setCurSetCode(info.substring(info.indexOf(':')+1));
-                    hasSetCurSet = true;                    
+            for (String info : cardinfo) {
+                if (info.startsWith("Set:")) {
+                    c.setCurSetCode(info.substring(info.indexOf(':') + 1));
+                    hasSetCurSet = true;
                 }
-                else if(info.equalsIgnoreCase("Tapped:True"))
-                {
+                else if (info.equalsIgnoreCase("Tapped:True")) {
                     c.tap();
                 }
-                else if(info.startsWith("Counters:"))
-                {
-                    String[] counterStrings = info.substring(info.indexOf(':')+1).split(",");
-                    for(String counter : counterStrings)
-                    {
+                else if (info.startsWith("Counters:")) {
+                    String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
+                    for (String counter : counterStrings) {
                         c.addCounter(Counters.valueOf(counter), 1);
                     }
                 }
-                else if(info.equalsIgnoreCase("SummonSick:True"))
-                {
+                else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
                 }
-                else if(info.equalsIgnoreCase("Morphed:True"))
-                {
-                    if(!c.getCanMorph())
-                    {
+                else if (info.equalsIgnoreCase("Morphed:True")) {
+                    if (!c.getCanMorph()) {
                         System.out.println("Setup game state - Can't morph a card without the morph keyword!");
                         continue;
                     }
@@ -1338,12 +1423,10 @@ public class GuiDisplayUtil implements NewConstants {
                     c.addType("Creature");
                 }
             }
-            
-            if (!hasSetCurSet)
-            {
+
+            if (!hasSetCurSet) {
                 c.setCurSetCode(c.getMostRecentSet());
             }
-                
 
             c.setImageFilename(CardUtil.buildFilename(c));
             for (Trigger trig : c.getTriggers()) {
@@ -1362,13 +1445,14 @@ public class GuiDisplayUtil implements NewConstants {
     public static void devModeTutor() {
         CardList lib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer());
         Object o = GuiUtils.getChoiceOptional("Choose a card", lib.toArray());
-        if (null == o) return;
-        else {
+        if (null == o) {
+            return;
+        } else {
             Card c = (Card) o;
             AllZone.getGameAction().moveToHand(c);
         }
     }
-    
+
     /**
      * <p>devModeAddCounter.</p>
      *
@@ -1377,23 +1461,28 @@ public class GuiDisplayUtil implements NewConstants {
     public static void devModeAddCounter() {
         CardList play = AllZoneUtil.getCardsInPlay();
         Object o = GuiUtils.getChoiceOptional("Add counters to which card?", play.toArray());
-        if (null == o) return;
-        else {
+        if (null == o) {
+            return;
+        } else {
             Card c = (Card) o;
             Counters counter = GuiUtils.getChoiceOptional("Which type of counter?", Counters.values());
-            if (null == counter) return;
-            else {
-            	Integer integers[] = new Integer[99];
-            	for(int j = 0; j < 99; j++) integers[j] = Integer.valueOf(j);
-            	Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
-                if (null == i) return;
-                else {
-                	c.addCounterFromNonEffect(counter, i);
+            if (null == counter) {
+                return;
+            } else {
+                Integer[] integers = new Integer[99];
+                for(int j = 0; j < 99; j++) {
+                    integers[j] = Integer.valueOf(j);
+                }
+                Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
+                if (null == i) {
+                    return;
+                } else {
+                    c.addCounterFromNonEffect(counter, i);
                 }
             }
         }
     }
-    
+
     /**
      * <p>devModeTapPerm.</p>
      *
@@ -1402,37 +1491,39 @@ public class GuiDisplayUtil implements NewConstants {
     public static void devModeTapPerm() {
         CardList play = AllZoneUtil.getCardsInPlay();
         Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
-        if (null == o) return;
-        else {
+        if (null == o) {
+            return;
+        } else {
             Card c = (Card) o;
             c.tap();
         }
     }
-    
+
     /**
      * <p>devModeUntapPerm.</p>
      *
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-    	CardList play = AllZoneUtil.getCardsInPlay();
+        CardList play = AllZoneUtil.getCardsInPlay();
         Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
-        if (null == o) return;
-        else {
+        if (null == o) {
+            return;
+        } else {
             Card c = (Card) o;
             c.untap();
         }
     }
-    
+
     /**
      * <p>devModeUnlimitedLand.</p>
      *
      * @since 1.0.16
      */
     public static void devModeUnlimitedLand() {
-    	AllZone.getHumanPlayer().addMaxLandsToPlay(100);
+        AllZone.getHumanPlayer().addMaxLandsToPlay(100);
     }
-    
+
     /**
      * <p>devModeSetLife.</p>
      *
@@ -1441,17 +1532,21 @@ public class GuiDisplayUtil implements NewConstants {
     public static void devModeSetLife() {
         ArrayList<Player> players = AllZoneUtil.getPlayersInGame();
         Object o = GuiUtils.getChoiceOptional("Set life for which player?", players.toArray());
-        if (null == o) return;
-        else {
+        if (null == o) {
+            return;
+        } else {
             Player p = (Player) o;
-            Integer integers[] = new Integer[99];
-            for(int j = 0; j < 99; j++) integers[j] = Integer.valueOf(j);
+            Integer[] integers = new Integer[99];
+            for (int j = 0; j < 99; j++) {
+                integers[j] = Integer.valueOf(j);
+            }
             Integer i = GuiUtils.getChoiceOptional("Set life to what?", integers);
-            if (null == i) return;
-            else {
+            if (null == i) {
+                return;
+            } else {
                 p.setLife(i, null);
             }
         }
     }
 
-}//end class GuiDisplayUtil
+} //end class GuiDisplayUtil
