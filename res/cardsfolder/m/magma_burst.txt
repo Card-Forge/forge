@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player. If CARDNAME was kicked, it deals 3 damage to another target creature or player.
 A:SP$ DealDamage | Cost$ 3 R Sac<2/Land> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | NumDmg$ 3 | TargetUnique$ True | SubAbility$ DBKicker | SpellDescription$ Kicker-Sacrifice two lands. (You may sacrifice two lands in addition to any other costs as you cast this spell.)
-SVar:DBKicker:DB$ DealDamage | Cost$ 3 R Sac<2/Land> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select another target creature or player | NumDmg$ 3 | TargetUnique$ True
+SVar:DBKicker:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select another target creature or player | NumDmg$ 3 | TargetUnique$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_burst.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/66.jpg
