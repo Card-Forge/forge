@@ -3747,6 +3747,8 @@ res/cardsfolder/i/incendiary.txt svneol=native#text/plain
 res/cardsfolder/i/incendiary_command.txt svneol=native#text/plain
 res/cardsfolder/i/incinerate.txt svneol=native#text/plain
 res/cardsfolder/i/incite.txt svneol=native#text/plain
+res/cardsfolder/i/incremental_blight.txt -text
+res/cardsfolder/i/incremental_growth.txt -text
 res/cardsfolder/i/incurable_ogre.txt svneol=native#text/plain
 res/cardsfolder/i/indebted_samurai.txt svneol=native#text/plain
 res/cardsfolder/i/independent_troops.txt svneol=native#text/plain
@@ -4220,7 +4222,6 @@ res/cardsfolder/k/kyoki_sanitys_eclipse.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_glider.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_negotiations.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_sniper.txt svneol=native#text/plain
-res/cardsfolder/l/incremental_growth.txt -text
 res/cardsfolder/l/lab_rats.txt svneol=native#text/plain
 res/cardsfolder/l/labyrinth_minotaur.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_grunt.txt svneol=native#text/plain
