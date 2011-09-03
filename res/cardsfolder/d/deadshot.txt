@@ -1,0 +1,12 @@
+Name:Deadshot
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ Tap | Cost$ 3 R | ValidTgts$ Creature |TgtPrompt$ Select target creature | SubAbility$ DBDamage | SpellDescription$ Tap target creature. It deals damage equal to its power to another target creature.
+SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select another target creature | NumDmg$ X |TargetUnique$ True
+# Which targeted does it pick
+SVar:X:Targeted$CardPower
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/170.jpg
+End

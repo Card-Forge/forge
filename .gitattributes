@@ -1792,6 +1792,7 @@ res/cardsfolder/d/deadfall.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_grub.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_insect.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_recluse.txt svneol=native#text/plain
+res/cardsfolder/d/deadshot.txt -text
 res/cardsfolder/d/deadshot_minotaur.txt svneol=native#text/plain
 res/cardsfolder/d/deadwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/d/death_baron.txt svneol=native#text/plain
@@ -2505,6 +2506,7 @@ res/cardsfolder/f/fallen_askari.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_cleric.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_ferromancer.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_ideal.txt svneol=native#text/plain
+res/cardsfolder/f/falling_timber.txt -text
 res/cardsfolder/f/fallow_earth.txt svneol=native#text/plain
 res/cardsfolder/f/fallowsage.txt svneol=native#text/plain
 res/cardsfolder/f/false_cure.txt svneol=native#text/plain
