@@ -1882,9 +1882,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 }
             }
             Constant.Keywords.loaded[0] = true;
+            /*
             if (Constant.Runtime.DevMode[0]) {
                 System.out.println(Constant.Keywords.NonStackingList[0].list);
-            }
+            }*/
         }
 
         /*
