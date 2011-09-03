@@ -1,0 +1,12 @@
+Name:Cone of Flame
+ManaCost:3 R R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SubAbility$ DBDamageTwo | SpellDescription$ CARDNAME deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
+SVar:DBDamageTwo:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select another target creature or player | NumDmg$ 2 |TargetUnique$ True | SubAbility$ DBDamageThree
+SVar:DBDamageThree:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select another target creature or player | NumDmg$ 3 |TargetUnique$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cone_of_flame.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/95.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/194.jpg
+End
