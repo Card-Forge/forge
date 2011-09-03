@@ -1477,6 +1477,7 @@ res/cardsfolder/c/conspiracy.txt svneol=native#text/plain
 res/cardsfolder/c/constant_mists.txt svneol=native#text/plain
 res/cardsfolder/c/constricting_tendrils.txt svneol=native#text/plain
 res/cardsfolder/c/consult_the_necrosages.txt svneol=native#text/plain
+res/cardsfolder/c/consume_strength.txt -text
 res/cardsfolder/c/consume_the_meek.txt svneol=native#text/plain
 res/cardsfolder/c/consuming_bonfire.txt svneol=native#text/plain
 res/cardsfolder/c/consumptive_goo.txt svneol=native#text/plain
@@ -3919,6 +3920,7 @@ res/cardsfolder/j/jhoira_of_the_ghitu.txt svneol=native#text/plain
 res/cardsfolder/j/jhoiras_toolbox.txt svneol=native#text/plain
 res/cardsfolder/j/jhovall_queen.txt svneol=native#text/plain
 res/cardsfolder/j/jhovall_rider.txt svneol=native#text/plain
+res/cardsfolder/j/jilt.txt -text
 res/cardsfolder/j/jin_gitaxias_core_augur.txt svneol=native#text/plain
 res/cardsfolder/j/jiwari_the_earth_aflame.txt svneol=native#text/plain
 res/cardsfolder/j/jodahs_avenger.txt svneol=native#text/plain
@@ -4298,6 +4300,7 @@ res/cardsfolder/l/leaping_lizard.txt svneol=native#text/plain
 res/cardsfolder/l/leatherback_baloth.txt svneol=native#text/plain
 res/cardsfolder/l/leave_no_trace.txt svneol=native#text/plain
 res/cardsfolder/l/leeches.txt svneol=native#text/plain
+res/cardsfolder/l/leeching_bite.txt -text
 res/cardsfolder/l/leechridden_swamp.txt svneol=native#text/plain
 res/cardsfolder/l/leering_emblem.txt svneol=native#text/plain
 res/cardsfolder/l/leering_gargoyle.txt svneol=native#text/plain

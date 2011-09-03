@@ -1,0 +1,9 @@
+Name:Consume Strength
+ManaCost:1 B G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 B G | ValidTgts$ Creature |TgtPrompt$ Select target creature | TargetUnique$ True | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
+SVar:DBPumpNeg:DB$ Pump | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select another creature | TargetUnique$ True | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_strength.jpg
+End
