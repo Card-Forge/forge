@@ -386,6 +386,38 @@ Comment=
 - Predicate: stylechanges.
 - Acquiring legacy booster longer throws.
 - Added the recent commit logs to changes.txt.
+- Added SVar:DiscardMe to some cards.
+- Added support for TargetUnique for cards like Arc Trail, where subabilities can't target something any parent ability has targeted.
+- Fixed continuous static effects that only change colors not being applied.
+- Added the LQ pic URL to Skullbriar, the Walking Grave.
+- Moved the file treasure_hunt.txt into the t folder and out of the cardsfolder.
+- Moved the new JuzamjediCube.dck file into the /res/decks/ folder.
+- Deckeditors use a unified component for TableWithCards, sorting issues fixed.
+- Fixed StackOverflow when donating stuff.
+- Moved some methods from QuestData to helper classes, the whole class rearranged.
+- Moved shop-related things to QuestUtilCards.java (eg. number of shop boosters calculation).
+- CardShop now shows how many decks use the given card.
+- Quest deck editor: press space to add card to your deck - that simple.
+- CardPool no longer allows incorrect remove numbers.
+- Removed lots of senseless javadocs.
+- Moved Incremental Growth to correct folder.
+- Added SetInfo to Consume Strength and Jilt.
+- Changed some imports and types in GuiBoosterDraftTest.java and GuiQuestOptionsTest.java (I don't know if the fixes are correct, but it fixes a broken build...)
+- Fixed a bunch of Java warnings.
+- Removed some debug code from OldGuiNewGame.java.
+- Checkstyle fixes in GuiDisplayUtil.java.
+- Many Checkstyle fixes.
+- Checkstyle fixes in some Input_* files.
+- NOTE: A commit with errors was apparently pushed previous to mine. As a result, my work has been broken also, and will unfortunately take some time to fix. The functionality described below will eventually work.
+- Big commit: Restructured Quest quests to use dck files. This required changes in many places. Among other things:
+- Model and view separated for quest main panel items
+- Quests and battles all generated from dck files
+- dck files all updated to contain metadata, main, sideboard
+- Quest dck files updated to contain [ai_extra_cards] and [human_extra_cards].
+- Fixed SetInfo for Bloodfire Dwarf.
+- Fixed a couple of compile errors from 10194, yet could not handle them all.
+- Frantic changes to Deck and DeckManager to fix errors in r10194.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
