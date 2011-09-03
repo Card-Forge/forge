@@ -7336,6 +7336,7 @@ res/cardsfolder/s/steadfastness.txt svneol=native#text/plain
 res/cardsfolder/s/steady_progress.txt svneol=native#text/plain
 res/cardsfolder/s/steal_artifact.txt svneol=native#text/plain
 res/cardsfolder/s/steal_enchantment.txt svneol=native#text/plain
+res/cardsfolder/s/steal_strength.txt -text
 res/cardsfolder/s/steam_blast.txt svneol=native#text/plain
 res/cardsfolder/s/steam_catapult.txt svneol=native#text/plain
 res/cardsfolder/s/steam_frigate.txt svneol=native#text/plain

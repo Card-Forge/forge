@@ -4,9 +4,9 @@ Types:Creature Beast
 Text:no text
 PT:4/3
 A:AB$ Pump | Cost$ 2 B G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+2: | NumAtt$ +2 | NumDef$ +2 | SubAbility$ SVar=DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
-SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | TgtPromp$ Select target creature to get -2/-2 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_groodion.jpg
+SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | TgtPromp$ Select target creature to get -2/-2 | TargetUnique$ True | IsCurse$ True
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_groodion.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/204.jpg
 Oracle:{2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
 End
