@@ -1,6 +1,17 @@
-quest3
-[general]
-constructed
+[metadata]
+ID=3
+Name=quest3
+DisplayName=Dungeon Crawling (Black)
+Difficulty=Medium
+Description=Guarded by black creatures.
+Repeatable=true
+NumberWinsRequired=20
+CardReward=3 black rares
+CreditsReward=100
+Icon=Dungeon Crawling Black.jpg
+AILife=25
+Deck Type=constructed
+Comment=
 [main]
 20 Swamp
 4 Charcoal Diamond
@@ -27,3 +38,6 @@ constructed
 1 Beacon of Unrest
 1 Zombify
 [sideboard]
+[human_extra_cards]
+[ai_extra_cards]
+Infernal Genesis

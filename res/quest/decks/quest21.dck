@@ -1,6 +1,17 @@
-quest21
-[general]
-constructed
+[metadata]
+ID=21
+Name=quest21
+DisplayName=Private Domain
+Difficulty=Expert
+Description=During your travels, you accidentally stumble upon the domain of an evil, powerful wizard. A fight to the death ensues.
+Repeatable=false
+NumberWinsRequired=96
+CardReward=6 random rares
+CreditsReward=500
+Icon=Private Domain.jpg
+AILife=50
+Deck Type=constructed
+Comment=
 [main]
 2 Underground Sea
 2 Plateau
@@ -29,3 +40,11 @@ constructed
 1 Mountain
 2 Wandering Stream
 [sideboard]
+[human_extra_cards]
+Strip Mine
+[ai_extra_cards]
+Plains
+Island
+Mountain
+Swamp
+Forest

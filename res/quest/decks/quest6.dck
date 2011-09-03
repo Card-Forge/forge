@@ -1,6 +1,17 @@
-quest6
-[general]
-constructed
+[metadata]
+ID=6
+Name=quest6
+DisplayName=Dungeon Crawling (Colorless)
+Difficulty=Hard
+Description=The inhabitants of this plane tread with a light step.
+Repeatable=true
+NumberWinsRequired=28
+CardReward=3 colorless rares
+CreditsReward=150
+Icon=Dungeon Crawling Colorless.jpg
+AILife=30
+Deck Type=constructed
+Comment=
 [main]
 20 Island
 20 Swamp
@@ -74,3 +85,6 @@ constructed
 1 Whipstitched Zombie
 1 Yawgmoth Demon
 [sideboard]
+[human_extra_cards]
+[ai_extra_cards]
+3 Eon Hub

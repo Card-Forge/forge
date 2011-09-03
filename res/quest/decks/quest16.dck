@@ -1,6 +1,17 @@
-quest16
-[general]
-constructed
+[metadata]
+ID=16
+Name=quest16
+DisplayName=Mines of Kazum Durl
+Difficulty=Hard
+Description=While exploring a mine with a group of dwarves the mine caves in. You start to dig out and then realize that your group is not alone.
+Repeatable=false
+NumberWinsRequired=52
+CardReward=4 green rares
+CreditsReward=250
+Icon=Mines of Kazum Durl.jpg
+AILife=30
+Deck Type=constructed
+Comment=
 [main]
 1 Proper Burial
 2 Disenchant
@@ -26,3 +37,14 @@ constructed
 1 Doubling Season
 3 Thelonite Hermit
 [sideboard]
+[human_extra_cards]
+Dwarven Demolition Team
+Dwarven Pony
+Dwarven Trader
+[ai_extra_cards]
+Wall of Earth
+Wall of Air
+Wall of Ice
+Wall of Light
+Carrion Wall
+Steel Wall

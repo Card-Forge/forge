@@ -1,6 +1,17 @@
-quest8
-[general]
-constructed
+[metadata]
+ID=8
+Name=quest8
+DisplayName=A Wolf in Sheep's Clothing
+Difficulty=Medium
+Description=The local sheep farm is under attack by a pack of wolves. Kill the wolves, save the sheep!
+Repeatable=false
+NumberWinsRequired=28
+CardReward=3 random rares
+CreditsReward=200
+Icon=A Wolf in Sheeps Clothing.jpg
+AILife=25
+Deck Type=constructed
+Comment=
 [main]
 1 Temple Garden
 1 Mox Emerald
@@ -20,3 +31,8 @@ constructed
 4 Tundra Wolves
 4 Savannah
 [sideboard]
+[human_extra_cards]
+TOKEN|G|0|1|sheep|creature|sheep
+TOKEN|G|0|1|sheep|creature|sheep
+TOKEN|G|0|1|sheep|creature|sheep
+[ai_extra_cards]

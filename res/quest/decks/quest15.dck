@@ -1,6 +1,17 @@
-quest15
-[general]
-constructed
+[metadata]
+ID=15
+Name=quest15
+DisplayName=Don't Play With Matches
+Difficulty=Hard
+Description=The goblins are battling the elves. Those pesky elves, will they ever learn. Do not play with fire!
+Repeatable=false
+NumberWinsRequired=52
+CardReward=4 red rares
+CreditsReward=200
+Icon=Dont Play With Matches.jpg
+AILife=30
+Deck Type=constructed
+Comment=
 [main]
 4 Plateau
 4 Druid of the Anima
@@ -22,3 +33,10 @@ constructed
 4 Elvish Harbinger
 4 Llanowar Elves
 [sideboard]
+[human_extra_cards]
+1 Mudbutton Torchrunner
+1 Scuzzback Scrapper
+[ai_extra_cards]
+1 Heedless One
+1 Norwood Archers
+1 Wildslayer Elves

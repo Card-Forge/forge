@@ -1,6 +1,17 @@
-quest20
-[general]
-constructed
+[metadata]
+ID=20
+Name=quest20
+DisplayName=Blood Oath
+Difficulty=Hard
+Description=A druid saves your life and the two of you take a blood oath. It is now time to fulfill your oath.
+Repeatable=false
+NumberWinsRequired=80
+CardReward=5 colorless rares
+CreditsReward=300
+Icon=Blood Oath.jpg
+AILife=30
+Deck Type=constructed
+Comment=
 [main]
 4 Underground Sea
 4 Tropical Island
@@ -32,3 +43,11 @@ constructed
 1 Thoughtseize
 1 Emrakul, the Aeons Torn
 [sideboard]
+[human_extra_cards]
+Counterbalance
+Hatching Plans
+Ley Druid
+[ai_extra_cards]
+Ior Ruin Expedition
+Oversold Cemetery
+Trapjaw Kelpie

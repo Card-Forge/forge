@@ -1,6 +1,17 @@
-quest1
-[general]
-constructed
+[metadata]
+ID=1
+Name=quest1
+DisplayName=Dungeon Crawling (White)
+Difficulty=Medium
+Description=This realm is guarded by a divine entity laying his protecting hand on each living being.
+Repeatable=true
+NumberWinsRequired=20
+CardReward=3 white rares
+CreditsReward=100
+Icon=Dungeon Crawling White.jpg
+AILife=25
+Deck Type=constructed
+Comment=
 [main]
 24 Plains
 1 Abbey Gargoyles
@@ -40,3 +51,6 @@ constructed
 1 Retribution of the Meek
 1 Sunlance
 [sideboard]
+[human_extra_cards]
+[ai_extra_cards]
+1 Divine Presence

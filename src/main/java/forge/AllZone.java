@@ -17,6 +17,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
+import forge.quest.data.DeckSingleQuest;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -40,9 +41,9 @@ public final class AllZone implements NewConstants {
 
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
-
-    /** Global <code>QuestAssignment</code>. */
-    private static Quest_Assignment questAssignment = null;
+    
+    /** Global <code>currentQuest</code>. */
+    private static forge.quest.data.DeckSingleQuest currentQuest = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -129,25 +130,25 @@ public final class AllZone implements NewConstants {
     public static void setQuestData(final QuestData questData0) {
         questData = questData0;
     }
-
+    
     /**
-     * <p>getQuestAssignment.</p>
+     * <p>getCurrentQuest.</p>
      *
-     * @return a {@link forge.Quest_Assignment} object.
-     * @since 1.0.15
+     * @return a {@link forge.quest.data.QuestData} object.
+     * 
      */
-    public static Quest_Assignment getQuestAssignment() {
-        return questAssignment;
+    public static forge.quest.data.DeckSingleQuest getCurrentQuest() {
+        return currentQuest;
     }
 
     /**
-     * <p>setQuestAssignment.</p>
+     * <p>setCurrentQuest.</p>
      *
-     * @param assignment a {@link forge.Quest_Assignment} object.
-     * @since 1.0.15
+     * @param a DeckSingleQuest object.
+     * 
      */
-    public static void setQuestAssignment(final Quest_Assignment assignment) {
-        questAssignment = assignment;
+    public static void setCurrentQuest(final DeckSingleQuest qq) {
+        currentQuest = qq;
     }
 
     /**

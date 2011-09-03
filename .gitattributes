@@ -9774,6 +9774,7 @@ src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
+src/main/java/forge/gui/SelectablePanel.java -text
 src/main/java/forge/gui/deckeditor/CardPanelBase.java -text
 src/main/java/forge/gui/deckeditor/CardPanelHeavy.java -text
 src/main/java/forge/gui/deckeditor/CardPanelLite.java -text
@@ -9822,6 +9823,10 @@ src/main/java/forge/properties/NewConstants.java svneol=native#text/plain
 src/main/java/forge/properties/Preferences.java svneol=native#text/plain
 src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/DeckSingleBattle.java svneol=native#text/plain
+src/main/java/forge/quest/data/DeckSingleQuest.java svneol=native#text/plain
+src/main/java/forge/quest/data/ManagerBattle.java svneol=native#text/plain
+src/main/java/forge/quest/data/ManagerQuest.java -text
 src/main/java/forge/quest/data/QuestBattleManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
@@ -9853,8 +9858,11 @@ src/main/java/forge/quest/data/pet/QuestPetManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/QuestPetPlant.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/QuestPetWolf.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/gui/PanelSingleBattle.java -text
+src/main/java/forge/quest/gui/PanelSingleQuest.java -text
 src/main/java/forge/quest/gui/QuestAbstractPanel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/QuestFrame.java svneol=native#text/plain
+src/main/java/forge/quest/gui/QuestMainPanel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/QuestOptions.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/QuestBazaarItem.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/QuestBazaarPanel.java svneol=native#text/plain
@@ -9923,7 +9931,6 @@ src/test/java/forge/GuiWinLoseTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseTest.java svneol=native#text/plain
 src/test/java/forge/ReadBoosterPackTest.java svneol=native#text/plain
-src/test/java/forge/ReadQuestAssignmentTest.java svneol=native#text/plain
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
 src/test/java/forge/card/cardFactory/CardFactoryTest.java svneol=native#text/plain

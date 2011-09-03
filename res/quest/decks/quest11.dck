@@ -1,6 +1,17 @@
-quest11
-[general]
-constructed
+[metadata]
+ID=11
+Name=quest11
+DisplayName=The King's Contest
+Difficulty=Hard
+Description=The king is holding a contest. You are invited to participate and compete against other legends of this era.
+Repeatable=false
+NumberWinsRequired=40
+CardReward=3 random rares
+CreditsReward=150
+Icon=The Kings Contest.jpg
+AILife=30
+Deck Type=constructed
+Comment=
 [main]
 1 Isamaru, Hound of Konda
 4 Plateau
@@ -47,3 +58,7 @@ constructed
 3 Mountain
 1 Tuknir Deathlock
 [sideboard]
+[human_extra_cards]
+Seal of Cleansing
+[ai_extra_cards]
+Loyal Retainers
