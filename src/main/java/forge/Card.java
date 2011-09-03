@@ -144,7 +144,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Player owner = null;
     private ArrayList<Object> controllerObjects = new ArrayList<Object>();
     private String imageName = "";
-    private String rarity = "";
+    //private String rarity = "";
     private String text = "";
     private String manaCost = "";
     private String echoCost = "";

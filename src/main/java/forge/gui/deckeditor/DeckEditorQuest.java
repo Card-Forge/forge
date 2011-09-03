@@ -3,7 +3,6 @@ package forge.gui.deckeditor;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;

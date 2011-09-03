@@ -135,7 +135,7 @@ public final class TableWithCards {
     }
 
     public void addCard(final CardPrinted card) {
-        int n = table.getSelectedRow();
+        //int n = table.getSelectedRow();
         pool.add(card);
         if (isUnfiltered()) { model.addCard(card); }
         updateView();

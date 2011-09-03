@@ -32,7 +32,6 @@ import forge.card.CardRules;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.card.CardType;
-import forge.gui.deckeditor.TableModel;
 
 import net.miginfocom.swing.MigLayout;
 

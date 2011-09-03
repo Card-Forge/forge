@@ -61,7 +61,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
 
     private String currentDeckName;
     private String currentGameType;
-    private String currentDeckPlayerType;
+    //private String currentDeckPlayerType;
 
     /**
      * <p>Setter for the field <code>currentGameType</code>.</p>
@@ -741,7 +741,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
      */
     public final void showSealedDeck(final Deck deck) {
         setDeckData(deck.getName(), true);
-        currentDeckPlayerType = deck.getMetadata("PlayerType");
+        //currentDeckPlayerType = deck.getMetadata("PlayerType");
         deckDisplay.setDecks(deck.getSideboard(), deck.getMain());
     }//showSealedDeck()
 

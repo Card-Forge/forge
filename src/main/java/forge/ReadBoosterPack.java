@@ -28,7 +28,7 @@ import net.slightlymagic.maxmtg.Predicate;
 public class ReadBoosterPack implements NewConstants {
 
     
-    private List<CardPrinted> mythics;
+    //private List<CardPrinted> mythics;
     private List<CardPrinted> rares;
     private List<CardPrinted> uncommons;
     private List<CardPrinted> commons;
@@ -39,7 +39,7 @@ public class ReadBoosterPack implements NewConstants {
      * <p>Constructor for ReadBoosterPack.</p>
      */
     public ReadBoosterPack() {
-        mythics = CardPrinted.Predicates.Presets.isMythicRare.select(CardDb.instance().getAllUniqueCards()); 
+        //mythics = CardPrinted.Predicates.Presets.isMythicRare.select(CardDb.instance().getAllUniqueCards()); 
         rares = CardPrinted.Predicates.Presets.isRare.select(CardDb.instance().getAllUniqueCards());
         commons = CardPrinted.Predicates.Presets.isCommon.select(CardDb.instance().getAllUniqueCards());
         uncommons = CardPrinted.Predicates.Presets.isUncommon.select(CardDb.instance().getAllUniqueCards());

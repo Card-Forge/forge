@@ -19,7 +19,6 @@ import javax.swing.*;
 import net.slightlymagic.maxmtg.Predicate;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
