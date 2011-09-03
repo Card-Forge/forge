@@ -1,6 +1,8 @@
 package forge.quest.data;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
 import com.google.code.jyield.Generator;
@@ -9,6 +11,8 @@ import com.google.code.jyield.YieldUtils;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
+import forge.card.CardPrinted;
+import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 
@@ -139,14 +143,14 @@ public class DeckSingleQuest {
      * 
      * @return String[]
      */
-    public ArrayList<String> getCardRewardList() {
-        ArrayList<String> cardRewardList = new ArrayList<String>(); 
+    public List<CardPrinted> getCardRewardList() {
+        List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
         
         String[] details = this.getCardReward().split(" ");
         
         // Set quantity, color and rarity from file meta.
         String cardscolor;
-        Constant.Rarity rarity;
+        CardRarity rarity;
         int quantity = Integer.parseInt(details[0]);
         
         // Color
@@ -185,17 +189,15 @@ public class DeckSingleQuest {
         
         // Rarity
         if(details[2].toLowerCase().equals("rares")) {
-            rarity = Constant.Rarity.Rare;
+            rarity = CardRarity.Rare;
         }
         else {
-            rarity = Constant.Rarity.Common;
+            rarity = CardRarity.Common;
         }
         
         // Generate deck list.
         QuestBoosterPack pack = new QuestBoosterPack();
-        pack.generateCards(quantity, rarity, cardscolor);
-        
-        return cardRewardList;
+        return pack.generateCards(quantity, rarity, cardscolor);
     }
     
     /**

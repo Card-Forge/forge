@@ -5,6 +5,8 @@ import forge.*;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.gui.SelectablePanel;
+import forge.gui.deckeditor.DeckEditorQuest;
+import forge.gui.deckeditor.DeckEditorShop;
 import forge.quest.data.DeckSingleBattle;
 import forge.quest.data.ManagerBattle;
 import forge.quest.data.QuestData;
@@ -599,7 +601,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        Gui_Quest_DeckEditor g = new Gui_Quest_DeckEditor();
+        DeckEditorQuest g = new DeckEditorQuest();
 
         g.show(exit);
         g.setVisible(true);
@@ -628,7 +630,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        Gui_CardShop g = new Gui_CardShop(questData);
+        DeckEditorShop g = new DeckEditorShop(questData);
 
         g.show(exit);
         g.setVisible(true);
