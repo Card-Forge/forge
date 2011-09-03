@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 B G | ValidTgts$ Creature |TgtPrompt$ Select target creatur
 SVar:DBPumpNeg:DB$ Pump | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select another creature | TargetUnique$ True | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_strength.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/93.jpg
 End
