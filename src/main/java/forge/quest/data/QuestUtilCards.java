@@ -2,7 +2,9 @@ package forge.quest.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.ReadBoosterPack;
@@ -168,4 +170,19 @@ public final class QuestUtilCards {
     public void resetNewList() {
         q.newCardList.clear();
     }
+
+    // These functions provide a way to sort and compare cards in a table according to their new-ness
+    // It might be a good idea to store them in a base class for both quest-mode deck editors
+    // Maybe we should consider doing so later
+    @SuppressWarnings("rawtypes")
+    public final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnNewCompare =
+        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
+            public Comparable apply(final Entry<CardPrinted, Integer> from) {
+                return q.newCardList.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            } };
+    public final Lambda1<Object, Entry<CardPrinted, Integer>> fnNewGet =
+        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
+            public Object apply(final Entry<CardPrinted, Integer> from) {
+                return q.newCardList.contains(from.getKey()) ? "NEW" : "";
+            } };
 }

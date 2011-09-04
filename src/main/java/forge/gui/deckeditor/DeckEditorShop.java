@@ -142,7 +142,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         top.setup(columns, cardView);
 
         columnsBelow.add(new TableColumnInfo<CardPrinted>("#Dk", 30, fnDeckCompare, fnDeckGet));
-        columnsBelow.add(new TableColumnInfo<CardPrinted>("New", 30, fnNewCompare, fnNewGet));
+        columnsBelow.add(new TableColumnInfo<CardPrinted>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
         columnsBelow.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
         bottom.setup(columnsBelow, cardView);
 
@@ -303,16 +303,6 @@ public final class DeckEditorShop extends DeckEditorBase {
                 Integer iValue = decksUsingMyCards.get(from.getKey());
                 return iValue == null ? "" : iValue.toString();
             } };
-            
-    @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnNewCompare =
-        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
-            public Comparable apply(final Entry<CardPrinted, Integer> from) {
-                return newCardsList.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-            } };
-    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnNewGet =
-        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
-            public Object apply(final Entry<CardPrinted, Integer> from) {
-                return newCardsList.contains(from.getKey()) ? "NEW" : "";
-            } };
+
+
 }

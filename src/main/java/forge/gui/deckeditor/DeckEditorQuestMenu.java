@@ -1,7 +1,6 @@
 package forge.gui.deckeditor;
 
 
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.card.CardRules;
@@ -14,6 +13,7 @@ import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.quest.data.QuestData;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -44,10 +44,6 @@ public class DeckEditorQuestMenu extends JMenuBar {
     /** Constant <code>serialVersionUID=-4052319220021158574L</code>. */
     private static final long serialVersionUID = -4052319220021158574L;
 
-    //this should be false in the public version
-    //if true, the Quest Deck editor will let you edit the computer's decks
-    private final boolean canEditComputerDecks;
-
     /** Constant <code>deckEditorName="Deck Editor"</code>. */
     private static final String deckEditorName = "Deck Editor";
 
@@ -69,21 +65,12 @@ public class DeckEditorQuestMenu extends JMenuBar {
      * @param d a {@link forge.gui.deckeditor.DeckDisplay} object.
      * @param exit a {@link forge.Command} object.
      */
-    public DeckEditorQuestMenu(final DeckDisplay d, final Command exit) {
-        //is a file named "edit" in this directory
-        //lame but it works, I don't like 2 versions of Forge floating around
-        //one that lets you edit the AI decks and one that doesn't
-        File f = new File("edit");
-        if (f.exists()) {
-            canEditComputerDecks = true;
-        } else {
-            canEditComputerDecks = false;
-        }
+    public DeckEditorQuestMenu(QuestData q, final DeckDisplay d, final Command exit) {
 
         deckDisplay = d;
-        d.setTitle(deckEditorName);
+        questData = q;
 
-        questData = AllZone.getQuestData();
+        d.setTitle(deckEditorName);
 
         exitCommand = exit;
 

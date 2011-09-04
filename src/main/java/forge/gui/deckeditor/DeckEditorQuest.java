@@ -1,6 +1,5 @@
 package forge.gui.deckeditor;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.card.CardPool;
@@ -10,14 +9,24 @@ import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestData;
 import forge.view.swing.OldGuiNewGame;
 
-import javax.swing.*;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -41,8 +50,9 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     private JButton addButton = new JButton();
     private JButton removeButton = new JButton();
     private JButton analysisButton = new JButton();
-
     private JLabel labelSortHint = new JLabel();
+
+    private QuestData questData;
 
 
     public void show(final Command exitCommand) {
@@ -58,17 +68,16 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent ev) {
+            public void windowClosing(final WindowEvent ev) {
                 customMenu.close();
             }
         });
 
         setup();
 
-        customMenu = new DeckEditorQuestMenu(this, exit);
+        customMenu = new DeckEditorQuestMenu(questData, this, exit);
         this.setJMenuBar(customMenu);
 
-        forge.quest.data.QuestData questData = AllZone.getQuestData();
         Deck deck = null;
 
         // open deck that the player used if QuestData has it
@@ -85,7 +94,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         CardPoolView bottomPool = deck.getMain();
         CardPool cardpool = new CardPool();
-        cardpool.addAll(AllZone.getQuestData().getCards().getCardpool());
+        cardpool.addAll(questData.getCards().getCardpool());
 
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(bottomPool);
@@ -98,7 +107,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         top.sort(3, true);// then sort by color
 
         bottom.sort(1, true);
-    }// show(Command)
+    } // show(Command)
 
 
     /**
@@ -116,6 +125,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
         columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<CardPrinted>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
         // Add NEW column here
 
         top.setup(columns, cardView);
@@ -131,7 +141,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // setExtendedState(Frame.MAXIMIZED_BOTH);
     } // setupAndDisplay()
 
-    public DeckEditorQuest() {
+    public DeckEditorQuest(QuestData questData2) {
+        questData = questData2;
         try {
             filterBoxes = new FilterCheckBoxes(false);
             top = new TableWithCards("All Cards", true);
@@ -155,14 +166,14 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         if (!OldGuiNewGame.useLAFFonts.isSelected())
             removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove Card");
-        removeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        removeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
                 removeButtonActionPerformed(e);
             }
         });
         addButton.setText("Add Card");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
                 addButtonActionPerformed(e);
             }
         });
@@ -172,8 +183,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         addButton.setBounds(new Rectangle(23, 403, 146, 49));
 
         analysisButton.setText("Deck Analysis");
-        analysisButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        analysisButton.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
                 analysisButton_actionPerformed(e);
             }
         });
@@ -276,9 +287,9 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     }
 
 
-    public void addCheatCard(CardPrinted card) {
+    public void addCheatCard(final CardPrinted card) {
         top.addCard(card);
-        AllZone.getQuestData().getCards().getCardpool().add(card);
+        questData.getCards().getCardpool().add(card);
     }
 
 }

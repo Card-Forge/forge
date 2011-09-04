@@ -590,7 +590,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         };
 
-        DeckEditorQuest g = new DeckEditorQuest();
+        DeckEditorQuest g = new DeckEditorQuest(AllZone.getQuestData());
 
         g.show(exit);
         g.setVisible(true);
