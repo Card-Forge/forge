@@ -4,12 +4,15 @@ package forge.deck;
 import forge.Constant;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -219,8 +222,15 @@ public class DeckManager {
 
         files = deckDir.listFiles(DCKFileFilter);
         for (File file : files) {
-            Deck newDeck = readDeck(file);
-            deckMap.put(newDeck.getName(), newDeck);
+            
+            try {
+                Deck newDeck = readDeck(file);
+                deckMap.put(newDeck.getName(), newDeck);
+            } catch ( NoSuchElementException ex ) {
+                String message = String.format("Your deck '%s' failed to load beacuse %s", file.getName(), ex.getMessage());
+                JOptionPane.showMessageDialog(null, message, "One of your decks failed to load", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
 
         files = deckDir.listFiles(BDKFileFilter);

@@ -69,7 +69,7 @@ public final class CardDb {
     public void addNewCard(final CardRules card) {
         if (null == card) { return; }
         //System.out.println(card.getName());
-        String cardName = card.getName();
+        String cardName = card.getName().toLowerCase();
 
         // 1. register among oracle uniques
         cards.put(cardName, card);
@@ -102,9 +102,9 @@ public final class CardDb {
     public CardPrinted getCard(final String name) {
         // Sometimes they read from decks things like "CardName|Set" - but we can handle it
         int pipePos = name.indexOf('|');
-        String cardName = name;
+        String cardName = name.toLowerCase();
         if (pipePos >= 0) {
-            cardName = name.substring(0, pipePos);
+            cardName = name.substring(0, pipePos).toLowerCase();
             String setName = name.substring(pipePos + 1);
             // only if set is not blank try to load it
             if (StringUtils.isNotBlank(setName)) {
@@ -120,13 +120,13 @@ public final class CardDb {
     public CardPrinted getCard(final String name, final String set) { return getCard(name, set, 0); }
     public CardPrinted getCard(final String name, final String set, final int artIndex) {
         // 1. get set
-        Map<String, CardPrinted[]> cardsFromset = allCardsBySet.get(set);
+        Map<String, CardPrinted[]> cardsFromset = allCardsBySet.get(set.toUpperCase());
         if (null == cardsFromset) {
             String err = String.format("Asked for card '%s' from set '%s': that set was not found. :(", name, set);
             throw new NoSuchElementException(err);
         }
         // 2. Find the card itself
-        CardPrinted[] cardCopies = cardsFromset.get(name);
+        CardPrinted[] cardCopies = cardsFromset.get(name.toLowerCase());
         if (null == cardCopies) {
             String err = String.format("Asked for card '%s' from '%s': set found, but the card wasn't. :(", name, set);
             throw new NoSuchElementException(err);
