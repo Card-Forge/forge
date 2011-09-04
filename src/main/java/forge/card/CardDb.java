@@ -39,6 +39,8 @@ public final class CardDb {
             }
         }
     }
+    private static List<String> skippedCards = new ArrayList<String>();
+    public static List<String> getSkippedCards() { return skippedCards; }
 
     // Here oracle cards
     private final Map<String, CardRules> cards = new Hashtable<String, CardRules>();
@@ -61,13 +63,17 @@ public final class CardDb {
 
     private CardDb(final Iterator<CardRules> parser) {
         while (parser.hasNext()) {
-            addNewCard(parser.next());
+            CardRules nextCard = parser.next();
+            boolean wasAdded = addNewCard(nextCard);
+            if (!wasAdded) {
+                skippedCards.add(nextCard.getName());
+            }
         }
         // TODO: consider using Collections.unmodifiableList wherever possible
     }
 
-    public void addNewCard(final CardRules card) {
-        if (null == card) { return; }
+    public boolean addNewCard(final CardRules card) {
+        if (null == card) { return true; } // consider that a success
         //System.out.println(card.getName());
         String cardName = card.getName().toLowerCase();
 
@@ -95,7 +101,12 @@ public final class CardDb {
                 cardCopies[i] = lastAdded;
             }
         }
-        uniqueCards.put(cardName, lastAdded);
+
+        if (null != lastAdded) {
+            uniqueCards.put(cardName, lastAdded);
+            return true;
+        }
+        return false;
     }
 
     // Single fetch
@@ -159,4 +170,14 @@ public final class CardDb {
 
     public List<CardPrinted> getAllCards() { return allCardsFlat; }
 
+    
+    public class NoSetsException extends RuntimeException
+    {
+        private static final long serialVersionUID = -8962691656197179214L;
+        public final String cardName;
+        public NoSetsException(String cardName) { this.cardName = cardName; }
+        @Override public String toString() {
+            return String.format("%s: The card '%s' was not assigned any set, it won't be loaded into game", this.getClass().getName(), cardName);
+        }
+    }
 }

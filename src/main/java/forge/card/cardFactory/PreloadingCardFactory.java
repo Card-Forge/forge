@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
@@ -79,6 +81,12 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         // this fills in our map of card names to Card instances.
         read.run();
         CardDb.setup(listCardRules.iterator());
+        
+        List<String> skipped = CardDb.getSkippedCards();
+        if (!skipped.isEmpty()) {
+            String message = String.format("The following cards are lacking of correct SetInfo: %s", StringUtils.join(skipped, ", "));
+            ErrorViewer.showError(message);
+        }
     } // readCard()
 
 } //end class PreloadingCardFactory
