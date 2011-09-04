@@ -50,22 +50,22 @@ public class StaticAbility_Continuous {
 		if (params.containsKey("SetPower")) {
 			String setP = params.get("SetPower");
 			setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP) 
-					: CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setP).split("\\$")[1]);
+					: CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setP));
 		}
 		
 		if (params.containsKey("SetToughness")) {
 			String setT = params.get("SetToughness");
 			setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT) 
-					: CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setT).split("\\$")[1]);
+					: CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setT));
 		}
 		
 		if (params.containsKey("AddPower")) {
 			if (params.get("AddPower").equals("X")) {
-				powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X").split("\\$")[1]);
+				powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
 				se.setXValue(powerBonus);
 			}
 			else if (params.get("AddPower").equals("Y")) {
-				powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y").split("\\$")[1]);
+				powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
 				se.setYValue(powerBonus);
 			}
 			else powerBonus = Integer.valueOf(params.get("AddPower"));
@@ -73,11 +73,11 @@ public class StaticAbility_Continuous {
 		
 		if (params.containsKey("AddToughness")) {
 			if (params.get("AddToughness").equals("X")) {
-				toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X").split("\\$")[1]);
+				toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
 				se.setXValue(toughnessBonus);
 			}
 			else if (params.get("AddToughness").equals("Y")) {
-				toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y").split("\\$")[1]);
+				toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
 				se.setYValue(toughnessBonus);
 			}
 			else toughnessBonus = Integer.valueOf(params.get("AddToughness"));
