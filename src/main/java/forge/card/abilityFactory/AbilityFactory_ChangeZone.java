@@ -1,6 +1,18 @@
 package forge.card.abilityFactory;
 
-import forge.*;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListUtil;
+import forge.CombatUtil;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.GameActionUtil;
+import forge.MyRandom;
+import forge.Player;
+import forge.PlayerZone;
+
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -17,7 +29,11 @@ import java.util.Random;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_ChangeZone {
+public final class AbilityFactory_ChangeZone {
+
+    private AbilityFactory_ChangeZone() {
+        throw new AssertionError();
+    }
 
     // Change Zone is going to work much differently than other AFs.
     // *NOTE* Please do not use this as a base for copying and creating your own AF
@@ -26,98 +42,98 @@ public class AbilityFactory_ChangeZone {
     /**
      * <p>createAbilityChangeZone.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityChangeZone(final AbilityFactory AF) {
-        final SpellAbility abChangeZone = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createAbilityChangeZone(final AbilityFactory af) {
+        final SpellAbility abChangeZone = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3728332812890211671L;
 
             @Override
             public boolean canPlayAI() {
-                return changeZoneCanPlayAI(AF, this);
+                return changeZoneCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                changeZoneResolve(AF, this);
+                changeZoneResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return changeZoneDescription(AF, this);
+                return changeZoneDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(boolean mandatory) {
-                return changeZoneTriggerAI(AF, this, mandatory);
+                return changeZoneTriggerAI(af, this, mandatory);
             }
 
         };
-        setMiscellaneous(AF, abChangeZone);
+        setMiscellaneous(af, abChangeZone);
         return abChangeZone;
     }
 
     /**
      * <p>createSpellChangeZone.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellChangeZone(final AbilityFactory AF) {
-        final SpellAbility spChangeZone = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellChangeZone(final AbilityFactory af) {
+        final SpellAbility spChangeZone = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
             public boolean canPlayAI() {
-                return changeZoneCanPlayAI(AF, this);
+                return changeZoneCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                changeZoneResolve(AF, this);
+                changeZoneResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return changeZoneDescription(AF, this);
+                return changeZoneDescription(af, this);
             }
         };
-        setMiscellaneous(AF, spChangeZone);
+        setMiscellaneous(af, spChangeZone);
         return spChangeZone;
     }
 
     /**
      * <p>createDrawbackChangeZone.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackChangeZone(final AbilityFactory AF) {
-        final SpellAbility dbChangeZone = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackChangeZone(final AbilityFactory af) {
+        final SpellAbility dbChangeZone = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
             public void resolve() {
-                changeZoneResolve(AF, this);
+                changeZoneResolve(af, this);
             }
 
             @Override
             public boolean chkAI_Drawback() {
-                return changeZonePlayDrawbackAI(AF, this);
+                return changeZonePlayDrawbackAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return changeZoneDescription(AF, this);
+                return changeZoneDescription(af, this);
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
-                return changeZoneTriggerAI(AF, this, mandatory);
+            public boolean doTrigger(final boolean mandatory) {
+                return changeZoneTriggerAI(af, this, mandatory);
             }
         };
-        setMiscellaneous(AF, dbChangeZone);
+        setMiscellaneous(af, dbChangeZone);
         return dbChangeZone;
     }
 
@@ -128,7 +144,7 @@ public class AbilityFactory_ChangeZone {
      * @param hiddenOverride a boolean.
      * @return a boolean.
      */
-    public static boolean isHidden(String origin, boolean hiddenOverride) {
+    public static boolean isHidden(final String origin, final boolean hiddenOverride) {
         return (hiddenOverride || origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard"));
     }
 
@@ -138,8 +154,9 @@ public class AbilityFactory_ChangeZone {
      * @param origin a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean isKnown(String origin) {
-        return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield") || origin.equals("Stack"));
+    public static boolean isKnown(final String origin) {
+        return (origin.equals("Graveyard") || origin.equals("Exile")
+                || origin.equals("Battlefield") || origin.equals("Stack"));
     }
 
     /**
@@ -148,19 +165,22 @@ public class AbilityFactory_ChangeZone {
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void setMiscellaneous(AbilityFactory af, SpellAbility sa) {
+    private static void setMiscellaneous(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
         Target tgt = af.getAbTgt();
 
         // Don't set the zone if it targets a player
-        if (tgt != null && !tgt.canTgtPlayer())
+        if (tgt != null && !tgt.canTgtPlayer()) {
             af.getAbTgt().setZone(origin);
+        }
 
-        if (!(sa instanceof Ability_Sub))
-            if (origin.equals("Battlefield") || params.get("Destination").equals("Battlefield"))
+        if (!(sa instanceof Ability_Sub)) {
+            if (origin.equals("Battlefield") || params.get("Destination").equals("Battlefield")) {
                 af.getHostCard().setSVar("PlayMain1", "TRUE");
+            }
+        }
     }
 
     /**
@@ -170,15 +190,15 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeZoneCanPlayAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean changeZoneCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
-        if (isHidden(origin, params.containsKey("Hidden")))
+        if (isHidden(origin, params.containsKey("Hidden"))) {
             return changeHiddenOriginCanPlayAI(af, sa);
-
-        else if (isKnown(origin))
+        } else if (isKnown(origin)) {
             return changeKnownOriginCanPlayAI(af, sa);
+        }
 
         return false;
     }
@@ -190,15 +210,15 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeZonePlayDrawbackAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean changeZonePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
-        if (isHidden(origin, params.containsKey("Hidden")))
+        if (isHidden(origin, params.containsKey("Hidden"))) {
             return changeHiddenOriginPlayDrawbackAI(af, sa);
-
-        else if (isKnown(origin))
+        } else if (isKnown(origin)) {
             return changeKnownOriginPlayDrawbackAI(af, sa);
+        }
 
         return false;
     }
@@ -211,15 +231,15 @@ public class AbilityFactory_ChangeZone {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean changeZoneTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean changeZoneTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
-        if (isHidden(origin, params.containsKey("Hidden")))
+        if (isHidden(origin, params.containsKey("Hidden"))) {
             return changeHiddenTriggerAI(af, sa, mandatory);
-
-        else if (isKnown(origin))
+        } else if (isKnown(origin)) {
             return changeKnownOriginTriggerAI(af, sa, mandatory);
+        }
 
         return false;
     }
@@ -231,15 +251,15 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String changeZoneDescription(AbilityFactory af, SpellAbility sa) {
+    private static String changeZoneDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
-        if (isHidden(origin, params.containsKey("Hidden")))
+        if (isHidden(origin, params.containsKey("Hidden"))) {
             return changeHiddenOriginStackDescription(af, sa);
-
-        else if (isKnown(origin))
+        } else if (isKnown(origin)) {
             return changeKnownOriginStackDescription(af, sa);
+        }
 
         return "";
     }
@@ -250,15 +270,15 @@ public class AbilityFactory_ChangeZone {
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void changeZoneResolve(AbilityFactory af, SpellAbility sa) {
+    private static void changeZoneResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
-        if (isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu"))
+        if (isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu")) {
             changeHiddenOriginResolve(af, sa);
-
-        else if (isKnown(origin) || params.containsKey("Ninjutsu"))
+        } else if (isKnown(origin) || params.containsKey("Ninjutsu")) {
             changeKnownOriginResolve(af, sa);
+        }
     }
 
     // *************************************************************************************
@@ -275,7 +295,7 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeHiddenOriginCanPlayAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean changeHiddenOriginCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and have access to more mana
         Cost abCost = af.getAbCost();
         Card source = af.getHostCard();
@@ -285,30 +305,34 @@ public class AbilityFactory_ChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
-            
-            if (!CostUtil.checkLifeCost(abCost, source, 4))
+            }
+
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
                 return false;
-            
-            if (!CostUtil.checkDiscardCost(abCost, source))
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
                 return false;
+            }
         }
 
         Random r = MyRandom.random;
         // prevent run-away activations - first time will always return true
-        
 
-        
+
+
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         ArrayList<Player> pDefined;
         Target tgt = af.getAbTgt();
         if (tgt != null && tgt.canTgtPlayer()) {
-            if (af.isCurse())
+            if (af.isCurse()) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            else
+            } else {
                 tgt.addTarget(AllZone.getComputerPlayer());
+            }
             pDefined = tgt.getTargetPlayers();
         } else {
             pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
@@ -331,15 +355,17 @@ public class AbilityFactory_ChangeZone {
                 list = AbilityFactory.filterListByType(list, params.get("ChangeType"), sa);
             }
 
-            if (list.isEmpty())
+            if (list.isEmpty()) {
                 return false;
+            }
         }
 
         chance &= (r.nextFloat() < .8);
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
     }
@@ -351,15 +377,16 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeHiddenOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean changeHiddenOriginPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
         Target tgt = af.getAbTgt();
         if (tgt != null && tgt.canTgtPlayer()) {
-            if (af.isCurse())
+            if (af.isCurse()) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            else
+            } else {
                 tgt.addTarget(AllZone.getComputerPlayer());
+            }
         }
 
         return true;
@@ -373,7 +400,7 @@ public class AbilityFactory_ChangeZone {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean changeHiddenTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean changeHiddenTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // Fetching should occur fairly often as it helps cast more spells, and have access to more mana
 
         Card source = sa.getSourceCard();
@@ -394,44 +421,52 @@ public class AbilityFactory_ChangeZone {
         Target tgt = af.getAbTgt();
         if (tgt != null && tgt.canTgtPlayer()) {
             if (af.isCurse()) {
-                if (AllZone.getHumanPlayer().canTarget(sa))
+                if (AllZone.getHumanPlayer().canTarget(sa)) {
                     tgt.addTarget(AllZone.getHumanPlayer());
-                else if (mandatory && AllZone.getComputerPlayer().canTarget(sa))
+                } else if (mandatory && AllZone.getComputerPlayer().canTarget(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
+                }
             } else {
-                if (AllZone.getComputerPlayer().canTarget(sa))
+                if (AllZone.getComputerPlayer().canTarget(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
-                else if (mandatory && AllZone.getHumanPlayer().canTarget(sa))
+                } else if (mandatory && AllZone.getHumanPlayer().canTarget(sa)) {
                     tgt.addTarget(AllZone.getHumanPlayer());
+                }
             }
 
             pDefined = tgt.getTargetPlayers();
 
-            if (pDefined.isEmpty())
+            if (pDefined.isEmpty()) {
                 return false;
+            }
 
             if (mandatory) {
                 return pDefined.size() > 0;
             }
         } else {
-            if (mandatory)
+            if (mandatory) {
                 return true;
+            }
             pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
         for (Player p : pDefined) {
             CardList list = AllZoneUtil.getCardsInZone(origin, p);
 
-            if (p.isComputer())    // Computer should "know" his deck
+            // Computer should "know" his deck
+            if (p.isComputer()) {
                 list = AbilityFactory.filterListByType(list, params.get("ChangeType"), sa);
+            }
 
-            if (list.isEmpty())
+            if (list.isEmpty()) {
                 return false;
+            }
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             return subAb.doTrigger(mandatory);
+        }
 
         return true;
     }
@@ -443,22 +478,22 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String changeHiddenOriginStackDescription(AbilityFactory af, SpellAbility sa) {
-        // TODO: build Stack Description will need expansion as more cards are added
+    private static String changeHiddenOriginStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        // TODO build Stack Description will need expansion as more cards are added
         HashMap<String, String> params = af.getMapParams();
 
         StringBuilder sb = new StringBuilder();
         Card host = af.getHostCard();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(host.getName()).append(" -");
+        }
 
         sb.append(" ");
 
-        if (params.containsKey("StackDescription"))
+        if (params.containsKey("StackDescription")) {
             sb.append(params.get("StackDescription"));
-
-        else {
+        } else {
             String origin = params.get("Origin");
             String destination = params.get("Destination");
 
@@ -468,43 +503,50 @@ public class AbilityFactory_ChangeZone {
             if (origin.equals("Library")) {
                 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
 
-                if (params.get("ChangeNum").equals("1"))
+                if (params.get("ChangeNum").equals("1")) {
                     sb.append("put that card ");
-                else
+                } else {
                     sb.append("put those cards ");
+                }
 
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
-                    if (params.containsKey("Tapped"))
+                    if (params.containsKey("Tapped")) {
                         sb.append(" tapped");
+                    }
 
 
                     sb.append(".");
 
                 }
-                if (destination.equals("Hand"))
+                if (destination.equals("Hand")) {
                     sb.append("into your hand.");
-                if (destination.equals("Graveyard"))
+                }
+                if (destination.equals("Graveyard")) {
                     sb.append("into your graveyard.");
+                }
 
                 sb.append("Then shuffle your library.");
             } else if (origin.equals("Hand")) {
                 sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
 
-                if (destination.equals("Battlefield"))
+                if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield.");
+                }
                 if (destination.equals("Library")) {
                     int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 
-                    if (libraryPos == 0)
+                    if (libraryPos == 0) {
                         sb.append("on top");
-                    if (libraryPos == -1)
+                    }
+                    if (libraryPos == -1) {
                         sb.append("on bottom");
+                    }
 
                     sb.append(" of your library.");
                 }
             } else if (origin.equals("Battlefield")) {
-                // TODO: Expand on this Description as more cards use it
+                // TODO Expand on this Description as more cards use it
                 // for the non-targeted SAs when you choose what is returned on resolution
                 sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
                 sb.append(" to your ").append(destination);
@@ -525,26 +567,28 @@ public class AbilityFactory_ChangeZone {
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void changeHiddenOriginResolve(AbilityFactory af, SpellAbility sa) {
+    private static void changeHiddenOriginResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
-        
+
         ArrayList<Player> fetchers;
-        
+
         fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        
+
         Player chooser = null;
         if (params.containsKey("Chooser")) {
             String choose = params.get("Chooser");
-            if (choose.equals("Targeted") && af.getAbTgt().getTargetPlayers() != null)
+            if (choose.equals("Targeted") && af.getAbTgt().getTargetPlayers() != null) {
                 chooser = af.getAbTgt().getTargetPlayers().get(0);
-            else
+            } else {
                 chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
+            }
         }
 
         for (Player player : fetchers) {
             Player decider = chooser;
-            if (decider == null)
+            if (decider == null) {
                 decider = player;
+            }
             if (decider.isComputer()) {
                 changeHiddenOriginResolveAI(af, sa, player);
             } else {
@@ -560,15 +604,18 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @param player a {@link forge.Player} object.
      */
-    private static void changeHiddenOriginResolveHuman(AbilityFactory af, SpellAbility sa, Player player) {
+    private static void changeHiddenOriginResolveHuman(final AbilityFactory af, final SpellAbility sa,
+            Player player)
+    {
         HashMap<String, String> params = af.getMapParams();
         Card card = sa.getSourceCard();
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             ArrayList<Player> players = tgt.getTargetPlayers();
             player = players.get(0);
-            if (players.contains(player) && !player.canTarget(sa))
+            if (players.contains(player) && !player.canTarget(sa)) {
                 return;
+            }
         }
 
         String origin = params.get("Origin");
@@ -587,8 +634,9 @@ public class AbilityFactory_ChangeZone {
             sb.append(params.get("AlternativeMessage")).append(" ");
             sb.append(altFetchList.size()).append(" cards match your searching type in Alternate Zones.");
 
-            if (!GameActionUtil.showYesNoDialog(card, sb.toString()))
+            if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
                 origin = alt;
+            }
         }
 
         if (params.containsKey("DestinationAlternative")) {
@@ -606,8 +654,12 @@ public class AbilityFactory_ChangeZone {
         if (origin.contains("Library"))    // Look at whole library before moving onto choosing a card{
             GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", AllZoneUtil.getCardsInZone("Library", player).toArray());
 
-        if (origin.contains("Hand") && player.isComputer())    // Look at opponents hand before moving onto choosing a card
-            GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand", AllZoneUtil.getCardsInZone("Hand", player).toArray());
+        // Look at opponents hand before moving onto choosing a card
+        if (origin.contains("Hand") && player.isComputer())
+        {
+            GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand",
+                    AllZoneUtil.getCardsInZone("Hand", player).toArray());
+        }
 
         fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
 
@@ -617,20 +669,22 @@ public class AbilityFactory_ChangeZone {
 
         String remember = params.get("RememberChanged");
         String imprint = params.get("Imprint");
-        
+
         if (params.containsKey("Unimprint")) {
             card.clearImprinted();
         }
 
         for (int i = 0; i < changeNum; i++) {
-            if (fetchList.size() == 0 || destination == null)
+            if (fetchList.size() == 0 || destination == null) {
                 break;
+            }
 
             Object o;
-            if (params.containsKey("Mandatory"))
+            if (params.containsKey("Mandatory")) {
                 o = GuiUtils.getChoice("Select a card", fetchList.toArray());
-            else
+            } else {
                 o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
+            }
 
             if (o != null) {
                 Card c = (Card) o;
@@ -644,37 +698,43 @@ public class AbilityFactory_ChangeZone {
                     }
                     movedCard = AllZone.getGameAction().moveToLibrary(c, libraryPos);
                 } else if (destination.equals("Battlefield")) {
-                    if (params.containsKey("Tapped"))
+                    if (params.containsKey("Tapped")) {
                         c.tap();
-                    if (params.containsKey("GainControl"))
+                    }
+                    if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
+                    }
 
                     movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
                 } else {
                     movedCard = AllZone.getGameAction().moveTo(destZone, c);
-                    if(params.containsKey("ExileFaceDown")) {
+                    if (params.containsKey("ExileFaceDown")) {
                         movedCard.setIsFaceDown(true);
                     }
                 }
 
-                if (remember != null)
+                if (remember != null) {
                     card.addRemembered(movedCard);
+                }
                 //for imprinted since this doesn't use Target
-                if (imprint != null)
+                if (imprint != null) {
                     card.addImprinted(movedCard);
+                }
 
             } else {
                 StringBuilder sb = new StringBuilder();
                 int num = Math.min(fetchList.size(), changeNum - i);
                 sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
 
-                if (i + 1 == changeNum || GameActionUtil.showYesNoDialog(card, sb.toString()))
+                if (i + 1 == changeNum || GameActionUtil.showYesNoDialog(card, sb.toString())) {
                     break;
+                }
             }
         }
 
-        if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle"))
+        if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle")) {
             player.shuffle();
+        }
     }
 
     /**
@@ -684,7 +744,7 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @param player a {@link forge.Player} object.
      */
-    private static void changeHiddenOriginResolveAI(AbilityFactory af, SpellAbility sa, Player player) {
+    private static void changeHiddenOriginResolveAI(final AbilityFactory af, final SpellAbility sa, Player player) {
         HashMap<String, String> params = af.getMapParams();
         Target tgt = af.getAbTgt();
         Card card = af.getHostCard();
@@ -692,8 +752,9 @@ public class AbilityFactory_ChangeZone {
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
                 player = tgt.getTargetPlayers().get(0);
-                if (!player.canTarget(sa))
+                if (!player.canTarget(sa)) {
                     return;
+                }
             }
         }
 
@@ -707,8 +768,9 @@ public class AbilityFactory_ChangeZone {
         PlayerZone destZone = AllZone.getZone(destination, player);
 
         String type = params.get("ChangeType");
-        if (type == null)
+        if (type == null) {
             type = "Card";
+        }
 
         CardList fetched = new CardList();
 
@@ -722,29 +784,32 @@ public class AbilityFactory_ChangeZone {
         }
 
         for (int i = 0; i < changeNum; i++) {
-            if (fetchList.size() == 0 || destination == null)
+            if (fetchList.size() == 0 || destination == null) {
                 break;
+            }
 
             // Improve the AI for fetching.
             Card c;
-            if (type.contains("Basic"))
+            if (type.contains("Basic")) {
                 c = basicManaFixing(fetchList);
-            else if (areAllBasics(type))    // if Searching for only basics,
+            } else if (areAllBasics(type)) {
                 c = basicManaFixing(fetchList, type);
-            else if (fetchList.getNotType("Creature").size() == 0)
+            } else if (fetchList.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.AI_getBestCreature(fetchList);     //if only creatures take the best
-            else if ("Battlefield".equals(destination) || "Graveyard".equals(destination))
+            } else if ("Battlefield".equals(destination) || "Graveyard".equals(destination)) {
                 c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
-            else if ("Exile".equals(destination)) {
+            } else if ("Exile".equals(destination)) {
                 // Exiling your own stuff, if Exiling opponents stuff choose best
-                if (destZone.getPlayer().isHuman())
+                if (destZone.getPlayer().isHuman()) {
                     c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
-                else
+                } else {
                     c = CardFactoryUtil.AI_getCheapestPermanent(fetchList, af.getHostCard(), false);
+                }
             } else {
                 //Don't fetch another tutor with the same name
-                if (origin.contains("Library") && !fetchList.getNotName(card.getName()).isEmpty())
+                if (origin.contains("Library") && !fetchList.getNotName(card.getName()).isEmpty()) {
                     fetchList = fetchList.getNotName(card.getName());
+                }
 
                 fetchList.shuffle();
                 c = fetchList.get(0);
@@ -754,8 +819,9 @@ public class AbilityFactory_ChangeZone {
             fetchList.remove(c);
         }
 
-        if (origin.contains("Library"))
+        if (origin.contains("Library")) {
             player.shuffle();
+        }
 
         for (Card c : fetched) {
             Card newCard = null;
@@ -763,38 +829,44 @@ public class AbilityFactory_ChangeZone {
                 int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
                 AllZone.getGameAction().moveToLibrary(c, libraryPos);
             } else if ("Battlefield".equals(destination)) {
-                if (params.containsKey("Tapped"))
+                if (params.containsKey("Tapped")) {
                     c.tap();
-                if (params.containsKey("GainControl"))
+                }
+                if (params.containsKey("GainControl")) {
                     c.addController(af.getHostCard());
+                }
 				// Auras without Candidates stay in their current location
-            	if (c.isAura()){
+            	if (c.isAura()) {
             		SpellAbility saAura = AbilityFactory_Attach.getAttachSpellAbility(c);
-            		if (!saAura.getTarget().hasCandidates(false))
-            			continue;
+            		if (!saAura.getTarget().hasCandidates(false)) {
+                        continue;
+                    }
             	}
 
                 newCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
             } else {
                 newCard = AllZone.getGameAction().moveTo(destZone, c);
-                if(params.containsKey("ExileFaceDown")) {
+                if (params.containsKey("ExileFaceDown")) {
                     newCard.setIsFaceDown(true);
                 }
             }
 
-            if (remember != null)
+            if (remember != null) {
                 card.addRemembered(newCard);
+            }
             //for imprinted since this doesn't use Target
-            if (imprint != null)
+            if (imprint != null) {
                 card.addImprinted(newCard);
+            }
         }
 
         if (!"Battlefield".equals(destination) && !"Card".equals(type)) {
             String picked = af.getHostCard().getName() + " - Computer picked:";
-            if (fetched.size() > 0)
+            if (fetched.size() > 0) {
                 GuiUtils.getChoice(picked, fetched.toArray());
-            else
+            } else {
                 GuiUtils.getChoice(picked, new String[]{"<Nothing>"});
+            }
         }
     }
 
@@ -805,7 +877,7 @@ public class AbilityFactory_ChangeZone {
      * @param list a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    private static Card basicManaFixing(CardList list) {    // Search for a Basic Land
+    private static Card basicManaFixing(final CardList list) {    // Search for a Basic Land
         return basicManaFixing(list, "Plains, Island, Swamp, Mountain, Forest");
     }
 
@@ -816,17 +888,18 @@ public class AbilityFactory_ChangeZone {
      * @param type a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    private static Card basicManaFixing(CardList list, String type) {    // type = basic land types
+    private static Card basicManaFixing(CardList list, final String type) {    // type = basic land types
         CardList combined = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
         combined.addAll(AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer()));
 
-        String names[] = type.split(",");
+        String[] names = type.split(",");
         ArrayList<String> basics = new ArrayList<String>();
 
         // what types can I go get?
         for (int i = 0; i < names.length; i++) {
-            if (list.getType(names[i]).size() != 0)
+            if (list.getType(names[i]).size() != 0) {
                 basics.add(names[i]);
+            }
         }
 
         // Which basic land is least available from hand and play, that I still have in my deck
@@ -842,8 +915,9 @@ public class AbilityFactory_ChangeZone {
             }
         }
 
-        if (minType != null)
+        if (minType != null) {
             list = list.getType(minType);
+        }
 
         return list.get(0);
     }
@@ -854,19 +928,22 @@ public class AbilityFactory_ChangeZone {
      * @param types a {@link java.lang.String} object.
      * @return a boolean.
      */
-    private static boolean areAllBasics(String types) {
+    private static boolean areAllBasics(final String types) {
         String[] split = types.split(",");
-        String names[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+        String[] names = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
         boolean[] bBasic = new boolean[split.length];
 
         for (String s : names) {
-            for (int i = 0; i < split.length; i++)
+            for (int i = 0; i < split.length; i++) {
                 bBasic[i] |= s.equals(split[i]);
+            }
         }
 
-        for (int i = 0; i < split.length; i++)
-            if (!bBasic[i])
+        for (int i = 0; i < split.length; i++) {
+            if (!bBasic[i]) {
                 return false;
+            }
+        }
 
         return true;
     }
@@ -884,7 +961,7 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginCanPlayAI(AbilityFactory af, SpellAbility sa) {
+    private static boolean changeKnownOriginCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         Cost abCost = af.getAbCost();
         final Card source = af.getHostCard();
@@ -899,17 +976,21 @@ public class AbilityFactory_ChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
-            
-            if (!CostUtil.checkLifeCost(abCost, source, 4))
-                return false;
-            
-            if (!CostUtil.checkDiscardCost(abCost, source))
-                return false;
+            }
 
-            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
                 return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+                return false;
+            }
         }
 
         // prevent run-away activations - first time will always return true
@@ -917,14 +998,16 @@ public class AbilityFactory_ChangeZone {
 
         Target tgt = af.getAbTgt();
         if (tgt != null) {
-            if (!changeKnownPreferredTarget(af, sa, false))
+            if (!changeKnownPreferredTarget(af, sa, false)) {
                 return false;
+            }
         } else {
             // non-targeted retrieval
             CardList retrieval = knownDetermineDefined(sa, params.get("Defined"), origin);
 
-            if (retrieval == null || retrieval.isEmpty())
+            if (retrieval == null || retrieval.isEmpty()) {
                 return false;
+            }
 
             //if (origin.equals("Graveyard")) {
             // return this card from graveyard: cards like Hammer of Bogardan
@@ -933,33 +1016,40 @@ public class AbilityFactory_ChangeZone {
             // return this card from battlefield: cards like Blinking Spirit
             // in general this should only be used to protect from Imminent Harm (dying or losing control of)
             if (origin.equals("Battlefield")) {
-            	if (AllZone.getStack().size() == 0)
-            		return false;
-            	
-            	Ability_Sub abSub = sa.getSubAbility();
-            	String subAPI = "";
-            	if (abSub != null)
-            		subAPI = abSub.getAbilityFactory().getAPI();
-            	
-            	//only use blink or bounce effects
-            	if (!(destination.equals("Exile") && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
-            			&& !destination.equals("Hand"))
-            		return false;
-            	
-            	ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+                if (AllZone.getStack().size() == 0) {
+                    return false;
+                }
+
+                Ability_Sub abSub = sa.getSubAbility();
+                String subAPI = "";
+                if (abSub != null) {
+                    subAPI = abSub.getAbilityFactory().getAPI();
+                }
+
+                //only use blink or bounce effects
+                if (!(destination.equals("Exile") && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
+                        && !destination.equals("Hand"))
+                {
+                    return false;
+                }
+
+                ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
                 for (Card c : retrieval) {
-                    if (objects.contains(c))
+                    if (objects.contains(c)) {
                         pct = 1;
+                    }
                 }
-                if (pct < 1)
-                	return false;
+                if (pct < 1) {
+                    return false;
+                }
             }
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return ((r.nextFloat() < pct) && chance);
     }
@@ -971,9 +1061,10 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa) {
-        if (sa.getTarget() == null)
+    private static boolean changeKnownOriginPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+        if (sa.getTarget() == null) {
             return true;
+        }
 
         return changeKnownPreferredTarget(af, sa, false);
     }
@@ -986,13 +1077,15 @@ public class AbilityFactory_ChangeZone {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownPreferredTarget(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean changeKnownPreferredTarget(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
         String origin = params.get("Origin");
         String destination = params.get("Destination");
         Target tgt = af.getAbTgt();
-        
+
     	Ability_Sub abSub = sa.getSubAbility();
     	String subAPI = "";
     	String subAffected = "";
@@ -1000,18 +1093,21 @@ public class AbilityFactory_ChangeZone {
     	if (abSub != null) {
     		subAPI = abSub.getAbilityFactory().getAPI();
     		subParams = abSub.getAbilityFactory().getMapParams();
-    		if (subParams.containsKey("Defined"))
-    			subAffected = subParams.get("Defined");
+    		if (subParams.containsKey("Defined")) {
+                subAffected = subParams.get("Defined");
+            }
     	}
 
-        if (tgt != null)
+        if (tgt != null) {
             tgt.resetTargets();
+        }
 
         CardList list = AllZoneUtil.getCardsInZone(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
-        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return false;
+        }
 
         // Narrow down the list:
         if (origin.equals("Battlefield")) {
@@ -1020,22 +1116,24 @@ public class AbilityFactory_ChangeZone {
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
             // if it's blink or bounce, try to save my about to die stuff
-            if((destination.equals("Hand") 
-            		|| (destination.equals("Exile") && (subAPI.equals("DelayedTrigger") 
+            if ((destination.equals("Hand")
+            		|| (destination.equals("Exile") && (subAPI.equals("DelayedTrigger")
             				|| (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))))
-            		&& tgt.getMinTargets(sa.getSourceCard(), sa) <= 1) {
-            	
+            		&& tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)
+            {
+
             	// check stack for something on the stack will kill anything i control
-	            if(AllZone.getStack().size() > 0) {
+	            if (AllZone.getStack().size() > 0) {
 	            	ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
-	
+
 	                CardList threatenedTargets = new CardList();
-	
+
 	                for (Card c : aiPermanents) {
-	                    if (objects.contains(c))
-	                        threatenedTargets.add(c);
+	                    if (objects.contains(c)) {
+                            threatenedTargets.add(c);
+                        }
 	                }
-	                
+
 	                if (!threatenedTargets.isEmpty()) {
 		                // Choose "best" of the remaining to save
 		                tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
@@ -1046,39 +1144,46 @@ public class AbilityFactory_ChangeZone {
 	            else if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
 	                CardList combatants = aiPermanents.getType("Creature");
 	                CardListUtil.sortByEvaluateCreature(combatants);
-	
-	                for (Card c : combatants)
+
+	                for (Card c : combatants) {
 	                    if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
 	                        tgt.addTarget(c);
 	                        return true;
 	                    }
+	                }
 	            }
             }
-            
+
         } else if (origin.equals("Graveyard")) {
             // Retrieve from Graveyard to:
 
         }
-        
-        //blink human targets only during combat 
-        if (origin.equals("Battlefield") && destination.equals("Exile") 
+
+        //blink human targets only during combat
+        if (origin.equals("Battlefield") && destination.equals("Exile")
         		&& (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
         		&& !(AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || sa.isAbility()))
-        	return false;
-        
+        {
+            return false;
+        }
+
         // Exile and bounce opponents stuff
-        if (destination.equals("Exile") || origin.equals("Battlefield"))
+        if (destination.equals("Exile") || origin.equals("Battlefield")) {
             list = list.getController(AllZone.getHumanPlayer());
-        
+        }
+
         // Only care about combatants during combat
-        if(AllZone.getPhase().inCombat())
-        	list.getValidCards("Card.attacking,Card.blocking", null, null);
+        if (AllZone.getPhase().inCombat()) {
+            list.getValidCards("Card.attacking,Card.blocking", null, null);
+        }
 
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return false;
+        }
 
-        if (!mandatory && list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+        if (!mandatory && list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return false;
+        }
 
         // target loop
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
@@ -1090,22 +1195,26 @@ public class AbilityFactory_ChangeZone {
                 if (destination.equals("Battlefield") || origin.equals("Battlefield")) {
                     if (mostExpensive.isCreature()) {
                         //if a creature is most expensive take the best one
-                        if (destination.equals("Exile"))    // If Exiling things, don't give bonus to Tokens
+                        if (destination.equals("Exile")) {
+                            // If Exiling things, don't give bonus to Tokens
                             choice = CardFactoryUtil.AI_getBestCreature(list);
-                        else
+                        } else {
                             choice = CardFactoryUtil.AI_getBestCreatureToBounce(list);
-                    } else
+                        }
+                    } else {
                         choice = mostExpensive;
+                    }
                 } else {
-                    // TODO: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+                    // TODO AI needs more improvement to it's retrieval (reuse some code from spReturn here)
                     list.shuffle();
                     choice = list.get(0);
                 }
             }
             if (choice == null) {    // can't find anything left
                 if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-                    if (!mandatory)
+                    if (!mandatory) {
                         tgt.resetTargets();
+                    }
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -1128,9 +1237,12 @@ public class AbilityFactory_ChangeZone {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownUnpreferredTarget(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!mandatory)
+    private static boolean changeKnownUnpreferredTarget(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        if (!mandatory) {
             return false;
+        }
 
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
@@ -1155,11 +1267,13 @@ public class AbilityFactory_ChangeZone {
 
         }
 
-        for (Card c : tgt.getTargetCards())
+        for (Card c : tgt.getTargetCards()) {
             list.remove(c);
+        }
 
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return false;
+        }
 
         // target loop
         while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -1169,11 +1283,13 @@ public class AbilityFactory_ChangeZone {
             if (!list.isEmpty()) {
                 if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature()
                         && (destination.equals("Battlefield") || origin.equals("Battlefield")))
-                    choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
-                else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
+                {
+                    //if a creature is most expensive take the best
+                    choice = CardFactoryUtil.AI_getBestCreatureToBounce(list);
+                } else if (destination.equals("Battlefield") || origin.equals("Battlefield")) {
                     choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
-                else {
-                    // TODO: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+                } else {
+                    // TODO AI needs more improvement to it's retrieval (reuse some code from spReturn here)
                     list.shuffle();
                     choice = list.get(0);
                 }
@@ -1203,20 +1319,26 @@ public class AbilityFactory_ChangeZone {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private static boolean changeKnownOriginTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
-        if (sa.getTarget() == null)    // Just in case of Defined cases
-            ; // do nothing
-        else if (changeKnownPreferredTarget(af, sa, mandatory)) {
-            ; // do nothing
-        } else if (!changeKnownUnpreferredTarget(af, sa, mandatory))
+        if (sa.getTarget() == null) {
+            // Just in case of Defined cases
+            // do nothing
+        } else if (changeKnownPreferredTarget(af, sa, mandatory)) {
+            // do nothing
+        } else if (!changeKnownUnpreferredTarget(af, sa, mandatory)) {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             return subAb.doTrigger(mandatory);
+        }
 
         return true;
     }
@@ -1229,14 +1351,15 @@ public class AbilityFactory_ChangeZone {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String changeKnownOriginStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String changeKnownOriginStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
 
         StringBuilder sb = new StringBuilder();
         Card host = af.getHostCard();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(host.getName()).append(" -");
+        }
 
         sb.append(" ");
 
@@ -1246,9 +1369,9 @@ public class AbilityFactory_ChangeZone {
         StringBuilder sbTargets = new StringBuilder();
 
         ArrayList<Card> tgts;
-        if (af.getAbTgt() != null)
+        if (af.getAbTgt() != null) {
             tgts = af.getAbTgt().getTargetCards();
-        else {
+        } else {
             // otherwise add self to list and go from there
             tgts = new ArrayList<Card>();
             for (Card c : knownDetermineDefined(sa, params.get("Defined"), origin)) {
@@ -1256,8 +1379,9 @@ public class AbilityFactory_ChangeZone {
             }
         }
 
-        for (Card c : tgts)
+        for (Card c : tgts) {
             sbTargets.append(" ").append(c.getName());
+        }
 
         String targetname = sbTargets.toString();
 
@@ -1267,21 +1391,25 @@ public class AbilityFactory_ChangeZone {
 
         if (destination.equals("Battlefield")) {
             sb.append("Put").append(targetname);
-            if (origin.equals("Graveyard"))
+            if (origin.equals("Graveyard")) {
                 sb.append(fromGraveyard);
+            }
 
             sb.append(" onto the battlefield");
-            if (params.containsKey("Tapped"))
+            if (params.containsKey("Tapped")) {
                 sb.append(" tapped");
-            if (params.containsKey("GainControl"))
+            }
+            if (params.containsKey("GainControl")) {
                 sb.append(" under your control");
+            }
             sb.append(".");
         }
 
         if (destination.equals("Hand")) {
             sb.append("Return").append(targetname);
-            if (origin.equals("Graveyard"))
+            if (origin.equals("Graveyard")) {
                 sb.append(fromGraveyard);
+            }
             sb.append(" to").append(pronoun).append("owners hand.");
         }
 
@@ -1292,25 +1420,29 @@ public class AbilityFactory_ChangeZone {
                 sb.append(" into").append(pronoun).append("owner's library.");
             } else {
                 sb.append("Put").append(targetname);
-                if (origin.equals("Graveyard"))
+                if (origin.equals("Graveyard")) {
                     sb.append(fromGraveyard);
+                }
 
                 // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
                 int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 
-                if (libraryPosition == -1)
+                if (libraryPosition == -1) {
                     sb.append(" on the bottom of").append(pronoun).append("owner's library.");
-                else if (libraryPosition == 0)
+                } else if (libraryPosition == 0) {
                     sb.append(" on top of").append(pronoun).append("owner's library.");
-                else
-                    sb.append(" ").append(libraryPosition + 1).append(" from the top of").append(pronoun).append("owner's library.");
+                } else {
+                    sb.append(" ").append(libraryPosition + 1).append(" from the top of");
+                    sb.append(pronoun).append("owner's library.");
+                }
             }
         }
 
         if (destination.equals("Exile")) {
             sb.append("Exile").append(targetname);
-            if (origin.equals("Graveyard"))
+            if (origin.equals("Graveyard")) {
                 sb.append(fromGraveyard);
+            }
             sb.append(".");
         }
 
@@ -1334,7 +1466,7 @@ public class AbilityFactory_ChangeZone {
      * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void changeKnownOriginResolve(AbilityFactory af, SpellAbility sa) {
+    private static void changeKnownOriginResolve(final AbilityFactory af, final SpellAbility sa) {
         ArrayList<Card> tgtCards;
         HashMap<String, String> params = af.getMapParams();
         Target tgt = af.getAbTgt();
@@ -1344,9 +1476,9 @@ public class AbilityFactory_ChangeZone {
         String destination = params.get("Destination");
         String origin = params.get("Origin");
 
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else {
+        } else {
             tgtCards = new ArrayList<Card>();
             for (Card c : knownDetermineDefined(sa, params.get("Defined"), origin)) {
                 tgtCards.add(c);
@@ -1359,24 +1491,27 @@ public class AbilityFactory_ChangeZone {
         if (params.containsKey("Unimprint")) {
             hostCard.clearImprinted();
         }
-        
+
         if (tgtCards.size() != 0) {
             for (Card tgtC : tgtCards) {
                 PlayerZone originZone = AllZone.getZone(tgtC);
                 // if Target isn't in the expected Zone, continue
-                if (originZone == null || !originZone.is(origin))
+                if (originZone == null || !originZone.is(origin)) {
                     continue;
+                }
 
                 if (tgt != null && origin.equals("Battlefield")) {
                     // check targeting
-                    if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC))
+                    if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC)) {
                         continue;
+                    }
                 }
-                
+
                 Card movedCard = null;
                 Player pl = player;
-                if (!destination.equals("Battlefield"))
+                if (!destination.equals("Battlefield")) {
                     pl = tgtC.getOwner();
+                }
 
                 if (destination.equals("Library")) {
                     // library position is zero indexed
@@ -1384,22 +1519,28 @@ public class AbilityFactory_ChangeZone {
 
                     movedCard = AllZone.getGameAction().moveToLibrary(tgtC, libraryPosition);
 
-                    if (params.containsKey("Shuffle"))    // for things like Gaea's Blessing
+                    // for things like Gaea's Blessing
+                    if (params.containsKey("Shuffle")) {
                         tgtC.getOwner().shuffle();
+                    }
                 } else {
                     if (destination.equals("Battlefield")) {
-                        if (params.containsKey("Tapped") || params.containsKey("Ninjutsu"))
+                        if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
                             tgtC.tap();
-                        if (params.containsKey("GainControl"))
+                        }
+                        if (params.containsKey("GainControl")) {
                             tgtC.addController(af.getHostCard());
+                        }
                         // Auras without Candidates stay in their current location
-                    	if (tgtC.isAura()){
+                    	if (tgtC.isAura()) {
                     		SpellAbility saAura = AbilityFactory_Attach.getAttachSpellAbility(tgtC);
-                    		if (!saAura.getTarget().hasCandidates(false))
+                    		if (!saAura.getTarget().hasCandidates(false)) {
                     			continue;
+                    		}
                     	}
 
-                    	movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, tgtC.getController()), tgtC);
+                    	movedCard = AllZone.getGameAction().moveTo(
+                    	        AllZone.getZone(destination, tgtC.getController()), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
                             AllZone.getCombat().addAttacker(tgtC);
@@ -1407,15 +1548,17 @@ public class AbilityFactory_ChangeZone {
                         }
                     } else {
                         movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
-                        if(params.containsKey("ExileFaceDown")) {
+                        if (params.containsKey("ExileFaceDown")) {
                             movedCard.setIsFaceDown(true);
                         }
                     }
                 }
-                if (remember != null)
+                if (remember != null) {
                     hostCard.addRemembered(movedCard);
-                if (imprint != null)
+                }
+                if (imprint != null) {
                     hostCard.addImprinted(movedCard);
+                }
             }
         }
     }
