@@ -130,7 +130,7 @@ public class StaticEffects {
             }
 
             //remove Types
-            if (params.containsKey("AddType")) {
+            if (params.containsKey("AddType") || params.containsKey("RemoveType")) {
                 affectedCard.removeChangedCardTypes(se.getTimestamp());
             }
 

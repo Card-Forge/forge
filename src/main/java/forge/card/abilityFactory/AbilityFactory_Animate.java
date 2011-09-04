@@ -425,6 +425,11 @@ public class AbilityFactory_Animate {
         if (params.containsKey("Types")) {
             types.addAll(Arrays.asList(params.get("Types").split(",")));
         }
+        
+        final ArrayList<String> removeTypes = new ArrayList<String>();
+        if (params.containsKey("RemoveTypes")) {
+            removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
+        }
 
         //allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
@@ -493,7 +498,7 @@ public class AbilityFactory_Animate {
 
         for (final Card c : tgts) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords, timestamp);
 
             //give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -572,7 +577,8 @@ public class AbilityFactory_Animate {
      * @return a long.
      */
     private static long doAnimate(final Card c, final AbilityFactory af, final int power, final int toughness,
-            final ArrayList<String> types, final String colors, final ArrayList<String> keywords, final long timestamp)
+            final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors, final ArrayList<String> keywords, 
+            final long timestamp)
     {
         HashMap<String, String> params = af.getMapParams();
 
@@ -617,7 +623,7 @@ public class AbilityFactory_Animate {
         }
 
         if (!types.isEmpty()) {
-        	c.addChangedCardTypes(types, removeSuperTypes, removeCardTypes, removeSubTypes,
+        	c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
         	        removeCreatureTypes, timestamp);
         }
 
@@ -920,6 +926,11 @@ public class AbilityFactory_Animate {
         if (params.containsKey("Types")) {
             types.addAll(Arrays.asList(params.get("Types").split(",")));
         }
+        
+        final ArrayList<String> removeTypes = new ArrayList<String>();
+        if (params.containsKey("RemoveTypes")) {
+            removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
+        }
 
         //allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
@@ -976,7 +987,7 @@ public class AbilityFactory_Animate {
 
         for (final Card c : list) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords, timestamp);
 
             //give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();

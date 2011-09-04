@@ -39,6 +39,7 @@ public class StaticAbility_Continuous {
 		String addAbilities[] = null;
 		String addSVars[] = null;
 		String addTypes[] = null;
+        String removeTypes[] = null;
 		String addColors = null;
 		String addTriggers[] = null;
 		boolean removeSuperTypes = false;
@@ -102,6 +103,15 @@ public class StaticAbility_Continuous {
     			addTypes[0] = chosenType;
     			se.setChosenType(chosenType);
     		}
+        }
+		
+		if (params.containsKey("RemoveType")) {
+          removeTypes = params.get("RemoveType").split(" & ");
+            if(removeTypes[0].equals("ChosenType")) {
+                String chosenType = hostCard.getChosenType(); 
+                removeTypes[0] = chosenType;
+                se.setChosenType(chosenType);
+            }
         }
 		
 		if (params.containsKey("RemoveSuperTypes")) {
@@ -175,8 +185,8 @@ public class StaticAbility_Continuous {
             		affectedCard.setSVar(sVar, hostCard.getSVar(sVar));
             
             // add Types
-            if (addTypes != null)
-            	affectedCard.addChangedCardTypes(addTypes, removeSuperTypes, removeCardTypes, removeSubTypes, 
+            if (addTypes != null || removeTypes != null)
+            	affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes, 
             			removeCreatureTypes, hostCard.getTimestamp());
             
             // add colors

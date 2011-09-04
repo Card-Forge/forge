@@ -3120,13 +3120,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     	
 	    	ArrayList<String> newType = new ArrayList<String>(type);
 	    	ArrayList<Card_Type> types = changedCardTypes;
-            //TODO: Any reason why changedCardTypes can't be sorted in place
-	    	//      Does changedCardTypes ever get out of increasing time
-	    	//      stamp order?
 	    	Collections.sort(types);  // sorts types by timeStamp
 
 	    	for (Card_Type ct : types) {
 	    		ArrayList<String> removeTypes = new ArrayList<String>();
+	    		removeTypes.addAll(ct.getRemoveType());
 	    		//remove old types
 	    		for (int i = 0; i < newType.size(); i++) {
 	    			String t = newType.get(i);
@@ -3141,7 +3139,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 	    		}
 	    		newType.removeAll(removeTypes);
 	    		//add new types
-	    		newType.addAll(ct.getType());
+	    		if (ct.getType() != null) {
+	    		    newType.addAll(ct.getType());
+	    		}
 	    			
 	    	}
 	    	
@@ -3160,16 +3160,26 @@ public class Card extends GameEntity implements Comparable<Card> {
         return changedCardTypes;
     }
         
-    public void addChangedCardTypes(ArrayList<String> types, boolean removeSuperTypes, boolean removeCardTypes, 
-    		boolean removeSubTypes, boolean removeCreatureTypes, long timestamp) {
+    public void addChangedCardTypes(ArrayList<String> types, ArrayList<String> removeTypes, boolean removeSuperTypes, 
+            boolean removeCardTypes, boolean removeSubTypes, boolean removeCreatureTypes, long timestamp) {
    
-    	changedCardTypes.add(new Card_Type(types, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp));
+    	changedCardTypes.add(new Card_Type(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, 
+    	        timestamp));
     }
     
-    public void addChangedCardTypes(String[] types, boolean removeSuperTypes, boolean removeCardTypes, 
+    public void addChangedCardTypes(String[] types, String[] removeTypes, boolean removeSuperTypes, boolean removeCardTypes, 
     		boolean removeSubTypes, boolean removeCreatureTypes, long timestamp) {
-    	ArrayList<String> typeList = new ArrayList<String>(Arrays.asList(types));
-    	addChangedCardTypes(typeList, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp);
+        ArrayList<String> typeList = null;
+        ArrayList<String> removeTypeList = null;
+        if(types != null) {
+            typeList = new ArrayList<String>(Arrays.asList(types));
+        }
+
+        if(removeTypes  != null) {
+            removeTypeList = new ArrayList<String>(Arrays.asList(removeTypes));
+        }
+        
+    	addChangedCardTypes(typeList, removeTypeList, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp);
     }
     
     public void removeChangedCardTypes(long timestamp) {
