@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Ability_Triggered;
@@ -1799,12 +1800,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public ArrayList<Ability_Mana> getAIPlayableMana() {
         ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
-        for (Ability_Mana am : getManaAbility())
+        for (Ability_Mana am : getManaAbility()) {
+            
+            //if a mana ability has a mana cost the AI will miscalculate
+            Cost cost = am.getPayCosts();
+            if(!cost.hasNoManaCost())
+                continue;
+            
             if (am.isBasic() && !res.contains(am)) {
                 res.add(am);
             } else if (am.isReflectedMana() && !res.contains(am)) {
                 res.add(am);
             }
+        }
 
         return res;
 
@@ -3115,7 +3123,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public ArrayList<String> getType() {
     	
-    	// see if type chages are in effect
+    	// see if type changes are in effect
     	if (!changedCardTypes.isEmpty()) {
     	
 	    	ArrayList<String> newType = new ArrayList<String>(type);
