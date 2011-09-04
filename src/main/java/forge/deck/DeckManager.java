@@ -329,36 +329,40 @@ public class DeckManager {
      * @param d a {@link forge.deck.Deck} object.
      */
     private static void addCardList(ListIterator<String> lineIterator, Deck d) {
-        String line;
-
-        Pattern p = Pattern.compile("\\s*((\\d+)\\s+)?(.*?)\\s*");
 
         //readDeck main deck
-        while (lineIterator.hasNext() && !(line = lineIterator.next()).equals("[sideboard]")) {
-            Matcher m = p.matcher(line);
-            m.matches();
-            String s = m.group(2);
-            int count = s == null ? 1 : parseInt(s);
-
-            for (int i = 0; i < count; i++) {
-                d.addMain(m.group(3));
-            }
+        for (String cardName : readCardList(lineIterator)) {
+            d.addMain(cardName);
         }
 
         //readDeck sideboard
-        /*while (lineIterator.hasNext()) {
-            line = lineIterator.next();
+        for (String cardName : readCardList(lineIterator)) {
+            d.addSideboard(cardName);
+        }
+
+    }
+
+    // Precondition: iterator should point at the first line of cards list
+    private static List<String> readCardList(final ListIterator<String> lineIterator) {
+        List<String> result = new ArrayList<String>();
+        Pattern p = Pattern.compile("\\s*((\\d+)\\s+)?(.*?)\\s*");
+
+        while (lineIterator.hasNext()) {
+            String line = lineIterator.next();
+            if (line.startsWith("[")) { break; } // there comes another section
+
             Matcher m = p.matcher(line);
             m.matches();
-            String s = m.group(2);
+            String sCnt = m.group(2);
             String cardName = m.group(3);
             if (StringUtils.isBlank(cardName)) { continue; }
 
-            int count = s == null ? 1 : parseInt(s);
+            int count = sCnt == null ? 1 : parseInt(sCnt);
             for (int i = 0; i < count; i++) {
-                d.addSideboard(cardName);
+                result.add(cardName);
             }
-        }*/
+        }
+        return result;
     }
 
     /**
