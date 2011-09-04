@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cone_of_flame.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/95.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/194.jpg
+Oracle:Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
 End

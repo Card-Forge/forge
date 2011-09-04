@@ -7,4 +7,5 @@ SVar:DBPutTwo:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_together.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/84.jpg
+Oracle:Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
 End

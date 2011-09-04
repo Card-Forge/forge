@@ -8,4 +8,5 @@ SVar:DBKicker:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select anoth
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falling_timber.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/79.jpg
+Oracle:Kicker-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
 End

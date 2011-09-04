@@ -8,4 +8,5 @@ SVar:DBKicker:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select anothe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_landslide.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/60.jpg
+Oracle:Kicker-{2}{R}, Sacrifice a land. (You may pay {2}{R} and sacrifice a land in addition to any other costs as you cast this spell.)\nDestroy target land. If Dwarven Landslide was kicked, destroy another target land.
 End

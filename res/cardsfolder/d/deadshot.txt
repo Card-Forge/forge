@@ -9,4 +9,5 @@ SVar:X:Targeted$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/170.jpg
+Oracle:Tap target creature. It deals damage equal to its power to another target creature.
 End
