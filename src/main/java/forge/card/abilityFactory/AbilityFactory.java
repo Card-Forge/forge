@@ -1183,7 +1183,27 @@ public class AbilityFactory {
             if (calcX[0].startsWith("Number")) {
                 return CardFactoryUtil.xCount(card, card.getSVar(amount)) * multiplier;
             }
+            else if (calcX[0].startsWith("Remembered")) {
+                // Add whole Remembered list to handlePaid
+                CardList list = new CardList();
+                for (Object o : card.getRemembered()) {
+                    if (o instanceof Card) {
+                        list.add(AllZoneUtil.getCardState((Card) o));
+                    }
+                }
 
+                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+
+            }
+            else if (calcX[0].startsWith("Imprinted")) {
+                // Add whole Imprinted list to handlePaid
+                CardList list = new CardList();
+                for (Card c : card.getImprinted()) {
+                    list.add(AllZoneUtil.getCardState(c));
+                }
+
+                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+            }
             else if (ability != null) {
                 //Player attribute counting
                 if (calcX[0].startsWith("TargetedPlayer")) {
@@ -1271,26 +1291,6 @@ public class AbilityFactory {
                 } else {
 
                     return 0;
-                }
-
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-
-            } else if (calcX[0].startsWith("Remembered")) {
-                // Add whole Remembered list to handlePaid
-                CardList list = new CardList();
-                for (Object o : card.getRemembered()) {
-                    if (o instanceof Card) {
-                        list.add(AllZoneUtil.getCardState((Card) o));
-                    }
-                }
-
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-
-            } else if (calcX[0].startsWith("Imprinted")) {
-                // Add whole Imprinted list to handlePaid
-                CardList list = new CardList();
-                for (Card c : card.getImprinted()) {
-                    list.add(AllZoneUtil.getCardState(c));
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
