@@ -1,9 +1,11 @@
 package forge.deck;
 
 
+import forge.Card;
 import forge.Constant;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
+import forge.quest.data.QuestUtil;
 
 import java.io.*;
 import java.util.*;
@@ -359,19 +361,29 @@ public class DeckManager {
             }
         }
         
+        // readDeck human extras
         while (lineIterator.hasNext() && !(line = lineIterator.next()).equals("[ai_extra_cards]")) {
             Matcher m = p.matcher(line);
             m.matches();
             String s = m.group(2);
             String cardName = m.group(3);
             if (StringUtils.isBlank(cardName)) { continue; }
-
+            
             int count = s == null ? 1 : parseInt(s);
             for (int i = 0; i < count; i++) {
-                d.addHumanExtraCards(cardName);
+                if(cardName.substring(0,5).equals("TOKEN")) {
+                    System.out.println("DeckManager: Token ignored ("+cardName+")");
+                    // Build token below, but of type Card, not CardPrinted, 
+                    // so can't be added to deck.
+                    //Card c = QuestUtil.extraCardBuilder(cardName);                    
+                }
+                else {
+                    d.addHumanExtraCards(cardName);
+                }
             }
         }
         
+        // readDeck AI extras
         while (lineIterator.hasNext()) {
             line = lineIterator.next();
             Matcher m = p.matcher(line);
@@ -382,7 +394,15 @@ public class DeckManager {
 
             int count = s == null ? 1 : parseInt(s);
             for (int i = 0; i < count; i++) {
-                d.addAIExtraCards(cardName);
+                if(cardName.substring(0,5).equals("TOKEN")) {
+                    System.out.println("DeckManager: Token ignored ("+cardName+")");
+                    // Build token below, but of type Card, not CardPrinted, 
+                    // so can't be added to deck.
+                    //Card c = QuestUtil.extraCardBuilder(cardName);                    
+                }
+                else {
+                    d.addAIExtraCards(cardName);
+                }
             }
         }
     }

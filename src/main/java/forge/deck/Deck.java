@@ -47,8 +47,10 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * <p>Constructor for Deck.</p>
      */
     public Deck() {
-        main = new CardPool();
-        sideboard = new CardPool();
+        main            = new CardPool();
+        sideboard       = new CardPool();
+        humanExtraCards = new CardPool();
+        aiExtraCards    = new CardPool();
     }
 
     /**
@@ -237,7 +239,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @param cardName a {@link java.lang.String} object.
      */
-    public void addAIExtraCards(final String cardName) { addHumanExtraCards(CardDb.instance().getCard(cardName)); }
+    public void addAIExtraCards(final String cardName) { addAIExtraCards(CardDb.instance().getCard(cardName)); }
     public void addAIExtraCards(final CardPrinted card) { aiExtraCards.add(card); }
     public void addAIExtraCards(final CardPoolView list) { aiExtraCards.addAll(list); }
     public void removeAIExtraCards(final CardPrinted card) { aiExtraCards.remove(card); }
