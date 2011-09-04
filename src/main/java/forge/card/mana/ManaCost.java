@@ -31,7 +31,7 @@ public class ManaCost {
      * @param manaCost a {@link java.lang.String} object.
      */
     public ManaCost(String manaCost) {
-        if (manaCost.equals(""))
+        if (manaCost.equals("") || manaCost.equals("C"))
             manaCost = "0";
 
         while (manaCost.contains("X")) {
