@@ -622,7 +622,7 @@ public class AbilityFactory_Animate {
     		c.addNewPT(power, toughness, timestamp);
         }
 
-        if (!types.isEmpty()) {
+        if (!types.isEmpty() || !removeTypes.isEmpty()) {
         	c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
         	        removeCreatureTypes, timestamp);
         }
