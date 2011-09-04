@@ -7,7 +7,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.FileUtil;
 import forge.SetUtils;
-import forge.Constant.Runtime;
 import forge.card.CardBlock;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
@@ -57,7 +56,7 @@ public class BoosterDraft_1 implements BoosterDraft {
      * 
      * TODO Write javadoc for Constructor.
      */
-    BoosterDraft_1() {
+    public BoosterDraft_1() {
         pack = get8BoosterPack();
     }
 

@@ -3,6 +3,8 @@ package forge;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
+
+import forge.game.limited.BoosterDraft;
 import org.testng.annotations.Test;
 
 /**

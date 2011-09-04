@@ -1,6 +1,7 @@
 package forge;
 
 import forge.deck.Deck;
+import forge.game.limited.BoosterDraft_1;
 import forge.gui.deckeditor.DeckEditorDraft;
 
 import org.testng.Assert;

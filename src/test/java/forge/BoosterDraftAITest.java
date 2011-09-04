@@ -5,6 +5,8 @@ import java.util.List;
 import forge.card.CardPool;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
+import forge.game.limited.BoosterDraftAI;
+
 import org.testng.annotations.Test;
 
 @Test(groups = {"UnitTest"}, timeOut = 5000, enabled = false)

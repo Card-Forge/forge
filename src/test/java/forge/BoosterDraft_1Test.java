@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import forge.card.CardRules;
 import forge.card.CardPoolView;
 
+import forge.game.limited.BoosterDraft_1;
+
 
 /**
  * Unit test for simple App.
