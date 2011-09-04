@@ -36,23 +36,26 @@ public class GenerateThemeDeck {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<String> getThemeNames() {
+    public final ArrayList<String> getThemeNames() {
         ArrayList<String> ltNames = new ArrayList<String>();
 
         File file = new File("res/quest/themes/");
 
-        if (!file.exists())
+        if (!file.exists()) {
             throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- file not found -- filename is "
                     + file.getAbsolutePath());
+        }
 
-        if (!file.isDirectory())
+        if (!file.isDirectory()) {
             throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- not a directory -- "
                     + file.getAbsolutePath());
+        }
 
         String[] fileList = file.list();
         for (int i = 0; i < fileList.length; i++) {
-            if (fileList[i].endsWith(".thm"))
+            if (fileList[i].endsWith(".thm")) {
                 ltNames.add(fileList[i].substring(0, fileList[i].indexOf(".thm")));
+            }
         }
 
         return ltNames;
@@ -61,67 +64,72 @@ public class GenerateThemeDeck {
     /**
      * <p>getThemeDeck.</p>
      *
-     * @param ThemeName a {@link java.lang.String} object.
-     * @param Size a int.
+     * @param themeName a {@link java.lang.String} object.
+     * @param size a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getThemeDeck(String ThemeName, int Size) {
+    public CardList getThemeDeck(final String themeName, final int size) {
         CardList tDeck = new CardList();
 
-        ArrayList<Grp> Groups = new ArrayList<Grp>();
+        ArrayList<Grp> groups = new ArrayList<Grp>();
 
-        Map<String, Integer> CardCounts = new HashMap<String, Integer>();
+        Map<String, Integer> cardCounts = new HashMap<String, Integer>();
 
         String s = "";
-        int BLandPercentage = 0;
-        boolean Testing = false;
+        int bLandPercentage = 0;
+        boolean testing = false;
 
         // read theme file
-        String tFileName = "res/quest/themes/" + ThemeName + ".thm";
+        String tFileName = "res/quest/themes/" + themeName + ".thm";
         File tFile = new File(tFileName);
-        if (!tFile.exists())
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file not found -- filename is " + tFile.getAbsolutePath());
+        if (!tFile.exists()) {
+            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file not found -- filename is "
+                    + tFile.getAbsolutePath());
+        }
 
         try {
             in = new BufferedReader(new FileReader(tFile));
         } catch (Exception ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is " + tFile.getPath());
+            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
+                    + tFile.getPath());
         }
 
         s = readLine();
         while (!s.equals("End")) {
             if (s.startsWith("[Group")) {
-                Grp G = new Grp();
+                Grp g = new Grp();
 
-                String ss[] = s.replaceAll("[\\[\\]]", "").split(" ");
+                String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
                 for (int i = 0; i < ss.length; i++) {
                     if (ss[i].startsWith("Percentage")) {
                         String p = ss[i].substring("Percentage".length() + 1);
-                        G.Percentage = Integer.parseInt(p);
+                        g.Percentage = Integer.parseInt(p);
                     }
                     if (ss[i].startsWith("MaxCnt")) {
                         String m = ss[i].substring("MaxCnt".length() + 1);
-                        G.MaxCnt = Integer.parseInt(m);
+                        g.MaxCnt = Integer.parseInt(m);
                     }
                 }
 
                 s = readLine();
                 while (!s.equals("[/Group]")) {
-                    G.Cardnames.add(s);
-                    CardCounts.put(s, 0);
+                    g.Cardnames.add(s);
+                    cardCounts.put(s, 0);
 
                     s = readLine();
                 }
 
-                Groups.add(G);
+                groups.add(g);
             }
 
-            if (s.startsWith("BasicLandPercentage"))
-                BLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
+            if (s.startsWith("BasicLandPercentage")) {
+                bLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
+            }
 
-            if (s.equals("Testing"))
-                Testing = true;
+            if (s.equals("Testing")) {
+                testing = true;
+            }
 
             s = readLine();
         }
@@ -130,7 +138,8 @@ public class GenerateThemeDeck {
             in.close();
         } catch (IOException ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
-            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is " + tFile.getPath());
+            throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
+                    + tFile.getPath());
         }
 
         String tmpDeck = "";
@@ -138,116 +147,122 @@ public class GenerateThemeDeck {
         // begin assigning cards to the deck
         Random r = MyRandom.random;
 
-        for (int i = 0; i < Groups.size(); i++) {
-            Grp G = Groups.get(i);
-            float p = (float) ((float) G.Percentage * .01);
-            int GrpCnt = (int) (p * (float) Size);
-            int cnSize = G.Cardnames.size();
-            tmpDeck += "Group" + i + ":" + GrpCnt + "\n";
+        for (int i = 0; i < groups.size(); i++) {
+            Grp g = groups.get(i);
+            float p = (float) ((float) g.Percentage * .01);
+            int grpCnt = (int) (p * (float) size);
+            int cnSize = g.Cardnames.size();
+            tmpDeck += "Group" + i + ":" + grpCnt + "\n";
 
-            for (int j = 0; j < GrpCnt; j++) {
-                s = G.Cardnames.get(r.nextInt(cnSize));
+            for (int j = 0; j < grpCnt; j++) {
+                s = g.Cardnames.get(r.nextInt(cnSize));
 
                 int lc = 0;
-                while (CardCounts.get(s) >= G.MaxCnt || lc > Size) // don't keep looping forever
+                while (cardCounts.get(s) >= g.MaxCnt || lc > size) // don't keep looping forever
                 {
-                    s = G.Cardnames.get(r.nextInt(cnSize));
+                    s = g.Cardnames.get(r.nextInt(cnSize));
                     lc++;
                 }
-                if (lc > Size)
-                    throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- looped too much -- filename is " + tFile.getAbsolutePath());
+                if (lc > size) {
+                    throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- looped too much -- filename is "
+                            + tFile.getAbsolutePath());
+                }
 
-                int n = CardCounts.get(s);
+                int n = cardCounts.get(s);
                 tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
-                CardCounts.put(s, n + 1);
+                cardCounts.put(s, n + 1);
                 tmpDeck += s + "\n";
 
             }
         }
 
         int numBLands = 0;
-        if (BLandPercentage > 0)    // if theme explicitly defines this
-        {
-            float p = (float) ((float) BLandPercentage * .01);
-            numBLands = (int) (p * (float) Size);
-        } else     // otherwise, just fill in the rest of the deck with basic lands
-            numBLands = Size - tDeck.size();
+        if (bLandPercentage > 0) {    // if theme explicitly defines this
+            float p = (float) ((float) bLandPercentage * .01);
+            numBLands = (int) (p * (float) size);
+        } else { // otherwise, just fill in the rest of the deck with basic lands
+            numBLands = size - tDeck.size();
+        }
 
         tmpDeck += "numBLands:" + numBLands + "\n";
 
         if (numBLands > 0)    // attempt to optimize basic land counts according to color representation
         {
-            CCnt ClrCnts[] = {new CCnt("Plains", 0),
+            CCnt[] clrCnts = {new CCnt("Plains", 0),
                     new CCnt("Island", 0),
                     new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0),
                     new CCnt("Forest", 0)};
 
             // count each instance of a color in mana costs
-            // TODO: count hybrid mana differently?
+            // TODO count hybrid mana differently?
             for (int i = 0; i < tDeck.size(); i++) {
                 String mc = tDeck.get(i).getManaCost();
 
                 for (int j = 0; j < mc.length(); j++) {
                     char c = mc.charAt(j);
 
-                    if (c == 'W')
-                        ClrCnts[0].Count++;
-                    else if (c == 'U')
-                        ClrCnts[1].Count++;
-                    else if (c == 'B')
-                        ClrCnts[2].Count++;
-                    else if (c == 'R')
-                        ClrCnts[3].Count++;
-                    else if (c == 'G')
-                        ClrCnts[4].Count++;
+                    if (c == 'W') {
+                        clrCnts[0].Count++;
+                    } else if (c == 'U') {
+                        clrCnts[1].Count++;
+                    } else if (c == 'B') {
+                        clrCnts[2].Count++;
+                    } else if (c == 'R') {
+                        clrCnts[3].Count++;
+                    } else if (c == 'G') {
+                        clrCnts[4].Count++;
+                    }
                 }
             }
 
             int totalColor = 0;
             for (int i = 0; i < 5; i++) {
-                totalColor += ClrCnts[i].Count;
-                tmpDeck += ClrCnts[i].Color + ":" + ClrCnts[i].Count + "\n";
+                totalColor += clrCnts[i].Count;
+                tmpDeck += clrCnts[i].Color + ":" + clrCnts[i].Count + "\n";
             }
 
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (ClrCnts[i].Count > 0) {    // calculate number of lands for each color
-                    float p = (float) ClrCnts[i].Count / (float) totalColor;
+                if (clrCnts[i].Count > 0) {    // calculate number of lands for each color
+                    float p = (float) clrCnts[i].Count / (float) totalColor;
                     int nLand = (int) ((float) numBLands * p);
-                    tmpDeck += "numLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
+                    tmpDeck += "numLand-" + clrCnts[i].Color + ":" + nLand + "\n";
 
-                    CardCounts.put(ClrCnts[i].Color, 2);
-                    for (int j = 0; j < nLand; j++)
-                        tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
+                    cardCounts.put(clrCnts[i].Color, 2);
+                    for (int j = 0; j < nLand; j++) {
+                        tDeck.add(AllZone.getCardFactory().getCard(clrCnts[i].Color, AllZone.getComputerPlayer()));
+                    }
                 }
             }
         }
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
 
-        if (tDeck.size() < Size) {
-            int diff = Size - tDeck.size();
+        if (tDeck.size() < size) {
+            int diff = size - tDeck.size();
 
             for (int i = 0; i < diff; i++) {
                 s = tDeck.get(r.nextInt(tDeck.size())).getName();
 
-                while (CardCounts.get(s) >= 4)
+                while (cardCounts.get(s) >= 4) {
                     s = tDeck.get(r.nextInt(tDeck.size())).getName();
+                }
 
-                int n = CardCounts.get(s);
+                int n = cardCounts.get(s);
                 tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
-                CardCounts.put(s, n + 1);
+                cardCounts.put(s, n + 1);
                 tmpDeck += "Added:" + s + "\n";
             }
-        } else if (tDeck.size() > Size) {
-            int diff = tDeck.size() - Size;
+        } else if (tDeck.size() > size) {
+            int diff = tDeck.size() - size;
 
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand())
+                while (c.isBasicLand()) {
                     c = tDeck.get(r.nextInt(tDeck.size()));
+                }
 
                 tDeck.remove(c);
                 tmpDeck += "Removed:" + s + "\n";
@@ -255,8 +270,9 @@ public class GenerateThemeDeck {
         }
 
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-        if (Testing)
+        if (testing) {
             ErrorViewer.showError(tmpDeck);
+        }
 
         return tDeck;
     }
@@ -270,14 +286,21 @@ public class GenerateThemeDeck {
         //makes the checked exception, into an unchecked runtime exception
         try {
             String s = in.readLine();
-            if (s != null) s = s.trim();
+            if (s != null) {
+                s = s.trim();
+            }
             return s;
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("GenerateThemeDeck : readLine error");
         }
-    }//readLine(Card)
+    } //readLine(Card)
 
+    /**
+     * 
+     * TODO Write javadoc for this type.
+     *
+     */
     class CCnt {
         public String Color;
         public int Count;
@@ -288,6 +311,11 @@ public class GenerateThemeDeck {
         }
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this type.
+     *
+     */
     class Grp {
         public ArrayList<String> Cardnames = new ArrayList<String>();
         public int MaxCnt;

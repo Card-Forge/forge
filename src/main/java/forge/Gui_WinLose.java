@@ -46,7 +46,7 @@ import java.util.List;
  * @version $Id$
  */
 public class Gui_WinLose extends JFrame implements NewConstants {
-    /** Constant <code>serialVersionUID=-5800412940994975483L</code> */
+    /** Constant <code>serialVersionUID=-5800412940994975483L</code>. */
     private static final long serialVersionUID = -5800412940994975483L;
 
     private JLabel titleLabel = new JLabel();
@@ -72,6 +72,10 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
     /**
      * <p>Constructor for Gui_WinLose.</p>
+     * 
+     * @param matchState a QuestMatchState
+     * @param quest a QuestData object
+     * @param qa a Quest_Assignment object
      */
     public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final Quest_Assignment qa) {
         model = new WinLoseModel();
@@ -118,7 +122,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         } else {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.LOSE));
         }
-    }//setup();
+    } //setup();
 
     /**
      * <p>jbInit.</p>
@@ -134,15 +138,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         this.getContentPane().setLayout(new MigLayout("fill"));
         continueButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.CONTINUE));
         continueButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) { continueButton_actionPerformed(e); }
+            public void actionPerformed(final ActionEvent e) { continueButton_actionPerformed(e); }
         });
         restartButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.RESTART));
         restartButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) { restartButton_actionPerformed(e); }
+            public void actionPerformed(final ActionEvent e) { restartButton_actionPerformed(e); }
         });
         quitButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.QUIT));
         quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) { quitButton_actionPerformed(e); }
+            public void actionPerformed(final ActionEvent e) { quitButton_actionPerformed(e); }
         });
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,7 +154,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         jPanel2.setLayout(new MigLayout("align center"));
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) { this_windowClosing(e); }
+            public void windowClosing(final WindowEvent e) { this_windowClosing(e); }
         });
         this.getContentPane().add(titleLabel, "align center, grow, wrap");
         this.getContentPane().add(statsLabel, "align center, grow, wrap");
@@ -166,38 +170,41 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
-    void continueButton_actionPerformed(ActionEvent e) {
+    final void continueButton_actionPerformed(ActionEvent e) {
         // issue 147 - keep battlefield up following win/loss
         JFrame frame = (JFrame) AllZone.getDisplay();
         frame.dispose();
 
         //open up "Game" screen
-        PrepareForNextRound();
+        prepareForNextRound();
         AllZone.getDisplay().setVisible(true);
         frame.setEnabled(true);
         dispose();
     }
-    
-    void PrepareForNextRound()
-    {
+
+    void prepareForNextRound() {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
             if (model.qa != null) {
                 forge.quest.data.QuestUtil.setupQuest(model.qa);
-                if (model.quest.getInventory().hasItem("Zeppelin"))
+                if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
+                }
             }
-            //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
+            //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
+            //humanList, computerList, humanLife, computerLife);
             CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(model.quest, model.qa);
             CardList computerList = new CardList();
 
 
             int humanLife = model.quest.getLife() + extraLife;
             int computerLife = 20;
-            if ( model.qa != null )
+            if (model.qa != null) {
                 computerLife = model.qa.getComputerLife();
+            }
 
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, model.qa);
+            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
+                    humanList, computerList, humanLife, computerLife, model.qa);
         } else {
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
@@ -209,13 +216,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
-    void restartButton_actionPerformed(ActionEvent e) {
+    final void restartButton_actionPerformed(ActionEvent e) {
         // issue 147 - keep battlefield up following win/loss
         JFrame frame = (JFrame) AllZone.getDisplay();
         frame.dispose();
-        
+
         model.match.reset();
-        PrepareForNextRound();
+        prepareForNextRound();
         AllZone.getDisplay().setVisible(true);
         frame.setEnabled(true);
         dispose();
@@ -229,7 +236,9 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param q a {@link forge.quest.data.QuestData} object.
      * @return a {@link java.lang.String} object.
      */
-    private String getCreditsAwardedText(final long creds, final QuestMatchState matchState, final forge.quest.data.QuestData q) {
+    private String getCreditsAwardedText(final long creds, final QuestMatchState matchState,
+            final forge.quest.data.QuestData q)
+    {
         // TODO use q.qdPrefs to write bonus credits in prefs file
         StringBuilder sb = new StringBuilder("<html>");
 
@@ -296,7 +305,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         } else if (estatesLevel == 2) { sb.append("Estates bonus: <b>15%</b>.<br>");
         } else if (estatesLevel == 3) { sb.append("Estates bonus: <b>20%</b>.<br>");
         }
-        
+
         sb.append(String.format("<br>You have earned <b>%d credits</b> in total.", creds));
         sb.append("</html>");
         return sb.toString();
@@ -308,7 +317,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param fileName a {@link java.lang.String} object.
      * @return a {@link javax.swing.ImageIcon} object.
      */
-    private ImageIcon getIcon(String fileName) {
+    private ImageIcon getIcon(final String fileName) {
         File base = ForgeProps.getFile(IMAGE_ICON);
         File file = new File(base, fileName);
         ImageIcon icon = new ImageIcon(file.toString());
@@ -320,12 +329,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
-    void quitButton_actionPerformed(ActionEvent e) {
+    final void quitButton_actionPerformed(ActionEvent e) {
         // issue 147 - keep battlefield up following win/loss
         JFrame frame = (JFrame) AllZone.getDisplay();
         frame.dispose();
         frame.setEnabled(true);
-        
+
         //are we on a quest?
         if (AllZone.getQuestData() == null) {
             new OldGuiNewGame();
@@ -356,7 +365,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             model.quest.saveData();
 
             new QuestFrame();
-        }//else - on quest
+        } //else - on quest
 
         dispose();
 
@@ -375,14 +384,17 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         quitButton_actionPerformed(null);
     }
 
-    protected void giveBooster()
-    {
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     */
+    protected final void giveBooster() {
         String[] boosterTypes = {"Legacy", "Extended", "Standard"};
         String boosterType = GuiUtils.getChoice("Choose prize booster format", boosterTypes);
         List<String> setsToGive = null;
         if (boosterTypes[2].equals(boosterType)) { // T2
             setsToGive = new ArrayList<String>();
-            setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN"}));
+            setsToGive.addAll(Arrays.asList(new String[]{"M12", "NPH", "MBS", "M11", "ROE", "WWK", "ZEN"}));
         }
         if (boosterTypes[1].equals(boosterType)) { // Ext
             setsToGive = new ArrayList<String>();
@@ -393,9 +405,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
-        
+
     }
 
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * @param wonMatch
+     */
     protected void giveQuestRewards(final boolean wonMatch) {
         // Award a random booster, as frequent as set in difficulty setup
         if (model.quest.getRewards().willGiveBooster(wonMatch)) {
@@ -420,7 +437,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             if (wins > 0 && wins % 80 == 0) // at every 80 wins, give 10 random rares
             {
                 List<CardPrinted> randomRares = model.quest.getCards().addRandomRare(10);
-                
+
                 ImageIcon icon = getIcon("BoxIcon.png");
                 String title = "You just won 10 random rares!";
                 CardListViewer c = new CardListViewer("Random rares", title, randomRares, icon);
@@ -464,7 +481,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             fileName = CardUtil.buildFilename(c) +".jpg";
             icon = getCardIcon(fileName);
 
-            JOptionPane.showMessageDialog(null, "", "You have won a random rare for winning against a very hard deck.", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "", "You have won a random rare for winning against a very hard deck.",
+            JOptionPane.INFORMATION_MESSAGE, icon);
         }*/
 
         // Loss match penalty
