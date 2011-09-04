@@ -418,6 +418,24 @@ Comment=
 - Fixed a couple of compile errors from 10194, yet could not handle them all.
 - Frantic changes to Deck and DeckManager to fix errors in r10194.
 - Added the recent commit logs to changes.txt.
+- Fixed description of Coralhelm Commander.
+- Better fix for the StackOverflow when donating stuff. You know, one that *doesn't* cause other GainControl abilities to spaz out.
+- Deck and DeckManager restored.
+- Updated Oracle text for recently added cards.
+- Fixed subability cost.
+- Added "TargetUnique$ True" to Toils of Night and Day.
+- Added a python script that parses the mtg-data.txt and produces card templates for card names entered at a prompt. It doesn't scrape magiccards.info for image data so that SetInfo lines are bogus.
+- DeckManager updated to ignore tokens stored in Quest decks. QuestUtil updated (poorly) for a quick fix on a couple of errors.
+- Fixed the typos for the cards: Nin, the Pain Artist; Vedalken Dismisser; Latulla, Keldon Overseer; Pearlspear Courier; Sorceress Queen; Khabal Ghoul; Skulking Ghost and Diligent Farmhand.
+- Reverted sources to revision 10193, changes from r10200 were kept (not reverted).
+- Disabled Sideboard parsing of deck files (because it currently chokes on the quest files).
+- The restart match button is now always enabled.
+- Fixed an incompatibility of getShortColorsString and ManaCost (the former translating Colorless to C which the latter doesn't take).
+- Added the option "RemoveType" to continuous static abilities to remove one special type.
+- Added Oracle text to some cards.
+- Updated two DiscardMe SVars.
+- Added the option "RemoveTypes" to AF Animate to remove one special type.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
