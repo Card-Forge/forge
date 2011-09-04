@@ -346,7 +346,7 @@ public class DeckManager {
         }
 
         //readDeck sideboard
-        while (lineIterator.hasNext()) {
+        /*while (lineIterator.hasNext()) {
             line = lineIterator.next();
             Matcher m = p.matcher(line);
             m.matches();
@@ -358,7 +358,7 @@ public class DeckManager {
             for (int i = 0; i < count; i++) {
                 d.addSideboard(cardName);
             }
-        }
+        }*/
     }
 
     /**
