@@ -21,8 +21,7 @@ public final class QuestUtilCards {
     private QuestData q;
     public QuestUtilCards(final QuestData qd) { q = qd; }
 
-    public void generateBasicLands(int nBasic, int nSnow)
-    {
+    public void generateBasicLands(final int nBasic, final int nSnow) {
         CardDb db = CardDb.instance();
         q.cardPool.add(db.getCard("Forest", "M10"), nBasic);
         q.cardPool.add(db.getCard("Mountain", "M10"), nBasic);
@@ -36,7 +35,6 @@ public final class QuestUtilCards {
         q.cardPool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
         q.cardPool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
     }
-    
 
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
@@ -62,31 +60,43 @@ public final class QuestUtilCards {
 
     public void addAllCards(final Iterable<CardPrinted> newCards) {
         for (CardPrinted card : newCards) {
-            q.cardPool.add(card);
+            addSingleCard(card);
         }
     }
+    
+    public void addSingleCard(CardPrinted card) {
+        q.cardPool.add(card);
 
-    public CardPrinted addRandomRare() { return addRandomRare(1).get(0); }
+        // register card into that list so that it would appear as a new one.
+        q.newCardList.add(card);
+    }
+
+    private static final Predicate<CardPrinted> rarePredicate = CardPrinted.Predicates.Presets.isRareOrMythic;
+    public CardPrinted addRandomRare() {
+        CardPrinted card = rarePredicate.random(CardDb.instance().getAllCards());
+        addSingleCard(card);
+        return card;
+    }
     public List<CardPrinted> addRandomRare(final int n) {
-        List<CardPrinted> newCards = CardPrinted.Predicates.Presets.isRareOrMythic.random(CardDb.instance().getAllCards(), n);
+        List<CardPrinted> newCards = rarePredicate.random(CardDb.instance().getAllCards(), n);
         addAllCards(newCards);
         return newCards;
     }
 
-    public void setupNewGameCardPool(Predicate<CardPrinted> filter, int idxDifficulty)
+    public void setupNewGameCardPool(final Predicate<CardPrinted> filter, final int idxDifficulty)
     {
         int nC = QuestPreferences.getStartingCommons(idxDifficulty);
         int nU = QuestPreferences.getStartingUncommons(idxDifficulty);
         int nR = QuestPreferences.getStartingRares(idxDifficulty);
-        
+
         addAllCards(QuestBoosterPack.getQuestStarterDeck(filter, nC, nU, nR));
     }
-    
+
     public void buyCard(final CardPrinted card, final int value) {
         if (q.credits >= value) {
             q.credits -= value;
-            q.cardPool.add(card);
             q.shopList.remove(card);
+            addSingleCard(card);
         }
     }
 
@@ -109,37 +119,39 @@ public final class QuestUtilCards {
 
     public double getSellMutliplier() {
         double multi = 0.20 + (0.001 * q.getWin());
-        if (multi > 0.6)
+        if (multi > 0.6) {
             multi = 0.6;
+        }
 
         int lvlEstates = q.isFantasy() ? q.inventory.getItemLevel("Estates") : 0;
         switch (lvlEstates) {
             case 1: multi += 0.01; break;
             case 2: multi += 0.0175; break;
             case 3: multi += 0.025; break;
+            default: break;
         }
-        
+
         return multi;
     }
 
     public int getSellPriceLimit() {
-        return q.getWin() <= 50 ? 1000 : Integer.MAX_VALUE; 
+        return q.getWin() <= 50 ? 1000 : Integer.MAX_VALUE;
     }
-    
+
     public void generateCardsInShop() {
         ReadBoosterPack pack = new ReadBoosterPack();
-        
+
         int levelPacks = q.getLevel() > 0 ? 4 / q.getLevel() : 4;
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
-        
+
         CardPoolView fromBoosters = pack.getShopCards(totalPacks);
         q.shopList.clear();
         q.shopList.addAll(fromBoosters);
     }
 
     public CardPool getCardpool() {
-        return q.cardPool; 
+        return q.cardPool;
     }
 
     public CardPoolView getShopList() {
@@ -147,6 +159,13 @@ public final class QuestUtilCards {
             generateCardsInShop();
         }
         return q.shopList;
-    }    
-    
+    }
+
+    public CardPoolView getNewCards() {
+        return q.newCardList;
+    }
+
+    public void resetNewList() {
+        q.newCardList.clear();
+    }
 }

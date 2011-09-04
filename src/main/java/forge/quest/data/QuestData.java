@@ -109,8 +109,14 @@ public final class QuestData {
     }
 
     private void initTransients() {
+        // These are helper classes that hold no data.
         myCards = new QuestUtilCards(this);
         myRewards = new QuestUtilRewards(this);
+
+        // to avoid NPE some pools will be created here if they are null
+        if (null == newCardList) { newCardList = new CardPool(); }
+        if (null == shopList) { shopList = new CardPool(); }
+
     }
 
     public void newGame(final int diff, final String m0de, final boolean standardStart) {

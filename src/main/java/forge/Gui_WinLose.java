@@ -347,6 +347,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                 model.quest.clearAvailableQuests();
             }
 
+            model.quest.getCards().resetNewList();
             giveQuestRewards(wonMatch);
 
             model.match.reset();

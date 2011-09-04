@@ -51,11 +51,13 @@ public final class DeckEditorShop extends DeckEditorBase {
     private double multiplier;
 
     private QuestData questData;
-
+    private CardPoolView newCardsList;
+    
     // get pricelist:
     private ReadPriceList r = new ReadPriceList();
     private Map<String, Integer> mapPrices = r.getPriceList();
     private Map<CardPrinted, Integer> decksUsingMyCards;
+    
 
 
     public void show(final Command exitCommand) {
@@ -67,7 +69,7 @@ public final class DeckEditorShop extends DeckEditorBase {
                 exitCommand.execute();
             }
         };
-
+        
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -88,6 +90,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             forSale = questData.getCards().getShopList();
         }
         CardPoolView owned = questData.getCards().getCardpool().getView();
+        newCardsList = questData.getCards().getNewCards();
 
         setDecks(forSale, owned);
 
@@ -139,6 +142,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         top.setup(columns, cardView);
 
         columnsBelow.add(new TableColumnInfo<CardPrinted>("#Dk", 30, fnDeckCompare, fnDeckGet));
+        columnsBelow.add(new TableColumnInfo<CardPrinted>("New", 30, fnNewCompare, fnNewGet));
         columnsBelow.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
         bottom.setup(columnsBelow, cardView);
 
@@ -155,7 +159,7 @@ public final class DeckEditorShop extends DeckEditorBase {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public DeckEditorShop(forge.quest.data.QuestData qd) {
+    public DeckEditorShop(final QuestData qd) {
         questData = qd;
         try {
             filterBoxes = null;
@@ -298,5 +302,17 @@ public final class DeckEditorShop extends DeckEditorBase {
             public Object apply(final Entry<CardPrinted, Integer> from) {
                 Integer iValue = decksUsingMyCards.get(from.getKey());
                 return iValue == null ? "" : iValue.toString();
+            } };
+            
+    @SuppressWarnings("rawtypes")
+    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnNewCompare =
+        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
+            public Comparable apply(final Entry<CardPrinted, Integer> from) {
+                return newCardsList.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            } };
+    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnNewGet =
+        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
+            public Object apply(final Entry<CardPrinted, Integer> from) {
+                return newCardsList.contains(from.getKey()) ? "NEW" : "";
             } };
 }

@@ -48,7 +48,11 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
     @Override
     public final Iterator<Entry<CardPrinted, Integer>> iterator() { return cards.entrySet().iterator(); }
 
-    // Cards manipulation
+    // Cards read only operations
+    public final boolean contains(final CardPrinted card) {
+        if (cards == null) { return false; }
+        return cards.containsKey(card);
+    }
     public final int count(final CardPrinted card) {
         if (cards == null) { return 0; }
         Integer boxed = cards.get(card);
@@ -60,19 +64,21 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
         return result;
     }
     public final int countDistinct() { return cards.size(); }
-    public final boolean isEmpty() { return cards.isEmpty(); }
+    public final boolean isEmpty() { return cards == null || cards.isEmpty(); }
 
     public final List<Entry<CardPrinted, Integer>> getOrderedList() {
-        if (!isListInSync) {
-            cardsListOrdered.clear();
-            if (cards != null) {
-                for (Entry<CardPrinted, Integer> e : cards.entrySet()) {
-                    cardsListOrdered.add(e);
-                }
-            }
-            isListInSync = true;
-        }
+        if (!isListInSync) { rebuildOrderedList(); }
         return cardsListOrdered;
+    }
+
+    private void rebuildOrderedList() {
+        cardsListOrdered.clear();
+        if (cards != null) {
+            for (Entry<CardPrinted, Integer> e : cards.entrySet()) {
+                cardsListOrdered.add(e);
+            }
+        }
+        isListInSync = true;
     }
 
     public final List<CardPrinted> toFlatList() {
