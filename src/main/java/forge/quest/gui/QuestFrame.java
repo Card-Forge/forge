@@ -3,6 +3,7 @@ package forge.quest.gui;
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
+import forge.quest.gui.main.QuestMainPanel;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;

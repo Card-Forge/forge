@@ -13,7 +13,7 @@ import java.util.*;
  * <p>Deck class.</p>
  *
  * @author Forge
- * @version $Id: Deck.java 10183 2011-09-02 22:51:47Z Max mtg $
+ * @version $Id$
  */
 public final class Deck implements Comparable<Deck>, Serializable {
     /**
@@ -27,8 +27,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     private CardPool main;
     private CardPool sideboard;
-    private CardPool humanExtraCards;
-    private CardPool aiExtraCards;
 
     /** Constant <code>NAME="Name"</code> */
     public static final String NAME = "Name";
@@ -47,10 +45,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * <p>Constructor for Deck.</p>
      */
     public Deck() {
-        main            = new CardPool();
-        sideboard       = new CardPool();
-        humanExtraCards = new CardPool();
-        aiExtraCards    = new CardPool();
+        main = new CardPool();
+        sideboard = new CardPool();
     }
 
     /**
@@ -95,24 +91,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public CardPoolView getSideboard() {
         return sideboard.getView();
-    }
-    
-    /**
-     * <p>Getter for the field <code>humanExtraCards</code>.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public CardPoolView getHumanExtraCards() {
-        return humanExtraCards.getView();
-    }
-    
-    /**
-     * <p>Getter for the field <code>aiExtraCards</code>.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public CardPoolView getAIExtraCards() {
-        return aiExtraCards.getView();
     }
 
     /**
@@ -222,30 +200,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
         sideboard.remove(card);
     }
 
-    /**
-     * <p>addHumanExtraCards.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     */
-    public void addHumanExtraCards(final String cardName) { addHumanExtraCards(CardDb.instance().getCard(cardName)); }
-    public void addHumanExtraCards(final CardPrinted card) { humanExtraCards.add(card); }
-    public void addHumanExtraCards(final CardPoolView list) { humanExtraCards.addAll(list); }
-    public void removeHumanExtraCards(final CardPrinted card) { humanExtraCards.remove(card); }
-    public void removeHumanExtraCards(final CardPrinted card, final int amount) { humanExtraCards.remove(card, amount); }
-    public int countHumanExtraCards() { return main.countAll(); }
-    
-    /**
-     * <p>addAIExtraCards.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     */
-    public void addAIExtraCards(final String cardName) { addAIExtraCards(CardDb.instance().getCard(cardName)); }
-    public void addAIExtraCards(final CardPrinted card) { aiExtraCards.add(card); }
-    public void addAIExtraCards(final CardPoolView list) { aiExtraCards.addAll(list); }
-    public void removeAIExtraCards(final CardPrinted card) { aiExtraCards.remove(card); }
-    public void removeAIExtraCards(final CardPrinted card, final int amount) { aiExtraCards.remove(card, amount); }
-    public int countAIExtraCards() { return aiExtraCards.countAll(); }
-    
     /**
      * <p>isDraft.</p>
      *
