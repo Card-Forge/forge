@@ -425,17 +425,17 @@ public class AbilityFactory_Attach {
 			prefList = list.filter(new CardListFilter() {
 				@Override
 				public boolean addCard(Card c) {
-					if (c.hasKeyword("Indestructible") && c.getNetDefense() <= Math.abs(tgh))
+					if (!c.hasKeyword("Indestructible") && c.getLethalDamage() <= Math.abs(tgh))
 						return true;
 					
-					return c.getLethalDamage() <= Math.abs(tgh);
+					return c.getNetDefense() <= Math.abs(tgh);
 				}
 			});
 		}
 		Card c = null;
 		if (prefList == null || prefList.size() == 0)
 			prefList = new CardList(list);
-		else if (prefList.size() > 0){
+		else {
 			c = CardFactoryUtil.AI_getBest(prefList);
 			if (c != null)
 				return c;
