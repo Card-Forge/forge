@@ -220,17 +220,21 @@ public class DeckManager {
 
         File[] files;
 
+        List<String> decksThatFailedToLoad = new ArrayList<String>();
         files = deckDir.listFiles(DCKFileFilter);
         for (File file : files) {
-            
             try {
                 Deck newDeck = readDeck(file);
                 deckMap.put(newDeck.getName(), newDeck);
-            } catch ( NoSuchElementException ex ) {
-                String message = String.format("Your deck '%s' failed to load beacuse %s", file.getName(), ex.getMessage());
-                JOptionPane.showMessageDialog(null, message, "One of your decks failed to load", JOptionPane.ERROR_MESSAGE);
+            } catch (NoSuchElementException ex) {
+                String message = String.format("%s failed to load because ---- %s", file.getName(), ex.getMessage());
+                decksThatFailedToLoad.add(message);
             }
-            
+        }
+
+        if (!decksThatFailedToLoad.isEmpty()) {
+            JOptionPane.showMessageDialog(null, StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
+                "Some of your decks were not loaded.", JOptionPane.WARNING_MESSAGE);
         }
 
         files = deckDir.listFiles(BDKFileFilter);
