@@ -13,6 +13,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -243,6 +245,10 @@ public class ListChooser<T> {
             d = p.createDialog(p.getParent(), title);
             if (minChoices != 0) d.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             jList.setSelectedIndex(0);
+            d.addWindowFocusListener(new WindowFocusListener() {
+                @Override public void windowGainedFocus(final WindowEvent e) { jList.grabFocus(); }
+                @Override public void windowLostFocus(final WindowEvent e) { }
+            });
             d.setVisible(true);
             d.dispose();
             value = (Integer) p.getValue();
