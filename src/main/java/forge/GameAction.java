@@ -1053,41 +1053,30 @@ public class GameAction {
             CardFactoryInterface c = AllZone.getCardFactory();
             
             Card.resetUniqueNumber();
+            
+            boolean canRandomFoil = Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed);
 
             Random generator = MyRandom.random;
-            for (Entry<CardPrinted, Integer> cardPile : humanDeck.getMain()) {
-                for (int i = 0; i < cardPile.getValue(); i++) {
-                    String cardName = cardPile.getKey().getName();
-                    String setCode = cardPile.getKey().getSet();
-    
-                    Card card = c.getCard(cardName, AllZone.getHumanPlayer());
-    
-                    if (!setCode.equals(""))
-                        card.setCurSetCode(setCode);
-                    else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
-                        card.setRandomSetCode();
-    
-                    if (!card.getCurSetCode().equals("")) {
-                        int n = SetInfoUtil.getSetInfoCode(card.getSets(), card.getCurSetCode()).PicCount;
-                        if (n > 1)
-                            card.setRandomPicture(generator.nextInt(n - 1) + 1);
-    
-                        card.setImageFilename(CardUtil.buildFilename(card));
-                    }
-                    
+            for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
+                CardPrinted cardPrinted = stackOfCards.getKey();
+                for (int i = 0; i < stackOfCards.getValue(); i++) {
+
+                    Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
+                    card.setCurSetCode(cardPrinted.getSet());
+
+                    int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                    if (cntVariants > 1) { card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1); }
+
+                    card.setImageFilename(CardUtil.buildFilename(card));
+
                     // Assign random foiling on approximately 1:20 cards
-                    if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
-                    	if (MyRandom.percentTrue(5))
-                    		card.setFoil(MyRandom.random.nextInt(9) + 1);
+                    if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                        int iFoil = MyRandom.random.nextInt(9) + 1;
+                        card.setFoil(iFoil);
                     }
-                    // foiling for cards explicitly foiled in deck
-                    if (cardPile.getKey().isFoil()) { card.setFoil(MyRandom.random.nextInt(9) + 1); }
-    
-                    //System.out.println("human random number:" + card.getRandomPicture());
-                    //}
-    
+
                     AllZone.getHumanLibrary().add(card);
-    
+
                     for (Trigger trig : card.getTriggers()) {
                         AllZone.getTriggerHandler().registerTrigger(trig);
                     }
@@ -1095,50 +1084,30 @@ public class GameAction {
             }
 
             ArrayList<String> RAICards = new ArrayList<String>();
-            for (Entry<CardPrinted, Integer> cardPile : computerDeck.getMain()) {
-                for (int i = 0; i < cardPile.getValue(); i++) {
+            for (Entry<CardPrinted, Integer> stackOfCards : computerDeck.getMain()) {
+                CardPrinted cardPrinted = stackOfCards.getKey();
+                for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                    String cardName = cardPile.getKey().getName();
-                    String setCode = cardPile.getKey().getSet();
-    
-                    Card card = c.getCard(cardName, AllZone.getComputerPlayer());
-    
-                    //if(card.isBasicLand()) {
-                    //String PC = card.getSVar("PicCount");
-                    //int n = 0;
-                    //if (PC.matches("[0-9][0-9]?"))
-                    //	n = Integer.parseInt(PC);
-                    //if (n > 1)
-                    //    card.setRandomPicture(generator.nextInt(n));
-                    //System.out.println("computer random number:" + card.getRandomPicture());
-                    //}
-    
-                    if (!setCode.equals(""))
-                        card.setCurSetCode(setCode);
-                    else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
-                        card.setRandomSetCode();
-    
-                    if (!card.getCurSetCode().equals("")) {
-                        int n = SetInfoUtil.getSetInfoCode(card.getSets(), card.getCurSetCode()).PicCount;
-                        if (n > 1)
-                            card.setRandomPicture(generator.nextInt(n - 1) + 1);
-    
-                        card.setImageFilename(CardUtil.buildFilename(card));
-                    }
-    
+                    Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
+                    card.setCurSetCode(cardPrinted.getSet());
+
+                    int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                    if (cntVariants > 1) { card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1); }
+
+                    card.setImageFilename(CardUtil.buildFilename(card));
+
                     // Assign random foiling on approximately 1:20 cards
-                    if (Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
-                    	if (MyRandom.percentTrue(5))
-                    		card.setFoil(MyRandom.random.nextInt(9) + 1);
+                    if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                        int iFoil = MyRandom.random.nextInt(9) + 1;
+                        card.setFoil(iFoil);
                     }
-                    if (cardPile.getKey().isFoil()) { card.setFoil(MyRandom.random.nextInt(9) + 1); }
-                    
+
                     AllZone.getComputerLibrary().add(card);
-    
+
                     for (Trigger trig : card.getTriggers()) {
                         AllZone.getTriggerHandler().registerTrigger(trig);
                     }
-    
+
                     if (card.getSVar("RemAIDeck").equals("True"))
                         RAICards.add(card.getName());
                     //get card picture so that it is in the image cache

@@ -160,4 +160,5 @@ public final class TableWithCards {
     public CardPoolView getCards() {
         return pool;
     }
+
 }

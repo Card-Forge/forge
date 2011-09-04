@@ -1,4 +1,6 @@
-package forge;
+package forge.game.limited;
+
+import forge.Constant;
 
 /**
  * Created by IntelliJ IDEA.

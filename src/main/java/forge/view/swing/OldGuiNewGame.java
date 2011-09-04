@@ -9,6 +9,8 @@ import forge.deck.DeckManager;
 import forge.deck.generate.*;
 import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
+import forge.game.limited.BoosterDraft_1;
+import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.deckeditor.DeckEditorDraft;

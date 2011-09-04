@@ -28,7 +28,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import net.slightlymagic.maxmtg.Predicate.StringOp;
 import forge.Command;
 import forge.Constant;
-import forge.SetInfoUtil;
+import forge.SetUtils;
 import forge.card.CardRules;
 import forge.card.CardDb;
 import forge.card.CardPrinted;
@@ -278,8 +278,8 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
 
         searchSetCombo.removeAllItems();
         searchSetCombo.addItem("");
-        for (int i = 0; i < SetInfoUtil.getNameList().size(); i++)
-            searchSetCombo.addItem(SetInfoUtil.getNameList().get(i));
+        for (int i = 0; i < SetUtils.getNameList().size(); i++)
+            searchSetCombo.addItem(SetUtils.getNameList().get(i));
         searchSetCombo.addItemListener(itemListenerUpdatesDisplay);
 
         this.getContentPane().add(searchSetCombo, "wmin 150, grow");
@@ -326,7 +326,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         }
         
         if (searchSetCombo.getSelectedIndex() != 0) {
-            String setCode = SetInfoUtil.getCode3ByName(searchSetCombo.getSelectedItem().toString());
+            String setCode = SetUtils.getCode3ByName(searchSetCombo.getSelectedItem().toString());
             rules.add(CardRules.Predicates.wasPrintedInSet(setCode));
         }
 

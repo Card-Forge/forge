@@ -1,8 +1,18 @@
-package forge;
+package forge.game.limited;
 
+import forge.AllZone;
+import forge.BoosterGenerator;
+import forge.Card;
+import forge.CardList;
+import forge.Constant;
+import forge.FileUtil;
+import forge.SetUtils;
+import forge.Constant.Runtime;
+import forge.card.CardBlock;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.CardSet;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 
@@ -20,8 +30,8 @@ import javax.swing.JOptionPane;
 public class BoosterDraft_1 implements BoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
     private static final int nPlayers = 8;
-    //private static int boosterPackSize = 15;
-    private static int stopCount = 45; //boosterPackSize * 3;//should total of 45
+    //private static int boosterPackSize = 14; // 10 com + 3 unc + 1 rare/myth
+    private static int stopCount = 42; //boosterPackSize * 3;//should total of 42 - because you don't draft lands
 
     private int currentCount = 0;
     private List<List<CardPrinted>> pack; //size 8
@@ -68,61 +78,50 @@ public class BoosterDraft_1 implements BoosterDraft {
 
             LandSetCode[0] = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
         } else if (draftType.equals("Block")) {    // Draft from cards by block or set
-            ArrayList<String> bNames = SetInfoUtil.getBlockNameList();
-            ArrayList<String> rbNames = new ArrayList<String>();
-            for (int i = bNames.size() - 1; i >= 0; i--) {
-                rbNames.add(bNames.get(i));
-            }
+            List<CardBlock> blocks = SetUtils.getBlocks();
 
-            Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
+            Object o = GuiUtils.getChoice("Choose Block", blocks.toArray());
+            CardBlock block = (CardBlock) o;
 
-            ArrayList<String> blockSets = SetInfoUtil.getSetsBlockName(o.toString());
-            int nPacks = SetInfoUtil.getDraftPackCount(o.toString());
+            CardSet[] cardSets = block.getSets();  
+            String[] sets = new String[cardSets.length];
+            for (int k = cardSets.length - 1; k >= 0 ; --k) { sets[k] = cardSets[k].getCode();} 
+
+            int nPacks = block.getCntBoostersDraft();
 
             ArrayList<String> setCombos = new ArrayList<String>();
+            if (sets.length >= 2) {
+                setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+            }
+            if (sets.length >= 3) {
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
+            }
 
-            //if (blockSets.get(1).equals("") && blockSets.get(2).equals("")) { // Block only has one set
-            if (blockSets.size() == 1) {
-                BoosterGenerator bpOne = new BoosterGenerator(blockSets.get(0));
-                int n = 0;
-                for (int i = 0; i < nPacks; i++) {
-                    packs.add(bpOne);
-                    n += bpOne.getBoosterPackSize();
-                }
-                stopCount = n;
-            } else {
-                //if (!blockSets.get(1).equals("") && blockSets.get(2).equals("")) { // Block only has two sets
-                if (blockSets.size() == 2) {
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(1)));
-                }
-                //else if (!blockSets.get(1).equals("") && !blockSets.get(2).equals("")) { // Block has three sets
-                else if (blockSets.size() == 3) {
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(2), blockSets.get(1), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(1)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(2), blockSets.get(2), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(2), blockSets.get(2), blockSets.get(1)));
-                    setCombos.add(String.format("%s/%s/%s", blockSets.get(2), blockSets.get(2), blockSets.get(2)));
-                }
-
+            int sumCards = 0;
+            if (sets.length > 1) {
                 Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
-
                 String[] pp = p.toString().split("/");
-                int n = 0;
                 for (int i = 0; i < nPacks; i++) {
                     BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
                     packs.add(bpMulti);
-                    n += bpMulti.getBoosterPackSize();
+                    sumCards += bpMulti.getBoosterPackSize();
                 }
-                stopCount = n;
+            } else {
+                BoosterGenerator bpOne = new BoosterGenerator(sets[0]);
+                for (int i = 0; i < nPacks; i++) {
+                    packs.add(bpOne);
+                    sumCards += bpOne.getBoosterPackSize();
+                }
             }
-
-            LandSetCode[0] = SetInfoUtil.getLandCode(o.toString());
+            stopCount = sumCards;
+            LandSetCode[0] = block.getLandSet().getCode();
+            
         } else if (draftType.equals("Custom")) {    // Draft from user-defined cardpools
             String[] dList;
             ArrayList<CustomDraft> customs = new ArrayList<CustomDraft>();

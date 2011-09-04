@@ -3,7 +3,7 @@ package forge.gui.deckeditor;
 import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import forge.SetInfoUtil;
+import forge.SetUtils;
 import forge.card.CardPrinted;
 
 /** 
@@ -71,7 +71,7 @@ public abstract class PresetColumns {
     @SuppressWarnings("rawtypes")
     public static final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnSetCompare =
         new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
-            public Comparable apply(final Entry<CardPrinted, Integer> from) { return SetInfoUtil.getSetByCode(from.getKey().getSet()); } };
+            public Comparable apply(final Entry<CardPrinted, Integer> from) { return SetUtils.getSetByCode(from.getKey().getSet()); } };
     public static final Lambda1<Object, Entry<CardPrinted, Integer>> fnSetGet =
         new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
             public Object apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getSet(); } };

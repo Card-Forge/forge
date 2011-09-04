@@ -1,4 +1,4 @@
-package forge;
+package forge.game.limited;
 
 /**
  * <p>CCnt class.</p>

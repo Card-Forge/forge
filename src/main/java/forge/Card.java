@@ -13,6 +13,7 @@ import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.CardDb;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -5790,7 +5791,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public String getMostRecentSet() {
-        return SetInfoUtil.getMostRecentSet(Sets);
+        return CardDb.instance().getCard(this.getName()).getSet();
     }
 
     private String ImageFilename = "";

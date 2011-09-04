@@ -9521,12 +9521,8 @@ src/main/java/forge/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
 src/main/java/forge/Base64Coder.java svneol=native#text/plain
-src/main/java/forge/BoosterDraft.java svneol=native#text/plain
-src/main/java/forge/BoosterDraftAI.java svneol=native#text/plain
-src/main/java/forge/BoosterDraft_1.java svneol=native#text/plain
 src/main/java/forge/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/ButtonUtil.java svneol=native#text/plain
-src/main/java/forge/CCnt.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardContainer.java svneol=native#text/plain
 src/main/java/forge/CardFilter.java svneol=native#text/plain
@@ -9557,8 +9553,6 @@ src/main/java/forge/Constant_StringArrayList.java svneol=native#text/plain
 src/main/java/forge/Constant_StringHashMap.java svneol=native#text/plain
 src/main/java/forge/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
-src/main/java/forge/CustomDraft.java svneol=native#text/plain
-src/main/java/forge/DeckColors.java svneol=native#text/plain
 src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
 src/main/java/forge/Display.java svneol=native#text/plain
 src/main/java/forge/EndOfCombat.java svneol=native#text/plain
@@ -9607,9 +9601,8 @@ src/main/java/forge/ReadBoosterPack.java svneol=native#text/plain
 src/main/java/forge/ReadDraftBoosterPack.java svneol=native#text/plain
 src/main/java/forge/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/ReadQuest_Assignment.java svneol=native#text/plain
-src/main/java/forge/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/SetInfo.java svneol=native#text/plain
-src/main/java/forge/SetInfoUtil.java svneol=native#text/plain
+src/main/java/forge/SetUtils.java svneol=native#text/plain
 src/main/java/forge/SimpleCombat.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
@@ -9618,6 +9611,7 @@ src/main/java/forge/Time.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
+src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardColor.java -text
 src/main/java/forge/card/CardCoreType.java -text
 src/main/java/forge/card/CardDb.java -text
@@ -9779,6 +9773,13 @@ src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/PlayerIndex.java -text
+src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
+src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
+src/main/java/forge/game/limited/BoosterDraft_1.java svneol=native#text/plain
+src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
+src/main/java/forge/game/limited/CustomDraft.java svneol=native#text/plain
+src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
+src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain

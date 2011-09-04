@@ -1,5 +1,15 @@
-package forge;
+package forge.game.limited;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.Constant;
+import forge.MyRandom;
+import forge.Constant.Color;
+import forge.Constant.GameType;
+import forge.Constant.Runtime;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
 
@@ -284,7 +294,7 @@ public class BoosterDraftAI {
      * <p>buildDeck.</p>
      *
      * @param dList a {@link forge.CardList} object.
-     * @param pClrs a {@link forge.DeckColors} object.
+     * @param pClrs a {@link forge.game.limited.DeckColors} object.
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck buildDeck(CardList dList, DeckColors pClrs) {
@@ -552,8 +562,9 @@ public class BoosterDraftAI {
     public BoosterDraftAI() {
         //choose colors for decks
         int[] n = getDeckColors();
-        for (int i = 0; i < n.length; i++)
+        for (int i = 0; i < n.length; i++) {
             deckColor[i] = deckColorChoices[n[i]];
+        }
 
         //initilize color map
         colorToLand.put(Constant.Color.Black, "Swamp");
@@ -574,22 +585,17 @@ public class BoosterDraftAI {
     private ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     //all 10 two color combinations
-    private String[][] deckColorChoices =
-            {
-                    {Constant.Color.Black, Constant.Color.Blue},
-                    {Constant.Color.Black, Constant.Color.Green},
-                    {Constant.Color.Black, Constant.Color.Red},
-                    {Constant.Color.Black, Constant.Color.White},
+    private String[][] deckColorChoices = {
+        {Constant.Color.Black, Constant.Color.Blue}, {Constant.Color.Black, Constant.Color.Green},
+        {Constant.Color.Black, Constant.Color.Red}, {Constant.Color.Black, Constant.Color.White},
 
-                    {Constant.Color.Blue, Constant.Color.Green},
-                    {Constant.Color.Blue, Constant.Color.Red},
-                    {Constant.Color.Blue, Constant.Color.White},
+        {Constant.Color.Blue, Constant.Color.Green}, {Constant.Color.Blue, Constant.Color.Red},
+        {Constant.Color.Blue, Constant.Color.White},
 
-                    {Constant.Color.Green, Constant.Color.Red},
-                    {Constant.Color.Green, Constant.Color.White},
+        {Constant.Color.Green, Constant.Color.Red}, {Constant.Color.Green, Constant.Color.White},
 
-                    {Constant.Color.Red, Constant.Color.White}
-            };
+        {Constant.Color.Red, Constant.Color.White}
+    };
 
     private Comparator<Card> bestCreature = new Comparator<Card>() {
         public int compare(Card a, Card b) {
@@ -639,34 +645,10 @@ public class BoosterDraftAI {
             else if (b.getCurSetRarity().equals("Mythic"))
             	rarB = 8;
 
-/**
- * <p>Constructor for deckColors.</p>
- *
- * @param c1 a {@link java.lang.String} object.
- * @param c2 a {@link java.lang.String} object.
- * @param sp a {@link java.lang.String} object.
- */
-
             int scoreA = ((attA + defA) / cmcA) + keyA + abA + trgA + rarA;
             int scoreB = ((attB + defB) / cmcB) + keyB + abB + trgB + rarB;
 
-            if (scoreA == scoreB)
-                return 0;
-            /**
-             * <p>Constructor for deckColors.</p>
-             */
-            else if (scoreA > scoreB)
-                return 1;
-            else if (scoreB > scoreA)
-                return -1;
-/**
- * <p>ColorToMana.</p>
- *
- * @param color a {@link java.lang.String} object.
- * @return a {@link java.lang.String} object.
- */
-
-            return 0;
+            return scoreA - scoreB;
         }
     };
 }//BoosterDraftAI()

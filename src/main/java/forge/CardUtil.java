@@ -535,7 +535,7 @@ public final class CardUtil {
             if (f.exists()) { return mwsSet3; }
 
             //Second, try 2 letter set code with MWS filename format
-            String mwsSet2 = String.format("%s/%s%s.full", SetInfoUtil.getCode2ByCode(setName), mwsCardName, nn);
+            String mwsSet2 = String.format("%s/%s%s.full", SetUtils.getCode2ByCode(setName), mwsCardName, nn);
             f = new File(path, mwsSet2 + ".jpg");
             if (f.exists()) { return mwsSet2; }
 

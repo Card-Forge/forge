@@ -1,4 +1,6 @@
-package forge;
+package forge.game.limited;
+
+import forge.AllZone;
 
 /**
  * <p>CustomDraft class.</p>

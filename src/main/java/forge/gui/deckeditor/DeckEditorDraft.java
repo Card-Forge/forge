@@ -1,7 +1,6 @@
 package forge.gui.deckeditor;
 
 import forge.AllZone;
-import forge.BoosterDraft;
 import forge.Constant;
 import forge.FileUtil;
 import forge.HttpUtil;
@@ -11,6 +10,7 @@ import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
+import forge.game.limited.BoosterDraft;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -44,7 +44,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
     /**
      * <p>showGui.</p>
      *
-     * @param in_boosterDraft a {@link forge.BoosterDraft} object.
+     * @param in_boosterDraft a {@link forge.game.limited.BoosterDraft} object.
      */
     public void showGui(BoosterDraft in_boosterDraft) {
         boosterDraft = in_boosterDraft;
@@ -97,16 +97,23 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
         
-        this.setSize(1024, 740);
+        this.setSize(980, 740);
         GuiUtils.centerFrame(this);
         this.setResizable(false);
+        
+        top.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == ' ') { jButton1_actionPerformed(null); }
+            }
+        });
 
     }
 
     public DeckEditorDraft() {
         try {
             top = new TableWithCards("Choose one card", false);
-            bottom = new TableWithCards("Previously Picked Cards", true);
+            bottom = new TableWithCards("Previously picked cards", true);
             filterBoxes = null;
             cardView = new CardPanelLite();
             jbInit();
@@ -124,11 +131,11 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(null);
 
-        top.getTableDecorated().setBounds(new Rectangle(19, 28, 661, 344));
-        bottom.getTableDecorated().setBounds(new Rectangle(19, 478, 661, 184));
-        cardView.setBounds(new Rectangle(693, 23, 239, 665));
-
-        bottom.getLabel().setBounds(new Rectangle(19, 665, 665, 31));
+        top.getTableDecorated().setBounds(new Rectangle(19, 28, 680, 344));
+        bottom.getTableDecorated().setBounds(new Rectangle(19, 478, 680, 184));
+        bottom.getLabel().setBounds(new Rectangle(19, 680, 665, 31));
+        
+        cardView.setBounds(new Rectangle(715, 23, 240, 666));
         
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setTitle("Booster Draft");
@@ -197,7 +204,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
     private void showChoices(CardPoolView list) {
         top.setDeck(list);
         cardView.showCard(null);
-
+        top.fixSelection(0);
     }//showChoices()
 
     /**

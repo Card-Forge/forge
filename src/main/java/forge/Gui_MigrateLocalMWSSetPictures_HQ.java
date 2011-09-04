@@ -402,7 +402,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
                 for (int j = 0; j < cSetInfo.size(); j++) {
                     c.setCurSetCode(cSetInfo.get(j).Code);
                     String SC3 = c.getCurSetCode();
-                    String SC2 = SetInfoUtil.getCode2ByCode(c.getCurSetCode());
+                    String SC2 = SetUtils.getCode2ByCode(c.getCurSetCode());
 
                     int n = 0;
                     if (cSetInfo.get(j).PicCount > 0) {

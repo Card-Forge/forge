@@ -1,6 +1,19 @@
-package forge;
+package forge.game.limited;
 
+import forge.AllZone;
+import forge.BoosterGenerator;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.Constant;
+import forge.FileUtil;
+import forge.MyRandom;
+import forge.SetUtils;
+import forge.card.CardBlock;
+import forge.card.CardDb;
 import forge.card.CardPool;
+import forge.card.CardSet;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -8,6 +21,7 @@ import forge.gui.GuiUtils;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>SealedDeck class.</p>
@@ -32,49 +46,44 @@ public class SealedDeck {
             for (int i = 0; i < 6; i++)
                 packs.add(bpFull);
 
-            LandSetCode[0] = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
+            LandSetCode[0] = CardDb.instance().getCard("Plains").getSet();
         } else if (sealedType.equals("Block")) {
-            ArrayList<String> bNames = SetInfoUtil.getBlockNameList();
-            ArrayList<String> rbNames = new ArrayList<String>();
-            for (int i = bNames.size() - 1; i >= 0; i--)
-                rbNames.add(bNames.get(i));
 
-            Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
+            Object o = GuiUtils.getChoice("Choose Block", SetUtils.getBlocks().toArray());
+            CardBlock block = (CardBlock) o;
 
-            ArrayList<String> blockSets = SetInfoUtil.getSetsBlockName(o.toString());
-            int nPacks = SetInfoUtil.getSealedPackCount(o.toString());
+            CardSet[] cardSets = block.getSets();  
+            String[] sets = new String[cardSets.length];
+            for (int k = cardSets.length - 1; k >= 0 ; --k) { sets[k] = cardSets[k].getCode();} 
 
-            ArrayList<String> setCombos = new ArrayList<String>();
+            int nPacks = block.getCntBoostersSealed();
 
-            //if (blockSets.get(1).equals("") && blockSets.get(2).equals("")) { // Block only has one set
-            if (blockSets.size() == 1) {
-                BoosterGenerator bpOne = new BoosterGenerator(blockSets.get(0));
+            List<String> setCombos = new ArrayList<String>();
+            if (sets.length >= 2) {
+                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
+                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
+            }
+            if (sets.length >= 3) {
+                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0]));
+                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
+            }
 
-                for (int i = 0; i < nPacks; i++)
-                    packs.add(bpOne);
-            } else {
-                //if (!blockSets.get(1).equals("") && blockSets.get(2).equals("")) { // Block only has two sets
-                if (blockSets.size() == 2) {
-                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                }
-                //else if (!blockSets.get(1).equals("") && !blockSets.get(2).equals("")) { // Block has three sets
-                else if (blockSets.size() == 3) {
-                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", blockSets.get(1), blockSets.get(1), blockSets.get(0), blockSets.get(0), blockSets.get(0), blockSets.get(0)));
-                    setCombos.add(String.format("%s/%s/%s/%s/%s/%s", blockSets.get(2), blockSets.get(2), blockSets.get(1), blockSets.get(1), blockSets.get(0), blockSets.get(0)));
-                }
 
+            if (sets.length > 1) {
                 Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
 
-                String pp[] = p.toString().split("/");
+                String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
                     packs.add(bpMulti);
                 }
+            } else {
+                BoosterGenerator bpOne = new BoosterGenerator(sets[0]);
+                for (int i = 0; i < nPacks; i++) { packs.add(bpOne); }
             }
 
-            LandSetCode[0] = blockSets.get(0);
+            LandSetCode[0] = block.getLandSet().getCode();
 
         } else if (sealedType.equals("Custom")) {
             String dList[];
