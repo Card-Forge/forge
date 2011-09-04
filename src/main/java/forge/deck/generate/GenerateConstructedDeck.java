@@ -1,6 +1,14 @@
 package forge.deck.generate;
 
-import forge.*;
+import forge.AllZone;
+import forge.Card;
+import forge.CardFilter;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.CardUtil;
+import forge.Constant;
+
 import forge.view.swing.OldGuiNewGame;
 
 import java.util.ArrayList;
@@ -42,7 +50,7 @@ public class GenerateConstructedDeck {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardList generateDeck() {
+    public final CardList generateDeck() {
         CardList deck;
 
         int check;
@@ -67,7 +75,7 @@ public class GenerateConstructedDeck {
      *
      * @param list a {@link forge.CardList} object.
      */
-    private void addLand(CardList list) {
+    private void addLand(final CardList list) {
         Card land;
         for (int i = 0; i < 13; i++) {
             land = AllZone.getCardFactory().getCard(map.get(color1).toString(), AllZone.getComputerPlayer());
@@ -80,12 +88,12 @@ public class GenerateConstructedDeck {
 
     /**
      * Creates a CardList from the set of all cards that meets the criteria
-     * for color(s), type, whether the card is suitable for 
-     * placement in random decks and in AI decks, etc. 
+     * for color(s), type, whether the card is suitable for
+     * placement in random decks and in AI decks, etc.
      *
      * @see #filterBadCards(Iterable)
      *
-     * @return a subset of cards <= the set of all cards; might be empty, but 
+     * @return a subset of cards <= the set of all cards; might be empty, but
      * never null
      */
     private CardList getCards() {
@@ -116,14 +124,14 @@ public class GenerateConstructedDeck {
      * @param in a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private CardList get2Colors(CardList in) {
+    private CardList get2Colors(final CardList in) {
         int a;
         int b;
 
         do {
             a = CardUtil.getRandomIndex(Constant.Color.onlyColors);
             b = CardUtil.getRandomIndex(Constant.Color.onlyColors);
-        } while (a == b);//do not want to get the same color twice
+        } while (a == b); //do not want to get the same color twice
 
         color1 = Constant.Color.onlyColors[a];
         color2 = Constant.Color.onlyColors[b];
@@ -134,21 +142,18 @@ public class GenerateConstructedDeck {
         out.shuffle();
 
         CardList artifact = in.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 //is this really a colorless artifact and not something
                 //weird like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() &&
-                        CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
-                        !OldGuiNewGame.removeArtifacts.isSelected();
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                        && !OldGuiNewGame.removeArtifacts.isSelected();
             }
         });
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if (c.isCreature() &&
-                        c.getNetAttack() <= 1 &&
-                                OldGuiNewGame.removeSmallCreatures.isSelected()) {
+            public boolean addCard(final Card c) {
+                if (c.isCreature() && c.getNetAttack() <= 1 && OldGuiNewGame.removeSmallCreatures.isSelected()) {
                     return false;
                 }
 
@@ -162,30 +167,31 @@ public class GenerateConstructedDeck {
 
     /**
      * Creates a CardList from the given sequence that meets the criteria
-     * for color(s), type, whether the card is suitable for 
-     * placement in random decks and in AI decks, etc. 
+     * for color(s), type, whether the card is suitable for
+     * placement in random decks and in AI decks, etc.
      *
      * @param sequence  an iterable over Card instances
      * 
      * @return a subset of sequence <= sequence; might be empty, but never
      * null
      */
-    private CardList filterBadCards(Iterable<Card> sequence) {
+    private CardList filterBadCards(final Iterable<Card> sequence) {
 
         final ArrayList<Card> goodLand = new ArrayList<Card>();
 
         CardList out = CardFilter.filter(sequence, new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 ArrayList<String> list = CardUtil.getColors(c);
                 if (list.size() == 2) {
-                    if (!(list.contains(color1) && list.contains(color2)))
+                    if (!(list.contains(color1) && list.contains(color2))) {
                         return false;
+                    }
                 }
-                return CardUtil.getColors(c).size() <= 2 && //only dual colored gold cards
-                        !c.isLand() && //no land
-                        !c.getSVar("RemRandomDeck").equals("True") &&
-                        !c.getSVar("RemAIDeck").equals("True") || //OR very important
-                        goodLand.contains(c.getName());
+                return CardUtil.getColors(c).size() <= 2 //only dual colored gold cards
+                        && !c.isLand() //no land
+                        && !c.getSVar("RemRandomDeck").equals("True")
+                        && !c.getSVar("RemAIDeck").equals("True")  //OR very important
+                        || goodLand.contains(c.getName());
             }
         });
 
