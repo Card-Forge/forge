@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Shapeshifter
 Text:no text
 PT:7/7
-K:Changeling
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 K:Champion:Creature
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

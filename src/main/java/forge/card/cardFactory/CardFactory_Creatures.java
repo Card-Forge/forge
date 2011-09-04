@@ -1958,7 +1958,7 @@ public class CardFactory_Creatures {
                     kithkin = kithkin.filter(new CardListFilter() {
 
                         public boolean addCard(Card c) {
-                            return (c.isType("Kithkin") || c.hasKeyword("Changeling"))
+                            return (c.isType("Kithkin"))
                                     && !c.equals(card);
                         }
 

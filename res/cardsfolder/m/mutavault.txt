@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature | Keywords$ Changeling | SpellDescription$ CARDNAME becomes a 2/2 creature with all creature types until end of turn. It's still a land.
+A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,AllCreatureTypes | SpellDescription$ CARDNAME becomes a 2/2 creature with all creature types until end of turn. It's still a land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutavault.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/148.jpg

@@ -1631,8 +1631,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Changeling + CARDNAME can't be countered. + Cascade + Multikicker
             for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).contains("Changeling") && !sb.toString().contains("Changeling"))
-                        || (kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered."))
+                if ((kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered."))
                         || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))
                         || (kw.get(i).contains("Multikicker") && !sb.toString().contains("Multikicker"))) {
                     sb.append(kw.get(i)).append("\r\n");
@@ -3133,7 +3132,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
 	    	for (Card_Type ct : types) {
 	    		ArrayList<String> removeTypes = new ArrayList<String>();
-	    		removeTypes.addAll(ct.getRemoveType());
+	    		if(ct.getRemoveType() != null) {
+	    		    removeTypes.addAll(ct.getRemoveType());
+	    		}
 	    		//remove old types
 	    		for (int i = 0; i < newType.size(); i++) {
 	    			String t = newType.get(i);
@@ -3143,7 +3144,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 	    				removeTypes.add(t);
 	    			if (ct.isRemoveSubTypes() && CardUtil.isASubType(t))
 	    				removeTypes.add(t);
-	    			if (ct.isRemoveCreatureTypes() && CardUtil.isACreatureType(t))
+	    			if (ct.isRemoveCreatureTypes() && (CardUtil.isACreatureType(t) || t.equals("AllCreatureTypes")))
 	    				removeTypes.add(t);
 	    		}
 	    		newType.removeAll(removeTypes);
@@ -4648,7 +4649,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (typeContains(cardType)
                 || ((isCreature() || isTribal())
-                && CardUtil.isACreatureType(cardType) && hasKeyword("Changeling"))) return true;
+                && CardUtil.isACreatureType(cardType) && typeContains("AllCreatureTypes"))) return true;
         return false;
     }
 

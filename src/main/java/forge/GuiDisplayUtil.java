@@ -149,17 +149,22 @@ public final class GuiDisplayUtil implements NewConstants {
         ArrayList<String> superTypes = new ArrayList<String>();
         ArrayList<String> cardTypes = new ArrayList<String>();
         ArrayList<String> subTypes = new ArrayList<String>();
+        boolean allCreatureTypes = list.contains("AllCreatureTypes");
+        
         for (String t : list) {
+            if(allCreatureTypes && t.equals("AllCreatureTypes")) {
+                continue;
+            } 
             if (CardUtil.isASuperType(t) && !superTypes.contains(t)) {
                 superTypes.add(t);
             }
             if (CardUtil.isACardType(t) && !cardTypes.contains(t)) {
                 cardTypes.add(t);
             }
-            if (CardUtil.isASubType(t) && !subTypes.contains(t)) {
+            if (CardUtil.isASubType(t) && !subTypes.contains(t)
+                    && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
                 subTypes.add(t);
             }
-
         }
 
         for (String type : superTypes) {
@@ -168,8 +173,11 @@ public final class GuiDisplayUtil implements NewConstants {
         for (String type : cardTypes) {
             sb.append(type).append(" ");
         }
-        if (!subTypes.isEmpty()) {
+        if (!subTypes.isEmpty() || allCreatureTypes) {
             sb.append("- ");
+        }
+        if (allCreatureTypes) {
+            sb.append("All creature types ");
         }
         for (String type : subTypes) {
             sb.append(type).append(" ");

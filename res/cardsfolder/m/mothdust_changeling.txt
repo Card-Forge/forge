@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Shapeshifter
 Text:no text
 PT:1/1
-K:Changeling
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:AB$ Pump | Cost$ tapXType<1/Creature.untapped+YouCtrl> | KW$ Flying | CostDesc$ Tap an untapped creature you control: | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

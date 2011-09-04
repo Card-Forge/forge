@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Shapeshifter
 Text:no text
 PT:4/4
-K:Changeling
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_trail_changeling.jpg

@@ -453,9 +453,6 @@ public class CardFactoryUtil {
         }
         value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
-        if (c.hasKeyword("Changeling")) {
-            value += 5;
-        }
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.")
                 && power > 0)
             value += 2;

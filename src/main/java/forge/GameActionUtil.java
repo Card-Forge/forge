@@ -2052,9 +2052,7 @@ public class GameActionUtil {
                                         && !type.get(x).getType().get(x2).equals("Legendary")
                                         && !type.get(x).getType().get(x2).equals("Artifact"))
                                 {
-                                    if (crd.isType(type.get(x).getType().get(x2))
-                                            || crd.hasKeyword("Changeling")
-                                            || type.get(x).hasKeyword("Changeling"))
+                                    if (crd.isType(type.get(x).getType().get(x2)))
                                     {
                                         alreadyAdded.add(type.get(x));
                                         crd.addSemiPermanentAttackBoost(1);

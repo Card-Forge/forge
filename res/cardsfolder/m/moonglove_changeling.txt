@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Shapeshifter
 Text:no text
 PT:2/2
-K:Changeling
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:AB$ Pump | Cost$ B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_changeling.jpg

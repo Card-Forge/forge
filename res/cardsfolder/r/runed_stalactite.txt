@@ -1,8 +1,9 @@
 Name:Runed Stalactite
 ManaCost:1
 Types:Artifact Equipment
-Text:Equipped creature gets +1/+1 and is every creature type.
-K:eqPump 2:+1/+1/HIDDEN Changeling
+Text:no text
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ AllCreatureTypes | Description$ Equipped creature gets +1/+1 and is every creature type.
+K:eqPump 2:+0/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/260.jpg
