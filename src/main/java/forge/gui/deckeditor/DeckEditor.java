@@ -18,8 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
+//import javax.swing.text.BadLocationException;
+//import javax.swing.text.Document;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -424,6 +424,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
             if (isFiltersChangeFiringUpdate) { updateDisplay(); }
         }
 
+        /*
         private String getTextFromDocument(final Document doc) {
             try {
                 return doc.getText(0, doc.getLength());
@@ -431,6 +432,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
                 return null;
             }
         }
+        */
 
         @Override public void insertUpdate(DocumentEvent e) { onChange(); }
         @Override public void removeUpdate(DocumentEvent e) { onChange(); }

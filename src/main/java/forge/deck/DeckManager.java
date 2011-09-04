@@ -4,7 +4,6 @@ package forge.deck;
 import forge.Constant;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
-import forge.gui.GuiUtils;
 
 import java.io.*;
 import java.util.*;
@@ -471,6 +470,7 @@ public class DeckManager {
      * @param src a {@link java.util.List} object.
      * @return a {@link java.util.Map} object.
      */
+    /*
     private static Map<String, Integer> count(List<String> src) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         for (String s : src) {
@@ -483,6 +483,7 @@ public class DeckManager {
         }
         return result;
     }
+    */
 
     /**
      * <p>writeDeck.</p>

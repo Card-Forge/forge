@@ -51,7 +51,7 @@ public final class DeckEditorShop extends DeckEditorBase {
     private double multiplier;
 
     private QuestData questData;
-    private CardPoolView newCardsList;
+    //private CardPoolView newCardsList;
     
     // get pricelist:
     private ReadPriceList r = new ReadPriceList();
@@ -90,7 +90,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             forSale = questData.getCards().getShopList();
         }
         CardPoolView owned = questData.getCards().getCardpool().getView();
-        newCardsList = questData.getCards().getNewCards();
+        //newCardsList = questData.getCards().getNewCards();
 
         setDecks(forSale, owned);
 

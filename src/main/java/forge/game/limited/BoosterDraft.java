@@ -1,7 +1,5 @@
 package forge.game.limited;
 
-import forge.Card;
-import forge.CardList;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;

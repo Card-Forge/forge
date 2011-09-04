@@ -7,9 +7,6 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
 import forge.MyRandom;
-import forge.Constant.Color;
-import forge.Constant.GameType;
-import forge.Constant.Runtime;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
 
