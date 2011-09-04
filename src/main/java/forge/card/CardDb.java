@@ -102,9 +102,17 @@ public final class CardDb {
     public CardPrinted getCard(final String name) {
         // Sometimes they read from decks things like "CardName|Set" - but we can handle it
         int pipePos = name.indexOf('|');
-        if (pipePos >= 0) { return getCard(name.substring(0, pipePos), name.substring(pipePos + 1)); }
+        String cardName = name;
+        if (pipePos >= 0) {
+            cardName = name.substring(0, pipePos);
+            String setName = name.substring(pipePos + 1);
+            // only if set is not blank try to load it
+            if (StringUtils.isNotBlank(setName)) {
+                return getCard(cardName, setName);
+            }
+        }
         // OK, plain name here
-        CardPrinted card = uniqueCards.get(name);
+        CardPrinted card = uniqueCards.get(cardName);
         if (card != null) { return card; }
         throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
     }
