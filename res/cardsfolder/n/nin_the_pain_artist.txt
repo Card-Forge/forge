@@ -1,6 +1,6 @@
 Name:Nin, the Pain Artist
 ManaCost:U R
-Types:Legendary Creature - Vedalken Wizard
+Types:Legendary Creature Vedalken Wizard
 Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ X U R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to target creature. That creature's controller draws X cards.

@@ -1,6 +1,6 @@
 Name:Khabal Ghoul
 ManaCost:2 B
-Types:Creature Ghoul
+Types:Creature Zombie
 Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a +1/+1 counter on CARDNAME for each creature put into a graveyard from the battlefield this turn.

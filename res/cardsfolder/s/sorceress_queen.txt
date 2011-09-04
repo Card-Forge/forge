@@ -1,6 +1,6 @@
 Name:Sorceress Queen
 ManaCost:1 B B
-Types:Creature Sorceress
+Types:Creature Human Wizard
 Text:no text
 PT:1/1
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Power$ 0 | Toughness$ 2 | SpellDescription$ Target creature other than Sorceress Queen becomes 0/2 until end of turn.

@@ -1,6 +1,6 @@
 Name:Diligent Farmhand
 ManaCost:G
-Types:Creature Druid
+Types:Creature Human Druid
 Text:If Diligent Farmhand is in the graveyard, Muscle Burst's effect counts it as a Muscle Burst.
 PT:1/1
 A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.

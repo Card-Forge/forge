@@ -1,6 +1,6 @@
 Name:Skulking Ghost
 ManaCost:1 B
-Types:Creature Ghost
+Types:Creature Spirit
 Text:no text
 PT:2/1
 K:Flying

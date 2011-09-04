@@ -1,6 +1,6 @@
 Name:Pearlspear Courier
 ManaCost:2 W
-Types:Creature Soldier
+Types:Creature Human Soldier
 Text:no text
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
