@@ -86,6 +86,10 @@ public final class CardRules {
         } else if (cardType.isPlaneswalker()) {
             this.loyalty = ptLine;
         }
+
+        if (setsData.isEmpty()) {
+            setsData.put("???", new CardInSet(CardRarity.Unknown, 1));
+        }
         setsPrinted = setsData;
     }
 

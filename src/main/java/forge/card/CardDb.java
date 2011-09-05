@@ -39,8 +39,6 @@ public final class CardDb {
             }
         }
     }
-    private static List<String> skippedCards = new ArrayList<String>();
-    public static List<String> getSkippedCards() { return skippedCards; }
 
     // Here oracle cards
     private final Map<String, CardRules> cards = new Hashtable<String, CardRules>();
@@ -63,17 +61,13 @@ public final class CardDb {
 
     private CardDb(final Iterator<CardRules> parser) {
         while (parser.hasNext()) {
-            CardRules nextCard = parser.next();
-            boolean wasAdded = addNewCard(nextCard);
-            if (!wasAdded) {
-                skippedCards.add(nextCard.getName());
-            }
+            addNewCard(parser.next());
         }
         // TODO: consider using Collections.unmodifiableList wherever possible
     }
 
-    public boolean addNewCard(final CardRules card) {
-        if (null == card) { return true; } // consider that a success
+    public void addNewCard(final CardRules card) {
+        if (null == card) { return; } // consider that a success
         //System.out.println(card.getName());
         String cardName = card.getName().toLowerCase();
 
@@ -101,12 +95,7 @@ public final class CardDb {
                 cardCopies[i] = lastAdded;
             }
         }
-
-        if (null != lastAdded) {
-            uniqueCards.put(cardName, lastAdded);
-            return true;
-        }
-        return false;
+        uniqueCards.put(cardName, lastAdded);
     }
 
     // Single fetch

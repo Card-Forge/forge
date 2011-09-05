@@ -13,7 +13,8 @@ public enum CardRarity {
     Uncommon("U"),
     Rare("R"),
     MythicRare("M"),
-    Special("S"); // Timeshifted
+    Special("S"), // Timeshifted
+    Unknown("?"); // In development
 
     private final String strValue;
     private CardRarity(final String sValue) {
