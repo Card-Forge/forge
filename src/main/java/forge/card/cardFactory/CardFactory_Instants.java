@@ -79,7 +79,7 @@ public class CardFactory_Instants {
 
                 String getChosenColor() {
                     // Choose color for protection in Brave the Elements
-                    String color = "";
+                    String color = "Black";
                     if (card.getController().isHuman()) {
 
                         // String[] colors = Constant.Color.Colors;
@@ -91,19 +91,8 @@ public class CardFactory_Instants {
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color = (String) o;
                     } else {
-                        CardList list = new CardList();
-                        list.addAll(AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer()));
-                        list.addAll(AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer()));
-
-                        if (list.size() > 0) {
-                            String mpcolor = CardFactoryUtil.getMostProminentColor(list);
-                            if (!mpcolor.equals("")) {
-                                color = mpcolor;
-                            } else {
-                                color = "black";
-                            }
-                        } else {
-                            color = "black";
+                        if (getAttacker() != null) {
+                        color = getAttacker().getColor().get(0).toString();
                         }
                     }
                     return color;
