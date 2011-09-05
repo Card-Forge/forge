@@ -3,7 +3,7 @@ ManaCost:5 R R
 Types:Creature Giant Warrior
 Text:no text
 PT:5/5
-S:Mode$ Continuous | Affected$ Creature.Warrior | AddKeyword$ CantBeBlockedBy Creature.Coward | Description$ Cowards can't block Warriors.
+S:Mode$ Continuous | Affected$ Creature.Coward | AddKeyword$ CantBlock Creature.Warrior | Description$ Cowards can't block Warriors.
 A:AB$ Animate | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Coward | SpellDescription$ Target creature becomes a Coward until end of turn.
 A:AB$ Animate | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Warrior | SpellDescription$ Target creature becomes a Warrior until end of turn.
 SVar:Rarity:Uncommon
