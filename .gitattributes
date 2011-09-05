@@ -9803,6 +9803,7 @@ src/main/java/forge/gui/deckeditor/DeckEditorQuestMenu.java svneol=native#text/p
 src/main/java/forge/gui/deckeditor/DeckEditorShop.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/FilterCheckBoxes.java -text
 src/main/java/forge/gui/deckeditor/GuiFilterCheckBox.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/ManaCostRenderer.java -text
 src/main/java/forge/gui/deckeditor/PresetColumns.java -text
 src/main/java/forge/gui/deckeditor/TableColumnInfo.java -text
 src/main/java/forge/gui/deckeditor/TableModel.java svneol=native#text/plain

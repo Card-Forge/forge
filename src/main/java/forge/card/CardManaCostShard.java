@@ -6,11 +6,18 @@ public class CardManaCostShard {
     public final int cmc;
     public final float cmpc;
     private final String stringValue;
-    protected CardManaCostShard(int value, String sValue) { 
+    public final String imageKey;
+    
+    protected CardManaCostShard(final int value, final String sValue) {
+        this(value, sValue, sValue);
+    }
+
+    protected CardManaCostShard(final int value, final String sValue, final String imgKey) {
         shard = value;
         cmc = getCMC();
         cmpc = getCmpCost();
         stringValue = sValue;
+        imageKey = imgKey;
     }
 
     public interface Atom {
@@ -44,28 +51,28 @@ public class CardManaCostShard {
     public static final CardManaCostShard RED = new CardManaCostShard(Atom.RED, "R");
     public static final CardManaCostShard GREEN = new CardManaCostShard(Atom.GREEN, "G");
 
-    public static final CardManaCostShard PW = new CardManaCostShard(Atom.WHITE | Atom.OR_2_LIFE, "W/P");
-    public static final CardManaCostShard PU = new CardManaCostShard(Atom.BLUE | Atom.OR_2_LIFE, "U/P");
-    public static final CardManaCostShard PB = new CardManaCostShard(Atom.BLACK | Atom.OR_2_LIFE, "B/P");
-    public static final CardManaCostShard PR = new CardManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P");
-    public static final CardManaCostShard PG = new CardManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P");
+    public static final CardManaCostShard PW = new CardManaCostShard(Atom.WHITE | Atom.OR_2_LIFE, "W/P", "PW");
+    public static final CardManaCostShard PU = new CardManaCostShard(Atom.BLUE | Atom.OR_2_LIFE, "U/P", "PU");
+    public static final CardManaCostShard PB = new CardManaCostShard(Atom.BLACK | Atom.OR_2_LIFE, "B/P", "PB");
+    public static final CardManaCostShard PR = new CardManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P", "PR");
+    public static final CardManaCostShard PG = new CardManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P", "PG");
 
-    public static final CardManaCostShard WU = new CardManaCostShard(Atom.WHITE | Atom.BLUE, "W/U");
-    public static final CardManaCostShard WB = new CardManaCostShard(Atom.WHITE | Atom.BLACK, "W/B");
-    public static final CardManaCostShard WR = new CardManaCostShard(Atom.WHITE | Atom.RED, "W/R");
-    public static final CardManaCostShard WG = new CardManaCostShard(Atom.WHITE | Atom.GREEN, "W/G");
-    public static final CardManaCostShard UB = new CardManaCostShard(Atom.BLUE | Atom.BLACK, "U/B");
-    public static final CardManaCostShard UR = new CardManaCostShard(Atom.BLUE | Atom.RED, "U/R");
-    public static final CardManaCostShard UG = new CardManaCostShard(Atom.BLUE | Atom.GREEN, "U/G");
-    public static final CardManaCostShard BR = new CardManaCostShard(Atom.BLACK | Atom.RED, "B/R");
-    public static final CardManaCostShard BG = new CardManaCostShard(Atom.BLACK | Atom.GREEN, "B/G");
-    public static final CardManaCostShard RG = new CardManaCostShard(Atom.RED | Atom.GREEN, "R/G");
+    public static final CardManaCostShard WU = new CardManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WB");
+    public static final CardManaCostShard WB = new CardManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WU");
+    public static final CardManaCostShard WR = new CardManaCostShard(Atom.WHITE | Atom.RED, "W/R", "RW");
+    public static final CardManaCostShard WG = new CardManaCostShard(Atom.WHITE | Atom.GREEN, "W/G", "GW");
+    public static final CardManaCostShard UB = new CardManaCostShard(Atom.BLUE | Atom.BLACK, "U/B", "UB");
+    public static final CardManaCostShard UR = new CardManaCostShard(Atom.BLUE | Atom.RED, "U/R", "UR");
+    public static final CardManaCostShard UG = new CardManaCostShard(Atom.BLUE | Atom.GREEN, "U/G", "GU");
+    public static final CardManaCostShard BR = new CardManaCostShard(Atom.BLACK | Atom.RED, "B/R", "BR");
+    public static final CardManaCostShard BG = new CardManaCostShard(Atom.BLACK | Atom.GREEN, "B/G", "BG");
+    public static final CardManaCostShard RG = new CardManaCostShard(Atom.RED | Atom.GREEN, "R/G", "RG");
 
-    public static final CardManaCostShard W2 = new CardManaCostShard(Atom.WHITE | Atom.OR_2_COLORLESS, "2/W");
-    public static final CardManaCostShard U2 = new CardManaCostShard(Atom.BLUE | Atom.OR_2_COLORLESS, "2/U");
-    public static final CardManaCostShard B2 = new CardManaCostShard(Atom.BLACK | Atom.OR_2_COLORLESS, "2/B");
-    public static final CardManaCostShard R2 = new CardManaCostShard(Atom.RED | Atom.OR_2_COLORLESS, "2/R");
-    public static final CardManaCostShard G2 = new CardManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G");
+    public static final CardManaCostShard W2 = new CardManaCostShard(Atom.WHITE | Atom.OR_2_COLORLESS, "2/W", "2W");
+    public static final CardManaCostShard U2 = new CardManaCostShard(Atom.BLUE | Atom.OR_2_COLORLESS, "2/U", "2U");
+    public static final CardManaCostShard B2 = new CardManaCostShard(Atom.BLACK | Atom.OR_2_COLORLESS, "2/B", "2B");
+    public static final CardManaCostShard R2 = new CardManaCostShard(Atom.RED | Atom.OR_2_COLORLESS, "2/R", "2R");
+    public static final CardManaCostShard G2 = new CardManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
 
     private static final CardManaCostShard[] allPossible = new CardManaCostShard[] {
         X, WHITE, BLUE, BLACK, RED, GREEN,

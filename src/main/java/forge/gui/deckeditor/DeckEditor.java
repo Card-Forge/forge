@@ -115,15 +115,16 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     private void setup() {
         List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
         columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Name", 175, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<CardPrinted>("Cost", 75, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
         columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
         columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
         columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
         columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.add(new TableColumnInfo<CardPrinted>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
-
+        columns.get(2).setCellRenderer(new ManaCostRenderer());
+        
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
 

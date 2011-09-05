@@ -1,6 +1,7 @@
 package forge.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,9 +13,9 @@ import java.util.List;
  */
 
 public final class CardManaCost implements Comparable<CardManaCost> {
-    private final List<CardManaCostShard> shards = new ArrayList<CardManaCostShard>();
+    private final List<CardManaCostShard> shards;
     private final int genericCost;
-    private final boolean isEmpty; // lands cost
+    private final boolean hasNoCost; // lands cost
     private final String stringValue; // precalculated for toString;
     
     private Float compareWeight = null;
@@ -23,9 +24,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     
     // pass mana cost parser here
     private CardManaCost() {
-        isEmpty = true;
+        hasNoCost = true;
         genericCost = 0;
         stringValue = "";
+        shards = Collections.unmodifiableList(new ArrayList<CardManaCostShard>());
     }
 
     // public ctor, should give it a mana parser
@@ -33,13 +35,16 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
-        isEmpty = false;
+        List<CardManaCostShard> shardsTemp = new ArrayList<CardManaCostShard>();
+        hasNoCost = false;
         while (parser.hasNext()) {
             CardManaCostShard shard = parser.next();
-            if (shard != null) { shards.add(shard); } // null is OK - that was generic mana
+            if (shard != null) { shardsTemp.add(shard); } // null is OK - that was generic mana
         }
         genericCost = parser.getTotalColorlessCost(); // collect generic mana here
+        shards = Collections.unmodifiableList(shardsTemp);
         stringValue = getSimpleString();
+
     }
 
     private String getSimpleString() {
@@ -68,13 +73,18 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         return result;
     }
 
+    public List<CardManaCostShard> getShards() { return shards; }
+    public int getGenericCost() { return genericCost; }
+    public boolean isEmpty() { return hasNoCost; }
+    public boolean isPureGeneric() { return shards.isEmpty() && !isEmpty(); }
+
     @Override
     public int compareTo(final CardManaCost o) { return getCompareWeight().compareTo(o.getCompareWeight()); }
     private Float getCompareWeight() {
         if (compareWeight == null) {
             float weight = genericCost;
             for (CardManaCostShard s : shards) { weight += s.cmpc; }
-            if (isEmpty) {
+            if (hasNoCost) {
                 weight = -1; // for those who doesn't even have a 0 sign on card
             }
             compareWeight = Float.valueOf(weight);

@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellRenderer;
 
 import net.slightlymagic.maxmtg.Predicate;
 
@@ -63,6 +64,13 @@ public final class TableWithCards {
         model.addListeners(table);
         table.setModel(model);
         model.resizeCols(table);
+
+        for (int idx = columns.size() - 1; idx >= 0; idx--) {
+            TableCellRenderer renderer = columns.get(idx).getCellRenderer();
+            if (null != renderer) {
+                table.getColumnModel().getColumn(idx).setCellRenderer(renderer);
+            }
+        }
 
         if (isTrackingStats) {
             // get stats from deck

@@ -34,7 +34,7 @@ public abstract class PresetColumns {
             public Comparable apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getCard().getManaCost(); } };
     public static final Lambda1<Object, Entry<CardPrinted, Integer>> fnCostGet =
         new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
-            public Object apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getCard().getManaCost().toString(); } };
+            public Object apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getCard().getManaCost(); } };
 
     @SuppressWarnings("rawtypes")
     public static final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnColorCompare =

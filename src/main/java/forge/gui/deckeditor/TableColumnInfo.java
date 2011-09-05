@@ -2,6 +2,8 @@ package forge.gui.deckeditor;
 
 import java.util.Map.Entry;
 
+import javax.swing.table.TableCellRenderer;
+
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
 /** 
@@ -22,6 +24,8 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 
         public final Lambda1<Comparable, Entry<T, Integer>> fnSort; // this will be used for sorting
         public final Lambda1<Object, Entry<T, Integer>> fnDisplay;  // this is used to display
+
+        private TableCellRenderer cellRenderer = null;
 
         public final String getName() { return name; }
 
@@ -48,6 +52,15 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
             this.maxWidth = wMax;
             this.minWidth = wMin;
             this.nominalWidth = width;
+        }
+
+
+        public void setCellRenderer(final TableCellRenderer renderer) {
+            cellRenderer = renderer;
+        }
+
+        public final TableCellRenderer getCellRenderer() {
+            return cellRenderer;
         }
     }
 
