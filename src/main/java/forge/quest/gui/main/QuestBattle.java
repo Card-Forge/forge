@@ -4,6 +4,7 @@ package forge.quest.gui.main;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
+import forge.quest.data.QuestEvent;
 
 import javax.swing.*;
 
@@ -23,12 +24,7 @@ public class QuestBattle extends QuestSelectablePanel {
 
     private String deckName;
     
-    private static String       oppName;
-    private static String       oppDiff;
-    private static String       oppDesc;
-    private static String       oppIconAddress;
-    private static ImageIcon    icon;
-    private static Deck         oppDeck;
+
     
     /**
      * <p>Constructor for QuestBattle.</p>
@@ -59,19 +55,21 @@ public class QuestBattle extends QuestSelectablePanel {
         String[] oppDecks = QuestBattleManager.generateBattles();
         for (String oppDeckName : oppDecks) {
             // Get deck object and properties for this opponent.
-            oppDeck    = QuestBattleManager.getAIDeckFromFile(oppDeckName);
-            
-            oppName         = oppDeck.getMetadata("DisplayName");
-            oppDiff         = oppDeck.getMetadata("Difficulty");
-            oppDesc         = oppDeck.getMetadata("Description");
-            oppIconAddress  = oppDeck.getMetadata("Icon");
-            
-            icon  = GuiUtils.getIconFromFile(oppName + ".jpg");
-            
+            QuestEvent event1    = QuestBattleManager.getQuestEventFromFile(oppDeckName);
+
+            String oppName         = event1.getDisplayName();
+            String oppDiff         = event1.getDifficulty();
+            String oppDesc         = event1.getDescription();
+            String oppIconAddress  = event1.getIcon();
+
+            ImageIcon    icon;
             // If non-default icon defined, use it            
-            if(!oppIconAddress.equals("")) {
-                icon = GuiUtils.getIconFromFile(oppIconAddress + ".jpg");
+            if(oppIconAddress.equals("")) {
+                icon  = GuiUtils.getIconFromFile(oppName + ".jpg");
             }
+            else
+                icon = GuiUtils.getIconFromFile(oppIconAddress + ".jpg");
+                
             
             // Add to list of current quest opponents.
             opponentList.add(

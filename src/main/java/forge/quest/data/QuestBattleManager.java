@@ -11,6 +11,8 @@ import forge.properties.NewConstants;
 import java.io.File;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <p>QuestBattleManager class.</p>
  *
@@ -117,6 +119,21 @@ public class QuestBattleManager {
     }     
     
     /**
+     * <p>getQuestEventFromFile.</p>
+     * Returns QuestEvent data for the challenge stored in that file name.
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
+    public static QuestEvent getQuestEventFromFile(String deckName) {
+        final File deckPath = ForgeProps.getFile(NewConstants.QUEST.DECKS);
+        File deckFile = new File(deckPath, deckName + ".dck");
+
+        QuestEvent result = readQuestBattleMetadataFromDeckFile(deckFile);
+        return result;
+    }
+
+    /**
      * <p>readFile.</p>
      * A reader util for accessing the AI deck list text files.
      *
@@ -145,6 +162,33 @@ public class QuestBattleManager {
         }
 
         return list;
+    }
+
+    private static QuestEvent readQuestBattleMetadataFromDeckFile(final File f) {
+        QuestEvent out = new QuestEvent();
+        List<String> contents = FileUtil.readFile(f);
+
+        for (String s : contents) {
+            if ("[main]".equals(s)) { break; }
+            if (StringUtils.isBlank(s) || s.charAt(0) == '[') { continue; }
+
+            int eqPos = s.indexOf('=');
+            if (eqPos < 0) { continue; } // no equals sign here
+            String key = s.substring(0, eqPos);
+            String value = s.substring(eqPos + 1);
+
+            if ("DisplayName".equalsIgnoreCase(key)) {
+                out.displayName = value;
+            } else if ("Difficulty".equalsIgnoreCase(key)) {
+                out.difficulty = value;
+            } else if ("Description".equalsIgnoreCase(key)) {
+                out.description = value;
+            } else if ("Icon".equalsIgnoreCase(key)) {
+                out.icon = value;
+            }
+        }
+
+        return out;
     }
 
 }

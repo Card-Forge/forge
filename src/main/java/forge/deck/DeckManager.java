@@ -2,6 +2,7 @@ package forge.deck;
 
 
 import forge.Constant;
+import forge.PlayerType;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 
@@ -42,6 +43,10 @@ public class DeckManager {
         }
     };
 
+    private static final String NAME = "Name";
+    private static final String DECK_TYPE = "Deck Type";
+    private static final String COMMENT = "Comment";
+    private static final String PLAYER = "Player";
 
     private File deckDir;
     Map<String, Deck> deckMap;
@@ -255,7 +260,6 @@ public class DeckManager {
      * @return a {@link forge.deck.Deck} object.
      */
     public static Deck readDeck(File deckFile) {
-
         List<String> lines = new LinkedList<String>();
 
         try {
@@ -286,7 +290,20 @@ public class DeckManager {
         //read metadata
         while (!(line = lineIterator.next()).equals("[main]")) {
             String[] linedata = line.split("=", 2);
-            d.addMetaData(linedata[0], linedata[1]);
+            String field = linedata[0].toLowerCase();
+            if (NAME.equalsIgnoreCase(field)) {
+                d.setName(linedata[1]);
+            } else if (COMMENT.equalsIgnoreCase(field)) {
+                d.setComment(linedata[1]);
+            } else if (DECK_TYPE.equalsIgnoreCase(field)) {
+                d.setDeckType(linedata[1]);
+            } else if (PLAYER.equalsIgnoreCase(field)) {
+                if ("human".equalsIgnoreCase(linedata[1])) {
+                    d.setPlayerType(PlayerType.HUMAN);
+                } else {
+                    d.setPlayerType(PlayerType.COMPUTER);
+                }
+            }
         }
 
         addCardList(lineIterator, d);
@@ -301,7 +318,7 @@ public class DeckManager {
      * @param iterator a {@link java.util.ListIterator} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private static Deck readDeckOld(ListIterator<String> iterator) {
+    private static Deck readDeckOld(final ListIterator<String> iterator) {
 
         String line;
         //readDeck name
@@ -449,10 +466,11 @@ public class DeckManager {
     private static void writeDeck(Deck d, BufferedWriter out) throws IOException {
         out.write("[metadata]\n");
 
-        for (Entry<String, String> entry : d.getMetadata()) {
-            if (entry.getValue() != null)
-                out.write(format("%s=%s%n", entry.getKey(), entry.getValue().replaceAll("\n", "")));
-        }
+        
+        out.write(format("%s=%s%n", NAME, d.getName().replaceAll("\n", "")));
+        out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType().replaceAll("\n", "")));
+        out.write(format("%s=%s%n", PLAYER, d.getPlayerType()));
+        out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", "")));
 
         out.write(format("%s%n", "[main]"));
         for (Entry<CardPrinted, Integer> e : d.getMain()) {

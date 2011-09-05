@@ -1,6 +1,7 @@
 package forge.deck;
 
 import forge.Constant;
+import forge.PlayerType;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
@@ -23,21 +24,17 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     //gameType is from Constant.GameType, like Constant.GameType.Regular
 
-    private Map<String, String> metadata = new HashMap<String, String>();
-
+    private String name;
+    private String deckType;
+    private String comment;
+    private PlayerType playerType;
+    
     private CardPool main;
     private CardPool sideboard;
 
-    /** Constant <code>NAME="Name"</code> */
-    public static final String NAME = "Name";
-    /** Constant <code>DECK_TYPE="Deck Type"</code> */
-    public static final String DECK_TYPE = "Deck Type";
-    /** Constant <code>COMMENT="Comment"</code> */
-    public static final String COMMENT = "Comment";
-    /** Constant <code>DESCRIPTION="Description"</code> */
-    public static final String DESCRIPTION = "Description";
-    /** Constant <code>DIFFICULTY="Difficulty"</code> */
-    public static final String DIFFICULTY = "Difficulty";
+
+
+
 
 
     //gameType is from Constant.GameType, like Constant.GameType.Regular
@@ -99,7 +96,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getDeckType() {
-        return metadata.get(DECK_TYPE);
+        return deckType;
     }
 
     //can only call this method ONCE
@@ -119,7 +116,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
                     "Deck : setDeckType() error, invalid deck type - " + deckType);
         }
 
-        metadata.put(DECK_TYPE, deckType);
+        this.deckType = deckType;
     }
 
     /**
@@ -128,7 +125,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @param s a {@link java.lang.String} object.
      */
     public void setName(String s) {
-        metadata.put(NAME, s);
+        name = s;
     }
 
     /**
@@ -137,7 +134,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
-        return metadata.get(NAME);
+        return name;
     }
 
     /**
@@ -146,7 +143,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @param comment a {@link java.lang.String} object.
      */
     public void setComment(String comment) {
-        metadata.put(COMMENT, comment);
+        this.comment = comment;
     }
 
     /**
@@ -155,7 +152,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
-        return metadata.get(COMMENT);
+        return comment;
 
     }
 
@@ -242,44 +239,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
         return getName();
     }
 
-
-    // The setters and getters below are for Quest decks
-    /**
-     * <p>setDifficulty.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     */
-    public void setDifficulty(String s) {
-        metadata.put(DIFFICULTY, s);
-    }
-
-    /**
-     * <p>getDifficulty.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getDifficulty() {
-        return metadata.get(DIFFICULTY);
-    }
-
-    /**
-     * <p>setDescription.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     */
-    public void setDescription(String s) {
-        metadata.put(DESCRIPTION, s);
-    }
-
-    /**
-     * <p>getDescription.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getDescription() {
-        return metadata.get(DESCRIPTION);
-    }
-
     /**
      * <p>compareTo.</p>
      *
@@ -299,41 +258,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
         return false;
     }
 
-    /**
-     * <p>Getter for the field <code>metadata</code>.</p>
-     *
-     * @return a {@link java.util.Set} object.
-     */
-    public Set<Map.Entry<String, String>> getMetadata() {
-        return metadata.entrySet();
-    }
-
-    /**
-     * <p>Getter for the field <code>metadata</code>.</p>
-     *
-     * @param key a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     * @since 1.0.15
-     */
-    public String getMetadata(String key) {
-        if (metadata.containsKey(key))
-            return metadata.get(key);
-        
-        System.err.println("In forge.deck/Deck.java, getMetadata() failed "+
-                "for property '"+key+"' in deck '"+getName()+"'.");
-        return "";
-    }
-
-    /**
-     * <p>addMetaData.</p>
-     *
-     * @param key a {@link java.lang.String} object.
-     * @param value a {@link java.lang.String} object.
-     */
-    public void addMetaData(String key, String value) {
-        metadata.put(key, value);
-    }
-
     public void clearSideboard() {
         sideboard.clear();
     }
@@ -343,4 +267,11 @@ public final class Deck implements Comparable<Deck>, Serializable {
         
     }
 
+    public final PlayerType getPlayerType() {
+        return playerType;
+    }
+
+    public final void setPlayerType(PlayerType recommendedPlayer0) {
+        this.playerType = recommendedPlayer0;
+    }
 }

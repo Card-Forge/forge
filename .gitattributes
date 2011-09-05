@@ -9842,6 +9842,7 @@ src/main/java/forge/quest/data/QuestBattleManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestEvent.java -text
 src/main/java/forge/quest/data/QuestMatchState.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain

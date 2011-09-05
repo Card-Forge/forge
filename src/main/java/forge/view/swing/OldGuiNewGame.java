@@ -339,14 +339,14 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_MSG),
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
             deck.setName(sDeckName);
-            deck.addMetaData("PlayerType", "Human");
+            deck.setPlayerType(PlayerType.HUMAN);
 
             Constant.Runtime.HumanDeck[0] = deck;
             Constant.Runtime.GameType[0] = Constant.GameType.Sealed;
 
             Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
             aiDeck.setName("AI_" + sDeckName);
-            aiDeck.addMetaData("PlayerType", "AI");
+            aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
             deckManager.writeAllDecks();
             deckManager.readAllDecks();
@@ -1128,9 +1128,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             for (Deck allDeck : allDecks) {
                 if (allDeck.getDeckType().equals(Constant.GameType.Sealed)) {
-                    if (allDeck.getMetadata("PlayerType").equals("Human")) {
+                    if (allDeck.getPlayerType() == PlayerType.HUMAN) {
                         humanComboBox.addItem(allDeck.getName());
-                    } else if (allDeck.getMetadata("PlayerType").equals("AI")) {
+                    } else if (allDeck.getPlayerType() == PlayerType.COMPUTER) {
                         computerComboBox.addItem(allDeck.getName());
                     }
                 }
