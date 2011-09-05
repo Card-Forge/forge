@@ -253,12 +253,15 @@ public class TriggerHandler {
      * <p>removeTemporaryTriggers.</p>
      * 
      */
-    public final void removeTemporaryTriggers() {
+    public final void cleanUpTemporaryTriggers() {
         for (int i = 0; i < registeredTriggers.size(); i++) {
             if (registeredTriggers.get(i).isTemporary()) {
                 registeredTriggers.get(i).hostCard.removeTrigger(registeredTriggers.get(i));
                 registeredTriggers.remove(i);
             }
+        }
+        for (int i = 0; i < registeredTriggers.size(); i++) {
+            registeredTriggers.get(i).setSuppressed(false);
         }
     }
 
@@ -365,6 +368,9 @@ public class TriggerHandler {
         if (!regtrig.performTest(runParams)) {
                 return false; //Test failed.
         }
+        if (regtrig.isSuppressed()) {
+            return false; //Trigger removed by effect
+    }
 
         //Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");

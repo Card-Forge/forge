@@ -3,6 +3,7 @@ ManaCost:2 R
 Types:Creature Human Wizard
 Text:no text
 PT:2/2
+S:Mode$ Continuous | Affected$ Land.nonBasic | RemoveTriggers$ True
 K:stAnimateAll:Land.nonBasic:no change/no change/Overwrite:Land,Mountain,RemoveSubTypes:no colors:Overwrite:No Condition:Nonbasic lands are Mountains.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

@@ -34,7 +34,7 @@ public class StaticEffects {
         }
         staticEffects = new ArrayList<StaticEffect>();
 
-        AllZone.getTriggerHandler().removeTemporaryTriggers();
+        AllZone.getTriggerHandler().cleanUpTemporaryTriggers();
     }
 
     /**

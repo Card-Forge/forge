@@ -203,6 +203,14 @@ public class StaticAbility_Continuous {
             		affectedCard.addTrigger(actualTrigger);
             		AllZone.getTriggerHandler().registerTrigger(actualTrigger);
 	        	}
+	        
+	        // remove triggers
+	        if (params.containsKey("RemoveTriggers") || params.containsKey("RemoveAllAbilities")) {
+	            ArrayList<Trigger> triggers = affectedCard.getTriggers();
+	            for (Trigger trigger : triggers) {
+	                trigger.setSuppressed(true);
+	            }
+	        }
 	        //affectedCard.updateObservers();
 		}
 	}

@@ -207,7 +207,7 @@ public abstract class Trigger {
      * @return a {@link java.lang.String} object.
      */
     public String toString() {
-        if (mapParams.containsKey("TriggerDescription")) {
+        if (mapParams.containsKey("TriggerDescription") && !isSuppressed()) {
             return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
         } else return "";
     }
@@ -522,5 +522,15 @@ public abstract class Trigger {
     
     public boolean isTemporary() {
     	return temporary;
+    }
+    
+    protected boolean suppressed = false;
+    
+    public void setSuppressed(boolean supp) {
+        suppressed = supp;
+    }
+    
+    public boolean isSuppressed() {
+        return suppressed;
     }
 }
