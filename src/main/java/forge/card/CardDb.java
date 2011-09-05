@@ -170,14 +170,4 @@ public final class CardDb {
 
     public List<CardPrinted> getAllCards() { return allCardsFlat; }
 
-    
-    public class NoSetsException extends RuntimeException
-    {
-        private static final long serialVersionUID = -8962691656197179214L;
-        public final String cardName;
-        public NoSetsException(String cardName) { this.cardName = cardName; }
-        @Override public String toString() {
-            return String.format("%s: The card '%s' was not assigned any set, it won't be loaded into game", this.getClass().getName(), cardName);
-        }
-    }
 }
