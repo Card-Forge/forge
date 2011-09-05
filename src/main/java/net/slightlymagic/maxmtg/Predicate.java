@@ -205,11 +205,10 @@ public abstract class Predicate<T> {
     }
 
     // Static builder methods - they choose concrete implementation by themselves
-    public static <U, T> Predicate<U> brigde(Predicate<T> predicate, Lambda1<T, U> fnBridge) {
-        // TODO Auto-generated method stub
+    public static <U, T> Predicate<U> brigde(final Predicate<T> predicate, final Lambda1<T, U> fnBridge) {
         return new Bridge<T, U>(predicate, fnBridge);
     }
-    
+
     public static <T> Predicate<T> not(final Predicate<T> operand1) { return new Not<T>(operand1); }
     public static <T> Predicate<T> compose(final Predicate<T> operand1,
             final PredicatesOp operator, final Predicate<T> operand2)
@@ -223,11 +222,13 @@ public abstract class Predicate<T> {
         return new NodeAnd<T>(operand1, operand2);
         }
     public static <T> Predicate<T> and(final Iterable<Predicate<T>> operand) { return new MultiNodeAnd<T>(operand); }
-    public static <T, U> Predicate<T> and(final Predicate<T> operand1, final Predicate<U> operand2, Lambda1<U, T> bridge) { return new NodeAndBridged<T, U>(operand1, operand2, bridge); } 
-
-    public static <T> Predicate<T> or(final Predicate<T> operand1, final Predicate<T> operand2) { return new NodeOr<T>(operand1, operand2); }
+    public static <T, U> Predicate<T> and(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> bridge)
+        { return new NodeAndBridged<T, U>(operand1, operand2, bridge); }
+    public static <T> Predicate<T> or(final Predicate<T> operand1, final Predicate<T> operand2)
+        { return new NodeOr<T>(operand1, operand2); }
     public static <T> Predicate<T> or(final Iterable<Predicate<T>> operand) { return new MultiNodeOr<T>(operand); }
-    public static <T, U> Predicate<T> or(final Predicate<T> operand1, final Predicate<U> operand2, Lambda1<U, T> bridge) { return new NodeOrBridged<T, U>(operand1, operand2, bridge); }    
+    public static <T, U> Predicate<T> or(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> bridge)
+        { return new NodeOrBridged<T, U>(operand1, operand2, bridge); }
 
     // Concrete implementations
     // unary operators
@@ -241,6 +242,7 @@ public abstract class Predicate<T> {
         protected final Lambda1<T, U> fnBridge;
         public Bridge(final Predicate<T> operand, final Lambda1<T, U> fnTfromU) { filter = operand; fnBridge = fnTfromU; }
         @Override public boolean isTrue(final U card) { return filter.isTrue(fnBridge.apply(card)); }
+        @Override public boolean is1() { return filter.is1(); }
     }
     // binary operators
     protected static class Node<T> extends Predicate<T> {

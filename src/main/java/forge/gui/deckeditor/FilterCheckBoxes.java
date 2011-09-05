@@ -80,7 +80,7 @@ class FilterCheckBoxes {
         if (red.isSelected()) { colors.add(CardRules.Predicates.Presets.isRed); }
         if (green.isSelected()) { colors.add(CardRules.Predicates.Presets.isGreen); }
         if (colorless.isSelected()) { colors.add(CardRules.Predicates.Presets.isColorless); }
-        Predicate<CardRules> filterByColor = colors.size() == 6 ? Predicate.getTrue(CardRules.class) : Predicate.or(colors);
+        Predicate<CardRules> filterByColor = colors.size() == 6 ? CardRules.Predicates.Presets.constantTrue : Predicate.or(colors);
 
         List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
         if (land.isSelected()) { types.add(CardRules.Predicates.Presets.isLand); }
@@ -90,7 +90,7 @@ class FilterCheckBoxes {
         if (planeswalker.isSelected()) { types.add(CardRules.Predicates.Presets.isPlaneswalker); }
         if (artifact.isSelected()) { types.add(CardRules.Predicates.Presets.isArtifact); }
         if (enchantment.isSelected()) { types.add(CardRules.Predicates.Presets.isEnchantment); }
-        Predicate<CardRules> filterByType = types.size() == 7 ? Predicate.getTrue(CardRules.class) : Predicate.or(types);
+        Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.constantTrue : Predicate.or(types);
 
         return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.fnGetRules);
     }
