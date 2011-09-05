@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
-A:AB$ Pump | Cost$ T |ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Changeling | SpellDescription$ Target creature gains all creature types until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ AllCreatureTypes | SpellDescription$ Target creature gains all creature types until end of turn.
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Creature | RemoveCreatureTypes$ True| IsCurse$ True | SpellDescription$ Target creature loses all creature types until end of turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
