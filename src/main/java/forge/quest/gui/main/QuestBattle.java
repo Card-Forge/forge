@@ -1,7 +1,6 @@
 package forge.quest.gui.main;
 
 
-import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestEvent;

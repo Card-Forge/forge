@@ -1,7 +1,5 @@
 package forge.quest.data;
 
-import forge.deck.Deck;
-
 /** 
  * TODO: Write javadoc for this type.
  *
