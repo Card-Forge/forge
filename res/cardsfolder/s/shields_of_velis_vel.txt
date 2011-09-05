@@ -8,4 +8,5 @@ SVar:DBAnimate:DB$ AnimateAll | Cost$ 0 | Defined$ Targeted | Types$ AllCreature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shields_of_velis_vel.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/39.jpg
+Oracle:Changeling (This card is every creature type at all times.)\nCreatures target player controls get +0/+1 and gain all creature types until end of turn.
 End
