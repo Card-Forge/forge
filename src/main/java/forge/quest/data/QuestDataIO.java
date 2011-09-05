@@ -63,6 +63,7 @@ public class QuestDataIO {
             InputStreamReader reader = new InputStreamReader(zin);
             while (reader.ready()) {
                 int len = reader.read(buf);
+                if (len == -1) { break; } // when end of stream was reached
                 xml.append(buf, 0, len);
             }
 
