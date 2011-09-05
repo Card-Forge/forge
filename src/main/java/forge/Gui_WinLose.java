@@ -108,7 +108,10 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             quitButton.grabFocus();
         }
 
-        restartButton.setEnabled(true);
+        restartButton.setEnabled(false);
+        if (AllZone.getQuestData() == null) {
+            restartButton.setEnabled(true);
+        }
 
         //show Wins and Loses
         int humanWins = model.match.getGamesCountWonByHuman();
