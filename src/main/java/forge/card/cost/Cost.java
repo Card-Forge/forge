@@ -222,21 +222,25 @@ public class Cost {
             costParts.add(new CostReveal(splitStr[0], splitStr[1], description));
         }
 
+        int manaLocation = 0;
         // These won't show up with multiples
         if (parse.contains("Untap")) {
             parse = parse.replace("Untap", "").trim();
             costParts.add(0, new CostUntap());
+            manaLocation++;
         }
 
         if (parse.contains("Q")) {
             parse = parse.replace("Q", "").trim();
             costParts.add(0, new CostUntap());
+            manaLocation++;
         }
 
         if (parse.contains("T")) {
         	tapCost = true;
             parse = parse.replace("T", "").trim();
             costParts.add(0, new CostTap());
+            manaLocation++;
         }
 
         String stripXCost = parse.replaceAll("X", "");
@@ -247,8 +251,9 @@ public class Cost {
         if (mana.equals(""))
         	mana = "0";
         
-        if (amountX > 0 || !mana.equals("0"))
-            costParts.add(0, new CostMana(mana, amountX));
+        if (amountX > 0 || !mana.equals("0")){
+            costParts.add(manaLocation, new CostMana(mana, amountX));
+        }
     }
 
     /**
@@ -414,9 +419,19 @@ public class Cost {
         boolean first = true;
         
         for(CostPart part : costParts){
-        	if (!first)
-        		cost.append(", ");
-        	cost.append(part.toString());
+            boolean append = true;
+            if (!first){
+                if (part instanceof CostMana){
+                    cost.insert(0, ", ").insert(0, part.toString());
+                    append = false;
+                }
+                else{
+                    cost.append(", ");
+                }
+            }
+            if (append){
+                cost.append(part.toString());
+            }
         	first = false;
         }
 
