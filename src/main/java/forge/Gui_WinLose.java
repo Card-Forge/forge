@@ -108,10 +108,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             quitButton.grabFocus();
         }
 
-        restartButton.setEnabled(false);
-        if (AllZone.getQuestData() == null) {
-            restartButton.setEnabled(true);
-        }
+        boolean isQuestMode = model.quest != null;
+        restartButton.setEnabled(!isQuestMode); // For quest always disabled, otherwise always on
 
         //show Wins and Loses
         int humanWins = model.match.getGamesCountWonByHuman();
@@ -339,7 +337,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         frame.setEnabled(true);
 
         //are we on a quest?
-        if (AllZone.getQuestData() == null) {
+        if (model.quest == null) {
             new OldGuiNewGame();
         } else { //Quest
 
