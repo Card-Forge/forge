@@ -152,8 +152,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
-        return comment;
-
+        return comment == null ? "" : comment;
     }
 
     /**

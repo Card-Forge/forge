@@ -469,8 +469,8 @@ public class DeckManager {
         
         out.write(format("%s=%s%n", NAME, d.getName().replaceAll("\n", "")));
         out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType().replaceAll("\n", "")));
-        out.write(format("%s=%s%n", PLAYER, d.getPlayerType()));
         out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", "")));
+        out.write(format("%s=%s%n", PLAYER, d.getPlayerType()));
 
         out.write(format("%s%n", "[main]"));
         for (Entry<CardPrinted, Integer> e : d.getMain()) {
