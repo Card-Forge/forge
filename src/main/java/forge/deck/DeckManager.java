@@ -463,14 +463,14 @@ public class DeckManager {
      * @param out a {@link java.io.BufferedWriter} object.
      * @throws java.io.IOException if any.
      */
-    private static void writeDeck(Deck d, BufferedWriter out) throws IOException {
+    private static void writeDeck(final Deck d, final BufferedWriter out) throws IOException {
         out.write("[metadata]\n");
 
-        
         out.write(format("%s=%s%n", NAME, d.getName().replaceAll("\n", "")));
         out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType().replaceAll("\n", "")));
-        out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", "")));
-        out.write(format("%s=%s%n", PLAYER, d.getPlayerType()));
+        // these are optional
+        if (d.getComment() != null) { out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", ""))); }
+        if (d.getPlayerType() != null) { out.write(format("%s=%s%n", PLAYER, d.getPlayerType())); }
 
         out.write(format("%s%n", "[main]"));
         for (Entry<CardPrinted, Integer> e : d.getMain()) {

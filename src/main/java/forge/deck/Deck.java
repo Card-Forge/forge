@@ -26,8 +26,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     private String name;
     private String deckType;
-    private String comment;
-    private PlayerType playerType;
+    private String comment = null;
+    private PlayerType playerType = null;
     
     private CardPool main;
     private CardPool sideboard;
@@ -152,7 +152,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
-        return comment == null ? "" : comment;
+        return comment;
     }
 
     /**
