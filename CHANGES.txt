@@ -436,6 +436,37 @@ Comment=
 - Updated two DiscardMe SVars.
 - Added the option "RemoveTypes" to AF Animate to remove one special type.
 - Added the recent commit logs to changes.txt.
+- The AI will no longer try to use mana abilities which have a mana cost (it will miscalculate).
+- "New" column added to Quest shop interface.
+- Little fix for the prompt of the reveal cost.
+- Now 'new' is present in quest deckbuider too.
+- Code for reading a deck refactored.
+- Some Checkstyle fixes in AF_ChangeZone.
+- Fixed calculateAmount so Remembered and Imprint work when ability != null.
+- Little AI fix in AF Attach Curse.
+- The choice window makes its list focused then it gains focus itself. So you can just press up/down and ENTER or ESC to choose without touching mouse.
+- SetInfoUtil cleaned out for unused code, init moved to static{} block, dependencies updated.
+- Limited game code moved to a matching package.
+- Deckeditor for drafting now lets you pick a card by hitting space.
+- Added Innistrad into sets list so that people would be able to develop cards for it.
+- Adressed issue from http://www.slightlymagic.net/forum/posting.php?mode=quote&f=26&p=69462 (if a card has blank value set that caused an exception).
+- Fixed exception that happens when loading a deck with cards not found in our database.
+- Pulled all the deck loading errors together.
+- Converted the Changeling keyword to a stat defining ability.
+- Checkstyle fixes in AF_ChangeZone.
+- Some fixes in Test classes to fix compile errors.
+- Cleaned up some java warnings.
+- Fixed Pulsemage Advocate.
+- Some Checkstyle in Gui_WinLose and GenerateThemeDeck.
+- Fixed cards like Shimmering Grotto being able to pay for itself.
+- Fixed Amoeboid Changeling and Blades of Velis Vel to animate to add AllCreatureTypes.
+- Changed Boldwyr Intimidator to use CantBlock instead of CantBeBlockedBy to be strictly correct.
+- Removed exception that turnd out not needed.
+- Deck class no longer contains metadata - please create new classes for extra data you want stored along with the deck, incapsulate deck there if needed.
+- Accelerated Quest startup by removing N reads of N files (n=number of decks) that happened before displaying list of battles.
+- Data specific for quest battle moved to QuestEvent.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
