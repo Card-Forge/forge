@@ -778,6 +778,11 @@ public class GameAction {
 
         while (!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             CardList b = AllZoneUtil.getCardsInPlay(a.get(0).getName());
+            b = b.filter(new CardListFilter() {
+                public boolean addCard(final Card c) {
+                    return !c.isFaceDown();
+                }
+            });
             a.remove(0);
             if (1 < b.size()) {
                 for (int i = 0; i < b.size(); i++)
