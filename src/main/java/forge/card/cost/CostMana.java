@@ -50,6 +50,14 @@ public class CostMana extends CostPart {
         this.adjustedMana = adjustedMana;
     }
     
+    public String getManaToPay() {
+        // Only used for Human to pay for non-X cost first
+        if (!adjustedMana.equals(""))
+            return adjustedMana;
+        
+        return mana;
+    } 
+    
     public CostMana(String mana, int amount){
     	this.mana = mana.trim();
     	this.amountX = amount;
@@ -95,7 +103,7 @@ public class CostMana extends CostPart {
                 manaToAdd = AbilityFactory.calculateAmount(source, "X", ability) * getXMana();
             }
         }
-        if (!getMana().equals("0") || manaToAdd > 0)
+        if (!getManaToPay().equals("0") || manaToAdd > 0)
             CostUtil.setInput(CostMana.input_payMana(ability, payment, this, manaToAdd));
         else if (getXMana() > 0)
             CostUtil.setInput(CostMana.input_payXMana(ability, payment, this, getXMana()));
@@ -188,7 +196,7 @@ public class CostMana extends CostPart {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0");
             } else {
-                String mana = costMana.getMana();
+                String mana = costMana.getManaToPay();
                 manaCost = new ManaCost(mana);
                 manaCost.increaseColorlessMana(manaToAdd);
             }

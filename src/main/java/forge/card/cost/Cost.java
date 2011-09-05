@@ -300,8 +300,8 @@ public class Cost {
     		if (part instanceof CostMana){
     			CostMana costMana = (CostMana)part;
     			
-    	        if (getTotalMana() != "0") {    // 11/15/10 use getTotalMana() to account for X reduction
-    	            String mana = getTotalMana();
+    			String mana = getTotalMana();
+    	        if (mana != "0") {    // 11/15/10 use getTotalMana() to account for X reduction
     	            costMana.setAdjustedMana(AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana)).toString());
     	        }
     		}
