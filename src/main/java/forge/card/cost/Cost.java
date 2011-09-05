@@ -301,7 +301,7 @@ public class Cost {
     			CostMana costMana = (CostMana)part;
     			
     			String mana = getTotalMana();
-    	        if (mana != "0") {    // 11/15/10 use getTotalMana() to account for X reduction
+    	        if ("0".equals(mana)) {    // 11/15/10 use getTotalMana() to account for X reduction
     	            costMana.setAdjustedMana(AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana)).toString());
     	        }
     		}
