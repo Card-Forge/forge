@@ -24,11 +24,14 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
         new Lambda1<CardRules, Entry<CardPrinted, Integer>>() {
           @Override public CardRules apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getCard(); }
         };
-    public final static Lambda1<CardPrinted, Entry<CardPrinted, Integer>> fnToReference =
+    public final static Lambda1<CardPrinted, Entry<CardPrinted, Integer>> fnToPrinted =
         new Lambda1<CardPrinted, Entry<CardPrinted, Integer>>() {
           @Override public CardPrinted apply(final Entry<CardPrinted, Integer> from) { return from.getKey(); }
         };
-
+    public final static Lambda1<String, Entry<CardPrinted, Integer>> fnToCardName =
+        new Lambda1<String, Entry<CardPrinted, Integer>>() {
+          @Override public String apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getName(); }
+        };
     public final static Lambda1<Integer, Entry<CardPrinted, Integer>> fnToCount =
         new Lambda1<Integer, Entry<CardPrinted, Integer>>() {
             @Override public Integer apply(final Entry<CardPrinted, Integer> from) { return from.getValue(); }

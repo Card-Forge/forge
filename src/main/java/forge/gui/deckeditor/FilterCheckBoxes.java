@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JCheckBox;
 
 import net.slightlymagic.maxmtg.Predicate;
+import forge.card.CardPrinted;
 import forge.card.CardRules;
 
 /** 
@@ -71,7 +72,7 @@ class FilterCheckBoxes {
     }
     
     
-    public final Predicate<CardRules> buildFilter() {
+    public final Predicate<CardPrinted> buildFilter() {
         List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
         if (white.isSelected()) { colors.add(CardRules.Predicates.Presets.isWhite); }
         if (blue.isSelected()) { colors.add(CardRules.Predicates.Presets.isBlue); }
@@ -89,9 +90,9 @@ class FilterCheckBoxes {
         if (planeswalker.isSelected()) { types.add(CardRules.Predicates.Presets.isPlaneswalker); }
         if (artifact.isSelected()) { types.add(CardRules.Predicates.Presets.isArtifact); }
         if (enchantment.isSelected()) { types.add(CardRules.Predicates.Presets.isEnchantment); }
-        Predicate<CardRules> filterByType = colors.size() == 7 ? Predicate.getTrue(CardRules.class) : Predicate.or(types);
+        Predicate<CardRules> filterByType = types.size() == 7 ? Predicate.getTrue(CardRules.class) : Predicate.or(types);
 
-        return Predicate.and(filterByColor, filterByType);
+        return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.fnGetRules);
     }
     
 }

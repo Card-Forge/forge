@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.GUI_DeckAnalysis;
+import forge.card.CardPrinted;
 import forge.card.CardRules;
 import forge.card.CardPoolView;
 
@@ -38,9 +39,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
 
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ... virtual protected member, but later
-    protected Predicate<CardRules> buildFilter() {
+    protected Predicate<CardPrinted> buildFilter() {
         if (null == filterBoxes) {
-            return Predicate.getTrue(CardRules.class);
+            return Predicate.getTrue(CardPrinted.class);
         }
         return filterBoxes.buildFilter();
     }

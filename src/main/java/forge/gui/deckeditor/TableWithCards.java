@@ -33,8 +33,9 @@ public final class TableWithCards {
     protected JTable table = new JTable();
     protected JScrollPane jScrollPane = new JScrollPane();
     protected JLabel statsLabel = new JLabel();
-    protected Predicate<CardRules> filter = null;
+    protected Predicate<CardPrinted> filter = null;
     protected boolean isTrackingStats = false;
+    protected boolean wantUnique = false;
 
     // need this to allow users place its contents
     public JComponent getTableDecorated() { return  jScrollPane; }
@@ -42,6 +43,9 @@ public final class TableWithCards {
     public JComponent getLabel() { return statsLabel; }
 
     public TableWithCards(final String title, final boolean showStats) {
+        this(title, showStats, false);
+    }
+    public TableWithCards(final String title, final boolean showStats, final boolean forceUnique) {
         // components
         Color gray = new Color(148, 145, 140);
         TitledBorder titledBorder = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, gray), title);
@@ -56,6 +60,7 @@ public final class TableWithCards {
 
         // class data
         isTrackingStats = showStats;
+        wantUnique = forceUnique;
     }
 
     public void setup(final List<TableColumnInfo<CardPrinted>> columns, final CardPanelBase cardView)
@@ -137,7 +142,7 @@ public final class TableWithCards {
     private boolean isUnfiltered() { return filter == null || filter.is1(); }
     private boolean isFiltered() { return filter != null && !filter.is1(); }
 
-    public void setFilter(final Predicate<CardRules> filterToSet) {
+    public void setFilter(final Predicate<CardPrinted> filterToSet) {
         filter = filterToSet;
         updateView();
     }
@@ -158,10 +163,18 @@ public final class TableWithCards {
     }
 
     public void updateView() {
-        if (isFiltered()) {
+        if (isFiltered() || wantUnique) {
             model.clear();
-            model.addCards(filter.select(pool, CardPoolView.fnToCard));
         }
+
+        if (isFiltered() && wantUnique) {
+            model.addCards(filter.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToPrinted));
+        } else if (isFiltered()) {
+            model.addCards(filter.select(pool, CardPoolView.fnToPrinted));
+        } else if (wantUnique) {
+            model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToCard));
+        }
+
         model.resort();
     }
 

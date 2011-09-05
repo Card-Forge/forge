@@ -25,7 +25,7 @@ public class BoosterDraft_1Test {
         while (draft.hasNextChoice()) {
             CardPoolView list = draft.nextChoice();
             System.out.println(list.countAll());
-            draft.setChoice(Predicate.getTrue(CardRules.class).first(list, CardPoolView.fnToCard, CardPoolView.fnToReference));
+            draft.setChoice(Predicate.getTrue(CardRules.class).first(list, CardPoolView.fnToCard, CardPoolView.fnToPrinted));
         }
     }
 }

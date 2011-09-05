@@ -246,13 +246,10 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Constructed;
         setDeckData("", false);
 
-        // This is an expensive heap operation.
-        
-        
         CardPool allCards = new CardPool();
-        allCards.addAllCards(CardDb.instance().getAllUniqueCards());
+        allCards.addAllCards(CardDb.instance().getAllCards());
         
-        deckDisplay.setDecks(allCards, new CardPoolView());
+        deckDisplay.setDecks(allCards, null);
     }//new constructed
 
     /**
@@ -302,7 +299,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
 
         // This is an expensive heap operation.
-        CardPool allCards = new CardPool( CardDb.instance().getAllUniqueCards() );
+        CardPool allCards = new CardPool( CardDb.instance().getAllCards() );
 
         CardPool generated = new CardPool();
         for (Card c : gen.generateDeck()) { generated.add( CardDb.instance().getCard(c)); }

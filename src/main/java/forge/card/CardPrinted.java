@@ -1,10 +1,14 @@
 package forge.card;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
+import net.slightlymagic.maxmtg.Predicate.StringOp;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
@@ -122,8 +126,10 @@ public final class CardPrinted implements Comparable<CardPrinted> {
         return cardSet.compareTo(o.cardSet);
     }
 
-
-    public static abstract class Predicates {
+    /**
+     *  Number of filters based on CardPrinted values.
+     */
+    public abstract static class Predicates {
         public static Predicate<CardPrinted> rarity(final boolean isEqual, final CardRarity value)
         {
             return new PredicateRarity(value, isEqual);
@@ -134,6 +140,15 @@ public final class CardPrinted implements Comparable<CardPrinted> {
                 return Predicate.getTrue(CardPrinted.class);
             }
             return new PredicateSets(value, shouldContain);
+        }
+        public static Predicate<CardPrinted> printedInSets(final String value) {
+            if (value == null || value.isEmpty()) {
+                return Predicate.getTrue(CardPrinted.class);
+            }
+            return new PredicateSets(Arrays.asList(new String[]{value}), true);
+        }
+        public static Predicate<CardPrinted> name(final StringOp op, final String what) {
+            return new PredicateName(op, what);
         }
 
         private static class PredicateRarity extends Predicate<CardPrinted> {
@@ -157,14 +172,39 @@ public final class CardPrinted implements Comparable<CardPrinted> {
             @Override public boolean isTrue(final CardPrinted card) {
                 return sets.contains(card.cardSet) == mustContain;
             }
-            public PredicateSets(final List<String> wantSets, boolean shouldContain) {
+            public PredicateSets(final List<String> wantSets, final boolean shouldContain) {
                 sets = wantSets; // maybe should make a copy here?
                 mustContain = shouldContain;
             }
         }
 
+        private static class PredicateName extends Predicate<CardPrinted> {
+            private final String operand;
+            private final StringOp operator;
+
+            @Override
+            public boolean isTrue(final CardPrinted card) {
+                return op(card.getName(), operand);
+            }
+
+            private boolean op(final String op1, final String op2) {
+                switch (operator) {
+                    case CONTAINS: return StringUtils.containsIgnoreCase(op1, op2);
+                    case NOT_CONTAINS: return !StringUtils.containsIgnoreCase(op1, op2);
+                    case EQUALS: return op1.equalsIgnoreCase(op2);
+                    default: return false;
+                }
+            }
+
+            public PredicateName(final StringOp operator, final String operand)
+            {
+                this.operand = operand;
+                this.operator = operator;
+            }
+        }
+
         /**
-         * Pre-built predicates are stored here to allow their re-usage and easier access from code 
+         * Pre-built predicates are stored here to allow their re-usage and easier access from code.
          */
         public abstract static class Presets {
             // Think twice before using these, since rarity is a prop of printed card.

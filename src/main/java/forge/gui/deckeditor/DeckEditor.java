@@ -156,7 +156,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     public DeckEditor() {
         try {
             filterBoxes = new FilterCheckBoxes(true);
-            top = new TableWithCards("Avaliable Cards", true);
+            top = new TableWithCards("Avaliable Cards", true, true);
             bottom = new TableWithCards("Deck", true);
             cardView = new CardPanelHeavy();
             
@@ -311,24 +311,24 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     }
 
     @Override
-    protected Predicate<CardRules> buildFilter() {
-        List<Predicate<CardRules>> rules = new ArrayList<Predicate<CardRules>>(5);
+    protected Predicate<CardPrinted> buildFilter() {
+        List<Predicate<CardPrinted>> rules = new ArrayList<Predicate<CardPrinted>>(5);
         rules.add(super.buildFilter());
         if (StringUtils.isNotBlank(txtCardName.getText())) {
-            rules.add(CardRules.Predicates.name(StringOp.CONTAINS, txtCardName.getText()));
+            rules.add(CardPrinted.Predicates.name(StringOp.CONTAINS, txtCardName.getText()));
         }
 
         if (StringUtils.isNotBlank(txtCardType.getText())) {
-            rules.add(CardRules.Predicates.joinedType(StringOp.CONTAINS, txtCardType.getText()));
+            rules.add(Predicate.brigde(CardRules.Predicates.joinedType(StringOp.CONTAINS, txtCardType.getText()), CardPrinted.fnGetRules));
         }
         
         if (StringUtils.isNotBlank(txtCardRules.getText())) {
-            rules.add(CardRules.Predicates.rules(StringOp.CONTAINS, txtCardRules.getText()));
+            rules.add(Predicate.brigde(CardRules.Predicates.rules(StringOp.CONTAINS, txtCardRules.getText()), CardPrinted.fnGetRules));
         }
         
         if (searchSetCombo.getSelectedIndex() != 0) {
             String setCode = SetUtils.getCode3ByName(searchSetCombo.getSelectedItem().toString());
-            rules.add(CardRules.Predicates.wasPrintedInSet(setCode));
+            rules.add(CardPrinted.Predicates.printedInSets(setCode));
         }
 
         return rules.size() == 1 ? rules.get(0) : Predicate.and(rules);

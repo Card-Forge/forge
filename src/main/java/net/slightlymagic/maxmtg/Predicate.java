@@ -1,7 +1,13 @@
 package net.slightlymagic.maxmtg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+
+import forge.card.CardPrinted;
+import forge.card.CardRules;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 /**
@@ -104,6 +110,38 @@ public abstract class Predicate<T> {
         }
     }
 
+    // Unique
+    public final <K> Iterable<T> uniqueByLast(final Iterable<T> source, final Lambda1<K, T> fnUniqueKey)
+    {
+        Map<K, T> uniques = new Hashtable<K, T>();
+        for (T c : source) { if (isTrue(c)) { uniques.put(fnUniqueKey.apply(c), c); } }
+        return uniques.values();
+    }
+    public final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Lambda1<K, U> fnUniqueKey, final Lambda1<T, U> accessor)
+    { // this might be exotic
+        Map<K, U> uniques = new Hashtable<K, U>();
+        for (U c : source) { if (isTrue(accessor.apply(c))) { uniques.put(fnUniqueKey.apply(c), c); } }
+        return uniques.values();
+    }
+    public final <K> Iterable<T> uniqueByFirst(final Iterable<T> source, final Lambda1<K, T> fnUniqueKey)
+    {
+        Map<K, T> uniques = new Hashtable<K, T>();
+        for (T c : source) {
+            K key = fnUniqueKey.apply(c);
+            if (isTrue(c) && !uniques.containsKey(key)) { uniques.put(fnUniqueKey.apply(c), c); }
+        }
+        return uniques.values();
+    }
+    public final <K, U> Iterable<U> uniqueByFirst(final Iterable<U> source, final Lambda1<K, U> fnUniqueKey, final Lambda1<T, U> accessor)
+    { // this might be exotic
+        Map<K, U> uniques = new Hashtable<K, U>();
+        for (U c : source) {
+            K key = fnUniqueKey.apply(c);
+            if (isTrue(accessor.apply(c)) && !uniques.containsKey(key)) { uniques.put(fnUniqueKey.apply(c), c); }
+        }
+        return uniques.values();
+    }
+
     // Count
     public final int count(final Iterable<T> source) {
         int result = 0;
@@ -167,6 +205,11 @@ public abstract class Predicate<T> {
     }
 
     // Static builder methods - they choose concrete implementation by themselves
+    public static <U, T> Predicate<U> brigde(Predicate<T> predicate, Lambda1<T, U> fnBridge) {
+        // TODO Auto-generated method stub
+        return new Bridge<T, U>(predicate, fnBridge);
+    }
+    
     public static <T> Predicate<T> not(final Predicate<T> operand1) { return new Not<T>(operand1); }
     public static <T> Predicate<T> compose(final Predicate<T> operand1,
             final PredicatesOp operator, final Predicate<T> operand2)
@@ -193,7 +236,12 @@ public abstract class Predicate<T> {
         public Not(final Predicate<T> operand) { filter = operand; }
         @Override public boolean isTrue(final T card) { return !filter.isTrue(card); }
     }
-
+    protected static final class Bridge<T, U> extends Predicate<U> {
+        protected final Predicate<T> filter;
+        protected final Lambda1<T, U> fnBridge;
+        public Bridge(final Predicate<T> operand, final Lambda1<T, U> fnTfromU) { filter = operand; fnBridge = fnTfromU; }
+        @Override public boolean isTrue(final U card) { return filter.isTrue(fnBridge.apply(card)); }
+    }
     // binary operators
     protected static class Node<T> extends Predicate<T> {
         private final PredicatesOp operator;

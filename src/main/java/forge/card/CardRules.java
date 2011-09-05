@@ -223,10 +223,12 @@ public final class CardRules {
             }
 
             private boolean op(final String op1, final String op2) {
-                if (operator == StringOp.CONTAINS) { return StringUtils.containsIgnoreCase(op1, op2); }
-                if (operator == StringOp.NOT_CONTAINS) { return !StringUtils.containsIgnoreCase(op1, op2); }
-                if (operator == StringOp.EQUALS) { return op1.equalsIgnoreCase(op2); }
-                return false;
+                switch (operator) {
+                    case CONTAINS: return StringUtils.containsIgnoreCase(op1, op2);
+                    case NOT_CONTAINS: return !StringUtils.containsIgnoreCase(op1, op2);
+                    case EQUALS: return op1.equalsIgnoreCase(op2);
+                    default: return false;
+                }
             }
 
             public LeafString(final CardField field, final StringOp operator, final String operand)
@@ -393,6 +395,8 @@ public final class CardRules {
               colors.add(isGreen);
               colors.add(isColorless);
             }
+            
+            public static final Predicate<CardRules> constantTrue = Predicate.getTrue(CardRules.class);
 
             // Think twice before using these, since rarity is a prop of printed card.
             public static final Predicate<CardRules> isInLatestSetCommon = rarityInCardsLatestSet(true, CardRarity.Common);
