@@ -7,6 +7,8 @@ import forge.quest.data.QuestEvent;
 
 import javax.swing.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,14 +64,13 @@ public class QuestBattle extends QuestSelectablePanel {
             String oppIconAddress  = event1.getIcon();
 
             ImageIcon    icon;
-            // If non-default icon defined, use it            
-            if(oppIconAddress.equals("")) {
+            // If non-default icon defined, use it
+            if (StringUtils.isBlank(oppIconAddress)) {
                 icon  = GuiUtils.getIconFromFile(oppName + ".jpg");
             }
             else
                 icon = GuiUtils.getIconFromFile(oppIconAddress + ".jpg");
-                
-            
+
             // Add to list of current quest opponents.
             opponentList.add(
                     new QuestBattle(oppName, oppDeckName, oppDiff, oppDesc, icon)
