@@ -338,6 +338,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
         //are we on a quest?
         if (model.quest == null) {
+            model.match.reset();
             new OldGuiNewGame();
         } else { //Quest
 
