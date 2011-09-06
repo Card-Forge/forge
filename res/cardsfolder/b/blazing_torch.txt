@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswa
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_torch.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/197.jpg
+Oracle:Equipped creature can't be blocked by Vampires or Zombies.\nEquipped creature has "{T}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player."\nEquip {1}
 End
