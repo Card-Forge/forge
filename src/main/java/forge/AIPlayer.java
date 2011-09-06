@@ -131,30 +131,11 @@ public class AIPlayer extends Player {
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = AllZoneUtil.getPlayerHand(this).size();
         max = Math.min(max, num);
-        CardList discarded = new CardList();
-        for (int i = 0; i < max; i++) {
-            CardList hand = AllZoneUtil.getPlayerHand(this);
-
-            if (hand.size() > 0) {
-                CardList basicLandsInPlay = AllZoneUtil.getPlayerTypeInPlay(this, "Basic");
-                if (basicLandsInPlay.size() > 5) {
-                    CardList basicLandsInHand = hand.getType("Basic");
-                    if (basicLandsInHand.size() > 0) {
-                        discarded.add(hand.get(0));
-                        doDiscard(basicLandsInHand.get(CardUtil.getRandomIndex(basicLandsInHand)), sa);
-                    } else {
-                        CardListUtil.sortAttackLowFirst(hand);
-                        CardListUtil.sortNonFlyingFirst(hand);
-                        discarded.add(hand.get(0));
-                        doDiscard(hand.get(0), sa);
-                    }
-                } else {
-                    CardListUtil.sortCMC(hand);
-                    discarded.add(hand.get(0));
-                    doDiscard(hand.get(0), sa);
-                }
-            }
+        CardList discarded = ComputerUtil.AI_discardNumType(max, null, sa);
+        for (int i = 0; i < discarded.size(); i++) {
+            doDiscard(discarded.get(i), sa);
         }
+
         return discarded;
     } //end discard
 

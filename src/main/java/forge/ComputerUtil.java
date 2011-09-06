@@ -845,12 +845,15 @@ public class ComputerUtil {
      * @return a {@link forge.Card} object.
      */
     static public Card getCardPreference(Card activate, String pref, CardList typeList) {
-        String[] prefValid = activate.getSVar("AIPreference").split("\\$");
-        if (prefValid[0].equals(pref)) {
-            CardList prefList = typeList.getValidCards(prefValid[1].split(","), activate.getController(), activate);
-            if (prefList.size() != 0) {
-                prefList.shuffle();
-                return prefList.get(0);
+        
+        if (activate != null) {
+            String[] prefValid = activate.getSVar("AIPreference").split("\\$");
+            if (prefValid[0].equals(pref)) {
+                CardList prefList = typeList.getValidCards(prefValid[1].split(","), activate.getController(), activate);
+                if (prefList.size() != 0) {
+                    prefList.shuffle();
+                    return prefList.get(0);
+                }
             }
         }
         if (pref.contains("SacCost")) { // search for permanents with SacMe
@@ -929,13 +932,20 @@ public class ComputerUtil {
      * <p>AI_discardNumType.</p>
      *
      * @param numDiscard a int.
-     * @param uTypes     an array of {@link java.lang.String} objects.
+     * @param uTypes     an array of {@link java.lang.String} objects. May be null for no restrictions.
      * @param sa         a {@link forge.card.spellability.SpellAbility} object.
      * @return a CardList of discarded cards.
      */
     static public CardList AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
-        hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+        Card sourceCard = null;
+        
+        if (uTypes != null && sa != null) {
+            hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+        }
+        if (sa != null) {
+            sourceCard = sa.getSourceCard();
+        }
 
         if (hand.size() < numDiscard){
             return null;
@@ -944,8 +954,9 @@ public class ComputerUtil {
         CardList discardList = new CardList();
         int count = 0;
         
+        // look for good discards
         while (count < numDiscard) {
-            Card prefCard = getCardPreference(sa.getSourceCard(), "DiscardCost", hand);
+            Card prefCard = getCardPreference(sourceCard, "DiscardCost", hand);
             if (prefCard != null) {
                 discardList.add(prefCard);
                 hand.remove(prefCard);
@@ -956,10 +967,28 @@ public class ComputerUtil {
         
         int discardsLeft = numDiscard - count;
         
-        CardListUtil.sortCMC(hand);
-        hand.reverse();
-        for (int i = 0; i < discardsLeft; i++){
-            discardList.add(hand.get(i));
+        // chose rest 
+        for (int i = 0; i < discardsLeft; i++) {
+            if (hand.size() <= 0) {
+                continue;
+            }
+            CardList landsInPlay = AllZoneUtil.getPlayerTypeInPlay(AllZone.getComputerPlayer(), "Land");
+            if (landsInPlay.size() > 5) {
+                CardList landsInHand = hand.getType("Land");
+                if (landsInHand.size() > 0) {       //discard lands
+                    discardList.add(landsInHand.get(0));
+                    hand.remove(landsInHand.get(0));
+                } else {                            //discard low costed stuff
+                    CardListUtil.sortCMC(hand); 
+                    hand.reverse();
+                    discardList.add(hand.get(0));
+                    hand.remove(hand.get(0));
+                }
+            } else {                                //discard high costed stuff
+                CardListUtil.sortCMC(hand);
+                discardList.add(hand.get(0));
+                hand.remove(hand.get(0));
+            }
         }
         
         return discardList;
