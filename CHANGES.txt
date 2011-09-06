@@ -467,6 +467,36 @@ Comment=
 - Data specific for quest battle moved to QuestEvent.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Added SVar:RemAIDeck:True to Brave the Elements.
+- Won't show errors if a card has no setinfo.
+- Fixed an NPE for null comments.
+- Does not force deck to have comment or playerType.
+- Modified the Hornet Queen script and it will now look for a token picture named "g_1_1_insect_deathtouch.jpg.
+- Added the option to remove triggered abilities with continuous static abilities.
+- Added it to some cards that currently still use stAnimate.
+- Deck Editor displays mana as symbols (currently only for constructed mode).
+- Fixed a bug in quest data load routine. It happened once per 1024 times, so it could be reproduced at very rare cases.
+- Disabled restarting matches in quest mode.
+- Cleaned up some Java warnings.
+- Fixed having 2 Legendary creatures with the same name on the battlefield, but one of them is face down both going to the graveyard. Now, isFaceDown() is checked.
+- Fixed new Cost object not using CostChange information properly.
+- fixed a bug with deckeditor filters: (1) when you select 6 core types of 7, all 7 are shown anyway, (2) with active set filter didn't show some cards issued in other sets
+- Fixing Java String Comparison
+- minor optimizations to card filtering
+- QuestMode crashed with old decks (no difficulty and displayname metadata in dck files), doesn't crash now at least.
+- deckmanager is now forced to store cards along with sets they belong to, cause ppl want customized decks
+- formats - will deal with them later
+- fixed GainControl AF not returning all controlled objects (Issue #227)
+- manacost as icons in quest mode
+- several Checkstyle fixes in Card, GameAction and CardFactoryUtil
+- clean up some Java warnings
+- added CostDesc so card text looks right on game screens
+- several Checkstyle fixes in Card.java
+- Fixed "games won" count not resetting between nonquest matches.
+- Restructured parts of AI discarding. All choosing is handled in ComputerUtil.AI_discardNumType. AIPlayer.discard will use this.
+- Converted the triggered ability of Necropotence to script (actually it wasn't even a triggered ability). Updated the wording on the activated ability.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
