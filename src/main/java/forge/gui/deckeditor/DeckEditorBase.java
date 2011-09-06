@@ -11,7 +11,6 @@ import net.slightlymagic.maxmtg.Predicate;
 
 import forge.GUI_DeckAnalysis;
 import forge.card.CardPrinted;
-import forge.card.CardRules;
 import forge.card.CardPoolView;
 
 public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {

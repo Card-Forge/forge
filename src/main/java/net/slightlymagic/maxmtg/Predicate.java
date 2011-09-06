@@ -1,13 +1,9 @@
 package net.slightlymagic.maxmtg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-
-import forge.card.CardPrinted;
-import forge.card.CardRules;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 /**

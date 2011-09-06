@@ -1,9 +1,17 @@
 package forge.card.abilityFactory;
 
-import forge.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.*;
-import forge.card.trigger.Trigger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
