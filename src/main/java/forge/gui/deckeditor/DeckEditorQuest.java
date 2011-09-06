@@ -126,7 +126,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.add(new TableColumnInfo<CardPrinted>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
-        // Add NEW column here
+
+        columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);

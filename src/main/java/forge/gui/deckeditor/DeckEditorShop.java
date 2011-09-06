@@ -136,7 +136,8 @@ public final class DeckEditorShop extends DeckEditorBase {
         columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
         columns.add(new TableColumnInfo<CardPrinted>("R", 30, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<CardPrinted>("Set", 35, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-
+        columns.get(2).setCellRenderer(new ManaCostRenderer());
+        
         List<TableColumnInfo<CardPrinted>> columnsBelow = new ArrayList<TableColumnInfo<CardPrinted>>(columns);
         columns.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
         top.setup(columns, cardView);

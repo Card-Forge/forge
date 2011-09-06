@@ -102,6 +102,7 @@ public interface NewConstants {
     String BOOSTERDATA = "boosterdata";
 
     String MTG_DATA = "mtg-data";
+    String SYMBOLS_SMALL = "symbols/small";
 
     /** Constant <code>IMAGE_BASE="image/base"</code>. */
     String IMAGE_BASE = "image/base";
