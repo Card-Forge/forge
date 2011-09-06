@@ -724,13 +724,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             }; //SpellAbility
 
-            ability.setDescription("Pay 1 life: Set aside the top card of your library face down. "
-                    + "At the end of your turn, put that card into your hand.");
+            ability.setDescription("Pay 1 life: Exile the top card of your library face down. " +
+            		"Put that card into your hand at the beginning of your next end step.");
 
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName());
-            sb.append(" - Set aside the top card of your library face down. "
-                    + "At the end of your turn, put that card into your hand.");
+            sb.append(" - Exile the top card of your library face down. " +
+            		"Put that card into your hand at the beginning of your next end step.");
             ability.setStackDescription(sb.toString());
 
             card.addSpellAbility(ability);

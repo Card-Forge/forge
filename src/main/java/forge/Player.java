@@ -983,12 +983,6 @@ public abstract class Player extends GameEntity {
             }
         }
 
-        // necro disrupts madness
-        if (AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0) {
-            AllZone.getGameAction().exile(c);
-            return;
-        }
-
         AllZone.getGameAction().discard_madness(c);
 
         if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
