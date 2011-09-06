@@ -375,13 +375,13 @@ public class DeckManager {
     // Precondition: iterator should point at the first line of cards list
     private static List<String> readCardList(final ListIterator<String> lineIterator) {
         List<String> result = new ArrayList<String>();
-        Pattern p = Pattern.compile("\\s*((\\d+)\\s+)?(.*?)\\s*");
+        Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 
         while (lineIterator.hasNext()) {
             String line = lineIterator.next();
             if (line.startsWith("[")) { break; } // there comes another section
 
-            Matcher m = p.matcher(line);
+            Matcher m = p.matcher(line.trim());
             m.matches();
             String sCnt = m.group(2);
             String cardName = m.group(3);
@@ -474,11 +474,11 @@ public class DeckManager {
 
         out.write(format("%s%n", "[main]"));
         for (Entry<CardPrinted, Integer> e : d.getMain()) {
-            out.write(format("%d %s%n", e.getValue(), e.getKey().getName()));
+            out.write(format("%d %s|%s%n", e.getValue(), e.getKey().getName(), e.getKey().getSet()));
         }
         out.write(format("%s%n", "[sideboard]"));
         for (Entry<CardPrinted, Integer> e : d.getSideboard()) {
-            out.write(format("%d %s%n", e.getValue(), e.getKey().getName()));
+            out.write(format("%d %s|%s%n", e.getValue(), e.getKey().getName(), e.getKey().getSet()));
         }
     }
 
