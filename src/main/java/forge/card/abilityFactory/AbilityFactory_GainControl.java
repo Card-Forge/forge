@@ -3,6 +3,7 @@ package forge.card.abilityFactory;
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.*;
+import forge.card.trigger.Trigger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -489,37 +490,39 @@ public class AbilityFactory_GainControl {
      * @return a {@link forge.Command} object.
      */
     private Command getLoseControlCommand(final int i, final Player originalController) {
+        final Card c = movedCards[i];
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
             public void execute() {
-                Card c = movedCards[i];
-                //ArrayList<Card> c = hostCard.getGainControlTargets();
-                if (null == c) {
-                    return;
-                }
-
-                if (AllZoneUtil.isCardInPlay(c)) {
-                    c.removeController(hostCard);
-                    //AllZone.getGameAction().changeController(new CardList(c), c.getController(), originalController);
-
-                    if (bTapOnLose) {
-                        c.tap();
-                    }
-
-                    if (null != kws) {
-                        for (String kw : kws) {
-                            c.removeExtrinsicKeyword(kw);
-                        }
-                    }
-                } //if
-                hostCard.clearGainControlTargets();
-                hostCard.clearGainControlReleaseCommands();
-                movedCards[i] = null;
+                doLoseControl(c, hostCard, bTapOnLose, kws);
             } //execute()
         };
 
         return loseControl;
+    }
+
+    private static void doLoseControl(final Card c, final Card host, final boolean tapOnLose, final ArrayList<String> addedKeywords)
+    {
+      if (null == c) {
+          return;
+      }
+      if (AllZoneUtil.isCardInPlay(c)) {
+          c.removeController(host);
+          //AllZone.getGameAction().changeController(new CardList(c), c.getController(), originalController);
+
+          if (tapOnLose) {
+              c.tap();
+          }
+
+          if (null != addedKeywords) {
+              for (String kw : addedKeywords) {
+                  c.removeExtrinsicKeyword(kw);
+              }
+          }
+      } //if
+      host.clearGainControlTargets();
+      host.clearGainControlReleaseCommands();
     }
 
 } //end class AbilityFactory_GainControl
