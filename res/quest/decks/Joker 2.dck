@@ -1,0 +1,25 @@
+[metadata]
+Name=Joker 2
+DisplayName=Joker
+Difficulty=medium
+Description=Mono G Survival of the Fittest deck with Squee, Goblin Nabob and Basking Rootwalla
+Deck Type=constructed
+Icon=
+[main]
+25 Forest
+4 Survival of the Fittest
+4 Fauna Shaman
+1 Llanowar Mentor
+3 Greenseeker
+3 Squee, Goblin Nabob
+4 Basking Rootwalla
+2 Krovikan Horror
+1 Brawn
+1 Vengeful Pharaoh
+4 Bloodghast
+3 Gaea's Anthem
+1 Leyline of Vitality
+1 Dense Foliage
+1 Spidersilk Armor
+2 Exploration
+[sideboard]
