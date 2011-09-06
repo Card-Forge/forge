@@ -10,7 +10,12 @@ import forge.card.cost.Cost;
 import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_Requirements;
+import forge.card.spellability.Target;
+import forge.card.spellability.Target_Selection;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.deck.Deck;
@@ -24,9 +29,15 @@ import forge.gui.input.Input_PayManaCost_Ability;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
-import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * <p>GameAction class.</p>
@@ -39,13 +50,14 @@ public class GameAction {
     /**
      * <p>resetActivationsPerTurn.</p>
      */
-    public void resetActivationsPerTurn() {
+    public final void resetActivationsPerTurn() {
         CardList all = AllZoneUtil.getCardsInGame();
 
         // Reset Activations per Turn
         for (Card card : all) {
-            for (SpellAbility sa : card.getSpellAbility())
+            for (SpellAbility sa : card.getSpellAbility()) {
                 sa.getRestrictions().resetTurnActivations();
+            }
         }
     }
 
@@ -57,7 +69,7 @@ public class GameAction {
      * @param c    a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card changeZone(PlayerZone prev, PlayerZone zone, Card c) {
+    public static Card changeZone(final PlayerZone prev, final PlayerZone zone, final Card c) {
         if (prev == null && !c.isToken()) {
             zone.add(c);
             return c;
@@ -73,7 +85,7 @@ public class GameAction {
         }
 
         Card copied = null;
-        Card lastKnownInfo = null; 
+        Card lastKnownInfo = null;
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering Battlefield
         if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) {
@@ -83,26 +95,31 @@ public class GameAction {
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
-            // todo: improve choices here
+            // TODO improve choices here
             // Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
-            if (c.wasSuspendCast())            // these probably can be moved back to SubtractCounters
+            // these probably can be moved back to SubtractCounters
+            if (c.wasSuspendCast()) {
                 copied = addSuspendTriggers(c);
+            }
             copied.setUnearthed(c.isUnearthed());    // this might be unnecessary
         }
 
         // This is the fix for Isochron Scepter and friends, we need to test other situations
         // To make sure it doesn't break anything serious
-        for (Trigger trigger : c.getTriggers())
+        for (Trigger trigger : c.getTriggers()) {
             trigger.setHostCard(copied);
+        }
 
-        if (suppress)
+        if (suppress) {
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
+        }
 
         zone.add(copied);
 
         //Tokens outside the battlefield disappear immideately.
-        if (copied.isToken() && !zone.is(Constant.Zone.Battlefield))
+        if (copied.isToken() && !zone.is(Constant.Zone.Battlefield)) {
             zone.remove(copied);
+        }
 
         HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
@@ -115,25 +132,30 @@ public class GameAction {
         AllZone.getTriggerHandler().runTrigger("ChangesZone", runParams);
         //AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
-        if (suppress)
+        if (suppress) {
             AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+        }
 
         if (prev != null) {
-            if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
+            if (prev.is(Constant.Zone.Battlefield) && c.isCreature()) {
                 AllZone.getCombat().removeFromCombat(c);
+            }
 
             prev.remove(c);
         }
-        
+
         /*
         if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) && !zone.is(Constant.Zone.Battlefield))
             copied = AllZone.getCardFactory().copyCard(copied);
         */
         //remove all counters from the card if destination is not the battlefield
         //UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!zone.is(Constant.Zone.Battlefield) && !(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone.is(Constant.Zone.Library)))
+        if (!zone.is(Constant.Zone.Battlefield) && !(c.getName().equals("Skullbriar, the Walking Grave")
+                && !zone.is(Constant.Zone.Hand) && !zone.is(Constant.Zone.Library)))
+        {
             copied.clearCounters();
-        
+        }
+
         copied.setTimestamp(AllZone.getNextTimestamp());
 
         return copied;
@@ -146,14 +168,15 @@ public class GameAction {
      * @param c    a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveTo(PlayerZone zone, Card c) {
+    public final Card moveTo(final PlayerZone zone, Card c) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         PlayerZone prev = AllZone.getZone(c);
         //String prevName = prev != null ? prev.getZoneName() : "";
 
-        if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.") &&
-                !zone.is(Constant.Zone.Exile)) {
+        if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
+                && !zone.is(Constant.Zone.Exile))
+        {
             PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
             c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
             return moveTo(removed, c);
@@ -164,22 +187,22 @@ public class GameAction {
         c = changeZone(prev, zone, c);
 
         if (c.isAura() && zone.is(Constant.Zone.Battlefield) && (prev == null || !prev.is(Constant.Zone.Stack))) {
-        	// TODO: Need a way to override this for Abilities that put Auras into play attached to things
-        	AbilityFactory_Attach.attachAuraOnIndirectEnterBattlefield(c);
+            // TODO Need a way to override this for Abilities that put Auras into play attached to things
+            AbilityFactory_Attach.attachAuraOnIndirectEnterBattlefield(c);
         }
 
         return c;
     }
-    
+
     /**
      * <p>moveToPlayFromHand.</p>
      *
      * @param c    a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToPlayFromHand(Card c) {
+    public final Card moveToPlayFromHand(Card c) {
         //handles the case for Clone, etc where prev was null
-    	
+
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
 
@@ -221,16 +244,14 @@ public class GameAction {
 
     /**
      *
-     * @param c
+     * @param c a Card object
      */
-    public void controllerChange_ZoneCorrection(Card c)
-    {
+    public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         PlayerZone oldBattlefield = AllZone.getZone(c);
-        PlayerZone newBattlefield = AllZone.getZone(oldBattlefield.getZoneName(),c.getController());
+        PlayerZone newBattlefield = AllZone.getZone(oldBattlefield.getZoneName(), c.getController());
 
-        if(oldBattlefield == null || newBattlefield == null)
-        {
+        if (oldBattlefield == null || newBattlefield == null) {
             return;
         }
 
@@ -256,7 +277,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToStack(Card c) {
+    public final Card moveToStack(final Card c) {
         PlayerZone stack = AllZone.getZone(Constant.Zone.Stack, null);
         return moveTo(stack, c);
     }
@@ -267,7 +288,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToGraveyard(Card c) {
+    public final Card moveToGraveyard(Card c) {
         final PlayerZone origZone = AllZone.getZone(c);
         final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
@@ -291,8 +312,7 @@ public class GameAction {
         c = moveTo(grave, c);
 
         //Recover keyword
-        if (c.isCreature()
-                && origZone.is(Constant.Zone.Battlefield)) {
+        if (c.isCreature() && origZone.is(Constant.Zone.Battlefield)) {
             for (final Card recoverable : AllZoneUtil.getPlayerGraveyard(c.getOwner())) {
                 if (recoverable.hasStartOfKeyword("Recover")) {
                     SpellAbility abRecover = new Ability(recoverable, "0") {
@@ -303,10 +323,10 @@ public class GameAction {
 
                         @Override
                         public String getStackDescription() {
-                            StringBuilder SD = new StringBuilder(recoverable.getName());
-                            SD.append(" - Recover.");
+                            StringBuilder sd = new StringBuilder(recoverable.getName());
+                            sd.append(" - Recover.");
 
-                            return SD.toString();
+                            return sd.toString();
                         }
                     };
 
@@ -349,9 +369,8 @@ public class GameAction {
                         //ComputerUtil.playStack(abRecover);
                     }
 
-                    if (!grave.hasChanged()) //If the controller declined Recovery or didn't pay the cost, exile the recoverable
-                    {
-
+                    if (!grave.hasChanged()) {
+                        //If the controller declined Recovery or didn't pay the cost, exile the recoverable
                     }
                 }
             }
@@ -365,7 +384,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToHand(Card c) {
+    public final Card moveToHand(final Card c) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
         return moveTo(hand, c);
     }
@@ -376,7 +395,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToPlay(Card c) {
+    public final Card moveToPlay(final Card c) {
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
         return moveTo(play, c);
     }
@@ -388,7 +407,7 @@ public class GameAction {
      * @param p a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToPlay(Card c, Player p) {
+    public final Card moveToPlay(final Card c, final Player p) {
         // move to a specific player's Battlefield
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, p);
         return moveTo(play, c);
@@ -400,7 +419,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToBottomOfLibrary(Card c) {
+    public final Card moveToBottomOfLibrary(final Card c) {
         return moveToLibrary(c, -1);
     }
 
@@ -410,7 +429,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToLibrary(Card c) {
+    public final Card moveToLibrary(final Card c) {
         return moveToLibrary(c, 0);
     }
 
@@ -421,7 +440,7 @@ public class GameAction {
      * @param libPosition a int.
      * @return a {@link forge.Card} object.
      */
-    public Card moveToLibrary(Card c, int libPosition) {
+    public final Card moveToLibrary(Card c, int libPosition) {
         PlayerZone p = AllZone.getZone(c);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
 
@@ -431,19 +450,24 @@ public class GameAction {
             return moveTo(removed, c);
         }
 
-        if (p != null) p.remove(c);
+        if (p != null) {
+            p.remove(c);
+        }
 
 
-        if (c.isToken())
+        if (c.isToken()) {
             return c;
+        }
 
-        if (p != null && p.is(Constant.Zone.Battlefield))
+        if (p != null && p.is(Constant.Zone.Battlefield)) {
             c = AllZone.getCardFactory().copyCard(c);
+        }
 
         c.clearCounters(); //remove all counters
 
-        if (libPosition == -1 || libPosition > library.size())
+        if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
+        }
 
         library.add(c, libPosition);
         return c;
@@ -455,8 +479,10 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card exile(Card c) {
-        if (AllZoneUtil.isCardExiled(c)) return c;
+    public final Card exile(final Card c) {
+        if (AllZoneUtil.isCardExiled(c)) {
+            return c;
+        }
 
         PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
 
@@ -471,20 +497,21 @@ public class GameAction {
      * @param libPosition a int.
      * @return a {@link forge.Card} object.
      */
-    public Card moveTo(String name, Card c, int libPosition) {
+    public final Card moveTo(final String name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
-        if (name.equals(Constant.Zone.Hand))
+        if (name.equals(Constant.Zone.Hand)) {
             return moveToHand(c);
-        else if (name.equals(Constant.Zone.Library))
+        } else if (name.equals(Constant.Zone.Library)) {
             return moveToLibrary(c, libPosition);
-        else if (name.equals(Constant.Zone.Battlefield))
+        } else if (name.equals(Constant.Zone.Battlefield)) {
             return moveToPlay(c);
-        else if (name.equals(Constant.Zone.Graveyard))
+        } else if (name.equals(Constant.Zone.Graveyard)) {
             return moveToGraveyard(c);
-        else if (name.equals(Constant.Zone.Exile))
+        } else if (name.equals(Constant.Zone.Exile)) {
             return exile(c);
-        else //if (name.equals(Constant.Zone.Stack))
+        } else {
             return moveToStack(c);
+        }
     }
 
     /**
@@ -495,8 +522,9 @@ public class GameAction {
     public void discard_PutIntoPlayInstead(Card c) {
         moveToPlay(c);
 
-        if (c.getName().equals("Dodecapod"))
+        if (c.getName().equals("Dodecapod")) {
             c.setCounter(Counters.P1P1, 2, false);
+        }
     }
 
     /**
@@ -504,10 +532,11 @@ public class GameAction {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void discard_madness(Card c) {
+    public final void discard_madness(Card c) {
         // Whenever a card with madness is discarded, you may cast it for it's madness cost
-        if (!c.hasMadness())
+        if (!c.hasMadness()) {
             return;
+        }
 
         final Card madness = c;
         final Ability cast = new Ability(madness, madness.getMadnessCost()) {
@@ -528,13 +557,16 @@ public class GameAction {
                 // pay madness cost here.
                 if (madness.getOwner().isHuman()) {
                     if (GameActionUtil.showYesNoDialog(madness, madness + " - Discarded. Pay Madness Cost?")) {
-                        if (cast.getManaCost().equals("0"))
+                        if (cast.getManaCost().equals("0")) {
                             AllZone.getStack().add(cast);
-                        else
+                        } else {
                             AllZone.getInputControl().setInput(new Input_PayManaCost(cast));
+                        }
                     }
-                } else     // computer will ALWAYS pay a madness cost if he has the mana.
+                } else {
+                    // computer will ALWAYS pay a madness cost if he has the mana.
                     ComputerUtil.playStack(cast);
+                }
             }
         };
 
@@ -550,7 +582,7 @@ public class GameAction {
      *
      * @return a boolean.
      */
-    public boolean checkEndGameSate() {
+    public final boolean checkEndGameSate() {
         // Win / Lose
         GameSummary game = AllZone.getGameInfo();
         boolean humanWins = false;
@@ -558,10 +590,10 @@ public class GameAction {
         Player computer = AllZone.getComputerPlayer();
         Player human = AllZone.getHumanPlayer();
 
-        if ( human.hasWon() || computer.hasLost() ) {    // Winning Conditions can be worth more than losing conditions
+        if (human.hasWon() || computer.hasLost()) {    // Winning Conditions can be worth more than losing conditions
             // Human wins
             humanWins = true;
-            
+
             if (human.getAltWin()) {
                 game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.HUMAN, human.getWinConditionSource());
             } else {
@@ -576,13 +608,13 @@ public class GameAction {
                 game.end(GameEndReason.Draw, PlayerIndex.DRAW, null);
             } else {
                 computerWins = true;
-                
+
                 if (computer.getAltWin()) {
                     game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.AI, computer.getWinConditionSource());
                 } else {
                     game.end(GameEndReason.AllOpponentsLost, PlayerIndex.AI, null);
                 }
-                
+
             }
         }
 
@@ -600,22 +632,26 @@ public class GameAction {
     /**
      * <p>checkStateEffects.</p>
      */
-    public void checkStateEffects() {
+    public final void checkStateEffects() {
+
         // sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution
-        if (AllZone.getStack().getResolving())
+        if (AllZone.getStack().getResolving()) {
             return;
+        }
 
         boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
         JFrame frame = (JFrame) AllZone.getDisplay();
-        if (!frame.isDisplayable()) return;
+        if (!frame.isDisplayable()) {
+            return;
+        }
 
         if (checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
             frame.setEnabled(false);
             //frame.dispose();
-            Gui_WinLose gwl = new Gui_WinLose( AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestAssignment() );
+            Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestAssignment());
             //gwl.setAlwaysOnTop(true);
             gwl.toFront();
             return;
@@ -623,31 +659,34 @@ public class GameAction {
 
         //do this twice, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {
-        	
+
             boolean checkAgain = false;
-        	
-        	//remove old effects
-        	AllZone.getStaticEffects().clearStaticEffects();
-        	
-        	//search for cards with static abilities
-        	CardList allCards = AllZoneUtil.getCardsInGame();
-        	CardList cardsWithStAbs = new CardList();
-        	for (Card card : allCards) {
-        		ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-        		if (!staticAbilities.isEmpty() && !card.isFaceDown())
-        			cardsWithStAbs.add(card);
-        	}
-        	
-        	//apply continuous effects
-        	for (int layer = 4; layer < 9; layer++) {
-	        	for (Card card : cardsWithStAbs) {
-	        		ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-	        		for (StaticAbility stAb : staticAbilities)
-	        			if (stAb.getLayer() == layer)
-	        				stAb.applyAbility("Continuous");
-	        	}
-        	}
-        	
+
+            //remove old effects
+            AllZone.getStaticEffects().clearStaticEffects();
+
+            //search for cards with static abilities
+            CardList allCards = AllZoneUtil.getCardsInGame();
+            CardList cardsWithStAbs = new CardList();
+            for (Card card : allCards) {
+                ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+                if (!staticAbilities.isEmpty() && !card.isFaceDown()) {
+                    cardsWithStAbs.add(card);
+                }
+            }
+
+            //apply continuous effects
+            for (int layer = 4; layer < 9; layer++) {
+                for (Card card : cardsWithStAbs) {
+                    ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+                    for (StaticAbility stAb : staticAbilities) {
+                        if (stAb.getLayer() == layer) {
+                            stAb.applyAbility("Continuous");
+                        }
+                    }
+                }
+            }
+
         	HashMap<String, Object> runParams = new HashMap<String, Object>();
         	AllZone.getTriggerHandler().runTrigger("Always", runParams);
 
@@ -675,7 +714,7 @@ public class GameAction {
                             checkAgain = true;
                         }
                     }
-                }//if isEquipped()
+                } //if isEquipped()
 
                 if (c.isEquipping()) {
                     Card equippedCreature = c.getEquipping().get(0);
@@ -689,60 +728,66 @@ public class GameAction {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
                     }
-                }//if isEquipping()
+                } //if isEquipping()
 
                 if (c.isAura()) {
                 	// Check if Card Aura is attached to is a legal target
                     for (int i = 0; i < c.getEnchanting().size(); i++) {
                         Card perm = c.getEnchanting().get(i);
-                        
+
                         SpellAbility sa = c.getSpellPermanent();
                         Target tgt = null;
-                        if (sa != null)
-                        	tgt = sa.getTarget();
-                        
+                        if (sa != null) {
+                            tgt = sa.getTarget();
+                        }
+
                         // I think the Keyword checks might be superfluous with the isValidCard check
                         if (!AllZoneUtil.isCardInPlay(perm)
                                 || CardFactoryUtil.hasProtectionFrom(c, perm)
                                 || ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature"))
                                 && !perm.isCreature())
                                 || (c.hasKeyword("Enchant tapped creature") && perm.isUntapped())
-                                || (tgt != null && !perm.isValidCard(tgt.getValidTgts(), c.getController(), c)) ) {
-       
+                                || (tgt != null && !perm.isValidCard(tgt.getValidTgts(), c.getController(), c)))
+                        {
+
                             c.unEnchantCard(perm);
                             moveToGraveyard(c);
                             checkAgain = true;
                         }
                     }
-                }//if isAura
+                } //if isAura
 
-                if (c.isCreature()){
+                if (c.isCreature()) {
                 	if (c.getNetDefense() <= c.getDamage() && !c.hasKeyword("Indestructible")) {
 	                    destroy(c);
-	                    AllZone.getCombat().removeFromCombat(c); //this is untested with instants and abilities but required for First Strike combat phase
+	                    //this is untested with instants and abilities but required for First Strike combat phase
+	                    AllZone.getCombat().removeFromCombat(c);
 	                    checkAgain = true;
 	                } else if (c.getNetDefense() <= 0) {
-	                	// TODO: This shouldn't be a destroy, and should happen before the damage check probably
+	                	// TODO This shouldn't be a destroy, and should happen before the damage check probably
 	                    destroy(c);
 	                    AllZone.getCombat().removeFromCombat(c);
 	                    checkAgain = true;
 	                }
                 }
 
-            }//while it.hasNext()
+            } //while it.hasNext()
 
-            if (!checkAgain) break; //do not continue the loop
+            if (!checkAgain) {
+                break; //do not continue the loop
+            }
 
-        }//for q=0;q<2
+        } //for q=0;q<2
 
         destroyLegendaryCreatures();
         destroyPlaneswalkers();
 
         GameActionUtil.stLandManaAbilities.execute();
 
-        if (!refreeze)
+        if (!refreeze) {
             AllZone.getStack().unfreezeStack();
-    }//checkStateEffects()
+        }
+    } //checkStateEffects()
 
 
     /**
@@ -756,7 +801,9 @@ public class GameAction {
         for (int i = 0; i < list.size(); i++) {
             c = list.get(i);
 
-            if (c.getCounters(Counters.LOYALTY) <= 0) AllZone.getGameAction().moveToGraveyard(c);
+            if (c.getCounters(Counters.LOYALTY) <= 0) {
+                AllZone.getGameAction().moveToGraveyard(c);
+            }
 
             String subtype = c.getType().get(c.getType().size() - 1);
             CardList cl = list.getType(subtype);
@@ -785,11 +832,12 @@ public class GameAction {
             });
             a.remove(0);
             if (1 < b.size()) {
-                for (int i = 0; i < b.size(); i++)
+                for (int i = 0; i < b.size(); i++) {
                     AllZone.getGameAction().sacrificeDestroy(b.get(i));
+                }
             }
         }
-    }//destroyLegendaryCreatures()
+    } //destroyLegendaryCreatures()
 
     /**
      * <p>sacrifice.</p>
@@ -797,7 +845,7 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean sacrifice(Card c) {
+    public final boolean sacrifice(final Card c) {
         if (c.getName().equals("Mana Pool")) {
             System.out.println("Trying to sacrifice mana pool...");
             return false;
@@ -818,13 +866,15 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean destroyNoRegeneration(Card c) {
-        if (!AllZoneUtil.isCardInPlay(c) || c.hasKeyword("Indestructible")) return false;
+    public final boolean destroyNoRegeneration(final Card c) {
+        if (!AllZoneUtil.isCardInPlay(c) || c.hasKeyword("Indestructible")) {
+            return false;
+        }
 
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy().toArray());
             list = list.filter(new CardListFilter() {
-                public boolean addCard(Card crd) {
+                public boolean addCard(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -835,10 +885,11 @@ public class GameAction {
                 if (list.size() == 1) {
                     crd = list.get(0);
                 } else {
-                    if (c.getController().isHuman())
+                    if (c.getController().isHuman()) {
                         crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
-                    else
+                    } else {
                         crd = list.get(0);
+                    }
                 }
 
                 final Card card = c;
@@ -857,7 +908,7 @@ public class GameAction {
                 AllZone.getStack().add(ability);
                 return false;
             }
-        }//totem armor
+        } //totem armor
 
         return sacrificeDestroy(c);
     }
@@ -875,9 +926,10 @@ public class GameAction {
             private static final long serialVersionUID = -4514610171270596654L;
 
             public void execute() {
-                if (AllZoneUtil.isCardInPlay(c) && c.isCreature())
+                if (AllZoneUtil.isCardInPlay(c) && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
-            }//execute()
+                }
+            } //execute()
         };
 
         c.addComesIntoPlayCommand(intoPlay);
@@ -890,7 +942,7 @@ public class GameAction {
                     c.setSVar("HasteFromSuspend", "False");
                     c.removeExtrinsicKeyword("Haste");
                 }
-            }//execute()
+            } //execute()
         };
 
         c.addChangeControllerCommand(loseControl);
@@ -904,12 +956,15 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean sacrificeDestroy(Card c) {
-        if (!AllZoneUtil.isCardInPlay(c)) return false;
+    public final boolean sacrificeDestroy(final Card c) {
+        if (!AllZoneUtil.isCardInPlay(c)) {
+            return false;
+        }
 
         Player owner = c.getOwner();
-        if (!(owner.isComputer() || owner.isHuman()))
+        if (!(owner.isComputer() || owner.isHuman())) {
             throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
+        }
 
         boolean persist = (c.hasKeyword("Persist") && c.getCounters(Counters.M1M1) == 0) && !c.isToken();
 
@@ -943,7 +998,7 @@ public class GameAction {
             AllZone.getStack().add(persistAb);
         }
         return true;
-    }//sacrificeDestroy()
+    } //sacrificeDestroy()
 
 
     /**
@@ -952,10 +1007,13 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean destroy(Card c) {
+    public final boolean destroy(final Card c) {
         if (!AllZoneUtil.isCardInPlay(c)
                 || (c.hasKeyword("Indestructible")
-                && (!c.isCreature() || c.getNetDefense() > 0))) return false;
+                && (!c.isCreature() || c.getNetDefense() > 0)))
+        {
+            return false;
+        }
 
         if (c.canBeShielded() && c.getShield() > 0) {
             c.subtractShield();
@@ -968,7 +1026,7 @@ public class GameAction {
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy().toArray());
             list = list.filter(new CardListFilter() {
-                public boolean addCard(Card crd) {
+                public boolean addCard(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
             });
@@ -980,10 +1038,11 @@ public class GameAction {
                 if (list.size() == 1) {
                     crd = list.get(0);
                 } else {
-                    if (c.getController().isHuman())
+                    if (c.getController().isHuman()) {
                         crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
-                    else
+                    } else {
                         crd = list.get(0);
+                    }
                 }
 
                 c.setDamage(0);
@@ -991,7 +1050,7 @@ public class GameAction {
                 System.out.println("Totem armor destroyed instead of original card");
                 return false;
             }
-        }//totem armor
+        } //totem armor
 
         return sacrificeDestroy(c);
     }
@@ -1008,7 +1067,9 @@ public class GameAction {
      * @param qa           a {@link forge.Quest_Assignment} object.
      * @param computer a {@link forge.CardList} object.
      */
-    public void newGame(Deck humanDeck, Deck computerDeck, CardList human, CardList computer, int humanLife, int computerLife, Quest_Assignment qa) {
+    public final void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
+            final CardList computer, final int humanLife, final int computerLife, final Quest_Assignment qa)
+    {
         this.newGame(humanDeck, computerDeck);
 
         AllZone.getComputerPlayer().setLife(computerLife, null);
@@ -1046,7 +1107,7 @@ public class GameAction {
      * @param humanDeck    a {@link forge.deck.Deck} object.
      * @param computerDeck a {@link forge.deck.Deck} object.
      */
-    public void newGame(Deck humanDeck, Deck computerDeck) {
+    public final void newGame(final Deck humanDeck, final Deck computerDeck) {
         //AllZone.getComputer() = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
 
@@ -1054,11 +1115,11 @@ public class GameAction {
         forge.card.trigger.Trigger.resetIDs();
 
 
-        {//re-number cards just so their unique numbers are low, just for user friendliness
+        { //re-number cards just so their unique numbers are low, just for user friendliness
             CardFactoryInterface c = AllZone.getCardFactory();
-            
+
             Card.resetUniqueNumber();
-            
+
             boolean canRandomFoil = Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed);
 
             Random generator = MyRandom.random;
@@ -1113,10 +1174,11 @@ public class GameAction {
                         AllZone.getTriggerHandler().registerTrigger(trig);
                     }
 
-                    if (card.getSVar("RemAIDeck").equals("True"))
+                    if (card.getSVar("RemAIDeck").equals("True")) {
                         RAICards.add(card.getName());
-                    //get card picture so that it is in the image cache
-                    // ImageCache.getImage(card);
+                        //get card picture so that it is in the image cache
+                        // ImageCache.getImage(card);
+                    }
                 }
             }
 
@@ -1124,54 +1186,61 @@ public class GameAction {
                 StringBuilder sb = new StringBuilder("AI deck contains the following cards that it can't play or may be buggy:\n");
                 for (int i = 0; i < RAICards.size(); i++) {
                     sb.append(RAICards.get(i));
-                    if (((i % 4) == 0) && (i > 0))
+                    if (((i % 4) == 0) && (i > 0)) {
                         sb.append("\n");
-                    else if (i != (RAICards.size() - 1))
+                    } else if (i != (RAICards.size() - 1)) {
                         sb.append(", ");
+                    }
                 }
 
                 JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
 
             }
-        }//end re-numbering
+        } //end re-numbering
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 100; i++) {
             AllZone.getHumanPlayer().shuffle();
+        }
 
         //do this instead of shuffling Computer's deck
         boolean smoothLand = Constant.Runtime.Smooth[0];
 
         if (smoothLand) {
-            Card[] c = smoothComputerManaCurve(AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer()).toArray());
+            Card[] c = smoothComputerManaCurve(AllZoneUtil.getPlayerCardsInLibrary(
+                    AllZone.getComputerPlayer()).toArray());
             AllZone.getComputerLibrary().setCards(c);
         } else {
-            AllZone.getComputerLibrary().setCards(AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer()).toArray());
+            AllZone.getComputerLibrary().setCards(
+                    AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer()).toArray());
             AllZone.getComputerPlayer().shuffle();
         }
 
         // Only cut/coin toss if it's the first game of the match
         if (AllZone.getMatchState().getGamesPlayedCount() == 0) {
             // New code to determine who goes first. Delete this if it doesn't work properly
-            if (isStartCut())
+            if (isStartCut()) {
                 seeWhoPlaysFirst();
-            else
+            } else {
                 seeWhoPlaysFirst_CoinToss();
-        } else if (AllZone.getMatchState().hasHumanWonLastGame())    // if player won last, AI starts
+            }
+        } else if (AllZone.getMatchState().hasHumanWonLastGame()) {
+            // if player won last, AI starts
             computerStartsGame();
+        }
 
         for (int i = 0; i < 7; i++) {
             AllZone.getHumanPlayer().drawCard();
             AllZone.getComputerPlayer().drawCard();
         }
 
-        // TODO: ManaPool should be moved to Player and be represented in the player panel
+        // TODO ManaPool should be moved to Player and be represented in the player panel
         ManaPool mp = AllZone.getManaPool();
         mp.setImageFilename("mana_pool");
         AllZone.getHumanBattlefield().add(mp);
 
         AllZone.getInputControl().setInput(new Input_Mulligan());
         Phase.setGameBegins(1);
-    }//newGame()
+    } //newGame()
 
     //this is where the computer cheats
     //changes AllZone.getComputerLibrary()
@@ -1182,14 +1251,17 @@ public class GameAction {
      * @param in an array of {@link forge.Card} objects.
      * @return an array of {@link forge.Card} objects.
      */
-    Card[] smoothComputerManaCurve(Card[] in) {
+    final Card[] smoothComputerManaCurve(final Card[] in) {
         CardList library = new CardList(in);
         library.shuffle();
 
         //remove all land, keep non-basicland in there, shuffled
         CardList land = library.getType("Land");
-        for (int i = 0; i < land.size(); i++)
-            if (land.get(i).isLand()) library.remove(land.get(i));
+        for (int i = 0; i < land.size(); i++) {
+            if (land.get(i).isLand()) {
+                library.remove(land.get(i));
+            }
+        }
 
         //non-basic lands are removed, because the computer doesn't seem to
         //effectively use them very well
@@ -1212,17 +1284,21 @@ public class GameAction {
         }
 
         //add the rest of land to the end of the deck
-        for (int i = 0; i < land.size(); i++)
-            if (!library.contains(land.get(i))) library.add(land.get(i));
+        for (int i = 0; i < land.size(); i++) {
+            if (!library.contains(land.get(i))) {
+                library.add(land.get(i));
+            }
+        }
 
 
         //check
-        for (int i = 0; i < library.size(); i++)
+        for (int i = 0; i < library.size(); i++) {
             System.out.println(library.get(i));
+        }
 
 
         return library.toArray();
-    }//smoothComputerManaCurve()
+    } //smoothComputerManaCurve()
 
     //non-basic lands are removed, because the computer doesn't seem to
     //effectively used them very well
@@ -1233,7 +1309,7 @@ public class GameAction {
      * @param in a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList threadLand(CardList in) {
+    public final CardList threadLand(final CardList in) {
         //String[] basicLand = {"Forest", "Swamp", "Mountain", "Island", "Plains"}; //unused
 
         //Thread stuff with as large a spread of colors as possible:
@@ -1256,7 +1332,9 @@ public class GameAction {
         for (int i = 0; i < allLand.length; i++) {
             check = in.getName(allLand[i]);
 
-            if (!check.isEmpty()) land.add(check);
+            if (!check.isEmpty()) {
+                land.add(check);
+            }
         }
         /*
             //get non-basic land CardList
@@ -1289,10 +1367,10 @@ public class GameAction {
 
             out.add(check.get(0));
             check.remove(0);
-        }//while
+        } //while
 
         return out;
-    }//threadLand()
+    } //threadLand()
 
 
     /**
@@ -1304,7 +1382,7 @@ public class GameAction {
      */
     @SuppressWarnings("unused")
     // getDifferentLand
-    private int getDifferentLand(CardList list, String land) {
+    private int getDifferentLand(final CardList list, final String land) {
         int out = 0;
 
         return out;
@@ -1347,7 +1425,7 @@ public class GameAction {
     /**
      * <p>seeWhoPlaysFirst.</p>
      */
-    public void seeWhoPlaysFirst() {
+    public final void seeWhoPlaysFirst() {
 
         CardList HLibrary = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer());
         HLibrary = HLibrary.filter(AllZoneUtil.nonlands);
@@ -1358,19 +1436,21 @@ public class GameAction {
         int Cut_Count = 0;
         int Cut_CountMax = 20;
         for (int i = 0; i < Cut_CountMax; i++) {
-            if (Starter_Determined == true) break;
+            if (Starter_Determined == true) {
+                break;
+            }
 
-            if (HLibrary.size() > 0)
+            if (HLibrary.size() > 0) {
                 setHumanCut(HLibrary.get(MyRandom.random.nextInt(HLibrary.size())));
-            else {
+            } else {
                 computerStartsGame();
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
-            if (CLibrary.size() > 0)
+            if (CLibrary.size() > 0) {
                 setComputerCut(CLibrary.get(MyRandom.random.nextInt(CLibrary.size())));
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -1394,9 +1474,9 @@ public class GameAction {
                 sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.EQUAL_CONVERTED_MANA) + "\r\n");
                 if (i == Cut_CountMax - 1) {
                     sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.RESOLVE_STARTER));
-                    if (MyRandom.random.nextInt(2) == 1)
+                    if (MyRandom.random.nextInt(2) == 1) {
                         JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN), "", JOptionPane.INFORMATION_MESSAGE);
-                    else {
+                    } else {
                         computerStartsGame();
                         JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN), "", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -1409,12 +1489,12 @@ public class GameAction {
         } // for-loop for multiple card cutting
 
 
-    }//seeWhoPlaysFirst()
+    } //seeWhoPlaysFirst()
 
     /**
      * <p>computerStartsGame.</p>
      */
-    public void computerStartsGame() {
+    public final void computerStartsGame() {
         AllZone.getPhase().setPlayerTurn(AllZone.getComputerPlayer());
         AllZone.getGameInfo().setPlayerWhoGotFirstTurn(PlayerIndex.AI);
     }
@@ -1428,16 +1508,18 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean isAttachee(Card c) {
+    public final boolean isAttachee(final Card c) {
         CardList list = AllZoneUtil.getCardsInPlay();
 
         for (int i = 0; i < list.size(); i++) {
             CardList check = new CardList(list.getCard(i).getAttachedCards());
-            if (check.contains(c)) return true;
+            if (check.contains(c)) {
+                return true;
+            }
         }
 
         return false;
-    }//isAttached(Card c)
+    } //isAttached(Card c)
 
     /**
      * <p>playCard.</p>
@@ -1445,19 +1527,21 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean playCard(Card c) {
+    public final boolean playCard(final Card c) {
         // this can only be called by the Human
         HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
         ArrayList<String> choices = new ArrayList<String>();
         Player human = AllZone.getHumanPlayer();
-        
-        if (c.isLand() && human.canPlayLand()){
+
+        if (c.isLand() && human.canPlayLand()) {
         	PlayerZone zone = AllZone.getZone(c);
-        	
-        	if (zone.is(Constant.Zone.Hand) || 
-        		(!zone.is(Constant.Zone.Battlefield)) && c.hasKeyword("May be played"))
+
+        	if (zone.is(Constant.Zone.Hand)
+        	        || (!zone.is(Constant.Zone.Battlefield)) && c.hasKeyword("May be played"))
+        	{
         		choices.add("Play land");
+        	}
         }
 
         for (SpellAbility sa : abilities) {
@@ -1470,15 +1554,17 @@ public class GameAction {
         }
 
         String choice;
-        if (choices.size() == 0)
+        if (choices.size() == 0) {
             return false;
-        else if (choices.size() == 1)
+        } else if (choices.size() == 1) {
             choice = choices.get(0);
-        else
+        } else {
             choice = (String) GuiUtils.getChoiceOptional("Choose", choices.toArray());
+        }
 
-        if (choice == null)
+        if (choice == null) {
             return false;
+        }
 
         if (choice.equals("Play land")) {
             AllZone.getHumanPlayer().playLand(c);
@@ -1498,17 +1584,17 @@ public class GameAction {
      *
      * @param c a {@link forge.Card} object.
      */
-    public void playCardNoCost(Card c) {
+    public final void playCardNoCost(final Card c) {
         //SpellAbility[] choices = (SpellAbility[]) c.getSpells().toArray();
         ArrayList<SpellAbility> choices = c.getBasicSpells();
         SpellAbility sa;
 
-        //TODO: add Buyback, Kicker, ... , spells here
+        //TODO add Buyback, Kicker, ... , spells here
         /*
         ArrayList<SpellAbility> additional = c.getAdditionalCostSpells();
         for (SpellAbility s : additional)
         {
-        	
+
         }
         */
         /*
@@ -1516,15 +1602,22 @@ public class GameAction {
          for(int i = 0; i < choices.length; i++)
              System.out.println(choices[i]);
         */
-        if (choices.size() == 0) return;
-        else if (choices.size() == 1) sa = choices.get(0);
-        else sa = (SpellAbility) GuiUtils.getChoiceOptional("Choose", choices.toArray());
+        if (choices.size() == 0) {
+            return;
+        } else if (choices.size() == 1) {
+            sa = choices.get(0);
+        } else {
+            sa = (SpellAbility) GuiUtils.getChoiceOptional("Choose", choices.toArray());
+        }
 
-        if (sa == null) return;
+        if (sa == null) {
+            return;
+        }
 
         // Ripple causes a crash because it doesn't set the activatingPlayer in this entrance
-        if (sa.getActivatingPlayer() == null)
+        if (sa.getActivatingPlayer() == null) {
             sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        }
         playSpellAbilityForFree(sa);
     }
 
@@ -1534,7 +1627,7 @@ public class GameAction {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void playSpellAbilityForFree(final SpellAbility sa) {
+    public final void playSpellAbilityForFree(final SpellAbility sa) {
         if (sa.getPayCosts() != null) {
             Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
             Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
@@ -1545,12 +1638,14 @@ public class GameAction {
         } else if (sa.getBeforePayMana() == null) {
             if (sa.isSpell()) {
                 Card c = sa.getSourceCard();
-                if (!c.isCopiedSpell())
+                if (!c.isCopiedSpell()) {
                     AllZone.getGameAction().moveToStack(c);
+                }
             }
             boolean x = false;
-            if (sa.getSourceCard().getManaCost().contains("X"))
+            if (sa.getSourceCard().getManaCost().contains("X")) {
                 x = true;
+            }
 
             if (sa.isKickerAbility()) {
                 Command paid1 = new Command() {
@@ -1950,31 +2045,33 @@ public class GameAction {
                     manaC = manaC.replaceFirst("G ", "");
                 }
                 manaC = manaC.trim();
-                if (manaC.equals("")) manaC = "0";
+                if (manaC.equals("")) {
+                    manaC = "0";
+                }
                 manaCost = new ManaCost(manaC);
             }
         } // Khalni Hydra
         return manaCost;
-    }//GetSpellCostChange
+    } //GetSpellCostChange
 
     /**
      * <p>playSpellAbility.</p>
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void playSpellAbility(SpellAbility sa) {
+    public final void playSpellAbility(final SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
 		// Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;
         SpellAbility ability = sa;
-        while(ability != null && !newAbility){
+        while (ability != null && !newAbility) {
             Target tgt = ability.getTarget();
-            
+
             newAbility |= tgt != null;
             ability = ability.getSubAbility();
         }
-        
+
         if (newAbility) {
             Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
             Cost_Payment payment = null;
@@ -1984,8 +2081,9 @@ public class GameAction {
                 payment = new Cost_Payment(sa.getPayCosts(), sa);
             }
 
-            if (!sa.isTrigger())
+            if (!sa.isTrigger()) {
                 payment.changeCost();
+            }
 
             SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
             req.fillRequirements();
@@ -2000,19 +2098,26 @@ public class GameAction {
             if (manaCost.isPaid() && sa.getBeforePayMana() == null) {
                 if (sa.getAfterPayMana() == null) {
                     Card source = sa.getSourceCard();
-                    if (sa.isSpell() && !source.isCopiedSpell())
+                    if (sa.isSpell() && !source.isCopiedSpell()) {
                         AllZone.getGameAction().moveToStack(source);
+                    }
 
                     AllZone.getStack().add(sa);
-                    if (sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
-                    if (sa.isUntapAbility()) sa.getSourceCard().untap();
+                    if (sa.isTapAbility() && !sa.wasCancelled()) {
+                        sa.getSourceCard().tap();
+                    }
+                    if (sa.isUntapAbility()) {
+                        sa.getSourceCard().untap();
+                    }
                     return;
-                } else
+                } else {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
-            } else if (sa.getBeforePayMana() == null)
+                }
+            } else if (sa.getBeforePayMana() == null) {
                 AllZone.getInputControl().setInput(new Input_PayManaCost(sa));
-            else
+            } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
+            }
         }
     }
 
@@ -2022,15 +2127,16 @@ public class GameAction {
      * @param sa            a {@link forge.card.spellability.SpellAbility} object.
      * @param skipTargeting a boolean.
      */
-    public void playSpellAbility_NoStack(SpellAbility sa, boolean skipTargeting) {
+    public void playSpellAbility_NoStack(final SpellAbility sa, final boolean skipTargeting) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
         if (sa.getPayCosts() != null) {
             Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
             Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
 
-            if (!sa.isTrigger())
+            if (!sa.isTrigger()) {
                 payment.changeCost();
+            }
 
             SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
             req.setSkipStack(true);
@@ -2046,15 +2152,21 @@ public class GameAction {
             if (manaCost.isPaid() && sa.getBeforePayMana() == null) {
                 if (sa.getAfterPayMana() == null) {
                     AbilityFactory.resolve(sa, false);
-                    if (sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
-                    if (sa.isUntapAbility()) sa.getSourceCard().untap();
+                    if (sa.isTapAbility() && !sa.wasCancelled()) {
+                        sa.getSourceCard().tap();
+                    }
+                    if (sa.isUntapAbility()) {
+                        sa.getSourceCard().untap();
+                    }
                     return;
-                } else
+                } else {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
-            } else if (sa.getBeforePayMana() == null)
+                }
+            } else if (sa.getBeforePayMana() == null) {
                 AllZone.getInputControl().setInput(new Input_PayManaCost(sa, true));
-            else
+            } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
+            }
         }
     }
 
@@ -2064,29 +2176,30 @@ public class GameAction {
      * @param sa an array of {@link forge.card.spellability.SpellAbility} objects.
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
-    public SpellAbility[] canPlaySpellAbility(SpellAbility[] sa) {
+    public final SpellAbility[] canPlaySpellAbility(final SpellAbility[] sa) {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
 
         for (int i = 0; i < sa.length; i++) {
             sa[i].setActivatingPlayer(AllZone.getHumanPlayer());
-            if (sa[i].canPlay())
+            if (sa[i].canPlay()) {
                 list.add(sa[i]);
+            }
         }
 
         SpellAbility[] array = new SpellAbility[list.size()];
         list.toArray(array);
         return array;
-    }//canPlaySpellAbility()
+    } //canPlaySpellAbility()
 
     /**
      * <p>searchLibraryBasicLand.</p>
      *
      * @param player  a {@link forge.Player} object.
-     * @param Zone1   a {@link java.lang.String} object.
+     * @param zone1   a {@link java.lang.String} object.
      * @param tapLand a boolean.
      */
-    public void searchLibraryBasicLand(Player player, String Zone1, boolean tapLand) {
-        searchLibraryTwoLand("Basic", player, Zone1, tapLand, "", false);
+    public final void searchLibraryBasicLand(final Player player, final String zone1, final boolean tapLand) {
+        searchLibraryTwoLand("Basic", player, zone1, tapLand, "", false);
     }
 
     /**
@@ -2094,18 +2207,18 @@ public class GameAction {
      *
      * @param type          a {@link java.lang.String} object.
      * @param player        a {@link forge.Player} object.
-     * @param Zone1         a {@link java.lang.String} object.
+     * @param zone1         a {@link java.lang.String} object.
      * @param tapFirstLand  a boolean.
-     * @param Zone2         a {@link java.lang.String} object.
+     * @param zone2         a {@link java.lang.String} object.
      * @param tapSecondLand a boolean.
      */
-    public void searchLibraryTwoLand(String type, Player player,
-                                     String Zone1, boolean tapFirstLand,
-                                     String Zone2, boolean tapSecondLand) {
+    public final void searchLibraryTwoLand(final String type, final Player player, final String zone1,
+            final boolean tapFirstLand, final String zone2, final boolean tapSecondLand)
+    {
         if (player.isHuman()) {
-            humanSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
+            humanSearchTwoLand(type, zone1, tapFirstLand, zone2, tapSecondLand);
         } else {
-            aiSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
+            aiSearchTwoLand(type, zone1, tapFirstLand, zone2, tapSecondLand);
         }
 
         player.shuffle();
@@ -2116,31 +2229,32 @@ public class GameAction {
      * <p>searchLibraryTwoBasicLand.</p>
      *
      * @param player        a {@link forge.Player} object.
-     * @param Zone1         a {@link java.lang.String} object.
+     * @param zone1         a {@link java.lang.String} object.
      * @param tapFirstLand  a boolean.
-     * @param Zone2         a {@link java.lang.String} object.
+     * @param zone2         a {@link java.lang.String} object.
      * @param tapSecondLand a boolean.
      */
-    public void searchLibraryTwoBasicLand(Player player,
-                                          String Zone1, boolean tapFirstLand,
-                                          String Zone2, boolean tapSecondLand) {
-        searchLibraryTwoLand("Basic", player, Zone1, tapFirstLand, Zone2, tapSecondLand);
+    public final void searchLibraryTwoBasicLand(final Player player, final String zone1, final boolean tapFirstLand,
+            final String zone2, final boolean tapSecondLand)
+    {
+        searchLibraryTwoLand("Basic", player, zone1, tapFirstLand, zone2, tapSecondLand);
     }
 
     /**
      * <p>aiSearchTwoLand.</p>
      *
      * @param type          a {@link java.lang.String} object.
-     * @param Zone1         a {@link java.lang.String} object.
+     * @param zone1         a {@link java.lang.String} object.
      * @param tapFirstLand  a boolean.
-     * @param Zone2         a {@link java.lang.String} object.
+     * @param zone2         a {@link java.lang.String} object.
      * @param tapSecondLand a boolean.
      */
-    private void aiSearchTwoLand(String type, String Zone1, boolean tapFirstLand,
-                                 String Zone2, boolean tapSecondLand) {
+    private void aiSearchTwoLand(final String type, final String zone1, final boolean tapFirstLand,
+            final String zone2, final boolean tapSecondLand)
+    {
         CardList land = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer());
         land = land.getType(type);
-        PlayerZone firstZone = AllZone.getZone(Zone1, AllZone.getComputerPlayer());
+        PlayerZone firstZone = AllZone.getZone(zone1, AllZone.getComputerPlayer());
 
         if (type.contains("Basic")) {
             // No need for special sorting for basic land
@@ -2148,7 +2262,7 @@ public class GameAction {
             land.shuffle();
         } else {
             Comparator<Card> aiLandComparator = new Comparator<Card>() {
-                private int scoreLand(Card a) {
+                private int scoreLand(final Card a) {
                     String valakutName = "Valakut, the Molten Pinnacle";
 
                     int theScore = 0;
@@ -2156,19 +2270,19 @@ public class GameAction {
                         // favor non-basic land
                         theScore++;
                         if (a.getName().contains(valakutName)) {
-                            // TODO: Add names of other special lands
+                            // TODO Add names of other special lands
                             theScore++;
                         }
                     }
                     return theScore;
                 }
 
-                public int compare(Card a, Card b) {
+                public int compare(final Card a, final Card b) {
                     int aScore = scoreLand(a);
                     int bScore = scoreLand(b);
                     return bScore - aScore;
                 } // compare
-            };//Comparator
+            }; //Comparator
 
             // Prioritize the land somewhat
             land.sort(aiLandComparator);
@@ -2177,17 +2291,19 @@ public class GameAction {
         if (land.size() != 0) {
             //branch 2 - at least 1 land in library
             Card firstLand = land.remove(0);
-            if (tapFirstLand)
+            if (tapFirstLand) {
                 firstLand.tap();
+            }
 
             AllZone.getGameAction().moveTo(firstZone, firstLand);
 
             //branch 3
-            if (Zone2.trim().length() != 0 && (land.size() != 0)) {
-                PlayerZone secondZone = AllZone.getZone(Zone2, AllZone.getComputerPlayer());
+            if (zone2.trim().length() != 0 && (land.size() != 0)) {
+                PlayerZone secondZone = AllZone.getZone(zone2, AllZone.getComputerPlayer());
                 Card secondLand = land.remove(0);
-                if (tapSecondLand)
+                if (tapSecondLand) {
                     secondLand.tap();
+                }
                 AllZone.getGameAction().moveTo(secondZone, secondLand);
             }
         }
@@ -2202,8 +2318,10 @@ public class GameAction {
      * @param Zone2         a {@link java.lang.String} object.
      * @param tapSecondLand a boolean.
      */
-    private void humanSearchTwoLand(String type, String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
-        PlayerZone firstZone = AllZone.getZone(Zone1, AllZone.getHumanPlayer());
+    private void humanSearchTwoLand(final String type, final String zone1, final boolean tapFirstLand,
+            final String zone2, final boolean tapSecondLand)
+    {
+        PlayerZone firstZone = AllZone.getZone(zone1, AllZone.getHumanPlayer());
 
         CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer());
         list = list.getType(type);
@@ -2211,35 +2329,42 @@ public class GameAction {
         //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
 
         //branch 1
-        if (list.size() == 0) return;
+        if (list.size() == 0) {
+            return;
+        }
 
         // Check whether we were only asked for one land, and adjust the prompt accordingly
-        boolean onlyOneLand = (Zone2.trim().length() == 0);
+        boolean onlyOneLand = (zone2.trim().length() == 0);
         String firstPrompt;
-        if (onlyOneLand)
+        if (onlyOneLand) {
             firstPrompt = "Choose a land";
-        else
+        } else {
             firstPrompt = "Choose first land";
+        }
 
         //branch 2
         Object o = GuiUtils.getChoiceOptional(firstPrompt, list.toArray());
         if (o != null) {
             Card c = (Card) o;
             list.remove(c);
-            if (tapFirstLand)
+            if (tapFirstLand) {
                 c.tap();
+            }
             moveTo(firstZone, c);
-        }//if
-        if ((list.size() == 0) || onlyOneLand) return;
+        } //if
+        if ((list.size() == 0) || onlyOneLand) {
+            return;
+        }
         //branch 3
         o = GuiUtils.getChoiceOptional(ForgeProps.getLocalized(GAMEACTION_TEXT.CHOOSE_2ND_LAND), list.toArray());
         if (o != null) {
-            PlayerZone secondZone = AllZone.getZone(Zone2, AllZone.getHumanPlayer());
+            PlayerZone secondZone = AllZone.getZone(zone2, AllZone.getHumanPlayer());
 
             Card c = (Card) o;
             list.remove(c);
-            if (tapSecondLand)
+            if (tapSecondLand) {
                 c.tap();
+            }
             moveTo(secondZone, c);
         }
     }
@@ -2249,7 +2374,7 @@ public class GameAction {
      *
      * @param computerCut a {@link forge.Card} object.
      */
-    public void setComputerCut(Card computerCut) {
+    public final void setComputerCut(final Card computerCut) {
         ComputerCut = computerCut;
     }
 
@@ -2258,17 +2383,17 @@ public class GameAction {
      *
      * @return a {@link forge.Card} object.
      */
-    public Card getComputerCut() {
+    public final Card getComputerCut() {
         return ComputerCut;
     }
 
     /**
      * <p>setStartCut.</p>
      *
-     * @param start_Cut a boolean.
+     * @param startCutIn a boolean.
      */
-    public void setStartCut(boolean start_Cut) {
-        Start_Cut = start_Cut;
+    public final void setStartCut(final boolean startCutIn) {
+        Start_Cut = startCutIn;
     }
 
     /**
@@ -2276,7 +2401,7 @@ public class GameAction {
      *
      * @return a boolean.
      */
-    public boolean isStartCut() {
+    public final boolean isStartCut() {
         return Start_Cut;
     }
 
@@ -2285,7 +2410,7 @@ public class GameAction {
      *
      * @param humanCut a {@link forge.Card} object.
      */
-    public void setHumanCut(Card humanCut) {
+    public final void setHumanCut(final Card humanCut) {
         HumanCut = humanCut;
     }
 
@@ -2294,7 +2419,7 @@ public class GameAction {
      *
      * @return a {@link forge.Card} object.
      */
-    public Card getHumanCut() {
+    public final Card getHumanCut() {
         return HumanCut;
     }
 }

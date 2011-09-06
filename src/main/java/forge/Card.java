@@ -2648,44 +2648,34 @@ public class Card extends GameEntity implements Comparable<Card> {
     }    */
 
     public Player getController() {
-        if(controllerObjects.size() == 0) return owner;
-        Object topController = controllerObjects.get(controllerObjects.size()-1);
-        if(topController instanceof Player)
-        {
+        if (controllerObjects.size() == 0) return owner;
+        Object topController = controllerObjects.get(controllerObjects.size() - 1);
+        if (topController instanceof Player) {
             return (Player)topController;
         }
-        else
-        {
+        else {
             return ((Card)topController).getController();
         }
     }
 
-    public void addController(Object controllerObject)
-    {
+    public void addController(Object controllerObject) {
         Object prevController = controllerObjects.size() == 0 ? owner : controllerObjects.get(controllerObjects.size()-1);
-        if(!controllerObject.equals(prevController))
-        {
-            if(controllerObject instanceof Player)
-            {
-                for(int i=0;i<controllerObjects.size();i++)
-                {
-                    if(controllerObjects.get(i) instanceof Player)
-                    {
+        if (!controllerObject.equals(prevController)) {
+            if (controllerObject instanceof Player) {
+                for (int i = 0; i < controllerObjects.size(); i++) {
+                    if(controllerObjects.get(i) instanceof Player) {
                         controllerObjects.remove(i);
                     }
                 }
             }
             controllerObjects.add(controllerObject);
-            if(AllZone.getGameAction() != null && prevController != null)
-            {
-                AllZone.getGameAction().controllerChange_ZoneCorrection(this);
+            if (AllZone.getGameAction() != null && prevController != null) {
+                AllZone.getGameAction().controllerChangeZoneCorrection(this);
             }
 
 
-            if(prevController != null)
-            {
-                for(Command c : changeControllerCommandList)
-                {
+            if (prevController != null) {
+                for (Command c : changeControllerCommandList) {
                     c.execute();
                 }
             }
@@ -2701,7 +2691,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if(!currentController.equals(getController()))
         {
-            AllZone.getGameAction().controllerChange_ZoneCorrection(this);
+            AllZone.getGameAction().controllerChangeZoneCorrection(this);
 
             for(Command c : changeControllerCommandList)
             {
@@ -2712,18 +2702,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
     
-    public void clearControllers()
-    {
+    public void clearControllers() {
         controllerObjects.clear();
     }
     
-    public ArrayList<Object> getControllerObjects()
-    {
+    public ArrayList<Object> getControllerObjects() {
         return controllerObjects;
     }
     
-    public void setControllerObjects(ArrayList<Object> in)
-    {
+    public void setControllerObjects(ArrayList<Object> in) {
         controllerObjects = in;
     }
 
@@ -5224,8 +5211,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public int getKillDamage() {
         int killDamage = getLethalDamage() + getPreventNextDamage();
-        if (killDamage > getPreventNextDamage() && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))
+        if (killDamage > getPreventNextDamage() && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
             killDamage = 1 + getPreventNextDamage();
+        }
 
         return killDamage;
     }
@@ -5268,13 +5256,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param sourceCard a {@link forge.Card} object.
      */
     public void addAssignedDamage(int damage, Card sourceCard) {
-        if (damage < 0) damage = 0;
+        if (damage < 0) {
+            damage = 0;
+        }
 
         int assignedDamage = damage;
 
         Log.debug(this + " - was assigned " + assignedDamage + " damage, by " + sourceCard);
-        if (!assignedDamageMap.containsKey(sourceCard)) assignedDamageMap.put(sourceCard, assignedDamage);
-        else {
+        if (!assignedDamageMap.containsKey(sourceCard)) {
+            assignedDamageMap.put(sourceCard, assignedDamage);
+        } else {
             assignedDamageMap.put(sourceCard, assignedDamageMap.get(sourceCard) + assignedDamage);
         }
 
@@ -5308,8 +5299,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         Collection<Integer> c = assignedDamageMap.values();
 
         Iterator<Integer> itr = c.iterator();
-        while (itr.hasNext())
+        while (itr.hasNext()) {
             total += itr.next();
+        }
 
         return total;
     }
@@ -5383,7 +5375,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+            return damage;
+        }
 
         int restDamage = damage - possiblePrvenetion;
 
@@ -5634,9 +5628,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    //This function handles damage after replacement and prevention effects are applied
     /**
      * <p>addDamageAfterPrevention.</p>
+     * This function handles damage after replacement and prevention effects are applied.
      *
      * @param damageIn a int.
      * @param source a {@link forge.Card} object.
@@ -5647,7 +5641,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         int damageToAdd = damageIn;
         boolean wither = false;
 
-        if (damageToAdd == 0) return;  //Rule 119.8
+        if (damageToAdd == 0) {
+            return;  //Rule 119.8
+        }
 
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
@@ -5670,13 +5666,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             return;
         }
 
-        if ((source.hasKeyword("Wither") || source.hasKeyword("Infect")))
+        if ((source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {
             wither = true;
+        }
 
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
 
-        if (AllZoneUtil.isCardInPlay(this) && wither) addCounter(Counters.M1M1, damageToAdd);
-        if (AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
+        if (AllZoneUtil.isCardInPlay(this) && wither) {
+            addCounter(Counters.M1M1, damageToAdd);
+        }
+        if (AllZoneUtil.isCardInPlay(this) && !wither) {
+            damage += damageToAdd;
+        }
 
     }
 
@@ -5732,8 +5733,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>setRandomSetCode.</p>
      */
     public void setRandomSetCode() {
-        if (Sets.size() < 1)
+        if (Sets.size() < 1) {
             return;
+        }
 
         Random r = MyRandom.random;
         SetInfo si = Sets.get(r.nextInt(Sets.size()));
@@ -5779,9 +5781,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public String getCurSetURL() {
-        for (int i = 0; i < Sets.size(); i++)
-            if (Sets.get(i).Code.equals(curSetCode))
+        for (int i = 0; i < Sets.size(); i++) {
+            if (Sets.get(i).Code.equals(curSetCode)) {
                 return Sets.get(i).URL;
+            }
+        }
 
         return "";
     }

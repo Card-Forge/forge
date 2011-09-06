@@ -517,8 +517,7 @@ public class CardFactoryUtil {
             value -= (toughness - 1) * 9;
         }
 
-        if (c.hasKeyword("CARDNAME can't attack or block."))
-         {
+        if (c.hasKeyword("CARDNAME can't attack or block.")) {
             value = 50 + c.getCMC() * 5; // reset everything - useless
         }
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
@@ -5124,12 +5123,16 @@ public class CardFactoryUtil {
 
                 final int m = Integer.parseInt(parse.substring(6));
 
-                final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Creature.Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.", card, true);
+                String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | Origin$ Any | Destination$ Battlefield";
+                trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ ";
+                trigStr += "Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.";
+                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
                 AbilityFactory af = new AbilityFactory();
-                myTrigger.setOverridingAbility(af.getAbility("AB$ MoveCounter | Cost$ 0 | Source$ Self | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1", card));
+                String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
+                myTrigger.setOverridingAbility(af.getAbility(abStr, card));
                 card.addTrigger(myTrigger);
-                
-                card.addIntrinsicKeyword("etbCounter:P1P1:"+m);
+
+                card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
             }
 
         } // while shouldModular
