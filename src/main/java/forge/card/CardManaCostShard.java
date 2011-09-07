@@ -57,8 +57,8 @@ public class CardManaCostShard {
     public static final CardManaCostShard PR = new CardManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P", "PR");
     public static final CardManaCostShard PG = new CardManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P", "PG");
 
-    public static final CardManaCostShard WU = new CardManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WB");
-    public static final CardManaCostShard WB = new CardManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WU");
+    public static final CardManaCostShard WU = new CardManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WU");
+    public static final CardManaCostShard WB = new CardManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WB");
     public static final CardManaCostShard WR = new CardManaCostShard(Atom.WHITE | Atom.RED, "W/R", "RW");
     public static final CardManaCostShard WG = new CardManaCostShard(Atom.WHITE | Atom.GREEN, "W/G", "GW");
     public static final CardManaCostShard UB = new CardManaCostShard(Atom.BLUE | Atom.BLACK, "U/B", "UB");
