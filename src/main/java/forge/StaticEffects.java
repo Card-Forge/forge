@@ -53,6 +53,7 @@ public class StaticEffects {
      */
     final void removeStaticEffect(final StaticEffect se) {
         CardList affectedCards = se.getAffectedCards();
+        ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         HashMap<String, String> params = se.getParams();
 
         int powerBonus = 0;
@@ -97,6 +98,15 @@ public class StaticEffects {
         if (params.containsKey("SetColor")) {
             addColors = CardUtil.getShortColorsString(
                     new ArrayList<String>(Arrays.asList(params.get("SetColor").split(" & "))));
+        }
+        
+        //modify players
+        for (Player p : affectedPlayers) {
+            
+            // add keywords
+            if (addKeywords != null)
+                for (String keyword : addKeywords)
+                    p.removeKeyword(keyword);
         }
 
         //modify the affected card

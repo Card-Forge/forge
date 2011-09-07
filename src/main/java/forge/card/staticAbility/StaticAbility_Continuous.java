@@ -25,8 +25,10 @@ public class StaticAbility_Continuous {
 		
 		StaticEffect se = new StaticEffect();
 		CardList affectedCards =  getAffectedCards(stAb);
+		ArrayList<Player> affectedPlayers =  getAffectedPlayers(stAb);
 		
 		se.setAffectedCards(affectedCards);
+		se.setAffectedPlayers(affectedPlayers);
 		se.setParams(params);
 		se.setTimestamp(hostCard.getTimestamp());
 		AllZone.getStaticEffects().addStaticEffect(se);
@@ -144,6 +146,15 @@ public class StaticAbility_Continuous {
 				sVars[i] = hostCard.getSVar(sVars[i]);
 			addTriggers = sVars;
 		}
+		
+		//modify players
+		for (Player p : affectedPlayers) {
+		    
+            // add keywords
+            if (addKeywords != null)
+                for (String keyword : addKeywords)
+                    p.addKeyword(keyword);
+		}
 			
 		//start modifying the cards
 		for (int i = 0; i < affectedCards.size(); i++) {
@@ -214,6 +225,32 @@ public class StaticAbility_Continuous {
 	        //affectedCard.updateObservers();
 		}
 	}
+	
+   private static ArrayList<Player> getAffectedPlayers(StaticAbility stAb) {
+       HashMap<String, String> params = stAb.getMapParams();
+       Card hostCard = stAb.getHostCard();
+       Player controller = hostCard.getController();
+       
+       ArrayList<Player> players = new ArrayList<Player>();
+       
+       if(!params.containsKey("Affected")) {
+           return players;
+       }
+       
+       String[] strngs = params.get("Affected").split(",");
+       
+       for (String str : strngs) {
+           if(str.equals("Player") || str.equals("You")) {
+               players.add(controller);
+           }
+           
+           if(str.equals("Player") || str.equals("Opponent")) {
+               players.add(controller.getOpponent());
+           }
+       }
+       
+       return players;
+   }
 	
 	private static CardList getAffectedCards(StaticAbility stAb) {
 		HashMap<String, String> params = stAb.getMapParams();

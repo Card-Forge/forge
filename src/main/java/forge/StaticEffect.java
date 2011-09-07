@@ -16,6 +16,7 @@ public class StaticEffect {
     private Card source = new Card();
     private int keywordNumber = 0;
     private CardList affectedCards = new CardList();
+    private ArrayList<Player> affectedPlayers = new ArrayList<Player>();
     private int xValue = 0;
     private int yValue = 0;
     private long timestamp = -1;
@@ -596,7 +597,14 @@ public class StaticEffect {
     public void setAffectedCards(CardList list) {
         affectedCards = list;
     }
+    
+    public ArrayList<Player> getAffectedPlayers() {
+        return affectedPlayers;
+    }
 
+    public void setAffectedPlayers(ArrayList<Player> list) {
+        affectedPlayers = list;
+    }
     /**
      * <p>Setter for the field <code>xValue</code>.</p>
      *
