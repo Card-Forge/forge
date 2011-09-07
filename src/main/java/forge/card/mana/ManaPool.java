@@ -1,6 +1,12 @@
 package forge.card.mana;
 
-import forge.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardUtil;
+import forge.Constant;
+import forge.Player;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
@@ -22,13 +28,13 @@ public class ManaPool extends Card {
 
     private ArrayList<Mana> floatingMana = new ArrayList<Mana>();
     private int[] floatingTotals = new int[7];    // WUBRGCS
-    /** Constant <code>map</code> */
-    private final static Map<String, Integer> map = new HashMap<String, Integer>();
+    /** Constant <code>map</code>. */
+    private static final Map<String, Integer> map = new HashMap<String, Integer>();
 
-    /** Constant <code>colors="WUBRG"</code> */
-    public final static String colors = "WUBRG";
-    /** Constant <code>mcolors="1WUBRG"</code> */
-    public final static String mcolors = "1WUBRG";
+    /** Constant <code>colors="WUBRG"</code>. */
+    public static final String colors = "WUBRG";
+    /** Constant <code>mcolors="1WUBRG"</code>. */
+    public static final String mcolors = "1WUBRG";
     private Player owner;
 
     /**
@@ -36,7 +42,7 @@ public class ManaPool extends Card {
      *
      * @param player a {@link forge.Player} object.
      */
-    public ManaPool(Player player) {
+    public ManaPool(final Player player) {
         super();
         updateObservers();
         owner = player;
@@ -62,18 +68,26 @@ public class ManaPool extends Card {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getManaList() {
+    public final String getManaList() {
         Mana[] pool = floatingMana.toArray(new Mana[floatingMana.size()]);
 
         int[] normalMana = {0, 0, 0, 0, 0, 0};
         int[] snowMana = {0, 0, 0, 0, 0, 0};
-        String[] manaStrings = {Constant.Color.White, Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless};
+        String[] manaStrings = {
+                Constant.Color.White,
+                Constant.Color.Blue,
+                Constant.Color.Black,
+                Constant.Color.Red,
+                Constant.Color.Green,
+                Constant.Color.Colorless
+        };
 
         for (Mana m : pool) {
-            if (m.isSnow())
+            if (m.isSnow()) {
                 snowMana[map.get(m.getColor())] += m.getAmount();
-            else
+            } else {
                 normalMana[map.get(m.getColor())] += m.getAmount();
+            }
         }
 
         StringBuilder sbNormal = new StringBuilder("");
@@ -81,24 +95,31 @@ public class ManaPool extends Card {
         if (!isEmpty()) {
             for (int i = 0; i < 6; i++) {
                 if (i == 5) {
-                    if (normalMana[i] > 0)
+                    if (normalMana[i] > 0) {
                         sbNormal.append(normalMana[i] + " ");
-                    if (snowMana[i] > 0)
+                    }
+                    if (snowMana[i] > 0) {
                         sbSnow.append(snowMana[i] + " ");
+                    }
                 } else {
-                    if (normalMana[i] > 0)
-                        for (int j = 0; j < normalMana[i]; j++)
+                    if (normalMana[i] > 0) {
+                        for (int j = 0; j < normalMana[i]; j++) {
                             sbNormal.append(CardUtil.getShortColor(manaStrings[i])).append(" ");
-                    if (snowMana[i] > 0)
-                        for (int j = 0; j < snowMana[i]; j++)
+                        }
+                    }
+                    if (snowMana[i] > 0) {
+                        for (int j = 0; j < snowMana[i]; j++) {
                             sbSnow.append(CardUtil.getShortColor(manaStrings[i])).append(" ");
+                        }
+                    }
                 }
 
                 sbNormal.append("|");
                 sbSnow.append("|");
             }
-        } else
+        } else {
             return ("|||||||||||");
+        }
 
         return sbNormal.append(sbSnow).toString();
 
@@ -106,18 +127,26 @@ public class ManaPool extends Card {
 
     /** {@inheritDoc} */
     @Override
-    public String getText() {
+    public final String getText() {
         Mana[] pool = floatingMana.toArray(new Mana[floatingMana.size()]);
 
         int[] normalMana = {0, 0, 0, 0, 0, 0};
         int[] snowMana = {0, 0, 0, 0, 0, 0};
-        String[] manaStrings = {Constant.Color.White, Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless};
+        String[] manaStrings = {
+                Constant.Color.White,
+                Constant.Color.Blue,
+                Constant.Color.Black,
+                Constant.Color.Red,
+                Constant.Color.Green,
+                Constant.Color.Colorless
+        };
 
         for (Mana m : pool) {
-            if (m.isSnow())
+            if (m.isSnow()) {
                 snowMana[map.get(m.getColor())] += m.getAmount();
-            else
+            } else {
                 normalMana[map.get(m.getColor())] += m.getAmount();
+            }
         }
 
         StringBuilder sbNormal = new StringBuilder();
@@ -126,15 +155,21 @@ public class ManaPool extends Card {
             for (int i = 0; i < 6; i++) {
                 if (i == 5) {
                     // Put colorless first
-                    if (normalMana[i] > 0)
+                    if (normalMana[i] > 0) {
                         sbNormal.insert(0, normalMana[i] + " ");
-                    if (snowMana[i] > 0)
+                    }
+                    if (snowMana[i] > 0) {
                         sbSnow.insert(0, snowMana[i] + " ");
+                    }
                 } else {
-                    if (normalMana[i] > 0)
-                        sbNormal.append(CardUtil.getShortColor(manaStrings[i])).append("(").append(normalMana[i]).append(") ");
-                    if (snowMana[i] > 0)
-                        sbSnow.append(CardUtil.getShortColor(manaStrings[i])).append("(").append(snowMana[i]).append(") ");
+                    if (normalMana[i] > 0) {
+                        sbNormal.append(CardUtil.getShortColor(manaStrings[i]));
+                        sbNormal.append("(").append(normalMana[i]).append(") ");
+                    }
+                    if (snowMana[i] > 0) {
+                        sbSnow.append(CardUtil.getShortColor(manaStrings[i]));
+                        sbSnow.append("(").append(snowMana[i]).append(") ");
+                    }
                 }
             }
         }
@@ -151,7 +186,7 @@ public class ManaPool extends Card {
      * @param color a {@link java.lang.String} object.
      * @return a int.
      */
-    public int getAmountOfColor(String color) {
+    public final int getAmountOfColor(final String color) {
         return floatingTotals[map.get(color)];
     }
 
@@ -161,7 +196,7 @@ public class ManaPool extends Card {
      * @param color a char.
      * @return a int.
      */
-    public int getAmountOfColor(char color) {
+    public final int getAmountOfColor(final char color) {
         return getAmountOfColor(Character.toString(color));
     }
 
@@ -170,7 +205,7 @@ public class ManaPool extends Card {
      *
      * @return a boolean.
      */
-    public boolean isEmpty() {
+    public final boolean isEmpty() {
         return floatingMana.size() == 0;
     }
 
@@ -180,15 +215,23 @@ public class ManaPool extends Card {
      * @param manaCost a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String oraclize(String manaCost) {
+    public static String oraclize(final String manaCost) {
         // converts RB to (R/B)
         String[] parts = manaCost.split(" ");
         StringBuilder res = new StringBuilder();
         for (String s : parts) {
-            if (s.length() == 2 && colors.contains(s.charAt(1) + "")) s = s.charAt(0) + "/" + s.charAt(1);
-            if (s.length() == 3) s = "(" + s + ")";
-            if (s.equals("S")) s = "(S)";//for if/when we implement snow mana
-            if (s.equals("X")) s = "(X)";//X costs?
+            if (s.length() == 2 && colors.contains(s.charAt(1) + "")) {
+                s = s.charAt(0) + "/" + s.charAt(1);
+            }
+            if (s.length() == 3) {
+                s = "(" + s + ")";
+            }
+            if (s.equals("S")) {
+                s = "(S)"; //for if/when we implement snow mana
+            }
+            if (s.equals("X")) {
+                s = "(X)"; //X costs?
+            }
             res.append(s);
         }
         return res.toString();
@@ -200,12 +243,13 @@ public class ManaPool extends Card {
      * @param pool a {@link java.util.ArrayList} object.
      * @param mana a {@link forge.card.mana.Mana} object.
      */
-    public void addManaToPool(ArrayList<Mana> pool, Mana mana) {
+    public final void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
         pool.add(mana);
         if (pool.equals(floatingMana)) {
             floatingTotals[map.get(mana.getColor())] += mana.getAmount();
-            if (mana.isSnow())
+            if (mana.isSnow()) {
                 floatingTotals[map.get(Constant.Color.Snow)] += mana.getAmount();
+            }
         }
     }
 
@@ -215,7 +259,7 @@ public class ManaPool extends Card {
      * @param manaStr a {@link java.lang.String} object.
      * @param card a {@link forge.Card} object.
      */
-    public void addManaToFloating(String manaStr, Card card) {
+    public final void addManaToFloating(final String manaStr, final Card card) {
         ArrayList<Mana> manaList = convertStringToMana(manaStr, card);
         for (Mana m : manaList) {
             addManaToPool(floatingMana, m);
@@ -230,7 +274,7 @@ public class ManaPool extends Card {
      * @param card a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Mana> convertStringToMana(String manaStr, Card card) {
+    public static ArrayList<Mana> convertStringToMana(String manaStr, final Card card) {
         ArrayList<Mana> manaList = new ArrayList<Mana>();
         manaStr = manaStr.trim();
         String[] manaArr = manaStr.split(" ");
@@ -241,9 +285,9 @@ public class ManaPool extends Card {
 
         for (String c : manaArr) {
             String longStr = Input_PayManaCostUtil.getLongColorString(c);
-            if (longStr.equals(Constant.Color.Colorless))
+            if (longStr.equals(Constant.Color.Colorless)) {
                 genericTotal += Integer.parseInt(c);
-            else if (color.equals("")) {
+            } else if (color.equals("")) {
                 color = longStr;
                 total = 1;
             } else if (color.equals(longStr)) {
@@ -256,10 +300,12 @@ public class ManaPool extends Card {
                 total = 1;
             }
         }
-        if (total > 0)
+        if (total > 0) {
             manaList.add(new Mana(color, total, card));
-        if (genericTotal > 0)
+        }
+        if (genericTotal > 0) {
             manaList.add(new Mana(Constant.Color.Colorless, genericTotal, card));
+        }
 
         return manaList;
     }
@@ -267,8 +313,10 @@ public class ManaPool extends Card {
     /**
      * <p>clearPool.</p>
      */
-    public void clearPool() {
-        if (floatingMana.size() == 0) return;
+    public final void clearPool() {
+        if (floatingMana.size() == 0) {
+            return;
+        }
 
         if (AllZoneUtil.isCardInPlay("Omnath, Locus of Mana", owner)) {
             // Omnath in play, clear all non-green mana
@@ -280,8 +328,9 @@ public class ManaPool extends Card {
                 }
                 floatingMana.remove(i);
             }
-        } else
+        } else {
             floatingMana.clear();
+        }
     }
 
     /**
@@ -291,13 +340,14 @@ public class ManaPool extends Card {
      * @param manaStr a {@link java.lang.String} object.
      * @return a {@link forge.card.mana.Mana} object.
      */
-    public Mana getManaFrom(ArrayList<Mana> pool, String manaStr) {
+    public final Mana getManaFrom(final ArrayList<Mana> pool, final String manaStr) {
         String[] colors = manaStr.split("/");
         boolean wantSnow = false;
         for (int i = 0; i < colors.length; i++) {
             colors[i] = Input_PayManaCostUtil.getLongColorString(colors[i]);
-            if (colors[i].equals(Constant.Color.Snow))
+            if (colors[i].equals(Constant.Color.Snow)) {
                 wantSnow = true;
+            }
         }
 
         Mana choice = null;
@@ -305,14 +355,15 @@ public class ManaPool extends Card {
 
         for (Mana mana : pool) {
             if (mana.isColor(colors)) {
-                if (choice == null)
+                if (choice == null) {
                     choice = mana;
-                else if (choice.isSnow() && !mana.isSnow())
+                } else if (choice.isSnow() && !mana.isSnow()) {
                     choice = mana;
+                }
             } else if (wantSnow && mana.isSnow()) {
-                if (choice == null)
+                if (choice == null) {
                     choice = mana;
-                else if (choice.isColor(Constant.Color.Colorless)) {
+                } else if (choice.isColor(Constant.Color.Colorless)) {
                     // do nothing Snow Colorless should be used first to pay for Snow mana
                 } else if (mana.isColor(Constant.Color.Colorless)) {
                     // give preference to Colorless Snow mana over Colored snow mana
@@ -322,33 +373,43 @@ public class ManaPool extends Card {
                     choice = mana;
                 }
             } else if (colors[0].equals(Constant.Color.Colorless)) {    // colorless
-                if (choice == null && mana.isColor(Constant.Color.Colorless))
+                if (choice == null && mana.isColor(Constant.Color.Colorless)) {
                     choice = mana;    // Colorless fits the bill nicely
-                else if (choice == null) {
+                } else if (choice == null) {
                     manaChoices.add(mana);
-                } else if (choice.isSnow() && !mana.isSnow()) {    // nonSnow colorless is better to spend than Snow colorless
+                } else if (choice.isSnow() && !mana.isSnow()) {
+                    // nonSnow colorless is better to spend than Snow colorless
                     choice = mana;
                 }
             }
         }
 
-        if (choice != null)
+        if (choice != null) {
             return choice;
+        }
 
         if (colors[0].equals(Constant.Color.Colorless)) {
-            if (manaChoices.size() == 1)
+            if (manaChoices.size() == 1) {
                 choice = manaChoices.get(0);
-            else if (manaChoices.size() > 1) {
+            } else if (manaChoices.size() > 1) {
                 int[] normalMana = {0, 0, 0, 0, 0, 0};
                 int[] snowMana = {0, 0, 0, 0, 0, 0};
-                String[] manaStrings = {Constant.Color.White, Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless};
+                String[] manaStrings = {
+                        Constant.Color.White,
+                        Constant.Color.Blue,
+                        Constant.Color.Black,
+                        Constant.Color.Red,
+                        Constant.Color.Green,
+                        Constant.Color.Colorless
+                };
 
                 // loop through manaChoices adding
                 for (Mana m : manaChoices) {
-                    if (m.isSnow())
+                    if (m.isSnow()) {
                         snowMana[map.get(m.getColor())] += m.getAmount();
-                    else
+                    } else {
                         normalMana[map.get(m.getColor())] += m.getAmount();
+                    }
                 }
 
                 int totalMana = 0;
@@ -377,9 +438,12 @@ public class ManaPool extends Card {
 
                 Object o;
 
-                if (owner.isHuman())
+                if (owner.isHuman()) {
                     o = GuiUtils.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
-                else o = alChoice.get(0); //owner is computer
+                }
+                else {
+                    o = alChoice.get(0); //owner is computer
+                }
 
                 if (o != null) {
                     String ch = o.toString();
@@ -390,10 +454,11 @@ public class ManaPool extends Card {
 
                     for (Mana m : manaChoices) {
                         if (m.isColor(ch) && (!grabSnow || (grabSnow && m.isSnow()))) {
-                            if (choice == null)
+                            if (choice == null) {
                                 choice = m;
-                            else if (choice.isSnow() && !m.isSnow())
+                            } else if (choice.isSnow() && !m.isSnow()) {
                                 choice = m;
+                            }
                         }
                     }
                 }
@@ -409,7 +474,7 @@ public class ManaPool extends Card {
      * @param mc a {@link forge.card.mana.ManaCost} object.
      * @param c a {@link forge.Card} object.
      */
-    public void removeManaFromFloating(ManaCost mc, Card c) {
+    public final void removeManaFromFloating(final ManaCost mc, final Card c) {
         removeManaFrom(floatingMana, mc, c);
     }
 
@@ -420,13 +485,15 @@ public class ManaPool extends Card {
      * @param mc a {@link forge.card.mana.ManaCost} object.
      * @param c a {@link forge.Card} object.
      */
-    public void removeManaFrom(ArrayList<Mana> pool, ManaCost mc, Card c) {
+    public final void removeManaFrom(final ArrayList<Mana> pool, final ManaCost mc, Card c) {
         int i = 0;
         Mana choice = null;
         boolean flag = false;
         while (i < pool.size()) {
             Mana mana = pool.get(i);
-            if (flag) c = this;
+            if (flag) {
+                c = this;
+            }
             if (c == this && mc.isNeeded(mana)) {
                 c = mana.getSourceCard();
                 flag = true;
@@ -445,7 +512,7 @@ public class ManaPool extends Card {
      * @param pool a {@link java.util.ArrayList} object.
      * @param mana a {@link forge.card.mana.Mana} object.
      */
-    public void findAndRemoveFrom(ArrayList<Mana> pool, Mana mana) {
+    public final void findAndRemoveFrom(final ArrayList<Mana> pool, final Mana mana) {
         Mana set = null;
         for (Mana m : pool) {
             if (m.getSourceCard().equals(mana.getSourceCard()) && m.getColor().equals(mana.getColor())) {
@@ -462,16 +529,18 @@ public class ManaPool extends Card {
      * @param pool a {@link java.util.ArrayList} object.
      * @param choice a {@link forge.card.mana.Mana} object.
      */
-    public void removeManaFrom(ArrayList<Mana> pool, Mana choice) {
+    public final void removeManaFrom(final ArrayList<Mana> pool, final Mana choice) {
         if (choice != null) {
-            if (choice.getAmount() == 1)
+            if (choice.getAmount() == 1) {
                 pool.remove(choice);
-            else
+            } else {
                 choice.decrementAmount();
+            }
             if (pool.equals(floatingMana)) {
                 floatingTotals[map.get(choice.getColor())] -= choice.getAmount();
-                if (choice.isSnow())
+                if (choice.isSnow()) {
                     floatingTotals[map.get(Constant.Color.Snow)] -= choice.getAmount();
+                }
             }
         }
     }
@@ -483,52 +552,55 @@ public class ManaPool extends Card {
      * @param manaAbility a {@link forge.card.spellability.Ability_Mana} object.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] formatMana(Ability_Mana manaAbility) {
+    public static String[] formatMana(final Ability_Mana manaAbility) {
         return formatMana(manaAbility.mana(), true);
-    }//wrapper
+    } //wrapper
 
     /**
      * <p>formatMana.</p>
      *
-     * @param Mana_2 a {@link java.lang.String} object.
+     * @param mana2 a {@link java.lang.String} object.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] formatMana(String Mana_2) {
+    public static String[] formatMana(final String mana2) {
         //turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R G" -> {"B","W","U","R","G"}, etc.
-        return formatMana(Mana_2, false);
+        return formatMana(mana2, false);
     }
 
     /**
      * <p>formatMana.</p>
      *
-     * @param Mana_2 a {@link java.lang.String} object.
+     * @param mana2 a {@link java.lang.String} object.
      * @param parsed a boolean.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] formatMana(String Mana_2, boolean parsed) {
-        String Mana = Mana_2;
+    public static String[] formatMana(final String mana2, final boolean parsed) {
+        String mana = mana2;
         //if (Mana.isEmpty()) return null;
-        if (Mana.trim().equals("")) return null;
-        if (!parsed)
-            Mana = oraclize(Mana);
+        if (mana.trim().equals("")) {
+            return null;
+        }
+        if (!parsed) {
+            mana = oraclize(mana);
+        }
         try {
-            String[] Colorless = {Integer.toString(Integer.parseInt(Mana))};
-            return Colorless;
+            String[] colorless = {Integer.toString(Integer.parseInt(mana))};
+            return colorless;
         } catch (NumberFormatException ex) {
         }
 
         ArrayList<String> res = new ArrayList<String>();
-        int Colorless = 0;
+        int colorless = 0;
         String clessString = "";
         boolean parentheses = false;
         String current = "";
 
-        for (int i = 0; i < Mana.length(); i++) {
-            char c = Mana.charAt(i);
+        for (int i = 0; i < mana.length(); i++) {
+            char c = mana.charAt(i);
             if (c == '(') {
                 parentheses = true;
                 continue;
-            }//Split cost handling ("(" +<W/U/B/R/G/2> + "/" + <W/U/B/R/G> + ")")
+            } //Split cost handling ("(" +<W/U/B/R/G/2> + "/" + <W/U/B/R/G> + ")")
             else if (parentheses) {
                 if (c != ')') {
                     current += c;
@@ -543,19 +615,24 @@ public class ManaPool extends Card {
             String s = c + "";
             if (colors.contains(s)) {
                 res.add(s);
-                if (clessString.trim().equals("")) continue;
+                if (clessString.trim().equals("")) {
+                    continue;
+                }
                 try {
-                    Colorless += Integer.parseInt(clessString.trim());
+                    colorless += Integer.parseInt(clessString.trim());
                 } catch (NumberFormatException ex) {
                     throw new RuntimeException(
                             "Mana_Pool.getManaParts : Error, sum of noncolor mana parts is not a number - "
                                     + clessString);
                 }
                 clessString = "";
-            } else clessString += s;
+            } else {
+                clessString += s;
+            }
         }
-        for (int i = 0; i < Colorless; i++)
+        for (int i = 0; i < colorless; i++) {
             res.add("1");
+        }
 
         return res.toArray(new String[0]);
     }
@@ -568,10 +645,11 @@ public class ManaPool extends Card {
      * @param m a {@link forge.card.mana.ManaCost} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    private ManaCost subtractMultiple(SpellAbility sa, String[] cost, ManaCost m) {
+    private ManaCost subtractMultiple(final SpellAbility sa, final String[] cost, ManaCost m) {
         for (String s : cost) {
-            if (isEmpty())
+            if (isEmpty()) {
                 break;
+            }
 
             int num = 1;
             try {
@@ -581,8 +659,9 @@ public class ManaPool extends Card {
             }
 
             for (int i = 0; i < num; i++) {
-                if (isEmpty())
+                if (isEmpty()) {
                     break;
+                }
 
                 m = subtractOne(sa, m, s);
             }
@@ -598,12 +677,14 @@ public class ManaPool extends Card {
      * @param mAbilities a {@link forge.card.spellability.Ability_Mana} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public ManaCost subtractMana(SpellAbility sa, ManaCost m, Ability_Mana... mAbilities) {
+    public final ManaCost subtractMana(final SpellAbility sa, ManaCost m, final Ability_Mana... mAbilities) {
         ArrayList<Ability_Mana> paidAbs = sa.getPayingManaAbilities();
 
         if (mAbilities.length == 0) {
             // paying from Mana Pool
-            if (m.isPaid() || isEmpty()) return m;
+            if (m.isPaid() || isEmpty()) {
+                return m;
+            }
 
             String[] cost = formatMana(m.toString());
             return subtractMultiple(sa, cost, m);
@@ -624,14 +705,18 @@ public class ManaPool extends Card {
      *
      * @param manaStr a {@link java.lang.String} object.
      */
-    public void subtractOne(String manaStr) {
+    public final void subtractOne(final String manaStr) {
         // Just subtract from floating, used by removeExtrinsicKeyword
         ManaCost manaCost = new ManaCost(manaStr);
-        if (manaStr.trim().equals("") || manaCost.isPaid()) return;
+        if (manaStr.trim().equals("") || manaCost.isPaid()) {
+            return;
+        }
 
         // get a mana of this type from floating, bail if none available
         Mana mana = getManaFrom(floatingMana, manaStr);
-        if (mana == null) return;    // no matching mana in the pool
+        if (mana == null) {
+            return;    // no matching mana in the pool
+        }
 
         Mana[] manaArray = mana.toSingleArray();
 
@@ -640,8 +725,9 @@ public class ManaPool extends Card {
             if (manaCost.isNeeded(m)) {
                 manaCost.payMana(m);
                 findAndRemoveFrom(floatingMana, m);
-            } else
+            } else {
                 break;
+            }
         }
     }
 
@@ -653,14 +739,18 @@ public class ManaPool extends Card {
      * @param manaStr a {@link java.lang.String} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public ManaCost subtractOne(SpellAbility sa, ManaCost manaCost, String manaStr) {
-        if (manaStr.trim().equals("") || manaCost.isPaid()) return manaCost;
+    public final ManaCost subtractOne(final SpellAbility sa, final ManaCost manaCost, final String manaStr) {
+        if (manaStr.trim().equals("") || manaCost.isPaid()) {
+            return manaCost;
+        }
 
         ArrayList<Mana> payMana = sa.getPayingMana();
 
         // get a mana of this type from floating, bail if none available
         Mana mana = getManaFrom(floatingMana, manaStr);
-        if (mana == null) return manaCost;    // no matching mana in the pool
+        if (mana == null) {
+            return manaCost;    // no matching mana in the pool
+        }
 
         Mana[] manaArray = mana.toSingleArray();
 
@@ -670,8 +760,9 @@ public class ManaPool extends Card {
                 manaCost.payMana(m);
                 payMana.add(m);
                 findAndRemoveFrom(floatingMana, m);
-            } else
+            } else {
                 break;
+            }
         }
         return manaCost;
     }
@@ -681,10 +772,11 @@ public class ManaPool extends Card {
      *
      * @return a int.
      */
-    public int totalMana() {
+    public final int totalMana() {
         int total = 0;
-        for (Mana c : floatingMana)
+        for (Mana c : floatingMana) {
             total += c.getAmount();
+        }
         return total;
     }
 
@@ -694,15 +786,16 @@ public class ManaPool extends Card {
      * @param ability a {@link forge.card.spellability.SpellAbility} object.
      * @param refund a boolean.
      */
-    public void clearPay(SpellAbility ability, boolean refund) {
+    public final void clearPay(final SpellAbility ability, final boolean refund) {
         ArrayList<Ability_Mana> payAbs = ability.getPayingManaAbilities();
         ArrayList<Mana> payMana = ability.getPayingMana();
 
         payAbs.clear();
         // move non-undoable paying mana back to floating
         if (refund) {
-            for (Mana m : payMana)
+            for (Mana m : payMana) {
                 addManaToPool(floatingMana, m);
+            }
         }
 
         payMana.clear();
@@ -716,8 +809,8 @@ public class ManaPool extends Card {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean accountFor(SpellAbility sa, String[] mana, Card c) {
-        // TODO: account for unpaying mana in payMana and floatingPool
+    public final boolean accountFor(final SpellAbility sa, final String[] mana, final Card c) {
+        // TODO account for unpaying mana in payMana and floatingPool
         ArrayList<Mana> payMana = sa.getPayingMana();
 
         ArrayList<Mana> removePaying = new ArrayList<Mana>();
@@ -730,8 +823,9 @@ public class ManaPool extends Card {
         String manaStr = mana[i];
         String color = Input_PayManaCostUtil.getLongColorString(manaStr);
 
-        if (!usePay && floatingMana.size() == 0)
+        if (!usePay && floatingMana.size() == 0) {
             return false;
+        }
 
         while (i < mana.length) {
 
@@ -741,26 +835,31 @@ public class ManaPool extends Card {
                 int amt = m.getColorlessAmount();
                 if (amt > 0) {
                     int difference = Integer.parseInt(manaStr) - amt;
-                    if (difference > 0)
+                    if (difference > 0) {
                         manaStr = Integer.toString(difference);
-                    else {
+                    } else {
                         i += amt;
-                        if (i < mana.length)
+                        if (i < mana.length) {
                             manaStr = mana[i];
+                        }
                     }
                 } else {
                     i += m.getAmount();
-                    if (i < mana.length)
+                    if (i < mana.length) {
                         manaStr = mana[i];
+                    }
                 }
                 color = Input_PayManaCostUtil.getLongColorString(manaStr);
-                if (usePay)
+                if (usePay) {
                     removePaying.add(m);
-                else
+                } else {
                     removeFloating.add(m);
+                }
 
-                if (i == mana.length)    // If mana has been depleted, break from loop. All Accounted for!
+                // If mana has been depleted, break from loop. All Accounted for!
+                if (i == mana.length) {
                     break;
+                }
             }
 
             j++;    // increase j until we reach the end of paying, then reset and use floating.
@@ -770,8 +869,9 @@ public class ManaPool extends Card {
                     usePay = false;
                 }
             }
-            if (!usePay && floatingMana.size() == j && !flag)
+            if (!usePay && floatingMana.size() == j && !flag) {
                 return false;
+            }
         }
 
 
@@ -791,8 +891,8 @@ public class ManaPool extends Card {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @param untap a boolean.
      */
-    public void unpaid(SpellAbility sa, boolean untap) {
-        // TODO: having some crash in here related to undo and not tracking abilities properly
+    public final void unpaid(final SpellAbility sa, final boolean untap) {
+        // TODO having some crash in here related to undo and not tracking abilities properly
         ArrayList<Ability_Mana> payAbs = sa.getPayingManaAbilities();
 
         // go through paidAbilities if they are undoable
@@ -815,21 +915,22 @@ public class ManaPool extends Card {
      */
     private void updateKeywords() {
         extrinsicKeyword.clear();
-        for (Mana m : floatingMana)
+        for (Mana m : floatingMana) {
             extrinsicKeyword.add("ManaPool:" + m.toString());
+        }
     }
 
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
 
     /** {@inheritDoc} */
     @Override
-    public ArrayList<String> getExtrinsicKeyword() {
+    public final ArrayList<String> getExtrinsicKeyword() {
         return new ArrayList<String>(extrinsicKeyword);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void addExtrinsicKeyword(String s) {
+    public final void addExtrinsicKeyword(final String s) {
         if (s.startsWith("ManaPool:")) {
             extrinsicKeyword.add(s);
             addManaToFloating(s.split(":")[1], this);
@@ -838,7 +939,7 @@ public class ManaPool extends Card {
 
     /** {@inheritDoc} */
     @Override
-    public void removeExtrinsicKeyword(String s) {
+    public final void removeExtrinsicKeyword(final String s) {
         if (s.startsWith("ManaPool:")) {
             updateKeywords();
             extrinsicKeyword.remove(s);
@@ -849,7 +950,7 @@ public class ManaPool extends Card {
 
     /** {@inheritDoc} */
     @Override
-    public int getExtrinsicKeywordSize() {
+    public final int getExtrinsicKeywordSize() {
         updateKeywords();
         return extrinsicKeyword.size();
     }
