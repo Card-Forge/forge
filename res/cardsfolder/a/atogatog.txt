@@ -3,7 +3,7 @@ ManaCost:W U B R G
 Types:Legendary Creature Atog
 Text:no text
 PT:5/5
-A:AB$ Pump | Cost$ Sac<1/Creature.Atog> | Defined$ Self | NumAtt$ X | NumDef$ X | CostDesc$ Sacrifice an Atog creature: | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the sacrificed creature's power.
+A:AB$ Pump | Cost$ Sac<1/Creature.Atog/Atog creature> | Defined$ Self | NumAtt$ X | NumDef$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atogatog.jpg

@@ -6,7 +6,7 @@ K:Enchant land you control
 A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Land.YouCtrl | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "W W, Tap: Put a 0/1 white Caribou creature token onto the battlefield."
 SVar:Token:AB$Token | Cost$ W W T | TokenAmount$ 1 | TokenName$ Caribou | TokenTypes$ Creature,Caribou | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put a 0/1 white Caribou creature token onto the battlefield.
-A:AB$ GainLife | Cost$ Sac<1/Caribou.token> | CostDesc$ Sacrifice a Caribou token: | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+A:AB$ GainLife | Cost$ Sac<1/Caribou.token/Caribou token> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caribou_range.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/290.jpg

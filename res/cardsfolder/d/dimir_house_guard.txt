@@ -4,7 +4,7 @@ Types:Creature Skeleton
 Text:no text
 PT:2/3
 K:Fear
-A:AB$ Regenerate | Cost$ Sac<1/Creature> | CostDesc$ Sacrifice a creature: | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
 K:Transmute:1 B B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_house_guard.jpg
