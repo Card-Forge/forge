@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Creature Human Knight
 Text:no text
 PT:2/2
-A:AB$ ChangeZone | Cost$ T Sac<1/Forest;Plains> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | CostDesc$ T, Sacrifice a Forest or Plains: | SpellDescription$ Search your library for a land card, put it onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ T Sac<1/Forest;Plains/Forest or Plains> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it onto the battlefield, then shuffle your library.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each land card in your graveyard.
 SVar:X:Count$TypeInYourYard.Land
 SVar:RemRandomDeck:True

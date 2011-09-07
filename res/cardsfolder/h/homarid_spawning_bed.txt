@@ -2,7 +2,7 @@ Name:Homarid Spawning Bed
 ManaCost:U U
 Types:Enchantment
 Text:no text
-A:AB$ Token | Cost$ 1 U U Sac<1/Creature.Blue> | CostDesc$ 1 U U, Sacrifice a blue creature: | TokenImage$ U 1 1 Camarid | TokenAmount$ X | TokenName$ Camarid | TokenTypes$ Creature,Camarid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put X 1/1 blue Camarid creature tokens onto the battlefield, where X is the sacrificed creature's converted mana cost.
+A:AB$ Token | Cost$ 1 U U Sac<1/Creature.Blue/blue creature> | TokenImage$ U 1 1 Camarid | TokenAmount$ X | TokenName$ Camarid | TokenTypes$ Creature,Camarid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put X 1/1 blue Camarid creature tokens onto the battlefield, where X is the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
