@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Horse Rebel
 Text:no text
 PT:2/3
-A:AB$ Pump | Cost$ Sac<1/Land> | CostDesc$ Sacrifice a land: | NumDef$ 3 | SpellDescription$ CARDNAME gets +0/+3 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | NumDef$ 3 | SpellDescription$ CARDNAME gets +0/+3 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trenching_steed.jpg

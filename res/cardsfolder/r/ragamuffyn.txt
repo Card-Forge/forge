@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie Cleric
 Text:no text
 PT:2/2
-A:AB$ Draw | Cost$ T Sac<1/Creature;Land> | CostDesc$ Tap, Sacrifice a creature or land: | PrecostDesc$ Hellbent - | NumCards$ 1 | Activation$ Hellbent | SpellDescription$ Draw a card. Activate this ability only if you have no cards in hand.
+A:AB$ Draw | Cost$ T Sac<1/Creature;Land/creature or land> | PrecostDesc$ Hellbent - | NumCards$ 1 | Activation$ Hellbent | SpellDescription$ Draw a card. Activate this ability only if you have no cards in hand.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragamuffyn.jpg
