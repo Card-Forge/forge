@@ -2,20 +2,22 @@
 Name=C3PO 2
 DisplayName=C3PO
 Difficulty=medium
-Description=BR Goblin deck with Goblin Ringleader, Kiki-Jiki, Mad Auntie and Sensation Gorger
+Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Frogtosser Banneret
 Deck Type=constructed
 Icon=
 [main]
 8 Mountain
 4 Swamp
-4 Badlands
-4 Blood Crypt
+2 Badlands
+4 Auntie's Hovel
+2 Dragonskull Summit
 1 Goblin Burrows
 1 Wort, Boggart Auntie
-4 Mad Auntie
+3 Mad Auntie
 3 Frogtosser Banneret
 3 Goblin Ringleader
 3 Knucklebone Witch
+1 Auntie's Snitch
 1 Goblin Lackey
 1 Sensation Gorger
 1 Goblin Chieftain
@@ -33,11 +35,12 @@ Icon=
 1 Goblin Deathraiders
 1 Boggart Harbinger
 1 Prickly Boggart
-1 Kiki-Jiki, Mirror Breaker
+1 Squeaking Pie Grubfellows
 1 Squee, Goblin Nabob
 1 Mudbutton Torchrunner
-1 Path of Anger's Flame
 1 Boggart Birth Rite
-2 Tarfire
+1 Tarfire
 1 Goblin Grenade
+1 Fodder Launch
+1 Stenchskipper
 [sideboard]

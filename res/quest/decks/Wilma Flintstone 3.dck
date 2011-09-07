@@ -6,21 +6,21 @@ Description=BG deck with Noxious Hatchling and Woodlurker Mimic
 Deck Type=constructed
 Icon=
 [main]
+4 Verdant Catacombs
 2 Llanowar Dead
 1 Lord of Extinction
 1 Mox Emerald
-7 Swamp
+5 Swamp
 1 Stalker Hag
 2 Overgrown Tomb
 2 Ebony Treefolk
 2 Rendclaw Trow
-7 Forest
+5 Forest
 4 Maelstrom Pulse
 4 Putrefy
 4 Bayou
 1 Mox Jet
 4 Noxious Hatchling
-1 Odious Trow
 4 Woodlurker Mimic
 1 Sapling of Colfenor
 1 Nath of the Gilt-Leaf
@@ -29,4 +29,5 @@ Icon=
 4 Creakwood Liege
 1 Deity of Scars
 1 Glissa, the Traitor
+1 Gleancrawler
 [sideboard]
