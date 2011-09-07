@@ -236,7 +236,7 @@ public class CostDiscard extends CostPartWithList {
                     type.append(" ").append(discType);
                 }
                 StringBuilder sb = new StringBuilder();
-                sb.append("Select a");
+                sb.append("Select a ");
                 sb.append(part.getDescriptiveType());
                 sb.append(" to discard.");
                 if (nNeeded > 1) {
