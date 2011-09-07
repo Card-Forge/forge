@@ -1285,10 +1285,10 @@ public class ComputerUtil {
                 // if SA is from AF_Counter don't add to getPlayable
                 //This try/catch should fix the "computer is thinking" bug
                 try {
-                    if (sa.canPlay() && ComputerUtil.canPayCost(sa, controller) && sa.getAbilityFactory() != null && sa.isAbility()) {
+                    if (sa.getAbilityFactory() != null && sa.isAbility()) {
                         AbilityFactory af = sa.getAbilityFactory();
                         HashMap<String, String> mapParams = af.getMapParams();
-                        if (mapParams.get("AB").equals("PreventDamage")) {
+                        if (mapParams.get("AB").equals("PreventDamage") && sa.canPlay() && ComputerUtil.canPayCost(sa, controller)) {
                             if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
                                 prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"), sa);
                             Target tgt = sa.getTarget();
