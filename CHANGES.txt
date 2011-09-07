@@ -497,6 +497,12 @@ Comment=
 - Converted the triggered ability of Necropotence to script (actually it wasn't even a triggered ability). Updated the wording on the activated ability.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Added the Joker 2 deck.
+- Mana String comparison isn't in CostChange.
+- various checkstyle fixes in Card.java.
+- corrected Blazing Torch damage ability.
+- Checkstyle fixes in ManaPool.java
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
