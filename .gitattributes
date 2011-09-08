@@ -1921,6 +1921,7 @@ res/cardsfolder/d/destructive_urge.txt svneol=native#text/plain
 res/cardsfolder/d/detonate.txt svneol=native#text/plain
 res/cardsfolder/d/deus_of_calamity.txt svneol=native#text/plain
 res/cardsfolder/d/devastate.txt svneol=native#text/plain
+res/cardsfolder/d/devastating_dreams.txt -text
 res/cardsfolder/d/devastating_summons.txt svneol=native#text/plain
 res/cardsfolder/d/devastation.txt svneol=native#text/plain
 res/cardsfolder/d/devoted_druid.txt svneol=native#text/plain
@@ -3771,6 +3772,7 @@ res/cardsfolder/i/indomitable_ancients.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_archangel.txt svneol=native#text/plain
 res/cardsfolder/i/indomitable_will.txt svneol=native#text/plain
 res/cardsfolder/i/indrik_stomphowler.txt svneol=native#text/plain
+res/cardsfolder/i/induce_despair.txt -text
 res/cardsfolder/i/inertia_bubble.txt svneol=native#text/plain
 res/cardsfolder/i/inexorable_tide.txt svneol=native#text/plain
 res/cardsfolder/i/infantry_veteran.txt svneol=native#text/plain
