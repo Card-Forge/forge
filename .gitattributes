@@ -4225,6 +4225,7 @@ res/cardsfolder/k/krovikan_rot.txt svneol=native#text/plain
 res/cardsfolder/k/krovikan_scoundrel.txt svneol=native#text/plain
 res/cardsfolder/k/krovikan_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/k/kry_shield.txt svneol=native#text/plain
+res/cardsfolder/k/kukemssa_pirates.txt -text
 res/cardsfolder/k/kuldotha_flamefiend.txt svneol=native#text/plain
 res/cardsfolder/k/kuldotha_forgemaster.txt svneol=native#text/plain
 res/cardsfolder/k/kuldotha_phoenix.txt svneol=native#text/plain
@@ -8526,6 +8527,7 @@ res/cardsfolder/w/wall_of_blood.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_blossoms.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_bone.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_brambles.txt svneol=native#text/plain
+res/cardsfolder/w/wall_of_corpses.txt -text
 res/cardsfolder/w/wall_of_denial.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_diffusion.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_distortion.txt svneol=native#text/plain
