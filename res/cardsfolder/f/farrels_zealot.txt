@@ -1,0 +1,13 @@
+Name:Farrel's Zealot
+ManaCost:1 W W
+Types:Creature Human
+Text:no text
+PT:2/2
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have it deal 3 damage to target creature. If you do, CARDNAME assigns no combat damage this turn.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ SVar=DBNoCombatDamage
+SVar:DBNoCombatDamage:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/farrels_zealot.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/139.jpg
+Oracle:Whenever Farrel's Zealot attacks and isn't blocked, you may have it deal 3 damage to target creature. If you do, Farrel's Zealot assigns no combat damage this turn.
+End
