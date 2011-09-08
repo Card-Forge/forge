@@ -1,0 +1,10 @@
+Name:Imperial Mask
+ManaCost:4 W
+Types:Enchantment
+Text:When CARDNAME enters the battlefield, if it's not a token, each of your teammates puts a token that's a copy of CARDNAME onto the battlefield.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_mask.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/23.jpg
+Oracle:When Imperial Mask enters the battlefield, if it's not a token, each of your teammates puts a token that's a copy of Imperial Mask onto the battlefield.\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)
+End

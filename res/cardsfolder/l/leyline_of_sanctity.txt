@@ -1,0 +1,10 @@
+Name:Leyline of Sanctity
+ManaCost:2 W W
+Types:Enchantment
+Text:If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_sanctity.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/21.jpg
+Oracle:If Leyline of Sanctity is in your opening hand, you may begin the game with it on the battlefield.\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)
+End

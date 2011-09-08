@@ -3743,6 +3743,7 @@ res/cardsfolder/i/impaler_shrike.txt svneol=native#text/plain
 res/cardsfolder/i/impending_disaster.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_edict.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_hellkite.txt svneol=native#text/plain
+res/cardsfolder/i/imperial_mask.txt -text
 res/cardsfolder/i/imperial_recruiter.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_seal.txt svneol=native#text/plain
 res/cardsfolder/i/imperiosaur.txt svneol=native#text/plain
@@ -4342,6 +4343,7 @@ res/cardsfolder/l/leyline_of_anticipation.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_lifeforce.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_lightning.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_punishment.txt svneol=native#text/plain
+res/cardsfolder/l/leyline_of_sanctity.txt -text
 res/cardsfolder/l/leyline_of_singularity.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_the_meek.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_the_void.txt svneol=native#text/plain
