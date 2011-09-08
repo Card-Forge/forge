@@ -18,14 +18,15 @@ public class Trigger_Cycled extends Trigger {
      *
      * @param params a {@link java.util.HashMap} object.
      * @param host a {@link forge.Card} object.
+     * @param intrinsic a boolean
      */
-    public Trigger_Cycled(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger_Cycled(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Trigger getCopy() {
+    public final Trigger getCopy() {
         Trigger copy = new Trigger_Cycled(mapParams, hostCard, isIntrinsic);
         if (overridingAbility != null) {
             copy.setOverridingAbility(overridingAbility);
@@ -38,13 +39,13 @@ public class Trigger_Cycled extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", runParams.get("Card"));
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
             if (!matchesValid(runParams.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
