@@ -503,6 +503,23 @@ Comment=
 - corrected Blazing Torch damage ability.
 - Checkstyle fixes in ManaPool.java
 - Added the recent commit logs to changes.txt.
+- Fixed sacrifice cost prompt for Blazing Torch
+- Continuous static abilities can now add keywords to players.
+- Fixed Ertai, the Corrupted.
+- Updated the costs descriptions of some cards.
+- Prevented possibleDamagePrevention from giving errors if a permanent with an AF Countermagic ability is around.
+- Little fix in the prompt of CostDiscard.
+- Fixed Buyback cost of Forbid.
+- Updated the costs descriptions of some cards.
+- Updated the costs descriptions of some cards.
+- Updated some quest decks.
+- a link in properties for small icons
+- WU and WB were mixed up
+- All computer decks are auto-assigned names. Protection from crashing on empty decks files. Resolution for issues 241-244
+- just tried to test issue 148, but could not find a card to quest deck, added it. and it didn't appear in list, so I moved the name, type and set filter to quest Deckeditor. Draft users also get an update of colored mana costs.
+- some Checkstyle fixes in Trigger_Cycled.java
+- Checkstyle fixes in StaticAbility_Continuous
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
