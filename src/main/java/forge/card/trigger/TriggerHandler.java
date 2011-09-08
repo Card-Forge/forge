@@ -261,7 +261,7 @@ public class TriggerHandler {
             }
         }
         for (int i = 0; i < registeredTriggers.size(); i++) {
-            registeredTriggers.get(i).setSuppressed(false);
+            registeredTriggers.get(i).setTemporarilySuppressed(false);
         }
     }
 

@@ -246,7 +246,7 @@ public class StaticAbility_Continuous {
             if (params.containsKey("RemoveTriggers") || params.containsKey("RemoveAllAbilities")) {
                 ArrayList<Trigger> triggers = affectedCard.getTriggers();
                 for (Trigger trigger : triggers) {
-                    trigger.setSuppressed(true);
+                    trigger.setTemporarilySuppressed(true);
                 }
             }
             //affectedCard.updateObservers();

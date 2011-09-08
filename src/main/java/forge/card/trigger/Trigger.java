@@ -525,12 +525,17 @@ public abstract class Trigger {
     }
     
     protected boolean suppressed = false;
+    protected boolean temporarilySuppressed = false;
     
-    public void setSuppressed(boolean supp) {
+    /*public void setSuppressed(boolean supp) {
         suppressed = supp;
+    }*/
+    
+    public void setTemporarilySuppressed(boolean supp) {
+        temporarilySuppressed = supp;
     }
     
     public boolean isSuppressed() {
-        return suppressed;
+        return (suppressed || temporarilySuppressed);
     }
 }
