@@ -252,6 +252,10 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         Deck[] all = {
                 human, computer[0], computer[1], computer[2], computer[3], computer[4], computer[5], computer[6]};
 
+        for(int i = 1; i < all.length; i++) {
+            all[i].setName(String.format("Draft %s - Computer %d", s, i));
+        }
+        
         //DeckManager deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
         DeckManager deckManager = AllZone.getDeckManager();
         deckManager.addDraftDeck(all);

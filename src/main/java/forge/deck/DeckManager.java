@@ -245,11 +245,19 @@ public class DeckManager {
         for (File file : files) {
             Deck[] d = new Deck[8];
 
+            boolean gotError = false;
             for (int i = 0; i < d.length; i++) {
                 d[i] = readDeck(new File(file, i + ".dck"));
+                if(d[i] == null) {
+                    gotError = true;
+                    break;
+                }
             }
 
-            draftMap.put(d[0].getName(), d);
+            if (!gotError)
+            {
+                draftMap.put(d[0].getName(), d);
+            }
         }
     }
 
@@ -276,7 +284,8 @@ public class DeckManager {
         }
 
         ListIterator<String> lineIterator = lines.listIterator();
-
+        if (!lineIterator.hasNext()) { return null; }
+        
         String line = lineIterator.next();
 
         //Old text-based format
