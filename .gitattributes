@@ -7242,6 +7242,7 @@ res/cardsfolder/s/spirit_link.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_loop.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_mantle.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_of_resistance.txt svneol=native#text/plain
+res/cardsfolder/s/spirit_of_the_hearth.txt -text
 res/cardsfolder/s/spirit_of_the_night.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_shackle.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_shield.txt svneol=native#text/plain
@@ -8102,6 +8103,7 @@ res/cardsfolder/t/tropical_island.txt svneol=native#text/plain
 res/cardsfolder/t/tropical_storm.txt svneol=native#text/plain
 res/cardsfolder/t/troubled_healer.txt svneol=native#text/plain
 res/cardsfolder/t/troublesome_spirit.txt svneol=native#text/plain
+res/cardsfolder/t/true_believer.txt -text
 res/cardsfolder/t/true_conviction.txt svneol=native#text/plain
 res/cardsfolder/t/trumpet_blast.txt svneol=native#text/plain
 res/cardsfolder/t/trusted_advisor.txt svneol=native#text/plain
