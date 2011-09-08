@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes blocked, you may have it deal damage equal to its power to target creature. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ SVar=DBPump
-SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_warrior.jpg

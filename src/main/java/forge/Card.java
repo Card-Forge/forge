@@ -3620,6 +3620,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getNetCombatDamage() {
+        if (hasKeyword("CARDNAME assigns no combat damage")) {
+            return 0;
+        }
+        
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
             return getNetDefense();
         }

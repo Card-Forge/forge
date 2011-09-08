@@ -5,7 +5,7 @@ Text:no text
 PT:1/3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may draw a card. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ SVar=DBPump
-SVar:DBPump:DB$Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+SVar:DBPump:DB$Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian.jpg
