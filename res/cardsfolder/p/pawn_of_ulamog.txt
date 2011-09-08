@@ -3,8 +3,8 @@ ManaCost:1 B B
 Types:Creature Vampire Shaman
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control is put into a graveyard from the battlefield, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add  to your mana pool."
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control is put into a graveyard from the battlefield, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add  to your mana pool."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control is put into a graveyard from the battlefield, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control is put into a graveyard from the battlefield, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Uncommon
