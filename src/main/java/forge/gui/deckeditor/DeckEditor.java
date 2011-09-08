@@ -4,8 +4,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -15,23 +13,11 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-//import javax.swing.text.BadLocationException;
-//import javax.swing.text.Document;
-
-import org.apache.commons.lang3.StringUtils;
-
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
-import net.slightlymagic.maxmtg.Predicate.StringOp;
 import forge.Command;
 import forge.Constant;
-import forge.SetUtils;
-import forge.card.CardRules;
 import forge.card.CardDb;
 import forge.card.CardPrinted;
 import forge.deck.Deck;

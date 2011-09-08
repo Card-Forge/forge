@@ -1,11 +1,15 @@
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import net.slightlymagic.maxmtg.Predicate;
 
 /**
  * This is a CardBlock class.
  */
-public class CardBlock implements Comparable<CardBlock> {
+public final class CardBlock implements Comparable<CardBlock> {
     private static final CardSet[] EMPTY_SET_ARRAY = new CardSet[]{};
 
     private final int orderNum;
@@ -14,6 +18,7 @@ public class CardBlock implements Comparable<CardBlock> {
     private final CardSet landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
+    private Predicate<CardPrinted> filter = null;
 
     public CardBlock(final int index, final String name, final List<CardSet> sets,
             final CardSet landSet, final int cntBoostersDraft, final int cntBoostersSealed) {
@@ -25,24 +30,39 @@ public class CardBlock implements Comparable<CardBlock> {
         this.cntBoostersSealed = cntBoostersSealed;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final CardSet[] getSets() {
+    public CardSet[] getSets() {
         return sets;
     }
 
-    public final CardSet getLandSet() {
+    public CardSet getLandSet() {
         return landSet;
     }
 
-    public final int getCntBoostersDraft() {
+    public int getCntBoostersDraft() {
         return cntBoostersDraft;
     }
 
-    public final int getCntBoostersSealed() {
+    public int getCntBoostersSealed() {
         return cntBoostersSealed;
+    }
+    
+    public Predicate<CardPrinted> getFilter()
+    {
+        if (filter == null) { filter = buildFilter(); }
+        return filter;
+    }
+    
+    private Predicate<CardPrinted> buildFilter()
+    {
+        List<String> setCodes = new ArrayList<String>();
+        for (int i = 0; i < sets.length; i++) {
+            setCodes.add(sets[i].getCode());
+        }
+        return CardPrinted.Predicates.printedInSets(setCodes, true);
     }
 
     @Override
@@ -72,6 +92,6 @@ public class CardBlock implements Comparable<CardBlock> {
     }
 
     @Override
-    public String toString() { return name; }
+    public String toString() { return name + " (block)"; }
 
 }

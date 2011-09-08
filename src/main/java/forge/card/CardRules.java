@@ -9,7 +9,7 @@ import java.util.Set;
 import net.slightlymagic.maxmtg.Predicate;
 import net.slightlymagic.maxmtg.Predicate.ComparableOp;
 import net.slightlymagic.maxmtg.Predicate.PredicatesOp;
-import net.slightlymagic.maxmtg.Predicate.StringOp;
+import net.slightlymagic.maxmtg.PredicateString;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -139,21 +139,21 @@ public final class CardRules {
         }
         // Power
         // Toughness
-        public static Predicate<CardRules> rules(final StringOp op, final String what) {
+        public static Predicate<CardRules> rules(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.RULES, op, what);
         }
-        public static Predicate<CardRules> name(final StringOp op, final String what) {
+        public static Predicate<CardRules> name(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.NAME, op, what);
         }
-        public static Predicate<CardRules> subType(final StringOp op, final String what) {
+        public static Predicate<CardRules> subType(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.SUBTYPE, op, what);
         }
-        public static Predicate<CardRules> joinedType(final StringOp op, final String what) {
+        public static Predicate<CardRules> joinedType(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.JOINED_TYPE, op, what);
         }
         
-        public static Predicate<CardRules> wasPrintedInSet(final String setCode) {
-            return new PredicateExitsInSet(setCode);
+        public static Predicate<CardRules> wasPrintedInSets(final List<String> setCodes) {
+            return new PredicateExitsInSets(setCodes);
         }
         
         public static Predicate<CardRules> coreType(final boolean isEqual, final String what)
@@ -191,7 +191,7 @@ public final class CardRules {
             return new LeafColor(LeafColor.ColorOperator.CountColorsGreaterOrEqual, cntColors);
         }
 
-        private static class LeafString extends Predicate<CardRules> {
+        private static class LeafString extends PredicateString<CardRules> {
             public enum CardField {
                 RULES,
                 NAME,
@@ -200,7 +200,6 @@ public final class CardRules {
             }
 
             private final String operand;
-            private final StringOp operator;
             private final CardField field;
 
             @Override
@@ -222,20 +221,11 @@ public final class CardRules {
                 }
             }
 
-            private boolean op(final String op1, final String op2) {
-                switch (operator) {
-                    case CONTAINS: return StringUtils.containsIgnoreCase(op1, op2);
-                    case NOT_CONTAINS: return !StringUtils.containsIgnoreCase(op1, op2);
-                    case EQUALS: return op1.equalsIgnoreCase(op2);
-                    default: return false;
-                }
-            }
-
             public LeafString(final CardField field, final StringOp operator, final String operand)
             {
+                super(operator);
                 this.field = field;
                 this.operand = operand;
-                this.operator = operator;
             }
         }
 
@@ -353,15 +343,18 @@ public final class CardRules {
             }
         }
 
-        private static class PredicateExitsInSet extends Predicate<CardRules> {
-            private final String setCode;
-            public PredicateExitsInSet(final String setsCode) {
-                setCode = setsCode;
+        private static class PredicateExitsInSets extends Predicate<CardRules> {
+            private final List<String> sets;
+            public PredicateExitsInSets(final List<String> wantSets) {
+                sets = wantSets; // maybe should make a copy here?
             }
 
             @Override
             public boolean isTrue(final CardRules subject) {
-                return subject.setsPrinted.containsKey(setCode);
+                for (String s : sets) {
+                    if (subject.setsPrinted.containsKey(s)) return true;
+                }
+                return false;
             }
         }
 

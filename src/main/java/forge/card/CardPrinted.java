@@ -3,11 +3,12 @@ package forge.card;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.axis.utils.ArrayUtil;
+import org.apache.commons.lang3.ArrayUtils;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import net.slightlymagic.maxmtg.Predicate.StringOp;
+import net.slightlymagic.maxmtg.PredicateString;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
@@ -146,8 +147,11 @@ public final class CardPrinted implements Comparable<CardPrinted> {
             }
             return new PredicateSets(Arrays.asList(new String[]{value}), true);
         }
-        public static Predicate<CardPrinted> name(final StringOp op, final String what) {
+        public static Predicate<CardPrinted> name(final PredicateString.StringOp op, final String what) {
             return new PredicateName(op, what);
+        }
+        public static Predicate<CardPrinted> namesExcept(final List<String> what) {
+            return new PredicateNamesExcept(what);
         }
 
         private static class PredicateRarity extends Predicate<CardPrinted> {
@@ -177,31 +181,38 @@ public final class CardPrinted implements Comparable<CardPrinted> {
             }
         }
 
-        private static class PredicateName extends Predicate<CardPrinted> {
+        private static class PredicateName extends PredicateString<CardPrinted> {
             private final String operand;
-            private final StringOp operator;
 
             @Override
             public boolean isTrue(final CardPrinted card) {
                 return op(card.getName(), operand);
             }
 
-            private boolean op(final String op1, final String op2) {
-                switch (operator) {
-                    case CONTAINS: return StringUtils.containsIgnoreCase(op1, op2);
-                    case NOT_CONTAINS: return !StringUtils.containsIgnoreCase(op1, op2);
-                    case EQUALS: return op1.equalsIgnoreCase(op2);
-                    default: return false;
-                }
-            }
-
-            public PredicateName(final StringOp operator, final String operand)
+            public PredicateName(final PredicateString.StringOp operator, final String operand)
             {
+                super(operator);
                 this.operand = operand;
-                this.operator = operator;
             }
         }
+        
+        private static class PredicateNamesExcept extends PredicateString<CardPrinted> {
+            private final String[] operand;
 
+            @Override
+            public boolean isTrue(final CardPrinted card) {
+                for(int i = 0; i < operand.length; i++) {
+                    if ( op(card.getName(), operand[i]) ) return false;
+                }
+                return true;
+            }
+
+            public PredicateNamesExcept(final List<String> operand)
+            {
+                super(StringOp.EQUALS);
+                this.operand = operand.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+            }
+        }
         /**
          * Pre-built predicates are stored here to allow their re-usage and easier access from code.
          */
@@ -214,10 +225,6 @@ public final class CardPrinted implements Comparable<CardPrinted> {
             public static final Predicate<CardPrinted> isRareOrMythic = Predicate.or(isRare, isMythicRare);
             public static final Predicate<CardPrinted> isSpecial = rarity(true, CardRarity.Special);
             public static final Predicate<CardPrinted> exceptLands = rarity(false, CardRarity.BasicLand);
-
-            // TODO: Update this code on each rotation (or move this list to a file)
-            public static final Predicate<CardPrinted> isStandard = printedInSets(
-                Arrays.asList(new String[] {"M12", "NPH", "MBS", "SOM", "M11", "ROE", "WWK", "ZEN"}), true);
 
             public static final Predicate<CardPrinted> isTrue = Predicate.getTrue(CardPrinted.class);
         }

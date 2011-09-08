@@ -1,6 +1,7 @@
 package forge.quest.data;
 
 import forge.MyRandom;
+import forge.SetUtils;
 import forge.card.CardPool;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
@@ -122,9 +123,7 @@ public final class QuestData {
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
         setDifficulty(diff);
 
-        Predicate<CardPrinted> filter = standardStart
-            ? CardPrinted.Predicates.Presets.isStandard
-            : Predicate.getTrue(CardPrinted.class);
+        Predicate<CardPrinted> filter = standardStart ? SetUtils.getStandard().getFilter() : CardPrinted.Predicates.Presets.isTrue;
 
         myCards.setupNewGameCardPool(filter, diff);
         credits = QuestPreferences.getStartingCredits();

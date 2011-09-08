@@ -3,12 +3,14 @@ package forge;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameEndReason;
+import forge.game.GameFormat;
 import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.PlayerIndex;
 import forge.gui.CardListViewer;
 import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
@@ -391,19 +393,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * TODO Write javadoc for this method.
      */
     protected final void giveBooster() {
-        String[] boosterTypes = {"Legacy", "Extended", "Standard"};
-        String boosterType = GuiUtils.getChoice("Choose prize booster format", boosterTypes);
-        List<String> setsToGive = null;
-        if (boosterTypes[2].equals(boosterType)) { // T2
-            setsToGive = new ArrayList<String>();
-            setsToGive.addAll(Arrays.asList(new String[]{"M12", "NPH", "MBS", "M11", "ROE", "WWK", "ZEN"}));
-        }
-        if (boosterTypes[1].equals(boosterType)) { // Ext
-            setsToGive = new ArrayList<String>();
-            setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}));
-        }
-
-        ArrayList<CardPrinted> cardsWon = model.quest.getCards().addCards(setsToGive);
+        ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose prize booster format", 1, SetUtils.getFormats());
+        ch.show();
+        GameFormat selected = ch.getSelectedValue();
+        
+        ArrayList<CardPrinted> cardsWon = model.quest.getCards().addCards(selected.getFilter());
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();

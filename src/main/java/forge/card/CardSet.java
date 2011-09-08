@@ -52,4 +52,9 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         CardSet other = (CardSet) obj;
         return other.name.equals(this.name) && this.code.equals(other.code);
     }
+    
+    @Override
+    public String toString() {
+        return this.name + " (set)";
+    }
 }

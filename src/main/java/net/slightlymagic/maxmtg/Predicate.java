@@ -30,12 +30,6 @@ public abstract class Predicate<T> {
      */
     public enum ComparableOp { EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL }
 
-    /**
-     * Possible operators for string operands.
-     * @author Max
-     *
-     */
-    public enum StringOp { CONTAINS, NOT_CONTAINS, EQUALS }
 
     // This is the main method, predicates were made for.
     public abstract boolean isTrue(T subject);
@@ -214,7 +208,7 @@ public abstract class Predicate<T> {
     // Predefined operators: and, or
     public static <T> Predicate<T> and(final Predicate<T> operand1, final Predicate<T> operand2) {
         if (operand1.is1()) { return operand2; }
-        if (operand2.is1()) { return operand1; }
+        if (operand2 == null || operand2.is1()) { return operand1; }
         return new NodeAnd<T>(operand1, operand2);
         }
     public static <T> Predicate<T> and(final Iterable<Predicate<T>> operand) { return new MultiNodeAnd<T>(operand); }
@@ -330,7 +324,7 @@ public abstract class Predicate<T> {
         @Override public boolean isTrue(final T card) { return bValue; }
         public LeafConstant(final boolean value) { bValue = value; }
     }
-
+    
     public static <T> Predicate<T> getTrue(final Class<T> cls) { return new LeafConstant<T>(true); }
     public static <T> Predicate<T> getFalse(final Class<T> cls) { return new LeafConstant<T>(false); }
 }

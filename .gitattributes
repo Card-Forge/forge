@@ -9781,6 +9781,7 @@ src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain
 src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
+src/main/java/forge/game/GameFormat.java -text
 src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
@@ -9928,6 +9929,7 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonit
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
+src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
 src/main/java/treeProperties/PropertyElement.java svneol=native#text/plain
 src/main/java/treeProperties/PropertyType.java svneol=native#text/plain
 src/main/java/treeProperties/TreeProperties.java svneol=native#text/plain

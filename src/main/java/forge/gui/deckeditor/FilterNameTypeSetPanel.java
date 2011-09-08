@@ -12,13 +12,15 @@ import javax.swing.event.DocumentListener;
 
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
-import net.slightlymagic.maxmtg.Predicate.StringOp;
+import net.slightlymagic.maxmtg.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.SetUtils;
 import forge.card.CardPrinted;
 import forge.card.CardRules;
+import forge.card.CardSet;
+import forge.game.GameFormat;
 
 /** 
  * A panel that holds Name, Type, Rules text fields aligned horizontally together with set filter
@@ -58,9 +60,13 @@ public class FilterNameTypeSetPanel extends JComponent{
 
 
         searchSetCombo.removeAllItems();
-        searchSetCombo.addItem("");
-        for (int i = 0; i < SetUtils.getNameList().size(); i++)
-            searchSetCombo.addItem(SetUtils.getNameList().get(i));
+        searchSetCombo.addItem("(all sets and formats)");
+        for (GameFormat s : SetUtils.getFormats()) {
+            searchSetCombo.addItem(s);
+        }        
+        for (CardSet s : SetUtils.getAllSets()) {
+            searchSetCombo.addItem(s);
+        }
 
         this.add(searchSetCombo, "wmin 150, grow");
     }
@@ -88,8 +94,12 @@ public class FilterNameTypeSetPanel extends JComponent{
         }
         
         if (searchSetCombo.getSelectedIndex() != 0) {
-            String setCode = SetUtils.getCode3ByName(searchSetCombo.getSelectedItem().toString());
-            rules.add(CardPrinted.Predicates.printedInSets(setCode));
+            Object selected = searchSetCombo.getSelectedItem();
+            if (selected instanceof CardSet) {
+                rules.add(CardPrinted.Predicates.printedInSets(((CardSet) selected).getCode()));
+            } else if (selected instanceof GameFormat) {
+                rules.add(((GameFormat) selected).getFilter());
+            }
         }
 
         switch (rules.size()){

@@ -44,12 +44,10 @@ public final class QuestUtilCards {
     /**
      * <p>addCards.</p>
      */
-    public ArrayList<CardPrinted> addCards(final List<String> setsFilter) {
+    public ArrayList<CardPrinted> addCards(final Predicate<CardPrinted> fSets) {
         int nCommon = QuestPreferences.getNumCommon();
         int nUncommon = QuestPreferences.getNumUncommon();
         int nRare = QuestPreferences.getNumRare();
-
-        Predicate<CardPrinted> fSets = CardPrinted.Predicates.printedInSets(setsFilter, true);
 
         ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
         newCards.addAll(QuestBoosterPack.generateCards(fSets, nCommon, CardRarity.Common, null));
