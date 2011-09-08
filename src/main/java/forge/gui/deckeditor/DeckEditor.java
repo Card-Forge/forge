@@ -4,6 +4,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -54,19 +56,10 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
     private JButton analysisButton = new JButton();
-
-    private JLabel labelFilterName = new JLabel();
-    private JLabel labelFilterType = new JLabel();
-    private JLabel labelFilterRules = new JLabel();
-    private JLabel jLabel4 = new JLabel();
-
-    //public JButton filterButton = new JButton();
-    private JTextField txtCardName = new JTextField();
-
-    private JTextField txtCardType = new JTextField();
-    private JTextField txtCardRules = new JTextField();
-    private JComboBox searchSetCombo = new JComboBox();
     private JButton clearFilterButton = new JButton();
+    
+    private JLabel jLabelAnalysisGap = new JLabel();  
+    private FilterNameTypeSetPanel filterNameTypeSet;
 
     private boolean isConstructed = false;
 
@@ -127,25 +120,13 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
+        
+        filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), itemListenerUpdatesDisplay);
 
-        // TODO use this as soon the deck editor has resizable GUI
-        // Use both so that when "un"maximizing, the frame isn't tiny
         setSize(1024, 740);
         setExtendedState(Frame.MAXIMIZED_BOTH);
 
-        // This was an attempt to limit the width of the deck editor to 1400
-        // pixels.
-        /*
-         * setSize(1024, 740); Rectangle bounds = getBounds(); Dimension screen
-         * = getToolkit().getScreenSize(); int maxWidth;
-         * 
-         * if (screen.width >= 1400) { maxWidth = 1400; } else { maxWidth =
-         * screen.width; } bounds.width = maxWidth; bounds.height =
-         * screen.height;
-         * 
-         * setMaximizedBounds(bounds);
-         */
-    }// setupAndDisplay()
+    }
 
 
     /**
@@ -159,6 +140,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
             top = new TableWithCards("Avaliable Cards", true, true);
             bottom = new TableWithCards("Deck", true);
             cardView = new CardPanelHeavy();
+            filterNameTypeSet = new FilterNameTypeSetPanel();
             
             jbInit();
         } catch (Exception ex) {
@@ -249,42 +231,13 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         //this.getContentPane().add(filterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
         this.getContentPane().add(clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
+        this.getContentPane().add(filterNameTypeSet, "cell 0 1, grow");
         this.getContentPane().add(top.getTableDecorated(), "cell 0 2 1 2, pushy, grow");
 
         this.getContentPane().add(cardView, "cell 1 0 1 8, flowy, grow");
-
-        labelFilterName.setText("Name:");
-        labelFilterName.setToolTipText("Card names must include the text in this field");
-        this.getContentPane().add(labelFilterName, "cell 0 1, split 7");
-        this.getContentPane().add(txtCardName, "wmin 100, grow");
-        txtCardName.getDocument().addDocumentListener(new OnChangeTextUpdateDisplay());
         
-/*        txtCardName.getDocument().addDocumentListener(new DocumentListener() {
-            @Override public void removeUpdate(final DocumentEvent e) { }
-            @Override public void insertUpdate(final DocumentEvent e) { }
-            @Override public void changedUpdate(final DocumentEvent e) { updateDisplay(); }
-        });
-        */
-
-        labelFilterType.setText("Type:");
-        labelFilterType.setToolTipText("Card types must include the text in this field");
-        this.getContentPane().add(labelFilterType, "");
-        this.getContentPane().add(txtCardType, "wmin 100, grow");
-        txtCardType.getDocument().addDocumentListener(new OnChangeTextUpdateDisplay());
-        labelFilterRules.setText("Text:");
-        labelFilterRules.setToolTipText("Card descriptions must include the text in this field");
-        this.getContentPane().add(labelFilterRules, "");
-        this.getContentPane().add(txtCardRules, "wmin 200, grow");
-        txtCardRules.getDocument().addDocumentListener(new OnChangeTextUpdateDisplay());
-
-        searchSetCombo.removeAllItems();
-        searchSetCombo.addItem("");
-        for (int i = 0; i < SetUtils.getNameList().size(); i++)
-            searchSetCombo.addItem(SetUtils.getNameList().get(i));
-        searchSetCombo.addItemListener(itemListenerUpdatesDisplay);
-
-        this.getContentPane().add(searchSetCombo, "wmin 150, grow");
-
+        
+       
         this.getContentPane().add(top.getLabel(), "cell 0 4");
 
         this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 4");
@@ -292,8 +245,8 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
 
         // jLabel4 is used to push the analysis button to the right
         // This will separate this button from the add and remove card buttons
-        jLabel4.setText("");
-        this.getContentPane().add(jLabel4, "wmin 100, grow");
+        jLabelAnalysisGap.setText("");
+        this.getContentPane().add(jLabelAnalysisGap, "wmin 100, grow");
 
         this.getContentPane().add(analysisButton, "w 100, h 49, wrap");
 
@@ -312,26 +265,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
 
     @Override
     protected Predicate<CardPrinted> buildFilter() {
-        List<Predicate<CardPrinted>> rules = new ArrayList<Predicate<CardPrinted>>(5);
-        rules.add(super.buildFilter());
-        if (StringUtils.isNotBlank(txtCardName.getText())) {
-            rules.add(CardPrinted.Predicates.name(StringOp.CONTAINS, txtCardName.getText()));
-        }
-
-        if (StringUtils.isNotBlank(txtCardType.getText())) {
-            rules.add(Predicate.brigde(CardRules.Predicates.joinedType(StringOp.CONTAINS, txtCardType.getText()), CardPrinted.fnGetRules));
-        }
-        
-        if (StringUtils.isNotBlank(txtCardRules.getText())) {
-            rules.add(Predicate.brigde(CardRules.Predicates.rules(StringOp.CONTAINS, txtCardRules.getText()), CardPrinted.fnGetRules));
-        }
-        
-        if (searchSetCombo.getSelectedIndex() != 0) {
-            String setCode = SetUtils.getCode3ByName(searchSetCombo.getSelectedItem().toString());
-            rules.add(CardPrinted.Predicates.printedInSets(setCode));
-        }
-
-        return rules.size() == 1 ? rules.get(0) : Predicate.and(rules);
+        return Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
     }
 
     void clearFilterButton_actionPerformed(ActionEvent e) {
@@ -341,24 +275,13 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         for (JCheckBox box : filterBoxes.allTypes) { if (!box.isSelected()) { box.doClick(); } }
         for (JCheckBox box : filterBoxes.allColors) { if (!box.isSelected()) { box.doClick(); } }
 
-        txtCardName.setText("");
-        txtCardType.setText("");
-        txtCardRules.setText("");
-        searchSetCombo.setSelectedIndex(0);
+        filterNameTypeSet.clearFilters();
 
         isFiltersChangeFiringUpdate = true;
 
         top.setFilter(null);
     }
 
-    /**
-     * <p>
-     * addButton_actionPerformed.
-     * </p>
-     * 
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
     void addButton_actionPerformed(ActionEvent e) {
         addCardToDeck();
     }
@@ -375,14 +298,6 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         }
     }
 
-    /**
-     * <p>
-     * removeButton_actionPerformed.
-     * </p>
-     * 
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
     void removeButtonClicked(ActionEvent e) {
         CardPrinted card = bottom.getSelectedCard();
         if (card == null) { return; }
@@ -417,30 +332,4 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         }
     }
 
-    protected class OnChangeTextUpdateDisplay implements DocumentListener {
-        //private String lastText = "";
-        private void onChange() {
-            //String newValue = getTextFromDocument(e.getDocument();
-            //System.out.println(String.format("%s --> %s", lastText, nowText));
-            if (isFiltersChangeFiringUpdate) { updateDisplay(); }
-        }
-
-        /*
-        private String getTextFromDocument(final Document doc) {
-            try {
-                return doc.getText(0, doc.getLength());
-            } catch (BadLocationException ex) {
-                return null;
-            }
-        }
-        */
-
-        @Override public void insertUpdate(DocumentEvent e) { onChange(); }
-        @Override public void removeUpdate(DocumentEvent e) { onChange(); }
-
-        // Happend only on ENTER pressed
-        @Override public void changedUpdate(DocumentEvent e) { }
-    }
-    
-    
 }

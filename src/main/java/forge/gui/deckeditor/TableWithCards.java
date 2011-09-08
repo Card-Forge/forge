@@ -121,17 +121,19 @@ public final class TableWithCards {
     }
 
     public void setDeck(final Iterable<CardPrinted> cards) {
-        model.clear();
-        pool = new CardPool(cards);
-        model.addCards(pool);
-        updateView();
+        setDeckImpl(new CardPool(cards));
     }
 
     public void setDeck(final CardPoolView poolView) {
+        setDeckImpl(new CardPool(poolView));
+    }
+    
+    protected void setDeckImpl(CardPool thePool)
+    {
         model.clear();
-        pool = new CardPool(poolView);
+        pool = thePool;
         model.addCards(pool);
-        updateView();
+        updateView(true);
     }
 
     public CardPrinted getSelectedCard() {
@@ -140,36 +142,37 @@ public final class TableWithCards {
     }
 
     private boolean isUnfiltered() { return filter == null || filter.is1(); }
-    private boolean isFiltered() { return filter != null && !filter.is1(); }
 
     public void setFilter(final Predicate<CardPrinted> filterToSet) {
         filter = filterToSet;
-        updateView();
+        updateView(true);
     }
 
     public void addCard(final CardPrinted card) {
         //int n = table.getSelectedRow();
         pool.add(card);
         if (isUnfiltered()) { model.addCard(card); }
-        updateView();
+        updateView(false);
     }
 
     public void removeCard(final CardPrinted card) {
         int n = table.getSelectedRow();
         pool.remove(card);
         if (isUnfiltered()) { model.removeCard(card); }
-        updateView();
+        updateView(false);
         fixSelection(n);
     }
 
-    public void updateView() {
-        if (isFiltered() || wantUnique) {
+    public void updateView(boolean bForceFilter) {
+        boolean useFilter = ( bForceFilter && filter != null ) || !isUnfiltered();
+        
+        if (useFilter || wantUnique) {
             model.clear();
         }
 
-        if (isFiltered() && wantUnique) {
+        if (useFilter && wantUnique) {
             model.addCards(filter.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToPrinted));
-        } else if (isFiltered()) {
+        } else if (useFilter) {
             model.addCards(filter.select(pool, CardPoolView.fnToPrinted));
         } else if (wantUnique) {
             model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToCard));

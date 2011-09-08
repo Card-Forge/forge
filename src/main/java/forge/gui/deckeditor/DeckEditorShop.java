@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Command;
 import forge.ReadPriceList;
@@ -269,8 +270,12 @@ public final class DeckEditorShop extends DeckEditorBase {
         }
     }
 
+    @Override
+    protected Predicate<CardPrinted> buildFilter() {
+        return CardPrinted.Predicates.Presets.isTrue;
+    }
 
-    void sellButton_actionPerformed(ActionEvent e) {
+    private void sellButton_actionPerformed(ActionEvent e) {
         CardPrinted c = bottom.getSelectedCard();
         if (c == null) { return; }
 

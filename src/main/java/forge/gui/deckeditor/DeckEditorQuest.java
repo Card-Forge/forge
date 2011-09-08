@@ -28,6 +28,8 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
+import net.slightlymagic.maxmtg.Predicate;
+
 //import forge.quest.data.QuestBoosterPack;
 
 /**
@@ -47,11 +49,14 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     // private ImageIcon upIcon = Constant.IO.upIcon;
     // private ImageIcon downIcon = Constant.IO.downIcon;
 
+    //private JLabel labelSortHint = new JLabel();
     private JButton addButton = new JButton();
     private JButton removeButton = new JButton();
     private JButton analysisButton = new JButton();
-    private JLabel labelSortHint = new JLabel();
+    
 
+    private FilterNameTypeSetPanel filterNameTypeSet;
+    
     private QuestData questData;
 
 
@@ -116,6 +121,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
      * </p>
      */
     public void setup() {
+        this.setLayout(null);
+        
         List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
         columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
         columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
@@ -131,6 +138,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
+        
+        filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), itemListenerUpdatesDisplay);
 
         this.setSize(1024, 768);
         GuiUtils.centerFrame(this);
@@ -149,6 +158,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
             top = new TableWithCards("All Cards", true);
             bottom = new TableWithCards("Your deck", true);
             cardView = new CardPanelHeavy();
+            filterNameTypeSet = new FilterNameTypeSetPanel();
             jbInit();
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
@@ -157,10 +167,15 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
 
     private void jbInit() throws Exception {
-        this.setLayout(null);
+        this.getContentPane().setLayout(null);
 
-        top.getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
+        //labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
+        //labelSortHint.setBounds(new Rectangle(20, 27, 400, 19));
+        
+        filterNameTypeSet.setBounds(new Rectangle(19, 10, 726, 25));
+        top.getTableDecorated().setBounds(new Rectangle(19, 40, 726, 316));
         bottom.getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
+        
 
         removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
@@ -236,9 +251,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // x 768 screen size
         this.setTitle("Deck Editor");
 
-        labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
-        labelSortHint.setBounds(new Rectangle(20, 1, 400, 19));
 
+        this.getContentPane().add(filterNameTypeSet, null);
         this.getContentPane().add(top.getTableDecorated(), null);
         this.getContentPane().add(bottom.getTableDecorated(), null);
         this.getContentPane().add(addButton, null);
@@ -246,7 +260,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         this.getContentPane().add(analysisButton, null);
         this.getContentPane().add(bottom.getLabel(), null);
         this.getContentPane().add(top.getLabel(), null);
-        this.getContentPane().add(labelSortHint, null);
+        //this.getContentPane().add(labelSortHint, null);
         this.getContentPane().add(cardView, null);
 
         for (JCheckBox box : filterBoxes.allTypes) {
@@ -266,6 +280,11 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     }
 
 
+    @Override
+    protected Predicate<CardPrinted> buildFilter() {
+        return Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
+    }    
+    
     private  void addButtonActionPerformed(final ActionEvent e) {
         CardPrinted card = top.getSelectedCard();
         if (card == null) { return; }

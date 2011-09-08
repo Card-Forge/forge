@@ -6,6 +6,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import net.slightlymagic.maxmtg.Predicate;
 
@@ -38,12 +40,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
 
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ... virtual protected member, but later
-    protected Predicate<CardPrinted> buildFilter() {
-        if (null == filterBoxes) {
-            return Predicate.getTrue(CardPrinted.class);
-        }
-        return filterBoxes.buildFilter();
-    }
+    protected abstract Predicate<CardPrinted> buildFilter();
 
     void analysisButton_actionPerformed(ActionEvent e) {
         CardPoolView deck = bottom.getCards(); 
@@ -57,12 +54,6 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
             g.setEnabled(false);
         }
     }
-
-    protected ItemListener itemListenerUpdatesDisplay = new ItemListener() {
-        public void itemStateChanged(ItemEvent e) {
-            if (isFiltersChangeFiringUpdate) { updateDisplay(); }
-        }
-    };
     
     public void setDecks(CardPoolView topParam, CardPoolView bottomParam) {
         top.setDeck(topParam);
@@ -73,4 +64,16 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
         top.setFilter(buildFilter());
     }
 
+    protected ItemListener itemListenerUpdatesDisplay = new ItemListener() {
+        public void itemStateChanged(ItemEvent e) {
+            if (isFiltersChangeFiringUpdate) { updateDisplay(); }
+        }
+    };
+
+    protected class OnChangeTextUpdateDisplay implements DocumentListener {
+        private void onChange() { if (isFiltersChangeFiringUpdate) { updateDisplay(); } }
+        @Override public void insertUpdate(DocumentEvent e) { onChange(); }
+        @Override public void removeUpdate(DocumentEvent e) { onChange(); }
+        @Override public void changedUpdate(DocumentEvent e) { } // Happend only on ENTER pressed
+    }
 }

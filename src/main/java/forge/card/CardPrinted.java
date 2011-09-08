@@ -219,6 +219,7 @@ public final class CardPrinted implements Comparable<CardPrinted> {
             public static final Predicate<CardPrinted> isStandard = printedInSets(
                 Arrays.asList(new String[] {"M12", "NPH", "MBS", "SOM", "M11", "ROE", "WWK", "ZEN"}), true);
 
+            public static final Predicate<CardPrinted> isTrue = Predicate.getTrue(CardPrinted.class);
         }
     }
 }

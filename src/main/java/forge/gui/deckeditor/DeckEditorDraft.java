@@ -17,6 +17,9 @@ import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
+
+import net.slightlymagic.maxmtg.Predicate;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -93,6 +96,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.add(new TableColumnInfo<CardPrinted>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
+        columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
@@ -267,4 +271,10 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         dispose();
         new OldGuiNewGame();
     }/*saveDraft()*/
+
+
+    @Override
+    protected Predicate<CardPrinted> buildFilter() {
+        return CardPrinted.Predicates.Presets.isTrue;
+    }
 }
