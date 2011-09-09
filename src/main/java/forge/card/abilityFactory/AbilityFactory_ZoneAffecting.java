@@ -423,8 +423,15 @@ public class AbilityFactory_ZoneAffecting {
                 if (slowDraw)
                     for (int i = 0; i < numCards; i++)
                         p.addSlowtripList(source);
-                else
-                    p.drawCards(numCards);
+                else {
+                    CardList drawn = p.drawCards(numCards);
+                    if (params.containsKey("RememberDrawn")) {
+                        for (Card c : drawn) {
+                            source.addRemembered(c);
+                        }
+                    }
+
+                }
 
             }
         }
