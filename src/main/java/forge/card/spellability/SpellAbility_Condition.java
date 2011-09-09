@@ -98,6 +98,15 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
         if(params.containsKey("ConditionManaSpent")) {
         	setManaSpent(params.get("ConditionManaSpent"));
         }
+        
+        if (params.containsKey("CheckSVar")) {
+            setSvarToCheck(params.get("CheckSVar"));
+        }
+        if (params.containsKey("SVarCompare")) {
+            setSvarOperator(params.get("SVarCompare").substring(0, 2));
+            setSvarOperand(params.get("SVarCompare").substring(2));
+        }
+        
     }//setConditions
 
     /**
@@ -209,6 +218,15 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
         	if(!sa.getSourceCard().getColorsPaid().contains(manaSpent)) {
         		return false;
         	}
+        }
+        
+        if (svarToCheck != null) {
+            int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarToCheck, sa);
+            int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarOperand, sa);
+
+            if (!AllZoneUtil.compare(svarValue, svarOperator, operandValue))
+                return false;
+
         }
 
         return true;
