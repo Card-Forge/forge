@@ -178,6 +178,11 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
         out.setCounters(in.getCounters());
+        
+        out.clearTriggersNew();
+        for(Trigger trigger : in.getTriggers()) {
+            out.moveTrigger(trigger);
+        }
         return out;
 
     }

@@ -105,12 +105,6 @@ public class GameAction {
             copied.setUnearthed(c.isUnearthed());    // this might be unnecessary
         }
 
-        // This is the fix for Isochron Scepter and friends, we need to test other situations
-        // To make sure it doesn't break anything serious
-        for (Trigger trigger : c.getTriggers()) {
-            trigger.setHostCard(copied);
-        }
-
         if (suppress) {
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
         }

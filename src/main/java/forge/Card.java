@@ -327,6 +327,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         triggers.add(newtrig);
         return newtrig;
     }
+    
+    public final void moveTrigger(final Trigger t) {
+        t.setHostCard(this);
+        triggers.add(t);
+    }
 
     /**
      * <p>removeTrigger.</p>
