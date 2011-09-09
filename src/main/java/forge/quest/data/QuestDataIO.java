@@ -12,6 +12,7 @@ import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -69,6 +70,7 @@ public class QuestDataIO {
 
             IgnoringXStream xStream = new IgnoringXStream();
             xStream.registerConverter(new CardPoolToXml());
+            xStream.registerConverter(new GameTypeToXml());
             xStream.alias("CardPool", CardPool.class);
             data = (QuestData) xStream.fromXML(xml.toString());
             
@@ -191,6 +193,27 @@ public class QuestDataIO {
         }
     }
 
+    
+    private static class GameTypeToXml implements Converter {
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(Class clasz) {
+            return clasz.equals(GameType.class);
+        }
+
+        @Override
+        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+            // not used
+        }
+
+        @Override
+        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+            String value = reader.getValue();
+            return GameType.smartValueOf(value);
+        }
+        
+    }
+    
     private static class CardPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
