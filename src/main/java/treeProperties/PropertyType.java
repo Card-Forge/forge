@@ -24,14 +24,14 @@ public interface PropertyType<T> {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getSuffix();
+    String getSuffix();
 
     /**
      * The class that identifies this content type.
      *
      * @return a {@link java.lang.Class} object.
      */
-    public Class<T> getType();
+    Class<T> getType();
 
     /**
      * Returns an object for the specified value, in the context of a TreeProperties.
@@ -40,5 +40,5 @@ public interface PropertyType<T> {
      * @param s a {@link java.lang.String} object.
      * @return a T object.
      */
-    public T toObject(TreeProperties p, String s);
+    T toObject(TreeProperties p, String s);
 }
