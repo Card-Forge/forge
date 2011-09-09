@@ -46,6 +46,7 @@ public class Trigger_Taps extends Trigger {
         }
         copy.setName(name);
         copy.setID(ID);
+        copy.setSuppressed(suppressed);
 
         return copy;
     }

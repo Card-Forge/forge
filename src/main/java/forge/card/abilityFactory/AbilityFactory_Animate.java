@@ -1,7 +1,20 @@
 package forge.card.abilityFactory;
 
-import forge.*;
-import forge.card.spellability.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardUtil;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -17,7 +30,11 @@ import java.util.Map;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Animate {
+public final class AbilityFactory_Animate {
+
+    private AbilityFactory_Animate() {
+        throw new AssertionError();
+    }
 
     //**************************************************************
     //************************** Animate ***************************
@@ -419,13 +436,13 @@ public class AbilityFactory_Animate {
 
         final long timestamp = timest;
 
-        boolean permanent = params.containsKey("Permanent") ? true : false;
+        boolean permanent = params.containsKey("Permanent");
 
         final ArrayList<String> types = new ArrayList<String>();
         if (params.containsKey("Types")) {
             types.addAll(Arrays.asList(params.get("Types").split(",")));
         }
-        
+
         final ArrayList<String> removeTypes = new ArrayList<String>();
         if (params.containsKey("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
@@ -498,7 +515,8 @@ public class AbilityFactory_Animate {
 
         for (final Card c : tgts) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types,
+                    removeTypes, finalDesc, keywords, timestamp);
 
             //give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -512,6 +530,17 @@ public class AbilityFactory_Animate {
                 }
             }
 
+            //remove abilities
+            final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+            if (params.containsKey("OverwriteAbilities")) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.isAbility()) {
+                        c.removeSpellAbility(ab);
+                        removedAbilities.add(ab);
+                    }
+                }
+            }
+
             //Grant triggers
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
@@ -522,11 +551,21 @@ public class AbilityFactory_Animate {
                     AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
                 }
             }
+            
+            //suppress triggers from the animated card
+            final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
+            if (params.containsKey("OverwriteTriggers")) {
+                System.out.println("Suppressing triggers for: "+c);
+                ArrayList<Trigger> triggersToRemove = c.getTriggers();
+                for (Trigger trigger : triggersToRemove) {
+                    trigger.setSuppressed(true);
+                }
+            }
 
             //give static abilities (should only be used by cards to give itself a static ability)
             if (stAbs.size() > 0) {
                 for (String s : stAbs) {
-                	String actualAbility = host.getSVar(s);
+                    String actualAbility = host.getSVar(s);
                     c.addStaticAbility(actualAbility);
                 }
             }
@@ -534,7 +573,7 @@ public class AbilityFactory_Animate {
             //give sVars
             if (sVars.size() > 0) {
                 for (String s : sVars) {
-                	String actualsVar = host.getSVar(s);
+                    String actualsVar = host.getSVar(s);
                     c.setSVar(s, actualsVar);
                 }
             }
@@ -546,7 +585,13 @@ public class AbilityFactory_Animate {
 
                 public void execute() {
                     doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp,
-                            givesStAbs, timestamp);
+                            givesStAbs, removedAbilities, timestamp);
+                    
+                    //give back suppressed triggers
+                    for(Trigger t : removedTriggers) {
+                        System.out.println("Unsuppressing triggers for: "+c);
+                        t.setSuppressed(false);
+                    }
                 }
             };
 
@@ -555,7 +600,7 @@ public class AbilityFactory_Animate {
                     AllZone.getEndOfCombat().addUntil(unanimate);
                 }
                 else if (params.containsKey("UntilHostLeavesPlay")) {
-                	host.addLeavesPlayCommand(unanimate);
+                    host.addLeavesPlayCommand(unanimate);
                 }
                 else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
@@ -577,32 +622,32 @@ public class AbilityFactory_Animate {
      * @return a long.
      */
     private static long doAnimate(final Card c, final AbilityFactory af, final int power, final int toughness,
-            final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors, final ArrayList<String> keywords, 
-            final long timestamp)
+            final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
+            final ArrayList<String> keywords, final long timestamp)
     {
         HashMap<String, String> params = af.getMapParams();
 
-		boolean removeSuperTypes = false;
-	    boolean removeCardTypes = false;
-	    boolean removeSubTypes = false;
-	    boolean removeCreatureTypes = false;
+        boolean removeSuperTypes = false;
+        boolean removeCardTypes = false;
+        boolean removeSubTypes = false;
+        boolean removeCreatureTypes = false;
 
-	    if (params.containsKey("OverwriteTypes")) {
-	    	removeSuperTypes = true;
-		    removeCardTypes = true;
-		    removeSubTypes = true;
-		    removeCreatureTypes = true;
-	    }
+        if (params.containsKey("OverwriteTypes")) {
+            removeSuperTypes = true;
+            removeCardTypes = true;
+            removeSubTypes = true;
+            removeCreatureTypes = true;
+        }
 
-	    if (params.containsKey("KeepSupertypes")) {
-	    	removeSuperTypes = false;
-	    }
+        if (params.containsKey("KeepSupertypes")) {
+            removeSuperTypes = false;
+        }
 
-	    if (params.containsKey("KeepCardTypes")) {
-		    removeCardTypes = false;
-	    }
+        if (params.containsKey("KeepCardTypes")) {
+            removeCardTypes = false;
+        }
 
-	    if (params.containsKey("RemoveSuperTypes")) {
+        if (params.containsKey("RemoveSuperTypes")) {
             removeSuperTypes = true;
         }
 
@@ -619,12 +664,12 @@ public class AbilityFactory_Animate {
         }
 
         if (power != -1 || toughness != -1) {
-    		c.addNewPT(power, toughness, timestamp);
+            c.addNewPT(power, toughness, timestamp);
         }
 
         if (!types.isEmpty() || !removeTypes.isEmpty()) {
-        	c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-        	        removeCreatureTypes, timestamp);
+            c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
+                    removeCreatureTypes, timestamp);
         }
 
         for (String k : keywords) {
@@ -656,21 +701,21 @@ public class AbilityFactory_Animate {
      * @param timestamp a long.
      */
     private static void doUnanimate(final Card c, final AbilityFactory af, final String colorDesc,
-    		final ArrayList<String> originalKeywords, final ArrayList<SpellAbility> addedAbilities,
-    		final ArrayList<Trigger> addedTriggers, final long colorTimestamp,
-    		final boolean givesStAbs, final long timestamp)
+            final ArrayList<String> originalKeywords, final ArrayList<SpellAbility> addedAbilities,
+            final ArrayList<Trigger> addedTriggers, final long colorTimestamp,
+            final boolean givesStAbs, final ArrayList<SpellAbility> removedAbilities, final long timestamp)
     {
-    	HashMap<String, String> params = af.getMapParams();
+        HashMap<String, String> params = af.getMapParams();
 
-    	c.removeNewPT(timestamp);
+        c.removeNewPT(timestamp);
 
         //remove all static abilities
         if (givesStAbs) {
-        	c.setStaticAbilities(new ArrayList<StaticAbility>());
+            c.setStaticAbilities(new ArrayList<StaticAbility>());
         }
 
         if (params.containsKey("Types")) {
-        	c.removeChangedCardTypes(timestamp);
+            c.removeChangedCardTypes(timestamp);
         }
 
         c.removeColor(colorDesc, c, !params.containsKey("OverwriteColors"), colorTimestamp);
@@ -685,6 +730,10 @@ public class AbilityFactory_Animate {
 
         for (SpellAbility sa : addedAbilities) {
             c.removeSpellAbility(sa);
+        }
+
+        for (SpellAbility sa : removedAbilities) {
+            c.addSpellAbility(sa);
         }
 
         for (Trigger t : addedTriggers) {
@@ -920,13 +969,13 @@ public class AbilityFactory_Animate {
 
         final long timestamp = timest;
 
-        boolean permanent = params.containsKey("Permanent") ? true : false;
+        boolean permanent = params.containsKey("Permanent");
 
         final ArrayList<String> types = new ArrayList<String>();
         if (params.containsKey("Types")) {
             types.addAll(Arrays.asList(params.get("Types").split(",")));
         }
-        
+
         final ArrayList<String> removeTypes = new ArrayList<String>();
         if (params.containsKey("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
@@ -987,7 +1036,8 @@ public class AbilityFactory_Animate {
 
         for (final Card c : list) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types,
+                    removeTypes, finalDesc, keywords, timestamp);
 
             //give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -998,6 +1048,17 @@ public class AbilityFactory_Animate {
                     SpellAbility grantedAbility = newAF.getAbility(actualAbility, c);
                     addedAbilities.add(grantedAbility);
                     c.addSpellAbility(grantedAbility);
+                }
+            }
+
+            //remove abilities
+            final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+            if (params.containsKey("OverwriteAbilities")) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.isAbility()) {
+                        c.removeSpellAbility(ab);
+                        removedAbilities.add(ab);
+                    }
                 }
             }
 
@@ -1017,7 +1078,7 @@ public class AbilityFactory_Animate {
 
                 public void execute() {
                     doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers,
-                            colorTimestamp, false, timestamp);
+                            colorTimestamp, false, removedAbilities, timestamp);
                 }
             };
 
