@@ -22,18 +22,18 @@ import java.util.regex.Pattern;
  * @version V0.0 19.08.2009
  */
 public class FileType implements PropertyType<File> {
-    /** Constant <code>suffix="file"</code> */
-    public static final String suffix = "file";
-    /** Constant <code>type</code> */
-    public static final Class<File> type = File.class;
+    /** Constant <code>suffix="file"</code>. */
+    public static final String SUFFIX = "file";
+    /** Constant <code>type</code>. */
+    public static final Class<File> TYPE = File.class;
 
     /**
      * <p>Getter for the field <code>suffix</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getSuffix() {
-        return suffix;
+    public final String getSuffix() {
+        return SUFFIX;
     }
 
     /**
@@ -41,17 +41,20 @@ public class FileType implements PropertyType<File> {
      *
      * @return a {@link java.lang.Class} object.
      */
-    public Class<File> getType() {
-        return type;
+    public final Class<File> getType() {
+        return TYPE;
     }
 
 
     /** {@inheritDoc} */
-    public File toObject(TreeProperties p, String s) {
+    public final File toObject(final TreeProperties p, final String s) {
         String path = getPath(s);
         File f = new File(path);
-        if (f.isAbsolute()) return f;
-        else return new File(p.getPath(), path);
+        if (f.isAbsolute()) {
+            return f;
+        } else {
+            return new File(p.getPath(), path);
+        }
     }
 
     /**
@@ -66,13 +69,19 @@ public class FileType implements PropertyType<File> {
      * @return a {@link java.lang.String} object.
      */
     public static String getPath(String s) {
-        if (s.startsWith("~/")) s = System.getProperty("user.home") + "/" + s.substring(2);
-        else if (s.startsWith("~\\")) s = System.getProperty("user.home") + "\\" + s.substring(2);
+        if (s.startsWith("~/")) {
+            s = System.getProperty("user.home") + "/" + s.substring(2);
+        } else if (s.startsWith("~\\")) {
+            s = System.getProperty("user.home") + "\\" + s.substring(2);
+        }
         Matcher m = Pattern.compile("\\$\\$|\\$\\{([^\\}]*)\\}").matcher(s);
         StringBuffer result = new StringBuffer();
         while (m.find()) {
-            if (m.group().equals("$$")) m.appendReplacement(result, Matcher.quoteReplacement("$"));
-            else m.appendReplacement(result, Matcher.quoteReplacement(System.getProperty(m.group(1))));
+            if (m.group().equals("$$")) {
+                m.appendReplacement(result, Matcher.quoteReplacement("$"));
+            } else {
+                m.appendReplacement(result, Matcher.quoteReplacement(System.getProperty(m.group(1))));
+            }
         }
         m.appendTail(result);
         return result.toString();
