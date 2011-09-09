@@ -9705,6 +9705,7 @@ src/main/java/forge/card/cost/CostTapType.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/Cost_Payment.java svneol=native#text/plain
+src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaCost.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
@@ -9798,6 +9799,7 @@ src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CustomDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
+src/main/java/forge/game/limited/package-info.java -text svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
@@ -9935,6 +9937,7 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonit
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
+src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain
 src/main/java/treeProperties/PropertyElement.java svneol=native#text/plain
 src/main/java/treeProperties/PropertyType.java svneol=native#text/plain
 src/main/java/treeProperties/TreeProperties.java svneol=native#text/plain
