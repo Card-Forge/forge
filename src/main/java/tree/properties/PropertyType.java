@@ -1,4 +1,4 @@
-package treeProperties;
+package tree.properties;
 
 
 /**

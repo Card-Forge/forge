@@ -4,7 +4,7 @@
  * Created on 19.08.2009
  */
 
-package treeProperties;
+package tree.properties;
 
 
 /**

@@ -4,11 +4,11 @@
  * Created on 19.08.2009
  */
 
-package treeProperties.types;
+package tree.properties.types;
 
 
-import treeProperties.PropertyType;
-import treeProperties.TreeProperties;
+import tree.properties.PropertyType;
+import tree.properties.TreeProperties;
 
 import java.io.File;
 import java.util.regex.Matcher;
