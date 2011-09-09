@@ -11,6 +11,7 @@ import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.quest.data.QuestData;
@@ -275,7 +276,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
                     cardpool.add(cp, s.getValue());
                     questData.getCards().getCardpool().add(cp, s.getValue());
                 }
-                deckDisplay.setDecks(cardpool, decklist);
+                deckDisplay.setDeck(cardpool, decklist, GameType.Quest);
 
             } catch (Exception ex) {
                 ErrorViewer.showError(ex);
@@ -339,13 +340,13 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
             // show in pool all cards except ones used in deck
             cards.removeAll(deck);
-            deckDisplay.setDecks(cards,  deck);
+            deckDisplay.setDeck(cards, deck, GameType.Quest);
         }
     };
 
     private final ActionListener newDeckActionListener = new ActionListener() {
         public void actionPerformed(final ActionEvent a) {
-            deckDisplay.setDecks(questData.getCards().getCardpool().getView(), new CardPool());
+            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), new CardPool(), GameType.Quest);
             setPlayerDeckName("");
         }
     };
@@ -428,7 +429,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             questData.removeDeck(currentDeck.getName());
 
             //show card pool
-            deckDisplay.setDecks(questData.getCards().getCardpool().getView(), new CardPool());
+            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), new CardPool(), GameType.Quest);
 
             setPlayerDeckName("");
         }
@@ -498,7 +499,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
      */
     private Deck cardPoolToDeck(final CardPoolView list) {
         //put CardPool into Deck main
-        Deck deck = new Deck(Constant.GameType.Sealed);
+        Deck deck = new Deck(GameType.Sealed);
         deck.addMain(list);
         return deck;
     }
@@ -511,7 +512,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
      */
     public final void setPlayerDeckName(final String deckName) {
         //the gui uses this, Gui_Quest_DeckEditor
-        currentDeck = new Deck(Constant.GameType.Sealed);
+        currentDeck = new Deck(GameType.Sealed);
         currentDeck.setName(deckName);
 
         deckDisplay.setTitle(deckEditorName + " - " + deckName);

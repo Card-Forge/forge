@@ -105,8 +105,10 @@ public final class TableWithCards {
         return show.toString();
     } // getStats()
 
-    public void sort(final int iCol, final boolean isAsc) {
+    public TableWithCards sort(final int iCol) { return sort(iCol, true); }
+    public TableWithCards sort(final int iCol, final boolean isAsc) {
         model.sort(iCol, isAsc);
+        return this;
     }
 
     // Call this after deleting an item from table

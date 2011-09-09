@@ -25,6 +25,7 @@ import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.view.swing.OldGuiNewGame;
@@ -93,7 +94,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         CardPoolView owned = questData.getCards().getCardpool().getView();
         //newCardsList = questData.getCards().getNewCards();
 
-        setDecks(forSale, owned);
+        setDeck(forSale, owned, GameType.Quest);
 
         double multiPercent = multiplier * 100;
         NumberFormat formatter = new DecimalFormat("#0.00");
@@ -162,6 +163,7 @@ public final class DeckEditorShop extends DeckEditorBase {
      *            a {@link forge.quest.data.QuestData} object.
      */
     public DeckEditorShop(final QuestData qd) {
+        super(GameType.Quest);
         questData = qd;
         try {
             filterBoxes = null;

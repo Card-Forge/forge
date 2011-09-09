@@ -21,6 +21,7 @@ import forge.card.trigger.Trigger;
 import forge.deck.Deck;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
+import forge.game.GameType;
 import forge.game.PlayerIndex;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_Mulligan;
@@ -1120,7 +1121,7 @@ public class GameAction {
 
             Card.resetUniqueNumber();
 
-            boolean canRandomFoil = Constant.Runtime.RndCFoil[0] && Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed);
+            boolean canRandomFoil = Constant.Runtime.RndCFoil[0] && Constant.Runtime.gameType.equals(GameType.Constructed);
 
             Random generator = MyRandom.random;
             for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {

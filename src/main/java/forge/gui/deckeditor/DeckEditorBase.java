@@ -14,6 +14,8 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.GUI_DeckAnalysis;
 import forge.card.CardPrinted;
 import forge.card.CardPoolView;
+import forge.deck.Deck;
+import forge.game.GameType;
 
 public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     private static final long serialVersionUID = -401223933343539977L;
@@ -28,6 +30,10 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     // CardPools and Table data for top and bottom lists
     protected TableWithCards top;
     protected TableWithCards bottom;
+
+    
+    private GameType gameType;
+    public GameType getGameType() { return gameType; }
     
     // top shows available card pool
     // if constructed, top shows all cards
@@ -55,7 +61,13 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
         }
     }
     
-    public void setDecks(CardPoolView topParam, CardPoolView bottomParam) {
+    public DeckEditorBase(GameType gametype)
+    {
+        gameType = gametype;
+    }
+    
+    public void setDeck(CardPoolView topParam, CardPoolView bottomParam, GameType gt) {
+        gameType = gt;
         top.setDeck(topParam);
         bottom.setDeck(bottomParam);
     }
@@ -76,4 +88,16 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
         @Override public void removeUpdate(DocumentEvent e) { onChange(); }
         @Override public void changedUpdate(DocumentEvent e) { } // Happend only on ENTER pressed
     }
+    
+    public Deck getDeck() {
+        Deck deck = new Deck(gameType);
+        deck.addMain(getBottom());
+
+        //if sealed or draft, move "top" to sideboard
+        if (gameType.isLimited() && gameType != GameType.Quest) {
+            deck.addSideboard(getTop());
+        }
+        return deck;
+    }//getDeck()
+    
 }

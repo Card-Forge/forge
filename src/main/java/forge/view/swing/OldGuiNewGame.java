@@ -9,6 +9,7 @@ import forge.deck.DeckManager;
 import forge.deck.generate.*;
 import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.game.limited.BoosterDraft_1;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
@@ -58,8 +59,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private final DeckManager deckManager = AllZone.getDeckManager();
     // with the new IO, there's no reason to use different instances
     private List<Deck> allDecks;
-    /** Constant <code>editor</code>. */
-    private static DeckEditor editor;
 
     private JLabel titleLabel = new JLabel();
     private JLabel jLabel2 = new JLabel();
@@ -131,7 +130,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     public OldGuiNewGame() {
 
         AllZone.setQuestData(null);
-        allDecks = getDecks();
 
         if (Constant.Runtime.width[0] == 0) {
             Constant.Runtime.width[0] = 70;
@@ -155,15 +153,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             ErrorViewer.showError(ex);
         }
 
-        if (Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) {
+        if (Constant.Runtime.gameType.equals(GameType.Constructed)) {
             singleRadioButton.setSelected(true);
             updateDeckComboBoxes();
         }
-        if (Constant.Runtime.GameType[0].equals(Constant.GameType.Sealed)) {
+        if (Constant.Runtime.gameType.equals(GameType.Sealed)) {
             sealedRadioButton.setSelected(true);
             updateDeckComboBoxes();
         }
-        if (Constant.Runtime.GameType[0].equals(Constant.GameType.Draft)) {
+        if (Constant.Runtime.gameType.equals(GameType.Draft)) {
             draftRadioButton.setSelected(true);
             draftRadioButtonActionPerformed(null);
         }
@@ -291,7 +289,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * </p>
      */
     private void setupSealed() {
-        Deck deck = new Deck(Constant.GameType.Sealed);
+        Deck deck = new Deck(GameType.Sealed);
 
         // ReadBoosterPack booster = new ReadBoosterPack();
         // CardList pack = booster.getBoosterPack5();
@@ -338,23 +336,22 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             String sDeckName = JOptionPane.showInputDialog(null,
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_MSG),
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
+            
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
 
             Constant.Runtime.HumanDeck[0] = deck;
-            Constant.Runtime.GameType[0] = Constant.GameType.Sealed;
+            Constant.Runtime.gameType = GameType.Sealed;
 
             Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
-            deckManager.writeAllDecks();
-            deckManager.readAllDecks();
+            DeckManager.writeDeck(aiDeck, DeckManager.makeFileName(aiDeck));
             updateDeckComboBoxes();
 
-            deckEditorButtonActionPerformed(null);
-            editor.customMenu.setCurrentGameType(Constant.GameType.Sealed);
-            editor.customMenu.showSealedDeck(deck);
+            deckEditorButtonActionPerformed(GameType.Sealed, deck);
+            
 
             Constant.Runtime.ComputerDeck[0] = aiDeck;
         } else {
@@ -456,12 +453,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         jLabel2.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.YOURDECK));
         jLabel3.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.OPPONENT));
 
-        humanComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                humanComboBoxActionPerformed(e);
-            }
-        });
-
         /*
          * Settings Panel
          */
@@ -511,7 +502,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         deckEditorButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DECK_EDITOR));
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                deckEditorButtonActionPerformed(e);
+                deckEditorButtonActionPerformed(GameType.Constructed, null);
             }
         });
 
@@ -626,35 +617,28 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void deckEditorButtonActionPerformed(final ActionEvent e) {
-        if (editor == null) {
+    final void deckEditorButtonActionPerformed(final GameType gt, final Deck deck) {
 
-            editor = new DeckEditor();
+        DeckEditor editor = new DeckEditor(gt);
 
-            Command exit = new Command() {
-                private static final long serialVersionUID = -9133358399503226853L;
+        Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
 
-                public void execute() {
-                    new OldGuiNewGame();
-                }
-            };
-            editor.show(exit);
-            editor.setVisible(true);
-        } // if
-
-        // refresh decks:
-        allDecks = getDecks();
-
-        // TODO (TO have DOne) - this seems hacky. If someone knows how to do
-        // this for real, feel free.
-        // This make it so the second time you open the Deck Editor, typing a
-        // card name and pressing enter will filter
-        //javax.swing.JRootPane rootPane = editor.getRootPane();
-        //rootPane.setDefaultButton(editor.filterButton);
-
+            public void execute() {
+                
+                updateDeckComboBoxes();
+                OldGuiNewGame.this.setVisible(true);
+            }
+        };
+        
+        editor.show(exit);
+        
+        if (deck != null) {
+            editor.customMenu.showDeck(deck, gt);
+        }
+        
+        this.setVisible(false);
         editor.setVisible(true);
-
-        dispose();
     }
 
     /**
@@ -697,9 +681,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         if (draftRadioButton.isSelected()) {
             if (human.equals("New Draft")) {
                 dispose();
-
                 setupDraft();
-
                 return;
 
             } else {
@@ -732,9 +714,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             }
         } else {
             // non-draft decks
-            String format = Constant.Runtime.GameType[0];
-            // boolean sealed = Constant.GameType.Sealed.equals(format);
-            boolean constructed = Constant.GameType.Constructed.equals(format);
+            GameType format = Constant.Runtime.gameType;
+            // boolean sealed = GameType.Sealed.equals(format);
+            boolean constructed = GameType.Constructed.equals(format);
 
             boolean humanGenerate = human.equals("Generate Deck");
             boolean humanRandom = human.equals("Random");
@@ -857,7 +839,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private Deck generateConstructedDeck() {
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
         CardList name = gen.generateDeck();
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -875,7 +857,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private Deck generateConstructed3ColorDeck() {
         GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate3ColorDeck();
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -893,7 +875,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private Deck generateConstructed5ColorDeck() {
         GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate5ColorDeck();
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -923,7 +905,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         CardList td = gen.getThemeDeck(stDeck, 60);
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < td.size(); i++) {
             deck.addMain(td.get(i).getName());
@@ -977,7 +959,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
         CardList d = gen.get2ColorDeck(60, p);
 
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());
@@ -1043,7 +1025,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
         CardList d = gen.get3ColorDeck(60, p);
 
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());
@@ -1077,7 +1059,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
         CardList d = gen.get5ColorDeck(60, p);
 
-        Deck deck = new Deck(Constant.GameType.Constructed);
+        Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());
@@ -1096,7 +1078,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void singleRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
+        Constant.Runtime.gameType = GameType.Constructed;
         updateDeckComboBoxes();
     }
 
@@ -1109,7 +1091,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void sealedRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.GameType[0] = Constant.GameType.Sealed;
+        Constant.Runtime.gameType = GameType.Sealed;
         updateDeckComboBoxes();
     }
 
@@ -1122,20 +1104,21 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         humanComboBox.removeAllItems();
         computerComboBox.removeAllItems();
 
-        if (Constant.GameType.Sealed.equals(Constant.Runtime.GameType[0])) {
+        allDecks = getDecks();
+        switch(Constant.Runtime.gameType)
+        {
+        case Sealed: 
             humanComboBox.addItem("New Sealed");
             computerComboBox.addItem("New Sealed");
 
             for (Deck allDeck : allDecks) {
-                if (allDeck.getDeckType().equals(Constant.GameType.Sealed)) {
-                    if (allDeck.getPlayerType() == PlayerType.HUMAN) {
-                        humanComboBox.addItem(allDeck.getName());
-                    } else if (allDeck.getPlayerType() == PlayerType.COMPUTER) {
-                        computerComboBox.addItem(allDeck.getName());
-                    }
+                if (allDeck.getDeckType().equals(GameType.Sealed)) {
+                    JComboBox boxToAdd = allDeck.getPlayerType() == PlayerType.COMPUTER ? computerComboBox : humanComboBox; 
+                    boxToAdd.addItem(allDeck.getName());
                 }
             } // for
-        } else if (Constant.GameType.Constructed.equals(Constant.Runtime.GameType[0])) {
+            break;
+        case Constructed:
             humanComboBox.addItem("Generate Deck");
             computerComboBox.addItem("Generate Deck");
 
@@ -1143,11 +1126,25 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             computerComboBox.addItem("Random");
 
             for (Deck allDeck : allDecks) {
-                if (allDeck.getDeckType().equals(Constant.GameType.Constructed)) {
+                if (allDeck.getDeckType().equals(GameType.Constructed)) {
                     humanComboBox.addItem(allDeck.getName());
                     computerComboBox.addItem(allDeck.getName());
                 }
             } // for
+            break;
+        case Draft:
+            humanComboBox.addItem("New Draft");
+            Object[] key = deckManager.getDraftDecks().keySet().toArray();
+            Arrays.sort(key);
+
+            for (Object aKey : key) {
+                humanComboBox.addItem(aKey);
+            }
+
+            for (int i = 0; i < 7; i++) {
+                computerComboBox.addItem("" + (i + 1));
+            }
+            break;
         }
         // not sure if the code below is useful or not
         // this will select the deck that you previously used
@@ -1166,11 +1163,11 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.lang.String} object.
      * @return an array of {@link forge.deck.Deck} objects.
      */
-    final Deck[] getDecks(final String gameType) {
+    final Deck[] getDecks(final GameType gameType) {
         ArrayList<Deck> list = new ArrayList<Deck>();
 
         Deck d;
-        for (Deck allDeck : allDecks) {
+        for (Deck allDeck : deckManager.getDecks()) {
             d = allDeck;
 
             if (d.getDeckType().equals(gameType)) {
@@ -1185,43 +1182,11 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         return out;
     } // getDecks()
 
-    /**
-     * <p>
-     * draftRadioButton_actionPerformed.
-     * </p>
-     *
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
+
     final void draftRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.GameType[0] = Constant.GameType.Draft;
-        humanComboBox.removeAllItems();
-        computerComboBox.removeAllItems();
-
-        humanComboBox.addItem("New Draft");
-        Object[] key = deckManager.getDraftDecks().keySet().toArray();
-        Arrays.sort(key);
-
-        for (Object aKey : key) {
-            humanComboBox.addItem(aKey);
-        }
-
-        for (int i = 0; i < 7; i++) {
-            computerComboBox.addItem("" + (i + 1));
-        }
+        Constant.Runtime.gameType = GameType.Draft;
+        updateDeckComboBoxes();
     }
-
-    /**
-     * <p>
-     * humanComboBox_actionPerformed.
-     * </p>
-     *
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
-    void humanComboBoxActionPerformed(final ActionEvent e) {
-
-    } /* draftRadioButton_actionPerformed() */
 
     /**
      *

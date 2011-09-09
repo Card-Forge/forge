@@ -16,6 +16,7 @@ import forge.card.CardPool;
 import forge.card.CardSet;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 
 import javax.swing.*;
@@ -397,7 +398,7 @@ public class SealedDeck {
             }
         }
 
-        Deck aiDeck = new Deck(Constant.GameType.Sealed);
+        Deck aiDeck = new Deck(GameType.Sealed);
 
         for (i = 0; i < deck.size(); i++)
             aiDeck.addMain(deck.get(i).getName() + "|" + deck.get(i).getCurSetCode());

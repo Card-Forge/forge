@@ -1,12 +1,20 @@
 package forge;
 
 import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.Proxy;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -114,4 +122,30 @@ public final class FileUtil {
 
         return list;
     } //readFile()
+    
+    public static void downloadUrlIntoFile(final String url, final File target)
+    {
+        try{
+            byte[] buf = new byte[1024];
+            int len;
+    
+            Proxy p = Proxy.NO_PROXY;
+            BufferedInputStream in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
+            BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target));
+    
+            //while - read and write file
+            while ((len = in.read(buf)) != -1) {
+                out.write(buf, 0, len);
+    
+            }//while - read and write file
+            in.close();
+            out.flush();
+            out.close();
+        }
+        catch (IOException ioex)
+        {
+            ErrorViewer.showError(ioex, ForgeProps.getLocalized(ERRORS.OTHER), "deck_temp.html", url);
+        }
+        
+    }
 }

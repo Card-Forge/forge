@@ -14,6 +14,7 @@ import forge.ComputerAI_Input;
 import forge.Constant;
 import forge.ImageCache;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.view.FView;
@@ -123,7 +124,7 @@ public class ApplicationView implements FView {
         
         if(!splashFrame.getSplashHasBeenClosed()) {
             try {
-                Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
+                Constant.Runtime.gameType = GameType.Constructed;
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
                     public void run() {
                         AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));

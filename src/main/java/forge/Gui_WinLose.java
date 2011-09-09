@@ -9,7 +9,6 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.PlayerIndex;
 import forge.gui.CardListViewer;
-import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -38,7 +37,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

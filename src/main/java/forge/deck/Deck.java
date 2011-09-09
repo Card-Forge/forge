@@ -1,11 +1,11 @@
 package forge.deck;
 
-import forge.Constant;
 import forge.PlayerType;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.game.GameType;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,10 +22,10 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     private static final long serialVersionUID = -7478025567887481994L;
 
-    //gameType is from Constant.GameType, like Constant.GameType.Regular
+    //gameType is from Constant.GameType, like GameType.Regular
 
     private String name;
-    private String deckType;
+    private GameType deckType;
     private String comment = null;
     private PlayerType playerType = null;
     
@@ -37,7 +37,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
 
 
-    //gameType is from Constant.GameType, like Constant.GameType.Regular
+    //gameType is from Constant.GameType, like GameType.Regular
     /**
      * <p>Constructor for Deck.</p>
      */
@@ -54,7 +54,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @param sideboard a {@link java.util.List} object.
      * @param name a {@link java.lang.String} object.
      */
-    public Deck(String deckType, List<String> main, List<String> sideboard, String name) {
+    public Deck(GameType deckType, List<String> main, List<String> sideboard, String name) {
         setDeckType(deckType);
         setName(name);
 
@@ -67,7 +67,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @param type a {@link java.lang.String} object.
      */
-    public Deck(final String type) {
+    public Deck(final GameType type) {
         this();
         setDeckType(type);
     }
@@ -95,7 +95,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getDeckType() {
+    public GameType getDeckType() {
         return deckType;
     }
 
@@ -105,15 +105,10 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @param deckType a {@link java.lang.String} object.
      */
-    void setDeckType(String deckType) {
+    void setDeckType(GameType deckType) {
         if (this.getDeckType() != null) {
             throw new IllegalStateException(
                     "Deck : setDeckType() error, deck type has already been set");
-        }
-
-        if (!Constant.GameType.GameTypes.contains(deckType)) {
-            throw new RuntimeException(
-                    "Deck : setDeckType() error, invalid deck type - " + deckType);
         }
 
         this.deckType = deckType;
@@ -202,7 +197,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isDraft() {
-        return getDeckType().equals(Constant.GameType.Draft);
+        return getDeckType().equals(GameType.Draft);
     }
 
     /**
@@ -211,7 +206,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isSealed() {
-        return getDeckType().equals(Constant.GameType.Sealed);
+        return getDeckType().equals(GameType.Sealed);
     }
 
     /**
@@ -220,7 +215,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isRegular() {
-        return getDeckType().equals(Constant.GameType.Constructed);
+        return getDeckType().equals(GameType.Constructed);
     }
 
     /**

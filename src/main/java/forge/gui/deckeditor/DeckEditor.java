@@ -4,6 +4,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -16,13 +18,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
+import forge.AllZone;
 import forge.Command;
-import forge.Constant;
 import forge.card.CardDb;
+import forge.card.CardPool;
+import forge.card.CardPoolView;
 import forge.card.CardPrinted;
-import forge.deck.Deck;
 import forge.error.ErrorViewer;
-import forge.properties.NewConstants;
+import forge.game.GameType;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -33,7 +36,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditor extends DeckEditorBase implements NewConstants {
+public final class DeckEditor extends DeckEditorBase {
     /** Constant <code>serialVersionUID=130339644136746796L</code> */
     private static final long serialVersionUID = 130339644136746796L;
 
@@ -44,16 +47,8 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     private JButton analysisButton = new JButton();
     private JButton clearFilterButton = new JButton();
     
-    private JLabel jLabelAnalysisGap = new JLabel();  
+    private JLabel jLabelAnalysisGap = new JLabel("");  
     private FilterNameTypeSetPanel filterNameTypeSet;
-
-    private boolean isConstructed = false;
-
-    /** {@inheritDoc} */
-    @Override
-    public void setTitle(final String message) {
-        super.setTitle(message);
-    }
 
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
@@ -65,7 +60,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
             }
         };
 
-        customMenu = new DeckEditorMenu(this, exit);
+        customMenu = new DeckEditorMenu(this, AllZone.getDeckManager(), exit);
         this.setJMenuBar(customMenu);
 
         // do not change this!!!!
@@ -78,11 +73,11 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
 
         setup();
 
-        isConstructed = Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed);
+        
 
         // show cards, makes this user friendly
-        if (isConstructed) {
-            customMenu.newConstructed();
+        if (!getGameType().isLimited()) {
+            customMenu.newConstructed(false);
         }
 
         top.sort(1, true);
@@ -115,12 +110,8 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
     }
 
 
-    /**
-     * <p>
-     * Constructor for Gui_DeckEditor.
-     * </p>
-     */
-    public DeckEditor() {
+    public DeckEditor(GameType gameType) {
+        super(gameType);
         try {
             filterBoxes = new FilterCheckBoxes(true);
             top = new TableWithCards("Avaliable Cards", true, true);
@@ -136,44 +127,28 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
 
 
     private void jbInit() {
-        // removeButton.setIcon(upIcon);
+
         if (!OldGuiNewGame.useLAFFonts.isSelected()) {
-            removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
+            Font fButtons = new java.awt.Font("Dialog", 0, 13);
+            removeButton.setFont(fButtons);
+            addButton.setFont(fButtons);
+            clearFilterButton.setFont(fButtons);
+            analysisButton.setFont(fButtons);
         }
+        
+        addButton.setText("Add to Deck");        
         removeButton.setText("Remove from Deck");
-        removeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                removeButtonClicked(e);
-            }
-        });
-        addButton.setText("Add to Deck");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                addButton_actionPerformed(e);
-            }
-        });
-        // addButton.setIcon(downIcon);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
-            addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
         clearFilterButton.setText("Clear Filter");
-        clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                clearFilterButton_actionPerformed(e);
-            }
-        });
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
-            clearFilterButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
         analysisButton.setText("Deck Analysis");
+        
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(final ActionEvent e) { removeButtonClicked(e); } });
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(final ActionEvent e) { addButton_actionPerformed(e); } });
+        clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(final ActionEvent e) { clearFilterButton_actionPerformed(e); } });
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                analysisButton_actionPerformed(e);
-            }
-        });
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
-            analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+            public void actionPerformed(final ActionEvent e) { analysisButton_actionPerformed(e); } });
 
         // Type filtering
         Font f = new Font("Tahoma", Font.PLAIN, 10);
@@ -195,10 +170,7 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         MigLayout layout = new MigLayout("fill");
         pane.setLayout(layout);
 
-        // this.getContentPane().add(landCheckBox,
-        // "cell 0 0, egx checkbox, split 16");
         boolean isFirst = true;
-
         for (JCheckBox box : filterBoxes.allTypes) {
             String growParameter = "grow";
             if (isFirst) {
@@ -214,36 +186,27 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
             box.addItemListener(itemListenerUpdatesDisplay);
         }
 
-        //this.getContentPane().add(filterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
         this.getContentPane().add(clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
         this.getContentPane().add(filterNameTypeSet, "cell 0 1, grow");
         this.getContentPane().add(top.getTableDecorated(), "cell 0 2 1 2, pushy, grow");
-
-        this.getContentPane().add(cardView, "cell 1 0 1 8, flowy, grow");
-        
-        
-       
         this.getContentPane().add(top.getLabel(), "cell 0 4");
 
         this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 4");
         this.getContentPane().add(removeButton, "w 100, h 49, sg button");
-
-        // jLabel4 is used to push the analysis button to the right
-        // This will separate this button from the add and remove card buttons
-        jLabelAnalysisGap.setText("");
+        // Label is used to push the analysis button to the right to separate analysis button from add/remove card ones 
         this.getContentPane().add(jLabelAnalysisGap, "wmin 100, grow");
-
         this.getContentPane().add(analysisButton, "w 100, h 49, wrap");
 
         this.getContentPane().add(bottom.getTableDecorated(), "cell 0 6, grow");
         this.getContentPane().add(bottom.getLabel(), "cell 0 7");
 
+        this.getContentPane().add(cardView, "cell 1 0 1 8, flowy, grow");
+
         top.getTable().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { addCardToDeck(); }
-            }
-        });
+            @Override public void mouseClicked(final MouseEvent e) { if (e.getClickCount() == 2) { addCardToDeck(); } } });
+        top.getTable().addKeyListener(new KeyAdapter() {
+            @Override public void keyPressed(final KeyEvent e) { if (e.getKeyChar() == ' ') { addCardToDeck(); } } });
 
         //javax.swing.JRootPane rootPane = this.getRootPane();
         //rootPane.setDefaultButton(filterButton);
@@ -254,6 +217,17 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         return Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
     }
 
+    @Override
+    public void setDeck(CardPoolView topParam, CardPoolView bottomParam, GameType gt)
+    {
+        boolean keepRecievedCards = gt.isLimited() || topParam != null;  
+        // if constructed, can add the all cards above
+        CardPoolView top = keepRecievedCards ? topParam : new CardPool( CardDb.instance().getAllCards() );
+
+        super.setDeck(top, bottomParam, gt);
+        
+    }
+    
     void clearFilterButton_actionPerformed(ActionEvent e) {
         // disable automatic update triggered by listeners
         isFiltersChangeFiringUpdate = false;
@@ -279,9 +253,11 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
         bottom.addCard(card);
-        if (!isConstructed) {
+        if (getGameType().isLimited()) {
             top.removeCard(card);
         }
+        
+        customMenu.notifyDeckChange();
     }
 
     void removeButtonClicked(ActionEvent e) {
@@ -291,31 +267,10 @@ public final class DeckEditor extends DeckEditorBase implements NewConstants {
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
         bottom.removeCard(card);
-        if (!isConstructed) {
+        if (getGameType().isLimited()) {
             top.addCard(card);
         }
+        
+        customMenu.notifyDeckChange();
     }
-
-    // refresh Gui from deck, Gui shows the cards in the deck
-    /**
-     * <p>
-     * refreshGui.
-     * </p>
-     */
-    @SuppressWarnings("unused")
-    // refreshGui
-    private void refreshGui() {
-        Deck deck = Constant.Runtime.HumanDeck[0];
-        if (deck == null) // this is just a patch, i know
-            deck = new Deck(Constant.Runtime.GameType[0]);
-
-        bottom.setDeck(deck.getMain());
-
-        if (deck.isSealed() || deck.isDraft()) {
-            top.setDeck(deck.getSideboard()); // add sideboard to GUI
-        } else {
-            top.setDeck(CardDb.instance().getAllUniqueCards());
-        }
-    }
-
 }

@@ -9,6 +9,7 @@ import forge.Constant;
 import forge.MyRandom;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
+import forge.game.GameType;
 
 import java.util.*;
 
@@ -295,7 +296,7 @@ public class BoosterDraftAI {
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck buildDeck(CardList dList, DeckColors pClrs) {
-        Deck out = new Deck(Constant.GameType.Draft);
+        Deck out = new Deck(GameType.Draft);
         CardList outList = new CardList();
         int cardsNeeded = 22;
         int landsNeeded = 18;
@@ -496,7 +497,7 @@ public class BoosterDraftAI {
 
 /*  private Deck getDeck(CardList list)
   {
-    Deck out = new Deck(Constant.GameType.Draft);
+    Deck out = new Deck(GameType.Draft);
     for(int i = 0; i < list.size(); i++)
       out.addMain(list.get(i).getName());
 

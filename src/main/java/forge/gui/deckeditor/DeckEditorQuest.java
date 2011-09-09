@@ -7,6 +7,7 @@ import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
@@ -26,8 +27,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-
 import net.slightlymagic.maxmtg.Predicate;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -90,7 +89,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
                 && questData.getDeckNames().contains(Constant.Runtime.HumanDeck[0].getName())) {
             deck = questData.getDeck(Constant.Runtime.HumanDeck[0].getName());
         } else {
-            deck = new Deck(Constant.GameType.Sealed);
+            deck = new Deck(GameType.Sealed);
             deck.setName("");
         }
 
@@ -105,7 +104,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         cardpool.removeAll(bottomPool);
 
         // show cards, makes this user friendly, lol, well may, ha
-        setDecks(cardpool, bottomPool);
+        setDeck(cardpool, bottomPool, GameType.Quest);
 
         // this affects the card pool
         top.sort(4, true);// sort by type
@@ -152,6 +151,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     } // setupAndDisplay()
 
     public DeckEditorQuest(QuestData questData2) {
+        super(GameType.Quest);
         questData = questData2;
         try {
             filterBoxes = new FilterCheckBoxes(false);

@@ -2,10 +2,7 @@ package forge;
 
 
 import forge.deck.Deck;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import forge.game.GameType;
 
 
 /**
@@ -19,11 +16,11 @@ public interface Constant {
     public static final String ProgramName = "Forge - http://cardforge.org";
 
     //used to pass information between the GUI screens
-    public interface Runtime {
+    public abstract class Runtime {
         public static final Deck[] HumanDeck = new Deck[1];
         public static final Deck[] ComputerDeck = new Deck[1];
-        public static final String[] GameType = new String[1];
-        
+        public static GameType gameType = GameType.Constructed;
+
         public static final boolean[] Smooth = new boolean[1];
         public static final boolean[] Mill = new boolean[1];
         public static final boolean[] DevMode = new boolean[1];    // one for normal mode one for quest mode
@@ -38,14 +35,6 @@ public interface Constant {
 
         public static final int[] stackSize = new int[1];
         public static final int[] stackOffset = new int[1];
-    }
-
-    public interface GameType {
-        public static final String Constructed = "constructed";
-        public static final String Sealed = "sealed";
-        public static final String Draft = "draft";
-        public static final List<String> GameTypes = Collections.unmodifiableList(Arrays.asList(Constructed,
-                Sealed, Draft));
     }
 
     //public interface IO {

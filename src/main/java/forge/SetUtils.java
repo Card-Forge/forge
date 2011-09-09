@@ -9,8 +9,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.slightlymagic.maxmtg.Predicate;
-
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.game.GameFormat;

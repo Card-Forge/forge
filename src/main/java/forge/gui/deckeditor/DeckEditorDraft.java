@@ -10,6 +10,7 @@ import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
@@ -106,8 +107,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         this.setResizable(false);
         
         top.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
+            @Override public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == ' ') { jButton1_actionPerformed(null); }
             }
         });
@@ -115,6 +115,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
     }
 
     public DeckEditorDraft() {
+        super(GameType.Draft);
         try {
             top = new TableWithCards("Choose one card", false);
             bottom = new TableWithCards("Previously picked cards", true);
@@ -217,7 +218,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck getPlayersDeck() {
-        Deck deck = new Deck(Constant.GameType.Draft);
+        Deck deck = new Deck(GameType.Draft);
         Constant.Runtime.HumanDeck[0] = deck;
 
         //add sideboard to deck
@@ -265,7 +266,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         deckManager.addDraftDeck(all);
 
         //write file
-        deckManager.close();
+        DeckManager.writeDraftDecks(all);
 
         //close and open next screen
         dispose();

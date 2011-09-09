@@ -1,10 +1,12 @@
 package forge.deck;
 
 
-import forge.Constant;
 import forge.PlayerType;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
+import forge.game.GameType;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 import java.io.*;
 import java.util.*;
@@ -13,12 +15,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 
 
 //reads and writeDeck Deck objects
@@ -40,6 +42,18 @@ public class DeckManager {
     private static FilenameFilter DCKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             return name.endsWith(".dck");
+        }
+    };
+    
+    public static final FileFilter dckFilter = new FileFilter() {
+        @Override
+        public boolean accept(File f) {
+            return f.getName().endsWith(".dck") || f.isDirectory();
+        }
+
+        @Override
+        public String getDescription() {
+            return "Simple Deck File .dck";
         }
     };
 
@@ -119,7 +133,7 @@ public class DeckManager {
      * @param deck a {@link forge.deck.Deck} object.
      */
     public void addDeck(Deck deck) {
-        if (deck.getDeckType().equals(Constant.GameType.Draft)) {
+        if (deck.getDeckType().equals(GameType.Draft)) {
             throw new RuntimeException(
                     "DeckManager : addDeck() error, deck type is Draft");
         }
@@ -174,6 +188,9 @@ public class DeckManager {
         }
 
         draftMap.remove(deckName);
+        // delete from disk as well
+        File f = makeFileName(deckName, GameType.Draft);
+        f.delete();
     }
 
     /**
@@ -183,37 +200,41 @@ public class DeckManager {
      */
     private void checkDraftDeck(Deck[] deck) {
         if (deck == null || deck.length != 8 || deck[0].getName().equals("")
-                || (!deck[0].getDeckType().equals(Constant.GameType.Draft))) {
+                || (!deck[0].getDeckType().equals(GameType.Draft))) {
             throw new RuntimeException("DeckManager : checkDraftDeck() error, invalid deck");
         }
     }
 
 
-    /**
-     * <p>getDecks.</p>
-     *
-     * @return a {@link java.util.Collection} object.
-     */
     public Collection<Deck> getDecks() {
         return deckMap.values();
     }
 
-    /**
-     * <p>getDraftDecks.</p>
-     *
-     * @return a {@link java.util.Map} object.
-     */
+
     public Map<String, Deck[]> getDraftDecks() {
         return new HashMap<String, Deck[]>(draftMap);
     }
+    
 
-    /**
-     * <p>close.</p>
-     */
-    public void close() {
-        writeAllDecks();
-    }
+    public ArrayList<String> getDeckNames(final GameType deckType) {
+        ArrayList<String> list = new ArrayList<String>();
 
+        //only get decks according to the OldGuiNewGame screen option
+        if (deckType.equals(GameType.Draft)) {
+            for (String s : getDraftDecks().keySet()) {
+                list.add(s);
+            }
+        } else {
+            for (Deck deck : getDecks()) {
+                if (deckType.equals(deck.getDeckType())) {
+                    list.add(deck.toString());
+                }
+            }
+        }
+
+        Collections.sort(list);
+        return list;
+    }    
 
     /**
      * <p>readAllDecks.</p>
@@ -305,7 +326,7 @@ public class DeckManager {
             } else if (COMMENT.equalsIgnoreCase(field)) {
                 d.setComment(linedata[1]);
             } else if (DECK_TYPE.equalsIgnoreCase(field)) {
-                d.setDeckType(linedata[1]);
+                d.setDeckType(GameType.smartValueOf(linedata[1]));
             } else if (PLAYER.equalsIgnoreCase(field)) {
                 if ("human".equalsIgnoreCase(linedata[1])) {
                     d.setPlayerType(PlayerType.HUMAN);
@@ -344,7 +365,7 @@ public class DeckManager {
         }
 
         //readDeck deck type
-        String deckType = iterator.next();
+        GameType deckType = GameType.smartValueOf(iterator.next());
 
         Deck d = new Deck();
         d.setName(name);
@@ -404,61 +425,52 @@ public class DeckManager {
         return result;
     }
 
-    /**
-     * <p>deriveFileName.</p>
-     *
-     * @param deckName a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private String deriveFileName(String deckName) {
+    private static String deriveFileName(String deckName) {
         //skips all but the listed characters
         return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
+    }
+
+    //only accepts numbers, letters or dashes up to 20 characters in length
+    public static String cleanDeckName(String in)
+    {
+        char[] c = in.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < c.length && i < 20; i++) {
+            if (Character.isLetterOrDigit(c[i]) || c[i] == '-') {
+                sb.append(c[i]);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static File makeFileName(String deckName, GameType deckType)
+    {
+        File path = ForgeProps.getFile(NewConstants.NEW_DECKS);
+        if (deckType == GameType.Draft)
+            return new File(path, deriveFileName(deckName) + ".bdk");
+        else
+            return new File(path, deriveFileName(deckName) + ".dck");
+    }
+    
+    public static File makeFileName(Deck deck)
+    {
+        return makeFileName(deck.getName(), deck.getDeckType());
     }
 
     /**
      * <p>writeAllDecks.</p>
      */
-    public void writeAllDecks() {
+    public static void writeDraftDecks(Deck[] drafts) {
         try {
-            //store the files that do exist
-            List<File> files = new ArrayList<File>();
-            files.addAll(asList(deckDir.listFiles(DCKFileFilter)));
-
-            //save the files and remove them from the list
-            for (Deck deck : deckMap.values()) {
-                File f = new File(deckDir, deriveFileName(deck.getName()) + ".dck");
-                files.remove(f);
-                BufferedWriter out = new BufferedWriter(new FileWriter(f));
-                writeDeck(deck, out);
+            File f = makeFileName(drafts[0]);
+            f.mkdir();
+            for (int i = 0; i < drafts.length; i++) {
+                BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
+                writeDeck(drafts[i], out);
                 out.close();
             }
-            //delete the files that were not written out: the decks that were deleted
-            for (File file : files) {
-                file.delete();
-            }
 
-            //store the files that do exist
-            files.clear();
-            files.addAll(asList(deckDir.listFiles(BDKFileFilter)));
 
-            //save the files and remove them from the list
-            for (Entry<String, Deck[]> e : draftMap.entrySet()) {
-                File f = new File(deckDir, deriveFileName(e.getValue()[0].getName()) + ".bdk");
-                f.mkdir();
-                for (int i = 0; i < e.getValue().length; i++) {
-                    BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
-                    writeDeck(e.getValue()[i], out);
-                    out.close();
-                }
-            }
-            /*
-            //delete the files that were not written out: the decks that were deleted
-            for(File file:files) {
-                for(int i = 0; i < 8; i++)
-                    new File(file, i + ".dck").delete();
-                file.delete();
-            }
-            */
         } catch (IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
@@ -473,10 +485,10 @@ public class DeckManager {
      * @throws java.io.IOException if any.
      */
     private static void writeDeck(final Deck d, final BufferedWriter out) throws IOException {
-        out.write("[metadata]\n");
+        out.write(format("[metadata]%n"));
 
         out.write(format("%s=%s%n", NAME, d.getName().replaceAll("\n", "")));
-        out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType().replaceAll("\n", "")));
+        out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType()));
         // these are optional
         if (d.getComment() != null) { out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", ""))); }
         if (d.getPlayerType() != null) { out.write(format("%s=%s%n", PLAYER, d.getPlayerType())); }
@@ -491,26 +503,6 @@ public class DeckManager {
         }
     }
 
-    /**
-     * <p>count.</p>
-     *
-     * @param src a {@link java.util.List} object.
-     * @return a {@link java.util.Map} object.
-     */
-    /*
-    private static Map<String, Integer> count(List<String> src) {
-        Map<String, Integer> result = new HashMap<String, Integer>();
-        for (String s : src) {
-            Integer dstValue = result.get(s);
-            if (dstValue == null) {
-                result.put(s, 1);
-            } else {
-                result.put(s, dstValue + 1);
-            }
-        }
-        return result;
-    }
-    */
 
     /**
      * <p>writeDeck.</p>
@@ -522,7 +514,6 @@ public class DeckManager {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writeDeck(d, writer);
-
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
