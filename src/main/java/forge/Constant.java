@@ -132,22 +132,22 @@ public interface Constant {
     }
 
     public interface CardTypes {
-    	boolean[] loaded = {false}; 
-    	Constant_StringArrayList[] cardTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] superTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] basicTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] landTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] creatureTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] instantTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] sorceryTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] enchantmentTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] artifactTypes = new Constant_StringArrayList[1];
-    	Constant_StringArrayList[] walkerTypes = new Constant_StringArrayList[1];
+        boolean[] loaded = {false}; 
+        Constant_StringArrayList[] cardTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] superTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] basicTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] landTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] creatureTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] instantTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] sorceryTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] enchantmentTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] artifactTypes = new Constant_StringArrayList[1];
+        Constant_StringArrayList[] walkerTypes = new Constant_StringArrayList[1];
     }
 
     public interface Keywords {
-    	boolean[] loaded = {false};
-    	Constant_StringArrayList[] NonStackingList = new Constant_StringArrayList[1];
+        boolean[] loaded = {false};
+        Constant_StringArrayList[] NonStackingList = new Constant_StringArrayList[1];
     }
 
 

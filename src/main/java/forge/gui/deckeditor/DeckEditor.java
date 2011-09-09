@@ -222,7 +222,7 @@ public final class DeckEditor extends DeckEditorBase {
     {
         boolean keepRecievedCards = gt.isLimited() || topParam != null;  
         // if constructed, can add the all cards above
-        CardPoolView top = keepRecievedCards ? topParam : new CardPool( CardDb.instance().getAllCards() );
+        CardPoolView top = keepRecievedCards ? topParam : new CardPool(CardDb.instance().getAllCards());
 
         super.setDeck(top, bottomParam, gt);
         

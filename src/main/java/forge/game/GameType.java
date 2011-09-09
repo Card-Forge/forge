@@ -1,8 +1,7 @@
 package forge.game;
 
 /** 
- * TODO: Write javadoc for this type.
- *
+ * GameType is an enum to determine the type of current game. :)
  */
 public enum GameType {
     Constructed(false),
@@ -17,10 +16,10 @@ public enum GameType {
         bLimited = isLimited;
     }
 
-    public static GameType smartValueOf(String value){
+    public static GameType smartValueOf(final String value) {
         String valToCompate = value.trim();
         for (GameType v : GameType.values()) {
-            if ( v.name().compareToIgnoreCase(valToCompate) == 0 ) {
+            if (v.name().compareToIgnoreCase(valToCompate) == 0) {
                 return v;
             }
         }

@@ -9768,6 +9768,7 @@ src/main/java/forge/card/trigger/Trigger_Unequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/Trigger_Untaps.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/Deck.java svneol=native#text/plain
+src/main/java/forge/deck/DeckGeneration.java -text
 src/main/java/forge/deck/DeckManager.java svneol=native#text/plain
 src/main/java/forge/deck/DownloadDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain

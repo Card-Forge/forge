@@ -35,7 +35,7 @@ import javax.swing.SwingUtilities;
  * @author Forge
  * @version $Id$
  */
-public class DeckEditorMenu extends JMenuBar implements NewConstants {
+public final class DeckEditorMenu extends JMenuBar implements NewConstants {
 
     /** Constant <code>serialVersionUID=-4037993759604768755L</code> */
     private static final long serialVersionUID = -4037993759604768755L;
@@ -44,7 +44,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     private static File previousDirectory = null;
 
     private DeckManager deckManager;
-    
+
     private boolean isDeckSaved = true;
 
     private String currentDeckName;
@@ -130,8 +130,8 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     } //setupSortMenu()
 
 
-    public void newConstructed(boolean careAboutOldDeck) {
-        if (careAboutOldDeck && !canLeaveCurrentDeck()) return;
+    public void newConstructed(final boolean careAboutOldDeck) {
+        if (careAboutOldDeck && !canLeaveCurrentDeck()) { return; }
 
         setDeckData("", true);
 
@@ -139,7 +139,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     }
 
     private void newRandomConstructed() {
-        if (!canLeaveCurrentDeck()) return;
+        if (!canLeaveCurrentDeck()) { return; }
 
         setDeckData("", false);
 
@@ -159,14 +159,14 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     }
 
     private void newGenerateConstructed() {
-        if (!canLeaveCurrentDeck()) return;
+        if (!canLeaveCurrentDeck()) { return; }
 
         setDeckData("", false);
 
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
 
         CardPool generated = new CardPool();
-        for (Card c : gen.generateDeck()) { generated.add( CardDb.instance().getCard(c)); }
+        for (Card c : gen.generateDeck()) { generated.add(CardDb.instance().getCard(c)); }
         deckDisplay.setDeck(null, generated, GameType.Constructed);
     }
 
@@ -296,7 +296,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     }
 
     private void saveAs() {
-        String name = getUserInput_GetDeckName();
+        String name = getDeckNameFromDialog();
 
         if (name.equals("")) { return; }
         setDeckData(name, true);
@@ -312,8 +312,7 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
             all[0] = deck;
             deckManager.addDraftDeck(all);
             DeckManager.writeDraftDecks(all);
-        } else//constructed and sealed
-        {
+        } else {//constructed and sealed
             deckManager.addDeck(deck);
             DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
         }
@@ -345,10 +344,10 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
     }
 
     private boolean canLeaveCurrentDeck() {
-        if (isSaved()) return true;
+        if (isSaved()) { return true; }
         String message = String.format("Do you wish to save changes you made to your current deck '%s'?", currentDeckName);
         int choice = JOptionPane.showConfirmDialog((Component) deckDisplay, message,
-                "You have unsaved changes in your deck", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            "You have unsaved changes in your deck", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (JOptionPane.CANCEL_OPTION == choice) { return false; }
         if (JOptionPane.NO_OPTION == choice) { return true; }
 
@@ -357,43 +356,42 @@ public class DeckEditorMenu extends JMenuBar implements NewConstants {
         DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
         return true;
     }
-    
-    private Deck getDeck()
-    {
+
+    private Deck getDeck() {
         Deck deck = deckDisplay.getDeck();
         deck.setName(currentDeckName);
         return deck;
     }
 
-    private void setDeckData(final String deckName, final boolean in_isDeckSaved) {
+    private void setDeckData(final String deckName, final boolean inDeckSaved) {
         currentDeckName = deckName;
-        isDeckSaved = in_isDeckSaved;
+        isDeckSaved = inDeckSaved;
 
         deckDisplay.setTitle("Deck Editor : " + currentDeckName);
     }
 
-    public final String getDeckName() { return currentDeckName; } 
-    public final boolean isSaved() { return isDeckSaved; }
+    public String getDeckName() { return currentDeckName; }
+    public boolean isSaved() { return isDeckSaved; }
 
     /**
      * <p>getUserInput_GetDeckName.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    private String getUserInput_GetDeckName() {
+    private String getDeckNameFromDialog() {
         Object o = JOptionPane.showInputDialog(null, "Save As", "Deck Name", JOptionPane.OK_CANCEL_OPTION);
 
         if (o == null) { return ""; }
 
         String deckName = DeckManager.cleanDeckName(o.toString());
-        boolean isDraft = deckDisplay.getGameType() == GameType.Draft; 
+        boolean isDraft = deckDisplay.getGameType() == GameType.Draft;
         boolean isUniqueName = isDraft ? deckManager.isUniqueDraft(deckName) : deckManager.isUnique(deckName);
         boolean isGoodName = isUniqueName && StringUtils.isNotBlank(deckName);
 
         if (isGoodName) { return deckName; }
 
         JOptionPane.showMessageDialog(null, "Please pick another deck name, another deck currently has that name.");
-        return getUserInput_GetDeckName();
+        return getDeckNameFromDialog();
     }
 
     private String getUserInput_OpenDeck(final GameType deckType) {

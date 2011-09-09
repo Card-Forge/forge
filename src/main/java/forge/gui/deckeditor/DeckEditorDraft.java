@@ -19,6 +19,9 @@ import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 
+import org.apache.axis.utils.ArrayUtil;
+import org.apache.commons.lang3.ArrayUtils;
+
 import net.slightlymagic.maxmtg.Predicate;
 
 import java.awt.*;
@@ -55,7 +58,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
         setup();
         showChoices(boosterDraft.nextChoice());
-        bottom.setDeck((CardPoolView)null);
+        bottom.setDeck((CardPoolView) null);
         
         top.sort(1, true);
         bottom.sort(1, true);
@@ -166,9 +169,9 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
-    void jButton1_actionPerformed(ActionEvent e) {
+    void jButton1_actionPerformed(final ActionEvent e) {
         CardPrinted card = top.getSelectedCard();
-        if ( null == card ) { return; } 
+        if (null == card) { return; }
 
         bottom.addCard(card);
 
@@ -181,8 +184,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
                 if (BoosterDraft.draftPicks.size() > 1) {
                     ArrayList<String> outDraftData = new ArrayList<String>();
 
-                    String keys[] = {""};
-                    keys = BoosterDraft.draftPicks.keySet().toArray(keys);
+                    String[] keys = BoosterDraft.draftPicks.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
 
                     for (int i = 0; i < keys.length; i++) {
                         outDraftData.add(keys[i] + "|" + BoosterDraft.draftPicks.get(keys[i]));
