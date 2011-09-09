@@ -2769,7 +2769,8 @@ public class CardFactory_Creatures {
         else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
                 || cardName.equals("Quicksilver Gargantuan")
                 || cardName.equals("Jwari Shapeshifter")
-                || cardName.equals("Phyrexian Metamorph")) {
+                || cardName.equals("Phyrexian Metamorph")
+                || cardName.equals("Phantasmal Image")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
             final Card[] cloned = new Card[1];
@@ -2817,6 +2818,7 @@ public class CardFactory_Creatures {
                         cloned[0].setOwner(card.getController());
                         cloned[0].addController(card.getController());
                         if (cardName.equals("Phyrexian Metamorph")) cloned[0].addType("Artifact");
+                        if (cardName.equals("Phantasmal Image")) cloned[0].addType("Illusion");
                         cloned[0].setCloneOrigin(card);
                         cloned[0].addLeavesPlayCommand(leaves);
                         cloned[0].setCloneLeavesPlayCommand(leaves);
@@ -2828,7 +2830,30 @@ public class CardFactory_Creatures {
                         } else if (cardName.equals("Quicksilver Gargantuan")) {
                             cloned[0].setBaseDefense(7);
                             cloned[0].setBaseAttack(7);
+                        } else if (cardName.equals("Phantasmal Image")) {
+                            StringBuilder trigScript = new StringBuilder("Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ ");
+                            StringBuilder svarName = new StringBuilder("TrigSac");
+                            //Couple of hoops to jump through to make sure no svar is overwritten.
+                            int iter = 0;
+                            while(cloned[0].getSVar(svarName.toString()) != "")
+                            {
+                                iter++;
+                                if(svarName.length() == 7)
+                                {
+                                    svarName.append(iter);
+                                }
+                                else
+                                {
+                                    svarName.delete(8, svarName.length());
+                                    svarName.append(iter);
+                                }
+                            }
+                            trigScript.append(svarName.toString());
+                            trigScript.append(" | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.");
+                            cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),card,true));
+                            cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
                         }
+                        
 
                         //Slight hack in case the cloner copies a card with triggers
                         for (Trigger t : cloned[0].getTriggers()) {

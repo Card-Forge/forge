@@ -5575,6 +5575,7 @@ res/cardsfolder/p/phantasmal_bear.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_dragon.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_fiend.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_forces.txt svneol=native#text/plain
+res/cardsfolder/p/phantasmal_image.txt -text
 res/cardsfolder/p/phantasmal_terrain.txt svneol=native#text/plain
 res/cardsfolder/p/phantatog.txt svneol=native#text/plain
 res/cardsfolder/p/phantom_beast.txt svneol=native#text/plain
