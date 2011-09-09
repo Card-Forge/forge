@@ -2,9 +2,11 @@ package forge.deck;
 
 
 import forge.PlayerType;
+import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.gui.deckeditor.TableSorter;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -494,11 +496,17 @@ public class DeckManager {
         if (d.getPlayerType() != null) { out.write(format("%s=%s%n", PLAYER, d.getPlayerType())); }
 
         out.write(format("%s%n", "[main]"));
-        for (Entry<CardPrinted, Integer> e : d.getMain()) {
-            out.write(format("%d %s|%s%n", e.getValue(), e.getKey().getName(), e.getKey().getSet()));
-        }
+        writeCardPool(d.getMain(), out);
+
         out.write(format("%s%n", "[sideboard]"));
-        for (Entry<CardPrinted, Integer> e : d.getSideboard()) {
+        writeCardPool(d.getSideboard(), out);
+    }
+
+    private static void writeCardPool(final CardPoolView pool, final BufferedWriter out) throws IOException
+    {
+        List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
+        Collections.sort(main2sort, TableSorter.byNameThenSet);
+        for (Entry<CardPrinted, Integer> e : main2sort) {
             out.write(format("%d %s|%s%n", e.getValue(), e.getKey().getName(), e.getKey().getSet()));
         }
     }

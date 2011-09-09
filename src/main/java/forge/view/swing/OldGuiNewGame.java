@@ -7,7 +7,6 @@ import forge.card.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
-import forge.deck.generate.*;
 import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
