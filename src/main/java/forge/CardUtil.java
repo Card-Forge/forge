@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import net.slightlymagic.maxmtg.Predicate;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -505,7 +507,14 @@ public final class CardUtil {
      */
     public static String buildFilename(final Card card) {
         boolean token = card.isToken() && !card.isCopiedToken();
-        return buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), token);
+
+        final String set = card.getCurSetCode();
+        Predicate<SetInfo> findSetInfo = new Predicate<SetInfo>() {
+            @Override public boolean isTrue(final SetInfo subject) { return subject.Code.equals(set); }
+        };
+        SetInfo neededSet = findSetInfo.first(card.getSets());
+        int cntPictures = neededSet == null ? 1 : neededSet.PicCount;
+        return buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 
     /**
@@ -515,14 +524,15 @@ public final class CardUtil {
      * @return the filename
      */
     public static String buildFilename(final CardPrinted card) {
-        return buildFilename(card.getName(), card.getSet(), card.getArtIndex(), false);
+        int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
+        return buildFilename(card.getName(), card.getSet(), card.getArtIndex(), maxIndex, false);
     }
 
     private static String buildFilename(final String cardName, final String setName,
-            final int artIndex, final boolean isToken)
+            final int artIndex, final int artIndexMax, final boolean isToken)
     {
         File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
-        String nn = artIndex > 0 ? Integer.toString(artIndex) : "";
+        String nn = artIndexMax > 1 ? Integer.toString(artIndex+1) : "";
         String cleanCardName = GuiDisplayUtil.cleanString(cardName);
 
         File f = null;

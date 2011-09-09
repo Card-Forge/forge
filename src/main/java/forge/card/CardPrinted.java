@@ -110,7 +110,7 @@ public final class CardPrinted implements Comparable<CardPrinted> {
         Card c = AllZone.getCardFactory().getCard(name, null);
         if (c != null) {
             c.setCurSetCode(getSet());
-            c.setRandomPicture(artIndex);
+            c.setRandomPicture(artIndex+1);
             c.setImageFilename(getImageFilename());
         }
         // else throw "Unsupported card";
