@@ -46,9 +46,13 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         if (AllZone.getStack().isSplitSecondOnStack()) return false;
 
         final Card c = getSourceCard();
-        if (c.isFaceDown() && isIntrinsic())    // Intrinsic abilities can't be activated by face down cards
+        if (c.isFaceDown() && isIntrinsic()) {   // Intrinsic abilities can't be activated by face down cards
             return false;
-        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.")) return false;
+        }
+        
+        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || isSuppressed()) {
+            return false;
+        }
 
         CardList pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
         pithing.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
@@ -59,7 +63,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
             }
         });
 
-        if (pithing.size() != 0) return false;
+        if (pithing.size() != 0 && !(this instanceof Ability_Mana)) return false;
 
         if (!(getRestrictions().canPlay(c, this)))
             return false;

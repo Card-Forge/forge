@@ -249,6 +249,14 @@ public class StaticAbility_Continuous {
                     trigger.setTemporarilySuppressed(true);
                 }
             }
+            
+            // remove activated abilities
+            if (params.containsKey("RemoveAllAbilities")) {
+                ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
+                for (SpellAbility ab : abilities) {
+                    ab.setTemporarilySuppressed(true);
+                }
+            }
             //affectedCard.updateObservers();
         }
     }

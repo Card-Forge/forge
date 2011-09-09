@@ -138,6 +138,14 @@ public class StaticEffects {
                     }
                 }
             }
+            
+            //remove abilities
+            if (params.containsKey("RemoveAllAbilities")) {
+                SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+                for (SpellAbility s : spellAbility) {
+                    s.setTemporarilySuppressed(false);
+                }
+            }
 
             //remove Types
             if (params.containsKey("AddType") || params.containsKey("RemoveType")) {

@@ -48,6 +48,7 @@ public abstract class SpellAbility {
     private boolean trigger = false;
     private int sourceTrigger = -1;
     private boolean mandatory = false;
+    private boolean temporarilySuppressed = false;
 
     private boolean tapAbility;
     private boolean untapAbility;
@@ -865,6 +866,11 @@ public abstract class SpellAbility {
     /** {@inheritDoc} */
     @Override
     public String toString() {
+        
+        if(isSuppressed()) {
+            return "";
+        }
+        
         StringBuilder sb = new StringBuilder();
         SpellAbility node = this;
 
@@ -1214,6 +1220,14 @@ public abstract class SpellAbility {
      */
     public boolean isWrapper() {
     	return false;
+    }
+    
+    public void setTemporarilySuppressed(boolean supp) {
+        temporarilySuppressed = supp;
+    }
+    
+    public boolean isSuppressed() {
+        return (temporarilySuppressed);
     }
 
 }

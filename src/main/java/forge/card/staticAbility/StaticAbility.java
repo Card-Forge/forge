@@ -82,7 +82,8 @@ public class StaticAbility {
             return 5;
         
         if(mapParams.containsKey("AddKeyword") || mapParams.containsKey("AddAbility")
-                || mapParams.containsKey("AddTrigger") || mapParams.containsKey("RemoveTriggers"))
+                || mapParams.containsKey("AddTrigger") || mapParams.containsKey("RemoveTriggers")
+                || mapParams.containsKey("RemoveAllAbilities"))
             return 6;
         
     	if(mapParams.containsKey("CharacteristicDefining"))
