@@ -328,8 +328,8 @@ public class TreeProperties implements Iterable<PropertyElement> {
         checkQueryKey(key);
         //first, try the key in the current file, as if there were no slash
         //No subpath - either directly in the properties...
-        Object result;
-        if ((result = properties.get(key + suffix)) != null) {
+        Object result = properties.get(key + suffix);
+        if (result != null) {
             return result;
         }
 
@@ -339,7 +339,8 @@ public class TreeProperties implements Iterable<PropertyElement> {
         for (Entry<String, Object> entry : properties.entrySet()) {
             if (entry.getKey().endsWith("--" + TRANSPARENT)) {
                 TreeProperties p = (TreeProperties) entry.getValue();
-                if ((result = p.getProperty(key, suffix, false)) != null) {
+                result = p.getProperty(key, suffix, false);
+                if (result != null) {
                     return result;
                 }
             }
@@ -357,7 +358,8 @@ public class TreeProperties implements Iterable<PropertyElement> {
             if (p == null) {
                 continue;
             }
-            if ((result = p.getProperty(second, suffix, false)) != null) {
+            result = p.getProperty(second, suffix, false);
+            if (result != null) {
                 return result;
             }
         }
