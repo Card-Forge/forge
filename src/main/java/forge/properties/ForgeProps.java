@@ -7,7 +7,7 @@ package forge.properties;
 
 
 import forge.error.ErrorViewer;
-import treeProperties.TreeProperties;
+import tree.properties.TreeProperties;
 
 import java.io.File;
 import java.io.IOException;
