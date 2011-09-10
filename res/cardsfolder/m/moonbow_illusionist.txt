@@ -1,0 +1,12 @@
+Name:Moonbow Illusionist
+ManaCost:2 U
+Types:Creature Moonfolk Wizard
+Text:no text
+PT:2/1
+K:Flying
+A:AB$ ChooseType | Cost$ 2 Return <1/Land> | Defined$ You | Type$ Basic Land | SubAbility$ SVar=DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | OverwriteAbilities$ True | OverwriteTriggers$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moonbow_illusionist.jpg
+End

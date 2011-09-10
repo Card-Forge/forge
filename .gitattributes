@@ -2089,6 +2089,7 @@ res/cardsfolder/d/dream_cache.txt svneol=native#text/plain
 res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
 res/cardsfolder/d/dream_prowler.txt svneol=native#text/plain
 res/cardsfolder/d/dream_stalker.txt svneol=native#text/plain
+res/cardsfolder/d/dream_thrush.txt -text
 res/cardsfolder/d/dreamborn_muse.txt svneol=native#text/plain
 res/cardsfolder/d/dreamcatcher.txt svneol=native#text/plain
 res/cardsfolder/d/dreams_grip.txt svneol=native#text/plain
@@ -3339,6 +3340,7 @@ res/cardsfolder/g/gristleback.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_battlemage.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_charm.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_grimblade.txt svneol=native#text/plain
+res/cardsfolder/g/grixis_illusionist.txt -text
 res/cardsfolder/g/grixis_panorama.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_slavedriver.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_sojourners.txt svneol=native#text/plain
@@ -3937,6 +3939,7 @@ res/cardsfolder/j/jhovall_queen.txt svneol=native#text/plain
 res/cardsfolder/j/jhovall_rider.txt svneol=native#text/plain
 res/cardsfolder/j/jilt.txt -text
 res/cardsfolder/j/jin_gitaxias_core_augur.txt svneol=native#text/plain
+res/cardsfolder/j/jinx.txt -text
 res/cardsfolder/j/jiwari_the_earth_aflame.txt svneol=native#text/plain
 res/cardsfolder/j/jodahs_avenger.txt svneol=native#text/plain
 res/cardsfolder/j/join_the_ranks.txt svneol=native#text/plain
@@ -4937,6 +4940,7 @@ res/cardsfolder/m/monstrous_carabid.txt svneol=native#text/plain
 res/cardsfolder/m/monstrous_growth.txt svneol=native#text/plain
 res/cardsfolder/m/monstrous_hound.txt svneol=native#text/plain
 res/cardsfolder/m/moon_sprite.txt svneol=native#text/plain
+res/cardsfolder/m/moonbow_illusionist.txt -text
 res/cardsfolder/m/moonglove_changeling.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_extract.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_winnower.txt svneol=native#text/plain
@@ -5050,6 +5054,7 @@ res/cardsfolder/m/myr_sire.txt svneol=native#text/plain
 res/cardsfolder/m/myr_turbine.txt svneol=native#text/plain
 res/cardsfolder/m/myrsmith.txt svneol=native#text/plain
 res/cardsfolder/m/mysteries_of_the_deep.txt svneol=native#text/plain
+res/cardsfolder/m/mystic_compass.txt -text
 res/cardsfolder/m/mystic_crusader.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_denial.txt svneol=native#text/plain
 res/cardsfolder/m/mystic_enforcer.txt svneol=native#text/plain
@@ -6093,6 +6098,7 @@ res/cardsfolder/r/redeem_the_lost.txt svneol=native#text/plain
 res/cardsfolder/r/reduce_to_dreams.txt svneol=native#text/plain
 res/cardsfolder/r/redwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/r/reef_pirates.txt svneol=native#text/plain
+res/cardsfolder/r/reef_shaman.txt -text
 res/cardsfolder/r/reflecting_pool.txt svneol=native#text/plain
 res/cardsfolder/r/reflex_sliver.txt svneol=native#text/plain
 res/cardsfolder/r/reflexes.txt svneol=native#text/plain
@@ -6570,6 +6576,7 @@ res/cardsfolder/s/sea_kings_blessing.txt svneol=native#text/plain
 res/cardsfolder/s/sea_monster.txt svneol=native#text/plain
 res/cardsfolder/s/sea_scryer.txt svneol=native#text/plain
 res/cardsfolder/s/sea_serpent.txt svneol=native#text/plain
+res/cardsfolder/s/sea_snidd.txt -text
 res/cardsfolder/s/sea_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/sea_sprite.txt svneol=native#text/plain
 res/cardsfolder/s/seachrome_coast.txt svneol=native#text/plain
@@ -6757,6 +6764,7 @@ res/cardsfolder/s/shimian_specter.txt svneol=native#text/plain
 res/cardsfolder/s/shimmer_myr.txt svneol=native#text/plain
 res/cardsfolder/s/shimmering_barrier.txt svneol=native#text/plain
 res/cardsfolder/s/shimmering_grotto.txt svneol=native#text/plain
+res/cardsfolder/s/shimmering_mirage.txt -text
 res/cardsfolder/s/shimmering_wings.txt svneol=native#text/plain
 res/cardsfolder/s/shinen_of_fears_chill.txt svneol=native#text/plain
 res/cardsfolder/s/shinen_of_lifes_roar.txt svneol=native#text/plain
@@ -7912,6 +7920,7 @@ res/cardsfolder/t/tidal_wave.txt svneol=native#text/plain
 res/cardsfolder/t/tideforce_elemental.txt svneol=native#text/plain
 res/cardsfolder/t/tidehollow_sculler.txt svneol=native#text/plain
 res/cardsfolder/t/tidehollow_strix.txt svneol=native#text/plain
+res/cardsfolder/t/tideshaper_mystic.txt -text
 res/cardsfolder/t/tidespout_tyrant.txt svneol=native#text/plain
 res/cardsfolder/t/tidewater_minion.txt svneol=native#text/plain
 res/cardsfolder/t/tidings.txt svneol=native#text/plain
@@ -8199,6 +8208,7 @@ res/cardsfolder/u/unnerve.txt svneol=native#text/plain
 res/cardsfolder/u/unquestioned_authority.txt svneol=native#text/plain
 res/cardsfolder/u/unseen_walker.txt svneol=native#text/plain
 res/cardsfolder/u/unspeakable_symbol.txt svneol=native#text/plain
+res/cardsfolder/u/unstable_frontier.txt -text
 res/cardsfolder/u/unstable_hulk.txt svneol=native#text/plain
 res/cardsfolder/u/unstable_mutation.txt svneol=native#text/plain
 res/cardsfolder/u/unstoppable_ash.txt svneol=native#text/plain

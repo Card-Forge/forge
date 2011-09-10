@@ -1,0 +1,11 @@
+Name:Grixis Illusionist
+ManaCost:U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ SVar=DBAnimate | SpellDescription$ Target land you control becomes the basic land type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | OverwriteAbilities$ True | OverwriteTriggers$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_illusionist.jpg
+End

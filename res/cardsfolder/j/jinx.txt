@@ -1,0 +1,11 @@
+Name:Jinx
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn. Draw a card at the beginning of the next turn's upkeep.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | OverwriteAbilities$ True | OverwriteTriggers$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | NextUpkeep$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jinx.jpg
+End
