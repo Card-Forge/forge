@@ -3,4 +3,5 @@ ManaCost:1 U
 Types:Creature Illusion
 Text:You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
 PT:0/0
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/72.jpg
 End
