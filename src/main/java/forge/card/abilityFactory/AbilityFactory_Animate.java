@@ -551,14 +551,14 @@ public final class AbilityFactory_Animate {
                     AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
                 }
             }
-            
+
             //suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (params.containsKey("OverwriteTriggers")) {
-                System.out.println("Suppressing triggers for: "+c);
                 ArrayList<Trigger> triggersToRemove = c.getTriggers();
                 for (Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
+                    removedTriggers.add(trigger);
                 }
             }
 
@@ -586,10 +586,9 @@ public final class AbilityFactory_Animate {
                 public void execute() {
                     doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp,
                             givesStAbs, removedAbilities, timestamp);
-                    
+
                     //give back suppressed triggers
-                    for(Trigger t : removedTriggers) {
-                        System.out.println("Unsuppressing triggers for: "+c);
+                    for (Trigger t : removedTriggers) {
                         t.setSuppressed(false);
                     }
                 }
