@@ -5122,14 +5122,13 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
 
                 final int m = Integer.parseInt(parse.substring(6));
-
+                String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
+                card.setSVar("GraftTrig", abStr);
+                
                 String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | Origin$ Any | Destination$ Battlefield";
-                trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ ";
+                trigStr += " | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ GraftTrig | TriggerDescription$ ";
                 trigStr += "Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.";
                 final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-                AbilityFactory af = new AbilityFactory();
-                String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
-                myTrigger.setOverridingAbility(af.getAbility(abStr, card));
                 card.addTrigger(myTrigger);
 
                 card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
