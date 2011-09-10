@@ -4958,6 +4958,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!dealtDamageToThisTurn.containsKey(source)) return false;
         } else if (Property.startsWith("SharesColorWith")) {
             if (!sharesColorWith(source)) return false;
+        } else if (Property.startsWith("withFlashback")) {
+            boolean fb = false;
+            if (hasStartOfUnHiddenKeyword("Flashback")) {
+                fb = true;
+            }
+            for (SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isFlashBackAbility()) {
+                    fb = true;
+                }
+            }
+            if (!fb) {
+                return false;
+            }
         } else if (Property.startsWith("with")) // ... Card keywords
         {
             if (Property.startsWith("without") && hasStartOfUnHiddenKeyword(Property.substring(7))) return false;
