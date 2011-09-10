@@ -3,6 +3,7 @@ package forge;
 import com.esotericsoftware.minlog.Log;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.card.staticAbility.StaticAbility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -144,6 +145,10 @@ public class StaticEffects {
                 SpellAbility[] spellAbility = affectedCard.getSpellAbility();
                 for (SpellAbility s : spellAbility) {
                     s.setTemporarilySuppressed(false);
+                }
+                ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
+                for (StaticAbility stA : staticAbilities) {
+                    stA.setTemporarilySuppressed(false);
                 }
             }
 

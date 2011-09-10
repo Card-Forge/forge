@@ -250,14 +250,17 @@ public class StaticAbility_Continuous {
                 }
             }
             
-            // remove activated abilities
+            // remove activated and static abilities
             if (params.containsKey("RemoveAllAbilities")) {
                 ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
                 for (SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(true);
                 }
+                ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
+                for (StaticAbility stA : staticAbilities) {
+                    stA.setTemporarilySuppressed(true);
+                }
             }
-            //affectedCard.updateObservers();
         }
     }
 

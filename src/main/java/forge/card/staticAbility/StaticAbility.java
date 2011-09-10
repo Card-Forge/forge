@@ -9,7 +9,11 @@ import java.util.Map;
 public class StaticAbility {
 
     private Card hostCard = null;
+
     private HashMap<String, String> mapParams = new HashMap<String, String>();
+    
+    protected boolean temporarilySuppressed = false;
+    protected boolean suppressed = false;
 
     /**
      * <p>getHostCard.</p>
@@ -74,6 +78,10 @@ public class StaticAbility {
     // In which layer should the ability be applied (for continuous effects only)
     public int getLayer() {
         
+        if(!mapParams.get("Mode").equals("Continuous")) {
+            return 0;
+        }
+        
         if(mapParams.containsKey("AddType") || mapParams.containsKey("RemoveType") || mapParams.containsKey("RemoveCardType")
                 || mapParams.containsKey("RemoveSubType") || mapParams.containsKey("RemoveSuperType"))
             return 4;
@@ -81,17 +89,19 @@ public class StaticAbility {
         if(mapParams.containsKey("AddColor") || mapParams.containsKey("RemoveColor") || mapParams.containsKey("SetColor"))
             return 5;
         
+        if(mapParams.containsKey("RemoveAllAbilities"))
+            return 6; //Layer 6
+        
         if(mapParams.containsKey("AddKeyword") || mapParams.containsKey("AddAbility")
-                || mapParams.containsKey("AddTrigger") || mapParams.containsKey("RemoveTriggers")
-                || mapParams.containsKey("RemoveAllAbilities"))
-            return 6;
+                || mapParams.containsKey("AddTrigger") || mapParams.containsKey("RemoveTriggers"))
+            return 7; //Layer 6 (dependent)
         
     	if(mapParams.containsKey("CharacteristicDefining"))
-    		return 7;
+    		return 8; //Layer 7a
     	
     	if(mapParams.containsKey("AddPower") || mapParams.containsKey("AddToughness")  
     			|| mapParams.containsKey("SetPower") || mapParams.containsKey("SetToughness"))
-    		return 8; // This is the collection of 7b and 7c
+    		return 9; // This is the collection of 7b and 7c
 
     	// Layer 1, 2 & 3 are not supported
     	
@@ -104,7 +114,7 @@ public class StaticAbility {
      * @return a {@link java.lang.String} object.
      */
     public String toString() {
-        if (mapParams.containsKey("Description")) {
+        if (mapParams.containsKey("Description") && !isSuppressed()) {
             return mapParams.get("Description").replace("CARDNAME", hostCard.getName());
         } else return "";
     }
@@ -130,7 +140,7 @@ public class StaticAbility {
     	if (!mapParams.get("Mode").equals(mode))
     		return;
     	
-    	if (!checkConditions())
+    	if (isSuppressed() || !checkConditions())
     		return;
     	
     	if (mode.equals("Continuous"))
@@ -194,5 +204,12 @@ public class StaticAbility {
     	return true;
     }
     
+    public void setTemporarilySuppressed(boolean supp) {
+        temporarilySuppressed = supp;
+    }
+    
+    public boolean isSuppressed() {
+        return (suppressed || temporarilySuppressed);
+    }
 
 }//end class StaticEffectFactory
