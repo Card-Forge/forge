@@ -23,7 +23,41 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
-
+- gameType is now a Enum, 
+- Deckeditors no longer save all decks on close (there may remain minor bugs)
+- Deckeditors have mostly been cleaned of usage of global variables
+- OldGuiNewGame updates deck comboboxes properly
+- Download deck from tcgplayer feature temporary removed
+- cleaned up some warnings
+- added a missing file!
+- Checkstyle changes
+- Moved deck generation code away from OldGuiNewGame
+- Added support for remembering drawn cards to Draw AF with "RememberDrawn" script key
+- added CheckSVar support to SpellAbility_Condition
+- add package-info javadoc files
+- sorting cards on save
+- removed import-related warning from OldGuiNewGame
+- fixed checkstyle
+- fixed card picture selection to correctly show cards that have several prints throughout a set
+- checkstyle
+- checkstyle
+- Added the option "RemoveAllAbilities" to continuous static abilities which will remove triggers and activated abilities (keywords and static abilities coming soon).
+- Fixed Pithing Needle affecting mana abilities.
+- Added RemoveAllAbilities to some cards.
+- fix namespace
+- fix import for tree.properties namespace
+- fixing an exception from deSerialilzation of old saves (where gametype was a string)
+- Fixed No Rest for the Wicked.
+- Cleared out the changes.txt file, is ready for new material.
+- Fixed the issue of changing zones messing up triggers.
+- Fixed Walker of Secret Ways.
+- Fixed Perish the Thought.
+- Fixed the Graft keyword.
+- ran setinfo script.
+- Simplified the code for the Storm keyword.
+- Continuous static abilities with "RemoveAllAbilities" will now also remove static abilities.
+- Improved the layering of continuous static effects.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
