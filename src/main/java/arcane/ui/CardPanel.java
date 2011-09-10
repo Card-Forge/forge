@@ -53,9 +53,6 @@ public class CardPanel extends JPanel implements CardContainer {
     /** Constant <code>rotCenterToBottomCorner=0.7071067811865475244008443621048f</code> */
     private static final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
 
-    /** Constant <code>beenHere=false</code> */
-    private static boolean beenHere = false;
-
     public Card gameCard;
     public CardPanel attachedToPanel;
     public List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
@@ -271,22 +268,23 @@ public class CardPanel extends JPanel implements CardContainer {
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
         
-        if (showCastingCost && !isAnimationPanel && cardWidth < 200) {
+        boolean canDrawOverCard = showCastingCost && !isAnimationPanel && cardWidth < 200;
+        if (canDrawOverCard) {
             int width = ManaSymbols.getWidth(gameCard.getManaCost());
             ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
-            beenHere = true;
         }
 
         //int yOff = (cardHeight/4) + 2;
-        if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isAttacking())
+        if (canDrawOverCard && getCard().isAttacking()) {
             ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
-        else if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isBlocking())
+        } else if (canDrawOverCard && getCard().isBlocking()) {
             ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
+        }
 
-        if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard()))
+        if (canDrawOverCard && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard()))
             ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
 
-        if (beenHere && getCard() != null) {
+        if (canDrawOverCard && getCard() != null) {
             if (this.gameCard.getFoil() > 0) {
             	String fl = String.format("foil%02d", getCard().getFoil());
             	int z = Math.round(cardWidth * BLACK_BORDER_SIZE);

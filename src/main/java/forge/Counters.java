@@ -50,7 +50,7 @@ public enum Counters {
     INTERVENTION(),
     JAVELIN(),
     KI(),
-    LEVEL(),
+    LEVEL("Level"),
     LORE(),
     LOYALTY(),
     LUCK(),
