@@ -5111,7 +5111,7 @@ public class CardFactoryUtil {
 
             }
 
-        } // while shouldModular
+        } // Modular
 
         /*
          * WARNING: must keep this keyword processing before etbCounter keyword processing.
@@ -5134,7 +5134,7 @@ public class CardFactoryUtil {
                 card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
             }
 
-        } // while shouldModular
+        }
 
         int etbCounter = hasKeyword(card, "etbCounter"); // etbCounter:CounterType:CounterAmount:Condition:Description
         // enters the battlefield with CounterAmount of CounterType
@@ -5212,18 +5212,12 @@ public class CardFactoryUtil {
 
         int storm = card.getKeywordAmount("Storm");
         for (int i = 0; i < storm; i++) {
-            StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self | Execute$ Storm");
-            trigScript.append(i);
-            trigScript
-                    .append(" | TriggerDescription$ Storm (When you cast this spell, copy it for each spell cast before it this turn.)");
+            StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self | Execute$ Storm " +
+            		"| TriggerDescription$ Storm (When you cast this spell, copy it for each spell cast before it this turn.)");
 
-            StringBuilder svarScript = new StringBuilder("Storm");
-            svarScript.append(i);
-
-            card.setSVar(svarScript.toString(),
-                    "AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ StormCount");
+            card.setSVar("Storm", "AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ StormCount");
             card.setSVar("StormCount", "Count$StormCount");
-            Trigger stormTrigger = forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(), card, true);
+            final Trigger stormTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
 
             card.addTrigger(stormTrigger);
         } // Storm
