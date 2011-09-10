@@ -532,7 +532,7 @@ public final class AbilityFactory_Animate {
 
             //remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
-            if (params.containsKey("OverwriteAbilities")) {
+            if (params.containsKey("OverwriteAbilities") || params.containsKey("RemoveAllAbilities")) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isAbility()) {
                         c.removeSpellAbility(ab);
@@ -554,7 +554,7 @@ public final class AbilityFactory_Animate {
 
             //suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
-            if (params.containsKey("OverwriteTriggers")) {
+            if (params.containsKey("OverwriteTriggers") || params.containsKey("RemoveAllAbilities")) {
                 ArrayList<Trigger> triggersToRemove = c.getTriggers();
                 for (Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
