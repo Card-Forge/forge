@@ -17,7 +17,7 @@ import forge.game.GameType;
 import forge.gui.GuiUtils;
 
 /** 
- * Utility class to hold add deck generation routines, methods moved from OldGuiNewGame
+ * Utility class to hold add deck generation routines, methods moved from OldGuiNewGame.
  *
  */
 public abstract class DeckGeneration {
@@ -30,7 +30,7 @@ public abstract class DeckGeneration {
      *             {@link java.lang.String} object.
      */
     public static void genDecks(final PlayerType playerType) {
-        // TODO: jendave to refactor deck generation
+        // TODO jendave to refactor deck generation
         Deck d = null;
 
         ArrayList<String> decks = new ArrayList<String>();
