@@ -3,6 +3,8 @@ ManaCost:2 G G
 Types:Enchantment
 Text:If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ HIDDEN CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Creature spells can't be countered.
+K:MayEffectFromOpeningHand:PutOnBattlefield
+SVar:PutOnBattlefield:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Hand | Destination$ Battlefield
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lifeforce.jpg

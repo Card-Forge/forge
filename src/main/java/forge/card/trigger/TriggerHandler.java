@@ -301,34 +301,38 @@ public class TriggerHandler {
         }
 
         Player playerAP = AllZone.getPhase().getPlayerTurn();
+        
+        //This is done to allow the list of triggers to be modified while triggers are running.
+        ArrayList<Trigger> registeredTriggersWorkingCopy = new ArrayList<Trigger>(registeredTriggers);
+        ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
 
         //AP
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).getHostCard().getController().equals(playerAP)) {
-                runSingleTrigger(registeredTriggers.get(i), mode, runParams);
+        for (int i = 0; i < registeredTriggersWorkingCopy.size(); i++) {
+            if (registeredTriggersWorkingCopy.get(i).getHostCard().getController().equals(playerAP)) {
+                runSingleTrigger(registeredTriggersWorkingCopy.get(i), mode, runParams);
             }
         }
-        for (int i = 0; i < delayedTriggers.size(); i++) {
-            Trigger deltrig = delayedTriggers.get(i);
+        for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
+            Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP)) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(i);
+                    delayedTriggers.remove(deltrig);
                     i--;
                 }
             }
         }
 
         //NAP
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).getHostCard().getController().equals(playerAP.getOpponent())) {
-                runSingleTrigger(registeredTriggers.get(i), mode, runParams);
+        for (int i = 0; i < registeredTriggersWorkingCopy.size(); i++) {
+            if (registeredTriggersWorkingCopy.get(i).getHostCard().getController().equals(playerAP.getOpponent())) {
+                runSingleTrigger(registeredTriggersWorkingCopy.get(i), mode, runParams);
             }
         }
-        for (int i = 0; i < delayedTriggers.size(); i++) {
-            Trigger deltrig = delayedTriggers.get(i);
+        for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
+            Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(i);
+                    delayedTriggers.remove(deltrig);
                     i--;
                 }
             }

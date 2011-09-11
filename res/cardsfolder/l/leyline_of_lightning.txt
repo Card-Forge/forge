@@ -4,6 +4,8 @@ Types:Enchantment
 Text:If Leyline of Lightning is in your opening hand, you may begin the game with it on the battlefield.
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell, you may pay 1. If you do, CARDNAME deals 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 1 | Tgt$ TgtP | NumDmg$ 1
+K:MayEffectFromOpeningHand:PutOnBattlefield
+SVar:PutOnBattlefield:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Hand | Destination$ Battlefield
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lightning.jpg

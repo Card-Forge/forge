@@ -1,6 +1,11 @@
 package forge.gui.input;
 
+import java.util.ArrayList;
+
 import forge.*;
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.game.PlayerIndex;
 import forge.quest.data.QuestData;
@@ -84,27 +89,58 @@ public class Input_Mulligan extends Input {
             }            
         }
 
-        //Human Leylines
+        //Human Leylines & Chancellors
         ButtonUtil.reset();
+        AbilityFactory af = new AbilityFactory();
         CardList humanOpeningHand = AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer());
-
+        
         for (Card c : humanOpeningHand) {
-            if (c.getName().startsWith("Leyline")) {
-                if (GameActionUtil.showYesNoDialog(c, "Put onto Battlefield?"))
-                    AllZone.getGameAction().moveToPlay(c);
+            ArrayList<String> kws = c.getKeyword(); 
+            for(int i = 0;i<kws.size();i++) {
+                String kw = kws.get(i);
+                
+                if(kw.startsWith("MayEffectFromOpeningHand"))
+                {
+                    String effName = kw.split(":")[1];
+                    
+                    SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                    if(GameActionUtil.showYesNoDialog(c, "Use this card's ability?"))
+                    {
+                        //If we ever let the AI memorize cards in the players hand, this would be a place to do so.
+                        AllZone.getGameAction().playSpellAbility_NoStack(effect, false);
+                    }
+                }
             }
         }
 
-        //Computer Leylines
+        //Computer Leylines & Chancellors
         CardList aiOpeningHand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
         for (Card c : aiOpeningHand) {
-            if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity")
+            if (!(c.getName().startsWith("Leyline of Singularity")
                     && AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0)) {
-                AllZone.getGameAction().moveToPlay(c);
-                AllZone.getGameAction().checkStateEffects();
+                ArrayList<String> kws = c.getKeyword(); 
+                for(int i = 0;i<kws.size();i++) {
+                    String kw = kws.get(i);
+                    
+                    if(kw.startsWith("MayEffectFromOpeningHand"))
+                    {
+                        String effName = kw.split(":")[1];
+                        
+                        SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+
+                        if(effect.doTrigger(false)) //Is there a better way for the AI to decide this?
+                        {
+                            GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
+                            ComputerUtil.playNoStack(effect);
+                        }
+                    }
+                }
             }
 
         }
+        AllZone.getGameAction().checkStateEffects();
+        
+        
         if (AllZone.getGameAction().isStartCut() && !(humanOpeningHand.contains(AllZone.getGameAction().getHumanCut())
                 || aiOpeningHand.contains(AllZone.getGameAction().getComputerCut()))) {
             AllZone.getGameAction().moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.getHumanPlayer()), AllZone.getGameAction().getHumanCut());
