@@ -8,4 +8,5 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | T
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reef_shaman.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/29.jpg
 End

@@ -8,4 +8,5 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_illusionist.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/29.jpg
 End

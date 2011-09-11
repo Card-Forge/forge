@@ -8,4 +8,5 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinx.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/36.jpg
 End

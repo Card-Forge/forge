@@ -8,4 +8,5 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | T
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tideshaper_mystic.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/93.jpg
 End

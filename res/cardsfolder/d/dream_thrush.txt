@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | T
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_thrush.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/53.jpg
 End
