@@ -111,13 +111,16 @@ public class Input_Mulligan extends Input {
                     }
                 }
             }
+            if (c.getName().startsWith("Leyline")) {
+                if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?"))
+                    AllZone.getGameAction().moveToPlay(c);
+            }
         }
 
         //Computer Leylines & Chancellors
         CardList aiOpeningHand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
         for (Card c : aiOpeningHand) {
-            if (!(c.getName().startsWith("Leyline of Singularity")
-                    && AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0)) {
+            if (!c.getName().startsWith("Leyline")) {
                 ArrayList<String> kws = c.getKeyword(); 
                 for(int i = 0;i<kws.size();i++) {
                     String kw = kws.get(i);
@@ -136,7 +139,11 @@ public class Input_Mulligan extends Input {
                     }
                 }
             }
-
+			if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity")
+                    && AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0)) {
+                AllZone.getGameAction().moveToPlay(c);
+                AllZone.getGameAction().checkStateEffects();
+            }
         }
         AllZone.getGameAction().checkStateEffects();
         
