@@ -48,6 +48,9 @@ import javax.swing.JOptionPane;
  */
 public class GameAction {
 
+    /** This variable prevents WinLose dialog from popping several times, ie on each state effect check after a win.*/
+    private boolean canShowWinLose = true;
+    
     /**
      * <p>resetActivationsPerTurn.</p>
      */
@@ -642,13 +645,14 @@ public class GameAction {
             return;
         }
 
-        if (checkEndGameSate()) {
+        if (canShowWinLose && checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
             frame.setEnabled(false);
             //frame.dispose();
             Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestAssignment());
             //gwl.setAlwaysOnTop(true);
             gwl.toFront();
+            canShowWinLose = false;
             return;
         }
 
@@ -1109,6 +1113,7 @@ public class GameAction {
         Constant.Quest.fantasyQuest[0] = false;
 
         AllZone.newGameCleanup();
+        canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
 
 
