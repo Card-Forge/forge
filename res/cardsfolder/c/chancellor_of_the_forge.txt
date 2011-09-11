@@ -12,4 +12,6 @@ SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | TriggerDescript
 SVar:EffToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
 SVar:TrigRemoveMe:Mode$ Phase | Phase$ Upkeep | Execute$ RemoveMe | Static$ True | Secondary$ True | TriggerDescription$ Oh, hell no.
 SVar:RemoveMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/81.jpg
+Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.\nWhen Chancellor of the Forge enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
 End

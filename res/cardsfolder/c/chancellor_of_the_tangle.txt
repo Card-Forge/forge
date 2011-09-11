@@ -11,4 +11,6 @@ SVar:TrigMana:Mode$ Phase | Phase$ Main | ValidPlayer$ You | Execute$ EffMana | 
 SVar:EffMana:AB$Mana | Cost$ 0 | Produced$ G
 SVar:TrigRemoveMe:Mode$ Phase | Phase$ Upkeep | Execute$ RemoveMe | Static$ True | Secondary$ True | TriggerDescription$ Oh, hell no.
 SVar:RemoveMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/106.jpg
+Oracle:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G} to your mana pool.\nVigilance, reach
 End
