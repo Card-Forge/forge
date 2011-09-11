@@ -507,7 +507,13 @@ public class DeckManager {
         List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.byNameThenSet);
         for (Entry<CardPrinted, Integer> e : main2sort) {
-            out.write(format("%d %s|%s%n", e.getValue(), e.getKey().getName(), e.getKey().getSet()));
+            CardPrinted card = e.getKey();
+            boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
+            if (hasBadSetInfo) {
+                out.write(format("%d %s%n", e.getValue(), card.getName()));
+            } else {
+                out.write(format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
+            }
         }
     }
 

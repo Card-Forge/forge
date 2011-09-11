@@ -105,9 +105,9 @@ public final class CardDb {
         String cardName = name;
         if (pipePos >= 0) {
             cardName = name.substring(0, pipePos);
-            String setName = name.substring(pipePos + 1);
+            String setName = name.substring(pipePos + 1).trim();
             // only if set is not blank try to load it
-            if (StringUtils.isNotBlank(setName)) {
+            if (StringUtils.isNotBlank(setName) && !"???".equals(setName)) {
                 return getCard(cardName, setName);
             }
         }
