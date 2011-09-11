@@ -87,10 +87,6 @@ public class StaticEffects {
             }
         }
 
-        if (params.containsKey("AddKeyword")) {
-            addKeywords = params.get("AddKeyword").split(" & ");
-        }
-
         if (params.containsKey("AddColor")) {
             addColors = CardUtil.getShortColorsString(
                     new ArrayList<String>(Arrays.asList(params.get("AddColor").split(" & "))));
@@ -103,6 +99,9 @@ public class StaticEffects {
         
         //modify players
         for (Player p : affectedPlayers) {
+            if (params.containsKey("AddKeyword")) {
+                addKeywords = params.get("AddKeyword").split(" & ");
+            }
             
             // add keywords
             if (addKeywords != null)
@@ -124,10 +123,8 @@ public class StaticEffects {
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
 
             //remove keywords
-            if (addKeywords != null) {
-                for (String keyword : addKeywords) {
-                    affectedCard.removeExtrinsicKeyword(keyword);
-                }
+            if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword") || params.containsKey("RemoveAllAbilities")) {
+                affectedCard.removeChangedCardKeywords(se.getTimestamp());
             }
 
             //remove abilities
@@ -142,10 +139,11 @@ public class StaticEffects {
             
             //remove abilities
             if (params.containsKey("RemoveAllAbilities")) {
-                SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-                for (SpellAbility s : spellAbility) {
-                    s.setTemporarilySuppressed(false);
+                ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
+                for (SpellAbility ab : abilities) {
+                    ab.setTemporarilySuppressed(false);
                 }
+                
                 ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
                 for (StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(false);

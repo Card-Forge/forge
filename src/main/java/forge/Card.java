@@ -68,6 +68,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<Card_Color> cardColor = new ArrayList<Card_Color>();
     //changes by AF animate and continuous static effects
     private ArrayList<Card_Type> changedCardTypes = new ArrayList<Card_Type>();
+    private ArrayList<Card_Keywords> changedCardKeywords = new ArrayList<Card_Keywords>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
 
     private ArrayList<Object> rememberedObjects = new ArrayList<Object>();
@@ -3903,34 +3904,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getKeyword() {
-        ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
-        ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());
+        ArrayList<String> keywords = getUnhiddenKeyword();
         ArrayList<String> a4 = new ArrayList<String>(getHiddenExtrinsicKeyword());
-        a1.addAll(a2);
-        a1.addAll(a4);
+        keywords.addAll(a4);
 
-        // SOL Changes for Mana
-        //for(Ability_Mana sa:getManaAbility())
-        //    if(sa.isBasic()) a1.add((sa).orig);
-
-        return a1;
+        return keywords;
     }
 
     public int getKeywordAmount(final String keyword) {
         int res = 0;
-        for (String k : getIntrinsicKeyword()) {
-            if (k.equals(keyword)) {
-                res++;
-            }
-        }
-
-        for (String k : getExtrinsicKeyword()) {
-            if (k.equals(keyword)) {
-                res++;
-            }
-        }
-
-        for (String k : getHiddenExtrinsicKeyword()) {
+        for (String k : getKeyword()) {
             if (k.equals(keyword)) {
                 res++;
             }
@@ -3938,8 +3921,44 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         return res;
     }
+    
+    public void setChangedCardKeywords(ArrayList<Card_Keywords> kw) {
+        changedCardKeywords = kw;
+    }
+    
+    public ArrayList<Card_Keywords> getChangedCardKeywords() {
+        return changedCardKeywords;
+    }
+        
+    public void addChangedCardKeywords(ArrayList<String> keywords, ArrayList<String> removeKeywords, boolean removeAllKeywords, 
+            long timestamp) {
+   
+        changedCardKeywords.add(new Card_Keywords(keywords, removeKeywords, removeAllKeywords, timestamp));
+    }
+    
+    public void addChangedCardKeywords(String[] keywords, String[] removeKeywords, boolean removeAllKeywords, long timestamp) {
+        ArrayList<String> keywordsList = null;
+        ArrayList<String> removeKeywordsList = null;
+        if(keywords != null) {
+            keywordsList = new ArrayList<String>(Arrays.asList(keywords));
+        }
 
-    //keywords are like flying, fear, first strike, etc...
+        if(removeKeywords  != null) {
+            removeKeywordsList = new ArrayList<String>(Arrays.asList(removeKeywords));
+        }
+        
+        addChangedCardKeywords(keywordsList, removeKeywordsList, removeAllKeywords, timestamp);
+    }
+    
+    public void removeChangedCardKeywords(long timestamp) {
+        for (int i = 0; i < changedCardKeywords.size(); i++) {
+            Card_Keywords cardK = changedCardKeywords.get(i);
+            if (cardK.getTimestamp() == timestamp) {
+                changedCardKeywords.remove(cardK);
+            }
+        }
+    }
+
     // Hidden keywords will be left out
     /**
      * <p>getUnhiddenKeyword.</p>
@@ -3947,15 +3966,32 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getUnhiddenKeyword() {
-        ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
+        ArrayList<String> keywords = new ArrayList<String>(getIntrinsicKeyword());
         ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());
-        a1.addAll(a2);
+        keywords.addAll(a2);
 
-        // SOL Changes for Mana
-        //for(Ability_Mana sa:getManaAbility())
-        //    if(sa.isBasic()) a1.add((sa).orig);
+        // see if keyword changes are in effect
+        if (!changedCardKeywords.isEmpty()) {
 
-        return a1;
+            ArrayList<Card_Keywords> newKeywords = changedCardKeywords;
+            Collections.sort(newKeywords);  // sorts newKeywords by timeStamp
+
+            for (Card_Keywords ck : newKeywords) {
+                
+                if(ck.isRemoveAllKeywords()) {
+                    keywords.clear();
+                } else if (ck.getRemoveKeywords() != null) {
+                    keywords.removeAll(ck.getRemoveKeywords());
+                }
+
+                if (ck.getKeywords() != null) {
+                    keywords.addAll(ck.getKeywords());
+                }
+
+            }
+        }
+
+        return keywords;
     }
 
     /**

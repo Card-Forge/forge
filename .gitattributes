@@ -9561,6 +9561,7 @@ src/main/java/forge/CardPowerToughness.java svneol=native#text/plain
 src/main/java/forge/CardReader.java svneol=native#text/plain
 src/main/java/forge/CardUtil.java svneol=native#text/plain
 src/main/java/forge/Card_Color.java svneol=native#text/plain
+src/main/java/forge/Card_Keywords.java -text
 src/main/java/forge/Card_Type.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
 src/main/java/forge/ColorChanger.java -text

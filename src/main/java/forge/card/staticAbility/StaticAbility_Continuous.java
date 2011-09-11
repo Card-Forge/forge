@@ -43,12 +43,14 @@ public class StaticAbility_Continuous {
         int setPower = -1;
         int setToughness = -1;
         String[] addKeywords = null;
+        String[] removeKeywords = null;
         String[] addAbilities = null;
         String[] addSVars = null;
         String[] addTypes = null;
         String[] removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
+        boolean removeAllAbilities = false ;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
@@ -94,6 +96,14 @@ public class StaticAbility_Continuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
+        }
+        
+        if (params.containsKey("RemoveKeyword")) {
+            removeKeywords = params.get("RemoveKeyword").split(" & ");
+        }
+        
+        if (params.containsKey("RemoveAllAbilities")) {
+            removeAllAbilities = true;
         }
 
         if (params.containsKey("AddAbility")) {
@@ -195,10 +205,8 @@ public class StaticAbility_Continuous {
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus);
 
             // add keywords
-            if (addKeywords != null) {
-                for (String keyword : addKeywords) {
-                    affectedCard.addExtrinsicKeyword(keyword);
-                }
+            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
+                affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities, hostCard.getTimestamp());
             }
 
             // add abilities
@@ -243,7 +251,7 @@ public class StaticAbility_Continuous {
             }
 
             // remove triggers
-            if (params.containsKey("RemoveTriggers") || params.containsKey("RemoveAllAbilities")) {
+            if (params.containsKey("RemoveTriggers") || removeAllAbilities) {
                 ArrayList<Trigger> triggers = affectedCard.getTriggers();
                 for (Trigger trigger : triggers) {
                     trigger.setTemporarilySuppressed(true);
@@ -251,7 +259,7 @@ public class StaticAbility_Continuous {
             }
             
             // remove activated and static abilities
-            if (params.containsKey("RemoveAllAbilities")) {
+            if (removeAllAbilities) {
                 ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
                 for (SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(true);
