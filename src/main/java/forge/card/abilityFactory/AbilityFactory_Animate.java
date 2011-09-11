@@ -1023,6 +1023,12 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Triggers")) {
             triggers.addAll(Arrays.asList(params.get("Triggers").split(",")));
         }
+        
+        //sVars to add to the animated being
+        ArrayList<String> sVars = new ArrayList<String>();
+        if (params.containsKey("sVars")) {
+            sVars.addAll(Arrays.asList(params.get("sVars").split(",")));
+        }
 
         String valid = "";
 
@@ -1069,6 +1075,14 @@ public final class AbilityFactory_Animate {
                     Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
                     addedTriggers.add(c.addTrigger(parsedTrigger));
                     AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
+                }
+            }
+            
+            //give sVars
+            if (sVars.size() > 0) {
+                for (String s : sVars) {
+                    String actualsVar = host.getSVar(s);
+                    c.setSVar(s, actualsVar);
                 }
             }
 
