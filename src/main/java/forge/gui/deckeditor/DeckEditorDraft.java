@@ -19,7 +19,6 @@ import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 
-import org.apache.axis.utils.ArrayUtil;
 import org.apache.commons.lang3.ArrayUtils;
 
 import net.slightlymagic.maxmtg.Predicate;
@@ -108,12 +107,14 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         this.setSize(980, 740);
         GuiUtils.centerFrame(this);
         this.setResizable(false);
-        
+
         top.getTable().addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { jButton1_actionPerformed(null); }
-            }
-        });
+                if (e.getKeyChar() == ' ') { jButton1_actionPerformed(null); } } });
+        top.getTable().addMouseListener(new MouseAdapter() {
+            @Override public void mouseClicked(final MouseEvent e) {
+                if ((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0 && e.getClickCount() == 2) {
+                    jButton1_actionPerformed(null); } } });
 
     }
 
