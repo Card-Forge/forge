@@ -1,0 +1,11 @@
+Name:Yixlid Jailer
+ManaCost:1 B
+Types:Creature Zombie Wizard
+Text:no text
+PT:2/1
+S:Mode$ Continuous | Affected$ Card | AffectedZone$ Graveyard | RemoveAllAbilities$ True | Description$ Cards in graveyards lose all abilities.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yixlid_jailer.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/93.jpg
+Oracle:Cards in graveyards lose all abilities.
+End
