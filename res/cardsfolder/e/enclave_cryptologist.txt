@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Level up:1 U
 K:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Loot | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ CARDNAME has tap: Draw a card, then discard a card.
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Loot | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 CARDNAME has tap: Draw a card, then discard a card.
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Draw | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ CARDNAME has tap: Draw a card.
 SVar:Loot:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.

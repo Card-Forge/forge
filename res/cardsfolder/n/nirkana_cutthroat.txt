@@ -5,9 +5,9 @@ Text:no text
 PT:3/2
 K:Level up:2 B
 K:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 3 | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 4/3 CARDNAME has Deathtouch
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 3 | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 4/3 CARDNAME has Deathtouch
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | SetToughness$ 4 | AddKeyword$ First Strike | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 5/4 CARDNAME has First Strike and Deathtouch
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLE2LEVEL
 SVar:Y:Count$Valid Card.Self+countersGE3LEVEL
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg

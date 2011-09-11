@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 K:Level up:3
 K:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1 2/2 CARDNAME has Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 2/2 CARDNAME has Flying
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 4/2 CARDNAME has Flying
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLE2LEVEL
 SVar:Y:Count$Valid Card.Self+countersGE3LEVEL
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skywatcher_adept.jpg

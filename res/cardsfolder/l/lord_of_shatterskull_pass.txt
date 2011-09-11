@@ -5,9 +5,9 @@ Text:no text
 PT:3/3
 K:Level up:1 R
 K:maxLevel:6
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 6/6
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-5 6/6
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddTrigger$ TriggerDamage | AddSVar$ TrigDamage | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 6+ 6/6 Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLE5LEVEL
 SVar:Y:Count$Valid Card.Self+countersGE6LEVEL
 SVar:TriggerDamage:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
 SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl | NumDmg$ 6

@@ -5,9 +5,9 @@ Text:no text
 PT:2/2
 K:Level up:2 G
 K:maxLevel:4
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 4/4
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-3 4/4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Trample | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 6/6 CARDNAME has Trample
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLE3LEVEL
 SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
