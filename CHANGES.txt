@@ -58,6 +58,36 @@ Fixes/Features:
 - Continuous static abilities with "RemoveAllAbilities" will now also remove static abilities.
 - Improved the layering of continuous static effects.
 - Added the recent commit logs to changes.txt.
+- Completed SVars of Phantasmal Image.
+- Added picCount for Farrel's Zealot.
+- Checkstyle fixes in GuiUtils
+- very minor Checkstyle stuff in DeckGeneration.java
+- finish up removing abilities and triggers for target cards in AF_Animate (may need to add static abilities to this yet also...)
+- trivial refactor in CardPanel (I was looking for a place to draw cards' counters)
+- Level counters were given a name
+- AF_Animate now respects a "RemoveAllAbilities" param just like StaticAbility. Updated the 10 recently submitted cards to use this.
+- Added "Mill" as a Cost
+- Converted Millikin to use it.
+- Non-deck meta removed from quest dck files. Meta now reads
+Name=
+Display Name=
+Icon=
+Deck Type=
+Comment=
+- All quest-related information is fully stored in quests.txt, including AI and human extra cards at match start.
+- ReadQuest_Assignment assembles all quest information from this file.
+- Quest_Assignment has getters and setters to handle all information.
+- QuestUtil updated, most importantly deprecating SetupQuest, which previously held a lot of hard-coded data.
+- Renamed "getHumanPlantAndPet" and "getComputerCreatures" to "getHumanStartingCards" and "getComputerStartingCards". This is more appropriate since the return values "computer creatures" and "plant and pet" can include enchantments, artifacts, tokens, etc.
+- Documentation added to Deck class to indicate proper use and legal metadata.
+- Minor fix.
+- Javadoc and functionality comments updated.
+- ReadQuest_Assignment > getQuests() renamed to getAvailableQuests() to avoid confusion, since a list of allQuests is also present.
+- "TriggerCount" will now look at the rootSpellAbility (fixes Souls of the Faultless).
+- The AI will no longer use the DealDamage AF abilities when the damage is 0.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
