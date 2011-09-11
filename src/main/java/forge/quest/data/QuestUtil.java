@@ -18,24 +18,24 @@ import java.util.ArrayList;
 public class QuestUtil {
 
     /**
-     * <p>getComputerCreatures.</p>
+     * <p>getComputerStartingCards.</p>
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerCreatures(final QuestData qd) {
+    public static CardList getComputerStartingCards(final QuestData qd) {
         return new CardList();
     }
 
     /**
-     * <p>getComputerCreatures.</p>
+     * <p>getComputerStartingCards.</p>
      * Returns extra AI cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerCreatures(final QuestData qd, Quest_Assignment qa) {
+    public static CardList getComputerStartingCards(final QuestData qd, Quest_Assignment qa) {
         CardList list = new CardList();
         
         if (qa != null) {
@@ -45,13 +45,13 @@ public class QuestUtil {
     }
 
     /**
-     * <p>getHumanPlantAndPet.</p>
-     * Returns list of current plant/pet configuration.
+     * <p>getHumanStartingCards.</p>
+     * Returns list of current plant/pet configuration only.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanPlantAndPet(final QuestData qd) {
+    public static CardList getHumanStartingCards(final QuestData qd) {
         CardList list = new CardList();
 
         if (qd.getPetManager().shouldPetBeUsed()) {
@@ -66,7 +66,7 @@ public class QuestUtil {
     }
 
     /**
-     * <p>getHumanPlantAndPet.</p>
+     * <p>getHumanStartingCards.</p>
      * Returns extra human cards, including current plant/pet configuration,
      * and cards in play at start of quest.
      *
@@ -74,8 +74,8 @@ public class QuestUtil {
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanPlantAndPet(final QuestData qd, Quest_Assignment qa) {
-        CardList list = getHumanPlantAndPet(qd);
+    public static CardList getHumanStartingCards(final QuestData qd, Quest_Assignment qa) {
+        CardList list = getHumanStartingCards(qd);
         
         if (qa != null) {
             list.addAll(qa.getHumanExtraCards());

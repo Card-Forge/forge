@@ -326,7 +326,7 @@ public final class GameActionUtil {
      */
     public static void playCard_Vengevine(final Card c) {
         if (c.isCreature() == true
-                && (Phase.getPlayerCreatureSpellCount() == 2 || Phase.getComputerCreatureSpellCount() == 2))
+                && (Phase.getPlayerCreatureSpellCount() == 2 || Phase.getComputerStartingCardspellCount() == 2))
         {
             final Player controller = c.getController();
             final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
@@ -608,7 +608,7 @@ public final class GameActionUtil {
         for (int i = 0; i < list.size(); i++) {
             final Player controller = list.get(i).getController();
             if ((player.isHuman() && Phase.getPlayerCreatureSpellCount() == 0)
-                    || (player.isComputer() && Phase.getComputerCreatureSpellCount() == 0))
+                    || (player.isComputer() && Phase.getComputerStartingCardspellCount() == 0))
             {
                 Ability abTrig = new Ability(list.get(i), "0") {
                     public void resolve() {

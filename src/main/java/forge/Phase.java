@@ -1003,11 +1003,11 @@ public class Phase extends MyObservable implements java.io.Serializable {
     }
 
     /**
-     * <p>getComputerCreatureSpellCount.</p>
+     * <p>getComputerStartingCardspellCount.</p>
      *
      * @return a int.
      */
-    static int getComputerCreatureSpellCount() {
+    static int getComputerStartingCardspellCount() {
         return ComputerCreatureSpellCount;
     }
 

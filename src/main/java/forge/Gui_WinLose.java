@@ -194,7 +194,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
             //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
             //humanList, computerList, humanLife, computerLife);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(model.quest, model.qa);
+            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qa);
             CardList computerList = new CardList();
 
 

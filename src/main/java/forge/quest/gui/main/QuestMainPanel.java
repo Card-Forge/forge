@@ -685,7 +685,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Deck computer = QuestBattleManager.getAIDeckFromFile((selectedOpponent).getName());
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        AllZone.getGameAction().newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanPlantAndPet(questData),
+        AllZone.getGameAction().newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanStartingCards(questData),
                 new CardList(), questData.getLife(), 20, null);
     }
 
@@ -709,7 +709,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
         AllZone.getGameAction().newGame(humanDeck, computerDeck,
-                forge.quest.data.QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(),
+                forge.quest.data.QuestUtil.getHumanStartingCards(questData, selectedQuest), new CardList(),
                 questData.getLife() + extraLife, selectedQuest.getComputerLife(), selectedQuest);
 
     }

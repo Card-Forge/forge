@@ -1073,7 +1073,7 @@ public class GameAction {
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
         if (qa != null) {
-            computer.addAll(forge.quest.data.QuestUtil.getComputerCreatures(AllZone.getQuestData(), AllZone.getQuestAssignment()));
+            computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestAssignment()));
         }
 
         for (Card c : human) {

@@ -132,7 +132,7 @@ public class ComputerAI_General implements Computer {
                                 creatures2.add(creatures.get(i));
                             }
                         }
-                        if (creatures2.size() + Phase.getComputerCreatureSpellCount() > 1
+                        if (creatures2.size() + Phase.getComputerStartingCardspellCount() > 1
                                 && c.isCreature()
                                 && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
                             return true;
