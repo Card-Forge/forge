@@ -62,9 +62,8 @@ class CardFactory_Auras {
 
         //*************** START *********** START **************************
         if (cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")
-                || cardName.equals("Spreading Seas") || cardName.equals("Evil Presence")
-                || cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim")
-                || cardName.equals("Tainted Well"))
+                || cardName.equals("Spreading Seas")
+                || cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim"))
         {
 
             final String[] newType = new String[1];
@@ -85,10 +84,6 @@ class CardFactory_Auras {
                             || card.getName().equals("Phantasmal Terrain"))
                     {
                         newType[0] = "Island";
-                    } else if (card.getName().equals("Evil Presence")
-                            || card.getName().equals("Tainted Well"))
-                    {
-                        newType[0] = "Swamp";
                     } else if (card.getName().equals("Convincing Mirage")
                             || card.getName().equals("Phantasmal Terrain"))
                     {
@@ -139,10 +134,6 @@ class CardFactory_Auras {
                             || card.getName().equals("Sea's Claim"))
                     {
                         newType[0] = "Island";
-                    } else if (card.getName().equals("Evil Presence")
-                            || card.getName().equals("Tainted Well"))
-                    {
-                        newType[0] = "Swamp";
                     } else if (card.getName().equals("Convincing Mirage")
                             || card.getName().equals("Phantasmal Terrain"))
                     {
