@@ -43,15 +43,33 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
     private BoosterDraft boosterDraft;
 
-    private JButton jButton1 = new JButton(); 
+    private JButton jButtonPick = new JButton();
 
     private CardPanelLite cardView = new CardPanelLite();
 
-    /**
-     * <p>showGui.</p>
-     *
-     * @param in_boosterDraft a {@link forge.game.limited.BoosterDraft} object.
-     */
+
+    private MouseListener pickWithMouse = new MouseAdapter() {
+        @Override
+        public void mouseClicked(final MouseEvent e) {
+            // Pick on left-button double click
+            if ((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0 && e.getClickCount() == 2) {
+                jButtonPickClicked(null);
+            } else if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) { // pick on right click
+                JTable table = top.getTable();
+                int rowNumber = table.rowAtPoint(e.getPoint());
+                // after hittest - if it was outside of rows - discard this click
+                if (rowNumber == -1) { return; }
+
+                // if row was not selected, select it. If it was, pick a card
+                if (rowNumber != table.getSelectedRow()) {
+                    table.getSelectionModel().setSelectionInterval(rowNumber, rowNumber);
+                } else {
+                    jButtonPickClicked(null);
+                }
+            }
+        }
+    };
+
     public void showGui(BoosterDraft in_boosterDraft) {
         boosterDraft = in_boosterDraft;
 
@@ -103,19 +121,16 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
-        
+
         this.setSize(980, 740);
         GuiUtils.centerFrame(this);
         this.setResizable(false);
 
+        top.getTable().addMouseListener(pickWithMouse);
         top.getTable().addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { jButton1_actionPerformed(null); } } });
-        top.getTable().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(final MouseEvent e) {
-                if ((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0 && e.getClickCount() == 2) {
-                    jButton1_actionPerformed(null); } } });
-
+                if (e.getKeyChar() == ' ') { jButtonPickClicked(null); } } });
+        
     }
 
     public DeckEditorDraft() {
@@ -149,12 +164,12 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setTitle("Booster Draft");
         
-        jButton1.setBounds(new Rectangle(238, 418, 147, 44));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 16));
-        jButton1.setText("Choose Card");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPick.setBounds(new Rectangle(238, 418, 147, 44));
+        jButtonPick.setFont(new java.awt.Font("Dialog", 0, 16));
+        jButtonPick.setText("Choose Card");
+        jButtonPick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                jButton1_actionPerformed(e);
+                jButtonPickClicked(e);
             }
         });
         
@@ -162,7 +177,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         this.getContentPane().add(top.getTableDecorated(), null);
         this.getContentPane().add(bottom.getLabel(), null);
         this.getContentPane().add(bottom.getTableDecorated(), null);
-        this.getContentPane().add(jButton1, null);
+        this.getContentPane().add(jButtonPick, null);
     }
 
     /**
@@ -170,7 +185,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
-    void jButton1_actionPerformed(final ActionEvent e) {
+    void jButtonPickClicked(final ActionEvent e) {
         CardPrinted card = top.getSelectedCard();
         if (null == card) { return; }
 

@@ -39,7 +39,7 @@ public final class TableWithCards {
 
     // need this to allow users place its contents
     public JComponent getTableDecorated() { return  jScrollPane; }
-    public JComponent getTable() { return table; }
+    public JTable getTable() { return table; }
     public JComponent getLabel() { return statsLabel; }
 
     public TableWithCards(final String title, final boolean showStats) {
