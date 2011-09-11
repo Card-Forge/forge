@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_snidd.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/31.jpg
+Oracle:{T}: Target land becomes the basic land type of your choice until end of turn.
 End

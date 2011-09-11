@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_compass.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/302.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/166.jpg
+Oracle:{1}, {T}: Target land becomes the basic land type of your choice until end of turn.
 End

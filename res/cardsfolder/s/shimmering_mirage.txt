@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmering_mirage.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/30.jpg
+Oracle:Target land becomes the basic land type of your choice until end of turn.\nDraw a card.
 End

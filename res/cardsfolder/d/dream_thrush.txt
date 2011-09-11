@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_thrush.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/53.jpg
+Oracle:Flying\n{T}: Target land becomes the basic land type of your choice until end of turn.
 End

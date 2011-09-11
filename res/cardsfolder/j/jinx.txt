@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinx.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/36.jpg
+Oracle:Target land becomes the basic land type of your choice until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
 End
