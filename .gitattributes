@@ -5333,6 +5333,7 @@ res/cardsfolder/o/ogre_warrior.txt svneol=native#text/plain
 res/cardsfolder/o/ogres_cleaver.txt svneol=native#text/plain
 res/cardsfolder/o/ohran_viper.txt svneol=native#text/plain
 res/cardsfolder/o/okiba_gang_shinobi.txt svneol=native#text/plain
+res/cardsfolder/o/okina_nightwatch.txt -text
 res/cardsfolder/o/okina_temple_to_the_grandfathers.txt svneol=native#text/plain
 res/cardsfolder/o/old_ghastbark.txt svneol=native#text/plain
 res/cardsfolder/o/old_man_of_the_sea.txt svneol=native#text/plain
@@ -6609,6 +6610,7 @@ res/cardsfolder/s/second_sight.txt svneol=native#text/plain
 res/cardsfolder/s/second_sunrise.txt -text
 res/cardsfolder/s/second_thoughts.txt svneol=native#text/plain
 res/cardsfolder/s/second_wind.txt svneol=native#text/plain
+res/cardsfolder/s/secretkeeper.txt -text
 res/cardsfolder/s/security_detail.txt svneol=native#text/plain
 res/cardsfolder/s/sedge_troll.txt svneol=native#text/plain
 res/cardsfolder/s/sedraxis_alchemist.txt svneol=native#text/plain
