@@ -79,12 +79,12 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
     } // ReadQuest_Assignment()
     
     /**
-     * <p>getQuests.</p>
+     * <p>getAvailableQuests.</p>
      * Returns list of currently available quest objects.
      *
      * @return a {@link java.util.List} object.
      */
-    public List<Quest_Assignment> getQuests() {
+    public List<Quest_Assignment> getAvailableQuests() {
         ArrayList<Quest_Assignment> availableQuests = new ArrayList<Quest_Assignment>();
         
         for(Quest_Assignment qa : allQuests) {

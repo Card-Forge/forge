@@ -79,7 +79,7 @@ public class QuestQuest extends QuestSelectablePanel {
             questsToDisplay = availableQuests;
 
         } else {
-            List<Quest_Assignment> allAvailableQuests = read.getQuests();
+            List<Quest_Assignment> allAvailableQuests = read.getAvailableQuests();
 
             List<Integer> availableInts = new ArrayList<Integer>();
 
