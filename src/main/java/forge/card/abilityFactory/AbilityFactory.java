@@ -1283,9 +1283,10 @@ public class AbilityFactory {
                     list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
                 } else if (calcX[0].startsWith("TriggerCount")) {
                     // TriggerCount is similar to a regular Count, but just pulls Integer Values from Trigger objects
+                    SpellAbility root = ability.getRootSpellAbility();
                     String[] l = calcX[1].split("/");
                     String[] m = CardFactoryUtil.parseMath(l);
-                    int count = (Integer) ability.getTriggeringObject(l[0]);
+                    int count = (Integer) root.getTriggeringObject(l[0]);
 
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
                 } else {
