@@ -238,6 +238,9 @@ public class AbilityFactory_DealDamage {
         } else
             dmg = getNumDamage(saMe);
         boolean rr = AF.isSpell();
+        
+        if(dmg <= 0)
+            return false;
 
         // temporarily disabled until better AI
         if (!CostUtil.checkLifeCost(abCost, source, 4))
