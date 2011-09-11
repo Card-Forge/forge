@@ -15,7 +15,7 @@ import java.util.*;
  * 
  * The set of MTG legal cards that become player's library when the game starts. 
  * Any other data is not part of a deck and should be stored elsewhere.
- * Current fields allowed for deck metadata are Name, Title, Description, Difficulty, Icon, Comment.
+ * Current fields allowed for deck metadata are Name, Title, Description, Difficulty, Icon, Deck Type.
  *
  * @author Forge
  * @version $Id$
