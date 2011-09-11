@@ -9704,6 +9704,7 @@ src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostMana.java -text
+src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
 src/main/java/forge/card/cost/CostPartWithList.java -text
 src/main/java/forge/card/cost/CostPayLife.java -text
