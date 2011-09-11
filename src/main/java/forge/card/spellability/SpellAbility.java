@@ -870,6 +870,11 @@ public abstract class SpellAbility {
         if(isSuppressed()) {
             return "";
         }
+
+        return toUnsuppressedString();
+    }
+    
+    public String toUnsuppressedString() {
         
         StringBuilder sb = new StringBuilder();
         SpellAbility node = this;

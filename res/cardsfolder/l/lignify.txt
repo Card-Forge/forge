@@ -4,8 +4,7 @@ Types:Tribal Enchantment Treefolk Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveAllAbilities$ True
-K:stAnimateEnchanted:Creature:0/4/Overwrite:Creature,Treefolk,Overwrite:no colors:Overwrite:No condition:Enchanted creature is a 0/4 Treefolk with no abilities.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 4 | AddType$ Treefolk | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted creature is a 0/4 Treefolk with no abilities.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lignify.jpg

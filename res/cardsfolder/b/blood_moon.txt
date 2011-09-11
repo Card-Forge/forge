@@ -2,8 +2,7 @@ Name:Blood Moon
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Land.nonBasic | RemoveAllAbilities$ True
-K:stAnimateAll:Land.nonBasic:no change/no change/Overwrite:Land,Mountain,RemoveSubTypes:no colors:Overwrite:No Condition:Nonbasic lands are Mountains.
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Nonbasic lands are Mountains.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
