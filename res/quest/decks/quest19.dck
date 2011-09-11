@@ -1,15 +1,7 @@
 [metadata]
-ID=19
 Name=quest19
 DisplayName=The Desert Caravan
-Difficulty=Hard
-Description=A caravan is transporting silk across the desert. While setting up camp for the night you are attacked by thieves. Defend yourself.
-Repeatable=false
-NumberWinsRequired=80
-CardReward=5 random rares
-CreditsReward=300
 Icon=The Desert Caravan.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -31,9 +23,3 @@ Comment=
 4 Eladamri's Call
 4 Savannah
 [sideboard]
-[human_extra_cards]
-Spidersilk Net
-Dromad Purebred
-[ai_extra_cards]
-4 Ambush Party
-Gnat Alley Creeper

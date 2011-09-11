@@ -1,15 +1,7 @@
 [metadata]
-ID=5
 Name=quest5
 DisplayName=Dungeon Crawling (Green)
-Difficulty=Medium
-Description=Guarded by green creatures.
-Repeatable=true
-NumberWinsRequired=20
-CardReward=3 green rares
-CreditsReward=100
 Icon=Dungeon Crawling Green.jpg
-AILife=25
 Deck Type=constructed
 Comment=
 [main]
@@ -76,8 +68,3 @@ Comment=
 1 Woodfall Primus
 1 Yavimaya Wurm
 [sideboard]
-[human_extra_cards]
-Defense of the Heart
-[ai_extra_cards]
-Eladamri's Vineyard
-Upwelling

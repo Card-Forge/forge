@@ -1,15 +1,7 @@
 [metadata]
-ID=3
 Name=quest3
 DisplayName=Dungeon Crawling (Black)
-Difficulty=Medium
-Description=Guarded by black creatures.
-Repeatable=true
-NumberWinsRequired=20
-CardReward=3 black rares
-CreditsReward=100
 Icon=Dungeon Crawling Black.jpg
-AILife=25
 Deck Type=constructed
 Comment=
 [main]
@@ -41,6 +33,3 @@ Comment=
 1 Beacon of Unrest
 1 Zombify
 [sideboard]
-[human_extra_cards]
-[ai_extra_cards]
-Infernal Genesis

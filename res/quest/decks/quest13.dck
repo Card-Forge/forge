@@ -1,15 +1,7 @@
 [metadata]
-ID=13
 Name=quest13
 DisplayName=The Court Jester
-Difficulty=Hard
-Description=The Court Jester pulls a prank on you. Will you laugh it off or pay him back?
-Repeatable=false
-NumberWinsRequired=52
-CardReward=4 multi-colored rares
-CreditsReward=300
 Icon=The Court Jester.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -36,7 +28,3 @@ Comment=
 1 Mox Jet
 2 Mountain
 [sideboard]
-[human_extra_cards]
-Sensei's Divining Top
-[ai_extra_cards]
-Teferi's Puzzle Box

@@ -1,15 +1,7 @@
 [metadata]
-ID=7
 Name=quest7
 DisplayName=Dungeon Crawling (Gold)
-Difficulty=Hard
-Description=Guarded by gold creatures.
-Repeatable=true
-NumberWinsRequired=28
-CardReward=3 multi-colored rares
-CreditsReward=150
 Icon=Dungeon Crawling Gold.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -48,6 +40,3 @@ Comment=
 1 Conflux
 1 Maelstrom Nexus
 [sideboard]
-[human_extra_cards]
-[ai_extra_cards]
-Darksteel Ingot

@@ -1,15 +1,7 @@
 [metadata]
-ID=10
 Name=quest10
 DisplayName=Zombie Attack!
-Difficulty=Hard
-Description=The village of Haven is getting attacked by the Zombie horde! Protect the village.
-Repeatable=false
-NumberWinsRequired=40
-CardReward=4 black rares
-CreditsReward=200
 Icon=Zombie Attack.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -38,11 +30,3 @@ Comment=
 1 Warpath Ghoul
 1 Viscera Dragger
 [sideboard]
-[human_extra_cards]
-TOKEN|W|1|1|citizen|creature
-TOKEN|W|1|1|citizen|creature
-TOKEN|W|1|1|citizen|creature
-Wall of Spears
-[ai_extra_cards]
-Scathe Zombies
-Mass of Ghouls

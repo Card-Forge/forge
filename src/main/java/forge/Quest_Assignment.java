@@ -11,25 +11,25 @@ import forge.card.CardPrinted;
  * @version $Id$
  */
 public class Quest_Assignment {
-    private int id;
-    private int requiredNumberWins;
-    private int computerLife;
+    // ID (default -1, should be explicitly set at later time.)
+    private int id = -1;
+    
+    // Default vals if none provided for this ID in quests.txt.
+    private int     requiredNumberWins  = 20;
+    private int     computerLife        = 25;
+    private long    creditsReward       = 100;
+    private String  name                = "Mystery Quest";
+    private String  desc                = "";
+    private String  difficulty          = "Medium";
+    private String  cardReward          = "1 colorless rare";
+    private String  iconName            = "Unknown.jpg";
+    private boolean repeatable          = false;
 
-    private long creditsReward;
-
-    private String name;
-    private String desc;
-    private String difficulty;
-    private String cardReward;
-    private String iconName;
-
-    private boolean repeatable;
-
-    private ArrayList<CardPrinted> cardRewardList = new ArrayList<CardPrinted>();
-
-    private CardList human = new CardList();
-    private ArrayList<String> compy = new ArrayList<String>();
-
+    // Other cards used in assignment: starting, and reward.
+    private CardList humanExtraCards    = new CardList();
+    private CardList aiExtraCards       = new CardList();
+    private ArrayList<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
+    
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
@@ -211,58 +211,50 @@ public class Quest_Assignment {
     }
 
     /**
-     * <p>Setter for the field <code>human</code>.</p>
+     * <p>Setter for the field <code>humanExtraCards</code>.</p>
      *
-     * @param humanIn a {@link forge.CardList} object.
+     * @param s a CardList object.
      */
-    public final void setHuman(final CardList humanIn) {
-        this.human = humanIn;
+    public final void setHumanExtraCards(final CardList cl) {
+        this.humanExtraCards = cl;
     }
-
+    
     /**
-     * <p>Getter for the field <code>human</code>.</p>
+     * <p>Getter for the field <code>humanExtraCards</code>.</p>
      *
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getHuman() {
-        return human;
+    public final CardList getHumanExtraCards() {
+        return humanExtraCards;
     }
 
     /**
-     * <p>addCompy.</p>
+     * <p>Setter for the field <code>aiExtraCards</code>.</p>
      *
-     * @param s a {@link java.lang.String} object.
+     * @param s a CardList object.
      */
-    public final void addCompy(final String s) {
-        this.compy.add(s);
+    public final void setAIExtraCards(final CardList cl) {
+        this.aiExtraCards = cl;
     }
-
-    /**
-     * <p>clearCompy.</p>
-     */
-    public final void clearCompy() {
-        this.compy.clear();
-    }
-
-
+    
     /**
      * <p>Getter for the field <code>compy</code>.</p>
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getCompy() {
-        return compy;
+    public final CardList getAIExtraCards() {
+        return aiExtraCards;
     }
 
     /**
      * <p>Setter for the field <code>cardRewardList</code>.</p>
      *
-     * @param cardRewardListIn a {@link java.util.ArrayList} object.
+     * @return a {@link java.util.ArrayList} object.
      */
-    public final void setCardRewardList(final ArrayList<CardPrinted> cardRewardListIn) {
-        this.cardRewardList = cardRewardListIn;
+    public void setCardRewardList(final ArrayList<CardPrinted> cp) {
+        this.cardRewardList = cp;
     }
-
+    
     /**
      * <p>Getter for the field <code>cardRewardList</code>.</p>
      *
@@ -271,4 +263,5 @@ public class Quest_Assignment {
     public final ArrayList<CardPrinted> getCardRewardList() {
         return cardRewardList;
     }
+    
 }

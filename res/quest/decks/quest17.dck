@@ -1,15 +1,7 @@
 [metadata]
-ID=17
 Name=quest17
 DisplayName=House Party
-Difficulty=Hard
-Description=Your friends decide to hold a house party at your home tonight. Later that night uninvited guests show up and disrupt the party.
-Repeatable=false
-NumberWinsRequired=64
-CardReward=4 colorless rares
-CreditsReward=250
 Icon=House Party.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -37,10 +29,3 @@ Comment=
 4 Sprouting Thrinax
 1 Mountain
 [sideboard]
-[human_extra_cards]
-Hopping Automaton
-Honden of Life's Web
-Forbidden Orchard
-[ai_extra_cards]
-Honden of Infinite Rage
-Mikokoro, Center of the Sea

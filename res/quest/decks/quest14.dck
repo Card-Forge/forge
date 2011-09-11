@@ -1,15 +1,7 @@
 [metadata]
-ID=14
 Name=quest14
 DisplayName=Ancient Battlefield
-Difficulty=Hard
-Description=You visit an ancient battlefield at midnight. It is overgrown and dark. You trip on a root, utter a curse and wish that you could see.
-Repeatable=false
-NumberWinsRequired=64
-CardReward=4 random rares
-CreditsReward=250
 Icon=Ancient Battlefield.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -32,9 +24,3 @@ Comment=
 1 Mox Jet
 4 Essence Warden
 [sideboard]
-[human_extra_cards]
-Glasses of Urza
-Blight Sickle
-[ai_extra_cards]
-Bad Moon
-Wall of Brambles

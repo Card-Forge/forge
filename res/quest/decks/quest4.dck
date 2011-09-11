@@ -1,15 +1,7 @@
 [metadata]
-ID=4
 Name=quest4
 DisplayName=Dungeon Crawling (Red)
-Difficulty=Medium
-Description=Guarded by red creatures.
-Repeatable=true
-NumberWinsRequired=20
-CardReward=3 red rares
-CreditsReward=100
 Icon=Dungeon Crawling Red.jpg
-AILife=25
 Deck Type=constructed
 Comment=
 [main]
@@ -96,6 +88,3 @@ Comment=
 1 Tarfire
 1 Volcanic Hammer
 [sideboard]
-[human_extra_cards]
-[ai_extra_cards]
-Furnace of Rath

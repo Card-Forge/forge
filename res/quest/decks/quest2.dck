@@ -1,15 +1,7 @@
 [metadata]
-ID=2
 Name=quest2
 DisplayName=Dungeon Crawling (Blue)
-Difficulty=Medium
-Description=This realm holds knowledge so vast it can overburden the unwary.
-Repeatable=true
-NumberWinsRequired=20
-CardReward=3 blue rares
-CreditsReward=100
 Icon=Dungeon Crawling Blue.jpg
-AILife=25
 Deck Type=constructed
 Comment=
 [main]
@@ -38,7 +30,3 @@ Comment=
 1 Fugitive Wizard
 1 Grayscaled Gharial
 [sideboard]
-[human_extra_cards]
-1 Quest for Ancient Secrets
-[ai_extra_cards]
-1 Forced Fruition

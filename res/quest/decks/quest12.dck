@@ -1,15 +1,7 @@
 [metadata]
-ID=12
 Name=quest12
 DisplayName=Barroom Brawl
-Difficulty=Hard
-Description=A drunken giant of a man takes a swing at you, your brew spills and a fight breaks out.
-Repeatable=false
-NumberWinsRequired=64
-CardReward=4 random rares
-CreditsReward=250
 Icon=Barroom Brawl.jpg
-AILife=30
 Deck Type=constructed
 Comment=
 [main]
@@ -35,9 +27,3 @@ Comment=
 4 Savannah
 4 Wasteland
 [sideboard]
-[human_extra_cards]
-TOKEN|W|1|1|soldier ally|creature|soldier|ally
-TOKEN|W|1|1|soldier ally|creature|soldier|ally
-TOKEN|W|1|1|soldier ally|creature|soldier|ally
-[ai_extra_cards]
-Lowland Giant

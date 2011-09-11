@@ -1,6 +1,10 @@
 package forge.quest.data;
 
-import forge.*;
+import forge.Card;
+import forge.CardList;
+import forge.Constant;
+import forge.Quest_Assignment;
+import forge.card.CardPrinted;
 import forge.card.CardRarity;
 
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ public class QuestUtil {
 
     /**
      * <p>getComputerCreatures.</p>
+     * Returns extra AI cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @param qa a {@link forge.Quest_Assignment} object.
@@ -32,23 +37,16 @@ public class QuestUtil {
      */
     public static CardList getComputerCreatures(final QuestData qd, Quest_Assignment qa) {
         CardList list = new CardList();
+        
         if (qa != null) {
-            ArrayList<String> compCards = qa.getCompy();
-
-            for (String s : compCards) {
-                Card c = AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                list.add(c);
-            }
+            list.addAll(qa.getAIExtraCards());
         }
         return list;
     }
 
     /**
      * <p>getHumanPlantAndPet.</p>
+     * Returns list of current plant/pet configuration.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
@@ -69,6 +67,8 @@ public class QuestUtil {
 
     /**
      * <p>getHumanPlantAndPet.</p>
+     * Returns extra human cards, including current plant/pet configuration,
+     * and cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @param qa a {@link forge.Quest_Assignment} object.
@@ -76,420 +76,104 @@ public class QuestUtil {
      */
     public static CardList getHumanPlantAndPet(final QuestData qd, Quest_Assignment qa) {
         CardList list = getHumanPlantAndPet(qd);
-
+        
         if (qa != null) {
-            list.addAll(qa.getHuman());
+            list.addAll(qa.getHumanExtraCards());
         }
 
         return list;
     }
+    
+    /**
+     * <p>createToken.</p>
+     * Creates a card instance for token defined by property string.
+     * 
+     * @param s Properties string of token (TOKEN;W;1;1;sheep;type;type;type...)
+     * @return token Card
+     */
+    public static Card createToken(String s) {
+        String[] properties = s.split(";");;
+        
+        Card c = new Card();
+        c.setToken(true);
+        
+        //c.setManaCost(properties[1]);
+        c.addColor(properties[1]);
+        c.setBaseAttack(Integer.parseInt(properties[2]));
+        c.setBaseDefense(Integer.parseInt(properties[3]));
+        c.setName(properties[4]);
+        
+        c.setImageName(
+            properties[1]+" "+
+            properties[2]+" "+
+            properties[3]+" "+
+            properties[4]
+        );   
 
+        int x = 5;
+        while(x != properties.length) {
+            c.addType(properties[x++]);
+        }                                
 
+        return c;
+    }
+    
+    /**
+     * <p>generateCardRewardList.</p>
+     * Takes a reward list string, parses, and returns list of cards rewarded.
+     * 
+     * @param s Properties string of reward (97 multicolor rares)
+     * @return CardList
+     */
+    public static ArrayList<CardPrinted> generateCardRewardList(String s) {
+        QuestBoosterPack pack = new QuestBoosterPack();
+        String[] temp = s.split(" ");
+        
+        int qty = Integer.parseInt(temp[0]);
+        
+        // Determine rarity
+        CardRarity rar = CardRarity.Uncommon;
+        if(temp[1].equals("rare") || temp[1].equals("rares")) {
+            rar = CardRarity.Rare;
+        }
+        
+        // Determine color ("random" defaults to null color)
+        String col = null;
+        if(temp[2].toLowerCase().equals("black")) {
+            col = Constant.Color.Black;
+        }
+        else if(temp[2].toLowerCase().equals("blue")) {
+            col = Constant.Color.Blue;
+        }
+        else if(temp[2].toLowerCase().equals("colorless")) {
+            col = Constant.Color.Colorless;
+        }
+        else if(temp[2].toLowerCase().equals("green")) {
+            col = Constant.Color.Green;
+        }
+        else if(temp[2].toLowerCase().equals("multicolor")) {
+            col = "Multicolor"; // Note: No constant color for this??
+        }
+        else if(temp[2].toLowerCase().equals("red")) {
+            col = Constant.Color.Red;
+        }
+        else if(temp[2].toLowerCase().equals("white")) {
+            col = Constant.Color.White;
+        }
+        
+        return pack.generateCards(qty, rar, col);
+    }
+    
     /**
      * <p>setupQuest.</p>
-     *
-     * @param qa a {@link forge.Quest_Assignment} object.
+     * Assembled hard-coded quest options.
+     * All non-deck-specific handling now takes place in quests.txt.
+     * 
+     * @deprecated 
+     * @param qa
      */
     public static void setupQuest(Quest_Assignment qa) {
-        QuestBoosterPack pack = new QuestBoosterPack();
-        qa.clearCompy();
-
-        int id = qa.getId();
-
-        if (id == 1) //White Dungeon
-        {
-            qa.addCompy("Divine Presence");
-
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.White));
-        } else if (id == 2) //Blue Dungeon
-        {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Quest for Ancient Secrets", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-            
-            qa.addCompy("Forced Fruition");
-
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Blue));
-        } else if (id == 3) //Black Dungeon
-        {
-            qa.addCompy("Infernal Genesis");
-            
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Black));
-        } else if (id == 4) //Red Dungeon
-        {
-            qa.addCompy("Furnace of Rath");
-
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Red));
-        } else if (id == 5) //Green Dungeon
-        {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Defense of the Heart", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-            
-            qa.addCompy("Eladamri's Vineyard");
-            qa.addCompy("Upwelling");
-            
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Green));
-        } else if (id == 6) //Colorless Dungeon
-        {
-            for (int i = 0; i < 3; i++)
-                qa.addCompy("Eon Hub");
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, Constant.Color.Colorless));
-        } else if (id == 7) //Gold Dungeon
-        {
-            qa.addCompy("Darksteel Ingot");
-            
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, "Multicolor"));
-        } else if (id == 8) {
-            CardList humanList = new CardList();
-            for (int i = 0; i < 3; i++) {
-                //CANNOT use makeToken because of WheneverKeyword
-                Card c = new Card();
-                c.setName("Sheep");
-                c.setImageName("G 0 1 Sheep");
-
-                c.addController(AllZone.getHumanPlayer());
-                c.setOwner(AllZone.getHumanPlayer());
-
-                //c.setManaCost("G");
-                c.addColor("G");
-                c.setToken(true);
-
-                c.addType("Creature");
-                c.addType("Sheep");
-
-                c.setBaseAttack(0);
-                c.setBaseDefense(1);
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
-        } else if (id == 9) {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Trusty Machete", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-
-            for (int i = 0; i < 3; i++)
-                qa.addCompy("Wall of Wood");
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Green));
-        } else if (id == 10) {
-            CardList humanList = new CardList();
-
-            Card crd = AllZone.getCardFactory().getCard("Wall of Spears", AllZone.getHumanPlayer());
-
-            crd.setCurSetCode(crd.getMostRecentSet());
-            crd.setImageFilename(CardUtil.buildFilename(crd));
-
-            humanList.add(crd);
-
-            for (int i = 0; i < 3; i++) {
-                Card c = new Card();
-                c.setName("Citizen");
-                c.setImageName("W 1 1 Citizen");
-
-                c.addController(AllZone.getHumanPlayer());
-                c.setOwner(AllZone.getHumanPlayer());
-
-                c.setManaCost("W");
-                c.addColor("W");
-                c.setToken(true);
-
-                c.addType("Creature");
-                c.addType("Citizen");
-
-                c.setBaseAttack(1);
-                c.setBaseDefense(1);
-
-                humanList.add(c);
-            }
-
-            qa.setHuman(humanList);
-
-            for (int i = 0; i < 3; i++)
-                qa.addCompy("Scathe Zombies");
-            qa.addCompy("Mass of Ghouls");
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Black));
-        } else if (id == 11)  // The King's Contest
-        {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Seal of Cleansing", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-
-            qa.addCompy("Loyal Retainers");
-
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
-        } else if (id == 12)  // Barroom Brawl
-        {
-            CardList humanList = new CardList();
-            for (int i = 0; i < 3; i++) {
-                Card c = new Card();
-                c.setName("Soldier Ally");
-                c.setImageName("W 1 1 Soldier Ally");
-
-                c.addController(AllZone.getHumanPlayer());
-                c.setOwner(AllZone.getHumanPlayer());
-
-                c.setManaCost("W");
-                c.addColor("W");
-                c.setToken(true);
-
-                c.addType("Creature");
-                c.addType("Soldier");
-                c.addType("Ally");
-
-                c.setBaseAttack(1);
-                c.setBaseDefense(1);
-
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-
-            qa.addCompy("Lowland Giant");
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, null));
-        } else if (id == 13)  // The Court Jester
-        {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Sensei's Divining Top", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-
-            qa.addCompy("Teferi's Puzzle Box");
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, "Multicolor"));
-        } else if (id == 14)  // Ancient Battlefield
-        {
-            CardList humanList = new CardList();
-            String humanSetupCards[] = {"Glasses of Urza", "Blight Sickle"};
-
-            for (int i = 0; i < 2; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String compySetupCards[] = {"Bad Moon", "Wall of Brambles"};
-
-            for (int i = 0; i < 2; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, null));
-        } else if (id == 15)  // Don't Play With Matches
-        {
-            CardList humanList = new CardList();
-            String humanSetupCards[] = {"Mudbutton Torchrunner", "Scuzzback Scrapper"};
-
-            for (int i = 0; i < 2; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String compySetupCards[] = {"Heedless One", "Norwood Archers", "Wildslayer Elves"};
-
-            for (int i = 0; i < 3; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Red));
-        } else if (id == 16)  // Mines of Kazum Durl
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
-
-            for (int i = 0; i < 3; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards =
-                    {"Wall of Earth", "Wall of Air", "Wall of Ice", "Wall of Light", "Carrion Wall", "Steel Wall"};
-
-            for (int i = 0; i < 6; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Green));
-        } else if (id == 17)  // House Party
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
-
-            for (int i = 0; i < 3; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
-
-            for (int i = 0; i < 3; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(4, CardRarity.Rare, Constant.Color.Colorless));
-        } else if (id == 18)  // Crows in the Field
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Straw Soldiers", "Femeref Archers", "Moonglove Extract"};
-
-            for (int i = 0; i < 3; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Defiant Falcon", "Soulcatcher", "Storm Crow", "Hypnotic Specter"};
-
-            for (int i = 0; i < 4; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, null));
-        } else if (id == 19)  // The Desert Caravan
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Spidersilk Net", "Dromad Purebred"};
-
-            for (int i = 0; i < 2; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Ambush Party", "Ambush Party", "Gnat Alley Creeper", "Ambush Party", "Ambush Party"};
-
-            for (int i = 0; i < 5; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, null));
-        } else if (id == 20)  // Blood Oath
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Counterbalance", "Hatching Plans", "Ley Druid"};
-
-            for (int i = 0; i < 3; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Ior Ruin Expedition", "Oversold Cemetery", "Trapjaw Kelpie"};
-
-            for (int i = 0; i < 3; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(5, CardRarity.Rare, Constant.Color.Colorless));
-        } else if (id == 21) // Private Domain
-        {
-            CardList humanList = new CardList();
-
-            Card c = AllZone.getCardFactory().getCard("Strip Mine", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
-
-            for (int i = 0; i < 5; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(6, CardRarity.Rare, null));
-        } else if (id == 22) // Pied Piper
-        {
-            CardList humanList = new CardList();
-            String[] humanSetupCards = {"Volunteer Militia", "Land Tax", "Elvish Farmer", "An-Havva Township"};
-
-            for (int i = 0; i < 4; i++) {
-                Card c = AllZone.getCardFactory().getCard(humanSetupCards[i], AllZone.getHumanPlayer());
-
-                c.setCurSetCode(c.getMostRecentSet());
-                c.setImageFilename(CardUtil.buildFilename(c));
-
-                humanList.add(c);
-            }
-            qa.setHuman(humanList);
-
-            String[] compySetupCards = {"Darksteel Citadel", "Relentless Rats"};
-
-            for (int i = 0; i < 2; i++) {
-                qa.addCompy(compySetupCards[i]);
-            }
-
-            qa.setCardRewardList(pack.generateCards(3, CardRarity.Rare, null));
-        }
-
+    
     }
 
 } //QuestUtil
