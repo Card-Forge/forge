@@ -1,0 +1,14 @@
+Name:Chancellor of the Tangle
+ManaCost:4 G G G
+Types:Creature Beast
+Text:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add G to your mana pool.
+PT:5/7
+K:MayEffectFromOpeningHand:ManaOnMain
+K:Vigilance
+K:Reach
+SVar:ManaOnMain:AB$ Effect | Cost$ 0 | Triggers$ TrigMana,TrigRemoveMe | SVars$ EffMana,RemoveMe | Name$ Chancellor of the Forge effect.
+SVar:TrigMana:Mode$ Phase | Phase$ Main | ValidPlayer$ You | Execute$ EffMana | TriggerDescription$ At the beginning of your first main phase, add G to your mana pool.
+SVar:EffMana:AB$Mana | Cost$ 0 | Produced$ G
+SVar:TrigRemoveMe:Mode$ Phase | Phase$ Upkeep | Execute$ RemoveMe | Static$ True | Secondary$ True | TriggerDescription$ Oh, hell no.
+SVar:RemoveMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+End

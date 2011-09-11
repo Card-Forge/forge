@@ -1285,6 +1285,9 @@ res/cardsfolder/c/champion_lancer.txt svneol=native#text/plain
 res/cardsfolder/c/champions_drake.txt svneol=native#text/plain
 res/cardsfolder/c/champions_helm.txt svneol=native#text/plain
 res/cardsfolder/c/champions_victory.txt svneol=native#text/plain
+res/cardsfolder/c/chancellor_of_the_dross.txt -text
+res/cardsfolder/c/chancellor_of_the_forge.txt -text
+res/cardsfolder/c/chancellor_of_the_tangle.txt -text
 res/cardsfolder/c/chandler.txt svneol=native#text/plain
 res/cardsfolder/c/chandra_nalaar.txt svneol=native#text/plain
 res/cardsfolder/c/chandra_the_firebrand.txt -text

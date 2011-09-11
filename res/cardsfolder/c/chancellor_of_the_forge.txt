@@ -1,0 +1,15 @@
+Name:Chancellor of the Forge
+ManaCost:4 R R R
+Types:Creature Giant
+Text:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
+PT:5/5
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EffMassToken | TriggerDescription$ When CARDNAME enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
+SVar:EffMassToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Count$Valid Creature.YouCtrl
+K:MayEffectFromOpeningHand:TokenOnUpkeep
+SVar:TokenOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigToken,TrigRemoveMe | SVars$ EffToken,RemoveMe | Name$ Chancellor of the Forge effect.
+SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | TriggerDescription$ At the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
+SVar:EffToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigRemoveMe:Mode$ Phase | Phase$ Upkeep | Execute$ RemoveMe | Static$ True | Secondary$ True | TriggerDescription$ Oh, hell no.
+SVar:RemoveMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+End
