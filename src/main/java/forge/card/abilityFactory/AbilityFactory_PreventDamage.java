@@ -233,7 +233,7 @@ public class AbilityFactory_PreventDamage {
         else if (AllZone.getStack().size() > 0) {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i control
-            ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+            ArrayList<Object> objects = new ArrayList<Object>();//AbilityFactory.predictThreatenedObjects(af);
             
             if (objects.contains(AllZone.getComputerPlayer()))
             	tgt.addTarget(AllZone.getComputerPlayer());
@@ -248,9 +248,11 @@ public class AbilityFactory_PreventDamage {
                     threatenedTargets.add(c);
             }
 
-            // Choose "best" of the remaining to save
-            tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
-            chance = true;
+            if(!threatenedTargets.isEmpty()) {
+                // Choose "best" of the remaining to save
+                tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
+                chance = true;
+            }
                 
         } // Protect combatants
         else if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
