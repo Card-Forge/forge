@@ -1,0 +1,9 @@
+Name:Arm with AEther
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$Effect | Cost$ 2 U | StaticAbilities$ PumpTrigs | SVars$ Trig,Eff | Name$ Arm with AEther effect. | SpellDescription$ Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
+SVar:PumpTrigs:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ Trig | AddSVar$ Eff | Description$ Creatures you control have "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
+SVar:Trig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ Eff | TriggerDescription$ Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand.
+SVar:Eff:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | Origin$ Battlefield | Destination$ Hand
+End
