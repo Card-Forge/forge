@@ -27,7 +27,7 @@ public class Trigger_Clashed extends Trigger {
     @Override
     public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;
             }
         }
