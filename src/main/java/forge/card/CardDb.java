@@ -157,6 +157,6 @@ public final class CardDb {
         return uniqueCards.values();
     }
 
-    public List<CardPrinted> getAllCards() { return allCardsFlat; }
+    public Iterable<CardPrinted> getAllCards() { return allCardsFlat; }
 
 }

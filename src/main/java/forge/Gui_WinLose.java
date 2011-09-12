@@ -394,8 +394,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose prize booster format", 1, SetUtils.getFormats());
         ch.show();
         GameFormat selected = ch.getSelectedValue();
-        
-        ArrayList<CardPrinted> cardsWon = model.quest.getCards().addCards(selected.getFilter());
+
+        ArrayList<CardPrinted> cardsWon = model.quest.getCards().addCards(selected.getFilterPrinted());
         ImageIcon icon = getIcon("BookIcon.png");
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
@@ -443,7 +443,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (wonMatch && model.qa != null) {
             model.quest.addQuestsPlayed();
 
-            ArrayList<CardPrinted> questRewardCards = model.qa.getCardRewardList();
+            List<CardPrinted> questRewardCards = model.qa.getCardRewardList();
             long questRewardCredits = model.qa.getCreditsReward();
 
             StringBuilder sb = new StringBuilder();

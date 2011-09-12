@@ -98,7 +98,7 @@ public class FilterNameTypeSetPanel extends JComponent{
             if (selected instanceof CardSet) {
                 rules.add(CardPrinted.Predicates.printedInSets(((CardSet) selected).getCode()));
             } else if (selected instanceof GameFormat) {
-                rules.add(((GameFormat) selected).getFilter());
+                rules.add(((GameFormat) selected).getFilterRules());
             }
         }
 

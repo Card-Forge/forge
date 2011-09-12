@@ -19,7 +19,8 @@ public final class GameFormat {
     private final List<String> allowedSetCodes; 
     private final List<String> bannedCardNames; 
     
-    private final Predicate<CardPrinted> filter; 
+    private final Predicate<CardPrinted> filterRules;
+    private final Predicate<CardPrinted> filterPrinted;
     
     
     public GameFormat(final String fName, final List<String> sets, final List<String> bannedCards)
@@ -27,11 +28,21 @@ public final class GameFormat {
         name = fName;
         allowedSetCodes = Collections.unmodifiableList(sets);
         bannedCardNames = Collections.unmodifiableList(bannedCards);
-        filter = buildFilter();
+        filterRules = buildFilterRules();
+        filterPrinted = buildFilterPritned();
     }
     
 
-    private Predicate<CardPrinted> buildFilter() {
+    private Predicate<CardPrinted> buildFilterPritned() {
+        Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(bannedCardNames);
+        Predicate<CardPrinted> allowSets = allowedSetCodes == null || allowedSetCodes.isEmpty() 
+            ? CardPrinted.Predicates.Presets.isTrue
+            : CardPrinted.Predicates.printedInSets(allowedSetCodes, true); 
+        return Predicate.and(banNames, allowSets);
+    }
+
+
+    private Predicate<CardPrinted> buildFilterRules() {
         Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(bannedCardNames);
         Predicate<CardPrinted> allowSets = allowedSetCodes == null || allowedSetCodes.isEmpty() 
             ? CardPrinted.Predicates.Presets.isTrue
@@ -40,7 +51,8 @@ public final class GameFormat {
     }
 
     public String getName() { return name; } 
-    public Predicate<CardPrinted> getFilter() { return filter; }
+    public Predicate<CardPrinted> getFilterRules() { return filterRules; }
+    public Predicate<CardPrinted> getFilterPrinted() { return filterPrinted; }
     
     @Override
     public String toString()

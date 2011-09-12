@@ -7,7 +7,7 @@ public class CardManaCostShard {
     public final float cmpc;
     private final String stringValue;
     public final String imageKey;
-    
+
     protected CardManaCostShard(final int value, final String sValue) {
         this(value, sValue, sValue);
     }
@@ -20,17 +20,19 @@ public class CardManaCostShard {
         imageKey = imgKey;
     }
 
-    public interface Atom {
+    /** A bitmask to represent any mana symbol as an integer. */
+    public abstract static class Atom {
         //int COLORLESS = 1 << 0;
-        int WHITE = 1 << 1;
-        int BLUE = 1 << 2;
-        int BLACK = 1 << 3;
-        int RED = 1 << 4;
-        int GREEN = 1 << 5;
+        public final static int WHITE = 1 << 1;
+        public final static int BLUE = 1 << 2;
+        public final static int BLACK = 1 << 3;
+        public final static int RED = 1 << 4;
+        public final static int GREEN = 1 << 5;
 
-        int IS_X = 1 << 8;
-        int OR_2_COLORLESS = 1 << 9;
-        int OR_2_LIFE = 1 << 10;
+        public final static int IS_X = 1 << 8;
+        public final static int OR_2_COLORLESS = 1 << 9;
+        public final static int OR_2_LIFE = 1 << 10;
+        public final static int IS_SNOW = 1 << 11;
 
     }
 
@@ -44,6 +46,7 @@ public class CardManaCostShard {
      *  while unboxed values will lay on stack, which is faster
      */
     public static final CardManaCostShard X = new CardManaCostShard(Atom.IS_X, "X");
+    public static final CardManaCostShard S = new CardManaCostShard(Atom.IS_SNOW, "S");
 
     public static final CardManaCostShard WHITE = new CardManaCostShard(Atom.WHITE, "W");
     public static final CardManaCostShard BLUE = new CardManaCostShard(Atom.BLUE, "U");
