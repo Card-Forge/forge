@@ -618,8 +618,8 @@ public class GameAction {
 
         boolean isGameDone = humanWins || computerWins;
         if (isGameDone) {
-            game.getPlayerRating(PlayerIndex.AI).setLossReason(computer.getLossState());
-            game.getPlayerRating(PlayerIndex.HUMAN).setLossReason(human.getLossState());
+            game.getPlayerRating(PlayerIndex.AI).setLossReason(computer.getLossState(), computer.getLossConditionSource());
+            game.getPlayerRating(PlayerIndex.HUMAN).setLossReason(human.getLossState(), computer.getLossConditionSource());
             AllZone.getMatchState().addGamePlayed(game);
         }
 

@@ -13,12 +13,18 @@ public class GamePlayerRating {
     protected int timesMulliganed = 0;
 
     protected GameLossReason lossReason = GameLossReason.DidNotLoseYet;
+    protected String lossSpellName;
 
     public final GameLossReason getLossReason() {
         return lossReason;
     }
-    public void setLossReason(GameLossReason loseCondition) {
+    
+    public void setLossReason(GameLossReason loseCondition, String spellName) {
         lossReason = loseCondition;
+        lossSpellName = spellName;
+    }
+    public String getLossSpellName() { 
+        return lossSpellName;
     }
 
     public final int getOpeningHandSize() {

@@ -1388,16 +1388,15 @@ public abstract class Player extends GameEntity {
      *
      * @return a {@link java.lang.String} object.
      */
-    public GameLossReason getLossState() {
-        return lossState;
-    }
+    public GameLossReason getLossState() { return lossState; }
+    public String getLossConditionSource() { return loseConditionSpell; }
 
     /**
      * <p>altWinConditionMet.</p>
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void altWinBySpellEffect( String sourceName ) {
+    public void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
             return;

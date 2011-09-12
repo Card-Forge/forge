@@ -264,6 +264,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                     switch(whyAiLost) {
                         case Poisoned: winConditionName = "Poison"; break;
                         case Milled: winConditionName = "Milled"; break;
+                        case SpellEffect: winConditionName = aiRating.getLossSpellName(); break;
                         default: break;
                     }
                 }
