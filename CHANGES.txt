@@ -7,6 +7,9 @@ http://raindropmemory.deviantart.com)
 #### cards in total.
 
 
+
+
+
 We have changed the archiving format to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
 
 
@@ -87,6 +90,35 @@ Comment=
 - The AI will no longer use the DealDamage AF abilities when the damage is 0.
 - Ran set info script.
 - Ran oracle script.
+- Added the recent commit logs to changes.txt.
+- Continuous static abilities with "RemoveAllAbilities" will now also remove keywords.
+- Fixed Fallen Ideal.
+- Fixed Caravan Escort.
+- Fixed the other level up creatures.
+- Fixed a bug with continuous static abilities with "RemoveAllAbilities" not granting mana abilities back.
+- Removed stAnimate from Blood Moon and Lignify.
+- Removed stAnimate from three more cards.
+- Converted Evil Presence and Tainted Well to script.
+- Added SVar:RemAIDeck:True to Peacekeeper.
+- Draft: cards can be picked by doubleclicking them
+- Fixed a bug in the AI of PreventDamage AF.
+- Draft: pick with either LMB dblclick or clicking RMB once on selected row
+- fix for decks with cards in development (that have no valid setinfo)
+- Made Resuscitate functional.
+- Added Gravity Sphere.
+- Run scripts.
+- Added MayEffectFromOpeningHand keyword. This replaces the hardcoding for Leyline-like effects.
+- Converted the Leylines to keyword.
+- Forgot to add script files
+- Ran scripts.
+- Revert main.properties
+- Reverted Checkstyle settings.
+- Fixed Arm with AEther to not affect creatures that enter the battlefield after it was cast.
+- Reverted the Leylines to their previous handling as I thought ChangeZone could handle their "opening hand abilities".
+- Fix for multiple winlose dialogs in quest mode
+- remove unneeded code in Trigger_Taps.getCopy (I had only added it to this trigger. The rest of the Trigger classes do not need this change.)
+- Checkstyle fixes in AF_Clash
+- fix up a couple Java warnings
 - Added the recent commit logs to changes.txt.
 
 
