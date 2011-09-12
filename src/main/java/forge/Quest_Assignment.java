@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.CardPrinted;
 
@@ -30,7 +31,7 @@ public class Quest_Assignment {
     // Other cards used in assignment: starting, and reward.
     private CardList humanExtraCards    = new CardList();
     private CardList aiExtraCards       = new CardList();
-    private ArrayList<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
+    private List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
 
     // No constructor required; fields are set dynamically.
     
@@ -81,7 +82,7 @@ public class Quest_Assignment {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public void setCardRewardList(final ArrayList<CardPrinted> cp) {
+    public void setCardRewardList(final List<CardPrinted> cp) {
         this.cardRewardList = cp;
     }
     
@@ -91,7 +92,7 @@ public class Quest_Assignment {
      *
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<CardPrinted> getCardRewardList() {
+    public final List<CardPrinted> getCardRewardList() {
         return cardRewardList;
     }
 

@@ -106,8 +106,18 @@ public final class QuestBoosterPack {
         return result;
     }
 
+    // Left if only for backwards compatibility
+    public List<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
+        Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
+        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+    }
 
-    private static ArrayList<CardPrinted> generateDistinctCards(
+    public static List<CardPrinted> generateCards(final Predicate<CardPrinted> filter, int num, CardRarity rarity, String color) {
+        Predicate<CardPrinted> whatYouWant = Predicate.and(filter, getPredicateForConditions(rarity, color));
+        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+    }
+
+    private static List<CardPrinted> generateDistinctCards(
             final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter,
             final int cntNeeded)
@@ -129,18 +139,6 @@ public final class QuestBoosterPack {
         }
 
         return result;
-    }
-
-
-    // Left if only for backwards compatibility
-    public ArrayList<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
-        Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
-        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
-    }
-
-    public static ArrayList<CardPrinted> generateCards(final Predicate<CardPrinted> filter, int num, CardRarity rarity, String color) {
-        Predicate<CardPrinted> whatYouWant = Predicate.and(filter, getPredicateForConditions(rarity, color));
-        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
 
     private static Predicate<CardPrinted> getPredicateForConditions(final CardRarity rarity, final String color)

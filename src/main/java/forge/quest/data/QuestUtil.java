@@ -8,6 +8,7 @@ import forge.card.CardPrinted;
 import forge.card.CardRarity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>QuestUtil class.</p>
@@ -125,7 +126,7 @@ public class QuestUtil {
      * @param s Properties string of reward (97 multicolor rares)
      * @return CardList
      */
-    public static ArrayList<CardPrinted> generateCardRewardList(String s) {
+    public static List<CardPrinted> generateCardRewardList(String s) {
         QuestBoosterPack pack = new QuestBoosterPack();
         String[] temp = s.split(" ");
         
