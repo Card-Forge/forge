@@ -107,6 +107,10 @@ public class GameAction {
             }
             copied.setUnearthed(c.isUnearthed());    // this might be unnecessary
         }
+        
+        for (Trigger trigger : c.getTriggers()) {
+            trigger.setHostCard(copied);
+        }
 
         if (suppress) {
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
