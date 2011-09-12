@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FileUtil;
@@ -13,16 +14,17 @@ import forge.card.CardManaCost.ManaParser;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
+/** This class can read CardRules from Arch's mtg-data.txt file */
 public final class MtgDataParser implements Iterator<CardRules> {
 
     private Iterator<String> it;
-    private final List<String> mtgDataLines; 
+    private final List<String> mtgDataLines;
     public MtgDataParser() {
         mtgDataLines = FileUtil.readFile(ForgeProps.getFile(NewConstants.MTG_DATA));
         it = mtgDataLines.iterator();
         skipSetList();
     }
-    
+
     private static List<String> setsToSkipPrefixes = new ArrayList<String>();
     private static List<String> unSets = new ArrayList<String>(); // take only lands from there
     static {
@@ -77,8 +79,6 @@ public final class MtgDataParser implements Iterator<CardRules> {
     @Override
     public boolean hasNext() { return weHaveNext; }
 
-    private static final String[] emptyArray = new String[0]; // list.toArray() needs this =(
-
     @Override
     public CardRules next() {
         if (!it.hasNext()) { weHaveNext = false; return null; }
@@ -118,9 +118,8 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
         if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
 
-        return new CardRules(name, type, cost, ptOrLoyalty, strs.toArray(emptyArray), sets,
-                // TODO: fix last two parameters
-                false, false);
+        return new CardRules(name, type, cost, ptOrLoyalty,
+                strs.toArray(ArrayUtils.EMPTY_STRING_ARRAY), sets, false, false);
     }
 
     private Map<String, CardInSet> getValidEditions(final String sets, final boolean isBasicLand) {
@@ -162,24 +161,23 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
     @Override public void remove() { }
 
-    
-    
-    public static class ManaParserMtgData implements ManaParser {
+    /** This is a mana-parser for mana written in curly braces like {2}{R}{B} */
+    public static final class ManaParserMtgData implements ManaParser {
         private final String cost;
 
         private int nextBracket;
         private int colorlessCost;
 
 
-        public ManaParserMtgData(final String cost) {
-            this.cost = cost;
+        public ManaParserMtgData(final String cost0) {
+            this.cost = cost0;
             // System.out.println(cost);
-            nextBracket = cost.indexOf('{');
+            nextBracket = cost0.indexOf('{');
             colorlessCost = 0;
         }
-        
-        public int getTotalColorlessCost() { 
-            if ( hasNext() ) { 
+
+        public int getTotalColorlessCost() {
+            if (hasNext()) {
                 throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
             }
             return colorlessCost;
@@ -219,7 +217,5 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
         @Override
         public void remove() { } // unsuported
-    }    
-    
-
+    }
 }
