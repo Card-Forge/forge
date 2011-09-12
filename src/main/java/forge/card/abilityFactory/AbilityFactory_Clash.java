@@ -18,17 +18,21 @@ import java.util.HashMap;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Clash {
+public final class AbilityFactory_Clash {
+
+    private AbilityFactory_Clash() {
+        throw new AssertionError();
+    }
 
     /**
      * <p>getAbilityClash.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public static SpellAbility getAbilityClash(final AbilityFactory AF) {
-        final SpellAbility abClash = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility getAbilityClash(final AbilityFactory af) {
+        final SpellAbility abClash = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -8019637116128196248L;
 
             @Override
@@ -42,18 +46,18 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
             @Override
             public String getStackDescription() {
-                return AF.getHostCard().getName() + " - Clash with an opponent.";
+                return af.getHostCard().getName() + " - Clash with an opponent.";
             }
 
             @Override
             public void resolve() {
-                clashResolve(AF, this);
+                clashResolve(af, this);
             }
         };
 
@@ -63,12 +67,12 @@ public class AbilityFactory_Clash {
     /**
      * <p>getSpellClash.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public static SpellAbility getSpellClash(final AbilityFactory AF) {
-        final SpellAbility spClash = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility getSpellClash(final AbilityFactory af) {
+        final SpellAbility spClash = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4991665176268317172L;
 
             @Override
@@ -82,18 +86,18 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
             @Override
             public String getStackDescription() {
-                return AF.getHostCard().getName() + " - Clash with an opponent.";
+                return af.getHostCard().getName() + " - Clash with an opponent.";
             }
 
             @Override
             public void resolve() {
-                clashResolve(AF, this);
+                clashResolve(af, this);
             }
         };
 
@@ -103,12 +107,12 @@ public class AbilityFactory_Clash {
     /**
      * <p>getDrawbackClash.</p>
      *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public static SpellAbility getDrawbackClash(final AbilityFactory AF) {
-        final SpellAbility dbClash = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility getDrawbackClash(final AbilityFactory af) {
+        final SpellAbility dbClash = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -3850086157052881360L;
 
             @Override
@@ -127,18 +131,18 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
             @Override
             public String getStackDescription() {
-                return AF.getHostCard().getName() + " - Clash with an opponent.";
+                return af.getHostCard().getName() + " - Clash with an opponent.";
             }
 
             @Override
             public void resolve() {
-                clashResolve(AF, this);
+                clashResolve(af, this);
             }
         };
 
@@ -151,28 +155,30 @@ public class AbilityFactory_Clash {
      * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param SA a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void clashResolve(final AbilityFactory AF, final SpellAbility SA) {
-        AbilityFactory AF_Outcomes = new AbilityFactory();
-        boolean victory = AF.getHostCard().getController().clashWithOpponent(AF.getHostCard());
+    private static void clashResolve(final AbilityFactory af, final SpellAbility sa) {
+        AbilityFactory afOutcomes = new AbilityFactory();
+        boolean victory = af.getHostCard().getController().clashWithOpponent(af.getHostCard());
 
         //Run triggers
         HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Player", AF.getHostCard().getController());
+        runParams.put("Player", af.getHostCard().getController());
 
         if (victory) {
-            if (AF.getMapParams().containsKey("WinSubAbility")) {
-                SpellAbility win = AF_Outcomes.getAbility(AF.getHostCard().getSVar(AF.getMapParams().get("WinSubAbility")), AF.getHostCard());
-                win.setActivatingPlayer(AF.getHostCard().getController());
-                ((Ability_Sub) win).setParent(SA);
+            if (af.getMapParams().containsKey("WinSubAbility")) {
+                SpellAbility win = afOutcomes.getAbility(
+                        af.getHostCard().getSVar(af.getMapParams().get("WinSubAbility")), af.getHostCard());
+                win.setActivatingPlayer(af.getHostCard().getController());
+                ((Ability_Sub) win).setParent(sa);
 
                 AbilityFactory.resolve(win, false);
             }
             runParams.put("Won", "True");
         } else {
-            if (AF.getMapParams().containsKey("OtherwiseSubAbility")) {
-                SpellAbility otherwise = AF_Outcomes.getAbility(AF.getHostCard().getSVar(AF.getMapParams().get("OtherwiseSubAbility")), AF.getHostCard());
-                otherwise.setActivatingPlayer(AF.getHostCard().getController());
-                ((Ability_Sub) otherwise).setParent(SA);
+            if (af.getMapParams().containsKey("OtherwiseSubAbility")) {
+                SpellAbility otherwise = afOutcomes.getAbility(
+                        af.getHostCard().getSVar(af.getMapParams().get("OtherwiseSubAbility")), af.getHostCard());
+                otherwise.setActivatingPlayer(af.getHostCard().getController());
+                ((Ability_Sub) otherwise).setParent(sa);
 
                 AbilityFactory.resolve(otherwise, false);
             }
@@ -203,7 +209,7 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
@@ -243,7 +249,7 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
@@ -288,7 +294,7 @@ public class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
@@ -313,17 +319,18 @@ public class AbilityFactory_Clash {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String flipGetStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String flipGetStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         Card host = af.getHostCard();
         Player player = params.containsKey("OpponentCalls") ? host.getController().getOpponent() : host.getController();
 
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         sb.append(player).append(" flips a coin.");
 
@@ -345,48 +352,50 @@ public class AbilityFactory_Clash {
         HashMap<String, String> params = af.getMapParams();
         Card host = af.getHostCard();
         Player player = host.getController();
-    	
-    	ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Caller"), sa);
-		if(caller.size() == 0) caller.add(player);
 
-    	AbilityFactory AF_Outcomes = new AbilityFactory();
-    	boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
+        ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Caller"), sa);
+        if (caller.size() == 0) {
+            caller.add(player);
+        }
+
+        AbilityFactory afOutcomes = new AbilityFactory();
+        boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
 
         //Run triggers
         //HashMap<String,Object> runParams = new HashMap<String,Object>();
         //runParams.put("Player", player);
-    	if (params.get("RememberAll") != null){
-    	    host.addRemembered(host);
-    	}
+        if (params.get("RememberAll") != null) {
+            host.addRemembered(host);
+        }
 
         if (victory) {
-            if (params.get("RememberWinner") != null){
+            if (params.get("RememberWinner") != null) {
                 host.addRemembered(host);
             }
             if (params.containsKey("WinSubAbility")) {
-                SpellAbility win = AF_Outcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
+                SpellAbility win = afOutcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
                 ((Ability_Sub) win).setParent(sa);
 
-    			AbilityFactory.resolve(win, false);
-    		}
-    		//runParams.put("Won","True");
-    	}
-    	else {
-    	    if (params.get("RememberLoser") != null){
+                AbilityFactory.resolve(win, false);
+            }
+            //runParams.put("Won","True");
+        }
+        else {
+            if (params.get("RememberLoser") != null) {
                 host.addRemembered(host);
             }
-    		if(params.containsKey("LoseSubAbility")) {
-    			SpellAbility lose = AF_Outcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
-    			lose.setActivatingPlayer(player);
-    			((Ability_Sub)lose).setParent(sa);
+            if (params.containsKey("LoseSubAbility")) {
+                SpellAbility lose = afOutcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
+                lose.setActivatingPlayer(player);
+                ((Ability_Sub) lose).setParent(sa);
 
-    			AbilityFactory.resolve(lose, false);
-    		}
-    		//runParams.put("Won","False");
-    	}
+                AbilityFactory.resolve(lose, false);
+            }
+            //runParams.put("Won","False");
+        }
 
         //AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
     }
 
-}//end class AbilityFactory_Clash
+} //end class AbilityFactory_Clash
