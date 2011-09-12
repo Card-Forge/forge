@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.game.PlayerIndex;

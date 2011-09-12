@@ -2,7 +2,6 @@ package forge.card.cardFactory;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
-import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.*;
@@ -13,8 +12,13 @@ import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
 import forge.gui.input.Input_PayManaCostUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 /**
  * <p>
@@ -5005,7 +5009,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final String magnitude = k[1];
 
                 final int multiplier = Integer.parseInt(magnitude);
