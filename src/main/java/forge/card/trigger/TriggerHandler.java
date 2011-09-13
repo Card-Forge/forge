@@ -380,7 +380,7 @@ public class TriggerHandler {
         //Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
 
-        if (torporOrbs.size() != 0 && mode.equals("ChangesZone") && regtrig.getMapParams().get("ValidCard").contains("Creature"))
+        if (torporOrbs.size() != 0 && mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
         {
             return false;
         }
