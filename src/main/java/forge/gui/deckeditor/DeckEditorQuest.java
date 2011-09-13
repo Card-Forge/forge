@@ -2,6 +2,7 @@ package forge.gui.deckeditor;
 
 import forge.Command;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
@@ -11,7 +12,7 @@ import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 
 import java.awt.Font;
@@ -179,7 +180,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove Card");
         removeButton.addActionListener(new ActionListener() {
@@ -194,7 +195,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
             }
         });
         // addButton.setIcon(downIcon);
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         addButton.setBounds(new Rectangle(23, 403, 146, 49));
 
@@ -204,7 +205,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
                 analysisButton_actionPerformed(e);
             }
         });
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
 
@@ -221,7 +222,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (JCheckBox box : filterBoxes.allTypes) {
-            if (!OldGuiNewGame.useLAFFonts.isSelected()) { box.setFont(f); }
+            if (!Singletons.getModel().getPreferences().lafFonts) { box.setFont(f); }
             box.setOpaque(false);
             box.addItemListener(itemListenerUpdatesDisplay);
         }

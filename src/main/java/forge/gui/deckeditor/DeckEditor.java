@@ -20,13 +20,14 @@ import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -128,7 +129,7 @@ public final class DeckEditor extends DeckEditorBase {
 
     private void jbInit() {
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             Font fButtons = new java.awt.Font("Dialog", 0, 13);
             removeButton.setFont(fButtons);
             addButton.setFont(fButtons);
@@ -153,7 +154,7 @@ public final class DeckEditor extends DeckEditorBase {
         // Type filtering
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (JCheckBox box : filterBoxes.allTypes) {
-            if (!OldGuiNewGame.useLAFFonts.isSelected()) { box.setFont(f); }
+            if (!Singletons.getModel().getPreferences().lafFonts) { box.setFont(f); }
             box.setOpaque(false);
         }
 

@@ -17,11 +17,12 @@ import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.GuiDisplayUtil;
 import forge.ImagePreviewPanel;
+import forge.Singletons;
 import forge.card.CardPrinted;
 import forge.gui.game.CardDetailPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 /** 
  * This panel is to be placed in the right part of a deck editor
@@ -51,7 +52,7 @@ public class CardPanelHeavy extends CardPanelBase {
                 changePictureButton_actionPerformed(e);
             }
         });
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
 
         removePictureButton.setText("Remove picture...");
@@ -60,7 +61,7 @@ public class CardPanelHeavy extends CardPanelBase {
                 removePictureButton_actionPerformed(e);
             }
         });
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
         
         pictureViewPanel.setCardPanel(picture);

@@ -16,11 +16,12 @@ import javax.swing.table.TableCellRenderer;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Constant;
+import forge.Singletons;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.card.CardRules;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -55,7 +56,7 @@ public final class TableWithCards {
         jScrollPane.setToolTipText(tableToolTip);
         jScrollPane.getViewport().add(table, null);
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) { statsLabel.setFont(new java.awt.Font("Dialog", 0, 13)); }
+        if (!Singletons.getModel().getPreferences().lafFonts) { statsLabel.setFont(new java.awt.Font("Dialog", 0, 13)); }
         statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
 
         // class data

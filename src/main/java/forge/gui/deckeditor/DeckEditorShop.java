@@ -21,6 +21,7 @@ import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Command;
 import forge.ReadPriceList;
+import forge.Singletons;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.deck.Deck;
@@ -28,7 +29,7 @@ import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -193,7 +194,7 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
         sellButton.setText("Sell Card");
         sellButton.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +209,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             }
         });
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
         buyButton.setBounds(new Rectangle(23, 403, 146, 49));
 
@@ -219,11 +220,11 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         creditsLabel.setText("Total credits: " + questData.getCredits());
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
         sellPercentageLabel.setText("(Sell percentage: " + multiplier + ")");
-        if (!OldGuiNewGame.useLAFFonts.isSelected())
+        if (!Singletons.getModel().getPreferences().lafFonts)
             sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
