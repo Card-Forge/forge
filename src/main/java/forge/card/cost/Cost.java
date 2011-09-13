@@ -18,7 +18,7 @@ import forge.card.spellability.SpellAbility;
  */
 public class Cost {
     private boolean isAbility = true;
-    ArrayList<CostPart> costParts = new ArrayList<CostPart>();
+    private ArrayList<CostPart> costParts = new ArrayList<CostPart>();
     
     public ArrayList<CostPart> getCostParts(){ return costParts; }
     

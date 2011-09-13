@@ -103,10 +103,15 @@ public class CostMana extends CostPart {
                 manaToAdd = AbilityFactory.calculateAmount(source, "X", ability) * getXMana();
             }
         }
-        if (!getManaToPay().equals("0") || manaToAdd > 0)
+        if (!getManaToPay().equals("0") || manaToAdd > 0){
             CostUtil.setInput(CostMana.input_payMana(ability, payment, this, manaToAdd));
-        else if (getXMana() > 0)
+        }
+        else if (getXMana() > 0){
             CostUtil.setInput(CostMana.input_payXMana(ability, payment, this, getXMana()));
+        }
+        else{
+            payment.paidCost(this);
+        }
         
         // We return false here because the Inputs set above should recall payment.payCosts()
         return false;

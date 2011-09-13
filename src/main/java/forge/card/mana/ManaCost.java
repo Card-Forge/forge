@@ -352,7 +352,13 @@ public class ManaCost {
             sb.append(list.get(i).toString());
         }
 
-        return sb.toString().trim();
+        String str = sb.toString().trim();
+        
+        if (str.equals("")){
+            return "0";
+        }
+        
+        return str;
     }
 
     /**
