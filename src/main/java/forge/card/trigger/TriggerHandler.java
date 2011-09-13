@@ -380,18 +380,25 @@ public class TriggerHandler {
         //Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
 
-        if (torporOrbs.size() != 0 && mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
+        if(torporOrbs.size() != 0)
         {
-            return false;
-        }
-        if (torporOrbs.size() != 0 && regtrig.getMapParams().containsKey("Destination"))
-        {
-            if (!regtrig.getMapParams().get("Destination").equals("Battlefield"))
+            if(regtrig.getMapParams().containsKey("Destination"))
             {
-                return false;
+                if ((regtrig.getMapParams().get("Destination").equals("Battlefield") || regtrig.getMapParams().get("Destination").equals("Any")) && mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
+                {
+                    return false;
+                }
             }
+            else
+            {
+                if (mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
+                {
+                    return false;
+                }
+            }
+            
         }
-
+        
         HashMap<String, String> trigParams = regtrig.getMapParams();
         final Player[] decider = new Player[1];
 
