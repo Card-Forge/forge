@@ -5,7 +5,7 @@ import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
 import arcane.ui.util.ManaSymbols;
 import forge.*;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -445,7 +445,9 @@ public class CardPanel extends JPanel implements CardContainer {
      * @param card a {@link forge.Card} object.
      */
     public void setText(Card card) {
-        if (card == null || !OldGuiNewGame.cardOverlay.isSelected()) return;
+        if (card == null || !Singletons.getModel().getPreferences().cardOverlay)
+            return;
+        
         if (card.isFaceDown()) {
             titleText.setText("");
             showCastingCost = false;
@@ -482,7 +484,7 @@ public class CardPanel extends JPanel implements CardContainer {
         Insets i = getInsets();
         Image image = card == null ? null : ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight()
                 - i.top - i.bottom);
-        if (gameCard != null && OldGuiNewGame.cardOverlay.isSelected()) {
+        if (gameCard != null && Singletons.getModel().getPreferences().cardOverlay) {
             setText(gameCard);
         }
 
