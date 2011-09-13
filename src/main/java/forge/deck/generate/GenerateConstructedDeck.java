@@ -8,8 +8,9 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Constant;
+import forge.Singletons;
 
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,14 +147,14 @@ public class GenerateConstructedDeck {
                 //is this really a colorless artifact and not something
                 //weird like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
-                        && !OldGuiNewGame.removeArtifacts.isSelected();
+                        && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
-                if (c.isCreature() && c.getNetAttack() <= 1 && OldGuiNewGame.removeSmallCreatures.isSelected()) {
+                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 

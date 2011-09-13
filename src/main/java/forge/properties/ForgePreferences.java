@@ -26,6 +26,9 @@ public class ForgePreferences extends Preferences {
     public boolean cardOverlay;
     public boolean scaleLargerThanOriginal;
     
+    public boolean deckGenRmvArtifacts;
+    public boolean deckGenRmvSmall;
+    
     public String BugzName;
     public String BugzPwd;
 
@@ -84,6 +87,9 @@ public class ForgePreferences extends Preferences {
         maxStackSize = getInt("stack.max.size", 3);
         scaleLargerThanOriginal = getBoolean("card.scale.larger.than.original", true);
         
+        deckGenRmvArtifacts = getBoolean("deck.gen.rmv.artifacts", false);
+        deckGenRmvSmall = getBoolean("deck.gen.rmv.small", false);
+        
         BugzName = get("bugz.user.name", "");
         BugzPwd = get("bugz.user.pwd", "");
 
@@ -124,12 +130,15 @@ public class ForgePreferences extends Preferences {
         set("stack.offset", stackOffset);
         set("stack.max.size", maxStackSize);
         set("card.scale.larger.than.original", scaleLargerThanOriginal);
-        for (SavePreferencesListener listeners : saveListeners)
+        for (SavePreferencesListener listeners : saveListeners) {
             listeners.savePreferences();
-                
+        }
+        
+        set("deck.gen.rmv.artifacts", deckGenRmvArtifacts);
+        set("deck.gen.rmv.small", deckGenRmvSmall);
+        
         set("bugz.user.name", BugzName);
-        set("bugz.user.pwd", BugzPwd);      
-
+        set("bugz.user.pwd", BugzPwd);
 
         set("phase.ai.upkeep", bAIUpkeep);
         set("phase.ai.draw", bAIDraw);

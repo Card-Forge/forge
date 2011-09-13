@@ -96,6 +96,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     /** Constant <code>removeSmallCreatures</code>. */
     public static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_SMALL));
+    
     /** Constant <code>removeArtifacts</code>. */
     public static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
@@ -211,8 +212,21 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         // new stuff
         JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.TITLE));
+        
         generatedDeck.add(removeSmallCreatures);
+        removeSmallCreatures.addActionListener(new ActionListener () {
+           public void actionPerformed(final ActionEvent arg0) {
+               Singletons.getModel().getPreferences().deckGenRmvSmall = removeSmallCreatures.isSelected();
+           }
+        });
+        
         generatedDeck.add(removeArtifacts);
+        removeArtifacts.addActionListener(new ActionListener () {
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences().deckGenRmvArtifacts = removeArtifacts.isSelected();
+            }
+         });
+        
         JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(OPTIONS.TITLE));
         optionsMenu.add(generatedDeck);
 

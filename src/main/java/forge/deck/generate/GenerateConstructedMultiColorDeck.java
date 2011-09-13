@@ -1,7 +1,7 @@
 package forge.deck.generate;
 
 import forge.*;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -295,7 +295,7 @@ public class GenerateConstructedMultiColorDeck {
                 //wierd like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() &&
                         CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
-                        !OldGuiNewGame.removeArtifacts.isSelected();
+                        !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
         out.addAll(artifact);
@@ -304,7 +304,7 @@ public class GenerateConstructedMultiColorDeck {
             public boolean addCard(Card c) {
                 if (c.isCreature() &&
                         c.getNetAttack() <= 1 &&
-                        OldGuiNewGame.removeSmallCreatures.isSelected()) {
+                        Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -347,7 +347,7 @@ public class GenerateConstructedMultiColorDeck {
                 //wierd like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() &&
                         CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
-                        !OldGuiNewGame.removeArtifacts.isSelected();
+                        !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
         out.addAll(artifact);
@@ -356,7 +356,7 @@ public class GenerateConstructedMultiColorDeck {
             public boolean addCard(Card c) {
                 if (c.isCreature() &&
                         c.getNetAttack() <= 1 &&
-                        OldGuiNewGame.removeSmallCreatures.isSelected()) {
+                        Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
