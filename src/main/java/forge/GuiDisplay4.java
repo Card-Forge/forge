@@ -92,7 +92,7 @@ import forge.gui.input.Input_PayManaCost_Ability;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 
 /**
@@ -842,7 +842,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private void initComponents() {
         //Preparing the Frame
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             setFont(new Font("Times New Roman", 0, 16));
         }
         getContentPane().setLayout(new BorderLayout());
@@ -983,7 +983,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         //adding the individual parts
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             initFonts(pane);
         }
 
@@ -1165,7 +1165,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppPCLabel.setForeground(greenColor);
 
         JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.BUTTON), SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             oppHandLabel.setFont(statFont);
         }
 
@@ -1173,7 +1173,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppGraveButton.setText((String) COMPUTER_GRAVEYARD_ACTION.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             oppGraveButton.setFont(statFont);
         }
 
@@ -1185,7 +1185,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppRemovedButton.setText((String) COMPUTER_REMOVED_ACTION.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             oppRemovedButton.setFont(statFont);
         }
 
@@ -1256,12 +1256,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.BUTTON),
                 SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             playerLibraryLabel.setFont(statFont);
         }
 
         JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HUMAN_HAND.TITLE), SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             playerHandLabel.setFont(statFont);
         }
 
@@ -1270,7 +1270,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerGraveButton.setText((String) HUMAN_GRAVEYARD_ACTION.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             playerGraveButton.setFont(statFont);
         }
 
@@ -1279,7 +1279,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerFlashBackButton.setText((String) HUMAN_FLASHBACK_ACTION.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             playerFlashBackButton.setFont(statFont);
         }
 
@@ -1294,7 +1294,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerRemovedButton.setText((String) HUMAN_REMOVED_ACTION.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             playerRemovedButton.setFont(statFont);
         }
 

@@ -8,7 +8,7 @@ package forge.gui.game;
 
 
 import forge.*;
-import forge.view.swing.OldGuiNewGame;
+//import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -81,7 +81,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         cdArea.setLineWrap(true);
         cdArea.setWrapStyleWord(true);
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+        if (!Singletons.getModel().getPreferences().lafFonts) {
         	nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         	typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
             powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
