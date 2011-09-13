@@ -468,7 +468,7 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public boolean doTrigger(boolean mandatory) {
-                return millCanPlayAI(af, this);
+                return millTrigger(af, this, mandatory);
             }
 
         };
