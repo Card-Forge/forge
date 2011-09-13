@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME can't attack or block. | AddAbility$ ManaW & ManaU & ManaB & ManaR & ManaG | Description$ Enchanted creature can't attack or block. Enchanted creature has "tap: Add one mana of any color to your mana pool."
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | AddAbility$ ManaW & ManaU & ManaB & ManaR & ManaG | Description$ Enchanted creature can't attack or block. Enchanted creature has "tap: Add one mana of any color to your mana pool."
 SVar:ManaW:AB$Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:ManaU:AB$Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:ManaB:AB$Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.

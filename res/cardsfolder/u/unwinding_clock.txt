@@ -2,7 +2,7 @@ Name:Unwinding Clock
 ManaCost:4
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ HIDDEN CARDNAME untaps during each other player's untap step. | Description$ Untap all artifacts you control during each other player's untap step.
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME untaps during each other player's untap step. | Description$ Untap all artifacts you control during each other player's untap step.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unwinding_clock.jpg

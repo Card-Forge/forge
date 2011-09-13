@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Intimidate | Description$ Enchanted creature gets +2/+2, has intimidate, and can't attack you or a planeswalker you control.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+YouDontCtrl | AddKeyword$ HIDDEN CARDNAME can't attack.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+YouDontCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't attack.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vow_of_malice.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/107.jpg

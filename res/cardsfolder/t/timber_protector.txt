@@ -4,7 +4,7 @@ Types:Creature Treefolk Warrior
 Text:no text
 PT:4/6
 S:Mode$ Continuous | Affected$ Creature.Treefolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Treefolk creatures you control get +1/+1.
-S:Mode$ Continuous | Affected$ Creature.Treefolk+Other+YouCtrl,Forest.YouCtrl | AddKeyword$ HIDDEN Indestructible | Description$ Other Treefolk and Forests you control are indestructible.
+S:Mode$ Continuous | Affected$ Creature.Treefolk+Other+YouCtrl,Forest.YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Other Treefolk and Forests you control are indestructible.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
