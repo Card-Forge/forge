@@ -4,7 +4,7 @@ Types:Legendary Creature Angel
 Text:no text
 PT:3/4
 K:Flying
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddKeyword$ HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of creatures your opponents control can't be activated.
+S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddHiddenKeyword$ HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of creatures your opponents control can't be activated.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg

@@ -2,7 +2,7 @@ Name:Darksteel Forge
 ManaCost:9
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ HIDDEN Indestructible | Description$ Artifacts you control are indestructible.
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Artifacts you control are indestructible.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/110.jpg

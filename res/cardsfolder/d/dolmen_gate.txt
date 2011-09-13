@@ -2,7 +2,7 @@ Name:Dolmen Gate
 ManaCost:2
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ HIDDEN Prevent all combat damage that would be dealt to CARDNAME. | Description$ Prevent all combat damage that would be dealt to attacking creatures you control.
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddHiddenKeyword$ HIDDEN Prevent all combat damage that would be dealt to CARDNAME. | Description$ Prevent all combat damage that would be dealt to attacking creatures you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dolmen_gate.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/256.jpg

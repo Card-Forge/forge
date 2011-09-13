@@ -2,7 +2,7 @@ Name:Goblin Assault
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.Goblin | AddKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Goblin creatures attack each turn if able.
+S:Mode$ Continuous | Affected$ Creature.Goblin | AddHiddenKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Goblin creatures attack each turn if able.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste
 SVar:Rarity:Rare

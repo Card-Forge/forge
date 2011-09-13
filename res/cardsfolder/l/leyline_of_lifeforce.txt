@@ -2,7 +2,7 @@ Name:Leyline of Lifeforce
 ManaCost:2 G G
 Types:Enchantment
 Text:If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
-S:Mode$ Continuous | Affected$ Creature | AddKeyword$ HIDDEN CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Creature spells can't be countered.
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Creature spells can't be countered.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lifeforce.jpg

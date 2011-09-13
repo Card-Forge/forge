@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment Aura
 Text:no text
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Enchanted creature attacks each turn if able.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Enchanted creature attacks each turn if able.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 3 damage to that creature's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
 SVar:Rarity:Uncommon

@@ -2,7 +2,7 @@ Name:Familiar Ground
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ HIDDEN CARDNAME can't be blocked by more than one creature. | Description$ Each creature you control can't be blocked by more than one creature.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't be blocked by more than one creature. | Description$ Each creature you control can't be blocked by more than one creature.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/familiar_ground.jpg

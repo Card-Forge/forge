@@ -4,7 +4,7 @@ Types:Snow Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME can't block. & HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block and its activated abilities can't be activated.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't block. & HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block and its activated abilities can't be activated.
 A:AB$ Pump | Cost$ S | Defined$ Enchanted | KW$ Defender | SpellDescription$ Enchanted creature gains defender until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

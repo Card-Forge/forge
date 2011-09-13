@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant permanent
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ HIDDEN Indestructible | Description$ Enchanted permanent is indestructible. (Effects that say "destroy" don't destroy that permanent. An indestructible creature can't be destroyed by damage.)
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Enchanted permanent is indestructible. (Effects that say "destroy" don't destroy that permanent. An indestructible creature can't be destroyed by damage.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indestructibility.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/17.jpg

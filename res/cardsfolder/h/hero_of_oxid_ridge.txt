@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, creatures with power 1 or less can't block this turn.
 SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
 SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Hero of Oxid Ridge Effect | StaticAbilities$ KWPump
-SVar:KWPump:Mode$ Continuous | Affected$ Creature.powerLE1 | AddKeyword$ HIDDEN CARDNAME can't block. | Description$ Creatures with power 1 or less can't block this turn.
+SVar:KWPump:Mode$ Continuous | Affected$ Creature.powerLE1 | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | Description$ Creatures with power 1 or less can't block this turn.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_oxid_ridge.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/66.jpg

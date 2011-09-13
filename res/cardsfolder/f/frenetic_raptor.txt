@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Lizard Beast
 Text:no text
 PT:6/6
-S:Mode$ Continuous | Affected$ Creature.Beast | AddKeyword$ HIDDEN CARDNAME can't block. | Description$ Beasts can't block.
+S:Mode$ Continuous | Affected$ Creature.Beast | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | Description$ Beasts can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_raptor.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/93.jpg

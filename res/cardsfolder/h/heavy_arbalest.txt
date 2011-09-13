@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 Text:no text
 K:eqPump 4:0/0
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Equipped creature doesn't untap during its controller's untap step.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Equipped creature doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Tap: This creature deals 2 damage to target creature or player."
 SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:Rarity:Uncommon
