@@ -120,6 +120,24 @@ Comment=
 - Checkstyle fixes in AF_Clash
 - fix up a couple Java warnings
 - Added the recent commit logs to changes.txt.
+- added snow to manashards
+- allCards returns an Iterable (a silly protection against external modification)
+- When player chooses t2 or modern he won't get cards valid for the format but belonging to older sets.
+- (minor) Changed from ArrayList to List in a chain of booster generation
+- Checkstyle-changes for mtg-data.txt parser
+- set oracleScript as executable
+- set cardTemplateScript as executable
+- Door to nothingness (as well as any other spell effect causing a GL) should be displayed correctly in quest battle debriefing
+- Fixed change zone triggers (once again).
+- Fixed performTest in Trigger_LandPlayed.
+- Fixed performTest in Trigger_Cycled.
+- Fixed performTest in Trigger_Clashed.
+- add Morbid script parameter to CardFactoryUtil.xCount()
+- I should be more careful copypaster
+- Fixing CostChange issue where required mana is reduced to 0.
+- Checkstyle fixes in SA_Condition and SA_Requirements
+- Fixed Haunting Apparition.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
