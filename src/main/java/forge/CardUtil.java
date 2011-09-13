@@ -499,6 +499,14 @@ public final class CardUtil {
         return !isNonStackingKeyword(keyword);
     }
 
+   
+    public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) 
+    {
+        String nn = artIndexMax > 1 ? Integer.toString(artIndex+1) : "";
+        String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
+        //3 letter set code with MWS filename format
+        return String.format("%s%s.full.jpg", mwsCardName, nn);
+    }
     /**
      * <p>buildFilename.</p>
      *
@@ -518,10 +526,7 @@ public final class CardUtil {
     }
 
     /**
-     * buildFilename.
-     * 
-     * @param card the card to get the filename for
-     * @return the filename
+     * buildFilename for lightweight card. Searches for a matching file on disk, 
      */
     public static String buildFilename(final CardPrinted card) {
         int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();

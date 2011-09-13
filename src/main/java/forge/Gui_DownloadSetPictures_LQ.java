@@ -1,6 +1,10 @@
 package forge;
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.card.CardDb;
+import forge.card.CardPrinted;
+import forge.card.CardSet;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -8,6 +12,9 @@ import forge.properties.NewConstants;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -386,66 +393,31 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
 
         //File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         String URLBase = "http://cardforge.org/fpics/";
-        String imgFN = "";
 
-        for (Card c : AllZone.getCardFactory()) {
-            ArrayList<SetInfo> cSetInfo = c.getSets();
-            if (cSetInfo.size() > 0) {
-                for (int j = 0; j < cSetInfo.size(); j++) {
-                    c.setCurSetCode(cSetInfo.get(j).Code);
-                    String SC3 = c.getCurSetCode();
-                    String SC2 = SetUtils.getCode2ByCode(c.getCurSetCode());
+        for (CardPrinted c : CardDb.instance().getAllCards()) {
+            String SC3 = c.getSet();
+            if (StringUtils.isBlank(SC3) || "???".equals(SC3)) continue; // we don't want cards from unknown sets
 
-                    int n = 0;
-                    if (cSetInfo.get(j).PicCount > 0) {
-                        n = cSetInfo.get(j).PicCount;
+            CardSet thisSet = SetUtils.getSetByCode(SC3);
+            String SC2 = thisSet.getCode2(); 
 
-                        for (int k = 1; k <= n; k++) {
-                            c.setRandomPicture(k);
+            String imgFN = CardUtil.buildFilename(c);
+            boolean foundSetImage = imgFN.contains(SC3) || imgFN.contains(SC2); 
 
-                            imgFN = CardUtil.buildFilename(c);
-                            if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2))) {
-                                String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + k + ".full.jpg";
-                                CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
-                            }
-                        }
-                    } else {
-                        c.setRandomPicture(0);
-
-                        imgFN = CardUtil.buildFilename(c);
-                        if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2))) {
-                            String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
-                            //if (MyRandom.percentTrue(50))
-                            CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
-                            //else
-                            //CList.add(new mCard(SC3 + "/" + fn, c.getCurSetURL(), SC3));
-
-                        }
-
-                    }
-                }
-
+            if (!foundSetImage) {
+                int artsCnt = c.getCard().getSetInfo(SC3).getCopiesCount();
+                String fn = CardUtil.buildIdealFilename(c.getName(), c.getArtIndex(), artsCnt); 
+                //System.out.println(fn);
+                CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
             }
-
-            //Log.error(iName + ".jpg" + "\t" + URLs[0]);
-
         }
-
-        //ArrayList<mCard> list = new ArrayList<mCard>();
-        //File file;
-
-        //File base = ForgeProps.getFile(IMAGE_TOKEN);
-        //for (int i = 0; i < cardTokenLQ.length; i++) {
-        //    file = new File(base, cardTokenLQ[i].name.substring(3, cardTokenLQ[i].name.length()));
-        //    if (!file.exists()) CList.add(cardTokenLQ[i]);
-        //}
 
         //return all card names and urls that are needed
         mCard[] out = new mCard[CList.size()];
         CList.toArray(out);
 
-        for (int i = 0; i < out.length; i++)
-            System.out.println(out[i].name + " " + out[i].url);
+        for (int i = 0; i < out.length; i++) { System.out.println(out[i].name + " " + out[i].url); }
+        
         return out;
     }//getNeededCards()
 

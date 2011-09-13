@@ -153,10 +153,8 @@ public final class CardDb {
     }
 
     // returns a list of all cards from their respective latest editions
-    public Iterable<CardPrinted> getAllUniqueCards() {
-        return uniqueCards.values();
-    }
-
+    public Iterable<CardPrinted> getAllUniqueCards() { return uniqueCards.values(); }
+    //public Iterable<CardRules> getAllCardRules() { return cards.values(); } // still not needed
     public Iterable<CardPrinted> getAllCards() { return allCardsFlat; }
 
 }
