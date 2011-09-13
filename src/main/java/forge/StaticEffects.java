@@ -61,6 +61,7 @@ public class StaticEffects {
         int toughnessBonus = 0;
         boolean setPT = false;
         String[] addKeywords = null;
+        String[] addHiddenKeywords = null;
         String addColors = null;
 
         if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
@@ -85,6 +86,10 @@ public class StaticEffects {
             } else {
                 toughnessBonus = Integer.valueOf(params.get("AddToughness"));
             }
+        }
+        
+        if (params.containsKey("AddHiddenKeyword")) {
+            addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
 
         if (params.containsKey("AddColor")) {
@@ -134,6 +139,12 @@ public class StaticEffects {
                     if (s.getType().equals("Temporary")) {
                         affectedCard.removeSpellAbility(s);
                     }
+                }
+            }
+            
+            if(addHiddenKeywords != null) {
+                for (String k : addHiddenKeywords) {
+                    affectedCard.removeExtrinsicKeyword(k);
                 }
             }
             

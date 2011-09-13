@@ -43,6 +43,7 @@ public class StaticAbility_Continuous {
         int setPower = -1;
         int setToughness = -1;
         String[] addKeywords = null;
+        String[] addHiddenKeywords = null;
         String[] removeKeywords = null;
         String[] addAbilities = null;
         String[] addSVars = null;
@@ -96,6 +97,10 @@ public class StaticAbility_Continuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
+        }
+        
+        if (params.containsKey("AddHiddenKeyword")) {
+            addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
         
         if (params.containsKey("RemoveKeyword")) {
@@ -207,6 +212,13 @@ public class StaticAbility_Continuous {
             // add keywords
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities, hostCard.getTimestamp());
+            }
+            
+         // add HIDDEN keywords
+            if(addHiddenKeywords != null) {
+                for (String k : addHiddenKeywords) {
+                    affectedCard.addExtrinsicKeyword(k);
+                }
             }
 
             // add abilities

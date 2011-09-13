@@ -681,7 +681,7 @@ public class GameAction {
             cardsWithStAbs.reverse(); //roughly timestamp order
             
             //apply continuous effects
-            for (int layer = 4; layer < 10; layer++) {
+            for (int layer = 4; layer < 11; layer++) {
                 for (Card card : cardsWithStAbs) {
                     ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
                     for (StaticAbility stAb : staticAbilities) {

@@ -102,7 +102,10 @@ public class StaticAbility {
     	
     	if(mapParams.containsKey("AddPower") || mapParams.containsKey("AddToughness")  
     			|| mapParams.containsKey("SetPower") || mapParams.containsKey("SetToughness"))
-    		return 9; // This is the collection of 7b and 7c
+    		return 9; //This is the collection of 7b and 7c
+    	
+        if(mapParams.containsKey("AddHiddenKeyword"))
+            return 10; // rules change
 
     	// Layer 1, 2 & 3 are not supported
     	
