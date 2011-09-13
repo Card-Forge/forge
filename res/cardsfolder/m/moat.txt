@@ -2,7 +2,7 @@ Name:Moat
 ManaCost:2 W W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures without flying can't attack.
+S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures without flying can't attack.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moat.jpg

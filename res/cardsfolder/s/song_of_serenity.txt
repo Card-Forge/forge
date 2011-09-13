@@ -2,7 +2,7 @@ Name:Song of Serenity
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.enchanted | AddKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures that are enchanted can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.enchanted | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures that are enchanted can't attack or block.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_serenity.jpg

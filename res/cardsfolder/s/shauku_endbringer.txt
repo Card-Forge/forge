@@ -4,7 +4,7 @@ Types:Legendary Creature Vampire
 Text:no text
 PT:5/5
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GT1 | Description$ CARDNAME can't attack if another creature is on the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GT1 | Description$ CARDNAME can't attack if another creature is on the battlefield.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 3 life.
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SubAbility$ SVar=DBCounter | SpellDescription$ Exile target creature and put a +1/+1 counter on CARDNAME.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 3

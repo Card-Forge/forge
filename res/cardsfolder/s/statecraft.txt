@@ -2,7 +2,7 @@ Name:Statecraft
 ManaCost:3 U
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | Description$ Prevent all combat damage that would be dealt to and dealt by creatures you control.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | Description$ Prevent all combat damage that would be dealt to and dealt by creatures you control.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/statecraft.jpg

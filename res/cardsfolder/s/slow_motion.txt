@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2 | Description$ At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays 2.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2 | Description$ At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays 2.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2

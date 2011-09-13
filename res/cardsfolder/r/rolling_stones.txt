@@ -2,7 +2,7 @@ Name:Rolling Stones
 ManaCost:1 W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.Wall | AddKeyword$ HIDDEN CARDNAME can attack as though it didn't have defender. | Description$ Wall creatures can attack as though they didn't have defender.
+S:Mode$ Continuous | Affected$ Creature.Wall | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it didn't have defender. | Description$ Wall creatures can attack as though they didn't have defender.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

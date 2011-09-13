@@ -6,7 +6,7 @@ PT:1/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target land. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
 SVar:DBTap:DB$Tap | Defined$ Targeted
-S:Mode$ Continuous | Affected$ Land.IsRemembered | AddKeyword$ HIDDEN This card doesn't untap during your next untap step.
+S:Mode$ Continuous | Affected$ Land.IsRemembered | AddHiddenKeyword$ HIDDEN This card doesn't untap during your next untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
