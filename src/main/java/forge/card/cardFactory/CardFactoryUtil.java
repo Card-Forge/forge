@@ -3169,6 +3169,18 @@ public class CardFactoryUtil {
             return doXMath(res.size(), m, c);
         }
 
+        
+        // Count$Morbid.<True>.<False>
+        if (sq[0].startsWith("Morbid")) {
+            CardList res = CardUtil.getThisTurnEntered("Graveyard", "Battlefield", "Creature", c);
+            if (res.size() > 0) {
+                return doXMath(Integer.parseInt(sq[1]), m, c);
+            }
+            else {
+                return doXMath(Integer.parseInt(sq[2]), m, c); 
+            }
+        }
+        
         // Generic Zone-based counting
         // Count$QualityAndZones.Subquality
 
