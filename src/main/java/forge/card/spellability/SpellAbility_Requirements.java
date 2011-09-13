@@ -26,7 +26,7 @@ public class SpellAbility_Requirements {
      *
      * @param bSkip a boolean.
      */
-    public void setSkipStack(boolean bSkip) {
+    public final void setSkipStack(final boolean bSkip) {
         skipStack = bSkip;
     }
 
@@ -35,7 +35,7 @@ public class SpellAbility_Requirements {
      *
      * @param bFree a boolean.
      */
-    public void setFree(boolean bFree) {
+    public final void setFree(final boolean bFree) {
         isFree = bFree;
     }
 
@@ -49,7 +49,7 @@ public class SpellAbility_Requirements {
      * @param ts a {@link forge.card.spellability.Target_Selection} object.
      * @param cp a {@link forge.card.cost.Cost_Payment} object.
      */
-    public SpellAbility_Requirements(SpellAbility sa, Target_Selection ts, Cost_Payment cp) {
+    public SpellAbility_Requirements(final SpellAbility sa, final Target_Selection ts, final Cost_Payment cp) {
         ability = sa;
         select = ts;
         payment = cp;
@@ -58,7 +58,7 @@ public class SpellAbility_Requirements {
     /**
      * <p>fillRequirements.</p>
      */
-    public void fillRequirements() {
+    public final void fillRequirements() {
         fillRequirements(false);
     }
 
@@ -67,7 +67,7 @@ public class SpellAbility_Requirements {
      *
      * @param skipTargeting a boolean.
      */
-    public void fillRequirements(boolean skipTargeting) {
+    public final void fillRequirements(final boolean skipTargeting) {
         if (ability instanceof Spell && !bCasting) {
             // remove from hand
             bCasting = true;
@@ -82,19 +82,21 @@ public class SpellAbility_Requirements {
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         AllZone.getStack().freezeStack();
 
-        // Skip to paying if parent ability doesn't target and has no subAbilities. (or trigger case where its already targeted)
+        // Skip to paying if parent ability doesn't target and has no subAbilities.
+        // (or trigger case where its already targeted)
         if (!skipTargeting && (select.doesTarget() || ability.getSubAbility() != null)) {
             select.setRequirements(this);
             select.resetTargets();
             select.chooseTargets();
-        } else
+        } else {
             needPayment();
+        }
     }
 
     /**
      * <p>finishedTargeting.</p>
      */
-    public void finishedTargeting() {
+    public final void finishedTargeting() {
         if (select.isCanceled()) {
             // cancel ability during target choosing
             Card c = ability.getSourceCard();
@@ -106,24 +108,26 @@ public class SpellAbility_Requirements {
             select.resetTargets();
             AllZone.getStack().clearFrozen();
             return;
-        } else
+        } else {
             needPayment();
+        }
     }
 
     /**
      * <p>needPayment.</p>
      */
-    public void needPayment() {
-        if (!isFree)
+    public final void needPayment() {
+        if (!isFree) {
             startPaying();
-        else
+        } else {
             finishPaying();
+        }
     }
 
     /**
      * <p>startPaying.</p>
      */
-    public void startPaying() {
+    public final void startPaying() {
         payment.setRequirements(this);
         payment.payCost();
     }
@@ -131,12 +135,13 @@ public class SpellAbility_Requirements {
     /**
      * <p>finishPaying.</p>
      */
-    public void finishPaying() {
+    public final void finishPaying() {
         if (isFree || payment.isAllPaid()) {
-            if (skipStack)
+            if (skipStack) {
                 AbilityFactory.resolve(ability, false);
-            else
+            } else {
                 addAbilityToStack();
+            }
 
             select.resetTargets();
             AllZone.getGameAction().checkStateEffects();
@@ -147,8 +152,9 @@ public class SpellAbility_Requirements {
                 AllZone.getGameAction().moveTo(fromZone, c);
             }
 
-            if (select != null)
+            if (select != null) {
                 select.resetTargets();
+            }
 
             ability.resetOnceResolved();
             payment.cancelPayment();
@@ -159,7 +165,7 @@ public class SpellAbility_Requirements {
     /**
      * <p>addAbilityToStack.</p>
      */
-    public void addAbilityToStack() {
+    public final void addAbilityToStack() {
         // For older abilities that don't setStackDescription set it here
         if (ability.getStackDescription().equals("")) {
             StringBuilder sb = new StringBuilder();
@@ -168,8 +174,9 @@ public class SpellAbility_Requirements {
                 ArrayList<Object> targets = ability.getTarget().getTargets();
                 if (targets.size() > 0) {
                     sb.append(" - Targeting ");
-                    for (Object o : targets)
+                    for (Object o : targets) {
                         sb.append(o.toString()).append(" ");
+                    }
                 }
             }
 

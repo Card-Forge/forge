@@ -1,7 +1,11 @@
 package forge.card.spellability;
 
 
-import forge.*;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.CardList;
+import forge.Phase;
+import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
@@ -32,25 +36,35 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
      *
      * @param params a {@link java.util.HashMap} object.
      */
-    public void setConditions(HashMap<String, String> params) {
+    public final void setConditions(final HashMap<String, String> params) {
         if (params.containsKey("Condition")) {
             String value = params.get("Condition");
-            if (value.equals("Threshold")) setThreshold(true);
-            if (value.equals("Metalcraft")) setMetalcraft(true);
-            if (value.equals("Hellbent")) setHellbent(true);
+            if (value.equals("Threshold")) {
+                setThreshold(true);
+            }
+            if (value.equals("Metalcraft")) {
+                setMetalcraft(true);
+            }
+            if (value.equals("Hellbent")) {
+                setHellbent(true);
+            }
         }
 
-        if (params.containsKey("ConditionZone"))
+        if (params.containsKey("ConditionZone")) {
             setZone(params.get("ContitionZone"));
+        }
 
-        if (params.containsKey("ConditionSorcerySpeed"))
+        if (params.containsKey("ConditionSorcerySpeed")) {
             setSorcerySpeed(true);
+        }
 
-        if (params.containsKey("ConditionPlayerTurn"))
+        if (params.containsKey("ConditionPlayerTurn")) {
             setPlayerTurn(true);
+        }
 
-        if (params.containsKey("ConditionOpponentTurn"))
+        if (params.containsKey("ConditionOpponentTurn")) {
             setOpponentTurn(true);
+        }
 
         if (params.containsKey("ConditionPhases")) {
             String phases = params.get("ConditionPhases");
@@ -68,14 +82,16 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             setPhases(phases);
         }
 
-        if (params.containsKey("ConditionCardsInHand"))
+        if (params.containsKey("ConditionCardsInHand")) {
             setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
+        }
 
         //Condition version of IsPresent stuff
         if (params.containsKey("ConditionPresent")) {
             setIsPresent(params.get("ConditionPresent"));
-            if (params.containsKey("ConditionCompare"))
+            if (params.containsKey("ConditionCompare")) {
                 setPresentCompare(params.get("ConditionCompare"));
+            }
         }
 
         if (params.containsKey("ConditionDefined")) {
@@ -94,11 +110,11 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 lifeAmount = params.get("ConditionLifeAmount");
             }
         }
-        
-        if(params.containsKey("ConditionManaSpent")) {
-        	setManaSpent(params.get("ConditionManaSpent"));
+
+        if (params.containsKey("ConditionManaSpent")) {
+            setManaSpent(params.get("ConditionManaSpent"));
         }
-        
+
         if (params.containsKey("CheckSVar")) {
             setSvarToCheck(params.get("CheckSVar"));
         }
@@ -106,8 +122,8 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             setSvarOperator(params.get("SVarCompare").substring(0, 2));
             setSvarOperand(params.get("SVarCompare").substring(2));
         }
-        
-    }//setConditions
+
+    } //setConditions
 
     /**
      * <p>checkConditions.</p>
@@ -115,38 +131,46 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean checkConditions(SpellAbility sa) {
+    public final boolean checkConditions(final SpellAbility sa) {
 
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
             activator = sa.getSourceCard().getController();
-            System.out.println(sa.getSourceCard().getName() + " Did not have activator set in SpellAbility_Condition.checkConditions()");
+            System.out.println(sa.getSourceCard().getName()
+                    + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
 
         if (hellbent) {
-            if (!activator.hasHellbent())
+            if (!activator.hasHellbent()) {
                 return false;
+            }
         }
         if (threshold) {
-            if (!activator.hasThreshold())
+            if (!activator.hasThreshold()) {
                 return false;
+            }
         }
         if (metalcraft) {
-            if (!activator.hasMetalcraft())
+            if (!activator.hasMetalcraft()) {
                 return false;
+            }
         }
 
-        if (bSorcerySpeed && !Phase.canCastSorcery(activator))
+        if (bSorcerySpeed && !Phase.canCastSorcery(activator)) {
             return false;
+        }
 
-        if (bPlayerTurn && !AllZone.getPhase().isPlayerTurn(activator))
+        if (bPlayerTurn && !AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
+        }
 
-        if (bOpponentTurn && AllZone.getPhase().isPlayerTurn(activator))
+        if (bOpponentTurn && AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
+        }
 
-        if (activationLimit != -1 && numberTurnActivations >= activationLimit)
+        if (activationLimit != -1 && numberTurnActivations >= activationLimit) {
             return false;
+        }
 
         if (phases.size() > 0) {
             boolean isPhase = false;
@@ -158,14 +182,16 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 }
             }
 
-            if (!isPhase)
+            if (!isPhase) {
                 return false;
+            }
         }
 
         if (nCardsInHand != -1) {
             // Can handle Library of Alexandria, or Hellbent
-            if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
+            if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand) {
                 return false;
+            }
         }
 
         if (sIsPresent != null) {
@@ -188,8 +214,9 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
             int left = list.size();
 
-            if (!AllZoneUtil.compare(left, presentCompare, right))
+            if (!AllZoneUtil.compare(left, presentCompare, right)) {
                 return false;
+            }
         }
 
         if (lifeTotal != null) {
@@ -213,23 +240,24 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 return false;
             }
         }
-        
-        if(null != manaSpent) {
-        	if(!sa.getSourceCard().getColorsPaid().contains(manaSpent)) {
-        		return false;
-        	}
+
+        if (null != manaSpent) {
+            if (!sa.getSourceCard().getColorsPaid().contains(manaSpent)) {
+                return false;
+            }
         }
-        
+
         if (svarToCheck != null) {
             int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarToCheck, sa);
             int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarOperand, sa);
 
-            if (!AllZoneUtil.compare(svarValue, svarOperator, operandValue))
+            if (!AllZoneUtil.compare(svarValue, svarOperator, operandValue)) {
                 return false;
+            }
 
         }
 
         return true;
     }
 
-}//end class SpellAbility_Condition
+} //end class SpellAbility_Condition
