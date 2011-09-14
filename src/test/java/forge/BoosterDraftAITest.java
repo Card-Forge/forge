@@ -43,7 +43,7 @@ public class BoosterDraftAITest {
     public void runTest(BoosterDraftAI ai) {
         ReadDraftBoosterPack booster = new ReadDraftBoosterPack();
         for (int outer = 0; outer < 1; outer++) {
-            ItemPool<CardPrinted> allBooster = new ItemPool<CardPrinted>();
+            ItemPool<CardPrinted> allBooster = new ItemPool<CardPrinted>(CardPrinted.class);
             for (int i = 0; i < 21; i++)
                 allBooster.addAll(booster.getBoosterPack());
             
