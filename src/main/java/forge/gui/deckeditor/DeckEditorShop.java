@@ -105,8 +105,8 @@ public final class DeckEditorShop extends DeckEditorBase {
         String maxSellingPrice = "";
         int maxSellPrice = questData.getCards().getSellPriceLimit();
 
-        if (maxSellPrice < Integer.MAX_VALUE) { maxSellingPrice = String.format("     Max selling price: %d", maxSellPrice); }
-        sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) + "% of value)" + maxSellingPrice);
+        if (maxSellPrice < Integer.MAX_VALUE) { maxSellingPrice = String.format("Max selling price: %d", maxSellPrice); }
+        sellPercentageLabel.setText("<html>(You can sell cards at " + formatter.format(multiPercent) + "% of their value)<br>" + maxSellingPrice + "</html>");
 
         top.sort(1, true);
         bottom.sort(1, true);
@@ -150,7 +150,7 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         columnsBelow.add(new TableColumnInfo<InventoryItem>("#Dk", 30, fnDeckCompare, fnDeckGet));
         columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceSellGet));
         bottom.setup(columnsBelow, cardView);
 
         this.setSize(1024, 768);
@@ -277,13 +277,11 @@ public final class DeckEditorShop extends DeckEditorBase {
             } else if (item instanceof BoosterPack) {
                 top.removeCard(item);
                 BoosterPack booster = (BoosterPack) item;
-                
+                questData.getCards().buyBooster(booster, value);
                 List<CardPrinted> newCards = booster.getCards();
                 for (CardPrinted card : newCards) { bottom.addCard(card); }
                 CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
                 c.show();
-                
-                questData.getCards().buyBooster(booster, value);
             }
 
             creditsLabel.setText("Total credits: " + questData.getCredits());
@@ -318,7 +316,10 @@ public final class DeckEditorShop extends DeckEditorBase {
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceGet =
         new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
             public Object apply(final Entry<InventoryItem, Integer> from) { return getCardValue(from.getKey()); } };
-
+    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceSellGet =
+            new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
+                public Object apply(final Entry<InventoryItem, Integer> from) { return (int) (multiplier * getCardValue(from.getKey())); } };
+            
     @SuppressWarnings("rawtypes")
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare =
         new Lambda1<Comparable, Entry<InventoryItem, Integer>>() { @Override

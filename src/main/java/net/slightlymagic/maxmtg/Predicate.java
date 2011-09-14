@@ -10,6 +10,9 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  * Predicate class allows to select items or type <U>, which are or contain an object of type <T>,
  * matching to some criteria set by predicate. No need to write that simple operations by hand.
  * 
+ * PS: com.google.common.base.Predicates contains almost the same functionality, except for they keep filtering, 
+ * transformations aside from the predicate in class Iterables
+ * 
  * @author Max
  *
  * @param <T> - class to check condition against
