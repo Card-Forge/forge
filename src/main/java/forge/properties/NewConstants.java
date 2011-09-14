@@ -375,6 +375,12 @@ public interface NewConstants {
                 String BUTTON = "%s/Display/setlife/button";
                 String MENU = "%s/Display/setlife/menu";
             }
+            
+            public static interface TRIGGER {
+                String ALWAYSACCEPT = "%s/Display/alwaysaccept";
+                String ALWAYSDECLINE = "%s/Display/alwaysdecline";
+                String ALWAYSASK = "%s/Display/alwaysask";
+            }
         }
 
         public static interface Gui_DownloadPictures {
@@ -459,7 +465,6 @@ public interface NewConstants {
                 public static interface HELP {
                     String TITLE = "%s/NewGame/help/title";
                 }
-
 
             }
 

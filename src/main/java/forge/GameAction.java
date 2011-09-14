@@ -1120,7 +1120,7 @@ public class GameAction {
         AllZone.newGameCleanup();
         canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
-
+        AllZone.getTriggerHandler().clearTriggerSettings();
 
         { //re-number cards just so their unique numbers are low, just for user friendliness
             CardFactoryInterface c = AllZone.getCardFactory();

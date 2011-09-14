@@ -52,6 +52,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -79,6 +80,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
 
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
@@ -124,6 +126,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     //public Card cCardHQ;
 
     //private CardList multiBlockers = new CardList();
+    
+    private TriggerReactionMenu triggerMenu;
 
     /**
      * <p>Constructor for GuiDisplay4.</p>
@@ -193,6 +197,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * <p>addMenu.</p>
      */
     private void addMenu() {
+        // Trigger Context Menu creation
+        triggerMenu = new TriggerReactionMenu();
+        
         // Game Menu Creation
         Object[] obj = {
                 HUMAN_DECKLIST_ACTION,
@@ -716,15 +723,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         AllZone.getStack().addObserver(new Observer() {
             public void update(final Observable a, final Object b) {
                 stackPanel.removeAll();
-                MagicStack stack = AllZone.getStack();
+                final MagicStack stack = AllZone.getStack();
                 int count = 1;
                 JLabel label;
 
                 for (int i = stack.size() - 1; 0 <= i; i--) {
+                    final int curI = i;
                     label = new JLabel("" + (count++) + ". " + stack.peekInstance(i).getStackDescription());
 
                     //update card detail
-                    final CardPanel cardPanel = new CardPanel(stack.peekInstance(i).getSourceCard());
+                    final CardPanel cardPanel = new CardPanel(stack.peekInstance().getSpellAbility().getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
                     cardPanel.add(label);
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {
@@ -733,6 +741,22 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         public void mouseMoved(final MouseEvent me) {
                             setCard(cardPanel.getCard());
                         } //mouseMoved
+                    });
+                    
+                    cardPanel.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(final MouseEvent e) {
+                            if(e.getButton() != MouseEvent.BUTTON3)
+                            {
+                                return;
+                            }
+                            if(!stack.peekInstance(curI).isOptionalTrigger())
+                            {
+                                return;
+                            }
+                            triggerMenu.setTrigger(stack.peekAbility(curI).getSourceTrigger());
+                            triggerMenu.show(e.getComponent(),e.getX(),e.getY());                           
+                        }
                     });
 
                     stackPanel.add(cardPanel);
@@ -1681,6 +1705,75 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     StringSelection ss = new StringSelection(deckList.toString());
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
                 }
+            }
+        }
+    }
+    
+    private class TriggerReactionMenu extends JPopupMenu {
+        private static final long serialVersionUID = 6665085414634139984L;
+        private int workTrigID;
+        
+        public TriggerReactionMenu()
+        {
+            super();
+            
+            ForgeAction actAccept = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSACCEPT) {
+               private static final long serialVersionUID = -3734674058185367612L;
+
+            @Override
+               public final void actionPerformed(final ActionEvent e) {
+                    AllZone.getTriggerHandler().setAlwaysAcceptTrigger(workTrigID);  
+               }
+            };
+            
+            ForgeAction actDecline = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSDECLINE) {
+                private static final long serialVersionUID = -1983295769159971502L;
+
+                @Override
+                public final void actionPerformed(final ActionEvent e) {
+                    AllZone.getTriggerHandler().setAlwaysDeclineTrigger(workTrigID);
+                }
+            };
+            
+            ForgeAction actAsk = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSASK) {
+				private static final long serialVersionUID = 5045255351332940821L;
+
+				@Override
+            	public final void actionPerformed(final ActionEvent e) {
+            		AllZone.getTriggerHandler().setAlwaysAskTrigger(workTrigID);
+            	}
+            };
+            
+            JCheckBoxMenuItem jcbmiAccept = new JCheckBoxMenuItem(actAccept);
+            JCheckBoxMenuItem jcbmiDecline = new JCheckBoxMenuItem(actDecline);
+            JCheckBoxMenuItem jcbmiAsk = new JCheckBoxMenuItem(actAsk);
+            
+            add(jcbmiAccept);
+            add(jcbmiDecline);
+            add(jcbmiAsk);
+        }
+        
+        public void setTrigger(final int trigID)
+        {
+            workTrigID = trigID;
+            
+            if(AllZone.getTriggerHandler().isAlwaysAccepted(trigID))
+            {
+                ((JCheckBoxMenuItem)getComponent(0)).setState(true);
+                ((JCheckBoxMenuItem)getComponent(1)).setState(false);
+                ((JCheckBoxMenuItem)getComponent(2)).setState(false);
+            }
+            else if (AllZone.getTriggerHandler().isAlwaysDeclined(trigID))
+            {
+                ((JCheckBoxMenuItem)getComponent(0)).setState(false);
+                ((JCheckBoxMenuItem)getComponent(1)).setState(true);
+                ((JCheckBoxMenuItem)getComponent(2)).setState(false);
+            }
+            else
+            {
+                ((JCheckBoxMenuItem)getComponent(0)).setState(false);
+                ((JCheckBoxMenuItem)getComponent(1)).setState(false);
+                ((JCheckBoxMenuItem)getComponent(2)).setState(true);
             }
         }
     }

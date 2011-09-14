@@ -453,6 +453,7 @@ public class TriggerHandler {
         sa[0].setStackDescription(sa[0].toString());
         boolean mand = false;
         if (trigParams.containsKey("OptionalDecider")) {
+        	sa[0].setOptionalTrigger(true);
             mand = false;
             decider[0] = AbilityFactory.getDefinedPlayers(host, trigParams.get("OptionalDecider"), sa[0]).get(0);
         } else {
@@ -930,6 +931,16 @@ public class TriggerHandler {
             public int getSourceTrigger() {
                 return sa[0].getSourceTrigger();
             }
+            
+            @Override
+            public void setOptionalTrigger(boolean b) {
+            	sa[0].setOptionalTrigger(b);
+            }
+            
+            @Override
+            public boolean isOptionalTrigger() {
+            	return sa[0].isOptionalTrigger();
+            }
 
             ////////////////////////////////////////
             //THIS ONE IS ALL THAT MATTERS
@@ -945,13 +956,24 @@ public class TriggerHandler {
 
                 if (decider[0] != null) {
                     if (decider[0].isHuman()) {
-                        StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-                        buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
-                        buildQuestion.append("\r\n(");
-                        buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
-                        buildQuestion.append(")");
-                        if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
+                        if(triggersAlwaysAccept.contains(getSourceTrigger()))
+                        {
+                            //No need to do anything.
+                        }
+                        else if(triggersAlwaysDecline.contains(getSourceTrigger()))
+                        {
                             return;
+                        }
+                        else
+                        {
+                            StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+                            buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
+                            buildQuestion.append("\r\n(");
+                            buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+                            buildQuestion.append(")");
+                            if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
+                                return;
+                            }
                         }
                     } else {
                         // This isn't quite right, but better than canPlayAI
@@ -1010,5 +1032,50 @@ public class TriggerHandler {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         return true;
+    }
+    
+    private final ArrayList<Integer> triggersAlwaysAccept = new ArrayList<Integer>();
+    private final ArrayList<Integer> triggersAlwaysDecline = new ArrayList<Integer>();
+    
+    public void setAlwaysAcceptTrigger(final int trigID) {
+        if(triggersAlwaysDecline.contains(trigID))
+        {
+            triggersAlwaysDecline.remove((Object)trigID);
+        }
+        
+        if(!triggersAlwaysAccept.contains(trigID))
+        {
+            triggersAlwaysAccept.add(trigID);
+        }
+    }
+    
+    public void setAlwaysDeclineTrigger(final int trigID) {
+        if(triggersAlwaysAccept.contains(trigID))
+        {
+            triggersAlwaysAccept.remove((Object)trigID);
+        }
+        
+        if(!triggersAlwaysDecline.contains(trigID))
+        {
+            triggersAlwaysDecline.add(trigID);
+        }
+    }
+    
+    public void setAlwaysAskTrigger(final int trigID) {
+    	triggersAlwaysAccept.remove((Object)trigID);
+    	triggersAlwaysDecline.remove((Object)trigID);
+    }
+    
+    public boolean isAlwaysAccepted(final int trigID) {
+        return triggersAlwaysAccept.contains(trigID);
+    }
+    
+    public boolean isAlwaysDeclined(final int trigID) {
+        return triggersAlwaysDecline.contains(trigID);
+    }
+    
+    public void clearTriggerSettings() {
+        triggersAlwaysAccept.clear();
+        triggersAlwaysDecline.clear();
     }
 }

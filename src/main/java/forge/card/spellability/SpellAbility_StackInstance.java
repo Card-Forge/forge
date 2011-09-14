@@ -190,4 +190,8 @@ public class SpellAbility_StackInstance {
     public boolean isStateTrigger(int ID) {
         return ability.getSourceTrigger() == ID;
     }
+    
+    public boolean isOptionalTrigger() {
+    	return ability.isOptionalTrigger();
+    }
 }

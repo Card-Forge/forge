@@ -46,6 +46,7 @@ public abstract class SpellAbility {
 
     private boolean spell;
     private boolean trigger = false;
+    private boolean optionalTrigger = false;
     private int sourceTrigger = -1;
     private boolean mandatory = false;
     private boolean temporarilySuppressed = false;
@@ -1140,6 +1141,14 @@ public abstract class SpellAbility {
      */
     public boolean isTrigger() {
         return trigger;
+    }
+    
+    public void setOptionalTrigger(final boolean optrigger) {
+    	this.optionalTrigger = optrigger;
+    }
+    
+    public boolean isOptionalTrigger() {
+    	return this.optionalTrigger;
     }
 
     /**
