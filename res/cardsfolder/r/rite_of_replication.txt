@@ -2,8 +2,8 @@ Name:Rite of Replication
 ManaCost:2 U U
 Types:Sorcery
 Text:no text
-A:SP$CopyPermanent | Cost$ 7 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumCopies$ 5 | SpellDescription$ Kicker 5 (You may pay an additional 5 as you cast this spell.)
 A:SP$CopyPermanent | Cost$ 2 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumCopies$ 1 | SpellDescription$ Put a token onto the battlefield that's a copy of target creature. If CARDNAME was kicked, put five of those tokens onto the battlefield instead.
+A:SP$CopyPermanent | Cost$ 7 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumCopies$ 5 | SpellDescription$ Kicker 5 (You may pay an additional 5 as you cast this spell.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_replication.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/61.jpg
