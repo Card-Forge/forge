@@ -255,6 +255,8 @@ public final class DeckEditorShop extends DeckEditorBase {
             case MythicRare: return Integer.valueOf(600);
             default: return Integer.valueOf(15);
             }
+        } else if (card instanceof BoosterPack) {
+            return 395;
         }
         return 1337;
     }
@@ -278,7 +280,7 @@ public final class DeckEditorShop extends DeckEditorBase {
                 
                 List<CardPrinted> newCards = booster.getCards();
                 for (CardPrinted card : newCards) { bottom.addCard(card); }
-                CardListViewer c = new CardListViewer(booster.getName(), "You have found the following new cards inside booster", newCards);
+                CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
                 c.show();
                 
                 questData.getCards().buyBooster(booster, value);

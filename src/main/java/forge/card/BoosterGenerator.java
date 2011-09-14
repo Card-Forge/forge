@@ -1,7 +1,5 @@
 package forge.card;
 
-import forge.Constant;
-import forge.FileUtil;
 import forge.MyRandom;
 import forge.deck.Deck;
 import forge.item.CardDb;
@@ -9,7 +7,6 @@ import forge.item.CardPrinted;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;

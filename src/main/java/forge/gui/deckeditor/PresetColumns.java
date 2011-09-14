@@ -20,7 +20,6 @@ public abstract class PresetColumns {
 
     private static CardManaCost toManaCost(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.empty; }
     private static CardColor toColor(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : CardColor.nullColor; }
-    private static String toType(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getType().toString() : i.getClass().toString(); }
     private static String toPTL(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getPTorLoyalty() : ""; }
     private static CardRarity toRarity(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getRarity() : CardRarity.Unknown; }
     private static CardSet toSetCmp(InventoryItem i) { return i instanceof InventoryItemFromSet ? SetUtils.getSetByCode(((InventoryItemFromSet) i).getSet()) : CardSet.unknown; }
@@ -63,10 +62,10 @@ public abstract class PresetColumns {
     @SuppressWarnings("rawtypes")
     public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnTypeCompare =
        new Lambda1<Comparable, Entry<InventoryItem, Integer>>() { @Override
-            public Comparable apply(final Entry<InventoryItem, Integer> from) { return toType(from.getKey()); } };
+            public Comparable apply(final Entry<InventoryItem, Integer> from) { return from.getKey().getType(); } };
    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnTypeGet =
        new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
-            public Object apply(final Entry<InventoryItem, Integer> from) { return toType(from.getKey()); } };
+            public Object apply(final Entry<InventoryItem, Integer> from) { return from.getKey().getType(); } };
 
     @SuppressWarnings("rawtypes")
     public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnStatsCompare =

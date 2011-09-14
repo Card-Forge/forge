@@ -9,4 +9,6 @@ public interface InventoryItem /* extends Comparable */ {
     String getName();
     /** An inventory item has to provide a picture. */
     String getImageFilename();
+    /** Return type as a string */ 
+    String getType();
 }

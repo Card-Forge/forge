@@ -50,6 +50,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         if (imageFilename == null) { imageFilename = CardUtil.buildFilename(this); }
         return imageFilename;
     }
+    public String getType() { return card.getType().toString(); }
 
     // Lambda to get rules for selects from list of printed cards
     public static final Lambda1<CardRules, CardPrinted> fnGetRules = new Lambda1<CardRules, CardPrinted>() {

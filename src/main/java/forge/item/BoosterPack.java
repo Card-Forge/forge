@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
+import forge.card.CardSet;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -11,17 +12,22 @@ import forge.card.BoosterGenerator;
  */
 public class BoosterPack implements InventoryItemFromSet {
 
-    private final String cardSet;
+    private final CardSet cardSet;
     private final String name;
     
     private List<CardPrinted> cards = null;
 
     public BoosterPack(String set) {
-        cardSet = set;
-        name = SetUtils.getSetByCodeOrThrow(set).getName() + " booster";
+        this(SetUtils.getSetByCodeOrThrow(set));
     }
 
-    @Override public String getSet() { return cardSet; }
+    public BoosterPack(CardSet set) {
+        cardSet = set;
+        name = cardSet.getName() + " Booster Pack";
+    }
+    
+    
+    @Override public String getSet() { return cardSet.getCode(); }
     @Override public String getName() { return name; }
 
     @Override public String getImageFilename() {
@@ -32,7 +38,7 @@ public class BoosterPack implements InventoryItemFromSet {
     public List<CardPrinted> getCards() {
         if (null == cards)
         {
-            BoosterGenerator gen = new BoosterGenerator(SetUtils.getSetByCode(cardSet));
+            BoosterGenerator gen = new BoosterGenerator(cardSet);
             cards = gen.getBoosterPack();
             // TODO: Add land here!
         }
@@ -62,6 +68,14 @@ public class BoosterPack implements InventoryItemFromSet {
         } else if (!cardSet.equals(other.cardSet))
             return false;
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.item.InventoryItem#getType()
+     */
+    @Override
+    public String getType() {
+        return "Booster Pack";
     }
     
     
