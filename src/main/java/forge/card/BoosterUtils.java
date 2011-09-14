@@ -1,5 +1,7 @@
 package forge.card;
 
+import forge.Constant;
+import forge.MyRandom;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -18,7 +20,7 @@ import net.slightlymagic.maxmtg.Predicate;
  * @author Forge
  * @version $Id$
  */
-public final class QuestBoosterPack {
+public final class BoosterUtils {
 
     public static List<CardPrinted> getQuestStarterDeck(final Predicate<CardPrinted> filter,
             final int numCommon, final int numUncommon, final int numRare)
@@ -106,7 +108,7 @@ public final class QuestBoosterPack {
     }
 
     // Left if only for backwards compatibility
-    public List<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
+    public static List<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
         Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
         return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
@@ -176,6 +178,23 @@ public final class QuestBoosterPack {
         return Predicate.and(rFilter, colorFilter, CardPrinted.fnGetRules);
     }
 
+    //return List<CardPrinted> of 5 or 6 cards, one for each color and maybe an artifact
+    public static List<CardPrinted> getVariety(List<CardPrinted> in) {
+        List<CardPrinted> out = new ArrayList<CardPrinted>();
+        Collections.shuffle(in, MyRandom.random);
 
+        for (int i = 0; i < Constant.Color.Colors.length; i++) {
+            CardPrinted check = findCardOfColor(in, i);
+            if (check != null) { out.add(check); }
+        }
+
+        return out;
+    }//getVariety()
+
+    public static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
+        Predicate<CardRules> filter = CardRules.Predicates.Presets.colors.get(color);
+        if (null == filter) { return null; }
+        return filter.first(in, CardPrinted.fnGetRules);
+    }
 }
 

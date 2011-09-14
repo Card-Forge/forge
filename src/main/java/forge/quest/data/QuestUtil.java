@@ -5,7 +5,7 @@ import forge.CardList;
 import forge.Constant;
 import forge.Quest_Assignment;
 import forge.card.CardRarity;
-import forge.card.QuestBoosterPack;
+import forge.card.BoosterUtils;
 import forge.item.CardPrinted;
 
 import java.util.List;
@@ -127,7 +127,6 @@ public class QuestUtil {
      * @return CardList
      */
     public static List<CardPrinted> generateCardRewardList(String s) {
-        QuestBoosterPack pack = new QuestBoosterPack();
         String[] temp = s.split(" ");
         
         int qty = Integer.parseInt(temp[0]);
@@ -162,7 +161,7 @@ public class QuestUtil {
             col = Constant.Color.White;
         }
         
-        return pack.generateCards(qty, rar, col);
+        return BoosterUtils.generateCards(qty, rar, col);
     }
     
     /**

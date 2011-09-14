@@ -43,8 +43,8 @@ public class BoosterGenerator {
     private final List<CardPrinted> mythics = new ArrayList<CardPrinted>();
     private final List<CardPrinted> specials = new ArrayList<CardPrinted>();
 
-    private List<CardPrinted> commonCreatures;
-    private List<CardPrinted> commonNonCreatures;
+    //private List<CardPrinted> commonCreatures;
+    //private List<CardPrinted> commonNonCreatures;
 
     private static final List<CardPrinted> emptyList = Collections.unmodifiableList( new ArrayList<CardPrinted>(0) ); 
 
@@ -70,14 +70,6 @@ public class BoosterGenerator {
 
     public BoosterGenerator(Deck dPool)
     {
-        /*
-        //DeckManager dio = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
-        DeckManager dio = AllZone.getDeckManager();
-        Deck dPool = dio.getDeck(deckFile);
-        if (dPool == null) {
-            throw new RuntimeException("BoosterGenerator : deck not found - " + deckFile);
-        }*/
-
         for (Entry<CardPrinted, Integer> e : dPool.getMain()) { addToRarity(e.getKey()); }
     }
 
@@ -177,19 +169,18 @@ public class BoosterGenerator {
 
     
     public final List<CardPrinted> getBoosterPack() {
-        return getBoosterPack(numCommons, 0, 0, numUncommons, numRareSlots, 0, 0, numSpecials, 0);
+        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, 0);
     }
     /**
-     * <p>getBoosterPack.</p>
-     *
-     * @return a {@link forge.CardList} object.
+     * So many parameters needed for custom limited cardpools, 
      */
-    public final List<CardPrinted> getBoosterPack(final int nCom, final int nComCreat, final int nComNonCr, final int nUnc,
-            final int nRareSlots, final int nRares, final int nMythics, final int nSpecs, final int nAnyCard) {
+    public final List<CardPrinted> getBoosterPack(final int nCom, final int nUnc, final int nRareSlots,
+            final int nRares, final int nMythics, final int nSpecs, final int nAnyCard) {
         
         List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
         temp.addAll(pickRandomCards(commons, nCom));
+        /*
         if( nComCreat > 0 || nComNonCr > 0) {
             if (commonNonCreatures.isEmpty()) { 
                 CardRules.Predicates.Presets.isCreature.split(commons, CardPrinted.fnGetRules, commonCreatures, commonNonCreatures);
@@ -197,6 +188,7 @@ public class BoosterGenerator {
             temp.addAll(pickRandomCards(commonCreatures, nComCreat));
             temp.addAll(pickRandomCards(commonNonCreatures, nComNonCr));
         }
+        */
         
         temp.addAll(pickRandomCards(uncommons, nUnc));
         

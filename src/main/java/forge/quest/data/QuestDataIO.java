@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.item.Booster;
+import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -234,7 +234,7 @@ public class QuestDataIO {
             writer.endNode();
         }
 
-        private void write(Booster booster, Integer count, HierarchicalStreamWriter writer)
+        private void write(BoosterPack booster, Integer count, HierarchicalStreamWriter writer)
         {
             writer.startNode("booster");
             writer.addAttribute("s", booster.getSet());
@@ -252,8 +252,8 @@ public class QuestDataIO {
                 Integer count = e.getValue();
                 if (item instanceof CardPrinted) {
                     write((CardPrinted) item, count, writer);
-                } else if (item instanceof Booster) {
-                    write((Booster) item, count, writer);
+                } else if (item instanceof BoosterPack) {
+                    write((BoosterPack) item, count, writer);
                 } 
             }
             
@@ -280,10 +280,10 @@ public class QuestDataIO {
             return result;
         }
         
-        private Booster readBooster(final HierarchicalStreamReader reader)
+        private BoosterPack readBooster(final HierarchicalStreamReader reader)
         {
             String set = reader.getAttribute("s");
-            return new Booster(set);
+            return new BoosterPack(set);
         }
 
         private CardPrinted readCardPrinted(final HierarchicalStreamReader reader)

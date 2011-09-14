@@ -7,11 +7,11 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
+import forge.card.BoosterGenerator;
 import forge.card.CardRarity;
-import forge.card.QuestBoosterPack;
-import forge.card.ReadBoosterPack;
+import forge.card.BoosterUtils;
 import forge.deck.Deck;
-import forge.item.Booster;
+import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -26,19 +26,19 @@ public final class QuestUtilCards {
     private QuestData q;
     public QuestUtilCards(final QuestData qd) { q = qd; }
 
-    public void generateBasicLands(final int nBasic, final int nSnow) {
+    public void addBasicLands(ItemPool<InventoryItem> pool, final int nBasic, final int nSnow) {
         CardDb db = CardDb.instance();
-        q.cardPool.add(db.getCard("Forest", "M10"), nBasic);
-        q.cardPool.add(db.getCard("Mountain", "M10"), nBasic);
-        q.cardPool.add(db.getCard("Swamp", "M10"), nBasic);
-        q.cardPool.add(db.getCard("Island", "M10"), nBasic);
-        q.cardPool.add(db.getCard("Plains", "M10"), nBasic);
+        pool.add(db.getCard("Forest", "M10"), nBasic);
+        pool.add(db.getCard("Mountain", "M10"), nBasic);
+        pool.add(db.getCard("Swamp", "M10"), nBasic);
+        pool.add(db.getCard("Island", "M10"), nBasic);
+        pool.add(db.getCard("Plains", "M10"), nBasic);
 
-        q.cardPool.add(db.getCard("Snow-Covered Forest", "ICE"), nSnow);
-        q.cardPool.add(db.getCard("Snow-Covered Mountain", "ICE"), nSnow);
-        q.cardPool.add(db.getCard("Snow-Covered Swamp", "ICE"), nSnow);
-        q.cardPool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
-        q.cardPool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
+        pool.add(db.getCard("Snow-Covered Forest", "ICE"), nSnow);
+        pool.add(db.getCard("Snow-Covered Mountain", "ICE"), nSnow);
+        pool.add(db.getCard("Snow-Covered Swamp", "ICE"), nSnow);
+        pool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
+        pool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
     }
 
     //adds 11 cards, to the current card pool
@@ -53,9 +53,9 @@ public final class QuestUtilCards {
         int nRare = QuestPreferences.getNumRare();
 
         ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        newCards.addAll(QuestBoosterPack.generateCards(fSets, nCommon, CardRarity.Common, null));
-        newCards.addAll(QuestBoosterPack.generateCards(fSets, nUncommon, CardRarity.Uncommon, null));
-        newCards.addAll(QuestBoosterPack.generateCards(fSets, nRare, CardRarity.Rare, null));
+        newCards.addAll(BoosterUtils.generateCards(fSets, nCommon, CardRarity.Common, null));
+        newCards.addAll(BoosterUtils.generateCards(fSets, nUncommon, CardRarity.Uncommon, null));
+        newCards.addAll(BoosterUtils.generateCards(fSets, nRare, CardRarity.Rare, null));
 
         addAllCards(newCards);
         return newCards;
@@ -92,7 +92,7 @@ public final class QuestUtilCards {
         int nU = QuestPreferences.getStartingUncommons(idxDifficulty);
         int nR = QuestPreferences.getStartingRares(idxDifficulty);
 
-        addAllCards(QuestBoosterPack.getQuestStarterDeck(filter, nC, nU, nR));
+        addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR));
     }
 
     public void buyCard(final CardPrinted card, final int value) {
@@ -100,6 +100,14 @@ public final class QuestUtilCards {
             q.credits -= value;
             q.shopList.remove(card);
             addSingleCard(card);
+        }
+    }
+
+    public void buyBooster(final BoosterPack booster, final int value) {
+        if (q.credits >= value) {
+            q.credits -= value;
+            q.shopList.remove(booster);
+            addAllCards(booster.getCards());
         }
     }
 
@@ -142,16 +150,20 @@ public final class QuestUtilCards {
     }
 
     public void generateCardsInShop() {
-        ReadBoosterPack pack = new ReadBoosterPack();
+        BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
         int levelPacks = q.getLevel() > 0 ? 4 / q.getLevel() : 4;
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-        ItemPoolView<CardPrinted> fromBoosters = pack.getShopCards(totalPacks);
         q.shopList.clear();
-        q.shopList.addAll(fromBoosters);
-        q.shopList.add(new Booster("M10"));
+        for (int i = 0; i < totalPacks; i++) {
+            q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0));
+        }
+
+        addBasicLands(q.shopList, 10, 5);
+
+        q.shopList.add(new BoosterPack("M10"));
     }
 
     public ItemPool<InventoryItem> getCardpool() {

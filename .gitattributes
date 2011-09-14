@@ -9655,6 +9655,7 @@ src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
+src/main/java/forge/card/BoosterUtils.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardColor.java -text
 src/main/java/forge/card/CardCoreType.java -text
@@ -9668,8 +9669,6 @@ src/main/java/forge/card/CardSet.java -text
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text
 src/main/java/forge/card/MtgDataParser.java -text
-src/main/java/forge/card/QuestBoosterPack.java svneol=native#text/plain
-src/main/java/forge/card/ReadBoosterPack.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
@@ -9874,7 +9873,7 @@ src/main/java/forge/gui/input/Input_PayManaCostUtil.java svneol=native#text/plai
 src/main/java/forge/gui/input/Input_PayManaCost_Ability.java svneol=native#text/plain
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
-src/main/java/forge/item/Booster.java -text
+src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
 src/main/java/forge/item/InventoryItem.java -text
@@ -9995,7 +9994,6 @@ src/test/java/forge/GuiQuestOptionsTest.java svneol=native#text/plain
 src/test/java/forge/GuiWinLoseTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseTest.java svneol=native#text/plain
-src/test/java/forge/ReadBoosterPackTest.java svneol=native#text/plain
 src/test/java/forge/ReadQuestAssignmentTest.java svneol=native#text/plain
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain

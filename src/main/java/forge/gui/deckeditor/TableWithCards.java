@@ -18,7 +18,6 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardRules;
-import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -151,14 +150,14 @@ public final class TableWithCards {
         updateView(true);
     }
 
-    public void addCard(final CardPrinted card) {
+    public void addCard(final InventoryItem card) {
         //int n = table.getSelectedRow();
         pool.add(card);
         if (isUnfiltered()) { model.addCard(card); }
         updateView(false);
     }
 
-    public void removeCard(final CardPrinted card) {
+    public void removeCard(final InventoryItem card) {
         int n = table.getSelectedRow();
         pool.remove(card);
         if (isUnfiltered()) { model.removeCard(card); }

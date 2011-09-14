@@ -62,8 +62,10 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
         cards.put(card, amount);
         isListInSync = false;
     }    
-    public void addAllCards(final Iterable<T> cards) {
-        for (T cr : cards) { add(cr); }
+    
+    @SuppressWarnings("unchecked")
+    public <U extends InventoryItem> void addAllCards(final Iterable<U> cards) {
+        for (U cr : cards) { if (myClass.isInstance(cr)) { add((T) cr); } }
         isListInSync = false;
     }
 

@@ -106,7 +106,7 @@ public final class QuestData {
      */
     public QuestData() {
         initTransients();
-        myCards.generateBasicLands(QuestPreferences.getStartingBasic(), QuestPreferences.getStartingSnowBasic());
+        myCards.addBasicLands(cardPool, QuestPreferences.getStartingBasic(), QuestPreferences.getStartingSnowBasic());
         randomizeOpponents();
     }
 

@@ -144,9 +144,9 @@ public final class BoosterDraft_1 implements BoosterDraft {
         Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
             @Override public List<CardPrinted> apply(BoosterGenerator pack) {
                 if ( draft.IgnoreRarity ) {
-                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, 0, draft.NumCards);
+                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, draft.NumCards);
                 }
-                return pack.getBoosterPack(draft.NumCommons, 0, 0, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0);
+                return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0);
             }
         };
 
@@ -303,7 +303,7 @@ public final class BoosterDraft_1 implements BoosterDraft {
     } //setChoice()
 
     /** This will upload drafting picks to cardforge HQ */
-    @Override public void finishedDrafting() {
+    public void finishedDrafting() {
         if (Constant.Runtime.UpldDrft[0]) {
             if (draftPicks.size() > 1) {
                 ArrayList<String> outDraftData = new ArrayList<String>();

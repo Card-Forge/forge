@@ -142,17 +142,27 @@ public class CardListViewer {
 
 
     private class SelListener implements ListSelectionListener {
-
+        private Card[] cache = null;
+        
         public void valueChanged(final ListSelectionEvent e) {
             int row = jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if (row >= 0 && row < list.size()) {
-                Card card = AllZone.getCardFactory().getCard(list.get(row).getName(), null);
-                card.setRandomSetCode();
-                card.setImageFilename(CardUtil.buildFilename(card));
-                detail.setCard(card);
-                picture.setCard(card);
+                CardPrinted cp = list.get(row);
+                ensureCacheHas(row, cp);
+                detail.setCard(cache[row]);
+                picture.setCard(cp);
             }
+        }
+        
+        private void ensureCacheHas(int row, CardPrinted cp) {
+            if (cache == null) { cache = new Card[list.size()]; }
+            if (null == cache[row]) {
+                Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
+                card.setCurSetCode(cp.getSet());
+                card.setImageFilename(CardUtil.buildFilename(card));
+                cache[row] = card;
+            }            
         }
     }
 

@@ -25,7 +25,9 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.gui.CardListViewer;
 import forge.gui.GuiUtils;
+import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -259,17 +261,28 @@ public final class DeckEditorShop extends DeckEditorBase {
 
     private void buyButton_actionPerformed(ActionEvent e) {
         InventoryItem item = top.getSelectedCard();
-        if (item == null || !( item instanceof CardPrinted )) { return; }
+        if (item == null ) { return; }
 
-        CardPrinted card = (CardPrinted) item;
-
-        int value = getCardValue(card);
+        int value = getCardValue(item);
 
         if (value <= questData.getCredits()) {
-            bottom.addCard(card);
-            top.removeCard(card);
+            if (item instanceof CardPrinted) {
+                CardPrinted card = (CardPrinted) item;
+                bottom.addCard(card);
+                top.removeCard(card);
 
-            questData.getCards().buyCard(card, value);
+                questData.getCards().buyCard(card, value);
+            } else if (item instanceof BoosterPack) {
+                top.removeCard(item);
+                BoosterPack booster = (BoosterPack) item;
+                
+                List<CardPrinted> newCards = booster.getCards();
+                for (CardPrinted card : newCards) { bottom.addCard(card); }
+                CardListViewer c = new CardListViewer(booster.getName(), "You have found the following new cards inside booster", newCards);
+                c.show();
+                
+                questData.getCards().buyBooster(booster, value);
+            }
 
             creditsLabel.setText("Total credits: " + questData.getCredits());
         } else {
