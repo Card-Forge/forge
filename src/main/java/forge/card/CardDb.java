@@ -98,6 +98,9 @@ public final class CardDb {
         uniqueCards.put(cardName, lastAdded);
     }
 
+    public boolean isCardSupported(final String cardName) { return uniqueCards.containsKey(cardName.toLowerCase()); }
+    
+    
     // Single fetch
     public CardPrinted getCard(final String name) {
         // Sometimes they read from decks things like "CardName|Set" - but we can handle it

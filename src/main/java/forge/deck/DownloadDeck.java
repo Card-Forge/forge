@@ -2,6 +2,7 @@ package forge.deck;
 
 import forge.AllZone;
 import forge.Card;
+import forge.card.CardDb;
 
 /**
  * <p>DownloadDeck class.</p>
@@ -141,15 +142,10 @@ public class DownloadDeck {
      * @param CardName a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean isCardSupport(String CardName) {
+    public boolean isCardSupport(String cardName) {
     	// TODO: using AllZone.getCardFactory().getCard() would probably be much faster.
     	
-        for (Card gCard : AllZone.getCardFactory()) {
-            if (CardName.equalsIgnoreCase(gCard.getName())) {
-                return true;
-            }
-        }
-        return false;
+        return CardDb.instance().isCardSupported(cardName);
     }
 
 
