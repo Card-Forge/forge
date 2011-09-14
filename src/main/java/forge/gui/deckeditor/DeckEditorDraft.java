@@ -2,8 +2,6 @@ package forge.gui.deckeditor;
 
 import forge.AllZone;
 import forge.Constant;
-import forge.FileUtil;
-import forge.HttpUtil;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -19,16 +17,25 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
 
-import javax.swing.*;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.slightlymagic.maxmtg.Predicate;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 
 /**
@@ -169,7 +176,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         jButtonPick.setBounds(new Rectangle(238, 418, 147, 44));
         jButtonPick.setFont(new java.awt.Font("Dialog", 0, 16));
         jButtonPick.setText("Choose Card");
-        jButtonPick.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPick.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jButtonPickClicked(e);
             }
@@ -200,22 +207,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         if (boosterDraft.hasNextChoice()) {
             showChoices(boosterDraft.nextChoice());
         } else {
-            if (Constant.Runtime.UpldDrft[0]) {
-                if (BoosterDraft.draftPicks.size() > 1) {
-                    ArrayList<String> outDraftData = new ArrayList<String>();
-
-                    String[] keys = BoosterDraft.draftPicks.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-
-                    for (int i = 0; i < keys.length; i++) {
-                        outDraftData.add(keys[i] + "|" + BoosterDraft.draftPicks.get(keys[i]));
-                    }
-
-                    FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
-
-                    HttpUtil poster = new HttpUtil();
-                    poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt=" + BoosterDraft.draftFormat[0], "res/draft/tmpDraftData.txt");
-                }
-            }
+            boosterDraft.finishedDrafting();
 
             //quit
             saveDraft();

@@ -10,6 +10,7 @@ import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft_1;
+import forge.game.limited.CardPoolLimitation;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
@@ -392,15 +393,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Object o = GuiUtils.getChoice(prompt, draftTypes.toArray());
 
         if (o.toString().equals(draftTypes.get(0))) {
-            draft.showGui(new BoosterDraft_1("Full"));
+            draft.showGui(new BoosterDraft_1(CardPoolLimitation.Full));
         }
 
         else if (o.toString().equals(draftTypes.get(1))) {
-            draft.showGui(new BoosterDraft_1("Block"));
+            draft.showGui(new BoosterDraft_1(CardPoolLimitation.Block));
         }
 
         else if (o.toString().equals(draftTypes.get(2))) {
-            draft.showGui(new BoosterDraft_1("Custom"));
+            draft.showGui(new BoosterDraft_1(CardPoolLimitation.Custom));
         }
 
     }

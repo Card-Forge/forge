@@ -72,4 +72,9 @@ public class BoosterDraftTest implements BoosterDraft {
     public CardList getUnchosenCards() {
         return null;
     }
+
+    @Override
+    public void finishedDrafting() {
+
+    }
 }

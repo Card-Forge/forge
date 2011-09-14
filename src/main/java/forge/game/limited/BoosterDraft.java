@@ -4,9 +4,6 @@ import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 /**
  * <p>BoosterDraft interface.</p>
  *
@@ -44,12 +41,12 @@ public interface BoosterDraft {
 
     /** Constant <code>LandSetCode="{}"</code>. */
     public String LandSetCode[] = {""};
+
+    /**
+     * Called when drafting is over - to upload picks.
+     */
+    void finishedDrafting();
     
-    /** Constant <code>draftFormat="{}"</code>. */
-    public String draftFormat[] = {""};
-    
-    /** Constant <code>draftPicks="{}"</code>. */
-    public Map<String,Float> draftPicks = new TreeMap<String,Float>();
 }
 
 

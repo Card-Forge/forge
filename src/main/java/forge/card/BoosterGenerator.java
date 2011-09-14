@@ -215,15 +215,6 @@ public class BoosterGenerator {
         return temp;
     }
 
-    /**
-     * <p>getBoosterPackSize.</p>
-     *
-     * @return a int.
-     */
-    public final int getBoosterPackSize() {
-        return numCommons + numUncommons + numRareSlots + numSpecials;
-    }
-
     private void addToRarity(final CardPrinted c) {
         switch(c.getRarity()) {
             case Common: commons.add(c); break;
