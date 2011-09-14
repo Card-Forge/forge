@@ -9669,7 +9669,6 @@ src/main/java/forge/card/CardType.java -text
 src/main/java/forge/card/MtgDataParser.java -text
 src/main/java/forge/card/QuestBoosterPack.java svneol=native#text/plain
 src/main/java/forge/card/ReadBoosterPack.java svneol=native#text/plain
-src/main/java/forge/card/ReadDraftBoosterPack.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
@@ -9979,7 +9978,6 @@ src/main/java/tree/properties/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/types/FileType.java svneol=native#text/plain
 src/main/java/tree/properties/types/package-info.java svneol=native#text/plain
 src/site/apt/index.apt -text
-src/test/java/forge/BoosterDraftAITest.java svneol=native#text/plain
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/BoosterDraft_1Test.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
