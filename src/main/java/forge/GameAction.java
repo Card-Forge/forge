@@ -830,6 +830,7 @@ public class GameAction {
 
         while (!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             CardList b = AllZoneUtil.getCardsInPlay(a.get(0).getName());
+            b.getType("Legendary");
             b = b.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
                     return !c.isFaceDown();
