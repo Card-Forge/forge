@@ -6,7 +6,7 @@ T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You  | Execute$ TrigPu
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredSource | CounterType$ GOLD | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.countersGE1GOLD | AddType$ Wall | AddKeyword$ Defender | Description$ Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender. (Those creatures can't attack.)
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME leaves the battlefield, remove all gold counters from all creatures.
-SVar:TrigRemove:AB$ RemoveCounterAll | Cost$ 0 | ValidCards$ Creature | CounterType$ GOLD | CounterNum$ 9
+SVar:TrigRemove:AB$ RemoveCounterAll | Cost$ 0 | ValidCards$ Creature | CounterType$ GOLD | AllCounters$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurification.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/6.jpg

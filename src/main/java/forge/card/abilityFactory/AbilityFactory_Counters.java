@@ -1663,9 +1663,14 @@ public class AbilityFactory_Counters {
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        String amountString = Integer.toString(amount);
+        
+        if(params.containsKey("AllCounters")) {
+            amountString = "all";
+        }
 
         sb.append("Remove ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) { sb.append("s"); }
+        if (!amountString.equals("1")) { sb.append("s"); }
         sb.append(" from each valid permanent.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -1723,6 +1728,10 @@ public class AbilityFactory_Counters {
         }
 
         for (Card tgtCard : cards) {
+            if(params.containsKey("AllCounters")) {
+                counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+            }
+                
             tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
         }
     }
