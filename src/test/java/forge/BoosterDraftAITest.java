@@ -2,10 +2,10 @@ package forge;
 
 import java.util.List;
 
-import forge.card.CardPool;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.game.limited.BoosterDraftAI;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
 
 import org.testng.annotations.Test;
 
@@ -43,7 +43,7 @@ public class BoosterDraftAITest {
     public void runTest(BoosterDraftAI ai) {
         ReadDraftBoosterPack booster = new ReadDraftBoosterPack();
         for (int outer = 0; outer < 1; outer++) {
-            CardPool<CardPrinted> allBooster = new CardPool<CardPrinted>();
+            ItemPool<CardPrinted> allBooster = new ItemPool<CardPrinted>();
             for (int i = 0; i < 21; i++)
                 allBooster.addAll(booster.getBoosterPack());
             

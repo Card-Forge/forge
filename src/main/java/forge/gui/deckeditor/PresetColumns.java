@@ -6,10 +6,10 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.SetUtils;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
-import forge.card.CardPrinted;
 import forge.card.CardRarity;
 import forge.card.CardSet;
-import forge.card.InventoryItem;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 /** 
  * TODO: Write javadoc for this type.

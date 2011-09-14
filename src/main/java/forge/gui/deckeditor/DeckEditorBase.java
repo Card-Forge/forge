@@ -12,12 +12,12 @@ import javax.swing.event.DocumentListener;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.GUI_DeckAnalysis;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
-import forge.card.CardPoolView;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     private static final long serialVersionUID = -401223933343539977L;
@@ -42,16 +42,16 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     // if sealed, top shows N booster packs
     // if draft, top shows cards that were chosen
     public final TableWithCards getTopTableModel() { return top; }
-    public final CardPoolView<InventoryItem> getTop() { return top.getCards(); }
+    public final ItemPoolView<InventoryItem> getTop() { return top.getCards(); }
     // bottom shows player's choice - be it deck or draft
-    public final CardPoolView<InventoryItem> getBottom() { return bottom.getCards(); }
+    public final ItemPoolView<InventoryItem> getBottom() { return bottom.getCards(); }
 
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ... virtual protected member, but later
     protected abstract Predicate<InventoryItem> buildFilter();
 
     void analysisButton_actionPerformed(ActionEvent e) {
-        CardPoolView<CardPrinted> deck = CardPool.createFrom(bottom.getCards(), CardPrinted.class); 
+        ItemPoolView<CardPrinted> deck = ItemPool.createFrom(bottom.getCards(), CardPrinted.class); 
         if (deck.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -68,7 +68,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
         gameType = gametype;
     }
     
-    public void setDeck(CardPoolView<CardPrinted> topParam, CardPoolView<CardPrinted> bottomParam, GameType gt) {
+    public void setDeck(ItemPoolView<CardPrinted> topParam, ItemPoolView<CardPrinted> bottomParam, GameType gt) {
         gameType = gt;
         top.setDeck(topParam);
         bottom.setDeck(bottomParam);
@@ -93,11 +93,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
     
     public Deck getDeck() {
         Deck deck = new Deck(gameType);
-        deck.addMain(CardPool.createFrom(getBottom(), CardPrinted.class));
+        deck.addMain(ItemPool.createFrom(getBottom(), CardPrinted.class));
 
         //if sealed or draft, move "top" to sideboard
         if (gameType.isLimited() && gameType != GameType.Quest) {
-            deck.addSideboard(CardPool.createFrom(getTop(), CardPrinted.class));
+            deck.addSideboard(ItemPool.createFrom(getTop(), CardPrinted.class));
         }
         return deck;
     }//getDeck()

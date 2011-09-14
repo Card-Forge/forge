@@ -17,10 +17,10 @@ import net.slightlymagic.maxmtg.PredicateString.StringOp;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.SetUtils;
-import forge.card.CardPrinted;
 import forge.card.CardRules;
 import forge.card.CardSet;
 import forge.game.GameFormat;
+import forge.item.CardPrinted;
 
 /** 
  * A panel that holds Name, Type, Rules text fields aligned horizontally together with set filter

@@ -9,9 +9,9 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.InventoryItem;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         }
     }
 
-    private CardPool<T> data = new CardPool<T>();
+    private ItemPool<T> data = new ItemPool<T>();
     private final CardPanelBase cardDisplay;
     private final List<TableColumnInfo<T>> columns;
     private final SortOrders sortOrders = new SortOrders();
@@ -118,7 +118,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
     }
 
     public void clear() { data.clear(); }
-    public CardPoolView<T> getCards() { return data.getView(); }
+    public ItemPoolView<T> getCards() { return data.getView(); }
 
     /**
      * <p>removeCard.</p>

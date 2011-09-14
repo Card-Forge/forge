@@ -3,7 +3,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.card.CardPrinted;
+import forge.item.CardPrinted;
 
 /**
  * <p>Quest_Assignment class.</p>

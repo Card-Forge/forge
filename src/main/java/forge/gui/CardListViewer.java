@@ -14,9 +14,9 @@ import javax.swing.event.ListSelectionListener;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
-import forge.card.CardPrinted;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.item.CardPrinted;
 
 
 import java.awt.event.ActionEvent;

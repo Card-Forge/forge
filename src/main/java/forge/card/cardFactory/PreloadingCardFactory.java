@@ -9,9 +9,9 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.error.ErrorViewer;
+import forge.item.CardDb;
 import forge.properties.ForgeProps;
 
 /**

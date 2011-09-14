@@ -3,14 +3,14 @@ package forge.gui.deckeditor;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 //import forge.view.swing.OldGuiNewGame;
@@ -98,8 +98,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // tell Gui_Quest_DeckEditor the name of the deck
         customMenu.setPlayerDeckName(deck.getName());
 
-        CardPoolView<CardPrinted> bottomPool = deck.getMain();
-        CardPool<CardPrinted> cardpool = new CardPool<CardPrinted>();
+        ItemPoolView<CardPrinted> bottomPool = deck.getMain();
+        ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>();
         cardpool.addAll(questData.getCards().getCardpool());
 
         // remove bottom cards that are in the deck from the card pool

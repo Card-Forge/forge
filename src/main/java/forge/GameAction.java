@@ -1,7 +1,6 @@
 package forge;
 
 
-import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.abilityFactory.AbilityFactory_Attach;
 import forge.card.cardFactory.CardFactoryInterface;
@@ -27,6 +26,7 @@ import forge.gui.GuiUtils;
 import forge.gui.input.Input_Mulligan;
 import forge.gui.input.Input_PayManaCost;
 import forge.gui.input.Input_PayManaCost_Ability;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 

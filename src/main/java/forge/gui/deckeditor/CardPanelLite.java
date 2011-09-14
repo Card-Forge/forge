@@ -3,10 +3,10 @@ package forge.gui.deckeditor;
 import net.miginfocom.swing.MigLayout;
 
 import forge.Card;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 /** 
  * This panel is to be placed in the right part of a deck editor

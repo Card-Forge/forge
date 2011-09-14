@@ -8,12 +8,12 @@ import forge.Constant;
 import forge.FileUtil;
 import forge.SetUtils;
 import forge.card.CardBlock;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.card.CardSet;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -237,13 +237,13 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public final CardPoolView<CardPrinted> nextChoice() {
+    public final ItemPoolView<CardPrinted> nextChoice() {
         if (pack.get(getCurrentBoosterIndex()).size() == 0) {
             pack = get8BoosterPack();
         }
 
         computerChoose();
-        return CardPool.createFrom(pack.get(getCurrentBoosterIndex()), CardPrinted.class);
+        return ItemPool.createFrom(pack.get(getCurrentBoosterIndex()), CardPrinted.class);
     }
 
     /**

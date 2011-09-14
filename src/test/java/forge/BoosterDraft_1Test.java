@@ -2,10 +2,10 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.card.CardPrinted;
-import forge.card.CardPoolView;
 
 import forge.game.limited.BoosterDraft_1;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 
 
 /**
@@ -21,7 +21,7 @@ public class BoosterDraft_1Test {
     public void BoosterDraft_1Test1() throws Exception {
         BoosterDraft_1 draft = new BoosterDraft_1();
         while (draft.hasNextChoice()) {
-            CardPoolView<CardPrinted> list = draft.nextChoice();
+            ItemPoolView<CardPrinted> list = draft.nextChoice();
             System.out.println(list.countAll());
             draft.setChoice(list.toFlatList().get(0));
         }

@@ -7,7 +7,7 @@ import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.card.InventoryItem;
+import forge.item.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

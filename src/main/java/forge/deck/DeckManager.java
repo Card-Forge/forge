@@ -2,11 +2,11 @@ package forge.deck;
 
 
 import forge.PlayerType;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.deckeditor.TableSorter;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -502,7 +502,7 @@ public class DeckManager {
         writeCardPool(d.getSideboard(), out);
     }
 
-    private static void writeCardPool(final CardPoolView<CardPrinted> pool, final BufferedWriter out) throws IOException
+    private static void writeCardPool(final ItemPoolView<CardPrinted> pool, final BufferedWriter out) throws IOException
     {
         List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.byNameThenSet);

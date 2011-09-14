@@ -4,17 +4,17 @@ package forge.gui.deckeditor;
 import forge.Command;
 import forge.Constant;
 import forge.card.CardRules;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
 
 import javax.swing.*;
@@ -171,7 +171,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
      */
     private String getExportDeckText(final Deck aDeck) {
         //convert Deck into CardList
-        CardPoolView<CardPrinted> all = aDeck.getMain();
+        ItemPoolView<CardPrinted> all = aDeck.getMain();
         //sort by card name
         Collections.sort(all.getOrderedList(), TableSorter.byNameThenSet);
 
@@ -270,8 +270,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 Deck newDeck = DeckManager.readDeck(file);
                 questData.addDeck(newDeck);
 
-                CardPool<CardPrinted> cardpool = CardPool.createFrom(questData.getCards().getCardpool(), CardPrinted.class);
-                CardPool<CardPrinted> decklist = new CardPool<CardPrinted>();
+                ItemPool<CardPrinted> cardpool = ItemPool.createFrom(questData.getCards().getCardpool(), CardPrinted.class);
+                ItemPool<CardPrinted> decklist = new ItemPool<CardPrinted>();
                 for (Entry<CardPrinted, Integer> s : newDeck.getMain()) {
                     CardPrinted cp = s.getKey();
                     decklist.add(cp, s.getValue());
@@ -337,8 +337,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
             if (StringUtils.isBlank(deckName)) { return; }
 
             setPlayerDeckName(deckName);
-            CardPool<CardPrinted> cards = CardPool.createFrom(questData.getCards().getCardpool().getView(), CardPrinted.class);
-            CardPoolView<CardPrinted> deck = questData.getDeck(deckName).getMain();
+            ItemPool<CardPrinted> cards = ItemPool.createFrom(questData.getCards().getCardpool().getView(), CardPrinted.class);
+            ItemPoolView<CardPrinted> deck = questData.getDeck(deckName).getMain();
 
             // show in pool all cards except ones used in deck
             cards.removeAll(deck);
@@ -499,10 +499,10 @@ public class DeckEditorQuestMenu extends JMenuBar {
      * @param list a {@link forge.CardPool} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck cardPoolToDeck(final CardPoolView<InventoryItem> list) {
+    private Deck cardPoolToDeck(final ItemPoolView<InventoryItem> list) {
         //put CardPool into Deck main
         Deck deck = new Deck(GameType.Sealed);
-        deck.addMain(CardPool.createFrom(list, CardPrinted.class));
+        deck.addMain(ItemPool.createFrom(list, CardPrinted.class));
         return deck;
     }
 

@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item;
 
 /** 
  * Interface to define a player's inventory may hold.

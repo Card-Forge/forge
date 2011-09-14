@@ -4,17 +4,17 @@ import forge.AllZone;
 import forge.Constant;
 import forge.FileUtil;
 import forge.HttpUtil;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.gui.GuiUtils;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
@@ -228,7 +228,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      *
      * @param list a {@link forge.CardList} object.
      */
-    private void showChoices(CardPoolView<CardPrinted> list) {
+    private void showChoices(ItemPoolView<CardPrinted> list) {
         top.setDeck(list);
         cardView.showCard(null);
         top.fixSelection(0);
@@ -244,7 +244,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         Constant.Runtime.HumanDeck[0] = deck;
 
         //add sideboard to deck
-        CardPoolView<CardPrinted> list = CardPool.createFrom(bottom.getCards(), CardPrinted.class);
+        ItemPoolView<CardPrinted> list = ItemPool.createFrom(bottom.getCards(), CardPrinted.class);
         deck.addSideboard(list);
         
         String landSet = BoosterDraft.LandSetCode[0];

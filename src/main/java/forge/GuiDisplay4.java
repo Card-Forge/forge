@@ -78,7 +78,6 @@ import com.google.code.jyield.YieldUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
 
-import forge.card.CardPrinted;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
@@ -89,6 +88,7 @@ import forge.gui.input.Input_Attack;
 import forge.gui.input.Input_Block;
 import forge.gui.input.Input_PayManaCost;
 import forge.gui.input.Input_PayManaCost_Ability;
+import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

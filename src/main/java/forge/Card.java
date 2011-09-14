@@ -13,7 +13,6 @@ import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.CardDb;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -23,6 +22,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.item.CardDb;
 
 /**
  * <p>Card class.</p>

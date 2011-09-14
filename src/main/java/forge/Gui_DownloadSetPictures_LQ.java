@@ -2,10 +2,10 @@ package forge;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.CardDb;
-import forge.card.CardPrinted;
 import forge.card.CardSet;
 import forge.error.ErrorViewer;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

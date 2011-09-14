@@ -1,7 +1,8 @@
 package forge.gui.deckeditor;
 
 import javax.swing.JPanel;
-import forge.card.InventoryItem;
+
+import forge.item.InventoryItem;
 
 /** 
  * Base class for any cardView panel

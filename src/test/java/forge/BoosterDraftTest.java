@@ -1,10 +1,11 @@
 package forge;
 
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 
 import forge.game.limited.BoosterDraft;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
+
 import org.testng.annotations.Test;
 
 /**
@@ -32,7 +33,7 @@ public class BoosterDraftTest implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView<CardPrinted> nextChoice() {
+    public ItemPoolView<CardPrinted> nextChoice() {
         n--;
         ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         return pack.getBoosterPack();

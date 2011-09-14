@@ -8,13 +8,13 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.ReadBoosterPack;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.card.CardRarity;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 /** 
  * This is a helper class to execute operations on QuestData.
@@ -146,23 +146,23 @@ public final class QuestUtilCards {
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-        CardPoolView<CardPrinted> fromBoosters = pack.getShopCards(totalPacks);
+        ItemPoolView<CardPrinted> fromBoosters = pack.getShopCards(totalPacks);
         q.shopList.clear();
         q.shopList.addAll(fromBoosters);
     }
 
-    public CardPool<CardPrinted> getCardpool() {
+    public ItemPool<CardPrinted> getCardpool() {
         return q.cardPool;
     }
 
-    public CardPoolView<CardPrinted> getShopList() {
+    public ItemPoolView<CardPrinted> getShopList() {
         if (q.shopList.isEmpty()) {
             generateCardsInShop();
         }
         return q.shopList;
     }
 
-    public CardPoolView<InventoryItem> getNewCards() {
+    public ItemPoolView<InventoryItem> getNewCards() {
         return q.newCardList;
     }
 

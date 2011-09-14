@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.CardList;
+import forge.card.CardRules;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
@@ -17,7 +18,7 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  * @author Forge
  * @version $Id: CardPoolView.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public class CardPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
+public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 
     // Field Accessors for select/aggregate operations with filters.
     public final Lambda1<CardRules, Entry<T, Integer>> fnToCard =
@@ -41,8 +42,8 @@ public class CardPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         };
 
     // Constructors
-    public CardPoolView() { cards = new Hashtable<T, Integer>(); }
-    public CardPoolView(final Map<T, Integer> inMap) { cards = inMap; }
+    public ItemPoolView() { cards = new Hashtable<T, Integer>(); }
+    public ItemPoolView(final Map<T, Integer> inMap) { cards = inMap; }
 
     // Data members
     protected Map<T, Integer> cards;

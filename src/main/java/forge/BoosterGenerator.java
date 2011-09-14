@@ -1,10 +1,10 @@
 package forge;
 
-import forge.card.CardDb;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,7 +85,7 @@ public class BoosterGenerator {
             throw new RuntimeException("BoosterGenerator : deck not found - " + deckFile);
         }
 
-        CardPoolView<CardPrinted> tList = dPool.getMain();
+        ItemPoolView<CardPrinted> tList = dPool.getMain();
         for (Entry<CardPrinted, Integer> e : tList) {
             if (ignoreRarity) { commons.add(e.getKey()); }
             else { addToRarity(e.getKey()); }

@@ -25,8 +25,6 @@ import forge.Counters;
 import forge.FileUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.CardDb;
-import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
@@ -36,6 +34,8 @@ import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

@@ -3,6 +3,8 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.item.CardPrinted;
+
 import net.slightlymagic.maxmtg.Predicate;
 
 /**

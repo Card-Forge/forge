@@ -7,8 +7,8 @@ import java.util.List;
 import javax.swing.JCheckBox;
 
 import net.slightlymagic.maxmtg.Predicate;
-import forge.card.CardPrinted;
 import forge.card.CardRules;
+import forge.item.CardPrinted;
 
 /** 
  * A structural class for some checkboxes need for a deck editor, contains no JPanel to store boxes on 

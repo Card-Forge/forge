@@ -21,14 +21,14 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 //import forge.view.swing.OldGuiNewGame;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 /**
  * <p>
@@ -221,11 +221,11 @@ public final class DeckEditor extends DeckEditorBase {
     }
 
     @Override
-    public void setDeck(CardPoolView<CardPrinted> topParam, CardPoolView<CardPrinted> bottomParam, GameType gt)
+    public void setDeck(ItemPoolView<CardPrinted> topParam, ItemPoolView<CardPrinted> bottomParam, GameType gt)
     {
         boolean keepRecievedCards = gt.isLimited() || topParam != null;  
         // if constructed, can add the all cards above
-        CardPoolView<CardPrinted> top = keepRecievedCards ? topParam : CardPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class);
+        ItemPoolView<CardPrinted> top = keepRecievedCards ? topParam : ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class);
 
         super.setDeck(top, bottomParam, gt);
     }

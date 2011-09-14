@@ -3,8 +3,6 @@ package forge.view.swing;
 import arcane.ui.util.ManaSymbols;
 import com.esotericsoftware.minlog.Log;
 import forge.*;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -17,6 +15,8 @@ import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.deckeditor.DeckEditorDraft;
 import forge.gui.deckeditor.DeckEditor;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
@@ -336,7 +336,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     "choice <<" + safeToString(o) + ">> does not equal any of the sealedTypes.");
         }
 
-        CardPool<CardPrinted> sDeck = sd.getCardpool();
+        ItemPool<CardPrinted> sDeck = sd.getCardpool();
 
         if (sDeck.countAll() > 1) {
 

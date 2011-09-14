@@ -1,6 +1,6 @@
 package forge.gui.deckeditor;
 
-import forge.card.InventoryItem;
+import forge.item.InventoryItem;
 
 import java.util.Comparator;
 import java.util.List;

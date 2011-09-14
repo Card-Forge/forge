@@ -1,26 +1,27 @@
-package forge.card;
+package forge.item;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
+
 /**
  * <p>CardPool class.</p>
  * Represents a list of cards with amount of each
  */
-public final class CardPool<T extends InventoryItem> extends CardPoolView<T>  {
+public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
 
     // Constructors here
-    public CardPool() { super(); }
+    public ItemPool() { super(); }
 
     @SuppressWarnings("unchecked") // conversion here must be safe
-    public CardPool(final List<String> names) { super(); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
+    public ItemPool(final List<String> names) { super(); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
 
     @SuppressWarnings("unchecked")
-    public static <Tin extends InventoryItem, Tout extends InventoryItem> CardPool<Tout> 
-        createFrom(CardPoolView<Tin> from, Class<Tout> clsHint) 
+    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> 
+        createFrom(ItemPoolView<Tin> from, Class<Tout> clsHint) 
     {
-        CardPool<Tout> result = new CardPool<Tout>();
+        ItemPool<Tout> result = new ItemPool<Tout>();
         if (from != null) {
             for (Entry<Tin, Integer> e : from) {
                 Tin srcKey = e.getKey();
@@ -33,9 +34,9 @@ public final class CardPool<T extends InventoryItem> extends CardPoolView<T>  {
     }
     
     @SuppressWarnings("unchecked")
-    public static <Tin extends InventoryItem, Tout extends InventoryItem> CardPool<Tout>
+    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout>
         createFrom(Iterable<Tin> from, Class<Tout> clsHint) {
-        CardPool<Tout> result = new CardPool<Tout>();
+        ItemPool<Tout> result = new ItemPool<Tout>();
         if (from != null) {
             for (Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
@@ -47,7 +48,7 @@ public final class CardPool<T extends InventoryItem> extends CardPoolView<T>  {
     }
 
     // get
-    public CardPoolView<T> getView() { return new CardPoolView<T>(Collections.unmodifiableMap(cards)); }
+    public ItemPoolView<T> getView() { return new ItemPoolView<T>(Collections.unmodifiableMap(cards)); }
 
     // Cards manipulation
     public void add(final T card) { add(card, 1); }

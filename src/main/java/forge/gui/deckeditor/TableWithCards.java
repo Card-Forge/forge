@@ -17,11 +17,11 @@ import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Constant;
 import forge.Singletons;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.card.CardRules;
-import forge.card.InventoryItem;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -29,7 +29,7 @@ import forge.card.InventoryItem;
  */
 public final class TableWithCards {
 
-    protected CardPool<InventoryItem> pool;
+    protected ItemPool<InventoryItem> pool;
     protected TableModel<InventoryItem> model;
     protected JTable table = new JTable();
     protected JScrollPane jScrollPane = new JScrollPane();
@@ -82,7 +82,7 @@ public final class TableWithCards {
             // get stats from deck
             model.addTableModelListener(new TableModelListener() {
                 public void tableChanged(final TableModelEvent ev) {
-                    CardPoolView<InventoryItem> deck = model.getCards();
+                    ItemPoolView<InventoryItem> deck = model.getCards();
                     statsLabel.setText(getStats(deck));
                 }
             });
@@ -90,7 +90,7 @@ public final class TableWithCards {
     }
 
     // This should not be here, but still found no better place
-    public static String getStats(final CardPoolView<InventoryItem> deck) {
+    public static String getStats(final ItemPoolView<InventoryItem> deck) {
         int total = deck.countAll();
         int creature = CardRules.Predicates.Presets.isCreature.aggregate(deck, deck.fnToCard, deck.fnToCount);
         int land = CardRules.Predicates.Presets.isLand.aggregate(deck, deck.fnToCard, deck.fnToCount);
@@ -124,14 +124,14 @@ public final class TableWithCards {
     }
 
     public void setDeck(final Iterable<InventoryItem> cards) {
-        setDeckImpl(CardPool.createFrom(cards, InventoryItem.class));
+        setDeckImpl(ItemPool.createFrom(cards, InventoryItem.class));
     }
 
-    public <T extends InventoryItem> void setDeck(final CardPoolView<T> poolView) {
-        setDeckImpl(CardPool.createFrom(poolView, InventoryItem.class));
+    public <T extends InventoryItem> void setDeck(final ItemPoolView<T> poolView) {
+        setDeckImpl(ItemPool.createFrom(poolView, InventoryItem.class));
     }
     
-    protected void setDeckImpl(CardPool<InventoryItem> thePool)
+    protected void setDeckImpl(ItemPool<InventoryItem> thePool)
     {
         model.clear();
         pool = thePool;
@@ -184,7 +184,7 @@ public final class TableWithCards {
         model.resort();
     }
 
-    public CardPoolView<InventoryItem> getCards() {
+    public ItemPoolView<InventoryItem> getCards() {
         return pool;
     }
 

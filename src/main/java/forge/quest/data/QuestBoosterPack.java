@@ -1,9 +1,10 @@
 package forge.quest.data;
 
-import forge.card.CardDb;
-import forge.card.CardPrinted;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,6 +1,5 @@
 package forge;
 
-import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
@@ -10,6 +9,7 @@ import forge.game.GameSummary;
 import forge.game.PlayerIndex;
 import forge.gui.CardListViewer;
 import forge.gui.ListChooser;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;

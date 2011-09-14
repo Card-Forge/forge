@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +11,8 @@ import net.slightlymagic.maxmtg.PredicateString;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
+import forge.card.CardRarity;
+import forge.card.CardRules;
 
 /**
  * <p>CardReference class.</p>

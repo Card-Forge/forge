@@ -3,8 +3,6 @@ package forge.card.cardFactory;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
-import forge.card.CardDb;
-import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
@@ -13,6 +11,8 @@ import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 
 import javax.swing.*;
 

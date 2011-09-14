@@ -3,15 +3,15 @@ package forge.gui.deckeditor;
 import forge.Card;
 import forge.CardList;
 import forge.Command;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.deck.generate.GenerateConstructedDeck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -147,7 +147,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
         // The only remaining reference to global variable!
         CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(15 * 5));
 
-        CardPool<CardPrinted> cpRandom = new CardPool<CardPrinted>();
+        ItemPool<CardPrinted> cpRandom = new ItemPool<CardPrinted>();
         for (Card c : random) { cpRandom.add(CardDb.instance().getCard(c)); }
         cpRandom.add(CardDb.instance().getCard("Forest"));
         cpRandom.add(CardDb.instance().getCard("Island"));
@@ -166,7 +166,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
 
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
 
-        CardPool<CardPrinted> generated = new CardPool<CardPrinted>();
+        ItemPool<CardPrinted> generated = new ItemPool<CardPrinted>();
         for (Card c : gen.generateDeck()) { generated.add(CardDb.instance().getCard(c)); }
         deckDisplay.setDeck(null, generated, GameType.Constructed);
     }

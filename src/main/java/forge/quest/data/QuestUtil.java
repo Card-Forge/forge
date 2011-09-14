@@ -4,8 +4,8 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Quest_Assignment;
-import forge.card.CardPrinted;
 import forge.card.CardRarity;
+import forge.item.CardPrinted;
 
 import java.util.List;
 

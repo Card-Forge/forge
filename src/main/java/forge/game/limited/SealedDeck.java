@@ -11,14 +11,14 @@ import forge.FileUtil;
 import forge.MyRandom;
 import forge.SetUtils;
 import forge.card.CardBlock;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
 import forge.card.CardSet;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
 
 import javax.swing.*;
 import java.io.File;
@@ -181,8 +181,8 @@ public class SealedDeck {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPool<CardPrinted> getCardpool() {
-        CardPool<CardPrinted> pool = new CardPool<CardPrinted>();
+    public ItemPool<CardPrinted> getCardpool() {
+        ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>();
 
         for (int i = 0; i < packs.size(); i++)
             pool.addAllCards(packs.get(i).getBoosterPack());

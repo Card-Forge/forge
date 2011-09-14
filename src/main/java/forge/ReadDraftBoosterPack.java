@@ -2,11 +2,11 @@ package forge;
 
 
 import forge.card.CardRules;
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.error.ErrorViewer;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -45,8 +45,8 @@ public class ReadDraftBoosterPack implements NewConstants {
         setup();
     }
 
-    public CardPoolView<CardPrinted> getBoosterPack5() {
-        CardPool<CardPrinted> list = new CardPool<CardPrinted>();
+    public ItemPoolView<CardPrinted> getBoosterPack5() {
+        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>();
         for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
         addBasicLands(list, 20);
@@ -59,7 +59,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         return list;
     } //getBoosterPack5()
 
-    public static final void addBasicLands(final CardPool<CardPrinted> pool, final int count) {
+    public static final void addBasicLands(final ItemPool<CardPrinted> pool, final int count) {
         CardDb db = CardDb.instance();
         pool.add(db.getCard("Forest", "M10"), count);
         pool.add(db.getCard("Island", "M10"), count);
@@ -68,7 +68,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         pool.add(db.getCard("Swamp", "M10"), count);
 
     }
-    public static final void addBasicSnowLands(final CardPool<CardPrinted> pool, final int count) {
+    public static final void addBasicSnowLands(final ItemPool<CardPrinted> pool, final int count) {
         CardDb db = CardDb.instance();
         pool.add(db.getCard("Snow-Covered Forest", "ICE"), count);
         pool.add(db.getCard("Snow-Covered Island", "ICE"), count);
@@ -81,8 +81,8 @@ public class ReadDraftBoosterPack implements NewConstants {
      *
      * @return a {@link forge.CardList} object.
      */
-    public final CardPoolView<CardPrinted> getBoosterPack() {
-        CardPool<CardPrinted> pack = new CardPool<CardPrinted>();
+    public final ItemPoolView<CardPrinted> getBoosterPack() {
+        ItemPool<CardPrinted> pack = new ItemPool<CardPrinted>();
 
         pack.add(getRandomCard(rareList));
 

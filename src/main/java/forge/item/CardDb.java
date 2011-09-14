@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -13,6 +13,9 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.card.CardInSet;
+import forge.card.CardRules;
+import forge.card.MtgDataParser;
 
 
 /**
@@ -41,7 +44,8 @@ public final class CardDb {
     }
 
     // Here oracle cards
-    private final Map<String, CardRules> cards = new Hashtable<String, CardRules>();
+    //private final Map<String, CardRules> cards = new Hashtable<String, CardRules>();
+    
     // Here are refs, get them by name
     private final Map<String, CardPrinted> uniqueCards = new Hashtable<String, CardPrinted>();
 
@@ -72,7 +76,7 @@ public final class CardDb {
         String cardName = card.getName().toLowerCase();
 
         // 1. register among oracle uniques
-        cards.put(cardName, card);
+        //cards.put(cardName, card);
 
         // 2. Save refs into two lists: one flat and other keyed with sets & name
         CardPrinted lastAdded = null;

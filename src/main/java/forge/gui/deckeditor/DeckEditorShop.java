@@ -22,13 +22,13 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.ReadPriceList;
 import forge.Singletons;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
 //import forge.view.swing.OldGuiNewGame;
 
@@ -88,12 +88,12 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         multiplier = questData.getCards().getSellMutliplier();
 
-        CardPoolView<CardPrinted> forSale = questData.getCards().getShopList();
+        ItemPoolView<CardPrinted> forSale = questData.getCards().getShopList();
         if (forSale.isEmpty()) {
             questData.getCards().generateCardsInShop();
             forSale = questData.getCards().getShopList();
         }
-        CardPoolView<CardPrinted> owned = questData.getCards().getCardpool().getView();
+        ItemPoolView<CardPrinted> owned = questData.getCards().getCardpool().getView();
         //newCardsList = questData.getCards().getNewCards();
 
         setDeck(forSale, owned, GameType.Quest);

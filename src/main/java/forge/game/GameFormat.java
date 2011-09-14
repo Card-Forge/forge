@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.slightlymagic.maxmtg.Predicate;
 
-import forge.card.CardPrinted;
 import forge.card.CardRules;
+import forge.item.CardPrinted;
 
 /** 
  * TODO: Write javadoc for this type.

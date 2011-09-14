@@ -2,11 +2,11 @@ package forge.quest.data;
 
 import forge.MyRandom;
 import forge.SetUtils;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -68,9 +68,9 @@ public final class QuestData {
     Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
     // Cards associated with quest
-    CardPool<CardPrinted> cardPool = new CardPool<CardPrinted>();     // player's belonging
-    CardPool<CardPrinted> shopList = new CardPool<CardPrinted>();     // the current shop list
-    CardPool<InventoryItem> newCardList = new CardPool<InventoryItem>();  // cards acquired since last game-win/loss
+    ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>();     // player's belonging
+    ItemPool<CardPrinted> shopList = new ItemPool<CardPrinted>();     // the current shop list
+    ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>();  // cards acquired since last game-win/loss
 
     // Quests history
     int questsPlayed;
@@ -116,8 +116,8 @@ public final class QuestData {
         myRewards = new QuestUtilRewards(this);
 
         // to avoid NPE some pools will be created here if they are null
-        if (null == newCardList) { newCardList = new CardPool<InventoryItem>(); }
-        if (null == shopList) { shopList = new CardPool<CardPrinted>(); }
+        if (null == newCardList) { newCardList = new ItemPool<InventoryItem>(); }
+        if (null == shopList) { shopList = new ItemPool<CardPrinted>(); }
 
     }
 

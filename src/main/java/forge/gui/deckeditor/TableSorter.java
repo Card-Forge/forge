@@ -1,7 +1,8 @@
 package forge.gui.deckeditor;
 
 
-import forge.card.CardPrinted;
+import forge.item.CardPrinted;
+
 import java.util.Comparator;
 import java.util.Map.Entry;
 

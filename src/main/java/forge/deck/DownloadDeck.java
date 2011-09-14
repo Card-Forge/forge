@@ -1,6 +1,6 @@
 package forge.deck;
 
-import forge.card.CardDb;
+import forge.item.CardDb;
 
 /**
  * <p>DownloadDeck class.</p>

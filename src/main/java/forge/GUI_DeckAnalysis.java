@@ -29,9 +29,9 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
 import forge.card.CardRules;
-import forge.card.CardPoolView;
-import forge.card.CardPrinted;
 import forge.card.CardType;
+import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -98,7 +98,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
     // private ButtonGroup buttonGroup1;
 
     public CardList filterCardList;
-    public CardPoolView<CardPrinted> deck;
+    public ItemPoolView<CardPrinted> deck;
 
     /**
      * <p>
@@ -110,7 +110,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @param tb
      *            a {@link forge.gui.deckeditor.TableModel} object.
      */
-    public GUI_DeckAnalysis(JFrame g, CardPoolView<CardPrinted> deckView) {
+    public GUI_DeckAnalysis(JFrame g, ItemPoolView<CardPrinted> deckView) {
         super(g);
         deck = deckView;
 

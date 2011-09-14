@@ -8,12 +8,12 @@ import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 
-import forge.card.CardDb;
-import forge.card.CardPool;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -72,7 +72,7 @@ public class QuestDataIO {
             IgnoringXStream xStream = new IgnoringXStream();
             xStream.registerConverter(new CardPoolToXml());
             xStream.registerConverter(new GameTypeToXml());
-            xStream.alias("CardPool", CardPool.class);
+            xStream.alias("CardPool", ItemPool.class);
             data = (QuestData) xStream.fromXML(xml.toString());
             
             if (data.versionNumber != QuestData.CURRENT_VERSION_NUMBER) {
@@ -151,7 +151,7 @@ public class QuestDataIO {
         try {
             XStream xStream = new XStream();
             xStream.registerConverter(new CardPoolToXml());
-            xStream.alias("CardPool", CardPool.class);
+            xStream.alias("CardPool", ItemPool.class);
 
             File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
             BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
@@ -219,7 +219,7 @@ public class QuestDataIO {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(Class clasz) {
-            return clasz.equals(CardPool.class);
+            return clasz.equals(ItemPool.class);
         }
 
         private void writeCardRef(CardPrinted cref, HierarchicalStreamWriter writer)
@@ -234,7 +234,7 @@ public class QuestDataIO {
         @Override
         public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
             @SuppressWarnings("unchecked")
-            CardPool<InventoryItem> pool = (CardPool<InventoryItem>) source;
+            ItemPool<InventoryItem> pool = (ItemPool<InventoryItem>) source;
             for (Entry<InventoryItem, Integer> e : pool) {
                 if ( e.getKey() instanceof CardPrinted)
                 {
@@ -249,7 +249,7 @@ public class QuestDataIO {
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            CardPool<CardPrinted> result = new CardPool<CardPrinted>();
+            ItemPool<CardPrinted> result = new ItemPool<CardPrinted>();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 String nodename = reader.getNodeName();

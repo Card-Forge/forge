@@ -13,8 +13,8 @@ import arcane.ui.ScaledImagePanel.ScalingType;
 import forge.Card;
 import forge.CardContainer;
 import forge.ImageCache;
-import forge.card.CardPrinted;
-import forge.card.InventoryItem;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 import javax.swing.*;
 import java.awt.*;
