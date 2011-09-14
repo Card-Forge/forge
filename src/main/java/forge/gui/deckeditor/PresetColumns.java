@@ -10,6 +10,7 @@ import forge.card.CardRarity;
 import forge.card.CardSet;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.InventoryItemFromSet;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -22,8 +23,8 @@ public abstract class PresetColumns {
     private static String toType(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getType().toString() : i.getClass().toString(); }
     private static String toPTL(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getPTorLoyalty() : ""; }
     private static CardRarity toRarity(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getRarity() : CardRarity.Unknown; }
-    private static CardSet toSetCmp(InventoryItem i) { return i instanceof CardPrinted ? SetUtils.getSetByCode(((CardPrinted) i).getSet()) : CardSet.unknown; }
-    private static String toSetStr(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getSet() : "n/a"; }
+    private static CardSet toSetCmp(InventoryItem i) { return i instanceof InventoryItemFromSet ? SetUtils.getSetByCode(((InventoryItemFromSet) i).getSet()) : CardSet.unknown; }
+    private static String toSetStr(InventoryItem i) { return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getSet() : "n/a"; }
     private static Integer toAiCmp(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getAiStatusComparable() : Integer.valueOf(-1); }
     private static String toAiStr(InventoryItem i) { return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getAiStatus() : "n/a"; }
     

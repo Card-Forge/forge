@@ -88,15 +88,15 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         multiplier = questData.getCards().getSellMutliplier();
 
-        ItemPoolView<CardPrinted> forSale = questData.getCards().getShopList();
+        ItemPoolView<InventoryItem> forSale = questData.getCards().getShopList();
         if (forSale.isEmpty()) {
             questData.getCards().generateCardsInShop();
             forSale = questData.getCards().getShopList();
         }
-        ItemPoolView<CardPrinted> owned = questData.getCards().getCardpool().getView();
+        ItemPoolView<InventoryItem> owned = questData.getCards().getCardpool().getView();
         //newCardsList = questData.getCards().getNewCards();
 
-        setDeck(forSale, owned, GameType.Quest);
+        setItems(forSale, owned, GameType.Quest);
 
         double multiPercent = multiplier * 100;
         NumberFormat formatter = new DecimalFormat("#0.00");

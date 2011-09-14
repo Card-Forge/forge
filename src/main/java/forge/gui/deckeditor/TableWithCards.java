@@ -66,7 +66,7 @@ public final class TableWithCards {
 
     public void setup(final List<TableColumnInfo<InventoryItem>> columns, final CardPanelBase cardView)
     {
-        model = new TableModel<InventoryItem>(cardView, columns);
+        model = new TableModel<InventoryItem>(cardView, columns, InventoryItem.class);
         model.addListeners(table);
         table.setModel(model);
         model.resizeCols(table);

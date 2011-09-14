@@ -10,7 +10,9 @@ import forge.SetUtils;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.deck.Deck;
+import forge.deck.DeckManager;
 import forge.gui.GuiUtils;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -70,7 +72,7 @@ public class BoosterDraft_1 implements BoosterDraft {
         draftFormat[0] = draftType;
 
         if (draftType.equals("Full")) {    // Draft from all cards in Forge
-            BoosterGenerator bpFull = new BoosterGenerator();
+            BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
             for (int i = 0; i < 3; i++) {
                 packs.add(bpFull);
             }

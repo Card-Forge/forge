@@ -46,7 +46,7 @@ public class ReadDraftBoosterPack implements NewConstants {
     }
 
     public ItemPoolView<CardPrinted> getBoosterPack5() {
-        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>(CardPrinted.class);
         for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
         addBasicLands(list, 20);
@@ -82,7 +82,7 @@ public class ReadDraftBoosterPack implements NewConstants {
      * @return a {@link forge.CardList} object.
      */
     public final ItemPoolView<CardPrinted> getBoosterPack() {
-        ItemPool<CardPrinted> pack = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> pack = new ItemPool<CardPrinted>(CardPrinted.class);
 
         pack.add(getRandomCard(rareList));
 

@@ -12,16 +12,16 @@ import java.util.Map.Entry;
 public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
 
     // Constructors here
-    public ItemPool() { super(); }
+    public ItemPool(final Class<T> cls) { super(cls); }
 
     @SuppressWarnings("unchecked") // conversion here must be safe
-    public ItemPool(final List<String> names) { super(); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
+    public ItemPool(final List<String> names, final Class<T> cls) { super(cls); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
 
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> 
         createFrom(ItemPoolView<Tin> from, Class<Tout> clsHint) 
     {
-        ItemPool<Tout> result = new ItemPool<Tout>();
+        ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
         if (from != null) {
             for (Entry<Tin, Integer> e : from) {
                 Tin srcKey = e.getKey();
@@ -35,8 +35,9 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
     
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout>
-        createFrom(Iterable<Tin> from, Class<Tout> clsHint) {
-        ItemPool<Tout> result = new ItemPool<Tout>();
+        createFrom(Iterable<Tin> from, Class<Tout> clsHint)
+    {
+        ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
         if (from != null) {
             for (Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
@@ -48,7 +49,7 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
     }
 
     // get
-    public ItemPoolView<T> getView() { return new ItemPoolView<T>(Collections.unmodifiableMap(cards)); }
+    public ItemPoolView<T> getView() { return new ItemPoolView<T>(Collections.unmodifiableMap(cards), myClass); }
 
     // Cards manipulation
     public void add(final T card) { add(card, 1); }
@@ -65,11 +66,17 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
         for (T cr : cards) { add(cr); }
         isListInSync = false;
     }
-    public void addAll(final Iterable<Entry<T, Integer>> map) {
-        for (Entry<T, Integer> e : map) { add(e.getKey(), e.getValue()); }
+
+    @SuppressWarnings("unchecked")
+    public <U extends InventoryItem> void addAll(final Iterable<Entry<U, Integer>> map) {
+        for (Entry<U, Integer> e : map) {
+            if (myClass.isInstance(e.getKey())) {
+                add((T) e.getKey(), e.getValue());
+            }
+        }
         isListInSync = false;
     }
-
+    
     public void remove(final T card) { remove(card, 1); }
     public void remove(final T card, final int amount) {
         int count = count(card);

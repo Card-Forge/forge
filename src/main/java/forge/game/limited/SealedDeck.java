@@ -44,7 +44,7 @@ public class SealedDeck {
     public SealedDeck(String sealedType) {
 
         if (sealedType.equals("Full")) {
-            BoosterGenerator bpFull = new BoosterGenerator();
+            BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
             for (int i = 0; i < 6; i++)
                 packs.add(bpFull);
 
@@ -182,7 +182,7 @@ public class SealedDeck {
      * @return a {@link forge.CardList} object.
      */
     public ItemPool<CardPrinted> getCardpool() {
-        ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
         for (int i = 0; i < packs.size(); i++)
             pool.addAllCards(packs.get(i).getBoosterPack());

@@ -68,9 +68,9 @@ public final class QuestData {
     Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
     // Cards associated with quest
-    ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>();     // player's belonging
-    ItemPool<CardPrinted> shopList = new ItemPool<CardPrinted>();     // the current shop list
-    ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>();  // cards acquired since last game-win/loss
+    ItemPool<InventoryItem> cardPool = new ItemPool<InventoryItem>(InventoryItem.class);     // player's belonging
+    ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class);     // the current shop list
+    ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class);  // cards acquired since last game-win/loss
 
     // Quests history
     int questsPlayed;
@@ -116,8 +116,8 @@ public final class QuestData {
         myRewards = new QuestUtilRewards(this);
 
         // to avoid NPE some pools will be created here if they are null
-        if (null == newCardList) { newCardList = new ItemPool<InventoryItem>(); }
-        if (null == shopList) { shopList = new ItemPool<CardPrinted>(); }
+        if (null == newCardList) { newCardList = new ItemPool<InventoryItem>(InventoryItem.class); }
+        if (null == shopList) { shopList = new ItemPool<InventoryItem>(InventoryItem.class); }
 
     }
 

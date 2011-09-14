@@ -91,12 +91,13 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         }
     }
 
-    private ItemPool<T> data = new ItemPool<T>();
+    private ItemPool<T> data;
     private final CardPanelBase cardDisplay;
     private final List<TableColumnInfo<T>> columns;
     private final SortOrders sortOrders = new SortOrders();
 
-    public TableModel(final CardPanelBase cd, final List<TableColumnInfo<T>> columnsToShow) {
+    public TableModel(final CardPanelBase cd, final List<TableColumnInfo<T>> columnsToShow, Class<T> cls) {
+        data = new ItemPool<T>(cls);
         cardDisplay = cd;
         columns = columnsToShow;
         columns.get(4).isMinMaxApplied = false;

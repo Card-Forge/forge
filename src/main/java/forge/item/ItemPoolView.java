@@ -42,11 +42,12 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         };
 
     // Constructors
-    public ItemPoolView() { cards = new Hashtable<T, Integer>(); }
-    public ItemPoolView(final Map<T, Integer> inMap) { cards = inMap; }
+    public ItemPoolView(final Class<T> cls) { cards = new Hashtable<T, Integer>(); myClass = cls; }
+    public ItemPoolView(final Map<T, Integer> inMap, final Class<T> cls) { cards = inMap; myClass = cls; }
 
     // Data members
     protected Map<T, Integer> cards;
+    protected final Class<T> myClass; // class does not keep this in runtime by itself
 
     // same thing as above, it was copied to provide sorting (needed by table views in deck editors) 
     protected List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T,Integer>>();

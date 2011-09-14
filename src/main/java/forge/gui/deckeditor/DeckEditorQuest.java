@@ -99,7 +99,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         customMenu.setPlayerDeckName(deck.getName());
 
         ItemPoolView<CardPrinted> bottomPool = deck.getMain();
-        ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
         cardpool.addAll(questData.getCards().getCardpool());
 
         // remove bottom cards that are in the deck from the card pool

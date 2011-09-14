@@ -41,8 +41,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * <p>Constructor for Deck.</p>
      */
     public Deck() {
-        main = new ItemPool<CardPrinted>();
-        sideboard = new ItemPool<CardPrinted>();
+        main = new ItemPool<CardPrinted>(CardPrinted.class);
+        sideboard = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
     /**

@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.item.Booster;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -222,49 +223,67 @@ public class QuestDataIO {
             return clasz.equals(ItemPool.class);
         }
 
-        private void writeCardRef(CardPrinted cref, HierarchicalStreamWriter writer)
+        private void write(CardPrinted cref, Integer count, HierarchicalStreamWriter writer)
         {
+            writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getSet());
             if (cref.isFoil()) { writer.addAttribute("foil", "1"); }
             if (cref.getArtIndex() > 0) { writer.addAttribute("i", Integer.toString(cref.getArtIndex())); }
-
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
         }
+
+        private void write(Booster booster, Integer count, HierarchicalStreamWriter writer)
+        {
+            writer.startNode("booster");
+            writer.addAttribute("s", booster.getSet());
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
+        }
+        
         
         @Override
         public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
             @SuppressWarnings("unchecked")
             ItemPool<InventoryItem> pool = (ItemPool<InventoryItem>) source;
             for (Entry<InventoryItem, Integer> e : pool) {
-                if ( e.getKey() instanceof CardPrinted)
-                {
-                    writer.startNode("card");
-                    writeCardRef((CardPrinted) e.getKey(), writer);
-                    writer.addAttribute("n", e.getValue().toString());
-                    writer.endNode();
-                }
+                InventoryItem item = e.getKey(); 
+                Integer count = e.getValue();
+                if (item instanceof CardPrinted) {
+                    write((CardPrinted) item, count, writer);
+                } else if (item instanceof Booster) {
+                    write((Booster) item, count, writer);
+                } 
             }
             
         }
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            ItemPool<CardPrinted> result = new ItemPool<CardPrinted>();
+            ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
+                String sCnt = reader.getAttribute("n");
+                int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
                 String nodename = reader.getNodeName();
+
                 if("string".equals(nodename)) {
-                    CardPrinted cp = CardDb.instance().getCard(reader.getValue());
-                    result.add(cp);
-                } else { // new format
-                    CardPrinted cp = readCardPrinted(reader);
-                    String sCnt = reader.getAttribute("n");
-                    int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
-                    result.add(cp, cnt);
+                    result.add(CardDb.instance().getCard(reader.getValue()));
+                } else if ("card".equals(nodename)) { // new format
+                    result.add(readCardPrinted(reader), cnt);
+                } else if ("booster".equals(nodename)) {
+                    result.add(readBooster(reader), cnt);
                 }
                 reader.moveUp();
             }
             return result;
+        }
+        
+        private Booster readBooster(final HierarchicalStreamReader reader)
+        {
+            String set = reader.getAttribute("s");
+            return new Booster(set);
         }
 
         private CardPrinted readCardPrinted(final HierarchicalStreamReader reader)

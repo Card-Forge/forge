@@ -16,6 +16,7 @@ import forge.item.ItemPoolView;
  */
 public interface DeckDisplay {
     void setDeck(ItemPoolView<CardPrinted> top, ItemPoolView<CardPrinted> bottom, GameType gameType);
+    <T extends InventoryItem> void setItems(ItemPoolView<T> topParam, ItemPoolView<T> bottomParam, GameType gt);
 
     //top shows available card pool
     //if constructed, top shows all cards

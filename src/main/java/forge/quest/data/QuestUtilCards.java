@@ -10,6 +10,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.ReadBoosterPack;
 import forge.card.CardRarity;
 import forge.deck.Deck;
+import forge.item.Booster;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -149,13 +150,14 @@ public final class QuestUtilCards {
         ItemPoolView<CardPrinted> fromBoosters = pack.getShopCards(totalPacks);
         q.shopList.clear();
         q.shopList.addAll(fromBoosters);
+        q.shopList.add(new Booster("M10"));
     }
 
-    public ItemPool<CardPrinted> getCardpool() {
+    public ItemPool<InventoryItem> getCardpool() {
         return q.cardPool;
     }
 
-    public ItemPoolView<CardPrinted> getShopList() {
+    public ItemPoolView<InventoryItem> getShopList() {
         if (q.shopList.isEmpty()) {
             generateCardsInShop();
         }

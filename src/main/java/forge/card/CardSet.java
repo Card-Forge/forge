@@ -9,10 +9,10 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  * @version $Id: CardSet.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardSet implements Comparable<CardSet> { // immutable
-    private int index;
-    private String code;
-    private String code2;
-    private String name;
+    private final int index;
+    private final String code;
+    private final String code2;
+    private final String name;
 
     public CardSet(final int index, final String name, final String code, final String code2) {
         this.code = code;

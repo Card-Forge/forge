@@ -27,16 +27,14 @@ public class BoosterGenerator {
     private List<CardPrinted> mythics = new ArrayList<CardPrinted>();
     private List<CardPrinted> specials = new ArrayList<CardPrinted>();
 
-    private int iCommons = 0;
-    private int iUncommons = 0;
-    private int iRares = 0;
-    private int iMythics = 0;
-    private int iSpecials = 0;
-
     private int numCommons = 0;
     private int numUncommons = 0;
+    // these two used when numbers of rares/myths is specified explicitly
     private int numRares = 0;
     private int numMythics = 0;
+    // this is used to specify number of slots for a rare - generator will decide by itself which to take
+    private int numRareSlots = 0;
+    
     private int numSpecials = 0;
 
     //private Random r  = new Random();
@@ -44,18 +42,15 @@ public class BoosterGenerator {
     /**
      * <p>Constructor for BoosterGenerator.</p>
      */
-    public BoosterGenerator() {
+    public BoosterGenerator(Iterable<CardPrinted> cards) {
         numCommons = 11;
         numUncommons = 3;
-        numRares = 1;
-        numMythics = 0;
+        numRareSlots = 1;
         numSpecials = 0;
 
-        for (CardPrinted c : CardDb.instance().getAllUniqueCards()) {
+        for (CardPrinted c : cards) {
             addToRarity(c);
         }
-
-        shuffleAll();
     }
 
     /**
@@ -70,13 +65,13 @@ public class BoosterGenerator {
      * @param ignoreRarity a boolean
      */
     public BoosterGenerator(final String deckFile, final int nCommons, final int nUncommons, final int nRares,
-            final int nMythics, final int nSpecials, final boolean ignoreRarity)
+           final int nMythics, final int nSpecials, final boolean ignoreRarity)
     {
         numCommons = nCommons;
         numUncommons = nUncommons;
         numRares = nRares;
-        numMythics = nMythics;
         numSpecials = nSpecials;
+        numMythics = nMythics;
 
         //DeckManager dio = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
         DeckManager dio = AllZone.getDeckManager();
@@ -91,7 +86,6 @@ public class BoosterGenerator {
             else { addToRarity(e.getKey()); }
         }
 
-        shuffleAll();
     }
 
     /**
@@ -103,7 +97,6 @@ public class BoosterGenerator {
         numCommons = 0;
         numUncommons = 0;
         numRares = 0;
-        numMythics = 0;
         numSpecials = 0;
 
         List<String> setsList = Arrays.asList(new String[]{setCode});
@@ -114,8 +107,6 @@ public class BoosterGenerator {
             addToRarity(c);
         }
 
-        shuffleAll();
-
         ArrayList<String> bpData = FileUtil.readFile("res/boosterdata/" + setCode + ".pack");
 
         for (String line : bpData) {
@@ -124,9 +115,7 @@ public class BoosterGenerator {
             } else if (line.startsWith("Uncommons:")) {
                 numUncommons = Integer.parseInt(line.substring(10));
             } else if (line.startsWith("Rares:")) {
-                numRares = Integer.parseInt(line.substring(6));
-            } else if (line.startsWith("Mythics:")) {
-                numMythics = Integer.parseInt(line.substring(8));
+                numRareSlots = Integer.parseInt(line.substring(6));
             } else if (line.startsWith("Specials:")) {
                 numSpecials = Integer.parseInt(line.substring(9));
             }
@@ -137,31 +126,60 @@ public class BoosterGenerator {
             System.out.println("numCommons: " + numCommons);
             System.out.println("numUncommons: " + numUncommons);
             System.out.println("numRares: " + numRares);
-            System.out.println("numMythics: " + numMythics);
             System.out.println("numSpecials: " + numSpecials);
         }
 
     }
 
-    /**
-     * <p>shuffleAll.</p>
-     */
-    private void shuffleAll() {
-
-        if (!commons.isEmpty()) { Collections.shuffle(commons, MyRandom.random); }
-        if (!uncommons.isEmpty()) { Collections.shuffle(uncommons, MyRandom.random); }
-        if (!rares.isEmpty()) { Collections.shuffle(rares, MyRandom.random); }
-        if (!mythics.isEmpty()) { Collections.shuffle(mythics, MyRandom.random); }
-        if (!specials.isEmpty()) { Collections.shuffle(specials, MyRandom.random); }
-
-        if (Constant.Runtime.DevMode[0]) {
-            System.out.println("commons.size: " + commons.size());
-            System.out.println("uncommons.size: " + uncommons.size());
-            System.out.println("rares.size: " + rares.size());
-            System.out.println("mythics.size: " + mythics.size());
-            System.out.println("specials.size: " + specials.size());
+    private List<CardPrinted> pickRandomCards(List<CardPrinted> source, int count)
+    {
+        List<CardPrinted> result = new ArrayList<CardPrinted>(count);
+        if (count <= 0 || source == null || source.isEmpty()) { return result; } 
+        
+        int listSize = source.size();
+        int index = Integer.MAX_VALUE;
+        for (int iCard = 0; iCard < count; iCard++) {
+            if (index >= listSize) {
+                Collections.shuffle(source, MyRandom.random);
+                index = 0;
+            }
+            result.add(source.get(index));
+            index++;
         }
+        return result;
     }
+
+    private List<CardPrinted> pickRandomRaresOrMythics(List<CardPrinted> rares, List<CardPrinted> mythics, int count)
+    {
+        List<CardPrinted> result = new ArrayList<CardPrinted>(count);
+        int raresSize = rares == null ? 0 : rares.size();
+        int mythicsSize = mythics == null ? 0 : mythics.size();
+        if (count <= 0 || raresSize == 0) { return result; } 
+        
+        int indexRares = Integer.MAX_VALUE;
+        int indexMythics = Integer.MAX_VALUE;
+        for (int iCard = 0; iCard < count; iCard++) {
+            boolean takeMythic = mythicsSize > 0 && MyRandom.random.nextInt(8) <= 1;
+            if (takeMythic) {
+                if (indexRares >= raresSize) {
+                    Collections.shuffle(mythics, MyRandom.random);
+                    indexMythics = 0;
+                }
+                result.add(mythics.get(indexMythics));
+                indexMythics++;
+            }
+            else 
+            {
+                if (indexRares >= raresSize) {
+                    Collections.shuffle(rares, MyRandom.random);
+                    indexRares = 0;
+                }
+                result.add(rares.get(indexRares));
+                indexRares++;
+            }
+        }
+        return result;
+    }    
 
     /**
      * <p>getBoosterPack.</p>
@@ -171,65 +189,18 @@ public class BoosterGenerator {
     public final List<CardPrinted> getBoosterPack() {
         List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
-        int i = 0;
-
-        if (commons.size() > numCommons) {
-            for (i = 0; i < numCommons; i++) {
-                if (iCommons >= commons.size()) {
-                    iCommons = 0;
-                }
-
-                temp.add(commons.get(iCommons++));
-            }
+        temp.addAll(pickRandomCards(commons, numCommons));
+        temp.addAll(pickRandomCards(uncommons, numUncommons));
+        // You can specify number of rare-slots or number of rares and mythics explicitly... or both, but they'll sum up
+        if (numRareSlots > 0) {
+            temp.addAll(pickRandomRaresOrMythics(rares, mythics, numRareSlots));
         }
-
-        if (uncommons.size() > numUncommons) {
-            for (i = 0; i < numUncommons; i++) {
-                if (iUncommons >= uncommons.size()) {
-                    iUncommons = 0;
-                }
-
-                temp.add(uncommons.get(iUncommons++));
-            }
+        if (numRares > 0 || numMythics > 0) {
+            temp.addAll(pickRandomCards(rares, numRares));
+            temp.addAll(pickRandomCards(mythics, numMythics));
         }
-
-        for (i = 0; i < numRares; i++) {
-            if (numMythics > 0) {
-                if (mythics.size() > numMythics) {
-                    if (MyRandom.random.nextInt(8) <= 1) {
-                        if (iMythics >= mythics.size()) {
-                            iMythics = 0;
-                        }
-
-                        temp.add(mythics.get(iMythics++));
-                    } else {
-                        if (iRares >= rares.size()) {
-                            iRares = 0;
-                        }
-
-                        temp.add(rares.get(iRares++));
-                    }
-                }
-            } else {
-                if (rares.size() > numRares) {
-                    if (iRares >= rares.size()) {
-                        iRares = 0;
-                    }
-
-                    temp.add(rares.get(iRares++));
-                }
-            }
-        }
-
-        if (specials.size() > numSpecials) {
-            for (i = 0; i < numSpecials; i++) {
-                if (iSpecials >= specials.size()) {
-                    iSpecials = 0;
-                }
-
-                temp.add(specials.get(iSpecials++));
-            }
-        }
+        
+        temp.addAll(pickRandomCards(specials, numSpecials));
 
         return temp;
     }

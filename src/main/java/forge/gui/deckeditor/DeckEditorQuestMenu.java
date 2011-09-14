@@ -271,7 +271,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 questData.addDeck(newDeck);
 
                 ItemPool<CardPrinted> cardpool = ItemPool.createFrom(questData.getCards().getCardpool(), CardPrinted.class);
-                ItemPool<CardPrinted> decklist = new ItemPool<CardPrinted>();
+                ItemPool<CardPrinted> decklist = new ItemPool<CardPrinted>(CardPrinted.class);
                 for (Entry<CardPrinted, Integer> s : newDeck.getMain()) {
                     CardPrinted cp = s.getKey();
                     decklist.add(cp, s.getValue());
@@ -348,7 +348,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
     private final ActionListener newDeckActionListener = new ActionListener() {
         public void actionPerformed(final ActionEvent a) {
-            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), null, GameType.Quest);
+            deckDisplay.setItems(questData.getCards().getCardpool().getView(), null, GameType.Quest);
             setPlayerDeckName("");
         }
     };
@@ -431,7 +431,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             questData.removeDeck(currentDeck.getName());
 
             //show card pool
-            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), null, GameType.Quest);
+            deckDisplay.setItems(questData.getCards().getCardpool().getView(), null, GameType.Quest);
 
             setPlayerDeckName("");
         }

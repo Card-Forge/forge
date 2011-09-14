@@ -55,7 +55,7 @@ public class ReadBoosterPack implements NewConstants {
      * @return a {@link forge.CardList} object.
      */
     public ItemPoolView<CardPrinted> getBoosterPack5() {
-        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>(CardPrinted.class);
         for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
         addBasicLands(list, 20);
@@ -92,7 +92,7 @@ public class ReadBoosterPack implements NewConstants {
      * @return a {@link forge.CardList} object.
      */
     public ItemPoolView<CardPrinted> getBoosterPack() {
-        ItemPool<CardPrinted> pack = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> pack = new ItemPool<CardPrinted>(CardPrinted.class);
 
         pack.add(getRandomCard(rares));
 
@@ -126,7 +126,7 @@ public class ReadBoosterPack implements NewConstants {
      * @return a {@link forge.CardList} object.
      */
     public ItemPoolView<CardPrinted> getShopCards(int totalPacks) {
-        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>(CardPrinted.class);
 
         // Number of Packs granted
 

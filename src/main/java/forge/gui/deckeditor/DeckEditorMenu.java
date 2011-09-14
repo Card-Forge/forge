@@ -147,7 +147,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
         // The only remaining reference to global variable!
         CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(15 * 5));
 
-        ItemPool<CardPrinted> cpRandom = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> cpRandom = new ItemPool<CardPrinted>(CardPrinted.class);
         for (Card c : random) { cpRandom.add(CardDb.instance().getCard(c)); }
         cpRandom.add(CardDb.instance().getCard("Forest"));
         cpRandom.add(CardDb.instance().getCard("Island"));
@@ -166,7 +166,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
 
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
 
-        ItemPool<CardPrinted> generated = new ItemPool<CardPrinted>();
+        ItemPool<CardPrinted> generated = new ItemPool<CardPrinted>(CardPrinted.class);
         for (Card c : gen.generateDeck()) { generated.add(CardDb.instance().getCard(c)); }
         deckDisplay.setDeck(null, generated, GameType.Constructed);
     }

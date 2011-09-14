@@ -62,13 +62,19 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
             g.setEnabled(false);
         }
     }
-    
+
     public DeckEditorBase(GameType gametype)
     {
         gameType = gametype;
     }
-    
+
     public void setDeck(ItemPoolView<CardPrinted> topParam, ItemPoolView<CardPrinted> bottomParam, GameType gt) {
+        gameType = gt;
+        top.setDeck(topParam);
+        bottom.setDeck(bottomParam);
+    }
+
+    public <T extends InventoryItem> void setItems(ItemPoolView<T> topParam, ItemPoolView<T> bottomParam, GameType gt) {
         gameType = gt;
         top.setDeck(topParam);
         bottom.setDeck(bottomParam);
@@ -84,6 +90,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
         }
     };
 
+    /** This class is used for a feature: when you start typing card name, the list gets auto-filtered. */
     protected class OnChangeTextUpdateDisplay implements DocumentListener {
         private void onChange() { if (isFiltersChangeFiringUpdate) { updateDisplay(); } }
         @Override public void insertUpdate(DocumentEvent e) { onChange(); }
