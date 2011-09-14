@@ -2,7 +2,9 @@ package forge.card.cardFactory;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -23,24 +25,21 @@ import forge.Counters;
 import forge.FileUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.card.CardDb;
+import forge.card.CardPrinted;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.card.trigger.Trigger;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-
 import net.slightlymagic.braids.util.ImmutableIterableFrom;
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.lambda.Lambda1;
-
 import java.io.File;
 
 
@@ -1349,43 +1348,25 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         //*************** START *********** START **************************
         else if (cardName.equals("Pithing Needle")) {
-            final CardFactoryInterface factory = this;
             final SpellAbility ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
-                    final String[] input = new String[1];
-                    Generator<Card> allCardsGen = YieldUtils.toGenerator(factory);
-                    input[0] = "";
+                    String cardName = "";
                     if (card.getController().isHuman()) {
-                        while (input[0] == "") {
-                            input[0] = JOptionPane.showInputDialog(null, "Which source?", "Pick a card", JOptionPane.QUESTION_MESSAGE);
+                        List<String> cards = new ArrayList<String>();
+                        for (CardPrinted c : CardDb.instance().getAllUniqueCards()) { cards.add(c.getName()); }
+                        Collections.sort(cards);
 
-                            final String input0 = input[0];
-
-                            Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
-                                public Boolean apply(final Card c) {
-                                    return c.getName().toLowerCase().equals(input0.toLowerCase());
-                                    //System.out.print("Comparing \"" + c.getName().toLowerCase() + "\" to \"" + input[0] + "\": ");
-                                    //System.out.println((c.getName().toLowerCase().equals(input[0].toLowerCase())));
-                                }
-                            };
-
-                            Generator<Card> cardGen = GeneratorFunctions.filterGenerator(predicate, allCardsGen);
-                            CardList cards = new CardList(cardGen);
-
-                            if (cards.size() == 0) {
-                                input[0] = "";
-                            } else {
-                                input[0] = cards.get(0).getName();
-                            }
-                        }
-                        //TODO some more input validation, case-sensitivity, etc.
-
+                        // use standard forge's list selection dialog
+                        ListChooser<String> c = new ListChooser<String>("Name a card to disable activation of its non-mana abilities", 1, 1, cards);
+                        c.show();
+                        // still missing a listener to display the card preview in the right
+                        cardName = c.getSelectedValue();
                     } else {
                         //AI CODE WILL EVENTUALLY GO HERE!
                     }
-                    card.setSVar("PithingTarget", input[0]);
-                    card.setChosenType(input[0]);
+                    card.setSVar("PithingTarget", cardName);
+                    card.setChosenType(cardName);
                 }
             }; //ability
             ability.setStackDescription("As Pithing Needle enters the battlefield, name a card.");
