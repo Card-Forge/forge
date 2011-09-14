@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.ReadDraftBoosterPack;
 import forge.deck.Deck;
 
 import forge.game.limited.BoosterDraft;

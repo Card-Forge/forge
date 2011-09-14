@@ -1,11 +1,12 @@
-package forge;
+package forge.card;
 
 
 //import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileReader;
 
-import forge.card.CardRules;
+import forge.Constant;
+import forge.MyRandom;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;

@@ -1,7 +1,8 @@
-package forge;
+package forge.card;
 
 
-import forge.card.CardRules;
+import forge.Constant;
+import forge.MyRandom;
 import forge.error.ErrorViewer;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -45,37 +46,6 @@ public class ReadDraftBoosterPack implements NewConstants {
         setup();
     }
 
-    public ItemPoolView<CardPrinted> getBoosterPack5() {
-        ItemPool<CardPrinted> list = new ItemPool<CardPrinted>(CardPrinted.class);
-        for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
-
-        addBasicLands(list, 20);
-        addBasicSnowLands(list, 20);
-
-        for (int i = 0; i < 4; i++) {
-            list.add(CardDb.instance().getCard("Terramorphic Expanse", "M10"));
-        }
-
-        return list;
-    } //getBoosterPack5()
-
-    public static final void addBasicLands(final ItemPool<CardPrinted> pool, final int count) {
-        CardDb db = CardDb.instance();
-        pool.add(db.getCard("Forest", "M10"), count);
-        pool.add(db.getCard("Island", "M10"), count);
-        pool.add(db.getCard("Plains", "M10"), count);
-        pool.add(db.getCard("Mountain", "M10"), count);
-        pool.add(db.getCard("Swamp", "M10"), count);
-
-    }
-    public static final void addBasicSnowLands(final ItemPool<CardPrinted> pool, final int count) {
-        CardDb db = CardDb.instance();
-        pool.add(db.getCard("Snow-Covered Forest", "ICE"), count);
-        pool.add(db.getCard("Snow-Covered Island", "ICE"), count);
-        pool.add(db.getCard("Snow-Covered Plains", "ICE"), count);
-        pool.add(db.getCard("Snow-Covered Mountain", "ICE"), count);
-        pool.add(db.getCard("Snow-Covered Swamp", "ICE"), count);
-    }
     /**
      * <p>getBoosterPack.</p>
      *

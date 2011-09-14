@@ -2,6 +2,7 @@ package forge;
 
 import java.util.List;
 
+import forge.card.ReadDraftBoosterPack;
 import forge.deck.Deck;
 import forge.game.limited.BoosterDraftAI;
 import forge.item.CardPrinted;

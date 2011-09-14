@@ -85,6 +85,7 @@ public final class CardType implements Comparable<CardType> {
 
     public boolean isBasic() { return superType.contains(CardSuperType.Basic); }
     public boolean isLegendary() { return superType.contains(CardSuperType.Legendary); }
+    public boolean isBasicLand() { return isBasic() && isLand(); }
 
     public String getTypesBeforeDash() {
         ArrayList<String> types = new ArrayList<String>();

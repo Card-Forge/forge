@@ -1,7 +1,6 @@
 package forge.game.limited;
 
 import forge.AllZone;
-import forge.BoosterGenerator;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -10,10 +9,12 @@ import forge.Constant;
 import forge.FileUtil;
 import forge.MyRandom;
 import forge.SetUtils;
+import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
+import forge.deck.DeckManager;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -21,6 +22,10 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 
 import javax.swing.*;
+
+import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Closure1;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,7 @@ import java.util.List;
  * @since 1.0.15
  */
 public class SealedDeck {
-    private ArrayList<BoosterGenerator> packs = new ArrayList<BoosterGenerator>();
+    private List<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
     public String LandSetCode[] = {""};
 
     /**
@@ -45,8 +50,9 @@ public class SealedDeck {
 
         if (sealedType.equals("Full")) {
             BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
+            Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpFull);
             for (int i = 0; i < 6; i++)
-                packs.add(bpFull);
+                packs.add(picker);
 
             LandSetCode[0] = CardDb.instance().getCard("Plains").getSet();
         } else if (sealedType.equals("Block")) {
@@ -78,19 +84,19 @@ public class SealedDeck {
                 String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
-                    packs.add(bpMulti);
+                    packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
             } else {
                 BoosterGenerator bpOne = new BoosterGenerator(sets[0]);
-                for (int i = 0; i < nPacks; i++) { packs.add(bpOne); }
+                Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpOne);
+                for (int i = 0; i < nPacks; i++) { packs.add(picker); }
             }
 
             LandSetCode[0] = block.getLandSet().getCode();
 
         } else if (sealedType.equals("Custom")) {
             String dList[];
-            ArrayList<CustomSealed> customs = new ArrayList<CustomSealed>();
-            ArrayList<String> customList = new ArrayList<String>();
+            ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
             // get list of custom draft files
             File dFolder = new File("res/sealed/");
@@ -105,73 +111,41 @@ public class SealedDeck {
             for (int i = 0; i < dList.length; i++) {
                 if (dList[i].endsWith(".sealed")) {
                     ArrayList<String> dfData = FileUtil.readFile("res/sealed/" + dList[i]);
-
-                    CustomSealed cs = new CustomSealed();
-
-                    for (int j = 0; j < dfData.size(); j++) {
-
-                        String dfd = dfData.get(j);
-
-                        if (dfd.startsWith("Name:"))
-                            cs.Name = dfd.substring(5);
-                        if (dfd.startsWith("Type:"))
-                            cs.Type = dfd.substring(5);
-                        if (dfd.startsWith("DeckFile:"))
-                            cs.DeckFile = dfd.substring(9);
-                        if (dfd.startsWith("IgnoreRarity:"))
-                            cs.IgnoreRarity = dfd.substring(13).equals("True");
-                        if (dfd.startsWith("LandSetCode:"))
-                            cs.LandSetCode = dfd.substring(12);
-
-                        if (dfd.startsWith("NumCards:"))
-                            cs.NumCards = Integer.parseInt(dfd.substring(9));
-                        if (dfd.startsWith("NumSpecials:"))
-                            cs.NumSpecials = Integer.parseInt(dfd.substring(12));
-                        if (dfd.startsWith("NumMythics:"))
-                            cs.NumMythics = Integer.parseInt(dfd.substring(11));
-                        if (dfd.startsWith("NumRares:"))
-                            cs.NumRares = Integer.parseInt(dfd.substring(9));
-                        if (dfd.startsWith("NumUncommons:"))
-                            cs.NumUncommons = Integer.parseInt(dfd.substring(13));
-                        if (dfd.startsWith("NumCommons:"))
-                            cs.NumCommons = Integer.parseInt(dfd.substring(11));
-                        if (dfd.startsWith("NumPacks:"))
-                            cs.NumPacks = Integer.parseInt(dfd.substring(9));
-
-                    }
-
+                    CustomLimited cs = CustomLimited.parse(dfData);
                     customs.add(cs);
-                    customList.add(cs.Name);
                 }
-
-
             }
-            CustomSealed chosenSealed = null;
 
             // present list to user
             if (customs.size() < 1)
                 JOptionPane.showMessageDialog(null, "No custom sealed files found.", "", JOptionPane.INFORMATION_MESSAGE);
 
             else {
-                Object p = GuiUtils.getChoice("Choose Custom Sealed Pool", customList.toArray());
+                final CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Sealed Pool", customs.toArray());
 
-                for (int i = 0; i < customs.size(); i++) {
-                    CustomSealed cs = customs.get(i);
-
-                    if (cs.Name.equals(p.toString()))
-                        chosenSealed = cs;
+                DeckManager dio = AllZone.getDeckManager();
+                Deck dPool = dio.getDeck(draft.DeckFile);
+                if (dPool == null) {
+                    throw new RuntimeException("BoosterGenerator : deck not found - " + draft.DeckFile);
                 }
 
-                if (chosenSealed.IgnoreRarity)
-                    chosenSealed.NumCommons = chosenSealed.NumCards;
+                BoosterGenerator bpCustom = new BoosterGenerator(dPool);
+                Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+                    @Override public List<CardPrinted> apply(BoosterGenerator pack) {
+                        if ( draft.IgnoreRarity ) {
+                            return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, 0, draft.NumCards);
+                        }
+                        return pack.getBoosterPack(draft.NumCommons, 0, 0, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0);
+                    }
+                };
 
-                BoosterGenerator bpCustom = new BoosterGenerator(chosenSealed.DeckFile, chosenSealed.NumCommons, chosenSealed.NumUncommons, chosenSealed.NumRares, chosenSealed.NumMythics, chosenSealed.NumSpecials, chosenSealed.IgnoreRarity);
+                Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(fnPick, bpCustom);
 
-                for (int i = 0; i < chosenSealed.NumPacks; i++) {
-                    packs.add(bpCustom);
+                for (int i = 0; i < draft.NumPacks; i++) {
+                    packs.add(picker);
                 }
 
-                LandSetCode[0] = chosenSealed.LandSetCode;
+                LandSetCode[0] = draft.LandSetCode;
             }
         }
     }
@@ -185,7 +159,7 @@ public class SealedDeck {
         ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
         for (int i = 0; i < packs.size(); i++)
-            pool.addAllCards(packs.get(i).getBoosterPack());
+            pool.addAllCards(packs.get(i).apply());
 
         return pool;
     }
@@ -408,21 +382,6 @@ public class SealedDeck {
             aiDeck.addSideboard(aiCardpool.get(i).getName() + "|" + aiCardpool.get(i).getCurSetCode());
 
         return aiDeck;
-    }
-
-    class CustomSealed {
-        public String Name;
-        public String Type;
-        public String DeckFile;
-        public Boolean IgnoreRarity;
-        public int NumCards = 15;
-        public int NumSpecials = 0;
-        public int NumMythics = 1;
-        public int NumRares = 1;
-        public int NumUncommons = 3;
-        public int NumCommons = 11;
-        public int NumPacks = 3;
-        public String LandSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
     }
 
     class DeckColors {

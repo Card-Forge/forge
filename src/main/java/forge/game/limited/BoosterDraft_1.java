@@ -1,12 +1,12 @@
 package forge.game.limited;
 
 import forge.AllZone;
-import forge.BoosterGenerator;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.FileUtil;
 import forge.SetUtils;
+import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.deck.Deck;
@@ -23,6 +23,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Closure1;
+
 /**
  * 
  * TODO Write javadoc for this type.
@@ -37,8 +40,8 @@ public class BoosterDraft_1 implements BoosterDraft {
     private int currentCount = 0;
     private List<List<CardPrinted>> pack; //size 8
     //private BoosterGenerator packs[] = {new BoosterGenerator(), new BoosterGenerator(), new BoosterGenerator()};
-    private ArrayList<BoosterGenerator> packs = new ArrayList<BoosterGenerator>();
-    private int packNum = 0;
+    private ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
+    private int currentBoosterPack = 0;
 
     //helps the computer choose which booster packs to pick from
     //the first row says "pick from boosters 1-7, skip 0" since the players picks from 0
@@ -73,8 +76,9 @@ public class BoosterDraft_1 implements BoosterDraft {
 
         if (draftType.equals("Full")) {    // Draft from all cards in Forge
             BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
+            Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpFull);
             for (int i = 0; i < 3; i++) {
-                packs.add(bpFull);
+                packs.add(picker);
             }
 
             LandSetCode[0] = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
@@ -110,13 +114,15 @@ public class BoosterDraft_1 implements BoosterDraft {
                 String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
-                    packs.add(bpMulti);
+                    Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpMulti);
+                    packs.add(picker);
                     sumCards += bpMulti.getBoosterPackSize();
                 }
             } else {
                 BoosterGenerator bpOne = new BoosterGenerator(sets[0]);
+                Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) {
-                    packs.add(bpOne);
+                    packs.add(picker);
                     sumCards += bpOne.getBoosterPackSize();
                 }
             }
@@ -124,116 +130,77 @@ public class BoosterDraft_1 implements BoosterDraft {
             LandSetCode[0] = block.getLandSet().getCode();
             
         } else if (draftType.equals("Custom")) {    // Draft from user-defined cardpools
-            String[] dList;
-            ArrayList<CustomDraft> customs = new ArrayList<CustomDraft>();
-            ArrayList<String> customList = new ArrayList<String>();
-
-            // get list of custom draft files
-            File dFolder = new File("res/draft/");
-            if (!dFolder.exists()) {
-                throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
-            }
-
-            if (!dFolder.isDirectory()) {
-                throw new RuntimeException("BoosterDraft : not a folder -- " + dFolder.getAbsolutePath());
-            }
-
-            dList = dFolder.list();
-
-            for (int i = 0; i < dList.length; i++) {
-                if (dList[i].endsWith(".draft")) {
-                    ArrayList<String> dfData = FileUtil.readFile("res/draft/" + dList[i]);
-
-                    CustomDraft cd = new CustomDraft();
-
-                    for (int j = 0; j < dfData.size(); j++) {
-
-                        String dfd = dfData.get(j);
-
-                        if (dfd.startsWith("Name:")) {
-                            cd.Name = dfd.substring(5);
-                        }
-                        if (dfd.startsWith("Type:")) {
-                            cd.Type = dfd.substring(5);
-                        }
-                        if (dfd.startsWith("DeckFile:")) {
-                            cd.DeckFile = dfd.substring(9);
-                        }
-                        if (dfd.startsWith("IgnoreRarity:")) {
-                            cd.IgnoreRarity = dfd.substring(13).equals("True");
-                        }
-                        if (dfd.startsWith("LandSetCode:")) {
-                            cd.LandSetCode = dfd.substring(12);
-                        }
-
-                        if (dfd.startsWith("NumCards:")) {
-                            cd.NumCards = Integer.parseInt(dfd.substring(9));
-                        }
-                        if (dfd.startsWith("NumSpecials:")) {
-                            cd.NumSpecials = Integer.parseInt(dfd.substring(12));
-                        }
-                        if (dfd.startsWith("NumMythics:")) {
-                            cd.NumMythics = Integer.parseInt(dfd.substring(11));
-                        }
-                        if (dfd.startsWith("NumRares:")) {
-                            cd.NumRares = Integer.parseInt(dfd.substring(9));
-                        }
-                        if (dfd.startsWith("NumUncommons:")) {
-                            cd.NumUncommons = Integer.parseInt(dfd.substring(13));
-                        }
-                        if (dfd.startsWith("NumCommons:")) {
-                            cd.NumCommons = Integer.parseInt(dfd.substring(11));
-                        }
-                        if (dfd.startsWith("NumPacks:")) {
-                            cd.NumPacks = Integer.parseInt(dfd.substring(9));
-                        }
-
-                    }
-
-                    customs.add(cd);
-                    customList.add(cd.Name);
-                }
-
-
-            }
-            CustomDraft chosenDraft = null;
-
-            // present list to user
-            if (customs.size() < 1) {
+            List<CustomLimited> myDrafts = loadCustomDrafts("res/draft/", ".draft");
+            
+            if (myDrafts.size() < 1) {
                 JOptionPane.showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Object p = GuiUtils.getChoice("Choose Custom Draft", customList.toArray());
-
-                for (int i = 0; i < customs.size(); i++) {
-                    CustomDraft cd = customs.get(i);
-
-                    if (cd.Name.equals(p.toString())) {
-                        chosenDraft = cd;
-                    }
-                }
-
-                if (chosenDraft.IgnoreRarity) {
-                    chosenDraft.NumCommons = chosenDraft.NumCards;
-                }
-
-                BoosterGenerator bpCustom = new BoosterGenerator(chosenDraft.DeckFile, chosenDraft.NumCommons,
-                        chosenDraft.NumUncommons, chosenDraft.NumRares, chosenDraft.NumMythics, chosenDraft.NumSpecials,
-                        chosenDraft.IgnoreRarity);
-                int n = 0;
-                for (int i = 0; i < chosenDraft.NumPacks; i++) {
-                    packs.add(bpCustom);
-                    n += chosenDraft.NumCards; //bpCustom.getBoosterPackSize();
-                }
-                stopCount = n;
-
-                LandSetCode[0] = chosenDraft.LandSetCode;
+                CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Draft", myDrafts.toArray());
+                setupCustomDraft(draft);
             }
-
         }
 
         pack = get8BoosterPack();
     }
 
+    private void setupCustomDraft(final CustomLimited draft)
+    {
+        DeckManager dio = AllZone.getDeckManager();
+        Deck dPool = dio.getDeck(draft.DeckFile);
+        if (dPool == null) {
+            throw new RuntimeException("BoosterGenerator : deck not found - " + draft.DeckFile);
+        }
+
+        BoosterGenerator bpCustom = new BoosterGenerator(dPool);
+        Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+            @Override public List<CardPrinted> apply(BoosterGenerator pack) {
+                if ( draft.IgnoreRarity ) {
+                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, 0, draft.NumCards);
+                }
+                return pack.getBoosterPack(draft.NumCommons, 0, 0, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0);
+            }
+        };
+
+        Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(fnPick, bpCustom);
+
+        int n = 0;
+        for (int i = 0; i < draft.NumPacks; i++) {
+            packs.add(picker);
+            n += draft.NumCards; //bpCustom.getBoosterPackSize();
+        }
+        stopCount = n;
+
+        LandSetCode[0] = draft.LandSetCode;
+    }
+    
+    /** Looks for res/draft/*.draft files, reads them, returns a list */
+    private List<CustomLimited> loadCustomDrafts(String lookupFolder, String fileExtension)
+    {
+        String[] dList;
+        ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
+
+        // get list of custom draft files
+        File dFolder = new File(lookupFolder);
+        if (!dFolder.exists()) {
+            throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
+        }
+
+        if (!dFolder.isDirectory()) {
+            throw new RuntimeException("BoosterDraft : not a folder -- " + dFolder.getAbsolutePath());
+        }
+
+        dList = dFolder.list();
+
+        for (int i = 0; i < dList.length; i++) {
+            if (dList[i].endsWith(fileExtension)) {
+                List<String> dfData = FileUtil.readFile(lookupFolder + dList[i]);
+                customs.add(CustomLimited.parse(dfData));
+            }
+        }
+        return customs;
+    }
+    
+    
     /**
      * <p>nextChoice.</p>
      *
@@ -256,13 +223,13 @@ public class BoosterDraft_1 implements BoosterDraft {
     public final List<List<CardPrinted>> get8BoosterPack() {
         List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
 
-        if (packNum < packs.size()) {
+        if (currentBoosterPack < packs.size()) {
             for (int i = 0; i < 8; i++) {
-                list.add(packs.get(packNum).getBoosterPack());
+                list.add(packs.get(currentBoosterPack).apply());
             }
         }
 
-        packNum++;
+        currentBoosterPack++;
 
         return list;
     } //get8BoosterPack()

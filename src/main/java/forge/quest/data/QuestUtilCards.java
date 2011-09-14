@@ -7,8 +7,9 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
-import forge.ReadBoosterPack;
 import forge.card.CardRarity;
+import forge.card.QuestBoosterPack;
+import forge.card.ReadBoosterPack;
 import forge.deck.Deck;
 import forge.item.Booster;
 import forge.item.CardDb;

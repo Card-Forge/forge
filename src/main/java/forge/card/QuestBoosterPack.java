@@ -1,7 +1,5 @@
-package forge.quest.data;
+package forge.card;
 
-import forge.card.CardRarity;
-import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 

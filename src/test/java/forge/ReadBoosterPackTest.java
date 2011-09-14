@@ -2,6 +2,8 @@ package forge;
 
 import org.testng.annotations.Test;
 
+import forge.card.ReadBoosterPack;
+
 /**
  * Created by IntelliJ IDEA.
  * User: dhudson

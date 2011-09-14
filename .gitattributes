@@ -9565,7 +9565,6 @@ src/main/java/forge/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
 src/main/java/forge/Base64Coder.java svneol=native#text/plain
-src/main/java/forge/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardContainer.java svneol=native#text/plain
@@ -9642,8 +9641,6 @@ src/main/java/forge/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/PlayerZone_ComesIntoPlay.java svneol=native#text/plain
 src/main/java/forge/Quest_Assignment.java svneol=native#text/plain
-src/main/java/forge/ReadBoosterPack.java svneol=native#text/plain
-src/main/java/forge/ReadDraftBoosterPack.java svneol=native#text/plain
 src/main/java/forge/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/ReadQuest_Assignment.java svneol=native#text/plain
 src/main/java/forge/SetInfo.java svneol=native#text/plain
@@ -9656,6 +9653,7 @@ src/main/java/forge/Time.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
+src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardColor.java -text
 src/main/java/forge/card/CardCoreType.java -text
@@ -9669,6 +9667,9 @@ src/main/java/forge/card/CardSet.java -text
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text
 src/main/java/forge/card/MtgDataParser.java -text
+src/main/java/forge/card/QuestBoosterPack.java svneol=native#text/plain
+src/main/java/forge/card/ReadBoosterPack.java svneol=native#text/plain
+src/main/java/forge/card/ReadDraftBoosterPack.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
@@ -9822,7 +9823,7 @@ src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraft_1.java svneol=native#text/plain
 src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
-src/main/java/forge/game/limited/CustomDraft.java svneol=native#text/plain
+src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java -text svneol=native#text/plain
@@ -9893,7 +9894,6 @@ src/main/java/forge/properties/Preferences.java svneol=native#text/plain
 src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestBattleManager.java svneol=native#text/plain
-src/main/java/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestEvent.java -text
@@ -9961,7 +9961,6 @@ src/main/java/net/slightlymagic/braids/util/lambda/Lambda.java svneol=native#tex
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda1.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda2.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda3.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/util/lambda/Null.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Thunk.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/package-info.java svneol=native#text/plain
@@ -9969,6 +9968,7 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/maxmtg/Closure1.java -text
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
 src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain

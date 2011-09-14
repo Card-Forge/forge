@@ -5,6 +5,7 @@ import forge.CardList;
 import forge.Constant;
 import forge.Quest_Assignment;
 import forge.card.CardRarity;
+import forge.card.QuestBoosterPack;
 import forge.item.CardPrinted;
 
 import java.util.List;
