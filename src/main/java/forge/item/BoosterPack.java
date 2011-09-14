@@ -2,6 +2,8 @@ package forge.item;
 
 import java.util.List;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardSet;
@@ -12,6 +14,9 @@ import forge.card.CardSet;
  */
 public class BoosterPack implements InventoryItemFromSet {
 
+    public final static Lambda1<BoosterPack, CardSet> fnFromSet = new Lambda1<BoosterPack, CardSet>() {
+        @Override public BoosterPack apply(CardSet arg1) { return new BoosterPack(arg1); } };
+    
     private final CardSet cardSet;
     private final String name;
     

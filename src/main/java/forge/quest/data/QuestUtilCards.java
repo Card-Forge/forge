@@ -7,9 +7,11 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
+import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardRarity;
 import forge.card.BoosterUtils;
+import forge.card.CardSet;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
@@ -163,7 +165,11 @@ public final class QuestUtilCards {
 
         addBasicLands(q.shopList, 10, 5);
 
-        q.shopList.add(new BoosterPack("M10"));
+        Predicate<CardSet> filterT2 = CardSet.Predicates.isLegalInFormat(SetUtils.getStandard());
+        q.shopList.addAllCards(filterT2.random(SetUtils.getAllSets(), 2, BoosterPack.fnFromSet));
+        Predicate<CardSet> filterExt = CardSet.Predicates.isLegalInFormat(SetUtils.getExtended());
+        Predicate<CardSet> filterExtButT2 = Predicate.and(filterExt, Predicate.not(filterT2));
+        q.shopList.addAllCards(filterExtButT2.random(SetUtils.getAllSets(), 3, BoosterPack.fnFromSet));
     }
 
     public ItemPool<InventoryItem> getCardpool() {

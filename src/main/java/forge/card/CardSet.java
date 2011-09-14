@@ -1,6 +1,8 @@
 package forge.card;
 
+import forge.game.GameFormat;
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Predicate;
 
 /**
  * <p>CardSet class.</p>
@@ -96,5 +98,23 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         public int getSpecial() { return nSpecial; }
         public int getLand() { return nLand; }
         public int getFoilChance() { return foilRate; }
+    }
+    
+    public static abstract class Predicates {
+        public final static Predicate<CardSet> canMakeBooster = new CanMakeBooster();
+        public final static Predicate<CardSet> isLegalInFormat(GameFormat format) { return new LegalInFormat(format); }
+        
+        private static class CanMakeBooster extends Predicate<CardSet> {
+            public boolean isTrue(CardSet subject) {
+                return subject.canGenerateBooster();
+            }
+        }
+        private static class LegalInFormat extends Predicate<CardSet> {
+            private final GameFormat format;
+            public LegalInFormat(final GameFormat fmt) { format = fmt; }
+            public boolean isTrue(CardSet subject) {
+                return format.isSetLegal(subject.getCode());
+            }
+        }        
     }
 }

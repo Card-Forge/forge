@@ -193,6 +193,15 @@ public abstract class Predicate<T> {
         }
         return result;
     }
+    public final <V> List<V> random(final Iterable<T> source, final int count, final Lambda1<V, T> transformer) {
+        List<V> result = new ArrayList<V>();
+        for (int i = 0; i < count; ++i) {
+            T toAdd = random(source);
+            if (toAdd == null) { break; }
+            result.add(transformer.apply(toAdd));
+        }
+        return result;
+    }    
 
     // Static builder methods - they choose concrete implementation by themselves
     public static <U, T> Predicate<U> brigde(final Predicate<T> predicate, final Lambda1<T, U> fnBridge) {

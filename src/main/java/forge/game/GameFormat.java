@@ -54,6 +54,8 @@ public final class GameFormat {
     public Predicate<CardPrinted> getFilterRules() { return filterRules; }
     public Predicate<CardPrinted> getFilterPrinted() { return filterPrinted; }
     
+    public boolean isSetLegal(String setCode) { return allowedSetCodes.isEmpty() || allowedSetCodes.contains(setCode); }
+    
     @Override
     public String toString()
     {
