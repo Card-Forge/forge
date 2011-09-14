@@ -7,7 +7,7 @@ import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -141,7 +141,7 @@ public class ImageCache implements NewConstants {
         return getImage(key + "#" + scale);
     }
 
-    public static BufferedImage getImage(CardPrinted card, int width, int height) {
+    public static BufferedImage getImage(InventoryItem card, int width, int height) {
         String key = card.getImageFilename();
         BufferedImage original = getImage(key);
         if (original == null) return null;

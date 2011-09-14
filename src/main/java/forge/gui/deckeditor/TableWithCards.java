@@ -21,7 +21,7 @@ import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.card.CardRules;
-//import forge.view.swing.OldGuiNewGame;
+import forge.card.InventoryItem;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -29,12 +29,12 @@ import forge.card.CardRules;
  */
 public final class TableWithCards {
 
-    protected CardPool pool;
-    protected TableModel model;
+    protected CardPool<InventoryItem> pool;
+    protected TableModel<InventoryItem> model;
     protected JTable table = new JTable();
     protected JScrollPane jScrollPane = new JScrollPane();
     protected JLabel statsLabel = new JLabel();
-    protected Predicate<CardPrinted> filter = null;
+    protected Predicate<InventoryItem> filter = null;
     protected boolean isTrackingStats = false;
     protected boolean wantUnique = false;
 
@@ -64,9 +64,9 @@ public final class TableWithCards {
         wantUnique = forceUnique;
     }
 
-    public void setup(final List<TableColumnInfo<CardPrinted>> columns, final CardPanelBase cardView)
+    public void setup(final List<TableColumnInfo<InventoryItem>> columns, final CardPanelBase cardView)
     {
-        model = new TableModel(cardView, columns);
+        model = new TableModel<InventoryItem>(cardView, columns);
         model.addListeners(table);
         table.setModel(model);
         model.resizeCols(table);
@@ -82,7 +82,7 @@ public final class TableWithCards {
             // get stats from deck
             model.addTableModelListener(new TableModelListener() {
                 public void tableChanged(final TableModelEvent ev) {
-                    CardPoolView deck = model.getCards();
+                    CardPoolView<InventoryItem> deck = model.getCards();
                     statsLabel.setText(getStats(deck));
                 }
             });
@@ -90,17 +90,17 @@ public final class TableWithCards {
     }
 
     // This should not be here, but still found no better place
-    public static String getStats(final CardPoolView deck) {
+    public static String getStats(final CardPoolView<InventoryItem> deck) {
         int total = deck.countAll();
-        int creature = CardRules.Predicates.Presets.isCreature.aggregate(deck, CardPoolView.fnToCard, CardPoolView.fnToCount);
-        int land = CardRules.Predicates.Presets.isLand.aggregate(deck, CardPoolView.fnToCard, CardPoolView.fnToCount);
+        int creature = CardRules.Predicates.Presets.isCreature.aggregate(deck, deck.fnToCard, deck.fnToCount);
+        int land = CardRules.Predicates.Presets.isLand.aggregate(deck, deck.fnToCard, deck.fnToCount);
 
         StringBuffer show = new StringBuffer();
         show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ").append(land);
         String[] color = Constant.Color.onlyColors;
         List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.colors;
         for (int i = 0; i < color.length; ++i) {
-            show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, CardPoolView.fnToCard)));
+            show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, deck.fnToCard)));
         }
 
         return show.toString();
@@ -123,15 +123,15 @@ public final class TableWithCards {
         }
     }
 
-    public void setDeck(final Iterable<CardPrinted> cards) {
-        setDeckImpl(new CardPool(cards));
+    public void setDeck(final Iterable<InventoryItem> cards) {
+        setDeckImpl(CardPool.createFrom(cards, InventoryItem.class));
     }
 
-    public void setDeck(final CardPoolView poolView) {
-        setDeckImpl(new CardPool(poolView));
+    public <T extends InventoryItem> void setDeck(final CardPoolView<T> poolView) {
+        setDeckImpl(CardPool.createFrom(poolView, InventoryItem.class));
     }
     
-    protected void setDeckImpl(CardPool thePool)
+    protected void setDeckImpl(CardPool<InventoryItem> thePool)
     {
         model.clear();
         pool = thePool;
@@ -139,14 +139,14 @@ public final class TableWithCards {
         updateView(true);
     }
 
-    public CardPrinted getSelectedCard() {
+    public InventoryItem getSelectedCard() {
         int iRow = table.getSelectedRow();
         return iRow >= 0 ? model.rowToCard(iRow).getKey() : null;
     }
 
     private boolean isUnfiltered() { return filter == null || filter.is1(); }
 
-    public void setFilter(final Predicate<CardPrinted> filterToSet) {
+    public void setFilter(final Predicate<InventoryItem> filterToSet) {
         filter = filterToSet;
         updateView(true);
     }
@@ -174,17 +174,17 @@ public final class TableWithCards {
         }
 
         if (useFilter && wantUnique) {
-            model.addCards(filter.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToPrinted));
+            model.addCards(filter.uniqueByLast(pool, pool.fnToCardName, pool.fnToPrinted));
         } else if (useFilter) {
-            model.addCards(filter.select(pool, CardPoolView.fnToPrinted));
+            model.addCards(filter.select(pool, pool.fnToPrinted));
         } else if (wantUnique) {
-            model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, CardPoolView.fnToCardName, CardPoolView.fnToCard));
+            model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, pool.fnToCardName, pool.fnToCard));
         }
 
         model.resort();
     }
 
-    public CardPoolView getCards() {
+    public CardPoolView<InventoryItem> getCards() {
         return pool;
     }
 

@@ -1,7 +1,5 @@
 package forge.deck;
 
-import forge.AllZone;
-import forge.Card;
 import forge.card.CardDb;
 
 /**

@@ -18,7 +18,7 @@ public interface BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    CardPoolView nextChoice();
+    CardPoolView<CardPrinted> nextChoice();
 
     /**
      * <p>setChoice.</p>

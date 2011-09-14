@@ -6,6 +6,7 @@ import forge.Singletons;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -97,14 +98,14 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         // tell Gui_Quest_DeckEditor the name of the deck
         customMenu.setPlayerDeckName(deck.getName());
 
-        CardPoolView bottomPool = deck.getMain();
-        CardPool cardpool = new CardPool();
+        CardPoolView<CardPrinted> bottomPool = deck.getMain();
+        CardPool<CardPrinted> cardpool = new CardPool<CardPrinted>();
         cardpool.addAll(questData.getCards().getCardpool());
 
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(bottomPool);
 
-        // show cards, makes this user friendly, lol, well may, ha
+        // show cards, makes this user friendly
         setDeck(cardpool, bottomPool, GameType.Quest);
 
         // this affects the card pool
@@ -123,16 +124,16 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
     public void setup() {
         this.setLayout(null);
         
-        List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-        columns.add(new TableColumnInfo<CardPrinted>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
+        List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<InventoryItem>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
 
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
@@ -282,13 +283,16 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
 
     @Override
-    protected Predicate<CardPrinted> buildFilter() {
-        return Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
+    protected Predicate<InventoryItem> buildFilter() {
+        Predicate<CardPrinted> cardFilter = Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
+        return Predicate.instanceOf(cardFilter, CardPrinted.class);        
     }    
     
     private  void addButtonActionPerformed(final ActionEvent e) {
-        CardPrinted card = top.getSelectedCard();
-        if (card == null) { return; }
+        InventoryItem item = top.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
+
+        CardPrinted card = (CardPrinted) item;
 
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
@@ -298,8 +302,10 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
 
     private void removeButtonActionPerformed(final ActionEvent e) {
-        CardPrinted card = bottom.getSelectedCard();
-        if (card == null) { return; }
+        InventoryItem item = bottom.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
+
+        CardPrinted card = (CardPrinted) item;
 
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 

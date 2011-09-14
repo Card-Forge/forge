@@ -7,7 +7,6 @@ import forge.Quest_Assignment;
 import forge.card.CardPrinted;
 import forge.card.CardRarity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

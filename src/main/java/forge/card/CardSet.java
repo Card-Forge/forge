@@ -20,6 +20,8 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         this.index = index;
         this.name = name;
     }
+    
+    public static final CardSet unknown = new CardSet(-1, "Undefined", "???", "??"); 
 
     public String getName() { return name; }
     public String getCode() { return code; }

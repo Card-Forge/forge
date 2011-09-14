@@ -8,7 +8,6 @@ import forge.card.CardPrinted;
 import forge.game.GameType;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * <p>Deck class.</p>
@@ -33,12 +32,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
     private String comment = null;
     private PlayerType playerType = null;
     
-    private CardPool main;
-    private CardPool sideboard;
-
-
-
-
+    private CardPool<CardPrinted> main;
+    private CardPool<CardPrinted> sideboard;
 
 
     //gameType is from Constant.GameType, like GameType.Regular
@@ -46,24 +41,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * <p>Constructor for Deck.</p>
      */
     public Deck() {
-        main = new CardPool();
-        sideboard = new CardPool();
-    }
-
-    /**
-     * <p>Constructor for Deck.</p>
-     *
-     * @param deckType a {@link java.lang.String} object.
-     * @param main a {@link java.util.List} object.
-     * @param sideboard a {@link java.util.List} object.
-     * @param name a {@link java.lang.String} object.
-     */
-    public Deck(GameType deckType, List<String> main, List<String> sideboard, String name) {
-        setDeckType(deckType);
-        setName(name);
-
-        this.main = new CardPool(main);
-        this.sideboard = new CardPool(sideboard);
+        main = new CardPool<CardPrinted>();
+        sideboard = new CardPool<CardPrinted>();
     }
 
     /**
@@ -81,7 +60,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @return a {@link java.util.List} object.
      */
-    public CardPoolView getMain() {
+    public CardPoolView<CardPrinted> getMain() {
         return main.getView();
     }
 
@@ -90,7 +69,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *
      * @return a {@link java.util.List} object.
      */
-    public CardPoolView getSideboard() {
+    public CardPoolView<CardPrinted> getSideboard() {
         return sideboard.getView();
     }
 
@@ -161,7 +140,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public void addMain(final String cardName) { addMain(CardDb.instance().getCard(cardName)); }
     public void addMain(final CardPrinted card) { main.add(card); }
-    public void addMain(final CardPoolView list) { main.addAll(list); }
+    public void addMain(final CardPoolView<CardPrinted> list) { main.addAll(list); }
     public void removeMain(final CardPrinted card) { main.remove(card); }
     public void removeMain(final CardPrinted card, final int amount) { main.remove(card, amount); }
     public int countMain() { return main.countAll(); }
@@ -174,7 +153,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
     public final void addSideboard(final String cardName) { addSideboard(CardDb.instance().getCard(cardName)); }
     public final void addSideboard(final CardPrinted card) { sideboard.add(card); }
     public final void addSideboard(final CardPrinted card, final int amount) { sideboard.add(card, amount); }
-    public final void addSideboard(final CardPoolView cards) { sideboard.addAll(cards); }
+    public final void addSideboard(final CardPoolView<CardPrinted> cards) { sideboard.addAll(cards); }
 
     /**
      * <p>countSideboard.</p>

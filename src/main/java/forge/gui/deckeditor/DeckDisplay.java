@@ -1,6 +1,8 @@
 package forge.gui.deckeditor;
 
 import forge.card.CardPoolView;
+import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.game.GameType;
 
@@ -13,16 +15,16 @@ import forge.game.GameType;
  * @version $Id$
  */
 public interface DeckDisplay {
-    void setDeck(CardPoolView top, CardPoolView bottom, GameType gameType);
+    void setDeck(CardPoolView<CardPrinted> top, CardPoolView<CardPrinted> bottom, GameType gameType);
 
     //top shows available card pool
     //if constructed, top shows all cards
     //if sealed, top shows 5 booster packs
     //if draft, top shows cards that were chosen
-    CardPoolView getTop();
+    CardPoolView<InventoryItem> getTop();
 
     //bottom shows cards that the user has chosen for his library
-    CardPoolView getBottom();
+    CardPoolView<InventoryItem> getBottom();
 
     void setTitle(String message);
 

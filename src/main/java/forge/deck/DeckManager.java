@@ -502,7 +502,7 @@ public class DeckManager {
         writeCardPool(d.getSideboard(), out);
     }
 
-    private static void writeCardPool(final CardPoolView pool, final BufferedWriter out) throws IOException
+    private static void writeCardPool(final CardPoolView<CardPrinted> pool, final BufferedWriter out) throws IOException
     {
         List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.byNameThenSet);

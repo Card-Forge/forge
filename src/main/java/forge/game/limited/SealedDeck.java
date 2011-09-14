@@ -13,6 +13,7 @@ import forge.SetUtils;
 import forge.card.CardBlock;
 import forge.card.CardDb;
 import forge.card.CardPool;
+import forge.card.CardPrinted;
 import forge.card.CardSet;
 import forge.card.spellability.Ability_Mana;
 import forge.deck.Deck;
@@ -180,8 +181,8 @@ public class SealedDeck {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPool getCardpool() {
-        CardPool pool = new CardPool();
+    public CardPool<CardPrinted> getCardpool() {
+        CardPool<CardPrinted> pool = new CardPool<CardPrinted>();
 
         for (int i = 0; i < packs.size(); i++)
             pool.addAllCards(packs.get(i).getBoosterPack());

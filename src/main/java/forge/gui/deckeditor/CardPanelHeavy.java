@@ -19,6 +19,7 @@ import forge.GuiDisplayUtil;
 import forge.ImagePreviewPanel;
 import forge.Singletons;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.gui.game.CardDetailPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -73,8 +74,8 @@ public class CardPanelHeavy extends CardPanelBase {
         this.add(pictureViewPanel, "wmin 239, hmin 323, grow");
     }
 
-    public void showCard(CardPrinted card) {
-        Card card2 = card.toForgeCard();
+    public void showCard(InventoryItem card) {
+        Card card2 = card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null;
         detail.setCard(card2);
         setCard(card2);
     }

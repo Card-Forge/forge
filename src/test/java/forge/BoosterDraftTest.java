@@ -32,7 +32,7 @@ public class BoosterDraftTest implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView nextChoice() {
+    public CardPoolView<CardPrinted> nextChoice() {
         n--;
         ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         return pack.getBoosterPack();

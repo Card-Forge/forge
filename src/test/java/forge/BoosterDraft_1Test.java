@@ -1,10 +1,8 @@
 package forge;
 
-import net.slightlymagic.maxmtg.Predicate;
-
 import org.testng.annotations.Test;
 
-import forge.card.CardRules;
+import forge.card.CardPrinted;
 import forge.card.CardPoolView;
 
 import forge.game.limited.BoosterDraft_1;
@@ -23,9 +21,9 @@ public class BoosterDraft_1Test {
     public void BoosterDraft_1Test1() throws Exception {
         BoosterDraft_1 draft = new BoosterDraft_1();
         while (draft.hasNextChoice()) {
-            CardPoolView list = draft.nextChoice();
+            CardPoolView<CardPrinted> list = draft.nextChoice();
             System.out.println(list.countAll());
-            draft.setChoice(Predicate.getTrue(CardRules.class).first(list, CardPoolView.fnToCard, CardPoolView.fnToPrinted));
+            draft.setChoice(list.toFlatList().get(0));
         }
     }
 }

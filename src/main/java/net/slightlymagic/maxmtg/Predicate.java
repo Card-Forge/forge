@@ -198,6 +198,9 @@ public abstract class Predicate<T> {
     public static <U, T> Predicate<U> brigde(final Predicate<T> predicate, final Lambda1<T, U> fnBridge) {
         return new Bridge<T, U>(predicate, fnBridge);
     }
+    public static <U, T> Predicate<U> instanceOf(final Predicate<T> predicate, final Class<T> clsTarget) {
+        return new BridgeToInstance<T, U>(predicate, clsTarget);
+    }
 
     public static <T> Predicate<T> not(final Predicate<T> operand1) { return new Not<T>(operand1); }
     public static <T> Predicate<T> compose(final Predicate<T> operand1,
@@ -220,111 +223,123 @@ public abstract class Predicate<T> {
     public static <T, U> Predicate<T> or(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> bridge)
         { return new NodeOrBridged<T, U>(operand1, operand2, bridge); }
 
-    // Concrete implementations
-    // unary operators
-    protected static final class Not<T> extends Predicate<T> {
-        protected final Predicate<T> filter;
-        public Not(final Predicate<T> operand) { filter = operand; }
-        @Override public boolean isTrue(final T card) { return !filter.isTrue(card); }
-    }
-    protected static final class Bridge<T, U> extends Predicate<U> {
-        protected final Predicate<T> filter;
-        protected final Lambda1<T, U> fnBridge;
-        public Bridge(final Predicate<T> operand, final Lambda1<T, U> fnTfromU) { filter = operand; fnBridge = fnTfromU; }
-        @Override public boolean isTrue(final U card) { return filter.isTrue(fnBridge.apply(card)); }
-        @Override public boolean is1() { return filter.is1(); }
-    }
-    // binary operators
-    protected static class Node<T> extends Predicate<T> {
-        private final PredicatesOp operator;
-        protected final Predicate<T> filter1;
-        protected final Predicate<T> filter2;
-
-        public Node(final Predicate<T> operand1, final PredicatesOp op, final Predicate<T> operand2)
-        {
-            operator = op;
-            filter1 = operand1;
-            filter2 = operand2;
-        }
-
-        @Override public boolean isTrue(final T card) {
-            switch (operator) {
-                case AND: return filter1.isTrue(card) && filter2.isTrue(card);
-                case NAND: return !(filter1.isTrue(card) && filter2.isTrue(card));
-                case OR: return filter1.isTrue(card) || filter2.isTrue(card);
-                case NOR: return !(filter1.isTrue(card) || filter2.isTrue(card));
-                case XOR: return filter1.isTrue(card) ^ filter2.isTrue(card);
-                case EQ: return filter1.isTrue(card) == filter2.isTrue(card);
-                default: return false;
-            }
-        }
-    }
-    protected static final class NodeOr<T> extends Node<T> {
-        public NodeOr(final Predicate<T> operand1, final Predicate<T> operand2) {
-            super(operand1, PredicatesOp.OR, operand2);
-        }
-        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) || filter2.isTrue(card); }
-    }
-    protected static final class NodeAnd<T> extends Node<T> {
-        public NodeAnd(final Predicate<T> operand1, final Predicate<T> operand2) {
-            super(operand1, PredicatesOp.AND, operand2);
-        }
-        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(card); }
-    }
-
-    // Bridged OR and AND
-    protected static final class NodeOrBridged<T,U> extends Predicate<T> {
-        private final Predicate<T> filter1;
-        private final Predicate<U> filter2;
-        private final Lambda1<U, T> bridge;
-        public NodeOrBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
-            filter1 = operand1;
-            filter2 = operand2;
-            bridge = accessor;
-        }
-        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) || filter2.isTrue(bridge.apply(card)); }
-    }
-    protected static final class NodeAndBridged<T,U> extends Predicate<T> {
-        private final Predicate<T> filter1;
-        private final Predicate<U> filter2;
-        private final Lambda1<U, T> bridge;
-        public NodeAndBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
-            filter1 = operand1;
-            filter2 = operand2;
-            bridge = accessor;
-        }
-        @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(bridge.apply(card)); }
-    }
-
-    // multi-operand operators
-    protected abstract static class MultiNode<T> extends Predicate<T> {
-        protected final Iterable<Predicate<T>> operands;
-        public MultiNode(Iterable<Predicate<T>> filters) { operands = filters; }
-    }
-    protected final static class MultiNodeAnd<T> extends MultiNode<T> {
-        public MultiNodeAnd(final Iterable<Predicate<T>> filters) { super(filters); }
-        @Override public boolean isTrue(final T subject) {
-            for (Predicate<T> p : operands) { if (!p.isTrue(subject)) { return false; } }
-            return true;
-        }
-    }
-    protected final static class MultiNodeOr<T> extends MultiNode<T> {
-        public MultiNodeOr(final Iterable<Predicate<T>> filters) { super(filters); }
-        @Override public boolean isTrue(final T subject) {
-            for (Predicate<T> p : operands) { if (p.isTrue(subject)) { return true; } }
-            return false;
-        }
-    }
-
-    protected static class LeafConstant<T> extends Predicate<T> {
-        private final boolean bValue;
-
-        @Override public boolean is1() { return bValue; }
-        @Override public boolean is0() { return !bValue; }
-        @Override public boolean isTrue(final T card) { return bValue; }
-        public LeafConstant(final boolean value) { bValue = value; }
-    }
+ 
     
     public static <T> Predicate<T> getTrue(final Class<T> cls) { return new LeafConstant<T>(true); }
     public static <T> Predicate<T> getFalse(final Class<T> cls) { return new LeafConstant<T>(false); }
+}
+
+// Concrete implementations
+// unary operators
+final class Not<T> extends Predicate<T> {
+    protected final Predicate<T> filter;
+    public Not(final Predicate<T> operand) { filter = operand; }
+    @Override public boolean isTrue(final T card) { return !filter.isTrue(card); }
+}
+final class Bridge<T, U> extends Predicate<U> {
+    protected final Predicate<T> filter;
+    protected final Lambda1<T, U> fnBridge;
+    public Bridge(final Predicate<T> operand, final Lambda1<T, U> fnTfromU) { filter = operand; fnBridge = fnTfromU; }
+    @Override public boolean isTrue(final U card) { return filter.isTrue(fnBridge.apply(card)); }
+    @Override public boolean is1() { return filter.is1(); }
+}
+
+final class BridgeToInstance<T, U> extends Predicate<U> {
+    protected final Predicate<T> filter;
+    protected final Class<T> clsBridge;
+    public BridgeToInstance(final Predicate<T> operand, final Class<T> clsT) { filter = operand; clsBridge = clsT; }
+    @SuppressWarnings("unchecked") @Override
+    public boolean isTrue(final U card) { return clsBridge.isInstance(card) && filter.isTrue((T) card); }
+    @Override public boolean is1() { return filter.is1(); }
+}
+
+// binary operators
+class Node<T> extends Predicate<T> {
+    private final PredicatesOp operator;
+    protected final Predicate<T> filter1;
+    protected final Predicate<T> filter2;
+
+    public Node(final Predicate<T> operand1, final PredicatesOp op, final Predicate<T> operand2)
+    {
+        operator = op;
+        filter1 = operand1;
+        filter2 = operand2;
+    }
+
+    @Override public boolean isTrue(final T card) {
+        switch (operator) {
+            case AND: return filter1.isTrue(card) && filter2.isTrue(card);
+            case NAND: return !(filter1.isTrue(card) && filter2.isTrue(card));
+            case OR: return filter1.isTrue(card) || filter2.isTrue(card);
+            case NOR: return !(filter1.isTrue(card) || filter2.isTrue(card));
+            case XOR: return filter1.isTrue(card) ^ filter2.isTrue(card);
+            case EQ: return filter1.isTrue(card) == filter2.isTrue(card);
+            default: return false;
+        }
+    }
+}
+final class NodeOr<T> extends Node<T> {
+    public NodeOr(final Predicate<T> operand1, final Predicate<T> operand2) {
+        super(operand1, PredicatesOp.OR, operand2);
+    }
+    @Override public boolean isTrue(final T card) { return filter1.isTrue(card) || filter2.isTrue(card); }
+}
+final class NodeAnd<T> extends Node<T> {
+    public NodeAnd(final Predicate<T> operand1, final Predicate<T> operand2) {
+        super(operand1, PredicatesOp.AND, operand2);
+    }
+    @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(card); }
+}
+
+// Bridged OR and AND
+final class NodeOrBridged<T,U> extends Predicate<T> {
+    private final Predicate<T> filter1;
+    private final Predicate<U> filter2;
+    private final Lambda1<U, T> bridge;
+    public NodeOrBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
+        filter1 = operand1;
+        filter2 = operand2;
+        bridge = accessor;
+    }
+    @Override public boolean isTrue(final T card) { return filter1.isTrue(card) || filter2.isTrue(bridge.apply(card)); }
+}
+final class NodeAndBridged<T,U> extends Predicate<T> {
+    private final Predicate<T> filter1;
+    private final Predicate<U> filter2;
+    private final Lambda1<U, T> bridge;
+    public NodeAndBridged(final Predicate<T> operand1, final Predicate<U> operand2, final Lambda1<U, T> accessor) {
+        filter1 = operand1;
+        filter2 = operand2;
+        bridge = accessor;
+    }
+    @Override public boolean isTrue(final T card) { return filter1.isTrue(card) && filter2.isTrue(bridge.apply(card)); }
+}
+
+// multi-operand operators
+abstract class MultiNode<T> extends Predicate<T> {
+    protected final Iterable<Predicate<T>> operands;
+    public MultiNode(Iterable<Predicate<T>> filters) { operands = filters; }
+}
+final class MultiNodeAnd<T> extends MultiNode<T> {
+    public MultiNodeAnd(final Iterable<Predicate<T>> filters) { super(filters); }
+    @Override public boolean isTrue(final T subject) {
+        for (Predicate<T> p : operands) { if (!p.isTrue(subject)) { return false; } }
+        return true;
+    }
+}
+final class MultiNodeOr<T> extends MultiNode<T> {
+    public MultiNodeOr(final Iterable<Predicate<T>> filters) { super(filters); }
+    @Override public boolean isTrue(final T subject) {
+        for (Predicate<T> p : operands) { if (p.isTrue(subject)) { return true; } }
+        return false;
+    }
+}
+
+class LeafConstant<T> extends Predicate<T> {
+    private final boolean bValue;
+
+    @Override public boolean is1() { return bValue; }
+    @Override public boolean is0() { return !bValue; }
+    @Override public boolean isTrue(final T card) { return bValue; }
+    public LeafConstant(final boolean value) { bValue = value; }
 }

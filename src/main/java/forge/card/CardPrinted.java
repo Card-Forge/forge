@@ -18,7 +18,7 @@ import forge.CardUtil;
  * @author Forge
  * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardPrinted implements Comparable<CardPrinted> {
+public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem {
     // Reference to rules
     private final transient CardRules card;
 

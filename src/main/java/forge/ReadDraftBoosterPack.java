@@ -45,8 +45,8 @@ public class ReadDraftBoosterPack implements NewConstants {
         setup();
     }
 
-    public CardPoolView getBoosterPack5() {
-        CardPool list = new CardPool();
+    public CardPoolView<CardPrinted> getBoosterPack5() {
+        CardPool<CardPrinted> list = new CardPool<CardPrinted>();
         for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
         addBasicLands(list, 20);
@@ -59,7 +59,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         return list;
     } //getBoosterPack5()
 
-    public static final void addBasicLands(final CardPool pool, final int count) {
+    public static final void addBasicLands(final CardPool<CardPrinted> pool, final int count) {
         CardDb db = CardDb.instance();
         pool.add(db.getCard("Forest", "M10"), count);
         pool.add(db.getCard("Island", "M10"), count);
@@ -68,7 +68,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         pool.add(db.getCard("Swamp", "M10"), count);
 
     }
-    public static final void addBasicSnowLands(final CardPool pool, final int count) {
+    public static final void addBasicSnowLands(final CardPool<CardPrinted> pool, final int count) {
         CardDb db = CardDb.instance();
         pool.add(db.getCard("Snow-Covered Forest", "ICE"), count);
         pool.add(db.getCard("Snow-Covered Island", "ICE"), count);
@@ -81,8 +81,8 @@ public class ReadDraftBoosterPack implements NewConstants {
      *
      * @return a {@link forge.CardList} object.
      */
-    public final CardPoolView getBoosterPack() {
-        CardPool pack = new CardPool();
+    public final CardPoolView<CardPrinted> getBoosterPack() {
+        CardPool<CardPrinted> pack = new CardPool<CardPrinted>();
 
         pack.add(getRandomCard(rareList));
 

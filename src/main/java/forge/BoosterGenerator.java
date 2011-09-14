@@ -85,7 +85,7 @@ public class BoosterGenerator {
             throw new RuntimeException("BoosterGenerator : deck not found - " + deckFile);
         }
 
-        CardPoolView tList = dPool.getMain();
+        CardPoolView<CardPrinted> tList = dPool.getMain();
         for (Entry<CardPrinted, Integer> e : tList) {
             if (ignoreRarity) { commons.add(e.getKey()); }
             else { addToRarity(e.getKey()); }

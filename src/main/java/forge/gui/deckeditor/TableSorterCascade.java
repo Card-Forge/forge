@@ -1,6 +1,7 @@
 package forge.gui.deckeditor;
 
-import forge.card.CardPrinted;
+import forge.card.InventoryItem;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,26 +12,21 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: TableSorter.java 10146 2011-09-01 18:11:00Z Max mtg $
  */
-public class TableSorterCascade implements Comparator<Entry<CardPrinted, Integer>> {
-    private TableSorter[] sorters;
+public class TableSorterCascade<T extends InventoryItem> implements Comparator<Entry<T, Integer>> {
+    private List<TableSorter<T>> sorters;
     private final int cntFields;
-    private static final TableSorter[] EMPTY_SORTER_ARRAY = new TableSorter[0];
 
-    public TableSorterCascade(final List<TableSorter> sortersCascade) {
-        this(sortersCascade.toArray(EMPTY_SORTER_ARRAY));
-    }
-
-    public TableSorterCascade(final TableSorter[] sortersCascade) {
+    public TableSorterCascade(final List<TableSorter<T>> sortersCascade) {
         this.sorters = sortersCascade;
-        cntFields = sortersCascade.length;
+        cntFields = sortersCascade.size();
     }
 
     @Override
-    public final int compare(final Entry<CardPrinted, Integer> arg0, final Entry<CardPrinted, Integer> arg1) {
+    public final int compare(final Entry<T, Integer> arg0, final Entry<T, Integer> arg1) {
         int lastCompare = 0;
         int iField = -1;
-        while (++iField < cntFields && lastCompare == 0) {
-            TableSorter sorter = sorters[iField];
+        while (++iField < cntFields && lastCompare == 0) { // reverse iteration
+            TableSorter<T> sorter = sorters.get(iField);
             if (sorter == null) { break; }
             lastCompare = sorter.compare(arg0, arg1);
         }

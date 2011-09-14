@@ -8,6 +8,7 @@ import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -170,7 +171,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
      */
     private String getExportDeckText(final Deck aDeck) {
         //convert Deck into CardList
-        CardPoolView all = aDeck.getMain();
+        CardPoolView<CardPrinted> all = aDeck.getMain();
         //sort by card name
         Collections.sort(all.getOrderedList(), TableSorter.byNameThenSet);
 
@@ -180,20 +181,21 @@ public class DeckEditorQuestMenu extends JMenuBar {
         sb.append(String.format("%d Total Cards%n%n", all.countAll()));
 
         //creatures
-        sb.append(String.format("%d Creatures%n-------------%n", CardRules.Predicates.Presets.isCreature.aggregate(all, CardPoolView.fnToCard, CardPoolView.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isCreature.select(all, CardPoolView.fnToCard)) {
+        
+        sb.append(String.format("%d Creatures%n-------------%n", CardRules.Predicates.Presets.isCreature.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isCreature.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
         //spells
-        sb.append(String.format("%d Spells%n----------%n", CardRules.Predicates.Presets.isNonCreatureSpell.aggregate(all, CardPoolView.fnToCard, CardPoolView.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isNonCreatureSpell.select(all, CardPoolView.fnToCard)) {
+        sb.append(String.format("%d Spells%n----------%n", CardRules.Predicates.Presets.isNonCreatureSpell.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isNonCreatureSpell.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
         //lands
-        sb.append(String.format("%d Land%n--------%n", CardRules.Predicates.Presets.isLand.aggregate(all, CardPoolView.fnToCard, CardPoolView.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isLand.select(all, CardPoolView.fnToCard)) {
+        sb.append(String.format("%d Land%n--------%n", CardRules.Predicates.Presets.isLand.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isLand.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
@@ -268,8 +270,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 Deck newDeck = DeckManager.readDeck(file);
                 questData.addDeck(newDeck);
 
-                CardPool cardpool = new CardPool(questData.getCards().getCardpool());
-                CardPool decklist = new CardPool();
+                CardPool<CardPrinted> cardpool = CardPool.createFrom(questData.getCards().getCardpool(), CardPrinted.class);
+                CardPool<CardPrinted> decklist = new CardPool<CardPrinted>();
                 for (Entry<CardPrinted, Integer> s : newDeck.getMain()) {
                     CardPrinted cp = s.getKey();
                     decklist.add(cp, s.getValue());
@@ -335,8 +337,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
             if (StringUtils.isBlank(deckName)) { return; }
 
             setPlayerDeckName(deckName);
-            CardPool cards = new CardPool(questData.getCards().getCardpool().getView());
-            CardPoolView deck = questData.getDeck(deckName).getMain();
+            CardPool<CardPrinted> cards = CardPool.createFrom(questData.getCards().getCardpool().getView(), CardPrinted.class);
+            CardPoolView<CardPrinted> deck = questData.getDeck(deckName).getMain();
 
             // show in pool all cards except ones used in deck
             cards.removeAll(deck);
@@ -346,7 +348,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
     private final ActionListener newDeckActionListener = new ActionListener() {
         public void actionPerformed(final ActionEvent a) {
-            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), new CardPool(), GameType.Quest);
+            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), null, GameType.Quest);
             setPlayerDeckName("");
         }
     };
@@ -429,7 +431,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
             questData.removeDeck(currentDeck.getName());
 
             //show card pool
-            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), new CardPool(), GameType.Quest);
+            deckDisplay.setDeck(questData.getCards().getCardpool().getView(), null, GameType.Quest);
 
             setPlayerDeckName("");
         }
@@ -497,10 +499,10 @@ public class DeckEditorQuestMenu extends JMenuBar {
      * @param list a {@link forge.CardPool} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck cardPoolToDeck(final CardPoolView list) {
+    private Deck cardPoolToDeck(final CardPoolView<InventoryItem> list) {
         //put CardPool into Deck main
         Deck deck = new Deck(GameType.Sealed);
-        deck.addMain(list);
+        deck.addMain(CardPool.createFrom(list, CardPrinted.class));
         return deck;
     }
 

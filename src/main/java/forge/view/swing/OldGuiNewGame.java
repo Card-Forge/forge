@@ -4,6 +4,7 @@ import arcane.ui.util.ManaSymbols;
 import com.esotericsoftware.minlog.Log;
 import forge.*;
 import forge.card.CardPool;
+import forge.card.CardPrinted;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -335,7 +336,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     "choice <<" + safeToString(o) + ">> does not equal any of the sealedTypes.");
         }
 
-        CardPool sDeck = sd.getCardpool();
+        CardPool<CardPrinted> sDeck = sd.getCardpool();
 
         if (sDeck.countAll() > 1) {
 

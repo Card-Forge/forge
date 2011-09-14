@@ -17,46 +17,49 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  * @author Forge
  * @version $Id: CardPoolView.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
+public class CardPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 
     // Field Accessors for select/aggregate operations with filters.
-    public final static Lambda1<CardRules, Entry<CardPrinted, Integer>> fnToCard =
-        new Lambda1<CardRules, Entry<CardPrinted, Integer>>() {
-          @Override public CardRules apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getCard(); }
+    public final Lambda1<CardRules, Entry<T, Integer>> fnToCard =
+        new Lambda1<CardRules, Entry<T, Integer>>() {
+          @Override public CardRules apply(final Entry<T, Integer> from) {
+              T item = from.getKey();
+              return item instanceof CardPrinted ? ((CardPrinted) item).getCard() : null; 
+          }
         };
-    public final static Lambda1<CardPrinted, Entry<CardPrinted, Integer>> fnToPrinted =
-        new Lambda1<CardPrinted, Entry<CardPrinted, Integer>>() {
-          @Override public CardPrinted apply(final Entry<CardPrinted, Integer> from) { return from.getKey(); }
+    public final Lambda1<T, Entry<T, Integer>> fnToPrinted =
+        new Lambda1<T, Entry<T, Integer>>() {
+          @Override public T apply(final Entry<T, Integer> from) { return from.getKey(); }
         };
-    public final static Lambda1<String, Entry<CardPrinted, Integer>> fnToCardName =
-        new Lambda1<String, Entry<CardPrinted, Integer>>() {
-          @Override public String apply(final Entry<CardPrinted, Integer> from) { return from.getKey().getName(); }
+    public final Lambda1<String, Entry<T, Integer>> fnToCardName =
+        new Lambda1<String, Entry<T, Integer>>() {
+          @Override public String apply(final Entry<T, Integer> from) { return from.getKey().getName(); }
         };
-    public final static Lambda1<Integer, Entry<CardPrinted, Integer>> fnToCount =
-        new Lambda1<Integer, Entry<CardPrinted, Integer>>() {
-            @Override public Integer apply(final Entry<CardPrinted, Integer> from) { return from.getValue(); }
+    public final Lambda1<Integer, Entry<T, Integer>> fnToCount =
+        new Lambda1<Integer, Entry<T, Integer>>() {
+            @Override public Integer apply(final Entry<T, Integer> from) { return from.getValue(); }
         };
 
     // Constructors
-    public CardPoolView() { cards = new Hashtable<CardPrinted, Integer>(); }
-    public CardPoolView(final Map<CardPrinted, Integer> inMap) { cards = inMap; }
+    public CardPoolView() { cards = new Hashtable<T, Integer>(); }
+    public CardPoolView(final Map<T, Integer> inMap) { cards = inMap; }
 
     // Data members
-    protected Map<CardPrinted, Integer> cards;
+    protected Map<T, Integer> cards;
 
     // same thing as above, it was copied to provide sorting (needed by table views in deck editors) 
-    protected List<Entry<CardPrinted, Integer>> cardsListOrdered = new ArrayList<Map.Entry<CardPrinted,Integer>>();
+    protected List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T,Integer>>();
     protected boolean isListInSync = false;
 
     @Override
-    public final Iterator<Entry<CardPrinted, Integer>> iterator() { return cards.entrySet().iterator(); }
+    public final Iterator<Entry<T, Integer>> iterator() { return cards.entrySet().iterator(); }
 
     // Cards read only operations
-    public final boolean contains(final CardPrinted card) {
+    public final boolean contains(final T card) {
         if (cards == null) { return false; }
         return cards.containsKey(card);
     }
-    public final int count(final CardPrinted card) {
+    public final int count(final T card) {
         if (cards == null) { return 0; }
         Integer boxed = cards.get(card);
         return boxed == null ? 0 : boxed.intValue();
@@ -69,7 +72,7 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
     public final int countDistinct() { return cards.size(); }
     public final boolean isEmpty() { return cards == null || cards.isEmpty(); }
 
-    public final List<Entry<CardPrinted, Integer>> getOrderedList() {
+    public final List<Entry<T, Integer>> getOrderedList() {
         if (!isListInSync) { rebuildOrderedList(); }
         return cardsListOrdered;
     }
@@ -77,16 +80,16 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
     private void rebuildOrderedList() {
         cardsListOrdered.clear();
         if (cards != null) {
-            for (Entry<CardPrinted, Integer> e : cards.entrySet()) {
+            for (Entry<T, Integer> e : cards.entrySet()) {
                 cardsListOrdered.add(e);
             }
         }
         isListInSync = true;
     }
 
-    public final List<CardPrinted> toFlatList() {
-        List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for (Entry<CardPrinted, Integer> e : this) {
+    public final List<T> toFlatList() {
+        List<T> result = new ArrayList<T>();
+        for (Entry<T, Integer> e : this) {
             for (int i = 0; i < e.getValue(); i++) { result.add(e.getKey()); }
         }
         return result;
@@ -94,9 +97,12 @@ public class CardPoolView implements Iterable<Entry<CardPrinted, Integer>> {
 
     public final CardList toForgeCardList() {
         CardList result = new CardList();
-        for (Entry<CardPrinted, Integer> e : this) {
+        for (Entry<T, Integer> e : this) {
+            if ( e.getKey() instanceof CardPrinted )
+            {
             for (int i = 0; i < e.getValue(); i++) {
-                result.add(e.getKey().toForgeCard());
+                result.add(((CardPrinted) e.getKey()).toForgeCard());
+            }
             }
         }
         return result;

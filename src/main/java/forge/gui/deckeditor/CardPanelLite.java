@@ -4,6 +4,7 @@ import net.miginfocom.swing.MigLayout;
 
 import forge.Card;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 
@@ -25,9 +26,9 @@ public class CardPanelLite extends CardPanelBase {
         this.add(picture, "wmin 239, hmin 323, grow");
     }
 
-    public void showCard(CardPrinted card) {
+    public void showCard(InventoryItem card) {
         picture.setCard(card);
-        detail.setCard(card != null ? card.toForgeCard() : null);
+        detail.setCard(card != null && card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null);
     }
 
     public Card getCard() { return detail.getCard(); }

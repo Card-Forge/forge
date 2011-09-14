@@ -24,6 +24,9 @@ public final class CardColor implements Comparable<CardColor> {
         myColor = mana.getColorProfile();
         orderWeight = getOrderWeight(); 
     }
+    
+    private CardColor() { myColor = 0; orderWeight = -1;}
+    public static CardColor nullColor = new CardColor();
 
     public boolean hasAnyColor(final byte colormask) { return (myColor & colormask) != 0; }
     public boolean hasAllColors(final byte colormask) { return (myColor & colormask) == colormask; }
@@ -55,6 +58,7 @@ public final class CardColor implements Comparable<CardColor> {
 
     @Override
     public String toString() {
+        if (orderWeight == -1) return "n/a";
         switch (myColor) {
             case 0: return Constant.Color.Colorless;
             case WHITE: return Constant.Color.White;

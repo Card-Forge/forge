@@ -5,8 +5,10 @@ import forge.Constant;
 import forge.FileUtil;
 import forge.HttpUtil;
 import forge.card.CardDb;
+import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -75,7 +77,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
         setup();
         showChoices(boosterDraft.nextChoice());
-        bottom.setDeck((CardPoolView) null);
+        bottom.setDeck((Iterable<InventoryItem>)null);
         
         top.sort(1, true);
         bottom.sort(1, true);
@@ -107,16 +109,16 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         addListeners();
 //    setupMenu();
 
-        List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-        columns.add(new TableColumnInfo<CardPrinted>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
+        List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         top.setup(columns, cardView);
@@ -186,8 +188,10 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void jButtonPickClicked(final ActionEvent e) {
-        CardPrinted card = top.getSelectedCard();
-        if (null == card) { return; }
+        InventoryItem item = top.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
+
+        CardPrinted card = (CardPrinted) item;
 
         bottom.addCard(card);
 
@@ -224,7 +228,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      *
      * @param list a {@link forge.CardList} object.
      */
-    private void showChoices(CardPoolView list) {
+    private void showChoices(CardPoolView<CardPrinted> list) {
         top.setDeck(list);
         cardView.showCard(null);
         top.fixSelection(0);
@@ -240,7 +244,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         Constant.Runtime.HumanDeck[0] = deck;
 
         //add sideboard to deck
-        CardPoolView list = bottom.getCards();
+        CardPoolView<CardPrinted> list = CardPool.createFrom(bottom.getCards(), CardPrinted.class);
         deck.addSideboard(list);
         
         String landSet = BoosterDraft.LandSetCode[0];
@@ -293,7 +297,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
 
     @Override
-    protected Predicate<CardPrinted> buildFilter() {
-        return CardPrinted.Predicates.Presets.isTrue;
+    protected Predicate<InventoryItem> buildFilter() {
+        return Predicate.getTrue(InventoryItem.class);
     }
 }

@@ -98,7 +98,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
     // private ButtonGroup buttonGroup1;
 
     public CardList filterCardList;
-    public CardPoolView deck;
+    public CardPoolView<CardPrinted> deck;
 
     /**
      * <p>
@@ -110,7 +110,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @param tb
      *            a {@link forge.gui.deckeditor.TableModel} object.
      */
-    public GUI_DeckAnalysis(JFrame g, CardPoolView deckView) {
+    public GUI_DeckAnalysis(JFrame g, CardPoolView<CardPrinted> deckView) {
         super(g);
         deck = deckView;
 

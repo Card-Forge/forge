@@ -11,9 +11,10 @@ import javax.swing.table.TableColumnModel;
 
 import forge.card.CardPool;
 import forge.card.CardPoolView;
-import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,7 +26,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id$
  */
-public final class TableModel extends AbstractTableModel {
+public final class TableModel<T extends InventoryItem> extends AbstractTableModel {
     /**
      * 
      */
@@ -39,13 +40,13 @@ public final class TableModel extends AbstractTableModel {
         };
 
         private final int MAX_DEPTH = 3;
-        private Order[] orders = new Order[] {null, null, null};
-        private TableSorterCascade sorter = null;
+        private List<Order> orders = new ArrayList<Order>(3);
+        private TableSorterCascade<T> sorter = null;
         private boolean isSorterReady = false;
         private int indexOfColumn(final int column) {
-            int posColumn = orders.length - 1;
+            int posColumn = orders.size() - 1;
             for (; posColumn >= 0; posColumn--) {
-                if (orders[posColumn] != null && orders[posColumn].sortColumn == column) {
+                if (orders.get(posColumn) != null && orders.get(posColumn).sortColumn == column) {
                     break;
                 }
             }
@@ -55,7 +56,7 @@ public final class TableModel extends AbstractTableModel {
         // index of column to sort by, desired direction
         public void add(final int column, final boolean wantAsc) {
             add(column);
-            orders[0].isSortAsc = wantAsc;
+            orders.get(0).isSortAsc = wantAsc;
             isSorterReady = false;
         }
 
@@ -64,43 +65,38 @@ public final class TableModel extends AbstractTableModel {
             int posColumn = indexOfColumn(column);
             switch (posColumn) {
                 case -1: // no such column here - let's add then
-                    System.arraycopy(orders, 0, orders, 1, MAX_DEPTH - 1);
-                    orders[0] = new Order(column);
+                    orders.add(0, new Order(column));
                     break;
                 case 0: // found at top-level, should invert
-                    orders[0].isSortAsc ^= true; // invert
+                    orders.get(0).isSortAsc ^= true; // invert
                     break;
                 default: // found somewhere, move down others, set this one onto top;
-                    System.arraycopy(orders, 0, orders, 1, posColumn);
-                    orders[0] = new Order(column);
+                    orders.remove(posColumn);
+                    orders.add(0, new Order(column));
                     break;
             }
+            if(orders.size() > MAX_DEPTH) { orders.remove(MAX_DEPTH); } 
             isSorterReady = false;
         }
 
-        public TableSorterCascade getSorter() {
+        public TableSorterCascade<T> getSorter() {
             if (!isSorterReady) {
-                TableSorter[] oneColSorters = new TableSorter[MAX_DEPTH];
-                for (int i = 0; i < orders.length; i++) {
-                    Order order = orders[i];
-                    if (order == null) {
-                        oneColSorters[i] = null;
-                    } else {
-                        oneColSorters[i] = new TableSorter(columns.get(order.sortColumn).fnSort, order.isSortAsc);
-                    }
+                List<TableSorter<T>> oneColSorters = new ArrayList<TableSorter<T>>(MAX_DEPTH);
+                for (Order order : orders) {
+                    oneColSorters.add(new TableSorter<T>(columns.get(order.sortColumn).fnSort, order.isSortAsc));
                 }
-                sorter = new TableSorterCascade(oneColSorters);
+                sorter = new TableSorterCascade<T>(oneColSorters);
             }
             return sorter;
         }
     }
 
-    private CardPool data = new CardPool();
+    private CardPool<T> data = new CardPool<T>();
     private final CardPanelBase cardDisplay;
-    private final List<TableColumnInfo<CardPrinted>> columns;
+    private final List<TableColumnInfo<T>> columns;
     private final SortOrders sortOrders = new SortOrders();
 
-    public TableModel(final CardPanelBase cd, final List<TableColumnInfo<CardPrinted>> columnsToShow) {
+    public TableModel(final CardPanelBase cd, final List<TableColumnInfo<T>> columnsToShow) {
         cardDisplay = cd;
         columns = columnsToShow;
         columns.get(4).isMinMaxApplied = false;
@@ -111,7 +107,7 @@ public final class TableModel extends AbstractTableModel {
         TableColumn tableColumn = null;
         for (int i = 0; i < table.getColumnCount(); i++) {
             tableColumn = table.getColumnModel().getColumn(i);
-            TableColumnInfo<CardPrinted> colInfo = columns.get(i);
+            TableColumnInfo<T> colInfo = columns.get(i);
 
             tableColumn.setPreferredWidth(colInfo.nominalWidth);
             if (colInfo.isMinMaxApplied) {
@@ -122,14 +118,14 @@ public final class TableModel extends AbstractTableModel {
     }
 
     public void clear() { data.clear(); }
-    public CardPoolView getCards() { return data.getView(); }
+    public CardPoolView<T> getCards() { return data.getView(); }
 
     /**
      * <p>removeCard.</p>
      *
      * @param c a {@link forge.Card} object.
      */
-    public void removeCard(final CardPrinted c) {
+    public void removeCard(final T c) {
         boolean wasThere = data.count(c) > 0;
         if (wasThere) {
             data.remove(c);
@@ -138,29 +134,29 @@ public final class TableModel extends AbstractTableModel {
     }
 
 
-    public void addCard(final CardPrinted c) {
+    public void addCard(final T c) {
         data.add(c);
         fireTableDataChanged();
     }
-    public void addCard(final CardPrinted c, final int count) {
+    public void addCard(final T c, final int count) {
         data.add(c, count);
         fireTableDataChanged();
     }
-    public void addCard(final Entry<CardPrinted, Integer> e) {
+    public void addCard(final Entry<T, Integer> e) {
         data.add(e.getKey(), e.getValue());
         fireTableDataChanged();
     }
-    public void addCards(final Iterable<Entry<CardPrinted, Integer>> c) {
+    public void addCards(final Iterable<Entry<T, Integer>> c) {
         data.addAll(c);
         fireTableDataChanged();
     }
-    public void addAllCards(final Iterable<CardPrinted> c) {
+    public void addAllCards(final Iterable<T> c) {
         data.addAllCards(c);
         fireTableDataChanged();
     }
 
-    public Entry<CardPrinted, Integer> rowToCard(final int row) {
-        List<Entry<CardPrinted, Integer>> model = data.getOrderedList();
+    public Entry<T, Integer> rowToCard(final int row) {
+        List<Entry<T, Integer>> model = data.getOrderedList();
         return row >= 0 && row < model.size() ? model.get(row) : null;
     }
     public int getRowCount() {
@@ -213,7 +209,7 @@ public final class TableModel extends AbstractTableModel {
     public void showSelectedCard(final JTable table) {
         int row = table.getSelectedRow();
         if (row != -1) {
-            CardPrinted cp = rowToCard(row).getKey();
+            T cp = rowToCard(row).getKey();
             cardDisplay.showCard(cp);
         }
     }

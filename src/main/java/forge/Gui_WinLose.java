@@ -187,7 +187,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
             if (model.qa != null) {
-                forge.quest.data.QuestUtil.setupQuest(model.qa);
                 if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }

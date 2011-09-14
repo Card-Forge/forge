@@ -25,6 +25,7 @@ import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 //import forge.view.swing.OldGuiNewGame;
@@ -88,16 +89,16 @@ public final class DeckEditor extends DeckEditorBase {
 
 
     private void setup() {
-        List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 175, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 75, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-        columns.add(new TableColumnInfo<CardPrinted>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
+        List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 75, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
         
         top.setup(columns, cardView);
@@ -214,19 +215,19 @@ public final class DeckEditor extends DeckEditorBase {
     }
 
     @Override
-    protected Predicate<CardPrinted> buildFilter() {
-        return Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
+    protected Predicate<InventoryItem> buildFilter() {
+        Predicate<CardPrinted> cardFilter = Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter());
+        return Predicate.instanceOf(cardFilter, CardPrinted.class);
     }
 
     @Override
-    public void setDeck(CardPoolView topParam, CardPoolView bottomParam, GameType gt)
+    public void setDeck(CardPoolView<CardPrinted> topParam, CardPoolView<CardPrinted> bottomParam, GameType gt)
     {
         boolean keepRecievedCards = gt.isLimited() || topParam != null;  
         // if constructed, can add the all cards above
-        CardPoolView top = keepRecievedCards ? topParam : new CardPool(CardDb.instance().getAllCards());
+        CardPoolView<CardPrinted> top = keepRecievedCards ? topParam : CardPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class);
 
         super.setDeck(top, bottomParam, gt);
-        
     }
     
     void clearFilterButton_actionPerformed(ActionEvent e) {
@@ -248,9 +249,10 @@ public final class DeckEditor extends DeckEditorBase {
     }
 
     void addCardToDeck() {
-        CardPrinted card = top.getSelectedCard();
-        if (card == null) { return; }
+        InventoryItem item = top.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
 
+        CardPrinted card = (CardPrinted) item;
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 
         bottom.addCard(card);
@@ -262,8 +264,10 @@ public final class DeckEditor extends DeckEditorBase {
     }
 
     void removeButtonClicked(ActionEvent e) {
-        CardPrinted card = bottom.getSelectedCard();
-        if (card == null) { return; }
+        InventoryItem item = bottom.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
+
+        CardPrinted card = (CardPrinted) item;
 
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
 

@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import forge.card.CardDb;
 import forge.card.CardPool;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
@@ -232,19 +233,23 @@ public class QuestDataIO {
         
         @Override
         public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-            CardPool pool = (CardPool) source;
-            for (Entry<CardPrinted, Integer> e : pool) {
-                writer.startNode("card");
-                writeCardRef(e.getKey(), writer);
-                writer.addAttribute("n", e.getValue().toString());
-                writer.endNode();
+            @SuppressWarnings("unchecked")
+            CardPool<InventoryItem> pool = (CardPool<InventoryItem>) source;
+            for (Entry<InventoryItem, Integer> e : pool) {
+                if ( e.getKey() instanceof CardPrinted)
+                {
+                    writer.startNode("card");
+                    writeCardRef((CardPrinted) e.getKey(), writer);
+                    writer.addAttribute("n", e.getValue().toString());
+                    writer.endNode();
+                }
             }
             
         }
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            CardPool result = new CardPool();
+            CardPool<CardPrinted> result = new CardPool<CardPrinted>();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 String nodename = reader.getNodeName();

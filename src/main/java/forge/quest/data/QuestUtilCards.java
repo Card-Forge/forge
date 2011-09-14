@@ -13,6 +13,7 @@ import forge.card.CardPool;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
 import forge.card.CardRarity;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 
 /** 
@@ -145,23 +146,23 @@ public final class QuestUtilCards {
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-        CardPoolView fromBoosters = pack.getShopCards(totalPacks);
+        CardPoolView<CardPrinted> fromBoosters = pack.getShopCards(totalPacks);
         q.shopList.clear();
         q.shopList.addAll(fromBoosters);
     }
 
-    public CardPool getCardpool() {
+    public CardPool<CardPrinted> getCardpool() {
         return q.cardPool;
     }
 
-    public CardPoolView getShopList() {
+    public CardPoolView<CardPrinted> getShopList() {
         if (q.shopList.isEmpty()) {
             generateCardsInShop();
         }
         return q.shopList;
     }
 
-    public CardPoolView getNewCards() {
+    public CardPoolView<InventoryItem> getNewCards() {
         return q.newCardList;
     }
 
@@ -173,14 +174,14 @@ public final class QuestUtilCards {
     // It might be a good idea to store them in a base class for both quest-mode deck editors
     // Maybe we should consider doing so later
     @SuppressWarnings("rawtypes")
-    public final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnNewCompare =
-        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
-            public Comparable apply(final Entry<CardPrinted, Integer> from) {
+    public final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnNewCompare =
+        new Lambda1<Comparable, Entry<InventoryItem, Integer>>() { @Override
+            public Comparable apply(final Entry<InventoryItem, Integer> from) {
                 return q.newCardList.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
             } };
-    public final Lambda1<Object, Entry<CardPrinted, Integer>> fnNewGet =
-        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
-            public Object apply(final Entry<CardPrinted, Integer> from) {
+    public final Lambda1<Object, Entry<InventoryItem, Integer>> fnNewGet =
+        new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
+            public Object apply(final Entry<InventoryItem, Integer> from) {
                 return q.newCardList.contains(from.getKey()) ? "NEW" : "";
             } };
 }

@@ -237,13 +237,13 @@ public class BoosterDraft_1 implements BoosterDraft {
      *
      * @return a {@link forge.CardList} object.
      */
-    public final CardPoolView nextChoice() {
+    public final CardPoolView<CardPrinted> nextChoice() {
         if (pack.get(getCurrentBoosterIndex()).size() == 0) {
             pack = get8BoosterPack();
         }
 
         computerChoose();
-        return new CardPool(pack.get(getCurrentBoosterIndex()));
+        return CardPool.createFrom(pack.get(getCurrentBoosterIndex()), CardPrinted.class);
     }
 
     /**

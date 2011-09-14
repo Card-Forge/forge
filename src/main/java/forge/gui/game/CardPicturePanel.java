@@ -14,6 +14,7 @@ import forge.Card;
 import forge.CardContainer;
 import forge.ImageCache;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     private static final long serialVersionUID = -3160874016387273383L;
 
     private Card card;
-    private CardPrinted cardPrinted;
+    private InventoryItem inventoryItem;
 
     //    private JLabel           label;
 //    private ImageIcon        icon;
@@ -73,9 +74,9 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      */
     public void update() { setCard(getCard()); }
 
-    public void setCard(final CardPrinted cp) {
+    public void setCard(final InventoryItem cp) {
         card = null;
-        cardPrinted = cp;
+        inventoryItem = cp;
         if (!isShowing()) { return; }
 
         setImage();
@@ -84,7 +85,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     /** {@inheritDoc} */
     public void setCard(final Card c) {
         card = c;
-        cardPrinted = null;
+        inventoryItem = null;
         if (!isShowing()) { return; }
 
         setImage();
@@ -93,8 +94,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     private void setImage() {
         Insets i = getInsets();
         Image image = null;
-        if (cardPrinted != null) {
-            image = ImageCache.getImage(cardPrinted, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom); }
+        if (inventoryItem != null) {
+            image = ImageCache.getImage(inventoryItem, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom); }
         if (card != null && image == null) {
             image = ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom); }
 
@@ -120,8 +121,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      * @return a {@link forge.Card} object.
      */
     public Card getCard() {
-        if ( card == null && cardPrinted != null ) {
-            card = cardPrinted.toForgeCard();
+        if ( card == null && inventoryItem != null && inventoryItem instanceof CardPrinted ) {
+            card = ((CardPrinted) inventoryItem).toForgeCard();
         }
         return card;
     }

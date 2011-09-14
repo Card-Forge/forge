@@ -54,8 +54,8 @@ public class ReadBoosterPack implements NewConstants {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView getBoosterPack5() {
-        CardPool list = new CardPool();
+    public CardPoolView<CardPrinted> getBoosterPack5() {
+        CardPool<CardPrinted> list = new CardPool<CardPrinted>();
         for (int i = 0; i < 5; i++) { list.addAll(getBoosterPack()); }
 
         addBasicLands(list, 20);
@@ -67,7 +67,7 @@ public class ReadBoosterPack implements NewConstants {
         return list;
     }//getBoosterPack5()
 
-    public static final void addBasicLands(final CardPool pool, final int count) {
+    public static final void addBasicLands(final CardPool<CardPrinted> pool, final int count) {
         for (int i = 0; i < count; i++) {
             pool.add(CardDb.instance().getCard("Forest", "M10"));
             pool.add(CardDb.instance().getCard("Island", "M10"));
@@ -76,7 +76,7 @@ public class ReadBoosterPack implements NewConstants {
             pool.add(CardDb.instance().getCard("Swamp", "M10"));
         }
     }
-    public static final void addBasicSnowLands(final CardPool pool, final int count) {
+    public static final void addBasicSnowLands(final CardPool<CardPrinted> pool, final int count) {
         for (int i = 0; i < count; i++) {
             pool.add(CardDb.instance().getCard("Snow-Covered Forest", "ICE"));
             pool.add(CardDb.instance().getCard("Snow-Covered Island", "ICE"));
@@ -91,8 +91,8 @@ public class ReadBoosterPack implements NewConstants {
      *
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView getBoosterPack() {
-        CardPool pack = new CardPool();
+    public CardPoolView<CardPrinted> getBoosterPack() {
+        CardPool<CardPrinted> pack = new CardPool<CardPrinted>();
 
         pack.add(getRandomCard(rares));
 
@@ -125,8 +125,8 @@ public class ReadBoosterPack implements NewConstants {
      * @param questLevel a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardPoolView getShopCards(int totalPacks) {
-        CardPool list = new CardPool();
+    public CardPoolView<CardPrinted> getShopCards(int totalPacks) {
+        CardPool<CardPrinted> list = new CardPool<CardPrinted>();
 
         // Number of Packs granted
 

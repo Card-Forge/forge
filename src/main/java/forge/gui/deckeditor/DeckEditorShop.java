@@ -24,6 +24,7 @@ import forge.ReadPriceList;
 import forge.Singletons;
 import forge.card.CardPoolView;
 import forge.card.CardPrinted;
+import forge.card.InventoryItem;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -87,12 +88,12 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         multiplier = questData.getCards().getSellMutliplier();
 
-        CardPoolView forSale = questData.getCards().getShopList();
+        CardPoolView<CardPrinted> forSale = questData.getCards().getShopList();
         if (forSale.isEmpty()) {
             questData.getCards().generateCardsInShop();
             forSale = questData.getCards().getShopList();
         }
-        CardPoolView owned = questData.getCards().getCardpool().getView();
+        CardPoolView<CardPrinted> owned = questData.getCards().getCardpool().getView();
         //newCardsList = questData.getCards().getNewCards();
 
         setDeck(forSale, owned, GameType.Quest);
@@ -130,24 +131,24 @@ public final class DeckEditorShop extends DeckEditorBase {
      * </p>
      */
     private void setup() {
-        List<TableColumnInfo<CardPrinted>> columns = new ArrayList<TableColumnInfo<CardPrinted>>();
-        columns.add(new TableColumnInfo<CardPrinted>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<CardPrinted>("R", 30, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<CardPrinted>("Set", 35, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 30, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
         
-        List<TableColumnInfo<CardPrinted>> columnsBelow = new ArrayList<TableColumnInfo<CardPrinted>>(columns);
-        columns.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
+        List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
+        columns.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceGet));
         top.setup(columns, cardView);
 
-        columnsBelow.add(new TableColumnInfo<CardPrinted>("#Dk", 30, fnDeckCompare, fnDeckGet));
-        columnsBelow.add(new TableColumnInfo<CardPrinted>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
-        columnsBelow.add(new TableColumnInfo<CardPrinted>("Price", 40, fnPriceCompare, fnPriceGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("#Dk", 30, fnDeckCompare, fnDeckGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceGet));
         bottom.setup(columnsBelow, cardView);
 
         this.setSize(1024, 768);
@@ -240,11 +241,11 @@ public final class DeckEditorShop extends DeckEditorBase {
     }
 
     // TODO: move to cardshop
-    private Integer getCardValue(final CardPrinted card) {
+    private Integer getCardValue(final InventoryItem card) {
         if (mapPrices.containsKey(card.getName())) {
             return mapPrices.get(card.getName());
-        } else {
-            switch (card.getRarity()) {
+        } else if (card instanceof CardPrinted)  {
+            switch (((CardPrinted) card).getRarity()) {
             case BasicLand: return Integer.valueOf(4);
             case Common: return Integer.valueOf(6);
             case Uncommon: return Integer.valueOf(40);
@@ -253,19 +254,22 @@ public final class DeckEditorShop extends DeckEditorBase {
             default: return Integer.valueOf(15);
             }
         }
+        return 1337;
     }
 
     private void buyButton_actionPerformed(ActionEvent e) {
-        CardPrinted c = top.getSelectedCard();
-        if (c == null) { return; }
+        InventoryItem item = top.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
 
-        int value = getCardValue(c);
+        CardPrinted card = (CardPrinted) item;
+
+        int value = getCardValue(card);
 
         if (value <= questData.getCredits()) {
-            bottom.addCard(c);
-            top.removeCard(c);
+            bottom.addCard(card);
+            top.removeCard(card);
 
-            questData.getCards().buyCard(c, value);
+            questData.getCards().buyCard(card, value);
 
             creditsLabel.setText("Total credits: " + questData.getCredits());
         } else {
@@ -274,41 +278,42 @@ public final class DeckEditorShop extends DeckEditorBase {
     }
 
     @Override
-    protected Predicate<CardPrinted> buildFilter() {
-        return CardPrinted.Predicates.Presets.isTrue;
+    protected Predicate<InventoryItem> buildFilter() {
+        return Predicate.getTrue(InventoryItem.class);
     }
 
     private void sellButton_actionPerformed(ActionEvent e) {
-        CardPrinted c = bottom.getSelectedCard();
-        if (c == null) { return; }
+        InventoryItem item = bottom.getSelectedCard();
+        if (item == null || !( item instanceof CardPrinted )) { return; }
 
-        bottom.removeCard(c);
-        top.addCard(c);
+        CardPrinted card = (CardPrinted) item;
+        bottom.removeCard(card);
+        top.addCard(card);
 
-        int price = Math.min((int) (multiplier * getCardValue(c)), questData.getCards().getSellPriceLimit());
-        questData.getCards().sellCard(c, price);
+        int price = Math.min((int) (multiplier * getCardValue(card)), questData.getCards().getSellPriceLimit());
+        questData.getCards().sellCard(card, price);
 
         creditsLabel.setText("Total credits: " + questData.getCredits());
     }
 
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnPriceCompare =
-        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
-            public Comparable apply(final Entry<CardPrinted, Integer> from) { return getCardValue(from.getKey()); } };
-    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnPriceGet =
-        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
-            public Object apply(final Entry<CardPrinted, Integer> from) { return getCardValue(from.getKey()); } };
+    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnPriceCompare =
+        new Lambda1<Comparable, Entry<InventoryItem, Integer>>() { @Override
+            public Comparable apply(final Entry<InventoryItem, Integer> from) { return getCardValue(from.getKey()); } };
+    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceGet =
+        new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
+            public Object apply(final Entry<InventoryItem, Integer> from) { return getCardValue(from.getKey()); } };
 
     @SuppressWarnings("rawtypes")
-    private final Lambda1<Comparable, Entry<CardPrinted, Integer>> fnDeckCompare =
-        new Lambda1<Comparable, Entry<CardPrinted, Integer>>() { @Override
-            public Comparable apply(final Entry<CardPrinted, Integer> from) {
+    private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare =
+        new Lambda1<Comparable, Entry<InventoryItem, Integer>>() { @Override
+            public Comparable apply(final Entry<InventoryItem, Integer> from) {
                 Integer iValue = decksUsingMyCards.get(from.getKey());
                 return iValue == null ? Integer.valueOf(0) : iValue;
             } };
-    private final Lambda1<Object, Entry<CardPrinted, Integer>> fnDeckGet =
-        new Lambda1<Object, Entry<CardPrinted, Integer>>() { @Override
-            public Object apply(final Entry<CardPrinted, Integer> from) {
+    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet =
+        new Lambda1<Object, Entry<InventoryItem, Integer>>() { @Override
+            public Object apply(final Entry<InventoryItem, Integer> from) {
                 Integer iValue = decksUsingMyCards.get(from.getKey());
                 return iValue == null ? "" : iValue.toString();
             } };
