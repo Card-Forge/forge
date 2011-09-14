@@ -46,7 +46,7 @@ public final class SetUtils {
     
     // Perform that first of all
     static {
-        loadSetData();
+        loadSetData(loadBoosterData());
         loadBlockData();
         loadFormatData();
     }
@@ -66,9 +66,36 @@ public final class SetUtils {
         CardSet set = setsByCode.get(code);
         return set == null ? "" : set.getCode2();
     }
+    
+    private static Map<String, CardSet.BoosterData> loadBoosterData()
+    {
+        ArrayList<String> fData = FileUtil.readFile("res/blockdata/boosters.txt");
+        Map<String, CardSet.BoosterData> result = new HashMap<String, CardSet.BoosterData>();
+        
+        
+        for (String s : fData) {
+            if (StringUtils.isBlank(s)) { continue; }
+    
+            String[] sParts = s.trim().split("\\|");
+            String code = null;
+            int nC = 0, nU = 0, nR = 0, nS = 0;
+            for (String sPart : sParts) {
+                String[] kv = sPart.split(":", 2);
+                String key = kv[0].toLowerCase();
+
+                if (key.equalsIgnoreCase("Set")) { code = kv[1]; }
+                if (key.equalsIgnoreCase("Commons")) { nC = Integer.parseInt(kv[1]); }
+                if (key.equalsIgnoreCase("Uncommons")) { nU = Integer.parseInt(kv[1]); }
+                if (key.equalsIgnoreCase("Rares")) { nR = Integer.parseInt(kv[1]); }
+                if (key.equalsIgnoreCase("Special")) { nS = Integer.parseInt(kv[1]); }
+            }
+            result.put(code, new CardSet.BoosterData(nC, nU, nR, nS));
+        }
+        return result;
+    }
 
     // parser code - quite boring.
-    private static void loadSetData() {
+    private static void loadSetData(Map<String, CardSet.BoosterData> boosters) {
         ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
     
         for (String s : fData) {
@@ -94,11 +121,13 @@ public final class SetUtils {
                     alias = kv[1];
                 }
             }
-            CardSet set = new CardSet(index, name, code, code2);
+            CardSet set = new CardSet(index, name, code, code2, boosters.get(code));
+            boosters.remove(code);
             setsByCode.put(code, set);
             if (alias != null) { setsByCode.put(alias, set); }
             allSets.add(set);
         }
+        assert boosters.isEmpty();
         Collections.sort(allSets);
         allSets = Collections.unmodifiableList(allSets);
     }

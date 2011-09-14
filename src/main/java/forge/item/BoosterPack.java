@@ -32,7 +32,7 @@ public class BoosterPack implements InventoryItemFromSet {
     public List<CardPrinted> getCards() {
         if (null == cards)
         {
-            BoosterGenerator gen = new BoosterGenerator(cardSet);
+            BoosterGenerator gen = new BoosterGenerator(SetUtils.getSetByCode(cardSet));
             cards = gen.getBoosterPack();
             // TODO: Add land here!
         }

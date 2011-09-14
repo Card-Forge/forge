@@ -6,6 +6,8 @@ import forge.MyRandom;
 import forge.deck.Deck;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,7 +38,8 @@ public class BoosterGenerator {
     }
     
     // These lists are to hold cards grouped by rarity in advance.
-    private final List<CardPrinted> allNoLands = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> basicLands = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> allButLands = new ArrayList<CardPrinted>();
     private final List<CardPrinted> commons = new ArrayList<CardPrinted>();
     private final List<CardPrinted> uncommons = new ArrayList<CardPrinted>();
     private final List<CardPrinted> rares = new ArrayList<CardPrinted>();
@@ -48,21 +51,17 @@ public class BoosterGenerator {
 
     private static final List<CardPrinted> emptyList = Collections.unmodifiableList( new ArrayList<CardPrinted>(0) ); 
 
-    // This set of cards 
-    private int numCommons = 0;
-    private int numUncommons = 0;
-    private int numRareSlots = 0;
+    // Modern boosters contain 10 commons, 3 uncommmons, 1 rare/mythic
+    // They also contain 1 land and 1 token/rules, but we don't pick them now.
+    private int numCommons = 10;
+    private int numUncommons = 3;
+    private int numRareSlots = 1;
     private int numSpecials = 0;
 
     /**
      * <p>Constructor for BoosterGenerator.</p>
      */
     public BoosterGenerator(Iterable<CardPrinted> cards) {
-        numCommons = 11;
-        numUncommons = 3;
-        numRareSlots = 1;
-        numSpecials = 0;
-
         for (CardPrinted c : cards) {
             addToRarity(c);
         }
@@ -78,40 +77,22 @@ public class BoosterGenerator {
      *
      * @param setCode a {@link java.lang.String} object.
      */
-    public BoosterGenerator(final String setCode) {
-        numCommons = 0;
-        numUncommons = 0;
-        numRareSlots = 0;
-        numSpecials = 0;
+    public BoosterGenerator(final CardSet cardSet) {
+        if (!cardSet.canGenerateBooster()) {
+            throw new InvalidParameterException("BoosterGenerator: Set " + cardSet + " cannot generate boosters!");
+        }
+        CardSet.BoosterData bs = cardSet.getBoosterData();
+        
+        numCommons = bs.getCommon();
+        numUncommons = bs.getUncommon();
+        numRareSlots = bs.getRare();
+        numSpecials = bs.getSpecial();
 
-        List<String> setsList = Arrays.asList(new String[]{setCode});
-        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(setsList, true);
+        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
         List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
         for (CardPrinted c : cardsInThisSet) {
             addToRarity(c);
-        }
-
-        ArrayList<String> bpData = FileUtil.readFile("res/boosterdata/" + setCode + ".pack");
-
-        for (String line : bpData) {
-            if (line.startsWith("Commons:")) {
-                numCommons = Integer.parseInt(line.substring(8));
-            } else if (line.startsWith("Uncommons:")) {
-                numUncommons = Integer.parseInt(line.substring(10));
-            } else if (line.startsWith("Rares:")) {
-                numRareSlots = Integer.parseInt(line.substring(6));
-            } else if (line.startsWith("Specials:")) {
-                numSpecials = Integer.parseInt(line.substring(9));
-            }
-
-        }
-
-        if (Constant.Runtime.DevMode[0]) {
-            System.out.println("numCommons: " + numCommons);
-            System.out.println("numUncommons: " + numUncommons);
-            System.out.println("numRares: " + numRareSlots);
-            System.out.println("numSpecials: " + numSpecials);
         }
 
     }
@@ -202,7 +183,7 @@ public class BoosterGenerator {
         
         temp.addAll(pickRandomCards(specials, nSpecs));
         
-        temp.addAll(pickRandomCards(allNoLands, nAnyCard));
+        temp.addAll(pickRandomCards(allButLands, nAnyCard));
 
         return temp;
     }
@@ -216,9 +197,8 @@ public class BoosterGenerator {
             case Special: specials.add(c); break;
             default: return;
         }
-        if (!c.getCard().getType().isBasicLand()) {
-            allNoLands.add(c);
-        }
+        
+        if (c.getCard().getType().isBasicLand()) { basicLands.add(c); } else { allButLands.add(c); }
     }
 
 }

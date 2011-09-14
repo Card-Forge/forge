@@ -83,11 +83,11 @@ public class SealedDeck {
 
                 String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    BoosterGenerator bpMulti = new BoosterGenerator(pp[i]);
+                    BoosterGenerator bpMulti = new BoosterGenerator(SetUtils.getSetByCode(pp[i]));
                     packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
             } else {
-                BoosterGenerator bpOne = new BoosterGenerator(sets[0]);
+                BoosterGenerator bpOne = new BoosterGenerator(SetUtils.getSetByCode(sets[0]));
                 Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) { packs.add(picker); }
             }

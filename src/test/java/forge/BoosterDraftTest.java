@@ -37,7 +37,7 @@ public class BoosterDraftTest implements BoosterDraft {
      */
     public ItemPoolView<CardPrinted> nextChoice() {
         n--;
-        BoosterGenerator pack = new BoosterGenerator("M11");
+        BoosterGenerator pack = new BoosterGenerator(SetUtils.getSetByCode("M11"));
         return ItemPool.createFrom(pack.getBoosterPack(), CardPrinted.class);
     }
 
