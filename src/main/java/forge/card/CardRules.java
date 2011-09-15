@@ -131,7 +131,10 @@ public final class CardRules {
      * Filtering conditions specific for CardRules class, defined here along with some presets.
      */
     public abstract static class Predicates {
-
+        public static final Predicate<CardRules> isKeptInAiDecks = new Predicate<CardRules>() {
+            @Override public boolean isTrue(CardRules card) { return !card.isRemovedFromAIDecks; } };
+        
+        
         // Static builder methods - they choose concrete implementation by themselves
         public static Predicate<CardRules> cmc(final ComparableOp op, final int what)
         {
