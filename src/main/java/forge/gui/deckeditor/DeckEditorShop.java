@@ -20,7 +20,6 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Command;
-import forge.ReadPriceList;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
@@ -32,6 +31,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
+import forge.quest.data.ReadPriceList;
 
 /**
  * <p>

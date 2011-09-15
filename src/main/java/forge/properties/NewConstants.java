@@ -150,6 +150,8 @@ public interface NewConstants {
 
         /** Property path for price. */
         String PRICE = "quest/price";
+        /** Property path for price. */
+        String BOOSTER_PRICE= "quest/boosterprice";
         /** Property path for quests. */
         String QUESTS = "quest/quests";
 

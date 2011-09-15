@@ -9574,7 +9574,6 @@ src/main/java/forge/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/PlayerZone_ComesIntoPlay.java svneol=native#text/plain
 src/main/java/forge/Quest_Assignment.java svneol=native#text/plain
-src/main/java/forge/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/ReadQuest_Assignment.java svneol=native#text/plain
 src/main/java/forge/SetInfo.java svneol=native#text/plain
 src/main/java/forge/SetUtils.java svneol=native#text/plain
@@ -9834,6 +9833,7 @@ src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtilCards.java -text
 src/main/java/forge/quest/data/QuestUtilRewards.java -text
+src/main/java/forge/quest/data/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/data/bazaar/QuestStallDefinition.java svneol=native#text/plain
 src/main/java/forge/quest/data/bazaar/QuestStallManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/bazaar/QuestStallPurchasable.java svneol=native#text/plain

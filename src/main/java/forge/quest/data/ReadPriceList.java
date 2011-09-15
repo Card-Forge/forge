@@ -1,7 +1,9 @@
-package forge;
+package forge.quest.data;
 
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.MyRandom;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -39,6 +41,8 @@ public class ReadPriceList implements NewConstants {
      */
     private void setup() {
         priceMap = readFile(ForgeProps.getFile(QUEST.PRICE));
+        priceMap.putAll(readFile(ForgeProps.getFile(QUEST.BOOSTER_PRICE)));
+        
     }//setup()
 
     /**
