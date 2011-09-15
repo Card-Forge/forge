@@ -159,11 +159,11 @@ public final class QuestUtilCards {
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
+        final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.setsInExt;
+        final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.canMakeBooster, CardSet.Predicates.Presets.setsInT2);
+        final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.canMakeBooster, Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.setsInT2)));
+        final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.canMakeBooster, Predicate.not(filterExt));
         
-        Predicate<CardSet> filterT2 = CardSet.Predicates.isLegalInFormat(SetUtils.getStandard());
-        Predicate<CardSet> filterExt = CardSet.Predicates.isLegalInFormat(SetUtils.getExtended());
-        Predicate<CardSet> filterExtButT2 = Predicate.and(filterExt, Predicate.not(filterT2));
-        Predicate<CardSet> filterNotExt = Predicate.not(filterExt);
         
         q.shopList.clear();
         for (int i = 0; i < totalPacks; i++) {
@@ -171,7 +171,7 @@ public final class QuestUtilCards {
 
             // add some boosters
             int rollD100 = MyRandom.random.nextInt(100);
-            Predicate<CardSet> filter = rollD100 < 40 ? filterT2 : (rollD100 < 75 ? filterExtButT2 : filterNotExt);
+            Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2 : filterNotExt);
             q.shopList.addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.fnFromSet));
         }
 

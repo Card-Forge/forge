@@ -1,5 +1,6 @@
 package forge.card;
 
+import forge.SetUtils;
 import forge.game.GameFormat;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
@@ -116,6 +117,12 @@ public final class CardSet implements Comparable<CardSet> { // immutable
             public boolean isTrue(CardSet subject) {
                 return format.isSetLegal(subject.getCode());
             }
-        }        
+        }
+        
+        public static abstract class Presets {
+            public final static Predicate<CardSet> setsInT2 = isLegalInFormat(SetUtils.getStandard());
+            public final static Predicate<CardSet> setsInExt = isLegalInFormat(SetUtils.getExtended());
+            public final static Predicate<CardSet> setsInModern = isLegalInFormat(SetUtils.getModern());
+        }
     }
 }
