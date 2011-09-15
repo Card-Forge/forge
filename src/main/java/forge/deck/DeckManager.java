@@ -1,6 +1,7 @@
 package forge.deck;
 
 
+import forge.FileUtil;
 import forge.PlayerType;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -291,36 +292,42 @@ public class DeckManager {
      * @return a {@link forge.deck.Deck} object.
      */
     public static Deck readDeck(File deckFile) {
-        List<String> lines = new LinkedList<String>();
-
-        try {
-            BufferedReader r = new BufferedReader(new FileReader(deckFile));
-
-            String line;
-            while ((line = r.readLine()) != null) {
-                lines.add(line);
-            }
-
-            r.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        ListIterator<String> lineIterator = lines.listIterator();
-        if (!lineIterator.hasNext()) { return null; }
         
-        String line = lineIterator.next();
+        List<String> lines = FileUtil.readFile(deckFile);
+        if (lines.isEmpty()) { return null; }
 
-        //Old text-based format
-        if (!line.equals("[metadata]")) {
-            lineIterator.previous();
-            return readDeckOld(lineIterator);
-        }
 
         Deck d = new Deck();
 
-        //read metadata
-        while (!(line = lineIterator.next()).equals("[main]")) {
+        String firstLine = lines.get(0); 
+        if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
+            readDeckOldMetadata(lines.iterator(), d);
+        } else {
+            readDeckMetadata(findSection(lines, "metadata"), d);
+        }
+        d.setMain(readCardList(findSection(lines, "main")));
+        d.setSideboard(readCardList(findSection(lines, "sideboard")));
+
+        return d;
+    }
+    
+    private static Iterator<String> findSection(final Iterable<String> lines, final String sectionName)
+    {
+        Iterator<String> lineIterator = lines.iterator();
+        String toSearch = String.format("[%s]", sectionName);
+        while(lineIterator.hasNext()) {
+            if (toSearch.equalsIgnoreCase(lineIterator.next())) { break; }
+        }
+        
+        return lineIterator;
+    }
+    
+    private static void readDeckMetadata(final Iterator<String> lineIterator, final Deck d)
+    {
+        while (lineIterator.hasNext()) {
+            String line = lineIterator.next();
+            if( line.startsWith("[") ) { break; }
+            
             String[] linedata = line.split("=", 2);
             String field = linedata[0].toLowerCase();
             if (NAME.equalsIgnoreCase(field)) {
@@ -337,11 +344,6 @@ public class DeckManager {
                 }
             }
         }
-
-        addCardList(lineIterator, d);
-
-        return d;
-
     }
 
     /**
@@ -350,7 +352,7 @@ public class DeckManager {
      * @param iterator a {@link java.util.ListIterator} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private static Deck readDeckOld(final ListIterator<String> iterator) {
+    private static void readDeckOldMetadata(final Iterator<String> iterator, Deck d) {
 
         String line;
         //readDeck name
@@ -369,19 +371,9 @@ public class DeckManager {
         //readDeck deck type
         GameType deckType = GameType.smartValueOf(iterator.next());
 
-        Deck d = new Deck();
         d.setName(name);
         d.setComment(comment);
         d.setDeckType(deckType);
-
-        //go to [main]
-        while ((line = iterator.next()) != null && !line.equals("[main]")) {
-            System.err.println("unexpected line: " + line);
-        }
-
-        addCardList(iterator, d);
-
-        return d;
     }
 
     /**
@@ -405,7 +397,7 @@ public class DeckManager {
     }
 
     // Precondition: iterator should point at the first line of cards list
-    private static List<String> readCardList(final ListIterator<String> lineIterator) {
+    private static List<String> readCardList(final Iterator<String> lineIterator) {
         List<String> result = new ArrayList<String>();
         Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 

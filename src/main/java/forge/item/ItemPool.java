@@ -15,7 +15,7 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
     public ItemPool(final Class<T> cls) { super(cls); }
 
     @SuppressWarnings("unchecked") // conversion here must be safe
-    public ItemPool(final List<String> names, final Class<T> cls) { super(cls); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
+    public ItemPool(final Iterable<String> names, final Class<T> cls) { super(cls); addAllCards((Iterable<T>) CardDb.instance().getCards(names)); }
 
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> 

@@ -153,7 +153,7 @@ public final class CardDb {
     }
 
     // Multiple fetch
-    public List<CardPrinted> getCards(final List<String> names) {
+    public List<CardPrinted> getCards(final Iterable<String> names) {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
         for (String name : names) { result.add(getCard(name)); }
         return result;

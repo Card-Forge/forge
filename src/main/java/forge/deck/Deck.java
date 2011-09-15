@@ -141,6 +141,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
     public void addMain(final String cardName) { addMain(CardDb.instance().getCard(cardName)); }
     public void addMain(final CardPrinted card) { main.add(card); }
     public void addMain(final ItemPoolView<CardPrinted> list) { main.addAll(list); }
+    public void setMain(final Iterable<String> cards) { main = new ItemPool<CardPrinted>(cards, CardPrinted.class); }
     public void removeMain(final CardPrinted card) { main.remove(card); }
     public void removeMain(final CardPrinted card, final int amount) { main.remove(card, amount); }
     public int countMain() { return main.countAll(); }
@@ -154,6 +155,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
     public final void addSideboard(final CardPrinted card) { sideboard.add(card); }
     public final void addSideboard(final CardPrinted card, final int amount) { sideboard.add(card, amount); }
     public final void addSideboard(final ItemPoolView<CardPrinted> cards) { sideboard.addAll(cards); }
+    public final void setSideboard(final Iterable<String> cards) { sideboard = new ItemPool<CardPrinted>(cards, CardPrinted.class); }
 
     /**
      * <p>countSideboard.</p>
