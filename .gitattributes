@@ -7669,6 +7669,7 @@ res/cardsfolder/t/tectonic_instability.txt svneol=native#text/plain
 res/cardsfolder/t/tectonic_rift.txt -text
 res/cardsfolder/t/teekas_dragon.txt svneol=native#text/plain
 res/cardsfolder/t/teetering_peaks.txt svneol=native#text/plain
+res/cardsfolder/t/teferis_care.txt -text
 res/cardsfolder/t/teferis_puzzle_box.txt svneol=native#text/plain
 res/cardsfolder/t/teferis_response.txt svneol=native#text/plain
 res/cardsfolder/t/tek.txt svneol=native#text/plain
