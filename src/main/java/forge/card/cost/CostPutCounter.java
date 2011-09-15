@@ -48,7 +48,11 @@ public class CostPutCounter extends CostPart {
 
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        // PutCounter can always be paid as a Cost
+
+        if(source.hasKeyword("CARDNAME can't have counters placed on it.")) {
+            return false;
+        }
+        
         return true;
     }
 
