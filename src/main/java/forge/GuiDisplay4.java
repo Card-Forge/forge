@@ -729,7 +729,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
                 for (int i = stack.size() - 1; 0 <= i; i--) {
                     final int curI = i;
-                    label = new JLabel("" + (count++) + ". " + stack.peekInstance(i).getStackDescription());
+                    String isOptional = stack.peekAbility(i).isOptionalTrigger() && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
+                    label = new JLabel(isOptional + (count++) + ". " + stack.peekInstance(i).getStackDescription());
 
                     //update card detail
                     final CardPanel cardPanel = new CardPanel(stack.peekInstance().getSpellAbility().getSourceCard());
@@ -743,21 +744,21 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         } //mouseMoved
                     });
                     
-                    cardPanel.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mousePressed(final MouseEvent e) {
-                            if(e.getButton() != MouseEvent.BUTTON3)
-                            {
-                                return;
+                    if(stack.peekInstance(curI).isOptionalTrigger())
+                    {                    
+                        cardPanel.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mousePressed(final MouseEvent e) {
+                                if(e.getButton() != MouseEvent.BUTTON3)
+                                {
+                                    return;
+                                }
+
+                                triggerMenu.setTrigger(stack.peekAbility(curI).getSourceTrigger());
+                                triggerMenu.show(e.getComponent(),e.getX(),e.getY());                           
                             }
-                            if(!stack.peekInstance(curI).isOptionalTrigger())
-                            {
-                                return;
-                            }
-                            triggerMenu.setTrigger(stack.peekAbility(curI).getSourceTrigger());
-                            triggerMenu.show(e.getComponent(),e.getX(),e.getY());                           
-                        }
-                    });
+                        });
+                    }
 
                     stackPanel.add(cardPanel);
                 }
