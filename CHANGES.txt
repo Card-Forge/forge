@@ -138,6 +138,68 @@ Comment=
 - Checkstyle fixes in SA_Condition and SA_Requirements
 - Fixed Haunting Apparition.
 - Added the recent commit logs to changes.txt.
+- Fix Indestructible Aura
+- Added LQ pic URLs to Chancellor of the Dross, Chancellor of the Forge and Chancellor of the Tangle.
+- HIDDEN keywords will now be treated differently by continuous static abilities.
+- Converted cards granting HIDDEN keywords.
+- Converted cards granting HIDDEN keywords (pt 2).
+- Converted cards granting HIDDEN keywords (pt 3).
+- Fix to "download set LQ images" list of files
+- Fixed description of Skullmulcher.
+- Changed references to OldGuiNewGame preference components to reference the actual ForgePreferences class hosted in Singletons.
+- Changed references to OldGuiNewGame preference components to reference the actual ForgePreferences class hosted in Singletons.
+- Added preferences to save the removal of artifacts and small creatures in deck generation.
+- Changed references to OldGuiNewGame preference components to reference the actual ForgePreferences class hosted in Singletons.
+- Changed references to OldGuiNewGame preference components to reference the actual ForgePreferences class hosted in Singletons.
+- Fixed Eyes of the Wisent.
+- Fixed Torpor Orb for ETB triggers that care about their host card.
+- Cleaned up and condensed Torpor Orb check.
+- isCardSupported has been implemented on CardDb basis
+- for "Pithing Needle" changed card selection from input where user had to guess the name into a list of options (all unique cards!)
+- CardPool is now parametrized, preparing to hold boosters and packaged decks in quest inventory
+- CardPool renamed to ItemPool, moved to forge.item, dependencies updated
+- cardSet's members are finalized
+- M10-Booster added to quest cardshop (experimental and non-functional yet)
+- BoosterGenerator uses now rare-slots together with explicit numbers for rares and mythics
+- ItemPool has to be parametrized by Class<T> (unfortunatelly java erases types of generics)
+- fix the test
+- Fixed the legend rule ("If only one of those permanents is legendary, this rule doesn’t apply").
+- Standardized the ordering of spells with kicker.
+- Added the option "AllCounters" to AF RemoveCounterAll.
+- Working over booster generation - BoosterGenerator became more universal, moved to forge.card for a while, this is still WIP.
+- Limited game classes have been cleaned (code moved to utility functions in draft, CustomLimited class contains setting to start with custom cardpool or boosters)
+- Closure introduced to utilities
+- Added a couple of counters to the counters class.
+- removed ReadDraftBoosterPack class - it was used by tests only.
+- removed BoosterDraftAITest - it didn't succeed anyway (needs to have CardDb initialized to succeed)
+- removed player's picks map from boosterDraft interface (interface should not hold static data)
+- removed the getCardsNumber function from BoosterGenerator (it doesn't know in advance how many cards caller will ask to generate)
+- moved upload picks from draft deckeditor to boosterDraft class
+- added an enum to describe limited game type
+- tests may start failing - they would need an initialized CardDb
+- Removed/renamed excessive booster classes
+- BoosterPacks in cardshop are functional. Need to discuss and balance their appearance
+- CardListViewer is caching Card objects to create them a single time. Set of cards shown now exactly matches CardPrinted.
+- Added a context menu to the stack items of optional triggers that lets you specify wether to always accept them, always decline them or always ask (default). Just right click! (The choice you make resets at the start of each game)
+- all data on boosters was aggregated into a single file
+- data for booster generation incorporated into CardSet
+- fixed type for boosterpack, base price set to $3.95, fixed text, removed unused imports
+- boosterdata was condensed to blockdata/boosters.txt
+- Added some random BoosterPacks to shop
+- texts; the bottom table shows the real price that will be paid for cards being sold
+- several Checkstyle fixes in Input_Mulligan
+- fixed: several boosters yeilded the same Cards
+- cardDetailPanel not shown if non-card is under cursor
+- boosters show their pictures (may keep them in booster/CODE.png)
+- fixed too mythics chances (was 1/4)
+- BoosterPacks (inventory) add basic land if there is a slot for it
+- booster distribution: 40% t2, 35% ext (not t2), 25% legacy
+- It was giving too many mythics at quest game start
+- Fixed Nirkana Cutthroat
+- added predicate to cardrules to filter cards
+- Only register a mouse listener on the stack objects that are from optional trigger objects.
+- Mark stack items from optional trigger objects.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
