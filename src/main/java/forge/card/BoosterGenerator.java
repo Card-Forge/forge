@@ -90,8 +90,9 @@ public class BoosterGenerator {
 
         for (CardPrinted c : cardsInThisSet) {
             addToRarity(c);
+            //System.out.println(c);
         }
-
+        //System.out.println("done");
     }
 
     private List<CardPrinted> pickRandomCards(List<CardPrinted> source, int count)
@@ -123,7 +124,8 @@ public class BoosterGenerator {
         int indexRares = Integer.MAX_VALUE;
         int indexMythics = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
-            boolean takeMythic = mythicsSize > 0 && MyRandom.random.nextInt(8) <= 1;
+            int rollD8 = MyRandom.random.nextInt(8);
+            boolean takeMythic = mythicsSize > 0 && rollD8 < 1;
             if (takeMythic) {
                 if (indexRares >= raresSize) {
                     Collections.shuffle(mythics, MyRandom.random);
@@ -147,13 +149,13 @@ public class BoosterGenerator {
 
     
     public final List<CardPrinted> getBoosterPack() {
-        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, 0);
+        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, 0, 0);
     }
     /**
      * So many parameters needed for custom limited cardpools, 
      */
     public final List<CardPrinted> getBoosterPack(final int nCom, final int nUnc, final int nRareSlots,
-            final int nRares, final int nMythics, final int nSpecs, final int nAnyCard) {
+            final int nRares, final int nMythics, final int nSpecs, final int nAnyCard, final int nLands) {
         
         List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
@@ -181,6 +183,8 @@ public class BoosterGenerator {
         temp.addAll(pickRandomCards(specials, nSpecs));
         
         temp.addAll(pickRandomCards(allButLands, nAnyCard));
+        
+        temp.addAll(pickRandomCards(basicLands, nLands));
 
         return temp;
     }
@@ -192,10 +196,13 @@ public class BoosterGenerator {
             case Rare: rares.add(c); break;
             case MythicRare: mythics.add(c); break;
             case Special: specials.add(c); break;
-            default: return;
         }
-        
-        if (c.getCard().getType().isBasicLand()) { basicLands.add(c); } else { allButLands.add(c); }
+
+        if (c.getCard().getType().isBasicLand()) {
+            basicLands.add(c);
+        } else {
+            allButLands.add(c);
+        }
     }
 
 }

@@ -362,6 +362,8 @@ public final class CardRules {
             public static final Predicate<CardRules> isCreature = coreType(true, CardCoreType.Creature);
             public static final Predicate<CardRules> isArtifact = coreType(true, CardCoreType.Artifact);
             public static final Predicate<CardRules> isLand = coreType(true, CardCoreType.Land);
+            public static final Predicate<CardRules> isBasicLand = new Predicate<CardRules>(){
+                @Override public boolean isTrue(CardRules subject) { return subject.getType().isBasicLand(); } };
             public static final Predicate<CardRules> isPlaneswalker = coreType(true, CardCoreType.Planeswalker);
             public static final Predicate<CardRules> isInstant = coreType(true, CardCoreType.Instant);
             public static final Predicate<CardRules> isSorcery = coreType(true, CardCoreType.Sorcery);

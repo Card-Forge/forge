@@ -64,6 +64,17 @@ public abstract class Predicate<T> {
         return result;
     }
 
+
+    // Check if any element meeting the criteria is present
+    public final boolean any(final Iterable<T> source) {
+        if (source != null) { for (T c : source) { if (isTrue(c)) { return true; } } }
+        return false;
+    }
+    public final <U> boolean any(final Iterable<U> source, final Lambda1<T, U> accessor) {
+        if (source != null) { for (U c : source) { if (isTrue(accessor.apply(c))) { return true; } } }
+        return false;
+    }
+
     // select top 1
     public final T first(final Iterable<T> source) {
         if (source != null) { for (T c : source) { if (isTrue(c)) { return c; } } }

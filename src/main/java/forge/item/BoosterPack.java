@@ -3,9 +3,11 @@ package forge.item;
 import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Predicate;
 
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
+import forge.card.CardRules;
 import forge.card.CardSet;
 
 /** 
@@ -36,17 +38,39 @@ public class BoosterPack implements InventoryItemFromSet {
     @Override public String getName() { return name; }
 
     @Override public String getImageFilename() {
-        // TODO: need images for boosters
-        return null;
+        return "booster/"+cardSet.getCode()+".png";
     }
 
-    public List<CardPrinted> getCards() {
-        if (null == cards)
+    private CardPrinted getRandomBasicLand(CardSet set) {
+        return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
+                             CardRules.Predicates.Presets.isBasicLand,
+                             CardPrinted.fnGetRules).random(CardDb.instance().getAllCards());
+    }
+
+    private CardPrinted getLandFromNearestSet()
+    {
+        List<CardSet> sets = SetUtils.getAllSets();
+        int iThisSet = sets.indexOf(cardSet);
+        for (int iSet = iThisSet; iSet < sets.size(); iSet++)
         {
-            BoosterGenerator gen = new BoosterGenerator(cardSet);
-            cards = gen.getBoosterPack();
-            // TODO: Add land here!
+            CardPrinted land = getRandomBasicLand(sets.get(iSet));
+            if (null != land) return land;
         }
+        // if not found (though that's impossible)
+        return getRandomBasicLand(SetUtils.getSetByCode("M12"));
+    }
+
+    private void generate() {
+        BoosterGenerator gen = new BoosterGenerator(cardSet);
+        cards = gen.getBoosterPack();
+        
+        int cntLands = cardSet.getBoosterData().getLand();
+        if (cntLands > 0) {
+            cards.add(getLandFromNearestSet());
+        }
+    }
+    public List<CardPrinted> getCards() {
+        if (null == cards) { generate(); } 
         return cards;
     }
 
@@ -75,12 +99,9 @@ public class BoosterPack implements InventoryItemFromSet {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.InventoryItem#getType()
-     */
-    @Override
-    public String getType() {
-        return "Booster Pack";
+    @Override public String getType() { return "Booster Pack"; }
+    @Override public Object clone() {
+        return new BoosterPack(cardSet); // it's ok to share a reference to cardSet which is static anyway
     }
     
     

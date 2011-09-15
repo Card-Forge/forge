@@ -32,7 +32,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
-//import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -148,9 +147,9 @@ public final class DeckEditorShop extends DeckEditorBase {
         columns.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceGet));
         top.setup(columns, cardView);
 
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("#Dk", 30, fnDeckCompare, fnDeckGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 30, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceSellGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, fnDeckCompare, fnDeckGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 35, fnPriceCompare, fnPriceSellGet));
         bottom.setup(columnsBelow, cardView);
 
         this.setSize(1024, 768);
@@ -276,7 +275,7 @@ public final class DeckEditorShop extends DeckEditorBase {
                 questData.getCards().buyCard(card, value);
             } else if (item instanceof BoosterPack) {
                 top.removeCard(item);
-                BoosterPack booster = (BoosterPack) item;
+                BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
                 questData.getCards().buyBooster(booster, value);
                 List<CardPrinted> newCards = booster.getCards();
                 for (CardPrinted card : newCards) { bottom.addCard(card); }

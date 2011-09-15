@@ -89,7 +89,8 @@ public class ImageCache implements NewConstants {
                         } else path = ForgeProps.getFile(IMAGE_BASE);
 
                         File file = null;
-                        file = new File(path, key + ".jpg");
+                        String fName = key.endsWith(".png") ? key : key + ".jpg";
+                        file = new File(path, fName);
                         if (!file.exists()) {
                             //DEBUG
                             //System.out.println("File not found, no image created: " + file);

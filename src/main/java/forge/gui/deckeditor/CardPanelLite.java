@@ -28,7 +28,9 @@ public class CardPanelLite extends CardPanelBase {
 
     public void showCard(InventoryItem card) {
         picture.setCard(card);
-        detail.setCard(card != null && card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null);
+        boolean isCard = card != null && card instanceof CardPrinted;
+        detail.setVisible(isCard);
+        if (isCard) { detail.setCard(((CardPrinted) card).toForgeCard()); }
     }
 
     public Card getCard() { return detail.getCard(); }

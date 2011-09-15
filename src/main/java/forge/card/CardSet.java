@@ -80,7 +80,8 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         
         //private final String landCode;
         public BoosterData(final int nC, final int nU, final int nR, final int nS) {
-            this(nC, nU, nR, nS, CARDS_PER_BOOSTER - nC - nR - nU - nS, 68);
+            // if this booster has more that 10 cards, there must be a land in 15th slot unless it's already taken
+            this(nC, nU, nR, nS, nC + nR + nU + nS > 10 ? CARDS_PER_BOOSTER - nC - nR - nU - nS : 0, 68);
         }
 
         public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nL, final int oneFoilPer) {

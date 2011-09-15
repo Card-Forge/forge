@@ -160,16 +160,29 @@ public final class QuestUtilCards {
 
         q.shopList.clear();
         for (int i = 0; i < totalPacks; i++) {
-            q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0));
+            q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0));
         }
 
         addBasicLands(q.shopList, 10, 5);
 
+        final int BOOSTERS_T2 = 2;
+        final int BOOSTERS_EXT_BUT_T2 = 2;
+        final int BOOSTERS_MODERN_BUT_EXT = 2;
+        final int BOOSTERS_NOT_MODERN = 2;
+        
         Predicate<CardSet> filterT2 = CardSet.Predicates.isLegalInFormat(SetUtils.getStandard());
-        q.shopList.addAllCards(filterT2.random(SetUtils.getAllSets(), 2, BoosterPack.fnFromSet));
+        q.shopList.addAllCards(filterT2.random(SetUtils.getAllSets(), BOOSTERS_T2, BoosterPack.fnFromSet));
+        
         Predicate<CardSet> filterExt = CardSet.Predicates.isLegalInFormat(SetUtils.getExtended());
         Predicate<CardSet> filterExtButT2 = Predicate.and(filterExt, Predicate.not(filterT2));
-        q.shopList.addAllCards(filterExtButT2.random(SetUtils.getAllSets(), 3, BoosterPack.fnFromSet));
+        q.shopList.addAllCards(filterExtButT2.random(SetUtils.getAllSets(), BOOSTERS_EXT_BUT_T2, BoosterPack.fnFromSet));
+        
+        Predicate<CardSet> filterModern = CardSet.Predicates.isLegalInFormat(SetUtils.getModern());
+        Predicate<CardSet> filterModernButExt = Predicate.and(filterModern, Predicate.not(filterExt));
+        q.shopList.addAllCards(filterModernButExt.random(SetUtils.getAllSets(), BOOSTERS_MODERN_BUT_EXT, BoosterPack.fnFromSet));
+        
+        Predicate<CardSet> filterNotModern = Predicate.not(filterModern);
+        q.shopList.addAllCards(filterNotModern.random(SetUtils.getAllSets(), BOOSTERS_NOT_MODERN, BoosterPack.fnFromSet));
     }
 
     public ItemPool<InventoryItem> getCardpool() {
