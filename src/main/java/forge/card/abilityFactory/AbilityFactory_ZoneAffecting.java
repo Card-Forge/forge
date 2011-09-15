@@ -194,7 +194,7 @@ public class AbilityFactory_ZoneAffecting {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (CostUtil.checkCreatureSacrificeCost(abCost, source))
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, source))
                 return false;
             
             if (!CostUtil.checkLifeCost(abCost, source, 4))

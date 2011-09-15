@@ -191,7 +191,7 @@ public class AbilityFactory_Regenerate {
             if (!CostUtil.checkSacrificeCost(abCost, hostCard))
                 return false;
                 
-            if (CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
                 return false;
         }
 
@@ -551,7 +551,7 @@ public class AbilityFactory_Regenerate {
             if (!CostUtil.checkSacrificeCost(abCost, hostCard))
                 return false;
             
-            if (CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
                 return false;
             
             if (!CostUtil.checkLifeCost(abCost, hostCard, 4))

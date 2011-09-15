@@ -242,7 +242,7 @@ public class AbilityFactory_Counters {
                 return false;
             }
 
-            if (CostUtil.checkCreatureSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, source)) {
                 return false;
             }
 
