@@ -50,8 +50,22 @@ public final class BoosterUtils {
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isCommon), numCommon, colorFilters));
         cards.addAll(generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isUncommon), numUncommon, colorFilters));
+        
+        int nRares = numRare, nMythics = 0;
+        Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare); 
+        boolean haveMythics = filterMythics.any(cardpool);
+        for(int iSlot = 0; haveMythics && iSlot < numRare; iSlot++) {
+            if (MyRandom.random.nextInt(7) < 1) { // a bit higher chance to get a mythic
+                nRares--;
+                nMythics++;
+            }
+        }
+
         cards.addAll(generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.isRareOrMythic), numRare, colorFilters));
+                Predicate.and(filter, CardPrinted.Predicates.Presets.isRare), nRares, colorFilters));
+        if (nMythics > 0) {
+            cards.addAll(generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
+        }
         return cards;
     }
 

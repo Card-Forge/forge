@@ -152,7 +152,7 @@ public class BoosterGenerator {
         return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, 0, 0);
     }
     /**
-     * So many parameters needed for custom limited cardpools, 
+     * So many parameters are needed for custom limited cardpools, 
      */
     public final List<CardPrinted> getBoosterPack(final int nCom, final int nUnc, final int nRareSlots,
             final int nRares, final int nMythics, final int nSpecs, final int nAnyCard, final int nLands) {

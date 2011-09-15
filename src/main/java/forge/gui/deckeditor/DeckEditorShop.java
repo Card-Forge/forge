@@ -144,12 +144,12 @@ public final class DeckEditorShop extends DeckEditorBase {
         columns.get(2).setCellRenderer(new ManaCostRenderer());
         
         List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
-        columns.add(new TableColumnInfo<InventoryItem>("Price", 40, fnPriceCompare, fnPriceGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Price", 36, fnPriceCompare, fnPriceGet));
         top.setup(columns, cardView);
 
         columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, fnDeckCompare, fnDeckGet));
         columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, questData.getCards().fnNewCompare, questData.getCards().fnNewGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 35, fnPriceCompare, fnPriceSellGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 36, fnPriceCompare, fnPriceSellGet));
         bottom.setup(columnsBelow, cardView);
 
         this.setSize(1024, 768);
