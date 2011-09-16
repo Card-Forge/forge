@@ -1471,6 +1471,7 @@ res/cardsfolder/c/corrupt_eunuchs.txt svneol=native#text/plain
 res/cardsfolder/c/corrupt_official.txt svneol=native#text/plain
 res/cardsfolder/c/corrupted_conscience.txt svneol=native#text/plain
 res/cardsfolder/c/corrupted_harvester.txt svneol=native#text/plain
+res/cardsfolder/c/corrupted_roots.txt -text
 res/cardsfolder/c/corrupted_zendikon.txt svneol=native#text/plain
 res/cardsfolder/c/cosis_ravager.txt svneol=native#text/plain
 res/cardsfolder/c/cosis_trickster.txt svneol=native#text/plain
