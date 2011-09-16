@@ -627,8 +627,10 @@ public abstract class Player extends GameEntity {
      * @param num a int.
      */
     public void addPoisonCounters(int num) {
-        poisonCounters += num;
-        this.updateObservers();
+        if(!this.hasKeyword("You can't get poison counters")) {
+            poisonCounters += num;
+            this.updateObservers();
+        }
     }
 
     /**

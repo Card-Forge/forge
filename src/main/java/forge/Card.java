@@ -822,6 +822,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return;
         }
+        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
+            return;
+        }
         if (counters.containsKey(counterName)) {
             Integer aux = counters.get(counterName) + n;
             counters.put(counterName, aux);
@@ -880,6 +883,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addCounter(final Counters counterName, final int n) {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
+            return;
+        }
+        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
             return;
         }
         int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
@@ -1013,7 +1019,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return;
         }
-
+        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
+            return;
+        }
         // sometimes you just need to set the value without being affected by DoublingSeason
         if (bSetValue) {
             counters.put(counterName, Integer.valueOf(n));

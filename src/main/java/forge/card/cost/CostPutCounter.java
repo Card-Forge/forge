@@ -52,6 +52,9 @@ public class CostPutCounter extends CostPart {
         if(source.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
+        if (source.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counter.equals(Counters.M1M1)) {
+            return false;
+        }
         
         return true;
     }

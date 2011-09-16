@@ -200,7 +200,7 @@ public class AbilityFactory_Counters {
         final Card source = sa.getSourceCard();
         CardList list;
         Card choice = null;
-        String type = params.get("CounterType");
+        final String type = params.get("CounterType");
         String amountStr = params.get("CounterNum");
 
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
@@ -210,7 +210,8 @@ public class AbilityFactory_Counters {
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return CardFactoryUtil.canTarget(source, c)
-                    && !c.hasKeyword("CARDNAME can't have counters placed on it.");
+                    && !c.hasKeyword("CARDNAME can't have counters placed on it.")
+                    && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
         });
 
@@ -1990,7 +1991,8 @@ public class AbilityFactory_Counters {
 
         if (null != source && null != dest) {
             if (source.getCounters(cType) >= amount) {
-                if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")) {
+                if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
+                        && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType.equals("M1M1"))) {
                     dest.addCounter(cType, amount);
                     source.subtractCounter(cType, amount);
                 }
