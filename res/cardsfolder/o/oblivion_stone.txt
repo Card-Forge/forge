@@ -1,0 +1,14 @@
+Name:Oblivion Stone
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ PutCounter | Cost$ 4 T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ FATE | CounterNum$ 1 | SpellDescription$ Put a fate counter on target permanent.
+A:AB$ DestroyAll | Cost$ 5 T Sac<1/CARDNAME> | ValidCards$ Permanent.countersLT1FATE | SubAbility$ DBRemove | SpellDescription$ Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents.
+SVar:DBRemove:DB$ RemoveCounterAll | Cost$ 0 | ValidCards$ Permanent | CounterType$ FATE | AllCounters$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oblivion_stone.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/222.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/254.jpg
+Oracle:{4}, {T}: Put a fate counter on target permanent.\n{5}, {T}, Sacrifice Oblivion Stone: Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents.
+End
