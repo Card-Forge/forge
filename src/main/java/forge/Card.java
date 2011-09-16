@@ -5046,6 +5046,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (Property.startsWith("leastPower")) {
+            CardList list = AllZoneUtil.getCreaturesInPlay();
+            for (Card crd : list) {
+                if (crd.getNetAttack() < getNetAttack()) {
+                    return false;
+                }
+            }
         } else if (Property.startsWith("greatestCMC")) {
             CardList list = AllZoneUtil.getCreaturesInPlay();
             for (Card crd : list) {
