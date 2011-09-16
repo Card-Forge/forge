@@ -3,8 +3,8 @@ ManaCost:3 U U U
 Types:Enchantment Aura
 Text:You control enchanted permanent.
 K:Enchant permanent
-A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Permanent | AILogic$ GainControl
-T:Mode$ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.AttachedBy+tapped | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is tapped, untap it.
+A:SP$ Attach | Cost$ 3 U U U | ValidTgts$ Permanent | AILogic$ GainControl
+T:Mode$ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is tapped, untap it.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
