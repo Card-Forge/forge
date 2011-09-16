@@ -200,6 +200,14 @@ Comment=
 - Only register a mouse listener on the stack objects that are from optional trigger objects.
 - Mark stack items from optional trigger objects.
 - Added the recent commit logs to changes.txt.
+- added protection against selection of sets not yielding boosters
+- Converted the rest of the cards with continuous static abilities to use AddHiddenKeyword.
+- Deck sections can be arranged in any order
+- booster price - data
+- read price for boosters
+- Fixed a couple of typos that prevented the AI from using AF Draw, PutCounter, Regenerate and RegenerateAll abilities.
+- You can no longer use cards with "CARDNAME can't have counters placed on it." to pay PutCounter costs.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
