@@ -42,7 +42,7 @@ public class DeckManager {
     };
 
     /** Constant <code>DCKFileFilter</code> */
-    private static FilenameFilter DCKFileFilter = new FilenameFilter() {
+    public static final FilenameFilter DCKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             return name.endsWith(".dck");
         }
