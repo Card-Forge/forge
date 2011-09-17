@@ -4,6 +4,7 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.input.Input;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * <p>PhaseUtil class.</p>
@@ -425,7 +426,11 @@ public class PhaseUtil {
             // Make sure exalted effects get applied only once per combat
 
         }
-
+        
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Attackers", list);
+        AllZone.getTriggerHandler().runTrigger("AttackersDeclared", runParams);
+        
         for (Card c : list)
             CombatUtil.checkDeclareAttackers(c);
         AllZone.getStack().unfreezeStack();

@@ -106,6 +106,8 @@ public class TriggerHandler {
             ret = new Trigger_Always(mapParams, host, intrinsic);
         } else if (mode.equals("AttackerBlocked")) {
             ret = new Trigger_AttackerBlocked(mapParams, host, intrinsic);
+        } else if (mode.equals("AttackersDeclared")) {
+            ret = new Trigger_AttackersDeclared(mapParams, host, intrinsic);
         } else if (mode.equals("AttackerUnblocked")) {
             ret = new Trigger_AttackerUnblocked(mapParams, host, intrinsic);
         } else if (mode.equals("Attacks")) {

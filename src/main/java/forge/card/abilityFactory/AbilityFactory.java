@@ -1343,6 +1343,12 @@ public class AbilityFactory {
             if (crd instanceof Card) {
                 c = AllZoneUtil.getCardState((Card) crd);
             }
+            else if (crd instanceof CardList) {
+                for(Card cardItem : (CardList)crd)
+                {
+                    cards.add(cardItem);
+                }
+            }
         } else if (defined.equals("Remembered")) {
             for (Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
