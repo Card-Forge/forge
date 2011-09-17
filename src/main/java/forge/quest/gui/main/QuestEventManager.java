@@ -5,6 +5,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.FileUtil;
+import forge.Player;
 import forge.deck.DeckManager;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -141,48 +142,20 @@ public class QuestEventManager {
             else if(key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
                 String[] names = value.split("\\|");
                 CardList templist = new CardList();
-                Card tempcard;
                 
                 for(String n : names) { 
-                    // Token card creation
-                    if(n.substring(0,5).equals("TOKEN")) {
-                        tempcard = QuestUtil.createToken(n);
-                        tempcard.addController(AllZone.getHumanPlayer());
-                        tempcard.setOwner(AllZone.getHumanPlayer());
-                        templist.add(tempcard);
-                    }
-                    // Standard card creation
-                    else {
-                        tempcard = AllZone.getCardFactory().getCard(n, AllZone.getHumanPlayer());
-                        tempcard.setCurSetCode(tempcard.getMostRecentSet());
-                        tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
-                        templist.add(tempcard); 
-                    }
+                    templist.add(readExtraCard(n, AllZone.getHumanPlayer()));
                 }
-                
+
                 qq.humanExtraCards = templist;
             }
             // AI extra card list assembled here.
             else if(key.equalsIgnoreCase("AIExtras") && !value.equals("")) {
                 String[] names = value.split("\\|");
                 CardList templist = new CardList();
-                Card tempcard;
-                
+
                 for(String n : names) { 
-                    // Token card creation
-                    if(n.substring(0,5).equals("TOKEN")) {
-                        tempcard = QuestUtil.createToken(n);
-                        tempcard.addController(AllZone.getComputerPlayer());
-                        tempcard.setOwner(AllZone.getComputerPlayer());
-                        templist.add(tempcard);
-                    }
-                    // Standard card creation
-                    else {
-                        tempcard = AllZone.getCardFactory().getCard(n, AllZone.getComputerPlayer());
-                        tempcard.setCurSetCode(tempcard.getMostRecentSet());
-                        tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
-                        templist.add(tempcard); 
-                    }
+                    templist.add(readExtraCard(n, AllZone.getComputerPlayer()));
                 }
                 
                 qq.aiExtraCards = templist;
@@ -194,6 +167,25 @@ public class QuestEventManager {
             } 
         }        
     }
+    
+
+    private Card readExtraCard(String name, Player owner) {
+        // Token card creation
+        Card tempcard;
+        if(name.startsWith("TOKEN")) {
+            tempcard = QuestUtil.createToken(name);
+            tempcard.addController(owner);
+            tempcard.setOwner(owner);
+        }
+        // Standard card creation
+        else {
+            tempcard = AllZone.getCardFactory().getCard(name, owner);
+            tempcard.setCurSetCode(tempcard.getMostRecentSet());
+            tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
+        }
+        return tempcard;
+    }
+    
     
     /**
      * <p>assembleEventMetadata.</p>
