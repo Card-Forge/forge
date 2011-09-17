@@ -1050,6 +1050,7 @@ res/cardsfolder/c/calciderm.txt svneol=native#text/plain
 res/cardsfolder/c/calciform_pools.txt svneol=native#text/plain
 res/cardsfolder/c/calcite_snapper.txt svneol=native#text/plain
 res/cardsfolder/c/caldera_hellion.txt svneol=native#text/plain
+res/cardsfolder/c/caldera_kavu.txt -text
 res/cardsfolder/c/caldera_lake.txt svneol=native#text/plain
 res/cardsfolder/c/call_for_blood.txt svneol=native#text/plain
 res/cardsfolder/c/call_of_the_herd.txt svneol=native#text/plain
@@ -3984,6 +3985,7 @@ res/cardsfolder/k/kathari_bomber.txt svneol=native#text/plain
 res/cardsfolder/k/kathari_remnant.txt svneol=native#text/plain
 res/cardsfolder/k/kathari_screecher.txt svneol=native#text/plain
 res/cardsfolder/k/kavu_aggressor.txt svneol=native#text/plain
+res/cardsfolder/k/kavu_chameleon.txt -text
 res/cardsfolder/k/kavu_climber.txt svneol=native#text/plain
 res/cardsfolder/k/kavu_glider.txt svneol=native#text/plain
 res/cardsfolder/k/kavu_howler.txt svneol=native#text/plain
@@ -5911,6 +5913,7 @@ res/cardsfolder/r/rain_of_embers.txt svneol=native#text/plain
 res/cardsfolder/r/rain_of_rust.txt svneol=native#text/plain
 res/cardsfolder/r/rain_of_salt.txt svneol=native#text/plain
 res/cardsfolder/r/rain_of_tears.txt svneol=native#text/plain
+res/cardsfolder/r/rainbow_crow.txt -text
 res/cardsfolder/r/rainbow_vale.txt svneol=native#text/plain
 res/cardsfolder/r/raise_dead.txt svneol=native#text/plain
 res/cardsfolder/r/raise_the_alarm.txt svneol=native#text/plain
