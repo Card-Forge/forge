@@ -111,8 +111,6 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Winnower_Patrol();
         upkeep_Wolf_Skull_Shaman();
 
-        upkeep_Sleeper_Agent();
-
         // upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 
         //Win / Lose
@@ -2518,31 +2516,6 @@ public class Upkeep implements java.io.Serializable {
 
         } // if
     } // upkeep_Barren_Glory
-
-    /**
-     * <p>upkeep_Sleeper_Agent.</p>
-     */
-    private static void upkeep_Sleeper_Agent() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Sleeper Agent");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card fCard = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    player.addDamage(2, fCard);
-                }
-            };
-
-            ability.setStackDescription("Sleeper Agent deals 2 damage to its controller.");
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        }
-    } //upkeep_Sleeper_Agent
 
     /**
      * <p>upkeep_Shapeshifter.</p>
