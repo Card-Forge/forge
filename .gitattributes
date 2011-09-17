@@ -8126,6 +8126,7 @@ res/cardsfolder/u/umezawas_jitte.txt svneol=native#text/plain
 res/cardsfolder/u/unbender_tine.txt svneol=native#text/plain
 res/cardsfolder/u/unblinking_bleb.txt svneol=native#text/plain
 res/cardsfolder/u/unburden.txt svneol=native#text/plain
+res/cardsfolder/u/unchecked_growth.txt -text
 res/cardsfolder/u/uncle_istvan.txt svneol=native#text/plain
 res/cardsfolder/u/uncontrollable_anger.txt svneol=native#text/plain
 res/cardsfolder/u/uncontrolled_infestation.txt svneol=native#text/plain
@@ -9357,6 +9358,7 @@ res/quest/decks/Terminator[!!-~]3.dck -text
 res/quest/decks/The[!!-~]Great[!!-~]Gazoo[!!-~]3.dck -text
 res/quest/decks/The[!!-~]Thing[!!-~]2.dck -text
 res/quest/decks/Tom[!!-~]Bombadil[!!-~]3.dck -text
+res/quest/decks/Totoro[!!-~]1.dck -text
 res/quest/decks/Totoro[!!-~]2.dck -text
 res/quest/decks/Treebeard[!!-~]1.dck -text
 res/quest/decks/Treebeard[!!-~]2.dck -text

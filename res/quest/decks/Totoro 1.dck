@@ -1,0 +1,43 @@
+[metadata]
+Name=Totoro 1
+DisplayName=Totoro
+Difficulty=easy
+Description=UBG deck with spirits and arcane spells
+Deck Type=constructed
+Icon=
+[main]
+6 Forest
+4 Swamp
+4 Island
+4 Terramorphic Expanse
+4 Evolving Wilds
+2 Waterveil Cavern
+2 Briarknit Kami
+1 Crawling Filth
+2 Elder Pine of Jukai
+1 Forked-Branch Garami
+2 Gibbering Kami
+1 Guardian of Solitude
+1 Harbinger of Spring
+1 Kami of Empty Graves
+1 Kami of Lunacy
+2 Kami of the Hunt
+2 Kami of the Waning Moon
+2 Loam Dweller
+1 Nightsoil Kami
+1 Orbweaver Kumo
+1 Scaled Hulk
+1 Sire of the Storm
+1 Thief of Hope
+2 Venerable Kumo
+1 Baku Altar
+1 Eye of Nowhere
+1 Feast of Worms
+1 Joyous Respite
+1 Kodama's Reach
+1 Pull Under
+2 Ribbons of the Reikai
+1 Unchecked Growth
+1 Uproot
+1 Waking Nightmare
+[sideboard]
