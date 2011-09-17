@@ -1,116 +1,114 @@
 package forge.quest.gui.main;
 
-import forge.AllZone;
-import forge.Quest_Assignment;
-import forge.ReadQuest_Assignment;
-import forge.gui.GuiUtils;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+import forge.CardList;
+import forge.item.CardPrinted;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * <p>QuestQuest class.</p>
  * 
- * Manages QuestSelectablePanel instances for "quest" style matches.
- *
- * @author Forge
- * @version $Id$
+ * MODEL - A single quest event data instance, including meta, 
+ * deck, and quest-specific properties.
+ * 
  */
-public class QuestQuest extends QuestSelectablePanel {
-    /** Constant <code>serialVersionUID=-162817410327650160L</code> */
-    private static final long serialVersionUID = -162817410327650160L;
+public class QuestQuest extends QuestEvent {
+    // ID (default -1, should be explicitly set at later time.)
+    public int id = -1;
+    
+    // Default vals if none provided for this ID
+    public int     aiLife              = 25;
+    public int     creditsReward       = 100;
+    public String  cardReward          = "1 colorless rare";
+    public boolean repeatable          = false;
+    public int     winsReqd            = 20;
 
-    Quest_Assignment assignment;
+    // Other cards used in assignment: starting, and reward.
+    public CardList humanExtraCards    = new CardList();
+    public CardList aiExtraCards       = new CardList();
+    public List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
 
     /**
-     * <p>Constructor for QuestQuest.</p>
+     * <p>getAILife.</p>
      *
-     * @param assignment a {@link forge.Quest_Assignment} object.
+     * @return {@link java.lang.Integer}.
      */
-    public QuestQuest(Quest_Assignment assignment) {
-        super(assignment.getName(), assignment.getDifficulty(), assignment.getDesc(), GuiUtils.getIconFromFile(assignment.getIconName()));
-        this.assignment = assignment;
-
-        JLabel repeatabilityLabel;
-        if (assignment.isRepeatable()) {
-            repeatabilityLabel = new JLabel("This quest is repeatable");
-        } else {
-            repeatabilityLabel = new JLabel("This quest is not repeatable");
-        }
-
-        GuiUtils.addGap(centerPanel);
-        this.centerPanel.add(repeatabilityLabel);
+    public final int getAILife() { 
+        return aiLife; 
     }
-
+    
     /**
-     * <p>getQuests.</p>
+     * <p>getCardReward.</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return {@link java.lang.String}.
      */
-    public static List<QuestQuest> getQuests() {
-        List<QuestQuest> quests = new ArrayList<QuestQuest>();
-
-        List<Quest_Assignment> questList = readQuests();
-
-        for (Quest_Assignment assignment : questList) {
-            quests.add(new QuestQuest(assignment));
-        }
-        return quests;
+    public final String getCardReward() { 
+        return cardReward; 
     }
-
+    
     /**
-     * <p>readQuests.</p>
+     * <p>getCreditsReward.</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return {@link java.lang.Integer}.
      */
-    private static List<Quest_Assignment> readQuests() {
-        forge.quest.data.QuestData questData = AllZone.getQuestData();
-        ReadQuest_Assignment read = new ReadQuest_Assignment(ForgeProps.getFile(NewConstants.QUEST.QUESTS), questData);
-        read.run();
-
-        List<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
-
-        if (questData.getAvailableQuests() != null && questData.getAvailableQuests().size() > 0) {
-            List<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
-            questsToDisplay = availableQuests;
-
-        } else {
-            List<Quest_Assignment> allAvailableQuests = read.getAvailableQuests();
-
-            List<Integer> availableInts = new ArrayList<Integer>();
-
-            int maxQuests = questData.getWin() / 10;
-            if (maxQuests > 5) {
-                maxQuests = 5;
-            }
-            if (allAvailableQuests.size() < maxQuests) {
-                maxQuests = allAvailableQuests.size();
-            }
-
-            Collections.shuffle(allAvailableQuests);
-
-            for (int i = 0; i < maxQuests; i++) {
-                Quest_Assignment qa = allAvailableQuests.get(i);
-
-                availableInts.add(qa.getId());
-                questsToDisplay.add(qa);
-            }
-            questData.setAvailableQuests(availableInts);
-            questData.saveData();
-        }//else
-        return questsToDisplay;
+    public final int getCreditsReward() { 
+        return creditsReward; 
     }
-
+    
     /**
-     * <p>getQuestAssignment.</p>
+     * <p>getId.</p>
      *
-     * @return a {@link forge.Quest_Assignment} object.
+     * @return {@link java.lang.Integer}.
      */
-    public Quest_Assignment getQuestAssignment() {
-        return assignment;
+    public final int getId() { 
+        return id; 
+    }
+    
+    /**
+     * <p>getRepeatable.</p>
+     *
+     * @return {@link java.lang.Boolean}.
+     */
+    public final boolean getRepeatable() { 
+        return repeatable; 
+    }
+    
+    /**
+     * <p>getWinsReqd.</p>
+     *
+     * @return {@link java.lang.Integer}.
+     */
+    public final int getWinsReqd() { 
+        return winsReqd; 
+    }
+    
+    /**
+     * <p>getAIExtraCards.</p>
+     * Retrieves list of cards AI has in play at the beginning of this quest.
+     *
+     * @return 
+     */
+    public final CardList getAIExtraCards() { 
+        return aiExtraCards; 
+    }
+    
+    /**
+     * <p>getHumanExtraCards.</p>
+     * Retrieves list of cards human has in play at the beginning of this quest.
+     *
+     * @return 
+     */
+    public final CardList getHumanExtraCards() { 
+        return humanExtraCards; 
+    }
+    
+    /**
+     * <p>getCardRewardList.</p>
+     *
+     * @return 
+     */
+    public final List<CardPrinted> getCardRewardList() { 
+        return cardRewardList; 
     }
 }

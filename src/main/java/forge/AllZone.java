@@ -17,6 +17,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
+import forge.quest.gui.main.QuestQuest;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -42,7 +43,7 @@ public final class AllZone implements NewConstants {
     private static forge.quest.data.QuestData questData = null;
 
     /** Global <code>QuestAssignment</code>. */
-    private static Quest_Assignment questAssignment = null;
+    private static QuestQuest questquest = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -136,8 +137,8 @@ public final class AllZone implements NewConstants {
      * @return a {@link forge.Quest_Assignment} object.
      * @since 1.0.15
      */
-    public static Quest_Assignment getQuestAssignment() {
-        return questAssignment;
+    public static QuestQuest getQuestQuest() {
+        return questquest;
     }
 
     /**
@@ -146,8 +147,8 @@ public final class AllZone implements NewConstants {
      * @param assignment a {@link forge.Quest_Assignment} object.
      * @since 1.0.15
      */
-    public static void setQuestAssignment(final Quest_Assignment assignment) {
-        questAssignment = assignment;
+    public static void setQuestQuest(final QuestQuest q) {
+        questquest = q;
     }
 
     /**

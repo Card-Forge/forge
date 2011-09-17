@@ -17,6 +17,7 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
+import forge.quest.gui.main.QuestQuest;
 import forge.view.swing.OldGuiNewGame;
 import net.miginfocom.swing.MigLayout;
 
@@ -65,7 +66,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     private class WinLoseModel {
         public QuestMatchState match;
         public QuestData quest;
-        public Quest_Assignment qa;
+        public QuestQuest qq;
     }
 
     private WinLoseModel model;
@@ -77,11 +78,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param quest a QuestData object
      * @param qa a Quest_Assignment object
      */
-    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final Quest_Assignment qa) {
+    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final QuestQuest qq) {
         model = new WinLoseModel();
         model.match = matchState;
         model.quest = quest;
-        model.qa = qa;
+        model.qq = qq;
 
         try {
             jbInit();
@@ -186,25 +187,25 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     void prepareForNextRound() {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
-            if (model.qa != null) {
+            if (model.qq != null) {
                 if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }
             }
             //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
             //humanList, computerList, humanLife, computerLife);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qa);
+            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qq);
             CardList computerList = new CardList();
 
 
             int humanLife = model.quest.getLife() + extraLife;
             int computerLife = 20;
-            if (model.qa != null) {
-                computerLife = model.qa.getComputerLife();
+            if (model.qq != null) {
+                computerLife = model.qq.getAILife();
             }
 
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
-                    humanList, computerList, humanLife, computerLife, model.qa);
+                    humanList, computerList, humanLife, computerLife, model.qq);
         } else {
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
@@ -362,7 +363,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             giveQuestRewards(wonMatch);
 
             model.match.reset();
-            AllZone.setQuestAssignment(null);
+            AllZone.setQuestQuest(null);
 
             model.quest.saveData();
 
@@ -440,11 +441,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
 
         // Rewards from QuestAssignment
-        if (wonMatch && model.qa != null) {
+        if (wonMatch && model.qq != null) {
             model.quest.addQuestsPlayed();
 
-            List<CardPrinted> questRewardCards = model.qa.getCardRewardList();
-            long questRewardCredits = model.qa.getCreditsReward();
+            List<CardPrinted> questRewardCards = model.qq.getCardRewardList();
+            long questRewardCredits = model.qq.getCreditsReward();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Quest Completed - \r\n");
@@ -465,7 +466,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
             String fileName = "BoxIcon.png";
             ImageIcon icon = getIcon(fileName);
-            String title = "Quest Rewards for " + model.qa.getName();
+            String title = "Quest Rewards for " + model.qq.getTitle();
             JOptionPane.showMessageDialog(null, sb.toString(), title, JOptionPane.INFORMATION_MESSAGE, icon);
         }
         /*

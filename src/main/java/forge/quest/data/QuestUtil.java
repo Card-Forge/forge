@@ -3,21 +3,21 @@ package forge.quest.data;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Quest_Assignment;
 import forge.card.CardRarity;
 import forge.card.BoosterUtils;
 import forge.item.CardPrinted;
+import forge.quest.gui.main.QuestQuest;
 
 import java.util.List;
 
 /**
  * <p>QuestUtil class.</p>
+ * MODEL - Static utility methods to help with minor tasks around Quest.
  *
  * @author Forge
  * @version $Id$
  */
 public class QuestUtil {
-
     /**
      * <p>getComputerStartingCards.</p>
      *
@@ -36,11 +36,11 @@ public class QuestUtil {
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestData qd, Quest_Assignment qa) {
+    public static CardList getComputerStartingCards(final QuestData qd, QuestQuest qq) {
         CardList list = new CardList();
         
-        if (qa != null) {
-            list.addAll(qa.getAIExtraCards());
+        if (qq != null) {
+            list.addAll(qq.getAIExtraCards());
         }
         return list;
     }
@@ -75,11 +75,11 @@ public class QuestUtil {
      * @param qa a {@link forge.Quest_Assignment} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestData qd, Quest_Assignment qa) {
+    public static CardList getHumanStartingCards(final QuestData qd, QuestQuest qq) {
         CardList list = getHumanStartingCards(qd);
         
-        if (qa != null) {
-            list.addAll(qa.getHumanExtraCards());
+        if (qq != null) {
+            list.addAll(qq.getHumanExtraCards());
         }
 
         return list;
@@ -162,18 +162,6 @@ public class QuestUtil {
         }
         
         return BoosterUtils.generateCards(qty, rar, col);
-    }
-    
-    /**
-     * <p>setupQuest.</p>
-     * Assembled hard-coded quest options.
-     * All non-deck-specific handling now takes place in quests.txt.
-     * 
-     * @deprecated 
-     * @param qa
-     */
-    public static void setupQuest(Quest_Assignment qa) {
-    
     }
 
 } //QuestUtil
