@@ -1129,8 +1129,8 @@ public final class GuiDisplayUtil implements NewConstants {
                 }
             }
 
-            if (card.isEnchanting()) {
-                toPanel.attachedToPanel = p.getCardPanel(card.getEnchanting().get(0).getUniqueNumber());
+            if (card.isEnchantingCard()) {
+                toPanel.attachedToPanel = p.getCardPanel(card.getEnchantingCard().getUniqueNumber());
             } else if (card.isEquipping()) {
                 toPanel.attachedToPanel = p.getCardPanel(card.getEquipping().get(0).getUniqueNumber());
             } else {

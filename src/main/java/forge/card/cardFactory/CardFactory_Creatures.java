@@ -1744,7 +1744,7 @@ public class CardFactory_Creatures {
                                                     if (choices.contains(card)) {
 
                                                         if (AllZoneUtil.isCardInPlay(card)) {
-                                                            c.enchantCard(card);
+                                                            c.enchantEntity(card);
                                                             stop();
                                                         }
                                                     }

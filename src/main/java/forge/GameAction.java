@@ -738,29 +738,44 @@ public class GameAction {
 
                 if (c.isAura()) {
                 	// Check if Card Aura is attached to is a legal target
-                    for (int i = 0; i < c.getEnchanting().size(); i++) {
-                        Card perm = c.getEnchanting().get(i);
-
-                        SpellAbility sa = c.getSpellPermanent();
-                        Target tgt = null;
-                        if (sa != null) {
-                            tgt = sa.getTarget();
-                        }
-
+                    GameEntity entity = c.getEnchanting();
+                    SpellAbility sa = c.getSpellPermanent();
+                    Target tgt = null;
+                    if (sa != null) {
+                        tgt = sa.getTarget();
+                    }
+                    
+                    if (entity instanceof Card){
+                        Card perm = (Card)entity;
                         // I think the Keyword checks might be superfluous with the isValidCard check
                         if (!AllZoneUtil.isCardInPlay(perm)
                                 || CardFactoryUtil.hasProtectionFrom(c, perm)
                                 || ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature"))
                                 && !perm.isCreature())
                                 || (c.hasKeyword("Enchant tapped creature") && perm.isUntapped())
-                                || (tgt != null && !perm.isValidCard(tgt.getValidTgts(), c.getController(), c)))
-                        {
-
-                            c.unEnchantCard(perm);
+                                || (tgt != null && !perm.isValidCard(tgt.getValidTgts(), c.getController(), c))){
+                            c.unEnchantEntity(perm);
                             moveToGraveyard(c);
                             checkAgain = true;
                         }
                     }
+                    else{
+                        Player pl = (Player)entity;
+                        boolean invalid = false;
+                        
+                        if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().isPlayer(pl)){
+                            invalid = true;
+                        }
+                        else{
+                         // TODO: Check Player Protection once it's added. 
+                        }
+                        if (invalid){
+                            c.unEnchantEntity(pl);
+                            moveToGraveyard(c);
+                            checkAgain = true;
+                        }
+                    }
+                    
                 } //if isAura
 
                 if (c.isCreature()) {

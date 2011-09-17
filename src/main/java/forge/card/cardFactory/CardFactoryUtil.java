@@ -2850,8 +2850,9 @@ public class CardFactoryUtil {
         // count total number of aura enchanting card that aura is attached to
         if (l[0].contains("AllAurasEnchanting")) {
             int numAuras = 0;
-            if (c.getEnchanting().size() != 0) {
-                numAuras = c.getEnchantingCard().getEnchantedBy().size();
+            Card aura = c.getEnchantingCard();
+            if (aura != null){
+                numAuras = aura.getEnchantedBy().size();
             }
             return doXMath(numAuras, m, c);
         }

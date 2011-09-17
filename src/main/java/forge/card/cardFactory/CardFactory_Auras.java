@@ -150,7 +150,7 @@ class CardFactory_Auras {
                     if (AllZoneUtil.isCardInPlay(c)
                             && CardFactoryUtil.canTarget(card, c))
                     {
-                        card.enchantCard(c);
+                        card.enchantEntity(c);
                     }
 
                 } //resolve()
@@ -171,7 +171,7 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
+                        Card crd = card.getEnchantingCard();
                         ArrayList<Card> seas = crd.getEnchantedBy();
                         int count = 0;
                         for (int i = 0; i < seas.size(); i++) {
@@ -210,7 +210,7 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
+                        Card crd = card.getEnchantingCard();
                         ArrayList<Card> seas = crd.getEnchantedBy();
                         int count = 0;
                         for (int i = 0; i < seas.size(); i++) {
@@ -250,8 +250,8 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
+                        Card crd = card.getEnchantingCard();
+                        card.unEnchantEntity(crd);
                     }
                 }
             };
@@ -319,7 +319,7 @@ class CardFactory_Auras {
                     if (AllZoneUtil.isCardInPlay(c)
                             && CardFactoryUtil.canTarget(card, c))
                     {
-                        card.enchantCard(c);
+                        card.enchantEntity(c);
                         Log.debug("Enchanted: " + getTargetCard());
                     }
                 } //resolve()
@@ -334,7 +334,7 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
+                        Card crd = card.getEnchantingCard();
                         if (crd.hasKeyword("Flying")) {
                             badTarget[0] = false;
                             crd.addDamage(2, card);
@@ -355,7 +355,7 @@ class CardFactory_Auras {
                     if (card.isEnchanting()
                             && !badTarget[0])
                     {
-                        Card crd = card.getEnchanting().get(0);
+                        Card crd = card.getEnchantingCard();
                         crd.addIntrinsicKeyword("Flying");
                     }
                 } //execute()
@@ -367,8 +367,8 @@ class CardFactory_Auras {
 
                 public void execute() {
                     if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
+                        Card crd = card.getEnchantingCard();
+                        card.unEnchantEntity(crd);
                     }
                 }
             };
@@ -429,7 +429,7 @@ class CardFactory_Auras {
                     if (AllZoneUtil.isCardInPlay(c)
                             && CardFactoryUtil.canTarget(aura, c))
                     {
-                        aura.enchantCard(c);
+                        aura.enchantEntity(c);
                     }
                 } //resolve()
             }; //SpellAbility
@@ -523,7 +523,7 @@ class CardFactory_Auras {
                     if (cardName.equals("Dance of the Dead")) {
                         animated.tap();
                     }
-                    card.enchantCard(animated);    // Attach before Targeting so detach Command will trigger
+                    card.enchantEntity(animated);    // Attach before Targeting so detach Command will trigger
 
                     if (CardFactoryUtil.hasProtectionFrom(card, animated)) {
                         // Animated a creature with protection

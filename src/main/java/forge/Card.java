@@ -55,10 +55,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     //if this card is of the type equipment, what card is it currently equipping?
     private ArrayList<Card> equipping = new ArrayList<Card>();
     //which auras enchanted this card?
-    private ArrayList<Card> enchantedBy = new ArrayList<Card>();
-    //enchanting size will always be 0 or 1
-    //if this card is an Aura, what card is it enchanting?
-    private ArrayList<Card> enchanting = new ArrayList<Card>();
+
+    //if this card is an Aura, what Entity is it enchanting?
+    private GameEntity enchanting = null;
     private ArrayList<String> type = new ArrayList<String>();
     private ArrayList<String> prevType = new ArrayList<String>();
     private ArrayList<String> choicesMade = new ArrayList<String>();
@@ -3037,29 +3036,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>Getter for the field <code>enchantedBy</code>.</p>
-     *
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<Card> getEnchantedBy() {
-        return enchantedBy;
-    }
-
-    /**
-     * <p>Setter for the field <code>enchantedBy</code>.</p>
-     *
-     * @param list a {@link java.util.ArrayList} object.
-     */
-    public final void setEnchantedBy(final ArrayList<Card> list) {
-        enchantedBy = list;
-    }
-
-    /**
      * <p>Getter for the field <code>enchanting</code>.</p>
      *
-     * @return a {@link java.util.ArrayList} object.
+     * @return a {@link forge.enchanting} object.
      */
-    public final ArrayList<Card> getEnchanting() {
+    public final GameEntity getEnchanting() {
         return enchanting;
     }
 
@@ -3069,10 +3050,22 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.Card} object.
      */
     public final Card getEnchantingCard() {
-        if (enchanting.size() == 0) {
-            return null;
+        if (enchanting != null && enchanting instanceof Card){
+            return (Card)enchanting;
         }
-        return enchanting.get(0);
+        return null;
+    }
+    
+    /**
+     * <p>getEnchantingPlayer.</p>
+     *
+     * @return a {@link forge.Player} object.
+     */
+    public final Player getEnchantingPlayer() {
+        if (enchanting != null && enchanting instanceof Player){
+            return (Player)enchanting;
+        }
+        return null;
     }
 
     /**
@@ -3080,17 +3073,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *
      * @param list a {@link java.util.ArrayList} object.
      */
-    public final void setEnchanting(final ArrayList<Card> list) {
-        enchanting = list;
-    }
-
-    /**
-     * <p>isEnchanted.</p>
-     *
-     * @return a boolean.
-     */
-    public final boolean isEnchanted() {
-        return enchantedBy.size() != 0;
+    public final void setEnchanting(GameEntity e) {
+        enchanting = e;
     }
 
     /**
@@ -3099,27 +3083,25 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isEnchanting() {
-        return enchanting.size() != 0;
+        return enchanting != null;
     }
-
+    
     /**
-     * <p>addEnchantedBy.</p>
+     * <p>isEnchanting.</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @return a boolean.
      */
-    public final void addEnchantedBy(final Card c) {
-        enchantedBy.add(c);
-        this.updateObservers();
+    public final boolean isEnchantingCard() {
+        return getEnchantingCard() != null;
     }
-
+    
     /**
-     * <p>removeEnchantedBy.</p>
+     * <p>isEnchanting.</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @return a boolean.
      */
-    public final void removeEnchantedBy(final Card c) {
-        enchantedBy.remove(c);
-        this.updateObservers();
+    public final boolean isEnchantingPlayer() {
+        return getEnchantingPlayer() != null;
     }
 
     /**
@@ -3141,10 +3123,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * <p>addEnchanting.</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @param e a {@link forge.GameEntity} object.
      */
-    public final void addEnchanting(final Card c) {
-        enchanting.add(c);
+    public final void addEnchanting(final GameEntity e) {
+        enchanting = e;
         setTimestamp(AllZone.getNextTimestamp());
         this.updateObservers();
     }
@@ -3152,41 +3134,36 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * <p>removeEnchanting.</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @param e a {@link forge.GameEntity} object.
      */
-    public final void removeEnchanting(final Card c) {
-        enchanting.remove(c);
-        this.updateObservers();
+    public final void removeEnchanting(final GameEntity e) {
+        if (enchanting.equals(e)){
+            enchanting = null;
+            this.updateObservers();
+        }
     }
 
     /**
-     * <p>enchantCard.</p>
+     * <p>enchant</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @param entity a {@link forge.GameEntity} object.
      */
-    public final void enchantCard(final Card c) {
-        addEnchanting(c);
-        c.addEnchantedBy(this);
+    public final void enchantEntity(final GameEntity entity) {
+        addEnchanting(entity);
+        entity.addEnchantedBy(this);
         this.enchant();
     }
 
     /**
-     * <p>unEnchantCard.</p>
+     * <p>unEnchant.</p>
      *
-     * @param c a {@link forge.Card} object.
+     * @param gameEntity a {@link forge.GameEntity} object.
      */
-    public final void unEnchantCard(final Card c) {
-        this.unEnchant();
-        enchanting.remove(c);
-        c.removeEnchantedBy(this);
-    }
-
-    /**
-     * <p>unEnchantAllCards.</p>
-     */
-    public final void unEnchantAllCards() {
-        for (int i = 0; i < enchantedBy.size(); i++) {
-            enchantedBy.get(i).unEnchantCard(this);
+    public final void unEnchantEntity(final GameEntity gameEntity) {
+        if (enchanting != null && enchanting.equals(gameEntity)){
+            this.unEnchant();
+            enchanting = null;
+            gameEntity.removeEnchantedBy(this);
         }
     }
 
@@ -4979,11 +4956,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (Property.startsWith("AttachedBy")) {
             if (!equippedBy.contains(source) && !enchantedBy.contains(source)) return false;
         } else if (Property.startsWith("Attached")) {
-            if (!equipping.contains(source) && !enchanting.contains(source)) return false;
+            if (!equipping.contains(source) && !source.equals(enchanting)) return false;
         } else if (Property.startsWith("EnchantedBy")) {
             if (!enchantedBy.contains(source)) return false;
         } else if (Property.startsWith("Enchanted")) {
-            if (!enchanting.contains(source)) return false;
+            if (!source.equals(enchanting)) return false;
         } else if (Property.startsWith("EquippedBy")) {
             if (!equippedBy.contains(source)) return false;
         } else if (Property.startsWith("Equipped")) {

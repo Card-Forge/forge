@@ -1383,10 +1383,16 @@ public class CardFactory_Instants {
                     CardList ens = AllZoneUtil.getTypeInPlay("Enchantment");
                     CardList toReturn = ens.filter(new CardListFilter() {
                         public boolean addCard(final Card c) {
-                            return (c.getOwner().isPlayer(you) && c.getController().isPlayer(you))
-                                    || (c.isAura() && c.getEnchanting().get(0).getController().isPlayer(you))
-                                    || (c.isAura() && c.getEnchanting().get(0).isAttacking()
-                                            && c.getEnchanting().get(0).getController().isPlayer(you.getOpponent()));
+                            Card enchanting = c.getEnchantingCard();
+                            
+                            if (enchanting != null){
+                                if ((enchanting.isAttacking() && enchanting.getController().isPlayer(you.getOpponent())) || 
+                                        enchanting.getController().isPlayer(you)){
+                                    return true;
+                                }
+                            }
+                            
+                            return (c.getOwner().isPlayer(you) && c.getController().isPlayer(you));
                         }
                     });
                     for (Card c : toReturn) {

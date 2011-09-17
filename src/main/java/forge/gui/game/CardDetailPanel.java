@@ -266,16 +266,24 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         //enchanting
-        if (card.getEnchanting().size() > 0) {
+        GameEntity entity = card.getEnchanting();
+        if (entity != null){ 
             if (area.length() != 0) area.append("\n");
             area.append("*Enchanting ");
-            if (card.getEnchanting().get(0).isFaceDown()
-                    && card.getEnchanting().get(0).getController().isComputer()) {
-                area.append("Morph (");
-                area.append(card.getEnchanting().get(0).getUniqueNumber());
-                area.append(")");
-            } else {
-                area.append(card.getEnchanting().get(0));
+            
+            if (entity instanceof Card){
+                Card c = (Card)entity;
+                if (c.isFaceDown() && c.getController().isComputer()){
+                    area.append("Morph (");
+                    area.append(card.getUniqueNumber());
+                    area.append(")");
+                }
+                else{
+                    area.append(entity);
+                }
+            }
+            else{
+                area.append(entity);
             }
             area.append("*");
         }

@@ -1712,7 +1712,7 @@ public class CombatUtil {
                             if (obj != null) {
                                 Card target = (Card) obj;
                                 if (AllZoneUtil.isCardInPlay(target)) {
-                                    crd.enchantCard(target);
+                                    crd.enchantEntity(target);
                                 }
                             }
                         }
@@ -2090,7 +2090,7 @@ public class CombatUtil {
                         if (Enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZone(Enchantment), 
                                     AllZone.getZone(Constant.Zone.Battlefield, Enchantment.getOwner()), Enchantment);
-                            Enchantment.enchantCard(attacker);
+                            Enchantment.enchantEntity(attacker);
                         }
                         attacker.getController().shuffle();
                     }//resolve

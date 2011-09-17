@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 import forge.card.spellability.SpellAbility;
 
 
@@ -12,6 +14,7 @@ import forge.card.spellability.SpellAbility;
 public abstract class GameEntity extends MyObservable {
     private String name = "";
     private int preventNextDamage = 0;
+    protected ArrayList<Card> enchantedBy = new ArrayList<Card>();
 
     /**
      * <p>Getter for the field <code>name</code>.</p>
@@ -246,6 +249,65 @@ public abstract class GameEntity extends MyObservable {
         
         return true;
     }
+    
+    // GameEntities can now be Enchanted
+    /**
+     * <p>Getter for the field <code>enchantedBy</code>.</p>
+     *
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final ArrayList<Card> getEnchantedBy() {
+        return enchantedBy;
+    }
+
+    /**
+     * <p>Setter for the field <code>enchantedBy</code>.</p>
+     *
+     * @param list a {@link java.util.ArrayList} object.
+     */
+    public final void setEnchantedBy(final ArrayList<Card> list) {
+        enchantedBy = list;
+    }
+    
+    /**
+     * <p>isEnchanted.</p>
+     *
+     * @return a boolean.
+     */
+    public final boolean isEnchanted() {
+        return enchantedBy.size() != 0;
+    }
+    
+
+    /**
+     * <p>addEnchantedBy.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     */
+    public final void addEnchantedBy(final Card c) {
+        enchantedBy.add(c);
+        this.updateObservers();
+    }
+
+    /**
+     * <p>removeEnchantedBy.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     */
+    public final void removeEnchantedBy(final Card c) {
+        enchantedBy.remove(c);
+        this.updateObservers();
+    }
+    
+    /**
+     * <p>unEnchantAllCards.</p>
+     */
+    public final void unEnchantAllCards() {
+        for (int i = 0; i < enchantedBy.size(); i++) {
+            enchantedBy.get(i).unEnchantEntity(this);
+        }
+    }
+
 
     ////////////////////////////////
     //

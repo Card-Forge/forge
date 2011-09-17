@@ -2818,8 +2818,9 @@ public final class GameActionUtil {
             } else if (range.equals("All")) {
                 affected.addAll(AllZoneUtil.getCardsInPlay());
             } else if (range.equals("Enchanted")) {
-                if (source.getEnchanting().size() > 0) {
-                    affected.addAll(source.getEnchanting().toArray());
+                Card en = source.getEnchantingCard();
+                if (en != null) {
+                    affected.add(en);
                 }
             }
             affected = affected.getValidCards(specific, source.getController(), source);

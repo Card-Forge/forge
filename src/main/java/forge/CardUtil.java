@@ -351,7 +351,7 @@ public final class CardUtil {
         if (relation.equals("CARDNAME")) {
             return c;
         } else if (relation.startsWith("enchanted ")) {
-            return c.getEnchanting().get(0);
+            return c.getEnchantingCard();
         } else if (relation.startsWith("equipped ")) {
             return c.getEquipping().get(0);
             //else if(relation.startsWith("target ")) return c.getTargetCard();

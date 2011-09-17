@@ -15,6 +15,7 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.GameEntity;
 import forge.MyRandom;
 import forge.Player;
 
@@ -534,7 +535,7 @@ public class AbilityFactory_Attach {
 				return null;
 		}
 		
-		if (af.isCurse())
+		if ("Curse".equals(af.getMapParams().get("AILogic")))
 			p = AllZone.getHumanPlayer();
 		else
 			p = AllZone.getComputerPlayer();
@@ -650,18 +651,19 @@ public class AbilityFactory_Attach {
 		}
 		else if (o instanceof Player){
 			// Currently, a few cards can enchant players
-			// Psychic Possession, Paradox Haze, Wheel of Sun and Moon
-			// Player p = (Player)o;
-			//if (card.isAura())
-			//	card.enchantPlayer(p);
+			// Psychic Possession, Paradox Haze, Wheel of Sun and Moon, New Curse cards
+			Player p = (Player)o;
+			if (card.isAura()){
+				handleAura(card, p, false);
+			}
 		}
 	}
 	
-	public static void handleAura(final Card card, final Card tgt, boolean gainControl){
+	public static void handleAura(final Card card, final GameEntity tgt, boolean gainControl){
 		if (card.isEnchanting()){
 			// If this Card is already Enchanting something
 			// Need to unenchant it, then clear out the commands
-			Card oldEnchanted = card.getEnchantingCard();
+			GameEntity oldEnchanted = card.getEnchanting();
 			card.removeEnchanting(oldEnchanted);
 			card.clearEnchantCommand();
 			card.clearUnEnchantCommand();
@@ -671,19 +673,27 @@ public class AbilityFactory_Attach {
 		if (gainControl){
 			// Handle GainControl Auras
 			final Player[] pl = new Player[1];
-			pl[0] = tgt.getController();
+			
+			if (tgt instanceof Card){
+			    pl[0] = ((Card)tgt).getController();
+			}
+			else{
+			    pl[0] = (Player)tgt;
+			}
 			
 	        Command onEnchant = new Command() {
 				private static final long serialVersionUID = -2519887209491512000L;
 	
 				public void execute() {
-	                if(card.isEnchanting()) {
-	                    Card crd = card.getEnchanting().get(0);
-	                    pl[0] = crd.getController();
+                    Card crd = card.getEnchantingCard();
+                    if (crd == null){ 
+                        return; 
+                    }
+                        
+                    pl[0] = crd.getController();
 
-                        crd.addController(card);
-	                    //AllZone.getGameAction().changeController(new CardList(crd), pl[0], card.getController());
-	                }
+                    crd.addController(card);
+
 	            }//execute()
 	        };//Command
 	        
@@ -691,13 +701,14 @@ public class AbilityFactory_Attach {
 				private static final long serialVersionUID = 3426441132121179288L;
 	
 				public void execute() {
-	                if(card.isEnchanting()) {
-	                    Card crd = card.getEnchanting().get(0);
-	                    if(AllZoneUtil.isCardInPlay(crd)) {
-                            crd.removeController(card);
-	                        //AllZone.getGameAction().changeController(new CardList(crd), crd.getController(), pl[0]);
-	                    }
-	                }
+                    Card crd = card.getEnchantingCard();
+                    if (crd == null){ 
+                        return; 
+                    }
+
+                    if(AllZoneUtil.isCardInPlay(crd)) {
+                        crd.removeController(card);
+                    }
 	                
 	            }//execute()
 	        };//Command
@@ -707,17 +718,16 @@ public class AbilityFactory_Attach {
 				private static final long serialVersionUID = -65903786170234039L;
 
 				public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-
-                        crd.removeController(card); //This looks odd, but will simply refresh controller
-                        crd.addController(card);
-                        //AllZone.getGameAction().changeController(new CardList(crd), crd.getController(),card.getController());
+                    Card crd = card.getEnchantingCard();
+                    if (crd == null){ 
+                        return; 
                     }
+                    crd.removeController(card); //This looks odd, but will simply refresh controller
+                    crd.addController(card);
                 }//execute()
             };//Command
 			
-	        // Add Enchant Commands
+	        // Add Enchant Commands for Control changers
 	        card.addEnchantCommand(onEnchant);
 	        card.addUnEnchantCommand(onUnEnchant);
             card.addChangeControllerCommand(onChangesControl);
@@ -727,15 +737,17 @@ public class AbilityFactory_Attach {
 			private static final long serialVersionUID = -639204333673364477L;
 
 			public void execute() {
-                if(card.isEnchanting()) {
-                    Card crd = card.getEnchanting().get(0);
-                    card.unEnchantCard(crd);
+                GameEntity entity = card.getEnchanting();
+                if (entity == null){ 
+                    return; 
                 }
+
+                card.unEnchantEntity(entity);
             }
         };//Command
 		
         card.addLeavesPlayCommand(onLeavesPlay);
-		card.enchantCard(tgt);
+		card.enchantEntity(tgt);
 	}
 	
 	public static SpellAbility getAttachSpellAbility(Card source){
@@ -767,7 +779,7 @@ public class AbilityFactory_Attach {
 			
 			Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
 			if (o instanceof Card){
-				source.enchantCard((Card)o);
+				source.enchantEntity((Card)o);
 				return true;
 			}
 		}
@@ -775,7 +787,7 @@ public class AbilityFactory_Attach {
 		else if (AbilityFactory_Attach.attachPreference(af, aura, af.getMapParams(), tgt, true)){
 			Object o = aura.getTarget().getTargets().get(0);
 			if (o instanceof Card){
-				source.enchantCard((Card)o);
+				source.enchantEntity((Card)o);
 				return true;
 			}
 			else if (o instanceof Player)
