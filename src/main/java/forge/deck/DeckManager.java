@@ -376,26 +376,6 @@ public class DeckManager {
         d.setDeckType(deckType);
     }
 
-    /**
-     * <p>addCardList.</p>
-     *
-     * @param lineIterator a {@link java.util.ListIterator} object.
-     * @param d a {@link forge.deck.Deck} object.
-     */
-    private static void addCardList(ListIterator<String> lineIterator, Deck d) {
-
-        //readDeck main deck
-        for (String cardName : readCardList(lineIterator)) {
-            d.addMain(cardName);
-        }
-
-        //readDeck sideboard
-        for (String cardName : readCardList(lineIterator)) {
-            d.addSideboard(cardName);
-        }
-
-    }
-
     // Precondition: iterator should point at the first line of cards list
     private static List<String> readCardList(final Iterator<String> lineIterator) {
         List<String> result = new ArrayList<String>();
