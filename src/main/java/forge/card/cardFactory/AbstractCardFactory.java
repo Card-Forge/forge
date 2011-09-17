@@ -472,19 +472,19 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         //************** Link to different CardFactories *******************
         Card card2 = null;
         if (card.isCreature()) {
-            card2 = CardFactory_Creatures.getCard(card, cardName, owner, this);
+            card2 = CardFactory_Creatures.getCard(card, cardName, this);
         } else if (card.isAura()) {
-            card2 = CardFactory_Auras.getCard(card, cardName, owner);
+            card2 = CardFactory_Auras.getCard(card, cardName);
         } else if (card.isEquipment()) {
-            card2 = CardFactory_Equipment.getCard(card, cardName, owner);
+            card2 = CardFactory_Equipment.getCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
+            card2 = CardFactory_Planeswalkers.getCard(card, cardName);
         } else if (card.isLand()) {
-            card2 = CardFactory_Lands.getCard(card, cardName, owner, this);
+            card2 = CardFactory_Lands.getCard(card, cardName, this);
         } else if (card.isInstant()) {
-            card2 = CardFactory_Instants.getCard(card, cardName, owner);
+            card2 = CardFactory_Instants.getCard(card, cardName);
         } else if (card.isSorcery()) {
-            card2 = CardFactory_Sorceries.getCard(card, cardName, owner);
+            card2 = CardFactory_Sorceries.getCard(card, cardName);
         }
 
         if (card2 != null) {

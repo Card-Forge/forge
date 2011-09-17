@@ -42,7 +42,7 @@ public class CardFactory_Instants {
      * @param owner a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName, final Player owner) {
+    public static Card getCard(final Card card, final String cardName) {
 
 
         //*************** START *********** START **************************

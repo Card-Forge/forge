@@ -25,7 +25,7 @@ class CardFactory_Lands {
      * @param cf a {@link forge.card.cardFactory.CardFactoryInterface} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName, Player owner, CardFactoryInterface cf) {
+    public static Card getCard(final Card card, final String cardName, CardFactoryInterface cf) {
 
 
         //*************** START *********** START **************************

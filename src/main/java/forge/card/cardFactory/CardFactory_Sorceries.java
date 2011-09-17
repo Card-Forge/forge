@@ -31,7 +31,7 @@ public class CardFactory_Sorceries {
      * @param owner a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, final String cardName, Player owner) {
+    public static Card getCard(final Card card, final String cardName) {
 
         //*************** START *********** START **************************
         if (cardName.equals("Political Trickery")) {

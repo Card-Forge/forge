@@ -46,7 +46,7 @@ class CardFactory_Equipment {
      * @param owner a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, String cardName, Player owner) {
+    public static Card getCard(final Card card, String cardName) {
 
         //*************** START *********** START **************************
         if (cardName.equals("Umbral Mantle")) {

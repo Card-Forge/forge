@@ -26,7 +26,7 @@ public class CardFactory_Planeswalkers {
      * @param owner a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCard(final Card card, String cardName, Player owner) {
+    public static Card getCard(final Card card, String cardName) {
         // All Planeswalkers set their loyality in the beginning
         if (card.getBaseLoyalty() > 0)
             card.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY, card.getBaseLoyalty()));
