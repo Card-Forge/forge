@@ -208,6 +208,22 @@ Comment=
 - Fixed a couple of typos that prevented the AI from using AF Draw, PutCounter, Regenerate and RegenerateAll abilities.
 - You can no longer use cards with "CARDNAME can't have counters placed on it." to pay PutCounter costs.
 - Added the recent commit logs to changes.txt.
+- Fixed Grave Peril.
+- Fixed Mana cost of Volition Reins (untap ability not fixed yet).
+- Fixing Scarecrone ability cost
+- Added AttackersDeclared trigger.
+- Converted Lighmine Field.
+- Added an easy version of the Totoro deck.
+- Converted Orim's Prayer to Trigger_AttackersDeclared.
+- Added the missed trigger class.
+- Converted Reveille Squad to Trigger_AttackersDeclared.
+- Finally, all quest and duel decks fully encapsulated with acceptable format.
+- Helper files completely removed (easy.txt, quests.txt, etc.) and hard-coded quest properties are a thing of the past.
+- Model and view fully separated for main panel in quest GUI.
+- Critical file: QuestEventManager can handle instantiation of all decks, once (ideally).
+- removed unused code as pointed by warnings
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -217,7 +233,48 @@ Many people helped with this version. A special thank you goes out to them:
 
 Added many cards, including:
 
-
+Phantasmal Image
+Quiet Speculation
+Dream Thrush
+Grixis Illusionist
+Jinx
+Moonbow Illusionist
+Mystic Compass
+Reef Shaman
+Sea Snidd
+Shimmering Mirage
+Tideshaper Mystic
+Unstable Frontier
+Yixlid Jailer
+Okina Nightwatch
+Secretkeeper
+Elder Pine of Jukai
+Merfolk Wayfinder
+Arm with AEther
+Mystic Decree
+Furystoke Giant
+Chancellor of the Dross
+Chancellor of the Forge
+Chancellor of the Tangle
+Scorched Earth
+AEther Tide
+Serra Paladin
+Aurification
+Avenging Druid
+Jhessian Balmgiver
+Teferi's Care
+Tangle
+Smoldering Tar
+Sunscape Apprentice
+Honor the Fallen
+Necromancer's Covenant
+Midnight Ritual
+Mine Layer
+Oblivion Stone
+Melira, Sylvok Outcast
+Wretched Banquet
+Corrupted Roots
+Unchecked Growth
 
 
 end
