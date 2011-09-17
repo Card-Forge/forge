@@ -429,6 +429,7 @@ public class PhaseUtil {
         
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Attackers", list);
+        runParams.put("AttackingPlayer", AllZone.getCombat().getAttackingPlayer());
         AllZone.getTriggerHandler().runTrigger("AttackersDeclared", runParams);
         
         for (Card c : list)
