@@ -83,7 +83,6 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Echo();
 
         upkeep_The_Abyss();
-        upkeep_Mana_Vortex();
         upkeep_Yawgmoth_Demon();
         upkeep_Lord_of_the_Pit();
         upkeep_Drop_of_Honey();
@@ -554,47 +553,7 @@ public class Upkeep implements java.io.Serializable {
         creats = creats.getTargetableCards(card);
         return creats;
     }
-
-    /**
-     * <p>upkeep_Mana_Vortex.</p>
-     */
-    private static void upkeep_Mana_Vortex() {
-        /*
-		 * At the beginning of each player's upkeep, that player
-		 * sacrifices a land.
-		 */
-        final Player player = AllZone.getPhase().getPlayerTurn();
-        final CardList vortices = AllZoneUtil.getCardsInPlay("Mana Vortex");
-
-        for (Card c : vortices) {
-            final Card vortex = c;
-
-            final Ability sacrificeLand = new Ability(vortex, "") {
-                @Override
-                public void resolve() {
-                    CardList choices = AllZoneUtil.getPlayerLandsInPlay(player);
-                    player.sacrificePermanent(vortex.getName() + " - select a land to sacrifice.", choices);
-
-                    //if no lands in play, sacrifice all "Mana Vortex"s
-                    if (AllZoneUtil.getLandsInPlay().size() == 0) {
-                        for (Card d : vortices) {
-                            AllZone.getGameAction().sacrifice(d);
-                        }
-                        return;
-                    }
-                } //resolve
-            }; //sacrificeCreature
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(vortex.getName()).append(" - " + player + " sacrifices a land.");
-            sacrificeLand.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(sacrificeLand);
-
-        } //end for
-    } //Mana_Vortex
-
-
+    
     /**
      * <p>upkeep_Yawgmoth_Demon.</p>
      */
