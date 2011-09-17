@@ -15,26 +15,39 @@ Description=The Court Jester pulls a prank on you. Will you laugh it off or pay 
 Icon=The Court Jester.jpg
 Deck Type=constructed
 [main]
-4 Underground Sea
-4 Spreading Seas
-4 Remove Soul
-1 Avatar of Fury
+3 Underground Sea
+3 Badlands
+2 Volcanic Island
+1 Reliquary Tower
+1 Island
+1 Swamp
+3 Bloodstained Mire
+3 Scalding Tarn
+3 Polluted Delta
 1 Mox Sapphire
-2 Damnation
-4 Crumbling Necropolis
-2 Island
-1 Ancestral Recall
-4 Badlands
-4 Fire-Field Ogre
-4 Kargan Dragonlord
-4 Lightning Bolt
-2 Nicol Bolas
 1 Mox Ruby
-4 Sedraxis Specter
-4 Volcanic Island
-1 Time Walk
-4 Counterspell
-2 Cruel Ultimatum
 1 Mox Jet
-2 Mountain
+1 Obelisk of Grixis
+1 Ancestral Recall
+1 Windfall
+1 Wheel of Fortune
+1 Burning Inquiry
+1 Vision Skeins
+1 Words of Wisdom
+1 Howling Mine
+1 Kami of the Crescent Moon
+1 Jace Beleren
+1 Mask of Riddles
+2 Noggle Ransacker
+1 Shadowmage Infiltrator
+3 Terminate
+1 Drastic Revelation
+1 Memory Jar
+2 Consecrated Sphinx
+4 Jace's Erasure
+3 Kederekt Parasite
+1 Mind's Eye
+2 Niv-Mizzet, the Firemind
+3 Underworld Dreams
+2 Psychosis Crawler
 [sideboard]
