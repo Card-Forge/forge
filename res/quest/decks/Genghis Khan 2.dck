@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Genghis Khan 2
-DisplayName=Genghis Khan
+Title=Genghis Khan
 Difficulty=medium
 Description=WG deck with mana ramp, Armageddon and Terravore
+Icon=Genghis Khan.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Stomping Ground
 4 Temple Garden

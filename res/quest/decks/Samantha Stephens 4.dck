@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Samantha Stephens 4
-DisplayName=Samantha Stephens
+Title=Samantha Stephens
 Difficulty=very hard
 Description=WU Painter's Servant - Grindstone combo
+Icon=Samantha Stephens.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Plains
 1 Karakas

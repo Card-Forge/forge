@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Joe Kidd 3
-DisplayName=Joe Kidd
+Title=Joe Kidd
 Difficulty=hard
 Description=WB deck with Voracious Hatchling and Nightsky Mimic
+Icon=Joe Kidd.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Mourning Thrull
 5 Swamp

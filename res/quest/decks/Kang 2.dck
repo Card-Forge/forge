@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Kang 2
-DisplayName=Kang
+Title=Kang
 Difficulty=medium
 Description=UB deck with Glen Elendra Liege, Gravelgill Duo and Dire Undercurrents
+Icon=Kang.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Benthic Djinn
 2 Dimir Cutpurse

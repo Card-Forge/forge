@@ -1,9 +1,19 @@
+[quest]
+id=22
+AILife=30
+Repeat=false
+Wins=32
+Card Reward=3 random rares
+Credit Reward=150
+HumanExtras=Volunteer Militia|Land Tax|Elvish Farmer|An-Havva Township
+AIExtras=Darksteel Citadel|Relentless Rats
 [metadata]
 Name=quest22
-DisplayName=The Pied Piper
+Title=The Pied Piper
+Difficulty=hard
+Description=A mysterious man threatens to flood the land with a relentless stream of hungry rats. Cross his plan before it's too late.
 Icon=The Pied Piper.jpg
 Deck Type=constructed
-Comment=
 [main]
 6 Swamp
 4 Underground Sea

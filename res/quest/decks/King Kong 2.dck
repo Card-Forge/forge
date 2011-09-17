@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=King Kong 2
-DisplayName=King Kong
+Title=King Kong
 Difficulty=medium
 Description=WBG Squirrel deck with tokens, changelings, Deranged Hermit and curse type auras
+Icon=King Kong.jpg
 Deck Type=constructed
-Icon=
 [main]
 8 Forest
 2 Plains

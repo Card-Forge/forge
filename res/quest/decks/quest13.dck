@@ -1,9 +1,19 @@
+[quest]
+id=13
+AILife=30
+Repeat=false
+Wins=52
+Card Reward=4 multi-colored rares
+Credit Reward=300
+HumanExtras=Sensei's Divining Top
+AIExtras=Teferi's Puzzle Box
 [metadata]
 Name=quest13
-DisplayName=The Court Jester
+Title=The Court Jester
+Difficulty=hard
+Description=The Court Jester pulls a prank on you. Will you laugh it off or pay him back?
 Icon=The Court Jester.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Underground Sea
 4 Spreading Seas

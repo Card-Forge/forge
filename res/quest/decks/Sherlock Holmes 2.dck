@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Sherlock Holmes 2
-DisplayName=Sherlock Holmes
+Title=Sherlock Holmes
 Difficulty=medium
 Description=Mono G deck with Baru, Fist of Krosa and lots of good green creatures
+Icon=Sherlock Holmes.jpg
 Deck Type=constructed
-Icon=
 [main]
 22 Forest
 1 Emerald Medallion

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Doc Holiday 3
-DisplayName=Doc Holiday
+Title=Doc Holiday
 Difficulty=hard
 Description=WUG deck with Stoic Angel, Murkfiend Liege and Knight of New Alara
+Icon=Doc Holiday.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Bant Sureblade
 4 Giltspire Avenger

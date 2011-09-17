@@ -1,9 +1,19 @@
+[quest]
+id=16
+AILife=30
+Repeat=false
+Wins=52
+Card Reward=4 green rares
+Credit Reward=250
+HumanExtras=Dwarven Demolition Team|Dwarven Pony|Dwarven Trader
+AIExtras=Wall of Earth|Wall of Air|Wall of Ice|Wall of Light|Carrion Wall|Steel Wall
 [metadata]
 Name=quest16
-DisplayName=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Difficulty=hard
+Description=While exploring a mine with a group of dwarves the mine caves in. You start to dig out and then realize that your group is not alone.
 Icon=Mines of Kazum Durl.jpg
 Deck Type=constructed
-Comment=
 [main]
 1 Proper Burial
 2 Disenchant

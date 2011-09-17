@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Galahad 2
-DisplayName=Galahad
+Title=Galahad
 Difficulty=medium
 Description=WB Knight deck with Kinsbaile Cavalier and Knight Exemplar
+Icon=Galahad.jpg
 Deck Type=constructed
-Icon=
 [main]
 7 Plains
 7 Swamp

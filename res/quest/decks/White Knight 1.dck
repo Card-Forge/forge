@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=White Knight 1
-DisplayName=White Knight
+Title=White Knight
 Difficulty=easy
 Description=Mono W Knights deck
+Icon=White Knight.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Saltblast
 24 Plains

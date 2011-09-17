@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Shrek 1
-DisplayName=Shrek
+Title=Shrek
 Difficulty=easy
 Description=Mono B Demon and Ogre deck
+Icon=Shrek.jpg
 Deck Type=constructed
-Icon=
 [main]
 24 Swamp
 4 Gutwrencher Oni

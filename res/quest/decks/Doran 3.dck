@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Doran 3
-DisplayName=Doran
+Title=Doran
 Difficulty=hard
 Description=WBG Doran, the Siege Tower deck with high toughness creatures
+Icon=Doran.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Swamp
 1 Forest

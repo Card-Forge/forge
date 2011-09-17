@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Buffy 2
-DisplayName=Buffy
+Title=Buffy
 Difficulty=medium
 Description=Mono B Zombie deck
+Icon=Buffy.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Skulking Knight|TSP
 1 Withered Wretch|TSB

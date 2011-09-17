@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Hagrid 2
-DisplayName=Hagrid
+Title=Hagrid
 Difficulty=medium
 Description=Mono R Giants deck
+Icon=Hagrid.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Pyroclasm|M11
 20 Mountain|MBS

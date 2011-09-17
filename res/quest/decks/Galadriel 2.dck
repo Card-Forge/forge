@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Galadriel 2
-DisplayName=Galadriel
+Title=Galadriel
 Difficulty=medium
 Description=Mono G Deck with Amulet of Vigor, mana ramp, Time Vault and Howl of the Night Pack
+Icon=Galadriel.jpg
 Deck Type=constructed
-Icon=
 [main]
 15 Forest
 2 Thawing Glaciers

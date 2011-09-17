@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=James T Kirk 3
-DisplayName=James T Kirk
+Title=James T Kirk
 Difficulty=hard
 Description=Mono B discard deck with Liliana Vess
+Icon=James T Kirk.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Megrim
 4 Liliana's Caress

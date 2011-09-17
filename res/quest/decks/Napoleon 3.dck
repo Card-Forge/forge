@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Napoleon 3
-DisplayName=Napoleon
+Title=Napoleon
 Difficulty=hard
 Description=WBG Wall deck with Rolling Stones and Doran, the Siege Tower
+Icon=Napoleon.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Angelic Wall
 1 Mox Emerald

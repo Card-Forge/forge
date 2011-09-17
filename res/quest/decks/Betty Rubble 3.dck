@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Betty Rubble 3
-DisplayName=Betty Rubble
+Title=Betty Rubble
 Difficulty=hard
 Description=BRG Hand of Emrakul deck with Broodwarden and Eldrazi Spawn tokens
+Icon=Betty Rubble.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Birds of Paradise
 4 Nest Invader

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Redwall 2
-DisplayName=Redwall
+Title=Redwall
 Difficulty=medium
 Description=Mono R Defender deck with Vent Sentinel
+Icon=Redwall.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Lightning Bolt|M11
 3 Pyroclasm|M11

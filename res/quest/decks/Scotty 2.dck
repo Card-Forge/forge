@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Scotty 2
-DisplayName=Scotty
+Title=Scotty
 Difficulty=medium
 Description=WBG protection from black Famine deck with Phantom Centaur and Nightwind Glider
+Icon=Scotty.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Death Speakers
 2 Auriok Champion

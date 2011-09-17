@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Radioactive Man 3
-DisplayName=Radioactive Man
+Title=Radioactive Man
 Difficulty=hard
 Description=WR Sneak Attack deck
+Icon=Radioactive Man.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Arid Mesa
 4 Plateau

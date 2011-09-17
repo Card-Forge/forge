@@ -1,9 +1,19 @@
+[quest]
+id=11
+AILife=30
+Repeat=false
+Wins=40
+Card Reward=3 random rares
+Credit Reward=150
+HumanExtras=Seal of Cleansing
+AIExtras=Loyal Retainers
 [metadata]
 Name=quest11
-DisplayName=The King's Contest
+Title=The King's Contest
+Difficulty=hard
+Description=The king is holding a contest. You are invited to participate and compete against other legends of this era.
 Icon=The Kings Contest.jpg
 Deck Type=constructed
-Comment=
 [main]
 1 Isamaru, Hound of Konda
 4 Plateau

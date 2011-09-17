@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=C3PO 2
-DisplayName=C3PO
+Title=C3PO
 Difficulty=medium
 Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Frogtosser Banneret
+Icon=C3PO.jpg
 Deck Type=constructed
-Icon=
 [main]
 8 Mountain
 4 Swamp

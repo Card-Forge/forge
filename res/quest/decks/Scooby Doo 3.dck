@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Scooby Doo 3
-DisplayName=Scooby Doo
+Title=Scooby Doo
 Difficulty=hard
 Description=WR Giants Aggro deck with a few changelings
+Icon=Scooby Doo.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Ancient Amphitheater
 4 Sacred Foundry

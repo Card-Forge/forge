@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Apu Nahasapeemapetilon 2
-DisplayName=Apu Nahasapeemapetilon
+Title=Apu Nahasapeemapetilon
 Difficulty=medium
 Description=WG persist deck with Heartmender and Juniper Order Ranger
+Icon=Apu Nahasapeemapetilon.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Sunpetal Grove
 6 Forest

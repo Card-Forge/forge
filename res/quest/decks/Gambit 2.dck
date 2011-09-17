@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Gambit 2
-DisplayName=Gambit
+Title=Gambit
 Difficulty=medium
 Description=URG Bounce deck with Taurean Mauler and Forgotten Ancient
+Icon=Gambit.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Predatory Hunger
 4 Vapor Snag

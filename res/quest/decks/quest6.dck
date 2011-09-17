@@ -1,9 +1,19 @@
+[quest]
+id=6
+AILife=30
+Repeat=true
+Wins=28
+Card Reward=3 colorless rares
+Credit Reward=150
+HumanExtras=
+AIExtras=Eon Hub|Eon Hub|Eon Hub
 [metadata]
 Name=quest6
-DisplayName=Dungeon Crawling (Colorless)
+Title=Dungeon Crawling (Colorless)
+Difficulty=hard
+Description=The inhabitants of this plane tread with a light step.
 Icon=Dungeon Crawling Colorless.jpg
 Deck Type=constructed
-Comment=
 [main]
 20 Island
 20 Swamp

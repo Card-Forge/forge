@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Storm 3
-DisplayName=Storm
+Title=Storm
 Difficulty=hard
 Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
+Icon=Storm.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Bayou
 4 Savannah

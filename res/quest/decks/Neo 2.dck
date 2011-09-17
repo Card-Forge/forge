@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Neo 2
-DisplayName=Neo
+Title=Neo
 Difficulty=medium
 Description=RG deck with Boartusk Liege, Jund Hackblade and Naya Hushblade
+Icon=Neo.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Copperline Gorge
 4 Kazandu Refuge

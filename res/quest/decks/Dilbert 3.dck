@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Dilbert 3
-DisplayName=Dilbert
+Title=Dilbert
 Difficulty=hard
 Description=BRG Ball Lightning deck with Smoke, Mighty Emergence and Kavu Lair
+Icon=Dilbert.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Spark Elemental
 2 Deathgreeter

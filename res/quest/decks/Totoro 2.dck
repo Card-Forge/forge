@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Totoro 2
-DisplayName=Totoro
+Title=Totoro
 Difficulty=medium
 Description=UBG deck with spirits and arcane spells
+Icon=Totoro.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Forest
 1 Swamp

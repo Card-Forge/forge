@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Sabertooth 3
-DisplayName=Sabertooth
+Title=Sabertooth
 Difficulty=hard
 Description=Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar
+Icon=Sabertooth.jpg
 Deck Type=constructed
-Icon=
 [main]
 23 Mountain
 1 Mox Ruby

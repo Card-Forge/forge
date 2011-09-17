@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Darrin Stephens 1
-DisplayName=Darrin Stephens
+Title=Darrin Stephens
 Difficulty=easy
 Description=Mono U Affinity deck with Affinity for artifacts and Modular cards
+Icon=Darrin Stephens.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Thoughtcast
 1 Scepter of Insight

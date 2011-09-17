@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Terminator 3
-DisplayName=Terminator
+Title=Terminator
 Difficulty=hard
 Description=Mono B artifact deck with The Abyss
+Icon=Terminator.jpg
 Deck Type=constructed
-Icon=
 [main]
 22 Swamp
 1 Mox Jet

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Deadpool 3
-DisplayName=Deadpool
+Title=Deadpool
 Difficulty=hard
 Description=BR deck with Ashenmoor Liege and Grixis Grimblade
+Icon=Deadpool.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Ashenmoor Gouger
 4 Ashenmoor Liege

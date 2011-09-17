@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Silver Samurai 2
-DisplayName=Silver Samurai
+Title=Silver Samurai
 Difficulty=medium
 Description=Mono W Samurai deck
+Icon=Silver Samurai.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Arrest|SOM
 3 Devoted Retainer|CHK

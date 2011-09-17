@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Atomic Robo 3
-DisplayName=Atomic Robo
+Title=Atomic Robo
 Difficulty=hard
 Description=UB artifact sacrifice deck with Thopter Foundry and Sword of the Meek
+Icon=Atomic Robo.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Phyrexia's Core
 4 Polluted Delta

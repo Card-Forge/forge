@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Luke Skywalker 3
-DisplayName=Luke Skywalker
+Title=Luke Skywalker
 Difficulty=hard
 Description=WU Rebels deck with Training Grounds
+Icon=Luke Skywalker.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Flooded Strand
 4 Tundra

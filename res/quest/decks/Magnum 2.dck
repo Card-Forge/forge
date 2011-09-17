@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Magnum 2
-DisplayName=Magnum
+Title=Magnum
 Difficulty=medium
 Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Icon=Magnum.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Tropical Island
 8 Island

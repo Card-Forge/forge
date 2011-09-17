@@ -1,9 +1,19 @@
+[quest]
+id=15
+AILife=30
+Repeat=false
+Wins=52
+Card Reward=4 red rares
+Credit Reward=200
+HumanExtras=Mudbutton Torchrunner|Scuzzback Scrapper
+AIExtras=Heedless One|Norwood Archers|Wildslayer Elves
 [metadata]
 Name=quest15
-DisplayName=Don't Play With Matches
+Title=Don't Play With Matches
+Difficulty=hard
+Description=The goblins are battling the elves. Those pesky elves, will they ever learn. Do not play with fire!
 Icon=Dont Play With Matches.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Plateau
 4 Druid of the Anima

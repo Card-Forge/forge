@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Boba Fett 3
-DisplayName=Boba Fett
+Title=Boba Fett
 Difficulty=hard
 Description=WRG Dragons deck with Chandra Nalaar, Crucible of Fire and Dragon Roost
+Icon=Boba Fett.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Plateau
 3 Wooded Foothills

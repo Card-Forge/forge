@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Galahad 3
-DisplayName=Galahad
+Title=Galahad
 Difficulty=hard
 Description=WB Knight deck with Kinsbaile Cavalier and Knight Exemplar
+Icon=Galahad.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Armageddon
 6 Swamp

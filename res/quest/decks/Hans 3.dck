@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Hans 3
-DisplayName=Hans
+Title=Hans
 Difficulty=hard
 Description=WRG Allies deck
+Icon=Hans.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Mountain|MBS
 2 Highland Berserker|ZEN

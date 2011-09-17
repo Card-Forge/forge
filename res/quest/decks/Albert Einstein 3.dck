@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Albert Einstein 3
-DisplayName=Albert Einstein
+Title=Albert Einstein
 Difficulty=hard
 Description=WG deck with Garruk Wildspeaker, Needle Storm and Retribution of the Meek
+Icon=Albert Einstein.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Savannah
 4 Razorverge Thicket

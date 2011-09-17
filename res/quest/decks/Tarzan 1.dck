@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Tarzan 1
-DisplayName=Tarzan
+Title=Tarzan
 Difficulty=easy
 Description=WR Ape tribal deck with Ancient Silverback, Earthbind, Claws of Wirewood and pump spells
+Icon=Tarzan.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Kird Ape
 2 Tree Monkey

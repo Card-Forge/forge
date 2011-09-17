@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Jack Sparrow 2
-DisplayName=Jack Sparrow
+Title=Jack Sparrow
 Difficulty=medium
 Description=UB Pirate deck with Talas Warrior, Coastal Piracy and Spreading Seas
+Icon=Jack Sparrow.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Cloud Pirates
 2 Talas Scout

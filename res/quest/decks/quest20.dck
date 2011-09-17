@@ -1,9 +1,19 @@
+[quest]
+id=20
+AILife=30
+Repeat=false
+Wins=80
+Card Reward=5 colorless rares
+Credit Reward=300
+HumanExtras=Counterbalance|Hatching Plans|Ley Druid
+AIExtras=Ior Ruin Expedition|Oversold Cemetery|Trapjaw Kelpie
 [metadata]
 Name=quest20
-DisplayName=Blood Oath
+Title=Blood Oath
+Difficulty=hard
+Description=A druid saves your life and the two of you take a blood oath. It is now time to fulfill your oath.
 Icon=Blood Oath.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Underground Sea
 4 Tropical Island

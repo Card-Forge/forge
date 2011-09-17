@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Spiderman 2
-DisplayName=Spiderman
+Title=Spiderman
 Difficulty=medium
 Description=Mono W weenie deck with WoG, Armageddon and Mass Calcify
+Icon=Spiderman.jpg
 Deck Type=constructed
-Icon=
 [main]
 18 Plains
 4 Flagstones of Trokair

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Hellboy 3
-DisplayName=Hellboy
+Title=Hellboy
 Difficulty=hard
 Description=BR direct damage deck
+Icon=Hellboy.jpg
 Deck Type=constructed
-Icon=
 [main]
 5 Swamp
 7 Mountain 

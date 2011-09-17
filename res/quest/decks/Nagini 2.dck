@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Nagini 2
-DisplayName=Nagini
+Title=Nagini
 Difficulty=medium
 Description=Mono G Snake deck
+Icon=Nagini.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Tangle Asp|5DN
 2 River Boa|ZEN

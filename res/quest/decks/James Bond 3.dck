@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=James Bond 3
-DisplayName=James Bond
+Title=James Bond
 Difficulty=hard
 Description=WG Sliver deck
+Icon=James Bond.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Savannah
 4 Windswept Heath

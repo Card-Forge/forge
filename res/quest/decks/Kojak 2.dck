@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Kojak 2
-DisplayName=Kojak
+Title=Kojak
 Difficulty=medium
 Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
+Icon=Kojak.jpg
 Deck Type=constructed
-Icon=
 [main]
 22 Island
 1 Sapphire Medallion

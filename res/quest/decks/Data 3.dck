@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Data 3
-DisplayName=Data
+Title=Data
 Difficulty=hard
 Description=WB Swampwalk Karma deck with Contaminated Ground and Crusading Knight
+Icon=Data.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Tethered Griffin
 3 Quag Vampires

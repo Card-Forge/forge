@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Homer Simpson 2
-DisplayName=Homer Simpson
+Title=Homer Simpson
 Difficulty=medium
 Description=UBR Sacrifice deck with Mortician Beetle
+Icon=Homer Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Underground Sea
 4 Badlands

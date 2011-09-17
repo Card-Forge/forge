@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Dr No 3
-DisplayName=Dr No
+Title=Dr No
 Difficulty=hard
 Description=WUB Combo & Control deck with The Rack, Balance, Propaganda and discard spells
+Icon=Dr No.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Underground Sea
 2 Megrim

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Doc Holiday 2
-DisplayName=Doc Holiday
+Title=Doc Holiday
 Difficulty=medium
 Description=WUG deck with Sunscape Familiar and Bant Sureblade
+Icon=Doc Holiday.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Bant Sureblade
 2 Giltspire Avenger

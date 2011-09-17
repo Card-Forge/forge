@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Ned Flanders 4
-DisplayName=Ned Flanders
+Title=Ned Flanders
 Difficulty=very hard
 Description=Mono B reanimator deck with a few large creatures and some spells
+Icon=Ned Flanders.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Blazing Archon
 21 Swamp

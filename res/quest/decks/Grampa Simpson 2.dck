@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Grampa Simpson 2
-DisplayName=Grampa Simpson
+Title=Grampa Simpson
 Difficulty=medium
 Description=WR Double Strike deck with equipments and auras
+Icon=Grampa Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Sacred Foundry
 4 Jungle Shrine

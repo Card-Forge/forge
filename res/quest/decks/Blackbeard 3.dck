@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Blackbeard 3
-DisplayName=Blackbeard
+Title=Blackbeard
 Difficulty=hard
 Description=Mono W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief
+Icon=Blackbeard.jpg
 Deck Type=constructed
-Icon=
 [main]
 18 Plains
 1 Daru Encampment

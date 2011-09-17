@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Fin Fang Foom 1
-DisplayName=Fin Fang Foom
+Title=Fin Fang Foom
 Difficulty=easy
 Description=Mono G Poison deck
+Icon=Fin Fang Foom.jpg
 Deck Type=constructed
-Icon=
 [main]
 24 Forest|MBS
 2 Beast Hunt|ZEN

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Seabiscuit 2
-DisplayName=Seabiscuit
+Title=Seabiscuit
 Difficulty=medium
 Description=Mono W Metalcraft deck with Ardent Recruit and Indomitable Archangel
+Icon=Seabiscuit.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Ancient Den
 4 Darksteel Citadel

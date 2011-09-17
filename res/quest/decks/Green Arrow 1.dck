@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Green Arrow 1
-DisplayName=Green Arrow
+Title=Green Arrow
 Difficulty=easy
 Description=WG Archer deck with Jagged-Scar Archers and Titania's Chosen
+Icon=Green Arrow.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Ezuri's Archers
 2 Skyshroud Archer

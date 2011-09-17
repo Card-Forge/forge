@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Samantha Stephens 1
-DisplayName=Samantha Stephens
+Title=Samantha Stephens
 Difficulty=easy
 Description=WU Painter's Servant anti-red deck
+Icon=Samantha Stephens.jpg
 Deck Type=constructed
-Icon=
 [main]
 5 Plains
 5 Island

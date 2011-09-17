@@ -1,9 +1,19 @@
+[quest]
+id=5
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 green rares
+Credit Reward=100
+HumanExtras=Defense of the Heart
+AIExtras=Eladamri's Vineyard|Upwelling
 [metadata]
 Name=quest5
-DisplayName=Dungeon Crawling (Green)
+Title=Dungeon Crawling (Green)
+Difficulty=medium
+Description=Gnarled, twisting, sinister growths slowly rend the walls in twain and try to silence all who cross their path.
 Icon=Dungeon Crawling Green.jpg
 Deck Type=constructed
-Comment=
 [main]
 33 Forest
 1 Alpha Tyrranax

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Da Vinci 2
-DisplayName=Da Vinci
+Title=Da Vinci
 Difficulty=medium
 Description=Mono B deck with Korlash, Heir to Blackblade, Badmoon and threat removal
+Icon=Da Vinci.jpg
 Deck Type=constructed
-Icon=
 [main]
 22 Swamp
 1 Jet Medallion

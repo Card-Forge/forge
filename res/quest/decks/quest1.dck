@@ -1,9 +1,19 @@
+[quest]
+id=1
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 white rares
+Credit Reward=100
+HumanExtras=
+AIExtras=Divine Presence
 [metadata]
 Name=quest1
-DisplayName=Dungeon Crawling (White)
+Title=Dungeon Crawling (White)
+Difficulty=medium
+Description=This realm is guarded by a divine entity laying his protecting hand on each living being.
 Icon=Dungeon Crawling White.jpg
 Deck Type=constructed
-Comment=
 [main]
 24 Plains
 1 Abbey Gargoyles

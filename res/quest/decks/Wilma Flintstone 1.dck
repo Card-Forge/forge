@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Wilma Flintstone 1
-DisplayName=Wilma Flintstone
+Title=Wilma Flintstone
 Difficulty=easy
 Description=BG deck with Noxious Hatchling and Woodlurker Mimic
+Icon=Wilma Flintstone.jpg
 Deck Type=constructed
-Icon=
 [main]
 7 Forest
 7 Swamp

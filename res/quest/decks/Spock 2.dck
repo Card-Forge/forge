@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Spock 2
-DisplayName=Spock
+Title=Spock
 Difficulty=medium
 Description=Mono G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman
+Icon=Spock.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Norwood Archers
 1 Elvish Warrior

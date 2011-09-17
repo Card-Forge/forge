@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Han Solo 3
-DisplayName=Han Solo
+Title=Han Solo
 Difficulty=hard
 Description=WU Enchanted Evening deck with lots of enchantment removal
+Icon=Han Solo.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Tundra
 4 Plains

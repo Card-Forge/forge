@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Oberon 3
-DisplayName=Oberon
+Title=Oberon
 Difficulty=hard
 Description=UB Faerie deck
+Icon=Oberon.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Scion of Oona|LRW
 4 Drowned Catacomb|M11

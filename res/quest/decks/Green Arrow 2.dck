@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Green Arrow 2
-DisplayName=Green Arrow
+Title=Green Arrow
 Difficulty=medium
 Description=Mono G Archer deck with Greatbow Doyen and Jagged-Scar Archers
+Icon=Green Arrow.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Gaea's Anthem|PLC
 4 Elvish Archers|7ED

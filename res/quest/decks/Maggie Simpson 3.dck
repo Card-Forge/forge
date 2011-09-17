@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Maggie Simpson 3
-DisplayName=Maggie Simpson
+Title=Maggie Simpson
 Difficulty=hard
 Description=BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf
+Icon=Maggie Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Hellkite Overlord
 2 Taiga

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Homer Simpson 1
-DisplayName=Homer Simpson
+Title=Homer Simpson
 Difficulty=easy
 Description=UBR Sacrifice deck with Mortician Beetle
+Icon=Homer Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Crumbling Necropolis
 6 Mountain

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Riddler 4
-DisplayName=Riddler
+Title=Riddler
 Difficulty=very hard
 Description=WR deck with mass damage spells, Stuffy Doll and Guilty Conscience
+Icon=Riddler.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Arid Mesa
 4 Plateau

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Fat Albert 1
-DisplayName=Fat Albert
+Title=Fat Albert
 Difficulty=easy
 Description=WBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers
+Icon=Fat Albert.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Druid of the Anima
 4 Jungle Shrine

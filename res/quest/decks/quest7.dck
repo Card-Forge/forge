@@ -1,9 +1,19 @@
+[quest]
+id=7
+AILife=30
+Repeat=true
+Wins=28
+Card Reward=3 multi-colored rares
+Credit Reward=150
+HumanExtras=
+AIExtras=Darksteel Ingot
 [metadata]
 Name=quest7
-DisplayName=Dungeon Crawling (Gold)
+Title=Dungeon Crawling (Gold)
+Difficulty=hard
+Description=Clever sorcerers draw energy from countless sources - can you outwit them?
 Icon=Dungeon Crawling Gold.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Glimmervoid
 4 Reflecting Pool

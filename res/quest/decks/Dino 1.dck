@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Dino 1
-DisplayName=Dino
+Title=Dino
 Difficulty=easy
 Description=Mono brown artifact deck with Affinity for artifacts, Metalcraft and Modular cards
+Icon=Dino.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Blasted Landscape
 2 Desert

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Buffy 3
-DisplayName=Buffy
+Title=Buffy
 Difficulty=hard
 Description=Mono B Zombie deck
+Icon=Buffy.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Unholy Grotto|ONS
 1 Graveborn Muse|10E

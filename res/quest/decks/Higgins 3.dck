@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Higgins 3
-DisplayName=Higgins
+Title=Higgins
 Difficulty=hard
 Description=UBR Grixis Control deck
+Icon=Higgins.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Underground Sea
 2 Badlands

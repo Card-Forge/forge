@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Odin 1
-DisplayName=Odin
+Title=Odin
 Difficulty=easy
 Description=WU deck with Thistledown Duo
+Icon=Odin.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Boreal Shelf
 1 Cloudcrest Lake

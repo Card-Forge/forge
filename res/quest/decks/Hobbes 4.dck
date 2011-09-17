@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Hobbes 4
-DisplayName=Hobbes
+Title=Hobbes
 Difficulty=very hard
 Description=UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba
+Icon=Hobbes.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Mox Emerald
 1 Mox Sapphire

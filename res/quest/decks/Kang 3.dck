@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Kang 3
-DisplayName=Kang
+Title=Kang
 Difficulty=hard
 Description=UB deck with Glen Elendra Liege and Dire Undercurrents
+Icon=Kang.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Benthic Djinn
 2 Ghastlord of Fugue

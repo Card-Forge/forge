@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Captain America 3
-DisplayName=Captain America
+Title=Captain America
 Difficulty=hard
 Description=Bant Exalted deck
+Icon=Captain America.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Seaside Citadel|ALA
 2 Dueling Grounds|INV

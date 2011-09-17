@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Magnum 3
-DisplayName=Magnum
+Title=Magnum
 Difficulty=hard
 Description=UG deck with Sturdy Hatchling and Shorecrasher Mimic
+Icon=Magnum.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Cold-Eyed Selkie
 2 Assault Zeppelid

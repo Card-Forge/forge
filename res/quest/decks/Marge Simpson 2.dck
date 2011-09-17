@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Marge Simpson 2
-DisplayName=Marge Simpson
+Title=Marge Simpson
 Difficulty=medium
 Description=RG deck with tokens which are devoured by creatures with devour
+Icon=Marge Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 8 Mountain
 8 Forest

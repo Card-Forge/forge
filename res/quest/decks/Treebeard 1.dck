@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Treebeard 1
-DisplayName=Treebeard
+Title=Treebeard
 Difficulty=easy
 Description=Mono G Treefolk deck with Bosk Banneret, Dauntless Dourbark and Leaf-Crowned Elder
+Icon=Treebeard.jpg
 Deck Type=constructed
-Icon=
 [main]
 22 Forest
 1 Reach of Branches

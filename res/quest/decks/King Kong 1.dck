@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=King Kong 1
-DisplayName=King Kong
+Title=King Kong
 Difficulty=easy
 Description=WBG Squirrel deck with tokens, changelings, Deranged Hermit and curse type auras
+Icon=King Kong.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Gilt-Leaf Palace
 2 Arctic Flats

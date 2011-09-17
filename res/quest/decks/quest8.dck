@@ -1,9 +1,19 @@
+[quest]
+id=8
+AILife=25
+Repeat=false
+Wins=28
+Card Reward=3 random rares
+Credit Reward=200
+HumanExtras=TOKEN;G;0;1;Sheep;Creature;Sheep|TOKEN;G;0;1;Sheep;Creature;Sheep|TOKEN;G;0;1;Sheep;Creature;Sheep
+AIExtras=
 [metadata]
 Name=quest8
-DisplayName=A Wolf in Sheep's Clothing
+Title=A Wolf in Sheep's Clothing
+Difficulty=medium
+Description=The local sheep farm is under attack by a pack of wolves. Kill the wolves, save the sheep!
 Icon=A Wolf in Sheeps Clothing.jpg
 Deck Type=constructed
-Comment=
 [main]
 1 Temple Garden
 1 Mox Emerald

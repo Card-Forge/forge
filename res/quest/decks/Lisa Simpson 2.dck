@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Lisa Simpson 2
-DisplayName=Lisa Simpson
+Title=Lisa Simpson
 Difficulty=medium
 Description=WG Devour deck with tokens, Skullmulcher and Mycoloth
+Icon=Lisa Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 7 Forest
 7 Plains

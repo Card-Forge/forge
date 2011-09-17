@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Wonder Woman 2
-DisplayName=Wonder Woman
+Title=Wonder Woman
 Difficulty=medium
 Description=Mono W Equipment deck
+Icon=Wonder Woman.jpg
 Deck Type=constructed
-Icon=
 [main]
 24 Plains
 2 Auriok Glaivemaster

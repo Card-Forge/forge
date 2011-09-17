@@ -1,9 +1,19 @@
+[quest]
+id=12
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 random rares
+Credit Reward=250
+HumanExtras=TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally|TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally|TOKEN;W;1;1;Soldier Ally;Creature;Soldier;Ally
+AIExtras=Lowland Giant
 [metadata]
 Name=quest12
-DisplayName=Barroom Brawl
+Title=Barroom Brawl
+Difficulty=hard
+Description=A drunken giant of a man takes a swing at you, your brew spills and a fight breaks out.
 Icon=Barroom Brawl.jpg
 Deck Type=constructed
-Comment=
 [main]
 2 Birds of Paradise
 4 Knight of the Reliquary

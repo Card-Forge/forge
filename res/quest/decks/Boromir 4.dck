@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Boromir 4
-DisplayName=Boromir
+Title=Boromir
 Difficulty=very hard
 Description=UG Show and Tell deck with huge creatures
+Icon=Boromir.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Misty Rainforest
 4 Tropical Island

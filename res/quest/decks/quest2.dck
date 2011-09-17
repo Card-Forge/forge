@@ -1,9 +1,19 @@
+[quest]
+id=2
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 blue rares
+Credit Reward=100
+HumanExtras=Quest for Ancient Secrets
+AIExtras=Forced Fruition
 [metadata]
 Name=quest2
-DisplayName=Dungeon Crawling (Blue)
+Title=Dungeon Crawling (Blue)
+Difficulty=medium
+Description=This realm holds knowledge so vast it can overburden the unwary.
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
-Comment=
 [main]
 20 Island
 4 Wasteland

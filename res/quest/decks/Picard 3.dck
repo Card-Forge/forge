@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Picard 3
-DisplayName=Picard
+Title=Picard
 Difficulty=hard
 Description=WUG Elf deck with elf lords
+Icon=Picard.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Wellwisher
 1 Mox Emerald

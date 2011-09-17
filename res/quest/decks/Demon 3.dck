@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Demon 3
-DisplayName=Demon
+Title=Demon
 Difficulty=hard
 Description=Mono B Demon deck
+Icon=Demon.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Go for the Throat|MBS
 1 Loxodon Warhammer|10E

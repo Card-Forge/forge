@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Crocodile Dundee 3
-DisplayName=Crocodile Dundee
+Title=Crocodile Dundee
 Difficulty=hard
 Description=Mono R deck with Mudbrawler Cohort and Bloodmark Mentor
+Icon=Crocodile Dundee.jpg
 Deck Type=constructed
-Icon=
 [main]
 21 Mountain
 1 Mox Ruby

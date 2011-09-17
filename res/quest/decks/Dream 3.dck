@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Dream 3
-DisplayName=Dream
+Title=Dream
 Difficulty=hard
 Description=U Illusion deck with Lord of the Unreal and Krovikan Mist
+Icon=Dream.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Phantom Beast
 4 Gossamer Phantasm

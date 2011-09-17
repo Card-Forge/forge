@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Sauron 2
-DisplayName=Sauron
+Title=Sauron
 Difficulty=medium
 Description=UB Underworld Dreams deck with Black Vise and lots of card draw for both players
+Icon=Sauron.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Underground Sea
 4 Frost Marsh

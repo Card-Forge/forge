@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=King Arthur 3
-DisplayName=King Arthur
+Title=King Arthur
 Difficulty=hard
 Description=WG Hybrid Knight deck with Wilt-Leaf Liege, Knight of New Alara and equipments
+Icon=King Arthur.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Steward of Valeron
 2 Knight Exemplar

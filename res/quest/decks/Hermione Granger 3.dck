@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Hermione Granger 3
-DisplayName=Hermione Granger
+Title=Hermione Granger
 Difficulty=hard
 Description=UR deck with Riverfall Mimic and Mindwrack Liege
+Icon=Hermione Granger.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Prophetic Bolt|APC
 10 Mountain|MBS

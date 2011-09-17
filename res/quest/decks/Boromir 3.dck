@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Boromir 3
-DisplayName=Boromir
+Title=Boromir
 Difficulty=hard
 Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
+Icon=Boromir.jpg
 Deck Type=constructed
-Icon=
 [main]
 21 Forest
 1 Mox Emerald

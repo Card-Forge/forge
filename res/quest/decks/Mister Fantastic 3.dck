@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Mister Fantastic 3
-DisplayName=Mister Fantastic
+Title=Mister Fantastic
 Difficulty=hard
 Description=UG Intruder Alarm deck with Imperious Perfect and mana elves
+Icon=Mister Fantastic.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Misty Rainforest
 4 Tropical Island

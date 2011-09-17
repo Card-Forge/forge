@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Electro 3
-DisplayName=Electro
+Title=Electro
 Difficulty=hard
 Description=WRG Naya deck with creatures with power 5 or greater
+Icon=Electro.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Jungle Shrine
 3 Plateau

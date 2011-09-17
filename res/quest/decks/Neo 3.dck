@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Neo 3
-DisplayName=Neo
+Title=Neo
 Difficulty=hard
 Description=RG deck with Boartusk Liege, Jund Hackblade and Naya Hushblade
+Icon=Neo.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Taiga
 4 Wooded Foothills

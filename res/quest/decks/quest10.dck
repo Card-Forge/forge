@@ -1,9 +1,19 @@
+[quest]
+id=10
+AILife=30
+Repeat=false
+Wins=40
+Card Reward=4 black rares
+Credit Reward=200
+HumanExtras=TOKEN;W;1;1;Citizen;Creature|TOKEN;W;1;1;Citizen;Creature|TOKEN;W;1;1;Citizen;Creature|Wall of Spears
+AIExtras=Scathe Zombies|Mass of Ghouls
 [metadata]
 Name=quest10
-DisplayName=Zombie Attack!
+Title=Zombie Attack!
+Difficulty=hard
+Description=The village of Haven is getting attacked by the Zombie horde! Protect the village.
 Icon=Zombie Attack.jpg
 Deck Type=constructed
-Comment=
 [main]
 1 Cadaverous Knight
 1 Bog Raiders

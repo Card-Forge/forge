@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Genghis Khan 1
-DisplayName=Genghis Khan
+Title=Genghis Khan
 Difficulty=easy
 Description=WRG deck with mana ramp, Armageddon and Mungha Wurm
+Icon=Genghis Khan.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Terramorphic Expanse
 2 Birds of Paradise

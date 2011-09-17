@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Oberon 2
-DisplayName=Oberon
+Title=Oberon
 Difficulty=medium
 Description=UB Faerie deck
+Icon=Oberon.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Briarberry Cohort|SHM
 1 Faerie Swarm|SHM

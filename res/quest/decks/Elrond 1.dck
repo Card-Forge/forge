@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Elrond 1
-DisplayName=Elrond
+Title=Elrond
 Difficulty=easy
 Description=WG Aura deck with Rabid Wombat
+Icon=Elrond.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Plains
 2 Forest

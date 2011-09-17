@@ -1,9 +1,19 @@
+[quest]
+id=17
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 colorless rares
+Credit Reward=250
+HumanExtras=Hopping Automaton|Honden of Life's Web|Forbidden Orchard
+AIExtras=Honden of Infinite Rage|Mikokoro, Center of the Sea
 [metadata]
 Name=quest17
-DisplayName=House Party
+Title=House Party
+Difficulty=hard
+Description=Your friends decide to hold a house party at your home tonight. Later that night uninvited guests show up and disrupt the party.
 Icon=House Party.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Terminate
 4 Taiga

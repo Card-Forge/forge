@@ -1,9 +1,19 @@
+[quest]
+id=18
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=5 random rares
+Credit Reward=300
+HumanExtras=Straw Soldiers|Femeref Archers|Moonglove Extract
+AIExtras=Defiant Falcon|Soulcatcher|Storm Crow|Hypnotic Specter
 [metadata]
 Name=quest18
-DisplayName=Crows in the Field
+Title=Crows in the Field
+Difficulty=hard
+Description=Crows are eating the seed planted in the local farm fields. The farmers are scared. Those crows are big, you will need some help.
 Icon=Crows in the Field.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Birds of Paradise
 4 Knight of the Reliquary

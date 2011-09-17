@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Jack Sparrow 1
-DisplayName=Jack Sparrow
+Title=Jack Sparrow
 Difficulty=easy
 Description=UB Pirate deck with Talas Warrior, Coastal Piracy, Drowned and Sea's Claim
+Icon=Jack Sparrow.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Cloud Pirates
 1 Water Wurm

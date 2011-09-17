@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=James Bond 1
-DisplayName=James Bond
+Title=James Bond
 Difficulty=easy
 Description=WG Sliver deck
+Icon=James Bond.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Elfhame Palace
 4 Arctic Flats

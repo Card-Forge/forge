@@ -1,9 +1,19 @@
+[quest]
+id=14
+AILife=30
+Repeat=false
+Wins=64
+Card Reward=4 random rares
+Credit Reward=250
+HumanExtras=Glasses of Urza|Blight Sickle
+AIExtras=Bad Moon|Wall of Brambles
 [metadata]
 Name=quest14
-DisplayName=Ancient Battlefield
+Title=Ancient Battlefield
+Difficulty=hard
+Description=You visit an ancient battlefield at midnight. It is overgrown and dark. You trip on a root, utter a curse and wish that you could see.
 Icon=Ancient Battlefield.jpg
 Deck Type=constructed
-Comment=
 [main]
 4 Birds of Paradise
 1 Plague Wind

@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Samantha Stephens 3
-DisplayName=Samantha Stephens
+Title=Samantha Stephens
 Difficulty=hard
 Description=WU Painter's Servant anti-red deck with Grindstone combo
+Icon=Samantha Stephens.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Plains
 1 Karakas

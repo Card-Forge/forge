@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Krypto 3
-DisplayName=Krypto
+Title=Krypto
 Difficulty=hard
 Description=BRG Bloodthirst deck with Doubling Season, Kyren Sniper and Rumbling Slum
+Icon=Krypto.jpg
 Deck Type=constructed
-Icon=
 [main]
 3 Skarrgan Pit-Skulk
 1 Battlegrowth

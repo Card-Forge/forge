@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Tom Bombadil 3
-DisplayName=Tom Bombadil
+Title=Tom Bombadil
 Difficulty=hard
 Description=Mono G deck with Garruk's Packleader, Garruk Wildspeaker and Garruk's Companion
+Icon=Tom Bombadil.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Explore|WWK
 1 Harrow|ZEN

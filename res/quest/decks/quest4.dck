@@ -1,9 +1,19 @@
+[quest]
+id=4
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 red rares
+Credit Reward=100
+HumanExtras=
+AIExtras=Furnace of Rath
 [metadata]
 Name=quest4
-DisplayName=Dungeon Crawling (Red)
+Title=Dungeon Crawling (Red)
+Difficulty=medium
+Description=Untold treasure awaits you, should you successfully dodge the lightning and lava.
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
-Comment=
 [main]
 49 Mountain
 1 Fury Sliver

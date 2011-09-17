@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Wilma Flintstone 3
-DisplayName=Wilma Flintstone
+Title=Wilma Flintstone
 Difficulty=hard
 Description=BG deck with Noxious Hatchling and Woodlurker Mimic
+Icon=Wilma Flintstone.jpg
 Deck Type=constructed
-Icon=
 [main]
 4 Verdant Catacombs
 2 Llanowar Dead

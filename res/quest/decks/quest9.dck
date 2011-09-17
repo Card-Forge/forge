@@ -1,9 +1,19 @@
+[quest]
+id=9
+AILife=30
+Repeat=false
+Wins=40
+Card Reward=4 green rares
+Credit Reward=225
+HumanExtras=Trusty Machete
+AIExtras=Wall of Wood|Wall of Wood|Wall of Wood
 [metadata]
 Name=quest9
-DisplayName=Bushwhacked!
+Title=Bushwhacked!
+Difficulty=hard
+Description=You find yourself surrounded by carnivorous plants and poisonous vines. Cut your way out of this foresty mess and make it home safe.
 Icon=Bushwhacked.jpg
 Deck Type=constructed
-Comment=
 [main]
 2 Avenger of Zendikar
 1 Sapling of Colfenor

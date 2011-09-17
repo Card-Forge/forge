@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=George of the Jungle 2
-DisplayName=George of the Jungle
+Title=George of the Jungle
 Difficulty=medium
 Description=WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant
+Icon=George of the Jungle.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Bull Cerodon
 4 Sacred Foundry

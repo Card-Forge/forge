@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Bart Simpson 3
-DisplayName=Bart Simpson
+Title=Bart Simpson
 Difficulty=hard
 Description=WUG deck with Harrier Griffin and Entangling Vines
+Icon=Bart Simpson.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Island
 3 Plains

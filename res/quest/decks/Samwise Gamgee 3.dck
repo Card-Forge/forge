@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Samwise Gamgee 3
-DisplayName=Samwise Gamgee
+Title=Samwise Gamgee
 Difficulty=hard
 Description=Mono W Kithkin deck
+Icon=Samwise Gamgee.jpg
 Deck Type=constructed
-Icon=
 [main]
 2 Burrenton Bombardier|MOR
 4 Arid Mesa|ZEN

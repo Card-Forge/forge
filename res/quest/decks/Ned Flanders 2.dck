@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Ned Flanders 2
-DisplayName=Ned Flanders
+Title=Ned Flanders
 Difficulty=medium
 Description=Mono B reanimator deck with a few large creatures and some spells
+Icon=Ned Flanders.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Hellkite Overlord
 4 Zombify

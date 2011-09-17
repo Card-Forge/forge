@@ -1,10 +1,11 @@
+[duel]
 [metadata]
 Name=Aquaman 1
-DisplayName=Aquaman
+Title=Aquaman
 Difficulty=easy
 Description=WU Control deck
+Icon=Aquaman.jpg
 Deck Type=constructed
-Icon=
 [main]
 1 Accorder Paladin
 1 Caravan Escort
