@@ -6127,6 +6127,7 @@ res/cardsfolder/r/restless_bones.txt svneol=native#text/plain
 res/cardsfolder/r/restless_dead.txt svneol=native#text/plain
 res/cardsfolder/r/restless_dreams.txt -text
 res/cardsfolder/r/restock.txt svneol=native#text/plain
+res/cardsfolder/r/restrain.txt -text
 res/cardsfolder/r/resurrection.txt svneol=native#text/plain
 res/cardsfolder/r/resuscitate.txt svneol=native#text/plain
 res/cardsfolder/r/retaliate.txt svneol=native#text/plain
@@ -6150,6 +6151,7 @@ res/cardsfolder/r/revive_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/r/reviving_dose.txt svneol=native#text/plain
 res/cardsfolder/r/revoke_existence.txt svneol=native#text/plain
 res/cardsfolder/r/reward_the_faithful.txt svneol=native#text/plain
+res/cardsfolder/r/rewards_of_diversity.txt -text
 res/cardsfolder/r/rewind.txt svneol=native#text/plain
 res/cardsfolder/r/reya_dawnbringer.txt svneol=native#text/plain
 res/cardsfolder/r/rhox_bodyguard.txt svneol=native#text/plain

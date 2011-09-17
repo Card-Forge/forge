@@ -1,0 +1,11 @@
+Name:Restrain
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn. Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/restrain.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/30.jpg
+Oracle:Prevent all combat damage that would be dealt by target attacking creature this turn.\nDraw a card.
+End
