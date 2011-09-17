@@ -53,7 +53,7 @@ public final class BoosterUtils {
         
         int nRares = numRare, nMythics = 0;
         Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare); 
-        boolean haveMythics = false;//filterMythics.any(cardpool);
+        boolean haveMythics = filterMythics.any(cardpool);
         for(int iSlot = 0; haveMythics && iSlot < numRare; iSlot++) {
             if (MyRandom.random.nextInt(7) < 1) { // a bit higher chance to get a mythic
                 nRares--;
