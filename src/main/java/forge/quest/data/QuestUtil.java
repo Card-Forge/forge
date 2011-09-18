@@ -130,37 +130,37 @@ public class QuestUtil {
         String[] temp = s.split(" ");
         
         int qty = Integer.parseInt(temp[0]);
-        
         // Determine rarity
         CardRarity rar = CardRarity.Uncommon;
-        if(temp[1].equals("rare") || temp[1].equals("rares")) {
+        if(temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {
             rar = CardRarity.Rare;
         }
         
         // Determine color ("random" defaults to null color)
         String col = null;
-        if(temp[2].toLowerCase().equals("black")) {
+        if(temp[1].equalsIgnoreCase("black")) {
             col = Constant.Color.Black;
         }
-        else if(temp[2].toLowerCase().equals("blue")) {
+        else if(temp[1].equalsIgnoreCase("blue")) {
             col = Constant.Color.Blue;
         }
-        else if(temp[2].toLowerCase().equals("colorless")) {
+        else if(temp[1].equalsIgnoreCase("colorless")) {
             col = Constant.Color.Colorless;
         }
-        else if(temp[2].toLowerCase().equals("green")) {
+        else if(temp[1].equalsIgnoreCase("green")) {
             col = Constant.Color.Green;
         }
-        else if(temp[2].toLowerCase().equals("multicolor")) {
+        else if(temp[1].equalsIgnoreCase("multicolor")) {
             col = "Multicolor"; // Note: No constant color for this??
         }
-        else if(temp[2].toLowerCase().equals("red")) {
+        else if(temp[1].equalsIgnoreCase("red")) {
             col = Constant.Color.Red;
         }
-        else if(temp[2].toLowerCase().equals("white")) {
+        else if(temp[1].equalsIgnoreCase("white")) {
             col = Constant.Color.White;
         }
         
+        System.out.println(rar+" "+col+" "+qty);
         return BoosterUtils.generateCards(qty, rar, col);
     }
 

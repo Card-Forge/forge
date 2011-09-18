@@ -168,7 +168,14 @@ public class QuestEventManager {
         }        
     }
     
-
+    /**
+     * <p>readExtraCard.</p>
+     * Creates single card for a string read from unique event properties.
+     * 
+     * @param name
+     * @param owner
+     * @return
+     */
     private Card readExtraCard(String name, Player owner) {
         // Token card creation
         Card tempcard;
