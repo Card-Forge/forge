@@ -101,7 +101,7 @@ public class CostPayLife extends CostPart {
         if (!activator.canPayLife(c)){
             return false;
         }
-        activator.payLife(c, null);
+        //activator.payLife(c, null);
         setLastPaidAmount(c);
         return true;
     }
