@@ -17,7 +17,6 @@ import forge.gui.input.Input_PayManaCost_Ability;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -2529,7 +2528,7 @@ public final class GameActionUtil {
     }
 
     /** Constant <code>stAnimate</code>. */
-    public static Command stAnimate = new Command() {
+    //public static Command stAnimate = new Command() {
         /** stAnimate
          * Syntax:[ k[0] stAnimate[All][Self][Enchanted] 		: k[1] AnimateValid :
          * 			k[2] P/T/Keyword : k[3] extra types 		: k[4] extra colors :
@@ -2537,7 +2536,7 @@ public final class GameActionUtil {
          *
          */
 
-        private static final long serialVersionUID = -1404133561787349004L;
+        /*private static final long serialVersionUID = -1404133561787349004L;
 
         // storage stores the source card and the cards it gave its bonus to, to know what to remove
         private ArrayList<StaticEffect> storage = new ArrayList<StaticEffect>();
@@ -2827,7 +2826,7 @@ public final class GameActionUtil {
 
             return affected;
         } //end getAffectedCards()
-    };
+    };*/
 
 
     /**

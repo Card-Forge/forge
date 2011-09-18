@@ -702,7 +702,7 @@ public class GameAction {
                 com.execute();
             }
 
-            GameActionUtil.stAnimate.execute();
+            //GameActionUtil.stAnimate.execute();
 
             CardList list = AllZoneUtil.getCardsInPlay();
             Card c;

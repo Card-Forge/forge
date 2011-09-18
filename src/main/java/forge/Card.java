@@ -1562,11 +1562,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (keyword.get(i).toString().contains("StaticEffect")) {
                     String[] k = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("stAnimate")) {
+                /*} else if (keyword.get(i).toString().contains("stAnimate")) {
                     String[] k = keyword.get(i).split(":", 8);
                     if (!k[7].contains("no text")) {
                         sbLong.append(k[7]).append("\r\n");
-                    }
+                    }*/
                 } else if (keyword.get(i).toString().contains("Protection:")) {
                     String[] k = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
