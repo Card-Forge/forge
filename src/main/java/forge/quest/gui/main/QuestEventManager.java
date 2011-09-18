@@ -360,32 +360,35 @@ public class QuestEventManager {
         forge.quest.data.QuestData questData = AllZone.getQuestData();
 
         List<QuestQuest> questOpponents = new ArrayList<QuestQuest>();
-
-        // If no quests available right now, generate new IDs.
-        if (questData.getAvailableQuests() == null || questData.getAvailableQuests().size() == 0) {  
-            // Assemble full list of currently available IDs.
+        
+        int maxQuests = questData.getWin() / 10;
+        if (maxQuests > 5) {
+            maxQuests = 5;
+        }
+        
+        // Generate IDs as needed.
+        if (questData.getAvailableQuests() == null || 
+                questData.getAvailableQuests().size() < maxQuests) { 
+            
+            List<Integer> unlockedQuestIds = new ArrayList<Integer>();
             List<Integer> availableQuestIds = new ArrayList<Integer>();
+            
             for(QuestQuest qq : allQuests) {
                 if (qq.getWinsReqd() <= questData.getWin() && 
                         !questData.getCompletedQuests().contains(qq.getId())) {
-                    availableQuestIds.add(qq.getId());
+                    unlockedQuestIds.add(qq.getId());
                 }
-            }            
+            }                        
 
-            // Filter that list as needed.
-            int maxQuests = questData.getWin() / 10;
-            if (maxQuests > 5) {
-                maxQuests = 5;
-            }
-
-            Collections.shuffle(availableQuestIds);
-
+            Collections.shuffle(unlockedQuestIds);
+            
             for (int i = 0; i < maxQuests; i++) {
-                availableQuestIds.add(i);
+                availableQuestIds.add(unlockedQuestIds.get(i));
             }
+            
             questData.setAvailableQuests(availableQuestIds);
             questData.saveData();
-        } //
+        } 
         
         // Finally, pull quest events from available IDs and return.
         for(int i : questData.getAvailableQuests()) {
