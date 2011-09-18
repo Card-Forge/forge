@@ -2,8 +2,9 @@ Name:Opalescence
 ManaCost:2 W W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Enchantment.nonAura+Other | SetPower$ OpalescenceX | SetToughness$ OpalescenceX | AddType$ Creature | AddSVar$ OpalescenceX | Description$ Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
-SVar:OpalescenceX:Count$CardManaCost
+S:Mode$ Continuous | Affected$ Enchantment.nonAura+Other | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
+SVar:AffectedX:Count$CardManaCost
+SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opalescence.jpg
