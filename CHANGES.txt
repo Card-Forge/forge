@@ -224,6 +224,31 @@ Comment=
 - removed unused code as pointed by warnings
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Minor fix (mythics)
+- Quest event dck files (didn't take the first time)
+- Little updates for quest deck changes.
+- Replaced the deck list of Quest 13.
+- should have excluded non-quest files
+- removed a useless "owner" parameter from getCard method of all factories
+- the way it should have been done
+- Converted the upkeep ability of Mana Vortex to script.
+- Converted the upkeep ability of Sleeper Agent to script.
+- Added Restrain and Rewards of Diversity.
+- Refactoring Enchanting and GameEntities
+- Added support for Enchanting Players in AF_Attach
+- Fixed Ore Gorger.
+- Added Curse to the list of enchantment types.
+- Null quest bug fixed.
+- Quest count vs. wins bug fixed.
+- Additional info saved in LKI copies (damage recieved). Fixes Rot Wolf, Soul Collector, Axelrod Gunnarson.
+- Booster pack quest reward bug fixed.
+- Converted Conversion and Glaciers to continuous static ability.
+- Converted the Zendikons to continuous static ability.
+- Converted Aquitect's Will and Liege of the Tangle to continuous static ability.
+- Fixed March of the Machines.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -275,6 +300,10 @@ Melira, Sylvok Outcast
 Wretched Banquet
 Corrupted Roots
 Unchecked Growth
+Caldera Kavu
+Kavu Chameleon
+Rainbow Crow
+Psychic Possession
 
 
 end
