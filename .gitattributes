@@ -6151,6 +6151,7 @@ res/cardsfolder/r/reverberate.txt svneol=native#text/plain
 res/cardsfolder/r/revered_dead.txt svneol=native#text/plain
 res/cardsfolder/r/revered_elder.txt svneol=native#text/plain
 res/cardsfolder/r/reverence.txt svneol=native#text/plain
+res/cardsfolder/r/reverent_silence.txt -text
 res/cardsfolder/r/revive.txt svneol=native#text/plain
 res/cardsfolder/r/revive_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/r/reviving_dose.txt svneol=native#text/plain
@@ -9657,6 +9658,7 @@ src/main/java/forge/card/cardFactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
+src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMana.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text

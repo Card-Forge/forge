@@ -91,6 +91,7 @@ public class Cost {
     private final static String subStr = "SubCounter<";
     private final static String addStr = "AddCounter<";
     private final static String lifeStr = "PayLife<";
+    private final static String lifeGainStr = "OppGainLife<";
     private final static String millStr = "Mill<";
     private final static String discStr = "Discard<";
     private final static String sacStr = "Sac<";
@@ -148,6 +149,14 @@ public class Cost {
             parse = abUpdateParse(parse, lifeStr);
 
             costParts.add(new CostPayLife(splitStr[0]));
+        }
+        
+        while (parse.contains(lifeGainStr)) {
+            // PayLife<LifeCost>
+            String[] splitStr = abCostParse(parse, lifeGainStr, 1);
+            parse = abUpdateParse(parse, lifeGainStr);
+
+            costParts.add(new CostGainLife(splitStr[0]));
         }
 
         while (parse.contains(millStr)) {
