@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_possession.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/30.jpg
+Oracle:Enchant opponent\nSkip your draw step.\nWhenever enchanted opponent draws a card, you may draw a card.
 End
