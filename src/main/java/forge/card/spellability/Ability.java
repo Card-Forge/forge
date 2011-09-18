@@ -2,6 +2,7 @@ package forge.card.spellability;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
+import forge.Constant.Zone;
 
 
 /**
@@ -44,8 +45,8 @@ abstract public class Ability extends SpellAbility {
     public boolean canPlay() {
         if (AllZone.getStack().isSplitSecondOnStack()) return false;
 
-        CardList pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
-        pithing.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+        CardList pithing = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         pithing = pithing.getName("Pithing Needle");
         pithing = pithing.filter(new CardListFilter() {
             public boolean addCard(Card c) {

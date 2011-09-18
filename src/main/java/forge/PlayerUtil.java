@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 
@@ -24,7 +25,7 @@ public final class PlayerUtil {
      */
     public static boolean worshipFlag(final Player player) {
         // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
@@ -53,7 +54,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanHand().size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
                 }
                 AllZone.getDisplay().showMessage("Select " + (nCards - n) + " cards to discard, unless you discard a "
@@ -75,7 +76,7 @@ public final class PlayerUtil {
                     if (card.isType(uType.toString())) {
                         stop();
                     } else {
-                        if (n == nCards || AllZone.getHumanHand().size() == 0) {
+                        if (n == nCards || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                             stop();
                         } else {
                             showMessage();
@@ -105,7 +106,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanHand().size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
                 }
                 if (nCards == 0) {
@@ -123,7 +124,7 @@ public final class PlayerUtil {
                     n++;
 
                     //in case no more cards in hand
-                    if (n == nCards || AllZone.getHumanHand().size() == 0) {
+                    if (n == nCards || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                         stop();
                     } else {
                         showMessage();
@@ -145,7 +146,7 @@ public final class PlayerUtil {
 
 			@Override
             public void showMessage() {
-                if (AllZone.getHumanHand().size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
                 }
 
@@ -190,7 +191,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input input_sacrificePermanents(final int nCards) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list.remove("Mana Pool");            // is this needed?
         return input_sacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } //input_sacrificePermanents()
@@ -204,7 +205,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input input_sacrificePermanents(final int nCards, final String type) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list.remove("Mana Pool");            // is this needed?
 
         list = list.getType(type);
@@ -239,7 +240,7 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.equals(AllZone.getHumanBattlefield()) && list.contains(card)) {
+                if (zone.equals(AllZone.getHumanPlayer().getZone(Zone.Battlefield)) && list.contains(card)) {
                     AllZone.getGameAction().sacrifice(card);
                     n++;
                     list.remove(card);
@@ -275,7 +276,7 @@ public final class PlayerUtil {
                 AllZone.getDisplay().showMessage("Select a card to put on the " + TopOrBottom + " of your library.");
                 ButtonUtil.disableAll();
 
-                if (n == num || AllZone.getHumanHand().size() == 0) {
+                if (n == num || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
                 }
             }

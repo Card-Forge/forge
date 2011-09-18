@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Phase;
 import forge.Player;
@@ -54,7 +55,7 @@ public class Input_Mulligan extends Input {
      * @return an int
      */
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
-        CardList hand = AllZoneUtil.getPlayerHand(player);
+        CardList hand = player.getCardsIn(Zone.Hand);
         for (Card c : hand) { AllZone.getGameAction().moveToLibrary(c); }
         for (int i = 0; i < MAGIC_NUMBER_OF_SHUFFLES; i++) { player.shuffle(); }
         int newHand = hand.size() - 1;
@@ -95,7 +96,7 @@ public class Input_Mulligan extends Input {
         //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
         while (aiTakesMulligan) {
 
-            CardList handList = AllZoneUtil.getPlayerHand(aiPlayer);
+            CardList handList = aiPlayer.getCardsIn(Zone.Hand);
             boolean hasLittleCmc0Cards = handList.getValidCards("Card.cmcEQ0", aiPlayer, null).size() < 2;
             aiTakesMulligan = handList.size() > AI_MULLIGAN_THRESHOLD && hasLittleCmc0Cards;
 
@@ -107,7 +108,7 @@ public class Input_Mulligan extends Input {
         //Human Leylines & Chancellors
         ButtonUtil.reset();
         AbilityFactory af = new AbilityFactory();
-        CardList humanOpeningHand = AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer());
+        CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
 
         for (Card c : humanOpeningHand) {
             ArrayList<String> kws = c.getKeyword();
@@ -132,7 +133,7 @@ public class Input_Mulligan extends Input {
         }
 
         //Computer Leylines & Chancellors
-        CardList aiOpeningHand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+        CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
         for (Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
                 ArrayList<String> kws = c.getKeyword();
@@ -154,7 +155,7 @@ public class Input_Mulligan extends Input {
                 }
             }
             if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity")
-                    && AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0))
+                    && AllZoneUtil.getCardsIn(Zone.Battlefield, "Leyline of Singularity").size() > 0))
             {
                 AllZone.getGameAction().moveToPlay(c);
                 AllZone.getGameAction().checkStateEffects();
@@ -166,9 +167,9 @@ public class Input_Mulligan extends Input {
         if (AllZone.getGameAction().isStartCut() && !(humanOpeningHand.contains(AllZone.getGameAction().getHumanCut())
                 || aiOpeningHand.contains(AllZone.getGameAction().getComputerCut())))
         {
-            AllZone.getGameAction().moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.getHumanPlayer()),
+            AllZone.getGameAction().moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
                     AllZone.getGameAction().getHumanCut());
-            AllZone.getGameAction().moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.getComputerPlayer()),
+            AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
                     AllZone.getGameAction().getComputerCut());
         }
         AllZone.getGameAction().checkStateEffects();

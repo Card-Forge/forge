@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.List;
+
 /**
  * <p>IPlayerZone interface.</p>
  *
@@ -78,6 +80,10 @@ interface IPlayerZone {
      * @return an array of {@link forge.Card} objects.
      */
     Card[] getCards();
+    Card[] getCards(int n);
+    
+    /** isEmpty returns true if given zone contains no cards */
+    boolean isEmpty();
 
     //removes all cards
     /**
@@ -91,7 +97,8 @@ interface IPlayerZone {
      * @param zone a {@link java.lang.String} object.
      * @return a boolean.
      */
-    boolean is(String zone);
+    boolean is(Constant.Zone zone);
+    boolean is(List<Constant.Zone> zones);
 
     /**
      * <p>is.</p>
@@ -100,7 +107,7 @@ interface IPlayerZone {
      * @param player a {@link forge.Player} object.
      * @return a boolean.
      */
-    boolean is(String zone, Player player);
+    boolean is(Constant.Zone zone, Player player);
 
     /**
      * <p>getPlayer.</p>
@@ -114,7 +121,7 @@ interface IPlayerZone {
      *
      * @return a {@link java.lang.String} object.
      */
-    String getZoneName(); //returns the Zone's name like Graveyard
+    Constant.Zone getZoneType(); //returns the Zone's name like Graveyard
 
     /**
      * <p>toString.</p>
@@ -122,5 +129,8 @@ interface IPlayerZone {
      * @return a {@link java.lang.String} object.
      */
     String toString();
+    
+    
+    void resetCardsAddedThisTurn();
 }
 

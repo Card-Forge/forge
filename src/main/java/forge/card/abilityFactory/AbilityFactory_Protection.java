@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -371,7 +372,7 @@ public final class AbilityFactory_Protection {
     	final HashMap<String, String> params = af.getMapParams();
     	final Card host = af.getHostCard();
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -948,7 +949,7 @@ public final class AbilityFactory_Protection {
         }
 
         String valid = params.get("ValidCards");
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
 
 

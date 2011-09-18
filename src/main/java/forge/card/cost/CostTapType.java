@@ -7,6 +7,7 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
@@ -53,7 +54,7 @@ public class CostTapType extends CostPartWithList {
 
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        CardList typeList = AllZoneUtil.getPlayerCardsInPlay(activator);
+        CardList typeList = activator.getCardsIn(Zone.Battlefield);
 
         typeList = typeList.getValidCards(getType().split(";"), activator, source);
 
@@ -76,7 +77,7 @@ public class CostTapType extends CostPartWithList {
 
     @Override
     public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
-        CardList typeList = AllZoneUtil.getPlayerCardsInPlay(source.getController());
+        CardList typeList = source.getController().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         String amount = getAmount();
         Integer c = convertAmount();

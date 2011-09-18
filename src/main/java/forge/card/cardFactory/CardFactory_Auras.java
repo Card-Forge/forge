@@ -11,6 +11,7 @@ import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
@@ -390,7 +391,7 @@ class CardFactory_Auras {
                 @Override
                 public boolean canPlayAI() {
 
-                    CardList stuffy = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer(), "Stuffy Doll");
+                    CardList stuffy = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Stuffy Doll");
 
                     if (stuffy.size() > 0) {
                         setTargetCard(stuffy.get(0));
@@ -448,9 +449,7 @@ class CardFactory_Auras {
                 public CardList getCreturesInGrave() {
                     // This includes creatures Animate Dead can't enchant once in play.
                     // The human may try to Animate them, the AI will not.
-                    CardList cList = AllZoneUtil.getCardsInGraveyard();
-                    cList = cList.getType("Creature");
-                    return cList;
+                    return AllZoneUtil.getTypeIn(Zone.Graveyard, "Creature");
                 }
 
                 public boolean canPlay() {
@@ -501,7 +500,7 @@ class CardFactory_Auras {
 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
                     // Animate Dead got destroyed before its ability resolved
                     if (!AllZoneUtil.isCardInZone(play, card)) {
@@ -550,7 +549,7 @@ class CardFactory_Auras {
                 public void resolve() {
                     Card c = targetC[0];
 
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
                     if (AllZoneUtil.isCardInZone(play, c)) {
                         AllZone.getGameAction().sacrifice(c);
@@ -564,7 +563,7 @@ class CardFactory_Auras {
                 public void execute() {
                     Card c = targetC[0];
 
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
                     if (AllZoneUtil.isCardInZone(play, c)) {
                         AllZone.getStack().addSimultaneousStackEntry(detach);

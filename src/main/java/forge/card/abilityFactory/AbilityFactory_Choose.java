@@ -7,6 +7,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 
 import forge.card.cardFactory.CardFactoryUtil;
@@ -286,15 +287,15 @@ public class AbilityFactory_Choose {
                             if (params.containsKey("AILogic")) {
                                 String logic = params.get("AILogic");
                                 if (logic.equals("MostProminentOnBattlefield")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInPlay());
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentComputerControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+                                            AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentHumanControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer()));
+                                            AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(

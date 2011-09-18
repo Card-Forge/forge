@@ -1,6 +1,7 @@
 package forge.card.staticAbility;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 
 import java.util.HashMap;
@@ -154,12 +155,12 @@ public class StaticAbility {
     public boolean checkConditions() {
     	Player controller = hostCard.getController();
     	
-    	String effectZone = "Battlefield"; //default
+    	Zone effectZone = Zone.Battlefield; //default
     	
     	if (mapParams.containsKey("EffectZone"))
-    		effectZone = mapParams.get("EffectZone");
+    		effectZone = Zone.smartValueOf(mapParams.get("EffectZone"));
     	
-    	if(!effectZone.equals("All") && !AllZone.getZone(hostCard).getZoneName().equals(effectZone))
+    	if( effectZone != null && !AllZone.getZone(hostCard).getZoneType().equals(effectZone))
     		return false;
     	
     	if(mapParams.containsKey("Threshold") && !controller.hasThreshold())
@@ -178,7 +179,7 @@ public class StaticAbility {
     		return false;
     	
     	if (mapParams.containsKey("TopCardOfLibraryIs")) {
-    		Card topCard = AllZoneUtil.getPlayerCardsInLibrary(controller).get(0);
+    		Card topCard = controller.getCardsIn(Zone.Library).get(0);
     		if (!topCard.isValidCard(mapParams.get("TopCardOfLibraryIs").split(","), controller, hostCard))
     			return false;
     	}

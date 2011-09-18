@@ -25,7 +25,7 @@ public class SpellAbility_Variables {
     }
 
     // default values for Sorcery speed abilities
-    protected String zone = Constant.Zone.Battlefield;
+    protected Constant.Zone zone = Constant.Zone.Battlefield;
     protected ArrayList<String> phases = new ArrayList<String>();
     protected boolean bSorcerySpeed = false;
     protected boolean bAnyPlayer = false;
@@ -45,7 +45,7 @@ public class SpellAbility_Variables {
     protected String sIsPresent = null;
     protected String presentCompare = "GE1";    // Default Compare to Greater or Equal to 1
     protected String presentDefined = null;
-    protected String presentZone = Constant.Zone.Battlefield;
+    protected Constant.Zone presentZone = Constant.Zone.Battlefield;
 
     protected String svarToCheck = null;
     protected String svarOperator = "GE";
@@ -81,7 +81,7 @@ public class SpellAbility_Variables {
      *
      * @param zone a {@link java.lang.String} object.
      */
-    public void setZone(String zone) {
+    public void setZone(Constant.Zone zone) {
         this.zone = zone;
     }
 
@@ -90,7 +90,7 @@ public class SpellAbility_Variables {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getZone() {
+    public Constant.Zone getZone() {
         return zone;
     }
 
@@ -292,11 +292,11 @@ public class SpellAbility_Variables {
         presentCompare = compare;
     }
 
-    public String getPresentZone() {
+    public Constant.Zone getPresentZone() {
 		return presentZone;
 	}
 
-	public void setPresentZone(String presentZone) {
+	public void setPresentZone(Constant.Zone presentZone) {
 		this.presentZone = presentZone;
 	}
 

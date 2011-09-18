@@ -9,6 +9,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -280,7 +281,7 @@ public class AbilityFactory {
             }
 
             if (mapParams.containsKey("TgtZone")) {   // if Targeting something not in play, this Key should be set
-                abTgt.setZone(mapParams.get("TgtZone"));
+                abTgt.setZone(Zone.listValueOf(mapParams.get("TgtZone")));
             }
 
             // Target Type mostly for Counter: Spell,Activated,Triggered,Ability (or any combination of)
@@ -702,7 +703,7 @@ public class AbilityFactory {
             AbilityFactory_CounterMagic c = new AbilityFactory_CounterMagic(this);
 
             if (isTargeted) {   // Since all "Counter" ABs Counter things on the Stack no need for it to be everywhere
-                abTgt.setZone("Stack");
+                abTgt.setZone(Zone.Stack);
             }
 
             if (isAb) {
@@ -846,7 +847,7 @@ public class AbilityFactory {
 
         else if (API.equals("CopySpell")) {
             if (isTargeted) {   // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
-                abTgt.setZone("Stack");
+                abTgt.setZone(Zone.Stack);
             }
 
             if (isAb) {
@@ -1365,14 +1366,15 @@ public class AbilityFactory {
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             String[] workingCopy = defined.split(" ");
-            String destination, origin, validFilter;
+            Zone destination, origin;
+            String validFilter;
 
-            destination = workingCopy[1];
+            destination = Zone.smartValueOf(workingCopy[1]);
             if (workingCopy[2].equals("from")) {
-                origin = workingCopy[3];
+                origin = Zone.smartValueOf(workingCopy[3]);
                 validFilter = workingCopy[4];
             } else {
-                origin = "Any";
+                origin = null;
                 validFilter = workingCopy[2];
             }
             for (Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {

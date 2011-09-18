@@ -3,6 +3,7 @@ package forge.card.trigger;
 import forge.Card;
 import forge.AllZone;
 import forge.AllZoneUtil;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.CardList;
 import forge.Command;
@@ -382,7 +383,7 @@ public class TriggerHandler {
         }
 
         //Torpor Orb check
-        CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
+        CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
 
         if(torporOrbs.size() != 0)
         {

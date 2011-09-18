@@ -8,6 +8,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
@@ -56,7 +57,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
         if (!getThis()) {
-            CardList typeList = AllZoneUtil.getPlayerCardsInPlay(activator);
+            CardList typeList = activator.getCardsIn(Zone.Battlefield);
             typeList = typeList.getValidCards(getType().split(";"), activator, source);
             
             Integer amount = convertAmount();   
@@ -79,7 +80,7 @@ public class CostReturn extends CostPartWithList {
         String amount = getAmount();
         Integer c = convertAmount();
         Player activator = ability.getActivatingPlayer();
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(activator);
+        CardList list = activator.getCardsIn(Zone.Battlefield);
         if (c == null) {
             String sVar = source.getSVar(amount);
             // Generalize this
@@ -145,7 +146,7 @@ public class CostReturn extends CostPartWithList {
                     msg.append("s");
                 }
     
-                typeList = AllZoneUtil.getPlayerCardsInPlay(sa.getSourceCard().getController());
+                typeList = sa.getSourceCard().getController().getCardsIn(Zone.Battlefield);
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();

@@ -79,6 +79,7 @@ import com.google.code.jyield.YieldUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
@@ -169,9 +170,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * <p>setupActions.</p>
      */
     private void setupActions() {
-        HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.getHumanGraveyard(), HUMAN_GRAVEYARD);
-        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.getHumanExile(), HUMAN_REMOVED);
-        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.getHumanGraveyard(), HUMAN_FLASHBACK) {
+        HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_GRAVEYARD);
+        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile), HUMAN_REMOVED);
+        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_FLASHBACK) {
 
             private static final long serialVersionUID = 8120331222693706164L;
 
@@ -186,8 +187,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             	AllZone.getGameAction().playCard(c);
             }
         };
-        COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.getComputerGraveyard(), COMPUTER_GRAVEYARD);
-        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.getComputerExile(), COMPUTER_REMOVED);
+        COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Graveyard), COMPUTER_GRAVEYARD);
+        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Exile), COMPUTER_REMOVED);
         CONCEDE_ACTION = new ConcedeAction();
 
         HUMAN_DECKLIST_ACTION = new DeckListAction(HUMAN_DECKLIST);
@@ -251,9 +252,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         if (Constant.Runtime.DevMode[0]) {
             canLoseByDecking.setSelected(Constant.Runtime.Mill[0]);
 
-            Action viewAIHand = new ZoneAction(AllZone.getComputerHand(), COMPUTER_HAND.BASE);
-            Action viewAILibrary = new ZoneAction(AllZone.getComputerLibrary(), COMPUTER_LIBRARY.BASE);
-            Action viewHumanLibrary = new ZoneAction(AllZone.getHumanLibrary(), HUMAN_LIBRARY.BASE);
+            Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), COMPUTER_HAND.BASE);
+            Action viewAILibrary = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Library), COMPUTER_LIBRARY.BASE);
+            Action viewHumanLibrary = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HUMAN_LIBRARY.BASE);
             ForgeAction generateMana = new ForgeAction(MANAGEN) {
                 private static final long serialVersionUID = 7171104690016706405L;
 
@@ -576,7 +577,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                             ((Input_Block) inputControl.input).removeFromAllBlocking(c);
                         }
                     } else {
-                        inputControl.selectCard(c, AllZone.getHumanBattlefield());
+                        inputControl.selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Battlefield));
                     }
                 }
             }
@@ -592,7 +593,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
                 Card c = playerHandPanel.getCardFromMouseOverPanel();
                 if (c != null) {
-                    inputControl.selectCard(c, AllZone.getHumanHand());
+                    inputControl.selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
                     okButton.requestFocusInWindow();
                 }
             }
@@ -608,7 +609,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void mousePressed(final MouseEvent e) {
                 Card c = oppPlayPanel.getCardFromMouseOverPanel();
                 if (c != null) {
-                    inputControl.selectCard(c, AllZone.getComputerBattlefield());
+                    inputControl.selectCard(c, AllZone.getComputerPlayer().getZone(Zone.Battlefield));
                 }
             }
         });
@@ -639,32 +640,32 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         { //make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(final Observable a, final Object b) {
-                    playerHandValue.setText("" + AllZone.getHumanHand().size());
-                    playerGraveValue.setText("" + AllZone.getHumanGraveyard().size());
-                    playerLibraryValue.setText("" + AllZone.getHumanLibrary().size());
+                    playerHandValue.setText("" + AllZone.getHumanPlayer().getZone(Zone.Hand).size());
+                    playerGraveValue.setText("" + AllZone.getHumanPlayer().getZone(Zone.Graveyard).size());
+                    playerLibraryValue.setText("" + AllZone.getHumanPlayer().getZone(Zone.Library).size());
                     playerFBValue.setText("" + CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer()).size());
-                    playerRemovedValue.setText("" + AllZone.getHumanExile().size());
+                    playerRemovedValue.setText("" + AllZone.getHumanPlayer().getZone(Zone.Exile).size());
 
                 }
             };
-            AllZone.getHumanHand().addObserver(o);
-            AllZone.getHumanGraveyard().addObserver(o);
-            AllZone.getHumanLibrary().addObserver(o);
+            AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o);
+            AllZone.getHumanPlayer().getZone(Zone.Graveyard).addObserver(o);
+            AllZone.getHumanPlayer().getZone(Zone.Library).addObserver(o);
         }
 
         //opponent Hand, Graveyard, and Library totals
         { //make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(final Observable a, final Object b) {
-                    oppHandValue.setText("" + AllZone.getComputerHand().size());
-                    oppGraveValue.setText("" + AllZone.getComputerGraveyard().size());
-                    oppLibraryValue.setText("" + AllZone.getComputerLibrary().size());
-                    oppRemovedValue.setText("" + AllZone.getComputerExile().size());
+                    oppHandValue.setText("" + AllZone.getComputerPlayer().getZone(Zone.Hand).size());
+                    oppGraveValue.setText("" + AllZone.getComputerPlayer().getZone(Zone.Graveyard).size());
+                    oppLibraryValue.setText("" + AllZone.getComputerPlayer().getZone(Zone.Library).size());
+                    oppRemovedValue.setText("" + AllZone.getComputerPlayer().getZone(Zone.Exile).size());
                 }
             };
-            AllZone.getComputerHand().addObserver(o);
-            AllZone.getComputerGraveyard().addObserver(o);
-            AllZone.getComputerLibrary().addObserver(o);
+            AllZone.getComputerPlayer().getZone(Zone.Hand).addObserver(o);
+            AllZone.getComputerPlayer().getZone(Zone.Graveyard).addObserver(o);
+            AllZone.getComputerPlayer().getZone(Zone.Library).addObserver(o);
         }
 
 
@@ -775,7 +776,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
 
         //self hand
-        AllZone.getHumanHand().addObserver(new Observer() {
+        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
             public void update(final Observable a, final Object b) {
                 PlayerZone pZone = (PlayerZone) a;
                 HandArea p = playerHandPanel;
@@ -829,11 +830,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
             }
         });
-        AllZone.getHumanHand().updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
         //END, self hand
 
         //self play
-        AllZone.getHumanBattlefield().addObserver(new Observer() {
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).addObserver(new Observer() {
             public void update(final Observable a, final Object b) {
                 PlayerZone pZone = (PlayerZone) a;
 
@@ -842,12 +843,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 GuiDisplayUtil.setupPlayZone(playerPlayPanel, c);
             }
         });
-        AllZone.getHumanBattlefield().updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
         //END - self play
 
 
         //computer play
-        AllZone.getComputerBattlefield().addObserver(new Observer() {
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).addObserver(new Observer() {
             public void update(final Observable a, final Object b) {
                 PlayerZone pZone = (PlayerZone) a;
 
@@ -856,7 +857,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 GuiDisplayUtil.setupPlayZone(oppPlayPanel, c);
             }
         });
-        AllZone.getComputerBattlefield().updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
         //END - computer play
 
     } //addObservers()

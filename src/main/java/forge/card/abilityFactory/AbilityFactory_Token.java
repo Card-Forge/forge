@@ -10,6 +10,7 @@ import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -227,7 +228,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         for (String type : tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer(), tokenName).size() > 0)
+                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, tokenName).size() > 0)
                     return false;
             }
         }

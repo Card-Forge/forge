@@ -2,6 +2,7 @@ package forge.card.spellability;
 
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
@@ -51,10 +52,10 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
         }
 
         if (params.containsKey("ActivationZone"))
-            setZone(params.get("ActivationZone"));
+            setZone(Zone.smartValueOf(params.get("ActivationZone")));
 
         if (params.containsKey("Flashback")) {
-            setZone("Graveyard");
+            setZone(Zone.Graveyard);
         }
 
         if (params.containsKey("SorcerySpeed"))
@@ -102,7 +103,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             if (params.containsKey("PresentCompare"))
                 setPresentCompare(params.get("PresentCompare"));
             if (params.containsKey("PresentZone"))
-            	setPresentZone(params.get("PresentZone"));
+            	setPresentZone(Zone.smartValueOf(params.get("PresentZone")));
         }
 
         if (params.containsKey("IsNotPresent")) {
@@ -174,7 +175,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
         }
 
         if (nCardsInHand != -1) {
-            if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
+            if (activator.getCardsIn(Zone.Hand).size() != nCardsInHand)
                 return false;
         }
         if (hellbent) {
@@ -202,7 +203,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
         }
         if (sIsPresent != null) {
-            CardList list = AllZoneUtil.getCardsInZone(presentZone);
+            CardList list = AllZoneUtil.getCardsIn(presentZone);
 
             list = list.getValidCards(sIsPresent.split(","), activator, c);
 

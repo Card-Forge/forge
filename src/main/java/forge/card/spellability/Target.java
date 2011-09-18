@@ -5,6 +5,8 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>Target class.</p>
@@ -138,23 +140,22 @@ public class Target {
         return choice != null && getMinTargets(c, sa) <= choice.getNumTargeted();
     }
 
-    private String tgtZone = Constant.Zone.Battlefield;
+    private List<Constant.Zone> tgtZone = Arrays.asList(Constant.Zone.Battlefield);
 
     /**
      * <p>setZone.</p>
      *
      * @param tZone a {@link java.lang.String} object.
      */
-    public void setZone(String tZone) {
-        tgtZone = tZone;
-    }
+    public void setZone(Constant.Zone tZone) { tgtZone = Arrays.asList(tZone); }
+    public void setZone(List<Constant.Zone> tZone) { tgtZone = tZone; }
 
     /**
      * <p>getZone.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getZone() {
+    public List<Constant.Zone> getZone() {
         return tgtZone;
     }
 
@@ -483,7 +484,7 @@ public class Target {
             return true;
         }
         
-        for (Card c : AllZoneUtil.getCardsInZone(tgtZone)){
+        for (Card c : AllZoneUtil.getCardsIn(tgtZone)){
             if (c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
                 return true;
             }

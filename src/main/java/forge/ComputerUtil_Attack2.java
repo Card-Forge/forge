@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 
@@ -205,7 +206,7 @@ public class ComputerUtil_Attack2 {
         int humanExaltedBonus = countExaltedBonus(AllZone.getHumanPlayer());
 
         if (humanExaltedBonus > 0) {
-            int nFinestHours = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer(), "Finest Hour").size();
+            int nFinestHours = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size();
 
             if ((blockersNeeded == 0 || nFinestHours > 0) && humanList.size() > 0) {
                 //
@@ -266,7 +267,7 @@ public class ComputerUtil_Attack2 {
     private boolean doAssault() {
         //Beastmaster Ascension
         if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer()) && attackers.size() > 1) {
-            CardList beastions = AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, AllZone.getComputerPlayer()).
+            CardList beastions = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Battlefield).
                     getName("Beastmaster Ascension");
             int minCreatures = 7;
             for (Card beastion : beastions) {
@@ -532,8 +533,8 @@ public class ComputerUtil_Attack2 {
         //Exalted
         if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.getComputerPlayer()) >= 3 ||
                 AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer()) ||
-                AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer(), "Battlegrace Angel").size() >= 2 ||
-                (AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer(), "Finest Hour").size() >= 1) &&
+                AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2 ||
+                (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1) &&
                         AllZone.getPhase().isFirstCombat())
                 && !bAssault) {
             int biggest = 0;
@@ -587,7 +588,7 @@ public class ComputerUtil_Attack2 {
      * @return a int.
      */
     public int countExaltedBonus(Player player) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.hasKeyword("Exalted");

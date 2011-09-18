@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.slightlymagic.braids.util.UtilFunctions;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.PreloadingCardFactory;
 import forge.card.mana.ManaPool;
@@ -367,149 +368,6 @@ public final class AllZone implements NewConstants {
         Singletons.getModel().getGameState().setCombat(attackers);
     }
 
-    /**
-     * <p>getHumanBattlefield.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanBattlefield() {
-        return Singletons.getModel().getGameState().getHumanBattlefield();
-    }
-
-    /**
-     * <p>getHumanHand.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanHand() {
-        return Singletons.getModel().getGameState().getHumanHand();
-    }
-
-    /**
-     * <p>getHumanGraveyard.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanGraveyard() {
-        return Singletons.getModel().getGameState().getHumanGraveyard();
-    }
-
-    /**
-     * <p>getHumanLibrary.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanLibrary() {
-        return Singletons.getModel().getGameState().getHumanLibrary();
-    }
-
-    /**
-     * <p>getHumanExile.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanExile() {
-        return Singletons.getModel().getGameState().getHumanExile();
-    }
-
-    /**
-     * <p>getHumanCommand.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getHumanCommand() {
-        return Singletons.getModel().getGameState().getHumanCommand();
-    }
-
-    /**
-     * <p>getComputerBattlefield.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerBattlefield() {
-        return Singletons.getModel().getGameState().getComputerBattlefield();
-    }
-
-    /**
-     * <p>getComputerHand.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerHand() {
-        return Singletons.getModel().getGameState().getComputerHand();
-    }
-
-    /**
-     * <p>getComputerGraveyard.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerGraveyard() {
-        return Singletons.getModel().getGameState().getComputerGraveyard();
-    }
-
-    /**
-     * <p>getComputerLibrary.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerLibrary() {
-        return Singletons.getModel().getGameState().getComputerLibrary();
-    }
-
-    /**
-     * <p>getComputerExile.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerExile() {
-        return Singletons.getModel().getGameState().getComputerExile();
-    }
-
-    /**
-     * <p>getComputerCommand.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getComputerCommand() {
-        return Singletons.getModel().getGameState().getComputerCommand();
-    }
 
     /**
      * <p>getStackZone.</p>
@@ -564,74 +422,42 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>Getter for the field <code>map</code>.</p>
-     *
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link java.util.Map} object.
-     */
-    private static Map<String, PlayerZone> getMap() {
-        return Singletons.getModel().getGameState().getZoneNamesToPlayerZones();
-    }
-
-    /**
      * <p>getZone.</p>
      *
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.PlayerZone} object.
      */
     public static PlayerZone getZone(final Card c) {
-        Iterator<PlayerZone> it = getMap().values().iterator();
-        PlayerZone p;
-        while (it.hasNext()) {
-            p = (PlayerZone) it.next();
-
-            if (AllZoneUtil.isCardInZone(p, c)) {
-                return p;
+        if (AllZoneUtil.isCardInZone(getStackZone(), c)) {
+            return getStackZone();
+        }
+    
+        Player[] players = new Player[]{ AllZone.getHumanPlayer(), AllZone.getComputerPlayer() };
+        Zone[] zones = new Zone[]{ Zone.Battlefield, Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command };
+        for (Player p : players) {
+            for(Zone z : zones) {
+                PlayerZone pz = p.getZone(z);
+                if ( AllZoneUtil.isCardInZone(pz, c) )
+                    return pz;
             }
         }
         return null;
     }
 
     /**
-     * <p>getZone.</p>
-     *
-     * @param zone a {@link java.lang.String} object.
-     * @param finalPlayer a {@link forge.Player} object.
-     * @return a {@link forge.PlayerZone} object.
-     */
-    public static PlayerZone getZone(final String zone, final Player finalPlayer) {
-        Player player;
-        if (zone.equals("Stack")) {
-            player = null;
-        }
-        else {
-            player = finalPlayer;
-        }
-
-        Object o = getMap().get(zone + player);
-
-        if (o == null) {
-            throw new RuntimeException("AllZone : getZone() invalid parameters " + zone + " " + player);
-        }
-
-        return (PlayerZone) o;
-    }
-
-    /**
      * <p>resetZoneMoveTracking.</p>
      */
     public static void resetZoneMoveTracking() {
-        ((DefaultPlayerZone) getHumanCommand()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getHumanLibrary()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getHumanHand()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getHumanBattlefield()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getHumanGraveyard()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getComputerCommand()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getComputerLibrary()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getComputerHand()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getComputerBattlefield()).resetCardsAddedThisTurn();
-        ((DefaultPlayerZone) getComputerGraveyard()).resetCardsAddedThisTurn();
+        resetZoneMoveTracking(getHumanPlayer());
+        resetZoneMoveTracking(getComputerPlayer());
+    }
+    
+    private static void resetZoneMoveTracking(Player player) {
+        player.getZone(Zone.Command).resetCardsAddedThisTurn();
+        player.getZone(Zone.Library).resetCardsAddedThisTurn();
+        player.getZone(Zone.Hand).resetCardsAddedThisTurn();
+        player.getZone(Zone.Battlefield).resetCardsAddedThisTurn();
+        player.getZone(Zone.Graveyard).resetCardsAddedThisTurn();        
     }
 
     /** 
@@ -672,17 +498,8 @@ public final class AllZone implements NewConstants {
         getDisplay().showCombat("");
         getDisplay().loadPrefs();
 
-        getHumanGraveyard().reset();
-        getHumanHand().reset();
-        getHumanLibrary().reset();
-        getHumanBattlefield().reset();
-        getHumanExile().reset();
-
-        getComputerGraveyard().reset();
-        getComputerHand().reset();
-        getComputerLibrary().reset();
-        getComputerBattlefield().reset();
-        getComputerExile().reset();
+        resetAllZones(getHumanPlayer());
+        resetAllZones(getComputerPlayer());
 
         getInputControl().clearInput();
 
@@ -695,6 +512,15 @@ public final class AllZone implements NewConstants {
 
         getTriggerHandler().clearRegistered();
 
+    }
+    
+    private static void resetAllZones(Player player) {
+        player.getZone(Zone.Command).reset();
+        player.getZone(Zone.Library).reset();
+        player.getZone(Zone.Hand).reset();
+        player.getZone(Zone.Battlefield).reset();
+        player.getZone(Zone.Graveyard).reset();
+        player.getZone(Zone.Exile).reset();   
     }
 
     /**

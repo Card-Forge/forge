@@ -7,6 +7,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -29,7 +30,7 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        PlayerZone zone = AllZone.getZone(Constant.Zone.Library, activator);
+        PlayerZone zone = activator.getZone(Constant.Zone.Library);
         
         Integer i = convertAmount();
         
@@ -63,7 +64,7 @@ public class CostMill extends CostPartWithList {
             c = AbilityFactory.calculateAmount(source, amount, ability);
         }
         
-        list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer(), c);
+        list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
 
         if (list == null || list.size() < c)
             return false;
@@ -99,7 +100,7 @@ public class CostMill extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        CardList list = AllZoneUtil.getPlayerCardsInLibrary(activator, c);
+        CardList list = activator.getCardsIn(Zone.Library, c);
         
         if (list == null || list.size() > c){
             // I don't believe this is possible

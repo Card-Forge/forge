@@ -8,6 +8,7 @@ import forge.CardList;
 import forge.CardListUtil;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
@@ -62,7 +63,7 @@ public class CostDiscard extends CostPartWithList {
 
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        CardList handList = AllZoneUtil.getPlayerHand(activator);
+        CardList handList = activator.getCardsIn(Zone.Hand);
         String type = getType();
         Integer amount = convertAmount();
 
@@ -97,7 +98,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
         Player activator = ability.getActivatingPlayer();
-        CardList handList = AllZoneUtil.getPlayerHand(activator);
+        CardList handList = activator.getCardsIn(Zone.Hand);
         String discType = getType();
         String amount = getAmount();
         resetList();
@@ -165,7 +166,7 @@ public class CostDiscard extends CostPartWithList {
     public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
         String type = getType();
         Player activator = ability.getActivatingPlayer();
-        CardList hand = AllZoneUtil.getPlayerHand(activator);
+        CardList hand = activator.getCardsIn(Zone.Hand);
         resetList();
         if (type.equals("LastDrawn")){
             if (!hand.contains(activator.getLastDrawnCard()))
@@ -230,7 +231,7 @@ public class CostDiscard extends CostPartWithList {
                     done();
                 }
                 
-                if (AllZone.getHumanHand().size() == 0) stop();
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) stop();
                 StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
@@ -265,7 +266,7 @@ public class CostDiscard extends CostPartWithList {
                     //in case no more cards in hand
                     if (nDiscard == nNeeded)
                         done();
-                    else if (AllZone.getHumanHand().size() == 0)    // this really shouldn't happen
+                    else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)    // this really shouldn't happen
                         cancel();
                     else
                         showMessage();

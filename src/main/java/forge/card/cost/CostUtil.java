@@ -7,6 +7,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.Counters;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +29,7 @@ public class CostUtil {
                 if (type.equals("CARDNAME"))
                     continue;
                 
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
                     return false;
@@ -65,7 +66,7 @@ public class CostUtil {
                 CostDiscard disc = (CostDiscard)part;
                 
                 String type = disc.getType();
-                CardList typeList = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null)
                     return false;

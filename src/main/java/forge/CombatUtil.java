@@ -2,6 +2,8 @@ package forge;
 
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -66,7 +68,7 @@ public class CombatUtil {
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block."))
             return false;
 
-        CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
+        CardList kulrath = AllZoneUtil.getCardsIn(Zone.Battlefield, "Kulrath Knight");
         if (kulrath.size() > 0) {
             for (int i = 0; i < kulrath.size(); i++) {
                 Card cKK = kulrath.get(i);
@@ -113,7 +115,7 @@ public class CombatUtil {
 
         //Landwalk
         if (!AllZoneUtil.isCardInPlay("Staff of the Ages")) { //"Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
-            CardList blkCL = AllZoneUtil.getPlayerCardsInPlay(attacker.getController().getOpponent());
+            CardList blkCL = attacker.getController().getOpponent().getCardsIn(Zone.Battlefield);
             CardList temp = new CardList();
 
             if (attacker.hasKeyword("Plainswalk")) {
@@ -520,7 +522,7 @@ public class CombatUtil {
             }
         } // hasKeyword = CARDNAME can't attack if defending player controls an untapped creature with power ...
 
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent());
+        CardList list = c.getController().getOpponent().getCardsIn(Zone.Battlefield);
         CardList temp;
 
         if (c.hasKeyword("CARDNAME can't attack unless defending player controls an Island.")) {
@@ -558,7 +560,7 @@ public class CombatUtil {
 
 
         if (c.getName().equals("Harbor Serpent")) {
-            CardList allislands = AllZoneUtil.getTypeInPlay("Island");
+            CardList allislands = AllZoneUtil.getTypeIn(Zone.Battlefield, "Island");
             if (allislands.size() < 5) return false;
         }
 
@@ -578,21 +580,21 @@ public class CombatUtil {
 
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
             int limit = Integer.MAX_VALUE;
-            CardList Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+            CardList Human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
             if (Human.getName("Ensnaring Bridge").size() > 0) {
-                CardList Hand = AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer());
+                CardList Hand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
                 limit = Hand.size();
             }
-            CardList Compi = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList Compi = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             if (Compi.getName("Ensnaring Bridge").size() > 0) {
-                CardList Hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+                CardList Hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                 if (Hand.size() < limit) limit = Hand.size();
             }
             if (c.getNetAttack() > limit) return false;
         }
 
         if (AllZoneUtil.isCardInPlay("Kulrath Knight")) {
-            CardList all = AllZoneUtil.getCardsInPlay("Kulrath Knight");
+            CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield, "Kulrath Knight");
             for (int i = 0; i < all.size(); i++) {
                 Card cKK = all.get(i);
                 Player oppKK = cKK.getController().getOpponent();
@@ -1470,7 +1472,7 @@ public class CombatUtil {
      * <p>removeAllDamage.</p>
      */
     public static void removeAllDamage() {
-        CardList cl = AllZoneUtil.getCardsInPlay();
+        CardList cl = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card c : cl) {
             c.setDamage(0);
         }
@@ -1651,7 +1653,7 @@ public class CombatUtil {
                     final Ability ability = new Ability(c, "0") {
                         public void resolve() {
                             if (crd.getController().isHuman()) {
-                                CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                                CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                                 ComputerUtil.sacrificePermanents(a, list);
                             } else {
                                 AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanents(a));
@@ -1681,7 +1683,7 @@ public class CombatUtil {
             //hack, to make sure this doesn't break grabbing an oblivion ring:
             c.setCreatureAttackedThisCombat(true);
 
-            CardList enchantments = AllZoneUtil.getPlayerCardsInLibrary(c.getController());
+            CardList enchantments = c.getController().getCardsIn(Zone.Library);
             enchantments = enchantments.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                     if (c.isEnchantment() && c.getCMC() <= 3) return true;
@@ -1741,7 +1743,7 @@ public class CombatUtil {
 
         else if (c.getName().equals("Spectral Bears")) {
             Player opp = c.getController().getOpponent();
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
+            CardList list = opp.getCardsIn(Zone.Battlefield);
             list = list.filter(new CardListFilter() {
                 public boolean addCard(Card crd) {
                     return crd.isBlack() && !crd.isToken();
@@ -1752,7 +1754,7 @@ public class CombatUtil {
             }
         } else if (c.getName().equals("Spectral Force")) {
             Player opp = c.getController().getOpponent();
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
+            CardList list = opp.getCardsIn(Zone.Battlefield);
             list = list.filter(AllZoneUtil.black);
             if (list.size() == 0) {
                 c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
@@ -1793,7 +1795,7 @@ public class CombatUtil {
         else if (c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
             System.out.println("Preeminent Captain Attacks");
 
-            CardList soldiers = AllZoneUtil.getPlayerHand(c.getController());
+            CardList soldiers = c.getController().getCardsIn(Zone.Hand);
             soldiers = soldiers.getType("Soldier");
 
             if (soldiers.size() > 0) {
@@ -1827,7 +1829,7 @@ public class CombatUtil {
                 && !c.getCreatureAttackedThisCombat()) {
             Player player = c.getController();
 
-            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+            PlayerZone lib = player.getZone(Constant.Zone.Library);
 
             if (lib.size() > 0) {
                 CardList cl = new CardList();
@@ -1969,7 +1971,7 @@ public class CombatUtil {
 
         if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
             Player opp = b.getController();
-            CardList list = AllZoneUtil.getPlayerHand(opp);
+            CardList list = opp.getCardsIn(Zone.Hand);
             int handSize = list.size();
 
             // opponent discards their hand,
@@ -2025,7 +2027,7 @@ public class CombatUtil {
 
         Player phasingPlayer = c.getController();
         // Finest Hour untaps the creature on the first combat phase
-        if ((AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size() > 0) &&
+        if ((phasingPlayer.getCardsIn(Zone.Battlefield, "Finest Hour").size() > 0) &&
                 AllZone.getPhase().isFirstCombat()) {
             // Untap the attacking creature
             Ability fhUntap = new Ability(c, "0") {
@@ -2041,7 +2043,7 @@ public class CombatUtil {
             AllZone.getStack().addSimultaneousStackEntry(fhUntap);
 
             // If any Finest Hours, queue up a new combat phase
-            for (int ix = 0; ix < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size(); ix++) {
+            for (int ix = 0; ix < phasingPlayer.getCardsIn(Zone.Battlefield, "Finest Hour").size(); ix++) {
                 Ability fhAddCombat = new Ability(c, "0") {
                     public void resolve() {
                         AllZone.getPhase().addExtraCombat();
@@ -2056,13 +2058,13 @@ public class CombatUtil {
             }
         }
 
-        if (AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size() > 0) {
-            for (int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size(); i++) {
+        if (phasingPlayer.getCardsIn(Zone.Battlefield, "Sovereigns of Lost Alara").size() > 0) {
+            for (int i = 0; i < phasingPlayer.getCardsIn(Zone.Battlefield, "Sovereigns of Lost Alara").size(); i++) {
                 final Card attacker = c;
                 Ability ability4 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        CardList enchantments = AllZoneUtil.getPlayerCardsInLibrary(attacker.getController());
+                        CardList enchantments = attacker.getController().getCardsIn(Zone.Library);
                         enchantments = enchantments.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 if (attacker.hasKeyword("Protection from enchantments")
@@ -2089,7 +2091,7 @@ public class CombatUtil {
                         }
                         if (Enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZone(Enchantment), 
-                                    AllZone.getZone(Constant.Zone.Battlefield, Enchantment.getOwner()), Enchantment);
+                                    Enchantment.getOwner().getZone(Constant.Zone.Battlefield), Enchantment);
                             Enchantment.enchantEntity(attacker);
                         }
                         attacker.getController().shuffle();

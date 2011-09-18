@@ -8,10 +8,14 @@ package forge.gui.game;
 
 
 import forge.*;
+import forge.Constant.Zone;
 //import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+
+import org.eclipse.swt.internal.Library;
+
 import java.awt.Color;
 import java.awt.*;
 import java.util.Iterator;
@@ -217,9 +221,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         //top revealed
         if (card.hasKeyword("Play with the top card of your library revealed.") && card.getController() != null
-                && !AllZoneUtil.getPlayerCardsInLibrary(card.getController()).isEmpty()) {
+                && !card.getController().getZone(Zone.Library).isEmpty()) {
             area.append("\r\nTop card: ");
-            area.append(AllZoneUtil.getPlayerCardsInLibrary(card.getController(), 1));
+            area.append(card.getController().getCardsIn(Zone.Library, 1));
         }
 
         //chosen type

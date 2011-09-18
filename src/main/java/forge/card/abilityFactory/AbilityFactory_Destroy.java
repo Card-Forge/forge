@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -135,7 +136,7 @@ public class AbilityFactory_Destroy {
         final boolean noRegen = params.containsKey("NoRegen");
 
         CardList list;
-        list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list = list.getTargetableCards(source);
 
         if (abTgt != null) {
@@ -236,7 +237,7 @@ public class AbilityFactory_Destroy {
 
         if (tgt != null) {
             CardList list;
-            list = AllZoneUtil.getCardsInPlay();
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             list = list.getTargetableCards(source);
             list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
 
@@ -589,8 +590,8 @@ public class AbilityFactory_Destroy {
             Valid = Valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
-        CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
         humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
@@ -649,7 +650,7 @@ public class AbilityFactory_Destroy {
         if (Valid.contains("X"))
             Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         list = AbilityFactory.filterListByType(list, Valid, sa);
 

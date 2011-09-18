@@ -3,6 +3,7 @@ package forge;
 
 import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability_Mana;
@@ -1147,9 +1148,9 @@ public final class GuiDisplayUtil implements NewConstants {
      * <p>updateGUI.</p>
      */
     public static void updateGUI() {
-        AllZone.getComputerBattlefield().updateObservers();
-        AllZone.getHumanBattlefield().updateObservers();
-        AllZone.getHumanHand().updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
         AllZone.getComputerPlayer().updateObservers();
         AllZone.getHumanPlayer().updateObservers();
     }
@@ -1320,43 +1321,43 @@ public final class GuiDisplayUtil implements NewConstants {
         AllZone.getTriggerHandler().suppressMode("ChangesZone");
         AllZone.getCombat().reset();
         for (Card c : humanDevSetup) {
-            AllZone.getHumanHand().add(c);
+            AllZone.getHumanPlayer().getZone(Zone.Hand).add(c);
             AllZone.getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         for (Card c : computerDevSetup) {
-            AllZone.getComputerHand().add(c);
+            AllZone.getComputerPlayer().getZone(Zone.Hand).add(c);
             AllZone.getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         if (computerDevGraveyardSetup.size() > 0) {
-            AllZone.getComputerGraveyard().setCards(computerDevGraveyardSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Graveyard).setCards(computerDevGraveyardSetup.toArray());
         }
         if (humanDevGraveyardSetup.size() > 0) {
-            AllZone.getHumanGraveyard().setCards(humanDevGraveyardSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Graveyard).setCards(humanDevGraveyardSetup.toArray());
         }
 
         if (computerDevHandSetup.size() > 0) {
-            AllZone.getComputerHand().setCards(computerDevHandSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Hand).setCards(computerDevHandSetup.toArray());
         }
         if (humanDevHandSetup.size() > 0) {
-            AllZone.getHumanHand().setCards(humanDevHandSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Hand).setCards(humanDevHandSetup.toArray());
         }
 
         if (humanDevLibrarySetup.size() > 0) {
-            AllZone.getHumanLibrary().setCards(humanDevLibrarySetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Library).setCards(humanDevLibrarySetup.toArray());
         }
         if (computerDevLibrarySetup.size() > 0) {
-            AllZone.getComputerLibrary().setCards(computerDevLibrarySetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(computerDevLibrarySetup.toArray());
         }
 
         if (humanDevExileSetup.size() > 0) {
-            AllZone.getHumanExile().setCards(humanDevExileSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Exile).setCards(humanDevExileSetup.toArray());
         }
         if (computerDevExileSetup.size() > 0) {
-            AllZone.getComputerExile().setCards(computerDevExileSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Exile).setCards(computerDevExileSetup.toArray());
         }
 
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");
@@ -1370,16 +1371,16 @@ public final class GuiDisplayUtil implements NewConstants {
 
         AllZone.getGameAction().checkStateEffects();
         AllZone.getPhase().updateObservers();
-        AllZone.getHumanExile().updateObservers();
-        AllZone.getComputerExile().updateObservers();
-        AllZone.getHumanHand().updateObservers();
-        AllZone.getComputerHand().updateObservers();
-        AllZone.getHumanGraveyard().updateObservers();
-        AllZone.getComputerGraveyard().updateObservers();
-        AllZone.getHumanBattlefield().updateObservers();
-        AllZone.getComputerBattlefield().updateObservers();
-        AllZone.getHumanLibrary().updateObservers();
-        AllZone.getComputerLibrary().updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Exile).updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Exile).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Hand).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Graveyard).updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Graveyard).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Library).updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Library).updateObservers();
     }
 
     /**
@@ -1451,7 +1452,7 @@ public final class GuiDisplayUtil implements NewConstants {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        CardList lib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getHumanPlayer());
+        CardList lib = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
         Object o = GuiUtils.getChoiceOptional("Choose a card", lib.toArray());
         if (null == o) {
             return;
@@ -1467,7 +1468,7 @@ public final class GuiDisplayUtil implements NewConstants {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        CardList play = AllZoneUtil.getCardsInPlay();
+        CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Object o = GuiUtils.getChoiceOptional("Add counters to which card?", play.toArray());
         if (null == o) {
             return;
@@ -1497,7 +1498,7 @@ public final class GuiDisplayUtil implements NewConstants {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        CardList play = AllZoneUtil.getCardsInPlay();
+        CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
         if (null == o) {
             return;
@@ -1513,7 +1514,7 @@ public final class GuiDisplayUtil implements NewConstants {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        CardList play = AllZoneUtil.getCardsInPlay();
+        CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
         if (null == o) {
             return;

@@ -153,7 +153,7 @@ public class AbilityFactory_Attach {
 		Card attachSource = sa.getSourceCard();
 		// TODO AttachSource is currently set for the Source of the Spell, but at some point can support attaching a different card
 		
-		CardList list = AllZoneUtil.getCardsInZone(tgt.getZone());
+		CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
 		list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
 		
 		// TODO: If Attaching without casting, don't need to actually target. 
@@ -774,7 +774,7 @@ public class AbilityFactory_Attach {
 		Target tgt = aura.getTarget();
 				
 		if (source.getController().isHuman()){
-			CardList list = AllZoneUtil.getCardsInZone(tgt.getZone());
+			CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
 			list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 			
 			Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());

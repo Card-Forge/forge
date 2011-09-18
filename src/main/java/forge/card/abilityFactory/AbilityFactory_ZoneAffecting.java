@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -258,9 +259,9 @@ public class AbilityFactory_ZoneAffecting {
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
 
-        int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.getComputerPlayer()).size();
-        int humanLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.getHumanPlayer()).size();
-        int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.getComputerPlayer()).size();
+        int computerHandSize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size();
+        int humanLibrarySize = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size();
+        int computerLibrarySize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Library).size();
         int computerMaxHandSize = AllZone.getComputerPlayer().getMaxHandSize();
 
         int numCards = 1;
@@ -402,7 +403,7 @@ public class AbilityFactory_ZoneAffecting {
             if (tgt == null || p.canTarget(sa)) {
                 if (optional) {
                     if (p.isComputer()) {
-                        if (numCards >= AllZoneUtil.getPlayerCardsInLibrary(p).size()) {
+                        if (numCards >= p.getCardsIn(Zone.Library).size()) {
                             // AI shouldn't itself
                             continue;
                         }
@@ -646,7 +647,7 @@ public class AbilityFactory_ZoneAffecting {
         if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa),
-                    AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.getHumanPlayer()).size());
+                    AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
 
@@ -677,7 +678,7 @@ public class AbilityFactory_ZoneAffecting {
 
             int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
-            CardList pLibrary = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.getHumanPlayer());
+            CardList pLibrary = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library);
 
             if (pLibrary.size() == 0) {    // deck already empty, no need to mill
                 if (!mandatory)
@@ -735,7 +736,7 @@ public class AbilityFactory_ZoneAffecting {
         if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
             // Set PayX here to maximum value.
             int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa),
-                    AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.getHumanPlayer()).size());
+                    AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
 
@@ -767,7 +768,7 @@ public class AbilityFactory_ZoneAffecting {
         else
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         if (destination == null)
             destination = Constant.Zone.Graveyard;
 
@@ -939,7 +940,7 @@ public class AbilityFactory_ZoneAffecting {
                     } else p.discard(numCards, sa, true);
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
-                    CardList dPHand = AllZoneUtil.getPlayerHand(p);
+                    CardList dPHand = p.getCardsIn(Zone.Hand);
 
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
@@ -962,7 +963,7 @@ public class AbilityFactory_ZoneAffecting {
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
                     // Is Reveal you choose right? I think the wrong player is being used?
-                    CardList dPHand = AllZoneUtil.getPlayerHand(p);
+                    CardList dPHand = p.getCardsIn(Zone.Hand);
                     if (dPHand.size() != 0) {
                         CardList dPChHand = new CardList(dPHand.toArray());
 
@@ -1132,7 +1133,7 @@ public class AbilityFactory_ZoneAffecting {
 
         }
 
-        boolean humanHasHand = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.getHumanPlayer()).size() > 0;
+        boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() > 0;
 
         if (tgt != null) {
             if (!humanHasHand)
@@ -1160,7 +1161,7 @@ public class AbilityFactory_ZoneAffecting {
             if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa),
-                        AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.getHumanPlayer()).size());
+                        AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size());
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             }
         }

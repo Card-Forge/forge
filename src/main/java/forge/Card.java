@@ -13,6 +13,7 @@ import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -4289,7 +4290,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public boolean isSpell() {
-        return (isInstant() || isSorcery() || (isAura() && !AllZoneUtil.getCardsInPlay().contains(this)));
+        return (isInstant() || isSorcery() || (isAura() && !AllZoneUtil.getCardsIn(Zone.Battlefield).contains(this)));
     }
 
     /**
@@ -4947,7 +4948,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (getOwner().isPlayer(sourceController)) return false;
         } else if (Property.startsWith("ControllerControls")) {
             String type = Property.substring(18);
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(getController());
+            CardList list = getController().getCardsIn(Zone.Battlefield);
             if (list.getType(type).isEmpty()) return false;
         } else if (Property.startsWith("Other")) {
             if (this.equals(source)) return false;
@@ -4966,11 +4967,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (Property.startsWith("Equipped")) {
             if (!equipping.contains(source)) return false;
         } else if (Property.startsWith("Above")){	// "Are Above" Source
-        	CardList list = AllZoneUtil.getPlayerGraveyard(this.getOwner());
+        	CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
         	if (!list.getAbove(source, this))
         		return false;
         }else if (Property.startsWith("DirectlyAbove")){	// "Are Directly Above" Source
-        	CardList list = AllZoneUtil.getPlayerGraveyard(this.getOwner());
+        	CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
         	if (!list.getDirectlyAbove(source, this))
         		return false;
         } else if (Property.startsWith("Cloned")) {
@@ -5660,7 +5661,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         //stPreventDamage
-        CardList allp = AllZoneUtil.getCardsInPlay();
+        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             if (ca.hasStartOfKeyword("stPreventDamage")) {
                 //syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
@@ -5772,7 +5773,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int restDamage = damage;
 
         if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
-            int amount = AllZoneUtil.getCardsInPlay("Sulfuric Vapors").size();
+            int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Sulfuric Vapors").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 1;
             }
@@ -5781,21 +5782,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController()) && (source.isInstant() || source.isSorcery()) 
                 && isCreature())
         {
-            int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Pyromancer's Swath").size();
+            int amount = source.getController().getCardsIn(Zone.Battlefield, "Pyromancer's Swath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += 2;
             }
         }
 
         if (AllZoneUtil.isCardInPlay("Furnace of Rath") && isCreature()) {
-            int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
+            int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
 
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature() && isCreature()) {
-            int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Gratuitous Violence").size();
+            int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
@@ -5804,14 +5805,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery()))
         {
-            int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Fire Servant").size();
+            int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
 
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && isCreature()) {
-            int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
+            int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
             for (int i = 0; i < amount; i++) {
                 if (restDamage > 0) {
                     restDamage -= 1;
@@ -5820,7 +5821,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (AllZoneUtil.isCardInPlay("Lashknife Barrier", getController()) && isCreature()) {
-            int amount = AllZoneUtil.getPlayerCardsInPlay(getController(), "Lashknife Barrier").size();
+            int amount = getController().getCardsIn(Zone.Battlefield, "Lashknife Barrier").size();
             for (int i = 0; i < amount; i++) {
                 if (restDamage > 0) {
                     restDamage -= 1;

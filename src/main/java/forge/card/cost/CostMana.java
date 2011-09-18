@@ -6,6 +6,7 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
@@ -171,7 +172,7 @@ public class CostMana extends CostPart {
             public void selectButtonCancel() {
                 stop();
                 payment.cancelCost();
-                AllZone.getHumanBattlefield().updateObservers();
+                AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
             }
     
             @Override
@@ -273,7 +274,7 @@ public class CostMana extends CostPart {
                 stop();
                 resetManaCost();
                 payment.cancelCost();
-                AllZone.getHumanBattlefield().updateObservers();
+                AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
             }
     
             @Override

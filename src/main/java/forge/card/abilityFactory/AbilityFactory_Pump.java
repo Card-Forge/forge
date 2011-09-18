@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -484,7 +485,7 @@ public class AbilityFactory_Pump {
      * @return a boolean.
      */
     private boolean pumpMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory) {
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -873,9 +874,9 @@ public class AbilityFactory_Pump {
             valid = params.get("ValidCards");
         }
 
-        CardList comp = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
-        CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         human = human.getValidCards(valid, hostCard.getController(), hostCard);
 
         //only count creatures that can attack
@@ -935,9 +936,9 @@ public class AbilityFactory_Pump {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
         if (tgtPlayers == null || tgtPlayers.isEmpty())
-        	list = AllZoneUtil.getCardsInPlay();
+        	list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         else
-        	list = AllZoneUtil.getPlayerCardsInPlay(tgtPlayers.get(0));
+        	list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
         
         String valid = "";
         if (params.containsKey("ValidCards"))

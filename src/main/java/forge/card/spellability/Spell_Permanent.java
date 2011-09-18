@@ -1,6 +1,7 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -41,7 +42,7 @@ public class Spell_Permanent extends Spell {
 
     private final CommandReturn championGetCreature = new CommandReturn() {
         public Object execute() {
-            CardList cards = AllZoneUtil.getPlayerCardsInPlay(getSourceCard().getController());
+            CardList cards = getSourceCard().getController().getCardsIn(Zone.Battlefield);
             return cards.getValidCards(championValid, getSourceCard().getController(), getSourceCard());
         }
     };//CommandReturn
@@ -60,7 +61,7 @@ public class Spell_Permanent extends Spell {
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(championInputComes);
             } else { //Computer
-                CardList computer = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList computer = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 computer = computer.getValidCards(championValid, controller, source);
                 computer.remove(source);
 
@@ -205,12 +206,12 @@ public class Spell_Permanent extends Spell {
 
         //check on legendary
         if (card.isType("Legendary")) {
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             if (list.containsName(card.getName()))
                 return false;
         }
         if (card.isPlaneswalker()) {
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             list = list.getType("Planeswalker");
 
             for (int i = 0; i < list.size(); i++) {
@@ -223,7 +224,7 @@ public class Spell_Permanent extends Spell {
             }
         }
         if (card.isType("World")) {
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             list = list.getType("World");
             if (list.size() > 0) return false;
         }

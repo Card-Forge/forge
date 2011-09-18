@@ -8,6 +8,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
@@ -49,7 +50,7 @@ public class CostSacrifice extends CostPartWithList {
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
         // You can always sac all
         if (!getThis()) {
-            CardList typeList = AllZoneUtil.getPlayerCardsInPlay(activator);
+            CardList typeList = activator.getCardsIn(Zone.Battlefield);
             typeList = typeList.getValidCards(getType().split(";"), activator, source);
 
             Integer amount = convertAmount();   
@@ -76,7 +77,7 @@ public class CostSacrifice extends CostPartWithList {
         String amount = getAmount();
         String type = getType();
         Player activator = ability.getActivatingPlayer();
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(activator);
+        CardList list = activator.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(type.split(";"), activator, source);
         
         if (getThis()){
@@ -115,7 +116,7 @@ public class CostSacrifice extends CostPartWithList {
             list.add(source);
         }
         else if (amount.equals("All")) {
-            CardList typeList = AllZoneUtil.getPlayerCardsInPlay(activator);
+            CardList typeList = activator.getCardsIn(Zone.Battlefield);
             typeList = typeList.getValidCards(type.split(","), activator, source);
             // Does the AI want to use Sacrifice All?
             return false;

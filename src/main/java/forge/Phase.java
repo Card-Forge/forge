@@ -1,6 +1,8 @@
 package forge;
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 
@@ -349,7 +351,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
             AllZone.getPhase().getPlayerTurn().setAssignedDamage(0);
 
             //Reset Damage received map
-            CardList list = AllZoneUtil.getCardsInPlay();
+            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             for (Card c : list) {
                 c.resetPreventNextDamage();
                 c.resetReceivedDamageFromThisTurn();
@@ -361,8 +363,8 @@ public class Phase extends MyObservable implements java.io.Serializable {
             AllZone.getComputerPlayer().resetPreventNextDamage();
 
             AllZone.getEndOfTurn().executeUntil();
-            CardList cHand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
-            CardList hHand = AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer());
+            CardList cHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+            CardList hHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
             for (Card c : cHand) c.setDrawnThisTurn(false);
             for (Card c : hHand) c.setDrawnThisTurn(false);
             AllZone.getHumanPlayer().resetNumDrawnThisTurn();
@@ -493,7 +495,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      */
     private Player skipTurnTimeVault(Player turn) {
         //time vault:
-        CardList vaults = AllZoneUtil.getPlayerCardsInPlay(turn, "Time Vault");
+        CardList vaults = turn.getCardsIn(Zone.Battlefield, "Time Vault");
         vaults = vaults.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.isTapped();
@@ -666,7 +668,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      */
     public void resetAttackedThisCombat(Player player) {
         // resets the status of attacked/blocked this phase
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
 
         list = list.getType("Creature");
 

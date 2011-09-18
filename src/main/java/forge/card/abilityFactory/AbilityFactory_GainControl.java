@@ -9,6 +9,7 @@ import forge.CardListFilter;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.*;
@@ -254,7 +255,7 @@ public class AbilityFactory_GainControl {
             return true;
         }
 
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
         //AI won't try to grab cards that are filtered out of AI decks on purpose
         list = list.filter(new CardListFilter() {

@@ -654,15 +654,14 @@ public final class CardUtil {
      * @param src a Card object
      * @return a CardList that matches then given criteria
      */
-    public static CardList getThisTurnEntered(final String to, final String from, final String valid, final Card src) {
+    public static CardList getThisTurnEntered(final Constant.Zone to, final Constant.Zone from, final String valid, final Card src) {
         CardList res = new CardList();
         if (to != Constant.Zone.Stack) {
-            res.addAll(((DefaultPlayerZone) AllZone.getZone(to,
-                    AllZone.getComputerPlayer())).getCardsAddedThisTurn(from));
-            res.addAll(((DefaultPlayerZone) AllZone.getZone(to, AllZone.getHumanPlayer())).getCardsAddedThisTurn(from));
+            res.addAll(((DefaultPlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
+            res.addAll(((DefaultPlayerZone) AllZone.getHumanPlayer().getZone(to)).getCardsAddedThisTurn(from));
         }
         else {
-            res.addAll(((DefaultPlayerZone) AllZone.getZone(to, null)).getCardsAddedThisTurn(from));
+            res.addAll(((DefaultPlayerZone) AllZone.getStackZone()).getCardsAddedThisTurn(from));
         }
 
         res = res.filter(new CardListFilter() {

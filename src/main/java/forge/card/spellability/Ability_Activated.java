@@ -1,6 +1,7 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.cost.Cost_Payment;
 
@@ -54,8 +55,8 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
             return false;
         }
 
-        CardList pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
-        pithing.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+        CardList pithing = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         pithing = pithing.getName("Pithing Needle");
         pithing = pithing.filter(new CardListFilter() {
             public boolean addCard(Card crd) {

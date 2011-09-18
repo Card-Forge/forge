@@ -37,55 +37,14 @@ public class FGameState {
     private Combat combat = new Combat();
 
 
-    // These fields should be moved to the player class(es) and implementation(s), and the getters
-    // should be moved there.  PMD complains of too many fields, and it is right.
-
-    // The battlefields are different because Card.comesIntoPlay() is called when a card is added by
-    // PlayerZone.add(Card).
-    private PlayerZone humanBattlefield = new PlayerZone_ComesIntoPlay(Constant.Zone.Battlefield, getHumanPlayer());
-    private PlayerZone humanHand = new DefaultPlayerZone(Constant.Zone.Hand, getHumanPlayer());
-    private PlayerZone humanGraveyard = new DefaultPlayerZone(Constant.Zone.Graveyard, getHumanPlayer());
-    private PlayerZone humanLibrary = new DefaultPlayerZone(Constant.Zone.Library, getHumanPlayer());
-    private PlayerZone humanExile = new DefaultPlayerZone(Constant.Zone.Exile, getHumanPlayer());
-    private PlayerZone humanCommand = new DefaultPlayerZone(Constant.Zone.Command, getHumanPlayer());
-
-    private PlayerZone computerBattlefield = // NOPMD by Braids on 8/27/11 10:50 PM
-            new PlayerZone_ComesIntoPlay(Constant.Zone.Battlefield, getComputerPlayer());
-
-    private PlayerZone computerHand = new DefaultPlayerZone(Constant.Zone.Hand, getComputerPlayer());
-    private PlayerZone computerGraveyard = new DefaultPlayerZone(Constant.Zone.Graveyard, getComputerPlayer());
-    private PlayerZone computerLibrary = new DefaultPlayerZone(Constant.Zone.Library, getComputerPlayer());
-    private PlayerZone computerExile = new DefaultPlayerZone(Constant.Zone.Exile, getComputerPlayer());
-    private PlayerZone computerCommand = new DefaultPlayerZone(Constant.Zone.Command, getComputerPlayer());
-
     private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
-
-    // Maps zone names to PlayerZone instances.
-    private Map<String, PlayerZone> zoneNamesToPlayerZones = // NOPMD by Braids on 8/27/11 10:50 PM
-            new HashMap<String, PlayerZone>();
 
     private long timestamp = 0;
 
     /**
      * Constructor.
      */
-    public FGameState() {
-        getZoneNamesToPlayerZones().put(Constant.Zone.Graveyard + getHumanPlayer(), getHumanGraveyard());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Hand + getHumanPlayer(), getHumanHand());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Library + getHumanPlayer(), getHumanLibrary());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Battlefield + getHumanPlayer(), getHumanBattlefield());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Exile + getHumanPlayer(), getHumanExile());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Command + getHumanPlayer(), getHumanCommand());
-
-        getZoneNamesToPlayerZones().put(Constant.Zone.Graveyard + getComputerPlayer(), getComputerGraveyard());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Hand + getComputerPlayer(), getComputerHand());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Library + getComputerPlayer(), getComputerLibrary());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Battlefield + getComputerPlayer(), getComputerBattlefield());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Exile + getComputerPlayer(), getComputerExile());
-        getZoneNamesToPlayerZones().put(Constant.Zone.Command + getComputerPlayer(), getComputerCommand());
-
-        getZoneNamesToPlayerZones().put(Constant.Zone.Stack + null, getStackZone());
-    }
+    public FGameState() { /* no more zones to map here */ }
 
 
     /**
@@ -265,202 +224,6 @@ public class FGameState {
 
 
     /**
-     * @return the humanBattlefield
-     */
-    public final PlayerZone getHumanBattlefield() {
-        return humanBattlefield;
-    }
-
-
-    /**
-     * @param humanBattlefield0 the humanBattlefield to set
-     */
-    protected final void setHumanBattlefield(final PlayerZone humanBattlefield0) {
-        this.humanBattlefield = humanBattlefield0;
-    }
-
-
-    /**
-     * @return the humanHand
-     */
-    public final PlayerZone getHumanHand() {
-        return humanHand;
-    }
-
-
-    /**
-     * @param humanHand0 the humanHand to set
-     */
-    protected final void setHumanHand(final PlayerZone humanHand0) {
-        this.humanHand = humanHand0;
-    }
-
-
-    /**
-     * @return the humanGraveyard
-     */
-    public final PlayerZone getHumanGraveyard() {
-        return humanGraveyard;
-    }
-
-
-    /**
-     * @param humanGraveyard0 the humanGraveyard to set
-     */
-    protected final void setHumanGraveyard(final PlayerZone humanGraveyard0) {
-        this.humanGraveyard = humanGraveyard0;
-    }
-
-
-    /**
-     * @return the humanLibrary
-     */
-    public final PlayerZone getHumanLibrary() {
-        return humanLibrary;
-    }
-
-
-    /**
-     * @param humanLibrary0 the humanLibrary to set
-     */
-    protected final void setHumanLibrary(final PlayerZone humanLibrary0) {
-        this.humanLibrary = humanLibrary0;
-    }
-
-
-    /**
-     * @return the humanExile
-     */
-    public final PlayerZone getHumanExile() {
-        return humanExile;
-    }
-
-
-    /**
-     * @param humanExile0 the humanExile to set
-     */
-    protected final void setHumanExile(final PlayerZone humanExile0) {
-        this.humanExile = humanExile0;
-    }
-
-
-    /**
-     * @return the humanCommand
-     */
-    public final PlayerZone getHumanCommand() {
-        return humanCommand;
-    }
-
-
-    /**
-     * @param humanCommand0 the humanCommand to set
-     */
-    protected final void setHumanCommand(final PlayerZone humanCommand0) {
-        this.humanCommand = humanCommand0;
-    }
-
-
-    /**
-     * @return the computerBattlefield
-     */
-    public final PlayerZone getComputerBattlefield() {
-        return computerBattlefield;
-    }
-
-
-    /**
-     * @param computerBattlefield0 the computerBattlefield to set
-     */
-    protected final void setComputerBattlefield(
-            final PlayerZone computerBattlefield0) // NOPMD by Braids on 8/27/11 10:53 PM
-    {
-        this.computerBattlefield = computerBattlefield0;
-    }
-
-
-    /**
-     * @return the computerHand
-     */
-    public final PlayerZone getComputerHand() {
-        return computerHand;
-    }
-
-
-    /**
-     * @param computerHand0 the computerHand to set
-     */
-    protected final void setComputerHand(final PlayerZone computerHand0) {
-        this.computerHand = computerHand0;
-    }
-
-
-    /**
-     * @return the computerGraveyard
-     */
-    public final PlayerZone getComputerGraveyard() {
-        return computerGraveyard;
-    }
-
-
-    /**
-     * @param computerGraveyard0 the computerGraveyard to set
-     */
-    protected final void setComputerGraveyard(
-            final PlayerZone computerGraveyard0) // NOPMD by Braids on 8/27/11 10:53 PM
-    {
-        this.computerGraveyard = computerGraveyard0;
-    }
-
-
-    /**
-     * @return the computerLibrary
-     */
-    public final PlayerZone getComputerLibrary() {
-        return computerLibrary;
-    }
-
-
-    /**
-     * @param computerLibrary0 the computerLibrary to set
-     */
-    protected final void setComputerLibrary(final PlayerZone computerLibrary0) {
-        this.computerLibrary = computerLibrary0;
-    }
-
-
-    /**
-     * @return the computerExile
-     */
-    public final PlayerZone getComputerExile() {
-        return computerExile;
-    }
-
-
-    /**
-     * @param computerExile0 the computerExile to set
-     */
-    protected final void setComputerExile(final PlayerZone computerExile0) {
-        this.computerExile = computerExile0;
-    }
-
-
-    /**
-     * @return the computerCommand
-     */
-    public final PlayerZone getComputerCommand() {
-        return computerCommand;
-    }
-
-
-    /**
-     * @param computerCommand0 the computerCommand to set
-     */
-    protected final void setComputerCommand(final PlayerZone computerCommand0) {
-        this.computerCommand = computerCommand0;
-    }
-
-
-    /**
      * @return the stackZone
      */
     public final PlayerZone getStackZone() {
@@ -474,25 +237,6 @@ public class FGameState {
     protected final void setStackZone(final PlayerZone stackZone0) {
         this.stackZone = stackZone0;
     }
-
-
-    /**
-     * @return the zoneNamesToPlayerZones
-     */
-    public final Map<String, PlayerZone> getZoneNamesToPlayerZones() {
-        return zoneNamesToPlayerZones;
-    }
-
-
-    /**
-     * @param zoneNamesToPlayerZones0 the zoneNamesToPlayerZones to set
-     */
-    protected final void setZoneNamesToPlayerZones(
-            final Map<String, PlayerZone> zoneNamesToPlayerZones0) // NOPMD by Braids on 8/27/11 10:53 PM
-    {
-        this.zoneNamesToPlayerZones = zoneNamesToPlayerZones0;
-    }
-
 
     /**
      * Create and return the next timestamp.

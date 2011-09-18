@@ -1,6 +1,7 @@
 package forge.card.cardFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
@@ -308,14 +309,14 @@ class CardFactory_Lands {
                         return false;
                     }
                     inPlay.clear();
-                    inPlay.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+                    inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
                     return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
 
                 @Override
                 public void resolve() {
                     inPlay.clear();
-                    inPlay.addAll(AllZoneUtil.getCardsInPlay());
+                    inPlay.addAll(AllZoneUtil.getCardsIn(Zone.Battlefield));
                     for (Card targ : inPlay.filter(targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
@@ -412,7 +413,7 @@ class CardFactory_Lands {
                 final Player player = card.getController();
 
                 public void execute() {
-                    final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0], player, card);
+                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(type[0], player, card);
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {
@@ -443,7 +444,7 @@ class CardFactory_Lands {
                             }
 
                             public void selectCard(Card c, PlayerZone zone) {
-                                if (c.isLand() && zone.is(Constant.Zone.Battlefield) && land.contains(c)) {
+                                if (c.isLand() && zone.is(Zone.Battlefield) && land.contains(c)) {
                                     AllZone.getGameAction().sacrifice(c);
                                     stop();
                                 }
@@ -466,7 +467,7 @@ class CardFactory_Lands {
 
                 public void execute() {
                     final Player player = card.getController();
-                    CardList land = AllZoneUtil.getPlayerCardsInPlay(player, "Sheltered Valley");
+                    CardList land = player.getCardsIn(Zone.Battlefield, "Sheltered Valley");
                     land.remove(card);
 
                     if (land.size() > 0) {
@@ -689,7 +690,7 @@ class CardFactory_Lands {
                 }
 
                 public void computerExecute() {
-                    CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+                    CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                     hand = hand.filter(AllZoneUtil.getTypeFilter(type));
                     if (hand.size() > 0) {
                         revealCard(hand.get(0));
@@ -937,7 +938,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     final Player player = card.getController();
-                    final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0] + ".untapped", player, card);
+                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(type[0] + ".untapped", player, card);
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {

@@ -11,6 +11,7 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Player;
 import forge.StaticEffect;
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -329,13 +330,13 @@ public class StaticAbility_Continuous {
 
         // non - CharacteristicDefining
         CardList affectedCards;
-        String affectedZone = "Battlefield"; // default
+        Zone affectedZone = Zone.Battlefield; // default
 
         if (params.containsKey("AffectedZone")) {
-            affectedZone = params.get("AffectedZone");
+            affectedZone = Zone.smartValueOf(params.get("AffectedZone"));
         }
 
-        affectedCards = AllZoneUtil.getCardsInZone(affectedZone);
+        affectedCards = AllZoneUtil.getCardsIn(affectedZone);
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {

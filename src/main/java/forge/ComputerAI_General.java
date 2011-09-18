@@ -1,6 +1,8 @@
 package forge;
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
@@ -73,7 +75,7 @@ public class ComputerAI_General implements Computer {
      */
     private SpellAbility[] getMain1() {
         //Card list of all cards to consider
-        CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+        CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
         if (AllZone.getComputerManaPool().isEmpty()) {
             hand = hand.filter(new CardListFilter() {
@@ -93,7 +95,7 @@ public class ComputerAI_General implements Computer {
                     }
 
                     //get all cards the computer controls with BuffedBy
-                    CardList buffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                    CardList buffed = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                     for (int j = 0; j < buffed.size(); j++) {
                         Card buffedcard = buffed.get(j);
                         if (buffedcard.getSVar("BuffedBy").length() > 0) {
@@ -106,7 +108,7 @@ public class ComputerAI_General implements Computer {
                     } //BuffedBy
 
                     //get all cards the human controls with AntiBuffedBy
-                    CardList antibuffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+                    CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                     for (int k = 0; k < antibuffed.size(); k++) {
                         Card buffedcard = antibuffed.get(k);
                         if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
@@ -122,9 +124,9 @@ public class ComputerAI_General implements Computer {
                         return false;
                     }
 
-                    CardList vengevines = AllZoneUtil.getPlayerGraveyard(AllZone.getComputerPlayer(), "Vengevine");
+                    CardList vengevines = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard, "Vengevine");
                     if (vengevines.size() > 0) {
-                        CardList creatures = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+                        CardList creatures = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                         CardList creatures2 = new CardList();
                         for (int i = 0; i < creatures.size(); i++) {
                             if (creatures.get(i).isCreature()
@@ -143,10 +145,10 @@ public class ComputerAI_General implements Computer {
                 }
             });
         }
-        CardList all = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         all.addAll(hand);
 
-        CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList humanPlayable = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         humanPlayable = humanPlayable.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return (c.canAnyPlayerActivate());
@@ -166,7 +168,7 @@ public class ComputerAI_General implements Computer {
      */
     private SpellAbility[] getMain2() {
         //Card list of all cards to consider
-        CardList all = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+        CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
         //Don't play permanents with Flash before humans declare attackers step
         all = all.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
@@ -180,7 +182,7 @@ public class ComputerAI_General implements Computer {
                 return true;
             }
         });
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
 
         // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
@@ -195,7 +197,7 @@ public class ComputerAI_General implements Computer {
             }
         });
 
-        CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList humanPlayable = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         humanPlayable = humanPlayable.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return (c.canAnyPlayerActivate());
@@ -212,7 +214,7 @@ public class ComputerAI_General implements Computer {
      * @return a {@link forge.CardList} object.
      */
     private CardList getAvailableSpellAbilities() {
-        CardList all = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+        CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
         //Don't play permanents with Flash before humans declare attackers step
         all = all.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
@@ -226,11 +228,11 @@ public class ComputerAI_General implements Computer {
                 return true;
             }
         });
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer()));
+        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
 
 
-        CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList humanPlayable = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         humanPlayable = humanPlayable.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return (c.canAnyPlayerActivate());
@@ -360,7 +362,7 @@ public class ComputerAI_General implements Computer {
             Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
 
-        AllZone.getComputerBattlefield().updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
         CombatUtil.showCombat();
 
         AllZone.getPhase().setNeedToNextPhase(true);

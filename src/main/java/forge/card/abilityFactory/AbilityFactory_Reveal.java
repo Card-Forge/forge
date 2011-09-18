@@ -6,6 +6,7 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.MyRandom;
 import forge.Player;
@@ -216,7 +217,7 @@ public final class AbilityFactory_Reveal {
         }
 
         //return false if nothing to dig into
-        if (AllZoneUtil.getCardsInZone(Constant.Zone.Library, libraryOwner).isEmpty()) {
+        if (libraryOwner.getCardsIn(Constant.Zone.Library).isEmpty()) {
             return false;
         }
 
@@ -268,13 +269,15 @@ public final class AbilityFactory_Reveal {
         Card host = af.getHostCard();
         Player player = sa.getActivatingPlayer();
         int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
-        String destZone1 = params.containsKey("DestinationZone") ? params.get("DestinationZone") : "Hand";
+        Zone destZone1 = params.containsKey("DestinationZone") ? Zone.smartValueOf(params.get("DestinationZone")) : Zone.Hand;
+        Zone destZone2 = params.containsKey("DestinationZone2") ? Zone.smartValueOf(params.get("DestinationZone2")) : Zone.Library;
+        
         int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
         boolean mitosis = params.containsKey("Mitosis");
         String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
         boolean anyNumber = params.containsKey("AnyNumber");
-        String destZone2 = params.containsKey("DestinationZone2") ? params.get("DestinationZone2") : "Library";
+
         int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params.get("LibraryPosition2")) : -1;
         boolean optional = params.containsKey("Optional");
         boolean noMove = params.containsKey("NoMove");
@@ -307,7 +310,7 @@ public final class AbilityFactory_Reveal {
                 CardList top = new CardList();
                 CardList valid = new CardList();
                 CardList rest = new CardList();
-                PlayerZone library = AllZone.getZone(Constant.Zone.Library, p);
+                PlayerZone library = p.getZone(Constant.Zone.Library);
 
                 numToDig = Math.min(numToDig, library.size());
                 for (int i = 0; i < numToDig; i++) {
@@ -356,8 +359,8 @@ public final class AbilityFactory_Reveal {
                                 if (c.equals(dummy)) {
                                     continue;
                                 }
-                                PlayerZone zone = AllZone.getZone(destZone1, c.getOwner());
-                                if (zone.is("Library")) {
+                                PlayerZone zone = c.getOwner().getZone(destZone1);
+                                if (zone.is(Zone.Library)) {
                                     AllZone.getGameAction().moveToLibrary(c, libraryPosition);
                                 } else {
                                     AllZone.getGameAction().moveTo(zone, c);
@@ -388,8 +391,8 @@ public final class AbilityFactory_Reveal {
                                         break;
                                     }
                                     valid.remove(chosen);
-                                    PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-                                    if (zone.is("Library")) {
+                                    PlayerZone zone = chosen.getOwner().getZone(destZone1);
+                                    if (zone.is(Zone.Library)) {
                                         //System.out.println("Moving to lib position: "+libraryPosition);
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
@@ -414,8 +417,8 @@ public final class AbilityFactory_Reveal {
                                     if (chosen.equals(dummy)) {
                                         break;
                                     }
-                                    PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-                                    if (zone.is("Library")) {
+                                    PlayerZone zone = chosen.getOwner().getZone(destZone1);
+                                    if (zone.is(Zone.Library)) {
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
                                         AllZone.getGameAction().moveTo(zone, chosen);
@@ -468,7 +471,7 @@ public final class AbilityFactory_Reveal {
                             //just move them randomly
                             for (int i = 0; i < rest.size(); i++) {
                                 Card c = rest.get(i);
-                                PlayerZone toZone = AllZone.getZone(destZone2, c.getOwner());
+                                PlayerZone toZone = c.getOwner().getZone(destZone2);
                                 c = AllZone.getGameAction().moveTo(toZone, c);
                                 if (destZone2.equals("Battlefield") && !keywords.isEmpty()) {
                                     for (String kw : keywords) {
@@ -493,7 +496,7 @@ public final class AbilityFactory_Reveal {
      */
     private static CardList sharesNameWithCardOnBattlefield(final CardList list) {
         CardList toReturn = new CardList();
-        CardList play = AllZoneUtil.getCardsInPlay();
+        CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card c : list) {
             for (Card p : play) {
                 if (p.getName().equals(c.getName())) {
@@ -716,7 +719,7 @@ public final class AbilityFactory_Reveal {
         }
 
         //return false if nothing to dig into
-        if (AllZoneUtil.getCardsInZone(Constant.Zone.Library, libraryOwner).isEmpty()) {
+        if (libraryOwner.getCardsIn(Constant.Zone.Library).isEmpty()) {
             return false;
         }
 
@@ -800,7 +803,7 @@ public final class AbilityFactory_Reveal {
                 CardList found = new CardList();
                 CardList revealed = new CardList();
 
-                PlayerZone library = AllZone.getZone(Constant.Zone.Library, p);
+                PlayerZone library = p.getZone(Constant.Zone.Library);
 
                 int maxToDig = maxRevealed != null ? maxRevealed : library.size();
 
@@ -1053,7 +1056,7 @@ public final class AbilityFactory_Reveal {
     {
         Target tgt = af.getAbTgt();
 
-        int humanHandSize = AllZoneUtil.getPlayerHand(AllZone.getHumanPlayer()).size();
+        int humanHandSize = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
 
         if (tgt != null) {
             // ability is targeted
@@ -1121,7 +1124,7 @@ public final class AbilityFactory_Reveal {
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
-                CardList hand = AllZoneUtil.getPlayerHand(p);
+                CardList hand = p.getCardsIn(Zone.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
                         GuiUtils.getChoice(p + "'s hand", hand.toArray());
@@ -1628,7 +1631,7 @@ public final class AbilityFactory_Reveal {
     private static void rearrangeTopOfLibrary(final Card src, final Player player,
             final int numCards, final boolean mayshuffle)
     {
-        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        PlayerZone lib = player.getZone(Constant.Zone.Library);
         int maxCards = lib.size();
         maxCards = Math.min(maxCards, numCards);
         if (maxCards == 0) {

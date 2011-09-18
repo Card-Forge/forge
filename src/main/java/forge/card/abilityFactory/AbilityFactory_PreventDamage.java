@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -240,7 +241,7 @@ public class AbilityFactory_PreventDamage {
 
             CardList threatenedTargets = new CardList();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             for (Card c : targetables) {
@@ -262,7 +263,7 @@ public class AbilityFactory_PreventDamage {
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
-                CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
                 if (targetables.size() == 0)
@@ -329,7 +330,7 @@ public class AbilityFactory_PreventDamage {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsInPlay();
+        CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 

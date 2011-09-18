@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.input.Input;
 
@@ -47,7 +48,7 @@ public class PhaseUtil {
 
         // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
         if (turn.getTurn() > 0) {
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(turn);
+            CardList list = turn.getCardsIn(Zone.Battlefield);
             for (Card c : list)
                 c.setSickness(false);
         }
@@ -71,7 +72,7 @@ public class PhaseUtil {
         doUntap();
 
         //otherwise land seems to stay tapped when it is really untapped
-        AllZone.getHumanBattlefield().updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
 
         AllZone.getPhase().setNeedToNextPhase(true);
     }
@@ -81,7 +82,7 @@ public class PhaseUtil {
      */
     private static void doUntap() {
         Player player = AllZone.getPhase().getPlayerTurn();
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
 
         for (Card c : list) {
             if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise")) {
@@ -138,14 +139,14 @@ public class PhaseUtil {
         }
 
         //Remove temporary keywords
-        list = AllZoneUtil.getPlayerCardsInPlay(player);
+        list = player.getCardsIn(Zone.Battlefield);
         for (Card c : list) {
             c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
             c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
         }
 
         //opponent untapping during your untap phase
-        CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+        CardList opp = player.getOpponent().getCardsIn(Zone.Battlefield);
         for (Card oppCard : opp)
             if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step."))
                 oppCard.untap();
@@ -188,7 +189,7 @@ public class PhaseUtil {
         }
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
-                CardList artList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList artList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(AllZoneUtil.artifacts);
                 artList = artList.filter(AllZoneUtil.tapped);
                 if (artList.size() > 0) {
@@ -215,7 +216,7 @@ public class PhaseUtil {
                         }
                     }//selectCard()
                 };//Input
-                CardList artList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+                CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(AllZoneUtil.artifacts);
                 artList = artList.filter(AllZoneUtil.tapped);
                 if (artList.size() > 0) {
@@ -272,7 +273,7 @@ public class PhaseUtil {
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")) return false;
 
-        CardList allp = AllZoneUtil.getCardsInPlay();
+        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
                 int KeywordPosition = ca.getKeywordPosition("Permanents don't untap during their controllers' untap steps");
@@ -295,10 +296,10 @@ public class PhaseUtil {
      */
     private static boolean canOnlyUntapOneLand() {
         //Winter Orb was given errata so it no longer matters if it's tapped or not
-        if (AllZoneUtil.getCardsInPlay("Winter Orb").size() > 0)
+        if (AllZoneUtil.getCardsIn(Zone.Battlefield, "Winter Orb").size() > 0)
             return true;
 
-        if (AllZoneUtil.getPlayerCardsInPlay(AllZone.getPhase().getPlayerTurn(), "Mungha Wurm").size() > 0)
+        if (AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield, "Mungha Wurm").size() > 0)
             return true;
 
         return false;
@@ -333,7 +334,7 @@ public class PhaseUtil {
 
         Player turn = AllZone.getPhase().getPlayerTurn();
 
-        if (AllZoneUtil.getPlayerHand(turn).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn))
+        if (turn.getCardsIn(Zone.Hand).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn))
             return true;
 
         return false;
@@ -367,7 +368,7 @@ public class PhaseUtil {
             return true;
         }
 
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
 
         if (list.containsName("Necropotence") || list.containsName("Yawgmoth's Bargain") || list.containsName("Recycle") ||
                 list.containsName("Dragon Appeasement") || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans") ||
@@ -419,7 +420,7 @@ public class PhaseUtil {
         if (list.size() == 1) {
             Player attackingPlayer = AllZone.getCombat().getAttackingPlayer();
 
-            CardList exalted = AllZoneUtil.getPlayerCardsInPlay(attackingPlayer);
+            CardList exalted = attackingPlayer.getCardsIn(Zone.Battlefield);
             exalted = exalted.getKeyword("Exalted");
 
             if (exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());

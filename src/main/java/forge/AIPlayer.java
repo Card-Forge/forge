@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
@@ -86,7 +87,7 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     public final CardList mayDrawCards(final int n) {
-        if (AllZone.getComputerLibrary().size() > n) {
+        if (getCardsIn(Zone.Library).size() > n) {
             return drawCards(n);
         } else {
             return new CardList();
@@ -107,12 +108,12 @@ public class AIPlayer extends Player {
             dredgers.shuffle();
             Card c = dredgers.get(0);
             //rule 702.49a
-            if (getDredgeNumber(c) <= AllZone.getComputerLibrary().size()) {
+            if (getDredgeNumber(c) <= getCardsIn(Zone.Library).size()) {
                 //dredge library, put card in hand
                 AllZone.getGameAction().moveToHand(c);
                 //put dredge number in graveyard
                 for (int i = 0; i < getDredgeNumber(c); i++) {
-                    Card c2 = AllZone.getComputerLibrary().get(0);
+                    Card c2 = getCardsIn(Zone.Library).get(0);
                     AllZone.getGameAction().moveToGraveyard(c2);
                 }
                 return true;
@@ -129,7 +130,7 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
-        int max = AllZoneUtil.getPlayerHand(this).size();
+        int max = getCardsIn(Zone.Hand).size();
         max = Math.min(max, num);
         CardList discarded = ComputerUtil.AI_discardNumType(max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
@@ -141,7 +142,7 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        CardList hand = AllZoneUtil.getPlayerHand(this);
+        CardList hand = getCardsIn(Zone.Hand);
         CardList tHand = hand.getType(uType);
 
         if (tHand.size() > 0) {
@@ -171,9 +172,9 @@ public class AIPlayer extends Player {
                     position = -1;
                 }
             }
-            CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
+            CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
-            CardList blIP = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList blIP = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
             blIP = blIP.getType("Basic");
             if (blIP.size() > 5) {
@@ -205,7 +206,7 @@ public class AIPlayer extends Player {
         for (int i = 0; i < num; i++) {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
-                CardList bl = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList bl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 bl = bl.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
                         if (c.isBasicLand()) {
@@ -218,7 +219,7 @@ public class AIPlayer extends Player {
 
                 bottom = bl.size() > 5; // if control more than 5 Basic land, probably don't need more
             } else if (topN.get(i).isCreature()) {
-                CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList cl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 cl = cl.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
                         if (c.isCreature()) {

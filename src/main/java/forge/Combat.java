@@ -3,6 +3,8 @@ package forge;
 import java.util.*;
 import java.util.Map.Entry;
 
+import forge.Constant.Zone;
+
 /**
  * <p>Combat class.</p>
  *
@@ -73,7 +75,7 @@ public class Combat {
      */
     public final void initiatePossibleDefenders(final Player defender) {
         defenders.add(defender);
-        CardList planeswalkers = AllZoneUtil.getPlayerCardsInPlay(defender);
+        CardList planeswalkers = defender.getCardsIn(Zone.Battlefield);
         planeswalkers = planeswalkers.getType("Planeswalker");
         for (Card pw : planeswalkers) {
             defenders.add(pw);

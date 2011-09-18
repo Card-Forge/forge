@@ -1,12 +1,14 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>Target_Selection class.</p>
@@ -177,7 +179,7 @@ public class Target_Selection {
      */
     public void chooseValidInput() {
         Target tgt = this.getTgt();
-        String zone = tgt.getZone();
+        List<Zone> zone = tgt.getZone();
         final boolean mandatory = target.getMandatory() ? target.hasCandidates(true) : false;
 
         if (zone.equals(Constant.Zone.Stack)) {
@@ -186,7 +188,7 @@ public class Target_Selection {
             return;
         }
 
-        CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(target.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard());
+        CardList choices = AllZoneUtil.getCardsIn(zone).getValidCards(target.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard());
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()){
@@ -206,7 +208,7 @@ public class Target_Selection {
             }
         }
         
-        if (zone.equals(Constant.Zone.Battlefield)) {
+        if (zone.contains(Constant.Zone.Battlefield)) {
             AllZone.getInputControl().setInput(input_targetSpecific(choices, true, mandatory, objects));
         } else{
             chooseCardFromList(choices, true, mandatory);

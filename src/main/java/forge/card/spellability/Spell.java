@@ -1,6 +1,7 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.cost.Cost_Payment;
 import forge.error.ErrorViewer;
@@ -74,7 +75,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         Card card = getSourceCard();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             String needsToPlay = card.getSVar("NeedsToPlay");
-            CardList list = AllZoneUtil.getCardsInPlay();
+            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
             list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) return false;

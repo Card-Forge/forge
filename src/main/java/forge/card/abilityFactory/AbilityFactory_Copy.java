@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
@@ -227,7 +228,7 @@ public final class AbilityFactory_Copy {
         Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            CardList list = AllZoneUtil.getCardsInPlay();
+            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             abTgt.resetTargets();
             // target loop

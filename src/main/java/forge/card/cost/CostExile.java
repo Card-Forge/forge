@@ -11,6 +11,7 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -25,13 +26,13 @@ public class CostExile extends CostPartWithList {
 	//ExileFromGraveyard<Num/Type{/TypeDescription}>
 	//ExileFromTop<Num/Type{/TypeDescription}> (of library)
 
-    private String from = Constant.Zone.Battlefield;
+    private Constant.Zone from = Constant.Zone.Battlefield;
 
-    public String getFrom() {
+    public Constant.Zone getFrom() {
         return from;
     }
     
-    public CostExile(String amount, String type, String description, String from){
+    public CostExile(String amount, String type, String description, Constant.Zone from){
         super(amount, type, description);
     	if (from != null)
     		this.from = from;
@@ -85,7 +86,7 @@ public class CostExile extends CostPartWithList {
 
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        PlayerZone zone = AllZone.getZone(getFrom(), activator);
+        PlayerZone zone = activator.getZone(getFrom());
         if (!getThis()) {
             CardList typeList = AllZoneUtil.getCardsInZone(zone);
 
@@ -111,7 +112,7 @@ public class CostExile extends CostPartWithList {
         String amount = getAmount();
         Integer c = convertAmount();
         Player activator = ability.getActivatingPlayer();
-        CardList list = AllZoneUtil.getCardsInZone(getFrom(), activator);
+        CardList list = activator.getCardsIn(getFrom());
         list = list.getValidCards(type.split(";"), activator, source);
         if (c == null){
             String sVar = source.getSVar(amount);
@@ -156,7 +157,7 @@ public class CostExile extends CostPartWithList {
             }
             
             if (from.equals(Constant.Zone.Library)){
-                list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer(), c);
+                list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
             }
             else{
                 list = ComputerUtil.chooseExileFrom(getFrom(), getType(), source, ability.getTargetCard(), c);
@@ -172,7 +173,7 @@ public class CostExile extends CostPartWithList {
     public static void exileFromTop(final SpellAbility sa, final CostExile part, final Cost_Payment payment, final int nNeeded){
         StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        CardList list = AllZoneUtil.getPlayerCardsInLibrary(sa.getActivatingPlayer(), nNeeded);
+        CardList list = sa.getActivatingPlayer().getCardsIn(Zone.Library, nNeeded);
         
         if (list.size() > nNeeded){
             // I don't believe this is possible
@@ -207,7 +208,7 @@ public class CostExile extends CostPartWithList {
                     done();
                 }
                 
-                typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
+                typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
     
                 for (int i = 0; i < nNeeded; i++) {
@@ -282,7 +283,7 @@ public class CostExile extends CostPartWithList {
                 if (part.getFrom().equals(Constant.Zone.Hand)){
                     msg.append(" from your Hand");
                 }
-                typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
+                typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
@@ -340,7 +341,7 @@ public class CostExile extends CostPartWithList {
             @Override
             public void showMessage() {
                 Card card = sa.getSourceCard();
-                if (sa.getActivatingPlayer().isHuman() && AllZoneUtil.isCardInZone(AllZone.getZone(part.getFrom(), sa.getActivatingPlayer()), card)) {
+                if (sa.getActivatingPlayer().isHuman() && AllZoneUtil.isCardInZone(sa.getActivatingPlayer().getZone(part.getFrom()), card)) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Exile?");

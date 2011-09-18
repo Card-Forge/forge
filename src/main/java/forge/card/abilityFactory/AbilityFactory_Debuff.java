@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -375,7 +376,7 @@ public final class AbilityFactory_Debuff {
     private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory)
     {
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -638,9 +639,9 @@ public final class AbilityFactory_Debuff {
             valid = params.get("ValidCards");
         }
 
-        CardList comp = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
-        CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         human = human.getValidCards(valid, hostCard.getController(), hostCard);
 
         //TODO - add blocking situations here also
@@ -680,7 +681,7 @@ public final class AbilityFactory_Debuff {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {

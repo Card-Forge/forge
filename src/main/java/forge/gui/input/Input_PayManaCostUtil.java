@@ -3,6 +3,7 @@ package forge.gui.input;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory_Mana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
@@ -113,7 +114,7 @@ public class Input_PayManaCostUtil {
 
         manaCost = AllZone.getManaPool().subtractMana(sa, manaCost, chosen);
 
-        AllZone.getHumanBattlefield().updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;
 
     }

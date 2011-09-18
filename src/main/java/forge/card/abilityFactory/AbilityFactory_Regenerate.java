@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -224,7 +225,7 @@ public class AbilityFactory_Regenerate {
         } else {
             tgt.resetTargets();
             // filter AIs battlefield by what I can target
-            CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+            CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
             if (targetables.size() == 0)
@@ -311,7 +312,7 @@ public class AbilityFactory_Regenerate {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        CardList targetables = AllZoneUtil.getCardsInPlay();
+        CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
@@ -564,7 +565,7 @@ public class AbilityFactory_Regenerate {
         if (params.containsKey("ValidCards"))
             valid = params.get("ValidCards");
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         if (list.size() == 0)
@@ -632,7 +633,7 @@ public class AbilityFactory_Regenerate {
         if (params.containsKey("ValidCards"))
             valid = params.get("ValidCards");
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {

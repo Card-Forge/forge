@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -98,14 +99,14 @@ public class HumanPlayer extends Player {
         if (o.equals("Yes")) {
             Card c = (Card) GuiUtils.getChoice("Select card to dredge", getDredge().toArray());
             //rule 702.49a
-            if (getDredgeNumber(c) <= AllZone.getHumanLibrary().size()) {
+            if (getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(Zone.Library).size()) {
 
                 //might have to make this more sophisticated
                 //dredge library, put card in hand
                 AllZone.getGameAction().moveToHand(c);
 
                 for (int i = 0; i < getDredgeNumber(c); i++) {
-                    Card c2 = AllZone.getHumanLibrary().get(0);
+                    Card c2 = AllZone.getHumanPlayer().getZone(Zone.Library).get(0);
                     AllZone.getGameAction().moveToGraveyard(c2);
                 }
                 dredged = true;

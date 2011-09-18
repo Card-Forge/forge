@@ -10,6 +10,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 
+import forge.Constant.Zone;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -1036,7 +1037,7 @@ public final class AbilityFactory_Animate {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), host.getController(), host);
 
         for (final Card c : list) {

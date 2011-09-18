@@ -4,6 +4,7 @@ package forge.card.spellability;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.CardList;
+import forge.Constant.Zone;
 import forge.Phase;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
@@ -51,7 +52,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
         }
 
         if (params.containsKey("ConditionZone")) {
-            setZone(params.get("ContitionZone"));
+            setZone(Zone.smartValueOf(params.get("ContitionZone")));
         }
 
         if (params.containsKey("ConditionSorcerySpeed")) {
@@ -189,7 +190,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
         if (nCardsInHand != -1) {
             // Can handle Library of Alexandria, or Hellbent
-            if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand) {
+            if (activator.getCardsIn(Zone.Hand).size() != nCardsInHand) {
                 return false;
             }
         }
@@ -199,7 +200,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             if (presentDefined != null) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), presentDefined, sa).toArray());
             } else {
-                list = AllZoneUtil.getCardsInPlay();
+                list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             }
 
             list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());

@@ -4,6 +4,7 @@ import forge.Card;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.CardList;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -11,6 +12,7 @@ import forge.card.spellability.SpellAbility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -219,14 +221,14 @@ public abstract class Trigger {
      */
     public boolean zonesCheck() {
         if (mapParams.containsKey("TriggerZones")) {
-            ArrayList<String> triggerZones = new ArrayList<String>();
+            List<Zone> triggerZones = new ArrayList<Zone>();
             for (String s : mapParams.get("TriggerZones").split(",")) {
-                triggerZones.add(s);
+                triggerZones.add(Zone.smartValueOf(s));
             }
             if (AllZone.getZone(hostCard) == null) {
                 return false;
             }
-            if (!triggerZones.contains(AllZone.getZone(hostCard).getZoneName())) {
+            if (!triggerZones.contains(AllZone.getZone(hostCard).getZoneType())) {
                 return false;
             }
         }
@@ -340,23 +342,23 @@ public abstract class Trigger {
         if (mapParams.containsKey("IsPresent")) {
             String sIsPresent = mapParams.get("IsPresent");
             String presentCompare = "GE1";
-            String presentZone = "Battlefield";
+            Zone presentZone = Zone.Battlefield;
             String presentPlayer = "Any";
             if (mapParams.containsKey("PresentCompare")) {
                 presentCompare = mapParams.get("PresentCompare");
             }
             if (mapParams.containsKey("PresentZone")) {
-                presentZone = mapParams.get("PresentZone");
+                presentZone = Zone.smartValueOf(mapParams.get("PresentZone"));
             }
             if (mapParams.containsKey("PresentPlayer")) {
                 presentPlayer = mapParams.get("PresentPlayer");
             }
             CardList list = new CardList();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController()));
+                list.addAll(hostCard.getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController().getOpponent()));
+                list.addAll(hostCard.getController().getOpponent().getCardsIn(presentZone));
             }
 
             list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
@@ -379,23 +381,23 @@ public abstract class Trigger {
         if (mapParams.containsKey("IsPresent2")) {
             String sIsPresent = mapParams.get("IsPresent2");
             String presentCompare = "GE1";
-            String presentZone = "Battlefield";
+            Zone presentZone = Zone.Battlefield;
             String presentPlayer = "Any";
             if (mapParams.containsKey("PresentCompare2")) {
                 presentCompare = mapParams.get("PresentCompare2");
             }
             if (mapParams.containsKey("PresentZone2")) {
-                presentZone = mapParams.get("PresentZone2");
+                presentZone = Zone.smartValueOf(mapParams.get("PresentZone2"));
             }
             if (mapParams.containsKey("PresentPlayer2")) {
                 presentPlayer = mapParams.get("PresentPlayer2");
             }
             CardList list = new CardList();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController()));
+                list.addAll(hostCard.getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController().getOpponent()));
+                list.addAll(hostCard.getController().getOpponent().getCardsIn(presentZone));
             }
 
             list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);

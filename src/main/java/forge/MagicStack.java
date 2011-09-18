@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
@@ -680,9 +681,9 @@ public class MagicStack extends MyObservable {
            */
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            CardList all = AllZoneUtil.getCardsInPlay();
+            CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
             all = all.filter(AllZoneUtil.nonToken);
-            CardList graves = AllZoneUtil.getCardsInGraveyard();
+            CardList graves = AllZoneUtil.getCardsIn(Zone.Graveyard);
             all.addAll(graves);
 
             for (Card c : all) {
@@ -692,7 +693,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                CardList bazaars = AllZoneUtil.getCardsInPlay("Bazaar of Wonders");  //should only be 1...
+                CardList bazaars = AllZoneUtil.getCardsIn(Zone.Battlefield, "Bazaar of Wonders");  //should only be 1...
                 for (final Card bazaar : bazaars) {
                     final SpellAbility counter = new Ability(bazaar, "0") {
                         @Override
@@ -711,18 +712,18 @@ public class MagicStack extends MyObservable {
         //Lurking Predators
         if (sp.isSpell()) {
             Player player = sp.getSourceCard().getController();
-            CardList lurkingPredators = AllZoneUtil.getPlayerCardsInPlay(player, "Lurking Predators");
+            CardList lurkingPredators = player.getCardsIn(Zone.Battlefield, "Lurking Predators");
 
             for (int i = 0; i < lurkingPredators.size(); i++) {
                 StringBuilder revealMsg = new StringBuilder("");
                 if (lurkingPredators.get(i).getController().isHuman()) {
                     revealMsg.append("You reveal: ");
-                    if (AllZone.getHumanLibrary().size() == 0) {
+                    if (AllZone.getHumanPlayer().getZone(Zone.Library).size() == 0) {
                         revealMsg.append("Nothing!");
                         GameActionUtil.showInfoDialg(revealMsg.toString());
                         continue;
                     }
-                    Card revealed = AllZone.getHumanLibrary().get(0);
+                    Card revealed = AllZone.getHumanPlayer().getZone(Zone.Library).get(0);
 
                     revealMsg.append(revealed.getName());
                     if (!revealed.isCreature()) {
@@ -738,12 +739,12 @@ public class MagicStack extends MyObservable {
                     }
                 } else {
                     revealMsg.append("Computer reveals: ");
-                    if (AllZone.getComputerLibrary().size() == 0) {
+                    if (AllZone.getComputerPlayer().getZone(Zone.Library).size() == 0) {
                         revealMsg.append("Nothing!");
                         GameActionUtil.showInfoDialg(revealMsg.toString());
                         continue;
                     }
-                    Card revealed = AllZone.getComputerLibrary().get(0);
+                    Card revealed = AllZone.getComputerPlayer().getZone(Zone.Library).get(0);
                     revealMsg.append(revealed.getName());
                     if (!revealed.isCreature()) {
                         GameActionUtil.showInfoDialg(revealMsg.toString());
@@ -902,7 +903,7 @@ public class MagicStack extends MyObservable {
         //verified by System.identityHashCode(card);
         Card tmp = sa.getSourceCard();
         if (tmp.getClones().size() > 0) {
-            for (Card c : AllZoneUtil.getCardsInPlay()) {
+            for (Card c : AllZoneUtil.getCardsIn(Zone.Battlefield)) {
                 if (c.equals(tmp)) {
                     c.setClones(tmp.getClones());
                 }

@@ -13,6 +13,7 @@ import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -21,6 +22,7 @@ import forge.gui.GuiUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -167,7 +169,7 @@ public final class AbilityFactory_ChangeZone {
      */
     private static void setMiscellaneous(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
-        String origin = params.get("Origin");
+        List<Constant.Zone> origin = Constant.Zone.listValueOf(params.get("Origin"));
 
         Target tgt = af.getAbTgt();
 
@@ -300,7 +302,7 @@ public final class AbilityFactory_ChangeZone {
         Cost abCost = af.getAbCost();
         Card source = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();
-        String origin = params.get("Origin");
+        Constant.Zone origin = Constant.Zone.smartValueOf(params.get("Origin"));
         //String destination = params.get("Destination");
 
         if (abCost != null) {
@@ -348,7 +350,7 @@ public final class AbilityFactory_ChangeZone {
         }
 
         for (Player p : pDefined) {
-            CardList list = AllZoneUtil.getCardsInZone(origin, p);
+            CardList list = p.getCardsIn(origin);
 
             if (type != null && p.isComputer()) {
                 // AI only "knows" about his information
@@ -407,7 +409,7 @@ public final class AbilityFactory_ChangeZone {
 
         HashMap<String, String> params = af.getMapParams();
         //String destination = params.get("Destination");
-        String origin = params.get("Origin");
+        Constant.Zone origin = Constant.Zone.smartValueOf(params.get("Origin"));
 
         // this works for hidden because the mana is paid first.
         String type = params.get("ChangeType");
@@ -451,7 +453,7 @@ public final class AbilityFactory_ChangeZone {
         }
 
         for (Player p : pDefined) {
-            CardList list = AllZoneUtil.getCardsInZone(origin, p);
+            CardList list = p.getCardsIn(origin);
 
             // Computer should "know" his deck
             if (p.isComputer()) {
@@ -618,16 +620,16 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        String origin = params.get("Origin");
-        String destination = params.get("Destination");
+        List<Zone> origin = Zone.listValueOf(params.get("Origin"));
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
         int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 
         if (params.containsKey("OriginChoice")) {
             // Currently only used for Mishra, but may be used by other things
             // Improve how this message reacts for other cards
-            String alt = params.get("OriginAlternative");
-            CardList altFetchList = AllZoneUtil.getCardsInZone(alt, player);
+            List<Zone> alt = Zone.listValueOf(params.get("OriginAlternative"));
+            CardList altFetchList = player.getCardsIn(alt);
             altFetchList = AbilityFactory.filterListByType(altFetchList, params.get("ChangeType"), sa);
 
             StringBuilder sb = new StringBuilder();
@@ -645,25 +647,25 @@ public final class AbilityFactory_ChangeZone {
             sb.append(params.get("AlternativeDestinationMessage"));
 
             if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
-                destination = params.get("DestinationAlternative");
+                destination = Zone.smartValueOf(params.get("DestinationAlternative"));
                 libraryPos = params.containsKey("LibraryPositionAlternative") ? Integer.parseInt(params.get("LibraryPositionAlternative")) : 0;
             }
         }
 
-        CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
-        if (origin.contains("Library"))    // Look at whole library before moving onto choosing a card{
-            GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", AllZoneUtil.getCardsInZone("Library", player).toArray());
+        CardList fetchList = player.getCardsIn(origin);
+        if (origin.contains(Zone.Library))    // Look at whole library before moving onto choosing a card{
+            GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", player.getCardsIn(Zone.Library).toArray());
 
         // Look at opponents hand before moving onto choosing a card
-        if (origin.contains("Hand") && player.isComputer())
+        if (origin.contains(Zone.Hand) && player.isComputer())
         {
             GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand",
-                    AllZoneUtil.getCardsInZone("Hand", player).toArray());
+                    player.getCardsIn(Zone.Hand).toArray());
         }
 
         fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
 
-        PlayerZone destZone = AllZone.getZone(destination, player);
+        PlayerZone destZone = player.getZone(destination);
 
         int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
@@ -691,13 +693,13 @@ public final class AbilityFactory_ChangeZone {
                 fetchList.remove(c);
                 Card movedCard = null;
 
-                if (destination.equals("Library")) {
+                if (destination.equals(Zone.Library)) {
                     // do not shuffle the library once we have placed a fetched card on top.
-                    if (origin.contains("Library") && i < 1) {
+                    if (origin.contains(Zone.Library) && i < 1) {
                         player.shuffle();
                     }
                     movedCard = AllZone.getGameAction().moveToLibrary(c, libraryPos);
-                } else if (destination.equals("Battlefield")) {
+                } else if (destination.equals(Zone.Battlefield)) {
                     if (params.containsKey("Tapped")) {
                         c.tap();
                     }
@@ -705,7 +707,7 @@ public final class AbilityFactory_ChangeZone {
                         c.addController(af.getHostCard());
                     }
 
-                    movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
+                    movedCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
                 } else {
                     movedCard = AllZone.getGameAction().moveTo(destZone, c);
                     if (params.containsKey("ExileFaceDown")) {
@@ -732,7 +734,7 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle")) {
+        if ((origin.contains(Zone.Library) && !destination.equals(Zone.Library)) || params.containsKey("Shuffle")) {
             player.shuffle();
         }
     }
@@ -758,14 +760,14 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        String origin = params.get("Origin");
+        List<Zone> origin = Zone.listValueOf(params.get("Origin"));
 
-        CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
+        CardList fetchList = player.getCardsIn(origin);
         fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
 
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
 
-        PlayerZone destZone = AllZone.getZone(destination, player);
+        PlayerZone destZone = player.getZone(destination);
 
         String type = params.get("ChangeType");
         if (type == null) {
@@ -819,7 +821,7 @@ public final class AbilityFactory_ChangeZone {
             fetchList.remove(c);
         }
 
-        if (origin.contains("Library")) {
+        if (origin.contains(Zone.Library)) {
             player.shuffle();
         }
 
@@ -843,7 +845,7 @@ public final class AbilityFactory_ChangeZone {
                     }
             	}
 
-                newCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
+                newCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
             } else {
                 newCard = AllZone.getGameAction().moveTo(destZone, c);
                 if (params.containsKey("ExileFaceDown")) {
@@ -889,8 +891,8 @@ public final class AbilityFactory_ChangeZone {
      * @return a {@link forge.Card} object.
      */
     private static Card basicManaFixing(CardList list, final String type) {    // type = basic land types
-        CardList combined = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-        combined.addAll(AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer()));
+        CardList combined = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        combined.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
 
         String[] names = type.split(",");
         ArrayList<String> basics = new ArrayList<String>();
@@ -967,10 +969,10 @@ public final class AbilityFactory_ChangeZone {
         final Card source = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();
 
-        String origin = params.get("Origin");
+        Zone origin = Zone.smartValueOf(params.get("Origin"));
         String destination = params.get("Destination");
 
-        float pct = origin.equals("Battlefield") ? .8f : .667f;
+        float pct = origin.equals(Zone.Battlefield) ? .8f : .667f;
 
         Random r = MyRandom.random;
 
@@ -1015,7 +1017,7 @@ public final class AbilityFactory_ChangeZone {
 
             // return this card from battlefield: cards like Blinking Spirit
             // in general this should only be used to protect from Imminent Harm (dying or losing control of)
-            if (origin.equals("Battlefield")) {
+            if (origin.equals(Zone.Battlefield)) {
                 if (AllZone.getStack().size() == 0) {
                     return false;
                 }
@@ -1082,7 +1084,7 @@ public final class AbilityFactory_ChangeZone {
     {
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
-        String origin = params.get("Origin");
+        Zone origin = Zone.smartValueOf(params.get("Origin"));
         String destination = params.get("Destination");
         Target tgt = af.getAbTgt();
 
@@ -1102,7 +1104,7 @@ public final class AbilityFactory_ChangeZone {
             tgt.resetTargets();
         }
 
-        CardList list = AllZoneUtil.getCardsInZone(origin);
+        CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -1110,14 +1112,14 @@ public final class AbilityFactory_ChangeZone {
         }
 
         // Narrow down the list:
-        if (origin.equals("Battlefield")) {
+        if (origin.equals(Zone.Battlefield)) {
             // filter out untargetables
             list = list.getTargetableCards(source);
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
             // if it's blink or bounce, try to save my about to die stuff
-            if ((destination.equals("Hand")
-            		|| (destination.equals("Exile") && (subAPI.equals("DelayedTrigger")
+            if ((destination.equals(Zone.Hand)
+            		|| (destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger")
             				|| (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))))
             		&& tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)
             {
@@ -1246,11 +1248,11 @@ public final class AbilityFactory_ChangeZone {
 
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
-        String origin = params.get("Origin");
+        Zone origin = Zone.smartValueOf(params.get("Origin"));
         String destination = params.get("Destination");
         Target tgt = af.getAbTgt();
 
-        CardList list = AllZoneUtil.getCardsInZone(origin);
+        CardList list = AllZoneUtil.getCardsIn(origin);
         list = list.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
 
@@ -1364,7 +1366,7 @@ public final class AbilityFactory_ChangeZone {
         sb.append(" ");
 
         String destination = params.get("Destination");
-        String origin = params.get("Origin");
+        Zone origin = Zone.smartValueOf(params.get("Origin"));
 
         StringBuilder sbTargets = new StringBuilder();
 
@@ -1473,8 +1475,8 @@ public final class AbilityFactory_ChangeZone {
         Player player = sa.getActivatingPlayer();
         Card hostCard = af.getHostCard();
 
-        String destination = params.get("Destination");
-        String origin = params.get("Origin");
+        Zone destination = Zone.valueOf(params.get("Destination"));
+        Zone origin = Zone.valueOf(params.get("Origin"));
 
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
@@ -1539,15 +1541,14 @@ public final class AbilityFactory_ChangeZone {
                     		}
                     	}
 
-                    	movedCard = AllZone.getGameAction().moveTo(
-                    	        AllZone.getZone(destination, tgtC.getController()), tgtC);
+                    	movedCard = AllZone.getGameAction().moveTo(tgtC.getController().getZone(destination), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
                             AllZone.getCombat().addAttacker(tgtC);
                             AllZone.getCombat().addUnblockedAttacker(tgtC);
                         }
                     } else {
-                        movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
+                        movedCard = AllZone.getGameAction().moveTo(pl.getZone(destination), tgtC);
                         if (params.containsKey("ExileFaceDown")) {
                             movedCard.setIsFaceDown(true);
                         }
@@ -1572,9 +1573,9 @@ public final class AbilityFactory_ChangeZone {
      * @param origin a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList knownDetermineDefined(final SpellAbility sa, final String defined, final String origin) {
+    private static CardList knownDetermineDefined(final SpellAbility sa, final String defined, final Zone origin) {
         // TODO this function should return a ArrayList<Card> and then be handled by the callees
-        CardList grave = AllZoneUtil.getCardsInZone(origin, sa.getActivatingPlayer());
+        CardList grave = sa.getActivatingPlayer().getCardsIn(origin);
         CardList ret = new CardList();
 
         if (defined != null && defined.equals("Top")) {
@@ -1706,7 +1707,7 @@ public final class AbilityFactory_ChangeZone {
         Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
         String destination = params.get("Destination");
-        String origin = params.get("Origin");
+        Constant.Zone origin = Constant.Zone.smartValueOf(params.get("Origin"));
 
 
         if (abCost != null) {
@@ -1732,9 +1733,9 @@ public final class AbilityFactory_ChangeZone {
         // ex. "Return all Auras attached to target"
         // ex. "Return all blocking/blocked by target creature"
 
-        CardList humanType = AllZoneUtil.getCardsInZone(origin, AllZone.getHumanPlayer());
+        CardList humanType = AllZone.getHumanPlayer().getCardsIn(origin);
         humanType = AbilityFactory.filterListByType(humanType, params.get("ChangeType"), sa);
-        CardList computerType = AllZoneUtil.getCardsInZone(origin, AllZone.getComputerPlayer());
+        CardList computerType = AllZone.getComputerPlayer().getCardsIn(origin);
         computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
 
         // TODO improve restrictions on when the AI would want to use this
@@ -1761,7 +1762,7 @@ public final class AbilityFactory_ChangeZone {
         } else if (origin.equals("Graveyard")) {
             Target tgt = af.getAbTgt();
             if (tgt != null) {
-                if (AllZoneUtil.getPlayerGraveyard(AllZone.getHumanPlayer()).isEmpty()) {
+                if (AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard).isEmpty()) {
                     return false;
                 }
                 tgt.resetTargets();
@@ -1866,7 +1867,7 @@ public final class AbilityFactory_ChangeZone {
     private static void changeZoneAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         String destination = params.get("Destination");
-        String origin = params.get("Origin");
+        Zone origin = Zone.smartValueOf(params.get("Origin"));
 
         CardList cards = null;
 
@@ -1880,9 +1881,9 @@ public final class AbilityFactory_ChangeZone {
         }
 
         if (tgtPlayers == null || tgtPlayers.isEmpty()) {
-            cards = AllZoneUtil.getCardsInZone(origin);
+            cards = AllZoneUtil.getCardsIn(origin);
         } else {
-            cards = AllZoneUtil.getCardsInZone(origin, tgtPlayers.get(0));
+            cards = tgtPlayers.get(0).getCardsIn(origin);
         }
 
         cards = AbilityFactory.filterListByType(cards, params.get("ChangeType"), sa);

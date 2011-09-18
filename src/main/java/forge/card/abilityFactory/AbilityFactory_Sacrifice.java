@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -193,7 +194,7 @@ public class AbilityFactory_Sacrifice {
             num = (num == null) ? "1" : num;
             int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
-            CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+            CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
             list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0)
@@ -306,9 +307,9 @@ public class AbilityFactory_Sacrifice {
                     amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
                 }
 
-                CardList humanList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+                CardList humanList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                 humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                CardList computerList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+                CardList computerList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 //Since all of the cards have remAIDeck:True, I enabled 1 for 1 (or X for X) trades for special decks
@@ -386,7 +387,7 @@ public class AbilityFactory_Sacrifice {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void sacrificeAI(Player p, int amount, String valid, SpellAbility sa) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(p);
+        CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
         ComputerUtil.sacrificePermanents(amount, list);
@@ -402,7 +403,7 @@ public class AbilityFactory_Sacrifice {
      * @param message a {@link java.lang.String} object.
      */
     private static void sacrificeHuman(Player p, int amount, String valid, SpellAbility sa, String message) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(p);
+        CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // TODO: Wait for Input to finish before moving on with the rest of Resolution
@@ -581,8 +582,8 @@ public class AbilityFactory_Sacrifice {
             Valid = Valid.replace("X", Integer.toString(xPay));
         }
 
-        CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
-        CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
         humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
@@ -637,7 +638,7 @@ public class AbilityFactory_Sacrifice {
         if (Valid.contains("X"))
             Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
 
-        CardList list = AllZoneUtil.getCardsInPlay();
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         boolean remSacrificed = params.containsKey("RememberSacrificed");
         if (remSacrificed)

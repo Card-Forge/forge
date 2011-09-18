@@ -1,6 +1,7 @@
 package forge.gui.input;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
@@ -172,7 +173,7 @@ public class Input_PayManaCost extends Input {
     public void selectButtonCancel() {
         resetManaCost();
         AllZone.getManaPool().unpaid(spell, true);
-        AllZone.getHumanBattlefield().updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
 
         stop();
     }

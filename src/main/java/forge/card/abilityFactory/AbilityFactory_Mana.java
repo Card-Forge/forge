@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
@@ -436,7 +437,7 @@ public class AbilityFactory_Mana {
             for (Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), (SpellAbility) abMana))
                 cards.add(c);
         } else {
-            cards = AllZoneUtil.getCardsInPlay().getValidCards(validCard, abMana.getActivatingPlayer(), card);
+            cards = AllZoneUtil.getCardsIn(Zone.Battlefield).getValidCards(validCard, abMana.getActivatingPlayer(), card);
         }
 
         // remove anything cards that is already in parents
@@ -619,7 +620,7 @@ public class AbilityFactory_Mana {
      * @return a boolean.
      */
     private static boolean hasUrzaLands(Player p) {
-        CardList landsControlled = AllZoneUtil.getPlayerCardsInPlay(p);
+        CardList landsControlled = p.getCardsIn(Zone.Battlefield);
 
         return (landsControlled.containsName("Urza's Mine") && landsControlled.containsName("Urza's Tower") &&
                 landsControlled.containsName("Urza's Power Plant"));

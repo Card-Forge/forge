@@ -1,6 +1,9 @@
 package forge;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.deck.Deck;
 import forge.game.GameType;
 
@@ -78,14 +81,27 @@ public interface Constant {
         public static final String Cleanup = "Cleanup";
     }
 
-    public interface Zone {
-        String Hand = "Hand";
-        String Library = "Library";
-        String Graveyard = "Graveyard";
-        String Battlefield = "Battlefield";
-        String Exile = "Exile";
-        String Command = "Command";
-        String Stack = "Stack";
+    public enum Zone {
+        Hand,
+        Library,
+        Graveyard,
+        Battlefield,
+        Exile,
+        Command,
+        Stack;
+        
+        public static Zone smartValueOf(final String value) {
+            if ("All".equals(value)) { return null; }
+            String valToCompate = value.trim();
+            for (Zone v : Zone.values()) { if (v.name().compareToIgnoreCase(valToCompate) == 0) { return v; } }
+            throw new IllegalArgumentException("No element named " + value + " in enum Zone");
+        }
+        
+        public static List<Zone> listValueOf(final String values) {
+            List<Zone> result = new ArrayList<Constant.Zone>();
+            for (String s : values.split("[, ]+")) { result.add(smartValueOf(s)); }
+            return result;
+        }
     }
 
     public interface Color {

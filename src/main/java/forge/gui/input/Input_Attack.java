@@ -8,6 +8,7 @@ import forge.CardList;
 import forge.CombatUtil;
 import forge.Command;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.PlayerZone;
 
@@ -44,7 +45,7 @@ public class Input_Attack extends Input {
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
-            CardList possibleAttackers = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+            CardList possibleAttackers = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
             possibleAttackers = possibleAttackers.getType("Creature");
             for (int i = 0; i < possibleAttackers.size(); i++) {
                 Card c = possibleAttackers.get(i);
@@ -89,7 +90,7 @@ public class Input_Attack extends Input {
             // return;
 
             AllZone.getCombat().addAttacker(card);
-            AllZone.getHumanBattlefield().updateObservers();    // just to make sure the attack symbol is marked
+            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();    // just to make sure the attack symbol is marked
 
             //for Castle Raptors, since it gets a bonus if untapped
             for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {

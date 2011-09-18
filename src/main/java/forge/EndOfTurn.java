@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 
@@ -51,7 +52,7 @@ public class EndOfTurn implements java.io.Serializable {
     public final void executeAt() {
 
         //Pyrohemia and Pestilence
-        CardList all = AllZoneUtil.getCardsInPlay();
+        CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         GameActionUtil.endOfTurn_Predatory_Advantage();
         GameActionUtil.endOfTurn_Wall_Of_Reverence();
@@ -251,7 +252,7 @@ public class EndOfTurn implements java.io.Serializable {
         execute(at);
 
 
-        CardList all2 = AllZoneUtil.getCardsInPlay();
+        CardList all2 = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card c : all2) {
             if (c.getCreatureAttackedThisTurn()) {
                 c.setCreatureAttackedThisTurn(false);

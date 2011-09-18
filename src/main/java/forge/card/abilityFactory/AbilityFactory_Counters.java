@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -206,7 +207,7 @@ public class AbilityFactory_Counters {
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
 
-        list = AllZoneUtil.getPlayerCardsInPlay(player);
+        list = player.getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return CardFactoryUtil.canTarget(source, c)
@@ -353,7 +354,7 @@ public class AbilityFactory_Counters {
 
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
-        list = AllZoneUtil.getPlayerCardsInPlay(player);
+        list = player.getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return CardFactoryUtil.canTarget(source, c);
@@ -445,14 +446,14 @@ public class AbilityFactory_Counters {
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else {
-            list = AllZoneUtil.getPlayerCardsInPlay(player);
+            list = player.getCardsIn(Zone.Battlefield);
             list = list.getTargetableCards(source);
             if (abTgt != null) {
                 list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             }
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose non-preferred ones
-                list = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+                list = player.getOpponent().getCardsIn(Zone.Battlefield);
                 list = list.getTargetableCards(source);
                 if (abTgt != null) {
                     list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
@@ -1113,14 +1114,14 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
-        CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
+        CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         hperms = hperms.filter(new CardListFilter() {
             public boolean addCard(final Card crd) {
                 return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
             }
         });
 
-        CardList cperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         cperms = cperms.filter(new CardListFilter() {
             public boolean addCard(final Card crd) {
                 return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
@@ -1424,8 +1425,8 @@ public class AbilityFactory_Counters {
         boolean curse = af.isCurse();
         Target tgt = sa.getTarget();
 
-        hList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
-        cList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
+        hList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        cList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
         hList = hList.getValidCards(valid, source.getController(), source);
         cList = cList.getValidCards(valid, source.getController(), source);
@@ -1522,7 +1523,7 @@ public class AbilityFactory_Counters {
         int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         String valid = params.get("ValidCards");
 
-        CardList cards = AllZoneUtil.getCardsInPlay();
+        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         Target tgt = sa.getTarget();
@@ -1719,7 +1720,7 @@ public class AbilityFactory_Counters {
         int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         String valid = params.get("ValidCards");
 
-        CardList cards = AllZoneUtil.getCardsInPlay();
+        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
         cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         Target tgt = sa.getTarget();

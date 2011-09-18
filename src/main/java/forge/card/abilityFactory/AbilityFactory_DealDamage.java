@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -315,7 +316,7 @@ public class AbilityFactory_DealDamage {
 
         if (!human.canLoseLife()) return false;
 
-        CardList hand = AllZoneUtil.getPlayerHand(comp);
+        CardList hand = comp.getCardsIn(Zone.Hand);
 
         if (AF.isSpell()) {
             // If this is a spell, cast it instead of discarding
@@ -342,7 +343,7 @@ public class AbilityFactory_DealDamage {
     private Card chooseTgtC(final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
         Target tgt = AF.getAbTgt();
         final Card source = AF.getHostCard();
-        CardList hPlay = AllZoneUtil.getPlayerCardsInPlay(pl);
+        CardList hPlay = pl.getCardsIn(Zone.Battlefield);
         hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         ArrayList<Object> objects = tgt.getTargets();
@@ -850,7 +851,7 @@ public class AbilityFactory_DealDamage {
             validC = params.get("ValidCards");
 
         //TODO: X may be something different than X paid
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(validC.split(","), source.getController(), source);
 
         CardListFilter filterKillable = new CardListFilter() {
@@ -953,7 +954,7 @@ public class AbilityFactory_DealDamage {
         }
         
         if (params.containsKey("ValidCards")) {
-            list = AllZoneUtil.getCardsInPlay();
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         }
 
         if (targetPlayer != null) {

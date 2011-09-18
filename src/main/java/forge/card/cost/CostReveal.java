@@ -7,6 +7,7 @@ import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -23,7 +24,7 @@ public class CostReveal extends CostPartWithList {
     
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        CardList handList = AllZoneUtil.getPlayerHand(activator);
+        CardList handList = activator.getCardsIn(Zone.Hand);
         String type = getType();
         Integer amount = convertAmount();
 
@@ -45,7 +46,7 @@ public class CostReveal extends CostPartWithList {
     public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
         String type = getType();
         Player activator = ability.getActivatingPlayer();
-        CardList hand = AllZoneUtil.getPlayerHand(activator);
+        CardList hand = activator.getCardsIn(Zone.Hand);
         resetList();
 
         if (getThis()){
@@ -88,7 +89,7 @@ public class CostReveal extends CostPartWithList {
         } else {
             Integer c = convertAmount();
 
-            CardList handList = AllZoneUtil.getPlayerHand(activator);
+            CardList handList = activator.getCardsIn(Zone.Hand);
             handList = handList.getValidCards(type.split(";"), activator, ability.getSourceCard());
             
             if (c == null){
@@ -162,7 +163,7 @@ public class CostReveal extends CostPartWithList {
                     done();
                 }
                 
-                if (AllZone.getHumanHand().size() < nNeeded) stop();
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() < nNeeded) stop();
                 StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
@@ -196,7 +197,7 @@ public class CostReveal extends CostPartWithList {
                     //in case no more cards in hand
                     if (nReveal == nNeeded)
                         done();
-                    else if (AllZone.getHumanHand().size() == 0)    // this really shouldn't happen
+                    else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)    // this really shouldn't happen
                         cancel();
                     else
                         showMessage();

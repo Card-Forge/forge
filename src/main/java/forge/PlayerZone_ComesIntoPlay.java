@@ -1,5 +1,6 @@
 package forge;
 
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -23,7 +24,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      * @param zone a {@link java.lang.String} object.
      * @param player a {@link forge.Player} object.
      */
-    public PlayerZone_ComesIntoPlay(final String zone, final Player player) {
+    public PlayerZone_ComesIntoPlay(final Constant.Zone zone, final Player player) {
         super(zone, player);
     }
 
@@ -83,7 +84,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
 
             if (c.isLand()) {
-                CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+                CardList list = c.getController().getCardsIn(Zone.Battlefield);
 
                 /*CardList listValakut = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
@@ -114,14 +115,14 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 }*/
 
                 //Tectonic Instability
-                CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
+                CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
                 for (Card ti : tis) {
                     final Card source = ti;
                     SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
+                            CardList lands = tisLand.getController().getCardsIn(Zone.Battlefield);
                             lands = lands.filter(AllZoneUtil.lands);
                             for (Card land : lands) {
                                 land.tap();
@@ -137,7 +138,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
 
                 }
 
-                CardList les = AllZoneUtil.getPlayerCardsInPlay(c.getOwner().getOpponent(), "Land Equilibrium");
+                CardList les = c.getOwner().getOpponent().getCardsIn(Zone.Battlefield, "Land Equilibrium");
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);
@@ -172,7 +173,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-        CardList meek = AllZoneUtil.getPlayerGraveyard(c.getController(), "Sword of the Meek");
+        CardList meek = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard, "Sword of the Meek");
 
         if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
             for (int i = 0; i < meek.size(); i++) {
