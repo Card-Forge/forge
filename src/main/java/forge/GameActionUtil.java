@@ -36,18 +36,6 @@ public final class GameActionUtil {
     }
 
     /**
-     * <p>executeDrawStepEffects.</p>
-     */
-    public static void executeDrawStepEffects() {
-        AllZone.getStack().freezeStack();
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        draw_Sylvan_Library(player);
-
-        AllZone.getStack().unfreezeStack();
-    }
-
-    /**
      * <p>executePlayCardEffects.</p>
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
@@ -64,7 +52,6 @@ public final class GameActionUtil {
         //playCard_Storm(sa);
 
         playCard_Vengevine(c);
-        playCard_Standstill(c);
         playCard_Curse_of_Wizardry(c);
         playCard_Venser_Emblem(c);
         playCard_Ichneumon_Druid(c);
@@ -462,41 +449,6 @@ public final class GameActionUtil {
             }
         }
     }
-
-
-    /**
-     * <p>playCard_Standstill.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    public static void playCard_Standstill(Card c) {
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Standstill");
-
-        for (int i = 0; i < list.size(); i++) {
-            final Player drawer = c.getController().getOpponent();
-            final Card card = list.get(i);
-
-            Ability ability2 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    // sac standstill
-                    AllZone.getGameAction().sacrifice(card);
-                    // player who didn't play spell, draws 3 cards
-                    drawer.drawCards(3);
-                }
-            }; // ability2
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - ").append(c.getController());
-            sb.append(" played a spell, ").append(drawer).append(" draws three cards.");
-            ability2.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability2);
-
-        }
-
-    }
-
 
     /**
      * <p>playCard_Curse_of_Wizardry.</p>
@@ -1464,78 +1416,6 @@ public final class GameActionUtil {
         AllZone.getStack().addSimultaneousStackEntry(ability2);
 
     }
-
-
-    /**
-     * <p>draw_Sylvan_Library.</p>
-     *
-     * @param player a {@link forge.Player} object.
-     */
-    private static void draw_Sylvan_Library(final Player player) {
-        /*
-		 * At the beginning of your draw step, you may draw two additional
-		 * cards. If you do, choose two cards in your hand drawn this turn.
-		 * For each of those cards, pay 4 life or put the card on top of
-		 * your library.
-		 */
-        final CardList cards = player.getCardsIn(Zone.Battlefield, "Sylvan Library");
-
-        for (final Card source : cards) {
-            final Ability ability = new Ability(source, "") {
-                @Override
-                public void resolve() {
-                    final Player player = source.getController();
-                    if (player.isHuman()) {
-                        String question = "Draw 2 additional cards?";
-                        final String cardQuestion = "Pay 4 life and keep in hand?";
-                        if (GameActionUtil.showYesNoDialog(source, question)) {
-                            player.drawCards(2);
-                            for (int i = 0; i < 2; i++) {
-                                final String prompt = source + " - Select a card drawn this turn: " + (2 - i) + " of 2";
-                                AllZone.getInputControl().setInput(new Input() {
-                                    private static final long serialVersionUID = -3389565833121544797L;
-
-                                    @Override
-                                    public void showMessage() {
-                                        if (AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty()) {
-                                            stop();
-                                        }
-                                        AllZone.getDisplay().showMessage(prompt);
-                                        ButtonUtil.disableAll();
-                                    }
-
-                                    @Override
-                                    public void selectCard(final Card card, final PlayerZone zone) {
-                                        if (zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
-                                            if (player.canPayLife(4)
-                                                    && GameActionUtil.showYesNoDialog(source, cardQuestion))
-                                            {
-                                                player.payLife(4, source);
-                                                //card stays in hand
-                                            } else {
-                                                AllZone.getGameAction().moveToLibrary(card);
-                                            }
-                                            stop();
-                                        }
-                                    }
-                                }); //end Input
-                            }
-                        }
-                    } else {
-                        //Computer, but he's too stupid to play this
-                    }
-                } //resolve
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } //end for
-    }
-
 
     /* Constant <code>Conspiracy</code>
     public static Command Conspiracy = new Command() {

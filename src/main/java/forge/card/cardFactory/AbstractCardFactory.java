@@ -24,6 +24,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.FileUtil;
+import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
@@ -1888,7 +1889,61 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             copy.setBeforePayMana(runtime);
         } //*************** END ************ END **************************
 
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sylvan Library")) {
+            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.", card, true);
+            final Ability ability = new Ability(card, "") {
+                @Override
+                public void resolve() {
+                    final Player player = card.getController();
+                    if (player.isHuman()) {
+                        final String cardQuestion = "Pay 4 life and keep in hand?";
+                        player.drawCards(2);
+                        for (int i = 0; i < 2; i++) {
+                            final String prompt = card + " - Select a card drawn this turn: " + (2 - i) + " of 2";
+                            AllZone.getInputControl().setInput(new Input() {
+                                private static final long serialVersionUID = -3389565833121544797L;
 
+                                @Override
+                                public void showMessage() {
+                                    if (AllZone.getHumanPlayer().getZone(Constant.Zone.Hand).size() == 0) {
+                                        stop();
+                                    }
+                                    AllZone.getDisplay().showMessage(prompt);
+                                    ButtonUtil.disableAll();
+                                }
+
+                                @Override
+                                public void selectCard(final Card card, final PlayerZone zone) {
+                                    if (zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
+                                        if (player.canPayLife(4)
+                                                && GameActionUtil.showYesNoDialog(card, cardQuestion))
+                                        {
+                                            player.payLife(4, card);
+                                            //card stays in hand
+                                        } else {
+                                            AllZone.getGameAction().moveToLibrary(card);
+                                        }
+                                        stop();
+                                    }
+                                }
+                            }); //end Input
+                        }
+                    } else {
+                        //Computer, but he's too stupid to play this
+                    }
+                } //resolve
+            }; // Ability
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.");
+            ability.setStackDescription(sb.toString());
+            
+            drawStepTrigger.setOverridingAbility(ability);
+            
+            card.addTrigger(drawStepTrigger);
+        } //*************** END ************ END **************************
+      
         return CardFactoryUtil.postFactoryKeywords(card);
     } //getCard2
 

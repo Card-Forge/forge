@@ -353,7 +353,6 @@ public class PhaseUtil {
         }
 
         playerTurn.drawCards(1, true);
-        GameActionUtil.executeDrawStepEffects();
     }
 
     /**

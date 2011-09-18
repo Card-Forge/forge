@@ -731,7 +731,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 for (int i = stack.size() - 1; 0 <= i; i--) {
                     final int curI = i;
                     String isOptional = stack.peekAbility(i).isOptionalTrigger() && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
-                    label = new JLabel(isOptional + (count++) + ". " + stack.peekInstance(i).getStackDescription());
+                    label = new JLabel((count++) + ". " + isOptional + stack.peekInstance(i).getStackDescription());
 
                     //update card detail
                     final CardPanel cardPanel = new CardPanel(stack.peekInstance().getSpellAbility().getSourceCard());
