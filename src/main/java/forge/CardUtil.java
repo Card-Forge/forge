@@ -692,6 +692,7 @@ public final class CardUtil {
         res.setColor(c.getColor());
         res.setChangedCardTypes(c.getChangedCardTypes());
         res.setNewPT(c.getNewPT());
+        res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
 
         return res;
     }
