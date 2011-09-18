@@ -257,6 +257,7 @@ Trap
 Arcane
 [EnchantmentTypes]
 Aura
+Curse
 Shrine
 [ArtifactTypes]
 Equipment
