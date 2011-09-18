@@ -8,22 +8,18 @@ Icon=Ned Flanders.jpg
 Deck Type=constructed
 [main]
 1 Cranial Extraction
-1 Nightmare
 1 Chill to the Bone
 1 Ghostly Visit
 1 Soul Feast
 4 Buried Alive
-4 Beacon of Unrest
-1 Sengir Vampire
+1 Beacon of Unrest
 2 Entomb
-2 Coercion
-1 Skeletal Wurm
-1 Ebon Dragon
+1 Coercion
 1 Vicious Hunger
 1 Perish the Thought
 4 Zombify
-22 Swamp
-1 Living Death
+4 Rise from the Grave
+23 Swamp
 1 Stronghold Discipline
 1 Hand of Death
 1 Douse in Gloom
@@ -33,4 +29,8 @@ Deck Type=constructed
 2 Delirium Skeins
 1 Teeka's Dragon
 1 Laquatus's Champion
+1 Nightmare
+1 Skeletal Wurm
+1 Ebon Dragon
+1 Minion of Tevesh Szat
 [sideboard]
