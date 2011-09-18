@@ -8,25 +8,25 @@ package forge.quest.gui.main;
  */
 
 @SuppressWarnings("serial")
-public class QuestQuestPanel extends QuestSelectablePanel {
+public class QuestChallengePanel extends QuestSelectablePanel {
     
     //private JLabel repeatabilityLabel;
     
-    /** <p>QuestQuestPanel.</p>
-     * Constructor, using quest data instance.
+    /** <p>QuestChallengePanel.</p>
+     * Constructor, using challenge data instance.
      * 
-     * @param {@link forge.quest.gui.main.QuestDuel}
+     * @param {@link forge.quest.gui.main.QuestChallenge}
      */
-    public QuestQuestPanel(QuestQuest q) {
+    public QuestChallengePanel(QuestChallenge q) {
         super(q);
         
         // Repeatability is currently meaningless.
         // Can be added here later if necessary.
         /* 
          * if (q.getRepeatable()) {
-            repeatabilityLabel = new JLabel("This quest is repeatable");
+            repeatabilityLabel = new JLabel("This challenge is repeatable");
         } else {
-            repeatabilityLabel = new JLabel("This quest is not repeatable");
+            repeatabilityLabel = new JLabel("This challenge is not repeatable");
         }
         
         super.rootPanel.add(repeatabilityLabel);

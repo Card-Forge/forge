@@ -13,7 +13,7 @@ import java.util.List;
  * deck, and quest-specific properties.
  * 
  */
-public class QuestQuest extends QuestEvent {
+public class QuestChallenge extends QuestEvent {
     // ID (default -1, should be explicitly set at later time.)
     public int id = -1;
     

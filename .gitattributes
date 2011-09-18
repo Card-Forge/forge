@@ -9872,12 +9872,12 @@ src/main/java/forge/quest/gui/bazaar/QuestBazaarItem.java svneol=native#text/pla
 src/main/java/forge/quest/gui/bazaar/QuestBazaarPanel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/QuestBazaarStall.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestChallenge.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestChallengePanel.java -text
 src/main/java/forge/quest/gui/main/QuestDuel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/main/QuestDuelPanel.java -text
 src/main/java/forge/quest/gui/main/QuestEvent.java -text
 src/main/java/forge/quest/gui/main/QuestEventManager.java svneol=native#text/plain
-src/main/java/forge/quest/gui/main/QuestQuest.java svneol=native#text/plain
-src/main/java/forge/quest/gui/main/QuestQuestPanel.java -text
 src/main/java/forge/quest/gui/main/QuestSelectablePanel.java -text
 src/main/java/forge/quest/gui/main/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain

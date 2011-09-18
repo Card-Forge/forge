@@ -28,17 +28,16 @@ public class QuestEventManager {
     public List<QuestDuel> hardAIduels      = null;
     public List<QuestDuel> veryHardAIduels  = null;
     
-    public List<QuestDuel> allDuels         = null;
-    public List<QuestQuest> allQuests       = null;
+    public List<QuestDuel> allDuels             = null;
+    public List<QuestChallenge> allChallenges   = null;
     
     /**<p>assembleAllEvents.</p>     * 
-     * Reads all quest and battle files to extract quest data.
-     * Instantiates all duel and quest events, and difficulty lists accordingly.
-     * Should be used sparingly.
+     * Reads all duel and challenge files and instantiates all events, 
+     * and difficulty lists accordingly. Should be used sparingly.
      */
     public void assembleAllEvents() {
         this.allDuels = new ArrayList<QuestDuel>();
-        this.allQuests = new ArrayList<QuestQuest>();
+        this.allChallenges = new ArrayList<QuestChallenge>();
         
         List<String> contents;
         QuestEvent tempEvent;
@@ -53,9 +52,9 @@ public class QuestEventManager {
             contents = FileUtil.readFile(f);
 
             if(contents.get(0).trim().equals("[quest]")) {
-                tempEvent = new QuestQuest();
-                assembleQuestUniquedata(contents,(QuestQuest)tempEvent);
-                allQuests.add((QuestQuest)tempEvent);
+                tempEvent = new QuestChallenge();
+            assembleChallengeUniquedata(contents,(QuestChallenge)tempEvent);
+                allChallenges.add((QuestChallenge)tempEvent);
             } // End if([quest])
             else {
                 tempEvent = new QuestDuel();
@@ -99,13 +98,13 @@ public class QuestEventManager {
     }
     
     /**
-     * <p>assembleQuestUniquedata.</p>
-     * Handler for any unique data contained in quest files.
+     * <p>assembleChallengeUniquedata.</p>
+     * Handler for any unique data contained in a challenge file.
      * 
      * @param contents
-     * @param qq
+     * @param qc
      */
-    private void assembleQuestUniquedata(List<String> contents, QuestQuest qq) {
+    private void assembleChallengeUniquedata(List<String> contents, QuestChallenge qc) {
         int eqpos;
         String key, value;
         
@@ -120,23 +119,23 @@ public class QuestEventManager {
             value = s.substring(eqpos + 1).trim();
 
             if (key.equalsIgnoreCase("ID")) {
-                qq.id = Integer.parseInt(value);
+                qc.id = Integer.parseInt(value);
             } 
             else if (key.equalsIgnoreCase("Repeat")) {
-                qq.repeatable = Boolean.parseBoolean(value);
+                qc.repeatable = Boolean.parseBoolean(value);
             } 
             else if (key.equalsIgnoreCase("AILife")) {
-                qq.aiLife = Integer.parseInt(value);
+                qc.aiLife = Integer.parseInt(value);
             } 
             else if (key.equalsIgnoreCase("Wins")) {
-                qq.winsReqd = Integer.parseInt(value);
+                qc.winsReqd = Integer.parseInt(value);
             } 
             else if (key.equalsIgnoreCase("Credit Reward")) {
-                qq.creditsReward = Integer.parseInt(value);
+                qc.creditsReward = Integer.parseInt(value);
             }
             else if (key.equalsIgnoreCase("Card Reward")) {
-                qq.cardReward = value;
-                qq.cardRewardList = QuestUtil.generateCardRewardList(value);
+                qc.cardReward = value;
+                qc.cardRewardList = QuestUtil.generateCardRewardList(value);
             }
             // Human extra card list assembled here.
             else if(key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
@@ -147,7 +146,7 @@ public class QuestEventManager {
                     templist.add(readExtraCard(n, AllZone.getHumanPlayer()));
                 }
 
-                qq.humanExtraCards = templist;
+                qc.humanExtraCards = templist;
             }
             // AI extra card list assembled here.
             else if(key.equalsIgnoreCase("AIExtras") && !value.equals("")) {
@@ -158,12 +157,12 @@ public class QuestEventManager {
                     templist.add(readExtraCard(n, AllZone.getComputerPlayer()));
                 }
                 
-                qq.aiExtraCards = templist;
+                qc.aiExtraCards = templist;
             }
             // Card reward list assembled here.
             else if(key.equalsIgnoreCase("Card Reward")) {
-                qq.cardReward = value;
-                qq.cardRewardList = QuestUtil.generateCardRewardList(value);
+                qc.cardReward = value;
+                qc.cardRewardList = QuestUtil.generateCardRewardList(value);
             } 
         }        
     }
@@ -246,13 +245,13 @@ public class QuestEventManager {
     }
     
     /**
-     * <p>getAllQuests.</p>
-     * Returns complete list of all quest objects.
+     * <p>getAllChallenges.</p>
+     * Returns complete list of all challenge objects.
      *
      * @return a {@link java.util.List} object.
      */
-    public List<QuestQuest> getAllQuests() {
-        return this.allQuests;
+    public List<QuestChallenge> getAllChallenges() {
+        return this.allChallenges;
     }
     
     /**
@@ -300,10 +299,19 @@ public class QuestEventManager {
         return deckListCopy.get(n);
     }
     
-    private QuestQuest getQuestOpponentByNumber(int n) {
-        for(QuestQuest qq : allQuests) {
-            if(qq.getId()==n) {
-                return qq;
+    /**
+     * <p>getChallengeOpponentByNumber.</p>
+     * Returns specific challenge event using its ID. 
+     * This is to make sure that the opponents do not change 
+     * when the deck editor is launched.
+     * 
+     * @param n
+     * @return
+     */
+    private QuestChallenge getChallengeEventByNumber(int n) {
+        for(QuestChallenge qc : allChallenges) {
+            if(qc.getId()==n) {
+                return qc;
             }
         }
         return null;
@@ -358,51 +366,51 @@ public class QuestEventManager {
     }
     
     /**
-     * <p>generateQuests.</p>
-     * Generates an array of new quest opponents based on current win conditions.
+     * <p>generateChallenges.</p>
+     * Generates an array of new challenge opponents based on current win conditions.
      *
      * @return a {@link java.util.List} object.
      */
-    public List<QuestQuest> generateQuests() {
+    public List<QuestChallenge> generateChallenges() {
         forge.quest.data.QuestData questData = AllZone.getQuestData();
 
-        List<QuestQuest> questOpponents = new ArrayList<QuestQuest>();
+        List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
         
-        int maxQuests = questData.getWin() / 10;
-        if (maxQuests > 5) {
-            maxQuests = 5;
+        int maxChallenges = questData.getWin() / 10;
+        if (maxChallenges > 5) {
+            maxChallenges = 5;
         }
         
-        // Generate IDs as needed.
-        if (questData.getAvailableQuests() == null || 
-                questData.getAvailableQuests().size() < maxQuests) { 
+        // Generate IDs as needed. 
+        if (questData.getAvailableChallenges() == null || 
+                questData.getAvailableChallenges().size() < maxChallenges) { 
             
-            List<Integer> unlockedQuestIds = new ArrayList<Integer>();
-            List<Integer> availableQuestIds = new ArrayList<Integer>();
+            List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
+            List<Integer> availableChallengeIds = new ArrayList<Integer>();
             
-            for(QuestQuest qq : allQuests) {
-                if (qq.getWinsReqd() <= questData.getWin() && 
-                        !questData.getCompletedQuests().contains(qq.getId())) {
-                    unlockedQuestIds.add(qq.getId());
+            for(QuestChallenge qc : allChallenges) {
+                if (qc.getWinsReqd() <= questData.getWin() &&
+                         !questData.getCompletedChallenges().contains(qc.getId())) {
+                    unlockedChallengeIds.add(qc.getId());
                 }
             }                        
 
-            Collections.shuffle(unlockedQuestIds);
+            Collections.shuffle(unlockedChallengeIds);
             
-            for (int i = 0; i < maxQuests; i++) {
-                availableQuestIds.add(unlockedQuestIds.get(i));
+            for (int i = 0; i < maxChallenges; i++) {
+                availableChallengeIds.add(unlockedChallengeIds.get(i));
             }
             
-            questData.setAvailableQuests(availableQuestIds);
+            questData.setAvailableChallenges(availableChallengeIds);
             questData.saveData();
         } 
         
-        // Finally, pull quest events from available IDs and return.
-        for(int i : questData.getAvailableQuests()) {
-            questOpponents.add(getQuestOpponentByNumber(i));                
+        // Finally, pull challenge events from available IDs and return.
+        for(int i : questData.getAvailableChallenges()) {
+            challengeOpponents.add(getChallengeEventByNumber(i));                
         }
         
-        return questOpponents;
+        return challengeOpponents;
     }
 
 }

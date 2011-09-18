@@ -6,7 +6,7 @@ import forge.Constant;
 import forge.card.CardRarity;
 import forge.card.BoosterUtils;
 import forge.item.CardPrinted;
-import forge.quest.gui.main.QuestQuest;
+import forge.quest.gui.main.QuestChallenge;
 
 import java.util.List;
 
@@ -33,14 +33,14 @@ public class QuestUtil {
      * Returns extra AI cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
-     * @param qa a {@link forge.Quest_Assignment} object.
+     * @param qc a QuestChallenge object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestData qd, QuestQuest qq) {
+    public static CardList getComputerStartingCards(final QuestData qd, QuestChallenge qc) {
         CardList list = new CardList();
         
-        if (qq != null) {
-            list.addAll(qq.getAIExtraCards());
+        if (qc != null) {
+            list.addAll(qc.getAIExtraCards());
         }
         return list;
     }
@@ -72,14 +72,14 @@ public class QuestUtil {
      * and cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
-     * @param qa a {@link forge.Quest_Assignment} object.
+     * @param qc a QuestChallenge object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestData qd, QuestQuest qq) {
+    public static CardList getHumanStartingCards(final QuestData qd, QuestChallenge qc) {
         CardList list = getHumanStartingCards(qd);
         
-        if (qq != null) {
-            list.addAll(qq.getHumanExtraCards());
+        if (qc != null) {
+            list.addAll(qc.getHumanExtraCards());
         }
 
         return list;
@@ -160,7 +160,6 @@ public class QuestUtil {
             col = Constant.Color.White;
         }
         
-        System.out.println(rar+" "+col+" "+qty);
         return BoosterUtils.generateCards(qty, rar, col);
     }
 

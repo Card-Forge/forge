@@ -17,7 +17,7 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
-import forge.quest.gui.main.QuestQuest;
+import forge.quest.gui.main.QuestChallenge;
 import forge.view.swing.OldGuiNewGame;
 import net.miginfocom.swing.MigLayout;
 
@@ -66,7 +66,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     private class WinLoseModel {
         public QuestMatchState match;
         public QuestData quest;
-        public QuestQuest qq;
+        public QuestChallenge qc;
     }
 
     private WinLoseModel model;
@@ -76,13 +76,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * 
      * @param matchState a QuestMatchState
      * @param quest a QuestData object
-     * @param qa a Quest_Assignment object
+     * @param chall a QuestChallenge object
      */
-    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final QuestQuest qq) {
+    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final QuestChallenge chall) {
         model = new WinLoseModel();
         model.match = matchState;
         model.quest = quest;
-        model.qq = qq;
+        model.qc = chall;
 
         try {
             jbInit();
@@ -187,25 +187,25 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     void prepareForNextRound() {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
-            if (model.qq != null) {
+            if (model.qc != null) {
                 if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }
             }
             //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
             //humanList, computerList, humanLife, computerLife);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qq);
+            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qc);
             CardList computerList = new CardList();
 
 
             int humanLife = model.quest.getLife() + extraLife;
             int computerLife = 20;
-            if (model.qq != null) {
-                computerLife = model.qq.getAILife();
+            if (model.qc != null) {
+                computerLife = model.qc.getAILife();
             }
 
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
-                    humanList, computerList, humanLife, computerLife, model.qq);
+                    humanList, computerList, humanLife, computerLife, model.qc);
         } else {
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
@@ -355,15 +355,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             model.quest.getCards().clearShopList();
 
 
-            if (model.quest.getAvailableQuests() != null) {
-                model.quest.clearAvailableQuests();
+            if (model.quest.getAvailableChallenges() != null) {
+                model.quest.clearAvailableChallenges();
             }
 
             model.quest.getCards().resetNewList();
             giveQuestRewards(wonMatch);
 
             model.match.reset();
-            AllZone.setQuestQuest(null);
+            AllZone.setQuestChallenge(null);
 
             model.quest.saveData();
 
@@ -441,32 +441,32 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
 
         // Rewards from QuestAssignment
-        if (wonMatch && model.qq != null) {
-            model.quest.addQuestsPlayed();
+        if (wonMatch && model.qc != null) {
+            model.quest.addChallengesPlayed();
 
-            List<CardPrinted> questRewardCards = model.qq.getCardRewardList();
-            long questRewardCredits = model.qq.getCreditsReward();
+            List<CardPrinted> challengeRewardCards = model.qc.getCardRewardList();
+            long questRewardCredits = model.qc.getCreditsReward();
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Quest Completed - \r\n");
+            sb.append("Challenge Completed - \r\n");
 
-            if (questRewardCards != null) {
+            if (challengeRewardCards != null) {
                 sb.append("You won the following cards:\r\n\r\n");
-                for (CardPrinted cardName : questRewardCards) {
+                for (CardPrinted cardName : challengeRewardCards) {
                     sb.append(cardName.getName());
                     sb.append("\r\n");
                 }
-                model.quest.getCards().addAllCards(questRewardCards);
+                model.quest.getCards().addAllCards(challengeRewardCards);
                 sb.append("\r\n");
             }
-            sb.append("Quest Bounty: ");
+            sb.append("Challenge Bounty: ");
             sb.append(questRewardCredits);
 
             model.quest.addCredits(questRewardCredits);
 
             String fileName = "BoxIcon.png";
             ImageIcon icon = getIcon(fileName);
-            String title = "Quest Rewards for " + model.qq.getTitle();
+            String title = "Challenge Rewards for " + model.qc.getTitle();
             JOptionPane.showMessageDialog(null, sb.toString(), title, JOptionPane.INFORMATION_MESSAGE, icon);
         }
         /*

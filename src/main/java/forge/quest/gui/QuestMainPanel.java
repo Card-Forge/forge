@@ -10,8 +10,8 @@ import forge.quest.data.QuestData;
 import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestDuelPanel;
-import forge.quest.gui.main.QuestQuest;
-import forge.quest.gui.main.QuestQuestPanel;
+import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestChallengePanel;
 import forge.quest.gui.main.QuestSelectablePanel;
 
 import javax.swing.*;
@@ -49,7 +49,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     JComboBox petComboBox = new JComboBox();
     JComboBox deckComboBox = new JComboBox();
 
-    JButton questButton = new JButton("Quests");
+    JButton eventButton = new JButton("Challenges");
     JButton playButton = new JButton("Play");
 
     private QuestSelectablePanel selectedOpponent;
@@ -57,7 +57,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     JPanel nextMatchPanel = new JPanel();
     CardLayout nextMatchLayout;
 
-    boolean isShowingQuests = false;
+    boolean isShowingChallenges = false;
     private JCheckBox devModeCheckBox = new JCheckBox("Developer Mode");
     //private JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
     private JCheckBox smoothLandCheckBox = new JCheckBox("Adjust AI Land");
@@ -66,10 +66,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private JCheckBox plantBox = new JCheckBox("Summon Plant");
     /** Constant <code>NO_DECKS_AVAILABLE="No decks available"</code> */
     private static final String NO_DECKS_AVAILABLE = "No decks available";
-    /** Constant <code>BATTLES="Battles"</code> */
-    private static final String BATTLES = "Battles";
-    /** Constant <code>QUESTS="Quests"</code> */
-    private static final String QUESTS = "Quests";
+    /** Constant <code>DUELS="Duels"</code> */
+    private static final String DUELS = "Duels";
+    /** Constant <code>CHALLENGES="Challenges"</code> */
+    private static final String CHALLENGES = "Challenges";
 
     //TODO: Make this ordering permanent
     /** Constant <code>lastUsedDeck="//TODO: Make this ordering permanent"</code> */
@@ -198,14 +198,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
 
-        questButton.addActionListener(new ActionListener() {
+        eventButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                QuestMainPanel.this.showQuests();
+                QuestMainPanel.this.showChallenges();
             }
         });
-        eastComponents.add(questButton);
-        questButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-        questButton.setPreferredSize(new Dimension(0, 60));
+        eastComponents.add(eventButton);
+        eventButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        eventButton.setPreferredSize(new Dimension(0, 60));
 
 
         playButton.addActionListener(new ActionListener() {
@@ -249,7 +249,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         panel.add(Box.createVerticalGlue());
 
-        panel.add(questButton);
+        panel.add(eventButton);
         this.nextQuestLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 11));
         panel.add(nextQuestLabel);
         GuiUtils.addGap(panel);
@@ -398,7 +398,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         JPanel DuelPanel = new JPanel();
         QuestDuelPanel duelEvent;
         DuelPanel.setLayout(new BoxLayout(DuelPanel, BoxLayout.Y_AXIS));
-        DuelPanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Battles"));
+        DuelPanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Duels"));
 
         List<QuestDuel> duels = TEST.qem.generateDuels();
 
@@ -416,30 +416,30 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createQuestPanel.</p>
-     * Makes a parent panel, then selectable panel instances for all available battles.
+     * <p>createChallengePanel.</p>
+     * Makes a parent panel, then selectable panel instances for all available challenges.
      *
      * @return a {@link javax.swing.JPanel} object.
      */
-    private JPanel createQuestPanel() {
-        JPanel QuestPanel = new JPanel();
+    private JPanel createChallengePanel() {
+        JPanel ChallengePanel = new JPanel();
         
         QuestSelectablePanel selpan;
-        QuestPanel.setLayout(new BoxLayout(QuestPanel, BoxLayout.Y_AXIS));
-        QuestPanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Quests"));
+        ChallengePanel.setLayout(new BoxLayout(ChallengePanel, BoxLayout.Y_AXIS));
+        ChallengePanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Challenges"));
 
-        List<QuestQuest> quests = TEST.qem.generateQuests();
+        List<QuestChallenge> challenges = TEST.qem.generateChallenges();
         
-        for (QuestQuest qq : quests) {
-            selpan = new QuestQuestPanel(qq);
-            QuestPanel.add(selpan);
+        for (QuestChallenge qc : challenges) {
+            selpan = new QuestChallengePanel(qc);
+            ChallengePanel.add(selpan);
             selpan.addMouseListener(new SelectionAdapter(selpan));
 
-            GuiUtils.addGap(QuestPanel, 3);
+            GuiUtils.addGap(ChallengePanel, 3);
         }
 
 
-        return QuestPanel;
+        return ChallengePanel;
     }
 
     /**
@@ -485,7 +485,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
         deckComboBox.setMinimumSize(new Dimension(150, 0));
 
-        questButton.setEnabled(nextQuestInWins() == 0);
+        eventButton.setEnabled(nextChallengeInWins() == 0);
 
         playButton.setEnabled(canGameBeLaunched());
 
@@ -536,10 +536,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         }
 
-        if (nextQuestInWins() > 0) {
-            nextQuestLabel.setText("Next Quest in " + nextQuestInWins() + " Wins.");
+        if (nextChallengeInWins() > 0) {
+            nextQuestLabel.setText("Next challenge in " + nextChallengeInWins() + " Wins.");
         } else {
-            nextQuestLabel.setText("Next Quest available now.");
+            nextQuestLabel.setText("Next challenge available now.");
         }
 
         nextMatchLayout = new CardLayout();
@@ -554,21 +554,21 @@ public class QuestMainPanel extends QuestAbstractPanel {
         nextMatchPanel.removeAll();
         nextMatchLayout = new CardLayout();
         nextMatchPanel.setLayout(nextMatchLayout);
-        nextMatchPanel.add(createDuelPanel(), BATTLES);
-        nextMatchPanel.add(createQuestPanel(), QUESTS);
-        if (isShowingQuests) {
-            this.nextMatchLayout.show(nextMatchPanel, QUESTS);
+        nextMatchPanel.add(createDuelPanel(), DUELS);
+        nextMatchPanel.add(createChallengePanel(), CHALLENGES);
+        if (isShowingChallenges) {
+            this.nextMatchLayout.show(nextMatchPanel, CHALLENGES);
         } else {
-            this.nextMatchLayout.show(nextMatchPanel, BATTLES);
+            this.nextMatchLayout.show(nextMatchPanel, DUELS);
         }
     }
 
     /**
-     * <p>nextQuestInWins.</p>
+     * <p>nextChallengeInWins.</p>
      *
      * @return a int.
      */
-    private int nextQuestInWins() {
+    private int nextChallengeInWins() {
 
         // Number of wins was 25, lowereing the number to 20 to help short term questers.
         if (questData.getWin() < 20) {
@@ -576,7 +576,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
         // The int mul has been lowered by one, should face special opps more frequently.
-        int questsPlayed = questData.getQuestsPlayed();
+        int challengesPlayed = questData.getChallengesPlayed();
         int mul = 5;
 
         if (questData.getInventory().hasItem("Zeppelin")) {
@@ -585,7 +585,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             mul = 4;
         }
 
-        int delta = (questsPlayed * mul) - questData.getWin();
+        int delta = (challengesPlayed * mul) - questData.getWin();
 
         return (delta > 0) ? delta : 0;
     }
@@ -679,8 +679,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         
         AllZone.getMatchState().reset();
-        if (isShowingQuests) {
-            setupQuest(humanDeck);
+        if (isShowingChallenges) {
+            setupChallenge(humanDeck);
         } else {
             setupDuel(humanDeck);
         }
@@ -706,17 +706,17 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>setupQuest.</p>
+     * <p>setupChallenge.</p>
      *
      * @param humanDeck a {@link forge.deck.Deck} object.
      */
-    private void setupQuest(Deck humanDeck) { 
-        QuestQuest selectedQuest = (QuestQuest)selectedOpponent.getEvent();
+    private void setupChallenge(Deck humanDeck) { 
+        QuestChallenge selectedChallenge = (QuestChallenge)selectedOpponent.getEvent();
 
         Deck computer = selectedOpponent.getEvent().getEventDeck();
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        AllZone.setQuestQuest(selectedQuest);
+        AllZone.setQuestChallenge(selectedChallenge);
 
         int extraLife = 0;
 
@@ -725,8 +725,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
         AllZone.getGameAction().newGame(humanDeck, computer,
-                forge.quest.data.QuestUtil.getHumanStartingCards(questData, selectedQuest), new CardList(),
-                questData.getLife() + extraLife, selectedQuest.getAILife(), selectedQuest);
+                forge.quest.data.QuestUtil.getHumanStartingCards(questData, selectedChallenge), new CardList(),
+                questData.getLife() + extraLife, selectedChallenge.getAILife(), selectedChallenge);
 
     }
 
@@ -740,15 +740,15 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>showQuests.</p>
+     * <p>showChallenges.</p>
      */
-    void showQuests() {
-        if (isShowingQuests) {
-            isShowingQuests = false;
-            questButton.setText("Quests");
+    void showChallenges() {
+        if (isShowingChallenges) {
+            isShowingChallenges = false;
+            eventButton.setText("Challenges");
         } else {
-            isShowingQuests = true;
-            questButton.setText("Battles");
+            isShowingChallenges = true;
+            eventButton.setText("Duels");
         }
 
         if (selectedOpponent != null) {

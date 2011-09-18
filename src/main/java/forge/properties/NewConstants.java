@@ -148,21 +148,8 @@ public interface NewConstants {
         /** Property path for a rare card. */
         String RARE = "quest/rare";
 
-        /** Property path for price. */
         String PRICE = "quest/price";
-        /** Property path for price. */
         String BOOSTER_PRICE= "quest/boosterprice";
-        /** Property path for quests. */
-        String QUESTS = "quest/quests";
-
-        /** Property path for easy quest difficulty. */
-        String EASY = "quest/easy";
-        /** Property path for medium quest difficulty. */
-        String MEDIUM = "quest/medium";
-        /** Property path for hard quest difficulty. */
-        String HARD = "quest/hard";
-        /** Property path for very hard quest difficulty. */
-        String VERYHARD = "quest/veryhard";
 
         String DATA = "quest/data";
         String PREFS = "quest/prefs";

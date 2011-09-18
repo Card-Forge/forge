@@ -23,10 +23,6 @@ import net.slightlymagic.maxmtg.Predicate;
 //you have to call one of these two methods below
 //see Gui_QuestOptions for more details
 
-//static readAIQuestDeckFiles(QuestDataOld data, ArrayList aiDeckNames)
-//OR non-static readAIQuestDeckFiles()
-//which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
-
 /**
  * <p>QuestData class.</p>
  *
@@ -72,10 +68,10 @@ public final class QuestData {
     ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class);     // the current shop list
     ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class);  // cards acquired since last game-win/loss
 
-    // Quests history
-    int questsPlayed;
-    List<Integer> availableQuests = new ArrayList<Integer>();
-    List<Integer> completedQuests = new ArrayList<Integer>();
+    // Challenge history
+    int challengesPlayed;
+    List<Integer> availableChallenges = new ArrayList<Integer>();
+    List<Integer> completedChallenges = new ArrayList<Integer>();
 
     // own randomizer seed
     private long randomSeed = 0;
@@ -140,14 +136,14 @@ public final class QuestData {
     public QuestUtilCards getCards() { return myCards; }
     public QuestUtilRewards getRewards() { return myRewards; }
 
-    // Quests performance
-    public int getQuestsPlayed() { return questsPlayed; }
-    public void addQuestsPlayed() { questsPlayed++; }
+    // Challenge performance
+    public int getChallengesPlayed() { return challengesPlayed; }
+    public void addChallengesPlayed() { challengesPlayed++; }
 
-    public List<Integer> getAvailableQuests() { return availableQuests != null ? new ArrayList<Integer>(availableQuests) : null; }
-    public void setAvailableQuests(final List<Integer> list) { availableQuests = list; }
-    public void clearAvailableQuests() { availableQuests.clear(); }
-    public List<Integer> getCompletedQuests() { return completedQuests != null ? new ArrayList<Integer>(completedQuests) : null; }
+    public List<Integer> getAvailableChallenges() { return availableChallenges != null ? new ArrayList<Integer>(availableChallenges) : null; }
+    public void setAvailableChallenges(final List<Integer> list) { availableChallenges = list; }
+    public void clearAvailableChallenges() { availableChallenges.clear(); }
+    public List<Integer> getCompletedChallenges() { return completedChallenges != null ? new ArrayList<Integer>(completedChallenges) : null; }
 
     // Wins & Losses
     public int getLost() { return lost; }
@@ -229,7 +225,7 @@ public final class QuestData {
         randomSeed = MyRandom.random.nextLong();
     }
 
-    // SERIALIZATION - relared things
+    // SERIALIZATION - related things
 
     // This must be called by XML-serializer via reflection
     public Object readResolve() {

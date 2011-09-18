@@ -17,7 +17,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
-import forge.quest.gui.main.QuestQuest;
+import forge.quest.gui.main.QuestChallenge;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -42,8 +42,8 @@ public final class AllZone implements NewConstants {
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
 
-    /** Global <code>QuestAssignment</code>. */
-    private static QuestQuest questquest = null;
+    /** Global <code>QuestChallenge</code>. */
+    private static QuestChallenge questChallenge = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -62,7 +62,7 @@ public final class AllZone implements NewConstants {
     private static GameSummary gameInfo = new GameSummary();
 
     /** 
-     * Match State for quests are stored in a <code>QuestMatchState</code> class instance.
+     * Match State for challenges are stored in a <code>QuestMatchState</code> class instance.
      * 
      * @deprecated Variable 'matchState' must be private and have accessor methods.
      */
@@ -132,23 +132,22 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getQuestAssignment.</p>
+     * <p>getQuestChallenge.</p>
      *
      * @return a {@link forge.Quest_Assignment} object.
      * @since 1.0.15
      */
-    public static QuestQuest getQuestQuest() {
-        return questquest;
+    public static QuestChallenge getQuestChallenge() {
+        return questChallenge;
     }
 
     /**
-     * <p>setQuestAssignment.</p>
+     * <p>setQuestChallenge.</p>
      *
-     * @param assignment a {@link forge.Quest_Assignment} object.
-     * @since 1.0.15
+     * @param q 
      */
-    public static void setQuestQuest(final QuestQuest q) {
-        questquest = q;
+    public static void setQuestChallenge(final QuestChallenge q) {
+        questChallenge = q;
     }
 
     /**
