@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Pump
-K:stAnimateEnchanted:Land:2/6/Defender:Creature,Wall:White:No Abilities:isPresent Card.AttachedBy:Enchanted land is a 2/6 white Wall creature with defender. It's still a land.
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Wall | SetColor$ White | SetPower$ 2 | SetToughness$ 6 | AddKeyword$ Defender | Description$ Enchanted land is a 2/6 white Wall creature with defender. It's still a land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land is put into a graveyard, return that card to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Common
