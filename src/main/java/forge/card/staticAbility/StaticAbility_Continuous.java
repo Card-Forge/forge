@@ -40,7 +40,9 @@ public class StaticAbility_Continuous {
 
         int powerBonus = 0;
         int toughnessBonus = 0;
+        String setP = "";
         int setPower = -1;
+        String setT = "";
         int setToughness = -1;
         String[] addKeywords = null;
         String[] addHiddenKeywords = null;
@@ -58,13 +60,13 @@ public class StaticAbility_Continuous {
         boolean removeCreatureTypes = false;
 
         if (params.containsKey("SetPower")) {
-            String setP = params.get("SetPower");
+            setP = params.get("SetPower");
             setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP)
                     : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setP));
         }
 
         if (params.containsKey("SetToughness")) {
-            String setT = params.get("SetToughness");
+            setT = params.get("SetToughness");
             setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT)
                     : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setT));
         }
@@ -202,6 +204,12 @@ public class StaticAbility_Continuous {
             }
             else  //non CharacteristicDefining
                 if (setPower != -1 || setToughness != -1) {
+                    if (setP.startsWith("AffectedX")) {
+                        setPower = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setP));
+                    }
+                    if (setT.startsWith("AffectedX")) {
+                        setToughness = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setT));
+                    }
                     affectedCard.addNewPT(setPower, setToughness, hostCard.getTimestamp());
                 }
 
