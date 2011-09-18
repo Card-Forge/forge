@@ -352,7 +352,9 @@ public class TriggerHandler {
      * @return a boolean.
      */
     private boolean runSingleTrigger(final Trigger regtrig, final String mode, final Map<String, Object> runParams) {
-        if (!regtrig.getMapParams().get("Mode").equals(mode)) {
+        final Map<String, String> params = regtrig.getMapParams();
+        
+        if (!params.get("Mode").equals(mode)) {
             return false; //Not the right mode.
         }
         if (!regtrig.zonesCheck()) {
@@ -377,31 +379,30 @@ public class TriggerHandler {
         }
         if (regtrig.isSuppressed()) {
             return false; //Trigger removed by effect
-    }
+        }
 
         //Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
 
         if(torporOrbs.size() != 0)
         {
-            if(regtrig.getMapParams().containsKey("Destination"))
+            if(params.containsKey("Destination"))
             {
-                if ((regtrig.getMapParams().get("Destination").equals("Battlefield") || regtrig.getMapParams().get("Destination").equals("Any")) && mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
+                if ((params.get("Destination").equals("Battlefield") || params.get("Destination").equals("Any")) && mode.equals("ChangesZone") && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
                 {
                     return false;
                 }
             }
             else
             {
-                if (mode.equals("ChangesZone") && ((regtrig.getMapParams().get("ValidCard").contains("Creature")) || (regtrig.getMapParams().get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
+                if (mode.equals("ChangesZone") && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
                 {
                     return false;
                 }
             }
             
-        }
+        }//Torpor Orb check
         
-        HashMap<String, String> trigParams = regtrig.getMapParams();
         final Player[] decider = new Player[1];
 
         // Any trigger should cause the phase not to skip
@@ -434,14 +435,14 @@ public class TriggerHandler {
 
         sa[0] = regtrig.getOverridingAbility();
         if (sa[0] == null) {
-            if (!trigParams.containsKey("Execute")) {
+            if (!params.containsKey("Execute")) {
                 sa[0] = new Ability(regtrig.getHostCard(), "0") {
                     @Override
                     public void resolve() {
                     }
                 };
             } else {
-                sa[0] = abilityFactory.getAbility(host.getSVar(trigParams.get("Execute")), host);
+                sa[0] = abilityFactory.getAbility(host.getSVar(params.get("Execute")), host);
             }
         }
         sa[0].setTrigger(true);
@@ -454,10 +455,10 @@ public class TriggerHandler {
         sa[0].setActivatingPlayer(host.getController());
         sa[0].setStackDescription(sa[0].toString());
         boolean mand = false;
-        if (trigParams.containsKey("OptionalDecider")) {
+        if (params.containsKey("OptionalDecider")) {
         	sa[0].setOptionalTrigger(true);
             mand = false;
-            decider[0] = AbilityFactory.getDefinedPlayers(host, trigParams.get("OptionalDecider"), sa[0]).get(0);
+            decider[0] = AbilityFactory.getDefinedPlayers(host, params.get("OptionalDecider"), sa[0]).get(0);
         } else {
             mand = true;
 
@@ -971,7 +972,7 @@ public class TriggerHandler {
                             StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
                             buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
                             buildQuestion.append("\r\n(");
-                            buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+                            buildQuestion.append(params.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
                             buildQuestion.append(")");
                             if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
                                 return;
@@ -996,8 +997,8 @@ public class TriggerHandler {
                 }
 
                 //Add eventual delayed trigger.
-                if (regtrig.getMapParams().containsKey("DelayedTrigger")) {
-                    String sVarName = regtrig.getMapParams().get("DelayedTrigger");
+                if (params.containsKey("DelayedTrigger")) {
+                    String sVarName = params.get("DelayedTrigger");
                     Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(sVarName), regtrig.getHostCard(), true);
                     deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
                     registerDelayedTrigger(deltrig);
@@ -1022,13 +1023,8 @@ public class TriggerHandler {
         //Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
         //System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
-        if (regtrig.getMapParams().containsKey("Static")) {
-            if (regtrig.getMapParams().get("Static").equals("True")) {
-                AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility, false);
-            }
-            else {
-                AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
-            }
+        if (params.containsKey("Static") && params.get("Static").equals("True")) {
+            AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility, false);
         }
         else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
