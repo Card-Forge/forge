@@ -108,7 +108,7 @@ public class Input_PayManaCost_Ability extends Input {
 
         if (manaCost.isPaid()) {
             resetManaCost();
-            AllZone.getManaPool().clearPay(fakeAbility, false);
+            AllZone.getHumanPlayer().getManaPool().clearPay(fakeAbility, false);
 
             paidCommand.execute();
 
@@ -120,7 +120,7 @@ public class Input_PayManaCost_Ability extends Input {
     @Override
     public void selectButtonCancel() {
         resetManaCost();
-        AllZone.getManaPool().unpaid(fakeAbility, true);
+        AllZone.getHumanPlayer().getManaPool().unpaid(fakeAbility, true);
         unpaidCommand.execute();
         AllZone.getInputControl().resetInput();
     }

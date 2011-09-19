@@ -1256,7 +1256,7 @@ public class GameAction {
         }
 
         // TODO ManaPool should be moved to Player and be represented in the player panel
-        ManaPool mp = AllZone.getManaPool();
+        ManaPool mp = AllZone.getHumanPlayer().getManaPool();
         mp.setImageFilename("mana_pool");
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(mp);
 

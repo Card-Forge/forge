@@ -293,8 +293,8 @@ public class CardPanel extends JPanel implements CardContainer {
         	
             if (getCard().getName().equals("Mana Pool") && !isAnimationPanel) {
 
-                if (AllZone.getManaPool() != null) {
-                    String s = AllZone.getManaPool().getManaList();
+                if (AllZone.getHumanPlayer().getManaPool() != null) {
+                    String s = AllZone.getHumanPlayer().getManaPool().getManaList();
                     if (!s.equals("|||||||||||")) {
 
                         String mList[] = s.split("\\|", 12);

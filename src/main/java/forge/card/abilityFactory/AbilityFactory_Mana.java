@@ -897,11 +897,7 @@ public class AbilityFactory_Mana {
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
-                if (p.isHuman()) {
-                    AllZone.getManaPool().clearPool();
-                } else if (p.isComputer()) {
-                    AllZone.getComputerManaPool().clearPool();
-                }
+                p.getManaPool().clearPool();
             }
         }
     }

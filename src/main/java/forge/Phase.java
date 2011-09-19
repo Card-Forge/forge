@@ -410,8 +410,8 @@ public class Phase extends MyObservable implements java.io.Serializable {
         }
         this.bPhaseEffects = true;
         if (!AllZoneUtil.isCardInPlay("Upwelling")) {
-            AllZone.getManaPool().clearPool();
-            AllZone.getComputerManaPool().clearPool();
+            AllZone.getHumanPlayer().getManaPool().clearPool();
+            AllZone.getComputerPlayer().getManaPool().clearPool();
         }
 
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {

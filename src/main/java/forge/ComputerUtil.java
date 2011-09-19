@@ -455,8 +455,7 @@ public class ComputerUtil {
 
         cost = AllZone.getGameAction().getSpellCostChange(sa, cost);
 
-        ManaPool manapool = AllZone.getComputerManaPool();
-        if (player.isHuman()) manapool = AllZone.getManaPool();
+        ManaPool manapool = player.getManaPool();
 
         Card card = sa.getSourceCard();
         // Tack xMana Payments into mana here if X is a set value

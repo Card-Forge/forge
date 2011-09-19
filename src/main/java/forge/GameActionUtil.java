@@ -2725,11 +2725,7 @@ public final class GameActionUtil {
         }
 
         //empty mana pool
-        if (p.isHuman()) {
-            AllZone.getManaPool().clearPool();
-        } else {
-            AllZone.getComputerManaPool().clearPool();
-        }
+        p.getManaPool().clearPool();
     }
 
 } //end class GameActionUtil

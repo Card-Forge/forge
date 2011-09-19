@@ -183,7 +183,7 @@ public class SpellAbility_Requirements {
             ability.setStackDescription(sb.toString());
         }
 
-        AllZone.getManaPool().clearPay(ability, false);
+        AllZone.getHumanPlayer().getManaPool().clearPay(ability, false);
         AllZone.getStack().addAndUnfreeze(ability);
     }
 }

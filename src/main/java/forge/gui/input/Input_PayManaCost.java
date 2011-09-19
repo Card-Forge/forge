@@ -141,7 +141,7 @@ public class Input_PayManaCost extends Input {
             } else
                 AllZone.getInputControl().resetInput();
         } else {
-            AllZone.getManaPool().clearPay(spell, false);
+            AllZone.getHumanPlayer().getManaPool().clearPay(spell, false);
             resetManaCost();
 
             // if tap ability, tap card
@@ -172,7 +172,7 @@ public class Input_PayManaCost extends Input {
     @Override
     public void selectButtonCancel() {
         resetManaCost();
-        AllZone.getManaPool().unpaid(spell, true);
+        AllZone.getHumanPlayer().getManaPool().unpaid(spell, true);
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
 
         stop();

@@ -112,7 +112,7 @@ public class Input_PayManaCostUtil {
 
         AllZone.getGameAction().playSpellAbility(chosen);
 
-        manaCost = AllZone.getManaPool().subtractMana(sa, manaCost, chosen);
+        manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
 
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;

@@ -5,7 +5,6 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.PreloadingCardFactory;
-import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
@@ -374,26 +373,6 @@ public final class AllZone implements NewConstants {
      */
     public static PlayerZone getStackZone() {
         return Singletons.getModel().getGameState().getStackZone();
-    }
-
-    /**
-     * <p>getManaPool.</p>
-     *
-     * @return a {@link forge.card.mana.ManaPool} object.
-     * @since 1.0.15
-     */
-    public static ManaPool getManaPool() {
-        return AllZone.getHumanPlayer().getManaPool();
-    }
-
-    /**
-     * <p>getComputerManaPool.</p>
-     *
-     * @return a {@link forge.card.mana.ManaPool} object.
-     * @since 1.0.15
-     */
-    public static ManaPool getComputerManaPool() {
-        return AllZone.getComputerPlayer().getManaPool();
     }
 
     /**

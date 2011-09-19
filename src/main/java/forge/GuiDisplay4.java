@@ -522,7 +522,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppLifeLabel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent me) {
-                setCard(AllZone.getComputerManaPool());
+                setCard(AllZone.getComputerPlayer().getManaPool());
             } //mouseMoved
         });
 

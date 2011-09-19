@@ -77,7 +77,7 @@ public class ComputerAI_General implements Computer {
         //Card list of all cards to consider
         CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
-        if (AllZone.getComputerManaPool().isEmpty()) {
+        if (AllZone.getComputerPlayer().getManaPool().isEmpty()) {
             hand = hand.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
 

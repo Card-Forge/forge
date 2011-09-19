@@ -196,7 +196,7 @@ public class Cost_Payment {
         }
         
         // Move this to CostMana
-        AllZone.getManaPool().unpaid(ability, false);
+        AllZone.getHumanPlayer().getManaPool().unpaid(ability, false);
     }
     
     /**
