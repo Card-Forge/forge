@@ -1,9 +1,15 @@
 package forge.gui.input;
 
-import forge.*;
 
 import java.util.LinkedList;
 import java.util.Stack;
+
+import forge.ComputerAI_Input;
+import forge.Constant;
+import forge.MyObservable;
+import forge.Phase;
+import forge.Player;
+import forge.model.FModel;
 
 /**
  * <p>InputControl class.</p>
@@ -22,13 +28,24 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Stack<Input> resolvingStack = new Stack<Input>();
     private LinkedList<Input> resolvingQueue = new LinkedList<Input>();
 
+    private final FModel model;
+    private ComputerAI_Input aiInput; // initialized at runtime to be the latest object created
+
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param model
+     */
+    public InputControl(FModel fModel) {
+        model = fModel;
+    }
+
     /**
      * <p>Setter for the field <code>input</code>.</p>
      *
      * @param in a {@link forge.gui.input.Input} object.
      */
     public void setInput(final Input in) {
-        if (AllZone.getStack().getResolving() || !(input == null || input instanceof Input_PassPriority))
+        if (model.getGameState().getStack().getResolving() || !(input == null || input instanceof Input_PassPriority))
             inputStack.add(in);
         else
             input = in;
@@ -106,9 +123,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input updateInput() {
-        final String phase = AllZone.getPhase().getPhase();
-        final Player playerTurn = AllZone.getPhase().getPlayerTurn();
-        final Player priority = AllZone.getPhase().getPriorityPlayer();
+        final String phase = model.getGameState().getPhase().getPhase();
+        final Player playerTurn = model.getGameState().getPhase().getPlayerTurn();
+        final Player priority = model.getGameState().getPhase().getPriorityPlayer();
 
         // TODO: this resolving portion needs more work, but fixes Death Cloud issues 
         if (resolvingStack.size() > 0) {
@@ -121,7 +138,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return input;
         }
 
-        if (AllZone.getStack().getResolving())
+        if (model.getGameState().getStack().getResolving())
             return null;
 
 
@@ -133,55 +150,59 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return input;
         }
 
-        if (Phase.getGameBegins() != 0 && AllZone.getPhase().doPhaseEffects()) {
+        if (Phase.getGameBegins() != 0 && model.getGameState().getPhase().doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
-            AllZone.getPhase().handleBeginPhase();
+            model.getGameState().getPhase().handleBeginPhase();
             return updateInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move to next phase
-        if (AllZone.getPhase().isNeedToNextPhase())
+        if (model.getGameState().getPhase().isNeedToNextPhase())
             return null;
 
         // Special Inputs needed for the following phases:        
         if (phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
-            AllZone.getStack().freezeStack();
+            model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman())
                 return new Input_Attack();
         } else if (phase.equals(Constant.Phase.Combat_Declare_Blockers)) {
-            AllZone.getStack().freezeStack();
+            model.getGameState().getStack().freezeStack();
             if (playerTurn.isHuman()) {
-                AllZone.getComputer().getComputer().declare_blockers();
+                aiInput.getComputer().declare_blockers();
                 return null;
             } else {
-                if (AllZone.getCombat().getAttackers().length == 0) {
+                if (model.getGameState().getCombat().getAttackers().length == 0) {
                     // no active attackers, skip the Blocking phase
-                    AllZone.getPhase().setNeedToNextPhase(true);
+                    model.getGameState().getPhase().setNeedToNextPhase(true);
                     return null;
                 } else
                     return new Input_Block();
             }
         } else if (phase.equals(Constant.Phase.Cleanup))    // Player needs to discard
-            if (AllZone.getStack().size() == 0)    // fall through to resolve things like Madness
+            if (model.getGameState().getStack().size() == 0)    // fall through to resolve things like Madness
                 return new Input_Cleanup();
 
         // *********************
         // Special phases handled above, everything else is handled simply by priority
 
         if (priority.isHuman()) {
-            boolean skip = AllZone.getPhase().doSkipPhase();
-            AllZone.getPhase().setSkipPhase(false);
-            if (AllZone.getStack().size() == 0 && !AllZone.getDisplay().stopAtPhase(playerTurn, phase) && skip) {
-                AllZone.getPhase().passPriority();
+            boolean skip = model.getGameState().getPhase().doSkipPhase();
+            model.getGameState().getPhase().setSkipPhase(false);
+            if (model.getGameState().getStack().size() == 0 && !forge.AllZone.getDisplay().stopAtPhase(playerTurn, phase) && skip) {
+                model.getGameState().getPhase().passPriority();
                 return null;
             } else
                 return new Input_PassPriority();
         } else if (playerTurn.isComputer())
-            return AllZone.getComputer();
+            return aiInput;
         else {
-            AllZone.getComputer().getComputer().stack_not_empty();
+            aiInput.getComputer().stack_not_empty();
             return null;
         }
     }//getInput()
+
+    public void setComputer(ComputerAI_Input computerAI_Input) {
+        aiInput = computerAI_Input;
+    }
 }//InputControl

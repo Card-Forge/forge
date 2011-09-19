@@ -53,7 +53,7 @@ public final class AllZone implements NewConstants {
     private static CardFactoryInterface cardFactory = null;
 
     /** Constant <code>inputControl</code>. */
-    private static final InputControl INPUT_CONTROL = new InputControl();
+    private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
 
     /** Game state observer <code>gameInfo</code> collects statistics and players' performance. */
     private static GameSummary gameInfo = new GameSummary();
@@ -65,8 +65,6 @@ public final class AllZone implements NewConstants {
 
     //initialized at Runtime since it has to be the last object constructed
 
-    /** Global <code>computer</code>. */
-    private static ComputerAI_Input computer;
 
     //shared between Input_Attack, Input_Block, Input_CombatDamage , InputState_Computer
 
@@ -318,25 +316,6 @@ public final class AllZone implements NewConstants {
         return Singletons.getModel().getGameState().getTriggerHandler();
     }
 
-    /**
-     * <p>getComputer.</p>
-     *
-     * @return a {@link forge.ComputerAI_Input} object.
-     * @since 1.0.15
-     */
-    public static ComputerAI_Input getComputer() {
-        return computer;
-    }
-
-    /**
-     * <p>setComputer.</p>
-     *
-     * @param input a {@link forge.ComputerAI_Input} object.
-     * @since 1.0.15
-     */
-    public static void setComputer(final ComputerAI_Input input) {
-        computer = input;
-    }
 
     /**
      * <p>getCombat.</p>

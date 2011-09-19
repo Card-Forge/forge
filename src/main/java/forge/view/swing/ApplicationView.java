@@ -127,7 +127,7 @@ public class ApplicationView implements FView {
                 Constant.Runtime.gameType = GameType.Constructed;
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
                     public void run() {
-                        AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));
+                        AllZone.getInputControl().setComputer(new ComputerAI_Input(new ComputerAI_General()));
     
                         // Enable only one of the following two lines. The second
                         // is useful for debugging.
