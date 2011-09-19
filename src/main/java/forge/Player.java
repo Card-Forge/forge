@@ -876,7 +876,8 @@ public abstract class Player extends GameEntity {
      * @param player a {@link forge.Player} object.
      */
     public CardList getCardsIn(final Constant.Zone zone) {
-        return new CardList(getZone(zone).getCards());
+        Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : getZone(zone).getCards();
+        return new CardList(cards);
     }
     
     /**
