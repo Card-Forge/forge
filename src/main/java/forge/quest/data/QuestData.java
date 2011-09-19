@@ -69,9 +69,17 @@ public final class QuestData {
     ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class);  // cards acquired since last game-win/loss
 
     // Challenge history
-    int challengesPlayed;
+    int challengesPlayed = -1;
     List<Integer> availableChallenges = new ArrayList<Integer>();
     List<Integer> completedChallenges = new ArrayList<Integer>();
+    
+    // Challenges used to be called quests.  During the renaming, 
+    // files could be corrupted.  These fields ensure old files still work.
+    // These fields should be phased out after a little while.
+    // The old files, if played once, are updated automatically to the new system.
+    int questsPlayed = -1;
+    List<Integer> availableQuests = null;
+    List<Integer> completedQuests = null;
 
     // own randomizer seed
     private long randomSeed = 0;
@@ -137,13 +145,44 @@ public final class QuestData {
     public QuestUtilRewards getRewards() { return myRewards; }
 
     // Challenge performance
-    public int getChallengesPlayed() { return challengesPlayed; }
+    public int getChallengesPlayed() {
+        // This should be phased out after a while, when
+        // old quest decks have been updated. (changes made 19-9-11)
+        if(questsPlayed!=-1) { 
+            challengesPlayed = questsPlayed;
+            questsPlayed = -1; 
+        }
+        
+        return challengesPlayed;
+    }
+    
     public void addChallengesPlayed() { challengesPlayed++; }
 
-    public List<Integer> getAvailableChallenges() { return availableChallenges != null ? new ArrayList<Integer>(availableChallenges) : null; }
+    public List<Integer> getAvailableChallenges() { 
+        // This should be phased out after a while, when
+        // old quest decks have been updated. (changes made 19-9-11)
+        if(availableQuests != null) {
+            availableChallenges = availableQuests;
+            availableQuests = null;
+        }
+        
+        return availableChallenges != null ? new ArrayList<Integer>(availableChallenges) : null; 
+    }
+    
     public void setAvailableChallenges(final List<Integer> list) { availableChallenges = list; }
     public void clearAvailableChallenges() { availableChallenges.clear(); }
-    public List<Integer> getCompletedChallenges() { return completedChallenges != null ? new ArrayList<Integer>(completedChallenges) : null; }
+    
+    
+    public List<Integer> getCompletedChallenges() { 
+        // This should be phased out after a while, when
+        // old quest decks have been updated. (changes made 19-9-11)
+        if(completedQuests != null) {
+            completedChallenges = completedQuests;
+            completedQuests = null;
+        }
+        
+        return completedChallenges != null ? new ArrayList<Integer>(completedChallenges) : null; 
+    }
 
     // Wins & Losses
     public int getLost() { return lost; }
