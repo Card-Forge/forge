@@ -117,7 +117,6 @@ public class Upkeep implements java.io.Serializable {
         //Win / Lose
         // Checks for can't win or can't lose happen in Player.altWinConditionMet()
 
-        upkeep_Mortal_Combat();
         upkeep_Near_Death_Experience();
         upkeep_Test_of_Endurance();
         upkeep_Helix_Pinnacle();
@@ -2349,38 +2348,6 @@ public class Upkeep implements java.io.Serializable {
 
         } // if
     } // upkeep_Felidar_Sovereign
-
-
-    /**
-     * <p>upkeep_Mortal_Combat.</p>
-     */
-    private static void upkeep_Mortal_Combat() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield, "Mortal Combat");
-        CardList grave = player.getCardsIn(Zone.Graveyard);
-        grave = grave.filter(AllZoneUtil.creatures);
-
-        if (0 < list.size() && 20 <= grave.size()) {
-            final Card source = list.get(0);
-            Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    CardList grave = player.getCardsIn(Zone.Graveyard);
-                    grave = grave.filter(AllZoneUtil.creatures);
-                    if (grave.size() >= 20)
-                        player.altWinBySpellEffect(source.getName());
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Mortal Combat - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Mortal Combat
 
     /**
      * <p>upkeep_Helix_Pinnacle.</p>
