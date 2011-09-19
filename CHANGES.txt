@@ -249,6 +249,50 @@ Comment=
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Converted Titania's Song to continuous static ability.
+- Commented out the stAnimate keyword.
+- Fixed Opalescence.
+- In quest mode, "Quests" universally renamed to "Challenges".
+- Quest mode now features events, such as duels and challenges.
+- Little fix for last commit.
+- Fixed Animate Artifact.
+- Little code simplifications in TriggerHandler class.
+- Made the Ned Flanders 1 deck less powerful.
+- Fixed AI paying life costs twice.
+- PlayerZones Moved into Player class
+- ZoneNames are listed in enum
+- Removed lots of calls to AllZoneUtil
+- Converted Sylvan Library to using a Trigger object rather than a hardcoded function (Last of the old drawCardEffect cards in GameActionUtil! Woo!)
+- Converted Standstill to script.
+- Moved (OPTIONAL)-marking of stack items to after their number.
+- Added the cost "OppGainLife".
+- Added check for null string to fix crash (Issue# 312)
+- added STUDY to counter enumerated list for Grimoire of the Dead
+- Added support for EnchantedPlayer to triggers and defined. Added EnchantedPlayerCtrl as a property test for cards
+- Some bughunting: replaced expressions Zone.equals(String_literal) for those equals would return false always, and zone names should not be magic-strings.
+- unused imports removed en-masse.
+- ALL_ZONES added to Player, some functions in AllZone now use GameState
+- matchState is no longer public and deprecated for that
+- renamed function finding card's current zone getZone(card) to getZoneOf(card)
+- getManaPool removed from AllZone (manapool already was a player's property) - just removed global refs
+- untied InputControl from AllZone (mostly, except for display)
+- removed call to global context for local property
+- Timetwister was querying Stack from player... had to add, otherwise it would crash
+- Converted Mortal Combat to script.
+- Converted Near-Death Experience to script.
+- Converted Felidar Sovereign and Test of Endurance to script.
+- removed PlayerIndex, players' stats are keyed by name, allowing multiple uniquely-named players
+- Changed the counters-property to "counters_<Comparator><Value>_<CounterType>" Where
+<Comparator> = LT or LE or EQ or NE or GE or GT
+<Value> = Integer or SVarname
+<CounterType> = Any countertype
+- Separating it like this removes the restrictions that only X or Y could be used for SVarNames or single digits for integers. Unfortunately it also makes for a massive commit.
+- Changed all cards that use the counters-property to the new format.
+- Converted Helix Pinnacle to script.
+- Ran set info script.
+- Ran oracle script.
+- Fixed loading bug for old quest.dat files.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -304,6 +348,8 @@ Caldera Kavu
 Kavu Chameleon
 Rainbow Crow
 Psychic Possession
+Humility
+Reverent Silence
 
 
 end
