@@ -182,7 +182,7 @@ public class Target_Selection {
         List<Zone> zone = tgt.getZone();
         final boolean mandatory = target.getMandatory() ? target.hasCandidates(true) : false;
 
-        if (zone.equals(Constant.Zone.Stack)) {
+        if (zone.contains(Constant.Zone.Stack) && zone.size() == 1) {
             // If Zone is Stack, the choices are handled slightly differently
             chooseCardFromStack(mandatory);
             return;
