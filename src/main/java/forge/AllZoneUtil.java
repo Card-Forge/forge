@@ -70,16 +70,18 @@ public final class AllZoneUtil {
      */
     public static CardList getCardsIn(final Constant.Zone zone) {
         CardList cards = new CardList();
-        cards.addAll(AllZone.getHumanPlayer().getZone(zone).getCards());
-        cards.addAll(AllZone.getComputerPlayer().getZone(zone).getCards());
+        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+            cards.addAll(p.getZone(zone).getCards());    
+        }
         return cards;
     }
 
     public static CardList getCardsIn(final List<Constant.Zone> zones) {
         CardList cards = new CardList();
         for (Zone z: zones) {
-            cards.addAll(AllZone.getHumanPlayer().getZone(z).getCards());
-            cards.addAll(AllZone.getComputerPlayer().getZone(z).getCards());
+            for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+                cards.addAll(p.getZone(z).getCards());    
+            }            
         }
         return cards;
     }
@@ -149,27 +151,7 @@ public final class AllZoneUtil {
 
     //////// HAND
 
-    /**
-     * answers the question "is a certain, specific card in this player's hand?".
-     *
-     * @param player the player's hand to check
-     * @param card   the specific card to look for
-     * @return true if the card is present in this player's hand; false otherwise
-     */
-    public static boolean isCardInPlayerHand(final Player player, final Card card) {
-        return isCardInZone(player.getZone(Constant.Zone.Hand), card);
-    }
 
-    /**
-     * answers the question "is a specific card in this player's library?".
-     *
-     * @param player the player's library to check
-     * @param card   the specific card to look for
-     * @return true if the card is present in this player's library; false otherwise
-     */
-    public static boolean isCardInPlayerLibrary(final Player player, final Card card) {
-        return isCardInZone(player.getZone(Constant.Zone.Library), card);
-    }
 
     /**
      * answers the question "is a specific card in the specified zone?".
@@ -183,10 +165,8 @@ public final class AllZoneUtil {
             return false;
         }
 
-        CardList cl = getCardsInZone(pz);
-
-        for (int i = 0; i < cl.size(); i++) {
-            if (cl.get(i).equals(card)) {
+        for (Card c : pz.getCards()) {
+            if (c.equals(card)) {
                 return true;
             }
         }
@@ -204,15 +184,6 @@ public final class AllZoneUtil {
         return getCardsIn(Zone.Exile).contains(c);
     }
 
-    /**
-     * <p>isCardInGrave.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isCardInGrave(final Card c) {
-        return getCardsIn(Zone.Graveyard).contains(c);
-    }
 
     ///Check if a certain card is in play
 

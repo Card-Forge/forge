@@ -425,19 +425,21 @@ public final class AllZone implements NewConstants {
      * @return a {@link forge.PlayerZone} object.
      */
     public static PlayerZone getZone(final Card c) {
-        if (AllZoneUtil.isCardInZone(getStackZone(), c)) {
-            return getStackZone();
+        final FGameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) { return null; }
+
+        if (AllZoneUtil.isCardInZone(gameState.getStackZone(), c)) {
+            return gameState.getStackZone();
         }
-    
-        Player[] players = new Player[]{ AllZone.getHumanPlayer(), AllZone.getComputerPlayer() };
-        Zone[] zones = new Zone[]{ Zone.Battlefield, Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command };
-        for (Player p : players) {
-            for(Zone z : zones) {
+
+        for (Player p : gameState.getPlayers()) {
+            for(Zone z : Player.ALL_ZONES) {
                 PlayerZone pz = p.getZone(z);
                 if ( AllZoneUtil.isCardInZone(pz, c) )
                     return pz;
             }
         }
+
         return null;
     }
 
@@ -445,16 +447,13 @@ public final class AllZone implements NewConstants {
      * <p>resetZoneMoveTracking.</p>
      */
     public static void resetZoneMoveTracking() {
-        resetZoneMoveTracking(getHumanPlayer());
-        resetZoneMoveTracking(getComputerPlayer());
-    }
-    
-    private static void resetZoneMoveTracking(Player player) {
-        player.getZone(Zone.Command).resetCardsAddedThisTurn();
-        player.getZone(Zone.Library).resetCardsAddedThisTurn();
-        player.getZone(Zone.Hand).resetCardsAddedThisTurn();
-        player.getZone(Zone.Battlefield).resetCardsAddedThisTurn();
-        player.getZone(Zone.Graveyard).resetCardsAddedThisTurn();        
+        final FGameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) { return; }
+        for (Player p : gameState.getPlayers()) {
+            for(Zone z : Player.ALL_ZONES) {
+                p.getZone(z).resetCardsAddedThisTurn();
+            }
+        }
     }
 
     /** 
@@ -495,8 +494,11 @@ public final class AllZone implements NewConstants {
         getDisplay().showCombat("");
         getDisplay().loadPrefs();
 
-        resetAllZones(getHumanPlayer());
-        resetAllZones(getComputerPlayer());
+        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for(Zone z : Player.ALL_ZONES) {
+                p.getZone(z).reset();
+            }
+        }
 
         getInputControl().clearInput();
 
@@ -509,15 +511,6 @@ public final class AllZone implements NewConstants {
 
         getTriggerHandler().clearRegistered();
 
-    }
-    
-    private static void resetAllZones(Player player) {
-        player.getZone(Zone.Command).reset();
-        player.getZone(Zone.Library).reset();
-        player.getZone(Zone.Hand).reset();
-        player.getZone(Zone.Battlefield).reset();
-        player.getZone(Zone.Graveyard).reset();
-        player.getZone(Zone.Exile).reset();   
     }
 
     /**

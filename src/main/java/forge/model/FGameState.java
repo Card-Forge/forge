@@ -73,6 +73,10 @@ public class FGameState {
     protected final void setComputerPlayer(final Player computerPlayer0) {
         this.computerPlayer = computerPlayer0;
     }
+    
+    public final Player[] getPlayers() {
+        return new Player[]{ humanPlayer, computerPlayer };
+    }
 
 
     /**

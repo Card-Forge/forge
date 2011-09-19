@@ -47,6 +47,7 @@ public abstract class Player extends GameEntity {
     protected Object mustAttackEntity = null;
     
     Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
+    public final static List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield, Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command));
 
     /**
      * <p>Constructor for Player.</p>
@@ -65,19 +66,9 @@ public abstract class Player extends GameEntity {
      * @param myPoisonCounters a int.
      */
     public Player(String myName, int myLife, int myPoisonCounters) {
-        PlayerZone battlefield = new PlayerZone_ComesIntoPlay(Constant.Zone.Battlefield, this);
-        PlayerZone hand = new DefaultPlayerZone(Constant.Zone.Hand, this);
-        PlayerZone graveyard = new DefaultPlayerZone(Constant.Zone.Graveyard, this);
-        PlayerZone library = new DefaultPlayerZone(Constant.Zone.Library, this);
-        PlayerZone exile = new DefaultPlayerZone(Constant.Zone.Exile, this);
-        PlayerZone command = new DefaultPlayerZone(Constant.Zone.Command, this);
-        
-        zones.put(Constant.Zone.Graveyard, graveyard);
-        zones.put(Constant.Zone.Hand, hand);
-        zones.put(Constant.Zone.Library, library);
-        zones.put(Constant.Zone.Battlefield, battlefield);
-        zones.put(Constant.Zone.Exile, exile);
-        zones.put(Constant.Zone.Command, command);
+        for (Zone z : ALL_ZONES) {
+            zones.put(z, new DefaultPlayerZone(z, this));
+        }
         
         reset();
         
