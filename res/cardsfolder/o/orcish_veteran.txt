@@ -1,9 +1,9 @@
 Name:Orcish Veteran
 ManaCost:2 R
 Types:Creature Orc
-Text:no text
+Text:CARDNAME can't block white creatures with power 2 or greater.
 PT:2/2
-K:CARDNAME can't block white creatures with power 2 or greater.
+K:CantBlock Creature.White+powerGE2
 A:AB$ Pump | Cost$ R | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_veteran.jpg

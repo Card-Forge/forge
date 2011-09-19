@@ -357,10 +357,6 @@ public class CombatUtil {
         if (!attacker.hasKeyword("Shadow")
                 && blocker.hasKeyword("Shadow")) return false;
 
-        if (blocker.hasKeyword("CARDNAME can't block white creatures with power 2 or greater.")) {
-            if (attacker.isWhite() && attacker.getNetAttack() >= 2) return false;
-        }
-
         if (blocker.hasKeyword("CARDNAME can't block black creatures.")) {
             if (attacker.isBlack()) return false;
         }
