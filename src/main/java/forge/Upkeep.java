@@ -117,10 +117,8 @@ public class Upkeep implements java.io.Serializable {
         //Win / Lose
         // Checks for can't win or can't lose happen in Player.altWinConditionMet()
 
-        upkeep_Test_of_Endurance();
         upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
-        upkeep_Felidar_Sovereign();
 
         upkeep_Karma();
         upkeep_Oath_of_Druids();
@@ -2321,34 +2319,6 @@ public class Upkeep implements java.io.Serializable {
     } // upkeep_Power_Surge()
 
     /**
-     * <p>upkeep_Felidar_Sovereign.</p>
-     */
-    private static void upkeep_Felidar_Sovereign() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield, "Felidar Sovereign");
-
-        if (0 < list.size() && player.getLife() >= 40) {
-            final Card source = list.get(0);
-            Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    if (player.getLife() >= 40) {
-                        player.altWinBySpellEffect(source.getName());
-                    }
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Felidar Sovereign - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Felidar_Sovereign
-
-    /**
      * <p>upkeep_Helix_Pinnacle.</p>
      */
     private static void upkeep_Helix_Pinnacle() {
@@ -2378,38 +2348,6 @@ public class Upkeep implements java.io.Serializable {
 
         } // if
     } // upkeep_Helix_Pinnacle
-
-    /**
-     * <p>upkeep_Test_of_Endurance.</p>
-     */
-    private static void upkeep_Test_of_Endurance() {
-        /*
-		 * At the beginning of your upkeep, if you have 50 or more life, you win the game.
-		 */
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield, "Test of Endurance");
-
-        if (0 < list.size() && player.getLife() >= 50) {
-            final Card source = list.get(0);
-            Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    if (player.getLife() >= 50) {
-                        player.altWinBySpellEffect(source.getName());
-                    }
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(list.get(0)).append(" - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Test_of_Endurance
-
 
     /**
      * <p>upkeep_Barren_Glory.</p>
