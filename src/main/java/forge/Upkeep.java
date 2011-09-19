@@ -117,7 +117,6 @@ public class Upkeep implements java.io.Serializable {
         //Win / Lose
         // Checks for can't win or can't lose happen in Player.altWinConditionMet()
 
-        upkeep_Near_Death_Experience();
         upkeep_Test_of_Endurance();
         upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
@@ -2379,37 +2378,6 @@ public class Upkeep implements java.io.Serializable {
 
         } // if
     } // upkeep_Helix_Pinnacle
-
-    /**
-     * <p>upkeep_Near_Death_Experience.</p>
-     */
-    private static void upkeep_Near_Death_Experience() {
-        /*
-		 * At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-		 */
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield, "Near-Death Experience");
-
-        if (0 < list.size() && player.getLife() == 1) {
-            final Card source = list.get(0);
-            Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    if (player.getLife() == 1) {
-                        player.altWinBySpellEffect(source.getName());
-                    }
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Near-Death Experience - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Near_Death_Experience
 
     /**
      * <p>upkeep_Test_of_Endurance.</p>
