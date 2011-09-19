@@ -91,6 +91,7 @@ public interface Constant {
         Stack;
         
         public static Zone smartValueOf(final String value) {
+            if (value == null)  { return null; }
             if ("All".equals(value)) { return null; }
             String valToCompate = value.trim();
             for (Zone v : Zone.values()) { if (v.name().compareToIgnoreCase(valToCompate) == 0) { return v; } }
