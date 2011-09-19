@@ -6,7 +6,7 @@ PT:5/5
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you may draw two cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
-SVar:AltCost:Cost$ W U B R G
+SVar:AltCost:Cost$ W U B R G | Description$ You may pay W U B R G rather than pay CARDNAME's mana cost.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_blue_dawn.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/26.jpg
