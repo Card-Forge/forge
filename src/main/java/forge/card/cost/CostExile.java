@@ -46,13 +46,13 @@ public class CostExile extends CostPartWithList {
 
         if (getThis()) {
         	sb.append(type);
-        	if (!from.equals("Battlefield")){
+        	if (!from.equals(Zone.Battlefield)){
         	    sb.append(" from your ").append(from);
         	}
         	return sb.toString();
         }
 
-        if (from.equals("Battlefield")){
+        if (from.equals(Zone.Battlefield)){
             String desc = typeDescription == null ? type : typeDescription;
             
             sb.append(Cost.convertAmountTypeToWords(i, amount, desc));

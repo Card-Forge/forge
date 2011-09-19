@@ -179,7 +179,7 @@ public final class AbilityFactory_ChangeZone {
         }
 
         if (!(sa instanceof Ability_Sub)) {
-            if (origin.equals("Battlefield") || params.get("Destination").equals("Battlefield")) {
+            if (origin.contains(Zone.Battlefield) || params.get("Destination").equals("Battlefield")) {
                 af.getHostCard().setSVar("PlayMain1", "TRUE");
             }
         }
@@ -798,9 +798,9 @@ public final class AbilityFactory_ChangeZone {
                 c = basicManaFixing(fetchList, type);
             } else if (fetchList.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.AI_getBestCreature(fetchList);     //if only creatures take the best
-            } else if ("Battlefield".equals(destination) || "Graveyard".equals(destination)) {
+            } else if (Zone.Battlefield.equals(destination) || Zone.Graveyard.equals(destination)) {
                 c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
-            } else if ("Exile".equals(destination)) {
+            } else if (Zone.Exile.equals(destination)) {
                 // Exiling your own stuff, if Exiling opponents stuff choose best
                 if (destZone.getPlayer().isHuman()) {
                     c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
@@ -809,7 +809,7 @@ public final class AbilityFactory_ChangeZone {
                 }
             } else {
                 //Don't fetch another tutor with the same name
-                if (origin.contains("Library") && !fetchList.getNotName(card.getName()).isEmpty()) {
+                if (origin.contains(Zone.Library) && !fetchList.getNotName(card.getName()).isEmpty()) {
                     fetchList = fetchList.getNotName(card.getName());
                 }
 
@@ -827,10 +827,10 @@ public final class AbilityFactory_ChangeZone {
 
         for (Card c : fetched) {
             Card newCard = null;
-            if ("Library".equals(destination)) {
+            if (Zone.Library.equals(destination)) {
                 int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
                 AllZone.getGameAction().moveToLibrary(c, libraryPos);
-            } else if ("Battlefield".equals(destination)) {
+            } else if (Zone.Battlefield.equals(destination)) {
                 if (params.containsKey("Tapped")) {
                     c.tap();
                 }
@@ -862,7 +862,7 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        if (!"Battlefield".equals(destination) && !"Card".equals(type)) {
+        if (!Zone.Battlefield.equals(destination) && !"Card".equals(type)) {
             String picked = af.getHostCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
                 GuiUtils.getChoice(picked, fetched.toArray());
@@ -970,7 +970,7 @@ public final class AbilityFactory_ChangeZone {
         HashMap<String, String> params = af.getMapParams();
 
         Zone origin = Zone.smartValueOf(params.get("Origin"));
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
 
         float pct = origin.equals(Zone.Battlefield) ? .8f : .667f;
 
@@ -1029,8 +1029,8 @@ public final class AbilityFactory_ChangeZone {
                 }
 
                 //only use blink or bounce effects
-                if (!(destination.equals("Exile") && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
-                        && !destination.equals("Hand"))
+                if (!(destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
+                        && !destination.equals(Zone.Hand))
                 {
                     return false;
                 }
@@ -1085,7 +1085,7 @@ public final class AbilityFactory_ChangeZone {
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
         Zone origin = Zone.smartValueOf(params.get("Origin"));
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         Target tgt = af.getAbTgt();
 
     	Ability_Sub abSub = sa.getSubAbility();
@@ -1156,13 +1156,13 @@ public final class AbilityFactory_ChangeZone {
 	            }
             }
 
-        } else if (origin.equals("Graveyard")) {
+        } else if (origin.equals(Zone.Graveyard)) {
             // Retrieve from Graveyard to:
 
         }
 
         //blink human targets only during combat
-        if (origin.equals("Battlefield") && destination.equals("Exile")
+        if (origin.equals(Zone.Battlefield) && destination.equals(Zone.Exile)
         		&& (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
         		&& !(AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || sa.isAbility()))
         {
@@ -1170,7 +1170,7 @@ public final class AbilityFactory_ChangeZone {
         }
 
         // Exile and bounce opponents stuff
-        if (destination.equals("Exile") || origin.equals("Battlefield")) {
+        if (destination.equals(Zone.Exile) || origin.equals(Zone.Battlefield)) {
             list = list.getController(AllZone.getHumanPlayer());
         }
 
@@ -1194,10 +1194,10 @@ public final class AbilityFactory_ChangeZone {
 
             if (!list.isEmpty()) {
                 Card mostExpensive = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
-                if (destination.equals("Battlefield") || origin.equals("Battlefield")) {
+                if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
                     if (mostExpensive.isCreature()) {
                         //if a creature is most expensive take the best one
-                        if (destination.equals("Exile")) {
+                        if (destination.equals(Zone.Exile)) {
                             // If Exiling things, don't give bonus to Tokens
                             choice = CardFactoryUtil.AI_getBestCreature(list);
                         } else {
@@ -1249,7 +1249,7 @@ public final class AbilityFactory_ChangeZone {
         HashMap<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
         Zone origin = Zone.smartValueOf(params.get("Origin"));
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         Target tgt = af.getAbTgt();
 
         CardList list = AllZoneUtil.getCardsIn(origin);
@@ -1257,14 +1257,14 @@ public final class AbilityFactory_ChangeZone {
 
 
         // Narrow down the list:
-        if (origin.equals("Battlefield")) {
+        if (origin.equals(Zone.Battlefield)) {
             // filter out untargetables
             list = list.getTargetableCards(source);
 
             // if Destination is hand, either bounce opponents dangerous stuff or save my about to die stuff
 
             // if Destination is exile, filter out my cards
-        } else if (origin.equals("Graveyard")) {
+        } else if (origin.equals(Zone.Graveyard)) {
             // Retrieve from Graveyard to:
 
         }
@@ -1284,11 +1284,11 @@ public final class AbilityFactory_ChangeZone {
 
             if (!list.isEmpty()) {
                 if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature()
-                        && (destination.equals("Battlefield") || origin.equals("Battlefield")))
+                        && (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)))
                 {
                     //if a creature is most expensive take the best
                     choice = CardFactoryUtil.AI_getBestCreatureToBounce(list);
-                } else if (destination.equals("Battlefield") || origin.equals("Battlefield")) {
+                } else if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
                     choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
                 } else {
                     // TODO AI needs more improvement to it's retrieval (reuse some code from spReturn here)
@@ -1365,7 +1365,7 @@ public final class AbilityFactory_ChangeZone {
 
         sb.append(" ");
 
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         Zone origin = Zone.smartValueOf(params.get("Origin"));
 
         StringBuilder sbTargets = new StringBuilder();
@@ -1391,9 +1391,9 @@ public final class AbilityFactory_ChangeZone {
 
         String fromGraveyard = " from the graveyard";
 
-        if (destination.equals("Battlefield")) {
+        if (destination.equals(Zone.Battlefield)) {
             sb.append("Put").append(targetname);
-            if (origin.equals("Graveyard")) {
+            if (origin.equals(Zone.Graveyard)) {
                 sb.append(fromGraveyard);
             }
 
@@ -1407,22 +1407,22 @@ public final class AbilityFactory_ChangeZone {
             sb.append(".");
         }
 
-        if (destination.equals("Hand")) {
+        if (destination.equals(Zone.Hand)) {
             sb.append("Return").append(targetname);
-            if (origin.equals("Graveyard")) {
+            if (origin.equals(Zone.Graveyard)) {
                 sb.append(fromGraveyard);
             }
             sb.append(" to").append(pronoun).append("owners hand.");
         }
 
-        if (destination.equals("Library")) {
+        if (destination.equals(Zone.Library)) {
             if (params.containsKey("Shuffle")) {    // for things like Gaea's Blessing
                 sb.append("Shuffle").append(targetname);
 
                 sb.append(" into").append(pronoun).append("owner's library.");
             } else {
                 sb.append("Put").append(targetname);
-                if (origin.equals("Graveyard")) {
+                if (origin.equals(Zone.Graveyard)) {
                     sb.append(fromGraveyard);
                 }
 
@@ -1440,15 +1440,15 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        if (destination.equals("Exile")) {
+        if (destination.equals(Zone.Exile)) {
             sb.append("Exile").append(targetname);
-            if (origin.equals("Graveyard")) {
+            if (origin.equals(Zone.Graveyard)) {
                 sb.append(fromGraveyard);
             }
             sb.append(".");
         }
 
-        if (destination.equals("Graveyard")) {
+        if (destination.equals(Zone.Graveyard)) {
             sb.append("Put").append(targetname);
             sb.append(" from ").append(origin);
             sb.append(" into").append(pronoun).append("owner's graveyard.");
@@ -1502,7 +1502,7 @@ public final class AbilityFactory_ChangeZone {
                     continue;
                 }
 
-                if (tgt != null && origin.equals("Battlefield")) {
+                if (tgt != null && origin.equals(Zone.Battlefield)) {
                     // check targeting
                     if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC)) {
                         continue;
@@ -1511,11 +1511,11 @@ public final class AbilityFactory_ChangeZone {
 
                 Card movedCard = null;
                 Player pl = player;
-                if (!destination.equals("Battlefield")) {
+                if (!destination.equals(Zone.Battlefield)) {
                     pl = tgtC.getOwner();
                 }
 
-                if (destination.equals("Library")) {
+                if (destination.equals(Zone.Library)) {
                     // library position is zero indexed
                     int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 
@@ -1526,7 +1526,7 @@ public final class AbilityFactory_ChangeZone {
                         tgtC.getOwner().shuffle();
                     }
                 } else {
-                    if (destination.equals("Battlefield")) {
+                    if (destination.equals(Zone.Battlefield)) {
                         if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
                             tgtC.tap();
                         }
@@ -1740,11 +1740,11 @@ public final class AbilityFactory_ChangeZone {
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
-        if (origin.equals("Hand")) {
+        if (origin.equals(Zone.Hand)) {
 
-        } else if (origin.equals("Library")) {
+        } else if (origin.equals(Zone.Library)) {
 
-        } else if (origin.equals("Battlefield")) {
+        } else if (origin.equals(Zone.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell offensively
             // if the AI is using it defensively, then something else needs to occur
             // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
@@ -1759,7 +1759,7 @@ public final class AbilityFactory_ChangeZone {
             if (AllZone.getPhase().is(Constant.Phase.Main1, AllZone.getComputerPlayer())) {
                 return false;
             }
-        } else if (origin.equals("Graveyard")) {
+        } else if (origin.equals(Zone.Graveyard)) {
             Target tgt = af.getAbTgt();
             if (tgt != null) {
                 if (AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard).isEmpty()) {
@@ -1768,19 +1768,16 @@ public final class AbilityFactory_ChangeZone {
                 tgt.resetTargets();
                 tgt.addTarget(AllZone.getHumanPlayer());
             }
-        } else if (origin.equals("Exile")) {
+        } else if (origin.equals(Zone.Exile)) {
 
-        } else if (origin.equals("Stack")) {
+        } else if (origin.equals(Zone.Stack)) {
             // time stop can do something like this:
             // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
             // DBSKipToPhase | DB$SkipToPhase | Phase$ Cleanup
             // otherwise, this situation doesn't exist
             return false;
-        } else if (origin.equals("Sideboard")) {
-            // This situation doesn't exist
-            return false;
-        }
-
+        } 
+        
         if (destination.equals(Constant.Zone.Battlefield)) {
             if (params.get("GainControl") != null) {
                 // Check if the cards are valuable enough
@@ -1866,7 +1863,7 @@ public final class AbilityFactory_ChangeZone {
      */
     private static void changeZoneAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
-        String destination = params.get("Destination");
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
         Zone origin = Zone.smartValueOf(params.get("Origin"));
 
         CardList cards = null;
@@ -1897,7 +1894,7 @@ public final class AbilityFactory_ChangeZone {
         // I don't know if library position is necessary. It's here if it is, just in case
         int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
         for (Card c : cards) {
-            if (destination.equals("Battlefield")) {
+            if (destination.equals(Zone.Battlefield)) {
 				// Auras without Candidates stay in their current location
             	if (c.isAura()) {
             		SpellAbility saAura = AbilityFactory_Attach.getAttachSpellAbility(c);

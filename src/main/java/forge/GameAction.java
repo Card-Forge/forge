@@ -501,7 +501,7 @@ public class GameAction {
      * @param libPosition a int.
      * @return a {@link forge.Card} object.
      */
-    public final Card moveTo(final String name, final Card c, final int libPosition) {
+    public final Card moveTo(final Zone name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         if (name.equals(Constant.Zone.Hand)) {
             return moveToHand(c);

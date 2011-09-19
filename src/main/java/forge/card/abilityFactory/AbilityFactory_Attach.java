@@ -15,6 +15,7 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.MyRandom;
 import forge.Player;
@@ -159,7 +160,7 @@ public class AbilityFactory_Attach {
 		// TODO: If Attaching without casting, don't need to actually target. 
 		// I believe this is the only case where mandatory will be true, so just check that when starting that work
 		// But we shouldn't attach to things with Protection
-		if (tgt.getZone().equals("Battlefield") && !mandatory){
+		if (tgt.getZone().contains(Zone.Battlefield) && !mandatory){
 			list = list.getTargetableCards(attachSource);
 		}
 		else{

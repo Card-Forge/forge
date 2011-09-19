@@ -376,10 +376,10 @@ public final class AbilityFactory_Reveal {
                                     //let user get choice
                                     Card chosen = null;
                                     String prompt = "Choose a card to put into the ";
-                                    if (destZone1.equals("Library") && libraryPosition == -1) {
+                                    if (destZone1.equals(Zone.Library) && libraryPosition == -1) {
                                         prompt = "Put the rest on the bottom of the ";
                                     }
-                                    if (destZone1.equals("Library") && libraryPosition == 0) {
+                                    if (destZone1.equals(Zone.Library) && libraryPosition == 0) {
                                         prompt = "Put the rest on top of the ";
                                     }
                                     if (anyNumber || optional) {
@@ -397,7 +397,7 @@ public final class AbilityFactory_Reveal {
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
                                         Card c = AllZone.getGameAction().moveTo(zone, chosen);
-                                        if (destZone1.equals("Battlefield") && !keywords.isEmpty()) {
+                                        if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                             for (String kw : keywords) {
                                                 c.addExtrinsicKeyword(kw);
                                             }
@@ -422,7 +422,7 @@ public final class AbilityFactory_Reveal {
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
                                         AllZone.getGameAction().moveTo(zone, chosen);
-                                    	if (destZone1.equals("Battlefield") && !keywords.isEmpty()) {
+                                    	if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                             for (String kw : keywords) {
                                                 chosen.addExtrinsicKeyword(kw);
                                             }
@@ -445,7 +445,7 @@ public final class AbilityFactory_Reveal {
                         }
 
                         //now, move the rest to destZone2
-                        if (destZone2.equals("Library")) {
+                        if (destZone2.equals(Zone.Library)) {
                         	if (player.isHuman()) {
 	                            //put them in any order
 	                            while (rest.size() > 0) {
@@ -473,7 +473,7 @@ public final class AbilityFactory_Reveal {
                                 Card c = rest.get(i);
                                 PlayerZone toZone = c.getOwner().getZone(destZone2);
                                 c = AllZone.getGameAction().moveTo(toZone, c);
-                                if (destZone2.equals("Battlefield") && !keywords.isEmpty()) {
+                                if (destZone2.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                     for (String kw : keywords) {
                                         c.addExtrinsicKeyword(kw);
                                     }
@@ -793,9 +793,9 @@ public final class AbilityFactory_Reveal {
             tgtPlayers = AbilityFactory.getDefinedPlayers(host, params.get("Defined"), sa);
         }
 
-        String foundDest = params.get("FoundDestination");
+        Zone foundDest = Zone.smartValueOf(params.get("FoundDestination"));
         int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa);
-        String revealedDest = params.get("RevealedDestination");
+        Zone revealedDest = Zone.smartValueOf(params.get("RevealedDestination"));
         int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
 
         for (Player p : tgtPlayers) {
