@@ -1,9 +1,6 @@
 package forge;
 
 
-import java.util.Iterator;
-import java.util.Map;
-
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryInterface;

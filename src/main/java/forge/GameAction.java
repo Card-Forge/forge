@@ -33,7 +33,6 @@ import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 import forge.quest.gui.main.QuestChallenge;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;

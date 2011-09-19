@@ -81,7 +81,6 @@ import com.thoughtworks.xstream.XStreamException;
 
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;

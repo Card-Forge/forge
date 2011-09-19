@@ -14,8 +14,6 @@ import forge.Constant.Zone;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
-import org.eclipse.swt.internal.Library;
-
 import java.awt.Color;
 import java.awt.*;
 import java.util.Iterator;

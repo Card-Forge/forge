@@ -1,8 +1,5 @@
 package forge.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import forge.AIPlayer;
 import forge.Combat;
 import forge.Constant;
@@ -15,7 +12,6 @@ import forge.MagicStack;
 import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
-import forge.PlayerZone_ComesIntoPlay;
 import forge.StaticEffects;
 import forge.Upkeep;
 import forge.card.trigger.TriggerHandler;

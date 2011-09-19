@@ -1,7 +1,6 @@
 package forge.gui.input;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;

@@ -12,7 +12,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
