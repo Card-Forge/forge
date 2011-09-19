@@ -1,8 +1,8 @@
 Name:Helix Pinnacle
 ManaCost:G
 Types:Enchantment
-# This cannot yet be converted to AF_WinsGame due to a limitation in how hasProperty determines the numeric value to compare Counters to
-Text:At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE100_TOWER | TriggerDescription$ At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
 K:Shroud
 A:AB$ PutCounter | Cost$ X | CounterType$ TOWER | CounterNum$ X | SpellDescription$ Put a tower counter on CARDNAME.
 SVar:X:Count$xPaid

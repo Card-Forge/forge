@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Warrior+Other+YouCtrl |TriggerZones$ Battlefield | Execute$ TrigPutCounter | Static$ True | TriggerDescription$ Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+countersGE1P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblewood_paragon.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/115.jpg

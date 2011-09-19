@@ -8,8 +8,8 @@ K:maxLevel:4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-3 4/2
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 7 | SetToughness$ 3 | AddAbility$ Regen | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 7/3 CARDNAME has "B: Regenerate CARDNAME."
 SVar:Regen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLE3LEVEL
-SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
+SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE3_LEVEL
+SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_champion.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/121.jpg

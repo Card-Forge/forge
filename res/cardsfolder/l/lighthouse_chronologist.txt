@@ -7,8 +7,8 @@ K:Level up:U
 K:maxLevel:7
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 4-6 2/4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 5 | AddKeyword$ At the beginning of each end step, if it's not your turn, take an extra turn after this one. | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
-SVar:X:Count$Valid Card.Self+countersGE4LEVEL+countersLE6LEVEL
-SVar:Y:Count$Valid Card.Self+countersGE7LEVEL
+SVar:X:Count$Valid Card.Self+counters_GE4_LEVEL+counters_LE6_LEVEL
+SVar:Y:Count$Valid Card.Self+counters_GE7_LEVEL
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lighthouse_chronologist.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/75.jpg

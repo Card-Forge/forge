@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter each other Shaman creature you control.
 SVar:TrigPutCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.Shaman+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
-T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+countersGE1P1P1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | TgtPrompt$ Select target player | NumDmg$ 1 | DamageSource$ TriggeredAttacker
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_forger.jpg

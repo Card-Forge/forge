@@ -9,8 +9,8 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 6 | Check
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 8 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 5+ 4/8 Other creatures you control get +2/+2.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ Y | SVarCompare$ EQ1
-SVar:X:Count$Valid Card.Self+countersGE2LEVEL+countersLT5LEVEL
-SVar:Y:Count$Valid Card.Self+countersGE5LEVEL
+SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LT5_LEVEL
+SVar:Y:Count$Valid Card.Self+counters_GE5_LEVEL
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_vindicator.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/28.jpg

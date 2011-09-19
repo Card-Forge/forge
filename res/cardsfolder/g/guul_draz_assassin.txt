@@ -9,8 +9,8 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddAb
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddAbility$ HighLvl | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 4/4 CARDNAME has B, tap: Target creature gets -4/-4 until end of turn.
 SVar:LowLvl:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 SVar:HighLvl:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
-SVar:X:Count$Valid Card.Self+countersGE2LEVEL+countersLT4LEVEL
-SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
+SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LT4_LEVEL
+SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_assassin.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/112.jpg

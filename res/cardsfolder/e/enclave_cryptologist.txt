@@ -10,8 +10,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Draw | CheckSVar$ Y | SVa
 SVar:Loot:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
-SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLT3LEVEL
-SVar:Y:Count$Valid Card.Self+countersGE3LEVEL
+SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT3_LEVEL
+SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_cryptologist.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/66.jpg

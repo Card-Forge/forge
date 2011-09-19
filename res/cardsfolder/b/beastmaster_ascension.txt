@@ -5,7 +5,7 @@ Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 5 | AddToughness$ 5 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME has seven or more quest counters on it, creatures you control get +5/+5.
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPut | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control attacks, you may put a quest counter on CARDNAME.
 SVar:TrigPut:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:X:Count$Valid Card.Self+countersGE7QUEST
+SVar:X:Count$Valid Card.Self+counters_GE7_QUEST
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg

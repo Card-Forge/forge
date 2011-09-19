@@ -8,8 +8,8 @@ A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep and whenever enchanted land becomes tapped, remove an ore counter from CARDNAME. If there are no ore counters on CARDNAME, destroy that land and CARDNAME deals 2 damage to its controller.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigRemoveCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep and whenever enchanted land becomes tapped, remove an ore counter from CARDNAME. If there are no ore counters on CARDNAME, destroy that land and CARDNAME deals 2 damage to its controller.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ ORE | CounterNum$ 1 | SubAbility$ DBDamage
-SVar:DBDamage:DB$DealDamage | Defined$ EnchantedController | NumDmg$ 2 | ConditionPresent$ Card.Self+countersLE0Ore | SubAbility$ DBDestroy | ConditionDescription$ If there are no ore counters on CARDNAME,
-SVar:DBDestroy:DB$Destroy | Defined$ Enchanted | ConditionPresent$ Card.Self+countersLE0Ore
+SVar:DBDamage:DB$DealDamage | Defined$ EnchantedController | NumDmg$ 2 | ConditionPresent$ Card.Self+counters_LE0_Ore | SubAbility$ DBDestroy | ConditionDescription$ If there are no ore counters on CARDNAME,
+SVar:DBDestroy:DB$Destroy | Defined$ Enchanted | ConditionPresent$ Card.Self+counters_LE0_Ore
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mine.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/98.jpg

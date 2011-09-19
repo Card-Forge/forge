@@ -5,7 +5,7 @@ Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME untaps during each other player's untap step. | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as there are four or more quest counters on CARDNAME, untap all creatures you control during each other player's untap step.
 T:Mode$ Taps | ValidCard$ Creature.YouCtrl | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control becomes tapped, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:X:Count$Valid Card.Self+countersGE4QUEST
+SVar:X:Count$Valid Card.Self+counters_GE4_QUEST
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_renewal.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/110.jpg

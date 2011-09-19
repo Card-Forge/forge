@@ -5,7 +5,7 @@ Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME has five or more quest counters on it, creatures you control get +2/+0.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin.YouCtrl | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Goblin enters the battlefield under your control, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:X:Count$Valid Card.Self+countersGE5QUEST
+SVar:X:Count$Valid Card.Self+counters_GE5_QUEST
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_goblin_lord.jpg

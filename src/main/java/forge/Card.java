@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -5108,17 +5109,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // TODO: get a working regex out of this pattern so the amount of digits doesn't matter
             int number = 0;
-            if (Property.substring(10, 11).equals("X"))
-                number = CardFactoryUtil.xCount(source, getSVar("X"));
-            else if (Property.substring(10, 11).equals("Y"))
-                number = CardFactoryUtil.xCount(source, getSVar("Y"));
-            else
-                number = Integer.parseInt(Property.substring(10, 11));
-
-            String type = Property.substring(11);
-            String comparator = Property.substring(8, 10); // comparator = EQ, LE, GE etc.
-            int actualnumber = getCounters(Counters.getType(type));
-
+            String[] splitProperty = Property.split("_");
+            String strNum = splitProperty[1].substring(2);
+            String comparator = splitProperty[1].substring(0,2);
+            String counterType = "";
+            try {
+                number = Integer.parseInt(strNum);
+            }
+            catch(NumberFormatException e) {
+                number = CardFactoryUtil.xCount(source, source.getSVar(strNum));
+            }
+            counterType = splitProperty[2];
+            
+            int actualnumber = getCounters(Counters.getType(counterType));
+            
             if (!AllZoneUtil.compare(actualnumber, comparator, number))
                 return false;
         } else if (Property.startsWith("attacking")) {

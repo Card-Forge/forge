@@ -117,7 +117,6 @@ public class Upkeep implements java.io.Serializable {
         //Win / Lose
         // Checks for can't win or can't lose happen in Player.altWinConditionMet()
 
-        upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
 
         upkeep_Karma();
@@ -2317,37 +2316,6 @@ public class Upkeep implements java.io.Serializable {
             }
         } // for
     } // upkeep_Power_Surge()
-
-    /**
-     * <p>upkeep_Helix_Pinnacle.</p>
-     */
-    private static void upkeep_Helix_Pinnacle() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield, "Helix Pinnacle");
-
-        for (final Card c : list) {
-            if (c.getCounters(Counters.TOWER) < 100) {
-                continue;
-            }
-
-            Ability ability = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    if (c.getCounters(Counters.TOWER) >= 100) {
-                        player.altWinBySpellEffect(c.getName());
-                    }
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Helix Pinnacle - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Helix_Pinnacle
 
     /**
      * <p>upkeep_Barren_Glory.</p>

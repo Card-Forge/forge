@@ -4,7 +4,7 @@ Types:Creature Dwarf
 Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ 1 R T | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType$ MINE | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a mine counter on target land.
-T:Mode$ Taps | ValidCard$ Land.countersGE1MINE  | Execute$ TrigDestroy | TriggerDescription$ Whenever a land with a mine counter on it becomes tapped, destroy it.
+T:Mode$ Taps | ValidCard$ Land.counters_GE1_MINE  | Execute$ TrigDestroy | TriggerDescription$ Whenever a land with a mine counter on it becomes tapped, destroy it.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME leaves the battlefield, remove all mine counters from all lands.
 SVar:TrigRemove:AB$ RemoveCounterAll | Cost$ 0 | ValidCards$ Land | CounterType$ MINE | AllCounters$ True

@@ -4,7 +4,7 @@ Types:Creature Vedalken Wizard Mutant
 Text:no text
 PT:0/0
 K:Graft 2
-A:AB$ Untap | Cost$ 1 U | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Untap target creature with a +1/+1 counter on it.
+A:AB$ Untap | Cost$ 1 U | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Untap target creature with a +1/+1 counter on it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_graftmage.jpg

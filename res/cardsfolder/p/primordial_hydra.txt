@@ -4,7 +4,7 @@ Types:Creature Hydra
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:X
-S:Mode$ Continuous | Affected$ Card.Self+countersGT9P1P1 | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has ten or more +1/+1 counters on it.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GT9_P1P1 | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has ten or more +1/+1 counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ At the beginning of your upkeep, double the number of +1/+1 counters on CARDNAME.
 SVar:TrigDoubleCounters:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ Double
 SVar:X:Count$xPaid

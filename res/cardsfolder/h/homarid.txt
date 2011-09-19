@@ -5,8 +5,8 @@ Text:Whenever there are four tide counters on CARDNAME, remove all tide counters
 PT:2/2
 K:etbCounter:TIDE:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
-S:Mode$ Continuous | Affected$ Card.Self+countersEQ1TIDE | AddPower$ -1 | AddToughness$ -1 | Description$ As long as there is exactly one tide counter on CARDNAME, it gets -1/-1.
-S:Mode$ Continuous | Affected$ Card.Self+countersEQ3TIDE | AddPower$ 1 | AddToughness$ 1 | Description$ As long as there are exactly three tide counters on CARDNAME, it gets +1/+1.
+S:Mode$ Continuous | Affected$ Card.Self+counters_EQ1_TIDE | AddPower$ -1 | AddToughness$ -1 | Description$ As long as there is exactly one tide counter on CARDNAME, it gets -1/-1.
+S:Mode$ Continuous | Affected$ Card.Self+counters_EQ3_TIDE | AddPower$ 1 | AddToughness$ 1 | Description$ As long as there are exactly three tide counters on CARDNAME, it gets +1/+1.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg

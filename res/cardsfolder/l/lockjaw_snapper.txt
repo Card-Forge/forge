@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Wither
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a -1/-1 counter on each creature with a -1/-1 counter on it.
-SVar:TrigPutCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.countersGE1M1M1 | CounterType$ M1M1 | CounterNum$ 1
+SVar:TrigPutCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.counters_GE1_M1M1 | CounterType$ M1M1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/255.jpg
