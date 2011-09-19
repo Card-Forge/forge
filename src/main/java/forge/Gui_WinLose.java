@@ -6,7 +6,6 @@ import forge.game.GameFormat;
 import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
-import forge.game.PlayerIndex;
 import forge.gui.CardListViewer;
 import forge.gui.ListChooser;
 import forge.item.CardPrinted;
@@ -113,13 +112,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         restartButton.setEnabled(!isQuestMode); // For quest always disabled, otherwise always on
 
         //show Wins and Loses
-        int humanWins = model.match.getGamesCountWonByHuman();
-        int humanLosses = model.match.getGamesCountLostByHuman();
+        Player human = AllZone.getHumanPlayer();
+        int humanWins = model.match.countGamesWonBy(human.getName());
+        int humanLosses = model.match.getGamesPlayedCount() - humanWins;
         statsLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WON) + humanWins
                 + ForgeProps.getLocalized(WINLOSE_TEXT.LOST) + humanLosses);
 
         //show "You Won" or "You Lost"
-        if (model.match.hasHumanWonLastGame()) {
+        if (model.match.hasWonLastGame(human.getName())) {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WIN));
         } else {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.LOSE));
@@ -244,15 +244,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         StringBuilder sb = new StringBuilder("<html>");
 
         boolean hasNeverLost = true;
+        Player computer = AllZone.getComputerPlayer();
         for (GameSummary game : matchState.getGamesPlayed()) {
 
-            if (game.isAIWinner()) {
-                hasNeverLost = true;
+            if (game.isWinner(computer.getName())) {
+                hasNeverLost = false;
                 continue; // no rewards for losing a game
             }
 
-            GamePlayerRating aiRating = game.getPlayerRating(PlayerIndex.AI);
-            GamePlayerRating humanRating = game.getPlayerRating(PlayerIndex.HUMAN);
+            GamePlayerRating aiRating = game.getPlayerRating(computer.getName());
+            GamePlayerRating humanRating = game.getPlayerRating(AllZone.getHumanPlayer().getName());
             GameLossReason whyAiLost = aiRating.getLossReason();
 
             int rewardAltWinCondition = q.getRewards().getCreditsRewardForAltWin(whyAiLost);
@@ -344,7 +345,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         } else { //Quest
 
             boolean wonMatch = false;
-            if (model.match.isMatchWonByHuman()) {
+            if (model.match.isMatchWonBy(AllZone.getHumanPlayer().getName())) {
                 model.quest.addWin();
                 wonMatch = true;
             } else {

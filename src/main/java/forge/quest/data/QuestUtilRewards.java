@@ -1,10 +1,11 @@
 package forge.quest.data;
 
+import forge.AllZone;
 import forge.MyRandom;
+import forge.Player;
 import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
-import forge.game.PlayerIndex;
 
 /** 
  * Helper class to deal with rewards given in quest.
@@ -47,14 +48,16 @@ public class QuestUtilRewards {
                 + (QuestPreferences.getMatchRewardTotalWins() * q.getWin()));
     
         boolean hasNeverLost = true;
+        Player computer = AllZone.getComputerPlayer();
         for (GameSummary game : matchState.getGamesPlayed()) {
-            if (game.isAIWinner()) {
-                hasNeverLost = true;
+
+            if (game.isWinner(computer.getName())) {
+                hasNeverLost = false;
                 continue; // no rewards for losing a game
             }
-    
-            GamePlayerRating aiRating = game.getPlayerRating(PlayerIndex.AI);
-            GamePlayerRating humanRating = game.getPlayerRating(PlayerIndex.HUMAN);
+
+            GamePlayerRating aiRating = game.getPlayerRating(computer.getName());
+            GamePlayerRating humanRating = game.getPlayerRating(AllZone.getHumanPlayer().getName());
             GameLossReason whyAiLost = aiRating.getLossReason();
     
             creds += getCreditsRewardForAltWin(whyAiLost);

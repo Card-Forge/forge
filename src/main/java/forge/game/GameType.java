@@ -7,6 +7,7 @@ public enum GameType {
     Constructed(false),
     Sealed(true),
     Draft(true),
+    Commander(false),
     Quest(true);
 
     private final boolean bLimited;

@@ -22,7 +22,6 @@ import forge.deck.Deck;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
 import forge.game.GameType;
-import forge.game.PlayerIndex;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_Mulligan;
 import forge.gui.input.Input_PayManaCost;
@@ -598,9 +597,9 @@ public class GameAction {
             humanWins = true;
 
             if (human.getAltWin()) {
-                game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.HUMAN, human.getWinConditionSource());
+                game.end(GameEndReason.WinsGameSpellEffect, human.getName(), human.getWinConditionSource());
             } else {
-                game.end(GameEndReason.AllOpponentsLost, PlayerIndex.HUMAN, null);
+                game.end(GameEndReason.AllOpponentsLost, human.getName(), null);
             }
         }
 
@@ -608,14 +607,14 @@ public class GameAction {
         if (computer.hasWon() || human.hasLost()) {
             if (humanWins) {
                 // both players won/lost at the same time.
-                game.end(GameEndReason.Draw, PlayerIndex.DRAW, null);
+                game.end(GameEndReason.Draw, null, null);
             } else {
                 computerWins = true;
 
                 if (computer.getAltWin()) {
-                    game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.AI, computer.getWinConditionSource());
+                    game.end(GameEndReason.WinsGameSpellEffect, computer.getName(), computer.getWinConditionSource());
                 } else {
-                    game.end(GameEndReason.AllOpponentsLost, PlayerIndex.AI, null);
+                    game.end(GameEndReason.AllOpponentsLost, computer.getName(), null);
                 }
 
             }
@@ -623,8 +622,8 @@ public class GameAction {
 
         boolean isGameDone = humanWins || computerWins;
         if (isGameDone) {
-            game.getPlayerRating(PlayerIndex.AI).setLossReason(computer.getLossState(), computer.getLossConditionSource());
-            game.getPlayerRating(PlayerIndex.HUMAN).setLossReason(human.getLossState(), human.getLossConditionSource());
+            game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(), computer.getLossConditionSource());
+            game.getPlayerRating(human.getName()).setLossReason(human.getLossState(), human.getLossConditionSource());
             AllZone.getMatchState().addGamePlayed(game);
         }
 
@@ -1245,7 +1244,7 @@ public class GameAction {
             } else {
                 seeWhoPlaysFirst_CoinToss();
             }
-        } else if (AllZone.getMatchState().hasHumanWonLastGame()) {
+        } else if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
             computerStartsGame();
         }
@@ -1517,8 +1516,9 @@ public class GameAction {
      * <p>computerStartsGame.</p>
      */
     public final void computerStartsGame() {
-        AllZone.getPhase().setPlayerTurn(AllZone.getComputerPlayer());
-        AllZone.getGameInfo().setPlayerWhoGotFirstTurn(PlayerIndex.AI);
+        Player computer = AllZone.getComputerPlayer();
+        AllZone.getPhase().setPlayerTurn(computer);
+        AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
 
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something

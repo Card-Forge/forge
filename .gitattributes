@@ -9761,7 +9761,6 @@ src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/GameType.java -text
-src/main/java/forge/game/PlayerIndex.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraft_1.java svneol=native#text/plain

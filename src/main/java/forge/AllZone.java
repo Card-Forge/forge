@@ -55,9 +55,6 @@ public final class AllZone implements NewConstants {
     /** Constant <code>inputControl</code>. */
     private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
 
-    /** Game state observer <code>gameInfo</code> collects statistics and players' performance. */
-    private static GameSummary gameInfo = new GameSummary();
-
     /** 
      * Match State for challenges are stored in a <code>QuestMatchState</code> class instance.
      */
@@ -301,7 +298,7 @@ public final class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static GameSummary getGameInfo() {
-        return gameInfo;
+        return Singletons.getModel().getGameState().getGameInfo();
     }
 
     /**
@@ -439,26 +436,15 @@ public final class AllZone implements NewConstants {
      */
     public static void newGameCleanup() {
 
-        gameInfo = new GameSummary();
-
-        getHumanPlayer().reset();
-        getComputerPlayer().reset();
-
-        getPhase().reset();
-        getStack().reset();
-        getCombat().reset();
+        Singletons.getModel().getGameState().newGameCleanup();
+       
+        
         getDisplay().showCombat("");
         getDisplay().loadPrefs();
 
-        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
-            for(Zone z : Player.ALL_ZONES) {
-                p.getZone(z).reset();
-            }
-        }
 
         getInputControl().clearInput();
 
-        getStaticEffects().reset();
         getColorChanger().reset();
 
         // player.reset() now handles this

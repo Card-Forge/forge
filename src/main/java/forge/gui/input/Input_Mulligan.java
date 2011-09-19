@@ -16,7 +16,6 @@ import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
-import forge.game.PlayerIndex;
 import forge.quest.data.QuestData;
 
 /**
@@ -68,9 +67,9 @@ public class Input_Mulligan extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(PlayerIndex.HUMAN);
         Player humanPlayer = AllZone.getHumanPlayer();
-
+        GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(humanPlayer.getName());
+        
         int newHand = doMulligan(humanPlayer, humanRating);
 
         QuestData quest = AllZone.getQuestData();
@@ -90,7 +89,7 @@ public class Input_Mulligan extends Input {
     final void end() {
         //Computer mulligan
         Player aiPlayer = AllZone.getComputerPlayer();
-        GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(PlayerIndex.AI);
+        GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(aiPlayer.getName());
         boolean aiTakesMulligan = true;
 
         //Computer mulligans if there are no cards with converted mana cost of 0 in its hand

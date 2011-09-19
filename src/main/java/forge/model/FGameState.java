@@ -14,14 +14,19 @@ import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
 import forge.Upkeep;
+import forge.Constant.Zone;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameSummary;
 
 /**
  * Represents the Forge Game State.
  */
 public class FGameState {
-    private Player humanPlayer = new HumanPlayer("Human");
-    private Player computerPlayer = new AIPlayer("Computer");
+    public static final String HUMAN_PLAYER_NAME = "Human";
+    public static final String AI_PLAYER_NAME = "Computer";
+    
+    private Player humanPlayer = new HumanPlayer(HUMAN_PLAYER_NAME);
+    private Player computerPlayer = new AIPlayer(AI_PLAYER_NAME);
     private EndOfTurn endOfTurn = new EndOfTurn();
     private EndOfCombat endOfCombat = new EndOfCombat();
     private Upkeep upkeep = new Upkeep();
@@ -36,6 +41,7 @@ public class FGameState {
     private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
     private long timestamp = 0;
+    private GameSummary gameInfo;
 
     /**
      * Constructor.
@@ -262,6 +268,34 @@ public class FGameState {
      */
     protected final void setTimestamp(final long timestamp0) {
         this.timestamp = timestamp0;
+    }
+
+
+    public GameSummary getGameInfo() {
+        return gameInfo;
+    }
+
+
+    /**
+     * Call this each time you start a new game, ok?
+     */
+    public void newGameCleanup() {
+        gameInfo = new GameSummary(humanPlayer.getName(), computerPlayer.getName());
+
+        getHumanPlayer().reset();
+        getComputerPlayer().reset();
+
+        getPhase().reset();
+        getStack().reset();
+        getCombat().reset();
+
+        for (Player p : getPlayers()) {
+            for(Zone z : Player.ALL_ZONES) {
+                p.getZone(z).reset();
+            }
+        }
+        
+        getStaticEffects().reset();
     }
 
 }

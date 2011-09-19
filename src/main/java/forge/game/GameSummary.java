@@ -1,5 +1,8 @@
 package forge.game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * <p>GameInfo class.</p>
@@ -8,49 +11,44 @@ package forge.game;
  * @version $Id$
  */
 
-// This should be divided into two: the very summary (immutable with only getters) and
+// This class might be divided in two parts: the very summary (immutable with only getters) and
 // GameObserver class - who should be notified of any considerable ingame event
-public class GameSummary {
-    protected int playerWinner = PlayerIndex.UNDEFINED;
-    protected int playerGotFirstTurn = PlayerIndex.UNDEFINED;
+public final class GameSummary {
+    protected String playerWinner = "Nobody";
+    protected String playerGotFirstTurn = "Nobody";
     protected int lastTurnNumber = 0;
     
     protected GameEndReason winCondition;
     protected String spellEffectWin;
-    protected GamePlayerRating playerRating[] = new GamePlayerRating[2/*players*/];
+    protected final Map<String, GamePlayerRating> playerRating = new HashMap<String, GamePlayerRating>();
 
-    public GameSummary()
+    public GameSummary(String... names)
     {
-        playerRating[PlayerIndex.AI] = new GamePlayerRating();
-        playerRating[PlayerIndex.HUMAN] = new GamePlayerRating();
+        for (String n : names) { 
+            playerRating.put(n, new GamePlayerRating());
+        }
     }
     
-    public final void end( final GameEndReason condition, int iPlayerWinner, String spellEffectWin )
+    public final void end( final GameEndReason condition, String winner, String spellEffect )
     {
         winCondition = condition;
-        playerWinner = iPlayerWinner;
-        this.spellEffectWin = spellEffectWin;
+        playerWinner = winner;
+        spellEffectWin = spellEffect;
     }
-
-    public final boolean isHumanWinner() { return PlayerIndex.HUMAN == playerWinner; }
-    public final boolean isAIWinner() { return PlayerIndex.AI == playerWinner; }
-    public final boolean isDraw() { return PlayerIndex.DRAW == playerWinner; }
+    public final boolean isDraw() { return null == playerWinner; }
+    public final boolean isWinner(String name) { return name != null && name.equals(playerWinner); }
+    public String getWinner() { return playerWinner; }
 
     public GameEndReason getWinCondition() { return winCondition; }
-    public GamePlayerRating getPlayerRating(int iPlayer) {
-        if (iPlayer >= 0 && iPlayer < playerRating.length) {
-            return playerRating[iPlayer];
-        }
-        return null;
-    }
+    public GamePlayerRating getPlayerRating(String name) { return playerRating.get(name); }
 
     public int getTurnGameEnded() {
         return lastTurnNumber;
     }
     
-    public final void setPlayerWhoGotFirstTurn(int iPlayer)
+    public final void setPlayerWhoGotFirstTurn(String playerName)
     {
-        playerGotFirstTurn = iPlayer;
+        playerGotFirstTurn = playerName;
     }
 
     public void notifyNextTurn() {

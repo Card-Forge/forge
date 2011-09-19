@@ -1,7 +1,9 @@
 package forge.quest.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.game.GameSummary;
 
@@ -33,43 +35,41 @@ public class QuestMatchState {
         return gamesPlayed.size();
     }
 
-    public final boolean hasHumanWonLastGame() {
+    public final boolean hasWonLastGame(String playerName) {
         int iLastGame = gamesPlayed.size() - 1;
-        return iLastGame >= 0 ? gamesPlayed.get(iLastGame).isHumanWinner() : false;
+        return iLastGame >= 0 ? gamesPlayed.get(iLastGame).isWinner(playerName) : false;
     }
 
     public final boolean isMatchOver() {
-        int winsHuman = 0;
-        int winsAI = 0;
         int totalGames = 0;
 
+        Map<String, Integer> winsCount = new HashMap<String, Integer>();
         for (GameSummary game : gamesPlayed) {
-            if (game.isAIWinner()) { winsAI++; }
-            if (game.isHumanWinner()) { winsHuman++; }
+            String winner = game.getWinner();
+            Integer boxedWins = winsCount.get(winner);
+            int wins = boxedWins == null ? 0 : boxedWins.intValue();
+            winsCount.put(winner, wins + 1);
             totalGames++;
         }
-
-        return winsAI >= MIN_GAMES_TO_WIN_MATCH || winsHuman >= MIN_GAMES_TO_WIN_MATCH || totalGames >= GAMES_PER_MATCH;
-    }
-
-    public final int getGamesCountWonByHuman() {
-        int winsHuman = 0;
-        for (GameSummary game : gamesPlayed) {
-            if (game.isHumanWinner()) { winsHuman++; }
+        
+        int maxWins = 0; 
+        for (Integer win : winsCount.values()) {
+            maxWins = Math.max(maxWins, win);
         }
-        return winsHuman;
+
+        return maxWins >= MIN_GAMES_TO_WIN_MATCH || totalGames >= GAMES_PER_MATCH;
     }
 
-    public final int getGamesCountLostByHuman() {
-        int lossHuman = 0;
+    public final int countGamesWonBy(String name) {
+        int wins = 0;
         for (GameSummary game : gamesPlayed) {
-            if (!game.isHumanWinner()) { lossHuman++; }
+            if (game.isWinner(name)) { wins++; }
         }
-        return lossHuman;
+        return wins;
     }
 
-    public final boolean isMatchWonByHuman() {
-        return getGamesCountWonByHuman() >= MIN_GAMES_TO_WIN_MATCH;
+    public final boolean isMatchWonBy(String name) {
+        return countGamesWonBy(name) >= MIN_GAMES_TO_WIN_MATCH;
     }
 
     public final void reset() {
