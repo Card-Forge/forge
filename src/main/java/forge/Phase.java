@@ -320,7 +320,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
                     AllZone.getPhase().setNeedToNextPhase(true);
 
                 else {
-                    if (!AllZone.getPhase().isPreventCombatDamageThisTurn())
+                    if (!isPreventCombatDamageThisTurn())
                         Combat.dealAssignedDamage();
 
                     AllZone.getGameAction().checkStateEffects();
@@ -335,7 +335,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
 
                 AllZone.getCombat().setAssignedDamage();
 
-                if (!AllZone.getPhase().isPreventCombatDamageThisTurn())
+                if (!isPreventCombatDamageThisTurn())
                     Combat.dealAssignedDamage();
 
                 AllZone.getGameAction().checkStateEffects();
