@@ -114,10 +114,6 @@ public class Upkeep implements java.io.Serializable {
 
         // upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 
-        //Win / Lose
-        // Checks for can't win or can't lose happen in Player.altWinConditionMet()
-
-        upkeep_Barren_Glory();
 
         upkeep_Karma();
         upkeep_Oath_of_Druids();
@@ -2316,48 +2312,6 @@ public class Upkeep implements java.io.Serializable {
             }
         } // for
     } // upkeep_Power_Surge()
-
-    /**
-     * <p>upkeep_Barren_Glory.</p>
-     */
-    private static void upkeep_Barren_Glory() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-        PlayerZone handZone = player.getZone(Constant.Zone.Hand);
-
-        CardList list = player.getCardsIn(Zone.Battlefield);
-        CardList playList = player.getCardsIn(Zone.Battlefield);
-        playList = playList.filter(new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return !c.getName().equals("Mana Pool");
-            }
-        });
-
-        list = list.getName("Barren Glory");
-
-        if (playList.size() == 1 && list.size() == 1 && handZone.size() == 0) {
-            final Card source = list.get(0);
-            Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    CardList handList = player.getCardsIn(Constant.Zone.Hand);
-                    CardList playList = player.getCardsIn(Constant.Zone.Battlefield);
-                    playList = playList.getValidCards("Permanents".split(","), source.getController(), source);
-                    playList.remove(source);
-
-                    if (playList.size() == 0 && handList.size() == 0) {
-                        player.altWinBySpellEffect(source.getName());
-                    }
-                }
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Barren Glory - ").append(player).append(" wins the game");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // if
-    } // upkeep_Barren_Glory
 
     /**
      * <p>upkeep_Shapeshifter.</p>
