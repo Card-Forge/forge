@@ -1515,6 +1515,13 @@ public class AbilityFactory {
             if (!players.contains(p)) {
                 players.add(p);
             }
+        } else if (defined.equals("EnchantedPlayer")) {
+            Object o = sa.getSourceCard().getEnchanting();
+            if (o instanceof Player) {
+                if (!players.contains((Player) o)) {
+                    players.add((Player) o);
+                }            
+            }
         } else if (defined.equals("AttackingPlayer")) {
             Player p = AllZone.getCombat().getAttackingPlayer();
             if (!players.contains(p)) {

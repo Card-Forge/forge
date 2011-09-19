@@ -466,6 +466,9 @@ public abstract class Trigger {
                 if (v.equalsIgnoreCase("EnchantedController")) {
                     return ((Player) o).isPlayer(srcCard.getEnchantingCard().getController());
                 }
+                if (v.equalsIgnoreCase("EnchantedPlayer")) {
+                    return o.equals(srcCard.getEnchanting());
+                }
             }
         }
 
