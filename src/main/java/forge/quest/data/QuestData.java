@@ -69,7 +69,7 @@ public final class QuestData {
     ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class);  // cards acquired since last game-win/loss
 
     // Challenge history
-    int challengesPlayed = -1;
+    int challengesPlayed = 0;
     List<Integer> availableChallenges = new ArrayList<Integer>();
     List<Integer> completedChallenges = new ArrayList<Integer>();
     
