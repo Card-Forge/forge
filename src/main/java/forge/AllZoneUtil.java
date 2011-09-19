@@ -79,6 +79,11 @@ public final class AllZoneUtil {
     public static CardList getCardsIn(final List<Constant.Zone> zones) {
         CardList cards = new CardList();
         for (Zone z: zones) {
+            if ( z == Zone.Stack) {
+                cards.addAll(AllZone.getStackZone().getCards());
+                continue;
+            }
+
             for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                 cards.addAll(p.getZone(z).getCards());    
             }            
