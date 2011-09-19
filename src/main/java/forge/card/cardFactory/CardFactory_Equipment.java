@@ -185,7 +185,7 @@ class CardFactory_Equipment {
                 //not changed
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
+                    return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(card.getController())
                             && super.canPlay();
                 }

@@ -61,10 +61,8 @@ public final class AllZone implements NewConstants {
 
     /** 
      * Match State for challenges are stored in a <code>QuestMatchState</code> class instance.
-     * 
-     * @deprecated Variable 'matchState' must be private and have accessor methods.
      */
-    public static QuestMatchState matchState = new QuestMatchState();
+    private static QuestMatchState matchState = new QuestMatchState();
 
     //initialized at Runtime since it has to be the last object constructed
 
@@ -424,7 +422,7 @@ public final class AllZone implements NewConstants {
      * @param c a {@link forge.Card} object.
      * @return a {@link forge.PlayerZone} object.
      */
-    public static PlayerZone getZone(final Card c) {
+    public static PlayerZone getZoneOf(final Card c) {
         final FGameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) { return null; }
 

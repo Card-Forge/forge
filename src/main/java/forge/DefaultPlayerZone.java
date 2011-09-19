@@ -48,8 +48,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
         if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
-            if (AllZone.getZone(c) != null) {
-                cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneType());
+            if (AllZone.getZoneOf(c) != null) {
+                cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
             } else {
                 cardsAddedThisTurnSource.add(null);
             }
@@ -119,8 +119,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
         if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
-            if (AllZone.getZone(c) != null) {
-                cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneType());
+            if (AllZone.getZoneOf(c) != null) {
+                cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
             } else {
                 cardsAddedThisTurnSource.add(null);
             }
@@ -150,8 +150,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
         if (!c.isImmutable()) {
             cardsAddedThisTurn.add(c);
-            if (AllZone.getZone(c) != null) {
-                cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneType());
+            if (AllZone.getZoneOf(c) != null) {
+                cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
             } else {
                 cardsAddedThisTurnSource.add(null);
             }

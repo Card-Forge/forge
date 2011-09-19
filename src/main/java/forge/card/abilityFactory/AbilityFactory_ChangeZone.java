@@ -1496,7 +1496,7 @@ public final class AbilityFactory_ChangeZone {
 
         if (tgtCards.size() != 0) {
             for (Card tgtC : tgtCards) {
-                PlayerZone originZone = AllZone.getZone(tgtC);
+                PlayerZone originZone = AllZone.getZoneOf(tgtC);
                 // if Target isn't in the expected Zone, continue
                 if (originZone == null || !originZone.is(origin)) {
                     continue;

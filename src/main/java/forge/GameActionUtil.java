@@ -2366,7 +2366,7 @@ public final class GameActionUtil {
         for (int i = 0; i < all.size(); i++) {
             Card c = all.get(i);
             if (c.getName().equals(cardName) && !c.isFaceDown()) {
-                zone.add(AllZone.getZone(c));
+                zone.add(AllZone.getZoneOf(c));
             }
         }
 

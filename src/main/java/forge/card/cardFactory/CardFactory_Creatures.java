@@ -357,7 +357,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
                     int reqHand = 1;
-                    if (AllZone.getZone(card).is(Constant.Zone.Hand))
+                    if (AllZone.getZoneOf(card).is(Constant.Zone.Hand))
                         reqHand++;
 
                     // Don't play if it would sacrifice as soon as it comes into play
@@ -509,7 +509,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
                     Object o = getArt.execute();
-                    return (o != null) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                    return (o != null) && AllZone.getZoneOf(getSourceCard()).is(Constant.Zone.Hand);
                 }
             });
             card.addComesIntoPlayCommand(intoPlay);
@@ -811,7 +811,7 @@ public class CardFactory_Creatures {
             		AllZone.getStack().addSimultaneousStackEntry(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to the battlefield") {
             			@Override
             			public void resolve() {
-            				PlayerZone grave = AllZone.getZone(target[0]);
+            				PlayerZone grave = AllZone.getZoneOf(target[0]);
             				//checks to see if card is still in the graveyard
 
             				if (grave != null && AllZoneUtil.isCardInZone(grave, target[0])) {
@@ -2779,7 +2779,7 @@ public class CardFactory_Creatures {
                     AllZone.getTriggerHandler().removeAllFromCard(cloned[0]);
 
                     Card orig = cfact.getCard(card.getName(), card.getController());
-                    PlayerZone dest = AllZone.getZone(card.getCurrentlyCloningCard());
+                    PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
                     AllZone.getGameAction().moveTo(dest, orig);
                     dest.remove(card.getCurrentlyCloningCard());
 
@@ -3064,7 +3064,7 @@ public class CardFactory_Creatures {
             final SpellAbility awaken = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if (!AllZone.getZone(card).is(Zone.Battlefield) || getTarget().getTargetCards().size() == 0)
+                    if (!AllZone.getZoneOf(card).is(Zone.Battlefield) || getTarget().getTargetCards().size() == 0)
                         return;
                     final Card c = getTarget().getTargetCards().get(0);
                     String[] types = {"Creature", "Treefolk"};

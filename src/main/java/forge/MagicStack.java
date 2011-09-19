@@ -135,7 +135,7 @@ public class MagicStack extends MyObservable {
         // if the ability is a spell, but not a copied spell and its not already on the stack zone, move there
         if (ability.isSpell()) {
             Card source = ability.getSourceCard();
-            if (!source.isCopiedSpell() && !AllZone.getZone(source).is(Constant.Zone.Stack)) {
+            if (!source.isCopiedSpell() && !AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
                 AllZone.getGameAction().moveToStack(source);
             }
         }
@@ -859,7 +859,7 @@ public class MagicStack extends MyObservable {
 
         // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
-                 && AllZone.getZone(source).is(Constant.Zone.Stack))
+                 && AllZone.getZoneOf(source).is(Constant.Zone.Stack))
         {
             if (source.getReplaceMoveToGraveyard().size() == 0) {
                 AllZone.getGameAction().moveToGraveyard(source);

@@ -801,7 +801,7 @@ public class Upkeep implements java.io.Serializable {
                         private static final long serialVersionUID = 4820011440853920644L;
 
                         public void resolve() {
-                            if (AllZone.getZone(c).is(Constant.Zone.Battlefield)) {
+                            if (AllZone.getZoneOf(c).is(Constant.Zone.Battlefield)) {
                                 StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(), Command.Blank, Command.Blank);
@@ -2599,7 +2599,7 @@ public class Upkeep implements java.io.Serializable {
                                 c.setCloneOrigin(null);
 
                                 //5
-                                PlayerZone play = AllZone.getZone(c);
+                                PlayerZone play = AllZone.getZoneOf(c);
                                 play.remove(c);
 
                                 play.add(newCopy);

@@ -2090,7 +2090,7 @@ public class CombatUtil {
                             Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments, attacker, false);
                         }
                         if (Enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
-                            GameAction.changeZone(AllZone.getZone(Enchantment), 
+                            GameAction.changeZone(AllZone.getZoneOf(Enchantment), 
                                     Enchantment.getOwner().getZone(Constant.Zone.Battlefield), Enchantment);
                             Enchantment.enchantEntity(attacker);
                         }

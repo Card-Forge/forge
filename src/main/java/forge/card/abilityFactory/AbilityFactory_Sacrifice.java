@@ -352,13 +352,13 @@ public class AbilityFactory_Sacrifice {
         msg = "Sacrifice a " + msg;
 
         if (valid.equals("Self")) {
-            if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield))
+            if (AllZone.getZoneOf(sa.getSourceCard()).is(Constant.Zone.Battlefield))
                 AllZone.getGameAction().sacrifice(sa.getSourceCard());
         }
         //TODO - maybe this can be done smarter...
         else if (valid.equals("Card.AttachedBy")) {
             Card toSac = sa.getSourceCard().getEnchantingCard();
-            if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
+            if (AllZone.getZoneOf(sa.getSourceCard()).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
                 AllZone.getGameAction().sacrifice(toSac);
             }
         } else if (valid.equals("TriggeredCard")) {

@@ -74,7 +74,7 @@ public class SpellAbility_Requirements {
             if (!ability.getSourceCard().isCopiedSpell()) {
                 Card c = ability.getSourceCard();
 
-                fromZone = AllZone.getZone(c);
+                fromZone = AllZone.getZoneOf(c);
                 AllZone.getGameAction().moveToStack(c);
             }
         }

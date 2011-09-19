@@ -223,7 +223,7 @@ public class AbilityFactory_Counters {
                 return false;
             }
         } else {    // "put counter on this"
-            PlayerZone pZone = AllZone.getZone(source);
+            PlayerZone pZone = AllZone.getZoneOf(source);
             // Don't activate Curse abilities on my cards and non-curse abilites on my opponents
             if (!pZone.getPlayer().equals(player)) {
                 return false;
@@ -590,7 +590,7 @@ public class AbilityFactory_Counters {
 
         for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
-                if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield)) {
+                if (AllZone.getZoneOf(tgtCard).is(Constant.Zone.Battlefield)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
                 }
                 else {
@@ -918,7 +918,7 @@ public class AbilityFactory_Counters {
 
         for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
-                PlayerZone zone = AllZone.getZone(tgtCard);
+                PlayerZone zone = AllZone.getZoneOf(tgtCard);
 
                 if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
                     if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
@@ -1533,7 +1533,7 @@ public class AbilityFactory_Counters {
         }
 
         for (Card tgtCard : cards) {
-            if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield)) {
+            if (AllZone.getZoneOf(tgtCard).is(Constant.Zone.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
             }
             else {

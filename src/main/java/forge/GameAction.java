@@ -174,7 +174,7 @@ public class GameAction {
     public final Card moveTo(final PlayerZone zone, Card c) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
-        PlayerZone prev = AllZone.getZone(c);
+        PlayerZone prev = AllZone.getZoneOf(c);
         //String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
@@ -251,7 +251,7 @@ public class GameAction {
      */
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
-        PlayerZone oldBattlefield = AllZone.getZone(c);
+        PlayerZone oldBattlefield = AllZone.getZoneOf(c);
         PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
         if (oldBattlefield == null || newBattlefield == null) {
@@ -292,7 +292,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToGraveyard(Card c) {
-        final PlayerZone origZone = AllZone.getZone(c);
+        final PlayerZone origZone = AllZone.getZoneOf(c);
         final PlayerZone grave = c.getOwner().getZone(Constant.Zone.Graveyard);
 
         if (AllZoneUtil.isCardInPlay("Leyline of the Void", c.getOwner().getOpponent())) {
@@ -444,7 +444,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToLibrary(Card c, int libPosition) {
-        PlayerZone p = AllZone.getZone(c);
+        PlayerZone p = AllZone.getZoneOf(c);
         PlayerZone library = c.getOwner().getZone(Constant.Zone.Library);
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
@@ -1009,7 +1009,7 @@ public class GameAction {
 
                 @Override
                 public void resolve() {
-                    if (AllZone.getZone(persistCard).is(Constant.Zone.Graveyard)) {
+                    if (AllZone.getZoneOf(persistCard).is(Constant.Zone.Graveyard)) {
                         PlayerZone ownerPlay = persistCard.getOwner().getZone(Constant.Zone.Battlefield);
                         Card card = moveTo(ownerPlay, persistCard);
                         card.addCounter(Counters.M1M1, 1);
@@ -1557,7 +1557,7 @@ public class GameAction {
         Player human = AllZone.getHumanPlayer();
 
         if (c.isLand() && human.canPlayLand()) {
-        	PlayerZone zone = AllZone.getZone(c);
+        	PlayerZone zone = AllZone.getZoneOf(c);
 
         	if (zone.is(Constant.Zone.Hand)
         	        || (!zone.is(Constant.Zone.Battlefield)) && c.hasKeyword("May be played"))

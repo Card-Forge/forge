@@ -240,7 +240,7 @@ public class Spell_Permanent extends Spell {
             if (o == null) return false;
 
             CardList cl = (CardList) championGetCreature.execute();
-            if ((o == null) || !(cl.size() > 0) || !AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand))
+            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(getSourceCard()).is(Constant.Zone.Hand))
                 return false;
         }
 

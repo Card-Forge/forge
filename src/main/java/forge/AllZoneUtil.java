@@ -282,7 +282,7 @@ public final class AllZoneUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getCardState(final Card card) {
-        PlayerZone zone = AllZone.getZone(card);
+        PlayerZone zone = AllZone.getZoneOf(card);
         //for tokens
         if (zone == null) {
             return null;

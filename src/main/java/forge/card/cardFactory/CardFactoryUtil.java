@@ -1384,7 +1384,7 @@ public class CardFactoryUtil {
             // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return AllZone.getZone(sourceCard).is(Constant.Zone.Battlefield) && !sourceCard.isCreature()
+                return AllZone.getZoneOf(sourceCard).is(Constant.Zone.Battlefield) && !sourceCard.isCreature()
                         && Phase.canCastSorcery(sourceCard.getController());
             }
 
@@ -2315,7 +2315,7 @@ public class CardFactoryUtil {
      */
     public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
 
-        if (AllZone.getZone(target) == null) {
+        if (AllZone.getZoneOf(target) == null) {
             return false; // for tokens that disappeared
         }
 
@@ -2332,13 +2332,13 @@ public class CardFactoryUtil {
 
             // Check if the target is in the zone it needs to be in to be
             // targeted
-            if (!AllZone.getZone(target).is(tgt.getZone())) {
+            if (!AllZone.getZoneOf(target).is(tgt.getZone())) {
                 return false;
             }
         } else {
             // If an Aura's target is removed before it resolves, the Aura
             // fizzles
-            if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Battlefield)) {
+            if (source.isAura() && !AllZone.getZoneOf(target).is(Constant.Zone.Battlefield)) {
                 return false;
             }
         }
@@ -2395,7 +2395,7 @@ public class CardFactoryUtil {
             return false;
         }
 
-        PlayerZone zone = AllZone.getZone(target);
+        PlayerZone zone = AllZone.getZoneOf(target);
         // if zone is null, it means its on the stack
         if (zone == null || !zone.is(Constant.Zone.Battlefield)) {
             // targets not in play, can normally be targeted
@@ -2648,7 +2648,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean activateFromExternalZones(final Card c, final Player player) {
-        PlayerZone zone = AllZone.getZone(c);
+        PlayerZone zone = AllZone.getZoneOf(c);
         if (zone.is(Constant.Zone.Graveyard)) {
             if (c.hasFlashback() || c.hasUnearth()) {
                 return true;
@@ -2661,7 +2661,7 @@ public class CardFactoryUtil {
         }
 
         for (SpellAbility sa : c.getSpellAbility()) {
-            if (AllZone.getZone(c).is(sa.getRestrictions().getZone())) {
+            if (AllZone.getZoneOf(c).is(sa.getRestrictions().getZone())) {
                 return true;
             }
 

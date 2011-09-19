@@ -507,7 +507,7 @@ class CardFactory_Auras {
                     }
 
                     Card animated = targetC[0];
-                    PlayerZone grave = AllZone.getZone(animated);
+                    PlayerZone grave = AllZone.getZoneOf(animated);
 
                     if (!grave.is(Constant.Zone.Graveyard)) {
                         // Animated Creature got removed before ability resolved

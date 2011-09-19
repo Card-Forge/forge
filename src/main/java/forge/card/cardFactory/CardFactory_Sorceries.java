@@ -201,7 +201,7 @@ public class CardFactory_Sorceries {
                     int i = 0;
                     for (Card target : creatures) {
                         if (AllZoneUtil.isCardInPlay(target)) {
-                            orig.add(i, AllZone.getZone(target));
+                            orig.add(i, AllZone.getZoneOf(target));
                             controllerEOT.add(i, target.getController());
                             targets.add(i, target);
 

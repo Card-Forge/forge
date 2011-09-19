@@ -807,7 +807,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                 @Override
                 public boolean canPlay() {
-                    return (AllZone.getZone(card).is(Constant.Zone.Battlefield));
+                    return (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield));
                 } //canPlay()
             }; //SpellAbility ability1
 
@@ -1808,7 +1808,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     AllZone.getTriggerHandler().removeAllFromCard(cloned[0]);
 
                     Card orig = cfact.getCard(card.getName(), card.getController());
-                    PlayerZone dest = AllZone.getZone(card.getCurrentlyCloningCard());
+                    PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
                     AllZone.getGameAction().moveTo(dest, orig);
                     dest.remove(card.getCurrentlyCloningCard());
 

@@ -28,7 +28,7 @@ public class CostReveal extends CostPartWithList {
         Integer amount = convertAmount();
 
         if (getThis()) {
-            if (!AllZone.getZone(source).is(Constant.Zone.Hand))
+            if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand))
                 return false;
         } else {
                 handList = handList.getValidCards(type.split(";"), activator, source);

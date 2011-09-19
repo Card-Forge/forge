@@ -67,7 +67,7 @@ public class CostDiscard extends CostPartWithList {
         Integer amount = convertAmount();
 
         if (getThis()) {
-            if (!AllZone.getZone(source).is(Constant.Zone.Hand))
+            if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand))
                 return false;
         } else if (type.equals("Hand")) {
             // this will always work

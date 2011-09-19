@@ -225,10 +225,10 @@ public abstract class Trigger {
             for (String s : mapParams.get("TriggerZones").split(",")) {
                 triggerZones.add(Zone.smartValueOf(s));
             }
-            if (AllZone.getZone(hostCard) == null) {
+            if (AllZone.getZoneOf(hostCard) == null) {
                 return false;
             }
-            if (!triggerZones.contains(AllZone.getZone(hostCard).getZoneType())) {
+            if (!triggerZones.contains(AllZone.getZoneOf(hostCard).getZoneType())) {
                 return false;
             }
         }
