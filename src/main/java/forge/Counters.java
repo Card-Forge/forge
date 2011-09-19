@@ -93,6 +93,7 @@ public enum Counters {
     SOOT(),
     SPORE(),
     STORAGE(),
+    STUDY(),
     TIDE(),
     TIME(),
     TOWER("tower"),
