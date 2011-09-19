@@ -435,13 +435,10 @@ public final class AllZone implements NewConstants {
      * <p>Resets everything possible to set a new game.</p>
      */
     public static void newGameCleanup() {
-
         Singletons.getModel().getGameState().newGameCleanup();
-       
         
         getDisplay().showCombat("");
         getDisplay().loadPrefs();
-
 
         getInputControl().clearInput();
 
@@ -450,9 +447,6 @@ public final class AllZone implements NewConstants {
         // player.reset() now handles this
         //AllZone.getHumanPlayer().clearHandSizeOperations();
         //AllZone.getComputerPlayer().clearHandSizeOperations();
-
-        getTriggerHandler().clearRegistered();
-
     }
 
     /**
