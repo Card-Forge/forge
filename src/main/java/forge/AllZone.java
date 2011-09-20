@@ -455,10 +455,6 @@ public final class AllZone implements NewConstants {
         getInputControl().clearInput();
 
         getColorChanger().reset();
-
-        // player.reset() now handles this
-        //AllZone.getHumanPlayer().clearHandSizeOperations();
-        //AllZone.getComputerPlayer().clearHandSizeOperations();
     }
 
     /**
