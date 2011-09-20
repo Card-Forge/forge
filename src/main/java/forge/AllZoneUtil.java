@@ -21,18 +21,6 @@ public final class AllZoneUtil {
     //////////// Creatures
 
     /**
-     * use to get a list of creatures in play for a given player.
-     *
-     * @param player the player to get creatures for
-     * @return a CardList containing all creatures a given player has in play
-     */
-    public static CardList getCreaturesInPlay(final Player player) {
-        CardList creats = player.getCardsIn(Zone.Battlefield);
-        return creats.filter(CardListFilter.creatures);
-    }
-
-    
-    /**
      * gets a list of all cards of a certain type that a given player has in given zone.
      *
      * @param player   the player to check for cards in play
@@ -83,10 +71,11 @@ public final class AllZoneUtil {
      * @return a CardList with all cards currently in a graveyard
      */
     public static CardList getCardsIn(final Constant.Zone zone, String cardName) {
-        CardList cards = getCardsIn(zone);
-        return cards.getName(cardName);
+        return getCardsIn(zone).getName(cardName);
     }    
 
+    //////////// Creatures
+    
     /**
      * use to get a CardList of all creatures on the battlefield for both players
      *
@@ -96,6 +85,19 @@ public final class AllZoneUtil {
         CardList creats = getCardsIn(Zone.Battlefield);
         return creats.filter(CardListFilter.creatures);
     }
+
+    /**
+     * use to get a list of creatures in play for a given player.
+     *
+     * @param player the player to get creatures for
+     * @return a CardList containing all creatures a given player has in play
+     */
+    public static CardList getCreaturesInPlay(final Player player) {
+        CardList creats = player.getCardsIn(Zone.Battlefield);
+        return creats.filter(CardListFilter.creatures);
+    }
+
+    
 
     ///////////////// Lands
 
@@ -184,18 +186,6 @@ public final class AllZoneUtil {
         return player.getCardsIn(Zone.Battlefield, cardName).size() > 0;
     }
 
-	/**
-	 * Answers the question: "Does <player> have <given card> in play?".
-	 *
-	 * @param card the card to look for
-	 * @param player the player whose battlefield we want to check
-	 * @return true if that player has that card in play, false otherwise
-	 * @since 1.0.15
-	 */
-	public static boolean isCardInPlay(final Card card, final Player player) {
-		return player.getCardsIn(Zone.Battlefield).contains(card);
-	}
-
     //////////////// getting all cards of a given color
 
     /**
@@ -241,8 +231,7 @@ public final class AllZoneUtil {
             return null;
         }
 
-        CardList list = getCardsInZone(zone);
-        for (Card c : list) {
+        for (Card c : zone.getCards()) {
             if (card.equals(c)) {
                 return c;
             }
@@ -250,17 +239,6 @@ public final class AllZoneUtil {
 
         return card;
     }
-
-    /**
-     * <p>getCardsInZone.</p>
-     *
-     * @param zone a {@link forge.PlayerZone} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static CardList getCardsInZone(final PlayerZone zone) {
-        return new CardList(zone.getCards());
-    }
-
 
     /**
      * <p>compareTypeAmountInPlay.</p>

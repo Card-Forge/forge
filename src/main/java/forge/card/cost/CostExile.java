@@ -88,8 +88,7 @@ public class CostExile extends CostPartWithList {
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
         PlayerZone zone = activator.getZone(getFrom());
         if (!getThis()) {
-            CardList typeList = AllZoneUtil.getCardsInZone(zone);
-
+            CardList typeList = new CardList(zone.getCards());
             typeList = typeList.getValidCards(getType().split(";"), activator, source);
             
             Integer amount = convertAmount(); 

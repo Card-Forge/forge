@@ -1044,7 +1044,7 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     static public CardList chooseExileFrom(Constant.Zone zone, String type, Card activate, Card target, int amount) {
-        CardList typeList = AllZoneUtil.getCardsInZone(AllZone.getComputerPlayer().getZone(zone));
+        CardList typeList = new CardList(AllZone.getComputerPlayer().getZone(zone).getCards());
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
         if (target != null && target.getController().isComputer() && typeList.contains(target))
             typeList.remove(target);    // don't exile the card we're pumping

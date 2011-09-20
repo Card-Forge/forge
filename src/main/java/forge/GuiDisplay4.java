@@ -780,7 +780,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 PlayerZone pZone = (PlayerZone) a;
                 HandArea p = playerHandPanel;
 
-                Card[] c = AllZoneUtil.getCardsInZone(pZone).toArray();
+                Card[] c = pZone.getCards();
 
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
@@ -837,7 +837,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void update(final Observable a, final Object b) {
                 PlayerZone pZone = (PlayerZone) a;
 
-                Card[] c = AllZoneUtil.getCardsInZone(pZone).toArray();
+                Card[] c = pZone.getCards();
 
                 GuiDisplayUtil.setupPlayZone(playerPlayPanel, c);
             }
@@ -851,7 +851,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void update(final Observable a, final Object b) {
                 PlayerZone pZone = (PlayerZone) a;
 
-                Card[] c = AllZoneUtil.getCardsInZone(pZone).toArray();
+                Card[] c = pZone.getCards();
 
                 GuiDisplayUtil.setupPlayZone(oppPlayPanel, c);
             }
@@ -1619,17 +1619,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             }
         }
 
-        /**
-         * @deprecated
-         * @see #getCardsAsIterable()
-         */
-        @SuppressWarnings("unused")
-		protected Card[] getCards() {
-            return AllZoneUtil.getCardsInZone(zone).toArray();
-        }
-
         protected Iterable<Card> getCardsAsIterable() {
-        	return new ImmutableIterableFrom<Card>(AllZoneUtil.getCardsInZone(zone));
+        	return new ImmutableIterableFrom<Card>(Arrays.asList(zone.getCards()));
         }
 
         protected void doAction(final Card c) {
