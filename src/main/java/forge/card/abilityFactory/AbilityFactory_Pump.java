@@ -944,7 +944,7 @@ public class AbilityFactory_Pump {
         if (params.containsKey("ValidCards"))
             valid = params.get("ValidCards");
 
-        list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+        list = AbilityFactory.filterListByType(list, valid, sa);
         
         final int a = getNumAttack(sa);
         final int d = getNumDefense(sa);

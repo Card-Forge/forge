@@ -649,7 +649,7 @@ public class CardFactory_Instants {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Echoing Courage")) {
+        /*else if (cardName.equals("Echoing Courage")) {
             Cost cost = new Cost(card.getManaCost(), cardName, false);
             Target tgt = new Target(card, "C");
             final SpellAbility spell = new Spell(card, cost, tgt) {
@@ -708,7 +708,7 @@ public class CardFactory_Instants {
             }; //SpellAbility
 
             card.addSpellAbility(spell);
-        } //*************** END ************ END **************************
+        }*/ //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -993,180 +993,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END ************************** 
 
-
-        //*************** START *********** START **************************
-        /*
-        else if (cardName.equals("Vengeful Dreams")) {
-            final CardList targets = new CardList();
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1593405082929818055L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    for (Card c : targets) {
-                        if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                            AllZone.getGameAction().exile(c);
-                        }//if isCardInPlay
-                    }
-                    targets.clear();
-                }
-            };
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 4656252051002867111L;
-                int max = 0;
-
-                @Override
-                public void showMessage() {
-                    PlayerZone hand = AllZone.getHumanPlayer().getZone(Constant.Zone.Hand);
-                    AllZone.getGameAction().moveToStack(card);
-                    hand.updateObservers();
-                    max = AllZoneUtil.getPlayerHand(card.getController()).size();
-                    if (max == targets.size()) done();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - Select target attacking creatures.  Currently, (");
-                    sb.append(targets.size()).append(") selected.");
-                    sb.append(" Press OK when done.");
-                    AllZone.getDisplay().showMessage(sb.toString());
-                    ButtonUtil.enableAll();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    targets.clear();
-                    AllZone.getGameAction().moveToHand(card);
-                    stop();
-                }
-
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Battlefield) && !targets.contains(c)
-                            && CardFactoryUtil.canTarget(card, c) && c.isAttacking()) {
-                        targets.add(c);
-                        showMessage();
-                    }
-                }
-
-                @Override
-                public void selectButtonOK() {
-                    done();
-                }
-
-                private void done() {
-                    if (targets.size() > AllZoneUtil.getPlayerHand(card.getController()).size()) stop();
-                    else {
-                        card.getController().discard(targets.size(), spell, false);
-                        stopSetNext(new Input_PayManaCost(spell));
-                    }
-
-                }
-            };
-            spell.setStackDescription(cardName + " - exile X attacking creatures.");
-            spell.setBeforePayMana(runtime);
-
-            
-            
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/
-/*
-        //*************** START *********** START **************************
-        else if (cardName.equals("Firestorm")) {
-            final ArrayList<Object> targets = new ArrayList<Object>();
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -3763504534745192451L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    int dmg = targets.size();
-                    for (Object o : targets) {
-                        if (o instanceof Player) {
-                            if (((Player) o).canTarget(this)) {
-                                ((Player) o).addDamage(dmg, card);
-                            }
-                        } else if (o instanceof Card) {
-                            if (AllZoneUtil.isCardInPlay((Card) o) && CardFactoryUtil.canTarget(card, (Card) o)) {
-                                ((Card) o).addDamage(dmg, card);
-                            }//if isCardInPlay
-                        }
-                    }
-                    targets.clear();
-                }
-            };
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 5261183989797221059L;
-
-                @Override
-                public void showMessage() {
-                    PlayerZone hand = AllZone.getHumanPlayer().getZone(Constant.Zone.Hand);
-                    AllZone.getGameAction().moveToStack(card);
-                    hand.updateObservers();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - Select target creatures, players, and/or planeswalkers.  Currently, (");
-                    sb.append(targets.size()).append(") selected.");
-                    sb.append(" Press OK when done.");
-                    AllZone.getDisplay().showMessage(sb.toString());
-                    ButtonUtil.enableAll();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    targets.clear();
-                    AllZone.getGameAction().moveToHand(card);
-                    stop();
-                }
-
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Battlefield) && !targets.contains(c)
-                            && CardFactoryUtil.canTarget(card, c) &&
-                            (c.isCreature() || c.isPlaneswalker())) {
-                        targets.add(c);
-                        showMessage();
-                    }
-                }
-
-                @Override
-                public void selectPlayer(Player p) {
-                    if (p.canTarget(spell) && !targets.contains(p)) {
-                        targets.add(p);
-                        showMessage();
-                    }
-                }
-
-                @Override
-                public void selectButtonOK() {
-                    done();
-                }
-
-                private void done() {
-                    if (targets.size() > AllZoneUtil.getPlayerHand(card.getController()).size()) stop();
-                    else {
-                        card.getController().discard(targets.size(), spell, true);
-                        stopSetNext(new Input_PayManaCost(spell));
-                    }
-
-                }
-            };
-            spell.setStackDescription(cardName + " - deals X damage to each of X target creatures and/or players.");
-            spell.setBeforePayMana(runtime);
-
-            
-            
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/
 
         //*************** START *********** START **************************
         else if (cardName.equals("Cryptic Command")) {
@@ -1522,9 +1348,6 @@ public class CardFactory_Instants {
                     }
                 } //resolve()
             }; //SpellAbility
-
-
-
             card.addSpellAbility(spell);
         } //*************** END ************ END **************************
 
