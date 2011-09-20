@@ -352,7 +352,7 @@ public final class AbilityFactory_Debuff {
     {
         Card hostCard = af.getHostCard();
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
+        list = list.getTargetableCards(hostCard);
 
         if (!list.isEmpty()) {
             list = list.filter(new CardListFilter() {

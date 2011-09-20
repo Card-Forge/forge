@@ -691,7 +691,7 @@ class CardFactory_Lands {
 
                 public void computerExecute() {
                     CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-                    hand = hand.filter(AllZoneUtil.getTypeFilter(type));
+                    hand = hand.getType(type);
                     if (hand.size() > 0) {
                         revealCard(hand.get(0));
                     }

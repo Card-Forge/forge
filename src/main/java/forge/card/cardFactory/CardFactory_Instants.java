@@ -1436,7 +1436,7 @@ public class CardFactory_Instants {
                                     && !c.hasKeyword("Indestructible");
                         }
                     });
-                    CardList infect = creatures.filter(AllZoneUtil.getKeywordFilter("Infect"));
+                    CardList infect = creatures.getKeyword("Infect");
                     if (infect.size() > 0) {
                         Card c = CardFactoryUtil.AI_getBestCreature(infect);
                         setTargetCard(c);

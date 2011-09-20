@@ -2071,7 +2071,7 @@ public class CardFactoryUtil {
     public static CardList AI_getHumanCreature(final Card spell, final boolean targeted) {
         CardList creature = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         if (targeted) {
-            creature = creature.filter(AllZoneUtil.getCanTargetFilter(spell));
+            creature = creature.getTargetableCards(spell);
         }
         return creature;
     }
@@ -3306,60 +3306,32 @@ public class CardFactoryUtil {
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
         if (sq[0].contains("Untapped")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return !c.isTapped();
-                }
-            });
+            someCards = someCards.filter(CardListFilter.untapped);
         }
 
         if (sq[0].contains("Tapped")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return c.isTapped();
-                }
-            });
+            someCards = someCards.filter(CardListFilter.tapped);
         }
 
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
         if (sq[0].contains("White")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return CardUtil.isColor(c, Constant.Color.White);
-                }
-            });
+            someCards = someCards.filter(CardListFilter.white);
         }
 
         if (sq[0].contains("Blue")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return CardUtil.isColor(c, Constant.Color.Blue);
-                }
-            });
+            someCards = someCards.filter(CardListFilter.blue);
         }
 
         if (sq[0].contains("Black")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return CardUtil.isColor(c, Constant.Color.Black);
-                }
-            });
+            someCards = someCards.filter(CardListFilter.black);
         }
 
         if (sq[0].contains("Red")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return CardUtil.isColor(c, Constant.Color.Red);
-                }
-            });
+            someCards = someCards.filter(CardListFilter.red);
         }
 
         if (sq[0].contains("Green")) {
-            someCards = someCards.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return CardUtil.isColor(c, Constant.Color.Green);
-                }
-            });
+            someCards = someCards.filter(CardListFilter.green);
         }
 
         if (sq[0].contains("Multicolor")) {

@@ -266,7 +266,7 @@ public class AbilityFactory_Pump {
      */
     private CardList getCurseCreatures(SpellAbility sa, final int defense, int attack) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
+        list = list.getTargetableCards(hostCard);
 
         if (defense < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
             list = list.filter(new CardListFilter() {

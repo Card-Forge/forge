@@ -299,7 +299,7 @@ class CardFactory_Equipment {
                 @Override
                 public void showMessage() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    list = list.filter(AllZoneUtil.getCanTargetFilter(card));
+                    list = list.getTargetableCards(card);
                     AllZone.getDisplay().showMessage(card + " - Select target creature you control to attach");
                     ButtonUtil.disableAll();
                     if (list.size() == 0) {

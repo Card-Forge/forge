@@ -2,8 +2,6 @@ package forge;
 
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +70,7 @@ public final class AllZoneUtil {
                 continue;
             }
 
-            for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for (Player p : AllZone.getPlayersInGame()) {
                 cards.addAll(p.getZone(z).getCards());    
             }            
         }
@@ -108,8 +106,7 @@ public final class AllZoneUtil {
      * @return a CardList containing all lands the given player has in play
      */
     public static CardList getPlayerLandsInPlay(final Player player) {
-        CardList cards = player.getCardsIn(Zone.Battlefield);
-        return cards.filter(CardListFilter.lands);
+        return player.getCardsIn(Zone.Battlefield).filter(CardListFilter.lands);
     }
 
     /**
@@ -118,8 +115,7 @@ public final class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        CardList cards = getCardsIn(Zone.Battlefield);
-        return cards.filter(CardListFilter.lands);
+        return getCardsIn(Zone.Battlefield).filter(CardListFilter.lands);
     }
 
     //=============================================================================
@@ -320,53 +316,6 @@ public final class AllZoneUtil {
     }
 
 
-
-
-    /**
-     * get a CardListFilter to filter in only cards that can be targeted.
-     *
-     * @param source - the card to be the source for the target
-     * @return a CardListFilter to only add cards that can be targeted
-     */
-    public static CardListFilter getCanTargetFilter(final Card source) {
-        CardListFilter canTarget = new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return CardFactoryUtil.canTarget(source, c);
-            }
-        };
-        return canTarget;
-    }
-
-    /**
-     * get a CardListFilter to filter a CardList for a given keyword.
-     *
-     * @param keyword - the keyword to look for
-     * @return a CardListFilter to only add cards with the given keyword
-     */
-    public static CardListFilter getKeywordFilter(final String keyword) {
-        CardListFilter filter = new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return c.hasKeyword(keyword);
-            }
-        };
-        return filter;
-    }
-
-    /**
-     * get a CardListFilter to filter a CardList for a given type.
-     *
-     * @param type - the type to check for
-     * @return a CardListFilter to only add cards of the given type
-     */
-    public static CardListFilter getTypeFilter(final String type) {
-        CardListFilter filter = new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return c.isType(type);
-            }
-        };
-        return filter;
-    }
-
     /**
      * a CardListFilter to get all cards that are a part of this game.
      *
@@ -374,25 +323,16 @@ public final class AllZoneUtil {
      */
     public static CardList getCardsInGame() {
         CardList all = new CardList();
-        for (Player p : AllZone.getPlayersInGame()) {
-            getCardsInGame(p, all);
+        for (Player player : AllZone.getPlayersInGame()) {
+            all.addAll(player.getZone(Zone.Graveyard).getCards());
+            all.addAll(player.getZone(Zone.Hand).getCards());
+            all.addAll(player.getZone(Zone.Library).getCards()); // not sure if library should be included.
+            all.addAll(player.getZone(Zone.Battlefield).getCards());
+            all.addAll(player.getZone(Zone.Exile).getCards());
         }
         return all;
     }
 
-    private static CardList getCardsInGame(Player player, CardList toAdd)
-    {
-        CardList all = toAdd == null ? new CardList() : toAdd;
-        all.addAll(player.getZone(Zone.Graveyard).getCards());
-        all.addAll(player.getZone(Zone.Hand).getCards());
-        all.addAll(player.getZone(Zone.Library).getCards()); // not sure if library should be included.
-        all.addAll(player.getZone(Zone.Battlefield).getCards());
-        all.addAll(player.getZone(Zone.Exile).getCards());
-        //should this include Human_Command ?
-        //all.addAll(AllZone.getHumanSideboard().getCards());
-        return all;
-    }
-    
     /**
      * <p>getDoublingSeasonMagnitude.</p>
      *

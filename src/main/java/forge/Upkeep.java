@@ -2353,7 +2353,7 @@ public class Upkeep implements java.io.Serializable {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
-        list = list.filter(AllZoneUtil.getKeywordFilter(keyword));
+        list = list.getKeyword(keyword);
 
         for (final Card c : list) {
             final SpellAbility ability = new Ability(c, "0") {

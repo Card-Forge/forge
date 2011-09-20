@@ -516,7 +516,7 @@ public final class GameActionUtil {
             ability = new Ability(list.get(i), "0") {
                 public void resolve() {
                     CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-                    creats = creats.filter(AllZoneUtil.getCanTargetFilter(card));
+                    creats = creats.getTargetableCards(card);
                     if (creats.size() == 0) {
                         return;
                     }

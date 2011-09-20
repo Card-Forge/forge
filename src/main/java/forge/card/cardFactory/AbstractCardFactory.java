@@ -1327,7 +1327,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 public Card getCreature() {
                     CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     tappedCreatures = tappedCreatures.filter(CardListFilter.tapped);
-                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.getCanTargetFilter(card));
+                    tappedCreatures = tappedCreatures.getTargetableCards(card);
                     if (tappedCreatures.isEmpty()) {
                         return null;
                     }
