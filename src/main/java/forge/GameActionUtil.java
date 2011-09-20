@@ -325,7 +325,7 @@ public final class GameActionUtil {
                             if (controller.isComputer()
                                     || GameActionUtil.showYesNoDialog(card, "Return Vengevine from the graveyard?"))
                             {
-                                if (AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
+                                if (controller.getZone(Zone.Graveyard).contains(card)) {
                                     AllZone.getGameAction().moveTo(play, card);
                                 }
                             }
@@ -921,7 +921,7 @@ public final class GameActionUtil {
             public void resolve() {
                 Card target = getTargetCard();
                 if (target != null) {
-                    if (AllZoneUtil.isCardInPlayerGraveyard(src.getController(), target)) {
+                    if (src.getController().getZone(Zone.Graveyard).contains(target)) {
                         PlayerZone hand = src.getController().getZone(Constant.Zone.Hand);
                         AllZone.getGameAction().moveTo(hand, target);
                     }

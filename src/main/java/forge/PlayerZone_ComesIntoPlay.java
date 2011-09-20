@@ -184,7 +184,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     public void resolve() {
                         if (crd.getController().isHuman()) {
                             if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
-                                if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                                if (player.getZone(Zone.Graveyard).contains(crd)
                                         && AllZoneUtil.isCardInPlay(c) && c.isCreature()
                                         && c.getNetAttack() == 1 && c.getNetDefense() == 1)
                                 {
@@ -195,7 +195,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                             }
 
                         } else {
-                            if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                            if (player.getZone(Zone.Graveyard).contains(crd)
                                     && AllZoneUtil.isCardInPlay(c) && c.isCreature()
                                     && c.getNetAttack() == 1 && c.getNetDefense() == 1)
                             {

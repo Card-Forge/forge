@@ -974,7 +974,7 @@ public class CardFactory_Creatures {
                         c = getAIElemental();
                     }
 
-                    if (AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
+                    if (card.getController().getZone(Zone.Graveyard).contains(c)) {
                         PlayerZone play = c.getController().getZone(Constant.Zone.Battlefield);
                         AllZone.getGameAction().moveTo(play, c);
                     }

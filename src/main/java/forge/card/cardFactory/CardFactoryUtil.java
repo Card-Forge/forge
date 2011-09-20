@@ -863,7 +863,7 @@ public class CardFactoryUtil {
             public boolean canPlay() {
                 Card sourceCard = this.getSourceCard();
 
-                return AllZoneUtil.isCardInPlayerGraveyard(sourceCard.getController(), sourceCard)
+                return sourceCard.getController().getZone(Zone.Graveyard).contains(sourceCard)
                         && (sourceCard.isInstant() || Phase.canCastSorcery(sourceCard.getController()));
 
             }

@@ -115,19 +115,6 @@ public abstract class AllZoneUtil {
 
 
     /**
-     * answers the question "is a certain, specific card in this player's graveyard?".
-     *
-     * @param player the player's hand to check
-     * @param card   the specific card to look for
-     * @return true if the card is present in this player's hand; false otherwise
-     */
-    public static boolean isCardInPlayerGraveyard(final Player player, final Card card) {
-        return player.getZone(Constant.Zone.Graveyard).contains(card);
-    }
-
-    //////// HAND
-
-    /**
      * answers the question "is the given card in any exile zone?".
      *
      * @param c the card to look for in Exile

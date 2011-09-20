@@ -2243,12 +2243,12 @@ public class CardFactory_Sorceries {
                     Card c = getTargetCard();
 
                     if (threshold.size() >= 7) {
-                        if (AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
+                        if (card.getController().getZone(Zone.Graveyard).contains(c)) {
                             PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
                             AllZone.getGameAction().moveTo(play, c);
                         }
                     } else {
-                        if (AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
+                        if (card.getController().getZone(Zone.Graveyard).contains(c)) {
                             PlayerZone hand = card.getController().getZone(Constant.Zone.Hand);
                             AllZone.getGameAction().moveTo(hand, c);
                         }
@@ -2827,7 +2827,7 @@ public class CardFactory_Sorceries {
                     if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         Card c = ab1card[0];
                         if (c != null) {
-                            if (AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c) && CardFactoryUtil.canTarget(card, c)) {
+                            if (card.getController().getZone(Zone.Graveyard).contains(c) && CardFactoryUtil.canTarget(card, c)) {
                                 AllZone.getGameAction().moveToPlay(c);
                             }
                         }
