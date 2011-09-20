@@ -6,7 +6,7 @@ PT:3/3
 K:Level up:1
 K:maxLevel:12
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Lifelink | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 6-11 6/6 Lifelink
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Indestructible | CheckSVar$ Z | SVarCompare$ EQ1 | Description$ LEVEL 12+ 9/9 Lifelink and CARDNAME is Indestructible.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Indestructible & Lifelink | CheckSVar$ Z | SVarCompare$ EQ1 | Description$ LEVEL 12+ 9/9 Lifelink and CARDNAME is Indestructible.
 SVar:Y:Count$Valid Card.Self+counters_GE6_LEVEL+counters_LT12_LEVEL
 SVar:Z:Count$Valid Card.Self+counters_GE12_LEVEL
 SVar:Rarity:Mythic
