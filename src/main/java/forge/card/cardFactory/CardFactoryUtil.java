@@ -2909,7 +2909,7 @@ public class CardFactoryUtil {
         sq = l[0].split("\\.");
 
         if (sq[0].contains("xPaid")) {
-            return c.getXManaCostPaid();
+            return doXMath(c.getXManaCostPaid(), m, c);
         }
 
         if (sq[0].contains("xLifePaid")) {

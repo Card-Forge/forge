@@ -2342,44 +2342,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Banshee")) {
-            /*
-                * X, Tap: Banshee deals half X damage, rounded down, to target creature or
-                * player, and half X damage, rounded up, to you.
-                */
-
-            Cost abCost = new Cost("X T", cardName, true);
-            Target tgt = new Target(card, "TgtCP");
-
-            final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
-                private static final long serialVersionUID = 2755743211116192949L;
-
-                @Override
-                public void resolve() {
-                    int x = card.getXManaCostPaid();
-                    if (getTargetPlayer() == null) {
-                        getTargetCard().addDamage((int) Math.floor(x / 2.0), card);
-                    } else {
-                        getTargetPlayer().addDamage((int) Math.floor(x / 2.0), card);
-                    }
-                    card.getController().addDamage((int) Math.ceil(x / 2.0), card);
-                    card.setXManaCostPaid(0);
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-            };//SpellAbility
-
-            ability.setDescription("X, tap: " + "Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.");
-            ability.setStackDescription(card.getName() + " - Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Shapeshifter")) {
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5447692676152380940L;
