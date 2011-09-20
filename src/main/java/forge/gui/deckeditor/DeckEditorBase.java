@@ -11,7 +11,6 @@ import javax.swing.event.DocumentListener;
 
 import net.slightlymagic.maxmtg.Predicate;
 
-import forge.GUI_DeckAnalysis;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.item.CardPrinted;
@@ -57,7 +56,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay  {
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
             DeckEditorBase g = DeckEditorBase.this;
-            GUI_DeckAnalysis dAnalysis = new GUI_DeckAnalysis(g, deck);
+            DeckAnalysis dAnalysis = new DeckAnalysis(g, deck);
             dAnalysis.setVisible(true);
             g.setEnabled(false);
         }

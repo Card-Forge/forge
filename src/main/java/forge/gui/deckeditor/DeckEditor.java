@@ -23,7 +23,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-//import forge.view.swing.OldGuiNewGame;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -46,6 +45,8 @@ public final class DeckEditor extends DeckEditorBase {
 
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
+    private JButton importButton = new JButton();
+    
     private JButton analysisButton = new JButton();
     private JButton clearFilterButton = new JButton();
     
@@ -134,12 +135,14 @@ public final class DeckEditor extends DeckEditorBase {
             Font fButtons = new java.awt.Font("Dialog", 0, 13);
             removeButton.setFont(fButtons);
             addButton.setFont(fButtons);
+            importButton.setFont(fButtons);
             clearFilterButton.setFont(fButtons);
             analysisButton.setFont(fButtons);
         }
         
         addButton.setText("Add to Deck");        
         removeButton.setText("Remove from Deck");
+        importButton.setText("Import a Deck");
         clearFilterButton.setText("Clear Filter");
         analysisButton.setText("Deck Analysis");
         
@@ -147,6 +150,8 @@ public final class DeckEditor extends DeckEditorBase {
             public void actionPerformed(final ActionEvent e) { removeButtonClicked(e); } });
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) { addButton_actionPerformed(e); } });
+        importButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(final ActionEvent e) { importButton_actionPerformed(e); } });
         clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) { clearFilterButton_actionPerformed(e); } });
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +173,9 @@ public final class DeckEditor extends DeckEditorBase {
         // x 768 screen size
         this.setTitle("Deck Editor");
 
-        Container pane = this.getContentPane();
+        Container content = this.getContentPane();
         MigLayout layout = new MigLayout("fill");
-        pane.setLayout(layout);
+        content.setLayout(layout);
 
         boolean isFirst = true;
         for (JCheckBox box : filterBoxes.allTypes) {
@@ -179,31 +184,32 @@ public final class DeckEditor extends DeckEditorBase {
                 growParameter = "cell 0 0, egx checkbox, grow, split 14";
                 isFirst = false;
             }
-            this.getContentPane().add(box, growParameter);
+            content.add(box, growParameter);
             box.addItemListener(itemListenerUpdatesDisplay);
         }
 
         for (JCheckBox box : filterBoxes.allColors) {
-            this.getContentPane().add(box, "grow");
+            content.add(box, "grow");
             box.addItemListener(itemListenerUpdatesDisplay);
         }
 
-        this.getContentPane().add(clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
+        content.add(clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
 
-        this.getContentPane().add(filterNameTypeSet, "cell 0 1, grow");
-        this.getContentPane().add(top.getTableDecorated(), "cell 0 2 1 2, pushy, grow");
-        this.getContentPane().add(top.getLabel(), "cell 0 4");
+        content.add(filterNameTypeSet, "cell 0 1, grow");
+        content.add(top.getTableDecorated(), "cell 0 2 1 2, pushy, grow");
+        content.add(top.getLabel(), "cell 0 4");
 
-        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 4");
-        this.getContentPane().add(removeButton, "w 100, h 49, sg button");
+        content.add(addButton, "w 100, h 49, sg button, cell 0 5, split 5");
+        content.add(removeButton, "w 100, h 49, sg button");
+        content.add(importButton, "w 100, h 49, sg button, gapleft 40px");
         // Label is used to push the analysis button to the right to separate analysis button from add/remove card ones 
-        this.getContentPane().add(jLabelAnalysisGap, "wmin 100, grow");
-        this.getContentPane().add(analysisButton, "w 100, h 49, wrap");
+        content.add(jLabelAnalysisGap, "wmin 100, growx");
+        content.add(analysisButton, "w 100, h 49, wrap");
 
-        this.getContentPane().add(bottom.getTableDecorated(), "cell 0 6, grow");
-        this.getContentPane().add(bottom.getLabel(), "cell 0 7");
+        content.add(bottom.getTableDecorated(), "cell 0 6, grow");
+        content.add(bottom.getLabel(), "cell 0 7");
 
-        this.getContentPane().add(cardView, "cell 1 0 1 8, flowy, grow");
+        content.add(cardView, "cell 1 0 1 8, flowy, grow");
 
         top.getTable().addMouseListener(new MouseAdapter() {
             @Override public void mouseClicked(final MouseEvent e) { if (e.getClickCount() == 2) { addCardToDeck(); } } });
@@ -278,4 +284,12 @@ public final class DeckEditor extends DeckEditorBase {
         
         customMenu.notifyDeckChange();
     }
+    
+    void importButton_actionPerformed(ActionEvent e) {
+        DeckEditorBase g = this;
+        DeckImport dImport = new DeckImport(g);
+        dImport.setVisible(true);
+        g.setEnabled(false);
+    }
+
 }

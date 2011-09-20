@@ -17,9 +17,9 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
@@ -267,7 +267,7 @@ public final class GuiUtils {
      *
      * @param frame a fully laid-out frame
      */
-    public static void centerFrame(final Frame frame) {
+    public static void centerFrame(final Window frame) {
         Dimension screen = frame.getToolkit().getScreenSize();
         Rectangle bounds = frame.getBounds();
         bounds.width = frame.getWidth();

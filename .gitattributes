@@ -9567,7 +9567,6 @@ src/main/java/forge/EndOfTurn.java svneol=native#text/plain
 src/main/java/forge/ExternalPanel.java svneol=native#text/plain
 src/main/java/forge/FileFinder.java svneol=native#text/plain
 src/main/java/forge/FileUtil.java svneol=native#text/plain
-src/main/java/forge/GUI_DeckAnalysis.java svneol=native#text/plain
 src/main/java/forge/GUI_ImportPicture.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
@@ -9798,6 +9797,7 @@ src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text
 src/main/java/forge/gui/deckeditor/CardPanelBase.java -text
 src/main/java/forge/gui/deckeditor/CardPanelHeavy.java -text
 src/main/java/forge/gui/deckeditor/CardPanelLite.java -text
+src/main/java/forge/gui/deckeditor/DeckAnalysis.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckDisplay.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditor.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text
@@ -9806,6 +9806,7 @@ src/main/java/forge/gui/deckeditor/DeckEditorMenu.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditorQuestMenu.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditorShop.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/DeckImport.java -text
 src/main/java/forge/gui/deckeditor/FilterCheckBoxes.java -text
 src/main/java/forge/gui/deckeditor/FilterNameTypeSetPanel.java -text
 src/main/java/forge/gui/deckeditor/GuiFilterCheckBox.java svneol=native#text/plain

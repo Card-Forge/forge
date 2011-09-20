@@ -1,4 +1,4 @@
-package forge;
+package forge.gui.deckeditor;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,6 +28,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
+import forge.CardList;
+import forge.MyRandom;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.CardPrinted;
@@ -48,7 +50,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Forge
  * @version $Id$
  */
-public class GUI_DeckAnalysis extends javax.swing.JDialog {
+public class DeckAnalysis extends javax.swing.JDialog {
 
     /** Constant <code>serialVersionUID=-8475271235196182185L</code> */
     private static final long serialVersionUID = -8475271235196182185L;
@@ -110,7 +112,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
      * @param tb
      *            a {@link forge.gui.deckeditor.TableModel} object.
      */
-    public GUI_DeckAnalysis(JFrame g, ItemPoolView<CardPrinted> deckView) {
+    public DeckAnalysis(JFrame g, ItemPoolView<CardPrinted> deckView) {
         super(g);
         deck = deckView;
 
