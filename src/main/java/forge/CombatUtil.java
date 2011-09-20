@@ -556,7 +556,7 @@ public class CombatUtil {
 
 
         if (c.getName().equals("Harbor Serpent")) {
-            CardList allislands = AllZoneUtil.getTypeIn(Zone.Battlefield, "Island");
+            CardList allislands = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Island");
             if (allislands.size() < 5) return false;
         }
 

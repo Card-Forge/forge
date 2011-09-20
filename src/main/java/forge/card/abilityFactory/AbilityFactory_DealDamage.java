@@ -966,7 +966,7 @@ public class AbilityFactory_DealDamage {
         for (Card c : list) c.addDamage(dmg, card);
 
         if (players.equals("Each")) {
-            for (Player p : AllZoneUtil.getPlayersInGame())
+            for (Player p : AllZone.getPlayersInGame())
                 p.addDamage(dmg, card);
         } else if (players.equals("EachOpponent")) {
             for (Player p : AllZoneUtil.getOpponents(card.getController())) p.addDamage(dmg, card);

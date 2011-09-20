@@ -1539,7 +1539,7 @@ public final class GuiDisplayUtil implements NewConstants {
      * @since 1.1.3
      */
     public static void devModeSetLife() {
-        ArrayList<Player> players = AllZoneUtil.getPlayersInGame();
+        List<Player> players = AllZone.getPlayersInGame();
         Object o = GuiUtils.getChoiceOptional("Set life for which player?", players.toArray());
         if (null == o) {
             return;

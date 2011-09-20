@@ -4955,7 +4955,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 6536398032388958127L;
 
                 public void execute() {
-                    CardList cardsInPlay = AllZoneUtil.getTypeIn(Zone.Battlefield, "World");
+                    CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
                         AllZone.getGameAction().sacrificeDestroy(cardsInPlay.get(i));

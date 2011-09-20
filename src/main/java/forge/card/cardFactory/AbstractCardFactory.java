@@ -1820,14 +1820,14 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList arts = AllZoneUtil.getTypeIn(Zone.Battlefield, "Artifact");
+                    CardList arts = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
                     return !arts.isEmpty();
                 }
 
                 @Override
                 public void resolve() {
                     if (card.getController().isComputer()) {
-                        CardList arts = AllZoneUtil.getTypeIn(Zone.Battlefield, "Artifact");
+                        CardList arts = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
                         if (!arts.isEmpty()) {
                             copyTarget[0] = CardFactoryUtil.AI_getBestArtifact(arts);
                         }

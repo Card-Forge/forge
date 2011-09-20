@@ -815,7 +815,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         //get all Planeswalkers
-        CardList list = AllZoneUtil.getTypeIn(Zone.Battlefield, "Planeswalker");
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Planeswalker");
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -841,7 +841,7 @@ public class GameAction {
      * <p>destroyLegendaryCreatures.</p>
      */
     private void destroyLegendaryCreatures() {
-        CardList a = AllZoneUtil.getTypeIn(Zone.Battlefield, "Legendary");
+        CardList a = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Legendary");
 
         while (!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             CardList b = AllZoneUtil.getCardsIn(Zone.Battlefield, a.get(0).getName());

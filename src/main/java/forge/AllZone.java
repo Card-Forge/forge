@@ -1,6 +1,9 @@
 package forge;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryInterface;
@@ -100,6 +103,15 @@ public final class AllZone implements NewConstants {
     public static Player getComputerPlayer() {
         return Singletons.getModel().getGameState().getComputerPlayer();
     }
+    
+    /**
+     * get a list of all players participating in this game.
+     *
+     * @return a list of all player participating in this game
+     */
+    public static List<Player> getPlayersInGame() {
+        return Arrays.asList(Singletons.getModel().getGameState().getPlayers());
+    }    
 
     /**
      * <p>getQuestData.</p>

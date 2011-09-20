@@ -235,19 +235,6 @@ public final class AllZoneUtil {
 		return player.getCardsIn(Zone.Battlefield).contains(card);
 	}
 
-    ///get a list of certain types are in play (like Mountain, Elf, etc...)
-
-    /**
-     * gets a list of all cards with a certain type (Mountain, Elf, etc...) in play.
-     *
-     * @param cardType the type to find in play
-     * @return a CardList with all cards of the given type in play
-     */
-    public static CardList getTypeIn(final Zone zone, final String cardType) {
-        return getCardsIn(zone).getType(cardType);
-    }
-
-
     //////////////// getting all cards of a given color
 
     /**
@@ -424,24 +411,8 @@ public final class AllZoneUtil {
      * @return a int.
      */
     public static int getDoublingSeasonMagnitude(final Player player) {
-        int multiplier = 1;
         int doublingSeasons = player.getCardsIn(Zone.Battlefield, "Doubling Season").size();
-        if (doublingSeasons > 0) {
-            multiplier = (int) Math.pow(2, doublingSeasons);
-        }
-        return multiplier;
-    }
-
-    /**
-     * get a list of all players participating in this game.
-     *
-     * @return a list of all player participating in this game
-     */
-    public static ArrayList<Player> getPlayersInGame() {
-        ArrayList<Player> list = new ArrayList<Player>();
-        list.add(AllZone.getHumanPlayer());
-        list.add(AllZone.getComputerPlayer());
-        return list;
+        return (int) Math.pow(2, doublingSeasons); // pow(a,0) = 1; pow(a,1) = a ... no worries about size = 0
     }
 
     /**
