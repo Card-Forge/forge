@@ -1751,7 +1751,7 @@ public class CombatUtil {
         } else if (c.getName().equals("Spectral Force")) {
             Player opp = c.getController().getOpponent();
             CardList list = opp.getCardsIn(Zone.Battlefield);
-            list = list.filter(AllZoneUtil.black);
+            list = list.filter(CardListFilter.black);
             if (list.size() == 0) {
                 c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
             }

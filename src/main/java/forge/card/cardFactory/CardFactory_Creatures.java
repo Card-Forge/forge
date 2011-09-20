@@ -558,7 +558,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     CardList possible = card.getController().getCardsIn(Zone.Hand);
-                    possible = possible.filter(AllZoneUtil.nonlands);
+                    possible = possible.filter(CardListFilter.nonlands);
                     return !possible.isEmpty() && super.canPlay();
                 }
 
@@ -1017,7 +1017,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList allTokens = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    allTokens = allTokens.filter(AllZoneUtil.token);
+                    allTokens = allTokens.filter(CardListFilter.token);
 
                     int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
 
@@ -1048,7 +1048,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
                     CardList allTokens = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    allTokens = allTokens.filter(AllZoneUtil.token);
+                    allTokens = allTokens.filter(CardListFilter.token);
 
                     return allTokens.size() >= 2;
                 }
@@ -2271,7 +2271,7 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     //get all creatures
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
-                    list = list.filter(AllZoneUtil.creatures);
+                    list = list.filter(CardListFilter.creatures);
                     return 0 < list.size();
                 }
             });
@@ -2295,12 +2295,12 @@ public class CardFactory_Creatures {
                     Player opp = player.getOpponent();
                     int max = 0;
                     CardList play = opp.getCardsIn(Zone.Battlefield);
-                    play = play.filter(AllZoneUtil.nonToken);
-                    play = play.filter(AllZoneUtil.white);
+                    play = play.filter(CardListFilter.nonToken);
+                    play = play.filter(CardListFilter.white);
                     max += play.size();
 
                     CardList grave = opp.getCardsIn(Zone.Graveyard);
-                    grave = grave.filter(AllZoneUtil.white);
+                    grave = grave.filter(CardListFilter.white);
                     max += grave.size();
 
                     String[] life = new String[max + 1];
@@ -2499,7 +2499,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     CardList grave = card.getController().getCardsIn(Zone.Graveyard);
-                    grave = grave.filter(AllZoneUtil.creatures);
+                    grave = grave.filter(CardListFilter.creatures);
                     return super.canPlay() && grave.size() > 0;
                 }
 

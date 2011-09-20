@@ -1449,9 +1449,9 @@ public class GameAction {
     public final void seeWhoPlaysFirst() {
 
         CardList HLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-        HLibrary = HLibrary.filter(AllZoneUtil.nonlands);
+        HLibrary = HLibrary.filter(CardListFilter.nonlands);
         CardList CLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
-        CLibrary = CLibrary.filter(AllZoneUtil.nonlands);
+        CLibrary = CLibrary.filter(CardListFilter.nonlands);
 
         boolean Starter_Determined = false;
         int Cut_Count = 0;
@@ -2058,7 +2058,7 @@ public class GameAction {
         if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
             Player player = AllZone.getPhase().getPlayerTurn();
             CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
-            playerCreature = playerCreature.filter(AllZoneUtil.green);
+            playerCreature = playerCreature.filter(CardListFilter.green);
             String manaC = manaCost + " ";
             if (playerCreature.size() > 0) {
                 for (int i = 0; i < playerCreature.size(); i++) {

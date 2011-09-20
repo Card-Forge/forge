@@ -775,7 +775,7 @@ public class ComputerUtil {
     static public boolean chooseLandsToPlay() {
         Player computer = AllZone.getComputerPlayer();
         CardList landList = computer.getCardsIn(Zone.Hand);
-        landList = landList.filter(AllZoneUtil.lands);
+        landList = landList.filter(CardListFilter.lands);
 
 
         CardList lands = AllZoneUtil.getPlayerTypeIn(computer, Zone.Graveyard, "Land");
@@ -1073,7 +1073,7 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
         //is this needed?
-        typeList = typeList.filter(AllZoneUtil.untapped);
+        typeList = typeList.filter(CardListFilter.untapped);
 
         if (tap)
             typeList.remove(activate);

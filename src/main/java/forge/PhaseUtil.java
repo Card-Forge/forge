@@ -57,7 +57,7 @@ public class PhaseUtil {
         AllZone.getGameAction().resetActivationsPerTurn();
 
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn);
-        lands = lands.filter(AllZoneUtil.untapped);
+        lands = lands.filter(CardListFilter.untapped);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap phase is skipped
@@ -156,7 +156,7 @@ public class PhaseUtil {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 //search for lands the computer has and only untap 1
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                landList = landList.filter(AllZoneUtil.tapped);
+                landList = landList.filter(CardListFilter.tapped);
                 if (landList.size() > 0) {
                     landList.get(0).untap();
                 }
@@ -181,7 +181,7 @@ public class PhaseUtil {
                     }//selectCard()
                 };//Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                landList = landList.filter(AllZoneUtil.tapped);
+                landList = landList.filter(CardListFilter.tapped);
                 if (landList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -190,8 +190,8 @@ public class PhaseUtil {
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList artList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                artList = artList.filter(AllZoneUtil.artifacts);
-                artList = artList.filter(AllZoneUtil.tapped);
+                artList = artList.filter(CardListFilter.artifacts);
+                artList = artList.filter(CardListFilter.tapped);
                 if (artList.size() > 0) {
                     CardFactoryUtil.AI_getBestArtifact(artList).untap();
                 }
@@ -217,8 +217,8 @@ public class PhaseUtil {
                     }//selectCard()
                 };//Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                artList = artList.filter(AllZoneUtil.artifacts);
-                artList = artList.filter(AllZoneUtil.tapped);
+                artList = artList.filter(CardListFilter.artifacts);
+                artList = artList.filter(CardListFilter.tapped);
                 if (artList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -227,7 +227,7 @@ public class PhaseUtil {
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                creatures = creatures.filter(AllZoneUtil.tapped);
+                creatures = creatures.filter(CardListFilter.tapped);
                 if (creatures.size() > 0) {
                     creatures.get(0).untap();
                 }
@@ -253,7 +253,7 @@ public class PhaseUtil {
                     }//selectCard()
                 };//Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                creatures = creatures.filter(AllZoneUtil.tapped);
+                creatures = creatures.filter(CardListFilter.tapped);
                 if (creatures.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }

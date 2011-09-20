@@ -123,7 +123,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         @Override
                         public void resolve() {
                             CardList lands = tisLand.getController().getCardsIn(Zone.Battlefield);
-                            lands = lands.filter(AllZoneUtil.lands);
+                            lands = lands.filter(CardListFilter.lands);
                             for (Card land : lands) {
                                 land.tap();
                             }

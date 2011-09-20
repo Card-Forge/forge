@@ -638,7 +638,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList c = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-                    c = c.filter(AllZoneUtil.nonlands);
+                    c = c.filter(CardListFilter.nonlands);
                     return c.size() > 0;
                 }
             };//SpellAbility spell
@@ -805,7 +805,7 @@ public class CardFactory_Sorceries {
                 //randomly choose a nonland card
                 int getDamage() {
                     CardList notLand = card.getController().getCardsIn(Zone.Library);
-                    notLand = notLand.filter(AllZoneUtil.nonlands);
+                    notLand = notLand.filter(CardListFilter.nonlands);
                     notLand.shuffle();
 
                     if (notLand.isEmpty()) return 0;
@@ -1117,10 +1117,10 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList humTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    humTokenCreats = humTokenCreats.filter(AllZoneUtil.token);
+                    humTokenCreats = humTokenCreats.filter(CardListFilter.token);
 
                     CardList compTokenCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    compTokenCreats = compTokenCreats.filter(AllZoneUtil.token);
+                    compTokenCreats = compTokenCreats.filter(CardListFilter.token);
 
                     return compTokenCreats.size() > humTokenCreats.size();
                 }//canPlayAI()
@@ -1128,7 +1128,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     CardList tokens = AllZoneUtil.getCreaturesInPlay();
-                    tokens = tokens.filter(AllZoneUtil.token);
+                    tokens = tokens.filter(CardListFilter.token);
 
                     CardFactoryUtil.copyTokens(tokens);
 
@@ -2561,7 +2561,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList c = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    c = c.filter(AllZoneUtil.nonlands);
+                    c = c.filter(CardListFilter.nonlands);
                     return 2 >= c.size();
                 }
 
@@ -2617,7 +2617,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList c = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-                    c = c.filter(AllZoneUtil.nonlands);
+                    c = c.filter(CardListFilter.nonlands);
                     return 2 >= c.size() ||
                             (AllZone.getComputerPlayer().hasMetalcraft() && AllZone.getHumanPlayer().getLife() <= 3);
                 }
@@ -2649,13 +2649,13 @@ public class CardFactory_Sorceries {
 
                     //"Destroy all artifacts",
                     if (userChoice.contains(cardChoices[0])) {
-                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(AllZoneUtil.artifacts);
+                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
                         for (Card c : cards) AllZone.getGameAction().destroy(c);
                     }
 
                     //"Destroy all enchantments",
                     if (userChoice.contains(cardChoices[1])) {
-                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(AllZoneUtil.enchantments);
+                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.enchantments);
                         for (Card c : cards) AllZone.getGameAction().destroy(c);
                     }
 
@@ -2988,7 +2988,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void showMessage() {
                     CardList grave = card.getController().getCardsIn(Constant.Zone.Graveyard);
-                    grave = grave.filter(AllZoneUtil.creatures);
+                    grave = grave.filter(CardListFilter.creatures);
                     grave = grave.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.getCMC() <= x[0];
@@ -3126,7 +3126,7 @@ public class CardFactory_Sorceries {
                         //get all
                         CardList creatures = AllZoneUtil.getCreaturesInPlay();
                         CardList grave = card.getController().getCardsIn(Zone.Graveyard);
-                        grave = grave.filter(AllZoneUtil.creatures);
+                        grave = grave.filter(CardListFilter.creatures);
 
                         if (AllZone.getHumanPlayer().canTarget(spell) || AllZone.getComputerPlayer().canTarget(spell))
                             display.add("Target player loses X life");

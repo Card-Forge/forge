@@ -201,7 +201,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         out.setOwner(in.getOwner());
         CardList all = new CardList(getAllCards());
         CardList tokens = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        tokens = tokens.filter(AllZoneUtil.token);
+        tokens = tokens.filter(CardListFilter.token);
         all.addAll(tokens);
         out.setCopiedSpell(true);
         for (Trigger t : out.getTriggers()) {
@@ -1092,7 +1092,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     final Player player = getTargetPlayer();
 
                     CardList lands = player.getCardsIn(Zone.Graveyard);
-                    lands = lands.filter(AllZoneUtil.basicLands);
+                    lands = lands.filter(CardListFilter.basicLands);
                     if (card.getController().isHuman()) {
                         //now, select up to four lands
                         int end = -1;
@@ -1326,7 +1326,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 //may return null
                 public Card getCreature() {
                     CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.tapped);
+                    tappedCreatures = tappedCreatures.filter(CardListFilter.tapped);
                     tappedCreatures = tappedCreatures.filter(AllZoneUtil.getCanTargetFilter(card));
                     if (tappedCreatures.isEmpty()) {
                         return null;

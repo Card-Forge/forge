@@ -1,10 +1,10 @@
 package forge.card.cost;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
@@ -60,7 +60,7 @@ public class CostTapType extends CostPartWithList {
 
         if (cost.getTap())
             typeList.remove(source);
-        typeList = typeList.filter(AllZoneUtil.untapped);
+        typeList = typeList.filter(CardListFilter.untapped);
 
         Integer amount = convertAmount();
         if (typeList.size() == 0 || (amount != null && typeList.size() < amount))

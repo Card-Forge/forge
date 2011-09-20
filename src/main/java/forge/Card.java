@@ -14,7 +14,6 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;

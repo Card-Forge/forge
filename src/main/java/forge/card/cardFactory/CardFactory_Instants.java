@@ -104,7 +104,7 @@ public class CardFactory_Instants {
                     final String kboost = getKeywordBoost();
 
                     CardList list = card.getController().getCardsIn(Zone.Battlefield);
-                    list = list.filter(AllZoneUtil.white);
+                    list = list.filter(CardListFilter.white);
 
                     for (int i = 0; i < list.size(); i++) {
                         final Card[] target = new Card[1];

@@ -539,7 +539,7 @@ public class Upkeep implements java.io.Serializable {
      */
     private static CardList abyss_getTargets(final Player player, final Card card) {
         CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-        creats = creats.filter(AllZoneUtil.nonartifacts);
+        creats = creats.filter(CardListFilter.nonartifacts);
         creats = creats.getTargetableCards(card);
         return creats;
     }
@@ -562,7 +562,7 @@ public class Upkeep implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     CardList artifacts = player.getCardsIn(Zone.Battlefield);
-                    artifacts = artifacts.filter(AllZoneUtil.artifacts);
+                    artifacts = artifacts.filter(CardListFilter.artifacts);
 
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {
@@ -2217,8 +2217,8 @@ public class Upkeep implements java.io.Serializable {
                 public void resolve() {
                     int gain = 0;
                     CardList play = player.getCardsIn(Zone.Battlefield);
-                    CardList black = play.filter(AllZoneUtil.black);
-                    CardList red = play.filter(AllZoneUtil.red);
+                    CardList black = play.filter(CardListFilter.black);
+                    CardList red = play.filter(CardListFilter.red);
                     if (black.size() > 0 && red.size() > 0) {
                         gain = 4;
                     }
@@ -2253,8 +2253,8 @@ public class Upkeep implements java.io.Serializable {
                 public void resolve() {
                     int draw = 0;
                     CardList play = player.getCardsIn(Zone.Battlefield);
-                    CardList green = play.filter(AllZoneUtil.green);
-                    CardList red = play.filter(AllZoneUtil.red);
+                    CardList green = play.filter(CardListFilter.green);
+                    CardList red = play.filter(CardListFilter.red);
 
                     if (green.size() > 0 && red.size() > 0) {
                         draw = 2;
@@ -2319,7 +2319,7 @@ public class Upkeep implements java.io.Serializable {
     private static void upkeep_Shapeshifter() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList list = player.getCardsIn(Zone.Battlefield, "Shapeshifter");
-        list = list.filter(AllZoneUtil.nonToken);
+        list = list.filter(CardListFilter.nonToken);
 
         for (final Card c : list) {
             SpellAbility ability = new Ability(c, "0") {

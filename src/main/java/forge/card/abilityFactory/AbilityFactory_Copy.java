@@ -246,7 +246,7 @@ public final class AbilityFactory_Copy {
                 }
 
                 Card choice;
-                if (list.filter(AllZoneUtil.creatures).size() > 0) {
+                if (list.filter(CardListFilter.creatures).size() > 0) {
                     choice = CardFactoryUtil.AI_getBestCreature(list);
                 } else {
                     choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, source, true);

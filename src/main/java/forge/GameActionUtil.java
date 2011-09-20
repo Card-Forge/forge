@@ -936,7 +936,7 @@ public final class GameActionUtil {
 
             public void execute() {
                 CardList list = src.getController().getCardsIn(Zone.Graveyard);
-                list = list.filter(AllZoneUtil.creatures);
+                list = list.filter(CardListFilter.creatures);
 
                 if (list.isEmpty()) {
                     AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -1035,7 +1035,7 @@ public final class GameActionUtil {
                     public void resolve() {
                         for (int i = 0; i < damage; i++) {
                             CardList nonTokens = player.getCardsIn(Zone.Battlefield);
-                            nonTokens = nonTokens.filter(AllZoneUtil.nonToken);
+                            nonTokens = nonTokens.filter(CardListFilter.nonToken);
                             if (nonTokens.size() == 0) {
                                 player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
                             } else {
@@ -1836,7 +1836,7 @@ public final class GameActionUtil {
             produces.put("Swamp", "B");
 
             CardList lands = AllZoneUtil.getCardsInGame();
-            lands = lands.filter(AllZoneUtil.lands);
+            lands = lands.filter(CardListFilter.lands);
 
             //remove all abilities granted by this Command
             for (Card land : lands) {
