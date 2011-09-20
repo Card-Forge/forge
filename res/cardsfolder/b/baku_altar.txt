@@ -2,7 +2,7 @@ Name:Baku Altar
 ManaCost:2
 Types:Artifact
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 A:AB$ Token | Cost$ 2 T SubCounter<1/KI> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put a 1/1 colorless Spirit creature token onto the battlefield.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
 SVar:RemRandomDeck:True

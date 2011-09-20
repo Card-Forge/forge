@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:3/4
 K:Reach
-T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gains forestwalk until end of turn.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gains forestwalk until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Forestwalk
 SVar:BuffedBy:Arcane,Spirit
 SVar:RemRandomDeck:True

@@ -4,7 +4,7 @@ Types:Legendary Creature Kirin Spirit
 Text:no text
 PT:4/4
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare

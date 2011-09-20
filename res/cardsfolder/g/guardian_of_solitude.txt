@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Spirit
 Text:no text
 PT:1/2
-T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target creature gains flying until end of turn.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target creature gains flying until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Uncommon
