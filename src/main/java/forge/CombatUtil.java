@@ -463,7 +463,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(Card c) {
-        if (c.isTapped() || (c.isSick() && !c.isEnchantedBy("Instill Energy"))) return false;
+        if (c.isTapped() || (c.hasSickness() && !c.isEnchantedBy("Instill Energy"))) return false;
 
         return canAttackNextTurn(c);
     }

@@ -22,7 +22,7 @@ public class CostTap extends CostPart {
 
     @Override
     public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        return !(source.isTapped() || source.isSick());
+        return source.isUntapped() && (!source.hasSickness() || !source.isCreature());  
     }
 
     @Override

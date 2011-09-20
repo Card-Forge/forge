@@ -2719,24 +2719,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasSickness() {
-        if (hasKeyword("Haste")) {
-            return false;
-        }
-
-        return sickness;
-    }
-
-    /**
-     * <p>isSick.</p>
-     *
-     * @return a boolean.
-     */
-    public final boolean isSick() {
-        if (hasKeyword("Haste")) {
-            return false;
-        }
-
-        return sickness && isCreature();
+        return !hasKeyword("Haste") && sickness;
     }
 
     /**
