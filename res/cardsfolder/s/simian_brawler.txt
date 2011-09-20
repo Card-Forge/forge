@@ -1,0 +1,12 @@
+Name:Simian Brawler
+ManaCost:3 G
+Types:Creature Ape Warrior
+Text:no text
+PT:3/3
+A:AB$ Pump | Cost$ Cost$ Discard<1/Land> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_brawler.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/122.jpg
+Oracle:Discard a land card: Simian Brawler gets +1/+1 until end of turn.
+End
