@@ -699,5 +699,26 @@ public final class CardUtil {
 
         return res;
     }
+    
+    public static CardList getRadiance(final Card source, final Card origin, final String[] valid) {
+        CardList res = new CardList();
+        
+        for(Card_Color col : origin.getColor()) {
+            for(String strCol : col.toStringArray())
+            {
+                if(strCol.equalsIgnoreCase("Colorless")) {
+                    continue;
+                }
+                for(Card c : AllZoneUtil.getColorInPlay(strCol))
+                {
+                    if(!res.contains(c) && c.isValidCard(valid, source.getController(), source) && !c.equals(origin)) {
+                        res.add(c);
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }
 
 } //end class CardUtil

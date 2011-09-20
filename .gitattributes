@@ -3710,6 +3710,7 @@ res/cardsfolder/i/incendiary.txt svneol=native#text/plain
 res/cardsfolder/i/incendiary_command.txt svneol=native#text/plain
 res/cardsfolder/i/incinerate.txt svneol=native#text/plain
 res/cardsfolder/i/incite.txt svneol=native#text/plain
+res/cardsfolder/i/incite_hysteria.txt -text
 res/cardsfolder/i/incremental_blight.txt -text
 res/cardsfolder/i/incremental_growth.txt -text
 res/cardsfolder/i/incurable_ogre.txt svneol=native#text/plain
@@ -7543,6 +7544,7 @@ res/cardsfolder/s/suqata_lancer.txt svneol=native#text/plain
 res/cardsfolder/s/surge_node.txt svneol=native#text/plain
 res/cardsfolder/s/surge_of_strength.txt svneol=native#text/plain
 res/cardsfolder/s/surge_of_thoughtweft.txt svneol=native#text/plain
+res/cardsfolder/s/surge_of_zeal.txt -text
 res/cardsfolder/s/surgical_extraction.txt svneol=native#text/plain
 res/cardsfolder/s/surging_aether.txt svneol=native#text/plain
 res/cardsfolder/s/surging_dementia.txt svneol=native#text/plain
@@ -8787,6 +8789,7 @@ res/cardsfolder/w/wizards_school.txt svneol=native#text/plain
 res/cardsfolder/w/wizened_cenn.txt svneol=native#text/plain
 res/cardsfolder/w/woebearer.txt svneol=native#text/plain
 res/cardsfolder/w/wojek_embermage.txt svneol=native#text/plain
+res/cardsfolder/w/wojek_siren.txt -text
 res/cardsfolder/w/wolf_skull_shaman.txt svneol=native#text/plain
 res/cardsfolder/w/wolfbriar_elemental.txt svneol=native#text/plain
 res/cardsfolder/w/wolverine_pack.txt svneol=native#text/plain

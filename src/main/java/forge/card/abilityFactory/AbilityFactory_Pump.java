@@ -704,6 +704,12 @@ public class AbilityFactory_Pump {
         else
             tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
+        if(params.containsKey("Radiance")) {
+            for(Card c : CardUtil.getRadiance(hostCard, tgtCards.get(0), params.get("ValidTgts").split(","))) {
+                tgtCards.add(c);
+            }
+        }
+        
         int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
