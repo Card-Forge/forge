@@ -1559,9 +1559,7 @@ public class GameAction {
         if (c.isLand() && human.canPlayLand()) {
         	PlayerZone zone = AllZone.getZoneOf(c);
 
-        	if (zone.is(Constant.Zone.Hand)
-        	        || (!zone.is(Constant.Zone.Battlefield)) && c.hasKeyword("May be played"))
-        	{
+        	if (zone.is(Zone.Hand) || (!zone.is(Zone.Battlefield)) && c.hasKeyword("May be played")) {
         		choices.add("Play land");
         	}
         }

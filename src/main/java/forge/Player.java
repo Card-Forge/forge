@@ -67,7 +67,8 @@ public abstract class Player extends GameEntity {
      */
     public Player(String myName, int myLife, int myPoisonCounters) {
         for (Zone z : ALL_ZONES) {
-            zones.put(z, new DefaultPlayerZone(z, this));
+            PlayerZone toPut = z == Zone.Battlefield ? new PlayerZone_ComesIntoPlay(z, this) : new DefaultPlayerZone(z, this);
+            zones.put(z, toPut);
         }
         
         reset();
