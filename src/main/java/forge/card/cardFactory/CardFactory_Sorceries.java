@@ -222,9 +222,6 @@ public class CardFactory_Sorceries {
                 }//canPlayAI()
 
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
@@ -255,8 +252,6 @@ public class CardFactory_Sorceries {
                 }//resolve()
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-
-            
             
             card.addSpellAbility(spell);
         }//*************** END ************ END ************************** 
@@ -416,8 +411,6 @@ public class CardFactory_Sorceries {
 
             card.addComesIntoPlayCommand(intoPlay);
 
-            
-            
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
             spell.setDescription("");
@@ -573,9 +566,6 @@ public class CardFactory_Sorceries {
                     return cards.size() >= 8;
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -642,11 +632,8 @@ public class CardFactory_Sorceries {
                     return c.size() > 0;
                 }
             };//SpellAbility spell
-
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -706,8 +693,6 @@ public class CardFactory_Sorceries {
                 }//resolve()
             };//SpellAbility
 
-            
-            
             card.addSpellAbility(spell);
 
             Input target = new Input() {
@@ -814,10 +799,6 @@ public class CardFactory_Sorceries {
                     return CardUtil.getConvertedManaCost(card.getSpellAbility()[0]);
                 }
             };//SpellAbility
-
-            
-            
-
             card.addSpellAbility(spell);
 
             card.setSVar("PlayMain1", "TRUE");
@@ -859,8 +840,6 @@ public class CardFactory_Sorceries {
                 }
             };// SpellAbility
 
-            
-            
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
 
@@ -1099,9 +1078,6 @@ public class CardFactory_Sorceries {
                     return out;
                 }//chooseTwo()
             };//Input chooseTwoInput
-
-            
-            
             card.addSpellAbility(spell);
 
             card.setSpellWithChoices(true);
@@ -1139,9 +1115,6 @@ public class CardFactory_Sorceries {
             spell.setStackDescription("Parallel Evolution - For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.");
 
             card.setFlashback(true);
-
-            
-            
             card.addSpellAbility(spell);
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G"));
         }//*************** END ************ END **************************
@@ -1310,9 +1283,6 @@ public class CardFactory_Sorceries {
                     }
                 }
             };//Input
-
-            
-            
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -1397,9 +1367,6 @@ public class CardFactory_Sorceries {
                     }
                 }
             };
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -1444,9 +1411,6 @@ public class CardFactory_Sorceries {
                     player.mill(total);
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -1494,9 +1458,6 @@ public class CardFactory_Sorceries {
                     }
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -1560,74 +1521,9 @@ public class CardFactory_Sorceries {
             };//Input
 
             spell.setBeforePayMana(runtime);
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        /*                        
-        //********************Start********Start***********************
-        else if(cardName.equals("Living Death"))
-        {
-           final SpellAbility spell = new Spell(card)
-           {
-              private static final long serialVersionUID = -7657135492744579098L;
-              
-              public void resolve()
-              {   //grab make 4 creature lists: human_play, human_graveyard, computer_play, computer_graveyard
-                 CardList human_play = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                 
-                 CardList human_graveyard = AllZoneUtil.getPlayerGraveyard(AllZone.getHumanPlayer());
-                 human_graveyard = human_graveyard.filter(AllZoneUtil.creatures);
-                 
-                 CardList computer_play = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                 
-                 CardList computer_graveyard = AllZoneUtil.getPlayerGraveyard(AllZone.getComputerPlayer());
-                 computer_graveyard = computer_graveyard.filter(AllZoneUtil.creatures);
-                           
-                 //TODO - the following code doesn't look like it's doing what it should to me...
-                 Card c = new Card();
-                 Iterator<Card> it = human_play.iterator();
-                 while(it.hasNext())
-                 {
-                    c = it.next();
-                    AllZone.getGameAction().moveTo(AllZone.getHumanBattlefield(),c);
-                    AllZone.getGameAction().moveTo(AllZone.getHumanGraveyard(),c);
-                 }
-                 
-                 it = human_graveyard.iterator();
-                 while(it.hasNext())
-                 {
-                    c = it.next();
-                    AllZone.getGameAction().moveTo(AllZone.getHumanGraveyard(),c);
-                    AllZone.getGameAction().moveTo(AllZone.getHumanBattlefield(),c);
-                 }
-                 
-                 it = computer_play.iterator();
-                 while(it.hasNext())
-                 {
-                    c = it.next();
-                    AllZone.getGameAction().moveTo(AllZone.getComputerBattlefield(),c);
-                    AllZone.getGameAction().moveTo(AllZone.getComputerGraveyard(),c);
-                 }
-                 
-                 it = computer_graveyard.iterator();
-                 while(it.hasNext())
-                 {
-                    c = it.next();
-                    AllZone.getGameAction().moveTo(AllZone.getComputerGraveyard(),c);
-                    AllZone.getGameAction().moveTo(AllZone.getComputerBattlefield(),c);
-                 }
-                 
-              }//resolve
-           };//spellability
-           
-           
-           
-           card.addSpellAbility(spell);
-        }//*********************END**********END***********************
-        */
 
         //*************** START *********** START **************************
         else if (cardName.equals("Balance")) {
@@ -1693,9 +1589,6 @@ public class CardFactory_Sorceries {
                     return diff > 2;
                 }
             };
-
-            
-            
             card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
@@ -1730,9 +1623,6 @@ public class CardFactory_Sorceries {
                     AllZone.getEndOfTurn().addUntil(untilEOT);
                 }
             };
-
-            
-            
             card.addSpellAbility(spell);
 
             card.setSVar("PlayMain1", "TRUE");
@@ -1773,68 +1663,11 @@ public class CardFactory_Sorceries {
                     thePlayer.drawCard();
                 }
             };
-
-            
-            
             card.addSpellAbility(spell);
 
             card.setSVar("PlayMain1", "TRUE");
         } //*************** END ************ END **************************
 
-/*
-        //*************** START *********** START **************************
-        else if (cardName.equals("Haunting Misery")) {
-            Cost cost = new Cost("1 B B", cardName, false);
-            Target tgt = new Target(card, "Select a Player", "Player");
-            final SpellAbility spell = new Spell(card, cost, tgt) {
-                private static final long serialVersionUID = 6867051257656060195L;
-
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    Player tPlayer = getTargetPlayer();
-                    CardList graveList = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
-
-                    int size = graveList.size();
-                    int damage = 0;
-
-                    if (player.isHuman()) {
-                        for (int i = 0; i < size; i++) {
-                            Object o = GuiUtils.getChoice("Exile from graveyard", graveList.toArray());
-                            if (o == null) break;
-                            damage++;    // tally up how many cards removed
-                            Card c_1 = (Card) o;
-                            graveList.remove(c_1); //remove from the display list
-                            AllZone.getGameAction().exile(c_1);
-                        }
-                    } else { //Computer
-                        // it would be nice if the computer chose vanilla creatures over
-                        for (int j = 0; j < size; j++) {
-                            AllZone.getGameAction().exile(graveList.get(j));
-                        }
-                    }
-                    tPlayer.addDamage(damage, card);
-                }
-
-                @Override
-                public void chooseTargetAI() {
-                    setTargetPlayer(AllZone.getHumanPlayer());
-                }//chooseTargetAI()
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList graveList = AllZoneUtil.getPlayerTypeInGraveyard(AllZone.getHumanPlayer(), "Creature");
-                    int humanLife = AllZone.getHumanPlayer().getLife();
-
-                    return (graveList.size() > 5 || graveList.size() > humanLife);
-                }
-            };
-
-            
-            
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/
 
         //*************** START *********** START **************************
         else if (cardName.equals("Brood Birthing")) {
@@ -1859,8 +1692,6 @@ public class CardFactory_Sorceries {
             sb.append(" puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
             spell.setStackDescription(sb.toString());
 
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -1968,9 +1799,6 @@ public class CardFactory_Sorceries {
                     return 0;
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -2188,8 +2016,6 @@ public class CardFactory_Sorceries {
             sb.append(card.getName()).append(" - discard X cards and return X cards to your hand.");
             spell.setStackDescription(sb.toString());
 
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -2225,9 +2051,6 @@ public class CardFactory_Sorceries {
                     player.drawCards(num);
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -2290,9 +2113,6 @@ public class CardFactory_Sorceries {
                     setTargetCard(biggest);
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
 
             Input target = new Input() {
@@ -2368,9 +2188,6 @@ public class CardFactory_Sorceries {
                     }
                 }//resolve()
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
 
             StringBuilder sb = new StringBuilder();
@@ -2416,9 +2233,6 @@ public class CardFactory_Sorceries {
                     return false;
                 }
             };// SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
 
@@ -2473,9 +2287,6 @@ public class CardFactory_Sorceries {
                 }
 
             };// SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
 
@@ -2523,9 +2334,6 @@ public class CardFactory_Sorceries {
                 }
 
             };// SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
 
@@ -2566,9 +2374,6 @@ public class CardFactory_Sorceries {
                 }
 
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -2623,9 +2428,6 @@ public class CardFactory_Sorceries {
                 }
 
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -2746,9 +2548,6 @@ public class CardFactory_Sorceries {
                     return out;
                 }//chooseTwo()
             };//Input chooseTwoInput
-
-            
-            
             card.addSpellAbility(spell);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
@@ -2775,9 +2574,6 @@ public class CardFactory_Sorceries {
                     player.addHandSizeOperation(new HandSizeOp("=", -1, Integer.parseInt(card.getSVar("HSStamp"))));
                 }
             };//SpellAbility
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -3163,9 +2959,6 @@ public class CardFactory_Sorceries {
                     return out;
                 }//chooseTwo()
             };//Input chooseTwoInput
-
-            
-            
             card.addSpellAbility(spell);
 
             card.setSpellWithChoices(true);
@@ -3198,8 +2991,6 @@ public class CardFactory_Sorceries {
 
             spell.setDescription(cardName + " deals 5 damage to target creature. Destroy all Equipment attached to that creature.");
 
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
