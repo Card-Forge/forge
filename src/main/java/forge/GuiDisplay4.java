@@ -733,7 +733,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     label = new JLabel((count++) + ". " + isOptional + stack.peekInstance(i).getStackDescription());
 
                     //update card detail
-                    final CardPanel cardPanel = new CardPanel(stack.peekInstance().getSpellAbility().getSourceCard());
+                    final CardPanel cardPanel = new CardPanel(stack.peekInstance(i).getSpellAbility().getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
                     cardPanel.add(label);
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {
