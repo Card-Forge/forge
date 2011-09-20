@@ -329,14 +329,17 @@ public class StaticAbility_Continuous {
         }
 
         // non - CharacteristicDefining
-        CardList affectedCards;
-        Zone affectedZone = Zone.Battlefield; // default
+        CardList affectedCards = new CardList();
+        String[] affectedZones = null;
 
         if (params.containsKey("AffectedZone")) {
-            affectedZone = Zone.smartValueOf(params.get("AffectedZone"));
+            affectedZones = params.get("AffectedZone").split(",");
+            for (String az : affectedZones) {
+                affectedCards.addAll(AllZoneUtil.getCardsIn(Zone.smartValueOf(az)));
+            }
+        } else {
+            affectedCards = AllZoneUtil.getCardsIn(Zone.Battlefield);
         }
-
-        affectedCards = AllZoneUtil.getCardsIn(affectedZone);
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {
