@@ -337,9 +337,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("This card can't be cast.");
         }
 
-        if (card.hasAttachedCards()) {
+        if (card.hasAttachedCardsByMindsDesire()) {
             if (area.length() != 0) area.append("\n");
-            Card[] cards = card.getAttachedCards();
+            Card[] cards = card.getAttachedCardsByMindsDesire();
             area.append("=Attached: ");
             for (Card c : cards) {
                 area.append(c.getName());

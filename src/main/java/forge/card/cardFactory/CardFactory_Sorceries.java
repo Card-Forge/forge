@@ -267,10 +267,10 @@ public class CardFactory_Sorceries {
                     Player player = card.getController();
                     PlayerZone play = player.getZone(Constant.Zone.Battlefield);
                     PlayerZone RFG = player.getZone(Constant.Zone.Exile);
-                    Card[] Attached = card.getAttachedCards();
+                    Card[] Attached = card.getAttachedCardsByMindsDesire();
                     RFG.remove(Attached[0]);
                     play.add(Attached[0]);
-                    card.unattachCard(Attached[0]);
+                    card.unattachCardByMindDesire(Attached[0]);
                 }//resolve()
             };//SpellAbility
 
@@ -282,7 +282,7 @@ public class CardFactory_Sorceries {
                     Card c = null;
                     Player player = card.getController();
                     if (player.isHuman()) {
-                        Card[] Attached = getSourceCard().getAttachedCards();
+                        Card[] Attached = getSourceCard().getAttachedCardsByMindsDesire();
                         Card[] Choices = new Card[Attached.length];
                         boolean SystemsGo = true;
                         if (AllZone.getStack().size() > 0) {
@@ -334,17 +334,17 @@ public class CardFactory_Sorceries {
                                     }
                                     // Clear Attached List
                                     for (int i = 0; i < Attached.length; i++) {
-                                        card.unattachCard(Attached[i]);
+                                        card.unattachCardByMindDesire(Attached[i]);
                                     }
                                     // Re-add
                                     for (int i = 0; i < ReAttach.length; i++) {
-                                        if (ReAttach[i] != null) card.attachCard(ReAttach[i]);
+                                        if (ReAttach[i] != null) card.attachCardByMindsDesire(ReAttach[i]);
                                     }
                                     target.addSpellAbility(PlayCreature);
                                     AllZone.getStack().add(PlayCreature);
                                 } else {
                                     AllZone.getGameAction().playCardNoCost(c);
-                                    card.unattachCard(c);
+                                    card.unattachCardByMindDesire(c);
                                 }
                             } else
                                 JOptionPane.showMessageDialog(null, "Player cancelled or there is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -382,7 +382,7 @@ public class CardFactory_Sorceries {
                         c = libList.get(0);
                         PlayerZone RFG = player.getZone(Constant.Zone.Exile);
                         AllZone.getGameAction().moveTo(RFG, c);
-                        Minds_D.attachCard(c);
+                        Minds_D.attachCardByMindsDesire(c);
                     }
                     final Card Minds = card;
                     //	AllZone.getGameAction().exile(Minds);

@@ -32,6 +32,7 @@ import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 import forge.quest.gui.main.QuestChallenge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -1530,12 +1531,12 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean isAttachee(final Card c) {
+    public final boolean isAttacheeByMindsDesire(final Card c) {
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
-            CardList check = new CardList(list.getCard(i).getAttachedCards());
-            if (check.contains(c)) {
+            Card [] cc = list.getCard(i).getAttachedCardsByMindsDesire();
+            if (Arrays.binarySearch(cc, c) >= 0) {
                 return true;
             }
         }

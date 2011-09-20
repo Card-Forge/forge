@@ -49,7 +49,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     //Hidden keywords won't be displayed on the card
     private ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
     private ArrayList<String> prevIntrinsicKeyword = new ArrayList<String>();
-    private ArrayList<Card> attached = new ArrayList<Card>();
+    private ArrayList<Card> attachedByMindsDesire = new ArrayList<Card>();
     //which equipment cards are equipping this card?
     private ArrayList<Card> equippedBy = new ArrayList<Card>();
     //equipping size will always be 0 or 1
@@ -3174,9 +3174,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getAttachedCards() {
-        Card[] c = new Card[attached.size()];
-        attached.toArray(c);
+    public final Card[] getAttachedCardsByMindsDesire() {
+        Card[] c = new Card[attachedByMindsDesire.size()];
+        attachedByMindsDesire.toArray(c);
         return c;
     }
 
@@ -3185,8 +3185,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *
      * @return a boolean.
      */
-    public final boolean hasAttachedCards() {
-        return getAttachedCards().length != 0;
+    public final boolean hasAttachedCardsByMindsDesire() {
+        return getAttachedCardsByMindsDesire().length != 0;
     }
 
     /**
@@ -3194,8 +3194,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *
      * @param c a {@link forge.Card} object.
      */
-    public final void attachCard(final Card c) {
-        attached.add(c);
+    public final void attachCardByMindsDesire(final Card c) {
+        attachedByMindsDesire.add(c);
         this.updateObservers();
     }
 
@@ -3204,8 +3204,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *
      * @param c a {@link forge.Card} object.
      */
-    public final void unattachCard(final Card c) {
-        attached.remove(c);
+    public final void unattachCardByMindDesire(final Card c) {
+        attachedByMindsDesire.remove(c);
         this.updateObservers();
     }
 
