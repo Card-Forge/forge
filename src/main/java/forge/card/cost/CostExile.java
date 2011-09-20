@@ -95,7 +95,7 @@ public class CostExile extends CostPartWithList {
             Integer amount = convertAmount(); 
             if (amount != null && typeList.size() < amount)
                 return false;
-        } else if (!AllZoneUtil.isCardInZone(zone, source))
+        } else if (!zone.contains(source))
             return false;
         
         return true;
@@ -341,7 +341,7 @@ public class CostExile extends CostPartWithList {
             @Override
             public void showMessage() {
                 Card card = sa.getSourceCard();
-                if (sa.getActivatingPlayer().isHuman() && AllZoneUtil.isCardInZone(sa.getActivatingPlayer().getZone(part.getFrom()), card)) {
+                if (sa.getActivatingPlayer().isHuman() && sa.getActivatingPlayer().getZone(part.getFrom()).contains(card)) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Exile?");

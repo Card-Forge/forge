@@ -82,6 +82,8 @@ interface IPlayerZone {
     Card[] getCards();
     Card[] getCards(int n);
     
+    boolean contains(Card c);
+    
     /** isEmpty returns true if given zone contains no cards */
     boolean isEmpty();
 

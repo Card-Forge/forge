@@ -17,7 +17,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
-    private ArrayList<Card> cards = new ArrayList<Card>();
+    private List<Card> cards = new ArrayList<Card>();
     private final Constant.Zone zoneName;
     private final Player player;
     private boolean update = true;
@@ -160,6 +160,10 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         cards.add(index, c);
         c.setTurnInZone(AllZone.getPhase().getTurn());
         update();
+    }
+    
+    public final boolean contains(Card c) {
+        return cards.contains(c);
     }
 
     /**

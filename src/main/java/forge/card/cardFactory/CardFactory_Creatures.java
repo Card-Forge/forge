@@ -249,7 +249,7 @@ public class CardFactory_Creatures {
                     PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
                     boolean canPlayLand = card.getController().canPlayLand();
 
-                    return (AllZoneUtil.isCardInZone(play, card) && library.get(0).isLand() && canPlayLand);
+                    return (play.contains(card) && library.get(0).isLand() && canPlayLand);
                 }
             };//SpellAbility
 
@@ -814,7 +814,7 @@ public class CardFactory_Creatures {
             				PlayerZone grave = AllZone.getZoneOf(target[0]);
             				//checks to see if card is still in the graveyard
 
-            				if (grave != null && AllZoneUtil.isCardInZone(grave, target[0])) {
+            				if (grave != null && grave.contains(target[0])) {
             					PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
             					target[0].addController(card.getController());
             					AllZone.getGameAction().moveTo(play, target[0]);

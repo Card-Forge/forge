@@ -502,7 +502,7 @@ class CardFactory_Auras {
                     PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
                     // Animate Dead got destroyed before its ability resolved
-                    if (!AllZoneUtil.isCardInZone(play, card)) {
+                    if (!play.contains(card)) {
                         return;
                     }
 
@@ -550,7 +550,7 @@ class CardFactory_Auras {
 
                     PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
-                    if (AllZoneUtil.isCardInZone(play, c)) {
+                    if (play.contains(c)) {
                         AllZone.getGameAction().sacrifice(c);
                     }
                 }
@@ -564,7 +564,7 @@ class CardFactory_Auras {
 
                     PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
-                    if (AllZoneUtil.isCardInZone(play, c)) {
+                    if (play.contains(c)) {
                         AllZone.getStack().addSimultaneousStackEntry(detach);
                     }
 

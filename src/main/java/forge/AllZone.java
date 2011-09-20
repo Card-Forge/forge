@@ -393,14 +393,14 @@ public final class AllZone implements NewConstants {
         final FGameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) { return null; }
 
-        if (AllZoneUtil.isCardInZone(gameState.getStackZone(), c)) {
+        if (gameState.getStackZone().contains(c)) {
             return gameState.getStackZone();
         }
 
         for (Player p : gameState.getPlayers()) {
             for(Zone z : Player.ALL_ZONES) {
                 PlayerZone pz = p.getZone(z);
-                if ( AllZoneUtil.isCardInZone(pz, c) )
+                if (pz.contains(c))
                     return pz;
             }
         }

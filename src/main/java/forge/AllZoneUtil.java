@@ -135,33 +135,10 @@ public final class AllZoneUtil {
      * @return true if the card is present in this player's hand; false otherwise
      */
     public static boolean isCardInPlayerGraveyard(final Player player, final Card card) {
-        return isCardInZone(player.getZone(Constant.Zone.Graveyard), card);
+        return player.getZone(Constant.Zone.Graveyard).contains(card);
     }
 
     //////// HAND
-
-
-
-    /**
-     * answers the question "is a specific card in the specified zone?".
-     *
-     * @param pz   the PlayerZone to check
-     * @param card the specific card to look for
-     * @return true if the card is present in this zone; false otherwise
-     */
-    public static boolean isCardInZone(final PlayerZone pz, final Card card) {
-        if (card == null) {
-            return false;
-        }
-
-        for (Card c : pz.getCards()) {
-            if (c.equals(card)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     /**
      * answers the question "is the given card in any exile zone?".
