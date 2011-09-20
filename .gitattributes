@@ -31,6 +31,7 @@ res/cardsfolder/a/aboshans_desire.txt svneol=native#text/plain
 res/cardsfolder/a/about_face.txt svneol=native#text/plain
 res/cardsfolder/a/absolute_grace.txt svneol=native#text/plain
 res/cardsfolder/a/absolute_law.txt svneol=native#text/plain
+res/cardsfolder/a/absolver_thrull.txt -text
 res/cardsfolder/a/absorb.txt svneol=native#text/plain
 res/cardsfolder/a/absorb_vis.txt svneol=native#text/plain
 res/cardsfolder/a/abuna_acolyte.txt svneol=native#text/plain
@@ -654,6 +655,7 @@ res/cardsfolder/b/behemoth_sledge.txt svneol=native#text/plain
 res/cardsfolder/b/belbes_armor.txt svneol=native#text/plain
 res/cardsfolder/b/belbes_percher.txt svneol=native#text/plain
 res/cardsfolder/b/belbes_portal.txt svneol=native#text/plain
+res/cardsfolder/b/belfry_spirit.txt -text
 res/cardsfolder/b/belligerent_hatchling.txt svneol=native#text/plain
 res/cardsfolder/b/bellowing_fiend.txt svneol=native#text/plain
 res/cardsfolder/b/bellowing_tanglewurm.txt svneol=native#text/plain
@@ -667,6 +669,7 @@ res/cardsfolder/b/benalish_knight.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_missionary.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_trapper.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_veteran.txt svneol=native#text/plain
+res/cardsfolder/b/benediction_of_moons.txt -text
 res/cardsfolder/b/benevolent_ancestor.txt svneol=native#text/plain
 res/cardsfolder/b/benevolent_bodyguard.txt svneol=native#text/plain
 res/cardsfolder/b/benevolent_unicorn.txt svneol=native#text/plain
@@ -756,6 +759,7 @@ res/cardsfolder/b/blightspeaker.txt svneol=native#text/plain
 res/cardsfolder/b/blightsteel_colossus.txt svneol=native#text/plain
 res/cardsfolder/b/blightwidow.txt svneol=native#text/plain
 res/cardsfolder/b/blind_creeper.txt svneol=native#text/plain
+res/cardsfolder/b/blind_hunter.txt -text
 res/cardsfolder/b/blind_phantasm.txt svneol=native#text/plain
 res/cardsfolder/b/blind_spot_giant.txt svneol=native#text/plain
 res/cardsfolder/b/blind_with_anger.txt svneol=native#text/plain
@@ -1570,6 +1574,7 @@ res/cardsfolder/c/crush.txt svneol=native#text/plain
 res/cardsfolder/c/crush_of_wurms.txt svneol=native#text/plain
 res/cardsfolder/c/crusher_zendikon.txt svneol=native#text/plain
 res/cardsfolder/c/crushing_pain.txt svneol=native#text/plain
+res/cardsfolder/c/cry_of_contrition.txt -text
 res/cardsfolder/c/cryoclasm.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_angel.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_cobra.txt svneol=native#text/plain
@@ -2391,6 +2396,7 @@ res/cardsfolder/e/execute.txt svneol=native#text/plain
 res/cardsfolder/e/executioners_capsule.txt svneol=native#text/plain
 res/cardsfolder/e/exhaustion.txt svneol=native#text/plain
 res/cardsfolder/e/exhume.txt svneol=native#text/plain
+res/cardsfolder/e/exhumer_thrull.txt -text
 res/cardsfolder/e/exile.txt svneol=native#text/plain
 res/cardsfolder/e/exile_into_darkness.txt svneol=native#text/plain
 res/cardsfolder/e/exiled_boggart.txt svneol=native#text/plain
@@ -3222,6 +3228,7 @@ res/cardsfolder/g/gravel_slinger.txt svneol=native#text/plain
 res/cardsfolder/g/gravelgill_axeshark.txt svneol=native#text/plain
 res/cardsfolder/g/gravelgill_duo.txt svneol=native#text/plain
 res/cardsfolder/g/graven_cairns.txt svneol=native#text/plain
+res/cardsfolder/g/graven_dominator.txt -text
 res/cardsfolder/g/gravespawn_sovereign.txt svneol=native#text/plain
 res/cardsfolder/g/gravitational_shift.txt svneol=native#text/plain
 res/cardsfolder/g/gravity_sphere.txt -text
@@ -5373,6 +5380,7 @@ res/cardsfolder/o/orochi_ranger.txt svneol=native#text/plain
 res/cardsfolder/o/orochi_sustainer.txt svneol=native#text/plain
 res/cardsfolder/o/oros_the_avenger.txt svneol=native#text/plain
 res/cardsfolder/o/orzhov_basilica.txt svneol=native#text/plain
+res/cardsfolder/o/orzhov_euthanist.txt -text
 res/cardsfolder/o/orzhov_guildmage.txt svneol=native#text/plain
 res/cardsfolder/o/orzhov_signet.txt svneol=native#text/plain
 res/cardsfolder/o/orzhova_the_church_of_deals.txt svneol=native#text/plain
@@ -6594,6 +6602,7 @@ res/cardsfolder/s/seismic_spike.txt svneol=native#text/plain
 res/cardsfolder/s/seismic_strike.txt svneol=native#text/plain
 res/cardsfolder/s/seizan_perverter_of_truth.txt svneol=native#text/plain
 res/cardsfolder/s/seize_the_initiative.txt svneol=native#text/plain
+res/cardsfolder/s/seize_the_soul.txt -text
 res/cardsfolder/s/seizures.txt svneol=native#text/plain
 res/cardsfolder/s/sejiri_merfolk.txt svneol=native#text/plain
 res/cardsfolder/s/sejiri_refuge.txt svneol=native#text/plain

@@ -184,6 +184,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
     private Map<String, String> sVars = new TreeMap<String, String>();
     private static String[] storableSVars = {"ChosenX"};
+    
+    private ArrayList<Card> hauntedBy = new ArrayList<Card>();
+    private Card haunting = null;
 
     /**
      * 
@@ -1615,7 +1618,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(" (When this enters the battlefield, sacrifice it unless you exile another ");
                     sbLong.append(types);
                     sbLong.append(" you control. When this leaves the battlefield, that card returns to the battlefield.)\r\n");
-                } else if (keyword.get(i).endsWith(".")) {
+                } else if (keyword.get(i).endsWith(".") && !keyword.get(i).startsWith("Haunt")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ")
                         && keyword.get(i).contains(" unless you pay"))
@@ -1644,6 +1647,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(numCounters);
                     sbLong.append(" +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
                 } else if (keyword.get(i).startsWith("MayEffectFromOpeningHand")) {
+                    continue;
+                } else if (keyword.get(i).contains("Haunt")) {
+                    sb.append("\r\nHaunt (");
+                    if(isCreature()) {
+                        sb.append("When this creature dies, exile it haunting target creature.");
+                    }
+                    else
+                    {
+                        sb.append("When this spell card is put into a graveyard after resolving, exile it haunting target creature.");
+                    }
+                    sb.append(")");
                     continue;
                 } else {
                     if (i != 0 && sb.length() != 0) {
@@ -1760,10 +1774,31 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(")\r\n");
                 }
             }
-
+            
+            for(String keyw : kw) {
+                if(keyw.startsWith("Haunt")) {
+                    if (sb.toString().endsWith("\r\n\r\n")) {
+                        sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                    }
+                    sb.append("Haunt (");
+                    if(isCreature()) {
+                        sb.append("When this creature dies, exile it haunting target creature.");
+                    }
+                    else {
+                        sb.append("When this spell card is put into a graveyard after resolving, exile it haunting target creature.");
+                    }
+                    sb.append(")\r\n");
+                }
+            }
+            
+            if(haunting != null) {
+                sb.append("Haunting: ").append(haunting);
+                sb.append("\r\n");
+            }
+            
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
-            }
+            }            
 
             return sb.toString().replaceAll("CARDNAME", getName());
         }
@@ -1869,6 +1904,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("\r\n");
             }
+        }
+        
+        if(hauntedBy.size() != 0) {
+            sb.append("Haunted by: ");
+            for(Card c : hauntedBy) {
+                sb.append(c).append(",");
+            }
+            sb.deleteCharAt(sb.length()-1);
+            sb.append("\r\n");
+        }
+        
+        if(haunting != null) {
+            sb.append("Haunting: ").append(haunting);
+            sb.append("\r\n");
         }
 
         /*
@@ -4957,6 +5006,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!equippedBy.contains(source)) return false;
         } else if (Property.startsWith("Equipped")) {
             if (!equipping.contains(source)) return false;
+        } else if (Property.startsWith("HauntedBy")) {
+            if (!hauntedBy.contains(source)) return false;
         } else if (Property.startsWith("Above")){	// "Are Above" Source
         	CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
         	if (!list.getAbove(source, this))
@@ -6128,6 +6179,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setFoil(final int f) {
     	sVars.put("Foil", Integer.toString(f));
+    }
+    
+    public final void addHauntedBy(final Card c) {
+        hauntedBy.add(c);
+        if(c != null) {
+            c.setHaunting(this);
+        }
+    }
+    
+    public final ArrayList<Card> getHauntedBy() {
+        return hauntedBy;
+    }
+    
+    public final void removeHauntedBy(final Card c) {
+        hauntedBy.remove(c);
+    }
+    
+    public final Card getHaunting() {
+        return haunting;
+    }
+    
+    public final void setHaunting(final Card c) {
+        haunting = c;
     }
 
 } //end Card class

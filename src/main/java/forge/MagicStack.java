@@ -820,7 +820,7 @@ public class MagicStack extends MyObservable {
         SpellAbility sa = AllZone.getStack().pop();
 
         AllZone.getPhase().resetPriority();    // ActivePlayer gains priority first after Resolve
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
 
         if (hasFizzled(sa, source)) { //Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
@@ -832,6 +832,67 @@ public class MagicStack extends MyObservable {
         } else {
             sa.resolve();
             finishResolving(sa, false);
+        }
+        
+        if(source.hasStartOfKeyword("Haunt") && !source.isCreature() && AllZone.getZoneOf(source).is(Constant.Zone.Graveyard)) {
+            CardList creats = AllZoneUtil.getCreaturesInPlay();
+            if(creats.size() != 0)
+            {
+                final Ability haunterDies_Work = new Ability(source,"0") {
+                    @Override
+                    public void resolve() {
+                        AllZone.getGameAction().exile(source);
+                        getTargetCard().addHauntedBy(source);                  
+                    }
+                  };
+                  haunterDies_Work.setDescription("");
+                  
+                  final Input target = new Input() {
+                      private static final long serialVersionUID = 1981791992623774490L;
+
+                      @Override
+                      public void showMessage() {
+                          AllZone.getDisplay().showMessage("Choose target creature to haunt.");
+                          ButtonUtil.disableAll();
+                      }
+
+                      @Override
+                      public void selectCard(final Card c, final PlayerZone zone) {
+                          if(!zone.is(Constant.Zone.Battlefield)) {
+                              return;
+                          }
+                          if(CardFactoryUtil.canTarget(source,c))
+                          {
+                              haunterDies_Work.setTargetCard(c);
+                              add(haunterDies_Work);
+                              stop();
+                          }
+                          else
+                          {
+                              AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
+                          }
+                      }
+                  };
+                  
+                  if(source.getController().isHuman())
+                  {
+                      AllZone.getInputControl().setInput(target);
+                  }
+                  else
+                  {
+                      //AI choosing what to haunt
+                      CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
+                      if(oppCreats.size() != 0)
+                      {
+                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(oppCreats));
+                      }
+                      else
+                      {
+                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(creats));
+                      }
+                      add(haunterDies_Work);
+                  }
+            }
         }
 
     }

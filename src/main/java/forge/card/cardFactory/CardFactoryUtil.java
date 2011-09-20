@@ -3,6 +3,7 @@ package forge.card.cardFactory;
 import com.esotericsoftware.minlog.Log;
 import forge.*;
 import forge.Constant.Zone;
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.*;
@@ -4769,6 +4770,137 @@ public class CardFactoryUtil {
 
                 card.addSpellAbility(altCostSA);
             }
+        }
+        
+        if(card.hasStartOfKeyword("Haunt")) {
+            int hauntPos = card.getKeywordPosition("Haunt");
+            String[] splitKeyword = card.getKeyword().get(hauntPos).split(":");
+            String hauntSVarName = splitKeyword[1];
+            String abilityDescription = splitKeyword[2];
+            String hauntAbilityDescription = abilityDescription.substring(0,1).toLowerCase() + abilityDescription.substring(1);
+            String hauntDescription;
+            if(card.isCreature())
+            {
+                hauntDescription = "When " + card.getName() + " enters the battlefield or the creature it haunts dies, " + hauntAbilityDescription;
+            }
+            else
+            {
+                hauntDescription = "When the creature " + card.getName() + " haunts dies, " + hauntAbilityDescription;
+            }
+            
+
+            card.getKeyword().remove(hauntPos);
+            
+            //First, create trigger that runs when the haunter dies (if it's a creature)
+            Trigger haunterDies = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank", card, true);
+            
+            final Ability haunterDies_Work = new Ability(card,"0") {
+              @Override
+              public void resolve() {                  
+                  getTargetCard().addHauntedBy(card);
+                  AllZone.getGameAction().exile(card);
+              }
+            };
+            haunterDies_Work.setDescription(hauntDescription);
+            
+            final Input target = new Input() {
+                private static final long serialVersionUID = 1981791992623774490L;
+
+                @Override
+                public void showMessage() {
+                    AllZone.getDisplay().showMessage("Choose target creature to haunt.");
+                    ButtonUtil.disableAll();
+                }
+
+                @Override
+                public void selectCard(final Card c, final PlayerZone zone) {
+                    if(!zone.is(Constant.Zone.Battlefield)) {
+                        return;
+                    }
+                    if(canTarget(card,c))
+                    {
+                        haunterDies_Work.setTargetCard(c);
+                        AllZone.getStack().add(haunterDies_Work);
+                        stop();
+                    }
+                    else
+                    {
+                        AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
+                    }
+                }
+            };
+            
+            Ability haunterDies_Setup = new Ability(card,"0") {
+              @Override
+              public void resolve() {
+                  CardList creats = AllZoneUtil.getCreaturesInPlay();
+                  
+                  if(creats.size() == 0)
+                  {
+                      return;
+                  }
+                  
+                  //need to do it this way because I don't know quite how to make TriggerHandler respect BeforePayMana.
+                  if(card.getController().isHuman())
+                  {
+                      AllZone.getInputControl().setInput(target);
+                  }
+                  else
+                  {
+                      //AI choosing what to haunt
+                      CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
+                      if(oppCreats.size() != 0)
+                      {
+                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(oppCreats));
+                      }
+                      else
+                      {
+                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(creats));
+                      }
+                      AllZone.getStack().add(haunterDies_Work);
+                  }
+              }
+            };
+            
+            haunterDies.setOverridingAbility(haunterDies_Setup);
+            
+            //Second, create the trigger that runs when the haunted creature dies
+            Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.HauntedBy | Execute$ " + hauntSVarName + " | TriggerDescription$ " + hauntDescription, card, true);
+            
+            //Third, create the trigger that runs when the haunting creature enters the battlefield
+            Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ " + hauntSVarName + " | Secondary$ True | TriggerDescription$ " + hauntDescription, card, true);
+            
+            //Fourth, create a trigger that removes the haunting status if the haunter leaves the exile
+            Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Exile | ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank", card, true);
+            
+            Ability haunterUnExiled_Work = new Ability(card,"0") {
+                @Override
+                public void resolve() {
+                    if(card.getHaunting() != null)
+                    {
+                        card.getHaunting().removeHauntedBy(card);
+                        card.setHaunting(null);
+                    }                    
+                }
+            };
+            
+            haunterUnExiled.setOverridingAbility(haunterUnExiled_Work);
+            
+            //Fifth, add all triggers and abilities to the card.
+            if(card.isCreature()) {
+                card.addTrigger(haunterETB);
+                card.addTrigger(haunterDies);
+            }
+            else {
+                AbilityFactory af = new AbilityFactory();
+                String abString = card.getSVar(hauntSVarName).replace("AB$", "SP$").replace("Cost$ 0", "Cost$ " + card.getManaCost()) + " | SpellDescription$ " + abilityDescription;
+                
+                SpellAbility sa = af.getAbility(abString, card);
+                card.addSpellAbility(sa);
+            }
+            
+            card.addTrigger(hauntedDies);
+            card.addTrigger(haunterUnExiled);
         }
 
         return card;

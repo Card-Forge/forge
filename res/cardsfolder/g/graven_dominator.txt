@@ -1,0 +1,11 @@
+Name:Graven Dominator
+ManaCost:4 W W
+Types:Creature Gargoyle
+Text:no text
+PT:4/4
+K:Flying
+K:Haunt:TrigAnimate:Each other creature becomes 1/1 until end of turn.
+SVar:TrigAnimate:AB$AnimateAll | Cost$ 0 | ValidCards$ Creature.Other | SetPower$ 1 | SetToughness$ 1
+Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Graven Dominator enters the battlefield or the creature it haunts dies, each other creature becomes 1/1 until end of turn.
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/7.jpg
+End

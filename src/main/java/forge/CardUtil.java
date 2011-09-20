@@ -692,6 +692,10 @@ public final class CardUtil {
         res.setChangedCardTypes(c.getChangedCardTypes());
         res.setNewPT(c.getNewPT());
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
+        res.setHaunting(c.getHaunting());
+        for(Card haunter : c.getHauntedBy()) {
+            res.addHauntedBy(haunter);
+        }
 
         return res;
     }
