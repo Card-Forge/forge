@@ -538,8 +538,7 @@ public class Upkeep implements java.io.Serializable {
      * @return a {@link forge.CardList} object.
      */
     private static CardList abyss_getTargets(final Player player, final Card card) {
-        CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-        creats = creats.filter(CardListFilter.nonartifacts);
+        CardList creats = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.nonartifacts);
         creats = creats.getTargetableCards(card);
         return creats;
     }
@@ -561,8 +560,7 @@ public class Upkeep implements java.io.Serializable {
             final Ability sacrificeArtifact = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    CardList artifacts = player.getCardsIn(Zone.Battlefield);
-                    artifacts = artifacts.filter(CardListFilter.artifacts);
+                    CardList artifacts = player.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
 
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {

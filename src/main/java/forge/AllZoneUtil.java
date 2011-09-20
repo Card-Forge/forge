@@ -33,22 +33,6 @@ public final class AllZoneUtil {
         return creats.filter(CardListFilter.creatures);
     }
 
-    /**
-     * use to get a list of creatures in play with a given keyword.
-     *
-     * @param keyword the keyword to get creatures for
-     * @return a CardList containing all creatures in play with a given keyword
-     */
-    public static CardList getCreaturesInPlayWithKeyword(final String keyword) {
-        CardList list = getCreaturesInPlay();
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return c.hasKeyword(keyword);
-            }
-        });
-        return list;
-    }
-
     
     /**
      * gets a list of all cards of a certain type that a given player has in given zone.
@@ -70,8 +54,12 @@ public final class AllZoneUtil {
      */
     public static CardList getCardsIn(final Constant.Zone zone) {
         CardList cards = new CardList();
-        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
-            cards.addAll(p.getZone(zone).getCards());    
+        if ( zone == Zone.Stack) {
+            cards.addAll(AllZone.getStackZone().getCards());
+        } else {
+            for (Player p : AllZone.getPlayersInGame()) {
+                cards.addAll(p.getZone(zone).getCards());
+            }
         }
         return cards;
     }
@@ -386,8 +374,9 @@ public final class AllZoneUtil {
      */
     public static CardList getCardsInGame() {
         CardList all = new CardList();
-        getCardsInGame(AllZone.getHumanPlayer(), all);
-        getCardsInGame(AllZone.getComputerPlayer(), all);
+        for (Player p : AllZone.getPlayersInGame()) {
+            getCardsInGame(p, all);
+        }
         return all;
     }
 
@@ -396,7 +385,7 @@ public final class AllZoneUtil {
         CardList all = toAdd == null ? new CardList() : toAdd;
         all.addAll(player.getZone(Zone.Graveyard).getCards());
         all.addAll(player.getZone(Zone.Hand).getCards());
-        all.addAll(player.getZone(Zone.Library).getCards());
+        all.addAll(player.getZone(Zone.Library).getCards()); // not sure if library should be included.
         all.addAll(player.getZone(Zone.Battlefield).getCards());
         all.addAll(player.getZone(Zone.Exile).getCards());
         //should this include Human_Command ?
