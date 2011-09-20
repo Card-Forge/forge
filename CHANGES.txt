@@ -293,6 +293,35 @@ Comment=
 - Ran oracle script.
 - Fixed loading bug for old quest.dat files.
 - Added the recent commit logs to changes.txt.
+- Converted Barren Glory to script.
+- Reverted properties file.
+- added Mandatory to Castigate
+- Minor fix
+- Fixed Orcish Veteran.
+- Fixed Gibbering Hyenas.
+- fix for crash when was querying Stack zone from global getCardsIn(List<Zone>)
+- just trying to understand things (comment added)
+- clear triggerHandler moved to FGameState
+- Added a Description$ for the alt cost to the five Bringer of the {color} Dawn cards.
+- Target spell choice for counterspell (and similiar cards) is fixed
+- ETB zone fixed
+- Commonly used CardFilters moved to CardListFilter file
+- moved getPlayersInGame from AllZoneUtil to AllZone (together with getHumanPlayer and getComputerPlayer)
+- removed getTypeIn() from AllZoneUtil, all ocurrencies use getCardsIn().filter(CardListFilter.type)... does not allocate memory for filter each time.
+- fixing another place for NPE
+- Removed CardListFilter creation in AllZoneUtil, re-wired it to CardList.get... - which include both filter creation and filtering.
+- contains() added to PlayerZone - that's another AllZoneUtil call eliminated as well as useless copying to arrays with the only purpose of checking
+- two useless functions in AllZoneUtil less.
+- getPlayerTypeIn from AllZoneUtil removed in favour of player.getCardsIn(zone).getType(type)
+- isCardInPlayerGraveyard no longer there.
+- XPaid can now be used with XMath
+- Converted Banshee to Script
+- Made getAffectedCards in StaticAbility_Continuous compatible with the new AllZoneUtil.getCardsIn function.
+- Cleanup (mostly in CardFactory_Creatures).
+- Converted Echoing Courage to script.
+- Cleanup in two CardFactories.
+- Fixed and simplified some of the cards with "Whenever you cast a Spirit or Arcane spell,...".
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -350,6 +379,7 @@ Rainbow Crow
 Psychic Possession
 Humility
 Reverent Silence
+Invigorate
 
 
 end
