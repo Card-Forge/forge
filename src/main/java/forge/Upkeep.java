@@ -2066,8 +2066,8 @@ public class Upkeep implements java.io.Serializable {
                                     oathFlag = false;
                                 }
                             } else {    // if player == Computer
-                                CardList creaturesInLibrary = AllZoneUtil.getPlayerTypeIn(player, Zone.Library, "Creature");
-                                CardList creaturesInBattlefield = AllZoneUtil.getPlayerTypeIn(player, Zone.Battlefield, "Creature");
+                                CardList creaturesInLibrary = player.getCardsIn(Zone.Library).getType("Creature");
+                                CardList creaturesInBattlefield = player.getCardsIn(Zone.Battlefield).getType("Creature");
 
                                 // if there are at least 3 creatures in library, or none in play with one in library, oath
                                 if (creaturesInLibrary.size() > 2
@@ -2131,7 +2131,7 @@ public class Upkeep implements java.io.Serializable {
                 Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        CardList graveyardCreatures = AllZoneUtil.getPlayerTypeIn(player, Zone.Graveyard, "Creature");
+                        CardList graveyardCreatures = player.getCardsIn(Zone.Graveyard).getType("Creature");
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
@@ -2169,7 +2169,7 @@ public class Upkeep implements java.io.Serializable {
     private static void upkeep_Karma() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList karmas = AllZoneUtil.getCardsIn(Zone.Battlefield, "Karma");
-        CardList swamps = AllZoneUtil.getPlayerTypeIn(player, Zone.Battlefield, "Swamp");
+        CardList swamps = player.getCardsIn(Zone.Battlefield).getType("Swamp");
 
         // determine how much damage to deal the current player
         final int damage = swamps.size();

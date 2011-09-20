@@ -1506,7 +1506,7 @@ public class CardFactory_Instants {
                     String[] choices = new String[]{"Artifact", "Creature", "Land"};
                     Object o = GuiUtils.getChoice("Select permanent type", choices);
                     String cardType = (String) o;
-                    CardList list = AllZoneUtil.getPlayerTypeIn(getTargetPlayer(), Zone.Battlefield, cardType);
+                    CardList list = getTargetPlayer().getCardsIn(Zone.Battlefield).getType(cardType);
 
                     String[] tapOrUntap = new String[]{"Tap", "Untap"};
                     Object z = GuiUtils.getChoice("Tap or Untap?", tapOrUntap);

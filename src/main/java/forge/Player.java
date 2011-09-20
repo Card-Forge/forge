@@ -1274,7 +1274,7 @@ public abstract class Player extends GameEntity {
      * @return a {@link forge.Card} object.
      */
     public Card getPlaneswalker() {
-        CardList c = AllZoneUtil.getPlayerTypeIn(this, Zone.Battlefield, "Planeswalker");
+        CardList c = getCardsIn(Zone.Battlefield).getType("Planeswalker");
         if (null != c && c.size() > 0) return c.get(0);
         else return null;
     }
@@ -1580,7 +1580,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public boolean hasMetalcraft() {
-        CardList list = AllZoneUtil.getPlayerTypeIn(this, Zone.Battlefield, "Artifact");
+        CardList list = getCardsIn(Zone.Battlefield).getType("Artifact");
         return list.size() >= 3;
     }
 

@@ -1238,7 +1238,7 @@ public class CardFactory_Planeswalkers {
 
                     final Player target = getTargetPlayer();
                     final Player player = card.getController();
-                    CardList dragons = AllZoneUtil.getPlayerTypeIn(player, Zone.Battlefield, "Dragon");
+                    CardList dragons = player.getCardsIn(Zone.Battlefield).getType("Dragon");
                     for (int i = 0; i < dragons.size(); i++) {
                         Card dragon = dragons.get(i);
                         int damage = dragon.getNetAttack();
@@ -1250,7 +1250,7 @@ public class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlayAI() {
                     setTargetPlayer(AllZone.getHumanPlayer());
-                    CardList dragons = AllZoneUtil.getPlayerTypeIn(AllZone.getComputerPlayer(), Zone.Battlefield, "Dragon");
+                    CardList dragons = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Dragon");
                     return card.getCounters(Counters.LOYALTY) >= 4 && dragons.size() >= 1;
                 }
 
@@ -1471,7 +1471,7 @@ public class CardFactory_Planeswalkers {
 
                 @Override
                 public void showMessage() {
-                    CardList lands = AllZoneUtil.getPlayerTypeIn(card.getController(), Zone.Battlefield, "Mountain");
+                    CardList lands = card.getController().getCardsIn(Zone.Battlefield).getType("Mountain");
 
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability1, lands, "Select target Mountain",
                             true, false));

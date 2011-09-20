@@ -2266,12 +2266,12 @@ public class CardFactory_Sorceries {
                 }
 
                 public Card[] getCreatures() {
-                    CardList creature = AllZoneUtil.getPlayerTypeIn(card.getController(), Zone.Graveyard, "Creature");
+                    CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
                     return creature.toArray();
                 }
 
                 public Card[] getCreaturesAI() {
-                    CardList creature = AllZoneUtil.getPlayerTypeIn(card.getController(), Zone.Graveyard, "Creature");
+                    CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
                     creature = creature.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.getNetAttack() > 4;
@@ -2300,7 +2300,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void showMessage() {
-                    CardList creature = AllZoneUtil.getPlayerTypeIn(card.getController(), Zone.Graveyard, "Creature");
+                    CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
                     Object check = GuiUtils.getChoiceOptional("Select creature", creature);
                     if (check != null) {
                         spell.setTargetCard((Card) check);

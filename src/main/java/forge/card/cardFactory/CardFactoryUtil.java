@@ -2773,7 +2773,7 @@ public class CardFactoryUtil {
         }
         if (sq[0].contains("LandsInGraveyard")) {
             if (players.size() > 0) {
-                return doXMath(AllZoneUtil.getPlayerTypeIn(players.get(0), Zone.Graveyard, "Land").size(), m, source);
+                return doXMath(players.get(0).getCardsIn(Zone.Graveyard).getType("Land").size(), m, source);
             }
         }
 

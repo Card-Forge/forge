@@ -778,7 +778,7 @@ public class ComputerUtil {
         landList = landList.filter(CardListFilter.lands);
 
 
-        CardList lands = AllZoneUtil.getPlayerTypeIn(computer, Zone.Graveyard, "Land");
+        CardList lands = computer.getCardsIn(Zone.Graveyard).getType("Land");
         for (Card crd : lands){
         	if (crd.isLand() && crd.hasKeyword("May be played"))
         		landList.add(crd);
@@ -972,7 +972,7 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            CardList landsInPlay = AllZoneUtil.getPlayerTypeIn(AllZone.getComputerPlayer(), Zone.Battlefield, "Land");
+            CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Land");
             if (landsInPlay.size() > 5) {
                 CardList landsInHand = hand.getType("Land");
                 if (landsInHand.size() > 0) {       //discard lands

@@ -485,7 +485,7 @@ public class CardFactory_Creatures {
 
 
                     if (card.getController().isHuman()) {
-                        CardList artifacts = AllZoneUtil.getPlayerTypeIn(AllZone.getHumanPlayer(), Zone.Battlefield, "Artifact");
+                        CardList artifacts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Artifact");
 
                         if (artifacts.size() != 0) AllZone.getInputControl().setInput(target);
 
@@ -986,7 +986,7 @@ public class CardFactory_Creatures {
                 }
 
                 public CardList getCreatures() {
-                    CardList creatures = AllZoneUtil.getPlayerTypeIn(card.getController(), Zone.Graveyard, "Elemental");
+                    CardList creatures = card.getController().getCardsIn(Zone.Graveyard).getType("Elemental");
                     return creatures;
                 }
 

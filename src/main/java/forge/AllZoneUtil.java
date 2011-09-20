@@ -12,26 +12,11 @@ import java.util.List;
  * @author dennis.r.friedrichsen (slapshot5 on slightlymagic.net)
  * @version $Id$
  */
-public final class AllZoneUtil {
+public abstract class AllZoneUtil {
 
-    private AllZoneUtil() {
-        throw new AssertionError();
-    }
 
     //////////// Creatures
 
-    /**
-     * gets a list of all cards of a certain type that a given player has in given zone.
-     *
-     * @param player   the player to check for cards in play
-     * @param cardType the card type to check for
-     * @return a CardList with all cards of a certain type the player has in play
-     */
-    public static CardList getPlayerTypeIn(final Player player, final Constant.Zone zone, final String cardType) {
-        CardList cards = player.getCardsIn(zone);
-        cards = cards.getType(cardType);
-        return cards;
-    }
     
     /**
      * gets a list of all cards owned by both players that have are currently in the given zone.
@@ -250,8 +235,8 @@ public final class AllZoneUtil {
     public static int compareTypeAmountInPlay(final Player player, final String type) {
         // returns the difference between player's
         Player opponent = player.getOpponent();
-        CardList playerList = getPlayerTypeIn(player, Zone.Battlefield, type);
-        CardList opponentList = getPlayerTypeIn(opponent, Zone.Battlefield, type);
+        CardList playerList = player.getCardsIn(Zone.Battlefield).getType(type);
+        CardList opponentList = opponent.getCardsIn(Zone.Battlefield).getType(type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -265,8 +250,8 @@ public final class AllZoneUtil {
     public static int compareTypeAmountInGraveyard(final Player player, final String type) {
         // returns the difference between player's
         Player opponent = player.getOpponent();
-        CardList playerList = getPlayerTypeIn(player, Zone.Graveyard, type);
-        CardList opponentList = getPlayerTypeIn(opponent, Zone.Graveyard, type);
+        CardList playerList = player.getCardsIn(Zone.Graveyard).getType(type);
+        CardList opponentList = opponent.getCardsIn(Zone.Graveyard).getType(type);
         return (playerList.size() - opponentList.size());
     }
 
