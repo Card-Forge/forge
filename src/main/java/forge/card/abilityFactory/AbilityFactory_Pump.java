@@ -696,8 +696,8 @@ public class AbilityFactory_Pump {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
     private void pumpResolve(SpellAbility sa) {
-    	Player activator = sa.getActivatingPlayer();
         ArrayList<Card> tgtCards;
+        ArrayList<Card> untargetedCards = new ArrayList<Card>();
         Target tgt = AF.getAbTgt();
         if (tgt != null)
             tgtCards = tgt.getTargetCards();
@@ -706,7 +706,7 @@ public class AbilityFactory_Pump {
 
         if(params.containsKey("Radiance")) {
             for(Card c : CardUtil.getRadiance(hostCard, tgtCards.get(0), params.get("ValidTgts").split(","))) {
-                tgtCards.add(c);
+                untargetedCards.add(c);
             }
         }
         
@@ -722,43 +722,56 @@ public class AbilityFactory_Pump {
             if (tgt != null && !CardFactoryUtil.canTarget(AF.getHostCard(), tgtC))
                 continue;
 
-            final int a = getNumAttack(sa);
-            final int d = getNumDefense(sa);
-
-            tgtC.addTempAttackBoost(a);
-            tgtC.addTempDefenseBoost(d);
-
-            for (int i = 0; i < Keywords.size(); i++) {
-                if (!Keywords.get(i).equals("none"))
-                    tgtC.addExtrinsicKeyword(Keywords.get(i));
-            }
-
-            if (!params.containsKey("Permanent")) {
-                // If not Permanent, remove Pumped at EOT
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = -42244224L;
-
-                    public void execute() {
-                        if (AllZoneUtil.isCardInPlay(tgtC)) {
-                            tgtC.addTempAttackBoost(-1 * a);
-                            tgtC.addTempDefenseBoost(-1 * d);
-
-                            if (Keywords.size() > 0) {
-                                for (int i = 0; i < Keywords.size(); i++) {
-                                    if (!Keywords.get(i).equals("none"))
-                                        tgtC.removeExtrinsicKeyword(Keywords.get(i));
-                                }
-                            }
-
-                        }
-                    }
-                };
-                if (params.containsKey("UntilEndOfCombat")) AllZone.getEndOfCombat().addUntil(untilEOT);
-                else if(params.containsKey("UntilYourNextUpkeep")) AllZone.getUpkeep().addUntil(activator, untilEOT);
-                else AllZone.getEndOfTurn().addUntil(untilEOT);
-            }
+            
+            applyPump(sa,tgtC);
+        }
+        
+        for(int i=0;i<untargetedCards.size();i++) {
+            final Card tgtC = untargetedCards.get(i);
+            if(!AllZoneUtil.isCardInPlay(tgtC))
+                    continue;
+            
+            applyPump(sa,tgtC);
         }
     }//pumpResolve()
+    
+    private void applyPump(final SpellAbility sa,final Card applyTo) {
+        final int a = getNumAttack(sa);
+        final int d = getNumDefense(sa);
+
+        applyTo.addTempAttackBoost(a);
+        applyTo.addTempDefenseBoost(d);
+
+        for (int i = 0; i < Keywords.size(); i++) {
+            if (!Keywords.get(i).equals("none"))
+                applyTo.addExtrinsicKeyword(Keywords.get(i));
+        }
+
+        if (!params.containsKey("Permanent")) {
+            // If not Permanent, remove Pumped at EOT
+            final Command untilEOT = new Command() {
+                private static final long serialVersionUID = -42244224L;
+
+                public void execute() {
+                    if (AllZoneUtil.isCardInPlay(applyTo)) {
+                        applyTo.addTempAttackBoost(-1 * a);
+                        applyTo.addTempDefenseBoost(-1 * d);
+
+                        if (Keywords.size() > 0) {
+                            for (int i = 0; i < Keywords.size(); i++) {
+                                if (!Keywords.get(i).equals("none"))
+                                    applyTo.removeExtrinsicKeyword(Keywords.get(i));
+                            }
+                        }
+
+                    }
+                }
+            };
+            if (params.containsKey("UntilEndOfCombat")) AllZone.getEndOfCombat().addUntil(untilEOT);
+            else if(params.containsKey("UntilYourNextUpkeep")) AllZone.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+            else AllZone.getEndOfTurn().addUntil(untilEOT);
+        }
+    }
 
 
     /////////////////////////////////////
