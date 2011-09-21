@@ -775,14 +775,32 @@ public class AbilityFactory_Attach {
 		Target tgt = aura.getTarget();
 				
 		if (source.getController().isHuman()){
-			CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
-			list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
-			
-			Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
-			if (o instanceof Card){
-				source.enchantEntity((Card)o);
-				return true;
-			}
+		    if (tgt.canTgtPlayer()){
+		        ArrayList<Player> players = new ArrayList<Player>();
+
+		        // TODO Once Player's are gaining Protection we need to add a check here
+		        
+		        players.add(AllZone.getComputerPlayer());
+		        if (!tgt.canOnlyTgtOpponent()){
+		            players.add(AllZone.getHumanPlayer());
+		        }
+		        
+                Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());
+                if (o instanceof Player) {
+                    source.enchantEntity((Player) o);
+                    return true;
+                }
+		    }
+		    else{
+                CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
+                list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+
+                Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
+                if (o instanceof Card) {
+                    source.enchantEntity((Card) o);
+                    return true;
+                }
+		    }
 		}
 		
 		else if (AbilityFactory_Attach.attachPreference(af, aura, af.getMapParams(), tgt, true)){
@@ -791,9 +809,10 @@ public class AbilityFactory_Attach {
 				source.enchantEntity((Card)o);
 				return true;
 			}
-			else if (o instanceof Player)
-				; // c.enchantPlayer((Player)o)
-
+			else if (o instanceof Player){
+			    source.enchantEntity((Player)o);
+			    return true;
+			}
 		}
 
 		return false;
