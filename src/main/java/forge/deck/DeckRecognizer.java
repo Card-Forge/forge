@@ -1,7 +1,10 @@
 package forge.deck;
 
-import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 
 /** 
@@ -58,9 +61,63 @@ public class DeckRecognizer {
         public int getNumber() { return number; }
     }
 
-    public static Token recognizeLine(String line)
+//  Let's think about it numbers in the back later
+//  private static final Pattern searchNumbersInBack = Pattern.compile("(.*)[^A-Za-wyz]*\\s+([\\d]{1,2})");
+    private static final Pattern searchNumbersInFront = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
+    public static Token recognizeLine(String raw_line)
     {
-        return new Token(TokenType.Unknown, 0, line);
+        if (StringUtils.isBlank(raw_line)) { return new Token(TokenType.Comment, 0, raw_line); }
+        String line = raw_line.trim();
+        
+        Token result = null;
+        Matcher foundNumbersInFront = searchNumbersInFront.matcher(line);
+        // Matcher foundNumbersInBack = searchNumbersInBack.matcher(line);
+        if (foundNumbersInFront.matches()) {
+            String cardName = foundNumbersInFront.group(2);
+            int amount = Integer.parseInt(foundNumbersInFront.group(1));
+            result = recognizePossibleNameAndNumber(cardName, amount);
+        } /* else if (foundNumbersInBack.matches()) {
+            String cardName = foundNumbersInBack.group(1);
+            int amount = Integer.parseInt(foundNumbersInBack.group(2));
+            return new Token(cardName, amount);
+        } */else  {
+            if ( CardDb.instance().isCardSupported(line)) {
+                return new Token( CardDb.instance().getCard(line), 1);
+            }
+            result = recognizeNonCard(line, 1);
+        }
+        return result != null ? result : new Token(TokenType.Unknown, 0, line); 
+    }
+    
+    private static Token recognizePossibleNameAndNumber(String name, int n) {
+        if ( CardDb.instance().isCardSupported(name))
+            return new Token( CardDb.instance().getCard(name), n);
+        
+        Token known = recognizeNonCard(name, n);
+        return null == known ? new Token(name, n) : known;
+    }
+    
+    private static Token recognizeNonCard(String text, int n) {
+        if (isDecoration(text)) { return new Token(TokenType.Comment, n, text); }
+        if (isSectionName(text)) { return new Token(TokenType.SectionName, n, text); }
+        return null;
+    }
+    
+    private final static String[] knownComments = new String[] {
+        "lands", "creatures", "creature", "spells", "enchancements", "other spells", "artifacts", "cards" };
+    private static boolean isDecoration(String line) {
+        for (String s : knownComments) {
+            if (line.equalsIgnoreCase(s)) { return true; }
+        }
+        return false;
     }
 
+    private static boolean isSectionName(String line) {
+        if (line.equalsIgnoreCase("sideboard")) { return true; }
+        if (line.equalsIgnoreCase("MAIN BOARD")) { return true; }
+        if (line.equalsIgnoreCase("MAIN")) { return true; }
+        return false;
+    }
+    
+    
 }

@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.card.CardInSet;
 import forge.card.CardRules;
@@ -102,24 +102,42 @@ public final class CardDb {
         uniqueCards.put(cardName, lastAdded);
     }
 
-    public boolean isCardSupported(final String cardName) { return uniqueCards.containsKey(cardName.toLowerCase()); }
+    public boolean isCardSupported(final String cardName) { 
+        ImmutablePair<String, String> nameWithSet = splitCardName(cardName);
+        if ( nameWithSet.right == null ) { return uniqueCards.containsKey(nameWithSet.left.toLowerCase()); }
+        // Set exists?
+        Map<String, CardPrinted[]> cardsFromset = allCardsBySet.get(nameWithSet.right.toUpperCase());
+        if (cardsFromset == null) return false;
+        // Card exists?
+        CardPrinted[] cardCopies = cardsFromset.get(nameWithSet.left.toLowerCase());
+        return cardCopies != null && cardCopies.length > 0;
+    }
     
-    
+    /**
+     * Splits cardname into Name and set whenever deck line reads as name|set
+     */
+    private static ImmutablePair<String, String> splitCardName(final String name) {
+        String cardName = name; // .trim() ?
+        int pipePos = cardName.indexOf('|');
+        
+        if (pipePos >= 0) {
+            String setName = cardName.substring(pipePos + 1).trim();
+            cardName = cardName.substring(0, pipePos);
+            // only if set is not blank try to load it
+            if (StringUtils.isNotBlank(setName) && !"???".equals(setName)) {
+                return new ImmutablePair<String, String>(cardName, setName);
+            }
+        }
+        return new ImmutablePair<String, String>(cardName, null);
+    }
+
     // Single fetch
     public CardPrinted getCard(final String name) {
         // Sometimes they read from decks things like "CardName|Set" - but we can handle it
-        int pipePos = name.indexOf('|');
-        String cardName = name;
-        if (pipePos >= 0) {
-            cardName = name.substring(0, pipePos);
-            String setName = name.substring(pipePos + 1).trim();
-            // only if set is not blank try to load it
-            if (StringUtils.isNotBlank(setName) && !"???".equals(setName)) {
-                return getCard(cardName, setName);
-            }
-        }
+        ImmutablePair<String, String> nameWithSet = splitCardName(name);
+        if (nameWithSet.right != null) { return getCard(nameWithSet.left, nameWithSet.right); } 
         // OK, plain name here
-        CardPrinted card = uniqueCards.get(cardName.toLowerCase());
+        CardPrinted card = uniqueCards.get(nameWithSet.left.toLowerCase());
         if (card != null) { return card; }
         throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
     }
