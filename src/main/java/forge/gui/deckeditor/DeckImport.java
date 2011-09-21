@@ -50,7 +50,7 @@ public class DeckImport extends JDialog {
     		"<div class='section'>Legend</div>" +
     		"<ul>" +
     		"<li class='knowncard'>Recognized cards will be shown in green. These cards will be auto-imported into a new deck<BR></li>" +
-    		"<li class='unknowncard'>Lines which seem to see cards but could not be recognized, are shown in red<BR></li>" +
+    		"<li class='unknowncard'>Lines which seem to be cards but are either misspelled or unsupported by Forge, are shown in dark-red<BR></li>" +
     		"<li class='comment'>Lines that appear unsignificant will be shown in gray<BR><BR></li>" +
     		"</ul>" +
     		"<div class='comment'>Submit feedback to Max mtg on slightlymagic.net forum</div>" +
@@ -119,6 +119,7 @@ public class DeckImport extends JDialog {
                 processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING)); } });
 
         txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
+        cmdAccept.setEnabled(false);
     }
     
     private void readInput()
@@ -155,12 +156,13 @@ public class DeckImport extends JDialog {
         int[] cardsUnknown = new int[2];
         int idx = 0;
         for (DeckRecognizer.Token t : tokens) {
-            if (t.getType() == TokenType.KnownCardWithNumber) { cardsOk[idx] += t.getNumber(); }
-            if (t.getType() == TokenType.UnknownCardWithNumber) { cardsUnknown[idx] += t.getNumber(); }
+            if (t.getType() == TokenType.KnownCard) { cardsOk[idx] += t.getNumber(); }
+            if (t.getType() == TokenType.UnknownCard) { cardsUnknown[idx] += t.getNumber(); }
             if (t.getType() == TokenType.SectionName && t.getText().toLowerCase().contains("side") ) { idx = 1; }
         }
         summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
         summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1], cardsUnknown[1]));
+        cmdAccept.setEnabled(cardsOk[0] > 0);
     }
     
     private Deck buildDeck(){
@@ -177,13 +179,13 @@ public class DeckImport extends JDialog {
     private String makeHtmlViewOfToken(DeckRecognizer.Token token) {
         switch(token.getType())
         {
-        case KnownCardWithNumber: 
+        case KnownCard: 
             return String.format("<div class='knowncard'>%s * %s [%s]</div>", token.getNumber(), token.getCard().getName(), token.getCard().getSet());
-        case UnknownCardWithNumber: 
+        case UnknownCard: 
             return String.format("<div class='unknowncard'>%s * %s</div>", token.getNumber(), token.getText());
         case SectionName:
             return String.format("<div class='section'>%s</div>", token.getText());
-        case Unknown:
+        case UnknownText:
         case Comment:
             return String.format("<div class='comment'>%s</div>", token.getText());
         }

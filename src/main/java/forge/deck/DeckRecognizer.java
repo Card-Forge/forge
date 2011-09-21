@@ -16,11 +16,11 @@ import forge.item.CardPrinted;
  */
 public class DeckRecognizer {
     public enum TokenType {
-        KnownCardWithNumber,
-        UnknownCardWithNumber,
+        KnownCard,
+        UnknownCard,
         SectionName,
         Comment,
-        Unknown
+        UnknownText
     }
     
     public static class Token {
@@ -29,30 +29,27 @@ public class DeckRecognizer {
         private final int number;
         private final String text;
         
-        public Token(CardPrinted knownCard, int count) { 
-            card = knownCard;
-            text = null;
-            number =  count;
-            type = TokenType.KnownCardWithNumber;
+        public static Token knownCard(CardPrinted theCard, int count) {
+            return new Token(theCard, TokenType.KnownCard, count, null);
+        }
+        public static Token unknownCard(String cardNme, int count) {
+            return new Token(null, TokenType.UnknownCard, count, cardNme);
         }
 
-        public Token(String unknownCard, int count) { 
-            card = null;
-            text = unknownCard;
+        private Token(CardPrinted knownCard, TokenType type1, int count, String message) 
+        {
+            card = knownCard;
             number = count;
-            type = TokenType.UnknownCardWithNumber;
+            type = type1;
+            text = message;
         }
 
         public Token(TokenType type1, int count, String message)
         {
-            if (type1 == TokenType.KnownCardWithNumber || type1 == TokenType.UnknownCardWithNumber) {
-                throw new IllegalArgumentException("Use specialized constructors for recognized card lines");
+            this(null, type1, count, message);
+            if (type1 == TokenType.KnownCard || type1 == TokenType.UnknownCard) {
+                throw new IllegalArgumentException("Use factory methods for recognized card lines");
             }
-
-            card = null;
-            number = count;
-            type = type1;
-            text = message;
         }
 
         public String getText() { return text; }
@@ -82,19 +79,19 @@ public class DeckRecognizer {
             return new Token(cardName, amount);
         } */else  {
             if ( CardDb.instance().isCardSupported(line)) {
-                return new Token( CardDb.instance().getCard(line), 1);
+                return Token.knownCard(CardDb.instance().getCard(line), 1);
             }
             result = recognizeNonCard(line, 1);
         }
-        return result != null ? result : new Token(TokenType.Unknown, 0, line); 
+        return result != null ? result : new Token(TokenType.UnknownText, 0, line); 
     }
     
     private static Token recognizePossibleNameAndNumber(String name, int n) {
         if ( CardDb.instance().isCardSupported(name))
-            return new Token( CardDb.instance().getCard(name), n);
+            return Token.knownCard(CardDb.instance().getCard(name), n);
         
         Token known = recognizeNonCard(name, n);
-        return null == known ? new Token(name, n) : known;
+        return null == known ? Token.unknownCard(name, n) : known;
     }
     
     private static Token recognizeNonCard(String text, int n) {
@@ -104,8 +101,14 @@ public class DeckRecognizer {
     }
     
     private final static String[] knownComments = new String[] {
-        "lands", "creatures", "creature", "spells", "enchancements", "other spells", "artifacts", "cards" };
-    private static boolean isDecoration(String line) {
+        "land", "lands", "creatures", "creature", "spells", "enchancements", "other spells", "artifacts" };
+    private final static String[] knownCommentParts = new String[] { "card" };
+
+    private static boolean isDecoration(String lineAsIs) {
+        String line = lineAsIs.toLowerCase();
+        for (String s : knownCommentParts) {
+            if (line.contains(s)) { return true; }
+        }
         for (String s : knownComments) {
             if (line.equalsIgnoreCase(s)) { return true; }
         }
