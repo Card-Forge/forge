@@ -1185,7 +1185,8 @@ public class ComputerUtil {
      * @param amount a int.
      * @param list a {@link forge.CardList} object.
      */
-    static public void sacrificePermanents(int amount, CardList list) {
+    static public CardList sacrificePermanents(int amount, CardList list) {
+        CardList sacList = new CardList();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();
         if (max > amount)
@@ -1220,8 +1221,10 @@ public class ComputerUtil {
             }
 
             list.remove(c);
+            sacList.add(c);
             AllZone.getGameAction().sacrifice(c);
         }
+        return sacList;
     }
 
     /**

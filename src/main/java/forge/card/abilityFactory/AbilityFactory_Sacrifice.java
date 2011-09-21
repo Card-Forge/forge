@@ -339,7 +339,7 @@ public class AbilityFactory_Sacrifice {
         if (tgt != null)
             tgts = tgt.getTargetPlayers();
         else
-            tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            tgts = AbilityFactory.getDefinedPlayers(card, params.get("Defined"), sa);
 
         String valid = params.get("SacValid");
         if (valid == null)
@@ -351,30 +351,57 @@ public class AbilityFactory_Sacrifice {
 
         msg = "Sacrifice a " + msg;
 
+        boolean remSacrificed = params.containsKey("RememberSacrificed");
+        if (remSacrificed)
+            card.clearRemembered();
+        
         if (valid.equals("Self")) {
-            if (AllZone.getZoneOf(sa.getSourceCard()).is(Constant.Zone.Battlefield))
-                AllZone.getGameAction().sacrifice(sa.getSourceCard());
+            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield))
+                AllZone.getGameAction().sacrifice(card);
+                if (remSacrificed) {
+                    card.addRemembered(card);
+                }
         }
         //TODO - maybe this can be done smarter...
         else if (valid.equals("Card.AttachedBy")) {
-            Card toSac = sa.getSourceCard().getEnchantingCard();
-            if (AllZone.getZoneOf(sa.getSourceCard()).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
+            Card toSac = card.getEnchantingCard();
+            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
                 AllZone.getGameAction().sacrifice(toSac);
+                if (remSacrificed) {
+                    card.addRemembered(toSac);
+                }
             }
         } else if (valid.equals("TriggeredCard")) {
             Card equipee = (Card) sa.getTriggeringObject("Card");
             if (tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
                 AllZone.getGameAction().sacrifice(equipee);
+                if (remSacrificed) {
+                    card.addRemembered(equipee);
+                }
             }
         } else {
+            CardList sacList = null;
             for (Player p : tgts) {
 
-                if (p.isComputer())
-                    sacrificeAI(p, amount, valid, sa);
+                //TODO - Can only add cards computer sacrificed to remembered list because
+                //       human sacrifice choices are buried in a Input.  Why is this hardcoded
+                //       into the GUI!?! A better approach would be to have two different methods 
+                //       that return the sacrifice choices for the AI and the human respectively,
+                //       then actually sacrifice the cards in this resolve method. (ArsenalNut 09/20/2011)
+                if (p.isComputer()) {
+                    sacList = sacrificeAI(p, amount, valid, sa);
+                    if (remSacrificed) {
+                        for (int i = 0; i < sacList.size(); i++) {
+                            card.addRemembered(sacList.get(i));
+                        }
+                    }
+                }
                 else
                     sacrificeHuman(p, amount, valid, sa, msg);
             }
+            
         }
+        
     }
 
 
@@ -386,11 +413,13 @@ public class AbilityFactory_Sacrifice {
      * @param valid a {@link java.lang.String} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void sacrificeAI(Player p, int amount, String valid, SpellAbility sa) {
+    private static CardList sacrificeAI(Player p, int amount, String valid, SpellAbility sa) {
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-        ComputerUtil.sacrificePermanents(amount, list);
+        CardList sacList = ComputerUtil.sacrificePermanents(amount, list);
+
+        return sacList;
     }
 
     /**
