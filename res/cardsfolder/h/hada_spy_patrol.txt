@@ -6,7 +6,7 @@ PT:1/1
 K:Level up:2 U
 K:maxLevel:3
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 2/2 CARDNAME is Unblockable
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Shroud | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 3/3 CARDNAME is Unblockable and has Shroud
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Shroud & Unblockable | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 3/3 CARDNAME is Unblockable and has Shroud
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
 SVar:Rarity:Uncommon
