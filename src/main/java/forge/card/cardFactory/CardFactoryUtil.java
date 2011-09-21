@@ -2930,6 +2930,10 @@ public class CardFactoryUtil {
         if (sq[0].equals("StormCount")) {
             return doXMath(Phase.getStormCount() - 1, m, c);
         }
+        
+        if(sq[0].equals("DamageDoneThisTurn")) {
+            return doXMath(c.getDamageDoneThisTurn(), m, c);
+        }
 
         CardList someCards = new CardList();
 
@@ -4791,7 +4795,7 @@ public class CardFactoryUtil {
 
             card.getKeyword().remove(hauntPos);
             
-            //First, create trigger that runs when the haunter dies (if it's a creature)
+            //First, create trigger that runs when the haunter goes to the graveyard
             Trigger haunterDies = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank", card, true);
             
             final Ability haunterDies_Work = new Ability(card,"0") {
@@ -4871,7 +4875,7 @@ public class CardFactoryUtil {
             Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ " + hauntSVarName + " | Secondary$ True | TriggerDescription$ " + hauntDescription, card, true);
             
             //Fourth, create a trigger that removes the haunting status if the haunter leaves the exile
-            Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Exile | ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank", card, true);
+            Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank", card, true);
             
             Ability haunterUnExiled_Work = new Ability(card,"0") {
                 @Override

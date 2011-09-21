@@ -603,8 +603,25 @@ public class AbilityFactory_DealDamage {
             tgts = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), params.get("Defined"), saMe);
         else
             tgts = saMe.getTarget().getTargets();
-
+        
         boolean targeted = (AF.getAbTgt() != null);
+        
+        if(params.containsKey("Radiance") && targeted) {
+            Card origin = null;
+            for(int i = 0; i< tgts.size();i++)
+            {
+                if(tgts.get(i) instanceof Card) {
+                    origin = (Card)tgts.get(i);
+                    break;
+                }
+            }
+            if(origin != null) //Can't radiate from a player
+            {
+                for(Card c : CardUtil.getRadiance(AF.getHostCard(), origin, params.get("ValidTgts").split(","))) {
+                    tgts.add(c);
+                }
+            }
+        }
 
         ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(saMe.getSourceCard(), params.get("DamageSource"), saMe);
         Card source = definedSources.get(0);

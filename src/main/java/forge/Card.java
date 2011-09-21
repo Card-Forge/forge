@@ -6201,6 +6201,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     
     public final void setHaunting(final Card c) {
         haunting = c;
+    }    
+    
+    public final int getDamageDoneThisTurn() {
+        int sum = 0;
+        for(Card c : dealtDamageToThisTurn.keySet()) {
+            sum += dealtDamageToThisTurn.get(c);
+        }
+        
+        return sum;
     }
 
 } //end Card class

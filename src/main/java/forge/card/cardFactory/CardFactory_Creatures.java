@@ -686,63 +686,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Wojek Embermage")) {
-            Cost abCost = new Cost("T", cardName, true);
-            Target tgt = new Target(card, "TgtC");
-            final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
-                private static final long serialVersionUID = -1208482961653326721L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return (CardFactoryUtil.AI_getHumanCreature(1, card, true).size() != 0)
-                            && (AllZone.getPhase().getPhase().equals(Constant.Phase.Main2));
-                }
-
-                @Override
-                public void chooseTargetAI() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
-                    list.shuffle();
-                    setTargetCard(list.get(0));
-                }
-
-                @Override
-                public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        CardList list = getRadiance(getTargetCard());
-                        for (int i = 0; i < list.size(); i++) {
-                            list.get(i).addDamage(1, card);
-                        }
-                    }
-                }//resolve()
-
-                //parameter Card c, is included in CardList
-                //no multi-colored cards
-                CardList getRadiance(Card c) {
-                    if (CardUtil.getColors(c).contains(Constant.Color.Colorless)) {
-                        CardList list = new CardList();
-                        list.add(c);
-                        return list;
-                    }
-
-                    CardList sameColor = new CardList();
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-
-                    for (int i = 0; i < list.size(); i++)
-                        if (list.get(i).sharesColorWith(c)) sameColor.add(list.get(i));
-
-                    return sameColor;
-                }
-
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("Radiance - " + abCost + cardName + " deals 1 damage to target creature and each other creature that shares a color with it.");
-
-        }//*************** END ************ END **************************
-
-
         //*************** START *********** START **************************
         else if (cardName.equals("Adarkar Valkyrie")) {
             //tap ability - no cost - target creature - EOT
