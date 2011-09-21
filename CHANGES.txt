@@ -322,6 +322,27 @@ Comment=
 - Cleanup in two CardFactories.
 - Fixed and simplified some of the cards with "Whenever you cast a Spirit or Arcane spell,...".
 - Added the recent commit logs to changes.txt.
+- Fixed Transcendent Master lacking Lifelink when >= Level 12
+- just a couple of comments
+- Renamed attachCard => attachCardByMindsDesire because it's the only way the field is uses. Hope someone will refactor the whole spell.
+- isSick removed from Card in favour of hasSickness
+- Added Haunt keyword
+- Reflecting recent bans: http://www.wizards.com/Magic/Magazine/Article.aspx?x=mtg/daily/feature/161a
+- Added Radiance parameter to AF_Pump
+- Ran Oracle & SetInfo script.
+- Fixed the mouse hover on the stack cardpanels.
+- Fixed Simian Brawler
+- DeckAnalysis moved to package with deckeditors, Default deckeditor has a button to invoke interactive deck import.
+- Added support for Attaching to Players on Auras ETB Indirectly.
+- Deck recognition (work in progress)
+- Card.isSick returned
+- some DeckEditor-related classes renamed
+- DeckImport - wip
+- Added partial RememberSacrificed support to Sacrifice. Cannot remember Human choices because of game actions in GUI
+- some tuning for deckimport appearance
+- Separated targeted cards to pump from untargeted cards to pump. Fixes the example where a black creature with Prot White doesn't get pumped when Wojek Siren targets another black creature. I will attempt to insert this basic structure into the other AFs that Radiance cards can use.
+- Moved the Data 3 deck to tier 2.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -380,6 +401,25 @@ Psychic Possession
 Humility
 Reverent Silence
 Invigorate
+Absolver Thrull
+Belfry Spirit
+Benediction of Moons
+Blind Hunter
+Cry of Contrition
+Exhumer Thrull
+Graven Dominator
+Orzhov Euthanist
+Seize the Soul
+Incite Hysteria
+Surge of Zeal
+Wojek Siren
+Rally the Righteous
+Survivor of the Unseen
+Simian Brawler
+Deepfire Elemental
+Mishra's Bauble
+Ohran Yeti
+Ronom Serpent
 
 
 end
