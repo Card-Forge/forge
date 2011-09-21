@@ -44,7 +44,7 @@ public class DeckImport extends JDialog {
             ".comment {color: #666666;} " +
             ".knowncard {color: #009900;} " +
             ".unknowncard {color: #990000;} " +
-            ".section {font-weight: bold; margin: 6px 0; text-decoration: underline; } " +
+            ".section {padding: 3px 10px; margin: 3px 0; font-weight: 700; background-color: #DDDDDD; } " +
             "</style>";
     private static final String htmlWelcomeText = "<html>"+stylesheet+"<h3>You'll see recognized cards here</h3>" +
     		"<div class='section'>Legend</div>" +
@@ -72,7 +72,7 @@ public class DeckImport extends JDialog {
     public DeckImport(DeckEditorBase g) {
         host = g;
 
-        int wWidth = 800;
+        int wWidth = 600;
         int wHeight = 600;
         
         setPreferredSize(new java.awt.Dimension(wWidth, wHeight));

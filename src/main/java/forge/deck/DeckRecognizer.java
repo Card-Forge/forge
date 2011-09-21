@@ -113,9 +113,8 @@ public class DeckRecognizer {
     }
 
     private static boolean isSectionName(String line) {
-        if (line.equalsIgnoreCase("sideboard")) { return true; }
-        if (line.equalsIgnoreCase("MAIN BOARD")) { return true; }
-        if (line.equalsIgnoreCase("MAIN")) { return true; }
+        if (line.toLowerCase().contains("side")) { return true; }
+        if (line.toLowerCase().contains("main")) { return true; }
         return false;
     }
     
