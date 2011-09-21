@@ -15,7 +15,7 @@ import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.deckeditor.DeckEditorDraft;
-import forge.gui.deckeditor.DeckEditor;
+import forge.gui.deckeditor.DeckEditorCommon;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences;
@@ -635,7 +635,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      */
     final void deckEditorButtonActionPerformed(final GameType gt, final Deck deck) {
 
-        DeckEditor editor = new DeckEditor(gt);
+        DeckEditorCommon editor = new DeckEditorCommon(gt);
 
         Command exit = new Command() {
             private static final long serialVersionUID = -9133358399503226853L;

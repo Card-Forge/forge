@@ -10,7 +10,7 @@ import javax.swing.JCheckBox;
  * Custom check box class for filter icon
  * 
  */
-public class GuiFilterCheckBox extends JCheckBox {
+public class CheckBoxWithIcon extends JCheckBox {
     /* CHOPPIC */
     /* Custom check box class for filter icons */
     private static final long serialVersionUID = -8099263807219520120L;
@@ -18,9 +18,9 @@ public class GuiFilterCheckBox extends JCheckBox {
     private String imagePath = "res/images/deckeditor/";
     private String iconYes;
     private String iconNo;
-    private GuiFilterCheckBox cb;
+    private CheckBoxWithIcon cb;
 
-    GuiFilterCheckBox(String filterName, String toolTip) {
+    CheckBoxWithIcon(String filterName, String toolTip) {
         super("", true);
         cb = this;
         iconYes = imagePath + "filter_" + filterName + "_y.png";

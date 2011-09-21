@@ -36,20 +36,20 @@ class FilterCheckBoxes {
 
     public FilterCheckBoxes(final boolean useGraphicalBoxes) {
         if (useGraphicalBoxes) {
-            white = new GuiFilterCheckBox("white", "White");
-            blue = new GuiFilterCheckBox("blue", "Blue");
-            black = new GuiFilterCheckBox("black", "Black");
-            red = new GuiFilterCheckBox("red", "Red");
-            green = new GuiFilterCheckBox("green", "Green");
-            colorless = new GuiFilterCheckBox("colorless", "Colorless");
+            white = new CheckBoxWithIcon("white", "White");
+            blue = new CheckBoxWithIcon("blue", "Blue");
+            black = new CheckBoxWithIcon("black", "Black");
+            red = new CheckBoxWithIcon("red", "Red");
+            green = new CheckBoxWithIcon("green", "Green");
+            colorless = new CheckBoxWithIcon("colorless", "Colorless");
 
-            land = new GuiFilterCheckBox("land", "Land");
-            creature = new GuiFilterCheckBox("creature", "Creature");
-            sorcery = new GuiFilterCheckBox("sorcery", "Sorcery");
-            instant = new GuiFilterCheckBox("instant", "Instant");
-            planeswalker = new GuiFilterCheckBox("planeswalker", "Planeswalker");
-            artifact = new GuiFilterCheckBox("artifact", "Artifact");
-            enchantment = new GuiFilterCheckBox("enchant", "Enchantment");
+            land = new CheckBoxWithIcon("land", "Land");
+            creature = new CheckBoxWithIcon("creature", "Creature");
+            sorcery = new CheckBoxWithIcon("sorcery", "Sorcery");
+            instant = new CheckBoxWithIcon("instant", "Instant");
+            planeswalker = new CheckBoxWithIcon("planeswalker", "Planeswalker");
+            artifact = new CheckBoxWithIcon("artifact", "Artifact");
+            enchantment = new CheckBoxWithIcon("enchant", "Enchantment");
         } else {
              white = new JCheckBox("W", true);
              blue = new JCheckBox("U", true);

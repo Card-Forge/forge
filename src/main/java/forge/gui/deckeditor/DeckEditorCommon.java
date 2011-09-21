@@ -3,6 +3,7 @@ package forge.gui.deckeditor;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -37,11 +38,11 @@ import forge.item.ItemPoolView;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditor extends DeckEditorBase {
+public final class DeckEditorCommon extends DeckEditorBase {
     /** Constant <code>serialVersionUID=130339644136746796L</code> */
     private static final long serialVersionUID = 130339644136746796L;
 
-    public DeckEditorMenu customMenu;
+    public DeckEditorCommonMenu customMenu;
 
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
@@ -58,12 +59,12 @@ public final class DeckEditor extends DeckEditorBase {
             private static final long serialVersionUID = 5210924838133689758L;
 
             public void execute() {
-                DeckEditor.this.dispose();
+                DeckEditorCommon.this.dispose();
                 exitCommand.execute();
             }
         };
 
-        customMenu = new DeckEditorMenu(this, AllZone.getDeckManager(), exit);
+        customMenu = new DeckEditorCommonMenu(this, AllZone.getDeckManager(), exit);
         this.setJMenuBar(customMenu);
 
         // do not change this!!!!
@@ -113,7 +114,7 @@ public final class DeckEditor extends DeckEditorBase {
     }
 
 
-    public DeckEditor(GameType gameType) {
+    public DeckEditorCommon(GameType gameType) {
         super(gameType);
         try {
             filterBoxes = new FilterCheckBoxes(true);
@@ -288,8 +289,8 @@ public final class DeckEditor extends DeckEditorBase {
     void importButton_actionPerformed(ActionEvent e) {
         DeckEditorBase g = this;
         DeckImport dImport = new DeckImport(g);
+        dImport.setModalityType(ModalityType.APPLICATION_MODAL);
         dImport.setVisible(true);
-        g.setEnabled(false);
     }
 
 }

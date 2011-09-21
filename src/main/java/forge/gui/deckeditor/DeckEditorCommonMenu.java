@@ -36,7 +36,7 @@ import javax.swing.SwingUtilities;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditorMenu extends JMenuBar implements NewConstants {
+public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants {
 
     /** Constant <code>serialVersionUID=-4037993759604768755L</code> */
     private static final long serialVersionUID = -4037993759604768755L;
@@ -55,7 +55,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
 
 
 
-    public DeckEditorMenu(final DeckDisplay in_display, final DeckManager dckManager, final Command exit) {
+    public DeckEditorCommonMenu(final DeckDisplay in_display, final DeckManager dckManager, final Command exit) {
         deckDisplay = in_display;
         exitCommand = exit;
         deckManager = dckManager;
@@ -92,7 +92,7 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
 
         name.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditor) deckDisplay).getTopTableModel().sort(1, true);
+                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(1, true);
             }
         });
 
@@ -100,32 +100,32 @@ public final class DeckEditorMenu extends JMenuBar implements NewConstants {
         //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity"};
         cost.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
-               ((DeckEditor) deckDisplay).getTopTableModel().sort(4).sort(3).sort(2);
+               ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(3).sort(2);
             }
         });
 
         color.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditor) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3);
+                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3);
             }
         });
 
         type.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditor) deckDisplay).getTopTableModel().sort(2).sort(3).sort(4);
+                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(2).sort(3).sort(4);
             }
         });
 
         stats.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditor) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3).sort(5);
+                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3).sort(5);
             }
         });
 
         rarity.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent ev) {
                 //sort by cost, type, color, rarity
-                ((DeckEditor) deckDisplay).getTopTableModel().sort(2).sort(4).sort(3).sort(6);
+                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(2).sort(4).sort(3).sort(6);
             }
         });
     } //setupSortMenu()
