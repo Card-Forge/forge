@@ -8,6 +8,8 @@
 /release.properties
 res/PerSetTrackingResults
 res/cardsfolder/cardsfolder.zip
+res/decks/AI_o1.dck
+res/decks/o1.bdk
 res/gui/display_new_layout.xml
 res/oracleScript.log
 res/quest/questData.dat
