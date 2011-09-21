@@ -6,7 +6,7 @@ PT:2/2
 K:Level up:R
 K:maxLevel:8
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 4-7 4/4 CARDNAME has Flying
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 8 | SetToughness$ 8 | AddKeyword$ Trample | AddAbility$ Pump | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 8+ 8/8 CARDNAME has Flying and Trample and R: CARDNAME gets +1/+0 until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 8 | SetToughness$ 8 | AddKeyword$ Flying & Trample | AddAbility$ Pump | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 8+ 8/8 CARDNAME has Flying and Trample and R: CARDNAME gets +1/+0 until end of turn.
 SVar:Pump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:X:Count$Valid Card.Self+counters_GE4_LEVEL+counters_LE7_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE8_LEVEL

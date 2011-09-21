@@ -6,7 +6,7 @@ PT:1/2
 K:Level up:4
 K:maxLevel:4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 6 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-3 2/6 CARDNAME has Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 10 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 3/10 CARDNAME has Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 10 | AddKeyword$ Vigilance | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 3/10 CARDNAME has Vigilance
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE3_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
 SVar:Rarity:Common

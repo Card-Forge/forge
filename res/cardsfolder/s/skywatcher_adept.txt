@@ -6,7 +6,7 @@ PT:1/1
 K:Level up:3
 K:maxLevel:3
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 2/2 CARDNAME has Flying
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 4/2 CARDNAME has Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Flying | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 4/2 CARDNAME has Flying
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
 SVar:Rarity:Common

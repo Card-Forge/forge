@@ -6,7 +6,7 @@ PT:1/1
 K:Level up:W
 K:maxLevel:7
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-6 3/3 CARDNAME has First Strike
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Double Strike | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 4/4 CARDNAME has First Strike and Double Strike
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Double Strike | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 4/4 CARDNAME has Double Strike
 SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LE6_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE7_LEVEL
 SVar:Rarity:Rare

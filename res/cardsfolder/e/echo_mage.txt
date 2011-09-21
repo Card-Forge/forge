@@ -6,7 +6,7 @@ PT:2/3
 K:Level up:1 U
 K:maxLevel:4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | AddAbility$ CopyOnce | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-3 2/4 CARDNAME gets U U,tap: Copy target instant or sorcery spell. You may choose new targets for the copy.
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | AddAbility$ CopyTwice | AddSVar$ CopyTwice2 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 2/5 CARDNAME gets U U,tap:Copy target instant or sorcery spell twice. You may choose new targets for the copies.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | AddAbility$ CopyTwice | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 2/5 CARDNAME gets U U,tap:Copy target instant or sorcery spell twice. You may choose new targets for the copies.
 SVar:CopyOnce:AB$CopySpell | Cost$ U U T | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 SVar:CopyTwice:AB$CopySpell | Cost$ U U T | ValidTgts$ Instant,Sorcery | Amount$ 2 | SpellDescription$ Copy target instant or sorcery spell twice. You may choose new targets for the copies.
 SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LT4_LEVEL
