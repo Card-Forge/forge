@@ -552,6 +552,16 @@ public final class AbilityFactory_Protection {
                     sb.append(", ");
                 }
             }
+            
+            if(af.getMapParams().containsKey("Radiance") && sa.getTarget() != null) {
+                sb.append(" and each other ").append(af.getMapParams().get("ValidTgts")).append(" that shares a color with ");
+                if(tgtCards.size() > 1) {
+                    sb.append("them");
+                }
+                else {
+                    sb.append("it");
+                }
+            }
 
     		sb.append(" gain");
     		if (tgtCards.size() == 1) {
@@ -624,12 +634,19 @@ public final class AbilityFactory_Protection {
         }
 
         ArrayList<Card> tgtCards;
+        ArrayList<Card> untargetedCards = new ArrayList<Card>();
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         }
         else {
             tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        }
+        
+        if(params.containsKey("Radiance") && tgt != null) {
+            for(Card c : CardUtil.getRadiance(af.getHostCard(), tgtCards.get(0), params.get("ValidTgts").split(","))) {
+                untargetedCards.add(c);
+            }
         }
 
         int size = tgtCards.size();
@@ -663,6 +680,37 @@ public final class AbilityFactory_Protection {
             			}
             		}
             	};
+                if (params.containsKey("UntilEndOfCombat")) {
+                    AllZone.getEndOfCombat().addUntil(untilEOT);
+                } else {
+                    AllZone.getEndOfTurn().addUntil(untilEOT);
+                }
+            }
+        }
+        
+        for(final Card unTgtC : untargetedCards) {
+            // only pump things in play
+            if (!AllZoneUtil.isCardInPlay(unTgtC)) {
+                continue;
+            }
+            
+            for (String gain : gains) {
+                unTgtC.addExtrinsicKeyword("Protection from " + gain);
+            }
+
+            if (!params.containsKey("Permanent")) {
+                // If not Permanent, remove protection at EOT
+                final Command untilEOT = new Command() {
+                    private static final long serialVersionUID = 7682700789217703789L;
+
+                    public void execute() {
+                        if (AllZoneUtil.isCardInPlay(unTgtC)) {
+                            for (String gain : gains) {
+                                unTgtC.removeExtrinsicKeyword("Protection from " + gain);
+                            }
+                        }
+                    }
+                };
                 if (params.containsKey("UntilEndOfCombat")) {
                     AllZone.getEndOfCombat().addUntil(untilEOT);
                 } else {

@@ -357,6 +357,16 @@ public class AbilityFactory_Destroy {
 
             if (it.hasNext()) sb.append(", ");
         }
+        
+        if(af.getMapParams().containsKey("Radiance")) {
+            sb.append(" and each other ").append(af.getMapParams().get("ValidTgts")).append(" that shares a color with ");
+            if(tgtCards.size() > 1) {
+                sb.append("them");
+            }
+            else {
+                sb.append("it");
+            }
+        }
 
         if (noRegen) {
             sb.append(". ");

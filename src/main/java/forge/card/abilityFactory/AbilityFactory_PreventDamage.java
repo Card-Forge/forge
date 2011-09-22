@@ -159,6 +159,16 @@ public class AbilityFactory_PreventDamage {
                 else sb.append(tgtC);
             } else sb.append(o.toString());
         }
+        
+        if(af.getMapParams().containsKey("Radiance") && sa.getTarget() != null) {
+            sb.append(" and each other ").append(af.getMapParams().get("ValidTgts")).append(" that shares a color with ");
+            if(tgts.size() > 1) {
+                sb.append("them");
+            }
+            else {
+                sb.append("it");
+            }
+        }
         sb.append(" this turn.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -373,10 +383,28 @@ public class AbilityFactory_PreventDamage {
         int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
 
         ArrayList<Object> tgts;
+        ArrayList<Card> untargetedCards = new ArrayList<Card>();
         if (sa.getTarget() == null)
             tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
         else
             tgts = sa.getTarget().getTargets();
+        
+        if(params.containsKey("Radiance") && sa.getTarget() != null) {
+            Card origin = null;
+            for(int i = 0; i< tgts.size();i++)
+            {
+                if(tgts.get(i) instanceof Card) {
+                    origin = (Card)tgts.get(i);
+                    break;
+                }
+            }
+            if(origin != null) //Can't radiate from a player
+            {
+                for(Card c : CardUtil.getRadiance(af.getHostCard(), origin, params.get("ValidTgts").split(","))) {
+                    untargetedCards.add(c);
+                }
+            }
+        }
 
         boolean targeted = (af.getAbTgt() != null);
 
@@ -392,6 +420,12 @@ public class AbilityFactory_PreventDamage {
                 if (!targeted || p.canTarget(sa)) {
                     p.addPreventNextDamage(numDam);
                 }
+            }
+        }
+        
+        for(Card c : untargetedCards) {
+            if(AllZoneUtil.isCardInPlay(c)) {
+                c.addPreventNextDamage(numDam);
             }
         }
     }//doResolve

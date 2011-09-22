@@ -657,6 +657,16 @@ public class AbilityFactory_Pump {
 
             for (Card c : tgtCards)
                 sb.append(c.getName()).append(" ");
+                    
+            if(af.getMapParams().containsKey("Radiance")) {
+                sb.append(" and each other ").append(af.getMapParams().get("ValidTgts")).append(" that shares a color with ");
+                if(tgtCards.size() > 1) {
+                    sb.append("them ");
+                }
+                else {
+                    sb.append("it ");
+                }
+            }
 
             final int atk = getNumAttack(sa);
             final int def = getNumDefense(sa);

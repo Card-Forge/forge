@@ -182,6 +182,16 @@ public class AbilityFactory_DealDamage {
             if (o instanceof Card || o instanceof Player)
                 sb.append(o.toString());
         }
+        
+        if(af.getMapParams().containsKey("Radiance")) {
+            sb.append(" and each other ").append(af.getMapParams().get("ValidTgts")).append(" that shares a color with ");
+            if(tgts.size() > 1) {
+                sb.append("them");
+            }
+            else {
+                sb.append("it");
+            }
+        }
 
         sb.append(". ");
 

@@ -599,6 +599,7 @@ res/cardsfolder/b/basalt_monolith.txt svneol=native#text/plain
 res/cardsfolder/b/bash_to_bits.txt svneol=native#text/plain
 res/cardsfolder/b/basilisk_collar.txt svneol=native#text/plain
 res/cardsfolder/b/basking_rootwalla.txt svneol=native#text/plain
+res/cardsfolder/b/bathe_in_light.txt -text
 res/cardsfolder/b/baton_of_courage.txt svneol=native#text/plain
 res/cardsfolder/b/battered_golem.txt svneol=native#text/plain
 res/cardsfolder/b/battering_craghorn.txt svneol=native#text/plain
@@ -8797,6 +8798,7 @@ res/cardsfolder/w/wizard_replica.txt svneol=native#text/plain
 res/cardsfolder/w/wizards_school.txt svneol=native#text/plain
 res/cardsfolder/w/wizened_cenn.txt svneol=native#text/plain
 res/cardsfolder/w/woebearer.txt svneol=native#text/plain
+res/cardsfolder/w/wojek_apothecary.txt -text
 res/cardsfolder/w/wojek_embermage.txt svneol=native#text/plain
 res/cardsfolder/w/wojek_siren.txt -text
 res/cardsfolder/w/wolf_skull_shaman.txt svneol=native#text/plain
