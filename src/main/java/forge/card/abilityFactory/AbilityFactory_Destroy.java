@@ -389,12 +389,19 @@ public class AbilityFactory_Destroy {
         Card card = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
+        ArrayList<Card> untargetedCards = new ArrayList<Card>();
 
         Target tgt = af.getAbTgt();
         if (tgt != null)
             tgtCards = tgt.getTargetCards();
         else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+        
+        if(params.containsKey("Radiance")) {
+            for(Card c : CardUtil.getRadiance(af.getHostCard(), tgtCards.get(0), params.get("ValidTgts").split(","))) {
+                untargetedCards.add(c);
+            }
         }
 
         for (Card tgtC : tgtCards) {
@@ -403,6 +410,15 @@ public class AbilityFactory_Destroy {
                     AllZone.getGameAction().destroyNoRegeneration(tgtC);
                 else
                     AllZone.getGameAction().destroy(tgtC);
+            }
+        }
+        
+        for(Card unTgtC : untargetedCards) {
+            if(AllZoneUtil.isCardInPlay(unTgtC)) {
+                if(noRegen)
+                    AllZone.getGameAction().destroyNoRegeneration(unTgtC);
+                else
+                    AllZone.getGameAction().destroy(unTgtC);
             }
         }
     }
