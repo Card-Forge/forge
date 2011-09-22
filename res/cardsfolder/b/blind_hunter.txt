@@ -8,5 +8,6 @@ K:Haunt:TrigDrain:When Blind Hunter enters the battlefield or the creature it ha
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Tgt$ TgtP | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Blind Hunter enters the battlefield or the creature it haunts dies, target player loses 2 life and you gain 2 life.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_hunter.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/102.jpg
 End

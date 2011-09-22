@@ -4,5 +4,6 @@ Types:Instant
 Text:no text
 A:SP$Pump | Cost$ R | ValidTgts$ Creature | Radiance$ True | KW$ Haste | SpellDescription$ Radiance - Target creature and each other creature that shares a color with it gain haste until end of turn.
 Oracle:Radiance - Target creature and each other creature that shares a color with it gain haste until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surge_of_zeal.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/146.jpg
 End

@@ -7,5 +7,6 @@ K:Flying
 K:Haunt:TrigToken:Put two 1/1 black Bat creature tokens with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 1 1 Bat | TokenName$ Bat | TokenColors$ Black | TokenTypes$ Creature,Bat | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying  | TokenOwner$ You | TokenAmount$ 2
 Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Belfry Spirit enters the battlefield or the creature it haunts dies, put two 1/1 black Bat creature tokens with flying onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/belfry_spirit.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/2.jpg
 End
