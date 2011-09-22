@@ -4,6 +4,9 @@ Types:Creature Human Cleric
 Text:no text
 PT:1/1
 A:AB$PreventDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Amount$ 1 | Radiance$ True | PreCostDesc$ Radiance -  | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_apothecary.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/36.jpg
 Oracle:Radiance - {T}: Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn.
 End
