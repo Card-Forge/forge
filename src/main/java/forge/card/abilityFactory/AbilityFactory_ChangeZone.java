@@ -1864,7 +1864,7 @@ public final class AbilityFactory_ChangeZone {
     private static void changeZoneAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         Zone destination = Zone.smartValueOf(params.get("Destination"));
-        Zone origin = Zone.smartValueOf(params.get("Origin"));
+        List<Zone> origin = Zone.listValueOf(params.get("Origin"));
 
         CardList cards = null;
 
