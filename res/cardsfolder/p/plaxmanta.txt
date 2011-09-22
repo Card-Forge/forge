@@ -1,0 +1,15 @@
+Name:Plaxmanta
+ManaCost:1 U
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ G | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless G was spent to cast it.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Shroud
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:ManaNeededToAvoidNegativeEffect:Green
+SVar:RemRandomDeck:True
+Oracle:Flash\nWhen Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)\nWhen Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/29.jpg
+End

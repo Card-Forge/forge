@@ -20,6 +20,8 @@ public class ManaCost {
     private ArrayList<Object> manaPart;
     private HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
     private int xcounter = 0;
+    private ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
+    private ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
 
 //manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     //or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -63,11 +65,11 @@ public class ManaCost {
     public String getColorsPaid() {
     	String s = "";
     	for (String key: sunburstMap.keySet()) {
-    	    if(key.equals("black")) s+= "B";
-    	    if(key.equals("blue")) s+= "U";
-    	    if(key.equals("green")) s+= "G";
-    	    if(key.equals("red")) s+= "R";
-    	    if(key.equals("white")) s+= "W";
+    	    if(key.equalsIgnoreCase("black") || key.equalsIgnoreCase("B")) s+= "B";
+    	    if(key.equalsIgnoreCase("blue") || key.equalsIgnoreCase("U")) s+= "U";
+    	    if(key.equalsIgnoreCase("green") || key.equalsIgnoreCase("G")) s+= "G";
+    	    if(key.equalsIgnoreCase("red") || key.equalsIgnoreCase("R")) s+= "R";
+    	    if(key.equalsIgnoreCase("white") || key.equalsIgnoreCase("W")) s+= "W";
     	}
         return s;
     }
@@ -146,6 +148,14 @@ public class ManaCost {
      * @return a boolean.
      */
     public boolean isNeeded(String mana) {
+        if(manaNeededToAvoidNegativeEffect.size() != 0) {
+           for(String s : manaNeededToAvoidNegativeEffect) {
+               if ((s.equalsIgnoreCase(mana) || s.substring(0,1).equalsIgnoreCase(mana))
+                       && !manaPaidToAvoidNegativeEffect.contains(mana)) {
+                   return true;
+               }
+           }
+        }
         if (mana.length() > 1)
             mana = Input_PayManaCostUtil.getShortColorString(mana);
         Mana_Part m;
@@ -203,6 +213,9 @@ public class ManaCost {
      * @return a boolean.
      */
     public boolean payMana(String color) {
+        if(manaNeededToAvoidNegativeEffect.contains(color) && !manaPaidToAvoidNegativeEffect.contains(color)) {
+            manaPaidToAvoidNegativeEffect.add(color);
+        }
         color = Input_PayManaCostUtil.getShortColorString(color);
         return addMana(color);
     }
@@ -487,5 +500,15 @@ public class ManaCost {
             if (manaPart.get(i) instanceof Mana_PartColorless)
                 manaPart.remove(manaPart.get(i));
         }
+    }
+    
+    public void setManaNeededToAvoidNegativeEffect(String[] manaCol) {
+        for(String s : manaCol) {
+            manaNeededToAvoidNegativeEffect.add(s);
+        }
+    }
+    
+    public ArrayList<String> getManaNeededToAvoidNegativeEffect() {
+        return manaNeededToAvoidNegativeEffect;
     }
 }

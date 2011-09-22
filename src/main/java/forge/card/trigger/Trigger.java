@@ -431,6 +431,17 @@ public abstract class Trigger {
             }
         }
 
+        if(mapParams.containsKey("ManaSpent")) {
+            if(!hostCard.getColorsPaid().contains(mapParams.get("ManaSpent"))) {
+                return false;
+            }
+        }
+        
+        if(mapParams.containsKey("ManaNotSpent")) {
+            if(hostCard.getColorsPaid().contains(mapParams.get("ManaNotSpent"))) {
+                return false;
+            }
+        }
 
         return true;
     }

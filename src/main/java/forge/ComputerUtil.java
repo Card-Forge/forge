@@ -488,6 +488,9 @@ public class ComputerUtil {
         ArrayList<String> colors;
 
         cost = ((ManaPool) manapool).subtractMana(sa, cost);
+        if(card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+            cost.setManaNeededToAvoidNegativeEffect(card.getSVar("ManaNeededToAvoidNegativeEffect").split(","));
+        }
 
         CardList manaSources = getAvailableMana();
 
@@ -732,6 +735,8 @@ public class ComputerUtil {
     static public ArrayList<Ability_Mana> sortForNeeded(ManaCost cost, ArrayList<Ability_Mana> manaAbilities, Player player) {
 
         ArrayList<String> colors;
+        
+        ArrayList<String> colorsNeededToAvoidNegativeEffect = cost.getManaNeededToAvoidNegativeEffect();
 
         ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
 
@@ -746,6 +751,12 @@ public class ComputerUtil {
                     res.add(am);
                     break;
                 }
+                for(String col : colorsNeededToAvoidNegativeEffect) {
+                    if(col.equalsIgnoreCase(colors.get(j))
+                            || col.substring(0,1).equalsIgnoreCase(colors.get(j))) {
+                        res.add(am);
+                    }
+                }
             }
         }
 
@@ -758,6 +769,12 @@ public class ComputerUtil {
                 if (cost.isNeeded(colors.get(j))) {
                     res.add(am);
                     break;
+                }
+                for(String col : colorsNeededToAvoidNegativeEffect) {
+                    if(col.equalsIgnoreCase(colors.get(j))
+                            || col.substring(0,1).equalsIgnoreCase(colors.get(j))) {
+                        res.add(am);
+                    }
                 }
             }
         }
