@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ X R R W W | ValidTgts$ Creature | Radiance$ True | NumDm
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$DamageDoneThisTurn
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/194.jpg
 End
