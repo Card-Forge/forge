@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$DamageDoneThisTurn
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/194.jpg
+Oracle:Radiance - Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
 End
