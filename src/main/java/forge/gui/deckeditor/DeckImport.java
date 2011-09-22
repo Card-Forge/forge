@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.game.GameType;
 import forge.gui.GuiUtils;
 
 /** 
@@ -67,7 +68,7 @@ public class DeckImport extends JDialog {
     
     List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 
-    DeckEditorBase host;
+    private final DeckEditorBase host;
 
     public DeckImport(DeckEditorBase g) {
         host = g;
@@ -114,8 +115,11 @@ public class DeckImport extends JDialog {
 
         cmdAccept.addActionListener(new ActionListener() { 
             @Override public void actionPerformed(ActionEvent e) {
-                buildDeck();
-                JOptionPane.showMessageDialog(DeckImport.this, "This dialog still in development, don't expect any changes to deck yet.");
+                String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
+                int answer = JOptionPane.showConfirmDialog(DeckImport.this, warning, "Replacing old deck", JOptionPane.YES_NO_OPTION);
+                if (JOptionPane.NO_OPTION == answer) { return; }
+                Deck toSet = buildDeck();
+                host.setDeck(null, toSet.getMain(), toSet.getDeckType());
                 processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING)); } });
 
         txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
@@ -166,7 +170,19 @@ public class DeckImport extends JDialog {
     }
     
     private Deck buildDeck(){
-        return new Deck();
+        Deck result = new Deck(GameType.Constructed);
+        boolean isMain = true;
+        for (DeckRecognizer.Token t : tokens) {
+            DeckRecognizer.TokenType type = t.getType();
+            if (type == DeckRecognizer.TokenType.SectionName && t.getText().toLowerCase().contains("side") ) { isMain = false; }
+            if (type != DeckRecognizer.TokenType.KnownCard) { continue; }
+            if (isMain) {
+                result.addMain(t.getCard(), t.getNumber());
+            } else {
+                result.addSideboard(t.getCard(), t.getNumber());
+            }
+        }
+        return result;
     }
 
     protected class OnChangeTextUpdate implements DocumentListener {

@@ -140,6 +140,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public void addMain(final String cardName) { addMain(CardDb.instance().getCard(cardName)); }
     public void addMain(final CardPrinted card) { main.add(card); }
+    public void addMain(final CardPrinted card, final int amount) { main.add(card, amount); }
     public void addMain(final ItemPoolView<CardPrinted> list) { main.addAll(list); }
     public void setMain(final Iterable<String> cards) { main = new ItemPool<CardPrinted>(cards, CardPrinted.class); }
     public void removeMain(final CardPrinted card) { main.remove(card); }
