@@ -509,6 +509,7 @@ res/cardsfolder/a/azorius_aethermage.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_chancery.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_first_wing.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_guildmage.txt svneol=native#text/plain
+res/cardsfolder/a/azorius_herald.txt -text
 res/cardsfolder/a/azorius_ploy.txt svneol=native#text/plain
 res/cardsfolder/a/azorius_signet.txt svneol=native#text/plain
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
@@ -1494,6 +1495,7 @@ res/cardsfolder/c/courier_hawk.txt svneol=native#text/plain
 res/cardsfolder/c/couriers_capsule.txt svneol=native#text/plain
 res/cardsfolder/c/court_archers.txt svneol=native#text/plain
 res/cardsfolder/c/court_homunculus.txt svneol=native#text/plain
+res/cardsfolder/c/court_hussar.txt -text
 res/cardsfolder/c/cover_of_darkness.txt svneol=native#text/plain
 res/cardsfolder/c/covert_operative.txt svneol=native#text/plain
 res/cardsfolder/c/covetous_dragon.txt svneol=native#text/plain
@@ -5472,6 +5474,7 @@ res/cardsfolder/p/pardic_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/p/part_the_veil.txt svneol=native#text/plain
 res/cardsfolder/p/part_water.txt svneol=native#text/plain
 res/cardsfolder/p/patagia_golem.txt svneol=native#text/plain
+res/cardsfolder/p/patagia_viper.txt -text
 res/cardsfolder/p/path_of_angers_flame.txt svneol=native#text/plain
 res/cardsfolder/p/path_of_peace.txt svneol=native#text/plain
 res/cardsfolder/p/path_to_exile.txt svneol=native#text/plain

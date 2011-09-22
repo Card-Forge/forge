@@ -1,0 +1,15 @@
+Name:Patagia Viper
+ManaCost:3 G
+Types:Creature Snake
+Text:no text
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 green and blue Snake creature tokens onto the battlefield.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ U | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless U was spent to cast it.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ GU 1 1 Snake | TokenAmount$ 2 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green,Blue | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:ManaNeededToAvoidNegativeEffect:Blue
+SVar:RemRandomDeck:True
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/89.jpg
+Oracle:Flying\nWhen Patagia Viper enters the battlefield, put two 1/1 green and blue Snake creature tokens onto the battlefield.\nWhen Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.
+End
