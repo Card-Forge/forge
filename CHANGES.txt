@@ -343,6 +343,25 @@ Comment=
 - Separated targeted cards to pump from untargeted cards to pump. Fixes the example where a black creature with Prot White doesn't get pumped when Wojek Siren targets another black creature. I will attempt to insert this basic structure into the other AFs that Radiance cards can use.
 - Moved the Data 3 deck to tier 2.
 - Added the recent commit logs to changes.txt.
+- Fixed trigger of Shield of the Righteous.
+- Fixed Salvaging Station.
+- Added initial Radiance parameter to AF_DealDamage.
+- Converted Wojek Embermage to script.
+- Converted Cleansing Beam to Radiance parameter.
+- Fixed one of the Haunt triggers, previously it would bug the AIs ETB trigger evaluation.
+- Added Count$DamageDoneThisTurn
+- Fixed Hada Spy Patrol.
+- Fixed some levelers inappropriately losing keywords and some other tweaks.
+- refactored and a bit improved DeckImport
+- Fixed Champion's Drake.
+- Fixed Evil Presence.
+- DeckImport is transferring cards to deckeditor. The whole deckediting still needs improvement.
+- issue 322
+- Added Radiance parameter to AF_Destroy.
+- Converted Leave No Trace to Radiance parameter.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
@@ -420,6 +439,8 @@ Deepfire Elemental
 Mishra's Bauble
 Ohran Yeti
 Ronom Serpent
+Skyshroud Cutter
+Brightflame
 
 
 end
