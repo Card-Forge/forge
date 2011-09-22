@@ -753,7 +753,7 @@ public class ComputerUtil {
                 }
                 for(String col : colorsNeededToAvoidNegativeEffect) {
                     if(col.equalsIgnoreCase(colors.get(j))
-                            || col.substring(0,1).equalsIgnoreCase(colors.get(j))) {
+                            || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
                         res.add(am);
                     }
                 }
@@ -772,7 +772,7 @@ public class ComputerUtil {
                 }
                 for(String col : colorsNeededToAvoidNegativeEffect) {
                     if(col.equalsIgnoreCase(colors.get(j))
-                            || col.substring(0,1).equalsIgnoreCase(colors.get(j))) {
+                            || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
                         res.add(am);
                     }
                 }
