@@ -664,14 +664,7 @@ public final class CardUtil {
             res.addAll(((DefaultPlayerZone) AllZone.getStackZone()).getCardsAddedThisTurn(from));
         }
 
-        res = res.filter(new CardListFilter() {
-           public boolean addCard(final Card c) {
-               if (c.isValidCard(valid.split(","), src.getController(), src)) {
-                   return true;
-               }
-               return false;
-           }
-        });
+        res = res.getValidCards(valid, src.getController(), src);
 
         return res;
     }

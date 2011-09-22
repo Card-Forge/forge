@@ -320,9 +320,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     public final CardList getCardsAddedThisTurn(final Constant.Zone origin) {
         System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         CardList ret = new CardList();
-        String originName = origin == null ? null : origin.name();
         for (int i = 0; i < cardsAddedThisTurn.size(); i++) {
-            if (cardsAddedThisTurnSource.get(i).equals(originName) || origin == null /* former: equals('Any') */) {
+            if (cardsAddedThisTurnSource.get(i) == origin || origin == null /* former: equals('Any') */) {
                 ret.add(cardsAddedThisTurn.get(i));
             }
         }
