@@ -1,0 +1,10 @@
+Name:Curse of the Nightly Hunt
+ManaCost:2 R
+Types:Enchantment Aura Curse
+Text:Enchant player
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Player | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedPlayerCtrl | AddHiddenKeyword$ HIDDEN CARDNAME attacks each turn if able. | Description$ Creatures enchanted player controls attack each turn if able.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_nightly_hunt.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/137.jpg
+End
