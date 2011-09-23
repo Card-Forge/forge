@@ -5,6 +5,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.CardUtil;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -322,9 +323,6 @@ public final class AbilityFactory_ChangeZone {
 
         Random r = MyRandom.random;
         // prevent run-away activations - first time will always return true
-
-
-
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         ArrayList<Player> pDefined;
@@ -682,7 +680,9 @@ public final class AbilityFactory_ChangeZone {
             }
 
             Object o;
-            if (params.containsKey("Mandatory")) {
+            if(params.containsKey("AtRandom")) {
+                o = CardUtil.getRandom(fetchList.toArray());
+            } else if (params.containsKey("Mandatory")) {
                 o = GuiUtils.getChoice("Select a card", fetchList.toArray());
             } else {
                 o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
@@ -789,10 +789,12 @@ public final class AbilityFactory_ChangeZone {
             if (fetchList.size() == 0 || destination == null) {
                 break;
             }
-
+            
             // Improve the AI for fetching.
             Card c;
-            if (type.contains("Basic")) {
+            if(params.containsKey("AtRandom")) {
+                c = CardUtil.getRandom(fetchList.toArray());
+            } else if (type.contains("Basic")) {
                 c = basicManaFixing(fetchList);
             } else if (areAllBasics(type)) {
                 c = basicManaFixing(fetchList, type);
