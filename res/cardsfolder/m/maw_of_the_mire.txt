@@ -1,0 +1,10 @@
+Name:Maw of the Mire
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGainLife | SpellDescription$ Destroy target land. You gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maw_of_the_mire.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/108.jpg
+End

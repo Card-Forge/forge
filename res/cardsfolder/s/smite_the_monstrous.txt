@@ -1,0 +1,9 @@
+Name:Smite the Monstrous
+ManaCost:3 W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smite_the_monstrous.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/33.jpg
+End

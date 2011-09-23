@@ -1,0 +1,11 @@
+Name:Kessig Wolf Run
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Pump | Cost$ X R G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | KW$ Trample | SpellDescription$ Target creature gets +X/+0 and gains trample until end of turn.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_wolf_run.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/243.jpg
+End

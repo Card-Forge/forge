@@ -1,0 +1,9 @@
+Name:Mask of Avacyn
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+2 and has hexproof.
+K:eqPump 3:+1/+2/Hexproof
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_avacyn.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/229.jpg
+End

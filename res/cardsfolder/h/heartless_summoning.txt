@@ -1,0 +1,11 @@
+Name:Heartless Summoning
+ManaCost:1 B
+Types:Enchantment
+Text:Creature spells you cast cost 2 less to cast.
+K:CostChange:Player:Less:2:Spell:All:Creature:NoSpecial
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures you control get -1/-1.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_summoning.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/104.jpg
+End

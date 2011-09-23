@@ -1,0 +1,9 @@
+Name:Midnight Haunting
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ Token | Cost$ 2 W | TokenImage$ W 1 1 Spirit | TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_haunting.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/22.jpg
+End

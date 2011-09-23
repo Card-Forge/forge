@@ -1,0 +1,14 @@
+Name:Mirror-Mad Phantasm
+ManaCost:3 U U
+Types:Creature Spirit
+Text:no text
+PT:5/1
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination $ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBDig | SpellDescription$ CARDNAME's owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named CARDNAME is revealed. That player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
+SVar:DBDig:DB$ DigUntil | Cost$ G T | CheckSVar$ X | SVarCompare$ GE1 | Valid$ Card.namedMirror-Mad Phantasm | ValidDescription$ Mirror-Mad Phantasm | FoundDestination$ Battlefield | RevealedDestination$ Graveyard
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_mad_phantasm.jpg
+SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/68.jpg
+End

@@ -1,0 +1,10 @@
+Name:Silverchase Fox
+ManaCost:1 W
+Types:Creature Fox
+Text:no text
+PT:2/2
+A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silverchase_fox.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/31.jpg
+End

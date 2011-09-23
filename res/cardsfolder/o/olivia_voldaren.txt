@@ -1,0 +1,14 @@
+Name:Olivia Voldaren
+ManaCost:2 B R
+Types:Legendary Creature Vampire
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Other | NumDmg$ 1 | SubAbility$ SVar=Animate | SpellDescription$ CARDNAME deas 1 damage to another target crature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on CARDNAME.
+SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire | Permanent$ True | SubAbility$ SVar=PutCounter
+SVar:PutCounter:DB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ GainControl | Cost$ 3 B B | ValidTgts$ Creature.Vampire | TgtPrompt$ Select target vampire | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature for as long as you control CARDNAME.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/olivia_voldaren.jpg
+SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/215.jpg
+End

@@ -1,0 +1,12 @@
+Name:Harvest Pyre
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R ExileFromGrave<X/Card> | Tgt$ TgtC | NumDmg$ Y | SpellDescription$ CARDNAME deals X damage to target creature.
+SVar:Y:Number$0/Plus.ChosenX
+SVar:X:XChoice
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_pyre.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/146.jpg
+End

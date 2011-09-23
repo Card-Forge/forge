@@ -1,0 +1,10 @@
+Name:Spectral Rider
+ManaCost:W W
+Types:Creature Spirit Knight
+Text:no text
+PT:2/2
+K:Intimidate
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_rider.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/35.jpg
+End

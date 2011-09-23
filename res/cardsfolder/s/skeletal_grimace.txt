@@ -1,0 +1,12 @@
+Name:Skeletal Grimace
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ ABRegen | Description$ Enchanted creature gets +1/+1 and has "B: Regenerate this creature."
+SVar:ABRegen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_grimace.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/116.jpg
+End

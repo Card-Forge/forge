@@ -1,0 +1,10 @@
+Name:Orchard Spirit
+ManaCost:2 G
+Types:Creature Spirit
+Text:CARDNAME can't be blocked except by creatures with flying or reach.
+PT:2/2
+K:CantBeBlockedBy Creature.withoutFlying+withoutReach
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orchard_spirit.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/198.jpg
+End

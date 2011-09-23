@@ -1,0 +1,9 @@
+Name:Vampiric Fury
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | KW$ First Strike | ValidCards$ Creature.Vampire+YouCtrl | SpellDescription$ Vampire creatures you control get +2/+0 and gain first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_fury.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/167.jpg
+End

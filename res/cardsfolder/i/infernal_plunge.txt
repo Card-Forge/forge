@@ -1,0 +1,10 @@
+Name:Infernal Plunge
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ Mana | Cost$ R Sac<1/Creature> | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_plunge.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/148.jpg
+End

@@ -1,0 +1,11 @@
+Name:Rage Thrower
+ManaCost:5 R
+Types:Creature Human Shaman
+Text:no text
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature dies, CARDNAME deals 2 damage to target player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_thrower.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/157.jpg
+End

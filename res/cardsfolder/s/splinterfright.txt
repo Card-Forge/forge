@@ -1,0 +1,14 @@
+Name:Splinterfright
+ManaCost:2 G
+Types:Creature Elemental
+Text:no text
+PT:*/*
+K:Trample
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X |  SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, put the top two cards of your library into your graveyard.
+SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 2
+SVar:X:Count$TypeInYourYard.Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/splinterfright.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/205.jpg
+End

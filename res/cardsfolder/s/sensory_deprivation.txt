@@ -1,0 +1,11 @@
+Name:Sensory Deprivation
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sensory_deprivation.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/74.jpg
+End
