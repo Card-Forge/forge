@@ -1734,6 +1734,14 @@ public final class GameActionUtil {
                 return false;
             }
         }
+        if (specialConditions.contains("Morbid")) {
+            CardList res = CardUtil.getThisTurnEntered(Zone.Graveyard, Zone.Battlefield, "Creature", sourceCard);
+            if (res.size() < 1) {
+                return false;
+            }
+        }
+        
+        
         if (specialConditions.contains("isPresent")) { // is a card of a certain type/color present?
             String requirements = specialConditions.replaceAll("isPresent ", "");
             CardList cardsinPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
