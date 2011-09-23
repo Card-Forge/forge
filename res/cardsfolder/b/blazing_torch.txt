@@ -7,6 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddAbility$ TorchDamage | D
 SVar:TorchDamage:AB$ DealDamage | Cost$ T Sac<1/Card.Attached+namedBlazing Torch/equipped Blazing Torch> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | NumDmg$ 2 | DamageSource$ Sacrificed | SpellDescription$ Blazing Torch deals 2 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_torch.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/197.jpg
 Oracle:Equipped creature can't be blocked by Vampires or Zombies.\nEquipped creature has "{T}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player."\nEquip {1}
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/197.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/216.jpg
 End

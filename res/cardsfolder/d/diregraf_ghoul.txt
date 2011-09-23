@@ -6,6 +6,6 @@ PT:2/2
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_ghoul.jpg
-SetInfo:ISD|Uncommon|Empty
 Oracle:Diregraf Ghoul enters the battlefield tapped.
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/97.jpg
 End

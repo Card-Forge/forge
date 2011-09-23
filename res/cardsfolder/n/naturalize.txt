@@ -5,6 +5,7 @@ Text:no text
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naturalize.jpg
+Oracle:Destroy target artifact or enchantment.
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/270.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/199.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/258.jpg
@@ -14,5 +15,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/195.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/185.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/275.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/141.jpg
-Oracle:Destroy target artifact or enchantment.
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/197.jpg
 End
