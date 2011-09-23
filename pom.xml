@@ -362,6 +362,9 @@
                                             <goal>
                                                 released-version
                                             </goal>
+                                            <goal>
+                                                parse-version
+                                            </goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
