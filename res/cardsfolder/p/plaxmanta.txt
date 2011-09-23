@@ -10,6 +10,7 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Shrou
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:Green
 SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plaxmanta.jpg
 Oracle:Flash\nWhen Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)\nWhen Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/29.jpg
 End

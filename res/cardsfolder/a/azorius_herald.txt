@@ -10,6 +10,7 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:Blue
 SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_herald.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/2.jpg
 Oracle:Azorius Herald is unblockable.\nWhen Azorius Herald enters the battlefield, you gain 4 life.\nWhen Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
 End
