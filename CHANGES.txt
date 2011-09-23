@@ -362,6 +362,28 @@ Comment=
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Added Radiance parameter to AF_PreventDamage & AF_Protection.
+- Added StackDescription handling of Radiance for all affected AFs (DealDamage,Destroy,PreventDamage,Protection & Pump)
+- Ran Oracle & SetInfo script for the last Radiance cards.
+- Added ManaSpent & ManaNotSpent restrictions to Triggers. Triggers with ManaSpent$ Green for instance will only go off if Green mana was spent to cast the host card.
+- New AI SVar; "ManaNeededToAvoidNegativeEffect". This is a comma-separated list of colors the AI will try to use to pay for the cost, but only if it actually has a source for that color mana.
+- Added LQ pic URLs.
+- Fixed ThisTurnEntered
+- Fixed a stupid oversight in the ManaNeededToAvoidNegativeEffect code.
+- Fix oracleScript file format. Add some files to gitignore
+- update build so that jar-with-deps does not get deployed
+- Fix bug that would prevent most developers from creating Windows executables.
+- Fixed Tainted Well.
+- Added missing SVars to the Radiance cards.
+- added Morbid to GameActionUtil.specialConditionsMet to support etbCounter
+- added Innistrad to setInfoScript.py
+- Innistrad A-G
+- Innistrad H-Z
+- Fix lifecylce issue with builder-helper plugin
+- Added flying to Voracious Dragon
+- Added the parameter "AtRandom" to AF ChangeZone Hidden.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
