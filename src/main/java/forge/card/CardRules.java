@@ -75,6 +75,9 @@ public final class CardRules {
         //System.out.println(cardName);
 
         if (cardType.isCreature()) {
+            if (ptLine == null){
+                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", cardName));
+            }
             int slashPos = ptLine.indexOf('/');
             if (slashPos == -1) {
                 throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", cardName));
