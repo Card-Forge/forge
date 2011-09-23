@@ -1,0 +1,10 @@
+Name:Bump in the Night
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ B | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life.
+A:SP$ LoseLife | Cost$ 5 R | ValidTgts$ Opponent | LifeAmount$ 3 | Flashback$ True | CostDesc$ Flashback - 5 R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bump_in_the_night.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/92.jpg
+End

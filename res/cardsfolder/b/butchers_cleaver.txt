@@ -1,0 +1,10 @@
+Name:Butcher's Cleaver
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +3/+0.
+K:eqPump 3:+3/+0
+S:Mode$ Continuous | Affected$ Card.EquippedBy+Human | AddKeyword$ Lifelink | Description$ As long as equipped creature is a Human, it has lifelink.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/butchers_cleaver.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/217.jpg
+End

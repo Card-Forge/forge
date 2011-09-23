@@ -1,0 +1,13 @@
+Name:Devil's Play
+ManaCost:X R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+A:SP$ DealDamage | Cost$ X R R R | Tgt$ TgtCP | NumDmg$ Y | Flashback$ True | CostDesc$ Flashback - X R R R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:X:Count$xPaid
+SVar:Y:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devils_play.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/140.jpg
+End

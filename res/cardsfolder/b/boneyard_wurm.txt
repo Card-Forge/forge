@@ -1,0 +1,11 @@
+Name:Boneyard Wurm
+ManaCost:1 G
+Types:Creature Wurm
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X |  SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boneyard_wurm.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/171.jpg
+End

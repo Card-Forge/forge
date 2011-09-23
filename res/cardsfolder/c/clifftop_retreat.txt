@@ -1,0 +1,11 @@
+Name:Clifftop Retreat
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped unless you control a Mountain or a Plains.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_catacomb.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/238.jpg
+End

@@ -1,0 +1,13 @@
+Name:Balefire Dragon
+ManaCost:5 R R
+Types:Creature Dragon
+Text:no text
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals that much damage to each creature that player controls.
+SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | NumDmg$ X | ValidCards$ Creature.YouDontCtrl
+SVar:X:TriggerCount$DamageAmount
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balefire_dragon.jpg
+SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/129.jpg
+End

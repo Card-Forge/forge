@@ -1,0 +1,12 @@
+Name:Dearly Departed
+ManaCost:4 W W
+Types:Creature Spirit
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Human+YouCtrl | TriggerZones$ Graveyard | Static$ True | Execute$ TrigPutCounter | TriggerDescription$ As long as CARDNAME is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dearly_departed.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/9.jpg
+End

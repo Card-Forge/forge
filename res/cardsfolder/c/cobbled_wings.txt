@@ -1,0 +1,9 @@
+Name:Cobbled Wings
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature has flying.
+K:eqPump 1:Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cobbled_wings.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/219.jpg
+End

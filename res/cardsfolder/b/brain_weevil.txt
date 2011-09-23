@@ -1,0 +1,12 @@
+Name:Brain Weevil
+ManaCost:3 B
+Types:Creature Insect
+Text:no text
+PT:1/1
+K:Intimidate
+A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SorcerySpeed$ True | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards. Activate this ability only any time you could cast a sorcery.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_weevil.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/91.jpg
+End

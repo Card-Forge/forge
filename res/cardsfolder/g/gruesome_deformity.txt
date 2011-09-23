@@ -1,0 +1,11 @@
+Name:Gruesome Deformity
+ManaCost:B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Intimidate  | Description$ Enchanted creature has intimidate.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_deformity.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/103.jpg
+End

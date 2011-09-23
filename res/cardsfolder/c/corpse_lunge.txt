@@ -1,0 +1,10 @@
+Name:Corpse Lunge
+ManaCost:2 B
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 2 B ExileFromGrave<1/Creature> | NumDmg$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | CostDesc$ As an additional cost to cast CARDNAME, exile a creature card from your graveyard. | SpellDescription$ CARDNAME deals damage equal to the exiled card's power to target creature.
+SVar:X:Exiled$CardPower
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_lunge.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/93.jpg
+End

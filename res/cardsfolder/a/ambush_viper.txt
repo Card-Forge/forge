@@ -1,0 +1,11 @@
+Name:Ambush Viper
+ManaCost:1 G
+Types:Creature Snake
+Text:no text
+PT:2/1
+K:Flash
+K:Deathtouch
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_viper.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/169.jpg
+End

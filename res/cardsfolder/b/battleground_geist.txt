@@ -1,0 +1,12 @@
+Name:Battleground Geist
+ManaCost:4 U
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 1 | AddToughness$ 0 | Description$ Other Spirit creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battleground_geist.jpg
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/45.jpg
+End
