@@ -1109,11 +1109,18 @@ public class AbilityFactory {
         // TODO probably also consider if winter orb or similar are out
 
         if (sa.getPayCosts() == null) {
-            // This is only true for Drawbacks and triggers
+            return true; // This is only true for Drawbacks and triggers
+        }
+        
+        if (!sa.getPayCosts().isReusuableResource()) {
+            return false;
+        }
+        
+        if (sa.getRestrictions().getPlaneswalker() && AllZone.getPhase().is(Constant.Phase.Main2)) {
             return true;
         }
 
-        return (sa.getPayCosts().isReusuableResource() && AllZone.getPhase().is(Constant.Phase.End_Of_Turn)
+        return (AllZone.getPhase().is(Constant.Phase.End_Of_Turn)
                 && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()));
     }
 

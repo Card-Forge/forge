@@ -455,19 +455,6 @@ public class AbilityFactory_Pump {
                 }
             }
 
-            /*Not needed
-               if (AF.isCurse()){
-                   t = CardFactoryUtil.AI_getBestCreature(list);
-                   goodt = true;
-               }
-               else{
-                   while(!goodt && !list.isEmpty()) {
-                       t = CardFactoryUtil.AI_getBestCreature(list);
-                       if((t.getNetDefense() + defense) > t.getDamage()) goodt = true;
-                       else list.remove(t);
-                   }
-               }*/
-
             t = CardFactoryUtil.AI_getBestCreature(list);
             tgt.addTarget(t);
             list.remove(t);
