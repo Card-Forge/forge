@@ -6,6 +6,6 @@ K:CARDNAME enters the battlefield tapped unless you control a Mountain or a Plai
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_catacomb.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clifftop_retreat.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/238.jpg
 End
