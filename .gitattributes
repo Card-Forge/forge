@@ -9002,6 +9002,7 @@ res/cardsfolder/w/woodland_cemetery.txt -text
 res/cardsfolder/w/woodland_changeling.txt svneol=native#text/plain
 res/cardsfolder/w/woodland_druid.txt svneol=native#text/plain
 res/cardsfolder/w/woodland_guidance.txt svneol=native#text/plain
+res/cardsfolder/w/woodland_sleuth.txt -text
 res/cardsfolder/w/woodlurker_mimic.txt svneol=native#text/plain
 res/cardsfolder/w/woodripper.txt svneol=native#text/plain
 res/cardsfolder/w/woodwraith_corrupter.txt svneol=native#text/plain
