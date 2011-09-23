@@ -145,6 +145,9 @@ def initSets():
 	allSets['Mirrodin Besieged'] = 'MBS'
 	allSets['New Phyrexia'] = 'NPH'
 
+	# Innistrad
+	allSets['Innistrad']='ISD'
+
 def addSets(card):
 	html = getURL('http://magiccards.info/query?q=!'+card.name)
 	start = html.find('<br><u><b>Editions:</b></u><br>')
