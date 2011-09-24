@@ -26,7 +26,27 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
-
+- Partially converted Venser, the Sojourner to script.
+- Performed formats rotation.
+- added ISD line to boosters.txt
+- enabling limited play with ISD
+- Cleared out the changes.txt file, is ready for new material.
+- Fixed several LQ pic URLs.
+- Improve error message in CardRules
+- Added missing LQ pic URLs.
+- Fixed name of Curse of the Nightly Hunt.
+- Fixed Beacon of Destruction text.
+- Added a Planeswalker check to AbilityFactory.playReusable to make the AI use the abilities each turn (without random factor).
+- Added Innistrad setinfo to reprints.
+- Fixing SetInfo for Basic Land
+- Island SetInfo didn't update properly
+- Increasing Commons in a Quest Booster Pack to 11
+- Increasing Money earned from Quest Victories
+- Fixed type of Pit Spawn.
+- Added two missing setinfos.
+- Fixed destroyPlaneswalkers checking non-Planeswalker types (so two Artifact Planeswalker won't destroy each other).
+- Little AI improvements in AF ChangeZone Hidden.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -36,7 +56,8 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Woodland Sleuth
+Runic Repetition
 
 
 end
