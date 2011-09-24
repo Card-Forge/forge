@@ -88,6 +88,7 @@ public class QuestEventManager {
             if (s.equals(""))           { continue; }
             
             eqpos = s.indexOf('=');
+            if(eqpos < 0) { continue; }
             key = s.substring(0, eqpos);
             value = s.substring(eqpos + 1);
 
