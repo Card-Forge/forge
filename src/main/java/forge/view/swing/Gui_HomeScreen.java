@@ -77,9 +77,9 @@ import java.awt.GridLayout;
 public class Gui_HomeScreen {
     // Hack... WindowBuilder can't deal with path relative to the project folder like "res/"
     // So... use a full path when debugging or designing with WindowBuilder
-    private String HomeScreenPath = "/home/rob/ForgeSVN/ForgeSVN/res/images/ui/HomeScreen/";
+    //private String HomeScreenPath = "/home/rob/ForgeSVN/ForgeSVN/res/images/ui/HomeScreen/";
     // And switch to relative path for distribution
-    // private String HomeScreenPath = "res/images/ui/HomeScreen/";
+    private String HomeScreenPath = "res/images/ui/HomeScreen/";
     
     private JFrame gHS;
     
