@@ -1,6 +1,6 @@
 Name:Pit Spawn
 ManaCost:4 B B B
-Types:Creature Elemental
+Types:Creature Demon
 Text:no text
 PT:6/4
 K:First Strike
