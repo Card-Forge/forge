@@ -178,7 +178,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         setupMenu();
         setVisible(true);
 
-        ManaSymbols.loadImages();
+        
         Log.WARN(); // set logging level to warn
         SwingUtilities.updateComponentTreeUI(this);
     }

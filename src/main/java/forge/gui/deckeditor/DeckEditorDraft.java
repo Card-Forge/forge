@@ -15,6 +15,7 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 import net.slightlymagic.maxmtg.Predicate;
@@ -103,7 +104,18 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
                         JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     dispose();
-                    new OldGuiNewGame();
+                    
+                    if (System.getenv("NG2") != null) {
+                        if (System.getenv("NG2").equalsIgnoreCase("true")) {
+                            String argz[] = {};
+                            Gui_HomeScreen.main(argz);
+                        } else {
+                            new OldGuiNewGame();
+                        }
+                    } else {
+                        new OldGuiNewGame();
+                    }
+
                 }
             }//windowClosing()
         });
@@ -284,7 +296,18 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
 
         //close and open next screen
         dispose();
-        new OldGuiNewGame();
+        
+        if (System.getenv("NG2") != null) {
+            if (System.getenv("NG2").equalsIgnoreCase("true")) {
+                String argz[] = {};
+                Gui_HomeScreen.main(argz);
+            } else {
+                new OldGuiNewGame();
+            }
+        } else {
+            new OldGuiNewGame();
+        }
+
     }/*saveDraft()*/
 
 

@@ -10168,6 +10168,7 @@ src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
+src/main/java/forge/view/swing/Gui_HomeScreen.java -text
 src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
 src/main/java/forge/view/swing/SplashFrame.java -text
@@ -10199,6 +10200,7 @@ src/main/java/net/slightlymagic/maxmtg/Closure1.java -text
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
 src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain
+src/main/java/org/eclipse/wb/swing/FocusTraversalOnArray.java -text
 src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
 src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain

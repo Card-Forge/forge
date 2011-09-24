@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.quest.gui.main.QuestEventManager;
+import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
@@ -107,7 +108,18 @@ public class QuestFrame extends JFrame {
      */
     public void returnToMainMenu() {
         AllZone.getQuestData().saveData();
-        (new OldGuiNewGame()).setVisible(true);
+        
+        if (System.getenv("NG2") != null) {
+            if (System.getenv("NG2").equalsIgnoreCase("true")) {
+                String argz[] = {};
+                Gui_HomeScreen.main(argz);
+            } else {
+                new OldGuiNewGame();
+            }
+        } else {
+            new OldGuiNewGame();
+        }
+
         this.dispose();
     }
 }

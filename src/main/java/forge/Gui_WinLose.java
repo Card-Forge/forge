@@ -17,6 +17,7 @@ import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
 import forge.quest.gui.main.QuestChallenge;
+import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 import net.miginfocom.swing.MigLayout;
 
@@ -341,7 +342,19 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         //are we on a quest?
         if (model.quest == null) {
             model.match.reset();
-            new OldGuiNewGame();
+            
+            
+            if (System.getenv("NG2") != null) {
+                if (System.getenv("NG2").equalsIgnoreCase("true")) {
+                    String argz[] = {};
+                    Gui_HomeScreen.main(argz);
+                } else {
+                    new OldGuiNewGame();
+                }
+            } else {
+                new OldGuiNewGame();
+            }
+
         } else { //Quest
 
             boolean wonMatch = false;

@@ -6,6 +6,8 @@ import javax.swing.UIManager;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
+import arcane.ui.util.ManaSymbols;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
@@ -124,6 +126,8 @@ public class ApplicationView implements FView {
         
         if(!splashFrame.getSplashHasBeenClosed()) {
             try {
+                ManaSymbols.loadImages();
+                
                 Constant.Runtime.gameType = GameType.Constructed;
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
                     public void run() {
@@ -137,7 +141,17 @@ public class ApplicationView implements FView {
     
     
                         splashFrame = null;
-                        new OldGuiNewGame();
+                        
+                        if (System.getenv("NG2") != null) {
+                            if (System.getenv("NG2").equalsIgnoreCase("true")) {
+                                String argz[] = {};
+                                Gui_HomeScreen.main(argz);
+                            } else {
+                                new OldGuiNewGame();
+                            }
+                        } else {
+                            new OldGuiNewGame();
+                        }
                     }
                 });
             } catch (Exception ex) {
