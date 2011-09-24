@@ -315,11 +315,11 @@ public class TriggerHandler {
                 runSingleTrigger(registeredTriggersWorkingCopy.get(i), mode, runParams);
             }
         }
-        for (int i = 0; i < delayedTriggers.size(); i++) {
+        for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
             Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP)) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(deltrig);
+                    delayedTriggersWorkingCopy.remove(deltrig);
                     i--;
                 }
             }
@@ -335,7 +335,7 @@ public class TriggerHandler {
             Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(deltrig);
+                    delayedTriggersWorkingCopy.remove(deltrig);
                     i--;
                 }
             }
