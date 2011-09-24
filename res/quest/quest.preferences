@@ -13,13 +13,13 @@ startingUncommons=20,18,16,15
 startingRares=10,10,10,8
 startingCredits=250
 # When winning a booster pack, this is what you'll expect to see in a pack.
-boosterPackCommon=7
+boosterPackCommon=11
 boosterPackUncommon=3
 boosterPackRare=1
 # Match rewards that are used by the quest system
-matchRewardBase=10
+matchRewardBase=25
 matchRewardTotalWins=0.3
-matchRewardNoLosses=10
+matchRewardNoLosses=25
 matchRewardPoisonWinBonus=50
 matchRewardMilledWinBonus=40
 matchRewardAltWinBonus=100
