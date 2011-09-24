@@ -427,12 +427,6 @@ public class TriggerHandler {
         if (host == null) {
             host = regtrig.getHostCard();
         }
-        // This will fix the Oblivion Ring issue, but is this the right fix?
-        for (Object o : regtrig.getHostCard().getRemembered()) {
-            if (!host.getRemembered().contains(o)) {
-                host.addRemembered(o);
-            }
-        }
 
         sa[0] = regtrig.getOverridingAbility();
         if (sa[0] == null) {

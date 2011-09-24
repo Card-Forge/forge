@@ -197,13 +197,8 @@ public abstract class AllZoneUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getCardState(final Card card) {
-        PlayerZone zone = AllZone.getZoneOf(card);
-        //for tokens
-        if (zone == null) {
-            return null;
-        }
 
-        for (Card c : zone.getCards()) {
+        for (Card c : AllZoneUtil.getCardsInGame()) {
             if (card.equals(c)) {
                 return c;
             }
