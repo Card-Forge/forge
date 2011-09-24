@@ -352,14 +352,14 @@ public class QuestEventManager {
             duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
         }
 
-        else if (AllZone.getQuestData().getWin() >= QuestPreferences.getWinsForVeryHardAI(index)) {
+        else if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForVeryHardAI(index)) {
             duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 0));
             duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
-            duelOpponents.add(getDuelOpponentByNumber(veryHardAIduels, 0));
+            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 2));
         }
         else {
-            duelOpponents.add(getDuelOpponentByNumber(veryHardAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(veryHardAIduels, 1));
+            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 0));
+            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
             duelOpponents.add(getDuelOpponentByNumber(veryHardAIduels, 2));
         }
         
