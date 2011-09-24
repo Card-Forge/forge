@@ -304,7 +304,7 @@ public final class AbilityFactory_ChangeZone {
         Card source = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();
         Constant.Zone origin = Constant.Zone.smartValueOf(params.get("Origin"));
-        //String destination = params.get("Destination");
+        String destination = params.get("Destination");
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -358,6 +358,12 @@ public final class AbilityFactory_ChangeZone {
             if (list.isEmpty()) {
                 return false;
             }
+        }
+        
+        //don't use fetching to top of library/graveyard before main2
+        if(AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases") 
+                && !destination.equals("Battlefield") && !destination.equals("Hand")) {
+            return false;
         }
 
         chance &= (r.nextFloat() < .8);
