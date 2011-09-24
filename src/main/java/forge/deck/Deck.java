@@ -32,6 +32,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
     private String comment = null;
     private PlayerType playerType = null;
     
+    private boolean customPool = false;
+    
     private ItemPool<CardPrinted> main;
     private ItemPool<CardPrinted> sideboard;
 
@@ -253,5 +255,13 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     public final void setPlayerType(PlayerType recommendedPlayer0) {
         this.playerType = recommendedPlayer0;
+    }
+    
+    public boolean isCustomPool() {
+        return customPool;
+    }
+    
+    public void setCustomPool(boolean cp) {
+        customPool = cp;
     }
 }

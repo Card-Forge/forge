@@ -64,6 +64,7 @@ public class DeckManager {
     private static final String DECK_TYPE = "Deck Type";
     private static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
+    private static final String CSTM_POOL = "Custom Pool";
 
     private File deckDir;
     Map<String, Deck> deckMap;
@@ -330,15 +331,27 @@ public class DeckManager {
             
             String[] linedata = line.split("=", 2);
             String field = linedata[0].toLowerCase();
+            String value = "";
+            
+            if (linedata.length > 1)
+                value = linedata[1];
+            
             if (NAME.equalsIgnoreCase(field)) {
-                d.setName(linedata[1]);
+                d.setName(value);
+                
             } else if (COMMENT.equalsIgnoreCase(field)) {
-                d.setComment(linedata[1]);
+                d.setComment(value);
+                
             } else if (DECK_TYPE.equalsIgnoreCase(field)) {
-                d.setDeckType(GameType.smartValueOf(linedata[1]));
+                d.setDeckType(GameType.smartValueOf(value));
+                
+            } else if (CSTM_POOL.equalsIgnoreCase(field)) {
+                d.setCustomPool(value.equalsIgnoreCase("true"));
+                
             } else if (PLAYER.equalsIgnoreCase(field)) {
-                if ("human".equalsIgnoreCase(linedata[1])) {
+                if ("human".equalsIgnoreCase(value)) {
                     d.setPlayerType(PlayerType.HUMAN);
+                    
                 } else {
                     d.setPlayerType(PlayerType.COMPUTER);
                 }
@@ -466,6 +479,8 @@ public class DeckManager {
         // these are optional
         if (d.getComment() != null) { out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", ""))); }
         if (d.getPlayerType() != null) { out.write(format("%s=%s%n", PLAYER, d.getPlayerType())); }
+        
+        if (d.isCustomPool()) { out.write(format("%s=%s%n", CSTM_POOL, "true")); }
 
         out.write(format("%s%n", "[main]"));
         writeCardPool(d.getMain(), out);
