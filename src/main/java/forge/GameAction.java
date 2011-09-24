@@ -826,16 +826,20 @@ public class GameAction {
                 AllZone.getGameAction().moveToGraveyard(c);
             }
 
-            String subtype = c.getType().get(c.getType().size() - 1);
-            CardList cl = list.getType(subtype);
+            ArrayList<String> types = c.getType();
+            for (String type : types) {
+                if(!CardUtil.isAPlaneswalkerType(type))
+                    continue;
+                
+                CardList cl = list.getType(type);
 
-            if (cl.size() > 1) {
-                for (Card crd : cl) {
-                    AllZone.getGameAction().moveToGraveyard(crd);
+                if (cl.size() > 1) {
+                    for (Card crd : cl) {
+                        AllZone.getGameAction().moveToGraveyard(crd);
+                    }
                 }
             }
         }
-
     }
 
     /**

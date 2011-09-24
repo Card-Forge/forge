@@ -447,7 +447,6 @@ public final class CardUtil {
         return (!isASuperType(cardType) && !isACardType(cardType));
     }
 
-    // Check if a Type is a Creature Type (by excluding all other types)
     /**
      * <p>isACreatureType.</p>
      *
@@ -466,6 +465,10 @@ public final class CardUtil {
      */
     public static boolean isALandType(final String cardType) {
         return (Constant.CardTypes.landTypes[0].list.contains(cardType));
+    }
+    
+    public static boolean isAPlaneswalkerType(final String cardType) {
+        return (Constant.CardTypes.walkerTypes[0].list.contains(cardType));
     }
 
     /**
