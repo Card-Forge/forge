@@ -505,7 +505,8 @@ public class AbilityFactory_Choose {
     private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory)
     {
-        if (!ComputerUtil.canPayCost(sa)) {
+        return false;
+        /*if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
 
@@ -523,7 +524,7 @@ public class AbilityFactory_Choose {
                 }
             }
         }
-        return true;
+        return true;*/
     }
 
     /**
