@@ -5,7 +5,6 @@ import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
 import arcane.ui.util.ManaSymbols;
 import forge.*;
-//import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import java.awt.Color;

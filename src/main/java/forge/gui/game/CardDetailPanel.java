@@ -9,7 +9,6 @@ package forge.gui.game;
 
 import forge.*;
 import forge.Constant.Zone;
-//import forge.view.swing.OldGuiNewGame;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;

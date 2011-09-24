@@ -13,7 +13,6 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-//import forge.view.swing.OldGuiNewGame;
 
 
 import java.awt.Font;

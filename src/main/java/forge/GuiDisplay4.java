@@ -94,7 +94,6 @@ import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-//import forge.view.swing.OldGuiNewGame;
 
 
 /**

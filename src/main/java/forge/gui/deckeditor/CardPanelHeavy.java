@@ -23,7 +23,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-//import forge.view.swing.OldGuiNewGame;
+
 
 /** 
  * This panel is to be placed in the right part of a deck editor

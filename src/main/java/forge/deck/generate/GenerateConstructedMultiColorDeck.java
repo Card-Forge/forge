@@ -1,8 +1,6 @@
 package forge.deck.generate;
 
 import forge.*;
-//import forge.view.swing.OldGuiNewGame;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

@@ -450,7 +450,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
         smoothLandCheckBox.setSelected(Constant.Runtime.Smooth[0]);
-        //newGUICheckbox.setSelected(OldGuiNewGame.preferences.newGui);
 
         creditsLabel.setText(" " + questData.getCredits());
         statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
@@ -674,7 +673,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         //    AllZone.setDisplay(new GuiDisplay3());
         //}
 
-        //OldGuiNewGame.preferences.newGui = newGUICheckbox.isSelected();
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         

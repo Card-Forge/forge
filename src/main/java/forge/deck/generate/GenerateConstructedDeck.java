@@ -9,9 +9,6 @@ import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
-
-//import forge.view.swing.OldGuiNewGame;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
