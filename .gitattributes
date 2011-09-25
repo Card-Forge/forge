@@ -2429,6 +2429,7 @@ res/cardsfolder/e/eternity_snare.txt svneol=native#text/plain
 res/cardsfolder/e/eternity_vessel.txt svneol=native#text/plain
 res/cardsfolder/e/ethercaste_knight.txt svneol=native#text/plain
 res/cardsfolder/e/ethereal_champion.txt svneol=native#text/plain
+res/cardsfolder/e/ethereal_haze.txt -text
 res/cardsfolder/e/ethereal_usher.txt svneol=native#text/plain
 res/cardsfolder/e/ethereal_whiskergill.txt svneol=native#text/plain
 res/cardsfolder/e/etherium_abomination.txt svneol=native#text/plain
@@ -4580,6 +4581,7 @@ res/cardsfolder/l/lumengrid_drake.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_sentinel.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_warden.txt svneol=native#text/plain
+res/cardsfolder/l/luminesce.txt -text
 res/cardsfolder/l/luminous_angel.txt svneol=native#text/plain
 res/cardsfolder/l/luminous_wake.txt svneol=native#text/plain
 res/cardsfolder/l/lumithread_field.txt svneol=native#text/plain

@@ -1,0 +1,14 @@
+Name:Luminesce
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ W | Name$ Luminesce Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that black sources and red sources would deal this turn.
+SVar:STPrevent:Mode$ PreventDamage | Source$ Card.Black,Card.Red | Description$ Prevent all damage that black sources and red sources would deal this turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/luminesce.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/14.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/28.jpg
+Oracle:Prevent all damage that black sources and red sources would deal this turn.
+End
