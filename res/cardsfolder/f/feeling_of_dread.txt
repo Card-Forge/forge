@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Tap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Tap up to two target creatures.
 A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | Flashback$ True | CostDesc$ Flashback 1 U | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeling_of_dread.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/14.jpg

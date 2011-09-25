@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 4 4 Angel | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenTapped$ True | TokenAttacking$ True | TokenTriggers$ DelTrig | TokenSVars$ TrigExile
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | TriggerDescription$ At end of combat, exile the Angel token.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
-SVar:Rarity:Rare
+SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_saint_traft.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/213.jpg
 End
