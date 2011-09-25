@@ -702,8 +702,6 @@ public class GameAction {
                 com.execute();
             }
 
-            //GameActionUtil.stAnimate.execute();
-
             CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;
 

@@ -288,16 +288,14 @@ public final class AbilityFactory_Animate {
         if (!AllZone.getPhase().is(Constant.Phase.Combat_Begin)
                 && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
                 && !AbilityFactory.isSorcerySpeed(sa) && !params.containsKey("ActivatingPhases")
-                && !params.containsKey("Permanent"))
-        {
+                && !params.containsKey("Permanent")) {
             return false;
         }
 
         //don't use instant speed animate abilities outside humans Combat_Declare_Attackers_InstantAbility step
         if ((!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility)
                 || AllZone.getCombat().getAttackers().length == 0)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer()))
-        {
+                && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
