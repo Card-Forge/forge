@@ -2,7 +2,7 @@ Name:Chameleon Blur
 ManaCost:3 G
 Types:Instant
 Text:no text
-A:SP$ Effect | Cost$ 3 G | Name$ Endure Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that creatures would deal to players this turn.
+A:SP$ Effect | Cost$ 3 G | Name$ Chameleon Blur Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that creatures would deal to players this turn.
 SVar:STPrevent:Mode$ PreventDamage | Source$ Creature | Target$ Player | Description$ Prevent all damage that creatures would deal to players this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
