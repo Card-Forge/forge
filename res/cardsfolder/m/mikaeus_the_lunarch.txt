@@ -1,4 +1,4 @@
-Name:Mikaeus, The Lunarch
+Name:Mikaeus, the Lunarch
 ManaCost:X W
 Types:Legendary Creature Human Cleric
 Text:no text
