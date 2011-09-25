@@ -1,0 +1,12 @@
+Name:Al-abara's Carpet
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$ Effect | Cost$ 5 T | Name$ Dauntless Al-abara's Carpet Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+SVar:STPrevent:Mode$ PreventDamage | Target$ You | Source$ Creature.attacking+withoutFlying | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/al_abaras_carpet.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/213.jpg
+Oracle:{5}, {T}: Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+End

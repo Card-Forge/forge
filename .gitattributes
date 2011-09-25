@@ -145,6 +145,7 @@ res/cardsfolder/a/akromas_vengeance.txt svneol=native#text/plain
 res/cardsfolder/a/akron_legionnaire.txt svneol=native#text/plain
 res/cardsfolder/a/aku_djinn.txt svneol=native#text/plain
 res/cardsfolder/a/akuta_born_of_ash.txt svneol=native#text/plain
+res/cardsfolder/a/al_abaras_carpet.txt -text
 res/cardsfolder/a/alabaster_dragon.txt svneol=native#text/plain
 res/cardsfolder/a/alabaster_leech.txt svneol=native#text/plain
 res/cardsfolder/a/alabaster_mage.txt svneol=native#text/plain
@@ -6619,6 +6620,7 @@ res/cardsfolder/s/scar.txt svneol=native#text/plain
 res/cardsfolder/s/scarblade_elite.txt svneol=native#text/plain
 res/cardsfolder/s/scare_tactics.txt svneol=native#text/plain
 res/cardsfolder/s/scarecrone.txt svneol=native#text/plain
+res/cardsfolder/s/scarecrow.txt -text
 res/cardsfolder/s/scarland_thrinax.txt svneol=native#text/plain
 res/cardsfolder/s/scarred_vinebreeder.txt svneol=native#text/plain
 res/cardsfolder/s/scarscale_ritual.txt svneol=native#text/plain
