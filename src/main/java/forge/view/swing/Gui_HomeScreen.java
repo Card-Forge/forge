@@ -59,6 +59,7 @@ import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.NewConstants.LANG;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.NEW_GAME_TEXT;
+import forge.quest.gui.QuestOptions;
 
 import java.awt.Component;
 import java.util.ArrayList;
@@ -1432,18 +1433,22 @@ public class Gui_HomeScreen {
     }
     
     private void doStartGame() {
-        if (HumanDeckSelected.equals("") && AIDeckSelected.equals(""))
-            return;
-        
-        if (doDeckLogic() == false)
-            return;
+        if (GameTypeSelected.equals(GameType.Quest)) {
+            new QuestOptions();
+        } else {
+            if (HumanDeckSelected.equals("") && AIDeckSelected.equals(""))
+                return;
+            
+            if (doDeckLogic() == false)
+                return;
+
+            AllZone.setDisplay(new GuiDisplay4());
+            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
+            AllZone.getDisplay().setVisible(true);
+        }
         
         Constant.Runtime.gameType = GameTypeSelected;
         
-        AllZone.setDisplay(new GuiDisplay4());
-        AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
-        AllZone.getDisplay().setVisible(true);
-
         gHS.dispose();
     }
     
