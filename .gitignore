@@ -13,6 +13,7 @@ res/decks/o1.bdk
 res/gui/display_new_layout.xml
 res/oracleScript.log
 res/quest/questData.dat
+res/quest/questData.dat.xml
 res/reprintSetInfo.log
 res/setInfoScript.log
 /target
