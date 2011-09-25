@@ -6985,6 +6985,7 @@ res/cardsfolder/s/silkwing_scout.txt svneol=native#text/plain
 res/cardsfolder/s/silt_crawler.txt svneol=native#text/plain
 res/cardsfolder/s/silver_drake.txt svneol=native#text/plain
 res/cardsfolder/s/silver_erne.txt svneol=native#text/plain
+res/cardsfolder/s/silver_inlaid_dagger.txt -text
 res/cardsfolder/s/silver_knight.txt svneol=native#text/plain
 res/cardsfolder/s/silver_myr.txt svneol=native#text/plain
 res/cardsfolder/s/silver_seraph.txt svneol=native#text/plain
@@ -7149,7 +7150,6 @@ res/cardsfolder/s/slith_strider.txt svneol=native#text/plain
 res/cardsfolder/s/slithering_shade.txt svneol=native#text/plain
 res/cardsfolder/s/slithermuse.txt svneol=native#text/plain
 res/cardsfolder/s/slithery_stalker.txt svneol=native#text/plain
-res/cardsfolder/s/sliver_inlaid_dagger.txt -text
 res/cardsfolder/s/sliver_legion.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_overlord.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_queen.txt svneol=native#text/plain

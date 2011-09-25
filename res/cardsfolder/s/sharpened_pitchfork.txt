@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:Equipped creature has first strike.
 K:eqPump 1:First Strike
-S:Mode$ Continuous | Affected$ Creature.AttachedBy+Human | AddPower$ 1 | AddToughness$ 1 | Description$ As long as equipped creature is a Human, it gets +1/+1.
+S:Mode$ Continuous | Affected$ Human.AttachedBy | AddPower$ 1 | AddToughness$ 1 | Description$ As long as equipped creature is a Human, it gets +1/+1.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sharpened_pitchfork.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/232.jpg
