@@ -2,7 +2,7 @@ Name:Bubble Matrix
 ManaCost:4
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures.
+S:Mode$ PreventDamage | Target$ Creature | Description$ Prevent all damage that would be dealt to creatures.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubble_matrix.jpg
