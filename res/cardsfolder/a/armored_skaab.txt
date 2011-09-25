@@ -5,7 +5,6 @@ Text:no text
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
-SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_skaab.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/43.jpg
