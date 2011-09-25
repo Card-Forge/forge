@@ -409,29 +409,14 @@ public abstract class Player extends GameEntity {
             return 0;
         }
 
-        //stPreventDamage
+        //Prevent Damage static abilities
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage);
             }
-            if (ca.hasStartOfKeyword("stPreventDamage")) {
-                //syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
-                int KeywordPosition = ca.getKeywordPosition("stPreventDamage");
-                String parse = ca.getKeyword().get(KeywordPosition).toString();
-                String k[] = parse.split(":");
-
-                final Card card = ca;
-                if (k[1].equals("Player") || (k[1].equals("You") && card.getController().isPlayer(this))) {
-                    final String restrictions[] = k[2].split(",");
-                    if (source.isValidCard(restrictions, card.getController(), card)) {
-                        if (k[3].equals("All")) return 0;
-                        restDamage = restDamage - Integer.valueOf(k[3]);
-                    }
-                }
-            }
-        } //stPreventDamage
+        }
 
         //specific cards
         if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {

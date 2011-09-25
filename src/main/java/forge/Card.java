@@ -1569,11 +1569,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.get(i).toString().contains("Protection:")) {
                     String[] k = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("stPreventDamage:")) {
-                    String[] k = keyword.get(i).split(":");
-                    if (!k[4].equals("no text")) {
-                        sbLong.append(k[4]).append("\r\n");
-                    }
                 } else if (keyword.get(i).toString().contains("Creatures can't attack unless their controller pays")) {
                     String[] k = keyword.get(i).split(":");
                     if (!k[3].equals("no text")) {
@@ -5701,33 +5696,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         
         
 
-        //stPreventDamage
+        //Prevent Damage static abilities
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage);
             }
-            
-            if (ca.hasStartOfKeyword("stPreventDamage")) {
-                //syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
-                int keywordPosition = ca.getKeywordPosition("stPreventDamage");
-                String parse = ca.getKeyword().get(keywordPosition).toString();
-                String[] k = parse.split(":");
-
-                final String[] restrictions1 = k[1].split(",");
-                final String[] restrictions2 = k[2].split(",");
-                final Card card = ca;
-                if (this.isValidCard(restrictions1, card.getController(), card)
-                		&& source.isValidCard(restrictions2, card.getController(), card))
-                {
-                    if (k[3].equals("All")) {
-                        return 0;
-                    }
-                    restDamage = restDamage - Integer.valueOf(k[3]);
-                }
-            }
-        } //stPreventDamage
+        }
 
         // specific Cards
         if (isCreature()) { //and not a planeswalker
