@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altars_reap.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/86.jpg
+Oracle:As an additional cost to cast Altar's Reap, sacrifice a creature.\nDraw two cards.
 End

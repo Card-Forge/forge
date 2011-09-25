@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ T
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frightful_delusion.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/57.jpg
+Oracle:Counter target spell unless its controller pays {1}. That player discards a card.
 End

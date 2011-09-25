@@ -8,4 +8,5 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneyard_wurm.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/171.jpg
+Oracle:Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
 End

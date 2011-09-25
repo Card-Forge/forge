@@ -10,4 +10,5 @@ SVar:DBDestroy:DB$Destroy | Cost$ 0 | Defined$ TriggeredTarget  | NoRegen$ False
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creepy_doll.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/220.jpg
+Oracle:Creepy Doll is indestructible.\nWhenever Creepy Doll deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.
 End

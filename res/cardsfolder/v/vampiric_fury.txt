@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_fury.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/167.jpg
+Oracle:Vampire creatures you control get +2/+0 and gain first strike until end of turn.
 End

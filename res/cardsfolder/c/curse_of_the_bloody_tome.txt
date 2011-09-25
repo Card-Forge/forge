@@ -8,4 +8,5 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ EnchantedPlayer | NumCards$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_bloody_tome.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/50.jpg
+Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.
 End

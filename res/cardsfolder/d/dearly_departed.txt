@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dearly_departed.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/9.jpg
+Oracle:Flying\nAs long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
 End

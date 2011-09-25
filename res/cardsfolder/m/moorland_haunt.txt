@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ W U T ExileFromGrave<1/Creature> | TokenImage$ W 1 1 Spirit 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moorland_haunt.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/244.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{W}{U}, {T}, Exile a creature card from your graveyard: Put a 1/1 white Spirit creature token with flying onto the battlefield.
 End

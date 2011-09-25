@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Human.EquippedBy | AddPower$ 1 | Description$ As 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_inlaid_dagger.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/233.jpg
+Oracle:Equipped creature gets +2/+0.\nAs long as equipped creature is a Human, it gets an additional +1/+0.\nEquip {2}
 End

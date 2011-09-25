@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcallers_chant.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/101.jpg
+Oracle:Choose one - Return target creature card from your graveyard to your hand; or return two target Zombie cards from your graveyard to your hand.
 End

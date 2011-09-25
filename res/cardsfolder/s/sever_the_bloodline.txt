@@ -9,4 +9,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_the_bloodline.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/115.jpg
+Oracle:Exile target creature and all other creatures with the same name as that creature.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

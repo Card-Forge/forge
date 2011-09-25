@@ -7,4 +7,5 @@ SVar:DBReturn:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_in_the_mist.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/63.jpg
+Oracle:Counter target spell. Return target permanent to its owner's hand.
 End

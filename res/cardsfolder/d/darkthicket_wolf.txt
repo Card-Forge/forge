@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkthicket_wolf.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/175.jpg
+Oracle:{2}{G}: Darkthicket Wolf gets +2/+2 until end of turn. Activate this ability only once each turn.
 End

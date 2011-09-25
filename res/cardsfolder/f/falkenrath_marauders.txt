@@ -10,4 +10,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_marauders.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/141.jpg
+Oracle:Flying, haste\nWhenever Falkenrath Marauders deals combat damage to a player, put two +1/+1 counters on it.
 End

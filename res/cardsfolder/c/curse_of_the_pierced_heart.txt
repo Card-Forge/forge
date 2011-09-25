@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedPlayer | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_pierced_heart.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/138.jpg
+Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
 End

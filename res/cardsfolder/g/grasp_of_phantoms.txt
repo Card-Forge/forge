@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 7 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grasp_of_phantoms.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/58.jpg
+Oracle:Put target creature on top of its owner's library.\nFlashback {7}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

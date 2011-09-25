@@ -11,4 +11,5 @@ A:AB$ GainControl | Cost$ 3 B B | ValidTgts$ Creature.Vampire | TgtPrompt$ Selec
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/olivia_voldaren.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/215.jpg
+Oracle:Flying\n{1}{R}: Olivia Voldaren deals 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on Olivia Voldaren.\n{3}{B}{B}: Gain control of target Vampire for as long as you control Olivia Voldaren.
 End

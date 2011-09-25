@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Spirit,Enchantment | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urgent_exorcism.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/40.jpg
+Oracle:Destroy target Spirit or enchantment.
 End

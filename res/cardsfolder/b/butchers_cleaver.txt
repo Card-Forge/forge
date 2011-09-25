@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy+Human | AddKeyword$ Lifelink | De
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/butchers_cleaver.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/217.jpg
+Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is a Human, it has lifelink.\nEquip {3}
 End

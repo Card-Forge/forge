@@ -9,4 +9,5 @@ SVar:SacMe:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomed_traveler.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/11.jpg
+Oracle:When Doomed Traveler dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
 End

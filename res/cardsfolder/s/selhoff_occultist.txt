@@ -9,4 +9,5 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selhoff_occultist.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/73.jpg
+Oracle:Whenever Selhoff Occultist or another creature dies, target player puts the top card of his or her library into his or her graveyard.
 End

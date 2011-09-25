@@ -9,4 +9,5 @@ SVar:SacMe:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_guard.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/20.jpg
+Oracle:When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
 End

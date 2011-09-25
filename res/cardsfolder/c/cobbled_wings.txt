@@ -6,4 +6,5 @@ K:eqPump 1:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobbled_wings.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/219.jpg
+Oracle:Equipped creature has flying.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 End

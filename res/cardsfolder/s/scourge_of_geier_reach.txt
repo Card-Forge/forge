@@ -8,4 +8,5 @@ SVar:X:Count$Valid Creature.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_geier_reach.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/162.jpg
+Oracle:Scourge of Geier Reach gets +1/+1 for each creature your opponents control.
 End

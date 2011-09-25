@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moment_of_heroism.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/24.jpg
+Oracle:Target creature gets +2/+2 and gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
 End

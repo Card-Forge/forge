@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mentor_of_the_meek.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/21.jpg
+Oracle:Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.
 End

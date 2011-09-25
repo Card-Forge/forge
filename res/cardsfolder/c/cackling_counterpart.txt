@@ -7,4 +7,5 @@ A:SP$CopyPermanent | Cost$ 1 U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Sele
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_counterpart.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/46.jpg
+Oracle:Put a token onto the battlefield that's a copy of target creature you control.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

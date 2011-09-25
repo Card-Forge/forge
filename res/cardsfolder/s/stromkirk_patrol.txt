@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_patrol.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/118.jpg
+Oracle:Whenever Stromkirk Patrol deals combat damage to a player, put a +1/+1 counter on it.
 End

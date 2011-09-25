@@ -7,4 +7,5 @@ K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chapel_geist.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/7.jpg
+Oracle:Flying
 End

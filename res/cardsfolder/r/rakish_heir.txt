@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredSource | Counter
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakish_heir.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/158.jpg
+Oracle:Whenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it.
 End

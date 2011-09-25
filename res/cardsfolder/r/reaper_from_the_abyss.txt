@@ -10,4 +10,5 @@ SVar:Morbid:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_from_the_abyss.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/112.jpg
+Oracle:Flying\nMorbid - At the beginning of each end step, if a creature died this turn, destroy target non-Demon creature.
 End

@@ -8,4 +8,5 @@ SVar:TrigDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtP
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geistcatchers_rig.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/223.jpg
+Oracle:When Geistcatcher's Rig enters the battlefield, you may have it deal 4 damage to target creature with flying.
 End

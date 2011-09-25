@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_bell_ringer.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/41.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Village Bell-Ringer enters the battlefield, untap all creatures you control.
 End

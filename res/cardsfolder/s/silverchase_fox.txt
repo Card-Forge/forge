@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPromp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverchase_fox.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/31.jpg
+Oracle:{1}{W}, Sacrifice Silverchase Fox: Exile target enchantment.
 End

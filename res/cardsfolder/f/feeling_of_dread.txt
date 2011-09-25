@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeling_of_dread.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/14.jpg
+Oracle:Tap up to two target creatures.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -10,4 +10,5 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ HIDDEN CA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claustrophobia.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/48.jpg
+Oracle:Enchant creature\nWhen Claustrophobia enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
 End

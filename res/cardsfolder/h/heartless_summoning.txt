@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_summoning.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/104.jpg
+Oracle:Creature spells you cast cost {2} less to cast.\nCreatures you control get -1/-1.
 End

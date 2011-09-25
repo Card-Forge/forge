@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | ChangeType$ Zombie.YouCtrl | Cost$ 0 | Origi
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulraiser.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/102.jpg
+Oracle:When Ghoulraiser enters the battlefield, return a Zombie card at random from your graveyard to your hand.
 End

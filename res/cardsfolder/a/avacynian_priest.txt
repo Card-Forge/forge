@@ -7,4 +7,5 @@ A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature.nonHuman | TgtPrompt$ Select target 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacynian_priest.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/4.jpg
+Oracle:{1}, {T}: Tap target non-Human creature.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stony_silence.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/36.jpg
+Oracle:Activated abilities of artifacts can't be activated.
 End

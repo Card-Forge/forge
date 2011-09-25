@@ -11,4 +11,5 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | 
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_saint_traft.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/213.jpg
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
 End

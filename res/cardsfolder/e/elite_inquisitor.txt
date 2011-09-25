@@ -9,4 +9,5 @@ K:Protection:Vampire,Werewolf,Zombie:Protection from Vampires, from Werewolves, 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_inquisitor.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/13.jpg
+Oracle:First strike, vigilance\nProtection from Vampires, from Werewolves, and from Zombies
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_possession.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/18.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.\nPrevent all combat damage that would be dealt to and dealt by enchanted creature.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Human
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_overseer.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/3.jpg
+Oracle:Flying\nAs long as you control a Human, Angelic Overseer has hexproof and is indestructible.
 End

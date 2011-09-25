@@ -8,4 +8,5 @@ K:Deathtouch
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_viper.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/169.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
 End

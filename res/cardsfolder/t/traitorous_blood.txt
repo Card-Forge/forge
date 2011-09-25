@@ -7,4 +7,5 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste & Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitorous_blood.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/166.jpg
+Oracle:Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
 End

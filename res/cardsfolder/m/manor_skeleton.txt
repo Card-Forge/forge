@@ -8,4 +8,5 @@ A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manor_skeleton.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/106.jpg
+Oracle:Haste\n{1}{B}: Regenerate Manor Skeleton.
 End

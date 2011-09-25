@@ -11,4 +11,5 @@ SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindshrieker.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/67.jpg
+Oracle:Flying\n{2}: Target player puts the top card of his or her library into his or her graveyard. Mindshrieker gets +X/+X until end of turn, where X is that card's converted mana cost.
 End

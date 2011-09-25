@@ -7,4 +7,5 @@ A:SP$ DamageAll | Cost$ 4 R R | ValidCards$ Creature.withoutFlying | ValidPlayer
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_temblor.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/161.jpg
+Oracle:Rolling Temblor deals 2 damage to each creature without flying.\nFlashback {4}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

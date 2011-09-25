@@ -7,4 +7,5 @@ A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | Flashbac
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_peasants.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/28.jpg
+Oracle:Creatures you control get +2/+0 until end of turn.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

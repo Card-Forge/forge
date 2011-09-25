@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select tar
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smite_the_monstrous.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/33.jpg
+Oracle:Destroy target creature with power 4 or greater.
 End

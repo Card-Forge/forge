@@ -9,4 +9,5 @@ SVar:ABRegen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_grimace.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/116.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "{B}: Regenerate this creature."
 End

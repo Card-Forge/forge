@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.withFlying+YouDontCtrl | AddPower$ -1 | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_eyed_scarecrow.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/230.jpg
+Oracle:Defender\nCreatures with flying your opponents control get -1/-0.
 End

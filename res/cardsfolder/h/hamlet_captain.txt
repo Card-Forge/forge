@@ -9,4 +9,5 @@ SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Other+Human+YouCtr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hamlet_captain.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/187.jpg
+Oracle:Whenever Hamlet Captain attacks or blocks, other Human creatures you control get +1/+1 until end of turn.
 End

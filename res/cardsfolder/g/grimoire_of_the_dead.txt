@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimoire_of_the_dead.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/226.jpg
+Oracle:{1}, {T}, Discard a card: Put a study counter on Grimoire of the Dead.\n{T}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types.
 End

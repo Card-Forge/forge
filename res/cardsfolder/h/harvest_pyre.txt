@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_pyre.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/146.jpg
+Oracle:As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.\nHarvest Pyre deals X damage to target creature.
 End

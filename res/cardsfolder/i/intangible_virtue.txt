@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intangible_virtue.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/19.jpg
+Oracle:Creature tokens you control get +1/+1 and have vigilance.
 End

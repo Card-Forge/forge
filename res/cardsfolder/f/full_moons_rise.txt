@@ -7,4 +7,5 @@ A:AB$RegenerateAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.Werewolf+YouCt
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/full_moons_rise.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/180.jpg
+Oracle:Werewolf creatures you control get +1/+0 and have trample.\nSacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.
 End

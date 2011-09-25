@@ -8,4 +8,5 @@ SVar:X:Remembered$Amount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paraselene.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/26.jpg
+Oracle:Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.
 End

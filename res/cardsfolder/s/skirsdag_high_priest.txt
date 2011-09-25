@@ -8,4 +8,5 @@ SVar:Morbid:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirsdag_high_priest.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/117.jpg
+Oracle:Morbid - {T}, Tap two untapped creatures you control: Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.
 End

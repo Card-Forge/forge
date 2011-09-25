@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_departure.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/75.jpg
+Oracle:Return target creature to its owner's hand.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -7,4 +7,5 @@ A:SP$ LoseLife | Cost$ 5 R | ValidTgts$ Opponent | LifeAmount$ 3 | Flashback$ Tr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bump_in_the_night.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/92.jpg
+Oracle:Target opponent loses 3 life.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -12,4 +12,5 @@ SVar:X:Remembered$Amount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_of_crows.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/70.jpg
+Oracle:Flying\nWhenever another creature dies, you may draw a card. If you do, discard a card.
 End

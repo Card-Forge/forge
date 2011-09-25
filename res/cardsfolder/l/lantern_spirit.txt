@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_spirit.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/62.jpg
+Oracle:Flying\n{U}: Return Lantern Spirit to its owner's hand.
 End

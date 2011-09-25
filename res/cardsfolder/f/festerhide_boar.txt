@@ -7,4 +7,5 @@ K:etbCounter:P1P1:2:Morbid:Morbid - CARDNAME enters the battlefield with two +1/
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festerhide_boar.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/179.jpg
+Oracle:Trample\nMorbid - Festerhide Boar enters the battlefield with two +1/+1 counters on it if a creature died this turn.
 End
