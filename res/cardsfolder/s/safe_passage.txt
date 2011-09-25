@@ -2,9 +2,8 @@ Name:Safe Passage
 ManaCost:2 W
 Types:Instant
 Text:no text
-A:SP$ Effect | Cost$ 2 W | Name$ Safe Passage Effect | StaticAbilities$ CPump,PPump | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn.
-SVar:CPump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
-SVar:PPump:Mode$ Continuous | Affected$ You | AddKeyword$ Prevent all damage that would be dealt to you
+A:SP$ Effect | Cost$ 2 W | Name$ Safe Passage Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn.
+SVar:STPrevent:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safe_passage.jpg
