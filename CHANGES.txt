@@ -47,6 +47,37 @@ Fixes/Features:
 - Fixed destroyPlaneswalkers checking non-Planeswalker types (so two Artifact Planeswalker won't destroy each other).
 - Little AI improvements in AF ChangeZone Hidden.
 - Added the recent commit logs to changes.txt.
+- Fixed Oblivion Ring (by changing getCardState to search all zones for the card).
+- Fixed delayedTriggers.
+- Reverted newgame_background.jpg.
+- Fixed the possible crash in assembleDuelUniquedata.
+- Changed generateDuels to the old system (ending with one very hard and two hard opponents).
+- Updating mtgData
+- Graphics for HomeScreen
+- Removed a few commented references of OldGuiNewGame.
+- Add CustomPool property to deck file for filtering from HomeScreen's deck list.
+- Adds first draft of HomeScreen gui. Requires an environmental variable to be present in order to enable it.
+- Move ManaSymbol initialization from OldGuiNewGame to ApplicationView.
+- Completed the fix for delayed triggers.
+- Disabled the use of AF ChooseColor for the AI.
+- Fixed Militia's Pride.
+- Change the absolute path to relative path for graphics
+- Added four copies of Isolated Chapel to the Data 2 deck.
+- Fixed type of Skulltap.
+- Added "Custom Pool=true" so it doesn't show up as a regular constructed deck in the new HomeScreen.
+- Added the -1/-1 counters (formerly Flourishing Defenses) deck by Nordos as Starfire 3.
+- Fixed name of Mikaeus, the Lunarch.
+- copyCard will now copy remembered objects (this could make some more use of ClearRemembered CleanUp necessary).
+- Fixed Admonition Angel.
+- Cleanup of stAnimate.
+- Updated some SVars of Innistrad cards (A-E).
+- Minor fix to the new Home Screen(nice and understandable code); Picking random deck for the AI causes it to echo the deck chosen for the human.
+- Updated some SVars of Innistrad cards (F-M).
+- Updated some SVars of Innistrad cards (N-S).
+- Fixed file name of Silver-Inlaid Dagger.
+- Updated some SVars of Innistrad cards (T-Z).
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -58,6 +89,8 @@ Added many cards, including:
 
 Woodland Sleuth
 Runic Repetition
+Altar's Reap
+Spare from Evil
 
 
 end
