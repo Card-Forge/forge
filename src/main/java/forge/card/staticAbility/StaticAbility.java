@@ -152,6 +152,22 @@ public class StaticAbility {
     		StaticAbility_Continuous.applyContinuousAbility(this);
     }
     
+    //apply the ability if it has the right mode
+    public int applyAbility(String mode, Card source, GameEntity target, int in) {
+        
+        //don't apply the ability if it hasn't got the right mode
+        if (!mapParams.get("Mode").equals(mode))
+            return in;
+        
+        if (isSuppressed() || !checkConditions())
+            return in;
+        
+        if (mode.equals("PreventDamage"))
+            return StaticAbility_PreventDamage.applyPreventDamageAbility(this, source, target, in);
+        
+        return in;
+    }
+    
     public boolean checkConditions() {
     	Player controller = hostCard.getController();
     	

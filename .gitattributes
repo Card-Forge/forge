@@ -9991,6 +9991,7 @@ src/main/java/forge/card/spellability/Target_Selection.java svneol=native#text/p
 src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/staticAbility/StaticAbility.java svneol=native#text/plain
 src/main/java/forge/card/staticAbility/StaticAbility_Continuous.java svneol=native#text/plain
+src/main/java/forge/card/staticAbility/StaticAbility_PreventDamage.java -text
 src/main/java/forge/card/staticAbility/package-info.java svneol=native#text/plain
 src/main/java/forge/card/trigger/Trigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain

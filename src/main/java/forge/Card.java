@@ -5698,10 +5698,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return 0;
             }
         }
+        
+        
 
         //stPreventDamage
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
+            ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (StaticAbility stAb : staticAbilities) {
+                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage);
+            }
+            
             if (ca.hasStartOfKeyword("stPreventDamage")) {
                 //syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
                 int keywordPosition = ca.getKeywordPosition("stPreventDamage");
