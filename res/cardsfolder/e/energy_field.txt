@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.YouOwn | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a card is put into your graveyard from anywhere, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
-K:stPreventDamage:You:Card.YouDontCtrl:All:Prevent all damage that would be dealt to you by sources you don't control.
+S:Mode$ PreventDamage | Target$ You | Source$ Card.YouDontCtrl | Description$ Prevent all damage that would be dealt to you by sources you don't control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_field.jpg
