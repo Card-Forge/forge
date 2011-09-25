@@ -1,6 +1,7 @@
 [metadata]
 Name=JuzamjediCube
 Deck Type=constructed
+Custom Pool=true
 [main]
 1 Fire Ambush|PTK
 1 Fulminator Mage|SHM
