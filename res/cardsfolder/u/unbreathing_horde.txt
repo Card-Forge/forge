@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie
 Text:no text
 PT:0/0
-K:etbCounter:P1P1:X
+K:etbCounter:P1P1:X:no Condition:Unbreathing Horde enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard.
 K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 SVar:X:Count$Valid Zombie.YouCtrl+Other/Plus.Y
 SVar:Y:Count$TypeInYourYard.Zombie
