@@ -1013,7 +1013,7 @@ public class Gui_HomeScreen {
                 Deck rDeck = chooseRandomDeck();
                 
                 if (rDeck != null) {
-                    String msg = String.format("The computer is using deck: %s.", Constant.Runtime.HumanDeck[0].getName());
+                    String msg = String.format("The computer is using deck: %s.", Constant.Runtime.ComputerDeck[0].getName());
                     JOptionPane.showMessageDialog(null, msg, "Random Deck Name", JOptionPane.INFORMATION_MESSAGE);
                     
                     Constant.Runtime.ComputerDeck[0] = rDeck;
