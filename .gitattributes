@@ -3179,6 +3179,7 @@ res/cardsfolder/g/goblin_elite_infantry.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_firebug.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_fireslinger.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_firestarter.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_furrier.txt -text
 res/cardsfolder/g/goblin_gardener.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_gaveleer.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_general.txt svneol=native#text/plain
@@ -3815,6 +3816,7 @@ res/cardsfolder/i/incremental_blight.txt -text
 res/cardsfolder/i/incremental_growth.txt -text
 res/cardsfolder/i/incurable_ogre.txt svneol=native#text/plain
 res/cardsfolder/i/indebted_samurai.txt svneol=native#text/plain
+res/cardsfolder/i/indentured_oaf.txt -text
 res/cardsfolder/i/independent_troops.txt svneol=native#text/plain
 res/cardsfolder/i/indestructibility.txt svneol=native#text/plain
 res/cardsfolder/i/indestructible_aura.txt svneol=native#text/plain
