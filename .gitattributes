@@ -7860,6 +7860,7 @@ res/cardsfolder/t/tangle_spider.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_wire.txt svneol=native#text/plain
 res/cardsfolder/t/tanglebloom.txt svneol=native#text/plain
 res/cardsfolder/t/tangleroot.txt svneol=native#text/plain
+res/cardsfolder/t/tanglesap.txt -text
 res/cardsfolder/t/tanglewalker.txt svneol=native#text/plain
 res/cardsfolder/t/taoist_hermit.txt svneol=native#text/plain
 res/cardsfolder/t/taoist_mystic.txt svneol=native#text/plain
