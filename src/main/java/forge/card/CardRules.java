@@ -150,6 +150,10 @@ public final class CardRules {
         public static Predicate<CardRules> name(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.NAME, op, what);
         }
+        public static Predicate<CardRules> subType(final String what) {
+            return new LeafString(LeafString.CardField.SUBTYPE, PredicateString.StringOp.CONTAINS, what);
+        }
+
         public static Predicate<CardRules> subType(final PredicateString.StringOp op, final String what) {
             return new LeafString(LeafString.CardField.SUBTYPE, op, what);
         }
