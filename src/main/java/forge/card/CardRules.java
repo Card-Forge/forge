@@ -61,13 +61,13 @@ public final class CardRules {
     }
 
     public CardRules(final String cardName, final CardType cardType, final CardManaCost manacost,
-            final String ptLine, final String[] cardRules, final Map<String, CardInSet> setsData,
+            final String ptLine, final String[] oracleRules, final Map<String, CardInSet> setsData,
             final boolean removedFromRandomDecks, final boolean removedFromAIDecks)
     {
         this.name = cardName;
         this.type = cardType;
         this.cost = manacost;
-        this.rules = cardRules;
+        this.rules = oracleRules;
         this.color = new CardColor(cost);
         this.isRemovedFromAIDecks = removedFromAIDecks;
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
@@ -75,10 +75,7 @@ public final class CardRules {
         //System.out.println(cardName);
 
         if (cardType.isCreature()) {
-            if (ptLine == null){
-                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", cardName));
-            }
-            int slashPos = ptLine.indexOf('/');
+            int slashPos = ptLine == null ? -1 : ptLine.indexOf('/');
             if (slashPos == -1) {
                 throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", cardName));
             }
@@ -136,7 +133,9 @@ public final class CardRules {
     public abstract static class Predicates {
         public static final Predicate<CardRules> isKeptInAiDecks = new Predicate<CardRules>() {
             @Override public boolean isTrue(CardRules card) { return !card.isRemovedFromAIDecks; } };
-        
+        public static final Predicate<CardRules> isKeptInRandomDecks = new Predicate<CardRules>() {
+            @Override public boolean isTrue(CardRules card) { return !card.isRemovedFromRandomDecks; } };
+            
         
         // Static builder methods - they choose concrete implementation by themselves
         public static Predicate<CardRules> cmc(final ComparableOp op, final int what)

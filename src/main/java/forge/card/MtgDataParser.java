@@ -52,7 +52,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
         setsToSkipPrefixes.add("BTD");
         setsToSkipPrefixes.add("DKM");
         //setsToSkipPrefixes.add("ATH"); // No need to skip it really.
-                                         // On gatherer's opinion this cards was releases twice in original set
+                                         // On gatherer's opinion this cards were released twice in original set
 
         // Promo sets - all cards have been issued in other sets
         setsToSkipPrefixes.add("SDC");
