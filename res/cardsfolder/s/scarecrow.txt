@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Scarecrow
 Text:no text
 PT:2/2
-A:AB$ Effect | Cost$ 6 T | Name$ Dauntless Scarecrow Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by creatures with flying.
+A:AB$ Effect | Cost$ 6 T | Name$ Scarecrow Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 SVar:STPrevent:Mode$ PreventDamage | Target$ You | Source$ Creature.withFlying | Description$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
