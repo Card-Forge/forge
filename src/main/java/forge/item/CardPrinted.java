@@ -149,6 +149,9 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             }
             return new PredicateSets(Arrays.asList(new String[]{value}), true);
         }
+        public static Predicate<CardPrinted> name(final String what) {
+            return new PredicateName(PredicateString.StringOp.EQUALS, what);
+        }        
         public static Predicate<CardPrinted> name(final PredicateString.StringOp op, final String what) {
             return new PredicateName(op, what);
         }
@@ -203,8 +206,9 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             @Override
             public boolean isTrue(final CardPrinted card) {
+                String cardName = card.getName();
                 for(int i = 0; i < operand.length; i++) {
-                    if ( op(card.getName(), operand[i]) ) return false;
+                    if ( op(cardName, operand[i]) ) return false;
                 }
                 return true;
             }
