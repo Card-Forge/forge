@@ -745,13 +745,13 @@ public class GameAction {
                     
                     if (entity instanceof Card){
                         Card perm = (Card)entity;
-                        // I think the Keyword checks might be superfluous with the isValidCard check
+                        // I think the Keyword checks might be superfluous with the isValid check
                         if (!AllZoneUtil.isCardInPlay(perm)
                                 || CardFactoryUtil.hasProtectionFrom(c, perm)
                                 || ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature"))
                                 && !perm.isCreature())
                                 || (c.hasKeyword("Enchant tapped creature") && perm.isUntapped())
-                                || (tgt != null && !perm.isValidCard(tgt.getValidTgts(), c.getController(), c))){
+                                || (tgt != null && !perm.isValid(tgt.getValidTgts(), c.getController(), c))){
                             c.unEnchantEntity(perm);
                             moveToGraveyard(c);
                             checkAgain = true;

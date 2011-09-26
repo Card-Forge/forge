@@ -196,7 +196,7 @@ public class StaticAbility {
     	
     	if (mapParams.containsKey("TopCardOfLibraryIs")) {
     		Card topCard = controller.getCardsIn(Zone.Library).get(0);
-    		if (!topCard.isValidCard(mapParams.get("TopCardOfLibraryIs").split(","), controller, hostCard))
+    		if (!topCard.isValid(mapParams.get("TopCardOfLibraryIs").split(","), controller, hostCard))
     			return false;
     	}
     		

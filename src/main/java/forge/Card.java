@@ -4862,29 +4862,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 || ((isCreature() || isTribal())
                 && CardUtil.isACreatureType(cardType) && typeContains("AllCreatureTypes"))) return true;
         return false;
-    }
-
-
-    /**
-     * <p>isValidCard.</p>
-     * Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
-     *
-     * @param Restrictions an array of {@link java.lang.String} objects.
-     * @param sourceController a {@link forge.Player} object.
-     * @param source a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public boolean isValidCard(final String Restrictions[], final Player sourceController, final Card source) {
-
-        if (getName().equals("Mana Pool") || isImmutable()) return false;
-
-        for (int i = 0; i < Restrictions.length; i++) {
-            if (isValid(Restrictions[i], sourceController, source)) return true;
-        }
-        return false;
-
-    }//isValidCard
-
+    }//isType
 
     // Takes one argument like Permanent.Blue+withFlying
     /**
@@ -4920,7 +4898,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (hasProperty(exR[j], sourceController, source) == false) return false;
         }
         return true;
-    }//isValidCard(String Restriction)
+    }//isValid(String Restriction)
 
     // Takes arguments like Blue or withFlying
     /**

@@ -900,7 +900,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -980,7 +980,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1075,7 +1075,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1169,7 +1169,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1260,7 +1260,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1347,7 +1347,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1433,7 +1433,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1518,7 +1518,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1597,7 +1597,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1675,7 +1675,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1773,7 +1773,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1851,7 +1851,7 @@ public class Upkeep implements java.io.Serializable {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
 
-                    if (peek[0].isValidCard(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());

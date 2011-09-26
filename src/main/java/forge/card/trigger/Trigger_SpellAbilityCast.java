@@ -103,7 +103,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
                 if (sa.getTarget().doesTarget()) {
                     boolean validTgtFound = false;
                     for (Card tgt : sa.getTarget().getTargetCards()) {
-                        if (tgt.isValidCard(mapParams.get("TargetsValid").split(","), hostCard.getController(), hostCard)) {
+                        if (tgt.isValid(mapParams.get("TargetsValid").split(","), hostCard.getController(), hostCard)) {
                             validTgtFound = true;
                             break;
                         }

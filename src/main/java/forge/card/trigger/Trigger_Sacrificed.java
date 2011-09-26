@@ -33,7 +33,7 @@ public class Trigger_Sacrificed extends Trigger {
             }
         }
         if (mapParams.containsKey("ValidCard")) {
-            if (!sac.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!sac.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

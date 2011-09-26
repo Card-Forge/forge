@@ -29,7 +29,7 @@ public class Trigger_TapsForMana extends Trigger {
         Card tapper = (Card) runParams2.get("Card");
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!tapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!tapper.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

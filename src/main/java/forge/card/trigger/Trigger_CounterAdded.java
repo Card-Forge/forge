@@ -31,7 +31,7 @@ public class Trigger_CounterAdded extends Trigger {
         Counters addedType = (Counters) runParams2.get("CounterType");
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!addedTo.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!addedTo.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

@@ -47,7 +47,7 @@ public class Trigger_ChangesZone extends Trigger {
 
         if (mapParams.containsKey("ValidCard")) {
             Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!moved.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

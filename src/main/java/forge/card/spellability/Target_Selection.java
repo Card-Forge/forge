@@ -465,7 +465,7 @@ public class Target_Selection {
         Player activatingPlayer = sa.getActivatingPlayer();
         if (o instanceof Card) {
             Card c = (Card) o;
-            return c.isValidCard(valids, activatingPlayer, srcCard);
+            return c.isValid(valids, activatingPlayer, srcCard);
         }
 
         if (o instanceof Player) {
@@ -485,7 +485,7 @@ public class Target_Selection {
 
         if (o instanceof SpellAbility) {
             Card c = ((SpellAbility) o).getSourceCard();
-            return c.isValidCard(valids, activatingPlayer, srcCard);
+            return c.isValid(valids, activatingPlayer, srcCard);
         }
 
         return false;

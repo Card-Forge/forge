@@ -281,7 +281,7 @@ public class PhaseUtil {
                 String k[] = parse.split(":");
                 final String restrictions[] = k[1].split(",");
                 final Card card = ca;
-                if (c.isValidCard(restrictions, card.getController(), card)) return false;
+                if (c.isValid(restrictions, card.getController(), card)) return false;
             }
         } // end of Permanents don't untap during their controllers' untap steps
 

@@ -31,7 +31,7 @@ public class Trigger_DamageDone extends Trigger {
         Object tgt = runParams2.get("DamageTarget");
 
         if (mapParams.containsKey("ValidSource")) {
-            if (!src.isValidCard(mapParams.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
+            if (!src.isValid(mapParams.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

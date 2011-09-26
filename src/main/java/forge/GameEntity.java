@@ -222,7 +222,7 @@ public abstract class GameEntity extends MyObservable {
         }
         return false;
 
-    }//isValidCard
+    }//isValid
     
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
         return false;

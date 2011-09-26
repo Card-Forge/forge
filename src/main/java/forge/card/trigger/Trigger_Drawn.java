@@ -29,7 +29,7 @@ public class Trigger_Drawn extends Trigger {
         Card draw = ((Card) runParams2.get("Card"));
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!draw.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!draw.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

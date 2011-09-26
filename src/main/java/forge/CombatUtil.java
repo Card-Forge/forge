@@ -372,7 +372,7 @@ public class CombatUtil {
             String parse = attacker.getKeyword().get(KeywordPosition).toString();
             String k[] = parse.split(" ", 2);
             final String restrictions[] = k[1].split(",");
-            if (blocker.isValidCard(restrictions, attacker.getController(), attacker))
+            if (blocker.isValid(restrictions, attacker.getController(), attacker))
                 return false;
         }
         
@@ -381,7 +381,7 @@ public class CombatUtil {
             String parse = blocker.getKeyword().get(KeywordPosition).toString();
             String k[] = parse.split(" ", 2);
             final String restrictions[] = k[1].split(",");
-            if (attacker.isValidCard(restrictions, blocker.getController(), blocker))
+            if (attacker.isValid(restrictions, blocker.getController(), blocker))
                 return false;
         }
 
@@ -1187,8 +1187,8 @@ public class CombatUtil {
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker"))
                 list.add(attacker);
             if (abilityParams.containsKey("ValidCards"))
-                if (attacker.isValidCard(abilityParams.get("ValidCards").split(","), source.getController(), source)
-                        || attacker.isValidCard(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
+                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source)
+                        || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
                         , source.getController(), source))
                     list.add(attacker);
             if (list.isEmpty()) continue;
@@ -1265,8 +1265,8 @@ public class CombatUtil {
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker"))
                 list.add(attacker);
             if (abilityParams.containsKey("ValidCards"))
-                if (attacker.isValidCard(abilityParams.get("ValidCards").split(","), source.getController(), source)
-                        || attacker.isValidCard(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
+                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source)
+                        || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
                                 , source.getController(), source))
                     list.add(attacker);
             if (list.isEmpty()) continue;

@@ -30,13 +30,13 @@ public class Trigger_Unequip extends Trigger {
         Card equipment = (Card) runParams2.get("Equipment");
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!equipped.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!equipped.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }
 
         if (mapParams.containsKey("ValidEquipment")) {
-            if (!equipment.isValidCard(mapParams.get("ValidEquipment").split(","), hostCard.getController(), hostCard)) {
+            if (!equipment.isValid(mapParams.get("ValidEquipment").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

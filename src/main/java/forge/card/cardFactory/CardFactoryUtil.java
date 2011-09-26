@@ -2326,7 +2326,7 @@ public class CardFactoryUtil {
             // Reconfirm the Validity of a TgtValid, or if the Creature is still
             // a Creature
             if (tgt.doesTarget()
-                    && !target.isValidCard(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard()))
+                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard()))
             {
                 return false;
             }
@@ -2551,10 +2551,10 @@ public class CardFactoryUtil {
                     return true;
                 }
 
-                if (kw.startsWith("Protection:")) { // uses isValidCard
+                if (kw.startsWith("Protection:")) { // uses isValid
                     String characteristic = kw.split(":")[1];
                     String[] characteristics = characteristic.split(",");
-                    if (card.isValidCard(characteristics, card.getController(), card)) {
+                    if (card.isValid(characteristics, card.getController(), card)) {
                         return true;
                     }
                 }
@@ -3102,7 +3102,7 @@ public class CardFactoryUtil {
 
             cl = cl.filter(new CardListFilter() {
                 public boolean addCard(final Card cdev) {
-                    return cdev.isValidCard(validDevoured.split(","), csource.getController(), csource);
+                    return cdev.isValid(validDevoured.split(","), csource.getController(), csource);
                 }
             });
 
@@ -3750,7 +3750,7 @@ public class CardFactoryUtil {
                 String[] k = parse.split(":");
 
                 String[] restrictions = k[1].split(",");
-                if (!c.isValidCard(restrictions, card.getController(), card)) {
+                if (!c.isValid(restrictions, card.getController(), card)) {
                     continue;
                 }
 

@@ -30,7 +30,7 @@ public class Trigger_Championed extends Trigger {
         Card championed = (Card) runParams2.get("Championed");
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!championed.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!championed.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

@@ -29,7 +29,7 @@ public class Trigger_Untaps extends Trigger {
         Card untapper = (Card) runParams2.get("Card");
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!untapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            if (!untapper.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
                 return false;
             }
         }

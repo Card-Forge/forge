@@ -707,7 +707,7 @@ public final class CardUtil {
                 }
                 for(Card c : AllZoneUtil.getColorInPlay(strCol))
                 {
-                    if(!res.contains(c) && c.isValidCard(valid, source.getController(), source) && !c.equals(origin)) {
+                    if(!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
                         res.add(c);
                     }
                 }

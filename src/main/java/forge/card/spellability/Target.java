@@ -485,7 +485,7 @@ public class Target {
         }
         
         for (Card c : AllZoneUtil.getCardsIn(tgtZone)){
-            if (c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
+            if (c.isValid(ValidTgts, srcCard.getController(), srcCard) && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
                 return true;
             }
         }

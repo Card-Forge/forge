@@ -458,7 +458,7 @@ public abstract class Trigger {
     public boolean matchesValid(Object o, String[] valids, Card srcCard) {
         if (o instanceof Card) {
             Card c = (Card) o;
-            return c.isValidCard(valids, srcCard.getController(), srcCard);
+            return c.isValid(valids, srcCard.getController(), srcCard);
         }
 
         if (o instanceof Player) {
