@@ -398,6 +398,8 @@ public class QuestEventManager {
 
             Collections.shuffle(unlockedChallengeIds);
             
+            maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
+            
             for (int i = 0; i < maxChallenges; i++) {
                 availableChallengeIds.add(unlockedChallengeIds.get(i));
             }
