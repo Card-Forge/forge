@@ -373,7 +373,7 @@ public class DeckManager {
 
         //readDeck comments
         String comment = null;
-        while ((line = iterator.next()) != null && !line.equals("[general]")) {
+        while (iterator.hasNext() && (line = iterator.next()) != null && !line.equals("[general]")) {
             if (comment == null) {
                 comment = line;
             } else {
@@ -382,7 +382,8 @@ public class DeckManager {
         }
 
         //readDeck deck type
-        GameType deckType = GameType.smartValueOf(iterator.next());
+        
+        GameType deckType = iterator.hasNext() ? GameType.smartValueOf(iterator.next()) : GameType.Constructed; 
 
         d.setName(name);
         d.setComment(comment);
