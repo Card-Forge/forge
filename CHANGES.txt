@@ -78,6 +78,24 @@ Fixes/Features:
 - Updated some SVars of Innistrad cards (T-Z).
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Added the player keyword "Prevent all damage that would be dealt to you".
+- Added a new static ability "PreventDamage".
+- Converted Personal Sanctuary to it.
+- Fixed affected creatures in Gallows Warded
+- Added support for "Amount" and "Source" parameters to the PreventDamage static ability.
+- Converted Daunting Defender, Energy Field and Energy Storm.
+- Converted all cards with stPreventDamage keyword to the PreventDamage static ability.
+- Removed the code of the stPreventDamage keyword.
+- Removed the keyword "Prevent all damage that would be dealt to you."
+- Fixed text of Unbreathing Horde.
+- Added RemAIDeck to Caldera Hellion.
+- Converted Bubble Matrix.
+- Converted Forfend.
+- Fixing text of Diplomatic Immunity
+- Fixing Fire-Belly Changeling
+- Forgot to handle launching Quest Mode.
+- fixed generateChallenges.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -91,6 +109,17 @@ Woodland Sleuth
 Runic Repetition
 Altar's Reap
 Spare from Evil
+Personal Sanctuary
+Safe Passage
+Endure
+Al-abara's Carpet
+Scarecrow
+Chameleon Blur
+Divine Light
+Ethereal Haze
+Luminesce
+Goblin Furrier
+Indentured Oaf
 
 
 end
