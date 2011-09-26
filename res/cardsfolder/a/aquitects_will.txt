@@ -2,10 +2,10 @@ Name:Aquitect's Will
 ManaCost:U
 Types:Tribal Sorcery Merfolk
 Text:no text
-A:SP$ Effect | Cost$ U | Name$ Flood Effect | Keywords$ KWAnimateAll | Unique$ True | Duration$ Permanent | SubAbility$ SVar=TrigPutCounter | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
-SVar:TrigPutCounter:DB$ PutCounter | Cost$ 0 | ValidTgts$ Land | CounterType$ FLOOD | CounterNum$ 1 | TgtPrompt$ Select target land | SubAbility$ SVar=DBDraw
+A:SP$ Effect | Cost$ U | Name$ Flood Effect | StaticAbilities$ STFlood | Unique$ True | Duration$ Permanent | SubAbility$ TrigPutCounter | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Cost$ 0 | ValidTgts$ Land | CounterType$ FLOOD | CounterNum$ 1 | TgtPrompt$ Select target land | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ 1 | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
-S:Mode$ Continuous | Affected$ Land.counters_GE1_FLOOD | AddType$ Island
+SVar:STFlood:Mode$ Continuous | Affected$ Land.counters_GE1_FLOOD | AddType$ Island
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
