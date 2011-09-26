@@ -12,6 +12,7 @@ import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestDuelPanel;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestChallengePanel;
+import forge.quest.gui.main.QuestEventManager;
 import forge.quest.gui.main.QuestSelectablePanel;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ import java.util.List;
 
 /**
  * <p>QuestMainPanel class.</p>
- * VIEW - lays out swing components for duel and quest events.
+ * VIEW - lays out swing components for duel and challenge events.
  *
  * @author Forge
  * @version $Id: QuestMainPanel.java 10358 2011-09-11 05:20:13Z Doublestrike $
@@ -39,6 +40,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private static final long serialVersionUID = 6142934729724012402L;
 
     private forge.quest.data.QuestData questData;
+    private forge.quest.gui.main.QuestEventManager qem;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();
@@ -78,11 +80,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
             GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
     private JPanel zeppelinPanel = new JPanel();
 
-    //TODO: DOUBLESTRIKE SEZ - the event manager is currently linked to
-    // the QuestFrame.  There is almost definitely a better way to do that.
-    // I'll be fixing it very soon, after this core commit is up and working.
-    QuestFrame TEST = null; 
-
     /**
      * <p>Constructor for QuestMainPanel.</p>
      *
@@ -91,8 +88,15 @@ public class QuestMainPanel extends QuestAbstractPanel {
     public QuestMainPanel(QuestFrame mainFrame) {
         super(mainFrame);
         questData = AllZone.getQuestData();
-
-        TEST = mainFrame;
+        qem = AllZone.getQuestEventManager();
+        
+        // QuestEventManager is the MODEL for this VIEW.
+        // All quest events are generated here, the first time the VIEW is made.
+        if(qem==null) {
+            qem = new QuestEventManager();
+            qem.assembleAllEvents(); 
+            AllZone.setQuestEventManager(qem);
+        }   
 
         initUI();
     }
@@ -400,7 +404,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         DuelPanel.setLayout(new BoxLayout(DuelPanel, BoxLayout.Y_AXIS));
         DuelPanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Duels"));
 
-        List<QuestDuel> duels = TEST.qem.generateDuels();
+        List<QuestDuel> duels = qem.generateDuels();
 
         for (QuestDuel qd : duels) {
             duelEvent = new QuestDuelPanel(qd);
@@ -428,7 +432,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         ChallengePanel.setLayout(new BoxLayout(ChallengePanel, BoxLayout.Y_AXIS));
         ChallengePanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Challenges"));
 
-        List<QuestChallenge> challenges = TEST.qem.generateChallenges();
+        List<QuestChallenge> challenges = qem.generateChallenges();
         
         for (QuestChallenge qc : challenges) {
             selpan = new QuestChallengePanel(qc);

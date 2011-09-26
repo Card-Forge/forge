@@ -18,6 +18,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
 import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEventManager;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -44,6 +45,9 @@ public final class AllZone implements NewConstants {
 
     /** Global <code>QuestChallenge</code>. */
     private static QuestChallenge questChallenge = null;
+    
+    /** Global <code>questEventManager</code>. */
+    private static QuestEventManager questEventManager = null;
 
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
@@ -150,6 +154,25 @@ public final class AllZone implements NewConstants {
      */
     public static void setQuestChallenge(final QuestChallenge q) {
         questChallenge = q;
+    }
+    
+    /**
+     * <p>getQuestEvents.</p>
+     *
+     * @return a QuestChallenge object.
+     * @since 1.0.15
+     */
+    public static QuestEventManager getQuestEventManager() {
+        return questEventManager;
+    }
+
+    /**
+     * <p>setQuestEvents.</p>
+     *
+     * @param q 
+     */
+    public static void setQuestEventManager(final QuestEventManager qem) {
+        questEventManager = qem;
     }
 
     /**

@@ -3,7 +3,6 @@ package forge.quest.gui;
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
-import forge.quest.gui.main.QuestEventManager;
 import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
@@ -25,7 +24,6 @@ public class QuestFrame extends JFrame {
 
     JPanel visiblePanel;
     CardLayout questLayout;
-    QuestEventManager qem = new QuestEventManager();
 
     /** Constant <code>MAIN_PANEL="Main"</code> */
     public static final String MAIN_PANEL = "Main";
@@ -40,14 +38,7 @@ public class QuestFrame extends JFrame {
      * @throws java.awt.HeadlessException if any.
      */
     public QuestFrame() throws HeadlessException {
-        this.setTitle("Quest Mode");
-        // DOUBLESTRIKE SEZ - this assembles all events, once.
-        // Unfortunately, QuestFrame is called several times.
-        // This is THE WRONG PLACE for this method, feel free to move, 
-        // I'll do it very soon anyways, this is only a temporary thing.
-        if(qem.getAllDuels()==null) {
-            qem.assembleAllEvents(); 
-        }       
+        this.setTitle("Quest Mode");    
     
         visiblePanel = new JPanel(new BorderLayout());
         visiblePanel.setBorder(new EmptyBorder(2, 2, 2, 2));
