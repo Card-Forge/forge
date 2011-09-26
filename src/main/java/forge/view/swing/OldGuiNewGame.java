@@ -513,7 +513,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Buttons
          */
 
-        deckEditorButton.setToolTipText("");
         deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 15));
         deckEditorButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DECK_EDITOR));
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
