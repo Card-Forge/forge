@@ -153,7 +153,7 @@ public class StaticAbility {
     }
     
     //apply the ability if it has the right mode
-    public int applyAbility(String mode, Card source, GameEntity target, int in) {
+    public int applyAbility(String mode, Card source, GameEntity target, int in, boolean b) {
         
         //don't apply the ability if it hasn't got the right mode
         if (!mapParams.get("Mode").equals(mode))
@@ -163,7 +163,7 @@ public class StaticAbility {
             return in;
         
         if (mode.equals("PreventDamage"))
-            return StaticAbility_PreventDamage.applyPreventDamageAbility(this, source, target, in);
+            return StaticAbility_PreventDamage.applyPreventDamageAbility(this, source, target, in, b);
         
         return in;
     }

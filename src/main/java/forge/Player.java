@@ -410,7 +410,7 @@ public abstract class Player extends GameEntity {
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (StaticAbility stAb : staticAbilities) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage);
+                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
         }
 

@@ -5660,7 +5660,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         int restDamage = damageIn;
-        Player player = getController();
 
         if (CardFactoryUtil.hasProtectionFrom(source, this)) {
             return 0;
@@ -5694,14 +5693,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         
-        
-
         //Prevent Damage static abilities
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (StaticAbility stAb : staticAbilities) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage);
+                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
         }
 
@@ -5712,10 +5709,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             if ((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this))) {
-                return 0;
-            }
-
-            if ((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player))) {
                 return 0;
             }
 

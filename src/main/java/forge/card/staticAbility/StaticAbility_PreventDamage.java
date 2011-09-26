@@ -13,7 +13,7 @@ public class StaticAbility_PreventDamage {
      * TODO Write javadoc for this method.
      * @param stAb a StaticAbility
      */
-    public static int applyPreventDamageAbility(final StaticAbility stAb, Card source, GameEntity target, int damage) {
+    public static int applyPreventDamageAbility(final StaticAbility stAb, Card source, GameEntity target, int damage, boolean isCombat) {
         HashMap<String, String> params = stAb.getMapParams();
         Card hostCard = stAb.getHostCard();
         int restDamage = damage;
@@ -26,6 +26,15 @@ public class StaticAbility_PreventDamage {
             return restDamage;
         }
         
+        if(params.containsKey("CombatDamage") && params.get("CombatDamage").equals("True") && !isCombat) {
+            return restDamage;
+        }
+        
+        if(params.containsKey("CombatDamage") && params.get("CombatDamage").equals("False") && isCombat) {
+            return restDamage;
+        }
+        
+        // no amount means all
         if(!params.containsKey("Amount") || params.get("Amount").equals("All")) {
             return 0;
         }
