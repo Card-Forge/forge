@@ -9,6 +9,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Player;
 
 import forge.Constant.Zone;
 import forge.card.spellability.Ability_Activated;
@@ -665,7 +666,7 @@ public final class AbilityFactory_Animate {
             c.addNewPT(power, toughness, timestamp);
         }
 
-        if (!types.isEmpty() || !removeTypes.isEmpty()) {
+        if (!types.isEmpty() || !removeTypes.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                     removeCreatureTypes, timestamp);
         }
@@ -712,7 +713,7 @@ public final class AbilityFactory_Animate {
             c.setStaticAbilities(new ArrayList<StaticAbility>());
         }
 
-        if (params.containsKey("Types")) {
+        if (params.containsKey("Types") || params.containsKey("RemoveTypes") || params.containsKey("RemoveCreatureTypes")) {
             c.removeChangedCardTypes(timestamp);
         }
 
@@ -1034,8 +1035,21 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
+        
+        CardList list;
+        ArrayList<Player> tgtPlayers = null;
+        
+        Target tgt = af.getAbTgt();
+        if (tgt != null)
+            tgtPlayers = tgt.getTargetPlayers();
+        else if (params.containsKey("Defined"))        // Make sure Defined exists to use it
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        
+        if (tgtPlayers == null || tgtPlayers.isEmpty())
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        else
+            list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
