@@ -1,0 +1,12 @@
+Name:Hundred-Talon Kami
+ManaCost:4 W
+Types:Creature Spirit
+Text:no text
+PT:2/3
+K:Flying
+K:Soulshift:4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hundred_talon_kami.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/16.jpg
+Oracle:Flying\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
+End

@@ -3709,6 +3709,7 @@ res/cardsfolder/h/hum_of_the_radix.txt svneol=native#text/plain
 res/cardsfolder/h/humble_budoka.txt svneol=native#text/plain
 res/cardsfolder/h/humility.txt -text
 res/cardsfolder/h/hunding_gjornersen.txt svneol=native#text/plain
+res/cardsfolder/h/hundred_talon_kami.txt -text
 res/cardsfolder/h/hundroog.txt svneol=native#text/plain
 res/cardsfolder/h/hunger_of_the_nim.txt svneol=native#text/plain
 res/cardsfolder/h/hungry_mist.txt svneol=native#text/plain
@@ -4205,6 +4206,7 @@ res/cardsfolder/k/kithkin_zephyrnaut.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_blademaster.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_dawnblade.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_diviner.txt svneol=native#text/plain
+res/cardsfolder/k/kitsune_healer.txt -text
 res/cardsfolder/k/kitsune_loreweaver.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_riftwalker.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_dead.txt svneol=native#text/plain
