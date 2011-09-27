@@ -1,4 +1,4 @@
-Name:Blind With Anger
+Name:Blind with Anger
 ManaCost:3 R
 Types:Instant Arcane
 Text:no text
