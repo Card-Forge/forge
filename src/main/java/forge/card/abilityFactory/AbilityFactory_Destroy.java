@@ -618,6 +618,14 @@ public class AbilityFactory_Destroy {
 
         CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        
+        Target tgt = sa.getTarget();
+        
+        if (sa.getTarget() != null) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            computerlist.clear();
+        }
 
         humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
@@ -665,6 +673,11 @@ public class AbilityFactory_Destroy {
         HashMap<String, String> params = af.getMapParams();
 
         Card card = sa.getSourceCard();
+        
+        Target tgt = af.getAbTgt();
+        Player targetPlayer = null;
+        if (tgt != null)
+            targetPlayer = tgt.getTargetPlayers().get(0);
 
         String Valid = "";
 
@@ -677,6 +690,10 @@ public class AbilityFactory_Destroy {
             Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        
+        if (targetPlayer != null) {
+            list = list.getController(targetPlayer);
+        }
 
         list = AbilityFactory.filterListByType(list, Valid, sa);
 
