@@ -1809,6 +1809,7 @@ res/cardsfolder/d/death_stroke.txt svneol=native#text/plain
 res/cardsfolder/d/death_ward.txt svneol=native#text/plain
 res/cardsfolder/d/deathbringer_liege.txt svneol=native#text/plain
 res/cardsfolder/d/deathbringer_thoctar.txt svneol=native#text/plain
+res/cardsfolder/d/deathcurse_ogre.txt -text
 res/cardsfolder/d/deathforge_shaman.txt svneol=native#text/plain
 res/cardsfolder/d/deathgazer.txt svneol=native#text/plain
 res/cardsfolder/d/deathgreeter.txt svneol=native#text/plain
