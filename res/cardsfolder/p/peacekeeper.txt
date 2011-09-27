@@ -1,9 +1,10 @@
 Name:Peacekeeper
 ManaCost:2 W
 Types:Creature Human
-Text:Creatures can't attack
+Text:no text
 PT:1/1
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 W
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures can't attack.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peacekeeper.jpg

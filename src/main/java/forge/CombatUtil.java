@@ -478,8 +478,6 @@ public class CombatUtil {
     public static boolean canAttackNextTurn(Card c) {
         if (!c.isCreature()) return false;
 
-        if (AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
-
         // CARDNAME can't attack if defending player controls an untapped creature with power ...
         final int powerLimit[] = {0};
         int keywordPosition = 0;
@@ -559,8 +557,7 @@ public class CombatUtil {
         //The creature won't untap next turn
         if (c.isTapped() && !PhaseUtil.canUntap(c)) return false;
 
-        if (AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent())
-                || c.hasKeyword("CARDNAME can't attack.")
+        if (c.hasKeyword("CARDNAME can't attack.")
                 || c.hasKeyword("CARDNAME can't attack or block.")
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
             return false;
