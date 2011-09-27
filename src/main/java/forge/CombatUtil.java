@@ -557,29 +557,12 @@ public class CombatUtil {
         //The creature won't untap next turn
         if (c.isTapped() && !PhaseUtil.canUntap(c)) return false;
 
-        if (c.hasKeyword("CARDNAME can't attack.")
-                || c.hasKeyword("CARDNAME can't attack or block.")
-                || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
+        if (c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("CARDNAME can't attack or block."))
             return false;
 
         if (c.hasKeyword("Defender")
                 && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
             return false;
-        }
-
-        if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
-            int limit = Integer.MAX_VALUE;
-            CardList Human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-            if (Human.getName("Ensnaring Bridge").size() > 0) {
-                CardList Hand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
-                limit = Hand.size();
-            }
-            CardList Compi = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-            if (Compi.getName("Ensnaring Bridge").size() > 0) {
-                CardList Hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-                if (Hand.size() < limit) limit = Hand.size();
-            }
-            if (c.getNetAttack() > limit) return false;
         }
 
         if (AllZoneUtil.isCardInPlay("Kulrath Knight")) {
