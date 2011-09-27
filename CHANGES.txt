@@ -96,6 +96,22 @@ Fixes/Features:
 - Forgot to handle launching Quest Mode.
 - fixed generateChallenges.
 - Added the recent commit logs to changes.txt.
+- Final minor fix to model/view architecture in quest event panels.
+- Fixed tooltip on "Deck Editor" button (issue 294)
+- Fixed Aquitect's Will.
+- Added support for "CombatDamage$" "True" and "False" to the PreventDamage static ability.
+- Converted Mark of Asylum to script.
+- Converted and corrected Enchanted Being.
+- Converted Dolmen Gate.
+- minor optimizations of CardRules, fix typo in comment of MtgDataParser
+- Removed the function isValidCard in favor of isValid in GameEntity.
+- overload for subtype
+- Changing Curse of Chains AILogic
+- added overload for name-based predicate, simplified NamesExcept
+- deckmanager crashed on bad files
+- Fixed typeline of Telethopter.
+- Fixed cost of Burning Vengeance.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -120,6 +136,10 @@ Ethereal Haze
 Luminesce
 Goblin Furrier
 Indentured Oaf
+Harmless Assault
+Magebane Armor
+Tanglesap
+Radiant Kavu
 
 
 end
