@@ -1,0 +1,14 @@
+Name:Hearth Kami
+ManaCost:1 R
+Types:Creature Spirit
+Text:no text
+PT:2/1
+A:AB$ Destroy | Cost$ X Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact with converted mana cost X.
+# It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
+SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hearth_kami.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/171.jpg
+Oracle:{X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
+End

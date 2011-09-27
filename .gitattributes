@@ -3529,6 +3529,7 @@ res/cardsfolder/h/heart_of_yavimaya.txt svneol=native#text/plain
 res/cardsfolder/h/heart_sliver.txt svneol=native#text/plain
 res/cardsfolder/h/heart_warden.txt svneol=native#text/plain
 res/cardsfolder/h/hearth_charm.txt svneol=native#text/plain
+res/cardsfolder/h/hearth_kami.txt -text
 res/cardsfolder/h/hearthcage_giant.txt svneol=native#text/plain
 res/cardsfolder/h/hearthfire_hobgoblin.txt svneol=native#text/plain
 res/cardsfolder/h/heartlash_cinder.txt svneol=native#text/plain
@@ -3666,6 +3667,7 @@ res/cardsfolder/h/hopping_automaton.txt svneol=native#text/plain
 res/cardsfolder/h/horde_of_notions.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_canopy.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_drake.txt svneol=native#text/plain
+res/cardsfolder/h/horizon_seed.txt -text
 res/cardsfolder/h/horizon_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_deafening.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_greed.txt svneol=native#text/plain
