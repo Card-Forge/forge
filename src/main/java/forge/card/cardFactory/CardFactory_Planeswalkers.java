@@ -616,43 +616,6 @@ public class CardFactory_Planeswalkers {
         }
         //*************** END ************ END **************************
 
-        //*************** START *********** START **************************
-        else if (cardName.equals("Ajani Vengeant")) {
-
-            //ability3
-            Cost cost = new Cost("SubCounter<7/LOYALTY>", cardName, true);
-            final SpellAbility ability3 = new Ability_Activated(card, cost, new Target(card, "P")) {
-                private static final long serialVersionUID = -1200172251117224702L;
-
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    CardList land = player.getCardsIn(Zone.Battlefield);
-                    land = land.getType("Land");
-
-                    for (Card c : land) {
-                        AllZone.getGameAction().destroy(c);
-                    }
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    Player player = AllZone.getHumanPlayer();
-                    CardList land = player.getCardsIn(Zone.Battlefield);
-                    land = land.getType("Land");
-
-                    setTargetPlayer(player);
-                    return card.getCounters(Counters.LOYALTY) >= 8 && land.size() >= 3;
-                }
-            };
-            ability3.setDescription("-7: Destroy all lands target player controls.");
-            ability3.getRestrictions().setPlaneswalker(true);
-
-            card.addSpellAbility(ability3);
-
-            return card;
-        }//*************** END ************ END **************************
-
 
         //*************** START *********** START **************************
         else if (cardName.equals("Tezzeret the Seeker")) {
