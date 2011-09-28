@@ -239,6 +239,7 @@ Volver
 Wall
 Warrior
 Weird
+Werewolf
 Whale
 Wizard
 Wolf
