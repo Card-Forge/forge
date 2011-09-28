@@ -1,0 +1,46 @@
+[quest]
+id=23
+AILife=30
+Repeat=true
+Wins=35
+Card Reward=3 random rares
+Credit Reward=350
+HumanExtras=
+AIExtras=Darksteel Reactor|Privileged Position|Privileged Position
+[metadata]
+Name=quest23
+Title=Reactor Meltdown
+Difficulty=hard
+Description=Avert the impending desaster
+Icon=
+Deck Type=constructed
+[main]
+5 Island
+5 Plains
+4 Tundra
+4 Flooded Strand
+4 Glacial Fortress
+1 Mox Pearl
+1 Mox Sapphire
+4 Steel Wall
+1 Wall of Frost
+1 Wall of Omens
+2 Aysen Bureaucrats
+1 Council of Advisors
+1 Grand Arbiter Augustin IV
+1 Michiko Konda, Truth Seeker
+2 Minister of Impediments
+2 Propaganda
+2 Ghostly Prison
+1 Reparations
+1 Armistice
+4 Negate
+2 Spell Pierce
+1 Radiant's Judgment
+1 Condemn
+2 Last Breath
+2 Misfortune's Gain
+2 Oust
+1 Path of Peace
+2 Swords to Plowshares
+[sideboard]
