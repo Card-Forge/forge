@@ -152,7 +152,7 @@ public final class QuestData {
         life = mode.equals(FANTASY) ? 15 : 20;
     }
 
-    // All belongins
+    // All belongings
     public QuestInventory getInventory() { return inventory; }
     public QuestPetManager getPetManager() { return petManager; }
     // Cards - class uses data from here
@@ -187,16 +187,34 @@ public final class QuestData {
     public void setAvailableChallenges(final List<Integer> list) { availableChallenges = list; }
     public void clearAvailableChallenges() { availableChallenges.clear(); }
     
-    
+    /**
+     * <p>getCompletedChallenges.</p>
+     * Returns stored list of non-repeatable challenge IDs.
+     * 
+     * @return List<Integer>
+     */
     public List<Integer> getCompletedChallenges() { 
         // This should be phased out after a while, when
         // old quest decks have been updated. (changes made 19-9-11)
+        // Also, poorly named - this should be "getLockedChalleneges" or similar.
         if(completedQuests != null) {
             completedChallenges = completedQuests;
             completedQuests = null;
         }
         
         return completedChallenges != null ? new ArrayList<Integer>(completedChallenges) : null; 
+    }
+    
+    /**
+     * <p>addCompletedChallenge.</p>
+     * Add non-repeatable challenge ID to list.
+     * 
+     * @param int i
+     */
+    
+    // Poorly named - this should be "setLockedChalleneges" or similar.
+    public void addCompletedChallenge(int i) {
+        completedChallenges.add(i);
     }
 
     // Wins & Losses

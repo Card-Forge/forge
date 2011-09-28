@@ -1,6 +1,8 @@
 package forge.quest.gui.main;
 
-//import javax.swing.JLabel;
+import javax.swing.JLabel;
+
+import forge.gui.GuiUtils;
 
 /** 
  * <p>QuestQuestPanel.</p>
@@ -10,7 +12,7 @@ package forge.quest.gui.main;
 @SuppressWarnings("serial")
 public class QuestChallengePanel extends QuestSelectablePanel {
     
-    //private JLabel repeatabilityLabel;
+    private JLabel repeatabilityLabel;
     
     /** <p>QuestChallengePanel.</p>
      * Constructor, using challenge data instance.
@@ -20,16 +22,15 @@ public class QuestChallengePanel extends QuestSelectablePanel {
     public QuestChallengePanel(QuestChallenge q) {
         super(q);
         
-        // Repeatability is currently meaningless.
-        // Can be added here later if necessary.
-        /* 
-         * if (q.getRepeatable()) {
+        GuiUtils.addGap(super.rootPanel,7);
+         
+        if (q.getRepeatable()) {
             repeatabilityLabel = new JLabel("This challenge is repeatable");
         } else {
             repeatabilityLabel = new JLabel("This challenge is not repeatable");
         }
         
         super.rootPanel.add(repeatabilityLabel);
-        */
+        
     }
 }

@@ -427,6 +427,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (model.quest.getRewards().willGiveBooster(wonMatch)) {
             giveBooster();
         }
+        
+        // Set repeatability
+        if(!model.qc.getRepeatable()) {
+            model.quest.addCompletedChallenge(model.qc.getId());
+        }
 
         // Award credits
         if (wonMatch) {
