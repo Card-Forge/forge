@@ -1,0 +1,12 @@
+Name:Phyrexian Reaper
+ManaCost:4 B
+Types:Creature Zombie
+Text:no text
+PT:3/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Green | Execute$ TrigDestroyBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a green creature, destroy that creature. It can't be regenerated.
+SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker | NoRegen$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_reaper.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/117.jpg
+Oracle:Whenever Phyrexian Reaper becomes blocked by a green creature, destroy that creature. It can't be regenerated.
+End

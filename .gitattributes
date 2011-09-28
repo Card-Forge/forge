@@ -4520,6 +4520,7 @@ res/cardsfolder/l/llanowar_knight.txt svneol=native#text/plain
 res/cardsfolder/l/llanowar_mentor.txt svneol=native#text/plain
 res/cardsfolder/l/llanowar_reborn.txt svneol=native#text/plain
 res/cardsfolder/l/llanowar_sentinel.txt svneol=native#text/plain
+res/cardsfolder/l/llanowar_vanguard.txt -text
 res/cardsfolder/l/llanowar_wastes.txt svneol=native#text/plain
 res/cardsfolder/l/loam_dweller.txt svneol=native#text/plain
 res/cardsfolder/l/loam_lion.txt svneol=native#text/plain
@@ -5746,9 +5747,11 @@ res/cardsfolder/p/phyrexian_plaguelord.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_processor.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_prowler.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_rager.txt svneol=native#text/plain
+res/cardsfolder/p/phyrexian_reaper.txt -text
 res/cardsfolder/p/phyrexian_rebirth.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_reclamation.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_scuta.txt svneol=native#text/plain
+res/cardsfolder/p/phyrexian_slayer.txt -text
 res/cardsfolder/p/phyrexian_snowcrusher.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_swarmlord.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_totem.txt svneol=native#text/plain

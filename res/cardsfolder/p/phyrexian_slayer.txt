@@ -1,0 +1,13 @@
+Name:Phyrexian Slayer
+ManaCost:3 B
+Types:Creature Minion
+Text:no text
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.White | Execute$ TrigDestroyBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a white creature, destroy that creature. It can't be regenerated.
+SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker | NoRegen$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_slayer.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/118.jpg
+Oracle:Flying\nWhenever Phyrexian Slayer becomes blocked by a white creature, destroy that creature. It can't be regenerated.
+End

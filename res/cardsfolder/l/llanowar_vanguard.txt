@@ -1,0 +1,12 @@
+Name:Llanowar Vanguard
+ManaCost:2 G
+Types:Creature Dryad
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ T | NumDef$ +4 | SpellDescription$ CARDNAME gets +0/+4 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_vanguard.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/197.jpg
+Oracle:{T}: Llanowar Vanguard gets +0/+4 until end of turn.
+End
