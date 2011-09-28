@@ -7288,6 +7288,7 @@ res/cardsfolder/s/soul_bleed.txt svneol=native#text/plain
 res/cardsfolder/s/soul_channeling.txt svneol=native#text/plain
 res/cardsfolder/s/soul_charmer.txt svneol=native#text/plain
 res/cardsfolder/s/soul_collector.txt svneol=native#text/plain
+res/cardsfolder/s/soul_conduit.txt -text
 res/cardsfolder/s/soul_exchange.txt svneol=native#text/plain
 res/cardsfolder/s/soul_feast.txt svneol=native#text/plain
 res/cardsfolder/s/soul_foundry.txt svneol=native#text/plain

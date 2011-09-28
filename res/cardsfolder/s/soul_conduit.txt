@@ -1,0 +1,9 @@
+Name:Soul Conduit
+ManaCost:6
+Types:Artifact
+Text:no text
+A:AB$ ExchangeLife | Cost$ 6 T | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players exchange life totals.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_conduit.jpg
+End
