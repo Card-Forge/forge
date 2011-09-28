@@ -4,7 +4,7 @@ Types:Creature Minotaur
 Text:no text
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature with flying.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | NumDmg$ 3
+SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | NumDmg$ 3
 K:Cycling:RG
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot_minotaur.jpg
