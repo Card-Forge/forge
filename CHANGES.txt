@@ -112,6 +112,19 @@ Fixes/Features:
 - Fixed typeline of Telethopter.
 - Fixed cost of Burning Vengeance.
 - Added the recent commit logs to changes.txt.
+- Fixed name of Blind with Anger.
+- Converted Blazing Archon and Peacekeeper to script.
+- Converted Ensnaring Bridge and Reverence to script.
+- Added support for targeting in AF DestroyAll.
+- Converted the last ability of Ajani Vengeant to script.
+- Added the deck: Chief Clancy Wiggum 1.
+- Added support for targeting and Defined parameter in AF AnimateAll.
+- Little fixed in AF AnimateAll.
+- Cleanup of Ego Erasure and Shields of Velis Vel.
+- Fixed delayed triggers triggering over and over again.
+- Difficulty multiplier on base reward for quest events added.
+- More level descriptors added to quest mode
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -140,6 +153,16 @@ Harmless Assault
 Magebane Armor
 Tanglesap
 Radiant Kavu
+Deathcurse Ogre
+Hearth Kami
+Horizon Seed
+Hundred-Talon Kami
+Kitsune Healer
+Primeval Light
+Devouring Strossus
+Skeletal Scrying
+Distorting Wake
+Firebrand Ranger
 
 
 end
