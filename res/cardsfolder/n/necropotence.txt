@@ -4,6 +4,10 @@ Types:Enchantment
 Text:Skip your draw step.
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever you discard a card, exile that card from your graveyard.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+A:AB$ ChangeZone | Cost$ PayLife<1> | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DelayedReturn | SpellDescription$ Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
+SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Put the exiled card into your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
