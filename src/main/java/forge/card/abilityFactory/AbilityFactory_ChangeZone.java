@@ -767,18 +767,18 @@ public final class AbilityFactory_ChangeZone {
         }
 
         List<Zone> origin = Zone.listValueOf(params.get("Origin"));
-
-        CardList fetchList = player.getCardsIn(origin);
-        fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
-
-        Zone destination = Zone.smartValueOf(params.get("Destination"));
-
-        PlayerZone destZone = player.getZone(destination);
-
+        
         String type = params.get("ChangeType");
         if (type == null) {
             type = "Card";
         }
+
+        CardList fetchList = player.getCardsIn(origin);
+        fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
+
+        Zone destination = Zone.smartValueOf(params.get("Destination"));
+
+        PlayerZone destZone = player.getZone(destination);
 
         CardList fetched = new CardList();
 
