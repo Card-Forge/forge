@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | ChangeType$ Creature.YouCtrl | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
 SVar:Morbid:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/woodland_sleuth.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_sleuth.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/210.jpg
 Oracle:Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
 End
