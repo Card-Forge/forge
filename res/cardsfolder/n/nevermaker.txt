@@ -6,7 +6,7 @@ PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME leaves the battlefield, put target nonland permanent on top of its owner's library.
 K:Evoke:3 U
-SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target non-Land permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:TrigBounce:DB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target non-Land permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:Rarity:Uncommon
