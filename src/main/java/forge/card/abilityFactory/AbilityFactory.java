@@ -1341,6 +1341,16 @@ public class AbilityFactory {
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
         }
+        else if (defined.equals("TopOfLibrary")) {
+            CardList lib = hostCard.getController().getCardsIn(Constant.Zone.Library);
+            if (lib.size() > 0) {
+                c = lib.get(0);
+            }
+            else {
+                //we don't want this to fall through and return the "Self"
+                return new ArrayList<Card>();
+            }
+        }
 
         else if (defined.equals("Targeted")) {
             SpellAbility parent = findParentsTargetedCard(sa);
