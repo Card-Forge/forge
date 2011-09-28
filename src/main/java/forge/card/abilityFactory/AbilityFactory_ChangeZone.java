@@ -506,7 +506,15 @@ public final class AbilityFactory_ChangeZone {
             String type = params.containsKey("ChangeType") ? params.get("ChangeType") : "Card";
             int num = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(host, params.get("ChangeNum"), sa) : 1;
 
-            if (origin.equals("Library")) {
+            if (origin.equals("Library") && params.containsKey("Defined")) {
+                //for now, just handle the Exile from top of library case, but this can be expanded...
+                sb.append("Exile the top card of your library");
+                if (params.containsKey("ExileFaceDown")) {
+                    sb.append(" face down");
+                }
+                sb.append(".");
+            }
+            else if (origin.equals("Library")) {
                 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
 
                 if (params.get("ChangeNum").equals("1")) {
@@ -579,6 +587,11 @@ public final class AbilityFactory_ChangeZone {
         ArrayList<Player> fetchers;
 
         fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        
+        //handle case when Defined is for a Card
+        if (fetchers.isEmpty()) {
+            fetchers.add(sa.getSourceCard().getController());
+        }
 
         Player chooser = null;
         if (params.containsKey("Chooser")) {
@@ -615,6 +628,8 @@ public final class AbilityFactory_ChangeZone {
     {
         HashMap<String, String> params = af.getMapParams();
         Card card = sa.getSourceCard();
+        boolean defined = params.containsKey("Defined");
+        
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             ArrayList<Player> players = tgt.getTargetPlayers();
@@ -656,9 +671,16 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        CardList fetchList = player.getCardsIn(origin);
-        if (origin.contains(Zone.Library))    // Look at whole library before moving onto choosing a card{
+        CardList fetchList;
+        if (defined) {
+            fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
+        } else {
+            fetchList = player.getCardsIn(origin);
+        }
+        
+        if (origin.contains(Zone.Library) && !defined) {    // Look at whole library before moving onto choosing a card{
             GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", player.getCardsIn(Zone.Library).toArray());
+        }
 
         // Look at opponents hand before moving onto choosing a card
         if (origin.contains(Zone.Hand) && player.isComputer())
@@ -667,7 +689,9 @@ public final class AbilityFactory_ChangeZone {
                     player.getCardsIn(Zone.Hand).toArray());
         }
 
-        fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
+        if (!defined) {
+            fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
+        }
 
         PlayerZone destZone = player.getZone(destination);
 
@@ -690,6 +714,8 @@ public final class AbilityFactory_ChangeZone {
                 o = CardUtil.getRandom(fetchList.toArray());
             } else if (params.containsKey("Mandatory")) {
                 o = GuiUtils.getChoice("Select a card", fetchList.toArray());
+            } else if (params.containsKey("Defined")) {
+                o = fetchList.get(i);
             } else {
                 o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
             }
@@ -740,7 +766,7 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        if ((origin.contains(Zone.Library) && !destination.equals(Zone.Library)) || params.containsKey("Shuffle")) {
+        if ((origin.contains(Zone.Library) && !destination.equals(Zone.Library) && !defined) || params.containsKey("Shuffle")) {
             player.shuffle();
         }
     }
@@ -756,6 +782,7 @@ public final class AbilityFactory_ChangeZone {
         HashMap<String, String> params = af.getMapParams();
         Target tgt = af.getAbTgt();
         Card card = af.getHostCard();
+        boolean defined = params.containsKey("Defined");
 
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
@@ -773,8 +800,13 @@ public final class AbilityFactory_ChangeZone {
             type = "Card";
         }
 
-        CardList fetchList = player.getCardsIn(origin);
-        fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
+        CardList fetchList;
+        if (defined) {
+            fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
+        } else {
+            fetchList = player.getCardsIn(origin);
+            fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
+        }
 
         Zone destination = Zone.smartValueOf(params.get("Destination"));
 
@@ -800,6 +832,8 @@ public final class AbilityFactory_ChangeZone {
             Card c;
             if(params.containsKey("AtRandom")) {
                 c = CardUtil.getRandom(fetchList.toArray());
+            } else if (defined) {
+                c = fetchList.get(i);
             } else if (type.contains("Basic")) {
                 c = basicManaFixing(fetchList);
             } else if (areAllBasics(type)) {
@@ -829,7 +863,7 @@ public final class AbilityFactory_ChangeZone {
             fetchList.remove(c);
         }
 
-        if (origin.contains(Zone.Library)) {
+        if (origin.contains(Zone.Library) && !defined) {
             player.shuffle();
         }
 
@@ -870,7 +904,7 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        if (!Zone.Battlefield.equals(destination) && !"Card".equals(type)) {
+        if (!Zone.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
             String picked = af.getHostCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
                 GuiUtils.getChoice(picked, fetched.toArray());
@@ -878,7 +912,7 @@ public final class AbilityFactory_ChangeZone {
                 GuiUtils.getChoice(picked, new String[]{"<Nothing>"});
             }
         }
-    }
+    } //end changeHiddenOriginResolveAI
 
     // *********** Utility functions for Hidden ********************
     /**
