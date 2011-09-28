@@ -101,8 +101,23 @@ public final class QuestData {
         "Level 7 - Loves Blue Control",
         "Level 8 - Immobilized by Fear",
         "Level 9 - Lands = Friends",
-        "Saltblasted for your talent",
-        "Serra Angel is your girlfriend",
+        "Level 10 - Forging new paths",
+        "Level 11 - Infect-o-tron",
+        "Level 12 - Great Balls of Fire",
+        "Level 13 - Artifact Schmartifact",
+        "Level 14 - Mike Mulligan's The Name",
+        "Level 15 - Fresh Air: Good For The Health",
+        "Level 16 - In It For The Love",
+        "Level 17 - Sticks, Stones, Bones",
+        "Level 18 - Credits For Breakfast",
+        "Level 19 - Millasaurus",
+        "Level 20 - One-turn Wonder",
+        "Teaching Gandalf a Lesson",
+        "What Do You Do With The Other Hand?",
+        "Freelance Sorcerer, Works Weekends",
+        "Should We Hire Commentators?",
+        "Saltblasted For Your Talent",
+        "Serra Angel Is Your Girlfriend",
         };
 
     /**
@@ -228,7 +243,7 @@ public final class QuestData {
 
     // Level, read-only ( note: it increments in addWin() )
     public int getLevel() { return rankIndex; }
-    public String getRank() {
+    public String getRank() {  
         if (rankIndex >= RANK_TITLES.length) { rankIndex = RANK_TITLES.length - 1; }
         return RANK_TITLES[rankIndex];
     }
