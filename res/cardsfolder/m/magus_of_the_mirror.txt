@@ -1,0 +1,11 @@
+Name:Magus of the Mirror
+ManaCost:4 B B
+Types:Creature Human Wizard
+Text:no text
+PT:4/2
+A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate this ability only during your upkeep.
+#Apparently, compy just plain can't handle the sac cost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_mirror.jpg
+End
