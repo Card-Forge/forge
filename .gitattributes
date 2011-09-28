@@ -7049,6 +7049,7 @@ res/cardsfolder/s/skeletal_changeling.txt svneol=native#text/plain
 res/cardsfolder/s/skeletal_crocodile.txt svneol=native#text/plain
 res/cardsfolder/s/skeletal_grimace.txt -text
 res/cardsfolder/s/skeletal_kathari.txt svneol=native#text/plain
+res/cardsfolder/s/skeletal_scrying.txt -text
 res/cardsfolder/s/skeletal_snake.txt svneol=native#text/plain
 res/cardsfolder/s/skeletal_vampire.txt svneol=native#text/plain
 res/cardsfolder/s/skeletal_wurm.txt svneol=native#text/plain
