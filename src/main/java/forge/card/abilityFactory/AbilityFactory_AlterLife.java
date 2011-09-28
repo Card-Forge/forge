@@ -1243,4 +1243,267 @@ public class AbilityFactory_AlterLife {
         }
     }
 
+    // *************************************************************************
+    // ************************ EXCHANGE LIFE **********************************
+    // *************************************************************************
+
+    /**
+     * <p>createAbilityExchangeLife.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityExchangeLife(final AbilityFactory af) {
+        final SpellAbility abExLife = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 212548821691286311L;
+
+            @Override
+            public String getStackDescription() {
+                return exchangeLifeStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return exchangeLifeCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeLifeResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return exchangeLifeDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abExLife;
+    }
+
+    /**
+     * <p>createSpellExchangeLife.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellExchangeLife(final AbilityFactory af) {
+        final SpellAbility spExLife = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 3512136004868367924L;
+
+            @Override
+            public String getStackDescription() {
+                return exchangeLifeStackDescription(af, this);
+            }
+
+            public boolean canPlayAI() {
+                return exchangeLifeCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeLifeResolve(af, this);
+            }
+
+        };
+        return spExLife;
+    }
+
+    /**
+     * <p>createDrawbackExchangeLife.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackExchangeLife(final AbilityFactory af) {
+        final SpellAbility dbExLife = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = 6951913863491173483L;
+
+            @Override
+            public String getStackDescription() {
+                return exchangeLifeStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return exchangeLifeCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                exchangeLifeResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return exchangeLifeDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbExLife;
+    }
+
+    /**
+     * <p>exchangeLifeStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String exchangeLifeStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        StringBuilder sb = new StringBuilder();
+        Player activatingPlayer = sa.getActivatingPlayer();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        }
+        else {
+            sb.append(sa.getSourceCard()).append(" -");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        if (tgtPlayers.size() == 1) {
+            sb.append(activatingPlayer).append(" exchanges life totals with ");
+            sb.append(tgtPlayers.get(0));
+        }
+        else if (tgtPlayers.size() > 1) {
+            sb.append(tgtPlayers.get(0)).append(" exchanges life totals with ");
+            sb.append(tgtPlayers.get(1));
+        }
+        sb.append(".");
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>exchangeLifeCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean exchangeLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        Random r = MyRandom.random;
+        int life = AllZone.getComputerPlayer().getLife();
+        int hLife = AllZone.getHumanPlayer().getLife();
+
+        if (!AllZone.getComputerPlayer().canGainLife()) {
+            return false;
+        }
+
+        // prevent run-away activations - first time will always return true
+        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+
+        /*
+         * TODO - There is one card that takes two targets (Soul Conduit)
+         * and one card that has a conditional (Psychic Transfer) that are not currently handled
+         */
+        Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgt.resetTargets();
+            if (AllZone.getHumanPlayer().canTarget(sa)) {
+                //never target self, that would be silly for exchange
+                tgt.addTarget(AllZone.getHumanPlayer());
+                if (!AllZone.getHumanPlayer().canLoseLife()) {
+                    return false;
+                }
+            }
+        }
+
+        //if life is in danger, always activate
+        if (life < 5 && hLife > life) {
+            return true;
+        }
+
+        //cost includes sacrifice probably, so make sure it's worth it
+        chance &= (hLife > (life + 8));
+
+        return ((r.nextFloat() < .6667) && chance);
+    }
+
+    /**
+     * <p>exchangeLifeDoTriggerAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean exchangeLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        //this can pretty much return false for now since nothing of this type triggers
+        return false;
+    }
+
+    /**
+     * <p>exchangeLifeResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void exchangeLifeResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card source = sa.getSourceCard();
+        Player p1;
+        Player p2;
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null && !params.containsKey("Defined")) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        if (tgtPlayers.size() == 1) {
+            p1 = sa.getActivatingPlayer();
+            p2 = tgtPlayers.get(0);
+        }
+        else {
+            p1 = tgtPlayers.get(0);
+            p2 = tgtPlayers.get(1);
+        }
+
+        int life1 = p1.getLife();
+        int life2 = p2.getLife();
+
+        if ((life1 > life2) && p1.canLoseLife()) {
+            int diff = life1 - life2;
+            p1.loseLife(diff, source);
+            p2.gainLife(diff, source);
+        }
+        else if ((life2 > life1) && p2.canLoseLife()) {
+            int diff = life2 - life1;
+            p2.loseLife(diff, source);
+            p1.gainLife(diff, source);
+        }
+        else {
+            //they are equal, so nothing to do
+        }
+
+    }
+
 } //end class AbilityFactory_AlterLife

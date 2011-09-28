@@ -471,6 +471,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_AlterLife.createDrawbackSetLife(this);
             }
         }
+        
+        else if (API.equals("ExchangeLife")) {
+            if (isAb) {
+                SA = AbilityFactory_AlterLife.createAbilityExchangeLife(this);
+            } else if (isSp) {
+                SA = AbilityFactory_AlterLife.createSpellExchangeLife(this);
+            } else if (isDb) {
+                SA = AbilityFactory_AlterLife.createDrawbackExchangeLife(this);
+            }
+        }
 
         else if (API.equals("Poison")) {
             if (isAb) {
