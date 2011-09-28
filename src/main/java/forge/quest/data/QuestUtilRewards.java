@@ -44,9 +44,27 @@ public class QuestUtilRewards {
      * @return a long.
      */
     public long getCreditsToAdd(final QuestMatchState matchState) {
-        long creds = (long) (QuestPreferences.getMatchRewardBase()
+        
+        int base = QuestPreferences.getMatchRewardBase();
+        double multiplier = 1;
+        
+        String diff = AllZone.getQuestEvent().getDifficulty();
+        if(diff.equalsIgnoreCase("medium")) {
+            multiplier = 1.5;
+        }
+        else if(diff.equalsIgnoreCase("hard")) {
+            multiplier = 2;
+        }
+        else if(diff.equalsIgnoreCase("very hard")) {
+            multiplier = 2.5;
+        }
+        else if(diff.equalsIgnoreCase("expert")) {
+            multiplier = 3;
+        }
+        
+        long creds = (long) (base*multiplier
                 + (QuestPreferences.getMatchRewardTotalWins() * q.getWin()));
-    
+        
         boolean hasNeverLost = true;
         Player computer = AllZone.getComputerPlayer();
         for (GameSummary game : matchState.getGamesPlayed()) {

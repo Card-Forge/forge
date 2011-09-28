@@ -703,6 +703,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Deck computer = selectedOpponent.getEvent().getEventDeck();
         Constant.Runtime.ComputerDeck[0] = computer;
 
+        QuestDuel selectedDuel = (QuestDuel)selectedOpponent.getEvent();
+        AllZone.setQuestEvent(selectedDuel);
+        
         AllZone.getGameAction().newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanStartingCards(questData),
                 new CardList(), questData.getLife(), 20, null);
     }
@@ -718,7 +721,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Deck computer = selectedOpponent.getEvent().getEventDeck();
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        AllZone.setQuestChallenge(selectedChallenge);
+        AllZone.setQuestEvent(selectedChallenge);
+        
+        // will be deprecated in favor of setQuestEvent, see note in AllZone. doublestrike 28-09-11 
+        AllZone.setQuestChallenge(selectedChallenge);  
 
         int extraLife = 0;
 

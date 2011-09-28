@@ -18,6 +18,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
 import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
 
 /**
@@ -39,12 +40,16 @@ public final class AllZone implements NewConstants {
         // blank
     }
 
-
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
 
     /** Global <code>QuestChallenge</code>. */
     private static QuestChallenge questChallenge = null;
+    // QuestChallenge extends QuestEvent. This global will be deprecated shortly,
+    // and the QuestEvent global used instead. doublestrike 28-09-11
+    
+    /** Global <code>QuestChallenge</code>. */
+    private static QuestEvent questEvent = null;
     
     /** Global <code>questEventManager</code>. */
     private static QuestEventManager questEventManager = null;
@@ -140,9 +145,11 @@ public final class AllZone implements NewConstants {
     /**
      * <p>getQuestChallenge.</p>
      *
-     * @return a {@link forge.Quest_Assignment} object.
+     * @return a {@link forge.quest.gui.main.QuestChallenge} object.
      * @since 1.0.15
      */
+    // QuestChallenge extends QuestEvent. This global will be deprecated shortly,
+    // and the QuestEvent global used instead. doublestrike 28-09-11
     public static QuestChallenge getQuestChallenge() {
         return questChallenge;
     }
@@ -150,16 +157,35 @@ public final class AllZone implements NewConstants {
     /**
      * <p>setQuestChallenge.</p>
      *
-     * @param q 
+     * @param {@link forge.quest.gui.main.QuestChallenge} object. 
      */
     public static void setQuestChallenge(final QuestChallenge q) {
         questChallenge = q;
     }
     
     /**
-     * <p>getQuestEvents.</p>
+     * <p>getQuestEvent.</p>
      *
-     * @return a QuestChallenge object.
+     * @return a {@link forge.quest.gui.main.QuestEvent} object.
+     * @since 1.0.15
+     */
+    public static QuestEvent getQuestEvent() {
+        return questEvent;
+    }
+
+    /**
+     * <p>setQuestEvent.</p>
+     *
+     * @param {@link forge.quest.gui.main.QuestEvent} object. 
+     */
+    public static void setQuestEvent(final QuestEvent q) {
+        questEvent = q;
+    }
+    
+    /**
+     * <p>getQuestEventManager.</p>
+     *
+     * @return {@link forge.quest.gui.main.QuestEventManager} object.
      * @since 1.0.15
      */
     public static QuestEventManager getQuestEventManager() {
@@ -167,9 +193,9 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setQuestEvents.</p>
+     * <p>setQuestEventManager.</p>
      *
-     * @param q 
+     * @param {@link forge.quest.gui.main.QuestEventManager} object 
      */
     public static void setQuestEventManager(final QuestEventManager qem) {
         questEventManager = qem;
