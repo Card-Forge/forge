@@ -320,6 +320,7 @@ public class TriggerHandler {
             if (deltrig.getHostCard().getController().equals(playerAP)) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggersWorkingCopy.remove(deltrig);
+                    delayedTriggers.remove(deltrig);
                     i--;
                 }
             }
@@ -336,6 +337,7 @@ public class TriggerHandler {
             if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
                 if (runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggersWorkingCopy.remove(deltrig);
+                    delayedTriggers.remove(deltrig);
                     i--;
                 }
             }
