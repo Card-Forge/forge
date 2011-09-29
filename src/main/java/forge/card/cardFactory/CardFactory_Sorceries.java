@@ -7,6 +7,7 @@ import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
+import forge.gui.input.Input_PayManaCost_Ability;
 import forge.Constant.Zone;
 
 import javax.swing.*;
@@ -120,8 +121,6 @@ public class CardFactory_Sorceries {
                 }
             };//Input
 
-            
-            
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -153,9 +152,6 @@ public class CardFactory_Sorceries {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 
             card.setSVar("PlayMain1", "TRUE");
-
-            
-            
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -163,9 +159,9 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if (cardName.equals("Insurrection")) {
             /*
-                * Untap all creatures and gain control of them until end of
-                * turn. They gain haste until end of turn.
-                */
+             * Untap all creatures and gain control of them until end of
+             * turn. They gain haste until end of turn.
+             */
             final ArrayList<PlayerZone> orig = new ArrayList<PlayerZone>();
             final PlayerZone[] newZone = new PlayerZone[1];
             final ArrayList<Player> controllerEOT = new ArrayList<Player>();
@@ -1460,7 +1456,6 @@ public class CardFactory_Sorceries {
             };//SpellAbility
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
 
 
         //*************** START *********** START **************************
@@ -2993,6 +2988,94 @@ public class CardFactory_Sorceries {
 
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if (cardName.equals("Transmute Artifact")) {
+            /*
+             * Sacrifice an artifact. If you do, search your library for an artifact
+             * card. If that card's converted mana cost is less than or equal to the
+             * sacrificed artifact's converted mana cost, put it onto the battlefield.
+             * If it's greater, you may pay X, where X is the difference. If you do,
+             * put it onto the battlefield. If you don't, put it into its owner's
+             * graveyard. Then shuffle your library.
+             */
+            
+            Cost abCost = new Cost("U U", cardName, false);
+            final SpellAbility spell = new Spell(card, abCost, null) {
+                private static final long serialVersionUID = -8497142072380944393L;
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+
+                @Override
+                public void resolve() {
+                    Player p = card.getController();
+                    int baseCMC = -1;
+                    final Card[] newArtifact = new Card[1];
+                    
+                    //Sacrifice an artifact
+                    CardList arts = p.getCardsIn(Constant.Zone.Battlefield);
+                    arts = arts.filter(CardListFilter.artifacts);
+                    Object toSac = GuiUtils.getChoiceOptional("Sacrifice an artifact", arts.toArray());
+                    if (toSac != null) {
+                        Card c = (Card) toSac;
+                        baseCMC = CardUtil.getConvertedManaCost(c);
+                        AllZone.getGameAction().sacrifice(c);
+                    } else {
+                        return;
+                    }
+                    
+                    //Search your library for an artifact
+                    CardList lib = p.getCardsIn(Zone.Library);
+                    GuiUtils.getChoiceOptional("Looking at Library", lib.toArray());
+                    CardList libArts = lib.filter(CardListFilter.artifacts);
+                    Object o = GuiUtils.getChoiceOptional("Search for artifact", libArts.toArray());
+                    if (o != null) {
+                        newArtifact[0] = (Card) o;
+                    } else {
+                        return;
+                    }
+                    
+                    int newCMC = CardUtil.getConvertedManaCost(newArtifact[0]);
+                    
+                    //if <= baseCMC, put it onto the battlefield
+                    if (newCMC <= baseCMC) {
+                        AllZone.getGameAction().moveToPlay(newArtifact[0]);
+                    }
+                    else {
+                        String diffCost = String.valueOf(newCMC - baseCMC);
+                        AllZone.getInputControl().setInput(
+                                new Input_PayManaCost_Ability(
+                                        diffCost,
+                                        new Command() {
+                                            private static final long serialVersionUID = -8729850321341068049L;
+
+                                            public void execute() {
+                                                AllZone.getGameAction().moveToPlay(newArtifact[0]);
+                                            }
+                                        },
+                                        new Command() {
+                                            private static final long serialVersionUID = -246036834856971935L;
+
+                                            public void execute() {
+                                                AllZone.getGameAction().moveToGraveyard(newArtifact[0]);
+                                            }
+                                        }
+                                )
+                        );
+                    }
+                    
+                    //finally, shuffle library
+                    p.shuffle();
+                    
+                } //resolve()
+            }; //SpellAbility
+
+            card.addSpellAbility(spell);
+        } //*************** END ************ END **************************
 
         return card;
     }//getCard

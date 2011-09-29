@@ -8242,6 +8242,7 @@ res/cardsfolder/t/transcendent_master.txt svneol=native#text/plain
 res/cardsfolder/t/transguild_courier.txt svneol=native#text/plain
 res/cardsfolder/t/transluminant.txt svneol=native#text/plain
 res/cardsfolder/t/transmutation.txt svneol=native#text/plain
+res/cardsfolder/t/transmute_artifact.txt -text
 res/cardsfolder/t/trap_digger.txt svneol=native#text/plain
 res/cardsfolder/t/trapjaw_kelpie.txt svneol=native#text/plain
 res/cardsfolder/t/trapmakers_snare.txt svneol=native#text/plain
