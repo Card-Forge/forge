@@ -427,11 +427,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (model.quest.getRewards().willGiveBooster(wonMatch)) {
             giveBooster();
         }
-        
-        // Set repeatability
-        if(!model.qc.getRepeatable()) {
-            model.quest.addCompletedChallenge(model.qc.getId());
-        }
 
         // Award credits
         if (wonMatch) {
@@ -461,6 +456,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
         // Rewards from QuestAssignment
         if (wonMatch && model.qc != null) {
+            // Set repeatability
+            if(!model.qc.getRepeatable()) {
+                model.quest.addCompletedChallenge(model.qc.getId());
+            }
+            
             model.quest.addChallengesPlayed();
 
             List<CardPrinted> challengeRewardCards = model.qc.getCardRewardList();
