@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_mirror.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/116.jpg
+Oracle:{T}, Sacrifice Magus of the Mirror: Exchange life totals with target opponent. Activate this ability only during your upkeep.
 End
