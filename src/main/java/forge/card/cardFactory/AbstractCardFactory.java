@@ -1185,52 +1185,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Mirror Universe")) {
-            /*
-             * Tap, Sacrifice Mirror Universe: Exchange life totals with
-             * target opponent. Activate this ability only during your upkeep.
-             */
-            Cost abCost = new Cost("T Sac<1/CARDNAME>", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-                private static final long serialVersionUID = -1409850598108909739L;
-
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    Player opponent = player.getOpponent();
-                    int tmp = player.getLife();
-                    player.setLife(opponent.getLife(), card);
-                    opponent.setLife(tmp, card);
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && AllZone.getPhase().getPhase().equals(Constant.Phase.Upkeep)
-                            && AllZone.getPhase().getPlayerTurn().equals(card.getController());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    if (AllZone.getComputerPlayer().getLife() < 5 && AllZone.getHumanPlayer().getLife() > 5) {
-                        return true;
-                    } else if (AllZone.getComputerPlayer().getLife() == 1) {
-                        return true;
-                    } else {
-                        return ((AllZone.getHumanPlayer().getLife() - AllZone.getComputerPlayer().getLife()) > 10);
-                    }
-                }
-            }; //SpellAbility
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Exchange life totals with target opponent.");
-            ability.setStackDescription(sb.toString());
-
-            ability.setDescription(abCost + "Exchange life totals with target opponent. Activate this ability only during your upkeep.");
-            card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Barl's Cage")) {
             final String[] tgts = {"Creature"};
             Target target = new Target(card, "Select target creature.", tgts, "1", "1");
