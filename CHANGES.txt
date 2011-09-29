@@ -7,7 +7,7 @@ http://raindropmemory.deviantart.com)
 #### cards in total.
 
 
-
+This beta is primarily a maintenance release. Some of the new Innistrad cards had typos. There was a bug with the quest mode in the last beta which apparently breaks the quest after 10 wins. These problems should be fixed in this version.
 
 
 We have changed the archiving format to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
