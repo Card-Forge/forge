@@ -11,7 +11,6 @@ Deck Type=constructed
 3 Pyroclasm|M11
 4 AEther Membrane|PLC
 20 Mountain|MBS
-4 Rage Nimbus|ROE
 3 Goblin Charbelcher|MRD
 4 Terramorphic Expanse|M11
 4 Vent Sentinel|ROE
@@ -20,4 +19,8 @@ Deck Type=constructed
 4 Wall of Razors|STH
 4 Ogre Sentry|ROE
 4 Steel Wall|MRD
+1 AEther Membrane
+1 Wall of Diffusion
+1 Wall of Earth
+1 Wall of Heat
 [sideboard]
