@@ -590,7 +590,11 @@ public class AbilityFactory_Counters {
 
         for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
-                if (AllZone.getZoneOf(tgtCard).is(Constant.Zone.Battlefield)) {
+                PlayerZone zone = AllZone.getZoneOf(tgtCard);
+                if (zone == null){
+                    // Do nothing, token disappeared
+                }
+                else if (zone.is(Constant.Zone.Battlefield)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
                 }
                 else {
