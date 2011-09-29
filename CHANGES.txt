@@ -125,6 +125,27 @@ Fixes/Features:
 - Difficulty multiplier on base reward for quest events added.
 - More level descriptors added to quest mode
 - Added the recent commit logs to changes.txt.
+- Repeatability activated for quest challenge events.
+- Added quest23.
+- Added Werewolf to the list of creature types.
+- Fixed a possible NPE in changeHiddenOriginResolveAI.
+- Made the script of Fiend Hunter AI friendly.
+- Made some scripts AI friendly (A-I).
+- Made some scripts AI friendly (J-Z).
+- Fixed broken LQ pic URL for Woodland Sleuth.
+- add TopOfLibrary as Defined for Cards
+- support Defined for Cards in ChangeZone Hidden
+- convert Necropotence to script
+- add an AbilityFactory for ExchangeLife
+- Moving Repeatability check inside QC check.
+- convert etb part of Bazaar of Wonders to script
+- Corrected Lost Order of Jarkeld.
+- Removed the copies of Rage Nimbus from the Redwall 2 deck.
+- Little fix in Redwall 2.
+- Corrected Pallimud and Skyshroud War Beast.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -163,6 +184,13 @@ Devouring Strossus
 Skeletal Scrying
 Distorting Wake
 Firebrand Ranger
+Llanowar Vanguard
+Phyrexian Reaper
+Phyrexian Slayer
+Venarian Glimmer
+Lost Order of Jarkeld
+Magus of the Mirror
+Soul Conduit
 
 
 end
