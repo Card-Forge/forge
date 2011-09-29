@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature  Beast
 Text:As CARDNAME enters the battlefield, choose an opponent.
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of tapped lands the chosen player controls.
+S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of tapped lands the chosen player controls.
 SVar:X:Count$Valid Land.tapped+YouDontCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pallimud.jpg
