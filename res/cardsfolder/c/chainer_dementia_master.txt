@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Nightmare | AddPower$ 1 | AddToughness$ 1 | Description$ Nightmare creatures get +1/+1.
 A:AB$ ChangeZone | Cost$ B B B PayLife<3> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBAnimate| SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
-SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Nightmare | Colors$ Black
+SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Nightmare | Colors$ Black | Permanent$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile all Nightmares.
 SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Nightmare
 SVar:PlayMain1:TRUE
