@@ -1,7 +1,9 @@
 Name:Bazaar of Wonders
 ManaCost:3 U U
 Types:World Enchantment
-Text:When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.\r\nWhenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.
+Text:Whenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from all graveyards.
+SVar:ExileAll:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_wonders.jpg

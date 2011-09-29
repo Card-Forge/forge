@@ -1327,30 +1327,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Bazaar of Wonders")) {
-            /*
-             * When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.
-             */
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 9209706681167017765L;
-
-                public void execute() {
-                    CardList hGrave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
-                    CardList cGrave = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
-
-                    for (Card c : hGrave) {
-                        AllZone.getGameAction().exile(c);
-                    }
-                    for (Card c : cGrave) {
-                        AllZone.getGameAction().exile(c);
-                    }
-                }
-            };
-                                    card.addComesIntoPlayCommand(intoPlay);
-        } //*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Phyrexian Processor")) {
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5634360316643996274L;
