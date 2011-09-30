@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/powerleech.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/64.jpg
+Oracle:Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.
 End
