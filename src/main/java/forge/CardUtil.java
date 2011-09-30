@@ -425,6 +425,15 @@ public final class CardUtil {
 
         return types;
     }
+    
+    public static ArrayList<String> getLandTypes() {
+        ArrayList<String> types = new ArrayList<String>();
+
+        types.addAll(Constant.CardTypes.basicTypes[0].list);
+        types.addAll(Constant.CardTypes.landTypes[0].list);
+
+        return types;
+    }
 
     /**
      * <p>isASuperType.</p>
