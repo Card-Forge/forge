@@ -63,7 +63,7 @@ class CardFactory_Lands {
                         AllZone.getComputerPlayer().loseLife(2, card);
                     }
                     else {
-                        card.tap();
+                        tapCard();
                     }
                 }
 
@@ -88,7 +88,8 @@ class CardFactory_Lands {
                 }//execute()
 
                 private void tapCard() {
-                    card.tap();
+                    //it enters the battlefield this way, and should not fire triggers
+                    card.setTapped(true);
                 }
             });
         }//*************** END ************ END **************************

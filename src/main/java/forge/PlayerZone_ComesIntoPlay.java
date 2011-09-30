@@ -46,7 +46,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
                 || (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent())))
         {
-            c.tap();
+            //it enters the battlefield this way, and should not fire triggers
+            c.setTapped(true);
         }
 
         //cannot use addComesIntoPlayCommand - trigger might be set to false;

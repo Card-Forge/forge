@@ -4976,8 +4976,8 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 203335252453049234L;
 
                 public void execute() {
-                    // System.out.println("Executing previous keyword");
-                    card.tap();
+                    //it enters the battlefield this way, and should not fire triggers
+                    card.setTapped(true);
                 }
             });
         } // if "Comes into play tapped."
@@ -4989,7 +4989,8 @@ public class CardFactoryUtil {
                     CardList lands = AllZoneUtil.getPlayerLandsInPlay(card.getController());
                     lands.remove(card);
                     if (!(lands.size() <= 2)) {
-                        card.tap();
+                        //it enters the battlefield this way, and should not fire triggers
+                        card.setTapped(true);
                     }
                 }
             });
@@ -5026,7 +5027,8 @@ public class CardFactoryUtil {
                     }
 
                     if (!fnd) {
-                        card.tap();
+                        //it enters the battlefield this way, and should not fire triggers
+                        card.setTapped(true);
                     }
                 }
             });
