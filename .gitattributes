@@ -1374,6 +1374,7 @@ res/cardsfolder/c/clockwork_condor.txt svneol=native#text/plain
 res/cardsfolder/c/clockwork_dragon.txt svneol=native#text/plain
 res/cardsfolder/c/clockwork_gnomes.txt svneol=native#text/plain
 res/cardsfolder/c/clockwork_steed.txt -text
+res/cardsfolder/c/clockwork_swarm.txt -text
 res/cardsfolder/c/clockwork_vorrac.txt svneol=native#text/plain
 res/cardsfolder/c/clone.txt svneol=native#text/plain
 res/cardsfolder/c/close_quarters.txt svneol=native#text/plain
