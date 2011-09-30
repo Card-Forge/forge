@@ -251,6 +251,9 @@ public final class AbilityFactory_Animate {
             else if (params.containsKey("UntilHostLeavesPlay")) {
                 sb.append(" until ").append(host).append(" leaves the battlefield.");
             }
+            else if (params.containsKey("UntilYourNextUpkeep")) {
+                sb.append(" until your next upkeep.");
+            }
             else {
                 sb.append(" until end of turn.");
             }
@@ -600,6 +603,9 @@ public final class AbilityFactory_Animate {
                 }
                 else if (params.containsKey("UntilHostLeavesPlay")) {
                     host.addLeavesPlayCommand(unanimate);
+                }
+                else if (params.containsKey("UntilYourNextUpkeep")) {
+                    AllZone.getUpkeep().addUntil(host.getController(), unanimate);
                 }
                 else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
