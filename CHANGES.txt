@@ -146,6 +146,23 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Add a fluff piece to the changes.txt file.
+- Fixed Chainer, Dementia Master.
+- convert Mirror Universe to script
+- Add specification entries to Manifest file. Reset Checkstyle in project
+- Add more entries to .gitignore
+- Add one more entry to .gitignore
+- Ran oracle and set info scripts
+- Fix for attempting to put counters on a token that no longer exists
+- Things that "come into play tapped" should not fire triggers for Mode$Taps according to my reading of rule 603.2d. I hope I haven't missed any place where this might be happening.
+- a couple tweaks to AF_PutCounter:
+1. add UpTo param for "add up to X counters to" a card
+2. add MaxFromEffect param to specify the maximum amount of these counters the card can have from this effect
+- add UntilYourNextUpkeep param to AF_Animate
+- Fixed Gratuitous Violence.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -191,6 +208,13 @@ Venarian Glimmer
 Lost Order of Jarkeld
 Magus of the Mirror
 Soul Conduit
+Transmute Artifact
+Powerleech
+Clockwork Beast
+Clockwork Avian
+Xenic Poltergeist
+Clockwork Steed
+Clockwork Swarm
 
 
 end
