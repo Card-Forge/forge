@@ -461,7 +461,7 @@ public abstract class Player extends GameEntity {
                 restDamage += restDamage;
         }
 
-        if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController())) {
+        if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
             int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++)
                 restDamage += restDamage;
