@@ -1,10 +1,10 @@
-Forge Beta: ##-##-2011 ver 1.1.4 rev #####
+Forge Beta: 09-30-2011 ver 1.1.5 rev 10795
 
 (Quest icons used created by Teekatas, from his Legendora set 
 
 http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9176 cards in total.
 
 
 This beta is primarily a maintenance release. Some of the new Innistrad cards had typos. There was a bug with the quest mode in the last beta which apparently breaks the quest after 10 wins. These problems should be fixed in this version.
@@ -15,7 +15,7 @@ We have changed the archiving format to ".tar.bz2". There are utilities for Wind
 
 The Mac OS application version:
 
-We have packaged the Forge ##-##-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
+We have packaged the Forge 09-30-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 You can move a copy of your pictures and decks over to the Forge.app application. Right click or control click on the Forge.app icon. Select Show Package Contents form the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
 
@@ -163,58 +163,71 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Preparing the changes.txt file for the next bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Marc
+Max mtg
+Night Shadow
+Nordos
+Rob Cashwalker
+Slapshot5
+Sloth
+Chris H
 
 
 Added many cards, including:
 
-Woodland Sleuth
-Runic Repetition
-Altar's Reap
-Spare from Evil
-Personal Sanctuary
-Safe Passage
-Endure
 Al-abara's Carpet
-Scarecrow
+Altar's Reap
 Chameleon Blur
-Divine Light
-Ethereal Haze
-Luminesce
-Goblin Furrier
-Indentured Oaf
-Harmless Assault
-Magebane Armor
-Tanglesap
-Radiant Kavu
+Clockwork Avian
+Clockwork Beast
+Clockwork Steed
+Clockwork Swarm
 Deathcurse Ogre
+Devouring Strossus
+Distorting Wake
+Divine Light
+Endure
+Ethereal Haze
+Firebrand Ranger
+Goblin Furrier
+Harmless Assault
 Hearth Kami
 Horizon Seed
 Hundred-Talon Kami
+Indentured Oaf
 Kitsune Healer
-Primeval Light
-Devouring Strossus
-Skeletal Scrying
-Distorting Wake
-Firebrand Ranger
 Llanowar Vanguard
+Lost Order of Jarkeld
+Luminesce
+Magebane Armor
+Magus of the Mirror
+Personal Sanctuary
 Phyrexian Reaper
 Phyrexian Slayer
-Venarian Glimmer
-Lost Order of Jarkeld
-Magus of the Mirror
-Soul Conduit
-Transmute Artifact
 Powerleech
-Clockwork Beast
-Clockwork Avian
+Primeval Light
+Radiant Kavu
+Runic Repetition
+Safe Passage
+Scarecrow
+Skeletal Scrying
+Soul Conduit
+Spare from Evil
+Tanglesap
+Transmute Artifact
+Venarian Glimmer
+Woodland Sleuth
 Xenic Poltergeist
-Clockwork Steed
-Clockwork Swarm
 
 
 end
