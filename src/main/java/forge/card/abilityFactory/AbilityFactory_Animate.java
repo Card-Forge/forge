@@ -316,16 +316,18 @@ public final class AbilityFactory_Animate {
                 bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == AllZone.getPhase().getTurn()));
 
                 //for creatures that could be improved (like Figure of Destiny)
-                int power = -5;
-                if (params.containsKey("Power")) {
-                    power = AbilityFactory.calculateAmount(source, params.get("Power"), sa);
-                }
-                int toughness = -5;
-                if (params.containsKey("Toughness")) {
-                    toughness = AbilityFactory.calculateAmount(source, params.get("Toughness"), sa);
-                }
-                if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
-                    bFlag = true;
+                if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {
+                    int power = -5;
+                    if (params.containsKey("Power")) {
+                        power = AbilityFactory.calculateAmount(source, params.get("Power"), sa);
+                    }
+                    int toughness = -5;
+                    if (params.containsKey("Toughness")) {
+                        toughness = AbilityFactory.calculateAmount(source, params.get("Toughness"), sa);
+                    }
+                    if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
+                        bFlag = true;
+                    }
                 }
 
             }
