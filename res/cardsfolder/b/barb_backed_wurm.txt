@@ -1,9 +1,0 @@
-Name:Barb-Backed Wurm
-ManaCost:4 B
-Types:Creature Wurm
-Text:no text
-PT:4/3
-A:AB$ Pump | Cost$ B | ValidTgts$ Creature.Green+blockingSource | TgtPrompt$ Select target green creature blocking Barb-Backed Wurm | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target green creature blocking CARDNAME gets -1/-1 until end of turn.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barb_backed_wurm.jpg
-End
