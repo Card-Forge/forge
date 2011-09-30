@@ -1367,6 +1367,7 @@ res/cardsfolder/c/cloak_of_confusion.txt svneol=native#text/plain
 res/cardsfolder/c/cloak_of_feathers.txt svneol=native#text/plain
 res/cardsfolder/c/cloak_of_mists.txt svneol=native#text/plain
 res/cardsfolder/c/clock_of_omens.txt svneol=native#text/plain
+res/cardsfolder/c/clockwork_avian.txt -text
 res/cardsfolder/c/clockwork_beast.txt -text
 res/cardsfolder/c/clockwork_beetle.txt svneol=native#text/plain
 res/cardsfolder/c/clockwork_condor.txt svneol=native#text/plain
