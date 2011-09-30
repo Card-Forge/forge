@@ -6,7 +6,6 @@ PT:2/2
 K:Flying
 A:AB$ ChangeZone | Cost$ R R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Play this ability only during your upkeep.
 A:AB$ DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 2 damage to each creature without flying.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_phoenix.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/97.jpg

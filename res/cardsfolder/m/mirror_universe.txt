@@ -3,8 +3,6 @@ ManaCost:6
 Types:Artifact
 Text:no text
 A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate this ability only during your upkeep.
-#Apparently, compy just plain can't handle the sac cost
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_universe.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/232.jpg
