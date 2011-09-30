@@ -1,0 +1,12 @@
+Name:Teferi's Isle
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:Phasing
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 2 | SpellDescription$ Add U U to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_isle.jpg
+Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nTeferi's Isle enters the battlefield tapped.\n{T}: Add {U}{U} to your mana pool.
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/315.jpg
+End

@@ -191,6 +191,11 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append(text);
         }
 
+        if (card.isPhasedOut()){
+            if (area.length() != 0) area.append("\n");
+            area.append("Phased Out");
+        }
+
         //counter text
         Counters[] counters = Counters.values();
         for (Counters counter : counters) {

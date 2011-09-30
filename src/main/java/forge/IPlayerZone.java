@@ -79,6 +79,7 @@ interface IPlayerZone {
      *
      * @return an array of {@link forge.Card} objects.
      */
+    Card[] getCards(boolean filter);
     Card[] getCards();
     Card[] getCards(int n);
     

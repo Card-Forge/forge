@@ -176,7 +176,7 @@ public class StaticAbility {
     	if (mapParams.containsKey("EffectZone"))
     		effectZone = Zone.smartValueOf(mapParams.get("EffectZone"));
     	
-    	if( effectZone != null && !AllZone.getZoneOf(hostCard).getZoneType().equals(effectZone))
+    	if( effectZone != null && (!AllZone.getZoneOf(hostCard).getZoneType().equals(effectZone) || hostCard.isPhasedOut()))
     		return false;
     	
     	if(mapParams.containsKey("Threshold") && !controller.hasThreshold())

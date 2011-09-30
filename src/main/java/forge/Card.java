@@ -113,6 +113,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean madness = false;
     private boolean suspendCast = false;
     private boolean suspend = false;
+    
+    private boolean phasedOut = false;
+    private boolean directlyPhasedOut = true;
 
     //for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
@@ -4690,6 +4693,71 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean isKicked() {
         return kicked;
+    }
+
+    public boolean isPhasedOut() {
+        return phasedOut;
+    }
+
+    public void setPhasedOut(boolean phasedOut) {
+        this.phasedOut = phasedOut;
+    }
+    
+    public void phase(){
+        this.phase(true);
+    }
+    
+    public void phase(boolean direct){
+        boolean phasingIn = this.isPhasedOut();
+        
+        if (!this.switchPhaseState()){
+            // Switch Phase State returns False if the Permanent can't Phase Out
+            return;
+        }
+        
+        if (!phasingIn){
+            this.setDirectlyPhasedOut(direct);
+        }
+        
+        for (Card eq : this.getEquippedBy()){
+            if (eq.isPhasedOut() == phasingIn){
+                eq.phase(false);
+            }
+        }
+        
+        for (Card aura : this.getEnchantedBy()){
+            if (aura.isPhasedOut() == phasingIn){
+                aura.phase(false);
+            }
+        }
+    }
+  
+    private boolean switchPhaseState(){
+        if (!this.phasedOut && this.hasKeyword("CARDNAME can't phase out.")){
+            return false;
+        }
+        
+        this.phasedOut = !this.phasedOut;
+        if (this.phasedOut && isToken()){
+            // 702.23k Phased-out tokens cease to exist as a state-based action. See rule 704.5d. 
+            // 702.23d The phasing event doesn't actually cause a permanent to change zones or control, 
+            // even though it's treated as though it's not on the battlefield and not under its controller's control while it's phased out. 
+            // Zone-change triggers don't trigger when a permanent phases in or out.
+            
+            // Suppressed Exiling is as close as we can get to "ceasing to exist"
+            AllZone.getTriggerHandler().suppressMode("ChangesZone");
+            AllZone.getGameAction().exile(this);
+            AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+        }
+        return true;
+    }
+    
+    public boolean isDirectlyPhasedOut(){
+        return this.directlyPhasedOut;
+    }
+    
+    public void setDirectlyPhasedOut(boolean direct){
+        this.directlyPhasedOut = direct;
     }
 
     /**

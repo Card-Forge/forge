@@ -871,6 +871,11 @@ public abstract class Player extends GameEntity {
         return new CardList(cards);
     }
     
+    public CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
+        Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : getZone(zone).getCards(false);
+        return new CardList(cards);
+    }
+    
     /**
      * gets a list of first N cards in the requested zone. This function makes a CardList from Card[].
      *

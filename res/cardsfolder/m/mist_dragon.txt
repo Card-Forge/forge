@@ -1,0 +1,14 @@
+Name:Mist Dragon
+ManaCost:4 U U
+Types:Creature Dragon
+Text:no text
+PT:4/4
+A:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying | Permanent$ True | SpellDescription$ CARDNAME gains flying. (This effect lasts indefinitely.)
+A:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Flying | Permanent$ True | SpellDescription$ CARDNAME loses flying. (This effect lasts indefinitely.)
+A:AB$ Phases | Cost$ 3 U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_dragon.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/79.jpg
+Oracle:{0}: Mist Dragon gains flying. (This effect lasts indefinitely.)\n{0}: Mist Dragon loses flying. (This effect lasts indefinitely.)\n{3}{U}{U}: Mist Dragon phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+End

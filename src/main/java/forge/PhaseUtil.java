@@ -48,7 +48,7 @@ public class PhaseUtil {
 
         // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
         if (turn.getTurn() > 0) {
-            CardList list = turn.getCardsIn(Zone.Battlefield);
+            CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
             for (Card c : list)
                 c.setSickness(false);
         }
@@ -56,8 +56,7 @@ public class PhaseUtil {
 
         AllZone.getGameAction().resetActivationsPerTurn();
 
-        CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn);
-        lands = lands.filter(CardListFilter.untapped);
+        CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.untapped);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap phase is skipped
@@ -68,6 +67,7 @@ public class PhaseUtil {
         }
 
         // Phasing would happen here
+        doPhasing(turn);
 
         doUntap();
 
@@ -77,6 +77,43 @@ public class PhaseUtil {
         AllZone.getPhase().setNeedToNextPhase(true);
     }
 
+    private static void doPhasing(Player turn){
+        // Needs to include phased out cards
+        CardList list = turn.getCardsIncludePhasingIn(Constant.Zone.Battlefield).filter(new CardListFilter() {
+            
+            @Override
+            public boolean addCard(Card c) {
+                return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword("Phasing"));
+            }
+        });
+        
+        // If c has things attached to it, they phase out simultaneously, and will phase back in with it
+        // If c is attached to something, it will phase out on its own, and try to attach back to that thing when it comes back
+        for(Card c : list){
+            if (c.isPhasedOut()){               
+                c.phase();
+            }
+            else if (c.hasKeyword("Phasing")){
+                // 702.23g If an object would simultaneously phase out directly and indirectly, it just phases out indirectly. 
+                if (c.isAura()){
+                    GameEntity ent = c.getEnchanting();
+                    
+                    if (ent instanceof Card && list.contains((Card)ent)){
+                        continue;
+                    }
+                }
+                else if (c.isEquipment() && c.isEquipping()){
+                    if (list.contains(c.getEquippingCard())){
+                        continue;
+                    }
+                }
+                // TODO: Fortification
+                c.phase();
+            }
+        }
+    }
+    
+    
     /**
      * <p>doUntap.</p>
      */

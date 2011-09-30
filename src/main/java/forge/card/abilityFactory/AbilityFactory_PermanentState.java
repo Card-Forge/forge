@@ -1676,6 +1676,330 @@ public class AbilityFactory_PermanentState {
         }
     }
 
-    //Phasing? Something else? Who knows!
+    // ******************************************
+    // ************** Phases ********************
+    // ******************************************
+    // Phases generally Phase Out. Time and Tide is the only card that can force
+    // Phased Out cards in.
 
+    /**
+     * <p>
+     * createAbilityPhases.
+     * </p>
+     * 
+     * @param af   a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityPhases(final AbilityFactory af) {
+        final SpellAbility abPhases = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 5445572699000471299L;
+
+            @Override
+            public String getStackDescription() {
+                return phasesStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return phasesCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                phasesResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return phasesTrigger(af, this, mandatory);
+            }
+
+        };
+        return abPhases;
+    }
+
+    /**
+     * <p>
+     * createSpellPhases.
+     * </p>
+     * 
+     * @param af  a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellPhases(final AbilityFactory af) {
+        final SpellAbility spPhases = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -4990932993654533449L;
+
+            @Override
+            public String getStackDescription() {
+                return phasesStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return phasesCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                phasesResolve(af, this);
+            }
+
+        };
+        return spPhases;
+    }
+
+    /**
+     * <p>
+     * createDrawbackPhases.
+     * </p>
+     * 
+     * @param af   a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackPhases(final AbilityFactory af) {
+        final SpellAbility dbPhases = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -4990932993654533449L;
+
+            @Override
+            public String getStackDescription() {
+                return phasesStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                phasesResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return phasesPlayDrawbackAI(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return phasesTrigger(af, this, mandatory);
+            }
+
+        };
+        return dbPhases;
+    }
+
+    /**
+     * <p>
+     * phasesStackDescription.
+     * </p>
+     * 
+     * @param af   a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa   a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String phasesStackDescription(AbilityFactory af, SpellAbility sa) {
+        // when getStackDesc is called, just build exactly what is happening
+        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        Card source = sa.getSourceCard();
+
+        if (sa instanceof Ability_Sub)
+            sb.append(" ");
+        else
+            sb.append(sa.getSourceCard()).append(" - ");
+
+        ArrayList<Card> tgtCards;
+        Target tgt = af.getAbTgt();
+        if (tgt != null)
+            tgtCards = tgt.getTargetCards();
+        else {
+            tgtCards = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+        }
+
+        Iterator<Card> it = tgtCards.iterator();
+        while (it.hasNext()) {
+            sb.append(it.next());
+            if (it.hasNext())
+                sb.append(", ");
+        }
+        sb.append(" Phases Out.");
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+            sb.append(subAb.getStackDescription());
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>
+     * phasesCanPlayAI.
+     * </p>
+     * 
+     * @param af  a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa   a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean phasesCanPlayAI(final AbilityFactory af, SpellAbility sa) {
+        // This still needs to be fleshed out
+        Target tgt = sa.getTarget();
+        Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+
+        Random r = MyRandom.random;
+        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
+
+        ArrayList<Card> tgtCards;
+        if (tgt == null) {
+            tgtCards = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+            if (tgtCards.contains(source)) {
+                // Protect it from something
+            } else {
+                //Card def = tgtCards.get(0);
+                // Phase this out if it might attack me, or before it can be
+                // declared as a blocker
+            }
+
+            return false;
+        } else {
+            if (!phasesPrefTargeting(tgt, af, sa, false))
+                return false;
+        }
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+            randomReturn &= subAb.chkAI_Drawback();
+
+        return randomReturn;
+    }
+
+    /**
+     * <p>
+     * phasesTrigger.
+     * </p>
+     * 
+     * @param af   a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa  a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory  a boolean.
+     * @return a boolean.
+     */
+    private static boolean phasesTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+        Target tgt = sa.getTarget();
+
+        if (tgt == null) {
+            if (mandatory)
+                return true;
+
+            return false;
+        } else {
+            if (phasesPrefTargeting(tgt, af, sa, mandatory)) {
+                return true;
+            } else if (mandatory) {
+                // not enough preferred targets, but mandatory so keep going:
+                return phasesUnpreferredTargeting(af, sa, mandatory);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * <p>
+     * phasesPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af  a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa  a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean phasesPlayDrawbackAI(final AbilityFactory af, SpellAbility sa) {
+        // AI cannot use this properly until he can use SAs during Humans turn
+        Target tgt = af.getAbTgt();
+
+        boolean randomReturn = true;
+
+        if (tgt == null) {
+            
+        } else {
+            if (!phasesPrefTargeting(tgt, af, sa, false))
+                return false;
+        }
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+            randomReturn &= subAb.chkAI_Drawback();
+
+        return randomReturn;
+    }
+
+    /**
+     * <p>
+     * phasesPrefTargeting.
+     * </p>
+     * 
+     * @param tgt a {@link forge.card.spellability.Target} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa  a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory  a boolean.
+     * @return a boolean.
+     */
+    private static boolean phasesPrefTargeting(Target tgt, AbilityFactory af, SpellAbility sa, boolean mandatory) {
+        //Card source = sa.getSourceCard();
+
+        //CardList phaseList = AllZoneUtil.getCardsIn(Zone.Battlefield).getTargetableCards(source)
+        //        .getValidCards(tgt.getValidTgts(), source.getController(), source);
+
+        //CardList aiPhaseList = phaseList.getController(AllZone.getComputerPlayer());
+
+        // If Something in the Phase List might die from a bad combat, or a
+        // spell on the stack save it
+
+        //CardList humanPhaseList = phaseList.getController(AllZone.getHumanPlayer());
+
+        // If something in the Human List is causing issues, phase it out
+
+        return false;
+    }
+
+    /**
+     * <p>
+     * phasesUnpreferredTargeting.
+     * </p>
+     * 
+     * @param af   a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa   a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory   a boolean.
+     * @return a boolean.
+     */
+    private static boolean phasesUnpreferredTargeting(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+        Card source = sa.getSourceCard();
+        Target tgt = sa.getTarget();
+
+        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        list = list.getValidCards(tgt.getValidTgts(), source.getController(), source).getTargetableCards(source);
+
+        return false;
+    }
+
+    /**
+     * <p>
+     * phasesResolve.
+     * </p>
+     * 
+     * @param af  a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa  a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void phasesResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card card = sa.getSourceCard();
+        Target tgt = sa.getTarget();
+        ArrayList<Card> tgtCards = null;
+
+        if (tgt != null)
+            tgtCards = tgt.getTargetCards();
+        else {
+            tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+        }
+
+        for (Card tgtC : tgtCards) {
+            tgtC.phase();
+        }
+    }
 }// end of AbilityFactory_PermanentState class

@@ -1385,7 +1385,7 @@ public class CardFactoryUtil {
             // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return AllZone.getZoneOf(sourceCard).is(Constant.Zone.Battlefield) && !sourceCard.isCreature()
+                return super.canPlay() && !sourceCard.isCreature()
                         && Phase.canCastSorcery(sourceCard.getController());
             }
 

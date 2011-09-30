@@ -65,7 +65,7 @@ public class CombatUtil {
         if (blocker.isTapped() && !AllZoneUtil.isCardInPlay("Masako the Humorless", blocker.getController()))
             return false;
 
-        if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block."))
+        if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.") || blocker.isPhasedOut())
             return false;
 
         CardList kulrath = AllZoneUtil.getCardsIn(Zone.Battlefield, "Kulrath Knight");
@@ -463,7 +463,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(Card c) {
-        if (c.isTapped() || (c.hasSickness() && !c.isEnchantedBy("Instill Energy"))) return false;
+        if (c.isTapped() || c.isPhasedOut() || (c.hasSickness() && !c.isEnchantedBy("Instill Energy"))) return false;
 
         return canAttackNextTurn(c);
     }

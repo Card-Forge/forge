@@ -1,0 +1,12 @@
+Name:Merfolk Raiders
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+Text:no text
+PT:2/3
+K:Islandwalk
+K:Phasing
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_raiders.jpg
+Oracle:Islandwalk\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/75.jpg
+End

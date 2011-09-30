@@ -551,6 +551,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_PermanentState.createDrawbackTapOrUntap(this);
             }
         }
+        
+        else if (API.equals("Phases")) {
+            if (isAb) {
+                SA = AbilityFactory_PermanentState.createAbilityPhases(this);
+            } else if (isSp) {
+                SA = AbilityFactory_PermanentState.createSpellPhases(this);
+            } else if (isDb) {
+                SA = AbilityFactory_PermanentState.createDrawbackPhases(this);
+            }
+        }
 
         else if (API.equals("PreventDamage")) {
             if (isAb) {

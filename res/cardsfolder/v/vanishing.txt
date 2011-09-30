@@ -1,0 +1,13 @@
+Name:Vanishing
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
+A:AB$ Phases | Cost$ U U | Defined$ Enchanted | SpellDescription$ Enchanted creature phases out.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vanishing.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/48.jpg
+Oracle:Enchant creature\n{U}{U}: Enchanted creature phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+End

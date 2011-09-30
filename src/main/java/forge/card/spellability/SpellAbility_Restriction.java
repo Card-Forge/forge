@@ -136,7 +136,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
      * @return a boolean.
      */
     public boolean canPlay(Card c, SpellAbility sa) {
-        if (!AllZone.getZoneOf(c).is(zone))
+        if (!AllZone.getZoneOf(c).is(zone) || c.isPhasedOut())
             return false;
 
         Player activator = sa.getActivatingPlayer();

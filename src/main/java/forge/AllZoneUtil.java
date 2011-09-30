@@ -249,9 +249,10 @@ public abstract class AllZoneUtil {
             all.addAll(player.getZone(Zone.Graveyard).getCards());
             all.addAll(player.getZone(Zone.Hand).getCards());
             all.addAll(player.getZone(Zone.Library).getCards()); // not sure if library should be included.
-            all.addAll(player.getZone(Zone.Battlefield).getCards());
+            all.addAll(player.getZone(Zone.Battlefield).getCards(false));
             all.addAll(player.getZone(Zone.Exile).getCards()); // Spawnsire of Ulamog plays spells from here?
         }
+        all.addAll(AllZone.getStackZone().getCards());
         return all;
     }
 

@@ -17,7 +17,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
-    private List<Card> cards = new ArrayList<Card>();
+    protected List<Card> cards = new ArrayList<Card>();
     private final Constant.Zone zoneName;
     private final Player player;
     private boolean update = true;
@@ -260,7 +260,13 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getCards() {
+    public Card[] getCards() {
+        return getCards(true);
+    }
+    
+    @Override
+    public Card[] getCards(boolean filter) {
+        // Non-Battlefield PlayerZones don't care about the filter
         Card[] c = new Card[cards.size()];
         cards.toArray(c);
         return c;

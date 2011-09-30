@@ -1,5 +1,8 @@
 package forge;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -310,5 +313,29 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
     public final void setTriggers(final boolean b) {
         trigger = b;
         leavesTrigger = b;
+    }
+
+    
+    @Override
+    public Card[] getCards(boolean filter) {
+        // Battlefield filters out Phased Out cards by default. Needs to call getCards(false) to get Phased Out cards
+        Card[] c;
+        if (!filter){
+            c = new Card[cards.size()];
+            cards.toArray(c);
+        }
+        else{
+            Iterator<Card> itr = cards.iterator();
+            ArrayList<Card> list = new ArrayList<Card>();
+            while(itr.hasNext()){
+                Card crd = itr.next();
+                if (!crd.isPhasedOut()){
+                    list.add(crd);
+                }
+            }
+            c = new Card[list.size()];
+            list.toArray(c);
+        }
+        return c;
     }
 }

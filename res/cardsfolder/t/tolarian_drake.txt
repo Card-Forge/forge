@@ -1,0 +1,12 @@
+Name:Tolarian Drake
+ManaCost:2 U
+Types:Creature Drake
+Text:no text
+PT:2/4
+K:Flying
+K:Phasing
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_drake.jpg
+Oracle:Flying\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/55.jpg
+End

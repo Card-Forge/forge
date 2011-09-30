@@ -1,0 +1,11 @@
+Name:Sandbar Crocodile
+ManaCost:4 U
+Types:Creature Crocodile
+Text:no text
+PT:6/5
+K:Phasing
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sandbar_crocodile.jpg
+Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/88.jpg
+End

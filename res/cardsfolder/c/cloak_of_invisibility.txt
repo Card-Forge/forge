@@ -1,0 +1,12 @@
+Name:Cloak of Invisibility
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Phasing & HIDDEN CARDNAME can't be blocked except by Walls. | Description$ Enchanted creature has phasing and can't be blocked except by Walls.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_invisibility.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/58.jpg
+Oracle:Enchant creature\nEnchanted creature has phasing and can't be blocked except by Walls. (It phases in or out before its controller untaps during each of his or her untap steps. While it's phased out, it's treated as though it doesn't exist.)
+End

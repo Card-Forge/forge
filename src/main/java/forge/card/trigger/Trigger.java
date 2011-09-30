@@ -228,7 +228,7 @@ public abstract class Trigger {
             if (AllZone.getZoneOf(hostCard) == null) {
                 return false;
             }
-            if (!triggerZones.contains(AllZone.getZoneOf(hostCard).getZoneType())) {
+            if (!triggerZones.contains(AllZone.getZoneOf(hostCard).getZoneType()) || hostCard.isPhasedOut()) {
                 return false;
             }
         }
