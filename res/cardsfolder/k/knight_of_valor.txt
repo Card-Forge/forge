@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flanking
 A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.withoutFlanking+blockingSource | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | ActivationLimit$ 1 | SpellDescription$ Each creature without flanking blocking CARDNAME gets -1/-1 until end of turn. Activate this ability only once each turn.
-Var:Rarity:Common
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_valor.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/111.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}: Each creature without flanking blocking Knight of Valor gets -1/-1 until end of turn. Activate this ability only once each turn.
