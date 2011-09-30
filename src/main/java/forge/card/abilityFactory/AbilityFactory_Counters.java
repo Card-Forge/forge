@@ -150,8 +150,11 @@ public class AbilityFactory_Counters {
         Card card = af.getHostCard();
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
-        sb.append("Put ").append(amount).append(" ").append(cType.getName())
-                .append(" counter");
+        sb.append("Put ");
+        if (params.containsKey("UpTo")) {
+            sb.append("up to ");
+        }
+        sb.append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) { sb.append("s"); }
         sb.append(" on ");
 
@@ -577,6 +580,20 @@ public class AbilityFactory_Counters {
         Card card = af.getHostCard();
         String type = params.get("CounterType");
         int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+        int max = params.containsKey("MaxFromEffect") ? Integer.parseInt(params.get("MaxFromEffect")) : -1;
+        
+        if (params.containsKey("UpTo")) {
+            Integer[] integers = new Integer[counterAmount+1];
+            for (int j = 0; j <= counterAmount; j++) {
+                integers[j] = Integer.valueOf(j);
+            }
+            Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
+            if (null == i) {
+                return;
+            } else {
+                counterAmount = i.intValue();
+            }
+        }
 
         ArrayList<Card> tgtCards;
 
@@ -590,6 +607,9 @@ public class AbilityFactory_Counters {
 
         for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
+                if (max != -1) {
+                    counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
+                }
                 PlayerZone zone = AllZone.getZoneOf(tgtCard);
                 if (zone == null){
                     // Do nothing, token disappeared
