@@ -1,0 +1,11 @@
+Name:Xenic Poltergeist
+ManaCost:1 B B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ Animate | Cost$ T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Creature,Artifact | UntilYourNextUpkeep$ True | SpellDescription$ Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
+SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xenic_poltergeist.jpg
+End
