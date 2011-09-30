@@ -1684,7 +1684,6 @@ res/cardsfolder/c/cylian_sunsinger.txt svneol=native#text/plain
 res/cardsfolder/c/cystbearer.txt svneol=native#text/plain
 res/cardsfolder/c/cytoplast_manipulator.txt -text
 res/cardsfolder/c/cytospawn_shambler.txt -text
-res/cardsfolder/c/moldgraf_monstrosity.txt -text
 res/cardsfolder/d/daggerback_basilisk.txt svneol=native#text/plain
 res/cardsfolder/d/daggerclaw_imp.txt svneol=native#text/plain
 res/cardsfolder/d/daily_regimen.txt svneol=native#text/plain
@@ -5020,6 +5019,7 @@ res/cardsfolder/m/molder.txt svneol=native#text/plain
 res/cardsfolder/m/molder_beast.txt svneol=native#text/plain
 res/cardsfolder/m/molder_slug.txt svneol=native#text/plain
 res/cardsfolder/m/moldervine_cloak.txt svneol=native#text/plain
+res/cardsfolder/m/moldgraf_monstrosity.txt -text
 res/cardsfolder/m/mole_worms.txt svneol=native#text/plain
 res/cardsfolder/m/molimo_maro_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/m/molten_frame.txt svneol=native#text/plain
