@@ -1,0 +1,13 @@
+Name:Shimmer
+ManaCost:2 U U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseLT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a land type.
+SVar:ChooseLT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Land
+S:Mode$ Continuous | Affected$ Land.ChosenType | AddKeyword$ Phasing | Description$ Each land of the chosen type has phasing. (It phases in or out before its controller untaps during each of his or her untap steps. While it's phased out, it's treated as though it doesn't exist.)
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/92.jpg
+Oracle:As Shimmer enters the battlefield, choose a land type.\nEach land of the chosen type has phasing. (It phases in or out before its controller untaps during each of his or her untap steps. While it's phased out, it's treated as though it doesn't exist.)
+End
