@@ -427,7 +427,6 @@ public class ComputerAI_General implements Computer {
             sas = getOtherPhases();
 
             boolean pass = (sas.length == 0)
-                    || AllZone.getPhase().is(Constant.Phase.Upkeep, AllZone.getComputerPlayer())
                     || AllZone.getPhase().is(Constant.Phase.Draw, AllZone.getComputerPlayer())
                     || AllZone.getPhase().is(Constant.Phase.End_Of_Turn, AllZone.getComputerPlayer());
             if (!pass) {        // Each AF should check the phase individually
