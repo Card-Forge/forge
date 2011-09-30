@@ -11,4 +11,10 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_beast.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/236.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/238.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/356.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/325.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/240.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/237.jpg
 End

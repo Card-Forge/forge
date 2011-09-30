@@ -12,4 +12,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_swarm.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/129.jpg
 End

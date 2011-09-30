@@ -12,4 +12,6 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_steed.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/128.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/357.jpg
 End

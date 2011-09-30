@@ -12,4 +12,6 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_avian.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/324.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/10.jpg
 End

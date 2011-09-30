@@ -8,4 +8,7 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenic_poltergeist.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/68.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/57.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/50.jpg
 End
