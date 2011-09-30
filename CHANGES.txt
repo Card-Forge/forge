@@ -1,10 +1,10 @@
-Forge Beta: 09-30-2011 ver 1.1.5 rev 10795
+Forge Beta: ##-##-2011 ver 1.1.# rev #####
 
 (Quest icons used created by Teekatas, from his Legendora set 
 
 http://raindropmemory.deviantart.com)
 
-9176 cards in total.
+#### cards in total.
 
 
 This beta is primarily a maintenance release. Some of the new Innistrad cards had typos. There was a bug with the quest mode in the last beta which apparently breaks the quest after 10 wins. These problems should be fixed in this version.
@@ -15,7 +15,7 @@ We have changed the archiving format to ".tar.bz2". There are utilities for Wind
 
 The Mac OS application version:
 
-We have packaged the Forge 09-30-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
+We have packaged the Forge ##-##-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 You can move a copy of your pictures and decks over to the Forge.app application. Right click or control click on the Forge.app icon. Select Show Package Contents form the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
 
@@ -26,208 +26,18 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
-- Partially converted Venser, the Sojourner to script.
-- Performed formats rotation.
-- added ISD line to boosters.txt
-- enabling limited play with ISD
+- The AI will now also use abilities and spells during upkeep.
 - Cleared out the changes.txt file, is ready for new material.
-- Fixed several LQ pic URLs.
-- Improve error message in CardRules
-- Added missing LQ pic URLs.
-- Fixed name of Curse of the Nightly Hunt.
-- Fixed Beacon of Destruction text.
-- Added a Planeswalker check to AbilityFactory.playReusable to make the AI use the abilities each turn (without random factor).
-- Added Innistrad setinfo to reprints.
-- Fixing SetInfo for Basic Land
-- Island SetInfo didn't update properly
-- Increasing Commons in a Quest Booster Pack to 11
-- Increasing Money earned from Quest Victories
-- Fixed type of Pit Spawn.
-- Added two missing setinfos.
-- Fixed destroyPlaneswalkers checking non-Planeswalker types (so two Artifact Planeswalker won't destroy each other).
-- Little AI improvements in AF ChangeZone Hidden.
-- Added the recent commit logs to changes.txt.
-- Fixed Oblivion Ring (by changing getCardState to search all zones for the card).
-- Fixed delayedTriggers.
-- Reverted newgame_background.jpg.
-- Fixed the possible crash in assembleDuelUniquedata.
-- Changed generateDuels to the old system (ending with one very hard and two hard opponents).
-- Updating mtgData
-- Graphics for HomeScreen
-- Removed a few commented references of OldGuiNewGame.
-- Add CustomPool property to deck file for filtering from HomeScreen's deck list.
-- Adds first draft of HomeScreen gui. Requires an environmental variable to be present in order to enable it.
-- Move ManaSymbol initialization from OldGuiNewGame to ApplicationView.
-- Completed the fix for delayed triggers.
-- Disabled the use of AF ChooseColor for the AI.
-- Fixed Militia's Pride.
-- Change the absolute path to relative path for graphics
-- Added four copies of Isolated Chapel to the Data 2 deck.
-- Fixed type of Skulltap.
-- Added "Custom Pool=true" so it doesn't show up as a regular constructed deck in the new HomeScreen.
-- Added the -1/-1 counters (formerly Flourishing Defenses) deck by Nordos as Starfire 3.
-- Fixed name of Mikaeus, the Lunarch.
-- copyCard will now copy remembered objects (this could make some more use of ClearRemembered CleanUp necessary).
-- Fixed Admonition Angel.
-- Cleanup of stAnimate.
-- Updated some SVars of Innistrad cards (A-E).
-- Minor fix to the new Home Screen(nice and understandable code); Picking random deck for the AI causes it to echo the deck chosen for the human.
-- Updated some SVars of Innistrad cards (F-M).
-- Updated some SVars of Innistrad cards (N-S).
-- Fixed file name of Silver-Inlaid Dagger.
-- Updated some SVars of Innistrad cards (T-Z).
-- Ran oracle script.
-- Added the recent commit logs to changes.txt.
-- Added the player keyword "Prevent all damage that would be dealt to you".
-- Added a new static ability "PreventDamage".
-- Converted Personal Sanctuary to it.
-- Fixed affected creatures in Gallows Warded
-- Added support for "Amount" and "Source" parameters to the PreventDamage static ability.
-- Converted Daunting Defender, Energy Field and Energy Storm.
-- Converted all cards with stPreventDamage keyword to the PreventDamage static ability.
-- Removed the code of the stPreventDamage keyword.
-- Removed the keyword "Prevent all damage that would be dealt to you."
-- Fixed text of Unbreathing Horde.
-- Added RemAIDeck to Caldera Hellion.
-- Converted Bubble Matrix.
-- Converted Forfend.
-- Fixing text of Diplomatic Immunity
-- Fixing Fire-Belly Changeling
-- Forgot to handle launching Quest Mode.
-- fixed generateChallenges.
-- Added the recent commit logs to changes.txt.
-- Final minor fix to model/view architecture in quest event panels.
-- Fixed tooltip on "Deck Editor" button (issue 294)
-- Fixed Aquitect's Will.
-- Added support for "CombatDamage$" "True" and "False" to the PreventDamage static ability.
-- Converted Mark of Asylum to script.
-- Converted and corrected Enchanted Being.
-- Converted Dolmen Gate.
-- minor optimizations of CardRules, fix typo in comment of MtgDataParser
-- Removed the function isValidCard in favor of isValid in GameEntity.
-- overload for subtype
-- Changing Curse of Chains AILogic
-- added overload for name-based predicate, simplified NamesExcept
-- deckmanager crashed on bad files
-- Fixed typeline of Telethopter.
-- Fixed cost of Burning Vengeance.
-- Added the recent commit logs to changes.txt.
-- Fixed name of Blind with Anger.
-- Converted Blazing Archon and Peacekeeper to script.
-- Converted Ensnaring Bridge and Reverence to script.
-- Added support for targeting in AF DestroyAll.
-- Converted the last ability of Ajani Vengeant to script.
-- Added the deck: Chief Clancy Wiggum 1.
-- Added support for targeting and Defined parameter in AF AnimateAll.
-- Little fixed in AF AnimateAll.
-- Cleanup of Ego Erasure and Shields of Velis Vel.
-- Fixed delayed triggers triggering over and over again.
-- Difficulty multiplier on base reward for quest events added.
-- More level descriptors added to quest mode
-- Added the recent commit logs to changes.txt.
-- Repeatability activated for quest challenge events.
-- Added quest23.
-- Added Werewolf to the list of creature types.
-- Fixed a possible NPE in changeHiddenOriginResolveAI.
-- Made the script of Fiend Hunter AI friendly.
-- Made some scripts AI friendly (A-I).
-- Made some scripts AI friendly (J-Z).
-- Fixed broken LQ pic URL for Woodland Sleuth.
-- add TopOfLibrary as Defined for Cards
-- support Defined for Cards in ChangeZone Hidden
-- convert Necropotence to script
-- add an AbilityFactory for ExchangeLife
-- Moving Repeatability check inside QC check.
-- convert etb part of Bazaar of Wonders to script
-- Corrected Lost Order of Jarkeld.
-- Removed the copies of Rage Nimbus from the Redwall 2 deck.
-- Little fix in Redwall 2.
-- Corrected Pallimud and Skyshroud War Beast.
-- Ran set info script.
-- Ran oracle script.
-- Added the recent commit logs to changes.txt.
-- Add a fluff piece to the changes.txt file.
-- Fixed Chainer, Dementia Master.
-- convert Mirror Universe to script
-- Add specification entries to Manifest file. Reset Checkstyle in project
-- Add more entries to .gitignore
-- Add one more entry to .gitignore
-- Ran oracle and set info scripts
-- Fix for attempting to put counters on a token that no longer exists
-- Things that "come into play tapped" should not fire triggers for Mode$Taps according to my reading of rule 603.2d. I hope I haven't missed any place where this might be happening.
-- a couple tweaks to AF_PutCounter:
-1. add UpTo param for "add up to X counters to" a card
-2. add MaxFromEffect param to specify the maximum amount of these counters the card can have from this effect
-- add UntilYourNextUpkeep param to AF_Animate
-- Fixed Gratuitous Violence.
-- Ran set info script.
-- Ran oracle script.
-- Added the recent commit logs to changes.txt.
-- Preparing the changes.txt file for the next bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-ArsenalNut
-Dave
-Doublestrike
-Friar Sol
-Hellfish
-Marc
-Max mtg
-Night Shadow
-Nordos
-Rob Cashwalker
-Slapshot5
-Sloth
-Chris H
+
 
 
 Added many cards, including:
 
-Al-abara's Carpet
-Altar's Reap
-Chameleon Blur
-Clockwork Avian
-Clockwork Beast
-Clockwork Steed
-Clockwork Swarm
-Deathcurse Ogre
-Devouring Strossus
-Distorting Wake
-Divine Light
-Endure
-Ethereal Haze
-Firebrand Ranger
-Goblin Furrier
-Harmless Assault
-Hearth Kami
-Horizon Seed
-Hundred-Talon Kami
-Indentured Oaf
-Kitsune Healer
-Llanowar Vanguard
-Lost Order of Jarkeld
-Luminesce
-Magebane Armor
-Magus of the Mirror
-Personal Sanctuary
-Phyrexian Reaper
-Phyrexian Slayer
-Powerleech
-Primeval Light
-Radiant Kavu
-Runic Repetition
-Safe Passage
-Scarecrow
-Skeletal Scrying
-Soul Conduit
-Spare from Evil
-Tanglesap
-Transmute Artifact
-Venarian Glimmer
-Woodland Sleuth
-Xenic Poltergeist
+Moldgraf Monstrosity
 
 
 end
