@@ -4,8 +4,7 @@ Types:Creature Plant Mutant
 Text:no text
 PT:0/0
 K:Graft 5
-K:HIDDEN CARDNAME can't attack or block.
-SVar:RemAIDeck:True
+K:CARDNAME can't attack or block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_hydropon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/135.jpg

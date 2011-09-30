@@ -1976,17 +1976,28 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+        boolean chance = false;
+        
         // if there is a cost, it's gotta be optional
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
+        
+        Counters cType = Counters.valueOf(params.get("CounterType"));
+        ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        if (srcCards.size() > 0 && cType.equals(Counters.P1P1) //move +1/+1 counters away from permanents that cannot use them
+                && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
+            chance = true;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            //chance &= subAb.doTrigger(mandatory);
+            chance &= subAb.doTrigger(mandatory);
         }
 
-        return false;
+        return chance;
     }
 
     /**

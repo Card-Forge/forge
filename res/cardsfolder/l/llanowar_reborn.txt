@@ -5,7 +5,6 @@ Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:Graft 1
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_reborn.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/171.jpg
