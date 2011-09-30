@@ -338,7 +338,7 @@ public class AbilityFactory_Choose {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            Object o = GuiUtils.getChoice("Choose a basic land type",
+                            Object o = GuiUtils.getChoice("Choose a land type",
                                     CardUtil.getLandTypes().toArray());
                             if (null == o) {
                                 return;
