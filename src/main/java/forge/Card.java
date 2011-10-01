@@ -5005,6 +5005,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         {
             if (Property.startsWith("non") && (CardUtil.getColors(this).size() == 1 && !isColorless())) return false;
             if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
+        } else if (Property.equals("ChosenColor")) {
+            if (!CardUtil.getColors(this).contains(source.getChosenColor())) return false;
         } else if (Property.startsWith("YouCtrl")) {
             if (!getController().isPlayer(sourceController)) return false;
         } else if (Property.startsWith("YouDontCtrl")) {
