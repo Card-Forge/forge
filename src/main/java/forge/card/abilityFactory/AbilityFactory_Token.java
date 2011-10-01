@@ -1,5 +1,6 @@
 package forge.card.abilityFactory;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -319,22 +320,23 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @return a {@link java.lang.String} object.
      */
     private String doStackDescription(SpellAbility sa) {
+        Card host = AF.getHostCard();
 
         int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
-
         int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
-
         int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
+        
+        String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
 
         StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub)
             sb.append(" ");
         else
-            sb.append(AF.getHostCard().getName()).append(" - ");
+            sb.append(host.getName()).append(" - ");
 
         sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
-        sb.append(" ").append(tokenName).append(" token");
+        sb.append(" ").append(substitutedName).append(" token");
         if (finalAmount != 1) sb.append("s");
         sb.append(" onto the battlefield");
 
@@ -357,23 +359,30 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
     private void doResolve(SpellAbility sa) {
+        Card host = AF.getHostCard();
         String imageName = "";
         Player controller;
         String cost = "";
         //Construct colors
+        String[] substitutedColors = Arrays.copyOf(tokenColors, tokenColors.length);
+        for (int i = 0; i < substitutedColors.length; i++) {
+            if (substitutedColors[i].equals("ChosenColor")) {
+                substitutedColors[i] = host.getChosenColor();
+            }
+        }
         String colorDesc = "";
-        for (String col : tokenColors) {
-            if (col.equals("White")) {
+        for (String col : substitutedColors) {
+            if (col.equalsIgnoreCase("White")) {
                 colorDesc += "W";
-            } else if (col.equals("Blue")) {
+            } else if (col.equalsIgnoreCase("Blue")) {
                 colorDesc += "U";
-            } else if (col.equals("Black")) {
+            } else if (col.equalsIgnoreCase("Black")) {
                 colorDesc += "B";
-            } else if (col.equals("Red")) {
+            } else if (col.equalsIgnoreCase("Red")) {
                 colorDesc += "R";
-            } else if (col.equals("Green")) {
+            } else if (col.equalsIgnoreCase("Green")) {
                 colorDesc += "G";
-            } else if (col.equals("Colorless")) {
+            } else if (col.equalsIgnoreCase("Colorless")) {
                 colorDesc = "C";
             }
         }
@@ -383,7 +392,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         } else {
             imageName = tokenImage;
         }
-        System.out.println("AF_Token imageName = " + imageName);
+        //System.out.println("AF_Token imageName = " + imageName);
 
         for (char c : colorDesc.toCharArray()) {
             cost += c + ' ';
@@ -396,10 +405,18 @@ public class AbilityFactory_Token extends AbilityFactory {
         int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
         int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
         int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
+        
+        String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
+        for (int i = 0; i < substitutedTypes.length; i++) {
+            if (substitutedTypes[i].equals("ChosenType")) {
+                substitutedTypes[i] = host.getChosenType();
+            }
+        }
+        String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
 
         String remember = AF.getMapParams().get("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
-            CardList tokens = CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
+            CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost, substitutedTypes, finalPower, finalToughness, tokenKeywords);
 
             //Grant abilities
             if (tokenAbilities != null) {
