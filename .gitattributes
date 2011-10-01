@@ -1510,6 +1510,7 @@ res/cardsfolder/c/core_prowler.txt svneol=native#text/plain
 res/cardsfolder/c/coretapper.txt svneol=native#text/plain
 res/cardsfolder/c/corpse_connoisseur.txt svneol=native#text/plain
 res/cardsfolder/c/corpse_cur.txt svneol=native#text/plain
+res/cardsfolder/c/corpse_dance.txt -text
 res/cardsfolder/c/corpse_harvester.txt svneol=native#text/plain
 res/cardsfolder/c/corpse_lunge.txt -text
 res/cardsfolder/c/corpsehatch.txt svneol=native#text/plain
