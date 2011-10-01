@@ -5,8 +5,8 @@ Text:no text
 T:Mode$ SpellCast | ValidControllingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacYou | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
 T:Mode$ SpellCast | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacOpp | Secondary$ True | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
 #Must use SacrificeAll since regular sacrifice can't remember the sac'd cards atm.
-SVar:TrigSacYou:AB$SacrificeAll | Cost$ 0 | Valid$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawOpp
-SVar:TrigSacOpp:AB$SacrificeAll | Cost$ 0 | Valid$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawYou
+SVar:TrigSacYou:AB$SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawOpp
+SVar:TrigSacOpp:AB$SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawYou
 SVar:DrawOpp:DB$ Draw | NumCards$ 3 | Defined$ Opponent | CheckSVar$ X | SVarCompare$ GE1
 SVar:DrawYou:DB$ Draw | NumCards$ 3 | Defined$ You | CheckSVar$ X | SVarCompare$ GE1
 SVar:X:Remembered$Amount
