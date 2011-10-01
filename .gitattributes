@@ -4229,6 +4229,7 @@ res/cardsfolder/k/kitsune_healer.txt -text
 res/cardsfolder/k/kitsune_loreweaver.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_riftwalker.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_dead.txt svneol=native#text/plain
+res/cardsfolder/k/kjeldoran_frostbeast.txt -text
 res/cardsfolder/k/kjeldoran_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_home_guard.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_javelineer.txt svneol=native#text/plain
