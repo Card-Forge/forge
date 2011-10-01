@@ -9211,6 +9211,7 @@ res/cardsfolder/z/zombie_master.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_mob.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_musher.txt svneol=native#text/plain
 res/cardsfolder/z/zombie_outlander.txt svneol=native#text/plain
+res/cardsfolder/z/zombie_scavengers.txt -text
 res/cardsfolder/z/zombie_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/z/zombify.txt svneol=native#text/plain
 res/cardsfolder/z/zoologist.txt svneol=native#text/plain
