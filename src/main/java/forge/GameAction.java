@@ -1100,8 +1100,11 @@ public class GameAction {
         AllZone.getComputerPlayer().setLife(computerLife, null);
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
-        if (qe != null && ((QuestChallenge)qe).getEventType().equals("challenge")) {
-            computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestEvent()));
+        if (qe != null && qe instanceof QuestChallenge){
+            QuestChallenge challenge = (QuestChallenge)qe;
+            if (challenge.getEventType().equals("challenge")) {
+                computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestEvent()));
+            }
         }
 
         for (Card c : human) {
