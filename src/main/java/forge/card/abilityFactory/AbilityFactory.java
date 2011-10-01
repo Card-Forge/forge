@@ -2064,6 +2064,9 @@ public class AbilityFactory {
             }
         } else {
             resolveSubAbilities(sa);
+            if (usedStack) {
+                AllZone.getStack().finishResolving(sa, false);
+            }
         }
     }
 
