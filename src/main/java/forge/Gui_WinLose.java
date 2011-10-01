@@ -190,8 +190,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
             
-            System.out.println("Gui_WinLose: "+model.event.getEventType()); // ghandi
-            
             if (model.event.getEventType().equals("challenge")) {
                 if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
