@@ -1,0 +1,16 @@
+Name:Tidewalker
+ManaCost:2 U
+Types:Creature Elemental
+Text:no text
+PT:*/*
+K:etbCounter:TIME:X:no Condition:Tidewalker enters the battlefield with a time counter on it for each Island you control.
+S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of time counters on it.
+K:Vanishing:0
+SVar:X:Count$Valid Island.YouCtrl
+SVar:Y:Count$CardCounters.TIME
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tidewalker.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/49.jpg
+Oracle:Tidewalker enters the battlefield with a time counter on it for each Island you control.\nVanishing (At the beginning of your upkeep, remove a time counter from this permanent. When the last is removed, sacrifice it.)\nTidewalker's power and toughness are each equal to the number of time counters on it.
+End

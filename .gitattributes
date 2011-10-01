@@ -8146,6 +8146,7 @@ res/cardsfolder/t/tidehollow_sculler.txt svneol=native#text/plain
 res/cardsfolder/t/tidehollow_strix.txt svneol=native#text/plain
 res/cardsfolder/t/tideshaper_mystic.txt -text
 res/cardsfolder/t/tidespout_tyrant.txt svneol=native#text/plain
+res/cardsfolder/t/tidewalker.txt -text
 res/cardsfolder/t/tidewater_minion.txt svneol=native#text/plain
 res/cardsfolder/t/tidings.txt svneol=native#text/plain
 res/cardsfolder/t/tiger_claws.txt svneol=native#text/plain
