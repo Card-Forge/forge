@@ -1916,6 +1916,7 @@ Flashback {9}{W}{W}{W} (You may cast this card from your graveyard for its flash
 ODY R
 
 Ancestral Vision
+(Blue)
 Sorcery
 Suspend 4-{U} (Rather than cast this card from your hand, pay {U} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 Target player draws three cards.
@@ -7338,6 +7339,7 @@ Flying
 {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
 ----
 Lord of Lineage
+(Black)
 Creature - Vampire
 5/5
 Flying
@@ -12346,6 +12348,7 @@ Creature - Human Advisor
 {T}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
 ----
 Homicidal Brute
+(Red)
 Creature - Human Mutant
 5/1
 At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
@@ -12662,6 +12665,7 @@ Creature - Human
 At the beginning of your upkeep, you may transform Cloistered Youth.
 ----
 Unholy Fiend
+(Black)
 Creature - Horror
 3/3
 At the beginning of your end step, you lose 1 life.
@@ -14601,6 +14605,7 @@ MIR R, 6ED R, 7ED R
 
 Crimson Kobolds
 {0}
+(Red)
 Creature - Kobold
 0/1
 LEG C, ME3 C
@@ -14679,6 +14684,7 @@ MMQ R
 
 Crookshank Kobolds
 {0}
+(Red)
 Creature - Kobold
 0/1
 LEG C, MED C
@@ -16454,6 +16460,7 @@ Creature - Human Archer Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
 ----
 Nightfall Predator
+(Green)
 Creature - Werewolf
 4/4
 {R}, {T}: Nightfall Predator fights target creature. (Each deals damage equal to its power to the other.)
@@ -17385,6 +17392,7 @@ Creature - Human Wizard
 At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
 ----
 Insectile Aberration
+(Blue)
 Creature - Human Insect
 3/2
 Flying
@@ -19974,6 +19982,7 @@ Dry Spell deals 1 damage to each creature and each player.
 HML C (x2), POR U, 6ED C, ME2 C
 
 Dryad Arbor
+(Green)
 Land Creature - Forest Dryad
 1/1
 (Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G} to your mana pool.")
@@ -22856,6 +22865,7 @@ All damage is dealt as though its source had wither. (A source with wither deals
 SHM R
 
 Evermind
+(Blue)
 Instant - Arcane
 (Nonexistent mana costs can't be paid.)
 Draw a card.
@@ -27395,6 +27405,7 @@ When Garruk Relentless has two or fewer loyalty counters on him, transform him.
 [0] Put a 2/2 green Wolf creature token onto the battlefield.
 ----
 Garruk, the Veil-Cursed
+(Black/Green)
 Planeswalker - Garruk
 [+1] Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
 [-1] Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
@@ -27529,6 +27540,7 @@ Creature - Human Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Shepherd.
 ----
 Gatstaf Howler
+(Green)
 Creature - Werewolf
 3/3
 Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)
@@ -31293,6 +31305,7 @@ Creature - Human Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Grizzled Outcasts.
 ----
 Krallenhorde Wantons
+(Green)
 Creature - Werewolf
 7/7
 At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Wantons.
@@ -32223,6 +32236,7 @@ Defender
 At the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.
 ----
 Bane of Hanweir
+(Red)
 Creature - Werewolf
 5/5
 Bane of Hanweir attacks each turn if able.
@@ -34684,6 +34698,7 @@ Target player discards two cards at random.
 FEM C (x4), MED U
 
 Hypergenesis
+(Green)
 Sorcery
 Suspend 3-{1}{G}{G} (Rather than cast this card from your hand, pay {1}{G}{G} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 Starting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
@@ -36151,6 +36166,7 @@ Attacking creatures you control get +1/+0.
 At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
 ----
 Wildblood Pack
+(Red)
 Creature - Werewolf
 5/5
 Trample
@@ -36214,6 +36230,7 @@ ULG C
 
 Intervention Pact
 {0}
+(White)
 Instant
 The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
 At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
@@ -39657,6 +39674,7 @@ LEG U, TSB S, ME3 C
 
 Kobolds of Kher Keep
 {0}
+(Red)
 Creature - Kobold
 0/1
 LEG C, ME3 C
@@ -40213,6 +40231,7 @@ First strike
 At the beginning of each upkeep, if no spells were cast last turn, transform Kruin Outlaw.
 ----
 Terror of Kruin Pass
+(Red)
 Creature - Werewolf
 3/3
 Double strike
@@ -42117,6 +42136,7 @@ You gain life equal to the revealed card's converted mana cost.
 ROE C
 
 Living End
+(Black)
 Sorcery
 Suspend 3-{2}{B}{B} (Rather than cast this card from your hand, pay {2}{B}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
@@ -42859,6 +42879,7 @@ Defender
 {1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
 ----
 Ludevic's Abomination
+(Blue)
 Creature - Lizard Horror
 13/13
 Trample
@@ -44861,6 +44882,7 @@ Other Human creatures you control get +1/+1.
 At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
 ----
 Howlpack Alpha
+(Green)
 Creature - Werewolf
 3/3
 Other Werewolf and Wolf creatures you control get +1/+1.
@@ -52374,6 +52396,7 @@ MOR C
 
 Pact of Negation
 {0}
+(Blue)
 Instant
 Counter target spell.
 At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
@@ -52381,6 +52404,7 @@ FUT R
 
 Pact of the Titan
 {0}
+(Red)
 Instant
 Put a 4/4 red Giant creature token onto the battlefield.
 At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
@@ -58596,6 +58620,7 @@ Creature - Human Rogue Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Reckless Waif.
 ----
 Merciless Predator
+(Red)
 Creature - Werewolf
 3/2
 At the beginning of each upkeep, if a player cast two or more spells last turn, transform Merciless Predator.
@@ -59484,6 +59509,7 @@ Return two target cards from your graveyard to your hand. Exile Restock.
 INV R
 
 Restore Balance
+(White)
 Sorcery
 Suspend 6-{W} (Rather than cast this card from your hand, pay {W} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
@@ -63363,6 +63389,7 @@ Flying
 At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.
 ----
 Stalking Vampire
+(Black)
 Creature - Vampire
 5/5
 At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
@@ -67636,6 +67663,7 @@ ZEN C, M12 C
 
 Slaughter Pact
 {0}
+(Black)
 Instant
 Destroy target nonblack creature.
 At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
@@ -72668,6 +72696,7 @@ When Summoner's Egg dies, turn the exiled card face up. If it's a creature card,
 
 Summoner's Pact
 {0}
+(Green)
 Instant
 Search your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library.
 At the beginning of your next upkeep, pay {2}{G}{G}. If you don't, you lose the game.
@@ -75949,6 +75978,7 @@ Vigilance
 Whenever another creature you control dies, you may transform Thraben Sentry.
 ----
 Thraben Militia
+(White)
 Creature - Human Soldier
 5/4
 Trample
@@ -77172,6 +77202,7 @@ Creature - Human Warrior Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Tormented Pariah.
 ----
 Rampaging Werewolf
+(Red)
 Creature - Werewolf
 6/4
 At the beginning of each upkeep, if a player cast two or more spells last turn, transform Rampaging Werewolf.
@@ -77707,6 +77738,7 @@ ROE M
 
 Transguild Courier
 {4}
+(White/Blue/Black/Red/Green)
 Artifact Creature - Golem
 3/3
 DIS U
@@ -78871,6 +78903,7 @@ Creature - Human Shaman Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Ulvenwald Mystics.
 ----
 Ulvenwald Primordials
+(Green)
 Creature - Werewolf
 5/5
 {G}: Regenerate Ulvenwald Primordials.
@@ -81139,6 +81172,7 @@ First strike
 At the beginning of each upkeep, if no spells were cast last turn, transform Village Ironsmith.
 ----
 Ironfang
+(Red)
 Creature - Werewolf
 3/1
 First strike
@@ -81152,6 +81186,7 @@ Creature - Human Werewolf
 At the beginning of each upkeep, if no spells were cast last turn, transform Villagers of Estwald.
 ----
 Howlpack of Estwald
+(Green)
 Creature - Werewolf
 4/6
 At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack of Estwald.
@@ -83684,6 +83719,7 @@ Draw a card.
 ONS R
 
 Wheel of Fate
+(Red)
 Sorcery
 Suspend 4-{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 Each player discards his or her hand, then draws seven cards.
