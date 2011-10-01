@@ -28,6 +28,23 @@ Fixes/Features:
 
 - The AI will now also use abilities and spells during upkeep.
 - Cleared out the changes.txt file, is ready for new material.
+- Updated some SVars of cards with abilities restricted to the upkeep.
+- Initial check-in for Phasing. Note: Auras and Equipped Equipment Phasing Directly is currently unsupported (not "reattaching" itself when phasing in) and AI for AF_Phases isn't functional yet.
+- fixing name of Barbed-Back Wurm
+- Fixed Cloak of Invisibility.
+- Little improvement for the AI of AF Animate.
+- minor prompt fix in AF_Choose
+- Fixed Vigean Hydropon being able to attack and block.
+- The AI will now use the Graft ability of Llanowar Reborn and Vigean Hydropon.
+- Moved Moldgraf Monstrosity file.
+- fix typo in Knight of Valor
+- Replaced AllZone global "QuestChallenge" with its superclass "QuestEvent".
+- Little fix in moveCounterDoTriggerAI.
+- Added the properties "TopGraveyardCreature" and "TopGraveyard" to hasProperty.
+- Minor fix.
+- Converted Necratog to script.
+- Little fix in changeHiddenTriggerAI.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -38,6 +55,31 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added many cards, including:
 
 Moldgraf Monstrosity
+Breezekeeper
+Cloak of Invisibility
+Crystal Golem
+Dream Fighter
+Merfolk Raiders
+Mist Dragon
+Rainbow Efreet
+Sandbar Crocodile
+Teferi's Drake
+Teferi's Honor Guard
+Teferi's Isle
+Tolarian Drake
+Vanishing
+Vaporous Djinn
+Vodalian Illusionist
+Barbed-Back Wurm
+Shimmer
+Rakalite
+Bamboozle
+Burning Sands
+Shallow Grave
+Corpse Dance
+Abu Ja'far
+Alms
+Zombie Scavengers
 
 
 end
