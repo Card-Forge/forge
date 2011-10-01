@@ -1987,7 +1987,9 @@ public class AbilityFactory_Counters {
         
         Counters cType = Counters.valueOf(params.get("CounterType"));
         ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         if (srcCards.size() > 0 && cType.equals(Counters.P1P1) //move +1/+1 counters away from permanents that cannot use them
+                && destCards.size() > 0 && destCards.get(0).getController().isComputer()
                 && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
             chance = true;
         }
