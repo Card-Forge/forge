@@ -1,0 +1,16 @@
+Name:Chaos Harlequin
+ManaCost:2 R R
+Types:Creature Human
+Text:no text
+PT:2/4
+A:AB$ Dig | Cost$ R | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBLand | SpellDescription$ Exile the top card of your library. If that card is a land card, Chaos Harlequin gets -4/-0 until end of turn. Otherwise, Chaos Harlequin gets +2/+0 until end of turn.
+SVar:DBLand:DB$ Pump | Defined$ Self | NumAtt$ -4 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GT0 | ConditionDescription$ If that card is a land card, | SubAbility$ DBNonLand
+SVar:DBNonLand:DB$ Pump | Defined$ Self | NumAtt$ +2 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ0 | ConditionDescription$ Otherwise, | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+# Note: This card is functioal, but it's Stack Description is horrendous.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_harlequin.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/102.jpg
+Oracle:{R}: Exile the top card of your library. If that card is a land card, Chaos Harlequin gets -4/-0 until end of turn. Otherwise, Chaos Harlequin gets +2/+0 until end of turn.
+End

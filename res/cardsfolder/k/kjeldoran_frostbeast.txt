@@ -9,4 +9,6 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ T
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockingSource,Creature.blockedBySource
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_frostbeast.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/374.jpg
+Oracle:At end of combat, destroy all creatures blocking or blocked by Kjeldoran Frostbeast.
 End
