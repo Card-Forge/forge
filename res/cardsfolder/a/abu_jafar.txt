@@ -1,0 +1,10 @@
+Name:Abu Ja'far
+ManaCost:W
+Types:Creature Human
+Text:no text
+PT:0/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy all creatures blocking or blocked by it. They can't be regenerated.
+SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockingSource,Creature.blockedBySource | NoRegen$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abu_jafar.jpg
+End
