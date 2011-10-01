@@ -1616,19 +1616,7 @@ public final class AbilityFactory_ChangeZone {
      * @return a {@link forge.CardList} object.
      */
     private static CardList knownDetermineDefined(final SpellAbility sa, final String defined, final Zone origin) {
-        // TODO this function should return a ArrayList<Card> and then be handled by the callees
-        CardList grave = sa.getActivatingPlayer().getCardsIn(origin);
         CardList ret = new CardList();
-
-        if (defined != null && defined.equals("Top")) {
-            // the "top" of the graveyard, is the last to be added to the graveyard list?
-            if (grave.size() == 0) {
-                return null;
-            }
-            ret.add(grave.get(grave.size() - 1));
-
-            return ret;
-        }
 
         ret.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).toArray());
         return ret;
