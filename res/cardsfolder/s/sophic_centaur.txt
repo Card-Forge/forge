@@ -1,0 +1,13 @@
+Name:Sophic Centaur
+ManaCost:3 G
+Types:Creature Centaur Spellshaper
+Text:no text
+PT:1/1
+A:AB$ GainLife | Cost$ 2 G G T Discard<1/Card> | LifeAmount$ X | SpellDescription$ You gain 2 life for each card in your hand.
+SVar:X:Count$CardsInYourHand/Times.2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sophic_centaur.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/139.jpg
+Oracle:{2}{G}{G}, {T}, Discard a card: You gain 2 life for each card in your hand.
+End
