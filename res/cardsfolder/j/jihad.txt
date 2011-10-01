@@ -1,0 +1,13 @@
+Name:Jihad
+ManaCost:W W W
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color and an opponent.
+SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 2 | AddToughness$ 1 | IsPresent$ Permanent.nontoken+ChosenColor+YouDontCtrl | Description$ White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nontoken+ChosenColor+YouDontCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When the chosen player controls no nontoken permanents of the chosen color, sacrifice CARDNAME. 
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jihad.jpg
+End
