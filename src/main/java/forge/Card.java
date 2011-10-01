@@ -5051,6 +5051,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         	CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
         	if (!list.getDirectlyAbove(source, this))
         		return false;
+        }else if (Property.startsWith("TopGraveyardCreature")){
+            CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            list = list.getType("Creature");
+            list.reverse();
+            if (list.isEmpty() || !this.equals(list.get(0)))
+                return false;
+        }else if (Property.startsWith("TopGraveyard")){
+            CardList list = this.getOwner().getCardsIn(Zone.Graveyard);
+            list.reverse();
+            if (list.isEmpty() || !this.equals(list.get(0)))
+                return false;
         } else if (Property.startsWith("Cloned")) {
             if (cloneOrigin == null || !cloneOrigin.equals(source)) return false;
         } else if (Property.startsWith("DamagedBy")) {
