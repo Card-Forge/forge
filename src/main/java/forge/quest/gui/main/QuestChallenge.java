@@ -29,6 +29,11 @@ public class QuestChallenge extends QuestEvent {
     public CardList aiExtraCards       = new CardList();
     public List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
 
+    public QuestChallenge() {
+        super();
+        eventType = "challenge";
+    }
+    
     /**
      * <p>getAILife.</p>
      *

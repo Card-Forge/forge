@@ -30,6 +30,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -654,7 +655,7 @@ public class GameAction {
             AllZone.getDisplay().savePrefs();
             frame.setEnabled(false);
             //frame.dispose();
-            Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestChallenge());
+            Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestEvent());
             //gwl.setAlwaysOnTop(true);
             gwl.toFront();
             canShowWinLose = false;
@@ -1092,15 +1093,15 @@ public class GameAction {
      * @param computer a {@link forge.CardList} object.
      */
     public final void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
-            final CardList computer, final int humanLife, final int computerLife, final QuestChallenge qc)
+            final CardList computer, final int humanLife, final int computerLife, final QuestEvent qe)
     {
         this.newGame(humanDeck, computerDeck);
 
         AllZone.getComputerPlayer().setLife(computerLife, null);
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
-        if (qc != null) {
-            computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestChallenge()));
+        if (qe != null && ((QuestChallenge)qe).getEventType().equals("challenge")) {
+            computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestEvent()));
         }
 
         for (Card c : human) {

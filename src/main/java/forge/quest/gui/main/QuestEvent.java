@@ -15,7 +15,8 @@ public class QuestEvent {
     public String  description         = "";
     public String  difficulty          = "Medium";
     public String  icon                = "Unknown.jpg";
-    public String  name                 = "Noname";
+    public String  name                = "Noname";
+    public String  eventType           = null;
     
     /**
      * <p>getTitle.</p>
@@ -51,6 +52,15 @@ public class QuestEvent {
      */
     public final Deck getEventDeck() {
         return eventDeck; 
+    }
+    
+    /**
+     * <p>getEventDeck.</p>
+     * 
+     * @return {@link forge.deck.Deck}
+     */
+    public final String getEventType() {
+        return eventType; 
     }
     
     /**

@@ -17,7 +17,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
-import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
 
@@ -42,11 +41,6 @@ public final class AllZone implements NewConstants {
 
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
-
-    /** Global <code>QuestChallenge</code>. */
-    private static QuestChallenge questChallenge = null;
-    // QuestChallenge extends QuestEvent. This global will be deprecated shortly,
-    // and the QuestEvent global used instead. doublestrike 28-09-11
     
     /** Global <code>QuestChallenge</code>. */
     private static QuestEvent questEvent = null;
@@ -140,27 +134,6 @@ public final class AllZone implements NewConstants {
      */
     public static void setQuestData(final QuestData questData0) {
         questData = questData0;
-    }
-
-    /**
-     * <p>getQuestChallenge.</p>
-     *
-     * @return a {@link forge.quest.gui.main.QuestChallenge} object.
-     * @since 1.0.15
-     */
-    // QuestChallenge extends QuestEvent. This global will be deprecated shortly,
-    // and the QuestEvent global used instead. doublestrike 28-09-11
-    public static QuestChallenge getQuestChallenge() {
-        return questChallenge;
-    }
-
-    /**
-     * <p>setQuestChallenge.</p>
-     *
-     * @param {@link forge.quest.gui.main.QuestChallenge} object. 
-     */
-    public static void setQuestChallenge(final QuestChallenge q) {
-        questChallenge = q;
     }
     
     /**

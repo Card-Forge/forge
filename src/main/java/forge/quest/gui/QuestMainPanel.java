@@ -722,9 +722,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.ComputerDeck[0] = computer;
 
         AllZone.setQuestEvent(selectedChallenge);
-        
-        // will be deprecated in favor of setQuestEvent, see note in AllZone. doublestrike 28-09-11 
-        AllZone.setQuestChallenge(selectedChallenge);  
 
         int extraLife = 0;
 

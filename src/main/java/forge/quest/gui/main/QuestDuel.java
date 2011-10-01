@@ -7,6 +7,9 @@ package forge.quest.gui.main;
  */
 public class QuestDuel extends QuestEvent {    
     
-    // [QuestDuel has no unique properties yet.]
+    public QuestDuel() {
+        super();
+        eventType = "duel";
+    }
     
 }

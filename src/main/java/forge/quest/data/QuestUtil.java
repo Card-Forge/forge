@@ -7,6 +7,7 @@ import forge.card.CardRarity;
 import forge.card.BoosterUtils;
 import forge.item.CardPrinted;
 import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEvent;
 
 import java.util.List;
 
@@ -30,17 +31,17 @@ public class QuestUtil {
 
     /**
      * <p>getComputerStartingCards.</p>
-     * Returns extra AI cards in play at start of quest.
+     * Returns extra AI cards in play at start of event.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
-     * @param qc a QuestChallenge object.
+     * @param qe a {@link forge.quest.gui.main.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getComputerStartingCards(final QuestData qd, QuestChallenge qc) {
+    public static CardList getComputerStartingCards(final QuestData qd, QuestEvent qe) {
         CardList list = new CardList();
         
-        if (qc != null) {
-            list.addAll(qc.getAIExtraCards());
+        if (qe.getEventType().equals("challenge")) {
+            list.addAll(((QuestChallenge)qe).getAIExtraCards());
         }
         return list;
     }
@@ -72,14 +73,14 @@ public class QuestUtil {
      * and cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
-     * @param qc a QuestChallenge object.
+     * @param qe a {@link forge.quest.gui.main.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanStartingCards(final QuestData qd, QuestChallenge qc) {
+    public static CardList getHumanStartingCards(final QuestData qd, QuestEvent qe) {
         CardList list = getHumanStartingCards(qd);
         
-        if (qc != null) {
-            list.addAll(qc.getHumanExtraCards());
+        if (qe.getEventType().equals("challenge")) {
+            list.addAll(((QuestChallenge)qe).getHumanExtraCards());
         }
 
         return list;

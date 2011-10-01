@@ -17,6 +17,7 @@ import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
 import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEvent;
 import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 import net.miginfocom.swing.MigLayout;
@@ -66,7 +67,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     private class WinLoseModel {
         public QuestMatchState match;
         public QuestData quest;
-        public QuestChallenge qc;
+        public QuestEvent event;
     }
 
     private WinLoseModel model;
@@ -78,11 +79,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param quest a QuestData object
      * @param chall a QuestChallenge object
      */
-    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final QuestChallenge chall) {
+    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final QuestEvent event) {
         model = new WinLoseModel();
         model.match = matchState;
         model.quest = quest;
-        model.qc = chall;
+        model.event = event;
 
         try {
             jbInit();
@@ -188,25 +189,28 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     void prepareForNextRound() {
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
-            if (model.qc != null) {
+            
+            System.out.println("Gui_WinLose: "+model.event.getEventType()); // ghandi
+            
+            if (model.event.getEventType().equals("challenge")) {
                 if (model.quest.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }
             }
             //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
             //humanList, computerList, humanLife, computerLife);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.qc);
+            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.quest, model.event);
             CardList computerList = new CardList();
 
 
             int humanLife = model.quest.getLife() + extraLife;
             int computerLife = 20;
-            if (model.qc != null) {
-                computerLife = model.qc.getAILife();
+            if (model.event.getEventType().equals("challenge")) {
+                computerLife = ((QuestChallenge)model.event).getAILife();
             }
 
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
-                    humanList, computerList, humanLife, computerLife, model.qc);
+                    humanList, computerList, humanLife, computerLife, model.event);
         } else {
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
@@ -377,7 +381,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             giveQuestRewards(wonMatch);
 
             model.match.reset();
-            AllZone.setQuestChallenge(null);
+            AllZone.setQuestEvent(null);
 
             model.quest.saveData();
 
@@ -455,16 +459,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
 
         // Rewards from QuestAssignment
-        if (wonMatch && model.qc != null) {
+        if (wonMatch && model.event.getEventType().equals("challenge")) {            
             // Set repeatability
-            if(!model.qc.getRepeatable()) {
-                model.quest.addCompletedChallenge(model.qc.getId());
+            if(!((QuestChallenge)model.event).getRepeatable()) {
+                model.quest.addCompletedChallenge(((QuestChallenge)model.event).getId());
             }
             
             model.quest.addChallengesPlayed();
 
-            List<CardPrinted> challengeRewardCards = model.qc.getCardRewardList();
-            long questRewardCredits = model.qc.getCreditsReward();
+            List<CardPrinted> challengeRewardCards = ((QuestChallenge)model.event).getCardRewardList();
+            long questRewardCredits = ((QuestChallenge)model.event).getCreditsReward();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Challenge Completed - \r\n");
@@ -485,7 +489,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
             String fileName = "BoxIcon.png";
             ImageIcon icon = getIcon(fileName);
-            String title = "Challenge Rewards for " + model.qc.getTitle();
+            String title = "Challenge Rewards for " + ((QuestChallenge)model.event).getTitle();
             JOptionPane.showMessageDialog(null, sb.toString(), title, JOptionPane.INFORMATION_MESSAGE, icon);
         }
         /*
