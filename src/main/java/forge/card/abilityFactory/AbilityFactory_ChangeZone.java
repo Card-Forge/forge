@@ -413,7 +413,7 @@ public final class AbilityFactory_ChangeZone {
 
         HashMap<String, String> params = af.getMapParams();
         //String destination = params.get("Destination");
-        Constant.Zone origin = Constant.Zone.smartValueOf(params.get("Origin"));
+        List<Zone> origin = Zone.listValueOf(params.get("Origin"));
 
         // this works for hidden because the mana is paid first.
         String type = params.get("ChangeType");
