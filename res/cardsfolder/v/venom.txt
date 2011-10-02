@@ -1,0 +1,19 @@
+Name:Venom
+ManaCost:1 G G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ Blocks | ValidCard$ Card.AttachedBy | ValidBlocked$ Creature.nonWall | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
+T:Mode$ Blocks | ValidCard$ Creature.nonWall | ValidBlocked$ Card.AttachedBy | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
+SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
+SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
+SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/venom.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/198.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/53.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/164.jpg
+Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
+End
