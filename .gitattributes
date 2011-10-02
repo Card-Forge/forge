@@ -1429,6 +1429,7 @@ res/cardsfolder/c/coiled_tinviper.txt svneol=native#text/plain
 res/cardsfolder/c/coiling_oracle.txt svneol=native#text/plain
 res/cardsfolder/c/coiling_woodworm.txt svneol=native#text/plain
 res/cardsfolder/c/cold_eyed_selkie.txt svneol=native#text/plain
+res/cardsfolder/c/coldsteel_heart.txt -text
 res/cardsfolder/c/colfenors_urn.txt -text
 res/cardsfolder/c/collective_restraint.txt svneol=native#text/plain
 res/cardsfolder/c/collective_unconscious.txt svneol=native#text/plain
@@ -6074,6 +6075,7 @@ res/cardsfolder/q/quilled_slagwurm.txt svneol=native#text/plain
 res/cardsfolder/q/quilled_sliver.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_druid.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_dryad.txt svneol=native#text/plain
+res/cardsfolder/q/quirion_elves.txt -text
 res/cardsfolder/q/quirion_explorer.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_ranger.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
