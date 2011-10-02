@@ -1,0 +1,15 @@
+Name:Blademane Baku
+ManaCost:1 R
+Types:Creature Spirit
+Text:no text
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
+A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | Defined$ Self | NumAtt$ +Y | SpellDescription$ For each counter removed, CARDNAME gets +2/+0 until end of turn.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:Y:Number$2/Times.ChosenX
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blademane_baku.jpg
+End
