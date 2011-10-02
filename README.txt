@@ -1,3 +1,10 @@
+Picture location info:
+
+The quest opponent icons jpg picture files go into your /res/pics/icons folder. The quest pet icons jpg picture files go into your /res/pics/icons folder. The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
+
+Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
+
+
 Memory Issues:
 
 In the past, some people noticed java heap space errors and lengthy pauses. The memory requirements for Forge have increased over time. The default setting on your computer for the java heap space may not be enough to prevent the above problems.
