@@ -1,0 +1,55 @@
+[quest]
+id=24
+AILife=20
+Repeat=true
+Wins=38
+Card Reward=4 random rares
+Credit Reward=400
+HumanExtras=
+AIExtras=Sanguine Bond|Sun Droplet|Sun Droplet|Privileged Position|Privileged Position
+[metadata]
+Name=quest24
+Title=The Backlash Machine
+Difficulty=hard
+Description=Be sure not to strike incautiously
+Icon=
+Deck Type=constructed
+[main]
+4 Arid Mesa
+4 Plateau
+4 Clifftop Retreat
+4 Battlefield Forge
+3 Plains
+3 Mountain
+1 Mox Pearl
+1 Mox Ruby
+2 Sun Droplet
+2 Angelheart Vial
+1 Blood Hound
+1 Darien, King of Kjeldor
+2 Searing Meditation
+4 Ajani's Pridemate
+1 Serra Avatar
+1 Cradle of Vitality
+1 Open the Vaults
+1 Copper Tablet
+1 Devastate
+1 Flame Rift
+1 Magma Giant
+1 Magma Phoenix
+1 Rain of Embers
+1 Steam Blast
+1 Sulfurous Blast
+1 Volcanic Fallout
+1 Volcanic Spray
+1 Aftershock
+1 Brothers of Fire
+2 Char
+1 Fireslinger
+1 Goblin Artillery
+1 Jackal Pup
+1 Lava Hounds
+1 Orcish Artillery
+1 Orcish Cannonade
+1 Orcish Cannoneers
+[sideboard]
