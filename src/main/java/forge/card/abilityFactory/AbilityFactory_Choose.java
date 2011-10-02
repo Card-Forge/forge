@@ -793,7 +793,6 @@ public class AbilityFactory_Choose {
                 if (sa.getActivatingPlayer().isHuman()) {
                     int chosen;
                     if (random) {
-                        //TODO - display the random number that was chosen
                         Random randomGen = new Random();
                         chosen = randomGen.nextInt(max - min) + min;
                         String message = "Randomly chosen number: " + chosen;
