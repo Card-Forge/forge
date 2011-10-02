@@ -1,0 +1,15 @@
+Name:Silhana Starfletcher
+ManaCost:2 G
+Types:Creature Elf Druid Archer
+Text:no text
+PT:1/3
+K:Reach
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_starfletcher.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/95.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nAs Silhana Starfletcher enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color to your mana pool.
+End
