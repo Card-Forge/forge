@@ -94,8 +94,6 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Ceta_Sanctuary();
         upkeep_Tangle_Wire();
 
-
-        upkeep_Shapeshifter();
         upkeep_Vesuvan_Doppelganger_Keyword();
 
         //Kinship cards
@@ -2306,44 +2304,9 @@ public class Upkeep implements java.io.Serializable {
 
             if (damage > 0) {
                 AllZone.getStack().addSimultaneousStackEntry(ability);
-
             }
         } // for
     } // upkeep_Power_Surge()
-
-    /**
-     * <p>upkeep_Shapeshifter.</p>
-     */
-    private static void upkeep_Shapeshifter() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-        CardList list = player.getCardsIn(Zone.Battlefield, "Shapeshifter");
-        list = list.filter(CardListFilter.nonToken);
-
-        for (final Card c : list) {
-            SpellAbility ability = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    int num = 0;
-                    if (player.isHuman()) {
-                        String[] choices = new String[7];
-                        for (int j = 0; j < 7; j++) {
-                            choices[j] = "" + j;
-                        }
-                        String answer = (String) (GuiUtils.getChoiceOptional(c.getName() + " - Choose a number", choices));
-                        num = Integer.parseInt(answer);
-                    } else {
-                        num = 3;
-                    }
-                    c.setBaseAttack(num);
-                    c.setBaseDefense(7 - num);
-                }
-            };
-            ability.setStackDescription(c.getName() + " - choose a new number");
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } //foreach(Card)
-    } //upkeep_Shapeshifter
 
     /**
      * <p>upkeep_Vesuvan_Doppelganger_Keyword.</p>

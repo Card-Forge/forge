@@ -2020,35 +2020,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Shapeshifter")) {
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 5447692676152380940L;
-
-                public void execute() {
-                    if (!card.isToken()) {  //ugly hack to get around tokens created by Crib Swap
-                        int num = 0;
-                        if (card.getController().isHuman()) {
-                            String[] choices = new String[7];
-                            for (int j = 0; j < 7; j++) {
-                                choices[j] = "" + j;
-                            }
-                            String answer = (String) (GuiUtils.getChoiceOptional(
-                                    card.getName() + " - Choose a number", choices));
-                            num = Integer.parseInt(answer);
-                        } else {
-                            num = 3;
-                        }
-                        card.setBaseAttack(num);
-                        card.setBaseDefense(7 - num);
-                    }
-                }
-            };
-
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Metalworker")) {
             final Cost abCost = new Cost("T", card.getName(), true);
 

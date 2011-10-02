@@ -3125,6 +3125,10 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardManaCost")) {
             return doXMath(CardUtil.getConvertedManaCost(c), m, c);
         }
+        // Count$ChosenNumber
+        if (sq[0].contains("ChosenNumber")) {
+            return doXMath(c.getChosenNumber(), m, c);
+        }
         // Count$CardCounters.<counterType>
         if (sq[0].contains("CardCounters")) {
             return doXMath(c.getCounters(Counters.getType(sq[1])), m, c);
