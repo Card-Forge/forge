@@ -8,4 +8,6 @@ A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +X | SpellDescription$ CARDNAME
 SVar:X:Count$InYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sokenzan_spellblade.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/115.jpg
+Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{R}: Sokenzan Spellblade gets +X/+0 until end of turn, where X is the number of cards in your hand.
 End

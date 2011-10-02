@@ -1,0 +1,17 @@
+Name:Cold Snap
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+K:Cumulative upkeep:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamageYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands he or she controls.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands he or she controls.
+SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X
+SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ Y
+SVar:X:Count$Valid Land.Snow+YouCtrl
+SVar:Y:Count$Valid Land.Snow+YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_snap.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/241.jpg
+Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each player's upkeep, Cold Snap deals damage to that player equal to the number of snow lands he or she controls.
+End
