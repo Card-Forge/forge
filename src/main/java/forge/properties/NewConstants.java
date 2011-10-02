@@ -461,6 +461,20 @@ public interface NewConstants {
             }
         }
 
+        public static interface WinLoseFrame {
+            public static interface WINLOSETEXT {
+                String WON = "%s/WinLose/won";
+                String LOST = "%s/WinLose/lost";
+                String WIN = "%s/WinLose/win";
+                String LOSE = "%s/WinLose/lose";
+                String CONTINUE = "%s/WinLose/continue";
+                String RESTART = "%s/WinLose/restart";
+                String QUIT = "%s/WinLose/quit";
+            }
+        }
+        // end
+        
+        // Doublestrike 02-10-11 - this is soon to be deprecated.
         public static interface Gui_WinLose {
             public static interface WINLOSE_TEXT {
                 String WON = "%s/WinLose/won";

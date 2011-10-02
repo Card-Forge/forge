@@ -29,8 +29,10 @@ import forge.gui.input.Input_PayManaCost_Ability;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
+import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.swing.WinLoseFrame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -655,12 +657,26 @@ public class GameAction {
             AllZone.getDisplay().savePrefs();
             frame.setEnabled(false);
             //frame.dispose();
-            Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestEvent());
+            
+            //Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestChallenge());
+            
+            // New WinLoseFrame below.  Old Gui_WinLose above. 
+            // Old code should still work if any problems with new. Doublestrike 02-10-11
+            WinLoseFrame gwl;            
+            
+            if(AllZone.getQuestData() != null) {
+                gwl = new WinLoseFrame(new QuestWinLoseHandler());
+            }
+            else {
+                gwl = new WinLoseFrame(); 
+            }
+            
             //gwl.setAlwaysOnTop(true);
             gwl.toFront();
             canShowWinLose = false;
             return;
         }
+
 
         //do this twice, sometimes creatures/permanents will survive when they shouldn't
         for (int q = 0; q < 9; q++) {

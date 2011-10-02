@@ -10240,6 +10240,8 @@ src/main/java/forge/quest/gui/QuestAbstractPanel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/QuestFrame.java svneol=native#text/plain
 src/main/java/forge/quest/gui/QuestMainPanel.java -text
 src/main/java/forge/quest/gui/QuestOptions.java svneol=native#text/plain
+src/main/java/forge/quest/gui/QuestWinLoseCardViewer.java -text
+src/main/java/forge/quest/gui/QuestWinLoseHandler.java -text
 src/main/java/forge/quest/gui/bazaar/QuestBazaarItem.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/QuestBazaarPanel.java svneol=native#text/plain
 src/main/java/forge/quest/gui/bazaar/QuestBazaarStall.java svneol=native#text/plain
@@ -10263,6 +10265,8 @@ src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
 src/main/java/forge/view/swing/SplashFrame.java -text
 src/main/java/forge/view/swing/SplashProgressComponent.java -text
 src/main/java/forge/view/swing/SplashProgressModel.java -text
+src/main/java/forge/view/swing/WinLoseFrame.java -text
+src/main/java/forge/view/swing/WinLoseModeHandler.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain

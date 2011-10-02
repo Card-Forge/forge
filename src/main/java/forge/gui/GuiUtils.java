@@ -113,17 +113,47 @@ public final class GuiUtils {
     /**
      * <p>getIconFromFile.</p>
      *
-     * @param iconName a {@link java.lang.String} object.
+     * @param filename a {@link java.lang.String} object.
      * @return a {@link javax.swing.ImageIcon} object.
      */
-    public static ImageIcon getIconFromFile(final String iconName) {
+    public static ImageIcon getIconFromFile(final String filename) {
         File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        File file = new File(base, iconName);
-        if (iconName.equals("") || !file.exists()) {
+        File file = new File(base, filename);
+        if (filename.equals("") || !file.exists()) {
             return null;
         } else {
             return new ImageIcon(file.toString());
         }
+    }
+    
+    /**
+     * <p>getResizedIcon.</p>
+     *
+     * @param {@link java.lang.String} filename.
+     * @param {@link java.lang.Double} scale
+     * @return {@link javax.swing.ImageIcon} object
+     */
+    public static ImageIcon getResizedIcon(final String filename, double scale) {
+        ImageIcon icon = getIconFromFile(filename);
+        
+        int w = (int) (icon.getIconWidth()*scale);
+        int h = (int) (icon.getIconHeight()*scale);
+        
+        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
+    }
+    
+    /**
+     * <p>getResizedIcon.</p>
+     *
+     * @param {@link javax.swing.ImageIcon} object
+     * @param {@link java.lang.Double} scale
+     * @return {@link javax.swing.ImageIcon} object
+     */
+    public static ImageIcon getResizedIcon(final ImageIcon icon, double scale) {
+        int w = (int) (icon.getIconWidth()*scale);
+        int h = (int) (icon.getIconHeight()*scale);
+        
+        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
 
     /**
