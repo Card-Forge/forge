@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZone | Cost$ 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card.nonBasic | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSearch | SpellDescription$ Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
-SVar:DBSearch:DB$ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBSearch:DB$ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True| Defined$ Targeted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lobotomy.jpg
