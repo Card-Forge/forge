@@ -237,9 +237,13 @@ public class AbilityFactory_Mana {
     private static String generatedMana(Ability_Mana abMana, AbilityFactory af, SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
         HashMap<String, String> params = af.getMapParams();
+        Card card = sa.getSourceCard();
         int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa) : 1;
 
         String baseMana = abMana.mana();
+        if (baseMana.equals("Chosen")){
+            baseMana = Input_PayManaCostUtil.getShortColorString(card.getChosenColor());
+        }
 
         if (params.containsKey("Bonus")) {
             // For mana abilities that get a bonus

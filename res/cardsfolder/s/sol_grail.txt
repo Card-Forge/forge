@@ -1,0 +1,13 @@
+Name:Sol Grail
+ManaCost:3
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_grail.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/173.jpg
+Oracle:As Sol Grail enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color to your mana pool.
+End
