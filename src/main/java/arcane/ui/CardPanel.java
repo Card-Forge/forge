@@ -282,6 +282,9 @@ public class CardPanel extends JPanel implements CardContainer {
 
         if (canDrawOverCard && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard()))
             ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
+        
+        if (canDrawOverCard && getCard().isPhasedOut())
+            ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
 
         if (canDrawOverCard && getCard() != null) {
             if (this.gameCard.getFoil() > 0) {
