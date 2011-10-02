@@ -335,7 +335,7 @@ public final class AbilityFactory_ChangeZone {
             }
             pDefined = tgt.getTargetPlayers();
         } else {
-            pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("DefinedPlayer"), sa);
         }
 
         String type = params.get("ChangeType");
@@ -586,7 +586,7 @@ public final class AbilityFactory_ChangeZone {
 
         ArrayList<Player> fetchers;
 
-        fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("DefinedPlayer"), sa);
         
         //handle case when Defined is for a Card
         if (fetchers.isEmpty()) {

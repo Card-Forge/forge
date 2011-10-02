@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SubAbility$ SVar=DBChange | SpellDescription$ Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
-SVar:DBChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | OptionalDecider$ You | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | Defined$ TargetedController
+SVar:DBChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | OptionalDecider$ You | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ TargetedController
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/25.jpg
