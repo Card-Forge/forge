@@ -24,6 +24,7 @@ import forge.card.spellability.Target;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -581,6 +582,234 @@ public class AbilityFactory_Choose {
                     card.setChosenColor(Constant.Color.Black);
                     String message = "Computer chooses " + Constant.Color.Black;
                     JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        }
+    }
+    
+    // *************************************************************************
+    // ************************* ChooseNumber **********************************
+    // *************************************************************************
+
+    /**
+     * <p>createAbilityChooseNumber.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createAbilityChooseNumber(final AbilityFactory af) {
+
+        final SpellAbility abChooseNumber = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -8268155210011368749L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseNumberStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return chooseNumberCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseNumberResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return chooseNumberTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abChooseNumber;
+    }
+
+    /**
+     * <p>createSpellChooseNumber.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createSpellChooseNumber(final AbilityFactory af) {
+        final SpellAbility spChooseNumber = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 6397887501014311392L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseNumberStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return chooseNumberCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseNumberResolve(af, this);
+            }
+
+        };
+        return spChooseNumber;
+    }
+
+    /**
+     * <p>createDrawbackChooseNumber.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createDrawbackChooseNumber(final AbilityFactory af) {
+        final SpellAbility dbChooseNumber = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -1339609900364066904L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseNumberStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseNumberResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return chooseNumberTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbChooseNumber;
+    }
+
+    /**
+     * <p>chooseNumberStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String chooseNumberStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        }
+        else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+        }
+
+        for (Player p : tgtPlayers) {
+            sb.append(p).append(" ");
+        }
+        sb.append("chooses a number.");
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>chooseNumberCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean chooseNumberCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        return chooseNumberTriggerAI(af, sa, false);
+    }
+
+    /**
+     * <p>chooseNumberTriggerAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean chooseNumberTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        return false;
+    }
+
+    /**
+     * <p>chooseNumberResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void chooseNumberResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card card = af.getHostCard();
+        int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
+        int max = Integer.parseInt(params.get("Max"));
+        boolean random = params.containsKey("Random");
+        
+        String[] choices = new String[max + 1];
+        if (!random) {
+            //initialize the array
+            for (int i = min; i <= max; i++) {
+                choices[i] = "" + i;
+            }
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canTarget(sa)) {
+                if (sa.getActivatingPlayer().isHuman()) {
+                    int chosen;
+                    if (random) {
+                        //TODO - display the random number that was chosen
+                        Random randomGen = new Random();
+                        chosen = randomGen.nextInt(max - min) + min;
+                        String message = "Randomly chosen number: " + chosen;
+                        JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        Object o = GuiUtils.getChoice("Choose a number", choices);
+                        if (null == o) {
+                            return;
+                        }
+                        chosen = Integer.parseInt((String) o);
+                    }
+                    card.setChosenNumber(chosen);
+                    
+                } else {
+                    //TODO - not implemented
                 }
             }
         }

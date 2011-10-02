@@ -165,6 +165,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String chosenType = "";
     private String chosenColor = "";
     private String namedCard = "";
+    private int chosenNumber;
 
     private Card cloneOrigin = null;
     private ArrayList<Card> clones = new ArrayList<Card>();
@@ -1354,6 +1355,24 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getCMC() {
         return CardUtil.getConvertedManaCost(manaCost);
+    }
+    
+    /**
+     * <p>Getter for the field <code>chosenNumber</code>.</p>
+     *
+     * @return an int
+     */
+    public final int getChosenNumber() {
+        return chosenNumber;
+    }
+
+    /**
+     * <p>Setter for the field <code>chosenNumber</code>.</p>
+     *
+     * @param s an int
+     */
+    public final void setChosenNumber(final int i) {
+        chosenNumber = i;
     }
 
     //used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
