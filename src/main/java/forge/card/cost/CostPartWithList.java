@@ -9,7 +9,12 @@ public abstract class CostPartWithList extends CostPart {
     public CardList getList() { return list; }
     public void setList(CardList setList) { list = setList; }
     public void resetList() { list = new CardList(); }
-    public void addToList(Card c) { list.add(c); }
+    public void addToList(Card c) { 
+        if (list == null){ 
+               resetList(); 
+        }
+        list.add(c); 
+    }
     
     public void addListToHash(SpellAbility sa, String hash){
         for(Card card : list){

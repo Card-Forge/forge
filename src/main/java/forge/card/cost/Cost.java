@@ -136,10 +136,13 @@ public class Cost {
        
         while (parse.contains(addStr)) {
             // AddCounter<NumCounters/CounterType>
-            String[] splitStr = abCostParse(parse, addStr, 2);
+            String[] splitStr = abCostParse(parse, addStr, 4);
             parse = abUpdateParse(parse, addStr);
 
-            costParts.add(new CostPutCounter(splitStr[0], Counters.valueOf(splitStr[1])));
+            String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
+            String description = splitStr.length > 3 ? splitStr[3] : null;
+            
+            costParts.add(new CostPutCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
         }
 
         // While no card has "PayLife<2> PayLife<3> there might be a card that Changes Cost by adding a Life Payment

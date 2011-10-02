@@ -146,7 +146,7 @@ public class CostReturn extends CostPartWithList {
                     msg.append("s");
                 }
     
-                typeList = sa.getSourceCard().getController().getCardsIn(Zone.Battlefield);
+                typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
