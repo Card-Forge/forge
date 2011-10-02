@@ -45,6 +45,28 @@ Fixes/Features:
 - Converted Necratog to script.
 - Little fix in changeHiddenTriggerAI.
 - Added the recent commit logs to changes.txt.
+- Convert Soldevi Digger to TopGraveyard property
+- Fixed Spirit Cairn.
+- Updating mtgdata
+- Fix for crash in GameAction when QuestEvent is not a QuestChallenge
+- add ChosenColor as a property in Card.java
+- Fixed Standstill.
+- Fixed a bug in AbilityFactory.resolve.
+- Fixed ETB Counter description of two cards.
+- AF_Token now supports:
+1. ChosenColor for TokenColors$
+2. ChosenType for TokenName$
+3. ChosenType for TokenTypes$
+- Add Support for ChosenColor in AF_Mana
+- add AF_ChooseNumber with Min, Max and Random params accepted. Max is required.
+- convert Shapeshifter to script
+- Added quest challenge 24.
+- removing a TODO in AF_ChooseNumber
+- Fixed destroyLegendaryCreatures().
+- AF ChangeZone Hidden used the parameter "Defined" for two different things (cards and players). Renamed one to "DefindPlayer".
+- Fixed Lobotomy to not affect your own cards.
+- UI improvements, round 1: WinLose UI streamlined.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -80,6 +102,23 @@ Corpse Dance
 Abu Ja'far
 Alms
 Zombie Scavengers
+Confessor
+Kjeldoran Frostbeast
+Jihad
+Chaos Harlequin
+Lat-Nam's Legacy
+Phyrexian Devourer
+Krovikan Plague
+Eater of the Dead
+Sophic Centaur
+Tidewalker
+Riptide Replicator
+Hunting Kavu
+Sol Grail
+Coldsteel Heart
+Quirion Elves
+Silhana Starfletcher
+Venom
 
 
 end
