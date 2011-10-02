@@ -5,7 +5,7 @@ Text:no text
 PT:0/3
 A:AB$ PreventDamage | Cost$ W PayLife<1> | ValidTgts$ Creature | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature this turn.
 A:AB$ PreventDamage | Cost$ U | ValidTgts$ Cleric,Wizard | TgtPrompt$ Select target Cleric or Wizard | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target Cleric or Wizard this turn.
-A:AB$ PreventDamage | Cost$ B AddCounter<1/M1M1/Creature.YouCtrl/Creature you control> | ValidTgts$ Player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target player this turn.
+A:AB$ PreventDamage | Cost$ B AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | ValidTgts$ Player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target player this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_mage.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/198.jpg
