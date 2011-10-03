@@ -28,6 +28,7 @@ import forge.item.CardPrinted;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestUtil;
 import forge.quest.gui.QuestWinLoseCardViewer;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestChallenge;
@@ -71,30 +72,30 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
      */
     @Override
     public void startNextRound() {
-        
-        if(model.qEvent.getEventType().equals("challenge")) {
+        if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
             
-            if (model.qData.getInventory().hasItem("Zeppelin")) {
-                extraLife += 3;
+            if (model.qEvent.getEventType().equals("challenge")) {
+                if (model.qData.getInventory().hasItem("Zeppelin")) {
+                    extraLife = 3;
+                }
             }
-            
-            // Found this commented out - is it still necessary? Doublestrike 01-10-11
-            //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
-            //humanList, computerList, humanLife, computerLife);
-            
-            CardList humanList = forge.quest.data.QuestUtil.getHumanStartingCards(model.qData,model.qEvent);
-            CardList computerList = forge.quest.data.QuestUtil.getComputerStartingCards(model.qData,model.qEvent);
+
+            CardList humanList = QuestUtil.getHumanStartingCards(model.qData, model.qEvent);
+            CardList computerList = new CardList();
+
+
             int humanLife = model.qData.getLife() + extraLife;
             int computerLife = 20;
-            
-            computerLife = ((QuestChallenge)model.qEvent).getAILife();
-   
+            if (model.qEvent.getEventType().equals("challenge")) {
+                computerLife = ((QuestChallenge)model.qEvent).getAILife();
+            }
+
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0],
                     humanList, computerList, humanLife, computerLife, model.qEvent);
+        } else {        
+            super.startNextRound();
         }
-        
-        super.startNextRound();
     }
     
     /**
