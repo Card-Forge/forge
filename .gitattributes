@@ -9336,6 +9336,10 @@ res/images/symbols-13/X.png -text svneol=unset#image/png
 res/images/symbols-13/Y.png -text svneol=unset#image/png
 res/images/symbols-13/Z.png -text svneol=unset#image/png
 res/images/symbols-13/attack.png -text svneol=unset#image/png
+res/images/symbols-13/counters1.png -text
+res/images/symbols-13/counters2.png -text
+res/images/symbols-13/counters3.png -text
+res/images/symbols-13/countersMulti.png -text
 res/images/symbols-13/defend.png -text svneol=unset#image/png
 res/images/symbols-13/foil01.png -text svneol=unset#image/png
 res/images/symbols-13/foil02.png -text svneol=unset#image/png

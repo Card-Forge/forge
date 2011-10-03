@@ -13,6 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>CardPanel class.</p>
@@ -268,25 +269,40 @@ public class CardPanel extends JPanel implements CardContainer {
         super.paintChildren(g);
         
         boolean canDrawOverCard = showCastingCost && !isAnimationPanel && cardWidth < 200;
-        if (canDrawOverCard) {
-            int width = ManaSymbols.getWidth(gameCard.getManaCost());
-            ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
-        }
+        
+        if (!canDrawOverCard)
+            return;
+        
+        int width = ManaSymbols.getWidth(gameCard.getManaCost());
+        ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
 
         //int yOff = (cardHeight/4) + 2;
-        if (canDrawOverCard && getCard().isAttacking()) {
+        if (getCard().isAttacking()) {
             ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
-        } else if (canDrawOverCard && getCard().isBlocking()) {
+        } else if (getCard().isBlocking()) {
             ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
         }
 
-        if (canDrawOverCard && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard()))
+        if (getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard()))
             ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
         
-        if (canDrawOverCard && getCard().isPhasedOut())
+        if (getCard().isPhasedOut())
             ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
-
-        if (canDrawOverCard && getCard() != null) {
+        
+        Map<Counters,Integer> counters = getCard().getCounters();
+        if (counters != null && !counters.isEmpty()) {
+            if(counters.containsValue(1)) {
+                ManaSymbols.drawSymbol("counters1", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            } else if(counters.containsValue(2)) {
+                ManaSymbols.drawSymbol("counters2", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            } else if(counters.containsValue(3)) {
+                ManaSymbols.drawSymbol("counters3", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            } else {
+                ManaSymbols.drawSymbol("countersMulti", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            }
+        }
+            
+        if (getCard() != null) {
             if (this.gameCard.getFoil() > 0) {
             	String fl = String.format("foil%02d", getCard().getFoil());
             	int z = Math.round(cardWidth * BLACK_BORDER_SIZE);
@@ -305,7 +321,7 @@ public class CardPanel extends JPanel implements CardContainer {
                         for (int i = 0; i < 2; i++) {
                             for (int j = 0; j < 6; j++) {
                                 if (!mList[n].equals("")) {
-                                    int width = ManaSymbols.getWidth(mList[n]);
+                                    width = ManaSymbols.getWidth(mList[n]);
                                     ManaSymbols.draw(g, mList[n], cardXOffset + ((i + 1) * (cardWidth / 3)) - width / 2, cardYOffset + ((j + 1) * (cardHeight / 7)));
                                 }
 
