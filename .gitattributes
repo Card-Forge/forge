@@ -1825,6 +1825,7 @@ res/cardsfolder/d/death_spark.txt svneol=native#text/plain
 res/cardsfolder/d/death_speakers.txt svneol=native#text/plain
 res/cardsfolder/d/death_stroke.txt svneol=native#text/plain
 res/cardsfolder/d/death_ward.txt svneol=native#text/plain
+res/cardsfolder/d/death_watch.txt -text
 res/cardsfolder/d/deathbringer_liege.txt svneol=native#text/plain
 res/cardsfolder/d/deathbringer_thoctar.txt svneol=native#text/plain
 res/cardsfolder/d/deathcurse_ogre.txt -text
