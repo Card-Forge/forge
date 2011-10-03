@@ -1338,6 +1338,8 @@ public class AbilityFactory {
                 return 0;
             }
         }
+        if(amount.equals("ChosenX")) //this is for the case that the choice isn't made yet
+            return 0;
 
         return Integer.parseInt(amount) * multiplier;
     }
