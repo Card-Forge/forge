@@ -77,6 +77,8 @@ Fixes/Features:
 - make sure all buttons on WinLoseFrame fit on Mac OS X
 - Made the max card size customizable (via menu -> Specify Max Card Size).
 - Added the recent commit logs to changes.txt.
+- WinLose bug fix: Quest win penalizes 15 credits and doesn't add win credits - fixed.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
