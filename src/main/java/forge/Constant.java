@@ -33,7 +33,7 @@ public interface Constant {
         
         public static final boolean[] RndCFoil = new boolean[1];
 
-        public static final int[] width = new int[1];
+        public static final int[] width = {300};
         public static final int[] height = new int[1];
 
         public static final int[] stackSize = new int[1];

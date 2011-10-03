@@ -1521,11 +1521,11 @@ public class Gui_HomeScreen {
     }
     
     private void doCardSize() {
-        String[] keys = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
-        int[] widths = {36, 42, 63, 70, 93, 120};
+        String[] keys = {"Tiny", "Smaller", "Small", "Medium", "Large(default)", "Huge"};
+        int[] widths = {52, 80, 120, 200, 300, 400};
         int[] heights = {50, 59, 88, 98, 130, 168};
         
-        ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new card size", 0, 1, keys);
+        ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new max card size", 0, 1, keys);
         if (ch.show()) {
             try {
                 int index = ch.getSelectedIndex();

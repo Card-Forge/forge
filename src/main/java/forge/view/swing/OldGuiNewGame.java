@@ -134,7 +134,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         AllZone.setQuestData(null);
 
         if (Constant.Runtime.width[0] == 0) {
-            Constant.Runtime.width[0] = 70;
+            Constant.Runtime.width[0] = 300;
         }
 
         if (Constant.Runtime.height[0] == 0) {
@@ -1151,7 +1151,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         private static final long serialVersionUID = -2900235618450319571L;
         private static String[] keys = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
-        private static int[] widths = {36, 42, 63, 70, 93, 120};
+        private static int[] widths = {52, 80, 120, 200, 300, 400};
         private static int[] heights = {50, 59, 88, 98, 130, 168};
 
         /**
@@ -1165,7 +1165,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *
          */
         public final void actionPerformed(final ActionEvent e) {
-            ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new card size", 0, 1, keys);
+            ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new max card size", 0, 1, keys);
             if (ch.show()) {
                 try {
                     int index = ch.getSelectedIndex();

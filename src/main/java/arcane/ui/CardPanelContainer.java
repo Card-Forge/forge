@@ -3,6 +3,7 @@ package arcane.ui;
 import arcane.ui.util.CardPanelMouseListener;
 import arcane.ui.util.UI;
 import forge.Card;
+import forge.Constant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,7 @@ abstract public class CardPanelContainer extends JPanel {
 
     public List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     protected JScrollPane scrollPane;
-    protected int cardWidthMin = 50, cardWidthMax = 300;
+    protected int cardWidthMin = 50, cardWidthMax = Constant.Runtime.width[0];
     protected CardPanel mouseOverPanel, mouseDownPanel, mouseDragPanel;
 
     private List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
