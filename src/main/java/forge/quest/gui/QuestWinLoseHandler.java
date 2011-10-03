@@ -110,7 +110,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
             view.btnQuit.setText("Surrender (15 Credits)");
             return false;
         }
-
+        
         // Win case
         if(wonMatch) {
             // Standard event reward credits
@@ -159,10 +159,10 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
     @Override
     public void actionOnQuit() {
         // Record win/loss in quest data
-        if (model.qMatchState.isMatchWonBy(AllZone.getHumanPlayer().getName())) {
+        if (wonMatch) {
             model.qData.addWin();
         } else {
-            model.qData.addLost();
+            model.qData.addLost(); 
             model.qData.subtractCredits(15);
         }
 
@@ -333,6 +333,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
 
         sb.append(String.format("%s <b>%d credits</b> in total.</h3>", congrats, credTotal));
         sb.append("</body></html>");
+        model.qData.addCredits(credTotal);
         
         // Generate Swing components and attach.
         icoTemp = GuiUtils.getResizedIcon("GoldIcon.png",0.5);
