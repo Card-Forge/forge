@@ -1014,6 +1014,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean hasCounters() {
         return counters.size() > 0;
     }
+    
+    public final int getNumberOfCounters() {
+        int number = 0;
+        for(Integer i : counters.values()) {
+            number += i.intValue();
+        }
+        return number;
+    }
 
     /**
      * <p>setCounter.</p>

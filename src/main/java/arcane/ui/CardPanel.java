@@ -289,17 +289,16 @@ public class CardPanel extends JPanel implements CardContainer {
         if (getCard().isPhasedOut())
             ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
         
-        Map<Counters,Integer> counters = getCard().getCounters();
-        if (counters != null && !counters.isEmpty()) {
-            if(counters.containsValue(1)) {
-                ManaSymbols.drawSymbol("counters1", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-            } else if(counters.containsValue(2)) {
-                ManaSymbols.drawSymbol("counters2", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-            } else if(counters.containsValue(3)) {
-                ManaSymbols.drawSymbol("counters3", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-            } else {
-                ManaSymbols.drawSymbol("countersMulti", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-            }
+        int counters = getCard().getNumberOfCounters();
+
+        if(counters == 1) {
+            ManaSymbols.drawSymbol("counters1", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters == 2) {
+            ManaSymbols.drawSymbol("counters2", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters == 3) {
+            ManaSymbols.drawSymbol("counters3", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters > 3) {
+            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
         }
             
         if (getCard() != null) {
