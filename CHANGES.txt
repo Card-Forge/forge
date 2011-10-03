@@ -67,6 +67,16 @@ Fixes/Features:
 - Fixed Lobotomy to not affect your own cards.
 - UI improvements, round 1: WinLose UI streamlined.
 - Added the recent commit logs to changes.txt.
+- Added the phasing symbol and replaced the other symbols with the new one by Marc.
+- Added support for Putting Counters on Cards you Control as a Cost
+- Corrected Scarscale Ritual.
+- fix hasProperty exception in Sun Droplet
+- Removed last beta's fluff piece from changes.txt.
+- Added a brief description of where to place the various pic files in the readme.txt file.
+- in sealed AI and Human receive different cardpools
+- make sure all buttons on WinLoseFrame fit on Mac OS X
+- Made the max card size customizable (via menu -> Specify Max Card Size).
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -119,6 +129,14 @@ Coldsteel Heart
 Quirion Elves
 Silhana Starfletcher
 Venom
+Sokenzan Spellblade
+Kiyomaro, First to Stand
+Oboro Envoy
+Ideas Unbound
+Blademane Baku
+Petalmane Baku
+Skullmane Baku
+Cold Snap
 
 
 end
