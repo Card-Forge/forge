@@ -1,12 +1,12 @@
 [quest]
 id=11
 AILife=30
-Repeat=false
+Repeat=true
 Wins=40
 Card Reward=3 random rares
-Credit Reward=150
-HumanExtras=Seal of Cleansing
-AIExtras=Loyal Retainers
+Credit Reward=450
+HumanExtras=
+AIExtras=Loyal Retainers|Leyline of Singularity
 [metadata]
 Name=quest11
 Title=The King's Contest
@@ -15,48 +15,64 @@ Description=The king is holding a contest. You are invited to participate and co
 Icon=The Kings Contest.jpg
 Deck Type=constructed
 [main]
-1 Isamaru, Hound of Konda
-4 Plateau
-1 Radiant, Archangel
-4 Taiga
-1 Zuo Ci, the Mocking Sage
+1 Plateau
+1 Taiga
+1 Savannah
+1 Arid Mesa
+1 Windswept Heath
+1 Wooded Foothills
+1 Jungle Shrine
+1 Rith's Grove
+1 Copperline Gorge
+1 Razorverge Thicket
+1 Sunpetal Grove
+1 Rootbound Crag
+1 Clifftop Retreat
+1 Ancient Amphitheater
+1 Elfhame Palace
+1 Eiganjo Castle
+1 Forbidden Orchard
+1 Rupture Spire
+1 Plains
+1 Forest
+1 Mountain
 1 Mox Emerald
-1 Rakka Mar
-1 Concordant Crossroads
-1 Meng Huo, Barbarian King
-1 Jeska, Warrior Adept
-2 Loyal Retainers
-1 Jacques le Vert
-1 Tolsimir Wolfblood
-1 Squee, Goblin Nabob
-1 Kaysa
-1 Earthcraft
 1 Mox Pearl
-1 Mikokoro, Center of the Sea
-1 Eladamri, Lord of Leaves
-1 Eladamri's Call
-1 Mirri, Cat Warrior
-1 Exploration
-4 Savannah
-1 Gaddock Teeg
-1 Honden of Cleansing Fire
-1 Pianna, Nomad Captain
-1 Azusa, Lost but Seeking
-3 Plains
-1 Captain Sisay
-1 Okina, Temple to the Grandfathers
-1 Honden of Infinite Rage
-1 Reki, the History of Kamigawa
-1 Goblin Assault
-1 Umezawa's Jitte
-3 Forest
-1 Fecundity
 1 Mox Ruby
-1 Tuktuk the Explorer
-1 Zuberi, Golden Feather
-1 Fastbond
-1 Honden of Life's Web
-1 Kongming, "Sleeping Dragon"
-3 Mountain
-1 Tuknir Deathlock
+1 Asmira, Holy Avenger
+1 Ayumi, the Last Visitor
+1 Azusa, Lost but Seeking
+1 Borborygmos
+1 Captain Sisay
+1 Champion's Helm
+1 Cho-Manno, Revolutionary
+1 Commander Eesha
+1 Day of Destiny
+1 Gaddock Teeg
+1 Hazezon Tamar
+1 Isamaru, Hound of Konda
+1 Isao, Enlightened Bushi
+1 Jacques le Vert
+1 Jasmine Boreal
+1 Jerrard of the Closed Fist
+1 Kaysa
+1 Lady Caleria
+1 Livonya Silone
+1 Lord Magnus
+1 Marhault Elsdragon
+1 Meng Huo, Barbarian King
+1 Mirri, Cat Warrior
+1 Radha, Heir to Keld
+1 Reki, the History of Kamigawa
+1 Rith, the Awakener
+1 Sir Shandlar of Eberyn
+1 Stangg
+1 Stonebrow, Krosan Hero
+1 Sword of the Chosen
+1 Tenza, Godo's Maul
+1 Thrun, the Last Troll
+1 Tolsimir Wolfblood
+1 Torsten Von Ursus
+1 Uril, the Miststalker
+1 Willow Satyr
 [sideboard]
