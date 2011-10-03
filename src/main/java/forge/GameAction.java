@@ -634,14 +634,22 @@ public class GameAction {
         return isGameDone;
     }
 
-
     /**
      * <p>checkStateEffects.</p>
      */
     public final void checkStateEffects() {
+        checkStateEffects(false);
+    }
 
-        // sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution
-        if (AllZone.getStack().getResolving()) {
+    /**
+     * <p>checkStateEffects.</p>
+     * 
+     *  @param force a boolean. States wether or not state effect checking should be forced, even if a spell is in the middle of resolving.
+     */
+    public final void checkStateEffects(boolean force) {
+
+        // sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution (except when persist-returning
+        if (AllZone.getStack().getResolving() && !force) {
             return;
         }
 
@@ -1031,6 +1039,7 @@ public class GameAction {
                     if (AllZone.getZoneOf(persistCard).is(Constant.Zone.Graveyard)) {
                         PlayerZone ownerPlay = persistCard.getOwner().getZone(Constant.Zone.Battlefield);
                         Card card = moveTo(ownerPlay, persistCard);
+                        AllZone.getGameAction().checkStateEffects(true);
                         card.addCounter(Counters.M1M1, 1);
                     }
                 }
