@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Enchantment
 Text:no text
 K:Cumulative upkeep:G
-A:AB$ Destroy | Cost$ 2 G PayLife<X> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ Velocity | ActivationLimit$ 1 | SpellDescription$ Destroy target permanent and put a velocity counter on CARDNAME. Activate this ability only once each turn.
+A:AB$ Destroy | Cost$ 2 G PayLife<X> | CostDesc$ 2 G, Pay 3 life for each velocity counter on Tornado: | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ Velocity | ActivationLimit$ 1 | SpellDescription$ Destroy target permanent and put a velocity counter on CARDNAME. Activate this ability only once each turn.
 SVar:Velocity:DB$ PutCounter | Defined$ Self | CounterType$ VELOCITY | CounterNum$ 1
 SVar:X:Count$CardCounters.VELOCITY/Times.3
 SVar:RemAIDeck:True
