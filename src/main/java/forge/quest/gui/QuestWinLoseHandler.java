@@ -23,6 +23,7 @@ import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
 import forge.item.CardPrinted;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
@@ -395,9 +396,10 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
      *
      */
     private void awardBooster() {
-        List<GameFormat> sets = SetUtils.getFormats();
-        int rand = (int)(Math.floor(Math.random()*(sets.size())));
-        GameFormat selected = sets.get(rand);
+        ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, SetUtils.getFormats());
+        ch.show();
+        GameFormat selected = ch.getSelectedValue();
+        
         List<CardPrinted> cardsWon = model.qData.getCards().addCards(selected.getFilterPrinted());
         
         // Generate Swing components and attach.        
