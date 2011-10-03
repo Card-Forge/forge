@@ -1138,7 +1138,9 @@ public class Gui_HomeScreen {
             Constant.Runtime.HumanDeck[0] = deck;
             AIDeckSelected = "AI_" + sDeckName;
 
-            Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            //Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList()); // AI will use different cardpool
+           
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);

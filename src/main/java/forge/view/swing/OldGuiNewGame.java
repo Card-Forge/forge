@@ -1,6 +1,5 @@
 package forge.view.swing;
 
-import arcane.ui.util.ManaSymbols;
 import com.esotericsoftware.minlog.Log;
 import forge.*;
 import forge.deck.Deck;
@@ -359,7 +358,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             Constant.Runtime.HumanDeck[0] = deck;
             Constant.Runtime.gameType = GameType.Sealed;
 
-            Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            //Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList()); // AI will use different cardpool
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
