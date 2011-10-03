@@ -70,7 +70,8 @@ public class WinLoseFrame extends JFrame {
         contentPane.setLayout(new MigLayout("wrap, fill"));
         contentPane.setBackground(new Color(16,28,50));
         
-        int HEAD_HEIGHT = 100;
+        //This needs to be at least 150, or the quit button is off the pane on Mac OS X
+        int HEAD_HEIGHT = 150;
         int FOOT_HEIGHT = 150;
         int FRAME_WIDTH_SMALL = 300;
         int FRAME_WIDTH_BIG = 600;
