@@ -1,0 +1,12 @@
+Name:Creature Bond
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ When enchanted creature dies, CARDNAME deals damage equal to that creature's toughness to the creature's controller.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ Y
+SVar:Y:TriggeredCard$CardToughness
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/creature_bond.jpg
+End
