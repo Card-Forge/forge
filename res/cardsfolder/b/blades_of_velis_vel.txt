@@ -2,7 +2,7 @@ Name:Blades of Velis Vel
 ManaCost:1 R
 Types:Tribal Instant Shapeshifter
 Text:no text
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ Pump | Cost$ 1 R | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBAnimate | SpellDescription$ Up to two target creatures each get +2/+0 and gain all creature types until end of turn.
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Types$ AllCreatureTypes
 SVar:Rarity:Common

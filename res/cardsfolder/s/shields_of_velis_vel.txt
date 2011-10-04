@@ -2,7 +2,7 @@ Name:Shields of Velis Vel
 ManaCost:W
 Types:Tribal Instant Shapeshifter
 Text:no text
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ PumpAll | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +0 | NumDef$ +1 | SubAbility$ DBAnimate | SpellDescription$ Creatures target player controls get +0/+1 and gain all creature types until end of turn.
 SVar:DBAnimate:DB$ AnimateAll | Cost$ 0 | Defined$ Targeted | Types$ AllCreatureTypes
 SVar:Rarity:Common

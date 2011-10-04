@@ -2,7 +2,7 @@ Name:Wings of Velis Vel
 ManaCost:1 U
 Types:Tribal Instant Shapeshifter
 Text:no text
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 4 | Toughness$ 4 | Keywords$ Flying | Types$ AllCreatureTypes | SpellDescription$ Target creature becomes 4/4, gains all creature types, and gains flying until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

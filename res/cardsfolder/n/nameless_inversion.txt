@@ -4,7 +4,7 @@ Types:Tribal Instant Shapeshifter
 Text:no text
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SubAbility$ SVar=DBAnimate |SpellDescription$ Target creature gets +3/-3 and loses all creature types until end of turn.
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Types$ Creature | RemoveCreatureTypes$ True
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/128.jpg

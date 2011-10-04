@@ -2,7 +2,7 @@ Name:Crib Swap
 ManaCost:2 W
 Types:Tribal Instant Shapeshifter
 Text:no text
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | IsCurse$ True | SubAbility$ SVar=DBToken | SpellDescription$ Exile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.
 SVar:DBToken:DB$Token | TokenImage$ C 1 1 Shapeshifter | TokenColors$ Colorless | TokenAmount$ 1 | TokenName$ Changeling | TokenTypes$ Creature,Shapeshifter | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Changeling | TokenOwner$ TargetedController
 SVar:Rarity:Uncommon

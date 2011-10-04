@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Shapeshifter
 Text:no text
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 K:Lifelink
 K:Champion:Creature
 SVar:RemRandomDeck:True
