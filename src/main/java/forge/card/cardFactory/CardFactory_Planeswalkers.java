@@ -724,7 +724,7 @@ public class CardFactory_Planeswalkers {
                     });
 
                     if (list.size() > 0) {
-                        Object o = GuiUtils.getChoiceOptional("Select artifact", list);
+                        Object o = GuiUtils.getChoiceOptional("Select artifact", list.toArray());
                         if (o != null) {
                             Card c = (Card) o;
                             if (list.contains(c)) {
