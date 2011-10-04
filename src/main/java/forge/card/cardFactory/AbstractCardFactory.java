@@ -1137,7 +1137,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Curse of Wizardry")) {
+        /*else if (cardName.equals("Curse of Wizardry")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -1181,7 +1181,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             ability.setStackDescription(sb.toString());
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } //*************** END ************ END **************************
+        }*/ //*************** END ************ END **************************
 
 
         //*************** START *********** START **************************

@@ -52,7 +52,7 @@ public final class GameActionUtil {
         //playCard_Storm(sa);
 
         playCard_Vengevine(c);
-        playCard_Curse_of_Wizardry(c);
+        //playCard_Curse_of_Wizardry(c);
         playCard_Venser_Emblem(c);
         playCard_Ichneumon_Druid(c);
 
@@ -455,7 +455,7 @@ public final class GameActionUtil {
      *
      * @param c a {@link forge.Card} object.
      */
-    public static void playCard_Curse_of_Wizardry(final Card c) {
+    /*public static void playCard_Curse_of_Wizardry(final Card c) {
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Curse of Wizardry");
 
         if (list.size() > 0) {
@@ -481,7 +481,7 @@ public final class GameActionUtil {
                 }
             } //if
         } //if
-    } //Curse of Wizardry
+    }*/ //Curse of Wizardry
 
     /**
      * <p>payManaDuringAbilityResolve.</p>

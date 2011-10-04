@@ -1,7 +1,11 @@
 Name:Curse of Wizardry
 ManaCost:2 B B
 Types:Enchantment
-Text:As Curse of Wizardry enters the battlefield, choose a color.\r\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True| TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentInHumanDeck 
+T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell of the chosen color, that player loses 1 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/104.jpg

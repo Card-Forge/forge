@@ -578,10 +578,19 @@ public class AbilityFactory_Choose {
                     String choice = (String) o;
                     card.setChosenColor(choice);
                 } else {
-                    //TODO - needs improvement
-                    card.setChosenColor(Constant.Color.Black);
-                    String message = "Computer chooses " + Constant.Color.Black;
-                    JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
+                    String chosen = "";
+                    if (params.containsKey("AILogic")) {
+                        String logic = params.get("AILogic");
+                        if (logic.equals("MostProminentInHumanDeck")) {
+                            chosen = CardFactoryUtil.getMostProminentColor(
+                                    AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()));
+                        }
+                    }
+                    if (chosen.equals("")) {
+                        chosen = Constant.Color.Green;
+                    }
+                    GuiUtils.getChoice("Computer picked: ", chosen);
+                    card.setChosenColor(chosen);
                 }
             }
         }
