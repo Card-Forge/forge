@@ -1,0 +1,16 @@
+Name:Chromatic Armor
+ManaCost:1 W U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W U | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You
+K:etbCounter:SLEIGHT:1
+S:Mode$ PreventDamage | Target$ Creature.EnchantedBy | Source$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to enchanted creature by a source of the last chosen color.
+A:AB$ PutCounter | Cost$ X | Defined$ Self | CounterType$ SLEIGHT | CounterNum$ 1 | SubAbility$ ChooseColor | SpellDescription$ Put a sleight counter on CARDNAME and choose a color. X is the number of sleight counters on CARDNAME.
+SVar:X:Count$CardCounters.SLEIGHT
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_armor.jpg
+End

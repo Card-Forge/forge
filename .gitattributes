@@ -1321,6 +1321,7 @@ res/cardsfolder/c/choking_fumes.txt svneol=native#text/plain
 res/cardsfolder/c/choking_sands.txt svneol=native#text/plain
 res/cardsfolder/c/choking_tethers.txt svneol=native#text/plain
 res/cardsfolder/c/chorus_of_woe.txt svneol=native#text/plain
+res/cardsfolder/c/chromatic_armor.txt -text
 res/cardsfolder/c/chromatic_sphere.txt svneol=native#text/plain
 res/cardsfolder/c/chromatic_star.txt svneol=native#text/plain
 res/cardsfolder/c/chrome_mox.txt svneol=native#text/plain
