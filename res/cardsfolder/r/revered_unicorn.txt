@@ -1,0 +1,12 @@
+Name:Revered Unicorn
+ManaCost:1 W
+Types:Creature Unicorn
+Text:no text
+PT:2/3
+K:Cumulative upkeep:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME leaves the battlefield, you gain life equal to the number of age counters on it.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredCard$CardCounters.AGE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revered_unicorn.jpg
+End
