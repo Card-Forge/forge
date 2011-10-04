@@ -4601,6 +4601,7 @@ res/cardsfolder/l/lotus_guardian.txt svneol=native#text/plain
 res/cardsfolder/l/lotus_petal.txt svneol=native#text/plain
 res/cardsfolder/l/lotus_vale.txt svneol=native#text/plain
 res/cardsfolder/l/lovisa_coldeyes.txt svneol=native#text/plain
+res/cardsfolder/l/lowland_basilisk.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lowland_giant.txt svneol=native#text/plain
 res/cardsfolder/l/lowland_oaf.txt -text
 res/cardsfolder/l/loxodon_anchorite.txt svneol=native#text/plain
