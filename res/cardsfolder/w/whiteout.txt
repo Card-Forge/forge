@@ -1,0 +1,10 @@
+Name:Whiteout
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ DebuffAll | Cost$ 1 G | ValidCards$ Creature | Keywords$ Flying | SpellDescription$ All creatures lose flying until end of turn.
+A:AB$ ChangeZone | Cost$ Sac<1/Land.Snow/snow land> | ActivationZone$ Graveyard | Defined$ Self | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whiteout.jpg
+End
