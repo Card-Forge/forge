@@ -1,0 +1,13 @@
+Name:Infinite Hourglass
+ManaCost:4
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a time counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature | AddPower$ +X | Description$ All creatures get +1/+0 for each time counter on CARDNAME.
+SVar:X:Count$CardCounters.TIME
+A:AB$ RemoveCounter | Cost$ 3 | CounterType$ TIME | CounterNum$ 1 | ActivationPhases$ Upkeep | AnyPlayer$ True | SpellDescription$ Remove a time counter from CARDNAME. Any player may activate this ability but only during any upkeep step.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_hourglass.jpg
+End
