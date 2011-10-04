@@ -1,0 +1,13 @@
+Name:Song of Blood
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ Mill | Cost$ 1 R | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Put the top four cards of your library into your graveyard. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.
+SVar:DBEffect:DB$ Effect | Cost$ 0 | Name$ Song of Blood Effect | Triggers$ TrigAttacks | SVars$ Pump,X | RememberCard$ Remembered
+SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ Pump | TriggerDescription$ Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way. 
+SVar:Pump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +X
+SVar:X:Remembered$Valid Creature
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_blood.jpg
+End
