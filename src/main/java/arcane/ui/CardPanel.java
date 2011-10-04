@@ -274,6 +274,18 @@ public class CardPanel extends JPanel implements CardContainer {
         
         int width = ManaSymbols.getWidth(gameCard.getManaCost());
         ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
+        
+        int counters = getCard().getNumberOfCounters();
+
+        if(counters == 1) {
+            ManaSymbols.drawSymbol("counters1", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters == 2) {
+            ManaSymbols.drawSymbol("counters2", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters == 3) {
+            ManaSymbols.drawSymbol("counters3", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        } else if(counters > 3) {
+            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+        }
 
         //int yOff = (cardHeight/4) + 2;
         if (getCard().isAttacking()) {
@@ -287,18 +299,6 @@ public class CardPanel extends JPanel implements CardContainer {
         
         if (getCard().isPhasedOut())
             ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight / 8) - 16);
-        
-        int counters = getCard().getNumberOfCounters();
-
-        if(counters == 1) {
-            ManaSymbols.drawSymbol("counters1", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-        } else if(counters == 2) {
-            ManaSymbols.drawSymbol("counters2", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-        } else if(counters == 3) {
-            ManaSymbols.drawSymbol("counters3", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-        } else if(counters > 3) {
-            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset + cardWidth - 65, cardYOffset + cardHeight - (cardHeight / 3) - 40);
-        }
             
         if (getCard() != null) {
             if (this.gameCard.getFoil() > 0) {
