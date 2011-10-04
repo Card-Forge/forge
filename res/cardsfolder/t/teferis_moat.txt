@@ -1,0 +1,13 @@
+Name:Teferi's Moat
+ManaCost:3 W U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True| TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentHumanCreatures
+S:Mode$ Continuous | Affected$ Creature.withoutFlying+ChosenColor | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures of the chosen color without flying can't attack you.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_moat.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/279.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/103.jpg
+Oracle:As Teferi's Moat enters the battlefield, choose a color.\nCreatures of the chosen color without flying can't attack you.
+End

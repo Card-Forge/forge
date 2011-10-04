@@ -4,6 +4,7 @@ package forge.card.abilityFactory;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardList;
 import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -587,6 +588,12 @@ public class AbilityFactory_Choose {
                         }
                         if (logic.equals("MostProminentInGame")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
+                        }
+                        if (logic.equals("MostProminentHumanCreatures")) {
+                            CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                            if(list.isEmpty())
+                                list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()).getType("Creature");
+                            chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                     }
                     if (chosen.equals("")) {
