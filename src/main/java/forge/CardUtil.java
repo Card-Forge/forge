@@ -159,11 +159,11 @@ public final class CardUtil {
      */
     public static String getShortColor(final String longColor) {
         Map<String, String> map = new HashMap<String, String>();
-        map.put(Constant.Color.Black, "B");
-        map.put(Constant.Color.Blue, "U");
-        map.put(Constant.Color.Green, "G");
-        map.put(Constant.Color.Red, "R");
-        map.put(Constant.Color.White, "W");
+        map.put(Constant.Color.Black.toString(), "B");
+        map.put(Constant.Color.Blue.toString(), "U");
+        map.put(Constant.Color.Green.toString(), "G");
+        map.put(Constant.Color.Red.toString(), "R");
+        map.put(Constant.Color.White.toString(), "W");
 
         Object o = map.get(longColor);
         if (o == null) {
