@@ -1,5 +1,7 @@
 package forge.view.swing;
 
+import arcane.ui.CardPanel;
+
 import com.esotericsoftware.minlog.Log;
 import forge.*;
 import forge.deck.Deck;
@@ -1152,7 +1154,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         private static final long serialVersionUID = -2900235618450319571L;
         private static String[] keys = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
         private static int[] widths = {52, 80, 120, 200, 300, 400};
-        private static int[] heights = {50, 59, 88, 98, 130, 168};
 
         /**
          *
@@ -1186,7 +1187,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         public static void set(final int index) {
             Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
             Constant.Runtime.width[0] = widths[index];
-            Constant.Runtime.height[0] = heights[index];
+            Constant.Runtime.height[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
         }
 
         /**
@@ -1203,7 +1204,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 index++;
             }
             Constant.Runtime.width[0] = widths[index];
-            Constant.Runtime.height[0] = heights[index];
+            Constant.Runtime.height[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
         }
     }
 
