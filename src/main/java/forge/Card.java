@@ -5797,10 +5797,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if ((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this))) {
                 return 0;
             }
-
-            if (getName().equals("Callous Giant") && restDamage <= 3) {
-                return 0;
-            }
         } //Creature end
 
         if (restDamage > 0) {

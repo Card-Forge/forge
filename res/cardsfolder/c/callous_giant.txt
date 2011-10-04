@@ -1,8 +1,9 @@
 Name:Callous Giant
 ManaCost:4 R R
 Types:Creature Giant
-Text:If a source would deal 3 or less damage to Callous Giant, prevent that damage.
+Text:
 PT:4/4
+S:Mode$ PreventDamage | Target$ Card.Self | MaxDamage$ 3 | Description$ If a source would deal 3 or less damage to Callous Giant, prevent that damage.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_giant.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/139.jpg

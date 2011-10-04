@@ -34,6 +34,10 @@ public class StaticAbility_PreventDamage {
             return restDamage;
         }
         
+        if(params.containsKey("MaxDamage") && Integer.parseInt(params.get("MaxDamage")) < damage) {
+            return restDamage;
+        }
+        
         // no amount means all
         if(!params.containsKey("Amount") || params.get("Amount").equals("All")) {
             return 0;
