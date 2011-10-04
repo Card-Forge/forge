@@ -11,7 +11,7 @@ S:Mode$ PreventDamage | Target$ Creature.EnchantedBy | Source$ Card.ChosenColor 
 A:AB$ PutCounter | Cost$ X | Defined$ Self | CounterType$ SLEIGHT | CounterNum$ 1 | SubAbility$ ChooseColor | SpellDescription$ Put a sleight counter on CARDNAME and choose a color. X is the number of sleight counters on CARDNAME.
 SVar:X:Count$CardCounters.SLEIGHT
 SVar:RemAIDeck:True
-SVar:Rarity:Common
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_armor.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/361.jpg
 Oracle:Enchant creature\nAs Chromatic Armor enters the battlefield, choose a color.\nChromatic Armor enters the battlefield with a sleight counter on it.\nPrevent all damage that would be dealt to enchanted creature by a source of the last chosen color.\n{X}: Put a sleight counter on Chromatic Armor and choose a color. X is the number of sleight counters on Chromatic Armor.

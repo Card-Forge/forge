@@ -1,0 +1,15 @@
+Name:Prismatic Ward
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck
+S:Mode$ PreventDamage | Target$ Creature.EnchantedBy | Source$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_ward.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/329.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/271.jpg
+Oracle:Enchant creature\nAs Prismatic Ward enters the battlefield, choose a color.\nPrevent all damage that would be dealt to enchanted creature by sources of the chosen color.
+End
