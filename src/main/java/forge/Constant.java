@@ -126,14 +126,6 @@ public interface Constant {
         String[] BasicLands = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
     }
 
-    public interface Rarity {
-        String Common = "Common";
-        String Uncommon = "Uncommon";
-        String Rare = "Rare";
-        String Mythic = "Mythic";
-        String Land = "Land";
-    }
-
     public interface Quest {
         boolean[] fantasyQuest = new boolean[1];
 
