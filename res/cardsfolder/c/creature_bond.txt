@@ -9,4 +9,10 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Nu
 SVar:Y:TriggeredCard$CardToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creature_bond.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/56.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/56.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/55.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/66.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/56.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, Creature Bond deals damage equal to that creature's toughness to the creature's controller.
 End

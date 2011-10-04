@@ -1,0 +1,13 @@
+Name:Jeweled Torque
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True| TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentInGame
+T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a spell of the chosen color, you may pay 2. If you do, you gain 2 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 2 | Defined$ You | LifeAmount$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_torque.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/301.jpg
+Oracle:As Jeweled Torque enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, you may pay {2}. If you do, you gain 2 life.
+End

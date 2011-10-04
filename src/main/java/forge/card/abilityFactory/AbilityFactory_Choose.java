@@ -585,6 +585,9 @@ public class AbilityFactory_Choose {
                             chosen = CardFactoryUtil.getMostProminentColor(
                                     AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()));
                         }
+                        if (logic.equals("MostProminentInGame")) {
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
+                        }
                     }
                     if (chosen.equals("")) {
                         chosen = Constant.Color.Green;
