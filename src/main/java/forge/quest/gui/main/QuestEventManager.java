@@ -46,7 +46,7 @@ public class QuestEventManager {
 
         DeckManager manager = new DeckManager(file);
         
-        File[] allFiles = ForgeProps.getFile(NewConstants.QUEST.DECKS).listFiles(DeckManager.DCKFileFilter);
+        File[] allFiles = ForgeProps.getFile(NewConstants.QUEST.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
         
         for(File f : allFiles) {
             contents = FileUtil.readFile(f);
