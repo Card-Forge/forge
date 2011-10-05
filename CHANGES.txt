@@ -98,6 +98,24 @@ Fixes/Features:
 - Added an AILogic parameter to AF ChoseColor.
 - Converted Curse of Wizardry to script.
 - Added the recent commit logs to changes.txt.
+- Rarity constants no longer needed
+- Fixed Aether Vial
+- Moved the representation of counters to the left and made attack/block/phasing icons appear on top.
+- Fixed Changeling not working in all zones.
+- Converted Callous Giant to script.
+- Converted two auras to StaticAbility PreventDamage.
+- Hopefully fixed the Plaxmanta issue on bugz.
+- Fix rarity
+- I had to add a NumBlockersMinus1 param to the AttackerBlocked trigger due to TriggerCount not working in a second level of xMath
+- a Card that bounces back and forth via a self-trigger of AF_GainControl doesn't need to say it's controlling itself 20 times...
+- Added SVar$ to calculateAmount.
+- Removed NumBlockersMinus1 triggeredobject from AttackerBlocked.
+- Removed debug output.
+- forgot some code for Ghazban Ogre. The LifeAmount param in Trigger restrictions now accepts any SVar, not just 'X'.
+- Fixed Teferi's Moat.
+- Fixed Daybreak Coronet.
+- Fixed the pic count of basic ISD lands.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -168,6 +186,21 @@ Whiteout
 Infinite Hourglass
 Jeweled Torque
 Prismatic Ward
+Teferi's Moat
+Safe Haven from The Dark
+Revered Unicorn
+Lowland Basilisk
+Grief Tyrant
+Goblin Snowman
+Dusk Urchins
+Johtull Wurm
+Elvish Healer
+Martyr's Cry
+Aven Liberator
+Unnatural Selection
+Ghazban Ogre
+Ethersworn Shieldmage
+Selective Memory
 
 
 end
