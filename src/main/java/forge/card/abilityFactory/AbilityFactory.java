@@ -1197,6 +1197,10 @@ public class AbilityFactory {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
 
+        if(card.getName().equals("Johtull Wurm"))
+        {
+            System.out.println("Heyo!");
+        }
         if (amount == null) {
             return 0;
         }
@@ -1221,6 +1225,11 @@ public class AbilityFactory {
             if (calcX[0].startsWith("Number")) {
                 return CardFactoryUtil.xCount(card, card.getSVar(amount)) * multiplier;
             }
+            else if (calcX[0].startsWith("SVar")) {
+                String[] l = calcX[1].split("/");
+                String[] m = CardFactoryUtil.parseMath(l);
+                return CardFactoryUtil.doXMath(calculateAmount(card,l[0],ability), m, card) * multiplier;
+            }
             else if (calcX[0].startsWith("Remembered")) {
                 // Add whole Remembered list to handlePaid
                 CardList list = new CardList();
@@ -1231,7 +1240,6 @@ public class AbilityFactory {
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-
             }
             else if (calcX[0].startsWith("Imprinted")) {
                 // Add whole Imprinted list to handlePaid
