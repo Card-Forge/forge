@@ -1197,10 +1197,6 @@ public class AbilityFactory {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
 
-        if(card.getName().equals("Johtull Wurm"))
-        {
-            System.out.println("Heyo!");
-        }
         if (amount == null) {
             return 0;
         }
