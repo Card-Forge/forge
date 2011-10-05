@@ -8319,6 +8319,7 @@ res/cardsfolder/t/transluminant.txt svneol=native#text/plain
 res/cardsfolder/t/transmutation.txt svneol=native#text/plain
 res/cardsfolder/t/transmute_artifact.txt -text
 res/cardsfolder/t/trap_digger.txt svneol=native#text/plain
+res/cardsfolder/t/trapfinders_trick.txt -text
 res/cardsfolder/t/trapjaw_kelpie.txt svneol=native#text/plain
 res/cardsfolder/t/trapmakers_snare.txt svneol=native#text/plain
 res/cardsfolder/t/traproot_kami.txt svneol=native#text/plain
