@@ -10347,6 +10347,7 @@ src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain
 src/main/java/tree/properties/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/types/FileType.java svneol=native#text/plain
 src/main/java/tree/properties/types/package-info.java svneol=native#text/plain
+src/main/resources/proxy-template.ftl -text
 src/site/apt/index.apt -text
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/BoosterDraft_1Test.java svneol=native#text/plain
