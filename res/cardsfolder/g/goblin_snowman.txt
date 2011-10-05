@@ -8,4 +8,7 @@ SVar:TrigPrevent:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Prevent all com
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.blockedBySource | TgtPrompt$ Select target creature Goblin Snowman is blocking | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature it's blocking.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_snowman.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/64.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/191.jpg
+Oracle:Whenever Goblin Snowman blocks, prevent all combat damage that would be dealt to and dealt by it this turn.\n{T}: Goblin Snowman deals 1 damage to target creature it's blocking.
 End

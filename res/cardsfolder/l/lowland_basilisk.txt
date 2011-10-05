@@ -8,4 +8,6 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigD
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_basilisk.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/59.jpg
+Oracle:Whenever Lowland Basilisk deals damage to a creature, destroy that creature at end of combat.
 End

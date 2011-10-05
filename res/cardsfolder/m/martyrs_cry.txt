@@ -11,4 +11,6 @@ SVar:X:Remembered$Amount
 SVar:Y:Remembered$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cry.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/85.jpg
+Oracle:Exile all white creatures. For each creature exiled this way, its controller draws a card.
 End
