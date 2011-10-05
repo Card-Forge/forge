@@ -1869,6 +1869,7 @@ public class CombatUtil {
         if (!a.getCreatureGotBlockedThisCombat()) {
             final int blockers = AllZone.getCombat().getBlockers(a).size();
             runParams.put("NumBlockers", blockers);
+            runParams.put("NumBlockersMinus1", blockers - 1);
             AllZone.getTriggerHandler().runTrigger("AttackerBlocked", runParams);
 
             //Bushido

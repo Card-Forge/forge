@@ -60,5 +60,6 @@ public class Trigger_AttackerBlocked extends Trigger {
         sa.setTriggeringObject("Attacker", runParams.get("Attacker"));
         sa.setTriggeringObject("Blocker", runParams.get("Blocker"));
         sa.setTriggeringObject("NumBlockers", runParams.get("NumBlockers"));
+        sa.setTriggeringObject("NumBlockersMinus1", runParams.get("NumBlockersMinus1"));
     }
 }
