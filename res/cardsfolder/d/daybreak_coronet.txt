@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:Enchant creature with another Aura attached to it
 K:Enchant creature
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature.enchanted | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike,Vigilance,Lifelink | Description$ Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike & Vigilance & Lifelink | Description$ Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
 T:Mode$ Always | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigRemove | Static$ True
 SVar:TrigRemove:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Graveyard | Defined$ Self
 SVar:X:Count$AllAurasEnchanting
