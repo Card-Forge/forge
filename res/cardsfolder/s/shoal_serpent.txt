@@ -1,0 +1,14 @@
+Name:Shoal Serpent
+ManaCost:5 U
+Types:Creature Serpent
+Text:no text
+PT:5/5
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDebuff | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.
+SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Defender
+SVar:BuffedBy:Land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shoal_serpent.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/65.jpg
+Oracle:Defender\nLandfall - Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.
+End
