@@ -335,6 +335,7 @@ public class AbilityFactory_GainControl {
      */
     private void gainControlResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
+        boolean self = params.containsKey("Defined") && params.get("Defined").equals("Self");
 
         Target tgt = af.getAbTgt();
         if (tgt != null) {
@@ -356,7 +357,9 @@ public class AbilityFactory_GainControl {
             final Player originalController = tgtC.getController();
 
             movedCards[j] = tgtC;
-            hostCard.addGainControlTarget(tgtC);
+            if (!self) {
+                hostCard.addGainControlTarget(tgtC);
+            }
 
             if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
 
