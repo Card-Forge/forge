@@ -1,0 +1,12 @@
+Name:Elvish Healer
+ManaCost:2 W
+Types:Creature Elf Cleric
+Text:no text
+PT:1/2
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ X | RememberTargets$ True | SubAbility$ DBCleanup | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn. If that creature is green, prevent the next 2 damage instead.
+SVar:X:Remembered$Valid Creature.Green/Plus.1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_healer.jpg
+End
