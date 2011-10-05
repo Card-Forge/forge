@@ -908,30 +908,7 @@ public class CardFactory_Creatures {
                     CardList allTokens = AllZoneUtil.getCreaturesInPlay(card.getController());
                     allTokens = allTokens.filter(CardListFilter.token);
 
-                    int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
-
-                    for (int i = 0; i < allTokens.size(); i++) {
-                        Card c = allTokens.get(i);
-                        for (int j = 0; j < multiplier; j++)
-                            copyToken(c);
-                    }
-                }
-
-                public void copyToken(Card token) {
-                    Card copy = new Card();
-                    copy.setName(token.getName());
-                    copy.setImageName(token.getImageName());
-
-                    copy.setOwner(token.getController());
-                    copy.addController(token.getController());
-                    copy.setManaCost(token.getManaCost());
-                    copy.setColor(token.getColor());
-                    copy.setToken(true);
-                    copy.setType(token.getType());
-                    copy.setBaseAttack(token.getBaseAttack());
-                    copy.setBaseDefense(token.getBaseDefense());
-
-                    AllZone.getGameAction().moveToPlay(copy);
+                    CardFactoryUtil.copyTokens(allTokens);
                 }
 
                 @Override
