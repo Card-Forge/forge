@@ -327,10 +327,11 @@ public abstract class Trigger {
 
             int right = 1;
             String rightString = lifeCompare.substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-            } else {
-                right = Integer.parseInt(lifeCompare.substring(2));
+            try {
+                right = Integer.parseInt(rightString);
+            }
+            catch (NumberFormatException nfe) {
+                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(rightString));
             }
 
             if (!AllZoneUtil.compare(life, lifeCompare, right)) {
