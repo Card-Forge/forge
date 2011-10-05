@@ -1,0 +1,11 @@
+Name:Goblin Snowman
+ManaCost:3 R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigPrevent | TriggerDescription$ Whenever CARDNAME blocks, prevent all combat damage that would be dealt to and dealt by it this turn.
+SVar:TrigPrevent:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.blockedBySource | TgtPrompt$ Select target creature Goblin Snowman is blocking | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature it's blocking.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_snowman.jpg
+End
