@@ -1,0 +1,13 @@
+Name:Venomous Fangs
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever enchanted creature deals damage to a creature, destroy the other creature.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_fangs.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/280.jpg
+Oracle:Enchant creature\nWhenever enchanted creature deals damage to a creature, destroy the other creature.
+End
