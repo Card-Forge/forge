@@ -1,0 +1,14 @@
+Name:Aven Liberator
+ManaCost:2 W W
+Types:Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+K:Morph:3 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigProtect | TriggerDescription$ When CARDNAME is turned face up, target creature you control gains protection from the color of your choice until end of turn.
+SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_liberator.jpg
+End
