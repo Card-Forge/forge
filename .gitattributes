@@ -3382,6 +3382,7 @@ res/cardsfolder/g/greenhilt_trainee.txt svneol=native#text/plain
 res/cardsfolder/g/greenseeker.txt svneol=native#text/plain
 res/cardsfolder/g/greenweaver_druid.txt svneol=native#text/plain
 res/cardsfolder/g/gremlin_mine.txt svneol=native#text/plain
+res/cardsfolder/g/grief_tyrant.txt -text svneol=unset#text/plain
 res/cardsfolder/g/griffin_canyon.txt svneol=native#text/plain
 res/cardsfolder/g/griffin_guide.txt svneol=native#text/plain
 res/cardsfolder/g/griffin_rider.txt svneol=native#text/plain
