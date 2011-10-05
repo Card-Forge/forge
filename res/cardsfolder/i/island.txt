@@ -13,7 +13,7 @@ SetInfo:3ED|Land|http://magiccards.info/scans/en/rv/287.jpg|3
 SetInfo:SOM|Land|http://magiccards.info/scans/en/som/234.jpg|4
 SetInfo:COM|Land|http://magiccards.info/scans/en/cmd/303.jpg|4
 SetInfo:TSP|Land|http://magiccards.info/scans/en/ts/286.jpg|4
-SetInfo:ISD|Land|http://magiccards.info/scans/en/isd/253.jpg|4
+SetInfo:ISD|Land|http://magiccards.info/scans/en/isd/253.jpg|3
 SetInfo:ODY|Land|http://magiccards.info/scans/en/od/335.jpg|4
 SetInfo:MIR|Land|http://magiccards.info/scans/en/mr/297.jpg|4
 SetInfo:PTK|Land|http://magiccards.info/scans/en/p3k/169.jpg|3
