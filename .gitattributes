@@ -4716,6 +4716,7 @@ res/cardsfolder/m/magus_of_the_vineyard.txt svneol=native#text/plain
 res/cardsfolder/m/mahamoti_djinn.txt svneol=native#text/plain
 res/cardsfolder/m/major_teroh.txt svneol=native#text/plain
 res/cardsfolder/m/make_a_wish.txt -text
+res/cardsfolder/m/makeshift_mauler.txt -text
 res/cardsfolder/m/makindi_griffin.txt svneol=native#text/plain
 res/cardsfolder/m/makindi_shieldmate.txt svneol=native#text/plain
 res/cardsfolder/m/malach_of_the_dawn.txt svneol=native#text/plain
@@ -7116,6 +7117,7 @@ res/cardsfolder/s/sisays_ring.txt svneol=native#text/plain
 res/cardsfolder/s/sisters_of_the_flame.txt svneol=native#text/plain
 res/cardsfolder/s/sivitri_scarzam.txt svneol=native#text/plain
 res/cardsfolder/s/sizzle.txt svneol=native#text/plain
+res/cardsfolder/s/skaab_goliath.txt -text
 res/cardsfolder/s/skarrg_the_rage_pits.txt svneol=native#text/plain
 res/cardsfolder/s/skarrgan_pit_skulk.txt svneol=native#text/plain
 res/cardsfolder/s/skarrgan_skybreaker.txt svneol=native#text/plain
@@ -7656,6 +7658,7 @@ res/cardsfolder/s/stir_the_grave.txt svneol=native#text/plain
 res/cardsfolder/s/stirring_wildwood.txt svneol=native#text/plain
 res/cardsfolder/s/stitch_in_time.txt svneol=native#text/plain
 res/cardsfolder/s/stitch_together.txt svneol=native#text/plain
+res/cardsfolder/s/stitched_drake.txt -text
 res/cardsfolder/s/stitchers_apprentice.txt -text
 res/cardsfolder/s/stoic_angel.txt svneol=native#text/plain
 res/cardsfolder/s/stoic_champion.txt svneol=native#text/plain

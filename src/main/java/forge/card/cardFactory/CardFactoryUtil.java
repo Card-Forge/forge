@@ -4717,6 +4717,16 @@ public class CardFactoryUtil {
                 card.addComesIntoPlayCommand(vanishing(card, power));
             }
         } // Vanishing
+        
+        // AddCost
+        if (!card.getSVar("FullCost").equals("")) {
+            SpellAbility[] abilities = card.getSpellAbility();
+            if (abilities.length > 0 && abilities[0].isSpell()) {
+                String altCost = card.getSVar("FullCost");
+                Cost abCost = new Cost(altCost, card.getName(), abilities[0].isAbility());
+                abilities[0].setPayCosts(abCost);
+            }
+        }
 
         // AltCost
         if (!card.getSVar("AltCost").equals("")) {
