@@ -2001,6 +2001,7 @@ res/cardsfolder/d/disempower.txt svneol=native#text/plain
 res/cardsfolder/d/disenchant.txt svneol=native#text/plain
 res/cardsfolder/d/disentomb.txt svneol=native#text/plain
 res/cardsfolder/d/disfigure.txt svneol=native#text/plain
+res/cardsfolder/d/disharmony.txt -text svneol=unset#text/plain
 res/cardsfolder/d/disintegrate.txt svneol=native#text/plain
 res/cardsfolder/d/dismal_failure.txt svneol=native#text/plain
 res/cardsfolder/d/dismember.txt svneol=native#text/plain
