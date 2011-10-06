@@ -7,5 +7,7 @@ SVar:DBPump:DB$Pump | NumAtt$ +4 | NumDef$ -4 | Defined$ Targeted | ConditionDef
 SVar:X:Targeted$CardToughness/Minus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_lust.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/212.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/196.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/135.jpg
 End
-

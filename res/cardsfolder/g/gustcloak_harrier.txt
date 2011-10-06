@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Self | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_harrier.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/34.jpg
 End

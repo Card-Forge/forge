@@ -7,4 +7,5 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickening_dreams.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/83.jpg
 End
