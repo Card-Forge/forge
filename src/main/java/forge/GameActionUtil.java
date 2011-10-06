@@ -1147,8 +1147,7 @@ public final class GameActionUtil {
         }
 
         if (c.isEquipped()) {
-            ArrayList<Card> equips = c.getEquippedBy();
-            for (Card equip : equips) {
+            for (Card equip : c.getEquippedBy()) {
                 if (equip.getName().equals("Sword of Light and Shadow")) {
                     GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
                 }

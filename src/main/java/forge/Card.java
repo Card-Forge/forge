@@ -2995,7 +2995,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isEquipped() {
-        return equippedBy.size() != 0;
+        return !equippedBy.isEmpty();
     }
 
     /**

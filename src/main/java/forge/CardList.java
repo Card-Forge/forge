@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -50,7 +51,7 @@ public class CardList implements Iterable<Card> {
      *
      * @param al a {@link java.util.ArrayList} object.
      */
-    public CardList(final ArrayList<Card> al) {
+    public CardList(final List<Card> al) {
         addAll(al.toArray());
     }
 
@@ -264,6 +265,17 @@ public class CardList implements Iterable<Card> {
     }
 
     /**
+     * <p>addAll.</p>
+     *
+     * @param c an array of {@link java.lang.Object} objects.
+     */
+    public final void addAll(final Object[] c) {
+        for (int i = 0; i < c.length; i++) {
+            list.add((Card) c[i]);
+        }
+    }
+
+    /**
      * <p>contains.</p>
      *
      * @param c a {@link forge.Card} object.
@@ -292,17 +304,6 @@ public class CardList implements Iterable<Card> {
      */
     public final Card get(final int i) {
         return getCard(i);
-    }
-
-    /**
-     * <p>addAll.</p>
-     *
-     * @param c an array of {@link java.lang.Object} objects.
-     */
-    public final void addAll(final Object[] c) {
-        for (int i = 0; i < c.length; i++) {
-            list.add((Card) c[i]);
-        }
     }
 
     /**

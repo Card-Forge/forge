@@ -2600,7 +2600,7 @@ public class CardFactoryUtil {
         }
 
         final String equipmentName = e;
-        CardList list = new CardList(c.getEquippedBy().toArray());
+        CardList list = new CardList(c.getEquippedBy());
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return c.getName().equals(equipmentName);
