@@ -119,7 +119,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.attachedPanels.isEmpty() || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters()) 
+                    if (!panel.attachedPanels.isEmpty() || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
+                            || panel.gameCard.isSick() != firstPanel.gameCard.isSick()
                             || stack.size() == tokenStackMax) {
                         // If this token has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
