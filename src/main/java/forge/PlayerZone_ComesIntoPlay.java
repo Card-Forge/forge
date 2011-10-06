@@ -177,7 +177,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-        CardList meek = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard, "Sword of the Meek");
+        CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
 
         if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
             for (int i = 0; i < meek.size(); i++) {
