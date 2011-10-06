@@ -721,6 +721,21 @@ public class CardList implements Iterable<Card> {
         }
         return total;
     }
+    
+    /**
+     * 
+     * <p>getTotalCreaturePower.</p>
+     * 
+     * @return a int.
+     */
+    
+    public final int getTotalCreaturePower() {
+        int total = 0;
+        for (int i = 0; i < size(); i++) {
+            total += get(i).getCurrentPower();
+        }
+        return total;
+    }
 
     /**
      * <p>getHighestConvertedManaCost.</p>

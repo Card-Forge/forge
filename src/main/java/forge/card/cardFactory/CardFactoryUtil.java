@@ -2905,6 +2905,16 @@ public class CardFactoryUtil {
             }
             return highest;
         }
+        
+        if (l[0].contains("RememberedSumPower")) {
+            CardList list = new CardList();
+            for (Object o : c.getRemembered()) {
+                if (o instanceof Card) {
+                    list.add(AllZoneUtil.getCardState((Card) o));
+                }
+            }
+            return list.getTotalCreaturePower();  
+        }
 
         final String[] sq;
         sq = l[0].split("\\.");
