@@ -9,6 +9,7 @@ import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Player;
+import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -462,6 +463,205 @@ public final class AbilityFactory_Combat {
                 }
                 //System.out.println("Setting mustAttackEntity to: "+entity);
                 p.setMustAttackEntity(entity);
+            }
+        }
+
+    } //mustAttackResolve()
+    
+    //**************************************************************
+    //********************* RemoveFromCombat ***********************
+    //**************************************************************
+
+    /**
+     * <p>createAbilityRemoveFromCombat.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.1.6
+     */
+    public static SpellAbility createAbilityRemoveFromCombat(final AbilityFactory af) {
+        final SpellAbility abRemCombat = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -2472319390656924874L;
+
+            @Override
+            public String getStackDescription() {
+                return removeFromCombatStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return removeFromCombatCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                removeFromCombatResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return removeFromCombatDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abRemCombat;
+    }
+
+    /**
+     * <p>createSpellRemoveFeomCombat.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellRemoveFromCombat(final AbilityFactory af) {
+        final SpellAbility spRemCombat = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 4086879057558760897L;
+
+            @Override
+            public String getStackDescription() {
+                return removeFromCombatStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return removeFromCombatCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                removeFromCombatResolve(af, this);
+            }
+
+        };
+        return spRemCombat;
+    }
+
+    /**
+     * <p>createDrawbackRemoveFromCombat.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackRemoveFromCombat(final AbilityFactory af) {
+        final SpellAbility dbRemCombat = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = 5080737903616292224L;
+
+            @Override
+            public void resolve() {
+                removeFromCombatResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return removeFromCombatPlayDrawbackAI(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return removeFromCombatDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbRemCombat;
+    }
+
+    private static String removeFromCombatStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        //end standard pre-
+
+        ArrayList<Card> tgtCards;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+        
+        sb.append("Remove ");
+
+        for (Card c : tgtCards) {
+            sb.append(c);
+        }
+        
+        sb.append(" from combat.");
+
+        //begin standard post-
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    private static boolean removeFromCombatCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        //disabled for the AI for now.  Only for Gideon Jura at this time.
+        return false;
+    }
+
+    private static boolean removeFromCombatPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+        // AI should only activate this during Human's turn
+        boolean chance;
+
+        //TODO - implement AI
+        chance = false;
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.chkAI_Drawback();
+        }
+
+        return chance;
+    }
+
+    private static boolean removeFromCombatDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+
+        boolean chance;
+
+        //TODO - implement AI
+        chance = false;
+
+        // check SubAbilities DoTrigger?
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            return chance && abSub.doTrigger(mandatory);
+        }
+
+        return chance;
+    }
+
+    private static void removeFromCombatResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+
+        ArrayList<Card> tgtCards;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null && !params.containsKey("Defined")) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (final Card c : tgtCards) {
+            if (tgt == null || CardFactoryUtil.canTarget(sa, c)) {
+                AllZone.getCombat().removeFromCombat(c);
             }
         }
 

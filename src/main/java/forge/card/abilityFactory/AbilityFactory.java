@@ -501,6 +501,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_Combat.createDrawbackFog(this);
             }
         }
+        
+        else if (API.equals("RemoveFromCombat")) {
+            if (isAb) {
+                SA = AbilityFactory_Combat.createAbilityRemoveFromCombat(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Combat.createSpellRemoveFromCombat(this);
+            } else if (isDb) {
+                SA = AbilityFactory_Combat.createDrawbackRemoveFromCombat(this);
+            }
+        }
 
         else if (API.equals("Untap")) {
             if (isAb) {
