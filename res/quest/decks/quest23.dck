@@ -11,8 +11,8 @@ AIExtras=Darksteel Reactor|Privileged Position|Privileged Position
 Name=quest23
 Title=Reactor Meltdown
 Difficulty=hard
-Description=Avert the impending desaster
-Icon=
+Description=Avert the impending disaster
+Icon=Reactor Meltdown.jpg
 Deck Type=constructed
 [main]
 5 Island
