@@ -116,6 +116,21 @@ Fixes/Features:
 - Fixed Daybreak Coronet.
 - Fixed the pic count of basic ISD lands.
 - Added the recent commit logs to changes.txt.
+- Updated the mana bases of some decks with new duals from ISD.
+- Updated some more quest decks.
+- Improved the implementation of the second ability of Rhys the Redeemed.
+- Added the SVar "FullCost" to add additional costs to permanents.
+- Add ability to generate proxies from deck editor
+- Add Freemarker template to generate proxies using MagicCard.info
+- add an "Exit" option under the Menu menu from the main screen.
+- Assigned an icon to the quest23 deck.
+- Added a fluff piece to changes.txt.
+- add AF_RemoveFromCombat. It just takes a target or Defined.
+- fix Wu Admiral SpellDescription
+- fix Target$ for Dolmen Gate
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -201,6 +216,20 @@ Unnatural Selection
 Ghazban Ogre
 Ethersworn Shieldmage
 Selective Memory
+Trapfinder's Trick
+Shoal Serpent
+Mindless Null
+Makeshift Mauler
+Skaab Goliath
+Stitched Drake
+Venomous Fangs
+Blood Lust
+Knowledge Vault
+Gustcloak Skirmisher
+Gustcloak Harrier
+Gustcloak Runner
+Sickening Dreams
+Root Greevil
 
 
 end
