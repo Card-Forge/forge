@@ -68,7 +68,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (CardPanel panel : cardPanels) {
-            if (!panel.gameCard.isLand()) continue;
+            if (!panel.gameCard.isLand() || panel.gameCard.isCreature()) continue;
 
             int insertIndex = -1;
 
@@ -76,7 +76,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 Stack stack = allLands.get(i);
                 CardPanel firstPanel = stack.get(0);
-                if (firstPanel.gameCard.getName().equals(panel.gameCard.getName()) && !panel.gameCard.isCreature()) {
+                if (firstPanel.gameCard.getName().equals(panel.gameCard.getName()) ) {
                     if (!firstPanel.attachedPanels.isEmpty() || firstPanel.gameCard.isEnchanted()) {
                         // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
