@@ -82,7 +82,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.attachedPanels.isEmpty() || firstPanel.gameCard.isEnchanted() || stack.size() == landStackMax) {
+                    if (!panel.attachedPanels.isEmpty()  || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
+                            || firstPanel.gameCard.isEnchanted() || stack.size() == landStackMax) {
                         // If this land has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
@@ -118,7 +119,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.attachedPanels.isEmpty() || stack.size() == tokenStackMax) {
+                    if (!panel.attachedPanels.isEmpty() || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters()) 
+                            || stack.size() == tokenStackMax) {
                         // If this token has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
