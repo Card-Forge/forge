@@ -1,0 +1,14 @@
+Name:Knowledge Vault
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ 2 T | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SpellDescription$ Exile the top card of your library face down.
+A:AB$ Discard | Cost$ Sac<1/Card.Self> | Mode$ Hand | SubAbility$ DBReturn | CostDesc$ Sacrifice CARDNAME: | SpellDescription$ If you do, discard your hand, then put all cards exiled with CARDNAME into their owner's hand.
+SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBGraveyard | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with CARDNAME into their owner's graveyard.
+SVar:DBGraveyard:DB$ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_vault.jpg
+End
