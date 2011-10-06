@@ -7,7 +7,7 @@ http://raindropmemory.deviantart.com)
 #### cards in total.
 
 
-
+Every expansion and set included in forge is now at least 70% complete.
 
 
 We have changed the archiving format to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
