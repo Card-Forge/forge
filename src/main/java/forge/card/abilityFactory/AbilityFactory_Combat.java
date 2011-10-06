@@ -568,7 +568,6 @@ public final class AbilityFactory_Combat {
 
     private static String removeFromCombatStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
         StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
