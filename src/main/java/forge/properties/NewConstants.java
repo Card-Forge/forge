@@ -436,6 +436,7 @@ public interface NewConstants {
                     String CARD_STACK = "%s/NewGame/menu/cardStack";
                     String CARD_STACK_OFFSET = "%s/NewGame/menu/cardStackOffset";
                     String ABOUT = "%s/NewGame/menu/about";
+                    String EXIT = "%s/NewGame/menu/exit";
                 }
 
                 public static interface OPTIONS {

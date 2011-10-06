@@ -1,7 +1,5 @@
 package forge.view.swing;
 
-import arcane.ui.CardPanel;
-
 import com.esotericsoftware.minlog.Log;
 import forge.*;
 import forge.deck.Deck;
@@ -125,6 +123,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private final Action HOW_TO_PLAY_ACTION = new HowToPlayAction();
     private final Action DNLD_PRICES_ACTION = new DownloadPriceAction();
     private final Action BUGZ_REPORTER_ACTION = new BugzReporterAction();
+    private final Action EXIT_ACTION = new ExitAction();
 
     /**
      * <p>
@@ -200,7 +199,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // CARD_SIZES_ACTION,
                 LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
                 CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, BUGZ_REPORTER_ACTION,
-                ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION };
+                ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION, EXIT_ACTION };
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for (Action a : actions) {
             menu.add(a);
@@ -284,6 +283,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent ev) {
+                dispose();
                 System.exit(0);
             }
         });
@@ -1405,6 +1405,29 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             JOptionPane.showMessageDialog(null, area, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+    
+    /**
+    *
+    * @author slapshot5
+    *
+    */
+   public static class ExitAction extends AbstractAction {
+       private static final long serialVersionUID = -319036939657136034L;
+
+       /**
+        *
+        */
+       public ExitAction() {
+           super(ForgeProps.getLocalized(MENU_BAR.MENU.EXIT));
+       }
+
+       /**
+        *
+        */
+       public final void actionPerformed(final ActionEvent e) {
+           System.exit(0);
+       }
+   }
 
     /**
      * <p>
