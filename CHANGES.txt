@@ -9,6 +9,8 @@ http://raindropmemory.deviantart.com)
 
 Every expansion and set included in forge is now at least 70% complete.
 
+The maximum size for a card displayed on the battlefield is now set using the New Game menu command "Specify Max CardSize". Added icons that will be drawn over the cards in the battlefield for phasing and counters. The attack/block/phasing icons and counters will now also be shown on large cards, only casting cost will be omitted. Lands and tokens with different amounts/types of counters will no longer stack. Tokens with different summoning sickness will no longer stack. Lands that become creatures will now always be moved to the front row.
+
 
 We have changed the archiving format to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
 
