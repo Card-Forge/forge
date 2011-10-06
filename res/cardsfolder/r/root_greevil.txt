@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_greevil.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/91.jpg
+Oracle:{2}{G}, {T}, Sacrifice Root Greevil: Destroy all enchantments of the color of your choice.
 End

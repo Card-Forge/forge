@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_lust.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/212.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/196.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/135.jpg
+Oracle:If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
 End

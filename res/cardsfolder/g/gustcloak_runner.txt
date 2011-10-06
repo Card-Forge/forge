@@ -9,4 +9,5 @@ SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_runner.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/35.jpg
+Oracle:Whenever Gustcloak Runner becomes blocked, you may untap it and remove it from combat.
 End
