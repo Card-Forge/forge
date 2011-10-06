@@ -4461,6 +4461,7 @@ res/cardsfolder/l/leonin_sun_standard.txt svneol=native#text/plain
 res/cardsfolder/l/leshracs_rite.txt svneol=native#text/plain
 res/cardsfolder/l/leshracs_sigil.txt svneol=native#text/plain
 res/cardsfolder/l/lesser_gargadon.txt svneol=native#text/plain
+res/cardsfolder/l/lesser_werewolf.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lethargy_trap.txt svneol=native#text/plain
 res/cardsfolder/l/leveler.txt svneol=native#text/plain
 res/cardsfolder/l/levitation.txt svneol=native#text/plain
