@@ -2,9 +2,9 @@ Name:Postmortem Lunge
 ManaCost:X PB
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ X PB | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.CMCEQX | TgtPromp$ Choose target creature with CMC equal to X. | SubAbility$ SVar=DBPump | SpellDescription$ Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+A:SP$ ChangeZone | Cost$ X PB | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | TgtPromp$ Choose target creature with CMC equal to X. | SubAbility$ SVar=DBPump | SpellDescription$ Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
 SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ Haste & HIDDEN At the beginning of the end step, exile CARDNAME.
-SVar:X:Count$xPaid
+SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/postmortem_lunge.jpg
