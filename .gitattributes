@@ -5882,6 +5882,7 @@ res/cardsfolder/p/planar_gate.txt svneol=native#text/plain
 res/cardsfolder/p/planar_guide.txt svneol=native#text/plain
 res/cardsfolder/p/planar_portal.txt svneol=native#text/plain
 res/cardsfolder/p/planar_void.txt svneol=native#text/plain
+res/cardsfolder/p/planeswalkers_favor.txt -text
 res/cardsfolder/p/plasma_elemental.txt svneol=native#text/plain
 res/cardsfolder/p/plateau.txt svneol=native#text/plain
 res/cardsfolder/p/plated_geopede.txt svneol=native#text/plain
