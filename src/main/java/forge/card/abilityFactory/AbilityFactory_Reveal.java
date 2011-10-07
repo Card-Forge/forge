@@ -1929,7 +1929,7 @@ public final class AbilityFactory_Reveal {
                     if (params.containsKey("RememberRevealed")) {
                         host.addRemembered(random);
                     }
-                    GuiUtils.getChoice("Random card", new CardList(random));
+                    GuiUtils.getChoice("Random card", new CardList(random).toArray());
                 }
 
             }
