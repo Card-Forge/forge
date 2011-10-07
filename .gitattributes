@@ -5915,6 +5915,7 @@ res/cardsfolder/p/pollenbright_wings.txt svneol=native#text/plain
 res/cardsfolder/p/polluted_bonds.txt svneol=native#text/plain
 res/cardsfolder/p/polluted_delta.txt svneol=native#text/plain
 res/cardsfolder/p/polluted_mire.txt svneol=native#text/plain
+res/cardsfolder/p/polymorph.txt -text
 res/cardsfolder/p/ponder.txt svneol=native#text/plain
 res/cardsfolder/p/pongify.txt svneol=native#text/plain
 res/cardsfolder/p/pooling_venom.txt svneol=native#text/plain
