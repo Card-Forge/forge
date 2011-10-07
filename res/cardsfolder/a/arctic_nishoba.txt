@@ -1,10 +1,13 @@
 Name:Arctic Nishoba
 ManaCost:5 G
 Types:Creature Cat Warrior
-Text:When Arctic Nishoba is put into a graveyard from the battlefield, you gain 2 life for each age counter on it.
+Text:no text
 PT:6/6
 K:Trample
 K:Cumulative upkeep:GW
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ When CARDNAME dies, you gain 2 life for each age counter on it.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X
+SVar:X:TriggeredCard$CardCounters.AGE/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/102.jpg

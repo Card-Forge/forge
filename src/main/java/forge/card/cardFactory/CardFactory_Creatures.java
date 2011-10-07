@@ -1660,7 +1660,7 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Arctic Nishoba")) {
+        /*else if (cardName.equals("Arctic Nishoba")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -1683,7 +1683,7 @@ public class CardFactory_Creatures {
             };//command
 
             card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
+        }*///*************** END ************ END **************************
 
 
         //*************** START *********** START ************************** 
