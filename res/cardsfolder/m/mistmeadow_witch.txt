@@ -3,9 +3,10 @@ ManaCost:1 WU
 Types:Creature Kithkin Wizard
 Text:no text
 PT:1/1
-A:AB$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+A:AB$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
 SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return the exiled creature to the battlefield.
-SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
+SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup 
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmeadow_witch.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/144.jpg
