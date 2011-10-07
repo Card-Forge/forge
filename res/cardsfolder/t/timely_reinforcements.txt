@@ -1,0 +1,13 @@
+Name:Timely Reinforcements
+ManaCost:2 W
+Types:Sorcery
+Text:no text
+A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 6 | ConditionLifeTotal$ You | ConditionLifeAmount$ LTX | SubAbility$ DBToken | SpellDescription$ If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | CheckSVar$ CreatureYouControl | SVarCompare$ LTCreatureOppControl
+SVar:X:Count$OppLifeTotal
+SVar:CreatureYouControl:Count$Valid Creature.YouCtrl
+SVar:CreatureOppControl:Count$Valid Creature.YouDontCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timely_reinforcements.jpg
+End

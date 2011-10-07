@@ -8228,6 +8228,7 @@ res/cardsfolder/t/time_stretch.txt svneol=native#text/plain
 res/cardsfolder/t/time_vault.txt svneol=native#text/plain
 res/cardsfolder/t/time_walk.txt svneol=native#text/plain
 res/cardsfolder/t/time_warp.txt svneol=native#text/plain
+res/cardsfolder/t/timely_reinforcements.txt -text
 res/cardsfolder/t/timetwister.txt svneol=native#text/plain
 res/cardsfolder/t/timid_drake.txt svneol=native#text/plain
 res/cardsfolder/t/tin_wing_chimera.txt svneol=native#text/plain
