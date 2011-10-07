@@ -1,0 +1,11 @@
+Name:Planeswalker's Scorn
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+A:AB$ Reveal | Cost$ 3 B | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Target opponent reveals a card at random from his or her hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost. Activate this ability only any time you could cast a sorcery.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_scorn.jpg
+End
