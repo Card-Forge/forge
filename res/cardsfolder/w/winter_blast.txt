@@ -1,0 +1,12 @@
+Name:Winter Blast
+ManaCost:X G
+Types:Sorcery
+Text:no text
+A:SP$ Tap | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ MaxTgts | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ Tap X target creatures.
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Remembered.withFlying | SpellDescription$ CARDNAME deals 2 damage to each of those creatures with flying.
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_blast.jpg
+End
