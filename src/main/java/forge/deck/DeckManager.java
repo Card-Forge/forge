@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -652,9 +651,9 @@ public class DeckManager {
 
 
             /* Create a data-model */
-            Map root = new HashMap();
+            Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
-            List list = new ArrayList();
+            List<String> list = new ArrayList<String>();
             for (Card card : d.getMain().toForgeCardList().toArray()) {
                 //System.out.println(card.getSets().get(0).URL);
                 list.add(card.getSets().get(0).URL);
@@ -662,7 +661,7 @@ public class DeckManager {
             root.put("urls", list);
 
             /* Merge data-model with template */
-            StringWriter sw = new StringWriter();
+            //StringWriter sw = new StringWriter();
             temp.process(root, out);
             out.flush();
         } catch (IOException e) {
