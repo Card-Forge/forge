@@ -6,4 +6,9 @@ A:SP$ Destroy | Cost$ 3 U | NoRegen$ True | ValidTgts$ Creature | TgtPrompt$ Sel
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polymorph.jpg
+Oracle:Destroy target creature. It can't be regenerated. Its controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/67.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/86.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/82.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/90.jpg
 End
