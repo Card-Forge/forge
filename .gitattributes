@@ -4886,6 +4886,7 @@ res/cardsfolder/m/merfolk_seastalkers.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_seer.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_skyscout.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_sovereign.txt svneol=native#text/plain
+res/cardsfolder/m/merfolk_spy.txt -text
 res/cardsfolder/m/merfolk_thaumaturgist.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_traders.txt svneol=native#text/plain
 res/cardsfolder/m/merfolk_wayfinder.txt -text
