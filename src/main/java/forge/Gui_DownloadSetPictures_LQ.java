@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
@@ -337,7 +338,11 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                         in.close();
                         out.flush();
                         out.close();
-                    } catch (MalformedURLException mURLe) {
+                    } 
+                    catch (ConnectException ce) {
+                        System.out.println("Connection refused for url: " + url);
+                    }
+                    catch (MalformedURLException mURLe) {
                         System.out.println("Error - possibly missing URL for: " + cards[card].name);
                         //Log.error("LQ Pictures", "Malformed URL for: "+cards[card].name, mURLe);
                     }
