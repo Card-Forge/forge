@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_ages.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/241.jpg
+Oracle:Sword of the Ages enters the battlefield tapped.\n{T}, Exile Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to target creature or player, where X is the total power of the creatures exiled this way.
 End

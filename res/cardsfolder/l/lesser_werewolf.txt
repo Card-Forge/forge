@@ -8,4 +8,5 @@ SVar:DBPump:DB$ Pump | NumAtt$ -1 | Defined$ Self | ConditionDefined$ Self | Con
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_werewolf.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/24.jpg
+Oracle:{B}: If Lesser Werewolf's power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by Lesser Werewolf. Activate this ability only during the declare blockers step.
 End

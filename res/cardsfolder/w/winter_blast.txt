@@ -12,4 +12,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_blast.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/205.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/174.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/127.jpg
+Oracle:Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.
 End
