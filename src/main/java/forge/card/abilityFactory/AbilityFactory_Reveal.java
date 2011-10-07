@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
@@ -1669,6 +1670,268 @@ public final class AbilityFactory_Reveal {
         if (mayshuffle) {
             if (GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?")) {
                 player.shuffle();
+            }
+        }
+    }
+    
+    //**********************************************************************
+    //******************************* Reveal *******************************
+    //**********************************************************************
+
+    /**
+     * <p>createAbilityReveal.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityReveal(final AbilityFactory af) {
+        final SpellAbility abReveal = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -4417404703197532765L;
+
+            @Override
+            public String getStackDescription() {
+                return revealStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return revealCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                revealResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return revealTrigger(af, this, mandatory);
+            }
+
+        };
+        return abReveal;
+    }
+
+    /**
+     * <p>createSpellReveal.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellReveal(final AbilityFactory af) {
+        final SpellAbility spReveal = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -9015033247472453902L;
+
+            @Override
+            public String getStackDescription() {
+                return revealStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return revealCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                revealResolve(af, this);
+            }
+
+        };
+        return spReveal;
+    }
+
+    /**
+     * <p>createDrawbackReveal.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackReveal(final AbilityFactory af) {
+        final SpellAbility dbReveal = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -8059731932417441449L;
+
+            @Override
+            public String getStackDescription() {
+                // when getStackDesc is called, just build exactly what is happening
+                return revealStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                revealResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                //reuse code from RevealHand
+                return revealHandTargetAI(af, this, false, false);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return revealTrigger(af, this, mandatory);
+            }
+
+        };
+        return dbReveal;
+    }
+
+    /**
+     * <p>revealStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String revealStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        }
+        else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        if (tgtPlayers.size() > 0) {
+            sb.append(tgtPlayers.get(0)).append(" reveals a card ");
+            if (params.containsKey("Random")) {
+                sb.append("at random ");
+            }
+            sb.append("from his or her hand.");
+        } else {
+            sb.append("Error - no target players for RevealHand. ");
+        }
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>revealCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean revealCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        // AI cannot use this properly until he can use SAs during Humans turn
+        Cost abCost = sa.getPayCosts();
+        Card source = sa.getSourceCard();
+
+        if (abCost != null) {
+            // AI currently disabled for these costs
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
+            }
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+                return false;
+            }
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+                return false;
+            }
+
+        }
+
+        //we can reuse this function here...
+        boolean bFlag = revealHandTargetAI(af, sa, true, false);
+
+        if (!bFlag)
+            return false;
+
+        Random r = MyRandom.random;
+        boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
+
+        if (AbilityFactory.playReusable(sa)) {
+            randomReturn = true;
+        }
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            randomReturn &= subAb.chkAI_Drawback();
+        }
+        return randomReturn;
+    }
+
+    /**
+     * <p>revealTrigger.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean revealTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
+            return false;
+        }
+
+        if (!revealHandTargetAI(af, sa, false, mandatory)) {
+            return false;
+        }
+
+        // check SubAbilities DoTrigger?
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            return abSub.doTrigger(mandatory);
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>revealResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void revealResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canTarget(sa)) {
+                CardList handChoices = p.getCardsIn(Zone.Hand);
+                if (handChoices.size() > 0) {
+                    Card random = CardUtil.getRandom(handChoices.toArray());
+                    if (params.containsKey("RememberRevealed")) {
+                        host.addRemembered(random);
+                    }
+                    GuiUtils.getChoice("Random card", new CardList(random));
+                }
+
             }
         }
     }

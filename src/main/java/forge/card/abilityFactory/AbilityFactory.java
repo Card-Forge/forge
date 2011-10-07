@@ -814,6 +814,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_Reveal.createDrawbackRevealHand(this);
             }
         }
+        
+        else if (API.equals("Reveal")) {
+            if (isAb) {
+                SA = AbilityFactory_Reveal.createAbilityReveal(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Reveal.createSpellReveal(this);
+            } else if (isDb) {
+                SA = AbilityFactory_Reveal.createDrawbackReveal(this);
+            }
+        }
 
         else if (API.equals("Dig")) {
             if (isAb) {
