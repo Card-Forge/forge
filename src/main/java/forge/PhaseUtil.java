@@ -175,13 +175,6 @@ public class PhaseUtil {
             } else c.untap();
         }
 
-        //Remove temporary keywords
-        list = player.getCardsIn(Zone.Battlefield);
-        for (Card c : list) {
-            c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
-        }
-
         //opponent untapping during your untap phase
         CardList opp = player.getOpponent().getCardsIn(Zone.Battlefield);
         for (Card oppCard : opp)
@@ -193,7 +186,12 @@ public class PhaseUtil {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 //search for lands the computer has and only untap 1
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                landList = landList.filter(CardListFilter.tapped);
+                landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (landList.size() > 0) {
                     landList.get(0).untap();
                 }
@@ -211,14 +209,19 @@ public class PhaseUtil {
                     }
 
                     public void selectCard(Card c, PlayerZone zone) {
-                        if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isTapped()) {
+                        if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isTapped() && canUntap(c)) {
                             c.untap();
                             stop();
                         }
                     }//selectCard()
                 };//Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                landList = landList.filter(CardListFilter.tapped);
+                landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (landList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -228,7 +231,12 @@ public class PhaseUtil {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList artList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(CardListFilter.artifacts);
-                artList = artList.filter(CardListFilter.tapped);
+                artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (artList.size() > 0) {
                     CardFactoryUtil.AI_getBestArtifact(artList).untap();
                 }
@@ -247,7 +255,7 @@ public class PhaseUtil {
 
                     public void selectCard(Card c, PlayerZone zone) {
                         if (c.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                                && c.getController().isHuman()) {
+                                && c.getController().isHuman() && canUntap(c)) {
                             c.untap();
                             stop();
                         }
@@ -255,7 +263,12 @@ public class PhaseUtil {
                 };//Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(CardListFilter.artifacts);
-                artList = artList.filter(CardListFilter.tapped);
+                artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (artList.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
@@ -264,7 +277,12 @@ public class PhaseUtil {
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                creatures = creatures.filter(CardListFilter.tapped);
+                creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (creatures.size() > 0) {
                     creatures.get(0).untap();
                 }
@@ -283,18 +301,30 @@ public class PhaseUtil {
 
                     public void selectCard(Card c, PlayerZone zone) {
                         if (c.isCreature() && zone.is(Constant.Zone.Battlefield)
-                                && c.getController().isHuman()) {
+                                && c.getController().isHuman() && canUntap(c)) {
                             c.untap();
                             stop();
                         }
                     }//selectCard()
                 };//Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                creatures = creatures.filter(CardListFilter.tapped);
+                creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(Card c) {
+                        return canUntap(c);
+                    }
+                });
                 if (creatures.size() > 0) {
                     AllZone.getInputControl().setInput(target);
                 }
             }
+        }
+        
+        //Remove temporary keywords
+        list = player.getCardsIn(Zone.Battlefield);
+        for (Card c : list) {
+            c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
         }
     }//end doUntap
 
