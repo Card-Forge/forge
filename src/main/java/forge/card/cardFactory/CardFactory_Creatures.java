@@ -1568,7 +1568,7 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Singe-Mind Ogre")) {
+        /*else if (cardName.equals("Singe-Mind Ogre")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -1592,7 +1592,7 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }*///*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
