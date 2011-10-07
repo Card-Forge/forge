@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Creature Horror
 Text:no text
 PT:3/4
-A:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBUntap | ConditionPresent$ Card.Self+tapped | SpellDescription$ If CARDNAME is tapped, exile target creature card from a graveyard and untap CARDNAME.
-SVar:DBUntap:DB$Untap | Defined$ Self | ConditionPresent$ Card.Self+tapped
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBUntap | IsPresent$ Card.Self+tapped | SpellDescription$ If CARDNAME is tapped, exile target creature card from a graveyard and untap CARDNAME.
+SVar:DBUntap:DB$Untap | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_the_dead.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/6.jpg
