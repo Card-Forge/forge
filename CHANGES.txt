@@ -133,6 +133,27 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Fixed Rotlung Reanimator.
+- The attack/block/phasing icons and counters will now also be shown on large cards (only casting cost will be omitted)
+- Lands and tokens with different amounts/types of counters will no longer stack.
+- Fixed Cackling Counterpart.
+- Tokens with different summoning sickness will no longer stack.
+- very small refactoring for equipped (removed some redundant conversions toArray or back)
+- fix link to releases
+- Lands that become creatures will now always be moved to the front row.
+- Fixed Sword of the Meek.
+- Added a fluff piece to changes.txt.
+- fixed Postmortem Lunge
+- clean up some Java warnings
+- add AF_Reveal for things like "target player reveals a card at random from his or her hand" Takes player defined/target, Random$ True and RememberRevealed$ True.
+- small fix for displaying revealed card in AF_Reveal
+- Fixed Vulturous Zombie.
+- Little updates and fixes in other card text files.
+- Fixed two more cards that need to exclude tokens in their triggers.
+- add a bit more Exception handling in Gui_DownloadSetPictures_LQ for java.net.ConnectException
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -232,6 +253,15 @@ Gustcloak Harrier
 Gustcloak Runner
 Sickening Dreams
 Root Greevil
+Disharmony
+Lesser Werewolf
+Osai Vultures
+Winter Blast
+Sword of the Ages
+Planeswalker's Favor
+Planeswalker's Scorn
+Planeswalker's Mirth
+Merfolk Spy
 
 
 end
