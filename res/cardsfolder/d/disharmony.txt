@@ -8,4 +8,5 @@ SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disharmony.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/140.jpg
 End

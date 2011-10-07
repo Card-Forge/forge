@@ -7,4 +7,5 @@ A:AB$ PutCounter | Cost$ B | ConditionDefined$ Self | ConditionPresent$ Creature
 SVar:DBPump:DB$ Pump | NumAtt$ -1 | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE1 | ConditionCompare$ EQ1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_werewolf.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/24.jpg
 End

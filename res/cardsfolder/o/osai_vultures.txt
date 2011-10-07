@@ -10,4 +10,6 @@ A:AB$ Pump | Cost$ SubCounter<2/CARRION> | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
 SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/osai_vultures.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/288.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/198.jpg
 End

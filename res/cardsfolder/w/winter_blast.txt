@@ -9,4 +9,7 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_blast.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/205.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/174.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/127.jpg
 End
