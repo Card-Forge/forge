@@ -1,0 +1,8 @@
+Name:Agonizing Memories
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0 | IsCurse$ True | SpellDescription$ Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/agonizing_memories.jpg
+End
