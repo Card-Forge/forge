@@ -107,6 +107,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
     @Override
     public boolean populateCustomPanel() {
         view.btnRestart.setVisible(false);
+        model.qData.getCards().resetNewList();
         
         if(!model.qMatchState.isMatchOver()) {
             view.btnQuit.setText("Surrender (15 Credits)");
