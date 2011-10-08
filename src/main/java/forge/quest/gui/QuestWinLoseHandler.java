@@ -110,7 +110,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         model.qData.getCards().resetNewList();
         
         if(!model.qMatchState.isMatchOver()) {
-            view.btnQuit.setText("Surrender (15 Credits)");
+            view.btnQuit.setText("Quit (15 Credits)");
             return false;
         }
         else {

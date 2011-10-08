@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import javax.swing.JButton;
 import forge.AllZone;
@@ -31,6 +32,7 @@ public class FButton extends JButton {
         this.setForeground(skin.txt1a); 
         this.setBackground(Color.red);
         this.setContentAreaFilled(false);
+        this.setMargin(new Insets(0,25,0,25));
         this.setFont(skin.font1.deriveFont(Font.BOLD,15));
         this.imgL = skin.btnLup.getImage();
         this.imgM = skin.btnMup.getImage();
