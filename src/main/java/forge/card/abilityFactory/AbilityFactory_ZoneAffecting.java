@@ -554,32 +554,42 @@ public class AbilityFactory_ZoneAffecting {
         ArrayList<Player> tgtPlayers;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else
+        }
+        else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         String conditionDesc = params.get("ConditionDescription");
-        if (conditionDesc != null)
+        if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
+        }
 
-        for (Player p : tgtPlayers)
+        for (Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");
+        }
 
-        String destination = params.get("Destination");
-        if (destination == null || destination.equals(Constant.Zone.Graveyard))
+        Zone dest = Zone.smartValueOf(params.get("Destination"));
+        if (dest == null || dest.equals(Zone.Graveyard)) {
             sb.append("mills ");
-        else if (destination.equals(Constant.Zone.Exile))
+        }
+        else if (dest.equals(Zone.Exile)) {
             sb.append("exiles ");
+        }
         sb.append(numCards);
         sb.append(" card");
-        if (numCards != 1) sb.append("s");
-        sb.append(" from his or her library.");
+        if (numCards != 1) {
+            sb.append("s");
+        }
+        sb.append(" from the top of his or her library.");
 
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
