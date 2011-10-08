@@ -1318,6 +1318,7 @@ res/cardsfolder/c/chimeric_coils.txt svneol=native#text/plain
 res/cardsfolder/c/chimeric_egg.txt svneol=native#text/plain
 res/cardsfolder/c/chimeric_idol.txt svneol=native#text/plain
 res/cardsfolder/c/chimeric_mass.txt svneol=native#text/plain
+res/cardsfolder/c/chimeric_sphere.txt -text
 res/cardsfolder/c/chimeric_staff.txt svneol=native#text/plain
 res/cardsfolder/c/chimney_imp.txt svneol=native#text/plain
 res/cardsfolder/c/chittering_rats.txt svneol=native#text/plain
