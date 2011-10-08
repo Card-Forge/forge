@@ -18,6 +18,7 @@ public class ForgePreferences extends Preferences {
     public boolean uploadDraftAI;
     public boolean randCFoil;
     
+    public String skin;
     public String laf;
     public boolean lafFonts;
     public StackOffsetType stackOffset;
@@ -80,6 +81,7 @@ public class ForgePreferences extends Preferences {
 
         laf = get("gui.laf", "");
         lafFonts = getBoolean("gui.laf.fonts", false);
+        skin = get("gui.skin","default");
 
         cardOverlay = getBoolean("card.overlay", true);
         cardSize = CardSizeType.valueOf(get("card.images.size", "medium"));
@@ -122,6 +124,7 @@ public class ForgePreferences extends Preferences {
         
         set("rand.C.Foil", randCFoil);
 
+        set("gui.skin", skin);
         set("gui.laf", laf);
         set("gui.laf.fonts", lafFonts);
 

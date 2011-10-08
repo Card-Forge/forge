@@ -17,11 +17,13 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -305,5 +307,25 @@ public final class GuiUtils {
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         frame.setBounds(bounds);
+    }
+    
+    /**
+     * Attempts to create a font from a filename. Concise error reported 
+     * if exceptions found.
+     *
+     * @param {@link java.lang.String} filename
+     */
+    public static Font newFont(String filename) {
+        File file = new File(filename);
+        Font ttf = null;
+        
+        try {
+            ttf = Font.createFont(Font.TRUETYPE_FONT,file);
+        } catch (FontFormatException e) {
+            System.err.println("GuiUtils > newFont: bad font format \"" + filename + "\"");
+        } catch (IOException e) {
+            System.err.println("GuiUtils > newFont: can't find \""+filename+"\"");
+        }
+        return ttf;
     }
 }

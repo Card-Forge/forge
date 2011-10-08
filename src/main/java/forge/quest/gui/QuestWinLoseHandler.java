@@ -112,6 +112,15 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
             view.btnQuit.setText("Surrender (15 Credits)");
             return false;
         }
+        else {
+            view.btnContinue.setVisible(false);
+            if(wonMatch) {
+                view.btnQuit.setText("Great!");
+            }
+            else {
+                view.btnQuit.setText("OK");
+            }
+        }
         
         // Win case
         if(wonMatch) {
@@ -145,8 +154,8 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         }
         
         // Win or lose, still a chance to win a booster, frequency set in preferences
-        int cntOutcomes = wonMatch ? model.qData.getWin() : model.qData.getLost();
-        if (cntOutcomes % QuestPreferences.getWinsForBooster(model.qData.getDifficultyIndex()) == 0) {
+        int outcome = wonMatch ? model.qData.getWin() : model.qData.getLost();
+        if (outcome % QuestPreferences.getWinsForBooster(model.qData.getDifficultyIndex()) == 0) {
             awardBooster(); 
         }
 
@@ -344,7 +353,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         
         lblTemp2 = new JLabel(sb.toString());
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTemp2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN,14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setIcon(icoTemp);
         lblTemp2.setIconTextGap(50);
@@ -441,7 +450,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
                 ((QuestChallenge)model.qEvent).getTitle() + "\"");
         
         lblTemp2 = new JLabel(sb.toString());
-        lblTemp2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN,14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         lblTemp2.setIconTextGap(50);
@@ -464,7 +473,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         lblTemp1 = new TitleLabel("Gameplay Results");
         
         lblTemp2 = new JLabel("You lose! You have lost 15 credits.");
-        lblTemp2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN,14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         lblTemp2.setIconTextGap(50);
@@ -530,11 +539,15 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         return credits;
     }
     
+    /**
+     * JLabel header between reward sections. 
+     *
+     */
     @SuppressWarnings("serial")
     private class TitleLabel extends JLabel {
         TitleLabel(String msg) {
             super(msg);
-            this.setFont(new Font("Tahoma", Font.ITALIC, 16));
+            this.setFont(AllZone.getSkin().font2.deriveFont(Font.ITALIC,16));
             this.setPreferredSize(new Dimension(200,40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

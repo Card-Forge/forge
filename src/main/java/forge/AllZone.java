@@ -12,6 +12,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
+import forge.gui.skin.FSkin;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -39,6 +40,9 @@ public final class AllZone implements NewConstants {
         // blank
     }
 
+    /** Global <code>SKIN</code>. */
+    private static FSkin SKIN = null;
+
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
     
@@ -53,7 +57,7 @@ public final class AllZone implements NewConstants {
 
     /** Constant <code>COLOR_CHANGER</code>. */
     private static final ColorChanger COLOR_CHANGER = new ColorChanger();
-
+    
     // Phase is now a prerequisite for CardFactory
     /** Global <code>cardFactory</code>. */
     private static CardFactoryInterface cardFactory = null;
@@ -493,5 +497,27 @@ public final class AllZone implements NewConstants {
      */
     public static ColorChanger getColorChanger() {
         return COLOR_CHANGER;
+    }
+    
+    /**
+     * <p>getSkin.</p>
+     * Gets current display skin.
+     * 
+     * @return a {@link forge.gui.skin.FSkin} object.
+     * @since 1.0.15
+     */
+    public static FSkin getSkin() {
+        return SKIN;
+    }
+
+    /**
+     * <p>setSkin.</p>
+     * Sets current display skin.
+     * 
+     * @param attackers a {@link forge.gui.skin.FSkin} object.
+     * @since 1.0.15
+     */
+    public static void setSkin(final FSkin fs) {
+        SKIN = fs;
     }
 } //AllZone

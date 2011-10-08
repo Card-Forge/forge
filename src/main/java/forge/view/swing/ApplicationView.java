@@ -17,6 +17,7 @@ import forge.Constant;
 import forge.ImageCache;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.gui.skin.FSkin;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.view.FView;
@@ -42,7 +43,7 @@ public class ApplicationView implements FView {
         // contract.
 
         UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD by Braids on 8/18/11 11:37 PM
-            public void run() {
+            public void run() { 
                 splashFrame = new SplashFrame();
             }
         });
@@ -77,7 +78,7 @@ public class ApplicationView implements FView {
      */
    
     @Override
-    public final void setModel(final FModel model) {
+    public final void setModel(final FModel model) {  
         try {
 
             final ForgePreferences preferences = model.getPreferences();
@@ -97,6 +98,8 @@ public class ApplicationView implements FView {
             CardSizesAction.set(preferences.cardSize);
             OldGuiNewGame.upldDrftCheckBox.setSelected(preferences.uploadDraftAI);
             OldGuiNewGame.foilRandomCheckBox.setSelected(preferences.randCFoil);
+            
+            AllZone.setSkin(new FSkin(preferences.skin));
 
         } catch (Exception exn) {
             Log.error("Error loading preferences: " + exn);

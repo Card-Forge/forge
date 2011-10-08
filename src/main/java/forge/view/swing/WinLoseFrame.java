@@ -1,22 +1,25 @@
 package forge.view.swing;
 
 import java.awt.Color;
-import java.awt.Container;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.AbstractBorder;
 
 import forge.AllZone;
 import forge.Phase;
 import forge.Player;
+import forge.gui.skin.FButton;
+import forge.gui.skin.FPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.WinLoseFrame.WINLOSETEXT;
 import forge.quest.data.QuestMatchState;
@@ -24,7 +27,7 @@ import forge.quest.data.QuestMatchState;
 import net.miginfocom.swing.MigLayout;
 
 /** <p>WinLoseFrame.</p>
- * Core display for win/lose UI shown after completing a game.
+ * VIEW - Core display for win/lose UI shown after completing a game.
  * Uses handlers to customize central panel for various game modes. 
  *
  */
@@ -34,9 +37,9 @@ public class WinLoseFrame extends JFrame {
     private QuestMatchState matchState;
     private WinLoseModeHandler modeHandler;
     
-    public JButton btnContinue;
-    public JButton btnQuit;
-    public JButton btnRestart;
+    public FButton btnContinue;
+    public FButton btnQuit;
+    public FButton btnRestart;
     
     public JLabel lblTitle;
     public JLabel lblStats;
@@ -66,11 +69,14 @@ public class WinLoseFrame extends JFrame {
         modeHandler = mh;
         modeHandler.setView(this);
         matchState = AllZone.getMatchState();
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new MigLayout("wrap, fill"));
-        contentPane.setBackground(new Color(16,28,50));
+
+        // Place all content in FPanel
+        FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
+        contentPanel.setBGImg(AllZone.getSkin().texture1);
+        contentPanel.setBorder(new WinLoseBorder());
+        getContentPane().add(contentPanel);        
         
-        //This needs to be at least 150, or the quit button is off the pane on Mac OS X
+        //Footer should be at least 150 to keep buttons in-pane on Mac OS X
         int HEAD_HEIGHT = 150;
         int FOOT_HEIGHT = 150;
         int FRAME_WIDTH_SMALL = 300;
@@ -79,17 +85,17 @@ public class WinLoseFrame extends JFrame {
         // Head panel
         JPanel pnlHead = new JPanel(new MigLayout("wrap, fill"));
         pnlHead.setOpaque(false);
-        this.add(pnlHead,"width " + FRAME_WIDTH_SMALL + "!, align center");
+        contentPanel.add(pnlHead,"width " + FRAME_WIDTH_SMALL + "!, align center");
 
         lblTitle = new JLabel("WinLoseFrame > lblTitle is broken.");
         lblTitle.setForeground(Color.white); 
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        lblTitle.setFont(AllZone.getSkin().font1.deriveFont(Font.PLAIN,26));
         
         lblStats = new JLabel("WinLoseFrame > lblStats is broken.");
         lblStats.setForeground(Color.white); 
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(new Font("Tahoma", Font.ITALIC, 21));
+        lblStats.setFont(AllZone.getSkin().font1.deriveFont(Font.PLAIN,26));
         
         pnlHead.add(lblTitle, "growx");
         pnlHead.add(lblStats, "growx");
@@ -99,21 +105,21 @@ public class WinLoseFrame extends JFrame {
         pnlCustom = new JPanel(new MigLayout("wrap, fillx"));
         pnlCustom.setBackground(new Color(111,87,59));
         pnlCustom.setForeground(Color.white);
-        this.add(scroller);
+        contentPanel.add(scroller,"w 96%!, align center, gapleft 2%");
         scroller.getViewport().add(pnlCustom);
         
         // Foot panel        
         JPanel pnlFoot = new JPanel(new MigLayout("wrap, fill, hidemode 3"));
         pnlFoot.setOpaque(false);
-        this.add(pnlFoot,"width " + FRAME_WIDTH_SMALL + "!, align center");
+        contentPanel.add(pnlFoot,"width " + FRAME_WIDTH_SMALL + "!, align center");
        
-        this.btnContinue    = new WinLoseButton("Continue");
-        this.btnRestart     = new WinLoseButton("Restart");
-        this.btnQuit        = new WinLoseButton("Quit");
+        this.btnContinue    = new FButton("Continue");
+        this.btnRestart     = new FButton("Restart");
+        this.btnQuit        = new FButton("Quit");
         
-        pnlFoot.add(btnContinue,"height 30!, gap 0 0 5 5, align center");
-        pnlFoot.add(btnRestart,"height 30!, gap 0 0 5 5, align center");
-        pnlFoot.add(btnQuit,"height 30!, gap 0 0 5 5, align center");        
+        pnlFoot.add(btnContinue,"h 36:36, w 150, gap 0 0 5 5, align center");
+        pnlFoot.add(btnRestart,"h 36:36, w 150, gap 0 0 5 5, align center");
+        pnlFoot.add(btnQuit,"h 36:36, w 150, gap 0 0 5 5, align center");        
         
         // Button actions
         btnQuit.addActionListener(new java.awt.event.ActionListener() {
@@ -152,14 +158,14 @@ public class WinLoseFrame extends JFrame {
         }
         
         // Populate custom panel, if necessary.
-        boolean hasStuff = modeHandler.populateCustomPanel();
-        if(!hasStuff) { scroller.setVisible(false); }
+        boolean hasContents = modeHandler.populateCustomPanel();
+        if(!hasContents) { scroller.setVisible(false); }
         
         // Size and show frame
         Dimension screen = this.getToolkit().getScreenSize();
         Rectangle bounds = this.getBounds();
         
-        if(hasStuff) { 
+        if(hasContents) { 
             bounds.height = screen.height - 150;
             scroller.setPreferredSize(new Dimension(FRAME_WIDTH_BIG,
                     screen.height - HEAD_HEIGHT - FOOT_HEIGHT));
@@ -174,7 +180,8 @@ public class WinLoseFrame extends JFrame {
             bounds.y = (screen.height - bounds.height)/2;
         }
         
-        this.setBounds(bounds);
+        this.setBackground(AllZone.getSkin().bg1a);
+        this.setBounds(bounds);        
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setUndecorated(true);
         this.setVisible(true);
@@ -226,7 +233,7 @@ public class WinLoseFrame extends JFrame {
      * @return {@link javax.swing.JFrame} display frame
      */
     final JFrame closeWinLoseFrame() {
-        // issue 147 - keep battlefield up following win/loss
+        // Issue 147 - keep battlefield up following win/loss
         JFrame frame = (JFrame) AllZone.getDisplay();
         frame.dispose();
         frame.setEnabled(true);
@@ -234,17 +241,14 @@ public class WinLoseFrame extends JFrame {
         return frame;
     }
     
-    /**
-     * <p>WinLoseButton.</p>
-     * Private button class to standardize buttons.
-     * 
-     */
-    private class WinLoseButton extends JButton {
-        WinLoseButton(String msg) {
-            super(msg);
-            this.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            this.setOpaque(false);
-            this.setPreferredSize(new Dimension(125,30));
-        }
+    private class WinLoseBorder extends AbstractBorder {        
+        public void paintBorder(Component c, 
+            Graphics g, int x, int y, int width, 
+            int height) {
+                g.setColor(AllZone.getSkin().txt1a);
+                g.drawRect(x+1, y+1, width-3, height-3);
+                g.setColor(AllZone.getSkin().bg1a);
+                g.drawRect(x+3, y+3, width-7, height-7);
+         }
     }
 }

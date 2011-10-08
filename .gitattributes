@@ -9343,6 +9343,23 @@ res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
+res/images/skins/default/bg_splash.jpg -text
+res/images/skins/default/btnLdown.png -text
+res/images/skins/default/btnLover.png -text
+res/images/skins/default/btnLup.png -text
+res/images/skins/default/btnMdown.png -text
+res/images/skins/default/btnMover.png -text
+res/images/skins/default/btnMup.png -text
+res/images/skins/default/btnRdown.png -text
+res/images/skins/default/btnRover.png -text
+res/images/skins/default/btnRup.png -text
+res/images/skins/default/font1.ttf -text
+res/images/skins/default/font2.ttf -text
+res/images/skins/default/palette.jpg -text
+res/images/skins/default/settings.txt -text
+res/images/skins/default/texture1.jpg -text
+res/images/skins/default/texture2.jpg -text
+res/images/skins/default/texture3.jpg -text
 res/images/symbols-13/0.png -text svneol=unset#image/png
 res/images/symbols-13/1.png -text svneol=unset#image/png
 res/images/symbols-13/10.png -text svneol=unset#image/png
@@ -10259,6 +10276,10 @@ src/main/java/forge/gui/input/Input_PayManaCostUtil.java svneol=native#text/plai
 src/main/java/forge/gui/input/Input_PayManaCost_Ability.java svneol=native#text/plain
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/skin/FButton.java -text
+src/main/java/forge/gui/skin/FPanel.java -text
+src/main/java/forge/gui/skin/FRoundedPanel.java -text
+src/main/java/forge/gui/skin/FSkin.java -text
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
