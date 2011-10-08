@@ -1,0 +1,16 @@
+# Settings are stored in a key=value format.
+# Color values are stored as RR,GG,BB[,AA] values 0 to 255
+# Dimension values are stored as x,y
+# Incomplete settings will make the file switch to the default theme.
+
+# Texture opacity settings, 0-100
+texture1opacity=100;
+texture2opacity=100;
+texture3opacity=100;
+
+# FRoundedPanel
+shadowColor=150,150,150,150
+borderColor=0,0,0
+shadowDistance=5,5
+shadowThickness=5
+cornerDiameter=20
