@@ -262,8 +262,8 @@ public class GameAction {
         }
 
         AllZone.getTriggerHandler().suppressMode("ChangesZone");
-        ((PlayerZone_ComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(false);
-        ((PlayerZone_ComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(false);
+        ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(false);
+        ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(false);
 
         int tiz = c.getTurnInZone();
 
@@ -273,8 +273,8 @@ public class GameAction {
         c.setTurnInZone(tiz);
 
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");
-        ((PlayerZone_ComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(true);
-        ((PlayerZone_ComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(true);
+        ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(true);
+        ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(true);
     }
 
     /**

@@ -14,7 +14,7 @@ import forge.card.spellability.SpellAbility;
  * @author Forge
  * @version $Id$
  */
-public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
+public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
     /** Constant <code>serialVersionUID=5750837078903423978L</code>. */
     private static final long serialVersionUID = 5750837078903423978L;
 
@@ -27,7 +27,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
      * @param zone a {@link java.lang.String} object.
      * @param player a {@link forge.Player} object.
      */
-    public PlayerZone_ComesIntoPlay(final Constant.Zone zone, final Player player) {
+    public PlayerZoneComesIntoPlay(final Constant.Zone zone, final Player player) {
         super(zone, player);
     }
 
@@ -99,7 +99,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
                         return c.hasKeyword("Landfall")
-                                || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
+                                || c.hasKeyword(
+                                        "Landfall - Whenever a land enters the battlefield under your control, "
+                                + "CARDNAME gets +2/+2 until end of turn.");
                     }
                 });
 
@@ -110,12 +112,12 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 // Check for a mountain
                 if (!listValakut.isEmpty() && c.isType("Mountain") ) {
                     for (int i = 0; i < listValakut.size(); i++) {
-                	    boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
-                		if (!b) {
-                			// Not enough mountains to activate Valakut -- stop the loop
-                			break;
-                		}
-                	}
+                        boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
+                        if (!b) {
+                            // Not enough mountains to activate Valakut -- stop the loop
+                            break;
+                        }
+                    }
                 }*/
 
                 //Tectonic Instability
@@ -315,21 +317,20 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         leavesTrigger = b;
     }
 
-    
     @Override
-    public Card[] getCards(boolean filter) {
+    public final Card[] getCards(final boolean filter) {
         // Battlefield filters out Phased Out cards by default. Needs to call getCards(false) to get Phased Out cards
         Card[] c;
-        if (!filter){
+        if (!filter) {
             c = new Card[cards.size()];
             cards.toArray(c);
         }
-        else{
+        else {
             Iterator<Card> itr = cards.iterator();
             ArrayList<Card> list = new ArrayList<Card>();
-            while(itr.hasNext()){
+            while (itr.hasNext()) {
                 Card crd = itr.next();
-                if (!crd.isPhasedOut()){
+                if (!crd.isPhasedOut()) {
                     list.add(crd);
                 }
             }
