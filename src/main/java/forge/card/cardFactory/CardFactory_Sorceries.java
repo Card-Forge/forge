@@ -224,36 +224,6 @@ public class CardFactory_Sorceries {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Ignite Memories")) {
-            Target t = new Target(card, "Select target player", "Player");
-            Cost cost = new Cost("4 R", cardName, false);
-
-            SpellAbility spell = new Spell(card, cost, t) {
-                private static final long serialVersionUID = 143904782338241969L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.getPhase().getPhase().equals(Constant.Phase.Main2);
-                }
-
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    CardList handChoices = player.getCardsIn(Zone.Hand);
-                    if (handChoices.size() > 0) {
-                        Card choice = CardUtil.getRandom(handChoices.toArray());
-                        GuiUtils.getChoice("Random card", new CardList(choice));
-                        player.addDamage(CardUtil.getConvertedManaCost(choice.getManaCost()), card);
-                    }
-                }//resolve()
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            
-            card.addSpellAbility(spell);
-        }//*************** END ************ END ************************** 
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Mind's Desire")) {
             final Spell PlayCreature = new Spell(card) {
                 private static final long serialVersionUID = 53838791023456795L;

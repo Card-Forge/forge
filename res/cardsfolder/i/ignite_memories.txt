@@ -1,8 +1,12 @@
 Name:Ignite Memories
 ManaCost:4 R
 Types:Sorcery
-Text:Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
+Text:no text
 K:Storm
+A:SP$ Reveal | Cost$ 4 R | Random$ True | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDamage | SpellDescription$ Target player reveals a card at random from his or her hand. CARDNAME deals damage to that player equal to that card's converted mana cost.
+SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/164.jpg
