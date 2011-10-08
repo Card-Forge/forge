@@ -547,11 +547,11 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         JMenuItem newRandomConstructed = new JMenuItem("New Deck - Generate Random Constructed Cardpool");
         JMenuItem newGenerateConstructed = new JMenuItem("New Deck - Generate Constructed Deck");
 
-        JMenuItem importDeck = new JMenuItem("Import Deck");
-        JMenuItem exportDeck = new JMenuItem("Export Deck");
+        JMenuItem importDeck = new JMenuItem("Import Deck...");
+        JMenuItem exportDeck = new JMenuItem("Export Deck...");
         // JMenuItem downloadDeck = new JMenuItem("Download Deck");
 
-        JMenuItem openConstructed = new JMenuItem("Open Deck - Constructed");
+        JMenuItem openConstructed = new JMenuItem("Open Deck - Constructed...");
         JMenuItem openSealed = new JMenuItem("Open Deck - Sealed");
         JMenuItem openDraft = new JMenuItem("Open Deck - Draft");
 
@@ -559,7 +559,7 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         // newDraftItem.setEnabled(false);
 
         JMenuItem save = new JMenuItem("Save");
-        JMenuItem saveAs = new JMenuItem("Save As");
+        JMenuItem saveAs = new JMenuItem("Save As...");
         JMenuItem delete = new JMenuItem("Delete");
         JMenuItem close = new JMenuItem("Close");
 
