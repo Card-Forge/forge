@@ -1,0 +1,10 @@
+Name:Moonring Island
+ManaCost:no cost
+Types:Land Island
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Dig | Cost$ U T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | IsPresent$ Permanent.Blue+YouCtrl | PresentCompare$ GE2 | SpellDescription$  Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_island.jpg
+End
