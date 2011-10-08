@@ -884,6 +884,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_Choose.createDrawbackChooseNumber(this);
             }
         }
+        
+        else if (API.equals("ChoosePlayer")) {
+            if (isAb) {
+                SA = AbilityFactory_Choose.createAbilityChoosePlayer(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Choose.createSpellChoosePlayer(this);
+            } else if (isDb) {
+                SA = AbilityFactory_Choose.createDrawbackChoosePlayer(this);
+            }
+        }
 
         else if (API.equals("CopyPermanent")) {
             if (isAb) {
@@ -1602,6 +1612,11 @@ public class AbilityFactory {
             }
         } else if (defined.equals("DefendingPlayer")) {
             Player p = AllZone.getCombat().getDefendingPlayer();
+            if (!players.contains(p)) {
+                players.add(p);
+            }
+        } else if (defined.equals("ChosenPlayer")) {
+            Player p = card.getChosenPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }

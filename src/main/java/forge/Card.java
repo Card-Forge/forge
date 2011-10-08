@@ -166,6 +166,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String chosenColor = "";
     private String namedCard = "";
     private int chosenNumber;
+    private Player chosenPlayer;
 
     private Card cloneOrigin = null;
     private ArrayList<Card> clones = new ArrayList<Card>();
@@ -1363,6 +1364,26 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getCMC() {
         return CardUtil.getConvertedManaCost(manaCost);
+    }
+    
+    /**
+     * <p>Getter for the field <code>chosenPlayer</code>.</p>
+     *
+     * @return a Player
+     * @since 1.1.6
+     */
+    public final Player getChosenPlayer() {
+        return chosenPlayer;
+    }
+
+    /**
+     * <p>Setter for the field <code>chosenNumber</code>.</p>
+     *
+     * @param s an int
+     * @since 1.1.6
+     */
+    public final void setChosenPlayer(final Player p) {
+        chosenPlayer = p;
     }
     
     /**
