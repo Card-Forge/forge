@@ -4,7 +4,8 @@ Types:Creature Elf Shaman
 Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ 2 G T Sac<1/Creature.Red> Sac<1/Creature.Green> Sac<1/Creature.White> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedGodsire | ChangeNum$ 1 | CostDesc$ 2 G, T, Sacrifice a red creature, a green creature, and a white creature: | SpellDescription$ Search your library for a card named Godsire and put it onto the battlefield. Then shuffle your library.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/behemoths_herald.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/124.jpg
+Oracle:{2}{G}, {T}, Sacrifice a red creature, a green creature, and a white creature: Search your library for a card named Godsire and put it onto the battlefield. Then shuffle your library.
 End
