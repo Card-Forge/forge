@@ -6600,6 +6600,7 @@ res/cardsfolder/r/rushwood_elemental.txt svneol=native#text/plain
 res/cardsfolder/r/rushwood_herbalist.txt svneol=native#text/plain
 res/cardsfolder/r/rust.txt svneol=native#text/plain
 res/cardsfolder/r/rust_tick.txt svneol=native#text/plain
+res/cardsfolder/r/rusted_relic.txt -text
 res/cardsfolder/r/rusted_sentinel.txt svneol=native#text/plain
 res/cardsfolder/r/rusted_slasher.txt svneol=native#text/plain
 res/cardsfolder/r/rustic_clachan.txt svneol=native#text/plain
