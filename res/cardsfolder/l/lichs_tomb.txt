@@ -1,0 +1,14 @@
+Name:Lich's Tomb
+ManaCost:4
+Types:Artifact
+Text:no text
+K:You don't lose the game for having 0 or less life.
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever you lose life, sacrifice a permanent for each 1 life you lost. (Damage causes loss of life.)
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent
+SVar:X:TriggerCount$LifeAmount
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lichs_tomb.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/128.jpg
+Oracle:You don't lose the game for having 0 or less life.\nWhenever you lose life, sacrifice a permanent for each 1 life you lost. (Damage causes loss of life.)
+End
