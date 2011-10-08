@@ -267,6 +267,7 @@ res/cardsfolder/a/angelic_voices.txt svneol=native#text/plain
 res/cardsfolder/a/angelic_wall.txt svneol=native#text/plain
 res/cardsfolder/a/angels_feather.txt svneol=native#text/plain
 res/cardsfolder/a/angels_grace.txt svneol=native#text/plain
+res/cardsfolder/a/angels_herald.txt -text
 res/cardsfolder/a/angels_mercy.txt svneol=native#text/plain
 res/cardsfolder/a/angelsong.txt svneol=native#text/plain
 res/cardsfolder/a/anger.txt svneol=native#text/plain
@@ -673,6 +674,7 @@ res/cardsfolder/b/bedlam.txt svneol=native#text/plain
 res/cardsfolder/b/bee_sting.txt svneol=native#text/plain
 res/cardsfolder/b/befoul.txt svneol=native#text/plain
 res/cardsfolder/b/behemoth_sledge.txt svneol=native#text/plain
+res/cardsfolder/b/behemoths_herald.txt -text
 res/cardsfolder/b/belbes_armor.txt svneol=native#text/plain
 res/cardsfolder/b/belbes_percher.txt svneol=native#text/plain
 res/cardsfolder/b/belbes_portal.txt svneol=native#text/plain
@@ -1902,6 +1904,7 @@ res/cardsfolder/d/demonic_dread.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_hordes.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_torment.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_tutor.txt svneol=native#text/plain
+res/cardsfolder/d/demons_herald.txt -text
 res/cardsfolder/d/demons_horn.txt svneol=native#text/plain
 res/cardsfolder/d/demons_jester.txt svneol=native#text/plain
 res/cardsfolder/d/demonspine_whip.txt svneol=native#text/plain
@@ -2086,6 +2089,7 @@ res/cardsfolder/d/dragon_tyrant.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_whelp.txt svneol=native#text/plain
 res/cardsfolder/d/dragonmaster_outcast.txt svneol=native#text/plain
 res/cardsfolder/d/dragons_claw.txt svneol=native#text/plain
+res/cardsfolder/d/dragons_herald.txt -text
 res/cardsfolder/d/dragonskull_summit.txt svneol=native#text/plain
 res/cardsfolder/d/dragonsoul_knight.txt svneol=native#text/plain
 res/cardsfolder/d/dragonspeaker_shaman.txt svneol=native#text/plain
@@ -7471,6 +7475,7 @@ res/cardsfolder/s/sphinx_of_magosi.txt svneol=native#text/plain
 res/cardsfolder/s/sphinx_of_the_steel_wind.txt svneol=native#text/plain
 res/cardsfolder/s/sphinx_sovereign.txt svneol=native#text/plain
 res/cardsfolder/s/sphinx_summoner.txt svneol=native#text/plain
+res/cardsfolder/s/sphinxs_herald.txt -text
 res/cardsfolder/s/spider_spawning.txt -text
 res/cardsfolder/s/spider_umbra.txt svneol=native#text/plain
 res/cardsfolder/s/spidersilk_armor.txt svneol=native#text/plain
