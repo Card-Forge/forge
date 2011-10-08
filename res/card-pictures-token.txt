@@ -14,3 +14,4 @@
 [T]c_1_1_myr.jpg							http://serv3.tcgimages.eu/img/cards/New_Phyrexia/myr_token.jpg
 [T]c_3_3_golem.jpg							http://serv2.tcgimages.eu/img/cards/New_Phyrexia/golem_token_artifact_33.jpg
 [T]r_X_X_elemental.jpg						http://serv1.tcgimages.eu/img/cards/Rise_of_the_Eldrazi/elemental_token_red_xx.jpg
+[T]ub_1_1_faerie_rogue.jpg					http://serv2.tcgimages.eu/img/cards/Shadowmoor/faerie_rogue_token_blue_and_black_11.jpg
