@@ -37,14 +37,14 @@ public class ApplicationView implements FView {
      * The splashFrame field is guaranteed to exist when this constructor
      * exits.
      */
-    public ApplicationView() {
+    public ApplicationView(final FSkin skin) {
 
         // We must use invokeAndWait here to fulfill the constructor's
         // contract.
 
         UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD by Braids on 8/18/11 11:37 PM
             public void run() { 
-                splashFrame = new SplashFrame();
+                splashFrame = new SplashFrame(skin);
             }
         });
 

@@ -35,7 +35,8 @@ public class FSkin {
     public ImageIcon btnRover           = null;  
     public ImageIcon btnLdown           = null;
     public ImageIcon btnMdown           = null;
-    public ImageIcon btnRdown           = null;  
+    public ImageIcon btnRdown           = null; 
+    public ImageIcon splash             = null;
     
     public Color bg1a                   = Color.red;
     public Color bg1b                   = Color.red;
@@ -68,6 +69,7 @@ public class FSkin {
     private final String btnLdownfile   = "btnLdown.png";
     private final String btnMdownfile   = "btnMdown.png";
     private final String btnRdownfile   = "btnRdown.png";
+    private final String splashfile     = "bg_splash.jpg";
     
     private ImageIcon tempImg;
     private Font tempFont;
@@ -165,6 +167,7 @@ public class FSkin {
         btnLdown = retrieveImage(dirName + btnLdownfile);
         btnMdown = retrieveImage(dirName + btnMdownfile);
         btnRdown = retrieveImage(dirName + btnRdownfile);
+        splash = retrieveImage(dirName + splashfile);
         
         // Color palette
         File file= new File(dirName + paletteFile);

@@ -3,6 +3,7 @@ package forge.view.swing;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
+import forge.gui.skin.FSkin;
 import forge.model.FModel;
 import forge.view.FView;
 
@@ -27,10 +28,13 @@ public final class Main {
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
         try {
-            final FView view = new ApplicationView();
-            Singletons.setView(view);
             final FModel model = new FModel(null);
             Singletons.setModel(model);
+            
+            FSkin skin = new FSkin(model.preferences.skin);
+            final FView view = new ApplicationView(skin);
+            Singletons.setView(view);
+            
 
             // Need this soon after card factory is loaded
             OldGuiNewGame.loadDynamicGamedata();            

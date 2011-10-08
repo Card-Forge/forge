@@ -31,7 +31,7 @@ public class FModel {
     private final transient PrintStream oldSystemOut;
     private final transient PrintStream oldSystemErr;
     private BuildInfo buildInfo;
-    private ForgePreferences preferences;
+    public ForgePreferences preferences;
     private FGameState gameState;
 
     /**

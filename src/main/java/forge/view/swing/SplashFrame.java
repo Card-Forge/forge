@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import forge.gui.skin.FSkin;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
@@ -24,9 +25,7 @@ import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 @SuppressWarnings("serial")
 public class SplashFrame extends JFrame {
 
-    // Inits: Visual changes can be made here.
-    private static final String BG_ADDRESS = "res/images/ui/forgeSplash.jpg";
-    
+    // Inits: Visual changes can be made here.    
     private static final int    BAR_PADDING_X           = 20;
     private static final int    BAR_PADDING_Y           = 20;
     private static final int    BAR_HEIGHT              = 57;
@@ -54,17 +53,17 @@ public class SplashFrame extends JFrame {
      * Throws {@link IllegalStateException} if not called from an event
      * dispatch thread.
      */
-    public SplashFrame() {
+    public SplashFrame(FSkin skin) {
         super();
-
+        
         if (!SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("SplashFrame() must be called from an event dispatch thread.");
         }
 
         setUndecorated(true);
 
-        // Load icon and set preferred JFrame properties.
-        final ImageIcon bgIcon = new ImageIcon(BG_ADDRESS);
+        // Set preferred JFrame properties.
+        final ImageIcon bgIcon = skin.splash;
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 
