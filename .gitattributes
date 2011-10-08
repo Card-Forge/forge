@@ -2564,6 +2564,7 @@ res/cardsfolder/f/fallowsage.txt svneol=native#text/plain
 res/cardsfolder/f/false_cure.txt svneol=native#text/plain
 res/cardsfolder/f/false_defeat.txt svneol=native#text/plain
 res/cardsfolder/f/false_demise.txt svneol=native#text/plain
+res/cardsfolder/f/false_memories.txt -text
 res/cardsfolder/f/false_mourning.txt svneol=native#text/plain
 res/cardsfolder/f/false_prophet.txt svneol=native#text/plain
 res/cardsfolder/f/false_summoning.txt svneol=native#text/plain
