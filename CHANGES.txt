@@ -154,6 +154,32 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Added an icon to quest24, the The Backlash Machine.
+- Converted Singe-Mind Ogre to script.
+- Made script of Slayer of the Wicked more AI friendly.
+- Converted Arctic Nishoba to script.
+- Fixed Mistmeadow Witch, it will now return all creatures to the battlefield. It's still not 100% correct though, since all creatures are returned with the first delayed trigger.
+- Cards like Winter Orb and Stoic Angel will no longer allow players to untap permanents that could not untap otherwise.
+- Fixed Eater of the Dead
+- ran oracle and setinfo scripts
+- Full support for skins in place.
+- Default skin added.
+- WinLose panel styled with new skinning system.
+- Forge custom swing components added and available for use in Swing UI.
+- WinLose panel written to use forge components.
+- Fixed Vedalken Orrery.
+- Applied fix for Elven Warhounds and Sylvan Basilisk by asret.
+- Fixed text antialiasing for FButtons.
+- Minor Gui cleanup - Menu items that require input should have "..."
+- Minor fix to reset new card flags in QuestWinLoseHandler. Note, "missing new card flag" bug is still present, probably from lines commented out in DeckEditorShop.java.
+- Added 25px horizontal insets to FButton.
+- Changed "Surrender" to "Quit" in QuestWinLoseHandler to prevent overflow.
+- Checkstyle fixes
+- Checkstyle fixes
+- Splash screen now loaded from skin (theme).
+- Added "rebel" theme.
+- fix WinLoseFrame so skinned buttons are not cut off on Mac OS X.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -262,6 +288,19 @@ Planeswalker's Favor
 Planeswalker's Scorn
 Planeswalker's Mirth
 Merfolk Spy
+Urza's Bauble
+Timely Reinforcements
+Polymorph
+Angel's Herald
+Behemoth's Herald
+Demon's Herald
+Dragon's Herald
+Sphinx's Herald
+False Memories
+Insidious Dreams
+Skirk Drill Sergeant
+Rusted Relic
+Lich's Tomb
 
 
 end
