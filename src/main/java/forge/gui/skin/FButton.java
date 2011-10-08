@@ -20,7 +20,6 @@ public class FButton extends JButton {
     protected Image imgL, imgM, imgR;
     private int w, h = 0;
     private boolean allImagesPresent = false;
-    private RenderingHints rh;
     private FSkin skin;
     private AlphaComposite disabledComposite = 
             AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.25f);
@@ -32,15 +31,10 @@ public class FButton extends JButton {
         this.setForeground(skin.txt1a); 
         this.setBackground(Color.red);
         this.setContentAreaFilled(false);
-        this.setFont(skin.font1.deriveFont(Font.PLAIN,14));
+        this.setFont(skin.font1.deriveFont(Font.BOLD,15));
         this.imgL = skin.btnLup.getImage();
         this.imgM = skin.btnMup.getImage();
         this.imgR = skin.btnRup.getImage();
-        
-        rh = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-                );
         
         if(this.imgL != null && this.imgM != null && this.imgR != null) {
             allImagesPresent = true;
@@ -77,7 +71,14 @@ public class FButton extends JButton {
         }
         
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setRenderingHints(rh);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         
         if(!isEnabled()) {
             g2d.setComposite(disabledComposite);

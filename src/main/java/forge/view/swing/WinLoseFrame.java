@@ -117,9 +117,9 @@ public class WinLoseFrame extends JFrame {
         this.btnRestart     = new FButton("Restart");
         this.btnQuit        = new FButton("Quit");
         
-        pnlFoot.add(btnContinue,"h 36:36, w 150, gap 0 0 5 5, align center");
-        pnlFoot.add(btnRestart,"h 36:36, w 150, gap 0 0 5 5, align center");
-        pnlFoot.add(btnQuit,"h 36:36, w 150, gap 0 0 5 5, align center");        
+        pnlFoot.add(btnContinue,"h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(btnRestart,"h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(btnQuit,"h 36:36, w 200!, gap 0 0 5 5, align center");        
         
         // Button actions
         btnQuit.addActionListener(new java.awt.event.ActionListener() {
