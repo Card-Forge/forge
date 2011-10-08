@@ -1,0 +1,12 @@
+Name:Valleymaker
+ManaCost:5 RG
+Types:Creature Giant Shaman
+Text:no text
+PT:5/5
+A:AB$ DealDamage | Cost$ T Sac<1/Mountain> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
+A:AB$ ChoosePlayer | Cost$ T Sac<1/Forest> | Defined$ You | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds G G G to his or her mana pool.
+SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3 | Defined$ ChosenPlayer
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/valleymaker.jpg
+End
