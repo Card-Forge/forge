@@ -1,0 +1,12 @@
+Name:Ancestral Knowledge
+ManaCost:1 U
+Types:Enchantment
+Text:no text
+K:Cumulative upkeep:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top ten cards of your library, then exile any number of them and put the rest back on top of your library in any order.
+SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 10 | AnyNumber$ True | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition$ 0
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME leaves the battlefield, shuffle your library.
+SVar:TrigShuffle:AB$ Shuffle | Cost$ 0 | Defined$ You
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_knowledge.jpg
+End
