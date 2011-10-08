@@ -77,8 +77,9 @@ public class WinLoseFrame extends JFrame {
         getContentPane().add(contentPanel);        
         
         //Footer should be at least 150 to keep buttons in-pane on Mac OS X
+        //it needs to be > 175 now that skinning is used
         int HEAD_HEIGHT = 150;
-        int FOOT_HEIGHT = 150;
+        int FOOT_HEIGHT = 182;
         int FRAME_WIDTH_SMALL = 300;
         int FRAME_WIDTH_BIG = 600;
         
