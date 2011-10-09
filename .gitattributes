@@ -6669,6 +6669,7 @@ res/cardsfolder/s/salvaging_station.txt svneol=native#text/plain
 res/cardsfolder/s/samite_archer.txt svneol=native#text/plain
 res/cardsfolder/s/samite_healer.txt svneol=native#text/plain
 res/cardsfolder/s/samite_pilgrim.txt svneol=native#text/plain
+res/cardsfolder/s/samite_sanctuary.txt -text
 res/cardsfolder/s/samurai_enforcers.txt svneol=native#text/plain
 res/cardsfolder/s/sanctimony.txt svneol=native#text/plain
 res/cardsfolder/s/sanctum_custodian.txt svneol=native#text/plain
