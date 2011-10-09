@@ -752,7 +752,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         else if (cardName.equals("Volrath's Dungeon")) {
 
             Cost dungeonCost = new Cost("Discard<1/Card>", cardName, true);
-            Target dungeonTgt = new Target(card, "Volrath's Dungeon - Target player", "player".split(","));
+            Target dungeonTgt = new Target(card, card + " - Select target player", "Player".split(","));
 
             final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt) {
                 private static final long serialVersionUID = 334033015590321821L;
