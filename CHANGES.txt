@@ -180,6 +180,23 @@ Fixes/Features:
 - Added "rebel" theme.
 - fix WinLoseFrame so skinned buttons are not cut off on Mac OS X.
 - Added the recent commit logs to changes.txt.
+- add AF_ChoosePlayer. Takes params for:
+1. target/defined Player
+2. Choices (defined for valid Player choices)
+This can then be accessed by Defined$ ChosenPlayer
+- fix up the stack description for AF_Mill
+- Fixed bg_splash.jpg bug.
+- Rebel skin, attempt #2.
+- convert Ignite Memories to script
+- fixed Falling Timber
+- AF_ChooseType for Creature types now uses list selection instead of free-text typing.
+- fix Type of Desperate Ravings
+- Added missing ability to Fire Whip.
+- Fixed Rolling Temblor.
+- Fixed Yawgmoth's Edict.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -301,6 +318,22 @@ Insidious Dreams
 Skirk Drill Sergeant
 Rusted Relic
 Lich's Tomb
+Valleymaker
+Oona, Queen of the Fae
+Moonring Island
+Agonizing Memories
+Ancestral Knowledge
+Apathy
+Chimeric Sphere
+Elvish Soultiller
+Mistform Seaswift
+Gulf Squid
+Ribbon Snake
+Samite Sanctuary
+Living Terrain
+Winding Canyons
+Skeletonize
+Fire Whip
 
 
 end
