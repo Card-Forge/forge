@@ -1795,6 +1795,7 @@ res/cardsfolder/d/dauthi_trapper.txt svneol=native#text/plain
 res/cardsfolder/d/dauthi_warlord.txt svneol=native#text/plain
 res/cardsfolder/d/davenant_archer.txt svneol=native#text/plain
 res/cardsfolder/d/davenant_healer.txt svneol=native#text/plain
+res/cardsfolder/d/dawn_charm.txt -text
 res/cardsfolder/d/dawn_elemental.txt svneol=native#text/plain
 res/cardsfolder/d/dawn_of_the_dead.txt svneol=native#text/plain
 res/cardsfolder/d/dawnfluke.txt -text
