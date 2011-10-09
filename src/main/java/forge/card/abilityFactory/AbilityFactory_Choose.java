@@ -281,8 +281,19 @@ public class AbilityFactory_Choose {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            chosenType = JOptionPane.showInputDialog(null, "Choose a creature type:", card.getName(),
-                                    JOptionPane.QUESTION_MESSAGE);
+                            ArrayList<String> validChoices = CardUtil.getCreatureTypes();
+                            for (String s : invalidTypes) {
+                                validChoices.remove(s);
+                            }
+                            Object o = GuiUtils.getChoice("Choose a creature type", validChoices.toArray());
+                            if (null == o) {
+                                return;
+                            }
+                            String choice = (String) o;
+                            if (CardUtil.isACreatureType(choice) && !invalidTypes.contains(choice)) {
+                                valid = true;
+                                card.setChosenType(choice);
+                            }
                         }
                         else {
                             String chosen = "";
@@ -302,6 +313,10 @@ public class AbilityFactory_Choose {
                                 if (logic.equals("MostProminentInComputerDeck")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(
                                             AllZoneUtil.getCardsInGame().getController(AllZone.getComputerPlayer()));
+                                }
+                                if (logic.equals("MostProminentInComputerGraveyard")) {
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
+                                            AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard));
                                 }
                             }
                             if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {

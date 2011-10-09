@@ -413,7 +413,7 @@ public final class CardUtil {
     }
 
     /**
-     * <p>getCardTypes.</p>
+     * <p>getBasicTypes.</p>
      *
      * @return a {@link java.util.ArrayList} object.
      * @since 1.1.3
@@ -431,6 +431,20 @@ public final class CardUtil {
 
         types.addAll(Constant.CardTypes.basicTypes[0].list);
         types.addAll(Constant.CardTypes.landTypes[0].list);
+
+        return types;
+    }
+    
+    /**
+     * <p>getCreatureTypes.</p>
+     *
+     * @return a {@link java.util.ArrayList} object.
+     * @since 1.1.6
+     */
+    public static ArrayList<String> getCreatureTypes() {
+        ArrayList<String> types = new ArrayList<String>();
+
+        types.addAll(Constant.CardTypes.creatureTypes[0].list);
 
         return types;
     }
