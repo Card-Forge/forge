@@ -1291,6 +1291,7 @@ res/cardsfolder/c/chapel_geist.txt -text
 res/cardsfolder/c/char.txt svneol=native#text/plain
 res/cardsfolder/c/char_rumbler.txt svneol=native#text/plain
 res/cardsfolder/c/charcoal_diamond.txt svneol=native#text/plain
+res/cardsfolder/c/charge_across_the_araba.txt -text
 res/cardsfolder/c/charging_bandits.txt svneol=native#text/plain
 res/cardsfolder/c/charging_paladin.txt svneol=native#text/plain
 res/cardsfolder/c/charging_rhino.txt svneol=native#text/plain
