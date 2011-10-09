@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_terrain.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/260.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/117.jpg
+Oracle:Enchant land\nEnchanted land is a 5/6 green Treefolk creature that's still a land.
 End

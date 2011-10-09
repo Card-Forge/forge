@@ -10,4 +10,5 @@ SVar:ABRegen:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate this creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletonize.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/114.jpg
+Oracle:Skeletonize deals 3 damage to target creature. When a creature dealt damage this way dies this turn, put a 1/1 black Skeleton creature token onto the battlefield with "{B}: Regenerate this creature."
 End

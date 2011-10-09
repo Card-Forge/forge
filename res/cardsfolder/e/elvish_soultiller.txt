@@ -9,4 +9,5 @@ SVar:ShuffleInto:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenType+YouOwn | Or
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_soultiller.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/124.jpg
+Oracle:When Elvish Soultiller dies, choose a creature type. Shuffle all creature cards of that type from your graveyard into your library.
 End

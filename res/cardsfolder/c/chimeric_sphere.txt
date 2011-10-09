@@ -8,4 +8,5 @@ SVar:DBDebuff:DB$ Debuff | Keywords$ Flying | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_sphere.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/148.jpg
+Oracle:{2}: Until end of turn, Chimeric Sphere becomes a 2/1 Construct artifact creature with flying.\n{2}: Until end of turn, Chimeric Sphere becomes a 3/2 Construct artifact creature without flying.
 End

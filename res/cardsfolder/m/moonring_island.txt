@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_island.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/276.jpg
+Oracle:({T}: Add {U} to your mana pool.)\nMoonring Island enters the battlefield tapped.\n{U}, {T}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
 End

@@ -9,4 +9,5 @@ SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/2.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/111.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/117.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/126.jpg
+Oracle:Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_whip.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/100.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/63.jpg
+Oracle:Enchant creature you control\nEnchanted creature has "{T}: This creature deals 1 damage to target creature or player."\nSacrifice Fire Whip: Fire Whip deals 1 damage to target creature or player.
 End

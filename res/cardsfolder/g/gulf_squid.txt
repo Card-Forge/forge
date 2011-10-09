@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gulf_squid.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/35.jpg
+Oracle:When Gulf Squid enters the battlefield, tap all lands target player controls.
 End
