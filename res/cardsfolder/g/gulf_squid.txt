@@ -1,0 +1,11 @@
+Name:Gulf Squid
+ManaCost:3 U
+Types:Creature Squid Beast
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all lands target player controls.
+SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gulf_squid.jpg
+End
