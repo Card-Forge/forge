@@ -1,0 +1,10 @@
+Name:Cabal Therapy
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ NameCard | Cost$ B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ DBDiscard | SpellDescription$ Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.NamedCard
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_therapy.jpg
+End
