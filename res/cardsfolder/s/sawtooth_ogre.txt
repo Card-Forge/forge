@@ -1,0 +1,14 @@
+Name:Sawtooth Ogre
+ManaCost:2 R R
+Types:Creature Ogre
+Text:no text
+PT:3/3
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy that creature at end of combat.
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy that creature at end of combat.
+SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDamageBlocked | TriggerDescription$ CARDNAME deals 1 damage to blocked creature at end of combat.
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDamageBlocker | TriggerDescription$ CARDNAME deals 1 damage to blocking creature at end of combat.
+SVar:TrigDamageBlocked:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
+SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_ogre.jpg
+End
