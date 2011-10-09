@@ -3,7 +3,8 @@ ManaCost:2 U U
 Types:Enchantment
 Text:no text
 K:Cumulative upkeep:1
-S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Cumulative upkeep 1 | Description$ Green creatures have "Cumulative upkeep 1."
+S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Cumulative upkeep:1 | Description$ Green creatures have "Cumulative upkeep 1."
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_dreams.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/62.jpg
