@@ -361,7 +361,7 @@ public final class AbilityFactory_ChangeZone {
         }
         
         //don't use fetching to top of library/graveyard before main2
-        if(AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases") 
+        if(AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases") 
                 && !destination.equals("Battlefield") && !destination.equals("Hand")) {
             return false;
         }

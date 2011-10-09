@@ -221,7 +221,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         //Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block
@@ -634,7 +634,7 @@ public class AbilityFactory_ZoneAffecting {
         Random r = MyRandom.random;
 
         //Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block
@@ -1177,7 +1177,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         //Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block

@@ -222,7 +222,7 @@ public class AbilityFactory_AlterLife {
             return false;
 
         //Don't use lifegain before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block
@@ -521,7 +521,7 @@ public class AbilityFactory_AlterLife {
             return false;
 
         //Don't use loselife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block
@@ -881,7 +881,7 @@ public class AbilityFactory_AlterLife {
         }
 
         //Don't use poison before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
             return false;
 
         //Don't tap creatures that may be able to block
@@ -1078,7 +1078,7 @@ public class AbilityFactory_AlterLife {
         }
 
         //Don't use setLife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
