@@ -1,0 +1,9 @@
+Name:Persecute
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+A:SP$ ChooseColor | Cost$ 2 B B | Defined$ You | AILogic$ MostProminentHumanCreatures | SubAbility$ DBRevealDiscard | SpellDescription$ Target player reveals his or her hand and discards all cards of that color.
+SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealDiscardAll | DiscardValid$ Card.ChosenColor | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/persecute.jpg
+End
