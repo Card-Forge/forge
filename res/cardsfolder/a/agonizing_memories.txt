@@ -5,4 +5,8 @@ Text:no text
 A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0 | IsCurse$ True | SpellDescription$ Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agonizing_memories.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/2.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/111.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/117.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/126.jpg
 End

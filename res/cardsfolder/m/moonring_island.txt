@@ -7,4 +7,5 @@ A:AB$ Dig | Cost$ U T | ValidTgts$ Player | TgtPrompt$ Select target player | Di
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_island.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/276.jpg
 End

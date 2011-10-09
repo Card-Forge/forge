@@ -8,4 +8,5 @@ SVar:TrigChoose:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILog
 SVar:ShuffleInto:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_soultiller.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/124.jpg
 End

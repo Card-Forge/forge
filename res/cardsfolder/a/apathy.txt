@@ -9,5 +9,5 @@ SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigUn
 SVar:TrigUntap:AB$ Untap | Cost$ Discard<1/Random> | Defined$ Self | SpellDescription$ Untap enchanted creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apathy.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/33.jpg
 End
-

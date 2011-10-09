@@ -10,4 +10,5 @@ K:Morph:1 U
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_seaswift.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/45.jpg
 End

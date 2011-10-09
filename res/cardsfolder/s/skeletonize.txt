@@ -9,4 +9,5 @@ SVar:ABToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Skeleton | TokenT
 SVar:ABRegen:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate this creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletonize.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/114.jpg
 End

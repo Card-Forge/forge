@@ -7,4 +7,5 @@ K:Flying
 A:AB$ Debuff | Cost$ 2 | Defined$ Self | Keywords$ Flying | AnyPlayer$ True | SpellDescription$ CARDNAME loses flying until end of turn. Any player may activate this ability.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbon_snake.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/46.jpg
 End

@@ -6,4 +6,5 @@ A:AB$ PreventDamage | Cost$ 2 | ValidTgts$ Creature | Amount$ 1 | TgtPrompt$ Sel
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_sanctuary.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/21.jpg
 End

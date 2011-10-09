@@ -9,4 +9,5 @@ SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3 | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valleymaker.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/221.jpg
 End
