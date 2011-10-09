@@ -1,0 +1,13 @@
+Name:Descendant of Kiyomaro
+ManaCost:1 W W
+Types:Creature Human Soldier
+Text:no text
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddTrigger$ TriggerGainLife | AddSVar$ TrigGainLife | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."
+SVar:TriggerGainLife:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGainLife | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage, you gain 3 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:X:Count$CardsInYourHand
+SVar:Y:Count$CardsInOppHand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_kiyomaro.jpg
+End
