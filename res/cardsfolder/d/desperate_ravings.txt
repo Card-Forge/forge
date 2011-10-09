@@ -1,6 +1,6 @@
 Name:Desperate Ravings
 ManaCost:1 R
-Types:Sorcery
+Types:Instant
 Text:no text
 A:SP$ Draw | Cost$ 1 R | NumCards$ 2 | SubAbility$ SVar=DBDiscard | SpellDescription$ Draw two cards, then discard a carda at random.
 A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SubAbility$ SVar=DBDiscard | Flashback$ True | CostDesc$ Flashback - 2 U | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
