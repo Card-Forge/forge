@@ -5035,6 +5035,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (getName().equals(Property.substring(8))) return false;
         } else if (Property.startsWith("sameName")) {
             if (!getName().equals(source.getName())) return false;
+        } else if (Property.equals("NamedCard")) {
+            if (!getName().equals(source.getNamedCard())) return false;
         }
         // ... Card colors
         else if (Property.contains("White")

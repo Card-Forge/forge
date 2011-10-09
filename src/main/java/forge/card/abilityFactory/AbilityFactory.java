@@ -894,6 +894,16 @@ public class AbilityFactory {
                 SA = AbilityFactory_Choose.createDrawbackChoosePlayer(this);
             }
         }
+        
+        else if (API.equals("NameCard")) {
+            if (isAb) {
+                SA = AbilityFactory_Choose.createAbilityNameCard(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Choose.createSpellNameCard(this);
+            } else if (isDb) {
+                SA = AbilityFactory_Choose.createDrawbackNameCard(this);
+            }
+        }
 
         else if (API.equals("CopyPermanent")) {
             if (isAb) {

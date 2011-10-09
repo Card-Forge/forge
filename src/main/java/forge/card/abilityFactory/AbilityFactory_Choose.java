@@ -1060,5 +1060,229 @@ public class AbilityFactory_Choose {
             }
         }
     }
+    
+    // *************************************************************************
+    // ***************************** NameCard **********************************
+    // *************************************************************************
+
+    /**
+     * <p>createAbilityNameCard.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createAbilityNameCard(final AbilityFactory af) {
+        final SpellAbility abNameCard = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 1748714246609515354L;
+
+            @Override
+            public String getStackDescription() {
+                return nameCardStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return nameCardCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                nameCardResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return nameCardTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abNameCard;
+    }
+
+    /**
+     * <p>createSpellNameCard.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createSpellNameCard(final AbilityFactory af) {
+        final SpellAbility spNameCard = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 209265128022008897L;
+
+            @Override
+            public String getStackDescription() {
+                return nameCardStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return nameCardCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                nameCardResolve(af, this);
+            }
+
+        };
+        return spNameCard;
+    }
+
+    /**
+     * <p>createDrawbackNameCard.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.6
+     */
+    public static SpellAbility createDrawbackNameCard(final AbilityFactory af) {
+        final SpellAbility dbNameCard = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -7647726271751061495L;
+
+            @Override
+            public String getStackDescription() {
+                return nameCardStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                nameCardResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return nameCardTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbNameCard;
+    }
+
+    /**
+     * <p>nameCardStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String nameCardStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        }
+        else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+        }
+
+        for (Player p : tgtPlayers) {
+            sb.append(p).append(" ");
+        }
+        sb.append("names a card.");
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>nameCardCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean nameCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        return choosePlayerTriggerAI(af, sa, false);
+    }
+
+    /**
+     * <p>nameCardTriggerAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean nameCardTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        //TODO - there is no AILogic implemented yet
+        return false;
+    }
+
+    /**
+     * <p>nameCardResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void nameCardResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+        
+        String valid = "Card";
+        String validDesc = "card";
+        if (params.containsKey("ValidCards")) {
+            valid = params.get("ValidCards");
+            validDesc = params.get("ValidDesc");
+        }
+
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canTarget(sa)) {
+                boolean ok = false;
+                String name = null;
+                while (!ok) {
+                    if (sa.getActivatingPlayer().isHuman()) {
+                        String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card";
+                        name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
+                        if (!valid.equals("Card") && !(null == name)) {
+                            Card temp = AllZone.getCardFactory().getCard(name, p);
+                            ok = temp.isValid(valid, host.getController(), host);
+                        }
+                        else {
+                            ok = true;
+                        }
+                        if (ok) {
+                            host.setNamedCard(null == name ? "" : name);
+                        }
+
+                    } else {
+                        //TODO - not implemented
+                    }
+                }
+            }
+        }
+    }
 
 } //end class AbilityFactory_Choose
