@@ -1,0 +1,10 @@
+Name:Ribbon Snake
+ManaCost:1 U U
+Types:Creature Snake
+Text:no text
+PT:2/3
+K:Flying
+A:AB$ Debuff | Cost$ 2 | Defined$ Self | Keywords$ Flying | AnyPlayer$ True | SpellDescription$ CARDNAME loses flying until end of turn. Any player may activate this ability.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbon_snake.jpg
+End
