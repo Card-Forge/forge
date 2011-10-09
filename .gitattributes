@@ -3599,6 +3599,7 @@ res/cardsfolder/h/heartwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/h/heat_of_battle.txt svneol=native#text/plain
 res/cardsfolder/h/heat_ray.txt svneol=native#text/plain
 res/cardsfolder/h/heat_shimmer.txt svneol=native#text/plain
+res/cardsfolder/h/heat_stroke.txt -text
 res/cardsfolder/h/heavens_gate.txt svneol=native#text/plain
 res/cardsfolder/h/heavy_arbalest.txt svneol=native#text/plain
 res/cardsfolder/h/heavy_ballista.txt svneol=native#text/plain
