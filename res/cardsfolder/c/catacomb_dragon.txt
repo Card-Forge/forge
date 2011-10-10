@@ -1,0 +1,12 @@
+Name:Catacomb Dragon
+ManaCost:4 B B
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+T:Mode$ Blocks | ValidCard$ Creature.nonArtifact+nonDragon | ValidBlocked$ Card.Self | Execute$ TrigPumpBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a nonartifact, non-Dragon creature, that creature gets -X/-0 until end of turn, where X is half the creature's power, rounded down.
+SVar:TrigPumpBlocker:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | NumAtt$ -X
+SVar:X:TriggeredBlocker$CardPower/HalfDown
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/catacomb_dragon.jpg
+End
