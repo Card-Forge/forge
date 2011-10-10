@@ -10079,7 +10079,6 @@ src/main/java/forge/Gui_MigrateLocalMWSSetPictures_HQ.java svneol=native#text/pl
 src/main/java/forge/Gui_MultipleBlockers4.java svneol=native#text/plain
 src/main/java/forge/Gui_NewGame.java svneol=native#text/plain
 src/main/java/forge/Gui_ProgressBarWindow.java svneol=native#text/plain
-src/main/java/forge/Gui_WinLose.java svneol=native#text/plain
 src/main/java/forge/HandSizeOp.java svneol=native#text/plain
 src/main/java/forge/HttpUtil.java svneol=native#text/plain
 src/main/java/forge/HumanPlayer.java svneol=native#text/plain
@@ -10364,7 +10363,6 @@ src/main/java/forge/quest/data/QuestMatchState.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtilCards.java -text
-src/main/java/forge/quest/data/QuestUtilRewards.java -text
 src/main/java/forge/quest/data/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/data/bazaar/QuestStallDefinition.java svneol=native#text/plain
 src/main/java/forge/quest/data/bazaar/QuestStallManager.java svneol=native#text/plain
@@ -10466,7 +10464,6 @@ src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/
 src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/GuiQuestOptionsTest.java svneol=native#text/plain
-src/test/java/forge/GuiWinLoseTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseTest.java svneol=native#text/plain
 src/test/java/forge/RunTest.java svneol=native#text/plain

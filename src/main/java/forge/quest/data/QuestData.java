@@ -87,8 +87,6 @@ public final class QuestData {
     // Utility class to access cards, has access to private fields
     // Moved some methods there that otherwise would make this class even more complex
     private transient QuestUtilCards myCards;
-    private transient QuestUtilRewards myRewards;
-
 
     public static final String[] RANK_TITLES  = new String[]{
         "Level 0 - Confused Wizard",
@@ -132,7 +130,6 @@ public final class QuestData {
     private void initTransients() {
         // These are helper classes that hold no data.
         myCards = new QuestUtilCards(this);
-        myRewards = new QuestUtilRewards(this);
 
         // to avoid NPE some pools will be created here if they are null
         if (null == newCardList) { newCardList = new ItemPool<InventoryItem>(InventoryItem.class); }
@@ -157,7 +154,6 @@ public final class QuestData {
     public QuestPetManager getPetManager() { return petManager; }
     // Cards - class uses data from here
     public QuestUtilCards getCards() { return myCards; }
-    public QuestUtilRewards getRewards() { return myRewards; }
 
     // Challenge performance
     public int getChallengesPlayed() {
