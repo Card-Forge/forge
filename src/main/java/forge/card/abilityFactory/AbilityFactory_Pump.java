@@ -284,6 +284,9 @@ public class AbilityFactory_Pump {
             final boolean addsKeywords = Keywords.size() > 0;
 
             if (addsKeywords) {
+                if(!containsCombatRelevantKeyword(Keywords) && AllZone.getPhase().isBefore(Constant.Phase.Main2))
+                    list.clear(); //this keyword is not combat relevenat
+                
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return !c.hasAnyKeyword(KWs);    // don't add duplicate negative keywords
@@ -295,6 +298,16 @@ public class AbilityFactory_Pump {
 
         return list;
     }//getCurseCreatures()
+    
+    private boolean containsCombatRelevantKeyword(ArrayList<String> keywords) {
+        boolean flag = false;
+        for (String keyword : keywords) {
+            //since most keywords are combat relevant check for those that are not
+            if (!keyword.equals("HIDDEN This card doesn't untap during your next untap step."))
+                flag = true;
+        }
+        return flag;
+    }
 
     /**
      * <p>pumpPlayAI.</p>
@@ -309,7 +322,6 @@ public class AbilityFactory_Pump {
 
         Cost cost = sa.getPayCosts();
         
-        // temporarily disabled until AI is improved
         if (!CostUtil.checkLifeCost(cost, hostCard, 4))
             return false;
 
@@ -327,8 +339,7 @@ public class AbilityFactory_Pump {
         // Phase Restrictions
         if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_Begin)) {
             // Instant-speed pumps should not be cast outside of combat when the stack is empty
-            if (!AF.isCurse()) {
-                if (!AbilityFactory.isSorcerySpeed(sa))
+            if (!AF.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
                     return false;
             }
         } else if (AllZone.getStack().size() > 0) {
@@ -412,7 +423,7 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory) {
         if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility) 
-                && !(AF.isCurse() && defense < 0))
+                && !(AF.isCurse() && (defense < 0 || !containsCombatRelevantKeyword(Keywords))))
             return false;
 
         Target tgt = AF.getAbTgt();
