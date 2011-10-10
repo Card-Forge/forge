@@ -71,6 +71,7 @@ public enum Counters {
     ORE(),
     PAGE(),
     PAIN(),
+    PARALYZATION(),
     PETAL(),
     PIN(),
     PLAGUE(),

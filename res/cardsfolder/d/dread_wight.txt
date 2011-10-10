@@ -1,0 +1,20 @@
+Name:Dread Wight
+ManaCost:3 B B
+Types:Creature Zombie
+Text:no text
+PT:3/4
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigBlocked | TriggerDescription$At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "4: Remove a paralyzation counter from this creature."
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "4: Remove a paralyzation counter from this creature."
+SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigCounterBlocked | TriggerDescription$ At the end of combat, put a paralyzation counter on creature
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigCounterBlocker | TriggerDescription$ At the end of combat, put a paralyzation counter on creature
+SVar:TrigCounterBlocked:AB$ PutCounter | Cost$ 0 | CounterType$ PARALYZATION | CounterNum$ 1 | Defined$ TriggeredAttacker | SubAbility$ DBTapBlocked | SpellDescription$ Put paralyzation counter on creature
+SVar:TrigCounterBlocker:AB$ PutCounter | Cost$ 0 | CounterType$ PARALYZATION | CounterNum$ 1 | Defined$ TriggeredBlocker | SubAbility$ DBTapBlocker | SpellDescription$ Put paralyzation counter on creature
+SVar:DBTapBlocked:DB$ Tap | Defined$ TriggeredAttacker | SpellDescription$ Tap creature | SubAbility$ DBAnimateAttacker
+SVar:DBTapBlocker:DB$ Tap | Defined$ TriggeredBlocker | SpellDescription$ Tap creature | SubAbility$ DBAnimateBlocker
+SVar:DBAnimateAttacker:DB$ Animate | Defined$ TriggeredAttacker | staticAbilities$ Static | Abilities$ ABRemoveCounter | Permanent$ True
+SVar:DBAnimateBlocker:DB$ Animate | Defined$ TriggeredBlocker | staticAbilities$ Static | Abilities$ ABRemoveCounter | Permanent$ True
+SVar:ABRemoveCounter:AB$ RemoveCounter | Defined$ Self | Cost$ 4 | CounterType$ PARALYZATION | CounterNum$ 1 | SpellDescription$ Remove a paralyzation counter from this creature.
+SVar:Static:Mode$ Continuous | Affected$ Card.Self+counters_GE1_PARALYZATION | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AffectedZone$ Battlefield
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wight.jpg
+End
