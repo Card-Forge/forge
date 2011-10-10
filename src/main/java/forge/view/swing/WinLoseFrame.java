@@ -103,6 +103,7 @@ public class WinLoseFrame extends JFrame {
         
         // Custom display panel in center; populated later by mode handler.
         JScrollPane scroller = new JScrollPane();
+        scroller.getVerticalScrollBar().setUnitIncrement(16);
         pnlCustom = new JPanel(new MigLayout("wrap, fillx"));
         pnlCustom.setBackground(new Color(111,87,59));
         pnlCustom.setForeground(Color.white);
