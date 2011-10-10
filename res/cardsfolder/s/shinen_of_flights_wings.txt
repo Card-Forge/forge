@@ -1,0 +1,10 @@
+Name:Shinen of Flight's Wings
+ManaCost:4 U
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ U Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel - | KW$ Flying | ActivationZone$ Hand | SpellDescription$ Target creature gains flying until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_flights_wings.jpg
+End
