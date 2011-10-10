@@ -2183,8 +2183,6 @@ public class GameAction {
      */
     public void playSpellAbility_NoStack(final SpellAbility sa, final boolean skipTargeting) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
-        
-        AbilityFactory_Charm.setupCharmSAs(sa);
 
         if (sa.getPayCosts() != null) {
             Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
