@@ -178,14 +178,11 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
             model.qData.subtractCredits(15);
         }
 
-        //System.out.println("model.qData cardpoolsize:" + AllZone.getQuestData().getCardpool().size());
         model.qData.getCards().clearShopList();
 
         if (model.qData.getAvailableChallenges() != null) {
             model.qData.clearAvailableChallenges();
         }
-
-        model.qData.getCards().resetNewList();
 
         model.qMatchState.reset();
         AllZone.setQuestEvent(null);
