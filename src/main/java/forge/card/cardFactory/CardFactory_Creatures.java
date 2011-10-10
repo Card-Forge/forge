@@ -2278,7 +2278,8 @@ public class CardFactory_Creatures {
                 || cardName.equals("Quicksilver Gargantuan")
                 || cardName.equals("Jwari Shapeshifter")
                 || cardName.equals("Phyrexian Metamorph")
-                || cardName.equals("Phantasmal Image")) {
+                || cardName.equals("Phantasmal Image")
+                || cardName.equals("Body Double")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
             final Card[] cloned = new Card[1];
@@ -2403,11 +2404,36 @@ public class CardFactory_Creatures {
                     }
                 }
             };
+            
+            Input graveyardRuntime = new Input() {
+                private static final long serialVersionUID = 6950318443268022876L;
+
+                @Override
+                public void showMessage() {
+                    String message = "Select a creature in a graveyard";
+                    CardList choices = AllZoneUtil.getCardsIn(Zone.Graveyard);
+                    Object o = GuiUtils.getChoiceOptional(message, choices.toArray());
+                    if (null == o) {
+                        stop();
+                    }
+                    else {
+                        Card c = (Card) o;
+                        copyTarget[0] = c;
+                        stopSetNext(new Input_PayManaCost(copy));
+                    }
+                }
+            };
+            
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(copy);
             copy.setStackDescription(cardName + " - enters the battlefield as a copy of selected card.");
-            copy.setBeforePayMana(runtime);
+            if (cardName.equals("Body Double")) {
+                copy.setBeforePayMana(graveyardRuntime);
+            }
+            else {
+                copy.setBeforePayMana(runtime);
+            }
         }//*************** END ************ END **************************
 
 
