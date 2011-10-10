@@ -4943,6 +4943,7 @@ res/cardsfolder/m/meteor_crater.txt svneol=native#text/plain
 res/cardsfolder/m/meteor_storm.txt svneol=native#text/plain
 res/cardsfolder/m/michiko_konda_truth_seeker.txt -text
 res/cardsfolder/m/midnight_banshee.txt svneol=native#text/plain
+res/cardsfolder/m/midnight_charm.txt -text
 res/cardsfolder/m/midnight_covenant.txt svneol=native#text/plain
 res/cardsfolder/m/midnight_haunting.txt -text
 res/cardsfolder/m/midnight_ritual.txt -text
