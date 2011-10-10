@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets -X/-X, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand/Times.-1
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kagemaros_clutch.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/74.jpg

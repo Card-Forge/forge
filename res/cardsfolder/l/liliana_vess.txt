@@ -5,7 +5,7 @@ Text:no text
 Loyalty:5
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, then shuffle your library and put that card on top of it.
-A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140212.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/102.jpg

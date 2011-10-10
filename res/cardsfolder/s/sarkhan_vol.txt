@@ -5,7 +5,7 @@ Text:no text
 Loyalty:4
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Haste | SpellDescription$ Creatures you control get +1/+1 and gain haste until end of turn.
 A:AB$ GainControl | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
-A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | TokenAmount$ 5 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | SpellDescription$ Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
+A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ 5 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | SpellDescription$ Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg

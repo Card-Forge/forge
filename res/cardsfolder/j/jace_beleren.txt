@@ -5,7 +5,7 @@ Text:no text
 Loyalty:3
 A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Defined$ Each | Planeswalker$ True | SpellDescription$ Each player draws a card.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ True | SpellDescription$ Target player draws a card.
-A:AB$ Mill | Cost$ SubCounter<10/LOYALTY> | NumCards$ 20 | ValidTgts$ Player | Planeswalker$ True | SpellDescription$ Target player puts the top twenty cards of his or her library into his or her graveyard.
+A:AB$ Mill | Cost$ SubCounter<10/LOYALTY> | NumCards$ 20 | ValidTgts$ Player | Planeswalker$ True | Ultimate$ True | SpellDescription$ Target player puts the top twenty cards of his or her library into his or her graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_beleren.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/58.jpg

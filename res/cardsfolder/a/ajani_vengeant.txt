@@ -6,7 +6,7 @@ Loyalty:3
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | KW$ HIDDEN This card doesn't untap during your next untap step. | ValidTgts$ Permanent | Permanent$ True | IsCurse$ True | SpellDescription$ Target permanent doesn't untap during its controller's next untap step.
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ SVar=DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target creature or player and you gain 3 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
-A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | Planeswalker$ True | SpellDescription$ Destroy all lands target player controls.
+A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SpellDescription$ Destroy all lands target player controls.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_vengeant.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/154.jpg

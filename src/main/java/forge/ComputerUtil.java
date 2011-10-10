@@ -4,6 +4,8 @@ import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostPart;
+import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostUtil;
 import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
@@ -55,7 +57,7 @@ public class ComputerUtil {
                 continue;
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            if (canBePlayedAndPayedByAI(sa)) //checks everything nescessary
+            if (canBePlayedAndPayedByAI(sa)) //checks everything necessary
             {
                 handlePlayingSpellAbility(sa);
 
@@ -1189,6 +1191,15 @@ public class ComputerUtil {
                 if (b.getSourceCard().isCreature())
                     b1 += 1;
 
+                //sort planeswalker abilities for ultimate
+                if(a.getRestrictions().getPlaneswalker() && b.getRestrictions().getPlaneswalker()) {
+                    if(a.getAbilityFactory() != null && a.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+                        a1 += 1;
+                    }
+                    else if(b.getAbilityFactory() != null && b.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+                        b1 += 1;
+                    }
+                }
 
                 return b1 - a1;
             }

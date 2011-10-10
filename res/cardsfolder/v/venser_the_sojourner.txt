@@ -8,7 +8,7 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tr
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$PumpAll | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature | KW$ Unblockable | SpellDescription$ Creatures are unblockable this turn.
-A:AB$Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Name$ Venser, the Sojourner emblem | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
+A:AB$Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Venser, the Sojourner emblem | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidControllingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, exile target permanent.
 SVar:EffSpellCast:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent
 SVar:Rarity:Mythic
