@@ -8355,6 +8355,7 @@ res/cardsfolder/t/tower_of_the_magistrate.txt svneol=native#text/plain
 res/cardsfolder/t/towering_baloth.txt svneol=native#text/plain
 res/cardsfolder/t/toxic_iguanar.txt svneol=native#text/plain
 res/cardsfolder/t/toxic_nim.txt svneol=native#text/plain
+res/cardsfolder/t/toxic_stench.txt -text
 res/cardsfolder/t/toxin_sliver.txt svneol=native#text/plain
 res/cardsfolder/t/toymaker.txt svneol=native#text/plain
 res/cardsfolder/t/tracker.txt svneol=native#text/plain
