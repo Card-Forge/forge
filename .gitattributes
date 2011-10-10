@@ -6000,6 +6000,7 @@ res/cardsfolder/p/primal_bellow.txt svneol=native#text/plain
 res/cardsfolder/p/primal_boost.txt svneol=native#text/plain
 res/cardsfolder/p/primal_clay.txt svneol=native#text/plain
 res/cardsfolder/p/primal_cocoon.txt svneol=native#text/plain
+res/cardsfolder/p/primal_command.txt -text
 res/cardsfolder/p/primal_forcemage.txt svneol=native#text/plain
 res/cardsfolder/p/primal_frenzy.txt svneol=native#text/plain
 res/cardsfolder/p/primal_order.txt svneol=native#text/plain
