@@ -17,4 +17,5 @@ SVar:ABRemoveCounter:AB$ RemoveCounter | Defined$ Self | Cost$ 4 | CounterType$ 
 SVar:Static:Mode$ Continuous | Affected$ Card.Self+counters_GE1_PARALYZATION | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AffectedZone$ Battlefield
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wight.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/10.jpg
 End

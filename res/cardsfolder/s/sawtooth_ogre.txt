@@ -11,4 +11,5 @@ SVar:TrigDamageBlocked:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | N
 SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_ogre.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/114.jpg
 End

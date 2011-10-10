@@ -10,4 +10,5 @@ SVar:X:Count$CardsInYourHand
 SVar:Y:Count$CardsInOppHand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_kiyomaro.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/7.jpg
 End

@@ -9,4 +9,5 @@ SVar:TrigDestroy2:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN A
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_stroke.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/107.jpg
 End

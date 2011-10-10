@@ -10,4 +10,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump2 | Secondary$ True | T
 SVar:TrigPump2:AB$ Pump | Cost$ 0 | Defined$ Card.Self | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_vanguard.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/5.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/7.jpg
 End

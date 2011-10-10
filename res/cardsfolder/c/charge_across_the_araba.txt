@@ -9,4 +9,5 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charge_across_the_araba.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/4.jpg
 End
