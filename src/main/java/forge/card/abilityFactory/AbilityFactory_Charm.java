@@ -1,9 +1,12 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.gui.GuiUtils;
 
 // Charm specific params:
 // Choices - a ","-delimited list of SVars containing ability choices
@@ -112,6 +115,36 @@ public final class AbilityFactory_Charm {
     private static void charmResolve(final AbilityFactory af, final SpellAbility sa) {
         //nothing to do.  Ability_Subs are set up in GameAction.playSpellAbility(),
         //and that Ability_Sub.resolve() is called from AbilityFactory
+    }
+    
+    public static void setupCharmSAs(final SpellAbility sa) {
+        //make Charm choices
+        if (sa.isCharm()) {
+            ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+            choices.addAll(sa.getCharmChoices());
+            for (int i = 0; i < choices.size(); i++) {
+                if (!sa.canPlay()) {
+                    choices.remove(sa);
+                }
+            }
+            for (int i = 0; i < sa.getCharmNumber(); i++) {
+                Object o = GuiUtils.getChoice("Choose a spell", choices.toArray());
+                Ability_Sub chosen = (Ability_Sub) o;
+                sa.addCharmChoice(chosen);
+                choices.remove(chosen);
+                
+                //walk down the SpellAbility tree and add to the child Ability_Sub
+                SpellAbility child = sa;
+                while (child.getSubAbility() != null) {
+                    child = child.getSubAbility();
+                }
+                child.setSubAbility(chosen);
+                if (chosen.getActivatingPlayer() == null) {
+                    chosen.setActivatingPlayer(child.getActivatingPlayer());
+                }
+                chosen.setParent(child);
+            }
+        }
     }
 
 } //end class AbilityFactory_Charm

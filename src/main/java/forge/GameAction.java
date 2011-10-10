@@ -4,6 +4,7 @@ package forge;
 import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.abilityFactory.AbilityFactory_Attach;
+import forge.card.abilityFactory.AbilityFactory_Charm;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -12,7 +13,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Static;
-import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_Requirements;
 import forge.card.spellability.Target;
@@ -2114,29 +2114,7 @@ public class GameAction {
     public final void playSpellAbility(final SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
         
-        //make Charm choices
-        if (sa.isCharm()) {
-            ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
-            choices.addAll(sa.getCharmChoices());
-            for (int i = 0; i < choices.size(); i++) {
-                if (!sa.canPlay()) {
-                    choices.remove(sa);
-                }
-            }
-            for (int i = 0; i < sa.getCharmNumber(); i++) {
-                Object o = GuiUtils.getChoice("Choose a spell", choices.toArray());
-                Ability_Sub chosen = (Ability_Sub) o;
-                sa.addCharmChoice(chosen);
-                choices.remove(chosen);
-                
-                //walk down the SpellAbility tree and add to the child Ability_Sub
-                SpellAbility child = sa;
-                while (child.getSubAbility() != null) {
-                    child = child.getSubAbility();
-                }
-                child.setSubAbility(chosen);
-            }
-        }
+        AbilityFactory_Charm.setupCharmSAs(sa);
 
 		// Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;
@@ -2205,6 +2183,8 @@ public class GameAction {
      */
     public void playSpellAbility_NoStack(final SpellAbility sa, final boolean skipTargeting) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        
+        AbilityFactory_Charm.setupCharmSAs(sa);
 
         if (sa.getPayCosts() != null) {
             Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
