@@ -1,0 +1,23 @@
+Name:Pox
+ManaCost:B B B
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ B B B | LifeAmount$ A | Defined$ You | SubAbility$ DBOppLife | SpellDescription$ Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
+SVar:DBOppLife:DB$ LoseLife | LifeAmount$ B | Defined$ Opponent | SubAbility$ DBDiscardYou
+SVar:DBDiscardYou:DB$ Discard | NumCards$ C | Defined$ You | Mode$ TgtChoose | SubAbility$ DBDiscardOpp
+SVar:DBDiscardOpp:DB$ Discard | NumCards$ D | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBCreatureYou
+SVar:DBCreatureYou:DB$ Sacrifice | SacValid$ Creature | Amount$ E | Defined$ You | SubAbility$ DBCreatureOpp
+SVar:DBCreatureOpp:DB$ Sacrifice | SacValid$ Creature | Amount$ F | Defined$ Opponent | SubAbility$ DBLandYou
+SVar:DBLandYou:DB$ Sacrifice | SacValid$ Land | Amount$ G | Defined$ You | SubAbility$ DBLandOpp
+SVar:DBLandOpp:DB$ Sacrifice | SacValid$ Land | Amount$ H | Defined$ Opponent
+SVar:A:Count$YourLifeTotal/ThirdUp
+SVar:B:Count$OppLifeTotal/ThirdUp
+SVar:C:Count$InYourHand/ThirdUp
+SVar:D:Count$InOppHand/ThirdUp
+SVar:E:Count$Valid Creature.YouCtrl/ThirdUp
+SVar:F:Count$Valid Creature.YouDontCtrl/ThirdUp
+SVar:G:Count$Valid Land.YouCtrl/ThirdUp
+SVar:H:Count$Valid Land.YouDontCtrl/ThirdUp
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pox.jpg
+End
