@@ -1,0 +1,12 @@
+Name:Sink into Takenuma
+ManaCost:3 B
+Types:Sorcery Arcane
+Text:no text
+A:SP$ ChangeZone | Cost$ 3 B | Origin$ Battlefield | Destination$ Hand | ChangeType$ Swamp.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBDiscard | SpellDescription$ Sweep - Return any number of Swamps you control to their owner's hand. Target player discards a card for each Swamp returned this way.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ Y | Mode$ TgtChoose
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:Y:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sink_into_takenuma.jpg
+End
