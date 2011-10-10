@@ -28,7 +28,7 @@ public class FRoundedPanel extends JPanel {
     private Color borderColor           = Color.black;
     private Dimension shadowDistance    = new Dimension(5,5);
     private int shadowThickness         = 5;
-    private int cornerRadius            = 20; // Note: this number is actually diameter.
+    private int cornerDiameter          = 20;
     
     /**
      * <p>FRoundedPanel.</p>
@@ -56,8 +56,8 @@ public class FRoundedPanel extends JPanel {
         tempS = skin.getSetting("shadowThickness");
         if(tempS != null) { shadowThickness = Integer.parseInt(tempS); }
         
-        tempS = skin.getSetting("cornerRadius");
-        if(tempS != null) { cornerRadius = Integer.parseInt(tempS); }
+        tempS = skin.getSetting("cornerDiameter");
+        if(tempS != null) { cornerDiameter = Integer.parseInt(tempS); }
     }
     
     /**
@@ -94,7 +94,7 @@ public class FRoundedPanel extends JPanel {
                 0 + (int)shadowDistance.getHeight() + (shadowThickness/2), 
                 w - (int)shadowDistance.getWidth() - shadowThickness, 
                 h - (int)shadowDistance.getHeight() - shadowThickness, 
-                cornerRadius, cornerRadius);
+                cornerDiameter, cornerDiameter);
         
         // Draw content rectangle (on top of shadow)
         g2d.setColor(this.getBackground()); 
@@ -102,16 +102,16 @@ public class FRoundedPanel extends JPanel {
                 0, 0,
                 w - shadowThickness, 
                 h - shadowThickness, 
-                cornerRadius, cornerRadius);
+                cornerDiameter, cornerDiameter);
         
         // Stroke border
         g2d.setColor(this.borderColor);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRoundRect(
                 0,0,
-                w - shadowThickness, 
-                h - shadowThickness, 
-                cornerRadius, cornerRadius);        
+                w - shadowThickness - 1, 
+                h - shadowThickness - 1, 
+                cornerDiameter, cornerDiameter);        
     }
     
     /**
@@ -166,17 +166,17 @@ public class FRoundedPanel extends JPanel {
     }
     
     /**
-     * <p>setCornerRadius.</p>
-     * Sets radius of each corner on rounded panel.
+     * <p>setCornerDiameter.</p>
+     * Sets diameter of each corner on rounded panel.
      *
      * @param {@link java.lang.Integer} r
      */
-    public void setCornerRadius(int r) {
+    public void setCornerDiameter(int r) {
         if(r < 0) {
             r = 0;
         }
         
-        this.cornerRadius = r*2;
+        this.cornerDiameter = r*2;
     }    
     
     /**
