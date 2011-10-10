@@ -2118,18 +2118,23 @@ public class GameAction {
         if (sa.isCharm()) {
             ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
             choices.addAll(sa.getCharmChoices());
+            for (int i = 0; i < choices.size(); i++) {
+                if (!sa.canPlay()) {
+                    choices.remove(sa);
+                }
+            }
             for (int i = 0; i < sa.getCharmNumber(); i++) {
                 Object o = GuiUtils.getChoice("Choose a spell", choices.toArray());
                 Ability_Sub chosen = (Ability_Sub) o;
                 sa.addCharmChoice(chosen);
                 choices.remove(chosen);
-                //TODO - to support the commands, thi
-                /*
-                 * TODO - to support the commands, this will need to arrange Ability_Sub items
-                 * so that the Charm sa doesn't have multiple Ability_Subs, but instead, the
-                 * most recent chosen Ability_Sub will be added to the bottom of the SpellAbility tree
-                 */
-                sa.setSubAbility(chosen);
+                
+                //walk down the SpellAbility tree and add to the child Ability_Sub
+                SpellAbility child = sa;
+                while (child.getSubAbility() != null) {
+                    child = child.getSubAbility();
+                }
+                child.setSubAbility(chosen);
             }
         }
 
