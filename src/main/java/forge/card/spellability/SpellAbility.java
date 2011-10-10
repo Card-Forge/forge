@@ -61,6 +61,11 @@ public abstract class SpellAbility {
     private boolean kickerAbility = false;
     private boolean kothThirdAbility = false;
     private boolean cycling = false;
+    private boolean isCharm = false;
+    
+    private int charmNumber;
+    private ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
+    //private ArrayList<SpellAbility> charmChoicesMade = new ArrayList<SpellAbility>();
 
     private Input beforePayMana;
     private Input afterResolve;
@@ -1242,6 +1247,97 @@ public abstract class SpellAbility {
     
     public boolean isSuppressed() {
         return (temporarilySuppressed);
+    }
+    
+    /**
+     * <p>setIsCharm.</p>
+     *
+     * @param b a boolean.
+     */
+    public final void setIsCharm(final boolean b) {
+        isCharm = b;
+    }
+
+    /**
+     * <p>isCharm.</p>
+     *
+     * @return a boolean.
+     */
+    public final boolean isCharm() {
+        return isCharm;
+    }
+    
+    /**
+     * <p>addCharmChoiceMade.</p>
+     *
+     * @param sa a SpellAbility
+     * @since 1.1.6
+     */
+    /*
+    public final void addCharmChoiceMade(final SpellAbility sa) {
+        charmChoicesMade.add(sa);
+    }
+    */
+
+    /**
+     * <p>getCharmChoicesMade.</p>
+     *
+     * @return an ArrayList<SpellAbility>
+     * @since 1.1.6
+     */
+    /*
+    public final ArrayList<SpellAbility> getCharmChoicesMade() {
+        return charmChoicesMade;
+    }
+    */
+    
+    /**
+     * <p>clearCharmChoices.</p>
+     *
+     * @since 1.1.6
+     */
+    /*
+    public final void clearCharmChoicesMade() {
+        charmChoicesMade.clear();
+    }
+    */
+    
+    /**
+     * <p>setCharmNumber.</p>
+     *
+     * @param i an int
+     */
+    public final void setCharmNumber(final int i) {
+        charmNumber = i;
+    }
+
+    /**
+     * <p>getCharmNumber.</p>
+     *
+     * @return an int
+     */
+    public final int getCharmNumber() {
+        return charmNumber;
+    }
+    
+    /**
+     * <p>addCharmChoice.</p>
+     *
+     * @param sa a SpellAbility
+     * @since 1.1.6
+     */
+    public final void addCharmChoice(final SpellAbility sa) {
+        charmChoices.add(sa);
+    }
+
+    /**
+     * <p>getCharmChoicesMade.</p>
+     *
+     * @return an ArrayList<SpellAbility>
+     * @since 1.1.6
+     */
+    public final ArrayList<SpellAbility> getCharmChoices() {
+        return charmChoices;
     }
 
 }

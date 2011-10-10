@@ -12,6 +12,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_Requirements;
 import forge.card.spellability.Target;
@@ -2112,6 +2113,25 @@ public class GameAction {
      */
     public final void playSpellAbility(final SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        
+        //make Charm choices
+        if (sa.isCharm()) {
+            ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+            choices.addAll(sa.getCharmChoices());
+            for (int i = 0; i < sa.getCharmNumber(); i++) {
+                Object o = GuiUtils.getChoice("Choose a spell", choices.toArray());
+                Ability_Sub chosen = (Ability_Sub) o;
+                sa.addCharmChoice(chosen);
+                choices.remove(chosen);
+                //TODO - to support the commands, thi
+                /*
+                 * TODO - to support the commands, this will need to arrange Ability_Sub items
+                 * so that the Charm sa doesn't have multiple Ability_Subs, but instead, the
+                 * most recent chosen Ability_Sub will be added to the bottom of the SpellAbility tree
+                 */
+                sa.setSubAbility(chosen);
+            }
+        }
 
 		// Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;

@@ -1049,6 +1049,24 @@ public class AbilityFactory {
                 SA = AbilityFactory_Combat.createDrawbackMustAttack(this);
             }
         }
+        
+        else if (API.equals("Charm")) {
+            if (isAb) {
+                SA = AbilityFactory_Charm.createAbilityCharm(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Charm.createSpellCharm(this);
+            }
+            SA.setIsCharm(true);
+            int num = Integer.parseInt(mapParams.containsKey("CharmNum") ? mapParams.get("CharmNum") : "1");
+            SA.setCharmNumber(num);
+            
+            String[] saChoices = mapParams.get("Choices").split(",");
+            for(int i = 0; i < saChoices.length; i++) {
+                String ab = hostC.getSVar(saChoices[i]);
+                AbilityFactory charmAF = new AbilityFactory();
+                SA.addCharmChoice(charmAF.getAbility(ab, hostC));
+            }
+        }
 
 
         if (SA == null) {
