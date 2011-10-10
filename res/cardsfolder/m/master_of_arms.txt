@@ -1,0 +1,10 @@
+Name:Master of Arms
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:First strike
+A:AB$ Tap | Cost$ 1 W | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking Master of Arms | SpellDescription$ Tap target creature blocking CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_arms.jpg
+End

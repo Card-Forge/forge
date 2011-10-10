@@ -4847,6 +4847,7 @@ res/cardsfolder/m/massacre_wurm.txt svneol=native#text/plain
 res/cardsfolder/m/master_apothecary.txt svneol=native#text/plain
 res/cardsfolder/m/master_decoy.txt svneol=native#text/plain
 res/cardsfolder/m/master_healer.txt svneol=native#text/plain
+res/cardsfolder/m/master_of_arms.txt -text
 res/cardsfolder/m/master_of_etherium.txt svneol=native#text/plain
 res/cardsfolder/m/master_of_the_wild_hunt.txt svneol=native#text/plain
 res/cardsfolder/m/master_splicer.txt svneol=native#text/plain
