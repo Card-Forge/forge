@@ -1235,6 +1235,7 @@ res/cardsfolder/c/centaur_veteran.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_aristocrat.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_broker.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_coliseum.txt svneol=native#text/plain
+res/cardsfolder/c/cephalid_constable.txt -text
 res/cardsfolder/c/cephalid_illusionist.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_inkshrouder.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_looter.txt svneol=native#text/plain
