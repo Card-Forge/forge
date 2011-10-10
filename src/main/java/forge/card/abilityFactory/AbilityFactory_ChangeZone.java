@@ -540,7 +540,7 @@ public final class AbilityFactory_ChangeZone {
                     sb.append("into your graveyard.");
                 }
 
-                sb.append("Then shuffle your library.");
+                sb.append(" Then shuffle your library.");
             } else if (origin.equals("Hand")) {
                 sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
 
