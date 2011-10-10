@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import forge.gui.skin.FSkin;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
@@ -121,6 +122,9 @@ public class SplashFrame extends JFrame {
 
         contentPane.getActionMap().put("escAction", new closeAction());
         
+        // Set UI to color splash bar fill with theme colors
+        UIManager.put("ProgressBar.foreground", skin.bg1b);         // Filled
+        UIManager.put("ProgressBar.selectionForeground",skin.txt1a);// Filled
         
         // Instantiate model and view and tie together.
         monitorModel = new SplashProgressModel();
