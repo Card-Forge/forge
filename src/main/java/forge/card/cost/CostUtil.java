@@ -15,8 +15,8 @@ import forge.gui.input.Input;
 
 public class CostUtil {
     static private Random r = new Random();
-    static private double P1P1Percent = .1;
-    static private double OtherPercent = .25;
+    static private double P1P1Percent = .25;
+    static private double OtherPercent = .9;
         
     static public boolean checkSacrificeCost(Cost cost, Card source){
         for(CostPart part : cost.getCostParts()){
