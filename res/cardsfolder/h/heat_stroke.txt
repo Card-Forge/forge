@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_stroke.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/107.jpg
+Oracle:At end of combat, destroy each creature that blocked or was blocked this turn.
 End

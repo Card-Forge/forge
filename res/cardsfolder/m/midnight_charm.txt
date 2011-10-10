@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/74.jpg
+Oracle:Choose one - Midnight Charm deals 1 damage to target creature and you gain 1 life; or target creature gains first strike until end of turn; or tap target creature.
 End

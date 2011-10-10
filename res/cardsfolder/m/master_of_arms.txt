@@ -8,4 +8,5 @@ A:AB$ Tap | Cost$ 1 W | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select t
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_arms.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/136.jpg
+Oracle:First strike\n{1}{W}: Tap target creature blocking Master of Arms.
 End

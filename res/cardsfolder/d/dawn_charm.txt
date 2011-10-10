@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/4.jpg
+Oracle:Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
 End

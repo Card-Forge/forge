@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_therapy.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/62.jpg
+Oracle:Name a nonland card. Target player reveals his or her hand and discards all cards with that name.\nFlashback-Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

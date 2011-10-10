@@ -10,4 +10,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/151.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/146.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/151.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/154.jpg
+Oracle:Choose a color. Target player reveals his or her hand and discards all cards of that color.
 End

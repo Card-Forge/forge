@@ -12,4 +12,5 @@ SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | Nu
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_ogre.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/114.jpg
+Oracle:Whenever Sawtooth Ogre blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
 End
