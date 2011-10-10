@@ -931,6 +931,8 @@ public class AbilityFactory_ZoneAffecting {
         else
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
+        CardList discarded = new CardList();
+        
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 if (mode.equals("Hand")) {
@@ -943,11 +945,12 @@ public class AbilityFactory_ZoneAffecting {
                     numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
                 if (mode.equals("Random")) {
-                    p.discardRandom(numCards, sa);
+                    discarded.addAll(p.discardRandom(numCards, sa));
                 } else if (mode.equals("TgtChoose")) {
                     if (params.containsKey("UnlessType")) {
                         p.discardUnless(numCards, params.get("UnlessType"), sa);
-                    } else p.discard(numCards, sa, true);
+                    } else 
+                        discarded.addAll(p.discard(numCards, sa, true));
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
                     CardList dPHand = p.getCardsIn(Zone.Hand);
@@ -970,6 +973,7 @@ public class AbilityFactory_ZoneAffecting {
                     // Reveal cards that will be discarded?
                     for (Card c : dPChHand) {
                         p.discard(c, sa);
+                        discarded.add(c);
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
                     // Is Reveal you choose right? I think the wrong player is being used?
@@ -1014,7 +1018,7 @@ public class AbilityFactory_ZoneAffecting {
                                     CardList dCs = new CardList();
                                     dCs.add(dC);
                                     GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
-
+                                    discarded.add(dC);
                                     AllZone.getComputerPlayer().discard(dC, sa); // is this right?
                                 }
                             }
@@ -1027,6 +1031,7 @@ public class AbilityFactory_ZoneAffecting {
                                     Card dC = GuiUtils.getChoice("Choose a card to be discarded", dPChHand.toArray());
 
                                     dPChHand.remove(dC);
+                                    discarded.add(dC);
                                     AllZone.getHumanPlayer().discard(dC, sa); // is this right?
                                 }
                             }
@@ -1035,7 +1040,14 @@ public class AbilityFactory_ZoneAffecting {
                 }
             }
         }
-    }//discardResolve()
+
+        if (params.containsKey("RememberDiscarded")) {
+            for (Card c : discarded) {
+                source.addRemembered(c);
+            }
+        }
+
+    } //discardResolve()
 
     /**
      * <p>discardStackDescription.</p>
