@@ -197,6 +197,27 @@ This can then be accessed by Defined$ ChosenPlayer
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Allow Compy to activate abilities in Draw phase.
+- fix several places in AFs where compy wouldn't activate because it was checking the wrong param
+- fix targeting of Volrath's Dungeon
+- Little fixes to two new cards.
+- Fixed Breath of Dreams.
+- Add AF_NameCard. Like other AF_Choose*, it can be accessed as a Property Card.NamedCard
+- forgot Flashback on Cabal Therapy
+- Add support for RememberDiscarded for everything except for DiscardUnless
+- Fix on FRoundedPanel, and some brief changes to the "rebel" skin to differentiate from "default" (note, still needs a lot of work)
+- Splash screen uses skin colors for load bar. "Rebel" and "Default" skin palettes adjusted to fit (still need some grafix work).
+- Sped up mousewheel scroll speed in custom scroll area on WinLoseFrame.
+- Fixed "New" flag bug in quest rewards handler.
+- Add AF_Charm. This should support all the regular Charm cards, or any "Choose one - " type of spells. See Midnight Charm for an example. The following items are outstanding:
+1. Enable Charms for the AI
+2. add support for the CharmNum$ param to supports the Commands (Cryptic Command, Profane Command, etc.; i.e. "Choose two -")
+- minor stack description fix in AF_ChangeZone
+- fully support the CharmNum param in AF_Charm
+- Removed obsolete win/lose frame files.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -334,6 +355,27 @@ Living Terrain
 Winding Canyons
 Skeletonize
 Fire Whip
+Sawtooth Ogre
+Descendant of Kiyomaro
+Well of Knowledge
+Persecute
+Defiant Vanguard
+Dawn Charm
+Heat Stroke
+Cabal Therapy
+Charge Across the Araba
+Barrel Down Sokenzan
+Mana Chains
+Wine of Blood and Iron
+Kagemaro's Clutch
+Dread Wight
+Shinen of Flight's Wings
+Shinen of Fury's Fire
+Sink into Takenuma
+Body Double
+Midnight Charm
+Primal Command
+Master of Arms
 
 
 end
