@@ -3,11 +3,8 @@ package forge.gui.skin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -52,8 +49,9 @@ public class FSkin {
     public Color txt3a                  = Color.red;
     public Color txt3b                  = Color.red;
     
+    public String name                  = "default";
+    
     //===== Private fields
-    private final String settingsfile   = "settings.txt";
     private final String paletteFile    = "palette.jpg";
     private final String font1file      = "font1.ttf";
     private final String font2file      = "font2.ttf";    
@@ -76,10 +74,6 @@ public class FSkin {
     private String skin;
     private String notfound = "FSkin.java: \""+skin+
             "\" skin can't find ";
-    private Hashtable<String, String> customSettings = 
-            new Hashtable<String, String>();
-    private Hashtable<String, String> defaultSettings = 
-            new Hashtable<String, String>();
 
     /**
      * FSkin constructor.  No arguments, will generate default skin settings,
@@ -99,47 +93,11 @@ public class FSkin {
      * @throws Exception
      */
     public FSkin(String skinName) throws Exception {
-        defaultSettings = loadSettings("default"); 
         loadFontAndImages("default");  
         
         if(!skinName.equals("default")) {
-            customSettings = loadSettings(skinName);
             loadFontAndImages(skinName);
         }
-    }
-    
-    /**
-     * Retrieves skin settings from file, returns in hashtable.
-     * 
-     * @param skinName
-     * @return settings hashtable
-     * @throws Exception
-     */
-    private Hashtable<String, String> loadSettings(String skinName) throws Exception {
-        String filename = "res/images/skins/"+skinName+"/"+settingsfile;
-        
-        String notfound = "FSkin > load: Can't find \"" + filename + "\".";
-        Hashtable<String, String> settings = new Hashtable<String, String>();
-        
-        File f = new File(filename);
-        customSettings.put("name",skinName);
-        
-        if (!f.exists()) {
-            throw new RuntimeException(notfound);
-        }
-        
-        BufferedReader input = new BufferedReader(new FileReader(f));
-        String line = null;
-        while ((line = input.readLine()) != null) {
-            String[] data = line.split("=");
-            if (line.startsWith("#") || line.length() == 0 || data.length != 2) {
-                continue;
-            }
-            
-            settings.put(data[0],data[1]);
-        }
-        
-        return settings;
     }
     
     /**
@@ -236,36 +194,5 @@ public class FSkin {
                 (pixel & 0x0000ff00) >> 8,
                 (pixel & 0x000000ff)
                 );
-    }
-       
-    /**
-     * <p>getSetting.</p>
-     * Retrieves a specific skin setting.  If skin setting is not defined, 
-     * will attempt to use default value.
-     *
-     * @param key a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public String getSetting(String key) {
-        String val = null;
-        
-        if(customSettings.size() > 1) {  
-            val = customSettings.get(key);
-            if(val==null) {
-                System.err.println("FSkin > getSetting: Could not find "+key+
-                        " setting for "+customSettings.get("name")+" skin!");
-            }
-        }
-        
-        if(val==null) {
-            val = defaultSettings.get(key);
-        }
-        
-        if(val==null) {
-            System.err.println("FSkin > getSetting: Could not find "+key+
-                    " in default settings!");
-        }
-        
-        return val;
     }
 }

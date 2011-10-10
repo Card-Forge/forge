@@ -1,34 +1,28 @@
 package forge.gui.skin;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
-
 import javax.swing.JPanel;
 
-import forge.AllZone;
-
 /** <p>FRoundedPanel.</p>
- * A subclass of JPanel with optional rounded corners and 
- * optional drop shadow, for special cases only. FPanel recommended for regular use.
- * Limitations - cannot use background image, and single line border only. 
+ * A subclass of JPanel with any of four corners rounded,
+ * drop shadow, and 1px line border.
  * 
- * Default values provided, later updated from skin settings, and can be
- * set dynamically.
+ * Limitations: Cannot tile background image, cannot set border width.
  *
  */
 @SuppressWarnings("serial")
 public class FRoundedPanel extends JPanel {
-    private FSkin skin;
+    public boolean[] corners = {true,true,true,true};  //NW, SW, SE, NE 
+    
     private Color shadowColor           = new Color(150,150,150,150);
     private Color borderColor           = Color.black;
-    private Dimension shadowDistance    = new Dimension(5,5);
-    private int shadowThickness         = 5;
-    private int cornerDiameter          = 20;
+    private int shadowOffset            = 5;
+    private int cornerRadius            = 10;
+    private boolean showShadow          = false;
     
     /**
      * <p>FRoundedPanel.</p>
@@ -38,26 +32,6 @@ public class FRoundedPanel extends JPanel {
     public FRoundedPanel() {
         super();
         this.setOpaque(false);
-        skin = AllZone.getSkin();
-        
-        Color tempC;
-        Dimension tempD;
-        String tempS;
-        
-        tempC = parseColorString(skin.getSetting("shadowColor"));
-        if(tempC != null) { shadowColor = tempC; }
-        
-        tempC = parseColorString(skin.getSetting("borderColor"));
-        if(tempC != null) { borderColor = tempC; }
-        
-        tempD = parseDimensionString(skin.getSetting("shadowDistance"));
-        if(tempD != null) { shadowDistance = tempD; }
-        
-        tempS = skin.getSetting("shadowThickness");
-        if(tempS != null) { shadowThickness = Integer.parseInt(tempS); }
-        
-        tempS = skin.getSetting("cornerDiameter");
-        if(tempS != null) { cornerDiameter = Integer.parseInt(tempS); }
     }
     
     /**
@@ -81,37 +55,131 @@ public class FRoundedPanel extends JPanel {
         super.paintComponent(g);
         int w = getWidth();
         int h = getHeight();
+        int so = shadowOffset;
+        int r = cornerRadius;
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
         
-        // Draw shadow
-        g2d.setColor(shadowColor);
-        g2d.setStroke(new BasicStroke(shadowThickness));
-        g2d.drawRoundRect(
-                0 + (int)shadowDistance.getWidth() + (shadowThickness/2), 
-                0 + (int)shadowDistance.getHeight() + (shadowThickness/2), 
-                w - (int)shadowDistance.getWidth() - shadowThickness, 
-                h - (int)shadowDistance.getHeight() - shadowThickness, 
-                cornerDiameter, cornerDiameter);
+        if(showShadow) {
+            // Mid, left, right rectangles: shadow
+            g2d.setColor(shadowColor);
+            g2d.fillRect(r + so, so, w - 2*r - so, h - so);
+            g2d.fillRect(so, r + so, r, h - 2*r - so);
+            g2d.fillRect(w - r, r + so, r, h - 2*r - so);
+            
+            // Corners: shadow
+            // NW
+            if(corners[0]) {
+                g2d.fillArc(so, so, 2*r, 2*r, 90, 90);
+            }
+            else {
+                g2d.fillRect(so, so, r, r);
+            }     
+            // SW
+            if(corners[1]) {
+                g2d.fillArc(so, h - 2*r, 2*r, 2*r, 180, 90);
+            }
+            else {
+                g2d.fillRect(so, h - r, r, r);
+            }
+            // SE
+            if(corners[2]) {
+                g2d.fillArc(w - 2*r, h - 2*r, 2*r, 2*r, 270, 90);
+            }
+            else {
+                g2d.fillRect(w - r, h - r, r, r);
+            }
+            // NE
+            if(corners[3]) {
+                g2d.fillArc(w - 2*r, so, 2*r, 2*r, 0, 90);
+            }
+            else {
+                g2d.fillRect(w - r, so, r, r);
+            }
+        } // End if(showShadow)
+        else {
+            so = 0;
+            so = 0;
+        }
         
-        // Draw content rectangle (on top of shadow)
-        g2d.setColor(this.getBackground()); 
-        g2d.fillRoundRect(
-                0, 0,
-                w - shadowThickness, 
-                h - shadowThickness, 
-                cornerDiameter, cornerDiameter);
+        // Mid, left, right rectangles: content
+        g2d.setColor(getBackground());
+        g2d.fillRect(r, 0, w - 2*r - so, h - so);
+        g2d.fillRect(0, r, r, h - 2*r - so);
+        g2d.fillRect(w - r - so, r, r, h - 2*r - so);
         
-        // Stroke border
+        // Corners: content
+        // NW
+        if(corners[0]) {
+            g2d.fillArc(0, 0, 2*r, 2*r, 90, 90);
+        }
+        else {
+            g2d.fillRect(0, 0, r, r);
+        }     
+        // SW
+        if(corners[1]) {
+            g2d.fillArc(0, h - 2*r - so, 2*r, 2*r, 180, 90);
+        }
+        else {
+            g2d.fillRect(0, h - r - so, r, r);
+        }
+        // SE
+        if(corners[2]) {
+            g2d.fillArc(w - 2*r - so, h - 2*r - so, 2*r, 2*r, 270, 90);
+        }
+        else {
+            g2d.fillRect(w - r - so, h - r - so, r, r);
+        }
+        // NE
+        if(corners[3]) {
+            g2d.fillArc(w - 2*r - so, 0, 2*r, 2*r, 0, 90);
+        }
+        else {
+            g2d.fillRect(w - r - so, 0, r, r);
+        }
+        
+        // Mid, left, right rectangles: border
         g2d.setColor(this.borderColor);
-        g2d.setStroke(new BasicStroke(1));
-        g2d.drawRoundRect(
-                0,0,
-                w - shadowThickness - 1, 
-                h - shadowThickness - 1, 
-                cornerDiameter, cornerDiameter);        
+        g2d.drawLine(r, 0, w - r - so, 0);
+        g2d.drawLine(r, h - so - 1, w - r - so, h - so - 1);
+        g2d.drawLine(0, r, 0, h - r - so);
+        g2d.drawLine(w - so - 1, r, w - so - 1, h - r - so);
+        
+        // Corners: border
+        // NW
+        if(corners[0]) {
+            g2d.drawArc(0, 0, 2*r, 2*r, 90, 90);
+        }
+        else {
+            g2d.drawLine(0, 0, r, 0);
+            g2d.drawLine(0, 0, 0, r);
+        }     
+        // SW
+        if(corners[1]) {
+            g2d.drawArc(0, h - 2*r - so, 2*r, 2*r - 1, 180, 90);
+        }
+        else {
+            g2d.drawLine(0, h - so - 1, 0, h - r - so - 1);
+            g2d.drawLine(0, h - so - 1, r, h - so - 1);
+        }
+        // SE
+        if(corners[2]) {
+            g2d.drawArc(w - 2*r - so, h - 2*r - so, 2*r - 1, 2*r - 1, 270, 90);
+        }
+        else {
+            g2d.drawLine(w - so - 1, h - so - 1, w - so - 1, h - r - so);
+            g2d.drawLine(w - so - 1, h - so - 1, w - r - so, h - so - 1);
+        }
+        // NE
+        if(corners[3]) {
+            g2d.drawArc(w - 2*r - so, 0, 2*r - 1, 2*r - 1, 0, 90);
+        }
+        else {
+            g2d.drawLine(w - so - 1, 0, w - so - r, 0);
+            g2d.drawLine(w - so - 1, 0, w - so - 1, r);            
+        }
     }
     
     /**
@@ -135,96 +203,47 @@ public class FRoundedPanel extends JPanel {
     }
     
     /**
-     * <p>setShadowDistance.</p>
-     * Sets distance of shadow from rounded panel.
+     * <p>setShadowOffset.</p>
+     * Sets offset of shadow from rounded panel.
      *
      * @param {@link java.lang.Integer} side
      */
-    public void setShadowDistance(int side) {
-        this.shadowDistance = new Dimension(side,side);
+    public void setShadowOffset(int i) {
+        if(i < 0) {
+            i = 0;
+        }
+        this.shadowOffset = i;
     }
     
     /**
-     * <p>setShadowDistance.</p>
-     * Sets distance of shadow from rounded panel.
-     *
-     * @param {@link java.lang.Integer} x
-     * @param {@link java.lang.Integer} y
-     */
-    public void setShadowDistance(int x, int y) {
-        this.shadowDistance = new Dimension(x,y);
-    }
-    
-    /**
-     * <p>setShadowDistance.</p>
-     * Sets thickness of rounded panel shadow.
-     *
-     * @param {@link java.lang.Integer} t
-     */
-    public void setShadowThickness(int t) {
-        this.shadowThickness = t;
-    }
-    
-    /**
-     * <p>setCornerDiameter.</p>
-     * Sets diameter of each corner on rounded panel.
+     * <p>setCornerRadius.</p>
+     * Sets radius of each corner on rounded panel.
      *
      * @param {@link java.lang.Integer} r
      */
-    public void setCornerDiameter(int r) {
+    public void setCornerRadius(int r) {
         if(r < 0) {
             r = 0;
         }
         
-        this.cornerDiameter = r*2;
+        this.cornerRadius = r;
     }    
     
     /**
-     * <p>parseColorString.</p>
-     * Uses string from settings file to make a new rgba color instance.
-     *
-     * @param {@link java.lang.String} s
+     * <p>setCorners.</p>
+     * Sets if corners should be rounded or not in the following order:
+     * NW, SW, SE, NE
+     * @param boolean vals[] must be length 4
      */
-    private Color parseColorString(String s) {
-        Color c = null;
-        int r,g,b,a = 0;
-        String[] temp = s.split(",");
-        
-        if(temp.length==3 || temp.length==4) {
-            r = Integer.parseInt(temp[0]);
-            g = Integer.parseInt(temp[1]);
-            b = Integer.parseInt(temp[2]);
-            if(temp.length==4) {
-                a = Integer.parseInt(temp[3]);
-            }
-            c = new Color(r,g,b,a);
-        } 
-        
-        return c;
-    }
-    
-    /**
-     * <p>parseDimensionString.</p>
-     * Uses string from settings file to make a new dimension instance.
-     *
-     * @param {@link java.lang.String} s
-     */
-    private Dimension parseDimensionString(String s) {
-        Dimension d = null;
-        int w,h = 0;
-        String[] temp = s.split(",");
-        
-        if(temp.length==2) {
-            w = Integer.parseInt(temp[0]);
-            h = Integer.parseInt(temp[0]);
-            d = new Dimension(w,h);
-        } 
-        else if(temp.length==1 && !temp[0].equals("")) {
-            w = Integer.parseInt(temp[0]);
-            h = w;
-            d = new Dimension(w,h);
+    public void setCorners(boolean vals[] ) {
+        if(vals.length!=4) {
+            throw new IllegalArgumentException("FRoundedPanel > setCorners requires an array of booleans of length 4.");
         }
         
-        return d;
+        corners = vals;
+    }
+    
+    public void setShowShadow(boolean b) {
+        showShadow = b;
     }
 }
