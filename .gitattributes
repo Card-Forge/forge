@@ -2986,6 +2986,7 @@ res/cardsfolder/f/fylamarid.txt svneol=native#text/plain
 res/cardsfolder/f/fylgja.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_bow.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_brownie.txt svneol=native#text/plain
+res/cardsfolder/f/fyndhorn_druid.txt -text
 res/cardsfolder/f/fyndhorn_elder.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_elves.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_pollen.txt svneol=native#text/plain
@@ -7591,6 +7592,7 @@ res/cardsfolder/s/spitting_spider.txt svneol=native#text/plain
 res/cardsfolder/s/splinter.txt svneol=native#text/plain
 res/cardsfolder/s/splinter_twin.txt svneol=native#text/plain
 res/cardsfolder/s/splinterfright.txt -text
+res/cardsfolder/s/splintering_wind.txt -text
 res/cardsfolder/s/split_tail_miko.txt svneol=native#text/plain
 res/cardsfolder/s/splitting_headache.txt svneol=native#text/plain
 res/cardsfolder/s/spoils_of_victory.txt svneol=native#text/plain
