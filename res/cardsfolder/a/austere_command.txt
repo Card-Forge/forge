@@ -1,7 +1,12 @@
 Name:Austere Command
 ManaCost:4 W W
 Types:Sorcery
-Text:Choose two - Destroy all artifacts; or destroy all enchantments; or destroy all creatures with converted mana cost 3 or less; or destroy all creatures with converted mana cost 4 or greater.
+Text:no text
+A:SP$ Charm | Cost$ 4 W W | Choices$ DestroyArtifacts,DestroyEnchs,DestroyLE3,DestroyGE4 | CharmNum$ 2 | SpellDescription$ Choose two - Destroy all artifacts; or destroy all enchantments; or destroy all creatures with converted mana cost 3 or less; or destroy all creatures with converted mana cost 4 or greater.
+SVar:DestroyArtifacts:DB$ DestroyAll | ValidCards$ Artifact | SpellDescription$ Destroy all artifacts.
+SVar:DestroyEnchs:DB$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+SVar:DestroyLE3:DB$ DestroyAll | ValidCards$ Creature.cmcLE3 | SpellDescription$ Destroy all creatures with converted mana cost 3 or less.
+SVar:DestroyGE4:DB$ DestroyAll | ValidCards$ Creature.cmcGE4 | SpellDescription$ Destroy all creatures with converted mana cost 4 or greater.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/austere_command.jpg

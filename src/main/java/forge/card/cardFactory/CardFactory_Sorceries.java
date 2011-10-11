@@ -12,7 +12,6 @@ import forge.Constant.Zone;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Vector;
@@ -2394,127 +2393,6 @@ public class CardFactory_Sorceries {
 
             };//SpellAbility
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Austere Command")) {
-            final ArrayList<String> userChoice = new ArrayList<String>();
-
-            final String[] cardChoices = {
-                    "Destroy all artifacts",
-                    "Destroy all enchantments",
-                    "Destroy all creatures with converted mana cost 3 or less",
-                    "Destroy all creatures with converted mana cost 4 or more"
-            };
-
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -8501457363981482513L;
-
-                @Override
-                public void resolve() {
-
-                    //"Destroy all artifacts",
-                    if (userChoice.contains(cardChoices[0])) {
-                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
-                        for (Card c : cards) AllZone.getGameAction().destroy(c);
-                    }
-
-                    //"Destroy all enchantments",
-                    if (userChoice.contains(cardChoices[1])) {
-                        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.enchantments);
-                        for (Card c : cards) AllZone.getGameAction().destroy(c);
-                    }
-
-                    //"Destroy all creatures with converted mana cost 3 or less",
-                    if (userChoice.contains(cardChoices[2])) {
-                        CardList cards = AllZoneUtil.getCreaturesInPlay();
-                        cards = cards.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return CardUtil.getConvertedManaCost(c) <= 3;
-                            }
-                        });
-                        for (Card c : cards) AllZone.getGameAction().destroy(c);
-                    }
-
-                    //"Destroy all creatures with converted mana cost 4 or more"};
-                    if (userChoice.contains(cardChoices[3])) {
-                        CardList cards = AllZoneUtil.getCreaturesInPlay();
-                        cards = cards.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return CardUtil.getConvertedManaCost(c) >= 4;
-                            }
-                        });
-                        for (Card c : cards) AllZone.getGameAction().destroy(c);
-                    }
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };//SpellAbility
-
-            final Command setStackDescription = new Command() {
-                private static final long serialVersionUID = -635710110379729475L;
-
-                public void execute() {
-                    ArrayList<String> a = new ArrayList<String>();
-                    if (userChoice.contains(cardChoices[0])) a.add("destroy all artifacts");
-                    if (userChoice.contains(cardChoices[1])) a.add("destroy all enchantments");
-                    if (userChoice.contains(cardChoices[2])) a.add("destroy all creatures with CMC <= 3");
-                    if (userChoice.contains(cardChoices[3])) a.add("destroy all creatures with CMC >= 4");
-
-                    String s = a.get(0) + ", " + a.get(1);
-                    spell.setStackDescription(card.getName() + " - " + s);
-                }
-            };//Command
-
-            Input chooseTwoInput = new Input() {
-                private static final long serialVersionUID = 2352497236500922820L;
-
-                @Override
-                public void showMessage() {
-                    if (card.isCopiedSpell()) {
-                        setStackDescription.execute();
-                        stopSetNext(new Input_PayManaCost(spell));
-                    } else {
-                        //reset variables
-                        userChoice.clear();
-
-                        ArrayList<String> display = new ArrayList<String>(Arrays.asList(cardChoices));
-
-                        ArrayList<String> a = chooseTwo(display);
-                        //everything stops here if user cancelled
-                        if (a == null) {
-                            stop();
-                            return;
-                        }
-
-                        userChoice.addAll(a);
-
-                        setStackDescription.execute();
-                        stopSetNext(new Input_PayManaCost(spell));
-                    }
-                }//showMessage()
-
-                ArrayList<String> chooseTwo(ArrayList<String> choices) {
-                    ArrayList<String> out = new ArrayList<String>();
-                    Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
-                    if (o == null) return null;
-
-                    out.add((String) o);
-                    choices.remove(out.get(0));
-                    o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
-                    if (o == null) return null;
-
-                    out.add((String) o);
-
-                    return out;
-                }//chooseTwo()
-            };//Input chooseTwoInput
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
 
 
