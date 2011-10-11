@@ -9,4 +9,6 @@ SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard |
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 4 | Defined$ You
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_druid.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/70.jpg
+Oracle:When Fyndhorn Druid dies, if it was blocked this turn, you gain 4 life.
 End
