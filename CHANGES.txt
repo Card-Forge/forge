@@ -218,6 +218,35 @@ This can then be accessed by Defined$ ChosenPlayer
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Update to FRoundedPanel: 
+Can now decide which corners to round.
+No settings file required in skin (all removed)
+- Fixed Cry of Contrition
+- AI's checkRemoveCounterCost was way too conservative (which mostly prevented the usage of ultimate Planeswalker abilities).
+- Added an ultimate parameter to planewalker abilities. These abilities will be considered before the others.
+- Little AI improvements for AF Pump Curse.
+- Little improvement in damageChoosingTargets AI (Chandra, the Firebrand will no longer omit targeting the human).
+- Updated the Hellboy 3 deck with 4 x Bump in the Night.
+- Added an easy version of the Deadpool deck.
+- Removed Toxic Stench. If someone can get the condition stuff to work with Threshold correctly, have at it.
+- a couple fixes for AF_Charm:
+1. Charms weren't chosen from Triggers. Now they are.
+2. Defined in a Charm caused a crash because ActivatingPlayer wasn't set for newly linked Ability_Subs. This is fixed.
+- fix Charm targeting when called from a Trigger
+- fix Inquisitor Exarch
+- convert Austere Command to script
+- Little addition
+- fix RememberDiscarded when Mode$ Hand
+- convert Incendiary Command to script
+- Convert Cryptic Command to script
+- Fixed text of Blind Hunter and Orzhov Euthanist.
+- Fixed Haunt cards allowing you to haunt non-creatures.
+- Little improvement for the AI of AF LoseLife (the AI will no longer wait until Main2 or blocking or use randomness if the ability can kill the human).
+- The AI will no longer use AF Dig abilities with destination hand before Main2.
+- Added SVar:RemAIDeck:True to Venser, the Sojourner.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly release build.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -376,6 +405,18 @@ Body Double
 Midnight Charm
 Primal Command
 Master of Arms
+Catacomb Dragon
+Cephalid Constable
+Flash of Insight
+Pox
+Inquisitor Exarch
+Fyndhorn Druid
+Splintering Wind
+Barbed Shocker
+Deceiver Exarch
+Orzhov Pontiff
+Gruul Scrapper
+Tormentor Exarch
 
 
 end
