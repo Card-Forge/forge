@@ -196,7 +196,7 @@ public final class AbilityFactory_Reveal {
      * @return a boolean.
      */
     private static boolean digCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-
+        HashMap<String, String> params = af.getMapParams();
         double chance = .4;    // 40 percent chance with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667;    // 66.7% chance for sorcery speed (since it will never activate EOT)
@@ -221,6 +221,11 @@ public final class AbilityFactory_Reveal {
         if (libraryOwner.getCardsIn(Constant.Zone.Library).isEmpty()) {
             return false;
         }
+        
+        //Don't use draw abilities before main 2 if possible
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")
+                && !params.containsKey("DestinationZone"))
+            return false;
 
         if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;
