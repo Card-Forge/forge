@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.CombatUtil;
@@ -1163,10 +1164,9 @@ public final class AbilityFactory_ChangeZone {
             if ((destination.equals(Zone.Hand)
             		|| (destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger")
             				|| (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))))
-            		&& tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)
-            {
+            		&& tgt.getMinTargets(sa.getSourceCard(), sa) <= 1) {
 
-            	// check stack for something on the stack will kill anything i control
+            	// check stack for something on the stack that will kill anything i control
 	            if (AllZone.getStack().size() > 0) {
 	            	ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
@@ -1195,6 +1195,22 @@ public final class AbilityFactory_ChangeZone {
 	                        return true;
 	                    }
 	                }
+	            }
+	            // Blink permanents with ETB triggers
+	            else if (AbilityFactory.playReusable(sa)){
+	                aiPermanents = aiPermanents.filter(new CardListFilter() {
+	                    @Override
+	                    public boolean addCard(Card c) {
+	                        if (c.getNumberOfCounters() > 0)
+	                            return false; //don't blink something with counters TODO: check good and bad counters
+	                        return Spell_Permanent.checkETBEffects(c, null, null); //checks only if there is a dangerous ETB effect
+	                    }
+	                });
+                   if (!aiPermanents.isEmpty()) {
+                        // Choose "best" of the remaining to save
+                        tgt.addTarget(CardFactoryUtil.AI_getBest(aiPermanents));
+                        return true;
+                    }
 	            }
             }
 

@@ -286,8 +286,11 @@ public class Spell_Permanent extends Spell {
 
             if (api != null && !af.getAPI().equals(api))
                 continue;
-
-            exSA.setActivatingPlayer(sa.getActivatingPlayer());
+            
+            if(sa != null)
+                exSA.setActivatingPlayer(sa.getActivatingPlayer());
+            else
+                exSA.setActivatingPlayer(AllZone.getComputerPlayer());
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
