@@ -4842,7 +4842,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if(!zone.is(Constant.Zone.Battlefield)) {
+                    if(!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
                         return;
                     }
                     if(canTarget(card,c))
@@ -4862,7 +4862,12 @@ public class CardFactoryUtil {
               @Override
               public void resolve() {
                   CardList creats = AllZoneUtil.getCreaturesInPlay();
-                  
+                  for(int i=0;i<creats.size();i++) {
+                      if(!canTarget(card, creats.get(i))) {
+                          creats.remove(i);
+                          i--;
+                      }
+                  }
                   if(creats.size() == 0)
                   {
                       return;
