@@ -4,8 +4,6 @@ import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostPart;
-import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostUtil;
 import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
