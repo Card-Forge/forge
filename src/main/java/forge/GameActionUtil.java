@@ -52,7 +52,6 @@ public final class GameActionUtil {
         //playCard_Storm(sa);
 
         playCard_Vengevine(c);
-        //playCard_Curse_of_Wizardry(c);
         playCard_Venser_Emblem(c);
         playCard_Ichneumon_Druid(c);
 
@@ -449,39 +448,6 @@ public final class GameActionUtil {
             }
         }
     }
-
-    /**
-     * <p>playCard_Curse_of_Wizardry.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    /*public static void playCard_Curse_of_Wizardry(final Card c) {
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Curse of Wizardry");
-
-        if (list.size() > 0) {
-            ArrayList<String> cl = CardUtil.getColors(c);
-
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                if (cl.contains(card.getChosenColor())) {
-                    Ability ability = new Ability(card, "0") {
-                        public void resolve() {
-                            c.getController().loseLife(1, card);
-                        } //resolve
-                    }; //ability
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(c.getController());
-                    sb.append(" played a ").append(card.getChosenColor()).append(" spell, ");
-                    sb.append(c.getController()).append(" loses 1 life.");
-                    ability.setStackDescription(sb.toString());
-
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            } //if
-        } //if
-    }*/ //Curse of Wizardry
 
     /**
      * <p>payManaDuringAbilityResolve.</p>
@@ -1415,69 +1381,6 @@ public final class GameActionUtil {
         AllZone.getStack().addSimultaneousStackEntry(ability2);
 
     }
-
-    /* Constant <code>Conspiracy</code>
-    public static Command Conspiracy = new Command() {
-        private static final long serialVersionUID = -752798545956593342L;
-
-        CardList gloriousAnthemList = new CardList();
-
-        public void execute() {
-            //String keyword = "Defender";
-
-            CardList list = gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                //System.out.println("prev type: " +c.getPrevType());
-                c.setType(c.getPrevType());
-            }
-
-            list.clear();
-
-            PlayerZone[] zone = new PlayerZone[4];
-
-            CardList cl = AllZoneUtil.getCardsIn(Zone.Battlefield, "Conspiracy");
-
-            for (int i = 0; i < cl.size(); i++) {
-                Card card = cl.get(i);
-                Player player = card.getController();
-                zone[0] = AllZone.getZone(Constant.Zone.Hand,
-                        player);
-                zone[1] = AllZone.getZone(Constant.Zone.Library,
-                        player);
-                zone[2] = AllZone.getZone(
-                        Constant.Zone.Graveyard, player);
-                zone[3] = AllZone.getZone(Constant.Zone.Battlefield,
-                        player);
-
-                for (int outer = 0; outer < zone.length; outer++) {
-                    CardList creature = AllZoneUtil.getCardsInZone(zone[outer]);
-                    creature = creature.getType("Creature");
-
-                    for (int j = 0; j < creature.size(); j++) {
-                        boolean art = false;
-                        boolean ench = false;
-
-                        c = creature.get(j);
-
-                        if (c.isArtifact()) art = true;
-                        if (c.isEnchantment()) ench = true;
-
-                        if (c.getPrevType().size() == 0) c.setPrevType(c.getType());
-                        c.setType(new ArrayList<String>());
-                        c.addType("Creature");
-                        if (art) c.addType("Artifact");
-                        if (ench) c.addType("Enchantment");
-                        c.addType(card.getChosenType());
-
-                        gloriousAnthemList.add(c);
-                    }
-                }
-            }// for inner
-        }// execute()
-    }; //Conspiracy*/
 
 
     /** Constant <code>Elspeth_Emblem</code>. */

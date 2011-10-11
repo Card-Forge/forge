@@ -1137,54 +1137,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
 
         //*************** START *********** START **************************
-        /*else if (cardName.equals("Curse of Wizardry")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if (card.getController().isHuman()) {
-
-                        String color = "";
-                        String[] colors = Constant.Color.Colors;
-                        colors[colors.length - 1] = null;
-
-                        Object o = GuiUtils.getChoice("Choose color", colors);
-                        color = (String) o;
-                        card.setChosenColor(color);
-                    } else {
-                        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-                        list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Hand));
-
-                        if (list.size() > 0) {
-                            String color = CardFactoryUtil.getMostProminentColor(list);
-                            if (!color.equals("")) {
-                                card.setChosenColor(color);
-                            } else {
-                                card.setChosenColor("black");
-                            }
-                        } else {
-                            card.setChosenColor("black");
-                        }
-                    }
-                }
-            };
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = -6417019967914398902L;
-
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            }; //Command
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("As ").append(cardName).append(" enters the battlefield, choose a color.");
-            ability.setStackDescription(sb.toString());
-
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }*/ //*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Barl's Cage")) {
             final String[] tgts = {"Creature"};
             Target target = new Target(card, "Select target creature.", tgts, "1", "1");
