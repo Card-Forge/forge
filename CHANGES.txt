@@ -410,7 +410,6 @@ Cephalid Constable
 Flash of Insight
 Pox
 Inquisitor Exarch
-Fyndhorn Druid
 Splintering Wind
 Barbed Shocker
 Deceiver Exarch
