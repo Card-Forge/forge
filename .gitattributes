@@ -8335,6 +8335,7 @@ res/cardsfolder/t/torii_watchward.txt svneol=native#text/plain
 res/cardsfolder/t/torment.txt svneol=native#text/plain
 res/cardsfolder/t/tormented_angel.txt svneol=native#text/plain
 res/cardsfolder/t/tormented_soul.txt svneol=native#text/plain
+res/cardsfolder/t/tormentor_exarch.txt -text
 res/cardsfolder/t/tormods_crypt.txt svneol=native#text/plain
 res/cardsfolder/t/tornado.txt -text
 res/cardsfolder/t/torpor_dust.txt svneol=native#text/plain
