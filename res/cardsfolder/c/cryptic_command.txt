@@ -1,7 +1,12 @@
 Name:Cryptic Command
 ManaCost:1 U U U
 Types:Instant
-Text:Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
+Text:
+A:SP$ Charm | Cost$ 1 U U U | Choices$ DBCounter,DBReturn,DBTapAll,DBDraw | CharmNum$ 2 | SpellDescription$ Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Return target permanent to its owner's hand.
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.YouDontCtrl | SpellDescription$ Tap all creatures your opponents control.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
