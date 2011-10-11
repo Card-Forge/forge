@@ -496,6 +496,7 @@ public class AbilityFactory_AlterLife {
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
+        boolean priority = false;
 
         String amountStr = params.get("LifeAmount");
 
@@ -519,13 +520,16 @@ public class AbilityFactory_AlterLife {
 
         if (!AllZone.getHumanPlayer().canLoseLife())
             return false;
+        
+        if (amount >= AllZone.getHumanPlayer().getLife())
+            priority = true; //killing the human should be done asap
 
         //Don't use loselife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases"))
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases") && !priority)
             return false;
 
         //Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa))
+        if (AbilityFactory.waitForBlocking(sa) && !priority)
             return false;
 
         // prevent run-away activations - first time will always return true
@@ -545,7 +549,7 @@ public class AbilityFactory_AlterLife {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (AbilityFactory.playReusable(sa))
+        if (AbilityFactory.playReusable(sa) || priority)
             randomReturn = true;
 
         return (randomReturn && chance);
