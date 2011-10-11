@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBGain,DBLose | SpellDescription$ Choose one - You gain 2 life; or target opponent loses 2 life.
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:DBLose:DB$ LoseLife | LifeAmount$ 2 | ValidTgts$ Opponent | SpellDescription$ Target opponent loses 2 life.
-SVar:RemAIDeck$True
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitor_exarch.jpg
 End
