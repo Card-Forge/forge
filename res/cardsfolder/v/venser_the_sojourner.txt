@@ -11,6 +11,7 @@ A:AB$PumpAll | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Cr
 A:AB$Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Venser, the Sojourner emblem | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidControllingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, exile target permanent.
 SVar:EffSpellCast:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent
+SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_the_sojourner.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/135.jpg
