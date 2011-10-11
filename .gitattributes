@@ -5635,6 +5635,7 @@ res/cardsfolder/o/oros_the_avenger.txt svneol=native#text/plain
 res/cardsfolder/o/orzhov_basilica.txt svneol=native#text/plain
 res/cardsfolder/o/orzhov_euthanist.txt -text
 res/cardsfolder/o/orzhov_guildmage.txt svneol=native#text/plain
+res/cardsfolder/o/orzhov_pontiff.txt -text
 res/cardsfolder/o/orzhov_signet.txt svneol=native#text/plain
 res/cardsfolder/o/orzhova_the_church_of_deals.txt svneol=native#text/plain
 res/cardsfolder/o/osai_vultures.txt -text svneol=unset#text/plain

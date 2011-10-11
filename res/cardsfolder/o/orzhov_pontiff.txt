@@ -1,0 +1,10 @@
+Name:Orzhov Pontiff
+ManaCost:1 W B
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:Haunt:TrigChoose:Choose one - Creatures you control get +1/+1 until end of turn; or creatures you don't control get -1/-1 until end of turn.
+SVar:TrigChoose:AB$Charm | Cost$ 0 | Choices$ DBPump,DBCurse | CharmNum$ 1
+SVar:DBPump:DB$PumpAll | ValidCards$ Card.Creature+YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+SVar:DBCurse:DB$PumpAll | ValidCards$ Card.Creature+YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Creatures you don't control get -1/-1 until end of turn.
+End
