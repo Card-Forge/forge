@@ -936,7 +936,12 @@ public class AbilityFactory_ZoneAffecting {
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 if (mode.equals("Hand")) {
-                    p.discardHand(sa);
+                    CardList list = p.discardHand(sa);
+                    if (params.containsKey("RememberDiscarded")) {
+                        for (Card c : list) {
+                            source.addRemembered(c);
+                        }
+                    }
                     continue;
                 }
 

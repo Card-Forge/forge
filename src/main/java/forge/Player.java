@@ -1061,9 +1061,10 @@ public abstract class Player extends GameEntity {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void discardHand(SpellAbility sa) {
+    public CardList discardHand(SpellAbility sa) {
         CardList list = this.getCardsIn(Zone.Hand);
         discardRandom(list.size(), sa);
+        return list;
     }
 
     /**
