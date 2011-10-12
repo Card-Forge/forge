@@ -2013,7 +2013,9 @@ public class AbilityFactory_PermanentState {
         }
 
         for (Card tgtC : tgtCards) {
-            tgtC.phase();
+            if (!tgtC.isPhasedOut()) {
+                tgtC.phase();
+            }
         }
     }
 }// end of AbilityFactory_PermanentState class

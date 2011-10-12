@@ -1,0 +1,15 @@
+Name:Frenetic Efreet
+ManaCost:1 U R
+Types:Creature Efreet
+Text:no text
+PT:2/1
+K:Flying
+A:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBPhase | LoseSubAbility$ DBDestroy | SpellDescription$ Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+SVar:DBPhase:DB$ Phases | Defined$ Self
+SVar:DBDestroy:DB$ Destroy | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_efreet.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/324.jpg
+Oracle:Flying\n{0}: Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+End

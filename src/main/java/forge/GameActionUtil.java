@@ -661,22 +661,20 @@ public final class GameActionUtil {
     public static boolean flipACoin(final Player caller, final Card source) {
         String choice = "";
         String[] choices = {"heads", "tails"};
-        boolean flip = (50 > MyRandom.random.nextInt(100));
+
+        boolean flip = MyRandom.random.nextBoolean();
         if (caller.isHuman()) {
             choice = (String) GuiUtils.getChoice(source.getName() + " - Call coin flip", choices);
         } else {
             choice = choices[MyRandom.random.nextInt(2)];
         }
 
-        if ((flip == true && choice.equals("heads")) || (flip == false && choice.equals("tails"))) {
-            JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + " wins flip.",
-                    source.getName(), JOptionPane.PLAIN_MESSAGE);
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + " loses flip.",
-                    source.getName(), JOptionPane.PLAIN_MESSAGE);
-            return false;
-        }
+        boolean winFlip = flip == choice.equals("heads");
+        String winMsg = winFlip ? " wins flip." : " loses flip.";
+
+        JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg,
+                source.getName(), JOptionPane.PLAIN_MESSAGE);
+        return winFlip;
     }
 
     /**
