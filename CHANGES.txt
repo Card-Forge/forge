@@ -246,7 +246,20 @@ No settings file required in skin (all removed)
 - Added SVar:RemAIDeck:True to Venser, the Sojourner.
 - Ran set info script.
 - Ran oracle script.
-- Added the recent commit logs to changes.txt. Preparing for the nightly release build.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- cleanups in GamActionUtil and AbstractCardFactory
+- Removed a couple of unused imports.
+- Removed Fyndhorn Druid. Incorrect implementation.
+- Added some more Blink AI to AF ChangeZone to support Venser, the Sojourner.
+- update surefire reporting plugin
+- Added LQ pic URLs to Orzhov Pontiff and Tormentor Exarch.
+- Removed Fyndhorn Druid from changes.txt.
+- Fix for check ETB if the trigger is missing an Execute (Hazazon Tamar)
+- Adding Printings info to Lat-Nams Legacy
+- fix token name for Monkey Cage
+- Didn't fix the NPE properly last time
+- AI will no longer use AF_Tap during his turn outside of combat
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
