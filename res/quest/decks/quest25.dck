@@ -1,0 +1,44 @@
+[quest]
+id=25
+AILife=30
+Repeat=true
+Wins=42
+Card Reward=3 random rares
+Credit Reward=500
+HumanExtras=
+AIExtras=Feroz's Ban|Squeeze|Hum of the Radix|Mana Matrix
+[metadata]
+Name=quest25
+Title=Repressed Magic
+Difficulty=hard
+Description=Some kinds of magic are not welcome here
+Icon=
+Deck Type=constructed
+[main]
+12 Forest
+12 Island
+3 Back to Basics
+2 Centaur Glade
+3 Reach of Branches
+1 Beast Attack
+2 Elephant Ambush
+2 Squirrel Nest
+1 Fable of Wolf and Owl
+1 Leafdrake Roost
+2 Convolute
+2 Frightful Delusion
+2 Runeboggle
+1 Summoner's Bane
+1 Krosan Grip
+1 Mystic Melting
+2 Regress
+1 Briar Patch
+1 Dissipation Field
+2 Gaea's Anthem
+1 Ior Ruin Expedition
+1 Jace's Ingenuity
+1 Khalni Heart Expedition
+1 Leyline of Vitality
+1 Spidersilk Armor
+1 Psionic Blast
+[sideboard]
