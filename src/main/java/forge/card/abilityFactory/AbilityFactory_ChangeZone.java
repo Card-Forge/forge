@@ -1197,7 +1197,7 @@ public final class AbilityFactory_ChangeZone {
 	                }
 	            }
 	            // Blink permanents with ETB triggers
-	            else if (AbilityFactory.playReusable(sa)){
+	            else if (sa.isAbility() && sa.getPayCosts() != null && AbilityFactory.playReusable(sa)){
 	                aiPermanents = aiPermanents.filter(new CardListFilter() {
 	                    @Override
 	                    public boolean addCard(Card c) {
