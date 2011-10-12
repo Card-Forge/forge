@@ -15,7 +15,7 @@
 </head>
 <body>
 <#list urls as url>
-  <img src="${url}" height="319" width="222" style="margin: 0 1px 1px 0;">
+  <img src="${url}" height="${height}" width="${width}" style="margin: 0 ${cardBorder}px ${cardBorder}px 0;">
 </#list>  
 </body>
 </html>

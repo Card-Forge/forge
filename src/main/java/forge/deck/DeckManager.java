@@ -636,6 +636,9 @@ public class DeckManager {
      */
     private static void writeDeckHtml(final Deck d, final BufferedWriter out) throws IOException {
         Template temp = null;
+        int cardBorder = 0;
+        int height = 319;
+        int width = 222;
 
 /* Create and adjust the configuration */
         Configuration cfg = new Configuration();
@@ -659,6 +662,9 @@ public class DeckManager {
                 list.add(card.getSets().get(0).URL);
             }
             root.put("urls", list);
+            root.put("cardBorder", cardBorder);
+            root.put("height", height);
+            root.put("width", width);
 
             /* Merge data-model with template */
             //StringWriter sw = new StringWriter();
