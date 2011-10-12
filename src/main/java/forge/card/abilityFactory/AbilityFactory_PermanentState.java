@@ -649,6 +649,20 @@ public class AbilityFactory_PermanentState {
         Random r = MyRandom.random;
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
+        Phase phase = AllZone.getPhase();
+        Player turn = phase.getPlayerTurn();
+        
+        if (turn.isHuman()){
+            // Tap things down if it's Human's turn
+        }
+        else if (phase.inCombat() && phase.isBefore(Constant.Phase.Combat_Declare_Blockers)){
+            // TODO Tap creatures down if in combat
+        }
+        else{
+            // Generally don't want to tap things during AI turn outside of combat
+            return false;
+        }
+        
         if (tgt == null) {
             ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
 
