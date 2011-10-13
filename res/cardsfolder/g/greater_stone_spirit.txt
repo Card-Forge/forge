@@ -1,0 +1,12 @@
+Name:Greater Stone Spirit
+ManaCost:4 R R
+Types:Creature Elemental Spirit
+Text:no text
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CantBeBlockedBy Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
+A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | NumDef$ 2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +0/+2 and gains "R: This creature gets +1/+0 until end of turn."
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ Pump
+SVar:Pump:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_stone_spirit.jpg
+End
