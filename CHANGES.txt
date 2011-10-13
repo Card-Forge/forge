@@ -260,6 +260,14 @@ No settings file required in skin (all removed)
 - Didn't fix the NPE properly last time
 - AI will no longer use AF_Tap during his turn outside of combat
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Some cleanup in AF_Phases and GameActionUtil.FlipACoin
+- Fixed a bug in the AI part of AF ChangeZone.
+- Added quest25 challenge.
+- Frenetic Efreet is a sacrifice not a destroy
+- Make the Freemarker template for generating proxies more generic
+- Assigned an icon to quest25.
+- Disciple of Griselbrand shouldn't have intimidate
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -429,6 +437,7 @@ Deceiver Exarch
 Orzhov Pontiff
 Gruul Scrapper
 Tormentor Exarch
+Frenetic Efreet
 
 
 end
