@@ -268,6 +268,12 @@ No settings file required in skin (all removed)
 - Assigned an icon to quest25.
 - Disciple of Griselbrand shouldn't have intimidate
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Fixed Exhume.
+- Enlarged the Multi Block window (but it's not a real solution for the problem with large card pictures).
+- update guava dependency to latest version
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -438,6 +444,8 @@ Orzhov Pontiff
 Gruul Scrapper
 Tormentor Exarch
 Frenetic Efreet
+Greater Stone Spirit
+Martyr of Ashes
 
 
 end
