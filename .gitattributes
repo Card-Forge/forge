@@ -6144,6 +6144,7 @@ res/cardsfolder/q/quest_for_the_gemblades.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_goblin_lord.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_gravelord.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_nihil_stone.txt svneol=native#text/plain
+res/cardsfolder/q/quest_for_ulas_temple.txt -text svneol=unset#text/plain
 res/cardsfolder/q/questing_phelddagrif.txt svneol=native#text/plain
 res/cardsfolder/q/quick_sliver.txt svneol=native#text/plain
 res/cardsfolder/q/quicksand.txt svneol=native#text/plain
