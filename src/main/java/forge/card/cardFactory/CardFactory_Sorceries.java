@@ -1960,59 +1960,7 @@ public class CardFactory_Sorceries {
         }// *************** END ************ END **************************
 
 
-        //*************** START *********** START **************************
-        else if (cardName.equals("Cerebral Eruption")) {
-        	/*
-        	 * Target opponent reveals the top card of his or her library.
-        	 * Cerebral Eruption deals damage equal to the revealed card's
-        	 * converted mana cost to that player and each creature he or
-        	 * she controls. If a land card is revealed this way, return
-        	 * Cerebral Eruption to its owner's hand.
-        	 */
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -1365692178841929046L;
-
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    Player opponent = player.getOpponent();
-                    CardList lib = opponent.getCardsIn(Zone.Library);
-                    if (lib.size() > 0) {
-                        final Card topCard = lib.get(0);
-                        int damage = CardUtil.getConvertedManaCost(topCard);
-
-                        GuiUtils.getChoiceOptional(card + " - Revealed card", new Card[]{topCard});
-
-                        //deal damage to player
-                        opponent.addDamage(damage, card);
-
-                        //deal damage to all opponent's creatures
-                        CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
-                        for (Card creature : creatures) {
-                            creature.addDamage(damage, card);
-                        }
-
-                        card.addReplaceMoveToGraveyardCommand(new Command() {
-                            private static final long serialVersionUID = -5912663572746146726L;
-
-                            public void execute() {
-                                if (null != topCard && topCard.isLand()) {
-                                    AllZone.getGameAction().moveToHand(card);
-                                } else AllZone.getGameAction().moveToGraveyard(card);
-                            }
-                        });
-                    }
-                }// resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return !AllZone.getHumanPlayer().getZone(Zone.Library).isEmpty();
-                }
-
-            };// SpellAbility
-            card.addSpellAbility(spell);
-        }// *************** END ************ END **************************
-
+        
 
         //*************** START *********** START **************************
         else if (cardName.equals("Sanity Grinding")) {
