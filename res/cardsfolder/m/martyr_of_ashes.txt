@@ -8,4 +8,5 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_ashes.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/92.jpg
 End
