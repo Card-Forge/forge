@@ -66,7 +66,7 @@ class Gui_MultipleBlockers4 extends JFrame {
         JDialog dialog = new JDialog(this, true);
         dialog.setTitle("Multiple Blockers");
         dialog.setContentPane(mainPanel);
-        dialog.setSize(470, 260);
+        dialog.setSize(470, 310);
         dialog.setVisible(true);
     }
 
@@ -95,9 +95,9 @@ class Gui_MultipleBlockers4 extends JFrame {
         numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
         numberLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         numberLabel.setText("Assign");
-        numberLabel.setBounds(new Rectangle(52, 30, 343, 24));
+        numberLabel.setBounds(new Rectangle(52, 10, 343, 24));
         jPanel3.setLayout(borderLayout3);
-        jPanel3.setBounds(new Rectangle(26, 75, 399, 114));
+        jPanel3.setBounds(new Rectangle(15, 40, 430, 235));
         creaturePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
