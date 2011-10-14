@@ -163,7 +163,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String echoCost = "";
     private String madnessCost = "";
     private String chosenType = "";
-    private String chosenColor = "";
+    //private String chosenColor = "";
+    private ArrayList<String> chosenColor = new ArrayList<String>();
     private String namedCard = "";
     private int chosenNumber;
     private Player chosenPlayer;
@@ -1427,18 +1428,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * <p>Getter for the field <code>chosenColor</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return an ArrayList<String> object.
      */
-    public final String getChosenColor() {
+    public final ArrayList<String> getChosenColor() {
         return chosenColor;
     }
 
     /**
      * <p>Setter for the field <code>chosenColor</code>.</p>
      *
-     * @param s a {@link java.lang.String} object.
+     * @param s an ArrayList<String> object.
      */
-    public final void setChosenColor(final String s) {
+    public final void setChosenColor(final ArrayList<String> s) {
         chosenColor = s;
     }
 

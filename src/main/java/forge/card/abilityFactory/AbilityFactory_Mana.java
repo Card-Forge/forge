@@ -242,7 +242,8 @@ public class AbilityFactory_Mana {
 
         String baseMana = abMana.mana();
         if (baseMana.equals("Chosen")){
-            baseMana = Input_PayManaCostUtil.getShortColorString(card.getChosenColor());
+            //this will only support 1 chosen color for now.
+            baseMana = Input_PayManaCostUtil.getShortColorString(card.getChosenColor().get(0));
         }
 
         if (params.containsKey("Bonus")) {

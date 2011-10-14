@@ -18,6 +18,7 @@ import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -1811,7 +1812,13 @@ public final class AbilityFactory_Reveal {
         }
 
         if (tgtPlayers.size() > 0) {
-            sb.append(tgtPlayers.get(0)).append(" reveals a card ");
+            sb.append(tgtPlayers.get(0)).append(" reveals ");
+            if (params.containsKey("AnyNumber")) {
+                sb.append("any number of cards ");
+            }
+            else {
+                sb.append("a card ");
+            }
             if (params.containsKey("Random")) {
                 sb.append("at random ");
             }
@@ -1930,15 +1937,92 @@ public final class AbilityFactory_Reveal {
             if (tgt == null || p.canTarget(sa)) {
                 CardList handChoices = p.getCardsIn(Zone.Hand);
                 if (handChoices.size() > 0) {
-                    Card random = CardUtil.getRandom(handChoices.toArray());
-                    if (params.containsKey("RememberRevealed")) {
-                        host.addRemembered(random);
+                    CardList revealed = new CardList();
+                    if (params.containsKey("Random")) {
+                        revealed.add(CardUtil.getRandom(handChoices.toArray()));
+                        GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
                     }
-                    GuiUtils.getChoice("Random card", new CardList(random).toArray());
+                    else if (params.containsKey("AnyNumber")) {
+                        CardList valid = new CardList(handChoices);
+                        if (params.containsKey("RevealValid")) {
+                            valid = valid.getValidCards(params.get("RevealValid"), p, host);
+                        }
+                        revealed.addAll(getRevealedList(host, sa, valid));
+                    }
+                    
+                    if (params.containsKey("RememberRevealed")) {
+                        for(Card rem : revealed) {
+                            host.addRemembered(rem);
+                        }
+                    }
+                    
                 }
-
             }
         }
     }
+    
+    private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid) {
+        final CardList revealed = new CardList();
+        if (sa.getActivatingPlayer().isComputer()) {
+            //not really implemented for computer
+            //would need GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
+        }
+        else {
+            
+        }
+
+        return revealed;
+    }
+    
+    /*
+    private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid) {
+        final CardList revealed = new CardList();
+        if (sa.getActivatingPlayer().isComputer()) {
+            //not really implemented for computer
+            //would need GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
+        }
+        else {
+            AllZone.getInputControl().setInput(new Input() {
+                private static final long serialVersionUID = 3851585340769670736L;
+
+                @Override
+                public void showMessage() {
+                    //in case hand is empty, don't do anything
+                    if (card.getController().getCardsIn(Zone.Hand).size() == 0) stop();
+
+                    AllZone.getDisplay().showMessage(card.getName() + " - Reveal a card.  Revealed " + revealed.size() + " so far.  Click OK when done.");
+                    ButtonUtil.enableOnlyOK();
+                }
+
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if (zone.is(Constant.Zone.Hand) && valid.contains(c) && !revealed.contains(c)) {
+                        revealed.add(c);
+
+                        //in case no more cards in hand to reveal
+                        if (revealed.size() == card.getController().getCardsIn(Zone.Hand).size()) {
+                            done();
+                        }
+                        else {
+                            showMessage();
+                        }
+                    }
+                }
+
+                @Override
+                public void selectButtonOK() {
+                    done();
+                }
+
+                void done() {
+                    stop();
+                    GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
+                }
+            });
+        }
+
+        return revealed;
+    }
+    */
 
 } //end class AbilityFactory_Reveal

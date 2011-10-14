@@ -477,8 +477,8 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Colors")) {
             String colors = params.get("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(
-                        new ArrayList<String>(Arrays.asList(host.getChosenColor().split(","))));
+                
+                tmpDesc = CardUtil.getShortColorsString(host.getChosenColor());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
             }
@@ -1012,8 +1012,7 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Colors")) {
             String colors = params.get("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(
-                        new ArrayList<String>(Arrays.asList(host.getChosenColor().split(","))));
+                tmpDesc = CardUtil.getShortColorsString(host.getChosenColor());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
             }

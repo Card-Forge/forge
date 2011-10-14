@@ -20,11 +20,10 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -488,6 +487,7 @@ public class AbilityFactory_Choose {
      * @return a {@link java.lang.String} object.
      */
     private static String chooseColorStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
@@ -510,7 +510,11 @@ public class AbilityFactory_Choose {
         for (Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
-        sb.append("chooses a color.");
+        sb.append("chooses a color");
+        if (params.containsKey("OrColors")) {
+            sb.append(" or colors");
+        }
+        sb.append(".");
 
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -586,13 +590,36 @@ public class AbilityFactory_Choose {
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
+                List<String> colors = new ArrayList<String>(Arrays.asList(Constant.Color.onlyColors));
                 if (sa.getActivatingPlayer().isHuman()) {
-                    Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
-                    if (null == o) {
-                        return;
+                    if (params.containsKey("OrColors")) {
+                        //ArrayList<String> chosenColors = new ArrayList<String>();
+                        //boolean done = false;
+                        //while (!done) {
+                            List<String> o = GuiUtils.getChoices("Choose a color or colors", colors.toArray(new String[0]));
+                            /*if (null == o) {
+                                done = true;
+                            }
+                            else {
+                                String thisColor = (String) o;
+                                chosenColors.add(thisColor);
+                                colors.remove(thisColor);
+                                card.setChosenColor(chosenColors);
+                            }
+                            */
+                            card.setChosenColor(new ArrayList<String>(o));
+                        //}
                     }
-                    String choice = (String) o;
-                    card.setChosenColor(choice);
+                    else {
+                        Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
+                        if (null == o) {
+                            return;
+                        }
+                        String choice = (String) o;
+                        ArrayList<String> tmpColors = new ArrayList<String>();
+                        tmpColors.add(choice);
+                        card.setChosenColor(tmpColors);
+                    }
                 } else {
                     String chosen = "";
                     if (params.containsKey("AILogic")) {
@@ -615,7 +642,9 @@ public class AbilityFactory_Choose {
                         chosen = Constant.Color.Green;
                     }
                     GuiUtils.getChoice("Computer picked: ", chosen);
-                    card.setChosenColor(chosen);
+                    ArrayList<String> colorTemp = new ArrayList<String>();
+                    colorTemp.add(chosen);
+                    card.setChosenColor(colorTemp);
                 }
             }
         }

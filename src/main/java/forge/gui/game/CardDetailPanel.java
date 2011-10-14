@@ -237,9 +237,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         //chosen color
-        if (card.getChosenColor() != "") {
+        if (!card.getChosenColor().isEmpty()) {
             if (area.length() != 0) area.append("\n");
-            area.append("(chosen color: ");
+            area.append("(chosen colors: ");
             area.append(card.getChosenColor());
             area.append(")");
         }

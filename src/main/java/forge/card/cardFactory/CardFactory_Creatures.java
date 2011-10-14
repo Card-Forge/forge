@@ -787,7 +787,9 @@ public class CardFactory_Creatures {
                             }
                         }
                     }
-                    card.setChosenColor(color[0]);
+                    ArrayList<String> colors = new ArrayList<String>();
+                    colors.add(color[0]);
+                    card.setChosenColor(colors);
                     String s = CardUtil.getShortColor(color[0]);
 
                     timeStamp[0] = AllZone.getColorChanger().addColorChanges(s, card, true, true);
@@ -1547,7 +1549,9 @@ public class CardFactory_Creatures {
 
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color = (String) o;
-                        card.setChosenColor(color);
+                        ArrayList<String> colorTemp = new ArrayList<String>();
+                        colorTemp.add(color);
+                        card.setChosenColor(colorTemp);
                     } else {
                         CardList list = new CardList();
                         list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Library));
@@ -1555,10 +1559,20 @@ public class CardFactory_Creatures {
 
                         if (list.size() > 0) {
                             String color = CardFactoryUtil.getMostProminentColor(list);
-                            if (!color.equals("")) card.setChosenColor(color);
-                            else card.setChosenColor("black");
+                            if (!color.equals("")) {
+                                ArrayList<String> colorTemp = new ArrayList<String>();
+                                colorTemp.add(color);
+                                card.setChosenColor(colorTemp);
+                            }
+                            else {
+                                ArrayList<String> colorTemp = new ArrayList<String>();
+                                colorTemp.add("black");
+                                card.setChosenColor(colorTemp);
+                            }
                         } else {
-                            card.setChosenColor("black");
+                            ArrayList<String> colorTemp = new ArrayList<String>();
+                            colorTemp.add("black");
+                            card.setChosenColor(colorTemp);
                         }
                     }
                 }
