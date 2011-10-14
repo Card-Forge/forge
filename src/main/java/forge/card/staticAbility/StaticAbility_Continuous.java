@@ -330,13 +330,9 @@ public class StaticAbility_Continuous {
 
         // non - CharacteristicDefining
         CardList affectedCards = new CardList();
-        String[] affectedZones = null;
 
         if (params.containsKey("AffectedZone")) {
-            affectedZones = params.get("AffectedZone").split(",");
-            for (String az : affectedZones) {
-                affectedCards.addAll(AllZoneUtil.getCardsIn(Zone.smartValueOf(az)));
-            }
+            affectedCards.addAll(AllZoneUtil.getCardsIn(Zone.listValueOf(params.get("AffectedZone"))));
         } else {
             affectedCards = AllZoneUtil.getCardsIn(Zone.Battlefield);
         }
