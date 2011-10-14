@@ -12,4 +12,6 @@ A:AB$ ChooseColor | Cost$ T | Defined$ You | OrColors$ True | SubAbility$ Animat
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuttlemutt.jpg
+Oracle:{T}: Add one mana of any color to your mana pool.\n{T}: Target creature becomes the color or colors of your choice until end of turn.
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/263.jpg
 End
