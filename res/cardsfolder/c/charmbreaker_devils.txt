@@ -1,0 +1,15 @@
+Name:Charmbreaker Devils
+ManaCost:5 R
+Types:Creature Devil
+Text:no text
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Instant.YouCtrl,Sorcery.YouCtrl  | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand
+T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a instant or sorcery spell, CARDNAME gets +4/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +4 | NumDef$ +0 | Defined$ Self
+SVar:BuffedBy:Instant,Sorcery
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charmbreaker_devils.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/134.jpg
+Oracle:At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.\nWhenever you cast an instant or sorcery spell, Charmbreaker Devils gets +4/+0 until end of turn.
+End

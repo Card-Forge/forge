@@ -6,7 +6,7 @@ PT:8/8
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Exile | SubAbility$ SVar=DBChangeZone
-SVar:DBChangeZone:DB$ChangeZone | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Hidden$ True | Origin$ Hand | AtRandom$ True | Destination$ Battlefield
+SVar:DBChangeZone:DB$ChangeZone | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moldgraf_monstrosity.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/194.jpg
