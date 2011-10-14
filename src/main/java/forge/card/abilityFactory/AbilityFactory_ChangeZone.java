@@ -326,7 +326,8 @@ public final class AbilityFactory_ChangeZone {
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        ArrayList<Player> pDefined;
+        ArrayList<Player> pDefined = new ArrayList<Player>();
+        pDefined.add(source.getController());
         Target tgt = af.getAbTgt();
         if (tgt != null && tgt.canTgtPlayer()) {
             if (af.isCurse()) {
