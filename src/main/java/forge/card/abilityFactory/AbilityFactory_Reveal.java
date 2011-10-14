@@ -331,6 +331,14 @@ public final class AbilityFactory_Reveal {
                     if (params.containsKey("Reveal")) {
                         GuiUtils.getChoice("Revealing cards from library", top.toArray());
                         //AllZone.getGameAction().revealToCopmuter(top.toArray()); - for when it exists
+                    } 
+                    else if (params.containsKey("RevealValid")) {
+                        String revealValid = params.get("RevealValid");
+                        CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
+                        if (!toReveal.isEmpty()) {
+                            GuiUtils.getChoice("Revealing cards from library", toReveal.toArray());
+                        }
+                        //AllZone.getGameAction().revealToCopmuter(top.toArray()); - for when it exists
                     } else if (player.isHuman()) {
                         //show the user the revealed cards
                         GuiUtils.getChoice("Looking at cards from library", top.toArray());
