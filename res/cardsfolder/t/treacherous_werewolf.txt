@@ -1,0 +1,11 @@
+Name:Treacherous Werewolf
+ManaCost:2 B
+Types:Creature Werewolf Minion
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ Dies | AddSVar$ TrigLose | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has "When CARDNAME dies, you lose 4 life."
+SVar:Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLose  | Secondary$ True | TriggerDescription$ When CARDNAME dies, you lose 4 life.
+SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_werewolf.jpg
+End

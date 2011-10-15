@@ -8413,6 +8413,7 @@ res/cardsfolder/t/travel_preparations.txt -text
 res/cardsfolder/t/travelers_amulet.txt -text
 res/cardsfolder/t/treacherous_link.txt svneol=native#text/plain
 res/cardsfolder/t/treacherous_urge.txt svneol=native#text/plain
+res/cardsfolder/t/treacherous_werewolf.txt -text
 res/cardsfolder/t/treachery.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_hunt.txt -text
 res/cardsfolder/t/treasure_hunter.txt svneol=native#text/plain
