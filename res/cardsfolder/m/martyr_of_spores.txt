@@ -7,5 +7,5 @@ A:AB$ Pump | Cost$ 1 Reveal<X/Card.Green> Sac<1/CARDNAME> | CostDesc$ 1, Reveal 
 SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_sands.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_spores.jpg
 End
