@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 RG | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Double Strike | Description$ As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ As long as enchanted creature is green, it gets +1/+1 and has trample.
-SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runes_of_the_deus.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/215.jpg
