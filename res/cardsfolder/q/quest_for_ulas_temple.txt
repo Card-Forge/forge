@@ -9,7 +9,9 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ QUEST | CounterNum$ 1 | Defined$
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Each | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_QUEST | PresentCompare$ EQ1 | TriggerDescription$ At the beginning of each end step, if there are three or more quest counters on Quest for CARDNAME, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Kraken,Creature.Leviathan,Creature.Octopus,Creature.Serpent | ChangeNum$ 1 | Hidden$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_ulas_temple.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/35.jpg
+Oracle:At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.\nAt the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
 End
