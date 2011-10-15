@@ -8,7 +8,6 @@ import forge.CardUtil;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
-import forge.Combat;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -46,96 +45,7 @@ public class CardFactory_Instants {
 
 
         //*************** START *********** START **************************
-        if (cardName.equals("Brave the Elements")) {
-            /**
-             *  This card now works slightly better than it did before the spAllPump
-             *  keyword was created. The AI is too simple and needs some work.
-             */
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7998437920995642451L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-
-                public Card getAttacker() {
-                    // target creatures that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    Card[] att = c.getAttackers();
-
-                    // Effect best used on at least a couple creatures
-                    if (att.length > 1) {
-                        return att[0];
-                    } else {
-                        return null;
-                    }
-                } //getAttacker()
-
-                String getKeywordBoost() {
-                    String theColor = getChosenColor();
-                    return "Protection from " + theColor;
-                } //getKeywordBoost()
-
-                String getChosenColor() {
-                    // Choose color for protection in Brave the Elements
-                    String color = "Black";
-                    if (card.getController().isHuman()) {
-
-                        // String[] colors = Constant.Color.Colors;
-                        // colors[colors.length-1] = null;
-
-                        // You can no longer choose to gain "protection from null".
-                        String[] colors = Constant.Color.onlyColors;
-
-                        Object o = GuiUtils.getChoice("Choose color", colors);
-                        color = (String) o;
-                    } else {
-                        if (getAttacker() != null) {
-                        color = getAttacker().getColor().get(0).toString();
-                        }
-                    }
-                    return color;
-                } // getChosenColor
-
-                @Override
-                public void resolve() {
-                    final String kboost = getKeywordBoost();
-
-                    CardList list = card.getController().getCardsIn(Zone.Battlefield);
-                    list = list.filter(CardListFilter.white);
-
-                    for (int i = 0; i < list.size(); i++) {
-                        final Card[] target = new Card[1];
-                        target[0] = list.get(i);
-
-                        final Command untilEOT = new Command() {
-                            private static final long serialVersionUID = 6308754740309909072L;
-
-                            public void execute() {
-                                if (AllZoneUtil.isCardInPlay(target[0])) {
-                                    target[0].removeExtrinsicKeyword(kboost);
-                                }
-                            }
-                        }; //Command
-
-                        if (AllZoneUtil.isCardInPlay(target[0]) && !target[0].hasKeyword(kboost)) {
-                            target[0].addExtrinsicKeyword(kboost);
-
-                            AllZone.getEndOfTurn().addUntil(untilEOT);
-                        } //if
-                    } //for
-                } //resolve
-            }; //SpellAbility
-
-            card.setSVar("PlayMain1", "TRUE");
-
-            card.addSpellAbility(spell);
-        } //*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Sprout Swarm")) {
+        if (cardName.equals("Sprout Swarm")) {
             final SpellAbility spell_one = new Spell(card) {
                 private static final long serialVersionUID = -609007714604161377L;
 

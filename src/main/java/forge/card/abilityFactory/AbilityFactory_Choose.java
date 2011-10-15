@@ -532,6 +532,7 @@ public class AbilityFactory_Choose {
      * @return a boolean.
      */
     private static boolean chooseColorCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        //Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
         return chooseColorTriggerAI(af, sa, false);
     }
 
@@ -621,6 +622,9 @@ public class AbilityFactory_Choose {
                             if(list.isEmpty())
                                 list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()).getType("Creature");
                             chosen = CardFactoryUtil.getMostProminentColor(list);
+                        }
+                        if (logic.equals("MostProminentAttackers")) {
+                            chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat().getAttackers()));
                         }
                     }
                     if (chosen.equals("")) {

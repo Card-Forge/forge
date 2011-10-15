@@ -993,7 +993,14 @@ public final class AbilityFactory_Protection {
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-            gains.addAll(choices);
+            if (params.get("Gains").equals("ChosenColor")) {
+                for (String color : host.getChosenColor()) {
+                    gains.add(color.toLowerCase());
+                }
+            }
+            else {
+                gains.addAll(choices);
+            }
         }
 
         String valid = params.get("ValidCards");
