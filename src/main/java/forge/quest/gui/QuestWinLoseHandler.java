@@ -71,7 +71,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     @Override
-    public void startNextRound() {
+    public void startNextRound() {  
         if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
             
@@ -82,9 +82,8 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
             }
 
             CardList humanList = QuestUtil.getHumanStartingCards(model.qData, model.qEvent);
-            CardList computerList = new CardList();
-
-
+            CardList computerList = QuestUtil.getComputerStartingCards(model.qData, model.qEvent);
+            
             int humanLife = model.qData.getLife() + extraLife;
             int computerLife = 20;
             if (model.qEvent.getEventType().equals("challenge")) {

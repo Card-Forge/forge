@@ -1,8 +1,6 @@
 package forge.quest.gui.main;
 
-import forge.CardList;
 import forge.item.CardPrinted;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +23,8 @@ public class QuestChallenge extends QuestEvent {
     public int     winsReqd            = 20;
 
     // Other cards used in assignment: starting, and reward.
-    public CardList humanExtraCards    = new CardList();
-    public CardList aiExtraCards       = new CardList();
+    public List<String> humanExtraCards = new ArrayList<String>();
+    public List<String>  aiExtraCards = new ArrayList<String>();
     public List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>(); 
 
     public QuestChallenge() {
@@ -94,7 +92,7 @@ public class QuestChallenge extends QuestEvent {
      *
      * @return 
      */
-    public final CardList getAIExtraCards() { 
+    public final List<String> getAIExtraCards() { 
         return aiExtraCards; 
     }
     
@@ -104,7 +102,7 @@ public class QuestChallenge extends QuestEvent {
      *
      * @return 
      */
-    public final CardList getHumanExtraCards() { 
+    public final List<String> getHumanExtraCards() { 
         return humanExtraCards; 
     }
     

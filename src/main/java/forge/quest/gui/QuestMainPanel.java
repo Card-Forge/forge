@@ -7,6 +7,7 @@ import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorShop;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestDuelPanel;
@@ -705,9 +706,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         QuestDuel selectedDuel = (QuestDuel)selectedOpponent.getEvent();
         AllZone.setQuestEvent(selectedDuel);
-        
-        AllZone.getGameAction().newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanStartingCards(questData),
-                new CardList(), questData.getLife(), 20, null);
+
+        AllZone.getGameAction().newGame(humanDeck, computer, 
+                QuestUtil.getHumanStartingCards(questData),
+                QuestUtil.getComputerStartingCards(questData), 
+                questData.getLife(), 20, null);
     }
 
     /**
@@ -730,7 +733,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
         AllZone.getGameAction().newGame(humanDeck, computer,
-                forge.quest.data.QuestUtil.getHumanStartingCards(questData, selectedChallenge), new CardList(),
+                QuestUtil.getHumanStartingCards(questData, selectedChallenge), 
+                QuestUtil.getComputerStartingCards(questData, selectedChallenge),
                 questData.getLife() + extraLife, selectedChallenge.getAILife(), selectedChallenge);
 
     }

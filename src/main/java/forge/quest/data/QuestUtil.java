@@ -1,8 +1,11 @@
 package forge.quest.data;
 
+import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
 import forge.Constant;
+import forge.Player;
 import forge.card.CardRarity;
 import forge.card.BoosterUtils;
 import forge.item.CardPrinted;
@@ -31,7 +34,7 @@ public class QuestUtil {
 
     /**
      * <p>getComputerStartingCards.</p>
-     * Returns extra AI cards in play at start of event.
+     * Returns new card instances of extra AI cards in play at start of event.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
      * @param qe a {@link forge.quest.gui.main.QuestEvent} object.
@@ -40,9 +43,14 @@ public class QuestUtil {
     public static CardList getComputerStartingCards(final QuestData qd, QuestEvent qe) {
         CardList list = new CardList();
         
-        if (qe.getEventType().equals("challenge")) {
-            list.addAll(((QuestChallenge)qe).getAIExtraCards());
+        if(qe.getEventType().equals("challenge")) {
+            List<String> extras = ((QuestChallenge)qe).getAIExtraCards();
+        
+            for(String s : extras) {
+                list.add(readExtraCard(s, AllZone.getComputerPlayer()));
+            }
         }
+        
         return list;
     }
 
@@ -69,7 +77,8 @@ public class QuestUtil {
 
     /**
      * <p>getHumanStartingCards.</p>
-     * Returns extra human cards, including current plant/pet configuration,
+     * Returns new card instances of extra human cards, 
+     * including current plant/pet configuration,
      * and cards in play at start of quest.
      *
      * @param qd a {@link forge.quest.data.QuestData} object.
@@ -79,8 +88,12 @@ public class QuestUtil {
     public static CardList getHumanStartingCards(final QuestData qd, QuestEvent qe) {
         CardList list = getHumanStartingCards(qd);
         
-        if (qe.getEventType().equals("challenge")) {
-            list.addAll(((QuestChallenge)qe).getHumanExtraCards());
+        if(qe.getEventType().equals("challenge")) {
+            List<String> extras = ((QuestChallenge)qe).getHumanExtraCards();
+            
+            for(String s : extras) {
+                list.add(readExtraCard(s, AllZone.getHumanPlayer()));
+            }
         }
 
         return list;
@@ -162,6 +175,31 @@ public class QuestUtil {
         }
         
         return BoosterUtils.generateCards(qty, rar, col);
+    }
+    
+    /**
+     * <p>readExtraCard.</p>
+     * Creates single card for a string read from unique event properties.
+     * 
+     * @param name
+     * @param owner
+     * @return
+     */
+    public static Card readExtraCard(String name, Player owner) {
+        // Token card creation
+        Card tempcard;
+        if(name.startsWith("TOKEN")) {
+            tempcard = QuestUtil.createToken(name);
+            tempcard.addController(owner);
+            tempcard.setOwner(owner);
+        }
+        // Standard card creation
+        else {
+            tempcard = AllZone.getCardFactory().getCard(name, owner);
+            tempcard.setCurSetCode(tempcard.getMostRecentSet());
+            tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
+        }
+        return tempcard;
     }
 
 } //QuestUtil

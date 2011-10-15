@@ -31,7 +31,6 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 import forge.quest.gui.QuestWinLoseHandler;
-import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
 import forge.view.swing.WinLoseFrame;
 
@@ -1125,13 +1124,6 @@ public class GameAction {
         AllZone.getComputerPlayer().setLife(computerLife, null);
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
-        if (qe != null && qe instanceof QuestChallenge){
-            QuestChallenge challenge = (QuestChallenge)qe;
-            if (challenge.getEventType().equals("challenge")) {
-                computer.addAll(forge.quest.data.QuestUtil.getComputerStartingCards(AllZone.getQuestData(), AllZone.getQuestEvent()));
-            }
-        }
-
         for (Card c : human) {
             for (Trigger trig : c.getTriggers()) {
                 AllZone.getTriggerHandler().registerTrigger(trig);
@@ -1141,7 +1133,7 @@ public class GameAction {
             c.setSickness(true);
         }
 
-        for (Card c : computer) {
+        for (Card c : computer) { 
             for (Trigger trig : c.getTriggers()) {
                 AllZone.getTriggerHandler().registerTrigger(trig);
             }

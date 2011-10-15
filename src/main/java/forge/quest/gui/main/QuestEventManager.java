@@ -1,11 +1,7 @@
 package forge.quest.gui.main;
 
 import forge.AllZone;
-import forge.Card;
-import forge.CardList;
-import forge.CardUtil;
 import forge.FileUtil;
-import forge.Player;
 import forge.deck.DeckManager;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -141,10 +137,10 @@ public class QuestEventManager {
             // Human extra card list assembled here.
             else if(key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
                 String[] names = value.split("\\|");
-                CardList templist = new CardList();
+                List<String> templist = new ArrayList<String>();
                 
                 for(String n : names) { 
-                    templist.add(readExtraCard(n, AllZone.getHumanPlayer()));
+                    templist.add(n);
                 }
 
                 qc.humanExtraCards = templist;
@@ -152,12 +148,12 @@ public class QuestEventManager {
             // AI extra card list assembled here.
             else if(key.equalsIgnoreCase("AIExtras") && !value.equals("")) {
                 String[] names = value.split("\\|");
-                CardList templist = new CardList();
-
-                for(String n : names) { 
-                    templist.add(readExtraCard(n, AllZone.getComputerPlayer()));
-                }
+                List<String> templist = new ArrayList<String>();
                 
+                for(String n : names) { 
+                    templist.add(n);
+                }
+
                 qc.aiExtraCards = templist;
             }
             // Card reward list assembled here.
@@ -166,33 +162,7 @@ public class QuestEventManager {
                 qc.cardRewardList = QuestUtil.generateCardRewardList(value);
             } 
         }        
-    }
-    
-    /**
-     * <p>readExtraCard.</p>
-     * Creates single card for a string read from unique event properties.
-     * 
-     * @param name
-     * @param owner
-     * @return
-     */
-    private Card readExtraCard(String name, Player owner) {
-        // Token card creation
-        Card tempcard;
-        if(name.startsWith("TOKEN")) {
-            tempcard = QuestUtil.createToken(name);
-            tempcard.addController(owner);
-            tempcard.setOwner(owner);
-        }
-        // Standard card creation
-        else {
-            tempcard = AllZone.getCardFactory().getCard(name, owner);
-            tempcard.setCurSetCode(tempcard.getMostRecentSet());
-            tempcard.setImageFilename(CardUtil.buildFilename(tempcard));
-        }
-        return tempcard;
-    }
-    
+    }    
     
     /**
      * <p>assembleEventMetadata.</p>
