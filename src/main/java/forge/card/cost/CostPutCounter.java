@@ -44,7 +44,7 @@ public class CostPutCounter extends CostPartWithList {
         else {
         	sb.append("Put ");
         	Integer i = convertAmount();
-        	sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName()));
+        	sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName()+" counter"));
 
         	sb.append(" on ");
             if (getThis()){
