@@ -3270,6 +3270,7 @@ res/cardsfolder/g/goblin_piledriver.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_pyromancer.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_raider.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_razerunners.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_recruiter.txt -text
 res/cardsfolder/g/goblin_replica.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_rimerunner.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_ringleader.txt svneol=native#text/plain
