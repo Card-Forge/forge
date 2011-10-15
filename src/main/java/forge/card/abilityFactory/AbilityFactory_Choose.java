@@ -590,25 +590,10 @@ public class AbilityFactory_Choose {
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
-                List<String> colors = new ArrayList<String>(Arrays.asList(Constant.Color.onlyColors));
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (params.containsKey("OrColors")) {
-                        //ArrayList<String> chosenColors = new ArrayList<String>();
-                        //boolean done = false;
-                        //while (!done) {
-                            List<String> o = GuiUtils.getChoices("Choose a color or colors", colors.toArray(new String[0]));
-                            /*if (null == o) {
-                                done = true;
-                            }
-                            else {
-                                String thisColor = (String) o;
-                                chosenColors.add(thisColor);
-                                colors.remove(thisColor);
-                                card.setChosenColor(chosenColors);
-                            }
-                            */
+                            List<String> o = GuiUtils.getChoices("Choose a color or colors", Constant.Color.onlyColors);
                             card.setChosenColor(new ArrayList<String>(o));
-                        //}
                     }
                     else {
                         Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
