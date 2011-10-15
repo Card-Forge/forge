@@ -8025,6 +8025,7 @@ res/cardsfolder/t/talruum_minotaur.txt svneol=native#text/plain
 res/cardsfolder/t/talus_paladin.txt svneol=native#text/plain
 res/cardsfolder/t/tamanoa.txt svneol=native#text/plain
 res/cardsfolder/t/tangle.txt -text
+res/cardsfolder/t/tangle_angler.txt -text
 res/cardsfolder/t/tangle_asp.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_golem.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_hulk.txt svneol=native#text/plain
