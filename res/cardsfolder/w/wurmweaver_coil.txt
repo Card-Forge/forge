@@ -5,7 +5,7 @@ Text:no text
 K:Enchant green creature
 A:SP$ Attach | Cost$ 4 G G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 6 | AddToughness$ 6 | Description$ Enchanted creature gets +6/+6.
-A:SP$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Wurm | TokenColors$ Green | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenPower$ 6 | TokenToughness$ 6 | SpellDescription$ Put a 6/6 green Wurm creature token onto the battlefield.
+A:AB$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Wurm | TokenColors$ Green | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenPower$ 6 | TokenToughness$ 6 | SpellDescription$ Put a 6/6 green Wurm creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmweaver_coil.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/99.jpg
