@@ -1536,80 +1536,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Iona, Shield of Emeria")) {
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 3331342605626623161L;
-
-                public void execute() {
-                    if (card.getController().isHuman()) {
-
-                        String color = "";
-                        String[] colors = Constant.Color.Colors;
-                        colors[colors.length - 1] = null;
-
-                        Object o = GuiUtils.getChoice("Choose color", colors);
-                        color = (String) o;
-                        ArrayList<String> colorTemp = new ArrayList<String>();
-                        colorTemp.add(color);
-                        card.setChosenColor(colorTemp);
-                    } else {
-                        CardList list = new CardList();
-                        list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Library));
-                        list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Hand));
-
-                        if (list.size() > 0) {
-                            String color = CardFactoryUtil.getMostProminentColor(list);
-                            if (!color.equals("")) {
-                                ArrayList<String> colorTemp = new ArrayList<String>();
-                                colorTemp.add(color);
-                                card.setChosenColor(colorTemp);
-                            }
-                            else {
-                                ArrayList<String> colorTemp = new ArrayList<String>();
-                                colorTemp.add("black");
-                                card.setChosenColor(colorTemp);
-                            }
-                        } else {
-                            ArrayList<String> colorTemp = new ArrayList<String>();
-                            colorTemp.add("black");
-                            card.setChosenColor(colorTemp);
-                        }
-                    }
-                }
-            };//Command
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
-        /*else if (cardName.equals("Singe-Mind Ogre")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    CardList handChoices = opponent.getCardsIn(Zone.Hand);
-                    if (handChoices.size() > 0) {
-                        Card random = CardUtil.getRandom(handChoices.toArray());
-                        CardList reveal = new CardList(random);
-                        GuiUtils.getChoice("Random card", reveal);
-                        opponent.loseLife(CardUtil.getConvertedManaCost(random.getManaCost()), card);
-                    }
-                }//resolve()
-            };
-            Command intoPlay = new Command() {
-
-                private static final long serialVersionUID = -4833144157620224716L;
-
-                public void execute() {
-                    ability.setStackDescription("When CARDNAME enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.");
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }*///*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -1671,33 +1597,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
 
         }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
-        /*else if (cardName.equals("Arctic Nishoba")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    int lifeGain = card.getCounters(Counters.AGE) * 2;
-                    card.getController().gainLife(lifeGain, card);
-                }
-            };
-
-            Command destroy = new Command() {
-                private static final long serialVersionUID = 1863551466234257411L;
-
-                public void execute() {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - gain 2 life for each age counter on it.");
-                    ability.setStackDescription(sb.toString());
-
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            };//command
-
-            card.addDestroyCommand(destroy);
-        }*///*************** END ************ END **************************
 
 
         //*************** START *********** START ************************** 
