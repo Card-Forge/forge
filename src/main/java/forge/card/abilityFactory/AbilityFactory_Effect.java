@@ -316,6 +316,11 @@ public class AbilityFactory_Effect {
                 eff.addRemembered(c);
             }
         }
+        
+        //Set Chosen Color(s)
+        if (!card.getChosenColor().isEmpty()) {
+            eff.setChosenColor(card.getChosenColor());
+        }
 
         // Duration
         String duration = params.get("Duration");
