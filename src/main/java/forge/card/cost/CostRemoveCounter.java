@@ -36,6 +36,10 @@ public class CostRemoveCounter extends CostPart {
         	sb.append("Remove ");
         	Integer i = convertAmount();
         	sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName()+" counter"));
+        	
+        	if (amount.equals("All")) {
+        	    sb.append("s");
+        	}
 
             sb.append(" from ").append(typeDescription == null ? type : typeDescription);
         }
