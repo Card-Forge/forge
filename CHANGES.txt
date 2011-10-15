@@ -274,6 +274,27 @@ No settings file required in skin (all removed)
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- allow multiple color selections in AF_ChooseColor via a "OrColors$" parameter. Please note, the chioce dialog for colors is multi-select (like, pick one, ctrl+click to pick another, etc...)
+- Change the prompt of AF charm from "choose a spell" to "choose a mode" to reflect its usage on abilities.
+- Make use of Zone.listValueOf in StaticAbility_Continuous.
+- Ran oracle and SetInfo scripts
+- Fixed Soul Charmer.
+- Charmbreaker Devils
+- Fixed Helix Pinnacle.
+- Converted Cerebral Eruption to script.
+- Fixed a possible NPE in doDiscard.
+- Fixed a possible NPE in changeHiddenOriginCanPlayAI.
+- Some work on Planar Guide, but it's not functional.
+- experimental patch for AF_Dig (RevealValid param)
+- convert Evolution Charm to SP$ Charm
+- small text tweaks
+- experimental patch in AF_Effect for ChosenColor
+- simplification in AF_ChooseColor
+- Fixed the cost string of remove counter costs.
+- Fixed the cost string of put counter costs.
+- Updated two SVars, ran scripts.
+- Fixed re-updating bug of cards in play at beginning of round during quest.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -446,6 +467,11 @@ Tormentor Exarch
 Frenetic Efreet
 Greater Stone Spirit
 Martyr of Ashes
+Scuttlemutt
+Quest for Ula's Temple
+Quickchange
+Treacherous Werewolf
+Relic Bind
 
 
 end
