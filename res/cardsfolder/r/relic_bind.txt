@@ -1,0 +1,17 @@
+Name:Relic Bind
+ManaCost:2 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant artifact an opponent controls
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target artifact an opponent controls | AILogic$ Curse
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever enchanted artifact becomes tapped, choose one - CARDNAME deals 1 damage to target player; or target player gains 1 life.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBDamage,DBGain | SpellDescription$ Choose one - CARDNAME deals 1 damage to target player; or target player gains 1 life.
+SVar:DBDamage:DB$ DealDamage | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player gains 1 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bind.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/97.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/71.jpg
+Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one - Relic Bind deals 1 damage to target player; or target player gains 1 life.
+End
