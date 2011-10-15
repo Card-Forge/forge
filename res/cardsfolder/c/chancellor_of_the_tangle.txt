@@ -2,7 +2,7 @@ Name:Chancellor of the Tangle
 ManaCost:4 G G G
 Types:Creature Beast
 Text:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add G to your mana pool.
-PT:5/7
+PT:6/7
 K:MayEffectFromOpeningHand:ManaOnMain
 K:Vigilance
 K:Reach
