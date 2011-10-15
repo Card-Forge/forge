@@ -1050,6 +1050,16 @@ public class AbilityFactory {
             }
         }
         
+        else if (API.equals("MustBlock")) {
+            if (isAb) {
+                SA = AbilityFactory_Combat.createAbilityMustBlock(this);
+            } else if (isSp) {
+                SA = AbilityFactory_Combat.createSpellMustBlock(this);
+            } else if (isDb) {
+                SA = AbilityFactory_Combat.createDrawbackMustBlock(this);
+            }
+        }
+        
         else if (API.equals("Charm")) {
             if (isAb) {
                 SA = AbilityFactory_Charm.createAbilityCharm(this);

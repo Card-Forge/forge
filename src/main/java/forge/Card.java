@@ -96,6 +96,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean dealtDmgToHumanThisTurn = false;
     private boolean dealtDmgToComputerThisTurn = false;
     private boolean sirenAttackOrDestroy = false;
+    private ArrayList<Card> mustBlockCards = new ArrayList<Card>();
 
     private boolean canMorph = false;
     private boolean faceDown = false;
@@ -649,6 +650,38 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean getSirenAttackOrDestroy() {
         return sirenAttackOrDestroy;
+    }
+    
+    /**
+     * a Card that this Card must block if able in an upcoming combat.
+     * This is cleared at the end of each turn.
+     * 
+     * @param o Card to block
+     * 
+     * @since 1.1.6
+     */
+    public void addMustBlockCard(Card c) {
+        mustBlockCards.add(c);
+    }
+    
+    /**
+     * get the Card that this Card must block this combat
+     * 
+     * @return the Cards to block (if able)
+     * 
+     * @since 1.1.6
+     */
+    public ArrayList<Card> getMustBlockCards() {
+        return mustBlockCards;
+    }
+    
+    /**
+     * clear the list of Cards that this Card must block this combat
+     * 
+     * @since 1.1.6
+     */
+    public void clearMustBlockCards() {
+        mustBlockCards.clear();
     }
 
     /**
@@ -5058,7 +5091,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (Property.startsWith("non") && (CardUtil.getColors(this).size() == 1 && !isColorless())) return false;
             if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
         } else if (Property.equals("ChosenColor")) {
-            if (!CardUtil.getColors(this).contains(source.getChosenColor())) return false;
+            //Should this match All chosen colors, or any?  Default to first chosen for now until it matters.
+            if (!CardUtil.getColors(this).contains(source.getChosenColor().get(0))) return false;
         } else if (Property.startsWith("YouCtrl")) {
             if (!getController().isPlayer(sourceController)) return false;
         } else if (Property.startsWith("YouDontCtrl")) {

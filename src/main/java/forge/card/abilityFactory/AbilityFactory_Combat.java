@@ -665,5 +665,227 @@ public final class AbilityFactory_Combat {
         }
 
     } //mustAttackResolve()
+    
+    //**************************************************************
+    //*********************** MustBlock ****************************
+    //**************************************************************
+
+    //AB$ MustBlock | Cost$ R T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature defending player controls | DefinedAttacker$ Self | SpellDescription$ ...
+
+    /**
+     * <p>createAbilityMustBlock.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.1.6
+     */
+    public static SpellAbility createAbilityMustBlock(final AbilityFactory af) {
+        final SpellAbility abMustBlock = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 4237190949098526123L;
+
+            @Override
+            public String getStackDescription() {
+                return mustBlockStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return mustBlockCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                mustBlockResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return mustBlockDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abMustBlock;
+    }
+
+    /**
+     * <p>createSpellMustBlock.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.1.6
+     */
+    public static SpellAbility createSpellMustBlock(final AbilityFactory af) {
+        final SpellAbility spMustBlock = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 6758785067306305860L;
+
+            @Override
+            public String getStackDescription() {
+                return mustBlockStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return mustBlockCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                mustBlockResolve(af, this);
+            }
+
+        };
+        return spMustBlock;
+    }
+
+    /**
+     * <p>createDrawbackMustBlock.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.1.6
+     */
+    public static SpellAbility createDrawbackMustBlock(final AbilityFactory af) {
+        final SpellAbility dbMustBlock = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -815813765448972775L;
+
+            @Override
+            public void resolve() {
+                mustBlockResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return mustBlockPlayDrawbackAI(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return mustBlockDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbMustBlock;
+    }
+
+    private static String mustBlockStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        //end standard pre-
+
+        ArrayList<Card> tgtCards;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        String attacker = null;
+        if (params.containsKey("DefinedAttacker")) {
+            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"), sa);
+            attacker = cards.get(0).toString();
+        }
+        else {
+            attacker = host.toString();
+        }
+
+        for (Card c : tgtCards) {
+            sb.append(c).append(" must block ").append(attacker).append(" if able.");
+        }
+
+        //begin standard post-
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    private static boolean mustBlockCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        //disabled for the AI until he/she can make decisions about who to make block
+        return false;
+    }
+
+    private static boolean mustBlockPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+        // AI should only activate this during Human's turn
+        boolean chance;
+
+        //TODO - implement AI
+        chance = false;
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.chkAI_Drawback();
+        }
+
+        return chance;
+    }
+
+    private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory)
+    {
+        // If there is a cost payment it's usually not mandatory
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+
+        boolean chance;
+
+        //TODO - implement AI
+        chance = false;
+
+        // check SubAbilities DoTrigger?
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            return chance && abSub.doTrigger(mandatory);
+        }
+
+        return chance;
+    }
+
+    private static void mustBlockResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+
+        ArrayList<Card> tgtCards;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        ArrayList<Card> cards;
+        if (params.containsKey("DefinedAttacker")) {
+            cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"), sa);
+        }
+        else {
+            cards = new ArrayList<Card>();
+            cards.add(host);
+        }
+
+        for (final Card c : tgtCards) {
+            if (tgt == null || CardFactoryUtil.canTarget(sa, c)) {
+                Card attacker = cards.get(0);
+                c.addMustBlockCard(attacker);
+                System.out.println(c+ " is adding "+attacker+" to mustBlockCards: "+c.getMustBlockCards());
+            }
+        }
+
+    } //mustBlockResolve()
 
 } //end class AbilityFactory_Combat
