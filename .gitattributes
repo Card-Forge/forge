@@ -6630,6 +6630,7 @@ res/cardsfolder/r/rummaging_wizard.txt svneol=native#text/plain
 res/cardsfolder/r/run_wild.txt svneol=native#text/plain
 res/cardsfolder/r/rune_cervin_rider.txt svneol=native#text/plain
 res/cardsfolder/r/rune_scarred_demon.txt svneol=native#text/plain
+res/cardsfolder/r/rune_snag.txt -text
 res/cardsfolder/r/runeboggle.txt svneol=native#text/plain
 res/cardsfolder/r/runechanters_pike.txt -text
 res/cardsfolder/r/runeclaw_bear.txt svneol=native#text/plain
