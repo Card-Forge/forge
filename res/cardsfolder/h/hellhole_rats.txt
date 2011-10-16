@@ -5,9 +5,10 @@ Text:no text
 PT:2/2
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards a card. CARDNAME deals damage to that player equal to that card's converted mana cost.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ SVar=DBDamage
-SVar:DBDamage:DB$DealDamage | Defined$ Targeted | NumDmg$ X
-SVar:X:Discarded$CardManaCost
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ SVar=DBDamage
+SVar:DBDamage:DB$DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_rats.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/113.jpg
