@@ -295,6 +295,28 @@ No settings file required in skin (all removed)
 - Updated two SVars, ran scripts.
 - Fixed re-updating bug of cards in play at beginning of round during quest.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- convert the etb of Iona, Shield of Emeria to script
+- convert Brave the Elements to script
+- toString tweak in CostRemoveCounter for "All"
+- fix token name for Weirding Shaman
+- Wurmweaver Coil's token ability was scripted improperly as a spell.
+- Fix Chancellor of the Tangle's PT
+- Added SVar:RemAIDeck:True to the godauras (because the AI may enchant artifact creatures with them).
+- Fixed typo
+- add an AF_MustBlock (for things like Target creature blocks CARDNAME this turn if able.)
+- also fixes an issue with Card.ChosenColor property
+- Fixing Hellhole Rats from using "Discarded" which is for the Discard Cost, to using the appropriate RememberDiscarded and Remembered.
+- Fixed Planar Guide by using AllZoneUtil.getCardState to search the card the Remembered object gets added to.
+- Fixed some cards that needed "DefinedPlayer" instead of "Defined".
+- Fixed Curse of Oblivion.
+- Added backward compatibility to the "DefinedPlayer"/"Defined" issue.
+- Removed the Faerie part of the champion stack description.
+- Initial Delve keyword checkin. (Does not work with X-cost spells.)
+- Added OwnerDoesntControl property.
+- Ran Setinfo and Oracle script.
+- Remove code that can pull build ID from another jar in the classpath.
+- Converted Lurking Predators to script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -472,6 +494,22 @@ Quest for Ula's Temple
 Quickchange
 Treacherous Werewolf
 Relic Bind
+Shocker
+Martyr of Sands
+Martyr of Spores
+Phyrexian Etchings
+Tangle Angler
+Rune Snag
+Prismatic Strands
+Vanish into Memory
+Woolly Razorback
+Goblin Recruiter
+Inquisition
+Rag Man
+Mob Mentality
+Bronze Bombshell
+Death Rattle
+Tombstalker
 
 
 end
