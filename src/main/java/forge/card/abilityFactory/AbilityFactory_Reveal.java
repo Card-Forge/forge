@@ -1126,6 +1126,7 @@ public final class AbilityFactory_Reveal {
      */
     private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
 
         ArrayList<Player> tgtPlayers;
 
@@ -1151,7 +1152,11 @@ public final class AbilityFactory_Reveal {
                 } else {
                     //reveal to Computer (when computer can keep track of seen cards...)
                 }
-
+                if (params.containsKey("RememberRevealed")) {
+                    for (Card c : hand) {
+                        host.addRemembered(c);
+                    }
+                }
             }
         }
     }

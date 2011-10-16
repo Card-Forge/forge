@@ -950,7 +950,8 @@ public class AbilityFactory_ZoneAffecting {
                     numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
                 if (mode.equals("Random")) {
-                    discarded.addAll(p.discardRandom(numCards, sa));
+                    String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
+                    discarded.addAll(p.discardRandom(numCards, sa, valid));
                 } else if (mode.equals("TgtChoose")) {
                     if (params.containsKey("UnlessType")) {
                         p.discardUnless(numCards, params.get("UnlessType"), sa);

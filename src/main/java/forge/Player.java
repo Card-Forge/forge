@@ -1071,9 +1071,10 @@ public abstract class Player extends GameEntity {
      * <p>discardRandom.</p>
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a CardList of cards discarded
      */
-    public void discardRandom(SpellAbility sa) {
-        discardRandom(1, sa);
+    public CardList discardRandom(SpellAbility sa) {
+        return discardRandom(1, sa);
     }
 
     /**
@@ -1081,12 +1082,25 @@ public abstract class Player extends GameEntity {
      *
      * @param num a int.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @return 
+     * @return a CardList of cards discarded
      */
     public CardList discardRandom(final int num, final SpellAbility sa) {
+        return discardRandom(num, sa, "Card");
+    }
+    
+    /**
+     * <p>discardRandom.</p>
+     *
+     * @param num a int.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param valid a valid expression
+     * @return a CardList of cards discarded
+     */
+    public CardList discardRandom(final int num, final SpellAbility sa, String valid) {
         CardList discarded = new CardList();
         for (int i = 0; i < num; i++) {
             CardList list = this.getCardsIn(Zone.Hand);
+            list = list.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0){
                 Card disc = CardUtil.getRandom(list.toArray());
                 discarded.add(disc);
