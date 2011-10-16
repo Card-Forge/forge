@@ -623,6 +623,10 @@ public class AbilityFactory_Choose {
                                 list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()).getType("Creature");
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
+                        if (logic.equals("MostProminentPermanent")) {
+                            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                            chosen = CardFactoryUtil.getMostProminentColor(list);
+                        }
                         if (logic.equals("MostProminentAttackers")) {
                             chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat().getAttackers()));
                         }

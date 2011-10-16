@@ -1125,8 +1125,6 @@ public final class GameActionUtil {
             playerCombatDamage_Spawnwrithe(c);
         } else if (c.getName().equals("Treva, the Renewer")) {
             playerCombatDamage_Treva(c);
-        } else if (c.getName().equals("Rith, the Awakener")) {
-            playerCombatDamage_Rith(c);
         } else if (c.isEnchantedBy("Celestial Mantle")) {
             execute_Celestial_Mantle(c);
         }
@@ -1173,20 +1171,6 @@ public final class GameActionUtil {
             ComputerUtil.playNoStack(sa[1]);
         }
 
-    }
-
-    /**
-     * <p>playerCombatDamage_Rith.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    private static void playerCombatDamage_Rith(final Card c) {
-        SpellAbility[] sa = c.getSpellAbility();
-        if (c.getController().isHuman()) {
-            AllZone.getGameAction().playSpellAbility(sa[1]);
-        } else {
-            ComputerUtil.playNoStack(sa[1]);
-        }
     }
 
     /**

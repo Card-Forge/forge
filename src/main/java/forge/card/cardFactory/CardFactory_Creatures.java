@@ -970,46 +970,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Rith, the Awakener")) {
-            final Player player = card.getController();
-
-            final Ability ability2 = new Ability(card, "2 G") {
-                @Override
-                public void resolve() {
-                    int numberTokens = 0;
-                    if (card.getController().isHuman()) {
-                        String choices[] = {"white", "blue", "black", "red", "green"};
-                        Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
-                        //System.out.println("Color:" + o);
-                        numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
-                    } else {
-                        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-                        String color = CardFactoryUtil.getMostProminentColor(list);
-                        numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor(color);
-                    }
-
-                    for (int i = 0; i < numberTokens; i++) {
-                        CardFactoryUtil.makeTokenSaproling(card.getController());
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    //this is set to false, since it should only TRIGGER
-                    return false;
-                }
-            };// ability2
-            //card.clearSpellAbility();
-            card.addSpellAbility(ability2);
-
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - ").append(player);
-            sb2.append(" puts a 1/1 green Saproling creature token onto the battlefield for each permanent of the chosen color");
-            ability2.setStackDescription(sb2.toString());
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Sphinx of Jwar Isle")) {
             final SpellAbility ability1 = new Ability(card, "0") {
                 @Override
