@@ -3595,6 +3595,7 @@ res/cardsfolder/h/headless_horseman.txt svneol=native#text/plain
 res/cardsfolder/h/headlong_rush.txt svneol=native#text/plain
 res/cardsfolder/h/headstone.txt svneol=native#text/plain
 res/cardsfolder/h/heal.txt svneol=native#text/plain
+res/cardsfolder/h/heal_the_scars.txt -text
 res/cardsfolder/h/healing_leaves.txt svneol=native#text/plain
 res/cardsfolder/h/healing_salve.txt svneol=native#text/plain
 res/cardsfolder/h/heap_doll.txt svneol=native#text/plain
@@ -6182,7 +6183,6 @@ res/cardsfolder/q/quirion_explorer.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_ranger.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/q/qumulox.txt svneol=native#text/plain
-res/cardsfolder/r/heal_the_scars.txt -text
 res/cardsfolder/r/rabble_rouser.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_elephant.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_rats.txt svneol=native#text/plain
