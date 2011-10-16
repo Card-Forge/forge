@@ -10,8 +10,8 @@ import java.nio.charset.Charset;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 /**
  * Provides access to information about the current version and build ID.
@@ -21,17 +21,19 @@ public class BuildInfo {
     public static final Charset US_ASCII_CHARSET = Charset.forName("US-ASCII");
 
     /** Convenience for file.separator. */
-    private static final String FILE_SEP = System.getProperty("file.separator");
+    /*private static final String FILE_SEP = System.getProperty("file.separator");*/
 
     /** Convenience for path.separator. */
-    private static final String PATH_SEP = System.getProperty("path.separator");
+    /*private static final String PATH_SEP = System.getProperty("path.separator");*/
 
+    /*
     private static final Pattern FORGE_JAR_REGEX_2G = // NOPMD by Braids on 8/12/11 10:18 AM
             Pattern.compile("^(.*" + Pattern.quote(FILE_SEP) + ")?"
                     + Pattern.quote("forge-")
                     + "([^" + Pattern.quote(FILE_SEP) + Pattern.quote(PATH_SEP) + "]*)"
                     + Pattern.quote("-with-dependencies.jar") + "$",
                     Pattern.CASE_INSENSITIVE);
+                    */
 
 
     private transient String pathToForgeJar;
