@@ -1769,6 +1769,73 @@ public class GameAction {
                     manaCost = new ManaCost("G G");
                 } // Avatar of Might
             }
+            else if(spell.getIsDelve()) {
+                int cardsInGrave = originalCard.getController().getCardsIn(Zone.Graveyard).size();
+                ArrayList<Integer> choiceList = new ArrayList<Integer>();
+                for(int i=0;i<=cardsInGrave;i++) {
+                    choiceList.add(i);
+                }
+                
+                if(originalCard.getController().isHuman()) {
+                    
+                    int chosenAmount = (Integer)GuiUtils.getChoice("Exile how many cards?", choiceList.toArray());
+                    System.out.println("Delve for " + chosenAmount);
+                    CardList choices = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
+                    CardList chosen = new CardList();
+                    for(int i=0;i<chosenAmount;i++) {
+                        Card nowChosen = (Card)GuiUtils.getChoiceOptional("Exile which card?", choices.toArray());
+                        
+                        if(nowChosen == null) //User canceled,abort delving.
+                        {
+                            chosen.clear();
+                            break;
+                        }
+                        
+                        choices.remove(nowChosen);
+                        chosen.add(nowChosen);
+                    }
+                    
+                    for(Card c : chosen) {
+                        exile(c);
+                    }
+                    
+                    manaCost = new ManaCost(originalCost.toString());
+                    manaCost.decreaseColorlessMana(chosenAmount);
+                }
+                else {
+                    //AI
+                    int numToExile = 0;
+                    int colorlessCost = originalCost.getColorlessManaAmount();
+                    
+                    if(cardsInGrave <= colorlessCost) {
+                        numToExile = cardsInGrave;
+                    }
+                    else {
+                        numToExile = colorlessCost;
+                    }
+                    
+                    for(int i=0;i<numToExile;i++) {
+                        CardList grave = new CardList(AllZone.getComputerPlayer().getZone(Zone.Graveyard).getCards()); 
+                        Card chosen = null;
+                        for(Card c : grave) { //Exile noncreatures first in case we can revive. Might wanna do some additional checking here for Flashback and the like.
+                            if(!c.isCreature()) {
+                                chosen = c;
+                                break;
+                            }
+                        }
+                        if(chosen == null) {
+                            chosen = CardFactoryUtil.AI_getWorstCreature(grave);
+                        }
+                        
+                        if(chosen == null) {
+                            //Should never get here but... You know how it is.
+                            chosen = grave.get(0);
+                        }
+                        
+                        exile(chosen);
+                    }
+                }
+            }
         } // isSpell
 
         // Get Cost Reduction

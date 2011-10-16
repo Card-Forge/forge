@@ -10,4 +10,6 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Enchanted | NumAtt$ X
 SVar:X:Count$Valid Creature.YouCtrl+nonWall
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_mentality.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/88.jpg
+Oracle:Enchant creature\nEnchanted creature has trample.\nWhenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
 End

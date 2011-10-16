@@ -62,6 +62,7 @@ public abstract class SpellAbility {
     private boolean kothThirdAbility = false;
     private boolean cycling = false;
     private boolean isCharm = false;
+    private boolean isDelve = false;
     
     private int charmNumber;
     private ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
@@ -1338,6 +1339,20 @@ public abstract class SpellAbility {
      */
     public final ArrayList<SpellAbility> getCharmChoices() {
         return charmChoices;
+    }
+
+    /**
+     * @return the isDelve
+     */
+    public boolean getIsDelve() {
+        return isDelve;
+    }
+
+    /**
+     * @param isDelve0 the isDelve to set
+     */
+    public void setIsDelve(boolean isDelve0) {
+        this.isDelve = isDelve0; // TODO: Add 0 to parameter's name.
     }
 
 }

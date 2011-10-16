@@ -7,4 +7,6 @@ SVar:Y:Count$NamedInAllYards.Rune Snag/Times.2
 SVar:X:Number$2/Plus.Y
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_snag.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/46.jpg
+Oracle:Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard.
 End

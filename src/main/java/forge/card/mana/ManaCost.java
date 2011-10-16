@@ -239,6 +239,44 @@ public class ManaCost {
         }
         manaPart.add(new Mana_PartColorless(manaToAdd));
     }
+    /**
+     * <p>decreaseColorlessMana</p>
+     * @param manaToSubtract an int. The amount of colorless mana to subtract from the cost.Used by Delve.
+     */
+    public void decreaseColorlessMana(int manaToSubtract) {
+        if(manaToSubtract <= 0)
+            return;
+        
+        Mana_Part m;
+        for(int  i = 0; i < manaPart.size();i++) {
+            m = (Mana_Part) manaPart.get(i);
+            if(m instanceof Mana_PartColorless) {
+                int remainingColorless = ((Mana_PartColorless) m).getManaNeeded() - manaToSubtract;
+                if(remainingColorless <= 0) {
+                    manaPart.remove(m);
+                    break;
+                }
+                else {
+                    manaPart.remove(m);
+                    manaPart.add(new Mana_PartColorless(remainingColorless));
+                }
+            }
+        }
+    }
+    
+    /**
+     * <p>getColorlessManaAmount</p>
+     * Returns how much colorless mana must be paid to pay the cost.Used by Delve AI. 
+     * @return an int.
+     */
+    public int getColorlessManaAmount() {
+        for(Object m : manaPart) {
+            if(m instanceof Mana_PartColorless) {
+                return ((Mana_PartColorless) m).getManaNeeded();
+            }
+        }
+        return 0;
+    }
 
     /**
      * <p>addMana.</p>

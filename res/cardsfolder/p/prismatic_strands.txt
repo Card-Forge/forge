@@ -8,4 +8,6 @@ SVar:STPrevent:Mode$ PreventDamage | Target$ Creature,Player | Source$ Card.Chos
 A:SP$ ChooseColor | Cost$ tapXType<1/Creature.YouCtrl+White+untapped> | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBEffect | Flashback$ True | CostDesc$ Flashback - Tap an untapped white creature you control. | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_strands.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/18.jpg
+Oracle:Prevent all damage that sources of the color of your choice would deal this turn.\nFlashback-Tap an untapped white creature you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -4800,6 +4800,10 @@ public class CardFactoryUtil {
             }
         }
         
+        if(card.hasKeyword("Delve")) {
+            card.getSpellAbilities().get(0).setIsDelve(true);
+        }
+        
         if(card.hasStartOfKeyword("Haunt")) {
             int hauntPos = card.getKeywordPosition("Haunt");
             String[] splitKeyword = card.getKeyword().get(hauntPos).split(":");

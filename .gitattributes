@@ -1028,6 +1028,7 @@ res/cardsfolder/b/broken_ambitions.txt svneol=native#text/plain
 res/cardsfolder/b/broken_dam.txt svneol=native#text/plain
 res/cardsfolder/b/broken_fall.txt svneol=native#text/plain
 res/cardsfolder/b/broken_visage.txt svneol=native#text/plain
+res/cardsfolder/b/bronze_bombshell.txt -text
 res/cardsfolder/b/brood_birthing.txt svneol=native#text/plain
 res/cardsfolder/b/brood_of_cockroaches.txt svneol=native#text/plain
 res/cardsfolder/b/brood_sliver.txt svneol=native#text/plain
@@ -1840,6 +1841,7 @@ res/cardsfolder/d/death_of_a_thousand_stings.txt svneol=native#text/plain
 res/cardsfolder/d/death_pit_offering.txt svneol=native#text/plain
 res/cardsfolder/d/death_pits_of_rath.txt svneol=native#text/plain
 res/cardsfolder/d/death_pulse.txt svneol=native#text/plain
+res/cardsfolder/d/death_rattle.txt -text
 res/cardsfolder/d/death_spark.txt svneol=native#text/plain
 res/cardsfolder/d/death_speakers.txt svneol=native#text/plain
 res/cardsfolder/d/death_stroke.txt svneol=native#text/plain
@@ -8337,6 +8339,7 @@ res/cardsfolder/t/tolarian_serpent.txt svneol=native#text/plain
 res/cardsfolder/t/tolsimir_wolfblood.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_hex.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_of_urami.txt svneol=native#text/plain
+res/cardsfolder/t/tombstalker.txt -text
 res/cardsfolder/t/tome_scour.txt svneol=native#text/plain
 res/cardsfolder/t/tonic_peddler.txt svneol=native#text/plain
 res/cardsfolder/t/tooth_and_nail.txt svneol=native#text/plain

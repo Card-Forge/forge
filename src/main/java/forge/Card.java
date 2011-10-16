@@ -5109,6 +5109,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!getOwner().isPlayer(sourceController)) return false;
         } else if (Property.startsWith("YouDontOwn")) {
             if (getOwner().isPlayer(sourceController)) return false;
+        } else if (Property.startsWith("OwnerDoesntControl")) {
+            if(getOwner().isPlayer(getController())) return false;
         } else if (Property.startsWith("ControllerControls")) {
             String type = Property.substring(18);
             CardList list = getController().getCardsIn(Zone.Battlefield);
