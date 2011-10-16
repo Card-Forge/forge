@@ -7219,6 +7219,7 @@ res/cardsfolder/s/skeleton_shard.txt svneol=native#text/plain
 res/cardsfolder/s/skeleton_ship.txt svneol=native#text/plain
 res/cardsfolder/s/skeletonize.txt -text
 res/cardsfolder/s/skinrender.txt svneol=native#text/plain
+res/cardsfolder/s/skinshifter.txt -text
 res/cardsfolder/s/skinthinner.txt svneol=native#text/plain
 res/cardsfolder/s/skinwing.txt svneol=native#text/plain
 res/cardsfolder/s/skirge_familiar.txt svneol=native#text/plain
