@@ -4036,7 +4036,6 @@ res/cardsfolder/i/ixidors_will.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_boilerworks.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_chronarch.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_signet.txt svneol=native#text/plain
-res/cardsfolder/i/venarian_glimmer.txt -text
 res/cardsfolder/j/jabaris_banner.txt svneol=native#text/plain
 res/cardsfolder/j/jace_beleren.txt svneol=native#text/plain
 res/cardsfolder/j/jace_memory_adept.txt svneol=native#text/plain
@@ -8714,6 +8713,7 @@ res/cardsfolder/v/vein_drinker.txt svneol=native#text/plain
 res/cardsfolder/v/veinfire_borderpost.txt svneol=native#text/plain
 res/cardsfolder/v/veldrane_of_sengir.txt svneol=native#text/plain
 res/cardsfolder/v/veldt.txt svneol=native#text/plain
+res/cardsfolder/v/venarian_glimmer.txt -text
 res/cardsfolder/v/venarian_gold.txt svneol=native#text/plain
 res/cardsfolder/v/vendetta.txt svneol=native#text/plain
 res/cardsfolder/v/vendilion_clique.txt svneol=native#text/plain
