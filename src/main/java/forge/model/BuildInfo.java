@@ -164,6 +164,7 @@ public class BuildInfo {
                 result = getMainManifestAttribute(manifest, manifestAttrName);
             }
 
+            /*
             if (result == null && pathToForgeJar == null) {
 
                 // Try to find a unique Forge jar in the class path.
@@ -188,6 +189,7 @@ public class BuildInfo {
                     }
                 }
             }
+            */
 
             if (result == null && pathToForgeJar == null) {
                 throw new FileNotFoundException(
