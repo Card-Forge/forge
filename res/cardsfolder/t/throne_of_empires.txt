@@ -7,4 +7,6 @@ SVar:X:Count$AllM12Empires.5.1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_empires.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/221.jpg
+Oracle:{1}, {T}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
 End

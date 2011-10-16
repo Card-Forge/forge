@@ -10,4 +10,6 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_bazaar.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/321.jpg
+Oracle:Mercadian Bazaar enters the battlefield tapped.\n{T}: Put a storage counter on Mercadian Bazaar.\n{T}, Remove any number of storage counters from Mercadian Bazaar: Add {R} to your mana pool for each storage counter removed this way.
 End

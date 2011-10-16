@@ -10,4 +10,6 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_grove.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/325.jpg
+Oracle:Rushwood Grove enters the battlefield tapped.\n{T}: Put a storage counter on Rushwood Grove.\n{T}, Remove any number of storage counters from Rushwood Grove: Add {G} to your mana pool for each storage counter removed this way.
 End

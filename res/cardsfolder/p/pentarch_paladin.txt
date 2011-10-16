@@ -9,4 +9,6 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanD
 A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.ChosenColor | TgtPrompt$ Select target permanent of the chosen color | SpellDescription$ Destroy target permanent of the chosen color.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentarch_paladin.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/32.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nAs Pentarch Paladin enters the battlefield, choose a color.\n{W}{W}, {T}: Destroy target permanent of the chosen color.
 End

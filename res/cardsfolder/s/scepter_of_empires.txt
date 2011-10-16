@@ -7,4 +7,6 @@ SVar:X:Count$AllM12Empires.3.1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_empires.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/216.jpg
+Oracle:{T}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
 End

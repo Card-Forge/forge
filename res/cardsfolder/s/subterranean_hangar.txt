@@ -10,4 +10,6 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_hangar.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/329.jpg
+Oracle:Subterranean Hangar enters the battlefield tapped.\n{T}: Put a storage counter on Subterranean Hangar.\n{T}, Remove any number of storage counters from Subterranean Hangar: Add {B} to your mana pool for each storage counter removed this way.
 End
