@@ -82,6 +82,11 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
             setPhases(phases);
         }
+        
+        if(params.containsKey("ConditionAllM12Empires"))
+            setAllM12Empires(true);
+        if(params.containsKey("ConditionNotAllM12Empires"))
+            setNotAllM12Empires(true);
 
         if (params.containsKey("ConditionCardsInHand")) {
             setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
@@ -186,6 +191,21 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             if (!isPhase) {
                 return false;
             }
+        }
+        
+        if(allM12Empires) {
+            Player p = sa.getSourceCard().getController();
+            boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
+            has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
+            has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
+            if(!has) return false;
+        }
+        if(notAllM12Empires) {
+            Player p = sa.getSourceCard().getController();
+            boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
+            has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
+            has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
+            if(has) return false;
         }
 
         if (nCardsInHand != -1) {

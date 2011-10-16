@@ -3167,6 +3167,17 @@ public class CardFactoryUtil {
                 return doXMath(Integer.parseInt(sq[2]), m, c); // not Main Phase
             }
         }
+        
+        //Count$M12Empires.<numIf>.<numIfNot>
+        if (sq[0].contains("AllM12Empires")) {
+            boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", c.getController());
+            has &= AllZoneUtil.isCardInPlay("Scepter of Empires", c.getController());
+            has &= AllZoneUtil.isCardInPlay("Throne of Empires", c.getController());
+            if (has)
+                return doXMath(Integer.parseInt(sq[1]), m, c);
+            else
+                return doXMath(Integer.parseInt(sq[2]), m, c);
+        }
 
         // Count$ThisTurnEntered <ZoneDestination> <ZoneOrigin> <Valid>
         // or

@@ -1631,6 +1631,7 @@ res/cardsfolder/c/crosswinds.txt svneol=native#text/plain
 res/cardsfolder/c/crovax_ascendant_hero.txt svneol=native#text/plain
 res/cardsfolder/c/crowd_favorites.txt svneol=native#text/plain
 res/cardsfolder/c/crowd_of_cinders.txt svneol=native#text/plain
+res/cardsfolder/c/crown_of_empires.txt -text
 res/cardsfolder/c/crown_of_flames.txt svneol=native#text/plain
 res/cardsfolder/c/crucible_of_fire.txt svneol=native#text/plain
 res/cardsfolder/c/crucible_of_worlds.txt svneol=native#text/plain
@@ -6806,6 +6807,7 @@ res/cardsfolder/s/scavenger_folk.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ghoul.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_scarab.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_dominance.txt svneol=native#text/plain
+res/cardsfolder/s/scepter_of_empires.txt -text
 res/cardsfolder/s/scepter_of_fugue.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_insight.txt svneol=native#text/plain
 res/cardsfolder/s/schismotivate.txt -text
@@ -8245,6 +8247,7 @@ res/cardsfolder/t/thriss_nantuko_primus.txt svneol=native#text/plain
 res/cardsfolder/t/thrive.txt svneol=native#text/plain
 res/cardsfolder/t/throat_slitter.txt svneol=native#text/plain
 res/cardsfolder/t/throne_of_bone.txt svneol=native#text/plain
+res/cardsfolder/t/throne_of_empires.txt -text
 res/cardsfolder/t/throne_of_geth.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_champion.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_surgeon.txt svneol=native#text/plain

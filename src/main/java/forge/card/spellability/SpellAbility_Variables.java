@@ -58,6 +58,45 @@ public class SpellAbility_Variables {
 
     protected boolean pwAbility = false;
     
+    protected boolean allM12Empires = false;
+    protected boolean notAllM12Empires = false;
+    
+    /**
+     * <p>Setter for the field <code>notAllM12Empires</code>.</p>
+     *
+     * @param b a boolean
+     */
+    public void setNotAllM12Empires(boolean b) {
+        notAllM12Empires = b;
+    }
+    
+    /**
+     * <p>Getter for the field <code>notAllM12Empires</code>.</p>
+     *
+     * @return a boolean
+     */
+    public boolean getNotAllM12Empires() {
+        return notAllM12Empires;
+    }
+    
+    /**
+     * <p>Setter for the field <code>allM12Empires</code>.</p>
+     *
+     * @param b a boolean
+     */
+    public void setAllM12Empires(boolean b) {
+        allM12Empires = b;
+    }
+    
+    /**
+     * <p>Getter for the field <code>allM12Empires</code>.</p>
+     *
+     * @return a boolean
+     */
+    public boolean getAllM12Empires() {
+        return allM12Empires;
+    }
+    
     /**
      * <p>Setter for the field <code>manaSpent</code>.</p>
      *
