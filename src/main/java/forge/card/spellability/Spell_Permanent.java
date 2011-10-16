@@ -90,7 +90,7 @@ public class Spell_Permanent extends Spell {
 
         public void execute() {
             StringBuilder sb = new StringBuilder();
-            sb.append(getSourceCard()).append(" - When CARDNAME enters the battlefield, sacrifice it unless you exile another Faerie you control.");
+            sb.append(getSourceCard()).append(" - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
             championAbilityComes.setStackDescription(sb.toString());
             AllZone.getStack().addSimultaneousStackEntry(championAbilityComes);
         }//execute()
