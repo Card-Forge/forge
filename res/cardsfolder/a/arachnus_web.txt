@@ -7,4 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN C
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Creature.EnchantedBy+powerGE4 | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy CARDNAME.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/163.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nAt the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
 End
