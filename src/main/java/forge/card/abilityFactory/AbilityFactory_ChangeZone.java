@@ -1966,7 +1966,7 @@ public final class AbilityFactory_ChangeZone {
             }
 
             if (remember != null) {
-                sa.getSourceCard().addRemembered(c);
+                AllZoneUtil.getCardState(af.getHostCard()).addRemembered(c);
             }
         }
 
