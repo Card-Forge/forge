@@ -2914,6 +2914,7 @@ res/cardsfolder/f/foul_familiar.txt svneol=native#text/plain
 res/cardsfolder/f/foul_imp.txt svneol=native#text/plain
 res/cardsfolder/f/foul_presence.txt svneol=native#text/plain
 res/cardsfolder/f/foul_spirit.txt svneol=native#text/plain
+res/cardsfolder/f/fountain_of_cho.txt -text
 res/cardsfolder/f/fountain_of_youth.txt svneol=native#text/plain
 res/cardsfolder/f/fountain_watch.txt svneol=native#text/plain
 res/cardsfolder/f/foxfire.txt svneol=native#text/plain
@@ -4818,6 +4819,7 @@ res/cardsfolder/m/maraxus_of_keld.txt svneol=native#text/plain
 res/cardsfolder/m/marble_chalice.txt svneol=native#text/plain
 res/cardsfolder/m/marble_diamond.txt svneol=native#text/plain
 res/cardsfolder/m/marble_titan.txt svneol=native#text/plain
+res/cardsfolder/m/marcadian_bazaar.txt -text
 res/cardsfolder/m/march_of_souls.txt svneol=native#text/plain
 res/cardsfolder/m/march_of_the_machines.txt svneol=native#text/plain
 res/cardsfolder/m/marhault_elsdragon.txt svneol=native#text/plain
@@ -6657,6 +6659,7 @@ res/cardsfolder/r/rush_of_knowledge.txt svneol=native#text/plain
 res/cardsfolder/r/rushing_river.txt -text
 res/cardsfolder/r/rushwood_dryad.txt svneol=native#text/plain
 res/cardsfolder/r/rushwood_elemental.txt svneol=native#text/plain
+res/cardsfolder/r/rushwood_grove.txt -text
 res/cardsfolder/r/rushwood_herbalist.txt svneol=native#text/plain
 res/cardsfolder/r/rust.txt svneol=native#text/plain
 res/cardsfolder/r/rust_tick.txt svneol=native#text/plain
@@ -6748,6 +6751,7 @@ res/cardsfolder/s/sapling_of_colfenor.txt svneol=native#text/plain
 res/cardsfolder/s/sapphire_leech.txt svneol=native#text/plain
 res/cardsfolder/s/sapphire_medallion.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_bailiff.txt svneol=native#text/plain
+res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_raider.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
@@ -7856,6 +7860,7 @@ res/cardsfolder/s/sturdy_hatchling.txt svneol=native#text/plain
 res/cardsfolder/s/sturmgeist.txt -text
 res/cardsfolder/s/su_chi.txt svneol=native#text/plain
 res/cardsfolder/s/subdue.txt svneol=native#text/plain
+res/cardsfolder/s/subterranean_hangar.txt -text
 res/cardsfolder/s/subterranean_shambler.txt svneol=native#text/plain
 res/cardsfolder/s/subterranean_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/subversion.txt svneol=native#text/plain
