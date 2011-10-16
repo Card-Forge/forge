@@ -709,59 +709,6 @@ public class MagicStack extends MyObservable {
             }
         }
 
-        //Lurking Predators
-        if (sp.isSpell()) {
-            Player player = sp.getSourceCard().getController();
-            CardList lurkingPredators = player.getCardsIn(Zone.Battlefield, "Lurking Predators");
-
-            for (int i = 0; i < lurkingPredators.size(); i++) {
-                StringBuilder revealMsg = new StringBuilder("");
-                if (lurkingPredators.get(i).getController().isHuman()) {
-                    revealMsg.append("You reveal: ");
-                    if (AllZone.getHumanPlayer().getZone(Zone.Library).size() == 0) {
-                        revealMsg.append("Nothing!");
-                        GameActionUtil.showInfoDialg(revealMsg.toString());
-                        continue;
-                    }
-                    Card revealed = AllZone.getHumanPlayer().getZone(Zone.Library).get(0);
-
-                    revealMsg.append(revealed.getName());
-                    if (!revealed.isCreature()) {
-                        revealMsg.append("\n\rPut it on the bottom of your library?");
-                        if (GameActionUtil.showYesNoDialog(lurkingPredators.get(i), revealMsg.toString())) {
-                            AllZone.getGameAction().moveToBottomOfLibrary(revealed);
-                        } else {
-                            AllZone.getGameAction().moveToLibrary(revealed);
-                        }
-                    } else {
-                        GameActionUtil.showInfoDialg(revealMsg.toString());
-                        AllZone.getGameAction().moveToPlay(revealed);
-                    }
-                } else {
-                    revealMsg.append("Computer reveals: ");
-                    if (AllZone.getComputerPlayer().getZone(Zone.Library).size() == 0) {
-                        revealMsg.append("Nothing!");
-                        GameActionUtil.showInfoDialg(revealMsg.toString());
-                        continue;
-                    }
-                    Card revealed = AllZone.getComputerPlayer().getZone(Zone.Library).get(0);
-                    revealMsg.append(revealed.getName());
-                    if (!revealed.isCreature()) {
-                        GameActionUtil.showInfoDialg(revealMsg.toString());
-                        if (lurkingPredators.size() > i) {
-                            AllZone.getGameAction().moveToBottomOfLibrary(revealed);
-                        } else {
-                            AllZone.getGameAction().moveToLibrary(revealed);
-                        }
-                    } else {
-                        GameActionUtil.showInfoDialg(revealMsg.toString());
-                        AllZone.getGameAction().moveToPlay(revealed);
-                    }
-
-                }
-            }
-        }
-
         /*if (sp.getTargetCard() != null)
               CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());*/
 
