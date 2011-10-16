@@ -1,0 +1,10 @@
+Name:Arachnus Web
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Creature.EnchantedBy+powerGE4 | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy CARDNAME.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+End
