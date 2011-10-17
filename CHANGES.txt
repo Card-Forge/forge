@@ -1,10 +1,8 @@
-Forge Beta: ##-##-2011 ver 1.1.# rev #####
+Forge Beta: 10-17-2011 ver 1.1.6 rev 11243
 
-(Quest icons used created by Teekatas, from his Legendora set 
+(Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-http://raindropmemory.deviantart.com)
-
-#### cards in total.
+9383 cards in total.
 
 
 Every expansion and set included in forge is now at least 70% complete.
@@ -17,7 +15,7 @@ We have changed the archiving format to ".tar.bz2". There are utilities for Wind
 
 The Mac OS application version:
 
-We have packaged the Forge ##-##-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
+We have packaged the Forge 10-17-2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 You can move a copy of your pictures and decks over to the Forge.app application. Right click or control click on the Forge.app icon. Select Show Package Contents form the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
 
@@ -331,219 +329,232 @@ No settings file required in skin (all removed)
 - add support for ChosenNumber in Number$ counting
 - Ran set info script.
 - Added the recent commit logs to changes.txt. Preparing for the bi-weekly build and release.
+- Preparing the changes.txt file for the next bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Asret
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Iran
+Jeff Wadsworth
+Marc
+Max mtg
+Slapshot5
+Sloth
+Zirbert
+Chris H
 
 
 Added many cards, including:
 
-Moldgraf Monstrosity
+Abu Ja'far
+Agonizing Memories
+Alms
+Ancestral Knowledge
+Angel's Herald
+Apathy
+Arachnus Web
+Aven Liberator
+Bamboozle
+Barbed Shocker
+Barbed-Back Wurm
+Barrel Down Sokenzan
+Behemoth's Herald
+Blademane Baku
+Blood Lust
+Body Double
 Breezekeeper
+Brontotherium
+Bronze Bombshell
+Burning Sands
+Cabal Therapy
+Catacomb Dragon
+Cephalid Constable
+Chaos Harlequin
+Charge Across the Araba
+Chimeric Sphere
 Cloak of Invisibility
+Cold Snap
+Coldsteel Heart
+Confessor
+Corpse Dance
+Creature Bond
+Crested Craghorn
+Crown of Empires
 Crystal Golem
+Dawn Charm
+Death Rattle
+Death Watch
+Deceiver Exarch
+Defiant Vanguard
+Demon's Herald
+Descendant of Kiyomaro
+Disharmony
+Dragon Mask
+Dragon's Herald
+Dread Wight
 Dream Fighter
+Dusk Urchins
+Eater of the Dead
+Elvish Healer
+Elvish Soultiller
+Ethersworn Shieldmage
+False Memories
+Fire Whip
+Flash of Insight
+Fountain of Cho
+Frenetic Efreet
+Gamekeeper
+Ghazban Ogre
+Goblin Grappler
+Goblin Recruiter
+Goblin Snowman
+Greater Stone Spirit
+Grief Tyrant
+Grim Discovery
+Gruul Scrapper
+Guiding Spirit
+Gulf Squid
+Gustcloak Harrier
+Gustcloak Runner
+Gustcloak Skirmisher
+Heat Stroke
+Hunting Kavu
+Ideas Unbound
+Infinite Hourglass
+Inquisition
+Inquisitor Exarch
+Insidious Dreams
+Jeweled Torque
+Jihad
+Johtull Wurm
+Kabira Evangel
+Kagemaro's Clutch
+Kiyomaro, First to Stand
+Kjeldoran Frostbeast
+Knowledge Vault
+Krovikan Plague
+Kyscu Drake
+Lat-Nam's Legacy
+Lesser Werewolf
+Lich's Tomb
+Living Terrain
+Lowland Basilisk
+Lowland Tracker
+Makeshift Mauler
+Mana Chains
+Martyr of Ashes
+Martyr of Sands
+Martyr of Spores
+Martyr's Cry
+Master of Arms
+Mercadian Bazaar
 Merfolk Raiders
+Merfolk Spy
+Midnight Charm
+Mindless Null
 Mist Dragon
+Mistform Seaswift
+Mob Mentality
+Moldgraf Monstrosity
+Moonring Island
+Myr Battlesphere
+Oboro Envoy
+Oona, Queen of the Fae
+Orzhov Pontiff
+Osai Vultures
+Pentarch Paladin
+Persecute
+Petalmane Baku
+Phyrexian Devourer
+Phyrexian Etchings
+Planeswalker's Favor
+Planeswalker's Mirth
+Planeswalker's Scorn
+Polymorph
+Pox
+Primal Command
+Prismatic Strands
+Prismatic Ward
+Quest for Ula's Temple
+Quickchange
+Quirion Elves
+Rag Man
 Rainbow Efreet
+Rakalite
+Relic Bind
+Remember the Fallen
+Revered Unicorn
+Ribbon Snake
+Riptide Replicator
+Root Greevil
+Rune Snag
+Rushwood Grove
+Rusted Relic
+Safe Haven from The Dark
+Samite Sanctuary
 Sandbar Crocodile
+Saprazzan Cove
+Sawtooth Ogre
+Scepter of Empires
+Scuttlemutt
+Selective Memory
+Shallow Grave
+Shimmer
+Shinen of Flight's Wings
+Shinen of Fury's Fire
+Shoal Serpent
+Shocker
+Sickening Dreams
+Silhana Starfletcher
+Sink into Takenuma
+Skaab Goliath
+Skeletonize
+Skinshifter
+Skirk Drill Sergeant
+Skullmane Baku
+Sokenzan Spellblade
+Sol Grail
+Song of Blood
+Sophic Centaur
+Sphinx's Herald
+Splintering Wind
+Stitched Drake
+Subterranean Hangar
+Sword of the Ages
+Tangle Angler
 Teferi's Drake
 Teferi's Honor Guard
 Teferi's Isle
+Teferi's Moat
+Throne of Empires
+Tidewalker
+Timely Reinforcements
 Tolarian Drake
+Tombstalker
+Tormentor Exarch
+Trapfinder's Trick
+Treacherous Werewolf
+Unnatural Selection
+Urza's Bauble
+Valleymaker
+Vanish into Memory
 Vanishing
 Vaporous Djinn
-Vodalian Illusionist
-Barbed-Back Wurm
-Shimmer
-Rakalite
-Bamboozle
-Burning Sands
-Shallow Grave
-Corpse Dance
-Abu Ja'far
-Alms
-Zombie Scavengers
-Confessor
-Kjeldoran Frostbeast
-Jihad
-Chaos Harlequin
-Lat-Nam's Legacy
-Phyrexian Devourer
-Krovikan Plague
-Eater of the Dead
-Sophic Centaur
-Tidewalker
-Riptide Replicator
-Hunting Kavu
-Sol Grail
-Coldsteel Heart
-Quirion Elves
-Silhana Starfletcher
 Venom
-Sokenzan Spellblade
-Kiyomaro, First to Stand
-Oboro Envoy
-Ideas Unbound
-Blademane Baku
-Petalmane Baku
-Skullmane Baku
-Cold Snap
-Kyscu Drake
-Guiding Spirit
-Death Watch
-Myr Battlesphere
-Creature Bond
-Song of Blood
-Whiteout
-Infinite Hourglass
-Jeweled Torque
-Prismatic Ward
-Teferi's Moat
-Safe Haven from The Dark
-Revered Unicorn
-Lowland Basilisk
-Grief Tyrant
-Goblin Snowman
-Dusk Urchins
-Johtull Wurm
-Elvish Healer
-Martyr's Cry
-Aven Liberator
-Unnatural Selection
-Ghazban Ogre
-Ethersworn Shieldmage
-Selective Memory
-Trapfinder's Trick
-Shoal Serpent
-Mindless Null
-Makeshift Mauler
-Skaab Goliath
-Stitched Drake
 Venomous Fangs
-Blood Lust
-Knowledge Vault
-Gustcloak Skirmisher
-Gustcloak Harrier
-Gustcloak Runner
-Sickening Dreams
-Root Greevil
-Disharmony
-Lesser Werewolf
-Osai Vultures
-Winter Blast
-Sword of the Ages
-Planeswalker's Favor
-Planeswalker's Scorn
-Planeswalker's Mirth
-Merfolk Spy
-Urza's Bauble
-Timely Reinforcements
-Polymorph
-Angel's Herald
-Behemoth's Herald
-Demon's Herald
-Dragon's Herald
-Sphinx's Herald
-False Memories
-Insidious Dreams
-Skirk Drill Sergeant
-Rusted Relic
-Lich's Tomb
-Valleymaker
-Oona, Queen of the Fae
-Moonring Island
-Agonizing Memories
-Ancestral Knowledge
-Apathy
-Chimeric Sphere
-Elvish Soultiller
-Mistform Seaswift
-Gulf Squid
-Ribbon Snake
-Samite Sanctuary
-Living Terrain
-Winding Canyons
-Skeletonize
-Fire Whip
-Sawtooth Ogre
-Descendant of Kiyomaro
+Vodalian Illusionist
 Well of Knowledge
-Persecute
-Defiant Vanguard
-Dawn Charm
-Heat Stroke
-Cabal Therapy
-Charge Across the Araba
-Barrel Down Sokenzan
-Mana Chains
+Whiteout
+Winding Canyons
 Wine of Blood and Iron
-Kagemaro's Clutch
-Dread Wight
-Shinen of Flight's Wings
-Shinen of Fury's Fire
-Sink into Takenuma
-Body Double
-Midnight Charm
-Primal Command
-Master of Arms
-Catacomb Dragon
-Cephalid Constable
-Flash of Insight
-Pox
-Inquisitor Exarch
-Splintering Wind
-Barbed Shocker
-Deceiver Exarch
-Orzhov Pontiff
-Gruul Scrapper
-Tormentor Exarch
-Frenetic Efreet
-Greater Stone Spirit
-Martyr of Ashes
-Scuttlemutt
-Quest for Ula's Temple
-Quickchange
-Treacherous Werewolf
-Relic Bind
-Shocker
-Martyr of Sands
-Martyr of Spores
-Phyrexian Etchings
-Tangle Angler
-Rune Snag
-Prismatic Strands
-Vanish into Memory
+Winter Blast
 Woolly Razorback
-Goblin Recruiter
-Inquisition
-Rag Man
-Mob Mentality
-Bronze Bombshell
-Death Rattle
-Tombstalker
-Arachnus Web
-Kabira Evangel
-Skinshifter
-Dragon Mask
-Pentarch Paladin
-Gamekeeper
-Crown of Empires
-Scepter of Empires
-Throne of Empires
-Fountain of Cho
-Mercadian Bazaar
-Rushwood Grove
-Saprazzan Cove
-Subterranean Hangar
-Goblin Grappler
-Brontotherium
-Crested Craghorn
-Lowland Tracker
-Remember the Fallen
-Grim Discovery
+Zombie Scavengers
 
 
 end
