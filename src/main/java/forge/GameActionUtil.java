@@ -2195,53 +2195,6 @@ public final class GameActionUtil {
         } // execute()
     }; //
 
-    /** Constant <code>Iona_Shield_of_Emeria</code>. */
-    public static Command Iona_Shield_of_Emeria = new Command() {
-        private static final long serialVersionUID = 7349652597673216545L;
-        CardList gloriousAnthemList = new CardList();
-
-        public void execute() {
-            CardList list = gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                //c.removeIntrinsicKeyword("This card can't be cast");
-                c.setUnCastable(false);
-            }
-
-            list.clear();
-
-            CardList cl = AllZoneUtil.getCardsIn(Zone.Battlefield, "Iona, Shield of Emeria");
-
-            for (int i = 0; i < cl.size(); i++) {
-                final Card crd = cl.get(i);
-                Player controller = cl.get(i).getController();
-                Player opp = controller.getOpponent();
-
-                CardList spells = new CardList();
-                spells.addAll(opp.getCardsIn(Zone.Graveyard));
-                spells.addAll(opp.getCardsIn(Zone.Hand));
-
-                spells = spells.filter(new CardListFilter() {
-                    public boolean addCard(final Card c) {
-                        return !c.isLand()
-                                && CardUtil.getColors(c).contains(
-                                crd.getChosenColor());
-                    }
-                });
-
-                for (int j = 0; j < spells.size(); j++) {
-                    c = spells.get(j);
-                    if (!c.isLand()) {
-                        c.setUnCastable(true);
-                        gloriousAnthemList.add(c);
-                    }
-                } // for inner
-            } // for outer
-        } // execute()
-    }; //end Iona, Shield of Emeria
-
     // returns all PlayerZones that has at least 1 Glorious Anthem
     // if Computer has 2 Glorious Anthems, AllZone.getComputerPlay() will be
     // returned twice
@@ -2278,7 +2231,6 @@ public final class GameActionUtil {
         commands.put("Elspeth_Emblem", Elspeth_Emblem);
         commands.put("Gaddock_Teeg", Gaddock_Teeg);
         commands.put("Homarid", Homarid);
-        commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 
         commands.put("Koth_Emblem", Koth_Emblem);
         commands.put("Liu_Bei", Liu_Bei);
