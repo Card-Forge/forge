@@ -178,15 +178,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
 
     private ArrayList<Ability_Triggered> zcTriggers = new ArrayList<Ability_Triggered>();
-    private ArrayList<Command> turnFaceUpCommandList = new ArrayList<Command>();
     private ArrayList<Command> equipCommandList = new ArrayList<Command>();
     private ArrayList<Command> unEquipCommandList = new ArrayList<Command>();
     private ArrayList<Command> enchantCommandList = new ArrayList<Command>();
     private ArrayList<Command> unEnchantCommandList = new ArrayList<Command>();
     private ArrayList<Command> untapCommandList = new ArrayList<Command>();
     private ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
-    private ArrayList<Command> replaceMoveToGraveyardCommandList = new ArrayList<Command>();
-    private ArrayList<Command> cycleCommandList = new ArrayList<Command>();
 
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
     private Map<String, String> sVars = new TreeMap<String, String>();
@@ -2578,38 +2575,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>addTurnFaceUpCommand.</p>
-     *
-     * @param c a {@link forge.Command} object.
-     */
-    public final void addTurnFaceUpCommand(final Command c) {
-        turnFaceUpCommandList.add(c);
-    }
-
-    /**
-     * <p>removeTurnFaceUpCommand.</p>
-     *
-     * @param c a {@link forge.Command} object.
-     */
-    public final void removeTurnFaceUpCommand(final Command c) {
-        turnFaceUpCommandList.remove(c);
-    }
-
-    /**
-     * <p>turnFaceUp.</p>
-     */
-    public final void turnFaceUp() {
-        for (Command var : turnFaceUpCommandList) {
-            var.execute();
-        }
-
-        //Run triggers
-        Map<String, Object> runParams = new TreeMap<String, Object>();
-        runParams.put("Card", this);
-        AllZone.getTriggerHandler().runTrigger("TurnFaceUp", runParams);
-    }
-
-    /**
      * <p>addDestroyCommand.</p>
      *
      * @param c a {@link forge.Command} object.
@@ -2778,58 +2743,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addChangeControllerCommand(Command c) {
         changeControllerCommandList.add(c);
-    }
-
-    /**
-     * <p>getReplaceMoveToGraveyard.</p>
-     *
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<Command> getReplaceMoveToGraveyard() {
-        return replaceMoveToGraveyardCommandList;
-    }
-
-    /**
-     * <p>addReplaceMoveToGraveyardCommand.</p>
-     *
-     * @param c a {@link forge.Command} object.
-     */
-    public final void addReplaceMoveToGraveyardCommand(Command c) {
-        replaceMoveToGraveyardCommandList.add(c);
-    }
-
-    /**
-     * <p>clearReplaceMoveToGraveyardCommandList.</p>
-     */
-    public final void clearReplaceMoveToGraveyardCommandList() {
-        replaceMoveToGraveyardCommandList.clear();
-    }
-
-    /**
-     * <p>replaceMoveToGraveyard.</p>
-     */
-    public final void replaceMoveToGraveyard() {
-        for (Command var : replaceMoveToGraveyardCommandList) {
-            var.execute();
-        }
-    }
-
-    /**
-     * <p>addCycleCommand.</p>
-     *
-     * @param c a {@link forge.Command} object.
-     */
-    public final void addCycleCommand(final Command c) {
-        cycleCommandList.add(c);
-    }
-
-    /**
-     * <p>cycle.</p>
-     */
-    public final void cycle() {
-        for (Command var : cycleCommandList) {
-            var.execute();
-        }
     }
 
     /**
