@@ -49,11 +49,8 @@ public final class GameActionUtil {
 
         playCard_Cascade(c);
         playCard_Ripple(c);
-        //playCard_Storm(sa);
 
-        playCard_Vengevine(c);
         playCard_Venser_Emblem(c);
-        playCard_Ichneumon_Druid(c);
 
     }
 
@@ -68,19 +65,17 @@ public final class GameActionUtil {
 
             public void execute() {
 
-                CardList humanNexus = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Maelstrom Nexus");
-                CardList computerNexus = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Maelstrom Nexus");
-
-                if (humanNexus.size() > 0) {
-                    if (Phase.getPlayerSpellCount() == 1 && !c.isCopiedSpell()) {
-                        for (int i = 0; i < humanNexus.size(); i++) {
-                            doCascade(c);
-                        }
-                    }
-                }
-                if (computerNexus.size() > 0) {
-                    if (Phase.getComputerSpellCount() == 1 && !c.isCopiedSpell()) {
-                        for (int i = 0; i < computerNexus.size(); i++) {
+                if(!c.isCopiedSpell()) {
+                    CardList humanNexus = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Maelstrom Nexus");
+                    CardList computerNexus = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Maelstrom Nexus");
+    
+                    CardList maelstromNexii = new CardList();
+                    maelstromNexii.addAll(humanNexus);
+                    maelstromNexii.addAll(computerNexus);
+                    
+                    
+                    for(Card nexus : maelstromNexii) {
+                        if(CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
                             doCascade(c);
                         }
                     }
@@ -288,90 +283,6 @@ public final class GameActionUtil {
     } //playCard_Ripple()
 
     /**
-     * <p>playCard_Storm.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     */   /*
-    public static void playCard_Storm(SpellAbility sa) {
-        Card source = sa.getSourceCard();
-        if (!source.isCopiedSpell()
-                && source.hasKeyword("Storm")) {
-            int StormNumber = Phase.getStormCount() - 1;
-            for (int i = 0; i < StormNumber; i++)
-                AllZone.getCardFactory().copySpellontoStack(source, source, sa, true);
-        }
-    }//playCard_Storm()
-            */
-    /**
-     * <p>playCard_Vengevine.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    public static void playCard_Vengevine(final Card c) {
-        if (c.isCreature() == true
-                && (Phase.getPlayerCreatureSpellCount() == 2 || Phase.getComputerStartingCardspellCount() == 2))
-        {
-            final Player controller = c.getController();
-            final PlayerZone play = controller.getZone(Constant.Zone.Battlefield);
-            CardList list = controller.getCardsIn(Zone.Graveyard);
-            list = list.getName("Vengevine");
-            if (list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-                    final Card card = list.get(i);
-                    Ability ability = new Ability(card, "0") {
-                        @Override
-                        public void resolve() {
-                            if (controller.isComputer()
-                                    || GameActionUtil.showYesNoDialog(card, "Return Vengevine from the graveyard?"))
-                            {
-                                if (controller.getZone(Zone.Graveyard).contains(card)) {
-                                    AllZone.getGameAction().moveTo(play, card);
-                                }
-                            }
-                        }
-                    }; // ability
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card).append(" - ").append("Whenever you cast a spell, if it's the second creature ");
-                    sb.append("spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
-                    ability.setStackDescription(sb.toString());
-
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            } //if
-        }
-    } //playCard_Vengevine()
-
-    /**
-     * <p>playCard_Ichneumon_Druid.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    public static void playCard_Ichneumon_Druid(final Card c) {
-        if (c.isInstant() && (Phase.getPlayerInstantSpellCount() >= 2 || Phase.getComputerInstantSpellCount() >= 2)) {
-            final Player player = c.getController();
-            final Player opp = player.getOpponent();
-            CardList list = opp.getCardsIn(Zone.Battlefield, "Ichneumon Druid");
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                Ability ability = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-                        player.addDamage(4, card);
-                    }
-                }; // ability
-
-                StringBuilder sb = new StringBuilder();
-                sb.append(card).append(" - ").append("Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, Ichneumon Druid deals 4 damage to him or her.");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-            }
-        }
-    } //playCard_Ichneumon_Druid()
-
-    /**
      * <p>playCard_Venser_Emblem.</p>
      *
      * @param c a {@link forge.Card} object.
@@ -513,31 +424,6 @@ public final class GameActionUtil {
 
         }
     } //endOfTurn_Wall_Of_Reverence()
-
-    /**
-     * <p>endOfTurn_Predatory_Advantage.</p>
-     */
-    public static void endOfTurn_Predatory_Advantage() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-        CardList list = player.getOpponent().getCardsIn(Zone.Battlefield, "Predatory Advantage");
-        for (int i = 0; i < list.size(); i++) {
-            final Player controller = list.get(i).getController();
-            if ((player.isHuman() && Phase.getPlayerCreatureSpellCount() == 0)
-                    || (player.isComputer() && Phase.getComputerStartingCardspellCount() == 0))
-            {
-                Ability abTrig = new Ability(list.get(i), "0") {
-                    public void resolve() {
-                        CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", controller, "G",
-                                new String[]{"Creature", "Lizard"}, 2, 2, new String[]{""});
-                    }
-                };
-                abTrig.setTrigger(true);
-                abTrig.setStackDescription("At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.");
-
-                AllZone.getGameAction().playSpellAbility(abTrig);
-            }
-        }
-    }
 
     /**
      * <p>endOfTurn_Lighthouse_Chronologist.</p>

@@ -1,9 +1,11 @@
 Name:Storm Entity
 ManaCost:1 R
 Types:Creature Elemental
-Text:CARDNAME enters the battlefield with a +1/+1 counter on it for each other spell cast this turn.
+Text:no text
 PT:1/1
 K:Haste
+K:etbCounter:P1P1:X
+SVar:X:Count$ThisTurnCast Card.Other
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_entity.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/122.jpg

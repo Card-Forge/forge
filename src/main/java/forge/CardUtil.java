@@ -678,7 +678,7 @@ public final class CardUtil {
      * @param from zone coming from
      * @param valid a isValid expression
      * @param src a Card object
-     * @return a CardList that matches then given criteria
+     * @return a CardList that matches the given criteria
      */
     public static CardList getThisTurnEntered(final Constant.Zone to, final Constant.Zone from, final String valid, final Card src) {
         CardList res = new CardList();
@@ -692,6 +692,23 @@ public final class CardUtil {
 
         res = res.getValidCards(valid, src.getController(), src);
 
+        return res;
+    }
+    
+    /**
+     * getThisTurnCast.
+     * 
+     * @param valid a String object
+     * @param src a Card object
+     * @return a CardList that matches the given criteria
+     */
+    public static CardList getThisTurnCast(final String valid, final Card src) {
+        CardList res = new CardList();
+        
+        res.addAll(AllZone.getStack().getCardsCastThisTurn());
+        
+        res = res.getValidCards(valid, src.getController(), src);
+        
         return res;
     }
 

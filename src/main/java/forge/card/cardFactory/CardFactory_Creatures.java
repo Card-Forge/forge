@@ -1642,43 +1642,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Storm Entity")) {
-            final SpellAbility intoPlay = new Ability(card, "0") {
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    CardListUtil.sortAttack(human);
-                    return (human.get(0).getNetAttack() < Phase.getStormCount() && Phase.getStormCount() > 1);
-                }
-
-                @Override
-                public void resolve() {
-                    for (int i = 0; i < Phase.getStormCount() - 1; i++) {
-                        card.addCounter(Counters.P1P1, 1);
-                    }
-                }
-            };//SpellAbility
-
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = -3734151854295L;
-
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(intoPlay);
-
-                }
-            };
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - enters the battlefield with a +1/+1 counter on it for each other spell played this turn.");
-            intoPlay.setStackDescription(sb.toString());
-
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-
-
         //*************** START *********** START **************************
         else if (cardName.equals("Vampire Hexmage")) {
             /*

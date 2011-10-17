@@ -40,6 +40,8 @@ public class MagicStack extends MyObservable {
     private boolean frozen = false;
     private boolean bResolving = false;
     private int splitSecondOnStack = 0;
+    
+    private CardList thisTurnCast = new CardList();
 
     /**
      * <p>isFrozen.</p>
@@ -314,7 +316,7 @@ public class MagicStack extends MyObservable {
             sp.resetOnceResolved();
             return;
         }
-
+        
         if (frozen) {
             SpellAbility_StackInstance si = new SpellAbility_StackInstance(sp);
             getFrozenStack().push(si);
@@ -746,7 +748,7 @@ public class MagicStack extends MyObservable {
         this.updateObservers();
 
         if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
-            Phase.increaseSpellCount(sp);
+            thisTurnCast.add(sp.getSourceCard());
 
             GameActionUtil.executePlayCardEffects(sp);
         }
@@ -1210,5 +1212,18 @@ public class MagicStack extends MyObservable {
         return frozenStack;
     }
 
-
+    /**
+     * Accessor for the field thisTurnCast.
+     * @return a CardList.
+     */
+    public final CardList getCardsCastThisTurn() {
+        return thisTurnCast;
+    }
+    
+    /**
+     * clearCardsCastThisTurn.
+     */
+    public void clearCardsCastThisTurn() {
+        thisTurnCast.clear();
+    }
 }

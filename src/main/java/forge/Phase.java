@@ -28,20 +28,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
     // accessing the following:
     /** Constant <code>GameBegins=0</code> */
     private static int GameBegins = 0;
-    /** Constant <code>StormCount=</code> */
-    private static int StormCount;
-    /** Constant <code>PlayerSpellCount=</code> */
-    private static int PlayerSpellCount;
-    /** Constant <code>PlayerCreatureSpellCount=</code> */
-    private static int PlayerCreatureSpellCount;
-    /** Constant <code>PlayerInstantSpellCount=</code> */
-    private static int PlayerInstantSpellCount;
-    /** Constant <code>ComputerSpellCount=</code> */
-    private static int ComputerSpellCount;
-    /** Constant <code>ComputerCreatureSpellCount=</code> */
-    private static int ComputerCreatureSpellCount;
-    /** Constant <code>ComputerInstantSpellCount=</code> */
-    private static int ComputerInstantSpellCount;
 
     private Stack<Player> extraTurns = new Stack<Player>();
 
@@ -260,13 +246,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
      * <p>turnReset.</p>
      */
     public void turnReset() {
-        setStormCount(0);
-        setPlayerSpellCount(0);
-        setPlayerCreatureSpellCount(0);
-        setPlayerInstantSpellCount(0);
-        setComputerSpellCount(0);
-        setComputerCreatureSpellCount(0);
-        setComputerInstantSpellCount(0);
         playerTurn.setNumLandsPlayed(0);
     }
 
@@ -480,6 +459,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     private Player handleNextTurn() {
         Player nextTurn = extraTurns.isEmpty() ? getPlayerTurn().getOpponent() : extraTurns.pop();
 
+        AllZone.getStack().clearCardsCastThisTurn();
         AllZone.resetZoneMoveTracking();
         AllZone.getComputerPlayer().resetProwl();
         AllZone.getHumanPlayer().resetProwl();
@@ -796,114 +776,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
     }
 
     /**
-     * <p>increaseSpellCount.</p>
-     *
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static void increaseSpellCount(final SpellAbility sp) {
-        incrementStormCount();
-
-        if (sp.getActivatingPlayer().isHuman()) {
-            incrementPlayerSpellCount();
-            if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
-                incrementPlayerCreatureSpellCount();
-            }
-            if (sp.getSourceCard().isInstant()) {
-                incrementPlayerInstantSpellCount();
-            }
-        } else {
-            incrementComputerSpellCount();
-            if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
-                incrementComputerCreatureSpellCount();
-            }
-            if (sp.getSourceCard().isInstant()) {
-                incrementComputerInstantSpellCount();
-            }
-        }
-    }
-
-    /**
-     * <p>incrementComputerInstantSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementComputerInstantSpellCount() {
-        ComputerInstantSpellCount++;
-    }
-
-    /**
-     * <p>incrementComputerCreatureSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementComputerCreatureSpellCount() {
-        ComputerCreatureSpellCount++;
-    }
-
-    /**
-     * <p>incrementComputerSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementComputerSpellCount() {
-        ComputerSpellCount++;
-    }
-
-    /**
-     * <p>incrementPlayerInstantSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementPlayerInstantSpellCount() {
-        PlayerInstantSpellCount++;
-    }
-
-    /**
-     * <p>incrementPlayerCreatureSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementPlayerCreatureSpellCount() {
-        PlayerCreatureSpellCount++;
-    }
-
-    /**
-     * <p>incrementPlayerSpellCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementPlayerSpellCount() {
-        PlayerSpellCount++;
-    }
-
-    /**
-     * <p>incrementStormCount.</p>
-     *
-     * @since 1.0.15
-     */
-    protected static void incrementStormCount() {
-        StormCount++;
-    }
-
-    /**
-     * <p>setStormCount.</p>
-     *
-     * @param stormCount a int.
-     */
-    public static void setStormCount(final int stormCount) {
-        StormCount = stormCount;
-    }
-
-    /**
-     * <p>getStormCount.</p>
-     *
-     * @return a int.
-     */
-    public static int getStormCount() {
-        return StormCount;
-    }
-
-    /**
      * <p>setGameBegins.</p>
      *
      * @param gameBegins a int.
@@ -930,114 +802,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
      */
     public final void setDevPhaseState(final String phaseID) {
         this.phaseIndex = findIndex(phaseID);
-    }
-
-    /**
-     * <p>getPlayerSpellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getPlayerSpellCount() {
-        return PlayerSpellCount;
-    }
-
-    /**
-     * <p>setPlayerSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setPlayerSpellCount(final int i) {
-        PlayerSpellCount = (i);
-    }
-
-    /**
-     * <p>getPlayerCreatureSpellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getPlayerCreatureSpellCount() {
-        return PlayerCreatureSpellCount;
-    }
-
-    /**
-     * <p>setPlayerCreatureSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setPlayerCreatureSpellCount(final int i) {
-        PlayerCreatureSpellCount = (i);
-    }
-
-    /**
-     * <p>getPlayerInstantSpellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getPlayerInstantSpellCount() {
-        return PlayerInstantSpellCount;
-    }
-
-    /**
-     * <p>setPlayerInstantSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setPlayerInstantSpellCount(final int i) {
-        PlayerInstantSpellCount = (i);
-    }
-
-    /**
-     * <p>getComputerSpellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getComputerSpellCount() {
-        return ComputerSpellCount;
-    }
-
-    /**
-     * <p>setComputerSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setComputerSpellCount(final int i) {
-        ComputerSpellCount = (i);
-    }
-
-    /**
-     * <p>getComputerStartingCardspellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getComputerStartingCardspellCount() {
-        return ComputerCreatureSpellCount;
-    }
-
-    /**
-     * <p>setComputerCreatureSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setComputerCreatureSpellCount(final int i) {
-        ComputerCreatureSpellCount = (i);
-    }
-
-    /**
-     * <p>getComputerInstantSpellCount.</p>
-     *
-     * @return a int.
-     */
-    static int getComputerInstantSpellCount() {
-        return ComputerInstantSpellCount;
-    }
-
-    /**
-     * <p>setComputerInstantSpellCount.</p>
-     *
-     * @param i a int.
-     */
-    static void setComputerInstantSpellCount(final int i) {
-        ComputerInstantSpellCount = (i);
     }
 
     /**

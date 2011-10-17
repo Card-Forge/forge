@@ -54,7 +54,6 @@ public class EndOfTurn implements java.io.Serializable {
         //Pyrohemia and Pestilence
         CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
-        GameActionUtil.endOfTurn_Predatory_Advantage();
         GameActionUtil.endOfTurn_Wall_Of_Reverence();
         GameActionUtil.endOfTurn_Lighthouse_Chronologist();
 

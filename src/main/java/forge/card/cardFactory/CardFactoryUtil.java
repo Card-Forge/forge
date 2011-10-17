@@ -2947,7 +2947,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].equals("StormCount")) {
-            return doXMath(Phase.getStormCount() - 1, m, c);
+            return doXMath(AllZone.getStack().getCardsCastThisTurn().size() - 1, m, c);
         }
         
         if(sq[0].equals("DamageDoneThisTurn")) {
@@ -3190,8 +3190,8 @@ public class CardFactoryUtil {
 
         // Count$ThisTurnEntered <ZoneDestination> <ZoneOrigin> <Valid>
         // or
-        // Count$ThisTurnEntered <ZoneDestination <Valid>
-        if (sq[0].startsWith("ThisTurnEntered")) {
+        // Count$ThisTurnEntered <ZoneDestination> <Valid>
+        if (sq[0].contains("ThisTurnEntered")) {
             String[] workingCopy = l[0].split(" ");
             Zone destination, origin;
             String validFilter;
@@ -3208,6 +3208,18 @@ public class CardFactoryUtil {
             CardList res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
 
             return doXMath(res.size(), m, c);
+        }
+        
+        // Count$ThisTurnCast <Valid>
+        if(sq[0].contains("ThisTurnCast")) {
+            String[] workingCopy = l[0].split(" ");
+            String validFilter = workingCopy[1];
+            
+            CardList res = CardUtil.getThisTurnCast(validFilter, c);
+            
+            int ret = doXMath(res.size(), m, c);
+            System.out.println("Requesting ThisTurn Cast \"" + validFilter + "\", returning " + ret);
+            return ret;
         }
 
         
