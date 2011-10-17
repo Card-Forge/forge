@@ -343,7 +343,7 @@ public class ComputerUtil {
      * @since 1.0.15
      */
     static public boolean canBePlayedAndPayedByAI(SpellAbility sa) {
-        return sa.canPlayAI() && sa.canPlay() && canPayCost(sa);
+        return sa.canPlay() && sa.canPlayAI() && canPayCost(sa);
     }
 
     /**
