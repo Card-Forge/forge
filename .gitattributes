@@ -2238,6 +2238,7 @@ res/cardsfolder/d/dwarven_miner.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_nomad.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_patrol.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_pony.txt svneol=native#text/plain
+res/cardsfolder/d/dwarven_recruiter.txt -text
 res/cardsfolder/d/dwarven_ruins.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_soldier.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_song.txt svneol=native#text/plain
