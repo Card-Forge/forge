@@ -2862,7 +2862,12 @@ public class CardFactoryUtil {
         // accept straight numbers
         if (l[0].contains("Number$")) {
             String number = l[0].replace("Number$", "");
-            return doXMath(Integer.parseInt(number), m, c);
+            if (number.equals("ChosenNumber")) {
+                return doXMath(c.getChosenNumber(), m, c);
+            }
+            else {
+                return doXMath(Integer.parseInt(number), m, c);
+            }
         }
 
         // Manapool
