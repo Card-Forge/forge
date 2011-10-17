@@ -651,7 +651,8 @@ public class ComputerUtil_Block2 {
             if (!blocker.getMustBlockCards().isEmpty()) {
                 ArrayList<Card> blocks = blocker.getMustBlockCards();
                 for (Card attacker : blocks) {
-                    if (attacker.isAttacking() && CombatUtil.canBlock(attacker, blocker)) {
+                    if (attacker.isAttacking() && CombatUtil.canBlock(attacker, blocker, combat) 
+                            && getBlockersLeft().contains(blocker)) {
                         combat.addBlocker(attacker, blocker);
                         getBlockersLeft().remove(blocker);
                     }

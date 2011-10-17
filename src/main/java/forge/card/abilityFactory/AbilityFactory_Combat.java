@@ -5,10 +5,13 @@ import java.util.HashMap;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Player;
+import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -835,17 +838,46 @@ public final class AbilityFactory_Combat {
     }
 
     private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+            final boolean mandatory) {
+        final Card source = sa.getSourceCard();
+        Target abTgt = sa.getTarget();
+        
         // If there is a cost payment it's usually not mandatory
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
+        
+        //only use on creatures that attack
+        if (!source.isAttacking())
+            return false;
 
-        boolean chance;
+        boolean chance = false;
 
-        //TODO - implement AI
-        chance = false;
+        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+        list = list.getTargetableCards(source);
+        
+        if (abTgt != null) {
+            list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+            list = list.filter(new CardListFilter() {
+                public boolean addCard(Card c) {
+                    if (!CombatUtil.canBlock(source, c, AllZone.getCombat()))
+                        return false;
+                    if (CombatUtil.canDestroyAttacker(source, c, AllZone.getCombat(), false))
+                        return false;
+                    if (!CombatUtil.canDestroyBlocker(c, source, AllZone.getCombat(), false))
+                        return false;
+                    return true;
+                }
+            });
+            if (!list.isEmpty()) {
+                Card blocker = CardFactoryUtil.AI_getBestCreature(list);
+                if (blocker == null)
+                    return false;
+                abTgt.addTarget(CardFactoryUtil.AI_getBestCreature(list));
+                chance = false; //TODO:change this to true, once the human input takes mustblocks into account
+            }
+        } else
+            return false;
 
         // check SubAbilities DoTrigger?
         Ability_Sub abSub = sa.getSubAbility();
