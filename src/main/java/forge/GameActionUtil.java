@@ -2095,53 +2095,6 @@ public final class GameActionUtil {
         } // execute()
     }; // Muraganda_Petroglyphs
 
-    /** Constant <code>Meddling_Mage</code>. */
-    public static Command Meddling_Mage = new Command() {
-        private static final long serialVersionUID = 738264163993370439L;
-        CardList gloriousAnthemList = new CardList();
-
-        public void execute() {
-            CardList list = gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                //c.removeIntrinsicKeyword("This card can't be cast");
-                c.setUnCastable(false);
-            }
-
-            list.clear();
-
-            CardList cl = AllZoneUtil.getCardsIn(Zone.Battlefield, "Meddling Mage");
-
-            for (int i = 0; i < cl.size(); i++) {
-                final Card crd = cl.get(i);
-
-                CardList spells = new CardList();
-                spells.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard));
-                spells.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Hand));
-                spells.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
-                spells.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard));
-                spells = spells.filter(new CardListFilter() {
-                    public boolean addCard(final Card c) {
-                        return !c.isLand()
-                                && c.getName().equals(
-                                crd.getNamedCard());
-                    }
-                });
-
-                for (int j = 0; j < spells.size(); j++) {
-                    c = spells.get(j);
-                    if (!c.isLand()) {
-                        //c.addIntrinsicKeyword("This card can't be cast");
-                        c.setUnCastable(true);
-                        gloriousAnthemList.add(c);
-                    }
-                } // for inner
-            } // for outer
-        } // execute()
-    }; // Meddling_Mage
-
     /** Constant <code>Gaddock_Teeg</code>. */
     public static Command Gaddock_Teeg = new Command() {
         private static final long serialVersionUID = -479252814191086571L;
@@ -2235,7 +2188,6 @@ public final class GameActionUtil {
         commands.put("Koth_Emblem", Koth_Emblem);
         commands.put("Liu_Bei", Liu_Bei);
 
-        commands.put("Meddling_Mage", Meddling_Mage);
         commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 
         commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
