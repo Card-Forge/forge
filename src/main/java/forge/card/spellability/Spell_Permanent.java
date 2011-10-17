@@ -181,7 +181,6 @@ public class Spell_Permanent extends Spell {
     @Override
     public boolean canPlay() {
         Card source = getSourceCard();
-        if (AllZone.getStack().isSplitSecondOnStack() || source.isUnCastable()) return false;
 
         Player turn = AllZone.getPhase().getPlayerTurn();
 

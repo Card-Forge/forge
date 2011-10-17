@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Golem
 Text:no text
 PT:3/4
-S:Mode$ CantBeCast | ValidCard$ Creature.YouCtrl | Description$ You can't cast creature spells.
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't cast creature spells.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_golem.jpg

@@ -169,7 +169,7 @@ public class StaticAbility {
     }
     
     //apply the ability if it has the right mode
-    public boolean applyAbility(String mode, Card card) {
+    public boolean applyAbility(String mode, Card card, Player activator) {
         
         //don't apply the ability if it hasn't got the right mode
         if (!mapParams.get("Mode").equals(mode))
@@ -179,7 +179,7 @@ public class StaticAbility {
             return false;
         
         if (mode.equals("CantBeCast"))
-            return StaticAbility_CantBeCast.applyCantBeCastAbility(this, card);
+            return StaticAbility_CantBeCast.applyCantBeCastAbility(this, card, activator);
         
         return false;
     }

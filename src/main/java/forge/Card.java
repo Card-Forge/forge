@@ -3895,16 +3895,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isUnCastable() {
-        //Prevent Damage static abilities
-        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        for (Card ca : allp) {
-            ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (StaticAbility stAb : staticAbilities) {
-                if(stAb.applyAbility("CantBeCast", this)) {
-                    return true;
-                }
-            }
-        }
         
         return unCastable;
     }
