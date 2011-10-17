@@ -6,6 +6,7 @@ A:AB$ Pump | Cost$ 3 T | NumAtt$ 2 | NumDef$ 2 | ValidTgts$ Creature.YouCtrl | T
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | SpellDescription$ Return creature to owner's hand
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | CleanRemembered$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_mask.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/144.jpg
