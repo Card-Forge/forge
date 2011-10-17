@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Ally | TriggerZones$ Battlefield | Execute$ TrigProt | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
 SVar:TrigProt:AB$ProtectionAll | Cost$ 0 | ValidCards$ Card.Ally+YouCtrl | Gains$ Choice | Choices$ AnyColor
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_evangel.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/15.jpg
 Oracle:Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
 End

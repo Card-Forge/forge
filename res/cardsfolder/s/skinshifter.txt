@@ -8,6 +8,7 @@ SVar:DBRhino:DB$Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creat
 SVar:DBBird:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Bird | OverwriteTypes$ True | Keywords$ Flying | SpellDescription$ Until end of turn, CARDNAME becomes a 2/2 Bird and gains Flying.
 SVar:DBPlant:DB$Animate | Defined$ Self | Power$ 0 | Toughness$ 8 | Types$ Creature,Plant | OverwriteTypes$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 0/8 Plant.
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skinshifter.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/195.jpg
 Oracle:{G}: Choose one - Until end of turn, Skinshifter becomes a 4/4 Rhino and gains trample; or until end of turn, Skinshifter becomes a 2/2 Bird and gains flying; or until end of turn, Skinshifter becomes a 0/8 Plant. Activate this ability only once each turn.
 End
