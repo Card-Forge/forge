@@ -1722,6 +1722,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(" (This enters the battlefield with ");
                     sbLong.append(numCounters);
                     sbLong.append(" +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
+                } else if (keyword.get(i).startsWith("Provoke")) {
+                    sbLong.append(keyword.get(i));
+                    sbLong.append(" (When this attacks, you may have target creature defending player controls untap and block it if able.)");
                 } else if (keyword.get(i).startsWith("MayEffectFromOpeningHand")) {
                     continue;
                 } else if (keyword.get(i).contains("Haunt")) {

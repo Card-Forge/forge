@@ -4950,6 +4950,16 @@ public class CardFactoryUtil {
             card.addTrigger(hauntedDies);
             card.addTrigger(haunterUnExiled);
         }
+        
+        if(card.hasKeyword("Provoke")) {
+            String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ UntapAbility | Secondary$ True | TriggerDescription$ When this attacks, you may have target creature defending player controls untap and block it if able.";
+            String abString = "AB$ Untap | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature defending player controls | SubAbility$ DBProvoke";
+            String dbString = "DB$ MustBlock | Defined$ Targeted";
+            Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, false);
+            card.addTrigger(parsedTrigger);
+            card.setSVar("UntapAbility", abString);
+            card.setSVar("DBProvoke", dbString);
+        }
 
         return card;
     }
