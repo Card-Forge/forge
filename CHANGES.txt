@@ -317,6 +317,20 @@ No settings file required in skin (all removed)
 - Remove code that can pull build ID from another jar in the classpath.
 - Converted Lurking Predators to script.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Little fix
+- clean up a couple Java warnings
+- fix TokenName in Militia's Pride
+- convert Rith, the Awakener to script
+- Added LQ pic URLs to Bronze Bombshell; Death Rattle and Tombstalker.
+- Moved Venarian Glimmer.
+- Moved Heal the Scars.
+- Rishadan Footpad no longer overrides Sacrifice Input, but still prompts twice for the Unless cost.
+- run oracle and setinfo scripts
+- add Provoke keyword
+- fix possible NPE in AF_ChooseNumber
+- add support for ChosenNumber in Number$ counting
+- Ran set info script.
+- Added the recent commit logs to changes.txt. Preparing for the bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -510,6 +524,26 @@ Mob Mentality
 Bronze Bombshell
 Death Rattle
 Tombstalker
+Arachnus Web
+Kabira Evangel
+Skinshifter
+Dragon Mask
+Pentarch Paladin
+Gamekeeper
+Crown of Empires
+Scepter of Empires
+Throne of Empires
+Fountain of Cho
+Mercadian Bazaar
+Rushwood Grove
+Saprazzan Cove
+Subterranean Hangar
+Goblin Grappler
+Brontotherium
+Crested Craghorn
+Lowland Tracker
+Remember the Fallen
+Grim Discovery
 
 
 end
