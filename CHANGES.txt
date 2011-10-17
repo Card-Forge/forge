@@ -24,7 +24,9 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
+- Updated some AI SVars.
 - Cleared out the changes.txt file, is ready for new material.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
