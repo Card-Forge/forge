@@ -1,0 +1,12 @@
+Name:Grand Abolisher
+ManaCost:W W
+Types:Creature Human Cleric
+Text:no text
+PT:2/2
+S:Mode$ CantBeCast | ValidCard$ Card.YouDontCtrl | PlayerTurn$ True | Description$ During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.
+S:Mode$ Continuous | Affected$ Artifact.YouDontCtrl,Creature.YouDontCtrl,Enchantment.YouDontCtrl | AddHiddenKeyword$ HIDDEN CARDNAME's activated abilities can't be activated. | PlayerTurn$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_abolisher.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/19.jpg
+Oracle:During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.
+End
