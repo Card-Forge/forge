@@ -3434,6 +3434,7 @@ res/cardsfolder/g/griffin_guide.txt svneol=native#text/plain
 res/cardsfolder/g/griffin_rider.txt svneol=native#text/plain
 res/cardsfolder/g/griffin_sentinel.txt svneol=native#text/plain
 res/cardsfolder/g/grim_affliction.txt svneol=native#text/plain
+res/cardsfolder/g/grim_discovery.txt -text
 res/cardsfolder/g/grim_feast.txt svneol=native#text/plain
 res/cardsfolder/g/grim_harvest.txt svneol=native#text/plain
 res/cardsfolder/g/grim_lavamancer.txt svneol=native#text/plain
