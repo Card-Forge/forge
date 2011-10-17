@@ -65,6 +65,7 @@ public abstract class SpellAbility {
     private boolean isDelve = false;
     
     private int charmNumber;
+    private int minCharmNumber;
     private ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
     //private ArrayList<SpellAbility> charmChoicesMade = new ArrayList<SpellAbility>();
 
@@ -1269,41 +1270,6 @@ public abstract class SpellAbility {
     }
     
     /**
-     * <p>addCharmChoiceMade.</p>
-     *
-     * @param sa a SpellAbility
-     * @since 1.1.6
-     */
-    /*
-    public final void addCharmChoiceMade(final SpellAbility sa) {
-        charmChoicesMade.add(sa);
-    }
-    */
-
-    /**
-     * <p>getCharmChoicesMade.</p>
-     *
-     * @return an ArrayList<SpellAbility>
-     * @since 1.1.6
-     */
-    /*
-    public final ArrayList<SpellAbility> getCharmChoicesMade() {
-        return charmChoicesMade;
-    }
-    */
-    
-    /**
-     * <p>clearCharmChoices.</p>
-     *
-     * @since 1.1.6
-     */
-    /*
-    public final void clearCharmChoicesMade() {
-        charmChoicesMade.clear();
-    }
-    */
-    
-    /**
      * <p>setCharmNumber.</p>
      *
      * @param i an int
@@ -1319,6 +1285,26 @@ public abstract class SpellAbility {
      */
     public final int getCharmNumber() {
         return charmNumber;
+    }
+    
+    /**
+     * <p>setMinCharmNumber.</p>
+     *
+     * @param i an int
+     * @since 1.1.6
+     */
+    public final void setMinCharmNumber(final int i) {
+        minCharmNumber = i;
+    }
+
+    /**
+     * <p>getMinCharmNumber.</p>
+     *
+     * @return an int
+     * @since 1.1.6
+     */
+    public final int getMinCharmNumber() {
+        return minCharmNumber;
     }
     
     /**

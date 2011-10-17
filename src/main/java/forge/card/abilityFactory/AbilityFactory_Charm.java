@@ -128,7 +128,16 @@ public final class AbilityFactory_Charm {
                 }
             }
             for (int i = 0; i < sa.getCharmNumber(); i++) {
-                Object o = GuiUtils.getChoice("Choose a mode", choices.toArray());
+                Object o;
+                if (i < sa.getMinCharmNumber()) {
+                    o = GuiUtils.getChoice("Choose a mode", choices.toArray());
+                }
+                else {
+                    o = GuiUtils.getChoiceOptional("Choose a mode", choices.toArray());
+                }
+                if (null == o) {
+                    break;
+                }
                 Ability_Sub chosen = (Ability_Sub) o;
                 sa.addCharmChoice(chosen);
                 choices.remove(chosen);

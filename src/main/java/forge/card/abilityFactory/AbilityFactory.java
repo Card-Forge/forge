@@ -1069,6 +1069,8 @@ public class AbilityFactory {
             SA.setIsCharm(true);
             int num = Integer.parseInt(mapParams.containsKey("CharmNum") ? mapParams.get("CharmNum") : "1");
             SA.setCharmNumber(num);
+            int min = mapParams.containsKey("MinCharmNum") ? Integer.parseInt(mapParams.get("MinCharmNum")) : num;
+            SA.setMinCharmNumber(min);
             
             String[] saChoices = mapParams.get("Choices").split(",");
             for(int i = 0; i < saChoices.length; i++) {
