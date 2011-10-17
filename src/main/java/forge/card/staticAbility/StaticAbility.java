@@ -181,6 +181,9 @@ public class StaticAbility {
         if (mode.equals("CantBeCast"))
             return StaticAbility_CantBeCast.applyCantBeCastAbility(this, card, activator);
         
+        if (mode.equals("CantBeActivated"))
+            return StaticAbility_CantBeCast.applyCantBeActivatedAbility(this, card, activator);
+        
         return false;
     }
     

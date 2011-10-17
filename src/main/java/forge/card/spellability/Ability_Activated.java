@@ -1,9 +1,12 @@
 package forge.card.spellability;
 
+import java.util.ArrayList;
+
 import forge.*;
 import forge.Constant.Zone;
 import forge.card.cost.Cost;
 import forge.card.cost.Cost_Payment;
+import forge.card.staticAbility.StaticAbility;
 
 
 /**
@@ -49,6 +52,19 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         final Card c = getSourceCard();
         if (c.isFaceDown() && isIntrinsic()) {   // Intrinsic abilities can't be activated by face down cards
             return false;
+        }
+        
+        Player activator = getActivatingPlayer();
+        
+        //CantBeActivated static abilities
+        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (Card ca : allp) {
+            ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (StaticAbility stAb : staticAbilities) {
+                if(stAb.applyAbility("CantBeActivated", c, activator)) {
+                    return false;
+                }
+            }
         }
         
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || isSuppressed()) {

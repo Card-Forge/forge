@@ -61,7 +61,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         
         Player activator = getActivatingPlayer();
         
-        //Prevent Damage static abilities
+        //CantBeCast static abilities
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
