@@ -1,0 +1,11 @@
+Name:Crested Craghorn
+ManaCost:4 R
+Types:Creature Goat Beast
+Text:no text
+PT:4/1
+K:Haste
+K:Provoke
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crested_craghorn.jpg
+End

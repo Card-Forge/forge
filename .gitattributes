@@ -1029,6 +1029,7 @@ res/cardsfolder/b/broken_ambitions.txt svneol=native#text/plain
 res/cardsfolder/b/broken_dam.txt svneol=native#text/plain
 res/cardsfolder/b/broken_fall.txt svneol=native#text/plain
 res/cardsfolder/b/broken_visage.txt svneol=native#text/plain
+res/cardsfolder/b/brontotherium.txt -text
 res/cardsfolder/b/bronze_bombshell.txt -text
 res/cardsfolder/b/brood_birthing.txt svneol=native#text/plain
 res/cardsfolder/b/brood_of_cockroaches.txt svneol=native#text/plain
@@ -1607,6 +1608,7 @@ res/cardsfolder/c/creeping_tar_pit.txt svneol=native#text/plain
 res/cardsfolder/c/creepy_doll.txt -text
 res/cardsfolder/c/cremate.txt svneol=native#text/plain
 res/cardsfolder/c/crenellated_wall.txt svneol=native#text/plain
+res/cardsfolder/c/crested_craghorn.txt -text
 res/cardsfolder/c/crevasse.txt svneol=native#text/plain
 res/cardsfolder/c/crib_swap.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_acolyte.txt svneol=native#text/plain
@@ -4665,6 +4667,7 @@ res/cardsfolder/l/lovisa_coldeyes.txt svneol=native#text/plain
 res/cardsfolder/l/lowland_basilisk.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lowland_giant.txt svneol=native#text/plain
 res/cardsfolder/l/lowland_oaf.txt -text
+res/cardsfolder/l/lowland_tracker.txt -text
 res/cardsfolder/l/loxodon_anchorite.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_convert.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_gatekeeper.txt svneol=native#text/plain
