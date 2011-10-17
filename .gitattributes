@@ -3428,6 +3428,7 @@ res/cardsfolder/g/greenhilt_trainee.txt svneol=native#text/plain
 res/cardsfolder/g/greenseeker.txt svneol=native#text/plain
 res/cardsfolder/g/greenweaver_druid.txt svneol=native#text/plain
 res/cardsfolder/g/gremlin_mine.txt svneol=native#text/plain
+res/cardsfolder/g/grid_monitor.txt -text
 res/cardsfolder/g/grief_tyrant.txt -text svneol=unset#text/plain
 res/cardsfolder/g/griffin_canyon.txt svneol=native#text/plain
 res/cardsfolder/g/griffin_guide.txt svneol=native#text/plain
@@ -10276,6 +10277,7 @@ src/main/java/forge/card/spellability/Target_Choices.java svneol=native#text/pla
 src/main/java/forge/card/spellability/Target_Selection.java svneol=native#text/plain
 src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/staticAbility/StaticAbility.java svneol=native#text/plain
+src/main/java/forge/card/staticAbility/StaticAbility_CantBeCast.java -text
 src/main/java/forge/card/staticAbility/StaticAbility_Continuous.java svneol=native#text/plain
 src/main/java/forge/card/staticAbility/StaticAbility_PreventDamage.java -text
 src/main/java/forge/card/staticAbility/package-info.java svneol=native#text/plain

@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -1021,7 +1022,11 @@ public class CardFactoryUtil {
                 sourceCard.setBaseDefense(defense);
                 sourceCard.setIntrinsicKeyword(sourceCard.getPrevIntrinsicKeyword());
                 sourceCard.setType(sourceCard.getPrevType());
-                sourceCard.turnFaceUp();
+
+                //Run triggers
+                Map<String, Object> runParams = new TreeMap<String, Object>();
+                runParams.put("Card", sourceCard);
+                AllZone.getTriggerHandler().runTrigger("TurnFaceUp", runParams);
             }
 
             @Override
@@ -1104,7 +1109,6 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 sourceCard.getController().drawCard();
-                sourceCard.cycle();
             }
         };
         cycle.setIsCycling(true);

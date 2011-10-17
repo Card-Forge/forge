@@ -168,6 +168,22 @@ public class StaticAbility {
         return in;
     }
     
+    //apply the ability if it has the right mode
+    public boolean applyAbility(String mode, Card card) {
+        
+        //don't apply the ability if it hasn't got the right mode
+        if (!mapParams.get("Mode").equals(mode))
+            return false;
+        
+        if (isSuppressed() || !checkConditions())
+            return false;
+        
+        if (mode.equals("CantBeCast"))
+            return StaticAbility_CantBeCast.applyCantBeCastAbility(this, card);
+        
+        return false;
+    }
+    
     public boolean checkConditions() {
     	Player controller = hostCard.getController();
     	
