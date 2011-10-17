@@ -8,4 +8,5 @@ K:Provoke
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brontotherium.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/119.jpg
 End

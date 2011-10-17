@@ -8,4 +8,5 @@ SVar:ChangeArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Tgt
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/remember_the_fallen.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/21.jpg
 End
