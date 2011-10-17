@@ -3920,7 +3920,7 @@ public class CardFactoryUtil {
             }
         }
 
-        int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
+        int multiplier = AllZoneUtil.getTokenDoublersMagnitude(controller);
         // TODO - does this need to set
         // PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication
         // does?

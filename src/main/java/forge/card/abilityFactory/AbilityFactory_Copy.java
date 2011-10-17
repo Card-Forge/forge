@@ -311,7 +311,7 @@ public final class AbilityFactory_Copy {
             if (tgt == null || CardFactoryUtil.canTarget(hostCard, c)) {
 
                 //start copied Kiki code
-                int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(hostCard.getController());
+                int multiplier = AllZoneUtil.getTokenDoublersMagnitude(hostCard.getController());
                 multiplier *= numCopies;
                 Card[] crds = new Card[multiplier];
 

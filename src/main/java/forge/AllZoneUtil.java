@@ -266,6 +266,17 @@ public abstract class AllZoneUtil {
         int doublingSeasons = player.getCardsIn(Zone.Battlefield, "Doubling Season").size();
         return (int) Math.pow(2, doublingSeasons); // pow(a,0) = 1; pow(a,1) = a ... no worries about size = 0
     }
+    
+    /**
+     * <p>getTokenDoublersMagnitude.</p>
+     *
+     * @param player the {@link forge.Player} player to determine if is affected by Doubling Season
+     * @return a int.
+     */
+    public static int getTokenDoublersMagnitude(final Player player) {
+        int tokenDoublers = player.getCardsIn(Zone.Battlefield, "Parallel Lives").size() + player.getCardsIn(Zone.Battlefield,"Doubling Season").size();
+        return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a ... no worries about size = 0
+    }
 
     /**
      * gets a list of all opponents of a given player.
