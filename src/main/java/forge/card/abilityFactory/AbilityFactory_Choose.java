@@ -823,7 +823,7 @@ public class AbilityFactory_Choose {
         HashMap<String, String> params = af.getMapParams();
         Card card = af.getHostCard();
         int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
-        int max = Integer.parseInt(params.get("Max"));
+        int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
         boolean random = params.containsKey("Random");
         
         String[] choices = new String[max + 1];
