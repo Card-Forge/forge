@@ -1,0 +1,12 @@
+Name:Goblin Grappler
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:Provoke
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grappler.jpg
+Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/100.jpg
+End
