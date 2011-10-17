@@ -1,0 +1,13 @@
+Name:Steel Golem
+ManaCost:3
+Types:Artifact Creature Golem
+Text:no text
+PT:3/4
+S:Mode$ CantBeCast | ValidCard$ Creature.YouCtrl | Description$ You can't cast creature spells.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_golem.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/157.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/344.jpg
+Oracle:You can't cast creature spells.
+End
