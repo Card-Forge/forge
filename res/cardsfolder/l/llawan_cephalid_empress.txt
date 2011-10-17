@@ -1,0 +1,13 @@
+Name:Llawan, Cephalid Empress
+ManaCost:3 U
+Types:Legendary Creature Cephalid
+Text:no text
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return all blue creatures your opponents control to their owners' hands.
+SVar:TrigChange:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.Blue+YouDontCtrl | Origin$ Battlefield | Destination$ Hand
+S:Mode$ CantBeCast | ValidCard$ Creature.Blue | Caster$ Opponent | Description$ Your opponents can't cast blue creature spells.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/llawan_cephalid_empress.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/42.jpg
+Oracle:When Llawan, Cephalid Empress enters the battlefield, return all blue creatures your opponents control to their owners' hands.\nYour opponents can't cast blue creature spells.
+End

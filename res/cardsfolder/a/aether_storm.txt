@@ -7,4 +7,6 @@ A:AB$ Destroy | Cost$ PayLife<4> | Defined$ Self | NoReg$ True | AnyPlayer$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_storm.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/26.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/70.jpg
 End
