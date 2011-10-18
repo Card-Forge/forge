@@ -560,8 +560,6 @@ public class ComputerUtil_Block2 {
         setBlockedButUnkilled(new CardList()); //keeps track of all blocked attackers that currently wouldn't be destroyed
         CardList blockers;
         CardList chumpBlockers;
-        
-        setupForcedBlocks(combat);
 
         setDiff(AllZone.getComputerPlayer().getLife() * 2 - 5); //This is the minimal gain for an unnecessary trade
 
@@ -627,7 +625,7 @@ public class ComputerUtil_Block2 {
         chumpBlockers = getBlockersLeft().getKeyword("CARDNAME blocks each turn if able.");
         // if an attacker with lure attacks - all that can block
         for (Card blocker : getBlockersLeft()) {
-            if (CombatUtil.canBlockAnAttackerWithLure(blocker, combat)) chumpBlockers.add(blocker);
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat)) chumpBlockers.add(blocker);
         }
         if (!chumpBlockers.isEmpty()) {
             getAttackers().shuffle();
@@ -643,21 +641,5 @@ public class ComputerUtil_Block2 {
         }
 
         return combat;
-    }
-    
-    private static void setupForcedBlocks(Combat combat) {
-        CardList blockers = AllZoneUtil.getCreaturesInPlay(combat.getDefendingPlayer());
-        for (Card blocker : blockers) {
-            if (!blocker.getMustBlockCards().isEmpty()) {
-                ArrayList<Card> blocks = blocker.getMustBlockCards();
-                for (Card attacker : blocks) {
-                    if (attacker.isAttacking() && CombatUtil.canBlock(attacker, blocker, combat) 
-                            && getBlockersLeft().contains(blocker)) {
-                        combat.addBlocker(attacker, blocker);
-                        getBlockersLeft().remove(blocker);
-                    }
-                }
-            }
-        }
     }
 }

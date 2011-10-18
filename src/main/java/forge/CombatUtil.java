@@ -253,7 +253,7 @@ public class CombatUtil {
         //if a creature does not block but should, return false
         for (Card blocker : blockers) {
             //lure effects
-            if (!combat.getAllBlockers().contains(blocker) && canBlockAnAttackerWithLure(blocker, combat))
+            if (!combat.getAllBlockers().contains(blocker) && mustBlockAnAttacker(blocker, combat))
                 return false;
 
             //"CARDNAME blocks each turn if able."
@@ -269,13 +269,13 @@ public class CombatUtil {
 
     // can the blocker block an attacker with a lure effect?
     /**
-     * <p>canBlockAnAttackerWithLure.</p>
+     * <p>mustBlockAnAttacker.</p>
      *
      * @param blocker a {@link forge.Card} object.
      * @param combat a {@link forge.Combat} object.
      * @return a boolean.
      */
-    public static boolean canBlockAnAttackerWithLure(Card blocker, Combat combat) {
+    public static boolean mustBlockAnAttacker(Card blocker, Combat combat) {
 
         if (blocker == null) return false;
 
@@ -285,6 +285,10 @@ public class CombatUtil {
         attackersWithLure = attackersWithLure.getKeyword("All creatures able to block CARDNAME do so.");
 
         for (Card attacker : attackersWithLure) {
+            if (canBlock(blocker, combat) && canBlock(attacker, blocker)) return true;
+        }
+        
+        for (Card attacker : blocker.getMustBlockCards()) {
             if (canBlock(blocker, combat) && canBlock(attacker, blocker)) return true;
         }
 
@@ -308,8 +312,9 @@ public class CombatUtil {
         if (canBeBlocked(attacker, combat) == false) return false;
 
         //if the attacker has no lure effect, but the blocker can block another attacker with lure, the blocker can't block the former
-        if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
-                && canBlockAnAttackerWithLure(blocker, combat)) return false;
+        if ((!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
+                && mustBlockAnAttacker(blocker, combat))
+                || !(blocker.getMustBlockCards().contains(attacker))) return false;
 
         return canBlock(attacker, blocker);
     }
