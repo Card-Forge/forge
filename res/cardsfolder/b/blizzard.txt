@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Enchantment
 Text:Creatures with flying don't untap during their controllers' untap steps.
 K:Cumulative upkeep:2
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ Hand | CheckSVar$ X | SVarCompare$ GE1 | Description$ Cast CARDNAME only if you control a snow land.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ Hand | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Cast CARDNAME only if you control a snow land.
 K:Permanents don't untap during their controllers' untap steps:Creature.withFlying
 SVar:X:Count$Valid Snow.Land+YouCtrl
 SVar:RemRandomDeck:True
