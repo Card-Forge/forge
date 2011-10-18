@@ -312,9 +312,10 @@ public class CombatUtil {
         if (canBeBlocked(attacker, combat) == false) return false;
 
         //if the attacker has no lure effect, but the blocker can block another attacker with lure, the blocker can't block the former
-        if ((!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
+        if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
+                && !(blocker.getMustBlockCards().contains(attacker))
                 && mustBlockAnAttacker(blocker, combat))
-                || !(blocker.getMustBlockCards().contains(attacker))) return false;
+            return false;
 
         return canBlock(attacker, blocker);
     }
