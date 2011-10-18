@@ -27,6 +27,27 @@ Fixes/Features:
 - Updated some AI SVars.
 - Cleared out the changes.txt file, is ready for new material.
 - Added the recent commit logs to changes.txt.
+- Added LQ pic URLs to Arachnus Web; Kabira Evangel and Skinshifter.
+- Removed ReplaceMoveToGraveyardCommand, CycleCommand and TurnFaceUpCommand.
+- Added the static ability "CantBeCast".
+- Added a "Caster" parameter to StaticAbility_CantBeCast.
+- Added the static ability "CantBeActivated".
+- Converted Grand Abolisher.
+- Converted Iona, Shield of Emeria to script.
+- Converted the second ability of Meddling Mage to script.
+- Added ThisTurnCast to xCount to complement ThisTurnEntered. Count$ThisTurnCast <Valid> lets you count how many <Valid> cards were cast so far this turn. StormCount remains, but is now functionally equivalent to ThisTurnCast Card.
+- Converted to script:Ichneumon Druid; Predatory Advantage; Storm Entity andVengevine
+- Changed the order of checks in canBePlayedAndPayedByAI to canPlay and then canPlayAI (this should speed things up and prevent possible NPE's).
+- Fixed a little loophole in the MustBlock code.
+- First steps towards an AI for AF MustBlock.
+- Fixed Ancestral Knowledge.
+- Fixed Barrel Down Sokenzan.
+Corrected some scripts etbCounters->etbCounter.
+- Added ThisTurnCast and ThisTurnNotCast to special conditions. See Hotheaded Giant for example.
+- Converted Blizzard to script.
+- Little script fix and added an AI SVar.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -36,7 +57,21 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Grid Monitor
+Steel Golem
+Parallel Lives
+Silence
+Grand Abolisher
+Aether Storm
+Llawan, Cephalid Empress
+Dwarven Recruiter
+Krosan Vorine
+Ethersworn Canonist
+Dream Thief
+Goblin Cohort
+Hotheaded Giant
+Mogg Conscripts
+Soul Reap
 
 
 end
