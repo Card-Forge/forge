@@ -1,0 +1,15 @@
+Name:Arcane Laboratory
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | Description$ Each player can't cast more than one spell each turn.
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | CheckSVar$ Y
+SVar:X:Count$ThisTurnCast Card
+SVar:Y:Count$ThisTurnCast Card
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_laboratory.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/60.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/60.jpg
+Oracle:Each player can't cast more than one spell each turn.
+End
