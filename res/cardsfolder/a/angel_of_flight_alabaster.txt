@@ -3,6 +3,7 @@ ManaCost:4 W
 Types:Creature Angel
 Text:no text
 PT:4/4
+K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You |TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target Spirit card from your graveyard to your hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select target Spirit card in your graveyard | ValidTgts$ Spirit.YouCtrl
 SVar:Rarity:Rare
