@@ -1160,8 +1160,6 @@ public class GameAction {
         canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
-        AllZone.getHumanPlayer().setEpicSpell(null);
-        AllZone.getComputerPlayer().setEpicSpell(null);
 
         { //re-number cards just so their unique numbers are low, just for user friendliness
             CardFactoryInterface c = AllZone.getCardFactory();

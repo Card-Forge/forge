@@ -4990,7 +4990,6 @@ public class CardFactoryUtil {
 
               @Override
               public void resolve() {
-                  card.getController().setEpicSpell(origSA);
                   
                   //Create Epic emblem
                   Card eff = new Card();

@@ -56,10 +56,6 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlay() {
         if (AllZone.getStack().isSplitSecondOnStack()) return false;
-        
-        if(getSourceCard().getController().getEpicSpell() != null) {
-            return false; //Player has cast an Epic spell and can't cast more this game.
-        }
 
         Card card = getSourceCard();
         
