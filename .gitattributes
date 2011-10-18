@@ -7315,6 +7315,7 @@ res/cardsfolder/s/skyshroud_archer.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_behemoth.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_blessing.txt -text
 res/cardsfolder/s/skyshroud_claim.txt svneol=native#text/plain
+res/cardsfolder/s/skyshroud_condor.txt -text
 res/cardsfolder/s/skyshroud_cutter.txt -text
 res/cardsfolder/s/skyshroud_elf.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_elite.txt svneol=native#text/plain
@@ -8052,6 +8053,7 @@ res/cardsfolder/t/tajuru_archer.txt svneol=native#text/plain
 res/cardsfolder/t/take_possession.txt svneol=native#text/plain
 res/cardsfolder/t/takenos_cavalry.txt svneol=native#text/plain
 res/cardsfolder/t/takenuma_bleeder.txt svneol=native#text/plain
+res/cardsfolder/t/talaras_battalion.txt -text
 res/cardsfolder/t/talas_air_ship.txt svneol=native#text/plain
 res/cardsfolder/t/talas_explorer.txt svneol=native#text/plain
 res/cardsfolder/t/talas_merchant.txt svneol=native#text/plain
