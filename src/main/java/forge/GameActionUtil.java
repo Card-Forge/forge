@@ -1580,6 +1580,18 @@ public final class GameActionUtil {
                 return false;
             }
         }
+        if (specialConditions.contains("ThisTurnCast")) {
+            String valid = specialConditions.split(" ")[1];
+            if(CardUtil.getThisTurnCast(valid, sourceCard).size() == 0) {
+                return false;
+            }
+        }
+        if(specialConditions.contains("ThisTurnNotCast")) {
+            String valid = specialConditions.split(" ")[1];
+            if(CardUtil.getThisTurnCast(valid, sourceCard).size() != 0) {
+                return false;
+            }
+        }
         return true;
 
     }

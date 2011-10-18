@@ -1,0 +1,12 @@
+Name:Hotheaded Giant
+ManaCost:3 R
+Types:Creature Giant Warrior
+Text:no text
+PT:4/4
+K:Haste
+K:etbCounter:M1M1:2:ThisTurnNotCast Card.Red+Other+YouCtrl:CARDNAME enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hotheaded_giant.jpg
+Oracle:Haste\nHotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/57.jpg
+End

@@ -2144,6 +2144,7 @@ res/cardsfolder/d/dream_fighter.txt -text
 res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
 res/cardsfolder/d/dream_prowler.txt svneol=native#text/plain
 res/cardsfolder/d/dream_stalker.txt svneol=native#text/plain
+res/cardsfolder/d/dream_thief.txt -text
 res/cardsfolder/d/dream_thrush.txt -text
 res/cardsfolder/d/dream_twist.txt -text
 res/cardsfolder/d/dreamborn_muse.txt svneol=native#text/plain
@@ -3242,6 +3243,7 @@ res/cardsfolder/g/goblin_chariot.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_chieftain.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_chirurgeon.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_clearcutter.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_cohort.txt -text
 res/cardsfolder/g/goblin_commando.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_deathraiders.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_digging_team.txt svneol=native#text/plain
@@ -3776,6 +3778,7 @@ res/cardsfolder/h/horror_of_horrors.txt svneol=native#text/plain
 res/cardsfolder/h/horseshoe_crab.txt svneol=native#text/plain
 res/cardsfolder/h/hostile_realm.txt svneol=native#text/plain
 res/cardsfolder/h/hot_springs.txt svneol=native#text/plain
+res/cardsfolder/h/hotheaded_giant.txt -text
 res/cardsfolder/h/hoverguard_observer.txt svneol=native#text/plain
 res/cardsfolder/h/hoverguard_sweepers.txt svneol=native#text/plain
 res/cardsfolder/h/hovermyr.txt svneol=native#text/plain
@@ -5116,6 +5119,7 @@ res/cardsfolder/m/mobilization.txt svneol=native#text/plain
 res/cardsfolder/m/mobilize.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_alarm.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_bombers.txt svneol=native#text/plain
+res/cardsfolder/m/mogg_conscripts.txt -text
 res/cardsfolder/m/mogg_fanatic.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_hollows.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_jailer.txt svneol=native#text/plain
@@ -7483,6 +7487,7 @@ res/cardsfolder/s/soul_manipulation.txt svneol=native#text/plain
 res/cardsfolder/s/soul_net.txt svneol=native#text/plain
 res/cardsfolder/s/soul_of_magma.txt svneol=native#text/plain
 res/cardsfolder/s/soul_parry.txt svneol=native#text/plain
+res/cardsfolder/s/soul_reap.txt -text
 res/cardsfolder/s/soul_rend.txt svneol=native#text/plain
 res/cardsfolder/s/soul_scourge.txt svneol=native#text/plain
 res/cardsfolder/s/soul_shepherd.txt svneol=native#text/plain
