@@ -1372,6 +1372,7 @@ res/cardsfolder/c/citanul_hierophants.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_woodreaders.txt svneol=native#text/plain
 res/cardsfolder/c/city_of_brass.txt svneol=native#text/plain
 res/cardsfolder/c/city_of_shadows.txt svneol=native#text/plain
+res/cardsfolder/c/city_of_solitude.txt -text
 res/cardsfolder/c/city_of_traitors.txt svneol=native#text/plain
 res/cardsfolder/c/civic_guildmage.txt svneol=native#text/plain
 res/cardsfolder/c/civic_wayfinder.txt svneol=native#text/plain
@@ -2088,6 +2089,7 @@ res/cardsfolder/d/doran_the_siege_tower.txt svneol=native#text/plain
 res/cardsfolder/d/dormant_gomazoa.txt svneol=native#text/plain
 res/cardsfolder/d/dormant_sliver.txt svneol=native#text/plain
 res/cardsfolder/d/dormant_volcano.txt svneol=native#text/plain
+res/cardsfolder/d/dosan_the_falling_leaf.txt -text
 res/cardsfolder/d/dosans_oldest_chant.txt svneol=native#text/plain
 res/cardsfolder/d/double_cleave.txt svneol=native#text/plain
 res/cardsfolder/d/doubling_season.txt svneol=native#text/plain
