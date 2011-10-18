@@ -4981,6 +4981,57 @@ public class CardFactoryUtil {
             card.setSVar("ProvokeAbility", abString);
             card.setSVar("DBUntap", dbString);
         }
+        
+        if(card.hasKeyword("Epic")) {
+            final SpellAbility origSA = card.getSpellAbilities().get(0);
+                        
+            SpellAbility newSA = new Spell(card,origSA.getPayCosts(),origSA.getTarget()) {
+              private static final long serialVersionUID = -7934420043356101045L;
+
+              @Override
+              public void resolve() {
+                  card.getController().setEpicSpell(origSA);
+                  
+                  //Create Epic emblem
+                  Card eff = new Card();
+                  eff.setName(card.toString() + " Epic");
+                  eff.addType("Effect");    // Or Emblem
+                  eff.setToken(true);    // Set token to true, so when leaving play it gets nuked
+                  eff.addController(card.getController());
+                  eff.setOwner(card.getController());
+                  eff.setImageName(card.getImageName());
+                  eff.setColor(card.getColor());
+                  eff.setImmutable(true);
+                  
+                  eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Description$ For the rest of the game, you can't cast spells.");
+                  
+                  Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerDescription$ At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.", card, false);
+
+                  copyTrigger.setOverridingAbility(origSA);
+                  
+                  eff.addTrigger(copyTrigger);
+                  AllZone.getTriggerHandler().registerTrigger(copyTrigger);
+                  
+                  AllZone.getTriggerHandler().suppressMode("ChangesZone");
+                  AllZone.getGameAction().moveToPlay(eff);
+                  AllZone.getTriggerHandler().clearSuppression("ChangesZone");
+                  
+                  if(card.getController().isHuman()) {
+                      AllZone.getGameAction().playSpellAbility_NoStack(origSA, false);
+                  }
+                  else {
+                      ComputerUtil.playNoStack(origSA);
+                  }
+              }
+            };
+            newSA.setDescription(origSA.getDescription());
+            
+            origSA.setPayCosts(null);
+            origSA.setManaCost("0");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(newSA);
+        }
 
         return card;
     }
@@ -5424,6 +5475,7 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
+        
     }
 
 } //end class CardFactoryUtil

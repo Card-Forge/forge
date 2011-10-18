@@ -1,0 +1,12 @@
+Name:Enduring Ideal
+ManaCost:5 W W
+Types:Sorcery
+Text:no text
+K:Epic
+A:SP$ChangeZone | Cost$ 5 W W | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
+SVar:Rarity:Rare
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enduring_ideal.jpg
+Oracle:Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability.)
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/9.jpg
+End

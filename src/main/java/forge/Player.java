@@ -49,6 +49,8 @@ public abstract class Player extends GameEntity {
     
     Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
     public final static List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield, Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command));
+    
+    private SpellAbility epicSpell = null;
 
     /**
      * <p>Constructor for Player.</p>
@@ -1913,5 +1915,19 @@ public abstract class Player extends GameEntity {
             Player p1 = (Player) o;
             return p1.getName().equals(getName());
         } else return false;
+    }
+
+    /**
+     * @return the epicSpell
+     */
+    public SpellAbility getEpicSpell() {
+        return epicSpell;
+    }
+
+    /**
+     * @param epicSpell0 the epicSpell to set
+     */
+    public void setEpicSpell(SpellAbility epicSpell0) {
+        this.epicSpell = epicSpell0;
     }
 }
