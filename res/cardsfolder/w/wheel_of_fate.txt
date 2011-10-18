@@ -1,5 +1,5 @@
 Name:Wheel of Fate
-ManaCost:0
+ManaCost:no cost
 Types:Sorcery
 Text:no text
 K:CARDNAME is red.
