@@ -187,10 +187,6 @@ public class Spell_Permanent extends Spell {
         if (source.getName().equals("Serra Avenger")) {
             if (turn.equals(source.getController()) && turn.getTurn() <= 3)
                 return false;
-        } else if (source.getName().equals("Blizzard")) {
-            CardList lands = AllZoneUtil.getPlayerLandsInPlay(source.getController());
-            lands = lands.getType("Snow");
-            if (lands.size() == 0) return false;
         }
 
         // Flash handled by super.canPlay
