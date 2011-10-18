@@ -202,6 +202,8 @@ public class StaticEffects {
         //value has to be an array, since certain cards have multiple commands associated with them
 
         cardToEffectsList.put("Avatar", new String[]{"Ajani_Avatar_Token"});
+        
+        cardToEffectsList.put("Alpha Status", new String[]{"Alpha_Status"});
         cardToEffectsList.put("Coat of Arms", new String[]{"Coat_of_Arms"});
         cardToEffectsList.put("Gaddock Teeg", new String[]{"Gaddock_Teeg"});
 

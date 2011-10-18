@@ -1734,6 +1734,57 @@ public final class GameActionUtil {
             } // for outer
         } // execute
     }; // Coat of Arms
+    
+    private static Command Alpha_Status = new Command() {
+        private static final long serialVersionUID = -3213793711304934358L;
+
+        CardList previouslyPumped = new CardList();
+        ArrayList<Integer> previouslyPumpedValue = new ArrayList<Integer>();
+        
+        @Override
+        public void execute() {
+            CardList alphaStatuses = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getName("Alpha Status");
+            alphaStatuses.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getName("Alpha Status"));
+            
+            CardList allCreatures = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+            allCreatures.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Creature"));
+            
+            for(int i=0;i<previouslyPumped.size();i++) {
+                previouslyPumped.get(i).addSemiPermanentAttackBoost(0-previouslyPumpedValue.get(i));
+                previouslyPumped.get(i).addSemiPermanentDefenseBoost(0-previouslyPumpedValue.get(i));
+            }
+            previouslyPumped.clear();
+            previouslyPumpedValue.clear();
+            
+            for(Card alpha : alphaStatuses) {
+                Card enchanted = alpha.getEnchantingCard();
+                int totalbuff = 0;
+                
+                for(Card othercreat : allCreatures) {
+                    boolean sharesatype = false;
+                    if(enchanted != othercreat) {
+                        for(String type : enchanted.getType()) {
+                            if(CardUtil.getCreatureTypes().contains(type)) {
+                                if(othercreat.getType().contains(type)) {
+                                    sharesatype = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(sharesatype) {
+                            totalbuff += 2;
+                        }
+                    }                    
+                }
+                
+                enchanted.addSemiPermanentAttackBoost(totalbuff);
+                enchanted.addSemiPermanentDefenseBoost(totalbuff);
+                previouslyPumped.add(enchanted);
+                previouslyPumpedValue.add(totalbuff);
+            }
+        }
+        
+    };
 
     /**
      * stores the Command
@@ -2078,6 +2129,7 @@ public final class GameActionUtil {
         //Please add cards in alphabetical order so they are easier to find
 
         commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
+        commands.put("Alpha_Status", Alpha_Status);
         commands.put("Coat_of_Arms", Coat_of_Arms);
         commands.put("Elspeth_Emblem", Elspeth_Emblem);
         commands.put("Gaddock_Teeg", Gaddock_Teeg);
