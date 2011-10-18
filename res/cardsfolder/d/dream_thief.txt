@@ -10,4 +10,5 @@ SVar:X:Count$ThisTurnCast Card.Other+Blue+YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_thief.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/20.jpg
+Oracle:Flying\nWhen Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
 End
