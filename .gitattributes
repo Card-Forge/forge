@@ -8116,6 +8116,7 @@ res/cardsfolder/t/tectonic_instability.txt svneol=native#text/plain
 res/cardsfolder/t/tectonic_rift.txt -text
 res/cardsfolder/t/teekas_dragon.txt svneol=native#text/plain
 res/cardsfolder/t/teetering_peaks.txt svneol=native#text/plain
+res/cardsfolder/t/teferi_mage_of_zhalfir.txt -text
 res/cardsfolder/t/teferis_care.txt -text
 res/cardsfolder/t/teferis_drake.txt -text
 res/cardsfolder/t/teferis_honor_guard.txt -text

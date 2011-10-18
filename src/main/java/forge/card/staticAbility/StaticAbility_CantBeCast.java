@@ -3,6 +3,7 @@ package forge.card.staticAbility;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.Phase;
 import forge.Player;
 
 public class StaticAbility_CantBeCast {
@@ -22,6 +23,10 @@ public class StaticAbility_CantBeCast {
         
         if(params.containsKey("Caster") && activator != null &&
                 !activator.isValid(params.get("Caster"), hostCard.getController(), hostCard)) {
+            return false;
+        }
+        
+        if(params.containsKey("OnlySorcerySpeed") && activator != null && Phase.canCastSorcery(activator)) {
             return false;
         }
         
