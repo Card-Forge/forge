@@ -7,7 +7,8 @@ K:CARDNAME can't be countered.
 K:Flying
 K:Protection from colored spells
 K:Annihilator 6
-K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+SVar:TrigShuffle:AB$ChangeZoneAll | Cost$ 0 | Defined$ TriggeredCardController | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True 
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAddTurn  | TriggerDescription$ When you cast CARDNAME, take an extra turn after this one.
 SVar:TrigAddTurn:AB$AddTurn | Cost$ 0 | Defined$ You | NumTurns$ 1
 SVar:Rarity:Mythic
