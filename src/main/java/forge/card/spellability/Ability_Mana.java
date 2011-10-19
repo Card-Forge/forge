@@ -278,6 +278,9 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         
         Ability_Mana abm = (Ability_Mana) o;
         
+        if(abm.getType() != getType())
+            return false;
+        
         return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
     }
 
