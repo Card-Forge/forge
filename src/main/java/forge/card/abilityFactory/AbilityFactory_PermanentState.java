@@ -226,7 +226,7 @@ public class AbilityFactory_PermanentState {
 
             // TODO: use Defined to determine, if this is an unfavorable result
             ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-            if (pDefined != null && pDefined.get(0).isUntapped())
+            if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer())
                 return false;
 
             return true;

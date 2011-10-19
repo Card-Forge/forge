@@ -5,7 +5,6 @@ Text:no text
 PT:2/2
 K:First Strike
 K:Provoke
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_tracker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/17.jpg

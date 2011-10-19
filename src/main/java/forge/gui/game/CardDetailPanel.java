@@ -340,6 +340,12 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             if (area.length() != 0) area.append("\n");
             area.append("This card can't be cast.");
         }
+        
+        //must block
+        if (!card.getMustBlockCards().isEmpty()) {
+            if (area.length() != 0) area.append("\n");
+            area.append("Must block an attacker");
+        }
 
         if (card.hasAttachedCardsByMindsDesire()) {
             if (area.length() != 0) area.append("\n");

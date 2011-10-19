@@ -285,11 +285,11 @@ public class CombatUtil {
         attackersWithLure = attackersWithLure.getKeyword("All creatures able to block CARDNAME do so.");
 
         for (Card attacker : attackersWithLure) {
-            if (canBlock(blocker, combat) && canBlock(attacker, blocker)) return true;
+            if (canBeBlocked(attacker, combat) && canBlock(attacker, blocker)) return true;
         }
         
         for (Card attacker : blocker.getMustBlockCards()) {
-            if (canBlock(blocker, combat) && canBlock(attacker, blocker)) return true;
+            if (canBeBlocked(attacker, combat) && canBlock(attacker, blocker)) return true;
         }
 
         return false;

@@ -874,7 +874,7 @@ public final class AbilityFactory_Combat {
                 if (blocker == null)
                     return false;
                 abTgt.addTarget(CardFactoryUtil.AI_getBestCreature(list));
-                chance = false; //TODO:change this to true, once the human input takes mustblocks into account
+                chance = true; //TODO:change this to true, once the human input takes mustblocks into account
             }
         } else
             return false;
