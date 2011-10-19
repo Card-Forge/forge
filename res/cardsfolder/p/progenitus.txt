@@ -4,7 +4,7 @@ Types:Legendary Creature Hydra Avatar
 Text:no text
 PT:10/10
 K:Protection from everything
-K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/progenitus.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/121.jpg

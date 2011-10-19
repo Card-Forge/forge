@@ -5,7 +5,7 @@ Text:no text
 PT:11/11
 K:Trample
 K:Indestructible
-K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card48158.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/208.jpg
