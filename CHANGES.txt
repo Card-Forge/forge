@@ -42,10 +42,28 @@ Fixes/Features:
 - First steps towards an AI for AF MustBlock.
 - Fixed Ancestral Knowledge.
 - Fixed Barrel Down Sokenzan.
-Corrected some scripts etbCounters->etbCounter.
+- Corrected some scripts etbCounters->etbCounter.
 - Added ThisTurnCast and ThisTurnNotCast to special conditions. See Hotheaded Giant for example.
 - Converted Blizzard to script.
 - Little script fix and added an AI SVar.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Fixed Angel of Flight Alabaster not having flying.
+- Fixed Wheel of Fate's cost.
+- Added Epic keyword.
+- Removed remnants of my first attempt at Epic.
+- Oracle and Setinfo for Neverending Torment.
+- Fixed SetInfo on Myr Battlesphere.
+- Added the option "OnlySorcerySpeed" to CantBeCast.
+- Fixed cost of Living Terrain.
+- Included mustBlockCard into the existing structures. Renamed canBlockAttackerWithLure to mustBlockAnAttacker.
+- Little correction for last commit. AF MustAttack should be ready for AI use. Will be enabled after testing.
+- Fixed Veteran Explorer.
+- Added SVar:RemAIDeck:True to Ivy Elemental.
+- Fixed name of AEther Storm.
+- A little note is added to creatures that have to block an attacker (in case the player forgot who was targeted with provoke).
+- Finished the basic trigger AI of AF MustBlock.
+- Removed RemAIDeck SVar from some of the Provoke cards.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
@@ -62,7 +80,7 @@ Steel Golem
 Parallel Lives
 Silence
 Grand Abolisher
-Aether Storm
+AEther Storm
 Llawan, Cephalid Empress
 Dwarven Recruiter
 Krosan Vorine
@@ -72,6 +90,18 @@ Goblin Cohort
 Hotheaded Giant
 Mogg Conscripts
 Soul Reap
+Endless Swarm
+Enduring Ideal
+Eternal Dominion
+Neverending Torment
+City of Solitude
+Dosan the Falling Leaf
+Teferi, Mage of Zhalfir
+Skyshroud Condor
+Talara's Battalion
+Arcane Laboratory
+Rule of Law
+Alpha Status
 
 
 end
