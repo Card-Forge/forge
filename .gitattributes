@@ -8420,6 +8420,7 @@ res/cardsfolder/t/touch_of_brilliance.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_darkness.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_death.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_invisibility.txt svneol=native#text/plain
+res/cardsfolder/t/touch_of_vitae.txt -text svneol=unset#text/plain
 res/cardsfolder/t/touchstone.txt svneol=native#text/plain
 res/cardsfolder/t/tower_drake.txt svneol=native#text/plain
 res/cardsfolder/t/tower_gargoyle.txt svneol=native#text/plain

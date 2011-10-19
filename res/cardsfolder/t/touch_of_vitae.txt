@@ -1,0 +1,11 @@
+Name:Touch of Vitae
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gains haste and "0: Untap this creature. Activate this ability only once." Draw a card at the beginning of the next turn's upkeep.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ ABUntap | SubAbility$ DBDraw
+SVar:ABUntap:AB$ Untap | Cost$ 0 | Defined$ Self | ActivationLimit$ 1 | SpellDescription$ Untap this creature.  Activate this ability only once.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_vitae.jpg
+End
