@@ -1,4 +1,4 @@
-Name:Aether Storm
+Name:AEther Storm
 ManaCost:3 U
 Types:Enchantment
 Text:no text
