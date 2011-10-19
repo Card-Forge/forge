@@ -860,7 +860,7 @@ public final class AbilityFactory_Combat {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    if (!CombatUtil.canBlock(source, c, AllZone.getCombat()))
+                    if (!CombatUtil.canBlock(source, c))
                         return false;
                     if (CombatUtil.canDestroyAttacker(source, c, AllZone.getCombat(), false))
                         return false;
