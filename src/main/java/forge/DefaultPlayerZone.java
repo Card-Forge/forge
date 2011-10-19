@@ -62,21 +62,6 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
             c.getOwner().shuffle();
             return;
         }
-        //slight difference from above I guess, the card gets put into the grave first, then shuffled into library.
-        //key is that this would trigger abilities that trigger on cards hitting the graveyard
-        else if (is(Zone.Graveyard)
-                && c.hasKeyword("When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library."))
-        {
-            PlayerZone lib = c.getOwner().getZone(Constant.Zone.Library);
-            PlayerZone grave = c.getOwner().getZone(Constant.Zone.Graveyard);
-
-            grave.addOnce(c);
-            grave.remove(c);
-            lib.add(c);
-            c.getOwner().shuffle();
-            return;
-        }
-
 
         if (is(Zone.Graveyard)
                 && c.hasKeyword("When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.")) {
@@ -98,35 +83,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
             return;
         }
 
-
         c.addObserver(this);
 
         c.setTurnInZone(AllZone.getPhase().getTurn());
-
-        cards.add((Card) c);
-        update();
-    }
-
-    //hack... use for adding Dread / Serra Avenger to grave
-
-    /**
-     *
-     * @param o a {@link java.lang.Object} object.
-     */
-    public final void addOnce(final Object o) {
-        Card c = (Card) o;
-
-        //Immutable cards are usually emblems,effects and the mana pool and we don't want to log those.
-        if (!c.isImmutable()) {
-            cardsAddedThisTurn.add(c);
-            if (AllZone.getZoneOf(c) != null) {
-                cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
-            } else {
-                cardsAddedThisTurnSource.add(null);
-            }
-        }
-
-        c.addObserver(this);
 
         cards.add((Card) c);
         update();

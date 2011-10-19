@@ -46,13 +46,6 @@ interface IPlayerZone {
     void add(Card c, int index);
 
     /**
-     * <p>addOnce.</p>
-     *
-     * @param o a {@link java.lang.Object} object.
-     */
-    void addOnce(Object o);
-
-    /**
      * <p>get.</p>
      *
      * @param index a int.
