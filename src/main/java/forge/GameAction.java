@@ -736,7 +736,8 @@ public class GameAction {
                 c = it.next();
 
                 if (c.isEquipped()) {
-                    for (Card equipment : c.getEquippedBy()) {
+                    CardList equipments = new CardList(c.getEquippedBy()); 
+                    for (Card equipment : equipments) {
                         if (!AllZoneUtil.isCardInPlay(equipment)) {
                             equipment.unEquipCard(c);
                             checkAgain = true;
