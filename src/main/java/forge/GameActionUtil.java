@@ -2079,7 +2079,6 @@ public final class GameActionUtil {
         commands.put("Alpha_Status", Alpha_Status);
         commands.put("Coat_of_Arms", Coat_of_Arms);
         commands.put("Elspeth_Emblem", Elspeth_Emblem);
-        commands.put("Gaddock_Teeg", Gaddock_Teeg);
         commands.put("Homarid", Homarid);
 
         commands.put("Koth_Emblem", Koth_Emblem);
