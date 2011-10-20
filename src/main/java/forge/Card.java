@@ -5152,6 +5152,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!isToken()) return false;
         } else if (Property.startsWith("nonToken")) {
             if (isToken()) return false;
+        } else if (Property.startsWith("hasXCost")) {
+            if (getSpellAbility().length > 0)
+                if (!getSpellAbility()[0].isXCost())
+                    return false;
+
         } else if (Property.startsWith("power") ||     // 8/10
                 Property.startsWith("toughness") ||
                 Property.startsWith("cmc")) {

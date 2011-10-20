@@ -205,7 +205,6 @@ public class StaticEffects {
         
         cardToEffectsList.put("Alpha Status", new String[]{"Alpha_Status"});
         cardToEffectsList.put("Coat of Arms", new String[]{"Coat_of_Arms"});
-        cardToEffectsList.put("Gaddock Teeg", new String[]{"Gaddock_Teeg"});
 
         cardToEffectsList.put("Homarid", new String[]{"Homarid"});
         cardToEffectsList.put("Liu Bei, Lord of Shu", new String[]{"Liu_Bei"});

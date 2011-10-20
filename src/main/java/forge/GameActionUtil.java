@@ -2044,59 +2044,6 @@ public final class GameActionUtil {
         } // execute()
     }; // Muraganda_Petroglyphs
 
-    /** Constant <code>Gaddock_Teeg</code>. */
-    public static Command Gaddock_Teeg = new Command() {
-        private static final long serialVersionUID = -479252814191086571L;
-        CardList gloriousAnthemList = new CardList();
-
-        public void execute() {
-            CardList list = gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                //c.removeIntrinsicKeyword("This card can't be cast");
-                c.setUnCastable(false);
-            }
-
-            list.clear();
-
-            CardList cl = AllZoneUtil.getCardsIn(Zone.Battlefield, "Gaddock Teeg");
-
-            for (int i = 0; i < cl.size(); i++) {
-                CardList spells = new CardList();
-                spells.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard));
-                spells.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Hand));
-                spells.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
-                spells.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard));
-
-                spells = spells.filter(new CardListFilter() {
-                    public boolean addCard(final Card c) {
-
-                        boolean isXNonCreature = false;
-                        if (c.getSpellAbility().length > 0) {
-                            if (c.getSpellAbility()[0].isXCost()) {
-                                isXNonCreature = true;
-                            }
-                        }
-
-                        return !c.isLand()
-                                && !c.isCreature()
-                                && (CardUtil.getConvertedManaCost(c.getManaCost()) >= 4 || isXNonCreature);
-                    }
-                });
-
-                for (int j = 0; j < spells.size(); j++) {
-                    c = spells.get(j);
-                    if (!c.isLand()) {
-                        c.setUnCastable(true);
-                        gloriousAnthemList.add(c);
-                    }
-                } // for inner
-            } // for outer
-        } // execute()
-    }; //
-
     // returns all PlayerZones that has at least 1 Glorious Anthem
     // if Computer has 2 Glorious Anthems, AllZone.getComputerPlay() will be
     // returned twice
