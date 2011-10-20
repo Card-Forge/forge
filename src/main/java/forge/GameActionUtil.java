@@ -599,23 +599,6 @@ public final class GameActionUtil {
             return;
         }
 
-        if (affected.getName().equals("Stuffy Doll")) {
-            final Player opponent = affected.getOwner().getOpponent();
-            final int stuffyDamage = damage;
-            SpellAbility ability = new Ability(affected, "0") {
-                @Override
-                public void resolve() {
-                    opponent.addDamage(stuffyDamage, affected);
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(affected.getName() + " - Deals ").append(stuffyDamage).append(" damage to ").append(opponent);
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        }
-
         if (affected.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
             Ability ability2 = new Ability(affected, "0") {
                 @Override

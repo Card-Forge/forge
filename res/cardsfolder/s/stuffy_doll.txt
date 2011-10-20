@@ -1,10 +1,13 @@
 Name:Stuffy Doll
 ManaCost:5
 Types:Artifact Creature Construct
-Text:Whenever damage is dealt to Stuffy Doll, it deals that much damage to your opponent.
+Text:no text
 PT:0/1
 K:Indestructible
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to itself.
+T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever damage is dealt to CARDNAME, it deals that much damage to your opponent.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ Opponent
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/264.jpg
