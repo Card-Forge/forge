@@ -49,9 +49,6 @@ public final class GameActionUtil {
 
         playCard_Cascade(c);
         playCard_Ripple(c);
-
-        playCard_Venser_Emblem(c);
-
     }
 
     /**
@@ -281,84 +278,6 @@ public final class GameActionUtil {
         };
         ripple.execute();
     } //playCard_Ripple()
-
-    /**
-     * <p>playCard_Venser_Emblem.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     */
-    public static void playCard_Venser_Emblem(final Card c) {
-        final Player controller = c.getController();
-
-        CardList list = controller.getCardsIn(Zone.Battlefield);
-
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(final Card crd) {
-                return crd.hasKeyword("Whenever you cast a spell, exile target permanent.");
-            }
-        });
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-            final SpellAbility ability = new Ability(card, "0") {
-                public void resolve() {
-                    Card target = getTargetCard();
-                    if (CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target)) {
-                        AllZone.getGameAction().exile(target);
-                    }
-                }
-
-                public void chooseTargetAI() {
-                    CardList humanList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                    CardList compList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-
-                    CardListFilter filter = new CardListFilter() {
-                        public boolean addCard(final Card c) {
-                            return CardFactoryUtil.canTarget(card, c);
-                        }
-                    };
-
-                    humanList = humanList.filter(filter);
-                    compList = compList.filter(filter);
-
-                    if (humanList.size() > 0) {
-                        CardListUtil.sortCMC(humanList);
-                        setTargetCard(humanList.get(0));
-                    } else if (compList.size() > 0) {
-                        CardListUtil.sortCMC(compList);
-                        compList.reverse();
-                        setTargetCard(compList.get(0));
-                    }
-
-                }
-            };
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -7620283169787412409L;
-
-                @Override
-                public void showMessage() {
-                    CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(final Card c) {
-                            return c.isPermanent() && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list,
-                            "Select target permanent to Exile", true, false));
-                } //showMessage()
-            }; //Input
-
-            ability.setBeforePayMana(runtime);
-            if (controller.isHuman()) {
-                AllZone.getGameAction().playSpellAbility(ability);
-            } else {
-                ability.chooseTargetAI();
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-            }
-        }
-    }
 
     /**
      * <p>payManaDuringAbilityResolve.</p>
