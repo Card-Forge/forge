@@ -1,0 +1,15 @@
+Name:Gaze of the Gorgon
+ManaCost:3 BG
+Types:Instant
+Text:no text
+A:SP$ Regenerate | Cost$ 3 BG | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAnimate | SpellDescription$ Regenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigBlocker,TrigAttacker | sVars$ DelTrigAttacker,DelTrigBlocker,TrigDestroyAttacker,TrigDestroyBlocker | SpellDescription$ Regenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
+SVar:TrigBlocker:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:TrigAttacker:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigAttacker | Secondary$ True | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigDestroyBlocker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:DelTrigAttacker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigDestroyAttacker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:TrigDestroyAttacker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredAttacker
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_the_gorgon.jpg
+End

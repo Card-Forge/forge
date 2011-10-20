@@ -3057,6 +3057,7 @@ res/cardsfolder/g/gavony_township.txt -text
 res/cardsfolder/g/gaze_of_adamaro.txt svneol=native#text/plain
 res/cardsfolder/g/gaze_of_justice.txt svneol=native#text/plain
 res/cardsfolder/g/gaze_of_pain.txt svneol=native#text/plain
+res/cardsfolder/g/gaze_of_the_gorgon.txt -text svneol=unset#text/plain
 res/cardsfolder/g/geist_honored_monk.txt -text
 res/cardsfolder/g/geist_of_saint_traft.txt -text
 res/cardsfolder/g/geistcatchers_rig.txt -text
@@ -8771,6 +8772,7 @@ res/cardsfolder/v/vengeful_firebrand.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_pharaoh.txt svneol=native#text/plain
 res/cardsfolder/v/vengevine.txt svneol=native#text/plain
 res/cardsfolder/v/venom.txt -text
+res/cardsfolder/v/venomous_breath.txt -text svneol=unset#text/plain
 res/cardsfolder/v/venomous_dragonfly.txt svneol=native#text/plain
 res/cardsfolder/v/venomous_fangs.txt -text
 res/cardsfolder/v/venomous_vines.txt svneol=native#text/plain

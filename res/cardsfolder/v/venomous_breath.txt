@@ -1,0 +1,14 @@
+Name:Venomous Breath
+ManaCost:3 G
+Types:Instant
+Text:no text
+A:SP$ Animate | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigBlocker,TrigAttacker | sVars$ DelTrigAttacker,DelTrigBlocker,TrigDestroyAttacker,TrigDestroyBlocker | SpellDescription$ Choose target creature. At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:TrigBlocker:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:TrigAttacker:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigAttacker | Secondary$ True | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigDestroyBlocker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:DelTrigAttacker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigDestroyAttacker | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:TrigDestroyAttacker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredAttacker
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_breath.jpg
+End
