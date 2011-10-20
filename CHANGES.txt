@@ -66,6 +66,16 @@ Fixes/Features:
 - Removed RemAIDeck SVar from some of the Provoke cards.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Removed the keyword "When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library."
+- Fixed the wording of the keyword: "If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.".
+- Removed the keyword "When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library." and converted the abilities to triggered abilities.
+- Fixed issue 463.
+- Fixed a bug caused by the strange "equals" function of mana abilities (fixes Joiner Adept leaving the battlefield).
+- Added the property NotEnchantedBy to fix Bravado.
+- Fixed Kjeldoran Frostbeast.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -102,6 +112,9 @@ Talara's Battalion
 Arcane Laboratory
 Rule of Law
 Alpha Status
+Giant Ambush Beetle
+Orcish Squatters
+Touch of Vitae
 
 
 end
