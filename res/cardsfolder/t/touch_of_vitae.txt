@@ -9,4 +9,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_vitae.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/159.jpg
+Oracle:Until end of turn, target creature gains haste and "{0}: Untap this creature. Activate this ability only once."\nDraw a card at the beginning of the next turn's upkeep.
 End
