@@ -8,4 +8,5 @@ SVar:ABUntap:AB$ Untap | Cost$ 0 | Defined$ Self | ActivationLimit$ 1 | SpellDes
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_vitae.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/159.jpg
 End

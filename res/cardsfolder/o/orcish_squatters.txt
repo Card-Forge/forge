@@ -8,4 +8,6 @@ SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Land.YouDontCtrl | T
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_squatters.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/258.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/211.jpg
 End
