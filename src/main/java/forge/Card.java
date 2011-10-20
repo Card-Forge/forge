@@ -5224,7 +5224,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!isBlocking(source)) return false;
         } else if (Property.startsWith("notblocking")) {
             if (isBlocking()) return false;
-        } else if (Property.startsWith("blocked")) {
+        } else if (Property.equals("blocked")) {
             if (!AllZone.getCombat().isBlocked(this)) return false;
         } else if (Property.startsWith("blockedBySource")) {
             if (!isBlockedBy(source)) return false;

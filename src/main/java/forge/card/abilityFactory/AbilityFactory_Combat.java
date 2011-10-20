@@ -847,8 +847,8 @@ public final class AbilityFactory_Combat {
             return false;
         }
         
-        //only use on creatures that attack
-        if (!source.isAttacking())
+        //only use on creatures that can attack
+        if (!AllZone.getPhase().isBefore(Constant.Phase.Main2))
             return false;
 
         boolean chance = false;
@@ -862,9 +862,9 @@ public final class AbilityFactory_Combat {
                 public boolean addCard(Card c) {
                     if (!CombatUtil.canBlock(source, c))
                         return false;
-                    if (CombatUtil.canDestroyAttacker(source, c, AllZone.getCombat(), false))
+                    if (CombatUtil.canDestroyAttacker(source, c, null, false))
                         return false;
-                    if (!CombatUtil.canDestroyBlocker(c, source, AllZone.getCombat(), false))
+                    if (!CombatUtil.canDestroyBlocker(c, source, null, false))
                         return false;
                     return true;
                 }
