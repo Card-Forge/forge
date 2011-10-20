@@ -1,12 +1,11 @@
 Name:Sword of Light and Shadow
 ManaCost:3
 Types:Artifact Equipment
-Text:Equipped creature gets +2/+2 and has protection from white and from black.\r\n\r\nWhenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
+Text:Equipped creature gets +2/+2 and has protection from white and from black.
 K:eqPump 2:+2/+2/Protection from white & Protection from black
-#Note: This trigger does not work due to some bug in Input where it is getting cleared.  When that's fixed, this trigger should work.
-#T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
-#SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3 | SubAbility$ SVar=DBReturn
-#SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature in your graveyard
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3 | SubAbility$ SVar=DBReturn
+SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature in your graveyard
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/149.jpg

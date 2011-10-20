@@ -12,7 +12,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.Target;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
 import forge.gui.input.Input_PayManaCost_Ability;
 
@@ -657,68 +656,6 @@ public final class GameActionUtil {
         if (source.hasKeyword("Deathtouch") && affected.isCreature()) {
             AllZone.getGameAction().destroy(affected);
         }
-
-
-    }
-
-    /**
-     * <p>executeSwordOfLightAndShadowEffects.</p>
-     *
-     * @param source a {@link forge.Card} object.
-     */
-    public static void executeSwordOfLightAndShadowEffects(final Card source) {
-        final Card src = source;
-        final Ability ability = new Ability(src, "0") {
-            @Override
-            public void resolve() {
-                Card target = getTargetCard();
-                if (target != null) {
-                    if (src.getController().getZone(Zone.Graveyard).contains(target)) {
-                        PlayerZone hand = src.getController().getZone(Constant.Zone.Hand);
-                        AllZone.getGameAction().moveTo(hand, target);
-                    }
-                }
-
-                src.getController().gainLife(3, source);
-            }
-        }; // ability
-
-        Command res = new Command() {
-            private static final long serialVersionUID = -7433708170033536384L;
-
-            public void execute() {
-                CardList list = src.getController().getCardsIn(Zone.Graveyard);
-                list = list.filter(CardListFilter.creatures);
-
-                if (list.isEmpty()) {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                    return;
-                }
-
-                if (src.getController().isHuman()) {
-                    Object o = GuiUtils.getChoiceOptional("Select target card", list.toArray());
-                    if (o != null) {
-                        ability.setTargetCard((Card) o);
-                        AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                    }
-                } //if
-                else { //computer
-                    Card best = CardFactoryUtil.AI_getBestCreature(list);
-                    ability.setTargetCard(best);
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            } //execute()
-        }; //Command
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Sword of Light and Shadow - You gain 3 life and you may return ");
-        sb.append("up to one target creature card from your graveyard to your hand");
-        ability.setStackDescription(sb.toString());
-
-        res.execute();
     }
 
     //this is for cards like Sengir Vampire
@@ -898,15 +835,6 @@ public final class GameActionUtil {
             }
         }
 
-        if (c.isEquipped()) {
-            for (Card equip : c.getEquippedBy()) {
-                if (equip.getName().equals("Sword of Light and Shadow")) {
-                    GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
-                }
-            }
-        } //isEquipped
-
-
         if (c.getName().equals("Scalpelexis")) {
             playerCombatDamage_Scalpelexis(c);
         } else if (c.getName().equals("Spawnwrithe")) {
@@ -916,9 +844,6 @@ public final class GameActionUtil {
         } else if (c.isEnchantedBy("Celestial Mantle")) {
             execute_Celestial_Mantle(c);
         }
-
-        //Unused variable
-        //c.setDealtCombatDmgToOppThisTurn(true);
 
     } //executeCombatDamageToPlayerEffects
 
