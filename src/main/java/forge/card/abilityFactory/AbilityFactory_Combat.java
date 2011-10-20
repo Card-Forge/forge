@@ -839,6 +839,7 @@ public final class AbilityFactory_Combat {
 
     private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
+        HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         Target abTgt = sa.getTarget();
         
@@ -850,6 +851,20 @@ public final class AbilityFactory_Combat {
         //only use on creatures that can attack
         if (!AllZone.getPhase().isBefore(Constant.Phase.Main2))
             return false;
+        
+        Card attacker = null;
+        if (params.containsKey("DefinedAttacker")) {
+            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"), sa);
+            if (cards.isEmpty())
+                return false;
+            
+            attacker = cards.get(0);
+        }
+        
+        if (attacker == null)
+            attacker = source;
+        
+        final Card definedAttacker = attacker; 
 
         boolean chance = false;
 
@@ -860,11 +875,11 @@ public final class AbilityFactory_Combat {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    if (!CombatUtil.canBlock(source, c))
+                    if (!CombatUtil.canBlock(definedAttacker, c))
                         return false;
-                    if (CombatUtil.canDestroyAttacker(source, c, null, false))
+                    if (CombatUtil.canDestroyAttacker(definedAttacker, c, null, false))
                         return false;
-                    if (!CombatUtil.canDestroyBlocker(c, source, null, false))
+                    if (!CombatUtil.canDestroyBlocker(c, definedAttacker, null, false))
                         return false;
                     return true;
                 }
