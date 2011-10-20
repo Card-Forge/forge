@@ -6285,6 +6285,7 @@ res/cardsfolder/r/ramosian_revivalist.txt svneol=native#text/plain
 res/cardsfolder/r/ramosian_sergeant.txt svneol=native#text/plain
 res/cardsfolder/r/ramosian_sky_marshal.txt svneol=native#text/plain
 res/cardsfolder/r/rampaging_baloths.txt svneol=native#text/plain
+res/cardsfolder/r/rampant_elephant.txt -text
 res/cardsfolder/r/rampant_growth.txt svneol=native#text/plain
 res/cardsfolder/r/rampart_crawler.txt svneol=native#text/plain
 res/cardsfolder/r/ramses_overdark.txt svneol=native#text/plain
@@ -8540,6 +8541,7 @@ res/cardsfolder/t/troublesome_spirit.txt svneol=native#text/plain
 res/cardsfolder/t/true_believer.txt -text
 res/cardsfolder/t/true_conviction.txt svneol=native#text/plain
 res/cardsfolder/t/trumpet_blast.txt svneol=native#text/plain
+res/cardsfolder/t/trumpeting_armodon.txt -text
 res/cardsfolder/t/trusted_advisor.txt svneol=native#text/plain
 res/cardsfolder/t/trusty_machete.txt svneol=native#text/plain
 res/cardsfolder/t/trygon_predator.txt svneol=native#text/plain
