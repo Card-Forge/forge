@@ -3211,14 +3211,23 @@ public class CardFactoryUtil {
         }
         
         // Count$ThisTurnCast <Valid>
-        if(sq[0].contains("ThisTurnCast")) {
+        // Count$LastTurnCast <Valid>
+        if(sq[0].contains("ThisTurnCast") || sq[0].contains("LastTurnCast")) {
+            
             String[] workingCopy = l[0].split(" ");
             String validFilter = workingCopy[1];
             
-            CardList res = CardUtil.getThisTurnCast(validFilter, c);
+            CardList res;
+            
+            if(workingCopy[0].contains("This")) {
+                res = CardUtil.getThisTurnCast(validFilter, c);
+            }
+            else {
+                res = CardUtil.getLastTurnCast(validFilter, c);
+            }
+            
             
             int ret = doXMath(res.size(), m, c);
-            System.out.println("Requesting ThisTurn Cast \"" + validFilter + "\", returning " + ret);
             return ret;
         }
 

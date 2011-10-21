@@ -457,6 +457,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     private Player handleNextTurn() {
         Player nextTurn = extraTurns.isEmpty() ? getPlayerTurn().getOpponent() : extraTurns.pop();
 
+        AllZone.getStack().setCardsCastLastTurn();
         AllZone.getStack().clearCardsCastThisTurn();
         AllZone.resetZoneMoveTracking();
         AllZone.getComputerPlayer().resetProwl();

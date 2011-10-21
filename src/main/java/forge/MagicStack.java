@@ -42,6 +42,7 @@ public class MagicStack extends MyObservable {
     private int splitSecondOnStack = 0;
     
     private CardList thisTurnCast = new CardList();
+    private CardList lastTurnCast = new CardList();
 
     /**
      * <p>isFrozen.</p>
@@ -1219,11 +1220,27 @@ public class MagicStack extends MyObservable {
     public final CardList getCardsCastThisTurn() {
         return thisTurnCast;
     }
-    
+
     /**
      * clearCardsCastThisTurn.
      */
-    public void clearCardsCastThisTurn() {
+    public final void clearCardsCastThisTurn() {
         thisTurnCast.clear();
+    }
+    
+    /**
+     * 
+     * setCardsCastLastTurn.
+     */
+    public final void setCardsCastLastTurn() {
+        lastTurnCast = new CardList(thisTurnCast);
+    }
+    
+    /**
+     * Accessor for the field lastTurnCast.
+     * @return a CardList.
+     */
+    public final CardList getCardsCastLastTurn() {
+        return lastTurnCast;
     }
 }

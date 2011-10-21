@@ -711,6 +711,23 @@ public final class CardUtil {
         
         return res;
     }
+    
+    /**
+     * getLastTurnCast.
+     * 
+     * @param valid a String object
+     * @param src a Card object
+     * @return a CardList that matches the given criteria
+     */
+    public static CardList getLastTurnCast(final String valid, final Card src) {
+        CardList res = new CardList();
+        
+        res.addAll(AllZone.getStack().getCardsCastLastTurn());
+        
+        res = res.getValidCards(valid, src.getController(), src);
+        
+        return res;
+    }
 
     /**
      * getLKICopy.
