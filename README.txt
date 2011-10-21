@@ -1,41 +1,3 @@
-Picture location info:
-
-The quest opponent icons jpg picture files go into your /res/pics/icons folder. The quest pet icons jpg picture files go into your /res/pics/icons folder. The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
-
-Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
-
-
-Launching Forge and Memory Issues:
-
-In the past, some people noticed java heap space errors and lengthy pauses. The memory requirements for Forge have increased over time. The default setting on your computer for the java heap space may not be enough to prevent the above problems.
-
-The technically proficient can launch the forge jar with an argument from the CLI. The argument "-Xmx512m" may work for computers with 1 Gig of memory. Computers with 2 Gigs or more of memory should be able to use "-Xmx1024m" as an argument.
-
-We have created several scripts that will launch the Forge jar with "-Xmx1024m" as an argument. People using Windows OS should double click the "forge.exe" file. People using one of the other *nix OS should double click the "forge.sh" file. People using Apple's Mac OS X should download the Mac version of Forge and then double click the "forge.app" application.
-
-The script file must be located in the same folder as the Forge jar file and the Forge jar file name can not be changed. Otherwise, the scripts will not work.
-
-If you have a low end machine you may find that the scripts above will prevent java heap space errors but will find that Forge still runs very slowly at times.
-
-In this case you can try the following. Remove the background jpg picture from /res/images/ui/ folder. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
-
-
-Java Issues:
-
-Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
-
-
-Card Picture Issues:
-
-The server which contained the high quality card pictures is now off line and these high quality card pictures are no longer available as a download from within the forge application. We apologize, but the current dev team do not maintain this server and this matter is out of our control.
-
-Some people are choosing to re-download all of the low quality card and card set pictures when they install the next version of forge. This consumes large amounts of bandwidth needlessly. Please be careful!
-
-When you install the new version of Forge, find the forge/res/pics/ folder. Either move it or copy and paste the pics folder over to the recently installed new version of forge. This way you will only have to download the pictures for the new cards.
-
-This should save enough bandwidth that everyone will be able to download the new set pictures from the cardforge server. We do appreciate your efforts to save bandwidth. Thank you.
-
-
 Installation and Updating to a newer version Instructions:
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
@@ -75,6 +37,46 @@ You can move a copy of your pictures and decks over to the "Forge.app" applicati
 /Contents/Resources/Java/res/
 
 Your decks can be placed in the decks folder, your pics can be placed in the pics folder, etc.
+
+
+Picture location info:
+
+The quest opponent icons jpg picture files go into your /res/pics/icons folder. The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
+
+The quest pets archive contains two subdirectories named "icons" and "tokens". Place the files located inside of the /icons/ folder into the /res/pics/icons/ folder. Place the files located inside of the /tokens/ folder into the /res/pics/tokens/ folder.
+
+Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
+
+
+Launching Forge and Memory Issues:
+
+In the past, some people noticed java heap space errors and lengthy pauses. The memory requirements for Forge have increased over time. The default setting on your computer for the java heap space may not be enough to prevent the above problems.
+
+The technically proficient can launch the forge jar with an argument from the CLI. The argument "-Xmx512m" may work for computers with 1 Gig of memory. Computers with 2 Gigs or more of memory should be able to use "-Xmx1024m" as an argument.
+
+We have created several scripts that will launch the Forge jar with "-Xmx1024m" as an argument. People using Windows OS should double click the "forge.exe" file. People using one of the other *nix OS should double click the "forge.sh" file. People using Apple's Mac OS X should download the Mac version of Forge and then double click the "forge.app" application.
+
+The script file must be located in the same folder as the Forge jar file and the Forge jar file name can not be changed. Otherwise, the scripts will not work.
+
+If you have a low end machine you may find that the scripts above will prevent java heap space errors but will find that Forge still runs very slowly at times.
+
+In this case you can try the following. Remove the background jpg picture from /res/images/ui/ folder. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
+
+
+Java Issues:
+
+Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
+
+
+Card Picture Issues:
+
+The server which contained the high quality card pictures is now off line and these high quality card pictures are no longer available as a download from within the forge application. We apologize, but the current dev team do not maintain this server and this matter is out of our control.
+
+Some people are choosing to re-download all of the low quality card and card set pictures when they install the next version of forge. This consumes large amounts of bandwidth needlessly. Please be careful!
+
+When you install the new version of Forge, find the forge/res/pics/ folder. Either move it or copy and paste the pics folder over to the recently installed new version of forge. This way you will only have to download the pictures for the new cards.
+
+This should save enough bandwidth that everyone will be able to download the new set pictures from the cardforge server. We do appreciate your efforts to save bandwidth. Thank you.
 
 
 Reporting Bugs:
