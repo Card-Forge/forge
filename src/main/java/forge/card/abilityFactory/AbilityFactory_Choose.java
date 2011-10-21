@@ -1286,11 +1286,16 @@ public class AbilityFactory_Choose {
                 String name = null;
                 while (!ok) {
                     if (sa.getActivatingPlayer().isHuman()) {
-                        String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card";
+                        String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card. (Case sensitive)";
                         name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
                         if (!valid.equals("Card") && !(null == name)) {
+                            try {
                             Card temp = AllZone.getCardFactory().getCard(name, p);
                             ok = temp.isValid(valid, host.getController(), host);
+                            }
+                            catch(Exception ignored) {
+                                ok = false;
+                            }
                         }
                         else {
                             ok = true;
