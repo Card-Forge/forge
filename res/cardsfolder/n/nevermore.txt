@@ -1,0 +1,13 @@
+Name:Nevermore
+ManaCost:1 W W
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigName | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, name a nonland card.
+SVar:TrigName:AB$ NameCard | Cost$ 0 | Defined$ You
+S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ The named card can't be cast.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nevermore.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/25.jpg
+Oracle:As Nevermore enters the battlefield, name a nonland card.\nThe named card can't be cast.
+End

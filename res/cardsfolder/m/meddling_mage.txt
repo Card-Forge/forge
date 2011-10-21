@@ -1,8 +1,10 @@
 Name:Meddling Mage
 ManaCost:U W
 Types:Creature Human Wizard
-Text:As Meddling Mage enters the battlefield, name a nonland card.
+Text:no text
 PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigName | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, name a nonland card.
+SVar:TrigName:AB$ NameCard | Cost$ 0 | Defined$ You
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ The named card can't be cast.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

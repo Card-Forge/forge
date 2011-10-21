@@ -1442,60 +1442,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Meddling Mage")) {
-            final String[] input = new String[1];
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if (card.getController().isHuman()) {
-                        input[0] = JOptionPane.showInputDialog(null, "Which card?", "Pick card",
-                                JOptionPane.QUESTION_MESSAGE);
-                        card.setNamedCard(input[0]);
-                    } else {
-                        String s = "Ancestral Recall";
-
-                        CardList list = new CardList();
-                        list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Hand));
-                        list.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Library));
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(final Card c) {
-                                return !c.isLand() && !c.isUnCastable();
-                            }
-                        });
-
-                        if (list.size() > 0) {
-                            Predicate<CardPrinted> isRare = CardPrinted.Predicates.Presets.isRareOrMythic;
-                            List<CardPrinted> rares = isRare.select(list, CardDb.fnGetCardPrintedByForgeCard, CardDb.fnGetCardPrintedByForgeCard);
-
-                            if (!rares.isEmpty()) {
-                                s = Predicate.getTrue(CardPrinted.class).random(rares).getName();
-                            } else {
-                                Card c = list.get(CardUtil.getRandomIndex(list));
-                                //System.out.println(c + " - " + c.getRarity());
-                                s = c.getName();
-                            }
-                        }
-
-                        card.setNamedCard(s);
-
-                    }
-
-                }
-            };
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 8485080996453793968L;
-
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            };//Command
-            ability.setStackDescription("As Meddling Mage enters the battlefield, name a nonland card.");
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override

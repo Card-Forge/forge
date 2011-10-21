@@ -5,6 +5,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -1305,7 +1306,14 @@ public class AbilityFactory_Choose {
                         }
 
                     } else {
-                        //TODO - not implemented
+                        CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
+                        list = list.filter(new CardListFilter() {
+                            public boolean addCard(final Card c) {
+                                return !c.isLand();
+                            }
+                        });
+                        if(!list.isEmpty())
+                            host.setNamedCard(list.get(0).getName());
                     }
                 }
             }
