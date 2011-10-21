@@ -3,8 +3,6 @@ package forge;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
 
 import java.util.HashMap;
 import java.util.Observer;
