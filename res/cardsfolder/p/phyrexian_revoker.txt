@@ -1,0 +1,12 @@
+Name:Phyrexian Revoker
+ManaCost:2
+Types:Artifact Creature Horror
+Text:no text
+PT:2/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigName | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, name a nonland card.
+SVar:TrigName:AB$ NameCard | Cost$ 0 | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland
+S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | Description$ Activated abilities of sources with the chosen name can't be activated.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_revoker.jpg
+End

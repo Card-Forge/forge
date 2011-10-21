@@ -5904,6 +5904,7 @@ res/cardsfolder/p/phyrexian_rager.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_reaper.txt -text
 res/cardsfolder/p/phyrexian_rebirth.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_reclamation.txt svneol=native#text/plain
+res/cardsfolder/p/phyrexian_revoker.txt -text
 res/cardsfolder/p/phyrexian_scuta.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_slayer.txt -text
 res/cardsfolder/p/phyrexian_snowcrusher.txt svneol=native#text/plain
