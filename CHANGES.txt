@@ -65,6 +65,19 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Fixed the property "blockedBySource".
+- Fine tuning of the mustBlock trigger AI.
+- Tokens with different P/T will no longer stack.
+- Updated the changes.txt and the readme.txt files.
+- Converted Gaddock Teeg to script.
+- cleanup for last commit.
+- Removed code for Venser's ultimate ability (which is scripted).
+- Converted Stuffy Doll to script (note that the choice of player is still not implemented).
+- Converted Sword of Light and Shadow to script (everything was done already).
+- clean up a few java warnings
+- Fixed AF_NameCard crashing if the named card didn't exist or wasn't implemented. Now it will simply ask again. It is,sadly, still case sensitive.
+- Added LastTurnCast in addition to ThisTurnCast.
+- Added the recent commit logs to changes.txt. Preparing for the nightly build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -104,6 +117,9 @@ Alpha Status
 Giant Ambush Beetle
 Orcish Squatters
 Touch of Vitae
+Grappling Hook
+Rampant Elephant
+Trumpeting Armodon
 
 
 end
