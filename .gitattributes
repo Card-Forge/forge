@@ -10090,6 +10090,7 @@ res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/juzamjedi.zsealed -text
 res/setInfoScript.py svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
+res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
 src/main/config/create-dmg -text

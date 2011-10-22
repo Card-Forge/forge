@@ -90,6 +90,8 @@ public interface NewConstants {
     String CARD_PICTURES_OTHER = "card-pictures_other";
     /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
     String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
+    /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
+    String TOKEN_IMAGES = "token-images";
     /** Constant <code>CARDS="cards"</code>. */
     String CARDS = "cards";
     /** Constant <code>CARDSFOLDER="cardsfolder"</code>. */
@@ -156,6 +158,8 @@ public interface NewConstants {
 
         String DECKS = "quest/decks-dir";
         String XMLDATA = "quest/data-xml";
+        
+        String OPPONENTS = "quest/opponent/icons";
     }
 
     /**
