@@ -32,8 +32,6 @@ public interface NewConstants {
     String TOKENS = "tokens";
     /** Constant <code>CARD_PICTURES="card-pictures"</code>. */
     String CARD_PICTURES = "card-pictures";
-    /** Constant <code>CARD_PICTURES_TOKEN_LQ="card-pictures_token_lq"</code>. */
-    String CARD_PICTURES_TOKEN_LQ = "card-pictures_token_lq";
     /** Constant <code>CARD_PICTURES_A="card-pictures_a"</code>. */
     String CARD_PICTURES_A = "card-pictures_a";
     /** Constant <code>CARD_PICTURES_B="card-pictures_b"</code>. */

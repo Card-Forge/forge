@@ -17,7 +17,6 @@ res/blockdata/boosters.txt -text
 res/blockdata/formats.txt -text
 res/blockdata/setdata.txt svneol=native#text/plain
 res/booster-decks -text
-res/card-pictures-token.txt -text
 res/cardTemplateScript.py -text svneol=unset#text/x-python
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
 res/cardsfolder/a/abattoir_ghoul.txt -text

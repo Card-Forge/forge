@@ -26,7 +26,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-//import java.util.StringTokenizer;
+import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 import static javax.swing.JOptionPane.DEFAULT_OPTION;
@@ -123,14 +123,6 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         //Proxy config
         p0.add(addr);
         p0.add(port);
-//        JTextField[] tfs = {addr, port};
-//        String[] labels = {"Address", "Port"};
-//        for(int i = 0; i < labels.length; i++) {
-//            JPanel p1 = new JPanel(new BorderLayout());
-//            p0.add(p1);
-////            p1.add(new JLabel(labels[i]), WEST);
-//            p1.add(tfs[i]);
-//        }
 
         //Start
         final JButton b = new JButton(ForgeProps.getLocalized(BUTTONS.START));
@@ -141,16 +133,13 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                 b.setEnabled(false);
             }
         });
-//        p0.add(b);
 
         p0.add(Box.createVerticalStrut(5));
 
         //Progress
         p0.add(bar);
         bar.setStringPainted(true);
-        //bar.setString(ForgeProps.getLocalized(BAR_BEFORE_START));
         bar.setString(card + "/" + cards.length);
-        //bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card, cards.length));
         Dimension d = bar.getPreferredSize();
         d.width = 300;
         bar.setPreferredSize(d);
@@ -230,8 +219,6 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                     sb.append(String.format(ForgeProps.getLocalized(BAR_CLOSE), card, cards.length));
 
                 bar.setString(sb.toString());
-                //bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), card,
-                //        cards.length));
                 System.out.println(card + "/" + cards.length + " - " + a);
             }
         }
@@ -273,6 +260,10 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         BufferedOutputStream out;
 
         File base = ForgeProps.getFile(IMAGE_BASE);
+        File tokenBase = ForgeProps.getFile(IMAGE_TOKEN);
+        if (!tokenBase.exists()) {
+            tokenBase.mkdirs();
+        }
 
         Random r = MyRandom.random;
 
@@ -283,7 +274,6 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         } catch (Exception ex) {
             ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(),
                     port.getText());
-//            throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
             return;
         }
 
@@ -295,6 +285,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                 try {
                     String url = cards[card].url;
                     String cName;
+                    
                     if (cards[card].name.substring(0, 3).equals("[T]")) {
                         base = ForgeProps.getFile(IMAGE_TOKEN);
                         cName = cards[card].name.substring(3, cards[card].name.length());
@@ -344,7 +335,6 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                     }
                     catch (MalformedURLException mURLe) {
                         System.out.println("Error - possibly missing URL for: " + cards[card].name);
-                        //Log.error("LQ Pictures", "Malformed URL for: "+cards[card].name, mURLe);
                     }
                 } catch (FileNotFoundException fnfe) {
                     System.out.println("Error - the LQ picture for " + cards[card].name + " could not be found on the server. [" + cards[card].url + "] - " + fnfe.getMessage());
@@ -390,11 +380,10 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
      * @return an array of {@link forge.Gui_DownloadSetPictures_LQ.mCard} objects.
      */
     private static mCard[] getNeededCards() {
-        //read all card names and urls
-        //mCard[] cardPlay = readFile(CARD_PICTURES);
-        //mCard[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
+        //read token names and urls
+        mCard[] cardTokenLQ = readFile(TOKEN_IMAGES);
 
-        ArrayList<mCard> CList = new ArrayList<mCard>();
+        ArrayList<mCard> cList = new ArrayList<mCard>();
 
         //File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         String URLBase = "http://cardforge.org/fpics/";
@@ -413,25 +402,32 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                 int artsCnt = c.getCard().getSetInfo(SC3).getCopiesCount();
                 String fn = CardUtil.buildIdealFilename(c.getName(), c.getArtIndex(), artsCnt); 
                 //System.out.println(fn);
-                CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
+                cList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
             }
+        }
+        
+        File file;
+        File base = ForgeProps.getFile(IMAGE_TOKEN);
+        for (int i = 0; i < cardTokenLQ.length; i++) {
+            file = new File(base, cardTokenLQ[i].name.substring(3, cardTokenLQ[i].name.length()));
+            if (!file.exists()) cList.add(cardTokenLQ[i]);
         }
 
         //return all card names and urls that are needed
-        mCard[] out = new mCard[CList.size()];
-        CList.toArray(out);
+        mCard[] out = new mCard[cList.size()];
+        cList.toArray(out);
 
         for (int i = 0; i < out.length; i++) { System.out.println(out[i].name + " " + out[i].url); }
         
         return out;
     }//getNeededCards()
 
-/*    *//**
+    /**
      * <p>readFile.</p>
      *
      * @param ABC a {@link java.lang.String} object.
      * @return an array of {@link forge.Gui_DownloadSetPictures_LQ.mCard} objects.
-     *//*
+     */
     private static mCard[] readFile(String ABC) {
         try {
             FileReader zrc = new FileReader(ForgeProps.getFile(ABC));
@@ -441,7 +437,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
             StringTokenizer tok;
 
             line = in.readLine();
-            while (line != null && (!line.equals(""))) {
+            while (line != null && (!line.equals("")) && !line.startsWith("#")) {
                 tok = new StringTokenizer(line);
                 list.add(new mCard(tok.nextToken(), tok.nextToken(), ""));
 
@@ -457,7 +453,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
             throw new RuntimeException("Gui_DownloadPictures : readFile() error");
         }
     }//readFile()
-*/
+
     private class ProxyHandler implements ChangeListener {
         private int type;
 
