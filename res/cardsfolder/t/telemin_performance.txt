@@ -1,0 +1,12 @@
+Name:Telemin Performance
+ManaCost:3 U U
+Types:Sorcery
+Text:no text
+A:SP$ DigUntil | Cost$ 3 U U | ValidTgts$ Opponent | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Graveyard | RememberFound$ True | SubAbility$ DBControl | SpellDescription$ Target opponent reveals cards from the top of his or her library until he or she reveals a creature card. That player puts all noncreature cards revealed this way into his or her graveyard, then you put the creature card onto the battlefield under your control.
+SVar:DBControl:DB$ GainControl | Defined$ Remembered | NewController$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/telemin_performance.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/35.jpg
+Oracle:Target opponent reveals cards from the top of his or her library until he or she reveals a creature card. That player puts all noncreature cards revealed this way into his or her graveyard, then you put the creature card onto the battlefield under your control.
+End
