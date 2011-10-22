@@ -1,0 +1,13 @@
+Name:Gorilla Titan
+ManaCost:3 G G
+Types:Creature Ape
+text:no text
+PT:4/4
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +4/+4 as long as there are no cards in your graveyard.
+SVar:X:Count$InYourYard
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_titan.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/241.jpg
+Oracle:Trample\nGorilla Titan gets +4/+4 as long as there are no cards in your graveyard.
+End
