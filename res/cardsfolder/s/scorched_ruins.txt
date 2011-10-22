@@ -1,4 +1,5 @@
 Name:Scorched Ruins
+ManaCost:no cost
 Types:Land
 Text:If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 4 | SpellDescription$ Add 4 to your mana pool.
