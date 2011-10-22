@@ -127,11 +127,12 @@ public class BuildInfo {
         String manifestResult;
         String result;
 
-        try {
-            manifestResult = getManifestAttribute("Implementation-Version");
-        } catch (IOException exn) {
-            manifestResult = null; // NOPMD by Braids on 8/12/11 10:21 AM
-        }
+        //try {
+            //manifestResult = getManifestAttribute("Implementation-Version");
+            manifestResult = BuildInfo.class.getPackage().getImplementationVersion();
+        //} catch (IOException exn) {
+        //    manifestResult = null; // NOPMD by Braids on 8/12/11 10:21 AM
+        //}
 
         if (manifestResult == null) {
             result = "SVN";
