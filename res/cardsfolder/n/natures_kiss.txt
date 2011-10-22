@@ -8,6 +8,6 @@ A:AB$ Pump | Cost$ 1 ExileFromGrave<1/Card.TopGraveyard>  | Defined$ Enchanted |
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_kiss.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/79.jpg
-Oracle:Enchant creature\nAt the beginning of each upkeep, if enchanted creature is untapped, tap it.
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/78.jpg
+Oracle:Enchant creature\n{1}, Exile the top card of your graveyard: Enchanted creature gets +1/+1 until end of turn.
 End
