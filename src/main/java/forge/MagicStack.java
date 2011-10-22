@@ -605,19 +605,19 @@ public class MagicStack extends MyObservable {
 
             // Not sure these clauses are necessary. Consider it a precaution
             // for backwards compatibility for hardcoded cards.
-            if (sp.getTargetCard() != null) {
+            else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
 
                 AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
             }
-            if (sp.getTargetList() != null && sp.getTargetList().size() > 0) {
+            else if (sp.getTargetList() != null && sp.getTargetList().size() > 0) {
                 for (Card ctgt : sp.getTargetList()) {
                     runParams.put("Target", ctgt);
 
                     AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
                 }
             }
-            if (sp.getTargetPlayer() != null) {
+            else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
                 AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
