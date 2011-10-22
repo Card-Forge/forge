@@ -61,9 +61,7 @@ class CardFactory_Auras {
     public static Card getCard(final Card card, final String cardName) {
 
         //*************** START *********** START **************************
-        if (cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")
-                || cardName.equals("Spreading Seas")
-                || cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim"))
+        if (cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain"))
         {
 
             final String[] newType = new String[1];
@@ -77,47 +75,36 @@ class CardFactory_Auras {
                     if (!super.canPlayAI()) {
                         return false;
                     }
+                    String[] landTypes = new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"};
+                    HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
+                    CardList humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
 
-                    if (card.getName().equals("Spreading Seas")
-                            || card.getName().equals("Lingering Mirage")
-                            || card.getName().equals("Sea's Claim")
-                            || card.getName().equals("Phantasmal Terrain"))
-                    {
-                        newType[0] = "Island";
-                    } else if (card.getName().equals("Convincing Mirage")
-                            || card.getName().equals("Phantasmal Terrain"))
-                    {
-                        String[] landTypes = new String[]{"Plains", "Island", "Swamp", "Mountain", "Forest"};
-                        HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
-                        CardList humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-
-                        for (int i = 0; i < landTypes.length; i++) {
-                            humanLandCount.put(landTypes[i], 0);
-                        }
-
-                        for (Card c : humanlands) {
-                            for (String singleType : c.getType()) {
-                                if (CardUtil.isABasicLandType(singleType)) {
-                                    humanLandCount.put(singleType, humanLandCount.get(singleType) + 1);
-                                }
-                            }
-                        }
-
-                        int minAt = 0;
-                        int minVal = Integer.MAX_VALUE;
-                        for (int i = 0; i < landTypes.length; i++) {
-                            if (getTargetCard().isType(landTypes[i])) {
-                                continue;
-                            }
-
-                            if (humanLandCount.get(landTypes[i]) < minVal) {
-                                minVal = humanLandCount.get(landTypes[i]);
-                                minAt = i;
-                            }
-                        }
-
-                        newType[0] = landTypes[minAt];
+                    for (int i = 0; i < landTypes.length; i++) {
+                        humanLandCount.put(landTypes[i], 0);
                     }
+
+                    for (Card c : humanlands) {
+                        for (String singleType : c.getType()) {
+                            if (CardUtil.isABasicLandType(singleType)) {
+                                humanLandCount.put(singleType, humanLandCount.get(singleType) + 1);
+                            }
+                        }
+                    }
+
+                    int minAt = 0;
+                    int minVal = Integer.MAX_VALUE;
+                    for (int i = 0; i < landTypes.length; i++) {
+                        if (getTargetCard().isType(landTypes[i])) {
+                            continue;
+                        }
+
+                        if (humanLandCount.get(landTypes[i]) < minVal) {
+                            minVal = humanLandCount.get(landTypes[i]);
+                            minAt = i;
+                        }
+                    }
+
+                    newType[0] = landTypes[minAt];
                     CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                     list = list.getNotType(newType[0]); // Don't enchant lands that already have the type
                     if (list.isEmpty()) {

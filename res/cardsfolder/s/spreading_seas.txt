@@ -1,8 +1,10 @@
 Name:Spreading Seas
 ManaCost:1 U
 Types:Enchantment Aura
-Text:Enchanted land is an Island.
+Text:no text
 K:Enchant land
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is an Island.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
