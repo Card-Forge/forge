@@ -206,7 +206,7 @@ public class BuildInfo {
      */
     public final String toPrettyString() {
         final String rawVersion = getVersion();
-        final String rawBuildID = getBuildID();
+        //final String rawBuildID = getBuildID();
 
         String version;
         if (rawVersion == null) {
@@ -215,14 +215,14 @@ public class BuildInfo {
             version = rawVersion;
         }
 
-        String buildID;
+        /*String buildID;
         if (rawBuildID == null) {
             buildID = "Unknown";
         } else {
             buildID = rawBuildID;
-        }
+        } */
 
-        return "Forge version " + version + ", build ID " + buildID;
+        return "Forge version " + version; //", build ID " + buildID;
     }
 
 }
