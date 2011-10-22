@@ -1,0 +1,16 @@
+Name:Manor Gargoyle
+ManaCost:5
+Types:Artifact Creature Gargoyle
+Text:no text
+PT:4/4
+K:Defender
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is indestructible as long as it has defender.
+SVar:X:Count$Valid Card.Self+withDefender
+A:AB$ Debuff | Cost$ 1 | Keywords$ Defender | Defined$ Self | SubAbility$ DBFlight | SpellDescription$ Until end of turn, CARDNAME loses defender and gains flying.
+SVar:DBFlight:DB$ Pump | Defined$ Self | KW$ Flying
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manor_gargoyle.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/228.jpg
+Oracle:Defender\nManor Gargoyle is indestructible as long as it has defender.\n{1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
+End
