@@ -5350,6 +5350,7 @@ res/cardsfolder/n/naturalize.txt svneol=native#text/plain
 res/cardsfolder/n/natures_chosen.txt svneol=native#text/plain
 res/cardsfolder/n/natures_claim.txt svneol=native#text/plain
 res/cardsfolder/n/natures_cloak.txt svneol=native#text/plain
+res/cardsfolder/n/natures_kiss.txt -text
 res/cardsfolder/n/natures_lore.txt svneol=native#text/plain
 res/cardsfolder/n/natures_resurgence.txt svneol=native#text/plain
 res/cardsfolder/n/natures_revolt.txt svneol=native#text/plain
