@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import java.util.Random;
@@ -466,15 +467,20 @@ public class AbilityFactory_Attach {
 	
    public static Card attachAIChangeTypePreference(final SpellAbility sa, CardList list, boolean mandatory, Card attachSource){
         // AI For Cards like Evil Presence or Spreading Seas
+       
+        String type = "";
+       
+        for (StaticAbility stAb : attachSource.getStaticAbilities()) {
+            HashMap<String, String> params = stAb.getMapParams();
+            if (params.get("Mode").equals("Continuous") && params.containsKey("AddType"))
+                type = params.get("AddType");
+        }
         
-        // A few of these cards are actually good, most of the Animate to Creature ones
-        // One or two of the give basic land types
-        // Maybe require Curse$ on the specific ones and filter the list that way
+        list.getNotType(type);// Filter out Basic Lands that have the same type as the changing type
         
         Card c = CardFactoryUtil.AI_getBest(list);
                 
         // TODO: Port over some of the existing code, but rewrite most of it.
-        // Filter out Basic Lands that have the same type as the changing type
         // Ultimately, these spells need to be used to reduce mana base of a color. So it might be better to choose a Basic over a Nonbasic
         
         if (c == null)

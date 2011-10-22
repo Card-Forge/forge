@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 Text:no text
 K:Enchant land
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is an Island.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seas_claim.jpg

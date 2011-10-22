@@ -116,19 +116,10 @@ class CardFactory_Auras {
 
                 @Override
                 public void resolve() {
-                    if (card.getName().equals("Spreading Seas")
-                            || card.getName().equals("Lingering Mirage")
-                            || card.getName().equals("Sea's Claim"))
-                    {
-                        newType[0] = "Island";
-                    } else if (card.getName().equals("Convincing Mirage")
-                            || card.getName().equals("Phantasmal Terrain"))
-                    {
-                        //Only query player, AI will have decided already.
-                        if (card.getController().isHuman()) {
-                            newType[0] = GuiUtils.getChoice("Select land type.",
-                                    "Plains", "Island", "Swamp", "Mountain", "Forest");
-                        }
+                    //Only query player, AI will have decided already.
+                    if (card.getController().isHuman()) {
+                        newType[0] = GuiUtils.getChoice("Select land type.",
+                                "Plains", "Island", "Swamp", "Mountain", "Forest");
                     }
                     AllZone.getGameAction().moveToPlay(card);
 
