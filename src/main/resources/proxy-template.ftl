@@ -18,11 +18,12 @@
   <img src="${url}" height="${height}" width="${width}" style="margin: 0 ${cardBorder}px ${cardBorder}px 0;">
 </#list>  
 <br>
-  <table title="Spirited Away" style="font-size:10px;" border=1 cellpadding="5" cellspacing="1">
+  <table style="font-size:10px;" border=1 cellpadding="5" cellspacing="1">
   <tr>
-  <td width="211">
-  </td>
-  <td width="211">
+  <td width="${cardlistWidth}">
+  <#list nameList as name>
+  ${name}<br>
+  </#list>  
   </td>
   </tr>
   </table>     

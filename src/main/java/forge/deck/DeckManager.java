@@ -658,13 +658,20 @@ public class DeckManager {
             root.put("title", d.getName());
             List<String> list = new ArrayList<String>();
             for (Card card : d.getMain().toForgeCardList().toArray()) {
-                //System.out.println(card.getSets().get(0).URL);
-                list.add(card.getSets().get(0).URL);
+                //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
+                list.add(card.getSets().get(card.getSets().size() - 1).URL);
+            }
+            List<String> nameList = new ArrayList<String>();
+            for (Card card : d.getMain().toForgeCardList().toArray()) {
+                //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
+                nameList.add(card.getName());
             }
             root.put("urls", list);
             root.put("cardBorder", cardBorder);
             root.put("height", height);
             root.put("width", width);
+            root.put("cardlistWidth", width - 11);
+            root.put("nameList", nameList);
 
             /* Merge data-model with template */
             //StringWriter sw = new StringWriter();
