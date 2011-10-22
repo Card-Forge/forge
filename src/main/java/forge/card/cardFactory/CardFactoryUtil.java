@@ -4832,7 +4832,8 @@ public class CardFactoryUtil {
 
                 SpellAbility_Restriction restriction = new SpellAbility_Restriction();
                 restriction.setRestrictions(mapParams);
-                restriction.setZone(Constant.Zone.Hand);
+                if(!mapParams.containsKey("ActivationZone"))
+                    restriction.setZone(Constant.Zone.Hand);
                 altCostSA.setRestrictions(restriction);
 
                 altCostSA.setDescription(sb.toString());
