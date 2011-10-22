@@ -2,7 +2,7 @@ Name:Devastating Summons
 ManaCost:R
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ ChosenX | TokenToughness$ ChosenX | SpellDescription$ Put two X/X red Elemental creature tokens onto the battlefield.
+A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenName$ Elemental | TokenImage$ R X X Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ ChosenX | TokenToughness$ ChosenX | SpellDescription$ Put two X/X red Elemental creature tokens onto the battlefield.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
