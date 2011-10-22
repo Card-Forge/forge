@@ -5253,6 +5253,7 @@ res/cardsfolder/m/mudbrawler_raiders.txt svneol=native#text/plain
 res/cardsfolder/m/mudbutton_clanger.txt svneol=native#text/plain
 res/cardsfolder/m/mudbutton_torchrunner.txt svneol=native#text/plain
 res/cardsfolder/m/muddle_the_mixture.txt svneol=native#text/plain
+res/cardsfolder/m/mudhole.txt -text
 res/cardsfolder/m/mul_daya_channelers.txt svneol=native#text/plain
 res/cardsfolder/m/mulch.txt svneol=native#text/plain
 res/cardsfolder/m/mulldrifter.txt svneol=native#text/plain
@@ -6220,7 +6221,6 @@ res/cardsfolder/q/quirion_explorer.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_ranger.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/q/qumulox.txt svneol=native#text/plain
-res/cardsfolder/r/mudhole.txt -text
 res/cardsfolder/r/rabble_rouser.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_elephant.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_rats.txt svneol=native#text/plain
@@ -8400,6 +8400,7 @@ res/cardsfolder/t/tolarian_serpent.txt svneol=native#text/plain
 res/cardsfolder/t/tolsimir_wolfblood.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_hex.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_of_urami.txt svneol=native#text/plain
+res/cardsfolder/t/tombfire.txt -text
 res/cardsfolder/t/tombstalker.txt -text
 res/cardsfolder/t/tome_scour.txt svneol=native#text/plain
 res/cardsfolder/t/tonic_peddler.txt svneol=native#text/plain
