@@ -75,9 +75,27 @@ Fixes/Features:
 - Converted Stuffy Doll to script (note that the choice of player is still not implemented).
 - Converted Sword of Light and Shadow to script (everything was done already).
 - clean up a few java warnings
-- Fixed AF_NameCard crashing if the named card didn't exist or wasn't implemented. Now it will simply ask again. It is,sadly, still case sensitive.
+- Fixed AF_NameCard crashing if the named card didn't exist or wasn't implemented. Now it will simply ask again. It is, sadly, still case sensitive.
 - Added LastTurnCast in addition to ThisTurnCast.
 - Added the recent commit logs to changes.txt. Preparing for the nightly build release.
+- Converted Meddling Mage to script.
+- Corrected the script of Brass Herald (he has one static and one triggered etb ability).
+- Updated the readme file.
+- Rebel skin splash without the mockup details.
+- Fixed Celestial Gatekeeper.
+- In-Game downloading Part 1:
+1) add moomarc's revamped token list (pointing to cardforge.org)
+2) readded token image downloading to LQ pic downloads (not Set Pics yet)
+3) add throttling to LQ Pic downloader
+- java warnings cleanup
+- Make getting ImplementationVersion more robust
+- step to making decklist card for proxies
+- Put build number into version number
+- Put build number into version number
+- Version display cleanup
+- Proxy generator creates cardlist. Still needs work.
+- Removed the unused functions getTopCard, getNumberOfMostProminentCreatureType and countBasicLandTypes.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -120,6 +138,20 @@ Touch of Vitae
 Grappling Hook
 Rampant Elephant
 Trumpeting Armodon
+Nevermore
+Voidstone Gargoyle
+Phyrexian Revoker
+Declaration of Naught
+Nature's Kiss
+Telemin Performance
+Skaab Ruinator
+Manor Gargoyle
+Patrol Hound
+Patchwork Gnomes
+Sandstone Deadfall
+Mudhole
+Tombfire
+Gorilla Titan
 
 
 end
