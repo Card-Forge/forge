@@ -3560,21 +3560,7 @@ public class CardFactoryUtil {
 
         return tot;
     }
-
-    /**
-     * <p>
-     * getNumberOfMostProminentCreatureType.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int getNumberOfMostProminentCreatureType(final CardList list, final String type) {
-        return list.getType(type).size();
-    }
+    
 
     /**
      * <p>
@@ -3713,76 +3699,6 @@ public class CardFactoryUtil {
         return maxColor;
     }
 
-    /**
-     * <p>
-     * chooseCreatureTypeAI.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
-    /*
-     * public static String chooseCreatureTypeAI(Card c) { String s = "";
-     * //TODO, take into account what human has
-     * 
-     * CardList humanPlay =
-     * AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield); CardList
-     * humanLib = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-     * 
-     * CardList compPlay =
-     * AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield); CardList
-     * compHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-     * CardList compLib =
-     * AllZone.getComputerPlayer().getCardsIn(Zone.Library);
-     * CardList compAll = new CardList(); compAll.addAll(compLib);
-     * compAll.addAll(compHand); compAll.addAll(compPlay);
-     * 
-     * humanPlay = humanPlay.getType("Creature"); humanLib =
-     * humanLib.getType("Creature");
-     * 
-     * compPlay = compPlay.getType("Creature"); compHand =
-     * compHand.getType("Creature"); compAll = compAll.getType("Creature");
-     * 
-     * //Buffs if (c.getName().equals("Conspiracy")) {
-     * 
-     * String type = ""; int number = 0;
-     * 
-     * type = getMostProminentCreatureType(compAll); number =
-     * getNumberOfMostProminentCreatureType(compAll, type); if (number >= 5) s =
-     * type;
-     * 
-     * if ((c.getName().equals("Conspiracy")) && compAll.size() > 1) { CardList
-     * turnTimber = compAll; turnTimber =
-     * turnTimber.getName("Turntimber Ranger"); if
-     * (c.getName().equals("Conspiracy") && turnTimber.size() > 0) s = "Ally"; }
-     * 
-     * } return s; }
-     */
-
-    /**
-     * <p>
-     * countBasicLandTypes.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.Player} object.
-     * @return a int.
-     */
-    public static int countBasicLandTypes(final Player player) {
-        String[] basic = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-        CardList list = player.getCardsIn(Zone.Battlefield);
-        int count = 0;
-
-        for (int i = 0; i < basic.length; i++) {
-            if (!list.getType(basic[i]).isEmpty()) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
     // total cost to pay for an attacker c, cards like Propaganda, Ghostly
     // Prison, Collective Restraint, ...
     /**
@@ -3850,25 +3766,6 @@ public class CardFactoryUtil {
         });
 
         return list.size();
-    }
-
-    /**
-     * <p>
-     * getTopCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getTopCard(final Card c) {
-        PlayerZone lib = c.getController().getZone(Constant.Zone.Library);
-        if (lib.size() > 0) {
-            return lib.get(0);
-        }
-        else {
-            return null;
-        }
     }
 
     /**
