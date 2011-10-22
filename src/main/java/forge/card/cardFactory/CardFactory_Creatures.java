@@ -11,13 +11,9 @@ import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
-import forge.item.CardDb;
-import forge.item.CardPrinted;
 import forge.Constant.Zone;
 
 import javax.swing.*;
-
-import net.slightlymagic.maxmtg.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
