@@ -157,7 +157,8 @@ public interface NewConstants {
         String DECKS = "quest/decks-dir";
         String XMLDATA = "quest/data-xml";
         
-        String OPPONENTS = "quest/opponent/icons";
+        String OPPONENT_ICONS = "quest/opponent/icons";
+        String OPPONENT_DIR = "image/icon";
     }
 
     /**
@@ -433,6 +434,7 @@ public interface NewConstants {
                     String DOWNLOAD = "%s/NewGame/menu/download";
                     String DOWNLOADLQ = "%s/NewGame/menu/downloadlq";
                     String DOWNLOADSETLQ = "%s/NewGame/menu/downloadsetlq";
+                    String DOWNLOADQUESTIMG = "%s/NewGame/menu/downloadquest";
                     String IMPORTPICTURE = "%s/NewGame/menu/importPicture";
                     String CARD_SIZES = "%s/NewGame/menu/cardSizes";
                     String CARD_STACK = "%s/NewGame/menu/cardStack";

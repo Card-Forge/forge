@@ -115,6 +115,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     // private Action DOWNLOAD_ACTION = new DownloadAction();
     private final Action DOWNLOAD_ACTION_LQ = new DownloadActionLQ();
     private final Action DOWNLOAD_ACTION_SETLQ = new DownloadActionSetLQ();
+    private final Action DOWNLOAD_ACTION_QUEST = new DownloadActionQuest();
     private final Action IMPORT_PICTURE = new ImportPictureAction();
     private final Action CARD_SIZES_ACTION = new CardSizesAction();
     private final Action CARD_STACK_ACTION = new CardStackAction();
@@ -197,8 +198,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION,
                 // DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
                 // CARD_SIZES_ACTION,
-                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
-                CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, BUGZ_REPORTER_ACTION,
+                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, DOWNLOAD_ACTION_QUEST,
+                IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, BUGZ_REPORTER_ACTION,
                 ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION, EXIT_ACTION };
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for (Action a : actions) {
@@ -1118,6 +1119,29 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             Gui_DownloadSetPictures_LQ.startDownload(null);
         }
     }
+    
+    /**
+    *
+    * @author slapshot5
+    *
+    */
+   public static class DownloadActionQuest extends AbstractAction {
+       private static final long serialVersionUID = -4439763134551377894L;
+
+    /**
+        *
+        */
+       public DownloadActionQuest() {
+           super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADQUESTIMG));
+       }
+
+       /**
+        *
+        */
+       public final void actionPerformed(final ActionEvent e) {
+           GuiDownloadQuestImages.startDownload(null);
+       }
+   }
 
     /**
      *

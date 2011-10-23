@@ -10025,6 +10025,7 @@ res/quest/decks/quest7.dck -text
 res/quest/decks/quest8.dck -text
 res/quest/decks/quest9.dck -text
 res/quest/price.txt svneol=native#text/plain
+res/quest/quest-opponent-icons.txt -text
 res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
 res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
@@ -10174,6 +10175,7 @@ src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GuiDisplay4.java svneol=native#text/plain
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
+src/main/java/forge/GuiDownloadQuestImages.java -text
 src/main/java/forge/GuiInput.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPictures_LQ.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPrices.java svneol=native#text/plain
