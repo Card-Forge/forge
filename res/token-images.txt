@@ -52,12 +52,12 @@
 [T]c_3_3_wurm_deathtouch.jpg              http://www.cardforge.org/fpics/tokens/c_3_3_wurm_deathtouch.jpg
 [T]c_3_3_wurm_lifelink.jpg                http://www.cardforge.org/fpics/tokens/c_3_3_wurm_lifelink.jpg
 [T]c_3_4_gargoyle.jpg                     http://www.cardforge.org/fpics/tokens/c_3_4_gargoyle.jpg
-[T]c_x_y_twin.jpg                         http://www.cardforge.org/fpics/tokens/c_x_y_twin.jpg
 [T]c_5_5_djinn.jpg                        http://www.cardforge.org/fpics/tokens/c_5_5_djinn.jpg
 [T]c_5_5_tuktuk_the_returned.jpg          http://www.cardforge.org/fpics/tokens/c_5_5_tuktuk_the_returned.jpg
 [T]c_9_9_golem.jpg                        http://www.cardforge.org/fpics/tokens/c_9_9_golem.jpg
 [T]c_x_x_horror.jpg                       http://www.cardforge.org/fpics/tokens/c_x_x_horror.jpg
 [T]c_x_x_riptide_replicator.jpg           http://www.cardforge.org/fpics/tokens/c_x_x_riptide_replicator.jpg
+[T]c_x_y_twin.jpg                         http://www.cardforge.org/fpics/tokens/c_x_y_twin.jpg
 [T]g_1_1_butterfly.jpg                    http://www.cardforge.org/fpics/tokens/g_1_1_butterfly.jpg
 [T]g_0_1_plant.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_plant.jpg
 [T]g_0_1_plant_wall.jpg                   http://www.cardforge.org/fpics/tokens/g_0_1_plant_wall.jpg
@@ -93,6 +93,7 @@
 [T]g_3_3_ape.jpg                          http://www.cardforge.org/fpics/tokens/g_3_3_ape.jpg
 [T]g_3_3_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_3_3_beast.jpg
 [T]g_3_3_centaur.jpg                      http://www.cardforge.org/fpics/tokens/g_3_3_centaur.jpg
+[T]g_3_3_centaur_pro_black.jpg            http://www.cardforge.org/fpics/tokens/g_3_3_centaur_pro_black.jpg
 [T]g_3_3_elephant.jpg                     http://www.cardforge.org/fpics/tokens/g_3_3_elephant.jpg
 [T]g_4_4_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_4_4_beast.jpg
 [T]g_4_4_elemental.jpg                    http://www.cardforge.org/fpics/tokens/g_4_4_elemental.jpg
@@ -126,6 +127,7 @@
 [T]r_4_4_hellion.jpg                      http://www.cardforge.org/fpics/tokens/r_4_4_hellion.jpg
 [T]r_5_5_dragon.jpg                       http://www.cardforge.org/fpics/tokens/r_5_5_dragon.jpg
 [T]r_7_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_7_1_elemental.jpg
+[T]r_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_x_x_elemental.jpg
 [T]rg_3_4_stangg_twin.jpg                 http://www.cardforge.org/fpics/tokens/rg_3_4_stangg_twin.jpg
 [T]rw_1_1_goblin_soldier.jpg              http://www.cardforge.org/fpics/tokens/rw_1_1_goblin_soldier.jpg
 [T]u_0_1_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_homunculus.jpg
@@ -175,13 +177,6 @@
 [T]wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_1_1_bird.jpg
 
 
-# These tokens should be used but aren't at present:
-# //g_3_3_centaur_pro_black.jpg            http://www.cardforge.org/fpics/tokens/g_3_3_centaur_pro_black.jpg
-# // Hunted Horror token should use this to distinguish from Centaur Glade tokens.
-# //r_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_x_x_elemental.jpg
-# // Devastating Summons tokens should use this image. I tried different naming variations on the x/x but nothing worked.]
-#
-#
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
 # //b_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/b_1_1_wolf.jpg                         [ISD] Garruk Relentless//Garruk, the Veil-Cursed
 # //b_2_2_tombspawn.jpg                    http://www.cardforge.org/fpics/tokens/b_2_2_tombspawn.jpg                    [MIR] Tombstone Stairwell
