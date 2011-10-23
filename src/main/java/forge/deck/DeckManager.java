@@ -666,12 +666,19 @@ public class DeckManager {
                 //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 nameList.add(card.getName());
             }
+
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            for (Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
+                map.put(entry.getKey().getName(), entry.getValue());
+                System.out.println(entry.getValue() + " " + entry.getKey().getName());
+            }
             root.put("urls", list);
             root.put("cardBorder", cardBorder);
             root.put("height", height);
             root.put("width", width);
             root.put("cardlistWidth", width - 11);
             root.put("nameList", nameList);
+            root.put("cardList", map);
 
             /* Merge data-model with template */
             //StringWriter sw = new StringWriter();
