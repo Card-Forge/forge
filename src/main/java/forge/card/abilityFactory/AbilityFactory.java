@@ -2142,7 +2142,7 @@ public class AbilityFactory {
 
         //check conditions
         if (AbilityFactory.checkConditional(sa)) {
-            if (params.get("UnlessCost") == null) {
+            if (params.get("UnlessCost") == null || sa.isWrapper()) {
                 sa.resolve();
 
                 //try to resolve subabilities (see null check above)

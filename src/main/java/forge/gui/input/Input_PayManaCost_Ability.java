@@ -104,13 +104,15 @@ public class Input_PayManaCost_Ability extends Input {
     public void selectCard(Card card, PlayerZone zone) {
         //only tap card if the mana is needed
         manaCost = Input_PayManaCostUtil.activateManaAbility(fakeAbility, card, manaCost);
-        showMessage();
-
+        
         if (manaCost.isPaid()) {
             resetManaCost();
             AllZone.getHumanPlayer().getManaPool().clearPay(fakeAbility, false);
             stop();
             paidCommand.execute();
+        }
+        else{
+            showMessage();
         }
     }
 
