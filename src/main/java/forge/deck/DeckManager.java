@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -661,23 +662,24 @@ public class DeckManager {
                 //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 list.add(card.getSets().get(card.getSets().size() - 1).URL);
             }
-            List<String> nameList = new ArrayList<String>();
+/*            List<String> nameList = new ArrayList<String>();
             for (Card card : d.getMain().toForgeCardList().toArray()) {
                 //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 nameList.add(card.getName());
-            }
+            }*/
 
-            Map<String, Integer> map = new HashMap<String, Integer>();
+            TreeMap<String, Integer> map = new TreeMap<String, Integer>();
             for (Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
                 map.put(entry.getKey().getName(), entry.getValue());
-                System.out.println(entry.getValue() + " " + entry.getKey().getName());
+                //System.out.println(entry.getValue() + " " + entry.getKey().getName());
             }
+
             root.put("urls", list);
             root.put("cardBorder", cardBorder);
             root.put("height", height);
             root.put("width", width);
             root.put("cardlistWidth", width - 11);
-            root.put("nameList", nameList);
+            //root.put("nameList", nameList);
             root.put("cardList", map);
 
             /* Merge data-model with template */
