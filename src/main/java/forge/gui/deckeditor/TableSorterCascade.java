@@ -11,11 +11,18 @@ import java.util.Map.Entry;
  *
  * @author Forge
  * @version $Id: TableSorter.java 10146 2011-09-01 18:11:00Z Max mtg $
+ * 
+ * @param <T> extends InventoryItem
  */
 public class TableSorterCascade<T extends InventoryItem> implements Comparator<Entry<T, Integer>> {
     private List<TableSorter<T>> sorters;
     private final int cntFields;
 
+    /**
+     * 
+     * TableSorterCascade Constructor.
+     * @param sortersCascade a List<TableSorter<T>>
+     */
     public TableSorterCascade(final List<TableSorter<T>> sortersCascade) {
         this.sorters = sortersCascade;
         cntFields = sortersCascade.size();
