@@ -96,6 +96,22 @@ Fixes/Features:
 - Proxy generator creates cardlist. Still needs work.
 - Removed the unused functions getTopCard, getNumberOfMostProminentCreatureType and countBasicLandTypes.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed "BecomesTarget" triggering twice.
+- Devastating Summons tokens now call card image correctly.
+- In-Game downloading Part 2:
+1) Download Set Pictures will now download token images also
+2) removed the old card-pictures-tokens.txt file
+- Converted Spreading Seas and friends to script.
+- Improved the AI of the type changing auras.
+- Fixed Barishi and Zodiac Dragon.
+- Fixed Welkin Hawk and Wirewood Herald.
+- Added ManaCost:no cost to Scorched Ruins.
+- Fix proxy generator cardlist
+- Proxies will be sorted alphabetically
+- Checkstyle updates
+- Tweaked the Reactor Meltdown challenge.
+- Hunted Horror tokens use different image to Centaur Glade now, and token download links updated.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
