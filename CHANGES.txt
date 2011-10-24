@@ -112,6 +112,29 @@ Fixes/Features:
 - Tweaked the Reactor Meltdown challenge.
 - Hunted Horror tokens use different image to Centaur Glade now, and token download links updated.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Renamed the deck Wally 2 back to Walle 2.
+- In-Game downloading Part 3:
+1) add downloading of Quest Opponent Icons
+2) add this menu option to the Old GUI 
+(Note: This is still work in progress with refactoring coming)
+- Fix for Trigger Wrapper incorrectly prompting for Unless Cost twice.
+- Fix bug in AF_Attach
+- Class to encapsulate Card Ratings and handle communication with cardforge.org database.
+- Adding some comments for future RemoveCounter expansion
+- Some Checkstyle fixes in SA_Restriction
+- In-Game downloading part 4:
+1) add Booster pack image downloading into the quest downloads
+2) begin refactor (The only real necessary difference in the downloaders is the getNeededCards(). The rest of the code was duplicate.)
+(Still work-in-progress)
+- In-game downloading Part 5:
+1) add Pet Shop icons to Quest Images Download
+(still work-in-progress)
+- missed this file in Part 5 check-in
+- In-game downloading Part 6:
+1) add Quest pet token image downloading to GuiDownloadQuestImages
+(still a work in progress)
+- Added Sol's "May be played" keyword implementation for non-land cards.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -168,6 +191,7 @@ Sandstone Deadfall
 Mudhole
 Tombfire
 Gorilla Titan
+Garruk's Horde
 
 
 end
