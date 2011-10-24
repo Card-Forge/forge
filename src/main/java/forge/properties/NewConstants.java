@@ -165,6 +165,8 @@ public interface NewConstants {
         String OPPONENT_DIR = "image/icon";
         
         String PET_SHOP_ICONS = "quest/pet/icons";
+        
+        String PET_TOKEN_IMAGES = "quest/pet/tokens";
     }
 
     /**
