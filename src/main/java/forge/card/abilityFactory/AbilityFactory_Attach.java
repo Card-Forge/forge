@@ -476,12 +476,13 @@ public class AbilityFactory_Attach {
                 type = params.get("AddType");
         }
         
-        list.getNotType(type);// Filter out Basic Lands that have the same type as the changing type
+        list = list.getNotType(type);// Filter out Basic Lands that have the same type as the changing type
         
         Card c = CardFactoryUtil.AI_getBest(list);
                 
         // TODO: Port over some of the existing code, but rewrite most of it.
         // Ultimately, these spells need to be used to reduce mana base of a color. So it might be better to choose a Basic over a Nonbasic
+        // Although a nonbasic card with a nasty ability, might be worth it to cast on
         
         if (c == null)
             return chooseLessPreferred(mandatory, list);
