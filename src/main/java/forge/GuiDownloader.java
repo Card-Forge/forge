@@ -399,6 +399,54 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             throw new RuntimeException("GuiDownloader : readFile() error");
         }
     }//readFile()
+    
+    /**
+     * <p>readFile.</p>
+     *
+     * @param filename a {@link java.lang.String} object.
+     * @param dir a {@link java.util.File} object.
+     * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
+     */
+    protected static DownloadObject[] readFileWithNames(String filename, File dir) {
+        try {
+            FileReader zrc = new FileReader(ForgeProps.getFile(filename));
+            BufferedReader in = new BufferedReader(zrc);
+            ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+            
+            String line;
+            StringTokenizer tok;
+
+            line = in.readLine();
+            while (line != null && (!line.equals(""))) {
+                if (line.startsWith("#")) {
+                    line = in.readLine();
+                    continue;
+                }
+                
+                String name = null;
+                String url = null;
+                tok = new StringTokenizer(line, " ");
+                
+                if (tok.hasMoreTokens()) {
+                    name = tok.nextToken();
+                }
+                if (tok.hasMoreTokens()) {
+                    url = tok.nextToken();
+                }
+                list.add(new DownloadObject(name, url, dir.getPath()));
+
+                line = in.readLine();
+            }
+
+            DownloadObject[] out = new DownloadObject[list.size()];
+            list.toArray(out);
+            return out;
+
+        } catch (Exception ex) {
+            ErrorViewer.showError(ex, "GuiDownloader: readFile() error");
+            throw new RuntimeException("GuiDownloader : readFile() error");
+        }
+    }//readFile()
 
     protected class ProxyHandler implements ChangeListener {
         private int type;
@@ -425,6 +473,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             name = nameIn;
             url = urlIn;
             dir = dirIn;
+            //System.out.println("Created download object: "+name+" "+url+" "+dir);
         }
     }//DownloadObject
 } 
