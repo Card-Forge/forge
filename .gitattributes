@@ -10027,6 +10027,7 @@ res/quest/decks/quest8.dck -text
 res/quest/decks/quest9.dck -text
 res/quest/price.txt svneol=native#text/plain
 res/quest/quest-opponent-icons.txt -text
+res/quest/quest-pet-shop-icons.txt -text
 res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
 res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text

@@ -1,0 +1,23 @@
+#Pet Shop Icon Links
+b_1_1_crocodile_pet_small.jpg             http://www.cardforge.org/fpics/pets/icons/b_1_1_crocodile_pet_small.jpg
+b_2_1_crocodile_pet_small.jpg             http://www.cardforge.org/fpics/pets/icons/b_2_1_crocodile_pet_small.jpg
+b_2_1_crocodile_pet_small.jpg             http://www.cardforge.org/fpics/pets/icons/b_3_1_crocodile_pet_small.jpg
+b_3_1_crocodile_pet_swampwalk_small.jpg   http://www.cardforge.org/fpics/pets/icons/b_3_1_crocodile_pet_swampwalk_small.jpg
+g_0_1_plant_wall_small.jpg                http://www.cardforge.org/fpics/pets/icons/g_0_1_plant_wall_small.jpg
+g_0_2_plant_wall_small.jpg                http://www.cardforge.org/fpics/pets/icons/g_0_2_plant_wall_small.jpg
+g_0_3_plant_wall_small.jpg                http://www.cardforge.org/fpics/pets/icons/g_0_3_plant_wall_small.jpg
+g_1_1_wolf_pet_small.jpg                  http://www.cardforge.org/fpics/pets/icons/g_1_1_wolf_pet_small.jpg
+g_1_2_wolf_pet_small.jpg                  http://www.cardforge.org/fpics/pets/icons/g_1_2_wolf_pet_small.jpg
+g_1_3_plant_wall_deathtouch_small.jpg     http://www.cardforge.org/fpics/pets/icons/g_1_3_plant_wall_deathtouch_small.jpg
+g_1_3_plant_wall_small.jpg                http://www.cardforge.org/fpics/pets/icons/g_1_3_plant_wall_small.jpg
+g_1_4_plant_wall_small.jpg                http://www.cardforge.org/fpics/pets/icons/g_1_4_plant_wall_small.jpg
+g_2_2_wolf_pet_small.jpg                  http://www.cardforge.org/fpics/pets/icons/g_2_2_wolf_pet_flanking_small.jpg
+g_2_2_wolf_pet_flanking_small.jpg         http://www.cardforge.org/fpics/pets/icons/g_2_2_wolf_pet_small.jpg
+r_1_1_hound_pet_small.jpg                 http://www.cardforge.org/fpics/pets/icons/r_1_1_hound_pet_haste_small.jpg
+r_1_1_hound_pet_haste_small.jpg           http://www.cardforge.org/fpics/pets/icons/r_1_1_hound_pet_small.jpg
+r_2_1_hound_pet_small.jpg                 http://www.cardforge.org/fpics/pets/icons/r_2_1_hound_pet_alone_small.jpg
+r_2_1_hound_pet_alone_small.jpg           http://www.cardforge.org/fpics/pets/icons/r_2_1_hound_pet_small.jpg
+w_0_1_bird_pet._smalljpg                  http://www.cardforge.org/fpics/pets/icons/w_0_1_bird_pet_small.jpg
+w_1_1_bird_pet._smalljpg                  http://www.cardforge.org/fpics/pets/icons/w_1_1_bird_pet_small.jpg
+w_2_1_bird_pet._smalljpg                  http://www.cardforge.org/fpics/pets/icons/w_2_1_bird_pet_first_strike_small.jpg
+w_2_1_bird_pet_first_strike_small.jpg     http://www.cardforge.org/fpics/pets/icons/w_2_1_bird_pet_small.jpg

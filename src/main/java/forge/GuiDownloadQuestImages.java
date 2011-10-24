@@ -38,6 +38,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
         //read all card names and urls
         DownloadObject[] questOpponents = readFile(QUEST.OPPONENT_ICONS, ForgeProps.getFile(QUEST.OPPONENT_DIR));
         DownloadObject[] boosterImages = readFile(PICS_BOOSTER_IMAGES, ForgeProps.getFile(PICS_BOOSTER));
+        DownloadObject[] petIcons = readFileWithNames(QUEST.PET_SHOP_ICONS, ForgeProps.getFile(IMAGE_ICON));
         ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
 
         File file;
@@ -54,6 +55,14 @@ public class GuiDownloadQuestImages extends GuiDownloader {
             file = new File(dir, boosterImages[i].name.replace("%20", " "));
             if (!file.exists()) {
                 urls.add(boosterImages[i]);
+            }
+        }
+        
+        dir = ForgeProps.getFile(IMAGE_ICON);
+        for (int i = 0; i < petIcons.length; i++) {
+            file = new File(dir, petIcons[i].name.replace("%20", " "));
+            if (!file.exists()) {
+                urls.add(petIcons[i]);
             }
         }
 
