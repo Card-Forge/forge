@@ -8,6 +8,10 @@ import forge.card.spellability.SpellAbility;
 
 public class CostRemoveCounter extends CostPart {
 	// SubCounter<Num/Counter/{Type/TypeDescription}>
+    
+    // Here are the cards that have RemoveCounter<Type>
+    // Ion Storm, Noviken Sages, Ghave, Guru of Spores, Power Conduit (any Counter is tough), 
+    // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
     private Counters counter;
     private int lastPaidAmount = 0;
