@@ -9720,6 +9720,7 @@ res/pics_link/card-pictures_x.txt svneol=native#text/plain
 res/pics_link/card-pictures_y.txt svneol=native#text/plain
 res/pics_link/card-pictures_z.txt svneol=native#text/plain
 res/quest/all-prices.txt svneol=native#text/plain
+res/quest/booster-images.txt -text
 res/quest/booster-prices.txt -text
 res/quest/decks/Abraham[!!-~]Lincoln[!!-~]3.dck -text
 res/quest/decks/Albert[!!-~]Einstein[!!-~]2.dck -text
@@ -10176,6 +10177,7 @@ src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GuiDisplay4.java svneol=native#text/plain
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/GuiDownloadQuestImages.java -text
+src/main/java/forge/GuiDownloader.java -text
 src/main/java/forge/GuiInput.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPictures_LQ.java svneol=native#text/plain
 src/main/java/forge/Gui_DownloadPrices.java svneol=native#text/plain

@@ -1139,7 +1139,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         *
         */
        public final void actionPerformed(final ActionEvent e) {
-           GuiDownloadQuestImages.startDownload(null);
+           //GuiDownloadQuestImages.startDownload(null);
+           new GuiDownloadQuestImages(null);
        }
    }
 

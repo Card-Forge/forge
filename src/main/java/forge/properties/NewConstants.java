@@ -88,7 +88,7 @@ public interface NewConstants {
     String CARD_PICTURES_OTHER = "card-pictures_other";
     /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
     String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
-    /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
+    /** Constant <code>TOKEN_IMAGES="token-images"</code>. */
     String TOKEN_IMAGES = "token-images";
     /** Constant <code>CARDS="cards"</code>. */
     String CARDS = "cards";
@@ -110,6 +110,10 @@ public interface NewConstants {
     String IMAGE_TOKEN = "image/token";
     /** Constant <code>IMAGE_ICON="image/icon"</code>. */
     String IMAGE_ICON = "image/icon";
+    /** Constant <code>PICS_BOOSTER="pics/booster"</code>. */
+    String PICS_BOOSTER = "pics/booster";
+    /** Constant <code>PICS_BOOSTER_IMAGES="pics/booster/images"</code>. */
+    String PICS_BOOSTER_IMAGES = "pics/booster/images";
     /** Constant <code>SOUND_BASE="sound/base"</code>. */
     String SOUND_BASE = "sound/base";
 
