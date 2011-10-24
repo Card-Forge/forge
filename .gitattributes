@@ -3005,6 +3005,7 @@ res/cardsfolder/f/fury_sliver.txt svneol=native#text/plain
 res/cardsfolder/f/furyborn_hellkite.txt svneol=native#text/plain
 res/cardsfolder/f/furystoke_giant.txt -text
 res/cardsfolder/f/fusion_elemental.txt svneol=native#text/plain
+res/cardsfolder/f/future_sight.txt -text
 res/cardsfolder/f/fylamarid.txt svneol=native#text/plain
 res/cardsfolder/f/fylgja.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_bow.txt svneol=native#text/plain
@@ -4783,6 +4784,7 @@ res/cardsfolder/m/magus_of_the_bazaar.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_candelabra.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_coffers.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_disk.txt svneol=native#text/plain
+res/cardsfolder/m/magus_of_the_future.txt -text
 res/cardsfolder/m/magus_of_the_jar.txt -text
 res/cardsfolder/m/magus_of_the_library.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_mirror.txt -text
