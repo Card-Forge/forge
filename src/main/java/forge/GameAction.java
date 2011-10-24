@@ -1584,7 +1584,7 @@ public class GameAction {
         if (c.isLand() && human.canPlayLand()) {
         	PlayerZone zone = AllZone.getZoneOf(c);
 
-        	if (zone.is(Zone.Hand) || (!zone.is(Zone.Battlefield)) && c.hasKeyword("May be played")) {
+        	if (zone.is(Zone.Hand) || (!zone.is(Zone.Battlefield)) && c.hasStartOfKeyword("May be played")) {
         		choices.add("Play land");
         	}
         }
@@ -1630,23 +1630,10 @@ public class GameAction {
      * @param c a {@link forge.Card} object.
      */
     public final void playCardNoCost(final Card c) {
-        //SpellAbility[] choices = (SpellAbility[]) c.getSpells().toArray();
         ArrayList<SpellAbility> choices = c.getBasicSpells();
         SpellAbility sa;
 
         //TODO add Buyback, Kicker, ... , spells here
-        /*
-        ArrayList<SpellAbility> additional = c.getAdditionalCostSpells();
-        for (SpellAbility s : additional)
-        {
-
-        }
-        */
-        /*
-         System.out.println(choices.length);
-         for(int i = 0; i < choices.length; i++)
-             System.out.println(choices[i]);
-        */
         if (choices.size() == 0) {
             return;
         } else if (choices.size() == 1) {

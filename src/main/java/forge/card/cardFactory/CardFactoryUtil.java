@@ -2630,6 +2630,7 @@ public class CardFactoryUtil {
         List<Zone> sb = new ArrayList<Constant.Zone>(3);
         sb.add(Constant.Zone.Graveyard);
         sb.add(Constant.Zone.Exile);
+        sb.add(Constant.Zone.Library);
         sb.add(Constant.Zone.Command);
         CardList cl = player.getCardsIn(sb);
         cl.addAll(AllZone.getStackZone().getCards());
@@ -2661,20 +2662,21 @@ public class CardFactoryUtil {
 
         }
 
-        if (c.isLand() && !zone.is(Constant.Zone.Battlefield) && c.hasKeyword("May be played")) {
+        if (c.isLand() && !zone.is(Constant.Zone.Battlefield) && c.hasStartOfKeyword("May be played")) {
             return true;
         }
 
         for (SpellAbility sa : c.getSpellAbility()) {
-            if (AllZone.getZoneOf(c).is(sa.getRestrictions().getZone())) {
+            Zone restrictZone = sa.getRestrictions().getZone();
+            if (zone.is(restrictZone)) {
                 return true;
             }
 
-            // TODO - Yawgmoth's Will check here, lots of testing before adding
-            // this though
-            // if (!zone.is(Constant.Zone.Battlefield) &&
-            // c.hasKeyword("May be played") && sa.isSpell())
-            // return true;
+            if (sa.isSpell() && !zone.is(Zone.Battlefield) && c.hasStartOfKeyword("May be played")
+                    && restrictZone.equals(Zone.Hand))
+            {
+                return true;
+            }
         }
 
         return false;

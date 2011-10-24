@@ -147,8 +147,21 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
      * @return a boolean.
      */
     public boolean canPlay(Card c, SpellAbility sa) {
-        if (!AllZone.getZoneOf(c).is(zone) || c.isPhasedOut())
+        if (c.isPhasedOut()) {
                 return false;
+        }
+
+        PlayerZone cardZone = AllZone.getZoneOf(c);
+        if (!cardZone.is(zone)) {
+			// If Card is not in the default activating zone, do some additional checks
+			// Not a Spell, or on Battlefield, return false
+            if (!sa.isSpell() || cardZone.is(Zone.Battlefield)) {
+            return false;
+            }
+            else if (!c.hasStartOfKeyword("May be played") || !zone.equals(Zone.Hand)) {
+                return false;
+            }
+        }
 
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {

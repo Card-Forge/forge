@@ -718,13 +718,16 @@ public class AbilityFactory_Pump {
             }
         }
         
+        Zone pumpZone = params.containsKey("PumpZone") ? Zone.smartValueOf(params.get("PumpZone")) : Zone.Battlefield;        
+        
         int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
 
-            // only pump things in play
-            if (!AllZoneUtil.isCardInPlay(tgtC))
+            // only pump things in PumpZone
+            if (!AllZoneUtil.getCardsIn(pumpZone).contains(tgtC)) {
                 continue;
+            }
 
             // if pump is a target, make sure we can still target now
             if (tgt != null && !CardFactoryUtil.canTarget(AF.getHostCard(), tgtC))
@@ -736,8 +739,10 @@ public class AbilityFactory_Pump {
         
         for(int i=0;i<untargetedCards.size();i++) {
             final Card tgtC = untargetedCards.get(i);
-            if(!AllZoneUtil.isCardInPlay(tgtC))
-                    continue;
+            // only pump things in PumpZone
+            if (!AllZoneUtil.getCardsIn(pumpZone).contains(tgtC)) {
+                continue;
+            }
             
             applyPump(sa,tgtC);
         }

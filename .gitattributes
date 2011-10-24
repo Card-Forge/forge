@@ -3044,6 +3044,7 @@ res/cardsfolder/g/gargoyle_sentinel.txt svneol=native#text/plain
 res/cardsfolder/g/garruk_primal_hunter.txt svneol=native#text/plain
 res/cardsfolder/g/garruk_wildspeaker.txt svneol=native#text/plain
 res/cardsfolder/g/garruks_companion.txt svneol=native#text/plain
+res/cardsfolder/g/garruks_horde.txt -text
 res/cardsfolder/g/garruks_packleader.txt svneol=native#text/plain
 res/cardsfolder/g/garza_zol_plague_queen.txt svneol=native#text/plain
 res/cardsfolder/g/gaseous_form.txt svneol=native#text/plain
