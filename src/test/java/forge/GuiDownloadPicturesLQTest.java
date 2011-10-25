@@ -15,6 +15,6 @@ public class GuiDownloadPicturesLQTest {
      */
     @Test(enabled = false, timeOut = 1000)
     public  void GuiDownloadPicturesTest1() {
-        Gui_DownloadPictures_LQ.startDownload(null);
+        new Gui_DownloadPictures_LQ(null);
     }
 }

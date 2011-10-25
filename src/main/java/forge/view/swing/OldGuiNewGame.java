@@ -1093,7 +1093,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *
          */
         public final void actionPerformed(final ActionEvent e) {
-            Gui_DownloadPictures_LQ.startDownload(null);
+            new Gui_DownloadPictures_LQ(null);
         }
     }
 
@@ -1116,7 +1116,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *
          */
         public final void actionPerformed(final ActionEvent e) {
-            Gui_DownloadSetPictures_LQ.startDownload(null);
+            new Gui_DownloadSetPictures_LQ(null);
         }
     }
     

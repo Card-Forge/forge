@@ -865,7 +865,7 @@ public class Gui_HomeScreen {
                 
                 cmdDownloadLQSetPics.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        Gui_DownloadSetPictures_LQ.startDownload(null);
+                        new Gui_DownloadSetPictures_LQ(null);
                     }
                 });
                 
