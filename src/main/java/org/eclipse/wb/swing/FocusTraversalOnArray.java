@@ -22,71 +22,106 @@ import java.awt.FocusTraversalPolicy;
  * @author scheglov_ke
  */
 public class FocusTraversalOnArray extends FocusTraversalPolicy {
-	private final Component m_Components[];
-	////////////////////////////////////////////////////////////////////////////
-	//
-	// Constructor
-	//
-	////////////////////////////////////////////////////////////////////////////
-	public FocusTraversalOnArray(Component components[]) {
-		m_Components = components;
-	}
-	////////////////////////////////////////////////////////////////////////////
-	//
-	// Utilities
-	//
-	////////////////////////////////////////////////////////////////////////////
-	private int indexCycle(int index, int delta) {
-		int size = m_Components.length;
-		int next = (index + delta + size) % size;
-		return next;
-	}
-	private Component cycle(Component currentComponent, int delta) {
-		int index = -1;
-		loop : for (int i = 0; i < m_Components.length; i++) {
-			Component component = m_Components[i];
-			for (Component c = currentComponent; c != null; c = c.getParent()) {
-				if (component == c) {
-					index = i;
-					break loop;
-				}
-			}
-		}
-		// try to find enabled component in "delta" direction
-		int initialIndex = index;
-		while (true) {
-			int newIndex = indexCycle(index, delta);
-			if (newIndex == initialIndex) {
-				break;
-			}
-			index = newIndex;
-			//
-			Component component = m_Components[newIndex];
-			if (component.isEnabled() && component.isVisible() && component.isFocusable()) {
-				return component;
-			}
-		}
-		// not found
-		return currentComponent;
-	}
-	////////////////////////////////////////////////////////////////////////////
-	//
-	// FocusTraversalPolicy
-	//
-	////////////////////////////////////////////////////////////////////////////
-	public Component getComponentAfter(Container container, Component component) {
-		return cycle(component, 1);
-	}
-	public Component getComponentBefore(Container container, Component component) {
-		return cycle(component, -1);
-	}
-	public Component getFirstComponent(Container container) {
-		return m_Components[0];
-	}
-	public Component getLastComponent(Container container) {
-		return m_Components[m_Components.length - 1];
-	}
-	public Component getDefaultComponent(Container container) {
-		return getFirstComponent(container);
-	}
+    private final Component m_Components[];
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // Constructor
+    //
+    // //////////////////////////////////////////////////////////////////////////
+    /**
+     * 
+     * FocusTraversalOnArray.
+     * @param components a Component
+     */
+    public FocusTraversalOnArray(final Component[] components) {
+        m_Components = components;
+    }
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // Utilities
+    //
+    // //////////////////////////////////////////////////////////////////////////
+    private int indexCycle(final int index, final int delta) {
+        int size = m_Components.length;
+        int next = (index + delta + size) % size;
+        return next;
+    }
+
+    private Component cycle(final Component currentComponent, final int delta) {
+        int index = -1;
+        loop: for (int i = 0; i < m_Components.length; i++) {
+            Component component = m_Components[i];
+            for (Component c = currentComponent; c != null; c = c.getParent()) {
+                if (component == c) {
+                    index = i;
+                    break loop;
+                }
+            }
+        }
+        // try to find enabled component in "delta" direction
+        int initialIndex = index;
+        while (true) {
+            int newIndex = indexCycle(index, delta);
+            if (newIndex == initialIndex) {
+                break;
+            }
+            index = newIndex;
+            //
+            Component component = m_Components[newIndex];
+            if (component.isEnabled() && component.isVisible() && component.isFocusable()) {
+                return component;
+            }
+        }
+        // not found
+        return currentComponent;
+    }
+
+    // //////////////////////////////////////////////////////////////////////////
+    //
+    // FocusTraversalPolicy
+    //
+    // //////////////////////////////////////////////////////////////////////////
+    /**
+     * @param container a Container
+     * @param component a Component
+     * @return Component
+     */
+    public final Component getComponentAfter(final Container container, final Component component) {
+        return cycle(component, 1);
+    }
+
+    /**
+     * @param container a Container
+     * @param component a Component
+     * @return Component
+     */
+    public final Component getComponentBefore(final Container container, final Component component) {
+        return cycle(component, -1);
+    }
+
+    /**
+     * @param container a Container
+     * @return Component
+     */
+    public final Component getFirstComponent(final Container container) {
+        return m_Components[0];
+    }
+
+    /**
+     * @param container a Container
+     * @return Component
+     */
+    public final Component getLastComponent(final Container container) {
+        return m_Components[m_Components.length - 1];
+    }
+
+    /**
+     * @param container a Container
+     * @return Component
+     */
+    public final Component getDefaultComponent(final Container container) {
+        return getFirstComponent(container);
+    }
 }
