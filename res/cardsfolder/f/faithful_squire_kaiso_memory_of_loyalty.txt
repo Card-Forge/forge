@@ -1,0 +1,27 @@
+Name:Faithful Squire
+ManaCost:1 W W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidControllingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
+SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+AlternateMode:Flip
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/3.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.\nAt the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it.
+
+ALTERNATE
+
+Name:Kaiso, Memory of Loyalty
+ManaCost:1 W W
+Colors:white
+Types:Legendary Creature Spirit
+Text:no text
+PT:3/4
+A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Tgt$ TgtC | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
+SVar:Rarity:Uncommon
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/166.jpg
+Oracle:Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
+End

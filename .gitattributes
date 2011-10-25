@@ -2594,6 +2594,7 @@ res/cardsfolder/f/faerie_swarm.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_tauntings.txt svneol=native#text/plain
 res/cardsfolder/f/faerie_trickery.txt svneol=native#text/plain
 res/cardsfolder/f/faith_healer.txt svneol=native#text/plain
+res/cardsfolder/f/faithful_squire_kaiso_memory_of_loyalty.txt -text
 res/cardsfolder/f/falkenrath_marauders.txt -text
 res/cardsfolder/f/falkenrath_noble.txt -text
 res/cardsfolder/f/fallen_angel.txt svneol=native#text/plain
@@ -3733,6 +3734,7 @@ res/cardsfolder/h/hindering_light.txt svneol=native#text/plain
 res/cardsfolder/h/hindering_touch.txt svneol=native#text/plain
 res/cardsfolder/h/hinterland_harbor.txt -text
 res/cardsfolder/h/hired_giant.txt svneol=native#text/plain
+res/cardsfolder/h/hired_muscle_scarmaker.txt -text
 res/cardsfolder/h/hisokas_defiance.txt svneol=native#text/plain
 res/cardsfolder/h/hisokas_guard.txt svneol=native#text/plain
 res/cardsfolder/h/hissing_iguanar.txt svneol=native#text/plain

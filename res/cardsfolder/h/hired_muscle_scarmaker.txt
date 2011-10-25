@@ -1,5 +1,5 @@
-Name:Cunning Bandit
-ManaCost:1 R R
+Name:Hired Muscle
+ManaCost:1 B B
 Types:Creature Human Warrior
 Text:no text
 PT:2/2
@@ -9,19 +9,20 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 AlternateMode:Flip
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/99.jpg
-Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.\nAt the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/69.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.\nAt the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
 
 ALTERNATE
 
-Name:Azamuki, Treachery Incarnate
-ManaCost:1 R R
-Colors:red
+Name:Scarmaker
+ManaCost:1 B B
+Colors:black
 Types:Legendary Creature Spirit
 Text:no text
-PT:5/2
-A:AB$GainControl | Cost$ SubCounter<1/KI> | Tgt$ TgtC | SpellDescription$ Gain control of target creature until end of turn.
+PT:4/4
+A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ Fear | Tgt$ TgtC | SpellDescription$ Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Rarity:Uncommon
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/169.jpg
-Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/168.jpg
+Oracle:Remove a ki counter from Scarmaker: Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+
 End
