@@ -17,13 +17,14 @@ import arcane.ui.util.Animation;
 import arcane.ui.util.CardPanelMouseListener;
 
 /**
- * <p>CardArea class.</p>
- *
+ * <p>
+ * CardArea class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
-public class CardArea extends CardPanelContainer implements CardPanelMouseListener
-{
+public class CardArea extends CardPanelContainer implements CardPanelMouseListener {
     /**
      *
      */
@@ -65,9 +66,12 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private boolean hasScrollbars;
 
     /**
-     * <p>Constructor for CardArea.</p>
-     *
-     * @param scrollPane a {@link javax.swing.JScrollPane} object.
+     * <p>
+     * Constructor for CardArea.
+     * </p>
+     * 
+     * @param scrollPane
+     *            a {@link javax.swing.JScrollPane} object.
      */
     public CardArea(final JScrollPane scrollPane) {
         super(scrollPane);
@@ -113,8 +117,10 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /**
-     * <p>doLayout.</p>
-     *
+     * <p>
+     * doLayout.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public final void doLayout() {
@@ -141,16 +147,16 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
                 cardSpacingX = Math.round(cardWidth * VERT_CARD_SPACING_X);
                 cardSpacingY = cardHeight + Math.round(cardWidth * VERT_CARD_SPACING_Y);
-                int maxRows =
-                        (int) Math.floor((cardAreaWidth - GUTTER_X * 2 + cardSpacingX) / (cardWidth + cardSpacingX));
+                int maxRows = (int) Math.floor((cardAreaWidth - GUTTER_X * 2 + cardSpacingX)
+                        / (cardWidth + cardSpacingX));
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
                 int availableRowHeight = cardAreaHeight - GUTTER_Y * 2;
-                int availableCardsPerRow =
-                        (int) Math.floor((availableRowHeight - (cardHeight - cardSpacingY)) / (double) cardSpacingY);
-                actualCardsPerRow =
-                        Math.max(availableCardsPerRow, (int) Math.ceil(cardPanels.size() / (float) maxRows));
+                int availableCardsPerRow = (int) Math.floor((availableRowHeight - (cardHeight - cardSpacingY))
+                        / (double) cardSpacingY);
+                actualCardsPerRow = Math
+                        .max(availableCardsPerRow, (int) Math.ceil(cardPanels.size() / (float) maxRows));
                 int actualRowHeight = (int) Math.floor((actualCardsPerRow - 1) * cardSpacingY + cardHeight);
                 float overflow = actualRowHeight - availableRowHeight;
                 if (overflow > 0) {
@@ -193,17 +199,16 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 int extraCardSpacingX = Math.round(cardWidth * HORIZ_CARD_SPACING_X);
                 cardSpacingY = Math.round(cardHeight * HORIZ_CARD_SPACING_Y);
                 cardSpacingX = cardWidth + extraCardSpacingX;
-                int maxRows =
-                        (int) Math.floor((cardAreaHeight - GUTTER_Y * 2 + cardSpacingY) /
-                                (double) (cardHeight + cardSpacingY));
+                int maxRows = (int) Math.floor((cardAreaHeight - GUTTER_Y * 2 + cardSpacingY)
+                        / (double) (cardHeight + cardSpacingY));
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
                 int availableRowWidth = cardAreaWidth - GUTTER_X * 2;
-                int availableCardsPerRow =
-                        (int) Math.floor((availableRowWidth - (cardWidth - cardSpacingX)) / cardSpacingX);
-                actualCardsPerRow =
-                        Math.max(availableCardsPerRow, (int) Math.ceil(cardPanels.size() / (float) maxRows));
+                int availableCardsPerRow = (int) Math.floor((availableRowWidth - (cardWidth - cardSpacingX))
+                        / cardSpacingX);
+                actualCardsPerRow = Math
+                        .max(availableCardsPerRow, (int) Math.ceil(cardPanels.size() / (float) maxRows));
                 int actualRowWidth = (int) Math.floor((actualCardsPerRow - 1) * cardSpacingX + cardWidth);
                 float overflow = actualRowWidth - availableRowWidth;
                 if (overflow > 0) {
@@ -280,9 +285,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /** {@inheritDoc} */
-    public final void mouseDragged(final CardPanel dragPanel,
-            final int dragOffsetX, final int dragOffsetY, final MouseEvent evt)
-    {
+    public final void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
+            final MouseEvent evt) {
         super.mouseDragged(dragPanel, dragOffsetX, dragOffsetY, evt);
 
         int mouseX = evt.getX();
@@ -319,13 +323,15 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         int startWidth = CardPanel.dragAnimationPanel.getCardWidth();
         Point endPos = SwingUtilities.convertPoint(this, dragPanel.getCardLocation(), layeredPane);
         int endWidth = dragPanel.getCardWidth();
-        Animation.moveCard(startX, startY, startWidth, endPos.x, endPos.y, endWidth,
-                CardPanel.dragAnimationPanel, dragPanel, layeredPane, 200);
+        Animation.moveCard(startX, startY, startWidth, endPos.x, endPos.y, endWidth, CardPanel.dragAnimationPanel,
+                dragPanel, layeredPane, 200);
     }
 
     /**
-     * <p>Getter for the field <code>maxCoverage</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>maxCoverage</code>.
+     * </p>
+     * 
      * @return a float.
      */
     public final float getMaxCoverage() {
@@ -333,26 +339,34 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /**
-     * <p>Setter for the field <code>maxCoverage</code>.</p>
-     *
-     * @param maxCoverage a float.
+     * <p>
+     * Setter for the field <code>maxCoverage</code>.
+     * </p>
+     * 
+     * @param maxCoverage
+     *            a float.
      */
     public final void setMaxCoverage(float maxCoverage) {
         this.maxCoverage = maxCoverage;
     }
 
     /**
-     * <p>Setter for the field <code>maxRows</code>.</p>
-     *
-     * @param maxRows a int.
+     * <p>
+     * Setter for the field <code>maxRows</code>.
+     * </p>
+     * 
+     * @param maxRows
+     *            a int.
      */
     public final void setMaxRows(int maxRows) {
         this.maxRows = maxRows;
     }
 
     /**
-     * <p>Getter for the field <code>maxRows</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>maxRows</code>.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getMaxRows() {
@@ -360,17 +374,22 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /**
-     * <p>setVertical.</p>
-     *
-     * @param isVertical a boolean.
+     * <p>
+     * setVertical.
+     * </p>
+     * 
+     * @param isVertical
+     *            a boolean.
      */
     public final void setVertical(final boolean isVertical) {
         this.isVertical = isVertical;
     }
 
     /**
-     * <p>isVertical.</p>
-     *
+     * <p>
+     * isVertical.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isVertical() {

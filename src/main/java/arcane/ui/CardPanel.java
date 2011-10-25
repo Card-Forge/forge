@@ -1,22 +1,41 @@
 package arcane.ui;
 
-import arcane.ui.ScaledImagePanel.MultipassType;
-import arcane.ui.ScaledImagePanel.ScalingType;
-import arcane.ui.util.GlowText;
-import arcane.ui.util.ManaSymbols;
-import forge.*;
-
-import javax.swing.*;
 import java.awt.Color;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
+import arcane.ui.ScaledImagePanel.MultipassType;
+import arcane.ui.ScaledImagePanel.ScalingType;
+import arcane.ui.util.GlowText;
+import arcane.ui.util.ManaSymbols;
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardContainer;
+import forge.Counters;
+import forge.ImageCache;
+import forge.Singletons;
+
 /**
- * <p>CardPanel class.</p>
- *
+ * <p>
+ * CardPanel class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -47,9 +66,15 @@ public class CardPanel extends JPanel implements CardContainer {
     private static final int TEXT_GLOW_SIZE = 6;
     /** Constant <code>TEXT_GLOW_INTENSITY=3f</code>. */
     private static final float TEXT_GLOW_INTENSITY = 3f;
-    /** Constant <code>rotCenterToTopCorner=1.0295630140987000315797369464196f</code>. */
+    /**
+     * Constant
+     * <code>rotCenterToTopCorner=1.0295630140987000315797369464196f</code>.
+     */
     private static final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
-    /** Constant <code>rotCenterToBottomCorner=0.7071067811865475244008443621048f</code>. */
+    /**
+     * Constant
+     * <code>rotCenterToBottomCorner=0.7071067811865475244008443621048f</code>.
+     */
     private static final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
 
     /**
@@ -87,9 +112,12 @@ public class CardPanel extends JPanel implements CardContainer {
     private boolean showCastingCost;
 
     /**
-     * <p>Constructor for CardPanel.</p>
-     *
-     * @param newGameCard a {@link forge.Card} object.
+     * <p>
+     * Constructor for CardPanel.
+     * </p>
+     * 
+     * @param newGameCard
+     *            a {@link forge.Card} object.
      */
     public CardPanel(final Card newGameCard) {
         this.gameCard = newGameCard;
@@ -133,11 +161,16 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setImage.</p>
-     *
-     * @param srcImage a {@link java.awt.Image} object.
-     * @param srcImageBlurred a {@link java.awt.Image} object.
-     * @param srcImageBlurred a {@link java.awt.Image} object.
+     * <p>
+     * setImage.
+     * </p>
+     * 
+     * @param srcImage
+     *            a {@link java.awt.Image} object.
+     * @param srcImageBlurred
+     *            a {@link java.awt.Image} object.
+     * @param srcImageBlurred
+     *            a {@link java.awt.Image} object.
      */
     private void setImage(final Image srcImage, final Image srcImageBlurred) {
         synchronized (imagePanel) {
@@ -153,9 +186,12 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setImage.</p>
-     *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * <p>
+     * setImage.
+     * </p>
+     * 
+     * @param panel
+     *            a {@link arcane.ui.CardPanel} object.
      */
     public final void setImage(final CardPanel panel) {
         synchronized (panel.imagePanel) {
@@ -168,26 +204,34 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setScalingType.</p>
-     *
-     * @param scalingType a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
+     * <p>
+     * setScalingType.
+     * </p>
+     * 
+     * @param scalingType
+     *            a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
      */
     public final void setScalingType(final ScalingType scalingType) {
         imagePanel.setScalingType(scalingType);
     }
 
     /**
-     * <p>Setter for the field <code>displayEnabled</code>.</p>
-     *
-     * @param displayEnabled a boolean.
+     * <p>
+     * Setter for the field <code>displayEnabled</code>.
+     * </p>
+     * 
+     * @param displayEnabled
+     *            a boolean.
      */
     public final void setDisplayEnabled(final boolean displayEnabled) {
         this.displayEnabled = displayEnabled;
     }
 
     /**
-     * <p>isDisplayEnabled.</p>
-     *
+     * <p>
+     * isDisplayEnabled.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isDisplayEnabled() {
@@ -195,18 +239,24 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setAnimationPanel.</p>
-     *
-     * @param isAnimationPanel a boolean.
+     * <p>
+     * setAnimationPanel.
+     * </p>
+     * 
+     * @param isAnimationPanel
+     *            a boolean.
      */
     public final void setAnimationPanel(final boolean isAnimationPanel) {
         this.isAnimationPanel = isAnimationPanel;
     }
 
     /**
-     * <p>setSelected.</p>
-     *
-     * @param isSelected a boolean.
+     * <p>
+     * setSelected.
+     * </p>
+     * 
+     * @param isSelected
+     *            a boolean.
      */
     public final void setSelected(final boolean isSelected) {
         this.isSelected = isSelected;
@@ -214,9 +264,12 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>Setter for the field <code>showCastingCost</code>.</p>
-     *
-     * @param showCastingCost a boolean.
+     * <p>
+     * Setter for the field <code>showCastingCost</code>.
+     * </p>
+     * 
+     * @param showCastingCost
+     *            a boolean.
      */
     public final void setShowCastingCost(final boolean showCastingCost) {
         this.showCastingCost = showCastingCost;
@@ -249,8 +302,7 @@ public class CardPanel extends JPanel implements CardContainer {
 
         if (this.gameCard != null) {
             if ((!this.gameCard.getImageFilename().equals("none")) && (!this.gameCard.getName().equals("Morph"))) {
-                if ((this.gameCard.getCurSetCode().equals("2ED"))
-                        || (this.gameCard.getCurSetCode().equals("3ED"))
+                if ((this.gameCard.getCurSetCode().equals("2ED")) || (this.gameCard.getCurSetCode().equals("3ED"))
                         || (this.gameCard.getCurSetCode().equals("4ED"))
                         || (this.gameCard.getCurSetCode().equals("5ED"))
                         || (this.gameCard.getCurSetCode().equals("6ED"))
@@ -260,15 +312,13 @@ public class CardPanel extends JPanel implements CardContainer {
                         || (this.gameCard.getCurSetCode().equals("CHR"))
                         || (this.gameCard.getCurSetCode().equals("S99"))
                         || (this.gameCard.getCurSetCode().equals("PTK"))
-                        || (this.gameCard.getCurSetCode().equals("S00")))
-                {
+                        || (this.gameCard.getCurSetCode().equals("S00"))) {
                     if (!isSelected) {
                         g2d.setColor(Color.black);
                         int offset = tapped ? 1 : 0;
                         for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++) {
-                            g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset,
-                                    cardWidth + i * 2 - 1, cardHeight + i * 2 - 1,
-                                    cornerSize, cornerSize);
+                            g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1,
+                                    cardHeight + i * 2 - 1, cornerSize, cornerSize);
                         }
                     }
                     g2d.setColor(Color.white);
@@ -284,9 +334,8 @@ public class CardPanel extends JPanel implements CardContainer {
             g2d.setColor(Color.green);
             int offset = tapped ? 1 : 0;
             for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++) {
-                g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset,
-                        cardWidth + i * 2 - 1, cardHeight + i * 2 - 1,
-                        cornerSize, cornerSize);
+                g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1, cardHeight + i * 2
+                        - 1, cornerSize, cornerSize);
             }
         }
     }
@@ -303,43 +352,40 @@ public class CardPanel extends JPanel implements CardContainer {
 
         int width = ManaSymbols.getWidth(gameCard.getManaCost());
         if (cardWidth < 200) {
-            ManaSymbols.draw(g, gameCard.getManaCost(),
-                    cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
+            ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset
+                    + cardHeight / 2);
         }
 
         int counters = getCard().getNumberOfCounters();
 
         if (counters == 1) {
-            ManaSymbols.drawSymbol("counters1", g, cardXOffset - 15,
-                    cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters1", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
         } else if (counters == 2) {
-            ManaSymbols.drawSymbol("counters2", g, cardXOffset - 15,
-                    cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters2", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
         } else if (counters == 3) {
-            ManaSymbols.drawSymbol("counters3", g, cardXOffset - 15,
-                    cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters3", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
         } else if (counters > 3) {
-            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset - 15,
-                    cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3)
+                    - 40);
         }
 
-        //int yOff = (cardHeight/4) + 2;
+        // int yOff = (cardHeight/4) + 2;
         if (getCard().isAttacking()) {
-            ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16,
-                    cardYOffset + cardHeight - (cardHeight / 8) - 16);
+            ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight
+                    - (cardHeight / 8) - 16);
         } else if (getCard().isBlocking()) {
-            ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16,
-                    cardYOffset + cardHeight - (cardHeight / 8) - 16);
+            ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight
+                    - (cardHeight / 8) - 16);
         }
 
         if (getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) {
-            ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16,
-                    cardYOffset + cardHeight - (cardHeight / 8) - 16);
+            ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight
+                    - (cardHeight / 8) - 16);
         }
 
         if (getCard().isPhasedOut()) {
-            ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16,
-                    cardYOffset + cardHeight - (cardHeight / 8) - 16);
+            ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight
+                    - (cardHeight / 8) - 16);
         }
 
         if (getCard() != null) {
@@ -363,8 +409,8 @@ public class CardPanel extends JPanel implements CardContainer {
                                 if (!mList[n].equals("")) {
                                     width = ManaSymbols.getWidth(mList[n]);
                                     ManaSymbols.draw(g, mList[n],
-                                            cardXOffset + ((i + 1) * (cardWidth / 3)) - width / 2,
-                                            cardYOffset + ((j + 1) * (cardHeight / 7)));
+                                            cardXOffset + ((i + 1) * (cardWidth / 3)) - width / 2, cardYOffset
+                                                    + ((j + 1) * (cardHeight / 7)));
                                 }
 
                                 n++;
@@ -377,8 +423,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>doLayout.</p>
-     *
+     * <p>
+     * doLayout.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public final void doLayout() {
@@ -409,8 +457,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>toString.</p>
-     *
+     * <p>
+     * toString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public final String toString() {
@@ -418,12 +468,18 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setCardBounds.</p>
-     *
-     * @param x      a int.
-     * @param y      a int.
-     * @param width  a int.
-     * @param height a int.
+     * <p>
+     * setCardBounds.
+     * </p>
+     * 
+     * @param x
+     *            a int.
+     * @param y
+     *            a int.
+     * @param width
+     *            a int.
+     * @param height
+     *            a int.
      */
     public final void setCardBounds(final int x, final int y, int width, int height) {
         cardWidth = width;
@@ -442,7 +498,9 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>repaint.</p>
+     * <p>
+     * repaint.
+     * </p>
      */
     public final void repaint() {
         Rectangle b = getBounds();
@@ -455,8 +513,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>getCardX.</p>
-     *
+     * <p>
+     * getCardX.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getCardX() {
@@ -464,8 +524,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>getCardY.</p>
-     *
+     * <p>
+     * getCardY.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getCardY() {
@@ -473,8 +535,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>Getter for the field <code>cardWidth</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>cardWidth</code>.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getCardWidth() {
@@ -482,8 +546,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>Getter for the field <code>cardHeight</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>cardHeight</code>.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getCardHeight() {
@@ -491,8 +557,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>getCardLocation.</p>
-     *
+     * <p>
+     * getCardLocation.
+     * </p>
+     * 
      * @return a {@link java.awt.Point} object.
      */
     public final Point getCardLocation() {
@@ -503,9 +571,12 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>setText.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * setText.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
         if (card == null || !Singletons.getModel().getPreferences().cardOverlay) {
@@ -521,9 +592,8 @@ public class CardPanel extends JPanel implements CardContainer {
         }
 
         if (card.isCreature() && card.isPlaneswalker()) {
-            ptText.setText(card.getNetAttack() + "/"
-        + card.getNetDefense()
-        + " (" + String.valueOf(card.getCounters(Counters.LOYALTY)) + ")");
+            ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " ("
+                    + String.valueOf(card.getCounters(Counters.LOYALTY)) + ")");
         } else if (card.isCreature()) {
             ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
         } else if (card.isPlaneswalker()) {
@@ -534,8 +604,10 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
-     * <p>getCard.</p>
-     *
+     * <p>
+     * getCard.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {

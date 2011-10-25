@@ -17,7 +17,7 @@ public interface CardPanelMouseListener {
      * @param panel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseOver(CardPanel panel, MouseEvent evt);
+    void mouseOver(CardPanel panel, MouseEvent evt);
 
     /**
      * <p>mouseOut.</p>
@@ -25,7 +25,7 @@ public interface CardPanelMouseListener {
      * @param panel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseOut(CardPanel panel, MouseEvent evt);
+    void mouseOut(CardPanel panel, MouseEvent evt);
 
     /**
      * <p>mouseLeftClicked.</p>
@@ -33,7 +33,7 @@ public interface CardPanelMouseListener {
      * @param panel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseLeftClicked(CardPanel panel, MouseEvent evt);
+    void mouseLeftClicked(CardPanel panel, MouseEvent evt);
 
     /**
      * <p>mouseMiddleClicked.</p>
@@ -41,7 +41,7 @@ public interface CardPanelMouseListener {
      * @param panel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseMiddleClicked(CardPanel panel, MouseEvent evt);
+    void mouseMiddleClicked(CardPanel panel, MouseEvent evt);
 
     /**
      * <p>mouseRightClicked.</p>
@@ -49,7 +49,7 @@ public interface CardPanelMouseListener {
      * @param panel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseRightClicked(CardPanel panel, MouseEvent evt);
+    void mouseRightClicked(CardPanel panel, MouseEvent evt);
 
     /**
      * <p>mouseDragStart.</p>
@@ -57,7 +57,7 @@ public interface CardPanelMouseListener {
      * @param dragPanel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseDragStart(CardPanel dragPanel, MouseEvent evt);
+    void mouseDragStart(CardPanel dragPanel, MouseEvent evt);
 
     /**
      * <p>mouseDragged.</p>
@@ -67,7 +67,7 @@ public interface CardPanelMouseListener {
      * @param dragOffsetY a int.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseDragged(CardPanel dragPanel, int dragOffsetX, int dragOffsetY, MouseEvent evt);
+    void mouseDragged(CardPanel dragPanel, int dragOffsetX, int dragOffsetY, MouseEvent evt);
 
     /**
      * <p>mouseDragEnd.</p>
@@ -75,5 +75,5 @@ public interface CardPanelMouseListener {
      * @param dragPanel a {@link arcane.ui.CardPanel} object.
      * @param evt a {@link java.awt.event.MouseEvent} object.
      */
-    public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt);
+    void mouseDragEnd(CardPanel dragPanel, MouseEvent evt);
 }

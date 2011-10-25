@@ -1,14 +1,17 @@
 package arcane.ui;
 
-import arcane.ui.util.CardPanelMouseListener;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Frame;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JScrollPane;
+
+import arcane.ui.util.CardPanelMouseListener;
+
 /**
- * <p>HandArea class.</p>
- *
+ * <p>
+ * HandArea class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -17,10 +20,14 @@ public class HandArea extends CardArea {
     private static final long serialVersionUID = 7488132628637407745L;
 
     /**
-     * <p>Constructor for HandArea.</p>
-     *
-     * @param scrollPane a {@link javax.swing.JScrollPane} object.
-     * @param frame a {@link java.awt.Frame} object.
+     * <p>
+     * Constructor for HandArea.
+     * </p>
+     * 
+     * @param scrollPane
+     *            a {@link javax.swing.JScrollPane} object.
+     * @param frame
+     *            a {@link java.awt.Frame} object.
      */
     public HandArea(final JScrollPane scrollPane, final Frame frame) {
         super(scrollPane);
@@ -45,11 +52,8 @@ public class HandArea extends CardArea {
 
             }
 
-            public void mouseDragged(final CardPanel dragPanel,
-                    final int dragOffsetX,
-                    final int dragOffsetY,
-                    final MouseEvent evt)
-            {
+            public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
+                    final MouseEvent evt) {
             }
 
             public void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {

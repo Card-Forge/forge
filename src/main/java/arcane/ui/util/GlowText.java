@@ -1,7 +1,11 @@
 package arcane.ui.util;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
@@ -11,46 +15,60 @@ import java.text.AttributedString;
 import java.text.BreakIterator;
 import java.util.Locale;
 
+import javax.swing.JLabel;
+
 /**
- * <p>GlowText class.</p>
- *
+ * <p>
+ * GlowText class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class GlowText extends JLabel {
-    /** Constant <code>serialVersionUID=-2868833097364223352L</code> */
+    /** Constant <code>serialVersionUID=-2868833097364223352L</code>. */
     private static final long serialVersionUID = -2868833097364223352L;
     private int glowSize;
     private Color glowColor;
     private boolean wrap;
 
     /**
-     * <p>setGlow.</p>
-     *
-     * @param glowColor a {@link java.awt.Color} object.
-     * @param size a int.
-     * @param intensity a float.
+     * <p>
+     * setGlow.
+     * </p>
+     * 
+     * @param glowColor
+     *            a {@link java.awt.Color} object.
+     * @param size
+     *            a int.
+     * @param intensity
+     *            a float.
      */
-    public void setGlow(Color glowColor, int size, float intensity) {
+    public final void setGlow(final Color glowColor, int size, float intensity) {
         this.glowColor = glowColor;
         this.glowSize = size;
     }
 
     /**
-     * <p>Setter for the field <code>wrap</code>.</p>
-     *
-     * @param wrap a boolean.
+     * <p>
+     * Setter for the field <code>wrap</code>.
+     * </p>
+     * 
+     * @param wrap
+     *            a boolean.
      */
-    public void setWrap(boolean wrap) {
+    public final void setWrap(final boolean wrap) {
         this.wrap = wrap;
     }
 
     /**
-     * <p>getPreferredSize.</p>
-     *
+     * <p>
+     * getPreferredSize.
+     * </p>
+     * 
      * @return a {@link java.awt.Dimension} object.
      */
-    public Dimension getPreferredSize() {
+    public final Dimension getPreferredSize() {
         Dimension size = super.getPreferredSize();
         size.width += glowSize;
         size.height += glowSize / 2;
@@ -58,13 +76,15 @@ public class GlowText extends JLabel {
     }
 
     /** {@inheritDoc} */
-    public void setText(String text) {
+    public final void setText(final String text) {
         super.setText(text);
     }
 
     /** {@inheritDoc} */
-    public void paint(Graphics g) {
-        if (getText().length() == 0) return;
+    public final void paint(final Graphics g) {
+        if (getText().length() == 0) {
+            return;
+        }
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -79,19 +99,24 @@ public class GlowText extends JLabel {
         AttributedCharacterIterator charIterator = attributedString.getIterator();
         FontRenderContext fontContext = g2d.getFontRenderContext();
 
-        LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH), fontContext);
+        LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH),
+                fontContext);
         int lineCount = 0;
         while (measurer.getPosition() < charIterator.getEndIndex()) {
             measurer.nextLayout(wrapWidth);
             lineCount++;
-            if (lineCount > 2) break;
+            if (lineCount > 2) {
+                break;
+            }
         }
         charIterator.first();
         // Use char wrap if word wrap would cause more than two lines of text.
-        if (lineCount > 2)
-            measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH), fontContext);
-        else
+        if (lineCount > 2) {
+            measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH),
+                    fontContext);
+        } else {
             measurer.setPosition(0);
+        }
         while (measurer.getPosition() < charIterator.getEndIndex()) {
             TextLayout textLayout = measurer.nextLayout(wrapWidth);
             float ascent = textLayout.getAscent();
@@ -108,7 +133,13 @@ public class GlowText extends JLabel {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
             textLayout.draw(g2d, textX + glowSize / 2, textY + glowSize / 2);
 
-            textY += textLayout.getDescent() + textLayout.getLeading(); // Move down to top of next line.
+            textY += textLayout.getDescent() + textLayout.getLeading(); // Move
+                                                                        // down
+                                                                        // to
+                                                                        // top
+                                                                        // of
+                                                                        // next
+                                                                        // line.
         }
     }
 }
