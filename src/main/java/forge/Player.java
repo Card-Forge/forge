@@ -1527,13 +1527,13 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public boolean cantWin() {
-        CardList list = getOpponent().getCardsIn(Zone.Battlefield);
+        CardList list = getCardsIn(Zone.Battlefield);
         list = list.getKeyword("You can't win the game.");
 
         if (list.size() > 0)
             return true;
 
-        CardList oppList = getCardsIn(Zone.Battlefield);
+        CardList oppList = getOpponent().getCardsIn(Zone.Battlefield);
         oppList = oppList.getKeyword("Your opponents can't win the game.");
 
         return oppList.size() > 0;
