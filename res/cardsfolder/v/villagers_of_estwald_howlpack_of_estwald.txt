@@ -7,7 +7,7 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ 
 SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 AlternateMode:DoubleFaced
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/209a.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/209a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Villagers of Estwald.
 
 ALTERNATE
@@ -21,6 +21,6 @@ PT:4/6
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/209b.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/209b.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack of Estwald.
 End

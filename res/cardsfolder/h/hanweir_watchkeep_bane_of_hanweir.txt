@@ -1,26 +1,28 @@
-Name:Grizzled Outcasts
-ManaCost:4 G
-Types:Creature Human Werewolf
+Name:Hanweir Watchkeep
+ManaCost:2 R
+Types:Creature Human Warrior Werewolf
 Text:no text
-PT:4/4
+PT:1/5
+K:Defender
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
-SVar:Rarity:Common
+SVar:Rarity:Uncommon
 AlternateMode:DoubleFaced
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/185a.jpg
-Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Grizzled Outcasts.
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/145a.jpg
+Oracle:Defender\nAt the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.
 
 ALTERNATE
 
-Name:Krallenhorde Wantons
+Name:Bane of Hanweir
 ManaCost:no cost
-Colors:green
+Colors:red
 Types:Creature Werewolf
 Text:no text
-PT:7/7
+PT:5/5
+K:CARDNAME attacks each turn if able.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
-SVar:Rarity:Common
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/185b.jpg
-Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Wantons.
+SVar:Rarity:Uncommon
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/145b.jpg
+Oracle:Bane of Hanweir attacks each turn if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Bane of Hanweir.
 End
