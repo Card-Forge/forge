@@ -1,183 +1,224 @@
 package forge;
 
-import com.esotericsoftware.minlog.Log;
-import forge.card.cardFactory.CardFactoryUtil;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import com.esotericsoftware.minlog.Log;
+
+import forge.card.cardFactory.CardFactoryUtil;
+
 /**
- * <p>CardListUtil class.</p>
- *
+ * <p>
+ * CardListUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class CardListUtil {
     /**
-     * <p>filterToughness.</p>
-     *
-     * @param in a {@link forge.CardList} object.
-     * @param atLeastToughness a int.
+     * <p>
+     * filterToughness.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.CardList} object.
+     * @param atLeastToughness
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList filterToughness(CardList in, int atLeastToughness) {
+    public static CardList filterToughness(final CardList in, final int atLeastToughness) {
         CardList out = new CardList();
-        for (int i = 0; i < in.size(); i++)
-            if (in.get(i).getNetDefense() <= atLeastToughness)
+        for (int i = 0; i < in.size(); i++) {
+            if (in.get(i).getNetDefense() <= atLeastToughness) {
                 out.add(in.get(i));
+            }
+        }
 
         return out;
     }
 
-    //the higher the defense the better
+    // the higher the defense the better
 
     /**
-     * <p>sortDefense.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortDefense.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortDefense(CardList list) {
+    public static void sortDefense(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 return b.getNetDefense() - a.getNetDefense();
             }
         };
         list.sort(com);
-    }//sortDefense()
+    } // sortDefense()
 
-    //the higher the attack the better
+    // the higher the attack the better
     /**
-     * <p>sortAttack.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortAttack.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortAttack(CardList list) {
+    public static void sortAttack(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
 
-                if (CombatUtil.isDoranInPlay())
+                if (CombatUtil.isDoranInPlay()) {
                     return b.getNetDefense() - a.getNetDefense();
-                else
+                } else {
                     return b.getNetAttack() - a.getNetAttack();
+                }
             }
         };
         list.sort(com);
-    }//sortAttack()
+    } // sortAttack()
 
     // sort by "best" using the EvaluateCreature function
     // the best creatures will be first in the list
     /**
-     * <p>sortByEvaluateCreature.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByEvaluateCreature.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByEvaluateCreature(CardList list) {
+    public static void sortByEvaluateCreature(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
             }
         };
         list.sort(com);
-    }//sortByEvaluateCreature()
+    } // sortByEvaluateCreature()
 
     // sort by "best" using the EvaluateCreature function
     // the best creatures will be first in the list
     /**
-     * <p>sortByMostExpensive.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByMostExpensive.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByMostExpensive(CardList list) {
+    public static void sortByMostExpensive(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 return b.getCMC() - a.getCMC();
             }
         };
         list.sort(com);
-    }//sortByEvaluateCreature()
+    } // sortByEvaluateCreature()
 
-    //the lower the attack the better
+    // the lower the attack the better
     /**
-     * <p>sortAttackLowFirst.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortAttackLowFirst.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortAttackLowFirst(CardList list) {
+    public static void sortAttackLowFirst(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
-                if (CombatUtil.isDoranInPlay())
+            public int compare(final Card a, final Card b) {
+                if (CombatUtil.isDoranInPlay()) {
                     return a.getNetDefense() - b.getNetDefense();
-                else
+                } else {
                     return a.getNetAttack() - b.getNetAttack();
+                }
             }
         };
         list.sort(com);
-    }//sortAttackLowFirst()
+    } // sortAttackLowFirst()
 
     /**
-     * <p>sortNonFlyingFirst.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortNonFlyingFirst.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortNonFlyingFirst(CardList list) {
+    public static void sortNonFlyingFirst(final CardList list) {
         sortFlying(list);
         list.reverse();
-    }//sortNonFlyingFirst
+    } // sortNonFlyingFirst
 
-    //the creature with flying are better
+    // the creature with flying are better
     /**
-     * <p>sortFlying.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortFlying.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortFlying(CardList list) {
+    public static void sortFlying(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
-                if (a.hasKeyword("Flying") && b.hasKeyword("Flying"))
+            public int compare(final Card a, final Card b) {
+                if (a.hasKeyword("Flying") && b.hasKeyword("Flying")) {
                     return 0;
-                else if (a.hasKeyword("Flying"))
+                } else if (a.hasKeyword("Flying")) {
                     return -1;
-                else if (b.hasKeyword("Flying"))
+                } else if (b.hasKeyword("Flying")) {
                     return 1;
+                }
 
                 return 0;
             }
         };
         list.sort(com);
-    }//sortFlying()
+    } // sortFlying()
 
-    //sort by keyword
+    // sort by keyword
     /**
-     * <p>sortByKeyword.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param kw a {@link java.lang.String} object.
+     * <p>
+     * sortByKeyword.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param kw
+     *            a {@link java.lang.String} object.
      */
-    public static void sortByKeyword(CardList list, String kw) {
+    public static void sortByKeyword(final CardList list, final String kw) {
         final String keyword = kw;
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
-                if (a.hasKeyword(keyword) && b.hasKeyword(keyword))
+            public int compare(final Card a, final Card b) {
+                if (a.hasKeyword(keyword) && b.hasKeyword(keyword)) {
                     return 0;
-                else if (a.hasKeyword(keyword))
+                } else if (a.hasKeyword(keyword)) {
                     return -1;
-                else if (b.hasKeyword(keyword))
+                } else if (b.hasKeyword(keyword)) {
                     return 1;
+                }
 
                 return 0;
             }
         };
         list.sort(com);
-    }//sortByKeyword()
+    } // sortByKeyword()
 
     /**
-     * <p>sortByDestroyEffect.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByDestroyEffect.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByDestroyEffect(CardList list) {
+    public static void sortByDestroyEffect(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 ArrayList<String> aKeywords = a.getKeyword();
                 ArrayList<String> bKeywords = b.getKeyword();
 
@@ -197,12 +238,13 @@ public class CardListUtil {
                         break;
                     }
                 }
-                if (aContains && bContains)
+                if (aContains && bContains) {
                     return 0;
-                else if (aContains)
+                } else if (aContains) {
                     return 1;
-                else if (bContains)
+                } else if (bContains) {
                     return -1;
+                }
 
                 return 0;
             }
@@ -211,23 +253,27 @@ public class CardListUtil {
     }
 
     /**
-     * <p>sortByIndestructible.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByIndestructible.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByIndestructible(CardList list) {
+    public static void sortByIndestructible(final CardList list) {
         final ArrayList<String> arrList = new ArrayList<String>();
         arrList.add("Timber Protector");
         arrList.add("Eldrazi Monument");
 
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
-                if (arrList.contains(a.getName()) && arrList.contains(b.getName()))
+            public int compare(final Card a, final Card b) {
+                if (arrList.contains(a.getName()) && arrList.contains(b.getName())) {
                     return 0;
-                else if (arrList.contains(a.getName()))
+                } else if (arrList.contains(a.getName())) {
                     return 1;
-                else if (arrList.contains(b.getName()))
+                } else if (arrList.contains(b.getName())) {
                     return -1;
+                }
 
                 return 0;
             }
@@ -236,20 +282,24 @@ public class CardListUtil {
     }
 
     /**
-     * <p>sortByTapped.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByTapped.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByTapped(CardList list) {
+    public static void sortByTapped(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
 
-                if (a.isTapped() && b.isTapped())
+                if (a.isTapped() && b.isTapped()) {
                     return 0;
-                else if (a.isTapped())
+                } else if (a.isTapped()) {
                     return 1;
-                else if (b.isTapped())
+                } else if (b.isTapped()) {
                     return -1;
+                }
 
                 return 0;
             }
@@ -258,13 +308,16 @@ public class CardListUtil {
     }
 
     /**
-     * <p>sortByName.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByName.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByName(CardList list) {
+    public static void sortByName(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 String aName = a.getName();
                 String bName = b.getName();
 
@@ -276,22 +329,26 @@ public class CardListUtil {
     }
 
     /**
-     * <p>sortBySelectable.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * sortBySelectable.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param type
+     *            a {@link java.lang.String} object.
      */
-    public static void sortBySelectable(CardList list, String type) {
+    public static void sortBySelectable(final CardList list, final String type) {
         final String t = type;
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
-                if (a.isType(t)
-                        && b.isType(t))
+            public int compare(final Card a, final Card b) {
+                if (a.isType(t) && b.isType(t)) {
                     return 0;
-                else if (a.hasKeyword(t))
+                } else if (a.hasKeyword(t)) {
                     return 1;
-                else if (b.hasKeyword(t))
+                } else if (b.hasKeyword(t)) {
                     return -1;
+                }
 
                 return 0;
             }
@@ -300,22 +357,26 @@ public class CardListUtil {
     }
 
     /**
-     * <p>sortByTextLen.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortByTextLen.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortByTextLen(CardList list) {
+    public static void sortByTextLen(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 int aLen = a.getText().length();
                 int bLen = b.getText().length();
 
-                if (aLen == bLen)
+                if (aLen == bLen) {
                     return 0;
-                else if (aLen > bLen)
+                } else if (aLen > bLen) {
                     return 1;
-                else if (bLen > aLen)
+                } else if (bLen > aLen) {
                     return -1;
+                }
 
                 return 0;
             }
@@ -323,105 +384,129 @@ public class CardListUtil {
         list.sort(com);
     }
 
-    //Sorts from high to low
+    // Sorts from high to low
     /**
-     * <p>sortCMC.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sortCMC.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public static void sortCMC(CardList list) {
+    public static void sortCMC(final CardList list) {
         Comparator<Card> com = new Comparator<Card>() {
-            public int compare(Card a, Card b) {
+            public int compare(final Card a, final Card b) {
                 int cmcA = CardUtil.getConvertedManaCost(a.getManaCost());
                 int cmcB = CardUtil.getConvertedManaCost(b.getManaCost());
 
-                if (cmcA == cmcB)
+                if (cmcA == cmcB) {
                     return 0;
-                if (cmcA > cmcB)
+                }
+                if (cmcA > cmcB) {
                     return -1;
-                if (cmcB > cmcA)
+                }
+                if (cmcB > cmcA) {
                     return 1;
+                }
 
                 return 0;
             }
         };
         list.sort(com);
-    }//sortCMC
-
+    } // sortCMC
 
     /**
-     * <p>getColor.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param color a {@link java.lang.String} object.
+     * <p>
+     * getColor.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param color
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getColor(CardList list, final String color) {
+    public static CardList getColor(final CardList list, final String color) {
         return list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CardUtil.getColors(c).contains(color);
             }
         });
-    }//getColor()
+    } // getColor()
 
     /**
-     * <p>getGoldCards.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * getGoldCards.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getGoldCards(CardList list) {
+    public static CardList getGoldCards(final CardList list) {
         return list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
             }
         });
     }
 
     /**
-     * <p>sumAttack.</p>
-     *
-     * @param c a {@link forge.CardList} object.
+     * <p>
+     * sumAttack.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int sumAttack(CardList c) {
+    public static int sumAttack(final CardList c) {
         int attack = 0;
 
         for (int i = 0; i < c.size(); i++) {
-            //if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
-            if (c.get(i).isCreature() && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike()))) {
+            // if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
+            if (c.get(i).isCreature()
+                    && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike())))
+            {
                 attack += c.get(i).getNetCombatDamage();
             }
         }
-        //System.out.println("Total attack: " +attack);
+        // System.out.println("Total attack: " +attack);
         return attack;
-    }//sumAttack()
+    } // sumAttack()
 
     /**
-     * <p>sumDefense.</p>
-     *
-     * @param c a {@link forge.CardList} object.
+     * <p>
+     * sumDefense.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int sumDefense(CardList c) {
+    public static int sumDefense(final CardList c) {
         int defense = 0;
 
         for (int i = 0; i < c.size(); i++) {
-            //if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
-            if (c.get(i).isCreature())
+            // if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
+            if (c.get(i).isCreature()) {
                 defense += c.get(i).getNetDefense();
+            }
         }
-        //System.out.println("Total attack: " +attack);
+        // System.out.println("Total attack: " +attack);
         return defense;
-    }//sumAttack()
+    } // sumAttack()
 
     /**
-     * <p>sumFirstStrikeAttack.</p>
-     *
-     * @param c a {@link forge.CardList} object.
+     * <p>
+     * sumFirstStrikeAttack.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int sumFirstStrikeAttack(CardList c) {
+    public static int sumFirstStrikeAttack(final CardList c) {
         int attack = 0;
 
         for (int i = 0; i < c.size(); i++) {
@@ -431,33 +516,47 @@ public class CardListUtil {
         }
         Log.debug("Total First Strike attack: " + attack);
         return attack;
-    }//sumFirstStrikeAttack()
+    } // sumFirstStrikeAttack()
 
-    //Get the total converted mana cost of a card list
+    // Get the total converted mana cost of a card list
     /**
-     * <p>sumCMC.</p>
-     *
-     * @param c a {@link forge.CardList} object.
+     * <p>
+     * sumCMC.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CardList} object.
      * @return a int.
      */
-    public static int sumCMC(CardList c) {
+    public static int sumCMC(final CardList c) {
         int cmc = 0;
 
         for (int i = 0; i < c.size(); i++) {
             cmc += CardUtil.getConvertedManaCost(c.get(i).getManaCost());
         }
-        //System.out.println("Total CMC: " +cmc);
+        // System.out.println("Total CMC: " +cmc);
 
         return cmc;
 
-    }//sumCMC
-    
-    public static CardList getRandomSubList(CardList c, int amount){
-        if (c.size() < amount)
+    } // sumCMC
+
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * 
+     * @param c
+     *            CardList
+     * @param amount
+     *            int
+     * @return CardList
+     */
+    public static CardList getRandomSubList(final CardList c, final int amount) {
+        if (c.size() < amount) {
             return null;
-        
+        }
+
         CardList subList = new CardList();
-        while(subList.size() < amount){
+        while (subList.size() < amount) {
             c.shuffle();
             subList.add(c.get(0));
             c.remove(0);

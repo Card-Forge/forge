@@ -5,25 +5,29 @@ import java.util.ArrayList;
 import forge.card.mana.ManaCost;
 
 /**
- * class ColorChanger.
- * TODO Write javadoc for this type.
- *
+ * class ColorChanger. TODO Write javadoc for this type.
+ * 
  */
 public class ColorChanger {
     private ArrayList<Card_Color> globalColorChanges = new ArrayList<Card_Color>();
 
-
     /**
-     * <p>addColorChanges.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     * @param c a {@link forge.Card} object.
-     * @param addToColors a boolean.
-     * @param bIncrease a boolean.
+     * <p>
+     * addColorChanges.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param addToColors
+     *            a boolean.
+     * @param bIncrease
+     *            a boolean.
      * @return a long.
      */
-    public final long addColorChanges(final String s, final Card c, final boolean addToColors,
-            final boolean bIncrease)
+    public final long addColorChanges(final String s,
+            final Card c, final boolean addToColors, final boolean bIncrease)
     {
         if (bIncrease) {
             Card_Color.increaseTimestamp();
@@ -33,12 +37,18 @@ public class ColorChanger {
     }
 
     /**
-     * <p>removeColorChanges.</p>
-     *
-     * @param s a {@link java.lang.String} object.
-     * @param c a {@link forge.Card} object.
-     * @param addTo a boolean.
-     * @param timestamp a long.
+     * <p>
+     * removeColorChanges.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param addTo
+     *            a boolean.
+     * @param timestamp
+     *            a long.
      */
     public final void removeColorChanges(final String s, final Card c, final boolean addTo, final long timestamp) {
         Card_Color removeCol = null;
@@ -54,14 +64,18 @@ public class ColorChanger {
     }
 
     /**
-     * <p>reset = clearColorChanges.</p>
+     * <p>
+     * reset = clearColorChanges.
+     * </p>
      */
     public final void reset() {
         clearColorChanges();
     }
 
     /**
-     * <p>clearColorChanges.</p>
+     * <p>
+     * clearColorChanges.
+     * </p>
      */
     public final void clearColorChanges() {
         // clear the global color changes at end of each game
@@ -69,8 +83,10 @@ public class ColorChanger {
     }
 
     /**
-     * <p>getColorChanges.</p>
-     *
+     * <p>
+     * getColorChanges.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Card_Color> getColorChanges() {

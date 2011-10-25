@@ -27,7 +27,6 @@ import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 
-import forge.card.CardColor;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.card.trigger.TriggerHandler;
@@ -35,33 +34,57 @@ import forge.error.ErrorViewer;
 import forge.properties.NewConstants;
 import forge.view.FView;
 
-
 /**
- * <p>CardReader class.</p>
- *
+ * <p>
+ * CardReader class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
-public class CardReader
-    implements Runnable,  // NOPMD by Braids on 8/18/11 10:55 PM
-    NewConstants
-{
-    private static final String CARD_FILE_DOT_EXTENSION = ".txt"; // NOPMD by Braids on 8/18/11 11:04 PM
+public class CardReader implements Runnable, NewConstants {
+    // NOPMD by Braids on 8/18/11 10:55
+    // PM
+    private static final String CARD_FILE_DOT_EXTENSION = ".txt"; // NOPMD by
+                                                                  // Braids on
+                                                                  // 8/18/11
+                                                                  // 11:04 PM
 
     /** Default charset when loading from files. */
-    public static final String DEFAULT_CHARSET_NAME = "US-ASCII"; // NOPMD by Braids on 8/18/11 10:54 PM
+    public static final String DEFAULT_CHARSET_NAME = "US-ASCII"; // NOPMD by
+                                                                  // Braids on
+                                                                  // 8/18/11
+                                                                  // 10:54 PM
 
     /** Regex that matches a single hyphen (-) or space. */
     public static final Pattern HYPHEN_OR_SPACE = Pattern.compile("[ -]");
 
     /** Regex for punctuation that we omit from card file names. */
-    public static final Pattern PUNCTUATION_TO_ZAP = Pattern.compile("[,'\"]"); // NOPMD by Braids on 8/18/11 10:54 PM
+    public static final Pattern PUNCTUATION_TO_ZAP = Pattern.compile("[,'\"]"); // NOPMD
+                                                                                // by
+                                                                                // Braids
+                                                                                // on
+                                                                                // 8/18/11
+                                                                                // 10:54
+                                                                                // PM
 
     /** Regex that matches two or more underscores (_). */
-    public static final Pattern MULTIPLE_UNDERSCORES = Pattern.compile("__+"); // NOPMD by Braids on 8/18/11 10:54 PM
+    public static final Pattern MULTIPLE_UNDERSCORES = Pattern.compile("__+"); // NOPMD
+                                                                               // by
+                                                                               // Braids
+                                                                               // on
+                                                                               // 8/18/11
+                                                                               // 10:54
+                                                                               // PM
 
     /** Special value for estimatedFilesRemaining. */
-    protected static final int UNKNOWN_NUMBER_OF_FILES_REMAINING = -1; // NOPMD by Braids on 8/18/11 10:54 PM
+    protected static final int UNKNOWN_NUMBER_OF_FILES_REMAINING = -1; // NOPMD
+                                                                       // by
+                                                                       // Braids
+                                                                       // on
+                                                                       // 8/18/11
+                                                                       // 10:54
+                                                                       // PM
 
     private transient Map<String, Card> mapToFill;
     private transient List<CardRules> listRulesToFill;
@@ -73,46 +96,71 @@ public class CardReader
 
     private transient Enumeration<? extends ZipEntry> zipEnum;
 
-    private transient long estimatedFilesRemaining = // NOPMD by Braids on 8/18/11 10:56 PM
-            UNKNOWN_NUMBER_OF_FILES_REMAINING;
+    private transient long estimatedFilesRemaining = // NOPMD by Braids on
+                                                     // 8/18/11 10:56 PM
+    UNKNOWN_NUMBER_OF_FILES_REMAINING;
 
-    private transient Iterable<File> findNonDirsIterable; // NOPMD by Braids on 8/18/11 10:56 PM
+    private transient Iterable<File> findNonDirsIterable; // NOPMD by Braids on
+                                                          // 8/18/11 10:56 PM
 
-
-    
-    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill ) {
+    /**
+     * Instantiates a new card reader.
+     * 
+     * @param theCardsFolder
+     *            the the cards folder
+     * @param theMapToFill
+     *            the the map to fill
+     */
+    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill) {
         this(theCardsFolder, theMapToFill, null, true);
     }
 
     /**
      * This is a convenience for CardReader(cardsfolder, mapToFill, true); .
-     *
-     * @param theCardsFolder  indicates location of the cardsFolder
-     *
-     * @param theMapToFill  maps card names to Card instances; this is where we
-     * place the cards once read
-     *
+     * 
+     * @param theCardsFolder
+     *            indicates location of the cardsFolder
+     * @param listRules2Fill
+     *            List<CardRules>
+     * @param theMapToFill
+     *            maps card names to Card instances; this is where we place the
+     *            cards once read
+     * 
      */
-    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill, 
-            final List<CardRules> listRules2Fill) {
+    public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill,
+            final List<CardRules> listRules2Fill)
+    {
         this(theCardsFolder, theMapToFill, listRules2Fill, true);
     }
 
     /**
-     * <p>Constructor for CardReader.</p>
-     *
-     * @param theCardsFolder  indicates location of the cardsFolder
-     *
-     * @param theMapToFill  maps card names to Card instances; this is where we
-     * place the cards once read
-     *
-     * @param useZip  if true, attempts to load cards from a zip file, if one exists.
+     * <p>
+     * Constructor for CardReader.
+     * </p>
+     * 
+     * @param theCardsFolder
+     *            indicates location of the cardsFolder
+     * 
+     * @param theMapToFill
+     *            maps card names to Card instances; this is where we place the
+     *            cards once read
+     * @param listRules2Fill
+     *            List<CardRules>
+     * @param useZip
+     *            if true, attempts to load cards from a zip file, if one
+     *            exists.
      */
     public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill,
             final List<CardRules> listRules2Fill, final boolean useZip)
     {
         if (theMapToFill == null) {
-            throw new NullPointerException("theMapToFill must not be null."); // NOPMD by Braids on 8/18/11 10:53 PM
+            throw new NullPointerException("theMapToFill must not be null."); // NOPMD
+                                                                              // by
+                                                                              // Braids
+                                                                              // on
+                                                                              // 8/18/11
+                                                                              // 10:53
+                                                                              // PM
         }
         this.mapToFill = theMapToFill;
         // These read data for lightweight classes.
@@ -122,17 +170,15 @@ public class CardReader
         if (!theCardsFolder.exists()) {
             throw new RuntimeException(// NOPMD by Braids on 8/18/11 10:53 PM
                     "CardReader : constructor error -- file not found -- filename is "
-                    + theCardsFolder.getAbsolutePath());
+                            + theCardsFolder.getAbsolutePath());
         }
 
         if (!theCardsFolder.isDirectory()) {
             throw new RuntimeException(// NOPMD by Braids on 8/18/11 10:53 PM
-                    "CardReader : constructor error -- not a directory -- "
-                    + theCardsFolder.getAbsolutePath());
+                    "CardReader : constructor error -- not a directory -- " + theCardsFolder.getAbsolutePath());
         }
 
         this.cardsfolder = theCardsFolder;
-
 
         final File zipFile = new File(theCardsFolder, "cardsfolder.zip");
 
@@ -141,12 +187,16 @@ public class CardReader
             try {
                 this.zip = new ZipFile(zipFile);
             } catch (Exception exn) {
-                System.err.println("Error reading zip file \"" // NOPMD by Braids on 8/18/11 10:53 PM
-                        + zipFile.getAbsolutePath() + "\": " + exn + ". "
+                System.err.println("Error reading zip file \"" // NOPMD by
+                                                               // Braids on
+                                                               // 8/18/11 10:53
+                                                               // PM
+                        + zipFile.getAbsolutePath()
+                        + "\": "
+                        + exn
+                        + ". "
                         + "Defaulting to txt files in \""
-                        + theCardsFolder.getAbsolutePath()
-                        + "\"."
-                        );
+                        + theCardsFolder.getAbsolutePath() + "\".");
             }
 
         }
@@ -158,22 +208,22 @@ public class CardReader
 
         setEncoding(DEFAULT_CHARSET_NAME);
 
-    } //CardReader()
-
+    } // CardReader()
 
     /**
      * This finalizer helps assure there is no memory or thread leak with
      * findNonDirsIterable, which was created with YieldUtils.toIterable.
-     *
-     * @throws Throwable indirectly
+     * 
+     * @throws Throwable
+     *             indirectly
      */
     protected final void finalize() throws Throwable {
         try {
             if (findNonDirsIterable != null) {
-                for (@SuppressWarnings("unused") File ignored
-                        : findNonDirsIterable)
+                for (@SuppressWarnings("unused")
+             // Do nothing; just exercising the Iterable.
+                File ignored : findNonDirsIterable)
                 {
-                    // Do nothing; just exercising the Iterable.
                 }
             }
         } finally {
@@ -181,9 +231,8 @@ public class CardReader
         }
     }
 
-
     /**
-     * Reads the rest of ALL the cards into memory.  This is not lazy.
+     * Reads the rest of ALL the cards into memory. This is not lazy.
      */
     public final void run() {
         loadCardsUntilYouFind(null);
@@ -191,12 +240,13 @@ public class CardReader
 
     /**
      * Starts reading cards into memory until the given card is found.
-     *
+     * 
      * After that, we save our place in the list of cards (on disk) in case we
      * need to load more.
-     *
-     * @param cardName the name to find; if null, load all cards.
-     *
+     * 
+     * @param cardName
+     *            the name to find; if null, load all cards.
+     * 
      * @return the Card or null if it was not found.
      */
     protected final Card loadCardsUntilYouFind(final String cardName) {
@@ -209,7 +259,7 @@ public class CardReader
         if (view != null) {
             monitor = view.getCardLoadingProgressMonitor();
         }
-        
+
         if (monitor == null) {
             monitor = new StderrProgressMonitor(1, 0L);
         }
@@ -223,7 +273,7 @@ public class CardReader
                 findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
             }
 
-            if(monitor!=null) {
+            if (monitor != null) {
                 monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
             }
 
@@ -237,10 +287,11 @@ public class CardReader
                 monitor.incrementUnitsCompletedThisPhase(1L);
 
                 if (cardName != null && cardName.equals(result.getName())) {
-                    break;  // no thread leak here if entire card DB is loaded, or if this object is finalized.
+                    break; // no thread leak here if entire card DB is loaded,
+                           // or if this object is finalized.
                 }
 
-            } //endfor
+            } // endfor
 
         } else {
             monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
@@ -263,17 +314,20 @@ public class CardReader
                 }
             }
 
-        } //endif
+        } // endif
 
         return result;
-    } //loadCardsUntilYouFind(String)
-
+    } // loadCardsUntilYouFind(String)
 
     /**
-     * <p>addTypes to an existing card.</p>
-     *
-     * @param card a {@link forge.Card} object.
-     * @param types a {@link java.lang.String} object.
+     * <p>
+     * addTypes to an existing card.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @param types
+     *            a {@link java.lang.String} object.
      */
     public static void addTypes(final Card card, final String types) {
         final StringTokenizer tok = new StringTokenizer(types);
@@ -283,13 +337,16 @@ public class CardReader
     }
 
     /**
-     * <p>Reads a line from the given reader and handles exceptions.</p>
-     *
+     * <p>
+     * Reads a line from the given reader and handles exceptions.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
-     * @param reader a {@link java.io.BufferedReader} object.
+     * @param reader
+     *            a {@link java.io.BufferedReader} object.
      */
     public static String readLine(final BufferedReader reader) {
-        //makes the checked exception, into an unchecked runtime exception
+        // makes the checked exception, into an unchecked runtime exception
         try {
             String line = reader.readLine();
             if (line != null) {
@@ -298,15 +355,24 @@ public class CardReader
             return line;
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("CardReader : readLine(Card) error", ex); // NOPMD by Braids on 8/18/11 10:53 PM
+            throw new RuntimeException("CardReader : readLine(Card) error", ex); // NOPMD
+                                                                                 // by
+                                                                                 // Braids
+                                                                                 // on
+                                                                                 // 8/18/11
+                                                                                 // 10:53
+                                                                                 // PM
         }
-    } //readLine(BufferedReader)
+    } // readLine(BufferedReader)
 
     /**
-     * <p>load a card.</p>
-     *
-     * @param inputStream  the stream from which to load the card's information
-     *
+     * <p>
+     * load a card.
+     * </p>
+     * 
+     * @param inputStream
+     *            the stream from which to load the card's information
+     * 
      * @return the card loaded from the stream
      */
     protected final Card loadCard(final InputStream inputStream) {
@@ -322,21 +388,22 @@ public class CardReader
             String line = readLine(reader);
             while (!"End".equals(line)) {
                 rulesReader.parseLine(line);
-                if(line.isEmpty()) {
-                  //Ignore empty lines.  
-                } else if (line.charAt(0) == '#') { // NOPMD by Braids on 8/18/11 10:59 PM
-                    //no need to do anything, this indicates a comment line
+                if (line.isEmpty()) {
+                    // Ignore empty lines.
+                } else if (line.charAt(0) == '#') { // NOPMD by Braids on
+                                                    // 8/18/11 10:59 PM
+                    // no need to do anything, this indicates a comment line
                 } else if (line.startsWith("Name:")) {
                     final String value = line.substring(5);
-                    //System.out.println(s);
+                    // System.out.println(s);
                     if (mapToFill.containsKey(value)) {
-                        break;  // this card has already been loaded.
+                        break; // this card has already been loaded.
                     } else {
                         card.setName(value);
                     }
                 } else if (line.startsWith("ManaCost:")) {
                     final String value = line.substring(9);
-                    //System.out.println(s);
+                    // System.out.println(s);
                     if (!"no cost".equals(value)) {
                         card.setManaCost(value);
                     }
@@ -391,13 +458,14 @@ public class CardReader
                     card.addStaticAbilityString(value);
                 } else if (line.startsWith("SetInfo:")) {
                     final String value = line.substring("SetInfo:".length());
-                    card.addSet(new SetInfo(value)); // NOPMD by Braids on 8/18/11 11:08 PM
+                    card.addSet(new SetInfo(value)); // NOPMD by Braids on
+                                                     // 8/18/11 11:08 PM
                 } else if (line.equals("ALTERNATE")) {
                     card.addAlternateState();
                     card.changeState();
                 } else if (line.startsWith("AlternateMode:")) {
                     final String value = line.substring("AlternateMode:".length());
-                    if(value.equalsIgnoreCase("Flip")) {
+                    if (value.equalsIgnoreCase("Flip")) {
                         card.setFlip(true);
                     } else {
                         card.setDoubleFaced(true);
@@ -405,12 +473,12 @@ public class CardReader
                 } else if (line.startsWith("Colors:")) {
                     final String value = line.substring("Colors:".length());
                     ArrayList<Card_Color> newCols = new ArrayList<Card_Color>();
-                    for(String col : value.split(",")) {
+                    for (String col : value.split(",")) {
                         Card_Color newCol = new Card_Color(card);
                         newCol.addToCardColor(col);
                         newCols.add(newCol);
                     }
-                    
+
                     card.setColor(newCols);
                     card.setCardColorsOverridden(true);
                 }
@@ -420,41 +488,45 @@ public class CardReader
         } finally {
             try {
                 reader.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08 PM
+            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
+                                            // PM
             }
             try {
                 inputStreamReader.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08 PM
+            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
+                                            // PM
             }
         }
-        
-        if(card.isInAlternateState()) {
+
+        if (card.isInAlternateState()) {
             card.changeState();
         }
 
         CardRules[] crdRules = rulesReader.getCard();
         listRulesToFill.add(crdRules[0]);
-        if(crdRules[1] != null) { listRulesToFill.add(crdRules[1]); }
+        if (crdRules[1] != null) {
+            listRulesToFill.add(crdRules[1]);
+        }
         mapToFill.put(card.getName(), card);
         return card;
     }
 
-
     /**
      * Set the character encoding to use when loading cards.
-     *
-     * @param charsetName  the name of the charset, for example, "UTF-8"
+     * 
+     * @param charsetName
+     *            the name of the charset, for example, "UTF-8"
      */
     public final void setEncoding(final String charsetName) {
         this.charset = Charset.forName(charsetName);
     }
 
-
     /**
      * Load a card from a txt file.
-     *
-     * @param pathToTxtFile  the full or relative path to the file to load
-     *
+     * 
+     * @param pathToTxtFile
+     *            the full or relative path to the file to load
+     * 
      * @return a new Card instance
      */
     protected final Card loadCard(final File pathToTxtFile) {
@@ -465,21 +537,22 @@ public class CardReader
         } catch (FileNotFoundException ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", pathToTxtFile.getAbsolutePath());
             throw new RuntimeException(// NOPMD by Braids on 8/18/11 10:53 PM
-                    "CardReader : run error -- file exception -- filename is "
-                    + pathToTxtFile.getPath(), ex);
+                    "CardReader : run error -- file exception -- filename is " + pathToTxtFile.getPath(), ex);
         } finally {
             try {
                 fileInputStream.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08 PM
+            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
+                                            // PM
             }
         }
     }
 
     /**
      * Load a card from an entry in a zip file.
-     *
-     * @param entry  to load from
-     *
+     * 
+     * @param entry
+     *            to load from
+     * 
      * @return a new Card instance
      */
     protected final Card loadCard(final ZipEntry entry) {
@@ -489,27 +562,29 @@ public class CardReader
             return loadCard(zipInputStream);
 
         } catch (IOException exn) {
-            throw new RuntimeException(exn); // NOPMD by Braids on 8/18/11 10:53 PM
+            throw new RuntimeException(exn); // NOPMD by Braids on 8/18/11 10:53
+                                             // PM
         } finally {
             try {
                 if (zipInputStream != null) {
                     zipInputStream.close();
                 }
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08 PM
+            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
+                                            // PM
             }
         }
     }
 
-
     /**
      * Attempt to guess what the path to a given card's txt file would be.
-     *
-     * @param asciiCardName  the card name in canonicalized ASCII form
-     *
-     * @return  the likeliest path of the card's txt file, excluding
-     * cardsFolder but including the subdirectory of that and the ".txt"
-     * suffix.  For example, "e/elvish_warrior.txt"
-     *
+     * 
+     * @param asciiCardName
+     *            the card name in canonicalized ASCII form
+     * 
+     * @return the likeliest path of the card's txt file, excluding cardsFolder
+     *         but including the subdirectory of that and the ".txt" suffix. For
+     *         example, "e/elvish_warrior.txt"
+     * 
      * @see CardUtil#canonicalizeCardName
      */
     public final String toMostLikelyPath(final String asciiCardName) {
@@ -519,8 +594,9 @@ public class CardReader
          * friarsol wrote: "hyphens and spaces are converted to underscores,
          * commas and apostrophes are removed (I'm not sure if there are any
          * other punctuation used)."
-         *
-         * @see http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=4887#p63189
+         * 
+         * @see
+         * http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=4887#p63189
          */
 
         baseFileName = HYPHEN_OR_SPACE.matcher(baseFileName).replaceAll("_");
@@ -542,12 +618,16 @@ public class CardReader
 
     /**
      * Attempt to load a card by its canonical ASCII name.
-     *
-     * @param canonicalASCIIName  the canonical ASCII name of the card
-     *
+     * 
+     * @param canonicalASCIIName
+     *            the canonical ASCII name of the card
+     * 
      * @return a new Card instance having that name, or null if not found
      */
-    public final Card findCard(final String canonicalASCIIName) { // NOPMD by Braids on 8/18/11 11:08 PM
+    public final Card findCard(final String canonicalASCIIName) { // NOPMD by
+                                                                  // Braids on
+                                                                  // 8/18/11
+                                                                  // 11:08 PM
         UtilFunctions.checkNotNull("canonicalASCIIName", canonicalASCIIName);
 
         final String cardFilePath = toMostLikelyPath(canonicalASCIIName);
@@ -567,7 +647,7 @@ public class CardReader
         }
 
         if (result == null || !(result.getName().equals(canonicalASCIIName))) {
-            //System.err.println(":Could not find \"" + cardFilePath + "\".");
+            // System.err.println(":Could not find \"" + cardFilePath + "\".");
             result = loadCardsUntilYouFind(canonicalASCIIName);
         }
 
