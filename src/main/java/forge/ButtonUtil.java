@@ -1,14 +1,18 @@
 package forge;
 
 /**
- * <p>ButtonUtil class.</p>
- *
+ * <p>
+ * ButtonUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class ButtonUtil {
     /**
-     * <p>reset.</p>
+     * <p>
+     * reset.
+     * </p>
      */
     public static void reset() {
         getOK().setText("OK");
@@ -19,7 +23,9 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>enableOnlyOK.</p>
+     * <p>
+     * enableOnlyOK.
+     * </p>
      */
     public static void enableOnlyOK() {
         getOK().setSelectable(true);
@@ -27,7 +33,9 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>enableOnlyCancel.</p>
+     * <p>
+     * enableOnlyCancel.
+     * </p>
      */
     public static void enableOnlyCancel() {
         getOK().setSelectable(false);
@@ -35,7 +43,9 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>disableAll.</p>
+     * <p>
+     * disableAll.
+     * </p>
      */
     public static void disableAll() {
         getOK().setSelectable(false);
@@ -43,7 +53,9 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>enableAll.</p>
+     * <p>
+     * enableAll.
+     * </p>
      */
     public static void enableAll() {
         getOK().setSelectable(true);
@@ -51,22 +63,28 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>disableOK.</p>
+     * <p>
+     * disableOK.
+     * </p>
      */
     public static void disableOK() {
         getOK().setSelectable(false);
     }
 
     /**
-     * <p>disableCancel.</p>
+     * <p>
+     * disableCancel.
+     * </p>
      */
     public static void disableCancel() {
         getCancel().setSelectable(false);
     }
 
     /**
-     * <p>getOK.</p>
-     *
+     * <p>
+     * getOK.
+     * </p>
+     * 
      * @return a {@link forge.MyButton} object.
      */
     private static MyButton getOK() {
@@ -74,8 +92,10 @@ public class ButtonUtil {
     }
 
     /**
-     * <p>getCancel.</p>
-     *
+     * <p>
+     * getCancel.
+     * </p>
+     * 
      * @return a {@link forge.MyButton} object.
      */
     private static MyButton getCancel() {

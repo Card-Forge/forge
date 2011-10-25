@@ -32,13 +32,15 @@ public class Card_Type implements Comparable<Card_Type> {
      *
      * @param types an ArrayList<String>
      * @param removeSuperType a boolean
+     * @param removeTypes an ArrayList<String>
      * @param removeCardType a boolean
      * @param removeSubType a boolean
      * @param removeCreatureType a boolean
      * @param stamp a long
      */
-    Card_Type(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType, 
-            final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType, final long stamp)
+    Card_Type(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
+            final boolean removeCardType, final boolean removeSubType,
+            final boolean removeCreatureType, final long stamp)
             {
         type = types;
         removeType = removeTypes;
@@ -51,16 +53,16 @@ public class Card_Type implements Comparable<Card_Type> {
 
     /**
      * 
-     * Write javadoc for this method.
+     * getType.
      * @return type
      */
     public final ArrayList<String> getType() {
         return type;
     }
-    
+
     /**
      * 
-     * Write javadoc for this method.
+     * getRemoveType.
      * @return removeType
      */
     public final ArrayList<String> getRemoveType() {
@@ -69,7 +71,7 @@ public class Card_Type implements Comparable<Card_Type> {
 
     /**
      * 
-     * Write javadoc for this method.
+     * isRemoveSuperTypes.
      * @return removeSuperTypes
      */
     public final boolean isRemoveSuperTypes() {
@@ -78,7 +80,7 @@ public class Card_Type implements Comparable<Card_Type> {
 
     /**
      * 
-     * Write javadoc for this method.
+     * isRemoveCardTypes.
      * @return removeCardTypes
      */
     public final boolean isRemoveCardTypes() {
@@ -87,7 +89,7 @@ public class Card_Type implements Comparable<Card_Type> {
 
     /**
      * 
-     * Write javadoc for this method.
+     * isRemoveSubTypes.
      * @return removeSubTypes
      */
     public final boolean isRemoveSubTypes() {
@@ -96,7 +98,7 @@ public class Card_Type implements Comparable<Card_Type> {
 
     /**
      * 
-     * Write javadoc for this method.
+     * isRemoveCreatureTypes.
      * @return removeCreatureTypes
      */
     public final boolean isRemoveCreatureTypes() {

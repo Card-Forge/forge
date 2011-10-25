@@ -1,6 +1,5 @@
 package forge;
 
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,8 +15,8 @@ import forge.gui.skin.FSkin;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestMatchState;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
 
@@ -25,13 +24,13 @@ import forge.quest.gui.main.QuestEventManager;
  * Please use public getters and setters instead of direct field access.
  * <p/>
  * If you need a setter, by all means, add it.
- *
+ * 
  * @author Forge
  * @version $Id$
  */
 public final class AllZone implements NewConstants {
-    //only for testing, should read decks from local directory
-    //  public static final IO IO = new IO("all-decks");
+    // only for testing, should read decks from local directory
+    // public static final IO IO = new IO("all-decks");
 
     /**
      * Do not instantiate.
@@ -45,10 +44,10 @@ public final class AllZone implements NewConstants {
 
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
-    
+
     /** Global <code>QuestChallenge</code>. */
     private static QuestEvent questEvent = null;
-    
+
     /** Global <code>questEventManager</code>. */
     private static QuestEventManager questEventManager = null;
 
@@ -57,7 +56,7 @@ public final class AllZone implements NewConstants {
 
     /** Constant <code>COLOR_CHANGER</code>. */
     private static final ColorChanger COLOR_CHANGER = new ColorChanger();
-    
+
     // Phase is now a prerequisite for CardFactory
     /** Global <code>cardFactory</code>. */
     private static CardFactoryInterface cardFactory = null;
@@ -65,15 +64,16 @@ public final class AllZone implements NewConstants {
     /** Constant <code>inputControl</code>. */
     private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
 
-    /** 
-     * Match State for challenges are stored in a <code>QuestMatchState</code> class instance.
+    /**
+     * Match State for challenges are stored in a <code>QuestMatchState</code>
+     * class instance.
      */
     private static QuestMatchState matchState = new QuestMatchState();
 
-    //initialized at Runtime since it has to be the last object constructed
+    // initialized at Runtime since it has to be the last object constructed
 
-
-    //shared between Input_Attack, Input_Block, Input_CombatDamage , InputState_Computer
+    // shared between Input_Attack, Input_Block, Input_CombatDamage ,
+    // InputState_Computer
 
     /** Global <code>display</code>. */
     private static Display display;
@@ -82,7 +82,9 @@ public final class AllZone implements NewConstants {
     private static DeckManager deckManager;
 
     /**
-     * <p>getHumanPlayer.</p>
+     * <p>
+     * getHumanPlayer.
+     * </p>
      * 
      * Will eventually be marked deprecated.
      * 
@@ -100,8 +102,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getComputerPlayer.</p>
-     *
+     * <p>
+     * getComputerPlayer.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.Player} object.
@@ -110,19 +114,21 @@ public final class AllZone implements NewConstants {
     public static Player getComputerPlayer() {
         return Singletons.getModel().getGameState().getComputerPlayer();
     }
-    
+
     /**
      * get a list of all players participating in this game.
-     *
+     * 
      * @return a list of all player participating in this game
      */
     public static List<Player> getPlayersInGame() {
         return Arrays.asList(Singletons.getModel().getGameState().getPlayers());
-    }    
+    }
 
     /**
-     * <p>getQuestData.</p>
-     *
+     * <p>
+     * getQuestData.
+     * </p>
+     * 
      * @return a {@link forge.quest.data.QuestData} object.
      * @since 1.0.15
      */
@@ -131,18 +137,23 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setQuestData.</p>
-     *
-     * @param questData0 a {@link forge.quest.data.QuestData} object.
+     * <p>
+     * setQuestData.
+     * </p>
+     * 
+     * @param questData0
+     *            a {@link forge.quest.data.QuestData} object.
      * @since 1.0.15
      */
     public static void setQuestData(final QuestData questData0) {
         questData = questData0;
     }
-    
+
     /**
-     * <p>getQuestEvent.</p>
-     *
+     * <p>
+     * getQuestEvent.
+     * </p>
+     * 
      * @return a {@link forge.quest.gui.main.QuestEvent} object.
      * @since 1.0.15
      */
@@ -151,17 +162,21 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setQuestEvent.</p>
-     *
-     * @param {@link forge.quest.gui.main.QuestEvent} object. 
+     * <p>
+     * setQuestEvent.
+     * </p>
+     * 
+     * @param q a {@link forge.quest.gui.main.QuestEvent} object.
      */
     public static void setQuestEvent(final QuestEvent q) {
         questEvent = q;
     }
-    
+
     /**
-     * <p>getQuestEventManager.</p>
-     *
+     * <p>
+     * getQuestEventManager.
+     * </p>
+     * 
      * @return {@link forge.quest.gui.main.QuestEventManager} object.
      * @since 1.0.15
      */
@@ -170,17 +185,21 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setQuestEventManager.</p>
-     *
-     * @param {@link forge.quest.gui.main.QuestEventManager} object 
+     * <p>
+     * setQuestEventManager.
+     * </p>
+     * 
+     * @param qem a {@link forge.quest.gui.main.QuestEventManager} object
      */
     public static void setQuestEventManager(final QuestEventManager qem) {
         questEventManager = qem;
     }
 
     /**
-     * <p>getNameChanger.</p>
-     *
+     * <p>
+     * getNameChanger.
+     * </p>
+     * 
      * @return a {@link forge.NameChanger} object.
      * @since 1.0.15
      */
@@ -189,8 +208,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getEndOfTurn.</p>
-     *
+     * <p>
+     * getEndOfTurn.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.EndOfTurn} object.
@@ -201,8 +222,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getEndOfCombat.</p>
-     *
+     * <p>
+     * getEndOfCombat.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.EndOfCombat} object.
@@ -213,8 +236,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getUpkeep.</p>
-     *
+     * <p>
+     * getUpkeep.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.EndOfCombat} object.
@@ -225,8 +250,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getPhase.</p>
-     *
+     * <p>
+     * getPhase.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.Phase} object; may be null.
@@ -243,22 +270,27 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getCardFactory.</p>
-     *
+     * <p>
+     * getCardFactory.
+     * </p>
+     * 
      * @return a {@link forge.card.cardFactory.CardFactoryInterface} object.
      * @since 1.0.15
      */
     public static CardFactoryInterface getCardFactory() {
-    	if (cardFactory == null) {
-    	    //setCardFactory(new LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-    		setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-    	}
+        if (cardFactory == null) {
+            // setCardFactory(new
+            // LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+        }
         return cardFactory;
     }
 
     /**
      * Setter for cardFactory.
-     * @param factory  the factory to set
+     * 
+     * @param factory
+     *            the factory to set
      */
     public static void setCardFactory(final CardFactoryInterface factory) {
         UtilFunctions.checkNotNull("factory", factory);
@@ -266,8 +298,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getStack.</p>
-     *
+     * <p>
+     * getStack.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.MagicStack} object.
@@ -284,8 +318,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getInputControl.</p>
-     *
+     * <p>
+     * getInputControl.
+     * </p>
+     * 
      * @return a {@link forge.gui.input.InputControl} object.
      * @since 1.0.15
      */
@@ -294,8 +330,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getGameAction.</p>
-     *
+     * <p>
+     * getGameAction.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.GameAction} object.
@@ -312,8 +350,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getStaticEffects.</p>
-     *
+     * <p>
+     * getStaticEffects.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.StaticEffects} object.
@@ -330,8 +370,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getGameInfo.</p>
-     *
+     * <p>
+     * getGameInfo.
+     * </p>
+     * 
      * @return a {@link forge.GameSummary} object.
      * @since 1.0.15
      */
@@ -340,8 +382,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getTriggerHandler.</p>
-     *
+     * <p>
+     * getTriggerHandler.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.card.trigger.TriggerHandler} object.
@@ -351,10 +395,11 @@ public final class AllZone implements NewConstants {
         return Singletons.getModel().getGameState().getTriggerHandler();
     }
 
-
     /**
-     * <p>getCombat.</p>
-     *
+     * <p>
+     * getCombat.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.Combat} object.
@@ -365,21 +410,25 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setCombat.</p>
-     *
+     * <p>
+     * setCombat.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
-     * @param attackers a {@link forge.Combat} object.
+     * @param attackers
+     *            a {@link forge.Combat} object.
      * @since 1.0.15
      */
     public static void setCombat(final Combat attackers) {
         Singletons.getModel().getGameState().setCombat(attackers);
     }
 
-
     /**
-     * <p>getStackZone.</p>
-     *
+     * <p>
+     * getStackZone.
+     * </p>
+     * 
      * Will eventually be marked deprecated.
      * 
      * @return a {@link forge.PlayerZone} object.
@@ -390,8 +439,10 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getDisplay.</p>
-     *
+     * <p>
+     * getDisplay.
+     * </p>
+     * 
      * @return a {@link forge.Display} object.
      * @since 1.0.15
      */
@@ -400,9 +451,12 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setDisplay.</p>
-     *
-     * @param display0 a {@link forge.Display} object.
+     * <p>
+     * setDisplay.
+     * </p>
+     * 
+     * @param display0
+     *            a {@link forge.Display} object.
      * @since 1.0.15
      */
     public static void setDisplay(final Display display0) {
@@ -410,24 +464,30 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>getZone.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * getZone.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link forge.PlayerZone} object.
      */
     public static PlayerZone getZoneOf(final Card c) {
         final FGameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) { return null; }
+        if (gameState == null) {
+            return null;
+        }
 
         if (gameState.getStackZone().contains(c)) {
             return gameState.getStackZone();
         }
 
         for (Player p : gameState.getPlayers()) {
-            for(Zone z : Player.ALL_ZONES) {
+            for (Zone z : Player.ALL_ZONES) {
                 PlayerZone pz = p.getZone(z);
-                if (pz.contains(c))
+                if (pz.contains(c)) {
                     return pz;
+                }
             }
         }
 
@@ -435,20 +495,27 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>resetZoneMoveTracking.</p>
+     * <p>
+     * resetZoneMoveTracking.
+     * </p>
      */
     public static void resetZoneMoveTracking() {
         final FGameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) { return; }
+        if (gameState == null) {
+            return;
+        }
         for (Player p : gameState.getPlayers()) {
-            for(Zone z : Player.ALL_ZONES) {
+            for (Zone z : Player.ALL_ZONES) {
                 p.getZone(z).resetCardsAddedThisTurn();
             }
         }
     }
 
-    /** 
-     * <p>getDeckManager.</p>
+    /**
+     * <p>
+     * getDeckManager.
+     * </p>
+     * 
      * @return dMgr
      */
     public static DeckManager getDeckManager() {
@@ -470,11 +537,13 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>Resets everything possible to set a new game.</p>
+     * <p>
+     * Resets everything possible to set a new game.
+     * </p>
      */
     public static void newGameCleanup() {
         Singletons.getModel().getGameState().newGameCleanup();
-        
+
         getDisplay().showCombat("");
         getDisplay().loadPrefs();
 
@@ -485,6 +554,7 @@ public final class AllZone implements NewConstants {
 
     /**
      * Getter for matchState.
+     * 
      * @return the matchState
      */
     public static QuestMatchState getMatchState() {
@@ -493,14 +563,17 @@ public final class AllZone implements NewConstants {
 
     /**
      * Getter for colorChanger.
+     * 
      * @return the colorChanger
      */
     public static ColorChanger getColorChanger() {
         return COLOR_CHANGER;
     }
-    
+
     /**
-     * <p>getSkin.</p>
+     * <p>
+     * getSkin.
+     * </p>
      * Gets current display skin.
      * 
      * @return a {@link forge.gui.skin.FSkin} object.
@@ -511,13 +584,16 @@ public final class AllZone implements NewConstants {
     }
 
     /**
-     * <p>setSkin.</p>
+     * <p>
+     * setSkin.
+     * </p>
      * Sets current display skin.
      * 
-     * @param attackers a {@link forge.gui.skin.FSkin} object.
+     * @param fs
+     *            a {@link forge.gui.skin.FSkin} object.
      * @since 1.0.15
      */
     public static void setSkin(final FSkin fs) {
         SKIN = fs;
     }
-} //AllZone
+} // AllZone
