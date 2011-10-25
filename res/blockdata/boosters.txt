@@ -71,4 +71,4 @@ Set:VIS|Commons:11|Uncommons:3|Rares:1
 Set:WTH|Commons:11|Uncommons:3|Rares:1
 Set:WWK|Commons:10|Uncommons:3|Rares:1
 Set:ZEN|Commons:10|Uncommons:3|Rares:1
-Set:ISD|Commons:10|Uncommons:3|Rares:1
+Set:ISD|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1

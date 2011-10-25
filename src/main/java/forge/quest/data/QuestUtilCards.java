@@ -167,7 +167,7 @@ public final class QuestUtilCards {
         
         q.shopList.clear();
         for (int i = 0; i < totalPacks; i++) {
-            q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0));
+            q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0, 0));
 
             // add some boosters
             int rollD100 = MyRandom.random.nextInt(100);

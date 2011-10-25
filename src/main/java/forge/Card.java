@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
+import forge.card.CardCharacteristics;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -39,12 +40,90 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int uniqueNumber = nextUniqueNumber++;
 
     private long value;
+    
+    private CardCharacteristics[] characteristics = new CardCharacteristics[] { new CardCharacteristics(), null };
+    private int currentCharacteristic = 0;
+    private boolean isDoubleFaced = false;
+    private boolean isFlip = false;
+    
+    private CardCharacteristics getCharacteristics() {
+        return characteristics[currentCharacteristic];
+    }
+    
+    public void addAlternateState() {
+        characteristics[1] = new CardCharacteristics();
+    }
+    
+    public void clearAlternateState() {
+        if(currentCharacteristic == 1) {
+            changeState();
+        }
+        characteristics[1] = null;
+    }
+    
+    public void clearOtherState() {
+        characteristics[1-currentCharacteristic] = null;
+    }
+    
+    @Override
+    public String getName() {
+        return getCharacteristics().getName();
+    }
+    
+    @Override
+    public void setName(String name0) {
+        getCharacteristics().setName(name0);
+    }
+    
+    public boolean isInAlternateState() {
+        return currentCharacteristic == 1;
+    }
+    
+    public boolean hasAlternateState() {
+        return characteristics[1] != null;
+    }
+    
+    public boolean changeState() {
+        if(characteristics[1-currentCharacteristic] != null) {
+            currentCharacteristic = 1 - currentCharacteristic;
+            
+            return true;
+        }
+        
+        return false;
+    }
 
+    /**
+     * @return the isDoubleFaced
+     */
+    public boolean isDoubleFaced() {
+        return isDoubleFaced;
+    }
+
+    /**
+     * @param isDoubleFaced0 the isDoubleFaced to set
+     */
+    public void setDoubleFaced(boolean isDoubleFaced0) {
+        this.isDoubleFaced = isDoubleFaced0; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the isFlip
+     */
+    public boolean isFlip() {
+        return isFlip;
+    }
+
+    /**
+     * @param isFlip0 the isFlip to set
+     */
+    public void setFlip(boolean isFlip0) {
+        this.isFlip = isFlip0; // TODO: Add 0 to parameter's name.
+    }
+
+    private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
     private Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
-    private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-    private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
-    private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     //Hidden keywords won't be displayed on the card
     private ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
@@ -59,17 +138,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     //if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
-    private ArrayList<String> type = new ArrayList<String>();
     private ArrayList<String> prevType = new ArrayList<String>();
     private ArrayList<String> choicesMade = new ArrayList<String>();
     private ArrayList<String> targetsForChoices = new ArrayList<String>();
-    private ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
-    private ArrayList<Ability_Mana> manaAbility = new ArrayList<Ability_Mana>();
-    private ArrayList<Card_Color> cardColor = new ArrayList<Card_Color>();
+
     //changes by AF animate and continuous static effects
     private ArrayList<Card_Type> changedCardTypes = new ArrayList<Card_Type>();
     private ArrayList<Card_Keywords> changedCardKeywords = new ArrayList<Card_Keywords>();
-    private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
 
     private ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private ArrayList<Card> imprintedCards = new ArrayList<Card>();
@@ -123,8 +198,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long timestamp = -1; // permanents on the battlefield
 
-    private int baseAttack = 0;
-    private int baseDefense = 0;
     private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>(); // stack of set power/toughness
     private int baseLoyalty = 0;
     private String baseAttackString = null;
@@ -160,7 +233,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String imageName = "";
     //private String rarity = "";
     private String text = "";
-    private String manaCost = "";
     private String echoCost = "";
     private String madnessCost = "";
     private String chosenType = "";
@@ -185,8 +257,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<Command> untapCommandList = new ArrayList<Command>();
     private ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
 
-    private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
-    private Map<String, String> sVars = new TreeMap<String, String>();
     private static String[] storableSVars = {"ChosenX"};
     
     private ArrayList<Card> hauntedBy = new ArrayList<Card>();
@@ -332,14 +402,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final Trigger addTrigger(final Trigger t) {
         Trigger newtrig = t.getCopy();
         newtrig.setHostCard(this);
-        triggers.add(newtrig);
+        getCharacteristics().getTriggers().add(newtrig);
         return newtrig;
     }
     
     public final void moveTrigger(final Trigger t) {
         t.setHostCard(this);
-        if(!triggers.contains(t))
-            triggers.add(t);
+        if(!getCharacteristics().getTriggers().contains(t))
+            getCharacteristics().getTriggers().add(t);
     }
 
     /**
@@ -348,7 +418,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param t a {@link forge.card.trigger.Trigger} object.
      */
     public final void removeTrigger(final Trigger t) {
-        triggers.remove(t);
+        getCharacteristics().getTriggers().remove(t);
     }
 
     /**
@@ -357,7 +427,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Trigger> getTriggers() {
-        return triggers;
+        return getCharacteristics().getTriggers();
     }
 
     /**
@@ -367,7 +437,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.card.trigger.Trigger} object.
      */
     public final Trigger getNamedTrigger(final String name) {
-        for (Trigger t : triggers) {
+        for (Trigger t : getCharacteristics().getTriggers()) {
             if (t.getName() != null && t.getName().equals(name)) {
                     return t;
             }
@@ -382,18 +452,21 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param trigs a {@link java.util.ArrayList} object.
      */
     public final void setTriggers(final ArrayList<Trigger> trigs) {
+        ArrayList<Trigger> copyList = new ArrayList<Trigger>();
         for (Trigger t : trigs) {
             Trigger newtrig = t.getCopy();
             newtrig.setHostCard(this);
-            triggers.add(newtrig);
+            copyList.add(newtrig);
         }
+        
+        getCharacteristics().setTriggers(copyList);
     }
 
     /**
      * <p>clearTriggersNew.</p>
      */
     public final void clearTriggersNew() {
-        triggers.clear();
+        getCharacteristics().getTriggers().clear();
     }
 
     /**
@@ -587,7 +660,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean canAnyPlayerActivate() {
-        for (SpellAbility s : spellAbility) {
+        for (SpellAbility s : getCharacteristics().getSpellAbility()) {
             if (s.getRestrictions().getAnyPlayer()) {
                 return true;
             }
@@ -1132,8 +1205,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getSVar(final String var) {
-        if (sVars.containsKey(var)) {
-            return sVars.get(var);
+        if (getCharacteristics().getsVars().containsKey(var)) {
+            return getCharacteristics().getsVars().get(var);
         } else {
             return "";
         }
@@ -1146,11 +1219,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param str a {@link java.lang.String} object.
      */
     public final void setSVar(final String var, final String str) {
-        if (sVars.containsKey(var)) {
-            sVars.remove(var);
+        if (getCharacteristics().getsVars().containsKey(var)) {
+            getCharacteristics().getsVars().remove(var);
         }
 
-        sVars.put(var, str);
+        getCharacteristics().getsVars().put(var, str);
     }
 
     /**
@@ -1159,7 +1232,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a Map object.
      */
     public final Map<String, String> getSVars() {
-        return sVars;
+        return getCharacteristics().getsVars();
     }
 
     /**
@@ -1168,7 +1241,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param newSVars a Map object.
      */
     public final void setSVars(final Map<String, String> newSVars) {
-        sVars = newSVars;
+        getCharacteristics().setsVars(newSVars);
     }
 
     /**
@@ -1238,7 +1311,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s a {@link java.lang.String} object.
      */
     public final void setManaCost(final String s) {
-        manaCost = s;
+        getCharacteristics().setManaCost(s);
     }
 
     /**
@@ -1247,7 +1320,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getManaCost() {
-        return manaCost;
+        return getCharacteristics().getManaCost();
     }
 
     /**
@@ -1259,7 +1332,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.equals("")) {
             s = "0";
         }
-        cardColor.add(new Card_Color(new ManaCost(s), this, false, true));
+        getCharacteristics().getCardColor().add(new Card_Color(new ManaCost(s), this, false, true));
     }
 
     /**
@@ -1275,7 +1348,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (bIncrease) {
             Card_Color.increaseTimestamp();
         }
-        cardColor.add(new Card_Color(new ManaCost(s), c, addToColors, false));
+        getCharacteristics().getCardColor().add(new Card_Color(new ManaCost(s), c, addToColors, false));
         return Card_Color.getTimestamp();
     }
 
@@ -1289,14 +1362,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeColor(final String s, final Card c, final boolean addTo, final long timestampIn) {
         Card_Color removeCol = null;
-        for (Card_Color cc : cardColor) {
+        for (Card_Color cc : getCharacteristics().getCardColor()) {
             if (cc.equals(s, c, addTo, timestampIn)) {
                 removeCol = cc;
             }
         }
 
         if (removeCol != null) {
-            cardColor.remove(removeCol);
+            getCharacteristics().getCardColor().remove(removeCol);
         }
     }
 
@@ -1322,7 +1395,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param colors a {@link java.util.ArrayList} object.
      */
     public final void setColor(final ArrayList<Card_Color> colors) {
-        cardColor = colors;
+        getCharacteristics().setCardColor(colors);
     }
 
     /**
@@ -1331,7 +1404,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Card_Color> getColor() {
-        return cardColor;
+        return getCharacteristics().getCardColor();
     }
 
     /**
@@ -1342,15 +1415,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     final Card_Color determineColor(final ArrayList<Card_Color> globalChanges) {
         Card_Color colors = new Card_Color(this);
-        int i = cardColor.size() - 1;
+        int i = getCharacteristics().getCardColor().size() - 1;
         int j = -1;
         if (globalChanges != null) { j = globalChanges.size() - 1; }
         // if both have changes, see which one is most recent
         while (i >= 0 && j >= 0) {
             Card_Color cc = null;
-            if (cardColor.get(i).getStamp() > globalChanges.get(j).getStamp()) {
+            if (getCharacteristics().getCardColor().get(i).getStamp() > globalChanges.get(j).getStamp()) {
                 // Card has a more recent color stamp
-                cc = cardColor.get(i);
+                cc = getCharacteristics().getCardColor().get(i);
                 i--;
             } else {
                 // Global effect has a more recent color stamp
@@ -1366,7 +1439,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         while (i >= 0) {
-            Card_Color cc = cardColor.get(i);
+            Card_Color cc = getCharacteristics().getCardColor().get(i);
             i--;
             for (String s : cc.toStringArray()) {
                 colors.addToCardColor(s);
@@ -1395,7 +1468,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getCMC() {
-        return CardUtil.getConvertedManaCost(manaCost);
+        return CardUtil.getConvertedManaCost(getCharacteristics().getManaCost());
     }
     
     /**
@@ -1787,14 +1860,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             ArrayList<String> kw = getKeyword();
 
             // Triggered abilities
-            for (Trigger trig : triggers) {
+            for (Trigger trig : getCharacteristics().getTriggers()) {
                 if (!trig.isSecondary()) {
                     sb.append(trig.toString() + "\r\n");
                 }
             }
 
             // static abilities
-            for (StaticAbility stAb : staticAbilities) {
+            for (StaticAbility stAb : getCharacteristics().getStaticAbilities()) {
             	String stAbD = stAb.toString();
             	if (!stAbD.equals("")) {
                     sb.append(stAbD + "\r\n");
@@ -1897,14 +1970,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         */
 
         // Triggered abilities
-        for (Trigger trig : triggers) {
+        for (Trigger trig : getCharacteristics().getTriggers()) {
             if (!trig.isSecondary()) {
                 sb.append(trig.toString() + "\r\n");
             }
         }
 
         // static abilities
-        for (StaticAbility stAb : staticAbilities) {
+        for (StaticAbility stAb : getCharacteristics().getStaticAbilities()) {
         	sb.append(stAb.toString() + "\r\n");
         }
 
@@ -2014,7 +2087,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Ability_Mana> getManaAbility() {
-        return new ArrayList<Ability_Mana>(manaAbility);
+        return new ArrayList<Ability_Mana>(getCharacteristics().getManaAbility());
     }
 
     // Returns basic mana abilities plus "reflected mana" abilities
@@ -2062,9 +2135,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>clearFirstSpellAbility.</p>
      */
     public final void clearFirstSpell() {
-    	for(int i = 0; i < spellAbility.size(); i++) {
-    		if (spellAbility.get(i).isSpell()) {
-    			spellAbility.remove(i);
+    	for(int i = 0; i < getCharacteristics().getSpellAbility().size(); i++) {
+    		if (getCharacteristics().getSpellAbility().get(i).isSpell()) {
+    		    getCharacteristics().getSpellAbility().remove(i);
     			return;
     		}
     	}
@@ -2074,12 +2147,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>clearAllButFirstSpellAbility.</p>
      */
     public final void clearAllButFirstSpellAbility() {
-        if (!spellAbility.isEmpty()) {
-            SpellAbility first = spellAbility.get(0);
-            spellAbility.clear();
-            spellAbility.add(first);
+        if (!getCharacteristics().getSpellAbility().isEmpty()) {
+            SpellAbility first = getCharacteristics().getSpellAbility().get(0);
+            getCharacteristics().getSpellAbility().clear();
+            getCharacteristics().getSpellAbility().add(first);
         }
-        manaAbility.clear();
+        getCharacteristics().getManaAbility().clear();
     }
 
     /**
@@ -2089,12 +2162,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final ArrayList<SpellAbility> getAllButFirstSpellAbility() {
         ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-        sas.addAll(spellAbility);
+        sas.addAll(getCharacteristics().getSpellAbility());
         if (!sas.isEmpty()) {
-            SpellAbility first = spellAbility.get(0);
+            SpellAbility first = getCharacteristics().getSpellAbility().get(0);
             sas.remove(first);
         }
-        sas.addAll(manaAbility);
+        sas.addAll(getCharacteristics().getManaAbility());
 
         return sas;
     }
@@ -2103,8 +2176,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>clearSpellAbility.</p>
      */
     public final void clearSpellAbility() {
-        spellAbility.clear();
-        manaAbility.clear();
+        getCharacteristics().getSpellAbility().clear();
+        getCharacteristics().getManaAbility().clear();
     }
 
     /**
@@ -2113,7 +2186,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.card.spellability.Spell_Permanent} object.
      */
     public final Spell_Permanent getSpellPermanent() {
-        for (SpellAbility sa : spellAbility) {
+        for (SpellAbility sa : getCharacteristics().getSpellAbility()) {
             if (sa instanceof Spell_Permanent) {
                 return (Spell_Permanent) sa;
             }
@@ -2125,14 +2198,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>clearSpellKeepManaAbility.</p>
      */
     public final void clearSpellKeepManaAbility() {
-        spellAbility.clear();
+        getCharacteristics().getSpellAbility().clear();
     }
 
     /**
      * <p>clearManaAbility.</p>
      */
     public final void clearManaAbility() {
-        manaAbility.clear();
+        getCharacteristics().getManaAbility().clear();
     }
 
 
@@ -2144,9 +2217,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addFirstSpellAbility(final SpellAbility a) {
         a.setSourceCard(this);
         if (a instanceof Ability_Mana) {
-            manaAbility.add(0, (Ability_Mana) a);
+            getCharacteristics().getManaAbility().add(0, (Ability_Mana) a);
         } else {
-            spellAbility.add(0, a);
+            getCharacteristics().getSpellAbility().add(0, a);
         }
     }
 
@@ -2158,9 +2231,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addSpellAbility(final SpellAbility a) {
         a.setSourceCard(this);
         if (a instanceof Ability_Mana) {
-            manaAbility.add((Ability_Mana) a);
+            getCharacteristics().getManaAbility().add((Ability_Mana) a);
         } else {
-            spellAbility.add(a);
+            getCharacteristics().getSpellAbility().add(a);
         }
     }
 
@@ -2172,10 +2245,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void removeSpellAbility(final SpellAbility a) {
         if (a instanceof Ability_Mana) {
             //if (a.isExtrinsic()) //never remove intrinsic mana abilities, is this the way to go??
-            manaAbility.remove(a);
+            getCharacteristics().getManaAbility().remove(a);
         }
         else {
-            spellAbility.remove(a);
+            getCharacteristics().getSpellAbility().remove(a);
         }
     }
 
@@ -2187,7 +2260,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         //temp ArrayList, otherwise ConcurrentModificationExceptions occur:
         ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
 
-        for (SpellAbility var : manaAbility) {
+        for (SpellAbility var : getCharacteristics().getManaAbility()) {
             if (var.isExtrinsic()) {
                 saList.add(var);
             }
@@ -2204,7 +2277,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public ArrayList<String> getIntrinsicManaAbilitiesDescriptions() {
         ArrayList<String> list = new ArrayList<String>();
-        for (SpellAbility var : manaAbility) {
+        for (SpellAbility var : getCharacteristics().getManaAbility()) {
             if (var.isIntrinsic()) list.add(var.toString());
         }
         return list;
@@ -2216,7 +2289,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     public SpellAbility[] getSpellAbility() {
-        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(spellAbility);
+        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(getCharacteristics().getSpellAbility());
         res.addAll(getManaAbility());
         SpellAbility[] s = new SpellAbility[res.size()];
         res.toArray(s);
@@ -2229,8 +2302,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<SpellAbility> getSpellAbilities() {
-        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(spellAbility);
+        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(getCharacteristics().getSpellAbility());
         res.addAll(getManaAbility());
+        return res;
+    }
+    
+    public ArrayList<SpellAbility> getAllSpellAbilities() {
+        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(getSpellAbilities());
+        if(hasAlternateState()) {
+            changeState();
+            res.addAll(getSpellAbilities());
+            changeState();
+        }
+        
         return res;
     }
 
@@ -2240,7 +2324,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<SpellAbility> getSpells() {
-        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(spellAbility);
+        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(getCharacteristics().getSpellAbility());
         ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
         for (SpellAbility sa : s) {
@@ -2255,7 +2339,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<SpellAbility> getBasicSpells() {
-        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(spellAbility);
+        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(getCharacteristics().getSpellAbility());
         ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
         for (SpellAbility sa : s) {
@@ -2270,7 +2354,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<SpellAbility> getAdditionalCostSpells() {
-        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(spellAbility);
+        ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(getCharacteristics().getSpellAbility());
         ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
         for (SpellAbility sa : s) {
@@ -3238,7 +3322,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a a {@link java.util.ArrayList} object.
      */
     public final void setType(final ArrayList<String> a) {
-        type = new ArrayList<String>(a);
+        getCharacteristics().setType(new ArrayList<String>(a));
     }
 
     /**
@@ -3247,7 +3331,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a a {@link java.lang.String} object.
      */
     public final void addType(final String a) {
-        type.add(a);
+        getCharacteristics().getType().add(a);
     }
 
     /**
@@ -3256,7 +3340,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a a {@link java.lang.String} object.
      */
     public final void removeType(final String a) {
-        type.remove(a);
+        getCharacteristics().getType().remove(a);
     }
 
     /**
@@ -3269,7 +3353,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     	// see if type changes are in effect
     	if (!changedCardTypes.isEmpty()) {
 
-	    	ArrayList<String> newType = new ArrayList<String>(type);
+	    	ArrayList<String> newType = new ArrayList<String>(getCharacteristics().getType());
 	    	ArrayList<Card_Type> types = changedCardTypes;
 	    	Collections.sort(types);  // sorts types by timeStamp
 
@@ -3308,7 +3392,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     	}
 
     	//nothing changed
-        return new ArrayList<String>(type);
+        return new ArrayList<String>(getCharacteristics().getType());
     }
     
     public void setChangedCardTypes(ArrayList<Card_Type> types) {
@@ -3357,8 +3441,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final ArrayList<String> clearAllTypes() {
         ArrayList<String> originalTypes = new ArrayList<String>();
-        originalTypes.addAll(type);
-        type.clear();
+        originalTypes.addAll(getCharacteristics().getType());
+        getCharacteristics().getType().clear();
         return originalTypes;
     }
 
@@ -3425,7 +3509,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getBaseAttack() {
-        return baseAttack;
+        return getCharacteristics().getBaseAttack();
     }
 
     /**
@@ -3434,7 +3518,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getBaseDefense() {
-        return baseDefense;
+        return getCharacteristics().getBaseDefense();
     }
 
     //values that are printed on card
@@ -3444,7 +3528,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param n a int.
      */
     public final void setBaseAttack(final int n) {
-        baseAttack = n;
+        getCharacteristics().setBaseAttack(n);
     }
 
     /**
@@ -3453,7 +3537,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param n a int.
      */
     public final void setBaseDefense(final int n) {
-        baseDefense = n;
+        getCharacteristics().setBaseDefense(n);
     }
 
     //values that are printed on card
@@ -4012,7 +4096,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getIntrinsicAbilities() {
-        return intrinsicAbility;
+        return getCharacteristics().getIntrinsicAbility();
     }
 
     /**
@@ -4021,14 +4105,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getIntrinsicKeyword() {
-        return new ArrayList<String>(intrinsicKeyword);
+        return new ArrayList<String>(getCharacteristics().getIntrinsicKeyword());
     }
 
     /**
      * <p>clearIntrinsicKeyword.</p>
      */
     public final void clearIntrinsicKeyword() {
-        intrinsicKeyword.clear();
+        getCharacteristics().getIntrinsicKeyword().clear();
     }
 
     /**
@@ -4037,14 +4121,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a a {@link java.util.ArrayList} object.
      */
     public final void setIntrinsicKeyword(final ArrayList<String> a) {
-        intrinsicKeyword = new ArrayList<String>(a);
+        getCharacteristics().setIntrinsicKeyword(new ArrayList<String>(a));
     }
 
     /**
      * <p>clearAllKeywords.</p>
      */
     public final void clearAllKeywords() {
-        intrinsicKeyword.clear();
+        getCharacteristics().getIntrinsicKeyword().clear();
         extrinsicKeyword.clear();
         hiddenExtrinsicKeyword.clear();        //Hidden keywords won't be displayed on the card
     }
@@ -4055,7 +4139,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a a {@link java.util.ArrayList} object.
      */
     public final void setIntrinsicAbilities(final ArrayList<String> a) {
-        intrinsicAbility = new ArrayList<String>(a);
+        getCharacteristics().setIntrinsicAbility(new ArrayList<String>(a));
     }
 
     /**
@@ -4065,7 +4149,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addIntrinsicKeyword(final String s) {
         if (s.trim().length() != 0) {
-            intrinsicKeyword.add(s);
+            getCharacteristics().getIntrinsicKeyword().add(s);
         //intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
         }
     }
@@ -4077,7 +4161,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public void addIntrinsicAbility(String s) {
         if (s.trim().length() != 0)
-            intrinsicAbility.add(s);
+            getCharacteristics().getIntrinsicAbility().add(s);
     }
 
     /**
@@ -4087,7 +4171,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addNonStackingIntrinsicKeyword(String s) {
         if (!getIntrinsicKeyword().contains(s) && s.trim().length() != 0) {
-                intrinsicKeyword.add((getName().trim().length() == 0 ? s : s.replaceAll(getName(), "CARDNAME")));
+            getCharacteristics().getIntrinsicKeyword().add((getName().trim().length() == 0 ? s : s.replaceAll(getName(), "CARDNAME")));
         }
     }
 
@@ -4097,7 +4181,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s a {@link java.lang.String} object.
      */
     public final void removeIntrinsicKeyword(String s) {
-        intrinsicKeyword.remove(s);
+        getCharacteristics().getIntrinsicKeyword().remove(s);
     }
 
     /**
@@ -4106,7 +4190,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getIntrinsicKeywordSize() {
-        return intrinsicKeyword.size();
+        return getCharacteristics().getIntrinsicKeyword().size();
     }
 
     /**
@@ -4284,18 +4368,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     
     public void setStaticAbilities(ArrayList<StaticAbility> a) {
-    	staticAbilities = new ArrayList<StaticAbility>(a);
+    	getCharacteristics().setStaticAbilities(new ArrayList<StaticAbility>(a));
     }
     
     public ArrayList<StaticAbility> getStaticAbilities() {
-        return new ArrayList<StaticAbility>(staticAbilities);
+        return new ArrayList<StaticAbility>(getCharacteristics().getStaticAbilities());
     }
     
     public void addStaticAbility(String s) {
     	
         if (s.trim().length() != 0) {
         	StaticAbility stAb = new StaticAbility(s,this);
-        	staticAbilities.add(stAb);
+        	getCharacteristics().getStaticAbilities().add(stAb);
         }
     }
 
@@ -4534,7 +4618,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             Card c = (Card) o;
             int a = getUniqueNumber();
             int b = c.getUniqueNumber();
-            return (a == b);
+            return (a == b); 
         }
         return false;
     }
@@ -4766,7 +4850,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public boolean isReflectedLand() {
-    	for(Ability_Mana am : manaAbility)
+    	for(Ability_Mana am : getCharacteristics().getManaAbility())
     		if (am.isReflectedMana())
     			return true;
     			
@@ -5011,6 +5095,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             //Should this match All chosen colors, or any?  Default to first chosen for now until it matters.
             if (source.getChosenColor().size() == 0) return false;
             if (!CardUtil.getColors(this).contains(source.getChosenColor().get(0))) return false;
+        } else if (Property.equals("DoubleFaced")) {
+            if (!isDoubleFaced) return false;
+        } else if (Property.equals("Flip")) {
+            if (!isFlip) return false;
         } else if (Property.startsWith("YouCtrl")) {
             if (!getController().isPlayer(sourceController)) return false;
         } else if (Property.startsWith("YouDontCtrl")) {
@@ -5253,7 +5341,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         {
             if (isType(Property.substring(3))) return false;
         } else if (Property.equals("CostsPhyrexianMana")) {
-            if (!manaCost.contains("P")) return false;
+            if (!getCharacteristics().getManaCost().contains("P")) return false;
         } else if (Property.equals("IsRemembered")) {
             if(!source.getRemembered().contains(this)) return false;
         } else {
@@ -6026,7 +6114,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     }
 
-    private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
+    
     private String curSetCode = "";
 
     /**
@@ -6035,7 +6123,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param sInfo a {@link forge.SetInfo} object.
      */
     public final void addSet(final SetInfo sInfo) {
-        Sets.add(sInfo);
+        getCharacteristics().getSets().add(sInfo);
     }
 
     /**
@@ -6044,7 +6132,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SetInfo> getSets() {
-        return Sets;
+        return getCharacteristics().getSets();
     }
 
     /**
@@ -6053,7 +6141,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param siList a {@link java.util.ArrayList} object.
      */
     public final void setSets(final ArrayList<SetInfo> siList) {
-        Sets = siList;
+        getCharacteristics().setSets(siList);
     }
 
     /**
@@ -6078,12 +6166,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>setRandomSetCode.</p>
      */
     public final void setRandomSetCode() {
-        if (Sets.size() < 1) {
+        if (getCharacteristics().getSets().size() < 1) {
             return;
         }
 
         Random r = MyRandom.random;
-        SetInfo si = Sets.get(r.nextInt(Sets.size()));
+        SetInfo si = getCharacteristics().getSets().get(r.nextInt(getCharacteristics().getSets().size()));
 
         curSetCode = si.Code;
     }
@@ -6113,9 +6201,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetRarity() {
-        for (int i = 0; i < Sets.size(); i++) {
-            if (Sets.get(i).Code.equals(curSetCode)) {
-                return Sets.get(i).Rarity;
+        for (int i = 0; i < getCharacteristics().getSets().size(); i++) {
+            if (getCharacteristics().getSets().get(i).Code.equals(curSetCode)) {
+                return getCharacteristics().getSets().get(i).Rarity;
             }
         }
 
@@ -6128,9 +6216,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetURL() {
-        for (int i = 0; i < Sets.size(); i++) {
-            if (Sets.get(i).Code.equals(curSetCode)) {
-                return Sets.get(i).URL;
+        for (int i = 0; i < getCharacteristics().getSets().size(); i++) {
+            if (getCharacteristics().getSets().get(i).Code.equals(curSetCode)) {
+                return getCharacteristics().getSets().get(i).URL;
             }
         }
 
@@ -6146,15 +6234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardDb.instance().getCard(this.getName()).getSet();
     }
 
-    private String ImageFilename = "";
-
     /**
      * <p>setImageFilename.</p>
      *
      * @param iFN a {@link java.lang.String} object.
      */
     public void setImageFilename(final String iFN) {
-        ImageFilename = iFN;
+        getCharacteristics().setImageFilename(iFN);
     }
 
     /**
@@ -6163,7 +6249,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getImageFilename() {
-        return ImageFilename;
+        return getCharacteristics().getImageFilename();
     }
 
     /**
@@ -6208,8 +6294,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an int
      */
     public final int getFoil() {
-        if (sVars.containsKey("Foil")) {
-            return Integer.parseInt(sVars.get("Foil"));
+        if (getCharacteristics().getsVars().containsKey("Foil")) {
+            return Integer.parseInt(getCharacteristics().getsVars().get("Foil"));
         }
         return 0;
     }
@@ -6220,7 +6306,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param f an int
      */
     public final void setFoil(final int f) {
-    	sVars.put("Foil", Integer.toString(f));
+        getCharacteristics().getsVars().put("Foil", Integer.toString(f));
     }
     
     public final void addHauntedBy(final Card c) {
@@ -6253,6 +6339,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         
         return sum;
+    }
+    
+    /**
+     * @return the cardColorsOverridden
+     */
+    public boolean isCardColorsOverridden() {
+        return getCharacteristics().isCardColorsOverridden();
+    }
+    /**
+     * @param cardColorsOverridden0 the cardColorsOverridden to set
+     */
+    public void setCardColorsOverridden(boolean cardColorsOverridden0) {
+        getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
     }
 
 } //end Card class

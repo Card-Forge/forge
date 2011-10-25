@@ -27,6 +27,7 @@ import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 
+import forge.card.CardColor;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.card.trigger.TriggerHandler;
@@ -321,7 +322,9 @@ public class CardReader
             String line = readLine(reader);
             while (!"End".equals(line)) {
                 rulesReader.parseLine(line);
-                if (line.charAt(0) == '#') { // NOPMD by Braids on 8/18/11 10:59 PM
+                if(line.isEmpty()) {
+                  //Ignore empty lines.  
+                } else if (line.charAt(0) == '#') { // NOPMD by Braids on 8/18/11 10:59 PM
                     //no need to do anything, this indicates a comment line
                 } else if (line.startsWith("Name:")) {
                     final String value = line.substring(5);
@@ -389,6 +392,27 @@ public class CardReader
                 } else if (line.startsWith("SetInfo:")) {
                     final String value = line.substring("SetInfo:".length());
                     card.addSet(new SetInfo(value)); // NOPMD by Braids on 8/18/11 11:08 PM
+                } else if (line.equals("ALTERNATE")) {
+                    card.addAlternateState();
+                    card.changeState();
+                } else if (line.startsWith("AlternateMode:")) {
+                    final String value = line.substring("AlternateMode:".length());
+                    if(value.equalsIgnoreCase("Flip")) {
+                        card.setFlip(true);
+                    } else {
+                        card.setDoubleFaced(true);
+                    }
+                } else if (line.startsWith("Colors:")) {
+                    final String value = line.substring("Colors:".length());
+                    ArrayList<Card_Color> newCols = new ArrayList<Card_Color>();
+                    for(String col : value.split(",")) {
+                        Card_Color newCol = new Card_Color(card);
+                        newCol.addToCardColor(col);
+                        newCols.add(newCol);
+                    }
+                    
+                    card.setColor(newCols);
+                    card.setCardColorsOverridden(true);
                 }
 
                 line = readLine(reader);
@@ -403,8 +427,14 @@ public class CardReader
             } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08 PM
             }
         }
+        
+        if(card.isInAlternateState()) {
+            card.changeState();
+        }
 
-        listRulesToFill.add(rulesReader.getCard());
+        CardRules[] crdRules = rulesReader.getCard();
+        listRulesToFill.add(crdRules[0]);
+        if(crdRules[1] != null) { listRulesToFill.add(crdRules[1]); }
         mapToFill.put(card.getName(), card);
         return card;
     }

@@ -20,11 +20,8 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id: CardOracle.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules {
-    private final String name;
-    private final CardType type;
-    private final CardManaCost cost;
-    private CardColor color = null; // color is subject to change yet (parse %cardname% is %color% rule)
-    private final String[] rules;
+
+    private final CardRuleCharacteristics characteristics;
 
     private int iPower = -1;
     private int iToughness = -1;
@@ -39,12 +36,12 @@ public final class CardRules {
     private boolean isRemovedFromRandomDecks = false;
 
     // Ctor and builders are needed here
-    public String getName() { return name; }
-    public CardType getType() { return type; }
-    public CardManaCost getManaCost() { return cost; }
-    public CardColor getColor() { return color; }
-    public String[] getRules() { return rules; }
-    public Set<Entry<String, CardInSet>> getSetsPrinted() { return setsPrinted.entrySet(); }
+    public String getName() { return characteristics.getCardName(); }
+    public CardType getType() { return characteristics.getCardType(); }
+    public CardManaCost getManaCost() { return characteristics.getManaCost(); }
+    public CardColor getColor() { return characteristics.getColor(); }
+    public String[] getRules() { return characteristics.getCardRules(); }
+    public Set<Entry<String, CardInSet>> getSetsPrinted() { return characteristics.getSetsData().entrySet(); }
 
     public String getPower() { return power; }
     public int getIntPower() { return iPower; }
@@ -59,43 +56,51 @@ public final class CardRules {
         if (getType().isPlaneswalker()) { return loyalty; }
         return "";
     }
+    
+    private final boolean isAlt;
+    public boolean isAltState() {
+        return isAlt;
+    }
+    
+    private final boolean isDFC;
+    public boolean isDoubleFaced() {
+        return isDFC;
+    }
 
-    public CardRules(final String cardName, final CardType cardType, final CardManaCost manacost,
-            final String ptLine, final String[] oracleRules, final Map<String, CardInSet> setsData,
+    public CardRules(final CardRuleCharacteristics chars,
+            final boolean isDoubleFacedCard, final boolean isAlt0,
             final boolean removedFromRandomDecks, final boolean removedFromAIDecks)
     {
-        this.name = cardName;
-        this.type = cardType;
-        this.cost = manacost;
-        this.rules = oracleRules;
-        this.color = new CardColor(cost);
+        characteristics = chars;
+        isAlt = isAlt0;
+        isDFC = isDoubleFacedCard;
         this.isRemovedFromAIDecks = removedFromAIDecks;
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
 
         //System.out.println(cardName);
 
-        if (cardType.isCreature()) {
-            int slashPos = ptLine == null ? -1 : ptLine.indexOf('/');
+        if (getType().isCreature()) {
+            int slashPos = characteristics.getPtLine() == null ? -1 : characteristics.getPtLine().indexOf('/');
             if (slashPos == -1) {
-                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", cardName));
+                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", getName()));
             }
-            this.power = ptLine.substring(0, slashPos);
-            this.toughness = ptLine.substring(slashPos + 1, ptLine.length());
+            this.power = characteristics.getPtLine().substring(0, slashPos);
+            this.toughness = characteristics.getPtLine().substring(slashPos + 1, characteristics.getPtLine().length());
             this.iPower = StringUtils.isNumeric(power) ? Integer.parseInt(power) : 0;
             this.iToughness = StringUtils.isNumeric(toughness) ? Integer.parseInt(toughness) : 0;
-        } else if (cardType.isPlaneswalker()) {
-            this.loyalty = ptLine;
+        } else if (getType().isPlaneswalker()) {
+            this.loyalty = characteristics.getPtLine();
         }
 
-        if (setsData.isEmpty()) {
-            setsData.put("???", new CardInSet(CardRarity.Unknown, 1));
+        if (characteristics.getSetsData().isEmpty()) {
+            characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1));
         }
-        setsPrinted = setsData;
+        setsPrinted = characteristics.getSetsData();
     }
 
     public boolean rulesContain(final String text) {
-        if (rules == null) { return false; }
-        for (String r : rules) { if (StringUtils.containsIgnoreCase(r, text)) { return true; } }
+        if (characteristics.getCardRules() == null) { return false; }
+        for (String r : characteristics.getCardRules()) { if (StringUtils.containsIgnoreCase(r, text)) { return true; } }
         return false;
     }
     public String getLatestSetPrinted() {
@@ -109,7 +114,7 @@ public final class CardRules {
     public CardInSet getSetInfo(final String setCode) {
         CardInSet result = setsPrinted.get(setCode);
         if (result != null) { return result; }
-        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", name, setCode));
+        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", getName(), setCode));
 
     }
     public CardRarity getRarityFromLatestSet() {

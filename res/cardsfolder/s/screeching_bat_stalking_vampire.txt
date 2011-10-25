@@ -1,0 +1,27 @@
+Name:Screeching Bat
+ManaCost:2 B
+Types:Creature Bat
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may pay 2 B B. If you do, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 2 B B | Defined$ Self
+SVar:Rarity:Uncommon
+AlternateMode:DoubleFaced
+Oracle:Flying\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.\n----\nStalking Vampire\n(Black)\nCreature - Vampire\n5/5\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/114a.jpg
+
+ALTERNATE
+
+Name:Stalking Vampire
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire
+Text:no text
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may pay 2 B B. If you do, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 2 B B | Defined$ Self
+SVar:Rarity:Uncommon
+Oracle:Creature - Vampire\n5/5\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/114b.jpg
+End

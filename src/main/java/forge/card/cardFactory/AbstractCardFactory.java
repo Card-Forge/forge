@@ -27,6 +27,7 @@ import forge.FileUtil;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.card.CardCharacteristics;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.*;
@@ -164,21 +165,24 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
      */
     @Override
     public final Card copyCard(final Card in) {
-
         Card out = getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
 
-        out.setSVars(in.getSVars());
-        out.setSets(in.getSets());
-        out.setCurSetCode(in.getCurSetCode());
-        out.setImageFilename(in.getImageFilename());
+        CardFactoryUtil.copyCharacteristics(in, out);
+        if(in.hasAlternateState()) {
+            in.changeState();
+            out.changeState();
+            CardFactoryUtil.copyCharacteristics(in, out);
+            in.changeState();
+            out.changeState();
+        }
+        
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
         out.setEquippedBy(in.getEquippedBy());
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
-        out.setCounters(in.getCounters());
         for(Object o:in.getRemembered()) {
             out.addRemembered(o);
         }
@@ -207,9 +211,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         tokens = tokens.filter(CardListFilter.token);
         all.addAll(tokens);
         out.setCopiedSpell(true);
-        for (Trigger t : out.getTriggers()) {
-            AllZone.getTriggerHandler().registerTrigger(t);
-        }
         copiedList.add(out);
         return out;
 
@@ -407,35 +408,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         return result;
     }
-
-    /**
-     * <p>getCard2.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     * @param owner a {@link forge.Player} object.
-     * @return a {@link forge.Card} object.
-     * @throws RuntimeException if cardName isn't in the Card map
-     */
-    protected Card getCard2(final String cardName, final Player owner) {
-        //o should be Card object
-        Object o = map.get(cardName);
-        if (o == null) {
-            throw new RuntimeException("CardFactory : getCard() invalid card name - " + cardName);
-        }
-
-        final Card card = CardFactoryUtil.copyStats(o);
-        card.setOwner(owner);
-        card.addColor(card.getManaCost());
-        //may have to change the spell
-
-        //this is so permanents like creatures and artifacts have a "default" spell
-        if (card.isPermanent() && !card.isLand() && !card.isAura()) {
-            card.addSpellAbility(new Spell_Permanent(card));
-        }
-
-        CardFactoryUtil.parseKeywords(card, cardName);
-
-        //**************************************************
+    
+    protected void addAbilityFactoryAbilities(Card card) {
+      //**************************************************
         // AbilityFactory cards
         ArrayList<String> ia = card.getIntrinsicAbilities();
         if (ia.size() > 0) {
@@ -464,6 +439,44 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             }
 
         }
+    }
+
+    /**
+     * <p>getCard2.</p>
+     *
+     * @param cardName a {@link java.lang.String} object.
+     * @param owner a {@link forge.Player} object.
+     * @return a {@link forge.Card} object.
+     * @throws RuntimeException if cardName isn't in the Card map
+     */
+    protected Card getCard2(final String cardName, final Player owner) {
+        //o should be Card object
+        Object o = map.get(cardName);
+        if (o == null) {
+            throw new RuntimeException("CardFactory : getCard() invalid card name - " + cardName);
+        }
+
+        final Card card = CardFactoryUtil.copyStats(o);
+        card.setOwner(owner);
+        if(!card.isCardColorsOverridden()) {
+            card.addColor(card.getManaCost());
+        }
+        //may have to change the spell
+
+        //this is so permanents like creatures and artifacts have a "default" spell
+        if (card.isPermanent() && !card.isLand() && !card.isAura()) {
+            card.addSpellAbility(new Spell_Permanent(card));
+        }
+
+        CardFactoryUtil.parseKeywords(card, cardName);
+
+        addAbilityFactoryAbilities(card);
+        if(card.hasAlternateState()) {
+            card.changeState();
+            addAbilityFactoryAbilities(card);
+            card.changeState();
+        }
+        
 
         //register static abilities
         ArrayList<String> stAbs = card.getStaticAbilityStrings();
@@ -1614,8 +1627,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 private static final long serialVersionUID = 6212378498863558380L;
 
                 public void execute() {
-                    //Slight hack if the cloner copies a card with triggers
-                    AllZone.getTriggerHandler().removeAllFromCard(cloned[0]);
 
                     Card orig = cfact.getCard(card.getName(), card.getController());
                     PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
@@ -1657,11 +1668,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                         for (SpellAbility sa : copyTarget[0].getSpellAbilities()) {
                             cloned[0].addSpellAbility(sa);
-                        }
-
-                        //Slight hack in case the cloner copies a card with triggers
-                        for (Trigger t : cloned[0].getTriggers()) {
-                            AllZone.getTriggerHandler().registerTrigger(t);
                         }
 
                         AllZone.getGameAction().moveToPlay(cloned[0]);

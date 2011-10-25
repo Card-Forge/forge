@@ -42,6 +42,7 @@ public class BoosterGenerator {
     private final List<CardPrinted> rares = new ArrayList<CardPrinted>();
     private final List<CardPrinted> mythics = new ArrayList<CardPrinted>();
     private final List<CardPrinted> specials = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> doubleFaced = new ArrayList<CardPrinted>();
 
     //private List<CardPrinted> commonCreatures;
     //private List<CardPrinted> commonNonCreatures;
@@ -53,6 +54,7 @@ public class BoosterGenerator {
     private int numCommons = 10;
     private int numUncommons = 3;
     private int numRareSlots = 1;
+    private int numDoubleFaced = 0;
     private int numSpecials = 0;
 
     /**
@@ -84,8 +86,9 @@ public class BoosterGenerator {
         numUncommons = bs.getUncommon();
         numRareSlots = bs.getRare();
         numSpecials = bs.getSpecial();
+        numDoubleFaced = bs.getDoubleFaced();
 
-        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
+        Predicate<CardPrinted> filter = Predicate.and(CardPrinted.Predicates.printedInSets(cardSet.getCode()), CardPrinted.Predicates.Presets.nonAlternate);
         List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
         for (CardPrinted c : cardsInThisSet) {
@@ -149,13 +152,13 @@ public class BoosterGenerator {
 
     
     public final List<CardPrinted> getBoosterPack() {
-        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, 0, 0);
+        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, numDoubleFaced, 0, 0);
     }
     /**
      * So many parameters are needed for custom limited cardpools, 
      */
     public final List<CardPrinted> getBoosterPack(final int nCom, final int nUnc, final int nRareSlots,
-            final int nRares, final int nMythics, final int nSpecs, final int nAnyCard, final int nLands) {
+            final int nRares, final int nMythics, final int nSpecs, final int nDoubls, final int nAnyCard, final int nLands) {
         
         List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
@@ -179,6 +182,9 @@ public class BoosterGenerator {
             temp.addAll(pickRandomCards(rares, nRares));
             temp.addAll(pickRandomCards(mythics, nMythics));
         }
+        if (nDoubls > 0) {
+            temp.addAll(pickRandomCards(doubleFaced,nDoubls));
+        }
         
         temp.addAll(pickRandomCards(specials, nSpecs));
         
@@ -190,12 +196,16 @@ public class BoosterGenerator {
     }
 
     private void addToRarity(final CardPrinted c) {
-        switch(c.getRarity()) {
-            case Common: commons.add(c); break;
-            case Uncommon: uncommons.add(c); break;
-            case Rare: rares.add(c); break;
-            case MythicRare: mythics.add(c); break;
-            case Special: specials.add(c); break;
+        if(c.isDoubleFaced() && numDoubleFaced > 0) {
+            doubleFaced.add(c);
+        } else {
+            switch(c.getRarity()) {
+                case Common: commons.add(c); break;
+                case Uncommon: uncommons.add(c); break;
+                case Rare: rares.add(c); break;
+                case MythicRare: mythics.add(c); break;
+                case Special: specials.add(c); break;
+            }
         }
 
         if (c.getCard().getType().isBasicLand()) {

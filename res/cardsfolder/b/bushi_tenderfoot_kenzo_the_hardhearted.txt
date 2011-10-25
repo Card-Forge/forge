@@ -1,0 +1,27 @@
+Name:Bushi Tenderfoot
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
+SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+AlternateMode:Flip
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/2.jpg
+Oracle:When a creature dealt damage by Bushi Tenderfoot this turn is put into a graveyard, flip Bushi Tenderfoot.
+
+ALTERNATE
+
+Name:Kenzo the Hardhearted
+ManaCost:W
+Colors:white
+Types:Legendary Creature Human Samurai
+Text:no text
+PT:3/4
+K:Double Strike
+K:Bushido 2
+SVar:Rarity:Uncommon
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/307.jpg
+Oracle:Double strike; bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
+
+End

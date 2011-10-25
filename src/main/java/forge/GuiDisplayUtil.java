@@ -1438,9 +1438,6 @@ public final class GuiDisplayUtil implements NewConstants {
             }
 
             c.setImageFilename(CardUtil.buildFilename(c));
-            for (Trigger trig : c.getTriggers()) {
-                AllZone.getTriggerHandler().registerTrigger(trig);
-            }
             cl.add(c);
         }
         return cl;

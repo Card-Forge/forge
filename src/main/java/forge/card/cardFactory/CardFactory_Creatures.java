@@ -2031,8 +2031,6 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 8590474793502538215L;
 
                 public void execute() {
-                    //Slight hack if the cloner copies a card with triggers
-                    AllZone.getTriggerHandler().removeAllFromCard(cloned[0]);
 
                     Card orig = cfact.getCard(card.getName(), card.getController());
                     PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
@@ -2055,13 +2053,21 @@ public class CardFactory_Creatures {
                     }
 
                     if (copyTarget[0] != null) {
+                        boolean wasInAlt = copyTarget[0].isInAlternateState();
                     	/*
                     	 * This cannot just be copyStats with an addSpellAbility loop from copyTarget[0].
                     	 * Unless we get a copySpellAbility.  Adding the SpellAbility from the
                     	 * source card causes many weird and Bad Things to happen.
                     	 */
-                    	try {
+                    	try {                    	    
+                    	    if(wasInAlt) {
+                    	        copyTarget[0].changeState();
+                    	    }
                     		cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
+                    		if(wasInAlt) {
+                    		    cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+                    		    copyTarget[0].changeState();
+                    		}
                     	}
                     	catch(RuntimeException re) {
                     		//the copyTarget was not found in CardFactory
@@ -2075,7 +2081,25 @@ public class CardFactory_Creatures {
                         cloned[0].addLeavesPlayCommand(leaves);
                         cloned[0].setCloneLeavesPlayCommand(leaves);
                         cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
-                        cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+                        
+                        if(copyTarget[0].isDoubleFaced()) { //Cloned DFC's can't transform
+                            if(wasInAlt)
+                            {
+                                cloned[0].changeState();
+                            }
+                            cloned[0].clearOtherState();
+                        }
+                        if(copyTarget[0].isFlip()) { //Cloned Flips CAN flip.
+                            cloned[0].changeState();
+                            copyTarget[0].changeState();
+                            cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+                            if(!copyTarget[0].isInAlternateState()) {
+                                cloned[0].changeState();
+                            }
+                            
+                            copyTarget[0].changeState();
+                        }
+                        
                         if (cardName.equals("Vesuvan Doppelganger")) {
                             cloned[0].addExtrinsicKeyword("At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
                             cloned[0].addColor("U", cloned[0], false, true);
@@ -2106,12 +2130,6 @@ public class CardFactory_Creatures {
                             cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
                         }
                         
-
-                        //Slight hack in case the cloner copies a card with triggers
-                        for (Trigger t : cloned[0].getTriggers()) {
-                            AllZone.getTriggerHandler().registerTrigger(t);
-                        }
-
                         AllZone.getGameAction().moveToPlayFromHand(cloned[0]);
                         card.setCurrentlyCloningCard(cloned[0]);
                     }

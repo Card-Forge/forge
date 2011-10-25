@@ -1079,6 +1079,26 @@ public class AbilityFactory {
                 SA.addCharmChoice(charmAF.getAbility(ab, hostC));
             }
         }
+        
+        else if (API.equals("ChangeState")) {
+            if (isAb) {
+                SA = AbilityFactory_ChangeState.getChangeStateAbility(this);
+            } else if (isSp) {
+                SA = AbilityFactory_ChangeState.getChangeStateSpell(this);
+            } else if (isDb) {
+                SA = AbilityFactory_ChangeState.getChangeStateDrawback(this);
+            }
+        }
+        
+        else if (API.equals("ChangeStateAll")) {
+            if (isAb) {
+                SA = AbilityFactory_ChangeState.getChangeStateAllAbility(this);
+            } else if (isSp) {
+                SA = AbilityFactory_ChangeState.getChangeStateAllSpell(this);
+            } else if (isDb) {
+                SA = AbilityFactory_ChangeState.getChangeStateAllDrawback(this);
+            }
+        }
 
 
         if (SA == null) {

@@ -74,10 +74,10 @@ public class ComputerUtil_Attack2 {
 
         //Cards with triggers should come first (for Battle Cry)
         for (Card attacker : in) {
-            ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
+            ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
             for (Trigger trigger : registeredTriggers) {
                 HashMap<String, String> trigParams = trigger.getMapParams();
-                if (trigParams.get("Mode").equals("Attacks") && trigger.getHostCard().equals(attacker)) {
+                if (trigParams.get("Mode").equals("Attacks")) {
                     list.add(attacker);
                 }
             }
@@ -113,12 +113,14 @@ public class ComputerUtil_Attack2 {
         if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
             return true;
         }
+        
+        CardList controlledByCompy = AllZone.getComputerPlayer().getAllCards();
 
-        ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers) {
-            if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)
-                    && trigger.getHostCard().getController().isComputer()) {
-                return true;
+        for(Card c : controlledByCompy) {
+            for (Trigger trigger : c.getTriggers()) {
+                if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
+                    return true;
+                }
             }
         }
 

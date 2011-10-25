@@ -296,7 +296,6 @@ public class FGameState {
         }
         
         getStaticEffects().reset();
-        getTriggerHandler().clearRegistered();
     }
 
 }

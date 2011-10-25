@@ -75,21 +75,23 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         private final int nUncommon;
         private final int nRare;
         private final int nSpecial;
+        private final int nDoubleFaced;
         private final int nLand;
         private final int foilRate;
         private final static int CARDS_PER_BOOSTER = 15;
         
         //private final String landCode;
-        public BoosterData(final int nC, final int nU, final int nR, final int nS) {
+        public BoosterData(final int nC, final int nU, final int nR, final int nS,final int nDF) {
             // if this booster has more that 10 cards, there must be a land in 15th slot unless it's already taken
-            this(nC, nU, nR, nS, nC + nR + nU + nS > 10 ? CARDS_PER_BOOSTER - nC - nR - nU - nS : 0, 68);
+            this(nC, nU, nR, nS, nDF, nC + nR + nU + nS + nDF > 10 ? CARDS_PER_BOOSTER - nC - nR - nU - nS - nDF : 0, 68);
         }
 
-        public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nL, final int oneFoilPer) {
+        public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL, final int oneFoilPer) {
             nCommon = nC;
             nUncommon = nU;
             nRare = nR;
             nSpecial = nS;
+            nDoubleFaced = nDF;
             nLand = nL > 0 ? nL : 0;
             foilRate = oneFoilPer;
         }
@@ -98,6 +100,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         public int getUncommon() { return nUncommon; }
         public int getRare() { return nRare; }
         public int getSpecial() { return nSpecial; }
+        public int getDoubleFaced() { return nDoubleFaced; }
         public int getLand() { return nLand; }
         public int getFoilChance() { return foilRate; }
     }

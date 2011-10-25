@@ -871,6 +871,18 @@ public abstract class Player extends GameEntity {
         return new CardList(cards);
     }
     
+    private static ArrayList<Zone> allZones = new ArrayList<Zone>();
+    
+    static {
+        for(Zone z : Constant.Zone.values()) {
+            allZones.add(z);
+        }
+    }
+    
+    public CardList getAllCards() {
+        return getCardsIn(allZones);
+    }
+    
     public CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
         Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : getZone(zone).getCards(false);
         return new CardList(cards);
@@ -896,7 +908,11 @@ public abstract class Player extends GameEntity {
      */
     public CardList getCardsIn(final List<Constant.Zone> zones) {
         CardList result = new CardList();
-        for (Constant.Zone z : zones) { result.addAll(getZone(z).getCards()); }
+        for (Constant.Zone z : zones) {
+            if(getZone(z) != null) {
+                result.addAll(getZone(z).getCards());
+            }
+        }
         return result;
     }    
     

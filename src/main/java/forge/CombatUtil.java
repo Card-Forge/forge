@@ -1039,8 +1039,9 @@ public class CombatUtil {
 
         power += defender.getKeywordMagnitude("Bushido");
 
-        ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers) {
+        ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        theTriggers.addAll(attacker.getTriggers());
+        for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             Card source = trigger.getHostCard();
 
@@ -1092,8 +1093,9 @@ public class CombatUtil {
 
         toughness += defender.getKeywordMagnitude("Bushido");
 
-        ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers) {
+        ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        theTriggers.addAll(attacker.getTriggers());
+        for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             Card source = trigger.getHostCard();
 
@@ -1141,18 +1143,21 @@ public class CombatUtil {
         int power = 0;
 
         power += attacker.getKeywordMagnitude("Bushido");
-
+        
+        
+        ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
         //if the defender has first strike and wither the attacker will deal less damage than expected
         if (null != defender) {
             if ((defender.hasKeyword("First Strike") || defender.hasKeyword("Double Strike"))
                     && (defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))
                     && !(attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")
-                    || attacker.hasKeyword("CARDNAME can't have counters placed on it.")))
+                    || attacker.hasKeyword("CARDNAME can't have counters placed on it."))) {
                 power -= defender.getNetCombatDamage();
+            }
+            theTriggers.addAll(defender.getTriggers());
         }
-
-        ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers) {
+        
+        for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             Card source = trigger.getHostCard();
 
@@ -1206,12 +1211,14 @@ public class CombatUtil {
     public static int predictToughnessBonusOfAttacker(Card attacker, Card defender, Combat combat) {
         int toughness = 0;
 
+        ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
         if (defender != null) {
             toughness += attacker.getKeywordMagnitude("Bushido");
+            theTriggers.addAll(defender.getTriggers());
         }
-
-        ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
-        for (Trigger trigger : registeredTriggers) {
+        
+        
+        for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             Card source = trigger.getHostCard();
 

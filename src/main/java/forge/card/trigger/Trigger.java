@@ -4,6 +4,7 @@ import forge.Card;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.CardList;
+import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
@@ -440,6 +441,20 @@ public abstract class Trigger {
         
         if(mapParams.containsKey("ManaNotSpent")) {
             if(hostCard.getColorsPaid().contains(mapParams.get("ManaNotSpent"))) {
+                return false;
+            }
+        }
+        
+        if(mapParams.containsKey("WerewolfTransformCondition")) {
+            if(CardUtil.getLastTurnCast("Card", hostCard).size() > 0) {
+                return false;
+            }
+        }
+        
+        if(mapParams.containsKey("WerewolfUntransformCondition")) {
+            CardList you = CardUtil.getLastTurnCast("Card.YouCtrl", hostCard);
+            CardList opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", hostCard);
+            if(!(you.size() > 1 || opp.size() > 1)) {
                 return false;
             }
         }

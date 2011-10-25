@@ -78,7 +78,7 @@ public final class SetUtils {
     
             String[] sParts = s.trim().split("\\|");
             String code = null;
-            int nC = 0, nU = 0, nR = 0, nS = 0;
+            int nC = 0, nU = 0, nR = 0, nS = 0, nDF = 0;
             for (String sPart : sParts) {
                 String[] kv = sPart.split(":", 2);
                 String key = kv[0].toLowerCase();
@@ -88,8 +88,9 @@ public final class SetUtils {
                 if (key.equalsIgnoreCase("Uncommons")) { nU = Integer.parseInt(kv[1]); }
                 if (key.equalsIgnoreCase("Rares")) { nR = Integer.parseInt(kv[1]); }
                 if (key.equalsIgnoreCase("Special")) { nS = Integer.parseInt(kv[1]); }
+                if (key.equalsIgnoreCase("DoubleFaced")) { nDF = Integer.parseInt(kv[1]); }
             }
-            result.put(code, new CardSet.BoosterData(nC, nU, nR, nS));
+            result.put(code, new CardSet.BoosterData(nC, nU, nR, nS, nDF));
         }
         return result;
     }

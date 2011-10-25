@@ -21,6 +21,7 @@ class CustomLimited {
     public int NumRares = 1;
     public int NumUncommons = 3;
     public int NumCommons = 11;
+    public int NumDoubleFaced = 0;
     public int NumPacks = 3;
     public String LandSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
     
@@ -42,6 +43,7 @@ class CustomLimited {
             if (key.equalsIgnoreCase("LandSetCode")) { cd.LandSetCode = value; }
 
             if (key.equalsIgnoreCase("NumCards")) { cd.NumCards = Integer.parseInt(value); }
+            if (key.equalsIgnoreCase("NumDoubleFaced")) { cd.NumDoubleFaced = Integer.parseInt(value); }
             if (key.equalsIgnoreCase("NumSpecials")) { cd.NumSpecials = Integer.parseInt(value); }
             if (key.equalsIgnoreCase("NumMythics")) { cd.NumMythics = Integer.parseInt(value); }
             if (key.equalsIgnoreCase("NumRares")) { cd.NumRares = Integer.parseInt(value); }

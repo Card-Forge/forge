@@ -270,20 +270,8 @@ public class AbilityFactory_Effect {
             for (String s : effectTriggers) {
                 String actualTrigger = af.getHostCard().getSVar(s);
 
-                //Needs to do some voodoo when the effect disappears to remove the triggers at the same time.
-                Command LPCommand = new Command() {
-
-                    private static final long serialVersionUID = -9007707442828928732L;
-
-                    public void execute() {
-                        AllZone.getTriggerHandler().removeAllFromCard(e);
-                    }
-
-                };
-                eff.addLeavesPlayCommand(LPCommand);
                 Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff,true);
                 eff.addTrigger(parsedTrigger);
-                AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
             }
         }
         

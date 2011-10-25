@@ -17,53 +17,55 @@ import forge.card.CardManaCost.ManaParser;
  */
 public class CardRulesReader {
     
-    private String cardName = null;
-    private CardType cardType = null;
-    private CardManaCost manaCost = CardManaCost.empty;
-    private String ptLine = null;
-    private String[] cardRules = null;
-    private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
+    private CardRuleCharacteristics[] characteristics = new CardRuleCharacteristics[] { new CardRuleCharacteristics() , null };
+    private int curCharacteristics = 0;
+    
+    private boolean isFlipCard = false;
+    private boolean isDoubleFacedCard = false;
+    
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
 
     // Reset all fields to parse next card (to avoid allocating new CardRulesReader N times)
     public final void reset() {
-        cardName = null;
-        cardType = null;
-        manaCost = CardManaCost.empty;
-        ptLine = null;
-        cardRules = null;
-        setsData = new TreeMap<String, CardInSet>();
+        characteristics = new CardRuleCharacteristics[] { new CardRuleCharacteristics() , null };
+        curCharacteristics = 0;
         removedFromAIDecks = false;
         removedFromRandomDecks = false;
+        isDoubleFacedCard = false;
+        isFlipCard = false;
     }
 
-    public final CardRules getCard() {
-        return new CardRules(cardName, cardType, manaCost, ptLine, cardRules, setsData, removedFromRandomDecks, removedFromAIDecks);
-    }
-    
+    public final CardRules[] getCard() {
+        CardRules[] ret = new CardRules[] { new CardRules(characteristics[0], isDoubleFacedCard, false, removedFromRandomDecks, removedFromAIDecks), null };
+        if(characteristics[1] != null) {
+            ret [1] = new CardRules(characteristics[1], isDoubleFacedCard, true, removedFromRandomDecks,removedFromAIDecks);
+        }
+        
+        return ret;
+    }    
 
     public final void parseLine(final String line) {
         if (line.startsWith("Name:")) {
-            cardName = getValueAfterKey(line, "Name:");
-            if (cardName == null || cardName.isEmpty()) {
+            characteristics[curCharacteristics].setCardName(getValueAfterKey(line, "Name:"));
+            if (characteristics[curCharacteristics].getCardName() == null || characteristics[curCharacteristics].getCardName().isEmpty()) {
                 throw new RuntimeException("Card name is empty");
             }
 
         } else if (line.startsWith("ManaCost:")) {
             String sCost = getValueAfterKey(line, "ManaCost:");
-            manaCost = "no cost".equals(sCost) ? CardManaCost.empty : new CardManaCost(new ParserCardnameTxtManaCost(sCost));
+            characteristics[curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.empty : new CardManaCost(new ParserCardnameTxtManaCost(sCost)));
 
         } else if (line.startsWith("Types:")) {
-            cardType = CardType.parse(getValueAfterKey(line, "Types:"));
+            characteristics[curCharacteristics].setCardType(CardType.parse(getValueAfterKey(line, "Types:")));
 
         } else if (line.startsWith("Oracle:")) {
-            cardRules = getValueAfterKey(line, "Oracle:").split("\\n");
+            characteristics[curCharacteristics].setCardRules(getValueAfterKey(line, "Oracle:").split("\\n"));
 
         } else if (line.startsWith("PT:")) {
-            ptLine = getValueAfterKey(line, "PT:");
+            characteristics[curCharacteristics].setPtLine(getValueAfterKey(line, "PT:"));
         } else if (line.startsWith("Loyalty:")) {
-            ptLine = getValueAfterKey(line, "Loyalty:");
+            characteristics[curCharacteristics].setPtLine(getValueAfterKey(line, "Loyalty:"));
 
         } else if (line.startsWith("SVar:RemAIDeck:")) {
             removedFromAIDecks = "True".equalsIgnoreCase(getValueAfterKey(line, "SVar:RemAIDeck:"));
@@ -72,8 +74,16 @@ public class CardRulesReader {
             removedFromRandomDecks = "True".equalsIgnoreCase(getValueAfterKey(line, "SVar:RemRandomDeck:"));
 
         } else if (line.startsWith("SetInfo:")) {
-            parseSetInfoLine(line, setsData);
+            parseSetInfoLine(line, characteristics[curCharacteristics].getSetsData());
+        
+        } else if (line.startsWith("AlternateMode:")) {
+            isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(getValueAfterKey(line,"AlternateMode:"));
+            isFlipCard = "Flip".equalsIgnoreCase(getValueAfterKey(line,"AlternateMode:"));
+        } else if (line.equals("ALTERNATE"))  {
+            characteristics[1] = new CardRuleCharacteristics();
+            curCharacteristics = 1;
         }
+        
     }
 
     /**

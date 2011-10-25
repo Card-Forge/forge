@@ -283,7 +283,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
                 return false;
             }
 
-            for (SpellAbility pwAbs : c.getSpellAbility()) {
+            for (SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker restriction set to confirm they haven't been activated
                 SpellAbility_Restriction restrict = pwAbs.getRestrictions();
                 if (restrict.getPlaneswalker() && restrict.getNumberTurnActivations() > 0) {

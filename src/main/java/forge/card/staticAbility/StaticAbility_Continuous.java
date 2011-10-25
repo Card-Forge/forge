@@ -267,7 +267,6 @@ public class StaticAbility_Continuous {
                     Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
                     actualTrigger.setTemporary(true);
                     affectedCard.addTrigger(actualTrigger);
-                    AllZone.getTriggerHandler().registerTrigger(actualTrigger);
                 }
             }
 

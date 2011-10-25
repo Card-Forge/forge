@@ -1,0 +1,27 @@
+Name:Gatstaf Shepherd
+ManaCost:1 G
+Types:Creature Human Werewolf
+Text:no text
+PT:2/2
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+AlternateMode:DoubleFaced
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/182a.jpg
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Shepherd.
+
+ALTERNATE
+
+Name:Gatstaf Howler
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+Text:no text
+PT:3/3
+K:Intimidate
+T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/182b.jpg
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Howler.
+End

@@ -4,6 +4,7 @@ import forge.Card;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Constant.Zone;
+import forge.Constant;
 import forge.Player;
 import forge.CardList;
 import forge.Command;
@@ -33,12 +34,40 @@ import java.util.Map;
  */
 public class TriggerHandler {
 
-    private ArrayList<String> registeredModes = new ArrayList<String>();
-    private ArrayList<Trigger> registeredTriggers = new ArrayList<Trigger>();
     private ArrayList<String> suppressedModes = new ArrayList<String>();
 
     private ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
 
+    public void cleanUpTemporaryTriggers() {
+        CardList absolutelyAllCards = new CardList();
+        absolutelyAllCards.addAll(AllZone.getHumanPlayer().getAllCards());
+        absolutelyAllCards.addAll(AllZone.getComputerPlayer().getAllCards());
+        
+        for(Card c : absolutelyAllCards) {
+            for(int i=0;i< c.getTriggers().size();i++) {
+                if(c.getTriggers().get(i).isTemporary()) {
+                    c.getTriggers().remove(i);
+                    i--;
+                }
+            }
+        }
+        for(Card c : absolutelyAllCards) {
+            for(int i=0;i< c.getTriggers().size();i++) {
+                c.getTriggers().get(i).setTemporarilySuppressed(false);
+            }
+        }
+        
+    }
+    
+    /**
+     * <p>registerDelayedTrigger.</p>
+     *
+     * @param trig a {@link forge.card.trigger.Trigger} object.
+     */
+    public final void registerDelayedTrigger(final Trigger trig) {
+        delayedTriggers.add(trig);
+    }
+    
     /**
      * <p>suppressMode.</p>
      *
@@ -203,95 +232,6 @@ public class TriggerHandler {
         return mapParams;
     }
 
-    /**
-     * <p>registerDelayedTrigger.</p>
-     *
-     * @param trig a {@link forge.card.trigger.Trigger} object.
-     */
-    public final void registerDelayedTrigger(final Trigger trig) {
-        delayedTriggers.add(trig);
-
-        String mode = trig.getMapParams().get("Mode");
-        if (!registeredModes.contains(mode)) {
-            registeredModes.add(mode);
-        }
-    }
-
-    /**
-     * <p>registerTrigger.</p>
-     *
-     * @param trig a {@link forge.card.trigger.Trigger} object.
-     */
-    public final void registerTrigger(final Trigger trig) {
-        registeredTriggers.add(trig);
-
-        String mode = trig.getMapParams().get("Mode");
-        if (!registeredModes.contains(mode)) {
-            registeredModes.add(mode);
-        }
-    }
-
-    /**
-     * <p>clearRegistered.</p>
-     */
-    public final void clearRegistered() {
-        delayedTriggers.clear();
-        registeredTriggers.clear();
-        registeredModes.clear();
-    }
-
-    /**
-     * <p>removeRegisteredTrigger.</p>
-     *
-     * @param trig a {@link forge.card.trigger.Trigger} object.
-     */
-    public final void removeRegisteredTrigger(final Trigger trig) {
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).equals(trig)) {
-                registeredTriggers.remove(i);
-            }
-        }
-    }
-
-    /**
-     * <p>removeTemporaryTriggers.</p>
-     * 
-     */
-    public final void cleanUpTemporaryTriggers() {
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).isTemporary()) {
-                registeredTriggers.get(i).hostCard.removeTrigger(registeredTriggers.get(i));
-                registeredTriggers.remove(i);
-                i--;
-            }
-        }
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            registeredTriggers.get(i).setTemporarilySuppressed(false);
-        }
-    }
-
-    /**
-     * <p>Getter for the field <code>registeredTriggers</code>.</p>
-     *
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<Trigger> getRegisteredTriggers() {
-        return registeredTriggers;
-    }
-
-    /**
-     * <p>removeAllFromCard.</p>
-     *
-     * @param crd a {@link forge.Card} object.
-     */
-    public final void removeAllFromCard(final Card crd) {
-        for (int i = 0; i < registeredTriggers.size(); i++) {
-            if (registeredTriggers.get(i).getHostCard().equals(crd)) {
-                registeredTriggers.remove(i);
-                i--;
-            }
-        }
-    }
 
     /**
      * <p>runTrigger.</p>
@@ -300,20 +240,21 @@ public class TriggerHandler {
      * @param runParams a {@link java.util.Map} object.
      */
     public final void runTrigger(final String mode, final Map<String, Object> runParams) {
-        if (suppressedModes.contains(mode) || !registeredModes.contains(mode)) {
+        if (suppressedModes.contains(mode)) {
             return;
         }
-
+        
         Player playerAP = AllZone.getPhase().getPlayerTurn();
         
         //This is done to allow the list of triggers to be modified while triggers are running.
-        ArrayList<Trigger> registeredTriggersWorkingCopy = new ArrayList<Trigger>(registeredTriggers);
         ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
-
+        CardList allCards;
+        
         //AP
-        for (int i = 0; i < registeredTriggersWorkingCopy.size(); i++) {
-            if (registeredTriggersWorkingCopy.get(i).getHostCard().getController().equals(playerAP)) {
-                runSingleTrigger(registeredTriggersWorkingCopy.get(i), mode, runParams);
+        allCards = playerAP.getAllCards();
+        for(Card c : allCards) {
+            for(Trigger t : c.getTriggers()) {
+                runSingleTrigger(t, mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
@@ -328,9 +269,10 @@ public class TriggerHandler {
         }
 
         //NAP
-        for (int i = 0; i < registeredTriggersWorkingCopy.size(); i++) {
-            if (registeredTriggersWorkingCopy.get(i).getHostCard().getController().equals(playerAP.getOpponent())) {
-                runSingleTrigger(registeredTriggersWorkingCopy.get(i), mode, runParams);
+        allCards = playerAP.getOpponent().getAllCards();
+        for(Card c : allCards) {
+            for(Trigger t : c.getTriggers()) {
+                runSingleTrigger(t, mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {

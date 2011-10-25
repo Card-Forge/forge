@@ -79,47 +79,74 @@ public final class MtgDataParser implements Iterator<CardRules> {
     @Override
     public boolean hasNext() { return weHaveNext; }
 
+    private final CardRuleCharacteristics[] chars = new CardRuleCharacteristics[2]; 
+    
     @Override
     public CardRules next() {
+        if(chars[1] != null) {
+            CardRules ret = new CardRules(chars[1], false, true, false, false); 
+            return ret;
+        }
+        chars[0] = new CardRuleCharacteristics();
+        Map<String, CardInSet> sets = new HashMap<String, CardInSet>(); 
+        
+        String nextline = readSingleCard(chars[0]);
+        if(nextline != null) {
+            if(nextline.equals("----"))
+            {
+                chars[1] = new CardRuleCharacteristics();
+                nextline = readSingleCard(chars[1]);
+            }
+            if(!nextline.isEmpty()) {
+                String setsLine = nextline;
+                boolean isBasicLand = chars[0].getCardType().isLand() && chars[0].getCardType().isBasic();
+                chars[0].setSetsData(getValidEditions(setsLine, isBasicLand));
+                if(chars[1] != null) {
+                    chars[1].setSetsData(getValidEditions(setsLine, isBasicLand));
+                }
+            }
+        }
+        
+       
+        // feel free to return null after this line
+        if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
+        if (chars[0] == null) { return null; }
+
+        return new CardRules(chars[0], false, false, false, false);
+    }
+    
+    private String readSingleCard(CardRuleCharacteristics ret) {
+        
         if (!it.hasNext()) { weHaveNext = false; return null; }
-        String name = it.next();
+        ret.setCardName(it.next());
 
         if (!it.hasNext()) { weHaveNext = false; return null; }
 
         String manaCost = it.next();
-        CardManaCost cost = CardManaCost.empty;
+        ret.setManaCost(CardManaCost.empty);
         CardType type = null;
         if (manaCost.startsWith("{")) {
-            cost = new CardManaCost(new ManaParserMtgData(manaCost));
+            ret.setManaCost(new CardManaCost(new ManaParserMtgData(manaCost)));
             if (!it.hasNext()) { weHaveNext = false; return null; }
             type = CardType.parse(it.next());
         } else { // Land?
             type = CardType.parse(manaCost);
             manaCost = null;
         }
-        String ptOrLoyalty = null;
+        ret.setPtLine(null);
         if (type.isCreature() || type.isPlaneswalker()) {
             if (!it.hasNext()) { weHaveNext = false; return null; }
-            ptOrLoyalty = it.next();
+            ret.setPtLine(it.next());
         }
-
-        List<String> strs = new ArrayList<String>();
-        if (!it.hasNext()) { weHaveNext = false; return null; }
-        String nextLine = it.next();
-        while (StringUtils.isNotBlank(nextLine) && it.hasNext()) {
-            strs.add(nextLine);
-            nextLine = it.next();
+        
+        String nextline = it.next();
+        ArrayList<String> rules = new ArrayList<String>();
+        while(nextline!= null && !nextline.isEmpty() && !nextline.equals("----") && !java.util.regex.Pattern.matches("([A-Z0-9][A-Z0-9][A-Z0-9] [CURM], )*[A-Z0-9][A-Z0-9][A-Z0-9] [CURM]", nextline)) {
+            rules.add(nextline);
         }
-        // feel free to return null after this line
-
-        String setsLine = strs.remove(strs.size() - 1);
-        boolean isBasicLand = type.isLand() && type.isBasic();
-        Map<String, CardInSet> sets = getValidEditions(setsLine, isBasicLand);
-
-        if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
-
-        return new CardRules(name, type, cost, ptOrLoyalty,
-                strs.toArray(ArrayUtils.EMPTY_STRING_ARRAY), sets, false, false);
+        ret.setCardRules((String[])rules.toArray());
+        
+        return nextline;
     }
 
     private Map<String, CardInSet> getValidEditions(final String sets, final boolean isBasicLand) {

@@ -1077,6 +1077,7 @@ res/cardsfolder/b/burrowing.txt svneol=native#text/plain
 res/cardsfolder/b/burst_lightning.txt svneol=native#text/plain
 res/cardsfolder/b/burst_of_energy.txt svneol=native#text/plain
 res/cardsfolder/b/burst_of_speed.txt svneol=native#text/plain
+res/cardsfolder/b/bushi_tenderfoot_kenzo_the_hardhearted.txt -text
 res/cardsfolder/b/butcher_of_malakir.txt svneol=native#text/plain
 res/cardsfolder/b/butchers_cleaver.txt -text
 res/cardsfolder/c/cabal_archon.txt svneol=native#text/plain
@@ -1408,6 +1409,7 @@ res/cardsfolder/c/clockwork_gnomes.txt svneol=native#text/plain
 res/cardsfolder/c/clockwork_steed.txt -text
 res/cardsfolder/c/clockwork_swarm.txt -text
 res/cardsfolder/c/clockwork_vorrac.txt svneol=native#text/plain
+res/cardsfolder/c/cloistered_youth_unholy_fiend.txt -text
 res/cardsfolder/c/clone.txt svneol=native#text/plain
 res/cardsfolder/c/close_quarters.txt svneol=native#text/plain
 res/cardsfolder/c/clot_sliver.txt svneol=native#text/plain
@@ -1823,6 +1825,7 @@ res/cardsfolder/d/day_of_destiny.txt svneol=native#text/plain
 res/cardsfolder/d/day_of_judgment.txt svneol=native#text/plain
 res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
 res/cardsfolder/d/daybreak_coronet.txt -text
+res/cardsfolder/d/daybreak_ranger_nightfall_predator.txt -text
 res/cardsfolder/d/daze.txt svneol=native#text/plain
 res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 res/cardsfolder/d/dead_weight.txt -text
@@ -3043,6 +3046,7 @@ res/cardsfolder/g/gangrenous_zombies.txt svneol=native#text/plain
 res/cardsfolder/g/gargoyle_castle.txt svneol=native#text/plain
 res/cardsfolder/g/gargoyle_sentinel.txt svneol=native#text/plain
 res/cardsfolder/g/garruk_primal_hunter.txt svneol=native#text/plain
+res/cardsfolder/g/garruk_relentless_garruk_the_veil_cursed.txt -text
 res/cardsfolder/g/garruk_wildspeaker.txt svneol=native#text/plain
 res/cardsfolder/g/garruks_companion.txt svneol=native#text/plain
 res/cardsfolder/g/garruks_horde.txt -text
@@ -3054,6 +3058,7 @@ res/cardsfolder/g/gate_to_phyrexia.txt svneol=native#text/plain
 res/cardsfolder/g/gatekeeper_of_malakir.txt svneol=native#text/plain
 res/cardsfolder/g/gathan_raiders.txt svneol=native#text/plain
 res/cardsfolder/g/gatherer_of_graces.txt svneol=native#text/plain
+res/cardsfolder/g/gatstaf_shepherd_gatstaf_howler.txt -text
 res/cardsfolder/g/gauntlet_of_might.txt svneol=native#text/plain
 res/cardsfolder/g/gavony_township.txt -text
 res/cardsfolder/g/gaze_of_adamaro.txt svneol=native#text/plain
@@ -5186,6 +5191,7 @@ res/cardsfolder/m/moonglove_extract.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_winnower.txt svneol=native#text/plain
 res/cardsfolder/m/moonlit_strider.txt svneol=native#text/plain
 res/cardsfolder/m/moonlit_wake.txt svneol=native#text/plain
+res/cardsfolder/m/moonmist.txt -text
 res/cardsfolder/m/moonring_island.txt -text
 res/cardsfolder/m/moonwing_moth.txt svneol=native#text/plain
 res/cardsfolder/m/moor_fiend.txt svneol=native#text/plain
@@ -6891,6 +6897,7 @@ res/cardsfolder/s/screaming_fury.txt svneol=native#text/plain
 res/cardsfolder/s/screaming_seahawk.txt svneol=native#text/plain
 res/cardsfolder/s/screams_from_within.txt -text
 res/cardsfolder/s/screams_of_the_damned.txt svneol=native#text/plain
+res/cardsfolder/s/screeching_bat_stalking_vampire.txt -text
 res/cardsfolder/s/screeching_buzzard.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_drake.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_harpy.txt svneol=native#text/plain
@@ -8282,6 +8289,7 @@ res/cardsfolder/t/thoughtseize.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtweft_gambit.txt svneol=native#text/plain
 res/cardsfolder/t/thousand_legged_kami.txt svneol=native#text/plain
 res/cardsfolder/t/thraben_purebloods.txt -text
+res/cardsfolder/t/thraben_sentry_thraben_militia.txt -text
 res/cardsfolder/t/thran_dynamo.txt svneol=native#text/plain
 res/cardsfolder/t/thran_forge.txt svneol=native#text/plain
 res/cardsfolder/t/thran_foundry.txt svneol=native#text/plain
@@ -10225,6 +10233,7 @@ src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/card/BoosterUtils.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
+src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardColor.java -text
 src/main/java/forge/card/CardCoreType.java -text
 src/main/java/forge/card/CardInSet.java -text
@@ -10232,6 +10241,7 @@ src/main/java/forge/card/CardManaCost.java -text
 src/main/java/forge/card/CardManaCostShard.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRatings.java -text
+src/main/java/forge/card/CardRuleCharacteristics.java -text
 src/main/java/forge/card/CardRules.java -text
 src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
 src/main/java/forge/card/CardSet.java -text
@@ -10242,6 +10252,7 @@ src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/p
 src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Attach.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_ChangeState.java -text
 src/main/java/forge/card/abilityFactory/AbilityFactory_ChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Charm.java -text
 src/main/java/forge/card/abilityFactory/AbilityFactory_Choose.java svneol=native#text/plain
@@ -10455,6 +10466,7 @@ src/main/java/forge/gui/skin/FSkin.java -text
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
+src/main/java/forge/item/CardPrintedCharacteristics.java -text
 src/main/java/forge/item/InventoryItem.java -text
 src/main/java/forge/item/InventoryItemFromSet.java -text
 src/main/java/forge/item/ItemPool.java -text

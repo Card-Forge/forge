@@ -553,7 +553,6 @@ public final class AbilityFactory_Animate {
                     String actualTrigger = host.getSVar(s);
                     Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
                     addedTriggers.add(c.addTrigger(parsedTrigger));
-                    AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
                 }
             }
 
@@ -744,7 +743,6 @@ public final class AbilityFactory_Animate {
         }
 
         for (Trigger t : addedTriggers) {
-            AllZone.getTriggerHandler().removeRegisteredTrigger(t);
             c.removeTrigger(t);
         }
 
@@ -1094,7 +1092,6 @@ public final class AbilityFactory_Animate {
                     String actualTrigger = host.getSVar(s);
                     Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
                     addedTriggers.add(c.addTrigger(parsedTrigger));
-                    AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
                 }
             }
             

@@ -4291,29 +4291,45 @@ public class CardFactoryUtil {
     public static Card copyStats(final Object o) {
         Card sim = (Card) o;
         Card c = new Card();
+        
+        copyCharacteristics(sim,c);
+        if(sim.hasAlternateState()) {
+            c.addAlternateState();
+            c.changeState();
+            sim.changeState();
+            copyCharacteristics(sim,c);
+            c.changeState();
+            sim.changeState();
+        }
 
-        c.setBaseAttack(sim.getBaseAttack());
-        c.setBaseDefense(sim.getBaseDefense());
-        c.setBaseLoyalty(sim.getBaseLoyalty());
-        c.setBaseAttackString(sim.getBaseAttackString());
-        c.setBaseDefenseString(sim.getBaseDefenseString());
-        c.setIntrinsicKeyword(sim.getKeyword());
-        c.setName(sim.getName());
-        c.setImageName(sim.getImageName());
-        c.setType(sim.getType());
-        c.setText(sim.getSpellText());
-        c.setManaCost(sim.getManaCost());
-        c.setColor(sim.getColor());
-        c.setSVars(sim.getSVars());
-        c.setSets(sim.getSets());
-        c.setIntrinsicAbilities(sim.getIntrinsicAbilities());
+        c.setFlip(sim.isFlip());
+        c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
-        c.setImageFilename(sim.getImageFilename());
-        c.setTriggers(sim.getTriggers());
-        c.setStaticAbilityStrings(sim.getStaticAbilityStrings());
-
+        
         return c;
     } // copyStats()
+    
+    public static void copyCharacteristics(Card From, Card To) {
+        To.setBaseAttack(From.getBaseAttack());
+        To.setBaseDefense(From.getBaseDefense());
+        To.setBaseLoyalty(From.getBaseLoyalty());
+        To.setBaseAttackString(From.getBaseAttackString());
+        To.setBaseDefenseString(From.getBaseDefenseString());
+        To.setIntrinsicKeyword(From.getKeyword());
+        To.setName(From.getName());
+        To.setType(From.getType());
+        To.setText(From.getSpellText());
+        To.setManaCost(From.getManaCost());
+        To.setColor(From.getColor());
+        To.setSVars(From.getSVars());
+        To.setSets(From.getSets());
+        To.setIntrinsicAbilities(From.getIntrinsicAbilities());
+        
+        To.setImageFilename(From.getImageFilename());
+        To.setTriggers(From.getTriggers());
+        To.setStaticAbilityStrings(From.getStaticAbilityStrings());
+        
+    }
 
     /**
      * <p>
@@ -4918,7 +4934,6 @@ public class CardFactoryUtil {
                   copyTrigger.setOverridingAbility(origSA);
                   
                   eff.addTrigger(copyTrigger);
-                  AllZone.getTriggerHandler().registerTrigger(copyTrigger);
                   
                   AllZone.getTriggerHandler().suppressMode("ChangesZone");
                   AllZone.getGameAction().moveToPlay(eff);

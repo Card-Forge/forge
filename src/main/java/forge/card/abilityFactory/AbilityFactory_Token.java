@@ -438,22 +438,11 @@ public class AbilityFactory_Token extends AbilityFactory {
                     String actualTrigger = AF.getHostCard().getSVar(s);
 
                     for (final Card c : tokens) {
-                        //Needs to do some voodoo when the token disappears to remove the triggers at the same time.
-                        Command LPCommand = new Command() {
 
-                            private static final long serialVersionUID = -9007707442828928732L;
-
-                            public void execute() {
-                                AllZone.getTriggerHandler().removeAllFromCard(c);
-                            }
-
-                        };
-                        c.addLeavesPlayCommand(LPCommand);
                         Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
                         String ability = AF.getHostCard().getSVar(parsedTrigger.getMapParams().get("Execute"));
                         parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
                         c.addTrigger(parsedTrigger);
-                        AllZone.getTriggerHandler().registerTrigger(parsedTrigger);
                     }
                 }
             }

@@ -15,6 +15,7 @@ import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 
 import forge.Card;
+import forge.CardUtil;
 import forge.GuiDisplayUtil;
 import forge.ImagePreviewPanel;
 import forge.Singletons;
@@ -33,8 +34,9 @@ public class CardPanelHeavy extends CardPanelBase {
 
     private static final long serialVersionUID = -7134546689397508597L;
 
+    private JButton changeStateButton = new JButton();
     private JButton changePictureButton = new JButton();
-    private JButton removePictureButton = new JButton();
+    private JButton removePictureButton = new JButton();    
 
     // Controls to show card details 
     protected CardDetailPanel detail = new CardDetailPanel(null);
@@ -47,6 +49,15 @@ public class CardPanelHeavy extends CardPanelBase {
     protected static File previousDirectory = null;
 
     public CardPanelHeavy() {
+        changeStateButton.setVisible(false);
+        changeStateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                changeStateButton_actionPerformed(e);
+            }
+        });
+        if (!Singletons.getModel().getPreferences().lafFonts)
+            changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        
         changePictureButton.setText("Change picture...");
         changePictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +80,8 @@ public class CardPanelHeavy extends CardPanelBase {
         
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(detail, "w 239, h 323, grow, flowy, wrap");
-        this.add(changePictureButton, "align 50% 0%, split 2, flowx");
+        this.add(changeStateButton, "align 50% 0%, split 3, flowx");
+        this.add(changePictureButton, "align 50% 0%");
         this.add(removePictureButton, "align 50% 0%, wrap");
         this.add(pictureViewPanel, "wmin 239, hmin 323, grow");
     }
@@ -80,7 +92,39 @@ public class CardPanelHeavy extends CardPanelBase {
         setCard(card2);
     }
     public void setCard(Card c) {
+        if(picture.getCard() != null) {
+            if(picture.getCard().isInAlternateState()) {
+                picture.getCard().changeState();
+            }
+        }
         picture.setCard(c);
+
+        
+        if(c.hasAlternateState()) {
+            changeStateButton.setVisible(true);
+            if(c.isFlip()) {
+                changeStateButton.setText("Flip");
+            }
+            else {
+                changeStateButton.setText("Transform");
+            }
+        }
+    }
+    
+    /**
+     * <p>
+     * changeStateButton_actionPerformed.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.ActionEvent} object.
+     */
+    void changeStateButton_actionPerformed(ActionEvent e) {
+        Card cur = picture.getCard();
+        cur.changeState();
+
+        picture.setCard(cur);
+        detail.setCard(cur);
     }
 
     /**

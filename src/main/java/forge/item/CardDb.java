@@ -81,25 +81,32 @@ public final class CardDb {
         // 2. Save refs into two lists: one flat and other keyed with sets & name
         CardPrinted lastAdded = null;
         for (Entry<String, CardInSet> s : card.getSetsPrinted()) {
-            String set = s.getKey();
-
-            // get this set storage, if not found, create it!
-            Map<String, CardPrinted[]> setMap = allCardsBySet.get(set);
-            if (null == setMap) {
-                setMap = new Hashtable<String, CardPrinted[]>();
-                allCardsBySet.put(set, setMap);
-            }
-
-            int count = s.getValue().getCopiesCount();
-            CardPrinted[] cardCopies = new CardPrinted[count];
-            setMap.put(cardName, cardCopies);
-            for (int i = 0; i < count; i++) {
-                lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
-                allCardsFlat.add(lastAdded);
-                cardCopies[i] = lastAdded;
-            }
+            lastAdded = addToLists(card, cardName,s);
         }
-        uniqueCards.put(cardName, lastAdded);
+        uniqueCards.put(cardName, lastAdded);        
+    }
+    
+    public CardPrinted addToLists(final CardRules card, final String cardName, final Entry<String, CardInSet> s) {
+        CardPrinted lastAdded = null;
+        String set = s.getKey();
+
+        // get this set storage, if not found, create it!
+        Map<String, CardPrinted[]> setMap = allCardsBySet.get(set);
+        if (null == setMap) {
+            setMap = new Hashtable<String, CardPrinted[]>();
+            allCardsBySet.put(set, setMap);
+        }
+
+        int count = s.getValue().getCopiesCount();
+        CardPrinted[] cardCopies = new CardPrinted[count];
+        setMap.put(cardName, cardCopies);
+        for (int i = 0; i < count; i++) {
+            lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i, card.isAltState(),card.isDoubleFaced());
+            allCardsFlat.add(lastAdded);
+            cardCopies[i] = lastAdded;
+        }
+        
+        return lastAdded;
     }
 
     public boolean isCardSupported(final String cardName) { 

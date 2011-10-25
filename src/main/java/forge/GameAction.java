@@ -66,6 +66,13 @@ public class GameAction {
             for (SpellAbility sa : card.getSpellAbility()) {
                 sa.getRestrictions().resetTurnActivations();
             }
+            if(card.hasAlternateState()) {
+                card.changeState();
+                for (SpellAbility sa : card.getSpellAbility()) {
+                    sa.getRestrictions().resetTurnActivations();
+                }
+                card.changeState();
+            }
         }
     }
 
@@ -100,6 +107,9 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
+            if(c.isInAlternateState()) {
+                c.changeState();
+            }
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
@@ -1137,18 +1147,12 @@ public class GameAction {
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
         for (Card c : human) {
-            for (Trigger trig : c.getTriggers()) {
-                AllZone.getTriggerHandler().registerTrigger(trig);
-            }
 
             AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(c);
             c.setSickness(true);
         }
 
         for (Card c : computer) { 
-            for (Trigger trig : c.getTriggers()) {
-                AllZone.getTriggerHandler().registerTrigger(trig);
-            }
 
             AllZone.getComputerPlayer().getZone(Zone.Battlefield).add(c);
             c.setSickness(true);
@@ -1185,6 +1189,9 @@ public class GameAction {
                 CardPrinted cardPrinted = stackOfCards.getKey();
                 for (int i = 0; i < stackOfCards.getValue(); i++) {
 
+                    if(cardPrinted.isAlternate()) {
+                        continue;
+                    }
                     Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
                     card.setCurSetCode(cardPrinted.getSet());
 
@@ -1200,9 +1207,11 @@ public class GameAction {
                     }
 
                     AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
-
-                    for (Trigger trig : card.getTriggers()) {
-                        AllZone.getTriggerHandler().registerTrigger(trig);
+                    
+                    if(card.hasAlternateState()) {
+                        card.changeState();
+                        card.setImageFilename(CardUtil.buildFilename(card));
+                        card.changeState();
                     }
                 }
             }
@@ -1227,10 +1236,6 @@ public class GameAction {
                     }
 
                     AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
-
-                    for (Trigger trig : card.getTriggers()) {
-                        AllZone.getTriggerHandler().registerTrigger(trig);
-                    }
 
                     if (card.getSVar("RemAIDeck").equals("True")) {
                         RAICards.add(card.getName());

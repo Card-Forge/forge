@@ -1,0 +1,31 @@
+Name:Daybreak Ranger
+ManaCost:2 G
+Types:Creature Human Archer Werewolf
+Text:no text
+PT:2/2
+A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature with flying.
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Rare
+AlternateMode:DoubleFaced
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/176a.jpg
+Oracle:{T}: Daybreak Ranger deals 2 damage to target creature with flying.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
+
+ALTERNATE
+
+Name:Nightfall Predator
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+Text:no text
+PT:4/4
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ SVar=DamageThis | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
+SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+SVar:X:Count$CardPower
+SVar:Y:Targeted$CardPower
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Rare
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/176b.jpg
+Oracle:{R}, {T}: Nightfall Predator fights target creature. (Each deals damage equal to its power to the other.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.
+End

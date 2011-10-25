@@ -310,6 +310,12 @@ public final class AbilityFactory_Copy {
         for (Card c : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(hostCard, c)) {
 
+                boolean wasInAlt = false;
+                if(c.isInAlternateState()) {
+                    wasInAlt = true;
+                    c.changeState();
+                }
+                
                 //start copied Kiki code
                 int multiplier = AllZoneUtil.getTokenDoublersMagnitude(hostCard.getController());
                 multiplier *= numCopies;
@@ -351,14 +357,26 @@ public final class AbilityFactory_Copy {
                         copy.addIntrinsicKeyword(kw);
                     }
 
-                    //Slight hack in case we copy a creature with triggers.
-                    for (Trigger t : copy.getTriggers()) {
-                        AllZone.getTriggerHandler().registerTrigger(t);
-                    }
-
                     copy.setCurSetCode(c.getCurSetCode());
-                    copy.setImageFilename(c.getImageFilename());
 
+                    if(c.isDoubleFaced()) { //Cloned DFC's can't transform
+                        if(wasInAlt)
+                        {
+                            copy.changeState();
+                        }
+                        copy.clearOtherState();
+                    }
+                    if(c.isFlip()) { //Cloned Flips CAN flip.
+                        copy.changeState();
+                        c.changeState();
+                        copy.setImageFilename(c.getImageFilename());
+                        if(!c.isInAlternateState()) {
+                            copy.changeState();
+                        }
+                        
+                        c.changeState();
+                    }
+                    
                     if (c.isFaceDown()) {
                         copy.setIsFaceDown(true);
                         copy.setManaCost("");
@@ -398,8 +416,6 @@ public final class AbilityFactory_Copy {
                                     AllZone.getGameAction().exile(target[index]);
                                 }
 
-                                //Slight hack in case we copy a creature with triggers
-                                AllZone.getTriggerHandler().removeAllFromCard(target[index]);
                             }
                         }
                     };
