@@ -15,7 +15,6 @@ import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 
 import forge.Card;
-import forge.CardUtil;
 import forge.GuiDisplayUtil;
 import forge.ImagePreviewPanel;
 import forge.Singletons;
@@ -35,9 +34,13 @@ public class CardPanelHeavy extends CardPanelBase {
     private static final long serialVersionUID = -7134546689397508597L;
 
     private JButton changeStateButton = new JButton();
+    
+    /*
+     * Removed Oct 25 2011 - Hellfish
     private JButton changePictureButton = new JButton();
     private JButton removePictureButton = new JButton();    
-
+     */
+    
     // Controls to show card details 
     protected CardDetailPanel detail = new CardDetailPanel(null);
     protected CardPanel picture = new CardPanel(null);
@@ -58,6 +61,8 @@ public class CardPanelHeavy extends CardPanelBase {
         if (!Singletons.getModel().getPreferences().lafFonts)
             changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
         
+        /*
+         * Removed Oct 25 2011 - Hellfish
         changePictureButton.setText("Change picture...");
         changePictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -75,14 +80,19 @@ public class CardPanelHeavy extends CardPanelBase {
         });
         if (!Singletons.getModel().getPreferences().lafFonts)
             removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+         */
         
         pictureViewPanel.setCardPanel(picture);
         
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(detail, "w 239, h 323, grow, flowy, wrap");
+        /*
+         * Removed Oct 25 2011 - Hellfish
         this.add(changeStateButton, "align 50% 0%, split 3, flowx");
         this.add(changePictureButton, "align 50% 0%");
         this.add(removePictureButton, "align 50% 0%, wrap");
+         */
+        this.add(changeStateButton, "align 50% 0%, flowx, wrap");
         this.add(pictureViewPanel, "wmin 239, hmin 323, grow");
     }
 
@@ -131,7 +141,7 @@ public class CardPanelHeavy extends CardPanelBase {
 
     /**
      * <p>
-     * changePictureButton_actionPerformed.
+     * changePictureButton_actionPerformed. Removed Oct 25 2011 - Hellfish
      * </p>
      * 
      * @param e
@@ -196,7 +206,11 @@ public class CardPanelHeavy extends CardPanelBase {
 
     };
 
-
+    /**
+     * 
+     * <p>removePictureButton_actionPerformed</p>. Removed Oct 25 2011 - Hellfish
+     * @param e
+     */
     void removePictureButton_actionPerformed(ActionEvent e) {
         if (cCardHQ != null) {
             String options[] = { "Yes", "No" };
