@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 /**
  * <p>CardPool class.</p>
  * Represents a list of cards with amount of each
- * 
+ * @param <T> an Object
  */
 public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
 
@@ -36,6 +36,8 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
      * createFrom method.
      * @param from a Tin
      * @param clsHint a Tout
+     * @param <Tin> an InventoryItem
+     * @param <Tout> an InventoryItem
      * @return InventoryItem
      */
     @SuppressWarnings("unchecked")
@@ -59,7 +61,9 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
      * createFrom method.
      * @param from a Iterable<Tin>
      * @param clsHint a Class<Tout>
-     * @return InventoryItem
+     * @return <Tin> an InventoryItem
+     * @param <Tin> an InventoryItem
+     * @param <Tout> an InventoryItem
      */
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout>
@@ -113,7 +117,8 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
     /**
      * 
      * addAllCards.
-     * @param cards a <U>
+     * @param cards a Iterable<U>
+     * @param <U> a InventoryItem
      */
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAllCards(final Iterable<U> cards) {
@@ -124,7 +129,8 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T>  {
     /**
      * 
      * addAll.
-     * @param map 
+     * @param map a Iterable<Entry<U, Integer>>
+     * @param <U> an InventoryItem
      */
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAll(final Iterable<Entry<U, Integer>> map) {
