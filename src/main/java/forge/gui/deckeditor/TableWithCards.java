@@ -23,7 +23,7 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 
 /** 
- * TODO: Write javadoc for this type.
+ * TableWithCards.
  *
  */
 public final class TableWithCards {
@@ -38,13 +38,44 @@ public final class TableWithCards {
     protected boolean wantUnique = false;
 
     // need this to allow users place its contents
+    /**
+     * 
+     * getTableDecorated.
+     * @return JComponent
+     */
     public JComponent getTableDecorated() { return  jScrollPane; }
+
+    /**
+     * 
+     * getTable.
+     * @return JTable
+     */
     public JTable getTable() { return table; }
+
+    /**
+     * 
+     * getLabel.
+     * @return JComponent
+     */
     public JComponent getLabel() { return statsLabel; }
 
+    /**
+     * 
+     * TableWithCards.
+     * @param title a String
+     * @param showStats a boolean
+     */
     public TableWithCards(final String title, final boolean showStats) {
         this(title, showStats, false);
     }
+
+    /**
+     * 
+     * TableWithCards Constructor.
+     * @param title a String
+     * @param showStats a boolean
+     * @param forceUnique a boolean
+     */
     public TableWithCards(final String title, final boolean showStats, final boolean forceUnique) {
         // components
         Color gray = new Color(148, 145, 140);
@@ -55,7 +86,9 @@ public final class TableWithCards {
         jScrollPane.setToolTipText(tableToolTip);
         jScrollPane.getViewport().add(table, null);
 
-        if (!Singletons.getModel().getPreferences().lafFonts) { statsLabel.setFont(new java.awt.Font("Dialog", 0, 13)); }
+        if (!Singletons.getModel().getPreferences().lafFonts) {
+            statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
+        }
         statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
 
         // class data
@@ -63,6 +96,12 @@ public final class TableWithCards {
         wantUnique = forceUnique;
     }
 
+    /**
+     * 
+     * setup.
+     * @param columns a List<TableColumnInfo<InventoryItem>>
+     * @param cardView a CardPanelBase
+     */
     public void setup(final List<TableColumnInfo<InventoryItem>> columns, final CardPanelBase cardView)
     {
         model = new TableModel<InventoryItem>(cardView, columns, InventoryItem.class);
@@ -89,13 +128,20 @@ public final class TableWithCards {
     }
 
     // This should not be here, but still found no better place
+    /**
+     * 
+     * getStats.
+     * @param deck an ItemPoolView<InventoryITem>
+     * @return String
+     */
     public static String getStats(final ItemPoolView<InventoryItem> deck) {
         int total = deck.countAll();
         int creature = CardRules.Predicates.Presets.isCreature.aggregate(deck, deck.fnToCard, deck.fnToCount);
         int land = CardRules.Predicates.Presets.isLand.aggregate(deck, deck.fnToCard, deck.fnToCount);
 
         StringBuffer show = new StringBuffer();
-        show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ").append(land);
+        show.append("Total - ").append(total).append(", Creatures - ")
+        .append(creature).append(", Land - ").append(land);
         String[] color = Constant.Color.onlyColors;
         List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.colors;
         for (int i = 0; i < color.length; ++i) {
@@ -105,13 +151,31 @@ public final class TableWithCards {
         return show.toString();
     } // getStats()
 
+    /**
+     * 
+     * sort.
+     * @param iCol an int
+     * @return TableWithCards
+     */
     public TableWithCards sort(final int iCol) { return sort(iCol, true); }
+
+    /**
+     * 
+     * sort.
+     * @param iCol an int
+     * @param isAsc a boolean
+     * @return TableWithCards
+     */
     public TableWithCards sort(final int iCol, final boolean isAsc) {
         model.sort(iCol, isAsc);
         return this;
     }
 
-    // Call this after deleting an item from table
+    /**
+     * 
+     * fixSelection. Call this after deleting an item from table.
+     * @param rowLastSelected an int
+     */
     public void fixSelection(final int rowLastSelected) {
         // 3 cases: 0 cards left, select the same row, select prev row
         int newRow = rowLastSelected;
@@ -122,22 +186,42 @@ public final class TableWithCards {
         }
     }
 
+    /**
+     * 
+     * setDeck.
+     * @param cards an Iterable<InventoryITem>
+     */
     public void setDeck(final Iterable<InventoryItem> cards) {
         setDeckImpl(ItemPool.createFrom(cards, InventoryItem.class));
     }
 
+    /**
+     * 
+     * setDeck.
+     * @param poolView an ItemPoolView
+     * @param <T> an Object
+     */
     public <T extends InventoryItem> void setDeck(final ItemPoolView<T> poolView) {
         setDeckImpl(ItemPool.createFrom(poolView, InventoryItem.class));
     }
-    
-    protected void setDeckImpl(ItemPool<InventoryItem> thePool)
-    {
+
+    /**
+     * 
+     * setDeckImpl.
+     * @param thePool an ItemPool
+     */
+    protected void setDeckImpl(final ItemPool<InventoryItem> thePool) {
         model.clear();
         pool = thePool;
         model.addCards(pool);
         updateView(true);
     }
 
+    /**
+     * 
+     * getSelectedCard.
+     * @return InventoryItem
+     */
     public InventoryItem getSelectedCard() {
         int iRow = table.getSelectedRow();
         return iRow >= 0 ? model.rowToCard(iRow).getKey() : null;
@@ -145,11 +229,21 @@ public final class TableWithCards {
 
     private boolean isUnfiltered() { return filter == null || filter.is1(); }
 
+    /**
+     * 
+     * setFilter.
+     * @param filterToSet a Predicate
+     */
     public void setFilter(final Predicate<InventoryItem> filterToSet) {
         filter = filterToSet;
         updateView(true);
     }
 
+    /**
+     * 
+     * addCard.
+     * @param card an InventoryItem
+     */
     public void addCard(final InventoryItem card) {
         //int n = table.getSelectedRow();
         pool.add(card);
@@ -157,6 +251,11 @@ public final class TableWithCards {
         updateView(false);
     }
 
+    /**
+     * 
+     * removeCard.
+     * @param card an InventoryItem
+     */
     public void removeCard(final InventoryItem card) {
         int n = table.getSelectedRow();
         pool.remove(card);
@@ -165,9 +264,14 @@ public final class TableWithCards {
         fixSelection(n);
     }
 
-    public void updateView(boolean bForceFilter) {
-        boolean useFilter = ( bForceFilter && filter != null ) || !isUnfiltered();
-        
+    /**
+     * 
+     * updateView.
+     * @param bForceFilter a boolean
+     */
+    public void updateView(final boolean bForceFilter) {
+        boolean useFilter = (bForceFilter && filter != null) || !isUnfiltered();
+
         if (useFilter || wantUnique) {
             model.clear();
         }
@@ -177,12 +281,19 @@ public final class TableWithCards {
         } else if (useFilter) {
             model.addCards(filter.select(pool, pool.fnToPrinted));
         } else if (wantUnique) {
-            model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, pool.fnToCardName, pool.fnToCard));
+            model.addCards(
+                    CardRules.Predicates.Presets.constantTrue.uniqueByLast(
+                            pool, pool.fnToCardName, pool.fnToCard));
         }
 
         model.resort();
     }
 
+    /**
+     * 
+     * getCards.
+     * @return ItemPoolView
+     */
     public ItemPoolView<InventoryItem> getCards() {
         return pool;
     }
