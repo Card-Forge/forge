@@ -222,41 +222,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Oracle of Mul Daya")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                private static final long serialVersionUID = 2902408812353813L;
-
-                @Override
-                public void resolve() {
-                    // TODO: change to static ability?
-                    CardList library = card.getController().getCardsIn(Zone.Library);
-                    if (library.size() == 0)
-                        return;
-
-                    Card top = library.get(0);
-                    if (top.isLand())
-                        card.getController().playLand(top);
-                }//resolve()
-
-                @Override
-                public boolean canPlay() {
-                    CardList library = card.getController().getCardsIn(Zone.Library);
-                    if (library.size() == 0) return false;
-                    PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
-                    boolean canPlayLand = card.getController().canPlayLand();
-
-                    return (play.contains(card) && library.get(0).isLand() && canPlayLand);
-                }
-            };//SpellAbility
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" - plays land from top of library.");
-            ability.setStackDescription(sb.toString());
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-
-
-        //*************** START *********** START **************************
         else if (cardName.equals("Drekavac")) {
             final Input discard = new Input() {
                 private static final long serialVersionUID = -6392468000100283596L;
