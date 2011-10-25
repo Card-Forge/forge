@@ -99,7 +99,6 @@ public class CardPanelHeavy extends CardPanelBase {
         }
         picture.setCard(c);
 
-        
         if(c.hasAlternateState()) {
             changeStateButton.setVisible(true);
             if(c.isFlip()) {
@@ -108,6 +107,9 @@ public class CardPanelHeavy extends CardPanelBase {
             else {
                 changeStateButton.setText("Transform");
             }
+        }
+        else { 
+            changeStateButton.setVisible(false);
         }
     }
     
