@@ -1,36 +1,41 @@
 package arcane.ui;
 
-import arcane.ui.util.CardPanelMouseListener;
-import forge.Card;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.JScrollPane;
+
+import arcane.ui.util.CardPanelMouseListener;
+import forge.Card;
+
 /**
- * <p>PlayArea class.</p>
- *
+ * <p>
+ * PlayArea class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class PlayArea extends CardPanelContainer implements CardPanelMouseListener {
-    /** Constant <code>serialVersionUID=8333013579724492513L</code> */
+    /** Constant <code>serialVersionUID=8333013579724492513L</code>. */
     private static final long serialVersionUID = 8333013579724492513L;
-    /** Constant <code>GUTTER_Y=5</code> */
-    static private final int GUTTER_Y = 5;
-    /** Constant <code>GUTTER_X=5</code> */
-    static private final int GUTTER_X = 5;
-    /** Constant <code>EXTRA_CARD_SPACING_X=0.04f</code> */
+    /** Constant <code>GUTTER_Y=5</code>. */
+    private static final int GUTTER_Y = 5;
+    /** Constant <code>GUTTER_X=5</code>. */
+    private static final int GUTTER_X = 5;
+    /** Constant <code>EXTRA_CARD_SPACING_X=0.04f</code>. */
     static final float EXTRA_CARD_SPACING_X = 0.04f;
-    /** Constant <code>CARD_SPACING_Y=0.06f</code> */
-    static private final float CARD_SPACING_Y = 0.06f;
-    /** Constant <code>STACK_SPACING_X=0.07f</code> */
-    static private final float STACK_SPACING_X = 0.07f;
-    /** Constant <code>STACK_SPACING_Y=0.07f</code> */
-    static private final float STACK_SPACING_Y = 0.07f;
+    /** Constant <code>CARD_SPACING_Y=0.06f</code>. */
+    private static final float CARD_SPACING_Y = 0.06f;
+    /** Constant <code>STACK_SPACING_X=0.07f</code>. */
+    private static final float STACK_SPACING_X = 0.07f;
+    /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
+    private static final float STACK_SPACING_Y = 0.07f;
 
     private int landStackMax = 5;
 
@@ -45,20 +50,26 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int stackSpacingX, stackSpacingY;
 
     /**
-     * <p>Constructor for PlayArea.</p>
-     *
-     * @param scrollPane a {@link javax.swing.JScrollPane} object.
-     * @param mirror a boolean.
+     * <p>
+     * Constructor for PlayArea.
+     * </p>
+     * 
+     * @param scrollPane
+     *            a {@link javax.swing.JScrollPane} object.
+     * @param mirror
+     *            a boolean.
      */
-    public PlayArea(JScrollPane scrollPane, boolean mirror) {
+    public PlayArea(final JScrollPane scrollPane, final boolean mirror) {
         super(scrollPane);
         setBackground(Color.white);
         this.mirror = mirror;
     }
 
     /**
-     * <p>doLayout.</p>
-     *
+     * <p>
+     * doLayout.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public void doLayout() {
@@ -68,7 +79,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (CardPanel panel : cardPanels) {
-            if (!panel.gameCard.isLand() || panel.gameCard.isCreature()) continue;
+            if (!panel.gameCard.isLand() || panel.gameCard.isCreature()) {
+                continue;
+            }
 
             int insertIndex = -1;
 
@@ -76,15 +89,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 Stack stack = allLands.get(i);
                 CardPanel firstPanel = stack.get(0);
-                if (firstPanel.gameCard.getName().equals(panel.gameCard.getName()) ) {
+                if (firstPanel.gameCard.getName().equals(panel.gameCard.getName())) {
                     if (!firstPanel.attachedPanels.isEmpty() || firstPanel.gameCard.isEnchanted()) {
-                        // Put this land to the left of lands with the same name and attachments.
+                        // Put this land to the left of lands with the same name
+                        // and attachments.
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.attachedPanels.isEmpty()  || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
+                    if (!panel.attachedPanels.isEmpty()
+                            || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
                             || firstPanel.gameCard.isEnchanted() || stack.size() == landStackMax) {
-                        // If this land has attachments or the stack is full, put it to the right.
+                        // If this land has attachments or the stack is full,
+                        // put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
@@ -92,7 +108,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     stack.add(0, panel);
                     continue outerLoop;
                 }
-                if (insertIndex != -1) break;
+                if (insertIndex != -1) {
+                    break;
+                }
             }
 
             Stack stack = new Stack();
@@ -105,7 +123,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (CardPanel panel : cardPanels) {
-            if (!panel.gameCard.isToken()) continue;
+            if (!panel.gameCard.isToken()) {
+                continue;
+            }
 
             int insertIndex = -1;
 
@@ -115,16 +135,19 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 CardPanel firstPanel = stack.get(0);
                 if (firstPanel.gameCard.getName().equals(panel.gameCard.getName())) {
                     if (!firstPanel.attachedPanels.isEmpty()) {
-                        // Put this token to the left of tokens with the same name and attachments.
+                        // Put this token to the left of tokens with the same
+                        // name and attachments.
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.attachedPanels.isEmpty() || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
+                    if (!panel.attachedPanels.isEmpty()
+                            || !panel.gameCard.getCounters().equals(firstPanel.gameCard.getCounters())
                             || panel.gameCard.isSick() != firstPanel.gameCard.isSick()
                             || panel.gameCard.getNetAttack() != firstPanel.gameCard.getNetAttack()
                             || panel.gameCard.getNetDefense() != firstPanel.gameCard.getNetDefense()
                             || stack.size() == tokenStackMax) {
-                        // If this token has attachments or the stack is full, put it to the right.
+                        // If this token has attachments or the stack is full,
+                        // put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
@@ -132,7 +155,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     stack.add(0, panel);
                     continue outerLoop;
                 }
-                if (insertIndex != -1) break;
+                if (insertIndex != -1) {
+                    break;
+                }
             }
 
             Stack stack = new Stack();
@@ -175,22 +200,30 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
             // Store the current rows and others.
             List<Row> storedRows = new ArrayList<Row>(rows.size());
-            for (Row row : rows)
+            for (Row row : rows) {
                 storedRows.add((Row) row.clone());
+            }
             Row storedOthers = (Row) others.clone();
             // Fill in all rows with others.
-            for (Row row : rows)
+            for (Row row : rows) {
                 fillRow(others, rows, row);
-            // Stop if everything fits, otherwise revert back to the stored values.
-            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
+            }
+            // Stop if everything fits, otherwise revert back to the stored
+            // values.
+            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) {
+                break;
+            }
             rows = storedRows;
             others = storedOthers;
             // Try to put others on their own row(s) and fill in the rest.
             wrap(others, rows, afterFirstRow);
-            for (Row row : rows)
+            for (Row row : rows) {
                 fillRow(others, rows, row);
+            }
             // If that still doesn't fit, scale down.
-            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
+            if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) {
+                break;
+            }
             cardWidth--;
         }
 
@@ -222,8 +255,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 // Align others to the right.
                 if (RowType.other.isType(stack.get(0).gameCard)) {
                     x = playAreaWidth - GUTTER_X + extraCardSpacingX;
-                    for (int i = stackIndex, n = row.size(); i < n; i++)
+                    for (int i = stackIndex, n = row.size(); i < n; i++) {
                         x -= row.get(i).getWidth();
+                    }
                 }
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     CardPanel panel = stack.get(panelIndex);
@@ -241,15 +275,21 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /**
-     * <p>wrap.</p>
-     *
-     * @param sourceRow a {@link arcane.ui.PlayArea.Row} object.
-     * @param rows a {@link java.util.List} object.
-     * @param insertIndex a int.
+     * <p>
+     * wrap.
+     * </p>
+     * 
+     * @param sourceRow
+     *            a {@link arcane.ui.PlayArea.Row} object.
+     * @param rows
+     *            a {@link java.util.List} object.
+     * @param insertIndex
+     *            a int.
      * @return a int.
      */
-    private int wrap(Row sourceRow, List<Row> rows, int insertIndex) {
-        // The cards are sure to fit (with vertical scrolling) at the minimum card width.
+    private int wrap(final Row sourceRow, final List<Row> rows, final int insertIndex) {
+        // The cards are sure to fit (with vertical scrolling) at the minimum
+        // card width.
         boolean allowHeightOverflow = cardWidth == cardWidthMin;
 
         Row currentRow = new Row();
@@ -259,8 +299,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             int rowWidth = currentRow.getWidth();
             if (!currentRow.isEmpty() && rowWidth + stack.getWidth() > playAreaWidth) {
                 // Stop processing if the row is too wide or tall.
-                if (!allowHeightOverflow && rowWidth > playAreaWidth) break;
-                if (!allowHeightOverflow && getRowsHeight(rows) + sourceRow.getHeight() > playAreaHeight) break;
+                if (!allowHeightOverflow && rowWidth > playAreaWidth) {
+                    break;
+                }
+                if (!allowHeightOverflow && getRowsHeight(rows) + sourceRow.getHeight() > playAreaHeight) {
+                    break;
+                }
                 rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
                 currentRow = new Row();
             }
@@ -276,48 +320,64 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         // Remove the wrapped stacks from the source row.
-        for (Row row : rows)
-            for (Stack stack : row)
+        for (Row row : rows) {
+            for (Stack stack : row) {
                 sourceRow.remove(stack);
+            }
+        }
         return insertIndex;
     }
 
     /**
-     * <p>fillRow.</p>
-     *
-     * @param sourceRow a {@link arcane.ui.PlayArea.Row} object.
-     * @param rows a {@link java.util.List} object.
-     * @param rows a {@link java.util.List} object.
-     * @param row a {@link arcane.ui.PlayArea.Row} object.
+     * <p>
+     * fillRow.
+     * </p>
+     * 
+     * @param sourceRow
+     *            a {@link arcane.ui.PlayArea.Row} object.
+     * @param rows
+     *            a {@link java.util.List} object.
+     * @param rows
+     *            a {@link java.util.List} object.
+     * @param row
+     *            a {@link arcane.ui.PlayArea.Row} object.
      */
-    private void fillRow(Row sourceRow, List<Row> rows, Row row) {
+    private void fillRow(final Row sourceRow, final List<Row> rows, Row row) {
         int rowWidth = row.getWidth();
         while (!sourceRow.isEmpty()) {
             Stack stack = sourceRow.get(0);
             rowWidth += stack.getWidth();
-            if (rowWidth > playAreaWidth) break;
+            if (rowWidth > playAreaWidth) {
+                break;
+            }
             if (stack.getHeight() > row.getHeight()) {
-                if (getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight) break;
+                if (getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight) {
+                    break;
+                }
             }
             row.add(sourceRow.remove(0));
         }
     }
 
     /**
-     * <p>getRowsHeight.</p>
-     *
-     * @param rows a {@link java.util.List} object.
+     * <p>
+     * getRowsHeight.
+     * </p>
+     * 
+     * @param rows
+     *            a {@link java.util.List} object.
      * @return a int.
      */
     private int getRowsHeight(List<Row> rows) {
         int height = 0;
-        for (Row row : rows)
+        for (Row row : rows) {
             height += row.getHeight();
+        }
         return height - cardSpacingY + GUTTER_Y * 2;
     }
 
     /** {@inheritDoc} */
-    public CardPanel getCardPanel(int x, int y) {
+    public final CardPanel getCardPanel(final int x, final int y) {
         for (Row row : rows) {
             for (Stack stack : row) {
                 for (CardPanel panel : stack) {
@@ -334,7 +394,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
                     if (x > panelX && x < panelX + panelWidth) {
                         if (y > panelY && y < panelY + panelHeight) {
-                            if (!panel.isDisplayEnabled()) return null;
+                            if (!panel.isDisplayEnabled()) {
+                                return null;
+                            }
                             return panel;
                         }
                     }
@@ -345,62 +407,74 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     /** {@inheritDoc} */
-    public void mouseLeftClicked(CardPanel panel, MouseEvent evt) {
-        if (panel.tappedAngle != 0 && panel.tappedAngle != CardPanel.TAPPED_ANGLE) return;
+    public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+        if (panel.tappedAngle != 0 && panel.tappedAngle != CardPanel.TAPPED_ANGLE) {
+            return;
+        }
         super.mouseLeftClicked(panel, evt);
     }
 
     /**
-     * <p>Getter for the field <code>landStackMax</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>landStackMax</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getLandStackMax() {
+    public final int getLandStackMax() {
         return landStackMax;
     }
 
     /**
-     * <p>Setter for the field <code>landStackMax</code>.</p>
-     *
-     * @param landStackMax a int.
+     * <p>
+     * Setter for the field <code>landStackMax</code>.
+     * </p>
+     * 
+     * @param landStackMax
+     *            a int.
      */
-    public void setLandStackMax(int landStackMax) {
+    public final void setLandStackMax(int landStackMax) {
         this.landStackMax = landStackMax;
     }
 
     /**
-     * <p>Getter for the field <code>stackVertical</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>stackVertical</code>.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean getStackVertical() {
+    public final boolean getStackVertical() {
         return stackVertical;
     }
 
     /**
-     * <p>Setter for the field <code>stackVertical</code>.</p>
-     *
-     * @param stackVertical a boolean.
+     * <p>
+     * Setter for the field <code>stackVertical</code>.
+     * </p>
+     * 
+     * @param stackVertical
+     *            a boolean.
      */
-    public void setStackVertical(boolean stackVertical) {
+    public final void setStackVertical(boolean stackVertical) {
         this.stackVertical = stackVertical;
     }
 
-    static private enum RowType {
+    private static enum RowType {
         land, creature, creatureNonToken, other;
 
-        public boolean isType(Card card) {
+        public boolean isType(final Card card) {
             switch (this) {
-                case land:
-                    return card.isLand();
-                case creature:
-                    return card.isCreature();
-                case creatureNonToken:
-                    return card.isCreature() && !card.isToken();
-                case other:
-                    return !card.isLand() && !card.isCreature();
-                default:
-                    throw new RuntimeException("Unhandled type: " + this);
+            case land:
+                return card.isLand();
+            case creature:
+                return card.isCreature();
+            case creatureNonToken:
+                return card.isCreature() && !card.isToken();
+            case other:
+                return !card.isLand() && !card.isCreature();
+            default:
+                throw new RuntimeException("Unhandled type: " + this);
             }
         }
     }
@@ -412,39 +486,47 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             super(16);
         }
 
-        public Row(List<CardPanel> cardPanels, RowType type) {
+        public Row(final List<CardPanel> cardPanels, final RowType type) {
             this();
             addAll(cardPanels, type);
         }
 
-        private void addAll(List<CardPanel> cardPanels, RowType type) {
+        private void addAll(final List<CardPanel> cardPanels, final RowType type) {
             for (CardPanel panel : cardPanels) {
-                if (!type.isType(panel.gameCard) || panel.attachedToPanel != null) continue;
+                if (!type.isType(panel.gameCard) || panel.attachedToPanel != null) {
+                    continue;
+                }
                 Stack stack = new Stack();
                 stack.add(panel);
                 add(stack);
             }
         }
 
-        public boolean addAll(Collection<? extends Stack> c) {
+        public boolean addAll(final Collection<? extends Stack> c) {
             boolean changed = super.addAll(c);
             c.clear();
             return changed;
         }
 
         private int getWidth() {
-            if (isEmpty()) return 0;
+            if (isEmpty()) {
+                return 0;
+            }
             int width = 0;
-            for (Stack stack : this)
+            for (Stack stack : this) {
                 width += stack.getWidth();
+            }
             return width + GUTTER_X * 2 - extraCardSpacingX;
         }
 
         private int getHeight() {
-            if (isEmpty()) return 0;
+            if (isEmpty()) {
+                return 0;
+            }
             int height = 0;
-            for (Stack stack : this)
+            for (Stack stack : this) {
                 height = Math.max(height, stack.getHeight());
+            }
             return height;
         }
     }
@@ -456,10 +538,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             super(8);
         }
 
-        public boolean add(CardPanel panel) {
+        public boolean add(final CardPanel panel) {
             boolean appended = super.add(panel);
-            for (CardPanel attachedPanel : panel.attachedPanels)
+            for (CardPanel attachedPanel : panel.attachedPanels) {
                 add(attachedPanel);
+            }
             return appended;
         }
 

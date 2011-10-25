@@ -1,7 +1,8 @@
 package arcane.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
 
 /**
  * <p>ViewPanel class.</p>
@@ -10,7 +11,7 @@ import java.awt.*;
  * @version $Id$
  */
 public class ViewPanel extends JPanel {
-    /** Constant <code>serialVersionUID=7016597023142963068L</code> */
+    /** Constant <code>serialVersionUID=7016597023142963068L</code>. */
     private static final long serialVersionUID = 7016597023142963068L;
 
     /**
@@ -18,8 +19,10 @@ public class ViewPanel extends JPanel {
      *
      * @since 1.0.15
      */
-    public void doLayout() {
-        if (getComponentCount() == 0) return;
+    public final void doLayout() {
+        if (getComponentCount() == 0) {
+            return;
+        }
         CardPanel panel = (CardPanel) getComponent(0);
         int viewWidth = getWidth();
         int viewHeight = getHeight();
@@ -30,8 +33,9 @@ public class ViewPanel extends JPanel {
         if (targetWidth > viewWidth) {
             targetHeight = Math.round(viewWidth * (srcHeight / (float) srcWidth));
             targetWidth = viewWidth;
-        } else
+        } else {
             targetHeight = viewHeight;
+        }
         int x = viewWidth / 2 - targetWidth / 2;
         int y = viewHeight / 2 - targetHeight / 2;
         panel.setCardBounds(x, y, targetWidth, targetHeight);
@@ -42,7 +46,7 @@ public class ViewPanel extends JPanel {
      *
      * @param panel a {@link arcane.ui.CardPanel} object.
      */
-    public void setCardPanel(CardPanel panel) {
+    public final void setCardPanel(final CardPanel panel) {
         //CardPanel newPanel = new CardPanel(panel.gameCard);
         //newPanel.setImage(panel);
         removeAll();

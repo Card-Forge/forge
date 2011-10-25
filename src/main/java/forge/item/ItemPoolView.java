@@ -17,6 +17,7 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  *
  * @author Forge
  * @version $Id: CardPoolView.java 9708 2011-08-09 19:34:12Z jendave $
+ * @param <T> an InventoryItem
  */
 public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 

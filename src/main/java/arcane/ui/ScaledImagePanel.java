@@ -1,8 +1,12 @@
 package arcane.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
 
 /**
  * <p>ScaledImagePanel class.</p>
@@ -12,9 +16,15 @@ import java.awt.image.BufferedImage;
  */
 public class ScaledImagePanel extends JPanel {
 
-    /** Constant <code>serialVersionUID=-5691107238620895385L</code> */
+    /** Constant <code>serialVersionUID=-5691107238620895385L</code>. */
     private static final long serialVersionUID = -5691107238620895385L;
+    /**
+     * 
+     */
     public volatile Image srcImage;
+    /**
+     * 
+     */
     public volatile Image srcImageBlurred;
 
     private ScalingType scalingType = ScalingType.bilinear;
@@ -37,7 +47,7 @@ public class ScaledImagePanel extends JPanel {
      * @param srcImageBlurred a {@link java.awt.Image} object.
      *
      */
-    public void setImage(Image srcImage, Image srcImageBlurred) {
+    public final void setImage(final Image srcImage, Image srcImageBlurred) {
         this.srcImage = srcImage;
         this.srcImageBlurred = srcImageBlurred;
     }
@@ -45,7 +55,7 @@ public class ScaledImagePanel extends JPanel {
     /**
      * <p>clearImage.</p>
      */
-    public void clearImage() {
+    public final void clearImage() {
         srcImage = null;
         srcImageBlurred = null;
         repaint();
@@ -56,7 +66,7 @@ public class ScaledImagePanel extends JPanel {
      *
      * @param multiPassType a {@link arcane.ui.ScaledImagePanel.MultipassType} object.
      */
-    public void setScalingMultiPassType(MultipassType multiPassType) {
+    public final void setScalingMultiPassType(final MultipassType multiPassType) {
         this.multiPassType = multiPassType;
     }
 
@@ -65,7 +75,7 @@ public class ScaledImagePanel extends JPanel {
      *
      * @param scalingType a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
      */
-    public void setScalingType(ScalingType scalingType) {
+    public final void setScalingType(final ScalingType scalingType) {
         this.scalingType = scalingType;
     }
 
@@ -74,7 +84,7 @@ public class ScaledImagePanel extends JPanel {
      *
      * @param blur a boolean.
      */
-    public void setScalingBlur(boolean blur) {
+    public final void setScalingBlur(final boolean blur) {
         this.blur = blur;
     }
 
@@ -83,7 +93,7 @@ public class ScaledImagePanel extends JPanel {
      *
      * @param scaleLarger a boolean.
      */
-    public void setScaleLarger(boolean scaleLarger) {
+    public final void setScaleLarger(final boolean scaleLarger) {
         this.scaleLarger = scaleLarger;
     }
 
@@ -92,7 +102,7 @@ public class ScaledImagePanel extends JPanel {
      *
      * @return a boolean.
      */
-    public boolean hasImage() {
+    public final boolean hasImage() {
         return srcImage != null;
     }
 
@@ -113,8 +123,9 @@ public class ScaledImagePanel extends JPanel {
             if (targetWidth > panelWidth) {
                 targetHeight = Math.round(panelWidth * (srcHeight / (float) srcWidth));
                 targetWidth = panelWidth;
-            } else
+            } else {
                 targetHeight = panelHeight;
+            }
         }
         ScalingInfo info = new ScalingInfo();
         info.targetWidth = targetWidth;
@@ -127,8 +138,10 @@ public class ScaledImagePanel extends JPanel {
     }
 
     /** {@inheritDoc} */
-    public void paint(Graphics g) {
-        if (srcImage == null) return;
+    public final void paint(final Graphics g) {
+        if (srcImage == null) {
+            return;
+        }
 
         Graphics2D g2 = (Graphics2D) g.create();
         ScalingInfo info = getScalingInfo();
@@ -149,6 +162,8 @@ public class ScaledImagePanel extends JPanel {
             case replicate:
                 scaleWithGetScaledInstance(g2, info, Image.SCALE_REPLICATE);
                 break;
+        default:
+            break;
         }
     }
 
@@ -159,7 +174,7 @@ public class ScaledImagePanel extends JPanel {
      * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
      * @param hints a int.
      */
-    private void scaleWithGetScaledInstance(Graphics2D g2, ScalingInfo info, int hints) {
+    private void scaleWithGetScaledInstance(final Graphics2D g2, final ScalingInfo info, final int hints) {
         Image srcImage = getSourceImage(info);
         Image scaledImage = srcImage.getScaledInstance(info.targetWidth, info.targetHeight, hints);
         g2.drawImage(scaledImage, info.x, info.y, null);
@@ -172,17 +187,24 @@ public class ScaledImagePanel extends JPanel {
      * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
      * @param hint a {@link java.lang.Object} object.
      */
-    private void scaleWithDrawImage(Graphics2D g2, ScalingInfo info, Object hint) {
+    private void scaleWithDrawImage(final Graphics2D g2, final ScalingInfo info, final Object hint) {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
 
         int tempDestWidth = info.srcWidth / 2, tempDestHeight = info.srcHeight / 2;
-        if (tempDestWidth < info.targetWidth) tempDestWidth = info.targetWidth;
-        if (tempDestHeight < info.targetHeight) tempDestHeight = info.targetHeight;
+        if (tempDestWidth < info.targetWidth) {
+            tempDestWidth = info.targetWidth;
+        }
+        if (tempDestHeight < info.targetHeight) {
+            tempDestHeight = info.targetHeight;
+        }
 
         Image srcImage = getSourceImage(info);
 
-        // If not doing multipass or multipass only needs a single pass, just scale it once directly to the panel surface.
-        if (multiPassType == MultipassType.none || (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight)) {
+        // If not doing multipass or multipass only needs a single pass,
+        // just scale it once directly to the panel surface.
+        if (multiPassType == MultipassType.none
+                || (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight))
+        {
             g2.drawImage(srcImage, info.x, info.y, info.targetWidth, info.targetHeight, null);
             return;
         }
@@ -191,7 +213,8 @@ public class ScaledImagePanel extends JPanel {
         Graphics2D g2temp = tempImage.createGraphics();
         switch (multiPassType) {
             case nearestNeighbor:
-                g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                        RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
                 break;
             case bilinear:
                 g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -199,6 +222,8 @@ public class ScaledImagePanel extends JPanel {
             case bicubic:
                 g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
                 break;
+        default:
+            break;
         }
         // Render first pass from image to temp.
         g2temp.drawImage(srcImage, 0, 0, tempDestWidth, tempDestHeight, null);
@@ -208,15 +233,21 @@ public class ScaledImagePanel extends JPanel {
         while (true) {
             if (tempDestWidth > info.targetWidth) {
                 tempDestWidth = tempDestWidth / 2;
-                if (tempDestWidth < info.targetWidth) tempDestWidth = info.targetWidth;
+                if (tempDestWidth < info.targetWidth) {
+                    tempDestWidth = info.targetWidth;
+                }
             }
 
             if (tempDestHeight > info.targetHeight) {
                 tempDestHeight = tempDestHeight / 2;
-                if (tempDestHeight < info.targetHeight) tempDestHeight = info.targetHeight;
+                if (tempDestHeight < info.targetHeight) {
+                    tempDestHeight = info.targetHeight;
+                }
             }
 
-            if (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight) break;
+            if (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight) {
+                break;
+            }
 
             g2temp.drawImage(tempImage, 0, 0, tempDestWidth, tempDestHeight, 0, 0, tempSrcWidth, tempSrcHeight, null);
 
@@ -226,7 +257,10 @@ public class ScaledImagePanel extends JPanel {
         g2temp.dispose();
         // Render last pass from temp to panel surface.
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
-        g2.drawImage(tempImage, info.x, info.y, info.x + info.targetWidth, info.y + info.targetHeight, 0, 0, tempSrcWidth,
+        g2.drawImage(tempImage, info.x,
+                info.y,
+                info.x + info.targetWidth,
+                info.y + info.targetHeight, 0, 0, tempSrcWidth,
                 tempSrcHeight, null);
     }
 
@@ -236,13 +270,17 @@ public class ScaledImagePanel extends JPanel {
      * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
      * @return a {@link java.awt.Image} object.
      */
-    private Image getSourceImage(ScalingInfo info) {
-        if (!blur || srcImageBlurred == null) return srcImage;
-        if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) return srcImage;
+    private Image getSourceImage(final ScalingInfo info) {
+        if (!blur || srcImageBlurred == null) {
+            return srcImage;
+        }
+        if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) {
+            return srcImage;
+        }
         return srcImageBlurred;
     }
 
-    static private class ScalingInfo {
+    private static class ScalingInfo {
         public int targetWidth;
         public int targetHeight;
         public int srcWidth;
@@ -251,11 +289,55 @@ public class ScaledImagePanel extends JPanel {
         public int y;
     }
 
-    static public enum MultipassType {
-        none, nearestNeighbor, bilinear, bicubic
+    /**
+     * 
+     * MultipassType.
+     *
+     */
+    public static enum MultipassType {
+        /**
+         * 
+         */
+        none,
+        /**
+         * 
+         */
+        nearestNeighbor,
+        /**
+         * 
+         */
+        bilinear,
+        /**
+         * 
+         */
+        bicubic
     }
 
-    static public enum ScalingType {
-        nearestNeighbor, replicate, bilinear, bicubic, areaAveraging
+    /**
+     * 
+     * ScalingType.
+     *
+     */
+    public static enum ScalingType {
+        /**
+         * 
+         */
+        nearestNeighbor,
+        /**
+         * 
+         */
+        replicate,
+        /**
+         * 
+         */
+        bilinear,
+        /**
+         * 
+         */
+        bicubic,
+        /**
+         * 
+         */
+        areaAveraging
     }
 }
