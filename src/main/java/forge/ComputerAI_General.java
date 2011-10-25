@@ -134,7 +134,8 @@ public class ComputerAI_General implements Computer {
                                 creatures2.add(creatures.get(i));
                             }
                         }
-                        if (creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size() > 1
+                        if (creatures2.size()
+                                + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size() > 1
                                 && c.isCreature()
                                 && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
                             return true;

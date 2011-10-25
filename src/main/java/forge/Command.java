@@ -7,8 +7,8 @@ package forge;
  * @version $Id$
  */
 public interface Command extends java.io.Serializable {
-    /** Constant <code>Blank</code> */
-    public static Command Blank = new Command() {
+    /** Constant <code>Blank</code>. */
+    Command Blank = new Command() {
 
         private static final long serialVersionUID = 2689172297036001710L;
 
@@ -19,5 +19,5 @@ public interface Command extends java.io.Serializable {
     /**
      * <p>execute.</p>
      */
-    public void execute();
+    void execute();
 }
