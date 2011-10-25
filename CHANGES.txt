@@ -135,6 +135,21 @@ Fixes/Features:
 (still a work in progress)
 - Added Sol's "May be played" keyword implementation for non-land cards.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Little fix in the script of Garruk's Horde.
+- Added 10E version of Tidings.
+- In-game downloading Part 7 (and final):
+1) refactor Gui_DownloadPictures_LQ
+2) refactor Gui_DownloadSetPictures_LQ
+3) remove the [T] before file names in tokens download file
+- Fixed a possible NPE if the activator for a cost is not set.
+- Fixed reversed logic of "Your opponents can't win the game." and "You can't win the game.".
+- checkstyle fixes
+- checkstyle
+- Converted one ability of Oracle of Mul Daya to script.
+- checkstyle
+- Added the keywords "If a card would be put into an opponent's graveyard from anywhere, exile it instead." and "If a card would be put into your graveyard from anywhere, exile it instead.".
+- Converted Leyline of the Void to script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -192,6 +207,8 @@ Mudhole
 Tombfire
 Gorilla Titan
 Garruk's Horde
+Future Sight
+Magus of the Future
 
 
 end
