@@ -6,18 +6,16 @@
 
 package tree.properties.types;
 
-
-import tree.properties.PropertyType;
-import tree.properties.TreeProperties;
-
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tree.properties.PropertyType;
+import tree.properties.TreeProperties;
 
 /**
  * The class FileType.
- *
+ * 
  * @author Clemens Koza
  * @version V0.0 19.08.2009
  */
@@ -28,8 +26,10 @@ public class FileType implements PropertyType<File> {
     public static final Class<File> TYPE = File.class;
 
     /**
-     * <p>Getter for the field <code>suffix</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>suffix</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public final String getSuffix() {
@@ -37,14 +37,15 @@ public class FileType implements PropertyType<File> {
     }
 
     /**
-     * <p>Getter for the field <code>type</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>type</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.Class} object.
      */
     public final Class<File> getType() {
         return TYPE;
     }
-
 
     /** {@inheritDoc} */
     public final File toObject(final TreeProperties p, final String s) {
@@ -58,14 +59,18 @@ public class FileType implements PropertyType<File> {
     }
 
     /**
-     * Returns a path path from a property value. Three substitutions are applied:
+     * Returns a path path from a property value. Three substitutions are
+     * applied:
      * <ul>
-     * <li>A "~/" or "~\" at the beginning is replaced with the user's home directory</li>
+     * <li>A "~/" or "~\" at the beginning is replaced with the user's home
+     * directory</li>
      * <li>A "$$" anywhere is replaced with a single "$"</li>
-     * <li>A "${*}", where * is any string without "}", is replaced by {@link System#getProperty(String)}</li>
+     * <li>A "${*}", where * is any string without "}", is replaced by
+     * {@link System#getProperty(String)}</li>
      * </ul>
-     *
-     * @param s a {@link java.lang.String} object.
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getPath(String s) {
