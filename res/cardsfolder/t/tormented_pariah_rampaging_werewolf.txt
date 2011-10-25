@@ -1,0 +1,26 @@
+Name:Tormented Pariah
+ManaCost:3 R
+Types:Creature Human Warrior Werewolf
+Text:no text
+PT:3/2
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+AlternateMode:DoubleFaced
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/165a.jpg
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Tormented Pariah.
+
+ALTERNATE
+
+Name:Rampaging Werewolf
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+Text:no text
+PT:6/4
+T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/165b.jpg
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Rampaging Werewolf.
+End
