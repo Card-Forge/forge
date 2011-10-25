@@ -296,18 +296,29 @@ public class GameAction {
      */
     public final Card moveToGraveyard(Card c) {
         final PlayerZone origZone = AllZone.getZoneOf(c);
-        final PlayerZone grave = c.getOwner().getZone(Constant.Zone.Graveyard);
-
-        if (AllZoneUtil.isCardInPlay("Leyline of the Void", c.getOwner().getOpponent())) {
-            return moveTo(c.getOwner().getZone(Constant.Zone.Exile), c);
-        }
+        final Player owner = c.getOwner();
+        final PlayerZone grave = owner.getZone(Constant.Zone.Graveyard);
+        final PlayerZone exile = owner.getZone(Constant.Zone.Exile);
+        final CardList ownerBoard = owner.getCardsIn(Constant.Zone.Battlefield);
+        final CardList opponentsBoard = owner.getOpponent().getCardsIn(Constant.Zone.Battlefield);
+        
 
         if (c.getName().equals("Nissa's Chosen") && origZone.is(Constant.Zone.Battlefield)) {
             return moveToLibrary(c, -1);
         }
+        
+        for(Card card : opponentsBoard) {
+            if(card.hasKeyword("If a card would be put into an opponent's graveyard from anywhere, exile it instead."))
+                return moveTo(exile, c);
+        }
+        
+        for(Card card : ownerBoard) {
+            if(card.hasKeyword("If a card would be put into your graveyard from anywhere, exile it instead."))
+                return moveTo(exile, c);
+        }
 
         if (c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
-            return moveTo(c.getOwner().getZone(Constant.Zone.Exile), c);
+            return moveTo(exile, c);
         }
 
         if (c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
@@ -361,7 +372,7 @@ public class GameAction {
                     boolean shouldRecoverForAI = false;
                     boolean shouldRecoverForHuman = false;
 
-                    if (c.getOwner().isHuman()) {
+                    if (owner.isHuman()) {
                         shouldRecoverForHuman = GameActionUtil.showYesNoDialog(recoverable, question.toString());
                     } else if (c.getOwner().isComputer()) {
                         shouldRecoverForAI = ComputerUtil.canPayCost(abRecover);
