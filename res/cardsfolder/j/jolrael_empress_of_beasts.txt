@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Legendary Creature Human Spellshaper
 Text:no text
 PT:3/3
-A:AB$ AnimateAll | Cost$ 2 G Discard<2/Card> | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ All lands target player controls become 3/3 creatures until end of turn. They're still lands.
+A:AB$ AnimateAll | Cost$ 2 G Discard<2/Card> T | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ All lands target player controls become 3/3 creatures until end of turn. They're still lands.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolrael_empress_of_beasts.jpg
 End
