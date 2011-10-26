@@ -1,11 +1,5 @@
 package forge.deck.generate;
 
-import forge.AllZone;
-import forge.Card;
-import forge.CardList;
-import forge.MyRandom;
-import forge.error.ErrorViewer;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,9 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
+import forge.MyRandom;
+import forge.error.ErrorViewer;
+
 /**
- * <p>GenerateThemeDeck class.</p>
- *
+ * <p>
+ * GenerateThemeDeck class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -25,15 +27,19 @@ public class GenerateThemeDeck {
     private BufferedReader in = null;
 
     /**
-     * <p>Constructor for GenerateThemeDeck.</p>
+     * <p>
+     * Constructor for GenerateThemeDeck.
+     * </p>
      */
     public GenerateThemeDeck() {
 
     }
 
     /**
-     * <p>getThemeNames.</p>
-     *
+     * <p>
+     * getThemeNames.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getThemeNames() {
@@ -62,13 +68,17 @@ public class GenerateThemeDeck {
     }
 
     /**
-     * <p>getThemeDeck.</p>
-     *
-     * @param themeName a {@link java.lang.String} object.
-     * @param size a int.
+     * <p>
+     * getThemeDeck.
+     * </p>
+     * 
+     * @param themeName
+     *            a {@link java.lang.String} object.
+     * @param size
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getThemeDeck(final String themeName, final int size) {
+    public final CardList getThemeDeck(final String themeName, final int size) {
         CardList tDeck = new CardList();
 
         ArrayList<Grp> groups = new ArrayList<Grp>();
@@ -158,7 +168,9 @@ public class GenerateThemeDeck {
                 s = g.Cardnames.get(r.nextInt(cnSize));
 
                 int lc = 0;
-                while (cardCounts.get(s) >= g.MaxCnt || lc > size) // don't keep looping forever
+                while (cardCounts.get(s) >= g.MaxCnt || lc > size) // don't keep
+                                                                   // looping
+                                                                   // forever
                 {
                     s = g.Cardnames.get(r.nextInt(cnSize));
                     lc++;
@@ -177,22 +189,21 @@ public class GenerateThemeDeck {
         }
 
         int numBLands = 0;
-        if (bLandPercentage > 0) {    // if theme explicitly defines this
+        if (bLandPercentage > 0) { // if theme explicitly defines this
             float p = (float) ((float) bLandPercentage * .01);
             numBLands = (int) (p * (float) size);
-        } else { // otherwise, just fill in the rest of the deck with basic lands
+        } else { // otherwise, just fill in the rest of the deck with basic
+                 // lands
             numBLands = size - tDeck.size();
         }
 
         tmpDeck += "numBLands:" + numBLands + "\n";
 
-        if (numBLands > 0)    // attempt to optimize basic land counts according to color representation
+        if (numBLands > 0) // attempt to optimize basic land counts according to
+                           // color representation
         {
-            CCnt[] clrCnts = {new CCnt("Plains", 0),
-                    new CCnt("Island", 0),
-                    new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0),
-                    new CCnt("Forest", 0)};
+            CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
             // count each instance of a color in mana costs
             // TODO count hybrid mana differently?
@@ -225,7 +236,8 @@ public class GenerateThemeDeck {
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (clrCnts[i].Count > 0) {    // calculate number of lands for each color
+                if (clrCnts[i].Count > 0) { // calculate number of lands for
+                                            // each color
                     float p = (float) clrCnts[i].Count / (float) totalColor;
                     int nLand = (int) ((float) numBLands * p);
                     tmpDeck += "numLand-" + clrCnts[i].Color + ":" + nLand + "\n";
@@ -278,12 +290,14 @@ public class GenerateThemeDeck {
     }
 
     /**
-     * <p>readLine.</p>
-     *
+     * <p>
+     * readLine.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     private String readLine() {
-        //makes the checked exception, into an unchecked runtime exception
+        // makes the checked exception, into an unchecked runtime exception
         try {
             String s = in.readLine();
             if (s != null) {
@@ -294,18 +308,30 @@ public class GenerateThemeDeck {
             ErrorViewer.showError(ex);
             throw new RuntimeException("GenerateThemeDeck : readLine error");
         }
-    } //readLine(Card)
+    } // readLine(Card)
 
     /**
      * 
      * TODO Write javadoc for this type.
-     *
+     * 
      */
     class CCnt {
+
+        /** The Color. */
         public String Color;
+
+        /** The Count. */
         public int Count;
 
-        public CCnt(String clr, int cnt) {
+        /**
+         * Instantiates a new c cnt.
+         * 
+         * @param clr
+         *            the clr
+         * @param cnt
+         *            the cnt
+         */
+        public CCnt(final String clr, final int cnt) {
             Color = clr;
             Count = cnt;
         }
@@ -314,12 +340,17 @@ public class GenerateThemeDeck {
     /**
      * 
      * TODO Write javadoc for this type.
-     *
+     * 
      */
     class Grp {
+
+        /** The Cardnames. */
         public ArrayList<String> Cardnames = new ArrayList<String>();
+
+        /** The Max cnt. */
         public int MaxCnt;
+
+        /** The Percentage. */
         public int Percentage;
     }
 }
-

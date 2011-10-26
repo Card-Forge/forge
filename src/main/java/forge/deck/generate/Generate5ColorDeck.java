@@ -17,8 +17,10 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
 /**
- * <p>Generate5ColorDeck class.</p>
- *
+ * <p>
+ * Generate5ColorDeck class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -35,24 +37,30 @@ public class Generate5ColorDeck {
     private Map<String, Integer> cardCounts = null;
 
     /**
-     * 
+     * Instantiates a new generate5 color deck.
      */
     public Generate5ColorDeck() {
         this("white", "blue", "black", "red", "green");
     }
 
     /**
-     * <p>Constructor for Generate5ColorDeck.</p>
-     *
-     * @param clr1 a {@link java.lang.String} object.
-     * @param clr2 a {@link java.lang.String} object.
-     * @param clr3 a {@link java.lang.String} object.
-     * @param clr4 a {@link java.lang.String} object.
-     * @param clr5 a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Generate5ColorDeck.
+     * </p>
+     * 
+     * @param clr1
+     *            a {@link java.lang.String} object.
+     * @param clr2
+     *            a {@link java.lang.String} object.
+     * @param clr3
+     *            a {@link java.lang.String} object.
+     * @param clr4
+     *            a {@link java.lang.String} object.
+     * @param clr5
+     *            a {@link java.lang.String} object.
      */
-    public Generate5ColorDeck(final String clr1, final String clr2,
-            final String clr3, final String clr4, final String clr5)
-    {
+    public Generate5ColorDeck(final String clr1, final String clr2, final String clr3, final String clr4,
+            final String clr5) {
         r = MyRandom.random;
 
         cardCounts = new HashMap<String, Integer>();
@@ -91,10 +99,14 @@ public class Generate5ColorDeck {
     }
 
     /**
-     * <p>get3ColorDeck.</p>
-     *
-     * @param size a int.
-     * @param pt a PlayerType
+     * <p>
+     * get3ColorDeck.
+     * </p>
+     * 
+     * @param size
+     *            a int.
+     * @param pt
+     *            a PlayerType
      * @return a {@link forge.CardList} object.
      */
     public final CardList get5ColorDeck(final int size, final PlayerType pt) {
@@ -112,8 +124,8 @@ public class Generate5ColorDeck {
             public boolean addCard(final Card c) {
                 if (c.getSVar("RemRandomDeck").equals("True")) {
                     return false;
-            }
-            return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
+                }
+                return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
             }
         });
 
@@ -149,7 +161,7 @@ public class Generate5ColorDeck {
         CardList cr4 = cL4.getType("Creature");
         CardList cr5 = cL5.getType("Creature");
 
-        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature"};
+        String[] ise = { "Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature" };
         CardList sp1 = cL1.getValidCards(ise, null, null);
         CardList sp2 = cL2.getValidCards(ise, null, null);
         CardList sp3 = cL3.getValidCards(ise, null, null);
@@ -161,8 +173,8 @@ public class Generate5ColorDeck {
         CardList sp12345 = new CardList();
 
         // used for mana curve in the card pool
-        final int[] minCMC = {1};
-        final int[] maxCMC = {3};
+        final int[] minCMC = { 1 };
+        final int[] maxCMC = { 3 };
         CardListFilter cmcF = new CardListFilter() {
             public boolean addCard(final Card c) {
                 int cCMC = c.getCMC();
@@ -229,10 +241,11 @@ public class Generate5ColorDeck {
             minCMC[0] += 2;
             maxCMC[0] += 2;
             // resulting mana curve of the card pool
-            //18x 1 - 3
-            //12x 3 - 5
-            //6x 5 - 7
-            //=36x - card pool could support up to a 257 card deck (all 4-ofs plus basic lands)
+            // 18x 1 - 3
+            // 12x 3 - 5
+            // 6x 5 - 7
+            // =36x - card pool could support up to a 257 card deck (all 4-ofs
+            // plus basic lands)
         }
 
         // shuffle card pools
@@ -290,7 +303,8 @@ public class Generate5ColorDeck {
         if (landsPercentage > 0) {
             p = (float) ((float) landsPercentage * .01);
             numLands = (int) (p * (float) size);
-        } else {    // otherwise, just fill in the rest of the deck with basic lands
+        } else { // otherwise, just fill in the rest of the deck with basic
+                 // lands
             numLands = size - tDeck.size();
         }
 
@@ -317,13 +331,11 @@ public class Generate5ColorDeck {
 
         numLands -= nDLands;
 
-        if (numLands > 0)    // attempt to optimize basic land counts according to color representation
+        if (numLands > 0) // attempt to optimize basic land counts according to
+                          // color representation
         {
-            CCnt[] clrCnts = {new CCnt("Plains", 0),
-                    new CCnt("Island", 0),
-                    new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0),
-                    new CCnt("Forest", 0)};
+            CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
             // count each card color using mana costs
             // TODO: count hybrid mana differently?
@@ -336,17 +348,13 @@ public class Generate5ColorDeck {
 
                     if (c == 'W') {
                         clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                    }
-                    else if (c == 'U') {
+                    } else if (c == 'U') {
                         clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                    }
-                    else if (c == 'B') {
+                    } else if (c == 'B') {
                         clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                    }
-                    else if (c == 'R') {
+                    } else if (c == 'R') {
                         clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                    }
-                    else if (c == 'G') {
+                    } else if (c == 'G') {
                         clrCnts[4].setCount(clrCnts[4].getCount() + 1);
                     }
                 }
@@ -362,12 +370,14 @@ public class Generate5ColorDeck {
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (clrCnts[i].getCount() > 0) {    // calculate number of lands for each color
+                if (clrCnts[i].getCount() > 0) { // calculate number of lands
+                                                 // for each color
                     p = (float) clrCnts[i].getCount() / (float) totalColor;
                     int nLand = (int) ((float) numLands * p);
                     tmpDeck += "nLand-" + clrCnts[i].getColor() + ":" + nLand + "\n";
 
-                    // just to prevent a null exception by the deck size fixing code
+                    // just to prevent a null exception by the deck size fixing
+                    // code
                     cardCounts.put(clrCnts[i].getColor(), nLand);
 
                     for (int j = 0; j <= nLand; j++) {
@@ -405,7 +415,7 @@ public class Generate5ColorDeck {
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand()) {   // don't remove basic lands
+                while (c.isBasicLand()) { // don't remove basic lands
                     c = tDeck.get(r.nextInt(tDeck.size()));
                 }
 

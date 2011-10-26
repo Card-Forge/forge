@@ -1,17 +1,26 @@
 package forge.deck.generate;
 
-import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardFilter;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Constant;
+import forge.MyRandom;
+import forge.PlayerType;
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+
 /**
- * <p>Generate2ColorDeck class.</p>
- *
+ * <p>
+ * Generate2ColorDeck class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -25,12 +34,16 @@ public class Generate2ColorDeck {
     private Map<String, Integer> cardCounts = null;
 
     /**
-     * <p>Constructor for Generate2ColorDeck.</p>
-     *
-     * @param Clr1 a {@link java.lang.String} object.
-     * @param Clr2 a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Generate2ColorDeck.
+     * </p>
+     * 
+     * @param Clr1
+     *            a {@link java.lang.String} object.
+     * @param Clr2
+     *            a {@link java.lang.String} object.
      */
-    public Generate2ColorDeck(String Clr1, String Clr2) {
+    public Generate2ColorDeck(final String Clr1, final String Clr2) {
         r = MyRandom.random;
 
         cardCounts = new HashMap<String, Integer>();
@@ -55,8 +68,9 @@ public class Generate2ColorDeck {
 
             // choose second color
             String c2 = notColors.get(r.nextInt(5));
-            while (c2.equals(color1))
+            while (c2.equals(color1)) {
                 c2 = notColors.get(r.nextInt(5));
+            }
             color2 = c2;
         } else {
             color1 = Clr1;
@@ -67,7 +81,7 @@ public class Generate2ColorDeck {
         notColors.remove(color2);
 
         dL = GenerateDeckUtil.getDualLandList(clrMap.get(color1) + clrMap.get(color2));
-        
+
         for (int i = 0; i < dL.size(); i++) {
             cardCounts.put(dL.get(i), 0);
         }
@@ -75,12 +89,17 @@ public class Generate2ColorDeck {
     }
 
     /**
-     * <p>get2ColorDeck.</p>
-     *
-     * @param Size a int.
+     * <p>
+     * get2ColorDeck.
+     * </p>
+     * 
+     * @param Size
+     *            a int.
+     * @param pt
+     *            the pt
      * @return a {@link forge.CardList} object.
      */
-    public CardList get2ColorDeck(int Size, final PlayerType pt) {
+    public final CardList get2ColorDeck(final int Size, final PlayerType pt) {
         int lc = 0; // loop counter to prevent infinite card selection loops
         String tmpDeck = "";
         CardList tDeck = new CardList();
@@ -92,9 +111,9 @@ public class Generate2ColorDeck {
         // start with all cards
         // remove cards that generated decks don't like
         CardList AllCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 if (c.getSVar("RemRandomDeck").equals("True")) {
-                        return false;
+                    return false;
                 }
                 return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
             }
@@ -107,7 +126,7 @@ public class Generate2ColorDeck {
 
         // remove multicolor cards that don't match the colors
         CardListFilter clrF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
                     if (c.getManaCost().contains(clrMap.get(notColors.get(i)))) {
                         return false;
@@ -123,7 +142,7 @@ public class Generate2ColorDeck {
         CardList Cr1 = CL1.getType("Creature");
         CardList Cr2 = CL2.getType("Creature");
 
-        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature"};
+        String[] ISE = { "Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature" };
         CardList Sp1 = CL1.getValidCards(ISE, null, null);
         CardList Sp2 = CL2.getValidCards(ISE, null, null);
 
@@ -132,9 +151,9 @@ public class Generate2ColorDeck {
         CardList Sp12 = new CardList();
 
         // used for mana curve in the card pool
-        final int MinCMC[] = {1}, MaxCMC[] = {2};
+        final int MinCMC[] = { 1 }, MaxCMC[] = { 2 };
         CardListFilter cmcF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 int cCMC = c.getCMC();
                 return (cCMC >= MinCMC[0]) && (cCMC <= MaxCMC[0]);
             }
@@ -168,11 +187,12 @@ public class Generate2ColorDeck {
             MinCMC[0] += 2;
             MaxCMC[0] += 2;
             // resulting mana curve of the card pool
-            //16x 1 - 2
-            //12x 3 - 4
-            //8x 5 - 6
-            //4x 7 - 8
-            //=40x - card pool could support up to a 275 card deck (all 4-ofs plus basic lands)
+            // 16x 1 - 2
+            // 12x 3 - 4
+            // 8x 5 - 6
+            // 4x 7 - 8
+            // =40x - card pool could support up to a 275 card deck (all 4-ofs
+            // plus basic lands)
         }
 
         // shuffle card pools
@@ -230,7 +250,8 @@ public class Generate2ColorDeck {
         if (LandsPercentage > 0) {
             p = (float) ((float) LandsPercentage * .01);
             numLands = (int) (p * (float) Size);
-        } else  {   // otherwise, just fill in the rest of the deck with basic lands
+        } else { // otherwise, just fill in the rest of the deck with basic
+                 // lands
             numLands = Size - tDeck.size();
         }
 
@@ -257,16 +278,14 @@ public class Generate2ColorDeck {
 
         numLands -= nDLands;
 
-        if (numLands > 0)    // attempt to optimize basic land counts according to color representation
+        if (numLands > 0) // attempt to optimize basic land counts according to
+                          // color representation
         {
-            CCnt ClrCnts[] = {new CCnt("Plains", 0),
-                    new CCnt("Island", 0),
-                    new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0),
-                    new CCnt("Forest", 0)};
+            CCnt[] ClrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
             // count each card color using mana costs
-            // TODO: count hybrid mana differently?
+            // TODO count hybrid mana differently?
             for (int i = 0; i < tDeck.size(); i++) {
                 String mc = tDeck.get(i).getManaCost();
 
@@ -276,17 +295,13 @@ public class Generate2ColorDeck {
 
                     if (c == 'W') {
                         ClrCnts[0].Count++;
-                    }
-                    else if (c == 'U') {
+                    } else if (c == 'U') {
                         ClrCnts[1].Count++;
-                    }
-                    else if (c == 'B') {
+                    } else if (c == 'B') {
                         ClrCnts[2].Count++;
-                    }
-                    else if (c == 'R') {
+                    } else if (c == 'R') {
                         ClrCnts[3].Count++;
-                    }
-                    else if (c == 'G') {
+                    } else if (c == 'G') {
                         ClrCnts[4].Count++;
                     }
                 }
@@ -302,12 +317,14 @@ public class Generate2ColorDeck {
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (ClrCnts[i].Count > 0) {    // calculate number of lands for each color
+                if (ClrCnts[i].Count > 0) { // calculate number of lands for
+                                            // each color
                     p = (float) ClrCnts[i].Count / (float) totalColor;
                     int nLand = (int) ((float) numLands * p);
                     tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 
-                    // just to prevent a null exception by the deck size fixing code
+                    // just to prevent a null exception by the deck size fixing
+                    // code
                     cardCounts.put(ClrCnts[i].Color, nLand);
 
                     for (int j = 0; j <= nLand; j++) {
@@ -345,7 +362,7 @@ public class Generate2ColorDeck {
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand()) {   // don't remove basic lands
+                while (c.isBasicLand()) { // don't remove basic lands
                     c = tDeck.get(r.nextInt(tDeck.size()));
                 }
 
@@ -366,7 +383,7 @@ public class Generate2ColorDeck {
         public String Color;
         public int Count;
 
-        public CCnt(String clr, int cnt) {
+        public CCnt(final String clr, final int cnt) {
             Color = clr;
             Count = cnt;
         }

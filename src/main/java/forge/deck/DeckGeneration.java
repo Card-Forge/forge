@@ -16,18 +16,20 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 
-/** 
- * Utility class to hold add deck generation routines, methods moved from OldGuiNewGame.
- *
+/**
+ * Utility class to hold add deck generation routines, methods moved from
+ * OldGuiNewGame.
+ * 
  */
 public abstract class DeckGeneration {
+
     /**
      * <p>
      * genDecks.
      * </p>
-     *
+     * 
      * @param playerType
-     *             {@link java.lang.String} object.
+     *            the player type {@link java.lang.String} object.
      */
     public static void genDecks(final PlayerType playerType) {
         // TODO jendave to refactor deck generation
@@ -44,7 +46,6 @@ public abstract class DeckGeneration {
 
         String playerName = playerType.equals(PlayerType.HUMAN) ? "Human" : "Computer";
         String prompt = String.format("Generate %s Deck", playerName);
-
 
         Object o = GuiUtils.getChoice(prompt, decks.toArray());
 
@@ -75,7 +76,7 @@ public abstract class DeckGeneration {
      * <p>
      * generateConstructedDeck.
      * </p>
-     *
+     * 
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructedDeck() {
@@ -93,7 +94,7 @@ public abstract class DeckGeneration {
      * <p>
      * generateConstructed3ColorDeck.
      * </p>
-     *
+     * 
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructed3ColorDeck() {
@@ -111,7 +112,7 @@ public abstract class DeckGeneration {
      * <p>
      * generateConstructed5ColorDeck.
      * </p>
-     *
+     * 
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructed5ColorDeck() {
@@ -129,7 +130,7 @@ public abstract class DeckGeneration {
      * <p>
      * generateConstructedThemeDeck.
      * </p>
-     *
+     * 
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructedThemeDeck() {
@@ -160,7 +161,7 @@ public abstract class DeckGeneration {
      * <p>
      * generate2ColorDeck.
      * </p>
-     *
+     * 
      * @param p
      *            a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
@@ -215,7 +216,7 @@ public abstract class DeckGeneration {
      * <p>
      * generate3ColorDeck.
      * </p>
-     *
+     * 
      * @param p
      *            a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
@@ -281,22 +282,21 @@ public abstract class DeckGeneration {
      * <p>
      * generate5ColorDeck.
      * </p>
-     *
+     * 
      * @param p
      *            a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generate5ColorDeck(final PlayerType p) {
-        //Random r = MyRandom.random;
+        // Random r = MyRandom.random;
 
-        //ArrayList<String> colors = new ArrayList<String>();
-        //colors.add("Random");
-        //colors.add("white");
-        //colors.add("blue");
-        //colors.add("black");
-        //colors.add("red");
-        //colors.add("green");
-
+        // ArrayList<String> colors = new ArrayList<String>();
+        // colors.add("Random");
+        // colors.add("white");
+        // colors.add("blue");
+        // colors.add("black");
+        // colors.add("red");
+        // colors.add("green");
 
         Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
         CardList d = gen.get5ColorDeck(60, p);

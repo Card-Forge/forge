@@ -26,11 +26,6 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import freemarker.template.TemplateException;
-import freemarker.template.Template;
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-
 import forge.Card;
 import forge.FileUtil;
 import forge.PlayerType;
@@ -41,6 +36,10 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 //reads and writeDeck Deck objects
 /**
@@ -66,9 +65,7 @@ public class DeckManager {
         }
     };
 
-    /**
-     * 
-     */
+    /** The Constant DCK_FILTER. */
     public static final FileFilter DCK_FILTER = new FileFilter() {
         @Override
         public boolean accept(final File f) {
@@ -81,9 +78,7 @@ public class DeckManager {
         }
     };
 
-    /**
-     * 
-     */
+    /** The Constant HTML_FILTER. */
     public static final FileFilter HTML_FILTER = new FileFilter() {
         @Override
         public boolean accept(final File f) {
@@ -265,8 +260,7 @@ public class DeckManager {
      */
     private void checkDraftDeck(final Deck[] deck) {
         if (deck == null || deck.length != 8 || deck[0].getName().equals("")
-                || (!deck[0].getDeckType().equals(GameType.Draft)))
-        {
+                || (!deck[0].getDeckType().equals(GameType.Draft))) {
             throw new RuntimeException("DeckManager : checkDraftDeck() error, invalid deck");
         }
     }
@@ -641,37 +635,45 @@ public class DeckManager {
         int height = 319;
         int width = 222;
 
-/* Create and adjust the configuration */
+        /* Create and adjust the configuration */
         Configuration cfg = new Configuration();
         try {
             cfg.setClassForTemplateLoading(d.getClass(), "/");
             cfg.setObjectWrapper(new DefaultObjectWrapper());
 
-            /* ------------------------------------------------------------------- */
-            /* You usually do these for many times in the application life-cycle:  */
+            /*
+             * ------------------------------------------------------------------
+             * -
+             */
+            /*
+             * You usually do these for many times in the application
+             * life-cycle:
+             */
 
             /* Get or create a template */
             temp = cfg.getTemplate("proxy-template.ftl");
-
 
             /* Create a data-model */
             Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
             List<String> list = new ArrayList<String>();
             for (Card card : d.getMain().toForgeCardList().toArray()) {
-                //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
+                // System.out.println(card.getSets().get(card.getSets().size() -
+                // 1).URL);
                 list.add(card.getSets().get(card.getSets().size() - 1).URL);
             }
-/*            List<String> nameList = new ArrayList<String>();
-            for (Card card : d.getMain().toForgeCardList().toArray()) {
-                //System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
-                nameList.add(card.getName());
-            }*/
+            /*
+             * List<String> nameList = new ArrayList<String>(); for (Card card :
+             * d.getMain().toForgeCardList().toArray()) {
+             * //System.out.println(card.getSets().get(card.getSets().size() -
+             * 1).URL); nameList.add(card.getName()); }
+             */
 
             TreeMap<String, Integer> map = new TreeMap<String, Integer>();
             for (Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
                 map.put(entry.getKey().getName(), entry.getValue());
-                //System.out.println(entry.getValue() + " " + entry.getKey().getName());
+                // System.out.println(entry.getValue() + " " +
+                // entry.getKey().getName());
             }
 
             root.put("urls", list);
@@ -679,11 +681,11 @@ public class DeckManager {
             root.put("height", height);
             root.put("width", width);
             root.put("cardlistWidth", width - 11);
-            //root.put("nameList", nameList);
+            // root.put("nameList", nameList);
             root.put("cardList", map);
 
             /* Merge data-model with template */
-            //StringWriter sw = new StringWriter();
+            // StringWriter sw = new StringWriter();
             temp.process(root, out);
             out.flush();
         } catch (IOException e) {
@@ -693,8 +695,8 @@ public class DeckManager {
         }
     }
 
-    private static void writeCardPool(final ItemPoolView<CardPrinted> pool,
-            final BufferedWriter out) throws IOException {
+    private static void writeCardPool(final ItemPoolView<CardPrinted> pool, final BufferedWriter out)
+            throws IOException {
         List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.byNameThenSet);
         for (Entry<CardPrinted, Integer> e : main2sort) {

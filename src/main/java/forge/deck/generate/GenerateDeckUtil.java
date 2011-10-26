@@ -3,8 +3,10 @@ package forge.deck.generate;
 import java.util.ArrayList;
 
 /**
- * <p>GenerateDeckUtil class.</p>
- *
+ * <p>
+ * GenerateDeckUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id: GenerateDeckUtil.java 10011 2011-08-28 12:20:52Z Sloth $
  */
@@ -13,7 +15,9 @@ public class GenerateDeckUtil {
     /**
      * 
      * Arrays of dual and tri-land cards.
-     * @param colors a String
+     * 
+     * @param colors
+     *            a String
      * @return ArrayList<String>
      */
     public static ArrayList<String> getDualLandList(final String colors) {

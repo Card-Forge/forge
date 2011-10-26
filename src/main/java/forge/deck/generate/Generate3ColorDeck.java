@@ -1,17 +1,26 @@
 package forge.deck.generate;
 
-import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardFilter;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Constant;
+import forge.MyRandom;
+import forge.PlayerType;
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+
 /**
- * <p>Generate3ColorDeck class.</p>
- *
+ * <p>
+ * Generate3ColorDeck class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -26,13 +35,18 @@ public class Generate3ColorDeck {
     private Map<String, Integer> cardCounts = null;
 
     /**
-     * <p>Constructor for Generate3ColorDeck.</p>
-     *
-     * @param Clr1 a {@link java.lang.String} object.
-     * @param Clr2 a {@link java.lang.String} object.
-     * @param Clr3 a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Generate3ColorDeck.
+     * </p>
+     * 
+     * @param Clr1
+     *            a {@link java.lang.String} object.
+     * @param Clr2
+     *            a {@link java.lang.String} object.
+     * @param Clr3
+     *            a {@link java.lang.String} object.
      */
-    public Generate3ColorDeck(String Clr1, String Clr2, String Clr3) {
+    public Generate3ColorDeck(final String Clr1, final String Clr2, final String Clr3) {
         r = MyRandom.random;
 
         cardCounts = new HashMap<String, Integer>();
@@ -57,13 +71,15 @@ public class Generate3ColorDeck {
 
             // choose second color
             String c2 = notColors.get(r.nextInt(5));
-            while (c2.equals(color1))
+            while (c2.equals(color1)) {
                 c2 = notColors.get(r.nextInt(5));
+            }
             color2 = c2;
 
             String c3 = notColors.get(r.nextInt(5));
-            while (c3.equals(color1) || c3.equals(color2))
+            while (c3.equals(color1) || c3.equals(color2)) {
                 c3 = notColors.get(r.nextInt(5));
+            }
             color3 = c3;
         } else {
             color1 = Clr1;
@@ -76,7 +92,7 @@ public class Generate3ColorDeck {
         notColors.remove(color3);
 
         dL = GenerateDeckUtil.getDualLandList(crMap.get(color1) + crMap.get(color2) + crMap.get(color3));
-        
+
         for (int i = 0; i < dL.size(); i++) {
             cardCounts.put(dL.get(i), 0);
         }
@@ -84,12 +100,17 @@ public class Generate3ColorDeck {
     }
 
     /**
-     * <p>get3ColorDeck.</p>
-     *
-     * @param Size a int.
+     * <p>
+     * get3ColorDeck.
+     * </p>
+     * 
+     * @param Size
+     *            a int.
+     * @param pt
+     *            the pt
      * @return a {@link forge.CardList} object.
      */
-    public CardList get3ColorDeck(int Size, final PlayerType pt) {
+    public final CardList get3ColorDeck(final int Size, final PlayerType pt) {
         int lc = 0; // loop counter to prevent infinite card selection loops
         String tmpDeck = "";
         CardList tDeck = new CardList();
@@ -101,11 +122,11 @@ public class Generate3ColorDeck {
         // start with all cards
         // remove cards that generated decks don't like
         CardList AllCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 if (c.getSVar("RemRandomDeck").equals("True")) {
                     return false;
-            }
-            return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
+                }
+                return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
             }
         });
 
@@ -117,10 +138,11 @@ public class Generate3ColorDeck {
 
         // remove multicolor cards that don't match the colors
         CardListFilter clrF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
-                    if (c.getManaCost().contains(crMap.get(notColors.get(i))))
+                    if (c.getManaCost().contains(crMap.get(notColors.get(i)))) {
                         return false;
+                    }
                 }
                 return true;
             }
@@ -134,7 +156,7 @@ public class Generate3ColorDeck {
         CardList Cr2 = CL2.getType("Creature");
         CardList Cr3 = CL3.getType("Creature");
 
-        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature"};
+        String[] ISE = { "Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature" };
         CardList Sp1 = CL1.getValidCards(ISE, null, null);
         CardList Sp2 = CL2.getValidCards(ISE, null, null);
         CardList Sp3 = CL3.getValidCards(ISE, null, null);
@@ -144,9 +166,9 @@ public class Generate3ColorDeck {
         CardList Sp123 = new CardList();
 
         // used for mana curve in the card pool
-        final int MinCMC[] = {1}, MaxCMC[] = {3};
+        final int MinCMC[] = { 1 }, MaxCMC[] = { 3 };
         CardListFilter cmcF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 int cCMC = c.getCMC();
                 return (cCMC >= MinCMC[0]) && (cCMC <= MaxCMC[0]);
             }
@@ -191,10 +213,11 @@ public class Generate3ColorDeck {
             MinCMC[0] += 2;
             MaxCMC[0] += 2;
             // resulting mana curve of the card pool
-            //18x 1 - 3
-            //12x 3 - 5
-            //6x 5 - 7
-            //=36x - card pool could support up to a 257 card deck (all 4-ofs plus basic lands)
+            // 18x 1 - 3
+            // 12x 3 - 5
+            // 6x 5 - 7
+            // =36x - card pool could support up to a 257 card deck (all 4-ofs
+            // plus basic lands)
         }
 
         // shuffle card pools
@@ -219,8 +242,9 @@ public class Generate3ColorDeck {
                 c = Cr123.get(r.nextInt(Cr123.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Cr123");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
             int n = cardCounts.get(c.getName());
@@ -236,8 +260,9 @@ public class Generate3ColorDeck {
                 c = Sp123.get(r.nextInt(Sp123.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Sp123");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
             int n = cardCounts.get(c.getName());
@@ -250,8 +275,10 @@ public class Generate3ColorDeck {
         if (LandsPercentage > 0) {
             p = (float) ((float) LandsPercentage * .01);
             numLands = (int) (p * (float) Size);
-        } else     // otherwise, just fill in the rest of the deck with basic lands
+        } else {
+            // otherwise, just fill in the rest of the deck with basic lands
             numLands = Size - tDeck.size();
+        }
 
         tmpDeck += "numLands:" + numLands + "\n";
 
@@ -264,8 +291,9 @@ public class Generate3ColorDeck {
                 s = dL.get(r.nextInt(dL.size()));
                 lc++;
             }
-            if (lc > 20)
+            if (lc > 20) {
                 throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- dL");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getHumanPlayer()));
             int n = cardCounts.get(s);
@@ -275,16 +303,14 @@ public class Generate3ColorDeck {
 
         numLands -= ndLands;
 
-        if (numLands > 0)    // attempt to optimize basic land counts according to color representation
+        if (numLands > 0) // attempt to optimize basic land counts according to
+                          // color representation
         {
-            CCnt ClrCnts[] = {new CCnt("Plains", 0),
-                    new CCnt("Island", 0),
-                    new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0),
-                    new CCnt("Forest", 0)};
+            CCnt[] ClrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
             // count each card color using mana costs
-            // TODO: count hybrid mana differently?
+            // TODO count hybrid mana differently?
             for (int i = 0; i < tDeck.size(); i++) {
                 String mc = tDeck.get(i).getManaCost();
 
@@ -292,16 +318,17 @@ public class Generate3ColorDeck {
                 for (int j = 0; j < mc.length(); j++) {
                     char c = mc.charAt(j);
 
-                    if (c == 'W')
+                    if (c == 'W') {
                         ClrCnts[0].Count++;
-                    else if (c == 'U')
+                    } else if (c == 'U') {
                         ClrCnts[1].Count++;
-                    else if (c == 'B')
+                    } else if (c == 'B') {
                         ClrCnts[2].Count++;
-                    else if (c == 'R')
+                    } else if (c == 'R') {
                         ClrCnts[3].Count++;
-                    else if (c == 'G')
+                    } else if (c == 'G') {
                         ClrCnts[4].Count++;
+                    }
                 }
             }
 
@@ -315,16 +342,19 @@ public class Generate3ColorDeck {
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (ClrCnts[i].Count > 0) {    // calculate number of lands for each color
+                if (ClrCnts[i].Count > 0) { // calculate number of lands for
+                                            // each color
                     p = (float) ClrCnts[i].Count / (float) totalColor;
                     int nLand = (int) ((float) numLands * p);
                     tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 
-                    // just to prevent a null exception by the deck size fixing code
+                    // just to prevent a null exception by the deck size fixing
+                    // code
                     cardCounts.put(ClrCnts[i].Color, nLand);
 
-                    for (int j = 0; j <= nLand; j++)
+                    for (int j = 0; j <= nLand; j++) {
                         tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
+                    }
                 }
             }
         }
@@ -342,8 +372,9 @@ public class Generate3ColorDeck {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
-                if (lc > Size)
+                if (lc > Size) {
                     throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- undersize");
+                }
 
                 int n = cardCounts.get(c.getName());
                 tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
@@ -356,8 +387,10 @@ public class Generate3ColorDeck {
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand())    // don't remove basic lands
+                while (c.isBasicLand()) {
+                    // don't remove basic lands
                     c = tDeck.get(r.nextInt(tDeck.size()));
+                }
 
                 tDeck.remove(c);
                 tmpDeck += "Removed:" + c.getName() + "\n";
@@ -365,8 +398,9 @@ public class Generate3ColorDeck {
         }
 
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-        if (ForgeProps.getProperty("showdeck/3color", "false").equals("true"))
+        if (ForgeProps.getProperty("showdeck/3color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck);
+        }
 
         return tDeck;
     }
@@ -375,7 +409,7 @@ public class Generate3ColorDeck {
         public String Color;
         public int Count;
 
-        public CCnt(String clr, int cnt) {
+        public CCnt(final String clr, final int cnt) {
             Color = clr;
             Count = cnt;
         }

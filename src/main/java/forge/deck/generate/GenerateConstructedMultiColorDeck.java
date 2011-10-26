@@ -1,13 +1,24 @@
 package forge.deck.generate;
 
-import forge.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardFilter;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardListUtil;
+import forge.CardUtil;
+import forge.Constant;
+import forge.Singletons;
+
 /**
- * <p>GenerateConstructedMultiColorDeck class.</p>
- *
+ * <p>
+ * GenerateConstructedMultiColorDeck class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -22,7 +33,9 @@ public class GenerateConstructedMultiColorDeck {
     private Map<String, String[]> multiMap = new HashMap<String, String[]>();
 
     /**
-     * <p>Constructor for GenerateConstructedMultiColorDeck.</p>
+     * <p>
+     * Constructor for GenerateConstructedMultiColorDeck.
+     * </p>
      */
     public GenerateConstructedMultiColorDeck() {
         setupBasicLandMap();
@@ -30,7 +43,9 @@ public class GenerateConstructedMultiColorDeck {
     }
 
     /**
-     * <p>setupBasicLandMap.</p>
+     * <p>
+     * setupBasicLandMap.
+     * </p>
      */
     private void setupBasicLandMap() {
         map.put(Constant.Color.Black, "Swamp");
@@ -41,38 +56,41 @@ public class GenerateConstructedMultiColorDeck {
     }
 
     /**
-     * <p>setupMultiMap.</p>
+     * <p>
+     * setupMultiMap.
+     * </p>
      */
     private void setupMultiMap() {
-        multiMap.put(Constant.Color.Black + Constant.Color.Blue, new String[]{"Underground Sea", "Watery Grave"});
-        multiMap.put(Constant.Color.Black + Constant.Color.Green, new String[]{"Bayou", "Overgrown Tomb"});
-        multiMap.put(Constant.Color.Black + Constant.Color.Red, new String[]{"Badlands", "Blood Crypt"});
-        multiMap.put(Constant.Color.Black + Constant.Color.White, new String[]{"Scrubland", "Godless Shrine"});
-        multiMap.put(Constant.Color.Blue + Constant.Color.Black, new String[]{"Underground Sea", "Watery Grave"});
-        multiMap.put(Constant.Color.Blue + Constant.Color.Green, new String[]{"Tropical Island", "Breeding Pool"});
-        multiMap.put(Constant.Color.Blue + Constant.Color.Red, new String[]{"Volcanic Island", "Steam Vents"});
-        multiMap.put(Constant.Color.Blue + Constant.Color.White, new String[]{"Tundra", "Hallowed Fountain"});
-        multiMap.put(Constant.Color.Green + Constant.Color.Black, new String[]{"Bayou", "Overgrown Tomb"});
-        multiMap.put(Constant.Color.Green + Constant.Color.Blue, new String[]{"Tropical Island", "Breeding Pool"});
-        multiMap.put(Constant.Color.Green + Constant.Color.Red, new String[]{"Taiga", "Stomping Ground"});
-        multiMap.put(Constant.Color.Green + Constant.Color.White, new String[]{"Savannah", "Temple Garden"});
-        multiMap.put(Constant.Color.Red + Constant.Color.Black, new String[]{"Badlands", "Blood Crypt"});
-        multiMap.put(Constant.Color.Red + Constant.Color.Blue, new String[]{"Volcanic Island", "Steam Vents"});
-        multiMap.put(Constant.Color.Red + Constant.Color.Green, new String[]{"Taiga", "Stomping Ground"});
-        multiMap.put(Constant.Color.Red + Constant.Color.White, new String[]{"Plateau", "Sacred Foundry"});
-        multiMap.put(Constant.Color.White + Constant.Color.Black, new String[]{"Scrubland", "Godless Shrine"});
-        multiMap.put(Constant.Color.White + Constant.Color.Blue, new String[]{"Tundra", "Hallowed Fountain"});
-        multiMap.put(Constant.Color.White + Constant.Color.Green, new String[]{"Savannah", "Temple Garden"});
-        multiMap.put(Constant.Color.White + Constant.Color.Red, new String[]{"Plateau", "Sacred Foundry"});
+        multiMap.put(Constant.Color.Black + Constant.Color.Blue, new String[] { "Underground Sea", "Watery Grave" });
+        multiMap.put(Constant.Color.Black + Constant.Color.Green, new String[] { "Bayou", "Overgrown Tomb" });
+        multiMap.put(Constant.Color.Black + Constant.Color.Red, new String[] { "Badlands", "Blood Crypt" });
+        multiMap.put(Constant.Color.Black + Constant.Color.White, new String[] { "Scrubland", "Godless Shrine" });
+        multiMap.put(Constant.Color.Blue + Constant.Color.Black, new String[] { "Underground Sea", "Watery Grave" });
+        multiMap.put(Constant.Color.Blue + Constant.Color.Green, new String[] { "Tropical Island", "Breeding Pool" });
+        multiMap.put(Constant.Color.Blue + Constant.Color.Red, new String[] { "Volcanic Island", "Steam Vents" });
+        multiMap.put(Constant.Color.Blue + Constant.Color.White, new String[] { "Tundra", "Hallowed Fountain" });
+        multiMap.put(Constant.Color.Green + Constant.Color.Black, new String[] { "Bayou", "Overgrown Tomb" });
+        multiMap.put(Constant.Color.Green + Constant.Color.Blue, new String[] { "Tropical Island", "Breeding Pool" });
+        multiMap.put(Constant.Color.Green + Constant.Color.Red, new String[] { "Taiga", "Stomping Ground" });
+        multiMap.put(Constant.Color.Green + Constant.Color.White, new String[] { "Savannah", "Temple Garden" });
+        multiMap.put(Constant.Color.Red + Constant.Color.Black, new String[] { "Badlands", "Blood Crypt" });
+        multiMap.put(Constant.Color.Red + Constant.Color.Blue, new String[] { "Volcanic Island", "Steam Vents" });
+        multiMap.put(Constant.Color.Red + Constant.Color.Green, new String[] { "Taiga", "Stomping Ground" });
+        multiMap.put(Constant.Color.Red + Constant.Color.White, new String[] { "Plateau", "Sacred Foundry" });
+        multiMap.put(Constant.Color.White + Constant.Color.Black, new String[] { "Scrubland", "Godless Shrine" });
+        multiMap.put(Constant.Color.White + Constant.Color.Blue, new String[] { "Tundra", "Hallowed Fountain" });
+        multiMap.put(Constant.Color.White + Constant.Color.Green, new String[] { "Savannah", "Temple Garden" });
+        multiMap.put(Constant.Color.White + Constant.Color.Red, new String[] { "Plateau", "Sacred Foundry" });
     }
 
-
     /**
-     * <p>generate3ColorDeck.</p>
-     *
+     * <p>
+     * generate3ColorDeck.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList generate3ColorDeck() {
+    public final CardList generate3ColorDeck() {
         CardList deck;
 
         int check;
@@ -85,37 +103,49 @@ public class GenerateConstructedMultiColorDeck {
 
         addLand(deck, 3);
 
-        if (deck.size() != 60)
-            throw new RuntimeException("GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is " + deck.size());
+        if (deck.size() != 60) {
+            throw new RuntimeException(
+                    "GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is "
+                            + deck.size());
+        }
 
         return deck;
     }
 
     /**
-     * <p>generate5ColorDeck.</p>
-     *
+     * <p>
+     * generate5ColorDeck.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList generate5ColorDeck() {
+    public final CardList generate5ColorDeck() {
         CardList deck;
 
         deck = get5ColorDeck();
 
         addLand(deck, 5);
 
-        if (deck.size() != 60)
-            throw new RuntimeException("GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is " + deck.size());
+        if (deck.size() != 60) {
+            throw new RuntimeException(
+                    "GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is "
+                            + deck.size());
+        }
 
         return deck;
     }
 
     /**
-     * <p>addLand.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param colors a int.
+     * <p>
+     * addLand.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param colors
+     *            a int.
      */
-    private void addLand(CardList list, int colors) {
+    private void addLand(final CardList list, final int colors) {
         if (colors == 3) {
             int numberBasic = 2;
             Card land;
@@ -173,7 +203,6 @@ public class GenerateConstructedMultiColorDeck {
                 list.add(land);
             }
 
-
             int numberDual = 2;
             for (int i = 0; i < numberDual; i++) {
                 land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color2)[0], AllZone.getComputerPlayer());
@@ -208,25 +237,28 @@ public class GenerateConstructedMultiColorDeck {
             }
 
         }
-    }//addLand()
+    } // addLand()
 
     /**
-     * Filters out cards by color and their suitability for being placed in
-     * a randomly created deck.
-     *
-     * @param colors  the number of different colors the deck should have;
-     * if this is a number other than 3 or 5, we return an empty list.
+     * Filters out cards by color and their suitability for being placed in a
+     * randomly created deck.
      * 
-     * @return a subset of all cards in the CardFactory database 
-     * which might be empty, but never null
+     * @param colors
+     *            the number of different colors the deck should have; if this
+     *            is a number other than 3 or 5, we return an empty list.
+     * 
+     * @return a subset of all cards in the CardFactory database which might be
+     *         empty, but never null
      */
-    private CardList getCards(int colors) {
+    private CardList getCards(final int colors) {
         return filterBadCards(AllZone.getCardFactory(), colors);
-    }//getCards()
+    } // getCards()
 
     /**
-     * <p>get3ColorDeck.</p>
-     *
+     * <p>
+     * get3ColorDeck.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     private CardList get3ColorDeck() {
@@ -235,16 +267,20 @@ public class GenerateConstructedMultiColorDeck {
         CardList out = new CardList();
         deck.shuffle();
 
-        //trim deck size down to 36 cards, presumes 24 land, for a total of 60 cards
-        for (int i = 0; i < 36 && i < deck.size(); i++)
+        // trim deck size down to 36 cards, presumes 24 land, for a total of 60
+        // cards
+        for (int i = 0; i < 36 && i < deck.size(); i++) {
             out.add(deck.get(i));
+        }
 
         return out;
     }
 
     /**
-     * <p>get5ColorDeck.</p>
-     *
+     * <p>
+     * get5ColorDeck.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     private CardList get5ColorDeck() {
@@ -253,20 +289,25 @@ public class GenerateConstructedMultiColorDeck {
         CardList out = new CardList();
         deck.shuffle();
 
-        //trim deck size down to 36 cards, presumes 24 land, for a total of 60 cards
-        for (int i = 0; i < 36 && i < deck.size(); i++)
+        // trim deck size down to 36 cards, presumes 24 land, for a total of 60
+        // cards
+        for (int i = 0; i < 36 && i < deck.size(); i++) {
             out.add(deck.get(i));
+        }
 
         return out;
     }
 
     /**
-     * <p>get3Colors.</p>
-     *
-     * @param in a {@link forge.CardList} object.
+     * <p>
+     * get3Colors.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private CardList get3Colors(CardList in) {
+    private CardList get3Colors(final CardList in) {
         int a;
         int b;
         int c;
@@ -275,7 +316,8 @@ public class GenerateConstructedMultiColorDeck {
         do {
             b = CardUtil.getRandomIndex(Constant.Color.onlyColors);
             c = CardUtil.getRandomIndex(Constant.Color.onlyColors);
-        } while (a == b || a == c || b == c);//do not want to get the same color thrice
+        } while (a == b || a == c || b == c); // do not want to get the same
+                                             // color thrice
 
         color1 = Constant.Color.onlyColors[a];
         color2 = Constant.Color.onlyColors[b];
@@ -288,21 +330,18 @@ public class GenerateConstructedMultiColorDeck {
         out.shuffle();
 
         CardList artifact = in.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                //is this really a colorless artifact and not something
-                //wierd like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() &&
-                        CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
-                        !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
+            public boolean addCard(final Card c) {
+                // is this really a colorless artifact and not something
+                // wierd like Sarcomite Myr which is a colored artifact
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                        && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if (c.isCreature() &&
-                        c.getNetAttack() <= 1 &&
-                        Singletons.getModel().getPreferences().deckGenRmvSmall) {
+            public boolean addCard(final Card c) {
+                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -315,12 +354,15 @@ public class GenerateConstructedMultiColorDeck {
     }
 
     /**
-     * <p>get5Colors.</p>
-     *
-     * @param in a {@link forge.CardList} object.
+     * <p>
+     * get5Colors.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private CardList get5Colors(CardList in) {
+    private CardList get5Colors(final CardList in) {
 
         color1 = Constant.Color.Black;
         color2 = Constant.Color.Blue;
@@ -330,31 +372,28 @@ public class GenerateConstructedMultiColorDeck {
 
         CardList out = new CardList();
         /*
-        out.addAll(CardListUtil.getColor(in, color1));
-        out.addAll(CardListUtil.getColor(in, color2));
-        out.addAll(CardListUtil.getColor(in, color3));
-        out.addAll(CardListUtil.getColor(in, color4));
-        out.addAll(CardListUtil.getColor(in, color5));
-        */
+         * out.addAll(CardListUtil.getColor(in, color1));
+         * out.addAll(CardListUtil.getColor(in, color2));
+         * out.addAll(CardListUtil.getColor(in, color3));
+         * out.addAll(CardListUtil.getColor(in, color4));
+         * out.addAll(CardListUtil.getColor(in, color5));
+         */
         out.addAll(CardListUtil.getGoldCards(in));
         out.shuffle();
 
         CardList artifact = in.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                //is this really a colorless artifact and not something
-                //wierd like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() &&
-                        CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
-                        !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
+            public boolean addCard(final Card c) {
+                // is this really a colorless artifact and not something
+                // wierd like Sarcomite Myr which is a colored artifact
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                        && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if (c.isCreature() &&
-                        c.getNetAttack() <= 1 &&
-                        Singletons.getModel().getPreferences().deckGenRmvSmall) {
+            public boolean addCard(final Card c) {
+                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -366,56 +405,61 @@ public class GenerateConstructedMultiColorDeck {
         return out;
     }
 
-
     /**
-     * Filters out cards by color and their suitability for being placed in
-     * a randomly created deck.
-     *
-     * @param sequence  an Iterable of Card instances
+     * Filters out cards by color and their suitability for being placed in a
+     * randomly created deck.
      * 
-     * @param colors  the number of different colors the deck should have;
-     * if this is a number other than 3 or 5, we return an empty list.
+     * @param sequence
+     *            an Iterable of Card instances
      * 
-     * @return a subset of sequence <= sequence which might be empty, but
-     * never null
+     * @param colors
+     *            the number of different colors the deck should have; if this
+     *            is a number other than 3 or 5, we return an empty list.
+     * 
+     * @return a subset of sequence <= sequence which might be empty, but never
+     *         null
      */
-    private CardList filterBadCards(Iterable<Card> sequence, int colors) {
+    private CardList filterBadCards(final Iterable<Card> sequence, final int colors) {
         final ArrayList<Card> goodLand = new ArrayList<Card>();
-        //goodLand.add("Faerie Conclave");
-        //goodLand.add("Forbidding Watchtower");
-        //goodLand.add("Treetop Village");
+        // goodLand.add("Faerie Conclave");
+        // goodLand.add("Forbidding Watchtower");
+        // goodLand.add("Treetop Village");
 
         CardList out = new CardList();
         if (colors == 3) {
 
             out = CardFilter.filter(sequence, new CardListFilter() {
-                public boolean addCard(Card c) {
+                public boolean addCard(final Card c) {
                     ArrayList<String> list = CardUtil.getColors(c);
 
                     if (list.size() == 3) {
-                        if (!list.contains(color1) || !list.contains(color2) || !list.contains(color3))
+                        if (!list.contains(color1) || !list.contains(color2) || !list.contains(color3)) {
                             return false;
+                        }
                     } else if (list.size() == 2) {
-                        if (!(list.contains(color1) && list.contains(color2)) &&
-                                !(list.contains(color1) && list.contains(color3)) &&
-                                !(list.contains(color2) && list.contains(color3)))
+                        if (!(list.contains(color1) && list.contains(color2))
+                                && !(list.contains(color1) && list.contains(color3))
+                                && !(list.contains(color2) && list.contains(color3))) {
                             return false;
+                        }
                     }
 
-                    return CardUtil.getColors(c).size() <= 3 &&
-                            !c.isLand() && //no land
-                            !c.getSVar("RemRandomDeck").equals("True") &&
-                            !c.getSVar("RemAIDeck").equals("True") || //OR very important
+                    return CardUtil.getColors(c).size() <= 3 && !c.isLand() && // no
+                                                                               // land
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True") ||
+                            // OR very important
                             goodLand.contains(c.getName());
                 }
             });
         } else if (colors == 5) {
             out = CardFilter.filter(sequence, new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return CardUtil.getColors(c).size() >= 2 && //only get multicolored cards
-                            !c.isLand() && //no land
-                            !c.getSVar("RemRandomDeck").equals("True") &&
-                            !c.getSVar("RemAIDeck").equals("True") || //OR very important
+                public boolean addCard(final Card c) {
+                    return CardUtil.getColors(c).size() >= 2 && // only get
+                                                                // multicolored
+                                                                // cards
+                            !c.isLand() && // no land
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True") ||
+                            // OR very important
                             goodLand.contains(c.getName());
                 }
             });
@@ -423,5 +467,5 @@ public class GenerateConstructedMultiColorDeck {
         }
 
         return out;
-    }//filterBadCards()
+    } // filterBadCards()
 }
