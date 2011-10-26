@@ -10,6 +10,7 @@ b_1_1_minion.jpg                       http://www.cardforge.org/fpics/tokens/b_1
 b_1_1_rat.jpg                          http://www.cardforge.org/fpics/tokens/b_1_1_rat.jpg
 b_1_1_skeleton.jpg                     http://www.cardforge.org/fpics/tokens/b_1_1_skeleton.jpg
 b_1_1_thrull.jpg                       http://www.cardforge.org/fpics/tokens/b_1_1_thrull.jpg
+b_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/b_1_1_wolf.jpg
 b_1_2_bat.jpg                          http://www.cardforge.org/fpics/tokens/b_1_2_bat.jpg
 b_20_20_marit_lage.jpg                 http://www.cardforge.org/fpics/tokens/b_20_20_marit_lage.jpg
 b_2_1_cat.jpg                          http://www.cardforge.org/fpics/tokens/b_2_1_cat.jpg
@@ -95,6 +96,7 @@ g_5_5_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_5
 g_6_1_insect.jpg                       http://www.cardforge.org/fpics/tokens/g_6_1_insect.jpg
 g_6_6_wurm.jpg                         http://www.cardforge.org/fpics/tokens/g_6_6_wurm.jpg
 g_7_7_elemental.jpg                    http://www.cardforge.org/fpics/tokens/g_7_7_elemental.jpg
+g_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/g_x_x_elemental.jpg
 g_x_x_elephant.jpg                     http://www.cardforge.org/fpics/tokens/g_x_x_elephant.jpg
 g_x_x_ooze.jpg                         http://www.cardforge.org/fpics/tokens/g_x_x_ooze.jpg
 g_x_x_wurm.jpg                         http://www.cardforge.org/fpics/tokens/g_x_x_wurm.jpg
@@ -172,7 +174,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
-# //b_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/b_1_1_wolf.jpg                         [ISD] Garruk Relentless//Garruk, the Veil-Cursed
 # //b_2_2_tombspawn.jpg                    http://www.cardforge.org/fpics/tokens/b_2_2_tombspawn.jpg                    [MIR] Tombstone Stairwell
 # //b_2_2_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_2_2_vampire.jpg                      [ISD] Bloodline Keeper//Lord of Lineage
 # //b_x_x_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_x_x_vampire.jpg                      [ZEN] Kalitas, Bloodchief of Ghet
@@ -185,7 +186,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //g_0_1_sheep.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_sheep.jpg                        [VIS/TSB] Ovinomancer
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg                        [EXO] Keeper of the Beasts
-# //g_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/g_x_x_elemental.jpg                    [CHK] Budoka Gardener//Dokai, Weaver of Life
 # //g_x_x_saproling.jpg                    http://www.cardforge.org/fpics/tokens/g_x_x_saproling.jpg                    [NEM] Saproling Burst
 # //r_1_1_survivor.jpg                     http://www.cardforge.org/fpics/tokens/r_1_1_survivor.jpg                     [ALL] Varchild's War-Riders
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Hoard
