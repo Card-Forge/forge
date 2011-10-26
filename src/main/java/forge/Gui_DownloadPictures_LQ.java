@@ -6,6 +6,7 @@ import forge.properties.ForgeProps;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -41,16 +42,10 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
 
         String base = ForgeProps.getFile(IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
-            String url = c.getSVar("Picture");
-            String[] URLs = url.split("\\\\");
-
-            String iName = GuiDisplayUtil.cleanString(c.getImageName());
-            cList.add(new DownloadObject(iName + ".jpg", URLs[0], base));
-
-            if (URLs.length > 1) {
-                for (int j = 1; j < URLs.length; j++) {
-                    cList.add(new DownloadObject(iName + j + ".jpg", URLs[j], base));
-                }
+            cList.addAll(createDLObjects(c,base));
+            if(c.hasAlternateState()) {
+                c.changeState();
+                cList.addAll(createDLObjects(c,base));
             }
         }
 
@@ -82,5 +77,23 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
 
         return out;
     } //getNeededImages()
+    
+    private List<DownloadObject> createDLObjects(final Card c,final String base) {
+        ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
+        
+        String url = c.getSVar("Picture");
+        String[] URLs = url.split("\\\\");
+
+        String iName = GuiDisplayUtil.cleanString(c.getImageName());
+        ret.add(new DownloadObject(iName + ".jpg", URLs[0], base));
+
+        if (URLs.length > 1) {
+            for (int j = 1; j < URLs.length; j++) {
+                ret.add(new DownloadObject(iName + j + ".jpg", URLs[j], base));
+            }
+        }
+        
+        return ret;
+    }
 
 }
