@@ -167,7 +167,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
     private Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
-    private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
     private ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
@@ -5336,7 +5335,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.util.ArrayList} object.
      */
     public final void setStaticAbilityStrings(final ArrayList<String> a) {
-        staticAbilityStrings = new ArrayList<String>(a);
+        getCharacteristics().setStaticAbilityStrings(new ArrayList<String>(a));
     }
 
     /**
@@ -5345,7 +5344,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return the static ability strings
      */
     public final ArrayList<String> getStaticAbilityStrings() {
-        return staticAbilityStrings;
+        return getCharacteristics().getStaticAbilityStrings();
     }
 
     /**
@@ -5358,7 +5357,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addStaticAbilityString(final String s) {
         if (s.trim().length() != 0) {
-            staticAbilityStrings.add(s);
+            getCharacteristics().getStaticAbilityStrings().add(s);
         }
     }
 

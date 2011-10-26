@@ -31,6 +31,7 @@ public class CardCharacteristics {
     private ArrayList<Ability_Mana> manaAbility = new ArrayList<Ability_Mana>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
+    private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String ImageFilename = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
@@ -225,5 +226,17 @@ public class CardCharacteristics {
      */
     public void setSets(ArrayList<SetInfo> sets0) {
         Sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's name.
+    }
+    /**
+     * @return the staticAbilityStrings
+     */
+    public ArrayList<String> getStaticAbilityStrings() {
+        return staticAbilityStrings;
+    }
+    /**
+     * @param staticAbilityStrings0 the staticAbilityStrings to set
+     */
+    public void setStaticAbilityStrings(ArrayList<String> staticAbilityStrings0) {
+        this.staticAbilityStrings = staticAbilityStrings0; // TODO: Add 0 to parameter's name.
     }
 }

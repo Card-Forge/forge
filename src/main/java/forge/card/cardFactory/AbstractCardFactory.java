@@ -471,11 +471,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         CardFactoryUtil.parseKeywords(card, cardName);
 
         addAbilityFactoryAbilities(card);
-        if(card.hasAlternateState()) {
-            card.changeState();
-            addAbilityFactoryAbilities(card);
-            card.changeState();
-        }
+        
         
 
         //register static abilities
@@ -484,6 +480,18 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             for (int i = 0; i < stAbs.size(); i++) {
                 card.addStaticAbility(stAbs.get(i));
             }
+        }
+        
+        if(card.hasAlternateState()) {
+            card.changeState();
+            addAbilityFactoryAbilities(card);
+            stAbs = card.getStaticAbilityStrings();
+            if (stAbs.size() > 0) {
+                for (int i = 0; i < stAbs.size(); i++) {
+                    card.addStaticAbility(stAbs.get(i));
+                }
+            }
+            card.changeState();
         }
 
 
