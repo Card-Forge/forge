@@ -10,6 +10,7 @@ T:Mode$Phase | Phase$ End of Turn | Static$ True | Execute$ TrigCleanup | Second
 SVar:TrigCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 AlternateMode:Flip
+SVar:Picture:http://www.wizards.com/global/images/magic/general/initiate_of_blood.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/173.jpg
 Oracle:{T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. When that creature dies this turn, flip Initiate of Blood.
 
@@ -23,6 +24,7 @@ Text:no text
 PT:4/4
 A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature that was dealt damage this turn.
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goka_the_unjust.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/314.jpg
 Oracle:{T}: Goka the Unjust deals 4 damage to target creature that was dealt damage this turn.
 
