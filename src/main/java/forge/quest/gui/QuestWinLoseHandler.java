@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import net.slightlymagic.maxmtg.Predicate;
+
 import forge.AllZone;
 import forge.CardList;
 import forge.Constant;
@@ -407,7 +409,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         ch.show();
         GameFormat selected = ch.getSelectedValue();
         
-        List<CardPrinted> cardsWon = model.qData.getCards().addCards(selected.getFilterPrinted());
+        List<CardPrinted> cardsWon = model.qData.getCards().addCards(Predicate.and(selected.getFilterPrinted(),CardPrinted.Predicates.Presets.nonAlternate));
         
         // Generate Swing components and attach.        
         lblTemp1 = new TitleLabel("Bonus booster pack from the \""+selected.getName()+"\" format!");
