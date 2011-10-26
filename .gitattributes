@@ -9405,6 +9405,7 @@ res/cardsfolder/y/yawgmoth_demon.txt svneol=native#text/plain
 res/cardsfolder/y/yawgmoths_agenda.txt -text
 res/cardsfolder/y/yawgmoths_bargain.txt svneol=native#text/plain
 res/cardsfolder/y/yawgmoths_edict.txt svneol=native#text/plain
+res/cardsfolder/y/yawgmoths_will.txt -text
 res/cardsfolder/y/yawning_fissure.txt svneol=native#text/plain
 res/cardsfolder/y/yellow_scarves_cavalry.txt svneol=native#text/plain
 res/cardsfolder/y/yellow_scarves_general.txt svneol=native#text/plain
