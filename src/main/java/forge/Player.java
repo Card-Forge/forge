@@ -638,8 +638,9 @@ public abstract class Player extends GameEntity {
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
             int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
             for (int i = 0; i < amount; i++) {
-                if (restDamage > 0)
+                if (restDamage > 0) {
                     restDamage -= 1;
+                }
             }
         }
 
@@ -2141,8 +2142,9 @@ public abstract class Player extends GameEntity {
             final String excR = incR[1];
             String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
-                if (hasProperty(exR[j], sourceController, source) == false)
+                if (hasProperty(exR[j], sourceController, source) == false) {
                     return false;
+                }
             }
         }
 

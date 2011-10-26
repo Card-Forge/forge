@@ -99,10 +99,11 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void showMessage() {
-                    if (index[0] == 0)
+                    if (index[0] == 0) {
                         AllZone.getDisplay().showMessage("Select target land you control.");
-                    else
+                    } else {
                         AllZone.getDisplay().showMessage("Select target land opponent controls.");
+                    }
 
                     ButtonUtil.enableOnlyCancel();
                 }
@@ -113,14 +114,16 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card c, PlayerZone zone) {
+                public void selectCard(final Card c, final PlayerZone zone) {
                     // must target creature you control
-                    if (index[0] == 0 && !c.getController().equals(card.getController()))
+                    if (index[0] == 0 && !c.getController().equals(card.getController())) {
                         return;
+                    }
 
                     // must target creature you don't control
-                    if (index[0] == 1 && c.getController().equals(card.getController()))
+                    if (index[0] == 1 && c.getController().equals(card.getController())) {
                         return;
+                    }
 
                     if (c.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
                         target[index[0]] = c;
@@ -132,8 +135,9 @@ public class CardFactory_Sorceries {
                                 this.setFree(false);
                                 AllZone.getStack().add(spell);
                                 stop();
-                            } else
+                            } else {
                                 stopSetNext(new Input_PayManaCost(spell));
+                            }
                         }
                     }
                 }// selectCard()
@@ -173,8 +177,9 @@ public class CardFactory_Sorceries {
 
                     list.shuffle();
 
-                    for (int i = 0; i < list.size() / 2; i++)
+                    for (int i = 0; i < list.size() / 2; i++) {
                         AllZone.getGameAction().destroyNoRegeneration(list.get(i));
+                    }
                 }
             };// SpellAbility
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -201,8 +206,9 @@ public class CardFactory_Sorceries {
                     // int i = 0;
                     for (Card target : targets) {
                         // if card isn't in play, do nothing
-                        if (!AllZoneUtil.isCardInPlay(target))
+                        if (!AllZoneUtil.isCardInPlay(target)) {
                             continue;
+                        }
 
                         target.removeController(card);
                         // AllZone.getGameAction().changeController(new
@@ -223,7 +229,6 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     CardList creatures = AllZoneUtil.getCreaturesInPlay();
                     newZone[0] = card.getController().getZone(Constant.Zone.Battlefield);
-                    ;
                     int i = 0;
                     for (Card target : creatures) {
                         if (AllZoneUtil.isCardInPlay(target)) {
@@ -285,15 +290,17 @@ public class CardFactory_Sorceries {
                         if (AllZone.getStack().size() > 0) {
                             CardList Config = new CardList();
                             for (int i = 0; i < Attached.length; i++) {
-                                if (Attached[i].isInstant() == true || Attached[i].hasKeyword("Flash") == true)
+                                if (Attached[i].isInstant() == true || Attached[i].hasKeyword("Flash") == true) {
                                     Config.add(Attached[i]);
+                                }
                             }
                             for (int i = 0; i < Config.size(); i++) {
                                 Card crd = Config.get(i);
                                 Choices[i] = crd;
                             }
-                            if (Config.size() == 0)
+                            if (Config.size() == 0) {
                                 SystemsGo = false;
+                            }
                         } else {
                             for (int i = 0; i < Attached.length; i++) {
                                 Choices[i] = Attached[i];
@@ -305,8 +312,9 @@ public class CardFactory_Sorceries {
                             if (check != null) {
                                 target = ((Card) check);
                             }
-                            if (target != null)
+                            if (target != null) {
                                 c = AllZone.getCardFactory().copyCard(target);
+                            }
 
                             if (c != null) {
                                 if (c.isLand()) {
@@ -345,8 +353,9 @@ public class CardFactory_Sorceries {
                                     }
                                     // Re-add
                                     for (int i = 0; i < ReAttach.length; i++) {
-                                        if (ReAttach[i] != null)
+                                        if (ReAttach[i] != null) {
                                             card.attachCardByMindsDesire(ReAttach[i]);
+                                        }
                                     }
                                     target.addSpellAbility(PlayCreature);
                                     AllZone.getStack().add(PlayCreature);
@@ -354,16 +363,18 @@ public class CardFactory_Sorceries {
                                     AllZone.getGameAction().playCardNoCost(c);
                                     card.unattachCardByMindDesire(c);
                                 }
-                            } else
+                            } else {
                                 JOptionPane.showMessageDialog(null,
                                         "Player cancelled or there is no more cards available on Mind's Desire.", "",
                                         JOptionPane.INFORMATION_MESSAGE);
-                        } else
+                            }
+                        } else {
                             JOptionPane
                                     .showMessageDialog(
                                             null,
                                             "You can only play an instant at this point in time, but none are attached to Mind's Desire.",
                                             "", JOptionPane.INFORMATION_MESSAGE);
+                        }
                     }
                 }
 
@@ -381,18 +392,20 @@ public class CardFactory_Sorceries {
                     Player player = AllZone.getPhase().getPlayerTurn();
                     PlayerZone Play = player.getZone(Constant.Zone.Battlefield);
                     Card Minds_D = card;
-                    if (player.isHuman())
+                    if (player.isHuman()) {
                         card.getController().shuffle();
+                    }
                     CardList MindsList = player.getCardsIn(Zone.Battlefield);
                     MindsList = MindsList.getName("Mind's Desire");
                     MindsList.remove(card);
                     if (MindsList.size() > 0) {
                         Play.remove(card);
                         Minds_D = MindsList.get(0);
-                    } else
+                    } else {
                         JOptionPane.showMessageDialog(null,
                                 "Click Mind's Desire to see the available cards to play without paying its mana cost.",
                                 "", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     CardList libList = player.getCardsIn(Zone.Library);
                     Card c = null;
                     if (libList.size() > 0) {
@@ -454,10 +467,12 @@ public class CardFactory_Sorceries {
                         return;
                     }
                     int Count = 5;
-                    if (lib.size() < 5)
+                    if (lib.size() < 5) {
                         Count = lib.size();
-                    for (int i = 0; i < Count; i++)
+                    }
+                    for (int i = 0; i < Count; i++) {
                         cards.add(lib.get(i));
+                    }
                     for (int i = 0; i < Count; i++) {
                         exiled.add(lib.get(i));
                         AllZone.getGameAction().exile(lib.get(i));
@@ -479,8 +494,9 @@ public class CardFactory_Sorceries {
                                     Pile1.add(choice);
                                     cards.remove(choice);
                                     Pile1CMC = Pile1CMC + CardUtil.getConvertedManaCost(choice);
-                                } else
+                                } else {
                                     stop = true;
+                                }
                             }
                         }
                         for (int i = 0; i < Count; i++) {
@@ -492,11 +508,13 @@ public class CardFactory_Sorceries {
                         StringBuilder sb = new StringBuilder();
                         sb.append("You have spilt the cards into the following piles" + "\r\n" + "\r\n");
                         sb.append("Pile 1: " + "\r\n");
-                        for (int i = 0; i < Pile1.size(); i++)
+                        for (int i = 0; i < Pile1.size(); i++) {
                             sb.append(Pile1.get(i).getName() + "\r\n");
+                        }
                         sb.append("\r\n" + "Pile 2: " + "\r\n");
-                        for (int i = 0; i < Pile2.size(); i++)
+                        for (int i = 0; i < Pile2.size(); i++) {
                             sb.append(Pile2.get(i).getName() + "\r\n");
+                        }
                         JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
                         if (Pile1CMC >= Pile2CMC) {
                             JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
@@ -507,8 +525,9 @@ public class CardFactory_Sorceries {
                                 for (SpellAbility sa : choices) {
                                     if (sa.canPlayAI()) {
                                         ComputerUtil.playStackFree(sa);
-                                        if (Pile1.get(i).isPermanent())
+                                        if (Pile1.get(i).isPermanent()) {
                                             exiled.remove(Pile1.get(i));
+                                        }
                                         break;
                                     }
                                 }
@@ -522,8 +541,9 @@ public class CardFactory_Sorceries {
                                 for (SpellAbility sa : choices) {
                                     if (sa.canPlayAI()) {
                                         ComputerUtil.playStackFree(sa);
-                                        if (Pile2.get(i).isPermanent())
+                                        if (Pile2.get(i).isPermanent()) {
                                             exiled.remove(Pile2.get(i));
+                                        }
                                         break;
                                     }
                                 }
@@ -536,8 +556,9 @@ public class CardFactory_Sorceries {
 
                         for (Card c : exiled)
                             if (CardUtil.getConvertedManaCost(biggest.getManaCost()) < CardUtil.getConvertedManaCost(c
-                                    .getManaCost()))
+                                    .getManaCost())) {
                                 biggest = c;
+                            }
 
                         Pile1.add(biggest);
                         cards.remove(biggest);
@@ -545,34 +566,39 @@ public class CardFactory_Sorceries {
                             Card Random = CardUtil.getRandom(cards.toArray());
                             Pile1.add(Random);
                         }
-                        for (int i = 0; i < Count; i++)
+                        for (int i = 0; i < Count; i++) {
                             if (!Pile1.contains(exiled.get(i)))
                                 Pile2.add(exiled.get(i));
+                        }
                         StringBuilder sb = new StringBuilder();
                         sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
                         sb.append("Pile 1: " + "\r\n");
-                        for (int i = 0; i < Pile1.size(); i++)
+                        for (int i = 0; i < Pile1.size(); i++) {
                             sb.append(Pile1.get(i).getName() + "\r\n");
+                        }
                         sb.append("\r\n" + "Pile 2: " + "\r\n");
-                        for (int i = 0; i < Pile2.size(); i++)
+                        for (int i = 0; i < Pile2.size(); i++) {
                             sb.append(Pile2.get(i).getName() + "\r\n");
+                        }
                         Object[] possibleValues = { "Pile 1", "Pile 2" };
                         Object q = JOptionPane.showOptionDialog(null, sb, "Brilliant Ultimatum",
                                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
                                 possibleValues[0]);
 
                         CardList chosen;
-                        if (q.equals(0))
+                        if (q.equals(0)) {
                             chosen = Pile1;
-                        else
+                        } else {
                             chosen = Pile2;
+                        }
 
                         int numChosen = chosen.size();
                         for (int i = 0; i < numChosen; i++) {
                             Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ",
                                     chosen.toArray());
-                            if (check == null)
+                            if (check == null) {
                                 break;
+                            }
 
                             Card playing = (Card) check;
                             if (playing.isLand()) {
@@ -633,32 +659,35 @@ public class CardFactory_Sorceries {
                         all.addAll(target.getCardsIn(Zone.Library));
 
                         CardList four = all.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                if (c.isLand())
+                            public boolean addCard(final Card c) {
+                                if (c.isLand()) {
                                     return false;
+                                }
 
                                 return 3 < CardUtil.getConvertedManaCost(c.getManaCost());
                             }
                         });
-                        if (!four.isEmpty())
+                        if (!four.isEmpty()) {
                             choice = CardUtil.getRandom(four.toArray()).getName();
-                        else
+                        } else {
                             choice = CardUtil.getRandom(all.toArray()).getName();
+                        }
 
                     }// else
                     remove(choice, target);
                     target.shuffle();
                 }// resolve()
 
-                void remove(String name, Player player) {
+                void remove(final String name, final Player player) {
                     CardList all = player.getCardsIn(Zone.Hand);
                     all.addAll(player.getCardsIn(Zone.Graveyard));
                     all.addAll(player.getCardsIn(Zone.Library));
 
                     for (int i = 0; i < all.size(); i++) {
                         if (all.get(i).getName().equals(name)) {
-                            if (!all.get(i).isLand())
+                            if (!all.get(i).isLand()) {
                                 AllZone.getGameAction().exile(all.get(i));
+                            }
                         }
                     }
                 }// remove()
@@ -683,9 +712,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList c = getCreature();
-                    if (c.isEmpty())
+                    if (c.isEmpty()) {
                         return false;
-                    else {
+                    } else {
                         setTargetCard(c.get(0));
                         return true;
                     }
@@ -696,9 +725,10 @@ public class CardFactory_Sorceries {
                     CardList list = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     list.shuffle();
 
-                    for (int i = 0; i < list.size(); i++)
+                    for (int i = 0; i < list.size(); i++) {
                         if ((list.get(i).getNetAttack() >= 2) && (list.get(i).getNetDefense() <= 2))
                             out.add(list.get(i));
+                    }
 
                     // in case human player only has a few creatures in play,
                     // target anything
@@ -723,9 +753,10 @@ public class CardFactory_Sorceries {
                             list = list.getName(getTargetCard().getName());
                             list.remove(getTargetCard());
 
-                            if (!getTargetCard().isFaceDown())
+                            if (!getTargetCard().isFaceDown()) {
                                 for (int i = 0; i < list.size(); i++)
                                     AllZone.getGameAction().destroy(list.get(i));
+                            }
                         }// is token?
                     }// in play?
                 }// resolve()
@@ -748,15 +779,16 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card card, PlayerZone zone) {
+                public void selectCard(final Card card, final PlayerZone zone) {
                     if (zone.is(Constant.Zone.Battlefield) && !card.isLand()) {
                         spell.setTargetCard(card);
                         if (this.isFree()) {
                             this.setFree(false);
                             AllZone.getStack().add(spell);
                             stop();
-                        } else
+                        } else {
                             stopSetNext(new Input_PayManaCost(spell));
+                        }
                     }
                 }
             };// Input
@@ -776,8 +808,9 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (AllZone.getHumanPlayer().getLife() <= damage)
+                    if (AllZone.getHumanPlayer().getLife() <= damage) {
                         return true;
+                    }
 
                     check = getFlying();
                     return check != null;
@@ -791,9 +824,10 @@ public class CardFactory_Sorceries {
                     }
 
                     Card c = getFlying();
-                    if ((c == null) || (!check.equals(c)))
+                    if ((c == null) || (!check.equals(c))) {
                         throw new RuntimeException(card + " error in chooseTargetAI() - Card c is " + c
                                 + ",  Card check is " + check);
+                    }
 
                     setTargetCard(c);
                 }// chooseTargetAI()
@@ -801,9 +835,10 @@ public class CardFactory_Sorceries {
                 // uses "damage" variable
                 Card getFlying() {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                    for (int i = 0; i < flying.size(); i++)
+                    for (int i = 0; i < flying.size(); i++) {
                         if (flying.get(i).getNetDefense() <= damage)
                             return flying.get(i);
+                    }
 
                     return null;
                 }
@@ -834,8 +869,9 @@ public class CardFactory_Sorceries {
                     notLand = notLand.filter(CardListFilter.nonlands);
                     notLand.shuffle();
 
-                    if (notLand.isEmpty())
+                    if (notLand.isEmpty()) {
                         return 0;
+                    }
 
                     Card card = notLand.get(0);
                     return CardUtil.getConvertedManaCost(card.getSpellAbility()[0]);
@@ -865,8 +901,9 @@ public class CardFactory_Sorceries {
                     if (Soldiers >= 5) {
                         for (int i = 0; i < all.size(); i++) {
                             Card c = all.get(i);
-                            if (c.isCreature())
+                            if (c.isCreature()) {
                                 AllZone.getGameAction().destroy(c);
+                            }
                         }
                     }
                 }// resolve()
@@ -948,7 +985,7 @@ public class CardFactory_Sorceries {
 
                     // figure out which basic land types the computer has
                     CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                    String basic[] = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
+                    String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
                     for (int i = 0; i < basic.length; i++) {
                         CardList cl = land.getType(basic[i]);
@@ -968,23 +1005,25 @@ public class CardFactory_Sorceries {
 
                     // need to sacrifice the other non-basic land types
                     land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            if (c.getName().contains("Dryad Arbor"))
+                        public boolean addCard(final Card c) {
+                            if (c.getName().contains("Dryad Arbor")) {
                                 return true;
-                            else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
-                                    || c.isType("Island") || c.isType("Swamp")))
+                            } else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
+                                    || c.isType("Island") || c.isType("Swamp"))) {
                                 return true;
-                            else
+                            } else {
                                 return false;
+                            }
                         }
                     });
                     target.addAll(land);
 
                     // when this spell resolves all basic lands which were not
                     // selected are sacrificed.
-                    for (int i = 0; i < target.size(); i++)
+                    for (int i = 0; i < target.size(); i++) {
                         if (AllZoneUtil.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i)))
                             AllZone.getGameAction().sacrifice(target.get(i));
+                    }
                 }// resolve()
             };// SpellAbility
 
@@ -1021,7 +1060,7 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card c, PlayerZone zone) {
+                public void selectCard(final Card c, final PlayerZone zone) {
                     if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
                     /* && c.getName().equals(humanBasic.get(count)) */
                     && c.isType(humanBasic.get(count))
@@ -1031,7 +1070,7 @@ public class CardFactory_Sorceries {
                         CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                         CardList cl = land.getType(humanBasic.get(count));
                         cl = cl.filter(new CardListFilter() {
-                            public boolean addCard(Card crd) {
+                            public boolean addCard(final Card crd) {
                                 return !saveList.contains(crd);
                             }
                         });
@@ -1045,19 +1084,21 @@ public class CardFactory_Sorceries {
                         index[0]++;
                         showMessage();
 
-                        if (index[0] >= humanBasic.size())
+                        if (index[0] >= humanBasic.size()) {
                             stopSetNext(new Input_PayManaCost(spell));
+                        }
 
                         // need to sacrifice the other non-basic land types
                         land = land.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                if (c.getName().contains("Dryad Arbor"))
+                            public boolean addCard(final Card c) {
+                                if (c.getName().contains("Dryad Arbor")) {
                                     return true;
-                                else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
-                                        || c.isType("Island") || c.isType("Swamp")))
+                                } else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
+                                        || c.isType("Island") || c.isType("Swamp"))) {
                                     return true;
-                                else
+                                } else {
                                     return false;
+                                }
                             }
                         });
                         target.addAll(land);
@@ -1075,7 +1116,7 @@ public class CardFactory_Sorceries {
                     // figure out which basic land types the human has
                     // put those in an set to use later
                     CardList land = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                    String basic[] = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
+                    String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
                     for (int i = 0; i < basic.length; i++) {
                         CardList c = land.getType(basic[i]);
@@ -1108,34 +1149,38 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     PlayerZone humanHand = AllZone.getHumanPlayer().getZone(Constant.Zone.Hand);
-                    if (humanHand.size() >= 2)
+                    if (humanHand.size() >= 2) {
                         return true;
-                    else
+                    } else {
                         return false;
+                    }
                 }
 
                 @Override
                 public void resolve() {
                     Player player = card.getController();
-                    if (player.isHuman())
+                    if (player.isHuman()) {
                         humanResolve();
-                    else
+                    } else {
                         computerResolve();
+                    }
                 }
 
                 public void humanResolve() {
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                     list.shuffle();
 
-                    if (list.size() == 0)
+                    if (list.size() == 0) {
                         return;
+                    }
 
                     Card c1 = list.get(0);
                     list.remove(c1);
                     c1.getController().discard(c1, null);
 
-                    if (list.size() == 0)
+                    if (list.size() == 0) {
                         return;
+                    }
 
                     Card c2 = list.get(0);
                     list.remove(c2);
@@ -1217,8 +1262,9 @@ public class CardFactory_Sorceries {
                             total++;
                             if (c.isLand()) {
                                 landCount++;
-                                if (landCount == 4)
+                                if (landCount == 4) {
                                     break;
+                                }
                             }
                         }
                     } else {
@@ -1245,7 +1291,7 @@ public class CardFactory_Sorceries {
                     CardList library = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
                     int graveCount = graveyard.size();
                     graveyard = graveyard.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
+                        public boolean addCard(final Card c) {
                             return c.isBasicLand();
                         }
                     });
@@ -1322,14 +1368,15 @@ public class CardFactory_Sorceries {
                 public void showMessage() {
                     CardList perms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                     perms = perms.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
+                        public boolean addCard(final Card c) {
                             return c.isPermanent() && !c.getName().equals("Mana Pool");
                         }
                     });
 
                     boolean free = false;
-                    if (this.isFree())
+                    if (this.isFree()) {
                         free = true;
+                    }
 
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, perms, "Select a permanent you control",
                             true, free));
@@ -1353,8 +1400,9 @@ public class CardFactory_Sorceries {
 
                     if (compLand.size() > humLand.size()) {
                         compLand.shuffle();
-                        for (int i = 0; i < compLand.size() - humLand.size(); i++)
+                        for (int i = 0; i < compLand.size() - humLand.size(); i++) {
                             AllZone.getGameAction().sacrifice(compLand.get(i));
+                        }
                     } else if (humLand.size() > compLand.size()) {
                         int diff = humLand.size() - compLand.size();
                         AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanents(diff, "Land"));
@@ -1379,8 +1427,9 @@ public class CardFactory_Sorceries {
                         CardListUtil.sortAttackLowFirst(compCreats);
                         CardListUtil.sortCMC(compCreats);
                         compCreats.reverse();
-                        for (int i = 0; i < compCreats.size() - humCreats.size(); i++)
+                        for (int i = 0; i < compCreats.size() - humCreats.size(); i++) {
                             AllZone.getGameAction().sacrifice(compCreats.get(i));
+                        }
                     } else if (humCreats.size() > compCreats.size()) {
                         int diff = humCreats.size() - compCreats.size();
                         AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanents(diff, "Creature"));
@@ -1461,10 +1510,11 @@ public class CardFactory_Sorceries {
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
                     list = list.getType("Land");
-                    if (list.size() > 0)
+                    if (list.size() > 0) {
                         return true;
-                    else
+                    } else {
                         return false;
+                    }
                 }
 
                 public void resolve() {
@@ -1496,8 +1546,9 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     int times = 1;
                     CardList cl;
-                    if (card.getController().getCardsIn(Zone.Battlefield, "Eldrazi Spawn").size() > 0)
+                    if (card.getController().getCardsIn(Zone.Battlefield, "Eldrazi Spawn").size() > 0) {
                         times = 3;
+                    }
                     for (int i = 0; i < times; i++) {
                         cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(),
                                 "", new String[] { "Creature", "Eldrazi", "Spawn" }, 0, 1, new String[] {});
@@ -1533,8 +1584,9 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (AllZone.getHumanPlayer().getLife() <= damage)
+                    if (AllZone.getHumanPlayer().getLife() <= damage) {
                         return true;
+                    }
 
                     check = getFlying();
                     return check != null;
@@ -1548,9 +1600,10 @@ public class CardFactory_Sorceries {
                     }
 
                     Card c = getFlying();
-                    if ((c == null) || (!check.equals(c)))
+                    if ((c == null) || (!check.equals(c))) {
                         throw new RuntimeException(card + " error in chooseTargetAI() - Card c is " + c
                                 + ",  Card check is " + check);
+                    }
 
                     setTargetCard(c);
                 }// chooseTargetAI()
@@ -1558,9 +1611,10 @@ public class CardFactory_Sorceries {
                 // uses "damage" variable
                 Card getFlying() {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                    for (int i = 0; i < flying.size(); i++)
+                    for (int i = 0; i < flying.size(); i++) {
                         if (flying.get(i).getNetDefense() <= damage)
                             return flying.get(i);
+                    }
 
                     return null;
                 }
@@ -1754,7 +1808,7 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card c, PlayerZone zone) {
+                public void selectCard(final Card c, final PlayerZone zone) {
                     if (!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.getDisplay().showMessage("Cannot target this card.");
                         return; // cannot target
@@ -1771,7 +1825,7 @@ public class CardFactory_Sorceries {
                 }// selectCard()
 
                 @Override
-                public void selectPlayer(Player player) {
+                public void selectPlayer(final Player player) {
                     if (!player.canTarget(spell)) {
                         AllZone.getDisplay().showMessage("Cannot target this player.");
                         return; // cannot target
@@ -1865,7 +1919,7 @@ public class CardFactory_Sorceries {
                     discardDraw(AllZone.getComputerPlayer(), num);
                 }// resolve()
 
-                void discardDraw(Player player, int num) {
+                void discardDraw(final Player player, final int num) {
                     player.discardHand(this);
                     player.drawCards(num);
                 }
@@ -1914,7 +1968,7 @@ public class CardFactory_Sorceries {
                 public Card[] getCreaturesAI() {
                     CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
                     creature = creature.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
+                        public boolean addCard(final Card c) {
                             return c.getNetAttack() > 4;
                         }
                     });
@@ -1923,11 +1977,12 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void chooseTargetAI() {
-                    Card c[] = getCreatures();
+                    Card[] c = getCreatures();
                     Card biggest = c[0];
-                    for (int i = 0; i < c.length; i++)
+                    for (int i = 0; i < c.length; i++) {
                         if (biggest.getNetAttack() < c[i].getNetAttack())
                             biggest = c[i];
+                    }
 
                     setTargetCard(biggest);
                 }
@@ -1944,8 +1999,9 @@ public class CardFactory_Sorceries {
                     if (check != null) {
                         spell.setTargetCard((Card) check);
                         stopSetNext(new Input_PayManaCost(spell));
-                    } else
+                    } else {
                         stop();
+                    }
                 }// showMessage()
             };// Input
             spell.setBeforePayMana(target);
@@ -1964,12 +2020,15 @@ public class CardFactory_Sorceries {
                     while (input[0] == "") {
                         input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
-                        if (input[0] == null)
+                        if (input[0] == null) {
                             break;
-                        if (!CardUtil.isACreatureType(input[0]))
+                        }
+                        if (!CardUtil.isACreatureType(input[0])) {
                             input[0] = "";
-                        // TODO: some more input validation, case-sensitivity,
-                        // etc.
+                            // TODO: some more input validation,
+                            // case-sensitivity,
+                            // etc.
+                        }
 
                         input[0] = input[0].trim(); // this is to prevent
                                                     // "cheating", and selecting
@@ -1977,8 +2036,9 @@ public class CardFactory_Sorceries {
                                                     // types,eg "Goblin Soldier"
                     }
 
-                    if (input[0] == null)
+                    if (input[0] == null) {
                         input[0] = "";
+                    }
 
                     HashMap<String, Integer> countInGraveyard = new HashMap<String, Integer>();
                     CardList allGrave = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Graveyard);
@@ -2002,17 +2062,19 @@ public class CardFactory_Sorceries {
                             maxCount = entry.getValue();
                         }
                     }
-                    if (!maxKey.equals(""))
+                    if (!maxKey.equals("")) {
                         input[1] = maxKey;
-                    else
+                    } else {
                         input[1] = "Sliver";
+                    }
 
                     // Actually put everything on the battlefield
                     CardList bidded = AllZoneUtil.getCardsIn(Constant.Zone.Graveyard);
                     bidded = bidded.getType("Creature");
                     for (Card c : bidded) {
-                        if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0])))
+                        if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0]))) {
                             AllZone.getGameAction().moveToPlay(c);
+                        }
                     }
                 }// resolve()
             };// SpellAbility
@@ -2083,8 +2145,9 @@ public class CardFactory_Sorceries {
                     PlayerZone lib = card.getController().getZone(Constant.Zone.Library);
                     int maxCards = lib.size();
                     maxCards = Math.min(maxCards, 10);
-                    if (maxCards == 0)
+                    if (maxCards == 0) {
                         return;
+                    }
                     CardList topCards = new CardList();
                     // show top n cards:
                     for (int j = 0; j < maxCards; j++) {
@@ -2126,7 +2189,7 @@ public class CardFactory_Sorceries {
                     discardDrawX(AllZone.getComputerPlayer());
                 }// resolve()
 
-                void discardDrawX(Player player) {
+                void discardDrawX(final Player player) {
                     CardList hand = player.getCardsIn(Zone.Hand);
 
                     for (Card c : hand)
@@ -2175,7 +2238,7 @@ public class CardFactory_Sorceries {
                     }
                 }// resolve()
 
-                void discardDraw(Player player) {
+                void discardDraw(final Player player) {
                     CardList hand = player.getCardsIn(Zone.Hand);
                     int numDraw = hand.size();
 
@@ -2237,7 +2300,7 @@ public class CardFactory_Sorceries {
             final Card[] ab1card = new Card[1];
             final Card[] ab2card = new Card[1];
             final ArrayList<Card> ab3cards = new ArrayList<Card>();
-            final int x[] = new int[1];
+            final int[] x = new int[1];
 
             final ArrayList<String> userChoice = new ArrayList<String>();
 
@@ -2340,14 +2403,18 @@ public class CardFactory_Sorceries {
 
                 public void execute() {
                     ArrayList<String> a = new ArrayList<String>();
-                    if (userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0]))
+                    if (userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) {
                         a.add(ab0player[0] + " loses X life");
-                    if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1]))
+                    }
+                    if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         a.add("return " + ab1card[0] + " from graveyard to play");
-                    if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2]))
+                    }
+                    if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) {
                         a.add(ab2card[0] + " gets -X/-X until end of turn");
-                    if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3]))
+                    }
+                    if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                         a.add("up to X target creatures gain Fear until end of turn");
+                    }
 
                     String s = a.get(0) + ", " + a.get(1);
                     spell.setStackDescription(card.getName() + " - " + s);
@@ -2363,8 +2430,9 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void showMessage() {
-                    if (count == 0)
+                    if (count == 0) {
                         stop = x[0];
+                    }
                     AllZone.getDisplay().showMessage(
                             cardName + " - Select a target creature to gain Fear (up to " + (stop - count) + " more)");
                     ButtonUtil.enableAll();
@@ -2381,15 +2449,16 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card c, PlayerZone zone) {
+                public void selectCard(final Card c, final PlayerZone zone) {
                     if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)
                             && !ab3cards.contains(c)) {
                         ab3cards.add(c);
                         count++;
-                        if (count == stop)
+                        if (count == stop) {
                             done();
-                        else
+                        } else {
                             showMessage();
+                        }
                     }
                 }// selectCard()
 
@@ -2415,18 +2484,19 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectCard(Card c, PlayerZone zone) {
+                public void selectCard(final Card c, final PlayerZone zone) {
                     if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
-                        if (card.isCopiedSpell())
+                        if (card.isCopiedSpell()) {
                             card.getChoiceTargets().remove(0);
+                        }
                         ab2card[0] = c;
                         // spell.setTargetCard(c);
                         card.setSpellChoiceTarget(String.valueOf(c.getUniqueNumber()));
                         setStackDescription.execute();
 
-                        if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3]))
+                        if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                             stopSetNext(targetXCreatures);
-                        else {
+                        } else {
                             System.out.println("Input_PayManaCost for spell is getting: " + spell.getManaCost());
                             stopSetNext(new Input_PayManaCost(spell));
                         }
@@ -2443,7 +2513,7 @@ public class CardFactory_Sorceries {
                     CardList grave = card.getController().getCardsIn(Constant.Zone.Graveyard);
                     grave = grave.filter(CardListFilter.creatures);
                     grave = grave.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
+                        public boolean addCard(final Card c) {
                             return c.getCMC() <= x[0];
                         }
                     });
@@ -2454,18 +2524,19 @@ public class CardFactory_Sorceries {
                         if (CardFactoryUtil.canTarget(card, c)) {
                             ab1card[0] = c;
                         }
-                    } else
+                    } else {
                         stop();
+                    }
 
                     done();
                 }// showMessage()
 
                 public void done() {
-                    if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2]))
+                    if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) {
                         stopSetNext(targetCreature);
-                    else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3]))
+                    } else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                         stopSetNext(targetXCreatures);
-                    else {
+                    } else {
                         stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
@@ -2487,22 +2558,23 @@ public class CardFactory_Sorceries {
                 }
 
                 @Override
-                public void selectPlayer(Player player) {
+                public void selectPlayer(final Player player) {
                     if (player.canTarget(spell)) {
-                        if (card.isCopiedSpell())
+                        if (card.isCopiedSpell()) {
                             card.getChoiceTargets().remove(0);
+                        }
                         ab0player[0] = player;
                         // spell.setTargetPlayer(player);
                         card.setSpellChoiceTarget(player.toString());
                         setStackDescription.execute();
 
-                        if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1]))
+                        if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                             stopSetNext(targetGraveCreature);
-                        else if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2]))
+                        } else if (userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) {
                             stopSetNext(targetCreature);
-                        else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3]))
+                        } else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                             stopSetNext(targetXCreatures);
-                        else {
+                        } else {
                             stopSetNext(new Input_PayManaCost(spell));
                         }
                     }
@@ -2516,15 +2588,15 @@ public class CardFactory_Sorceries {
                 public void showMessage() {
                     if (card.isCopiedSpell()) {
                         x[0] = 0;
-                        if (userChoice.contains(cardChoice[0]))
+                        if (userChoice.contains(cardChoice[0])) {
                             stopSetNext(targetPlayer);
-                        else if (userChoice.contains(cardChoice[1]))
+                        } else if (userChoice.contains(cardChoice[1])) {
                             stopSetNext(targetGraveCreature);
-                        else if (userChoice.contains(cardChoice[2]))
+                        } else if (userChoice.contains(cardChoice[2])) {
                             stopSetNext(targetCreature);
-                        else if (userChoice.contains(cardChoice[3]))
+                        } else if (userChoice.contains(cardChoice[3])) {
                             stopSetNext(targetXCreatures);
-                        else {
+                        } else {
                             throw new RuntimeException(
                                     "Something in if(isCopiedSpell()) in Profane Command selection is FUBAR.");
                         }
@@ -2546,15 +2618,15 @@ public class CardFactory_Sorceries {
                         spell.setManaCost(x[0] + " B B");
                         spell.setIsXCost(false);
 
-                        if (userChoice.contains(cardChoice[0]))
+                        if (userChoice.contains(cardChoice[0])) {
                             stopSetNext(targetPlayer);
-                        else if (userChoice.contains(cardChoice[1]))
+                        } else if (userChoice.contains(cardChoice[1])) {
                             stopSetNext(targetGraveCreature);
-                        else if (userChoice.contains(cardChoice[2]))
+                        } else if (userChoice.contains(cardChoice[2])) {
                             stopSetNext(targetCreature);
-                        else if (userChoice.contains(cardChoice[3]))
+                        } else if (userChoice.contains(cardChoice[3])) {
                             stopSetNext(targetXCreatures);
-                        else {
+                        } else {
                             throw new RuntimeException("Something in Profane Command selection is FUBAR.");
                         }
                     }
@@ -2567,15 +2639,15 @@ public class CardFactory_Sorceries {
                 @Override
                 public void showMessage() {
                     if (card.isCopiedSpell()) {
-                        if (userChoice.contains(cardChoice[0]))
+                        if (userChoice.contains(cardChoice[0])) {
                             stopSetNext(targetPlayer);
-                        else if (userChoice.contains(cardChoice[1]))
+                        } else if (userChoice.contains(cardChoice[1])) {
                             stopSetNext(targetGraveCreature);
-                        else if (userChoice.contains(cardChoice[2]))
+                        } else if (userChoice.contains(cardChoice[2])) {
                             stopSetNext(targetCreature);
-                        else if (userChoice.contains(cardChoice[3]))
+                        } else if (userChoice.contains(cardChoice[3])) {
                             stopSetNext(targetXCreatures);
-                        else {
+                        } else {
                             throw new RuntimeException(
                                     "Something in if(isCopiedSpell()) in Profane Command selection is FUBAR.");
                         }
@@ -2596,12 +2668,15 @@ public class CardFactory_Sorceries {
                         CardList grave = card.getController().getCardsIn(Zone.Graveyard);
                         grave = grave.filter(CardListFilter.creatures);
 
-                        if (AllZone.getHumanPlayer().canTarget(spell) || AllZone.getComputerPlayer().canTarget(spell))
+                        if (AllZone.getHumanPlayer().canTarget(spell) || AllZone.getComputerPlayer().canTarget(spell)) {
                             display.add("Target player loses X life");
-                        if (grave.size() > 0)
+                        }
+                        if (grave.size() > 0) {
                             display.add("Return target creature card with converted mana cost X or less from your graveyard to the battlefield");
-                        if (creatures.size() > 0)
+                        }
+                        if (creatures.size() > 0) {
                             display.add("Target creature gets -X/-X until end of turn");
+                        }
                         display.add("Up to X target creatures gain fear until end of turn");
 
                         ArrayList<String> a = chooseTwo(display);
@@ -2616,18 +2691,20 @@ public class CardFactory_Sorceries {
                     }
                 }// showMessage()
 
-                private ArrayList<String> chooseTwo(ArrayList<String> choices) {
+                private ArrayList<String> chooseTwo(final ArrayList<String> choices) {
                     ArrayList<String> out = new ArrayList<String>();
                     Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
-                    if (o == null)
+                    if (o == null) {
                         return null;
+                    }
 
                     out.add((String) o);
                     card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
                     o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
-                    if (o == null)
+                    if (o == null) {
                         return null;
+                    }
 
                     out.add((String) o);
                     card.addSpellChoice((String) o);

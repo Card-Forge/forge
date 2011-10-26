@@ -928,7 +928,6 @@ public class CardFactory_Planeswalkers {
 
                         // TODO: improve this:
                         if (land.size() > 4 && c.isLand()) {
-                            ;
                         } else {
                             AllZone.getGameAction().moveToBottomOfLibrary(c);
                         }

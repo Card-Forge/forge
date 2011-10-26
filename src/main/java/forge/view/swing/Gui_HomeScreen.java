@@ -564,7 +564,7 @@ public class Gui_HomeScreen {
         cmdDeckSelect.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         cmdDeckSelect.setBackground(new Color(255, 222, 173));
         cmdDeckSelect.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 doDeckSelect();
             }
         });

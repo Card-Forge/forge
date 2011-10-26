@@ -130,6 +130,10 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * 
      * @see forge.IPlayerZone#contains(forge.Card)
      */
+    /**
+     * @return boolean
+     * @param c Card
+     */
     public final boolean contains(final Card c) {
         return cards.contains(c);
     }
@@ -359,7 +363,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
                                                                              * equals
                                                                              * (
                                                                              * 'Any')
-                                                                             */) {
+                                                                             */)
+            {
                 ret.add(cardsAddedThisTurn.get(i));
             }
         }

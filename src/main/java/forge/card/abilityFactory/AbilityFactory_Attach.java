@@ -193,8 +193,8 @@ public class AbilityFactory_Attach {
      *            the mandatory
      * @return true, if successful
      */
-    public static boolean attachPreference(final AbilityFactory af, final SpellAbility sa, final Map<String, String> params, final Target tgt,
-            final boolean mandatory) {
+    public static boolean attachPreference(final AbilityFactory af, final SpellAbility sa,
+            final Map<String, String> params, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
             o = attachToPlayerAIPreferences(af, sa, mandatory);
@@ -223,8 +223,8 @@ public class AbilityFactory_Attach {
      *            the mandatory
      * @return the card
      */
-    public static Card attachToCardAIPreferences(final AbilityFactory af, final SpellAbility sa, final Map<String, String> params,
-            final boolean mandatory) {
+    public static Card attachToCardAIPreferences(final AbilityFactory af, final SpellAbility sa,
+            final Map<String, String> params, final boolean mandatory) {
         Target tgt = sa.getTarget();
         Card attachSource = sa.getSourceCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
@@ -272,8 +272,8 @@ public class AbilityFactory_Attach {
      *            the logic
      * @return the card
      */
-    public static Card attachGeneralAI(final SpellAbility sa, final CardList list, final boolean mandatory, final Card attachSource,
-            final String logic) {
+    public static Card attachGeneralAI(final SpellAbility sa, final CardList list, final boolean mandatory,
+            final Card attachSource, final String logic) {
         Player prefPlayer = "Pump".equals(logic) ? AllZone.getComputerPlayer() : AllZone.getHumanPlayer();
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
@@ -411,7 +411,8 @@ public class AbilityFactory_Attach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIPumpPreference(final SpellAbility sa, final CardList list, final boolean mandatory, final Card attachSource) {
+    public static Card attachAIPumpPreference(final SpellAbility sa, final CardList list, final boolean mandatory,
+            final Card attachSource) {
         // AI For choosing a Card to Pump
         Card c = null;
         CardList magnetList = null;
@@ -707,8 +708,8 @@ public class AbilityFactory_Attach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list, final boolean mandatory,
-            final Card attachSource) {
+    public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list,
+            final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
         CardList prefList = list.filter(new CardListFilter() {
             @Override
@@ -761,7 +762,8 @@ public class AbilityFactory_Attach {
      *            the mandatory
      * @return the player
      */
-    public static Player attachToPlayerAIPreferences(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static Player attachToPlayerAIPreferences(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         Target tgt = sa.getTarget();
         Player p;
         if (tgt.canOnlyTgtOpponent()) {
@@ -935,11 +937,10 @@ public class AbilityFactory_Attach {
                 // handle being scripted
                 boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
                 handleAura(card, c, gainControl);
-            } else if (card.isEquipment())
-             {
+            } else if (card.isEquipment()) {
                 card.equipCard(c);
-            // else if (card.isFortification())
-            // card.fortifyCard(c);
+                // else if (card.isFortification())
+                // card.fortifyCard(c);
             }
         } else if (o instanceof Player) {
             // Currently, a few cards can enchant players

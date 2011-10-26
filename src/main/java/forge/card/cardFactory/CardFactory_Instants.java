@@ -210,8 +210,9 @@ public class CardFactory_Instants {
                             Pile1.add(Random);
                         }
                         for (int i = 0; i < Count; i++) {
-                            if (!Pile1.contains(library.get(i)))
+                            if (!Pile1.contains(library.get(i))) {
                                 Pile2.add(library.get(i));
+                            }
                         }
                         StringBuilder sb = new StringBuilder();
                         sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
