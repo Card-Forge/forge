@@ -204,7 +204,7 @@ public final class DeckEditorCommon extends DeckEditorBase {
         content.add(removeButton, "w 100, h 49, sg button");
         content.add(importButton, "w 100, h 49, sg button, gapleft 40px");
         // Label is used to push the analysis button to the right to separate analysis button from add/remove card ones 
-        content.add(jLabelAnalysisGap, "wmin 100, growx");
+        content.add(jLabelAnalysisGap, "wmin 75, growx");
         content.add(analysisButton, "w 100, h 49, wrap");
 
         content.add(bottom.getTableDecorated(), "cell 0 6, grow");
