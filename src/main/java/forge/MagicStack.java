@@ -26,8 +26,10 @@ import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost_Ability;
 
 /**
- * <p>MagicStack class.</p>
- *
+ * <p>
+ * MagicStack class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -40,13 +42,15 @@ public class MagicStack extends MyObservable {
     private boolean frozen = false;
     private boolean bResolving = false;
     private int splitSecondOnStack = 0;
-    
+
     private CardList thisTurnCast = new CardList();
     private CardList lastTurnCast = new CardList();
 
     /**
-     * <p>isFrozen.</p>
-     *
+     * <p>
+     * isFrozen.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isFrozen() {
@@ -54,16 +58,21 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>Setter for the field <code>frozen</code>.</p>
-     *
-     * @param frozen0 a boolean.
+     * <p>
+     * Setter for the field <code>frozen</code>.
+     * </p>
+     * 
+     * @param frozen0
+     *            a boolean.
      */
     public final void setFrozen(final boolean frozen0) {
         this.frozen = frozen0;
     }
 
     /**
-     * <p>reset.</p>
+     * <p>
+     * reset.
+     * </p>
      */
     public final void reset() {
         getStack().clear();
@@ -74,8 +83,10 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>isSplitSecondOnStack.</p>
-     *
+     * <p>
+     * isSplitSecondOnStack.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isSplitSecondOnStack() {
@@ -83,9 +94,12 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>incrementSplitSecond.</p>
-     *
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * incrementSplitSecond.
+     * </p>
+     * 
+     * @param sp
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void incrementSplitSecond(final SpellAbility sp) {
         if (sp.getSourceCard().hasKeyword("Split second")) {
@@ -94,9 +108,12 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>decrementSplitSecond.</p>
-     *
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * decrementSplitSecond.
+     * </p>
+     * 
+     * @param sp
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void decrementSplitSecond(final SpellAbility sp) {
         if (sp.getSourceCard().hasKeyword("Split second")) {
@@ -109,23 +126,27 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>freezeStack.</p>
+     * <p>
+     * freezeStack.
+     * </p>
      */
     public final void freezeStack() {
         frozen = true;
     }
 
     /**
-     * <p>addAndUnfreeze.</p>
-     *
-     * @param ability a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addAndUnfreeze.
+     * </p>
+     * 
+     * @param ability
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addAndUnfreeze(final SpellAbility ability) {
         ability.getRestrictions().abilityActivated();
         if (ability.getRestrictions().getActivationNumberSacrifice() != -1
-                && ability.getRestrictions().getNumberTurnActivations()
-                   >= ability.getRestrictions().getActivationNumberSacrifice())
-        {
+                && ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions()
+                        .getActivationNumberSacrifice()) {
             ability.getSourceCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
         }
         // triggered abilities should go on the frozen stack
@@ -135,7 +156,8 @@ public class MagicStack extends MyObservable {
 
         this.add(ability);
 
-        // if the ability is a spell, but not a copied spell and its not already on the stack zone, move there
+        // if the ability is a spell, but not a copied spell and its not already
+        // on the stack zone, move there
         if (ability.isSpell()) {
             Card source = ability.getSourceCard();
             if (!source.isCopiedSpell() && !AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
@@ -149,7 +171,9 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>unfreezeStack.</p>
+     * <p>
+     * unfreezeStack.
+     * </p>
      */
     public final void unfreezeStack() {
         frozen = false;
@@ -164,18 +188,24 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>clearFrozen.</p>
+     * <p>
+     * clearFrozen.
+     * </p>
      */
     public final void clearFrozen() {
-        // TODO: frozen triggered abilities and undoable costs have nasty consequences
+        // TODO: frozen triggered abilities and undoable costs have nasty
+        // consequences
         frozen = false;
         getFrozenStack().clear();
     }
 
     /**
-     * <p>setResolving.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setResolving.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
     public final void setResolving(final boolean b) {
         bResolving = b;
@@ -185,8 +215,10 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>getResolving.</p>
-     *
+     * <p>
+     * getResolving.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean getResolving() {
@@ -194,33 +226,41 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>add.</p>
-     *
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
-     * @param useX a boolean.
+     * <p>
+     * add.
+     * </p>
+     * 
+     * @param sp
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param useX
+     *            a boolean.
      */
     public final void add(final SpellAbility sp, final boolean useX) {
         if (!useX) {
             this.add(sp);
-        }
-        else {
+        } else {
 
             // TODO: make working triggered abilities!
             if (sp instanceof Ability_Mana || sp instanceof Ability_Triggered) {
                 sp.resolve();
-            }
-            else {
+            } else {
                 push(sp);
-                /*if (sp.getTargetCard() != null)
-                        CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());*/
+                /*
+                 * if (sp.getTargetCard() != null)
+                 * CardFactoryUtil.checkTargetingEffects(sp,
+                 * sp.getTargetCard());
+                 */
             }
         }
     }
 
     /**
-     * <p>getMultiKickerSpellCostChange.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * getMultiKickerSpellCostChange.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
     public final ManaCost getMultiKickerSpellCostChange(final SpellAbility sa) {
@@ -239,11 +279,9 @@ public class MagicStack extends MyObservable {
 
         if (mana.toString().length() == 1) {
             numberManaCost = mana.toString().substring(0, 1);
-        }
-        else if (mana.toString().length() == 0) {
+        } else if (mana.toString().length() == 0) {
             numberManaCost = "0"; // Should Never Occur
-        }
-        else {
+        } else {
             numberManaCost = mana.toString().substring(0, 2);
         }
 
@@ -272,42 +310,46 @@ public class MagicStack extends MyObservable {
 
         for (int colorCutIx = 0; colorCutIx < colorCut.length(); colorCutIx++) {
             if ("WUGRB".contains(colorCut.substring(colorCutIx, colorCutIx + 1))
-                    && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), "")))
-            {
-                    mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
+                    && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
+                mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                    AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored =
-                            AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                            .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
+                AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored = AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
+                        .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                    mana = mana.trim();
-                    if (mana.equals("")) {
-                        mana = "0";
-                    }
-                    manaCost = new ManaCost(mana);
+                mana = mana.trim();
+                if (mana.equals("")) {
+                    mana = "0";
+                }
+                manaCost = new ManaCost(mana);
             }
         }
 
         return manaCost;
     }
 
-    //TODO: this may be able to use a straight copy of MultiKicker cost change
+    // TODO: this may be able to use a straight copy of MultiKicker cost change
     /**
-     * <p>getReplicateSpellCostChange.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * getReplicateSpellCostChange.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
     public final ManaCost getReplicateSpellCostChange(final SpellAbility sa) {
         ManaCost manaCost = new ManaCost(sa.getManaCost());
-        //String Mana = manaCost.toString();
+        // String Mana = manaCost.toString();
         return manaCost;
     }
 
     /**
-     * <p>add.</p>
+     * <p>
+     * add.
+     * </p>
      * 
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
+     * @param sp
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
         ArrayList<Target_Choices> chosenTargets = sp.getAllTargetChoices();
@@ -317,7 +359,7 @@ public class MagicStack extends MyObservable {
             sp.resetOnceResolved();
             return;
         }
-        
+
         if (frozen) {
             SpellAbility_StackInstance si = new SpellAbility_StackInstance(sp);
             getFrozenStack().push(si);
@@ -331,7 +373,10 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (AllZone.getPhase().is(Constant.Phase.Cleanup)) {    // If something triggers during Cleanup, need to repeat
+        if (AllZone.getPhase().is(Constant.Phase.Cleanup)) { // If something
+                                                             // triggers during
+                                                             // Cleanup, need to
+                                                             // repeat
             AllZone.getPhase().repeatPhase();
         }
 
@@ -344,8 +389,7 @@ public class MagicStack extends MyObservable {
         if (sp instanceof Ability_Triggered || sp instanceof Ability_Static) {
             // TODO: make working triggered ability
             sp.resolve();
-        }
-        else {
+        } else {
             if (sp.isKickerAbility()) {
                 sp.getSourceCard().setKicked(true);
                 SpellAbility[] sa = sp.getSourceCard().getSpellAbility();
@@ -389,18 +433,19 @@ public class MagicStack extends MyObservable {
                     public void execute() {
                         ability.resolve();
                         Card crd = sa.getSourceCard();
-                        AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Pay X cost for "
-                                + crd.getName()
-                                + " (X=" + crd.getXManaCostPaid() + ")\r\n",
-                                ability.getManaCost(), this, unpaidCommand, true));
+                        AllZone.getInputControl().setInput(
+                                new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X="
+                                        + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), this, unpaidCommand,
+                                        true));
                     }
                 };
 
                 Card crd = sa.getSourceCard();
                 if (sp.getSourceCard().getController().isHuman()) {
-                    AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Pay X cost for "
-                            + sp.getSourceCard().getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n",
-                            ability.getManaCost(), paidCommand, unpaidCommand, true));
+                    AllZone.getInputControl().setInput(
+                            new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X="
+                                    + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), paidCommand,
+                                    unpaidCommand, true));
                 } else {
                     // computer
                     int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
@@ -411,7 +456,8 @@ public class MagicStack extends MyObservable {
                     push(sa);
                 }
             } else if (sp.isMultiKicker()) {
-                // TODO: convert multikicker support in abCost so this doesn't happen here
+                // TODO: convert multikicker support in abCost so this doesn't
+                // happen here
                 // both X and multi is not supported yet
 
                 final SpellAbility sa = sp;
@@ -440,24 +486,27 @@ public class MagicStack extends MyObservable {
                         } else {
                             if (AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid == 0
                                     && AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                                    .equals(""))
-                            {
+                                            .equals("")) {
 
-                                AllZone.getInputControl().setInput(new Input_PayManaCost_Ability(
-                                        "Multikicker for " + sa.getSourceCard() + "\r\n"
+                                AllZone.getInputControl().setInput(
+                                        new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n"
                                                 + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
-                                                + "\r\n",
-                                        manaCost.toString(), this, unpaidCommand));
+                                                + "\r\n", manaCost.toString(), this, unpaidCommand));
                             } else {
-                                AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Multikicker for "
-                                        + sa.getSourceCard() + "\r\n" + "Mana in Reserve: "
-                                        + ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid != 0)
-                                           ? AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid
-                                           : "")
-                                        + AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                                        + "\r\n"
-                                        + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                        manaCost.toString(), this, unpaidCommand));
+                                AllZone.getInputControl()
+                                        .setInput(
+                                                new Input_PayManaCost_Ability(
+                                                        "Multikicker for "
+                                                                + sa.getSourceCard()
+                                                                + "\r\n"
+                                                                + "Mana in Reserve: "
+                                                                + ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid != 0) ? AllZone
+                                                                        .getGameAction().CostCutting_GetMultiMickerManaCostPaid
+                                                                        : "")
+                                                                + AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
+                                                                + "\r\n" + "Times Kicked: "
+                                                                + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+                                                        manaCost.toString(), this, unpaidCommand));
                             }
                         }
                     }
@@ -470,21 +519,26 @@ public class MagicStack extends MyObservable {
                         paidCommand.execute();
                     } else {
                         if (AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid == 0
-                                && AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored.equals(""))
-                        {
-                            AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Multikicker for "
-                                    + sa.getSourceCard() + "\r\n" + "Times Kicked: "
-                                    + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                    manaCost.toString(), paidCommand, unpaidCommand));
+                                && AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+                            AllZone.getInputControl().setInput(
+                                    new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n"
+                                            + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+                                            manaCost.toString(), paidCommand, unpaidCommand));
                         } else {
-                            AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Multikicker for "
-                                    + sa.getSourceCard() + "\r\n" + "Mana in Reserve: "
-                                    + ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid != 0)
-                                       ? AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid
-                                       : "")
-                                    + AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                                    + "\r\n" + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                    manaCost.toString(), paidCommand, unpaidCommand));
+                            AllZone.getInputControl()
+                                    .setInput(
+                                            new Input_PayManaCost_Ability(
+                                                    "Multikicker for "
+                                                            + sa.getSourceCard()
+                                                            + "\r\n"
+                                                            + "Mana in Reserve: "
+                                                            + ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid != 0) ? AllZone
+                                                                    .getGameAction().CostCutting_GetMultiMickerManaCostPaid
+                                                                    : "")
+                                                            + AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
+                                                            + "\r\n" + "Times Kicked: "
+                                                            + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+                                                    manaCost.toString(), paidCommand, unpaidCommand));
                         }
                     }
                 } else {
@@ -497,7 +551,8 @@ public class MagicStack extends MyObservable {
                     push(sa);
                 }
             } else if (sp.isReplicate()) {
-                // TODO: convert multikicker/replicate support in abCost so this doesn't happen here
+                // TODO: convert multikicker/replicate support in abCost so this
+                // doesn't happen here
                 // X and multi and replicate are not supported yet
 
                 final SpellAbility sa = sp;
@@ -528,26 +583,24 @@ public class MagicStack extends MyObservable {
                             this.execute();
                         } else {
 
-                            AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Replicate for "
-                                    + sa.getSourceCard() + "\r\n"
-                                    + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n",
-                                    manaCost.toString(), this, unpaidCommand));
+                            AllZone.getInputControl().setInput(
+                                    new Input_PayManaCost_Ability("Replicate for " + sa.getSourceCard() + "\r\n"
+                                            + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude()
+                                            + "\r\n", manaCost.toString(), this, unpaidCommand));
                         }
                     }
                 };
 
-                if (sp.getSourceCard().getController().equals(
-                        AllZone.getHumanPlayer()))
-                {
+                if (sp.getSourceCard().getController().equals(AllZone.getHumanPlayer())) {
                     ManaCost manaCost = getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        AllZone.getInputControl().setInput(new Input_PayManaCost_Ability("Replicate for "
-                                + sa.getSourceCard() + "\r\n"
-                                + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n",
-                                manaCost.toString(), paidCommand, unpaidCommand));
+                        AllZone.getInputControl().setInput(
+                                new Input_PayManaCost_Ability("Replicate for " + sa.getSourceCard() + "\r\n"
+                                        + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n",
+                                        manaCost.toString(), paidCommand, unpaidCommand));
                     }
                 } else {
                     // computer
@@ -561,9 +614,11 @@ public class MagicStack extends MyObservable {
 
         }
 
-        if (!sp.getSourceCard().isCopiedSpell()) //Copied spells aren't cast per se so triggers shouldn't run for them.
+        if (!sp.getSourceCard().isCopiedSpell()) // Copied spells aren't cast
+                                                 // per se so triggers shouldn't
+                                                 // run for them.
         {
-            //Run SpellAbilityCast triggers
+            // Run SpellAbilityCast triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cost", sp.getPayCosts());
             runParams.put("Player", sp.getSourceCard().getController());
@@ -571,24 +626,24 @@ public class MagicStack extends MyObservable {
             runParams.put("CastSA", sp);
             AllZone.getTriggerHandler().runTrigger("SpellAbilityCast", runParams);
 
-            //Run SpellCast triggers
+            // Run SpellCast triggers
             if (sp.isSpell()) {
                 AllZone.getTriggerHandler().runTrigger("SpellCast", runParams);
             }
 
-            //Run AbilityCast triggers
+            // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
                 AllZone.getTriggerHandler().runTrigger("AbilityCast", runParams);
             }
 
-            //Run Cycled triggers
+            // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getSourceCard());
                 AllZone.getTriggerHandler().runTrigger("Cycled", runParams);
             }
 
-            //Run BecomesTarget triggers
+            // Run BecomesTarget triggers
             runParams.clear();
             runParams.put("SourceSA", sp);
             if (chosenTargets.size() > 0) {
@@ -609,15 +664,13 @@ public class MagicStack extends MyObservable {
                 runParams.put("Target", sp.getTargetCard());
 
                 AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
-            }
-            else if (sp.getTargetList() != null && sp.getTargetList().size() > 0) {
+            } else if (sp.getTargetList() != null && sp.getTargetList().size() > 0) {
                 for (Card ctgt : sp.getTargetList()) {
                     runParams.put("Target", ctgt);
 
                     AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
                 }
-            }
-            else if (sp.getTargetPlayer() != null) {
+            } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
                 AllZone.getTriggerHandler().runTrigger("BecomesTarget", runParams);
@@ -646,9 +699,7 @@ public class MagicStack extends MyObservable {
 
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
-                            if (zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
-                                    && c.isLand())
-                            {
+                            if (zone.is(Constant.Zone.Battlefield) && c.getController().isHuman() && c.isLand()) {
                                 AllZone.getGameAction().sacrifice(c);
                                 stop();
                             }
@@ -658,7 +709,7 @@ public class MagicStack extends MyObservable {
                     if (prev.isSpell() && prev.getSourceCard().getName().equals("Mana Vortex")) {
                         if (sp.getSourceCard().getController().isHuman()) {
                             AllZone.getInputControl().setInput(in);
-                        } else { //Computer
+                        } else { // Computer
                             CardList lands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
                             if (!lands.isEmpty()) {
                                 AllZone.getComputerPlayer().sacrificePermanent("prompt", lands);
@@ -669,8 +720,8 @@ public class MagicStack extends MyObservable {
                         }
                     }
 
-                } //resolve()
-            }; //SpellAbility
+                } // resolve()
+            }; // SpellAbility
 
             counter.setStackDescription(sp.getSourceCard().getName()
                     + " - counter Mana Vortex unless you sacrifice a land.");
@@ -679,9 +730,10 @@ public class MagicStack extends MyObservable {
         }
 
         /*
-           * Whenever a player casts a spell, counter it if a card with the same name
-           * is in a graveyard or a nontoken permanent with the same name is on the battlefield.
-           */
+         * Whenever a player casts a spell, counter it if a card with the same
+         * name is in a graveyard or a nontoken permanent with the same name is
+         * on the battlefield.
+         */
         if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
             CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -696,7 +748,10 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                CardList bazaars = AllZoneUtil.getCardsIn(Zone.Battlefield, "Bazaar of Wonders");  //should only be 1...
+                CardList bazaars = AllZoneUtil.getCardsIn(Zone.Battlefield, "Bazaar of Wonders"); // should
+                                                                                                  // only
+                                                                                                  // be
+                                                                                                  // 1...
                 for (final Card bazaar : bazaars) {
                     final SpellAbility counter = new Ability(bazaar, "0") {
                         @Override
@@ -704,16 +759,18 @@ public class MagicStack extends MyObservable {
                             if (AllZone.getStack().size() > 0) {
                                 AllZone.getStack().pop();
                             }
-                        } //resolve()
-                    }; //SpellAbility
+                        } // resolve()
+                    }; // SpellAbility
                     counter.setStackDescription(bazaar.getName() + " - counter " + sp.getSourceCard().getName() + ".");
                     add(counter);
                 }
             }
         }
 
-        /*if (sp.getTargetCard() != null)
-              CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());*/
+        /*
+         * if (sp.getTargetCard() != null)
+         * CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
+         */
 
         if (getSimultaneousStackEntryList().size() > 0) {
             AllZone.getPhase().passPriority();
@@ -721,8 +778,10 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>size.</p>
-     *
+     * <p>
+     * size.
+     * </p>
+     * 
      * @return a int.
      */
     public final int size() {
@@ -731,9 +790,12 @@ public class MagicStack extends MyObservable {
 
     // Push should only be used by add.
     /**
-     * <p>push.</p>
-     *
-     * @param sp a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * push.
+     * </p>
+     * 
+     * @param sp
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void push(final SpellAbility sp) {
         if (null == sp.getActivatingPlayer()) {
@@ -756,7 +818,9 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>resolveStack.</p>
+     * <p>
+     * resolveStack.
+     * </p>
      */
     public final void resolveStack() {
         // Resolving the Stack
@@ -764,15 +828,17 @@ public class MagicStack extends MyObservable {
         // TODO: change to use forge.view.FView?
         GuiDisplayUtil.updateGUI();
 
-        this.freezeStack();    // freeze the stack while we're in the middle of resolving
+        this.freezeStack(); // freeze the stack while we're in the middle of
+                            // resolving
         setResolving(true);
 
         SpellAbility sa = AllZone.getStack().pop();
 
-        AllZone.getPhase().resetPriority();    // ActivePlayer gains priority first after Resolve
+        AllZone.getPhase().resetPriority(); // ActivePlayer gains priority first
+                                            // after Resolve
         final Card source = sa.getSourceCard();
 
-        if (hasFizzled(sa, source)) { //Fizzle
+        if (hasFizzled(sa, source)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
             finishResolving(sa, true);
@@ -783,87 +849,82 @@ public class MagicStack extends MyObservable {
             sa.resolve();
             finishResolving(sa, false);
         }
-        
-        if(source.hasStartOfKeyword("Haunt") && !source.isCreature() && AllZone.getZoneOf(source).is(Constant.Zone.Graveyard)) {
+
+        if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
+                && AllZone.getZoneOf(source).is(Constant.Zone.Graveyard)) {
             CardList creats = AllZoneUtil.getCreaturesInPlay();
-            for(int i=0;i<creats.size();i++) {
-                if(!CardFactoryUtil.canTarget(source, creats.get(i))) {
+            for (int i = 0; i < creats.size(); i++) {
+                if (!CardFactoryUtil.canTarget(source, creats.get(i))) {
                     creats.remove(i);
                     i--;
                 }
             }
-            if(creats.size() != 0)
-            {
-                final Ability haunterDies_Work = new Ability(source,"0") {
+            if (creats.size() != 0) {
+                final Ability haunterDies_Work = new Ability(source, "0") {
                     @Override
                     public void resolve() {
                         AllZone.getGameAction().exile(source);
-                        getTargetCard().addHauntedBy(source);                  
+                        getTargetCard().addHauntedBy(source);
                     }
-                  };
-                  haunterDies_Work.setDescription("");
-                  
-                  final Input target = new Input() {
-                      private static final long serialVersionUID = 1981791992623774490L;
+                };
+                haunterDies_Work.setDescription("");
 
-                      @Override
-                      public void showMessage() {
-                          AllZone.getDisplay().showMessage("Choose target creature to haunt.");
-                          ButtonUtil.disableAll();
-                      }
+                final Input target = new Input() {
+                    private static final long serialVersionUID = 1981791992623774490L;
 
-                      @Override
-                      public void selectCard(final Card c, final PlayerZone zone) {
-                          if(!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
-                              return;
-                          }
-                          if(CardFactoryUtil.canTarget(source,c))
-                          {
-                              haunterDies_Work.setTargetCard(c);
-                              add(haunterDies_Work);
-                              stop();
-                          }
-                          else
-                          {
-                              AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
-                          }
-                      }
-                  };
-                  
-                  if(source.getController().isHuman())
-                  {
-                      AllZone.getInputControl().setInput(target);
-                  }
-                  else
-                  {
-                      //AI choosing what to haunt
-                      CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
-                      if(oppCreats.size() != 0)
-                      {
-                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(oppCreats));
-                      }
-                      else
-                      {
-                          haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(creats));
-                      }
-                      add(haunterDies_Work);
-                  }
+                    @Override
+                    public void showMessage() {
+                        AllZone.getDisplay().showMessage("Choose target creature to haunt.");
+                        ButtonUtil.disableAll();
+                    }
+
+                    @Override
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
+                            return;
+                        }
+                        if (CardFactoryUtil.canTarget(source, c)) {
+                            haunterDies_Work.setTargetCard(c);
+                            add(haunterDies_Work);
+                            stop();
+                        } else {
+                            AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
+                        }
+                    }
+                };
+
+                if (source.getController().isHuman()) {
+                    AllZone.getInputControl().setInput(target);
+                } else {
+                    // AI choosing what to haunt
+                    CardList oppCreats = creats.getController(AllZone.getHumanPlayer());
+                    if (oppCreats.size() != 0) {
+                        haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(oppCreats));
+                    } else {
+                        haunterDies_Work.setTargetCard(CardFactoryUtil.AI_getWorstCreature(creats));
+                    }
+                    add(haunterDies_Work);
+                }
             }
         }
 
     }
 
     /**
-     * <p>removeCardFromStack.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param fizzle a boolean.
+     * <p>
+     * removeCardFromStack.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param fizzle
+     *            a boolean.
      * @since 1.0.15
      */
     public final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getSourceCard();
 
-        //do nothing
+        // do nothing
         if (sa.getSourceCard().isCopiedSpell() || sa.isAbility()) {
         }
         // Handle cards that need to be moved differently
@@ -874,23 +935,28 @@ public class MagicStack extends MyObservable {
             sa.setFlashBackAbility(false);
         }
 
-        // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
+        // If Spell and still on the Stack then let it goto the graveyard or
+        // replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
-                 && AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
+                && AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
             AllZone.getGameAction().moveToGraveyard(source);
         }
     }
 
     /**
-     * <p>finishResolving.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param fizzle a boolean.
+     * <p>
+     * finishResolving.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param fizzle
+     *            a boolean.
      * @since 1.0.15
      */
     public final void finishResolving(final SpellAbility sa, final boolean fizzle) {
 
-        //remove card from the stack
+        // remove card from the stack
         removeCardFromStack(sa, fizzle);
 
         // After SA resolves we have to do a handful of things
@@ -909,9 +975,9 @@ public class MagicStack extends MyObservable {
         // TODO: change to use forge.view.FView?
         GuiDisplayUtil.updateGUI();
 
-        //TODO: this is a huge hack.  Why is this necessary?
-        //hostCard in AF is not the same object that's on the battlefield
-        //verified by System.identityHashCode(card);
+        // TODO: this is a huge hack. Why is this necessary?
+        // hostCard in AF is not the same object that's on the battlefield
+        // verified by System.identityHashCode(card);
         Card tmp = sa.getSourceCard();
         if (tmp.getClones().size() > 0) {
             for (Card c : AllZoneUtil.getCardsIn(Zone.Battlefield)) {
@@ -924,10 +990,14 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>hasFizzled.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * hasFizzled.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param source
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
     public final boolean hasFizzled(final SpellAbility sa, final Card source) {
@@ -941,18 +1011,19 @@ public class MagicStack extends MyObservable {
         while (true) {
             Target tgt = fizzSA.getTarget();
             if (tgt != null && tgt.getMinTargets(source, fizzSA) == 0 && tgt.getNumTargeted() == 0) {
-                // Don't assume fizzled for minTargets == 0 and nothing is targeted
-            }
-            else if (firstTarget && (tgt != null || fizzSA.getTargetCard() != null
-                                     || fizzSA.getTargetPlayer() != null))
-            {
-                // If there is at least 1 target, fizzle switches because ALL targets need to be invalid
+                // Don't assume fizzled for minTargets == 0 and nothing is
+                // targeted
+            } else if (firstTarget
+                    && (tgt != null || fizzSA.getTargetCard() != null || fizzSA.getTargetPlayer() != null)) {
+                // If there is at least 1 target, fizzle switches because ALL
+                // targets need to be invalid
                 fizzle = true;
                 firstTarget = false;
             }
 
             if (tgt != null) {
-                // With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
+                // With multi-targets, as long as one target is still legal,
+                // we'll try to go through as much as possible
                 ArrayList<Object> tgts = tgt.getTargets();
                 for (Object o : tgts) {
                     if (o instanceof Player) {
@@ -969,7 +1040,8 @@ public class MagicStack extends MyObservable {
                     }
                 }
             } else if (fizzSA.getTargetCard() != null) {
-                // Fizzling will only work for Abilities that use the Target class,
+                // Fizzling will only work for Abilities that use the Target
+                // class,
                 // since the info isn't available otherwise
                 fizzle &= !CardFactoryUtil.isTargetStillValid(fizzSA, fizzSA.getTargetCard());
             } else if (fizzSA.getTargetPlayer() != null) {
@@ -978,8 +1050,7 @@ public class MagicStack extends MyObservable {
 
             if (fizzSA.getSubAbility() != null) {
                 fizzSA = fizzSA.getSubAbility();
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -988,8 +1059,10 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>pop.</p>
-     *
+     * <p>
+     * pop.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility pop() {
@@ -1002,19 +1075,26 @@ public class MagicStack extends MyObservable {
     // CAREFUL! Peeking while an SAs Targets are being choosen may cause issues
     // index = 0 is the top, index = 1 is the next to top, etc...
     /**
-     * <p>peekInstance.</p>
-     *
-     * @param index a int.
-     * @return a {@link forge.card.spellability.SpellAbility_StackInstance} object.
+     * <p>
+     * peekInstance.
+     * </p>
+     * 
+     * @param index
+     *            a int.
+     * @return a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *         object.
      */
     public final SpellAbility_StackInstance peekInstance(final int index) {
         return getStack().get(index);
     }
 
     /**
-     * <p>peekAbility.</p>
-     *
-     * @param index a int.
+     * <p>
+     * peekAbility.
+     * </p>
+     * 
+     * @param index
+     *            a int.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility peekAbility(final int index) {
@@ -1022,17 +1102,22 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>peekInstance.</p>
-     *
-     * @return a {@link forge.card.spellability.SpellAbility_StackInstance} object.
+     * <p>
+     * peekInstance.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *         object.
      */
     public final SpellAbility_StackInstance peekInstance() {
         return getStack().peek();
     }
 
     /**
-     * <p>peekAbility.</p>
-     *
+     * <p>
+     * peekAbility.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility peekAbility() {
@@ -1040,9 +1125,12 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>remove.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * remove.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void remove(final SpellAbility sa) {
         SpellAbility_StackInstance si = getInstanceFromSpellAbility(sa);
@@ -1055,9 +1143,13 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>remove.</p>
-     *
-     * @param si a {@link forge.card.spellability.SpellAbility_StackInstance} object.
+     * <p>
+     * remove.
+     * </p>
+     * 
+     * @param si
+     *            a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *            object.
      */
     public final void remove(final SpellAbility_StackInstance si) {
         if (getStack().remove(si)) {
@@ -1068,10 +1160,14 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>getInstanceFromSpellAbility.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbility_StackInstance} object.
+     * <p>
+     * getInstanceFromSpellAbility.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *         object.
      */
     public final SpellAbility_StackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
         // TODO: Confirm this works!
@@ -1084,8 +1180,10 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>hasSimultaneousStackEntries.</p>
-     *
+     * <p>
+     * hasSimultaneousStackEntries.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean hasSimultaneousStackEntries() {
@@ -1093,16 +1191,21 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>addSimultaneousStackEntry.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addSimultaneousStackEntry.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addSimultaneousStackEntry(final SpellAbility sa) {
         getSimultaneousStackEntryList().add(sa);
     }
 
     /**
-     * <p>chooseOrderOfSimultaneousStackEntryAll.</p>
+     * <p>
+     * chooseOrderOfSimultaneousStackEntryAll.
+     * </p>
      */
     public final void chooseOrderOfSimultaneousStackEntryAll() {
         final Player playerTurn = AllZone.getPhase().getPlayerTurn();
@@ -1115,9 +1218,12 @@ public class MagicStack extends MyObservable {
     }
 
     /**
-     * <p>chooseOrderOfSimultaneousStackEntry.</p>
-     *
-     * @param activePlayer a {@link forge.Player} object.
+     * <p>
+     * chooseOrderOfSimultaneousStackEntry.
+     * </p>
+     * 
+     * @param activePlayer
+     *            a {@link forge.Player} object.
      */
     public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
         if (getSimultaneousStackEntryList().size() == 0) {
@@ -1152,9 +1258,8 @@ public class MagicStack extends MyObservable {
         } else {
             while (activePlayerSAs.size() > 1) {
 
-                SpellAbility next =
-                        (SpellAbility) GuiUtils.getChoice("Choose which spell or ability to put on the stack next.",
-                                activePlayerSAs.toArray());
+                SpellAbility next = (SpellAbility) GuiUtils.getChoice(
+                        "Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
 
                 activePlayerSAs.remove(next);
 
@@ -1169,18 +1274,19 @@ public class MagicStack extends MyObservable {
 
             if (activePlayerSAs.get(0).isTrigger()) {
                 AllZone.getGameAction().playSpellAbility(activePlayerSAs.get(0));
-            }
-            else {
+            } else {
                 add(activePlayerSAs.get(0));
             }
-            //AllZone.getGameAction().playSpellAbility(activePlayerSAs.get(0));
+            // AllZone.getGameAction().playSpellAbility(activePlayerSAs.get(0));
         }
     }
 
     /**
      * TODO: Write javadoc for this method.
+     * 
      * @param triggerID
-     * @return
+     *            the trigger id
+     * @return true, if successful
      */
     public final boolean hasStateTrigger(final int triggerID) {
         for (SpellAbility_StackInstance sasi : getStack()) {
@@ -1193,6 +1299,8 @@ public class MagicStack extends MyObservable {
     }
 
     /**
+     * Gets the simultaneous stack entry list.
+     * 
      * @return the simultaneousStackEntryList
      */
     public final List<SpellAbility> getSimultaneousStackEntryList() {
@@ -1200,6 +1308,8 @@ public class MagicStack extends MyObservable {
     }
 
     /**
+     * Gets the stack.
+     * 
      * @return the stack
      */
     public final Stack<SpellAbility_StackInstance> getStack() {
@@ -1207,6 +1317,8 @@ public class MagicStack extends MyObservable {
     }
 
     /**
+     * Gets the frozen stack.
+     * 
      * @return the frozenStack
      */
     public final Stack<SpellAbility_StackInstance> getFrozenStack() {
@@ -1215,6 +1327,7 @@ public class MagicStack extends MyObservable {
 
     /**
      * Accessor for the field thisTurnCast.
+     * 
      * @return a CardList.
      */
     public final CardList getCardsCastThisTurn() {
@@ -1227,7 +1340,7 @@ public class MagicStack extends MyObservable {
     public final void clearCardsCastThisTurn() {
         thisTurnCast.clear();
     }
-    
+
     /**
      * 
      * setCardsCastLastTurn.
@@ -1235,9 +1348,10 @@ public class MagicStack extends MyObservable {
     public final void setCardsCastLastTurn() {
         lastTurnCast = new CardList(thisTurnCast);
     }
-    
+
     /**
      * Accessor for the field lastTurnCast.
+     * 
      * @return a CardList.
      */
     public final CardList getCardsCastLastTurn() {

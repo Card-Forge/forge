@@ -1,34 +1,47 @@
 package forge;
 
 /**
- * <p>Abstract Move class.</p>
- *
+ * <p>
+ * Abstract Move class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public abstract class Move {
     /**
-     * <p>generateMoves.</p>
-     *
+     * <p>
+     * generateMoves.
+     * </p>
+     * 
      * @return an array of {@link forge.Move} objects.
      */
     public abstract Move[] generateMoves();
 
     /**
-     * <p>getScore.</p>
-     *
+     * <p>
+     * getScore.
+     * </p>
+     * 
      * @return a int.
      */
     public abstract int getScore();
 
+    /** The best move. */
     public Move bestMove = null;
+
+    /** The best score. */
     public int bestScore = Integer.MIN_VALUE;
 
     /**
-     * <p>min.</p>
-     *
-     * @param move a {@link forge.Move} object.
-     * @param depth a int.
+     * <p>
+     * min.
+     * </p>
+     * 
+     * @param move
+     *            a {@link forge.Move} object.
+     * @param depth
+     *            a int.
      * @return a int.
      */
     public final int min(final Move move, final int depth) {
@@ -45,11 +58,16 @@ public abstract class Move {
     }
 
     /**
-     * <p>max.</p>
-     *
-     * @param move a {@link forge.Move} object.
-     * @param depth a int.
-     * @param first a boolean.
+     * <p>
+     * max.
+     * </p>
+     * 
+     * @param move
+     *            a {@link forge.Move} object.
+     * @param depth
+     *            a int.
+     * @param first
+     *            a boolean.
      * @return a int.
      */
     public final int max(final Move move, final int depth, final boolean first) {
@@ -66,7 +84,7 @@ public abstract class Move {
                 bestScore = score;
                 bestMove = v[i];
             }
-        } //for
+        } // for
         return score;
-    } //max()
+    } // max()
 }

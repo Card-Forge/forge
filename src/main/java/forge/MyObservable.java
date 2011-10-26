@@ -3,14 +3,18 @@ package forge;
 import java.util.Observable;
 
 /**
- * <p>MyObservable class.</p>
- *
+ * <p>
+ * MyObservable class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class MyObservable extends Observable {
     /**
-     * <p>updateObservers.</p>
+     * <p>
+     * updateObservers.
+     * </p>
      */
     public final void updateObservers() {
         this.setChanged();
@@ -25,4 +29,3 @@ public class MyObservable extends Observable {
         }
     }
 }
-
