@@ -4,7 +4,7 @@ package net.slightlymagic.braids.util;
  * This exception indicates the particular method (or part of a method) being
  * called has not been implemented; getting this exception is generally
  * considered a programming error.
- *
+ * 
  * Throwing this exception does not necessarily mean the method will be
  * implemented at any point in the future.
  */
@@ -22,10 +22,11 @@ public class NotImplementedError extends RuntimeException {
 
     /**
      * Indicates what has not been implemented.
-     *
-     * @param message  indicates what exactly has not been implemented.
-     * May include information about future plans to implement the described
-     * section of code.
+     * 
+     * @param message
+     *            indicates what exactly has not been implemented. May include
+     *            information about future plans to implement the described
+     *            section of code.
      */
     public NotImplementedError(final String message) {
         super(message);
@@ -33,9 +34,10 @@ public class NotImplementedError extends RuntimeException {
 
     /**
      * Like the no-arg constructor, but with a cause parameter.
-     *
-     * @param cause  the exception that caused this one to be thrown
-     *
+     * 
+     * @param cause
+     *            the exception that caused this one to be thrown
+     * 
      * @see #NotImplementedError()
      */
     public NotImplementedError(final Throwable cause) {
@@ -44,13 +46,15 @@ public class NotImplementedError extends RuntimeException {
 
     /**
      * Like the String constructor, but with a cause parameter.
-     *
-     * @param message  indicates what exactly has not been implemented.
-     * May include information about future plans to implement the described
-     * section of code.
-     *
-     * @param cause  the exception that caused this one to be thrown
-     *
+     * 
+     * @param message
+     *            indicates what exactly has not been implemented. May include
+     *            information about future plans to implement the described
+     *            section of code.
+     * 
+     * @param cause
+     *            the exception that caused this one to be thrown
+     * 
      * @see #NotImplementedError(String)
      */
     public NotImplementedError(final String message, final Throwable cause) {

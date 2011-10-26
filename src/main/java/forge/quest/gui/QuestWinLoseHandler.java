@@ -34,7 +34,6 @@ import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
 import forge.view.swing.WinLoseModeHandler;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * QuestWinLoseHandler.

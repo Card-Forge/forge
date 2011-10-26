@@ -37,7 +37,7 @@ public class WinLoseModeHandler {
      * Action performed when "quit" button is pressed in default win/lose UI.
      * 
      */
-    public final void actionOnQuit() {
+    public void actionOnQuit() {
         if (System.getenv("NG2") != null) {
             if (System.getenv("NG2").equalsIgnoreCase("true")) {
                 String[] argz = {};
@@ -69,7 +69,7 @@ public class WinLoseModeHandler {
      * with other game modes.
      * 
      */
-    public final void startNextRound() {
+    public void startNextRound() {
         AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
     }
 
@@ -82,7 +82,7 @@ public class WinLoseModeHandler {
      * 
      * @return true, if successful
      */
-    public final boolean populateCustomPanel() {
+    public boolean populateCustomPanel() {
         return false;
     }
 
