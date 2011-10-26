@@ -4,7 +4,7 @@ Types:Instant Trap
 Text:no text
 A:SP$Tap | Cost$ 2 U U | TargetMin$ 0 | TargetMax$ 2 | Tgt$ TgtC | SubAbility$ DBPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 A:SP$Tap | Cost$ U | CheckSVar$ GreenCreats | TargetMin$ 0 | TargetMax$ 2 | Tgt$ TgtC | SubAbility$ DBPump | SpellDescription$ If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay U rather than pay CARDNAME's mana cost.
-SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step.
+SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:GreenCreats:Count$ThisTurnEntered Battlefield Creature.Green+YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permafrost_trap.jpg

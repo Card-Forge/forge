@@ -4840,6 +4840,7 @@ res/cardsfolder/m/mana_prism.txt svneol=native#text/plain
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
 res/cardsfolder/m/mana_short.txt svneol=native#text/plain
 res/cardsfolder/m/mana_tithe.txt svneol=native#text/plain
+res/cardsfolder/m/mana_vapors.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mana_vault.txt svneol=native#text/plain
 res/cardsfolder/m/mana_vortex.txt svneol=native#text/plain
 res/cardsfolder/m/manabarbs.txt svneol=native#text/plain
