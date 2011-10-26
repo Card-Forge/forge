@@ -1,8 +1,13 @@
 package forge.card.trigger;
 
-import forge.Card;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
+import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
@@ -11,173 +16,225 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * <p>Abstract Trigger class.</p>
- *
+ * <p>
+ * Abstract Trigger class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public abstract class Trigger {
 
-    /** Constant <code>nextID=0</code> */
+    /** Constant <code>nextID=0</code>. */
     private static int nextID = 0;
 
     /**
-     * <p>resetIDs.</p>
+     * <p>
+     * resetIDs.
+     * </p>
      */
     public static void resetIDs() {
         nextID = 50000;
     }
 
+    /** The ID. */
     protected int ID = nextID++;
 
+    /** The name. */
     protected String name;
 
     /**
-     * <p>Getter for the field <code>name</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>name</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
     /**
-     * <p>Setter for the field <code>name</code>.</p>
-     *
-     * @param n a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>name</code>.
+     * </p>
+     * 
+     * @param n
+     *            a {@link java.lang.String} object.
      */
-    public void setName(String n) {
+    public final void setName(final String n) {
         name = n;
     }
 
     /**
-     * <p>setID.</p>
-     *
-     * @param id a int.
+     * <p>
+     * setID.
+     * </p>
+     * 
+     * @param id
+     *            a int.
      */
-    public void setID(int id) {
+    public final void setID(final int id) {
         ID = id;
     }
 
+    /** The map params. */
     protected HashMap<String, String> mapParams = new HashMap<String, String>();
 
     /**
-     * <p>Getter for the field <code>mapParams</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>mapParams</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<String, String> getMapParams() {
+    public final HashMap<String, String> getMapParams() {
         return mapParams;
     }
 
+    /** The run params. */
     protected Map<String, Object> runParams;
 
     /**
-     * <p>Setter for the field <code>runParams</code>.</p>
-     *
-     * @param runParams2 a {@link java.util.Map} object.
+     * <p>
+     * Setter for the field <code>runParams</code>.
+     * </p>
+     * 
+     * @param runParams2
+     *            a {@link java.util.Map} object.
      */
-    public void setRunParams(Map<String, Object> runParams2) {
+    public final void setRunParams(final Map<String, Object> runParams2) {
         runParams = runParams2;
     }
 
     /**
-     * <p>Getter for the field <code>runParams</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>runParams</code>.
+     * </p>
+     * 
      * @return a {@link java.util.Map} object.
      */
-    public Map<String, Object> getRunParams() {
+    public final Map<String, Object> getRunParams() {
         return runParams;
     }
 
+    /** The overriding ability. */
     protected SpellAbility overridingAbility = null;
 
     /**
-     * <p>Getter for the field <code>overridingAbility</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>overridingAbility</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getOverridingAbility() {
+    public final SpellAbility getOverridingAbility() {
         return overridingAbility;
     }
 
     /**
-     * <p>Setter for the field <code>overridingAbility</code>.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Setter for the field <code>overridingAbility</code>.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void setOverridingAbility(SpellAbility sa) {
+    public final void setOverridingAbility(final SpellAbility sa) {
         overridingAbility = sa;
     }
 
     private HashMap<String, Object> storedTriggeredObjects = null;
 
     /**
-     * <p>Setter for the field <code>storedTriggeredObjects</code>.</p>
-     *
-     * @param storedTriggeredObjects a {@link java.util.HashMap} object.
+     * <p>
+     * Setter for the field <code>storedTriggeredObjects</code>.
+     * </p>
+     * 
+     * @param storedTriggeredObjects
+     *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public void setStoredTriggeredObjects(HashMap<String, Object> storedTriggeredObjects) {
+    public final void setStoredTriggeredObjects(final HashMap<String, Object> storedTriggeredObjects) {
         this.storedTriggeredObjects = storedTriggeredObjects;
     }
 
     /**
-     * <p>Getter for the field <code>storedTriggeredObjects</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>storedTriggeredObjects</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public HashMap<String, Object> getStoredTriggeredObjects() {
+    public final HashMap<String, Object> getStoredTriggeredObjects() {
         return storedTriggeredObjects;
     }
 
+    /** The host card. */
     protected Card hostCard;
 
     /**
-     * <p>Getter for the field <code>hostCard</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>hostCard</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getHostCard() {
+    public final Card getHostCard() {
         return hostCard;
     }
 
     /**
-     * <p>Setter for the field <code>hostCard</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>hostCard</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
-    public void setHostCard(Card c) {
+    public final void setHostCard(final Card c) {
         hostCard = c;
     }
 
+    /** The is intrinsic. */
     protected boolean isIntrinsic;
 
-    public boolean getIsIntrinsic()
-    {
+    /**
+     * Gets the checks if is intrinsic.
+     * 
+     * @return the checks if is intrinsic
+     */
+    public final boolean getIsIntrinsic() {
         return isIntrinsic;
     }
 
-    public void setIsIntrinsic(boolean b)
-    {
+    /**
+     * Sets the checks if is intrinsic.
+     * 
+     * @param b
+     *            the new checks if is intrinsic
+     */
+    public final void setIsIntrinsic(final boolean b) {
         isIntrinsic = b;
     }
 
     /**
-     * <p>Constructor for Trigger.</p>
-     *
-     * @param n a {@link java.lang.String} object.
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger.
+     * </p>
+     * 
+     * @param n
+     *            a {@link java.lang.String} object.
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger(String n, HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger(final String n, final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         name = n;
         mapParams = new HashMap<String, String>();
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -189,12 +246,18 @@ public abstract class Trigger {
     }
 
     /**
-     * <p>Constructor for Trigger.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         mapParams = new HashMap<String, String>();
         for (Map.Entry<String, String> entry : params.entrySet()) {
             mapParams.put(entry.getKey(), entry.getValue());
@@ -205,22 +268,28 @@ public abstract class Trigger {
     }
 
     /**
-     * <p>toString.</p>
-     *
+     * <p>
+     * toString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
+    public final String toString() {
         if (mapParams.containsKey("TriggerDescription") && !isSuppressed()) {
             return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
-        } else return "";
+        } else {
+            return "";
+        }
     }
 
     /**
-     * <p>zonesCheck.</p>
-     *
+     * <p>
+     * zonesCheck.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean zonesCheck() {
+    public final boolean zonesCheck() {
         if (mapParams.containsKey("TriggerZones")) {
             List<Zone> triggerZones = new ArrayList<Zone>();
             for (String s : mapParams.get("TriggerZones").split(",")) {
@@ -238,11 +307,13 @@ public abstract class Trigger {
     }
 
     /**
-     * <p>phasesCheck.</p>
-     *
+     * <p>
+     * phasesCheck.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean phasesCheck() {
+    public final boolean phasesCheck() {
         if (mapParams.containsKey("TriggerPhases")) {
             String phases = mapParams.get("TriggerPhases");
 
@@ -264,23 +335,29 @@ public abstract class Trigger {
             }
         }
 
-        if (mapParams.containsKey("PlayerTurn"))
-            if (!AllZone.getPhase().isPlayerTurn(hostCard.getController()))
+        if (mapParams.containsKey("PlayerTurn")) {
+            if (!AllZone.getPhase().isPlayerTurn(hostCard.getController())) {
                 return false;
+            }
+        }
 
-        if (mapParams.containsKey("OpponentTurn"))
-            if (AllZone.getPhase().isPlayerTurn(hostCard.getController()))
+        if (mapParams.containsKey("OpponentTurn")) {
+            if (AllZone.getPhase().isPlayerTurn(hostCard.getController())) {
                 return false;
+            }
+        }
 
         return true;
     }
 
     /**
-     * <p>requirementsCheck.</p>
-     *
+     * <p>
+     * requirementsCheck.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean requirementsCheck() {
+    public final boolean requirementsCheck() {
         if (mapParams.containsKey("Metalcraft")) {
             if (mapParams.get("Metalcraft").equals("True") && !hostCard.getController().hasMetalcraft()) {
                 return false;
@@ -302,9 +379,12 @@ public abstract class Trigger {
         if (mapParams.containsKey("PlayersPoisoned")) {
             if (mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0) {
                 return false;
-            } else if (mapParams.get("PlayersPoisoned").equals("Opponent") && hostCard.getController().getOpponent().getPoisonCounters() == 0) {
+            } else if (mapParams.get("PlayersPoisoned").equals("Opponent")
+                    && hostCard.getController().getOpponent().getPoisonCounters() == 0) {
                 return false;
-            } else if (mapParams.get("PlayersPoisoned").equals("Each") && !(hostCard.getController().getPoisonCounters() != 0 && hostCard.getController().getPoisonCounters() != 0)) {
+            } else if (mapParams.get("PlayersPoisoned").equals("Each")
+                    && !(hostCard.getController().getPoisonCounters() != 0 && hostCard.getController()
+                            .getPoisonCounters() != 0)) {
                 return false;
             }
         }
@@ -325,13 +405,11 @@ public abstract class Trigger {
                 lifeCompare = mapParams.get("LifeAmount");
             }
 
-
             int right = 1;
             String rightString = lifeCompare.substring(2);
             try {
                 right = Integer.parseInt(rightString);
-            }
-            catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(rightString));
             }
 
@@ -420,7 +498,8 @@ public abstract class Trigger {
         }
 
         if (mapParams.containsKey("CheckSVar")) {
-            int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), mapParams.get("CheckSVar"), null);
+            int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), mapParams.get("CheckSVar"),
+                    null);
             String comparator = "GE1";
             if (mapParams.containsKey("SVarCompare")) {
                 comparator = mapParams.get("SVarCompare");
@@ -433,28 +512,28 @@ public abstract class Trigger {
             }
         }
 
-        if(mapParams.containsKey("ManaSpent")) {
-            if(!hostCard.getColorsPaid().contains(mapParams.get("ManaSpent"))) {
+        if (mapParams.containsKey("ManaSpent")) {
+            if (!hostCard.getColorsPaid().contains(mapParams.get("ManaSpent"))) {
                 return false;
             }
         }
-        
-        if(mapParams.containsKey("ManaNotSpent")) {
-            if(hostCard.getColorsPaid().contains(mapParams.get("ManaNotSpent"))) {
+
+        if (mapParams.containsKey("ManaNotSpent")) {
+            if (hostCard.getColorsPaid().contains(mapParams.get("ManaNotSpent"))) {
                 return false;
             }
         }
-        
-        if(mapParams.containsKey("WerewolfTransformCondition")) {
-            if(CardUtil.getLastTurnCast("Card", hostCard).size() > 0) {
+
+        if (mapParams.containsKey("WerewolfTransformCondition")) {
+            if (CardUtil.getLastTurnCast("Card", hostCard).size() > 0) {
                 return false;
             }
         }
-        
-        if(mapParams.containsKey("WerewolfUntransformCondition")) {
+
+        if (mapParams.containsKey("WerewolfUntransformCondition")) {
             CardList you = CardUtil.getLastTurnCast("Card.YouCtrl", hostCard);
             CardList opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", hostCard);
-            if(!(you.size() > 1 || opp.size() > 1)) {
+            if (!(you.size() > 1 || opp.size() > 1)) {
                 return false;
             }
         }
@@ -462,16 +541,20 @@ public abstract class Trigger {
         return true;
     }
 
-
     /**
-     * <p>matchesValid.</p>
-     *
-     * @param o a {@link java.lang.Object} object.
-     * @param valids an array of {@link java.lang.String} objects.
-     * @param srcCard a {@link forge.Card} object.
+     * <p>
+     * matchesValid.
+     * </p>
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
+     * @param valids
+     *            an array of {@link java.lang.String} objects.
+     * @param srcCard
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean matchesValid(Object o, String[] valids, Card srcCard) {
+    public final boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
         if (o instanceof Card) {
             Card c = (Card) o;
             return c.isValid(valids, srcCard.getController(), srcCard);
@@ -503,71 +586,115 @@ public abstract class Trigger {
     }
 
     /**
-     * <p>isSecondary.</p>
-     *
+     * <p>
+     * isSecondary.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isSecondary() {
+    public final boolean isSecondary() {
         if (mapParams.containsKey("Secondary")) {
-            if (mapParams.get("Secondary").equals("True"))
+            if (mapParams.get("Secondary").equals("True")) {
                 return true;
+            }
         }
         return false;
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Trigger))
+    public final boolean equals(final Object o) {
+        if (!(o instanceof Trigger)) {
             return false;
+        }
 
         return this.ID == ((Trigger) o).ID;
     }
 
     /**
-     * <p>performTest.</p>
-     *
-     * @param runParams2 a {@link java.util.HashMap} object.
+     * <p>
+     * performTest.
+     * </p>
+     * 
+     * @param runParams2
+     *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
     public abstract boolean performTest(java.util.Map<String, Object> runParams2);
 
     /**
-     * <p>getCopy.</p>
-     *
+     * <p>
+     * getCopy.
+     * </p>
+     * 
      * @return a {@link forge.card.trigger.Trigger} object.
      */
     public abstract Trigger getCopy();
 
     /**
-     * <p>setTriggeringObjects.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * setTriggeringObjects.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public abstract void setTriggeringObjects(SpellAbility sa);
-    
+
+    /** The temporary. */
     protected boolean temporary = false;
-    
-    public void setTemporary(boolean temp) {
-    	temporary = temp;
+
+    /**
+     * Sets the temporary.
+     * 
+     * @param temp
+     *            the new temporary
+     */
+    public final void setTemporary(final boolean temp) {
+        temporary = temp;
     }
-    
-    public boolean isTemporary() {
-    	return temporary;
+
+    /**
+     * Checks if is temporary.
+     * 
+     * @return true, if is temporary
+     */
+    public final boolean isTemporary() {
+        return temporary;
     }
-    
+
+    /** The suppressed. */
     protected boolean suppressed = false;
+
+    /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
-    
-    public void setSuppressed(boolean supp) {
+
+    /**
+     * Sets the suppressed.
+     * 
+     * @param supp
+     *            the new suppressed
+     */
+    public final void setSuppressed(final boolean supp) {
         suppressed = supp;
     }
-    
-    public void setTemporarilySuppressed(boolean supp) {
+
+    /**
+     * Sets the temporarily suppressed.
+     * 
+     * @param supp
+     *            the new temporarily suppressed
+     */
+    public final void setTemporarilySuppressed(final boolean supp) {
         temporarilySuppressed = supp;
     }
-    
-    public boolean isSuppressed() {
+
+    /**
+     * Checks if is suppressed.
+     * 
+     * @return true, if is suppressed
+     */
+    public final boolean isSuppressed() {
         return (suppressed || temporarilySuppressed);
     }
 }

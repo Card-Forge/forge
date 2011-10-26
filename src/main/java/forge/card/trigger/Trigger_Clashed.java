@@ -1,31 +1,39 @@
 package forge.card.trigger;
 
+import java.util.HashMap;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
-import java.util.HashMap;
-
 /**
- * <p>Trigger_Clashed class.</p>
- *
+ * <p>
+ * Trigger_Clashed class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Trigger_Clashed extends Trigger {
 
     /**
-     * <p>Constructor for Trigger_Clashed.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger_Clashed.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger_Clashed(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger_Clashed(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;
@@ -33,8 +41,9 @@ public class Trigger_Clashed extends Trigger {
         }
 
         if (mapParams.containsKey("Won")) {
-            if (!mapParams.get("Won").equals(runParams2.get("Won")))
+            if (!mapParams.get("Won").equals(runParams2.get("Won"))) {
                 return false;
+            }
         }
 
         return true;
@@ -42,7 +51,7 @@ public class Trigger_Clashed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public Trigger getCopy() {
+    public final Trigger getCopy() {
         Trigger copy = new Trigger_Clashed(mapParams, hostCard, isIntrinsic);
         if (overridingAbility != null) {
             copy.setOverridingAbility(overridingAbility);
@@ -55,7 +64,7 @@ public class Trigger_Clashed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        //No triggered-variables for you :(
+    public void setTriggeringObjects(final SpellAbility sa) {
+        // No triggered-variables for you :(
     }
 }

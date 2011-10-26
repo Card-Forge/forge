@@ -1,34 +1,35 @@
 package forge.card.trigger;
 
-import forge.Card;
-import forge.AllZone;
-import forge.AllZoneUtil;
-import forge.Constant.Zone;
-import forge.Constant;
-import forge.Player;
-import forge.CardList;
-import forge.Command;
-import forge.CommandArgs;
-import forge.GameActionUtil;
-import forge.ComputerUtil;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.abilityFactory.AbilityFactory_Charm;
-import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Sub;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.SpellAbility_Restriction;
-import forge.card.spellability.Target;
-import forge.gui.input.Input;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.Command;
+import forge.CommandArgs;
+import forge.ComputerUtil;
+import forge.Constant.Zone;
+import forge.GameActionUtil;
+import forge.Player;
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityFactory.AbilityFactory_Charm;
+import forge.card.cost.Cost;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.Target;
+import forge.gui.input.Input;
+
 /**
- * <p>TriggerHandler class.</p>
- *
+ * <p>
+ * TriggerHandler class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -38,96 +39,121 @@ public class TriggerHandler {
 
     private ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
 
-    public void cleanUpTemporaryTriggers() {
+    /**
+     * Clean up temporary triggers.
+     */
+    public final void cleanUpTemporaryTriggers() {
         CardList absolutelyAllCards = new CardList();
         absolutelyAllCards.addAll(AllZone.getHumanPlayer().getAllCards());
         absolutelyAllCards.addAll(AllZone.getComputerPlayer().getAllCards());
-        
-        for(Card c : absolutelyAllCards) {
-            for(int i=0;i< c.getTriggers().size();i++) {
-                if(c.getTriggers().get(i).isTemporary()) {
+
+        for (Card c : absolutelyAllCards) {
+            for (int i = 0; i < c.getTriggers().size(); i++) {
+                if (c.getTriggers().get(i).isTemporary()) {
                     c.getTriggers().remove(i);
                     i--;
                 }
             }
         }
-        for(Card c : absolutelyAllCards) {
-            for(int i=0;i< c.getTriggers().size();i++) {
+        for (Card c : absolutelyAllCards) {
+            for (int i = 0; i < c.getTriggers().size(); i++) {
                 c.getTriggers().get(i).setTemporarilySuppressed(false);
             }
         }
-        
+
     }
-    
+
     /**
-     * <p>registerDelayedTrigger.</p>
-     *
-     * @param trig a {@link forge.card.trigger.Trigger} object.
+     * <p>
+     * registerDelayedTrigger.
+     * </p>
+     * 
+     * @param trig
+     *            a {@link forge.card.trigger.Trigger} object.
      */
     public final void registerDelayedTrigger(final Trigger trig) {
         delayedTriggers.add(trig);
     }
-    
+
     /**
-     * <p>suppressMode.</p>
-     *
-     * @param mode a {@link java.lang.String} object.
+     * <p>
+     * suppressMode.
+     * </p>
+     * 
+     * @param mode
+     *            a {@link java.lang.String} object.
      */
     public final void suppressMode(final String mode) {
         suppressedModes.add(mode);
     }
 
     /**
-     * <p>clearSuppression.</p>
-     *
-     * @param mode a {@link java.lang.String} object.
+     * <p>
+     * clearSuppression.
+     * </p>
+     * 
+     * @param mode
+     *            a {@link java.lang.String} object.
      */
     public final void clearSuppression(final String mode) {
         suppressedModes.remove(mode);
     }
 
     /**
-     * <p>parseTrigger.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param trigParse a {@link java.lang.String} object.
-     * @param host a {@link forge.Card} object.
-     * @param intrinsic a boolean.
+     * <p>
+     * parseTrigger.
+     * </p>
+     * 
+     * @param name
+     *            a {@link java.lang.String} object.
+     * @param trigParse
+     *            a {@link java.lang.String} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(final String name, final String trigParse,
-            final Card host, final boolean intrinsic)
-    {
+    public static Trigger parseTrigger(final String name, final String trigParse, final Card host,
+            final boolean intrinsic) {
         Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
         ret.setName(name);
         return ret;
     }
 
     /**
-     * <p>parseTrigger.</p>
-     *
-     * @param trigParse a {@link java.lang.String} object.
-     * @param host a {@link forge.Card} object.
-     * @param intrinsic a boolean.
+     * <p>
+     * parseTrigger.
+     * </p>
+     * 
+     * @param trigParse
+     *            a {@link java.lang.String} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic)
-    {
+    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
         HashMap<String, String> mapParams = parseParams(trigParse);
         return parseTrigger(mapParams, host, intrinsic);
     }
 
     /**
-     * <p>parseTrigger.</p>
-     *
-     * @param mapParams a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
-     * @param intrinsic a boolean.
+     * <p>
+     * parseTrigger.
+     * </p>
+     * 
+     * @param mapParams
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
     public static Trigger parseTrigger(final HashMap<String, String> mapParams,
-            final Card host, final boolean intrinsic)
-    {
+            final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
         String mode = mapParams.get("Mode");
@@ -195,9 +221,12 @@ public class TriggerHandler {
     }
 
     /**
-     * <p>parseParams.</p>
-     *
-     * @param trigParse a {@link java.lang.String} object.
+     * <p>
+     * parseParams.
+     * </p>
+     * 
+     * @param trigParse
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.HashMap} object.
      */
     private static HashMap<String, String> parseParams(final String trigParse) {
@@ -232,28 +261,32 @@ public class TriggerHandler {
         return mapParams;
     }
 
-
     /**
-     * <p>runTrigger.</p>
-     *
-     * @param mode a {@link java.lang.String} object.
-     * @param runParams a {@link java.util.Map} object.
+     * <p>
+     * runTrigger.
+     * </p>
+     * 
+     * @param mode
+     *            a {@link java.lang.String} object.
+     * @param runParams
+     *            a {@link java.util.Map} object.
      */
     public final void runTrigger(final String mode, final Map<String, Object> runParams) {
         if (suppressedModes.contains(mode)) {
             return;
         }
-        
+
         Player playerAP = AllZone.getPhase().getPlayerTurn();
-        
-        //This is done to allow the list of triggers to be modified while triggers are running.
+
+        // This is done to allow the list of triggers to be modified while
+        // triggers are running.
         ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
         CardList allCards;
-        
-        //AP
+
+        // AP
         allCards = playerAP.getAllCards();
-        for(Card c : allCards) {
-            for(Trigger t : c.getTriggers()) {
+        for (Card c : allCards) {
+            for (Trigger t : c.getTriggers()) {
                 runSingleTrigger(t, mode, runParams);
             }
         }
@@ -268,10 +301,10 @@ public class TriggerHandler {
             }
         }
 
-        //NAP
+        // NAP
         allCards = playerAP.getOpponent().getAllCards();
-        for(Card c : allCards) {
-            for(Trigger t : c.getTriggers()) {
+        for (Card c : allCards) {
+            for (Trigger t : c.getTriggers()) {
                 runSingleTrigger(t, mode, runParams);
             }
         }
@@ -287,68 +320,77 @@ public class TriggerHandler {
         }
     }
 
-    //Checks if the conditions are right for a single trigger to go off, and runs it if so.
-    //Return true if the trigger went off, false otherwise.
+    // Checks if the conditions are right for a single trigger to go off, and
+    // runs it if so.
+    // Return true if the trigger went off, false otherwise.
     /**
-     * <p>runSingleTrigger.</p>
-     *
-     * @param regtrig a {@link forge.card.trigger.Trigger} object.
-     * @param mode a {@link java.lang.String} object.
-     * @param runParams a {@link java.util.HashMap} object.
+     * <p>
+     * runSingleTrigger.
+     * </p>
+     * 
+     * @param regtrig
+     *            a {@link forge.card.trigger.Trigger} object.
+     * @param mode
+     *            a {@link java.lang.String} object.
+     * @param runParams
+     *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    private boolean runSingleTrigger(final Trigger regtrig, final String mode, final Map<String, Object> runParams) {
+    private boolean runSingleTrigger(final Trigger regtrig,
+            final String mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
-        
+
         if (!params.get("Mode").equals(mode)) {
-            return false; //Not the right mode.
+            return false; // Not the right mode.
         }
         if (!regtrig.zonesCheck()) {
-            return false; //Host card isn't where it needs to be.
+            return false; // Host card isn't where it needs to be.
         }
         if (!regtrig.phasesCheck()) {
-            return false; //It's not the right phase to go off.
+            return false; // It's not the right phase to go off.
         }
         if (!regtrig.requirementsCheck()) {
-            return false; //Conditions aren't right.
+            return false; // Conditions aren't right.
         }
         if (regtrig.getHostCard().isFaceDown() && regtrig.getIsIntrinsic()) {
-            return false; //Morphed cards only have pumped triggers go off.
+            return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof Trigger_Always) {
             if (AllZone.getStack().hasStateTrigger(regtrig.ID)) {
-                return false; //State triggers that are already on the stack don't trigger again.
+                return false; // State triggers that are already on the stack
+                              // don't trigger again.
             }
         }
         if (!regtrig.performTest(runParams)) {
-                return false; //Test failed.
+            return false; // Test failed.
         }
         if (regtrig.isSuppressed()) {
-            return false; //Trigger removed by effect
+            return false; // Trigger removed by effect
         }
 
-        //Torpor Orb check
+        // Torpor Orb check
         CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
 
-        if(torporOrbs.size() != 0)
-        {
-            if(params.containsKey("Destination"))
-            {
-                if ((params.get("Destination").equals("Battlefield") || params.get("Destination").equals("Any")) && mode.equals("ChangesZone") && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
-                {
+        if (torporOrbs.size() != 0) {
+            if (params.containsKey("Destination")) {
+                if ((params.get("Destination").equals("Battlefield") || params.get("Destination").equals("Any"))
+                        && mode.equals("ChangesZone")
+                        && ((params.get("ValidCard").contains("Creature"))
+                                || (params.get("ValidCard").contains("Self") && regtrig
+                                .getHostCard().isCreature()))) {
+                    return false;
+                }
+            } else {
+                if (mode.equals("ChangesZone")
+                        && ((params.get("ValidCard").contains("Creature"))
+                                || (params.get("ValidCard").contains("Self") && regtrig
+                                .getHostCard().isCreature()))) {
                     return false;
                 }
             }
-            else
-            {
-                if (mode.equals("ChangesZone") && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig.getHostCard().isCreature() )))
-                {
-                    return false;
-                }
-            }
-            
-        }//Torpor Orb check
-        
+
+        } // Torpor Orb check
+
         final Player[] decider = new Player[1];
 
         // Any trigger should cause the phase not to skip
@@ -356,7 +398,7 @@ public class TriggerHandler {
 
         regtrig.setRunParams(runParams);
 
-        //All tests passed, execute ability.
+        // All tests passed, execute ability.
         if (regtrig instanceof Trigger_TapsForMana) {
             Ability_Mana abMana = (Ability_Mana) runParams.get("Ability_Mana");
             if (null != abMana) {
@@ -394,13 +436,13 @@ public class TriggerHandler {
 
         sa[0].setActivatingPlayer(host.getController());
         sa[0].setStackDescription(sa[0].toString());
-        //TODO - for Charms to supports AI, this needs to be removed
+        // TODO - for Charms to supports AI, this needs to be removed
         if (sa[0].getActivatingPlayer().isHuman()) {
             AbilityFactory_Charm.setupCharmSAs(sa[0]);
         }
         boolean mand = false;
         if (params.containsKey("OptionalDecider")) {
-        	sa[0].setOptionalTrigger(true);
+            sa[0].setOptionalTrigger(true);
             mand = false;
             decider[0] = AbilityFactory.getDefinedPlayers(host, params.get("OptionalDecider"), sa[0]).get(0);
         } else {
@@ -418,9 +460,12 @@ public class TriggerHandler {
         }
         final boolean isMandatory = mand;
 
-        //Wrapper ability that checks the requirements again just before resolving, for intervening if clauses.
-        //Yes, it must wrap ALL SpellAbility methods in order to handle possible corner cases.
-        //(The trigger can have a hardcoded OverridingAbility which can make use of any of the methods)
+        // Wrapper ability that checks the requirements again just before
+        // resolving, for intervening if clauses.
+        // Yes, it must wrap ALL SpellAbility methods in order to handle
+        // possible corner cases.
+        // (The trigger can have a hardcoded OverridingAbility which can make
+        // use of any of the methods)
         final Ability wrapperAbility = new Ability(regtrig.getHostCard(), "0") {
 
             @Override
@@ -429,7 +474,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setPaidHash(HashMap<String, CardList> hash) {
+            public void setPaidHash(final HashMap<String, CardList> hash) {
                 sa[0].setPaidHash(hash);
             }
 
@@ -439,17 +484,17 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setPaidList(CardList list, String str) {
+            public void setPaidList(final CardList list, final String str) {
                 sa[0].setPaidList(list, str);
             }
 
             @Override
-            public CardList getPaidList(String str) {
+            public CardList getPaidList(final String str) {
                 return sa[0].getPaidList(str);
             }
 
             @Override
-            public void addCostToHashList(Card c, String str) {
+            public void addCostToHashList(final Card c, final String str) {
                 sa[0].addCostToHashList(c, str);
             }
 
@@ -464,22 +509,22 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setAllTriggeringObjects(HashMap<String, Object> triggeredObjects) {
+            public void setAllTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
                 sa[0].setAllTriggeringObjects(triggeredObjects);
             }
 
             @Override
-            public void setTriggeringObject(String type, Object o) {
+            public void setTriggeringObject(final String type, final Object o) {
                 sa[0].setTriggeringObject(type, o);
             }
 
             @Override
-            public Object getTriggeringObject(String type) {
+            public Object getTriggeringObject(final String type) {
                 return sa[0].getTriggeringObject(type);
             }
 
             @Override
-            public boolean hasTriggeringObject(String type) {
+            public boolean hasTriggeringObject(final String type) {
                 return sa[0].hasTriggeringObject(type);
             }
 
@@ -509,7 +554,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return sa[0].doTrigger(mandatory);
             }
 
@@ -701,166 +746,166 @@ public class TriggerHandler {
             @Override
             public void resetOnceResolved() {
                 // Fixing an issue with Targeting + Paying Mana
-                //sa[0].resetOnceResolved();
+                // sa[0].resetOnceResolved();
             }
 
             @Override
-            public void setAbilityFactory(AbilityFactory af) {
+            public void setAbilityFactory(final AbilityFactory af) {
                 sa[0].setAbilityFactory(af);
             }
 
             @Override
-            public void setActivatingPlayer(Player player) {
+            public void setActivatingPlayer(final Player player) {
                 sa[0].setActivatingPlayer(player);
             }
 
             @Override
-            public void setAdditionalManaCost(String cost) {
+            public void setAdditionalManaCost(final String cost) {
                 sa[0].setAdditionalManaCost(cost);
             }
 
             @Override
-            public void setAfterPayMana(Input in) {
+            public void setAfterPayMana(final Input in) {
                 sa[0].setAfterPayMana(in);
             }
 
             @Override
-            public void setAfterResolve(Input in) {
+            public void setAfterResolve(final Input in) {
                 sa[0].setAfterResolve(in);
             }
 
             @Override
-            public void setBeforePayMana(Input in) {
+            public void setBeforePayMana(final Input in) {
                 sa[0].setBeforePayMana(in);
             }
 
             @Override
-            public void setBeforePayManaAI(Command c) {
+            public void setBeforePayManaAI(final Command c) {
                 sa[0].setBeforePayManaAI(c);
             }
 
             @Override
-            public void setCancelCommand(Command cancelCommand) {
+            public void setCancelCommand(final Command cancelCommand) {
                 sa[0].setCancelCommand(cancelCommand);
             }
 
             @Override
-            public void setChooseTargetAI(CommandArgs c) {
+            public void setChooseTargetAI(final CommandArgs c) {
                 sa[0].setChooseTargetAI(c);
             }
 
             @Override
-            public void setDescription(String s) {
+            public void setDescription(final String s) {
                 sa[0].setDescription(s);
             }
 
             @Override
-            public void setFlashBackAbility(boolean flashBackAbility) {
+            public void setFlashBackAbility(final boolean flashBackAbility) {
                 sa[0].setFlashBackAbility(flashBackAbility);
             }
 
             @Override
-            public void setIsBuyBackAbility(boolean b) {
+            public void setIsBuyBackAbility(final boolean b) {
                 sa[0].setIsBuyBackAbility(b);
             }
 
             @Override
-            public void setIsCycling(boolean b) {
+            public void setIsCycling(final boolean b) {
                 sa[0].setIsCycling(b);
             }
 
             @Override
-            public void setIsMultiKicker(boolean b) {
+            public void setIsMultiKicker(final boolean b) {
                 sa[0].setIsMultiKicker(b);
             }
 
             @Override
-            public void setIsReplicate(boolean b) {
+            public void setIsReplicate(final boolean b) {
                 sa[0].setIsReplicate(b);
             }
 
             @Override
-            public void setIsXCost(boolean b) {
+            public void setIsXCost(final boolean b) {
                 sa[0].setIsXCost(b);
             }
 
             @Override
-            public void setKickerAbility(boolean kab) {
+            public void setKickerAbility(final boolean kab) {
                 sa[0].setKickerAbility(kab);
             }
 
             @Override
-            public void setKothThirdAbility(boolean kothThirdAbility) {
+            public void setKothThirdAbility(final boolean kothThirdAbility) {
                 sa[0].setKothThirdAbility(kothThirdAbility);
             }
 
             @Override
-            public void setManaCost(String cost) {
+            public void setManaCost(final String cost) {
                 sa[0].setManaCost(cost);
             }
 
             @Override
-            public void setMultiKickerManaCost(String cost) {
+            public void setMultiKickerManaCost(final String cost) {
                 sa[0].setMultiKickerManaCost(cost);
             }
 
             @Override
-            public void setReplicateManaCost(String cost) {
+            public void setReplicateManaCost(final String cost) {
                 sa[0].setReplicateManaCost(cost);
             }
 
             @Override
-            public void setPayCosts(Cost abCost) {
+            public void setPayCosts(final Cost abCost) {
                 sa[0].setPayCosts(abCost);
             }
 
             @Override
-            public void setRestrictions(SpellAbility_Restriction restrict) {
+            public void setRestrictions(final SpellAbility_Restriction restrict) {
                 sa[0].setRestrictions(restrict);
             }
 
             @Override
-            public void setSourceCard(Card c) {
+            public void setSourceCard(final Card c) {
                 sa[0].setSourceCard(c);
             }
 
             @Override
-            public void setStackDescription(String s) {
+            public void setStackDescription(final String s) {
                 sa[0].setStackDescription(s);
             }
 
             @Override
-            public void setSubAbility(Ability_Sub subAbility) {
+            public void setSubAbility(final Ability_Sub subAbility) {
                 sa[0].setSubAbility(subAbility);
             }
 
             @Override
-            public void setTarget(Target tgt) {
+            public void setTarget(final Target tgt) {
                 sa[0].setTarget(tgt);
             }
 
             @Override
-            public void setTargetCard(Card card) {
+            public void setTargetCard(final Card card) {
                 sa[0].setTargetCard(card);
             }
 
             @Override
-            public void setTargetList(CardList list) {
+            public void setTargetList(final CardList list) {
                 sa[0].setTargetList(list);
             }
 
             @Override
-            public void setTargetPlayer(Player p) {
+            public void setTargetPlayer(final Player p) {
                 sa[0].setTargetPlayer(p);
             }
 
             @Override
-            public void setType(String s) {
+            public void setType(final String s) {
                 sa[0].setType(s);
             }
 
             @Override
-            public void setXManaCost(String cost) {
+            public void setXManaCost(final String cost) {
                 sa[0].setXManaCost(cost);
             }
 
@@ -870,7 +915,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setSourceTrigger(int ID) {
+            public void setSourceTrigger(final int ID) {
                 sa[0].setSourceTrigger(ID);
             }
 
@@ -878,23 +923,26 @@ public class TriggerHandler {
             public int getSourceTrigger() {
                 return sa[0].getSourceTrigger();
             }
-            
+
             @Override
-            public void setOptionalTrigger(boolean b) {
-            	sa[0].setOptionalTrigger(b);
-            }
-            
-            @Override
-            public boolean isOptionalTrigger() {
-            	return sa[0].isOptionalTrigger();
+            public void setOptionalTrigger(final boolean b) {
+                sa[0].setOptionalTrigger(b);
             }
 
-            ////////////////////////////////////////
-            //THIS ONE IS ALL THAT MATTERS
-            ////////////////////////////////////////
+            @Override
+            public boolean isOptionalTrigger() {
+                return sa[0].isOptionalTrigger();
+            }
+
+            // //////////////////////////////////////
+            // THIS ONE IS ALL THAT MATTERS
+            // //////////////////////////////////////
             @Override
             public void resolve() {
-                if (!(regtrig instanceof Trigger_Always)) //State triggers don't do the whole "Intervening If" thing.
+                if (!(regtrig instanceof Trigger_Always)) // State triggers
+                                                          // don't do the whole
+                                                          // "Intervening If"
+                                                          // thing.
                 {
                     if (!regtrig.requirementsCheck()) {
                         return;
@@ -903,20 +951,17 @@ public class TriggerHandler {
 
                 if (decider[0] != null) {
                     if (decider[0].isHuman()) {
-                        if(triggersAlwaysAccept.contains(getSourceTrigger()))
-                        {
-                            //No need to do anything.
-                        }
-                        else if(triggersAlwaysDecline.contains(getSourceTrigger()))
-                        {
+                        if (triggersAlwaysAccept.contains(getSourceTrigger())) {
+                            // No need to do anything.
+                        } else if (triggersAlwaysDecline.contains(getSourceTrigger())) {
                             return;
-                        }
-                        else
-                        {
+                        } else {
                             StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-                            buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
+                            buildQuestion.append(regtrig.getHostCard().getName()).append("(")
+                                    .append(regtrig.getHostCard().getUniqueNumber()).append(")?");
                             buildQuestion.append("\r\n(");
-                            buildQuestion.append(params.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+                            buildQuestion.append(params.get("TriggerDescription").replace("CARDNAME",
+                                    regtrig.getHostCard().getName()));
                             buildQuestion.append(")");
                             if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
                                 return;
@@ -931,19 +976,22 @@ public class TriggerHandler {
                 }
 
                 if (sa[0].getSourceCard().getController().isHuman()) {
-                    //Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
-                    //System.out.println("Trigger resolving for "+mode+".  Card = "+src);
+                    // Card src =
+                    // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
+                    // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
                     AllZone.getGameAction().playSpellAbility_NoStack(sa[0], true);
                 } else {
-                    // commented out because i don't think this should be called again here
-                    //sa[0].doTrigger(isMandatory);
+                    // commented out because i don't think this should be called
+                    // again here
+                    // sa[0].doTrigger(isMandatory);
                     ComputerUtil.playNoStack(sa[0]);
                 }
 
-                //Add eventual delayed trigger.
+                // Add eventual delayed trigger.
                 if (params.containsKey("DelayedTrigger")) {
                     String sVarName = params.get("DelayedTrigger");
-                    Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(sVarName), regtrig.getHostCard(), true);
+                    Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(sVarName),
+                            regtrig.getHostCard(), true);
                     deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
                     registerDelayedTrigger(deltrig);
                 }
@@ -953,70 +1001,95 @@ public class TriggerHandler {
         wrapperAbility.setMandatory(isMandatory);
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         /*
-           if(host.getController().isHuman())
-           {
-               AllZone.getGameAction().playSpellAbility(wrapperAbility);
-           }
-           else
-           {
-               wrapperAbility.doTrigger(isMandatory);
-               ComputerUtil.playStack(wrapperAbility);
-           }
-            */
+         * if(host.getController().isHuman()) {
+         * AllZone.getGameAction().playSpellAbility(wrapperAbility); } else {
+         * wrapperAbility.doTrigger(isMandatory);
+         * ComputerUtil.playStack(wrapperAbility); }
+         */
 
-        //Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
-        //System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
+        // Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
+        // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (params.containsKey("Static") && params.get("Static").equals("True")) {
             AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility, false);
-        }
-        else {
+        } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         return true;
     }
-    
+
     private final ArrayList<Integer> triggersAlwaysAccept = new ArrayList<Integer>();
     private final ArrayList<Integer> triggersAlwaysDecline = new ArrayList<Integer>();
-    
-    public void setAlwaysAcceptTrigger(final int trigID) {
-        if(triggersAlwaysDecline.contains(trigID))
-        {
-            triggersAlwaysDecline.remove((Object)trigID);
+
+    /**
+     * Sets the always accept trigger.
+     * 
+     * @param trigID
+     *            the new always accept trigger
+     */
+    public final void setAlwaysAcceptTrigger(final int trigID) {
+        if (triggersAlwaysDecline.contains(trigID)) {
+            triggersAlwaysDecline.remove((Object) trigID);
         }
-        
-        if(!triggersAlwaysAccept.contains(trigID))
-        {
+
+        if (!triggersAlwaysAccept.contains(trigID)) {
             triggersAlwaysAccept.add(trigID);
         }
     }
-    
-    public void setAlwaysDeclineTrigger(final int trigID) {
-        if(triggersAlwaysAccept.contains(trigID))
-        {
-            triggersAlwaysAccept.remove((Object)trigID);
+
+    /**
+     * Sets the always decline trigger.
+     * 
+     * @param trigID
+     *            the new always decline trigger
+     */
+    public final void setAlwaysDeclineTrigger(final int trigID) {
+        if (triggersAlwaysAccept.contains(trigID)) {
+            triggersAlwaysAccept.remove((Object) trigID);
         }
-        
-        if(!triggersAlwaysDecline.contains(trigID))
-        {
+
+        if (!triggersAlwaysDecline.contains(trigID)) {
             triggersAlwaysDecline.add(trigID);
         }
     }
-    
-    public void setAlwaysAskTrigger(final int trigID) {
-    	triggersAlwaysAccept.remove((Object)trigID);
-    	triggersAlwaysDecline.remove((Object)trigID);
+
+    /**
+     * Sets the always ask trigger.
+     * 
+     * @param trigID
+     *            the new always ask trigger
+     */
+    public final void setAlwaysAskTrigger(final int trigID) {
+        triggersAlwaysAccept.remove((Object) trigID);
+        triggersAlwaysDecline.remove((Object) trigID);
     }
-    
-    public boolean isAlwaysAccepted(final int trigID) {
+
+    /**
+     * Checks if is always accepted.
+     * 
+     * @param trigID
+     *            the trig id
+     * @return true, if is always accepted
+     */
+    public final boolean isAlwaysAccepted(final int trigID) {
         return triggersAlwaysAccept.contains(trigID);
     }
-    
-    public boolean isAlwaysDeclined(final int trigID) {
+
+    /**
+     * Checks if is always declined.
+     * 
+     * @param trigID
+     *            the trig id
+     * @return true, if is always declined
+     */
+    public final boolean isAlwaysDeclined(final int trigID) {
         return triggersAlwaysDecline.contains(trigID);
     }
-    
-    public void clearTriggerSettings() {
+
+    /**
+     * Clear trigger settings.
+     */
+    public final void clearTriggerSettings() {
         triggersAlwaysAccept.clear();
         triggersAlwaysDecline.clear();
     }

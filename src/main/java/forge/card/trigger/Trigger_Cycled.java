@@ -1,24 +1,31 @@
 package forge.card.trigger;
 
+import java.util.HashMap;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
-import java.util.HashMap;
-
 /**
- * <p>Trigger_Cycled class.</p>
- *
+ * <p>
+ * Trigger_Cycled class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Trigger_Cycled extends Trigger {
 
     /**
-     * <p>Constructor for Trigger_Cycled.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
-     * @param intrinsic a boolean
+     * <p>
+     * Constructor for Trigger_Cycled.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            a boolean
      */
     public Trigger_Cycled(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);

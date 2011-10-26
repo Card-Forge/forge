@@ -1,32 +1,40 @@
 package forge.card.trigger;
 
-import forge.Card;
-import forge.card.spellability.SpellAbility;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.Card;
+import forge.card.spellability.SpellAbility;
+
 /**
- * <p>Trigger_AttackerUnblocked class.</p>
- *
+ * <p>
+ * Trigger_AttackerUnblocked class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Trigger_AttackerUnblocked extends Trigger {
 
     /**
-     * <p>Constructor for Trigger_AttackerUnblocked.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger_AttackerUnblocked.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger_AttackerUnblocked(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger_AttackerUnblocked(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
             if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
@@ -38,7 +46,7 @@ public class Trigger_AttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public Trigger getCopy() {
+    public final Trigger getCopy() {
         Trigger copy = new Trigger_AttackerUnblocked(mapParams, hostCard, isIntrinsic);
         if (overridingAbility != null) {
             copy.setOverridingAbility(overridingAbility);
@@ -51,7 +59,7 @@ public class Trigger_AttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", runParams.get("Attacker"));
     }
 }

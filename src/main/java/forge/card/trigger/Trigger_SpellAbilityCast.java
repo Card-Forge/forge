@@ -1,5 +1,7 @@
 package forge.card.trigger;
 
+import java.util.HashMap;
+
 import forge.AllZone;
 import forge.Card;
 import forge.Player;
@@ -7,29 +9,35 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_StackInstance;
 
-import java.util.HashMap;
-
 /**
- * <p>Trigger_SpellAbilityCast class.</p>
- *
+ * <p>
+ * Trigger_SpellAbilityCast class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Trigger_SpellAbilityCast extends Trigger {
 
     /**
-     * <p>Constructor for Trigger_SpellAbilityCast.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger_SpellAbilityCast.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger_SpellAbilityCast(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger_SpellAbilityCast(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         SpellAbility SA = (SpellAbility) runParams2.get("CastSA");
         Card cast = SA.getSourceCard();
         SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(SA);
@@ -43,7 +51,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
                 return false;
             }
         } else if (mapParams.get("Mode").equals("SpellAbilityCast")) {
-            //Empty block for readability.
+            // Empty block for readability.
         }
 
         if (mapParams.containsKey("ActivatedOnly")) {
@@ -51,7 +59,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
                 return false;
             }
         }
-        
+
         if (mapParams.containsKey("ValidControllingPlayer")) {
             if (!matchesValid(cast.getController(), mapParams.get("ValidControllingPlayer").split(","), hostCard)) {
                 return false;
@@ -127,7 +135,9 @@ public class Trigger_SpellAbilityCast extends Trigger {
 
         if (mapParams.containsKey("NonTapCost")) {
             Cost cost = (Cost) (runParams2.get("Cost"));
-            if (cost.getTap()) return false;
+            if (cost.getTap()) {
+                return false;
+            }
         }
 
         return true;
@@ -135,7 +145,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public Trigger getCopy() {
+    public final Trigger getCopy() {
         Trigger copy = new Trigger_SpellAbilityCast(mapParams, hostCard, isIntrinsic);
         if (overridingAbility != null) {
             copy.setOverridingAbility(overridingAbility);
@@ -148,7 +158,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", ((SpellAbility) runParams.get("CastSA")).getSourceCard());
         sa.setTriggeringObject("SpellAbility", runParams.get("CastSA"));
         sa.setTriggeringObject("Player", runParams.get("Player"));

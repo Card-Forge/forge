@@ -1,32 +1,40 @@
 package forge.card.trigger;
 
+import java.util.HashMap;
+
 import forge.Card;
 import forge.Counters;
 import forge.card.spellability.SpellAbility;
 
-import java.util.HashMap;
-
 /**
- * <p>Trigger_CounterAdded class.</p>
- *
+ * <p>
+ * Trigger_CounterAdded class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Trigger_CounterAdded extends Trigger {
 
     /**
-     * <p>Constructor for Trigger_CounterAdded.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
-     * @param host a {@link forge.Card} object.
+     * <p>
+     * Constructor for Trigger_CounterAdded.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link forge.Card} object.
+     * @param intrinsic
+     *            the intrinsic
      */
-    public Trigger_CounterAdded(HashMap<String, String> params, Card host, boolean intrinsic) {
+    public Trigger_CounterAdded(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         Card addedTo = (Card) runParams2.get("Card");
         Counters addedType = (Counters) runParams2.get("CounterType");
 
@@ -48,7 +56,7 @@ public class Trigger_CounterAdded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public Trigger getCopy() {
+    public final Trigger getCopy() {
         Trigger copy = new Trigger_CounterAdded(mapParams, hostCard, isIntrinsic);
         if (overridingAbility != null) {
             copy.setOverridingAbility(overridingAbility);
@@ -61,7 +69,7 @@ public class Trigger_CounterAdded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", runParams.get("Card"));
     }
 }
