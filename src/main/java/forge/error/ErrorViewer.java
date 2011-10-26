@@ -1,11 +1,10 @@
 package forge.error;
 
-
 import static forge.properties.ForgeProps.getLocalized;
 import static forge.properties.ForgeProps.getProperty;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
-import static java.awt.event.KeyEvent.VK_S;
 import static java.awt.event.KeyEvent.VK_B;
+import static java.awt.event.KeyEvent.VK_S;
 import static javax.swing.JOptionPane.DEFAULT_OPTION;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -33,10 +32,10 @@ import javax.swing.KeyStroke;
 import forge.Singletons;
 import forge.properties.NewConstants;
 
-
 /**
- * The class ErrorViewer. Enables showing and saving error messages that occurred in forge.
- *
+ * The class ErrorViewer. Enables showing and saving error messages that
+ * occurred in forge.
+ * 
  * @author Clemens Koza
  * @version V1.0 02.08.2009
  */
@@ -58,20 +57,26 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static JDialog dlg = null;
 
     /**
-     * Shows an error dialog taking the exception's message as the error message.
-     *
-     * @param ex a {@link java.lang.Throwable} object.
+     * Shows an error dialog taking the exception's message as the error
+     * message.
+     * 
+     * @param ex
+     *            a {@link java.lang.Throwable} object.
      */
     public static void showError(final Throwable ex) {
         showError(ex, null);
     }
 
     /**
-     * Shows an error dialog creating the error message by a formatting operation.
-     *
-     * @param ex a {@link java.lang.Throwable} object.
-     * @param format a {@link java.lang.String} object.
-     * @param args a {@link java.lang.Object} object.
+     * Shows an error dialog creating the error message by a formatting
+     * operation.
+     * 
+     * @param ex
+     *            a {@link java.lang.Throwable} object.
+     * @param format
+     *            a {@link java.lang.String} object.
+     * @param args
+     *            a {@link java.lang.Object} object.
      */
     public static void showError(final Throwable ex, final String format, final Object... args) {
         if (ex == null) {
@@ -82,9 +87,11 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Shows an error dialog with the specified error message.
-     *
-     * @param ex a {@link java.lang.Throwable} object.
-     * @param message a {@link java.lang.String} object.
+     * 
+     * @param ex
+     *            a {@link java.lang.Throwable} object.
+     * @param message
+     *            a {@link java.lang.String} object.
      */
     public static void showError(final Throwable ex, final String message) {
         if (ex == null) {
@@ -100,9 +107,11 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Shows an error without an exception that caused it.
-     *
-     * @param format a {@link java.lang.String} object.
-     * @param args a {@link java.lang.Object} object.
+     * 
+     * @param format
+     *            a {@link java.lang.String} object.
+     * @param args
+     *            a {@link java.lang.Object} object.
      */
     public static void showError(final String format, final Object... args) {
         showError(String.format(format, args));
@@ -110,8 +119,9 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Shows an error without an exception that caused it.
-     *
-     * @param message a {@link java.lang.String} object.
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
      */
     public static void showError(final String message) {
         showError(new Exception(), message);
@@ -119,9 +129,11 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Shows an error message for all running threads.
-     *
-     * @param format a {@link java.lang.String} object.
-     * @param args a {@link java.lang.Object} object.
+     * 
+     * @param format
+     *            a {@link java.lang.String} object.
+     * @param args
+     *            a {@link java.lang.Object} object.
      */
     public static void showErrorAllThreads(final String format, final Object... args) {
         showErrorAllThreads(String.format(format, args));
@@ -129,8 +141,9 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Shows an error message for all running threads.
-     *
-     * @param message a {@link java.lang.String} object.
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
      */
     public static void showErrorAllThreads(final String message) {
         final StringWriter sw = new StringWriter();
@@ -141,9 +154,12 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     }
 
     /**
-     * <p>showDialog.</p>
-     *
-     * @param fullMessage a {@link java.lang.String} object.
+     * <p>
+     * showDialog.
+     * </p>
+     * 
+     * @param fullMessage
+     *            a {@link java.lang.String} object.
      */
     private static void showDialog(final String fullMessage) {
         JTextArea area = new JTextArea(fullMessage, 40, 90);
@@ -152,10 +168,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
 
-        //Button is not modified, String gets the automatic listener to hide the dialog
-        Object[] options = {
-                new JButton(new BugzAction(area)), new JButton(new SaveAction(area)), getLocalized(BUTTON_CLOSE),
-                new JButton(new ExitAction())};
+        // Button is not modified, String gets the automatic listener to hide
+        // the dialog
+        Object[] options = {new JButton(new BugzAction(area)), new JButton(new SaveAction(area)),
+                getLocalized(BUTTON_CLOSE), new JButton(new ExitAction())};
 
         JOptionPane pane = new JOptionPane(new JScrollPane(area), ERROR_MESSAGE, DEFAULT_OPTION, null, options,
                 options[1]);
@@ -167,10 +183,13 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
     /**
      * Prints the error message for the specified exception to the print writer.
-     *
-     * @param pw a {@link java.io.PrintWriter} object.
-     * @param ex a {@link java.lang.Throwable} object.
-     * @param message a {@link java.lang.String} object.
+     * 
+     * @param pw
+     *            a {@link java.io.PrintWriter} object.
+     * @param ex
+     *            a {@link java.lang.Throwable} object.
+     * @param message
+     *            a {@link java.lang.String} object.
      */
     private static void printError(final PrintWriter pw, final Throwable ex, final String message) {
         if (message != null) {
@@ -179,26 +198,27 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         ex.printStackTrace();
 
         pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL),
-                message != null ? message : ex.getMessage(),
-                Singletons.getModel().getBuildInfo().toPrettyString(),
+                message != null ? message : ex.getMessage(), Singletons.getModel().getBuildInfo().toPrettyString(),
                 System.getProperty(NAME_OS), System.getProperty(VERSION_OS), System.getProperty(ARCHITECTURE_OS),
                 System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
         ex.printStackTrace(pw);
     }
 
     /**
-     * Prints the error message to the print writer, showing all running threads' stack traces.
-     *
-     * @param pw a {@link java.io.PrintWriter} object.
-     * @param message a {@link java.lang.String} object.
+     * Prints the error message to the print writer, showing all running
+     * threads' stack traces.
+     * 
+     * @param pw
+     *            a {@link java.io.PrintWriter} object.
+     * @param message
+     *            a {@link java.lang.String} object.
      */
     private static void printError(final PrintWriter pw, final String message) {
         System.err.println(message);
 
-        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL), message,
-                Singletons.getModel().getBuildInfo().toPrettyString(),
-                System.getProperty(NAME_OS), System.getProperty(VERSION_OS), System.getProperty(ARCHITECTURE_OS),
-                System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
+        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL), message, Singletons.getModel()
+                .getBuildInfo().toPrettyString(), System.getProperty(NAME_OS), System.getProperty(VERSION_OS),
+                System.getProperty(ARCHITECTURE_OS), System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
         for (Entry<Thread, StackTraceElement[]> e : traces.entrySet()) {
             pw.println();
@@ -277,7 +297,6 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         public ExitAction() {
             super(getLocalized(BUTTON_EXIT));
         }
-
 
         public void actionPerformed(final ActionEvent e) {
             System.exit(0);
