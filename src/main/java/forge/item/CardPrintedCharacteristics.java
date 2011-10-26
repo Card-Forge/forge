@@ -1,34 +1,46 @@
 package forge.item;
 
-/** 
- * TODO: Write javadoc for this type.
+/**
  *
+ * 
  */
 public class CardPrintedCharacteristics {
     private String name;
     private String cardSet;
+
     /**
+     * Gets the name.
+     *
      * @return the name
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
+
     /**
+     * Sets the name.
+     *
      * @param name0 the name to set
      */
-    public void setName(String name0) {
-        this.name = name0; // TODO: Add 0 to parameter's name.
+    public final void setName(final String name0) {
+        this.name = name0; // TODO Add 0 to parameter's name.
     }
+
     /**
+     * Gets the card set.
+     *
      * @return the cardSet
      */
-    public String getCardSet() {
+    public final String getCardSet() {
         return cardSet;
     }
+
     /**
+     * Sets the card set.
+     *
      * @param cardSet0 the cardSet to set
      */
-    public void setCardSet(String cardSet0) {
+    public final void setCardSet(final String cardSet0) {
         this.cardSet = cardSet0; // TODO: Add 0 to parameter's name.
     }
 }

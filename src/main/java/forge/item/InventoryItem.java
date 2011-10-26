@@ -1,14 +1,29 @@
 package forge.item;
 
-/** 
- * Interface to define a player's inventory may hold.
- * Should include CardPrinted, Booster, Pets, Plants... etc
+/**
+ * Interface to define a player's inventory may hold. Should include
+ * CardPrinted, Booster, Pets, Plants... etc
  */
-public interface InventoryItem /* extends Comparable */ {
-    /** An inventory item has to provide a name. */
+public interface InventoryItem /* extends Comparable */{
+
+    /**
+     * An inventory item has to provide a name.
+     * 
+     * @return the name
+     */
     String getName();
-    /** An inventory item has to provide a picture. */
+
+    /**
+     * An inventory item has to provide a picture.
+     * 
+     * @return the image filename
+     */
     String getImageFilename();
-    /** Return type as a string */ 
+
+    /**
+     * Return type as a string.
+     * 
+     * @return the type
+     */
     String getType();
 }
