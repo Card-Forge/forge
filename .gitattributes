@@ -8721,6 +8721,7 @@ res/cardsfolder/u/urzas_blueprints.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_chalice.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_factory.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_guilt.txt svneol=native#text/plain
+res/cardsfolder/u/urzas_incubator.txt -text svneol=unset#text/plain
 res/cardsfolder/u/urzas_mine.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_power_plant.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_rage.txt svneol=native#text/plain
