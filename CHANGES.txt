@@ -150,6 +150,45 @@ Fixes/Features:
 - Added the keywords "If a card would be put into an opponent's graveyard from anywhere, exile it instead." and "If a card would be put into your graveyard from anywhere, exile it instead.".
 - Converted Leyline of the Void to script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- fixed some pet shop icon filenames
+- The big Multistate commit.
+* Alternate states can be viewed in all deckeditors.
+* Alternate states are downloaded by Download Set Card LQ Pictures automatically.
+* Multistate cards act correctly outside the battlefield.
+* SHOULD interact correctly with Clone / AF_CopyPermanent.
+* Innistrad booster pack composition is correct (9 Commons,3 Uncommons, 1 Rare/Mythic, 1 Doublefaced of any rarity)
+* oracleScript.py and setInfoScript.py are not working entirely correct for multistate cards, though the output is easily tweaked.
+- Fixed Garruk Relentless second ability cost.
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- Fixed Flip/Transform button not disappearing in deck edit when selecting non-flip/transform card after selecting flip/transform card.
+- Fixed text of Cunning Bandit / Azamuki, Treachery Incarnate
+- checkstyle
+- checkstyle
+- Commented out Change/Remove picture buttons from the CardPanel, hopefully fixes the Quest Deck Editor.
+- Fixed Crib Swap.
+- checkstyle
+- checkstyle
+- Fixing new Garruk's damage ability
+- Fixed typo in Garruk, the Veil-Cursed.
+- checkstyle
+- Removed Alternate faces from Quest reward pool.
+- Updated token download links for Garruk, the Veil Cursed and for Budoka Gardener // Dokai, Weaver of Life
+- checkstyle
+- Fixed Pyric Salamander.
+- Fixed how state triggers could go on the stack twice if they triggered within the same checkStateEffects "cycle". Fixes Garruk Relentless' Transform trigger.
+- Fixed other cases of double triggering and some code duplication.
+- Fixed Max's Cut&Paste Deck importer' interaction with alternate card faces.
+- checkstyle
+- checkstyle
+- checkstyle
+- Updated cardTemplateScript to include Innistrad
+- checkstyle
+- Fixed the mill function not using moveToGraveyard.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -209,6 +248,28 @@ Gorilla Titan
 Garruk's Horde
 Future Sight
 Magus of the Future
+Yawgmoth's Agenda
+Bushi Tenderfoot / Kenzo the Hardhearted
+Cloistered Youth / Unholy Fiend
+Daybreak Ranger / Nightfall Predator
+Garruk Relentless / Garruk, the Veil-Cursed
+Gatstaf Shepherd / Gatstaf Howler
+Moonmist
+Screeching Bat / Stalking Vampire
+Thraben Sentry / Thraben Militia
+Grizzled Outcasts / Krallenhorde Wantons
+Villagers of Estwald / Howlpack of Estwald
+Budoka Pupil / Ichiga, Who Topples Oaks
+Callow Jushi / Jaraku the Interloper
+Budoka Gardener / Dokai, Weaver of Life
+Cunning Bandit / Azamuki, Treachery Incarnate
+Faithful Squire / Kaiso, Memory of Loyalty
+Hired Muscle / Scarmaker
+Hanweir Watchkeep / Bane of Hanweir
+Reckless Waif / Merciless Predator
+Tormented Pariah / Rampaging Werewolf
+Erayo, Soratami Ascendant / Erayo's Essence
+Initiate of Blood / Goka the Unjust
 
 
 end
