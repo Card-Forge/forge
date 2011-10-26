@@ -4135,6 +4135,7 @@ res/cardsfolder/j/johtull_wurm.txt -text
 res/cardsfolder/j/join_the_ranks.txt svneol=native#text/plain
 res/cardsfolder/j/joiner_adept.txt svneol=native#text/plain
 res/cardsfolder/j/jokulhaups.txt svneol=native#text/plain
+res/cardsfolder/j/jolrael_empress_of_beasts.txt -text svneol=unset#text/plain
 res/cardsfolder/j/jolraels_centaur.txt svneol=native#text/plain
 res/cardsfolder/j/jolraels_favor.txt svneol=native#text/plain
 res/cardsfolder/j/jolt.txt svneol=native#text/plain
