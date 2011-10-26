@@ -2,50 +2,59 @@ package forge.view.swing;
 
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
-/** 
+/**
  * Creates an instance of BaseProgressMonitor that is used in the splash frame.
  * 
  * Not all mutators notify the view yet.
- *
+ * 
  */
 public class SplashProgressModel extends BaseProgressMonitor {
 
     private SplashProgressComponent currentView = null;
-    
+
     /**
-     * Constructor called with no arguments, indicating 1 phase
-     * and number of phase units assumed to be 1 also (can be updated later). 
-     * @param numPhases
+     * Constructor called with no arguments, indicating 1 phase and number of
+     * phase units assumed to be 1 also (can be updated later).
+     * 
      */
     public SplashProgressModel() {
-        super();        
+        super();
     }
-    
-    @Override
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#
+     * incrementUnitsCompletedThisPhase(long)
+     */
+
     /**
      * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#incrementUnitsCompletedThisPhase(long)
+     * @param numUnits long
      */
-    public void incrementUnitsCompletedThisPhase(long numUnits) {
+    @Override
+    public final void incrementUnitsCompletedThisPhase(final long numUnits) {
         super.incrementUnitsCompletedThisPhase(numUnits);
         getCurrentView().updateProgressBar();
     }
-    
+
     /**
-     * Gets view from which data is sent for display
+     * Gets view from which data is sent for display.
      * 
-     * @return
+     * @return the current view
      */
-    public SplashProgressComponent getCurrentView() {
+    public final SplashProgressComponent getCurrentView() {
         return currentView;
     }
 
     /**
-     * Sets view to which data is sent for display
+     * Sets view to which data is sent for display.
      * 
      * @param neoView
+     *            the new current view
      */
-    public void setCurrentView(SplashProgressComponent neoView) {
+    public final void setCurrentView(final SplashProgressComponent neoView) {
         currentView = neoView;
     }
-    
+
 }

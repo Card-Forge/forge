@@ -1,7 +1,65 @@
 package forge.view.swing;
 
+import static net.slightlymagic.braids.util.UtilFunctions.safeToString;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
+
+import net.miginfocom.swing.MigLayout;
+
 import com.esotericsoftware.minlog.Log;
-import forge.*;
+
+import forge.AllZone;
+import forge.Command;
+import forge.Constant;
+import forge.Constant_StringArrayList;
+import forge.FileUtil;
+import forge.GUI_ImportPicture;
+import forge.GuiDisplay4;
+import forge.GuiDownloadQuestImages;
+import forge.Gui_DownloadPictures_LQ;
+import forge.Gui_DownloadPrices;
+import forge.Gui_DownloadSetPictures_LQ;
+import forge.ImageCache;
+import forge.MyRandom;
+import forge.PlayerType;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -13,8 +71,8 @@ import forge.game.limited.CardPoolLimitation;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
-import forge.gui.deckeditor.DeckEditorDraft;
 import forge.gui.deckeditor.DeckEditorCommon;
+import forge.gui.deckeditor.DeckEditorDraft;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences;
@@ -25,21 +83,6 @@ import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.MENU;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.OPTIONS;
 import forge.quest.gui.QuestOptions;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
-import java.awt.Color;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.*;
-import java.util.List;
-
-import static net.slightlymagic.braids.util.UtilFunctions.safeToString;
 
 /*CHOPPIC*/
 
@@ -47,7 +90,7 @@ import static net.slightlymagic.braids.util.UtilFunctions.safeToString;
  * <p>
  * OldGuiNewGame class.
  * </p>
- *
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -82,14 +125,17 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
     // @SuppressWarnings("unused")
     // titledBorder2
-    /** Constant <code>newGuiCheckBox</code> */
+    /** Constant <code>newGuiCheckBox</code>. */
     // private static JCheckBox newGuiCheckBox = new JCheckBox("", true);
     /** Constant <code>smoothLandCheckBox</code>. */
     static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
     /** Constant <code>devModeCheckBox</code>. */
     static JCheckBox devModeCheckBox = new JCheckBox("", true);
 
+    /** The upld drft check box. */
     static JCheckBox upldDrftCheckBox = new JCheckBox("", true);
+
+    /** The foil random check box. */
     static JCheckBox foilRandomCheckBox = new JCheckBox("", true);
 
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
@@ -97,7 +143,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     /** Constant <code>removeSmallCreatures</code>. */
     public static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_SMALL));
-    
+
     /** Constant <code>removeArtifacts</code>. */
     public static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
@@ -179,7 +225,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         setupMenu();
         setVisible(true);
 
-        
         Log.WARN(); // set logging level to warn
         SwingUtilities.updateComponentTreeUI(this);
     }
@@ -198,15 +243,14 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION,
                 // DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
                 // CARD_SIZES_ACTION,
-                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, DOWNLOAD_ACTION_QUEST,
-                IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, BUGZ_REPORTER_ACTION,
-                ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION, EXIT_ACTION };
+                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ,
+                DOWNLOAD_ACTION_QUEST, IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION,
+                BUGZ_REPORTER_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION, EXIT_ACTION };
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for (Action a : actions) {
             menu.add(a);
             if (a.equals(LOOK_AND_FEEL_ACTION) || a.equals(IMPORT_PICTURE) || a.equals(CARD_STACK_OFFSET_ACTION)
-                    || a.equals(ErrorViewer.ALL_THREADS_ACTION))
-            {
+                    || a.equals(ErrorViewer.ALL_THREADS_ACTION)) {
                 menu.addSeparator();
             }
         }
@@ -215,21 +259,21 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         // new stuff
         JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.TITLE));
-        
+
         generatedDeck.add(removeSmallCreatures);
-        removeSmallCreatures.addActionListener(new ActionListener () {
-           public void actionPerformed(final ActionEvent arg0) {
-               Singletons.getModel().getPreferences().deckGenRmvSmall = removeSmallCreatures.isSelected();
-           }
+        removeSmallCreatures.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences().deckGenRmvSmall = removeSmallCreatures.isSelected();
+            }
         });
-        
+
         generatedDeck.add(removeArtifacts);
-        removeArtifacts.addActionListener(new ActionListener () {
+        removeArtifacts.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences().deckGenRmvArtifacts = removeArtifacts.isSelected();
             }
-         });
-        
+        });
+
         JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(OPTIONS.TITLE));
         optionsMenu.add(generatedDeck);
 
@@ -265,7 +309,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * getDecks.
      * </p>
-     *
+     * 
      * @return a {@link java.util.List} object.
      */
     private List<Deck> getDecks() {
@@ -335,8 +379,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         else {
-            throw new IllegalStateException(
-                    "choice <<" + safeToString(o) + ">> does not equal any of the sealedTypes.");
+            throw new IllegalStateException("choice <<" + safeToString(o)
+                    + ">> does not equal any of the sealedTypes.");
         }
 
         ItemPool<CardPrinted> sDeck = sd.getCardpool();
@@ -354,15 +398,19 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             String sDeckName = JOptionPane.showInputDialog(null,
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_MSG),
                     ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
-            
+
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
 
             Constant.Runtime.HumanDeck[0] = deck;
             Constant.Runtime.gameType = GameType.Sealed;
 
-            //Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
-            Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList()); // AI will use different cardpool
+            // Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList()); // AI
+                                                                              // will
+                                                                              // use
+                                                                              // different
+                                                                              // cardpool
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
@@ -370,7 +418,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             updateDeckComboBoxes();
 
             deckEditorButtonActionPerformed(GameType.Sealed, deck);
-            
 
             Constant.Runtime.ComputerDeck[0] = aiDeck;
         } else {
@@ -413,7 +460,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * jbInit.
      * </p>
-     *
+     * 
      * @throws java.lang.Exception
      *             if any.
      */
@@ -575,8 +622,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         ImageIcon bkgd = new ImageIcon("res/images/ui/newgame_background.jpg");
         JLabel myLabel = new JLabel(bkgd);
 
-        // Do not pass Integer.MIN_VALUE directly here; it must be packaged in an Integer
-        // instance.  Otherwise, GUI components will not draw unless moused over.
+        // Do not pass Integer.MIN_VALUE directly here; it must be packaged in
+        // an Integer
+        // instance. Otherwise, GUI components will not draw unless moused over.
         getLayeredPane().add(myLabel, Integer.valueOf(Integer.MIN_VALUE));
 
         myLabel.setBounds(0, 0, bkgd.getIconWidth(), bkgd.getIconHeight());
@@ -590,7 +638,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * updatePanelDisplay.
      * </p>
-     *
+     * 
      * @param panel
      *            a {@link javax.swing.JPanel} object.
      */
@@ -611,7 +659,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * setCustomBorder.
      * </p>
-     *
+     * 
      * @param panel
      *            a {@link javax.swing.JPanel} object.
      * @param title
@@ -631,9 +679,11 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * deckEditorButton_actionPerformed.
      * </p>
-     *
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
+     * 
+     * @param gt
+     *            the gt
+     * @param deck
+     *            the deck
      */
     final void deckEditorButtonActionPerformed(final GameType gt, final Deck deck) {
 
@@ -643,18 +693,18 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             private static final long serialVersionUID = -9133358399503226853L;
 
             public void execute() {
-                
+
                 updateDeckComboBoxes();
                 OldGuiNewGame.this.setVisible(true);
             }
         };
-        
+
         editor.show(exit);
-        
+
         if (deck != null) {
             editor.customMenu.showDeck(deck, gt);
         }
-        
+
         this.setVisible(false);
         editor.setVisible(true);
     }
@@ -663,7 +713,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * getRandomDeck.
      * </p>
-     *
+     * 
      * @param d
      *            an array of {@link forge.deck.Deck} objects.
      * @return a {@link forge.deck.Deck} object.
@@ -680,7 +730,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * startButton_actionPerformed.
      * </p>
-     *
+     * 
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
@@ -793,12 +843,11 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         dispose();
     } // startButton_actionPerformed()
 
-
     /**
      * <p>
      * singleRadioButton_actionPerformed.
      * </p>
-     *
+     * 
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
@@ -811,7 +860,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * sealedRadioButton_actionPerformed.
      * </p>
-     *
+     * 
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
@@ -831,44 +880,47 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         allDecks = getDecks();
         switch (Constant.Runtime.gameType) {
-            case Sealed:
-                humanComboBox.addItem("New Sealed");
-                computerComboBox.addItem("New Sealed");
+        case Sealed:
+            humanComboBox.addItem("New Sealed");
+            computerComboBox.addItem("New Sealed");
 
-                for (Deck allDeck : allDecks) {
-                    if (allDeck.getDeckType().equals(GameType.Sealed)) {
-                        JComboBox boxToAdd = allDeck.getPlayerType() == PlayerType.COMPUTER ? computerComboBox : humanComboBox;
-                        boxToAdd.addItem(allDeck.getName());
-                    }
-                } // for
-                break;
-            case Constructed:
-                humanComboBox.addItem("Generate Deck");
-                computerComboBox.addItem("Generate Deck");
-
-                humanComboBox.addItem("Random");
-                computerComboBox.addItem("Random");
-
-                for (Deck allDeck : allDecks) {
-                    if (allDeck.getDeckType().equals(GameType.Constructed)) {
-                        humanComboBox.addItem(allDeck.getName());
-                        computerComboBox.addItem(allDeck.getName());
-                    }
-                } // for
-                break;
-            case Draft:
-                humanComboBox.addItem("New Draft");
-                Object[] key = deckManager.getDraftDecks().keySet().toArray();
-                Arrays.sort(key);
-
-                for (Object aKey : key) {
-                    humanComboBox.addItem(aKey);
+            for (Deck allDeck : allDecks) {
+                if (allDeck.getDeckType().equals(GameType.Sealed)) {
+                    JComboBox boxToAdd = allDeck.getPlayerType() == PlayerType.COMPUTER ? computerComboBox
+                            : humanComboBox;
+                    boxToAdd.addItem(allDeck.getName());
                 }
+            } // for
+            break;
+        case Constructed:
+            humanComboBox.addItem("Generate Deck");
+            computerComboBox.addItem("Generate Deck");
 
-                for (int i = 0; i < 7; i++) {
-                    computerComboBox.addItem("" + (i + 1));
+            humanComboBox.addItem("Random");
+            computerComboBox.addItem("Random");
+
+            for (Deck allDeck : allDecks) {
+                if (allDeck.getDeckType().equals(GameType.Constructed)) {
+                    humanComboBox.addItem(allDeck.getName());
+                    computerComboBox.addItem(allDeck.getName());
                 }
-                break;
+            } // for
+            break;
+        case Draft:
+            humanComboBox.addItem("New Draft");
+            Object[] key = deckManager.getDraftDecks().keySet().toArray();
+            Arrays.sort(key);
+
+            for (Object aKey : key) {
+                humanComboBox.addItem(aKey);
+            }
+
+            for (int i = 0; i < 7; i++) {
+                computerComboBox.addItem("" + (i + 1));
+            }
+            break;
+        default:
+            break;
         }
         // not sure if the code below is useful or not
         // this will select the deck that you previously used
@@ -882,7 +934,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * <p>
      * getDecks.
      * </p>
-     *
+     * 
      * @param gameType
      *            a {@link java.lang.String} object.
      * @return an array of {@link forge.deck.Deck} objects.
@@ -906,16 +958,21 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         return out;
     } // getDecks()
 
-
+    /**
+     * Draft radio button action performed.
+     * 
+     * @param e
+     *            the e
+     */
     final void draftRadioButtonActionPerformed(final ActionEvent e) {
         Constant.Runtime.gameType = GameType.Draft;
         updateDeckComboBoxes();
     }
 
     /**
-     *
+     * The Class LookAndFeelAction.
+     * 
      * @author dhudson
-     *
      */
     public static class LookAndFeelAction extends AbstractAction {
 
@@ -923,8 +980,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         private Component c;
 
         /**
-         *
+         * Instantiates a new look and feel action.
+         * 
          * @param component
+         *            the component
          */
         public LookAndFeelAction(final Component component) {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.LF));
@@ -932,7 +991,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
+         * Action performed.
+         * 
          * @param e
+         *            the e
          */
         public final void actionPerformed(final ActionEvent e) {
             LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
@@ -974,8 +1036,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     "org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel");
             LAFMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
             LAFMap.put("Raven Graphite", "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteLookAndFeel");
-            //LAFMap.put("Raven Graphite Glass",
-            //"org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteGlassLookAndFeel");
+            // LAFMap.put("Raven Graphite Glass",
+            // "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteGlassLookAndFeel");
             LAFMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
             LAFMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
 
@@ -1007,23 +1069,30 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
     }
 
-/**
- *
- * @author dhudson
- *
- */
+    /**
+     * The Class DownloadPriceAction.
+     * 
+     * @author dhudson
+     */
     public static class DownloadPriceAction extends AbstractAction {
         private static final long serialVersionUID = 929877827872974298L;
 
         /**
-         *
+         * Instantiates a new download price action.
          */
         public DownloadPriceAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADPRICE));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             Gui_DownloadPrices gdp = new Gui_DownloadPrices();
@@ -1032,9 +1101,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class BugzReporterAction.
+     * 
      * @author dhudson
-     *
      */
     public static class BugzReporterAction extends AbstractAction {
 
@@ -1044,53 +1113,66 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         private static final long serialVersionUID = 6354047838575733085L;
 
         /**
-         *
+         * Instantiates a new bugz reporter action.
          */
         public BugzReporterAction() {
             super("Report Bug");
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             BugzReporter br = new BugzReporter();
             br.setVisible(true);
         }
 
-
     }
 
     /*
      * public static class DownloadAction extends AbstractAction {
-     *
+     * 
      * private static final long serialVersionUID = 6564425021778307101L;
-     *
+     * 
      * public DownloadAction() {
      * super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOAD)); }
-     *
+     * 
      * public void actionPerformed(ActionEvent e) {
-     *
+     * 
      * Gui_DownloadPictures.startDownload(null); } }
      */
     /**
-     *
+     * The Class DownloadActionLQ.
+     * 
      * @author dhudson
-     *
      */
     public static class DownloadActionLQ extends AbstractAction {
 
         private static final long serialVersionUID = -6234380664413874813L;
 
         /**
-         *
+         * Instantiates a new download action lq.
          */
         public DownloadActionLQ() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADLQ));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             new Gui_DownloadPictures_LQ(null);
@@ -1098,70 +1180,91 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class DownloadActionSetLQ.
+     * 
      * @author dhudson
-     *
      */
     public static class DownloadActionSetLQ extends AbstractAction {
         private static final long serialVersionUID = 2947202546752930L;
 
         /**
-         *
+         * Instantiates a new download action set lq.
          */
         public DownloadActionSetLQ() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADSETLQ));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             new Gui_DownloadSetPictures_LQ(null);
         }
     }
-    
-    /**
-    *
-    * @author slapshot5
-    *
-    */
-   public static class DownloadActionQuest extends AbstractAction {
-       private static final long serialVersionUID = -4439763134551377894L;
 
     /**
-        *
-        */
-       public DownloadActionQuest() {
-           super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADQUESTIMG));
-       }
+     * The Class DownloadActionQuest.
+     * 
+     * @author slapshot5
+     */
+    public static class DownloadActionQuest extends AbstractAction {
+        private static final long serialVersionUID = -4439763134551377894L;
 
-       /**
-        *
-        */
-       public final void actionPerformed(final ActionEvent e) {
-           //GuiDownloadQuestImages.startDownload(null);
-           new GuiDownloadQuestImages(null);
-       }
-   }
+        /**
+         * Instantiates a new download action quest.
+         */
+        public DownloadActionQuest() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADQUESTIMG));
+        }
+
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
+        /**
+         * @param e ActionEvent
+         */
+        public final void actionPerformed(final ActionEvent e) {
+            // GuiDownloadQuestImages.startDownload(null);
+            new GuiDownloadQuestImages(null);
+        }
+    }
 
     /**
-     *
+     * The Class ImportPictureAction.
+     * 
      * @author dhudson
-     *
      */
     public static class ImportPictureAction extends AbstractAction {
 
         private static final long serialVersionUID = 6893292814498031508L;
 
         /**
-         *
+         * Instantiates a new import picture action.
          */
         public ImportPictureAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.IMPORTPICTURE));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             GUI_ImportPicture ip = new GUI_ImportPicture(null);
@@ -1170,25 +1273,32 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class CardSizesAction.
+     * 
      * @author dhudson
-     *
      */
     public static class CardSizesAction extends AbstractAction {
 
         private static final long serialVersionUID = -2900235618450319571L;
-        private static String[] keys = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
-        private static int[] widths = {52, 80, 120, 200, 300, 400};
+        private static String[] keys = { "Tiny", "Smaller", "Small", "Medium", "Large", "Huge" };
+        private static int[] widths = { 52, 80, 120, 200, 300, 400 };
 
         /**
-         *
+         * Instantiates a new card sizes action.
          */
         public CardSizesAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_SIZES));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new max card size", 0, 1, keys);
@@ -1206,8 +1316,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the.
+         * 
          * @param index
+         *            the index
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
@@ -1216,8 +1328,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the.
+         * 
          * @param s
+         *            the s
          */
         public static void set(final CardSizeType s) {
             Singletons.getModel().getPreferences().cardSize = s;
@@ -1234,30 +1348,37 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class CardStackAction.
+     * 
      * @author dhudson
-     *
      */
     public static class CardStackAction extends AbstractAction {
 
         private static final long serialVersionUID = -3770527681359311455L;
         private static String[] keys = {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        private static int[] values = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        private static int[] values = { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
         /**
-         *
+         * Instantiates a new card stack action.
          */
         public CardStackAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
 
-            ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose the max size of a stack", 0, 1,
-                    keys);
+            ListChooser<String> ch
+            = new ListChooser<String>("Choose one", "Choose the max size of a stack", 0, 1, keys);
 
             if (ch.show()) {
                 try {
@@ -1274,8 +1395,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the.
+         * 
          * @param index
+         *            the index
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().maxStackSize = values[index];
@@ -1283,8 +1406,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the val.
+         * 
          * @param val
+         *            the new val
          */
         public static void setVal(final int val) {
             Singletons.getModel().getPreferences().maxStackSize = val;
@@ -1293,25 +1418,32 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class CardStackOffsetAction.
+     * 
      * @author dhudson
-     *
      */
     public static class CardStackOffsetAction extends AbstractAction {
 
         private static final long serialVersionUID = 5021304777748833975L;
         private static String[] keys = {"Tiny", "Small", "Medium", "Large"};
-        private static int[] offsets = {5, 7, 10, 15};
+        private static int[] offsets = { 5, 7, 10, 15 };
 
         /**
-         *
+         * Instantiates a new card stack offset action.
          */
         public CardStackOffsetAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK_OFFSET));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a stack offset value", 0, 1, keys);
@@ -1330,8 +1462,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the.
+         * 
          * @param index
+         *            the index
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
@@ -1339,8 +1473,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
 
         /**
-         *
+         * Sets the.
+         * 
          * @param s
+         *            the s
          */
         public static void set(final StackOffsetType s) {
             Singletons.getModel().getPreferences().stackOffset = s;
@@ -1356,23 +1492,30 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class HowToPlayAction.
+     * 
      * @author dhudson
-     *
      */
     public static class HowToPlayAction extends AbstractAction {
 
         private static final long serialVersionUID = 5552000208438248428L;
 
         /**
-         *
+         * Instantiates a new how to play action.
          */
         public HowToPlayAction() {
             super(ForgeProps.getLocalized(LANG.HowTo.TITLE));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             String text = ForgeProps.getLocalized(LANG.HowTo.MESSAGE);
@@ -1389,23 +1532,30 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * The Class AboutAction.
+     * 
      * @author dhudson
-     *
      */
     public static class AboutAction extends AbstractAction {
 
         private static final long serialVersionUID = 5492173304463396871L;
 
         /**
-         *
+         * Instantiates a new about action.
          */
         public AboutAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.ABOUT));
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
         /**
-         *
+         * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
             JTextArea area = new JTextArea(12, 25);
@@ -1430,35 +1580,42 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             JOptionPane.showMessageDialog(null, area, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     /**
-    *
-    * @author slapshot5
-    *
-    */
-   public static class ExitAction extends AbstractAction {
-       private static final long serialVersionUID = -319036939657136034L;
+     * The Class ExitAction.
+     * 
+     * @author slapshot5
+     */
+    public static class ExitAction extends AbstractAction {
+        private static final long serialVersionUID = -319036939657136034L;
 
-       /**
-        *
-        */
-       public ExitAction() {
-           super(ForgeProps.getLocalized(MENU_BAR.MENU.EXIT));
-       }
+        /**
+         * Instantiates a new exit action.
+         */
+        public ExitAction() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.EXIT));
+        }
 
-       /**
-        *
-        */
-       public final void actionPerformed(final ActionEvent e) {
-           System.exit(0);
-       }
-   }
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+         * )
+         */
+        /**
+         * @param e ActionEvent
+         */
+        public final void actionPerformed(final ActionEvent e) {
+            System.exit(0);
+        }
+    }
 
     /**
      * <p>
      * exit.
      * </p>
-     *
+     * 
      * @return a boolean.
      */
     public final boolean exit() {
@@ -1521,7 +1678,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     }
 
     /**
-     *
+     * Load dynamic gamedata.
      */
     public static void loadDynamicGamedata() {
         if (!Constant.CardTypes.loaded[0]) {
@@ -1620,15 +1777,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             }
             Constant.Keywords.loaded[0] = true;
             /*
-            if (Constant.Runtime.DevMode[0]) {
-                System.out.println(Constant.Keywords.NonStackingList[0].list);
-            }*/
+             * if (Constant.Runtime.DevMode[0]) {
+             * System.out.println(Constant.Keywords.NonStackingList[0].list); }
+             */
         }
 
         /*
          * if (!Constant.Color.loaded[0]) { ArrayList<String> lcListFile =
          * FileUtil.readFile("res/gamedata/LandColorList");
-         *
+         * 
          * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
          * { String s = lcListFile.get(i); if (s.length() > 1)
          * Constant.Color.LandColor[0].map.add(s); } }
