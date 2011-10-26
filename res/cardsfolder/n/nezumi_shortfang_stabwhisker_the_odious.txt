@@ -1,0 +1,27 @@
+Name:Nezumi Shortfang
+ManaCost:1 B
+Types:Creature Rat Rogue
+Text:no text
+PT:1/1
+A:AB$Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBFlip:DB$Flip | Defined$ Self | CheckSVar$ X | SVarCompare$ EQ0
+SVar:X:Count$InOppHand
+SVar:Rarity:Rare
+AlternateMode:Flip
+
+ALTERNATE
+
+Name:Stabwhisker the Odious
+ManaCost:1 B
+Colors:black
+Types:Legendary Creature Rat Shaman
+Text:no text
+PT:4/2
+T:Mode$Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in his or her hand.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ X
+SVar:X:SVar$Y/Minus.Z
+SVar:Y:Count$InOppHand
+SVar:Z:Number$3
+SVar:Rarity:Rare
+
+End
