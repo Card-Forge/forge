@@ -134,6 +134,9 @@ def initSets():
 	forgeSets.append('SOM')
 	forgeSets.append('MBS')
 	forgeSets.append('NPH')
+	
+	# Innistrad
+	forgeSets.append('ISD')
 
 if not os.path.exists(pathToMtgData) :
         print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
