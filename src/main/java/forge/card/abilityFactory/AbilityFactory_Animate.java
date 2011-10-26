@@ -1,5 +1,9 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -9,9 +13,8 @@ import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.Player;
-
 import forge.Constant.Zone;
+import forge.Player;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -21,14 +24,11 @@ import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * <p>AbilityFactory_Animate class.</p>
- *
+ * <p>
+ * AbilityFactory_Animate class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -38,14 +38,17 @@ public final class AbilityFactory_Animate {
         throw new AssertionError();
     }
 
-    //**************************************************************
-    //************************** Animate ***************************
-    //**************************************************************
+    // **************************************************************
+    // ************************** Animate ***************************
+    // **************************************************************
 
     /**
-     * <p>createAbilityAnimate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityAnimate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimate(final AbilityFactory af) {
@@ -76,9 +79,12 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>createSpellAnimate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellAnimate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellAnimate(final AbilityFactory af) {
@@ -104,9 +110,12 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>createDrawbackAnimate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackAnimate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimate(final AbilityFactory af) {
@@ -137,10 +146,14 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String animateStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -166,7 +179,7 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
-        //allow SVar substitution for keywords
+        // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             String k = keywords.get(i);
             if (svars.containsKey(k)) {
@@ -183,8 +196,7 @@ public final class AbilityFactory_Animate {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
@@ -192,8 +204,7 @@ public final class AbilityFactory_Animate {
         ArrayList<Card> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -204,7 +215,7 @@ public final class AbilityFactory_Animate {
         if (tgts.size() == 1) {
             sb.append("s a");
         }
-        //if power is -1, we'll assume it's not just setting toughness
+        // if power is -1, we'll assume it's not just setting toughness
         if (power != -1) {
             sb.append(" ").append(power).append("/").append(toughness);
         }
@@ -214,8 +225,7 @@ public final class AbilityFactory_Animate {
         }
         if (colors.contains("ChosenColor")) {
             sb.append("color of that player's choice");
-        }
-        else {
+        } else {
             for (int i = 0; i < colors.size(); i++) {
                 sb.append(colors.get(i));
                 if (i < (colors.size() - 1)) {
@@ -226,8 +236,7 @@ public final class AbilityFactory_Animate {
         sb.append(" ");
         if (types.contains("ChosenType")) {
             sb.append("type of player's choice ");
-        }
-        else {
+        } else {
             for (int i = types.size() - 1; i >= 0; i--) {
                 sb.append(types.get(i));
                 sb.append(" ");
@@ -242,23 +251,19 @@ public final class AbilityFactory_Animate {
                 sb.append(" and ");
             }
         }
-        //sb.append(abilities)
-        //sb.append(triggers)
+        // sb.append(abilities)
+        // sb.append(triggers)
         if (!permanent) {
             if (params.containsKey("UntilEndOfCombat")) {
                 sb.append(" until end of combat.");
-            }
-            else if (params.containsKey("UntilHostLeavesPlay")) {
+            } else if (params.containsKey("UntilHostLeavesPlay")) {
                 sb.append(" until ").append(host).append(" leaves the battlefield.");
-            }
-            else if (params.containsKey("UntilYourNextUpkeep")) {
+            } else if (params.containsKey("UntilYourNextUpkeep")) {
                 sb.append(" until your next upkeep.");
-            }
-            else {
+            } else {
                 sb.append(" until end of turn.");
             }
-        }
-        else {
+        } else {
             sb.append(".");
         }
 
@@ -268,13 +273,17 @@ public final class AbilityFactory_Animate {
         }
 
         return sb.toString();
-    } //end animateStackDescription()
+    } // end animateStackDescription()
 
     /**
-     * <p>animateCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean animateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -285,25 +294,27 @@ public final class AbilityFactory_Animate {
 
         boolean useAbility = true;
 
-        //TODO - add some kind of check to answer "Am I going to attack with this?"
-        //TODO - add some kind of check for during human turn to answer "Can I use this to block something?"
+        // TODO - add some kind of check to answer
+        // "Am I going to attack with this?"
+        // TODO - add some kind of check for during human turn to answer
+        // "Can I use this to block something?"
 
-        //don't use instant speed animate abilities outside computers Combat_Begin step
+        // don't use instant speed animate abilities outside computers
+        // Combat_Begin step
         if (!AllZone.getPhase().is(Constant.Phase.Combat_Begin)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
-                && !AbilityFactory.isSorcerySpeed(sa) && !params.containsKey("ActivationPhases")
-                && !params.containsKey("Permanent")) {
+                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
+                && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
         }
 
-        //don't use instant speed animate abilities outside humans Combat_Declare_Attackers_InstantAbility step
-        if ((!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility)
-                || AllZone.getCombat().getAttackers().length == 0)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+        // don't use instant speed animate abilities outside humans
+        // Combat_Declare_Attackers_InstantAbility step
+        if ((!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || AllZone.getCombat()
+                .getAttackers().length == 0) && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
-        //don't activate during main2 unless this effect is permanent
+        // don't activate during main2 unless this effect is permanent
         if (AllZone.getPhase().is(Constant.Phase.Main2) && !params.containsKey("Permanent")) {
             return false;
         }
@@ -315,7 +326,7 @@ public final class AbilityFactory_Animate {
             for (Card c : defined) {
                 bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == AllZone.getPhase().getTurn()));
 
-                //for creatures that could be improved (like Figure of Destiny)
+                // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (params.containsKey("Power")) {
@@ -332,7 +343,8 @@ public final class AbilityFactory_Animate {
 
             }
 
-            if (!bFlag) {    // All of the defined stuff is animated, not very useful
+            if (!bFlag) { // All of the defined stuff is animated, not very
+                          // useful
                 return false;
             }
         } else {
@@ -349,10 +361,14 @@ public final class AbilityFactory_Animate {
     } // end animateCanPlayAI()
 
     /**
-     * <p>animatePlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animatePlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean animatePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -370,26 +386,31 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * animateTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean animateTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {    // If there is a cost payment
+        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
             return false;
         }
 
         boolean chance = animateTgtAI(af, sa);
 
         // Improve AI for triggers. If source is a creature with:
-        // When ETB, sacrifice a creature. Check to see if the AI has something to sacrifice
+        // When ETB, sacrifice a creature. Check to see if the AI has something
+        // to sacrifice
 
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
-
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
@@ -400,24 +421,34 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateTgtAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateTgtAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean animateTgtAI(final AbilityFactory af, final SpellAbility sa) {
-        //This is reasonable for now.  Kamahl, Fist of Krosa and a sorcery or two are the only things
-        //that animate a target.  Those can just use SVar:RemAIDeck:True until this can do a reasonably
-        //good job of picking a good target
+        // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
+        // two are the only things
+        // that animate a target. Those can just use SVar:RemAIDeck:True until
+        // this can do a reasonably
+        // good job of picking a good target
         return false;
     }
 
     /**
-     * <p>animateResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void animateResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -426,7 +457,7 @@ public final class AbilityFactory_Animate {
         Map<String, String> svars = host.getSVars();
         long timest = -1;
 
-        //AF specific params
+        // AF specific params
         int power = -1;
         if (params.containsKey("Power")) {
             power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
@@ -453,7 +484,7 @@ public final class AbilityFactory_Animate {
             removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
         }
 
-        //allow ChosenType - overrides anything else specified
+        // allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
             types.clear();
             types.add(host.getChosenType());
@@ -463,7 +494,7 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
-        //allow SVar substitution for keywords
+        // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             String k = keywords.get(i);
             if (svars.containsKey(k)) {
@@ -472,12 +503,12 @@ public final class AbilityFactory_Animate {
             }
         }
 
-        //colors to be added or changed to
+        // colors to be added or changed to
         String tmpDesc = "";
         if (params.containsKey("Colors")) {
             String colors = params.get("Colors");
             if (colors.equals("ChosenColor")) {
-                
+
                 tmpDesc = CardUtil.getShortColorsString(host.getChosenColor());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
@@ -485,25 +516,25 @@ public final class AbilityFactory_Animate {
         }
         final String finalDesc = tmpDesc;
 
-        //abilities to add to the animated being
+        // abilities to add to the animated being
         ArrayList<String> abilities = new ArrayList<String>();
         if (params.containsKey("Abilities")) {
             abilities.addAll(Arrays.asList(params.get("Abilities").split(",")));
         }
 
-        //triggers to add to the animated being
+        // triggers to add to the animated being
         ArrayList<String> triggers = new ArrayList<String>();
         if (params.containsKey("Triggers")) {
             triggers.addAll(Arrays.asList(params.get("Triggers").split(",")));
         }
 
-        //static abilities to add to the animated being
+        // static abilities to add to the animated being
         ArrayList<String> stAbs = new ArrayList<String>();
         if (params.containsKey("staticAbilities")) {
             stAbs.addAll(Arrays.asList(params.get("staticAbilities").split(",")));
         }
 
-        //sVars to add to the animated being
+        // sVars to add to the animated being
         ArrayList<String> sVars = new ArrayList<String>();
         if (params.containsKey("sVars")) {
             sVars.addAll(Arrays.asList(params.get("sVars").split(",")));
@@ -513,17 +544,16 @@ public final class AbilityFactory_Animate {
         ArrayList<Card> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgts = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
         }
 
         for (final Card c : tgts) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types,
-                    removeTypes, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords,
+                    timestamp);
 
-            //give abilities
+            // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
                 for (String s : abilities) {
@@ -535,7 +565,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //remove abilities
+            // remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
             if (params.containsKey("OverwriteAbilities") || params.containsKey("RemoveAllAbilities")) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
@@ -546,7 +576,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //Grant triggers
+            // Grant triggers
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
                 for (String s : triggers) {
@@ -556,7 +586,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //suppress triggers from the animated card
+            // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (params.containsKey("OverwriteTriggers") || params.containsKey("RemoveAllAbilities")) {
                 ArrayList<Trigger> triggersToRemove = c.getTriggers();
@@ -566,7 +596,8 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //give static abilities (should only be used by cards to give itself a static ability)
+            // give static abilities (should only be used by cards to give
+            // itself a static ability)
             if (stAbs.size() > 0) {
                 for (String s : stAbs) {
                     String actualAbility = host.getSVar(s);
@@ -574,7 +605,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //give sVars
+            // give sVars
             if (sVars.size() > 0) {
                 for (String s : sVars) {
                     String actualsVar = host.getSVar(s);
@@ -588,10 +619,10 @@ public final class AbilityFactory_Animate {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 public void execute() {
-                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp,
-                            givesStAbs, removedAbilities, timestamp);
+                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp, givesStAbs,
+                            removedAbilities, timestamp);
 
-                    //give back suppressed triggers
+                    // give back suppressed triggers
                     for (Trigger t : removedTriggers) {
                         t.setSuppressed(false);
                     }
@@ -601,36 +632,41 @@ public final class AbilityFactory_Animate {
             if (!permanent) {
                 if (params.containsKey("UntilEndOfCombat")) {
                     AllZone.getEndOfCombat().addUntil(unanimate);
-                }
-                else if (params.containsKey("UntilHostLeavesPlay")) {
+                } else if (params.containsKey("UntilHostLeavesPlay")) {
                     host.addLeavesPlayCommand(unanimate);
-                }
-                else if (params.containsKey("UntilYourNextUpkeep")) {
+                } else if (params.containsKey("UntilYourNextUpkeep")) {
                     AllZone.getUpkeep().addUntil(host.getController(), unanimate);
-                }
-                else {
+                } else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
                 }
             }
         }
-    } //animateResolve
+    } // animateResolve
 
     /**
-     * <p>doAnimate.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param power a int.
-     * @param toughness a int.
-     * @param types a {@link java.util.ArrayList} object.
-     * @param colors a {@link java.lang.String} object.
-     * @param keywords a {@link java.util.ArrayList} object.
+     * <p>
+     * doAnimate.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param power
+     *            a int.
+     * @param toughness
+     *            a int.
+     * @param types
+     *            a {@link java.util.ArrayList} object.
+     * @param colors
+     *            a {@link java.lang.String} object.
+     * @param keywords
+     *            a {@link java.util.ArrayList} object.
      * @return a long.
      */
     private static long doAnimate(final Card c, final AbilityFactory af, final int power, final int toughness,
             final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
-            final ArrayList<String> keywords, final long timestamp)
-    {
+            final ArrayList<String> keywords, final long timestamp) {
         HashMap<String, String> params = af.getMapParams();
 
         boolean removeSuperTypes = false;
@@ -682,8 +718,10 @@ public final class AbilityFactory_Animate {
             if (k.startsWith("HIDDEN")) {
                 c.addExtrinsicKeyword(k);
             }
-            //this maybe should just blindly add since multiple instances of a keyword sometimes have effects
-            //practically, this shouldn't matter though, and will display more cleanly
+            // this maybe should just blindly add since multiple instances of a
+            // keyword sometimes have effects
+            // practically, this shouldn't matter though, and will display more
+            // cleanly
             else if (!c.getIntrinsicKeyword().contains(k) || CardUtil.isStackingKeyword(k)) {
                 c.addIntrinsicKeyword(k);
             }
@@ -694,33 +732,44 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>doUnanimate.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param originalPower a int.
-     * @param originalToughness a int.
-     * @param originalTypes a {@link java.util.ArrayList} object.
-     * @param colorDesc a {@link java.lang.String} object.
-     * @param originalKeywords a {@link java.util.ArrayList} object.
-     * @param addedAbilities a {@link java.util.ArrayList} object.
-     * @param addedTriggers a {@link java.util.ArrayList} object.
-     * @param timestamp a long.
+     * <p>
+     * doUnanimate.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param originalPower
+     *            a int.
+     * @param originalToughness
+     *            a int.
+     * @param originalTypes
+     *            a {@link java.util.ArrayList} object.
+     * @param colorDesc
+     *            a {@link java.lang.String} object.
+     * @param originalKeywords
+     *            a {@link java.util.ArrayList} object.
+     * @param addedAbilities
+     *            a {@link java.util.ArrayList} object.
+     * @param addedTriggers
+     *            a {@link java.util.ArrayList} object.
+     * @param timestamp
+     *            a long.
      */
     private static void doUnanimate(final Card c, final AbilityFactory af, final String colorDesc,
             final ArrayList<String> originalKeywords, final ArrayList<SpellAbility> addedAbilities,
-            final ArrayList<Trigger> addedTriggers, final long colorTimestamp,
-            final boolean givesStAbs, final ArrayList<SpellAbility> removedAbilities, final long timestamp)
-    {
+            final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
+            final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
         HashMap<String, String> params = af.getMapParams();
 
         c.removeNewPT(timestamp);
 
-        //remove all static abilities
+        // remove all static abilities
         if (givesStAbs) {
             c.setStaticAbilities(new ArrayList<StaticAbility>());
         }
 
-        if (params.containsKey("Types") || params.containsKey("RemoveTypes") || params.containsKey("RemoveCreatureTypes")) {
+        if (params.containsKey("Types") || params.containsKey("RemoveTypes")
+                || params.containsKey("RemoveCreatureTypes")) {
             c.removeChangedCardTypes(timestamp);
         }
 
@@ -730,7 +779,8 @@ public final class AbilityFactory_Animate {
             if (k.startsWith("HIDDEN")) {
                 c.removeExtrinsicKeyword(k);
             }
-            //TODO - may want to look at saving off intrinsic and extrinsic separately and add back that way
+            // TODO - may want to look at saving off intrinsic and extrinsic
+            // separately and add back that way
             c.removeIntrinsicKeyword(k);
         }
 
@@ -746,20 +796,23 @@ public final class AbilityFactory_Animate {
             c.removeTrigger(t);
         }
 
-        //any other unanimate cleanup
+        // any other unanimate cleanup
         if (!c.isCreature()) {
             c.unEquipAllCards();
         }
     }
 
-    //**************************************************************
+    // **************************************************************
     // ************************ AnimateAll *************************
-    //**************************************************************
+    // **************************************************************
 
     /**
-     * <p>createAbilityAnimateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityAnimateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimateAll(final AbilityFactory af) {
@@ -790,9 +843,12 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>createSpellAnimateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellAnimateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellAnimateAll(final AbilityFactory af) {
@@ -818,9 +874,12 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>createDrawbackAnimateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackAnimateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimateAll(final AbilityFactory af) {
@@ -851,10 +910,14 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateAllStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateAllStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String animateAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -864,8 +927,7 @@ public final class AbilityFactory_Animate {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
@@ -887,10 +949,14 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateAllCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean animateAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -905,10 +971,14 @@ public final class AbilityFactory_Animate {
     } // end animateAllCanPlayAI()
 
     /**
-     * <p>animateAllPlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateAllPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean animateAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -923,17 +993,20 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateAllTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * animateAllTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean animateAllTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
-        if (!ComputerUtil.canPayCost(sa)) {    // If there is a cost payment
+    private static boolean animateAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
             return false;
         }
 
@@ -948,10 +1021,14 @@ public final class AbilityFactory_Animate {
     }
 
     /**
-     * <p>animateAllResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * animateAllResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void animateAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -959,7 +1036,7 @@ public final class AbilityFactory_Animate {
         Map<String, String> svars = host.getSVars();
         long timest = -1;
 
-        //AF specific params
+        // AF specific params
         int power = -1;
         if (params.containsKey("Power")) {
             power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
@@ -986,7 +1063,7 @@ public final class AbilityFactory_Animate {
             removeTypes.addAll(Arrays.asList(params.get("RemoveTypes").split(",")));
         }
 
-        //allow ChosenType - overrides anything else specified
+        // allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
             types.clear();
             types.add(host.getChosenType());
@@ -996,7 +1073,7 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
-        //allow SVar substitution for keywords
+        // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             String k = keywords.get(i);
             if (svars.containsKey(k)) {
@@ -1005,7 +1082,7 @@ public final class AbilityFactory_Animate {
             }
         }
 
-        //colors to be added or changed to
+        // colors to be added or changed to
         String tmpDesc = "";
         if (params.containsKey("Colors")) {
             String colors = params.get("Colors");
@@ -1017,19 +1094,19 @@ public final class AbilityFactory_Animate {
         }
         final String finalDesc = tmpDesc;
 
-        //abilities to add to the animated being
+        // abilities to add to the animated being
         ArrayList<String> abilities = new ArrayList<String>();
         if (params.containsKey("Abilities")) {
             abilities.addAll(Arrays.asList(params.get("Abilities").split(",")));
         }
 
-        //triggers to add to the animated being
+        // triggers to add to the animated being
         ArrayList<String> triggers = new ArrayList<String>();
         if (params.containsKey("Triggers")) {
             triggers.addAll(Arrays.asList(params.get("Triggers").split(",")));
         }
-        
-        //sVars to add to the animated being
+
+        // sVars to add to the animated being
         ArrayList<String> sVars = new ArrayList<String>();
         if (params.containsKey("sVars")) {
             sVars.addAll(Arrays.asList(params.get("sVars").split(",")));
@@ -1040,29 +1117,32 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
-        
+
         CardList list;
         ArrayList<Player> tgtPlayers = null;
-        
+
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        else if (params.containsKey("Defined"))        // Make sure Defined exists to use it
+        } else if (params.containsKey("Defined")) {
+            // use it
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        
-        if (tgtPlayers == null || tgtPlayers.isEmpty())
+        }
+
+        if (tgtPlayers == null || tgtPlayers.isEmpty()) {
             list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        else
+        } else {
             list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
+        }
 
         list = list.getValidCards(valid.split(","), host.getController(), host);
 
         for (final Card c : list) {
 
-            final long colorTimestamp = doAnimate(c, af, power, toughness, types,
-                    removeTypes, finalDesc, keywords, timestamp);
+            final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords,
+                    timestamp);
 
-            //give abilities
+            // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
                 for (String s : abilities) {
@@ -1074,7 +1154,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //remove abilities
+            // remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
             if (params.containsKey("OverwriteAbilities")) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
@@ -1085,7 +1165,7 @@ public final class AbilityFactory_Animate {
                 }
             }
 
-            //Grant triggers
+            // Grant triggers
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
                 for (String s : triggers) {
@@ -1094,8 +1174,8 @@ public final class AbilityFactory_Animate {
                     addedTriggers.add(c.addTrigger(parsedTrigger));
                 }
             }
-            
-            //give sVars
+
+            // give sVars
             if (sVars.size() > 0) {
                 for (String s : sVars) {
                     String actualsVar = host.getSVar(s);
@@ -1107,20 +1187,19 @@ public final class AbilityFactory_Animate {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 public void execute() {
-                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers,
-                            colorTimestamp, false, removedAbilities, timestamp);
+                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp, false,
+                            removedAbilities, timestamp);
                 }
             };
 
             if (!permanent) {
                 if (params.containsKey("UntilEndOfCombat")) {
                     AllZone.getEndOfCombat().addUntil(unanimate);
-                }
-                else {
+                } else {
                     AllZone.getEndOfTurn().addUntil(unanimate);
                 }
             }
         }
-    } //animateAllResolve
+    } // animateAllResolve
 
-} //end class AbilityFactory_Animate
+} // end class AbilityFactory_Animate

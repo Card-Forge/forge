@@ -1,88 +1,145 @@
 package forge;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
 import forge.Constant.Zone;
-import forge.game.GameLossReason;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticAbility.StaticAbility;
-
-import javax.swing.*;
-import java.util.*;
-
+import forge.game.GameLossReason;
 
 /**
- * <p>Abstract Player class.</p>
- *
+ * <p>
+ * Abstract Player class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public abstract class Player extends GameEntity {
+
+    /** The poison counters. */
     protected int poisonCounters;
+
+    /** The life. */
     protected int life;
+
+    /** The assigned damage. */
     protected int assignedDamage;
+
+    /** The num power surge lands. */
     protected int numPowerSurgeLands;
 
+    /** The alt win. */
     protected boolean altWin = false;
+
+    /** The alt win source name. */
     protected String altWinSourceName;
+
+    /** The alt lose. */
     protected boolean altLose = false;
+
+    /** The loss state. */
     protected GameLossReason lossState = GameLossReason.DidNotLoseYet;
+
+    /** The lose condition spell. */
     protected String loseConditionSpell;
 
+    /** The n turns. */
     protected int nTurns = 0;
+
+    /** The skip next untap. */
     protected boolean skipNextUntap = false;
+
+    /** The prowl. */
     protected ArrayList<String> prowl = new ArrayList<String>();
 
+    /** The max lands to play. */
     protected int maxLandsToPlay = 1;
+
+    /** The num lands played. */
     protected int numLandsPlayed = 0;
 
+    /** The last drawn card. */
     protected Card lastDrawnCard;
+
+    /** The num drawn this turn. */
     protected int numDrawnThisTurn = 0;
+
+    /** The slowtrip list. */
     protected CardList slowtripList = new CardList();
-    
+
+    /** The keywords. */
     protected ArrayList<String> keywords = new ArrayList<String>();
-    
+
+    /** The mana pool. */
     protected ManaPool manaPool = null;
-    
+
+    /** The must attack entity. */
     protected Object mustAttackEntity = null;
-    
+
+    /** The zones. */
     Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
-    public final static List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield, Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command));
+
+    /** The Constant ALL_ZONES. */
+    public static final List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield,
+            Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command));
 
     /**
-     * <p>Constructor for Player.</p>
-     *
-     * @param myName a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Player.
+     * </p>
+     * 
+     * @param myName
+     *            a {@link java.lang.String} object.
      */
-    public Player(String myName) {
+    public Player(final String myName) {
         this(myName, 20, 0);
     }
 
     /**
-     * <p>Constructor for Player.</p>
-     *
-     * @param myName a {@link java.lang.String} object.
-     * @param myLife a int.
-     * @param myPoisonCounters a int.
+     * <p>
+     * Constructor for Player.
+     * </p>
+     * 
+     * @param myName
+     *            a {@link java.lang.String} object.
+     * @param myLife
+     *            a int.
+     * @param myPoisonCounters
+     *            a int.
      */
-    public Player(String myName, int myLife, int myPoisonCounters) {
+    public Player(final String myName, final int myLife, final int myPoisonCounters) {
         for (Zone z : ALL_ZONES) {
-            PlayerZone toPut = z == Zone.Battlefield ? new PlayerZoneComesIntoPlay(z, this) : new DefaultPlayerZone(z, this);
+            PlayerZone toPut = z == Zone.Battlefield ? new PlayerZoneComesIntoPlay(z, this) : new DefaultPlayerZone(z,
+                    this);
             zones.put(z, toPut);
         }
-        
+
         reset();
-        
+
         setName(myName);
         life = myLife;
         poisonCounters = myPoisonCounters;
     }
 
     /**
-     * <p>reset.</p>
+     * <p>
+     * reset.
+     * </p>
      */
-    public void reset() {
+    public final void reset() {
         life = 20;
         poisonCounters = 0;
         assignedDamage = 0;
@@ -99,67 +156,80 @@ public abstract class Player extends GameEntity {
         maxLandsToPlay = 1;
         numLandsPlayed = 0;
         prowl = new ArrayList<String>();
-        
+
         handSizeOperations = new ArrayList<HandSizeOp>();
         keywords.clear();
         manaPool = new ManaPool(this);
-        
+
         this.updateObservers();
     }
 
     /**
-     * <p>isHuman.</p>
-     *
+     * <p>
+     * isHuman.
+     * </p>
+     * 
      * @return a boolean.
      */
     public abstract boolean isHuman();
 
     /**
-     * <p>isComputer.</p>
-     *
+     * <p>
+     * isComputer.
+     * </p>
+     * 
      * @return a boolean.
      */
     public abstract boolean isComputer();
 
     /**
-     * <p>isPlayer.</p>
-     *
-     * @param p1 a {@link forge.Player} object.
+     * <p>
+     * isPlayer.
+     * </p>
+     * 
+     * @param p1
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    public boolean isPlayer(Player p1) {
+    public final boolean isPlayer(final Player p1) {
         return p1 != null && p1.getName().equals(getName());
     }
 
     /**
-     * <p>getOpponent.</p>
-     *
+     * <p>
+     * getOpponent.
+     * </p>
+     * 
      * @return a {@link forge.Player} object.
      */
     public abstract Player getOpponent();
 
-    //////////////////////////
+    // ////////////////////////
     //
     // methods for manipulating life
     //
-    //////////////////////////
+    // ////////////////////////
 
     /**
-     * <p>Setter for the field <code>life</code>.</p>
-     *
-     * @param newLife a int.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>life</code>.
+     * </p>
+     * 
+     * @param newLife
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean setLife(final int newLife, final Card source) {
+    public final boolean setLife(final int newLife, final Card source) {
         boolean change = false;
-        //rule 118.5
+        // rule 118.5
         if (life > newLife) {
             change = loseLife(life - newLife, source);
         } else if (newLife > life) {
             change = gainLife(newLife - life, source);
         } else {
-            //life == newLife
+            // life == newLife
             change = false;
         }
         this.updateObservers();
@@ -167,18 +237,23 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>Getter for the field <code>life</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>life</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getLife() {
+    public final int getLife() {
         return life;
     }
 
     /**
-     * <p>addLife.</p>
-     *
-     * @param toAdd a int.
+     * <p>
+     * addLife.
+     * </p>
+     * 
+     * @param toAdd
+     *            a int.
      */
     private void addLife(final int toAdd) {
         life += toAdd;
@@ -186,26 +261,33 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>gainLife.</p>
-     *
-     * @param toGain a int.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * gainLife.
+     * </p>
+     * 
+     * @param toGain
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean gainLife(final int toGain, final Card source) {
+    public final boolean gainLife(final int toGain, final Card source) {
         boolean newLifeSet = false;
-        if (!canGainLife()) return false;
+        if (!canGainLife()) {
+            return false;
+        }
         int lifeGain = toGain;
 
         if (AllZoneUtil.isCardInPlay("Boon Reflection", this)) {
             int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Boon Reflection").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 lifeGain += lifeGain;
+            }
         }
 
         if (lifeGain > 0) {
             if (AllZoneUtil.isCardInPlay("Lich", this)) {
-                //draw cards instead of gain life
+                // draw cards instead of gain life
                 drawCards(lifeGain);
                 newLifeSet = false;
             } else {
@@ -213,50 +295,63 @@ public abstract class Player extends GameEntity {
                 newLifeSet = true;
                 this.updateObservers();
 
-                //Run triggers
+                // Run triggers
                 HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Player", this);
                 runParams.put("LifeAmount", lifeGain);
                 AllZone.getTriggerHandler().runTrigger("LifeGained", runParams);
             }
-        } else System.out.println("Player - trying to gain negative or 0 life");
+        } else {
+            System.out.println("Player - trying to gain negative or 0 life");
+        }
 
         return newLifeSet;
     }
 
     /**
-     * <p>canGainLife.</p>
-     *
+     * <p>
+     * canGainLife.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment") ||
-                AllZoneUtil.isCardInPlay("Platinum Emperion", this) || AllZoneUtil.isCardInPlay("Forsaken Wastes"))
+    public final boolean canGainLife() {
+        if (AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment")
+                || AllZoneUtil.isCardInPlay("Platinum Emperion", this) || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
             return false;
+        }
         return true;
     }
 
     /**
-     * <p>loseLife.</p>
-     *
-     * @param toLose a int.
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * loseLife.
+     * </p>
+     * 
+     * @param toLose
+     *            a int.
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean loseLife(final int toLose, final Card c) {
+    public final boolean loseLife(final int toLose, final Card c) {
         boolean newLifeSet = false;
-        if (!canLoseLife()) return false;
+        if (!canLoseLife()) {
+            return false;
+        }
         if (toLose > 0) {
             subtractLife(toLose);
             newLifeSet = true;
             this.updateObservers();
         } else if (toLose == 0) {
-            //Rule 118.4
-            //this is for players being able to pay 0 life
-            //nothing to do
-        } else System.out.println("Player - trying to lose positive life");
+            // Rule 118.4
+            // this is for players being able to pay 0 life
+            // nothing to do
+        } else {
+            System.out.println("Player - trying to lose positive life");
+        }
 
-        //Run triggers
+        // Run triggers
         HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
@@ -266,19 +361,26 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>canLoseLife.</p>
-     *
+     * <p>
+     * canLoseLife.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canLoseLife() {
-        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) return false;
+    public final boolean canLoseLife() {
+        if (AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+            return false;
+        }
         return true;
     }
 
     /**
-     * <p>subtractLife.</p>
-     *
-     * @param toSub a int.
+     * <p>
+     * subtractLife.
+     * </p>
+     * 
+     * @param toSub
+     *            a int.
      */
     private void subtractLife(final int toSub) {
         life -= toSub;
@@ -286,27 +388,40 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>canPayLife.</p>
-     *
-     * @param lifePayment a int.
+     * <p>
+     * canPayLife.
+     * </p>
+     * 
+     * @param lifePayment
+     *            a int.
      * @return a boolean.
      */
-    public boolean canPayLife(int lifePayment) {
-        if (life < lifePayment) return false;
-        if (lifePayment > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion", this)) return false;
+    public final boolean canPayLife(final int lifePayment) {
+        if (life < lifePayment) {
+            return false;
+        }
+        if (lifePayment > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion", this)) {
+            return false;
+        }
         return true;
     }
 
     /**
-     * <p>payLife.</p>
-     *
-     * @param lifePayment a int.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * payLife.
+     * </p>
+     * 
+     * @param lifePayment
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean payLife(int lifePayment, Card source) {
-        if (!canPayLife(lifePayment)) return false;
-        //rule 118.8
+    public final boolean payLife(final int lifePayment, final Card source) {
+        if (!canPayLife(lifePayment)) {
+            return false;
+        }
+        // rule 118.8
         if (life >= lifePayment) {
             return loseLife(lifePayment, source);
         }
@@ -314,46 +429,55 @@ public abstract class Player extends GameEntity {
         return false;
     }
 
-    //////////////////////////
+    // ////////////////////////
     //
     // methods for handling damage
     //
-    //////////////////////////
+    // ////////////////////////
 
-    //This function handles damage after replacement and prevention effects are applied
+    // This function handles damage after replacement and prevention effects are
+    // applied
     /**
-     * <p>addDamageAfterPrevention.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * addDamageAfterPrevention.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      */
     @Override
-    public void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
+    public final void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         int damageToDo = damage;
 
         if (source.hasKeyword("Infect")) {
             addPoisonCounters(damageToDo);
         } else {
-            //Worship does not reduce the damage dealt but changes the effect of the damage
+            // Worship does not reduce the damage dealt but changes the effect
+            // of the damage
             if (PlayerUtil.worshipFlag(this) && life <= damageToDo) {
                 loseLife(Math.min(damageToDo, life - 1), source);
-            } else
-                //rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
+            } else {
+                // rule 118.2. Damage dealt to a player normally causes that
+                // player to lose that much life.
                 loseLife(damageToDo, source);
+            }
         }
         if (damageToDo > 0) {
             addAssignedDamage(damageToDo);
             GameActionUtil.executeDamageDealingEffects(source, damageToDo);
             GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
-            
-            if(isCombat) {
+
+            if (isCombat) {
                 ArrayList<String> types = source.getType();
                 for (String type : types)
                     source.getController().addProwlType(type);
             }
 
-            //Run triggers
+            // Run triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("DamageSource", source);
             runParams.put("DamageTarget", this);
@@ -364,14 +488,19 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>predictDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * predictDamage.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      * @return a int.
      */
-    public int predictDamage(final int damage, final Card source, final boolean isCombat) {
+    public final int predictDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
 
@@ -381,31 +510,49 @@ public abstract class Player extends GameEntity {
         return restDamage;
     }
 
-    //This should be also usable by the AI to forecast an effect (so it must not change the game state)
+    // This should be also usable by the AI to forecast an effect (so it must
+    // not change the game state)
     /**
-     * <p>staticDamagePrevention.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * staticDamagePrevention.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      * @return a int.
      */
     @Override
-    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+    public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+            return damage;
+        }
 
         int restDamage = damage;
 
         if (isCombat) {
-            if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
-            if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
+            if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+                return 0;
+            }
+            if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) {
+                return 0;
+            }
         }
-        if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
-        if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) return 0;
-        if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) return 0;
+        if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+            return 0;
+        }
+        if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {
+            return 0;
+        }
+        if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
+            return 0;
+        }
 
-        //Prevent Damage static abilities
+        // Prevent Damage static abilities
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
@@ -414,7 +561,7 @@ public abstract class Player extends GameEntity {
             }
         }
 
-        //specific cards
+        // specific cards
         if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
             if (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
                     && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Blue).size() > 0
@@ -424,61 +571,76 @@ public abstract class Player extends GameEntity {
                 return 0;
             }
         }
-        if (restDamage > 0)
+        if (restDamage > 0) {
             return restDamage;
-        else return 0;
+        } else {
+            return 0;
+        }
     }
 
-    //This should be also usable by the AI to forecast an effect (so it must not change the game state)
+    // This should be also usable by the AI to forecast an effect (so it must
+    // not change the game state)
     /**
-     * <p>staticReplaceDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * staticReplaceDamage.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      * @return a int.
      */
     @Override
-    public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
+    public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
 
         if (AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed()) {
             int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Sulfuric Vapors").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 restDamage += 1;
+            }
         }
-        
-        if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController()) && (source.isInstant() || source.isSorcery())) {
+
+        if (AllZoneUtil.isCardInPlay("Pyromancer's Swath", source.getController())
+                && (source.isInstant() || source.isSorcery())) {
             int amount = source.getController().getCardsIn(Zone.Battlefield, "Pyromancer's Swath").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 restDamage += 2;
+            }
         }
 
         if (AllZoneUtil.isCardInPlay("Furnace of Rath")) {
             int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
+            }
         }
 
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
             int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
+            }
         }
 
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery())) {
             int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 restDamage *= 2;
+            }
         }
 
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
             int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++) {
                 if (restDamage > 0)
                     restDamage -= 1;
+            }
         }
 
         if (AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
@@ -486,7 +648,8 @@ public abstract class Player extends GameEntity {
             restDamage = 3;
         }
 
-        if (AllZoneUtil.isCardInPlay("Forethought Amulet", this) && (source.isInstant() || source.isSorcery()) && restDamage > 2) {
+        if (AllZoneUtil.isCardInPlay("Forethought Amulet", this) && (source.isInstant() || source.isSorcery())
+                && restDamage > 2) {
 
             restDamage = 2;
         }
@@ -495,15 +658,20 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>replaceDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * replaceDamage.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      * @return a int.
      */
     @Override
-    public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    public final int replaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = staticReplaceDamage(damage, source, isCombat);
 
@@ -525,7 +693,8 @@ public abstract class Player extends GameEntity {
                     AllZone.getGameAction().exile(lib.get(0));
                 }
             }
-            //return so things like Lifelink, etc do not trigger.  This is a replacement effect I think.
+            // return so things like Lifelink, etc do not trigger. This is a
+            // replacement effect I think.
             return 0;
         }
 
@@ -533,17 +702,24 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>preventDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
-     * @param isCombat a boolean.
+     * <p>
+     * preventDamage.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param isCombat
+     *            a boolean.
      * @return a int.
      */
     @Override
-    public int preventDamage(final int damage, Card source, boolean isCombat) {
+    public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+            return damage;
+        }
 
         int restDamage = damage;
 
@@ -567,265 +743,349 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>Setter for the field <code>assignedDamage</code>.</p>
-     *
-     * @param n a int.
+     * <p>
+     * Setter for the field <code>assignedDamage</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void setAssignedDamage(int n) {
+    public final void setAssignedDamage(final int n) {
         assignedDamage = n;
     }
 
     /**
-     * <p>addAssignedDamage.</p>
-     *
-     * @param n a int.
+     * <p>
+     * addAssignedDamage.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void addAssignedDamage(int n) {
+    public final void addAssignedDamage(final int n) {
         assignedDamage += n;
     }
 
     /**
-     * <p>Getter for the field <code>assignedDamage</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>assignedDamage</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getAssignedDamage() {
+    public final int getAssignedDamage() {
         return assignedDamage;
     }
 
     /**
-     * <p>addCombatDamage.</p>
-     *
-     * @param damage a int.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * addCombatDamage.
+     * </p>
+     * 
+     * @param damage
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      */
-    public void addCombatDamage(final int damage, final Card source) {
+    public final void addCombatDamage(final int damage, final Card source) {
 
         int damageToDo = damage;
 
         damageToDo = replaceDamage(damageToDo, source, true);
         damageToDo = preventDamage(damageToDo, source, true);
 
-        addDamageAfterPrevention(damageToDo, source, true);   //damage prevention is already checked
+        addDamageAfterPrevention(damageToDo, source, true); // damage prevention
+                                                            // is already
+                                                            // checked
 
         if (damageToDo > 0) {
             GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
         }
     }
 
-    //////////////////////////
+    // ////////////////////////
     //
     // methods for handling Poison counters
     //
-    //////////////////////////
+    // ////////////////////////
 
     /**
-     * <p>addPoisonCounters.</p>
-     *
-     * @param num a int.
+     * <p>
+     * addPoisonCounters.
+     * </p>
+     * 
+     * @param num
+     *            a int.
      */
-    public void addPoisonCounters(int num) {
-        if(!this.hasKeyword("You can't get poison counters")) {
+    public final void addPoisonCounters(final int num) {
+        if (!this.hasKeyword("You can't get poison counters")) {
             poisonCounters += num;
             this.updateObservers();
         }
     }
 
     /**
-     * <p>Setter for the field <code>poisonCounters</code>.</p>
-     *
-     * @param num a int.
+     * <p>
+     * Setter for the field <code>poisonCounters</code>.
+     * </p>
+     * 
+     * @param num
+     *            a int.
      */
-    public void setPoisonCounters(int num) {
+    public final void setPoisonCounters(final int num) {
         poisonCounters = num;
         this.updateObservers();
     }
 
     /**
-     * <p>Getter for the field <code>poisonCounters</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>poisonCounters</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getPoisonCounters() {
+    public final int getPoisonCounters() {
         return poisonCounters;
     }
 
     /**
-     * <p>subtractPoisonCounters.</p>
-     *
-     * @param num a int.
+     * <p>
+     * subtractPoisonCounters.
+     * </p>
+     * 
+     * @param num
+     *            a int.
      */
-    public void subtractPoisonCounters(int num) {
+    public final void subtractPoisonCounters(final int num) {
         poisonCounters -= num;
         this.updateObservers();
-    }   
-    
-    public ArrayList<String> getKeywords() {
-		return keywords;
-	}
-
-	public void setKeywords(ArrayList<String> keywords) {
-		this.keywords = keywords;
-	}
-	
-	public void addKeyword(String keyword){
-		this.keywords.add(keyword);
-	}
-	
-	   public void removeKeyword(String keyword){
-	        this.keywords.remove(keyword);
-	    }
-	
-	public boolean hasKeyword(String keyword){
-		return this.keywords.contains(keyword);
-	}
+    }
 
     /**
-     *
-     * @param sa
-     * @return  a boolean
+     * Gets the keywords.
+     * 
+     * @return the keywords
      */
-	@Override
-    public boolean canTarget(SpellAbility sa) {
-    	if (hasKeyword("Shroud") ||
-    			(!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof")))
-    		return false;
-    		
+    public final ArrayList<String> getKeywords() {
+        return keywords;
+    }
+
+    /**
+     * Sets the keywords.
+     * 
+     * @param keywords
+     *            the new keywords
+     */
+    public final void setKeywords(final ArrayList<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    /**
+     * Adds the keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     */
+    public final void addKeyword(final String keyword) {
+        this.keywords.add(keyword);
+    }
+
+    /**
+     * Removes the keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     */
+    public final void removeKeyword(final String keyword) {
+        this.keywords.remove(keyword);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.GameEntity#hasKeyword(java.lang.String)
+     */
+    public final boolean hasKeyword(final String keyword) {
+        return this.keywords.contains(keyword);
+    }
+
+    /**
+     * Can target.
+     * 
+     * @param sa
+     *            the sa
+     * @return a boolean
+     */
+    @Override
+    public final boolean canTarget(final SpellAbility sa) {
+        if (hasKeyword("Shroud") || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))) {
+            return false;
+        }
+
         return true;
     }
-    
+
     /**
-     * <p>canPlaySpells.</p>
-     *
+     * <p>
+     * canPlaySpells.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canCastSpells() {
+    public final boolean canCastSpells() {
         return !this.keywords.contains("Can't cast spells");
     }
 
     /**
-     * <p>canPlayAbilities.</p>
-     *
+     * <p>
+     * canPlayAbilities.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canActivateAbilities() {
-    	return !this.keywords.contains("Can't activate abilities");
+    public final boolean canActivateAbilities() {
+        return !this.keywords.contains("Can't activate abilities");
     }
 
-    ////////////////////////////////
-    ///
-    /// replaces AllZone.getGameAction().draw* methods
-    ///
-    ////////////////////////////////
-    
+    // //////////////////////////////
+    // /
+    // / replaces AllZone.getGameAction().draw* methods
+    // /
+    // //////////////////////////////
+
     /**
-     * <p>canDraw</p>
+     * <p>
+     * canDraw
+     * </p>
+     * .
      * 
      * @return true if a player can draw a card, false otherwise
      */
-    public boolean canDraw() {
+    public final boolean canDraw() {
         return !AllZoneUtil.isCardInPlay("Maralen of the Mornsong");
     }
 
     /**
-     * <p>mayDrawCard.</p>
+     * <p>
+     * mayDrawCard.
+     * </p>
      * 
      * @return a CardList of cards actually drawn
      */
     public abstract CardList mayDrawCard();
 
     /**
-     * <p>mayDrawCards.</p>
-     *
-     * @param numCards a int.
+     * <p>
+     * mayDrawCards.
+     * </p>
+     * 
+     * @param numCards
+     *            a int.
      * @return a CardList of cards actually drawn
      */
     public abstract CardList mayDrawCards(int numCards);
 
     /**
-     * <p>drawCard.</p>
+     * <p>
+     * drawCard.
+     * </p>
      * 
      * @return a CardList of cards actually drawn
      */
-    public CardList drawCard() {
+    public final CardList drawCard() {
         return drawCards(1);
     }
 
     /**
-     * <p>drawCards.</p>
+     * <p>
+     * drawCards.
+     * </p>
      * 
      * @return a CardList of cards actually drawn
      */
-    public CardList drawCards() {
+    public final CardList drawCards() {
         return drawCards(1);
     }
 
     /**
-     * <p>dredge.</p>
-     *
+     * <p>
+     * dredge.
+     * </p>
+     * 
      * @return a boolean.
      */
     public abstract boolean dredge();
-    
+
     /**
-     * <p>drawCards.</p>
-     *
-     * @param n a int.
+     * <p>
+     * drawCards.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      * @return a CardList of cards actually drawn
      */
-    public CardList drawCards(int n) {
-    	return drawCards(n, false);
+    public final CardList drawCards(final int n) {
+        return drawCards(n, false);
     }
 
     /**
-     * <p>drawCards.</p>
-     *
-     * @param n a int.
-     * @param firstFromDraw true if this is the card drawn from that player's draw step each turn
+     * <p>
+     * drawCards.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     * @param firstFromDraw
+     *            true if this is the card drawn from that player's draw step
+     *            each turn
      * @return a CardList of cards actually drawn
      */
-    public CardList drawCards(int n, boolean firstFromDraw) {
-    	CardList drawn = new CardList();
-    	
-    	if(!canDraw()) {
-    	    return drawn;
-    	}
-    	
+    public final CardList drawCards(final int n, final boolean firstFromDraw) {
+        CardList drawn = new CardList();
+
+        if (!canDraw()) {
+            return drawn;
+        }
+
         for (int i = 0; i < n; i++) {
 
             // TODO: multiple replacements need to be selected by the controller
-            if (getDredge().size() != 0)
-                if(dredge())
-                	continue;
-            
-            if(!firstFromDraw && AllZoneUtil.isCardInPlay("Chains of Mephistopheles")) {
-            	if (!this.getZone(Zone.Hand).isEmpty()) {
-            		if(isHuman()) discard_Chains_of_Mephistopheles();
-            		else { //Computer
-            			discard(1, null, false);
-            			//true causes this code not to be run again
-            			drawn.addAll(drawCards(1, true));
-            		}
-            	}
-            	else {
-            		mill(1);
-            	}
+            if (getDredge().size() != 0) {
+                if (dredge()) {
+                    continue;
+                }
             }
-            else {
-            	drawn.addAll(doDraw());
+
+            if (!firstFromDraw && AllZoneUtil.isCardInPlay("Chains of Mephistopheles")) {
+                if (!this.getZone(Zone.Hand).isEmpty()) {
+                    if (isHuman()) {
+                        discard_Chains_of_Mephistopheles();
+                    } else { // Computer
+                        discard(1, null, false);
+                        // true causes this code not to be run again
+                        drawn.addAll(drawCards(1, true));
+                    }
+                } else {
+                    mill(1);
+                }
+            } else {
+                drawn.addAll(doDraw());
             }
         }
         return drawn;
     }
 
     /**
-     * <p>doDraw.</p>
+     * <p>
+     * doDraw.
+     * </p>
      * 
      * @return a CardList of cards actually drawn
      */
     private CardList doDraw() {
-    	CardList drawn = new CardList();
-    	PlayerZone library = getZone(Constant.Zone.Library);
+        CardList drawn = new CardList();
+        PlayerZone library = getZone(Constant.Zone.Library);
         if (library.size() != 0) {
             Card c = library.get(0);
             c = AllZone.getGameAction().moveToHand(c);
@@ -835,14 +1095,15 @@ public abstract class Player extends GameEntity {
             numDrawnThisTurn++;
             drawn.add(c);
 
-            //Run triggers
+            // Run triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
         }
-        //lose:
+        // lose:
         else if (!Constant.Runtime.DevMode[0] || AllZone.getDisplay().canLoseByDecking()) {
-            // if devMode is off, or canLoseByDecking is Enabled, run Lose Condition
+            // if devMode is off, or canLoseByDecking is Enabled, run Lose
+            // Condition
             if (!cantLose()) {
                 loseConditionMet(GameLossReason.Milled, null);
                 AllZone.getGameAction().checkStateEffects();
@@ -852,79 +1113,103 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * Returns PlayerZone corresponding to the given zone of game
+     * Returns PlayerZone corresponding to the given zone of game.
+     * 
      * @param zone
-     * @return
+     *            the zone
+     * @return the zone
      */
-    public PlayerZone getZone(Zone zone) {
+    public final PlayerZone getZone(final Zone zone) {
         return zones.get(zone);
     }
 
     /**
-     * gets a list of all cards in the requested zone. This function makes a CardList from Card[].
-     *
+     * gets a list of all cards in the requested zone. This function makes a
+     * CardList from Card[].
+     * 
+     * @param zone
+     *            the zone
      * @return a CardList with all the cards currently in requested zone
-     * @param player a {@link forge.Player} object.
      */
-    public CardList getCardsIn(final Constant.Zone zone) {
+    public final CardList getCardsIn(final Constant.Zone zone) {
         Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : getZone(zone).getCards();
         return new CardList(cards);
     }
 
-    public CardList getAllCards() {
+    /**
+     * Gets the all cards.
+     * 
+     * @return the all cards
+     */
+    public final CardList getAllCards() {
         return getCardsIn(ALL_ZONES);
     }
-    
-    public CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
+
+    /**
+     * Gets the cards include phasing in.
+     * 
+     * @param zone
+     *            the zone
+     * @return the cards include phasing in
+     */
+    public final CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
         Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : getZone(zone).getCards(false);
         return new CardList(cards);
     }
-    
+
     /**
-     * gets a list of first N cards in the requested zone. This function makes a CardList from Card[].
-     *
+     * gets a list of first N cards in the requested zone. This function makes a
+     * CardList from Card[].
+     * 
+     * @param zone
+     *            the zone
+     * @param n
+     *            the n
      * @return a CardList with all the cards currently in requested zone
-     * @param player a {@link forge.Player} object.
      */
-    public CardList getCardsIn(final Constant.Zone zone, int n) {
+    public final CardList getCardsIn(final Constant.Zone zone, final int n) {
         return new CardList(getZone(zone).getCards(n));
-    }    
-    
-    
+    }
 
     /**
      * gets a list of all cards in a given player's requested zones.
-     *
+     * 
+     * @param zones
+     *            the zones
      * @return a CardList with all the cards currently in requested zones
-     * @param player a {@link forge.Player} object.
      */
-    public CardList getCardsIn(final List<Constant.Zone> zones) {
+    public final CardList getCardsIn(final List<Constant.Zone> zones) {
         CardList result = new CardList();
         for (Constant.Zone z : zones) {
-            if(getZone(z) != null) {
+            if (getZone(z) != null) {
                 result.addAll(getZone(z).getCards());
             }
         }
         return result;
-    }    
-    
+    }
+
     /**
-     * gets a list of all cards with requested cardName in a given player's requested zone.
-     * This function makes a CardList from Card[].
-     *
+     * gets a list of all cards with requested cardName in a given player's
+     * requested zone. This function makes a CardList from Card[].
+     * 
+     * @param zone
+     *            the zone
+     * @param cardName
+     *            the card name
      * @return a CardList with all the cards currently in that player's library
-     * @param player a {@link forge.Player} object.
      */
-    public CardList getCardsIn(final Constant.Zone zone, String cardName) {
+    public final CardList getCardsIn(final Constant.Zone zone, final String cardName) {
         return getCardsIn(zone).getName(cardName);
-    }        
-    
+    }
+
     /**
-     * <p>getDredge.</p>
-     *
+     * <p>
+     * getDredge.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    protected CardList getDredge() {
+    protected final CardList getDredge() {
         CardList dredge = new CardList();
         CardList cl = getCardsIn(Zone.Graveyard);
 
@@ -932,100 +1217,129 @@ public abstract class Player extends GameEntity {
             ArrayList<String> kw = c.getKeyword();
             for (int i = 0; i < kw.size(); i++) {
                 if (kw.get(i).toString().startsWith("Dredge")) {
-                    if (getCardsIn(Zone.Library).size() >= getDredgeNumber(c)) dredge.add(c);
+                    if (getCardsIn(Zone.Library).size() >= getDredgeNumber(c)) {
+                        dredge.add(c);
+                    }
                 }
             }
         }
         return dredge;
-    }//hasDredge()
+    }// hasDredge()
 
     /**
-     * <p>getDredgeNumber.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * getDredgeNumber.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
-    protected int getDredgeNumber(Card c) {
+    protected final int getDredgeNumber(final Card c) {
         ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++)
+        for (int i = 0; i < a.size(); i++) {
             if (a.get(i).toString().startsWith("Dredge")) {
                 String s = a.get(i).toString();
                 return Integer.parseInt("" + s.charAt(s.length() - 1));
             }
+        }
 
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
-    }//getDredgeNumber()
+    }// getDredgeNumber()
 
     /**
-     * <p>resetNumDrawnThisTurn.</p>
+     * <p>
+     * resetNumDrawnThisTurn.
+     * </p>
      */
-    public void resetNumDrawnThisTurn() {
+    public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
     }
 
     /**
-     * <p>Getter for the field <code>numDrawnThisTurn</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>numDrawnThisTurn</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getNumDrawnThisTurn() {
+    public final int getNumDrawnThisTurn() {
         return numDrawnThisTurn;
     }
 
-    ////////////////////////////////
-    ///
-    /// replaces AllZone.getGameAction().discard* methods
-    ///
-    ////////////////////////////////
-    
+    // //////////////////////////////
+    // /
+    // / replaces AllZone.getGameAction().discard* methods
+    // /
+    // //////////////////////////////
+
+    /**
+     * Discard_ chains_of_ mephistopheles.
+     */
     protected abstract void discard_Chains_of_Mephistopheles();
 
     /**
-     * <p>discard.</p>
-     *
-     * @param num a int.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param duringResolution a boolean.
+     * <p>
+     * discard.
+     * </p>
+     * 
+     * @param num
+     *            a int.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param duringResolution
+     *            a boolean.
      * @return a {@link forge.CardList} object.
      */
     public abstract CardList discard(final int num, final SpellAbility sa, boolean duringResolution);
 
     /**
-     * <p>discard.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discard.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList discard(final SpellAbility sa) {
+    public final CardList discard(final SpellAbility sa) {
         return discard(1, sa, false);
     }
 
     /**
-     * <p>discard.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discard.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void discard(Card c, SpellAbility sa) {
+    public final void discard(final Card c, final SpellAbility sa) {
         doDiscard(c, sa);
     }
 
     /**
-     * <p>doDiscard.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doDiscard.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    protected void doDiscard(final Card c, final SpellAbility sa) {
+    protected final void doDiscard(final Card c, final SpellAbility sa) {
         // TODO: This line should be moved inside CostPayment somehow
         if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
         }
 
         /*
-           * When a spell or ability an opponent controls causes you
-           * to discard Psychic Purge, that player loses 5 life.
-           */
+         * When a spell or ability an opponent controls causes you to discard
+         * Psychic Purge, that player loses 5 life.
+         */
         if (c.getName().equals("Psychic Purge")) {
             if (null != sa && !sa.getSourceCard().getController().equals(this)) {
                 SpellAbility ability = new Ability(c, "") {
@@ -1033,25 +1347,24 @@ public abstract class Player extends GameEntity {
                         sa.getSourceCard().getController().loseLife(5, c);
                     }
                 };
-                ability.setStackDescription(c.getName() + " - " +
-                        sa.getSourceCard().getController() + " loses 5 life.");
+                ability.setStackDescription(c.getName() + " - " + sa.getSourceCard().getController() + " loses 5 life.");
                 AllZone.getStack().add(ability);
             }
         }
 
         AllZone.getGameAction().discard_madness(c);
 
-        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
-                || c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))
+        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
+                .hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))
                 && null != sa && !c.getController().equals(sa.getSourceCard().getController())) {
             AllZone.getGameAction().discard_PutIntoPlayInstead(c);
-        } else if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
-            ;
+        } else if (c
+                .hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
         } else {
             AllZone.getGameAction().moveToGraveyard(c);
         }
 
-        //Run triggers
+        // Run triggers
         Card cause = null;
         if (sa != null) {
             cause = sa.getSourceCard();
@@ -1062,54 +1375,70 @@ public abstract class Player extends GameEntity {
         runParams.put("Cause", cause);
         AllZone.getTriggerHandler().runTrigger("Discarded", runParams);
 
-    }//end doDiscard
+    }// end doDiscard
 
     /**
-     * <p>discardHand.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discardHand.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return the card list
      */
-    public CardList discardHand(SpellAbility sa) {
+    public final CardList discardHand(final SpellAbility sa) {
         CardList list = this.getCardsIn(Zone.Hand);
         discardRandom(list.size(), sa);
         return list;
     }
 
     /**
-     * <p>discardRandom.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discardRandom.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a CardList of cards discarded
      */
-    public CardList discardRandom(SpellAbility sa) {
+    public final CardList discardRandom(final SpellAbility sa) {
         return discardRandom(1, sa);
     }
 
     /**
-     * <p>discardRandom.</p>
-     *
-     * @param num a int.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discardRandom.
+     * </p>
+     * 
+     * @param num
+     *            a int.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a CardList of cards discarded
      */
-    public CardList discardRandom(final int num, final SpellAbility sa) {
+    public final CardList discardRandom(final int num, final SpellAbility sa) {
         return discardRandom(num, sa, "Card");
     }
-    
+
     /**
-     * <p>discardRandom.</p>
-     *
-     * @param num a int.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param valid a valid expression
+     * <p>
+     * discardRandom.
+     * </p>
+     * 
+     * @param num
+     *            a int.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param valid
+     *            a valid expression
      * @return a CardList of cards discarded
      */
-    public CardList discardRandom(final int num, final SpellAbility sa, String valid) {
+    public final CardList discardRandom(final int num, final SpellAbility sa, final String valid) {
         CardList discarded = new CardList();
         for (int i = 0; i < num; i++) {
             CardList list = this.getCardsIn(Zone.Hand);
             list = list.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
-            if (list.size() != 0){
+            if (list.size() != 0) {
                 Card disc = CardUtil.getRandom(list.toArray());
                 discarded.add(disc);
                 doDiscard(disc, sa);
@@ -1119,30 +1448,44 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>discardUnless.</p>
-     *
-     * @param num a int.
-     * @param uType a {@link java.lang.String} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * discardUnless.
+     * </p>
+     * 
+     * @param num
+     *            a int.
+     * @param uType
+     *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public abstract void discardUnless(int num, String uType, SpellAbility sa);
 
     /**
-     * <p>mill.</p>
-     *
-     * @param n a int.
+     * <p>
+     * mill.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     * @return the card list
      */
-    public CardList mill(int n) {
+    public final CardList mill(final int n) {
         return mill(n, Constant.Zone.Graveyard);
     }
 
     /**
-     * <p>mill.</p>
-     *
-     * @param n a int.
-     * @param zone a {@link java.lang.String} object.
+     * <p>
+     * mill.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     * @param zone
+     *            a {@link java.lang.String} object.
+     * @return the card list
      */
-    public CardList mill(int n, Constant.Zone zone) {
+    public final CardList mill(final int n, final Constant.Zone zone) {
         CardList lib = getCardsIn(Zone.Library);
         CardList milled = new CardList();
 
@@ -1153,30 +1496,38 @@ public abstract class Player extends GameEntity {
         for (int i = 0; i < max; i++) {
             milled.add(AllZone.getGameAction().moveTo(destination, lib.get(i)));
         }
-        
+
         return milled;
     }
 
     /**
-     * <p>handToLibrary.</p>
-     *
-     * @param numToLibrary a int.
-     * @param libPos a {@link java.lang.String} object.
+     * <p>
+     * handToLibrary.
+     * </p>
+     * 
+     * @param numToLibrary
+     *            a int.
+     * @param libPos
+     *            a {@link java.lang.String} object.
      */
     public abstract void handToLibrary(final int numToLibrary, String libPos);
 
-    ////////////////////////////////
+    // //////////////////////////////
     /**
-     * <p>shuffle.</p>
+     * <p>
+     * shuffle.
+     * </p>
      */
-    public void shuffle() {
+    public final void shuffle() {
         PlayerZone library = getZone(Constant.Zone.Library);
-        Card c[] = getCardsIn(Zone.Library).toArray();
+        Card[] c = getCardsIn(Zone.Library).toArray();
 
-        if (c.length <= 1) return;
+        if (c.length <= 1) {
+            return;
+        }
 
         ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
-        //overdone but wanted to make sure it was really random
+        // overdone but wanted to make sure it was really random
         Random random = MyRandom.random;
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
@@ -1198,33 +1549,39 @@ public abstract class Player extends GameEntity {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-
         list.toArray(c);
         library.setCards(c);
 
-        //Run triggers
+        // Run triggers
         HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
         AllZone.getTriggerHandler().runTrigger("Shuffled", runParams);
 
-    }//shuffle
-    ////////////////////////////////
+    }// shuffle
+     // //////////////////////////////
 
-    ////////////////////////////////
+    // //////////////////////////////
     /**
-     * <p>doScry.</p>
-     *
-     * @param topN a {@link forge.CardList} object.
-     * @param N a int.
+     * <p>
+     * doScry.
+     * </p>
+     * 
+     * @param topN
+     *            a {@link forge.CardList} object.
+     * @param N
+     *            a int.
      */
     protected abstract void doScry(CardList topN, int N);
 
     /**
-     * <p>scry.</p>
-     *
-     * @param numScry a int.
+     * <p>
+     * scry.
+     * </p>
+     * 
+     * @param numScry
+     *            a int.
      */
-    public void scry(int numScry) {
+    public final void scry(int numScry) {
         CardList topN = new CardList();
         PlayerZone library = getZone(Constant.Zone.Library);
         numScry = Math.min(numScry, library.size());
@@ -1233,23 +1590,28 @@ public abstract class Player extends GameEntity {
         }
         doScry(topN, topN.size());
     }
-    ///////////////////////////////
+
+    // /////////////////////////////
 
     /**
-     * <p>playLand.</p>
-     *
-     * @param land a {@link forge.Card} object.
+     * <p>
+     * playLand.
+     * </p>
+     * 
+     * @param land
+     *            a {@link forge.Card} object.
      */
-    public void playLand(Card land) {
+    public final void playLand(final Card land) {
         if (canPlayLand()) {
             AllZone.getGameAction().moveToPlay(land);
             CardFactoryUtil.playLandEffects(land);
             numLandsPlayed++;
 
-            //check state effects for static animate (Living Lands, Conversion, etc...)
+            // check state effects for static animate (Living Lands, Conversion,
+            // etc...)
             AllZone.getGameAction().checkStateEffects();
 
-            //Run triggers
+            // Run triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", land);
             AllZone.getTriggerHandler().runTrigger("LandPlayed", runParams);
@@ -1259,215 +1621,284 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>canPlayLand.</p>
-     *
+     * <p>
+     * canPlayLand.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canPlayLand() {
-        return Phase.canCastSorcery(this) && (numLandsPlayed < maxLandsToPlay ||
-                getCardsIn(Zone.Battlefield, "Fastbond").size() > 0);
+    public final boolean canPlayLand() {
+        return Phase.canCastSorcery(this)
+                && (numLandsPlayed < maxLandsToPlay || getCardsIn(Zone.Battlefield, "Fastbond").size() > 0);
     }
 
-    public ManaPool getManaPool() {
-		return manaPool;
-	}
-
-	///////////////////////////////
-    ////
-    ////	properties about the player and his/her cards/game status
-    ////
-    ///////////////////////////////
     /**
-     * <p>hasPlaneswalker.</p>
-     *
+     * Gets the mana pool.
+     * 
+     * @return the mana pool
+     */
+    public final ManaPool getManaPool() {
+        return manaPool;
+    }
+
+    // /////////////////////////////
+    // //
+    // // properties about the player and his/her cards/game status
+    // //
+    // /////////////////////////////
+    /**
+     * <p>
+     * hasPlaneswalker.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasPlaneswalker() {
+    public final boolean hasPlaneswalker() {
         return null != getPlaneswalker();
     }
 
     /**
-     * <p>getPlaneswalker.</p>
-     *
+     * <p>
+     * getPlaneswalker.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getPlaneswalker() {
+    public final Card getPlaneswalker() {
         CardList c = getCardsIn(Zone.Battlefield).getType("Planeswalker");
-        if (null != c && c.size() > 0) return c.get(0);
-        else return null;
+        if (null != c && c.size() > 0) {
+            return c.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**
-     * <p>Getter for the field <code>numPowerSurgeLands</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>numPowerSurgeLands</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getNumPowerSurgeLands() {
+    public final int getNumPowerSurgeLands() {
         return numPowerSurgeLands;
     }
 
     /**
-     * <p>Setter for the field <code>numPowerSurgeLands</code>.</p>
-     *
-     * @param n a int.
+     * <p>
+     * Setter for the field <code>numPowerSurgeLands</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      * @return a int.
      */
-    public int setNumPowerSurgeLands(int n) {
+    public final int setNumPowerSurgeLands(final int n) {
         numPowerSurgeLands = n;
         return numPowerSurgeLands;
     }
 
     /**
-     * <p>Getter for the field <code>lastDrawnCard</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>lastDrawnCard</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getLastDrawnCard() {
+    public final Card getLastDrawnCard() {
         return lastDrawnCard;
     }
 
     /**
-     * <p>Setter for the field <code>lastDrawnCard</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>lastDrawnCard</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card setLastDrawnCard(Card c) {
+    public final Card setLastDrawnCard(final Card c) {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
 
     /**
-     * <p>resetLastDrawnCard.</p>
-     *
+     * <p>
+     * resetLastDrawnCard.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card resetLastDrawnCard() {
+    public final Card resetLastDrawnCard() {
         Card old = lastDrawnCard;
         lastDrawnCard = null;
         return old;
     }
 
     /**
-     * <p>skipNextUntap.</p>
-     *
+     * <p>
+     * skipNextUntap.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean skipNextUntap() {
+    public final boolean skipNextUntap() {
         return skipNextUntap;
     }
 
     /**
-     * <p>Setter for the field <code>skipNextUntap</code>.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * Setter for the field <code>skipNextUntap</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setSkipNextUntap(boolean b) {
+    public final void setSkipNextUntap(final boolean b) {
         skipNextUntap = b;
     }
 
     /**
-     * <p>Getter for the field <code>slowtripList</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>slowtripList</code>.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList getSlowtripList() {
+    public final CardList getSlowtripList() {
         return slowtripList;
     }
 
     /**
-     * <p>clearSlowtripList.</p>
+     * <p>
+     * clearSlowtripList.
+     * </p>
      */
-    public void clearSlowtripList() {
+    public final void clearSlowtripList() {
         slowtripList.clear();
     }
 
     /**
-     * <p>addSlowtripList.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * addSlowtripList.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      */
-    public void addSlowtripList(Card card) {
+    public final void addSlowtripList(final Card card) {
         slowtripList.add(card);
     }
 
     /**
-     * <p>getTurn.</p>
-     *
+     * <p>
+     * getTurn.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getTurn() {
+    public final int getTurn() {
         return nTurns;
     }
 
     /**
-     * <p>incrementTurn.</p>
+     * <p>
+     * incrementTurn.
+     * </p>
      */
-    public void incrementTurn() {
+    public final void incrementTurn() {
         nTurns++;
     }
 
-    ////////////////////////////////
+    // //////////////////////////////
     /**
-     * <p>sacrificePermanent.</p>
-     *
-     * @param prompt a {@link java.lang.String} object.
-     * @param choices a {@link forge.CardList} object.
+     * <p>
+     * sacrificePermanent.
+     * </p>
+     * 
+     * @param prompt
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a {@link forge.CardList} object.
      */
     public abstract void sacrificePermanent(String prompt, CardList choices);
 
     /**
-     * <p>sacrificeCreature.</p>
+     * <p>
+     * sacrificeCreature.
+     * </p>
      */
-    public void sacrificeCreature() {
+    public final void sacrificeCreature() {
         CardList choices = AllZoneUtil.getCreaturesInPlay(this);
         sacrificePermanent("Select a creature to sacrifice.", choices);
     }
 
     /**
-     * <p>sacrificeCreature.</p>
-     *
-     * @param choices a {@link forge.CardList} object.
+     * <p>
+     * sacrificeCreature.
+     * </p>
+     * 
+     * @param choices
+     *            a {@link forge.CardList} object.
      */
-    public void sacrificeCreature(CardList choices) {
+    public final void sacrificeCreature(final CardList choices) {
         sacrificePermanent("Select a creature to sacrifice.", choices);
     }
 
     // Game win/loss
 
     /**
-     * <p>Getter for the field <code>altWin</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>altWin</code>.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean getAltWin() {
+    public final boolean getAltWin() {
         return altWin;
     }
 
     /**
-     * <p>Getter for the field <code>winCondition</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>winCondition</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getWinConditionSource()
-    {
+    public final String getWinConditionSource() {
         return altWinSourceName;
     }
 
     /**
-     * <p>Getter for the field <code>loseCondition</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>loseCondition</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public GameLossReason getLossState() { return lossState; }
-    public String getLossConditionSource() { return loseConditionSpell; }
+    public final GameLossReason getLossState() {
+        return lossState;
+    }
 
     /**
-     * <p>altWinConditionMet.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * Gets the loss condition source.
+     * 
+     * @return the loss condition source
      */
-    public void altWinBySpellEffect(final String sourceName) {
+    public final String getLossConditionSource() {
+        return loseConditionSpell;
+    }
+
+    /**
+     * <p>
+     * altWinConditionMet.
+     * </p>
+     * 
+     * @param sourceName
+     *            the source name
+     */
+    public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
             return;
@@ -1477,12 +1908,17 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>altLoseConditionMet.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * altLoseConditionMet.
+     * </p>
+     * 
+     * @param state
+     *            the state
+     * @param spellName
+     *            the spell name
      * @return a boolean.
      */
-    public boolean loseConditionMet(GameLossReason state, String spellName ) {
+    public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
         if (cantLose()) {
             System.out.println("Tried to lose, but currently can't.");
             return false;
@@ -1492,24 +1928,32 @@ public abstract class Player extends GameEntity {
         return true;
     }
 
-    public void concede() { // No cantLose checks - just lose
+    /**
+     * Concede.
+     */
+    public final void concede() { // No cantLose checks - just lose
         lossState = GameLossReason.Conceded;
         loseConditionSpell = null;
     }
 
     /**
-     * <p>cantLose.</p>
-     *
+     * <p>
+     * cantLose.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean cantLose() {
-        if (lossState == GameLossReason.Conceded) { return false; }
+    public final boolean cantLose() {
+        if (lossState == GameLossReason.Conceded) {
+            return false;
+        }
 
         CardList list = getCardsIn(Zone.Battlefield);
         list = list.getKeyword("You can't lose the game.");
 
-        if (list.size() > 0)
+        if (list.size() > 0) {
             return true;
+        }
 
         CardList oppList = getOpponent().getCardsIn(Zone.Battlefield);
         oppList = oppList.getKeyword("Your opponents can't lose the game.");
@@ -1518,11 +1962,13 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>cantLoseForZeroOrLessLife.</p>
-     *
+     * <p>
+     * cantLoseForZeroOrLessLife.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean cantLoseForZeroOrLessLife() {
+    public final boolean cantLoseForZeroOrLessLife() {
         CardList list = getCardsIn(Zone.Battlefield);
         list = list.getKeyword("You don't lose the game for having 0 or less life.");
 
@@ -1530,16 +1976,19 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>cantWin.</p>
-     *
+     * <p>
+     * cantWin.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean cantWin() {
+    public final boolean cantWin() {
         CardList list = getCardsIn(Zone.Battlefield);
         list = list.getKeyword("You can't win the game.");
 
-        if (list.size() > 0)
+        if (list.size() > 0) {
             return true;
+        }
 
         CardList oppList = getOpponent().getCardsIn(Zone.Battlefield);
         oppList = oppList.getKeyword("Your opponents can't win the game.");
@@ -1548,21 +1997,24 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>hasLost.</p>
-     *
+     * <p>
+     * hasLost.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasLost() {
+    public final boolean hasLost() {
 
-        if (cantLose())
+        if (cantLose()) {
             return false;
+        }
 
         if (lossState != GameLossReason.DidNotLoseYet) {
             return true;
         }
 
         if (poisonCounters >= 10) {
-            loseConditionMet( GameLossReason.Poisoned, null );
+            loseConditionMet(GameLossReason.Poisoned, null);
             return true;
         }
 
@@ -1572,126 +2024,163 @@ public abstract class Player extends GameEntity {
 
         boolean hasNoLife = getLife() <= 0;
         if (hasNoLife) {
-            loseConditionMet( GameLossReason.LifeReachedZero, null);
+            loseConditionMet(GameLossReason.LifeReachedZero, null);
             return true;
         }
 
         return false;
     }
 
-
     /**
-     * <p>hasWon.</p>
-     *
+     * <p>
+     * hasWon.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasWon() {
-        if (cantWin())
+    public final boolean hasWon() {
+        if (cantWin()) {
             return false;
+        }
 
         return altWin;
     }
 
     /**
-     * <p>hasMetalcraft.</p>
-     *
+     * <p>
+     * hasMetalcraft.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasMetalcraft() {
+    public final boolean hasMetalcraft() {
         CardList list = getCardsIn(Zone.Battlefield).getType("Artifact");
         return list.size() >= 3;
     }
 
     /**
-     * <p>hasThreshold.</p>
-     *
+     * <p>
+     * hasThreshold.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasThreshold() {
+    public final boolean hasThreshold() {
         return getZone(Zone.Graveyard).getCards().length >= 7;
     }
 
     /**
-     * <p>hasHellbent.</p>
-     *
+     * <p>
+     * hasHellbent.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasHellbent() {
+    public final boolean hasHellbent() {
         return this.getZone(Zone.Hand).getCards().length == 0;
     }
-    
+
     /**
-     * <p>hasLandfall.</p>
-     *
+     * <p>
+     * hasLandfall.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasLandfall() {
+    public final boolean hasLandfall() {
         CardList list = ((DefaultPlayerZone) getZone(Zone.Battlefield)).getCardsAddedThisTurn(null).getType("Land");
         return !list.isEmpty();
     }
-    
+
     /**
-     * <p>hasProwl.</p>
-     *
+     * <p>
+     * hasProwl.
+     * </p>
+     * 
+     * @param type
+     *            the type
      * @return a boolean.
      */
-    public boolean hasProwl(String type) {
+    public final boolean hasProwl(final String type) {
         return prowl.contains(type);
     }
-    
-    public void addProwlType(String type) {
+
+    /**
+     * Adds the prowl type.
+     * 
+     * @param type
+     *            the type
+     */
+    public final void addProwlType(final String type) {
         prowl.add(type);
     }
-    
-    public void resetProwl() {
+
+    /**
+     * Reset prowl.
+     */
+    public final void resetProwl() {
         prowl = new ArrayList<String>();
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.GameEntity#isValid(java.lang.String, forge.Player, forge.Card)
+     */
     @Override
-    public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
-        
-        String incR[] = Restriction.split("\\.");
-        
-        if (!incR[0].equals("Player") && 
-                !(incR[0].equals("Opponent") && !this.equals(sourceController)) &&
-                !(incR[0].equals("You") && this.equals(sourceController)))
+    public final boolean isValid(final String Restriction, final Player sourceController, final Card source) {
+
+        String[] incR = Restriction.split("\\.");
+
+        if (!incR[0].equals("Player") && !(incR[0].equals("Opponent") && !this.equals(sourceController))
+                && !(incR[0].equals("You") && this.equals(sourceController))) {
             return false;
-        
+        }
+
         if (incR.length > 1) {
             final String excR = incR[1];
-            String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
-            for (int j = 0; j < exR.length; j++)
-                if (hasProperty(exR[j], sourceController, source) == false) return false;
+            String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
+            for (int j = 0; j < exR.length; j++) {
+                if (hasProperty(exR[j], sourceController, source) == false)
+                    return false;
+            }
         }
-        
+
         return true;
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.GameEntity#hasProperty(java.lang.String, forge.Player,
+     * forge.Card)
+     */
     @Override
-    public boolean hasProperty(String Property, final Player sourceController, final Card source) {
-        
+    public final boolean hasProperty(final String Property, final Player sourceController, final Card source) {
+
         if (Property.equals("You")) {
             if (!this.equals(sourceController)) {
                 return false;
             }
-        }        
-        else if (Property.equals("Opponent")) {
+        } else if (Property.equals("Opponent")) {
             if (this.equals(sourceController)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     private ArrayList<HandSizeOp> handSizeOperations;
 
     /**
-     * <p>getMaxHandSize.</p>
-     *
+     * <p>
+     * getMaxHandSize.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getMaxHandSize() {
+    public final int getMaxHandSize() {
 
         int ret = 7;
         for (int i = 0; i < handSizeOperations.size(); i++) {
@@ -1710,9 +2199,11 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>sortHandSizeOperations.</p>
+     * <p>
+     * sortHandSizeOperations.
+     * </p>
      */
-    public void sortHandSizeOperations() {
+    public final void sortHandSizeOperations() {
         if (handSizeOperations.size() < 2) {
             return;
         }
@@ -1733,20 +2224,26 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>addHandSizeOperation.</p>
-     *
-     * @param theNew a {@link forge.HandSizeOp} object.
+     * <p>
+     * addHandSizeOperation.
+     * </p>
+     * 
+     * @param theNew
+     *            a {@link forge.HandSizeOp} object.
      */
-    public void addHandSizeOperation(HandSizeOp theNew) {
+    public final void addHandSizeOperation(final HandSizeOp theNew) {
         handSizeOperations.add(theNew);
     }
 
     /**
-     * <p>removeHandSizeOperation.</p>
-     *
-     * @param timestamp a int.
+     * <p>
+     * removeHandSizeOperation.
+     * </p>
+     * 
+     * @param timestamp
+     *            a int.
      */
-    public void removeHandSizeOperation(int timestamp) {
+    public final void removeHandSizeOperation(final int timestamp) {
         for (int i = 0; i < handSizeOperations.size(); i++) {
             if (handSizeOperations.get(i).hsTimeStamp == timestamp) {
                 handSizeOperations.remove(i);
@@ -1756,9 +2253,11 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>clearHandSizeOperations.</p>
+     * <p>
+     * clearHandSizeOperations.
+     * </p>
      */
-    public void clearHandSizeOperations() {
+    public final void clearHandSizeOperations() {
         handSizeOperations.clear();
     }
 
@@ -1766,8 +2265,10 @@ public abstract class Player extends GameEntity {
     private static int NextHandSizeStamp = 0;
 
     /**
-     * <p>getHandSizeStamp.</p>
-     *
+     * <p>
+     * getHandSizeStamp.
+     * </p>
+     * 
      * @return a int.
      */
     public static int getHandSizeStamp() {
@@ -1775,70 +2276,86 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * <p>Getter for the field <code>maxLandsToPlay</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>maxLandsToPlay</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getMaxLandsToPlay() {
+    public final int getMaxLandsToPlay() {
         return maxLandsToPlay;
     }
 
     /**
-     * <p>Setter for the field <code>maxLandsToPlay</code>.</p>
-     *
-     * @param n a int.
+     * <p>
+     * Setter for the field <code>maxLandsToPlay</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void setMaxLandsToPlay(int n) {
+    public final void setMaxLandsToPlay(final int n) {
         maxLandsToPlay = n;
     }
 
     /**
-     * <p>addMaxLandsToPlay.</p>
-     *
-     * @param n a int.
+     * <p>
+     * addMaxLandsToPlay.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void addMaxLandsToPlay(int n) {
+    public final void addMaxLandsToPlay(final int n) {
         maxLandsToPlay += n;
     }
 
     /**
-     * <p>Getter for the field <code>numLandsPlayed</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>numLandsPlayed</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getNumLandsPlayed() {
+    public final int getNumLandsPlayed() {
         return numLandsPlayed;
     }
 
     /**
-     * <p>Setter for the field <code>numLandsPlayed</code>.</p>
-     *
-     * @param n a int.
+     * <p>
+     * Setter for the field <code>numLandsPlayed</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void setNumLandsPlayed(int n) {
+    public final void setNumLandsPlayed(final int n) {
         numLandsPlayed = n;
     }
 
-    ////////////////////////////////
+    // //////////////////////////////
     //
     // Clash
     //
-    /////////////////////////////////
+    // ///////////////////////////////
 
     /**
-     * <p>clashWithOpponent.</p>
-     *
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * clashWithOpponent.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean clashWithOpponent(Card source) {
+    public final boolean clashWithOpponent(final Card source) {
         /*
-           * Each clashing player reveals the top card of his or
-           * her library, then puts that card on the top or bottom.
-           * A player wins if his or her card had a higher mana cost.
-           *
-           * Clash you win or win you don't.  There is no tie.
-           */
+         * Each clashing player reveals the top card of his or her library, then
+         * puts that card on the top or bottom. A player wins if his or her card
+         * had a higher mana cost.
+         * 
+         * Clash you win or win you don't. There is no tie.
+         */
         Player player = source.getController();
         Player opponent = player.getOpponent();
         Constant.Zone lib = Constant.Zone.Library;
@@ -1851,11 +2368,16 @@ public abstract class Player extends GameEntity {
         Card pCard = null;
         Card oCard = null;
 
-        if (pLib.size() > 0) pCard = pLib.get(0);
-        if (oLib.size() > 0) oCard = oLib.get(0);
+        if (pLib.size() > 0) {
+            pCard = pLib.get(0);
+        }
+        if (oLib.size() > 0) {
+            oCard = oLib.get(0);
+        }
 
-        if (pLib.size() == 0 && oLib.size() == 0) return false;
-        else if (pLib.size() == 0) {
+        if (pLib.size() == 0 && oLib.size() == 0) {
+            return false;
+        } else if (pLib.size() == 0) {
             opponent.clashMoveToTopOrBottom(oCard);
             return false;
         } else if (oLib.size() == 0) {
@@ -1868,58 +2390,68 @@ public abstract class Player extends GameEntity {
             reveal.append("\r\n");
             reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);
             reveal.append("\r\n\r\n");
-            if (pCMC > oCMC) reveal.append(player).append(" wins clash.");
-            else reveal.append(player).append(" loses clash.");
+            if (pCMC > oCMC) {
+                reveal.append(player).append(" wins clash.");
+            } else {
+                reveal.append(player).append(" loses clash.");
+            }
             JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
             player.clashMoveToTopOrBottom(pCard);
             opponent.clashMoveToTopOrBottom(oCard);
-            //JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
+            // JOptionPane.showMessageDialog(null, reveal.toString(),
+            // source.getName(), JOptionPane.PLAIN_MESSAGE);
             return pCMC > oCMC;
         }
     }
 
     /**
-     * <p>clashMoveToTopOrBottom.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * clashMoveToTopOrBottom.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
     protected abstract void clashMoveToTopOrBottom(Card c);
-    
+
     /**
-     * a Player or Planeswalker that this Player must attack if able in an upcoming combat.
-     * This is cleared at the end of each combat.
+     * a Player or Planeswalker that this Player must attack if able in an
+     * upcoming combat. This is cleared at the end of each combat.
      * 
-     * @param o Player or Planeswalker (Card) to attack
+     * @param o
+     *            Player or Planeswalker (Card) to attack
      * 
      * @since 1.1.01
      */
-    public void setMustAttackEntity(Object o) {
-    	mustAttackEntity = o;
-    }
-    
-    /**
-     * get the Player object or Card (Planeswalker) object that this Player must attack this combat
-     * 
-     * @return the Player or Card (Planeswalker)
-     * 
-     * @since 1.1.01
-     */
-    public Object getMustAttackEntity() {
-    	return mustAttackEntity;
+    public final void setMustAttackEntity(final Object o) {
+        mustAttackEntity = o;
     }
 
-    ////////////////////////////////
+    /**
+     * get the Player object or Card (Planeswalker) object that this Player must
+     * attack this combat.
+     * 
+     * @return the Player or Card (Planeswalker)
+     * @since 1.1.01
+     */
+    public final Object getMustAttackEntity() {
+        return mustAttackEntity;
+    }
+
+    // //////////////////////////////
     //
     // generic Object overrides
     //
-    /////////////////////////////////
+    // ///////////////////////////////
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         if (o instanceof Player) {
             Player p1 = (Player) o;
             return p1.getName().equals(getName());
-        } else return false;
+        } else {
+            return false;
+        }
     }
 }

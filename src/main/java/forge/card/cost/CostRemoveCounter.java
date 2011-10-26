@@ -6,101 +6,156 @@ import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
+/**
+ * The Class CostRemoveCounter.
+ */
 public class CostRemoveCounter extends CostPart {
-	// SubCounter<Num/Counter/{Type/TypeDescription}>
-    
+    // SubCounter<Num/Counter/{Type/TypeDescription}>
+
     // Here are the cards that have RemoveCounter<Type>
-    // Ion Storm, Noviken Sages, Ghave, Guru of Spores, Power Conduit (any Counter is tough), 
+    // Ion Storm, Noviken Sages, Ghave, Guru of Spores, Power Conduit (any
+    // Counter is tough),
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
     private Counters counter;
     private int lastPaidAmount = 0;
-    
-    public Counters getCounter() {
+
+    /**
+     * Gets the counter.
+     * 
+     * @return the counter
+     */
+    public final Counters getCounter() {
         return counter;
     }
 
-    public void setLastPaidAmount(int paidAmount){
-    	lastPaidAmount = paidAmount;
+    /**
+     * Sets the last paid amount.
+     * 
+     * @param paidAmount
+     *            the new last paid amount
+     */
+    public final void setLastPaidAmount(final int paidAmount) {
+        lastPaidAmount = paidAmount;
     }
-    
-    public CostRemoveCounter(String amount, Counters counter, String type, String description){
+
+    /**
+     * Instantiates a new cost remove counter.
+     * 
+     * @param amount
+     *            the amount
+     * @param counter
+     *            the counter
+     * @param type
+     *            the type
+     * @param description
+     *            the description
+     */
+    public CostRemoveCounter(final String amount, final Counters counter, final String type, final String description) {
         super(amount, type, description);
-    	isReusable = true;
+        isReusable = true;
 
-    	this.counter = counter;
+        this.counter = counter;
     }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-        if (counter.getName().equals("Loyalty"))
-        	sb.append("-").append(amount);
-        else {
-        	sb.append("Remove ");
-        	Integer i = convertAmount();
-        	sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName()+" counter"));
-        	
-        	if (amount.equals("All")) {
-        	    sb.append("s");
-        	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
+    @Override
+    public final String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (counter.getName().equals("Loyalty")) {
+            sb.append("-").append(amount);
+        } else {
+            sb.append("Remove ");
+            Integer i = convertAmount();
+            sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName() + " counter"));
+
+            if (amount.equals("All")) {
+                sb.append("s");
+            }
 
             sb.append(" from ").append(typeDescription == null ? type : typeDescription);
         }
         return sb.toString();
-	}
+    }
 
-	@Override
-	public void refund(Card source) {
-		source.addCounterFromNonEffect(counter, lastPaidAmount);
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
+    public final void refund(final Card source) {
+        source.addCounterFromNonEffect(counter, lastPaidAmount);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         Counters c = getCounter();
-        
+
         Integer amount = convertAmount();
         if (amount != null && source.getCounters(c) - amount < 0) {
             return false;
         }
-        
+
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Integer c = convertAmount();
-        if (c == null){
+        if (c == null) {
             c = AbilityFactory.calculateAmount(source, amount, ability);
         }
         source.subtractCounter(getCounter(), c);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         String amount = getAmount();
         Counters type = getCounter();
         Integer c = convertAmount();
         int maxCounters = source.getCounters(type);
-        
-        if (amount.equals("All")){
+
+        if (amount.equals("All")) {
             c = maxCounters;
-        }
-        else{
-            if (c == null){
+        } else {
+            if (c == null) {
                 String sVar = source.getSVar(amount);
                 // Generalize this
-                if (sVar.equals("XChoice")){
+                if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, maxCounters);
-                }
-                else{
+                } else {
                     c = AbilityFactory.calculateAmount(source, amount, ability);
                 }
             }
         }
-       
+
         if (maxCounters >= c) {
-            source.setSVar("CostCountersRemoved", "Number$"+Integer.toString(c));
+            source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
             source.subtractCounter(type, c);
             setLastPaidAmount(c);
             payment.setPaidManaPart(this, true);
@@ -112,15 +167,22 @@ public class CostRemoveCounter extends CostPart {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Integer c = convertAmount();
-        if (c == null){
+        if (c == null) {
             String sVar = source.getSVar(amount);
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 return false;
             }
-            
+
             c = AbilityFactory.calculateAmount(source, amount, ability);
         }
         if (c > source.getCounters(getCounter())) {

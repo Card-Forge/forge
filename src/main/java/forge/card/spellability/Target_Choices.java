@@ -1,13 +1,15 @@
 package forge.card.spellability;
 
+import java.util.ArrayList;
+
 import forge.Card;
 import forge.Player;
 
-import java.util.ArrayList;
-
 /**
- * <p>Target_Choices class.</p>
- *
+ * <p>
+ * Target_Choices class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -15,11 +17,13 @@ public class Target_Choices {
     private int numTargeted = 0;
 
     /**
-     * <p>Getter for the field <code>numTargeted</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>numTargeted</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getNumTargeted() {
+    public final int getNumTargeted() {
         return numTargeted;
     }
 
@@ -29,31 +33,36 @@ public class Target_Choices {
     private ArrayList<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
 
     /**
-     * <p>addTarget.</p>
-     *
-     * @param o a {@link java.lang.Object} object.
+     * <p>
+     * addTarget.
+     * </p>
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
      * @return a boolean.
      */
-    public boolean addTarget(Object o) {
-        if (o instanceof Player)
+    public final boolean addTarget(final Object o) {
+        if (o instanceof Player) {
             return addTarget((Player) o);
-
-        else if (o instanceof Card)
+        } else if (o instanceof Card) {
             return addTarget((Card) o);
-
-        else if (o instanceof SpellAbility)
+        } else if (o instanceof SpellAbility) {
             return addTarget((SpellAbility) o);
+        }
 
         return false;
     }
 
     /**
-     * <p>addTarget.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * addTarget.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean addTarget(Card c) {
+    public final boolean addTarget(final Card c) {
         if (!targetCards.contains(c)) {
             targetCards.add(c);
             numTargeted++;
@@ -63,12 +72,15 @@ public class Target_Choices {
     }
 
     /**
-     * <p>addTarget.</p>
-     *
-     * @param p a {@link forge.Player} object.
+     * <p>
+     * addTarget.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    public boolean addTarget(Player p) {
+    public final boolean addTarget(final Player p) {
         if (!targetPlayers.contains(p)) {
             targetPlayers.add(p);
             numTargeted++;
@@ -78,12 +90,15 @@ public class Target_Choices {
     }
 
     /**
-     * <p>addTarget.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addTarget.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean addTarget(SpellAbility sa) {
+    public final boolean addTarget(final SpellAbility sa) {
         if (!targetSAs.contains(sa)) {
             targetSAs.add(sa);
             numTargeted++;
@@ -93,38 +108,46 @@ public class Target_Choices {
     }
 
     /**
-     * <p>Getter for the field <code>targetCards</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetCards</code>.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Card> getTargetCards() {
+    public final ArrayList<Card> getTargetCards() {
         return targetCards;
     }
 
     /**
-     * <p>Getter for the field <code>targetPlayers</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetPlayers</code>.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Player> getTargetPlayers() {
+    public final ArrayList<Player> getTargetPlayers() {
         return targetPlayers;
     }
 
     /**
-     * <p>Getter for the field <code>targetSAs</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetSAs</code>.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<SpellAbility> getTargetSAs() {
+    public final ArrayList<SpellAbility> getTargetSAs() {
         return targetSAs;
     }
 
     /**
-     * <p>getTargets.</p>
-     *
+     * <p>
+     * getTargets.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Object> getTargets() {
+    public final ArrayList<Object> getTargets() {
         ArrayList<Object> tgts = new ArrayList<Object>();
         tgts.addAll(targetPlayers);
         tgts.addAll(targetCards);
@@ -134,11 +157,13 @@ public class Target_Choices {
     }
 
     /**
-     * <p>getTargetedString.</p>
-     *
+     * <p>
+     * getTargetedString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getTargetedString() {
+    public final String getTargetedString() {
         ArrayList<Object> tgts = getTargets();
         StringBuilder sb = new StringBuilder("");
         for (Object o : tgts) {

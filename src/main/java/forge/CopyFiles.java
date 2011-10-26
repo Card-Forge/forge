@@ -58,8 +58,8 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
      * @param jButtonSource
      *            a {@link javax.swing.JButton} object.
      */
-    public CopyFiles(final List<File> FileList, JLabel jLabelTotalFiles, JProgressBar Jbar, JCheckBox jCheckBox,
-            JButton jButtonSource) {
+    public CopyFiles(final List<File> FileList, final JLabel jLabelTotalFiles, final JProgressBar Jbar, final JCheckBox jCheckBox,
+            final JButton jButtonSource) {
         this.FileList = FileList;
         jLb = jLabelTotalFiles;
         jB = Jbar;

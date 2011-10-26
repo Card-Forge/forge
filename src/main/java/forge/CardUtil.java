@@ -20,7 +20,6 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * CardUtil class.
@@ -412,8 +411,7 @@ public final class CardUtil {
             return c.getEquipping().get(0);
             // else if(relation.startsWith("target ")) return c.getTargetCard();
         } else {
-            throw new IllegalArgumentException(
-                    "Error at CardUtil.getRelative: " + relation + "is not a valid relation");
+            throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
         }
     }
 
@@ -493,7 +491,7 @@ public final class CardUtil {
 
     /**
      * Gets the land types.
-     *
+     * 
      * @return the land types
      */
     public static ArrayList<String> getLandTypes() {
@@ -576,8 +574,9 @@ public final class CardUtil {
 
     /**
      * Checks if is a planeswalker type.
-     *
-     * @param cardType the card type
+     * 
+     * @param cardType
+     *            the card type
      * @return true, if is a planeswalker type
      */
     public static boolean isAPlaneswalkerType(final String cardType) {
@@ -627,10 +626,13 @@ public final class CardUtil {
 
     /**
      * Builds the ideal filename.
-     *
-     * @param cardName the card name
-     * @param artIndex the art index
-     * @param artIndexMax the art index max
+     * 
+     * @param cardName
+     *            the card name
+     * @param artIndex
+     *            the art index
+     * @param artIndexMax
+     *            the art index max
      * @return the string
      */
     public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) {
@@ -666,8 +668,9 @@ public final class CardUtil {
 
     /**
      * buildFilename for lightweight card. Searches for a matching file on disk,
-     *
-     * @param card the card
+     * 
+     * @param card
+     *            the card
      * @return the string
      */
     public static String buildFilename(final CardPrinted card) {
@@ -676,8 +679,7 @@ public final class CardUtil {
     }
 
     private static String buildFilename(final String cardName, final String setName, final int artIndex,
-            final int artIndexMax, final boolean isToken)
-    {
+            final int artIndexMax, final boolean isToken) {
         File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
         String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
         String cleanCardName = GuiDisplayUtil.cleanString(cardName);
@@ -818,8 +820,7 @@ public final class CardUtil {
      * @return a CardList that matches the given criteria
      */
     public static CardList getThisTurnEntered(final Constant.Zone to, final Constant.Zone from, final String valid,
-            final Card src)
-    {
+            final Card src) {
         CardList res = new CardList();
         if (to != Constant.Zone.Stack) {
             res.addAll(((DefaultPlayerZone) AllZone.getComputerPlayer().getZone(to)).getCardsAddedThisTurn(from));
@@ -899,10 +900,13 @@ public final class CardUtil {
 
     /**
      * Gets the radiance.
-     *
-     * @param source the source
-     * @param origin the origin
-     * @param valid the valid
+     * 
+     * @param source
+     *            the source
+     * @param origin
+     *            the origin
+     * @param valid
+     *            the valid
      * @return the radiance
      */
     public static CardList getRadiance(final Card source, final Card origin, final String[] valid) {

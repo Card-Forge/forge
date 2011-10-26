@@ -1,5 +1,6 @@
 package forge.card.spellability;
 
+import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -10,11 +11,11 @@ import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
-import java.util.HashMap;
-
 /**
- * <p>SpellAbility_Condition class.</p>
- *
+ * <p>
+ * SpellAbility_Condition class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  * @since 1.0.15
@@ -23,19 +24,26 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
     // A class for handling SpellAbility Conditions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
-    // Each value will have a default, that can be overridden (mostly by AbilityFactory)
-    // The CanPlay function will use these values to determine if the current game state is ok with these restrictions
+    // Each value will have a default, that can be overridden (mostly by
+    // AbilityFactory)
+    // The CanPlay function will use these values to determine if the current
+    // game state is ok with these restrictions
 
     /**
-     * <p>Constructor for SpellAbility_Condition.</p>
+     * <p>
+     * Constructor for SpellAbility_Condition.
+     * </p>
      */
     public SpellAbility_Condition() {
     }
 
     /**
-     * <p>setConditions.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
+     * <p>
+     * setConditions.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
      */
     public final void setConditions(final HashMap<String, String> params) {
         if (params.containsKey("Condition")) {
@@ -82,17 +90,19 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
             setPhases(phases);
         }
-        
-        if(params.containsKey("ConditionAllM12Empires"))
+
+        if (params.containsKey("ConditionAllM12Empires")) {
             setAllM12Empires(true);
-        if(params.containsKey("ConditionNotAllM12Empires"))
+        }
+        if (params.containsKey("ConditionNotAllM12Empires")) {
             setNotAllM12Empires(true);
+        }
 
         if (params.containsKey("ConditionCardsInHand")) {
             setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
         }
 
-        //Condition version of IsPresent stuff
+        // Condition version of IsPresent stuff
         if (params.containsKey("ConditionPresent")) {
             setIsPresent(params.get("ConditionPresent"));
             if (params.containsKey("ConditionCompare")) {
@@ -109,7 +119,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             setPresentCompare("EQ0");
         }
 
-        //basically PresentCompare for life totals:
+        // basically PresentCompare for life totals:
         if (params.containsKey("ConditionLifeTotal")) {
             lifeTotal = params.get("ConditionLifeTotal");
             if (params.containsKey("ConditionLifeAmount")) {
@@ -129,12 +139,15 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             setSvarOperand(params.get("SVarCompare").substring(2));
         }
 
-    } //setConditions
+    } // setConditions
 
     /**
-     * <p>checkConditions.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * checkConditions.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     public final boolean checkConditions(final SpellAbility sa) {
@@ -192,20 +205,24 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 return false;
             }
         }
-        
-        if(allM12Empires) {
+
+        if (allM12Empires) {
             Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
-            if(!has) return false;
+            if (!has) {
+                return false;
+            }
         }
-        if(notAllM12Empires) {
+        if (notAllM12Empires) {
             Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
-            if(has) return false;
+            if (has) {
+                return false;
+            }
         }
 
         if (nCardsInHand != -1) {
@@ -227,9 +244,10 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
             int right;
             String rightString = presentCompare.substring(2);
-            try {    // If this is an Integer, just parse it
+            try { // If this is an Integer, just parse it
                 right = Integer.parseInt(rightString);
-            } catch (NumberFormatException e) {    // Otherwise, grab it from the SVar
+            } catch (NumberFormatException e) { // Otherwise, grab it from the
+                                                // SVar
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
             }
 
@@ -281,4 +299,4 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
         return true;
     }
 
-} //end class SpellAbility_Condition
+} // end class SpellAbility_Condition

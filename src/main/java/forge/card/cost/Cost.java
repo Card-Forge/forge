@@ -11,75 +11,97 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
 /**
- * <p>Cost class.</p>
- *
+ * <p>
+ * Cost class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Cost {
     private boolean isAbility = true;
     private ArrayList<CostPart> costParts = new ArrayList<CostPart>();
-    
-    public ArrayList<CostPart> getCostParts(){ return costParts; }
-    
+
+    /**
+     * Gets the cost parts.
+     * 
+     * @return the cost parts
+     */
+    public final ArrayList<CostPart> getCostParts() {
+        return costParts;
+    }
+
     private boolean sacCost = false;
 
     /**
-     * <p>Getter for the field <code>sacCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>sacCost</code>.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean getSacCost() {
+    public final boolean getSacCost() {
         return sacCost;
     }
 
     private boolean tapCost = false;
 
     /**
-     * <p>getTap.</p>
-     *
+     * <p>
+     * getTap.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean getTap() {
+    public final boolean getTap() {
         return tapCost;
     }
 
     /**
-     * <p>hasNoManaCost.</p>
-     *
+     * <p>
+     * hasNoManaCost.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean hasNoManaCost() {
-    	for(CostPart part : costParts)
-    		if (part instanceof CostMana)
-    			return false;
-    			
-    	return true;
+    public final boolean hasNoManaCost() {
+        for (CostPart part : costParts)
+            if (part instanceof CostMana) {
+                return false;
+            }
+
+        return true;
     }
 
     /**
-     * <p>isOnlyManaCost.</p>
-     *
+     * <p>
+     * isOnlyManaCost.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isOnlyManaCost() {
+    public final boolean isOnlyManaCost() {
         // Only used by Morph and Equip... why do we need this?
-    	for(CostPart part : costParts)
-    		if (!(part instanceof CostMana))
-    			return false;
-    			
-    	return true;
+        for (CostPart part : costParts)
+            if (!(part instanceof CostMana)) {
+                return false;
+            }
+
+        return true;
     }
 
     /**
-     * <p>getTotalMana.</p>
-     *
+     * <p>
+     * getTotalMana.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getTotalMana() {
-    	for(CostPart part : costParts)
-    		if (part instanceof CostMana)
-    			return part.toString();
+    public final String getTotalMana() {
+        for (CostPart part : costParts)
+            if (part instanceof CostMana) {
+                return part.toString();
+            }
 
         return "0";
     }
@@ -87,41 +109,46 @@ public class Cost {
     private String name;
 
     // Parsing Strings
-    private final static String tapXStr = "tapXType<";
-    private final static String subStr = "SubCounter<";
-    private final static String addStr = "AddCounter<";
-    private final static String lifeStr = "PayLife<";
-    private final static String lifeGainStr = "OppGainLife<";
-    private final static String millStr = "Mill<";
-    private final static String discStr = "Discard<";
-    private final static String sacStr = "Sac<";
-    private final static String exileStr = "Exile<";
-    private final static String exileFromHandStr = "ExileFromHand<";
-    private final static String exileFromGraveStr = "ExileFromGrave<";
-    private final static String exileFromTopStr = "ExileFromTop<";
-    private final static String returnStr = "Return<";
-    private final static String revealStr = "Reveal<";
-    
+    private static final String tapXStr = "tapXType<";
+    private static final String subStr = "SubCounter<";
+    private static final String addStr = "AddCounter<";
+    private static final String lifeStr = "PayLife<";
+    private static final String lifeGainStr = "OppGainLife<";
+    private static final String millStr = "Mill<";
+    private static final String discStr = "Discard<";
+    private static final String sacStr = "Sac<";
+    private static final String exileStr = "Exile<";
+    private static final String exileFromHandStr = "ExileFromHand<";
+    private static final String exileFromGraveStr = "ExileFromGrave<";
+    private static final String exileFromTopStr = "ExileFromTop<";
+    private static final String returnStr = "Return<";
+    private static final String revealStr = "Reveal<";
+
     /**
-     * <p>Constructor for Cost.</p>
-     *
-     * @param parse a {@link java.lang.String} object.
-     * @param cardName a {@link java.lang.String} object.
-     * @param bAbility a boolean.
-     */    
-    public Cost(String parse, String cardName, boolean bAbility) {
+     * <p>
+     * Constructor for Cost.
+     * </p>
+     * 
+     * @param parse
+     *            a {@link java.lang.String} object.
+     * @param cardName
+     *            a {@link java.lang.String} object.
+     * @param bAbility
+     *            a boolean.
+     */
+    public Cost(String parse, final String cardName, final boolean bAbility) {
         isAbility = bAbility;
         // when adding new costs for cost string, place them here
         name = cardName;
- 
+
         while (parse.contains(tapXStr)) {
             String[] splitStr = abCostParse(parse, tapXStr, 3);
             parse = abUpdateParse(parse, tapXStr);
-            
+
             String description = splitStr.length > 2 ? splitStr[2] : null;
             costParts.add(new CostTapType(splitStr[0], splitStr[1], description));
         }
-        
+
         while (parse.contains(subStr)) {
             // SubCounter<NumCounters/CounterType>
             String[] splitStr = abCostParse(parse, subStr, 4);
@@ -129,11 +156,10 @@ public class Cost {
 
             String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             String description = splitStr.length > 3 ? splitStr[3] : null;
-            
+
             costParts.add(new CostRemoveCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
         }
 
-       
         while (parse.contains(addStr)) {
             // AddCounter<NumCounters/CounterType>
             String[] splitStr = abCostParse(parse, addStr, 4);
@@ -141,11 +167,12 @@ public class Cost {
 
             String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             String description = splitStr.length > 3 ? splitStr[3] : null;
-            
+
             costParts.add(new CostPutCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
         }
 
-        // While no card has "PayLife<2> PayLife<3> there might be a card that Changes Cost by adding a Life Payment
+        // While no card has "PayLife<2> PayLife<3> there might be a card that
+        // Changes Cost by adding a Life Payment
         while (parse.contains(lifeStr)) {
             // PayLife<LifeCost>
             String[] splitStr = abCostParse(parse, lifeStr, 1);
@@ -153,7 +180,7 @@ public class Cost {
 
             costParts.add(new CostPayLife(splitStr[0]));
         }
-        
+
         while (parse.contains(lifeGainStr)) {
             // PayLife<LifeCost>
             String[] splitStr = abCostParse(parse, lifeGainStr, 1);
@@ -169,9 +196,9 @@ public class Cost {
 
             costParts.add(new CostMill(splitStr[0]));
         }
-        
+
         while (parse.contains(discStr)) {
-        	// Discard<NumCards/Type>
+            // Discard<NumCards/Type>
             String[] splitStr = abCostParse(parse, discStr, 3);
             parse = abUpdateParse(parse, discStr);
 
@@ -179,7 +206,6 @@ public class Cost {
             costParts.add(new CostDiscard(splitStr[0], splitStr[1], description));
         }
 
-        
         while (parse.contains(sacStr)) {
             sacCost = true;
             String[] splitStr = abCostParse(parse, sacStr, 3);
@@ -189,7 +215,6 @@ public class Cost {
             costParts.add(new CostSacrifice(splitStr[0], splitStr[1], description));
         }
 
-        
         while (parse.contains(exileStr)) {
             String[] splitStr = abCostParse(parse, exileStr, 3);
             parse = abUpdateParse(parse, exileStr);
@@ -198,7 +223,6 @@ public class Cost {
             costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Battlefield));
         }
 
-        
         while (parse.contains(exileFromHandStr)) {
             String[] splitStr = abCostParse(parse, exileFromHandStr, 3);
             parse = abUpdateParse(parse, exileFromHandStr);
@@ -207,7 +231,6 @@ public class Cost {
             costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Hand));
         }
 
-        
         while (parse.contains(exileFromGraveStr)) {
             String[] splitStr = abCostParse(parse, exileFromGraveStr, 3);
             parse = abUpdateParse(parse, exileFromGraveStr);
@@ -216,7 +239,6 @@ public class Cost {
             costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Graveyard));
         }
 
-        
         while (parse.contains(exileFromTopStr)) {
             String[] splitStr = abCostParse(parse, exileFromTopStr, 3);
             parse = abUpdateParse(parse, exileFromTopStr);
@@ -225,7 +247,6 @@ public class Cost {
             costParts.add(new CostExile(splitStr[0], splitStr[1], description, Constant.Zone.Library));
         }
 
-        
         while (parse.contains(returnStr)) {
             String[] splitStr = abCostParse(parse, returnStr, 3);
             parse = abUpdateParse(parse, returnStr);
@@ -233,7 +254,7 @@ public class Cost {
             String description = splitStr.length > 2 ? splitStr[2] : null;
             costParts.add(new CostReturn(splitStr[0], splitStr[1], description));
         }
-        
+
         while (parse.contains(revealStr)) {
             String[] splitStr = abCostParse(parse, revealStr, 3);
             parse = abUpdateParse(parse, revealStr);
@@ -257,7 +278,7 @@ public class Cost {
         }
 
         if (parse.contains("T")) {
-        	tapCost = true;
+            tapCost = true;
             parse = parse.replace("T", "").trim();
             costParts.add(0, new CostTap());
             manaLocation++;
@@ -268,23 +289,29 @@ public class Cost {
         int amountX = parse.length() - stripXCost.length();
 
         String mana = stripXCost.trim();
-        if (mana.equals(""))
-        	mana = "0";
-        
-        if (amountX > 0 || !mana.equals("0")){
+        if (mana.equals("")) {
+            mana = "0";
+        }
+
+        if (amountX > 0 || !mana.equals("0")) {
             costParts.add(manaLocation, new CostMana(mana, amountX));
         }
     }
 
     /**
-     * <p>abCostParse.</p>
-     *
-     * @param parse a {@link java.lang.String} object.
-     * @param subkey a {@link java.lang.String} object.
-     * @param numParse a int.
+     * <p>
+     * abCostParse.
+     * </p>
+     * 
+     * @param parse
+     *            a {@link java.lang.String} object.
+     * @param subkey
+     *            a {@link java.lang.String} object.
+     * @param numParse
+     *            a int.
      * @return an array of {@link java.lang.String} objects.
      */
-    private String[] abCostParse(String parse, String subkey, int numParse) {
+    private String[] abCostParse(final String parse, final String subkey, final int numParse) {
         int startPos = parse.indexOf(subkey);
         int endPos = parse.indexOf(">", startPos);
         String str = parse.substring(startPos, endPos);
@@ -296,13 +323,17 @@ public class Cost {
     }
 
     /**
-     * <p>abUpdateParse.</p>
-     *
-     * @param parse a {@link java.lang.String} object.
-     * @param subkey a {@link java.lang.String} object.
+     * <p>
+     * abUpdateParse.
+     * </p>
+     * 
+     * @param parse
+     *            a {@link java.lang.String} object.
+     * @param subkey
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    private String abUpdateParse(String parse, String subkey) {
+    private String abUpdateParse(final String parse, final String subkey) {
         int startPos = parse.indexOf(subkey);
         int endPos = parse.indexOf(">", startPos);
         String str = parse.substring(startPos, endPos + 1);
@@ -310,203 +341,258 @@ public class Cost {
     }
 
     /**
-     * <p>changeCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * changeCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void changeCost(SpellAbility sa) {
-    	// TODO: Change where ChangeCost happens
-    	for(CostPart part : costParts){
-    		if (part instanceof CostMana){
-    			CostMana costMana = (CostMana)part;
-    			
-    			String mana = getTotalMana();
-    	        costMana.setAdjustedMana(AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana)).toString());
-    		}
-    	}
+    public final void changeCost(final SpellAbility sa) {
+        // TODO: Change where ChangeCost happens
+        for (CostPart part : costParts) {
+            if (part instanceof CostMana) {
+                CostMana costMana = (CostMana) part;
+
+                String mana = getTotalMana();
+                costMana.setAdjustedMana(AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana)).toString());
+            }
+        }
     }
 
     /**
-     * <p>refundPaidCost.</p>
-     *
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * refundPaidCost.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
      */
-    public void refundPaidCost(Card source) {
+    public final void refundPaidCost(final Card source) {
         // prereq: isUndoable is called first
-    	for(CostPart part : costParts)
-    		part.refund(source);
+        for (CostPart part : costParts)
+            part.refund(source);
     }
 
     /**
-     * <p>isUndoable.</p>
-     *
+     * <p>
+     * isUndoable.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isUndoable() {
-    	for(CostPart part : costParts)
-    		if (!part.isUndoable())
-    			return false;
-    			
-    	return true;
+    public final boolean isUndoable() {
+        for (CostPart part : costParts)
+            if (!part.isUndoable()) {
+                return false;
+            }
+
+        return true;
     }
 
     /**
-     * <p>isReusuableResource.</p>
-     *
+     * <p>
+     * isReusuableResource.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isReusuableResource() {
-    	for(CostPart part : costParts)
-    		if (!part.isReusable())
-    			return false;
-    			
-    	return isAbility;
+    public final boolean isReusuableResource() {
+        for (CostPart part : costParts)
+            if (!part.isReusable()) {
+                return false;
+            }
+
+        return isAbility;
     }
 
     /**
-     * <p>toString.</p>
-     *
+     * <p>
+     * toString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
-        if (isAbility)
+    public final String toString() {
+        if (isAbility) {
             return abilityToString();
-        else
+        } else {
             return spellToString(true);
+        }
     }
 
-    // maybe add a conversion method that turns the amounts into words 1=a(n), 2=two etc.
+    // maybe add a conversion method that turns the amounts into words 1=a(n),
+    // 2=two etc.
 
     /**
-     * <p>toStringAlt.</p>
-     *
+     * <p>
+     * toStringAlt.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String toStringAlt() {
+    public final String toStringAlt() {
         return spellToString(false);
     }
 
     /**
-     * <p>spellToString.</p>
-     *
-     * @param bFlag a boolean.
+     * <p>
+     * spellToString.
+     * </p>
+     * 
+     * @param bFlag
+     *            a boolean.
      * @return a {@link java.lang.String} object.
      */
-    private String spellToString(boolean bFlag) {
+    private String spellToString(final boolean bFlag) {
         StringBuilder cost = new StringBuilder();
         boolean first = true;
-        
-        if (bFlag)
+
+        if (bFlag) {
             cost.append("As an additional cost to cast ").append(name).append(", ");
-        else{
+        } else {
             // usually no additional mana cost for spells
-            // only three Alliances cards have additional mana costs, but they are basically kicker/multikicker
+            // only three Alliances cards have additional mana costs, but they
+            // are basically kicker/multikicker
             /*
-            if (!getTotalMana().equals("0")) {
-                cost.append("pay ").append(getTotalMana());
-                first = false;
-            }
-            */
+             * if (!getTotalMana().equals("0")) {
+             * cost.append("pay ").append(getTotalMana()); first = false; }
+             */
         }
 
-        for(CostPart part : costParts){
-            if (part instanceof CostMana)
+        for (CostPart part : costParts) {
+            if (part instanceof CostMana) {
                 continue;
-        	if (!first)
-        		cost.append(" and ");
-        	cost.append(part.toString());
-        	first = false;
+            }
+            if (!first) {
+                cost.append(" and ");
+            }
+            cost.append(part.toString());
+            first = false;
         }
 
-        if (first)
+        if (first) {
             return "";
+        }
 
-        if (bFlag)
+        if (bFlag) {
             cost.append(".").append("\n");
+        }
 
         return cost.toString();
     }
 
     /**
-     * <p>abilityToString.</p>
-     *
+     * <p>
+     * abilityToString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     private String abilityToString() {
         StringBuilder cost = new StringBuilder();
         boolean first = true;
-        
-        for(CostPart part : costParts){
+
+        for (CostPart part : costParts) {
             boolean append = true;
-            if (!first){
-                if (part instanceof CostMana){
+            if (!first) {
+                if (part instanceof CostMana) {
                     cost.insert(0, ", ").insert(0, part.toString());
                     append = false;
-                }
-                else{
+                } else {
                     cost.append(", ");
                 }
             }
-            if (append){
+            if (append) {
                 cost.append(part.toString());
             }
-        	first = false;
+            first = false;
         }
 
-        if (first)    // No costs, append 0
+        if (first) {
             cost.append("0");
+        }
 
         cost.append(": ");
         return cost.toString();
     }
 
-    // TODO: If a Cost needs to pay more than 10 of something, fill this array as appropriate
-    /** Constant <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code> */
-    private static final String[] numNames = {"zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
+    // TODO: If a Cost needs to pay more than 10 of something, fill this array
+    // as appropriate
+    /**
+     * Constant
+     * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>
+     */
+    private static final String[] numNames = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight",
+            "nine", "ten" };
     /** Constant <code>vowelPattern</code> */
     private static final Pattern vowelPattern = Pattern.compile("^[aeiou]", Pattern.CASE_INSENSITIVE);
 
-
-    public static String convertAmountTypeToWords(Integer i, String amount, String type){
-    	if (i == null)
-    		return convertAmountTypeToWords(amount, type);
-    	
-    	return convertIntAndTypeToWords(i.intValue(), type);
-    }
-    
     /**
-     * <p>convertIntAndTypeToWords.</p>
-     *
-     * @param i a int.
-     * @param type a {@link java.lang.String} object.
+     * Convert amount type to words.
+     * 
+     * @param i
+     *            the i
+     * @param amount
+     *            the amount
+     * @param type
+     *            the type
+     * @return the string
+     */
+    public static String convertAmountTypeToWords(final Integer i, final String amount, final String type) {
+        if (i == null) {
+            return convertAmountTypeToWords(amount, type);
+        }
+
+        return convertIntAndTypeToWords(i.intValue(), type);
+    }
+
+    /**
+     * <p>
+     * convertIntAndTypeToWords.
+     * </p>
+     * 
+     * @param i
+     *            a int.
+     * @param type
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String convertIntAndTypeToWords(int i, String type) {
+    public static String convertIntAndTypeToWords(final int i, final String type) {
         StringBuilder sb = new StringBuilder();
 
         if (i >= numNames.length) {
             sb.append(i);
-        } else if (1 == i && vowelPattern.matcher(type).find())
+        } else if (1 == i && vowelPattern.matcher(type).find()) {
             sb.append("an");
-        else
+        } else {
             sb.append(numNames[i]);
+        }
 
         sb.append(" ");
         sb.append(type);
-        if (1 != i)
+        if (1 != i) {
             sb.append("s");
+        }
 
         return sb.toString();
     }
-    
-    
-    public static String convertAmountTypeToWords(String amount, String type) {
+
+    /**
+     * Convert amount type to words.
+     * 
+     * @param amount
+     *            the amount
+     * @param type
+     *            the type
+     * @return the string
+     */
+    public static String convertAmountTypeToWords(final String amount, final String type) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(amount);
         sb.append(" ");
         sb.append(type);
-
 
         return sb.toString();
     }

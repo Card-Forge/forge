@@ -9,35 +9,37 @@ import org.apache.commons.lang3.ArrayUtils;
 import forge.FileUtil;
 import forge.HttpUtil;
 
-/** 
- * Contains Maps of card ratings
- *
+/**
+ * Contains Maps of card ratings.
  */
 public class CardRatings {
     private static Map<String, Integer> fullRatings = new TreeMap<String, Integer>();
     private static Map<String, Integer> blockRatings = new TreeMap<String, Integer>();
     private static Map<String, Integer> customRatings = new TreeMap<String, Integer>();
-    
+
     private static ArrayList<String> tempRatings = new ArrayList<String>();
-    
+
+    /**
+     * Instantiates a new card ratings.
+     */
     public CardRatings() {
         if (fullRatings.size() < 1) {
             loadFullRatings();
         }
-    
+
         if (blockRatings.size() < 1) {
             loadBlockRatings();
         }
-        
+
         if (customRatings.size() < 1) {
             loadCustomRatings();
         }
-        
+
         if (tempRatings.size() < 1) {
-            tempRatings = FileUtil.readFile("res/draft/tempRatings.dat");            
+            tempRatings = FileUtil.readFile("res/draft/tempRatings.dat");
         }
     }
-    
+
     private void loadFullRatings() {
         ArrayList<String> sRatings = FileUtil.readFile("res/draft/fullRatings.dat");
         if (sRatings.size() > 1) {
@@ -51,7 +53,7 @@ public class CardRatings {
             }
         }
     }
-    
+
     private void loadBlockRatings() {
         ArrayList<String> sRatings = FileUtil.readFile("res/draft/blockRatings.dat");
         if (sRatings.size() > 1) {
@@ -65,7 +67,7 @@ public class CardRatings {
             }
         }
     }
-    
+
     private void loadCustomRatings() {
         ArrayList<String> sRatings = FileUtil.readFile("res/draft/customRatings.dat");
         if (sRatings.size() > 1) {
@@ -79,38 +81,41 @@ public class CardRatings {
             }
         }
     }
-    
-    public void saveRatings() {
+
+    /**
+     * Save ratings.
+     */
+    public final void saveRatings() {
         if (fullRatings.size() > 1) {
             String[] keys = fullRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
             ArrayList<String> ratings = new ArrayList<String>();
-            
+
             for (String k : keys) {
                 ratings.add(k + ":" + fullRatings.get(k));
             }
-            
+
             FileUtil.writeFile("res/draft/fullRatings.dat", ratings);
         }
-        
+
         if (blockRatings.size() > 1) {
             String[] keys = blockRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
             ArrayList<String> ratings = new ArrayList<String>();
-            
+
             for (String k : keys) {
                 ratings.add(k + ":" + blockRatings.get(k));
             }
-            
+
             FileUtil.writeFile("res/draft/blockRatings.dat", ratings);
         }
 
         if (customRatings.size() > 1) {
             String[] keys = customRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
             ArrayList<String> ratings = new ArrayList<String>();
-            
+
             for (String k : keys) {
                 ratings.add(k + ":" + customRatings.get(k));
             }
-            
+
             FileUtil.writeFile("res/draft/customRatings.dat", ratings);
         }
 
@@ -119,34 +124,66 @@ public class CardRatings {
         }
     }
 
-    
-    public int getFullRating(String cardName) {
+    /**
+     * Gets the full rating.
+     * 
+     * @param cardName
+     *            the card name
+     * @return the full rating
+     */
+    public final int getFullRating(final String cardName) {
         if (fullRatings.containsKey(cardName)) {
             return fullRatings.get(cardName);
         }
-        
+
         return 0;
     }
-    
-    public int getBlockRating(String cardName, String setCode) {
+
+    /**
+     * Gets the block rating.
+     * 
+     * @param cardName
+     *            the card name
+     * @param setCode
+     *            the set code
+     * @return the block rating
+     */
+    public final int getBlockRating(final String cardName, final String setCode) {
         String cNsC = cardName + "|" + setCode;
         if (blockRatings.containsKey(cNsC)) {
             return blockRatings.get(cNsC);
         }
-        
+
         return 0;
     }
-    
-    public int getCustomRatings(String cardName, String custName) {
+
+    /**
+     * Gets the custom ratings.
+     * 
+     * @param cardName
+     *            the card name
+     * @param custName
+     *            the cust name
+     * @return the custom ratings
+     */
+    public final int getCustomRatings(final String cardName, final String custName) {
         String cNcN = cardName + "|" + custName;
         if (customRatings.containsKey(cNcN)) {
             return customRatings.get(cNcN);
         }
-        
+
         return 0;
     }
-    
-    public void putFullRating(String cardName, int Rating) {
+
+    /**
+     * Put full rating.
+     * 
+     * @param cardName
+     *            the card name
+     * @param Rating
+     *            the rating
+     */
+    public final void putFullRating(final String cardName, final int Rating) {
         if (fullRatings.containsKey(cardName)) {
             int r = fullRatings.get(cardName);
             int nr = (r + Rating) / 2;
@@ -154,11 +191,21 @@ public class CardRatings {
         } else {
             fullRatings.put(cardName, Rating);
         }
-        
+
         tempRatings.add("Full:" + cardName + ":" + Rating);
     }
-    
-    public void putBlockRating(String cardName, String setCode, int Rating) {
+
+    /**
+     * Put block rating.
+     * 
+     * @param cardName
+     *            the card name
+     * @param setCode
+     *            the set code
+     * @param Rating
+     *            the rating
+     */
+    public final void putBlockRating(final String cardName, final String setCode, final int Rating) {
         String cNsC = cardName + "|" + setCode;
         if (blockRatings.containsKey(cNsC)) {
             int r = blockRatings.get(cNsC);
@@ -167,11 +214,21 @@ public class CardRatings {
         } else {
             blockRatings.put(cNsC, Rating);
         }
-        
+
         tempRatings.add("Block:" + cNsC + ":" + Rating);
     }
-    
-    public void putCustomRating(String cardName, String custName, int Rating) {
+
+    /**
+     * Put custom rating.
+     * 
+     * @param cardName
+     *            the card name
+     * @param custName
+     *            the cust name
+     * @param Rating
+     *            the rating
+     */
+    public final void putCustomRating(final String cardName, final String custName, final int Rating) {
         String cNcN = cardName + "|" + custName;
         if (customRatings.containsKey(cNcN)) {
             int r = customRatings.get(cNcN);
@@ -180,40 +237,46 @@ public class CardRatings {
         } else {
             customRatings.put(cNcN, Rating);
         }
-        
+
         tempRatings.add("Custom:" + cNcN + ":" + Rating);
     }
-    
-    public void uploadRatings() {
+
+    /**
+     * Upload ratings.
+     */
+    public final void uploadRatings() {
         FileUtil.writeFile("res/draft/tempRatings.dat", tempRatings);
-        
+
         HttpUtil httpPost = new HttpUtil();
         httpPost.upload("http://cardforge.org/draftAI/submitRatingsData.php?", "res/draft/tempRatings.dat");
-        
+
         FileUtil.writeFile("res/draft/tempRatings.dat", new ArrayList<String>());
     }
-    
-    public void downloadRatings() {
+
+    /**
+     * Download ratings.
+     */
+    public final void downloadRatings() {
         HttpUtil httpGet = new HttpUtil();
         ArrayList<String> tmpList = new ArrayList<String>();
         String tmpData = new String();
-        
+
         tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Full");
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/fullRatings.dat", tmpList);
         fullRatings.clear();
         loadFullRatings();
-        
+
         tmpList.clear();
-        
+
         tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Block");
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/blockRatings.dat", tmpList);
         blockRatings.clear();
         loadBlockRatings();
-        
+
         tmpList.clear();
-        
+
         tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Custom");
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/customRatings.dat", tmpList);

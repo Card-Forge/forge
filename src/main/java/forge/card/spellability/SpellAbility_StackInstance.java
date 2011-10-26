@@ -1,38 +1,54 @@
 package forge.card.spellability;
 
+import java.util.HashMap;
+
 import forge.Card;
 import forge.CardList;
 import forge.Player;
 
-import java.util.HashMap;
-
 /**
- * <p>SpellAbility_StackInstance class.</p>
- *
+ * <p>
+ * SpellAbility_StackInstance class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class SpellAbility_StackInstance {
-    // At some point I want this functioning more like Target/Target Choices where the SA has an "active"
-    // Stack Instance, and instead of having duplicate parameters, it adds changes directly to the "active" one
-    // When hitting the Stack, the active SI gets "applied" to the Stack and gets cleared from the base SI
-    // Coming off the Stack would work similarly, except it would just add the full active SI instead of each of the parts
+    // At some point I want this functioning more like Target/Target Choices
+    // where the SA has an "active"
+    // Stack Instance, and instead of having duplicate parameters, it adds
+    // changes directly to the "active" one
+    // When hitting the Stack, the active SI gets "applied" to the Stack and
+    // gets cleared from the base SI
+    // Coming off the Stack would work similarly, except it would just add the
+    // full active SI instead of each of the parts
+    /** The ability. */
     SpellAbility ability = null;
+
+    /** The sub instace. */
     SpellAbility_StackInstance subInstace = null;
 
     // When going to a SubAbility that SA has a Instance Choice object
+    /** The tc. */
     Target_Choices tc = null;
+
+    /** The activating player. */
     Player activatingPlayer = null;
+
+    /** The activated from. */
     String activatedFrom = null;
 
+    /** The stack description. */
     String stackDescription = null;
 
     // Adjusted Mana Cost
-    //private String adjustedManaCost = "";
+    // private String adjustedManaCost = "";
 
     // Paid Mana Cost
-    //private ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    //private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
+    // private ArrayList<Mana> payingMana = new ArrayList<Mana>();
+    // private ArrayList<Ability_Mana> paidAbilities = new
+    // ArrayList<Ability_Mana>();
     private int xManaPaid = 0;
 
     // Other Paid things
@@ -41,18 +57,20 @@ public class SpellAbility_StackInstance {
     // Additional info
     // is Kicked, is Buyback
 
-
     // Triggers
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
-    
+
     private HashMap<String, String> storedSVars = new HashMap<String, String>();
- 
+
     /**
-     * <p>Constructor for SpellAbility_StackInstance.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Constructor for SpellAbility_StackInstance.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility_StackInstance(SpellAbility sa) {
+    public SpellAbility_StackInstance(final SpellAbility sa) {
         // Base SA info
         ability = sa;
         stackDescription = ability.getStackDescription();
@@ -69,22 +87,25 @@ public class SpellAbility_StackInstance {
         triggeringObjects = sa.getTriggeringObjects();
 
         Ability_Sub subAb = ability.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             subInstace = new SpellAbility_StackInstance(subAb);
+        }
 
-        // Targeting info  -- 29/06/11 Moved to after taking care of SubAbilities because otherwise AF_DealDamage SubAbilities that use Defined$ Targeted breaks (since it's parents target is reset)
+        // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
+        // because otherwise AF_DealDamage SubAbilities that use Defined$
+        // Targeted breaks (since it's parents target is reset)
         Target target = sa.getTarget();
         if (target != null) {
             tc = target.getTargetChoices();
             ability.getTarget().resetTargets();
         }
-        
+
         Card source = ability.getSourceCard();
-        
-        //Store SVars and Clear
-        for(String store : Card.getStorableSVars()){
+
+        // Store SVars and Clear
+        for (String store : Card.getStorableSVars()) {
             String value = source.getSVar(store);
-            if (value.length() > 0){
+            if (value.length() > 0) {
                 storedSVars.put(store, value);
                 source.setSVar(store, "");
             }
@@ -92,11 +113,13 @@ public class SpellAbility_StackInstance {
     }
 
     /**
-     * <p>getSpellAbility.</p>
-     *
+     * <p>
+     * getSpellAbility.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getSpellAbility() {
+    public final SpellAbility getSpellAbility() {
         if (ability.getTarget() != null) {
             ability.getTarget().resetTargets();
             ability.getTarget().setTargetChoices(tc);
@@ -104,8 +127,9 @@ public class SpellAbility_StackInstance {
         ability.setActivatingPlayer(activatingPlayer);
 
         // Saved sub-SA needs to be reset on the way out
-        if (this.subInstace != null)
+        if (this.subInstace != null) {
             ability.setSubAbility((Ability_Sub) this.subInstace.getSpellAbility());
+        }
 
         // Set Cost specific things here
         ability.setPaidHash(paidHash);
@@ -116,82 +140,102 @@ public class SpellAbility_StackInstance {
 
         // Add SVars back in
         Card source = ability.getSourceCard();
-        for(String store : storedSVars.keySet()){
+        for (String store : storedSVars.keySet()) {
             String value = storedSVars.get(store);
-            if (value.length() > 0){
+            if (value.length() > 0) {
                 source.setSVar(store, value);
             }
         }
-        
+
         return ability;
     }
 
     // A bit of SA shared abilities to restrict conflicts
     /**
-     * <p>Getter for the field <code>stackDescription</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>stackDescription</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getStackDescription() {
+    public final String getStackDescription() {
         return stackDescription;
     }
 
     /**
-     * <p>getSourceCard.</p>
-     *
+     * <p>
+     * getSourceCard.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getSourceCard() {
+    public final Card getSourceCard() {
         return ability.getSourceCard();
     }
 
     /**
-     * <p>Getter for the field <code>activatingPlayer</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>activatingPlayer</code>.
+     * </p>
+     * 
      * @return a {@link forge.Player} object.
      */
-    public Player getActivatingPlayer() {
+    public final Player getActivatingPlayer() {
         return activatingPlayer;
     }
 
     /**
-     * <p>isSpell.</p>
-     *
+     * <p>
+     * isSpell.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isSpell() {
+    public final boolean isSpell() {
         return ability.isSpell();
     }
 
     /**
-     * <p>isAbility.</p>
-     *
+     * <p>
+     * isAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isAbility() {
+    public final boolean isAbility() {
         return ability.isAbility();
     }
 
     /**
-     * <p>isTrigger.</p>
-     *
+     * <p>
+     * isTrigger.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isTrigger() {
+    public final boolean isTrigger() {
         return ability.isTrigger();
     }
 
     /**
-     * <p>isStateTrigger.</p>
-     *
-     * @param ID a int.
+     * <p>
+     * isStateTrigger.
+     * </p>
+     * 
+     * @param ID
+     *            a int.
      * @return a boolean.
      */
-    public boolean isStateTrigger(int ID) {
+    public final boolean isStateTrigger(final int ID) {
         return ability.getSourceTrigger() == ID;
     }
-    
-    public boolean isOptionalTrigger() {
-    	return ability.isOptionalTrigger();
+
+    /**
+     * Checks if is optional trigger.
+     * 
+     * @return true, if is optional trigger
+     */
+    public final boolean isOptionalTrigger() {
+        return ability.isOptionalTrigger();
     }
 }

@@ -1,7 +1,21 @@
 package forge.card.abilityFactory;
 
-import forge.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
 import forge.Constant.Zone;
+import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
@@ -9,18 +23,13 @@ import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
-
 /**
- * <p>AbilityFactory_Copy class.</p>
- *
+ * <p>
+ * AbilityFactory_Copy class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -35,9 +44,12 @@ public final class AbilityFactory_Copy {
     // *************************************************************************
 
     /**
-     * <p>createAbilityCopyPermanent.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityCopyPermanent.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCopyPermanent(final AbilityFactory af) {
@@ -70,9 +82,12 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>createSpellCopyPermanent.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellCopyPermanent.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellCopyPermanent(final AbilityFactory af) {
@@ -99,9 +114,12 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>createDrawbackCopyPermanent.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackCopyPermanent.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopyPermanent(final AbilityFactory af) {
@@ -133,10 +151,14 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copyPermanentStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copyPermanentStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String copyPermanentStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -177,23 +199,28 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copyPermanentCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copyPermanentCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean copyPermanentCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        //Card source = sa.getSourceCard();
-        //TODO - I'm sure someone can do this AI better
+        // Card source = sa.getSourceCard();
+        // TODO - I'm sure someone can do this AI better
 
         HashMap<String, String> params = af.getMapParams();
         if (params.containsKey("AtEOT") && !AllZone.getPhase().is(Constant.Phase.Main1)) {
             return false;
         } else {
-            double chance = .4;    // 40 percent chance with instant speed stuff
+            double chance = .4; // 40 percent chance with instant speed stuff
             if (AbilityFactory.isSorcerySpeed(sa)) {
-                chance = .667;    // 66.7% chance for sorcery speed (since it will never activate EOT)
+                chance = .667; // 66.7% chance for sorcery speed (since it will
+                               // never activate EOT)
             }
             Random r = MyRandom.random;
             if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
@@ -205,24 +232,28 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copyPermanentTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * copyPermanentTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean copyPermanentTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
-        //HashMap<String,String> params = af.getMapParams();
+            final boolean mandatory) {
+        // HashMap<String,String> params = af.getMapParams();
         Card source = sa.getSourceCard();
 
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
 
-        //////
+        // ////
         // Targeting
 
         Target abTgt = sa.getTarget();
@@ -235,8 +266,7 @@ public final class AbilityFactory_Copy {
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -252,10 +282,9 @@ public final class AbilityFactory_Copy {
                     choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, source, true);
                 }
 
-                if (choice == null) {    // can't find anything left
+                if (choice == null) { // can't find anything left
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -267,10 +296,10 @@ public final class AbilityFactory_Copy {
                 abTgt.addTarget(choice);
             }
         } else {
-            //if no targeting, it should always be ok
+            // if no targeting, it should always be ok
         }
 
-        //end Targeting
+        // end Targeting
 
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
@@ -282,10 +311,14 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copyPermanentResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copyPermanentResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void copyPermanentResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
@@ -294,7 +327,8 @@ public final class AbilityFactory_Copy {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
-        int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard, params.get("NumCopies"), sa) : 1;
+        int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
+                params.get("NumCopies"), sa) : 1;
 
         ArrayList<Card> tgtCards;
 
@@ -311,29 +345,29 @@ public final class AbilityFactory_Copy {
             if (tgt == null || CardFactoryUtil.canTarget(hostCard, c)) {
 
                 boolean wasInAlt = false;
-                if(c.isInAlternateState()) {
+                if (c.isInAlternateState()) {
                     wasInAlt = true;
                     c.changeState();
                 }
-                
-                //start copied Kiki code
+
+                // start copied Kiki code
                 int multiplier = AllZoneUtil.getTokenDoublersMagnitude(hostCard.getController());
                 multiplier *= numCopies;
                 Card[] crds = new Card[multiplier];
 
                 for (int i = 0; i < multiplier; i++) {
-                    //TODO Use central copy methods
+                    // TODO Use central copy methods
                     Card copy;
                     if (!c.isToken()) {
-                        //copy creature and put it onto the battlefield
+                        // copy creature and put it onto the battlefield
                         copy = AllZone.getCardFactory().getCard(c.getName(), sa.getActivatingPlayer());
 
-                        //when copying something stolen:
+                        // when copying something stolen:
                         copy.addController(sa.getActivatingPlayer());
 
                         copy.setToken(true);
                         copy.setCopiedToken(true);
-                    } else { //isToken()
+                    } else { // isToken()
                         copy = CardFactoryUtil.copyStats(c);
 
                         copy.setName(c.getName());
@@ -352,40 +386,42 @@ public final class AbilityFactory_Copy {
                         copy.setBaseDefense(c.getBaseDefense());
                     }
 
-                    //add keywords from params
+                    // add keywords from params
                     for (String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
                     }
 
                     copy.setCurSetCode(c.getCurSetCode());
 
-                    if(c.isDoubleFaced()) { //Cloned DFC's can't transform
-                        if(wasInAlt)
-                        {
+                    if (c.isDoubleFaced()) { // Cloned DFC's can't transform
+                        if (wasInAlt) {
                             copy.changeState();
                         }
                         copy.clearOtherState();
                     }
-                    if(c.isFlip()) { //Cloned Flips CAN flip.
+                    if (c.isFlip()) { // Cloned Flips CAN flip.
                         copy.changeState();
                         c.changeState();
                         copy.setImageFilename(c.getImageFilename());
-                        if(!c.isInAlternateState()) {
+                        if (!c.isInAlternateState()) {
                             copy.changeState();
                         }
-                        
+
                         c.changeState();
                     }
-                    
+
                     if (c.isFaceDown()) {
                         copy.setIsFaceDown(true);
                         copy.setManaCost("");
                         copy.setBaseAttack(2);
                         copy.setBaseDefense(2);
-                        copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
-                        copy.setType(new ArrayList<String>()); //remove all types
+                        copy.setIntrinsicKeyword(new ArrayList<String>()); // remove
+                                                                           // all
+                                                                           // keywords
+                        copy.setType(new ArrayList<String>()); // remove all
+                                                               // types
                         copy.addType("Creature");
-                        copy.clearSpellAbility(); //disallow "morph_up"
+                        copy.clearSpellAbility(); // disallow "morph_up"
                         copy.setCurSetCode("");
                         copy.setImageFilename("morph.jpg");
                     }
@@ -396,8 +432,8 @@ public final class AbilityFactory_Copy {
                     crds[i] = copy;
                 }
 
-                //have to do this since getTargetCard() might change
-                //if Kiki-Jiki somehow gets untapped again
+                // have to do this since getTargetCard() might change
+                // if Kiki-Jiki somehow gets untapped again
                 final Card[] target = new Card[multiplier];
                 for (int i = 0; i < multiplier; i++) {
                     final int index = i;
@@ -406,11 +442,12 @@ public final class AbilityFactory_Copy {
                     final SpellAbility sac = new Ability(target[index], "0") {
                         @Override
                         public void resolve() {
-                            //technically your opponent could steal the token
-                            //and the token shouldn't be sacrificed
+                            // technically your opponent could steal the token
+                            // and the token shouldn't be sacrificed
                             if (AllZoneUtil.isCardInPlay(target[index])) {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
-                                    //maybe do a setSacrificeAtEOT, but probably not.
+                                    // maybe do a setSacrificeAtEOT, but
+                                    // probably not.
                                     AllZone.getGameAction().sacrifice(target[index]);
                                 } else if (params.get("AtEOT").equals("Exile")) {
                                     AllZone.getGameAction().exile(target[index]);
@@ -427,25 +464,28 @@ public final class AbilityFactory_Copy {
                             sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
                             AllZone.getStack().addSimultaneousStackEntry(sac);
                         }
-                    }; //Command
+                    }; // Command
                     if (params.containsKey("AtEOT")) {
                         AllZone.getEndOfTurn().addAt(atEOT);
                     }
-                    //end copied Kiki code
+                    // end copied Kiki code
 
                 }
-            } //end canTarget
-        } //end foreach Card
-    } //end resolve
+            } // end canTarget
+        } // end foreach Card
+    } // end resolve
 
     // *************************************************************************
     // ************************* CopySpell *************************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityCopySpell.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityCopySpell.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCopySpell(final AbilityFactory af) {
@@ -478,9 +518,12 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>createSpellCopySpell.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellCopySpell.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellCopySpell(final AbilityFactory af) {
@@ -507,9 +550,12 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>createDrawbackCopySpell.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackCopySpell.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopySpell(final AbilityFactory af) {
@@ -541,10 +587,14 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copySpellStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copySpellStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String copySpellStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -583,7 +633,7 @@ public final class AbilityFactory_Copy {
             sb.append(amount).append(" times");
         }
         sb.append(".");
-        //TODO probably add an optional "You may choose new targets..."
+        // TODO probably add an optional "You may choose new targets..."
 
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -594,10 +644,14 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copySpellCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copySpellCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean copySpellCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -605,11 +659,16 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copySpellTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * copySpellTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -625,10 +684,14 @@ public final class AbilityFactory_Copy {
     }
 
     /**
-     * <p>copySpellResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * copySpellResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void copySpellResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
@@ -667,6 +730,6 @@ public final class AbilityFactory_Copy {
                 AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }
         }
-    } //end resolve
+    } // end resolve
 
-} //end class AbilityFactory_Copy
+} // end class AbilityFactory_Copy

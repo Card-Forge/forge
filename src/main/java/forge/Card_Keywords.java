@@ -31,14 +31,18 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
     /**
      * 
      * Card_Keywords.
-     * @param keywordList an ArrayList<String>
-     * @param removeKeywordList a ArrayList<String>
-     * @param removeAll a boolean
-     * @param stamp a long
+     * 
+     * @param keywordList
+     *            an ArrayList<String>
+     * @param removeKeywordList
+     *            a ArrayList<String>
+     * @param removeAll
+     *            a boolean
+     * @param stamp
+     *            a long
      */
     Card_Keywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList,
-            final boolean removeAll, final long stamp)
-            {
+            final boolean removeAll, final long stamp) {
         keywords = keywordList;
         removeKeywords = removeKeywordList;
         removeAllKeywords = removeAll;
@@ -48,6 +52,7 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
     /**
      * 
      * getKeywords.
+     * 
      * @return ArrayList<String>
      */
     public final ArrayList<String> getKeywords() {
@@ -57,6 +62,7 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
     /**
      * 
      * getRemoveKeywords.
+     * 
      * @return ArrayList<String>
      */
     public final ArrayList<String> getRemoveKeywords() {
@@ -66,12 +72,18 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
     /**
      * 
      * isRemoveAllKeywords.
+     * 
      * @return boolean
      */
     public final boolean isRemoveAllKeywords() {
         return removeAllKeywords;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public final int compareTo(final Card_Keywords anotherCardKeywords) {
         int returnValue = 0;

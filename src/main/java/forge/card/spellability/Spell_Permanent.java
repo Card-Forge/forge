@@ -1,32 +1,41 @@
 package forge.card.spellability;
 
-import forge.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.Command;
+import forge.CommandReturn;
+import forge.Constant;
 import forge.Constant.Zone;
+import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.trigger.Trigger;
 import forge.gui.input.Input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
 /**
- * <p>Spell_Permanent class.</p>
- *
+ * <p>
+ * Spell_Permanent class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Spell_Permanent extends Spell {
-    /** Constant <code>serialVersionUID=2413495058630644447L</code> */
+    /** Constant <code>serialVersionUID=2413495058630644447L</code>. */
     private static final long serialVersionUID = 2413495058630644447L;
 
     private boolean willChampion = false;
     private String championValid = null;
     private String championValidDesc = "";
 
-
+    /** The champion input comes. */
     final Input championInputComes = new Input() {
         private static final long serialVersionUID = -7503268232821397107L;
 
@@ -36,7 +45,8 @@ public class Spell_Permanent extends Spell {
 
             stopSetNext(CardFactoryUtil.input_targetChampionSac(getSourceCard(), championAbilityComes, choice,
                     "Select another " + championValidDesc + " you control to exile", false, false));
-            ButtonUtil.disableAll(); //target this card means: sacrifice this card
+            ButtonUtil.disableAll(); // target this card means: sacrifice this
+                                     // card
         }
     };
 
@@ -45,8 +55,9 @@ public class Spell_Permanent extends Spell {
             CardList cards = getSourceCard().getController().getCardsIn(Zone.Battlefield);
             return cards.getValidCards(championValid, getSourceCard().getController(), getSourceCard());
         }
-    };//CommandReturn
+    }; // CommandReturn
 
+    /** The champion ability comes. */
     final SpellAbility championAbilityComes = new Ability(getSourceCard(), "0") {
         @Override
         public void resolve() {
@@ -60,7 +71,7 @@ public class Spell_Permanent extends Spell {
                 return;
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(championInputComes);
-            } else { //Computer
+            } else { // Computer
                 CardList computer = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 computer = computer.getValidCards(championValid, controller, source);
                 computer.remove(source);
@@ -73,29 +84,33 @@ public class Spell_Permanent extends Spell {
                         AllZone.getGameAction().exile(c);
                     }
 
-                    //Run triggers
+                    // Run triggers
                     HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
                     AllZone.getTriggerHandler().runTrigger("Championed", runParams);
-                } else
+                } else {
                     AllZone.getGameAction().sacrifice(getSourceCard());
-            }//computer
-        }//resolve()
+                }
+            } // computer
+        } // resolve()
     };
 
+    /** The champion command comes. */
     Command championCommandComes = new Command() {
 
         private static final long serialVersionUID = -3580408066322945328L;
 
         public void execute() {
             StringBuilder sb = new StringBuilder();
-            sb.append(getSourceCard()).append(" - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
+            sb.append(getSourceCard()).append(
+                    " - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
             championAbilityComes.setStackDescription(sb.toString());
             AllZone.getStack().addSimultaneousStackEntry(championAbilityComes);
-        }//execute()
-    };//championCommandComes
+        } // execute()
+    }; // championCommandComes
 
+    /** The champion command leaves play. */
     Command championCommandLeavesPlay = new Command() {
 
         private static final long serialVersionUID = -5903638227914705191L;
@@ -109,54 +124,77 @@ public class Spell_Permanent extends Spell {
                     if (c != null && !c.isToken() && AllZoneUtil.isCardExiled(c)) {
                         AllZone.getGameAction().moveToPlay(c);
                     }
-                }//resolve()
-            };//SpellAbility
+                } // resolve()
+            }; // SpellAbility
 
             StringBuilder sb = new StringBuilder();
-            sb.append(getSourceCard()).append(" - When CARDNAME leaves the battlefield, exiled card returns to the battlefield.");
+            sb.append(getSourceCard()).append(
+                    " - When CARDNAME leaves the battlefield, exiled card returns to the battlefield.");
             ability.setStackDescription(sb.toString());
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
-        }//execute()
-    };//championCommandLeavesPlay
+        } // execute()
+    }; // championCommandLeavesPlay
 
-    ///////
-    ////////////////////
+    // /////
+    // //////////////////
 
     /**
-     * <p>Constructor for Spell_Permanent.</p>
-     *
-     * @param sourceCard a {@link forge.Card} object.
+     * <p>
+     * Constructor for Spell_Permanent.
+     * </p>
+     * 
+     * @param sourceCard
+     *            a {@link forge.Card} object.
      */
-    public Spell_Permanent(Card sourceCard) {
+    public Spell_Permanent(final Card sourceCard) {
         // Add Costs for all SpellPermanents
         this(sourceCard, new Cost(sourceCard.getManaCost(), sourceCard.getName(), false), null);
-    }//Spell_Permanent()
+    } // Spell_Permanent()
 
     /**
-     * <p>Constructor for Spell_Permanent.</p>
-     *
-     * @param sourceCard a {@link forge.Card} object.
-     * @param cost a {@link forge.card.cost.Cost} object.
-     * @param tgt a {@link forge.card.spellability.Target} object.
+     * <p>
+     * Constructor for Spell_Permanent.
+     * </p>
+     * 
+     * @param sourceCard
+     *            a {@link forge.Card} object.
+     * @param cost
+     *            a {@link forge.card.cost.Cost} object.
+     * @param tgt
+     *            a {@link forge.card.spellability.Target} object.
      */
-    public Spell_Permanent(Card sourceCard, Cost cost, Target tgt) {
-    	this(sourceCard, cost, tgt, true);
-    }//Spell_Permanent()
-    
-    public Spell_Permanent(Card sourceCard, Cost cost, Target tgt, boolean setDesc) {
+    public Spell_Permanent(final Card sourceCard, final Cost cost, final Target tgt) {
+        this(sourceCard, cost, tgt, true);
+    } // Spell_Permanent()
+
+    /**
+     * Instantiates a new spell_ permanent.
+     * 
+     * @param sourceCard
+     *            the source card
+     * @param cost
+     *            the cost
+     * @param tgt
+     *            the tgt
+     * @param setDesc
+     *            the set desc
+     */
+    public Spell_Permanent(final Card sourceCard, final Cost cost, final Target tgt, final boolean setDesc) {
         super(sourceCard, cost, tgt);
 
         if (CardFactoryUtil.hasKeyword(sourceCard, "Champion") != -1) {
             int n = CardFactoryUtil.hasKeyword(sourceCard, "Champion");
 
             String toParse = sourceCard.getKeyword().get(n).toString();
-            String parsed[] = toParse.split(":");
+            String[] parsed = toParse.split(":");
             willChampion = true;
             championValid = parsed[1];
             if (parsed.length > 2) {
                 championValidDesc = parsed[2];
-            } else championValidDesc = championValid;
+            } else {
+                championValidDesc = championValid;
+            }
         }
 
         if (sourceCard.isCreature()) {
@@ -165,17 +203,20 @@ public class Spell_Permanent extends Spell {
             sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
             sb.append(" / ").append(sourceCard.getNetDefense());
             setStackDescription(sb.toString());
-        } else setStackDescription(sourceCard.getName());
+        } else {
+            setStackDescription(sourceCard.getName());
+        }
 
-        if (setDesc)
-        	setDescription(getStackDescription());
-        
+        if (setDesc) {
+            setDescription(getStackDescription());
+        }
+
         if (willChampion) {
             sourceCard.addComesIntoPlayCommand(championCommandComes);
             sourceCard.addLeavesPlayCommand(championCommandLeavesPlay);
         }
 
-    }//Spell_Permanent()
+    } // Spell_Permanent()
 
     /** {@inheritDoc} */
     @Override
@@ -185,8 +226,9 @@ public class Spell_Permanent extends Spell {
         Player turn = AllZone.getPhase().getPlayerTurn();
 
         if (source.getName().equals("Serra Avenger")) {
-            if (turn.equals(source.getController()) && turn.getTurn() <= 3)
+            if (turn.equals(source.getController()) && turn.getTurn() <= 3) {
                 return false;
+            }
         }
 
         // Flash handled by super.canPlay
@@ -199,11 +241,12 @@ public class Spell_Permanent extends Spell {
 
         Card card = getSourceCard();
 
-        //check on legendary
+        // check on legendary
         if (card.isType("Legendary")) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-            if (list.containsName(card.getName()))
+            if (list.containsName(card.getName())) {
                 return false;
+            }
         }
         if (card.isPlaneswalker()) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
@@ -221,59 +264,75 @@ public class Spell_Permanent extends Spell {
         if (card.isType("World")) {
             CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             list = list.getType("World");
-            if (list.size() > 0) return false;
+            if (list.size() > 0) {
+                return false;
+            }
         }
 
-        if (card.isCreature()
-                && card.getNetDefense() <= 0
-                && !card.hasStartOfKeyword("etbCounter")
-                && !card.getText().contains("Modular"))
+        if (card.isCreature() && card.getNetDefense() <= 0 && !card.hasStartOfKeyword("etbCounter")
+                && !card.getText().contains("Modular")) {
             return false;
+        }
 
         if (willChampion) {
             Object o = championGetCreature.execute();
-            if (o == null) return false;
+            if (o == null) {
+                return false;
+            }
 
             CardList cl = (CardList) championGetCreature.execute();
-            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(getSourceCard()).is(Constant.Zone.Hand))
+            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(getSourceCard()).is(Constant.Zone.Hand)) {
                 return false;
+            }
         }
 
-        if (!checkETBEffects(card, this, null))
+        if (!checkETBEffects(card, this, null)) {
             return false;
+        }
 
         return super.canPlayAI();
-    }//canPlayAI()
+    } // canPlayAI()
 
     /**
-     * <p>checkETBEffects.</p>
-     *
-     * @param card a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param api a {@link java.lang.String} object.
+     * <p>
+     * checkETBEffects.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param api
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean checkETBEffects(Card card, SpellAbility sa, String api) {
+    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
         // Trigger play improvements
         ArrayList<Trigger> triggers = card.getTriggers();
         for (Trigger tr : triggers) {
             // These triggers all care for ETB effects
 
             HashMap<String, String> params = tr.getMapParams();
-            if (!params.get("Mode").equals("ChangesZone"))
+            if (!params.get("Mode").equals("ChangesZone")) {
                 continue;
+            }
 
-            if (!params.get("Destination").equals("Battlefield"))
+            if (!params.get("Destination").equals("Battlefield")) {
                 continue;
+            }
 
-            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self"))
+            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
                 continue;
+            }
 
-            if (!tr.requirementsCheck())
+            if (!tr.requirementsCheck()) {
                 continue;
+            }
 
-            if (tr.getOverridingAbility() != null)    // Don't look at Overriding Abilities yet
+            if (tr.getOverridingAbility() != null) {
+                // Abilities yet
                 continue;
+            }
 
             // Maybe better considerations
             AbilityFactory af = new AbilityFactory();
@@ -283,16 +342,19 @@ public class Spell_Permanent extends Spell {
             }
             SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if (api != null && !af.getAPI().equals(api))
+            if (api != null && !af.getAPI().equals(api)) {
                 continue;
-            
-            if(sa != null)
+            }
+
+            if (sa != null) {
                 exSA.setActivatingPlayer(sa.getActivatingPlayer());
-            else
+            } else {
                 exSA.setActivatingPlayer(AllZone.getComputerPlayer());
+            }
 
             // Run non-mandatory trigger.
-            // These checks only work if the Executing SpellAbility is an Ability_Sub.
+            // These checks only work if the Executing SpellAbility is an
+            // Ability_Sub.
             if (exSA instanceof Ability_Sub && !exSA.doTrigger(false)) {
                 // AI would not run this trigger if given the chance
 
@@ -307,7 +369,6 @@ public class Spell_Permanent extends Spell {
 
         return true;
     }
-
 
     /** {@inheritDoc} */
     @Override

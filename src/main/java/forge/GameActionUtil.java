@@ -113,8 +113,9 @@ public final class GameActionUtil {
                             crd = topOfLibrary.get(count++);
                             revealed.add(crd);
                             if ((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil
-                                    .getConvertedManaCost(cascCard.getManaCost())))
+                                    .getConvertedManaCost(cascCard.getManaCost()))) {
                                 cascadedCard = crd;
+                            }
 
                             if (count == topOfLibrary.size()) {
                                 break;
@@ -1076,7 +1077,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Scalpelexis(Card c) {
+    private static void playerCombatDamage_Scalpelexis(final Card c) {
         final Player player = c.getController();
         final Player opponent = player.getOpponent();
 
@@ -1835,7 +1836,7 @@ public final class GameActionUtil {
         public void execute() {
             CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             list = list.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
+                public boolean addCard(final Card c) {
                     return c.getName().equals("Wolf")
                             && c.hasKeyword("This creature gets +1/+1 for each card named Sound the Call in each graveyard.");
                 }

@@ -1,16 +1,18 @@
 package forge.card.spellability;
 
+import java.util.ArrayList;
+
 import forge.AllZone;
 import forge.Card;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost_Payment;
 
-import java.util.ArrayList;
-
 /**
- * <p>SpellAbility_Requirements class.</p>
- *
+ * <p>
+ * SpellAbility_Requirements class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -22,18 +24,24 @@ public class SpellAbility_Requirements {
     private boolean skipStack = false;
 
     /**
-     * <p>Setter for the field <code>skipStack</code>.</p>
-     *
-     * @param bSkip a boolean.
+     * <p>
+     * Setter for the field <code>skipStack</code>.
+     * </p>
+     * 
+     * @param bSkip
+     *            a boolean.
      */
     public final void setSkipStack(final boolean bSkip) {
         skipStack = bSkip;
     }
 
     /**
-     * <p>setFree.</p>
-     *
-     * @param bFree a boolean.
+     * <p>
+     * setFree.
+     * </p>
+     * 
+     * @param bFree
+     *            a boolean.
      */
     public final void setFree(final boolean bFree) {
         isFree = bFree;
@@ -43,11 +51,16 @@ public class SpellAbility_Requirements {
     private boolean bCasting = false;
 
     /**
-     * <p>Constructor for SpellAbility_Requirements.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param ts a {@link forge.card.spellability.Target_Selection} object.
-     * @param cp a {@link forge.card.cost.Cost_Payment} object.
+     * <p>
+     * Constructor for SpellAbility_Requirements.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param ts
+     *            a {@link forge.card.spellability.Target_Selection} object.
+     * @param cp
+     *            a {@link forge.card.cost.Cost_Payment} object.
      */
     public SpellAbility_Requirements(final SpellAbility sa, final Target_Selection ts, final Cost_Payment cp) {
         ability = sa;
@@ -56,16 +69,21 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>fillRequirements.</p>
+     * <p>
+     * fillRequirements.
+     * </p>
      */
     public final void fillRequirements() {
         fillRequirements(false);
     }
 
     /**
-     * <p>fillRequirements.</p>
-     *
-     * @param skipTargeting a boolean.
+     * <p>
+     * fillRequirements.
+     * </p>
+     * 
+     * @param skipTargeting
+     *            a boolean.
      */
     public final void fillRequirements(final boolean skipTargeting) {
         if (ability instanceof Spell && !bCasting) {
@@ -79,10 +97,12 @@ public class SpellAbility_Requirements {
             }
         }
 
-        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        // freeze Stack. No abilities should go onto the stack while I'm filling
+        // requirements.
         AllZone.getStack().freezeStack();
 
-        // Skip to paying if parent ability doesn't target and has no subAbilities.
+        // Skip to paying if parent ability doesn't target and has no
+        // subAbilities.
         // (or trigger case where its already targeted)
         if (!skipTargeting && (select.doesTarget() || ability.getSubAbility() != null)) {
             select.setRequirements(this);
@@ -94,13 +114,15 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>finishedTargeting.</p>
+     * <p>
+     * finishedTargeting.
+     * </p>
      */
     public final void finishedTargeting() {
         if (select.isCanceled()) {
             // cancel ability during target choosing
             Card c = ability.getSourceCard();
-            if (bCasting && !c.isCopiedSpell()) {    // and not a copy
+            if (bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to where it came from
                 AllZone.getGameAction().moveTo(fromZone, c);
             }
@@ -114,7 +136,9 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>needPayment.</p>
+     * <p>
+     * needPayment.
+     * </p>
      */
     public final void needPayment() {
         if (!isFree) {
@@ -125,7 +149,9 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>startPaying.</p>
+     * <p>
+     * startPaying.
+     * </p>
      */
     public final void startPaying() {
         payment.setRequirements(this);
@@ -133,7 +159,9 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>finishPaying.</p>
+     * <p>
+     * finishPaying.
+     * </p>
      */
     public final void finishPaying() {
         if (isFree || payment.isAllPaid()) {
@@ -147,7 +175,7 @@ public class SpellAbility_Requirements {
             AllZone.getGameAction().checkStateEffects();
         } else if (payment.isCanceled()) {
             Card c = ability.getSourceCard();
-            if (bCasting && !c.isCopiedSpell()) {    // and not a copy
+            if (bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to Previous Zone
                 AllZone.getGameAction().moveTo(fromZone, c);
             }
@@ -163,7 +191,9 @@ public class SpellAbility_Requirements {
     }
 
     /**
-     * <p>addAbilityToStack.</p>
+     * <p>
+     * addAbilityToStack.
+     * </p>
      */
     public final void addAbilityToStack() {
         // For older abilities that don't setStackDescription set it here

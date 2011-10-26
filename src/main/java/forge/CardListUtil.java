@@ -466,8 +466,7 @@ public class CardListUtil {
         for (int i = 0; i < c.size(); i++) {
             // if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
             if (c.get(i).isCreature()
-                    && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike())))
-            {
+                    && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike()))) {
                 attack += c.get(i).getNetCombatDamage();
             }
         }

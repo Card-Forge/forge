@@ -2,8 +2,10 @@ package forge;
 
 //handles "until end of combat" and "at end of combat" commands from cards
 /**
- * <p>EndOfCombat class.</p>
- *
+ * <p>
+ * EndOfCombat class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -16,42 +18,53 @@ public class EndOfCombat implements java.io.Serializable {
     private CommandList until = new CommandList();
 
     /**
-     * <p>addAt.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addAt.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addAt(final Command c) {
         at.add(c);
     }
 
     /**
-     * <p>addUntil.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addUntil.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addUntil(final Command c) {
         until.add(c);
     }
 
     /**
-     * <p>executeAt.</p>
+     * <p>
+     * executeAt.
+     * </p>
      */
     public final void executeAt() {
-        //AllZone.getStateBasedEffects().rePopulateStateBasedList();
+        // AllZone.getStateBasedEffects().rePopulateStateBasedList();
         execute(at);
-    } //executeAt()
-
+    } // executeAt()
 
     /**
-     * <p>executeUntil.</p>
+     * <p>
+     * executeUntil.
+     * </p>
      */
     public final void executeUntil() {
         execute(until);
     }
 
     /**
-     * <p>sizeAt.</p>
-     *
+     * <p>
+     * sizeAt.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeAt() {
@@ -59,8 +72,10 @@ public class EndOfCombat implements java.io.Serializable {
     }
 
     /**
-     * <p>sizeUntil.</p>
-     *
+     * <p>
+     * sizeUntil.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeUntil() {
@@ -68,9 +83,12 @@ public class EndOfCombat implements java.io.Serializable {
     }
 
     /**
-     * <p>execute.</p>
-     *
-     * @param c a {@link forge.CommandList} object.
+     * <p>
+     * execute.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CommandList} object.
      */
     private void execute(final CommandList c) {
         int length = c.size();
@@ -80,4 +98,4 @@ public class EndOfCombat implements java.io.Serializable {
         }
     }
 
-} //end class EndOfCombat
+} // end class EndOfCombat

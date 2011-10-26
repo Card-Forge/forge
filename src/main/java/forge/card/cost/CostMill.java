@@ -13,127 +13,149 @@ import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
-/** 
- * This is for the "Mill" Cost. Putting cards from the top of your library into your graveyard as a cost.
- * This Cost doesn't appear on very many cards, but might appear in more in the future.
- * This will show up in the form of Mill<1> 
+/**
+ * This is for the "Mill" Cost. Putting cards from the top of your library into
+ * your graveyard as a cost. This Cost doesn't appear on very many cards, but
+ * might appear in more in the future. This will show up in the form of Mill<1>
  */
 public class CostMill extends CostPartWithList {
 
-    public CostMill(String amount){
+    /**
+     * Instantiates a new cost mill.
+     * 
+     * @param amount
+     *            the amount
+     */
+    public CostMill(final String amount) {
         this.amount = amount;
     }
-    
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility, forge.Card, forge.Player, forge.card.cost.Cost)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         PlayerZone zone = activator.getZone(Constant.Zone.Library);
-        
+
         Integer i = convertAmount();
-        
-        if (i == null){
+
+        if (i == null) {
             String sVar = source.getSVar(amount);
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 return true;
             }
-            
+
             i = AbilityFactory.calculateAmount(source, amount, ability);
         }
-        
+
         return i < zone.size();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility, forge.Card, forge.card.cost.Cost_Payment)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         resetList();
-        
+
         Integer c = convertAmount();
-        if (c == null){
+        if (c == null) {
             String sVar = source.getSVar(amount);
             // Generalize this
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 return false;
             }
-            
+
             c = AbilityFactory.calculateAmount(source, amount, ability);
         }
-        
+
         list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
 
-        if (list == null || list.size() < c)
+        if (list == null || list.size() < c) {
             return false;
-        
+        }
+
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility, forge.Card, forge.card.cost.Cost_Payment)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         for (Card c : list)
             AllZone.getGameAction().moveToGraveyard(c);
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility, forge.Card, forge.card.cost.Cost_Payment)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         String amount = getAmount();
         Integer c = convertAmount();
         Player activator = ability.getActivatingPlayer();
 
-        if (c == null){
+        if (c == null) {
             String sVar = source.getSVar(amount);
             // Generalize this
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, list.size());
-            }
-            else{
+            } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
         CardList list = activator.getCardsIn(Zone.Library, c);
-        
-        if (list == null || list.size() > c){
+
+        if (list == null || list.size() > c) {
             // I don't believe this is possible
             payment.cancelCost();
             return false;
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("Mill ").append(c).append(" cards from your library?");
-        
+
         boolean doMill = GameActionUtil.showYesNoDialog(source, sb.toString());
-        if (doMill){
+        if (doMill) {
             resetList();
             Iterator<Card> itr = list.iterator();
-            while(itr.hasNext()){
-                Card card = (Card)itr.next();
+            while (itr.hasNext()) {
+                Card card = (Card) itr.next();
                 addToList(card);
                 AllZone.getGameAction().moveToGraveyard(card);
             }
             addListToHash(ability, "Milled");
             payment.paidCost(this);
             return false;
-        }
-        else{
+        } else {
             payment.cancelCost();
             return false;
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder sb = new StringBuilder();
         Integer i = convertAmount();
         sb.append("Put the top ");
@@ -145,18 +167,20 @@ public class CostMill extends CostPartWithList {
         }
 
         sb.append(" card");
-        if(i == null || i > 1) {
+        if (i == null || i > 1) {
             sb.append("s");
         }
         sb.append(" from the top of your library into your graveyard");
-        
+
         return sb.toString();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.card.cost.CostPart#refund(forge.Card)
      */
     @Override
-    public void refund(Card source) {
+    public void refund(final Card source) {
     }
 }

@@ -60,7 +60,7 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListTextFilter(CardList all, String name) {
+    public final CardList CardListTextFilter(final CardList all, final String name) {
         Card cardName;
         String s;
         s = "";
@@ -92,7 +92,7 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListColorFilter(CardList all, String name) {
+    public final CardList CardListColorFilter(final CardList all, final String name) {
         Card CardName = new Card();
         CardList listFilter = new CardList();
 
@@ -172,7 +172,7 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListTypeFilter(CardList all, String name) {
+    public final CardList CardListTypeFilter(final CardList all, final String name) {
         Card CardName = new Card();
         CardList listFilter = new CardList();
 

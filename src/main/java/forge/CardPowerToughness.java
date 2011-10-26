@@ -1,8 +1,10 @@
 package forge;
 
 /**
- * <p>CardPowerToughness class.</p>
- *
+ * <p>
+ * CardPowerToughness class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -13,8 +15,10 @@ public class CardPowerToughness {
     private long timeStamp = 0;
 
     /**
-     * <p>getTimestamp.</p>
-     *
+     * <p>
+     * getTimestamp.
+     * </p>
+     * 
      * @return a long.
      */
     public final long getTimestamp() {
@@ -22,11 +26,16 @@ public class CardPowerToughness {
     }
 
     /**
-     * <p>Constructor for Card_PT.</p>
-     *
-     * @param newPower     a int.
-     * @param newToughness a int.
-     * @param stamp        a long.
+     * <p>
+     * Constructor for Card_PT.
+     * </p>
+     * 
+     * @param newPower
+     *            a int.
+     * @param newToughness
+     *            a int.
+     * @param stamp
+     *            a long.
      */
     CardPowerToughness(final int newPower, final int newToughness, final long stamp) {
         power = newPower;
@@ -37,6 +46,7 @@ public class CardPowerToughness {
     /**
      * 
      * Get Power.
+     * 
      * @return int
      */
     public final int getPower() {
@@ -46,6 +56,7 @@ public class CardPowerToughness {
     /**
      * 
      * Get Toughness.
+     * 
      * @return int
      */
     public final int getToughness() {
@@ -53,11 +64,16 @@ public class CardPowerToughness {
     }
 
     /**
-     * <p>equals.</p>
-     *
-     * @param newPower     a int.
-     * @param newToughness a int.
-     * @param stamp        a long.
+     * <p>
+     * equals.
+     * </p>
+     * 
+     * @param newPower
+     *            a int.
+     * @param newToughness
+     *            a int.
+     * @param stamp
+     *            a long.
      * @return a boolean.
      */
     public final boolean equals(final int newPower, final int newToughness, final long stamp) {

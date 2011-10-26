@@ -7,36 +7,73 @@ import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
+/**
+ * The Class CostPayLife.
+ */
 public class CostPayLife extends CostPart {
     private int lastPaidAmount = 0;
 
-    public int getLastPaidAmount(){
+    /**
+     * Gets the last paid amount.
+     * 
+     * @return the last paid amount
+     */
+    public final int getLastPaidAmount() {
         return lastPaidAmount;
     }
-    
-    public void setLastPaidAmount(int paidAmount){
-    	lastPaidAmount = paidAmount;
+
+    /**
+     * Sets the last paid amount.
+     * 
+     * @param paidAmount
+     *            the new last paid amount
+     */
+    public final void setLastPaidAmount(final int paidAmount) {
+        lastPaidAmount = paidAmount;
     }
-    
-    public CostPayLife(String amount){
-    	this.amount = amount;
+
+    /**
+     * Instantiates a new cost pay life.
+     * 
+     * @param amount
+     *            the amount
+     */
+    public CostPayLife(final String amount) {
+        this.amount = amount;
     }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Pay ").append(amount).append(" Life");
-		return sb.toString();
-	}
-
-	@Override
-	public void refund(Card source) {
-		// Really should be activating player
-		source.getController().payLife(lastPaidAmount * -1, null);
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
+    public final String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pay ").append(amount).append(" Life");
+        return sb.toString();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
+    @Override
+    public final void refund(final Card source) {
+        // Really should be activating player
+        source.getController().payLife(lastPaidAmount * -1, null);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         Integer amount = convertAmount();
         if (amount != null && !activator.canPayLife(amount)) {
             return false;
@@ -45,32 +82,44 @@ public class CostPayLife extends CostPart {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         AllZone.getComputerPlayer().payLife(getLastPaidAmount(), null);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         String amount = getAmount();
         Player activator = ability.getActivatingPlayer();
         int life = activator.getLife();
-        
+
         Integer c = convertAmount();
-        if (c == null){
+        if (c == null) {
             String sVar = source.getSVar(amount);
             // Generalize this
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, life);
-            }
-            else{
+            } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Pay ").append(c).append(" Life?");
-        
+
         if (GameActionUtil.showYesNoDialog(source, sb.toString()) && activator.canPayLife(c)) {
             activator.payLife(c, null);
             setLastPaidAmount(c);
@@ -83,25 +132,31 @@ public class CostPayLife extends CostPart {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Player activator = ability.getActivatingPlayer();
 
         Integer c = convertAmount();
-        if (c == null){
+        if (c == null) {
             String sVar = source.getSVar(amount);
             // Generalize this
-            if (sVar.equals("XChoice")){
+            if (sVar.equals("XChoice")) {
                 return false;
-            }
-            else{
+            } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        if (!activator.canPayLife(c)){
+        if (!activator.canPayLife(c)) {
             return false;
         }
-        //activator.payLife(c, null);
+        // activator.payLife(c, null);
         setLastPaidAmount(c);
         return true;
     }

@@ -9,8 +9,10 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 
 /**
- * <p>PlayerZone_ComesIntoPlay class.</p>
- *
+ * <p>
+ * PlayerZone_ComesIntoPlay class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -22,10 +24,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
     private boolean leavesTrigger = true;
 
     /**
-     * <p>Constructor for PlayerZone_ComesIntoPlay.</p>
-     *
-     * @param zone a {@link java.lang.String} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * Constructor for PlayerZone_ComesIntoPlay.
+     * </p>
+     * 
+     * @param zone
+     *            a {@link java.lang.String} object.
+     * @param player
+     *            a {@link forge.Player} object.
      */
     public PlayerZoneComesIntoPlay(final Constant.Zone zone, final Player player) {
         super(zone, player);
@@ -43,17 +49,17 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         final Card c = (Card) o;
         final Player player = c.getController();
 
-        if (trigger && ((CardFactoryUtil.oppHasKismet(c.getController())
-                            && (c.isLand() || c.isCreature() || c.isArtifact()))
-                || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c.isCreature())
-                || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
-                || (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent())))
-        {
-            //it enters the battlefield this way, and should not fire triggers
+        if (trigger
+                && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
+                        || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c
+                                .isCreature())
+                        || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact())) || (AllZoneUtil
+                        .isCardInPlay("Orb of Dreams") && c.isPermanent()))) {
+            // it enters the battlefield this way, and should not fire triggers
             c.setTapped(true);
         }
 
-        //cannot use addComesIntoPlayCommand - trigger might be set to false;
+        // cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
         int addMax = 0;
 
@@ -67,12 +73,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             addMax = 2;
             adjustLandPlays = true;
         } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            // these two aren't in yet, but will just need the other part of the card to work with more lands
+            // these two aren't in yet, but will just need the other part of the
+            // card to work with more lands
             adjustLandPlays = true;
             eachPlayer = true;
             addMax = 1;
         }
-        // 7/13: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
+        // 7/13: fastbond code removed, fastbond should be unlimited and will be
+        // handled elsewhere.
 
         if (adjustLandPlays) {
             if (eachPlayer) {
@@ -90,18 +98,17 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             if (c.isLand()) {
                 CardList list = c.getController().getCardsIn(Zone.Battlefield);
 
-                /*CardList listValakut = list.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return c.getName().contains("Valakut, the Molten Pinnacle");
-                    }
-                });*/
+                /*
+                 * CardList listValakut = list.filter(new CardListFilter() {
+                 * public boolean addCard(Card c) { return
+                 * c.getName().contains("Valakut, the Molten Pinnacle"); } });
+                 */
 
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
                         return c.hasKeyword("Landfall")
-                                || c.hasKeyword(
-                                        "Landfall - Whenever a land enters the battlefield under your control, "
-                                + "CARDNAME gets +2/+2 until end of turn.");
+                                || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, "
+                                        + "CARDNAME gets +2/+2 until end of turn.");
                     }
                 });
 
@@ -109,18 +116,15 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
                 /*
-                // Check for a mountain
-                if (!listValakut.isEmpty() && c.isType("Mountain") ) {
-                    for (int i = 0; i < listValakut.size(); i++) {
-                        boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
-                        if (!b) {
-                            // Not enough mountains to activate Valakut -- stop the loop
-                            break;
-                        }
-                    }
-                }*/
+                 * // Check for a mountain if (!listValakut.isEmpty() &&
+                 * c.isType("Mountain") ) { for (int i = 0; i <
+                 * listValakut.size(); i++) { boolean b =
+                 * GameActionUtil.executeValakutEffect(listValakut.get(i),c); if
+                 * (!b) { // Not enough mountains to activate Valakut -- stop
+                 * the loop break; } } }
+                 */
 
-                //Tectonic Instability
+                // Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
                 for (Card ti : tis) {
@@ -152,8 +156,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                         @Override
                         public void resolve() {
                             CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                            lesLand.getOwner().sacrificePermanent(
-                                    source.getName() + " - Select a land to sacrifice", lands);
+                            lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice",
+                                    lands);
                         }
                     };
                     StringBuilder sb = new StringBuilder();
@@ -162,14 +166,15 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     ability.setStackDescription(sb.toString());
                     CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
                     CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
-                    //(pLands - 1) because this land is in play, and the ability is before it is in play
+                    // (pLands - 1) because this land is in play, and the
+                    // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {
                         AllZone.getStack().addSimultaneousStackEntry(ability);
 
                     }
                 }
 
-            } //isLand()
+            } // isLand()
         }
 
         if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
@@ -190,10 +195,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     public void resolve() {
                         if (crd.getController().isHuman()) {
                             if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
-                                if (player.getZone(Zone.Graveyard).contains(crd)
-                                        && AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                                        && c.getNetAttack() == 1 && c.getNetDefense() == 1)
-                                {
+                                if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
+                                        && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
                                     AllZone.getGameAction().moveToPlay(crd);
 
                                     crd.equipCard(c);
@@ -201,10 +204,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                             }
 
                         } else {
-                            if (player.getZone(Zone.Graveyard).contains(crd)
-                                    && AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                                    && c.getNetAttack() == 1 && c.getNetDefense() == 1)
-                            {
+                            if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
+                                    && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
                                 AllZone.getGameAction().moveToPlay(crd);
 
                                 crd.equipCard(c);
@@ -248,12 +249,14 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             addMax = -2;
             adjustLandPlays = true;
         } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            // once their second half of their abilities are programmed these two can be added in
+            // once their second half of their abilities are programmed these
+            // two can be added in
             adjustLandPlays = true;
             eachPlayer = true;
             addMax = -1;
         }
-        // 7/12: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
+        // 7/12: fastbond code removed, fastbond should be unlimited and will be
+        // handled elsewhere.
 
         if (adjustLandPlays) {
             if (eachPlayer) {
@@ -263,7 +266,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 c.getController().addMaxLandsToPlay(addMax);
             }
         }
-
 
         if (leavesTrigger) {
             c.leavesPlay();
@@ -275,7 +277,13 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             for (String effect : effects) {
                 tempEffect = effect;
                 AllZone.getStaticEffects().removeStateBasedEffect(effect);
-                Command comm = GameActionUtil.commands.get(tempEffect); //this is to make sure cards reset correctly
+                Command comm = GameActionUtil.commands.get(tempEffect); // this
+                                                                        // is to
+                                                                        // make
+                                                                        // sure
+                                                                        // cards
+                                                                        // reset
+                                                                        // correctly
                 comm.execute();
             }
 
@@ -286,46 +294,59 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             com.execute();
         }
 
-
     }
 
     /**
-     * <p>Setter for the field <code>trigger</code>.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * Setter for the field <code>trigger</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
     public final void setTrigger(final boolean b) {
         trigger = b;
     }
 
     /**
-     * <p>Setter for the field <code>leavesTrigger</code>.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * Setter for the field <code>leavesTrigger</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
     public final void setLeavesTrigger(final boolean b) {
         leavesTrigger = b;
     }
 
     /**
-     * <p>setTriggers.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setTriggers.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
     public final void setTriggers(final boolean b) {
         trigger = b;
         leavesTrigger = b;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.DefaultPlayerZone#getCards(boolean)
+     */
     @Override
     public final Card[] getCards(final boolean filter) {
-        // Battlefield filters out Phased Out cards by default. Needs to call getCards(false) to get Phased Out cards
+        // Battlefield filters out Phased Out cards by default. Needs to call
+        // getCards(false) to get Phased Out cards
         Card[] c;
         if (!filter) {
             c = new Card[cards.size()];
             cards.toArray(c);
-        }
-        else {
+        } else {
             Iterator<Card> itr = cards.iterator();
             ArrayList<Card> list = new ArrayList<Card>();
             while (itr.hasNext()) {

@@ -46,9 +46,13 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     private JPanel jPanel = null;
     private JCheckBox jCheckBox = null;
     private JButton jButtonStart = null;
+
+    /** The frame. */
     GUI_ImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
+
+    /** The j label total files. */
     public JLabel jLabelTotalFiles = null;
     private List<File> listFiles;
     private ArrayList<File> fileCopyList;
@@ -65,7 +69,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
      * @param owner
      *            a {@link javax.swing.JFrame} object.
      */
-    public GUI_ImportPicture(JFrame owner) {
+    public GUI_ImportPicture(final JFrame owner) {
         super(owner);
         frame = this;
         initialize();
@@ -153,7 +157,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
             jButtonSource.setText("...");
             jButtonSource.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
-                public void mouseClicked(java.awt.event.MouseEvent e) {
+                public void mouseClicked(final java.awt.event.MouseEvent e) {
                     JFileChooser chooser;
                     String choosertitle;
                     choosertitle = "Select source directory.";
@@ -258,7 +262,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
             jCheckBox.setText("Overwriting picture in resource folder");
             jCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
-                public void mouseClicked(java.awt.event.MouseEvent e) {
+                public void mouseClicked(final java.awt.event.MouseEvent e) {
                     jButtonStart.setEnabled(false);
                     if (jLabelSource.getText() != "") {
                         FileFinder ff = new FileFinder();
@@ -325,7 +329,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
             // jButtonStart.addMouseListener(new CustomListener());
             jButtonStart.addMouseListener(new MouseInputAdapter() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(final MouseEvent e) {
 
                     if (jButtonStart.isEnabled()) {
                         jLabelTotalFiles.setText("Please wait while all files are copying.");
@@ -337,7 +341,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
                                     jButtonSource);
                             cFiles.addPropertyChangeListener(new PropertyChangeListener() {
                                 @Override
-                                public void propertyChange(PropertyChangeEvent evt) {
+                                public void propertyChange(final PropertyChangeEvent evt) {
                                     if ("progress".equals(evt.getPropertyName())) {
                                         jProgressBar.setValue((Integer) evt.getNewValue());
                                     }
@@ -351,7 +355,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
                             CopyFiles cFiles = new CopyFiles(fileCopyList, jLabelTotalFiles, jProgressBar, jCheckBox,
                                     jButtonSource);
                             cFiles.addPropertyChangeListener(new PropertyChangeListener() {
-                                public void propertyChange(PropertyChangeEvent evt) {
+                                public void propertyChange(final PropertyChangeEvent evt) {
                                     if ("progress".equals(evt.getPropertyName())) {
                                         jProgressBar.setValue((Integer) evt.getNewValue());
                                     }

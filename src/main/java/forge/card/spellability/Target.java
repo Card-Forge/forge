@@ -1,93 +1,115 @@
 package forge.card.spellability;
 
-import forge.*;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.Constant;
+import forge.Player;
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+
 /**
- * <p>Target class.</p>
- *
+ * <p>
+ * Target class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Target {
     // Target has two things happening:
-    // Targeting restrictions (Creature, Min/Maxm etc) which are true for this whole Target
+    // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
+    // whole Target
     // Target Choices (which is specific for the StackInstance)
     private Card srcCard;
     private boolean uniqueTargets = false;
     private Target_Choices choice = null;
 
     /**
-     * <p>getTargetChoices.</p>
-     *
+     * <p>
+     * getTargetChoices.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.Target_Choices} object.
      */
-    public Target_Choices getTargetChoices() {
+    public final Target_Choices getTargetChoices() {
         return choice;
     }
 
     /**
-     * <p>setTargetChoices.</p>
-     *
-     * @param tc a {@link forge.card.spellability.Target_Choices} object.
+     * <p>
+     * setTargetChoices.
+     * </p>
+     * 
+     * @param tc
+     *            a {@link forge.card.spellability.Target_Choices} object.
      */
-    public void setTargetChoices(Target_Choices tc) {
+    public final void setTargetChoices(final Target_Choices tc) {
         choice = tc;
     }
 
     private boolean bMandatory = false;
 
     /**
-     * <p>getMandatory.</p>
-     *
+     * <p>
+     * getMandatory.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean getMandatory() {
+    public final boolean getMandatory() {
         return bMandatory;
     }
 
     /**
-     * <p>setMandatory.</p>
-     *
-     * @param m a boolean.
+     * <p>
+     * setMandatory.
+     * </p>
+     * 
+     * @param m
+     *            a boolean.
      */
-    public void setMandatory(boolean m) {
+    public final void setMandatory(final boolean m) {
         bMandatory = m;
     }
 
     private boolean tgtValid = false;
-    private String ValidTgts[];
+    private String[] ValidTgts;
     private String vtSelection = "";
 
     /**
-     * <p>doesTarget.</p>
-     *
+     * <p>
+     * doesTarget.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean doesTarget() {
+    public final boolean doesTarget() {
         return tgtValid;
     }
 
     /**
-     * <p>getValidTgts.</p>
-     *
+     * <p>
+     * getValidTgts.
+     * </p>
+     * 
      * @return an array of {@link java.lang.String} objects.
      */
-    public String[] getValidTgts() {
+    public final String[] getValidTgts() {
         return ValidTgts;
     }
 
     /**
-     * <p>getVTSelection.</p>
-     *
+     * <p>
+     * getVTSelection.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getVTSelection() {
+    public final String getVTSelection() {
         return vtSelection;
     }
 
@@ -95,88 +117,127 @@ public class Target {
     private String maxTargets;
 
     /**
-     * <p>Getter for the field <code>minTargets</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Getter for the field <code>minTargets</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    public int getMinTargets(Card c, SpellAbility sa) {
+    public final int getMinTargets(final Card c, final SpellAbility sa) {
         return AbilityFactory.calculateAmount(c, minTargets, sa);
     }
 
     /**
-     * <p>Getter for the field <code>maxTargets</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Getter for the field <code>maxTargets</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    public int getMaxTargets(Card c, SpellAbility sa) {
+    public final int getMaxTargets(final Card c, final SpellAbility sa) {
         return AbilityFactory.calculateAmount(c, maxTargets, sa);
     }
 
     /**
-     * <p>isMaxTargetsChosen.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * isMaxTargetsChosen.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean isMaxTargetsChosen(Card c, SpellAbility sa) {
+    public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
         return choice != null && getMaxTargets(c, sa) == choice.getNumTargeted();
     }
 
     /**
-     * <p>isMinTargetsChosen.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * isMinTargetsChosen.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean isMinTargetsChosen(Card c, SpellAbility sa) {
-    	if (getMinTargets(c, sa) == 0)
-    		return true;
+    public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
+        if (getMinTargets(c, sa) == 0) {
+            return true;
+        }
         return choice != null && getMinTargets(c, sa) <= choice.getNumTargeted();
     }
 
     private List<Constant.Zone> tgtZone = Arrays.asList(Constant.Zone.Battlefield);
 
     /**
-     * <p>setZone.</p>
-     *
-     * @param tZone a {@link java.lang.String} object.
+     * <p>
+     * setZone.
+     * </p>
+     * 
+     * @param tZone
+     *            a {@link java.lang.String} object.
      */
-    public void setZone(Constant.Zone tZone) { tgtZone = Arrays.asList(tZone); }
-    public void setZone(List<Constant.Zone> tZone) { tgtZone = tZone; }
+    public final void setZone(final Constant.Zone tZone) {
+        tgtZone = Arrays.asList(tZone);
+    }
 
     /**
-     * <p>getZone.</p>
-     *
+     * Sets the zone.
+     * 
+     * @param tZone
+     *            the new zone
+     */
+    public final void setZone(final List<Constant.Zone> tZone) {
+        tgtZone = tZone;
+    }
+
+    /**
+     * <p>
+     * getZone.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public List<Constant.Zone> getZone() {
+    public final List<Constant.Zone> getZone() {
         return tgtZone;
     }
 
-    // Used for Counters. Currently, Spell,Activated,Triggered can be Comma-separated
+    // Used for Counters. Currently, Spell,Activated,Triggered can be
+    // Comma-separated
     private String targetSpellAbilityType = null;
 
     /**
-     * <p>Setter for the field <code>targetSpellAbilityType</code>.</p>
-     *
-     * @param tgtSAType a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>targetSpellAbilityType</code>.
+     * </p>
+     * 
+     * @param tgtSAType
+     *            a {@link java.lang.String} object.
      */
-    public void setTargetSpellAbilityType(String tgtSAType) {
+    public final void setTargetSpellAbilityType(final String tgtSAType) {
         targetSpellAbilityType = tgtSAType;
     }
 
     /**
-     * <p>Getter for the field <code>targetSpellAbilityType</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetSpellAbilityType</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getTargetSpellAbilityType() {
+    public final String getTargetSpellAbilityType() {
         return targetSpellAbilityType;
     }
 
@@ -184,133 +245,172 @@ public class Target {
     private String saValidTargeting = null;
 
     /**
-     * <p>setSAValidTargeting.</p>
-     *
-     * @param saValidTgting a {@link java.lang.String} object.
+     * <p>
+     * setSAValidTargeting.
+     * </p>
+     * 
+     * @param saValidTgting
+     *            a {@link java.lang.String} object.
      */
-    public void setSAValidTargeting(String saValidTgting) {
+    public final void setSAValidTargeting(final String saValidTgting) {
         saValidTargeting = saValidTgting;
     }
 
     /**
-     * <p>getSAValidTargeting.</p>
-     *
+     * <p>
+     * getSAValidTargeting.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getSAValidTargeting() {
+    public final String getSAValidTargeting() {
         return saValidTargeting;
     }
 
     // Leaving old structure behind for compatibility.
     /**
-     * <p>addTarget.</p>
-     *
-     * @param o a {@link java.lang.Object} object.
+     * <p>
+     * addTarget.
+     * </p>
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
      * @return a boolean.
      */
-    public boolean addTarget(Object o) {
-        if (choice == null)
+    public final boolean addTarget(final Object o) {
+        if (choice == null) {
             choice = new Target_Choices();
+        }
 
-        if (o instanceof Card)
+        if (o instanceof Card) {
             return choice.addTarget((Card) o);
+        }
 
-        if (o instanceof Player)
+        if (o instanceof Player) {
             return choice.addTarget((Player) o);
+        }
 
-        if (o instanceof SpellAbility)
+        if (o instanceof SpellAbility) {
             return choice.addTarget((SpellAbility) o);
+        }
 
         return false;
     }
 
     /**
-     * <p>getTargetCards.</p>
-     *
+     * <p>
+     * getTargetCards.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Card> getTargetCards() {
-        if (choice == null)
+    public final ArrayList<Card> getTargetCards() {
+        if (choice == null) {
             return new ArrayList<Card>();
+        }
 
         return choice.getTargetCards();
     }
 
     /**
-     * <p>getTargetPlayers.</p>
-     *
+     * <p>
+     * getTargetPlayers.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Player> getTargetPlayers() {
-        if (choice == null)
+    public final ArrayList<Player> getTargetPlayers() {
+        if (choice == null) {
             return new ArrayList<Player>();
+        }
 
         return choice.getTargetPlayers();
     }
 
     /**
-     * <p>getTargetSAs.</p>
-     *
+     * <p>
+     * getTargetSAs.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<SpellAbility> getTargetSAs() {
-        if (choice == null)
+    public final ArrayList<SpellAbility> getTargetSAs() {
+        if (choice == null) {
             return new ArrayList<SpellAbility>();
+        }
 
         return choice.getTargetSAs();
     }
 
     /**
-     * <p>getTargets.</p>
-     *
+     * <p>
+     * getTargets.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Object> getTargets() {
-        if (choice == null)
+    public final ArrayList<Object> getTargets() {
+        if (choice == null) {
             return new ArrayList<Object>();
+        }
 
         return choice.getTargets();
     }
 
     /**
-     * <p>getNumTargeted.</p>
-     *
+     * <p>
+     * getNumTargeted.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getNumTargeted() {
-        if (choice == null)
+    public final int getNumTargeted() {
+        if (choice == null) {
             return 0;
+        }
         return choice.getNumTargeted();
     }
 
     /**
-     * <p>resetTargets.</p>
+     * <p>
+     * resetTargets.
+     * </p>
      */
-    public void resetTargets() {
+    public final void resetTargets() {
         choice = null;
     }
 
     /**
-     * <p>Constructor for Target.</p>
-     *
-     * @param src a {@link forge.Card} object.
-     * @param parse a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param parse
+     *            a {@link java.lang.String} object.
      */
-    public Target(Card src, String parse) {
+    public Target(final Card src, final String parse) {
         this(src, parse, "1", "1");
     }
 
     /**
-     * <p>Constructor for Target.</p>
-     *
-     * @param src a {@link forge.Card} object.
-     * @param parse a {@link java.lang.String} object.
-     * @param min a {@link java.lang.String} object.
-     * @param max a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param parse
+     *            a {@link java.lang.String} object.
+     * @param min
+     *            a {@link java.lang.String} object.
+     * @param max
+     *            a {@link java.lang.String} object.
      */
-    public Target(Card src, String parse, String min, String max) {
+    public Target(final Card src, String parse, final String min, final String max) {
         // parse=Tgt{C}{P} - Primarily used for Pump or Damage
-        // C = Creature   P=Player/Planeswalker
+        // C = Creature P=Player/Planeswalker
         // CP = All three
 
         tgtValid = true;
@@ -338,7 +438,9 @@ public class Target {
             return;
         }
 
-        if (src != null) sb.append(src + " - ");
+        if (src != null) {
+            sb.append(src + " - ");
+        }
         sb.append(prompt);
         vtSelection = sb.toString();
         ValidTgts = valid.split(",");
@@ -348,37 +450,54 @@ public class Target {
     }
 
     /**
-     * <p>Constructor for Target.</p>
-     *
-     * @param src a {@link forge.Card} object.
-     * @param select a {@link java.lang.String} object.
-     * @param valid an array of {@link java.lang.String} objects.
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            an array of {@link java.lang.String} objects.
      */
-    public Target(Card src, String select, String[] valid) {
+    public Target(final Card src, final String select, final String[] valid) {
         this(src, select, valid, "1", "1");
     }
 
     /**
-     * <p>Constructor for Target.</p>
-     *
-     * @param src a {@link forge.Card} object.
-     * @param select a {@link java.lang.String} object.
-     * @param valid a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            a {@link java.lang.String} object.
      */
-    public Target(Card src, String select, String valid) {
+    public Target(final Card src, final String select, final String valid) {
         this(src, select, valid.split(","), "1", "1");
     }
 
     /**
-     * <p>Constructor for Target.</p>
-     *
-     * @param src a {@link forge.Card} object.
-     * @param select a {@link java.lang.String} object.
-     * @param valid an array of {@link java.lang.String} objects.
-     * @param min a {@link java.lang.String} object.
-     * @param max a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            an array of {@link java.lang.String} objects.
+     * @param min
+     *            a {@link java.lang.String} object.
+     * @param max
+     *            a {@link java.lang.String} object.
      */
-    public Target(Card src, String select, String[] valid, String min, String max) {
+    public Target(final Card src, final String select, final String[] valid, final String min, final String max) {
         srcCard = src;
         tgtValid = true;
         vtSelection = select;
@@ -389,11 +508,13 @@ public class Target {
     }
 
     /**
-     * <p>getTargetedString.</p>
-     *
+     * <p>
+     * getTargetedString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getTargetedString() {
+    public final String getTargetedString() {
         ArrayList<Object> tgts = getTargets();
         StringBuilder sb = new StringBuilder("");
         for (Object o : tgts) {
@@ -411,81 +532,102 @@ public class Target {
         return sb.toString();
     }
 
-
     /**
-     * <p>canOnlyTgtOpponent.</p>
-     *
+     * <p>
+     * canOnlyTgtOpponent.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canOnlyTgtOpponent() {
+    public final boolean canOnlyTgtOpponent() {
         boolean player = false;
         boolean opponent = false;
         for (String s : ValidTgts) {
-            if (s.equals("Opponent"))
+            if (s.equals("Opponent")) {
                 opponent = true;
-            else if (s.equals("Player"))
+            } else if (s.equals("Player")) {
                 player = true;
+            }
         }
         return opponent && !player;
     }
 
     /**
-     * <p>canTgtPlayer.</p>
-     *
+     * <p>
+     * canTgtPlayer.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canTgtPlayer() {
+    public final boolean canTgtPlayer() {
         for (String s : ValidTgts) {
-            if (s.equals("Player") || s.equals("Opponent"))
+            if (s.equals("Player") || s.equals("Opponent")) {
                 return true;
+            }
         }
         return false;
     }
 
     /**
-     * <p>canTgtCreature.</p>
-     *
+     * <p>
+     * canTgtCreature.
+     * </p>
+     * 
      * @return a boolean.
      */
-    
-    public boolean canTgtPermanent() {
+
+    public final boolean canTgtPermanent() {
         for (String s : ValidTgts) {
-            if (s.contains("Permanent"))
+            if (s.contains("Permanent")) {
                 return true;
-        }
-        return false;
-    }
-    
-    public boolean canTgtCreature() {
-        for (String s : ValidTgts) {
-            if (s.contains("Creature") && !s.contains("nonCreature"))
-                return true;
+            }
         }
         return false;
     }
 
     /**
-     * <p>canTgtCreatureAndPlayer.</p>
-     *
+     * Can tgt creature.
+     * 
+     * @return true, if successful
+     */
+    public final boolean canTgtCreature() {
+        for (String s : ValidTgts) {
+            if (s.contains("Creature") && !s.contains("nonCreature")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * <p>
+     * canTgtCreatureAndPlayer.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean canTgtCreatureAndPlayer() {
+    public final boolean canTgtCreatureAndPlayer() {
         return canTgtPlayer() && canTgtCreature();
     }
 
     /**
-     * <p>hasCandidates.</p>
-     * @param isTargeted Check Valid Candidates and Targeting
-     *
+     * <p>
+     * hasCandidates.
+     * </p>
+     * 
+     * @param isTargeted
+     *            Check Valid Candidates and Targeting
+     * 
      * @return a boolean.
      */
-    public boolean hasCandidates(boolean isTargeted) {
+    public final boolean hasCandidates(final boolean isTargeted) {
         if (canTgtPlayer()) {
             return true;
         }
-        
-        for (Card c : AllZoneUtil.getCardsIn(tgtZone)){
-            if (c.isValid(ValidTgts, srcCard.getController(), srcCard) && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
+
+        for (Card c : AllZoneUtil.getCardsIn(tgtZone)) {
+            if (c.isValid(ValidTgts, srcCard.getController(), srcCard)
+                    && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
                 return true;
             }
         }
@@ -493,11 +635,22 @@ public class Target {
         return false;
     }
 
-    public boolean isUniqueTargets() {
+    /**
+     * Checks if is unique targets.
+     * 
+     * @return true, if is unique targets
+     */
+    public final boolean isUniqueTargets() {
         return uniqueTargets;
     }
 
-    public void setUniqueTargets(boolean unique) {
+    /**
+     * Sets the unique targets.
+     * 
+     * @param unique
+     *            the new unique targets
+     */
+    public final void setUniqueTargets(final boolean unique) {
         this.uniqueTargets = unique;
     }
 }

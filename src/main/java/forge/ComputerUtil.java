@@ -369,8 +369,7 @@ public class ComputerUtil {
         ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (int outer = 0; outer < all.size(); outer++) {
             SpellAbility[] sa = all.get(outer).getSpellAbility();
-            for (int i = 0; i < sa.length; i++)
-             {
+            for (int i = 0; i < sa.length; i++) {
                 spellAbility.add(sa[i]);// this seems like it needs to be
                                         // copied, not sure though
             }
@@ -528,7 +527,8 @@ public class ComputerUtil {
      * @return a boolean.
      * @since 1.0.15
      */
-    public static boolean payManaCost(final SpellAbility sa, final Player player, final boolean test, final int extraMana) {
+    public static boolean payManaCost(final SpellAbility sa, final Player player, final boolean test,
+            final int extraMana) {
         String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
         ManaCost cost = new ManaCost(mana);
@@ -590,8 +590,7 @@ public class ComputerUtil {
 
             for (Ability_Mana m : manaAbilities) {
 
-                if (used)
-                 {
+                if (used) {
                     break; // mana source already used in the test
                 }
                 m.setActivatingPlayer(player);
@@ -614,8 +613,7 @@ public class ComputerUtil {
 
                 colors = getProduceableColors(m, player);
                 for (int j = 0; j < colors.size(); j++) {
-                    if (used)
-                     {
+                    if (used) {
                         break; // mana source already used in the test
                     }
 
@@ -630,8 +628,7 @@ public class ComputerUtil {
                             } else {
                                 sourceCard.tap();
                             }
-                        }
-                        else {
+                        } else {
                             used = true; // mana source is now used in the test
                         }
 
@@ -780,8 +777,7 @@ public class ComputerUtil {
         for (int i = 0; i < manaSources.size(); i++) {
             Card card = manaSources.get(i);
 
-            if (card.isCreature() || card.isEnchanted())
-             {
+            if (card.isCreature() || card.isEnchanted()) {
                 continue; // don't use creatures before other permanents
             }
 
@@ -826,8 +822,7 @@ public class ComputerUtil {
             for (int i = 0; i < manaSources.size(); i++) {
                 Card card = manaSources.get(i);
 
-                if (card.isCreature() || card.isEnchanted())
-                 {
+                if (card.isCreature() || card.isEnchanted()) {
                     continue; // don't use creatures before other permanents
                 }
 
@@ -889,8 +884,8 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Ability_Mana> sortForNeeded(final ManaCost cost, final ArrayList<Ability_Mana> manaAbilities,
-            final Player player) {
+    public static ArrayList<Ability_Mana> sortForNeeded(final ManaCost cost,
+            final ArrayList<Ability_Mana> manaAbilities, final Player player) {
 
         ArrayList<String> colors;
 
@@ -1095,11 +1090,11 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseSacrificeType(final String type, final Card activate, final Card target, final int amount) {
+    public static CardList chooseSacrificeType(final String type, final Card activate, final Card target,
+            final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
-        if (target != null && target.getController().isComputer() && typeList.contains(target))
-         {
+        if (target != null && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't sacrifice the card we're pumping
         }
 
@@ -1236,7 +1231,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFromHandType(final String type, final Card activate, final Card target, final int amount) {
+    public static CardList chooseExileFromHandType(final String type, final Card activate, final Card target,
+            final int amount) {
         return chooseExileFrom(Constant.Zone.Hand, type, activate, target, amount);
     }
 
@@ -1255,7 +1251,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFromGraveType(final String type, final Card activate, final Card target, final int amount) {
+    public static CardList chooseExileFromGraveType(final String type, final Card activate, final Card target,
+            final int amount) {
         return chooseExileFrom(Constant.Zone.Graveyard, type, activate, target, amount);
     }
 
@@ -1276,11 +1273,11 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList chooseExileFrom(final Constant.Zone zone, final String type, final Card activate, final Card target, final int amount) {
+    public static CardList chooseExileFrom(final Constant.Zone zone, final String type, final Card activate,
+            final Card target, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(zone);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
-        if (target != null && target.getController().isComputer() && typeList.contains(target))
-         {
+        if (target != null && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
         }
 
@@ -1357,10 +1354,10 @@ public class ComputerUtil {
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
         if (target != null && target.getController().isComputer() && typeList.contains(target)) {
             // bounce
-                                                                                                // the
-                                                                                                // card
-                                                                                                // we're
-                                                                                                // pumping
+            // the
+            // card
+            // we're
+            // pumping
             typeList.remove(target);
         }
 
@@ -1472,6 +1469,7 @@ public class ComputerUtil {
      *            a int.
      * @param list
      *            a {@link forge.CardList} object.
+     * @return the card list
      */
     public static CardList sacrificePermanents(final int amount, final CardList list) {
         CardList sacList = new CardList();
@@ -1539,14 +1537,12 @@ public class ComputerUtil {
                 try {
                     AbilityFactory af = sa.getAbilityFactory();
 
-                    if (!sa.isAbility() || af == null || !af.getAPI().equals("Regenerate"))
-                     {
+                    if (!sa.isAbility() || af == null || !af.getAPI().equals("Regenerate")) {
                         continue; // Not a Regenerate ability
                     }
 
                     // sa.setActivatingPlayer(controller);
-                    if (!(sa.canPlay() && ComputerUtil.canPayCost(sa, controller)))
-                     {
+                    if (!(sa.canPlay() && ComputerUtil.canPayCost(sa, controller))) {
                         continue; // Can't play ability
                     }
 

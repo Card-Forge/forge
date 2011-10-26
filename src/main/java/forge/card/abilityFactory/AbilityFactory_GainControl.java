@@ -1,5 +1,9 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -12,12 +16,12 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
@@ -35,8 +39,10 @@ import java.util.Map;
 //	NoRegen - set if destroyed creature can't be regenerated.  used only with DestroyTgt
 
 /**
- * <p>AbilityFactory_GainControl class.</p>
- *
+ * <p>
+ * AbilityFactory_GainControl class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -55,9 +61,12 @@ public class AbilityFactory_GainControl {
     private ArrayList<String> kws = null;
 
     /**
-     * <p>Constructor for AbilityFactory_GainControl.</p>
-     *
-     * @param newAF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * Constructor for AbilityFactory_GainControl.
+     * </p>
+     * 
+     * @param newAF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_GainControl(final AbilityFactory newAF) {
         af = newAF;
@@ -84,8 +93,10 @@ public class AbilityFactory_GainControl {
     }
 
     /**
-     * <p>getSpellGainControl.</p>
-     *
+     * <p>
+     * getSpellGainControl.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -101,20 +112,22 @@ public class AbilityFactory_GainControl {
             @Override
             public void resolve() {
                 gainControlResolve(this);
-            } //resolve
+            } // resolve
 
             @Override
             public String getStackDescription() {
                 return gainControlStackDescription(this);
             }
-        }; //SpellAbility
+        }; // SpellAbility
 
         return spControl;
     }
 
     /**
-     * <p>getAbilityGainControl.</p>
-     *
+     * <p>
+     * getAbilityGainControl.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -142,14 +155,16 @@ public class AbilityFactory_GainControl {
             public boolean doTrigger(final boolean mandatory) {
                 return gainControlTgtAI(this);
             }
-        }; //Ability_Activated
+        }; // Ability_Activated
 
         return abControl;
     }
 
     /**
-     * <p>getDrawbackGainControl.</p>
-     *
+     * <p>
+     * getDrawbackGainControl.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -170,7 +185,7 @@ public class AbilityFactory_GainControl {
             @Override
             public void resolve() {
                 gainControlResolve(this);
-            } //resolve
+            } // resolve
 
             @Override
             public boolean chkAI_Drawback() {
@@ -181,15 +196,18 @@ public class AbilityFactory_GainControl {
             public boolean doTrigger(final boolean mandatory) {
                 return gainControlTriggerAI(this, mandatory);
             }
-        }; //SpellAbility
+        }; // SpellAbility
 
         return dbControl;
     }
 
     /**
-     * <p>gainControlStackDescription.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * gainControlStackDescription.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private String gainControlStackDescription(final SpellAbility sa) {
@@ -237,9 +255,12 @@ public class AbilityFactory_GainControl {
     }
 
     /**
-     * <p>gainControlTgtAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * gainControlTgtAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private boolean gainControlTgtAI(final SpellAbility sa) {
@@ -250,14 +271,15 @@ public class AbilityFactory_GainControl {
 
         Target tgt = af.getAbTgt();
 
-        //if Defined, then don't worry about targeting
+        // if Defined, then don't worry about targeting
         if (tgt == null) {
             return true;
         }
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
-        //AI won't try to grab cards that are filtered out of AI decks on purpose
+        // AI won't try to grab cards that are filtered out of AI decks on
+        // purpose
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 Map<String, String> vars = c.getSVars();
@@ -269,10 +291,9 @@ public class AbilityFactory_GainControl {
             return false;
         }
 
-        // Don't steal something if I can't Attack without, or prevent it from blocking at least
-        if (lose != null && lose.contains("EOT")
-                && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers))
-        {
+        // Don't steal something if I can't Attack without, or prevent it from
+        // blocking at least
+        if (lose != null && lose.contains("EOT") && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers)) {
             return false;
         }
 
@@ -329,9 +350,12 @@ public class AbilityFactory_GainControl {
     }
 
     /**
-     * <p>gainControlResolve.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * gainControlResolve.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void gainControlResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
@@ -343,7 +367,7 @@ public class AbilityFactory_GainControl {
         } else {
             tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
         }
-        //tgtCards.add(hostCard);
+        // tgtCards.add(hostCard);
 
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 params.get("NewController"), sa);
@@ -365,12 +389,11 @@ public class AbilityFactory_GainControl {
 
                 if (params.containsKey("NewController")) {
                     tgtC.addController(newController.get(0));
-                }
-                else {
+                } else {
                     tgtC.addController(hostCard);
                 }
-                //AllZone.getGameAction().changeController(new CardList(tgtC),
-                //      tgtC.getController(), newController.get(0));
+                // AllZone.getGameAction().changeController(new CardList(tgtC),
+                // tgtC.getController(), newController.get(0));
 
                 if (bUntap) {
                     tgtC.untap();
@@ -383,7 +406,7 @@ public class AbilityFactory_GainControl {
                 }
             }
 
-            //end copied
+            // end copied
 
             if (lose != null) {
                 if (lose.contains("LeavesPlay")) {
@@ -412,18 +435,23 @@ public class AbilityFactory_GainControl {
                 }
             }
 
-            //for Old Man of the Sea - 0 is hardcoded since it only allows 1 target
+            // for Old Man of the Sea - 0 is hardcoded since it only allows 1
+            // target
             hostCard.clearGainControlReleaseCommands();
             hostCard.addGainControlReleaseCommand(getLoseControlCommand(0, originalController));
 
-        } //end foreach target
+        } // end foreach target
     }
 
     /**
-     * <p>gainControlTriggerAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * gainControlTriggerAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private boolean gainControlTriggerAI(final SpellAbility sa, final boolean mandatory) {
@@ -443,25 +471,31 @@ public class AbilityFactory_GainControl {
     }
 
     /**
-     * <p>gainControlDrawbackAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * gainControlDrawbackAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
-            //all is good
+            // all is good
         } else {
             return gainControlTgtAI(sa);
         }
 
         return true;
-    } //pumpDrawbackAI()
+    } // pumpDrawbackAI()
 
     /**
-     * <p>getDestroyCommand.</p>
-     *
-     * @param i a int.
+     * <p>
+     * getDestroyCommand.
+     * </p>
+     * 
+     * @param i
+     *            a int.
      * @return a {@link forge.Command} object.
      */
     private Command getDestroyCommand(final int i) {
@@ -495,10 +529,14 @@ public class AbilityFactory_GainControl {
     }
 
     /**
-     * <p>getLoseControlCommand.</p>
-     *
-     * @param i a int.
-     * @param originalController a {@link forge.Player} object.
+     * <p>
+     * getLoseControlCommand.
+     * </p>
+     * 
+     * @param i
+     *            a int.
+     * @param originalController
+     *            a {@link forge.Player} object.
      * @return a {@link forge.Command} object.
      */
     private Command getLoseControlCommand(final int i, final Player originalController) {
@@ -508,33 +546,34 @@ public class AbilityFactory_GainControl {
 
             public void execute() {
                 doLoseControl(c, hostCard, bTapOnLose, kws);
-            } //execute()
+            } // execute()
         };
 
         return loseControl;
     }
 
-    private static void doLoseControl(final Card c, final Card host, final boolean tapOnLose, final ArrayList<String> addedKeywords)
-    {
-      if (null == c) {
-          return;
-      }
-      if (AllZoneUtil.isCardInPlay(c)) {
-          c.removeController(host);
-          //AllZone.getGameAction().changeController(new CardList(c), c.getController(), originalController);
+    private static void doLoseControl(final Card c, final Card host, final boolean tapOnLose,
+            final ArrayList<String> addedKeywords) {
+        if (null == c) {
+            return;
+        }
+        if (AllZoneUtil.isCardInPlay(c)) {
+            c.removeController(host);
+            // AllZone.getGameAction().changeController(new CardList(c),
+            // c.getController(), originalController);
 
-          if (tapOnLose) {
-              c.tap();
-          }
+            if (tapOnLose) {
+                c.tap();
+            }
 
-          if (null != addedKeywords) {
-              for (String kw : addedKeywords) {
-                  c.removeExtrinsicKeyword(kw);
-              }
-          }
-      } //if
-      host.clearGainControlTargets();
-      host.clearGainControlReleaseCommands();
+            if (null != addedKeywords) {
+                for (String kw : addedKeywords) {
+                    c.removeExtrinsicKeyword(kw);
+                }
+            }
+        } // if
+        host.clearGainControlTargets();
+        host.clearGainControlReleaseCommands();
     }
 
-} //end class AbilityFactory_GainControl
+} // end class AbilityFactory_GainControl

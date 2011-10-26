@@ -6,16 +6,15 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import forge.Card_Color;
-import forge.Counters;
 import forge.SetInfo;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class CardCharacteristics {
     private String name = "";
@@ -24,7 +23,7 @@ public class CardCharacteristics {
     private ArrayList<Card_Color> cardColor = new ArrayList<Card_Color>();
     private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
-    private int baseDefense = 0;   
+    private int baseDefense = 0;
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
@@ -35,208 +34,341 @@ public class CardCharacteristics {
     private String ImageFilename = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
+
     /**
+     * Gets the name.
+     * 
      * @return the name
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
+
     /**
-     * @param name0 the name to set
+     * Sets the name.
+     * 
+     * @param name0
+     *            the name to set
      */
-    public void setName(String name0) {
+    public final void setName(final String name0) {
         this.name = name0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the type.
+     * 
      * @return the type
      */
-    public ArrayList<String> getType() {
+    public final ArrayList<String> getType() {
         return type;
     }
+
     /**
-     * @param type0 the type to set
+     * Sets the type.
+     * 
+     * @param type0
+     *            the type to set
      */
-    public void setType(ArrayList<String> type0) {
+    public final void setType(final ArrayList<String> type0) {
         this.type = type0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the mana cost.
+     * 
      * @return the manaCost
      */
-    public String getManaCost() {
+    public final String getManaCost() {
         return manaCost;
     }
+
     /**
-     * @param manaCost0 the manaCost to set
+     * Sets the mana cost.
+     * 
+     * @param manaCost0
+     *            the manaCost to set
      */
-    public void setManaCost(String manaCost0) {
+    public final void setManaCost(final String manaCost0) {
         this.manaCost = manaCost0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the card color.
+     * 
      * @return the cardColor
      */
-    public ArrayList<Card_Color> getCardColor() {
+    public final ArrayList<Card_Color> getCardColor() {
         return cardColor;
     }
+
     /**
-     * @param cardColor0 the cardColor to set
+     * Sets the card color.
+     * 
+     * @param cardColor0
+     *            the cardColor to set
      */
-    public void setCardColor(ArrayList<Card_Color> cardColor0) {
-        this.cardColor = new ArrayList<Card_Color>(cardColor0); // TODO: Add 0 to parameter's name.
+    public final void setCardColor(final ArrayList<Card_Color> cardColor0) {
+        this.cardColor = new ArrayList<Card_Color>(cardColor0); // TODO: Add 0
+                                                                // to
+                                                                // parameter's
+                                                                // name.
     }
+
     /**
+     * Checks if is card colors overridden.
+     * 
      * @return the cardColorsOverridden
      */
-    public boolean isCardColorsOverridden() {
+    public final boolean isCardColorsOverridden() {
         return cardColorsOverridden;
     }
+
     /**
-     * @param cardColorsOverridden0 the cardColorsOverridden to set
+     * Sets the card colors overridden.
+     * 
+     * @param cardColorsOverridden0
+     *            the cardColorsOverridden to set
      */
-    public void setCardColorsOverridden(boolean cardColorsOverridden0) {
-        this.cardColorsOverridden = cardColorsOverridden0; // TODO: Add 0 to parameter's name.
+    public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
+        this.cardColorsOverridden = cardColorsOverridden0; // TODO: Add 0 to
+                                                           // parameter's name.
     }
+
     /**
+     * Gets the base attack.
+     * 
      * @return the baseAttack
      */
-    public int getBaseAttack() {
+    public final int getBaseAttack() {
         return baseAttack;
     }
+
     /**
-     * @param baseAttack0 the baseAttack to set
+     * Sets the base attack.
+     * 
+     * @param baseAttack0
+     *            the baseAttack to set
      */
-    public void setBaseAttack(int baseAttack0) {
+    public final void setBaseAttack(final int baseAttack0) {
         this.baseAttack = baseAttack0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the base defense.
+     * 
      * @return the baseDefense
      */
-    public int getBaseDefense() {
+    public final int getBaseDefense() {
         return baseDefense;
     }
+
     /**
-     * @param baseDefense0 the baseDefense to set
+     * Sets the base defense.
+     * 
+     * @param baseDefense0
+     *            the baseDefense to set
      */
-    public void setBaseDefense(int baseDefense0) {
+    public final void setBaseDefense(final int baseDefense0) {
         this.baseDefense = baseDefense0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the intrinsic keyword.
+     * 
      * @return the intrinsicKeyword
      */
-    public ArrayList<String> getIntrinsicKeyword() {
+    public final ArrayList<String> getIntrinsicKeyword() {
         return intrinsicKeyword;
     }
+
     /**
-     * @param intrinsicKeyword0 the intrinsicKeyword to set
+     * Sets the intrinsic keyword.
+     * 
+     * @param intrinsicKeyword0
+     *            the intrinsicKeyword to set
      */
-    public void setIntrinsicKeyword(ArrayList<String> intrinsicKeyword0) {
-        this.intrinsicKeyword = intrinsicKeyword0; // TODO: Add 0 to parameter's name.
+    public final void setIntrinsicKeyword(final ArrayList<String> intrinsicKeyword0) {
+        this.intrinsicKeyword = intrinsicKeyword0; // TODO: Add 0 to parameter's
+                                                   // name.
     }
+
     /**
+     * Gets the spell ability.
+     * 
      * @return the spellAbility
      */
-    public ArrayList<SpellAbility> getSpellAbility() {
+    public final ArrayList<SpellAbility> getSpellAbility() {
         return spellAbility;
     }
+
     /**
-     * @param spellAbility0 the spellAbility to set
+     * Sets the spell ability.
+     * 
+     * @param spellAbility0
+     *            the spellAbility to set
      */
-    public void setSpellAbility(ArrayList<SpellAbility> spellAbility0) {
+    public final void setSpellAbility(final ArrayList<SpellAbility> spellAbility0) {
         this.spellAbility = spellAbility0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the intrinsic ability.
+     * 
      * @return the intrinsicAbility
      */
-    public ArrayList<String> getIntrinsicAbility() {
+    public final ArrayList<String> getIntrinsicAbility() {
         return intrinsicAbility;
     }
+
     /**
-     * @param intrinsicAbility0 the intrinsicAbility to set
+     * Sets the intrinsic ability.
+     * 
+     * @param intrinsicAbility0
+     *            the intrinsicAbility to set
      */
-    public void setIntrinsicAbility(ArrayList<String> intrinsicAbility0) {
-        this.intrinsicAbility = intrinsicAbility0; // TODO: Add 0 to parameter's name.
+    public final void setIntrinsicAbility(final ArrayList<String> intrinsicAbility0) {
+        this.intrinsicAbility = intrinsicAbility0; // TODO: Add 0 to parameter's
+                                                   // name.
     }
+
     /**
+     * Gets the mana ability.
+     * 
      * @return the manaAbility
      */
-    public ArrayList<Ability_Mana> getManaAbility() {
+    public final ArrayList<Ability_Mana> getManaAbility() {
         return manaAbility;
     }
+
     /**
-     * @param manaAbility0 the manaAbility to set
+     * Sets the mana ability.
+     * 
+     * @param manaAbility0
+     *            the manaAbility to set
      */
-    public void setManaAbility(ArrayList<Ability_Mana> manaAbility0) {
+    public final void setManaAbility(final ArrayList<Ability_Mana> manaAbility0) {
         this.manaAbility = manaAbility0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the triggers.
+     * 
      * @return the triggers
      */
-    public ArrayList<Trigger> getTriggers() {
+    public final ArrayList<Trigger> getTriggers() {
         return triggers;
     }
+
     /**
-     * @param triggers0 the triggers to set
+     * Sets the triggers.
+     * 
+     * @param triggers0
+     *            the triggers to set
      */
-    public void setTriggers(ArrayList<Trigger> triggers0) {
+    public final void setTriggers(final ArrayList<Trigger> triggers0) {
         this.triggers = triggers0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the static abilities.
+     * 
      * @return the staticAbilities
      */
-    public ArrayList<StaticAbility> getStaticAbilities() {
+    public final ArrayList<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
+
     /**
-     * @param staticAbilities0 the staticAbilities to set
+     * Sets the static abilities.
+     * 
+     * @param staticAbilities0
+     *            the staticAbilities to set
      */
-    public void setStaticAbilities(ArrayList<StaticAbility> staticAbilities0) {
-        this.staticAbilities = new ArrayList<StaticAbility>(staticAbilities0); // TODO: Add 0 to parameter's name.
+    public final void setStaticAbilities(final ArrayList<StaticAbility> staticAbilities0) {
+        this.staticAbilities = new ArrayList<StaticAbility>(staticAbilities0); // TODO:
+                                                                               // Add
+                                                                               // 0
+                                                                               // to
+                                                                               // parameter's
+                                                                               // name.
     }
+
     /**
+     * Gets the image filename.
+     * 
      * @return the imageFilename
      */
-    public String getImageFilename() {
+    public final String getImageFilename() {
         return ImageFilename;
     }
+
     /**
-     * @param imageFilename0 the imageFilename to set
+     * Sets the image filename.
+     * 
+     * @param imageFilename0
+     *            the imageFilename to set
      */
-    public void setImageFilename(String imageFilename0) {
+    public final void setImageFilename(final String imageFilename0) {
         ImageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the s vars.
+     * 
      * @return the sVars
      */
-    public Map<String, String> getsVars() {
+    public final Map<String, String> getsVars() {
         return sVars;
     }
+
     /**
-     * @param sVars0 the sVars to set
+     * Sets vars.
+     * 
+     * @param sVars0
+     *            the sVars to set
      */
-    public void setsVars(Map<String, String> sVars0) {
-        this.sVars = new HashMap<String, String>(sVars0); // TODO: Add 0 to parameter's name.
+    public final void setsVars(final Map<String, String> sVars0) {
+        this.sVars = new HashMap<String, String>(sVars0); // TODO: Add 0 to
+                                                          // parameter's name.
     }
+
     /**
+     * Gets the sets.
+     * 
      * @return the sets
      */
-    public ArrayList<SetInfo> getSets() {
+    public final ArrayList<SetInfo> getSets() {
         return Sets;
     }
+
     /**
-     * @param sets0 the sets to set
+     * Sets the sets.
+     * 
+     * @param sets0
+     *            the sets to set
      */
-    public void setSets(ArrayList<SetInfo> sets0) {
-        Sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's name.
+    public final void setSets(final ArrayList<SetInfo> sets0) {
+        Sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
+                                              // name.
     }
+
     /**
+     * Gets the static ability strings.
+     * 
      * @return the staticAbilityStrings
      */
-    public ArrayList<String> getStaticAbilityStrings() {
+    public final ArrayList<String> getStaticAbilityStrings() {
         return staticAbilityStrings;
     }
+
     /**
-     * @param staticAbilityStrings0 the staticAbilityStrings to set
+     * Sets the static ability strings.
+     * 
+     * @param staticAbilityStrings0
+     *            the staticAbilityStrings to set
      */
-    public void setStaticAbilityStrings(ArrayList<String> staticAbilityStrings0) {
-        this.staticAbilityStrings = staticAbilityStrings0; // TODO: Add 0 to parameter's name.
+    public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
+        this.staticAbilityStrings = staticAbilityStrings0; // TODO: Add 0 to
+                                                           // parameter's name.
     }
 }

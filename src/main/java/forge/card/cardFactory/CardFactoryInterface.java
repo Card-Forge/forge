@@ -7,74 +7,94 @@ import forge.CardList;
 import forge.Player;
 import forge.card.spellability.SpellAbility;
 
-public interface CardFactoryInterface extends Iterable<Card>{
+/**
+ * The Interface CardFactoryInterface.
+ */
+public interface CardFactoryInterface extends Iterable<Card> {
 
     /**
-     * Iterate over all full-fledged cards in the database; these cards are 
+     * Iterate over all full-fledged cards in the database; these cards are
      * owned by the human player by default.
      * 
-     * @return an Iterator that does NOT support the remove method 
+     * @return an Iterator that does NOT support the remove method
      */
-	public Iterator<Card> iterator();
+    Iterator<Card> iterator();
 
-	/**
-	 * Typical size method. 
-	 * 
-	 * @return an estimate of the number of items encountered by this object's 
-	 * iterator
-	 * 
-	 * @see #iterator
-	 */
-	public int size();
-	
     /**
-     * <p>copyCard.</p>
-     *
-     * @param in a {@link forge.Card} object.
+     * Typical size method.
+     * 
+     * @return an estimate of the number of items encountered by this object's
+     *         iterator
+     * 
+     * @see #iterator
+     */
+    int size();
+
+    /**
+     * <p>
+     * copyCard.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card copyCard(Card in);
-    
+    Card copyCard(Card in);
+
     /**
-     * <p>copyCardintoNew.</p>
-     *
-     * @param in a {@link forge.Card} object.
+     * <p>
+     * copyCardintoNew.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public Card copyCardintoNew(Card in);
+    Card copyCardintoNew(Card in);
 
     /**
-     * <p>copySpellontoStack.</p>
-     *
-     * @param source a {@link forge.Card} object.
-     * @param original a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param bCopyDetails a boolean.
+     * <p>
+     * copySpellontoStack.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param original
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param bCopyDetails
+     *            a boolean.
      */
-    public void copySpellontoStack(Card source, Card original, SpellAbility sa, boolean bCopyDetails);
+    void copySpellontoStack(Card source, Card original, SpellAbility sa, boolean bCopyDetails);
 
     /**
-     * <p>copySpellontoStack.</p>
-     *
-     * @param source a {@link forge.Card} object.
-     * @param original a {@link forge.Card} object.
-     * @param bCopyDetails a boolean.
+     * <p>
+     * copySpellontoStack.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param original
+     *            a {@link forge.Card} object.
+     * @param bCopyDetails
+     *            a boolean.
      */
-    public void copySpellontoStack(Card source, Card original, boolean bCopyDetails);
+    void copySpellontoStack(Card source, Card original, boolean bCopyDetails);
 
     /**
-     * <p>getCard.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
+     * <p>
+     * getCard.
+     * </p>
      * 
-     * @param owner a {@link forge.Player} object.
-     * 
-     * @return a {@link forge.Card} instance, owned by owner; or the special 
-     * blankCard
-     * 
-     * @throws RuntimeException if cardName isn't in the Card map
+     * @param cardName
+     *            a {@link java.lang.String} object.
+     * @param owner
+     *            a {@link forge.Player} object.
+     * @return a {@link forge.Card} instance, owned by owner; or the special
+     *         blankCard
      */
-    public Card getCard(String cardName, Player owner);
+    Card getCard(String cardName, Player owner);
 
     /**
      * Fetch a random combination of cards without any duplicates.
@@ -84,11 +104,8 @@ public interface CardFactoryInterface extends Iterable<Card>{
      * 
      * @param numCards
      *            the number of cards to return
-     * 
      * @return a list of fleshed-out card instances
-     * 
-     * @throws IllegalArgumentException if numCards >= size()/4
      */
-    public CardList getRandomCombinationWithoutRepetition(int numCards);
+    CardList getRandomCombinationWithoutRepetition(int numCards);
 
 }

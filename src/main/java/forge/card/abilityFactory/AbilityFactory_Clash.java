@@ -1,5 +1,8 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
@@ -9,12 +12,11 @@ import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- * <p>AbilityFactory_Clash class.</p>
- *
+ * <p>
+ * AbilityFactory_Clash class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -25,9 +27,12 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>getAbilityClash.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getAbilityClash.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -65,9 +70,12 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>getSpellClash.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getSpellClash.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -105,9 +113,12 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>getDrawbackClash.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getDrawbackClash.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -150,16 +161,20 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>clashResolve.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param SA a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * clashResolve.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void clashResolve(final AbilityFactory af, final SpellAbility sa) {
         AbilityFactory afOutcomes = new AbilityFactory();
         boolean victory = af.getHostCard().getController().clashWithOpponent(af.getHostCard());
 
-        //Run triggers
+        // Run triggers
         HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", af.getHostCard().getController());
 
@@ -193,9 +208,12 @@ public final class AbilityFactory_Clash {
     // *************************************************************************
 
     /**
-     * <p>createAbilityFlip.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityFlip.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -228,9 +246,12 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>createSpellFlip.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellFlip.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -268,9 +289,12 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>createDrawbackFlip.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackFlip.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -313,10 +337,14 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>flipGetStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * flipGetStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String flipGetStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -343,10 +371,14 @@ public final class AbilityFactory_Clash {
     }
 
     /**
-     * <p>flipResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * flipResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void flipResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -361,9 +393,9 @@ public final class AbilityFactory_Clash {
         AbilityFactory afOutcomes = new AbilityFactory();
         boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
 
-        //Run triggers
-        //HashMap<String,Object> runParams = new HashMap<String,Object>();
-        //runParams.put("Player", player);
+        // Run triggers
+        // HashMap<String,Object> runParams = new HashMap<String,Object>();
+        // runParams.put("Player", player);
         if (params.get("RememberAll") != null) {
             host.addRemembered(host);
         }
@@ -379,9 +411,8 @@ public final class AbilityFactory_Clash {
 
                 AbilityFactory.resolve(win, false);
             }
-            //runParams.put("Won","True");
-        }
-        else {
+            // runParams.put("Won","True");
+        } else {
             if (params.get("RememberLoser") != null) {
                 host.addRemembered(host);
             }
@@ -392,10 +423,10 @@ public final class AbilityFactory_Clash {
 
                 AbilityFactory.resolve(lose, false);
             }
-            //runParams.put("Won","False");
+            // runParams.put("Won","False");
         }
 
-        //AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
+        // AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
     }
 
-} //end class AbilityFactory_Clash
+} // end class AbilityFactory_Clash

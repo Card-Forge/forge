@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.slightlymagic.braids.util.NotImplementedError;
-
 import forge.Card;
 import forge.CardReader;
 import forge.CardUtil;
@@ -16,19 +15,20 @@ import forge.Player;
 /**
  * Like PreloadingCardFactory, but loads cards one at a time, instead of all at
  * once; only used for unit testing at this time.
- *
+ * 
  * Iteration has been disabled for this class.
  */
 public class LazyCardFactory extends AbstractCardFactory {
 
     private final CardReader cardReader;
     private final List<String> cardsFailedToLoad = new ArrayList<String>();
-    
+
     /**
      * Construct an instance, pointing it to a specific cardsfolder.
-     *
-     * @param cardsfolder  a directory containing cardsfolder.zip or
-     * subdirectories and txt files.
+     * 
+     * @param cardsfolder
+     *            a directory containing cardsfolder.zip or subdirectories and
+     *            txt files.
      */
     public LazyCardFactory(final File cardsfolder) {
         super(cardsfolder);
@@ -39,33 +39,36 @@ public class LazyCardFactory extends AbstractCardFactory {
 
     /**
      * Getter for cardReader.
+     * 
      * @return cardReader
      */
-    public CardReader getCardReader() {
+    public final CardReader getCardReader() {
         return cardReader;
     }
 
     /**
      * Not implemented; do not call.
-     *
+     * 
      * @return never
      */
     @Override
-    public Iterator<Card> iterator() {
+    public final Iterator<Card> iterator() {
         throw new NotImplementedError();
     }
 
     /**
-     * Like AbstractCardFactory.getCard2, but loads the card into the map
-     * first if it's not there.
-     *
-     * @param cardName  the name of the card to fetch
-     * @param owner  the owner of the returned card
-     *
+     * Like AbstractCardFactory.getCard2, but loads the card into the map first
+     * if it's not there.
+     * 
+     * @param cardName
+     *            the name of the card to fetch
+     * @param owner
+     *            the owner of the returned card
+     * 
      * @return a new Card instance with abilities and an owner
      */
     @Override
-    protected Card getCard2(final String cardName, final Player owner) {
+    protected final Card getCard2(final String cardName, final Player owner) {
         final Map<String, Card> cardNamesToCards = getMap();
         Card result = null;
         boolean wasLoaded = cardNamesToCards.containsKey(cardName);
@@ -73,7 +76,8 @@ public class LazyCardFactory extends AbstractCardFactory {
         if (!wasLoaded) {
 
             if (cardsFailedToLoad.contains(cardName)) {
-                return null; // no more System.err, exceptions of other drama - just return null.
+                return null; // no more System.err, exceptions of other drama -
+                             // just return null.
             }
 
             final String canonicalASCIIName = CardUtil.canonicalizeCardName(cardName);
@@ -83,7 +87,8 @@ public class LazyCardFactory extends AbstractCardFactory {
                 wasLoaded = true;
             } else {
                 cardsFailedToLoad.add(cardName);
-                System.err.println(String.format("LazyCF: Tried to read from disk card '%s' but not found it!", cardName));
+                System.err.println(String.format("LazyCF: Tried to read from disk card '%s' but not found it!",
+                        cardName));
                 return null;
             }
         }

@@ -4,8 +4,10 @@ import java.util.Observer;
 
 //PlayerZone observers the cards that are added to its zone
 /**
- * <p>Abstract PlayerZone class.</p>
- *
+ * <p>
+ * Abstract PlayerZone class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */

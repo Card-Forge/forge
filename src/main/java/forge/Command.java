@@ -1,8 +1,10 @@
 package forge;
 
 /**
- * <p>Command interface.</p>
- *
+ * <p>
+ * Command interface.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -17,7 +19,9 @@ public interface Command extends java.io.Serializable {
     };
 
     /**
-     * <p>execute.</p>
+     * <p>
+     * execute.
+     * </p>
      */
     void execute();
 }

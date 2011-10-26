@@ -15,68 +15,114 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 
+/**
+ * The Class CostReturn.
+ */
 public class CostReturn extends CostPartWithList {
-	// Return<Num/Type{/TypeDescription}>
-    
-    public CostReturn(String amount, String type, String description){
+    // Return<Num/Type{/TypeDescription}>
+
+    /**
+     * Instantiates a new cost return.
+     * 
+     * @param amount
+     *            the amount
+     * @param type
+     *            the type
+     * @param description
+     *            the description
+     */
+    public CostReturn(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
 
-	@Override
-	public String toString() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
+    @Override
+    public final String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Return ");
 
         Integer i = convertAmount();
         String pronoun = "its";
-        
-        if (getThis())
+
+        if (getThis()) {
             sb.append(type);
-        else {
-        	String desc = typeDescription == null ? type : typeDescription;
-	        if (i != null){
-	        	sb.append(Cost.convertIntAndTypeToWords(i, desc));
-	        	if (i > 1)
-            		pronoun = "their"; 	
-	        }
-	        else
-	        	sb.append(Cost.convertAmountTypeToWords(amount, desc));
-        	
+        } else {
+            String desc = typeDescription == null ? type : typeDescription;
+            if (i != null) {
+                sb.append(Cost.convertIntAndTypeToWords(i, desc));
+                if (i > 1) {
+                    pronoun = "their";
+                }
+            } else {
+                sb.append(Cost.convertAmountTypeToWords(amount, desc));
+            }
+
             sb.append(" you control");
         }
         sb.append(" to ").append(pronoun).append(" owner's hand");
         return sb.toString();
-	}
+    }
 
-	@Override
-	public void refund(Card source) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
+    public void refund(final Card source) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         if (!getThis()) {
             CardList typeList = activator.getCardsIn(Zone.Battlefield);
             typeList = typeList.getValidCards(getType().split(";"), activator, source);
-            
-            Integer amount = convertAmount();   
-            if (amount != null && typeList.size() < amount)
+
+            Integer amount = convertAmount();
+            if (amount != null && typeList.size() < amount) {
                 return false;
-        } else if (!AllZoneUtil.isCardInPlay(source))
+            }
+        } else if (!AllZoneUtil.isCardInPlay(source)) {
             return false;
-        
+        }
+
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         for (Card c : list)
             AllZone.getGameAction().moveToHand(c);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         String amount = getAmount();
         Integer c = convertAmount();
         Player activator = ability.getActivatingPlayer();
@@ -90,54 +136,72 @@ public class CostReturn extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        if (getThis())
+        if (getThis()) {
             CostUtil.setInput(CostReturn.returnThis(ability, payment, this));
-        else
+        } else {
             CostUtil.setInput(CostReturn.returnType(ability, getType(), payment, this, c));
+        }
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         resetList();
-        if (getThis())
+        if (getThis()) {
             list.add(source);
-        else{
+        } else {
             Integer c = convertAmount();
-            if (c == null){
+            if (c == null) {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
-            
+
             list = ComputerUtil.chooseReturnType(getType(), source, ability.getTargetCard(), c);
-            if (list == null)
+            if (list == null) {
                 return false;
+            }
         }
         return true;
     }
 
     // Inputs
-    
+
     /**
-     * <p>returnType.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param type a {@link java.lang.String} object.
-     * @param payment a {@link forge.card.cost.Cost_Payment} object.
-     * @param part TODO
+     * <p>
+     * returnType.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param payment
+     *            a {@link forge.card.cost.Cost_Payment} object.
+     * @param part
+     *            TODO
+     * @param nNeeded
+     *            the n needed
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment, final CostReturn part, final int nNeeded) {
+    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment,
+            final CostReturn part, final int nNeeded) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
             private int nReturns = 0;
-    
+
             @Override
             public void showMessage() {
-                if (nNeeded == 0){
+                if (nNeeded == 0) {
                     done();
                 }
-                
+
                 StringBuilder msg = new StringBuilder("Return ");
                 int nLeft = nNeeded - nReturns;
                 msg.append(nLeft).append(" ");
@@ -145,62 +209,69 @@ public class CostReturn extends CostPartWithList {
                 if (nLeft > 1) {
                     msg.append("s");
                 }
-    
+
                 typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
-    
+
             @Override
             public void selectButtonCancel() {
                 cancel();
             }
-    
+
             @Override
-            public void selectCard(Card card, PlayerZone zone) {
+            public void selectCard(final Card card, final PlayerZone zone) {
                 if (typeList.contains(card)) {
                     nReturns++;
                     part.addToList(card);
                     AllZone.getGameAction().moveToHand(card);
                     typeList.remove(card);
-                    //in case nothing else to return
-                    if (nReturns == nNeeded)
+                    // in case nothing else to return
+                    if (nReturns == nNeeded) {
                         done();
-                    else if (typeList.size() == 0)    // this really shouldn't happen
+                    } else if (typeList.size() == 0) {
+                        // happen
                         cancel();
-                    else
+                    } else {
                         showMessage();
+                    }
                 }
             }
-    
+
             public void done() {
                 stop();
                 payment.paidCost(part);
             }
-    
+
             public void cancel() {
                 stop();
                 part.addListToHash(sa, "Returned");
                 payment.cancelCost();
             }
         };
-    
+
         return target;
-    }//returnType()  
+    }// returnType()
 
     /**
-     * <p>returnThis.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment a {@link forge.card.cost.Cost_Payment} object.
-     * @param part TODO
+     * <p>
+     * returnThis.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.Cost_Payment} object.
+     * @param part
+     *            TODO
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input returnThis(final SpellAbility sa, final Cost_Payment payment, final CostReturn part) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
-    
+
             @Override
             public void showMessage() {
                 Card card = sa.getSourceCard();
@@ -208,10 +279,10 @@ public class CostReturn extends CostPartWithList {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Return to Hand?");
-                    Object[] possibleValues = {"Yes", "No"};
+                    Object[] possibleValues = { "Yes", "No" };
                     Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                            null, possibleValues, possibleValues[0]);
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
+                            possibleValues[0]);
                     if (choice.equals(0)) {
                         part.addToList(card);
                         AllZone.getGameAction().moveToHand(card);
@@ -225,7 +296,7 @@ public class CostReturn extends CostPartWithList {
                 }
             }
         };
-    
+
         return target;
-    }//input_sacrifice()
+    }// input_sacrifice()
 }

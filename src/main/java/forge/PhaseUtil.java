@@ -1,29 +1,35 @@
 package forge;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.input.Input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- * <p>PhaseUtil class.</p>
- *
+ * <p>
+ * PhaseUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class PhaseUtil {
     // ******* UNTAP PHASE *****
     /**
-     * <p>skipUntap.</p>
-     *
-     * @param p a {@link forge.Player} object.
+     * <p>
+     * skipUntap.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    private static boolean skipUntap(Player p) {
-        if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis"))
+    private static boolean skipUntap(final Player p) {
+        if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis")) {
             return true;
+        }
 
         if (p.skipNextUntap()) {
             p.setSkipNextUntap(false);
@@ -34,7 +40,9 @@ public class PhaseUtil {
     }
 
     /**
-     * <p>handleUntap.</p>
+     * <p>
+     * handleUntap.
+     * </p>
      */
     public static void handleUntap() {
         Player turn = AllZone.getPhase().getPlayerTurn();
@@ -46,7 +54,8 @@ public class PhaseUtil {
         AllZone.getCombat().setAttackingPlayer(turn);
         AllZone.getCombat().setDefendingPlayer(turn.getOpponent());
 
-        // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
+        // For tokens a player starts the game with they don't recover from Sum.
+        // Sickness on first turn
         if (turn.getTurn() > 0) {
             CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
             for (Card c : list)
@@ -59,7 +68,8 @@ public class PhaseUtil {
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.untapped);
         turn.setNumPowerSurgeLands(lands.size());
 
-        // anything before this point happens regardless of whether the Untap phase is skipped
+        // anything before this point happens regardless of whether the Untap
+        // phase is skipped
 
         if (skipUntap(turn)) {
             AllZone.getPhase().setNeedToNextPhase(true);
@@ -71,39 +81,40 @@ public class PhaseUtil {
 
         doUntap();
 
-        //otherwise land seems to stay tapped when it is really untapped
+        // otherwise land seems to stay tapped when it is really untapped
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
 
         AllZone.getPhase().setNeedToNextPhase(true);
     }
 
-    private static void doPhasing(Player turn){
+    private static void doPhasing(final Player turn) {
         // Needs to include phased out cards
         CardList list = turn.getCardsIncludePhasingIn(Constant.Zone.Battlefield).filter(new CardListFilter() {
-            
+
             @Override
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword("Phasing"));
             }
         });
-        
-        // If c has things attached to it, they phase out simultaneously, and will phase back in with it
-        // If c is attached to something, it will phase out on its own, and try to attach back to that thing when it comes back
-        for(Card c : list){
-            if (c.isPhasedOut()){               
+
+        // If c has things attached to it, they phase out simultaneously, and
+        // will phase back in with it
+        // If c is attached to something, it will phase out on its own, and try
+        // to attach back to that thing when it comes back
+        for (Card c : list) {
+            if (c.isPhasedOut()) {
                 c.phase();
-            }
-            else if (c.hasKeyword("Phasing")){
-                // 702.23g If an object would simultaneously phase out directly and indirectly, it just phases out indirectly. 
-                if (c.isAura()){
+            } else if (c.hasKeyword("Phasing")) {
+                // 702.23g If an object would simultaneously phase out directly
+                // and indirectly, it just phases out indirectly.
+                if (c.isAura()) {
                     GameEntity ent = c.getEnchanting();
-                    
-                    if (ent instanceof Card && list.contains((Card)ent)){
+
+                    if (ent instanceof Card && list.contains((Card) ent)) {
                         continue;
                     }
-                }
-                else if (c.isEquipment() && c.isEquipping()){
-                    if (list.contains(c.getEquippingCard())){
+                } else if (c.isEquipment() && c.isEquipping()) {
+                    if (list.contains(c.getEquippingCard())) {
                         continue;
                     }
                 }
@@ -112,10 +123,11 @@ public class PhaseUtil {
             }
         }
     }
-    
-    
+
     /**
-     * <p>doUntap.</p>
+     * <p>
+     * doUntap.
+     * </p>
      */
     private static void doUntap() {
         Player player = AllZone.getPhase().getPlayerTurn();
@@ -128,13 +140,21 @@ public class PhaseUtil {
         }
 
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if (!canUntap(c)) return false;
-                if (canOnlyUntapOneLand() && c.isLand()) return false;
+            public boolean addCard(final Card c) {
+                if (!canUntap(c)) {
+                    return false;
+                }
+                if (canOnlyUntapOneLand() && c.isLand()) {
+                    return false;
+                }
                 if ((AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue"))
-                        && c.isArtifact()) return false;
-                if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")
-                        || AllZoneUtil.isCardInPlay("Intruder Alarm")) && c.isCreature()) return false;
+                        && c.isArtifact()) {
+                    return false;
+                }
+                if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel") || AllZoneUtil
+                        .isCardInPlay("Intruder Alarm")) && c.isCreature()) {
+                    return false;
+                }
                 return true;
             }
         });
@@ -150,45 +170,56 @@ public class PhaseUtil {
                             prompt += "\r\n" + c + " is controlling: ";
                             for (Card target : targets) {
                                 prompt += target;
-                                if(AllZoneUtil.isCardInPlay(target)) defaultNo |= true;
+                                if (AllZoneUtil.isCardInPlay(target)) {
+                                    defaultNo |= true;
+                                }
                             }
                         }
                         if (GameActionUtil.showYesNoDialog(c, prompt, defaultNo)) {
                             c.untap();
                         }
-                    } else {  //computer
-                        //if it is controlling something by staying tapped, leave it tapped
-                        //if not, untap it
-                    	if (c.getGainControlTargets().size() > 0) {
+                    } else { // computer
+                        // if it is controlling something by staying tapped,
+                        // leave it tapped
+                        // if not, untap it
+                        if (c.getGainControlTargets().size() > 0) {
                             ArrayList<Card> targets = c.getGainControlTargets();
                             boolean untap = true;
                             for (Card target : targets) {
-                                if(AllZoneUtil.isCardInPlay(target)) untap |= true;
+                                if (AllZoneUtil.isCardInPlay(target)) {
+                                    untap |= true;
+                                }
                             }
-                            if(untap) c.untap();
+                            if (untap) {
+                                c.untap();
+                            }
                         }
                     }
                 }
             } else if ((c.getCounters(Counters.WIND) > 0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
-                //remove a WIND counter instead of untapping
+                // remove a WIND counter instead of untapping
                 c.subtractCounter(Counters.WIND, 1);
-            } else c.untap();
+            } else {
+                c.untap();
+            }
         }
 
-        //opponent untapping during your untap phase
+        // opponent untapping during your untap phase
         CardList opp = player.getOpponent().getCardsIn(Zone.Battlefield);
         for (Card oppCard : opp)
             if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step."))
+             {
                 oppCard.untap();
-        //end opponent untapping during your untap phase
+        // end opponent untapping during your untap phase
+            }
 
         if (canOnlyUntapOneLand()) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
-                //search for lands the computer has and only untap 1
+                // search for lands the computer has and only untap 1
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
                 landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -208,17 +239,17 @@ public class PhaseUtil {
                         stop();
                     }
 
-                    public void selectCard(Card c, PlayerZone zone) {
+                    public void selectCard(final Card c, final PlayerZone zone) {
                         if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isTapped() && canUntap(c)) {
                             c.untap();
                             stop();
                         }
-                    }//selectCard()
-                };//Input
+                    }// selectCard()
+                };// Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                 landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -233,7 +264,7 @@ public class PhaseUtil {
                 artList = artList.filter(CardListFilter.artifacts);
                 artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -253,19 +284,19 @@ public class PhaseUtil {
                         stop();
                     }
 
-                    public void selectCard(Card c, PlayerZone zone) {
-                        if (c.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                                && c.getController().isHuman() && canUntap(c)) {
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (c.isArtifact() && zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
+                                && canUntap(c)) {
                             c.untap();
                             stop();
                         }
-                    }//selectCard()
-                };//Input
+                    }// selectCard()
+                };// Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(CardListFilter.artifacts);
                 artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -279,7 +310,7 @@ public class PhaseUtil {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
                 creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -299,18 +330,18 @@ public class PhaseUtil {
                         stop();
                     }
 
-                    public void selectCard(Card c, PlayerZone zone) {
-                        if (c.isCreature() && zone.is(Constant.Zone.Battlefield)
-                                && c.getController().isHuman() && canUntap(c)) {
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
+                                && canUntap(c)) {
                             c.untap();
                             stop();
                         }
-                    }//selectCard()
-                };//Input
+                    }// selectCard()
+                };// Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                 creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
                     @Override
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return canUntap(c);
                     }
                 });
@@ -319,67 +350,81 @@ public class PhaseUtil {
                 }
             }
         }
-        
-        //Remove temporary keywords
+
+        // Remove temporary keywords
         list = player.getCardsIn(Zone.Battlefield);
         for (Card c : list) {
             c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
             c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
         }
-    }//end doUntap
-
+    }// end doUntap
 
     /**
-     * <p>canUntap.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * canUntap.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canUntap(Card c) {
+    public static boolean canUntap(final Card c) {
 
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
-                || c.hasKeyword("This card doesn't untap during your next untap step.")) return false;
+                || c.hasKeyword("This card doesn't untap during your next untap step.")) {
+            return false;
+        }
 
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
-                int KeywordPosition = ca.getKeywordPosition("Permanents don't untap during their controllers' untap steps");
+                int KeywordPosition = ca
+                        .getKeywordPosition("Permanents don't untap during their controllers' untap steps");
                 String parse = ca.getKeyword().get(KeywordPosition).toString();
-                String k[] = parse.split(":");
-                final String restrictions[] = k[1].split(",");
+                String[] k = parse.split(":");
+                final String[] restrictions = k[1].split(",");
                 final Card card = ca;
-                if (c.isValid(restrictions, card.getController(), card)) return false;
+                if (c.isValid(restrictions, card.getController(), card)) {
+                    return false;
+                }
             }
         } // end of Permanents don't untap during their controllers' untap steps
 
         return true;
     }
 
-
     /**
-     * <p>canOnlyUntapOneLand.</p>
-     *
+     * <p>
+     * canOnlyUntapOneLand.
+     * </p>
+     * 
      * @return a boolean.
      */
     private static boolean canOnlyUntapOneLand() {
-        //Winter Orb was given errata so it no longer matters if it's tapped or not
-        if (AllZoneUtil.getCardsIn(Zone.Battlefield, "Winter Orb").size() > 0)
+        // Winter Orb was given errata so it no longer matters if it's tapped or
+        // not
+        if (AllZoneUtil.getCardsIn(Zone.Battlefield, "Winter Orb").size() > 0) {
             return true;
+        }
 
-        if (AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield, "Mungha Wurm").size() > 0)
+        if (AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield, "Mungha Wurm").size() > 0) {
             return true;
+        }
 
         return false;
     }
 
     // ******* UPKEEP PHASE *****
     /**
-     * <p>handleUpkeep.</p>
+     * <p>
+     * handleUpkeep.
+     * </p>
      */
     public static void handleUpkeep() {
-    	Player turn = AllZone.getPhase().getPlayerTurn();
+        Player turn = AllZone.getPhase().getPlayerTurn();
         if (skipUpkeep()) {
-            // Slowtrips all say "on the next turn's upkeep" if there is no upkeep next turn, the trigger will never occur.
+            // Slowtrips all say "on the next turn's upkeep" if there is no
+            // upkeep next turn, the trigger will never occur.
             turn.clearSlowtripList();
             turn.getOpponent().clearSlowtripList();
             AllZone.getPhase().setNeedToNextPhase(true);
@@ -391,25 +436,31 @@ public class PhaseUtil {
     }
 
     /**
-     * <p>skipUpkeep.</p>
-     *
+     * <p>
+     * skipUpkeep.
+     * </p>
+     * 
      * @return a boolean.
      */
     public static boolean skipUpkeep() {
-        if (AllZoneUtil.isCardInPlay("Eon Hub"))
+        if (AllZoneUtil.isCardInPlay("Eon Hub")) {
             return true;
+        }
 
         Player turn = AllZone.getPhase().getPlayerTurn();
 
-        if (turn.getCardsIn(Zone.Hand).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn))
+        if (turn.getCardsIn(Zone.Hand).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn)) {
             return true;
+        }
 
         return false;
     }
 
     // ******* DRAW PHASE *****
     /**
-     * <p>handleDraw.</p>
+     * <p>
+     * handleDraw.
+     * </p>
      */
     public static void handleDraw() {
         Player playerTurn = AllZone.getPhase().getPlayerTurn();
@@ -423,12 +474,15 @@ public class PhaseUtil {
     }
 
     /**
-     * <p>skipDraw.</p>
-     *
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * skipDraw.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    private static boolean skipDraw(Player player) {
+    private static boolean skipDraw(final Player player) {
         // starting player skips his draw
         if (AllZone.getPhase().getTurn() == 1) {
             return true;
@@ -436,11 +490,13 @@ public class PhaseUtil {
 
         CardList list = player.getCardsIn(Zone.Battlefield);
 
-        if (list.containsName("Necropotence") || list.containsName("Yawgmoth's Bargain") || list.containsName("Recycle") ||
-                list.containsName("Dragon Appeasement") || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans") ||
-                list.containsName("Psychic Possession") || list.containsName("Solitary Confinement") ||
-                list.containsName("Symbiotic Deployment"))
+        if (list.containsName("Necropotence") || list.containsName("Yawgmoth's Bargain")
+                || list.containsName("Recycle") || list.containsName("Dragon Appeasement")
+                || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans")
+                || list.containsName("Psychic Possession") || list.containsName("Solitary Confinement")
+                || list.containsName("Symbiotic Deployment")) {
             return true;
+        }
 
         return false;
     }
@@ -448,7 +504,9 @@ public class PhaseUtil {
     // ********* Declare Attackers ***********
 
     /**
-     * <p>verifyCombat.</p>
+     * <p>
+     * verifyCombat.
+     * </p>
      */
     public static void verifyCombat() {
         AllZone.getCombat().verifyCreaturesInPlay();
@@ -456,7 +514,9 @@ public class PhaseUtil {
     }
 
     /**
-     * <p>handleDeclareAttackers.</p>
+     * <p>
+     * handleDeclareAttackers.
+     * </p>
      */
     public static void handleDeclareAttackers() {
         verifyCombat();
@@ -475,37 +535,44 @@ public class PhaseUtil {
     }
 
     /**
-     * <p>handleAttackingTriggers.</p>
+     * <p>
+     * handleAttackingTriggers.
+     * </p>
      */
     public static void handleAttackingTriggers() {
         CardList list = new CardList();
         list.addAll(AllZone.getCombat().getAttackers());
         AllZone.getStack().freezeStack();
         // Then run other Attacker bonuses
-        //check for exalted:
+        // check for exalted:
         if (list.size() == 1) {
             Player attackingPlayer = AllZone.getCombat().getAttackingPlayer();
 
             CardList exalted = attackingPlayer.getCardsIn(Zone.Battlefield);
             exalted = exalted.getKeyword("Exalted");
 
-            if (exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+            if (exalted.size() > 0)
+             {
+                CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
             // Make sure exalted effects get applied only once per combat
+            }
 
         }
-        
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+
+        HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
         runParams.put("AttackingPlayer", AllZone.getCombat().getAttackingPlayer());
         AllZone.getTriggerHandler().runTrigger("AttackersDeclared", runParams);
-        
+
         for (Card c : list)
             CombatUtil.checkDeclareAttackers(c);
         AllZone.getStack().unfreezeStack();
     }
 
     /**
-     * <p>handleDeclareBlockers.</p>
+     * <p>
+     * handleDeclareBlockers.
+     * </p>
      */
     public static void handleDeclareBlockers() {
         verifyCombat();
@@ -518,7 +585,7 @@ public class PhaseUtil {
         list.addAll(AllZone.getCombat().getAllBlockers());
 
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return !c.getCreatureBlockedThisCombat();
             }
         });
@@ -538,12 +605,14 @@ public class PhaseUtil {
         CombatUtil.showCombat();
     }
 
-
     // ***** Combat Utility **********
-    // TODO: the below functions should be removed and the code blocks that use them should instead use SA_Restriction
+    // TODO: the below functions should be removed and the code blocks that use
+    // them should instead use SA_Restriction
     /**
-     * <p>isBeforeAttackersAreDeclared.</p>
-     *
+     * <p>
+     * isBeforeAttackersAreDeclared.
+     * </p>
+     * 
      * @return a boolean.
      */
     public static boolean isBeforeAttackersAreDeclared() {

@@ -1,13 +1,13 @@
 package forge;
 
-
 import java.util.HashMap;
 import java.util.Iterator;
 
-
 /**
- * <p>SimpleCombat class.</p>
- *
+ * <p>
+ * SimpleCombat class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -16,15 +16,20 @@ class SimpleCombat {
     private CardList attackers = new CardList();
 
     /**
-     * <p>Constructor for SimpleCombat.</p>
+     * <p>
+     * Constructor for SimpleCombat.
+     * </p>
      */
     public SimpleCombat() {
     }
 
     /**
-     * <p>Constructor for SimpleCombat.</p>
-     *
-     * @param attackingCreatures a {@link forge.CardList} object.
+     * <p>
+     * Constructor for SimpleCombat.
+     * </p>
+     * 
+     * @param attackingCreatures
+     *            a {@link forge.CardList} object.
      */
     public SimpleCombat(final CardList attackingCreatures) {
         CardList a = attackingCreatures;
@@ -34,8 +39,10 @@ class SimpleCombat {
     }
 
     /**
-     * <p>Getter for the field <code>attackers</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>attackers</code>.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     public CardList getAttackers() {
@@ -43,9 +50,12 @@ class SimpleCombat {
     }
 
     /**
-     * <p>addAttacker.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * addAttacker.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
     public void addAttacker(final Card c) {
         attackers.add(c);
@@ -53,9 +63,12 @@ class SimpleCombat {
     }
 
     /**
-     * <p>getBlockers.</p>
-     *
-     * @param attacker a {@link forge.Card} object.
+     * <p>
+     * getBlockers.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
     public CardList getBlockers(final Card attacker) {
@@ -63,10 +76,14 @@ class SimpleCombat {
     }
 
     /**
-     * <p>addBlocker.</p>
-     *
-     * @param attacker a {@link forge.Card} object.
-     * @param blocker a {@link forge.Card} object.
+     * <p>
+     * addBlocker.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @param blocker
+     *            a {@link forge.Card} object.
      */
     public void addBlocker(final Card attacker, final Card blocker) {
         CardList list = map.get(attacker);
@@ -78,8 +95,10 @@ class SimpleCombat {
     }
 
     /**
-     * <p>getUnblockedAttackers.</p>
-     *
+     * <p>
+     * getUnblockedAttackers.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     public CardList getUnblockedAttackers() {
@@ -96,21 +115,23 @@ class SimpleCombat {
         return list;
     }
 
-    //creatures destroy each other in combat damage
+    // creatures destroy each other in combat damage
     /**
-     * <p>combatDamage.</p>
-     *
+     * <p>
+     * combatDamage.
+     * </p>
+     * 
      * @return an array of {@link forge.CardList} objects.
      */
     public CardList[] combatDamage() {
-        //aDestroy holds the number of creatures of A's that were destroyed
+        // aDestroy holds the number of creatures of A's that were destroyed
         CardList aDestroy = new CardList();
         CardList bDestroy = new CardList();
 
         CardList allAttackers = this.getAttackers();
         for (int i = 0; i < allAttackers.size(); i++) {
             Card attack = allAttackers.get(i);
-            //for now, CardList blockers should only hold 1 Card
+            // for now, CardList blockers should only hold 1 Card
             CardList blockers = map.get(attack);
             if (blockers.size() == 0) {
             } else {
@@ -127,9 +148,9 @@ class SimpleCombat {
                     bDestroy.add(block);
                 }
             }
-        } //while
-        return new CardList[]{aDestroy, bDestroy};
-    } //combatDamage()
+        } // while
+        return new CardList[] { aDestroy, bDestroy };
+    } // combatDamage()
 
     /** {@inheritDoc} */
     @Override
@@ -152,4 +173,4 @@ class SimpleCombat {
 
         return sb.toString();
     }
-} //end class SimpleCombat
+} // end class SimpleCombat

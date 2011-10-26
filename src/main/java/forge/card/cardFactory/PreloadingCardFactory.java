@@ -1,6 +1,5 @@
 package forge.card.cardFactory;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,36 +14,43 @@ import forge.item.CardDb;
 import forge.properties.ForgeProps;
 
 /**
- * <p>CardFactory class.</p>
- *
+ * <p>
+ * CardFactory class.
+ * </p>
+ * 
  * TODO The map field contains Card instances that have not gone through
- * getCard2, and thus lack abilities.  However, when a new
- * Card is requested via getCard, it is this map's values that serve as
- * the templates for the values it returns.  This class has another field,
- * allCards, which is another copy of the card database.  These cards have
- * abilities attached to them, and are owned by the human player by
- * default.  <b>It would be better memory-wise if we had only one or the
- * other.</b>  We may experiment in the future with using allCard-type
- * values for the map instead of the less complete ones that exist there
- * today.
- *
+ * getCard2, and thus lack abilities. However, when a new Card is requested via
+ * getCard, it is this map's values that serve as the templates for the values
+ * it returns. This class has another field, allCards, which is another copy of
+ * the card database. These cards have abilities attached to them, and are owned
+ * by the human player by default. <b>It would be better memory-wise if we had
+ * only one or the other.</b> We may experiment in the future with using
+ * allCard-type values for the map instead of the less complete ones that exist
+ * there today.
+ * 
  * @author Forge
  * @version $Id$
  */
 public class PreloadingCardFactory extends AbstractCardFactory {
     /**
-     * <p>Constructor for CardFactory.</p>
-     *
-     * @param filename a {@link java.lang.String} object.
+     * <p>
+     * Constructor for CardFactory.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
      */
     public PreloadingCardFactory(final String filename) {
         this(new File(filename));
     }
 
     /**
-     * <p>Constructor for CardFactory.</p>
-     *
-     * @param file a {@link java.io.File} object.
+     * <p>
+     * Constructor for CardFactory.
+     * </p>
+     * 
+     * @param file
+     *            a {@link java.io.File} object.
      */
     public PreloadingCardFactory(final File file) {
         super(file);
@@ -64,11 +70,13 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         }
     } // constructor
 
-
     /**
-     * <p>readCards.</p>
-     *
-     * @param file a {@link java.io.File} object.
+     * <p>
+     * readCards.
+     * </p>
+     * 
+     * @param file
+     *            a {@link java.io.File} object.
      */
     protected final void readCards(final File file) {
         getMap().clear();
@@ -82,4 +90,4 @@ public class PreloadingCardFactory extends AbstractCardFactory {
 
     } // readCard()
 
-} //end class PreloadingCardFactory
+} // end class PreloadingCardFactory

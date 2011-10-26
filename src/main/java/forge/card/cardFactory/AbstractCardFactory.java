@@ -1,6 +1,6 @@
 package forge.card.cardFactory;
 
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
 import javax.swing.JOptionPane;
 
+import net.slightlymagic.braids.util.ImmutableIterableFrom;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
@@ -27,10 +29,16 @@ import forge.FileUtil;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.CardCharacteristics;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
@@ -42,32 +50,29 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-import net.slightlymagic.braids.util.ImmutableIterableFrom;
-import java.io.File;
-
-
 /**
- * <p>AbstractCardFactory class.</p>
- *
+ * <p>
+ * AbstractCardFactory class.
+ * </p>
+ * 
  * TODO The map field contains Card instances that have not gone through
- * getCard2, and thus lack abilities.  However, when a new
- * Card is requested via getCard, it is this map's values that serve as
- * the templates for the values it returns.  This class has another field,
- * allCards, which is another copy of the card database.  These cards have
- * abilities attached to them, and are owned by the human player by
- * default.  <b>It would be better memory-wise if we had only one or the
- * other.</b>  We may experiment in the future with using allCard-type
- * values for the map instead of the less complete ones that exist there
- * today.
- *
+ * getCard2, and thus lack abilities. However, when a new Card is requested via
+ * getCard, it is this map's values that serve as the templates for the values
+ * it returns. This class has another field, allCards, which is another copy of
+ * the card database. These cards have abilities attached to them, and are owned
+ * by the human player by default. <b>It would be better memory-wise if we had
+ * only one or the other.</b> We may experiment in the future with using
+ * allCard-type values for the map instead of the less complete ones that exist
+ * there today.
+ * 
  * @author Forge
  * @version $Id$
  */
 public abstract class AbstractCardFactory implements NewConstants, CardFactoryInterface {
     /**
-     * This maps card name Strings to Card instances. The Card instances have
-     * no owner, and lack abilities.
-     *
+     * This maps card name Strings to Card instances. The Card instances have no
+     * owner, and lack abilities.
+     * 
      * To get a full-fledged card, see allCards field or the iterator method.
      */
     private Map<String, Card> map = new TreeMap<String, Card>();
@@ -76,18 +81,21 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
     private CardList allCards = new CardList();
 
     private Set<String> removedCardList;
-    private Card blankCard = new Card();                 //new code
+    private Card blankCard = new Card(); // new code
 
     private CardList copiedList = new CardList();
 
     /**
-     * <p>Constructor for CardFactory.</p>
-     *
-     * @param file a {@link java.io.File} object.
+     * <p>
+     * Constructor for CardFactory.
+     * </p>
+     * 
+     * @param file
+     *            a {@link java.io.File} object.
      */
     protected AbstractCardFactory(final File file) {
         SpellAbility spell = new SpellAbility(SpellAbility.Spell, blankCard) {
-            //neither computer nor human play can play this card
+            // neither computer nor human play can play this card
             @Override
             public boolean canPlay() {
                 return false;
@@ -101,40 +109,37 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         spell.setManaCost("1");
         blankCard.setName("Removed Card");
 
-        //owner and controller will be wrong sometimes
-        //but I don't think it will matter
-        //theoretically blankCard will go to the wrong graveyard
+        // owner and controller will be wrong sometimes
+        // but I don't think it will matter
+        // theoretically blankCard will go to the wrong graveyard
         blankCard.setOwner(AllZone.getHumanPlayer());
 
         removedCardList = new TreeSet<String>(FileUtil.readFile(ForgeProps.getFile(REMOVED)));
 
     } // constructor
 
-
     /**
      * Getter for allCards.
-     *
+     * 
      * @return allCards
      */
     protected final CardList getAllCards() {
         return allCards;
     } // getAllCards()
 
-
     /**
      * Getter for map.
-     *
+     * 
      * @return map
      */
     protected final Map<String, Card> getMap() {
         return map;
     }
 
-
     /**
      * Iterate over all full-fledged cards in the database; these cards are
      * owned by the human player by default.
-     *
+     * 
      * @return an Iterator that does NOT support the remove method
      */
     @Override
@@ -142,13 +147,12 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         return new ImmutableIterableFrom<Card>(allCards);
     }
 
-
     /**
      * Typical size method.
-     *
+     * 
      * @return an estimate of the number of items encountered by this object's
-     * iterator
-     *
+     *         iterator
+     * 
      * @see #iterator
      */
     @Override
@@ -156,11 +160,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         return allCards.size();
     }
 
-
     /**
-     * <p>copyCard.</p>
-     *
-     * @param in a {@link forge.Card} object.
+     * <p>
+     * copyCard.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
     @Override
@@ -169,26 +175,26 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         out.setUniqueNumber(in.getUniqueNumber());
 
         CardFactoryUtil.copyCharacteristics(in, out);
-        if(in.hasAlternateState()) {
+        if (in.hasAlternateState()) {
             in.changeState();
             out.changeState();
             CardFactoryUtil.copyCharacteristics(in, out);
             in.changeState();
             out.changeState();
         }
-        
+
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
         out.setEquippedBy(in.getEquippedBy());
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
-        for(Object o:in.getRemembered()) {
+        for (Object o : in.getRemembered()) {
             out.addRemembered(o);
         }
-        
+
         out.clearTriggersNew();
-        for(Trigger trigger : in.getTriggers()) {
+        for (Trigger trigger : in.getTriggers()) {
             out.moveTrigger(trigger);
         }
         return out;
@@ -196,9 +202,12 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
     }
 
     /**
-     * <p>copyCardintoNew.</p>
-     *
-     * @param in a {@link forge.Card} object.
+     * <p>
+     * copyCardintoNew.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
     @Override
@@ -217,17 +226,22 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
     }
 
     /**
-     * <p>copySpellontoStack.</p>
-     *
-     * @param source a {@link forge.Card} object.
-     * @param original a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param bCopyDetails a boolean.
+     * <p>
+     * copySpellontoStack.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param original
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param bCopyDetails
+     *            a boolean.
      */
     @Override
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
-            final boolean bCopyDetails)
-    {
+            final boolean bCopyDetails) {
         if (sa.getPayCosts() == null) {
             copySpellontoStack(source, source, bCopyDetails);
             return;
@@ -258,13 +272,17 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         }
     }
 
-
     /**
-     * <p>copySpellontoStack.</p>
-     *
-     * @param source a {@link forge.Card} object.
-     * @param original a {@link forge.Card} object.
-     * @param bCopyDetails a boolean.
+     * <p>
+     * copySpellontoStack.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param original
+     *            a {@link forge.Card} object.
+     * @param bCopyDetails
+     *            a boolean.
      */
     @Override
     public final void copySpellontoStack(final Card source, final Card original, final boolean bCopyDetails) {
@@ -334,9 +352,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         }
 
         if (sa.getTargetPlayer() != null) {
-            if (sa.getTargetPlayer().isHuman()
-                    || (sa.getTargetPlayer().isComputer()))
-            {
+            if (sa.getTargetPlayer().isHuman() || (sa.getTargetPlayer().isComputer())) {
                 copySA.setTargetPlayer(sa.getTargetPlayer());
             }
         }
@@ -348,18 +364,17 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         }
     }
 
-
     /**
-     * <p>getCard.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     *
-     * @param owner a {@link forge.Player} object.
-     *
+     * <p>
+     * getCard.
+     * </p>
+     * 
+     * @param cardName
+     *            a {@link java.lang.String} object.
+     * @param owner
+     *            a {@link forge.Player} object.
      * @return a {@link forge.Card} instance, owned by owner; or the special
-     * blankCard
-     *
-     * @throws RuntimeException if cardName isn't in the Card map
+     *         blankCard
      */
     @Override
     public final Card getCard(final String cardName, final Player owner) {
@@ -372,16 +387,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
     /**
      * Fetch a random combination of cards without any duplicates.
-     *
+     * 
      * This algorithm is reasonably fast if numCards is small. If it is larger
      * than, say, size()/10, it starts to get noticeably slow.
-     *
+     * 
      * @param numCards
      *            the number of cards to return
-     *
      * @return a list of fleshed-out card instances
-     *
-     * @throws IllegalArgumentException if numCards >= size()/4
      */
     @Override
     public final CardList getRandomCombinationWithoutRepetition(final int numCards) {
@@ -390,8 +402,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         if (numCards >= size()) {
             throw new IllegalArgumentException("numCards (" + numCards
                     + ") is larger than the size of the card database.");
-        }
-        else if (numCards >= size() / 4) {
+        } else if (numCards >= size() / 4) {
             throw new IllegalArgumentException("numCards (" + numCards
                     + ") is too large for this algorithm; it will take too long to complete.");
         }
@@ -400,7 +411,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             intSelections.add((int) (Math.random() * size()));
         }
 
-
         CardList result = new CardList(numCards);
         for (Integer index : intSelections) {
             result.add(allCards.get(index));
@@ -408,15 +418,21 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         return result;
     }
-    
-    protected void addAbilityFactoryAbilities(Card card) {
-      //**************************************************
+
+    /**
+     * Adds the ability factory abilities.
+     * 
+     * @param card
+     *            the card
+     */
+    protected final void addAbilityFactoryAbilities(final Card card) {
+        // **************************************************
         // AbilityFactory cards
         ArrayList<String> ia = card.getIntrinsicAbilities();
         if (ia.size() > 0) {
             for (int i = 0; i < ia.size(); i++) {
                 AbilityFactory af = new AbilityFactory();
-                //System.out.println(cardName);
+                // System.out.println(cardName);
                 SpellAbility sa = af.getAbility(ia.get(i), card);
 
                 card.addSpellAbility(sa);
@@ -426,7 +442,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     SpellAbility bbSA = sa.copy();
                     String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
                     if (bbSA.getPayCosts() != null) {
-                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false)); // create new abCost
+                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false)); // create
+                                                                                                  // new
+                                                                                                  // abCost
                     }
                     StringBuilder sb = new StringBuilder();
                     sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
@@ -442,15 +460,18 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
     }
 
     /**
-     * <p>getCard2.</p>
-     *
-     * @param cardName a {@link java.lang.String} object.
-     * @param owner a {@link forge.Player} object.
+     * <p>
+     * getCard2.
+     * </p>
+     * 
+     * @param cardName
+     *            a {@link java.lang.String} object.
+     * @param owner
+     *            a {@link forge.Player} object.
      * @return a {@link forge.Card} object.
-     * @throws RuntimeException if cardName isn't in the Card map
      */
     protected Card getCard2(final String cardName, final Player owner) {
-        //o should be Card object
+        // o should be Card object
         Object o = map.get(cardName);
         if (o == null) {
             throw new RuntimeException("CardFactory : getCard() invalid card name - " + cardName);
@@ -458,12 +479,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         final Card card = CardFactoryUtil.copyStats(o);
         card.setOwner(owner);
-        if(!card.isCardColorsOverridden()) {
+        if (!card.isCardColorsOverridden()) {
             card.addColor(card.getManaCost());
         }
-        //may have to change the spell
+        // may have to change the spell
 
-        //this is so permanents like creatures and artifacts have a "default" spell
+        // this is so permanents like creatures and artifacts have a "default"
+        // spell
         if (card.isPermanent() && !card.isLand() && !card.isAura()) {
             card.addSpellAbility(new Spell_Permanent(card));
         }
@@ -471,18 +493,16 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         CardFactoryUtil.parseKeywords(card, cardName);
 
         addAbilityFactoryAbilities(card);
-        
-        
 
-        //register static abilities
+        // register static abilities
         ArrayList<String> stAbs = card.getStaticAbilityStrings();
         if (stAbs.size() > 0) {
             for (int i = 0; i < stAbs.size(); i++) {
                 card.addStaticAbility(stAbs.get(i));
             }
         }
-        
-        if(card.hasAlternateState()) {
+
+        if (card.hasAlternateState()) {
             card.changeState();
             addAbilityFactoryAbilities(card);
             stAbs = card.getStaticAbilityStrings();
@@ -494,9 +514,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             card.changeState();
         }
 
-
-        //******************************************************************
-        //************** Link to different CardFactories *******************
+        // ******************************************************************
+        // ************** Link to different CardFactories *******************
         Card card2 = null;
         if (card.isCreature()) {
             card2 = CardFactory_Creatures.getCard(card, cardName, this);
@@ -526,17 +545,17 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             };
 
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(spell);
         }
-        //*************** END ************ END *************************
+        // *************** END ************ END *************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Sarpadian Empires, Vol. VII")) {
 
-            final String[] choices = {"Citizen", "Camarid", "Thrull", "Goblin", "Saproling"};
+            final String[] choices = { "Citizen", "Camarid", "Thrull", "Goblin", "Saproling" };
 
             final Player player = card.getController();
 
@@ -582,7 +601,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     final String t = type;
                     final String in = imageName;
                     final String col = color;
-                    //card.setChosenType(input[0]);
+                    // card.setChosenType(input[0]);
 
                     Cost a1Cost = new Cost("3 T", cardName, true);
                     final Ability_Activated a1 = new Ability_Activated(card, a1Cost, null) {
@@ -591,8 +610,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                         @Override
                         public void resolve() {
-                            CardFactoryUtil.makeToken(t, in, card.getController(), col, new String[]{"Creature", t}, 1,
-                                    1, new String[]{""});
+                            CardFactoryUtil.makeToken(t, in, card.getController(), col, new String[] { "Creature", t },
+                                    1, 1, new String[] { "" });
                         }
 
                     };
@@ -603,7 +622,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                     card.addSpellAbility(a1);
                 }
-            }; //ability
+            }; // ability
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 7202704600935499188L;
 
@@ -617,13 +636,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             card.setText("As Sarpadian Empires, Vol. VII enters the battlefield, "
                     + "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n"
                     + "3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.\r\n"
-                    + card.getText()); // In the slight chance that there may be a need to add a note to this card.
+                    + card.getText()); // In the slight chance that there may be
+                                       // a need to add a note to this card.
             card.addComesIntoPlayCommand(intoPlay);
 
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Night Soil")) {
             final SpellAbility nightSoil = new Ability(card, "1") {
                 @Override
@@ -709,10 +728,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Aluren")) {
             final Ability ability1 = new Ability(card, "0") {
                 @Override
@@ -726,9 +744,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     CardList creatures = new CardList();
 
                     for (int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i).isCreature()
-                                && CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3)
-                        {
+                        if (hand.get(i).isCreature() && CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3) {
                             creatures.add(hand.get(i));
                         }
                     }
@@ -737,14 +753,11 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         return;
                     }
 
-
-                    Object o = GuiUtils.getChoiceOptional("Select target creature to play",
-                            creatures.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Select target creature to play", creatures.toArray());
                     if (o != null) {
                         Card c = (Card) o;
                         AllZone.getStack().add(c.getSpellPermanent());
                     }
-
 
                 }
 
@@ -757,19 +770,17 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 @Override
                 public boolean canPlay() {
                     return (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield));
-                } //canPlay()
-            }; //SpellAbility ability1
-
+                } // canPlay()
+            }; // SpellAbility ability1
 
             ability1.setDescription("Any player may play creature cards with converted mana cost 3 or less without "
                     + "paying their mana cost any time he or she could play an instant.");
             ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
             ability1.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability1);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Volrath's Dungeon")) {
 
             Cost dungeonCost = new Cost("Discard<1/Card>", cardName, true);
@@ -805,12 +816,11 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                 @Override
                 public boolean canPlayAI() {
-                    return !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty() && 
-                           !AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty() && super.canPlay();
+                    return !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty()
+                            && !AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty() && super.canPlay();
                 }
 
-            }; //SpellAbility dungeon
-
+            }; // SpellAbility dungeon
 
             Cost bailCost = new Cost("PayLife<5>", cardName, true);
             final SpellAbility bail = new Ability_Activated(card, bailCost, null) {
@@ -832,7 +842,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                             && super.canPlay() && !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty();
                 }
 
-            }; //SpellAbility pay bail
+            }; // SpellAbility pay bail
 
             dungeon.setDescription("Discard a card: "
                     + "Target player puts a card from his or her hand on top of his or her library. "
@@ -848,10 +858,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             card.addSpellAbility(dungeon);
             card.addSpellAbility(bail);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Mox Diamond")) {
             final Input discard = new Input() {
                 private static final long serialVersionUID = -1319202902385425204L;
@@ -872,7 +881,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         stop();
                     }
                 }
-            }; //Input
+            }; // Input
 
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -891,9 +900,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                             }
                         });
                         AllZone.getComputerPlayer().discard(list.get(0), this);
-                    } //else
-                } //resolve()
-            }; //SpellAbility
+                    } // else
+                } // resolve()
+            }; // SpellAbility
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -7679939432259603542L;
 
@@ -906,8 +915,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -1818766848857998431L;
 
-                //could never get the AI to work correctly
-                //it always played the same card 2 or 3 times
+                // could never get the AI to work correctly
+                // it always played the same card 2 or 3 times
                 @Override
                 public boolean canPlayAI() {
                     return false;
@@ -923,18 +932,18 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         }
                     });
                     return list.size() != 0 && super.canPlay();
-                } //canPlay()
+                } // canPlay()
             };
             card.addComesIntoPlayCommand(intoPlay);
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(spell);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Standstill")) {
 
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
 
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -945,15 +954,16 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     CardList compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
                     CardList humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
 
-                    //only play standstill if comp controls more creatures than human
-                    //this needs some additional rules, maybe add all power + toughness and compare
+                    // only play standstill if comp controls more creatures than
+                    // human
+                    // this needs some additional rules, maybe add all power +
+                    // toughness and compare
                     return (compCreats.size() > humCreats.size());
                 }
             });
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Goblin Charbelcher")) {
             Cost abCost = new Cost("3 T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtCP")) {
@@ -986,13 +996,12 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                                 damage *= 2;
                             }
                         }
-                    } //while
+                    } // while
                     GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 
                     if (getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard()))
-                        {
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(damage, card);
                         }
                     } else {
@@ -1010,18 +1019,19 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Lodestone Bauble")) {
-            /* 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
+            /*
+             * 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
              * land cards from a player's graveyard on top of his or her library
-             * in any order. That player draws a card at the beginning of the next
-             * turn's upkeep.
+             * in any order. That player draws a card at the beginning of the
+             * next turn's upkeep.
              */
 
             Cost abCost = new Cost("1 T Sac<1/CARDNAME>", cardName, true);
-            Target target = new Target(card, "Select target player", new String[]{"Player"});
+            Target target = new Target(card, "Select target player", new String[] { "Player" });
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -6711849408085138636L;
 
@@ -1033,20 +1043,21 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 @Override
                 public void chooseTargetAI() {
                     setTargetPlayer(AllZone.getComputerPlayer());
-                } //chooseTargetAI()
+                } // chooseTargetAI()
 
                 @Override
                 public void resolve() {
-                    final int limit = 4;   //at most, this can target 4 cards
+                    final int limit = 4; // at most, this can target 4 cards
                     final Player player = getTargetPlayer();
 
                     CardList lands = player.getCardsIn(Zone.Graveyard);
                     lands = lands.filter(CardListFilter.basicLands);
                     if (card.getController().isHuman()) {
-                        //now, select up to four lands
+                        // now, select up to four lands
                         int end = -1;
                         end = Math.min(lands.size(), limit);
-                        //TODO - maybe pop a message box here that no basic lands found (if necessary)
+                        // TODO - maybe pop a message box here that no basic
+                        // lands found (if necessary)
                         for (int i = 1; i <= end; i++) {
                             String title = "Put on top of library: ";
                             if (i == 2) {
@@ -1063,11 +1074,12 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                                 break;
                             }
                             Card c1 = (Card) o;
-                            lands.remove(c1); //remove from the display list
+                            lands.remove(c1); // remove from the display list
                             AllZone.getGameAction().moveToLibrary(c1, i - 1);
                         }
-                    } else { //Computer
-                        //based on current AI, computer should always target himself.
+                    } else { // Computer
+                        // based on current AI, computer should always target
+                        // himself.
                         CardList list = getComputerLands();
                         int max = list.size();
                         if (max > limit) {
@@ -1086,16 +1098,16 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
                     return list.getType("Basic");
                 }
-            }; //ability
+            }; // ability
 
-            ability.setDescription(abCost + "Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.");
+            ability.setDescription(abCost
+                    + "Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.");
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Grindstone")) {
-            Target target = new Target(card, "Select target player", new String[]{"Player"});
+            Target target = new Target(card, "Select target player", new String[] { "Player" });
             Cost abCost = new Cost("3 T", cardName, true);
             Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -6281219446216L;
@@ -1103,7 +1115,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 @Override
                 public boolean canPlayAI() {
                     CardList libList = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-                    //CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
+                    // CardList list =
+                    // AllZoneUtil.getCardsInPlay("Painter's Servant");
                     return libList.size() > 0; // && list.size() > 0;
                 }
 
@@ -1138,12 +1151,12 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ab1.setDescription(abCost + "Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.");
+            ab1.setDescription(abCost
+                    + "Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.");
             card.addSpellAbility(ab1);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Everflowing Chalice")) {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 4245563898487609274L;
@@ -1154,12 +1167,11 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Barl's Cage")) {
-            final String[] tgts = {"Creature"};
+            final String[] tgts = { "Creature" };
             Target target = new Target(card, "Select target creature.", tgts, "1", "1");
 
             final Cost cost = new Cost("3", card.getName(), true);
@@ -1176,9 +1188,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         setTargetCard(c);
                         return true;
                     }
-                } //canPlayAI()
+                } // canPlayAI()
 
-                //may return null
+                // may return null
                 public Card getCreature() {
                     CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     tappedCreatures = tappedCreatures.filter(CardListFilter.tapped);
@@ -1193,19 +1205,16 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 @Override
                 public void resolve() {
                     Card target = getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(target)
-                            && CardFactoryUtil.canTarget(card, target))
-                    {
+                    if (AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
                         target.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-                    } //is card in play?
-                } //resolve()
-            }; //SpellAbility
+                    } // is card in play?
+                } // resolve()
+            }; // SpellAbility
 
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Pithing Needle")) {
             final SpellAbility ability = new Ability_Static(card, "0") {
                 @Override
@@ -1213,21 +1222,25 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     String cardName = "";
                     if (card.getController().isHuman()) {
                         List<String> cards = new ArrayList<String>();
-                        for (CardPrinted c : CardDb.instance().getAllUniqueCards()) { cards.add(c.getName()); }
+                        for (CardPrinted c : CardDb.instance().getAllUniqueCards()) {
+                            cards.add(c.getName());
+                        }
                         Collections.sort(cards);
 
                         // use standard forge's list selection dialog
-                        ListChooser<String> c = new ListChooser<String>("Name a card to disable activation of its non-mana abilities", 1, 1, cards);
+                        ListChooser<String> c = new ListChooser<String>(
+                                "Name a card to disable activation of its non-mana abilities", 1, 1, cards);
                         c.show();
-                        // still missing a listener to display the card preview in the right
+                        // still missing a listener to display the card preview
+                        // in the right
                         cardName = c.getSelectedValue();
                     } else {
-                        //AI CODE WILL EVENTUALLY GO HERE!
+                        // AI CODE WILL EVENTUALLY GO HERE!
                     }
                     card.setSVar("PithingTarget", cardName);
                     card.setChosenType(cardName);
                 }
-            }; //ability
+            }; // ability
             ability.setStackDescription("As Pithing Needle enters the battlefield, name a card.");
             Command intoPlay = new Command() {
 
@@ -1250,10 +1263,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             card.addComesIntoPlayCommand(intoPlay);
             card.addLeavesPlayCommand(leavesPlay);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Processor")) {
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5634360316643996274L;
@@ -1268,11 +1280,10 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         for (int j = 0; j <= num; j++) {
                             choices[j] = "" + j;
                         }
-                        String answer = (String) (GuiUtils.getChoiceOptional(
-                                "Life to pay:", choices));
+                        String answer = (String) (GuiUtils.getChoiceOptional("Life to pay:", choices));
                         lifeToPay = Integer.parseInt(answer);
                     } else {
-                        //not implemented for Compy
+                        // not implemented for Compy
                     }
 
                     if (player.payLife(lifeToPay, card)) {
@@ -1282,10 +1293,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
             Cost abCost = new Cost("1 T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
@@ -1293,7 +1303,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                 @Override
                 public void resolve() {
-                    //not implemented for compy
+                    // not implemented for compy
                     if (card.getController().isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {
                             private static final long serialVersionUID = -2305549394512889450L;
@@ -1301,7 +1311,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(card.getName() + " - Exile cards from hand.  Currently, " + exiled.size() + " selected.  (Press OK when done.)");
+                                AllZone.getDisplay().showMessage(
+                                        card.getName() + " - Exile cards from hand.  Currently, " + exiled.size()
+                                                + " selected.  (Press OK when done.)");
                                 ButtonUtil.enableOnlyOK();
                             }
 
@@ -1312,40 +1324,42 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(Constant.Zone.Hand, AllZone.getHumanPlayer())
-                                        && !exiled.contains(c))
-                                {
+                                if (zone.is(Constant.Zone.Hand, AllZone.getHumanPlayer()) && !exiled.contains(c)) {
                                     exiled.add(c);
                                     showMessage();
                                 }
                             }
 
                             public void done() {
-                                //exile those cards
+                                // exile those cards
                                 for (Card c : exiled) {
                                     AllZone.getGameAction().exile(c);
                                 }
 
-                                        //Put that many cards from the top of your library into your hand.
-                                        //Ruling: This is not a draw...
-                                        PlayerZone lib = AllZone.getHumanPlayer().getZone(Constant.Zone.Library);
-                                        int numCards = 0;
-                                        while (lib.size() > 0 && numCards < exiled.size()) {
-                                            AllZone.getGameAction().moveToHand(lib.get(0));
-                                            numCards++;
-                                        }
+                                // Put that many cards from the top of your
+                                // library into your hand.
+                                // Ruling: This is not a draw...
+                                PlayerZone lib = AllZone.getHumanPlayer().getZone(Constant.Zone.Library);
+                                int numCards = 0;
+                                while (lib.size() > 0 && numCards < exiled.size()) {
+                                    AllZone.getGameAction().moveToHand(lib.get(0));
+                                    numCards++;
+                                }
 
-                                        AllZone.getDisplay().showMessage(card.getName() + " - Returning cards to top of library.");
+                                AllZone.getDisplay().showMessage(
+                                        card.getName() + " - Returning cards to top of library.");
 
-                                        //Then look at the exiled cards and put them on top of your library in any order.
-                                        while (exiled.size() > 0) {
-                                            Object o = GuiUtils.getChoice("Put a card on top of your library.", exiled.toArray());
-                                            Card c1 = (Card) o;
-                                            AllZone.getGameAction().moveToLibrary(c1);
-                                            exiled.remove(c1);
-                                        }
+                                // Then look at the exiled cards and put them on
+                                // top of your library in any order.
+                                while (exiled.size() > 0) {
+                                    Object o = GuiUtils.getChoice("Put a card on top of your library.",
+                                            exiled.toArray());
+                                    Card c1 = (Card) o;
+                                    AllZone.getGameAction().moveToLibrary(c1);
+                                    exiled.remove(c1);
+                                }
 
-                                        stop();
+                                stop();
                             }
                         });
                     }
@@ -1355,18 +1369,19 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 public boolean canPlayAI() {
                     return false;
                 }
-            }; //ability
-            ability.setDescription(abCost + "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.");
+            }; // ability
+            ability.setDescription(abCost
+                    + "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.");
             ability.setStackDescription(cardName + " - exile any number of cards from your hand.");
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Cursed Scroll")) {
             /*
-             * 3, Tap: Name a card.  Reveal a card at random from your hand.  If it's the named card,
-             * Cursed Scroll deals 2 damage to target creature or player.
+             * 3, Tap: Name a card. Reveal a card at random from your hand. If
+             * it's the named card, Cursed Scroll deals 2 damage to target
+             * creature or player.
              */
             Cost abCost = new Cost("3 T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtCP")) {
@@ -1377,7 +1392,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     Player player = card.getController();
                     String input = "";
                     if (player.isHuman()) {
-                        input = JOptionPane.showInputDialog(null, "Name a card.", card.getName(), JOptionPane.QUESTION_MESSAGE);
+                        input = JOptionPane.showInputDialog(null, "Name a card.", card.getName(),
+                                JOptionPane.QUESTION_MESSAGE);
                     } else {
                         CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                         if (!hand.isEmpty()) {
@@ -1386,12 +1402,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         }
                     }
 
-                    //reveal a card at random, and damage if it matches
+                    // reveal a card at random, and damage if it matches
                     CardList hand = card.getController().getCardsIn(Zone.Hand);
                     if (!hand.isEmpty()) {
                         hand.shuffle();
                         Card c = hand.get(0);
-                        JOptionPane.showMessageDialog(null, "Revealed card:\n" + c.getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Revealed card:\n" + c.getName(), card.getName(),
+                                JOptionPane.PLAIN_MESSAGE);
                         if (input.equals(c.getName())) {
                             if (null != getTargetCard()) {
                                 getTargetCard().addDamage(2, card);
@@ -1400,7 +1417,8 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                             }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "No cards to reveal.  Damage fail.", card.getName(), JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No cards to reveal.  Damage fail.", card.getName(),
+                                JOptionPane.PLAIN_MESSAGE);
                     }
                 }
 
@@ -1414,20 +1432,21 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             sbStack.append(card).append(" - Name a card.");
             ability.setStackDescription(sbStack.toString());
 
-            ability.setDescription(abCost + "Name a card.  Reveal a card at random from your hand.  If it's the named card, CARDNAME deals 2 damage to target creature or player.");
+            ability.setDescription(abCost
+                    + "Name a card.  Reveal a card at random from your hand.  If it's the named card, CARDNAME deals 2 damage to target creature or player.");
 
             ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Temporal Aperture")) {
             /*
              * 5, Tap: Shuffle your library, then reveal the top card. Until end
              * of turn, for as long as that card remains on top of your library,
-             * play with the top card of your library revealed and you may play that
-             * card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+             * play with the top card of your library revealed and you may play
+             * that card without paying its mana cost. (If it has X in its mana
+             * cost, X is 0.)
              */
             final Card[] topCard = new Card[1];
 
@@ -1448,13 +1467,15 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                             if (player.canPlayLand()) {
                                 player.playLand(freeCard);
                             } else {
-                                JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "",
+                                        JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
                             AllZone.getGameAction().playCardNoCost(freeCard);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error in " + cardName + ".  freeCard is null", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error in " + cardName + ".  freeCard is null", "",
+                                JOptionPane.INFORMATION_MESSAGE);
                     }
 
                 }
@@ -1477,12 +1498,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     PlayerZone lib = card.getController().getZone(Constant.Zone.Library);
                     if (lib.size() > 0) {
 
-                        //shuffle your library
+                        // shuffle your library
                         card.getController().shuffle();
 
-                        //reveal the top card
+                        // reveal the top card
                         topCard[0] = lib.get(0);
-                        JOptionPane.showMessageDialog(null, "Revealed card:\n" + topCard[0].getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Revealed card:\n" + topCard[0].getName(), card.getName(),
+                                JOptionPane.PLAIN_MESSAGE);
 
                         card.addSpellAbility(freeCast);
                         card.addExtrinsicKeyword("Play with the top card of your library revealed.");
@@ -1495,7 +1517,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                             }
                         });
                     }
-                } //resolve
+                } // resolve
 
                 @Override
                 public boolean canPlayAI() {
@@ -1515,10 +1537,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             ability.setDescription(abCost + sbDesc.toString());
 
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Lich")) {
             final SpellAbility loseAllLife = new Ability(card, "0") {
                 @Override
@@ -1567,10 +1588,9 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             card.addComesIntoPlayCommand(intoPlay);
             card.addDestroyCommand(toGrave);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Triangle of War")) {
 
             Target t2 = new Target(card, "Select target creature an opponent controls",
@@ -1619,13 +1639,13 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 }
             };
             ability.setSubAbility(sub);
-            ability.setDescription(abCost + "Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its power to the other.");
+            ability.setDescription(abCost
+                    + "Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its power to the other.");
             ability.setStackDescription(card + " - Each creature deals damage equal to its power to the other.");
             card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Copy Artifact") || cardName.equals("Sculpting Steel")) {
             final CardFactoryInterface cfact = this;
             final Card[] copyTarget = new Card[1];
@@ -1682,7 +1702,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                         card.setCurrentlyCloningCard(cloned[0]);
                     }
                 }
-            }; //SpellAbility
+            }; // SpellAbility
 
             Input runtime = new Input() {
                 private static final long serialVersionUID = 8117808324791871452L;
@@ -1706,16 +1726,20 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     }
                 }
             };
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(copy);
             copy.setStackDescription(cardName + " - enters the battlefield as a copy of selected card.");
             copy.setBeforePayMana(runtime);
-        } //*************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sylvan Library")) {
-            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.", card, true);
+        // *************** START *********** START **************************
+        else if (cardName.equals("Sylvan Library")) {
+            final Trigger drawStepTrigger = forge.card.trigger.TriggerHandler
+                    .parseTrigger(
+                            "Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.",
+                            card, true);
             final Ability ability = new Ability(card, "") {
                 @Override
                 public void resolve() {
@@ -1740,35 +1764,33 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                                 @Override
                                 public void selectCard(final Card card, final PlayerZone zone) {
                                     if (zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
-                                        if (player.canPayLife(4)
-                                                && GameActionUtil.showYesNoDialog(card, cardQuestion))
-                                        {
+                                        if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(card, cardQuestion)) {
                                             player.payLife(4, card);
-                                            //card stays in hand
+                                            // card stays in hand
                                         } else {
                                             AllZone.getGameAction().moveToLibrary(card);
                                         }
                                         stop();
                                     }
                                 }
-                            }); //end Input
+                            }); // end Input
                         }
                     } else {
-                        //Computer, but he's too stupid to play this
+                        // Computer, but he's too stupid to play this
                     }
-                } //resolve
+                } // resolve
             }; // Ability
 
             StringBuilder sb = new StringBuilder();
             sb.append("At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.");
             ability.setStackDescription(sb.toString());
-            
-            drawStepTrigger.setOverridingAbility(ability);
-            
-            card.addTrigger(drawStepTrigger);
-        } //*************** END ************ END **************************
-      
-        return CardFactoryUtil.postFactoryKeywords(card);
-    } //getCard2
 
-} //end class AbstractCardFactory
+            drawStepTrigger.setOverridingAbility(ability);
+
+            card.addTrigger(drawStepTrigger);
+        } // *************** END ************ END **************************
+
+        return CardFactoryUtil.postFactoryKeywords(card);
+    } // getCard2
+
+} // end class AbstractCardFactory

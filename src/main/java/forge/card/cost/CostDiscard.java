@@ -14,61 +14,91 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 
+/**
+ * The Class CostDiscard.
+ */
 public class CostDiscard extends CostPartWithList {
-	// Discard<Num/Type{/TypeDescription}>
+    // Discard<Num/Type{/TypeDescription}>
 
-    public CostDiscard(String amount, String type, String description){
+    /**
+     * Instantiates a new cost discard.
+     * 
+     * @param amount
+     *            the amount
+     * @param type
+     *            the type
+     * @param description
+     *            the description
+     */
+    public CostDiscard(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
 
-	@Override
-	public String toString() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
+    @Override
+    public final String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Discard ");
-        
-        Integer i = convertAmount();
-        
-        if (getThis()) {
-        	sb.append(type);
-        } 
-        else if (type.equals("Hand")) {
-        	sb.append("your hand");
-        } 
-        else if (type.equals("LastDrawn")) {
-        	sb.append("last drawn card");
-        } 
-        else {
-        	StringBuilder desc = new StringBuilder();
-        	
-        	if (type.equals("Card") || type.equals("Random"))
-        		desc.append("Card");
-        	else
-        		desc.append(typeDescription == null ? type : typeDescription).append(" card");
-        	
-        	sb.append(Cost.convertAmountTypeToWords(i, amount, desc.toString()));
 
-            if (type.equals("Random"))
-            	sb.append(" at random");
+        Integer i = convertAmount();
+
+        if (getThis()) {
+            sb.append(type);
+        } else if (type.equals("Hand")) {
+            sb.append("your hand");
+        } else if (type.equals("LastDrawn")) {
+            sb.append("last drawn card");
+        } else {
+            StringBuilder desc = new StringBuilder();
+
+            if (type.equals("Card") || type.equals("Random")) {
+                desc.append("Card");
+            } else {
+                desc.append(typeDescription == null ? type : typeDescription).append(" card");
+            }
+
+            sb.append(Cost.convertAmountTypeToWords(i, amount, desc.toString()));
+
+            if (type.equals("Random")) {
+                sb.append(" at random");
+            }
         }
         return sb.toString();
 
-	}
+    }
 
-	@Override
-	public void refund(Card source) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
+    public void refund(final Card source) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList handList = activator.getCardsIn(Zone.Hand);
         String type = getType();
         Integer amount = convertAmount();
 
         if (getThis()) {
-            if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand))
+            if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand)) {
                 return false;
+            }
         } else if (type.equals("Hand")) {
             // this will always work
         } else if (type.equals("LastDrawn")) {
@@ -83,19 +113,32 @@ public class CostDiscard extends CostPartWithList {
                 return false;
             }
         }
-        
+
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Player activator = ability.getActivatingPlayer();
         for (Card c : list)
             activator.discard(c, ability);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Player activator = ability.getActivatingPlayer();
         CardList handList = activator.getCardsIn(Zone.Hand);
         String discType = getType();
@@ -103,7 +146,7 @@ public class CostDiscard extends CostPartWithList {
         resetList();
 
         if (getThis()) {
-            if (!handList.contains(source)){
+            if (!handList.contains(source)) {
                 return false;
             }
             activator.discard(source, ability);
@@ -125,34 +168,32 @@ public class CostDiscard extends CostPartWithList {
             Integer c = convertAmount();
 
             if (discType.equals("Random")) {
-                if (c == null){
+                if (c == null) {
                     String sVar = source.getSVar(amount);
                     // Generalize this
-                    if (sVar.equals("XChoice")){
+                    if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, handList.size());
-                    }
-                    else{
+                    } else {
                         c = AbilityFactory.calculateAmount(source, amount, ability);
                     }
                 }
-                
+
                 list = activator.discardRandom(c, ability);
                 payment.setPaidManaPart(this, true);
             } else {
-                String validType[] = discType.split(";");
+                String[] validType = discType.split(";");
                 handList = handList.getValidCards(validType, activator, ability.getSourceCard());
-                
-                if (c == null){
+
+                if (c == null) {
                     String sVar = source.getSVar(amount);
                     // Generalize this
-                    if (sVar.equals("XChoice")){
+                    if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, handList.size());
-                    }
-                    else{
+                    } else {
                         c = AbilityFactory.calculateAmount(source, amount, ability);
                     }
                 }
-                
+
                 CostUtil.setInput(CostDiscard.input_discardCost(discType, handList, ability, payment, this, c));
                 return false;
             }
@@ -161,43 +202,51 @@ public class CostDiscard extends CostPartWithList {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         String type = getType();
         Player activator = ability.getActivatingPlayer();
         CardList hand = activator.getCardsIn(Zone.Hand);
         resetList();
-        if (type.equals("LastDrawn")){
-            if (!hand.contains(activator.getLastDrawnCard()))
+        if (type.equals("LastDrawn")) {
+            if (!hand.contains(activator.getLastDrawnCard())) {
                 return false;
+            }
             addToList(activator.getLastDrawnCard());
         }
 
-        else if (getThis()){
-            if (!hand.contains(source))
+        else if (getThis()) {
+            if (!hand.contains(source)) {
                 return false;
-            
+            }
+
             addToList(source);
         }
-        
-        else if (type.equals("Hand")){
+
+        else if (type.equals("Hand")) {
             list.addAll(hand);
         }
-        
-        else{
+
+        else {
             Integer c = convertAmount();
-            if (c == null){
+            if (c == null) {
                 String sVar = source.getSVar(amount);
-                if (sVar.equals("XChoice")){
+                if (sVar.equals("XChoice")) {
                     return false;
                 }
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
 
-            if (type.equals("Random")){
+            if (type.equals("Random")) {
                 list = CardListUtil.getRandomSubList(hand, c);
-            }
-            else{
+            } else {
                 list = ComputerUtil.AI_discardNumType(c, type.split(";"), ability);
             }
         }
@@ -205,32 +254,44 @@ public class CostDiscard extends CostPartWithList {
     }
 
     // Inputs
-    
+
     /**
-     * <p>input_discardCost.</p>
-     * @param discType a {@link java.lang.String} object.
-     * @param handList a {@link forge.CardList} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment a {@link forge.card.cost.Cost_Payment} object.
-     * @param part TODO
-     * @param nNeeded a int.
-     *
+     * <p>
+     * input_discardCost.
+     * </p>
+     * 
+     * @param discType
+     *            a {@link java.lang.String} object.
+     * @param handList
+     *            a {@link forge.CardList} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.Cost_Payment} object.
+     * @param part
+     *            TODO
+     * @param nNeeded
+     *            a int.
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_discardCost(final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment, final CostDiscard part, final int nNeeded) {
+    public static Input input_discardCost(final String discType, final CardList handList, final SpellAbility sa,
+            final Cost_Payment payment, final CostDiscard part, final int nNeeded) {
         final SpellAbility sp = sa;
         Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
-    
+
             int nDiscard = 0;
-    
+
             @Override
             public void showMessage() {
-                if (nNeeded == 0){
+                if (nNeeded == 0) {
                     done();
                 }
-                
-                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) stop();
+
+                if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                    stop();
+                }
                 StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
@@ -247,43 +308,47 @@ public class CostDiscard extends CostPartWithList {
                 AllZone.getDisplay().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
-    
+
             @Override
             public void selectButtonCancel() {
                 cancel();
             }
-    
+
             @Override
-            public void selectCard(Card card, PlayerZone zone) {
+            public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(Constant.Zone.Hand) && handList.contains(card)) {
                     // send in CardList for Typing
                     card.getController().discard(card, sp);
                     part.addToList(card);
                     handList.remove(card);
                     nDiscard++;
-    
-                    //in case no more cards in hand
-                    if (nDiscard == nNeeded)
+
+                    // in case no more cards in hand
+                    if (nDiscard == nNeeded) {
                         done();
-                    else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)    // this really shouldn't happen
+                    } else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
+                        // really
+                                                                                      // shouldn't
+                                                                                      // happen
                         cancel();
-                    else
+                    } else {
                         showMessage();
+                    }
                 }
             }
-    
+
             public void cancel() {
                 stop();
                 payment.cancelCost();
             }
-    
+
             public void done() {
                 stop();
                 part.addListToHash(sp, "Discarded");
                 payment.paidCost(part);
             }
         };
-    
+
         return target;
-    }//input_discard() 
+    }// input_discard()
 }

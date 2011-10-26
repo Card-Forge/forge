@@ -4,10 +4,11 @@ import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 
-
 /**
- * <p>PlayerUtil class.</p>
- *
+ * <p>
+ * PlayerUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -18,9 +19,12 @@ public final class PlayerUtil {
     }
 
     /**
-     * <p>worshipFlag.</p>
-     *
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * worshipFlag.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
     public static boolean worshipFlag(final Player player) {
@@ -37,11 +41,16 @@ public final class PlayerUtil {
     }
 
     /**
-     * <p>input_discardNumUnless.</p>
-     *
-     * @param nCards a int.
-     * @param uType a {@link java.lang.String} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * input_discardNumUnless.
+     * </p>
+     * 
+     * @param nCards
+     *            a int.
+     * @param uType
+     *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
@@ -57,8 +66,8 @@ public final class PlayerUtil {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
                 }
-                AllZone.getDisplay().showMessage("Select " + (nCards - n) + " cards to discard, unless you discard a "
-                        + uType + ".");
+                AllZone.getDisplay().showMessage(
+                        "Select " + (nCards - n) + " cards to discard, unless you discard a " + uType + ".");
                 ButtonUtil.disableAll();
             }
 
@@ -87,13 +96,17 @@ public final class PlayerUtil {
         };
 
         return target;
-    } //input_discardNumUnless
+    } // input_discardNumUnless
 
     /**
-     * <p>input_discard.</p>
-     *
-     * @param nCards a int.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * input_discard.
+     * </p>
+     * 
+     * @param nCards
+     *            a int.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
@@ -123,7 +136,7 @@ public final class PlayerUtil {
                     card.getController().discard(card, sp);
                     n++;
 
-                    //in case no more cards in hand
+                    // in case no more cards in hand
                     if (n == nCards || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                         stop();
                     } else {
@@ -133,18 +146,20 @@ public final class PlayerUtil {
             }
         };
         return target;
-    } //input_discard()
+    } // input_discard()
 
     /**
-     * <p>input_chainsDiscard.</p>
-     *
+     * <p>
+     * input_chainsDiscard.
+     * </p>
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input input_chainsDiscard() {
         Input target = new Input() {
             private static final long serialVersionUID = 2856894846224546303L;
 
-			@Override
+            @Override
             public void showMessage() {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     stop();
@@ -163,61 +178,77 @@ public final class PlayerUtil {
             }
 
             private void done() {
-            	stop();
-            	//hack to not trigger Chains of Mephistopheles recursively
-            	AllZone.getHumanPlayer().drawCards(1, true);
+                stop();
+                // hack to not trigger Chains of Mephistopheles recursively
+                AllZone.getHumanPlayer().drawCards(1, true);
             }
         };
         return target;
-    } //input_chainsDiscard()
+    } // input_chainsDiscard()
 
     /**
-     * <p>input_sacrificePermanent.</p>
-     *
-     * @param choices a {@link forge.CardList} object.
-     * @param message a {@link java.lang.String} object.
+     * <p>
+     * input_sacrificePermanent.
+     * </p>
+     * 
+     * @param choices
+     *            a {@link forge.CardList} object.
+     * @param message
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
     public static Input input_sacrificePermanent(final CardList choices, final String message) {
         return input_sacrificePermanentsFromList(1, choices, message);
-    } //input_sacrifice()
+    } // input_sacrifice()
 
     /**
-     * <p>input_sacrificePermanents.</p>
-     *
-     * @param nCards a int.
+     * <p>
+     * input_sacrificePermanents.
+     * </p>
+     * 
+     * @param nCards
+     *            a int.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
     public static Input input_sacrificePermanents(final int nCards) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list.remove("Mana Pool");            // is this needed?
+        list.remove("Mana Pool"); // is this needed?
         return input_sacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
-    } //input_sacrificePermanents()
+    } // input_sacrificePermanents()
 
     /**
-     * <p>input_sacrificePermanents.</p>
-     *
-     * @param nCards a int.
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * input_sacrificePermanents.
+     * </p>
+     * 
+     * @param nCards
+     *            a int.
+     * @param type
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
     public static Input input_sacrificePermanents(final int nCards, final String type) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list.remove("Mana Pool");            // is this needed?
+        list.remove("Mana Pool"); // is this needed?
 
         list = list.getType(type);
         return input_sacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
-    } //input_sacrificePermanents()
+    } // input_sacrificePermanents()
 
     /**
-     * <p>input_sacrificePermanentsFromList.</p>
-     *
-     * @param nCards a int.
-     * @param list a {@link forge.CardList} object.
-     * @param message a {@link java.lang.String} object.
+     * <p>
+     * input_sacrificePermanentsFromList.
+     * </p>
+     * 
+     * @param nCards
+     *            a int.
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param message
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
@@ -228,7 +259,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                //in case no more {type}s in play
+                // in case no more {type}s in play
                 if (n == nCards || list.size() == 0) {
                     stop();
                     return;
@@ -245,7 +276,7 @@ public final class PlayerUtil {
                     n++;
                     list.remove(card);
 
-                    //in case no more {type}s in play
+                    // in case no more {type}s in play
                     if (n == nCards || list.size() == 0) {
                         stop();
                         return;
@@ -256,13 +287,17 @@ public final class PlayerUtil {
             }
         };
         return target;
-    } //input_sacrificePermanents()
+    } // input_sacrificePermanents()
 
     /**
-     * <p>input_putFromHandToLibrary.</p>
-     *
-     * @param TopOrBottom a {@link java.lang.String} object.
-     * @param num a int.
+     * <p>
+     * input_putFromHandToLibrary.
+     * </p>
+     * 
+     * @param TopOrBottom
+     *            a {@link java.lang.String} object.
+     * @param num
+     *            a int.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
@@ -308,4 +343,4 @@ public final class PlayerUtil {
         return target;
     }
 
-} //end class PlayerUtil
+} // end class PlayerUtil

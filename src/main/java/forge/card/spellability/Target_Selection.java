@@ -1,18 +1,27 @@
 package forge.card.spellability;
 
-import forge.*;
-import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.Constant;
+import forge.Constant.Zone;
+import forge.Player;
+import forge.PlayerZone;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.gui.GuiUtils;
+import forge.gui.input.Input;
+
 /**
- * <p>Target_Selection class.</p>
- *
+ * <p>
+ * Target_Selection class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -23,65 +32,82 @@ public class Target_Selection {
     private Target_Selection subSelection = null;
 
     /**
-     * <p>getTgt.</p>
-     *
+     * <p>
+     * getTgt.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.Target} object.
      */
-    public Target getTgt() {
+    public final Target getTgt() {
         return target;
     }
 
     /**
-     * <p>Getter for the field <code>ability</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>ability</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getAbility() {
+    public final SpellAbility getAbility() {
         return ability;
     }
 
     /**
-     * <p>Getter for the field <code>card</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>card</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getCard() {
+    public final Card getCard() {
         return card;
     }
 
     private SpellAbility_Requirements req = null;
 
     /**
-     * <p>setRequirements.</p>
-     *
-     * @param reqs a {@link forge.card.spellability.SpellAbility_Requirements} object.
+     * <p>
+     * setRequirements.
+     * </p>
+     * 
+     * @param reqs
+     *            a {@link forge.card.spellability.SpellAbility_Requirements}
+     *            object.
      */
-    public void setRequirements(SpellAbility_Requirements reqs) {
+    public final void setRequirements(final SpellAbility_Requirements reqs) {
         req = reqs;
     }
 
     private boolean bCancel = false;
 
     /**
-     * <p>setCancel.</p>
-     *
-     * @param done a boolean.
+     * <p>
+     * setCancel.
+     * </p>
+     * 
+     * @param done
+     *            a boolean.
      */
-    public void setCancel(boolean done) {
+    public final void setCancel(final boolean done) {
         bCancel = done;
     }
 
     /**
-     * <p>isCanceled.</p>
-     *
+     * <p>
+     * isCanceled.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isCanceled() {
-    	if (bCancel)
-    		return bCancel;
-    	
-    	if (subSelection == null)
-    		return false;
+    public final boolean isCanceled() {
+        if (bCancel) {
+            return bCancel;
+        }
+
+        if (subSelection == null) {
+            return false;
+        }
 
         return subSelection.isCanceled();
     }
@@ -89,57 +115,73 @@ public class Target_Selection {
     private boolean bDoneTarget = false;
 
     /**
-     * <p>setDoneTarget.</p>
-     *
-     * @param done a boolean.
+     * <p>
+     * setDoneTarget.
+     * </p>
+     * 
+     * @param done
+     *            a boolean.
      */
-    public void setDoneTarget(boolean done) {
+    public final void setDoneTarget(final boolean done) {
         bDoneTarget = done;
     }
 
     /**
-     * <p>Constructor for Target_Selection.</p>
-     *
-     * @param tgt a {@link forge.card.spellability.Target} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Constructor for Target_Selection.
+     * </p>
+     * 
+     * @param tgt
+     *            a {@link forge.card.spellability.Target} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public Target_Selection(Target tgt, SpellAbility sa) {
+    public Target_Selection(final Target tgt, final SpellAbility sa) {
         target = tgt;
         ability = sa;
         card = sa.getSourceCard();
     }
 
     /**
-     * <p>doesTarget.</p>
-     *
+     * <p>
+     * doesTarget.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean doesTarget() {
-        if (target == null)
+    public final boolean doesTarget() {
+        if (target == null) {
             return false;
+        }
         return target.doesTarget();
     }
 
     /**
-     * <p>resetTargets.</p>
+     * <p>
+     * resetTargets.
+     * </p>
      */
-    public void resetTargets() {
-        if (target != null)
+    public final void resetTargets() {
+        if (target != null) {
             target.resetTargets();
+        }
     }
 
     /**
-     * <p>chooseTargets.</p>
-     *
+     * <p>
+     * chooseTargets.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean chooseTargets() {
+    public final boolean chooseTargets() {
         // if not enough targets chosen, reset and cancel Ability
         if (bCancel || (bDoneTarget && !target.isMinTargetsChosen(card, ability))) {
             bCancel = true;
             req.finishedTargeting();
             return false;
-        } else if (!doesTarget() || bDoneTarget && target.isMinTargetsChosen(card, ability) || target.isMaxTargetsChosen(card, ability)) {
+        } else if (!doesTarget() || bDoneTarget && target.isMinTargetsChosen(card, ability)
+                || target.isMaxTargetsChosen(card, ability)) {
             Ability_Sub abSub = ability.getSubAbility();
 
             if (abSub == null) {
@@ -148,9 +190,9 @@ public class Target_Selection {
                 return true;
             } else {
                 // Has Sub Ability
-            	subSelection = new Target_Selection(abSub.getTarget(), abSub);
-            	subSelection.setRequirements(req);
-            	subSelection.resetTargets();
+                subSelection = new Target_Selection(abSub.getTarget(), abSub);
+                subSelection.setRequirements(req);
+                subSelection.resetTargets();
                 return subSelection.chooseTargets();
             }
         }
@@ -160,24 +202,35 @@ public class Target_Selection {
         return false;
     }
 
-    public ArrayList<Object> getUniqueTargets(SpellAbility ability){
+    /**
+     * Gets the unique targets.
+     * 
+     * @param ability
+     *            the ability
+     * @return the unique targets
+     */
+    public final ArrayList<Object> getUniqueTargets(final SpellAbility ability) {
         ArrayList<Object> targets = new ArrayList<Object>();
         SpellAbility child = ability;
-        while(child instanceof Ability_Sub){
-            child = ((Ability_Sub)child).getParent();
+        while (child instanceof Ability_Sub) {
+            child = ((Ability_Sub) child).getParent();
             targets.addAll(child.getTarget().getTargets());
         }
-        
+
         return targets;
     }
-    
-    // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
-    // however, due to the changes necessary for SA_Requirements this is much different than the original
+
+    // these have been copied over from CardFactoryUtil as they need two extra
+    // parameters for target selection.
+    // however, due to the changes necessary for SA_Requirements this is much
+    // different than the original
 
     /**
-     * <p>chooseValidInput.</p>
+     * <p>
+     * chooseValidInput.
+     * </p>
      */
-    public void chooseValidInput() {
+    public final void chooseValidInput() {
         Target tgt = this.getTgt();
         List<Zone> zone = tgt.getZone();
         final boolean mandatory = target.getMandatory() ? target.hasCandidates(true) : false;
@@ -188,44 +241,53 @@ public class Target_Selection {
             return;
         }
 
-        CardList choices = AllZoneUtil.getCardsIn(zone).getValidCards(target.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard());
+        CardList choices = AllZoneUtil.getCardsIn(zone).getValidCards(target.getValidTgts(),
+                ability.getActivatingPlayer(), ability.getSourceCard());
 
         ArrayList<Object> objects = new ArrayList<Object>();
-        if (tgt.isUniqueTargets()){
+        if (tgt.isUniqueTargets()) {
             objects = getUniqueTargets(ability);
             for (Object o : objects) {
-                if (o instanceof Card && objects.contains(o)){
-                    choices.remove((Card)o);
+                if (o instanceof Card && objects.contains(o)) {
+                    choices.remove((Card) o);
                 }
             }
         }
-        
+
         // Remove cards already targeted
         ArrayList<Card> targeted = tgt.getTargetCards();
         for (Card c : targeted) {
-            if (choices.contains(c)){
+            if (choices.contains(c)) {
                 choices.remove(c);
             }
         }
-        
+
         if (zone.contains(Constant.Zone.Battlefield)) {
             AllZone.getInputControl().setInput(input_targetSpecific(choices, true, mandatory, objects));
-        } else{
+        } else {
             chooseCardFromList(choices, true, mandatory);
         }
-    }//input_targetValid
+    }// input_targetValid
 
-    //CardList choices are the only cards the user can successful select
+    // CardList choices are the only cards the user can successful select
     /**
-     * <p>input_targetSpecific.</p>
-     *
-     * @param choices a {@link forge.CardList} object.
-     * @param targeted a boolean.
-     * @param mandatory a boolean.
-     * @param objects TODO
+     * <p>
+     * input_targetSpecific.
+     * </p>
+     * 
+     * @param choices
+     *            a {@link forge.CardList} object.
+     * @param targeted
+     *            a boolean.
+     * @param mandatory
+     *            a boolean.
+     * @param alreadyTargeted
+     *            the already targeted
      * @return a {@link forge.gui.input.Input} object.
      */
-    public Input input_targetSpecific(final CardList choices, final boolean targeted, final boolean mandatory, final ArrayList<Object> alreadyTargeted) {
+    public final Input input_targetSpecific(final CardList choices,
+            final boolean targeted, final boolean mandatory,
+            final ArrayList<Object> alreadyTargeted) {
         final SpellAbility sa = this.ability;
         final Target_Selection select = this;
         final Target tgt = this.target;
@@ -238,7 +300,7 @@ public class Target_Selection {
             public void showMessage() {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Targeted: ");
-                for(Object o : alreadyTargeted){
+                for (Object o : alreadyTargeted) {
                     sb.append(o).append(" ");
                 }
                 sb.append(tgt.getTargetedString());
@@ -248,13 +310,15 @@ public class Target_Selection {
                 AllZone.getDisplay().showMessage(sb.toString());
 
                 // If reached Minimum targets, enable OK button
-                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa))
+                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
                     ButtonUtil.enableOnlyCancel();
-                else
+                } else {
                     ButtonUtil.enableAll();
+                }
 
-                if (mandatory)
+                if (mandatory) {
                     ButtonUtil.disableCancel();
+                }
             }
 
             @Override
@@ -271,24 +335,25 @@ public class Target_Selection {
             }
 
             @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                // leave this in temporarily, there some seriously wrong things going on here
+            public void selectCard(final Card card, final PlayerZone zone) {
+                // leave this in temporarily, there some seriously wrong things
+                // going on here
                 if (targeted && !CardFactoryUtil.canTarget(sa, card)) {
                     AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
                     tgt.addTarget(card);
                     done();
                 }
-            }//selectCard()
+            } // selectCard()
 
             @Override
-            public void selectPlayer(Player player) {
-                if (alreadyTargeted.contains(player)){
+            public void selectPlayer(final Player player) {
+                if (alreadyTargeted.contains(player)) {
                     return;
                 }
-                
-                if ((tgt.canTgtPlayer() || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer().getOpponent()))) &&
-                        player.canTarget(sa)) {
+
+                if ((tgt.canTgtPlayer() || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer()
+                        .getOpponent()))) && player.canTarget(sa)) {
                     tgt.addTarget(player);
                     done();
                 }
@@ -302,17 +367,21 @@ public class Target_Selection {
         };
 
         return target;
-    }//input_targetSpecific()
-
+    } // input_targetSpecific()
 
     /**
-     * <p>chooseCardFromList.</p>
-     *
-     * @param choices a {@link forge.CardList} object.
-     * @param targeted a boolean.
-     * @param mandatory a boolean.
+     * <p>
+     * chooseCardFromList.
+     * </p>
+     * 
+     * @param choices
+     *            a {@link forge.CardList} object.
+     * @param targeted
+     *            a boolean.
+     * @param mandatory
+     *            a boolean.
      */
-    public void chooseCardFromList(final CardList choices, boolean targeted, final boolean mandatory) {
+    public final void chooseCardFromList(final CardList choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Card dummy = new Card();
         dummy.setName("[FINISH TARGETING]");
@@ -329,22 +398,27 @@ public class Target_Selection {
         Object check = GuiUtils.getChoiceOptional(message, choicesWithDone.toArray());
         if (check != null) {
             Card c = (Card) check;
-            if (c.equals(dummy))
+            if (c.equals(dummy)) {
                 this.setDoneTarget(true);
-            else
+            } else {
                 tgt.addTarget(c);
-        } else
+            }
+        } else {
             this.setCancel(true);
+        }
 
         this.chooseTargets();
     }
 
     /**
-     * <p>chooseCardFromStack.</p>
-     *
-     * @param mandatory a boolean.
+     * <p>
+     * chooseCardFromStack.
+     * </p>
+     * 
+     * @param mandatory
+     *            a boolean.
      */
-    public void chooseCardFromStack(final boolean mandatory) {
+    public final void chooseCardFromStack(final boolean mandatory) {
         Target tgt = this.target;
         String message = tgt.getVTSelection();
         Target_Selection select = this;
@@ -368,23 +442,29 @@ public class Target_Selection {
 
             if (madeChoice != null) {
                 tgt.addTarget(map.get(madeChoice));
-            } else
+            } else {
                 select.setCancel(true);
+            }
         }
 
         select.chooseTargets();
     }
 
-    // TODO: The following three functions are Utility functions for TargetOnStack, probably should be moved
+    // TODO The following three functions are Utility functions for
+    // TargetOnStack, probably should be moved
     // The following should be select.getTargetableOnStack()
     /**
-     * <p>getTargetableOnStack.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param tgt a {@link forge.card.spellability.Target} object.
+     * <p>
+     * getTargetableOnStack.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param tgt
+     *            a {@link forge.card.spellability.Target} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<SpellAbility> getTargetableOnStack(SpellAbility sa, Target tgt) {
+    public static ArrayList<SpellAbility> getTargetableOnStack(final SpellAbility sa, final Target tgt) {
         ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
 
         for (int i = 0; i < AllZone.getStack().size(); i++) {
@@ -400,37 +480,46 @@ public class Target_Selection {
     }
 
     /**
-     * <p>matchSpellAbility.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param topSA a {@link forge.card.spellability.SpellAbility} object.
-     * @param tgt a {@link forge.card.spellability.Target} object.
+     * <p>
+     * matchSpellAbility.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param topSA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param tgt
+     *            a {@link forge.card.spellability.Target} object.
      * @return a boolean.
      */
-    public static boolean matchSpellAbility(SpellAbility sa, SpellAbility topSA, Target tgt) {
+    public static boolean matchSpellAbility(final SpellAbility sa, final SpellAbility topSA, final Target tgt) {
         String saType = tgt.getTargetSpellAbilityType();
 
         if (null == saType) {
-            //just take this to mean no restrictions - carry on.
+            // just take this to mean no restrictions - carry on.
         } else if (topSA.isSpell()) {
-            if (!saType.contains("Spell"))
+            if (!saType.contains("Spell")) {
                 return false;
+            }
         } else if (topSA.isTrigger()) {
-            if (!saType.contains("Triggered"))
+            if (!saType.contains("Triggered")) {
                 return false;
+            }
         } else if (topSA.isAbility()) {
-            if (!saType.contains("Activated"))
+            if (!saType.contains("Activated")) {
                 return false;
+            }
         }
 
         String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
-            // TODO: What about spells with SubAbilities with Targets?
+            // TODO What about spells with SubAbilities with Targets?
 
             Target matchTgt = topSA.getTarget();
 
-            if (matchTgt == null)
+            if (matchTgt == null) {
                 return false;
+            }
 
             boolean result = false;
 
@@ -441,8 +530,9 @@ public class Target_Selection {
                 }
             }
 
-            if (!result)
+            if (!result) {
                 return false;
+            }
         }
 
         if (!matchesValid(topSA, tgt.getValidTgts(), sa)) {
@@ -453,14 +543,19 @@ public class Target_Selection {
     }
 
     /**
-     * <p>matchesValid.</p>
-     *
-     * @param o a {@link java.lang.Object} object.
-     * @param valids an array of {@link java.lang.String} objects.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * matchesValid.
+     * </p>
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
+     * @param valids
+     *            an array of {@link java.lang.String} objects.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean matchesValid(Object o, String[] valids, SpellAbility sa) {
+    private static boolean matchesValid(final Object o, final String[] valids, final SpellAbility sa) {
         Card srcCard = sa.getSourceCard();
         Player activatingPlayer = sa.getActivatingPlayer();
         if (o instanceof Card) {
@@ -470,16 +565,18 @@ public class Target_Selection {
 
         if (o instanceof Player) {
             for (String v : valids) {
-                if (v.equalsIgnoreCase("Player"))
+                if (v.equalsIgnoreCase("Player")) {
                     return true;
+                }
 
                 if (v.equalsIgnoreCase("Opponent")) {
                     if (o.equals(activatingPlayer.getOpponent())) {
                         return true;
                     }
                 }
-                if (v.equalsIgnoreCase("You"))
+                if (v.equalsIgnoreCase("You")) {
                     return o.equals(activatingPlayer);
+                }
             }
         }
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import forge.card.spellability.SpellAbility;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * Abstract Player class.
@@ -16,7 +15,7 @@ import forge.card.spellability.SpellAbility;
 public abstract class GameEntity extends MyObservable {
     private String name = "";
     private int preventNextDamage = 0;
-    
+
     /** The enchanted by. */
     protected ArrayList<Card> enchantedBy = new ArrayList<Card>();
 
@@ -266,8 +265,9 @@ public abstract class GameEntity extends MyObservable {
 
     /**
      * Checks for keyword.
-     *
-     * @param keyword the keyword
+     * 
+     * @param keyword
+     *            the keyword
      * @return true, if successful
      */
     public boolean hasKeyword(String keyword) {
@@ -276,8 +276,9 @@ public abstract class GameEntity extends MyObservable {
 
     /**
      * Can target.
-     *
-     * @param sa the sa
+     * 
+     * @param sa
+     *            the sa
      * @return a boolean
      */
     public boolean canTarget(SpellAbility sa) {
@@ -286,10 +287,13 @@ public abstract class GameEntity extends MyObservable {
 
     /**
      * Checks if is valid.
-     *
-     * @param Restrictions the restrictions
-     * @param sourceController the source controller
-     * @param source the source
+     * 
+     * @param Restrictions
+     *            the restrictions
+     * @param sourceController
+     *            the source controller
+     * @param source
+     *            the source
      * @return true, if is valid
      */
     public boolean isValid(final String Restrictions[], final Player sourceController, final Card source) {
@@ -304,10 +308,13 @@ public abstract class GameEntity extends MyObservable {
 
     /**
      * Checks if is valid.
-     *
-     * @param Restriction the restriction
-     * @param sourceController the source controller
-     * @param source the source
+     * 
+     * @param Restriction
+     *            the restriction
+     * @param sourceController
+     *            the source controller
+     * @param source
+     *            the source
      * @return true, if is valid
      */
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
@@ -316,10 +323,13 @@ public abstract class GameEntity extends MyObservable {
 
     /**
      * Checks for property.
-     *
-     * @param Property the property
-     * @param sourceController the source controller
-     * @param source the source
+     * 
+     * @param Property
+     *            the property
+     * @param sourceController
+     *            the source controller
+     * @param source
+     *            the source
      * @return true, if successful
      */
     public boolean hasProperty(String Property, final Player sourceController, final Card source) {

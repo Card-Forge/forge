@@ -12,7 +12,6 @@ public final class Singletons {
 
     private static FView view = null;
 
-
     /**
      * Do not instantiate.
      */
@@ -20,8 +19,9 @@ public final class Singletons {
         // This line intentionally left blank.
     }
 
-
     /**
+     * Gets the model.
+     * 
      * @return the model
      */
     public static FModel getModel() {
@@ -29,13 +29,18 @@ public final class Singletons {
     }
 
     /**
-     * @param theModel the model to set
+     * Sets the model.
+     * 
+     * @param theModel
+     *            the model to set
      */
     public static void setModel(final FModel theModel) {
         Singletons.model = theModel;
     }
 
     /**
+     * Gets the view.
+     * 
      * @return the view
      */
     public static FView getView() {
@@ -43,7 +48,10 @@ public final class Singletons {
     }
 
     /**
-     * @param theView the view to set
+     * Sets the view.
+     * 
+     * @param theView
+     *            the view to set
      */
     public static void setView(final FView theView) {
         Singletons.view = theView;

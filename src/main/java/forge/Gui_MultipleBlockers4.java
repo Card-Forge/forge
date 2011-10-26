@@ -1,12 +1,19 @@
 package forge;
 
-import forge.error.ErrorViewer;
-import forge.gui.game.CardPanel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+
+import forge.error.ErrorViewer;
+import forge.gui.game.CardPanel;
 
 /**
  * <p>Constructor for Gui_MultipleBlockers4.</p>
@@ -15,9 +22,9 @@ import java.awt.event.MouseEvent;
  * @version $Id$
  */
 
-
-/** very hacky
- *
+/**
+ * very hacky
+ * 
  */
 class Gui_MultipleBlockers4 extends JFrame {
     /** Constant <code>serialVersionUID=7622818310877381045L</code> */
@@ -37,23 +44,30 @@ class Gui_MultipleBlockers4 extends JFrame {
     private JPanel creaturePanel = new JPanel();
 
     /**
-     * <p>Constructor for Gui_MultipleBlockers4.</p>
-     *
-     * @param attacker a {@link forge.Card} object.
-     * @param creatureList a {@link forge.CardList} object.
-     * @param damage a int.
-     * @param display a {@link forge.CardContainer} object.
+     * <p>
+     * Constructor for Gui_MultipleBlockers4.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @param creatureList
+     *            a {@link forge.CardList} object.
+     * @param damage
+     *            a int.
+     * @param display
+     *            a {@link forge.CardContainer} object.
      */
-    Gui_MultipleBlockers4(Card attacker, CardList creatureList, int damage, CardContainer display) {
+    Gui_MultipleBlockers4(final Card attacker, final CardList creatureList, final int damage, final CardContainer display) {
         this();
         assignDamage = damage;
-        updateDamageLabel();//update user message about assigning damage
+        updateDamageLabel();// update user message about assigning damage
         guiDisplay = display;
         att = attacker;
         blockers = creatureList;
 
-        for (int i = 0; i < creatureList.size(); i++)
+        for (int i = 0; i < creatureList.size(); i++) {
             creaturePanel.add(new CardPanel(creatureList.get(i)));
+        }
 
         if (att.hasKeyword("Trample")) {
             Card player = new Card();
@@ -71,7 +85,9 @@ class Gui_MultipleBlockers4 extends JFrame {
     }
 
     /**
-     * <p>Constructor for Gui_MultipleBlockers4.</p>
+     * <p>
+     * Constructor for Gui_MultipleBlockers4.
+     * </p>
      */
     public Gui_MultipleBlockers4() {
         try {
@@ -79,14 +95,17 @@ class Gui_MultipleBlockers4 extends JFrame {
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
         }
-        //    setSize(470, 280);
-        //    show();
+        // setSize(470, 280);
+        // show();
     }
 
     /**
-     * <p>jbInit.</p>
-     *
-     * @throws java.lang.Exception if any.
+     * <p>
+     * jbInit.
+     * </p>
+     * 
+     * @throws java.lang.Exception
+     *             if any.
      */
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(borderLayout1);
@@ -100,13 +119,13 @@ class Gui_MultipleBlockers4 extends JFrame {
         jPanel3.setBounds(new Rectangle(15, 40, 430, 235));
         creaturePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 creaturePanel_mousePressed(e);
             }
         });
         creaturePanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(final MouseEvent e) {
                 creaturePanel_mouseMoved(e);
             }
         });
@@ -118,20 +137,26 @@ class Gui_MultipleBlockers4 extends JFrame {
     }
 
     /**
-     * <p>okButton_actionPerformed.</p>
-     *
-     * @param e a {@link java.awt.event.ActionEvent} object.
+     * <p>
+     * okButton_actionPerformed.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.ActionEvent} object.
      */
-    void okButton_actionPerformed(ActionEvent e) {
+    void okButton_actionPerformed(final ActionEvent e) {
         dispose();
     }
 
     /**
-     * <p>creaturePanel_mousePressed.</p>
-     *
-     * @param e a {@link java.awt.event.MouseEvent} object.
+     * <p>
+     * creaturePanel_mousePressed.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.MouseEvent} object.
      */
-    void creaturePanel_mousePressed(MouseEvent e) {
+    void creaturePanel_mousePressed(final MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if (o instanceof CardPanel) {
 
@@ -139,55 +164,60 @@ class Gui_MultipleBlockers4 extends JFrame {
 
             CardContainer cardPanel = (CardContainer) o;
             Card c = cardPanel.getCard();
-            //c.setAssignedDamage(c.getAssignedDamage() + 1);
+            // c.setAssignedDamage(c.getAssignedDamage() + 1);
             CardList cl = new CardList();
             cl.add(att);
 
             boolean assignedLethalDamageToAllBlockers = true;
             for (Card crd : blockers) {
-                if (crd.getLethalDamage() > 0
-                        && (!att.hasKeyword("Deathtouch") || crd.getTotalAssignedDamage() < 1))
+                if (crd.getLethalDamage() > 0 && (!att.hasKeyword("Deathtouch") || crd.getTotalAssignedDamage() < 1)) {
                     assignedLethalDamageToAllBlockers = false;
+                }
             }
 
-
-            if (c.getName().equals("Player")
-                    && att.hasKeyword("Trample")
-                    && assignedLethalDamageToAllBlockers) {
+            if (c.getName().equals("Player") && att.hasKeyword("Trample") && assignedLethalDamageToAllBlockers) {
                 AllZone.getCombat().addDefendingDamage(1, att);
                 c.addAssignedDamage(1, att);
             } else if (!c.getName().equals("Player")) {
                 c.addAssignedDamage(1, att);
-            } else
+            } else {
                 assignedDamage = false;
+            }
 
             if (assignedDamage) {
                 assignDamage--;
                 updateDamageLabel();
-                if (assignDamage == 0) dispose();
+                if (assignDamage == 0) {
+                    dispose();
+                }
             }
 
             if (guiDisplay != null) {
                 guiDisplay.setCard(c);
             }
         }
-        //reduce damage, show new user message, exit if necessary
+        // reduce damage, show new user message, exit if necessary
 
-    }//creaturePanel_mousePressed()
+    }// creaturePanel_mousePressed()
 
     /**
-     * <p>updateDamageLabel.</p>
+     * <p>
+     * updateDamageLabel.
+     * </p>
      */
     void updateDamageLabel() {
         numberLabel.setText("Assign " + assignDamage + " damage - click on card to assign damage");
     }
 
     /**
-     * <p>creaturePanel_mouseMoved.</p>
-     *
-     * @param e a {@link java.awt.event.MouseEvent} object.
+     * <p>
+     * creaturePanel_mouseMoved.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.MouseEvent} object.
      */
-    void creaturePanel_mouseMoved(MouseEvent e) {
+    void creaturePanel_mouseMoved(final MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if (o instanceof CardPanel) {
             CardContainer cardPanel = (CardContainer) o;

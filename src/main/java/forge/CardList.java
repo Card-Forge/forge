@@ -212,7 +212,7 @@ public class CardList implements Iterable<Card> {
     }
 
     /** {@inheritDoc} */
-    public final boolean equals(Object a) {
+    public final boolean equals(final Object a) {
         if (a instanceof CardList) {
             CardList b = (CardList) a;
             if (list.size() != b.size()) {

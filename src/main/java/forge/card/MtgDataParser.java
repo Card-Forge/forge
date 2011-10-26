@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FileUtil;
@@ -19,6 +18,10 @@ public final class MtgDataParser implements Iterator<CardRules> {
 
     private Iterator<String> it;
     private final List<String> mtgDataLines;
+
+    /**
+     * Instantiates a new mtg data parser.
+     */
     public MtgDataParser() {
         mtgDataLines = FileUtil.readFile(ForgeProps.getFile(NewConstants.MTG_DATA));
         it = mtgDataLines.iterator();
@@ -26,7 +29,9 @@ public final class MtgDataParser implements Iterator<CardRules> {
     }
 
     private static List<String> setsToSkipPrefixes = new ArrayList<String>();
-    private static List<String> unSets = new ArrayList<String>(); // take only lands from there
+    private static List<String> unSets = new ArrayList<String>(); // take only
+                                                                  // lands from
+                                                                  // there
     static {
         setsToSkipPrefixes.add("VG"); // Vanguard
         setsToSkipPrefixes.add("ME"); // Mtgo master's editions
@@ -51,8 +56,8 @@ public final class MtgDataParser implements Iterator<CardRules> {
         setsToSkipPrefixes.add("BRB");
         setsToSkipPrefixes.add("BTD");
         setsToSkipPrefixes.add("DKM");
-        //setsToSkipPrefixes.add("ATH"); // No need to skip it really.
-                                         // On gatherer's opinion this cards were released twice in original set
+        // setsToSkipPrefixes.add("ATH"); // No need to skip it really.
+        // On gatherer's opinion this cards were released twice in original set
 
         // Promo sets - all cards have been issued in other sets
         setsToSkipPrefixes.add("SDC");
@@ -68,6 +73,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
     }
 
     private boolean weHaveNext;
+
     private void skipSetList() {
         String nextLine = it.next();
         while (nextLine.length() > 0 && it.hasNext()) {
@@ -76,58 +82,81 @@ public final class MtgDataParser implements Iterator<CardRules> {
         weHaveNext = it.hasNext();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.util.Iterator#hasNext()
+     */
     @Override
-    public boolean hasNext() { return weHaveNext; }
+    public boolean hasNext() {
+        return weHaveNext;
+    }
 
-    private final CardRuleCharacteristics[] chars = new CardRuleCharacteristics[2]; 
-    
+    private final CardRuleCharacteristics[] chars = new CardRuleCharacteristics[2];
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.util.Iterator#next()
+     */
     @Override
     public CardRules next() {
-        if(chars[1] != null) {
-            CardRules ret = new CardRules(chars[1], false, true, false, false); 
+        if (chars[1] != null) {
+            CardRules ret = new CardRules(chars[1], false, true, false, false);
             return ret;
         }
         chars[0] = new CardRuleCharacteristics();
-        Map<String, CardInSet> sets = new HashMap<String, CardInSet>(); 
-        
+        Map<String, CardInSet> sets = new HashMap<String, CardInSet>();
+
         String nextline = readSingleCard(chars[0]);
-        if(nextline != null) {
-            if(nextline.equals("----"))
-            {
+        if (nextline != null) {
+            if (nextline.equals("----")) {
                 chars[1] = new CardRuleCharacteristics();
                 nextline = readSingleCard(chars[1]);
             }
-            if(!nextline.isEmpty()) {
+            if (!nextline.isEmpty()) {
                 String setsLine = nextline;
                 boolean isBasicLand = chars[0].getCardType().isLand() && chars[0].getCardType().isBasic();
                 chars[0].setSetsData(getValidEditions(setsLine, isBasicLand));
-                if(chars[1] != null) {
+                if (chars[1] != null) {
                     chars[1].setSetsData(getValidEditions(setsLine, isBasicLand));
                 }
             }
         }
-        
-       
+
         // feel free to return null after this line
-        if (sets.isEmpty()) { return null; } // that was a bad card - it won't be added by invoker
-        if (chars[0] == null) { return null; }
+        if (sets.isEmpty()) {
+            return null;
+        } // that was a bad card - it won't be added by invoker
+        if (chars[0] == null) {
+            return null;
+        }
 
         return new CardRules(chars[0], false, false, false, false);
     }
-    
-    private String readSingleCard(CardRuleCharacteristics ret) {
-        
-        if (!it.hasNext()) { weHaveNext = false; return null; }
+
+    private String readSingleCard(final CardRuleCharacteristics ret) {
+
+        if (!it.hasNext()) {
+            weHaveNext = false;
+            return null;
+        }
         ret.setCardName(it.next());
 
-        if (!it.hasNext()) { weHaveNext = false; return null; }
+        if (!it.hasNext()) {
+            weHaveNext = false;
+            return null;
+        }
 
         String manaCost = it.next();
         ret.setManaCost(CardManaCost.empty);
         CardType type = null;
         if (manaCost.startsWith("{")) {
             ret.setManaCost(new CardManaCost(new ManaParserMtgData(manaCost)));
-            if (!it.hasNext()) { weHaveNext = false; return null; }
+            if (!it.hasNext()) {
+                weHaveNext = false;
+                return null;
+            }
             type = CardType.parse(it.next());
         } else { // Land?
             type = CardType.parse(manaCost);
@@ -135,17 +164,24 @@ public final class MtgDataParser implements Iterator<CardRules> {
         }
         ret.setPtLine(null);
         if (type.isCreature() || type.isPlaneswalker()) {
-            if (!it.hasNext()) { weHaveNext = false; return null; }
+            if (!it.hasNext()) {
+                weHaveNext = false;
+                return null;
+            }
             ret.setPtLine(it.next());
         }
-        
+
         String nextline = it.next();
         ArrayList<String> rules = new ArrayList<String>();
-        while(nextline!= null && !nextline.isEmpty() && !nextline.equals("----") && !java.util.regex.Pattern.matches("([A-Z0-9][A-Z0-9][A-Z0-9] [CURM], )*[A-Z0-9][A-Z0-9][A-Z0-9] [CURM]", nextline)) {
+        while (nextline != null
+                && !nextline.isEmpty()
+                && !nextline.equals("----")
+                && !java.util.regex.Pattern.matches(
+                        "([A-Z0-9][A-Z0-9][A-Z0-9] [CURM], )*[A-Z0-9][A-Z0-9][A-Z0-9] [CURM]", nextline)) {
             rules.add(nextline);
         }
-        ret.setCardRules((String[])rules.toArray());
-        
+        ret.setCardRules((String[]) rules.toArray());
+
         return nextline;
     }
 
@@ -156,25 +192,60 @@ public final class MtgDataParser implements Iterator<CardRules> {
             int spacePos = setsData[iSet].indexOf(' ');
             String setCode = setsData[iSet].substring(0, spacePos);
             boolean shouldSkip = false;
-            for (String s : setsToSkipPrefixes) { if (setCode.startsWith(s)) { shouldSkip = true; break; } }
-            for (String s : unSets) { if (setCode.startsWith(s) && !isBasicLand) { shouldSkip = true; break; } }
-            if (shouldSkip) { continue; }
+            for (String s : setsToSkipPrefixes) {
+                if (setCode.startsWith(s)) {
+                    shouldSkip = true;
+                    break;
+                }
+            }
+            for (String s : unSets) {
+                if (setCode.startsWith(s) && !isBasicLand) {
+                    shouldSkip = true;
+                    break;
+                }
+            }
+            if (shouldSkip) {
+                continue;
+            }
             result.put(setCode, parseCardInSet(setsData[iSet], spacePos));
         }
         return result;
     }
 
+    /**
+     * Parses the card in set.
+     * 
+     * @param unparsed
+     *            the unparsed
+     * @param spaceAt
+     *            the space at
+     * @return the card in set
+     */
     public static CardInSet parseCardInSet(final String unparsed, final int spaceAt) {
         char rarity = unparsed.charAt(spaceAt + 1);
         CardRarity rating;
         switch (rarity) {
-            case 'L': rating = CardRarity.BasicLand; break;
-            case 'C': rating = CardRarity.Common; break;
-            case 'U': rating = CardRarity.Uncommon; break;
-            case 'R': rating = CardRarity.Rare; break;
-            case 'M': rating = CardRarity.MythicRare; break;
-            case 'S': rating = CardRarity.Special; break;
-            default: rating = CardRarity.MythicRare; break;
+        case 'L':
+            rating = CardRarity.BasicLand;
+            break;
+        case 'C':
+            rating = CardRarity.Common;
+            break;
+        case 'U':
+            rating = CardRarity.Uncommon;
+            break;
+        case 'R':
+            rating = CardRarity.Rare;
+            break;
+        case 'M':
+            rating = CardRarity.MythicRare;
+            break;
+        case 'S':
+            rating = CardRarity.Special;
+            break;
+        default:
+            rating = CardRarity.MythicRare;
+            break;
         }
 
         int number = 1;
@@ -186,16 +257,30 @@ public final class MtgDataParser implements Iterator<CardRules> {
         return new CardInSet(rating, number);
     }
 
-    @Override public void remove() { }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.util.Iterator#remove()
+     */
+    @Override
+    public void remove() {
+    }
 
-    /** This is a mana-parser for mana written in curly braces like {2}{R}{B} */
+    /**
+     * This is a mana-parser for mana written in curly braces like {2}{R}{B}.
+     */
     public static final class ManaParserMtgData implements ManaParser {
         private final String cost;
 
         private int nextBracket;
         private int colorlessCost;
 
-
+        /**
+         * Instantiates a new mana parser mtg data.
+         * 
+         * @param cost0
+         *            the cost0
+         */
         public ManaParserMtgData(final String cost0) {
             this.cost = cost0;
             // System.out.println(cost);
@@ -203,6 +288,11 @@ public final class MtgDataParser implements Iterator<CardRules> {
             colorlessCost = 0;
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see forge.card.CardManaCost.ManaParser#getTotalColorlessCost()
+         */
         public int getTotalColorlessCost() {
             if (hasNext()) {
                 throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
@@ -210,9 +300,21 @@ public final class MtgDataParser implements Iterator<CardRules> {
             return colorlessCost;
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see java.util.Iterator#hasNext()
+         */
         @Override
-        public boolean hasNext() { return nextBracket != -1; }
+        public boolean hasNext() {
+            return nextBracket != -1;
+        }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see java.util.Iterator#next()
+         */
         @Override
         public CardManaCostShard next() {
             int closeBracket = cost.indexOf('}', nextBracket);
@@ -228,21 +330,44 @@ public final class MtgDataParser implements Iterator<CardRules> {
             int atoms = 0;
             for (int iChar = 0; iChar < unparsed.length(); iChar++) {
                 switch (unparsed.charAt(iChar)) {
-                    case 'W': atoms |= CardManaCostShard.Atom.WHITE; break;
-                    case 'U': atoms |= CardManaCostShard.Atom.BLUE; break;
-                    case 'B': atoms |= CardManaCostShard.Atom.BLACK; break;
-                    case 'R': atoms |= CardManaCostShard.Atom.RED; break;
-                    case 'G': atoms |= CardManaCostShard.Atom.GREEN; break;
-                    case '2': atoms |= CardManaCostShard.Atom.OR_2_COLORLESS; break;
-                    case 'P': atoms |= CardManaCostShard.Atom.OR_2_LIFE; break;
-                    case 'X': atoms |= CardManaCostShard.Atom.IS_X; break;
-                    default: break;
+                case 'W':
+                    atoms |= CardManaCostShard.Atom.WHITE;
+                    break;
+                case 'U':
+                    atoms |= CardManaCostShard.Atom.BLUE;
+                    break;
+                case 'B':
+                    atoms |= CardManaCostShard.Atom.BLACK;
+                    break;
+                case 'R':
+                    atoms |= CardManaCostShard.Atom.RED;
+                    break;
+                case 'G':
+                    atoms |= CardManaCostShard.Atom.GREEN;
+                    break;
+                case '2':
+                    atoms |= CardManaCostShard.Atom.OR_2_COLORLESS;
+                    break;
+                case 'P':
+                    atoms |= CardManaCostShard.Atom.OR_2_LIFE;
+                    break;
+                case 'X':
+                    atoms |= CardManaCostShard.Atom.IS_X;
+                    break;
+                default:
+                    break;
                 }
             }
             return CardManaCostShard.valueOf(atoms);
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see java.util.Iterator#remove()
+         */
         @Override
-        public void remove() { } // unsuported
+        public void remove() {
+        } // unsuported
     }
 }

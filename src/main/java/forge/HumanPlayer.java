@@ -5,53 +5,66 @@ import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 
-
 /**
- * <p>HumanPlayer class.</p>
- *
+ * <p>
+ * HumanPlayer class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class HumanPlayer extends Player {
 
     /**
-     * <p>Constructor for HumanPlayer.</p>
-     *
-     * @param myName a {@link java.lang.String} object.
+     * <p>
+     * Constructor for HumanPlayer.
+     * </p>
+     * 
+     * @param myName
+     *            a {@link java.lang.String} object.
      */
     public HumanPlayer(final String myName) {
         this(myName, 20, 0);
     }
 
     /**
-     * <p>Constructor for HumanPlayer.</p>
-     *
-     * @param myName a {@link java.lang.String} object.
-     * @param myLife a int.
-     * @param myPoisonCounters a int.
+     * <p>
+     * Constructor for HumanPlayer.
+     * </p>
+     * 
+     * @param myName
+     *            a {@link java.lang.String} object.
+     * @param myLife
+     *            a int.
+     * @param myPoisonCounters
+     *            a int.
      */
     public HumanPlayer(final String myName, final int myLife, final int myPoisonCounters) {
         super(myName, myLife, myPoisonCounters);
     }
 
     /**
-     * <p>getOpponent.</p>
-     *
+     * <p>
+     * getOpponent.
+     * </p>
+     * 
      * @return a {@link forge.Player} object.
      */
     public final Player getOpponent() {
         return AllZone.getComputerPlayer();
     }
 
-    ////////////////
-    ///
-    /// Methods to ease transition to Abstract Player class
-    ///
-    ///////////////
+    // //////////////
+    // /
+    // / Methods to ease transition to Abstract Player class
+    // /
+    // /////////////
 
     /**
-     * <p>isHuman.</p>
-     *
+     * <p>
+     * isHuman.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isHuman() {
@@ -59,19 +72,21 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * <p>isComputer.</p>
-     *
+     * <p>
+     * isComputer.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isComputer() {
         return false;
     }
 
-    ///////////////
-    ///
-    /// End transition methods
-    ///
-    ///////////////
+    // /////////////
+    // /
+    // / End transition methods
+    // /
+    // /////////////
 
     /** {@inheritDoc} */
     public final CardList mayDrawCards(final int n) {
@@ -88,21 +103,23 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * <p>dredge.</p>
-     *
+     * <p>
+     * dredge.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean dredge() {
         boolean dredged = false;
-        String[] choices = {"Yes", "No"};
+        String[] choices = { "Yes", "No" };
         Object o = GuiUtils.getChoice("Do you want to dredge?", choices);
         if (o.equals("Yes")) {
             Card c = (Card) GuiUtils.getChoice("Select card to dredge", getDredge().toArray());
-            //rule 702.49a
+            // rule 702.49a
             if (getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(Zone.Library).size()) {
 
-                //might have to make this more sophisticated
-                //dredge library, put card in hand
+                // might have to make this more sophisticated
+                // dredge library, put card in hand
                 AllZone.getGameAction().moveToHand(c);
 
                 for (int i = 0; i < getDredgeNumber(c); i++) {
@@ -130,7 +147,12 @@ public class HumanPlayer extends Player {
         AllZone.getInputControl().setInput(PlayerUtil.input_discardNumUnless(num, uType, sa));
     }
 
-    protected void discard_Chains_of_Mephistopheles() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Player#discard_Chains_of_Mephistopheles()
+     */
+    protected final void discard_Chains_of_Mephistopheles() {
         AllZone.getInputControl().setInput(PlayerUtil.input_chainsDiscard(), true);
     }
 
@@ -144,8 +166,8 @@ public class HumanPlayer extends Player {
                 s += "s";
             }
 
-            Object o = GuiUtils.getChoice("Do you want to put the " + s
-                    + " on the top or bottom of your library?", new Object[]{"top", "bottom"});
+            Object o = GuiUtils.getChoice("Do you want to put the " + s + " on the top or bottom of your library?",
+                    new Object[] { "top", "bottom" });
             libPos = o.toString();
         }
         AllZone.getInputControl().setInput(PlayerUtil.input_putFromHandToLibrary(libPos, numToLibrary));
@@ -187,7 +209,7 @@ public class HumanPlayer extends Player {
     /** {@inheritDoc} */
     protected final void clashMoveToTopOrBottom(final Card c) {
         String choice = "";
-        String[] choices = {"top", "bottom"};
+        String[] choices = { "top", "bottom" };
         AllZone.getDisplay().setCard(c);
         choice = (String) GuiUtils.getChoice(c.getName() + " - Top or bottom of Library", choices);
 
@@ -198,4 +220,4 @@ public class HumanPlayer extends Player {
         }
     }
 
-}//end HumanPlayer class
+}// end HumanPlayer class

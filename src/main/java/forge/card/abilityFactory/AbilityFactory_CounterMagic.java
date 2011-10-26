@@ -1,13 +1,22 @@
 package forge.card.abilityFactory;
 
-import forge.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import forge.AllZone;
+import forge.Card;
+import forge.ComputerUtil;
+import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_StackInstance;
+import forge.card.spellability.Target;
+import forge.card.spellability.Target_Selection;
 
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
 //		-Graveyard (Default)
@@ -24,8 +33,10 @@ import java.util.HashMap;
 //A:AB$Counter | Cost$ G G | TargetType$ Spell | Destination$ Exile | ValidTgts$ Color.Black | SpellDescription$ xxxxx
 
 /**
- * <p>AbilityFactory_CounterMagic class.</p>
- *
+ * <p>
+ * AbilityFactory_CounterMagic class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -37,34 +48,42 @@ public class AbilityFactory_CounterMagic {
     private String unlessCost = null;
 
     /**
-     * <p>Constructor for AbilityFactory_CounterMagic.</p>
-     *
-     * @param newAF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * Constructor for AbilityFactory_CounterMagic.
+     * </p>
+     * 
+     * @param newAF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
-    public AbilityFactory_CounterMagic(AbilityFactory newAF) {
+    public AbilityFactory_CounterMagic(final AbilityFactory newAF) {
         af = newAF;
         params = af.getMapParams();
 
         destination = params.containsKey("Destination") ? params.get("Destination") : "Graveyard";
 
-        if (params.containsKey("UnlessCost"))
+        if (params.containsKey("UnlessCost")) {
             unlessCost = params.get("UnlessCost").trim();
+        }
 
     }
 
     /**
-     * <p>getAbilityCounter.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getAbilityCounter.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getAbilityCounter(final AbilityFactory AF) {
+    public final SpellAbility getAbilityCounter(final AbilityFactory AF) {
         final SpellAbility abCounter = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = -3895990436431818899L;
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return counterStackDescription(af, this);
             }
 
@@ -79,7 +98,7 @@ public class AbilityFactory_CounterMagic {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return counterCanPlayAI(af, this);
             }
 
@@ -88,12 +107,15 @@ public class AbilityFactory_CounterMagic {
     }
 
     /**
-     * <p>getSpellCounter.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getSpellCounter.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getSpellCounter(final AbilityFactory AF) {
+    public final SpellAbility getSpellCounter(final AbilityFactory AF) {
         final SpellAbility spCounter = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
@@ -118,12 +140,15 @@ public class AbilityFactory_CounterMagic {
 
     // Add Counter Drawback
     /**
-     * <p>getDrawbackCounter.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getDrawbackCounter.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getDrawbackCounter(final AbilityFactory AF) {
+    public final SpellAbility getDrawbackCounter(final AbilityFactory AF) {
         final SpellAbility dbCounter = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
@@ -148,7 +173,7 @@ public class AbilityFactory_CounterMagic {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return counterDoTriggerAI(af, this, mandatory);
             }
 
@@ -157,10 +182,14 @@ public class AbilityFactory_CounterMagic {
     }
 
     /**
-     * <p>counterCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * counterCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private boolean counterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -173,26 +202,29 @@ public class AbilityFactory_CounterMagic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
-            if (!CostUtil.checkLifeCost(abCost, source, 4))
+            }
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
                 return false;
+            }
         }
 
         Target tgt = sa.getTarget();
         if (tgt != null) {
 
             SpellAbility topSA = AllZone.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
+            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
+            }
 
             tgt.resetTargets();
-            if (Target_Selection.matchSpellAbility(sa, topSA, tgt))
+            if (Target_Selection.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
-            else
+            } else {
                 return false;
+            }
         }
-
 
         if (unlessCost != null) {
             // Is this Usable Mana Sources? Or Total Available Mana?
@@ -202,44 +234,56 @@ public class AbilityFactory_CounterMagic {
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
                 toPay = ComputerUtil.determineLeftoverMana(sa);
-            } else
+            } else {
                 toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
-
-            if (toPay == 0)
-                return false;
-
-            if (toPay <= usableManaSources) {
-                // If this is a reusable Resource, feel free to play it most of the time
-                if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4)
-                    return false;
             }
 
-            if (setPayX)
+            if (toPay == 0) {
+                return false;
+            }
+
+            if (toPay <= usableManaSources) {
+                // If this is a reusable Resource, feel free to play it most of
+                // the time
+                if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4) {
+                    return false;
+                }
+            }
+
+            if (setPayX) {
                 source.setSVar("PayX", Integer.toString(toPay));
+            }
         }
 
         // TODO: Improve AI
 
-        // Will return true if this spell can counter (or is Reusable and can force the Human into making decisions)
+        // Will return true if this spell can counter (or is Reusable and can
+        // force the Human into making decisions)
 
         // But really it should be more picky about how it counters things
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             toReturn &= subAb.chkAI_Drawback();
+        }
 
         return toReturn;
     }
 
     /**
-     * <p>counterDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * counterDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    public boolean counterDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    public final boolean counterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean toReturn = true;
         if (AllZone.getStack().size() < 1) {
             return false;
@@ -248,14 +292,16 @@ public class AbilityFactory_CounterMagic {
         Target tgt = sa.getTarget();
         if (tgt != null) {
             SpellAbility topSA = AllZone.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
+            if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
+            }
 
             tgt.resetTargets();
-            if (Target_Selection.matchSpellAbility(sa, topSA, tgt))
+            if (Target_Selection.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
-            else
+            } else {
                 return false;
+            }
 
             Card source = sa.getSourceCard();
             if (unlessCost != null) {
@@ -266,52 +312,65 @@ public class AbilityFactory_CounterMagic {
                 if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtil.determineLeftoverMana(sa);
-                } else
+                } else {
                     toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
-
-                if (toPay == 0)
-                    return false;
-
-                if (toPay <= usableManaSources) {
-                    // If this is a reusable Resource, feel free to play it most of the time
-                    if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4)
-                        return false;
                 }
 
-                if (setPayX)
+                if (toPay == 0) {
+                    return false;
+                }
+
+                if (toPay <= usableManaSources) {
+                    // If this is a reusable Resource, feel free to play it most
+                    // of the time
+                    if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4) {
+                        return false;
+                    }
+                }
+
+                if (setPayX) {
                     source.setSVar("PayX", Integer.toString(toPay));
+                }
             }
         }
 
         // TODO: Improve AI
 
-        // Will return true if this spell can counter (or is Reusable and can force the Human into making decisions)
+        // Will return true if this spell can counter (or is Reusable and can
+        // force the Human into making decisions)
 
         // But really it should be more picky about how it counters things
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             toReturn &= subAb.chkAI_Drawback();
+        }
 
         return toReturn;
     }
 
     /**
-     * <p>counterResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * counterResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
 
-        // TODO: Before this resolves we should see if any of our targets are still on the stack
+        // TODO: Before this resolves we should see if any of our targets are
+        // still on the stack
         ArrayList<SpellAbility> sas;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             sas = tgt.getTargetSAs();
-        else
+        } else {
             sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         if (params.containsKey("ForgetOtherTargets")) {
             if (params.get("ForgetOtherTargets").equals("True")) {
@@ -322,12 +381,14 @@ public class AbilityFactory_CounterMagic {
         for (final SpellAbility tgtSA : sas) {
             Card tgtSACard = tgtSA.getSourceCard();
 
-            if (tgtSA.isSpell() && tgtSACard.keywordsContain("CARDNAME can't be countered."))
+            if (tgtSA.isSpell() && tgtSACard.keywordsContain("CARDNAME can't be countered.")) {
                 continue;
+            }
 
             SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
-            if (si == null)
+            if (si == null) {
                 continue;
+            }
 
             removeFromStack(tgtSA, sa, si);
 
@@ -342,31 +403,37 @@ public class AbilityFactory_CounterMagic {
                 }
             }
         }
-    }//end counterResolve
+    }// end counterResolve
 
     /**
-     * <p>counterStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * counterStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private String counterStackDescription(AbilityFactory af, SpellAbility sa) {
+    private String counterStackDescription(final AbilityFactory af, final SpellAbility sa) {
 
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        } else {
             sb.append(" ");
+        }
 
         ArrayList<SpellAbility> sas;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             sas = tgt.getTargetSAs();
-        else
+        } else {
             sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         sb.append("countering");
 
@@ -375,7 +442,9 @@ public class AbilityFactory_CounterMagic {
             sb.append(" ");
             sb.append(tgtSA.getSourceCard());
             isAbility = tgtSA.isAbility();
-            if (isAbility) sb.append("'s ability");
+            if (isAbility) {
+                sb.append("'s ability");
+            }
         }
 
         if (isAbility && params.containsKey("DestroyPermanent")) {
@@ -390,20 +459,27 @@ public class AbilityFactory_CounterMagic {
         }
 
         return sb.toString();
-    }//end counterStackDescription
+    }// end counterStackDescription
 
     /**
-     * <p>removeFromStack.</p>
-     *
-     * @param tgtSA a {@link forge.card.spellability.SpellAbility} object.
-     * @param srcSA a {@link forge.card.spellability.SpellAbility} object.
-     * @param si a {@link forge.card.spellability.SpellAbility_StackInstance} object.
+     * <p>
+     * removeFromStack.
+     * </p>
+     * 
+     * @param tgtSA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param srcSA
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param si
+     *            a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *            object.
      */
-    private void removeFromStack(SpellAbility tgtSA, SpellAbility srcSA, SpellAbility_StackInstance si) {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbility_StackInstance si) {
         AllZone.getStack().remove(si);
 
         if (tgtSA.isAbility()) {
-            //For Ability-targeted counterspells - do not move it anywhere, even if Destination$ is specified.
+            // For Ability-targeted counterspells - do not move it anywhere,
+            // even if Destination$ is specified.
         } else if (destination.equals("Graveyard")) {
             AllZone.getGameAction().moveToGraveyard(tgtSA.getSourceCard());
         } else if (destination.equals("Exile")) {
@@ -418,11 +494,13 @@ public class AbilityFactory_CounterMagic {
             AllZone.getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             tgtSA.getSourceCard().getController().shuffle();
         } else {
-            throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card " + srcSA.getSourceCard().getName());
+            throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
+                    + srcSA.getSourceCard().getName());
         }
 
-        if (!tgtSA.isAbility())
+        if (!tgtSA.isAbility()) {
             System.out.println("Send countered spell to " + destination);
+        }
     }
 
-}//end class AbilityFactory_CounterMagic
+}// end class AbilityFactory_CounterMagic

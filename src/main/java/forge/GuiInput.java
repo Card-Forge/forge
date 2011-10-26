@@ -1,23 +1,27 @@
 package forge;
 
-
-import forge.gui.input.Input;
-
 import java.util.Observable;
 import java.util.Observer;
 
+import forge.gui.input.Input;
 
 /**
- * <p>GuiInput class.</p>
- *
+ * <p>
+ * GuiInput class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class GuiInput extends MyObservable implements Observer {
+
+    /** The input. */
     Input input;
 
     /**
-     * <p>Constructor for GuiInput.</p>
+     * <p>
+     * Constructor for GuiInput.
+     * </p>
      */
     public GuiInput() {
         AllZone.getInputControl().addObserver(this);
@@ -34,9 +38,12 @@ public class GuiInput extends MyObservable implements Observer {
     }
 
     /**
-     * <p>Setter for the field <code>input</code>.</p>
-     *
-     * @param in a {@link forge.gui.input.Input} object.
+     * <p>
+     * Setter for the field <code>input</code>.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.gui.input.Input} object.
      */
     private void setInput(final Input in) {
         input = in;
@@ -44,40 +51,53 @@ public class GuiInput extends MyObservable implements Observer {
     }
 
     /**
-     * <p>showMessage.</p>
+     * <p>
+     * showMessage.
+     * </p>
      */
     public final void showMessage() {
         input.showMessage();
     }
 
     /**
-     * <p>selectButtonOK.</p>
+     * <p>
+     * selectButtonOK.
+     * </p>
      */
     public final void selectButtonOK() {
         input.selectButtonOK();
     }
 
     /**
-     * <p>selectButtonCancel.</p>
+     * <p>
+     * selectButtonCancel.
+     * </p>
      */
     public final void selectButtonCancel() {
         input.selectButtonCancel();
     }
 
     /**
-     * <p>selectPlayer.</p>
-     *
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * selectPlayer.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
      */
     public final void selectPlayer(final Player player) {
         input.selectPlayer(player);
     }
 
     /**
-     * <p>selectCard.</p>
-     *
-     * @param card a {@link forge.Card} object.
-     * @param zone a {@link forge.PlayerZone} object.
+     * <p>
+     * selectCard.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @param zone
+     *            a {@link forge.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
         input.selectCard(card, zone);

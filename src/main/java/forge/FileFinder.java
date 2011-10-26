@@ -8,8 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <p>FileFinder class.</p>
- *
+ * <p>
+ * FileFinder class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -27,20 +29,26 @@ public class FileFinder {
     private ArrayList<String> fileNames;
     private ArrayList<String> fName;
 
-
     /**
-     * <p>Constructor for FileFinder.</p>
+     * <p>
+     * Constructor for FileFinder.
+     * </p>
      */
     public FileFinder() {
     }
 
     /**
-     * <p>findFiles.</p>
-     *
-     * @param startPath a {@link java.lang.String} object.
-     * @param mask a {@link java.lang.String} object.
+     * <p>
+     * findFiles.
+     * </p>
+     * 
+     * @param startPath
+     *            a {@link java.lang.String} object.
+     * @param mask
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.List} object.
-     * @throws java.lang.Exception if any.
+     * @throws Exception
+     *             the exception
      */
     public final List<File> findFiles(final String startPath, final String mask) throws Exception {
         fileNames = new ArrayList<String>();
@@ -48,10 +56,11 @@ public class FileFinder {
         return findWithFull(startPath, mask, FILES);
     }
 
-
     /**
-     * <p>getDirectorySize.</p>
-     *
+     * <p>
+     * getDirectorySize.
+     * </p>
+     * 
      * @return a long.
      */
     public final long getDirectorySize() {
@@ -59,8 +68,10 @@ public class FileFinder {
     }
 
     /**
-     * <p>Getter for the field <code>filesNumber</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>filesNumber</code>.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getFilesNumber() {
@@ -68,8 +79,10 @@ public class FileFinder {
     }
 
     /**
-     * <p>Getter for the field <code>directoriesNumber</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>directoriesNumber</code>.
+     * </p>
+     * 
      * @return a long.
      */
     public final long getDirectoriesNumber() {
@@ -77,9 +90,12 @@ public class FileFinder {
     }
 
     /**
-     * <p>accept.</p>
-     *
-     * @param name a {@link java.lang.String} object.
+     * <p>
+     * accept.
+     * </p>
+     * 
+     * @param name
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
     private boolean accept(final String name) {
@@ -93,15 +109,20 @@ public class FileFinder {
         return m.matches();
     }
 
-
     /**
-     * <p>findWithFull.</p>
-     *
-     * @param startPath a {@link java.lang.String} object.
-     * @param mask a {@link java.lang.String} object.
-     * @param objectType a int.
+     * <p>
+     * findWithFull.
+     * </p>
+     * 
+     * @param startPath
+     *            a {@link java.lang.String} object.
+     * @param mask
+     *            a {@link java.lang.String} object.
+     * @param objectType
+     *            a int.
      * @return a {@link java.util.List} object.
-     * @throws java.lang.Exception if any.
+     * @throws java.lang.Exception
+     *             if any.
      */
     private List<File> findWithFull(final String startPath, final String mask, final int objectType) throws Exception {
 
@@ -114,8 +135,7 @@ public class FileFinder {
         }
 
         if (!mask.equals("")) {
-            p = Pattern.compile(mask,
-                    Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            p = Pattern.compile(mask, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         }
         filesNumber = 0;
         directoriesNumber = 0;
@@ -127,13 +147,17 @@ public class FileFinder {
         return res;
     }
 
-
     /**
-     * <p>searchWithFull.</p>
-     *
-     * @param topDirectory a {@link java.io.File} object.
-     * @param res a {@link java.util.List} object.
-     * @param objectType a int.
+     * <p>
+     * searchWithFull.
+     * </p>
+     * 
+     * @param topDirectory
+     *            a {@link java.io.File} object.
+     * @param res
+     *            a {@link java.util.List} object.
+     * @param objectType
+     *            a int.
      */
     private void searchWithFull(final File topDirectory, final List<File> res, final int objectType) {
 

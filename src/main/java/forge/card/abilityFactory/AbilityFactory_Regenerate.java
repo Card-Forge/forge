@@ -1,35 +1,53 @@
 package forge.card.abilityFactory;
 
-import forge.*;
-import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
-import forge.card.spellability.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListUtil;
+import forge.CombatUtil;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Constant.Zone;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+
 /**
- * <p>AbilityFactory_Regenerate class.</p>
- *
+ * <p>
+ * AbilityFactory_Regenerate class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class AbilityFactory_Regenerate {
 
-    // Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate target creature.
+    // Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate
+    // target creature.
     // http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
 
-    //**************************************************************
+    // **************************************************************
     // ********************* Regenerate ****************************
-    //**************************************************************
+    // **************************************************************
 
     /**
-     * <p>getAbilityRegenerate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getAbilityRegenerate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility getAbilityRegenerate(final AbilityFactory af) {
@@ -53,19 +71,22 @@ public class AbilityFactory_Regenerate {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return doTriggerAI(af, this, mandatory);
             }
 
-        };//Ability_Activated
+        };// Ability_Activated
 
         return abRegenerate;
     }
 
     /**
-     * <p>getSpellRegenerate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getSpellRegenerate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility getSpellRegenerate(final AbilityFactory af) {
@@ -94,9 +115,12 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>createDrawbackRegenerate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackRegenerate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRegenerate(final AbilityFactory af) {
@@ -119,7 +143,7 @@ public class AbilityFactory_Regenerate {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return doTriggerAI(af, this, mandatory);
             }
 
@@ -128,38 +152,49 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>regenerateStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String regenerateStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String regenerateStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
         Card host = af.getHostCard();
 
         ArrayList<Card> tgtCards;
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
         if (tgtCards.size() > 0) {
-            if (sa instanceof Ability_Sub)
+            if (sa instanceof Ability_Sub) {
                 sb.append(" ");
-            else
+            } else {
                 sb.append(host).append(" - ");
+            }
 
             sb.append("Regenerate ");
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card tgtC = it.next();
-                if (tgtC.isFaceDown()) sb.append("Morph");
-                else sb.append(tgtC);
+                if (tgtC.isFaceDown()) {
+                    sb.append("Morph");
+                } else {
+                    sb.append(tgtC);
+                }
 
-                if (it.hasNext()) sb.append(", ");
+                if (it.hasNext()) {
+                    sb.append(", ");
+                }
             }
         }
         sb.append(".");
@@ -173,10 +208,14 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>regenerateCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean regenerateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -186,39 +225,46 @@ public class AbilityFactory_Regenerate {
         Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, hostCard, 4))
+            if (!CostUtil.checkLifeCost(abCost, hostCard, 4)) {
                 return false;
+            }
 
-            if (!CostUtil.checkSacrificeCost(abCost, hostCard))
+            if (!CostUtil.checkSacrificeCost(abCost, hostCard)) {
                 return false;
-                
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+            }
+
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard)) {
                 return false;
+            }
         }
 
         Target tgt = sa.getTarget();
         if (tgt == null) {
-            // As far as I can tell these Defined Cards will only have one of them
+            // As far as I can tell these Defined Cards will only have one of
+            // them
             ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
             if (AllZone.getStack().size() > 0) {
                 ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
                 for (Card c : list) {
-                    if (objects.contains(c))
+                    if (objects.contains(c)) {
                         chance = true;
+                    }
                 }
             } else {
                 if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
                     boolean flag = false;
 
                     for (Card c : list) {
-                        if (c.getShield() == 0)
+                        if (c.getShield() == 0) {
                             flag |= CombatUtil.combatantWouldBeDestroyed(c);
+                        }
                     }
 
                     chance = flag;
-                } else {    // if nothing on the stack, and it's not declare blockers. no need to regen
+                } else { // if nothing on the stack, and it's not declare
+                         // blockers. no need to regen
                     return false;
                 }
             }
@@ -228,24 +274,27 @@ public class AbilityFactory_Regenerate {
             CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
-            if (targetables.size() == 0)
+            if (targetables.size() == 0) {
                 return false;
+            }
 
             if (AllZone.getStack().size() > 0) {
-                // check stack for something on the stack will kill anything i control
+                // check stack for something on the stack will kill anything i
+                // control
                 ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
                 CardList threatenedTargets = new CardList();
 
                 for (Card c : targetables) {
-                    if (objects.contains(c) && c.getShield() == 0)
+                    if (objects.contains(c) && c.getShield() == 0) {
                         threatenedTargets.add(c);
+                    }
                 }
-                
+
                 if (!threatenedTargets.isEmpty()) {
-	                // Choose "best" of the remaining to regenerate
-	                tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
-	                chance = true;
+                    // Choose "best" of the remaining to regenerate
+                    tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
+                    chance = true;
                 }
             } else {
                 if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
@@ -264,25 +313,32 @@ public class AbilityFactory_Regenerate {
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
-    }//regenerateCanPlayAI
+    }// regenerateCanPlayAI
 
     /**
-     * <p>doTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * doTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean doTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean doTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean chance = false;
 
-        if (!ComputerUtil.canPayCost(sa))
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         Target tgt = sa.getTarget();
         if (tgt == null) {
@@ -293,21 +349,27 @@ public class AbilityFactory_Regenerate {
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
+        }
 
         return chance;
     }
 
     /**
-     * <p>regenMandatoryTarget.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * regenMandatoryTarget.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean regenMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+    private static boolean regenMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = af.getHostCard();
         Target tgt = sa.getTarget();
         tgt.resetTargets();
@@ -316,11 +378,13 @@ public class AbilityFactory_Regenerate {
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
         CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
-        if (targetables.size() == 0)
+        if (targetables.size() == 0) {
             return false;
+        }
 
-        if (!mandatory && compTargetables.size() == 0)
+        if (!mandatory && compTargetables.size() == 0) {
             return false;
+        }
 
         if (compTargetables.size() > 0) {
             CardList combatants = compTargetables.getType("Creature");
@@ -334,7 +398,8 @@ public class AbilityFactory_Regenerate {
                 }
             }
 
-            // TODO see if something on the stack is about to kill something i can target
+            // TODO see if something on the stack is about to kill something i
+            // can target
 
             // choose my best X without regen
             if (compTargetables.getNotType("Creature").size() == 0) {
@@ -364,10 +429,14 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>regenerateResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void regenerateResolve(final AbilityFactory af, final SpellAbility sa) {
         Card hostCard = af.getHostCard();
@@ -375,10 +444,11 @@ public class AbilityFactory_Regenerate {
 
         ArrayList<Card> tgtCards;
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        else
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+        }
 
         for (final Card tgtC : tgtCards) {
             final Command untilEOT = new Command() {
@@ -394,16 +464,19 @@ public class AbilityFactory_Regenerate {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }
-    }//regenerateResolve
+    }// regenerateResolve
 
-    //**************************************************************
+    // **************************************************************
     // ********************* RegenerateAll *************************
-    //**************************************************************
+    // **************************************************************
 
     /**
-     * <p>getAbilityRegenerateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getAbilityRegenerateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility getAbilityRegenerateAll(final AbilityFactory af) {
@@ -427,19 +500,22 @@ public class AbilityFactory_Regenerate {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return regenerateAllDoTriggerAI(af, this, mandatory);
             }
 
-        };//Ability_Activated
+        };// Ability_Activated
 
         return abRegenerateAll;
     }
 
     /**
-     * <p>getSpellRegenerateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getSpellRegenerateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility getSpellRegenerateAll(final AbilityFactory af) {
@@ -468,9 +544,12 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>createDrawbackRegenerateAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackRegenerateAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRegenerateAll(final AbilityFactory af) {
@@ -493,7 +572,7 @@ public class AbilityFactory_Regenerate {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return regenerateAllDoTriggerAI(af, this, mandatory);
             }
 
@@ -502,21 +581,26 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>regenerateAllStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateAllStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String regenerateAllStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String regenerateAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
         Card host = af.getHostCard();
 
-        if (sa instanceof Ability_Sub)
+        if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        else
+        } else {
             sb.append(host).append(" - ");
+        }
 
         String desc = "";
         if (params.containsKey("SpellDescription")) {
@@ -536,10 +620,14 @@ public class AbilityFactory_Regenerate {
     }
 
     /**
-     * <p>regenerateAllCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean regenerateAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -549,31 +637,37 @@ public class AbilityFactory_Regenerate {
         Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, hostCard))
+            if (!CostUtil.checkSacrificeCost(abCost, hostCard)) {
                 return false;
-            
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+            }
+
+            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard)) {
                 return false;
-            
-            if (!CostUtil.checkLifeCost(abCost, hostCard, 4))
+            }
+
+            if (!CostUtil.checkLifeCost(abCost, hostCard, 4)) {
                 return false;
+            }
         }
 
         // filter AIs battlefield by what I can target
         String valid = "";
 
-        if (params.containsKey("ValidCards"))
+        if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
+        }
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
 
-        if (list.size() == 0)
+        if (list.size() == 0) {
             return false;
+        }
 
         int numSaved = 0;
         if (AllZone.getStack().size() > 0) {
-            //TODO - check stack for something on the stack will kill anything i control
+            // TODO - check stack for something on the stack will kill anything
+            // i control
         } else {
 
             if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
@@ -592,46 +686,59 @@ public class AbilityFactory_Regenerate {
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
     }
 
     /**
-     * <p>regenerateAllDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * regenerateAllDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean chance = true;
 
-        if (!ComputerUtil.canPayCost(sa))
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
+        }
 
         return chance;
     }
 
     /**
-     * <p>regenerateAllResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * regenerateAllResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void regenerateAllResolve(final AbilityFactory af, final SpellAbility sa) {
         Card hostCard = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
         String valid = "";
 
-        if (params.containsKey("ValidCards"))
+        if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
+        }
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
@@ -650,6 +757,6 @@ public class AbilityFactory_Regenerate {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }
-    }//regenerateAllResolve
+    }// regenerateAllResolve
 
-}//end class AbilityFactory_Regenerate
+}// end class AbilityFactory_Regenerate

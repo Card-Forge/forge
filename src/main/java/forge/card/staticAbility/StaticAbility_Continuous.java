@@ -9,29 +9,34 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
+import forge.Constant.Zone;
 import forge.Player;
 import forge.StaticEffect;
-import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
+/**
+ * The Class StaticAbility_Continuous.
+ */
 public class StaticAbility_Continuous {
 
     /**
      * 
      * TODO Write javadoc for this method.
-     * @param stAb a StaticAbility
+     * 
+     * @param stAb
+     *            a StaticAbility
      */
     public static void applyContinuousAbility(final StaticAbility stAb) {
         HashMap<String, String> params = stAb.getMapParams();
         Card hostCard = stAb.getHostCard();
 
         StaticEffect se = new StaticEffect();
-        CardList affectedCards =  getAffectedCards(stAb);
-        ArrayList<Player> affectedPlayers =  getAffectedPlayers(stAb);
+        CardList affectedCards = getAffectedCards(stAb);
+        ArrayList<Player> affectedPlayers = getAffectedPlayers(stAb);
 
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
@@ -54,7 +59,7 @@ public class StaticAbility_Continuous {
         String[] removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
-        boolean removeAllAbilities = false ;
+        boolean removeAllAbilities = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
@@ -62,22 +67,21 @@ public class StaticAbility_Continuous {
 
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
-            setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP)
-                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setP));
+            setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP) : CardFactoryUtil.xCount(hostCard,
+                    hostCard.getSVar(setP));
         }
 
         if (params.containsKey("SetToughness")) {
             setT = params.get("SetToughness");
-            setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT)
-                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(setT));
+            setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT) : CardFactoryUtil.xCount(hostCard,
+                    hostCard.getSVar(setT));
         }
 
         if (params.containsKey("AddPower")) {
             if (params.get("AddPower").equals("X")) {
                 powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
                 se.setXValue(powerBonus);
-            }
-            else if (params.get("AddPower").equals("Y")) {
+            } else if (params.get("AddPower").equals("Y")) {
                 powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
                 se.setYValue(powerBonus);
             } else {
@@ -89,8 +93,7 @@ public class StaticAbility_Continuous {
             if (params.get("AddToughness").equals("X")) {
                 toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
                 se.setXValue(toughnessBonus);
-            }
-            else if (params.get("AddToughness").equals("Y")) {
+            } else if (params.get("AddToughness").equals("Y")) {
                 toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
                 se.setYValue(toughnessBonus);
             } else {
@@ -101,15 +104,15 @@ public class StaticAbility_Continuous {
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
         }
-        
+
         if (params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
-        
+
         if (params.containsKey("RemoveKeyword")) {
             removeKeywords = params.get("RemoveKeyword").split(" & ");
         }
-        
+
         if (params.containsKey("RemoveAllAbilities")) {
             removeAllAbilities = true;
         }
@@ -161,13 +164,13 @@ public class StaticAbility_Continuous {
         }
 
         if (params.containsKey("AddColor")) {
-            addColors = CardUtil.getShortColorsString(
-                    new ArrayList<String>(Arrays.asList(params.get("AddColor").split(" & "))));
+            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("AddColor").split(
+                    " & "))));
         }
 
         if (params.containsKey("SetColor")) {
-            addColors = CardUtil.getShortColorsString(
-                    new ArrayList<String>(Arrays.asList(params.get("SetColor").split(" & "))));
+            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("SetColor").split(
+                    " & "))));
             se.setOverwriteColors(true);
         }
 
@@ -179,7 +182,7 @@ public class StaticAbility_Continuous {
             addTriggers = sVars;
         }
 
-        //modify players
+        // modify players
         for (Player p : affectedPlayers) {
 
             // add keywords
@@ -190,7 +193,7 @@ public class StaticAbility_Continuous {
             }
         }
 
-        //start modifying the cards
+        // start modifying the cards
         for (int i = 0; i < affectedCards.size(); i++) {
             Card affectedCard = affectedCards.get(i);
 
@@ -202,17 +205,16 @@ public class StaticAbility_Continuous {
                 if (setToughness != -1) {
                     affectedCard.setBaseDefense(setToughness);
                 }
-            }
-            else  //non CharacteristicDefining
-                if (setPower != -1 || setToughness != -1) {
-                    if (setP.startsWith("AffectedX")) {
-                        setPower = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setP));
-                    }
-                    if (setT.startsWith("AffectedX")) {
-                        setToughness = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setT));
-                    }
-                    affectedCard.addNewPT(setPower, setToughness, hostCard.getTimestamp());
+            } else // non CharacteristicDefining
+            if (setPower != -1 || setToughness != -1) {
+                if (setP.startsWith("AffectedX")) {
+                    setPower = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setP));
                 }
+                if (setT.startsWith("AffectedX")) {
+                    setToughness = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setT));
+                }
+                affectedCard.addNewPT(setPower, setToughness, hostCard.getTimestamp());
+            }
 
             // add P/T bonus
             affectedCard.addSemiPermanentAttackBoost(powerBonus);
@@ -220,11 +222,12 @@ public class StaticAbility_Continuous {
 
             // add keywords
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
-                affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities, hostCard.getTimestamp());
+                affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities,
+                        hostCard.getTimestamp());
             }
-            
-         // add HIDDEN keywords
-            if(addHiddenKeywords != null) {
+
+            // add HIDDEN keywords
+            if (addHiddenKeywords != null) {
                 for (String k : addHiddenKeywords) {
                     affectedCard.addExtrinsicKeyword(k);
                 }
@@ -277,7 +280,7 @@ public class StaticAbility_Continuous {
                     trigger.setTemporarilySuppressed(true);
                 }
             }
-            
+
             // remove activated and static abilities
             if (removeAllAbilities) {
                 ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
@@ -347,8 +350,7 @@ public class StaticAbility_Continuous {
         }
 
         if (params.containsKey("Affected")) {
-            affectedCards = affectedCards.getValidCards(
-                    params.get("Affected").split(","), controller, hostCard);
+            affectedCards = affectedCards.getValidCards(params.get("Affected").split(","), controller, hostCard);
         }
 
         return affectedCards;

@@ -136,7 +136,7 @@ public final class Base64Coder {
      *            The line separator to be used to separate the output lines.
      * @return A String containing the Base64 encoded data, broken into lines.
      */
-    public static String encodeLines(final byte[] in, final int iOff, int iLen, int lineLen, String lineSeparator) {
+    public static String encodeLines(final byte[] in, final int iOff, final int iLen, final int lineLen, final String lineSeparator) {
         int blockLen = (lineLen * 3) / 4;
         if (blockLen <= 0) {
             throw new IllegalArgumentException();

@@ -1294,9 +1294,9 @@ public class MagicStack extends MyObservable {
                 return true;
             }
         }
-        
-        for(SpellAbility sa : simultaneousStackEntryList) {
-            if(sa.getSourceTrigger() == triggerID) {
+
+        for (SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.getSourceTrigger() == triggerID) {
                 return true;
             }
         }

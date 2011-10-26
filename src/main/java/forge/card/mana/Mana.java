@@ -5,8 +5,10 @@ import forge.Constant;
 import forge.gui.input.Input_PayManaCostUtil;
 
 /**
- * <p>Mana class.</p>
- *
+ * <p>
+ * Mana class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -16,60 +18,75 @@ public class Mana {
     private Card sourceCard = null;
 
     /**
-     * <p>Constructor for Mana.</p>
-     *
-     * @param col a {@link java.lang.String} object.
-     * @param amt a int.
-     * @param source a {@link forge.Card} object.
+     * <p>
+     * Constructor for Mana.
+     * </p>
+     * 
+     * @param col
+     *            a {@link java.lang.String} object.
+     * @param amt
+     *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      */
-    public Mana(String col, int amt, Card source) {
+    public Mana(final String col, final int amt, final Card source) {
         color = col;
         amount = amt;
-        if (source == null)
+        if (source == null) {
             return;
+        }
 
         sourceCard = source;
     }
 
     /**
-     * <p>toString.</p>
-     *
+     * <p>
+     * toString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String toString() {
-        if (color.equals(Constant.Color.Colorless))
+    public final String toString() {
+        if (color.equals(Constant.Color.Colorless)) {
             return Integer.toString(amount);
+        }
 
         String manaString = "";
         StringBuilder sbMana = new StringBuilder();
 
         manaString = Input_PayManaCostUtil.getShortColorString(color);
 
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount; i++) {
             sbMana.append(manaString);
+        }
         return sbMana.toString();
     }
 
     /**
-     * <p>toDescriptiveString.</p>
-     *
+     * <p>
+     * toDescriptiveString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String toDescriptiveString() {
+    public final String toDescriptiveString() {
         // this will be used for advanced choice box
-        if (color.equals(Constant.Color.Colorless))
+        if (color.equals(Constant.Color.Colorless)) {
             return Integer.toString(amount);
+        }
 
         String manaString = "";
         StringBuilder sbMana = new StringBuilder();
 
         manaString = Input_PayManaCostUtil.getShortColorString(color);
 
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount; i++) {
             sbMana.append(manaString);
+        }
 
-        if (isSnow())
+        if (isSnow()) {
             sbMana.append("(S)");
+        }
 
         sbMana.append(" From ");
         sbMana.append(sourceCard.getName());
@@ -78,11 +95,13 @@ public class Mana {
     }
 
     /**
-     * <p>toSingleArray.</p>
-     *
+     * <p>
+     * toSingleArray.
+     * </p>
+     * 
      * @return an array of {@link forge.card.mana.Mana} objects.
      */
-    public Mana[] toSingleArray() {
+    public final Mana[] toSingleArray() {
         Mana[] normalize = new Mana[amount];
         for (int i = 0; i < normalize.length; i++) {
             normalize[i] = new Mana(this.color, 1, this.sourceCard);
@@ -91,97 +110,121 @@ public class Mana {
     }
 
     /**
-     * <p>isSnow.</p>
-     *
+     * <p>
+     * isSnow.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isSnow() {
+    public final boolean isSnow() {
         return sourceCard.isSnow();
     }
 
     /**
-     * <p>fromBasicLand.</p>
-     *
+     * <p>
+     * fromBasicLand.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean fromBasicLand() {
+    public final boolean fromBasicLand() {
         return sourceCard.isBasicLand();
     } // for Imperiosaur
 
     /**
-     * <p>getColorlessAmount.</p>
-     *
+     * <p>
+     * getColorlessAmount.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getColorlessAmount() {
+    public final int getColorlessAmount() {
         return color.equals(Constant.Color.Colorless) ? amount : 0;
     }
 
     /**
-     * <p>Getter for the field <code>amount</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>amount</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getAmount() {
+    public final int getAmount() {
         return amount;
     }
 
     /**
-     * <p>isColor.</p>
-     *
-     * @param col a {@link java.lang.String} object.
+     * <p>
+     * isColor.
+     * </p>
+     * 
+     * @param col
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean isColor(String col) {
+    public final boolean isColor(final String col) {
         return color.equals(col);
     }
 
     /**
-     * <p>isColor.</p>
-     *
-     * @param colors an array of {@link java.lang.String} objects.
+     * <p>
+     * isColor.
+     * </p>
+     * 
+     * @param colors
+     *            an array of {@link java.lang.String} objects.
      * @return a boolean.
      */
-    public boolean isColor(String[] colors) {
+    public final boolean isColor(final String[] colors) {
         for (String col : colors)
-            if (color.equals(col))
+            if (color.equals(col)) {
                 return true;
+            }
 
         return false;
     }
 
     /**
-     * <p>Getter for the field <code>color</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>color</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getColor() {
+    public final String getColor() {
         return color;
     }
 
     /**
-     * <p>Getter for the field <code>sourceCard</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>sourceCard</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getSourceCard() {
+    public final Card getSourceCard() {
         return sourceCard;
     }
 
     /**
-     * <p>fromSourceCard.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * fromSourceCard.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean fromSourceCard(Card c) {
+    public final boolean fromSourceCard(final Card c) {
         return sourceCard.equals(c);
     }
 
     /**
-     * <p>decrementAmount.</p>
+     * <p>
+     * decrementAmount.
+     * </p>
      */
-    public void decrementAmount() {
+    public final void decrementAmount() {
         amount--;
     }
 }

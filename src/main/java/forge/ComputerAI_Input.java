@@ -1,12 +1,14 @@
 package forge;
 
 import com.esotericsoftware.minlog.Log;
+
 import forge.gui.input.Input;
 
-
 /**
- * <p>ComputerAI_Input class.</p>
- *
+ * <p>
+ * ComputerAI_Input class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -17,18 +19,23 @@ public class ComputerAI_Input extends Input {
     private final Computer computer;
 
     /**
-     * <p>Constructor for ComputerAI_Input.</p>
-     *
-     * @param iComputer a {@link forge.Computer} object.
+     * <p>
+     * Constructor for ComputerAI_Input.
+     * </p>
+     * 
+     * @param iComputer
+     *            a {@link forge.Computer} object.
      */
     public ComputerAI_Input(final Computer iComputer) {
         computer = iComputer;
     }
 
-    //wrapper method that ComputerAI_StackNotEmpty class calls
-    //ad-hoc way for ComptuerAI_StackNotEmpty to get to the Computer class
+    // wrapper method that ComputerAI_StackNotEmpty class calls
+    // ad-hoc way for ComptuerAI_StackNotEmpty to get to the Computer class
     /**
-     * <p>stackNotEmpty.</p>
+     * <p>
+     * stackNotEmpty.
+     * </p>
      */
     public final void stackNotEmpty() {
         computer.stack_not_empty();
@@ -38,19 +45,20 @@ public class ComputerAI_Input extends Input {
     @Override
     public final void showMessage() {
         /*
-         * //put this back in
-        ButtonUtil.disableAll();
-        AllZone.getDisplay().showMessage("Phase: "
-                + AllZone.getPhase().getPhase()
-                + "\nAn error may have occurred. Please send the \"Stack Report\" and the
-                \"Detailed Error Trace\" to the Forge forum.");
-        */
+         * //put this back in ButtonUtil.disableAll();
+         * AllZone.getDisplay().showMessage("Phase: " +
+         * AllZone.getPhase().getPhase() + "\nAn error may have occurred. Please
+         * send the \"Stack Report\" and the
+         * \"Detailed Error Trace\" to the Forge forum.");
+         */
         think();
-    } //getMessage();
+    } // getMessage();
 
     /**
-     * <p>Getter for the field <code>computer</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>computer</code>.
+     * </p>
+     * 
      * @return a {@link forge.Computer} object.
      */
     public final Computer getComputer() {
@@ -58,10 +66,12 @@ public class ComputerAI_Input extends Input {
     }
 
     /**
-     * <p>think.</p>
+     * <p>
+     * think.
+     * </p>
      */
     private void think() {
-        //TODO instead of setNextPhase, pass priority
+        // TODO instead of setNextPhase, pass priority
         final String phase = AllZone.getPhase().getPhase();
 
         if (AllZone.getStack().size() > 0) {
@@ -86,5 +96,5 @@ public class ComputerAI_Input extends Input {
             computer.stack_not_empty();
         }
 
-    } //think
+    } // think
 }

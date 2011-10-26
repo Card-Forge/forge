@@ -1,5 +1,12 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -11,31 +18,23 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
-
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.gui.GuiUtils;
-
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.JOptionPane;
+import forge.gui.GuiUtils;
 
 /**
- * <p>AbilityFactory_Choose class.</p>
- *
+ * <p>
+ * AbilityFactory_Choose class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory_Choose {
+public final class AbilityFactory_Choose {
 
     private AbilityFactory_Choose() {
         throw new AssertionError();
@@ -46,9 +45,12 @@ public class AbilityFactory_Choose {
     // *************************************************************************
 
     /**
-     * <p>createAbilityChooseType.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityChooseType.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChooseType(final AbilityFactory af) {
@@ -81,9 +83,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createSpellChooseType.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellChooseType.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellChooseType(final AbilityFactory af) {
@@ -110,9 +115,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createDrawbackChooseType.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackChooseType.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChooseType(final AbilityFactory af) {
@@ -144,10 +152,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseTypeStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseTypeStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String chooseTypeStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -156,8 +168,7 @@ public class AbilityFactory_Choose {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -166,8 +177,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -185,10 +195,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseTypeCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseTypeCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean chooseTypeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -196,16 +210,19 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseTypeTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * chooseTypeTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
@@ -216,8 +233,8 @@ public class AbilityFactory_Choose {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(
-                    sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                    af.getMapParams().get("Defined"), sa);
             for (Player p : tgtPlayers) {
                 if (p.isHuman() && !mandatory) {
                     return false;
@@ -228,10 +245,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseTypeResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseTypeResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void chooseTypeResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -247,8 +268,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -269,11 +289,11 @@ public class AbilityFactory_Choose {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            //TODO
-                            //computer will need to choose a type
-                            //based on whether it needs a creature or land,
-                            //otherwise, lib search for most common type left
-                            //then, reveal chosenType to Human
+                            // TODO
+                            // computer will need to choose a type
+                            // based on whether it needs a creature or land,
+                            // otherwise, lib search for most common type left
+                            // then, reveal chosenType to Human
                         }
                     }
                 } else if (type.equals("Creature")) {
@@ -294,29 +314,29 @@ public class AbilityFactory_Choose {
                                 valid = true;
                                 card.setChosenType(choice);
                             }
-                        }
-                        else {
+                        } else {
                             String chosen = "";
                             if (params.containsKey("AILogic")) {
                                 String logic = params.get("AILogic");
                                 if (logic.equals("MostProminentOnBattlefield")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsIn(Zone.Battlefield));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil
+                                            .getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentComputerControls")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
+                                            .getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentHumanControls")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getHumanPlayer()
+                                            .getCardsIn(Zone.Battlefield));
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZoneUtil.getCardsInGame().getController(AllZone.getComputerPlayer()));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZoneUtil.getCardsInGame()
+                                            .getController(AllZone.getComputerPlayer()));
                                 }
                                 if (logic.equals("MostProminentInComputerGraveyard")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(
-                                            AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
+                                            .getCardsIn(Zone.Graveyard));
                                 }
                             }
                             if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
@@ -330,13 +350,12 @@ public class AbilityFactory_Choose {
                             card.setChosenType(chosenType);
                         }
                     }
-                }
-                else if (type.equals("Basic Land")) {
+                } else if (type.equals("Basic Land")) {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            Object o = GuiUtils.getChoice("Choose a basic land type",
-                                    CardUtil.getBasicTypes().toArray());
+                            Object o = GuiUtils.getChoice("Choose a basic land type", CardUtil.getBasicTypes()
+                                    .toArray());
                             if (null == o) {
                                 return;
                             }
@@ -346,17 +365,15 @@ public class AbilityFactory_Choose {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            //TODO
-                            //computer will need to choose a type
+                            // TODO
+                            // computer will need to choose a type
                         }
                     }
-                }
-                else if (type.equals("Land")) {
+                } else if (type.equals("Land")) {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            Object o = GuiUtils.getChoice("Choose a land type",
-                                    CardUtil.getLandTypes().toArray());
+                            Object o = GuiUtils.getChoice("Choose a land type", CardUtil.getLandTypes().toArray());
                             if (null == o) {
                                 return;
                             }
@@ -366,11 +383,11 @@ public class AbilityFactory_Choose {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            //TODO
-                            //computer will need to choose a type
+                            // TODO
+                            // computer will need to choose a type
                         }
                     }
-                } //end if-else if
+                } // end if-else if
             }
         }
     }
@@ -380,9 +397,12 @@ public class AbilityFactory_Choose {
     // *************************************************************************
 
     /**
-     * <p>createAbilityChooseColor.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityChooseColor.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -416,9 +436,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createSpellChooseColor.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellChooseColor.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -446,9 +469,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createDrawbackChooseColor.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackChooseColor.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -481,10 +507,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseColorStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseColorStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String chooseColorStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -493,8 +523,7 @@ public class AbilityFactory_Choose {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -503,8 +532,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
@@ -526,55 +554,59 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseColorCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseColorCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean chooseColorCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        //Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
+        // Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
         return chooseColorTriggerAI(af, sa, false);
     }
 
     /**
-     * <p>chooseColorTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * chooseColorTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
-        /*if (!ComputerUtil.canPayCost(sa)) {
-            return false;
-        }
-
-        Target tgt = sa.getTarget();
-
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getComputerPlayer());
-        } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    af.getMapParams().get("Defined"), sa);
-            for (Player p : tgtPlayers) {
-                if (p.isHuman() && !mandatory) {
-                    return false;
-                }
-            }
-        }
-        return true;*/
+        /*
+         * if (!ComputerUtil.canPayCost(sa)) { return false; }
+         * 
+         * Target tgt = sa.getTarget();
+         * 
+         * if (sa.getTarget() != null) { tgt.resetTargets();
+         * sa.getTarget().addTarget(AllZone.getComputerPlayer()); } else {
+         * ArrayList<Player> tgtPlayers =
+         * AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+         * af.getMapParams().get("Defined"), sa); for (Player p : tgtPlayers) {
+         * if (p.isHuman() && !mandatory) { return false; } } } return true;
+         */
     }
 
     /**
-     * <p>chooseColorResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseColorResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void chooseColorResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -585,8 +617,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -594,10 +625,9 @@ public class AbilityFactory_Choose {
             if (tgt == null || p.canTarget(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (params.containsKey("OrColors")) {
-                            List<String> o = GuiUtils.getChoices("Choose a color or colors", Constant.Color.onlyColors);
-                            card.setChosenColor(new ArrayList<String>(o));
-                    }
-                    else {
+                        List<String> o = GuiUtils.getChoices("Choose a color or colors", Constant.Color.onlyColors);
+                        card.setChosenColor(new ArrayList<String>(o));
+                    } else {
                         Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
                         if (null == o) {
                             return;
@@ -612,16 +642,18 @@ public class AbilityFactory_Choose {
                     if (params.containsKey("AILogic")) {
                         String logic = params.get("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(
-                                    AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()));
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
+                                    AllZone.getHumanPlayer()));
                         }
                         if (logic.equals("MostProminentInGame")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
                         }
                         if (logic.equals("MostProminentHumanCreatures")) {
                             CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                            if(list.isEmpty())
-                                list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer()).getType("Creature");
+                            if (list.isEmpty()) {
+                                list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer())
+                                        .getType("Creature");
+                            }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                         if (logic.equals("MostProminentPermanent")) {
@@ -629,7 +661,8 @@ public class AbilityFactory_Choose {
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                         if (logic.equals("MostProminentAttackers")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat().getAttackers()));
+                            chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat()
+                                    .getAttackers()));
                         }
                     }
                     if (chosen.equals("")) {
@@ -643,15 +676,18 @@ public class AbilityFactory_Choose {
             }
         }
     }
-    
+
     // *************************************************************************
     // ************************* ChooseNumber **********************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityChooseNumber.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityChooseNumber.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -685,9 +721,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createSpellChooseNumber.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellChooseNumber.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -715,9 +754,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createDrawbackChooseNumber.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackChooseNumber.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -750,10 +792,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseNumberStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseNumberStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String chooseNumberStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -761,8 +807,7 @@ public class AbilityFactory_Choose {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
@@ -771,8 +816,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
@@ -790,10 +834,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseNumberCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseNumberCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean chooseNumberCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -801,24 +849,31 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>chooseNumberTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * chooseNumberTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseNumberTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    private static boolean chooseNumberTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
     }
 
     /**
-     * <p>chooseNumberResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * chooseNumberResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void chooseNumberResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -826,10 +881,10 @@ public class AbilityFactory_Choose {
         int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
         int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
         boolean random = params.containsKey("Random");
-        
+
         String[] choices = new String[max + 1];
         if (!random) {
-            //initialize the array
+            // initialize the array
             for (int i = min; i <= max; i++) {
                 choices[i] = "" + i;
             }
@@ -840,8 +895,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -854,8 +908,7 @@ public class AbilityFactory_Choose {
                         chosen = randomGen.nextInt(max - min) + min;
                         String message = "Randomly chosen number: " + chosen;
                         JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else {
+                    } else {
                         Object o = GuiUtils.getChoice("Choose a number", choices);
                         if (null == o) {
                             return;
@@ -863,22 +916,25 @@ public class AbilityFactory_Choose {
                         chosen = Integer.parseInt((String) o);
                     }
                     card.setChosenNumber(chosen);
-                    
+
                 } else {
-                    //TODO - not implemented
+                    // TODO - not implemented
                 }
             }
         }
     }
-    
+
     // *************************************************************************
     // ************************* ChoosePlayer **********************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityChoosePlayer.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityChoosePlayer.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -912,9 +968,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createSpellChoosePlayer.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellChoosePlayer.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -943,9 +1002,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createDrawbackChoosePlayer.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackChoosePlayer.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -979,10 +1041,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>choosePlayerStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * choosePlayerStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String choosePlayerStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -990,8 +1056,7 @@ public class AbilityFactory_Choose {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
@@ -1000,8 +1065,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
@@ -1019,10 +1083,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>choosePlayerCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * choosePlayerCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean choosePlayerCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1030,24 +1098,31 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>choosePlayerTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * choosePlayerTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean choosePlayerTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    private static boolean choosePlayerTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
     }
 
     /**
-     * <p>choosePlayerResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * choosePlayerResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void choosePlayerResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -1058,14 +1133,12 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-        
-        ArrayList<Player> choices = params.containsKey("Choices") ?
-                AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Choices"), sa) :
-                new ArrayList<Player>(AllZone.getPlayersInGame());
+
+        ArrayList<Player> choices = params.containsKey("Choices") ? AbilityFactory.getDefinedPlayers(
+                sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(AllZone.getPlayersInGame());
 
         for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
@@ -1078,20 +1151,23 @@ public class AbilityFactory_Choose {
                     card.setChosenPlayer(chosen);
 
                 } else {
-                    //TODO - not implemented
+                    // TODO - not implemented
                 }
             }
         }
     }
-    
+
     // *************************************************************************
     // ***************************** NameCard **********************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityNameCard.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityNameCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -1124,9 +1200,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createSpellNameCard.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellNameCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -1154,9 +1233,12 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>createDrawbackNameCard.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackNameCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.6
      */
@@ -1189,10 +1271,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>nameCardStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * nameCardStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String nameCardStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -1200,8 +1286,7 @@ public class AbilityFactory_Choose {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
@@ -1210,8 +1295,7 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
@@ -1229,10 +1313,14 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>nameCardCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * nameCardCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean nameCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1240,25 +1328,32 @@ public class AbilityFactory_Choose {
     }
 
     /**
-     * <p>nameCardTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * nameCardTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean nameCardTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
-        //TODO - there is no AILogic implemented yet
+    private static boolean nameCardTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        // TODO - there is no AILogic implemented yet
         return false;
     }
 
     /**
-     * <p>nameCardResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * nameCardResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void nameCardResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -1269,11 +1364,10 @@ public class AbilityFactory_Choose {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-        
+
         String valid = "Card";
         String validDesc = "card";
         if (params.containsKey("ValidCards")) {
@@ -1287,18 +1381,17 @@ public class AbilityFactory_Choose {
                 String name = null;
                 while (!ok) {
                     if (sa.getActivatingPlayer().isHuman()) {
-                        String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card. (Case sensitive)";
+                        String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
+                                + " card. (Case sensitive)";
                         name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
                         if (!valid.equals("Card") && !(null == name)) {
                             try {
-                            Card temp = AllZone.getCardFactory().getCard(name, p);
-                            ok = temp.isValid(valid, host.getController(), host);
-                            }
-                            catch(Exception ignored) {
+                                Card temp = AllZone.getCardFactory().getCard(name, p);
+                                ok = temp.isValid(valid, host.getController(), host);
+                            } catch (Exception ignored) {
                                 ok = false;
                             }
-                        }
-                        else {
+                        } else {
                             ok = true;
                         }
                         if (ok) {
@@ -1312,12 +1405,13 @@ public class AbilityFactory_Choose {
                                 return !c.isLand();
                             }
                         });
-                        if(!list.isEmpty())
+                        if (!list.isEmpty()) {
                             host.setNamedCard(list.get(0).getName());
+                        }
                     }
                 }
             }
         }
     }
 
-} //end class AbilityFactory_Choose
+} // end class AbilityFactory_Choose

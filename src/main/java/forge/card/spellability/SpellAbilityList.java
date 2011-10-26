@@ -1,14 +1,14 @@
 package forge.card.spellability;
 
+import java.util.ArrayList;
 
 import forge.ComputerUtil;
 
-import java.util.ArrayList;
-
-
 /**
- * <p>SpellAbilityList class.</p>
- *
+ * <p>
+ * SpellAbilityList class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -16,94 +16,122 @@ public class SpellAbilityList {
     private ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
 
     /**
-     * <p>Constructor for SpellAbilityList.</p>
+     * <p>
+     * Constructor for SpellAbilityList.
+     * </p>
      */
     public SpellAbilityList() {
     }
 
     /**
-     * <p>Constructor for SpellAbilityList.</p>
-     *
-     * @param s a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Constructor for SpellAbilityList.
+     * </p>
+     * 
+     * @param s
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbilityList(SpellAbility s) {
+    public SpellAbilityList(final SpellAbility s) {
         add(s);
     }
 
     /**
-     * <p>Constructor for SpellAbilityList.</p>
-     *
-     * @param s an array of {@link forge.card.spellability.SpellAbility} objects.
+     * <p>
+     * Constructor for SpellAbilityList.
+     * </p>
+     * 
+     * @param s
+     *            an array of {@link forge.card.spellability.SpellAbility}
+     *            objects.
      */
-    public SpellAbilityList(SpellAbility[] s) {
-        for (int i = 0; i < s.length; i++)
+    public SpellAbilityList(final SpellAbility[] s) {
+        for (int i = 0; i < s.length; i++) {
             add(s[i]);
+        }
     }
 
     /**
-     * <p>remove.</p>
-     *
-     * @param n a int.
+     * <p>
+     * remove.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      */
-    public void remove(int n) {
+    public final void remove(final int n) {
         list.remove(n);
     }
 
     /**
-     * <p>add.</p>
-     *
-     * @param s a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * add.
+     * </p>
+     * 
+     * @param s
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public void add(SpellAbility s) {
+    public final void add(final SpellAbility s) {
         list.add(s);
     }
 
     /**
-     * <p>size.</p>
-     *
+     * <p>
+     * size.
+     * </p>
+     * 
      * @return a int.
      */
-    public int size() {
+    public final int size() {
         return list.size();
     }
 
     /**
-     * <p>get.</p>
-     *
-     * @param n a int.
+     * <p>
+     * get.
+     * </p>
+     * 
+     * @param n
+     *            a int.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility get(int n) {
+    public final SpellAbility get(final int n) {
         return list.get(n);
     }
 
     /**
-     * <p>addAll.</p>
-     *
-     * @param s a {@link forge.card.spellability.SpellAbilityList} object.
+     * <p>
+     * addAll.
+     * </p>
+     * 
+     * @param s
+     *            a {@link forge.card.spellability.SpellAbilityList} object.
      */
-    public void addAll(SpellAbilityList s) {
-        for (int i = 0; i < s.size(); i++)
+    public final void addAll(final SpellAbilityList s) {
+        for (int i = 0; i < s.size(); i++) {
             add(s.get(i));
+        }
     }
 
-    //Move1.getMax() uses this
+    // Move1.getMax() uses this
     /**
-     * <p>execute.</p>
+     * <p>
+     * execute.
+     * </p>
      */
-    public void execute() {
+    public final void execute() {
         for (int i = 0; i < size(); i++) {
-            if (!ComputerUtil.canPayCost(get(i))) throw new RuntimeException(
-                    "SpellAbilityList : execute() error, cannot pay for the spell " + get(i).getSourceCard()
-                            + " - " + get(i).getStackDescription());
+            if (!ComputerUtil.canPayCost(get(i))) {
+                throw new RuntimeException("SpellAbilityList : execute() error, cannot pay for the spell "
+                        + get(i).getSourceCard() + " - " + get(i).getStackDescription());
+            }
 
             ComputerUtil.playNoStack(get(i));
         }
-    }//execute()
+    } // execute()
 
     /** {@inheritDoc} */
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size(); i++) {
             sb.append(get(i).getSourceCard().toString());
@@ -112,12 +140,14 @@ public class SpellAbilityList {
             sb.append("\r\n");
         }
         return sb.toString();
-    }//toString()
+    } // toString()
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
-        if (o == null) return false;
+    public final boolean equals(final Object o) {
+        if (o == null) {
+            return false;
+        }
         return toString().equals(o.toString());
     }
 }

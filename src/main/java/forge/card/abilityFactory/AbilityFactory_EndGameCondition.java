@@ -1,17 +1,23 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
+
 import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
 import forge.Player;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.game.GameLossReason;
 
-import java.util.ArrayList;
-
 /**
- * <p>AbilityFactory_EndGameCondition class.</p>
- *
+ * <p>
+ * AbilityFactory_EndGameCondition class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -22,12 +28,16 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     // ***********************************************************************************************
-    // ***************************************** Wins Game *******************************************
+    // ***************************************** Wins Game
+    // *******************************************
     // ***********************************************************************************************
     /**
-     * <p>createAbilityWinsGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityWinsGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityWinsGame(final AbilityFactory af) {
@@ -37,7 +47,8 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return winsGameStackDescription(af, this);
             }
 
@@ -60,9 +71,12 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>createSpellWinsGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellWinsGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellWinsGame(final AbilityFactory af) {
@@ -71,13 +85,16 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return winsGameStackDescription(af, this);
             }
 
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return winsGameCanPlayAI(af, this);
             }
@@ -92,9 +109,12 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>createDrawbackWinsGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackWinsGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackWinsGame(final AbilityFactory af) {
@@ -103,13 +123,16 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return winsGameStackDescription(af, this);
             }
 
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return winsGameCanPlayAI(af, this);
             }
@@ -134,10 +157,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>winsGameStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * winsGameStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     public static String winsGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -161,10 +188,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>winsGameCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * winsGameCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     public static boolean winsGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -182,11 +213,16 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>winsGameDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * winsGameDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     public static boolean winsGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -195,7 +231,8 @@ public final class AbilityFactory_EndGameCondition {
             return false;
         }
 
-        // WinGame abilities usually don't have subAbilities but for consistency...
+        // WinGame abilities usually don't have subAbilities but for
+        // consistency...
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
@@ -205,10 +242,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>winsGameResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * winsGameResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void winsGameResolve(final AbilityFactory af, final SpellAbility sa) {
 
@@ -222,13 +263,17 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     // ***********************************************************************************************
-    // **************************************** Loses Game *******************************************
+    // **************************************** Loses Game
+    // *******************************************
     // ***********************************************************************************************
 
     /**
-     * <p>createAbilityLosesGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityLosesGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityLosesGame(final AbilityFactory af) {
@@ -238,7 +283,8 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return losesGameStackDescription(af, this);
             }
 
@@ -261,9 +307,12 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>createSpellLosesGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellLosesGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellLosesGame(final AbilityFactory af) {
@@ -272,13 +321,16 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return losesGameStackDescription(af, this);
             }
 
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return losesGameCanPlayAI(af, this);
             }
@@ -293,9 +345,12 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>createDrawbackLosesGame.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackLosesGame.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackLosesGame(final AbilityFactory af) {
@@ -304,13 +359,16 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public String getStackDescription() {
-                // when getStackDesc is called, just build exactly what is happening
+                // when getStackDesc is called, just build exactly what is
+                // happening
                 return losesGameStackDescription(af, this);
             }
 
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return losesGameCanPlayAI(af, this);
             }
@@ -335,10 +393,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>losesGameStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * losesGameStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     public static String losesGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -374,10 +436,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>losesGameCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * losesGameCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     public static boolean losesGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -385,7 +451,8 @@ public final class AbilityFactory_EndGameCondition {
             return false;
         }
 
-        // Only one SA Lose the Game card right now, which is Door to Nothingness
+        // Only one SA Lose the Game card right now, which is Door to
+        // Nothingness
 
         Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -399,23 +466,27 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>losesGameDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * losesGameDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    public static boolean losesGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    public static boolean losesGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
 
         // Phage the Untouchable
-        // (Final Fortune would need to attach it's delayed trigger to a specific turn, which can't be done yet)
+        // (Final Fortune would need to attach it's delayed trigger to a
+        // specific turn, which can't be done yet)
 
         if (!mandatory && AllZone.getHumanPlayer().cantLose()) {
             return false;
@@ -427,7 +498,8 @@ public final class AbilityFactory_EndGameCondition {
             tgt.addTarget(AllZone.getHumanPlayer());
         }
 
-        // WinGame abilities usually don't have subAbilities but for consistency...
+        // WinGame abilities usually don't have subAbilities but for
+        // consistency...
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
@@ -437,10 +509,14 @@ public final class AbilityFactory_EndGameCondition {
     }
 
     /**
-     * <p>losesGameResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * losesGameResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void losesGameResolve(final AbilityFactory af, final SpellAbility sa) {
 
@@ -459,4 +535,4 @@ public final class AbilityFactory_EndGameCondition {
         }
     }
 
-} //end class AbilityFactory_EndGameCondition
+} // end class AbilityFactory_EndGameCondition

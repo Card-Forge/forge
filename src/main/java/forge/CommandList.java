@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * <p>CommandList class.</p>
- *
+ * <p>
+ * CommandList class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -16,48 +18,55 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     private ArrayList<Command> a = new ArrayList<Command>();
 
     /**
-     * default constructor
-     * TODO Write javadoc for Constructor.
+     * default constructor TODO Write javadoc for Constructor.
      */
     public CommandList() {
-        //nothing to do
+        // nothing to do
     }
 
     /**
-     * constructor
-     * TODO Write javadoc for Constructor.
-     * @param c a Command
+     * constructor TODO Write javadoc for Constructor.
+     * 
+     * @param c
+     *            a Command
      */
     public CommandList(final Command c) {
         a.add(c);
     }
 
     /**
-     * <p>iterator.</p>
-     *
+     * <p>
+     * iterator.
+     * </p>
+     * 
      * @return a {@link java.util.Iterator} object.
      */
     public final Iterator<Command> iterator() {
         return a.iterator();
     }
 
-    //bug fix, when token is pumped up like with Giant Growth
-    //and Sorceress Queen targets token, the effects need to be done
-    //in this order, weird I know, DO NOT CHANGE THIS
+    // bug fix, when token is pumped up like with Giant Growth
+    // and Sorceress Queen targets token, the effects need to be done
+    // in this order, weird I know, DO NOT CHANGE THIS
     /**
-     * <p>add.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * add.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void add(final Command c) {
         a.add(0, c);
     }
 
-
     /**
-     * <p>get.</p>
-     *
-     * @param i a int.
+     * <p>
+     * get.
+     * </p>
+     * 
+     * @param i
+     *            a int.
      * @return a {@link forge.Command} object.
      */
     public final Command get(final int i) {
@@ -65,9 +74,12 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     }
 
     /**
-     * <p>remove.</p>
-     *
-     * @param i a int.
+     * <p>
+     * remove.
+     * </p>
+     * 
+     * @param i
+     *            a int.
      * @return a {@link forge.Command} object.
      */
     public final Command remove(final int i) {
@@ -75,8 +87,10 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     }
 
     /**
-     * <p>size.</p>
-     *
+     * <p>
+     * size.
+     * </p>
+     * 
      * @return a int.
      */
     public final int size() {
@@ -84,14 +98,18 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     }
 
     /**
-     * <p>clear.</p>
+     * <p>
+     * clear.
+     * </p>
      */
     public final void clear() {
         a.clear();
     }
 
     /**
-     * <p>execute.</p>
+     * <p>
+     * execute.
+     * </p>
      */
     public final void execute() {
         for (int i = 0; i < size(); i++) {

@@ -1,5 +1,27 @@
 package forge;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
@@ -7,35 +29,15 @@ import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability_Mana;
-import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.Color;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-
 /**
- * <p>GuiDisplayUtil class.</p>
- *
+ * <p>
+ * GuiDisplayUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -44,10 +46,14 @@ public final class GuiDisplayUtil implements NewConstants {
     private GuiDisplayUtil() {
         throw new AssertionError();
     }
+
     /**
-     * <p>getCardDetailMouse.</p>
-     *
-     * @param visual a {@link forge.CardContainer} object.
+     * <p>
+     * getCardDetailMouse.
+     * </p>
+     * 
+     * @param visual
+     *            a {@link forge.CardContainer} object.
      * @return a {@link java.awt.event.MouseMotionListener} object.
      */
     public static MouseMotionListener getCardDetailMouse(final CardContainer visual) {
@@ -61,14 +67,17 @@ public final class GuiDisplayUtil implements NewConstants {
                     CardContainer cardPanel = (CardContainer) o;
                     visual.setCard(cardPanel.getCard());
                 }
-            } //mouseMoved
+            } // mouseMoved
         };
     }
 
     /**
-     * <p>getBorder.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * getBorder.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      * @return a {@link javax.swing.border.Border} object.
      */
     public static Border getBorder(final Card card) {
@@ -96,7 +105,8 @@ public final class GuiDisplayUtil implements NewConstants {
         } else if (list.get(0).equals(Constant.Color.Colorless)) {
             color = Color.gray;
         } else {
-            color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
+            color = new Color(200, 0, 230); // If your card has a violet border,
+                                            // something is wrong
         }
 
         if (color != Color.gray) {
@@ -124,7 +134,9 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeGenerateMana.</p>
+     * <p>
+     * devModeGenerateMana.
+     * </p>
      */
     public static void devModeGenerateMana() {
         Card dummy = new Card();
@@ -138,9 +150,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>formatCardType.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * formatCardType.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      * @return a {@link java.lang.String} object.
      */
     public static String formatCardType(final Card card) {
@@ -151,19 +166,18 @@ public final class GuiDisplayUtil implements NewConstants {
         ArrayList<String> cardTypes = new ArrayList<String>();
         ArrayList<String> subTypes = new ArrayList<String>();
         boolean allCreatureTypes = list.contains("AllCreatureTypes");
-        
+
         for (String t : list) {
-            if(allCreatureTypes && t.equals("AllCreatureTypes")) {
+            if (allCreatureTypes && t.equals("AllCreatureTypes")) {
                 continue;
-            } 
+            }
             if (CardUtil.isASuperType(t) && !superTypes.contains(t)) {
                 superTypes.add(t);
             }
             if (CardUtil.isACardType(t) && !cardTypes.contains(t)) {
                 cardTypes.add(t);
             }
-            if (CardUtil.isASubType(t) && !subTypes.contains(t)
-                    && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
+            if (CardUtil.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
                 subTypes.add(t);
             }
         }
@@ -188,9 +202,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>cleanString.</p>
-     *
-     * @param in a {@link java.lang.String} object.
+     * <p>
+     * cleanString.
+     * </p>
+     * 
+     * @param in
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public static String cleanString(final String in) {
@@ -208,10 +225,13 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>cleanStringMWS.</p>
-     *
+     * <p>
+     * cleanStringMWS.
+     * </p>
+     * 
+     * @param in
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
-     * @param in a {@link java.lang.String} object.
      */
     public static String cleanStringMWS(final String in) {
         StringBuffer out = new StringBuffer();
@@ -228,35 +248,34 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>setupNoLandPanel.</p>
-     *
-     * @param j a {@link javax.swing.JPanel} object.
-     * @param c an array of {@link forge.Card} objects.
+     * <p>
+     * setupNoLandPanel.
+     * </p>
+     * 
+     * @param j
+     *            a {@link javax.swing.JPanel} object.
+     * @param c
+     *            an array of {@link forge.Card} objects.
      */
     public static void setupNoLandPanel(final JPanel j, final Card[] c) {
         ArrayList<Card> a = new ArrayList<Card>();
         /*
-        for(int i = 0; i < c.length; i++)
-          if(c[i].isCreature() || c[i].isGlobalEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker())
-            a.add(c[i]);
+         * for(int i = 0; i < c.length; i++) if(c[i].isCreature() ||
+         * c[i].isGlobalEnchantment() || c[i].isArtifact() ||
+         * c[i].isPlaneswalker()) a.add(c[i]);
          */
 
         /*
-
-        //creatures or planeswalkers
-        for(int i = 0; i < c.length; i++)
-        	//!artifact because of Memnarch turning planeswalkers into artifacts.
-        	if (c[i].isCreature() || (c[i].isPlaneswalker() && !c[i].isArtifact()))
-        		a.add(c[i]);
-        //(noncreature, non-enchantment,nonland) artifacts
-        for(int i = 0; i < c.length; i++)
-        	if (c[i].isArtifact() && !c[i].isCreature() && !c[i].isLand() && !c[i].isGlobalEnchantment() )
-        		a.add(c[i]);
-        //(noncreature) enchantments
-        for(int i = 0; i < c.length; i++)
-        	if (c[i].isGlobalEnchantment() && !c[i].isCreature())
-        		a.add(c[i]);
-
+         * 
+         * //creatures or planeswalkers for(int i = 0; i < c.length; i++)
+         * //!artifact because of Memnarch turning planeswalkers into artifacts.
+         * if (c[i].isCreature() || (c[i].isPlaneswalker() &&
+         * !c[i].isArtifact())) a.add(c[i]); //(noncreature,
+         * non-enchantment,nonland) artifacts for(int i = 0; i < c.length; i++)
+         * if (c[i].isArtifact() && !c[i].isCreature() && !c[i].isLand() &&
+         * !c[i].isGlobalEnchantment() ) a.add(c[i]); //(noncreature)
+         * enchantments for(int i = 0; i < c.length; i++) if
+         * (c[i].isGlobalEnchantment() && !c[i].isCreature()) a.add(c[i]);
          */
 
         for (int i = 0; i < c.length; i++) {
@@ -267,19 +286,22 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>setupLandPanel.</p>
-     *
-     * @param j a {@link javax.swing.JPanel} object.
-     * @param c an array of {@link forge.Card} objects.
+     * <p>
+     * setupLandPanel.
+     * </p>
+     * 
+     * @param j
+     *            a {@link javax.swing.JPanel} object.
+     * @param c
+     *            an array of {@link forge.Card} objects.
      */
     public static void setupLandPanel(final JPanel j, final Card[] c) {
         ArrayList<Card> a = new ArrayList<Card>();
         for (int i = 0; i < c.length; i++) {
-            if ((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker())
-                    || (c[i].isLand() && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment()))
+            if ((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker()) || (c[i]
+                    .isLand() && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment()))
                     && !AllZone.getGameAction().isAttacheeByMindsDesire(c[i])
-                    || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond")))
-            {
+                    || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond"))) {
                 a.add(c[i]);
             }
         }
@@ -287,54 +309,48 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /*
-    private static void setupPanel(JPanel p, ArrayList<Card> list) {
-      setupPanel(p, list, false);
-    }
+     * private static void setupPanel(JPanel p, ArrayList<Card> list) {
+     * setupPanel(p, list, false); }
      */
 
-    //list holds Card objects
-    //puts local enchanments in the right order
-    //adds "<<" to local enchanments names
+    // list holds Card objects
+    // puts local enchanments in the right order
+    // adds "<<" to local enchanments names
     /**
-     * <p>setupPanel.</p>
-     *
-     * @param p a {@link javax.swing.JPanel} object.
-     * @param list a {@link java.util.ArrayList} object.
-     * @param stack a boolean.
+     * <p>
+     * setupPanel.
+     * </p>
+     * 
+     * @param p
+     *            a {@link javax.swing.JPanel} object.
+     * @param list
+     *            a {@link java.util.ArrayList} object.
+     * @param stack
+     *            a boolean.
      */
     private static void setupPanel(final JPanel p, ArrayList<Card> list, final boolean stack) {
 
         int maxY = 0;
         int maxX = 0;
-        //remove all local enchantments
+        // remove all local enchantments
 
         Card c;
         /*
-        for(int i = 0; i < list.size(); i++)
-        {
-          c = (Card)list.get(i);
-          if(c.isLocalEnchantment())
-            list.remove(i);
-        }
-
-        //add local enchantments to the permanents
-        //put local enchantments "next to" the permanent they are enchanting
-        //the inner for loop is backward so permanents with more than one local enchantments are in the right order
-        Card ca[];
-        for(int i = 0; i < list.size(); i++)
-        {
-          c = (Card)list.get(i);
-          if(c.hasAttachedCards())
-          {
-            ca = c.getAttachedCards();
-            for(int inner = ca.length - 1; 0 <= inner; inner--)
-              list.add(i + 1, ca[inner]);
-          }
-        }
+         * for(int i = 0; i < list.size(); i++) { c = (Card)list.get(i);
+         * if(c.isLocalEnchantment()) list.remove(i); }
+         * 
+         * //add local enchantments to the permanents //put local enchantments
+         * "next to" the permanent they are enchanting //the inner for loop is
+         * backward so permanents with more than one local enchantments are in
+         * the right order Card ca[]; for(int i = 0; i < list.size(); i++) { c =
+         * (Card)list.get(i); if(c.hasAttachedCards()) { ca =
+         * c.getAttachedCards(); for(int inner = ca.length - 1; 0 <= inner;
+         * inner--) list.add(i + 1, ca[inner]); } }
          */
 
         if (stack) {
-            // add all Cards in list to the GUI, add arrows to Local Enchantments
+            // add all Cards in list to the GUI, add arrows to Local
+            // Enchantments
 
             ArrayList<Card> manaPools = getManaPools(list);
             ArrayList<Card> enchantedLands = getEnchantedLands(list);
@@ -361,7 +377,7 @@ public final class GuiDisplayUtil implements NewConstants {
             ArrayList<Card> moxPearl = getMoxen(list, "Mox Pearl");
             ArrayList<Card> moxRuby = getMoxen(list, "Mox Ruby");
             ArrayList<Card> moxSapphire = getMoxen(list, "Mox Sapphire");
-            //ArrayList<Card> moxDiamond = getMoxen(list, "Mox Diamond");
+            // ArrayList<Card> moxDiamond = getMoxen(list, "Mox Diamond");
 
             list = new ArrayList<Card>();
             list.addAll(manaPools);
@@ -389,8 +405,7 @@ public final class GuiDisplayUtil implements NewConstants {
             list.addAll(moxPearl);
             list.addAll(moxRuby);
             list.addAll(moxSapphire);
-            //list.addAll(moxDiamond);
-
+            // list.addAll(moxDiamond);
 
             int atInStack = 0;
 
@@ -415,13 +430,12 @@ public final class GuiDisplayUtil implements NewConstants {
 
                 addPanel = new CardPanel(c);
 
-
                 boolean startANewStack = false;
 
                 if (!isStackable(c)) {
                     startANewStack = true;
                 } else {
-                    String newColor = c.getName(); //CardUtil.getColor(c);
+                    String newColor = c.getName(); // CardUtil.getColor(c);
 
                     if (!newColor.equals(color)) {
                         startANewStack = true;
@@ -433,11 +447,9 @@ public final class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                 }
 
-
                 if (!startANewStack && atInStack == Constant.Runtime.stackSize[0]) {
                     startANewStack = true;
                 }
-
 
                 if (c.isAura() && c.isEnchanting() && !nextEnchanted) {
                     startANewStack = false;
@@ -451,25 +463,23 @@ public final class GuiDisplayUtil implements NewConstants {
                     nextEnchanted = true;
                 }
 
+                // very hacky, but this is to ensure enchantment stacking occurs
+                // correctly when
+                // a land is enchanted, and there are more lands of that same
+                // name
 
-                //very hacky, but this is to ensure enchantment stacking occurs correctly when
-                //a land is enchanted, and there are more lands of that same name
-
-                else if ((prevCard != null && c.isLand() && prevCard.isLand() && prevCard.isEnchanted()
-                        && prevCard.getName().equals(c.getName())))
-                {
+                else if ((prevCard != null && c.isLand() && prevCard.isLand() && prevCard.isEnchanted() && prevCard
+                        .getName().equals(c.getName()))) {
                     startANewStack = true;
                 } else if (prevCard != null && c.isLand() && prevCard.isLand()
-                        && !prevCard.getName().equals(c.getName()))
-                {
+                        && !prevCard.getName().equals(c.getName())) {
                     startANewStack = true;
                 }
 
                 /*
-                if (c.getName().equals("Squirrel Nest")) {
-                    startANewStack = true;
-                    System.out.println("startANewStack: " + startANewStack);
-                }
+                 * if (c.getName().equals("Squirrel Nest")) { startANewStack =
+                 * true; System.out.println("startANewStack: " +
+                 * startANewStack); }
                  */
                 if (c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool) {
                     startANewStack = true;
@@ -484,8 +494,7 @@ public final class GuiDisplayUtil implements NewConstants {
 
                     // Fixed distance if last was a stack, looks a bit nicer
                     if (atInStack > 1) {
-                        x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height)
-                        + marginX;
+                        x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height) + marginX;
                     } else {
                         x = nextXIfNotStacked;
                     }
@@ -507,7 +516,6 @@ public final class GuiDisplayUtil implements NewConstants {
                 addPanel.setLocation(new Point(xLoc, yLoc));
                 addPanel.setSize(addPanel.getPreferredSize());
 
-
                 cards.add(addPanel);
 
                 connectedCards.add((CardPanel) addPanel);
@@ -519,45 +527,51 @@ public final class GuiDisplayUtil implements NewConstants {
             setupConnectedCards(connectedCards);
             connectedCards.clear();
 
-
             for (int i = cards.size() - 1; i >= 0; i--) {
                 JPanel card = cards.get(i);
-                //maxX = Math.max(maxX, card.getLocation().x + card.getSize().width + marginX);
+                // maxX = Math.max(maxX, card.getLocation().x +
+                // card.getSize().width + marginX);
                 maxY = Math.max(maxY, card.getLocation().y + card.getSize().height + marginY);
                 p.add(card);
             }
 
             maxX = nextXIfNotStacked;
 
-            //System.out.println("x:" + maxX + ", y:" + maxY);
-            if (maxX > 0 && maxY > 0) { //p.getSize().width || maxY > p.getSize().height) {
-                //              p.setSize(new Dimension(maxX, maxY));
+            // System.out.println("x:" + maxX + ", y:" + maxY);
+            if (maxX > 0 && maxY > 0) { // p.getSize().width || maxY >
+                                        // p.getSize().height) {
+                // p.setSize(new Dimension(maxX, maxY));
                 p.setPreferredSize(new Dimension(maxX, maxY));
             }
 
         } else {
-            //add all Cards in list to the GUI, add arrows to Local Enchantments
+            // add all Cards in list to the GUI, add arrows to Local
+            // Enchantments
             JPanel addPanel;
             for (int i = 0; i < list.size(); i++) {
                 c = list.get(i);
-                /*if(c.isLocalEnchantment())
-                  addPanel = getCardPanel(c, "<< " +c.getName());
-                else
-                  addPanel = getCardPanel(c);
+                /*
+                 * if(c.isLocalEnchantment()) addPanel = getCardPanel(c, "<< "
+                 * +c.getName()); else addPanel = getCardPanel(c);
                  */
                 addPanel = new CardPanel(c);
 
                 p.add(addPanel);
             }
         }
-    } //setupPanel()
+    } // setupPanel()
 
     /**
-     * <p>setupNoLandPermPanel.</p>
-     *
-     * @param p a {@link javax.swing.JPanel} object.
-     * @param list a {@link java.util.ArrayList} object.
-     * @param stack a boolean.
+     * <p>
+     * setupNoLandPermPanel.
+     * </p>
+     * 
+     * @param p
+     *            a {@link javax.swing.JPanel} object.
+     * @param list
+     *            a {@link java.util.ArrayList} object.
+     * @param stack
+     *            a boolean.
      */
     private static void setupNoLandPermPanel(final JPanel p, ArrayList<Card> list, final boolean stack) {
 
@@ -567,25 +581,26 @@ public final class GuiDisplayUtil implements NewConstants {
         Card c;
 
         if (stack) {
-            // add all Cards in list to the GUI, add arrows to Local Enchantments
+            // add all Cards in list to the GUI, add arrows to Local
+            // Enchantments
 
             ArrayList<Card> planeswalkers = getPlaneswalkers(list);
-            //this will also fetch the equipment and/or enchantment
+            // this will also fetch the equipment and/or enchantment
             ArrayList<Card> equippedEnchantedCreatures = getEquippedEnchantedCreatures(list);
             ArrayList<Card> nonTokenCreatures = getNonTokenCreatures(list);
             ArrayList<Card> tokenCreatures = getTokenCreatures(list);
 
-            //sort tokenCreatures by name (TODO fix the warning message somehow)
+            // sort tokenCreatures by name (TODO fix the warning message
+            // somehow)
             Collections.sort(tokenCreatures, new Comparator<Card>() {
-                public int compare(Card c1, Card c2) {
+                public int compare(final Card c1, final Card c2) {
                     return c1.getName().compareTo(c2.getName());
                 }
             });
 
             ArrayList<Card> artifacts = getNonCreatureArtifacts(list);
             ArrayList<Card> enchantments = getGlobalEnchantments(list);
-            //ArrayList<Card> nonBasics = getNonBasics(list);
-
+            // ArrayList<Card> nonBasics = getNonBasics(list);
 
             list = new ArrayList<Card>();
             list.addAll(planeswalkers);
@@ -594,7 +609,6 @@ public final class GuiDisplayUtil implements NewConstants {
             list.addAll(tokenCreatures);
             list.addAll(artifacts);
             list.addAll(enchantments);
-
 
             int atInStack = 0;
 
@@ -610,7 +624,6 @@ public final class GuiDisplayUtil implements NewConstants {
 
             ArrayList<CardPanel> connectedCards = new ArrayList<CardPanel>();
 
-
             boolean nextEquippedEnchanted = false;
             int nextXIfNotStacked = 0;
             Card prevCard = null;
@@ -624,14 +637,13 @@ public final class GuiDisplayUtil implements NewConstants {
                 if (!isStackable(c)) {
                     startANewStack = true;
                 } else {
-                    String newColor = c.getName(); //CardUtil.getColor(c);
+                    String newColor = c.getName(); // CardUtil.getColor(c);
 
                     if (!newColor.equals(color)) {
                         startANewStack = true;
                         color = newColor;
                     }
                 }
-
 
                 if (i == 0) {
                     startANewStack = false;
@@ -641,10 +653,7 @@ public final class GuiDisplayUtil implements NewConstants {
                     startANewStack = true;
                 }
 
-
-                if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())
-                        && !nextEquippedEnchanted)
-                {
+                if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting()) && !nextEquippedEnchanted) {
                     startANewStack = false;
                 } else if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())) {
                     startANewStack = true;
@@ -655,22 +664,20 @@ public final class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                     nextEquippedEnchanted = true;
                 }
-                //very hacky, but this is to ensure equipment stacking occurs correctly when a token
-                //is equipped/enchanted, and there are more tokens of that same name
+                // very hacky, but this is to ensure equipment stacking occurs
+                // correctly when a token
+                // is equipped/enchanted, and there are more tokens of that same
+                // name
                 else if ((prevCard != null && c.isCreature() && prevCard.isCreature()
-                        && (prevCard.isEquipped() || prevCard.isEnchanted()) && prevCard.getName().equals(
-                                c.getName())))
-                {
+                        && (prevCard.isEquipped() || prevCard.isEnchanted()) && prevCard.getName().equals(c.getName()))) {
                     startANewStack = true;
                 } else if (prevCard != null && c.isCreature() && prevCard.isCreature()
-                        && !prevCard.getName().equals(c.getName()))
-                {
+                        && !prevCard.getName().equals(c.getName())) {
                     startANewStack = true;
                 }
 
                 if (((c.isAura() && c.isEnchanting()) || (c.isEquipment() && c.isEquipping())) && prevCard != null
-                        && prevCard.isPlaneswalker())
-                {
+                        && prevCard.isPlaneswalker()) {
                     startANewStack = true;
                 }
 
@@ -680,8 +687,7 @@ public final class GuiDisplayUtil implements NewConstants {
 
                     // Fixed distance if last was a stack, looks a bit nicer
                     if (atInStack > 1) {
-                        x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height)
-                        + marginX;
+                        x += Math.max(addPanel.getPreferredSize().width, addPanel.getPreferredSize().height) + marginX;
                     } else {
                         x = nextXIfNotStacked;
                     }
@@ -703,7 +709,6 @@ public final class GuiDisplayUtil implements NewConstants {
                 addPanel.setLocation(new Point(xLoc, yLoc));
                 addPanel.setSize(addPanel.getPreferredSize());
 
-
                 cards.add(addPanel);
 
                 connectedCards.add((CardPanel) addPanel);
@@ -715,17 +720,18 @@ public final class GuiDisplayUtil implements NewConstants {
             setupConnectedCards(connectedCards);
             connectedCards.clear();
 
-
             for (int i = cards.size() - 1; i >= 0; i--) {
                 JPanel card = cards.get(i);
-                //maxX = Math.max(maxX, card.getLocation().x + card.getSize().width + marginX);
+                // maxX = Math.max(maxX, card.getLocation().x +
+                // card.getSize().width + marginX);
                 maxY = Math.max(maxY, card.getLocation().y + card.getSize().height + marginY);
                 p.add(card);
             }
 
             maxX = nextXIfNotStacked;
 
-            if (maxX > 0 && maxY > 0) { //p.getSize().width || maxY > p.getSize().height) {
+            if (maxX > 0 && maxY > 0) { // p.getSize().width || maxY >
+                                        // p.getSize().height) {
                 p.setPreferredSize(new Dimension(maxX, maxY));
             }
 
@@ -738,12 +744,15 @@ public final class GuiDisplayUtil implements NewConstants {
                 p.add(addPanel);
             }
         }
-    } //setupPanel()
+    } // setupPanel()
 
     /**
-     * <p>getPlaneswalkers.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getPlaneswalkers.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getPlaneswalkers(final ArrayList<Card> cards) {
@@ -757,9 +766,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getEquippedEnchantedCreatures.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getEquippedEnchantedCreatures.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getEquippedEnchantedCreatures(final ArrayList<Card> cards) {
@@ -780,11 +792,13 @@ public final class GuiDisplayUtil implements NewConstants {
         return ret;
     }
 
-
     /**
-     * <p>getNonTokenCreatures.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getNonTokenCreatures.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getNonTokenCreatures(final ArrayList<Card> cards) {
@@ -798,9 +812,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getTokenCreatures.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getTokenCreatures.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getTokenCreatures(final ArrayList<Card> cards) {
@@ -814,10 +831,14 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getTokenCreatures.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
-     * @param tokenName a {@link java.lang.String} object.
+     * <p>
+     * getTokenCreatures.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
+     * @param tokenName
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getTokenCreatures(final ArrayList<Card> cards, final String tokenName) {
@@ -832,10 +853,14 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getMoxen.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
-     * @param moxName a {@link java.lang.String} object.
+     * <p>
+     * getMoxen.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
+     * @param moxName
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getMoxen(final ArrayList<Card> cards, final String moxName) {
@@ -850,9 +875,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getNonCreatureArtifacts.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getNonCreatureArtifacts.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getNonCreatureArtifacts(final ArrayList<Card> cards) {
@@ -860,10 +888,8 @@ public final class GuiDisplayUtil implements NewConstants {
         for (Card c : cards) {
             String name = c.getName();
             if (c.isArtifact() && !c.isCreature() && !c.isLand() && !c.isGlobalEnchantment()
-                    && !(c.isEquipment() && c.isEquipping()) && !name.equals("Mox Emerald")
-                    && !name.equals("Mox Jet") && !name.equals("Mox Pearl") && !name.equals("Mox Ruby")
-                    && !name.equals("Mox Sapphire"))
-            {
+                    && !(c.isEquipment() && c.isEquipping()) && !name.equals("Mox Emerald") && !name.equals("Mox Jet")
+                    && !name.equals("Mox Pearl") && !name.equals("Mox Ruby") && !name.equals("Mox Sapphire")) {
                 ret.add(c);
             }
         }
@@ -871,9 +897,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getGlobalEnchantments.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getGlobalEnchantments.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getGlobalEnchantments(final ArrayList<Card> cards) {
@@ -887,10 +916,14 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getCard.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
-     * @param name a {@link java.lang.String} object.
+     * <p>
+     * getCard.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
+     * @param name
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getCard(final ArrayList<Card> cards, final String name) {
@@ -904,9 +937,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getEnchantedLands.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getEnchantedLands.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getEnchantedLands(final ArrayList<Card> cards) {
@@ -921,12 +957,15 @@ public final class GuiDisplayUtil implements NewConstants {
         return ret;
     }
 
-
     /**
-     * <p>getBasics.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
-     * @param color a {@link java.lang.String} object.
+     * <p>
+     * getBasics.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
+     * @param color
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getBasics(final ArrayList<Card> cards, final String color) {
@@ -936,7 +975,7 @@ public final class GuiDisplayUtil implements NewConstants {
             String name = c.getName();
 
             if (c.isEnchanted()) {
-                //do nothing
+                // do nothing
             }
 
             else if (name.equals("Swamp") || name.equals("Bog")) {
@@ -969,9 +1008,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getNonBasics.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getNonBasics.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getNonBasics(final ArrayList<Card> cards) {
@@ -988,9 +1030,8 @@ public final class GuiDisplayUtil implements NewConstants {
                         || name.equals("Underwater") || name.equals("Badlands") || name.equals("Bayou")
                         || name.equals("Plateau") || name.equals("Scrubland") || name.equals("Savannah")
                         || name.equals("Taiga") || name.equals("Tropical Island") || name.equals("Tundra")
-                        || name.equals("Underground Sea") || name.equals("Volcanic Island")
-                        || name.startsWith("Mox") || c instanceof ManaPool)
-                {
+                        || name.equals("Underground Sea") || name.equals("Volcanic Island") || name.startsWith("Mox")
+                        || c instanceof ManaPool) {
                     // do nothing.
                 } else {
                     ret.add(c);
@@ -1002,10 +1043,14 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getNonBasicLand.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
-     * @param landName a {@link java.lang.String} object.
+     * <p>
+     * getNonBasicLand.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
+     * @param landName
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getNonBasicLand(final ArrayList<Card> cards, final String landName) {
@@ -1021,9 +1066,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>getManaPools.</p>
-     *
-     * @param cards a {@link java.util.ArrayList} object.
+     * <p>
+     * getManaPools.
+     * </p>
+     * 
+     * @param cards
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> getManaPools(final ArrayList<Card> cards) {
@@ -1037,9 +1085,12 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>isStackable.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * isStackable.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
     public static boolean isStackable(final Card c) {
@@ -1047,34 +1098,41 @@ public final class GuiDisplayUtil implements NewConstants {
                 || (c.isLand() && c.isEnchanted()) || (c.isAura() && c.isEnchanting())
                 || (c.isToken() && CardFactoryUtil.multipleControlled(c))
                 || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
-                || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow()))
-        {
+                || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow())) {
             return true;
         }
 
         return false;
     }
 
-    //~
+    // ~
     /**
-     * <p>setupConnectedCards.</p>
-     *
-     * @param connectedCards a {@link java.util.ArrayList} object.
+     * <p>
+     * setupConnectedCards.
+     * </p>
+     * 
+     * @param connectedCards
+     *            a {@link java.util.ArrayList} object.
      */
     public static void setupConnectedCards(final ArrayList<CardPanel> connectedCards) {
         for (int i = connectedCards.size() - 1; i > 0; i--) {
-            //System.out.println("We should have a stack");
+            // System.out.println("We should have a stack");
             CardPanel cp = connectedCards.get(i);
             cp.connectedCard = connectedCards.get(i - 1);
         }
     }
-    //~
+
+    // ~
 
     /**
-     * <p>setupPlayZone.</p>
-     *
-     * @param p a {@link arcane.ui.PlayArea} object.
-     * @param c an array of {@link forge.Card} objects.
+     * <p>
+     * setupPlayZone.
+     * </p>
+     * 
+     * @param p
+     *            a {@link arcane.ui.PlayArea} object.
+     * @param c
+     *            an array of {@link forge.Card} objects.
      */
     public static void setupPlayZone(final PlayArea p, final Card[] c) {
         List<Card> tmp, diff;
@@ -1145,7 +1203,9 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>updateGUI.</p>
+     * <p>
+     * updateGUI.
+     * </p>
      */
     public static void updateGUI() {
         AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
@@ -1156,7 +1216,9 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devSetupGameState.</p>
+     * <p>
+     * devSetupGameState.
+     * </p>
      */
     public static void devSetupGameState() {
         String t_humanLife = "-1";
@@ -1384,10 +1446,14 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devProcessCardsForZone.</p>
-     *
-     * @param data an array of {@link java.lang.String} objects.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * devProcessCardsForZone.
+     * </p>
+     * 
+     * @param data
+     *            an array of {@link java.lang.String} objects.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList devProcessCardsForZone(final String[] data, final Player player) {
@@ -1402,33 +1468,32 @@ public final class GuiDisplayUtil implements NewConstants {
                 if (info.startsWith("Set:")) {
                     c.setCurSetCode(info.substring(info.indexOf(':') + 1));
                     hasSetCurSet = true;
-                }
-                else if (info.equalsIgnoreCase("Tapped:True")) {
+                } else if (info.equalsIgnoreCase("Tapped:True")) {
                     c.tap();
-                }
-                else if (info.startsWith("Counters:")) {
+                } else if (info.startsWith("Counters:")) {
                     String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
                     for (String counter : counterStrings) {
                         c.addCounter(Counters.valueOf(counter), 1);
                     }
-                }
-                else if (info.equalsIgnoreCase("SummonSick:True")) {
+                } else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
-                }
-                else if (info.equalsIgnoreCase("Morphed:True")) {
+                } else if (info.equalsIgnoreCase("Morphed:True")) {
                     if (!c.getCanMorph()) {
                         System.out.println("Setup game state - Can't morph a card without the morph keyword!");
                         continue;
                     }
                     c.setIsFaceDown(true);
                     c.setManaCost("");
-                    c.setColor(new ArrayList<Card_Color>()); //remove all colors
+                    c.setColor(new ArrayList<Card_Color>()); // remove all
+                                                             // colors
                     c.addColor("0");
                     c.setBaseAttack(2);
                     c.setBaseDefense(2);
                     c.comesIntoPlay();
-                    c.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
-                    c.setType(new ArrayList<String>()); //remove all types
+                    c.setIntrinsicKeyword(new ArrayList<String>()); // remove
+                                                                    // all
+                                                                    // keywords
+                    c.setType(new ArrayList<String>()); // remove all types
                     c.addType("Creature");
                 }
             }
@@ -1444,8 +1509,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeTutor.</p>
-     *
+     * <p>
+     * devModeTutor.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public static void devModeTutor() {
@@ -1460,8 +1527,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeAddCounter.</p>
-     *
+     * <p>
+     * devModeAddCounter.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
@@ -1476,7 +1545,7 @@ public final class GuiDisplayUtil implements NewConstants {
                 return;
             } else {
                 Integer[] integers = new Integer[99];
-                for(int j = 0; j < 99; j++) {
+                for (int j = 0; j < 99; j++) {
                     integers[j] = Integer.valueOf(j);
                 }
                 Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
@@ -1490,8 +1559,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeTapPerm.</p>
-     *
+     * <p>
+     * devModeTapPerm.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
@@ -1506,8 +1577,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeUntapPerm.</p>
-     *
+     * <p>
+     * devModeUntapPerm.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
@@ -1522,8 +1595,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeUnlimitedLand.</p>
-     *
+     * <p>
+     * devModeUnlimitedLand.
+     * </p>
+     * 
      * @since 1.0.16
      */
     public static void devModeUnlimitedLand() {
@@ -1531,8 +1606,10 @@ public final class GuiDisplayUtil implements NewConstants {
     }
 
     /**
-     * <p>devModeSetLife.</p>
-     *
+     * <p>
+     * devModeSetLife.
+     * </p>
+     * 
      * @since 1.1.3
      */
     public static void devModeSetLife() {
@@ -1555,4 +1632,4 @@ public final class GuiDisplayUtil implements NewConstants {
         }
     }
 
-} //end class GuiDisplayUtil
+} // end class GuiDisplayUtil

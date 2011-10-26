@@ -1,5 +1,7 @@
 package forge.card.abilityFactory;
 
+import java.util.HashMap;
+
 import forge.AllZone;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -8,35 +10,33 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
-import java.util.HashMap;
-
 /**
- * Created by IntelliJ IDEA.
- * User: Administrator
- * Date: 5/18/11
- * Time: 8:53 PM
- * To change this template use File | Settings | File Templates.
- *
+ * Created by IntelliJ IDEA. User: Administrator Date: 5/18/11 Time: 8:53 PM To
+ * change this template use File | Settings | File Templates.
+ * 
  * @author Forge
  * @version $Id$
  */
 public class AbilityFactory_DelayedTrigger {
     /** Constant <code>tempCreator</code> */
     private static AbilityFactory tempCreator = new AbilityFactory();
-    
+
     /**
-     * <p>getAbility.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getAbility.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
     public static SpellAbility getAbility(final AbilityFactory af) {
         final SpellAbility ability = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-			private static final long serialVersionUID = -7502962478028160305L;
+            private static final long serialVersionUID = -7502962478028160305L;
 
-			@Override
-			public boolean canPlayAI() {
+            @Override
+            public boolean canPlayAI() {
                 return delTrigCanPlayAI(af, this);
             }
 
@@ -51,7 +51,7 @@ public class AbilityFactory_DelayedTrigger {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return doTriggerAI(af, this, mandatory);
             }
         };
@@ -59,17 +59,20 @@ public class AbilityFactory_DelayedTrigger {
     }
 
     /**
-     * <p>getSpell.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getSpell.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
     public static SpellAbility getSpell(final AbilityFactory af) {
         final SpellAbility spell = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-			private static final long serialVersionUID = -6981410664429186904L;
+            private static final long serialVersionUID = -6981410664429186904L;
 
-			@Override
+            @Override
             public boolean canPlayAI() {
                 return delTrigCanPlayAI(af, this);
             }
@@ -88,9 +91,12 @@ public class AbilityFactory_DelayedTrigger {
     }
 
     /**
-     * <p>getDrawback.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * getDrawback.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.Ability_Sub} object.
      */
     public static Ability_Sub getDrawback(final AbilityFactory AF) {
@@ -103,7 +109,7 @@ public class AbilityFactory_DelayedTrigger {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return doTriggerAI(AF, this, mandatory);
             }
 
@@ -117,10 +123,14 @@ public class AbilityFactory_DelayedTrigger {
     }
 
     /**
-     * <p>doChkAI_Drawback.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param SA a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doChkAI_Drawback.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean doChkAI_Drawback(final AbilityFactory AF, final SpellAbility SA) {
@@ -136,13 +146,17 @@ public class AbilityFactory_DelayedTrigger {
     }
 
     /**
-     * <p>doTriggerAI.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param SA a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doTriggerAI.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean doTriggerAI(final AbilityFactory AF, final SpellAbility SA, boolean mandatory) {
+    private static boolean doTriggerAI(final AbilityFactory AF, final SpellAbility SA, final boolean mandatory) {
         HashMap<String, String> params = AF.getMapParams();
         String svarName = params.get("Execute");
         SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName), AF.getHostCard());
@@ -153,12 +167,16 @@ public class AbilityFactory_DelayedTrigger {
             return trigsa.doTrigger(!params.get("OptionalDecider").equals("You"));
         }
     }
-    
+
     /**
-     * <p>delTrigCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * delTrigCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean delTrigCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -168,51 +186,59 @@ public class AbilityFactory_DelayedTrigger {
 
         return trigsa.canPlayAI();
     }
-    
+
     /**
-     * <p>delTrigStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * delTrigStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static String delTrigStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String delTrigStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> mapParams = af.getMapParams();
-        
+
         StringBuilder sb = new StringBuilder();
-        
-        if (sa instanceof Ability_Sub)
-        	sb.append(" ");
-        else
-        	sb.append(sa.getSourceCard()).append(" - ");
-            
-        
-        if(mapParams.containsKey("SpellDescription")) {
-        	sb.append(mapParams.get("SpellDescription"));
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
         }
-        else if(mapParams.containsKey("TriggerDescription")) {
+
+        if (mapParams.containsKey("SpellDescription")) {
+            sb.append(mapParams.get("SpellDescription"));
+        } else if (mapParams.containsKey("TriggerDescription")) {
             sb.append(mapParams.get("TriggerDescription"));
         }
-        
+
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();
-        
+
     }
 
     /**
-     * <p>doResolve.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param SA a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doResolve.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param SA
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void doResolve(AbilityFactory AF, SpellAbility SA) {
+    private static void doResolve(final AbilityFactory AF, final SpellAbility SA) {
         HashMap<String, String> mapParams = AF.getMapParams();
 
-        if (mapParams.containsKey("Cost"))
+        if (mapParams.containsKey("Cost")) {
             mapParams.remove("Cost");
+        }
 
         if (mapParams.containsKey("SpellDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));

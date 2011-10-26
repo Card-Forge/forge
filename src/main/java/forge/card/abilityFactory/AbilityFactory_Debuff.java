@@ -1,21 +1,37 @@
 package forge.card.abilityFactory;
 
-import forge.*;
-import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
-import forge.card.spellability.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CombatUtil;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Constant.Zone;
+import forge.MyRandom;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.Target;
+
 /**
- * <p>AbilityFactory_Debuff class.</p>
- *
+ * <p>
+ * AbilityFactory_Debuff class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -24,14 +40,18 @@ public final class AbilityFactory_Debuff {
     private AbilityFactory_Debuff() {
         throw new AssertionError();
     }
+
     // *************************************************************************
     // ***************************** Debuff ************************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityDebuff.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityDebuff.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDebuff(final AbilityFactory af) {
@@ -63,9 +83,12 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>createSpellDebuff.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellDebuff.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellDebuff(final AbilityFactory af) {
@@ -92,9 +115,12 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>createDrawbackDebuff.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackDebuff.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDebuff(final AbilityFactory af) {
@@ -126,9 +152,12 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>getKeywords.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
+     * <p>
+     * getKeywords.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
      * @return a {@link java.util.ArrayList} object.
      */
     private static ArrayList<String> getKeywords(final HashMap<String, String> params) {
@@ -140,10 +169,14 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String debuffStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -172,8 +205,7 @@ public final class AbilityFactory_Debuff {
                 Card tgtC = it.next();
                 if (tgtC.isFaceDown()) {
                     sb.append("Morph");
-                }
-                else {
+                } else {
                     sb.append(tgtC);
                 }
 
@@ -183,12 +215,10 @@ public final class AbilityFactory_Debuff {
             }
             sb.append(" loses ");
             /*
-               Iterator<String> kwit = kws.iterator();
-               while(it.hasNext()) {
-                   String kw = kwit.next();
-                   sb.append(kw);
-                   if(it.hasNext()) sb.append(" ");
-               }*/
+             * Iterator<String> kwit = kws.iterator(); while(it.hasNext()) {
+             * String kw = kwit.next(); sb.append(kw); if(it.hasNext())
+             * sb.append(" "); }
+             */
             sb.append(kws);
             if (!params.containsKey("Permanent")) {
                 sb.append(" until end of turn");
@@ -205,10 +235,14 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -238,7 +272,8 @@ public final class AbilityFactory_Debuff {
 
         // Phase Restrictions
         if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_Begin)) {
-            // Instant-speed pumps should not be cast outside of combat when the stack is empty
+            // Instant-speed pumps should not be cast outside of combat when the
+            // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
                 return false;
             }
@@ -246,7 +281,7 @@ public final class AbilityFactory_Debuff {
 
         int activations = restrict.getNumberTurnActivations();
         int sacActivations = restrict.getActivationNumberSacrifice();
-        //don't risk sacrificing a creature just to pump it
+        // don't risk sacrificing a creature just to pump it
         if (sacActivations != -1 && activations >= (sacActivations - 1)) {
             return false;
         }
@@ -264,36 +299,46 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean debuffDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
-            //TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
+            // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
+            // here?
         } else {
             return debuffTgtAI(af, sa, getKeywords(params), false);
         }
 
         return true;
-    } //debuffDrawbackAI()
+    } // debuffDrawbackAI()
 
     /**
-     * <p>debuffTgtAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param kws a {@link java.util.ArrayList} object.
-     * @param mandatory a boolean.
+     * <p>
+     * debuffTgtAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param kws
+     *            a {@link java.util.ArrayList} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa,
-            final ArrayList<String> kws, final boolean mandatory)
-    {
-        //this would be for evasive things like Flying, Unblockable, etc
+    private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
+            final boolean mandatory) {
+        // this would be for evasive things like Flying, Unblockable, etc
         if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
             return false;
         }
@@ -303,11 +348,12 @@ public final class AbilityFactory_Debuff {
         CardList list = getCurseCreatures(af, sa, kws);
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
-        //several uses here:
-        //1. make human creatures lose evasion when they are attacking
-        //2. make human creatures lose Flying/Horsemanship/Shadow/etc. when Comp is attacking
-        //3. remove Indestructible keyword so it can be destroyed?
-        //3a. remove Persist?
+        // several uses here:
+        // 1. make human creatures lose evasion when they are attacking
+        // 2. make human creatures lose Flying/Horsemanship/Shadow/etc. when
+        // Comp is attacking
+        // 3. remove Indestructible keyword so it can be destroyed?
+        // 3a. remove Persist?
 
         if (list.isEmpty()) {
             return mandatory && debuffMandatoryTarget(af, sa, mandatory);
@@ -315,7 +361,7 @@ public final class AbilityFactory_Debuff {
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
-            //boolean goodt = false;
+            // boolean goodt = false;
 
             if (list.isEmpty()) {
                 if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0) {
@@ -337,19 +383,23 @@ public final class AbilityFactory_Debuff {
         }
 
         return true;
-    } //pumpTgtAI()
+    } // pumpTgtAI()
 
     /**
-     * <p>getCurseCreatures.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param kws a {@link java.util.ArrayList} object.
+     * <p>
+     * getCurseCreatures.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param kws
+     *            a {@link java.util.ArrayList} object.
      * @return a {@link forge.CardList} object.
      */
     private static CardList getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
-            final ArrayList<String> kws)
-    {
+            final ArrayList<String> kws) {
         Card hostCard = af.getHostCard();
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = list.getTargetableCards(hostCard);
@@ -357,25 +407,29 @@ public final class AbilityFactory_Debuff {
         if (!list.isEmpty()) {
             list = list.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
-                    return c.hasAnyKeyword(kws);    // don't add duplicate negative keywords
+                    return c.hasAnyKeyword(kws); // don't add duplicate negative
+                                                 // keywords
                 }
             });
         }
 
         return list;
-    } //getCurseCreatures()
+    } // getCurseCreatures()
 
     /**
-     * <p>debuffMandatoryTarget.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * debuffMandatoryTarget.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa,
-            final boolean mandatory)
-    {
+    private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -416,7 +470,8 @@ public final class AbilityFactory_Debuff {
                 break;
             }
 
-            //TODO - if forced targeting, just pick something without the given keyword
+            // TODO - if forced targeting, just pick something without the given
+            // keyword
             Card c;
             if (forced.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.AI_getWorstCreature(forced);
@@ -435,14 +490,19 @@ public final class AbilityFactory_Debuff {
         }
 
         return true;
-    } //pumpMandatoryTarget()
+    } // pumpMandatoryTarget()
 
     /**
-     * <p>debuffTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * debuffTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean debuffTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -466,10 +526,14 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void debuffResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -511,17 +575,19 @@ public final class AbilityFactory_Debuff {
             }
         }
 
-    } //debuffResolve
-
+    } // debuffResolve
 
     // *************************************************************************
     // ***************************** DebuffAll *********************************
     // *************************************************************************
 
     /**
-     * <p>createAbilityDebuffAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityDebuffAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -549,15 +615,18 @@ public final class AbilityFactory_Debuff {
                 return debuffAllTriggerAI(af, this, mandatory);
             }
 
-        }; //SpellAbility
+        }; // SpellAbility
 
         return abDebuffAll;
     }
 
     /**
-     * <p>createSpellDebuffAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellDebuffAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -579,15 +648,18 @@ public final class AbilityFactory_Debuff {
             public void resolve() {
                 debuffAllResolve(af, this);
             }
-        }; //SpellAbility
+        }; // SpellAbility
 
         return spDebuffAll;
     }
 
     /**
-     * <p>createDrawbackDebuffAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackDebuffAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
@@ -614,26 +686,33 @@ public final class AbilityFactory_Debuff {
             public boolean doTrigger(final boolean mandatory) {
                 return debuffAllTriggerAI(af, this, mandatory);
             }
-        }; //SpellAbility
+        }; // SpellAbility
 
         return dbDebuffAll;
     }
 
     /**
-     * <p>debuffAllCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean debuffAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         String valid = "";
         Random r = MyRandom.random;
-        //final Card source = sa.getSourceCard();
+        // final Card source = sa.getSourceCard();
         Card hostCard = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();
 
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); //to prevent runaway activations
+        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
+                                                                                        // prevent
+                                                                                        // runaway
+                                                                                        // activations
 
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
@@ -644,16 +723,16 @@ public final class AbilityFactory_Debuff {
         CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         human = human.getValidCards(valid, hostCard.getController(), hostCard);
 
-        //TODO - add blocking situations here also
+        // TODO - add blocking situations here also
 
-        //only count creatures that can attack
+        // only count creatures that can attack
         human = human.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
 
-        //don't use DebuffAll after Combat_Begin until AI is improved
+        // don't use DebuffAll after Combat_Begin until AI is improved
         if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin)) {
             return false;
         }
@@ -663,13 +742,17 @@ public final class AbilityFactory_Debuff {
         }
 
         return (r.nextFloat() < .6667) && chance;
-    } //debuffAllCanPlayAI()
+    } // debuffAllCanPlayAI()
 
     /**
-     * <p>debuffAllResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffAllResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void debuffAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -709,14 +792,19 @@ public final class AbilityFactory_Debuff {
                 });
             }
         }
-    } //debuffAllResolve()
+    } // debuffAllResolve()
 
     /**
-     * <p>debuffAllTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * debuffAllTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean debuffAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -728,10 +816,14 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffAllChkDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffAllChkDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean debuffAllChkDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -739,10 +831,14 @@ public final class AbilityFactory_Debuff {
     }
 
     /**
-     * <p>debuffAllStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * debuffAllStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String debuffAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -770,6 +866,6 @@ public final class AbilityFactory_Debuff {
         }
 
         return sb.toString();
-    } //debuffAllStackDescription()
+    } // debuffAllStackDescription()
 
-} //end class AbilityFactory_Debuff
+} // end class AbilityFactory_Debuff

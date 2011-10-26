@@ -1,116 +1,165 @@
 package forge.card.cardFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
-import forge.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.CardUtil;
+import forge.Command;
+import forge.CommandReturn;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Constant.Zone;
+import forge.Counters;
+import forge.GameActionUtil;
+import forge.MyRandom;
+import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.spellability.*;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
-import forge.Constant.Zone;
-
-import javax.swing.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 /**
- * <p>CardFactory_Creatures class.</p>
- *
+ * <p>
+ * CardFactory_Creatures class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class CardFactory_Creatures {
 
     /**
-     * <p>hasKeyword.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param k a {@link java.lang.String} object.
+     * <p>
+     * hasKeyword.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param k
+     *            a {@link java.lang.String} object.
      * @return a int.
      */
     private static final int hasKeyword(Card c, String k) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
-            if (a.get(i).toString().startsWith(k)) return i;
+            if (a.get(i).toString().startsWith(k))
+                return i;
 
         return -1;
     }
 
     /**
-     * <p>shouldCycle.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * shouldCycle.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public static int shouldCycle(Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
-            if (a.get(i).toString().startsWith("Cycling")) return i;
+            if (a.get(i).toString().startsWith("Cycling"))
+                return i;
 
         return -1;
     }
 
     /**
-     * <p>shouldTypeCycle.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * shouldTypeCycle.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public static int shouldTypeCycle(Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
-            if (a.get(i).toString().startsWith("TypeCycling")) return i;
+            if (a.get(i).toString().startsWith("TypeCycling"))
+                return i;
 
         return -1;
     }
 
     /**
-     * <p>shouldTransmute.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * shouldTransmute.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public static int shouldTransmute(Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
-            if (a.get(i).toString().startsWith("Transmute")) return i;
+            if (a.get(i).toString().startsWith("Transmute"))
+                return i;
 
         return -1;
     }
 
     /**
-     * <p>shouldSoulshift.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * shouldSoulshift.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public static int shouldSoulshift(Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
-            if (a.get(i).toString().startsWith("Soulshift")) return i;
+            if (a.get(i).toString().startsWith("Soulshift"))
+                return i;
 
         return -1;
     }
 
-
     /**
-     * <p>getCard.</p>
-     *
-     * @param card a {@link forge.Card} object.
-     * @param cardName a {@link java.lang.String} object.
-     * @param owner a {@link forge.Player} object.
-     * @param cf a {@link forge.card.cardFactory.CardFactoryInterface} object.
+     * <p>
+     * getCard.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @param cardName
+     *            a {@link java.lang.String} object.
+     * @param cf
+     *            a {@link forge.card.cardFactory.CardFactoryInterface} object.
      * @return a {@link forge.Card} object.
      */
     public static Card getCard(final Card card, final String cardName, CardFactoryInterface cf) {
 
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         if (cardName.equals("Force of Savagery")) {
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = 1603238129819160467L;
@@ -122,17 +171,17 @@ public class CardFactory_Creatures {
                     return list.containsName("Glorious Anthem") || list.containsName("Gaea's Anthem");
                 }
             };
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(spell);
         }
-        //*************** END ************ END **************************
+        // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Gilder Bairn")) {
             Cost abCost = new Cost("2 GU Untap", cardName, true);
-            Target tgt = new Target(card, "Select target permanent.", new String[]{"Permanent"});
+            Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
             final Ability_Activated a1 = new Ability_Activated(card, abCost, tgt) {
                 private static final long serialVersionUID = -1847685865277129366L;
 
@@ -140,11 +189,13 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = getTargetCard();
 
-                    if (c.sumAllCounters() == 0) return;
+                    if (c.sumAllCounters() == 0)
+                        return;
                     else if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        //zerker clean up:
+                        // zerker clean up:
                         for (Counters c_1 : Counters.values())
-                            if (c.getCounters(c_1) > 0) c.addCounter(c_1, c.getCounters(c_1));
+                            if (c.getCounters(c_1) > 0)
+                                c.addCounter(c_1, c.getCounters(c_1));
                     }
                 }
 
@@ -157,7 +208,7 @@ public class CardFactory_Creatures {
                         }
                     });
                     perms.shuffle();
-                    setTargetCard(perms.get(0)); //TODO: improve this.
+                    setTargetCard(perms.get(0)); // TODO: improve this.
                 }
 
                 @Override
@@ -170,14 +221,14 @@ public class CardFactory_Creatures {
                     });
                     return perms.size() > 0;
                 }
-            };//SpellAbility
+            };// SpellAbility
 
             card.addSpellAbility(a1);
-            a1.setDescription(abCost + "For each counter on target permanent, put another of those counters on that permanent.");
-        }//*************** END ************ END **************************
+            a1.setDescription(abCost
+                    + "For each counter on target permanent, put another of those counters on that permanent.");
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Primal Plasma") || cardName.equals("Primal Clay")) {
             card.setBaseAttack(3);
             card.setBaseDefense(3);
@@ -185,11 +236,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String choice = "";
-                    String choices[] = {"3/3", "2/2 with flying", "1/6 with defender"};
+                    String choices[] = { "3/3", "2/2 with flying", "1/6 with defender" };
 
                     if (card.getController().isHuman()) {
                         choice = GuiUtils.getChoice("Choose one", choices);
-                    } else choice = choices[MyRandom.random.nextInt(3)];
+                    } else
+                        choice = choices[MyRandom.random.nextInt(3)];
 
                     if (choice.equals("2/2 with flying")) {
                         card.setBaseAttack(2);
@@ -203,8 +255,8 @@ public class CardFactory_Creatures {
                         card.addType("Wall");
                     }
 
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 8957338395786245312L;
 
@@ -218,10 +270,9 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Drekavac")) {
             final Input discard = new Input() {
                 private static final long serialVersionUID = -6392468000100283596L;
@@ -245,7 +296,7 @@ public class CardFactory_Creatures {
                     AllZone.getGameAction().sacrifice(card);
                     stop();
                 }
-            };//Input
+            };// Input
 
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -253,7 +304,8 @@ public class CardFactory_Creatures {
                     if (card.getController().isHuman()) {
                         if (AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size() == 0)
                             AllZone.getGameAction().sacrifice(card);
-                        else AllZone.getInputControl().setInput(discard);
+                        else
+                            AllZone.getInputControl().setInput(discard);
                     } else {
                         CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                         list = list.filter(new CardListFilter() {
@@ -262,16 +314,17 @@ public class CardFactory_Creatures {
                             }
                         });
                         list.get(0).getController().discard(list.get(0), this);
-                    }//else
-                }//resolve()
-            };//SpellAbility
+                    }// else
+                }// resolve()
+            };// SpellAbility
 
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 9202753910259054021L;
 
                 public void execute() {
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getController()).append(" sacrifices Drekavac unless he discards a noncreature card");
+                    sb.append(card.getController())
+                            .append(" sacrifices Drekavac unless he discards a noncreature card");
                     ability.setStackDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -282,8 +335,8 @@ public class CardFactory_Creatures {
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -2940969025405788931L;
 
-                //could never get the AI to work correctly
-                //it always played the same card 2 or 3 times
+                // could never get the AI to work correctly
+                // it always played the same card 2 or 3 times
                 @Override
                 public boolean canPlayAI() {
                     return false;
@@ -299,18 +352,18 @@ public class CardFactory_Creatures {
                         }
                     });
                     return list.size() != 0;
-                }//canPlay()
+                }// canPlay()
             };
             card.addComesIntoPlayCommand(intoPlay);
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Minotaur Explorer") || cardName.equals("Balduvian Horde") ||
-                cardName.equals("Pillaging Horde")) {
+        // *************** START *********** START **************************
+        else if (cardName.equals("Minotaur Explorer") || cardName.equals("Balduvian Horde")
+                || cardName.equals("Pillaging Horde")) {
 
             final SpellAbility creature = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -7326018877172328480L;
@@ -321,7 +374,8 @@ public class CardFactory_Creatures {
                     if (AllZone.getZoneOf(card).is(Constant.Zone.Hand))
                         reqHand++;
 
-                    // Don't play if it would sacrifice as soon as it comes into play
+                    // Don't play if it would sacrifice as soon as it comes into
+                    // play
                     return AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size() > reqHand;
                 }
             };
@@ -338,7 +392,7 @@ public class CardFactory_Creatures {
                     else
                         card.getController().discardRandom(this);
                 }
-            };//SpellAbility
+            };// SpellAbility
 
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 4986114285467649619L;
@@ -353,17 +407,18 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Sleeper Agent")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     // TODO: this need to be targeted
                     card.addController(card.getController().getOpponent());
-                    //AllZone.getGameAction().changeController(new CardList(card), card.getController(), card.getController().getOpponent());
+                    // AllZone.getGameAction().changeController(new
+                    // CardList(card), card.getController(),
+                    // card.getController().getOpponent());
                 }
             };
 
@@ -374,16 +429,15 @@ public class CardFactory_Creatures {
                 public void execute() {
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
-                }//execute()
+                }// execute()
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Phylactery Lich")) {
             final CommandReturn getArt = new CommandReturn() {
-                //get target card, may be null
+                // get target card, may be null
                 public Object execute() {
                     CardList art = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                     art = art.filter(new CardListFilter() {
@@ -406,8 +460,8 @@ public class CardFactory_Creatures {
                         target = art.get(0);
 
                     return target;
-                }//execute()
-            };//CommandReturn
+                }// execute()
+            };// CommandReturn
 
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -418,8 +472,8 @@ public class CardFactory_Creatures {
                         c.addCounter(Counters.PHYLACTERY, 1);
                         card.setFinishedEnteringBF(true);
                     }
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -1601957445498569156L;
 
@@ -436,32 +490,34 @@ public class CardFactory_Creatures {
 
                         @Override
                         public void selectCard(Card card, PlayerZone zone) {
-                            if (card.isArtifact() && zone.is(Constant.Zone.Battlefield) && card.getController().isHuman()) {
+                            if (card.isArtifact() && zone.is(Constant.Zone.Battlefield)
+                                    && card.getController().isHuman()) {
                                 ability.setTargetCard(card);
                                 AllZone.getStack().add(ability);
                                 stop();
                             }
                         }
-                    };//Input target
-
+                    };// Input target
 
                     if (card.getController().isHuman()) {
                         CardList artifacts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Artifact");
 
-                        if (artifacts.size() != 0) AllZone.getInputControl().setInput(target);
+                        if (artifacts.size() != 0)
+                            AllZone.getInputControl().setInput(target);
 
-                    } else { //computer
+                    } else { // computer
                         Object o = getArt.execute();
-                        if (o != null)//should never happen, but just in case
+                        if (o != null)// should never happen, but just in case
                         {
                             ability.setTargetCard((Card) o);
                             AllZone.getStack().addSimultaneousStackEntry(ability);
 
                         }
-                    }//else
-                }//execute()
+                    }// else
+                }// execute()
             };
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(new Spell_Permanent(card) {
 
@@ -474,24 +530,24 @@ public class CardFactory_Creatures {
                 }
             });
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Sky Swallower")) {
             final SpellAbility ability = new Ability(card, "0") {
 
                 @Override
                 public void resolve() {
-                	//TODO - this needs to be targeted
+                    // TODO - this needs to be targeted
                     Player opp = card.getController().getOpponent();
 
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                     list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
                     card.addController(opp);
-                    //AllZone.getGameAction().changeController(list, card.getController(), opp);
-                }//resolve()
-            };//SpellAbility
+                    // AllZone.getGameAction().changeController(list,
+                    // card.getController(), opp);
+                }// resolve()
+            };// SpellAbility
 
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -453410206437839334L;
@@ -507,10 +563,9 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Jhoira of the Ghitu")) {
             final Stack<Card> chosen = new Stack<Card>();
             final SpellAbility ability = new Ability(card, "2") {
@@ -557,10 +612,9 @@ public class CardFactory_Creatures {
             });
 
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Vedalken Plotter")) {
             final Card[] target = new Card[2];
             final int[] index = new int[1];
@@ -583,13 +637,14 @@ public class CardFactory_Creatures {
                         Player p1 = crd1.getController();
                         crd0.addController(p1);
                         crd1.addController(p0);
-                        //AllZone.getGameAction().changeController(new CardList(crd0), p0, p1);
-                        //AllZone.getGameAction().changeController(new CardList(crd1), p1, p0);
+                        // AllZone.getGameAction().changeController(new
+                        // CardList(crd0), p0, p1);
+                        // AllZone.getGameAction().changeController(new
+                        // CardList(crd1), p1, p0);
                     }
 
-                }//resolve()
-            };//SpellAbility
-
+                }// resolve()
+            };// SpellAbility
 
             final Input input = new Input() {
 
@@ -597,8 +652,10 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void showMessage() {
-                    if (index[0] == 0) AllZone.getDisplay().showMessage("Select target land you control.");
-                    else AllZone.getDisplay().showMessage("Select target land opponent controls.");
+                    if (index[0] == 0)
+                        AllZone.getDisplay().showMessage("Select target land you control.");
+                    else
+                        AllZone.getDisplay().showMessage("Select target land opponent controls.");
 
                     ButtonUtil.enableOnlyCancel();
                 }
@@ -610,15 +667,16 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    //must target creature you control
-                    if (index[0] == 0 && !c.getController().equals(card.getController())) return;
+                    // must target creature you control
+                    if (index[0] == 0 && !c.getController().equals(card.getController()))
+                        return;
 
-                    //must target creature you don't control
-                    if (index[0] == 1 && c.getController().equals(card.getController())) return;
-
+                    // must target creature you don't control
+                    if (index[0] == 1 && c.getController().equals(card.getController()))
+                        return;
 
                     if (c.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
-                        //System.out.println("c is: " +c);
+                        // System.out.println("c is: " +c);
                         target[index[0]] = c;
                         index[0]++;
                         showMessage();
@@ -628,57 +686,62 @@ public class CardFactory_Creatures {
                             stop();
                         }
                     }
-                }//selectCard()
-            };//Input
+                }// selectCard()
+            };// Input
 
             Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 6513203926272187582L;
 
                 public void execute() {
                     index[0] = 0;
-                    if (card.getController().isHuman()) AllZone.getInputControl().setInput(input);
+                    if (card.getController().isHuman())
+                        AllZone.getInputControl().setInput(input);
                 }
             };
 
             StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Exchange control of target land you control and target land an opponent controls.");
+            sb.append(cardName).append(
+                    " - Exchange control of target land you control and target land an opponent controls.");
             ability.setStackDescription(sb.toString());
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Adarkar Valkyrie")) {
-            //tap ability - no cost - target creature - EOT
+            // tap ability - no cost - target creature - EOT
 
             final Card[] target = new Card[1];
 
             final Command destroy = new Command() {
-            	private static final long serialVersionUID = -2433442359225521472L;
+                private static final long serialVersionUID = -2433442359225521472L;
 
-            	public void execute() {
+                public void execute() {
 
-            		AllZone.getStack().addSimultaneousStackEntry(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to the battlefield") {
-            			@Override
-            			public void resolve() {
-            				PlayerZone grave = AllZone.getZoneOf(target[0]);
-            				//checks to see if card is still in the graveyard
+                    AllZone.getStack().addSimultaneousStackEntry(
+                            new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0]
+                                    + " from graveyard to the battlefield") {
+                                @Override
+                                public void resolve() {
+                                    PlayerZone grave = AllZone.getZoneOf(target[0]);
+                                    // checks to see if card is still in the
+                                    // graveyard
 
-            				if (grave != null && grave.contains(target[0])) {
-            					PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
-            					target[0].addController(card.getController());
-            					AllZone.getGameAction().moveTo(play, target[0]);
-            				}
-            			}
-            		});
-            	}//execute()
+                                    if (grave != null && grave.contains(target[0])) {
+                                        PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
+                                        target[0].addController(card.getController());
+                                        AllZone.getGameAction().moveTo(play, target[0]);
+                                    }
+                                }
+                            });
+                }// execute()
             };
 
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 2777978927867867610L;
 
                 public void execute() {
-                    //resets the Card destroy Command
+                    // resets the Card destroy Command
                     target[0].removeDestroyCommand(destroy);
                 }
             };
@@ -693,18 +756,20 @@ public class CardFactory_Creatures {
                     if (AllZoneUtil.isCardInPlay(getTargetCard())) {
                         target[0] = getTargetCard();
 
-                        if (!target[0].isToken()) {    // not necessary, but will help speed up stack resolution
+                        if (!target[0].isToken()) { // not necessary, but will
+                                                    // help speed up stack
+                                                    // resolution
                             AllZone.getEndOfTurn().addUntil(untilEOT);
                             target[0].addDestroyCommand(destroy);
                         }
-                    }//if
-                }//resolve()
+                    }// if
+                }// resolve()
 
                 @Override
                 public boolean canPlayAI() {
                     return false;
                 }
-            };//SpellAbility
+            };// SpellAbility
 
             card.addSpellAbility(ability);
 
@@ -712,10 +777,9 @@ public class CardFactory_Creatures {
             sb.append("tap: When target creature other than Adarkar Valkyrie is put into a ");
             sb.append("graveyard this turn, return that card to the battlefield under your control.");
             ability.setDescription(sb.toString());
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Painter's Servant")) {
             final long[] timeStamp = new long[1];
             final String[] color = new String[1];
@@ -730,7 +794,8 @@ public class CardFactory_Creatures {
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color[0] = (String) o;
                     } else {
-                        // AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
+                        // AI chooses the color that appears in the keywords of
+                        // the most cards in its deck, hand and on battlefield
                         CardList list = new CardList();
                         list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
                         list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
@@ -739,7 +804,8 @@ public class CardFactory_Creatures {
                         color[0] = Constant.Color.White;
                         int max = list.getKeywordsContain(color[0]).size();
 
-                        String[] colors = {Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green};
+                        String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
+                                Constant.Color.Green };
                         for (String c : colors) {
                             int cmp = list.getKeywordsContain(c).size();
                             if (cmp > max) {
@@ -755,7 +821,7 @@ public class CardFactory_Creatures {
 
                     timeStamp[0] = AllZone.getColorChanger().addColorChanges(s, card, true, true);
                 }
-            };//Command
+            };// Command
 
             Command leavesBattlefield = new Command() {
                 private static final long serialVersionUID = 2559212590399132459L;
@@ -768,23 +834,24 @@ public class CardFactory_Creatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
             card.addLeavesPlayCommand(leavesBattlefield);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Stangg")) {
 
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardList cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin", card.getController(), "R G",
-                            new String[]{"Legendary", "Creature", "Human", "Warrior"}, 3, 4, new String[]{""});
+                    CardList cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin", card.getController(),
+                            "R G", new String[] { "Legendary", "Creature", "Human", "Warrior" }, 3, 4,
+                            new String[] { "" });
 
                     cl.get(0).addLeavesPlayCommand(new Command() {
                         private static final long serialVersionUID = 3367390368512271319L;
 
                         public void execute() {
-                            if (AllZoneUtil.isCardInPlay(card)) AllZone.getGameAction().sacrifice(card);
+                            if (AllZoneUtil.isCardInPlay(card))
+                                AllZone.getGameAction().sacrifice(card);
                         }
                     });
                 }
@@ -806,13 +873,13 @@ public class CardFactory_Creatures {
                 public void execute() {
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Stangg Twin");
 
-                    if (list.size() == 1) AllZone.getGameAction().exile(list.get(0));
+                    if (list.size() == 1)
+                        AllZone.getGameAction().exile(list.get(0));
                 }
             });
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Horde of Notions")) {
             final Ability ability = new Ability(card, "W U B R G") {
                 @Override
@@ -830,7 +897,7 @@ public class CardFactory_Creatures {
                         PlayerZone play = c.getController().getZone(Constant.Zone.Battlefield);
                         AllZone.getGameAction().moveTo(play, c);
                     }
-                }//resolve()
+                }// resolve()
 
                 @Override
                 public boolean canPlay() {
@@ -846,20 +913,20 @@ public class CardFactory_Creatures {
                     CardList c = getCreatures();
                     Card biggest = c.get(0);
                     for (int i = 0; i < c.size(); i++)
-                        if (biggest.getNetAttack() < c.get(i).getNetAttack()) biggest = c.get(i);
+                        if (biggest.getNetAttack() < c.get(i).getNetAttack())
+                            biggest = c.get(i);
 
                     return biggest;
                 }
-            };//SpellAbility
+            };// SpellAbility
             card.addSpellAbility(ability);
 
             ability.setDescription("W U B R G: You may play target Elemental card from your graveyard without paying its mana cost.");
             ability.setStackDescription("Horde of Notions - play Elemental card from graveyard without paying its mana cost.");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Rhys the Redeemed")) {
 
             Cost abCost = new Cost("4 GW GW T", card.getName(), true);
@@ -884,14 +951,16 @@ public class CardFactory_Creatures {
             };
 
             card.addSpellAbility(copyTokens1);
-            copyTokens1.setDescription(abCost + "For each creature token you control, put a token that's a copy of that creature onto the battlefield.");
+            copyTokens1
+                    .setDescription(abCost
+                            + "For each creature token you control, put a token that's a copy of that creature onto the battlefield.");
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - For each creature token you control, put a token that's a copy of that creature onto the battlefield.");
+            sb.append(card.getName())
+                    .append(" - For each creature token you control, put a token that's a copy of that creature onto the battlefield.");
             copyTokens1.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Treva, the Renewer")) {
             final Player player = card.getController();
 
@@ -900,7 +969,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int lifeGain = 0;
                     if (card.getController().isHuman()) {
-                        String choices[] = {"white", "blue", "black", "red", "green"};
+                        String choices[] = { "white", "blue", "black", "red", "green" };
                         Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
@@ -916,21 +985,20 @@ public class CardFactory_Creatures {
 
                 @Override
                 public boolean canPlay() {
-                    //this is set to false, since it should only TRIGGER
+                    // this is set to false, since it should only TRIGGER
                     return false;
                 }
             };// ability2
-            //card.clearSpellAbility();
+              // card.clearSpellAbility();
             card.addSpellAbility(ability2);
 
             StringBuilder sb2 = new StringBuilder();
             sb2.append(card.getName()).append(" - ").append(player);
             sb2.append(" gains life equal to permanents of the chosen color.");
             ability2.setStackDescription(sb2.toString());
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Sphinx of Jwar Isle")) {
             final SpellAbility ability1 = new Ability(card, "0") {
                 @Override
@@ -938,7 +1006,8 @@ public class CardFactory_Creatures {
                     Player player = card.getController();
                     PlayerZone lib = player.getZone(Constant.Zone.Library);
 
-                    if (lib.size() < 1) return;
+                    if (lib.size() < 1)
+                        return;
 
                     CardList cl = new CardList();
                     cl.add(lib.get(0));
@@ -950,7 +1019,7 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     return false;
                 }
-            };//SpellAbility
+            };// SpellAbility
 
             StringBuilder sb1 = new StringBuilder();
             sb1.append(card.getName()).append(" - look at top card of library.");
@@ -958,10 +1027,9 @@ public class CardFactory_Creatures {
 
             ability1.setDescription("You may look at the top card of your library.");
             card.addSpellAbility(ability1);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Master of the Wild Hunt")) {
 
             final Cost abCost = new Cost("T", cardName, true);
@@ -992,7 +1060,8 @@ public class CardFactory_Creatures {
 
                     targetables = targetables.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card, c) && c.isCreature() && c.getNetDefense() <= totalPower;
+                            return CardFactoryUtil.canTarget(card, c) && c.isCreature()
+                                    && c.getNetDefense() <= totalPower;
                         }
                     });
 
@@ -1029,25 +1098,30 @@ public class CardFactory_Creatures {
                         target.addDamage(c.getNetAttack(), c);
                     }
 
-                    if (target.getController().isHuman()) {    // Human choose spread damage
+                    if (target.getController().isHuman()) { // Human choose
+                                                            // spread damage
                         for (int x = 0; x < target.getNetAttack(); x++) {
-                            AllZone.getInputControl().setInput(CardFactoryUtil.MasteroftheWildHunt_input_targetCreature(this, wolves, new Command() {
-                                private static final long serialVersionUID = -328305150127775L;
+                            AllZone.getInputControl().setInput(
+                                    CardFactoryUtil.MasteroftheWildHunt_input_targetCreature(this, wolves,
+                                            new Command() {
+                                                private static final long serialVersionUID = -328305150127775L;
 
-                                public void execute() {
-                                    getTargetCard().addDamage(1, target);
-                                    AllZone.getGameAction().checkStateEffects();
-                                }
-                            }));
+                                                public void execute() {
+                                                    getTargetCard().addDamage(1, target);
+                                                    AllZone.getGameAction().checkStateEffects();
+                                                }
+                                            }));
                         }
-                    } else {        // AI Choose spread Damage
+                    } else { // AI Choose spread Damage
                         CardList damageableWolves = wolves.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 return (c.predictDamage(target.getNetAttack(), target, false) > 0);
                             }
                         });
 
-                        if (damageableWolves.size() == 0)    // don't bother if I can't damage anything
+                        if (damageableWolves.size() == 0) // don't bother if I
+                                                          // can't damage
+                                                          // anything
                             return;
 
                         CardList wolvesLeft = damageableWolves.filter(new CardListFilter() {
@@ -1059,8 +1133,9 @@ public class CardFactory_Creatures {
                         for (int i = 0; i < target.getNetAttack(); i++) {
                             wolvesLeft = wolvesLeft.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
-                                    return c.getKillDamage() > 0 && (c.getKillDamage() <= target.getNetAttack()
-                                            || target.hasKeyword("Deathtouch"));
+                                    return c.getKillDamage() > 0
+                                            && (c.getKillDamage() <= target.getNetAttack() || target
+                                                    .hasKeyword("Deathtouch"));
                                 }
                             });
 
@@ -1092,8 +1167,8 @@ public class CardFactory_Creatures {
                             }
                         }
                     }
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
 
             StringBuilder sb = new StringBuilder();
             sb.append("Tap: Tap all untapped Wolf creatures you control. Each Wolf tapped ");
@@ -1102,27 +1177,28 @@ public class CardFactory_Creatures {
             ability.setDescription(sb.toString());
 
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals") || cardName.equals("Feral Hydra")
-                || cardName.equals("Krakilin") || cardName.equals("Ivy Elemental") || cardName.equals("Lightning Serpent")) {
+        // *************** START *********** START **************************
+        else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
+                || cardName.equals("Feral Hydra") || cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")
+                || cardName.equals("Lightning Serpent")) {
 
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = 7708945715867177172L;
 
                 @Override
                 public boolean canPlayAI() {
-                    return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
+                    return super.canPlay()
+                            && 4 <= ComputerUtil.getAvailableMana().size()
+                                    - CardUtil.getConvertedManaCost(card.getManaCost());
                 }
             };
             card.clearFirstSpell();
             card.addFirstSpellAbility(spell);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Apocalypse Hydra")) {
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -11489323313L;
@@ -1137,17 +1213,18 @@ public class CardFactory_Creatures {
                     int XCounters = card.getXManaCostPaid();
                     Card c = AllZone.getGameAction().moveToPlay(getSourceCard());
 
-                    if (XCounters >= 5) XCounters = 2 * XCounters;
+                    if (XCounters >= 5)
+                        XCounters = 2 * XCounters;
                     c.addCounter(Counters.P1P1, XCounters);
                 }
             };
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Molten Hydra")) {
             Target target = new Target(card, "TgtCP");
             Cost abCost = new Cost("T", cardName, true);
@@ -1173,11 +1250,11 @@ public class CardFactory_Creatures {
                         list.shuffle();
                         setTargetCard(list.get(0));
                     }
-                }//chooseTargetAI()
+                }// chooseTargetAI()
 
                 CardList getCreature() {
 
-                    //toughness of 1
+                    // toughness of 1
                     CardList list = CardFactoryUtil.AI_getHumanCreature(card.getCounters(Counters.P1P1), card, true);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -1186,19 +1263,20 @@ public class CardFactory_Creatures {
                         }
                     });
                     return list;
-                }//getCreature()
+                }// getCreature()
 
                 @Override
                 public void resolve() {
                     int total = card.getCounters(Counters.P1P1);
                     if (getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
-                                card);
-                    } else getTargetPlayer().addDamage(total, card);
+                                && CardFactoryUtil.canTarget(card, getTargetCard()))
+                            getTargetCard().addDamage(total, card);
+                    } else
+                        getTargetPlayer().addDamage(total, card);
                     card.subtractCounter(Counters.P1P1, total);
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
 
             card.addSpellAbility(ability2);
 
@@ -1208,10 +1286,9 @@ public class CardFactory_Creatures {
             ability2.setDescription(sb.toString());
 
             ability2.setStackDescription("Molten Hydra deals damage to number of +1/+1 counters on it to target creature or player.");
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Academy Rector") || cardName.equals("Lost Auramancers")) {
             final SpellAbility ability = new Ability(card, "0") {
 
@@ -1235,7 +1312,8 @@ public class CardFactory_Creatures {
                             list = list.getType("Enchantment");
 
                             if (list.size() > 0) {
-                                Object objectSelected = GuiUtils.getChoiceOptional("Choose an enchantment", list.toArray());
+                                Object objectSelected = GuiUtils.getChoiceOptional("Choose an enchantment",
+                                        list.toArray());
 
                                 if (objectSelected != null) {
 
@@ -1244,10 +1322,12 @@ public class CardFactory_Creatures {
 
                                     if (c.isAura()) {
 
-                                        String enchantThisType[] = {""};
-                                        String message[] = {""};
+                                        String enchantThisType[] = { "" };
+                                        String message[] = { "" };
 
-                                        // The type following "Enchant" maybe upercase or lowercase, cardsfolder has both
+                                        // The type following "Enchant" maybe
+                                        // upercase or lowercase, cardsfolder
+                                        // has both
                                         // Note that I am being overly cautious.
 
                                         if (c.hasKeyword("Enchant creature without flying")
@@ -1264,24 +1344,20 @@ public class CardFactory_Creatures {
                                         } else if (c.hasKeyword("Enchant tapped creature")) {
                                             enchantThisType[0] = "Creature.tapped";
                                             message[0] = "Select a tapped creature";
-                                        } else if (c.hasKeyword("Enchant creature")
-                                                || c.hasKeyword("Enchant Creature")) {
+                                        } else if (c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant Creature")) {
                                             enchantThisType[0] = "Creature";
                                             message[0] = "Select a creature";
-                                        } else if (c.hasKeyword("Enchant wall")
-                                                || c.hasKeyword("Enchant Wall")) {
+                                        } else if (c.hasKeyword("Enchant wall") || c.hasKeyword("Enchant Wall")) {
                                             enchantThisType[0] = "Wall";
                                             message[0] = "Select a Wall";
                                         } else if (c.hasKeyword("Enchant land you control")
                                                 || c.hasKeyword("Enchant Land you control")) {
                                             enchantThisType[0] = "Land.YouCtrl";
                                             message[0] = "Select a land you control";
-                                        } else if (c.hasKeyword("Enchant land")
-                                                || c.hasKeyword("Enchant Land")) {
+                                        } else if (c.hasKeyword("Enchant land") || c.hasKeyword("Enchant Land")) {
                                             enchantThisType[0] = "Land";
                                             message[0] = "Select a land";
-                                        } else if (c.hasKeyword("Enchant artifact")
-                                                || c.hasKeyword("Enchant Artifact")) {
+                                        } else if (c.hasKeyword("Enchant artifact") || c.hasKeyword("Enchant Artifact")) {
                                             enchantThisType[0] = "Artifact";
                                             message[0] = "Select an artifact";
                                         } else if (c.hasKeyword("Enchant enchantment")
@@ -1292,11 +1368,14 @@ public class CardFactory_Creatures {
 
                                         CardList allCards = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
-                                        // Make sure that we were able to match the selected aura with our list of criteria
+                                        // Make sure that we were able to match
+                                        // the selected aura with our list of
+                                        // criteria
 
                                         if (enchantThisType[0] != "" && message[0] != "") {
 
-                                            final CardList choices = allCards.getValidCards(enchantThisType[0], card.getController(), card);
+                                            final CardList choices = allCards.getValidCards(enchantThisType[0],
+                                                    card.getController(), card);
                                             final String msg = message[0];
 
                                             AllZone.getInputControl().setInput(new Input() {
@@ -1322,10 +1401,12 @@ public class CardFactory_Creatures {
                                                             stop();
                                                         }
                                                     }
-                                                }//selectCard()
+                                                }// selectCard()
                                             });// Input()
 
-                                        }// if we were able to match the selected aura with our list of criteria
+                                        }// if we were able to match the
+                                         // selected aura with our list of
+                                         // criteria
                                     }// If enchantment selected is an aura
                                 }// If an enchantment is selected
                             }// If there are enchantments in library
@@ -1371,8 +1452,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
 
-                    if (card.getName().equals("Lost Auramancers")
-                            && card.getCounters(Counters.TIME) <= 0) {
+                    if (card.getName().equals("Lost Auramancers") && card.getCounters(Counters.TIME) <= 0) {
                         AllZone.getStack().addSimultaneousStackEntry(ability);
 
                     } else if (card.getName().equals("Academy Rector")) {
@@ -1384,40 +1464,39 @@ public class CardFactory_Creatures {
             };// Command destroy
 
             card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Deadly Grub")) {
             final Command destroy = new Command() {
                 private static final long serialVersionUID = -4352349741511065318L;
 
                 public void execute() {
-                    if (card.getCounters(Counters.TIME) <= 0) CardFactoryUtil.makeToken("Insect", "G 6 1 Insect",
-                            card.getController(), "G", new String[]{"Creature", "Insect"}, 6, 1, new String[]{"Shroud"});
+                    if (card.getCounters(Counters.TIME) <= 0)
+                        CardFactoryUtil.makeToken("Insect", "G 6 1 Insect", card.getController(), "G", new String[] {
+                                "Creature", "Insect" }, 6, 1, new String[] { "Shroud" });
                 }
             };
 
             card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     card.addCounter(Counters.P1P1, countKithkin());
-                    //System.out.println("all counters: " +card.sumAllCounters());
-                }//resolve()
+                    // System.out.println("all counters: "
+                    // +card.sumAllCounters());
+                }// resolve()
 
                 public int countKithkin() {
                     CardList kithkin = card.getController().getCardsIn(Zone.Battlefield);
                     kithkin = kithkin.filter(new CardListFilter() {
 
                         public boolean addCard(Card c) {
-                            return (c.isType("Kithkin"))
-                                    && !c.equals(card);
+                            return (c.isType("Kithkin")) && !c.equals(card);
                         }
 
                     });
@@ -1441,11 +1520,11 @@ public class CardFactory_Creatures {
                     for (int i = 0; i < card.sumAllCounters(); i++) {
                         makeToken();
                     }
-                }//resolve()
+                }// resolve()
 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card.getController(), "W", new String[]{
-                            "Creature", "Kithkin", "Soldier"}, 1, 1, new String[]{""});
+                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card.getController(), "W",
+                            new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
                 }
             };
 
@@ -1453,8 +1532,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 304026662487997331L;
 
                 public void execute() {
-                    ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white " +
-                            "Kithkin Soldier creature token onto the battlefield for each counter on it.");
+                    ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white "
+                            + "Kithkin Soldier creature token onto the battlefield for each counter on it.");
                     AllZone.getStack().addSimultaneousStackEntry(ability2);
 
                 }
@@ -1463,10 +1542,9 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             card.addDestroyCommand(destroy);
 
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START ************************** 
+        // *************** START *********** START **************************
         else if (cardName.equals("Kavu Titan")) {
             final SpellAbility kicker = new Spell(card) {
                 private static final long serialVersionUID = -1598664196463358630L;
@@ -1480,8 +1558,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     return super.canPlay() && AllZone.getPhase().getPlayerTurn().equals(card.getController())
-                            && !AllZone.getPhase().getPhase().equals("End of Turn")
-                            && !AllZoneUtil.isCardInPlay(card);
+                            && !AllZone.getPhase().getPhase().equals("End of Turn") && !AllZoneUtil.isCardInPlay(card);
                 }
 
             };
@@ -1515,17 +1592,16 @@ public class CardFactory_Creatures {
                         AllZone.getStack().addSimultaneousStackEntry(ability);
 
                     }
-                }//execute()
-            };//CommandComes
+                }// execute()
+            };// CommandComes
 
             card.addComesIntoPlayCommand(commandComes);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") ||
-                cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards") ||
-                cardName.equals("Joraga Warcaller")) {
+        // *************** START *********** START **************************
+        else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
+                || cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards")
+                || cardName.equals("Joraga Warcaller")) {
             final Ability_Static ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
@@ -1547,13 +1623,14 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Vampire Hexmage")) {
             /*
-                * Sacrifice Vampire Hexmage: Remove all counters from target permanent.
-                */
+             * Sacrifice Vampire Hexmage: Remove all counters from target
+             * permanent.
+             */
 
             Cost cost = new Cost("Sac<1/CARDNAME>", cardName, true);
             final Target tgt = new Target(card, "Select a permanent", "Permanent".split(","));
@@ -1563,7 +1640,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
 
-                    //Dark Depths:
+                    // Dark Depths:
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Dark Depths");
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card crd) {
@@ -1576,7 +1653,7 @@ public class CardFactory_Creatures {
                         return true;
                     }
 
-                    //Get rid of Planeswalkers:
+                    // Get rid of Planeswalkers:
                     list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card crd) {
@@ -1603,10 +1680,9 @@ public class CardFactory_Creatures {
                 }
             };
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Sutured Ghoul")) {
             final int[] numCreatures = new int[1];
             final int[] sumPower = new int[1];
@@ -1627,7 +1703,8 @@ public class CardFactory_Creatures {
 
                     if (card.getController().isHuman()) {
                         if (creats.size() > 0) {
-                            List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
+                            List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice",
+                                    creats.toArray());
 
                             numCreatures[0] = selection.size();
                             for (int m = 0; m < selection.size(); m++) {
@@ -1637,7 +1714,7 @@ public class CardFactory_Creatures {
                             }
                         }
 
-                    }//human
+                    }// human
                     else {
                         int count = 0;
                         for (int i = 0; i < creats.size(); i++) {
@@ -1648,7 +1725,7 @@ public class CardFactory_Creatures {
                                 AllZone.getGameAction().exile(c);
                                 count++;
                             }
-                            //is this needed?
+                            // is this needed?
                             AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
                         }
                         numCreatures[0] = count;
@@ -1659,7 +1736,8 @@ public class CardFactory_Creatures {
                     card.setBaseDefense(sumToughness[0]);
                 }
             };
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addComesIntoPlayCommand(intoPlay);
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -1667,25 +1745,24 @@ public class CardFactory_Creatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    //get all creatures
+                    // get all creatures
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard);
                     list = list.filter(CardListFilter.creatures);
                     return 0 < list.size();
                 }
             });
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Nameless Race")) {
             /*
-                * As Nameless Race enters the battlefield, pay any amount of life.
-                * The amount you pay can't be more than the total number of white
-                * nontoken permanents your opponents control plus the total number
-                * of white cards in their graveyards.
-                * Nameless Race's power and toughness are each equal to the life
-                * paid as it entered the battlefield.
-                */
+             * As Nameless Race enters the battlefield, pay any amount of life.
+             * The amount you pay can't be more than the total number of white
+             * nontoken permanents your opponents control plus the total number
+             * of white cards in their graveyards. Nameless Race's power and
+             * toughness are each equal to the life paid as it entered the
+             * battlefield.
+             */
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -1719,8 +1796,8 @@ public class CardFactory_Creatures {
                     card.setBaseDefense(loseLife);
 
                     player.loseLife(loseLife, card);
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
 
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 931101364538995898L;
@@ -1736,10 +1813,9 @@ public class CardFactory_Creatures {
             ability.setStackDescription(sb.toString());
 
             card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Metalworker")) {
             final Cost abCost = new Cost("T", card.getName(), true);
 
@@ -1748,9 +1824,9 @@ public class CardFactory_Creatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    //compy doesn't have a manapool
+                    // compy doesn't have a manapool
                     return false;
-                }//canPlayAI()
+                }// canPlayAI()
 
                 @Override
                 public void resolve() {
@@ -1760,10 +1836,13 @@ public class CardFactory_Creatures {
 
                         @Override
                         public void showMessage() {
-                            //in case hand is empty, don't do anything
-                            if (card.getController().getCardsIn(Zone.Hand).size() == 0) stop();
+                            // in case hand is empty, don't do anything
+                            if (card.getController().getCardsIn(Zone.Hand).size() == 0)
+                                stop();
 
-                            AllZone.getDisplay().showMessage(card.getName() + " - Reveal an artifact.  Revealed " + revealed.size() + " so far.  Click OK when done.");
+                            AllZone.getDisplay().showMessage(
+                                    card.getName() + " - Reveal an artifact.  Revealed " + revealed.size()
+                                            + " so far.  Click OK when done.");
                             ButtonUtil.enableOnlyOK();
                         }
 
@@ -1772,8 +1851,9 @@ public class CardFactory_Creatures {
                             if (zone.is(Constant.Zone.Hand) && c.isArtifact() && !revealed.contains(c)) {
                                 revealed.add(c);
 
-                                //in case no more cards in hand to reveal
-                                if (revealed.size() == card.getController().getCardsIn(Zone.Hand).size()) done();
+                                // in case no more cards in hand to reveal
+                                if (revealed.size() == card.getController().getCardsIn(Zone.Hand).size())
+                                    done();
                                 else
                                     showMessage();
                             }
@@ -1786,9 +1866,11 @@ public class CardFactory_Creatures {
 
                         void done() {
                             StringBuilder sb = new StringBuilder();
-                            for (Card reveal : revealed) sb.append(reveal.getName() + "\n");
-                            JOptionPane.showMessageDialog(null, "Revealed Cards:\n" + sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
-                            //adding mana
+                            for (Card reveal : revealed)
+                                sb.append(reveal.getName() + "\n");
+                            JOptionPane.showMessageDialog(null, "Revealed Cards:\n" + sb.toString(), card.getName(),
+                                    JOptionPane.PLAIN_MESSAGE);
+                            // adding mana
 
                             Ability_Mana abMana = new Ability_Mana(card, "0", "1", 2 * revealed.size()) {
                                 private static final long serialVersionUID = -2182129023960978132L;
@@ -1799,16 +1881,16 @@ public class CardFactory_Creatures {
                             stop();
                         }
                     });
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
 
-            ability.setDescription(abCost + "Reveal any number of artifact cards in your hand. Add 2 to your mana pool for each card revealed this way.");
+            ability.setDescription(abCost
+                    + "Reveal any number of artifact cards in your hand. Add 2 to your mana pool for each card revealed this way.");
             ability.setStackDescription(cardName + " - Reveal any number of artifact cards in your hand.");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START ************************** 
+        // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Scuta")) {
             Cost abCost = new Cost("3 B PayLife<3>", cardName, false);
             final SpellAbility kicker = new Spell(card, abCost, null) {
@@ -1836,10 +1918,9 @@ public class CardFactory_Creatures {
             kicker.setStackDescription(sb.toString());
 
             card.addSpellAbility(kicker);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Yosei, the Morning Star")) {
             final CardList targetPerms = new CardList();
             final SpellAbility ability = new Ability(card, "0") {
@@ -1855,7 +1936,7 @@ public class CardFactory_Creatures {
                         }
                     }
                     targetPerms.clear();
-                }//resolve()
+                }// resolve()
             };
 
             final Input targetInput = new Input() {
@@ -1863,8 +1944,11 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void showMessage() {
-                    if (targetPerms.size() == 5) done();
-                    AllZone.getDisplay().showMessage("Select up to 5 target permanents.  Selected (" + targetPerms.size() + ") so far.  Click OK when done.");
+                    if (targetPerms.size() == 5)
+                        done();
+                    AllZone.getDisplay().showMessage(
+                            "Select up to 5 target permanents.  Selected (" + targetPerms.size()
+                                    + ") so far.  Click OK when done.");
                     ButtonUtil.enableOnlyOK();
                 }
 
@@ -1874,9 +1958,11 @@ public class CardFactory_Creatures {
                 }
 
                 private void done() {
-                    //here, we add the ability to the stack since it's triggered.
+                    // here, we add the ability to the stack since it's
+                    // triggered.
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - tap up to 5 permanents target player controls. Target player skips his or her next untap step.");
+                    sb.append(card.getName())
+                            .append(" - tap up to 5 permanents target player controls. Target player skips his or her next untap step.");
                     ability.setStackDescription(sb.toString());
                     AllZone.getStack().add(ability);
                     stop();
@@ -1891,7 +1977,7 @@ public class CardFactory_Creatures {
                     }
                     showMessage();
                 }
-            };//Input
+            };// Input
 
             final Input playerInput = new Input() {
                 private static final long serialVersionUID = 4765535692144126496L;
@@ -1923,21 +2009,21 @@ public class CardFactory_Creatures {
                     Player player = card.getController();
                     CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
 
-                    if (player.isHuman()) AllZone.getInputControl().setInput(playerInput);
+                    if (player.isHuman())
+                        AllZone.getInputControl().setInput(playerInput);
                     else if (list.size() != 0) {
                         Card target = CardFactoryUtil.AI_getBestCreature(list);
                         ability.setTargetCard(target);
                         AllZone.getStack().addSimultaneousStackEntry(ability);
 
                     }
-                }//execute()
+                }// execute()
             };
             card.addDestroyCommand(destroy);
         }
-        //*************** END ************ END **************************
+        // *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Dreadnought")) {
             final Player player = card.getController();
             final CardList toSac = new CardList();
@@ -1952,7 +2038,8 @@ public class CardFactory_Creatures {
                             @Override
                             public void showMessage() {
                                 String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
-                                toDisplay += "Currently, (" + toSac.size() + ") selected with a total power of: " + getTotalPower();
+                                toDisplay += "Currently, (" + toSac.size() + ") selected with a total power of: "
+                                        + getTotalPower();
                                 toDisplay += "  Click OK when Done.";
                                 AllZone.getDisplay().showMessage(toDisplay);
                                 ButtonUtil.enableAll();
@@ -1977,21 +2064,22 @@ public class CardFactory_Creatures {
                                     toSac.add(c);
                                 }
                                 showMessage();
-                            }//selectCard()
+                            }// selectCard()
 
                             private void done() {
                                 if (getTotalPower() >= 12) {
-                                    for (Card sac : toSac) AllZone.getGameAction().sacrifice(sac);
+                                    for (Card sac : toSac)
+                                        AllZone.getGameAction().sacrifice(sac);
                                 } else {
                                     AllZone.getGameAction().sacrifice(card);
                                 }
                                 toSac.clear();
                                 stop();
                             }
-                        };//Input
+                        };// Input
                         AllZone.getInputControl().setInput(target);
                     }
-                }//end resolve
+                }// end resolve
 
                 private int getTotalPower() {
                     int sum = 0;
@@ -2006,22 +2094,21 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 7680692311339496770L;
 
                 public void execute() {
-                    sacOrSac.setStackDescription("When " + cardName + " enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.");
+                    sacOrSac.setStackDescription("When "
+                            + cardName
+                            + " enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.");
                     AllZone.getStack().addSimultaneousStackEntry(sacOrSac);
 
                 }
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
-                || cardName.equals("Quicksilver Gargantuan")
-                || cardName.equals("Jwari Shapeshifter")
-                || cardName.equals("Phyrexian Metamorph")
-                || cardName.equals("Phantasmal Image")
+                || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
+                || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
                 || cardName.equals("Body Double")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
@@ -2054,87 +2141,91 @@ public class CardFactory_Creatures {
 
                     if (copyTarget[0] != null) {
                         boolean wasInAlt = copyTarget[0].isInAlternateState();
-                    	/*
-                    	 * This cannot just be copyStats with an addSpellAbility loop from copyTarget[0].
-                    	 * Unless we get a copySpellAbility.  Adding the SpellAbility from the
-                    	 * source card causes many weird and Bad Things to happen.
-                    	 */
-                    	try {                    	    
-                    	    if(wasInAlt) {
-                    	        copyTarget[0].changeState();
-                    	    }
-                    		cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
-                    		if(wasInAlt) {
-                    		    cloned[0].setImageFilename(copyTarget[0].getImageFilename());
-                    		    copyTarget[0].changeState();
-                    		}
-                    	}
-                    	catch(RuntimeException re) {
-                    		//the copyTarget was not found in CardFactory
-                    		cloned[0] = CardFactoryUtil.copyStats(copyTarget[0]);
-                    	}
+                        /*
+                         * This cannot just be copyStats with an addSpellAbility
+                         * loop from copyTarget[0]. Unless we get a
+                         * copySpellAbility. Adding the SpellAbility from the
+                         * source card causes many weird and Bad Things to
+                         * happen.
+                         */
+                        try {
+                            if (wasInAlt) {
+                                copyTarget[0].changeState();
+                            }
+                            cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
+                            if (wasInAlt) {
+                                cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+                                copyTarget[0].changeState();
+                            }
+                        } catch (RuntimeException re) {
+                            // the copyTarget was not found in CardFactory
+                            cloned[0] = CardFactoryUtil.copyStats(copyTarget[0]);
+                        }
                         cloned[0].setOwner(card.getController());
                         cloned[0].addController(card.getController());
-                        if (cardName.equals("Phyrexian Metamorph")) cloned[0].addType("Artifact");
-                        if (cardName.equals("Phantasmal Image")) cloned[0].addType("Illusion");
+                        if (cardName.equals("Phyrexian Metamorph"))
+                            cloned[0].addType("Artifact");
+                        if (cardName.equals("Phantasmal Image"))
+                            cloned[0].addType("Illusion");
                         cloned[0].setCloneOrigin(card);
                         cloned[0].addLeavesPlayCommand(leaves);
                         cloned[0].setCloneLeavesPlayCommand(leaves);
                         cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
-                        
-                        if(copyTarget[0].isDoubleFaced()) { //Cloned DFC's can't transform
-                            if(wasInAlt)
-                            {
+
+                        if (copyTarget[0].isDoubleFaced()) { // Cloned DFC's
+                                                             // can't transform
+                            if (wasInAlt) {
                                 cloned[0].changeState();
                             }
                             cloned[0].clearOtherState();
                         }
-                        if(copyTarget[0].isFlip()) { //Cloned Flips CAN flip.
+                        if (copyTarget[0].isFlip()) { // Cloned Flips CAN flip.
                             cloned[0].changeState();
                             copyTarget[0].changeState();
                             cloned[0].setImageFilename(copyTarget[0].getImageFilename());
-                            if(!copyTarget[0].isInAlternateState()) {
+                            if (!copyTarget[0].isInAlternateState()) {
                                 cloned[0].changeState();
                             }
-                            
+
                             copyTarget[0].changeState();
                         }
-                        
+
                         if (cardName.equals("Vesuvan Doppelganger")) {
-                            cloned[0].addExtrinsicKeyword("At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
+                            cloned[0]
+                                    .addExtrinsicKeyword("At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
                             cloned[0].addColor("U", cloned[0], false, true);
                         } else if (cardName.equals("Quicksilver Gargantuan")) {
                             cloned[0].setBaseDefense(7);
                             cloned[0].setBaseAttack(7);
                         } else if (cardName.equals("Phantasmal Image")) {
-                            StringBuilder trigScript = new StringBuilder("Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ ");
+                            StringBuilder trigScript = new StringBuilder(
+                                    "Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ ");
                             StringBuilder svarName = new StringBuilder("TrigSac");
-                            //Couple of hoops to jump through to make sure no svar is overwritten.
+                            // Couple of hoops to jump through to make sure no
+                            // svar is overwritten.
                             int iter = 0;
-                            while(cloned[0].getSVar(svarName.toString()) != "")
-                            {
+                            while (cloned[0].getSVar(svarName.toString()) != "") {
                                 iter++;
-                                if(svarName.length() == 7)
-                                {
+                                if (svarName.length() == 7) {
                                     svarName.append(iter);
-                                }
-                                else
-                                {
+                                } else {
                                     svarName.delete(8, svarName.length());
                                     svarName.append(iter);
                                 }
                             }
                             trigScript.append(svarName.toString());
-                            trigScript.append(" | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.");
-                            cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),card,true));
+                            trigScript
+                                    .append(" | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.");
+                            cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),
+                                    card, true));
                             cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
                         }
-                        
+
                         AllZone.getGameAction().moveToPlayFromHand(cloned[0]);
                         card.setCurrentlyCloningCard(cloned[0]);
                     }
                 }
-            };//SpellAbility
+            };// SpellAbility
 
             Input runtime = new Input() {
                 private static final long serialVersionUID = 7615038074569687330L;
@@ -2142,7 +2233,8 @@ public class CardFactory_Creatures {
                 @Override
                 public void showMessage() {
                     String message = "Select a creature ";
-                    if (cardName.equals("Phyrexian Metamorph")) message += "or artifact ";
+                    if (cardName.equals("Phyrexian Metamorph"))
+                        message += "or artifact ";
                     message += "on the battlefield";
                     AllZone.getDisplay().showMessage(cardName + " - " + message);
                     ButtonUtil.enableOnlyCancel();
@@ -2155,8 +2247,8 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void selectCard(Card c, PlayerZone z) {
-                    if (z.is(Constant.Zone.Battlefield) &&
-                            (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
+                    if (z.is(Constant.Zone.Battlefield)
+                            && (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
                         if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) {
                             return;
                         }
@@ -2165,7 +2257,7 @@ public class CardFactory_Creatures {
                     }
                 }
             };
-            
+
             Input graveyardRuntime = new Input() {
                 private static final long serialVersionUID = 6950318443268022876L;
 
@@ -2176,35 +2268,34 @@ public class CardFactory_Creatures {
                     Object o = GuiUtils.getChoiceOptional(message, choices.toArray());
                     if (null == o) {
                         stop();
-                    }
-                    else {
+                    } else {
                         Card c = (Card) o;
                         copyTarget[0] = c;
                         stopSetNext(new Input_PayManaCost(copy));
                     }
                 }
             };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+
+            // Do not remove SpellAbilities created by AbilityFactory or
+            // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(copy);
             copy.setStackDescription(cardName + " - enters the battlefield as a copy of selected card.");
             if (cardName.equals("Body Double")) {
                 copy.setBeforePayMana(graveyardRuntime);
-            }
-            else {
+            } else {
                 copy.setBeforePayMana(runtime);
             }
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START ************ START **************************
+        // *************** START ************ START **************************
         else if (cardName.equals("Nebuchadnezzar")) {
             /*
-                * X, T: Name a card. Target opponent reveals X cards at random from his or her hand.
-                * Then that player discards all cards with that name revealed this way.
-                * Activate this ability only during your turn.
-                */
+             * X, T: Name a card. Target opponent reveals X cards at random from
+             * his or her hand. Then that player discards all cards with that
+             * name revealed this way. Activate this ability only during your
+             * turn.
+             */
             Cost abCost = new Cost("X T", cardName, true);
             Target target = new Target(card, "Select target opponent", "Opponent".split(","));
             Ability_Activated discard = new Ability_Activated(card, abCost, target) {
@@ -2212,8 +2303,9 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void resolve() {
-                    //name a card
-                    String choice = JOptionPane.showInputDialog(null, "Name a card", cardName, JOptionPane.QUESTION_MESSAGE);
+                    // name a card
+                    String choice = JOptionPane.showInputDialog(null, "Name a card", cardName,
+                            JOptionPane.QUESTION_MESSAGE);
                     CardList hand = getTargetPlayer().getCardsIn(Zone.Hand);
                     int numCards = card.getXManaCostPaid();
                     numCards = Math.min(hand.size(), numCards);
@@ -2227,11 +2319,12 @@ public class CardFactory_Creatures {
                     if (!revealed.isEmpty()) {
                         GuiUtils.getChoice("Revealed at random", revealed.toArray());
                     } else {
-                        GuiUtils.getChoice("Revealed at random", new String[]{"Nothing to reveal"});
+                        GuiUtils.getChoice("Revealed at random", new String[] { "Nothing to reveal" });
                     }
 
                     for (Card c : revealed) {
-                        if (c.getName().equals(choice)) c.getController().discard(c, this);
+                        if (c.getName().equals(choice))
+                            c.getController().discard(c, this);
                     }
                 }
 
@@ -2244,7 +2337,8 @@ public class CardFactory_Creatures {
             discard.getRestrictions().setPlayerTurn(true);
 
             StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost).append("Name a card. Target opponent reveals X cards at random from his or her hand. ");
+            sbDesc.append(abCost).append(
+                    "Name a card. Target opponent reveals X cards at random from his or her hand. ");
             sbDesc.append("Then that player discards all cards with that name revealed this way. ");
             sbDesc.append("Activate this ability only during your turn.");
             discard.setDescription(sbDesc.toString());
@@ -2254,10 +2348,9 @@ public class CardFactory_Creatures {
             discard.setStackDescription(sbStack.toString());
 
             card.addSpellAbility(discard);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Brass Squire")) {
 
             Target t2 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
@@ -2310,12 +2403,12 @@ public class CardFactory_Creatures {
                 }
             };
             ability.setSubAbility(sub);
-            ability.setStackDescription(cardName + " - Attach target Equipment you control to target creature you control.");
+            ability.setStackDescription(cardName
+                    + " - Attach target Equipment you control to target creature you control.");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Gore Vassal")) {
             Cost abCost = new Cost("Sac<1/CARDNAME>", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtC")) {
@@ -2343,23 +2436,26 @@ public class CardFactory_Creatures {
                             });
                         }
                     }
-                }//resolve()
-            };//SpellAbility
+                }// resolve()
+            };// SpellAbility
 
             card.addSpellAbility(ability);
-            ability.setDescription(abCost + "Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.");
+            ability.setDescription(abCost
+                    + "Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.");
 
             StringBuilder sb = new StringBuilder();
             sb.append(cardName).append(" put a -1/-1 counter on target creature.");
             ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
+        // *************** START *********** START **************************
         else if (cardName.equals("Awakener Druid")) {
-            final long[] timeStamp = {0};
+            final long[] timeStamp = { 0 };
 
-            Trigger myTrig = TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerDescription$ When CARDNAME enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the battlefield. It's still a land.", card, true);
+            Trigger myTrig = TriggerHandler
+                    .parseTrigger(
+                            "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerDescription$ When CARDNAME enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the battlefield. It's still a land.",
+                            card, true);
             Target myTarget = new Target(card, "Choose target forest.", "Land.Forest".split(","), "1", "1");
             final SpellAbility awaken = new Ability(card, "0") {
                 @Override
@@ -2367,7 +2463,7 @@ public class CardFactory_Creatures {
                     if (!AllZone.getZoneOf(card).is(Zone.Battlefield) || getTarget().getTargetCards().size() == 0)
                         return;
                     final Card c = getTarget().getTargetCards().get(0);
-                    String[] types = {"Creature", "Treefolk"};
+                    String[] types = { "Creature", "Treefolk" };
                     String[] keywords = {};
                     timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 5, types, keywords, "G");
 
@@ -2377,23 +2473,23 @@ public class CardFactory_Creatures {
                         Card tgt = c;
 
                         public void execute() {
-                            String[] types = {"Creature", "Treefolk"};
-                            String[] keywords = {""};
+                            String[] types = { "Creature", "Treefolk" };
+                            String[] keywords = { "" };
                             CardFactoryUtil.revertManland(tgt, types, keywords, "G", stamp);
                         }
                     };
                     card.addLeavesPlayCommand(onleave);
                 }
-            };//SpellAbility
+            };// SpellAbility
             awaken.setTarget(myTarget);
 
             myTrig.setOverridingAbility(awaken);
             card.addTrigger(myTrig);
-        }//*************** END ************ END **************************
+        }// *************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling") || cardName.equals("Spin Engine")) {
+        // *************** START *********** START **************************
+        else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
+                || cardName.equals("Spin Engine")) {
             String theCost = "0";
             if (cardName.equals("Duct Crawler"))
                 theCost = "1 R";
@@ -2414,10 +2510,9 @@ public class CardFactory_Creatures {
             SpellAbility myAb = createAb.getAbility(abilityBuilder.toString(), card);
 
             card.addSpellAbility(myAb);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+        }// *************** END ************ END **************************
+
+        // *************** START *********** START **************************
         else if (cardName.equals("Krovikan Sorcerer")) {
             Cost abCost = new Cost("T Discard<1/Card.Black>", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
@@ -2430,31 +2525,32 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void resolve() {
-                	final Player player = card.getController();
-                	if (player.isHuman()) {
-                		final CardList n = player.drawCards(2);
-                		
-                		AllZone.getInputControl().setInput(new Input() {
-							private static final long serialVersionUID = -1411038851955251074L;
+                    final Player player = card.getController();
+                    if (player.isHuman()) {
+                        final CardList n = player.drawCards(2);
 
-							@Override
-                			public void showMessage() {
-                				if(n.isEmpty()) stop();
-                				AllZone.getDisplay().showMessage(card+" - discard one of the cards drawn.");
-                				ButtonUtil.disableAll();
-                			}
+                        AllZone.getInputControl().setInput(new Input() {
+                            private static final long serialVersionUID = -1411038851955251074L;
 
-                			@Override
-                			public void selectCard(Card c, PlayerZone zone) {
-                				if (zone.is(Constant.Zone.Hand) && n.contains(c)) {
-                					player.discard(c, null);
-                					stop();
-                				}
-                			}
-                		});//end Input
-                	}
-                }//resolve()
-            };//SpellAbility
+                            @Override
+                            public void showMessage() {
+                                if (n.isEmpty())
+                                    stop();
+                                AllZone.getDisplay().showMessage(card + " - discard one of the cards drawn.");
+                                ButtonUtil.disableAll();
+                            }
+
+                            @Override
+                            public void selectCard(Card c, PlayerZone zone) {
+                                if (zone.is(Constant.Zone.Hand) && n.contains(c)) {
+                                    player.discard(c, null);
+                                    stop();
+                                }
+                            }
+                        });// end Input
+                    }
+                }// resolve()
+            };// SpellAbility
 
             card.addSpellAbility(ability);
             ability.setDescription("Tap, Discard a black card: " + "Draw two cards, then discard one of them.");
@@ -2462,12 +2558,11 @@ public class CardFactory_Creatures {
             StringBuilder sb = new StringBuilder();
             sb.append(card).append(" - Draw two cards, then discard one of them.");
             ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
-        
-        //***************************************************
+        }// *************** END ************ END **************************
+
+        // ***************************************************
         // end of card specific code
-        //***************************************************
+        // ***************************************************
 
         if (hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1) {
             int n = hasKeyword(card, "Level up");
@@ -2478,7 +2573,6 @@ public class CardFactory_Creatures {
 
                 card.removeIntrinsicKeyword(parse);
                 card.removeIntrinsicKeyword(parseMax);
-
 
                 String k[] = parse.split(":");
                 final String manacost = k[1];
@@ -2514,7 +2608,7 @@ public class CardFactory_Creatures {
                 card.setLevelUp(true);
 
             }
-        }//level up
+        }// level up
 
         return card;
     }

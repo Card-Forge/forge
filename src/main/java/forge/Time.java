@@ -1,8 +1,10 @@
 package forge;
 
 /**
- * <p>Time class.</p>
- *
+ * <p>
+ * Time class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -11,22 +13,28 @@ public class Time {
     private long stopTime;
 
     /**
-     * <p>Constructor for Time.</p>
+     * <p>
+     * Constructor for Time.
+     * </p>
      */
     public Time() {
         start();
     }
 
     /**
-     * <p>start.</p>
+     * <p>
+     * start.
+     * </p>
      */
     public final void start() {
         startTime = System.currentTimeMillis();
     }
 
     /**
-     * <p>stop.</p>
-     *
+     * <p>
+     * stop.
+     * </p>
+     * 
      * @return a double.
      */
     public final double stop() {
@@ -35,8 +43,10 @@ public class Time {
     }
 
     /**
-     * <p>getTime.</p>
-     *
+     * <p>
+     * getTime.
+     * </p>
+     * 
      * @return a double.
      */
     public final double getTime() {

@@ -1,40 +1,55 @@
 package forge.card.spellability;
 
 import com.esotericsoftware.minlog.Log;
-import forge.*;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
 import forge.Constant.Zone;
 
-
 /**
- * <p>Abstract Ability class.</p>
- *
+ * <p>
+ * Abstract Ability class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
-abstract public class Ability extends SpellAbility {
-    //Slight hack for Pithing Needle
+public abstract class Ability extends SpellAbility {
+    // Slight hack for Pithing Needle
     private String sourceCardName;
 
     /**
-     * <p>Constructor for Ability.</p>
-     *
-     * @param sourceCard a {@link forge.Card} object.
-     * @param manaCost a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Ability.
+     * </p>
+     * 
+     * @param sourceCard
+     *            a {@link forge.Card} object.
+     * @param manaCost
+     *            a {@link java.lang.String} object.
      */
-    public Ability(Card sourceCard, String manaCost) {
+    public Ability(final Card sourceCard, final String manaCost) {
         super(SpellAbility.Ability, sourceCard);
         setManaCost(manaCost);
         sourceCardName = sourceCard.getName();
     }
 
     /**
-     * <p>Constructor for Ability.</p>
-     *
-     * @param sourceCard a {@link forge.Card} object.
-     * @param manaCost a {@link java.lang.String} object.
-     * @param stackDescription a {@link java.lang.String} object.
+     * <p>
+     * Constructor for Ability.
+     * </p>
+     * 
+     * @param sourceCard
+     *            a {@link forge.Card} object.
+     * @param manaCost
+     *            a {@link java.lang.String} object.
+     * @param stackDescription
+     *            a {@link java.lang.String} object.
      */
-    public Ability(Card sourceCard, String manaCost, String stackDescription) {
+    public Ability(final Card sourceCard, final String manaCost, final String stackDescription) {
         this(sourceCard, manaCost);
         setStackDescription(stackDescription);
         Log.debug("an ability is being played from" + sourceCard.getName());
@@ -43,17 +58,20 @@ abstract public class Ability extends SpellAbility {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (AllZone.getStack().isSplitSecondOnStack()) return false;
+        if (AllZone.getStack().isSplitSecondOnStack()) {
+            return false;
+        }
 
         CardList pithing = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         pithing = pithing.getName("Pithing Needle");
         pithing = pithing.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return c.getSVar("PithingTarget").equals(sourceCardName);
             }
         });
 
-        return AllZoneUtil.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && pithing.size() == 0;
+        return AllZoneUtil.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown()
+                && !getSourceCard().getName().equals("Spreading Seas") && pithing.size() == 0;
     }
 }

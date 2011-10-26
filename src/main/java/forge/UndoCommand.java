@@ -1,19 +1,25 @@
 package forge;
 
 /**
- * <p>UndoCommand interface.</p>
- *
+ * <p>
+ * UndoCommand interface.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public interface UndoCommand extends Command {
     /**
-     * <p>execute.</p>
+     * <p>
+     * execute.
+     * </p>
      */
     void execute();
 
     /**
-     * <p>undo.</p>
+     * <p>
+     * undo.
+     * </p>
      */
     void undo();
 }

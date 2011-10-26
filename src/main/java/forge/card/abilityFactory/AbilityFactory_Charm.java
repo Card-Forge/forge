@@ -12,8 +12,10 @@ import forge.gui.GuiUtils;
 // Choices - a ","-delimited list of SVars containing ability choices
 
 /**
- * <p>AbilityFactory_Charm class.</p>
- *
+ * <p>
+ * AbilityFactory_Charm class.
+ * </p>
+ * 
  * @author Forge
  */
 public final class AbilityFactory_Charm {
@@ -23,9 +25,12 @@ public final class AbilityFactory_Charm {
     }
 
     /**
-     * <p>createAbilityCharm.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityCharm.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCharm(final AbilityFactory af) {
@@ -51,15 +56,18 @@ public final class AbilityFactory_Charm {
             public boolean doTrigger(final boolean mandatory) {
                 return charmCanPlayAI(af, this);
             }
-        }; //Ability_Activated
+        }; // Ability_Activated
 
         return abCharm;
     }
 
     /**
-     * <p>createSpellCharm.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellCharm.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellCharm(final AbilityFactory af) {
@@ -90,15 +98,14 @@ public final class AbilityFactory_Charm {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
-        //end standard begin
+        // end standard begin
 
-        //nothing stack specific for Charm
+        // nothing stack specific for Charm
 
-        //begin standard post
+        // begin standard post
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
@@ -108,17 +115,24 @@ public final class AbilityFactory_Charm {
     }
 
     private static boolean charmCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        //TODO - enable Charms for the AI
+        // TODO - enable Charms for the AI
         return false;
     }
 
     private static void charmResolve(final AbilityFactory af, final SpellAbility sa) {
-        //nothing to do.  Ability_Subs are set up in GameAction.playSpellAbility(),
-        //and that Ability_Sub.resolve() is called from AbilityFactory
+        // nothing to do. Ability_Subs are set up in
+        // GameAction.playSpellAbility(),
+        // and that Ability_Sub.resolve() is called from AbilityFactory
     }
-    
+
+    /**
+     * Sets the up charm s as.
+     * 
+     * @param sa
+     *            the new up charm s as
+     */
     public static void setupCharmSAs(final SpellAbility sa) {
-        //make Charm choices
+        // make Charm choices
         if (sa.isCharm()) {
             ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
             choices.addAll(sa.getCharmChoices());
@@ -131,8 +145,7 @@ public final class AbilityFactory_Charm {
                 Object o;
                 if (i < sa.getMinCharmNumber()) {
                     o = GuiUtils.getChoice("Choose a mode", choices.toArray());
-                }
-                else {
+                } else {
                     o = GuiUtils.getChoiceOptional("Choose a mode", choices.toArray());
                 }
                 if (null == o) {
@@ -141,8 +154,9 @@ public final class AbilityFactory_Charm {
                 Ability_Sub chosen = (Ability_Sub) o;
                 sa.addCharmChoice(chosen);
                 choices.remove(chosen);
-                
-                //walk down the SpellAbility tree and add to the child Ability_Sub
+
+                // walk down the SpellAbility tree and add to the child
+                // Ability_Sub
                 SpellAbility child = sa;
                 while (child.getSubAbility() != null) {
                     child = child.getSubAbility();
@@ -156,4 +170,4 @@ public final class AbilityFactory_Charm {
         }
     }
 
-} //end class AbilityFactory_Charm
+} // end class AbilityFactory_Charm

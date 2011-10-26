@@ -120,16 +120,14 @@ public class CardReader implements Runnable, NewConstants {
      * 
      * @param theCardsFolder
      *            indicates location of the cardsFolder
-     * @param listRules2Fill
-     *            List<CardRules>
      * @param theMapToFill
      *            maps card names to Card instances; this is where we place the
      *            cards once read
-     * 
+     * @param listRules2Fill
+     *            List<CardRules>
      */
     public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill,
-            final List<CardRules> listRules2Fill)
-    {
+            final List<CardRules> listRules2Fill) {
         this(theCardsFolder, theMapToFill, listRules2Fill, true);
     }
 
@@ -151,8 +149,7 @@ public class CardReader implements Runnable, NewConstants {
      *            exists.
      */
     public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill,
-            final List<CardRules> listRules2Fill, final boolean useZip)
-    {
+            final List<CardRules> listRules2Fill, final boolean useZip) {
         if (theMapToFill == null) {
             throw new NullPointerException("theMapToFill must not be null."); // NOPMD
                                                                               // by
@@ -221,9 +218,8 @@ public class CardReader implements Runnable, NewConstants {
         try {
             if (findNonDirsIterable != null) {
                 for (@SuppressWarnings("unused")
-             // Do nothing; just exercising the Iterable.
-                File ignored : findNonDirsIterable)
-                {
+                // Do nothing; just exercising the Iterable.
+                File ignored : findNonDirsIterable) {
                 }
             }
         } finally {
@@ -341,9 +337,9 @@ public class CardReader implements Runnable, NewConstants {
      * Reads a line from the given reader and handles exceptions.
      * </p>
      * 
-     * @return a {@link java.lang.String} object.
      * @param reader
      *            a {@link java.io.BufferedReader} object.
+     * @return a {@link java.lang.String} object.
      */
     public static String readLine(final BufferedReader reader) {
         // makes the checked exception, into an unchecked runtime exception

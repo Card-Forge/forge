@@ -166,7 +166,8 @@ public final class AllZone implements NewConstants {
      * setQuestEvent.
      * </p>
      * 
-     * @param q a {@link forge.quest.gui.main.QuestEvent} object.
+     * @param q
+     *            a {@link forge.quest.gui.main.QuestEvent} object.
      */
     public static void setQuestEvent(final QuestEvent q) {
         questEvent = q;
@@ -189,7 +190,8 @@ public final class AllZone implements NewConstants {
      * setQuestEventManager.
      * </p>
      * 
-     * @param qem a {@link forge.quest.gui.main.QuestEventManager} object
+     * @param qem
+     *            a {@link forge.quest.gui.main.QuestEventManager} object
      */
     public static void setQuestEventManager(final QuestEventManager qem) {
         questEventManager = qem;

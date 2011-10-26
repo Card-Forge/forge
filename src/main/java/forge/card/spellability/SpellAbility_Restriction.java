@@ -1,46 +1,66 @@
 package forge.card.spellability;
 
-
-import forge.*;
-import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.Constant.Zone;
+import forge.Phase;
+import forge.Player;
+import forge.PlayerZone;
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+
 /**
- * <p>SpellAbility_Restriction class.</p>
- *
+ * <p>
+ * SpellAbility_Restriction class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class SpellAbility_Restriction extends SpellAbility_Variables {
-    // A class for handling SpellAbility Restrictions. These restrictions include:
+    // A class for handling SpellAbility Restrictions. These restrictions
+    // include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
-    // Each value will have a default, that can be overridden (mostly by AbilityFactory)
-    // The canPlay function will use these values to determine if the current game state is ok with these restrictions
-
+    // Each value will have a default, that can be overridden (mostly by
+    // AbilityFactory)
+    // The canPlay function will use these values to determine if the current
+    // game state is ok with these restrictions
 
     /**
-     * <p>Constructor for SpellAbility_Restriction.</p>
+     * <p>
+     * Constructor for SpellAbility_Restriction.
+     * </p>
      */
     public SpellAbility_Restriction() {
     }
 
     /**
-     * <p>setRestrictions.</p>
-     *
-     * @param params a {@link java.util.HashMap} object.
+     * <p>
+     * setRestrictions.
+     * </p>
+     * 
+     * @param params
+     *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public void setRestrictions(HashMap<String, String> params) {
+    public final void setRestrictions(final HashMap<String, String> params) {
         if (params.containsKey("Activation")) {
             String value = params.get("Activation");
-            if (value.equals("Threshold")) setThreshold(true);
-            if (value.equals("Metalcraft")) setMetalcraft(true);
-            if (value.equals("Hellbent")) setHellbent(true);
+            if (value.equals("Threshold")) {
+                setThreshold(true);
+            }
+            if (value.equals("Metalcraft")) {
+                setMetalcraft(true);
+            }
+            if (value.equals("Hellbent")) {
+                setHellbent(true);
+            }
             if (value.startsWith("Prowl")) {
                 ArrayList<String> prowlTypes = new ArrayList<String>();
                 prowlTypes.add("Rogue");
@@ -122,7 +142,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             setPresentCompare("EQ0");
         }
 
-        //basically PresentCompare for life totals:
+        // basically PresentCompare for life totals:
         if (params.containsKey("ActivationLifeTotal")) {
             lifeTotal = params.get("ActivationLifeTotal");
             if (params.containsKey("ActivationLifeAmount")) {
@@ -137,28 +157,32 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             setSvarOperator(params.get("SVarCompare").substring(0, 2));
             setSvarOperand(params.get("SVarCompare").substring(2));
         }
-    } //end setRestrictions()
+    } // end setRestrictions()
 
     /**
-     * <p>canPlay.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * canPlay.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean canPlay(Card c, SpellAbility sa) {
+    public final boolean canPlay(final Card c, final SpellAbility sa) {
         if (c.isPhasedOut()) {
-                return false;
+            return false;
         }
 
         PlayerZone cardZone = AllZone.getZoneOf(c);
         if (!cardZone.is(zone)) {
-			// If Card is not in the default activating zone, do some additional checks
-			// Not a Spell, or on Battlefield, return false
+            // If Card is not in the default activating zone, do some additional
+            // checks
+            // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield)) {
-            return false;
-            }
-            else if (!c.hasStartOfKeyword("May be played") || !zone.equals(Zone.Hand)) {
+                return false;
+            } else if (!c.hasStartOfKeyword("May be played") || !zone.equals(Zone.Hand)) {
                 return false;
             }
         }
@@ -225,7 +249,8 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
         }
         if (prowl != null) {
-            //only true if the activating player has damaged the opponent with one of the specified types
+            // only true if the activating player has damaged the opponent with
+            // one of the specified types
             boolean prowlFlag = false;
             for (String type : prowl) {
                 if (activator.hasProwl(type)) {
@@ -284,7 +309,8 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
 
             for (SpellAbility pwAbs : c.getAllSpellAbilities()) {
-                // check all abilities on card that have their planeswalker restriction set to confirm they haven't been activated
+                // check all abilities on card that have their planeswalker
+                // restriction set to confirm they haven't been activated
                 SpellAbility_Restriction restrict = pwAbs.getRestrictions();
                 if (restrict.getPlaneswalker() && restrict.getNumberTurnActivations() > 0) {
                     return false;
@@ -303,6 +329,6 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
         }
 
         return true;
-    } //canPlay()
+    } // canPlay()
 
-} //end class SpellAbility_Restriction
+} // end class SpellAbility_Restriction

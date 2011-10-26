@@ -1,5 +1,9 @@
 package forge;
 
+import static forge.error.ErrorViewer.showError;
+
+import java.util.ArrayList;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
@@ -7,28 +11,29 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 
-import java.util.ArrayList;
-
-import static forge.error.ErrorViewer.showError;
-
-
 /**
- * <p>ComputerAI_General class.</p>
- *
+ * <p>
+ * ComputerAI_General class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class ComputerAI_General implements Computer {
 
     /**
-     * <p>Constructor for ComputerAI_General.</p>
+     * <p>
+     * Constructor for ComputerAI_General.
+     * </p>
      */
     public ComputerAI_General() {
 
     }
 
     /**
-     * <p>main1.</p>
+     * <p>
+     * main1.
+     * </p>
      */
     public final void main1() {
         ComputerUtil.chooseLandsToPlay();
@@ -38,10 +43,12 @@ public class ComputerAI_General implements Computer {
         } else {
             stackResponse();
         }
-    } //main1()
+    } // main1()
 
     /**
-     * <p>main2.</p>
+     * <p>
+     * main2.
+     * </p>
      */
     public final void main2() {
         ComputerUtil.chooseLandsToPlay();
@@ -54,9 +61,12 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>playCards.</p>
-     *
-     * @param phase a {@link java.lang.String} object.
+     * <p>
+     * playCards.
+     * </p>
+     * 
+     * @param phase
+     *            a {@link java.lang.String} object.
      */
     private void playCards(final String phase) {
         SpellAbility[] sp = phase.equals(Constant.Phase.Main1) ? getMain1() : getMain2();
@@ -66,15 +76,17 @@ public class ComputerAI_General implements Computer {
         if (nextPhase) {
             AllZone.getPhase().passPriority();
         }
-    } //playCards()
+    } // playCards()
 
     /**
-     * <p>getMain1.</p>
-     *
+     * <p>
+     * getMain1.
+     * </p>
+     * 
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     private SpellAbility[] getMain1() {
-        //Card list of all cards to consider
+        // Card list of all cards to consider
         CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
         if (AllZone.getComputerPlayer().getManaPool().isEmpty()) {
@@ -85,7 +97,7 @@ public class ComputerAI_General implements Computer {
                         return true;
                     }
 
-                    //timing should be handled by the AF's
+                    // timing should be handled by the AF's
                     if (c.isSorcery() || c.isAura()) {
                         return true;
                     }
@@ -94,7 +106,7 @@ public class ComputerAI_General implements Computer {
                         return true;
                     }
 
-                    //get all cards the computer controls with BuffedBy
+                    // get all cards the computer controls with BuffedBy
                     CardList buffed = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                     for (int j = 0; j < buffed.size(); j++) {
                         Card buffedcard = buffed.get(j);
@@ -105,9 +117,9 @@ public class ComputerAI_General implements Computer {
                                 return true;
                             }
                         }
-                    } //BuffedBy
+                    } // BuffedBy
 
-                    //get all cards the human controls with AntiBuffedBy
+                    // get all cards the human controls with AntiBuffedBy
                     CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                     for (int k = 0; k < antibuffed.size(); k++) {
                         Card buffedcard = antibuffed.get(k);
@@ -118,7 +130,7 @@ public class ComputerAI_General implements Computer {
                                 return true;
                             }
                         }
-                    } //AntiBuffedBy
+                    } // AntiBuffedBy
 
                     if (c.isLand()) {
                         return false;
@@ -134,14 +146,12 @@ public class ComputerAI_General implements Computer {
                                 creatures2.add(creatures.get(i));
                             }
                         }
-                        if (creatures2.size()
-                                + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size() > 1
-                                && c.isCreature()
-                                && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
+                        if (creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size() > 1
+                                && c.isCreature() && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
                             return true;
                         }
                     } // AI Improvement for Vengevine
-                    // Beached As End
+                      // Beached As End
                     return false;
                 }
             });
@@ -159,25 +169,25 @@ public class ComputerAI_General implements Computer {
         all.addAll(humanPlayable);
 
         return getPlayable(all);
-    } //getMain1()
-
+    } // getMain1()
 
     /**
-     * <p>getMain2.</p>
-     *
+     * <p>
+     * getMain2.
+     * </p>
+     * 
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     private SpellAbility[] getMain2() {
-        //Card list of all cards to consider
+        // Card list of all cards to consider
         CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-        //Don't play permanents with Flash before humans declare attackers step
+        // Don't play permanents with Flash before humans declare attackers step
         all = all.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
-                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
-                        || AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
-                {
+                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
+                                .isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility))) {
                     return false;
                 }
                 return true;
@@ -186,7 +196,8 @@ public class ComputerAI_General implements Computer {
         all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
 
-        // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
+        // Prevent the computer from summoning Ball Lightning type creatures
+        // during main phase 2
         all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
 
         all = all.filter(new CardListFilter() {
@@ -207,23 +218,24 @@ public class ComputerAI_General implements Computer {
         all.addAll(humanPlayable);
 
         return getPlayable(all);
-    } //getMain2()
+    } // getMain2()
 
     /**
-     * <p>getAvailableSpellAbilities.</p>
-     *
+     * <p>
+     * getAvailableSpellAbilities.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     private CardList getAvailableSpellAbilities() {
         CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-        //Don't play permanents with Flash before humans declare attackers step
+        // Don't play permanents with Flash before humans declare attackers step
         all = all.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
-                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
-                        || AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
-                {
+                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
+                                .isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility))) {
                     return false;
                 }
                 return true;
@@ -231,7 +243,6 @@ public class ComputerAI_General implements Computer {
         });
         all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
-
 
         CardList humanPlayable = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         humanPlayable = humanPlayable.filter(new CardListFilter() {
@@ -244,8 +255,10 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>getOtherPhases.</p>
-     *
+     * <p>
+     * getOtherPhases.
+     * </p>
+     * 
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     private SpellAbility[] getOtherPhases() {
@@ -253,8 +266,10 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>getPossibleCounters.</p>
-     *
+     * <p>
+     * getPossibleCounters.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getPossibleCounters() {
@@ -262,8 +277,10 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>getPossibleETBCounters.</p>
-     *
+     * <p>
+     * getPossibleETBCounters.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getPossibleETBCounters() {
@@ -271,9 +288,11 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * Returns the spellAbilities from the card list that the computer is able to play.
-     *
-     * @param l a {@link forge.CardList} object.
+     * Returns the spellAbilities from the card list that the computer is able
+     * to play.
+     * 
+     * @param l
+     *            a {@link forge.CardList} object.
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     private SpellAbility[] getPlayable(final CardList l) {
@@ -281,7 +300,7 @@ public class ComputerAI_General implements Computer {
         for (Card c : l) {
             for (SpellAbility sa : c.getSpellAbility()) {
                 // if SA is from AF_Counter don't add to getPlayable
-                //This try/catch should fix the "computer is thinking" bug
+                // This try/catch should fix the "computer is thinking" bug
                 try {
                     sa.setActivatingPlayer(AllZone.getComputerPlayer());
                     if (ComputerUtil.canBePlayedAndPayedByAI(sa)) {
@@ -296,9 +315,12 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>getPlayableCounters.</p>
-     *
-     * @param l a {@link forge.CardList} object.
+     * <p>
+     * getPlayableCounters.
+     * </p>
+     * 
+     * @param l
+     *            a {@link forge.CardList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getPlayableCounters(final CardList l) {
@@ -316,9 +338,12 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>getETBCounters.</p>
-     *
-     * @param l a {@link forge.CardList} object.
+     * <p>
+     * getETBCounters.
+     * </p>
+     * 
+     * @param l
+     *            a {@link forge.CardList} object.
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getETBCounters(final CardList l) {
@@ -338,14 +363,18 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>begin_combat.</p>
+     * <p>
+     * begin_combat.
+     * </p>
      */
     public final void begin_combat() {
         stackResponse();
     }
 
     /**
-     * <p>declare_attackers.</p>
+     * <p>
+     * declare_attackers.
+     * </p>
      */
     public final void declare_attackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
@@ -359,7 +388,7 @@ public class ComputerAI_General implements Computer {
 
         for (int i = 0; i < att.length; i++) {
             // tapping of attackers happens after Propaganda is paid for
-            //if (!att[i].hasKeyword("Vigilance")) att[i].tap();
+            // if (!att[i].hasKeyword("Vigilance")) att[i].tap();
             Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
 
@@ -370,14 +399,18 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>declare_attackers_after.</p>
+     * <p>
+     * declare_attackers_after.
+     * </p>
      */
     public final void declare_attackers_after() {
         stackResponse();
     }
 
     /**
-     * <p>declare_blockers.</p>
+     * <p>
+     * declare_blockers.
+     * </p>
      */
     public final void declare_blockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
@@ -390,36 +423,46 @@ public class ComputerAI_General implements Computer {
     }
 
     /**
-     * <p>declare_blockers_after.</p>
+     * <p>
+     * declare_blockers_after.
+     * </p>
      */
     public final void declare_blockers_after() {
         stackResponse();
     }
 
     /**
-     * <p>end_of_combat.</p>
+     * <p>
+     * end_of_combat.
+     * </p>
      */
     public final void end_of_combat() {
         stackResponse();
     }
 
-    //end of Human's turn
+    // end of Human's turn
     /**
-     * <p>end_of_turn.</p>
+     * <p>
+     * end_of_turn.
+     * </p>
      */
     public final void end_of_turn() {
         stackResponse();
     }
 
     /**
-     * <p>stack_not_empty.</p>
+     * <p>
+     * stack_not_empty.
+     * </p>
      */
     public final void stack_not_empty() {
         stackResponse();
     }
 
     /**
-     * <p>stackResponse.</p>
+     * <p>
+     * stackResponse.
+     * </p>
      */
     public final void stackResponse() {
         // if top of stack is empty
@@ -429,7 +472,7 @@ public class ComputerAI_General implements Computer {
 
             boolean pass = (sas.length == 0)
                     || AllZone.getPhase().is(Constant.Phase.End_Of_Turn, AllZone.getComputerPlayer());
-            if (!pass) {        // Each AF should check the phase individually
+            if (!pass) { // Each AF should check the phase individually
                 pass = ComputerUtil.playCards(sas);
             }
 
@@ -441,7 +484,8 @@ public class ComputerAI_General implements Computer {
 
         // if top of stack is owned by me
         if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
-            // probably should let my stuff resolve to force Human to respond to it
+            // probably should let my stuff resolve to force Human to respond to
+            // it
             AllZone.getPhase().passPriority();
             return;
         }
@@ -450,7 +494,8 @@ public class ComputerAI_General implements Computer {
         ArrayList<SpellAbility> possibleCounters = getPossibleCounters();
 
         if (possibleCounters.size() > 0 && ComputerUtil.playCounterSpell(possibleCounters)) {
-            // Responding CounterSpell is on the Stack trying to Counter the Spell
+            // Responding CounterSpell is on the Stack trying to Counter the
+            // Spell
             // If playCounterSpell returns true, a Spell is hitting the Stack
             return;
         }

@@ -7,26 +7,27 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
 /**
- * <p>AbilityFactory_Token class.</p>
- *
+ * <p>
+ * AbilityFactory_Token class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -50,9 +51,12 @@ public class AbilityFactory_Token extends AbilityFactory {
     private boolean tokenAttacking;
 
     /**
-     * <p>Constructor for AbilityFactory_Token.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * Constructor for AbilityFactory_Token.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_Token(final AbilityFactory af) {
         AF = af;
@@ -62,7 +66,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         String[] keywords;
 
         if (mapParams.containsKey("TokenKeywords")) {
-        	// TODO: Change this Split to a semicolon or something else
+            // TODO: Change this Split to a semicolon or something else
             keywords = mapParams.get("TokenKeywords").split("<>");
         } else {
             keywords = new String[0];
@@ -114,18 +118,21 @@ public class AbilityFactory_Token extends AbilityFactory {
         tokenColors = mapParams.get("TokenColors").split(",");
         tokenKeywords = keywords;
         tokenImage = image;
-        if (mapParams.containsKey("TokenOwner"))
+        if (mapParams.containsKey("TokenOwner")) {
             tokenOwner = mapParams.get("TokenOwner");
-        else tokenOwner = "You";
+        } else {
+            tokenOwner = "You";
+        }
     }
 
     /**
-     * <p>getAbility.</p>
-     *
+     * <p>
+     * getAbility.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getAbility() {
-
+    public final SpellAbility getAbility() {
 
         final SpellAbility abToken = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = 8460074843405764620L;
@@ -146,7 +153,7 @@ public class AbilityFactory_Token extends AbilityFactory {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return tokenDoTriggerAI(this, mandatory);
             }
         };
@@ -155,11 +162,13 @@ public class AbilityFactory_Token extends AbilityFactory {
     }
 
     /**
-     * <p>getSpell.</p>
-     *
+     * <p>
+     * getSpell.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getSpell() {
+    public final SpellAbility getSpell() {
         final SpellAbility spToken = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = -8041427947613029670L;
 
@@ -183,11 +192,13 @@ public class AbilityFactory_Token extends AbilityFactory {
     }
 
     /**
-     * <p>getDrawback.</p>
-     *
+     * <p>
+     * getDrawback.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public SpellAbility getDrawback() {
+    public final SpellAbility getDrawback() {
         final SpellAbility dbDealDamage = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
@@ -207,7 +218,7 @@ public class AbilityFactory_Token extends AbilityFactory {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return tokenDoTriggerAI(this, mandatory);
             }
 
@@ -217,40 +228,56 @@ public class AbilityFactory_Token extends AbilityFactory {
     }
 
     /**
-     * <p>tokenCanPlayAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * tokenCanPlayAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean tokenCanPlayAI(SpellAbility sa) {
+    private boolean tokenCanPlayAI(final SpellAbility sa) {
         Cost cost = sa.getPayCosts();
 
         for (String type : tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, tokenName).size() > 0)
+                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, tokenName).size() > 0) {
                     return false;
+                }
             }
         }
 
         boolean haste = false;
         boolean oneShot = false;
         for (String kw : tokenKeywords) {
-            if (kw.equals("Haste")) haste = true;
+            if (kw.equals("Haste")) {
+                haste = true;
+            }
             if (kw.equals("At the beginning of the end step, exile CARDNAME.")
-                    || kw.equals("At the beginning of the end step, sacrifice CARDNAME.")) oneShot = true;
+                    || kw.equals("At the beginning of the end step, sacrifice CARDNAME.")) {
+                oneShot = true;
+            }
         }
 
-        //Don't generate tokens without haste before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste)
+        // Don't generate tokens without haste before main 2 if possible
+        if (AllZone.getPhase().isBefore(Constant.Phase.Main2)
+                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste) {
             return false;
-        if ((AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin) || AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) && oneShot)
+        }
+        if ((AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin) || AllZone.getPhase().isPlayerTurn(
+                AllZone.getHumanPlayer()))
+                && oneShot) {
             return false;
+        }
 
-        // TODO: if i don't have enough blockers and my token can block one of the unblocked creatures
+        // TODO: if i don't have enough blockers and my token can block one of
+        // the unblocked creatures
         // create it after attackers are declared
-        //if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility, AllZone.getHumanPlayer()))
-        //	return true;
+        // if
+        // (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility,
+        // AllZone.getHumanPlayer()))
+        // return true;
 
         // prevent run-away activations - first time will always return true
         Random r = MyRandom.random;
@@ -260,24 +287,29 @@ public class AbilityFactory_Token extends AbilityFactory {
         Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent())
+            if (tgt.canOnlyTgtOpponent()) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            else
+            } else {
                 tgt.addTarget(AllZone.getComputerPlayer());
+            }
         }
 
         if (cost != null) {
-            if (!CostUtil.checkLifeCost(cost, source, 4))
+            if (!CostUtil.checkLifeCost(cost, source, 4)) {
                 return false;
+            }
 
-            if (!CostUtil.checkDiscardCost(cost, source))
+            if (!CostUtil.checkDiscardCost(cost, source)) {
                 return false;
-                
-            if (!CostUtil.checkSacrificeCost(cost, source))
+            }
+
+            if (!CostUtil.checkSacrificeCost(cost, source)) {
                 return false;
-                
-            if (!CostUtil.checkRemoveCounterCost(cost, source))
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(cost, source)) {
                 return false;
+            }
         }
 
         if (tokenAmount.equals("X")) {
@@ -286,58 +318,72 @@ public class AbilityFactory_Token extends AbilityFactory {
                 int xPay = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(xPay));
             }
-            if (AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa) <= 0)
+            if (AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa) <= 0) {
                 return false;
+            }
         }
 
-        if (AbilityFactory.playReusable(sa))
+        if (AbilityFactory.playReusable(sa)) {
             return chance;
+        }
 
-        if (sa.isAbility())
+        if (sa.isAbility()) {
             return (r.nextFloat() < .9 && chance);
+        }
 
         return (r.nextFloat() < .6667 && chance);
     }
 
     /**
-     * <p>tokenDoTriggerAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * tokenDoTriggerAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private boolean tokenDoTriggerAI(SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa))
+    private boolean tokenDoTriggerAI(final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
             return false;
+        }
 
         return true;
     }
 
     /**
-     * <p>doStackDescription.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doStackDescription.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private String doStackDescription(SpellAbility sa) {
+    private String doStackDescription(final SpellAbility sa) {
         Card host = AF.getHostCard();
 
         int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
         int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
         int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
-        
+
         String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
 
         StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub)
+        if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        else
+        } else {
             sb.append(host.getName()).append(" - ");
+        }
 
         sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
         sb.append(" ").append(substitutedName).append(" token");
-        if (finalAmount != 1) sb.append("s");
+        if (finalAmount != 1) {
+            sb.append("s");
+        }
         sb.append(" onto the battlefield");
 
         if (tokenOwner.equals("Opponent")) {
@@ -354,20 +400,23 @@ public class AbilityFactory_Token extends AbilityFactory {
     }
 
     /**
-     * <p>doResolve.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * doResolve.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private void doResolve(SpellAbility sa) {
+    private void doResolve(final SpellAbility sa) {
         Card host = AF.getHostCard();
         String imageName = "";
         Player controller;
         String cost = "";
-        //Construct colors
+        // Construct colors
         String[] substitutedColors = Arrays.copyOf(tokenColors, tokenColors.length);
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
-                //this currently only supports 1 chosen color
+                // this currently only supports 1 chosen color
                 substitutedColors[i] = host.getChosenColor().get(0);
             }
         }
@@ -393,7 +442,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         } else {
             imageName = tokenImage;
         }
-        //System.out.println("AF_Token imageName = " + imageName);
+        // System.out.println("AF_Token imageName = " + imageName);
 
         for (char c : colorDesc.toCharArray()) {
             cost += c + ' ';
@@ -406,7 +455,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
         int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
         int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
-        
+
         String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
         for (int i = 0; i < substitutedTypes.length; i++) {
             if (substitutedTypes[i].equals("ChosenType")) {
@@ -417,9 +466,10 @@ public class AbilityFactory_Token extends AbilityFactory {
 
         String remember = AF.getMapParams().get("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
-            CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost, substitutedTypes, finalPower, finalToughness, tokenKeywords);
+            CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost, substitutedTypes,
+                    finalPower, finalToughness, tokenKeywords);
 
-            //Grant abilities
+            // Grant abilities
             if (tokenAbilities != null) {
                 AbilityFactory af = new AbilityFactory();
                 for (String s : tokenAbilities) {
@@ -431,7 +481,7 @@ public class AbilityFactory_Token extends AbilityFactory {
                 }
             }
 
-            //Grant triggers
+            // Grant triggers
             if (tokenTriggers != null) {
 
                 for (String s : tokenTriggers) {
@@ -447,7 +497,7 @@ public class AbilityFactory_Token extends AbilityFactory {
                 }
             }
 
-            //Grant SVars
+            // Grant SVars
             if (tokenSVars != null) {
                 for (String s : tokenSVars) {
                     String actualSVar = AF.getHostCard().getSVar(s);
@@ -457,7 +507,7 @@ public class AbilityFactory_Token extends AbilityFactory {
                 }
             }
 
-            //Grant static abilities
+            // Grant static abilities
             if (tokenStaticAbilities != null) {
                 for (String s : tokenStaticAbilities) {
                     String actualAbility = AF.getHostCard().getSVar(s);

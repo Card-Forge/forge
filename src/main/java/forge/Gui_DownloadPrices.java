@@ -228,13 +228,11 @@ public class Gui_DownloadPrices extends JFrame {
                             // keys.add(key);
                             String k = keys.get(i);
                             if (k.equals("Plains") || k.equals("Island") || k.equals("Swamp") || k.equals("Mountain")
-                                    || k.equals("Forest"))
-                            {
+                                    || k.equals("Forest")) {
                                 outBW.write(k + "=5\r\n");
                             } else if (k.equals("Snow-Covered Plains") || k.equals("Snow-Covered Island")
                                     || k.equals("Snow-Covered Swamp") || k.equals("Snow-Covered Mountain")
-                                    || k.equals("Snow-Covered Forest"))
-                            {
+                                    || k.equals("Snow-Covered Forest")) {
                                 outBW.write(k + "=10\r\n");
                             } else {
                                 outBW.write(keys.get(i) + "=" + prices.get(keys.get(i)) + "\r\n");

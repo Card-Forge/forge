@@ -1,29 +1,38 @@
 package forge.card.spellability;
 
-import forge.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import forge.Card;
+import forge.CardList;
+import forge.Command;
+import forge.CommandArgs;
+import forge.ComputerUtil;
+import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.gui.input.Input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
 //only SpellAbility can go on the stack
 //override any methods as needed
 /**
- * <p>Abstract SpellAbility class.</p>
- *
+ * <p>
+ * Abstract SpellAbility class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public abstract class SpellAbility {
-    public Object[] choices_made;                       //open ended Casting choice storage
-    //choices for constructor isPermanent argument
-    /** Constant <code>Spell=0</code> */
+
+    /** The choices_made. */
+    public Object[] choices_made; // open ended Casting choice storage
+    // choices for constructor isPermanent argument
+    /** Constant <code>Spell=0</code>. */
     public static final int Spell = 0;
-    /** Constant <code>Ability=1</code> */
+
+    /** Constant <code>Ability=1</code>. */
     public static final int Ability = 1;
 
     private String description = "";
@@ -36,7 +45,7 @@ public abstract class SpellAbility {
     private String xManaCost = "";
     private Player activatingPlayer = null;
 
-    private String type = "Intrinsic";  //set to Intrinsic by default
+    private String type = "Intrinsic"; // set to Intrinsic by default
 
     private Card targetCard;
     private Card sourceCard;
@@ -53,7 +62,7 @@ public abstract class SpellAbility {
 
     private boolean tapAbility;
     private boolean untapAbility;
-    private boolean buyBackAbility = false;        //false by default
+    private boolean buyBackAbility = false; // false by default
     private boolean flashBackAbility = false;
     private boolean multiKicker = false;
     private boolean replicate = false;
@@ -63,17 +72,21 @@ public abstract class SpellAbility {
     private boolean cycling = false;
     private boolean isCharm = false;
     private boolean isDelve = false;
-    
+
     private int charmNumber;
     private int minCharmNumber;
     private ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
-    //private ArrayList<SpellAbility> charmChoicesMade = new ArrayList<SpellAbility>();
+    // private ArrayList<SpellAbility> charmChoicesMade = new
+    // ArrayList<SpellAbility>();
 
     private Input beforePayMana;
     private Input afterResolve;
     private Input afterPayMana;
 
+    /** The pay costs. */
     protected Cost payCosts = null;
+
+    /** The chosen target. */
     protected Target chosenTarget = null;
 
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
@@ -96,62 +109,79 @@ public abstract class SpellAbility {
 
         private static final long serialVersionUID = 1795025064923737374L;
 
-        public void execute(Object o) {
+        public void execute(final Object o) {
         }
     };
 
     /**
-     * <p>Constructor for SpellAbility.</p>
-     *
-     * @param spellOrAbility a int.
-     * @param i_sourceCard a {@link forge.Card} object.
+     * <p>
+     * Constructor for SpellAbility.
+     * </p>
+     * 
+     * @param spellOrAbility
+     *            a int.
+     * @param i_sourceCard
+     *            a {@link forge.Card} object.
      */
-    public SpellAbility(int spellOrAbility, Card i_sourceCard) {
-        if (spellOrAbility == Spell) spell = true;
-        else if (spellOrAbility == Ability) spell = false;
-
-        else throw new RuntimeException("SpellAbility : constructor error, invalid spellOrAbility argument = "
+    public SpellAbility(final int spellOrAbility, final Card i_sourceCard) {
+        if (spellOrAbility == Spell) {
+            spell = true;
+        } else if (spellOrAbility == Ability) {
+            spell = false;
+        } else {
+            throw new RuntimeException("SpellAbility : constructor error, invalid spellOrAbility argument = "
                     + spellOrAbility);
-
+        }
 
         sourceCard = i_sourceCard;
     }
 
-    //Spell, and Ability, and other Ability objects override this method
+    // Spell, and Ability, and other Ability objects override this method
     /**
-     * <p>canPlay.</p>
-     *
+     * <p>
+     * canPlay.
+     * </p>
+     * 
      * @return a boolean.
      */
-    abstract public boolean canPlay();
-
+    public abstract boolean canPlay();
 
     /**
-     *
-     * @return  boolean
+     * Can afford.
+     * 
+     * @return boolean
      */
     public boolean canAfford() {
-    	Player activator = this.getActivatingPlayer();
-    	if (activator == null) {
-    		activator = this.getSourceCard().getController();
+        Player activator = this.getActivatingPlayer();
+        if (activator == null) {
+            activator = this.getSourceCard().getController();
         }
-    	
-    	return ComputerUtil.canPayCost(this, activator);
+
+        return ComputerUtil.canPayCost(this, activator);
     }
 
-    public boolean canPlayAndAfford(){
-    	return canPlay() && canAfford();
-    }
-    
-    //all Spell's and Abilities must override this method
     /**
-     * <p>resolve.</p>
+     * Can play and afford.
+     * 
+     * @return true, if successful
      */
-    abstract public void resolve();
+    public final boolean canPlayAndAfford() {
+        return canPlay() && canAfford();
+    }
+
+    // all Spell's and Abilities must override this method
+    /**
+     * <p>
+     * resolve.
+     * </p>
+     */
+    public abstract void resolve();
 
     /**
-     * <p>canPlayAI.</p>
-     *
+     * <p>
+     * canPlayAI.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean canPlayAI() {
@@ -160,34 +190,44 @@ public abstract class SpellAbility {
 
     // This should be overridden by ALL AFs
     /**
-     * <p>doTrigger.</p>
-     *
-     * @param mandatory a boolean.
+     * <p>
+     * doTrigger.
+     * </p>
+     * 
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    public boolean doTrigger(boolean mandatory) {
+    public boolean doTrigger(final boolean mandatory) {
         return false;
     }
 
     /**
-     * <p>chooseTargetAI.</p>
+     * <p>
+     * chooseTargetAI.
+     * </p>
      */
     public void chooseTargetAI() {
         randomTarget.execute(this);
     }
 
     /**
-     * <p>setChooseTargetAI.</p>
-     *
-     * @param c a {@link forge.CommandArgs} object.
+     * <p>
+     * setChooseTargetAI.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CommandArgs} object.
      */
-    public void setChooseTargetAI(CommandArgs c) {
+    public void setChooseTargetAI(final CommandArgs c) {
         randomTarget = c;
     }
 
     /**
-     * <p>getChooseTargetAI.</p>
-     *
+     * <p>
+     * getChooseTargetAI.
+     * </p>
+     * 
      * @return a {@link forge.CommandArgs} object.
      */
     public CommandArgs getChooseTargetAI() {
@@ -195,8 +235,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Getter for the field <code>manaCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>manaCost</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getManaCost() {
@@ -204,17 +246,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>manaCost</code>.</p>
-     *
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>manaCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
      */
-    public void setManaCost(String cost) {
+    public void setManaCost(final String cost) {
         manaCost = cost;
     }
 
     /**
-     * <p>Getter for the field <code>additionalManaCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>additionalManaCost</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getAdditionalManaCost() {
@@ -222,17 +269,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>additionalManaCost</code>.</p>
-     *
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>additionalManaCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
      */
-    public void setAdditionalManaCost(String cost) {
+    public void setAdditionalManaCost(final String cost) {
         additionalManaCost = cost;
     }
 
     /**
-     * <p>Getter for the field <code>multiKickerManaCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>multiKickerManaCost</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getMultiKickerManaCost() {
@@ -240,17 +292,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>multiKickerManaCost</code>.</p>
-     *
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>multiKickerManaCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
      */
-    public void setMultiKickerManaCost(String cost) {
+    public void setMultiKickerManaCost(final String cost) {
         multiKickerManaCost = cost;
     }
 
     /**
-     * <p>Getter for the field <code>replicateManaCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>replicateManaCost</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getReplicateManaCost() {
@@ -258,17 +315,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>replicateManaCost</code>.</p>
-     *
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>replicateManaCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
      */
-    public void setReplicateManaCost(String cost) {
+    public void setReplicateManaCost(final String cost) {
         replicateManaCost = cost;
     }
 
     /**
-     * <p>Getter for the field <code>xManaCost</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>xManaCost</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getXManaCost() {
@@ -276,17 +338,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>xManaCost</code>.</p>
-     *
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>xManaCost</code>.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link java.lang.String} object.
      */
-    public void setXManaCost(String cost) {
+    public void setXManaCost(final String cost) {
         xManaCost = cost;
     }
 
     /**
-     * <p>Getter for the field <code>activatingPlayer</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>activatingPlayer</code>.
+     * </p>
+     * 
      * @return a {@link forge.Player} object.
      */
     public Player getActivatingPlayer() {
@@ -294,20 +361,26 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>activatingPlayer</code>.</p>
-     *
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * Setter for the field <code>activatingPlayer</code>.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
      */
-    public void setActivatingPlayer(Player player) {
+    public void setActivatingPlayer(final Player player) {
         // trickle down activating player
         activatingPlayer = player;
-        if (subAbility != null)
+        if (subAbility != null) {
             subAbility.setActivatingPlayer(player);
+        }
     }
 
     /**
-     * <p>isSpell.</p>
-     *
+     * <p>
+     * isSpell.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isSpell() {
@@ -315,8 +388,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>isAbility.</p>
-     *
+     * <p>
+     * isAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isAbility() {
@@ -324,8 +399,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>isTapAbility.</p>
-     *
+     * <p>
+     * isTapAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isTapAbility() {
@@ -333,8 +410,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>isUntapAbility.</p>
-     *
+     * <p>
+     * isUntapAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isUntapAbility() {
@@ -342,7 +421,9 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>makeUntapAbility.</p>
+     * <p>
+     * makeUntapAbility.
+     * </p>
      */
     public void makeUntapAbility() {
         untapAbility = true;
@@ -350,17 +431,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setIsBuyBackAbility.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsBuyBackAbility.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setIsBuyBackAbility(boolean b) {
+    public void setIsBuyBackAbility(final boolean b) {
         buyBackAbility = b;
     }
 
     /**
-     * <p>isBuyBackAbility.</p>
-     *
+     * <p>
+     * isBuyBackAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isBuyBackAbility() {
@@ -368,17 +454,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setIsMultiKicker.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsMultiKicker.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setIsMultiKicker(boolean b) {
+    public void setIsMultiKicker(final boolean b) {
         multiKicker = b;
     }
 
     /**
-     * <p>isMultiKicker.</p>
-     *
+     * <p>
+     * isMultiKicker.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isMultiKicker() {
@@ -386,17 +477,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setIsReplicate.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsReplicate.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setIsReplicate(boolean b) {
+    public void setIsReplicate(final boolean b) {
         replicate = b;
     }
 
     /**
-     * <p>isReplicate.</p>
-     *
+     * <p>
+     * isReplicate.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isReplicate() {
@@ -404,17 +500,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setIsXCost.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsXCost.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setIsXCost(boolean b) {
+    public void setIsXCost(final boolean b) {
         xCost = b;
     }
 
     /**
-     * <p>isXCost.</p>
-     *
+     * <p>
+     * isXCost.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isXCost() {
@@ -422,35 +523,45 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setIsCycling.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsCycling.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
-    public void setIsCycling(boolean b) {
+    public void setIsCycling(final boolean b) {
         cycling = b;
     }
 
     /**
-     * <p>isCycling.</p>
-     *
+     * <p>
+     * isCycling.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isCycling() {
+    public  boolean isCycling() {
         return cycling;
     }
 
     /**
-     * <p>Setter for the field <code>sourceCard</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>sourceCard</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
-    public void setSourceCard(Card c) {
+    public  void setSourceCard(final Card c) {
         sourceCard = c;
     }
 
     /**
-     * <p>Getter for the field <code>sourceCard</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>sourceCard</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
     public Card getSourceCard() {
@@ -458,8 +569,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Getter for the field <code>beforePayManaAI</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>beforePayManaAI</code>.
+     * </p>
+     * 
      * @return a {@link forge.Command} object.
      */
     public Command getBeforePayManaAI() {
@@ -467,18 +580,23 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>beforePayManaAI</code>.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * Setter for the field <code>beforePayManaAI</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
-    public void setBeforePayManaAI(Command c) {
+    public void setBeforePayManaAI(final Command c) {
         beforePayManaAI = c;
     }
 
-    //begin - Input methods
+    // begin - Input methods
     /**
-     * <p>Getter for the field <code>beforePayMana</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>beforePayMana</code>.
+     * </p>
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getBeforePayMana() {
@@ -486,17 +604,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>beforePayMana</code>.</p>
-     *
-     * @param in a {@link forge.gui.input.Input} object.
+     * <p>
+     * Setter for the field <code>beforePayMana</code>.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.gui.input.Input} object.
      */
-    public void setBeforePayMana(Input in) {
+    public void setBeforePayMana(final Input in) {
         beforePayMana = in;
     }
 
     /**
-     * <p>Getter for the field <code>afterPayMana</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>afterPayMana</code>.
+     * </p>
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getAfterPayMana() {
@@ -504,17 +627,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>afterPayMana</code>.</p>
-     *
-     * @param in a {@link forge.gui.input.Input} object.
+     * <p>
+     * Setter for the field <code>afterPayMana</code>.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.gui.input.Input} object.
      */
-    public void setAfterPayMana(Input in) {
+    public void setAfterPayMana(final Input in) {
         afterPayMana = in;
     }
 
     /**
-     * <p>Getter for the field <code>payCosts</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>payCosts</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.cost.Cost} object.
      */
     public Cost getPayCosts() {
@@ -522,17 +650,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>payCosts</code>.</p>
-     *
-     * @param abCost a {@link forge.card.cost.Cost} object.
+     * <p>
+     * Setter for the field <code>payCosts</code>.
+     * </p>
+     * 
+     * @param abCost
+     *            a {@link forge.card.cost.Cost} object.
      */
-    public void setPayCosts(Cost abCost) {
+    public void setPayCosts(final Cost abCost) {
         payCosts = abCost;
     }
 
     /**
-     * <p>getTarget.</p>
-     *
+     * <p>
+     * getTarget.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.Target} object.
      */
     public Target getTarget() {
@@ -540,53 +673,72 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setTarget.</p>
-     *
-     * @param tgt a {@link forge.card.spellability.Target} object.
+     * <p>
+     * setTarget.
+     * </p>
+     * 
+     * @param tgt
+     *            a {@link forge.card.spellability.Target} object.
      */
-    public void setTarget(Target tgt) {
+    public void setTarget(final Target tgt) {
         chosenTarget = tgt;
     }
 
     /**
-     * <p>Setter for the field <code>restrictions</code>.</p>
-     *
-     * @param restrict a {@link forge.card.spellability.SpellAbility_Restriction} object.
+     * <p>
+     * Setter for the field <code>restrictions</code>.
+     * </p>
+     * 
+     * @param restrict
+     *            a {@link forge.card.spellability.SpellAbility_Restriction}
+     *            object.
      */
-    public void setRestrictions(SpellAbility_Restriction restrict) {
+    public void setRestrictions(final SpellAbility_Restriction restrict) {
         restrictions = restrict;
     }
 
     /**
-     * <p>Getter for the field <code>restrictions</code>.</p>
-     *
-     * @return a {@link forge.card.spellability.SpellAbility_Restriction} object.
+     * <p>
+     * Getter for the field <code>restrictions</code>.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility_Restriction}
+     *         object.
      */
     public SpellAbility_Restriction getRestrictions() {
         return restrictions;
     }
 
     /**
-     * <p>Shortcut to see how many activations there were.</p>
+     * <p>
+     * Shortcut to see how many activations there were.
+     * </p>
+     * 
+     * @return the activations this turn
      */
-    public int getActivationsThisTurn(){
-    	return restrictions.getNumberTurnActivations();
+    public int getActivationsThisTurn() {
+        return restrictions.getNumberTurnActivations();
     }
-    
-    
+
     /**
-     * <p>Setter for the field <code>conditions</code>.</p>
-     *
-     * @param condition a {@link forge.card.spellability.SpellAbility_Condition} object.
+     * <p>
+     * Setter for the field <code>conditions</code>.
+     * </p>
+     * 
+     * @param condition
+     *            a {@link forge.card.spellability.SpellAbility_Condition}
+     *            object.
      * @since 1.0.15
      */
-    public void setConditions(SpellAbility_Condition condition) {
+    public void setConditions(final SpellAbility_Condition condition) {
         conditions = condition;
     }
 
     /**
-     * <p>Getter for the field <code>conditions</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>conditions</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility_Condition} object.
      * @since 1.0.15
      */
@@ -595,17 +747,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>abilityFactory</code>.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * Setter for the field <code>abilityFactory</code>.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
-    public void setAbilityFactory(AbilityFactory af) {
+    public void setAbilityFactory(final AbilityFactory af) {
         abilityFactory = af;
     }
 
     /**
-     * <p>Getter for the field <code>abilityFactory</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>abilityFactory</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory getAbilityFactory() {
@@ -613,8 +770,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Getter for the field <code>payingMana</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>payingMana</code>.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<Mana> getPayingMana() {
@@ -622,8 +781,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>getPayingManaAbilities.</p>
-     *
+     * <p>
+     * getPayingManaAbilities.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<Ability_Mana> getPayingManaAbilities() {
@@ -632,17 +793,22 @@ public abstract class SpellAbility {
 
     // Combined PaidLists
     /**
-     * <p>setPaidHash.</p>
-     *
-     * @param hash a {@link java.util.HashMap} object.
+     * <p>
+     * setPaidHash.
+     * </p>
+     * 
+     * @param hash
+     *            a {@link java.util.HashMap} object.
      */
-    public void setPaidHash(HashMap<String, CardList> hash) {
+    public void setPaidHash(final HashMap<String, CardList> hash) {
         paidLists = hash;
     }
 
     /**
-     * <p>getPaidHash.</p>
-     *
+     * <p>
+     * getPaidHash.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      */
     public HashMap<String, CardList> getPaidHash() {
@@ -651,48 +817,64 @@ public abstract class SpellAbility {
 
     // Paid List are for things ca
     /**
-     * <p>setPaidList.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param str a {@link java.lang.String} object.
+     * <p>
+     * setPaidList.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param str
+     *            a {@link java.lang.String} object.
      */
-    public void setPaidList(CardList list, String str) {
+    public void setPaidList(final CardList list, final String str) {
         paidLists.put(str, list);
     }
 
     /**
-     * <p>getPaidList.</p>
-     *
-     * @param str a {@link java.lang.String} object.
+     * <p>
+     * getPaidList.
+     * </p>
+     * 
+     * @param str
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getPaidList(String str) {
+    public CardList getPaidList(final String str) {
         return paidLists.get(str);
     }
 
     /**
-     * <p>addCostToHashList.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param str a {@link java.lang.String} object.
+     * <p>
+     * addCostToHashList.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param str
+     *            a {@link java.lang.String} object.
      */
-    public void addCostToHashList(Card c, String str) {
-        if (!paidLists.containsKey(str))
+    public void addCostToHashList(final Card c, final String str) {
+        if (!paidLists.containsKey(str)) {
             paidLists.put(str, new CardList());
+        }
 
         paidLists.get(str).add(c);
     }
 
     /**
-     * <p>resetPaidHash.</p>
+     * <p>
+     * resetPaidHash.
+     * </p>
      */
     public void resetPaidHash() {
         paidLists = new HashMap<String, CardList>();
     }
 
     /**
-     * <p>Getter for the field <code>triggeringObjects</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>triggeringObjects</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
@@ -701,51 +883,66 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>setAllTriggeringObjects.</p>
-     *
-     * @param triggeredObjects a {@link java.util.HashMap} object.
+     * <p>
+     * setAllTriggeringObjects.
+     * </p>
+     * 
+     * @param triggeredObjects
+     *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public void setAllTriggeringObjects(HashMap<String, Object> triggeredObjects) {
+    public void setAllTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
         this.triggeringObjects = triggeredObjects;
     }
 
     /**
-     * <p>setTriggeringObject.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param o a {@link java.lang.Object} object.
+     * <p>
+     * setTriggeringObject.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param o
+     *            a {@link java.lang.Object} object.
      * @since 1.0.15
      */
-    public void setTriggeringObject(String type, Object o) {
+    public void setTriggeringObject(final String type, final Object o) {
         this.triggeringObjects.put(type, o);
     }
 
     /**
-     * <p>getTriggeringObject.</p>
-     *
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * getTriggeringObject.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.Object} object.
      * @since 1.0.15
      */
-    public Object getTriggeringObject(String type) {
+    public Object getTriggeringObject(final String type) {
         return triggeringObjects.get(type);
     }
 
     /**
-     * <p>hasTriggeringObject.</p>
-     *
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * hasTriggeringObject.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      * @since 1.0.15
      */
-    public boolean hasTriggeringObject(String type) {
+    public boolean hasTriggeringObject(final String type) {
         return triggeringObjects.containsKey(type);
     }
 
     /**
-     * <p>resetTriggeringObjects.</p>
-     *
+     * <p>
+     * resetTriggeringObjects.
+     * </p>
+     * 
      * @since 1.0.15
      */
     public void resetTriggeringObjects() {
@@ -753,28 +950,33 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>resetOnceResolved.</p>
+     * <p>
+     * resetOnceResolved.
+     * </p>
      */
     public void resetOnceResolved() {
         resetPaidHash();
 
-        if (chosenTarget != null)
+        if (chosenTarget != null) {
             chosenTarget.resetTargets();
+        }
 
         resetTriggeringObjects();
-        
-        //Clear SVars
-        for(String store : Card.getStorableSVars()){
+
+        // Clear SVars
+        for (String store : Card.getStorableSVars()) {
             String value = sourceCard.getSVar(store);
-            if (value.length() > 0){
+            if (value.length() > 0) {
                 sourceCard.setSVar(store, "");
             }
         }
     }
 
     /**
-     * <p>Getter for the field <code>afterResolve</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>afterResolve</code>.
+     * </p>
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getAfterResolve() {
@@ -782,40 +984,52 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>afterResolve</code>.</p>
-     *
-     * @param in a {@link forge.gui.input.Input} object.
+     * <p>
+     * Setter for the field <code>afterResolve</code>.
+     * </p>
+     * 
+     * @param in
+     *            a {@link forge.gui.input.Input} object.
      */
-    public void setAfterResolve(Input in) {
+    public void setAfterResolve(final Input in) {
         afterResolve = in;
     }
 
     /**
-     * <p>Setter for the field <code>stackDescription</code>.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>stackDescription</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
-    public void setStackDescription(String s) {
+    public void setStackDescription(final String s) {
         stackDescription = s;
-        if (description == "" && sourceCard.getText().equals(""))
+        if (description == "" && sourceCard.getText().equals("")) {
             description = s;
+        }
     }
 
     /**
-     * <p>Getter for the field <code>stackDescription</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>stackDescription</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getStackDescription() {
-        if (stackDescription.equals(getSourceCard().getText().trim())) return getSourceCard().getName() + " - "
-                + getSourceCard().getText();
+        if (stackDescription.equals(getSourceCard().getText().trim())) {
+            return getSourceCard().getName() + " - " + getSourceCard().getText();
+        }
 
         return stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
     }
 
     /**
-     * <p>isIntrinsic.</p>
-     *
+     * <p>
+     * isIntrinsic.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isIntrinsic() {
@@ -823,8 +1037,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>isExtrinsic.</p>
-     *
+     * <p>
+     * isExtrinsic.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isExtrinsic() {
@@ -832,39 +1048,49 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>type</code>.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>type</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
-    public void setType(String s) //Extrinsic or Intrinsic:
+    public void setType(final String s) // Extrinsic or Intrinsic:
     {
         type = s;
     }
 
     /**
-     * <p>Getter for the field <code>type</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>type</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getType() //Extrinsic or Intrinsic:
+    public String getType() // Extrinsic or Intrinsic:
     {
         return type;
     }
 
-    //setDescription() includes mana cost and everything like
-    //"G, tap: put target creature from your hand onto the battlefield"
+    // setDescription() includes mana cost and everything like
+    // "G, tap: put target creature from your hand onto the battlefield"
     /**
-     * <p>Setter for the field <code>description</code>.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>description</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
-    public void setDescription(String s) {
+    public void setDescription(final String s) {
         description = s;
     }
 
     /**
-     * <p>Getter for the field <code>description</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>description</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getDescription() {
@@ -873,23 +1099,29 @@ public abstract class SpellAbility {
 
     /** {@inheritDoc} */
     @Override
-    public String toString() {
-        
-        if(isSuppressed()) {
+    public final String toString() {
+
+        if (isSuppressed()) {
             return "";
         }
 
         return toUnsuppressedString();
     }
-    
+
+    /**
+     * To unsuppressed string.
+     * 
+     * @return the string
+     */
     public String toUnsuppressedString() {
-        
+
         StringBuilder sb = new StringBuilder();
         SpellAbility node = this;
 
         while (node != null) {
-            if (node != this)
+            if (node != this) {
                 sb.append(" ");
+            }
 
             sb.append(node.getDescription().replace("CARDNAME", node.getSourceCard().getName()));
             node = node.getSubAbility();
@@ -899,19 +1131,25 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>subAbility</code>.</p>
-     *
-     * @param subAbility a {@link forge.card.spellability.Ability_Sub} object.
+     * <p>
+     * Setter for the field <code>subAbility</code>.
+     * </p>
+     * 
+     * @param subAbility
+     *            a {@link forge.card.spellability.Ability_Sub} object.
      */
-    public void setSubAbility(Ability_Sub subAbility) {
+    public void setSubAbility(final Ability_Sub subAbility) {
         this.subAbility = subAbility;
-        if (subAbility != null)
+        if (subAbility != null) {
             subAbility.setParent(this);
+        }
     }
 
     /**
-     * <p>Getter for the field <code>subAbility</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>subAbility</code>.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.Ability_Sub} object.
      */
     public Ability_Sub getSubAbility() {
@@ -919,18 +1157,21 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Getter for the field <code>targetCard</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetCard</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getTargetCard() {
+    public  Card getTargetCard() {
         if (targetCard == null) {
             Target tgt = this.getTarget();
             if (tgt != null) {
                 ArrayList<Card> list = tgt.getTargetCards();
 
-                if (!list.isEmpty())
+                if (!list.isEmpty()) {
                     return list.get(0);
+                }
             }
             return null;
         }
@@ -939,11 +1180,14 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>targetCard</code>.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>targetCard</code>.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      */
-    public void setTargetCard(Card card) {
+    public void setTargetCard(final Card card) {
         if (card == null) {
             System.out.println(getSourceCard() + " - SpellAbility.setTargetCard() called with null for target card.");
             return;
@@ -953,20 +1197,25 @@ public abstract class SpellAbility {
         if (tgt != null) {
             tgt.addTarget(card);
         } else {
-            targetPlayer = null;//reset setTargetPlayer()
+            targetPlayer = null; // reset setTargetPlayer()
             targetCard = card;
         }
         String desc = "";
         if (null != card) {
-            if (!card.isFaceDown()) desc = getSourceCard().getName() + " - targeting " + card;
-            else desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+            if (!card.isFaceDown()) {
+                desc = getSourceCard().getName() + " - targeting " + card;
+            } else {
+                desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+            }
             setStackDescription(desc);
         }
     }
 
     /**
-     * <p>Getter for the field <code>targetList</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetList</code>.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
     public CardList getTargetList() {
@@ -974,13 +1223,18 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>targetList</code>.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * Setter for the field <code>targetList</code>.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public void setTargetList(CardList list) {
-        // The line below started to create a null error at forge.CardFactoryUtil.canTarget(CardFactoryUtil.java:3329)
-        // after ForgeSVN r2699. I hope that commenting out the line below will not result in other bugs.  :)
+    public void setTargetList(final CardList list) {
+        // The line below started to create a null error at
+        // forge.CardFactoryUtil.canTarget(CardFactoryUtil.java:3329)
+        // after ForgeSVN r2699. I hope that commenting out the line below will
+        // not result in other bugs. :)
         // targetPlayer = null;//reset setTargetPlayer()
 
         targetList = list;
@@ -988,36 +1242,48 @@ public abstract class SpellAbility {
         sb.append(getSourceCard().getName()).append(" - targeting ");
         for (int i = 0; i < targetList.size(); i++) {
 
-            if (!targetList.get(i).isFaceDown()) sb.append(targetList.get(i));
-            else sb.append("Morph(").append(targetList.get(i).getUniqueNumber()).append(")");
+            if (!targetList.get(i).isFaceDown()) {
+                sb.append(targetList.get(i));
+            } else {
+                sb.append("Morph(").append(targetList.get(i).getUniqueNumber()).append(")");
+            }
 
-            if (i < targetList.size() - 1) sb.append(", ");
+            if (i < targetList.size() - 1) {
+                sb.append(", ");
+            }
         }
         setStackDescription(sb.toString());
     }
 
     /**
-     * <p>Setter for the field <code>targetPlayer</code>.</p>
-     *
-     * @param p a {@link forge.Player} object.
+     * <p>
+     * Setter for the field <code>targetPlayer</code>.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.Player} object.
      */
-    public void setTargetPlayer(Player p) {
-        if (p == null || (!(p.isHuman() || p.isComputer()))) throw new RuntimeException(
-                "SpellAbility : setTargetPlayer() error, argument is " + p + " source card is " + getSourceCard());
+    public void setTargetPlayer(final Player p) {
+        if (p == null || (!(p.isHuman() || p.isComputer()))) {
+            throw new RuntimeException("SpellAbility : setTargetPlayer() error, argument is " + p + " source card is "
+                    + getSourceCard());
+        }
 
         Target tgt = this.getTarget();
         if (tgt != null) {
             tgt.addTarget(p);
         } else {
-            targetCard = null;//reset setTargetCard()
+            targetCard = null; // reset setTargetCard()
             targetPlayer = p;
         }
         setStackDescription(getSourceCard().getName() + " - targeting " + p);
     }
 
     /**
-     * <p>Getter for the field <code>targetPlayer</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>targetPlayer</code>.
+     * </p>
+     * 
      * @return a {@link forge.Player} object.
      */
     public Player getTargetPlayer() {
@@ -1026,8 +1292,9 @@ public abstract class SpellAbility {
             if (tgt != null) {
                 ArrayList<Player> list = tgt.getTargetPlayers();
 
-                if (!list.isEmpty())
+                if (!list.isEmpty()) {
                     return list.get(0);
+                }
             }
             return null;
         }
@@ -1035,8 +1302,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Getter for the field <code>cancelCommand</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>cancelCommand</code>.
+     * </p>
+     * 
      * @return a {@link forge.Command} object.
      */
     public Command getCancelCommand() {
@@ -1044,26 +1313,34 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>cancelCommand</code>.</p>
-     *
-     * @param cancelCommand a {@link forge.Command} object.
+     * <p>
+     * Setter for the field <code>cancelCommand</code>.
+     * </p>
+     * 
+     * @param cancelCommand
+     *            a {@link forge.Command} object.
      */
-    public void setCancelCommand(Command cancelCommand) {
+    public void setCancelCommand(final Command cancelCommand) {
         this.cancelCommand = cancelCommand;
     }
 
     /**
-     * <p>Setter for the field <code>flashBackAbility</code>.</p>
-     *
-     * @param flashBackAbility a boolean.
+     * <p>
+     * Setter for the field <code>flashBackAbility</code>.
+     * </p>
+     * 
+     * @param flashBackAbility
+     *            a boolean.
      */
-    public void setFlashBackAbility(boolean flashBackAbility) {
+    public void setFlashBackAbility(final boolean flashBackAbility) {
         this.flashBackAbility = flashBackAbility;
     }
 
     /**
-     * <p>isFlashBackAbility.</p>
-     *
+     * <p>
+     * isFlashBackAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isFlashBackAbility() {
@@ -1071,28 +1348,37 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>kickerAbility</code>.</p>
-     *
-     * @param kab a boolean.
+     * <p>
+     * Setter for the field <code>kickerAbility</code>.
+     * </p>
+     * 
+     * @param kab
+     *            a boolean.
      */
-    public void setKickerAbility(boolean kab) {
+    public void setKickerAbility(final boolean kab) {
         this.kickerAbility = kab;
     }
 
     /**
-     * <p>isKickerAbility.</p>
-     *
+     * <p>
+     * isKickerAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isKickerAbility() {
         return kickerAbility;
     }
 
-    // Only used by Ability_Reflected_Mana, because the user has an option to cancel the input.
-    // Most spell abilities and even most mana abilities do not need to use this.
+    // Only used by Ability_Reflected_Mana, because the user has an option to
+    // cancel the input.
+    // Most spell abilities and even most mana abilities do not need to use
+    // this.
     /**
-     * <p>wasCancelled.</p>
-     *
+     * <p>
+     * wasCancelled.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean wasCancelled() {
@@ -1100,8 +1386,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>copy.</p>
-     *
+     * <p>
+     * copy.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbility copy() {
@@ -1115,17 +1403,22 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>kothThirdAbility</code>.</p>
-     *
-     * @param kothThirdAbility a boolean.
+     * <p>
+     * Setter for the field <code>kothThirdAbility</code>.
+     * </p>
+     * 
+     * @param kothThirdAbility
+     *            a boolean.
      */
-    public void setKothThirdAbility(boolean kothThirdAbility) {
+    public void setKothThirdAbility(final boolean kothThirdAbility) {
         this.kothThirdAbility = kothThirdAbility;
     }
 
     /**
-     * <p>isKothThirdAbility.</p>
-     *
+     * <p>
+     * isKothThirdAbility.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isKothThirdAbility() {
@@ -1133,43 +1426,64 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>trigger</code>.</p>
-     *
-     * @param trigger a boolean.
+     * <p>
+     * Setter for the field <code>trigger</code>.
+     * </p>
+     * 
+     * @param trigger
+     *            a boolean.
      */
-    public void setTrigger(boolean trigger) {
+    public void setTrigger(final boolean trigger) {
         this.trigger = trigger;
     }
 
     /**
-     * <p>isTrigger.</p>
-     *
+     * <p>
+     * isTrigger.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isTrigger() {
         return trigger;
     }
-    
+
+    /**
+     * Sets the optional trigger.
+     * 
+     * @param optrigger
+     *            the new optional trigger
+     */
     public void setOptionalTrigger(final boolean optrigger) {
-    	this.optionalTrigger = optrigger;
-    }
-    
-    public boolean isOptionalTrigger() {
-    	return this.optionalTrigger;
+        this.optionalTrigger = optrigger;
     }
 
     /**
-     * <p>setSourceTrigger.</p>
-     *
-     * @param ID a int.
+     * Checks if is optional trigger.
+     * 
+     * @return true, if is optional trigger
      */
-    public void setSourceTrigger(int ID) {
+    public boolean isOptionalTrigger() {
+        return this.optionalTrigger;
+    }
+
+    /**
+     * <p>
+     * setSourceTrigger.
+     * </p>
+     * 
+     * @param ID
+     *            a int.
+     */
+    public void setSourceTrigger(final int ID) {
         sourceTrigger = ID;
     }
 
     /**
-     * <p>getSourceTrigger.</p>
-     *
+     * <p>
+     * getSourceTrigger.
+     * </p>
+     * 
      * @return a int.
      */
     public int getSourceTrigger() {
@@ -1177,120 +1491,158 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>Setter for the field <code>mandatory</code>.</p>
-     *
-     * @param mand a boolean.
+     * <p>
+     * Setter for the field <code>mandatory</code>.
+     * </p>
+     * 
+     * @param mand
+     *            a boolean.
      */
-    public void setMandatory(boolean mand) {
+    public final void setMandatory(final boolean mand) {
         this.mandatory = mand;
     }
 
     /**
-     * <p>isMandatory.</p>
-     *
+     * <p>
+     * isMandatory.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isMandatory() {
+    public final boolean isMandatory() {
         return mandatory;
     }
 
     /**
-     * <p>getRootSpellAbility.</p>
-     *
+     * <p>
+     * getRootSpellAbility.
+     * </p>
+     * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public SpellAbility getRootSpellAbility() {
+    public final SpellAbility getRootSpellAbility() {
         if (this instanceof Ability_Sub) {
             SpellAbility parent = ((Ability_Sub) this).getParent();
-            if (parent != null)
+            if (parent != null) {
                 return parent.getRootSpellAbility();
+            }
         }
 
         return this;
     }
 
     /**
-     * <p>getAllTargetChoices.</p>
-     *
+     * <p>
+     * getAllTargetChoices.
+     * </p>
+     * 
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public ArrayList<Target_Choices> getAllTargetChoices() {
+    public final ArrayList<Target_Choices> getAllTargetChoices() {
         ArrayList<Target_Choices> res = new ArrayList<Target_Choices>();
 
         SpellAbility sa = getRootSpellAbility();
-        if (sa.getTarget() != null)
+        if (sa.getTarget() != null) {
             res.add(sa.getTarget().getTargetChoices());
+        }
         while (sa.getSubAbility() != null) {
             sa = sa.getSubAbility();
 
-            if (sa.getTarget() != null)
+            if (sa.getTarget() != null) {
                 res.add(sa.getTarget().getTargetChoices());
+            }
         }
 
         return res;
     }
-    
-    //is this a wrapping ability (used by trigger abilities)
+
+    // is this a wrapping ability (used by trigger abilities)
     /**
-     * <p>isWrapper.</p>
-     *
+     * <p>
+     * isWrapper.
+     * </p>
+     * 
      * @return a boolean.
      * @since 1.0.15
      */
     public boolean isWrapper() {
-    	return false;
+        return false;
     }
-    
-    public void setTemporarilySuppressed(boolean supp) {
+
+    /**
+     * Sets the temporarily suppressed.
+     * 
+     * @param supp
+     *            the new temporarily suppressed
+     */
+    public final void setTemporarilySuppressed(final boolean supp) {
         temporarilySuppressed = supp;
     }
-    
-    public boolean isSuppressed() {
+
+    /**
+     * Checks if is suppressed.
+     * 
+     * @return true, if is suppressed
+     */
+    public final boolean isSuppressed() {
         return (temporarilySuppressed);
     }
-    
+
     /**
-     * <p>setIsCharm.</p>
-     *
-     * @param b a boolean.
+     * <p>
+     * setIsCharm.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
      */
     public final void setIsCharm(final boolean b) {
         isCharm = b;
     }
 
     /**
-     * <p>isCharm.</p>
-     *
+     * <p>
+     * isCharm.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isCharm() {
         return isCharm;
     }
-    
+
     /**
-     * <p>setCharmNumber.</p>
-     *
-     * @param i an int
+     * <p>
+     * setCharmNumber.
+     * </p>
+     * 
+     * @param i
+     *            an int
      */
     public final void setCharmNumber(final int i) {
         charmNumber = i;
     }
 
     /**
-     * <p>getCharmNumber.</p>
-     *
+     * <p>
+     * getCharmNumber.
+     * </p>
+     * 
      * @return an int
      */
     public final int getCharmNumber() {
         return charmNumber;
     }
-    
+
     /**
-     * <p>setMinCharmNumber.</p>
-     *
-     * @param i an int
+     * <p>
+     * setMinCharmNumber.
+     * </p>
+     * 
+     * @param i
+     *            an int
      * @since 1.1.6
      */
     public final void setMinCharmNumber(final int i) {
@@ -1298,19 +1650,24 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>getMinCharmNumber.</p>
-     *
+     * <p>
+     * getMinCharmNumber.
+     * </p>
+     * 
      * @return an int
      * @since 1.1.6
      */
     public final int getMinCharmNumber() {
         return minCharmNumber;
     }
-    
+
     /**
-     * <p>addCharmChoice.</p>
-     *
-     * @param sa a SpellAbility
+     * <p>
+     * addCharmChoice.
+     * </p>
+     * 
+     * @param sa
+     *            a SpellAbility
      * @since 1.1.6
      */
     public final void addCharmChoice(final SpellAbility sa) {
@@ -1318,8 +1675,10 @@ public abstract class SpellAbility {
     }
 
     /**
-     * <p>getCharmChoicesMade.</p>
-     *
+     * <p>
+     * getCharmChoicesMade.
+     * </p>
+     * 
      * @return an ArrayList<SpellAbility>
      * @since 1.1.6
      */
@@ -1328,17 +1687,22 @@ public abstract class SpellAbility {
     }
 
     /**
+     * Gets the checks if is delve.
+     * 
      * @return the isDelve
      */
-    public boolean getIsDelve() {
+    public final boolean getIsDelve() {
         return isDelve;
     }
 
     /**
-     * @param isDelve0 the isDelve to set
+     * Sets the checks if is delve.
+     * 
+     * @param isDelve0
+     *            the isDelve to set
      */
-    public void setIsDelve(boolean isDelve0) {
-        this.isDelve = isDelve0; // TODO: Add 0 to parameter's name.
+    public final void setIsDelve(final boolean isDelve0) {
+        this.isDelve = isDelve0; // TODO Add 0 to parameter's name.
     }
 
 }

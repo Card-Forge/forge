@@ -4,7 +4,6 @@ import java.util.EnumSet;
 
 import forge.card.mana.ManaCost;
 
-// TODO Auto-generated Javadoc
 /**
  * <p>
  * Color class.
@@ -64,7 +63,7 @@ public enum Color {
      *            an array of {@link java.lang.String} objects.
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> ConvertStringsToColor(String[] s) {
+    public static EnumSet<Color> ConvertStringsToColor(final String[] s) {
         EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
         for (int i = 0; i < s.length; i++) {
@@ -87,7 +86,7 @@ public enum Color {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Color} object.
      */
-    public static Color ConvertFromString(String s) {
+    public static Color ConvertFromString(final String s) {
 
         if (s.equals(Constant.Color.White)) {
             return Color.White;

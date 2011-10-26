@@ -1,14 +1,15 @@
 package forge;
 
-
-import forge.card.spellability.SpellAbility;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import forge.card.spellability.SpellAbility;
+
 /**
- * <p>StaticEffect class.</p>
- *
+ * <p>
+ * StaticEffect class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -24,52 +25,54 @@ public class StaticEffect {
     private String chosenType;
     private HashMap<String, String> mapParams = new HashMap<String, String>();
 
-    //for P/T
+    // for P/T
     private HashMap<Card, String> originalPT = new HashMap<Card, String>();
 
-    //for types
+    // for types
     private boolean overwriteTypes = false;
     private boolean keepSupertype = false;
     private boolean removeSubTypes = false;
     private HashMap<Card, ArrayList<String>> types = new HashMap<Card, ArrayList<String>>();
     private HashMap<Card, ArrayList<String>> originalTypes = new HashMap<Card, ArrayList<String>>();
 
-    //keywords
+    // keywords
     private boolean overwriteKeywords = false;
     private HashMap<Card, ArrayList<String>> originalKeywords = new HashMap<Card, ArrayList<String>>();
 
-    //for abilities
+    // for abilities
     private boolean overwriteAbilities = false;
     private HashMap<Card, ArrayList<SpellAbility>> originalAbilities = new HashMap<Card, ArrayList<SpellAbility>>();
 
-    //for colors
+    // for colors
     private String colorDesc = "";
     private boolean overwriteColors = false;
     private HashMap<Card, Long> timestamps = new HashMap<Card, Long>();
 
     /**
-     * setTimestamp
-     * TODO Write javadoc for this method.
-     * @param t a long
+     * setTimestamp TODO Write javadoc for this method.
+     * 
+     * @param t
+     *            a long
      */
     public final void setTimestamp(final long t) {
         timestamp = t;
     }
 
     /**
-     * getTimestamp.
-     * TODO Write javadoc for this method.
+     * getTimestamp. TODO Write javadoc for this method.
+     * 
      * @return a long
      */
     public final long getTimestamp() {
         return timestamp;
     }
 
-
-    //overwrite SAs
+    // overwrite SAs
     /**
-     * <p>isOverwriteAbilities.</p>
-     *
+     * <p>
+     * isOverwriteAbilities.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isOverwriteAbilities() {
@@ -77,20 +80,27 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Setter for the field <code>overwriteAbilities</code>.</p>
-     *
-     * @param overwriteAbilitiesIn a boolean.
+     * <p>
+     * Setter for the field <code>overwriteAbilities</code>.
+     * </p>
+     * 
+     * @param overwriteAbilitiesIn
+     *            a boolean.
      */
     public final void setOverwriteAbilities(final boolean overwriteAbilitiesIn) {
         this.overwriteAbilities = overwriteAbilitiesIn;
     }
 
-    //original SAs
+    // original SAs
     /**
-     * <p>addOriginalAbilities.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addOriginalAbilities.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
         if (!originalAbilities.containsKey(c)) {
@@ -103,10 +113,14 @@ public class StaticEffect {
     }
 
     /**
-     * <p>addOriginalAbilities.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.util.ArrayList} object.
+     * <p>
+     * addOriginalAbilities.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalAbilities(final Card c, final ArrayList<SpellAbility> s) {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>(s);
@@ -119,9 +133,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Getter for the field <code>originalAbilities</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Getter for the field <code>originalAbilities</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SpellAbility> getOriginalAbilities(final Card c) {
@@ -133,9 +150,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearOriginalAbilities.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * clearOriginalAbilities.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
     public final void clearOriginalAbilities(final Card c) {
         if (originalAbilities.containsKey(c)) {
@@ -144,16 +164,20 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearAllOriginalAbilities.</p>
+     * <p>
+     * clearAllOriginalAbilities.
+     * </p>
      */
     public final void clearAllOriginalAbilities() {
         originalAbilities.clear();
     }
 
-    //overwrite keywords
+    // overwrite keywords
     /**
-     * <p>isOverwriteKeywords.</p>
-     *
+     * <p>
+     * isOverwriteKeywords.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isOverwriteKeywords() {
@@ -161,20 +185,27 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Setter for the field <code>overwriteKeywords</code>.</p>
-     *
-     * @param overwriteKeywordsIn a boolean.
+     * <p>
+     * Setter for the field <code>overwriteKeywords</code>.
+     * </p>
+     * 
+     * @param overwriteKeywordsIn
+     *            a boolean.
      */
     public final void setOverwriteKeywords(final boolean overwriteKeywordsIn) {
         this.overwriteKeywords = overwriteKeywordsIn;
     }
 
-    //original keywords
+    // original keywords
     /**
-     * <p>addOriginalKeyword.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * addOriginalKeyword.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.lang.String} object.
      */
     public final void addOriginalKeyword(final Card c, final String s) {
         if (!originalKeywords.containsKey(c)) {
@@ -187,10 +218,14 @@ public class StaticEffect {
     }
 
     /**
-     * <p>addOriginalKeywords.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.util.ArrayList} object.
+     * <p>
+     * addOriginalKeywords.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalKeywords(final Card c, final ArrayList<String> s) {
         ArrayList<String> list = new ArrayList<String>(s);
@@ -203,9 +238,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Getter for the field <code>originalKeywords</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Getter for the field <code>originalKeywords</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalKeywords(final Card c) {
@@ -217,9 +255,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearOriginalKeywords.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * clearOriginalKeywords.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
     public final void clearOriginalKeywords(final Card c) {
         if (originalKeywords.containsKey(c)) {
@@ -228,19 +269,26 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearAllOriginalKeywords.</p>
+     * <p>
+     * clearAllOriginalKeywords.
+     * </p>
      */
     public final void clearAllOriginalKeywords() {
         originalKeywords.clear();
     }
 
-    //original power/toughness
+    // original power/toughness
     /**
-     * <p>addOriginalPT.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param power a int.
-     * @param toughness a int.
+     * <p>
+     * addOriginalPT.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param power
+     *            a int.
+     * @param toughness
+     *            a int.
      */
     public final void addOriginalPT(final Card c, final int power, final int toughness) {
         String pt = power + "/" + toughness;
@@ -250,9 +298,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>getOriginalPower.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * getOriginalPower.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public final int getOriginalPower(final Card c) {
@@ -264,9 +315,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>getOriginalToughness.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * getOriginalToughness.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a int.
      */
     public final int getOriginalToughness(final Card c) {
@@ -278,16 +332,20 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearAllOriginalPTs.</p>
+     * <p>
+     * clearAllOriginalPTs.
+     * </p>
      */
     public final void clearAllOriginalPTs() {
         originalPT.clear();
     }
 
-    //should we overwrite types?
+    // should we overwrite types?
     /**
-     * <p>isOverwriteTypes.</p>
-     *
+     * <p>
+     * isOverwriteTypes.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isOverwriteTypes() {
@@ -295,17 +353,22 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Setter for the field <code>overwriteTypes</code>.</p>
-     *
-     * @param overwriteTypesIn a boolean.
+     * <p>
+     * Setter for the field <code>overwriteTypes</code>.
+     * </p>
+     * 
+     * @param overwriteTypesIn
+     *            a boolean.
      */
     public final void setOverwriteTypes(final boolean overwriteTypesIn) {
         this.overwriteTypes = overwriteTypesIn;
     }
 
     /**
-     * <p>isKeepSupertype.</p>
-     *
+     * <p>
+     * isKeepSupertype.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isKeepSupertype() {
@@ -313,18 +376,23 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Setter for the field <code>keepSupertype</code>.</p>
-     *
-     * @param keepSupertypeIn a boolean.
+     * <p>
+     * Setter for the field <code>keepSupertype</code>.
+     * </p>
+     * 
+     * @param keepSupertypeIn
+     *            a boolean.
      */
-    public final void setKeepSupertype(boolean keepSupertypeIn) {
+    public final void setKeepSupertype(final boolean keepSupertypeIn) {
         this.keepSupertype = keepSupertypeIn;
     }
 
-    //should we overwrite land types?
+    // should we overwrite land types?
     /**
-     * <p>isRemoveSubTypes.</p>
-     *
+     * <p>
+     * isRemoveSubTypes.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean isRemoveSubTypes() {
@@ -332,20 +400,27 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Setter for the field <code>removeSubTypes</code>.</p>
-     *
-     * @param removeSubTypesIn a boolean.
+     * <p>
+     * Setter for the field <code>removeSubTypes</code>.
+     * </p>
+     * 
+     * @param removeSubTypesIn
+     *            a boolean.
      */
     public final void setRemoveSubTypes(final boolean removeSubTypesIn) {
         this.removeSubTypes = removeSubTypesIn;
     }
 
-    //original types
+    // original types
     /**
-     * <p>addOriginalType.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * addOriginalType.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.lang.String} object.
      */
     public final void addOriginalType(final Card c, final String s) {
         if (!originalTypes.containsKey(c)) {
@@ -358,10 +433,14 @@ public class StaticEffect {
     }
 
     /**
-     * <p>addOriginalTypes.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.util.ArrayList} object.
+     * <p>
+     * addOriginalTypes.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalTypes(final Card c, final ArrayList<String> s) {
         ArrayList<String> list = new ArrayList<String>(s);
@@ -374,9 +453,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Getter for the field <code>originalTypes</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Getter for the field <code>originalTypes</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalTypes(final Card c) {
@@ -388,9 +470,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearOriginalTypes.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * clearOriginalTypes.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
     public final void clearOriginalTypes(final Card c) {
         if (originalTypes.containsKey(c)) {
@@ -399,18 +484,24 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearAllOriginalTypes.</p>
+     * <p>
+     * clearAllOriginalTypes.
+     * </p>
      */
     public final void clearAllOriginalTypes() {
         originalTypes.clear();
     }
 
-    //statically assigned types
+    // statically assigned types
     /**
-     * <p>addType.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * addType.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.lang.String} object.
      */
     public final void addType(final Card c, final String s) {
         if (!types.containsKey(c)) {
@@ -423,9 +514,12 @@ public class StaticEffect {
     }
 
     /**
-     * <p>Getter for the field <code>types</code>.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * Getter for the field <code>types</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getTypes(final Card c) {
@@ -437,10 +531,14 @@ public class StaticEffect {
     }
 
     /**
-     * <p>removeType.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * removeType.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param type
+     *            a {@link java.lang.String} object.
      */
     public final void removeType(final Card c, final String type) {
         if (types.containsKey(c)) {
@@ -449,76 +547,96 @@ public class StaticEffect {
     }
 
     /**
-     * <p>clearTypes.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * clearTypes.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      */
-    public void clearTypes(Card c) {
+    public final void clearTypes(final Card c) {
         if (types.containsKey(c)) {
             types.get(c).clear();
         }
     }
 
     /**
-     * <p>clearAllTypes.</p>
+     * <p>
+     * clearAllTypes.
+     * </p>
      */
-    public void clearAllTypes() {
+    public final void clearAllTypes() {
         types.clear();
     }
 
     /**
-     * <p>Getter for the field <code>colorDesc</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>colorDesc</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getColorDesc() {
+    public final String getColorDesc() {
         return colorDesc;
     }
 
     /**
-     * <p>Setter for the field <code>colorDesc</code>.</p>
-     *
-     * @param colorDesc a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>colorDesc</code>.
+     * </p>
+     * 
+     * @param colorDesc
+     *            a {@link java.lang.String} object.
      */
-    public void setColorDesc(String colorDesc) {
+    public final void setColorDesc(final String colorDesc) {
         this.colorDesc = colorDesc;
     }
 
-    //overwrite color
+    // overwrite color
     /**
-     * <p>isOverwriteColors.</p>
-     *
+     * <p>
+     * isOverwriteColors.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isOverwriteColors() {
+    public final boolean isOverwriteColors() {
         return overwriteColors;
     }
 
     /**
-     * <p>Setter for the field <code>overwriteColors</code>.</p>
-     *
-     * @param overwriteColors a boolean.
+     * <p>
+     * Setter for the field <code>overwriteColors</code>.
+     * </p>
+     * 
+     * @param overwriteColors
+     *            a boolean.
      */
-    public void setOverwriteColors(boolean overwriteColors) {
+    public final void setOverwriteColors(final boolean overwriteColors) {
         this.overwriteColors = overwriteColors;
     }
 
     /**
-     * <p>Getter for the field <code>timestamps</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>timestamps</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      */
-    public HashMap<Card, Long> getTimestamps() {
+    public final HashMap<Card, Long> getTimestamps() {
         return timestamps;
     }
 
     /**
-     * <p>getTimestamp.</p>
-     *
-     * @param c a {@link forge.Card} object.
+     * <p>
+     * getTimestamp.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
      * @return a long.
      */
-    public long getTimestamp(Card c) {
+    public final long getTimestamp(final Card c) {
         long stamp = -1;
         Long l = timestamps.get(c);
         if (null != l) {
@@ -528,113 +646,156 @@ public class StaticEffect {
     }
 
     /**
-     * <p>addTimestamp.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param timestamp a long.
+     * <p>
+     * addTimestamp.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param timestamp
+     *            a long.
      */
-    public void addTimestamp(Card c, long timestamp) {
+    public final void addTimestamp(final Card c, final long timestamp) {
         timestamps.put(c, Long.valueOf(timestamp));
     }
 
     /**
-     * <p>clearTimestamps.</p>
+     * <p>
+     * clearTimestamps.
+     * </p>
      */
-    public void clearTimestamps() {
+    public final void clearTimestamps() {
         timestamps.clear();
     }
 
     /**
-     * <p>Setter for the field <code>source</code>.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * Setter for the field <code>source</code>.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      */
-    public void setSource(Card card) {
+    public final void setSource(final Card card) {
         source = card;
     }
 
     /**
-     * <p>Getter for the field <code>source</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>source</code>.
+     * </p>
+     * 
      * @return a {@link forge.Card} object.
      */
-    public Card getSource() {
+    public final Card getSource() {
         return source;
     }
 
     /**
-     * <p>Setter for the field <code>keywordNumber</code>.</p>
-     *
-     * @param i a int.
+     * <p>
+     * Setter for the field <code>keywordNumber</code>.
+     * </p>
+     * 
+     * @param i
+     *            a int.
      */
-    public void setKeywordNumber(int i) {
+    public final void setKeywordNumber(final int i) {
         keywordNumber = i;
     }
 
     /**
-     * <p>Getter for the field <code>keywordNumber</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>keywordNumber</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getKeywordNumber() {
+    public final int getKeywordNumber() {
         return keywordNumber;
     }
 
     /**
-     * <p>Getter for the field <code>affectedCards</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>affectedCards</code>.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    public CardList getAffectedCards() {
+    public final CardList getAffectedCards() {
         return affectedCards;
     }
 
     /**
-     * <p>Setter for the field <code>affectedCards</code>.</p>
-     *
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * Setter for the field <code>affectedCards</code>.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    public void setAffectedCards(CardList list) {
+    public final void setAffectedCards(final CardList list) {
         affectedCards = list;
     }
-    
-    public ArrayList<Player> getAffectedPlayers() {
+
+    /**
+     * Gets the affected players.
+     * 
+     * @return the affected players
+     */
+    public final ArrayList<Player> getAffectedPlayers() {
         return affectedPlayers;
     }
 
-    public void setAffectedPlayers(ArrayList<Player> list) {
+    /**
+     * Sets the affected players.
+     * 
+     * @param list
+     *            the new affected players
+     */
+    public final void setAffectedPlayers(final ArrayList<Player> list) {
         affectedPlayers = list;
     }
+
     /**
-     * <p>Setter for the field <code>xValue</code>.</p>
-     *
-     * @param x a int.
+     * <p>
+     * Setter for the field <code>xValue</code>.
+     * </p>
+     * 
+     * @param x
+     *            a int.
      */
-    public void setXValue(int x) {
+    public final void setXValue(final int x) {
         xValue = x;
     }
 
     /**
-     * <p>Getter for the field <code>xValue</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>xValue</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getXValue() {
+    public final int getXValue() {
         return xValue;
     }
 
     /**
-     * <p>Setter for the field <code>yValue</code>.</p>
-     *
-     * @param y a int.
+     * <p>
+     * Setter for the field <code>yValue</code>.
+     * </p>
+     * 
+     * @param y
+     *            a int.
      */
     public final void setYValue(final int y) {
         yValue = y;
     }
 
     /**
-     * <p>Getter for the field <code>yValue</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>yValue</code>.
+     * </p>
+     * 
      * @return a int.
      */
     public final int getYValue() {
@@ -642,29 +803,41 @@ public class StaticEffect {
     }
 
     /**
-     * setParams.
-     * TODO Write javadoc for this method.
-     * @param params a HashMap
+     * setParams. TODO Write javadoc for this method.
+     * 
+     * @param params
+     *            a HashMap
      */
-    public final void setParams(HashMap<String, String> params) {
+    public final void setParams(final HashMap<String, String> params) {
         mapParams = params;
     }
 
-    public HashMap<String, String> getParams() {
+    /**
+     * Gets the params.
+     * 
+     * @return the params
+     */
+    public final HashMap<String, String> getParams() {
         return mapParams;
     }
 
-    public void setChosenType(String type) {
+    /**
+     * Sets the chosen type.
+     * 
+     * @param type
+     *            the new chosen type
+     */
+    public final void setChosenType(final String type) {
         chosenType = type;
     }
 
     /**
-     * getChosenType.
-     * TODO Write javadoc for this method.
-     * @return
+     * getChosenType. TODO Write javadoc for this method.
+     * 
+     * @return the chosen type
      */
-    public String getChosenType() {
+    public final String getChosenType() {
         return chosenType;
     }
 
-} //end class StaticEffect
+} // end class StaticEffect

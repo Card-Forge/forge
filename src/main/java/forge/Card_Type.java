@@ -2,10 +2,11 @@ package forge;
 
 import java.util.ArrayList;
 
-
 /**
- * <p>Card_Color class.</p>
- *
+ * <p>
+ * Card_Color class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -20,8 +21,10 @@ public class Card_Type implements Comparable<Card_Type> {
     private long timeStamp = 0;
 
     /**
-     * <p>getTimestamp.</p>
-     *
+     * <p>
+     * getTimestamp.
+     * </p>
+     * 
      * @return a long.
      */
     public final long getTimestamp() {
@@ -29,19 +32,26 @@ public class Card_Type implements Comparable<Card_Type> {
     }
 
     /**
-     *
-     * @param types an ArrayList<String>
-     * @param removeSuperType a boolean
-     * @param removeTypes an ArrayList<String>
-     * @param removeCardType a boolean
-     * @param removeSubType a boolean
-     * @param removeCreatureType a boolean
-     * @param stamp a long
+     * Instantiates a new card_ type.
+     * 
+     * @param types
+     *            an ArrayList<String>
+     * @param removeTypes
+     *            an ArrayList<String>
+     * @param removeSuperType
+     *            a boolean
+     * @param removeCardType
+     *            a boolean
+     * @param removeSubType
+     *            a boolean
+     * @param removeCreatureType
+     *            a boolean
+     * @param stamp
+     *            a long
      */
     Card_Type(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
-            final boolean removeCardType, final boolean removeSubType,
-            final boolean removeCreatureType, final long stamp)
-            {
+            final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType,
+            final long stamp) {
         type = types;
         removeType = removeTypes;
         removeSuperTypes = removeSuperType;
@@ -49,11 +59,12 @@ public class Card_Type implements Comparable<Card_Type> {
         removeSubTypes = removeSubType;
         removeCreatureTypes = removeCreatureType;
         timeStamp = stamp;
-            }
+    }
 
     /**
      * 
      * getType.
+     * 
      * @return type
      */
     public final ArrayList<String> getType() {
@@ -63,6 +74,7 @@ public class Card_Type implements Comparable<Card_Type> {
     /**
      * 
      * getRemoveType.
+     * 
      * @return removeType
      */
     public final ArrayList<String> getRemoveType() {
@@ -72,6 +84,7 @@ public class Card_Type implements Comparable<Card_Type> {
     /**
      * 
      * isRemoveSuperTypes.
+     * 
      * @return removeSuperTypes
      */
     public final boolean isRemoveSuperTypes() {
@@ -81,6 +94,7 @@ public class Card_Type implements Comparable<Card_Type> {
     /**
      * 
      * isRemoveCardTypes.
+     * 
      * @return removeCardTypes
      */
     public final boolean isRemoveCardTypes() {
@@ -90,6 +104,7 @@ public class Card_Type implements Comparable<Card_Type> {
     /**
      * 
      * isRemoveSubTypes.
+     * 
      * @return removeSubTypes
      */
     public final boolean isRemoveSubTypes() {
@@ -99,12 +114,18 @@ public class Card_Type implements Comparable<Card_Type> {
     /**
      * 
      * isRemoveCreatureTypes.
+     * 
      * @return removeCreatureTypes
      */
     public final boolean isRemoveCreatureTypes() {
         return removeCreatureTypes;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public final int compareTo(final Card_Type anotherCardType) {
         int returnValue = 0;

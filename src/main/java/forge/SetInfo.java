@@ -1,19 +1,31 @@
 package forge;
 
 /**
- * <p>SetInfo class.</p>
- *
+ * <p>
+ * SetInfo class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class SetInfo {
+
+    /** The Code. */
     public String Code;
+
+    /** The Rarity. */
     public String Rarity;
+
+    /** The URL. */
     public String URL;
+
+    /** The Pic count. */
     public int PicCount;
 
     /**
-     * <p>Constructor for SetInfo.</p>
+     * <p>
+     * Constructor for SetInfo.
+     * </p>
      */
     public SetInfo() {
         Code = "";
@@ -23,11 +35,16 @@ public class SetInfo {
     }
 
     /**
-     * <p>Constructor for SetInfo.</p>
-     *
-     * @param c a {@link java.lang.String} object.
-     * @param r a {@link java.lang.String} object.
-     * @param u a {@link java.lang.String} object.
+     * <p>
+     * Constructor for SetInfo.
+     * </p>
+     * 
+     * @param c
+     *            a {@link java.lang.String} object.
+     * @param r
+     *            a {@link java.lang.String} object.
+     * @param u
+     *            a {@link java.lang.String} object.
      */
     public SetInfo(final String c, final String r, final String u) {
         Code = c;
@@ -37,12 +54,18 @@ public class SetInfo {
     }
 
     /**
-     * <p>Constructor for SetInfo.</p>
-     *
-     * @param c a {@link java.lang.String} object.
-     * @param r a {@link java.lang.String} object.
-     * @param u a {@link java.lang.String} object.
-     * @param p a int.
+     * <p>
+     * Constructor for SetInfo.
+     * </p>
+     * 
+     * @param c
+     *            a {@link java.lang.String} object.
+     * @param r
+     *            a {@link java.lang.String} object.
+     * @param u
+     *            a {@link java.lang.String} object.
+     * @param p
+     *            a int.
      */
     public SetInfo(final String c, final String r, final String u, final int p) {
         Code = c;
@@ -52,9 +75,12 @@ public class SetInfo {
     }
 
     /**
-     * <p>Constructor for SetInfo.</p>
-     *
-     * @param parse a {@link java.lang.String} object.
+     * <p>
+     * Constructor for SetInfo.
+     * </p>
+     * 
+     * @param parse
+     *            a {@link java.lang.String} object.
      */
     public SetInfo(final String parse) {
         String[] pp = parse.split("\\|");
@@ -69,8 +95,10 @@ public class SetInfo {
     }
 
     /**
-     * <p>toString.</p>
-     *
+     * <p>
+     * toString.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public final String toString() {
@@ -88,5 +116,3 @@ public class SetInfo {
 
     }
 }
-
-

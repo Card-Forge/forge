@@ -1,5 +1,9 @@
 package forge;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
@@ -7,28 +11,24 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticAbility.StaticAbility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-
 /**
- * <p>StaticEffects class.</p>
- *
+ * <p>
+ * StaticEffects class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class StaticEffects {
 
-    //**************** StaticAbility system **************************
+    // **************** StaticAbility system **************************
     /**
      * staticEffects.
      */
     public ArrayList<StaticEffect> staticEffects;
 
     /**
-     * clearStaticEffect.
-     * TODO Write javadoc for this method.
+     * clearStaticEffect. TODO Write javadoc for this method.
      */
     public final void clearStaticEffects() {
         // remove all static effects
@@ -41,18 +41,20 @@ public class StaticEffects {
     }
 
     /**
-     * addStaticEffect.
-     * TODO Write javadoc for this method.
-     * @param staticEffect a StaticEffect
+     * addStaticEffect. TODO Write javadoc for this method.
+     * 
+     * @param staticEffect
+     *            a StaticEffect
      */
     public final void addStaticEffect(final StaticEffect staticEffect) {
         staticEffects.add(staticEffect);
     }
 
     /**
-     * removeStaticEffect
-     * TODO Write javadoc for this method.
-     * @param se a StaticEffect
+     * removeStaticEffect TODO Write javadoc for this method.
+     * 
+     * @param se
+     *            a StaticEffect
      */
     final void removeStaticEffect(final StaticEffect se) {
         CardList affectedCards = se.getAffectedCards();
@@ -89,52 +91,54 @@ public class StaticEffects {
                 toughnessBonus = Integer.valueOf(params.get("AddToughness"));
             }
         }
-        
+
         if (params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
 
         if (params.containsKey("AddColor")) {
-            addColors = CardUtil.getShortColorsString(
-                    new ArrayList<String>(Arrays.asList(params.get("AddColor").split(" & "))));
+            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("AddColor").split(
+                    " & "))));
         }
 
         if (params.containsKey("SetColor")) {
-            addColors = CardUtil.getShortColorsString(
-                    new ArrayList<String>(Arrays.asList(params.get("SetColor").split(" & "))));
+            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("SetColor").split(
+                    " & "))));
         }
-        
-        //modify players
+
+        // modify players
         for (Player p : affectedPlayers) {
             if (params.containsKey("AddKeyword")) {
                 addKeywords = params.get("AddKeyword").split(" & ");
             }
-            
+
             // add keywords
-            if (addKeywords != null)
+            if (addKeywords != null) {
                 for (String keyword : addKeywords)
                     p.removeKeyword(keyword);
+            }
         }
 
-        //modify the affected card
+        // modify the affected card
         for (int i = 0; i < affectedCards.size(); i++) {
             Card affectedCard = affectedCards.get(i);
 
-            //remove set P/T
+            // remove set P/T
             if (!params.containsKey("CharacteristicDefining") && setPT) {
                 affectedCard.removeNewPT(se.getTimestamp());
             }
 
-            //remove P/T bonus
+            // remove P/T bonus
             affectedCard.addSemiPermanentAttackBoost(powerBonus * -1);
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
 
-            //remove keywords
-            if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword") || params.containsKey("RemoveAllAbilities")) {
+            // remove keywords
+            if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword")
+                    || params.containsKey("RemoveAllAbilities")) {
                 affectedCard.removeChangedCardKeywords(se.getTimestamp());
             }
 
-            //remove abilities
+            // remove abilities
             if (params.containsKey("AddAbility")) {
                 SpellAbility[] spellAbility = affectedCard.getSpellAbility();
                 for (SpellAbility s : spellAbility) {
@@ -143,52 +147,55 @@ public class StaticEffects {
                     }
                 }
             }
-            
-            if(addHiddenKeywords != null) {
+
+            if (addHiddenKeywords != null) {
                 for (String k : addHiddenKeywords) {
                     affectedCard.removeExtrinsicKeyword(k);
                 }
             }
-            
-            //remove abilities
+
+            // remove abilities
             if (params.containsKey("RemoveAllAbilities")) {
                 ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
                 for (SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(false);
                 }
-                
+
                 ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
                 for (StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(false);
                 }
             }
 
-            //remove Types
+            // remove Types
             if (params.containsKey("AddType") || params.containsKey("RemoveType")) {
                 affectedCard.removeChangedCardTypes(se.getTimestamp());
             }
 
-            //remove colors
+            // remove colors
             if (addColors != null) {
-                affectedCard.removeColor(addColors, affectedCard,
-                        !se.isOverwriteColors(), se.getTimestamp(affectedCard));
+                affectedCard.removeColor(addColors, affectedCard, !se.isOverwriteColors(),
+                        se.getTimestamp(affectedCard));
             }
         }
         se.clearTimestamps();
     }
 
-    //**************** End StaticAbility system **************************
+    // **************** End StaticAbility system **************************
 
-    //this is used to keep track of all state-based effects in play:
+    // this is used to keep track of all state-based effects in play:
     private HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
 
-    //this is used to define all cards that are state-based effects, and map the
-    //corresponding commands to their cardnames
+    // this is used to define all cards that are state-based effects, and map
+    // the
+    // corresponding commands to their cardnames
     /** Constant <code>cardToEffectsList</code>. */
     private static HashMap<String, String[]> cardToEffectsList = new HashMap<String, String[]>();
 
     /**
-     * <p>Constructor for StaticEffects.</p>
+     * <p>
+     * Constructor for StaticEffects.
+     * </p>
      */
     public StaticEffects() {
         initStateBasedEffectsList();
@@ -196,32 +203,37 @@ public class StaticEffects {
     }
 
     /**
-     * <p>initStateBasedEffectsList.</p>
+     * <p>
+     * initStateBasedEffectsList.
+     * </p>
      */
     public final void initStateBasedEffectsList() {
-        //value has to be an array, since certain cards have multiple commands associated with them
+        // value has to be an array, since certain cards have multiple commands
+        // associated with them
 
-        cardToEffectsList.put("Avatar", new String[]{"Ajani_Avatar_Token"});
-        
-        cardToEffectsList.put("Alpha Status", new String[]{"Alpha_Status"});
-        cardToEffectsList.put("Coat of Arms", new String[]{"Coat_of_Arms"});
+        cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
 
-        cardToEffectsList.put("Homarid", new String[]{"Homarid"});
-        cardToEffectsList.put("Liu Bei, Lord of Shu", new String[]{"Liu_Bei"});
+        cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
+        cardToEffectsList.put("Coat of Arms", new String[] { "Coat_of_Arms" });
 
-        cardToEffectsList.put("Muraganda Petroglyphs", new String[]{"Muraganda_Petroglyphs"});
-        cardToEffectsList.put("Old Man of the Sea", new String[]{"Old_Man_of_the_Sea"});
+        cardToEffectsList.put("Homarid", new String[] { "Homarid" });
+        cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
 
-        cardToEffectsList.put("Tarmogoyf", new String[]{"Tarmogoyf"});
+        cardToEffectsList.put("Muraganda Petroglyphs", new String[] { "Muraganda_Petroglyphs" });
+        cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
 
-        cardToEffectsList.put("Umbra Stalker", new String[]{"Umbra_Stalker"});
-        cardToEffectsList.put("Wolf", new String[]{"Sound_the_Call_Wolf"});
+        cardToEffectsList.put("Tarmogoyf", new String[] { "Tarmogoyf" });
+
+        cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
+        cardToEffectsList.put("Wolf", new String[] { "Sound_the_Call_Wolf" });
 
     }
 
     /**
-     * <p>Getter for the field <code>cardToEffectsList</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>cardToEffectsList</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String[]> getCardToEffectsList() {
@@ -229,9 +241,12 @@ public class StaticEffects {
     }
 
     /**
-     * <p>addStateBasedEffect.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * addStateBasedEffect.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
     public final void addStateBasedEffect(final String s) {
         if (stateBasedMap.containsKey(s)) {
@@ -242,9 +257,12 @@ public class StaticEffects {
     }
 
     /**
-     * <p>removeStateBasedEffect.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * removeStateBasedEffect.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
     public final void removeStateBasedEffect(final String s) {
         if (stateBasedMap.containsKey(s)) {
@@ -256,8 +274,10 @@ public class StaticEffects {
     }
 
     /**
-     * <p>Getter for the field <code>stateBasedMap</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>stateBasedMap</code>.
+     * </p>
+     * 
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, Integer> getStateBasedMap() {
@@ -265,14 +285,18 @@ public class StaticEffects {
     }
 
     /**
-     * <p>reset.</p>
+     * <p>
+     * reset.
+     * </p>
      */
     public final void reset() {
         stateBasedMap.clear();
     }
 
     /**
-     * <p>rePopulateStateBasedList.</p>
+     * <p>
+     * rePopulateStateBasedList.
+     * </p>
      */
     public final void rePopulateStateBasedList() {
         reset();
@@ -299,4 +323,4 @@ public class StaticEffects {
 
     }
 
-} //end class StaticEffects
+} // end class StaticEffects

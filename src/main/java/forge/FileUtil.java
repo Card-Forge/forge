@@ -19,7 +19,6 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * FileUtil class.
@@ -143,9 +142,11 @@ public final class FileUtil {
 
     /**
      * Download url into file.
-     *
-     * @param url the url
-     * @param target the target
+     * 
+     * @param url
+     *            the url
+     * @param target
+     *            the target
      */
     public static void downloadUrlIntoFile(final String url, final File target) {
         try {

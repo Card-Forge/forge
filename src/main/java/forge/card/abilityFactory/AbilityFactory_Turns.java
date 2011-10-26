@@ -12,8 +12,10 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
 /**
- * <p>AbilityFactory_Turns class.</p>
- *
+ * <p>
+ * AbilityFactory_Turns class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -24,9 +26,12 @@ public class AbilityFactory_Turns {
     // *************************************************************************
 
     /**
-     * <p>createAbilityAddTurn.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityAddTurn.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAddTurn(final AbilityFactory af) {
@@ -59,9 +64,12 @@ public class AbilityFactory_Turns {
     }
 
     /**
-     * <p>createSpellAddTurn.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellAddTurn.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellAddTurn(final AbilityFactory af) {
@@ -88,9 +96,12 @@ public class AbilityFactory_Turns {
     }
 
     /**
-     * <p>createDrawbackAddTurn.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackAddTurn.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAddTurn(final AbilityFactory af) {
@@ -122,10 +133,14 @@ public class AbilityFactory_Turns {
     }
 
     /**
-     * <p>addTurnStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addTurnStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String addTurnStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -135,8 +150,7 @@ public class AbilityFactory_Turns {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -145,8 +159,7 @@ public class AbilityFactory_Turns {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -175,10 +188,14 @@ public class AbilityFactory_Turns {
     }
 
     /**
-     * <p>addTurnCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addTurnCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -186,11 +203,16 @@ public class AbilityFactory_Turns {
     }
 
     /**
-     * <p>addTurnTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * addTurnTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -203,23 +225,28 @@ public class AbilityFactory_Turns {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(
-                    sa.getSourceCard(), params.get("Defined"), sa);
+            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"),
+                    sa);
             for (Player p : tgtPlayers) {
                 if (p.isHuman() && !mandatory) {
                     return false;
                 }
             }
-            // not sure if the AI should be playing with cards that give the Human more turns.
+            // not sure if the AI should be playing with cards that give the
+            // Human more turns.
         }
         return true;
     }
 
     /**
-     * <p>addTurnResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * addTurnResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void addTurnResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -230,8 +257,7 @@ public class AbilityFactory_Turns {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        }
-        else {
+        } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
@@ -244,4 +270,4 @@ public class AbilityFactory_Turns {
         }
     }
 
-} //end class AbilityFactory_Turns
+} // end class AbilityFactory_Turns

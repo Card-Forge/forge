@@ -4,44 +4,89 @@ import forge.Card;
 import forge.Player;
 import forge.card.spellability.SpellAbility;
 
+/**
+ * The Class CostTap.
+ */
 public class CostTap extends CostPart {
-	public CostTap(){
-		isReusable = true;
-		isUndoable = true;
-	}
 
-	@Override
-	public String toString() {
-		return "Tap";
-	}
-
-	@Override
-	public void refund(Card source) {
-		source.untap();
-	}
-
-    @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        return source.isUntapped() && (!source.hasSickness() || !source.isCreature());  
+    /**
+     * Instantiates a new cost tap.
+     */
+    public CostTap() {
+        isReusable = true;
+        isUndoable = true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final String toString() {
+        return "Tap";
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
+    @Override
+    public final void refund(final Card source) {
+        source.untap();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+        return source.isUntapped() && (!source.hasSickness() || !source.isCreature());
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
+    @Override
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         source.tap();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
-        //if (!canPay(ability, source, ability.getActivatingPlayer(), payment.getCost()))
-        //    return false;
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+        // if (!canPay(ability, source, ability.getActivatingPlayer(),
+        // payment.getCost()))
+        // return false;
 
         source.tap();
         payment.setPaidManaPart(this, true);
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         return true;
     }
 }

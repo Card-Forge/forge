@@ -1,22 +1,39 @@
 package forge.card.abilityFactory;
 
-import forge.*;
-import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
-import forge.card.spellability.*;
-import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Constant.Zone;
+import forge.Counters;
+import forge.MyRandom;
+import forge.Player;
+import forge.PlayerZone;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.gui.GuiUtils;
+import forge.gui.input.Input;
+
 /**
- * <p>AbilityFactory_Counters class.</p>
- *
+ * <p>
+ * AbilityFactory_Counters class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -28,9 +45,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityPutCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityPutCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPutCounters(final AbilityFactory af) {
@@ -63,9 +83,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellPutCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellPutCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellPutCounters(final AbilityFactory af) {
@@ -79,8 +102,10 @@ public class AbilityFactory_Counters {
 
             @Override
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return putCanPlayAI(af, this);
             }
@@ -95,9 +120,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackPutCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackPutCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPutCounters(final AbilityFactory af) {
@@ -129,10 +157,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String putStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -141,8 +173,7 @@ public class AbilityFactory_Counters {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -155,7 +186,9 @@ public class AbilityFactory_Counters {
             sb.append("up to ");
         }
         sb.append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) { sb.append("s"); }
+        if (amount != 1) {
+            sb.append("s");
+        }
         sb.append(" on ");
 
         ArrayList<Card> tgtCards;
@@ -163,18 +196,22 @@ public class AbilityFactory_Counters {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
         Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
             Card tgtC = it.next();
-            if (tgtC.isFaceDown()) { sb.append("Morph"); }
-            else { sb.append(tgtC); }
+            if (tgtC.isFaceDown()) {
+                sb.append("Morph");
+            } else {
+                sb.append(tgtC);
+            }
 
-            if (it.hasNext()) { sb.append(", "); }
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
         }
 
         sb.append(".");
@@ -188,14 +225,19 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on
         // what the expected targets could be
         HashMap<String, String> params = af.getMapParams();
         Random r = MyRandom.random;
@@ -209,13 +251,12 @@ public class AbilityFactory_Counters {
 
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
 
-
         list = player.getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return CardFactoryUtil.canTarget(source, c)
-                    && !c.hasKeyword("CARDNAME can't have counters placed on it.")
-                    && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
+                        && !c.hasKeyword("CARDNAME can't have counters placed on it.")
+                        && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
         });
 
@@ -225,9 +266,10 @@ public class AbilityFactory_Counters {
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
             }
-        } else {    // "put counter on this"
+        } else { // "put counter on this"
             PlayerZone pZone = AllZone.getZoneOf(source);
-            // Don't activate Curse abilities on my cards and non-curse abilites on my opponents
+            // Don't activate Curse abilities on my cards and non-curse abilites
+            // on my opponents
             if (!pZone.getPlayer().equals(player)) {
                 return false;
             }
@@ -265,8 +307,10 @@ public class AbilityFactory_Counters {
             source.setSVar("PayX", Integer.toString(amount));
         }
 
-        //don't use it if no counters to add
-        if (amount <= 0) { return false; }
+        // don't use it if no counters to add
+        if (amount <= 0) {
+            return false;
+        }
 
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -278,8 +322,7 @@ public class AbilityFactory_Counters {
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -294,10 +337,9 @@ public class AbilityFactory_Counters {
                     choice = chooseBoonTarget(list, type);
                 }
 
-                if (choice == null) {    // can't find anything left
+                if (choice == null) { // can't find anything left
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -311,17 +353,17 @@ public class AbilityFactory_Counters {
         } else {
             // Placeholder: No targeting necessary
             int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
-            // each non +1/+1 counter on the card is a 10% chance of not activating this ability.
+            // each non +1/+1 counter on the card is a 10% chance of not
+            // activating this ability.
 
             if (!(type.equals("P1P1") || type.equals("ICE")) && r.nextFloat() < .1 * currCounters) {
                 return false;
             }
         }
 
-        //Don't use non P1P1/M1M1 counters before main 2 if possible
+        // Don't use non P1P1/M1M1 counters before main 2 if possible
         if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")
-                && !(type.equals("P1P1") || type.equals("M1M1")))
-        {
+                && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }
 
@@ -335,13 +377,17 @@ public class AbilityFactory_Counters {
         }
 
         return ((r.nextFloat() < .6667) && chance);
-    } //putCanPlayAI
+    } // putCanPlayAI
 
     /**
-     * <p>putPlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean putPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -376,8 +422,7 @@ public class AbilityFactory_Counters {
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -391,10 +436,9 @@ public class AbilityFactory_Counters {
 
                 }
 
-                if (choice == null) {    // can't find anything left
+                if (choice == null) { // can't find anything left
                     if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0)
-                    {
+                            || abTgt.getNumTargeted() == 0) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -413,14 +457,19 @@ public class AbilityFactory_Counters {
         }
 
         return chance;
-    } //putPlayDrawbackAI
+    } // putPlayDrawbackAI
 
     /**
-     * <p>putDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * putDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -432,7 +481,7 @@ public class AbilityFactory_Counters {
         HashMap<String, String> params = af.getMapParams();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        //boolean chance = true;
+        // boolean chance = true;
         boolean preferred = true;
         CardList list;
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
@@ -445,7 +494,8 @@ public class AbilityFactory_Counters {
             list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa).toArray());
 
             if (!mandatory) {
-                // TODO - If Trigger isn't mandatory, when wouldn't we want to put a counter?
+                // TODO - If Trigger isn't mandatory, when wouldn't we want to
+                // put a counter?
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else {
@@ -455,7 +505,8 @@ public class AbilityFactory_Counters {
                 list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             }
             if (list.isEmpty() && mandatory) {
-                // If there isn't any prefered cards to target, gotta choose non-preferred ones
+                // If there isn't any prefered cards to target, gotta choose
+                // non-preferred ones
                 list = player.getOpponent().getCardsIn(Zone.Battlefield);
                 list = list.getTargetableCards(source);
                 if (abTgt != null) {
@@ -463,7 +514,8 @@ public class AbilityFactory_Counters {
                 }
                 preferred = false;
             }
-            // Not mandatory, or the the list was regenerated and is still empty,
+            // Not mandatory, or the the list was regenerated and is still
+            // empty,
             // so return false since there are no targets
             if (list.isEmpty()) {
                 return false;
@@ -498,24 +550,30 @@ public class AbilityFactory_Counters {
                 }
             }
 
-            //TODO - I think choice can be null here.  Is that ok for addTarget()?
+            // TODO - I think choice can be null here. Is that ok for
+            // addTarget()?
             abTgt.addTarget(choice);
         }
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            //chance &= subAb.doTrigger(mandatory);
+            // chance &= subAb.doTrigger(mandatory);
         }
 
         return true;
     }
 
     /**
-     * <p>chooseCursedTarget.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param type a {@link java.lang.String} object.
-     * @param amount a int.
+     * <p>
+     * chooseCursedTarget.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.Card} object.
      */
     private static Card chooseCursedTarget(final CardList list, final String type, final int amount) {
@@ -529,8 +587,7 @@ public class AbilityFactory_Counters {
             });
             if (killable.size() > 0) {
                 choice = CardFactoryUtil.AI_getBestCreature(killable);
-            }
-            else {
+            } else {
                 choice = CardFactoryUtil.AI_getBestCreature(list);
             }
         } else {
@@ -541,38 +598,45 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>chooseBoonTarget.</p>
-     *
-     * @param list a {@link forge.CardList} object.
-     * @param type a {@link java.lang.String} object.
+     * <p>
+     * chooseBoonTarget.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @param type
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
     private static Card chooseBoonTarget(final CardList list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
             choice = CardFactoryUtil.AI_getBestCreature(list);
-        }
-        else if (type.equals("DIVINITY")) {
+        } else if (type.equals("DIVINITY")) {
             CardList boon = list.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
                     return c.getCounters(Counters.DIVINITY) == 0;
                 }
             });
             choice = CardFactoryUtil.AI_getMostExpensivePermanent(boon, null, false);
-        }
-        else {
+        } else {
             // The AI really should put counters on cards that can use it.
-            // Charge counters on things with Charge abilities, etc. Expand these above
+            // Charge counters on things with Charge abilities, etc. Expand
+            // these above
             choice = CardFactoryUtil.getRandomCard(list);
         }
         return choice;
     }
 
     /**
-     * <p>putResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void putResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -581,9 +645,9 @@ public class AbilityFactory_Counters {
         String type = params.get("CounterType");
         int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         int max = params.containsKey("MaxFromEffect") ? Integer.parseInt(params.get("MaxFromEffect")) : -1;
-        
+
         if (params.containsKey("UpTo")) {
-            Integer[] integers = new Integer[counterAmount+1];
+            Integer[] integers = new Integer[counterAmount + 1];
             for (int j = 0; j <= counterAmount; j++) {
                 integers[j] = Integer.valueOf(j);
             }
@@ -600,8 +664,7 @@ public class AbilityFactory_Counters {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
@@ -611,13 +674,11 @@ public class AbilityFactory_Counters {
                     counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
                 }
                 PlayerZone zone = AllZone.getZoneOf(tgtCard);
-                if (zone == null){
+                if (zone == null) {
                     // Do nothing, token disappeared
-                }
-                else if (zone.is(Constant.Zone.Battlefield)) {
+                } else if (zone.is(Constant.Zone.Battlefield)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
-                }
-                else {
+                } else {
                     // adding counters to something like re-suspend cards
                     tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
                 }
@@ -630,9 +691,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityRemoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityRemoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityRemoveCounters(final AbilityFactory af) {
@@ -664,9 +728,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellRemoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellRemoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellRemoveCounters(final AbilityFactory af) {
@@ -680,8 +747,10 @@ public class AbilityFactory_Counters {
 
             @Override
             public boolean canPlayAI() {
-                // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-                // then call xCount with that card to properly calculate the amount
+                // if X depends on abCost, the AI needs to choose which card he
+                // would sacrifice first
+                // then call xCount with that card to properly calculate the
+                // amount
                 // Or choosing how many to sacrifice
                 return removeCanPlayAI(af, this);
             }
@@ -696,9 +765,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackRemoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackRemoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRemoveCounters(final AbilityFactory af) {
@@ -730,10 +802,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String removeStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -743,8 +819,7 @@ public class AbilityFactory_Counters {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(card).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -752,9 +827,13 @@ public class AbilityFactory_Counters {
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Remove ");
-        if (params.containsKey("UpTo")) { sb.append("up to "); }
+        if (params.containsKey("UpTo")) {
+            sb.append("up to ");
+        }
         sb.append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) { sb.append("s"); }
+        if (amount != 1) {
+            sb.append("s");
+        }
         sb.append(" from");
 
         ArrayList<Card> tgtCards;
@@ -762,8 +841,7 @@ public class AbilityFactory_Counters {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
         for (Card c : tgtCards) {
@@ -781,30 +859,35 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean removeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on what
         // the expected targets could be
         Random r = MyRandom.random;
         Cost abCost = sa.getPayCosts();
-        //Target abTgt = sa.getTarget();
+        // Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        //CardList list;
-        //Card choice = null;
+        // CardList list;
+        // Card choice = null;
         HashMap<String, String> params = af.getMapParams();
 
         String type = params.get("CounterType");
-        //String amountStr = params.get("CounterNum");
+        // String amountStr = params.get("CounterNum");
 
-        //TODO - currently, not targeted, only for Self
+        // TODO - currently, not targeted, only for Self
 
-        //Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
-
+        // Player player = af.isCurse() ? AllZone.getHumanPlayer() :
+        // AllZone.getComputerPlayer();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -826,16 +909,17 @@ public class AbilityFactory_Counters {
         }
 
         // TODO handle proper calculation of X values based on Cost
-        //final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+        // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
 
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        //currently, not targeted
+        // currently, not targeted
 
         // Placeholder: No targeting necessary
         int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
-        // each counter on the card is a 10% chance of not activating this ability.
+        // each counter on the card is a 10% chance of not activating this
+        // ability.
         if (r.nextFloat() < .1 * currCounters) {
             return false;
         }
@@ -849,35 +933,41 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removePlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removePlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean removePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on what
         // the expected targets could be
-        //Target abTgt = sa.getTarget();
-        //final Card source = sa.getSourceCard();
-        //CardList list;
-        //Card choice = null;
-        //HashMap<String,String> params = af.getMapParams();
+        // Target abTgt = sa.getTarget();
+        // final Card source = sa.getSourceCard();
+        // CardList list;
+        // Card choice = null;
+        // HashMap<String,String> params = af.getMapParams();
 
-        //String type = params.get("CounterType");
-        //String amountStr = params.get("CounterNum");
+        // String type = params.get("CounterType");
+        // String amountStr = params.get("CounterNum");
 
-        //TODO - currently, not targeted, only for Self
+        // TODO - currently, not targeted, only for Self
 
-        //Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+        // Player player = af.isCurse() ? AllZone.getHumanPlayer() :
+        // AllZone.getComputerPlayer();
 
         // TODO handle proper calculation of X values based on Cost
-        //final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+        // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
 
         // prevent run-away activations - first time will always return true
         boolean chance = true;
 
-        //currently, not targeted
+        // currently, not targeted
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
@@ -888,21 +978,28 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * removeDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean removeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on what the
         // expected targets could be
         boolean chance = true;
 
-        //TODO - currently, not targeted, only for Self
+        // TODO - currently, not targeted, only for Self
 
-        // Note: Not many cards even use Trigger and Remove Counters. And even fewer are not mandatory
+        // Note: Not many cards even use Trigger and Remove Counters. And even
+        // fewer are not mandatory
         // Since the targeting portion of this would be what
 
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
@@ -918,10 +1015,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void removeResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -935,8 +1036,7 @@ public class AbilityFactory_Counters {
         Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
-        }
-        else {
+        } else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
@@ -947,7 +1047,9 @@ public class AbilityFactory_Counters {
                 if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
                     if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
                         ArrayList<String> choices = new ArrayList<String>();
-                        for (int i = 0; i <= counterAmount; i++) { choices.add("" + i); }
+                        for (int i = 0; i <= counterAmount; i++) {
+                            choices.add("" + i);
+                        }
                         String prompt = "Select the number of " + type + " counters to remove";
                         Object o = GuiUtils.getChoice(prompt, choices.toArray());
                         counterAmount = Integer.parseInt((String) o);
@@ -963,9 +1065,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityProliferate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityProliferate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityProliferate(final AbilityFactory af) {
@@ -997,9 +1102,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellProliferate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellProliferate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellProliferate(final AbilityFactory af) {
@@ -1032,9 +1140,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackProliferate.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackProliferate.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProliferate(final AbilityFactory af) {
@@ -1071,17 +1182,19 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>proliferateStackDescription.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * proliferateStackDescription.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String proliferateStackDescription(final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
         sb.append("Proliferate.");
@@ -1097,9 +1210,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>proliferateShouldPlayAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * proliferateShouldPlayAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean proliferateShouldPlayAI(final SpellAbility sa) {
@@ -1109,15 +1225,20 @@ public class AbilityFactory_Counters {
             chance &= subAb.chkAI_Drawback();
         }
 
-        // TODO: Make sure Human has poison counters or there are some counters we want to proliferate
+        // TODO: Make sure Human has poison counters or there are some counters
+        // we want to proliferate
         return chance;
     }
 
     /**
-     * <p>proliferateDoTriggerAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * proliferateDoTriggerAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
     private static boolean proliferateDoTriggerAI(final SpellAbility sa, final boolean mandatory) {
@@ -1127,28 +1248,39 @@ public class AbilityFactory_Counters {
             chance &= subAb.doTrigger(mandatory);
         }
 
-        // TODO: Make sure Human has poison counters or there are some counters we want to proliferate
+        // TODO: Make sure Human has poison counters or there are some counters
+        // we want to proliferate
         return chance;
     }
 
     /**
-     * <p>proliferateResolve.</p>
-     *
-     * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * proliferateResolve.
+     * </p>
+     * 
+     * @param AF
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         hperms = hperms.filter(new CardListFilter() {
             public boolean addCard(final Card crd) {
-                return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+                return !crd.getName().equals("Mana Pool") /*
+                                                           * &&
+                                                           * crd.hasCounters()
+                                                           */;
             }
         });
 
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         cperms = cperms.filter(new CardListFilter() {
             public boolean addCard(final Card crd) {
-                return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+                return !crd.getName().equals("Mana Pool") /*
+                                                           * &&
+                                                           * crd.hasCounters()
+                                                           */;
             }
         });
 
@@ -1166,22 +1298,30 @@ public class AbilityFactory_Counters {
 
                 @Override
                 public void selectButtonCancel() {
-                    // Hacky intermittent solution to triggers that look for counters being put on. They used
-                    // to wait for another priority passing after proliferate finished.
+                    // Hacky intermittent solution to triggers that look for
+                    // counters being put on. They used
+                    // to wait for another priority passing after proliferate
+                    // finished.
                     AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
                     stop();
                 }
 
                 @Override
                 public void selectCard(final Card card, final PlayerZone zone) {
-                    if (!unchosen.contains(card)) { return; }
+                    if (!unchosen.contains(card)) {
+                        return;
+                    }
                     unchosen.remove(card);
                     ArrayList<String> choices = new ArrayList<String>();
                     for (Counters c1 : Counters.values()) {
-                        if (card.getCounters(c1) != 0) { choices.add(c1.getName()); }
+                        if (card.getCounters(c1) != 0) {
+                            choices.add(c1.getName());
+                        }
                     }
                     if (choices.size() > 0) {
-                        card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice("Select counter type", choices.toArray()).toString())), 1);
+                        card.addCounter(
+                                Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice(
+                                        "Select counter type", choices.toArray()).toString())), 1);
                     }
                 }
 
@@ -1204,7 +1344,7 @@ public class AbilityFactory_Counters {
                     }
                 }
             });
-        } else { //Compy
+        } else { // Compy
             cperms = cperms.filter(new CardListFilter() {
                 public boolean addCard(final Card crd) {
                     int pos = 0;
@@ -1213,8 +1353,7 @@ public class AbilityFactory_Counters {
                         if (crd.getCounters(c1) != 0) {
                             if (CardFactoryUtil.isNegativeCounter(c1)) {
                                 neg++;
-                            }
-                            else {
+                            } else {
                                 pos++;
                             }
                         }
@@ -1231,8 +1370,7 @@ public class AbilityFactory_Counters {
                         if (crd.getCounters(c1) != 0) {
                             if (CardFactoryUtil.isNegativeCounter(c1)) {
                                 neg++;
-                            }
-                            else {
+                            } else {
                                 pos++;
                             }
                         }
@@ -1245,8 +1383,7 @@ public class AbilityFactory_Counters {
             sb.append("<html>Proliferate: <br>Computer selects ");
             if (cperms.size() == 0 && hperms.size() == 0 && AllZone.getHumanPlayer().getPoisonCounters() == 0) {
                 sb.append("<b>nothing</b>.");
-            }
-            else {
+            } else {
                 if (cperms.size() > 0) {
                     sb.append("<br>From Computer's permanents: <br><b>");
                     for (Card c : cperms) {
@@ -1266,30 +1403,35 @@ public class AbilityFactory_Counters {
                 if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
                     sb.append("<b>Human Player</b>.");
                 }
-            } //else
+            } // else
             sb.append("</html>");
 
-
-            //add a counter for each counter type, if it would benefit the computer
+            // add a counter for each counter type, if it would benefit the
+            // computer
             for (Card c : cperms) {
                 for (Counters c1 : Counters.values()) {
-                    if (c.getCounters(c1) != 0) { c.addCounter(c1, 1); }
+                    if (c.getCounters(c1) != 0) {
+                        c.addCounter(c1, 1);
+                    }
                 }
             }
 
-            //add a counter for each counter type, if it would screw over the player
+            // add a counter for each counter type, if it would screw over the
+            // player
             for (Card c : hperms) {
                 for (Counters c1 : Counters.values()) {
-                    if (c.getCounters(c1) != 0) { c.addCounter(c1, 1); }
+                    if (c.getCounters(c1) != 0) {
+                        c.addCounter(c1, 1);
+                    }
                 }
             }
 
-            //give human a poison counter, if he has one
+            // give human a poison counter, if he has one
             if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
                 AllZone.getHumanPlayer().addPoisonCounters(1);
             }
 
-        } //comp
+        } // comp
     }
 
     // *******************************************
@@ -1297,9 +1439,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityPutCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityPutCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPutCounterAll(final AbilityFactory af) {
@@ -1332,9 +1477,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellPutCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellPutCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellPutCounterAll(final AbilityFactory af) {
@@ -1361,9 +1509,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackPutCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackPutCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPutCounterAll(final AbilityFactory af) {
@@ -1395,10 +1546,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putAllStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putAllStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String putAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -1407,8 +1562,7 @@ public class AbilityFactory_Counters {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
@@ -1416,7 +1570,9 @@ public class AbilityFactory_Counters {
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) { sb.append("s"); }
+        if (amount != 1) {
+            sb.append("s");
+        }
         sb.append(" on each valid permanent.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -1428,14 +1584,19 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putAllCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean putAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on what
         // the expected targets could be
         Random r = MyRandom.random;
         HashMap<String, String> params = af.getMapParams();
@@ -1474,8 +1635,7 @@ public class AbilityFactory_Counters {
             Player pl;
             if (curse) {
                 pl = AllZone.getHumanPlayer();
-            }
-            else {
+            } else {
                 pl = AllZone.getComputerPlayer();
             }
 
@@ -1485,7 +1645,8 @@ public class AbilityFactory_Counters {
             cList = cList.getController(pl);
         }
 
-        // TODO improve X value to don't overpay when extra mana won't do anything more useful
+        // TODO improve X value to don't overpay when extra mana won't do
+        // anything more useful
         final int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -1505,14 +1666,21 @@ public class AbilityFactory_Counters {
                         return c.getNetDefense() <= amount;
                     }
                 });
-                if (!(killable.size() > 2)) { return false; }
+                if (!(killable.size() > 2)) {
+                    return false;
+                }
             } else {
-                //make sure compy doesn't harm his stuff more than human's stuff
-                if (cList.size() > hList.size()) { return false; }
+                // make sure compy doesn't harm his stuff more than human's
+                // stuff
+                if (cList.size() > hList.size()) {
+                    return false;
+                }
             }
         } else {
-            //human has more things that will benefit, don't play
-            if (hList.size() >= cList.size()) { return false; }
+            // human has more things that will benefit, don't play
+            if (hList.size() >= cList.size()) {
+                return false;
+            }
         }
 
         Ability_Sub subAb = sa.getSubAbility();
@@ -1524,10 +1692,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putAllPlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putAllPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean putAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1535,10 +1707,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>putAllResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * putAllResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void putAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -1559,8 +1735,7 @@ public class AbilityFactory_Counters {
         for (Card tgtCard : cards) {
             if (AllZone.getZoneOf(tgtCard).is(Constant.Zone.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
-            }
-            else {
+            } else {
                 // adding counters to something like re-suspend cards
                 tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
             }
@@ -1572,9 +1747,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityRemoveCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityRemoveCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityRemoveCounterAll(final AbilityFactory af) {
@@ -1607,9 +1785,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellRemoveCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellRemoveCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellRemoveCounterAll(final AbilityFactory af) {
@@ -1636,9 +1817,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackRemoveCounterAll.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackRemoveCounterAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRemoveCounterAll(final AbilityFactory af) {
@@ -1670,10 +1854,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeCounterAllStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeCounterAllStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String removeCounterAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -1682,21 +1870,22 @@ public class AbilityFactory_Counters {
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        }
-        else {
+        } else {
             sb.append(" ");
         }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
         String amountString = Integer.toString(amount);
-        
-        if(params.containsKey("AllCounters")) {
+
+        if (params.containsKey("AllCounters")) {
             amountString = "all";
         }
 
         sb.append("Remove ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (!amountString.equals("1")) { sb.append("s"); }
+        if (!amountString.equals("1")) {
+            sb.append("s");
+        }
         sb.append(" from each valid permanent.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -1708,23 +1897,32 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeCounterAllCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeCounterAllCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean removeCounterAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        //Heartmender is the only card using this, and it's from a trigger.
-        //If at some point, other cards use this as a spell or ability, this will need to be implemented.
+        // Heartmender is the only card using this, and it's from a trigger.
+        // If at some point, other cards use this as a spell or ability, this
+        // will need to be implemented.
         return false;
     }
 
     /**
-     * <p>removeCounterAllPlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeCounterAllPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean removeCounterAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1732,10 +1930,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>removeCounterAllResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * removeCounterAllResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void removeCounterAllResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -1754,10 +1956,10 @@ public class AbilityFactory_Counters {
         }
 
         for (Card tgtCard : cards) {
-            if(params.containsKey("AllCounters")) {
+            if (params.containsKey("AllCounters")) {
                 counterAmount = tgtCard.getCounters(Counters.valueOf(type));
             }
-                
+
             tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
         }
     }
@@ -1767,9 +1969,12 @@ public class AbilityFactory_Counters {
     // *******************************************
 
     /**
-     * <p>createAbilityMoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createAbilityMoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityMoveCounters(final AbilityFactory af) {
@@ -1801,9 +2006,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createSpellMoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createSpellMoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellMoveCounters(final AbilityFactory af) {
@@ -1830,9 +2038,12 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>createDrawbackMoveCounters.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * <p>
+     * createDrawbackMoveCounters.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackMoveCounters(final AbilityFactory af) {
@@ -1864,10 +2075,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>moveCounterStackDescription.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * moveCounterStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     private static String moveCounterStackDescription(final AbilityFactory af, final SpellAbility sa) {
@@ -1877,8 +2092,7 @@ public class AbilityFactory_Counters {
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
-        }
-        else {
+        } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
@@ -1897,9 +2111,10 @@ public class AbilityFactory_Counters {
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
-        sb.append("Move ").append(amount).append(" ").append(cType.getName())
-                .append(" counter");
-        if (amount != 1) { sb.append("s"); }
+        sb.append("Move ").append(amount).append(" ").append(cType.getName()).append(" counter");
+        if (amount != 1) {
+            sb.append("s");
+        }
         sb.append(" from ");
         sb.append(source).append(" to ").append(dest);
 
@@ -1914,14 +2129,19 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>moveCounterCanPlayAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * moveCounterCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean moveCounterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what
+        // AI needs to be expanded, since this function can be pretty complex
+        // based on what
         // the expected targets could be
         HashMap<String, String> params = af.getMapParams();
         Random r = MyRandom.random;
@@ -1930,7 +2150,7 @@ public class AbilityFactory_Counters {
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 
-        //don't use it if no counters to add
+        // don't use it if no counters to add
         if (amount <= 0) {
             return false;
         }
@@ -1948,13 +2168,17 @@ public class AbilityFactory_Counters {
         }
 
         return ((r.nextFloat() < .6667) && chance);
-    } //moveCounterCanPlayAI
+    } // moveCounterCanPlayAI
 
     /**
-     * <p>moveCounterPlayDrawbackAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * moveCounterPlayDrawbackAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean moveCounterPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1962,33 +2186,43 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();}
+            chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
-    } //moveCounterPlayDrawbackAI
+    } // moveCounterPlayDrawbackAI
 
     /**
-     * <p>moveCounterDoTriggerAI.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory a boolean.
+     * <p>
+     * moveCounterDoTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
      * @return a boolean.
      */
-    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         HashMap<String, String> params = af.getMapParams();
         Card host = af.getHostCard();
         boolean chance = false;
-        
+
         // if there is a cost, it's gotta be optional
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
-        
+
         Counters cType = Counters.valueOf(params.get("CounterType"));
         ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        if (srcCards.size() > 0 && cType.equals(Counters.P1P1) //move +1/+1 counters away from permanents that cannot use them
+        if (srcCards.size() > 0
+                && cType.equals(Counters.P1P1) // move +1/+1 counters away from
+                                               // permanents that cannot use
+                                               // them
                 && destCards.size() > 0 && destCards.get(0).getController().isComputer()
                 && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
             chance = true;
@@ -2003,10 +2237,14 @@ public class AbilityFactory_Counters {
     }
 
     /**
-     * <p>moveCounterResolve.</p>
-     *
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * moveCounterResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void moveCounterResolve(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
@@ -2030,12 +2268,13 @@ public class AbilityFactory_Counters {
         if (null != source && null != dest) {
             if (source.getCounters(cType) >= amount) {
                 if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
-                        && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType.equals("M1M1"))) {
+                        && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
+                                .equals("M1M1"))) {
                     dest.addCounter(cType, amount);
                     source.subtractCounter(cType, amount);
                 }
             }
         }
-    } //moveCounterResolve
+    } // moveCounterResolve
 
-} //end class AbilityFactory_Counters
+} // end class AbilityFactory_Counters

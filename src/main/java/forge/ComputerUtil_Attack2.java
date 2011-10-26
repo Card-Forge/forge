@@ -62,8 +62,7 @@ public class ComputerUtil_Attack2 {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtil_Attack2(final CardList possibleAttackers,
-            final CardList possibleBlockers, final int blockerLife) {
+    public ComputerUtil_Attack2(final CardList possibleAttackers, final CardList possibleBlockers, final int blockerLife) {
         humanList = new CardList(possibleBlockers.toArray());
         humanList = humanList.getType("Creature");
 
@@ -178,7 +177,7 @@ public class ComputerUtil_Attack2 {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getPossibleBlockers(final CardList blockers, CardList attackers) {
+    public final CardList getPossibleBlockers(final CardList blockers, final CardList attackers) {
         CardList possibleBlockers = new CardList(blockers.toArray());
         final CardList attackerList = new CardList(attackers.toArray());
         possibleBlockers = possibleBlockers.filter(new CardListFilter() {
@@ -211,7 +210,7 @@ public class ComputerUtil_Attack2 {
      *            a {@link forge.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList notNeededAsBlockers(final CardList attackers, Combat combat) {
+    public final CardList notNeededAsBlockers(final CardList attackers, final Combat combat) {
         CardList notNeededAsBlockers = new CardList(attackers.toArray());
         CardListUtil.sortAttackLowFirst(attackers);
         int blockersNeeded = attackers.size();
@@ -254,8 +253,8 @@ public class ComputerUtil_Attack2 {
                     // bonus TWICE
                     humanBaseAttack = humanBaseAttack + humanExaltedBonus;
                 }
-                int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many",
-                        AllZone.getHumanPlayer()) ? 2 * humanBaseAttack : humanBaseAttack;
+                int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
+                        : humanBaseAttack;
                 if ((AllZone.getComputerPlayer().getLife() - 3) <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
                     // blocker
@@ -387,7 +386,7 @@ public class ComputerUtil_Attack2 {
      * 
      * @return a {@link forge.Combat} object.
      */
-    public Combat getAttackers() {
+    public final Combat getAttackers() {
         // if this method is called multiple times during a turn,
         // it will always return the same value
         // randomInt is used so that the computer doesn't always
@@ -414,8 +413,7 @@ public class ComputerUtil_Attack2 {
                     || attacker.hasKeyword("At the beginning of the end step, exile CARDNAME.")
                     || attacker.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
                     || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy() || (attacker.getController()
-                    .getMustAttackEntity() != null)) && CombatUtil.canAttack(attacker, combat))
-            {
+                    .getMustAttackEntity() != null)) && CombatUtil.canAttack(attacker, combat)) {
                 combat.addAttacker(attacker);
                 attackersLeft.remove(attacker);
             }
@@ -583,8 +581,7 @@ public class ComputerUtil_Attack2 {
                                                       // <= 1 && ratioDiff >= 1
                                                       // && outNumber > 0) ||
             aiAggression = 5; // attack at all costs
-        } else if ((playerLifeToDamageRatio < 2 && ratioDiff >= 0)
-                || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)) {
+        } else if ((playerLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)) {
             aiAggression = 3; // attack expecting to kill creatures or damage
                               // player.
         } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1) {
@@ -616,11 +613,9 @@ public class ComputerUtil_Attack2 {
         if (combat.getAttackers().length == 0
                 && (countExaltedBonus(AllZone.getComputerPlayer()) >= 3
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || AllZone.getComputerPlayer()
-                        .getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2 || (AllZone
+                        || AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2 || (AllZone
                         .getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
-                        && AllZone.getPhase().isFirstCombat()) && !bAssault)
-        {
+                        && AllZone.getPhase().isFirstCombat()) && !bAssault) {
             int biggest = 0;
             Card att = null;
             for (int i = 0; i < attackersLeft.size(); i++) {
@@ -664,8 +659,7 @@ public class ComputerUtil_Attack2 {
 
                 if (shouldAttack(attacker, blockers, combat)
                         && (totalFirstStrikeBlockPower < attacker.getKillDamage() || aiAggression == 5)
-                        && CombatUtil.canAttack(attacker, combat))
-                {
+                        && CombatUtil.canAttack(attacker, combat)) {
                     combat.addAttacker(attacker);
                 }
             }

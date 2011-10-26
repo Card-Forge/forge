@@ -1,6 +1,18 @@
 package forge.card;
 
-public enum CardSuperType
-{
-    Basic, Legendary, Show, Ongoing, World
+/**
+ * The Enum CardSuperType.
+ */
+public enum CardSuperType {
+
+    /** The Basic. */
+    Basic,
+    /** The Legendary. */
+    Legendary,
+    /** The Show. */
+    Show,
+    /** The Ongoing. */
+    Ongoing,
+    /** The World. */
+    World
 }

@@ -3,9 +3,9 @@ package forge.card;
 import java.util.Map;
 import java.util.TreeMap;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class CardRuleCharacteristics {
     private String cardName = null;
@@ -15,90 +15,138 @@ public class CardRuleCharacteristics {
     private String ptLine = null;
     private String[] cardRules = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
-    
+
     /**
+     * Gets the card name.
+     * 
      * @return the cardName
      */
-    public String getCardName() {
+    public final String getCardName() {
         return cardName;
     }
+
     /**
-     * @param cardName0 the cardName to set
+     * Sets the card name.
+     * 
+     * @param cardName0
+     *            the cardName to set
      */
-    public void setCardName(String cardName0) {
+    public final void setCardName(final String cardName0) {
         this.cardName = cardName0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the card type.
+     * 
      * @return the cardType
      */
-    public CardType getCardType() {
+    public final CardType getCardType() {
         return cardType;
     }
+
     /**
-     * @param cardType0 the cardType to set
+     * Sets the card type.
+     * 
+     * @param cardType0
+     *            the cardType to set
      */
-    public void setCardType(CardType cardType0) {
+    public final void setCardType(final CardType cardType0) {
         this.cardType = cardType0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the mana cost.
+     * 
      * @return the manaCost
      */
-    public CardManaCost getManaCost() {
+    public final CardManaCost getManaCost() {
         return manaCost;
     }
+
     /**
-     * @param manaCost0 the manaCost to set
+     * Sets the mana cost.
+     * 
+     * @param manaCost0
+     *            the manaCost to set
      */
-    public void setManaCost(CardManaCost manaCost0) {
+    public final void setManaCost(final CardManaCost manaCost0) {
         this.manaCost = manaCost0; // TODO: Add 0 to parameter's name.
         this.color = new CardColor(this.manaCost);
     }
+
     /**
+     * Gets the color.
+     * 
      * @return the color
      */
-    public CardColor getColor() {
+    public final CardColor getColor() {
         return color;
     }
+
     /**
-     * @param color0 the color to set
+     * Sets the color.
+     * 
+     * @param color0
+     *            the color to set
      */
-    public void setColor(CardColor color0) {
+    public final void setColor(final CardColor color0) {
         this.color = color0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the pt line.
+     * 
      * @return the ptLine
      */
-    public String getPtLine() {
+    public final String getPtLine() {
         return ptLine;
     }
+
     /**
-     * @param ptLine0 the ptLine to set
+     * Sets the pt line.
+     * 
+     * @param ptLine0
+     *            the ptLine to set
      */
-    public void setPtLine(String ptLine0) {
+    public final void setPtLine(final String ptLine0) {
         this.ptLine = ptLine0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the card rules.
+     * 
      * @return the cardRules
      */
-    public String[] getCardRules() {
+    public final String[] getCardRules() {
         return cardRules;
     }
+
     /**
-     * @param cardRules0 the cardRules to set
+     * Sets the card rules.
+     * 
+     * @param cardRules0
+     *            the cardRules to set
      */
-    public void setCardRules(String[] cardRules0) {
+    public final void setCardRules(final String[] cardRules0) {
         this.cardRules = cardRules0; // TODO: Add 0 to parameter's name.
     }
+
     /**
+     * Gets the sets data.
+     * 
      * @return the setsData
      */
-    public Map<String, CardInSet> getSetsData() {
+    public final Map<String, CardInSet> getSetsData() {
         return setsData;
     }
+
     /**
-     * @param setsData0 the setsData to set
+     * Sets the sets data.
+     * 
+     * @param setsData0
+     *            the setsData to set
      */
-    public void setSetsData(Map<String, CardInSet> setsData0) {
+    public final void setSetsData(final Map<String, CardInSet> setsData0) {
         this.setsData = setsData0; // TODO: Add 0 to parameter's name.
     }
 }

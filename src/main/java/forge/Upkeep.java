@@ -1,4 +1,3 @@
-
 package forge;
 
 import java.util.ArrayList;
@@ -15,8 +14,10 @@ import forge.gui.input.Input;
 
 //handles "until next upkeep", "until your next upkeep" and "at beginning of upkeep" commands from cards
 /**
- * <p>Upkeep class.</p>
- *
+ * <p>
+ * Upkeep class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -26,38 +27,46 @@ public class Upkeep implements java.io.Serializable {
     private HashMap<Player, CommandList> until = new HashMap<Player, CommandList>();
 
     /**
-     * <p>addUntil.</p>
-     *
-     * @param p a {@link forge.Player} object
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addUntil.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.Player} object
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addUntil(Player p, final Command c) {
-    	if (null == p) {
-    	    p = AllZone.getPhase().getPlayerTurn();
-    	}
+        if (null == p) {
+            p = AllZone.getPhase().getPlayerTurn();
+        }
 
-    	if (until.containsKey(p)) {
-    	    until.get(p).add(c);
-    	}
-    	else {
-    	    until.put(p, new CommandList(c));
-    	}
+        if (until.containsKey(p)) {
+            until.get(p).add(c);
+        } else {
+            until.put(p, new CommandList(c));
+        }
     }
 
     /**
-     * <p>executeUntil.</p>
+     * <p>
+     * executeUntil.
+     * </p>
      * 
-     * @param p the player the execute until for
+     * @param p
+     *            the player the execute until for
      */
     public final void executeUntil(final Player p) {
-    	if (until.containsKey(p)) {
-    	    execute(until.get(p));
-    	}
+        if (until.containsKey(p)) {
+            execute(until.get(p));
+        }
     }
 
     /**
-     * <p>sizeUntil.</p>
-     *
+     * <p>
+     * sizeUntil.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeUntil() {
@@ -73,14 +82,17 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>executeAt.</p>
+     * <p>
+     * executeAt.
+     * </p>
      */
-    public void executeAt() {
-    	AllZone.getStack().freezeStack();
+    public final void executeAt() {
+        AllZone.getStack().freezeStack();
         upkeep_Braid_Of_Fire();
 
-        upkeep_Slowtrips();  // for "Draw a card at the beginning of the next turn's upkeep."
-        upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
+        upkeep_Slowtrips(); // for
+                            // "Draw a card at the beginning of the next turn's upkeep."
+        upkeep_UpkeepCost(); // sacrifice unless upkeep cost is paid
         upkeep_Echo();
 
         upkeep_The_Abyss();
@@ -96,7 +108,7 @@ public class Upkeep implements java.io.Serializable {
 
         upkeep_Vesuvan_Doppelganger_Keyword();
 
-        //Kinship cards
+        // Kinship cards
         upkeep_Ink_Dissolver();
         upkeep_Kithkin_Zephyrnaut();
         upkeep_Leaf_Crowned_Elder();
@@ -110,8 +122,8 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Winnower_Patrol();
         upkeep_Wolf_Skull_Shaman();
 
-        // upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
-
+        // upkeep_Dragon_Broodmother(); //put this before bitterblossom and
+        // mycoloth, so that they will resolve FIRST
 
         upkeep_Karma();
         upkeep_Oath_of_Druids();
@@ -122,7 +134,7 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Masticore();
         upkeep_Eldrazi_Monument();
         upkeep_Blaze_Counters();
-        //upkeep_Dark_Confidant(); // keep this one semi-last
+        // upkeep_Dark_Confidant(); // keep this one semi-last
         upkeep_Power_Surge();
         upkeep_AI_Aluren();
         // experimental, AI abuse aluren
@@ -130,10 +142,12 @@ public class Upkeep implements java.io.Serializable {
         AllZone.getStack().unfreezeStack();
     }
 
-    //UPKEEP CARDS:
+    // UPKEEP CARDS:
 
     /**
-     * <p>upkeep_Braid_Of_Fire.</p>
+     * <p>
+     * upkeep_Braid_Of_Fire.
+     * </p>
      */
     private static void upkeep_Braid_Of_Fire() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -168,10 +182,12 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
 
         }
-    } //upkeep_Braid_of_Fire
+    } // upkeep_Braid_of_Fire
 
     /**
-     * <p>upkeep_Echo.</p>
+     * <p>
+     * upkeep_Echo.
+     * </p>
      */
     private static void upkeep_Echo() {
         CardList list = AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield);
@@ -204,12 +220,12 @@ public class Upkeep implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (c.getController().isHuman()) {
-                        	GameActionUtil.payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand, unpaidCommand);
-                        } else { //computer
+                            GameActionUtil.payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand,
+                                    unpaidCommand);
+                        } else { // computer
                             if (ComputerUtil.canPayCost(aiPaid)) {
                                 ComputerUtil.playNoStack(aiPaid);
-                            }
-                            else {
+                            } else {
                                 AllZone.getGameAction().sacrifice(c);
                             }
                         }
@@ -219,14 +235,15 @@ public class Upkeep implements java.io.Serializable {
 
                 AllZone.getStack().addSimultaneousStackEntry(sacAbility);
 
-
                 c.removeIntrinsicKeyword("(Echo unpaid)");
             }
         }
-    } //echo
+    } // echo
 
     /**
-     * <p>upkeep_Slowtrips.  Draw a card at the beginning of the next turn's upkeep.</p>
+     * <p>
+     * upkeep_Slowtrips. Draw a card at the beginning of the next turn's upkeep.
+     * </p>
      */
     private static void upkeep_Slowtrips() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -236,7 +253,7 @@ public class Upkeep implements java.io.Serializable {
         for (int i = 0; i < list.size(); i++) {
             Card card = list.get(i);
 
-            //otherwise another slowtrip gets added
+            // otherwise another slowtrip gets added
             card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
 
             final Ability slowtrip = new Ability(card, "0") {
@@ -249,11 +266,10 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(slowtrip);
 
-
         }
         player.clearSlowtripList();
 
-        //Do the same for the opponent
+        // Do the same for the opponent
         final Player opponent = player.getOpponent();
 
         list = opponent.getSlowtripList();
@@ -261,7 +277,7 @@ public class Upkeep implements java.io.Serializable {
         for (int i = 0; i < list.size(); i++) {
             Card card = list.get(i);
 
-            //otherwise another slowtrip gets added
+            // otherwise another slowtrip gets added
             card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
 
             final Ability slowtrip = new Ability(card, "0") {
@@ -279,7 +295,9 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>upkeep_UpkeepCost.</p>
+     * <p>
+     * upkeep_UpkeepCost.
+     * </p>
      */
     private static void upkeep_UpkeepCost() {
         CardList list = AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield);
@@ -291,18 +309,17 @@ public class Upkeep implements java.io.Serializable {
             for (int j = 0; j < a.size(); j++) {
                 String ability = a.get(j);
 
-                //destroy
+                // destroy
                 if (ability.startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
                     String[] k = ability.split(" pay ");
                     final String upkeepCost = k[1].toString();
-
 
                     final Command unpaidCommand = new Command() {
                         private static final long serialVersionUID = 8942537892273123542L;
 
                         public void execute() {
                             if (c.getName().equals("Cosmic Horror")) {
-                            	controller.addDamage(7, c);
+                                controller.addDamage(7, c);
                             }
                             AllZone.getGameAction().destroy(c);
                         }
@@ -318,14 +335,12 @@ public class Upkeep implements java.io.Serializable {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                            	GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
-                            } else { //computer
-                                if (ComputerUtil.canPayCost(aiPaid)
-                                        && !c.hasKeyword("Indestructible"))
-                                {
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
+                                        unpaidCommand);
+                            } else { // computer
+                                if (ComputerUtil.canPayCost(aiPaid) && !c.hasKeyword("Indestructible")) {
                                     ComputerUtil.playNoStack(aiPaid);
-                                }
-                                else {
+                                } else {
                                     AllZone.getGameAction().destroy(c);
                                 }
                             }
@@ -335,27 +350,28 @@ public class Upkeep implements java.io.Serializable {
                     upkeepAbility.setDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } //destroy
+                } // destroy
 
-                //sacrifice
-                if (ability.startsWith("At the beginning of your upkeep, sacrifice") || ability.startsWith("Cumulative upkeep")) {
-                	String cost = "0";
+                // sacrifice
+                if (ability.startsWith("At the beginning of your upkeep, sacrifice")
+                        || ability.startsWith("Cumulative upkeep")) {
+                    String cost = "0";
                     final StringBuilder sb = new StringBuilder();
 
-                	if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
-	                    String[] k = ability.split(" pay ");
-	                    cost = k[1].toString();
-	                    sb.append("Sacrifice upkeep for ").append(c).append("\n");
-                	}
+                    if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
+                        String[] k = ability.split(" pay ");
+                        cost = k[1].toString();
+                        sb.append("Sacrifice upkeep for ").append(c).append("\n");
+                    }
 
-                	if (ability.startsWith("Cumulative upkeep")) {
-	                    String[] k = ability.split(":");
-	                    c.addCounter(Counters.AGE, 1);
-	                    cost = CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE));
-	                    sb.append("Cumulative upkeep for ").append(c).append("\n");
-                	}
+                    if (ability.startsWith("Cumulative upkeep")) {
+                        String[] k = ability.split(":");
+                        c.addCounter(Counters.AGE, 1);
+                        cost = CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE));
+                        sb.append("Cumulative upkeep for ").append(c).append("\n");
+                    }
 
-                	final String upkeepCost = cost;
+                    final String upkeepCost = cost;
 
                     final Command unpaidCommand = new Command() {
                         private static final long serialVersionUID = 5612348769167529102L;
@@ -373,12 +389,12 @@ public class Upkeep implements java.io.Serializable {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                            	GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
-                            } else { //computer
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
+                                        unpaidCommand);
+                            } else { // computer
                                 if (ComputerUtil.canPayCost(aiPaid)) {
                                     ComputerUtil.playNoStack(aiPaid);
-                                }
-                                else {
+                                } else {
                                     AllZone.getGameAction().sacrifice(c);
                                 }
                             }
@@ -388,13 +404,13 @@ public class Upkeep implements java.io.Serializable {
                     upkeepAbility.setDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } //sacrifice
+                } // sacrifice
 
-                //destroy
+                // destroy
                 if (ability.startsWith("At the beginning of your upkeep, CARDNAME deals ")) {
                     String[] k = ability.split("deals ");
                     String s1 = k[1].substring(0, 2);
-                    final int upkeepDamage =  Integer.parseInt(s1.trim());
+                    final int upkeepDamage = Integer.parseInt(s1.trim());
                     String[] l = k[1].split(" pay ");
                     final String upkeepCost = l[1].toString();
 
@@ -402,7 +418,7 @@ public class Upkeep implements java.io.Serializable {
                         private static final long serialVersionUID = 1238166187561501928L;
 
                         public void execute() {
-                        	controller.addDamage(upkeepDamage, c);
+                            controller.addDamage(upkeepDamage, c);
                         }
                     };
 
@@ -416,15 +432,14 @@ public class Upkeep implements java.io.Serializable {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
-                            } else { //computer
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
+                                        unpaidCommand);
+                            } else { // computer
                                 if (ComputerUtil.canPayCost(aiPaid)
-                                        && controller.predictDamage(upkeepDamage, c, false) > 0)
-                                {
+                                        && controller.predictDamage(upkeepDamage, c, false) > 0) {
                                     ComputerUtil.playNoStack(aiPaid);
-                                }
-                                else {
-                                	controller.addDamage(upkeepDamage, c);
+                                } else {
+                                    controller.addDamage(upkeepDamage, c);
                                 }
                             }
                         }
@@ -433,18 +448,23 @@ public class Upkeep implements java.io.Serializable {
                     upkeepAbility.setDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } //destroy
+                } // destroy
             }
 
-        } //for
-    } //upkeepCost
+        } // for
+    } // upkeepCost
 
     /**
-     * <p>upkeepAIPayment.</p>
-     *
-     * @param c a {@link forge.Card} object.
-     * @param cost a {@link java.lang.String} object.
-     * @param cost a {@link java.lang.String} object.
+     * <p>
+     * upkeepAIPayment.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param cost
+     *            a {@link java.lang.String} object.
+     * @param cost
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability} object.
      */
     private static Ability upkeepAIPayment(final Card c, final String cost) {
@@ -457,14 +477,16 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>upkeep_The_Abyss.</p>
+     * <p>
+     * upkeep_The_Abyss.
+     * </p>
      */
     private static void upkeep_The_Abyss() {
         /*
-		 * At the beginning of each player's upkeep, destroy target
-		 * nonartifact creature that player controls of his or her
-		 * choice. It can't be regenerated.
-		 */
+         * At the beginning of each player's upkeep, destroy target nonartifact
+         * creature that player controls of his or her choice. It can't be
+         * regenerated.
+         */
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList the = AllZoneUtil.getCardsIn(Zone.Battlefield, "The Abyss");
         final CardList magus = AllZoneUtil.getCardsIn(Zone.Battlefield, "Magus of the Abyss");
@@ -485,22 +507,24 @@ public class Upkeep implements java.io.Serializable {
                                 private static final long serialVersionUID = 4820011040853968644L;
 
                                 public void showMessage() {
-                                    AllZone.getDisplay().showMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
+                                    AllZone.getDisplay().showMessage(
+                                            abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
                                 }
 
                                 public void selectCard(final Card selected, final PlayerZone zone) {
-                                    //probably need to restrict by controller also
-                                    if (selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
-                                            && zone.is(Constant.Zone.Battlefield) && zone.getPlayer().isHuman())
-                                    {
+                                    // probably need to restrict by controller
+                                    // also
+                                    if (selected.isCreature() && !selected.isArtifact()
+                                            && CardFactoryUtil.canTarget(abyss, selected)
+                                            && zone.is(Constant.Zone.Battlefield) && zone.getPlayer().isHuman()) {
                                         AllZone.getGameAction().destroyNoRegeneration(selected);
                                         stop();
                                     }
-                                } //selectCard()
-                            }); //Input
+                                } // selectCard()
+                            }); // Input
                         }
-                    } else { //computer
+                    } else { // computer
                         CardList targets = abyss_getTargets(player, abyss);
                         CardList indestruct = targets.getKeyword("Indestructible");
                         if (indestruct.size() > 0) {
@@ -508,14 +532,14 @@ public class Upkeep implements java.io.Serializable {
                         } else {
                             Card target = CardFactoryUtil.AI_getWorstCreature(targets);
                             if (null == target) {
-                                //must be nothing valid to destroy
+                                // must be nothing valid to destroy
                             } else {
                                 AllZone.getGameAction().destroyNoRegeneration(target);
                             }
                         }
                     }
-                } //resolve
-            }; //sacrificeCreature
+                } // resolve
+            }; // sacrificeCreature
 
             StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
@@ -525,14 +549,18 @@ public class Upkeep implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
             }
 
-        } //end for
-    } //The Abyss
+        } // end for
+    } // The Abyss
 
     /**
-     * <p>abyss_getTargets.</p>
-     *
-     * @param player a {@link forge.Player} object.
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * abyss_getTargets.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
+     * @param card
+     *            a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
     private static CardList abyss_getTargets(final Player player, final Card card) {
@@ -542,13 +570,15 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>upkeep_Yawgmoth_Demon.</p>
+     * <p>
+     * upkeep_Yawgmoth_Demon.
+     * </p>
      */
     private static void upkeep_Yawgmoth_Demon() {
         /*
-		 * At the beginning of your upkeep, you may sacrifice an artifact. If
-		 * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
-		 */
+         * At the beginning of your upkeep, you may sacrifice an artifact. If
+         * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
+         */
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList cards = player.getCardsIn(Zone.Battlefield, "Yawgmoth Demon");
 
@@ -565,7 +595,8 @@ public class Upkeep implements java.io.Serializable {
                             private static final long serialVersionUID = -1698502376924356936L;
 
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage("Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
+                                AllZone.getDisplay().showMessage(
+                                        "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -575,16 +606,15 @@ public class Upkeep implements java.io.Serializable {
                             }
 
                             public void selectCard(final Card artifact, final PlayerZone zone) {
-                                //probably need to restrict by controller also
+                                // probably need to restrict by controller also
                                 if (artifact.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                                        && zone.getPlayer().isHuman())
-                                {
+                                        && zone.getPlayer().isHuman()) {
                                     AllZone.getGameAction().sacrifice(artifact);
                                     stop();
                                 }
-                            } //selectCard()
-                        }); //Input
-                    } else { //computer
+                            } // selectCard()
+                        }); // Input
+                    } else { // computer
                         Card target = CardFactoryUtil.AI_getCheapestPermanent(artifacts, c, false);
                         if (null == target) {
                             tapAndDamage(player);
@@ -592,7 +622,7 @@ public class Upkeep implements java.io.Serializable {
                             AllZone.getGameAction().sacrifice(target);
                         }
                     }
-                } //resolve
+                } // resolve
 
                 private void tapAndDamage(final Player player) {
                     c.tap();
@@ -607,17 +637,19 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(sacrificeArtifact);
 
-        } //end for
+        } // end for
     }
 
     /**
-     * <p>upkeep_Lord_of_the_Pit.</p>
+     * <p>
+     * upkeep_Lord_of_the_Pit.
+     * </p>
      */
     private static void upkeep_Lord_of_the_Pit() {
         /*
-		 * At the beginning of your upkeep, sacrifice a creature other than
-		 * Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-		 */
+         * At the beginning of your upkeep, sacrifice a creature other than Lord
+         * of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
+         */
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList lords = player.getCardsIn(Zone.Battlefield, "Lord of the Pit");
         lords.addAll(player.getCardsIn(Zone.Battlefield, "Liege of the Pit"));
@@ -632,16 +664,19 @@ public class Upkeep implements java.io.Serializable {
             final Ability sacrificeCreature = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    //TODO - this should handle the case where you sacrifice 2 LOTPs to each other
+                    // TODO - this should handle the case where you sacrifice 2
+                    // LOTPs to each other
                     CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                     creatures.remove(c);
                     if (player.isHuman()) {
-                        AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanent(creatures, c.getName() + " - Select a creature to sacrifice."));
-                    } else { //computer
+                        AllZone.getInputControl().setInput(
+                                PlayerUtil.input_sacrificePermanent(creatures, c.getName()
+                                        + " - Select a creature to sacrifice."));
+                    } else { // computer
                         Card target = CardFactoryUtil.AI_getWorstCreature(creatures);
                         AllZone.getGameAction().sacrifice(target);
                     }
-                } //resolve
+                } // resolve
             };
 
             final Ability sevenDamage = new Ability(c, "") {
@@ -654,7 +689,8 @@ public class Upkeep implements java.io.Serializable {
             CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
             creatures.remove(c);
             if (creatures.size() == 0) {
-                //there are no creatures to sacrifice, so we must do the 7 damage
+                // there are no creatures to sacrifice, so we must do the 7
+                // damage
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(c.getName()).append(" - deals 7 damage to controller");
@@ -671,18 +707,20 @@ public class Upkeep implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
 
             }
-        } //end for
+        } // end for
     } // upkeep_Lord_of_the_Pit()
 
     /**
-     * <p>upkeep_Drop_of_Honey.</p>
+     * <p>
+     * upkeep_Drop_of_Honey.
+     * </p>
      */
     private static void upkeep_Drop_of_Honey() {
         /*
-		 * At the beginning of your upkeep, destroy the creature with the
-		 * least power. It can't be regenerated. If two or more creatures
-		 * are tied for least power, you choose one of them.
-		 */
+         * At the beginning of your upkeep, destroy the creature with the least
+         * power. It can't be regenerated. If two or more creatures are tied for
+         * least power, you choose one of them.
+         */
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList drops = player.getCardsIn(Zone.Battlefield, "Drop of Honey");
         drops.addAll(player.getCardsIn(Zone.Battlefield, "Porphyry Nodes"));
@@ -699,13 +737,15 @@ public class Upkeep implements java.io.Serializable {
                         CardListUtil.sortAttackLowFirst(creatures);
                         int power = creatures.get(0).getNetAttack();
                         if (player.isHuman()) {
-                            AllZone.getInputControl().setInput(CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures), "Select creature with power: " + power + " to sacrifice."));
-                        } else { //computer
+                            AllZone.getInputControl().setInput(
+                                    CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures),
+                                            "Select creature with power: " + power + " to sacrifice."));
+                        } else { // computer
                             Card compyTarget = getCompyCardToDestroy(creatures);
                             AllZone.getGameAction().destroyNoRegeneration(compyTarget);
                         }
                     }
-                } //resolve
+                } // resolve
 
                 private CardList getLowestPowerList(final CardList original) {
                     CardList lowestPower = new CardList();
@@ -741,18 +781,20 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        } //end for
+        } // end for
     } // upkeep_Drop_of_Honey()
 
     /**
-     * <p>upkeep_Demonic_Hordes.</p>
+     * <p>
+     * upkeep_Demonic_Hordes.
+     * </p>
      */
     private static void upkeep_Demonic_Hordes() {
 
         /*
-		 * At the beginning of your upkeep, unless you pay BBB,
-		 * tap Demonic Hordes and sacrifice a land of an opponent's choice.
-		 */
+         * At the beginning of your upkeep, unless you pay BBB, tap Demonic
+         * Hordes and sacrifice a land of an opponent's choice.
+         */
 
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList cards = player.getCardsIn(Zone.Battlefield, "Demonic Hordes");
@@ -771,15 +813,17 @@ public class Upkeep implements java.io.Serializable {
                     c.tap();
                     if (c.getController().isComputer()) {
                         if (playerLand.size() > 0) {
-                            AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanent(playerLand, c.getName() + " - Select a land to sacrifice."));
+                            AllZone.getInputControl().setInput(
+                                    PlayerUtil.input_sacrificePermanent(playerLand, c.getName()
+                                            + " - Select a land to sacrifice."));
                         }
                     } else {
                         Card target = CardFactoryUtil.AI_getBestLand(playerLand);
 
                         AllZone.getGameAction().sacrifice(target);
                     }
-                } //end resolve()
-            }; //end noPay ability
+                } // end resolve()
+            }; // end noPay ability
 
             if (c.getController().isHuman()) {
                 String question = "Pay Demonic Hordes upkeep cost?";
@@ -791,15 +835,16 @@ public class Upkeep implements java.io.Serializable {
                             if (AllZone.getZoneOf(c).is(Constant.Zone.Battlefield)) {
                                 StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
-                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(), Command.Blank, Command.Blank);
+                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
+                                        Command.Blank, Command.Blank);
                             }
-                        } //end resolve()
-                    }; //end pay ability
+                        } // end resolve()
+                    }; // end pay ability
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
 
                     AllZone.getStack().addSimultaneousStackEntry(pay);
 
-                } //end choice
+                } // end choice
                 else {
                     StringBuilder sb = new StringBuilder();
                     sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
@@ -808,8 +853,8 @@ public class Upkeep implements java.io.Serializable {
                     AllZone.getStack().addSimultaneousStackEntry(noPay);
 
                 }
-            } //end human
-            else { //computer
+            } // end human
+            else { // computer
                 if ((c.getController().isComputer() && (ComputerUtil.canPayCost(noPay)))) {
                     final Ability computerPay = new Ability(c, "0") {
                         private static final long serialVersionUID = 4820011440852868644L;
@@ -826,14 +871,16 @@ public class Upkeep implements java.io.Serializable {
                     AllZone.getStack().addSimultaneousStackEntry(noPay);
 
                 }
-            } //end computer
+            } // end computer
 
-        } //end for loop
+        } // end for loop
 
-    } //upkeep_Demonic_Hordes
+    } // upkeep_Demonic_Hordes
 
     /**
-     * <p>upkeep_AI_Aluren.</p>
+     * <p>
+     * upkeep_AI_Aluren.
+     * </p>
      */
     private static void upkeep_AI_Aluren() {
         CardList alurens = AllZoneUtil.getCardsIn(Zone.Battlefield, "Aluren");
@@ -856,14 +903,14 @@ public class Upkeep implements java.io.Serializable {
         }
     }
 
-
-    /////////////////////////
+    // ///////////////////////
     // Start of Kinship cards
-    /////////////////////////
-
+    // ///////////////////////
 
     /**
-     * <p>upkeep_Ink_Dissolver.</p>
+     * <p>
+     * upkeep_Ink_Dissolver.
+     * </p>
      */
     private static void upkeep_Ink_Dissolver() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -871,19 +918,22 @@ public class Upkeep implements java.io.Serializable {
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Ink Dissolver");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Merfolk", "Wizard"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Merfolk", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -894,9 +944,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantToMillOpponent = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -942,28 +995,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Ink_Dissolver()
 
-
     /**
-     * <p>upkeep_Kithkin_Zephyrnaut.</p>
+     * <p>
+     * upkeep_Kithkin_Zephyrnaut.
+     * </p>
      */
     private static void upkeep_Kithkin_Zephyrnaut() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Kithkin Zephyrnaut");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Kithkin", "Soldier"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Kithkin", "Soldier" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -974,9 +1031,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantKithkinBuff = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1037,28 +1097,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Kithkin_Zephyrnaut()
 
-
     /**
-     * <p>upkeep_Leaf_Crowned_Elder.</p>
+     * <p>
+     * upkeep_Leaf_Crowned_Elder.
+     * </p>
      */
     private static void upkeep_Leaf_Crowned_Elder() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Leaf-Crowned Elder");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Treefolk", "Shaman"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Treefolk", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1069,9 +1133,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantToPlayCard = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1131,28 +1198,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Leaf_Crowned_Elder()
 
-
     /**
-     * <p>upkeep_Mudbutton_Clanger.</p>
+     * <p>
+     * upkeep_Mudbutton_Clanger.
+     * </p>
      */
     private static void upkeep_Mudbutton_Clanger() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Mudbutton Clanger");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Goblin", "Warrior"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Goblin", "Warrior" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1163,9 +1234,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantGoblinBuff = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1221,9 +1295,10 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Mudbutton_Clanger()
 
-
     /**
-     * <p>upkeep_Nightshade_Schemers.</p>
+     * <p>
+     * upkeep_Nightshade_Schemers.
+     * </p>
      */
     private static void upkeep_Nightshade_Schemers() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -1231,19 +1306,22 @@ public class Upkeep implements java.io.Serializable {
         final Player opponent = player.getOpponent();
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Faerie", "Wizard"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Faerie", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1254,9 +1332,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantOpponentLoseLife = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1300,28 +1381,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Nightshade_Schemers()
 
-
     /**
-     * <p>upkeep_Pyroclast_Consul.</p>
+     * <p>
+     * upkeep_Pyroclast_Consul.
+     * </p>
      */
     private static void upkeep_Pyroclast_Consul() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Pyroclast Consul");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Elemental", "Shaman"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Elemental", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1331,7 +1416,7 @@ public class Upkeep implements java.io.Serializable {
 
                     peek[0] = library.get(0);
                     boolean wantDamageCreatures = false;
-                    String[] smallCreatures = {"Creature.toughnessLE2"};
+                    String[] smallCreatures = { "Creature.toughnessLE2" };
 
                     CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     humanCreatures = humanCreatures.getValidCards(smallCreatures, k.getController(), k);
@@ -1341,9 +1426,12 @@ public class Upkeep implements java.io.Serializable {
                     computerCreatures = computerCreatures.getValidCards(smallCreatures, k.getController(), k);
                     computerCreatures = computerCreatures.getNotKeyword("Indestructible");
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1393,9 +1481,10 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Pyroclast_Consul()
 
-
     /**
-     * <p>upkeep_Sensation_Gorger.</p>
+     * <p>
+     * upkeep_Sensation_Gorger.
+     * </p>
      */
     private static void upkeep_Sensation_Gorger() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -1403,19 +1492,22 @@ public class Upkeep implements java.io.Serializable {
         final Player opponent = player.getOpponent();
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Goblin", "Shaman"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Goblin", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1427,9 +1519,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantDiscardThenDraw = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1479,9 +1574,10 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Sensation_Gorger()
 
-
     /**
-     * <p>upkeep_Squeaking_Pie_Grubfellows.</p>
+     * <p>
+     * upkeep_Squeaking_Pie_Grubfellows.
+     * </p>
      */
     private static void upkeep_Squeaking_Pie_Grubfellows() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -1489,19 +1585,22 @@ public class Upkeep implements java.io.Serializable {
         final Player opponent = player.getOpponent();
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Goblin", "Shaman"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Goblin", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1512,9 +1611,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantOpponentDiscard = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1559,28 +1661,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Squeaking_Pie_Grubfellows()
 
-
     /**
-     * <p>upkeep_Wandering_Graybeard.</p>
+     * <p>
+     * upkeep_Wandering_Graybeard.
+     * </p>
      */
     private static void upkeep_Wandering_Graybeard() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Wandering Graybeard");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Giant", "Wizard"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Giant", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1591,9 +1697,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantGainLife = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1637,28 +1746,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Wandering_Graybeard()
 
-
     /**
-     * <p>upkeep_Waterspout_Weavers.</p>
+     * <p>
+     * upkeep_Waterspout_Weavers.
+     * </p>
      */
     private static void upkeep_Waterspout_Weavers() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Waterspout Weavers");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Merfolk", "Wizard"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Merfolk", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1669,9 +1782,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantMerfolkBuff = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1735,28 +1851,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Waterspout_Weavers()
 
-
     /**
-     * <p>upkeep_Winnower_Patrol.</p>
+     * <p>
+     * upkeep_Winnower_Patrol.
+     * </p>
      */
     private static void upkeep_Winnower_Patrol() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Winnower Patrol");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Elf", "Warrior"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Elf", "Warrior" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1767,9 +1887,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantCounter = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1813,28 +1936,32 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Winnower_Patrol()
 
-
     /**
-     * <p>upkeep_Wolf_Skull_Shaman.</p>
+     * <p>
+     * upkeep_Wolf_Skull_Shaman.
+     * </p>
      */
     private static void upkeep_Wolf_Skull_Shaman() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList kinship = player.getCardsIn(Zone.Battlefield, "Wolf-Skull Shaman");
 
         PlayerZone library = player.getZone(Constant.Zone.Library);
-        // Players would not choose to trigger Kinship ability if library is empty.
-        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        // Players would not choose to trigger Kinship ability if library is
+        // empty.
+        // Useful for games when the "Milling = Loss Condition" check box is
+        // unchecked.
 
         if (kinship.size() == 0 || library.size() <= 0) {
             return;
         }
 
-        final String[] shareTypes = {"Elf", "Shaman"};
-        final Card[] prevCardShown = {null};
-        final Card[] peek = {null};
+        final String[] shareTypes = { "Elf", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card[] peek = { null };
 
         for (final Card k : kinship) {
-            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+            Ability ability = new Ability(k, "0") { // change to triggered
+                                                    // abilities when ready
                 @Override
                 public void resolve() {
                     PlayerZone library = player.getZone(Constant.Zone.Library);
@@ -1845,9 +1972,12 @@ public class Upkeep implements java.io.Serializable {
                     peek[0] = library.get(0);
                     boolean wantToken = false;
 
-                    // We assume that both players will want to peek, ask if they want to reveal.
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    // We assume that both players will want to peek, ask if
+                    // they want to reveal.
+                    // We do not want to slow down the pace of the game by
+                    // asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end
+                    // of turn phase !!!
 
                     if (peek[0].isValid(shareTypes, k.getController(), k)) {
                         if (player.isHuman()) {
@@ -1870,8 +2000,8 @@ public class Upkeep implements java.io.Serializable {
                     }
 
                     if (wantToken) {
-                        CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", k.getController(), "G",
-                                new String[]{"Creature", "Wolf"}, 2, 2, new String[]{""});
+                        CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", k.getController(), "G", new String[] {
+                                "Creature", "Wolf" }, 2, 2, new String[] { "" });
                     }
                 } // resolve()
 
@@ -1893,51 +2023,46 @@ public class Upkeep implements java.io.Serializable {
         } // for
     } // upkeep_Wolf_Skull_Shaman()
 
-
-    ///////////////////////
+    // /////////////////////
     // End of Kinship cards
-    ///////////////////////
-
+    // /////////////////////
 
     /**
-     * <p>upkeep_Dark_Confidant.</p>
+     * <p>
+     * upkeep_Dark_Confidant.
+     * </p>
      */
-    /*private static void upkeep_Dark_Confidant() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList list = player.getCardsIn(Zone.Battlefield);
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return c.getName().equals("Dark Confidant") || c.getName().equals("Dark Tutelage");
-            }
-        });
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card fCard = list.get(i);
-            ability = new Ability(fCard, "0") {
-                @Override
-                public void resolve() {
-                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
-                    if (lib.size() > 0) {
-                        Card toMove = lib.get(0);
-                        AllZone.getGameAction().moveToHand(toMove);
-                        player.loseLife(toMove.getCMC(), fCard);
-                    }
-                } // resolve()
-            }; // Ability
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(fCard).append(" - ").append("At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // for
-    } // upkeep_Dark_Confidant()*/
+    /*
+     * private static void upkeep_Dark_Confidant() { final Player player =
+     * AllZone.getPhase().getPlayerTurn();
+     * 
+     * CardList list = player.getCardsIn(Zone.Battlefield); list =
+     * list.filter(new CardListFilter() { public boolean addCard(final Card c) {
+     * return c.getName().equals("Dark Confidant") ||
+     * c.getName().equals("Dark Tutelage"); } });
+     * 
+     * Ability ability; for (int i = 0; i < list.size(); i++) { final Card fCard
+     * = list.get(i); ability = new Ability(fCard, "0") {
+     * 
+     * @Override public void resolve() { CardList lib =
+     * AllZoneUtil.getPlayerCardsInLibrary(player); if (lib.size() > 0) { Card
+     * toMove = lib.get(0); AllZone.getGameAction().moveToHand(toMove);
+     * player.loseLife(toMove.getCMC(), fCard); } } // resolve() }; // Ability
+     * 
+     * StringBuilder sb = new StringBuilder();
+     * sb.append(fCard).append(" - ").append(
+     * "At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost."
+     * ); ability.setStackDescription(sb.toString());
+     * 
+     * AllZone.getStack().addSimultaneousStackEntry(ability);
+     * 
+     * } // for } // upkeep_Dark_Confidant()
+     */
 
     /**
-     * <p>upkeep_Suspend.</p>
+     * <p>
+     * upkeep_Suspend.
+     * </p>
      */
     public static void upkeep_Suspend() {
         Player player = AllZone.getPhase().getPlayerTurn();
@@ -1960,10 +2085,12 @@ public class Upkeep implements java.io.Serializable {
                 c.subtractCounter(Counters.TIME, 1);
             }
         }
-    } //suspend
+    } // suspend
 
     /**
-     * <p>upkeep_Vanishing.</p>
+     * <p>
+     * upkeep_Vanishing.
+     * </p>
      */
     private static void upkeep_Vanishing() {
 
@@ -1996,7 +2123,9 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>upkeep_Fading.</p>
+     * <p>
+     * upkeep_Fading.
+     * </p>
      */
     private static void upkeep_Fading() {
 
@@ -2016,8 +2145,7 @@ public class Upkeep implements java.io.Serializable {
                         int fadeCounters = card.getCounters(Counters.FADE);
                         if (fadeCounters <= 0) {
                             AllZone.getGameAction().sacrifice(card);
-                        }
-                        else {
+                        } else {
                             card.subtractCounter(Counters.FADE, 1);
                         }
                     }
@@ -2035,7 +2163,9 @@ public class Upkeep implements java.io.Serializable {
     }
 
     /**
-     * <p>upkeep_Oath_of_Druids.</p>
+     * <p>
+     * upkeep_Oath_of_Druids.
+     * </p>
      */
     private static void upkeep_Oath_of_Druids() {
         CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Druids");
@@ -2063,17 +2193,17 @@ public class Upkeep implements java.io.Serializable {
                                 if (!GameActionUtil.showYesNoDialog(oath, question.toString())) {
                                     oathFlag = false;
                                 }
-                            } else {    // if player == Computer
+                            } else { // if player == Computer
                                 CardList creaturesInLibrary = player.getCardsIn(Zone.Library).getType("Creature");
-                                CardList creaturesInBattlefield = player.getCardsIn(Zone.Battlefield).getType("Creature");
+                                CardList creaturesInBattlefield = player.getCardsIn(Zone.Battlefield).getType(
+                                        "Creature");
 
-                                // if there are at least 3 creatures in library, or none in play with one in library, oath
+                                // if there are at least 3 creatures in library,
+                                // or none in play with one in library, oath
                                 if (creaturesInLibrary.size() > 2
-                                        || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0))
-                                {
+                                        || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0)) {
                                     oathFlag = true;
-                                }
-                                else {
+                                } else {
                                     oathFlag = false;
                                 }
                             }
@@ -2114,7 +2244,9 @@ public class Upkeep implements java.io.Serializable {
     } // upkeep_Oath of Druids()
 
     /**
-     * <p>upkeep_Oath_of_Ghouls.</p>
+     * <p>
+     * upkeep_Oath_of_Ghouls.
+     * </p>
      */
     private static void upkeep_Oath_of_Ghouls() {
         CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Ghouls");
@@ -2158,11 +2290,12 @@ public class Upkeep implements java.io.Serializable {
 
             }
         }
-    } //Oath of Ghouls
-
+    } // Oath of Ghouls
 
     /**
-     * <p>upkeep_Karma.</p>
+     * <p>
+     * upkeep_Karma.
+     * </p>
      */
     private static void upkeep_Karma() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2198,9 +2331,10 @@ public class Upkeep implements java.io.Serializable {
         } // if
     } // upkeep_Karma()
 
-
     /**
-     * <p>upkeep_Dega_Sanctuary.</p>
+     * <p>
+     * upkeep_Dega_Sanctuary.
+     * </p>
      */
     private static void upkeep_Dega_Sanctuary() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2217,13 +2351,12 @@ public class Upkeep implements java.io.Serializable {
                     CardList red = play.filter(CardListFilter.red);
                     if (black.size() > 0 && red.size() > 0) {
                         gain = 4;
-                    }
-                    else if (black.size() > 0 || red.size() > 0) {
+                    } else if (black.size() > 0 || red.size() > 0) {
                         gain = 2;
                     }
                     player.gainLife(gain, source);
                 }
-            }; //Ability
+            }; // Ability
 
             StringBuilder sb = new StringBuilder();
             sb.append(source.getName()).append(" - ");
@@ -2232,11 +2365,13 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        } //for
-    } //upkeep_Dega_Sanctuary()
+        } // for
+    } // upkeep_Dega_Sanctuary()
 
     /**
-     * <p>upkeep_Ceta_Sanctuary.</p>
+     * <p>
+     * upkeep_Ceta_Sanctuary.
+     * </p>
      */
     private static void upkeep_Ceta_Sanctuary() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2254,8 +2389,7 @@ public class Upkeep implements java.io.Serializable {
 
                     if (green.size() > 0 && red.size() > 0) {
                         draw = 2;
-                    }
-                    else if (green.size() > 0 || red.size() > 0) {
+                    } else if (green.size() > 0 || red.size() > 0) {
                         draw = 1;
                     }
 
@@ -2264,7 +2398,7 @@ public class Upkeep implements java.io.Serializable {
                         player.discard(1, this, true);
                     }
                 }
-            }; //Ability
+            }; // Ability
 
             StringBuilder sb = new StringBuilder();
             sb.append(source).append(" - ");
@@ -2273,18 +2407,20 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        } //for
-    } //upkeep_Ceta_Sanctuary()
+        } // for
+    } // upkeep_Ceta_Sanctuary()
 
     /**
-     * <p>upkeep_Power_Surge.</p>
+     * <p>
+     * upkeep_Power_Surge.
+     * </p>
      */
     private static void upkeep_Power_Surge() {
         /*
-		 * At the beginning of each player's upkeep, Power Surge deals X
-		 * damage to that player, where X is the number of untapped
-		 * lands he or she controlled at the beginning of this turn.
-		 */
+         * At the beginning of each player's upkeep, Power Surge deals X damage
+         * to that player, where X is the number of untapped lands he or she
+         * controlled at the beginning of this turn.
+         */
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Power Surge");
         final int damage = player.getNumPowerSurgeLands();
@@ -2309,10 +2445,13 @@ public class Upkeep implements java.io.Serializable {
     } // upkeep_Power_Surge()
 
     /**
-     * <p>upkeep_Vesuvan_Doppelganger_Keyword.</p>
+     * <p>
+     * upkeep_Vesuvan_Doppelganger_Keyword.
+     * </p>
      */
     private static void upkeep_Vesuvan_Doppelganger_Keyword() {
-        // TODO - what about enchantments? i dont know how great this solution is
+        // TODO - what about enchantments? i dont know how great this solution
+        // is
         final Player player = AllZone.getPhase().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
@@ -2329,21 +2468,21 @@ public class Upkeep implements java.io.Serializable {
                         public void resolve() {
                             if (newTarget[0] != null) {
                                 /*
-								 * 1. need to select new card - DONE
-								 * 1a. need to create the newly copied card with pic and setinfo
-								 * 2. need to add the leaves play command
-								 * 3. need to transfer the keyword
-								 * 4. need to update the clone origin of new card and old card
-								 * 5. remove clone leaves play commands from old
-								 * 5a. remove old from play
-								 * 6. add new to play
-								 */
+                                 * 1. need to select new card - DONE 1a. need to
+                                 * create the newly copied card with pic and
+                                 * setinfo 2. need to add the leaves play
+                                 * command 3. need to transfer the keyword 4.
+                                 * need to update the clone origin of new card
+                                 * and old card 5. remove clone leaves play
+                                 * commands from old 5a. remove old from play 6.
+                                 * add new to play
+                                 */
 
                                 Card newCopy = AllZone.getCardFactory().getCard(newTarget[0].getName(), player);
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
                                 newCopy.setImageFilename(newTarget[0].getImageFilename());
 
-                                //need to add the leaves play command (2)
+                                // need to add the leaves play command (2)
                                 newCopy.addLeavesPlayCommand(c.getCloneLeavesPlayCommand());
                                 c.removeTrigger(c.getCloneLeavesPlayCommand(), ZCTrigger.LEAVEFIELD);
                                 newCopy.setCloneLeavesPlayCommand(c.getCloneLeavesPlayCommand());
@@ -2354,7 +2493,7 @@ public class Upkeep implements java.io.Serializable {
                                 newCopy.getCloneOrigin().setCurrentlyCloningCard(newCopy);
                                 c.setCloneOrigin(null);
 
-                                //5
+                                // 5
                                 PlayerZone play = AllZone.getZoneOf(c);
                                 play.remove(c);
 
@@ -2368,7 +2507,8 @@ public class Upkeep implements java.io.Serializable {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage(c.getName() + " - Select new target creature.  (Click Cancel to remain as is.)");
+                            AllZone.getDisplay().showMessage(
+                                    c.getName() + " - Select new target creature.  (Click Cancel to remain as is.)");
                             ButtonUtil.enableOnlyCancel();
                         }
 
@@ -2383,7 +2523,8 @@ public class Upkeep implements java.io.Serializable {
                                     && CardFactoryUtil.canTarget(c, selectedCard)) {
                                 newTarget[0] = selectedCard;
                                 StringBuilder sb = new StringBuilder();
-                                sb.append(c.getCloneOrigin()).append(" - switching to copy " + selectedCard.getName() + ".");
+                                sb.append(c.getCloneOrigin()).append(
+                                        " - switching to copy " + selectedCard.getName() + ".");
                                 switchTargets.setStackDescription(sb.toString());
                                 AllZone.getStack().add(switchTargets);
                                 stop();
@@ -2397,11 +2538,13 @@ public class Upkeep implements java.io.Serializable {
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        } //foreach(Card)
-    } //upkeep_Vesuvan_Doppelganger_Keyword
+        } // foreach(Card)
+    } // upkeep_Vesuvan_Doppelganger_Keyword
 
     /**
-     * <p>upkeep_Tangle_Wire.</p>
+     * <p>
+     * upkeep_Tangle_Wire.
+     * </p>
      */
     private static void upkeep_Tangle_Wire() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2434,12 +2577,15 @@ public class Upkeep implements java.io.Serializable {
                                         stop();
                                         return;
                                     }
-                                    AllZone.getDisplay().showMessage(source.getName() + " - Select " + num + " untapped artifact(s), creature(s), or land(s) you control");
+                                    AllZone.getDisplay().showMessage(
+                                            source.getName() + " - Select " + num
+                                                    + " untapped artifact(s), creature(s), or land(s) you control");
                                     ButtonUtil.disableAll();
                                 }
 
                                 public void selectCard(final Card card, final PlayerZone zone) {
-                                    if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && list.contains(card)) {
+                                    if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
+                                            && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);
                                         stop();
@@ -2450,15 +2596,18 @@ public class Upkeep implements java.io.Serializable {
                     }
                 }
             };
-            ability.setStackDescription(source.getName() + " - " + player + " taps X artifacts, creatures or lands he or she controls.");
+            ability.setStackDescription(source.getName() + " - " + player
+                    + " taps X artifacts, creatures or lands he or she controls.");
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
-        } //foreach(wire)
-    } //upkeep_Tangle_Wire()
+        } // foreach(wire)
+    } // upkeep_Tangle_Wire()
 
     /**
-     * <p>upkeep_Masticore.</p>
+     * <p>
+     * upkeep_Masticore.
+     * </p>
      */
     private static void upkeep_Masticore() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2493,7 +2642,7 @@ public class Upkeep implements java.io.Serializable {
                     AllZone.getGameAction().sacrifice(crd);
                     stop();
                 }
-            }; //Input
+            }; // Input
 
             ability = new Ability(crd, "0") {
                 @Override
@@ -2501,22 +2650,20 @@ public class Upkeep implements java.io.Serializable {
                     if (crd.getController().isHuman()) {
                         if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                             AllZone.getGameAction().sacrifice(crd);
-                        }
-                        else {
+                        } else {
                             AllZone.getInputControl().setInput(discard);
                         }
-                    } else { //comp
+                    } else { // comp
                         CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
                         if (list.size() != 0) {
                             list.get(0).getController().discard(list.get(0), this);
-                        }
-                        else {
+                        } else {
                             AllZone.getGameAction().sacrifice(crd);
                         }
-                    } //else
-                } //resolve()
-            }; //Ability
+                    } // else
+                } // resolve()
+            }; // Ability
 
             StringBuilder sb = new StringBuilder();
             sb.append(crd).append(" - sacrifice ").append(crd).append(" unless you discard a card.");
@@ -2526,11 +2673,12 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } //upkeep_Masticore
-
+    } // upkeep_Masticore
 
     /**
-     * <p>upkeep_Eldrazi_Monument.</p>
+     * <p>
+     * upkeep_Eldrazi_Monument.
+     * </p>
      */
     private static void upkeep_Eldrazi_Monument() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2551,15 +2699,14 @@ public class Upkeep implements java.io.Serializable {
                     }
 
                     if (player.isHuman()) {
-                        Object o = GuiUtils.getChoiceOptional("Select creature to sacrifice",
-                                creats.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select creature to sacrifice", creats.toArray());
                         Card sac = (Card) o;
                         if (sac == null) {
                             creats.shuffle();
                             sac = creats.get(0);
                         }
                         AllZone.getGameAction().sacrifice(sac);
-                    } else { //computer
+                    } else { // computer
                         CardListUtil.sortAttackLowFirst(creats);
                         AllZone.getGameAction().sacrifice(creats.get(0));
                     }
@@ -2574,10 +2721,12 @@ public class Upkeep implements java.io.Serializable {
 
         }
 
-    }//upkeep_Eldrazi_Monument
+    }// upkeep_Eldrazi_Monument
 
     /**
-     * <p>upkeep_Blaze_Counters.</p>
+     * <p>
+     * upkeep_Blaze_Counters.
+     * </p>
      */
     private static void upkeep_Blaze_Counters() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2607,9 +2756,11 @@ public class Upkeep implements java.io.Serializable {
 
         }
     }
-    
+
     /**
-     * <p>upkeep_Carnophage.</p>
+     * <p>
+     * upkeep_Carnophage.
+     * </p>
      */
     private static void upkeep_Carnophage() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2618,28 +2769,30 @@ public class Upkeep implements java.io.Serializable {
         if (player.isHuman()) {
             for (int i = 0; i < list.size(); i++) {
                 Card c = list.get(i);
-                String[] choices = {"Yes", "No"};
+                String[] choices = { "Yes", "No" };
                 Object choice = GuiUtils.getChoice("Pay Carnophage's upkeep?", choices);
                 if (choice.equals("Yes")) {
                     player.loseLife(1, c);
-                }
-                else {
+                } else {
                     c.tap();
                 }
             }
-        } else if (player.isComputer()) for (int i = 0; i < list.size(); i++) {
-            Card c = list.get(i);
-            if (AllZone.getComputerPlayer().getLife() > 1) {
-                player.loseLife(1, c);
-            }
-            else{
-                c.tap();
+        } else if (player.isComputer()) {
+            for (int i = 0; i < list.size(); i++) {
+                Card c = list.get(i);
+                if (AllZone.getComputerPlayer().getLife() > 1) {
+                    player.loseLife(1, c);
+                } else {
+                    c.tap();
+                }
             }
         }
     } // upkeep_Carnophage
 
     /**
-     * <p>upkeep_Sangrophage.</p>
+     * <p>
+     * upkeep_Sangrophage.
+     * </p>
      */
     private static void upkeep_Sangrophage() {
         final Player player = AllZone.getPhase().getPlayerTurn();
@@ -2648,24 +2801,24 @@ public class Upkeep implements java.io.Serializable {
         if (player.isHuman()) {
             for (int i = 0; i < list.size(); i++) {
                 Card c = list.get(i);
-                String[] choices = {"Yes", "No"};
+                String[] choices = { "Yes", "No" };
                 Object choice = GuiUtils.getChoice("Pay Sangrophage's upkeep?", choices);
                 if (choice.equals("Yes")) {
                     player.loseLife(2, c);
-                }
-                else {
+                } else {
                     c.tap();
                 }
             }
-        } else if (player.isComputer()) for (int i = 0; i < list.size(); i++) {
-            Card c = list.get(i);
-            if (AllZone.getComputerPlayer().getLife() > 2) {
-                player.loseLife(2, c);
-            }
-            else {
-                c.tap();
+        } else if (player.isComputer()) {
+            for (int i = 0; i < list.size(); i++) {
+                Card c = list.get(i);
+                if (AllZone.getComputerPlayer().getLife() > 2) {
+                    player.loseLife(2, c);
+                } else {
+                    c.tap();
+                }
             }
         }
     } // upkeep_Carnophage
-    
-} //end class Upkeep
+
+} // end class Upkeep

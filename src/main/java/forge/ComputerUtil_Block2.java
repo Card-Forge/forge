@@ -164,7 +164,7 @@ public class ComputerUtil_Block2 {
      *            a {@link forge.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getPossibleBlockers(final Card attacker, final CardList blockersLeft, Combat combat) {
+    private static CardList getPossibleBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
         CardList blockers = new CardList();
 
         for (Card blocker : blockersLeft) {
@@ -192,7 +192,7 @@ public class ComputerUtil_Block2 {
      *            a {@link forge.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getSafeBlockers(final Card attacker, final CardList blockersLeft, Combat combat) {
+    private static CardList getSafeBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
         CardList blockers = new CardList();
 
         for (Card b : blockersLeft) {
@@ -218,7 +218,7 @@ public class ComputerUtil_Block2 {
      *            a {@link forge.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static CardList getKillingBlockers(final Card attacker, final CardList blockersLeft, Combat combat) {
+    private static CardList getKillingBlockers(final Card attacker, final CardList blockersLeft, final Combat combat) {
         CardList blockers = new CardList();
 
         for (Card b : blockersLeft) {
@@ -330,8 +330,7 @@ public class ComputerUtil_Block2 {
                     Card worst = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
 
                     if (CardFactoryUtil.evaluateCreature(worst) + getDiff() < CardFactoryUtil
-                            .evaluateCreature(attacker))
-                    {
+                            .evaluateCreature(attacker)) {
                         blocker = worst;
                     }
                 }
@@ -419,8 +418,7 @@ public class ComputerUtil_Block2 {
             usableBlockers = blockers.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
                     if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
-                            && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike")))
-                    {
+                            && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike"))) {
                         return false;
                     }
                     return CardFactoryUtil.evaluateCreature(c) + getDiff() < CardFactoryUtil.evaluateCreature(attacker);
@@ -446,14 +444,14 @@ public class ComputerUtil_Block2 {
                 int damageNeeded = attacker.getKillDamage()
                         + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                 if (damageNeeded > currentDamage && !(damageNeeded > currentDamage + additionalDamage)
-                        // The attacker will be killed
+                // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
-                                // only one blocker can be killed
+                        // only one blocker can be killed
                         || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker))
                         // attacker is worth more
-                        && CombatUtil.canBlock(attacker, blocker, combat))
-                {
-                    // this is needed for attackers that can't be blocked by more than 1
+                        && CombatUtil.canBlock(attacker, blocker, combat)) {
+                    // this is needed for attackers that can't be blocked by
+                    // more than 1
                     currentAttackers.remove(attacker);
                     combat.addBlocker(attacker, blocker);
                     combat.addBlocker(attacker, leader);
@@ -560,8 +558,7 @@ public class ComputerUtil_Block2 {
                 if (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,
                         combat.getBlockers(attacker))
                         && CombatUtil.shieldDamage(attacker, blocker) > 0
-                        && CombatUtil.canBlock(attacker, blocker, combat) && CombatUtil.lifeInDanger(combat))
-                {
+                        && CombatUtil.canBlock(attacker, blocker, combat) && CombatUtil.lifeInDanger(combat)) {
                     combat.addBlocker(attacker, blocker);
                     getBlockersLeft().remove(blocker);
                 }
@@ -608,8 +605,7 @@ public class ComputerUtil_Block2 {
                 // enough and the new one would deal additional damage
                 if (damageNeeded > CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker))
                         && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0
-                        && CombatUtil.canBlock(attacker, blocker, combat))
-                {
+                        && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     getBlockersLeft().remove(blocker);
                 }
@@ -637,8 +633,7 @@ public class ComputerUtil_Block2 {
                 if (damageNeeded > currentDamage
                         && !(damageNeeded > currentDamage + additionalDamage)
                         && CardFactoryUtil.evaluateCreature(blocker) + getDiff() < CardFactoryUtil
-                                .evaluateCreature(attacker) && CombatUtil.canBlock(attacker, blocker, combat))
-                {
+                                .evaluateCreature(attacker) && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     getBlockersLeft().removeAll(blocker);
                 }
@@ -754,11 +749,11 @@ public class ComputerUtil_Block2 {
         if (CombatUtil.lifeInDanger(combat)) {
             combat = makeTradeBlocks(combat); // choose necessary trade blocks
         }
-                                              // if life is in danger
+        // if life is in danger
         if (CombatUtil.lifeInDanger(combat)) {
             combat = makeChumpBlocks(combat); // choose necessary chump blocks
         }
-                                              // if life is still in danger
+        // if life is still in danger
         // Reinforce blockers blocking attackers with trample if life is still
         // in danger
         if (CombatUtil.lifeInDanger(combat)) {
@@ -782,8 +777,8 @@ public class ComputerUtil_Block2 {
             if (CombatUtil.lifeInDanger(combat)) {
                 combat = makeChumpBlocks(combat); // choose necessary chump
             }
-                                                  // blocks if life is still in
-                                                  // danger
+            // blocks if life is still in
+            // danger
             // Reinforce blockers blocking attackers with trample if life is
             // still in danger
             if (CombatUtil.lifeInDanger(combat)) {
@@ -803,7 +798,7 @@ public class ComputerUtil_Block2 {
             if (CombatUtil.lifeInDanger(combat)) {
                 combat = makeTradeBlocks(combat); // choose necessary trade
             }
-                                                  // blocks if life is in danger
+            // blocks if life is in danger
             if (!CombatUtil.lifeInDanger(combat)) {
                 combat = makeGoodBlocks(combat);
             }

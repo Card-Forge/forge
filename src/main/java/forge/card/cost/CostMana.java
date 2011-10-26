@@ -16,86 +16,173 @@ import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
 
+/**
+ * The Class CostMana.
+ */
 public class CostMana extends CostPart {
-	//"Leftover"
+    // "Leftover"
     private String mana = "";
     private int amountX = 0;
     private String adjustedMana = "";
-    
-    public String getMana() {
-    	// Only used for Human to pay for non-X cost first
-        return mana;
-    }    
 
-    public void setMana(String sCost) {
+    /**
+     * Gets the mana.
+     * 
+     * @return the mana
+     */
+    public final String getMana() {
+        // Only used for Human to pay for non-X cost first
+        return mana;
+    }
+
+    /**
+     * Sets the mana.
+     * 
+     * @param sCost
+     *            the new mana
+     */
+    public final void setMana(final String sCost) {
         mana = sCost;
     }
 
-    public boolean hasNoXManaCost() {
+    /**
+     * Checks for no x mana cost.
+     * 
+     * @return true, if successful
+     */
+    public final boolean hasNoXManaCost() {
         return amountX == 0;
     }
 
-    public int getXMana() {
+    /**
+     * Gets the x mana.
+     * 
+     * @return the x mana
+     */
+    public final int getXMana() {
         return amountX;
     }
 
-    public void setXMana(int xCost) {
+    /**
+     * Sets the x mana.
+     * 
+     * @param xCost
+     *            the new x mana
+     */
+    public final void setXMana(final int xCost) {
         amountX = xCost;
     }
-    
-    public String getAdjustedMana() {
+
+    /**
+     * Gets the adjusted mana.
+     * 
+     * @return the adjusted mana
+     */
+    public final String getAdjustedMana() {
         return adjustedMana;
     }
 
-    public void setAdjustedMana(String adjustedMana) {
+    /**
+     * Sets the adjusted mana.
+     * 
+     * @param adjustedMana
+     *            the new adjusted mana
+     */
+    public final void setAdjustedMana(final String adjustedMana) {
         this.adjustedMana = adjustedMana;
     }
-    
-    public String getManaToPay() {
+
+    /**
+     * Gets the mana to pay.
+     * 
+     * @return the mana to pay
+     */
+    public final String getManaToPay() {
         // Only used for Human to pay for non-X cost first
-        if (!adjustedMana.equals(""))
+        if (!adjustedMana.equals("")) {
             return adjustedMana;
-        
+        }
+
         return mana;
-    } 
-    
-    public CostMana(String mana, int amount){
-    	this.mana = mana.trim();
-    	this.amountX = amount;
-    	this.isUndoable = true;
-    	this.isReusable = true;
-    }    
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-	
-		sb.append(Strings.repeat("X ", amountX));
-		if (!mana.equals("0"))
-			sb.append(mana);
-		
-		return sb.toString().trim();
-	}
+    /**
+     * Instantiates a new cost mana.
+     * 
+     * @param mana
+     *            the mana
+     * @param amount
+     *            the amount
+     */
+    public CostMana(final String mana, final int amount) {
+        this.mana = mana.trim();
+        this.amountX = amount;
+        this.isUndoable = true;
+        this.isReusable = true;
+    }
 
-	@Override
-	public void refund(Card source) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#toString()
+     */
     @Override
-    public boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost) {
-        // For now, this will always return true. But this should probably be checked at some point
+    public final String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(Strings.repeat("X ", amountX));
+        if (!mana.equals("0")) {
+            sb.append(mana);
+        }
+
+        return sb.toString().trim();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
+    @Override
+    public void refund(final Card source) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.Player, forge.card.cost.Cost)
+     */
+    @Override
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+        // For now, this will always return true. But this should probably be
+        // checked at some point
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public void payAI(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         ComputerUtil.payManaCost(ability);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
+     * forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         int manaToAdd = 0;
         if (!hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
@@ -104,100 +191,132 @@ public class CostMana extends CostPart {
                 manaToAdd = AbilityFactory.calculateAmount(source, "X", ability) * getXMana();
             }
         }
-        if (!getManaToPay().equals("0") || manaToAdd > 0){
+        if (!getManaToPay().equals("0") || manaToAdd > 0) {
             CostUtil.setInput(CostMana.input_payMana(ability, payment, this, manaToAdd));
-        }
-        else if (getXMana() > 0){
+        } else if (getXMana() > 0) {
             CostUtil.setInput(CostMana.input_payXMana(ability, payment, this, getXMana()));
-        }
-        else{
+        } else {
             payment.paidCost(this);
         }
-        
-        // We return false here because the Inputs set above should recall payment.payCosts()
+
+        // We return false here because the Inputs set above should recall
+        // payment.payCosts()
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
+     * , forge.Card, forge.card.cost.Cost_Payment)
+     */
     @Override
-    public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         return true;
     }
 
     // Inputs
-    
+
     /**
-     * <p>input_payXMana.</p>
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment a {@link forge.card.cost.Cost_Payment} object.
-     * @param costMana TODO
-     * @param numX a int.
-     *
+     * <p>
+     * input_payXMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.Cost_Payment} object.
+     * @param costMana
+     *            TODO
+     * @param numX
+     *            a int.
+     * 
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_payXMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana, final int numX) {
+    public static Input input_payXMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana,
+            final int numX) {
         Input payX = new Input() {
             private static final long serialVersionUID = -6900234444347364050L;
             int xPaid = 0;
             ManaCost manaCost = new ManaCost(Integer.toString(numX));
-    
+
             @Override
             public void showMessage() {
-                if (manaCost.toString().equals(Integer.toString(numX))) // Can only cancel if partially paid an X value
+                if (manaCost.toString().equals(Integer.toString(numX))) {
+                    // only
+                                                                        // cancel
+                                                                        // if
+                                                                        // partially
+                                                                        // paid
+                                                                        // an X
+                                                                        // value
                     ButtonUtil.enableAll();
-                else
+                } else {
                     ButtonUtil.enableOnlyCancel();
-    
-                AllZone.getDisplay().showMessage("Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + xPaid + " Paid so far.");
+                }
+
+                AllZone.getDisplay().showMessage(
+                        "Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + xPaid + " Paid so far.");
             }
-    
+
             // selectCard
             @Override
-            public void selectCard(Card card, PlayerZone zone) {
+            public void selectCard(final Card card, final PlayerZone zone) {
                 if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
                     // this really shouldn't happen but just in case
                     return;
                 }
-    
+
                 manaCost = Input_PayManaCostUtil.activateManaAbility(sa, card, manaCost);
                 if (manaCost.isPaid()) {
                     manaCost = new ManaCost(Integer.toString(numX));
                     xPaid++;
                 }
-    
-                if (AllZone.getInputControl().getInput() == this)
+
+                if (AllZone.getInputControl().getInput() == this) {
                     showMessage();
+                }
             }
-    
+
             @Override
             public void selectButtonCancel() {
                 stop();
                 payment.cancelCost();
                 AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
             }
-    
+
             @Override
             public void selectButtonOK() {
                 stop();
                 payment.getCard().setXManaCostPaid(xPaid);
                 payment.paidCost(costMana);
             }
-    
+
         };
-    
+
         return payX;
     }
 
     /**
-     * <p>input_payMana.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment a {@link forge.card.cost.Cost_Payment} object.
-     * @param manaToAdd a int.
+     * <p>
+     * input_payMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment
+     *            a {@link forge.card.cost.Cost_Payment} object.
+     * @param costMana
+     *            the cost mana
+     * @param manaToAdd
+     *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_payMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana, final int manaToAdd) {
+    public static Input input_payMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana,
+            final int manaToAdd) {
         final ManaCost manaCost;
-    
+
         if (Phase.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0");
@@ -210,65 +329,67 @@ public class CostMana extends CostPart {
             System.out.println("Is input_payMana ever called when the Game isn't in progress?");
             manaCost = new ManaCost(sa.getManaCost());
         }
-    
+
         Input payMana = new Input() {
             private ManaCost mana = manaCost;
             private static final long serialVersionUID = 3467312982164195091L;
-    
+
             private final String originalManaCost = costMana.getMana();
-    
+
             private int phyLifeToLose = 0;
-    
+
             private void resetManaCost() {
                 mana = new ManaCost(originalManaCost);
                 phyLifeToLose = 0;
             }
-    
+
             @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                // prevent cards from tapping themselves if ability is a tapability, although it should already be tapped
+            public void selectCard(final Card card, final PlayerZone zone) {
+                // prevent cards from tapping themselves if ability is a
+                // tapability, although it should already be tapped
                 if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
                     return;
                 }
-    
+
                 mana = Input_PayManaCostUtil.activateManaAbility(sa, card, mana);
-    
-                if (mana.isPaid())
+
+                if (mana.isPaid()) {
                     done();
-                else if (AllZone.getInputControl().getInput() == this)
+                } else if (AllZone.getInputControl().getInput() == this) {
                     showMessage();
+                }
             }
-    
+
             @Override
-            public void selectPlayer(Player player) {
+            public void selectPlayer(final Player player) {
                 if (player.isHuman()) {
                     if (manaCost.payPhyrexian()) {
                         phyLifeToLose += 2;
                     }
-    
+
                     showMessage();
                 }
             }
-    
+
             private void done() {
                 Card source = sa.getSourceCard();
-                if (phyLifeToLose > 0)
+                if (phyLifeToLose > 0) {
                     AllZone.getHumanPlayer().payLife(phyLifeToLose, source);
+                }
                 source.setColorsPaid(mana.getColorsPaid());
                 source.setSunburstValue(mana.getSunburst());
                 resetManaCost();
                 stop();
-                
-                if (costMana.hasNoXManaCost() || manaToAdd > 0){
+
+                if (costMana.hasNoXManaCost() || manaToAdd > 0) {
                     payment.paidCost(costMana);
-                }
-                else{
+                } else {
                     source.setXManaCostPaid(0);
                     CostUtil.setInput(CostMana.input_payXMana(sa, payment, costMana, costMana.getXMana()));
                 }
-                    
+
             }
-    
+
             @Override
             public void selectButtonCancel() {
                 stop();
@@ -276,27 +397,28 @@ public class CostMana extends CostPart {
                 payment.cancelCost();
                 AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
             }
-    
+
             @Override
             public void showMessage() {
                 ButtonUtil.enableOnlyCancel();
                 String displayMana = mana.toString().replace("X", "").trim();
                 AllZone.getDisplay().showMessage("Pay Mana Cost: " + displayMana);
-    
+
                 StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
                 if (phyLifeToLose > 0) {
                     msg.append(" (");
                     msg.append(phyLifeToLose);
                     msg.append(" life paid for phyrexian mana)");
                 }
-    
+
                 if (mana.containsPhyrexianMana()) {
                     msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
                 }
-    
+
                 AllZone.getDisplay().showMessage(msg.toString());
-                if (mana.isPaid())
+                if (mana.isPaid()) {
                     done();
+                }
             }
         };
         return payMana;
