@@ -30,6 +30,7 @@ import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.item.CardPrinted;
 
 /** 
  * Dialog for quick import of decks
@@ -176,10 +177,14 @@ public class DeckImport extends JDialog {
             DeckRecognizer.TokenType type = t.getType();
             if (type == DeckRecognizer.TokenType.SectionName && t.getText().toLowerCase().contains("side") ) { isMain = false; }
             if (type != DeckRecognizer.TokenType.KnownCard) { continue; }
+            CardPrinted crd = t.getCard();
+            if(crd.isAlternate()) {
+                continue;
+            }
             if (isMain) {
-                result.addMain(t.getCard(), t.getNumber());
+                result.addMain(crd, t.getNumber());
             } else {
-                result.addSideboard(t.getCard(), t.getNumber());
+                result.addSideboard(crd, t.getNumber());
             }
         }
         return result;

@@ -136,6 +136,14 @@ public class GameAction {
         if (copied.isToken() && !zone.is(Constant.Zone.Battlefield)) {
             zone.remove(copied);
         }
+        
+        if (prev != null) {
+            if (prev.is(Constant.Zone.Battlefield) && c.isCreature()) {
+                AllZone.getCombat().removeFromCombat(c);
+            }
+
+            prev.remove(c);
+        }
 
         HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
@@ -150,14 +158,6 @@ public class GameAction {
 
         if (suppress) {
             AllZone.getTriggerHandler().clearSuppression("ChangesZone");
-        }
-
-        if (prev != null) {
-            if (prev.is(Constant.Zone.Battlefield) && c.isCreature()) {
-                AllZone.getCombat().removeFromCombat(c);
-            }
-
-            prev.remove(c);
         }
 
         /*
