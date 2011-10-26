@@ -8,6 +8,7 @@ SVar:DBFlip:DB$ChangeState | Defined$ Self | CheckSVar$ HandSize | SVarCompare$ 
 SVar:HandSize:Count$InYourHand
 SVar:Rarity:Rare
 AlternateMode:Flip
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jushi_apprentice.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/70.jpg
 Oracle:{2}{U}, {T}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
 
@@ -22,6 +23,7 @@ PT:2/3
 A:AB$Draw | Cost$ 3 U U T | ValidTgts$ Player | NumCards$ X | SpellDescription$ Target player draws X cards, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tomoya_the_revealer.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/309.jpg
 Oracle:{3}{U}{U}, {T}: Target player draws X cards, where X is the number of cards in your hand.
 End
