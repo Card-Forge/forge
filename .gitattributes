@@ -10474,6 +10474,7 @@ src/main/java/forge/gui/skin/FButton.java -text
 src/main/java/forge/gui/skin/FPanel.java -text
 src/main/java/forge/gui/skin/FRoundedPanel.java -text
 src/main/java/forge/gui/skin/FSkin.java -text
+src/main/java/forge/gui/skin/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text

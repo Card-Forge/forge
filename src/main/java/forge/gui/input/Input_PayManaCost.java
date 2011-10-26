@@ -1,7 +1,12 @@
 package forge.gui.input;
 
-import forge.*;
+import forge.AllZone;
+import forge.ButtonUtil;
+import forge.Card;
 import forge.Constant.Zone;
+import forge.Phase;
+import forge.Player;
+import forge.PlayerZone;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
@@ -9,19 +14,23 @@ import forge.card.spellability.SpellAbility;
 //the card is removed from the players hand if the cost is paid
 //CANNOT be used for ABILITIES
 /**
- * <p>Input_PayManaCost class.</p>
- *
+ * <p>
+ * Input_PayManaCost class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Input_PayManaCost extends Input {
     // anything that uses this should be converted to Ability_Cost
-    /** Constant <code>serialVersionUID=3467312982164195091L</code> */
+    /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;
 
     private final String originalManaCost;
 
     private final Card originalCard;
+
+    /** The mana cost. */
     public ManaCost manaCost;
 
     private final SpellAbility spell;
@@ -31,12 +40,16 @@ public class Input_PayManaCost extends Input {
     private int phyLifeToLose = 0;
 
     /**
-     * <p>Constructor for Input_PayManaCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param noStack a boolean.
+     * <p>
+     * Constructor for Input_PayManaCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param noStack
+     *            a boolean.
      */
-    public Input_PayManaCost(SpellAbility sa, boolean noStack) {
+    public Input_PayManaCost(final SpellAbility sa, final boolean noStack) {
         skipStack = noStack;
         originalManaCost = sa.getManaCost(); // Change
         originalCard = sa.getSourceCard();
@@ -45,8 +58,9 @@ public class Input_PayManaCost extends Input {
 
         if (Phase.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
-                else {
+                if (spell.getAfterPayMana() != null) {
+                    stopSetNext(spell.getAfterPayMana());
+                } else {
                     manaCost = new ManaCost("0");
                     AllZone.getStack().add(spell);
                 }
@@ -59,11 +73,14 @@ public class Input_PayManaCost extends Input {
     }
 
     /**
-     * <p>Constructor for Input_PayManaCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * Constructor for Input_PayManaCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public Input_PayManaCost(SpellAbility sa) {
+    public Input_PayManaCost(final SpellAbility sa) {
         originalManaCost = sa.getManaCost(); // Change
         originalCard = sa.getSourceCard();
 
@@ -71,8 +88,9 @@ public class Input_PayManaCost extends Input {
 
         if (Phase.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
-                else {
+                if (spell.getAfterPayMana() != null) {
+                    stopSetNext(spell.getAfterPayMana());
+                } else {
                     manaCost = new ManaCost("0");
                     AllZone.getStack().add(spell);
                 }
@@ -85,7 +103,9 @@ public class Input_PayManaCost extends Input {
     }
 
     /**
-     * <p>resetManaCost.</p>
+     * <p>
+     * resetManaCost.
+     * </p>
      */
     private void resetManaCost() {
         manaCost = new ManaCost(originalManaCost);
@@ -94,20 +114,24 @@ public class Input_PayManaCost extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectCard(Card card, PlayerZone zone) {
-        //this is a hack, to prevent lands being able to use mana to pay their own abilities from cards like
-        //Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the Sea, .... 
+    public final void selectCard(final Card card, final PlayerZone zone) {
+        // this is a hack, to prevent lands being able to use mana to pay their
+        // own abilities from cards like
+        // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the
+        // Sea, ....
 
         if (originalCard.equals(card) && spell.isTapAbility()) {
-            // I'm not sure if this actually prevents anything that wouldn't be handled by canPlay below
+            // I'm not sure if this actually prevents anything that wouldn't be
+            // handled by canPlay below
             return;
         }
 
         manaCost = Input_PayManaCostUtil.activateManaAbility(spell, card, manaCost);
 
         // only show message if this is the active input
-        if (AllZone.getInputControl().getInput() == this)
+        if (AllZone.getInputControl().getInput() == this) {
             showMessage();
+        }
 
         if (manaCost.isPaid()) {
             originalCard.setSunburstValue(manaCost.getSunburst());
@@ -117,7 +141,7 @@ public class Input_PayManaCost extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectPlayer(Player player) {
+    public final void selectPlayer(final Player player) {
 
         if (player.isHuman()) {
             if (manaCost.payPhyrexian()) {
@@ -130,36 +154,43 @@ public class Input_PayManaCost extends Input {
     }
 
     /**
-     * <p>done.</p>
+     * <p>
+     * done.
+     * </p>
      */
     private void done() {
-        if (phyLifeToLose > 0)
+        if (phyLifeToLose > 0) {
             AllZone.getHumanPlayer().payLife(phyLifeToLose, originalCard);
+        }
         if (spell.getSourceCard().isCopiedSpell()) {
             if (spell.getAfterPayMana() != null) {
                 stopSetNext(spell.getAfterPayMana());
-            } else
+            } else {
                 AllZone.getInputControl().resetInput();
+            }
         } else {
             AllZone.getHumanPlayer().getManaPool().clearPay(spell, false);
             resetManaCost();
 
             // if tap ability, tap card
-            if (spell.isTapAbility())
+            if (spell.isTapAbility()) {
                 originalCard.tap();
-            if (spell.isUntapAbility())
+            }
+            if (spell.isUntapAbility()) {
                 originalCard.untap();
+            }
 
             // if this is a spell, move it to the Stack ZOne
 
-            if (spell.isSpell())    // already checked for if its a copy
+            if (spell.isSpell()) {
                 AllZone.getGameAction().moveToStack(originalCard);
+            }
 
-            if (spell.getAfterPayMana() != null)
+            if (spell.getAfterPayMana() != null) {
                 stopSetNext(spell.getAfterPayMana());
-            else {
+            } else {
                 if (skipStack) {
-                	spell.resolve();
+                    spell.resolve();
                 } else {
                     AllZone.getStack().add(spell);
                 }
@@ -170,17 +201,26 @@ public class Input_PayManaCost extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectButtonCancel() {
+    public final void selectButtonCancel() {
         resetManaCost();
         AllZone.getHumanPlayer().getManaPool().unpaid(spell, true);
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // DO
+                                                                             // NOT
+                                                                             // REMOVE
+                                                                             // THIS,
+                                                                             // otherwise
+                                                                             // the
+                                                                             // cards
+                                                                             // don't
+                                                                             // always
+                                                                             // tap
 
         stop();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void showMessage() {
+    public final void showMessage() {
         ButtonUtil.enableOnlyCancel();
 
         StringBuilder msg = new StringBuilder("Pay Mana Cost: " + manaCost.toString());
@@ -199,7 +239,6 @@ public class Input_PayManaCost extends Input {
             originalCard.setSunburstValue(manaCost.getSunburst());
             done();
         }
-
 
     }
 }

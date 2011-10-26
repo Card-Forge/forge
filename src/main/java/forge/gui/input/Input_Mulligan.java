@@ -19,8 +19,10 @@ import forge.game.GamePlayerRating;
 import forge.quest.data.QuestData;
 
 /**
- * <p>Input_Mulligan class.</p>
- *
+ * <p>
+ * Input_Mulligan class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -49,16 +51,25 @@ public class Input_Mulligan extends Input {
     /**
      * 
      * TODO Write javadoc for this method.
-     * @param player a Player object
-     * @param playerRating a GamePlayerRating object
+     * 
+     * @param player
+     *            a Player object
+     * @param playerRating
+     *            a GamePlayerRating object
      * @return an int
      */
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
         CardList hand = player.getCardsIn(Zone.Hand);
-        for (Card c : hand) { AllZone.getGameAction().moveToLibrary(c); }
-        for (int i = 0; i < MAGIC_NUMBER_OF_SHUFFLES; i++) { player.shuffle(); }
+        for (Card c : hand) {
+            AllZone.getGameAction().moveToLibrary(c);
+        }
+        for (int i = 0; i < MAGIC_NUMBER_OF_SHUFFLES; i++) {
+            player.shuffle();
+        }
         int newHand = hand.size() - 1;
-        for (int i = 0; i < newHand; i++) { player.drawCard(); }
+        for (int i = 0; i < newHand; i++) {
+            player.drawCard();
+        }
         playerRating.notifyHasMulliganed();
         playerRating.notifyOpeningHandSize(newHand);
         return newHand;
@@ -69,7 +80,7 @@ public class Input_Mulligan extends Input {
     public final void selectButtonCancel() {
         Player humanPlayer = AllZone.getHumanPlayer();
         GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(humanPlayer.getName());
-        
+
         int newHand = doMulligan(humanPlayer, humanRating);
 
         QuestData quest = AllZone.getQuestData();
@@ -81,18 +92,21 @@ public class Input_Mulligan extends Input {
         if (newHand == 0) {
             end();
         }
-    } //selectButtonOK()
+    } // selectButtonOK()
 
     /**
-     * <p>end.</p>
+     * <p>
+     * end.
+     * </p>
      */
     final void end() {
-        //Computer mulligan
+        // Computer mulligan
         Player aiPlayer = AllZone.getComputerPlayer();
         GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(aiPlayer.getName());
         boolean aiTakesMulligan = true;
 
-        //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
+        // Computer mulligans if there are no cards with converted mana cost of
+        // 0 in its hand
         while (aiTakesMulligan) {
 
             CardList handList = aiPlayer.getCardsIn(Zone.Hand);
@@ -104,7 +118,7 @@ public class Input_Mulligan extends Input {
             }
         }
 
-        //Human Leylines & Chancellors
+        // Human Leylines & Chancellors
         ButtonUtil.reset();
         AbilityFactory af = new AbilityFactory();
         CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
@@ -119,7 +133,8 @@ public class Input_Mulligan extends Input {
 
                     SpellAbility effect = af.getAbility(c.getSVar(effName), c);
                     if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
-                        //If we ever let the AI memorize cards in the players hand, this would be a place to do so.
+                        // If we ever let the AI memorize cards in the players
+                        // hand, this would be a place to do so.
                         AllZone.getGameAction().playSpellAbility_NoStack(effect, false);
                     }
                 }
@@ -131,7 +146,7 @@ public class Input_Mulligan extends Input {
             }
         }
 
-        //Computer Leylines & Chancellors
+        // Computer Leylines & Chancellors
         CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
         for (Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
@@ -144,28 +159,27 @@ public class Input_Mulligan extends Input {
 
                         SpellAbility effect = af.getAbility(c.getSVar(effName), c);
 
-                      //Is there a better way for the AI to decide this?
+                        // Is there a better way for the AI to decide this?
                         if (effect.doTrigger(false)) {
-                            GameActionUtil.showInfoDialg("Computer reveals "
-                                    + c.getName() + "(" + c.getUniqueNumber() + ").");
+                            GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber()
+                                    + ").");
                             ComputerUtil.playNoStack(effect);
                         }
                     }
                 }
             }
-            if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity")
-                    && AllZoneUtil.getCardsIn(Zone.Battlefield, "Leyline of Singularity").size() > 0))
-            {
+            if (c.getName().startsWith("Leyline")
+                    && !(c.getName().startsWith("Leyline of Singularity") && AllZoneUtil.getCardsIn(Zone.Battlefield,
+                            "Leyline of Singularity").size() > 0)) {
                 AllZone.getGameAction().moveToPlay(c);
                 AllZone.getGameAction().checkStateEffects();
             }
         }
         AllZone.getGameAction().checkStateEffects();
 
-
-        if (AllZone.getGameAction().isStartCut() && !(humanOpeningHand.contains(AllZone.getGameAction().getHumanCut())
-                || aiOpeningHand.contains(AllZone.getGameAction().getComputerCut())))
-        {
+        if (AllZone.getGameAction().isStartCut()
+                && !(humanOpeningHand.contains(AllZone.getGameAction().getHumanCut()) || aiOpeningHand.contains(AllZone
+                        .getGameAction().getComputerCut()))) {
             AllZone.getGameAction().moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
                     AllZone.getGameAction().getHumanCut());
             AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),

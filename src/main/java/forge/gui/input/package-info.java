@@ -1,2 +1,2 @@
-/** Forge Card Game */
+/** Forge Card Game. */
 package forge.gui.input;

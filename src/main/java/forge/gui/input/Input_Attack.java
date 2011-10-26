@@ -11,12 +11,11 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.PlayerZone;
 
-
-
-
 /**
- * <p>Input_Attack class.</p>
- *
+ * <p>
+ * Input_Attack class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -48,8 +47,7 @@ public class Input_Attack extends Input {
             possibleAttackers = possibleAttackers.getType("Creature");
             for (int i = 0; i < possibleAttackers.size(); i++) {
                 Card c = possibleAttackers.get(i);
-                if (c.hasKeyword("CARDNAME attacks each turn if able.")
-                        && CombatUtil.canAttack(c, AllZone.getCombat())
+                if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, AllZone.getCombat())
                         && !c.isAttacking())
                 {
                     AllZone.getCombat().addAttacker(c);
@@ -84,14 +82,23 @@ public class Input_Attack extends Input {
                 && CombatUtil.canAttack(card, AllZone.getCombat()))
         {
 
-            // TODO add the propaganda code here and remove it in Phase.nextPhase()
+            // TODO add the propaganda code here and remove it in
+            // Phase.nextPhase()
             // if (!CombatUtil.checkPropagandaEffects(card))
             // return;
 
             AllZone.getCombat().addAttacker(card);
-            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();    // just to make sure the attack symbol is marked
+            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // just
+                                                                                  // to
+                                                                                  // make
+                                                                                  // sure
+                                                                                  // the
+                                                                                  // attack
+                                                                                  // symbol
+                                                                                  // is
+                                                                                  // marked
 
-            //for Castle Raptors, since it gets a bonus if untapped
+            // for Castle Raptors, since it gets a bonus if untapped
             for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
                 Command com = GameActionUtil.commands.get(effect);
                 com.execute();
@@ -99,13 +106,17 @@ public class Input_Attack extends Input {
 
             CombatUtil.showCombat();
         }
-    } //selectCard()
+    } // selectCard()
 
     /**
-     * <p>unselectCard.</p>
-     *
-     * @param card a {@link forge.Card} object.
-     * @param zone a {@link forge.PlayerZone} object.
+     * <p>
+     * unselectCard.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @param zone
+     *            a {@link forge.PlayerZone} object.
      */
     public void unselectCard(final Card card, final PlayerZone zone) {
 
