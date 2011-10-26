@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 AlternateMode:Flip
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bushi_tenderfoot.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/2.jpg
 Oracle:When a creature dealt damage by Bushi Tenderfoot this turn is put into a graveyard, flip Bushi Tenderfoot.
 
@@ -21,6 +22,7 @@ PT:3/4
 K:Double Strike
 K:Bushido 2
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kenzo_the_hardhearted.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/307.jpg
 Oracle:Double strike; bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
 
