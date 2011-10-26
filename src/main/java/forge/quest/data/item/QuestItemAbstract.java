@@ -4,8 +4,10 @@ import forge.AllZone;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 
 /**
- * <p>Abstract QuestItemAbstract class.</p>
- *
+ * <p>
+ * Abstract QuestItemAbstract class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -15,34 +17,42 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
     private String shopName;
     private int maxLevel = 1;
 
-
     /**
-     * <p>Constructor for QuestItemAbstract.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param shopName a {@link java.lang.String} object.
+     * <p>
+     * Constructor for QuestItemAbstract.
+     * </p>
+     * 
+     * @param name
+     *            a {@link java.lang.String} object.
+     * @param shopName
+     *            a {@link java.lang.String} object.
      */
-    protected QuestItemAbstract(String name, String shopName) {
+    protected QuestItemAbstract(final String name, final String shopName) {
         this.name = name;
         this.shopName = shopName;
     }
 
     /**
-     * <p>Constructor for QuestItemAbstract.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param shopName a {@link java.lang.String} object.
-     * @param maxLevel a int.
+     * <p>
+     * Constructor for QuestItemAbstract.
+     * </p>
+     * 
+     * @param name
+     *            a {@link java.lang.String} object.
+     * @param shopName
+     *            a {@link java.lang.String} object.
+     * @param maxLevel
+     *            a int.
      */
-    protected QuestItemAbstract(String name, String shopName, int maxLevel) {
+    protected QuestItemAbstract(final String name, final String shopName, final int maxLevel) {
         this.name = name;
         this.shopName = shopName;
         this.maxLevel = maxLevel;
     }
 
     /**
-     * This is the name shared across all item levels e.g., "Estates"
-     *
+     * This is the name shared across all item levels e.g., "Estates".
+     * 
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
@@ -50,8 +60,8 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
     }
 
     /**
-     * This is the name used in purchasing the item e.g.,"Estates Training 1"
-     *
+     * This is the name used in purchasing the item e.g.,"Estates Training 1".
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getPurchaseName() {
@@ -59,14 +69,15 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
     }
 
     /**
-     * <p>getStallName.</p>
-     *
+     * <p>
+     * getStallName.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
-    public String getStallName() {
+    public final String getStallName() {
         return shopName;
     }
-
 
     /**
      * This method will be invoked when an item is bought in a shop.
@@ -76,10 +87,11 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
         AllZone.getQuestData().getInventory().setItemLevel(name, currentLevel + 1);
     }
 
-
     /**
-     * <p>isAvailableForPurchase.</p>
-     *
+     * <p>
+     * isAvailableForPurchase.
+     * </p>
+     * 
      * @return a boolean.
      */
     public boolean isAvailableForPurchase() {
@@ -87,64 +99,79 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
     }
 
     /**
-     * <p>Getter for the field <code>level</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>level</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getLevel() {
+    public final int getLevel() {
         return level;
     }
 
     /**
-     * <p>Setter for the field <code>level</code>.</p>
-     *
-     * @param level a int.
+     * <p>
+     * Setter for the field <code>level</code>.
+     * </p>
+     * 
+     * @param level
+     *            a int.
      */
-    public void setLevel(int level) {
+    public final void setLevel(final int level) {
         this.level = level;
     }
 
     /**
-     * <p>Getter for the field <code>maxLevel</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>maxLevel</code>.
+     * </p>
+     * 
      * @return a int.
      */
-    public int getMaxLevel() {
+    public final int getMaxLevel() {
         return maxLevel;
     }
 
     /**
-     * <p>isLeveledItem.</p>
-     *
+     * <p>
+     * isLeveledItem.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isLeveledItem() {
+    public final boolean isLeveledItem() {
         return maxLevel == 1;
     }
 
     /**
-     * <p>getPurchaseDescription.</p>
-     *
+     * <p>
+     * getPurchaseDescription.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public abstract String getPurchaseDescription();
 
     /**
-     * <p>getImageName.</p>
-     *
+     * <p>
+     * getImageName.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public abstract String getImageName();
 
     /**
-     * <p>getPrice.</p>
-     *
+     * <p>
+     * getPrice.
+     * </p>
+     * 
      * @return a int.
      */
     public abstract int getPrice();
 
     /** {@inheritDoc} */
-    public int compareTo(Object o) {
+    public final int compareTo(final Object o) {
         QuestStallPurchasable q = (QuestStallPurchasable) o;
         return this.getPurchaseName().compareTo(q.getPurchaseName());
     }

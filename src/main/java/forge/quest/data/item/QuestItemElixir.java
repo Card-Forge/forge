@@ -4,15 +4,17 @@ import forge.AllZone;
 import forge.quest.data.bazaar.QuestStallManager;
 
 /**
- * This item has special coding because of the
- *
+ * This item has special coding.
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestItemElixir extends QuestItemAbstract {
 
     /**
-     * <p>Constructor for QuestItemElixir.</p>
+     * <p>
+     * Constructor for QuestItemElixir.
+     * </p>
      */
     QuestItemElixir() {
         super("Elixir of Life", QuestStallManager.ALCHEMIST, 15);
@@ -20,19 +22,19 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public String getPurchaseDescription() {
+    public final String getPurchaseDescription() {
         return "Gives +1 to maximum life<br>Current Life: " + AllZone.getQuestData().getLife();
     }
 
     /** {@inheritDoc} */
     @Override
-    public String getImageName() {
+    public final String getImageName() {
         return "ElixirIcon.png";
     }
 
     /** {@inheritDoc} */
     @Override
-    public int getPrice() {
+    public final int getPrice() {
         if (getLevel() < 5) {
             return 250;
         } else if (getLevel() < 10) {
@@ -44,7 +46,7 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public void onPurchase() {
+    public final void onPurchase() {
         AllZone.getQuestData().addLife(1);
     }
 

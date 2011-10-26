@@ -1,18 +1,29 @@
 package forge.quest.data.item;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
- * <p>QuestInventory class.</p>
- *
+ * <p>
+ * QuestInventory class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestInventory {
+
+    /** The inventory. */
     Map<String, QuestItemAbstract> inventory = new HashMap<String, QuestItemAbstract>();
 
     /**
-     * <p>Constructor for QuestInventory.</p>
+     * <p>
+     * Constructor for QuestInventory.
+     * </p>
      */
     public QuestInventory() {
         Set<QuestItemAbstract> allItems = getAllItems();
@@ -22,31 +33,40 @@ public class QuestInventory {
     }
 
     /**
-     * <p>hasItem.</p>
-     *
-     * @param itemName a {@link java.lang.String} object.
+     * <p>
+     * hasItem.
+     * </p>
+     * 
+     * @param itemName
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean hasItem(String itemName) {
+    public final boolean hasItem(final String itemName) {
         return inventory.containsKey(itemName) && inventory.get(itemName).getLevel() > 0;
     }
 
     /**
-     * <p>addItem.</p>
-     *
-     * @param item a {@link forge.quest.data.item.QuestItemAbstract} object.
+     * <p>
+     * addItem.
+     * </p>
+     * 
+     * @param item
+     *            a {@link forge.quest.data.item.QuestItemAbstract} object.
      */
-    public void addItem(QuestItemAbstract item) {
+    public final void addItem(final QuestItemAbstract item) {
         inventory.put(item.getName(), item);
     }
 
     /**
-     * <p>getItemLevel.</p>
-     *
-     * @param itemName a {@link java.lang.String} object.
+     * <p>
+     * getItemLevel.
+     * </p>
+     * 
+     * @param itemName
+     *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public int getItemLevel(String itemName) {
+    public final int getItemLevel(final String itemName) {
         QuestItemAbstract item = inventory.get(itemName);
         if (item == null) {
             return 0;
@@ -55,19 +75,24 @@ public class QuestInventory {
     }
 
     /**
-     * <p>setItemLevel.</p>
-     *
-     * @param itemName a {@link java.lang.String} object.
-     * @param level a int.
+     * <p>
+     * setItemLevel.
+     * </p>
+     * 
+     * @param itemName
+     *            a {@link java.lang.String} object.
+     * @param level
+     *            a int.
      */
-    public void setItemLevel(String itemName, int level) {
+    public final void setItemLevel(final String itemName, final int level) {
         inventory.get(itemName).setLevel(level);
     }
 
-
     /**
-     * <p>getAllItems.</p>
-     *
+     * <p>
+     * getAllItems.
+     * </p>
+     * 
      * @return a {@link java.util.Set} object.
      */
     private static Set<QuestItemAbstract> getAllItems() {
@@ -83,10 +108,12 @@ public class QuestInventory {
         return set;
     }
 
-    //Magic to support added pet types when reading saves.
+    // Magic to support added pet types when reading saves.
     /**
-     * <p>readResolve.</p>
-     *
+     * <p>
+     * readResolve.
+     * </p>
+     * 
      * @return a {@link java.lang.Object} object.
      */
     private Object readResolve() {
@@ -98,10 +125,11 @@ public class QuestInventory {
         return this;
     }
 
-
     /**
-     * <p>getItems.</p>
-     *
+     * <p>
+     * getItems.
+     * </p>
+     * 
      * @return a {@link java.util.Collection} object.
      */
     public Collection<QuestItemAbstract> getItems() {
@@ -109,9 +137,12 @@ public class QuestInventory {
     }
 
     /**
-     * <p>getItem.</p>
-     *
-     * @param itemName a {@link java.lang.String} object.
+     * <p>
+     * getItem.
+     * </p>
+     * 
+     * @param itemName
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.quest.data.item.QuestItemAbstract} object.
      */
     public QuestItemAbstract getItem(String itemName) {

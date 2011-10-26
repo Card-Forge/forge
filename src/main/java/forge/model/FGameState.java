@@ -3,6 +3,7 @@ package forge.model;
 import forge.AIPlayer;
 import forge.Combat;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.DefaultPlayerZone;
 import forge.EndOfCombat;
 import forge.EndOfTurn;
@@ -14,7 +15,6 @@ import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
 import forge.Upkeep;
-import forge.Constant.Zone;
 import forge.card.trigger.TriggerHandler;
 import forge.game.GameSummary;
 
@@ -22,9 +22,13 @@ import forge.game.GameSummary;
  * Represents the Forge Game State.
  */
 public class FGameState {
+
+    /** The Constant HUMAN_PLAYER_NAME. */
     public static final String HUMAN_PLAYER_NAME = "Human";
+
+    /** The Constant AI_PLAYER_NAME. */
     public static final String AI_PLAYER_NAME = "Computer";
-    
+
     private Player humanPlayer = new HumanPlayer(HUMAN_PLAYER_NAME);
     private Player computerPlayer = new AIPlayer(AI_PLAYER_NAME);
     private EndOfTurn endOfTurn = new EndOfTurn();
@@ -37,7 +41,6 @@ public class FGameState {
     private TriggerHandler triggerHandler = new TriggerHandler();
     private Combat combat = new Combat();
 
-
     private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
     private long timestamp = 0;
@@ -46,199 +49,241 @@ public class FGameState {
     /**
      * Constructor.
      */
-    public FGameState() { /* no more zones to map here */ }
-
+    public FGameState() { /* no more zones to map here */
+    }
 
     /**
+     * Gets the human player.
+     * 
      * @return the humanPlayer
      */
     public final Player getHumanPlayer() {
         return humanPlayer;
     }
 
-
     /**
-     * @param humanPlayer0 the humanPlayer to set
+     * Sets the human player.
+     * 
+     * @param humanPlayer0
+     *            the humanPlayer to set
      */
     protected final void setHumanPlayer(final Player humanPlayer0) {
         this.humanPlayer = humanPlayer0;
     }
 
-
     /**
+     * Gets the computer player.
+     * 
      * @return the computerPlayer
      */
     public final Player getComputerPlayer() {
         return computerPlayer;
     }
 
-
     /**
-     * @param computerPlayer0 the computerPlayer to set
+     * Sets the computer player.
+     * 
+     * @param computerPlayer0
+     *            the computerPlayer to set
      */
     protected final void setComputerPlayer(final Player computerPlayer0) {
         this.computerPlayer = computerPlayer0;
     }
-    
-    public final Player[] getPlayers() {
-        return new Player[]{ humanPlayer, computerPlayer };
-    }
-
 
     /**
+     * Gets the players.
+     * 
+     * @return the players
+     */
+    public final Player[] getPlayers() {
+        return new Player[] {humanPlayer, computerPlayer};
+    }
+
+    /**
+     * Gets the end of turn.
+     * 
      * @return the endOfTurn
      */
     public final EndOfTurn getEndOfTurn() {
         return endOfTurn;
     }
 
-
     /**
-     * @param endOfTurn0 the endOfTurn to set
+     * Sets the end of turn.
+     * 
+     * @param endOfTurn0
+     *            the endOfTurn to set
      */
     protected final void setEndOfTurn(final EndOfTurn endOfTurn0) {
         this.endOfTurn = endOfTurn0;
     }
 
-
     /**
+     * Gets the end of combat.
+     * 
      * @return the endOfCombat
      */
     public final EndOfCombat getEndOfCombat() {
         return endOfCombat;
     }
 
-
     /**
-     * @param endOfCombat0 the endOfCombat to set
+     * Sets the end of combat.
+     * 
+     * @param endOfCombat0
+     *            the endOfCombat to set
      */
     protected final void setEndOfCombat(final EndOfCombat endOfCombat0) {
         this.endOfCombat = endOfCombat0;
     }
 
-
     /**
+     * Gets the upkeep.
+     * 
      * @return the upkeep
      */
     public final Upkeep getUpkeep() {
         return upkeep;
     }
 
-
     /**
-     * @param upkeep0 the upkeep to set
+     * Sets the upkeep.
+     * 
+     * @param upkeep0
+     *            the upkeep to set
      */
     protected final void setUpkeep(final Upkeep upkeep0) {
         this.upkeep = upkeep0;
     }
 
-
     /**
+     * Gets the phase.
+     * 
      * @return the phase
      */
     public final Phase getPhase() {
         return phase;
     }
 
-
     /**
-     * @param phase0 the phase to set
+     * Sets the phase.
+     * 
+     * @param phase0
+     *            the phase to set
      */
     protected final void setPhase(final Phase phase0) {
         this.phase = phase0;
     }
 
-
     /**
+     * Gets the stack.
+     * 
      * @return the stack
      */
     public final MagicStack getStack() {
         return stack;
     }
 
-
     /**
-     * @param stack0 the stack to set
+     * Sets the stack.
+     * 
+     * @param stack0
+     *            the stack to set
      */
     protected final void setStack(final MagicStack stack0) {
         this.stack = stack0;
     }
 
-
     /**
+     * Gets the game action.
+     * 
      * @return the gameAction
      */
     public final GameAction getGameAction() {
         return gameAction;
     }
 
-
     /**
-     * @param gameAction0 the gameAction to set
+     * Sets the game action.
+     * 
+     * @param gameAction0
+     *            the gameAction to set
      */
     protected final void setGameAction(final GameAction gameAction0) {
         this.gameAction = gameAction0;
     }
 
-
     /**
+     * Gets the static effects.
+     * 
      * @return the staticEffects
      */
     public final StaticEffects getStaticEffects() {
         return staticEffects;
     }
 
-
     /**
-     * @param staticEffects0 the staticEffects to set
+     * Sets the static effects.
+     * 
+     * @param staticEffects0
+     *            the staticEffects to set
      */
     protected final void setStaticEffects(final StaticEffects staticEffects0) {
         this.staticEffects = staticEffects0;
     }
 
-
     /**
+     * Gets the trigger handler.
+     * 
      * @return the triggerHandler
      */
     public final TriggerHandler getTriggerHandler() {
         return triggerHandler;
     }
 
-
     /**
-     * @param triggerHandler0 the triggerHandler to set
+     * Sets the trigger handler.
+     * 
+     * @param triggerHandler0
+     *            the triggerHandler to set
      */
     protected final void setTriggerHandler(final TriggerHandler triggerHandler0) {
         this.triggerHandler = triggerHandler0;
     }
 
-
     /**
+     * Gets the combat.
+     * 
      * @return the combat
      */
     public final Combat getCombat() {
         return combat;
     }
 
-
     /**
-     * @param combat0 the combat to set
+     * Sets the combat.
+     * 
+     * @param combat0
+     *            the combat to set
      */
     public final void setCombat(final Combat combat0) {
         this.combat = combat0;
     }
 
-
     /**
+     * Gets the stack zone.
+     * 
      * @return the stackZone
      */
     public final PlayerZone getStackZone() {
         return stackZone;
     }
 
-
     /**
-     * @param stackZone0 the stackZone to set
+     * Sets the stack zone.
+     * 
+     * @param stackZone0
+     *            the stackZone to set
      */
     protected final void setStackZone(final PlayerZone stackZone0) {
         this.stackZone = stackZone0;
@@ -254,32 +299,38 @@ public class FGameState {
         return getTimestamp();
     }
 
-
     /**
+     * Gets the timestamp.
+     * 
      * @return the timestamp
      */
     public final long getTimestamp() {
         return timestamp;
     }
 
-
     /**
-     * @param timestamp0 the timestamp to set
+     * Sets the timestamp.
+     * 
+     * @param timestamp0
+     *            the timestamp to set
      */
     protected final void setTimestamp(final long timestamp0) {
         this.timestamp = timestamp0;
     }
 
-
-    public GameSummary getGameInfo() {
+    /**
+     * Gets the game info.
+     * 
+     * @return the game info
+     */
+    public final GameSummary getGameInfo() {
         return gameInfo;
     }
 
-
     /**
-     * Call this each time you start a new game, ok?
+     * Call this each time you start a new game, ok?.
      */
-    public void newGameCleanup() {
+    public final void newGameCleanup() {
         gameInfo = new GameSummary(humanPlayer.getName(), computerPlayer.getName());
 
         getHumanPlayer().reset();
@@ -290,11 +341,11 @@ public class FGameState {
         getCombat().reset();
 
         for (Player p : getPlayers()) {
-            for(Zone z : Player.ALL_ZONES) {
+            for (Zone z : Player.ALL_ZONES) {
                 p.getZone(z).reset();
             }
         }
-        
+
         getStaticEffects().reset();
     }
 

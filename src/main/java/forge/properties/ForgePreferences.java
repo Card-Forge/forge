@@ -1,60 +1,123 @@
 package forge.properties;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
- * <p>ForgePreferences class.</p>
- *
+ * <p>
+ * ForgePreferences class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class ForgePreferences extends Preferences {
+
+    /** The new gui. */
     public boolean newGui;
+
+    /** The stack ai land. */
     public boolean stackAiLand;
+
+    /** The milling loss condition. */
     public boolean millingLossCondition;
+
+    /** The developer mode. */
     public boolean developerMode;
+
+    /** The upload draft ai. */
     public boolean uploadDraftAI;
+
+    /** The rand c foil. */
     public boolean randCFoil;
-    
+
+    /** The skin. */
     public String skin;
+
+    /** The laf. */
     public String laf;
+
+    /** The laf fonts. */
     public boolean lafFonts;
+
+    /** The stack offset. */
     public StackOffsetType stackOffset;
+
+    /** The max stack size. */
     public int maxStackSize;
+
+    /** The card size. */
     public CardSizeType cardSize;
+
+    /** The card overlay. */
     public boolean cardOverlay;
+
+    /** The scale larger than original. */
     public boolean scaleLargerThanOriginal;
-    
+
+    /** The deck gen rmv artifacts. */
     public boolean deckGenRmvArtifacts;
+
+    /** The deck gen rmv small. */
     public boolean deckGenRmvSmall;
-    
+
+    /** The Bugz name. */
     public String BugzName;
+
+    /** The Bugz pwd. */
     public String BugzPwd;
 
     // Phases
+    /** The b ai upkeep. */
     public boolean bAIUpkeep;
+
+    /** The b ai draw. */
     public boolean bAIDraw;
+
+    /** The b aieot. */
     public boolean bAIEOT;
+
+    /** The b ai begin combat. */
     public boolean bAIBeginCombat;
+
+    /** The b ai end combat. */
     public boolean bAIEndCombat;
+
+    /** The b human upkeep. */
     public boolean bHumanUpkeep;
+
+    /** The b human draw. */
     public boolean bHumanDraw;
+
+    /** The b human eot. */
     public boolean bHumanEOT;
+
+    /** The b human begin combat. */
     public boolean bHumanBeginCombat;
+
+    /** The b human end combat. */
     public boolean bHumanEndCombat;
 
     private List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
     private final String fileName;
 
     /**
-     * <p>Constructor for ForgePreferences.</p>
-     *
-     * @param fileName a {@link java.lang.String} object.
-     * @throws java.lang.Exception if any.
+     * <p>
+     * Constructor for ForgePreferences.
+     * </p>
+     * 
+     * @param fileName
+     *            a {@link java.lang.String} object.
+     * @throws Exception
+     *             the exception
      */
-    public ForgePreferences(String fileName) throws Exception {
+    public ForgePreferences(final String fileName) throws Exception {
         this.fileName = fileName;
         File f = new File(fileName);
         if (!f.exists()) {
@@ -74,24 +137,24 @@ public class ForgePreferences extends Preferences {
         stackAiLand = getBoolean("AI.stack.land", false);
         millingLossCondition = getBoolean("loss.condition.milling", true);
         developerMode = getBoolean("developer.mode", false);
-        
+
         uploadDraftAI = getBoolean("upload.Draft.AI", true);
-        
+
         randCFoil = getBoolean("rand.C.Foil", true);
 
         laf = get("gui.laf", "");
         lafFonts = getBoolean("gui.laf.fonts", false);
-        skin = get("gui.skin","default");
+        skin = get("gui.skin", "default");
 
         cardOverlay = getBoolean("card.overlay", true);
         cardSize = CardSizeType.valueOf(get("card.images.size", "medium"));
         stackOffset = StackOffsetType.valueOf(get("stack.offset", "tiny"));
         maxStackSize = getInt("stack.max.size", 3);
         scaleLargerThanOriginal = getBoolean("card.scale.larger.than.original", true);
-        
+
         deckGenRmvArtifacts = getBoolean("deck.gen.rmv.artifacts", false);
         deckGenRmvSmall = getBoolean("deck.gen.rmv.small", false);
-        
+
         BugzName = get("bugz.user.name", "");
         BugzPwd = get("bugz.user.pwd", "");
 
@@ -109,11 +172,14 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
-     * <p>save.</p>
-     *
-     * @throws java.lang.Exception if any.
+     * <p>
+     * save.
+     * </p>
+     * 
+     * @throws Exception
+     *             the exception
      */
-    public void save() throws Exception {
+    public final void save() throws Exception {
 
         set("gui.new", newGui);
 
@@ -121,7 +187,7 @@ public class ForgePreferences extends Preferences {
         set("loss.condition.milling", millingLossCondition);
         set("developer.mode", developerMode);
         set("upload.Draft.AI", uploadDraftAI);
-        
+
         set("rand.C.Foil", randCFoil);
 
         set("gui.skin", skin);
@@ -136,10 +202,10 @@ public class ForgePreferences extends Preferences {
         for (SavePreferencesListener listeners : saveListeners) {
             listeners.savePreferences();
         }
-        
+
         set("deck.gen.rmv.artifacts", deckGenRmvArtifacts);
         set("deck.gen.rmv.small", deckGenRmvSmall);
-        
+
         set("bugz.user.name", BugzName);
         set("bugz.user.pwd", BugzPwd);
 
@@ -164,19 +230,48 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
-     * <p>addSaveListener.</p>
-     *
-     * @param listener a {@link forge.properties.SavePreferencesListener} object.
+     * <p>
+     * addSaveListener.
+     * </p>
+     * 
+     * @param listener
+     *            a {@link forge.properties.SavePreferencesListener} object.
      */
-    public void addSaveListener(SavePreferencesListener listener) {
+    public final void addSaveListener(final SavePreferencesListener listener) {
         saveListeners.add(listener);
     }
 
-    static public enum CardSizeType {
-        tiny, smaller, small, medium, large, huge
+    /**
+     * The Enum CardSizeType.
+     */
+    public static enum CardSizeType {
+
+        /** The tiny. */
+        tiny,
+        /** The smaller. */
+        smaller,
+        /** The small. */
+        small,
+        /** The medium. */
+        medium,
+        /** The large. */
+        large,
+        /** The huge. */
+        huge
     }
 
+    /**
+     * The Enum StackOffsetType.
+     */
     static public enum StackOffsetType {
-        tiny, small, medium, large
+
+        /** The tiny. */
+        tiny,
+        /** The small. */
+        small,
+        /** The medium. */
+        medium,
+        /** The large. */
+        large
     }
 }
