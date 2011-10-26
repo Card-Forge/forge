@@ -1148,7 +1148,7 @@ public abstract class Player extends GameEntity {
 
         int max = Math.min(n, lib.size());
 
-        PlayerZone destination = getZone(zone);
+        Zone destination = getZone(zone).getZoneType();
 
         for (int i = 0; i < max; i++) {
             milled.add(AllZone.getGameAction().moveTo(destination, lib.get(i)));

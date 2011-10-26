@@ -515,6 +515,10 @@ public class GameAction {
 
         return AllZone.getGameAction().moveTo(removed, c);
     }
+    
+    public final Card moveTo(final Zone name, final Card c) {
+        return moveTo(name, c, 0);
+    }
 
     /**
      * <p>moveTo.</p>
