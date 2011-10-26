@@ -28,14 +28,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
+import net.miginfocom.swing.MigLayout;
 import forge.CardList;
 import forge.MyRandom;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-
-import net.miginfocom.swing.MigLayout;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -99,7 +98,10 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JFrame jF;
     // private ButtonGroup buttonGroup1;
 
+    /** The filter card list. */
     public CardList filterCardList;
+
+    /** The deck. */
     public ItemPoolView<CardPrinted> deck;
 
     /**
@@ -109,10 +111,10 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * 
      * @param g
      *            a {@link javax.swing.JFrame} object.
-     * @param tb
-     *            a {@link forge.gui.deckeditor.TableModel} object.
+     * @param deckView
+     *            the deck view
      */
-    public DeckAnalysis(JFrame g, ItemPoolView<CardPrinted> deckView) {
+    public DeckAnalysis(final JFrame g, final ItemPoolView<CardPrinted> deckView) {
         super(g);
         deck = deckView;
 
@@ -145,12 +147,12 @@ public class DeckAnalysis extends javax.swing.JDialog {
 
             this.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosing(WindowEvent arg0) {
+                public void windowClosing(final WindowEvent arg0) {
                     jF.setEnabled(true);
                 }
 
                 @Override
-                public void windowOpened(WindowEvent arg0) {
+                public void windowOpened(final WindowEvent arg0) {
 
                     int cBlack, cBlue, cGreen, cRed, cWhite, cMulticolor, cColorless, cLand;
                     int cArtifact, cCreature, cEnchant, cInstant, cLandType, cPlaneswalker, cSorcery;
@@ -188,36 +190,69 @@ public class DeckAnalysis extends javax.swing.JDialog {
                         if (c.getColor().isMulticolor()) {
                             cMulticolor = cMulticolor + cnt;
                         } else {
-                            if (c.getColor().isBlack()) { cBlack = cBlack + cnt; }
-                            if (c.getColor().isBlue()) { cBlue = cBlue + cnt; }
-                            if (c.getColor().isGreen()) { cGreen = cGreen + cnt; }
-                            if (c.getColor().isRed()) { cRed = cRed + cnt; }
-                            if (c.getColor().isWhite()) { cWhite = cWhite + cnt; }
+                            if (c.getColor().isBlack()) {
+                                cBlack = cBlack + cnt;
+                            }
+                            if (c.getColor().isBlue()) {
+                                cBlue = cBlue + cnt;
+                            }
+                            if (c.getColor().isGreen()) {
+                                cGreen = cGreen + cnt;
+                            }
+                            if (c.getColor().isRed()) {
+                                cRed = cRed + cnt;
+                            }
+                            if (c.getColor().isWhite()) {
+                                cWhite = cWhite + cnt;
+                            }
                             if (c.getColor().isColorless()) {
-                                if (c.getType().isLand()) { cLand = cLand + cnt; }
-                                else { cColorless = cColorless + cnt; }
+                                if (c.getType().isLand()) {
+                                    cLand = cLand + cnt;
+                                } else {
+                                    cColorless = cColorless + cnt;
+                                }
                             }
                         }
 
                         // count card types
                         CardType cType = c.getType();
-                        if (cType.isArtifact()) { cArtifact = cArtifact + cnt; }
-                        if (cType.isCreature()) { cCreature = cCreature + cnt; }
-                        if (cType.isEnchantment()) { cEnchant = cEnchant + cnt; }
-                        if (cType.isInstant()) { cInstant = cInstant + cnt; }
-                        if (cType.isLand()) { cLandType = cLandType + cnt; }
-                        if (cType.isPlaneswalker()) { cPlaneswalker = cPlaneswalker + cnt; }
-                        if (cType.isSorcery()) { cSorcery = cSorcery + cnt; }
-
+                        if (cType.isArtifact()) {
+                            cArtifact = cArtifact + cnt;
+                        }
+                        if (cType.isCreature()) {
+                            cCreature = cCreature + cnt;
+                        }
+                        if (cType.isEnchantment()) {
+                            cEnchant = cEnchant + cnt;
+                        }
+                        if (cType.isInstant()) {
+                            cInstant = cInstant + cnt;
+                        }
+                        if (cType.isLand()) {
+                            cLandType = cLandType + cnt;
+                        }
+                        if (cType.isPlaneswalker()) {
+                            cPlaneswalker = cPlaneswalker + cnt;
+                        }
+                        if (cType.isSorcery()) {
+                            cSorcery = cSorcery + cnt;
+                        }
 
                         int cmc = c.getManaCost().getCMC();
-                        if (cmc == 0) {             mZero = mZero + cnt;
-                        } else if (cmc == 1) {      mOne = mOne + cnt;
-                        } else if (cmc == 2) {      mTwo = mTwo + cnt;
-                        } else if (cmc == 3) {      mThree = mThree + cnt;
-                        } else if (cmc == 4) {      mFour = mFour + cnt;
-                        } else if (cmc == 5) {      mFive = mFive + 1;
-                        } else if (cmc >= 6) {      mSixMore = mSixMore + 1;
+                        if (cmc == 0) {
+                            mZero = mZero + cnt;
+                        } else if (cmc == 1) {
+                            mOne = mOne + cnt;
+                        } else if (cmc == 2) {
+                            mTwo = mTwo + cnt;
+                        } else if (cmc == 3) {
+                            mThree = mThree + cnt;
+                        } else if (cmc == 4) {
+                            mFour = mFour + cnt;
+                        } else if (cmc == 5) {
+                            mFive = mFive + 1;
+                        } else if (cmc >= 6) {
+                            mSixMore = mSixMore + 1;
                         }
 
                         tManaCost = tManaCost + cmc * cnt;
@@ -230,51 +265,95 @@ public class DeckAnalysis extends javax.swing.JDialog {
                     jLabelManaCost.setText("Mana cost (ACC:" + aManaCost + ")");
                     Color cr = new Color(100, 100, 100);
 
-                    if (cBlack == 0) { jLabelBlack.setForeground(cr); }
+                    if (cBlack == 0) {
+                        jLabelBlack.setForeground(cr);
+                    }
                     jLabelBlack.setText(formatStat("Black", cBlack, total));
-                    if (cBlue == 0) { jLabelBlue.setForeground(cr); }
+                    if (cBlue == 0) {
+                        jLabelBlue.setForeground(cr);
+                    }
                     jLabelBlue.setText(formatStat("Blue", cBlue, total));
-                    if (cGreen == 0) { jLabelGreen.setForeground(cr); }
+                    if (cGreen == 0) {
+                        jLabelGreen.setForeground(cr);
+                    }
                     jLabelGreen.setText(formatStat("Green", cGreen, total));
-                    if (cRed == 0) { jLabelRed.setForeground(cr); }
+                    if (cRed == 0) {
+                        jLabelRed.setForeground(cr);
+                    }
                     jLabelRed.setText(formatStat("Red", cRed, total));
-                    if (cWhite == 0) { jLabelWhite.setForeground(cr); }
+                    if (cWhite == 0) {
+                        jLabelWhite.setForeground(cr);
+                    }
                     jLabelWhite.setText(formatStat("White", cWhite, total));
-                    if (cMulticolor == 0) { jLabelMultiColor.setForeground(cr); }
+                    if (cMulticolor == 0) {
+                        jLabelMultiColor.setForeground(cr);
+                    }
                     jLabelMultiColor.setText(formatStat("Multicolor", cMulticolor, total));
-                    if (cColorless == 0) { jLabelColorless.setForeground(cr); }
+                    if (cColorless == 0) {
+                        jLabelColorless.setForeground(cr);
+                    }
                     jLabelColorless.setText(formatStat("Colorless", cColorless, total));
 
-                    if (cLand == 0) { jLabelLand.setForeground(cr); }
+                    if (cLand == 0) {
+                        jLabelLand.setForeground(cr);
+                    }
                     jLabelLand.setText(formatStat("Land", cLand, total));
-                    if (cArtifact == 0) { jLabelArtifact.setForeground(cr); }
+                    if (cArtifact == 0) {
+                        jLabelArtifact.setForeground(cr);
+                    }
                     jLabelArtifact.setText(formatStat("Artifact", cArtifact, total));
-                    if (cCreature == 0) { jLabelCreature.setForeground(cr); }
+                    if (cCreature == 0) {
+                        jLabelCreature.setForeground(cr);
+                    }
                     jLabelCreature.setText(formatStat("Creature", cCreature, total));
-                    if (cEnchant == 0) { jLabelEnchant.setForeground(cr); }
+                    if (cEnchant == 0) {
+                        jLabelEnchant.setForeground(cr);
+                    }
                     jLabelEnchant.setText(formatStat("Enchant", cEnchant, total));
-                    if (cInstant == 0) { jLabelInstant.setForeground(cr); }
+                    if (cInstant == 0) {
+                        jLabelInstant.setForeground(cr);
+                    }
                     jLabelInstant.setText(formatStat("Instant", cInstant, total));
-                    if (cLandType == 0) { jLabelLandType.setForeground(cr); }
+                    if (cLandType == 0) {
+                        jLabelLandType.setForeground(cr);
+                    }
                     jLabelLandType.setText(formatStat("Land", cLandType, total));
-                    if (cPlaneswalker == 0) { jLabelPlaneswalker.setForeground(cr); }
+                    if (cPlaneswalker == 0) {
+                        jLabelPlaneswalker.setForeground(cr);
+                    }
                     jLabelPlaneswalker.setText(formatStat("Planeswalker", cPlaneswalker, total));
 
-                    if (cSorcery == 0) { jLabelSorcery.setForeground(cr); }
+                    if (cSorcery == 0) {
+                        jLabelSorcery.setForeground(cr);
+                    }
                     jLabelSorcery.setText(formatStat("Sorcery", cSorcery, total));
-                    if (mZero == 0) { jLabelZeroMana.setForeground(cr); }
+                    if (mZero == 0) {
+                        jLabelZeroMana.setForeground(cr);
+                    }
                     jLabelZeroMana.setText(formatStat("Zero mana", mZero, total));
-                    if (mOne == 0) { jLabelOneMana.setForeground(cr); }
+                    if (mOne == 0) {
+                        jLabelOneMana.setForeground(cr);
+                    }
                     jLabelOneMana.setText(formatStat("One mana", mOne, total));
-                    if (mTwo == 0) { jLabelTwoMana.setForeground(cr); }
+                    if (mTwo == 0) {
+                        jLabelTwoMana.setForeground(cr);
+                    }
                     jLabelTwoMana.setText(formatStat("Two mana", mTwo, total));
-                    if (mThree == 0) { jLabelThreeMana.setForeground(cr); }
+                    if (mThree == 0) {
+                        jLabelThreeMana.setForeground(cr);
+                    }
                     jLabelThreeMana.setText(formatStat("Three mana", mThree, total));
-                    if (mFour == 0) { jLabelFourMana.setForeground(cr); }
+                    if (mFour == 0) {
+                        jLabelFourMana.setForeground(cr);
+                    }
                     jLabelFourMana.setText(formatStat("Four mana", mFour, total));
-                    if (mFive == 0) { jLabelFiveMana.setForeground(cr); }
+                    if (mFive == 0) {
+                        jLabelFiveMana.setForeground(cr);
+                    }
                     jLabelFiveMana.setText(formatStat("Five mana", mFive, total));
-                    if (mSixMore == 0) { jLabelSixMana.setForeground(cr); }
+                    if (mSixMore == 0) {
+                        jLabelSixMana.setForeground(cr);
+                    }
                     jLabelSixMana.setText(formatStat("Six and more", mSixMore, total));
                 }
             });
@@ -293,9 +372,8 @@ public class DeckAnalysis extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
-    private String formatStat(String statName, int value, int deckSize )
-    {
+
+    private String formatStat(final String statName, final int value, final int deckSize) {
         return String.format("%s: %d (%f%%)", statName, value, 100f * value / deckSize);
     }
 
@@ -380,7 +458,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
             jButtonOk.setBounds(206, 536, 168, 31);
             jButtonOk.addMouseListener(new MouseInputAdapter() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(final MouseEvent e) {
                     jF.setEnabled(true);
                     dispose();
                 }
@@ -929,12 +1007,12 @@ public class DeckAnalysis extends javax.swing.JDialog {
         if (jListFirstHand == null) {
             jListFirstHand = new JList();
         }
-        
+
         if (rList.size() >= 40) {
-            jList1Model = new DefaultComboBoxModel(new String[] { rList.get(0).getName(),
-                    rList.get(1).getName(), rList.get(2).getName(), rList.get(3).getName(),
-                    rList.get(4).getName(), rList.get(5).getName(), rList.get(6).getName() });
-        
+            jList1Model = new DefaultComboBoxModel(new String[] { rList.get(0).getName(), rList.get(1).getName(),
+                    rList.get(2).getName(), rList.get(3).getName(), rList.get(4).getName(), rList.get(5).getName(),
+                    rList.get(6).getName() });
+
         } else {
             jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
         }
@@ -1038,7 +1116,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
                 jButtonRegenerate.setPreferredSize(new java.awt.Dimension(139, 21));
                 jButtonRegenerate.setBounds(2, 189, 133, 13);
                 jButtonRegenerate.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(final ActionEvent e) {
                         jButtonRegenerate_actionPerformed(e);
                     }
                 });
@@ -1059,7 +1137,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    void jButtonRegenerate_actionPerformed(ActionEvent e) {
+    final void jButtonRegenerate_actionPerformed(final ActionEvent e) {
         getContentPane().removeAll();
         getContentPane().add(getJPanel5());
         getContentPane().add(getJLabel1xx());

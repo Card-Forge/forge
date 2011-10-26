@@ -1,5 +1,25 @@
 package forge.gui.deckeditor;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Constant;
@@ -17,28 +37,12 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-
 //presumes AllZone.getQuestData() is not null
 /**
- * <p>Gui_Quest_DeckEditor_Menu class.</p>
- *
+ * <p>
+ * Gui_Quest_DeckEditor_Menu class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -49,7 +53,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
     /** Constant <code>deckEditorName="Deck Editor"</code>. */
     private static final String deckEditorName = "Deck Editor";
 
-    //used for import and export, try to made the gui user friendly
+    // used for import and export, try to made the gui user friendly
     /** Constant <code>previousDirectory</code>. */
     private static File previousDirectory = null;
 
@@ -57,17 +61,22 @@ public class DeckEditorQuestMenu extends JMenuBar {
     private forge.quest.data.QuestData questData;
     private Deck currentDeck;
 
-    //the class DeckDisplay is in the file "Gui_DeckEditor_Menu.java"
+    // the class DeckDisplay is in the file "Gui_DeckEditor_Menu.java"
     private DeckDisplay deckDisplay;
 
-
     /**
-     * <p>Constructor for Gui_Quest_DeckEditor_Menu.</p>
-     *
-     * @param d a {@link forge.gui.deckeditor.DeckDisplay} object.
-     * @param exit a {@link forge.Command} object.
+     * <p>
+     * Constructor for Gui_Quest_DeckEditor_Menu.
+     * </p>
+     * 
+     * @param q
+     *            the q
+     * @param d
+     *            a {@link forge.gui.deckeditor.DeckDisplay} object.
+     * @param exit
+     *            a {@link forge.Command} object.
      */
-    public DeckEditorQuestMenu(QuestData q, final DeckDisplay d, final Command exit) {
+    public DeckEditorQuestMenu(final QuestData q, final DeckDisplay d, final Command exit) {
 
         deckDisplay = d;
         questData = q;
@@ -79,13 +88,15 @@ public class DeckEditorQuestMenu extends JMenuBar {
         setupMenu();
     }
 
-
-
     /**
-     * <p>addImportExport.</p>
-     *
-     * @param menu a {@link javax.swing.JMenu} object.
-     * @param isHumanMenu a boolean.
+     * <p>
+     * addImportExport.
+     * </p>
+     * 
+     * @param menu
+     *            a {@link javax.swing.JMenu} object.
+     * @param isHumanMenu
+     *            a boolean.
      */
     private void addImportExport(final JMenu menu, final boolean isHumanMenu) {
         JMenuItem import2 = new JMenuItem("Import");
@@ -93,23 +104,25 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         import2.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent a) {
-                importDeck(); //importDeck(isHumanMenu);
+                importDeck(); // importDeck(isHumanMenu);
             }
-        }); //import
+        }); // import
 
         export.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent a) {
                 exportDeck();
             }
-        }); //export
+        }); // export
 
         menu.add(import2);
         menu.add(export);
 
-    } //addImportExport()
+    } // addImportExport()
 
     /**
-     * <p>exportDeck.</p>
+     * <p>
+     * exportDeck.
+     * </p>
      */
     private void exportDeck() {
         File filename = getExportFilename();
@@ -118,8 +131,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
             return;
         }
 
-        //write is an Object variable because you might just
-        //write one Deck object
+        // write is an Object variable because you might just
+        // write one Deck object
         Deck deck = cardPoolToDeck(deckDisplay.getBottom());
 
         deck.setName(filename.getName());
@@ -136,17 +149,21 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         exportDeckText(getExportDeckText(deck), filename.getAbsolutePath());
 
-    } //exportDeck()
+    } // exportDeck()
 
     /**
-     * <p>exportDeckText.</p>
-     *
-     * @param deckText a {@link java.lang.String} object.
-     * @param filename a {@link java.lang.String} object.
+     * <p>
+     * exportDeckText.
+     * </p>
+     * 
+     * @param deckText
+     *            a {@link java.lang.String} object.
+     * @param filename
+     *            a {@link java.lang.String} object.
      */
     private void exportDeckText(final String deckText, String filename) {
 
-        //remove ".deck" extension
+        // remove ".deck" extension
         int cut = filename.indexOf(".");
         filename = filename.substring(0, cut);
 
@@ -158,21 +175,24 @@ public class DeckEditorQuestMenu extends JMenuBar {
             writer.close();
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("Gui_Quest_DeckEditor_Menu : exportDeckText() error, " + ex.getMessage()
-                    + " : " + Arrays.toString(ex.getStackTrace()));
+            throw new RuntimeException("Gui_Quest_DeckEditor_Menu : exportDeckText() error, " + ex.getMessage() + " : "
+                    + Arrays.toString(ex.getStackTrace()));
         }
-    } //exportDeckText()
+    } // exportDeckText()
 
     /**
-     * <p>getExportDeckText.</p>
-     *
-     * @param aDeck a {@link forge.deck.Deck} object.
+     * <p>
+     * getExportDeckText.
+     * </p>
+     * 
+     * @param aDeck
+     *            a {@link forge.deck.Deck} object.
      * @return a {@link java.lang.String} object.
      */
     private String getExportDeckText(final Deck aDeck) {
-        //convert Deck into CardList
+        // convert Deck into CardList
         ItemPoolView<CardPrinted> all = aDeck.getMain();
-        //sort by card name
+        // sort by card name
         Collections.sort(all.getOrderedList(), TableSorter.byNameThenSet);
 
         StringBuffer sb = new StringBuffer();
@@ -180,21 +200,24 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         sb.append(String.format("%d Total Cards%n%n", all.countAll()));
 
-        //creatures
-        
-        sb.append(String.format("%d Creatures%n-------------%n", CardRules.Predicates.Presets.isCreature.aggregate(all, all.fnToCard, all.fnToCount)));
+        // creatures
+
+        sb.append(String.format("%d Creatures%n-------------%n",
+                CardRules.Predicates.Presets.isCreature.aggregate(all, all.fnToCard, all.fnToCount)));
         for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isCreature.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
-        //spells
-        sb.append(String.format("%d Spells%n----------%n", CardRules.Predicates.Presets.isNonCreatureSpell.aggregate(all, all.fnToCard, all.fnToCount)));
+        // spells
+        sb.append(String.format("%d Spells%n----------%n",
+                CardRules.Predicates.Presets.isNonCreatureSpell.aggregate(all, all.fnToCard, all.fnToCount)));
         for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isNonCreatureSpell.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
-        //lands
-        sb.append(String.format("%d Land%n--------%n", CardRules.Predicates.Presets.isLand.aggregate(all, all.fnToCard, all.fnToCount)));
+        // lands
+        sb.append(String.format("%d Land%n--------%n",
+                CardRules.Predicates.Presets.isLand.aggregate(all, all.fnToCard, all.fnToCount)));
         for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isLand.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
@@ -202,11 +225,13 @@ public class DeckEditorQuestMenu extends JMenuBar {
         sb.append(newLine);
 
         return sb.toString();
-    } //getExportDeckText
+    } // getExportDeckText
 
     /**
-     * <p>getFileFilter.</p>
-     *
+     * <p>
+     * getFileFilter.
+     * </p>
+     * 
      * @return a {@link javax.swing.filechooser.FileFilter} object.
      */
     private FileFilter getFileFilter() {
@@ -223,15 +248,17 @@ public class DeckEditorQuestMenu extends JMenuBar {
         };
 
         return filter;
-    } //getFileFilter()
+    } // getFileFilter()
 
     /**
-     * <p>getExportFilename.</p>
-     *
+     * <p>
+     * getExportFilename.
+     * </p>
+     * 
      * @return a {@link java.io.File} object.
      */
     private File getExportFilename() {
-        //Object o = null; // unused
+        // Object o = null; // unused
 
         JFileChooser save = new JFileChooser(previousDirectory);
 
@@ -256,10 +283,12 @@ public class DeckEditorQuestMenu extends JMenuBar {
         }
 
         return null;
-    } //getExportFilename()
+    } // getExportFilename()
 
     /**
-     * <p>importDeck.</p>
+     * <p>
+     * importDeck.
+     * </p>
      */
     private void importDeck() {
         File file = getImportFilename();
@@ -270,7 +299,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 Deck newDeck = DeckManager.readDeck(file);
                 questData.addDeck(newDeck);
 
-                ItemPool<CardPrinted> cardpool = ItemPool.createFrom(questData.getCards().getCardpool(), CardPrinted.class);
+                ItemPool<CardPrinted> cardpool = ItemPool.createFrom(questData.getCards().getCardpool(),
+                        CardPrinted.class);
                 ItemPool<CardPrinted> decklist = new ItemPool<CardPrinted>(CardPrinted.class);
                 for (Entry<CardPrinted, Integer> s : newDeck.getMain()) {
                     CardPrinted cp = s.getKey();
@@ -286,11 +316,13 @@ public class DeckEditorQuestMenu extends JMenuBar {
             }
         }
 
-    } //importDeck()
+    } // importDeck()
 
     /**
-     * <p>getImportFilename.</p>
-     *
+     * <p>
+     * getImportFilename.
+     * </p>
+     * 
      * @return a {@link java.io.File} object.
      */
     private File getImportFilename() {
@@ -306,17 +338,18 @@ public class DeckEditorQuestMenu extends JMenuBar {
         }
 
         return null;
-    } //openFileDialog()
-
-
+    } // openFileDialog()
 
     private final ActionListener addCardActionListener = new ActionListener() {
         public void actionPerformed(final ActionEvent a) {
 
-            // Provide a model here: all unique cards to be displayed by only name (unlike default toString)
+            // Provide a model here: all unique cards to be displayed by only
+            // name (unlike default toString)
             Iterable<CardPrinted> uniqueCards = CardDb.instance().getAllUniqueCards();
             List<String> cards = new ArrayList<String>();
-            for (CardPrinted c : uniqueCards) { cards.add(c.getName()); }
+            for (CardPrinted c : uniqueCards) {
+                cards.add(c.getName());
+            }
             Collections.sort(cards);
 
             // use standard forge's list selection dialog
@@ -333,11 +366,14 @@ public class DeckEditorQuestMenu extends JMenuBar {
         public void actionPerformed(final ActionEvent a) {
             String deckName = getUserInput_OpenDeck(questData.getDeckNames());
 
-            //check if user selected "cancel"
-            if (StringUtils.isBlank(deckName)) { return; }
+            // check if user selected "cancel"
+            if (StringUtils.isBlank(deckName)) {
+                return;
+            }
 
             setPlayerDeckName(deckName);
-            ItemPool<CardPrinted> cards = ItemPool.createFrom(questData.getCards().getCardpool().getView(), CardPrinted.class);
+            ItemPool<CardPrinted> cards = ItemPool.createFrom(questData.getCards().getCardpool().getView(),
+                    CardPrinted.class);
             ItemPoolView<CardPrinted> deck = questData.getDeck(deckName).getMain();
 
             // show in pool all cards except ones used in deck
@@ -357,10 +393,12 @@ public class DeckEditorQuestMenu extends JMenuBar {
         public void actionPerformed(final ActionEvent a) {
             String deckName = getUserInput_GetDeckName(questData.getDeckNames());
 
-            //check if user cancels
-            if (StringUtils.isBlank(deckName)) { return; }
+            // check if user cancels
+            if (StringUtils.isBlank(deckName)) {
+                return;
+            }
 
-            //is the current deck already saved and in QuestData?
+            // is the current deck already saved and in QuestData?
             if (questData.getDeckNames().contains(currentDeck.getName())) {
                 questData.removeDeck(currentDeck.getName());
             }
@@ -379,11 +417,11 @@ public class DeckEditorQuestMenu extends JMenuBar {
         public void actionPerformed(final ActionEvent a) {
             String name = currentDeck.getName();
 
-            //check to see if name is set
+            // check to see if name is set
             if (name.equals("")) {
                 name = getUserInput_GetDeckName(questData.getDeckNames());
 
-                //check if user cancels
+                // check if user cancels
                 if (name.equals("")) {
                     return;
                 }
@@ -402,7 +440,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
         public void actionPerformed(final ActionEvent a) {
             String name = getUserInput_GetDeckName(questData.getDeckNames());
 
-            //check if user cancels
+            // check if user cancels
             if (name.equals("")) {
                 return;
             }
@@ -422,24 +460,26 @@ public class DeckEditorQuestMenu extends JMenuBar {
                 return;
             }
 
-            int check = JOptionPane.showConfirmDialog(null, "Do you really want to delete this deck?",
-                    "Delete", JOptionPane.YES_NO_OPTION);
+            int check = JOptionPane.showConfirmDialog(null, "Do you really want to delete this deck?", "Delete",
+                    JOptionPane.YES_NO_OPTION);
             if (check == JOptionPane.NO_OPTION) {
-                return; //stop here
+                return; // stop here
             }
 
             questData.removeDeck(currentDeck.getName());
 
-            //show card pool
+            // show card pool
             deckDisplay.setItems(questData.getCards().getCardpool().getView(), null, GameType.Quest);
 
             setPlayerDeckName("");
         }
     };
 
-    //the usual menu options that will be used
+    // the usual menu options that will be used
     /**
-     * <p>setupMenu.</p>
+     * <p>
+     * setupMenu.
+     * </p>
      */
     private void setupMenu() {
         JMenuItem openDeck = new JMenuItem("Open");
@@ -452,7 +492,6 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         JMenuItem addCard = new JMenuItem("Cheat - Add Card");
 
-
         addCard.addActionListener(addCardActionListener);
         openDeck.addActionListener(openDeckActionListener);
         newDeck.addActionListener(newDeckActionListener);
@@ -461,8 +500,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
         copy.addActionListener(copyDeckActionListener);
         delete.addActionListener(deleteDeckActionListener);
 
-
-        //human
+        // human
         exit.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent a) {
                 DeckEditorQuestMenu.this.close();
@@ -494,37 +532,46 @@ public class DeckEditorQuestMenu extends JMenuBar {
     }
 
     /**
-     * <p>convertCardPoolToDeck.</p>
-     *
-     * @param list a {@link forge.CardPool} object.
+     * <p>
+     * convertCardPoolToDeck.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardPool} object.
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck cardPoolToDeck(final ItemPoolView<InventoryItem> list) {
-        //put CardPool into Deck main
+        // put CardPool into Deck main
         Deck deck = new Deck(GameType.Sealed);
         deck.addMain(ItemPool.createFrom(list, CardPrinted.class));
         return deck;
     }
 
-    //needs to be public because Gui_Quest_DeckEditor.show(Command) uses it
+    // needs to be public because Gui_Quest_DeckEditor.show(Command) uses it
     /**
-     * <p>setHumanPlayer.</p>
-     *
-     * @param deckName a {@link java.lang.String} object.
+     * <p>
+     * setHumanPlayer.
+     * </p>
+     * 
+     * @param deckName
+     *            a {@link java.lang.String} object.
      */
     public final void setPlayerDeckName(final String deckName) {
-        //the gui uses this, Gui_Quest_DeckEditor
+        // the gui uses this, Gui_Quest_DeckEditor
         currentDeck = new Deck(GameType.Sealed);
         currentDeck.setName(deckName);
 
         deckDisplay.setTitle(deckEditorName + " - " + deckName);
     }
 
-    //only accepts numbers, letters or dashes up to 20 characters in length
+    // only accepts numbers, letters or dashes up to 20 characters in length
     /**
-     * <p>cleanString.</p>
-     *
-     * @param in a {@link java.lang.String} object.
+     * <p>
+     * cleanString.
+     * </p>
+     * 
+     * @param in
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     private String cleanString(final String in) {
@@ -532,17 +579,22 @@ public class DeckEditorQuestMenu extends JMenuBar {
         char[] c = in.toCharArray();
 
         for (int i = 0; i < c.length && i < 20; i++) {
-            if (Character.isLetterOrDigit(c[i]) || c[i] == '-' || c[i] == '_' || c[i] == ' ') { out.append(c[i]); }
+            if (Character.isLetterOrDigit(c[i]) || c[i] == '-' || c[i] == '_' || c[i] == ' ') {
+                out.append(c[i]);
+            }
         }
 
         return out.toString();
     }
 
-    //if user cancels, returns ""
+    // if user cancels, returns ""
     /**
-     * <p>getUserInput_GetDeckName.</p>
-     *
-     * @param nameList a {@link java.util.List} object.
+     * <p>
+     * getUserInput_GetDeckName.
+     * </p>
+     * 
+     * @param nameList
+     *            a {@link java.util.List} object.
      * @return a {@link java.lang.String} object.
      */
     private String getUserInput_GetDeckName(final List<String> nameList) {
@@ -560,14 +612,16 @@ public class DeckEditorQuestMenu extends JMenuBar {
         }
 
         return deckName;
-    } //getUserInput_GetDeckName()
+    } // getUserInput_GetDeckName()
 
-
-    //if user cancels, it will return ""
+    // if user cancels, it will return ""
     /**
-     * <p>getUserInput_OpenDeck.</p>
-     *
-     * @param deckNameList a {@link java.util.List} object.
+     * <p>
+     * getUserInput_OpenDeck.
+     * </p>
+     * 
+     * @param deckNameList
+     *            a {@link java.util.List} object.
      * @return a {@link java.lang.String} object.
      */
     private String getUserInput_OpenDeck(final List<String> deckNameList) {
@@ -577,8 +631,9 @@ public class DeckEditorQuestMenu extends JMenuBar {
             return "";
         }
 
-        //Object o = JOptionPane.showInputDialog(null, "Deck Name", "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
-        //        choices.toArray(), choices.toArray()[0]);
+        // Object o = JOptionPane.showInputDialog(null, "Deck Name",
+        // "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
+        // choices.toArray(), choices.toArray()[0]);
         Object o = GuiUtils.getChoiceOptional("Select Deck", choices.toArray());
 
         if (o == null) {
@@ -586,20 +641,24 @@ public class DeckEditorQuestMenu extends JMenuBar {
         }
 
         return o.toString();
-    } //getUserInput_OpenDeck()
+    } // getUserInput_OpenDeck()
 
-    //used by Gui_Quest_DeckEditor
+    // used by Gui_Quest_DeckEditor
     /**
-     * <p>close.</p>
+     * <p>
+     * close.
+     * </p>
      */
     public final void close() {
         exitCommand.execute();
     }
 
-    //used by Gui_Quest_DeckEditor
+    // used by Gui_Quest_DeckEditor
     /**
-     * <p>getDeckName.</p>
-     *
+     * <p>
+     * getDeckName.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public final String getDeckName() {

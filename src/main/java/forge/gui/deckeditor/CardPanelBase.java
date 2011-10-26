@@ -6,7 +6,7 @@ import forge.item.InventoryItem;
 
 /**
  * Base class for any cardView panel.
- *
+ * 
  */
 public abstract class CardPanelBase extends JPanel {
     private static final long serialVersionUID = -2230733670423143126L;
@@ -14,7 +14,9 @@ public abstract class CardPanelBase extends JPanel {
     /**
      * 
      * showCard.
-     * @param card an InventoryItem
+     * 
+     * @param card
+     *            an InventoryItem
      */
     public abstract void showCard(InventoryItem card);
 

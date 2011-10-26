@@ -10,10 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import net.miginfocom.swing.MigLayout;
-
 import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
-
 import forge.Card;
 import forge.GuiDisplayUtil;
 import forge.ImagePreviewPanel;
@@ -24,105 +22,121 @@ import forge.item.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-
-/** 
- * This panel is to be placed in the right part of a deck editor
- *
+/**
+ * This panel is to be placed in the right part of a deck editor.
  */
 public class CardPanelHeavy extends CardPanelBase {
 
     private static final long serialVersionUID = -7134546689397508597L;
 
     private JButton changeStateButton = new JButton();
-    
+
     /*
-     * Removed Oct 25 2011 - Hellfish
-    private JButton changePictureButton = new JButton();
-    private JButton removePictureButton = new JButton();    
+     * Removed Oct 25 2011 - Hellfish private JButton changePictureButton = new
+     * JButton(); private JButton removePictureButton = new JButton();
      */
-    
-    // Controls to show card details 
+
+    // Controls to show card details
+    /** The detail. */
     protected CardDetailPanel detail = new CardDetailPanel(null);
+
+    /** The picture. */
     protected CardPanel picture = new CardPanel(null);
+
+    /** The picture view panel. */
     protected ViewPanel pictureViewPanel = new ViewPanel();
 
-    // fake card to allow picture changes 
+    // fake card to allow picture changes
+    /** The c card hq. */
     public Card cCardHQ;
-    /** Constant <code>previousDirectory</code> */
+
+    /** Constant <code>previousDirectory</code>. */
     protected static File previousDirectory = null;
 
+    /**
+     * Instantiates a new card panel heavy.
+     */
     public CardPanelHeavy() {
         changeStateButton.setVisible(false);
         changeStateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 changeStateButton_actionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().lafFonts)
+        if (!Singletons.getModel().getPreferences().lafFonts) {
             changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
-        
+        }
+
         /*
          * Removed Oct 25 2011 - Hellfish
-        changePictureButton.setText("Change picture...");
-        changePictureButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changePictureButton_actionPerformed(e);
-            }
-        });
-        if (!Singletons.getModel().getPreferences().lafFonts)
-            changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
-
-        removePictureButton.setText("Remove picture...");
-        removePictureButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removePictureButton_actionPerformed(e);
-            }
-        });
-        if (!Singletons.getModel().getPreferences().lafFonts)
-            removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+         * changePictureButton.setText("Change picture...");
+         * changePictureButton.addActionListener(new
+         * java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) {
+         * changePictureButton_actionPerformed(e); } }); if
+         * (!Singletons.getModel().getPreferences().lafFonts)
+         * changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+         * 
+         * removePictureButton.setText("Remove picture...");
+         * removePictureButton.addActionListener(new
+         * java.awt.event.ActionListener() { public void
+         * actionPerformed(ActionEvent e) {
+         * removePictureButton_actionPerformed(e); } }); if
+         * (!Singletons.getModel().getPreferences().lafFonts)
+         * removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
          */
-        
+
         pictureViewPanel.setCardPanel(picture);
-        
+
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(detail, "w 239, h 323, grow, flowy, wrap");
         /*
-         * Removed Oct 25 2011 - Hellfish
-        this.add(changeStateButton, "align 50% 0%, split 3, flowx");
-        this.add(changePictureButton, "align 50% 0%");
-        this.add(removePictureButton, "align 50% 0%, wrap");
+         * Removed Oct 25 2011 - Hellfish this.add(changeStateButton,
+         * "align 50% 0%, split 3, flowx"); this.add(changePictureButton,
+         * "align 50% 0%"); this.add(removePictureButton, "align 50% 0%, wrap");
          */
         this.add(changeStateButton, "align 50% 0%, flowx, wrap");
         this.add(pictureViewPanel, "wmin 239, hmin 323, grow");
     }
 
-    public void showCard(InventoryItem card) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.gui.deckeditor.CardPanelBase#showCard(forge.item.InventoryItem)
+     */
+    public final void showCard(final InventoryItem card) {
         Card card2 = card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null;
         detail.setCard(card2);
         setCard(card2);
     }
-    public void setCard(Card c) {
-        if(picture.getCard() != null) {
-            if(picture.getCard().isInAlternateState()) {
+
+    /**
+     * Sets the card.
+     * 
+     * @param c
+     *            the new card
+     */
+    public final void setCard(final Card c) {
+        if (picture.getCard() != null) {
+            if (picture.getCard().isInAlternateState()) {
                 picture.getCard().changeState();
             }
         }
         picture.setCard(c);
 
-        if(c.hasAlternateState()) {
+        if (c.hasAlternateState()) {
             changeStateButton.setVisible(true);
-            if(c.isFlip()) {
+            if (c.isFlip()) {
                 changeStateButton.setText("Flip");
-            }
-            else {
+            } else {
                 changeStateButton.setText("Transform");
             }
-        }
-        else { 
+        } else {
             changeStateButton.setVisible(false);
         }
     }
-    
+
     /**
      * <p>
      * changeStateButton_actionPerformed.
@@ -131,7 +145,7 @@ public class CardPanelHeavy extends CardPanelBase {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    void changeStateButton_actionPerformed(ActionEvent e) {
+    final void changeStateButton_actionPerformed(final ActionEvent e) {
         Card cur = picture.getCard();
         cur.changeState();
 
@@ -147,7 +161,7 @@ public class CardPanelHeavy extends CardPanelBase {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    void changePictureButton_actionPerformed(ActionEvent e) {
+    final void changePictureButton_actionPerformed(final ActionEvent e) {
         if (cCardHQ != null) {
             File file = getImportFilename();
             if (file != null) {
@@ -159,7 +173,8 @@ public class CardPanelHeavy extends CardPanelBase {
                 try {
                     org.apache.commons.io.FileUtils.copyFile(file, f);
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                    // TODO Auto-generated catch block ignores the exception,
+                    // but sends it to System.err and probably forge.log.
                     e1.printStackTrace();
                 }
                 setCard(cCardHQ);
@@ -192,10 +207,11 @@ public class CardPanelHeavy extends CardPanelBase {
 
     }
 
+    /** The dck filter. */
     protected FileFilter dckFilter = new FileFilter() {
 
         @Override
-        public boolean accept(File f) {
+        public boolean accept(final File f) {
             return f.getName().endsWith(".jpg") || f.isDirectory();
         }
 
@@ -207,11 +223,15 @@ public class CardPanelHeavy extends CardPanelBase {
     };
 
     /**
+     * <p>
+     * removePictureButton_actionPerformed
+     * </p>
+     * . Removed Oct 25 2011 - Hellfish
      * 
-     * <p>removePictureButton_actionPerformed</p>. Removed Oct 25 2011 - Hellfish
      * @param e
+     *            the e
      */
-    void removePictureButton_actionPerformed(ActionEvent e) {
+    final void removePictureButton_actionPerformed(final ActionEvent e) {
         if (cCardHQ != null) {
             String options[] = { "Yes", "No" };
             int value = JOptionPane.showOptionDialog(null, "Do you want delete " + cCardHQ.getName() + " picture?",
@@ -229,6 +249,13 @@ public class CardPanelHeavy extends CardPanelBase {
         }
     }
 
-    public Card getCard() { return detail.getCard(); }
+    /**
+     * Gets the card.
+     * 
+     * @return the card
+     */
+    public final Card getCard() {
+        return detail.getCard();
+    }
 
 }

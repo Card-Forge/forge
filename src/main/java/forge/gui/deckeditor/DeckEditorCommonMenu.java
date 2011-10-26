@@ -147,7 +147,7 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
     } // setupSortMenu()
 
     /**
-     * 
+     * New constructed.
      * 
      * @param careAboutOldDeck
      *            a boolean

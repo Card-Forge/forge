@@ -22,27 +22,41 @@ import forge.card.CardSet;
 import forge.game.GameFormat;
 import forge.item.CardPrinted;
 
-/** 
- * A panel that holds Name, Type, Rules text fields aligned horizontally together with set filter
+/**
+ * A panel that holds Name, Type, Rules text fields aligned horizontally
+ * together with set filter.
  */
-public class FilterNameTypeSetPanel extends JComponent{
+public class FilterNameTypeSetPanel extends JComponent {
 
-    
     private static final long serialVersionUID = -6409564625432765430L;
+
+    /** The label filter name. */
     public final JLabel labelFilterName = new JLabel();
+
+    /** The label filter type. */
     public final JLabel labelFilterType = new JLabel();
+
+    /** The label filter rules. */
     public final JLabel labelFilterRules = new JLabel();
 
+    /** The txt card name. */
     public final JTextField txtCardName = new JTextField();
+
+    /** The txt card type. */
     public final JTextField txtCardType = new JTextField();
+
+    /** The txt card rules. */
     public final JTextField txtCardRules = new JTextField();
+
+    /** The search set combo. */
     public final JComboBox searchSetCombo = new JComboBox();
-    
-    
-    public FilterNameTypeSetPanel()
-    {
+
+    /**
+     * Instantiates a new filter name type set panel.
+     */
+    public FilterNameTypeSetPanel() {
         this.setLayout(new MigLayout("fill, ins 0"));
-        
+
         labelFilterName.setText("Name:");
         labelFilterName.setToolTipText("Card names must include the text in this field");
         this.add(labelFilterName, "cell 0 1, split 7");
@@ -52,18 +66,17 @@ public class FilterNameTypeSetPanel extends JComponent{
         labelFilterType.setToolTipText("Card types must include the text in this field");
         this.add(labelFilterType, "");
         this.add(txtCardType, "wmin 100, grow");
-        
+
         labelFilterRules.setText("Text:");
         labelFilterRules.setToolTipText("Card descriptions must include the text in this field");
         this.add(labelFilterRules, "");
         this.add(txtCardRules, "wmin 200, grow");
 
-
         searchSetCombo.removeAllItems();
         searchSetCombo.addItem("(all sets and formats)");
         for (GameFormat s : SetUtils.getFormats()) {
             searchSetCombo.addItem(s);
-        }        
+        }
         for (CardSet s : SetUtils.getAllSets()) {
             searchSetCombo.addItem(s);
         }
@@ -71,28 +84,42 @@ public class FilterNameTypeSetPanel extends JComponent{
         this.add(searchSetCombo, "wmin 150, grow");
     }
 
-    public void setListeners(DocumentListener onTextChange, ItemListener onComboChange) 
-    {
+    /**
+     * Sets the listeners.
+     * 
+     * @param onTextChange
+     *            the on text change
+     * @param onComboChange
+     *            the on combo change
+     */
+    public final void setListeners(final DocumentListener onTextChange, final ItemListener onComboChange) {
         txtCardType.getDocument().addDocumentListener(onTextChange);
         txtCardRules.getDocument().addDocumentListener(onTextChange);
         txtCardName.getDocument().addDocumentListener(onTextChange);
         searchSetCombo.addItemListener(onComboChange);
     }
-    
-    public Predicate<CardPrinted> buildFilter() {
+
+    /**
+     * Builds the filter.
+     * 
+     * @return the predicate
+     */
+    public final Predicate<CardPrinted> buildFilter() {
         List<Predicate<CardPrinted>> rules = new ArrayList<Predicate<CardPrinted>>(4);
         if (StringUtils.isNotBlank(txtCardName.getText())) {
             rules.add(CardPrinted.Predicates.name(StringOp.CONTAINS, txtCardName.getText()));
         }
 
         if (StringUtils.isNotBlank(txtCardType.getText())) {
-            rules.add(Predicate.brigde(CardRules.Predicates.joinedType(StringOp.CONTAINS, txtCardType.getText()), CardPrinted.fnGetRules));
+            rules.add(Predicate.brigde(CardRules.Predicates.joinedType(StringOp.CONTAINS, txtCardType.getText()),
+                    CardPrinted.fnGetRules));
         }
-        
+
         if (StringUtils.isNotBlank(txtCardRules.getText())) {
-            rules.add(Predicate.brigde(CardRules.Predicates.rules(StringOp.CONTAINS, txtCardRules.getText()), CardPrinted.fnGetRules));
+            rules.add(Predicate.brigde(CardRules.Predicates.rules(StringOp.CONTAINS, txtCardRules.getText()),
+                    CardPrinted.fnGetRules));
         }
-        
+
         if (searchSetCombo.getSelectedIndex() != 0) {
             Object selected = searchSetCombo.getSelectedItem();
             if (selected instanceof CardSet) {
@@ -102,18 +129,22 @@ public class FilterNameTypeSetPanel extends JComponent{
             }
         }
 
-        switch (rules.size()){
-            case 0: return Predicate.getTrue(CardPrinted.class);
-            case 1: return rules.get(0);
-            case 2: return Predicate.and(rules.get(0), rules.get(1));
-            default: return Predicate.and(rules);
+        switch (rules.size()) {
+        case 0:
+            return Predicate.getTrue(CardPrinted.class);
+        case 1:
+            return rules.get(0);
+        case 2:
+            return Predicate.and(rules.get(0), rules.get(1));
+        default:
+            return Predicate.and(rules);
         }
     }
 
     /**
      * TODO: Write javadoc for this method.
      */
-    public void clearFilters() {
+    public final void clearFilters() {
         txtCardName.setText("");
         txtCardType.setText("");
         txtCardRules.setText("");

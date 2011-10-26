@@ -7,8 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 
 /**
- * Custom check box class for filter icon
- * 
+ * Custom check box class for filter icon.
  */
 public class CheckBoxWithIcon extends JCheckBox {
     /* CHOPPIC */
@@ -20,7 +19,15 @@ public class CheckBoxWithIcon extends JCheckBox {
     private String iconNo;
     private CheckBoxWithIcon cb;
 
-    CheckBoxWithIcon(String filterName, String toolTip) {
+    /**
+     * Instantiates a new check box with icon.
+     * 
+     * @param filterName
+     *            the filter name
+     * @param toolTip
+     *            the tool tip
+     */
+    CheckBoxWithIcon(final String filterName, final String toolTip) {
         super("", true);
         cb = this;
         iconYes = imagePath + "filter_" + filterName + "_y.png";
@@ -28,7 +35,7 @@ public class CheckBoxWithIcon extends JCheckBox {
         this.setIcon(new ImageIcon(iconYes));
         this.setToolTipText(toolTip);
         this.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 if (cb.isSelected()) {
                     cb.setIcon(new ImageIcon(iconYes));
                 } else {

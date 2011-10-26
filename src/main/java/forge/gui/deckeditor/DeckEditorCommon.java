@@ -1,9 +1,9 @@
 package forge.gui.deckeditor;
 
 import java.awt.Container;
+import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
@@ -42,18 +43,25 @@ public final class DeckEditorCommon extends DeckEditorBase {
     /** Constant <code>serialVersionUID=130339644136746796L</code> */
     private static final long serialVersionUID = 130339644136746796L;
 
+    /** The custom menu. */
     public DeckEditorCommonMenu customMenu;
 
     private JButton removeButton = new JButton();
     private JButton addButton = new JButton();
     private JButton importButton = new JButton();
-    
+
     private JButton analysisButton = new JButton();
     private JButton clearFilterButton = new JButton();
-    
-    private JLabel jLabelAnalysisGap = new JLabel("");  
+
+    private JLabel jLabelAnalysisGap = new JLabel("");
     private FilterNameTypeSetPanel filterNameTypeSet;
 
+    /**
+     * Show.
+     * 
+     * @param exitCommand
+     *            the exit command
+     */
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = 5210924838133689758L;
@@ -77,8 +85,6 @@ public final class DeckEditorCommon extends DeckEditorBase {
 
         setup();
 
-        
-
         // show cards, makes this user friendly
         if (!getGameType().isLimited()) {
             customMenu.newConstructed(false);
@@ -89,23 +95,28 @@ public final class DeckEditorCommon extends DeckEditorBase {
 
     } // show(Command)
 
-
     private void setup() {
         List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
         columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.fnNameCompare, PresetColumns.fnNameGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.fnNameCompare,
+                PresetColumns.fnNameGet));
         columns.add(new TableColumnInfo<InventoryItem>("Cost", 75, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare, PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare, PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare, PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare, PresetColumns.fnRarityGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare,
+                PresetColumns.fnColorGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare,
+                PresetColumns.fnTypeGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare,
+                PresetColumns.fnStatsGet));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare,
+                PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare, PresetColumns.fnAiStatusGet));
+        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare,
+                PresetColumns.fnAiStatusGet));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
-        
+
         top.setup(columns, cardView);
         bottom.setup(columns, cardView);
-        
+
         filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), itemListenerUpdatesDisplay);
 
         setSize(1024, 740);
@@ -113,8 +124,13 @@ public final class DeckEditorCommon extends DeckEditorBase {
 
     }
 
-
-    public DeckEditorCommon(GameType gameType) {
+    /**
+     * Instantiates a new deck editor common.
+     * 
+     * @param gameType
+     *            the game type
+     */
+    public DeckEditorCommon(final GameType gameType) {
         super(gameType);
         try {
             filterBoxes = new FilterCheckBoxes(true);
@@ -122,13 +138,12 @@ public final class DeckEditorCommon extends DeckEditorBase {
             bottom = new TableWithCards("Deck", true);
             cardView = new CardPanelHeavy();
             filterNameTypeSet = new FilterNameTypeSetPanel();
-            
+
             jbInit();
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
         }
     }
-
 
     private void jbInit() {
 
@@ -140,28 +155,45 @@ public final class DeckEditorCommon extends DeckEditorBase {
             clearFilterButton.setFont(fButtons);
             analysisButton.setFont(fButtons);
         }
-        
-        addButton.setText("Add to Deck");        
+
+        addButton.setText("Add to Deck");
         removeButton.setText("Remove from Deck");
         importButton.setText("Import a Deck");
         clearFilterButton.setText("Clear Filter");
         analysisButton.setText("Deck Analysis");
-        
+
         removeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) { removeButtonClicked(e); } });
+            public void actionPerformed(final ActionEvent e) {
+                removeButtonClicked(e);
+            }
+        });
         addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) { addButton_actionPerformed(e); } });
+            public void actionPerformed(final ActionEvent e) {
+                addButton_actionPerformed(e);
+            }
+        });
         importButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) { importButton_actionPerformed(e); } });
+            public void actionPerformed(final ActionEvent e) {
+                importButton_actionPerformed(e);
+            }
+        });
         clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) { clearFilterButton_actionPerformed(e); } });
+            public void actionPerformed(final ActionEvent e) {
+                clearFilterButton_actionPerformed(e);
+            }
+        });
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(final ActionEvent e) { analysisButton_actionPerformed(e); } });
+            public void actionPerformed(final ActionEvent e) {
+                analysisButton_actionPerformed(e);
+            }
+        });
 
         // Type filtering
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (JCheckBox box : filterBoxes.allTypes) {
-            if (!Singletons.getModel().getPreferences().lafFonts) { box.setFont(f); }
+            if (!Singletons.getModel().getPreferences().lafFonts) {
+                box.setFont(f);
+            }
             box.setOpaque(false);
         }
 
@@ -203,7 +235,8 @@ public final class DeckEditorCommon extends DeckEditorBase {
         content.add(addButton, "w 100, h 49, sg button, cell 0 5, split 5");
         content.add(removeButton, "w 100, h 49, sg button");
         content.add(importButton, "w 100, h 49, sg button, gapleft 40px");
-        // Label is used to push the analysis button to the right to separate analysis button from add/remove card ones 
+        // Label is used to push the analysis button to the right to separate
+        // analysis button from add/remove card ones
         content.add(jLabelAnalysisGap, "wmin 75, growx");
         content.add(analysisButton, "w 100, h 49, wrap");
 
@@ -213,36 +246,76 @@ public final class DeckEditorCommon extends DeckEditorBase {
         content.add(cardView, "cell 1 0 1 8, flowy, grow");
 
         top.getTable().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(final MouseEvent e) { if (e.getClickCount() == 2) { addCardToDeck(); } } });
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    addCardToDeck();
+                }
+            }
+        });
         top.getTable().addKeyListener(new KeyAdapter() {
-            @Override public void keyPressed(final KeyEvent e) { if (e.getKeyChar() == ' ') { addCardToDeck(); } } });
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    addCardToDeck();
+                }
+            }
+        });
 
-        //javax.swing.JRootPane rootPane = this.getRootPane();
-        //rootPane.setDefaultButton(filterButton);
+        // javax.swing.JRootPane rootPane = this.getRootPane();
+        // rootPane.setDefaultButton(filterButton);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.gui.deckeditor.DeckEditorBase#buildFilter()
+     */
     @Override
     protected Predicate<InventoryItem> buildFilter() {
-        Predicate<CardPrinted> cardFilter = Predicate.and(Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter()),CardPrinted.Predicates.Presets.nonAlternate);
+        Predicate<CardPrinted> cardFilter = Predicate.and(
+                Predicate.and(filterBoxes.buildFilter(), filterNameTypeSet.buildFilter()),
+                CardPrinted.Predicates.Presets.nonAlternate);
         return Predicate.instanceOf(cardFilter, CardPrinted.class);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.gui.deckeditor.DeckEditorBase#setDeck(forge.item.ItemPoolView,
+     * forge.item.ItemPoolView, forge.game.GameType)
+     */
     @Override
-    public void setDeck(ItemPoolView<CardPrinted> topParam, ItemPoolView<CardPrinted> bottomParam, GameType gt)
-    {
-        boolean keepRecievedCards = gt.isLimited() || topParam != null;  
+    public void setDeck(final ItemPoolView<CardPrinted> topParam, final ItemPoolView<CardPrinted> bottomParam,
+            final GameType gt) {
+        boolean keepRecievedCards = gt.isLimited() || topParam != null;
         // if constructed, can add the all cards above
-        ItemPoolView<CardPrinted> top = keepRecievedCards ? topParam : ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class);
+        ItemPoolView<CardPrinted> top = keepRecievedCards ? topParam : ItemPool.createFrom(CardDb.instance()
+                .getAllCards(), CardPrinted.class);
         importButton.setVisible(!gt.isLimited());
         super.setDeck(top, bottomParam, gt);
     }
-    
-    void clearFilterButton_actionPerformed(ActionEvent e) {
+
+    /**
+     * Clear filter button_action performed.
+     * 
+     * @param e
+     *            the e
+     */
+    void clearFilterButton_actionPerformed(final ActionEvent e) {
         // disable automatic update triggered by listeners
         isFiltersChangeFiringUpdate = false;
 
-        for (JCheckBox box : filterBoxes.allTypes) { if (!box.isSelected()) { box.doClick(); } }
-        for (JCheckBox box : filterBoxes.allColors) { if (!box.isSelected()) { box.doClick(); } }
+        for (JCheckBox box : filterBoxes.allTypes) {
+            if (!box.isSelected()) {
+                box.doClick();
+            }
+        }
+        for (JCheckBox box : filterBoxes.allColors) {
+            if (!box.isSelected()) {
+                box.doClick();
+            }
+        }
 
         filterNameTypeSet.clearFilters();
 
@@ -251,13 +324,24 @@ public final class DeckEditorCommon extends DeckEditorBase {
         top.setFilter(null);
     }
 
-    void addButton_actionPerformed(ActionEvent e) {
+    /**
+     * Adds the button_action performed.
+     * 
+     * @param e
+     *            the e
+     */
+    void addButton_actionPerformed(final ActionEvent e) {
         addCardToDeck();
     }
 
+    /**
+     * Adds the card to deck.
+     */
     void addCardToDeck() {
         InventoryItem item = top.getSelectedCard();
-        if (item == null || !( item instanceof CardPrinted )) { return; }
+        if (item == null || !(item instanceof CardPrinted)) {
+            return;
+        }
 
         CardPrinted card = (CardPrinted) item;
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
@@ -266,13 +350,21 @@ public final class DeckEditorCommon extends DeckEditorBase {
         if (getGameType().isLimited()) {
             top.removeCard(card);
         }
-        
+
         customMenu.notifyDeckChange();
     }
 
-    void removeButtonClicked(ActionEvent e) {
+    /**
+     * Removes the button clicked.
+     * 
+     * @param e
+     *            the e
+     */
+    void removeButtonClicked(final ActionEvent e) {
         InventoryItem item = bottom.getSelectedCard();
-        if (item == null || !( item instanceof CardPrinted )) { return; }
+        if (item == null || !(item instanceof CardPrinted)) {
+            return;
+        }
 
         CardPrinted card = (CardPrinted) item;
 
@@ -282,11 +374,17 @@ public final class DeckEditorCommon extends DeckEditorBase {
         if (getGameType().isLimited()) {
             top.addCard(card);
         }
-        
+
         customMenu.notifyDeckChange();
     }
-    
-    void importButton_actionPerformed(ActionEvent e) {
+
+    /**
+     * Import button_action performed.
+     * 
+     * @param e
+     *            the e
+     */
+    void importButton_actionPerformed(final ActionEvent e) {
         DeckEditorBase g = this;
         DeckImport dImport = new DeckImport(g);
         dImport.setModalityType(ModalityType.APPLICATION_MODAL);
