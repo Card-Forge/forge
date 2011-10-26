@@ -1,0 +1,27 @@
+Name:Jushi Apprentice
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+A:AB$Draw | Cost$ 2 U T | Defined$ You | NumCards$ 1 | SubAbility$ DBFlip | SpellDescription$ Draw a card. If you have nine or more cards in hand, flip CARDNAME.
+SVar:DBFlip:DB$ChangeState | Defined$ Self | CheckSVar$ HandSize | SVarCompare$ GE9
+SVar:HandSize:Count$InYourHand
+SVar:Rarity:Rare
+AlternateMode:Flip
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/70.jpg
+Oracle:{2}{U}, {T}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
+
+ALTERNATE
+
+Name:Tomoya the Revealer
+ManaCost:1 U
+Colors:blue
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:2/3
+A:AB$Draw | Cost$ 3 U U T | ValidTgts$ Player | NumCards$ X | SpellDescription$ Target player draws X cards, where X is the number of cards in your hand.
+SVar:X:Count$InYourHand
+SVar:Rarity:Rare
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/309.jpg
+Oracle:{3}{U}{U}, {T}: Target player draws X cards, where X is the number of cards in your hand.
+End
