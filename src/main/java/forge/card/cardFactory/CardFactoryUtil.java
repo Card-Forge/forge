@@ -4325,6 +4325,7 @@ public class CardFactoryUtil {
         To.setSets(From.getSets());
         To.setIntrinsicAbilities(From.getIntrinsicAbilities());
         
+        To.setImageName(From.getImageName());
         To.setImageFilename(From.getImageFilename());
         To.setTriggers(From.getTriggers());
         To.setStaticAbilityStrings(From.getStaticAbilityStrings());
