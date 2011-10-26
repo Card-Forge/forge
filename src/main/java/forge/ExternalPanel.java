@@ -1,12 +1,16 @@
 package forge;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * ExternalPanel.java
@@ -14,10 +18,10 @@ import java.awt.event.WindowEvent;
  * Created on 13.08.2009
  */
 
-
 /**
- * The class ExternalPanel. A panel with which some other component can be shown in an external window.
- *
+ * The class ExternalPanel. A panel with which some other component can be shown
+ * in an external window.
+ * 
  * @author Clemens Koza
  * @version V0.0 13.08.2009
  */
@@ -29,19 +33,26 @@ public class ExternalPanel extends JPanel {
     private JFrame frame;
 
     /**
-     * <p>Constructor for ExternalPanel.</p>
-     *
-     * @param child a {@link java.awt.Component} object.
+     * <p>
+     * Constructor for ExternalPanel.
+     * </p>
+     * 
+     * @param child
+     *            a {@link java.awt.Component} object.
      */
     public ExternalPanel(final Component child) {
         this(child, BorderLayout.EAST);
     }
 
     /**
-     * <p>Constructor for ExternalPanel.</p>
-     *
-     * @param child a {@link java.awt.Component} object.
-     * @param side a {@link java.lang.String} object.
+     * <p>
+     * Constructor for ExternalPanel.
+     * </p>
+     * 
+     * @param child
+     *            a {@link java.awt.Component} object.
+     * @param side
+     *            a {@link java.lang.String} object.
      */
     public ExternalPanel(final Component child, final String side) {
         super(new BorderLayout());
@@ -55,9 +66,12 @@ public class ExternalPanel extends JPanel {
     }
 
     /**
-     * <p>setHeadSide.</p>
-     *
-     * @param side a {@link java.lang.String} object.
+     * <p>
+     * setHeadSide.
+     * </p>
+     * 
+     * @param side
+     *            a {@link java.lang.String} object.
      */
     public final void setHeadSide(final String side) {
         remove(head);

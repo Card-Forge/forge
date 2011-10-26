@@ -1,9 +1,5 @@
 package forge;
 
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -19,10 +15,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
 
+// TODO: Auto-generated Javadoc
 /**
- * <p>FileUtil class.</p>
- *
+ * <p>
+ * FileUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -33,9 +35,12 @@ public final class FileUtil {
     }
 
     /**
-     * <p>doesFileExist.</p>
-     *
-     * @param filename a {@link java.lang.String} object.
+     * <p>
+     * doesFileExist.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
      * @return a boolean.
      */
     public static boolean doesFileExist(final String filename) {
@@ -44,24 +49,32 @@ public final class FileUtil {
     }
 
     /**
-     * <p>writeFile.</p>
-     *
-     * @param filename a {@link java.lang.String} object.
-     * @param data a {@link java.util.List} object.
+     * <p>
+     * writeFile.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
+     * @param data
+     *            a {@link java.util.List} object.
      */
     public static void writeFile(final String filename, final List<String> data) {
         writeFile(new File(filename), data);
     }
 
-    //writes each element of ArrayList on a separate line
-    //this is used to write a file of Strings
-    //this will create a new file if needed
-    //if filename already exists, it is deleted
+    // writes each element of ArrayList on a separate line
+    // this is used to write a file of Strings
+    // this will create a new file if needed
+    // if filename already exists, it is deleted
     /**
-     * <p>writeFile.</p>
-     *
-     * @param file a {@link java.io.File} object.
-     * @param data a {@link java.util.List} object.
+     * <p>
+     * writeFile.
+     * </p>
+     * 
+     * @param file
+     *            a {@link java.io.File} object.
+     * @param data
+     *            a {@link java.util.List} object.
      */
     public static void writeFile(final File file, final List<String> data) {
         try {
@@ -78,25 +91,31 @@ public final class FileUtil {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
-    } //writeAllDecks()
+    } // writeAllDecks()
 
     /**
-     * <p>readFile.</p>
-     *
-     * @param filename a {@link java.lang.String} object.
+     * <p>
+     * readFile.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> readFile(final String filename) {
         return readFile(new File(filename));
     }
 
-    //reads line by line and adds each line to the ArrayList
-    //this will return blank lines as well
-    //if filename not found, returns an empty ArrayList
+    // reads line by line and adds each line to the ArrayList
+    // this will return blank lines as well
+    // if filename not found, returns an empty ArrayList
     /**
-     * <p>readFile.</p>
-     *
-     * @param file a {@link java.io.File} object.
+     * <p>
+     * readFile.
+     * </p>
+     * 
+     * @param file
+     *            a {@link java.io.File} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> readFile(final File file) {
@@ -107,7 +126,6 @@ public final class FileUtil {
             if (file == null || !file.exists()) {
                 return list;
             }
-
 
             in = new BufferedReader(new FileReader(file));
 
@@ -121,31 +139,34 @@ public final class FileUtil {
         }
 
         return list;
-    } //readFile()
-    
-    public static void downloadUrlIntoFile(final String url, final File target)
-    {
-        try{
+    } // readFile()
+
+    /**
+     * Download url into file.
+     *
+     * @param url the url
+     * @param target the target
+     */
+    public static void downloadUrlIntoFile(final String url, final File target) {
+        try {
             byte[] buf = new byte[1024];
             int len;
-    
+
             Proxy p = Proxy.NO_PROXY;
             BufferedInputStream in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target));
-    
-            //while - read and write file
+
+            // while - read and write file
             while ((len = in.read(buf)) != -1) {
                 out.write(buf, 0, len);
-    
-            }//while - read and write file
+
+            } // while - read and write file
             in.close();
             out.flush();
             out.close();
-        }
-        catch (IOException ioex)
-        {
+        } catch (IOException ioex) {
             ErrorViewer.showError(ioex, ForgeProps.getLocalized(ERRORS.OTHER), "deck_temp.html", url);
         }
-        
+
     }
 }

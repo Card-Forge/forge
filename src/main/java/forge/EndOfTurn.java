@@ -6,8 +6,10 @@ import forge.card.spellability.SpellAbility;
 
 //handles "until end of turn" and "at end of turn" commands from cards
 /**
- * <p>EndOfTurn class.</p>
- *
+ * <p>
+ * EndOfTurn class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -20,44 +22,55 @@ public class EndOfTurn implements java.io.Serializable {
     private CommandList last = new CommandList();
 
     /**
-     * <p>addAt.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addAt.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addAt(final Command c) {
         at.add(c);
     }
 
     /**
-     * <p>addUntil.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addUntil.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addUntil(final Command c) {
         until.add(c);
     }
 
     /**
-     * <p>addLast.</p>
-     *
-     * @param c a {@link forge.Command} object.
+     * <p>
+     * addLast.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
     public final void addLast(final Command c) {
         last.add(c);
     }
 
     /**
-     * <p>executeAt.</p>
+     * <p>
+     * executeAt.
+     * </p>
      */
     public final void executeAt() {
 
-        //Pyrohemia and Pestilence
+        // Pyrohemia and Pestilence
         CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         GameActionUtil.endOfTurn_Wall_Of_Reverence();
         GameActionUtil.endOfTurn_Lighthouse_Chronologist();
 
-        //reset mustAttackEntity for me
+        // reset mustAttackEntity for me
         AllZone.getPhase().getPlayerTurn().setMustAttackEntity(null);
 
         GameActionUtil.removeAttackedBlockedThisTurn();
@@ -65,9 +78,7 @@ public class EndOfTurn implements java.io.Serializable {
         AllZone.getStaticEffects().rePopulateStateBasedList();
 
         for (Card c : all) {
-            if (!c.isFaceDown()
-                    && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME."))
-            {
+            if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility sac = new Ability(card, "0") {
                     @Override
@@ -84,9 +95,7 @@ public class EndOfTurn implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(sac);
 
             }
-            if (!c.isFaceDown()
-                    && c.hasKeyword("At the beginning of the end step, exile CARDNAME."))
-            {
+            if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility exile = new Ability(card, "0") {
                     @Override
@@ -103,9 +112,7 @@ public class EndOfTurn implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(exile);
 
             }
-            if (!c.isFaceDown()
-                    && c.hasKeyword("At the beginning of the end step, destroy CARDNAME."))
-            {
+            if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility destroy = new Ability(card, "0") {
                     @Override
@@ -122,7 +129,7 @@ public class EndOfTurn implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(destroy);
 
             }
-            //Berserk is using this, so don't check isFaceDown()
+            // Berserk is using this, so don't check isFaceDown()
             if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
                 if (c.getCreatureAttackedThisTurn()) {
                     final Card card = c;
@@ -151,8 +158,9 @@ public class EndOfTurn implements java.io.Serializable {
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(vale)) {
                             vale.addController(vale.getController().getOpponent());
-                            //AllZone.getGameAction().changeController(
-                            //      new CardList(vale), vale.getController(), vale.getController().getOpponent());
+                            // AllZone.getGameAction().changeController(
+                            // new CardList(vale), vale.getController(),
+                            // vale.getController().getOpponent());
 
                             vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
                         }
@@ -165,9 +173,8 @@ public class EndOfTurn implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(change);
 
             }
-            if (c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn()
-                    && !c.hasSickness() && AllZone.getPhase().isPlayerTurn(c.getController()))
-            {
+            if (c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() && !c.hasSickness()
+                    && AllZone.getPhase().isPlayerTurn(c.getController())) {
                 final Card raider = c;
                 final SpellAbility change = new Ability(raider, "0") {
                     @Override
@@ -186,9 +193,8 @@ public class EndOfTurn implements java.io.Serializable {
             }
             if (c.hasKeyword("At the beginning of your end step, sacrifice this creature unless it attacked this turn.")
                     && !c.getCreatureAttackedThisTurn()
-                    /* && !(c.getTurnInZone() == AllZone.getPhase().getTurn())*/
-                    && AllZone.getPhase().isPlayerTurn(c.getController()))
-            {
+                    /* && !(c.getTurnInZone() == AllZone.getPhase().getTurn()) */
+                    && AllZone.getPhase().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
@@ -206,9 +212,7 @@ public class EndOfTurn implements java.io.Serializable {
 
             }
             if (c.hasKeyword("At the beginning of your end step, destroy this creature if it didn't attack this turn.")
-                    && !c.getCreatureAttackedThisTurn()
-                    && AllZone.getPhase().isPlayerTurn(c.getController()))
-            {
+                    && !c.getCreatureAttackedThisTurn() && AllZone.getPhase().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
@@ -226,8 +230,7 @@ public class EndOfTurn implements java.io.Serializable {
 
             }
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
-                    && AllZone.getPhase().isPlayerTurn(c.getController()))
-            {
+                    && AllZone.getPhase().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
@@ -247,9 +250,7 @@ public class EndOfTurn implements java.io.Serializable {
 
         }
 
-
         execute(at);
-
 
         CardList all2 = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card c : all2) {
@@ -259,11 +260,12 @@ public class EndOfTurn implements java.io.Serializable {
             }
         }
 
-    } //executeAt()
-
+    } // executeAt()
 
     /**
-     * <p>executeUntil.</p>
+     * <p>
+     * executeUntil.
+     * </p>
      */
     public final void executeUntil() {
         execute(until);
@@ -271,8 +273,10 @@ public class EndOfTurn implements java.io.Serializable {
     }
 
     /**
-     * <p>sizeAt.</p>
-     *
+     * <p>
+     * sizeAt.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeAt() {
@@ -280,8 +284,10 @@ public class EndOfTurn implements java.io.Serializable {
     }
 
     /**
-     * <p>sizeUntil.</p>
-     *
+     * <p>
+     * sizeUntil.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeUntil() {
@@ -289,8 +295,10 @@ public class EndOfTurn implements java.io.Serializable {
     }
 
     /**
-     * <p>sizeLast.</p>
-     *
+     * <p>
+     * sizeLast.
+     * </p>
+     * 
      * @return a int.
      */
     public final int sizeLast() {
@@ -298,9 +306,12 @@ public class EndOfTurn implements java.io.Serializable {
     }
 
     /**
-     * <p>execute.</p>
-     *
-     * @param c a {@link forge.CommandList} object.
+     * <p>
+     * execute.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CommandList} object.
      */
     private void execute(final CommandList c) {
         int length = c.size();
@@ -310,4 +321,4 @@ public class EndOfTurn implements java.io.Serializable {
         }
     }
 
-} //end class EndOfTurn
+} // end class EndOfTurn

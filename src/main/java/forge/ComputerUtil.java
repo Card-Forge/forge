@@ -1,5 +1,12 @@
 package forge;
 
+import static forge.error.ErrorViewer.showError;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+
 import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -8,54 +15,57 @@ import forge.card.cost.CostUtil;
 import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-
-import static forge.error.ErrorViewer.showError;
-
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 
 /**
- * <p>ComputerUtil class.</p>
- *
+ * <p>
+ * ComputerUtil class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class ComputerUtil {
 
-    //if return true, go to next phase
+    // if return true, go to next phase
     /**
-     * <p>playCards.</p>
-     *
+     * <p>
+     * playCards.
+     * </p>
+     * 
      * @return a boolean.
      */
-    static public boolean playCards() {
+    public static boolean playCards() {
         return playCards(getSpellAbility());
     }
 
-    //if return true, go to next phase
+    // if return true, go to next phase
     /**
-     * <p>playCards.</p>
-     *
-     * @param all an array of {@link forge.card.spellability.SpellAbility} objects.
+     * <p>
+     * playCards.
+     * </p>
+     * 
+     * @param all
+     *            an array of {@link forge.card.spellability.SpellAbility}
+     *            objects.
      * @return a boolean.
      */
-    static public boolean playCards(SpellAbility[] all) {
-        //not sure "playing biggest spell" matters?
+    public static boolean playCards(final SpellAbility[] all) {
+        // not sure "playing biggest spell" matters?
         sortSpellAbilityByCost(all);
-        //    MyRandom.shuffle(all);
+        // MyRandom.shuffle(all);
 
         for (SpellAbility sa : all) {
             // Don't add Counterspells to the "normal" playcard lookupss
             AbilityFactory af = sa.getAbilityFactory();
-            if (af != null && af.getAPI().equals("Counter"))
+            if (af != null && af.getAPI().equals("Counter")) {
                 continue;
+            }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            if (canBePlayedAndPayedByAI(sa)) //checks everything necessary
+            if (canBePlayedAndPayedByAI(sa)) // checks everything necessary
             {
                 handlePlayingSpellAbility(sa);
 
@@ -63,33 +73,40 @@ public class ComputerUtil {
             }
         }
         return true;
-    }//playCards()
+    }// playCards()
 
     /**
-     * <p>playCards.</p>
-     *
-     * @param all a {@link java.util.ArrayList} object.
+     * <p>
+     * playCards.
+     * </p>
+     * 
+     * @param all
+     *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    static public boolean playCards(ArrayList<SpellAbility> all) {
+    public static boolean playCards(final ArrayList<SpellAbility> all) {
         SpellAbility[] sas = new SpellAbility[all.size()];
         for (int i = 0; i < sas.length; i++) {
             sas[i] = all.get(i);
         }
         return playCards(sas);
-    }//playCards()
+    } // playCards()
 
     /**
-     * <p>handlePlayingSpellAbility.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * handlePlayingSpellAbility.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    static public void handlePlayingSpellAbility(SpellAbility sa) {
+    public static void handlePlayingSpellAbility(final SpellAbility sa) {
         AllZone.getStack().freezeStack();
         Card source = sa.getSourceCard();
 
-        if (sa.isSpell() && !source.isCopiedSpell())
+        if (sa.isSpell() && !source.isCopiedSpell()) {
             AllZone.getGameAction().moveToStack(source);
+        }
 
         Cost cost = sa.getPayCosts();
         Target tgt = sa.getTarget();
@@ -100,22 +117,27 @@ public class ComputerUtil {
             sa.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(sa);
         } else {
-            if (tgt != null && tgt.doesTarget())
+            if (tgt != null && tgt.doesTarget()) {
                 sa.chooseTargetAI();
+            }
 
             Cost_Payment pay = new Cost_Payment(cost, sa);
-            if (pay.payComputerCosts())
+            if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
+            }
         }
     }
 
     /**
-     * <p>counterSpellRestriction.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * counterSpellRestriction.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    static public int counterSpellRestriction(SpellAbility sa) {
+    public static int counterSpellRestriction(final SpellAbility sa) {
         // Move this to AF?
         // Restriction Level is Based off a handful of factors
 
@@ -129,7 +151,7 @@ public class ComputerUtil {
         // Play higher costing spells first?
         Cost cost = sa.getPayCosts();
         // Convert cost to CMC
-        //String totalMana = source.getSVar("PayX"); // + cost.getCMC()
+        // String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 
         // Consider the costs here for relative "scoring"
         if (CostUtil.hasDiscardHandCost(cost)) {
@@ -138,8 +160,9 @@ public class ComputerUtil {
         }
 
         // Abilities before Spells (card advantage)
-        if (af.isAbility())
+        if (af.isAbility()) {
             restrict += 40;
+        }
 
         // TargetValidTargeting gets biggest bonus
         if (tgt.getSAValidTargeting() != null) {
@@ -154,38 +177,44 @@ public class ComputerUtil {
             int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
 
             // If the Unless isn't enough, this should be less likely to be used
-            if (amount > usableManaSources)
+            if (amount > usableManaSources) {
                 restrict += 20 - (2 * amount);
-            else
+            } else {
                 restrict -= (10 - (2 * amount));
+            }
         }
 
         // Then base on Targeting Restriction
         String[] validTgts = tgt.getValidTgts();
-        if (validTgts.length != 1 || !validTgts[0].equals("Card"))
+        if (validTgts.length != 1 || !validTgts[0].equals("Card")) {
             restrict += 10;
+        }
 
-        // And lastly give some bonus points to least restrictive TargetType (Spell,Ability,Triggered)
+        // And lastly give some bonus points to least restrictive TargetType
+        // (Spell,Ability,Triggered)
         String tgtType = tgt.getTargetSpellAbilityType();
         restrict -= (5 * tgtType.split(",").length);
 
         return restrict;
     }
 
-    //if return true, go to next phase
+    // if return true, go to next phase
     /**
-     * <p>playCounterSpell.</p>
-     *
-     * @param possibleCounters a {@link java.util.ArrayList} object.
+     * <p>
+     * playCounterSpell.
+     * </p>
+     * 
+     * @param possibleCounters
+     *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    static public boolean playCounterSpell(ArrayList<SpellAbility> possibleCounters) {
+    public static boolean playCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
 
         for (SpellAbility sa : possibleCounters) {
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            if (canBePlayedAndPayedByAI(sa)) { //checks everything nescessary
+            if (canBePlayedAndPayedByAI(sa)) { // checks everything nescessary
                 if (bestSA == null) {
                     bestSA = sa;
                     bestRestriction = counterSpellRestriction(sa);
@@ -201,8 +230,9 @@ public class ComputerUtil {
             }
         }
 
-        if (bestSA == null)
+        if (bestSA == null) {
             return false;
+        }
 
         // TODO
         // "Look" at Targeted SA and "calculate" the threshold
@@ -211,8 +241,9 @@ public class ComputerUtil {
         AllZone.getStack().freezeStack();
         Card source = bestSA.getSourceCard();
 
-        if (bestSA.isSpell() && !source.isCopiedSpell())
+        if (bestSA.isSpell() && !source.isCopiedSpell()) {
             AllZone.getGameAction().moveToStack(source);
+        }
 
         Cost cost = bestSA.getPayCosts();
 
@@ -224,25 +255,29 @@ public class ComputerUtil {
             AllZone.getStack().addAndUnfreeze(bestSA);
         } else {
             Cost_Payment pay = new Cost_Payment(cost, bestSA);
-            if (pay.payComputerCosts())
+            if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(bestSA);
+            }
         }
 
         return true;
-    }//playCounterSpell()
+    }// playCounterSpell()
 
-
-    //this is used for AI's counterspells
+    // this is used for AI's counterspells
     /**
-     * <p>playStack.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * playStack.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    final static public void playStack(SpellAbility sa) {
+    public static final void playStack(final SpellAbility sa) {
         if (canPayCost(sa)) {
             Card source = sa.getSourceCard();
-            if (sa.isSpell() && !source.isCopiedSpell())
+            if (sa.isSpell() && !source.isCopiedSpell()) {
                 AllZone.getGameAction().moveToStack(source);
+            }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
 
@@ -253,60 +288,69 @@ public class ComputerUtil {
     }
 
     /**
-     * <p>playStackFree.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * playStackFree.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    final static public void playStackFree(SpellAbility sa) {
+    public static final void playStackFree(final SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getComputerPlayer());
 
         Card source = sa.getSourceCard();
-        if (sa.isSpell() && !source.isCopiedSpell())
+        if (sa.isSpell() && !source.isCopiedSpell()) {
             AllZone.getGameAction().moveToStack(source);
+        }
 
         AllZone.getStack().add(sa);
     }
 
     /**
-     * <p>playNoStack.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * playNoStack.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    final static public void playNoStack(SpellAbility sa) {
+    public static final void playNoStack(final SpellAbility sa) {
         // TODO: We should really restrict what doesn't use the Stack
 
         if (canPayCost(sa)) {
             Card source = sa.getSourceCard();
-            if (sa.isSpell() && !source.isCopiedSpell())
+            if (sa.isSpell() && !source.isCopiedSpell()) {
                 AllZone.getGameAction().moveToStack(source);
+            }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            
+
             Cost cost = sa.getPayCosts();
-            if (cost == null) 
+            if (cost == null) {
                 payManaCost(sa);
-            else {
-            	Cost_Payment pay = new Cost_Payment(cost, sa);
-            	pay.payComputerCosts();
+            } else {
+                Cost_Payment pay = new Cost_Payment(cost, sa);
+                pay.payComputerCosts();
             }
 
             AbilityFactory.resolve(sa, false);
 
-            //destroys creatures if they have lethal damage, etc..
+            // destroys creatures if they have lethal damage, etc..
             AllZone.getGameAction().checkStateEffects();
         }
-    }//play()
+    }// play()
 
-
-    //gets Spells of cards in hand and Abilities of cards in play
-    //checks to see
-    //1. if canPlay() returns true, 2. can pay for mana
+    // gets Spells of cards in hand and Abilities of cards in play
+    // checks to see
+    // 1. if canPlay() returns true, 2. can pay for mana
     /**
-     * <p>getSpellAbility.</p>
-     *
+     * <p>
+     * getSpellAbility.
+     * </p>
+     * 
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
-    static public SpellAbility[] getSpellAbility() {
+    public static SpellAbility[] getSpellAbility() {
         CardList all = new CardList();
         all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
@@ -315,7 +359,7 @@ public class ComputerUtil {
         CardList humanPlayable = new CardList();
         humanPlayable.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield));
         humanPlayable = humanPlayable.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return (c.canAnyPlayerActivate());
             }
         });
@@ -326,7 +370,10 @@ public class ComputerUtil {
         for (int outer = 0; outer < all.size(); outer++) {
             SpellAbility[] sa = all.get(outer).getSpellAbility();
             for (int i = 0; i < sa.length; i++)
-                spellAbility.add(sa[i]);//this seems like it needs to be copied, not sure though
+             {
+                spellAbility.add(sa[i]);// this seems like it needs to be
+                                        // copied, not sure though
+            }
         }
 
         SpellAbility[] sa = new SpellAbility[spellAbility.size()];
@@ -334,121 +381,154 @@ public class ComputerUtil {
         return sa;
     }
 
-    //This is for playing spells regularly (no Cascade/Ripple etc.)
+    // This is for playing spells regularly (no Cascade/Ripple etc.)
     /**
-     * <p>canBePlayedAndPayedByAI.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * canBePlayedAndPayedByAI.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      * @since 1.0.15
      */
-    static public boolean canBePlayedAndPayedByAI(SpellAbility sa) {
+    public static boolean canBePlayedAndPayedByAI(final SpellAbility sa) {
         return sa.canPlay() && sa.canPlayAI() && canPayCost(sa);
     }
 
     /**
-     * <p>canPayCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * canPayCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    static public boolean canPayCost(SpellAbility sa) {
+    public static boolean canPayCost(final SpellAbility sa) {
         return canPayCost(sa, AllZone.getComputerPlayer());
-    }//canPayCost()
-
+    }// canPayCost()
 
     /**
-     * <p>canPayCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * canPayCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    static public boolean canPayCost(SpellAbility sa, Player player) {
-        if (!payManaCost(sa, player, true, 0))
+    public static boolean canPayCost(final SpellAbility sa, final Player player) {
+        if (!payManaCost(sa, player, true, 0)) {
             return false;
+        }
 
         return canPayAdditionalCosts(sa, player);
-    }//canPayCost()
-
+    }// canPayCost()
 
     /**
-     * <p>determineLeftoverMana.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * determineLeftoverMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    static public int determineLeftoverMana(SpellAbility sa) {
+    public static int determineLeftoverMana(final SpellAbility sa) {
         return determineLeftoverMana(sa, AllZone.getComputerPlayer());
     }
 
     /**
-     * <p>determineLeftoverMana.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * determineLeftoverMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a int.
      * @since 1.0.15
      */
-    static public int determineLeftoverMana(SpellAbility sa, Player player) {
+    public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
 
         int xMana = 0;
 
         for (int i = 1; i < 99; i++) {
-            if (!payManaCost(sa, player, true, xMana))
+            if (!payManaCost(sa, player, true, xMana)) {
                 break;
+            }
             xMana = i;
         }
 
         return xMana;
     }
 
-
     /**
-     * <p>canPayAdditionalCosts.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * canPayAdditionalCosts.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    static public boolean canPayAdditionalCosts(SpellAbility sa) {
+    public static boolean canPayAdditionalCosts(final SpellAbility sa) {
         return canPayAdditionalCosts(sa, AllZone.getComputerPlayer());
     }
 
     /**
-     * <p>canPayAdditionalCosts.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * canPayAdditionalCosts.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    static public boolean canPayAdditionalCosts(SpellAbility sa, Player player) {
-        if (sa.getActivatingPlayer() == null){
-            System.out.println(sa.getSourceCard() + " in ComputerUtil.canPayAdditionalCosts() without an activating player");
+    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
+        if (sa.getActivatingPlayer() == null) {
+            System.out.println(sa.getSourceCard()
+                    + " in ComputerUtil.canPayAdditionalCosts() without an activating player");
             sa.setActivatingPlayer(player);
         }
         return Cost_Payment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }
 
     /**
-     * <p>payManaCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * payManaCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    static public void payManaCost(SpellAbility sa) {
+    public static void payManaCost(final SpellAbility sa) {
         payManaCost(sa, AllZone.getComputerPlayer(), false, 0);
     }
 
     /**
-     * <p>payManaCost.</p>
-     *
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
-     * @param player a {@link forge.Player} object.
-     * @param test (is for canPayCost, if true does not change the game state)
-     * @param extraMana a int.
+     * <p>
+     * payManaCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param player
+     *            a {@link forge.Player} object.
+     * @param test
+     *            (is for canPayCost, if true does not change the game state)
+     * @param extraMana
+     *            a int.
      * @return a boolean.
      * @since 1.0.15
      */
-    static public boolean payManaCost(SpellAbility sa, Player player, boolean test, int extraMana) {
+    public static boolean payManaCost(final SpellAbility sa, final Player player, final boolean test, final int extraMana) {
         String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
         ManaCost cost = new ManaCost(mana);
@@ -462,108 +542,140 @@ public class ComputerUtil {
         if (sa.getPayCosts() != null && cost.getXcounter() > 0) {
 
             int manaToAdd = 0;
-            if (test && extraMana > 0)
+            if (test && extraMana > 0) {
                 manaToAdd = extraMana * cost.getXcounter();
-            else {
+            } else {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
                 String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X";
                 if (!card.getSVar(xSvar).equals("")) {
-                    if (xSvar.equals("PayX"))
-                        manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X has already been decided
-                    else {
+                    if (xSvar.equals("PayX")) {
+                        manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
+                    } else {
                         manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
                     }
                 }
             }
 
             cost.increaseColorlessMana(manaToAdd);
-            if (!test)
+            if (!test) {
                 card.setXManaCostPaid(manaToAdd);
+            }
         }
 
-        if (cost.isPaid())
+        if (cost.isPaid()) {
             return true;
+        }
 
         ArrayList<String> colors;
 
         cost = ((ManaPool) manapool).subtractMana(sa, cost);
-        if(card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+        if (card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
             cost.setManaNeededToAvoidNegativeEffect(card.getSVar("ManaNeededToAvoidNegativeEffect").split(","));
         }
 
         CardList manaSources = getAvailableMana();
 
-        //this is to prevent errors for mana sources that have abilities that cost mana.
+        // this is to prevent errors for mana sources that have abilities that
+        // cost mana.
         manaSources.remove(sa.getSourceCard());
 
         for (int i = 0; i < manaSources.size(); i++) {
             Card sourceCard = manaSources.get(i);
             ArrayList<Ability_Mana> manaAbilities = sourceCard.getAIPlayableMana();
 
-            boolean used = false; //this is for testing paying mana only
+            boolean used = false; // this is for testing paying mana only
 
             manaAbilities = sortForNeeded(cost, manaAbilities, player);
 
             for (Ability_Mana m : manaAbilities) {
 
-                if (used) break; //mana source already used in the test
+                if (used)
+                 {
+                    break; // mana source already used in the test
+                }
                 m.setActivatingPlayer(player);
-                //if the AI can't pay the additional costs skip the mana ability
+                // if the AI can't pay the additional costs skip the mana
+                // ability
                 if (m.getPayCosts() != null) {
-                    if (!canPayAdditionalCosts(m, player))
+                    if (!canPayAdditionalCosts(m, player)) {
                         continue;
-                } else if (sourceCard.isTapped())
+                    }
+                } else if (sourceCard.isTapped()) {
                     continue;
+                }
 
-                //don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null)
-                    if (!m.getSubAbility().chkAI_Drawback())
+                // don't use abilities with dangerous drawbacks
+                if (m.getSubAbility() != null) {
+                    if (!m.getSubAbility().chkAI_Drawback()) {
                         continue;
+                    }
+                }
 
                 colors = getProduceableColors(m, player);
                 for (int j = 0; j < colors.size(); j++) {
-                    if (used) break; //mana source already used in the test
+                    if (used)
+                     {
+                        break; // mana source already used in the test
+                    }
 
                     if (cost.isNeeded(colors.get(j))) {
                         if (!test) {
-                            //Pay additional costs
+                            // Pay additional costs
                             if (m.getPayCosts() != null) {
                                 Cost_Payment pay = new Cost_Payment(m.getPayCosts(), m);
-                                if (!pay.payComputerCosts()) continue;
-                            } else
+                                if (!pay.payComputerCosts()) {
+                                    continue;
+                                }
+                            } else {
                                 sourceCard.tap();
-                        } else used = true; // mana source is now used in the test
+                            }
+                        }
+                        else {
+                            used = true; // mana source is now used in the test
+                        }
 
                         cost.payMana(colors.get(j));
 
                         if (!test) {
-                            //resolve subabilities
+                            // resolve subabilities
                             AbilityFactory af = m.getAbilityFactory();
-                            if (af != null)
+                            if (af != null) {
                                 AbilityFactory.resolveSubAbilities(m);
+                            }
 
                             if (sourceCard.getName().equals("Undiscovered Paradise")) {
                                 sourceCard.setBounceAtUntap(true);
                             }
 
                             if (sourceCard.getName().equals("Rainbow Vale")) {
-                                sourceCard.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+                                sourceCard
+                                        .addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
                             }
 
-                            //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
-                            //Run triggers
+                            // System.out.println("just subtracted " +
+                            // colors.get(j) + ", cost is now: " +
+                            // cost.toString());
+                            // Run triggers
                             HashMap<String, Object> runParams = new HashMap<String, Object>();
 
                             runParams.put("Card", sourceCard);
                             runParams.put("Player", player);
-                            runParams.put("Produced", colors.get(j)); //can't tell what mana the computer just paid?
+                            runParams.put("Produced", colors.get(j)); // can't
+                                                                      // tell
+                                                                      // what
+                                                                      // mana
+                                                                      // the
+                                                                      // computer
+                                                                      // just
+                                                                      // paid?
                             AllZone.getTriggerHandler().runTrigger("TapsForMana", runParams);
-                        }//not a test
+                        }// not a test
                     }
                     if (cost.isPaid()) {
-                        //if (sa instanceof Spell_Permanent) // should probably add this
-                    	sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
+                        // if (sa instanceof Spell_Permanent) // should probably
+                        // add this
+                        sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
                         sa.getSourceCard().setSunburstValue(cost.getSunburst());
                         manapool.clearPay(sa, test);
                         return true;
@@ -573,81 +685,105 @@ public class ComputerUtil {
 
         }
 
-        if (!test) // real payment should not arrive here
-            throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
+        if (!test) {
+            throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for "
+                    + sa.getSourceCard().getName());
+        }
 
         return false;
 
-    }//payManaCost()
-
+    }// payManaCost()
 
     /**
-     * <p>getProduceableColors.</p>
-     *
-     * @param m a {@link forge.card.spellability.Ability_Mana} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * getProduceableColors.
+     * </p>
+     * 
+     * @param m
+     *            a {@link forge.card.spellability.Ability_Mana} object.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<String> getProduceableColors(Ability_Mana m, Player player) {
+    public static ArrayList<String> getProduceableColors(final Ability_Mana m, final Player player) {
         ArrayList<String> colors = new ArrayList<String>();
 
-        //if the mana ability is not avaiable move to the next one
+        // if the mana ability is not avaiable move to the next one
         m.setActivatingPlayer(player);
-        if (!m.canPlay()) return colors;
+        if (!m.canPlay()) {
+            return colors;
+        }
 
-        if (!colors.contains(Constant.Color.Black) && m.isBasic() && m.mana().equals("B"))
+        if (!colors.contains(Constant.Color.Black) && m.isBasic() && m.mana().equals("B")) {
             colors.add(Constant.Color.Black);
-        if (!colors.contains(Constant.Color.White) && m.isBasic() && m.mana().equals("W"))
+        }
+        if (!colors.contains(Constant.Color.White) && m.isBasic() && m.mana().equals("W")) {
             colors.add(Constant.Color.White);
-        if (!colors.contains(Constant.Color.Green) && m.isBasic() && m.mana().equals("G"))
+        }
+        if (!colors.contains(Constant.Color.Green) && m.isBasic() && m.mana().equals("G")) {
             colors.add(Constant.Color.Green);
-        if (!colors.contains(Constant.Color.Red) && m.isBasic() && m.mana().equals("R"))
+        }
+        if (!colors.contains(Constant.Color.Red) && m.isBasic() && m.mana().equals("R")) {
             colors.add(Constant.Color.Red);
-        if (!colors.contains(Constant.Color.Blue) && m.isBasic() && m.mana().equals("U"))
+        }
+        if (!colors.contains(Constant.Color.Blue) && m.isBasic() && m.mana().equals("U")) {
             colors.add(Constant.Color.Blue);
-        if (!colors.contains(Constant.Color.Colorless) && m.isBasic() && m.mana().equals("1"))
+        }
+        if (!colors.contains(Constant.Color.Colorless) && m.isBasic() && m.mana().equals("1")) {
             colors.add(Constant.Color.Colorless);
+        }
 
         return colors;
     }
 
     /**
-     * <p>getAvailableMana.</p>
-     *
+     * <p>
+     * getAvailableMana.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    static public CardList getAvailableMana() {
+    public static CardList getAvailableMana() {
         return getAvailableMana(AllZone.getComputerPlayer());
-    }//getAvailableMana()
+    }// getAvailableMana()
 
-    //gets available mana sources and sorts them
+    // gets available mana sources and sorts them
     /**
-     * <p>getAvailableMana.</p>
-     *
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * getAvailableMana.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList getAvailableMana(final Player player) {
+    public static CardList getAvailableMana(final Player player) {
         CardList list = player.getCardsIn(Zone.Battlefield);
         CardList manaSources = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 for (Ability_Mana am : c.getAIPlayableMana()) {
                     am.setActivatingPlayer(player);
-                    if (am.canPlay()) return true;
+                    if (am.canPlay()) {
+                        return true;
+                    }
                 }
 
                 return false;
             }
-        });//CardListFilter
+        });// CardListFilter
 
         CardList sortedManaSources = new CardList();
-        
-        // 1. Use lands that can only produce colorless mana without drawback/cost first
+
+        // 1. Use lands that can only produce colorless mana without
+        // drawback/cost first
         for (int i = 0; i < manaSources.size(); i++) {
             Card card = manaSources.get(i);
 
-            if (card.isCreature() || card.isEnchanted()) continue; //don't use creatures before other permanents
+            if (card.isCreature() || card.isEnchanted())
+             {
+                continue; // don't use creatures before other permanents
+            }
 
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
@@ -658,33 +794,42 @@ public class ComputerUtil {
                 Cost cost = m.getPayCosts();
                 needsLimitedResources |= !cost.isReusuableResource();
 
-                //if the AI can't pay the additional costs skip the mana ability
+                // if the AI can't pay the additional costs skip the mana
+                // ability
                 m.setActivatingPlayer(AllZone.getComputerPlayer());
                 if (cost != null) {
-                    if (!canPayAdditionalCosts(m, player))
+                    if (!canPayAdditionalCosts(m, player)) {
                         continue;
+                    }
                 }
 
-                //don't use abilities with dangerous drawbacks
+                // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAI_Drawback())
+                    if (!m.getSubAbility().chkAI_Drawback()) {
                         continue;
-                    needsLimitedResources = true; //TODO: check for good drawbacks (gainLife)
+                    }
+                    needsLimitedResources = true; // TODO: check for good
+                                                  // drawbacks (gainLife)
                 }
                 usableManaAbilities++;
             }
-            
-            //use lands that can only produce colorless mana first
-            if (usableManaAbilities == 1 && !needsLimitedResources && manaAbilities.get(0).mana().equals("1"))
-            	sortedManaSources.add(card); 	
+
+            // use lands that can only produce colorless mana first
+            if (usableManaAbilities == 1 && !needsLimitedResources && manaAbilities.get(0).mana().equals("1")) {
+                sortedManaSources.add(card);
+            }
         }
 
-        // 2. Search for mana sources that have a certain number of mana abilities (start with 1 and go up to 5) and no drawback/costs
-        for (int number = 1; number < 6; number++)
+        // 2. Search for mana sources that have a certain number of mana
+        // abilities (start with 1 and go up to 5) and no drawback/costs
+        for (int number = 1; number < 6; number++) {
             for (int i = 0; i < manaSources.size(); i++) {
                 Card card = manaSources.get(i);
 
-                if (card.isCreature() || card.isEnchanted()) continue; //don't use creatures before other permanents
+                if (card.isCreature() || card.isEnchanted())
+                 {
+                    continue; // don't use creatures before other permanents
+                }
 
                 int usableManaAbilities = 0;
                 boolean needsLimitedResources = false;
@@ -694,48 +839,61 @@ public class ComputerUtil {
 
                     Cost cost = m.getPayCosts();
                     needsLimitedResources |= !cost.isReusuableResource();
-                    //if the AI can't pay the additional costs skip the mana ability
+                    // if the AI can't pay the additional costs skip the mana
+                    // ability
                     if (cost != null) {
-                        if (!canPayAdditionalCosts(m, player))
+                        if (!canPayAdditionalCosts(m, player)) {
                             continue;
+                        }
                     }
 
-                    //don't use abilities with dangerous drawbacks
+                    // don't use abilities with dangerous drawbacks
                     if (m.getSubAbility() != null) {
-                        if (!m.getSubAbility().chkAI_Drawback())
+                        if (!m.getSubAbility().chkAI_Drawback()) {
                             continue;
-                        needsLimitedResources = true; //TODO: check for good drawbacks (gainLife)
+                        }
+                        needsLimitedResources = true; // TODO: check for good
+                                                      // drawbacks (gainLife)
                     }
                     usableManaAbilities++;
                 }
 
-                if (usableManaAbilities == number && !needsLimitedResources && !sortedManaSources.contains(card))
+                if (usableManaAbilities == number && !needsLimitedResources && !sortedManaSources.contains(card)) {
                     sortedManaSources.add(card);
+                }
             }
+        }
 
-        //Add the rest
+        // Add the rest
         for (int j = 0; j < manaSources.size(); j++) {
-            if (!sortedManaSources.contains(manaSources.get(j)))
+            if (!sortedManaSources.contains(manaSources.get(j))) {
                 sortedManaSources.add(manaSources.get(j));
+            }
         }
 
         return sortedManaSources;
-    }//getAvailableMana()
+    }// getAvailableMana()
 
     // sorts the most needed mana abilities to come first
     /**
-     * <p>sortForNeeded.</p>
-     *
-     * @param cost a {@link forge.card.mana.ManaCost} object.
-     * @param manaAbilities a {@link java.util.ArrayList} object.
-     * @param player a {@link forge.Player} object.
+     * <p>
+     * sortForNeeded.
+     * </p>
+     * 
+     * @param cost
+     *            a {@link forge.card.mana.ManaCost} object.
+     * @param manaAbilities
+     *            a {@link java.util.ArrayList} object.
+     * @param player
+     *            a {@link forge.Player} object.
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    static public ArrayList<Ability_Mana> sortForNeeded(ManaCost cost, ArrayList<Ability_Mana> manaAbilities, Player player) {
+    public static ArrayList<Ability_Mana> sortForNeeded(final ManaCost cost, final ArrayList<Ability_Mana> manaAbilities,
+            final Player player) {
 
         ArrayList<String> colors;
-        
+
         ArrayList<String> colorsNeededToAvoidNegativeEffect = cost.getManaNeededToAvoidNegativeEffect();
 
         ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
@@ -751,8 +909,8 @@ public class ComputerUtil {
                     res.add(am);
                     break;
                 }
-                for(String col : colorsNeededToAvoidNegativeEffect) {
-                    if(col.equalsIgnoreCase(colors.get(j))
+                for (String col : colorsNeededToAvoidNegativeEffect) {
+                    if (col.equalsIgnoreCase(colors.get(j))
                             || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
                         res.add(am);
                     }
@@ -762,7 +920,9 @@ public class ComputerUtil {
 
         for (Ability_Mana am : manaAbilities) {
 
-            if (res.contains(am)) break;
+            if (res.contains(am)) {
+                break;
+            }
 
             colors = getProduceableColors(am, player);
             for (int j = 0; j < colors.size(); j++) {
@@ -770,8 +930,8 @@ public class ComputerUtil {
                     res.add(am);
                     break;
                 }
-                for(String col : colorsNeededToAvoidNegativeEffect) {
-                    if(col.equalsIgnoreCase(colors.get(j))
+                for (String col : colorsNeededToAvoidNegativeEffect) {
+                    if (col.equalsIgnoreCase(colors.get(j))
                             || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
                         res.add(am);
                     }
@@ -782,55 +942,59 @@ public class ComputerUtil {
         return res;
     }
 
-
-    //plays a land if one is available
+    // plays a land if one is available
     /**
-     * <p>chooseLandsToPlay.</p>
-     *
+     * <p>
+     * chooseLandsToPlay.
+     * </p>
+     * 
      * @return a boolean.
      */
-    static public boolean chooseLandsToPlay() {
+    public static boolean chooseLandsToPlay() {
         Player computer = AllZone.getComputerPlayer();
         CardList landList = computer.getCardsIn(Zone.Hand);
         landList = landList.filter(CardListFilter.lands);
 
-
         CardList lands = computer.getCardsIn(Zone.Graveyard).getType("Land");
-        for (Card crd : lands){
-        	if (crd.isLand() && crd.hasStartOfKeyword("May be played"))
-        		landList.add(crd);
+        for (Card crd : lands) {
+            if (crd.isLand() && crd.hasStartOfKeyword("May be played")) {
+                landList.add(crd);
+            }
         }
 
         landList = landList.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     String needsToPlay = c.getSVar("NeedsToPlay");
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
                     list = list.getValidCards(needsToPlay.split(","), c.getController(), c);
-                    if (list.isEmpty()) return false;
-                }
-                if (c.isType("Legendary")
-                        && !c.getName().equals("Flagstones of Trokair")) {
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    if (list.containsName(c.getName()))
+                    if (list.isEmpty()) {
                         return false;
+                    }
                 }
-                
-                //don't play the land if it has cycling and enough lands are available
+                if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
+                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                    if (list.containsName(c.getName())) {
+                        return false;
+                    }
+                }
+
+                // don't play the land if it has cycling and enough lands are
+                // available
                 ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
-                for (SpellAbility sa : spellAbilities) 
-                	if (sa.isCycling()) {
-                		CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                for (SpellAbility sa : spellAbilities)
+                    if (sa.isCycling()) {
+                        CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                         CardList lands = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                         lands.addAll(hand);
                         lands = lands.getType("Land");
 
-                        if (lands.size() >= Math.max(hand.getHighestConvertedManaCost(), 6))
+                        if (lands.size() >= Math.max(hand.getHighestConvertedManaCost(), 6)) {
                             return false;
-                	}
-                		
-                
+                        }
+                    }
+
                 return true;
             }
         });
@@ -839,30 +1003,37 @@ public class ComputerUtil {
             // play as many lands as you can
             int ix = 0;
             while (landList.get(ix).isReflectedLand() && (ix + 1 < landList.size())) {
-                // Skip through reflected lands. Choose last if they are all reflected.
+                // Skip through reflected lands. Choose last if they are all
+                // reflected.
                 ix++;
             }
 
             Card land = landList.get(ix);
             landList.remove(ix);
             computer.playLand(land);
-            
-            if (AllZone.getStack().size() != 0)
-            	return true;
+
+            if (AllZone.getStack().size() != 0) {
+                return true;
+            }
         }
         return false;
     }
 
     /**
-     * <p>getCardPreference.</p>
-     *
-     * @param activate a {@link forge.Card} object.
-     * @param pref a {@link java.lang.String} object.
-     * @param typeList a {@link forge.CardList} object.
+     * <p>
+     * getCardPreference.
+     * </p>
+     * 
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param pref
+     *            a {@link java.lang.String} object.
+     * @param typeList
+     *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    static public Card getCardPreference(Card activate, String pref, CardList typeList) {
-        
+    public static Card getCardPreference(final Card activate, final String pref, final CardList typeList) {
+
         if (activate != null) {
             String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
@@ -874,10 +1045,11 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) { // search for permanents with SacMe
-            for (int ip = 0; ip < 9; ip++) {    // priority 0 is the lowest, priority 5 the highest
+            for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
+                                             // priority 5 the highest
                 final int priority = 9 - ip;
                 CardList SacMeList = typeList.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return (!c.getSVar("SacMe").equals("") && Integer.parseInt(c.getSVar("SacMe")) == priority);
                     }
                 });
@@ -887,12 +1059,14 @@ public class ComputerUtil {
                 }
             }
         }
-        
-        if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
-            for (int ip = 0; ip < 9; ip++) {    // priority 0 is the lowest, priority 5 the highest
+
+        if (pref.contains("DiscardCost")) { // search for permanents with
+                                            // DiscardMe
+            for (int ip = 0; ip < 9; ip++) { // priority 0 is the lowest,
+                                             // priority 5 the highest
                 final int priority = 9 - ip;
                 CardList SacMeList = typeList.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return (!c.getSVar("DiscardMe").equals("") && Integer.parseInt(c.getSVar("DiscardMe")) == priority);
                     }
                 });
@@ -902,27 +1076,36 @@ public class ComputerUtil {
                 }
             }
         }
-        
+
         return null;
     }
 
     /**
-     * <p>chooseSacrificeType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseSacrificeType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseSacrificeType(String type, Card activate, Card target, int amount) {
+    public static CardList chooseSacrificeType(final String type, final Card activate, final Card target, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
         if (target != null && target.getController().isComputer() && typeList.contains(target))
-            typeList.remove(target);        // don't sacrifice the card we're pumping
+         {
+            typeList.remove(target); // don't sacrifice the card we're pumping
+        }
 
-        if (typeList.size() < amount)
+        if (typeList.size() < amount) {
             return null;
+        }
 
         CardList sacList = new CardList();
         int count = 0;
@@ -933,30 +1116,37 @@ public class ComputerUtil {
                 sacList.add(prefCard);
                 typeList.remove(prefCard);
                 count++;
-            } else
+            } else {
                 break;
+            }
         }
 
         CardListUtil.sortAttackLowFirst(typeList);
 
-        for (int i = count; i < amount; i++) sacList.add(typeList.get(i));
+        for (int i = count; i < amount; i++) {
+            sacList.add(typeList.get(i));
+        }
         return sacList;
     }
-    
-
 
     /**
-     * <p>AI_discardNumType.</p>
-     *
-     * @param numDiscard a int.
-     * @param uTypes     an array of {@link java.lang.String} objects. May be null for no restrictions.
-     * @param sa         a {@link forge.card.spellability.SpellAbility} object.
+     * <p>
+     * AI_discardNumType.
+     * </p>
+     * 
+     * @param numDiscard
+     *            a int.
+     * @param uTypes
+     *            an array of {@link java.lang.String} objects. May be null for
+     *            no restrictions.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a CardList of discarded cards.
      */
-    static public CardList AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
+    public static CardList AI_discardNumType(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
         Card sourceCard = null;
-        
+
         if (uTypes != null && sa != null) {
             hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
@@ -964,13 +1154,13 @@ public class ComputerUtil {
             sourceCard = sa.getSourceCard();
         }
 
-        if (hand.size() < numDiscard){
+        if (hand.size() < numDiscard) {
             return null;
         }
-        
+
         CardList discardList = new CardList();
         int count = 0;
-        
+
         // look for good discards
         while (count < numDiscard) {
             Card prefCard = getCardPreference(sourceCard, "DiscardCost", hand);
@@ -978,13 +1168,14 @@ public class ComputerUtil {
                 discardList.add(prefCard);
                 hand.remove(prefCard);
                 count++;
-            } else
+            } else {
                 break;
+            }
         }
-        
+
         int discardsLeft = numDiscard - count;
-        
-        // chose rest 
+
+        // chose rest
         for (int i = 0; i < discardsLeft; i++) {
             if (hand.size() <= 0) {
                 continue;
@@ -992,154 +1183,211 @@ public class ComputerUtil {
             CardList landsInPlay = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Land");
             if (landsInPlay.size() > 5) {
                 CardList landsInHand = hand.getType("Land");
-                if (landsInHand.size() > 0) {       //discard lands
+                if (landsInHand.size() > 0) { // discard lands
                     discardList.add(landsInHand.get(0));
                     hand.remove(landsInHand.get(0));
-                } else {                            //discard low costed stuff
-                    CardListUtil.sortCMC(hand); 
+                } else { // discard low costed stuff
+                    CardListUtil.sortCMC(hand);
                     hand.reverse();
                     discardList.add(hand.get(0));
                     hand.remove(hand.get(0));
                 }
-            } else {                                //discard high costed stuff
+            } else { // discard high costed stuff
                 CardListUtil.sortCMC(hand);
                 discardList.add(hand.get(0));
                 hand.remove(hand.get(0));
             }
         }
-        
+
         return discardList;
     }
 
     /**
-     * <p>chooseExileType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseExileType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseExileType(String type, Card activate, Card target, int amount) {
+    public static CardList chooseExileType(final String type, final Card activate, final Card target, final int amount) {
         return chooseExileFrom(Constant.Zone.Battlefield, type, activate, target, amount);
     }
 
     /**
-     * <p>chooseExileFromHandType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseExileFromHandType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseExileFromHandType(String type, Card activate, Card target, int amount) {
+    public static CardList chooseExileFromHandType(final String type, final Card activate, final Card target, final int amount) {
         return chooseExileFrom(Constant.Zone.Hand, type, activate, target, amount);
     }
 
     /**
-     * <p>chooseExileFromGraveType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseExileFromGraveType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseExileFromGraveType(String type, Card activate, Card target, int amount) {
+    public static CardList chooseExileFromGraveType(final String type, final Card activate, final Card target, final int amount) {
         return chooseExileFrom(Constant.Zone.Graveyard, type, activate, target, amount);
     }
 
     /**
-     * <p>chooseExileFrom.</p>
-     *
-     * @param zone a {@link java.lang.String} object.
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseExileFrom.
+     * </p>
+     * 
+     * @param zone
+     *            a {@link java.lang.String} object.
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseExileFrom(Constant.Zone zone, String type, Card activate, Card target, int amount) {
+    public static CardList chooseExileFrom(final Constant.Zone zone, final String type, final Card activate, final Card target, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(zone);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
         if (target != null && target.getController().isComputer() && typeList.contains(target))
-            typeList.remove(target);    // don't exile the card we're pumping
+         {
+            typeList.remove(target); // don't exile the card we're pumping
+        }
 
-        if (typeList.size() < amount)
+        if (typeList.size() < amount) {
             return null;
+        }
 
         CardListUtil.sortAttackLowFirst(typeList);
         CardList exileList = new CardList();
 
-        for (int i = 0; i < amount; i++) exileList.add(typeList.get(i));
+        for (int i = 0; i < amount; i++) {
+            exileList.add(typeList.get(i));
+        }
         return exileList;
     }
 
     /**
-     * <p>chooseTapType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param tap a boolean.
-     * @param amount a int.
+     * <p>
+     * chooseTapType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param tap
+     *            a boolean.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseTapType(String type, Card activate, boolean tap, int amount) {
+    public static CardList chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 
-        //is this needed?
+        // is this needed?
         typeList = typeList.filter(CardListFilter.untapped);
 
-        if (tap)
+        if (tap) {
             typeList.remove(activate);
+        }
 
-        if (typeList.size() < amount)
+        if (typeList.size() < amount) {
             return null;
+        }
 
         CardListUtil.sortAttackLowFirst(typeList);
 
         CardList tapList = new CardList();
 
-        for (int i = 0; i < amount; i++) tapList.add(typeList.get(i));
+        for (int i = 0; i < amount; i++) {
+            tapList.add(typeList.get(i));
+        }
         return tapList;
     }
 
     /**
-     * <p>chooseReturnType.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param activate a {@link forge.Card} object.
-     * @param target a {@link forge.Card} object.
-     * @param amount a int.
+     * <p>
+     * chooseReturnType.
+     * </p>
+     * 
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    static public CardList chooseReturnType(String type, Card activate, Card target, int amount) {
+    public static CardList chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
         CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
-        if (target != null && target.getController().isComputer() && typeList.contains(target)) // don't bounce the card we're pumping
+        if (target != null && target.getController().isComputer() && typeList.contains(target)) {
+            // bounce
+                                                                                                // the
+                                                                                                // card
+                                                                                                // we're
+                                                                                                // pumping
             typeList.remove(target);
+        }
 
-        if (typeList.size() < amount)
+        if (typeList.size() < amount) {
             return null;
+        }
 
         CardListUtil.sortAttackLowFirst(typeList);
         CardList returnList = new CardList();
 
-        for (int i = 0; i < amount; i++) returnList.add(typeList.get(i));
+        for (int i = 0; i < amount; i++) {
+            returnList.add(typeList.get(i));
+        }
         return returnList;
     }
 
     /**
-     * <p>getPossibleAttackers.</p>
-     *
+     * <p>
+     * getPossibleAttackers.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
-    static public CardList getPossibleAttackers() {
+    public static CardList getPossibleAttackers() {
         CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c);
             }
         });
@@ -1147,11 +1395,13 @@ public class ComputerUtil {
     }
 
     /**
-     * <p>getAttackers.</p>
-     *
+     * <p>
+     * getAttackers.
+     * </p>
+     * 
      * @return a {@link forge.Combat} object.
      */
-    static public Combat getAttackers() {
+    public static Combat getAttackers() {
         ComputerUtil_Attack2 att = new ComputerUtil_Attack2(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield),
                 AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield), AllZone.getHumanPlayer().getLife());
 
@@ -1159,64 +1409,77 @@ public class ComputerUtil {
     }
 
     /**
-     * <p>getBlockers.</p>
-     *
+     * <p>
+     * getBlockers.
+     * </p>
+     * 
      * @return a {@link forge.Combat} object.
      */
-    static public Combat getBlockers() {
+    public static Combat getBlockers() {
         CardList blockers = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
         return ComputerUtil_Block2.getBlockers(AllZone.getCombat(), blockers);
     }
 
     /**
-     * <p>sortSpellAbilityByCost.</p>
-     *
-     * @param sa an array of {@link forge.card.spellability.SpellAbility} objects.
+     * <p>
+     * sortSpellAbilityByCost.
+     * </p>
+     * 
+     * @param sa
+     *            an array of {@link forge.card.spellability.SpellAbility}
+     *            objects.
      */
-    static void sortSpellAbilityByCost(SpellAbility sa[]) {
-        //sort from highest cost to lowest
-        //we want the highest costs first
+    static void sortSpellAbilityByCost(final SpellAbility[] sa) {
+        // sort from highest cost to lowest
+        // we want the highest costs first
         Comparator<SpellAbility> c = new Comparator<SpellAbility>() {
-            public int compare(SpellAbility a, SpellAbility b) {
+            public int compare(final SpellAbility a, final SpellAbility b) {
                 int a1 = CardUtil.getConvertedManaCost(a);
                 int b1 = CardUtil.getConvertedManaCost(b);
 
-                //puts creatures in front of spells
-                if (a.getSourceCard().isCreature())
+                // puts creatures in front of spells
+                if (a.getSourceCard().isCreature()) {
                     a1 += 1;
+                }
 
-                if (b.getSourceCard().isCreature())
+                if (b.getSourceCard().isCreature()) {
                     b1 += 1;
+                }
 
-                //sort planeswalker abilities for ultimate
-                if(a.getRestrictions().getPlaneswalker() && b.getRestrictions().getPlaneswalker()) {
-                    if(a.getAbilityFactory() != null && a.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+                // sort planeswalker abilities for ultimate
+                if (a.getRestrictions().getPlaneswalker() && b.getRestrictions().getPlaneswalker()) {
+                    if (a.getAbilityFactory() != null && a.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
                         a1 += 1;
-                    }
-                    else if(b.getAbilityFactory() != null && b.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+                    } else if (b.getAbilityFactory() != null
+                            && b.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
                         b1 += 1;
                     }
                 }
 
                 return b1 - a1;
             }
-        };//Comparator
+        };// Comparator
         Arrays.sort(sa, c);
-    }//sortSpellAbilityByCost()
+    }// sortSpellAbilityByCost()
 
     /**
-     * <p>sacrificePermanents.</p>
-     *
-     * @param amount a int.
-     * @param list a {@link forge.CardList} object.
+     * <p>
+     * sacrificePermanents.
+     * </p>
+     * 
+     * @param amount
+     *            a int.
+     * @param list
+     *            a {@link forge.CardList} object.
      */
-    static public CardList sacrificePermanents(int amount, CardList list) {
+    public static CardList sacrificePermanents(final int amount, final CardList list) {
         CardList sacList = new CardList();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();
-        if (max > amount)
+        if (max > amount) {
             max = amount;
+        }
 
         CardListUtil.sortCMC(list);
         list.reverse();
@@ -1254,42 +1517,53 @@ public class ComputerUtil {
     }
 
     /**
-     * <p>canRegenerate.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * canRegenerate.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canRegenerate(Card card) {
+    public static boolean canRegenerate(final Card card) {
 
-        if (card.hasKeyword("CARDNAME can't be regenerated.")) return false;
+        if (card.hasKeyword("CARDNAME can't be regenerated.")) {
+            return false;
+        }
 
         Player controller = card.getController();
         CardList l = controller.getCardsIn(Zone.Battlefield);
         for (Card c : l)
-            for (SpellAbility sa : c.getSpellAbility()){
-                //This try/catch should fix the "computer is thinking" bug
+            for (SpellAbility sa : c.getSpellAbility()) {
+                // This try/catch should fix the "computer is thinking" bug
                 try {
-                	AbilityFactory af = sa.getAbilityFactory();
-                	
-                	if (!sa.isAbility() || af == null || !af.getAPI().equals("Regenerate"))
-                		continue;	// Not a Regenerate ability
-                	
-                	//sa.setActivatingPlayer(controller);
-            		if (!(sa.canPlay() && ComputerUtil.canPayCost(sa, controller)))
-            			continue;	// Can't play ability
-            		
-            		HashMap<String, String> mapParams = af.getMapParams();
-            		
-            		Target tgt = sa.getTarget();
-                    if (tgt != null){
-                    	if (AllZoneUtil.getCardsIn(Zone.Battlefield).getValidCards(tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card))
-							return true;
+                    AbilityFactory af = sa.getAbilityFactory();
+
+                    if (!sa.isAbility() || af == null || !af.getAPI().equals("Regenerate"))
+                     {
+                        continue; // Not a Regenerate ability
                     }
-                    else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
+
+                    // sa.setActivatingPlayer(controller);
+                    if (!(sa.canPlay() && ComputerUtil.canPayCost(sa, controller)))
+                     {
+                        continue; // Can't play ability
+                    }
+
+                    HashMap<String, String> mapParams = af.getMapParams();
+
+                    Target tgt = sa.getTarget();
+                    if (tgt != null) {
+                        if (AllZoneUtil.getCardsIn(Zone.Battlefield)
+                                .getValidCards(tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                            return true;
+                        }
+                    } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
+                            .contains(card)) {
                         return true;
-                    
-                } 
-        		catch (Exception ex) {
+                    }
+
+                } catch (Exception ex) {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
                 }
             }
@@ -1298,12 +1572,15 @@ public class ComputerUtil {
     }
 
     /**
-     * <p>possibleDamagePrevention.</p>
-     *
-     * @param card a {@link forge.Card} object.
+     * <p>
+     * possibleDamagePrevention.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
      * @return a int.
      */
-    public static int possibleDamagePrevention(Card card) {
+    public static int possibleDamagePrevention(final Card card) {
 
         int prevented = 0;
 
@@ -1312,19 +1589,25 @@ public class ComputerUtil {
         for (Card c : l)
             for (SpellAbility sa : c.getSpellAbility())
                 // if SA is from AF_Counter don't add to getPlayable
-                //This try/catch should fix the "computer is thinking" bug
+                // This try/catch should fix the "computer is thinking" bug
                 try {
                     if (sa.getAbilityFactory() != null && sa.isAbility()) {
                         AbilityFactory af = sa.getAbilityFactory();
                         HashMap<String, String> mapParams = af.getMapParams();
-                        if (mapParams.get("AB").equals("PreventDamage") && sa.canPlay() && ComputerUtil.canPayCost(sa, controller)) {
-                            if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
-                                prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"), sa);
+                        if (mapParams.get("AB").equals("PreventDamage") && sa.canPlay()
+                                && ComputerUtil.canPayCost(sa, controller)) {
+                            if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
+                                    .contains(card)) {
+                                prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"),
+                                        sa);
+                            }
                             Target tgt = sa.getTarget();
                             if (tgt != null) {
-                                if (AllZoneUtil.getCardsIn(Zone.Battlefield).getValidCards(tgt.getValidTgts(), controller, af.getHostCard())
-                                        .contains(card))
-                                    prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"), sa);
+                                if (AllZoneUtil.getCardsIn(Zone.Battlefield)
+                                        .getValidCards(tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
+                                    prevented += AbilityFactory.calculateAmount(af.getHostCard(),
+                                            mapParams.get("Amount"), sa);
+                                }
 
                             }
                         }

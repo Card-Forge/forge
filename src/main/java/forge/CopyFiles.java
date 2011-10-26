@@ -1,41 +1,65 @@
 package forge;
 
-
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
+
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
- * <p>CopyFiles class.</p>
- *
+ * <p>
+ * CopyFiles class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstants {
 
     private List<File> FileList;
+
+    /** The j lb. */
     JLabel jLb;
+
+    /** The j b. */
     JProgressBar jB;
+
+    /** The j check. */
     JCheckBox jCheck;
+
+    /** The j source. */
     JButton jSource;
+
+    /** The count. */
     int count;
 
     /**
-     * <p>Constructor for CopyFiles.</p>
-     *
-     * @param FileList a {@link java.util.List} object.
-     * @param jLabelTotalFiles a {@link javax.swing.JLabel} object.
-     * @param Jbar a {@link javax.swing.JProgressBar} object.
-     * @param jCheckBox a {@link javax.swing.JCheckBox} object.
-     * @param jButtonSource a {@link javax.swing.JButton} object.
+     * <p>
+     * Constructor for CopyFiles.
+     * </p>
+     * 
+     * @param FileList
+     *            a {@link java.util.List} object.
+     * @param jLabelTotalFiles
+     *            a {@link javax.swing.JLabel} object.
+     * @param Jbar
+     *            a {@link javax.swing.JProgressBar} object.
+     * @param jCheckBox
+     *            a {@link javax.swing.JCheckBox} object.
+     * @param jButtonSource
+     *            a {@link javax.swing.JButton} object.
      */
-    public CopyFiles(List<File> FileList, JLabel jLabelTotalFiles, JProgressBar Jbar, JCheckBox jCheckBox, JButton jButtonSource) {
+    public CopyFiles(final List<File> FileList, JLabel jLabelTotalFiles, JProgressBar Jbar, JCheckBox jCheckBox,
+            JButton jButtonSource) {
         this.FileList = FileList;
         jLb = jLabelTotalFiles;
         jB = Jbar;
@@ -45,7 +69,7 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
 
     /** {@inheritDoc} */
     @Override
-    protected Void doInBackground() {
+    protected final Void doInBackground() {
         for (int i = 0; i < this.FileList.size(); i++) {
             publish();
             String cName, name, source;
@@ -66,7 +90,9 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
                 int length;
                 while (fis.available() > 0) {
                     length = fis.read(buff);
-                    if (length > 0) fos.write(buff, 0, length);
+                    if (length > 0) {
+                        fos.write(buff, 0, length);
+                    }
                 }
                 fos.flush();
                 fis.close();
@@ -85,7 +111,7 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
 
     /** {@inheritDoc} */
     @Override
-    protected void done() {
+    protected final void done() {
         jLb.setText("All files were copied successfully.");
         jB.setIndeterminate(false);
         jCheck.setEnabled(true);

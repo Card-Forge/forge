@@ -1,33 +1,46 @@
 package forge;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
-import forge.properties.NewConstants.QUEST;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
+import java.awt.Point;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
+import forge.properties.NewConstants.QUEST;
+
 /**
- * <p>Gui_DownloadPrices class.</p>
- *
+ * <p>
+ * Gui_DownloadPrices class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class Gui_DownloadPrices extends JFrame {
 
-    /** Constant <code>serialVersionUID=1L</code> */
+    /** Constant <code>serialVersionUID=1L</code>. */
     private static final long serialVersionUID = 1L;
     private JPanel jContentPane = null;
     private JButton jButton = null;
 
     /**
-     * This is the default constructor
+     * This is the default constructor.
      */
     public Gui_DownloadPrices() {
         super();
@@ -35,7 +48,7 @@ public class Gui_DownloadPrices extends JFrame {
     }
 
     /**
-     * This method initializes this
+     * This method initializes this.
      */
     private void initialize() {
         this.setSize(386, 200);
@@ -44,8 +57,8 @@ public class Gui_DownloadPrices extends JFrame {
     }
 
     /**
-     * This method initializes jContentPane
-     *
+     * This method initializes jContentPane.
+     * 
      * @return javax.swing.JPanel
      */
     private JPanel getJContentPane() {
@@ -58,8 +71,8 @@ public class Gui_DownloadPrices extends JFrame {
     }
 
     /**
-     * This method initializes jButton
-     *
+     * This method initializes jButton.
+     * 
      * @return javax.swing.JButton
      */
     private JButton getJButton() {
@@ -70,9 +83,10 @@ public class Gui_DownloadPrices extends JFrame {
             jButton.setSize(158, 89);
 
             jButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent e) {
-                    if (jButton.getText().equals("Done!"))
+                public void actionPerformed(final java.awt.event.ActionEvent e) {
+                    if (jButton.getText().equals("Done!")) {
                         Gui_DownloadPrices.this.dispose();
+                    }
 
                     BufferedInputStream in = null;
                     BufferedOutputStream out = null;
@@ -85,13 +99,11 @@ public class Gui_DownloadPrices extends JFrame {
                     String s = "Downloading";
 
                     try {
-                        in = new BufferedInputStream(new URL(url)
-                                .openConnection(p).getInputStream());
+                        in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                         out = new BufferedOutputStream(new FileOutputStream(f));
 
                         jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.DOWNLOADING));
                         jContentPane.paintImmediately(jButton.getBounds());
-
 
                         int len = 0;
                         while ((len = in.read(buf)) != -1) {
@@ -100,8 +112,7 @@ public class Gui_DownloadPrices extends JFrame {
                             if (++x % 50 == 0) {
                                 s += ".";
                                 jButton.setText(s);
-                                jContentPane.paintImmediately(jButton
-                                        .getBounds());
+                                jContentPane.paintImmediately(jButton.getBounds());
 
                                 if (x >= 300) {
                                     x = 0;
@@ -116,14 +127,16 @@ public class Gui_DownloadPrices extends JFrame {
                         return;
                     } finally {
                         try {
-                            if (in != null)
+                            if (in != null) {
                                 in.close();
-                            if (out != null)
+                            }
+                            if (out != null) {
                                 out.close();
+                            }
                         } catch (IOException ex) {
                             return;
                         }
-                    }// while - read and write file
+                    } // while - read and write file
 
                     FileReader fr = null;
                     FileWriter fw = null;
@@ -144,7 +157,7 @@ public class Gui_DownloadPrices extends JFrame {
                         x = 0;
                         s = "Compiling";
                         while (line != null && !line.equals("")) {
-                            String ll[] = line.split("\\|");
+                            String[] ll = line.split("\\|");
 
                             if (ll[0].contains("(")) {
                                 int indx = ll[0].indexOf(" (");
@@ -160,21 +173,25 @@ public class Gui_DownloadPrices extends JFrame {
 
                                 if (cp >= inp) {
                                     fScl = 1 - (float) inp / (float) cp;
-                                    if (fScl > .333)
+                                    if (fScl > .333) {
                                         cp = cp / 2;
+                                    }
                                 } else {
                                     fScl = 1 - (float) cp / (float) inp;
-                                    if (fScl > .333)
+                                    if (fScl > .333) {
                                         inp = inp / 2;
+                                    }
                                 }
 
                                 int ap = (cp + inp) / 2;
-                                if (ap < 7)
+                                if (ap < 7) {
                                     ap += 10;
+                                }
                                 prices.put(ll[0], ap);
                             } else {
-                                if (inp < 7)
+                                if (inp < 7) {
                                     inp += 10;
+                                }
 
                                 prices.put(ll[0], inp);
                             }
@@ -185,8 +202,7 @@ public class Gui_DownloadPrices extends JFrame {
                             if (++x % 100 == 0) {
                                 s += ".";
                                 jButton.setText(s);
-                                jContentPane.paintImmediately(jButton
-                                        .getBounds());
+                                jContentPane.paintImmediately(jButton.getBounds());
 
                                 if (x >= 500) {
                                     x = 0;
@@ -195,14 +211,12 @@ public class Gui_DownloadPrices extends JFrame {
                             }
                         }
 
-                        String pfn = ForgeProps.getFile(QUEST.PRICE)
-                                .getAbsolutePath();
+                        String pfn = ForgeProps.getFile(QUEST.PRICE).getAbsolutePath();
                         String pfnb = pfn.replace(".txt", ".bak");
                         File ff = new File(pfn);
                         ff.renameTo(new File(pfnb));
 
-                        fw = new FileWriter(ForgeProps
-                                .getFile(QUEST.PRICE));
+                        fw = new FileWriter(ForgeProps.getFile(QUEST.PRICE));
                         BufferedWriter outBW = new BufferedWriter(fw);
 
                         // Collection<String> keys = prices.keySet();
@@ -213,24 +227,22 @@ public class Gui_DownloadPrices extends JFrame {
                         for (int i = 0; i < keys.size(); i++) {
                             // keys.add(key);
                             String k = keys.get(i);
-                            if (k.equals("Plains") || k.equals("Island")
-                                    || k.equals("Swamp")
-                                    || k.equals("Mountain")
+                            if (k.equals("Plains") || k.equals("Island") || k.equals("Swamp") || k.equals("Mountain")
                                     || k.equals("Forest"))
+                            {
                                 outBW.write(k + "=5\r\n");
-
-                            else if (k.equals("Snow-Covered Plains")
-                                    || k.equals("Snow-Covered Island")
-                                    || k.equals("Snow-Covered Swamp")
-                                    || k.equals("Snow-Covered Mountain")
+                            } else if (k.equals("Snow-Covered Plains") || k.equals("Snow-Covered Island")
+                                    || k.equals("Snow-Covered Swamp") || k.equals("Snow-Covered Mountain")
                                     || k.equals("Snow-Covered Forest"))
+                            {
                                 outBW.write(k + "=10\r\n");
-                            else
-                                outBW.write(keys.get(i) + "="
-                                        + prices.get(keys.get(i)) + "\r\n");
+                            } else {
+                                outBW.write(keys.get(i) + "=" + prices.get(keys.get(i)) + "\r\n");
+                            }
 
-                            if (i % 100 == 0)
+                            if (i % 100 == 0) {
                                 outBW.flush();
+                            }
                         }
 
                         outBW.flush();
@@ -244,10 +256,12 @@ public class Gui_DownloadPrices extends JFrame {
                         return;
                     } finally {
                         try {
-                            if (fr != null)
+                            if (fr != null) {
                                 fr.close();
-                            if (fw != null)
+                            }
+                            if (fw != null) {
                                 fw.close();
+                            }
                         } catch (IOException ex) {
                             return;
                         }

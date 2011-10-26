@@ -66,7 +66,7 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
                 list.add(cardPlay[i]);
             }
         }
-        
+
         //add missing tokens to the list of things to download
         File filebase = ForgeProps.getFile(IMAGE_TOKEN);
         for (int i = 0; i < cardTokenLQ.length; i++) {
