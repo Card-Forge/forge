@@ -117,7 +117,7 @@ public class QuestStallManager {
      *            a {@link java.lang.String} object.
      * @return a {@link java.util.List} object.
      */
-    public static List<QuestStallPurchasable> getItems(String stallName) {
+    public static List<QuestStallPurchasable> getItems(final String stallName) {
         if (items == null) {
             buildItems();
         }
@@ -134,19 +134,19 @@ public class QuestStallManager {
 
     /** Constant <code>ALCHEMIST="Alchemist"</code>. */
     public static final String ALCHEMIST = "Alchemist";
-    
+
     /** Constant <code>BANKER="Banker"</code>. */
     public static final String BANKER = "Banker";
-    
+
     /** Constant <code>BOOKSTORE="Bookstore"</code>. */
     public static final String BOOKSTORE = "Bookstore";
-    
+
     /** Constant <code>GEAR="Gear"</code>. */
     public static final String GEAR = "Gear";
-    
+
     /** Constant <code>NURSERY="Nursery"</code>. */
     public static final String NURSERY = "Nursery";
-    
+
     /** Constant <code>PET_SHOP="Pet Shop"</code>. */
     public static final String PET_SHOP = "Pet Shop";
 

@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * <p>QuestBazaarStall class.</p>
  *
@@ -22,15 +23,24 @@ import java.util.ArrayList;
 public class QuestBazaarStall extends JPanel implements NewConstants {
     /** Constant <code>serialVersionUID=-4147745071116906043L</code> */
     private static final long serialVersionUID = -4147745071116906043L;
+    
+    /** The name. */
     String name;
+    
+    /** The stall name. */
     String stallName;
+    
+    /** The fluff. */
     String fluff;
+    
+    /** The icon. */
     ImageIcon icon;
 
 
     private JLabel creditLabel = new JLabel();
     private JPanel inventoryPanel = new JPanel();
 
+    /** The quest data. */
     protected QuestData questData = AllZone.getQuestData();
 
     /**

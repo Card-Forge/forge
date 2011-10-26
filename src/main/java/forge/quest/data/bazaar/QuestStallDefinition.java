@@ -36,7 +36,8 @@ public class QuestStallDefinition {
      * @param iconName
      *            a {@link java.lang.String} object.
      */
-    public QuestStallDefinition(final String name, final String displayName, final String fluff, final String iconName) {
+    public QuestStallDefinition(final String name,
+            final String displayName, final String fluff, final String iconName) {
         this.name = name;
         this.displayName = displayName;
         this.fluff = fluff;
