@@ -1,7 +1,13 @@
 package forge.quest.gui;
 
+import static java.util.Collections.unmodifiableList;
 
-import javax.swing.*;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -12,28 +18,30 @@ import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.CardPrinted;
 
-import java.util.List;
-
-import static java.util.Collections.unmodifiableList;
-
 /**
- * A simple JPanel that shows three columns: card list, pic, and description.. 
- *
+ * A simple JPanel that shows three columns: card list, pic, and description..
+ * 
  * @author Forge
  * @version $Id: ListChooser.java 9708 2011-08-09 19:34:12Z jendave $
  */
 @SuppressWarnings("serial")
 public class QuestWinLoseCardViewer extends JPanel {
 
-    //Data and number of choices for the list
+    // Data and number of choices for the list
     private List<CardPrinted> list;
 
-    //initialized before; listeners may be added to it
+    // initialized before; listeners may be added to it
     private JList jList;
     private CardDetailPanel detail;
     private CardPicturePanel picture;
-    
-    public QuestWinLoseCardViewer(List<CardPrinted> list) {
+
+    /**
+     * Instantiates a new quest win lose card viewer.
+     * 
+     * @param list
+     *            the list
+     */
+    public QuestWinLoseCardViewer(final List<CardPrinted> list) {
         this.list = unmodifiableList(list);
         jList = new JList(new ChooserListModel());
         detail = new CardDetailPanel(null);
@@ -42,7 +50,7 @@ public class QuestWinLoseCardViewer extends JPanel {
         this.add(new JScrollPane(jList));
         this.add(picture);
         this.add(detail);
-        this.setLayout( new java.awt.GridLayout(1, 3, 6, 0) );
+        this.setLayout(new java.awt.GridLayout(1, 3, 6, 0));
 
         // selection is here
         jList.getSelectionModel().addListSelectionListener(new SelListener());
@@ -53,14 +61,18 @@ public class QuestWinLoseCardViewer extends JPanel {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
-        public int getSize() { return list.size(); }
-        public Object getElementAt(int index) { return list.get(index); }
-    }
+        public int getSize() {
+            return list.size();
+        }
 
+        public Object getElementAt(final int index) {
+            return list.get(index);
+        }
+    }
 
     private class SelListener implements ListSelectionListener {
         private Card[] cache = null;
-        
+
         public void valueChanged(final ListSelectionEvent e) {
             int row = jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
@@ -71,15 +83,17 @@ public class QuestWinLoseCardViewer extends JPanel {
                 picture.setCard(cp);
             }
         }
-        
-        private void ensureCacheHas(int row, CardPrinted cp) {
-            if (cache == null) { cache = new Card[list.size()]; }
+
+        private void ensureCacheHas(final int row, final CardPrinted cp) {
+            if (cache == null) {
+                cache = new Card[list.size()];
+            }
             if (null == cache[row]) {
                 Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
                 card.setCurSetCode(cp.getSet());
                 card.setImageFilename(CardUtil.buildFilename(card));
                 cache[row] = card;
-            }            
+            }
         }
     }
 

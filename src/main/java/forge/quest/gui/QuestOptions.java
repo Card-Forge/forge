@@ -1,5 +1,26 @@
 package forge.quest.gui;
 
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 import forge.AllZone;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
@@ -9,22 +30,16 @@ import forge.quest.data.QuestPreferences;
 import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 /**
- * <p>Gui_QuestOptions class.</p>
- *
+ * <p>
+ * Gui_QuestOptions class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestOptions extends JFrame {
-    /** Constant <code>serialVersionUID=2018518804206822235L</code> */
+    /** Constant <code>serialVersionUID=2018518804206822235L</code>. */
     private static final long serialVersionUID = 2018518804206822235L;
 
     private QuestData questData = new QuestData();
@@ -52,7 +67,9 @@ public class QuestOptions extends JFrame {
     private JPanel jPanel3 = new JPanel();
 
     /**
-     * <p>Constructor for Gui_QuestOptions.</p>
+     * <p>
+     * Constructor for Gui_QuestOptions.
+     * </p>
      */
     public QuestOptions() {
         try {
@@ -70,19 +87,20 @@ public class QuestOptions extends JFrame {
     }
 
     /**
-     * <p>setup.</p>
+     * <p>
+     * setup.
+     * </p>
      */
     private void setup() {
-        //make the text look correct on the screen
+        // make the text look correct on the screen
         jTextArea1.setBackground(getBackground());
 
-
-        //if user closes this window, go back to "New Game" screen
+        // if user closes this window, go back to "New Game" screen
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent ev) {
+            public void windowClosing(final WindowEvent ev) {
                 QuestOptions.this.dispose();
-                
+
                 if (System.getenv("NG2") != null) {
                     if (System.getenv("NG2").equalsIgnoreCase("true")) {
                         String argz[] = {};
@@ -97,37 +115,43 @@ public class QuestOptions extends JFrame {
             }
         });
 
-        //is there any saved data?
-        if (!questData.hasSaveFile()) continueQuestButton.setEnabled(false);
-    } //setup()
+        // is there any saved data?
+        if (!questData.hasSaveFile()) {
+            continueQuestButton.setEnabled(false);
+        }
+    } // setup()
 
-    //show total number of games for each difficulty
+    // show total number of games for each difficulty
     /**
-     * <p>setupRadioButtonText.</p>
+     * <p>
+     * setupRadioButtonText.
+     * </p>
      */
     private void setupRadioButtonText() {
         String[] diff = QuestPreferences.getDifficulty();
         JRadioButton[] b = {easyRadio, mediumRadio, hardRadio, veryHardRadio};
 
         for (int i = 0; i < diff.length; i++) {
-            //-2 because you start a level 1, and the last level is secret
+            // -2 because you start a level 1, and the last level is secret
             int numberLevels = QuestData.RANK_TITLES.length - 2;
             int numGames = numberLevels * QuestPreferences.getWinsForRankIncrease(i);
 
             b[i].setText(String.format("%s - %d", diff[i], numGames));
         }
 
-    }//setupRadioButtonText()
+    } // setupRadioButtonText()
 
     /**
-     * <p>jbInit.</p>
-     *
-     * @throws java.lang.Exception if any.
+     * <p>
+     * jbInit.
+     * </p>
+     * 
+     * @throws java.lang.Exception
+     *             if any.
      */
     private void jbInit() throws Exception {
-        TitledBorder titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,
-                new Color(148, 145, 140)),
-                "Quest Length");
+        TitledBorder titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145,
+                140)), "Quest Length");
         Border border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         TitledBorder titledBorder2 = new TitledBorder(border2, "Continue");
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
@@ -140,7 +164,7 @@ public class QuestOptions extends JFrame {
         continueQuestButton.setFont(new java.awt.Font("Dialog", 0, 18));
         continueQuestButton.setText("Continue Quest");
         continueQuestButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 continueQuestButton_actionPerformed(e);
             }
         });
@@ -170,7 +194,7 @@ public class QuestOptions extends JFrame {
         newQuestButton.setFont(new java.awt.Font("Dialog", 0, 16));
         newQuestButton.setText("New Quest");
         newQuestButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 newQuestButton_actionPerformed(e);
             }
         });
@@ -188,7 +212,7 @@ public class QuestOptions extends JFrame {
         jTextArea1.setFont(new java.awt.Font("Dialog", 0, 12));
         jTextArea1.setDisabledTextColor(Color.black);
         jTextArea1.setEditable(false);
-//      jTextArea1.setText("Note: Starting a new quest will delete your current quest data");
+        // jTextArea1.setText("Note: Starting a new quest will delete your current quest data");
         jTextArea1.setText(sb.toString());
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
@@ -203,7 +227,7 @@ public class QuestOptions extends JFrame {
         jPanel2.add(mediumRadio, null);
         jPanel2.add(fantasyRadio, null);
         jPanel2.add(hardRadio, null);
-        jPanel2.add(new JLabel(""));  // for empty cell
+        jPanel2.add(new JLabel("")); // for empty cell
         jPanel2.add(veryHardRadio, null);
         jPanel2.add(cbStandardStart, null);
 
@@ -225,12 +249,15 @@ public class QuestOptions extends JFrame {
     }
 
     /**
-     * <p>continueQuestButton_actionPerformed.</p>
-     *
-     * @param e a {@link java.awt.event.ActionEvent} object.
+     * <p>
+     * continueQuestButton_actionPerformed.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.ActionEvent} object.
      */
-    void continueQuestButton_actionPerformed(ActionEvent e) {
-        //set global variable
+    final void continueQuestButton_actionPerformed(final ActionEvent e) {
+        // set global variable
         AllZone.setQuestData(QuestDataIO.loadData());
         AllZone.getQuestData().guessDifficultyIndex();
         dispose();
@@ -240,49 +267,54 @@ public class QuestOptions extends JFrame {
     }
 
     /**
-     * <p>newQuestButton_actionPerformed.</p>
-     *
-     * @param e a {@link java.awt.event.ActionEvent} object.
+     * <p>
+     * newQuestButton_actionPerformed.
+     * </p>
+     * 
+     * @param e
+     *            a {@link java.awt.event.ActionEvent} object.
      */
-    void newQuestButton_actionPerformed(ActionEvent e) {
+    final void newQuestButton_actionPerformed(final ActionEvent e) {
         int difficulty = 0;
 
-        String mode = fantasyRadio.isSelected() ? forge.quest.data.QuestData.FANTASY : forge.quest.data.QuestData.REALISTIC;
+        String mode = fantasyRadio.isSelected() ? forge.quest.data.QuestData.FANTASY
+                : forge.quest.data.QuestData.REALISTIC;
 
-        if (easyRadio.isSelected()) difficulty = 0;
-
-        else if (mediumRadio.isSelected()) difficulty = 1;
-
-        else if (hardRadio.isSelected()) difficulty = 2;
-
-        else if (veryHardRadio.isSelected()) difficulty = 3;
-
-        else //user didn't select a difficulty{
+        if (easyRadio.isSelected()) {
+            difficulty = 0;
+        } else if (mediumRadio.isSelected()) {
+            difficulty = 1;
+        } else if (hardRadio.isSelected()) {
+            difficulty = 2;
+        } else if (veryHardRadio.isSelected()) {
+            difficulty = 3;
+        } else {
+            // user didn't select a difficulty{
             return;
+        }
 
         if (questData.hasSaveFile()) {
             // this will overwrite your save file!
             Object[] possibleValues = {"Yes", "No"};
-            Object choice = JOptionPane.showOptionDialog(null, "Starting a new quest will overwrite your current quest. Continue?",
-                    "Start New Quest?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, possibleValues, possibleValues[1]);
+            Object choice = JOptionPane.showOptionDialog(null,
+                    "Starting a new quest will overwrite your current quest. Continue?", "Start New Quest?",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, possibleValues, possibleValues[1]);
 
-            if (!choice.equals(0))
+            if (!choice.equals(0)) {
                 return;
+            }
         }
 
-        //give the user a few cards to build a deck
+        // give the user a few cards to build a deck
         questData.newGame(difficulty, mode, cbStandardStart.isSelected());
 
         questData.saveData();
 
-
-        //set global variable
+        // set global variable
         AllZone.setQuestData(questData);
 
         dispose();
         new QuestFrame();
     }
-
 
 }

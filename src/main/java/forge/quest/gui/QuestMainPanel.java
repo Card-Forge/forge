@@ -1,109 +1,151 @@
 package forge.quest.gui;
 
-
-import forge.*;
-import forge.deck.Deck;
-import forge.gui.GuiUtils;
-import forge.gui.deckeditor.DeckEditorShop;
-import forge.gui.deckeditor.DeckEditorQuest;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestUtil;
-import forge.quest.data.item.QuestItemZeppelin;
-import forge.quest.gui.main.QuestDuel;
-import forge.quest.gui.main.QuestDuelPanel;
-import forge.quest.gui.main.QuestChallenge;
-import forge.quest.gui.main.QuestChallengePanel;
-import forge.quest.gui.main.QuestEventManager;
-import forge.quest.gui.main.QuestSelectablePanel;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import forge.AllZone;
+import forge.Command;
+import forge.Constant;
+import forge.GuiDisplay4;
+import forge.ImageCache;
+import forge.deck.Deck;
+import forge.gui.GuiUtils;
+import forge.gui.deckeditor.DeckEditorQuest;
+import forge.gui.deckeditor.DeckEditorShop;
+import forge.quest.data.QuestData;
+import forge.quest.data.QuestUtil;
+import forge.quest.data.item.QuestItemZeppelin;
+import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestChallengePanel;
+import forge.quest.gui.main.QuestDuel;
+import forge.quest.gui.main.QuestDuelPanel;
+import forge.quest.gui.main.QuestEventManager;
+import forge.quest.gui.main.QuestSelectablePanel;
 
 /**
- * <p>QuestMainPanel class.</p>
+ * <p>
+ * QuestMainPanel class.
+ * </p>
  * VIEW - lays out swing components for duel and challenge events.
- *
+ * 
  * @author Forge
  * @version $Id: QuestMainPanel.java 10358 2011-09-11 05:20:13Z Doublestrike $
  */
 public class QuestMainPanel extends QuestAbstractPanel {
-    /** Constant <code>serialVersionUID=6142934729724012402L</code> */
+    /** Constant <code>serialVersionUID=6142934729724012402L</code>. */
     private static final long serialVersionUID = 6142934729724012402L;
 
     private forge.quest.data.QuestData questData;
     private forge.quest.gui.main.QuestEventManager qem;
 
+    /** The credits label. */
     JLabel creditsLabel = new JLabel();
+
+    /** The life label. */
     JLabel lifeLabel = new JLabel();
+
+    /** The stats label. */
     JLabel statsLabel = new JLabel();
+
+    /** The title label. */
     JLabel titleLabel = new JLabel();
+
+    /** The next quest label. */
     JLabel nextQuestLabel = new JLabel();
 
+    /** The pet combo box. */
     JComboBox petComboBox = new JComboBox();
+
+    /** The deck combo box. */
     JComboBox deckComboBox = new JComboBox();
 
+    /** The event button. */
     JButton eventButton = new JButton("Challenges");
+
+    /** The play button. */
     JButton playButton = new JButton("Play");
 
     private QuestSelectablePanel selectedOpponent;
 
+    /** The next match panel. */
     JPanel nextMatchPanel = new JPanel();
+
+    /** The next match layout. */
     CardLayout nextMatchLayout;
 
+    /** The is showing challenges. */
     boolean isShowingChallenges = false;
     private JCheckBox devModeCheckBox = new JCheckBox("Developer Mode");
-    //private JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
+    // private JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
     private JCheckBox smoothLandCheckBox = new JCheckBox("Adjust AI Land");
     private JCheckBox petCheckBox = new JCheckBox("Summon Pet");
 
     private JCheckBox plantBox = new JCheckBox("Summon Plant");
-    /** Constant <code>NO_DECKS_AVAILABLE="No decks available"</code> */
+    /** Constant <code>NO_DECKS_AVAILABLE="No decks available"</code>. */
     private static final String NO_DECKS_AVAILABLE = "No decks available";
-    /** Constant <code>DUELS="Duels"</code> */
+    /** Constant <code>DUELS="Duels"</code>. */
     private static final String DUELS = "Duels";
-    /** Constant <code>CHALLENGES="Challenges"</code> */
+    /** Constant <code>CHALLENGES="Challenges"</code>. */
     private static final String CHALLENGES = "Challenges";
 
-    //TODO: Make this ordering permanent
-    /** Constant <code>lastUsedDeck="//TODO: Make this ordering permanent"</code> */
+    // TODO: Make this ordering permanent
+    /** Constant <code>lastUsedDeck="//TODO: Make this ordering permanent"</code>. */
     private static String lastUsedDeck;
-    private JButton zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>",
-            GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
+    private JButton zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>", GuiUtils.getResizedIcon(
+            GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
     private JPanel zeppelinPanel = new JPanel();
 
     /**
-     * <p>Constructor for QuestMainPanel.</p>
-     *
-     * @param mainFrame a {@link forge.quest.gui.QuestFrame} object.
+     * <p>
+     * Constructor for QuestMainPanel.
+     * </p>
+     * 
+     * @param mainFrame
+     *            a {@link forge.quest.gui.QuestFrame} object.
      */
-    public QuestMainPanel(QuestFrame mainFrame) {
+    public QuestMainPanel(final QuestFrame mainFrame) {
         super(mainFrame);
         questData = AllZone.getQuestData();
         qem = AllZone.getQuestEventManager();
-        
+
         // QuestEventManager is the MODEL for this VIEW.
         // All quest events are generated here, the first time the VIEW is made.
-        if(qem==null) {
+        if (qem == null) {
             qem = new QuestEventManager();
-            qem.assembleAllEvents(); 
+            qem.assembleAllEvents();
             AllZone.setQuestEventManager(qem);
-        }   
+        }
 
         initUI();
     }
 
     /**
-     * <p>initUI.</p>
+     * <p>
+     * initUI.
+     * </p>
      */
     private void initUI() {
         refresh();
@@ -126,14 +168,16 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createStatusPanel.</p>
-     *
+     * <p>
+     * createStatusPanel.
+     * </p>
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createStatusPanel() {
         JPanel northPanel = new JPanel();
         JLabel modeLabel;
-        JLabel difficultyLabel;//Create labels at the top
+        JLabel difficultyLabel; // Create labels at the top
         titleLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 28));
         titleLabel.setAlignmentX(LEFT_ALIGNMENT);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -160,21 +204,23 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createSidePanel.</p>
-     *
+     * <p>
+     * createSidePanel.
+     * </p>
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createSidePanel() {
         JPanel panel = new JPanel();
-        JPanel optionsPanel; //Create options checkbox list
+        JPanel optionsPanel; // Create options checkbox list
         optionsPanel = createOptionsPanel();
 
         List<Component> eastComponents = new ArrayList<Component>();
-        //Create buttons
+        // Create buttons
 
         JButton mainMenuButton = new JButton("Return to Main Menu");
         mainMenuButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 mainFrame.returnToMainMenu();
             }
         });
@@ -182,7 +228,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         JButton cardShopButton = new JButton("Card Shop");
         cardShopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 QuestMainPanel.this.showCardShop();
             }
         });
@@ -194,7 +240,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
             bazaarButton = new JButton("Bazaar");
             bazaarButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+                public void actionPerformed(final ActionEvent actionEvent) {
                     QuestMainPanel.this.showBazaar();
                 }
             });
@@ -202,9 +248,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
             bazaarButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         }
 
-
         eventButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 QuestMainPanel.this.showChallenges();
             }
         });
@@ -212,16 +257,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
         eventButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         eventButton.setPreferredSize(new Dimension(0, 60));
 
-
         playButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 QuestMainPanel.this.launchGame();
             }
         });
 
         playButton.setFont(new Font(Font.DIALOG, Font.BOLD, 28));
         playButton.setPreferredSize(new Dimension(0, 100));
-
 
         eastComponents.add(playButton);
         eastComponents.add(optionsPanel);
@@ -266,8 +309,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createOptionsPanel.</p>
-     *
+     * <p>
+     * createOptionsPanel.
+     * </p>
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createOptionsPanel() {
@@ -275,7 +320,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 
-        //optionsPanel.add(this.newGUICheckbox);
+        // optionsPanel.add(this.newGUICheckbox);
         optionsPanel.add(Box.createVerticalStrut(5));
         optionsPanel.add(this.smoothLandCheckBox);
         optionsPanel.add(Box.createVerticalStrut(5));
@@ -285,8 +330,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createMatchSettingsPanel.</p>
-     *
+     * <p>
+     * createMatchSettingsPanel.
+     * </p>
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createMatchSettingsPanel() {
@@ -302,7 +349,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         GuiUtils.addGap(deckPanel);
 
         this.deckComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 playButton.setEnabled(canGameBeLaunched());
                 lastUsedDeck = (String) deckComboBox.getSelectedItem();
             }
@@ -313,7 +360,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         JButton editDeckButton = new JButton("Deck Editor");
         editDeckButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(final ActionEvent actionEvent) {
                 showDeckEditor();
             }
         });
@@ -321,7 +368,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         deckPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, deckPanel.getPreferredSize().height));
         deckPanel.setAlignmentX(LEFT_ALIGNMENT);
         matchPanel.add(deckPanel);
-
 
         GuiUtils.addGap(matchPanel);
 
@@ -333,7 +379,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
 
             this.petCheckBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+                public void actionPerformed(final ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
                         questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
                     } else {
@@ -347,7 +393,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             petPanel.add(this.petCheckBox);
             GuiUtils.addGap(petPanel);
             this.petComboBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+                public void actionPerformed(final ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
                         questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
                     } else {
@@ -355,13 +401,12 @@ public class QuestMainPanel extends QuestAbstractPanel {
                     }
                 }
             });
-            this.petComboBox.setMaximumSize(
-                    new Dimension(Integer.MAX_VALUE,
-                            (int) this.petCheckBox.getPreferredSize().getHeight()));
+            this.petComboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int) this.petCheckBox.getPreferredSize()
+                    .getHeight()));
             petPanel.add(this.petComboBox);
 
             this.plantBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+                public void actionPerformed(final ActionEvent actionEvent) {
                     questData.getPetManager().usePlant = plantBox.isSelected();
                 }
             });
@@ -374,7 +419,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             fantasyPanel.add(petPanel, BorderLayout.WEST);
 
             zeppelinButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent actionEvent) {
+                public void actionPerformed(final ActionEvent actionEvent) {
                     questData.randomizeOpponents();
                     refreshNextMatchPanel();
                     QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
@@ -394,9 +439,12 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createDuelPanel.</p>
-     * Makes a parent panel, then selectable panel instances for all available duels.
-     *
+     * <p>
+     * createDuelPanel.
+     * </p>
+     * Makes a parent panel, then selectable panel instances for all available
+     * duels.
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createDuelPanel() {
@@ -421,20 +469,23 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>createChallengePanel.</p>
-     * Makes a parent panel, then selectable panel instances for all available challenges.
-     *
+     * <p>
+     * createChallengePanel.
+     * </p>
+     * Makes a parent panel, then selectable panel instances for all available
+     * challenges.
+     * 
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel createChallengePanel() {
         JPanel ChallengePanel = new JPanel();
-        
+
         QuestSelectablePanel selpan;
         ChallengePanel.setLayout(new BoxLayout(ChallengePanel, BoxLayout.Y_AXIS));
         ChallengePanel.setBorder(new TitledBorder(new EtchedBorder(), "Available Challenges"));
 
         List<QuestChallenge> challenges = qem.generateChallenges();
-        
+
         for (QuestChallenge qc : challenges) {
             selpan = new QuestChallengePanel(qc);
             ChallengePanel.add(selpan);
@@ -443,14 +494,15 @@ public class QuestMainPanel extends QuestAbstractPanel {
             GuiUtils.addGap(ChallengePanel, 3);
         }
 
-
         return ChallengePanel;
     }
 
     /**
-     * <p>refresh.</p>
+     * <p>
+     * refresh.
+     * </p>
      */
-    void refresh() {
+    final void refresh() {
         AllZone.getQuestData().saveData();
 
         devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
@@ -460,7 +512,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
         titleLabel.setText(questData.getRank());
 
-        //copy lastUsedDeck as removal triggers selection change.
+        // copy lastUsedDeck as removal triggers selection change.
         String lastUsedDeck = QuestMainPanel.lastUsedDeck;
         deckComboBox.removeAllItems();
 
@@ -470,7 +522,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             List<String> deckNames = new ArrayList<String>(questData.getDeckNames());
 
             Collections.sort(deckNames, new Comparator<String>() {
-                public int compare(String s, String s1) {
+                public int compare(final String s, final String s1) {
                     return s.compareToIgnoreCase(s1);
                 }
             });
@@ -520,7 +572,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 petComboBox.setSelectedItem(questData.getPetManager().getSelectedPet().getName());
             }
 
-
             this.plantBox.setEnabled(questData.getPetManager().getPlant().getLevel() > 0);
             this.plantBox.setSelected(questData.getPetManager().shouldPlantBeUsed());
 
@@ -537,7 +588,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 zeppelinButton.setEnabled(false);
             }
 
-
         }
 
         if (nextChallengeInWins() > 0) {
@@ -552,7 +602,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>refreshNextMatchPanel.</p>
+     * <p>
+     * refreshNextMatchPanel.
+     * </p>
      */
     private void refreshNextMatchPanel() {
         nextMatchPanel.removeAll();
@@ -568,18 +620,22 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>nextChallengeInWins.</p>
-     *
+     * <p>
+     * nextChallengeInWins.
+     * </p>
+     * 
      * @return a int.
      */
     private int nextChallengeInWins() {
 
-        // Number of wins was 25, lowereing the number to 20 to help short term questers.
+        // Number of wins was 25, lowereing the number to 20 to help short term
+        // questers.
         if (questData.getWin() < 20) {
             return 20 - questData.getWin();
         }
 
-        // The int mul has been lowered by one, should face special opps more frequently.
+        // The int mul has been lowered by one, should face special opps more
+        // frequently.
         int challengesPlayed = questData.getChallengesPlayed();
         int mul = 5;
 
@@ -594,16 +650,17 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return (delta > 0) ? delta : 0;
     }
 
-
     /**
-     * <p>showDeckEditor.</p>
+     * <p>
+     * showDeckEditor.
+     * </p>
      */
-    void showDeckEditor() {
+    final void showDeckEditor() {
         Command exit = new Command() {
             private static final long serialVersionUID = -5110231879431074581L;
 
             public void execute() {
-                //saves all deck data
+                // saves all deck data
                 AllZone.getQuestData().saveData();
 
                 new QuestFrame();
@@ -615,24 +672,28 @@ public class QuestMainPanel extends QuestAbstractPanel {
         g.show(exit);
         g.setVisible(true);
         mainFrame.dispose();
-    }//deck editor button
+    } // deck editor button
 
     /**
-     * <p>showBazaar.</p>
+     * <p>
+     * showBazaar.
+     * </p>
      */
-    void showBazaar() {
+    final void showBazaar() {
         mainFrame.showBazaarPane();
     }
 
     /**
-     * <p>showCardShop.</p>
+     * <p>
+     * showCardShop.
+     * </p>
      */
-    void showCardShop() {
+    final void showCardShop() {
         Command exit = new Command() {
             private static final long serialVersionUID = 8567193482568076362L;
 
             public void execute() {
-                //saves all deck data
+                // saves all deck data
                 AllZone.getQuestData().saveData();
 
                 new QuestFrame();
@@ -646,13 +707,16 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         this.mainFrame.dispose();
 
-    }//card shop button
+    } // card shop button
 
     /**
-     * <p>launchGame.</p>
+     * <p>
+     * launchGame.
+     * </p>
      */
     private void launchGame() {
-        //TODO: This is a temporary hack to see if the image cache affects the heap usage significantly.
+        // TODO This is a temporary hack to see if the image cache affects the
+        // heap usage significantly.
         ImageCache.clear();
 
         QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
@@ -660,9 +724,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         questData.randomizeOpponents();
 
         String humanDeckName = (String) deckComboBox.getSelectedItem();
-        
+
         Deck humanDeck = questData.getDeck(humanDeckName);
-        
+
         Constant.Runtime.HumanDeck[0] = humanDeck;
         moveDeckToTop(humanDeckName);
 
@@ -671,16 +735,16 @@ public class QuestMainPanel extends QuestAbstractPanel {
         // Dev Mode occurs before Display
         Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
 
-        //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
-        //if (newGUICheckbox.isSelected()) {
-            AllZone.setDisplay(new GuiDisplay4());
-        //} else {
-        //    AllZone.setDisplay(new GuiDisplay3());
-        //}
-
+        // DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards
+        // are added
+        // if (newGUICheckbox.isSelected()) {
+        AllZone.setDisplay(new GuiDisplay4());
+        // } else {
+        // AllZone.setDisplay(new GuiDisplay3());
+        // }
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
-        
+
         AllZone.getMatchState().reset();
         if (isShowingChallenges) {
             setupChallenge(humanDeck);
@@ -694,32 +758,35 @@ public class QuestMainPanel extends QuestAbstractPanel {
         mainFrame.dispose();
     }
 
-
     /**
-     * <p>setupDuel.</p>
-     *
-     * @param humanDeck a {@link forge.deck.Deck} object.
+     * <p>
+     * setupDuel.
+     * </p>
+     * 
+     * @param humanDeck
+     *            a {@link forge.deck.Deck} object.
      */
-    void setupDuel(Deck humanDeck) {
+    final void setupDuel(final Deck humanDeck) {
         Deck computer = selectedOpponent.getEvent().getEventDeck();
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        QuestDuel selectedDuel = (QuestDuel)selectedOpponent.getEvent();
+        QuestDuel selectedDuel = (QuestDuel) selectedOpponent.getEvent();
         AllZone.setQuestEvent(selectedDuel);
 
-        AllZone.getGameAction().newGame(humanDeck, computer, 
-                QuestUtil.getHumanStartingCards(questData),
-                QuestUtil.getComputerStartingCards(questData), 
-                questData.getLife(), 20, null);
+        AllZone.getGameAction().newGame(humanDeck, computer, QuestUtil.getHumanStartingCards(questData),
+                QuestUtil.getComputerStartingCards(questData), questData.getLife(), 20, null);
     }
 
     /**
-     * <p>setupChallenge.</p>
-     *
-     * @param humanDeck a {@link forge.deck.Deck} object.
+     * <p>
+     * setupChallenge.
+     * </p>
+     * 
+     * @param humanDeck
+     *            a {@link forge.deck.Deck} object.
      */
-    private void setupChallenge(Deck humanDeck) { 
-        QuestChallenge selectedChallenge = (QuestChallenge)selectedOpponent.getEvent();
+    private void setupChallenge(final Deck humanDeck) {
+        QuestChallenge selectedChallenge = (QuestChallenge) selectedOpponent.getEvent();
 
         Deck computer = selectedOpponent.getEvent().getEventDeck();
         Constant.Runtime.ComputerDeck[0] = computer;
@@ -733,15 +800,17 @@ public class QuestMainPanel extends QuestAbstractPanel {
         }
 
         AllZone.getGameAction().newGame(humanDeck, computer,
-                QuestUtil.getHumanStartingCards(questData, selectedChallenge), 
-                QuestUtil.getComputerStartingCards(questData, selectedChallenge),
-                questData.getLife() + extraLife, selectedChallenge.getAILife(), selectedChallenge);
+                QuestUtil.getHumanStartingCards(questData, selectedChallenge),
+                QuestUtil.getComputerStartingCards(questData, selectedChallenge), questData.getLife() + extraLife,
+                selectedChallenge.getAILife(), selectedChallenge);
 
     }
 
     /**
-     * <p>getEventIconFilename.</p>
-     *
+     * <p>
+     * getEventIconFilename.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     private String getEventIconFilename() {
@@ -749,9 +818,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>showChallenges.</p>
+     * <p>
+     * showChallenges.
+     * </p>
      */
-    void showChallenges() {
+    final void showChallenges() {
         if (isShowingChallenges) {
             isShowingChallenges = false;
             eventButton.setText("Challenges");
@@ -769,16 +840,33 @@ public class QuestMainPanel extends QuestAbstractPanel {
         refresh();
     }
 
+    /**
+     * The Class SelectionAdapter.
+     */
     class SelectionAdapter extends MouseAdapter {
+
+        /** The selectable panel. */
         QuestSelectablePanel selectablePanel;
 
-        SelectionAdapter(QuestSelectablePanel selectablePanel) {
+        /**
+         * Instantiates a new selection adapter.
+         * 
+         * @param selectablePanel
+         *            the selectable panel
+         */
+        SelectionAdapter(final QuestSelectablePanel selectablePanel) {
             super();
             this.selectablePanel = selectablePanel;
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
+         */
         @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
+        public void mouseClicked(final MouseEvent mouseEvent) {
 
             if (selectedOpponent != null) {
                 selectedOpponent.setSelected(false);
@@ -793,27 +881,31 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     /**
-     * <p>moveDeckToTop.</p>
-     *
-     * @param humanDeckName a {@link java.lang.String} object.
+     * <p>
+     * moveDeckToTop.
+     * </p>
+     * 
+     * @param humanDeckName
+     *            a {@link java.lang.String} object.
      */
-    private void moveDeckToTop(String humanDeckName) {
+    private void moveDeckToTop(final String humanDeckName) {
         QuestMainPanel.lastUsedDeck = humanDeckName;
     }
 
-
     /**
-     * <p>canGameBeLaunched.</p>
-     *
+     * <p>
+     * canGameBeLaunched.
+     * </p>
+     * 
      * @return a boolean.
      */
-    boolean canGameBeLaunched() {
+    final boolean canGameBeLaunched() {
         return !(NO_DECKS_AVAILABLE.equals(deckComboBox.getSelectedItem()) || selectedOpponent == null);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void refreshState() {
+    public final void refreshState() {
         this.refresh();
     }
 
