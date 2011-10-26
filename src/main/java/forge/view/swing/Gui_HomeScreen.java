@@ -763,6 +763,8 @@ public class Gui_HomeScreen {
                 cmdSealed, cmdDraft, cmdQuest, cmdHumanDeck, cmdAIDeck, cmdDeckEditor, cmdSettings, cmdStart, lstDecks,
                 cmdDeckSelect}));
 
+        GuiUtils.centerFrame(gHS);
+        
         // non gui init stuff
         allDecks = new ArrayList<Deck>(deckManager.getDecks());
     }
