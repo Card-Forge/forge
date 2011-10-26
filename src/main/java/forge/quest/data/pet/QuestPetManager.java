@@ -1,22 +1,39 @@
 package forge.quest.data.pet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
- * <p>QuestPetManager class.</p>
- *
+ * <p>
+ * QuestPetManager class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestPetManager {
 
+    /** The pets. */
     public Map<String, QuestPetAbstract> pets = new HashMap<String, QuestPetAbstract>();
+
+    /** The selected pet. */
     public QuestPetAbstract selectedPet;
+
+    /** The plant. */
     public QuestPetAbstract plant;
+
+    /** The use plant. */
     public boolean usePlant;
 
     /**
-     * <p>Constructor for QuestPetManager.</p>
+     * <p>
+     * Constructor for QuestPetManager.
+     * </p>
      */
     public QuestPetManager() {
         plant = new QuestPetPlant();
@@ -26,36 +43,45 @@ public class QuestPetManager {
     }
 
     /**
-     * <p>Setter for the field <code>selectedPet</code>.</p>
-     *
-     * @param pet a {@link java.lang.String} object.
+     * <p>
+     * Setter for the field <code>selectedPet</code>.
+     * </p>
+     * 
+     * @param pet
+     *            a {@link java.lang.String} object.
      */
-    public void setSelectedPet(String pet) {
+    public final void setSelectedPet(final String pet) {
         selectedPet = (pet == null) ? null : getPet(pet);
     }
 
     /**
-     * <p>Getter for the field <code>selectedPet</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>selectedPet</code>.
+     * </p>
+     * 
      * @return a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
-    public QuestPetAbstract getSelectedPet() {
+    public final QuestPetAbstract getSelectedPet() {
         return selectedPet;
     }
 
     /**
-     * <p>Getter for the field <code>plant</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>plant</code>.
+     * </p>
+     * 
      * @return a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
-    public QuestPetAbstract getPlant() {
+    public final QuestPetAbstract getPlant() {
         return plant;
     }
 
     /**
-     * <p>addPlantLevel.</p>
+     * <p>
+     * addPlantLevel.
+     * </p>
      */
-    public void addPlantLevel() {
+    public final void addPlantLevel() {
         if (plant == null) {
             plant = new QuestPetPlant();
         } else {
@@ -64,64 +90,81 @@ public class QuestPetManager {
     }
 
     /**
-     * <p>getPet.</p>
-     *
-     * @param petName a {@link java.lang.String} object.
+     * <p>
+     * getPet.
+     * </p>
+     * 
+     * @param petName
+     *            a {@link java.lang.String} object.
      * @return a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
-    public QuestPetAbstract getPet(String petName) {
+    public final QuestPetAbstract getPet(final String petName) {
 
         return pets.get(petName);
     }
 
     /**
-     * <p>addPet.</p>
-     *
-     * @param newPet a {@link forge.quest.data.pet.QuestPetAbstract} object.
+     * <p>
+     * addPet.
+     * </p>
+     * 
+     * @param newPet
+     *            a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
-    public void addPet(QuestPetAbstract newPet) {
+    public final void addPet(final QuestPetAbstract newPet) {
         pets.put(newPet.getName(), newPet);
     }
 
     /**
-     * <p>getPetNames.</p>
-     *
+     * <p>
+     * getPetNames.
+     * </p>
+     * 
      * @return a {@link java.util.Set} object.
      */
-    public Set<String> getPetNames() {
+    public final Set<String> getPetNames() {
         return pets.keySet();
     }
 
     /**
-     * <p>addPetLevel.</p>
-     *
-     * @param s a {@link java.lang.String} object.
+     * <p>
+     * addPetLevel.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
      */
-    public void addPetLevel(String s) {
+    public final void addPetLevel(final String s) {
         pets.get(s).incrementLevel();
     }
 
     /**
-     * <p>shouldPlantBeUsed.</p>
-     *
+     * <p>
+     * shouldPlantBeUsed.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean shouldPlantBeUsed() {
+    public final boolean shouldPlantBeUsed() {
         return usePlant;
     }
 
     /**
-     * <p>shouldPetBeUsed.</p>
-     *
+     * <p>
+     * shouldPetBeUsed.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean shouldPetBeUsed() {
+    public final boolean shouldPetBeUsed() {
         return selectedPet != null;
     }
 
     /**
-     * <p>getAllPets.</p>
-     *
+     * <p>
+     * getAllPets.
+     * </p>
+     * 
      * @return a {@link java.util.Set} object.
      */
     private static Set<QuestPetAbstract> getAllPets() {
@@ -135,13 +178,14 @@ public class QuestPetManager {
         return set;
     }
 
-
     /**
-     * <p>getAvailablePetNames.</p>
-     *
+     * <p>
+     * getAvailablePetNames.
+     * </p>
+     * 
      * @return a {@link java.util.Set} object.
      */
-    public Set<String> getAvailablePetNames() {
+    public final Set<String> getAvailablePetNames() {
         SortedSet<String> set = new TreeSet<String>();
         for (Map.Entry<String, QuestPetAbstract> pet : pets.entrySet()) {
             if (pet.getValue().getLevel() > 0) {
@@ -151,23 +195,26 @@ public class QuestPetManager {
         return set;
     }
 
-
     /**
-     * <p>getPetsAndPlants.</p>
-     *
+     * <p>
+     * getPetsAndPlants.
+     * </p>
+     * 
      * @return a {@link java.util.Collection} object.
      */
-    public Collection<QuestPetAbstract> getPetsAndPlants() {
+    public final Collection<QuestPetAbstract> getPetsAndPlants() {
         Set<QuestPetAbstract> petsAndPlants = new HashSet<QuestPetAbstract>(pets.values());
         petsAndPlants.add(plant);
 
         return petsAndPlants;
     }
 
-    //Magic to support added pet types when reading saves.
+    // Magic to support added pet types when reading saves.
     /**
-     * <p>readResolve.</p>
-     *
+     * <p>
+     * readResolve.
+     * </p>
+     * 
      * @return a {@link java.lang.Object} object.
      */
     private Object readResolve() {

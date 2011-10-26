@@ -1,6 +1,5 @@
 package forge.properties;
 
-// TODO: Auto-generated Javadoc
 /**
  * NewConstants.java
  *

@@ -4,15 +4,17 @@ import forge.AllZone;
 import forge.Card;
 
 /**
- * <p>QuestPetWolf class.</p>
- *
+ * <p>
+ * QuestPetWolf class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestPetWolf extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
-    public Card getPetCard() {
+    public final Card getPetCard() {
         Card petCard = new Card();
 
         petCard.setName("Wolf Pet");
@@ -49,50 +51,38 @@ public class QuestPetWolf extends QuestPetAbstract {
     }
 
     /**
-     * <p>Constructor for QuestPetWolf.</p>
+     * <p>
+     * Constructor for QuestPetWolf.
+     * </p>
      */
     public QuestPetWolf() {
-        super("Wolf",
-                "This ferocious animal may have been raised in captivity, but it has been trained to kill.",
-                4);
+        super("Wolf", "This ferocious animal may have been raised in captivity, but it has been trained to kill.", 4);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int[] getAllUpgradePrices() {
-        return new int[]{250, 250, 500, 550};
+    public final int[] getAllUpgradePrices() {
+        return new int[] { 250, 250, 500, 550 };
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllUpgradeDescriptions() {
-        return new String[]{
-                "Purchase Wolf",
-                "Improve the attack power of your wolf.",
-                "Improve the defense power of your wolf.",
-                "Give Flanking to your wolf.",
+    public final String[] getAllUpgradeDescriptions() {
+        return new String[] {"Purchase Wolf", "Improve the attack power of your wolf.",
+                "Improve the defense power of your wolf.", "Give Flanking to your wolf.",
                 "You cannot train your wolf any further"};
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllStats() {
-        return new String[]{"You do not own a wolf",
-                "1/1, G",
-                "1/2, G",
-                "2/2, G",
-                "2/2, G, Flanking"};
+    public final String[] getAllStats() {
+        return new String[] {"You do not own a wolf", "1/1, G", "1/2, G", "2/2, G", "2/2, G, Flanking"};
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllImageNames() {
-        return new String[]{
-                "",
-                "g_1_1_wolf_pet_small.jpg",
-                "g_1_2_wolf_pet_small.jpg",
-                "g_2_2_wolf_pet_small.jpg",
-                "g_2_2_wolf_pet_flanking_small.jpg"
-        };
+    public final String[] getAllImageNames() {
+        return new String[] {"", "g_1_1_wolf_pet_small.jpg", "g_1_2_wolf_pet_small.jpg", "g_2_2_wolf_pet_small.jpg",
+                "g_2_2_wolf_pet_flanking_small.jpg"};
     }
 }

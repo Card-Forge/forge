@@ -4,15 +4,17 @@ import forge.AllZone;
 import forge.Card;
 
 /**
- * <p>QuestPetCrocodile class.</p>
- *
+ * <p>
+ * QuestPetCrocodile class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestPetCrocodile extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
-    public Card getPetCard() {
+    public final Card getPetCard() {
         Card petCard = new Card();
         petCard.setName("Crocodile Pet");
         petCard.addController(AllZone.getHumanPlayer());
@@ -44,55 +46,42 @@ public class QuestPetCrocodile extends QuestPetAbstract {
             petCard.addIntrinsicKeyword("Swampwalk");
         }
 
-
         return petCard;
     }
 
     /**
-     * <p>Constructor for QuestPetCrocodile.</p>
+     * <p>
+     * Constructor for QuestPetCrocodile.
+     * </p>
      */
     public QuestPetCrocodile() {
-        super("Crocodile",
-                "With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.",
-                4);
+        super("Crocodile", "With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.", 4);
     }
 
     /** {@inheritDoc} */
     @Override
-    public int[] getAllUpgradePrices() {
-        return new int[]{250, 300, 450, 600};
+    public final int[] getAllUpgradePrices() {
+        return new int[] { 250, 300, 450, 600 };
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllUpgradeDescriptions() {
-        return new String[]{
-                "Purchase Crocodile",
-                "Improve the attack power of your crocodile.",
-                "Improve the attack power of your crocodile.",
-                "Give Swampwalking to your crocodile.",
+    public final String[] getAllUpgradeDescriptions() {
+        return new String[] {"Purchase Crocodile", "Improve the attack power of your crocodile.",
+                "Improve the attack power of your crocodile.", "Give Swampwalking to your crocodile.",
                 "You cannot train your crocodile any further"};
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllStats() {
-        return new String[]{"You do not own a crocodile",
-                "1/1, B",
-                "2/1, B",
-                "3/1, B",
-                "3/1, B, Swampwalking"};
+    public final String[] getAllStats() {
+        return new String[] {"You do not own a crocodile", "1/1, B", "2/1, B", "3/1, B", "3/1, B, Swampwalking"};
     }
 
     /** {@inheritDoc} */
     @Override
-    public String[] getAllImageNames() {
-        return new String[]{
-                "",
-                "b_1_1_crocodile_pet_small.jpg",
-                "b_2_1_crocodile_pet_small.jpg",
-                "b_3_1_crocodile_pet_small.jpg",
-                "b_3_1_crocodile_pet_swampwalk_small.jpg"
-        };
+    public final String[] getAllImageNames() {
+        return new String[] {"", "b_1_1_crocodile_pet_small.jpg", "b_2_1_crocodile_pet_small.jpg",
+                "b_3_1_crocodile_pet_small.jpg", "b_3_1_crocodile_pet_swampwalk_small.jpg"};
     }
 }
