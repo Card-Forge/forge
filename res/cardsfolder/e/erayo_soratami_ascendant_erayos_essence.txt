@@ -1,0 +1,29 @@
+Name:Erayo, Soratami Ascendant
+ManaCost:1 U
+Types:Legendary Creature Moonfolk Monk
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$SpellCast | CheckSVar$NumCast | SVarCompare$ EQ4 | Execute$ TrigFlip | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
+SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:NumCast:Count$ThisTurnCast Card
+SVar:Rarity:Rare
+AlternateMode:Flip
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/35.jpg
+Oracle:Flying\nWhenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
+
+ALTERNATE
+
+Name:Erayo's Essence
+ManaCost:1 U
+Colors:blue
+Types:Legendary Enchantment
+Text:no text
+T:Mode$SpellCast | ValidControllingPlayer$ Opponent | CheckSVar$ NumOppCast | SVarCompare$ EQ1 | Execute$ TrigCounter | TriggerDescription$ Whenever an opponent casts a spell for the first time in a turn, counter that spell.
+SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | Destination$ Graveyard
+SVar:NumOppCast:Count$ThisTurnCast Card.YouDontCtrl
+SVar:Rarity:Rare
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/167.jpg
+Oracle:Whenever an opponent casts a spell for the first time in a turn, counter that spell.
+
+End
