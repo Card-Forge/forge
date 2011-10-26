@@ -1,13 +1,39 @@
 package net.slightlymagic.braids.util.lambda;
 
-public abstract class Lambda1<R,A1> implements Lambda<R> {
+/**
+ * The Class Lambda1.
+ * 
+ * @param <R>
+ *            the generic type
+ * @param <A1>
+ *            the generic type
+ */
+public abstract class Lambda1<R, A1> implements Lambda<R> {
 
-	public abstract R apply(A1 arg1);
+    /**
+     * Apply.
+     * 
+     * @param arg1
+     *            the arg1
+     * @return the r
+     */
+    public abstract R apply(A1 arg1);
 
-	@SuppressWarnings("unchecked")
-	//TODO @Override
-	public R apply(Object[] args) {
-		return apply((A1) args[0]);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * net.slightlymagic.braids.util.lambda.Lambda#apply(java.lang.Object[])
+     */
+
+    // TODO @Override
+    /**
+     * @return R
+     * @param args Object[]
+     */
+    @SuppressWarnings("unchecked")
+    public final R apply(final Object[] args) {
+        return apply((A1) args[0]);
+    }
 
 }
