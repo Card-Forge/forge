@@ -1,19 +1,24 @@
 package forge.quest.gui.main;
 
-
-/** 
- * <p>QuestDuelPanel.</p>
- *  VIEW - Creates a QuestSelectablePanel instance for a "battle" style event.
+/**
+ * <p>
+ * QuestDuelPanel.
+ * </p>
+ * VIEW - Creates a QuestSelectablePanel instance for a "battle" style event.
  */
 @SuppressWarnings("serial")
 public class QuestDuelPanel extends QuestSelectablePanel {
 
-    /** <p>QuestDuelPanel.</p>
+    /**
+     * <p>
+     * QuestDuelPanel.
+     * </p>
      * Constructor, using duel data instance.
      * 
-     * @param {@link forge.quest.gui.main.QuestDuel}
+     * @param d
+     *            the d
      */
-    public QuestDuelPanel(QuestDuel d) {
+    public QuestDuelPanel(final QuestDuel d) {
         super(d);
     }
 

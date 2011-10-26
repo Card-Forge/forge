@@ -1,61 +1,72 @@
 package forge.quest.gui.main;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.File;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.io.File;
-
 /**
- * <p>QuestSelectablePanel class.</p>
+ * <p>
+ * QuestSelectablePanel class.
+ * </p>
  * VIEW - Creates a selectable panel, used for picking events.
- *
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestSelectablePanel extends JPanel {
-    /** Constant <code>serialVersionUID=-1502285997894190742L</code> */
+    /** Constant <code>serialVersionUID=-1502285997894190742L</code>. */
     private static final long serialVersionUID = -1502285997894190742L;
 
+    /** The background color. */
     protected Color backgroundColor;
     private boolean selected;
     private QuestEvent event;
     private String iconfilename;
+
+    /** The root panel. */
     public JPanel rootPanel = new JPanel();
 
     /**
-     * <p>Constructor for QuestSelectablePanel.</p>
+     * <p>
+     * Constructor for QuestSelectablePanel.
+     * </p>
      * VIEW - A JPanel for selecting quest events.
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param difficulty a {@link java.lang.String} object.
-     * @param description a {@link java.lang.String} object.
-     * @param icon a {@link javax.swing.ImageIcon} object.
+     * 
+     * @param qe
+     *            the qe
      */
-    public QuestSelectablePanel(QuestEvent qe) {
+    public QuestSelectablePanel(final QuestEvent qe) {
         this.event = qe;
         this.iconfilename = qe.icon;
         File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
         File file = new File(base, iconfilename);
-        
-        if(!file.exists()) {
-            file = new File(base,"Unknown.jpg");
+
+        if (!file.exists()) {
+            file = new File(base, "Unknown.jpg");
             this.iconfilename = "Unknown.jpg";
         }
-            
-        ImageIcon icon = new ImageIcon(file.toString()); 
-        
+
+        ImageIcon icon = new ImageIcon(file.toString());
+
         this.backgroundColor = getBackground();
         this.setLayout(new BorderLayout(5, 5));
 
         JLabel iconLabel;
 
-        if (icon.getIconHeight() == -1) { 
+        if (icon.getIconHeight() == -1) {
             iconLabel = new JLabel(GuiUtils.getEmptyIcon(40, 40));
         } else {
             iconLabel = new JLabel(GuiUtils.getResizedIcon(icon, 40, 40));
@@ -101,20 +112,25 @@ public class QuestSelectablePanel extends JPanel {
     }
 
     /**
-     * <p>isSelected.</p>
-     *
+     * <p>
+     * isSelected.
+     * </p>
+     * 
      * @return a boolean.
      */
-    public boolean isSelected() {
+    public final boolean isSelected() {
         return selected;
     }
 
     /**
-     * <p>Setter for the field <code>selected</code>.</p>
-     *
-     * @param selected a boolean.
+     * <p>
+     * Setter for the field <code>selected</code>.
+     * </p>
+     * 
+     * @param selected
+     *            a boolean.
      */
-    public void setSelected(boolean selected) {
+    public final void setSelected(final boolean selected) {
         if (selected) {
             this.setBackground(backgroundColor.darker());
         } else {
@@ -125,20 +141,24 @@ public class QuestSelectablePanel extends JPanel {
     }
 
     /**
-     * <p>getIconFilename.</p>
+     * <p>
+     * getIconFilename.
+     * </p>
      * 
      * @return String
      */
-    public String getIconFilename() {
+    public final String getIconFilename() {
         return this.iconfilename;
     }
-    
+
     /**
-     * <p>getEvent.</p>
+     * <p>
+     * getEvent.
+     * </p>
      * 
      * @return QuestEvent
      */
-    public QuestEvent getEvent() {
+    public final QuestEvent getEvent() {
         return this.event;
     }
 }
