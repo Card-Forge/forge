@@ -1,0 +1,13 @@
+Name:Sigil of Sleep
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ You | Execute$ TrigReturnYou | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
+SVar:TrigReturnYou:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | Execute$ TrigReturnOpp | Secondary$ True | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
+SVar:TrigReturnOpp:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature your opponent controls | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_sleep.jpg
+End
