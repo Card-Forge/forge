@@ -6715,6 +6715,7 @@ res/cardsfolder/r/run_wild.txt svneol=native#text/plain
 res/cardsfolder/r/rune_cervin_rider.txt svneol=native#text/plain
 res/cardsfolder/r/rune_scarred_demon.txt svneol=native#text/plain
 res/cardsfolder/r/rune_snag.txt -text
+res/cardsfolder/r/rune_tail_kitsune_ascendant_rune_tails_essence.txt -text
 res/cardsfolder/r/runeboggle.txt svneol=native#text/plain
 res/cardsfolder/r/runechanters_pike.txt -text
 res/cardsfolder/r/runeclaw_bear.txt svneol=native#text/plain
@@ -7927,6 +7928,7 @@ res/cardsfolder/s/stronghold_overseer.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_rats.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_taskmaster.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_zeppelin.txt svneol=native#text/plain
+res/cardsfolder/s/student_of_elements_tobita_master_of_winds.txt -text
 res/cardsfolder/s/student_of_warfare.txt svneol=native#text/plain
 res/cardsfolder/s/stuffy_doll.txt svneol=native#text/plain
 res/cardsfolder/s/stun.txt svneol=native#text/plain
