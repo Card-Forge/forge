@@ -134,8 +134,9 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        CardList typeList = source.getController().getCardsIn(Zone.Battlefield);
+        CardList typeList = ability.getActivatingPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        typeList = typeList.filter(CardListFilter.untapped);
         String amount = getAmount();
         Integer c = convertAmount();
         if (c == null) {
