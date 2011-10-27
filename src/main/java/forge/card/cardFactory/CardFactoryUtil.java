@@ -136,7 +136,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card AI_getCheapestCreature(CardList list, final Card spell, final boolean targeted) {
+    public static Card AI_getCheapestCreature(final CardList list, final Card spell, final boolean targeted) {
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return c.isCreature();
@@ -158,7 +158,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card AI_getCheapestPermanent(CardList list, final Card spell, final boolean targeted) {
+    public static Card AI_getCheapestPermanent(final CardList list, final Card spell, final boolean targeted) {
         CardList all = list;
         if (targeted) {
             all = all.filter(new CardListFilter() {
@@ -261,7 +261,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card AI_getBestEnchantment(CardList list, final Card spell, final boolean targeted) {
+    public static Card AI_getBestEnchantment(final CardList list, final Card spell, final boolean targeted) {
         CardList all = list;
         all = all.getType("Enchantment");
         if (targeted) {
@@ -495,13 +495,16 @@ public class CardFactoryUtil {
         value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.")
-                && power > 0)
+                && power > 0) {
             value += 2;
+        }
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.")
-                && power > 0)
+                && power > 0) {
             value += 4;
-        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it."))
+        }
+        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
             value += 10;
+        }
 
         // Defensive Keywords
         if (c.hasKeyword("Reach")) {
@@ -3190,10 +3193,11 @@ public class CardFactoryUtil {
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", c.getController());
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", c.getController());
             has &= AllZoneUtil.isCardInPlay("Throne of Empires", c.getController());
-            if (has)
+            if (has) {
                 return doXMath(Integer.parseInt(sq[1]), m, c);
-            else
+            } else {
                 return doXMath(Integer.parseInt(sq[2]), m, c);
+            }
         }
 
         // Count$ThisTurnEntered <ZoneDestination> <ZoneOrigin> <Valid>
@@ -3948,8 +3952,9 @@ public class CardFactoryUtil {
 
         Card c = ability.getSourceCard();
 
-        if (target != null && c.getText().contains("deals X damage to target") && !c.getName().equals("Death Grasp"))
+        if (target != null && c.getText().contains("deals X damage to target") && !c.getName().equals("Death Grasp")) {
             neededDamage = target.getNetDefense() - target.getDamage();
+        }
 
         return neededDamage;
     }
@@ -4297,7 +4302,7 @@ public class CardFactoryUtil {
      * @param To
      *            the to
      */
-    public static void copyCharacteristics(Card From, Card To) {
+    public static void copyCharacteristics(final Card From, final Card To) {
         To.setBaseAttack(From.getBaseAttack());
         To.setBaseDefense(From.getBaseDefense());
         To.setBaseLoyalty(From.getBaseLoyalty());
@@ -4355,7 +4360,7 @@ public class CardFactoryUtil {
             String parse = card.getKeyword().get(kicker).toString();
             card.removeIntrinsicKeyword(parse);
 
-            String k[] = parse.split(":");
+            String[] k = parse.split(":");
             final String kickerCost = k[1];
 
             ManaCost mc = new ManaCost(card.getManaCost());
@@ -4382,7 +4387,7 @@ public class CardFactoryUtil {
             int n = CardFactoryUtil.hasKeyword(card, "Multikicker");
             if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                String k[] = parse.split("kicker ");
+                String[] k = parse.split("kicker ");
 
                 SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsMultiKicker(true);
@@ -4394,7 +4399,7 @@ public class CardFactoryUtil {
             int n = CardFactoryUtil.hasKeyword(card, "Replicate");
             if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                String k[] = parse.split("cate ");
+                String[] k = parse.split("cate ");
 
                 SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsReplicate(true);
@@ -4424,7 +4429,7 @@ public class CardFactoryUtil {
             String parse = card.getKeyword().get(evokeKeyword).toString();
             card.removeIntrinsicKeyword(parse);
 
-            String k[] = parse.split(":");
+            String[] k = parse.split(":");
             final String evokedCost = k[1];
 
             evokedSpell.setManaCost(evokedCost);
@@ -4449,7 +4454,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final String manacost = k[1];
 
                 card.addSpellAbility(ability_cycle(card, manacost));
@@ -4462,7 +4467,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final String type = k[1];
                 final String manacost = k[2];
 
@@ -4476,7 +4481,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
 
                 card.setFlashback(true);
                 card.addSpellAbility(ability_Flashback(card, k[1]));
@@ -4489,7 +4494,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final String manacost = k[1];
 
                 card.addSpellAbility(ability_transmute(card, manacost));
@@ -4502,7 +4507,7 @@ public class CardFactoryUtil {
             int n = shiftPos;
             String parse = card.getKeyword().get(n).toString();
 
-            String k[] = parse.split(":");
+            String[] k = parse.split(":");
             final String manacost = k[1];
 
             card.addDestroyCommand(ability_Soulshift(card, manacost));
@@ -4515,7 +4520,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final String manacost = k[1];
 
                 card.setEchoCost(manacost);
@@ -4537,7 +4542,7 @@ public class CardFactoryUtil {
             String toParse = card.getKeyword().get(CardFactoryUtil.hasKeyword(card, "HandSize"));
             card.removeIntrinsicKeyword(toParse);
 
-            String parts[] = toParse.split(" ");
+            String[] parts = toParse.split(" ");
             final String mode = parts[1];
             final int amount;
             if (parts[2].equals("INF")) {
@@ -4614,7 +4619,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
                 card.setSuspend(true);
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
 
                 final int timeCounters = Integer.parseInt(k[1]);
                 final String cost = k[2];
@@ -4654,7 +4659,7 @@ public class CardFactoryUtil {
             if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final int power = Integer.parseInt(k[1]);
 
                 card.addComesIntoPlayCommand(fading(card, power));
@@ -4666,7 +4671,7 @@ public class CardFactoryUtil {
             if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final int power = Integer.parseInt(k[1]);
 
                 card.addComesIntoPlayCommand(vanishing(card, power));
@@ -4697,7 +4702,7 @@ public class CardFactoryUtil {
                 }
 
                 for (int i = 0; i < altCosts.length; i++) {
-                    String aa[] = altCosts[i].split("\\$");
+                    String[] aa = altCosts[i].split("\\$");
 
                     for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
                         aa[aaCnt] = aa[aaCnt].trim();
@@ -4736,8 +4741,9 @@ public class CardFactoryUtil {
 
                 SpellAbility_Restriction restriction = new SpellAbility_Restriction();
                 restriction.setRestrictions(mapParams);
-                if (!mapParams.containsKey("ActivationZone"))
+                if (!mapParams.containsKey("ActivationZone")) {
                     restriction.setZone(Constant.Zone.Hand);
+                }
                 altCostSA.setRestrictions(restriction);
 
                 altCostSA.setDescription(sb.toString());
@@ -5051,7 +5057,7 @@ public class CardFactoryUtil {
                 splitString = " or an ";
             }
 
-            final String types[] = parse.substring(60, parse.length() - 1).split(splitString);
+            final String[] types = parse.substring(60, parse.length() - 1).split(splitString);
 
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 403635232455049834L;
@@ -5130,7 +5136,7 @@ public class CardFactoryUtil {
                 card.removeIntrinsicKeyword(parse);
                 card.setCanMorph(true);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
                 final Cost cost = new Cost(k[1], cardName, true);
 
                 int attack = card.getBaseAttack();
@@ -5149,7 +5155,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
 
                 final String manacost = k[1];
 
@@ -5164,7 +5170,7 @@ public class CardFactoryUtil {
                 String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
 
-                String k[] = parse.split(":");
+                String[] k = parse.split(":");
 
                 card.setMadness(true);
                 card.setMadnessCost(k[1]);
@@ -5316,7 +5322,7 @@ public class CardFactoryUtil {
             String parse = card.getKeyword().get(etbCounter).toString();
             card.removeIntrinsicKeyword(parse);
 
-            String p[] = parse.split(":");
+            String[] p = parse.split(":");
             final Counters counter = Counters.valueOf(p[1]);
             final String numCounters = p[2];
             final String condition = p.length > 3 ? p[3] : "";
