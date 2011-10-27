@@ -101,13 +101,13 @@ public final class DeckEditorCommon extends DeckEditorBase {
         columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.fnNameCompare,
                 PresetColumns.fnNameGet));
         columns.add(new TableColumnInfo<InventoryItem>("Cost", 75, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare,
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 60, PresetColumns.fnColorCompare,
                 PresetColumns.fnColorGet));
         columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare,
                 PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare,
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 60, PresetColumns.fnStatsCompare,
                 PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare,
+        columns.add(new TableColumnInfo<InventoryItem>("R", 25, PresetColumns.fnRarityCompare,
                 PresetColumns.fnRarityGet));
         columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
         columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare,
