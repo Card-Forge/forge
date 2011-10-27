@@ -286,7 +286,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Player owner = null;
     private ArrayList<Object> controllerObjects = new ArrayList<Object>();
-    private String imageName = "";
+    
     // private String rarity = "";
     private String text = "";
     private String echoCost = "";
@@ -3427,7 +3427,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setImageName(final String s) {
-        imageName = s;
+        getCharacteristics().setImageName(s);
     }
 
     /**
@@ -3438,8 +3438,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getImageName() {
-        if (!imageName.equals("")) {
-            return imageName;
+        if (!getCharacteristics().getImageName().equals("")) {
+            return getCharacteristics().getImageName();
         }
         return getName();
     }
