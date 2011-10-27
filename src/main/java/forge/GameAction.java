@@ -183,7 +183,8 @@ public class GameAction {
         // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (!zone.is(Constant.Zone.Battlefield)
                 && !(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
-                        .is(Constant.Zone.Library))) {
+                        .is(Constant.Zone.Library)))
+        {
             copied.clearCounters();
         }
 
@@ -210,9 +211,11 @@ public class GameAction {
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
-                && !zone.is(Constant.Zone.Exile)) {
+                && !zone.is(Constant.Zone.Exile))
+        {
             PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
-            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
+            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
+            + "exile it instead of putting it anywhere else.");
             return moveTo(removed, c);
         }
 
@@ -347,7 +350,9 @@ public class GameAction {
         }
 
         for (Card card : opponentsBoard) {
-            if (card.hasKeyword("If a card would be put into an opponent's graveyard from anywhere, exile it instead.")) {
+            if (card.hasKeyword("If a card would be put into an opponent's "
+        + "graveyard from anywhere, exile it instead."))
+            {
                 return moveTo(exile, c);
             }
         }
@@ -526,7 +531,8 @@ public class GameAction {
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
             PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
-            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
+            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
+            + "exile it instead of putting it anywhere else.");
             return moveTo(removed, c);
         }
 
@@ -889,10 +895,11 @@ public class GameAction {
                         // the isValid check
                         if (!AllZoneUtil.isCardInPlay(perm)
                                 || CardFactoryUtil.hasProtectionFrom(c, perm)
-                                || ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature")) && !perm
-                                        .isCreature())
+                                || ((c.hasKeyword("Enchant creature")
+                                        || c.hasKeyword("Enchant tapped creature")) && !perm.isCreature())
                                 || (c.hasKeyword("Enchant tapped creature") && perm.isUntapped())
-                                || (tgt != null && !perm.isValid(tgt.getValidTgts(), c.getController(), c))) {
+                                || (tgt != null && !perm.isValid(tgt.getValidTgts(), c.getController(), c)))
+                        {
                             c.unEnchantEntity(perm);
                             moveToGraveyard(c);
                             checkAgain = true;
@@ -904,7 +911,7 @@ public class GameAction {
                         if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().isPlayer(pl)) {
                             invalid = true;
                         } else {
-                            // TODO: Check Player Protection once it's added.
+                            // TODO Check Player Protection once it's added.
                         }
                         if (invalid) {
                             c.unEnchantEntity(pl);
@@ -1194,7 +1201,8 @@ public class GameAction {
      */
     public final boolean destroy(final Card c) {
         if (!AllZoneUtil.isCardInPlay(c)
-                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) {
+                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0)))
+        {
             return false;
         }
 
@@ -1507,7 +1515,7 @@ public class GameAction {
         // "Plains"}; //unused
 
         // Thread stuff with as large a spread of colors as possible:
-        String[] allLand = { "Bayou", "Volcanic Island", "Savannah", "Badlands", "Tundra", "Taiga", "Underground Sea",
+        String[] allLand = {"Bayou", "Volcanic Island", "Savannah", "Badlands", "Tundra", "Taiga", "Underground Sea",
                 "Plateau", "Tropical Island", "Scrubland", "Overgrown Tomb", "Steam Vents", "Temple Garden",
                 "Blood Crypt", "Hallowed Fountain", "Stomping Ground", "Watery Grave", "Sacred Foundry",
                 "Breeding Pool", "Godless Shrine", "Pendelhaven", "Flagstones of Trokair", "Forest", "Swamp",
@@ -1515,7 +1523,7 @@ public class GameAction {
                 "Seat of the Synod", "Ancient Den", "Treetop Village", "Ghitu Encampment", "Faerie Conclave",
                 "Forbidding Watchtower", "Savage Lands", "Arcane Sanctum", "Jungle Shrine", "Crumbling Necropolis",
                 "Seaside Citadel", "Elfhame Palace", "Coastal Tower", "Salt Marsh", "Kher Keep",
-                "Library of Alexandria", "Dryad Arbor" };
+                "Library of Alexandria", "Dryad Arbor"};
 
         ArrayList<CardList> land = new ArrayList<CardList>();
 
@@ -1613,7 +1621,7 @@ public class GameAction {
                     Computer_Flip + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-    }// seeWhoPlaysFirst_CoinToss()
+    } // seeWhoPlaysFirst_CoinToss()
 
     private Card HumanCut = null;
     private Card ComputerCut = null;
@@ -1634,7 +1642,7 @@ public class GameAction {
         int Cut_Count = 0;
         int Cut_CountMax = 20;
         for (int i = 0; i < Cut_CountMax; i++) {
-            if (Starter_Determined == true) {
+            if (Starter_Determined) {
                 break;
             }
 
@@ -1916,7 +1924,7 @@ public class GameAction {
             return manaCost;
         }
 
-        if (spell.isSpell() == true) {
+        if (spell.isSpell()) {
             if (originalCard.getName().equals("Avatar of Woe")) {
                 Player player = AllZone.getPhase().getPlayerTurn();
                 Player opponent = player.getOpponent();
@@ -1963,8 +1971,8 @@ public class GameAction {
                     for (int i = 0; i < chosenAmount; i++) {
                         Card nowChosen = (Card) GuiUtils.getChoiceOptional("Exile which card?", choices.toArray());
 
-                        if (nowChosen == null) // User canceled,abort delving.
-                        {
+                        if (nowChosen == null) {
+                         // User canceled,abort delving.
                             chosen.clear();
                             break;
                         }
@@ -2111,7 +2119,8 @@ public class GameAction {
                         }
                     }
                     if ((k[1].equals("Player") && card.getController().equals(controller)
-                            || (k[1].equals("Opponent") && card.getController().equals(controller.getOpponent())) || k[1]
+                            || (k[1].equals("Opponent")
+                                    && card.getController().equals(controller.getOpponent())) || k[1]
                                 .equals("All"))
                             && ((k[4].equals("Spell") && sa.isSpell() == true)
                                     || (k[4].equals("Ability") && sa.isAbility() == true)
@@ -2297,10 +2306,11 @@ public class GameAction {
                             }
                         }
                         if ((k[1].equals("Player") && card.getController().equals(controller)
-                                || (k[1].equals("Opponent") && card.getController().equals(controller.getOpponent())) || k[1]
+                                || (k[1].equals("Opponent")
+                                        && card.getController().equals(controller.getOpponent())) || k[1]
                                     .equals("All"))
-                                && ((k[4].equals("Spell") && sa.isSpell() == true)
-                                        || (k[4].equals("Ability") && sa.isAbility() == true)
+                                && ((k[4].equals("Spell") && sa.isSpell())
+                                        || (k[4].equals("Ability") && sa.isAbility())
                                         || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                         || (k[4].equals("Self") && originalCard.equals(card))
                                         || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
@@ -2310,7 +2320,7 @@ public class GameAction {
                                         || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6]
                                             .equals("All"))) {
                             if (k[7].contains("CardIsTapped")) {
-                                if (card.isTapped() == false) {
+                                if (!card.isTapped()) {
                                     k[3] = "0";
                                 }
                             }
@@ -2390,9 +2400,9 @@ public class GameAction {
                                     // sa.getSourceCard().addXManaCostPaid(1);
                                     // Not Included as X Costs are not in
                                     // Colored Mana
-                                    if (sa.isMultiKicker())
-                                     {
-                                        CostCutting_GetMultiMickerManaCostPaid_Colored = CostCutting_GetMultiMickerManaCostPaid_Colored
+                                    if (sa.isMultiKicker()) {
+                                        CostCutting_GetMultiMickerManaCostPaid_Colored
+                                        = CostCutting_GetMultiMickerManaCostPaid_Colored
                                                 + k[3];
                                     // JOptionPane.showMessageDialog(null,
                                     // CostCutting_GetMultiMickerManaCostPaid_Colored,
@@ -2433,7 +2443,7 @@ public class GameAction {
             }
         }
 
-        if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
+        if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell()) {
             Player player = AllZone.getPhase().getPlayerTurn();
             CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
             playerCreature = playerCreature.filter(CardListFilter.green);
