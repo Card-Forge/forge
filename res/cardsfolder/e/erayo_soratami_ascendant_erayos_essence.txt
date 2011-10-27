@@ -8,6 +8,7 @@ T:Mode$SpellCast | CheckSVar$NumCast | SVarCompare$ EQ4 | Execute$ TrigFlip | Tr
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:NumCast:Count$ThisTurnCast Card
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/erayo_soratami_ascendant.jpg
 AlternateMode:Flip
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/35.jpg
 Oracle:Flying\nWhenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
@@ -23,6 +24,8 @@ T:Mode$SpellCast | ValidControllingPlayer$ Opponent | CheckSVar$ NumOppCast | SV
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | Destination$ Graveyard
 SVar:NumOppCast:Count$ThisTurnCast Card.YouDontCtrl
 SVar:Rarity:Rare
+# SVar:Picture:http://www.wizards.com/global/images/magic/general/erayos_essence.jpg
+# This link 404s
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/167.jpg
 Oracle:Whenever an opponent casts a spell for the first time in a turn, counter that spell.
 
