@@ -417,6 +417,9 @@ public final class AbilityFactory_Reveal {
                                     AllZone.getGameAction().moveToLibrary(c, libraryPosition);
                                 } else {
                                     AllZone.getGameAction().moveTo(zone, c);
+                                    if (destZone1.equals(Zone.Battlefield) && params.containsKey("Tapped")) {
+                                        c.setTapped(true);
+                                    }
                                 }
                                 if (params.containsKey("RememberChanged")) {
                                     host.addRemembered(c);
@@ -454,6 +457,9 @@ public final class AbilityFactory_Reveal {
                                             for (String kw : keywords) {
                                                 c.addExtrinsicKeyword(kw);
                                             }
+                                            if (params.containsKey("Tapped")) {
+                                                c.setTapped(true);
+                                            }
                                         }
                                     }
                                     // AllZone.getGameAction().revealToComputer()
@@ -475,10 +481,13 @@ public final class AbilityFactory_Reveal {
                                     if (zone.is(Zone.Library)) {
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
-                                        AllZone.getGameAction().moveTo(zone, chosen);
+                                        Card c = AllZone.getGameAction().moveTo(zone, chosen);
                                         if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                             for (String kw : keywords) {
                                                 chosen.addExtrinsicKeyword(kw);
+                                            }
+                                            if (params.containsKey("Tapped")) {
+                                                c.setTapped(true);
                                             }
                                         }
                                     }
