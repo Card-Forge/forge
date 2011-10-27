@@ -28,10 +28,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-
 /**
- * <p>GuiUtils class.</p>
- *
+ * <p>
+ * GuiUtils class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -42,10 +43,11 @@ public final class GuiUtils {
     }
 
     /**
-     * This method takes a collection of components and sets the width of each component
-     * to the maximum of the collection.
-     *
-     * @param components a {@link java.util.Collection} object.
+     * This method takes a collection of components and sets the width of each
+     * component to the maximum of the collection.
+     * 
+     * @param components
+     *            a {@link java.util.Collection} object.
      */
     public static void setWidthToMax(final Collection<Component> components) {
         int maxWidth = 0;
@@ -66,8 +68,9 @@ public final class GuiUtils {
 
     /**
      * Adds a Horizontal Glue to panel.
-     *
-     * @param panel a {@link javax.swing.JPanel} object.
+     * 
+     * @param panel
+     *            a {@link javax.swing.JPanel} object.
      */
     public static void addExpandingHorizontalSpace(final JPanel panel) {
         panel.add(Box.createHorizontalGlue());
@@ -75,8 +78,9 @@ public final class GuiUtils {
 
     /**
      * Adds a Vertical Glue to panel.
-     *
-     * @param panel a {@link javax.swing.JPanel} object.
+     * 
+     * @param panel
+     *            a {@link javax.swing.JPanel} object.
      */
     public static void addExpandingVerticalSpace(final JPanel panel) {
         panel.add(Box.createHorizontalGlue());
@@ -84,9 +88,11 @@ public final class GuiUtils {
 
     /**
      * Adds a rigid area of size strutSize to panel.
-     *
-     * @param panel a {@link javax.swing.JPanel} object.
-     * @param strutSize a int.
+     * 
+     * @param panel
+     *            a {@link javax.swing.JPanel} object.
+     * @param strutSize
+     *            a int.
      */
     public static void addGap(final JPanel panel, final int strutSize) {
         panel.add(Box.createRigidArea(new Dimension(strutSize, strutSize)));
@@ -94,8 +100,9 @@ public final class GuiUtils {
 
     /**
      * Adds a rigid area of size 5 to panel.
-     *
-     * @param panel a {@link javax.swing.JPanel} object.
+     * 
+     * @param panel
+     *            a {@link javax.swing.JPanel} object.
      */
     public static void addGap(final JPanel panel) {
         panel.add(Box.createRigidArea(new Dimension(5, 5)));
@@ -103,9 +110,11 @@ public final class GuiUtils {
 
     /**
      * Sets the font size of a component.
-     *
-     * @param component a {@link java.awt.Component} object.
-     * @param newSize a int.
+     * 
+     * @param component
+     *            a {@link java.awt.Component} object.
+     * @param newSize
+     *            a int.
      */
     public static void setFontSize(final Component component, final int newSize) {
         Font oldFont = component.getFont();
@@ -113,9 +122,12 @@ public final class GuiUtils {
     }
 
     /**
-     * <p>getIconFromFile.</p>
-     *
-     * @param filename a {@link java.lang.String} object.
+     * <p>
+     * getIconFromFile.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
      * @return a {@link javax.swing.ImageIcon} object.
      */
     public static ImageIcon getIconFromFile(final String filename) {
@@ -127,43 +139,52 @@ public final class GuiUtils {
             return new ImageIcon(file.toString());
         }
     }
-    
+
     /**
-     * <p>getResizedIcon.</p>
-     *
-     * @param {@link java.lang.String} filename.
-     * @param {@link java.lang.Double} scale
+     * <p>
+     * getResizedIcon.
+     * </p>
+     * 
+     * @param filename String.
+     * @param scale Double.
      * @return {@link javax.swing.ImageIcon} object
      */
-    public static ImageIcon getResizedIcon(final String filename, double scale) {
+    public static ImageIcon getResizedIcon(final String filename, final double scale) {
         ImageIcon icon = getIconFromFile(filename);
-        
-        int w = (int) (icon.getIconWidth()*scale);
-        int h = (int) (icon.getIconHeight()*scale);
-        
-        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
-    }
-    
-    /**
-     * <p>getResizedIcon.</p>
-     *
-     * @param {@link javax.swing.ImageIcon} object
-     * @param {@link java.lang.Double} scale
-     * @return {@link javax.swing.ImageIcon} object
-     */
-    public static ImageIcon getResizedIcon(final ImageIcon icon, double scale) {
-        int w = (int) (icon.getIconWidth()*scale);
-        int h = (int) (icon.getIconHeight()*scale);
-        
+
+        int w = (int) (icon.getIconWidth() * scale);
+        int h = (int) (icon.getIconHeight() * scale);
+
         return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
 
     /**
-     * <p>getResizedIcon.</p>
-     *
-     * @param icon a {@link javax.swing.ImageIcon} object.
-     * @param width a int.
-     * @param height a int.
+     * <p>
+     * getResizedIcon.
+     * </p>
+     * 
+     * @param icon ImageIcon
+     * @param scale Double
+     * @return {@link javax.swing.ImageIcon} object
+     */
+    public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
+        int w = (int) (icon.getIconWidth() * scale);
+        int h = (int) (icon.getIconHeight() * scale);
+
+        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
+    }
+
+    /**
+     * <p>
+     * getResizedIcon.
+     * </p>
+     * 
+     * @param icon
+     *            a {@link javax.swing.ImageIcon} object.
+     * @param width
+     *            a int.
+     * @param height
+     *            a int.
      * @return a {@link javax.swing.ImageIcon} object.
      */
     public static ImageIcon getResizedIcon(final ImageIcon icon, final int width, final int height) {
@@ -171,10 +192,14 @@ public final class GuiUtils {
     }
 
     /**
-     * <p>getEmptyIcon.</p>
-     *
-     * @param width a int.
-     * @param height a int.
+     * <p>
+     * getEmptyIcon.
+     * </p>
+     * 
+     * @param width
+     *            a int.
+     * @param height
+     *            a int.
      * @return a {@link javax.swing.ImageIcon} object.
      */
     public static ImageIcon getEmptyIcon(final int width, final int height) {
@@ -185,14 +210,17 @@ public final class GuiUtils {
      * Convenience for getChoices(message, 0, 1, choices).
      * 
      * @see #getChoices(String, int, int, Object...)
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
-     * @param <T> is automatically inferred.
      * 
-     * @return null if choices is missing, empty, or if the users'
-     * choices are empty; otherwise, returns the first item in
-     * the List returned by getChoices.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
+     * @param <T>
+     *            is automatically inferred.
+     * 
+     * @return null if choices is missing, empty, or if the users' choices are
+     *         empty; otherwise, returns the first item in the List returned by
+     *         getChoices.
      */
     public static <T> T getChoiceOptional(final String message, final T... choices) {
         if (choices == null || choices.length == 0) {
@@ -200,20 +228,23 @@ public final class GuiUtils {
         }
         List<T> choice = getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
-    } //getChoiceOptional(String,T...)
+    } // getChoiceOptional(String,T...)
 
     /**
-     * Like getChoiceOptional, but this takes an Iterator instead of a
-     * variable number of arguments.
-     *
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param choices an Iterator over T objects.
-     * @param <T> is automatically inferred.
+     * Like getChoiceOptional, but this takes an Iterator instead of a variable
+     * number of arguments.
      * 
-     * @return null if choices is missing, empty, or if the users'
-     * choices are empty; otherwise, returns the first item in
-     * the List returned by getChoices.
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            an Iterator over T objects.
+     * @param <T>
+     *            is automatically inferred.
+     * 
+     * @return null if choices is missing, empty, or if the users' choices are
+     *         empty; otherwise, returns the first item in the List returned by
+     *         getChoices.
      */
     public static <T> T getChoiceOptional(final String message, final Iterator<T> choices) {
         if (choices == null | !choices.hasNext()) {
@@ -226,58 +257,80 @@ public final class GuiUtils {
 
         List<T> choice = getChoices(message, 0, 1, choicesArray);
         return choice.isEmpty() ? null : choice.get(0);
-    } //getChoiceOptional(String,Iterator<T>)
+    } // getChoiceOptional(String,Iterator<T>)
 
     // returned Object will never be null
     /**
-     * <p>getChoice.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
-     * @param <T> a T object.
+     * <p>
+     * getChoice.
+     * </p>
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
+     * @param <T>
+     *            a T object.
      * @return a T object.
      */
     public static <T> T getChoice(final String message, final T... choices) {
         List<T> choice = getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
-    } //getChoice()
+    } // getChoice()
 
     // returned Object will never be null
     /**
-     * <p>getChoicesOptional.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
-     * @param <T> a T object.
+     * <p>
+     * getChoicesOptional.
+     * </p>
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
+     * @param <T>
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoicesOptional(final String message, final T... choices) {
         return getChoices(message, 0, choices.length, choices);
-    } //getChoice()
+    } // getChoice()
 
     // returned Object will never be null
     /**
-     * <p>getChoices.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
-     * @param <T> a T object.
+     * <p>
+     * getChoices.
+     * </p>
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
+     * @param <T>
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final T... choices) {
         return getChoices(message, 1, choices.length, choices);
-    } //getChoice()
+    } // getChoice()
 
     // returned Object will never be null
     /**
-     * <p>getChoices.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param min a int.
-     * @param max a int.
-     * @param choices a T object.
-     * @param <T> a T object.
+     * <p>
+     * getChoices.
+     * </p>
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param min
+     *            a int.
+     * @param max
+     *            a int.
+     * @param choices
+     *            a T object.
+     * @param <T>
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {
@@ -292,12 +345,13 @@ public final class GuiUtils {
         });
         c.show();
         return c.getSelectedValues();
-    } //getChoice()
+    } // getChoice()
 
     /**
      * Centers a frame on the screen based on its current size.
-     *
-     * @param frame a fully laid-out frame
+     * 
+     * @param frame
+     *            a fully laid-out frame
      */
     public static void centerFrame(final Window frame) {
         Dimension screen = frame.getToolkit().getScreenSize();
@@ -308,23 +362,24 @@ public final class GuiUtils {
         bounds.y = (screen.height - bounds.height) / 2;
         frame.setBounds(bounds);
     }
-    
+
     /**
-     * Attempts to create a font from a filename. Concise error reported 
-     * if exceptions found.
-     *
-     * @param {@link java.lang.String} filename
+     * Attempts to create a font from a filename. Concise error reported if
+     * exceptions found.
+     * 
+     * @param filename String
+     * @return Font
      */
-    public static Font newFont(String filename) {
+    public static Font newFont(final String filename) {
         File file = new File(filename);
         Font ttf = null;
-        
+
         try {
-            ttf = Font.createFont(Font.TRUETYPE_FONT,file);
+            ttf = Font.createFont(Font.TRUETYPE_FONT, file);
         } catch (FontFormatException e) {
             System.err.println("GuiUtils > newFont: bad font format \"" + filename + "\"");
         } catch (IOException e) {
-            System.err.println("GuiUtils > newFont: can't find \""+filename+"\"");
+            System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
     }

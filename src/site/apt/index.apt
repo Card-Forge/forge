@@ -39,11 +39,11 @@ Forge
 
   * {{{http://cardforge.org/releases/snapshots/forge/forge}Forge Snapshot Builds}}
 
-  * {{{/apidocs/index.html}JavaDocs}}
+  * {{{./apidocs/index.html}JavaDocs}}
 
-  * {{{/xref/index.html}Browsable Source Code}}
+  * {{{./xref/index.html}Browsable Source Code}}
 
-  * {{{/project-reports.html}Project Reports}}
+  * {{{./project-reports.html}Project Reports}}
 
 
  <<Related Links>>

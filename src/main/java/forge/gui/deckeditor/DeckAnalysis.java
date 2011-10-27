@@ -51,7 +51,7 @@ import forge.item.ItemPoolView;
  */
 public class DeckAnalysis extends javax.swing.JDialog {
 
-    /** Constant <code>serialVersionUID=-8475271235196182185L</code> */
+    /** Constant <code>serialVersionUID=-8475271235196182185L</code>. */
     private static final long serialVersionUID = -8475271235196182185L;
     private JPanel jPanel1;
     private JLabel jLabelColorless;
@@ -1009,12 +1009,12 @@ public class DeckAnalysis extends javax.swing.JDialog {
         }
 
         if (rList.size() >= 40) {
-            jList1Model = new DefaultComboBoxModel(new String[] { rList.get(0).getName(), rList.get(1).getName(),
+            jList1Model = new DefaultComboBoxModel(new String[] {rList.get(0).getName(), rList.get(1).getName(),
                     rList.get(2).getName(), rList.get(3).getName(), rList.get(4).getName(), rList.get(5).getName(),
-                    rList.get(6).getName() });
+                    rList.get(6).getName()});
 
         } else {
-            jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
+            jList1Model = new DefaultComboBoxModel(new String[] {"Few cards."});
         }
 
         jListFirstHand.setModel(jList1Model);
@@ -1180,8 +1180,8 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JTable getJTable1() {
         if (jTable1 == null) {
             DefaultTableModel dm = new DefaultTableModel();
-            dm.setDataVector(new Object[][] { {} }, new Object[] { "Card", "Qty", "1st", "2nd", "3rd", "4th", "5th",
-                    "6th", "7th" });
+            dm.setDataVector(new Object[][] { {} }, new Object[] {"Card", "Qty", "1st", "2nd", "3rd", "4th", "5th",
+                    "6th", "7th"});
 
             jTable1 = new JTable(dm);
             List<CardPrinted> rList = deck.toFlatList();
@@ -1204,7 +1204,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
                         cCount = cCount + 1;
 
                     } else {
-                        dm.addRow(new Object[][] { {} });
+                        dm.addRow(new Object[][] {{}});
                         jTable1.setValueAt(cardsName[i], dm.getRowCount() - 1, 0);
                         jTable1.setValueAt(cCount, dm.getRowCount() - 2, 1);
                         fCount = cCount;

@@ -128,7 +128,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * </p>
      * 
      * @param type
-     *            a {@link treeProperties.PropertyType} object.
+     *            a {@link tree.properties.PropertyType} object.
      */
     public static void addType(final PropertyType<?> type) {
         TYPES.put(type.getType(), type);
@@ -141,7 +141,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * </p>
      * 
      * @param type
-     *            a {@link treeProperties.PropertyType} object.
+     *            a {@link tree.properties.PropertyType} object.
      */
     public static void removeType(final PropertyType<?> type) {
         TYPES.remove(type.getType());
@@ -330,7 +330,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @param key
      *            a {@link java.lang.String} object.
-     * @return a {@link treeProperties.TreeProperties} object.
+     * @return a {@link tree.properties.TreeProperties} object.
      */
     public final TreeProperties getTransparentProperties(final String key) {
         return (TreeProperties) getProperty(key, "--" + TRANSPARENT, true);
@@ -437,7 +437,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @param prefix
      *            a {@link java.lang.String} object.
-     * @return a {@link treeProperties.TreeProperties.TreePropertiesIterator}
+     * @return a {@link tree.properties.TreeProperties.TreePropertiesIterator}
      *         object.
      */
     private TreePropertiesIterator iterator(final String prefix) {

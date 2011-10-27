@@ -36,7 +36,7 @@ public interface PropertyType<T> {
      * TreeProperties.
      * 
      * @param p
-     *            a {@link treeProperties.TreeProperties} object.
+     *            a {@link tree.properties.TreeProperties} object.
      * @param s
      *            a {@link java.lang.String} object.
      * @return a T object.

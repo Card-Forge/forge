@@ -3771,7 +3771,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>enchanting</code>.
      * </p>
      * 
-     * @return a {@link forge.enchanting} object.
+     * @return a {@link forge.GameEntity} object.
      */
     public final GameEntity getEnchanting() {
         return enchanting;

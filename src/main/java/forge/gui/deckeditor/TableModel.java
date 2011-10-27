@@ -252,6 +252,9 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * 
      * @see javax.swing.table.TableModel#getRowCount()
      */
+    /**
+     * @return int
+     */
     public int getRowCount() {
         return data.countDistinct();
     }
@@ -260,6 +263,9 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * (non-Javadoc)
      * 
      * @see javax.swing.table.TableModel#getColumnCount()
+     */
+    /**
+     * @return int
      */
     public int getColumnCount() {
         return columns.size();
@@ -280,11 +286,10 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * The listener interface for receiving column events. The class that is
      * interested in processing a column event implements this interface, and
      * the object created with that class is registered with a component using
-     * the component's <code>addColumnListener<code> method. When
+     * the component's addColumnListener method. When
      * the column event occurs, that object's appropriate
      * method is invoked.
      * 
-     * @see ColumnEvent
      */
     class ColumnListener extends MouseAdapter {
 
@@ -306,6 +311,9 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
          * 
          * @see
          * java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
+         */
+        /**
+         * @param e MouseEvent
          */
         public void mouseClicked(final MouseEvent e) {
             TableColumnModel colModel = table.getColumnModel();
@@ -376,7 +384,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
         table.getTableHeader().addMouseListener(new ColumnListener(table));
 
-    }// addCardListener()
+    } // addCardListener()
 
     /**
      * Resort.
@@ -398,4 +406,4 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         resort();
     }
 
-}// CardTableModel
+} // CardTableModel

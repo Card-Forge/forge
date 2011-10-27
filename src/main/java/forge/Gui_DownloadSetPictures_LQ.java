@@ -86,6 +86,6 @@ public class Gui_DownloadSetPictures_LQ extends GuiDownloader {
         cList.toArray(out);
 
         return out;
-    }// getNeededImages()
+    } // getNeededImages()
 
 } // end class Gui_DownloadSetPictures_LQ

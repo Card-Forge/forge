@@ -376,7 +376,7 @@ public final class AllZone implements NewConstants {
      * getGameInfo.
      * </p>
      * 
-     * @return a {@link forge.GameSummary} object.
+     * @return a {@link forge.game.GameSummary} object.
      * @since 1.0.15
      */
     public static GameSummary getGameInfo() {

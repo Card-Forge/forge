@@ -677,7 +677,7 @@ public class AbilityFactory_Attach {
             }
         }
 
-        list = list.getNotType(type);// Filter out Basic Lands that have the
+        list = list.getNotType(type); // Filter out Basic Lands that have the
                                      // same type as the changing type
 
         Card c = CardFactoryUtil.AI_getBest(list);
@@ -997,8 +997,8 @@ public class AbilityFactory_Attach {
 
                     crd.addController(card);
 
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
             Command onUnEnchant = new Command() {
                 private static final long serialVersionUID = 3426441132121179288L;
@@ -1013,8 +1013,8 @@ public class AbilityFactory_Attach {
                         crd.removeController(card);
                     }
 
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
             Command onChangesControl = new Command() {
                 /** automatically generated serialVersionUID. */
@@ -1028,8 +1028,8 @@ public class AbilityFactory_Attach {
                     crd.removeController(card); // This looks odd, but will
                                                 // simply refresh controller
                     crd.addController(card);
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
             // Add Enchant Commands for Control changers
             card.addEnchantCommand(onEnchant);
@@ -1048,7 +1048,7 @@ public class AbilityFactory_Attach {
 
                 card.unEnchantEntity(entity);
             }
-        };// Command
+        }; // Command
 
         card.addLeavesPlayCommand(onLeavesPlay);
         card.enchantEntity(tgt);

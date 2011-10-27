@@ -136,7 +136,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card AI_getCheapestCreature(final CardList list, final Card spell, final boolean targeted) {
+    public static Card AI_getCheapestCreature(CardList list, final Card spell, final boolean targeted) {
         list = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
                 return c.isCreature();

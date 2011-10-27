@@ -41,7 +41,7 @@ public class ForgeProps {
     /**
      * Returns the tree properties of forge.
      *
-     * @return a {@link treeProperties.TreeProperties} object.
+     * @return a {@link tree.properties.TreeProperties} object.
      */
     public static TreeProperties getProperties() {
         return properties;
