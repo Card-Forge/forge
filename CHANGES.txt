@@ -189,6 +189,58 @@ Fixes/Features:
 - checkstyle
 - Fixed the mill function not using moveToGraveyard.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed text on Initiate of Blood / Goka the Unjust
+- Moved StaticAbilityStrings from Card to CardCharacteristics.
+- added Picture SVar to Gatstaf Shepard/Gatstaf Howler
+- This fixes the problem where the card detail and card picture panels in the deck editor were pushed to far to the right. Decreased the minimum width for the jLabelAnalysisGap component and this should take care of this issue.
+- Fixed token images. (Forgot to copy one value >_>)
+- Added multistate handling to Download Card LQ Pictures
+- ran oracle and setinfo scripts
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- checkstyle
+- Fixed Nezumi Shortfang.
+- checkstyle
+- Added LQ pic URLs to Budoka Gardener / Dokai, Weaver of Life.
+- Added LQ pic URLs to Bushi Tenderfoot / Kenzo the Hardhearted.
+- Added LQ pic URLs to Cloistered Youth / Unholy Fiend.
+- Added LQ pic URLs to Daybreak Ranger / Nightfall Predator.
+- Added LQ pic URLs to Garruk Relentless / Garruk, the Veil-Cursed.
+- Added LQ pic URLs to Grizzled Outcasts / Krallenhorde Wantons.
+- Added LQ pic URLs to Hanweir Watchkeep / Bane of Hanweir.
+- Added LQ pic URLs to Initiate of Blood / Goka the Unjust.
+- Added LQ pic URLs to Moonmist.
+- Added LQ pic URLs to Nezumi Graverobber / Nighteyes the Desecrator.
+- checkstyle
+- Added LQ pic URLs to Reckless Waif / Merciless Predator.
+- Added LQ pic URLs to Screeching Bat / Stalking Vampire.
+- checkstyle
+- Fixed Dream Fighter.
+- Little fix.
+- checkstyle
+- Added LQ pic URLs to Thraben Sentry / Thraben Militia.
+- Removed Mana Vapors. It must be an effect. Land put down after it resolves still do not untap, etc.
+- Added LQ pic URLs to Tormented Pariah / Rampaging Werewolf.
+- Added LQ pic URLs to Villagers of Estwald / Howlpack of Estwald.
+- make sure Gui_HomeScreen is centered when it pops up.
+- Added Singleton format option - if true every card in booster draft is different. Mainly for cube support.
+- Added new unpowered cube; target 540 cards; mostly based on statistics from Cube Comparison Result Thread of mtgsalvation
+- Filter out tapped cards in CostTapType
+- Hopefully fixed LQ nonSet Pic downloading.(Moved ImageName into CardCharacteristics)
+- Add LQ pic URL to Nezumi Shortfang / Stabwhisker the Odious
+- Fixed quest starting pool getting alternate state cards.
+- update links on website. Checstyle update
+- Corrected Daybreak Ranger/Nightfall Predator's untransform condition.
+- checkstyle
+- checkstyle
+- add missing package-info.java
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -270,6 +322,18 @@ Reckless Waif / Merciless Predator
 Tormented Pariah / Rampaging Werewolf
 Erayo, Soratami Ascendant / Erayo's Essence
 Initiate of Blood / Goka the Unjust
+Homura, Human Ascendant / Homura's Essence
+Jushi Apprentice / Tomoya the Revealer
+Mayor of Avabruck / HowlPack Alpha
+Instigator Gang / Wildblood Pack
+Nezumi Graverobber / Nighteyes the Desecrator
+Nezumi Shortfang / Stabwhisker the Odious
+Yawgmoth's Will
+Sigil of Sleep
+Urza's Incubator
+Jolrael, Empress of Beasts
+Brutalizer Exarch
+Panacea
 
 
 end
