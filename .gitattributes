@@ -10598,6 +10598,7 @@ src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
 src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain
 src/main/java/org/eclipse/wb/swing/FocusTraversalOnArray.java -text
+src/main/java/org/eclipse/wb/swing/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
 src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain
