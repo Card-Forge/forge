@@ -1375,6 +1375,12 @@ public class GameAction {
                     // get card picture so that it is in the image cache
                     // ImageCache.getImage(card);
                 }
+                
+                if (card.hasAlternateState()) {
+                    card.changeState();
+                    card.setImageFilename(CardUtil.buildFilename(card));
+                    card.changeState();
+                }
             }
         }
         if (RAICards.size() > 0) {
