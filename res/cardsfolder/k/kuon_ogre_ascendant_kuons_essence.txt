@@ -1,0 +1,30 @@
+Name:Kuon, Ogre Ascendant
+ManaCost:B B B
+Types:Legendary Creature Ogre Monk
+Text:no text
+PT:2/4
+T:Mode$Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigFlip | TriggerDescription$ At the beginning of the end step, if three or more creatures died this turn, flip CARDNAME.
+SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
+SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kuon_ogre_ascendant.jpg
+AlternateMode:Flip
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/78.jpg
+Oracle:At the beginning of the end step, if three or more creatures died this turn, flip Kuon, Ogre Ascendant.
+
+ALTERNATE
+
+Name:Kuon's Essence
+ManaCost:B B B
+Colors:black
+Types:Legendary Enchantment
+Text:no text
+T:Mode$Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creature
+SVar:Rarity:Rare
+#SVar:Picture:http://www.wizards.com/global/images/magic/general/kuons_essence.jpg
+#This link 404s.
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/168.jpg
+Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.
+
+End
