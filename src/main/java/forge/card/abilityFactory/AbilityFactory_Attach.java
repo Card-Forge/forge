@@ -233,7 +233,7 @@ public class AbilityFactory_Attach {
         CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
 
-        // TODO: If Attaching without casting, don't need to actually target.
+        // TODO If Attaching without casting, don't need to actually target.
         // I believe this is the only case where mandatory will be true, so just
         // check that when starting that work
         // But we shouldn't attach to things with Protection
@@ -350,7 +350,7 @@ public class AbilityFactory_Attach {
             return c;
         }
 
-        // TODO: If Not Mandatory, make sure the card is "good enough"
+        // TODO If Not Mandatory, make sure the card is "good enough"
         if (c.isCreature()) {
             int eval = CardFactoryUtil.evaluateCreature(c);
             if (eval < 160 && (eval < 130 || AllZone.getComputerPlayer().getLife() > 5)) {
@@ -511,7 +511,7 @@ public class AbilityFactory_Attach {
         }
 
         if (attachSource.isAura()) {
-            // TODO: For Auras like Rancor, that aren't as likely to lead to
+            // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
             prefList = prefList.filter(new CardListFilter() {
 

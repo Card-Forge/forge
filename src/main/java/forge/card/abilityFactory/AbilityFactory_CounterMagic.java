@@ -255,7 +255,7 @@ public class AbilityFactory_CounterMagic {
             }
         }
 
-        // TODO: Improve AI
+        // TODO Improve AI
 
         // Will return true if this spell can counter (or is Reusable and can
         // force the Human into making decisions)
@@ -334,7 +334,7 @@ public class AbilityFactory_CounterMagic {
             }
         }
 
-        // TODO: Improve AI
+        // TODO Improve AI
 
         // Will return true if this spell can counter (or is Reusable and can
         // force the Human into making decisions)
@@ -361,7 +361,7 @@ public class AbilityFactory_CounterMagic {
      */
     private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
 
-        // TODO: Before this resolves we should see if any of our targets are
+        // TODO Before this resolves we should see if any of our targets are
         // still on the stack
         ArrayList<SpellAbility> sas;
 

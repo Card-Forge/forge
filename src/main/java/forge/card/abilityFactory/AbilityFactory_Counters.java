@@ -1225,7 +1225,7 @@ public class AbilityFactory_Counters {
             chance &= subAb.chkAI_Drawback();
         }
 
-        // TODO: Make sure Human has poison counters or there are some counters
+        // TODO Make sure Human has poison counters or there are some counters
         // we want to proliferate
         return chance;
     }
@@ -1248,7 +1248,7 @@ public class AbilityFactory_Counters {
             chance &= subAb.doTrigger(mandatory);
         }
 
-        // TODO: Make sure Human has poison counters or there are some counters
+        // TODO Make sure Human has poison counters or there are some counters
         // we want to proliferate
         return chance;
     }

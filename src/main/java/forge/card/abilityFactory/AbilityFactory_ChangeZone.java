@@ -1342,7 +1342,7 @@ public final class AbilityFactory_ChangeZone {
                              {
                                 return false; // don't blink something with
                             }
-                                              // counters TODO: check good and
+                                              // counters TODO check good and
                                               // bad counters
                             return Spell_Permanent.checkETBEffects(c, null, null); // checks
                                                                                    // only

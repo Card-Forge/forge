@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>QuestBazaarStall class.</p>
  *

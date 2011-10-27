@@ -8,6 +8,6 @@ K:CostChange:Player:Less:2:Spell:All:ChosenType:NoSpecial
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_incubator.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/142.jpg
 Oracle:As Urza's Incubator enters the battlefield, choose a creature type.\nCreature spells of the chosen type cost {2} less to cast.
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/142.jpg
 End

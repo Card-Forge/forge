@@ -3,7 +3,6 @@ package forge.quest.data.item;
 import forge.AllZone;
 import forge.quest.data.bazaar.QuestStallManager;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * QuestItemZeppelin class.
