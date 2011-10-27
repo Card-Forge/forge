@@ -15,6 +15,7 @@ class CustomLimited {
     public String Type;
     public String DeckFile;
     public Boolean IgnoreRarity;
+    public Boolean Singleton = false;
     public int NumCards = 15;
     public int NumSpecials = 0;
     public int NumMythics = 1;
@@ -40,6 +41,7 @@ class CustomLimited {
             if (key.equalsIgnoreCase("Type")) { cd.Type = value; }
             if (key.equalsIgnoreCase("DeckFile")) { cd.DeckFile = value; }
             if (key.equalsIgnoreCase("IgnoreRarity")) { cd.IgnoreRarity = value.equals("True"); }
+            if (key.equalsIgnoreCase("Singleton")) { cd.Singleton = value.equals("True"); }
             if (key.equalsIgnoreCase("LandSetCode")) { cd.LandSetCode = value; }
 
             if (key.equalsIgnoreCase("NumCards")) { cd.NumCards = Integer.parseInt(value); }

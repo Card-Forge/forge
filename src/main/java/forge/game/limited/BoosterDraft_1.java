@@ -144,7 +144,11 @@ public final class BoosterDraft_1 implements BoosterDraft {
         Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
             @Override public List<CardPrinted> apply(BoosterGenerator pack) {
                 if ( draft.IgnoreRarity ) {
-                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
+                    if (!draft.Singleton) {
+	                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
+                    } else {
+                        return pack.getSingletonBoosterPack(draft.NumCards);
+                    }
                 }
                 return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0, 0, 0);
             }

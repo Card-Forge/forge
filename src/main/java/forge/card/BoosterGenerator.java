@@ -127,6 +127,10 @@ public class BoosterGenerator {
     }
 
     private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count) {
+        return pickRandomCards(source, count, false);
+    }
+
+    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count, boolean singleton) {
         int listSize = source == null ? 0 : source.size();
         if (count <= 0 || listSize == 0) {
             return emptyList;
@@ -140,7 +144,13 @@ public class BoosterGenerator {
                 index = 0;
             }
             result.add(source.get(index));
-            index++;
+
+            if (!singleton) {
+                index++;
+            } else {
+                source.remove(index);
+                listSize--;
+            }
         }
         return result;
     }
@@ -178,6 +188,7 @@ public class BoosterGenerator {
         return result;
     }
 
+
     /**
      * Gets the booster pack.
      * 
@@ -186,6 +197,15 @@ public class BoosterGenerator {
     public final List<CardPrinted> getBoosterPack() {
         return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, numDoubleFaced, 0, 0);
     }
+
+    public final List<CardPrinted> getSingletonBoosterPack( final int nAnyCard) {
+        List<CardPrinted> temp = new ArrayList<CardPrinted>();
+
+        temp.addAll(pickRandomCards(allButLands, nAnyCard, true));
+
+        return temp;
+    }
+
 
     /**
      * So many parameters are needed for custom limited cardpools,.
