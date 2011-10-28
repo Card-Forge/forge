@@ -11,6 +11,7 @@ import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
+import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
@@ -285,6 +286,7 @@ public class TriggerHandler {
 
         // AP
         allCards = playerAP.getAllCards();
+        allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
         for (Card c : allCards) {
             for (Trigger t : c.getTriggers()) {
                 runSingleTrigger(t, mode, runParams);
@@ -303,6 +305,7 @@ public class TriggerHandler {
 
         // NAP
         allCards = playerAP.getOpponent().getAllCards();
+        allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
         for (Card c : allCards) {
             for (Trigger t : c.getTriggers()) {
                 runSingleTrigger(t, mode, runParams);
