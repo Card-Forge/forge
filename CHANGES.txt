@@ -241,6 +241,27 @@ Fixes/Features:
 - checkstyle
 - add missing package-info.java
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- support a Tapped$ True param in AF_Dig
+- Minor adjustments to the deck editor column widths.
+- checkstyle
+- Fixed alternate card face images for AI.
+- Added LQ Pic URL to Budoka Pupil. URL for Ichiga, Who Topples Oaks is commented out as it 404s.
+- Added LQ Pic URL to Callow Jushi. URL for Jaraku the Interloper is commented out as it 404s.
+- Added LQ Pic URL to Cunning Bandit. URL for Azamuki, Treachery Incarnate is commented out as it 404s.
+- Added LQ Pic URL to Erayo, Soratami Ascendant. URL for Erayo's Essence is commented out as it 404s.
+- Added LQ Pic URL to Faithful Squire. URL for Kaiso, Memory of Loyalty is commented out as it 404s.
+- Added LQ Pic URL to Hired Muscle. URL for Scarmaker is commented out as it 404s.
+- Added LQ Pic URL to Homura, Human Ascendant. URL for Homura's Essence is commented out as it 404s.
+- Minor edit to Concussive Bolt card description.
+- fixed ETB trigger for Hired Giant
+- Added optional decider for Slayer of the Wicked.
+- Reverted Slayer of the Wicked
+- Re-added optional decider for Slayer of the Wicked. Someone needs to fix OpionalDecider though so that the initial targeting is still enforced.
+- Fixed there being a way for alternate card faces to be put in the card shop.
+- Adjusted token download list to include vampire token created by Bloodline Keeper / Lord of Lineage
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -334,6 +355,14 @@ Urza's Incubator
 Jolrael, Empress of Beasts
 Brutalizer Exarch
 Panacea
+Kuon, Ogre Ascendant / Kuon's Essence
+Orochi Eggwatcher / Shidako Broodmistress
+Rune-Tail, Kitsune Ascendant / Rune-Tail's Essence
+Student of Elements / Tobita, Master of Wind
+Breath of Darigaaz
+Canopy Surge
+Ludevic's Test Subject / Ludevic's Abomination
+Bloodline Keeper / Lord of Lineage
 
 
 end
