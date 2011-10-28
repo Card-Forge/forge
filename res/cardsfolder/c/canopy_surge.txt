@@ -6,4 +6,5 @@ A:SP$ DamageAll | Cost$ 1 G | ValidCards$ Creature.withFlying | ValidPlayers$ Ea
 A:SP$ DamageAll | Cost$ 3 G | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ 4 | SpellDescription$ Kicker 2 (You may pay an additional 2 as you cast this spell.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_surge.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/184.jpg
 End
