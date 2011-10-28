@@ -1,0 +1,15 @@
+Name:Aven Windreader
+ManaCost:3 U U
+Types:Creature Bird Soldier Wizard
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ Dig | Cost$ 1 U | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Target player reveals the top card of his or her library.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_windreader.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/65.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/62.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/69.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Target player reveals the top card of his or her library.
+End

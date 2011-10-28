@@ -4,7 +4,6 @@ Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Reflection | PresentCompare$ EQ0 | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Reflection | TokenTypes$ Creature,Reflection | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2
-SVar:BuffedBy:Reflection.YouDontCtrl
 A:AB$ Destroy | Cost$ 0 | ValidTgts$ Reflection | TgtPrompt$ Select target Reflection | SpellDescription$ Destroy target Reflection.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_mirror.jpg
