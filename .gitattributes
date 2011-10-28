@@ -7682,6 +7682,7 @@ res/cardsfolder/s/spirit_en_dal.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_link.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_loop.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_mantle.txt svneol=native#text/plain
+res/cardsfolder/s/spirit_mirror.txt -text
 res/cardsfolder/s/spirit_of_resistance.txt svneol=native#text/plain
 res/cardsfolder/s/spirit_of_the_hearth.txt -text
 res/cardsfolder/s/spirit_of_the_night.txt svneol=native#text/plain

@@ -163,6 +163,7 @@ w_2_2_cat.jpg                          http://www.cardforge.org/fpics/tokens/w_2
 w_2_2_griffin.jpg                      http://www.cardforge.org/fpics/tokens/w_2_2_griffin.jpg
 w_2_2_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_2_2_knight.jpg
 w_2_2_knight_first_strike.jpg          http://www.cardforge.org/fpics/tokens/w_2_2_knight_first_strike.jpg
+w_2_2_reflection.jpg                   http://www.cardforge.org/fpics/tokens/w_2_2_reflection.jpg
 w_3_3_bird.jpg                         http://www.cardforge.org/fpics/tokens/w_3_3_bird.jpg
 w_3_3_spirit.jpg                       http://www.cardforge.org/fpics/tokens/w_3_3_spirit.jpg
 w_4_4_angel.jpg                        http://www.cardforge.org/fpics/tokens/w_4_4_angel.jpg
@@ -197,5 +198,4 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //u_5_5_dragon_spirit.jpg                http://www.cardforge.org/fpics/tokens/u_5_5_dragon_spirit.jpg                [CHK] Tatsumasa, the Dragon's Fang
 # //u_x_x_orb.jpg                          http://www.cardforge.org/fpics/tokens/u_x_x_orb.jpg                          [ALL] Phantasmal Sphere
 # //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty
-# //w_2_2_reflection.jpg                   http://www.cardforge.org/fpics/tokens/w_2_2_reflection.jpg                   [TMP] Spirit Mirror
 # //w_x_x_reflection.jpg                   http://www.cardforge.org/fpics/tokens/w_x_x_reflection.jpg                   [INV] Pure Reflection
