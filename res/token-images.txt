@@ -14,6 +14,7 @@ b_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/b_1
 b_1_2_bat.jpg                          http://www.cardforge.org/fpics/tokens/b_1_2_bat.jpg
 b_20_20_marit_lage.jpg                 http://www.cardforge.org/fpics/tokens/b_20_20_marit_lage.jpg
 b_2_1_cat.jpg                          http://www.cardforge.org/fpics/tokens/b_2_1_cat.jpg
+b_2_2_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_2_2_vampire.jpg
 b_2_2_zombie.jpg                       http://www.cardforge.org/fpics/tokens/b_2_2_zombie.jpg
 b_2_4_spider.jpg                       http://www.cardforge.org/fpics/tokens/b_2_4_spider.jpg
 b_3_3_angel.jpg                        http://www.cardforge.org/fpics/tokens/b_3_3_angel.jpg
@@ -175,7 +176,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
 # //b_2_2_tombspawn.jpg                    http://www.cardforge.org/fpics/tokens/b_2_2_tombspawn.jpg                    [MIR] Tombstone Stairwell
-# //b_2_2_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_2_2_vampire.jpg                      [ISD] Bloodline Keeper//Lord of Lineage
 # //b_x_x_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_x_x_vampire.jpg                      [ZEN] Kalitas, Bloodchief of Ghet
 # //c_0_2_wall.jpg                         http://www.cardforge.org/fpics/tokens/c_0_2_wall.jpg                         [MIR] Basalt Golem
 # //c_1_1_gnome.jpg                        http://www.cardforge.org/fpics/tokens/c_1_1_gnome.jpg                        [USG] Metrognome
