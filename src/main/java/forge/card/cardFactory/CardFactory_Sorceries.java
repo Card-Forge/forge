@@ -261,18 +261,18 @@ public class CardFactory_Sorceries {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Mind's Desire")) {
-            final Spell PlayCreature = new Spell(card) {
+            final Spell playCreature = new Spell(card) {
                 private static final long serialVersionUID = 53838791023456795L;
 
                 @Override
                 public void resolve() {
                     Player player = card.getController();
                     PlayerZone play = player.getZone(Constant.Zone.Battlefield);
-                    PlayerZone RFG = player.getZone(Constant.Zone.Exile);
-                    Card[] Attached = card.getAttachedCardsByMindsDesire();
-                    RFG.remove(Attached[0]);
-                    play.add(Attached[0]);
-                    card.unattachCardByMindDesire(Attached[0]);
+                    PlayerZone rfg = player.getZone(Constant.Zone.Exile);
+                    Card[] attached = card.getAttachedCardsByMindsDesire();
+                    rfg.remove(attached[0]);
+                    play.add(attached[0]);
+                    card.unattachCardByMindDesire(attached[0]);
                 } // resolve()
             }; // SpellAbility
 
@@ -284,31 +284,31 @@ public class CardFactory_Sorceries {
                     Card c = null;
                     Player player = card.getController();
                     if (player.isHuman()) {
-                        Card[] Attached = getSourceCard().getAttachedCardsByMindsDesire();
-                        Card[] Choices = new Card[Attached.length];
-                        boolean SystemsGo = true;
+                        Card[] attached = getSourceCard().getAttachedCardsByMindsDesire();
+                        Card[] choices = new Card[attached.length];
+                        boolean systemsGo = true;
                         if (AllZone.getStack().size() > 0) {
-                            CardList Config = new CardList();
-                            for (int i = 0; i < Attached.length; i++) {
-                                if (Attached[i].isInstant()|| Attached[i].hasKeyword("Flash")) {
-                                    Config.add(Attached[i]);
+                            CardList config = new CardList();
+                            for (int i = 0; i < attached.length; i++) {
+                                if (attached[i].isInstant() || attached[i].hasKeyword("Flash")) {
+                                    config.add(attached[i]);
                                 }
                             }
-                            for (int i = 0; i < Config.size(); i++) {
-                                Card crd = Config.get(i);
-                                Choices[i] = crd;
+                            for (int i = 0; i < config.size(); i++) {
+                                Card crd = config.get(i);
+                                choices[i] = crd;
                             }
-                            if (Config.size() == 0) {
-                                SystemsGo = false;
+                            if (config.size() == 0) {
+                                systemsGo = false;
                             }
                         } else {
-                            for (int i = 0; i < Attached.length; i++) {
-                                Choices[i] = Attached[i];
+                            for (int i = 0; i < attached.length; i++) {
+                                choices[i] = attached[i];
                             }
                         }
                         Object check = null;
-                        if (SystemsGo) {
-                            check = GuiUtils.getChoiceOptional("Select Card to play for free", Choices);
+                        if (systemsGo) {
+                            check = GuiUtils.getChoiceOptional("Select Card to play for free", choices);
                             if (check != null) {
                                 target = ((Card) check);
                             }
@@ -336,29 +336,29 @@ public class CardFactory_Sorceries {
 
                                     StringBuilder sb = new StringBuilder();
                                     sb.append(c.getName()).append(" - Copied from Mind's Desire");
-                                    PlayCreature.setStackDescription(sb.toString());
+                                    playCreature.setStackDescription(sb.toString());
 
-                                    Card[] ReAttach = new Card[Attached.length];
-                                    ReAttach[0] = c;
-                                    int ReAttach_Count = 0;
-                                    for (int i = 0; i < Attached.length; i++) {
-                                        if (Attached[i] != target) {
-                                            ReAttach_Count = ReAttach_Count + 1;
-                                            ReAttach[ReAttach_Count] = Attached[i];
+                                    Card[] reAttach = new Card[attached.length];
+                                    reAttach[0] = c;
+                                    int reAttachCount = 0;
+                                    for (int i = 0; i < attached.length; i++) {
+                                        if (attached[i] != target) {
+                                            reAttachCount = reAttachCount + 1;
+                                            reAttach[reAttachCount] = attached[i];
                                         }
                                     }
                                     // Clear Attached List
-                                    for (int i = 0; i < Attached.length; i++) {
-                                        card.unattachCardByMindDesire(Attached[i]);
+                                    for (int i = 0; i < attached.length; i++) {
+                                        card.unattachCardByMindDesire(attached[i]);
                                     }
                                     // Re-add
-                                    for (int i = 0; i < ReAttach.length; i++) {
-                                        if (ReAttach[i] != null) {
-                                            card.attachCardByMindsDesire(ReAttach[i]);
+                                    for (int i = 0; i < reAttach.length; i++) {
+                                        if (reAttach[i] != null) {
+                                            card.attachCardByMindsDesire(reAttach[i]);
                                         }
                                     }
-                                    target.addSpellAbility(PlayCreature);
-                                    AllZone.getStack().add(PlayCreature);
+                                    target.addSpellAbility(playCreature);
+                                    AllZone.getStack().add(playCreature);
                                 } else {
                                     AllZone.getGameAction().playCardNoCost(c);
                                     card.unattachCardByMindDesire(c);
@@ -391,17 +391,17 @@ public class CardFactory_Sorceries {
 
                 public void execute() {
                     Player player = AllZone.getPhase().getPlayerTurn();
-                    PlayerZone Play = player.getZone(Constant.Zone.Battlefield);
-                    Card Minds_D = card;
+                    PlayerZone play = player.getZone(Constant.Zone.Battlefield);
+                    Card mindsD = card;
                     if (player.isHuman()) {
                         card.getController().shuffle();
                     }
-                    CardList MindsList = player.getCardsIn(Zone.Battlefield);
-                    MindsList = MindsList.getName("Mind's Desire");
-                    MindsList.remove(card);
-                    if (MindsList.size() > 0) {
-                        Play.remove(card);
-                        Minds_D = MindsList.get(0);
+                    CardList mindsList = player.getCardsIn(Zone.Battlefield);
+                    mindsList = mindsList.getName("Mind's Desire");
+                    mindsList.remove(card);
+                    if (mindsList.size() > 0) {
+                        play.remove(card);
+                        mindsD = mindsList.get(0);
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Click Mind's Desire to see the available cards to play without paying its mana cost.",
@@ -411,20 +411,20 @@ public class CardFactory_Sorceries {
                     Card c = null;
                     if (libList.size() > 0) {
                         c = libList.get(0);
-                        PlayerZone RFG = player.getZone(Constant.Zone.Exile);
-                        AllZone.getGameAction().moveTo(RFG, c);
-                        Minds_D.attachCardByMindsDesire(c);
+                        PlayerZone rfg = player.getZone(Constant.Zone.Exile);
+                        AllZone.getGameAction().moveTo(rfg, c);
+                        mindsD.attachCardByMindsDesire(c);
                     }
-                    final Card Minds = card;
+                    final Card minds = card;
                     // AllZone.getGameAction().exile(Minds);
-                    Minds.setImmutable(true);
+                    minds.setImmutable(true);
                     Command untilEOT = new Command() {
                         private static final long serialVersionUID = -28032591440730370L;
 
                         public void execute() {
                             Player player = AllZone.getPhase().getPlayerTurn();
                             PlayerZone play = player.getZone(Constant.Zone.Battlefield);
-                            play.remove(Minds);
+                            play.remove(minds);
                         }
                     };
                     AllZone.getEndOfTurn().addUntil(untilEOT);
@@ -467,67 +467,67 @@ public class CardFactory_Sorceries {
                                 JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
-                    int Count = 5;
+                    int count = 5;
                     if (lib.size() < 5) {
-                        Count = lib.size();
+                        count = lib.size();
                     }
-                    for (int i = 0; i < Count; i++) {
+                    for (int i = 0; i < count; i++) {
                         cards.add(lib.get(i));
                     }
-                    for (int i = 0; i < Count; i++) {
+                    for (int i = 0; i < count; i++) {
                         exiled.add(lib.get(i));
                         AllZone.getGameAction().exile(lib.get(i));
                     }
-                    CardList Pile1 = new CardList();
-                    CardList Pile2 = new CardList();
+                    CardList pile1 = new CardList();
+                    CardList pile2 = new CardList();
                     boolean stop = false;
-                    int Pile1CMC = 0;
-                    int Pile2CMC = 0;
+                    int pile1CMC = 0;
+                    int pile2CMC = 0;
 
-                    GuiUtils.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
+                    GuiUtils.getChoice("Revealing top " + count + " cards of library: ", cards.toArray());
                     // Human chooses
                     if (card.getController().isComputer()) {
-                        for (int i = 0; i < Count; i++) {
+                        for (int i = 0; i < count; i++) {
                             if (!stop) {
                                 choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ",
                                         cards.toArray());
                                 if (choice != null) {
-                                    Pile1.add(choice);
+                                    pile1.add(choice);
                                     cards.remove(choice);
-                                    Pile1CMC = Pile1CMC + CardUtil.getConvertedManaCost(choice);
+                                    pile1CMC = pile1CMC + CardUtil.getConvertedManaCost(choice);
                                 } else {
                                     stop = true;
                                 }
                             }
                         }
-                        for (int i = 0; i < Count; i++) {
-                            if (!Pile1.contains(exiled.get(i))) {
-                                Pile2.add(exiled.get(i));
-                                Pile2CMC = Pile2CMC + CardUtil.getConvertedManaCost(exiled.get(i));
+                        for (int i = 0; i < count; i++) {
+                            if (!pile1.contains(exiled.get(i))) {
+                                pile2.add(exiled.get(i));
+                                pile2CMC = pile2CMC + CardUtil.getConvertedManaCost(exiled.get(i));
                             }
                         }
                         StringBuilder sb = new StringBuilder();
                         sb.append("You have spilt the cards into the following piles" + "\r\n" + "\r\n");
                         sb.append("Pile 1: " + "\r\n");
-                        for (int i = 0; i < Pile1.size(); i++) {
-                            sb.append(Pile1.get(i).getName() + "\r\n");
+                        for (int i = 0; i < pile1.size(); i++) {
+                            sb.append(pile1.get(i).getName() + "\r\n");
                         }
                         sb.append("\r\n" + "Pile 2: " + "\r\n");
-                        for (int i = 0; i < Pile2.size(); i++) {
-                            sb.append(Pile2.get(i).getName() + "\r\n");
+                        for (int i = 0; i < pile2.size(); i++) {
+                            sb.append(pile2.get(i).getName() + "\r\n");
                         }
                         JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
-                        if (Pile1CMC >= Pile2CMC) {
+                        if (pile1CMC >= pile2CMC) {
                             JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
                                     JOptionPane.INFORMATION_MESSAGE);
-                            for (int i = 0; i < Pile1.size(); i++) {
-                                ArrayList<SpellAbility> choices = Pile1.get(i).getBasicSpells();
+                            for (int i = 0; i < pile1.size(); i++) {
+                                ArrayList<SpellAbility> choices = pile1.get(i).getBasicSpells();
 
                                 for (SpellAbility sa : choices) {
                                     if (sa.canPlayAI()) {
                                         ComputerUtil.playStackFree(sa);
-                                        if (Pile1.get(i).isPermanent()) {
-                                            exiled.remove(Pile1.get(i));
+                                        if (pile1.get(i).isPermanent()) {
+                                            exiled.remove(pile1.get(i));
                                         }
                                         break;
                                     }
@@ -536,14 +536,14 @@ public class CardFactory_Sorceries {
                         } else {
                             JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
                                     JOptionPane.INFORMATION_MESSAGE);
-                            for (int i = 0; i < Pile2.size(); i++) {
-                                ArrayList<SpellAbility> choices = Pile2.get(i).getBasicSpells();
+                            for (int i = 0; i < pile2.size(); i++) {
+                                ArrayList<SpellAbility> choices = pile2.get(i).getBasicSpells();
 
                                 for (SpellAbility sa : choices) {
                                     if (sa.canPlayAI()) {
                                         ComputerUtil.playStackFree(sa);
-                                        if (Pile2.get(i).isPermanent()) {
-                                            exiled.remove(Pile2.get(i));
+                                        if (pile2.get(i).isPermanent()) {
+                                            exiled.remove(pile2.get(i));
                                         }
                                         break;
                                     }
@@ -562,26 +562,26 @@ public class CardFactory_Sorceries {
                             }
                         }
 
-                        Pile1.add(biggest);
+                        pile1.add(biggest);
                         cards.remove(biggest);
                         if (cards.size() > 2) {
-                            Card Random = CardUtil.getRandom(cards.toArray());
-                            Pile1.add(Random);
+                            Card random = CardUtil.getRandom(cards.toArray());
+                            pile1.add(random);
                         }
-                        for (int i = 0; i < Count; i++) {
-                            if (!Pile1.contains(exiled.get(i))) {
-                                Pile2.add(exiled.get(i));
+                        for (int i = 0; i < count; i++) {
+                            if (!pile1.contains(exiled.get(i))) {
+                                pile2.add(exiled.get(i));
                             }
                         }
                         StringBuilder sb = new StringBuilder();
                         sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
                         sb.append("Pile 1: " + "\r\n");
-                        for (int i = 0; i < Pile1.size(); i++) {
-                            sb.append(Pile1.get(i).getName() + "\r\n");
+                        for (int i = 0; i < pile1.size(); i++) {
+                            sb.append(pile1.get(i).getName() + "\r\n");
                         }
                         sb.append("\r\n" + "Pile 2: " + "\r\n");
-                        for (int i = 0; i < Pile2.size(); i++) {
-                            sb.append(Pile2.get(i).getName() + "\r\n");
+                        for (int i = 0; i < pile2.size(); i++) {
+                            sb.append(pile2.get(i).getName() + "\r\n");
                         }
                         Object[] possibleValues = {"Pile 1", "Pile 2"};
                         Object q = JOptionPane.showOptionDialog(null, sb, "Brilliant Ultimatum",
@@ -590,9 +590,9 @@ public class CardFactory_Sorceries {
 
                         CardList chosen;
                         if (q.equals(0)) {
-                            chosen = Pile1;
+                            chosen = pile1;
                         } else {
-                            chosen = Pile2;
+                            chosen = pile2;
                         }
 
                         int numChosen = chosen.size();
@@ -618,8 +618,8 @@ public class CardFactory_Sorceries {
                         }
 
                     }
-                    Pile1.clear();
-                    Pile2.clear();
+                    pile1.clear();
+                    pile2.clear();
                 } // resolve()
 
                 @Override
@@ -808,8 +808,8 @@ public class CardFactory_Sorceries {
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = -6003403347798646257L;
 
-                int damage = 3;
-                Card check;
+                private int damage = 3;
+                private Card check;
 
                 @Override
                 public boolean canPlayAI() {
@@ -900,12 +900,12 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
-                    int Soldiers = card.getXManaCostPaid();
-                    for (int i = 0; i < Soldiers; i++) {
+                    int soldiers = card.getXManaCostPaid();
+                    for (int i = 0; i < soldiers; i++) {
                         CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
                                 "Creature", "Soldier" }, 1, 1, new String[] { "" });
                     }
-                    if (Soldiers >= 5) {
+                    if (soldiers >= 5) {
                         for (int i = 0; i < all.size(); i++) {
                             Card c = all.get(i);
                             if (c.isCreature()) {
@@ -963,7 +963,7 @@ public class CardFactory_Sorceries {
 
             card.setFlashback(true);
             card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G"));
+            card.addSpellAbility(CardFactoryUtil.abilityFlashback(card, "4 G G G"));
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
@@ -1594,8 +1594,8 @@ public class CardFactory_Sorceries {
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = -3234630801871872940L;
 
-                int damage = 3;
-                Card check;
+                private int damage = 3;
+                private Card check;
 
                 @Override
                 public boolean canPlayAI() {
@@ -1921,21 +1921,21 @@ public class CardFactory_Sorceries {
                     /*
                      * We want compy to have less cards in hand than the human
                      */
-                    CardList Hhand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
-                    CardList Chand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-                    return Chand.size() < Hhand.size();
+                    CardList humanHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
+                    CardList computerHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                    return computerHand.size() < humanHand.size();
                 }
 
                 @Override
                 public void resolve() {
-                    CardList Hhand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
-                    CardList Chand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                    CardList humanHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
+                    CardList computerHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
-                    int num = Math.max(Hhand.size(), Chand.size());
+                    int num = Math.max(humanHand.size(), computerHand.size());
 
                     discardDraw(AllZone.getHumanPlayer(), num);
                     discardDraw(AllZone.getComputerPlayer(), num);
-                }// resolve()
+                } // resolve()
 
                 void discardDraw(final Player player, final int num) {
                     player.discardHand(this);
@@ -2355,7 +2355,7 @@ public class CardFactory_Sorceries {
                         }
                     }
 
-                    // "Return target creature card with converted mana cost 
+                    // "Return target creature card with converted mana cost
                     // X or less from your graveyard to the battlefield",
                     if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         Card c = ab1card[0];
@@ -2449,8 +2449,8 @@ public class CardFactory_Sorceries {
             final Input targetXCreatures = new Input() {
                 private static final long serialVersionUID = 2584765431286321048L;
 
-                int stop = 0;
-                int count = 0;
+                private int stop = 0;
+                private int count = 0;
 
                 @Override
                 public void showMessage() {

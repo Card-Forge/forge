@@ -143,7 +143,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return putPlayDrawbackAI(af, this);
             }
 
@@ -369,7 +369,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         if (AbilityFactory.playReusable(sa)) {
@@ -453,7 +453,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -788,7 +788,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return removePlayDrawbackAI(af, this);
             }
 
@@ -926,7 +926,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .6667) && chance);
@@ -971,7 +971,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -1168,7 +1168,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return proliferateShouldPlayAI(this);
             }
 
@@ -1222,7 +1222,7 @@ public class AbilityFactory_Counters {
         boolean chance = true;
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         // TODO Make sure Human has poison counters or there are some counters
@@ -1532,7 +1532,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return putAllPlayDrawbackAI(af, this);
             }
 
@@ -1685,7 +1685,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .6667) && chance);
@@ -1840,7 +1840,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return removeCounterAllPlayDrawbackAI(af, this);
             }
 
@@ -2061,7 +2061,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return moveCounterPlayDrawbackAI(af, this);
             }
 
@@ -2160,7 +2160,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         if (AbilityFactory.playReusable(sa)) {
@@ -2186,7 +2186,7 @@ public class AbilityFactory_Counters {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

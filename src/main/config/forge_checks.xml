@@ -143,7 +143,9 @@
         <module name="EmptyForIteratorPad"/>
         <module name="GenericWhitespace"/>
         <module name="MethodParamPad"/>
-        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceAfter">
+         <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS"/>
+        </module>
         <module name="NoWhitespaceBefore"/>
         <module name="OperatorWrap"/>
         <module name="ParenPad"/>
@@ -168,7 +170,7 @@
           <!-- Place left curly at EOL for one-line clauses, 
                and on next line for multi-line clauses. 
           -->
-          <property name="option" value="nlow" />
+          <!--   <property name="option" value="nlow" /> -->
         </module>
          
         <module name="NeedBraces"/>

@@ -135,7 +135,7 @@ public class AbilityFactory_Effect {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 

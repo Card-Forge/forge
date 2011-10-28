@@ -188,7 +188,7 @@ public class AbilityFactory_GainControl {
             } // resolve
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return gainControlDrawbackAI(this);
             }
 

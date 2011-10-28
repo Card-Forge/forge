@@ -24,23 +24,23 @@ public class SpellAbility_StackInstance {
     // Coming off the Stack would work similarly, except it would just add the
     // full active SI instead of each of the parts
     /** The ability. */
-    SpellAbility ability = null;
+    private SpellAbility ability = null;
 
     /** The sub instace. */
-    SpellAbility_StackInstance subInstace = null;
+    private SpellAbility_StackInstance subInstace = null;
 
     // When going to a SubAbility that SA has a Instance Choice object
     /** The tc. */
-    Target_Choices tc = null;
+    private Target_Choices tc = null;
 
     /** The activating player. */
-    Player activatingPlayer = null;
+    private Player activatingPlayer = null;
 
     /** The activated from. */
-    String activatedFrom = null;
+    private String activatedFrom = null;
 
     /** The stack description. */
-    String stackDescription = null;
+    private String stackDescription = null;
 
     // Adjusted Mana Cost
     // private String adjustedManaCost = "";
@@ -222,12 +222,12 @@ public class SpellAbility_StackInstance {
      * isStateTrigger.
      * </p>
      * 
-     * @param ID
+     * @param id
      *            a int.
      * @return a boolean.
      */
-    public final boolean isStateTrigger(final int ID) {
-        return ability.getSourceTrigger() == ID;
+    public final boolean isStateTrigger(final int id) {
+        return ability.getSourceTrigger() == id;
     }
 
     /**

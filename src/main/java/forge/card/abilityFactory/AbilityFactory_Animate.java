@@ -128,7 +128,7 @@ public final class AbilityFactory_Animate {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return animatePlayDrawbackAI(af, this);
             }
 
@@ -354,7 +354,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            useAbility &= subAb.chkAI_Drawback();
+            useAbility &= subAb.chkAIDrawback();
         }
 
         return useAbility;
@@ -379,7 +379,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -414,7 +414,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance || mandatory;
@@ -892,7 +892,7 @@ public final class AbilityFactory_Animate {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return animateAllPlayDrawbackAI(af, this);
             }
 
@@ -964,7 +964,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            useAbility &= subAb.chkAI_Drawback();
+            useAbility &= subAb.chkAIDrawback();
         }
 
         return useAbility;
@@ -986,7 +986,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -1005,7 +1005,8 @@ public final class AbilityFactory_Animate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean animateAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean animateAllTriggerAI(final AbilityFactory af,
+            final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
             return false;
         }
@@ -1014,7 +1015,7 @@ public final class AbilityFactory_Animate {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance || mandatory;

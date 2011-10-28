@@ -368,8 +368,9 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setPhases(final String phasesString) {
-        for (String s : phasesString.split(","))
+        for (String s : phasesString.split(",")) {
             phases.add(s);
+        }
     }
 
     /**
@@ -520,11 +521,11 @@ public class SpellAbility_Variables {
      * Setter for the field <code>svarToCheck</code>.
      * </p>
      * 
-     * @param SVar
+     * @param sVar
      *            a {@link java.lang.String} object.
      */
-    public final void setSvarToCheck(final String SVar) {
-        svarToCheck = SVar;
+    public final void setSvarToCheck(final String sVar) {
+        svarToCheck = sVar;
     }
 
     /**
@@ -532,11 +533,11 @@ public class SpellAbility_Variables {
      * Setter for the field <code>svarOperator</code>.
      * </p>
      * 
-     * @param Operator
+     * @param operator
      *            a {@link java.lang.String} object.
      */
-    public final void setSvarOperator(final String Operator) {
-        svarOperator = Operator;
+    public final void setSvarOperator(final String operator) {
+        svarOperator = operator;
     }
 
     /**
@@ -544,11 +545,11 @@ public class SpellAbility_Variables {
      * Setter for the field <code>svarOperand</code>.
      * </p>
      * 
-     * @param Operand
+     * @param operand
      *            a {@link java.lang.String} object.
      */
-    public final void setSvarOperand(final String Operand) {
-        svarOperand = Operand;
+    public final void setSvarOperand(final String operand) {
+        svarOperand = operand;
     }
 
 } // end class SpellAbility_Variables

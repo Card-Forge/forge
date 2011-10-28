@@ -41,16 +41,17 @@ public class AbilityFactory_AlterLife {
      * createAbilityGainLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityGainLife(final AbilityFactory AF) {
+    public static SpellAbility createAbilityGainLife(final AbilityFactory abilityFactory) {
 
-        final SpellAbility abGainLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abGainLife = new Ability_Activated(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -83,15 +84,16 @@ public class AbilityFactory_AlterLife {
      * createSpellGainLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellGainLife(final AbilityFactory AF) {
-        final SpellAbility spGainLife = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellGainLife(final AbilityFactory abilityFactory) {
+        final SpellAbility spGainLife = new Spell(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -124,15 +126,15 @@ public class AbilityFactory_AlterLife {
      * createDrawbackGainLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackGainLife(final AbilityFactory AF) {
-        final SpellAbility dbGainLife = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackGainLife(final AbilityFactory abilityFactory) {
+        final SpellAbility dbGainLife = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -157,7 +159,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -206,8 +208,9 @@ public class AbilityFactory_AlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player player : tgtPlayers)
+        for (Player player : tgtPlayers) {
             sb.append(player).append(" ");
+        }
 
         sb.append("gains ").append(amount).append(" life.");
 
@@ -384,10 +387,11 @@ public class AbilityFactory_AlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers)
+        for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 p.gainLife(lifeAmount, sa.getSourceCard());
             }
+        }
     }
 
     // *************************************************************************
@@ -399,15 +403,16 @@ public class AbilityFactory_AlterLife {
      * createAbilityLoseLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityLoseLife(final AbilityFactory AF) {
-        final SpellAbility abLoseLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createAbilityLoseLife(final AbilityFactory abilityFactory) {
+        final SpellAbility abLoseLife = new Ability_Activated(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 1129762905315395160L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -444,15 +449,16 @@ public class AbilityFactory_AlterLife {
      * createSpellLoseLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellLoseLife(final AbilityFactory AF) {
-        final SpellAbility spLoseLife = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellLoseLife(final AbilityFactory abilityFactory) {
+        final SpellAbility spLoseLife = new Spell(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -2966932725306192437L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -484,15 +490,15 @@ public class AbilityFactory_AlterLife {
      * createDrawbackLoseLife.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createDrawbackLoseLife(final AbilityFactory AF) {
-        final SpellAbility dbLoseLife = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static SpellAbility createDrawbackLoseLife(final AbilityFactory abilityFactory) {
+        final SpellAbility dbLoseLife = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -2966932725306192437L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
             @Override
             public String getStackDescription() {
@@ -517,7 +523,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -564,8 +570,9 @@ public class AbilityFactory_AlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player player : tgtPlayers)
+        for (Player player : tgtPlayers) {
             sb.append(player).append(" ");
+        }
 
         sb.append("loses ").append(amount).append(" life.");
 
@@ -749,11 +756,11 @@ public class AbilityFactory_AlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers)
+        for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 p.loseLife(lifeAmount, sa.getSourceCard());
             }
-
+        }
     }
 
     // *************************************************************************
@@ -874,7 +881,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -914,10 +921,11 @@ public class AbilityFactory_AlterLife {
             tgt.addTarget(AllZone.getHumanPlayer());
         } else {
             ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            for (Player p : players)
+            for (Player p : players) {
                 if (!mandatory && p.isComputer() && p.getPoisonCounters() > p.getOpponent().getPoisonCounters()) {
                     return false;
                 }
+            }
         }
 
         // check SubAbilities DoTrigger?
@@ -952,10 +960,11 @@ public class AbilityFactory_AlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers)
+        for (Player p : tgtPlayers) {
             if (tgt == null || p.canTarget(sa)) {
                 p.addPoisonCounters(amount);
             }
+        }
     }
 
     /**
@@ -1192,7 +1201,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -1548,7 +1557,7 @@ public class AbilityFactory_AlterLife {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 

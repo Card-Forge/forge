@@ -133,7 +133,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return untapPlayDrawbackAI(af, this);
             }
 
@@ -237,7 +237,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -315,7 +315,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -691,7 +691,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return tapPlayDrawbackAI(af, this);
             }
 
@@ -807,7 +807,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -884,7 +884,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -1208,7 +1208,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return untapAllPlayDrawbackAI(af, this);
             }
 
@@ -1434,7 +1434,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return tapAllPlayDrawbackAI(af, this);
             }
 
@@ -1767,7 +1767,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return tapOrUntapPlayDrawbackAI(af, this);
             }
 
@@ -1874,7 +1874,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -1951,7 +1951,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -2101,7 +2101,7 @@ public class AbilityFactory_PermanentState {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return phasesPlayDrawbackAI(af, this);
             }
 
@@ -2202,7 +2202,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -2269,7 +2269,7 @@ public class AbilityFactory_PermanentState {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

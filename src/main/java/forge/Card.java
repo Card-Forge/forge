@@ -3113,7 +3113,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void executeTrigger(final ZCTrigger type) {
         for (Ability_Triggered t : zcTriggers) {
-            if (t.trigger.equals(type) && t.isBasic()) {
+            if (t.getTrigger().equals(type) && t.isBasic()) {
                 t.execute();
             }
         }

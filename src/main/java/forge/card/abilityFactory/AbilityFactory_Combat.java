@@ -54,21 +54,22 @@ public final class AbilityFactory_Combat {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return fogStackDescription(af, this);
+                return AbilityFactory_Combat.fogStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return fogCanPlayAI(af, this);
+                return AbilityFactory_Combat.fogCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                fogResolve(af, this);
+                AbilityFactory_Combat.fogResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return fogDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.fogDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -92,16 +93,17 @@ public final class AbilityFactory_Combat {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return fogStackDescription(af, this);
+                return AbilityFactory_Combat.fogStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return fogCanPlayAI(af, this);
+                return AbilityFactory_Combat.fogCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                fogResolve(af, this);
+                AbilityFactory_Combat.fogResolve(af, this);
             }
 
         };
@@ -123,17 +125,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public void resolve() {
-                fogResolve(af, this);
+                AbilityFactory_Combat.fogResolve(af, this);
             }
 
             @Override
-            public boolean chkAI_Drawback() {
-                return fogPlayDrawbackAI(af, this);
+            public boolean chkAIDrawback() {
+                return AbilityFactory_Combat.fogPlayDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return fogDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.fogDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -152,7 +154,7 @@ public final class AbilityFactory_Combat {
      * @return a {@link java.lang.String} object.
      */
     public static String fogStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -163,7 +165,7 @@ public final class AbilityFactory_Combat {
         sb.append(sa.getSourceCard().getController());
         sb.append(" prevents all combat damage this turn.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -201,9 +203,9 @@ public final class AbilityFactory_Combat {
             return false;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            if (!subAb.chkAI_Drawback()) {
+            if (!subAb.chkAIDrawback()) {
                 return false;
             }
         }
@@ -232,9 +234,9 @@ public final class AbilityFactory_Combat {
             chance = AllZone.getPhase().isAfter(Constant.Phase.Combat_Damage);
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -267,7 +269,7 @@ public final class AbilityFactory_Combat {
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -315,22 +317,22 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return mustAttackStackDescription(af, this);
+                return AbilityFactory_Combat.mustAttackStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return mustAttackCanPlayAI(af, this);
+                return AbilityFactory_Combat.mustAttackCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                mustAttackResolve(af, this);
+                AbilityFactory_Combat.mustAttackResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return mustAttackDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.mustAttackDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -352,17 +354,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return mustAttackStackDescription(af, this);
+                return AbilityFactory_Combat.mustAttackStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return mustAttackCanPlayAI(af, this);
+                return AbilityFactory_Combat.mustAttackCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                mustAttackResolve(af, this);
+                AbilityFactory_Combat.mustAttackResolve(af, this);
             }
 
         };
@@ -384,17 +386,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public void resolve() {
-                mustAttackResolve(af, this);
+                AbilityFactory_Combat.mustAttackResolve(af, this);
             }
 
             @Override
-            public boolean chkAI_Drawback() {
-                return mustAttackPlayDrawbackAI(af, this);
+            public boolean chkAIDrawback() {
+                return AbilityFactory_Combat.mustAttackPlayDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return mustAttackDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.mustAttackDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -402,9 +404,9 @@ public final class AbilityFactory_Combat {
     }
 
     private static String mustAttackStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -416,7 +418,7 @@ public final class AbilityFactory_Combat {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -430,13 +432,13 @@ public final class AbilityFactory_Combat {
             // TODO - if more needs arise in the future
         }
 
-        for (Player player : tgtPlayers) {
+        for (final Player player : tgtPlayers) {
             sb.append("Creatures ").append(player).append(" controls attack ");
             sb.append(defender).append(" during his or her next turn.");
         }
 
         // begin standard post-
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -456,15 +458,16 @@ public final class AbilityFactory_Combat {
         // TODO - implement AI
         chance = false;
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
     }
 
-    private static boolean mustAttackDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean mustAttackDoTriggerAI(final AbilityFactory af,
+            final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
@@ -476,7 +479,7 @@ public final class AbilityFactory_Combat {
         chance = false;
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -485,19 +488,19 @@ public final class AbilityFactory_Combat {
     }
 
     private static void mustAttackResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined")) {
+        final Target tgt = af.getAbTgt();
+        if ((tgt != null) && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
         for (final Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 Object entity;
                 if (params.get("Defender").equals("Self")) {
                     entity = af.getHostCard();
@@ -532,22 +535,22 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return removeFromCombatStackDescription(af, this);
+                return AbilityFactory_Combat.removeFromCombatStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return removeFromCombatCanPlayAI(af, this);
+                return AbilityFactory_Combat.removeFromCombatCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                removeFromCombatResolve(af, this);
+                AbilityFactory_Combat.removeFromCombatResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return removeFromCombatDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.removeFromCombatDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -569,17 +572,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return removeFromCombatStackDescription(af, this);
+                return AbilityFactory_Combat.removeFromCombatStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return removeFromCombatCanPlayAI(af, this);
+                return AbilityFactory_Combat.removeFromCombatCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                removeFromCombatResolve(af, this);
+                AbilityFactory_Combat.removeFromCombatResolve(af, this);
             }
 
         };
@@ -601,17 +604,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public void resolve() {
-                removeFromCombatResolve(af, this);
+                AbilityFactory_Combat.removeFromCombatResolve(af, this);
             }
 
             @Override
-            public boolean chkAI_Drawback() {
-                return removeFromCombatPlayDrawbackAI(af, this);
+            public boolean chkAIDrawback() {
+                return AbilityFactory_Combat.removeFromCombatPlayDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return removeFromCombatDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.removeFromCombatDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -619,8 +622,8 @@ public final class AbilityFactory_Combat {
     }
 
     private static String removeFromCombatStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -632,7 +635,7 @@ public final class AbilityFactory_Combat {
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -641,14 +644,14 @@ public final class AbilityFactory_Combat {
 
         sb.append("Remove ");
 
-        for (Card c : tgtCards) {
+        for (final Card c : tgtCards) {
             sb.append(c);
         }
 
         sb.append(" from combat.");
 
         // begin standard post-
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -668,9 +671,9 @@ public final class AbilityFactory_Combat {
         // TODO - implement AI
         chance = false;
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -689,7 +692,7 @@ public final class AbilityFactory_Combat {
         chance = false;
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -698,19 +701,19 @@ public final class AbilityFactory_Combat {
     }
 
     private static void removeFromCombatResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined")) {
+        final Target tgt = af.getAbTgt();
+        if ((tgt != null) && !params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
         for (final Card c : tgtCards) {
-            if (tgt == null || CardFactoryUtil.canTarget(sa, c)) {
+            if ((tgt == null) || CardFactoryUtil.canTarget(sa, c)) {
                 AllZone.getCombat().removeFromCombat(c);
             }
         }
@@ -742,22 +745,22 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return mustBlockStackDescription(af, this);
+                return AbilityFactory_Combat.mustBlockStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return mustBlockCanPlayAI(af, this);
+                return AbilityFactory_Combat.mustBlockCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                mustBlockResolve(af, this);
+                AbilityFactory_Combat.mustBlockResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return mustBlockDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.mustBlockDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -781,17 +784,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public String getStackDescription() {
-                return mustBlockStackDescription(af, this);
+                return AbilityFactory_Combat.mustBlockStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return mustBlockCanPlayAI(af, this);
+                return AbilityFactory_Combat.mustBlockCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                mustBlockResolve(af, this);
+                AbilityFactory_Combat.mustBlockResolve(af, this);
             }
 
         };
@@ -815,17 +818,17 @@ public final class AbilityFactory_Combat {
 
             @Override
             public void resolve() {
-                mustBlockResolve(af, this);
+                AbilityFactory_Combat.mustBlockResolve(af, this);
             }
 
             @Override
-            public boolean chkAI_Drawback() {
-                return mustBlockPlayDrawbackAI(af, this);
+            public boolean chkAIDrawback() {
+                return AbilityFactory_Combat.mustBlockPlayDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return mustBlockDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Combat.mustBlockDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -833,9 +836,9 @@ public final class AbilityFactory_Combat {
     }
 
     private static String mustBlockStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -847,7 +850,7 @@ public final class AbilityFactory_Combat {
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -856,19 +859,19 @@ public final class AbilityFactory_Combat {
 
         String attacker = null;
         if (params.containsKey("DefinedAttacker")) {
-            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"),
-                    sa);
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    params.get("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();
         }
 
-        for (Card c : tgtCards) {
+        for (final Card c : tgtCards) {
             sb.append(c).append(" must block ").append(attacker).append(" if able.");
         }
 
         // begin standard post-
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -889,18 +892,19 @@ public final class AbilityFactory_Combat {
         // TODO - implement AI
         chance = false;
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
     }
 
-    private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        HashMap<String, String> params = af.getMapParams();
+    private static boolean mustBlockDoTriggerAI(final AbilityFactory af,
+            final SpellAbility sa, final boolean mandatory) {
+        final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
-        Target abTgt = sa.getTarget();
+        final Target abTgt = sa.getTarget();
 
         // If there is a cost payment it's usually not mandatory
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
@@ -914,8 +918,8 @@ public final class AbilityFactory_Combat {
 
         Card attacker = null;
         if (params.containsKey("DefinedAttacker")) {
-            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"),
-                    sa);
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    params.get("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }
@@ -937,6 +941,7 @@ public final class AbilityFactory_Combat {
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new CardListFilter() {
+                @Override
                 public boolean addCard(final Card c) {
                     if (!CombatUtil.canBlock(definedAttacker, c)) {
                         return false;
@@ -951,12 +956,12 @@ public final class AbilityFactory_Combat {
                 }
             });
             if (!list.isEmpty()) {
-                Card blocker = CardFactoryUtil.AI_getBestCreature(list);
+                final Card blocker = CardFactoryUtil.AI_getBestCreature(list);
                 if (blocker == null) {
                     return false;
                 }
                 abTgt.addTarget(CardFactoryUtil.AI_getBestCreature(list));
-                chance = true; // TODO:change this to true, once the human input
+                chance = true; // TODO change this to true, once the human input
                                // takes mustblocks into account
             }
         } else {
@@ -964,7 +969,7 @@ public final class AbilityFactory_Combat {
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -973,12 +978,12 @@ public final class AbilityFactory_Combat {
     }
 
     private static void mustBlockResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -994,8 +999,8 @@ public final class AbilityFactory_Combat {
         }
 
         for (final Card c : tgtCards) {
-            if (tgt == null || CardFactoryUtil.canTarget(sa, c)) {
-                Card attacker = cards.get(0);
+            if ((tgt == null) || CardFactoryUtil.canTarget(sa, c)) {
+                final Card attacker = cards.get(0);
                 c.addMustBlockCard(attacker);
                 System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());
             }

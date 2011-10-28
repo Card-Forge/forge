@@ -203,7 +203,7 @@ public class AbilityFactory_Token extends AbilityFactory {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 

@@ -138,7 +138,7 @@ public final class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return debuffDrawbackAI(af, this);
             }
 
@@ -678,7 +678,7 @@ public final class AbilityFactory_Debuff {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return debuffAllChkDrawbackAI(af, this);
             }
 

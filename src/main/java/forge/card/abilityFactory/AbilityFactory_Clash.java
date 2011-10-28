@@ -62,7 +62,7 @@ public final class AbilityFactory_Clash {
 
             @Override
             public void resolve() {
-                clashResolve(af, this);
+                AbilityFactory_Clash.clashResolve(af, this);
             }
         };
 
@@ -105,7 +105,7 @@ public final class AbilityFactory_Clash {
 
             @Override
             public void resolve() {
-                clashResolve(af, this);
+                AbilityFactory_Clash.clashResolve(af, this);
             }
         };
 
@@ -137,7 +137,7 @@ public final class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -153,7 +153,7 @@ public final class AbilityFactory_Clash {
 
             @Override
             public void resolve() {
-                clashResolve(af, this);
+                AbilityFactory_Clash.clashResolve(af, this);
             }
         };
 
@@ -171,16 +171,16 @@ public final class AbilityFactory_Clash {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void clashResolve(final AbilityFactory af, final SpellAbility sa) {
-        AbilityFactory afOutcomes = new AbilityFactory();
-        boolean victory = af.getHostCard().getController().clashWithOpponent(af.getHostCard());
+        final AbilityFactory afOutcomes = new AbilityFactory();
+        final boolean victory = af.getHostCard().getController().clashWithOpponent(af.getHostCard());
 
         // Run triggers
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", af.getHostCard().getController());
 
         if (victory) {
             if (af.getMapParams().containsKey("WinSubAbility")) {
-                SpellAbility win = afOutcomes.getAbility(
+                final SpellAbility win = afOutcomes.getAbility(
                         af.getHostCard().getSVar(af.getMapParams().get("WinSubAbility")), af.getHostCard());
                 win.setActivatingPlayer(af.getHostCard().getController());
                 ((Ability_Sub) win).setParent(sa);
@@ -190,7 +190,7 @@ public final class AbilityFactory_Clash {
             runParams.put("Won", "True");
         } else {
             if (af.getMapParams().containsKey("OtherwiseSubAbility")) {
-                SpellAbility otherwise = afOutcomes.getAbility(
+                final SpellAbility otherwise = afOutcomes.getAbility(
                         af.getHostCard().getSVar(af.getMapParams().get("OtherwiseSubAbility")), af.getHostCard());
                 otherwise.setActivatingPlayer(af.getHostCard().getController());
                 ((Ability_Sub) otherwise).setParent(sa);
@@ -233,12 +233,12 @@ public final class AbilityFactory_Clash {
 
             @Override
             public String getStackDescription() {
-                return flipGetStackDescription(af, this);
+                return AbilityFactory_Clash.flipGetStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                flipResolve(af, this);
+                AbilityFactory_Clash.flipResolve(af, this);
             }
         };
 
@@ -276,12 +276,12 @@ public final class AbilityFactory_Clash {
 
             @Override
             public String getStackDescription() {
-                return flipGetStackDescription(af, this);
+                return AbilityFactory_Clash.flipGetStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                flipResolve(af, this);
+                AbilityFactory_Clash.flipResolve(af, this);
             }
         };
 
@@ -313,7 +313,7 @@ public final class AbilityFactory_Clash {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -324,12 +324,12 @@ public final class AbilityFactory_Clash {
 
             @Override
             public String getStackDescription() {
-                return flipGetStackDescription(af, this);
+                return AbilityFactory_Clash.flipGetStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                flipResolve(af, this);
+                AbilityFactory_Clash.flipResolve(af, this);
             }
         };
 
@@ -348,11 +348,12 @@ public final class AbilityFactory_Clash {
      * @return a {@link java.lang.String} object.
      */
     private static String flipGetStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        Player player = params.containsKey("OpponentCalls") ? host.getController().getOpponent() : host.getController();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final Player player = params.containsKey("OpponentCalls") ? host.getController().getOpponent() : host
+                .getController();
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -362,7 +363,7 @@ public final class AbilityFactory_Clash {
 
         sb.append(player).append(" flips a coin.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -381,17 +382,17 @@ public final class AbilityFactory_Clash {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void flipResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        Player player = host.getController();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final Player player = host.getController();
 
-        ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Caller"), sa);
+        final ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Caller"), sa);
         if (caller.size() == 0) {
             caller.add(player);
         }
 
-        AbilityFactory afOutcomes = new AbilityFactory();
-        boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
+        final AbilityFactory afOutcomes = new AbilityFactory();
+        final boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
 
         // Run triggers
         // HashMap<String,Object> runParams = new HashMap<String,Object>();
@@ -405,7 +406,7 @@ public final class AbilityFactory_Clash {
                 host.addRemembered(host);
             }
             if (params.containsKey("WinSubAbility")) {
-                SpellAbility win = afOutcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
+                final SpellAbility win = afOutcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
                 ((Ability_Sub) win).setParent(sa);
 
@@ -417,7 +418,7 @@ public final class AbilityFactory_Clash {
                 host.addRemembered(host);
             }
             if (params.containsKey("LoseSubAbility")) {
-                SpellAbility lose = afOutcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
+                final SpellAbility lose = afOutcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
                 lose.setActivatingPlayer(player);
                 ((Ability_Sub) lose).setParent(sa);
 

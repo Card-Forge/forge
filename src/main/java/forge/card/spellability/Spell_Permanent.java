@@ -36,7 +36,7 @@ public class Spell_Permanent extends Spell {
     private String championValidDesc = "";
 
     /** The champion input comes. */
-    final Input championInputComes = new Input() {
+    private final Input championInputComes = new Input() {
         private static final long serialVersionUID = -7503268232821397107L;
 
         @Override
@@ -58,7 +58,7 @@ public class Spell_Permanent extends Spell {
     }; // CommandReturn
 
     /** The champion ability comes. */
-    final SpellAbility championAbilityComes = new Ability(getSourceCard(), "0") {
+    private final SpellAbility championAbilityComes = new Ability(getSourceCard(), "0") {
         @Override
         public void resolve() {
 
@@ -97,7 +97,7 @@ public class Spell_Permanent extends Spell {
     };
 
     /** The champion command comes. */
-    Command championCommandComes = new Command() {
+    private Command championCommandComes = new Command() {
 
         private static final long serialVersionUID = -3580408066322945328L;
 
@@ -111,7 +111,7 @@ public class Spell_Permanent extends Spell {
     }; // championCommandComes
 
     /** The champion command leaves play. */
-    Command championCommandLeavesPlay = new Command() {
+    private Command championCommandLeavesPlay = new Command() {
 
         private static final long serialVersionUID = -5903638227914705191L;
 

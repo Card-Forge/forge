@@ -191,7 +191,7 @@ public class CardFactory_Creatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Gilder Bairn")) {
             Cost abCost = new Cost("2 GU Untap", cardName, true);
-            Target tgt = new Target(card, "Select target permanent.", new String[] {"Permanent"});
+            Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
             final Ability_Activated a1 = new Ability_Activated(card, abCost, tgt) {
                 private static final long serialVersionUID = -1847685865277129366L;
 
@@ -203,9 +203,9 @@ public class CardFactory_Creatures {
                         return;
                     } else if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         // zerker clean up:
-                        for (Counters c_1 : Counters.values()) {
-                            if (c.getCounters(c_1) > 0) {
-                                c.addCounter(c_1, c.getCounters(c_1));
+                        for (Counters c1 : Counters.values()) {
+                            if (c.getCounters(c1) > 0) {
+                                c.addCounter(c1, c.getCounters(c1));
                             }
                         }
                     }
@@ -248,7 +248,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String choice = "";
-                    String[] choices = {"3/3", "2/2 with flying", "1/6 with defender"};
+                    String[] choices = { "3/3", "2/2 with flying", "1/6 with defender" };
 
                     if (card.getController().isHuman()) {
                         choice = GuiUtils.getChoice("Choose one", choices);
@@ -438,8 +438,8 @@ public class CardFactory_Creatures {
                 }
             };
 
-            ability.setStackDescription(
-                    "When Sleeper Agent enters the battlefield, target opponent gains control of it.");
+            ability.setStackDescription("When Sleeper Agent enters the battlefield, "
+            + "target opponent gains control of it.");
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -3934471871041458847L;
 
@@ -509,8 +509,7 @@ public class CardFactory_Creatures {
                         @Override
                         public void selectCard(final Card card, final PlayerZone zone) {
                             if (card.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                                    && card.getController().isHuman())
-                            {
+                                    && card.getController().isHuman()) {
                                 ability.setTargetCard(card);
                                 AllZone.getStack().add(ability);
                                 stop();
@@ -527,8 +526,8 @@ public class CardFactory_Creatures {
 
                     } else { // computer
                         Object o = getArt.execute();
-                        if (o != null)// should never happen, but just in case
-                        {
+                        // should never happen, but just in case
+                        if (o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -828,8 +827,8 @@ public class CardFactory_Creatures {
                         color[0] = Constant.Color.White;
                         int max = list.getKeywordsContain(color[0]).size();
 
-                        String[] colors = {Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
-                                Constant.Color.Green};
+                        String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
+                                Constant.Color.Green };
                         for (String c : colors) {
                             int cmp = list.getKeywordsContain(c).size();
                             if (cmp > max) {
@@ -867,8 +866,8 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin", card.getController(),
-                            "R G", new String[] {"Legendary", "Creature", "Human", "Warrior" }, 3, 4,
-                            new String[] {""});
+                            "R G", new String[] { "Legendary", "Creature", "Human", "Warrior" }, 3, 4,
+                            new String[] { "" });
 
                     cl.get(0).addLeavesPlayCommand(new Command() {
                         private static final long serialVersionUID = 3367390368512271319L;
@@ -881,9 +880,9 @@ public class CardFactory_Creatures {
                     });
                 }
             };
-            ability.setStackDescription(
-                    "When Stangg enters the battlefield, if Stangg is on the battlefield, "
-            + "put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield.");
+            ability.setStackDescription("When Stangg enters the battlefield, if Stangg is on the battlefield, "
+                    + "put a legendary 3/4 red and green Human Warrior creature token "
+                    + "named Stangg Twin onto the battlefield.");
 
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 6667896040611028600L;
@@ -951,10 +950,10 @@ public class CardFactory_Creatures {
             }; // SpellAbility
             card.addSpellAbility(ability);
 
-            ability.setDescription(
-                    "W U B R G: You may play target Elemental card from your graveyard without paying its mana cost.");
-            ability.setStackDescription(
-                    "Horde of Notions - play Elemental card from graveyard without paying its mana cost.");
+            ability.setDescription("W U B R G: You may play target Elemental card from "
+            + "your graveyard without paying its mana cost.");
+            ability.setStackDescription("Horde of Notions - play Elemental card from "
+            + "graveyard without paying its mana cost.");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         } // *************** END ************ END **************************
 
@@ -983,14 +982,12 @@ public class CardFactory_Creatures {
             };
 
             card.addSpellAbility(copyTokens1);
-            copyTokens1
-                    .setDescription(abCost
-                            + "For each creature token you control, "
-                            + "put a token that's a copy of that creature onto the battlefield.");
+            copyTokens1.setDescription(abCost + "For each creature token you control, "
+                    + "put a token that's a copy of that creature onto the battlefield.");
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName())
-                    .append(" - For each creature token you control, "
-            + "put a token that's a copy of that creature onto the battlefield.");
+            sb.append(card.getName()).append(
+                    " - For each creature token you control, "
+                            + "put a token that's a copy of that creature onto the battlefield.");
             copyTokens1.setStackDescription(sb.toString());
         } // *************** END ************ END **************************
 
@@ -1003,7 +1000,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int lifeGain = 0;
                     if (card.getController().isHuman()) {
-                        String[] choices = {"white", "blue", "black", "red", "green"};
+                        String[] choices = { "white", "blue", "black", "red", "green" };
                         Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
@@ -1023,7 +1020,7 @@ public class CardFactory_Creatures {
                     return false;
                 }
             }; // ability2
-              // card.clearSpellAbility();
+               // card.clearSpellAbility();
             card.addSpellAbility(ability2);
 
             StringBuilder sb2 = new StringBuilder();
@@ -1161,7 +1158,7 @@ public class CardFactory_Creatures {
 
                         if (damageableWolves.size() == 0) {
                             // can't damage
-                                                          // anything
+                            // anything
                             return;
                         }
 
@@ -1223,8 +1220,7 @@ public class CardFactory_Creatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
                 || cardName.equals("Feral Hydra") || cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")
-                || cardName.equals("Lightning Serpent"))
-        {
+                || cardName.equals("Lightning Serpent")) {
 
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = 7708945715867177172L;
@@ -1252,13 +1248,13 @@ public class CardFactory_Creatures {
 
                 @Override
                 public void resolve() {
-                    int XCounters = card.getXManaCostPaid();
+                    int xCounters = card.getXManaCostPaid();
                     Card c = AllZone.getGameAction().moveToPlay(getSourceCard());
 
-                    if (XCounters >= 5) {
-                        XCounters = 2 * XCounters;
+                    if (xCounters >= 5) {
+                        xCounters = 2 * xCounters;
                     }
-                    c.addCounter(Counters.P1P1, XCounters);
+                    c.addCounter(Counters.P1P1, xCounters);
                 }
             };
             // Do not remove SpellAbilities created by AbilityFactory or
@@ -1313,8 +1309,7 @@ public class CardFactory_Creatures {
                     int total = card.getCounters(Counters.P1P1);
                     if (getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard()))
-                        {
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(total, card);
                         }
                     } else {
@@ -1329,11 +1324,11 @@ public class CardFactory_Creatures {
             StringBuilder sb = new StringBuilder();
             sb.append(abCost + "Remove all +1/+1 counters from " + cardName + ":  " + cardName);
             sb.append(" deals damage to target creature or player equal to the "
-            + "number of +1/+1 counters removed this way.");
+                    + "number of +1/+1 counters removed this way.");
             ability2.setDescription(sb.toString());
 
             ability2.setStackDescription("Molten Hydra deals damage to number of "
-            + "+1/+1 counters on it to target creature or player.");
+                    + "+1/+1 counters on it to target creature or player.");
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
@@ -1370,8 +1365,8 @@ public class CardFactory_Creatures {
 
                                     if (c.isAura()) {
 
-                                        String[] enchantThisType = {""};
-                                        String[] message = {""};
+                                        String[] enchantThisType = { "" };
+                                        String[] message = { "" };
 
                                         // The type following "Enchant" maybe
                                         // upercase or lowercase, cardsfolder
@@ -1379,13 +1374,12 @@ public class CardFactory_Creatures {
                                         // Note that I am being overly cautious.
 
                                         if (c.hasKeyword("Enchant creature without flying")
-                                                || c.hasKeyword("Enchant Creature without flying"))
-                                        {
+                                                || c.hasKeyword("Enchant Creature without flying")) {
                                             enchantThisType[0] = "Creature.withoutFlying";
                                             message[0] = "Select a creature without flying";
                                         } else if (c.hasKeyword("Enchant creature with converted mana cost 2 or less")
-                                                || c.hasKeyword("Enchant Creature with converted mana cost 2 or less"))
-                                        {
+                                                || c.hasKeyword("Enchant Creature with "
+                                        + "converted mana cost 2 or less")) {
                                             enchantThisType[0] = "Creature.cmcLE2";
                                             message[0] = "Select a creature with converted mana cost 2 or less";
                                         } else if (c.hasKeyword("Enchant red or green creature")) {
@@ -1394,8 +1388,8 @@ public class CardFactory_Creatures {
                                         } else if (c.hasKeyword("Enchant tapped creature")) {
                                             enchantThisType[0] = "Creature.tapped";
                                             message[0] = "Select a tapped creature";
-                                        } else if (c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant Creature"))
-                                        {
+                                        } else if (c.hasKeyword("Enchant creature")
+                                                || c.hasKeyword("Enchant Creature")) {
                                             enchantThisType[0] = "Creature";
                                             message[0] = "Select a creature";
                                         } else if (c.hasKeyword("Enchant wall") || c.hasKeyword("Enchant Wall")) {
@@ -1408,8 +1402,8 @@ public class CardFactory_Creatures {
                                         } else if (c.hasKeyword("Enchant land") || c.hasKeyword("Enchant Land")) {
                                             enchantThisType[0] = "Land";
                                             message[0] = "Select a land";
-                                        } else if (c.hasKeyword("Enchant artifact") || c.hasKeyword("Enchant Artifact"))
-                                        {
+                                        } else if (c.hasKeyword("Enchant artifact")
+                                                || c.hasKeyword("Enchant Artifact")) {
                                             enchantThisType[0] = "Artifact";
                                             message[0] = "Select an artifact";
                                         } else if (c.hasKeyword("Enchant enchantment")
@@ -1457,8 +1451,8 @@ public class CardFactory_Creatures {
                                             }); // Input()
 
                                         } // if we were able to match the
-                                         // selected aura with our list of
-                                         // criteria
+                                          // selected aura with our list of
+                                          // criteria
                                     } // If enchantment selected is an aura
                                 } // If an enchantment is selected
                             } // If there are enchantments in library
@@ -1562,7 +1556,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                     ability.setStackDescription("Kinsbaile Borderguard enters "
-                + "the battlefield with a +1/+1 counter on it for each other Kithkin you control.");
+                            + "the battlefield with a +1/+1 counter on it for each other Kithkin you control.");
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
@@ -1578,7 +1572,7 @@ public class CardFactory_Creatures {
 
                 public void makeToken() {
                     CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card.getController(), "W",
-                            new String[] {"Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
+                            new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
                 }
             };
 
@@ -1587,7 +1581,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                     ability2.setStackDescription("When Kinsbaile Borderguard "
-                + "is put into a graveyard from play, put a 1/1 white "
+                            + "is put into a graveyard from play, put a 1/1 white "
                             + "Kithkin Soldier creature token onto the battlefield for each counter on it.");
                     AllZone.getStack().addSimultaneousStackEntry(ability2);
 
@@ -1656,8 +1650,7 @@ public class CardFactory_Creatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
                 || cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards")
-                || cardName.equals("Joraga Warcaller"))
-        {
+                || cardName.equals("Joraga Warcaller")) {
             final Ability_Static ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
@@ -1888,7 +1881,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     AllZone.getInputControl().setInput(new Input() {
                         private static final long serialVersionUID = 6150236529653275947L;
-                        CardList revealed = new CardList();
+                        private CardList revealed = new CardList();
 
                         @Override
                         public void showMessage() {
@@ -1943,8 +1936,7 @@ public class CardFactory_Creatures {
                 } // resolve()
             }; // SpellAbility
 
-            ability.setDescription(abCost
-                    + "Reveal any number of artifact cards in your hand. "
+            ability.setDescription(abCost + "Reveal any number of artifact cards in your hand. "
                     + "Add 2 to your mana pool for each card revealed this way.");
             ability.setStackDescription(cardName + " - Reveal any number of artifact cards in your hand.");
             card.addSpellAbility(ability);
@@ -2022,9 +2014,9 @@ public class CardFactory_Creatures {
                     // here, we add the ability to the stack since it's
                     // triggered.
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName())
-                            .append(" - tap up to 5 permanents target player controls. "
-                    + "Target player skips his or her next untap step.");
+                    sb.append(card.getName()).append(
+                            " - tap up to 5 permanents target player controls. "
+                                    + "Target player skips his or her next untap step.");
                     ability.setStackDescription(sb.toString());
                     AllZone.getStack().add(ability);
                     stop();
@@ -2157,8 +2149,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 7680692311339496770L;
 
                 public void execute() {
-                    sacOrSac.setStackDescription("When "
-                            + cardName
+                    sacOrSac.setStackDescription("When " + cardName
                             + " enters the battlefield, sacrifice it unless you "
                             + "sacrifice any number of creatures with total power 12 or greater.");
                     AllZone.getStack().addSimultaneousStackEntry(sacOrSac);
@@ -2173,8 +2164,7 @@ public class CardFactory_Creatures {
         else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
                 || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
                 || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
-                || cardName.equals("Body Double"))
-        {
+                || cardName.equals("Body Double")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
             final Card[] cloned = new Card[1];
@@ -2259,9 +2249,9 @@ public class CardFactory_Creatures {
 
                         if (cardName.equals("Vesuvan Doppelganger")) {
                             cloned[0].addExtrinsicKeyword("At the beginning of your upkeep, "
-                            + "you may have this creature become a copy of target creature "
+                                    + "you may have this creature become a copy of target creature "
                                     + "except it doesn't copy that creature's color. "
-                            + "If you do, this creature gains this ability.");
+                                    + "If you do, this creature gains this ability.");
                             cloned[0].addColor("U", cloned[0], false, true);
                         } else if (cardName.equals("Quicksilver Gargantuan")) {
                             cloned[0].setBaseDefense(7);
@@ -2269,7 +2259,7 @@ public class CardFactory_Creatures {
                         } else if (cardName.equals("Phantasmal Image")) {
                             StringBuilder trigScript = new StringBuilder(
                                     "Mode$ BecomesTarget | ValidTarget$ Card.Self | "
-                            + "TriggerZones$ Battlefield | Execute$ ");
+                                            + "TriggerZones$ Battlefield | Execute$ ");
                             StringBuilder svarName = new StringBuilder("TrigSac");
                             // Couple of hoops to jump through to make sure no
                             // svar is overwritten.
@@ -2284,9 +2274,8 @@ public class CardFactory_Creatures {
                                 }
                             }
                             trigScript.append(svarName.toString());
-                            trigScript
-                                    .append(" | TriggerDescription$ When this creature "
-                            + "becomes the target of a spell or ability, sacrifice it.");
+                            trigScript.append(" | TriggerDescription$ When this creature "
+                                    + "becomes the target of a spell or ability, sacrifice it.");
                             cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),
                                     card, true));
                             cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
@@ -2320,8 +2309,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield)
-                            && (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact())))
-                    {
+                            && (c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
                         if (cardName.equals("Jwari Shapeshifter") && !c.isType("Ally")) {
                             return;
                         }
@@ -2392,7 +2380,7 @@ public class CardFactory_Creatures {
                     if (!revealed.isEmpty()) {
                         GuiUtils.getChoice("Revealed at random", revealed.toArray());
                     } else {
-                        GuiUtils.getChoice("Revealed at random", new String[] {"Nothing to reveal"});
+                        GuiUtils.getChoice("Revealed at random", new String[] { "Nothing to reveal" });
                     }
 
                     for (Card c : revealed) {
@@ -2432,7 +2420,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -8926850792424930054L;
 
                 @Override
-                public boolean chkAI_Drawback() {
+                public boolean chkAIDrawback() {
                     return false;
                 }
 
@@ -2514,8 +2502,7 @@ public class CardFactory_Creatures {
             }; // SpellAbility
 
             card.addSpellAbility(ability);
-            ability.setDescription(abCost
-                    + "Put a -1/-1 counter on target creature. "
+            ability.setDescription(abCost + "Put a -1/-1 counter on target creature. "
                     + "Then if that creature's toughness is 1 or greater, regenerate it.");
 
             StringBuilder sb = new StringBuilder();
@@ -2525,16 +2512,14 @@ public class CardFactory_Creatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Awakener Druid")) {
-            final long[] timeStamp = {0};
+            final long[] timeStamp = { 0 };
 
-            Trigger myTrig = TriggerHandler
-                    .parseTrigger(
-                            "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + "ValidCard$ Card.Self | TriggerDescription$ "
-                                    + "When CARDNAME enters the battlefield, target Forest "
-                    + "becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the "
-                                    + "battlefield. It's still a land.",
-                            card, true);
+            Trigger myTrig = TriggerHandler.parseTrigger(
+                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                            + "ValidCard$ Card.Self | TriggerDescription$ "
+                            + "When CARDNAME enters the battlefield, target Forest "
+                            + "becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the "
+                            + "battlefield. It's still a land.", card, true);
             Target myTarget = new Target(card, "Choose target forest.", "Land.Forest".split(","), "1", "1");
             final SpellAbility awaken = new Ability(card, "0") {
                 @Override
@@ -2543,18 +2528,18 @@ public class CardFactory_Creatures {
                         return;
                     }
                     final Card c = getTarget().getTargetCards().get(0);
-                    String[] types = {"Creature", "Treefolk"};
+                    String[] types = { "Creature", "Treefolk" };
                     String[] keywords = {};
                     timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 5, types, keywords, "G");
 
                     final Command onleave = new Command() {
                         private static final long serialVersionUID = -6004932214386L;
-                        long stamp = timeStamp[0];
-                        Card tgt = c;
+                        private long stamp = timeStamp[0];
+                        private Card tgt = c;
 
                         public void execute() {
-                            String[] types = {"Creature", "Treefolk"};
-                            String[] keywords = {""};
+                            String[] types = { "Creature", "Treefolk" };
+                            String[] keywords = { "" };
                             CardFactoryUtil.revertManland(tgt, types, keywords, "G", stamp);
                         }
                     };

@@ -134,7 +134,7 @@ public class AbilityFactory_PreventDamage {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -344,7 +344,7 @@ public class AbilityFactory_PreventDamage {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

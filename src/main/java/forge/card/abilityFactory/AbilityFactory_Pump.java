@@ -178,7 +178,7 @@ public class AbilityFactory_Pump {
             }// resolve
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return pumpDrawbackAI(this);
             }
 
@@ -1037,7 +1037,7 @@ public class AbilityFactory_Pump {
             }// resolve
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return pumpAllChkDrawbackAI(this);
             }
 

@@ -104,7 +104,7 @@ public class AbilityFactory_DelayedTrigger {
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return doChkAI_Drawback(AF, this);
             }
 
@@ -139,7 +139,7 @@ public class AbilityFactory_DelayedTrigger {
         SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName), AF.getHostCard());
 
         if (trigsa instanceof Ability_Sub) {
-            return ((Ability_Sub) trigsa).chkAI_Drawback();
+            return ((Ability_Sub) trigsa).chkAIDrawback();
         } else {
             return trigsa.canPlayAI();
         }

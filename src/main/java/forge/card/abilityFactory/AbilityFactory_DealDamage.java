@@ -138,7 +138,7 @@ public class AbilityFactory_DealDamage {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 // Make sure there is a valid target
                 return damageDrawback(this);
             }
@@ -357,7 +357,7 @@ public class AbilityFactory_DealDamage {
 
         Ability_Sub subAb = saMe.getSubAbility();
         if (subAb != null) {
-            rr &= subAb.chkAI_Drawback();
+            rr &= subAb.chkAIDrawback();
         }
         return rr;
     }
@@ -889,7 +889,7 @@ public class AbilityFactory_DealDamage {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 // check AI life before playing this drawback?
                 return true;
             }
@@ -1017,7 +1017,7 @@ public class AbilityFactory_DealDamage {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .6667) && chance);

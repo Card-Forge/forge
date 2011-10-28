@@ -33,8 +33,8 @@ public class LazyCardFactory extends AbstractCardFactory {
     public LazyCardFactory(final File cardsfolder) {
         super(cardsfolder);
 
-        getMap().clear();
-        cardReader = new CardReader(cardsfolder, getMap());
+        this.getMap().clear();
+        this.cardReader = new CardReader(cardsfolder, this.getMap());
     }
 
     /**
@@ -43,7 +43,7 @@ public class LazyCardFactory extends AbstractCardFactory {
      * @return cardReader
      */
     public final CardReader getCardReader() {
-        return cardReader;
+        return this.cardReader;
     }
 
     /**
@@ -69,24 +69,24 @@ public class LazyCardFactory extends AbstractCardFactory {
      */
     @Override
     protected final Card getCard2(final String cardName, final Player owner) {
-        final Map<String, Card> cardNamesToCards = getMap();
+        final Map<String, Card> cardNamesToCards = this.getMap();
         Card result = null;
         boolean wasLoaded = cardNamesToCards.containsKey(cardName);
 
         if (!wasLoaded) {
 
-            if (cardsFailedToLoad.contains(cardName)) {
+            if (this.cardsFailedToLoad.contains(cardName)) {
                 return null; // no more System.err, exceptions of other drama -
                              // just return null.
             }
 
             final String canonicalASCIIName = CardUtil.canonicalizeCardName(cardName);
-            Card cardRequested = getCardReader().findCard(canonicalASCIIName);
+            final Card cardRequested = this.getCardReader().findCard(canonicalASCIIName);
             if (null != cardRequested) {
                 cardNamesToCards.put(cardName, cardRequested);
                 wasLoaded = true;
             } else {
-                cardsFailedToLoad.add(cardName);
+                this.cardsFailedToLoad.add(cardName);
                 System.err.println(String.format("LazyCF: Tried to read from disk card '%s' but not found it!",
                         cardName));
                 return null;

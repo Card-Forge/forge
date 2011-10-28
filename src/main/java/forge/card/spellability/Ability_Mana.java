@@ -18,20 +18,20 @@ import forge.card.mana.ManaPool;
  * @version $Id$
  */
 public abstract class Ability_Mana extends Ability_Activated implements java.io.Serializable {
-    /** Constant <code>serialVersionUID=-6816356991224950520L</code> */
+    /** Constant <code>serialVersionUID=-6816356991224950520L</code>. */
     private static final long serialVersionUID = -6816356991224950520L;
 
     private String origProduced;
     private int amount = 1;
 
     /** The reflected. */
-    protected boolean reflected = false;
+    private boolean reflected = false;
 
     /** The undoable. */
-    protected boolean undoable = true;
+    private boolean undoable = true;
 
     /** The canceled. */
-    protected boolean canceled = false;
+    private boolean canceled = false;
 
     /**
      * <p>

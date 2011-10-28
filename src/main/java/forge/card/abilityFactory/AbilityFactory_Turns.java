@@ -119,7 +119,7 @@ public class AbilityFactory_Turns {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 

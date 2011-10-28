@@ -137,7 +137,7 @@ public final class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -304,7 +304,7 @@ public final class AbilityFactory_Copy {
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
-                return abSub.chkAI_Drawback();
+                return abSub.chkAIDrawback();
             }
         }
         return true;
@@ -573,7 +573,7 @@ public final class AbilityFactory_Copy {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -677,7 +677,7 @@ public final class AbilityFactory_Copy {
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
-                return randomReturn && abSub.chkAI_Drawback();
+                return randomReturn && abSub.chkAIDrawback();
             }
         }
         return randomReturn;

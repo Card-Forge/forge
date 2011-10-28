@@ -43,7 +43,7 @@ class CardFactory_Equipment {
      * @return a int.
      */
     public static int shouldEquip(final Card c) {
-        ArrayList<String> a = c.getKeyword();
+        final ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++) {
 
             // Keyword renamed to eqPump, was VanillaEquipment
@@ -69,25 +69,26 @@ class CardFactory_Equipment {
 
         // *************** START *********** START **************************
         if (cardName.equals("Umbral Mantle")) {
-            Cost abCost = new Cost("0", cardName, true);
-            Target target = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
+            final Cost abCost = new Cost("0", cardName, true);
+            final Target target = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
             final Ability_Activated equip = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -6122939616068165612L;
 
                 @Override
                 public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
+                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
 
                         if (card.isEquipping()) {
-                            Card crd = card.getEquipping().get(0);
-                            if (crd.equals(getTargetCard())) {
+                            final Card crd = card.getEquipping().get(0);
+                            if (crd.equals(this.getTargetCard())) {
                                 return;
                             }
 
                             card.unEquipCard(crd);
                         }
 
-                        card.equipCard(getTargetCard());
+                        card.equipCard(this.getTargetCard());
                     }
                 }
 
@@ -95,15 +96,16 @@ class CardFactory_Equipment {
                 public boolean canPlayAI() {
                     return false;
                 }
-            };// equip ability
+            }; // equip ability
 
             equip.setType("Extrinsic");
 
             final Ability untapboost = new Ability(card, "3") {
-                Command EOT(final Card c) {
+                Command eot(final Card c) {
                     return new Command() {
                         private static final long serialVersionUID = -8840812331316327448L;
 
+                        @Override
                         public void execute() {
                             if (AllZoneUtil.isCardInPlay(getSourceCard())) {
                                 c.addTempAttackBoost(-2);
@@ -116,49 +118,51 @@ class CardFactory_Equipment {
 
                 @Override
                 public void resolve() {
-                    getSourceCard().addTempAttackBoost(2);
-                    getSourceCard().addTempDefenseBoost(2);
-                    AllZone.getEndOfTurn().addUntil(EOT(getSourceCard()));
+                    this.getSourceCard().addTempAttackBoost(2);
+                    this.getSourceCard().addTempDefenseBoost(2);
+                    AllZone.getEndOfTurn().addUntil(this.eot(this.getSourceCard()));
                 }
 
                 @Override
                 public boolean canPlay() {
-                    return (getSourceCard().isTapped() && !getSourceCard().hasSickness() && super.canPlay());
+                    return (this.getSourceCard().isTapped() && !this.getSourceCard().hasSickness() && super.canPlay());
                 }
-            };// equiped creature's ability
+            }; // equiped creature's ability
             untapboost.makeUntapAbility();
-            Command onEquip = new Command() {
+            final Command onEquip = new Command() {
 
                 private static final long serialVersionUID = -4784079305541955698L;
 
+                @Override
                 public void execute() {
                     if (card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
+                        final Card crd = card.getEquipping().get(0);
 
-                        StringBuilder sbDesc = new StringBuilder();
+                        final StringBuilder sbDesc = new StringBuilder();
                         sbDesc.append("3, Untap: ").append(crd).append(" gets +2/+2 until end of turn");
                         untapboost.setDescription(sbDesc.toString());
 
-                        StringBuilder sbStack = new StringBuilder();
+                        final StringBuilder sbStack = new StringBuilder();
                         sbStack.append(crd).append(" - +2/+2 until EOT");
                         untapboost.setStackDescription(sbStack.toString());
 
                         crd.addSpellAbility(untapboost);
                     }
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
-            Command onUnEquip = new Command() {
+            final Command onUnEquip = new Command() {
                 private static final long serialVersionUID = -3427116314295067303L;
 
+                @Override
                 public void execute() {
                     if (card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
+                        final Card crd = card.getEquipping().get(0);
                         crd.removeSpellAbility(untapboost);
                     }
 
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
             equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
             equip.getRestrictions().setSorcerySpeed(true);
@@ -180,17 +184,18 @@ class CardFactory_Equipment {
                 // not changed
                 @Override
                 public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
+                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
 
                         if (card.isEquipping()) {
-                            Card crd = card.getEquipping().get(0);
-                            if (crd.equals(getTargetCard())) {
+                            final Card crd = card.getEquipping().get(0);
+                            if (crd.equals(this.getTargetCard())) {
                                 return;
                             }
 
                             card.unEquipCard(crd);
                         }
-                        card.equipCard(getTargetCard());
+                        card.equipCard(this.getTargetCard());
                     }
                 }
 
@@ -204,20 +209,21 @@ class CardFactory_Equipment {
                 // not changed
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping() && super.canPlayAI();
+                    return (this.getCreature().size() != 0) && !card.isEquipping() && super.canPlayAI();
                 }
 
                 // not changed
                 @Override
                 public void chooseTargetAI() {
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
+                    final Card target = CardFactoryUtil.AI_getBestCreature(this.getCreature());
+                    this.setTargetCard(target);
                 }
 
                 // not changed
                 CardList getCreature() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
                     list = list.filter(new CardListFilter() {
+                        @Override
                         public boolean addCard(final Card c) {
                             return CardFactoryUtil.AI_doesCreatureAttack(c) && CardFactoryUtil.canTarget(card, c)
                                     && (!c.hasKeyword("Defender"));
@@ -234,36 +240,38 @@ class CardFactory_Equipment {
                     }
 
                     return list;
-                }// getCreature()
-            };// equip ability
+                } // getCreature()
+            }; // equip ability
 
-            Command onEquip = new Command() {
+            final Command onEquip = new Command() {
                 private static final long serialVersionUID = -5356474407155702171L;
 
+                @Override
                 public void execute() {
                     if (card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
-                        int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
+                        final Card crd = card.getEquipping().get(0);
+                        final int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
                         crd.addSemiPermanentAttackBoost(pump);
                         crd.addSemiPermanentDefenseBoost(pump);
                     }
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
-            Command onUnEquip = new Command() {
+            final Command onUnEquip = new Command() {
                 private static final long serialVersionUID = 5196262972986079207L;
 
+                @Override
                 public void execute() {
                     if (card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
-                        int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
+                        final Card crd = card.getEquipping().get(0);
+                        final int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
                         crd.addSemiPermanentAttackBoost(-pump);
                         crd.addSemiPermanentDefenseBoost(-pump);
 
                     }
 
-                }// execute()
-            };// Command
+                } // execute()
+            }; // Command
 
             equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
 
@@ -281,7 +289,7 @@ class CardFactory_Equipment {
                 @Override
                 public void resolve() {
                     if (card.getEquipping().size() != 0) {
-                        Card equipping = card.getEquipping().get(0);
+                        final Card equipping = card.getEquipping().get(0);
                         if (equipping.isType("Vampire")) {
                             equipping.addCounter(Counters.P1P1, 2);
                         } else {
@@ -291,10 +299,12 @@ class CardFactory_Equipment {
                 }
             };
 
-            final Trigger myTrigger = TriggerHandler
-                    .parseTrigger(
-                            "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.",
-                            card, true);
+            final Trigger myTrigger = TriggerHandler.parseTrigger(
+                    "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | "
+                            + "ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | "
+                            + "TriggerDescription$ Whenever a creature is put into a "
+                            + "graveyard from the battlefield, put a +1/+1 counter on equipped creature. "
+                            + "If equipped creature is a Vampire, put two +1/+1 counters on it instead.", card, true);
             myTrigger.setOverridingAbility(triggeredAbility);
 
             card.addTrigger(myTrigger);
@@ -313,16 +323,17 @@ class CardFactory_Equipment {
                     AllZone.getDisplay().showMessage(card + " - Select target creature you control to attach");
                     ButtonUtil.disableAll();
                     if (list.size() == 0) {
-                        stop();
+                        this.stop();
                     }
                 }
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()
-                            && CardFactoryUtil.canTarget(card, c)) {
+                            && CardFactoryUtil.canTarget(card, c))
+                    {
                         card.equipCard(c);
-                        stop();
+                        this.stop();
                     }
                 }
 
@@ -332,15 +343,16 @@ class CardFactory_Equipment {
                 @Override
                 public void resolve() {
                     AllZone.getInputControl().setInput(in);
-                }// resolve()
+                } // resolve()
             }; // comesIntoPlayAbility
 
-            Command intoPlay = new Command() {
+            final Command intoPlay = new Command() {
                 private static final long serialVersionUID = 2985015252466920757L;
 
+                @Override
                 public void execute() {
 
-                    StringBuilder sb = new StringBuilder();
+                    final StringBuilder sb = new StringBuilder();
                     sb.append("When Piston Sledge enters the battlefield, attach it to target creature you control.");
                     comesIntoPlayAbility.setStackDescription(sb.toString());
 
@@ -350,15 +362,15 @@ class CardFactory_Equipment {
             };
 
             card.addComesIntoPlayCommand(intoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
-        if (shouldEquip(card) != -1) {
-            int n = shouldEquip(card);
+        if (CardFactory_Equipment.shouldEquip(card) != -1) {
+            final int n = CardFactory_Equipment.shouldEquip(card);
             if (n != -1) {
-                String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
 
-                String[] k = parse.split(":");
+                final String[] k = parse.split(":");
                 String tmpCost;
                 tmpCost = k[0].substring(6);
                 String keywordsUnsplit = "";
@@ -370,13 +382,12 @@ class CardFactory_Equipment {
                 int power = 0;
                 int tough = 0;
 
-                String[] ptk = k[1].split("/");
-
-                if (ptk.length == 1) // keywords in first cell
-                {
+                final String[] ptk = k[1].split("/");
+                // keywords in first cell
+                if (ptk.length == 1) {
                     keywordsUnsplit = ptk[0];
-                } else // parse the power/toughness boosts in first two cells
-                {
+                } else {
+                    // parse the power/toughness boosts in first two cells
                     for (int i = 0; i < 2; i++) {
                         if (ptk[i].matches("[\\+\\-][0-9]")) {
                             ptk[i] = ptk[i].replace("+", "");
@@ -394,7 +405,7 @@ class CardFactory_Equipment {
                 if (keywordsUnsplit.length() > 0) // then there is at least one
                                                   // extrinsic keyword to assign
                 {
-                    String[] tempKwds = keywordsUnsplit.split("&");
+                    final String[] tempKwds = keywordsUnsplit.split("&");
                     extrinsicKeywords = new String[tempKwds.length];
 
                     for (int i = 0; i < tempKwds.length; i++) {
@@ -407,7 +418,7 @@ class CardFactory_Equipment {
                 card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, power, tough, extrinsicKeywords, abCost));
 
             }
-        }// eqPump (was VanillaEquipment)
+        } // eqPump (was VanillaEquipment)
 
         if (card.hasKeyword("Living Weapon")) {
             card.removeIntrinsicKeyword("Living Weapon");
@@ -415,14 +426,14 @@ class CardFactory_Equipment {
 
                 @Override
                 public void resolve() {
-                    String[] types = new String[] { "Creature", "Germ" };
-                    String[] keywords = new String[0];
-                    CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B", types,
-                            1, 1, keywords);
+                    final String[] types = new String[] { "Creature", "Germ" };
+                    final String[] keywords = new String[0];
+                    final CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B",
+                            types, 1, 1, keywords);
 
                     card.equipCard(germs.get(0));
 
-                    for (Card c : germs) {
+                    for (final Card c : germs) {
                         c.setBaseAttack(0);
                         c.setBaseDefense(0);
                     }
@@ -430,10 +441,12 @@ class CardFactory_Equipment {
 
             };
 
-            final Trigger etbTrigger = TriggerHandler
-                    .parseTrigger(
-                            "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ Living Weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)",
-                            card, true);
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(
+                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                            + "ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ "
+                            + "Living Weapon (When this Equipment enters the battlefield, "
+                            + "put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)",
+                    card, true);
             etbTrigger.setOverridingAbility(etbAbility);
 
             card.addTrigger(etbTrigger);

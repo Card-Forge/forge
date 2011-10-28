@@ -122,7 +122,7 @@ public class AbilityFactory_Sacrifice {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return sacrificePlayDrawbackAI(af, this);
             }
 
@@ -257,7 +257,7 @@ public class AbilityFactory_Sacrifice {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -282,7 +282,7 @@ public class AbilityFactory_Sacrifice {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -318,7 +318,7 @@ public class AbilityFactory_Sacrifice {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance || mandatory;
@@ -627,7 +627,7 @@ public class AbilityFactory_Sacrifice {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -763,7 +763,7 @@ public class AbilityFactory_Sacrifice {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .9667) && chance);

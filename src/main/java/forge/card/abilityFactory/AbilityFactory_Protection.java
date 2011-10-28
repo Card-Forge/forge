@@ -141,7 +141,7 @@ public final class AbilityFactory_Protection {
             } // resolve
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return protectDrawbackAI(af, this);
             }
 
@@ -898,7 +898,7 @@ public final class AbilityFactory_Protection {
             } // resolve
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return protectAllDrawbackAI(af, this);
             }
 

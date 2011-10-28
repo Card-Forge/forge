@@ -23,13 +23,31 @@ public class Ability_Triggered extends Ability implements Command {
     private static final long serialVersionUID = 4970998845621323960L;
 
     /** The restrictions. */
-    public String[] restrictions;
+    private String[] restrictions;
 
     /** The trigger. */
-    public ZCTrigger trigger;
+    private ZCTrigger trigger;
+
+    /**
+     * Gets the trigger.
+     *
+     * @return the trigger
+     */
+    public final ZCTrigger getTrigger() {
+        return trigger;
+    }
+
+    /**
+     * Sets the trigger.
+     *
+     * @param trigger the new trigger
+     */
+    public final void setTrigger(final ZCTrigger trigger) {
+    this.trigger = trigger;
+    }
 
     /** The todo. */
-    public Command todo;
+    private Command todo;
 
     /**
      * <p>
@@ -114,7 +132,7 @@ public class Ability_Triggered extends Ability implements Command {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object o) // TODO: triggers affecting other cards
+    public final boolean equals(final Object o) // TODO triggers affecting other cards
     {
         if (!(o instanceof Ability_Triggered)) {
             return false;

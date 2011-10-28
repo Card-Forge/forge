@@ -19,12 +19,12 @@ import forge.card.spellability.Target;
 import forge.card.spellability.Target_Selection;
 
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
-//		-Graveyard (Default)
-//		-Exile
-//		-TopOfLibrary
-//		-Hand
-//		-BottomOfLibrary
-//		-ShuffleIntoLibrary
+// -Graveyard (Default)
+// -Exile
+// -TopOfLibrary
+// -Hand
+// -BottomOfLibrary
+// -ShuffleIntoLibrary
 //PowerSink - true if the drawback type part of Power Sink should be used
 //ExtraActions - this has been removed.  All SubAbilitys should now use the standard SubAbility system
 
@@ -56,13 +56,13 @@ public class AbilityFactory_CounterMagic {
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_CounterMagic(final AbilityFactory newAF) {
-        af = newAF;
-        params = af.getMapParams();
+        this.af = newAF;
+        this.params = this.af.getMapParams();
 
-        destination = params.containsKey("Destination") ? params.get("Destination") : "Graveyard";
+        this.destination = this.params.containsKey("Destination") ? this.params.get("Destination") : "Graveyard";
 
-        if (params.containsKey("UnlessCost")) {
-            unlessCost = params.get("UnlessCost").trim();
+        if (this.params.containsKey("UnlessCost")) {
+            this.unlessCost = this.params.get("UnlessCost").trim();
         }
 
     }
@@ -72,34 +72,36 @@ public class AbilityFactory_CounterMagic {
      * getAbilityCounter.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final SpellAbility getAbilityCounter(final AbilityFactory AF) {
-        final SpellAbility abCounter = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public final SpellAbility getAbilityCounter(final AbilityFactory abilityFactory) {
+        final SpellAbility abCounter = new Ability_Activated(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -3895990436431818899L;
 
             @Override
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return counterStackDescription(af, this);
+                return AbilityFactory_CounterMagic.this.counterStackDescription(AbilityFactory_CounterMagic.this.af,
+                        this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return counterCanPlayAI(af, this);
+                return AbilityFactory_CounterMagic.this.counterCanPlayAI(AbilityFactory_CounterMagic.this.af, this);
             }
 
             @Override
             public void resolve() {
-                counterResolve(af, this);
+                AbilityFactory_CounterMagic.this.counterResolve(AbilityFactory_CounterMagic.this.af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return counterCanPlayAI(af, this);
+                return AbilityFactory_CounterMagic.this.counterCanPlayAI(AbilityFactory_CounterMagic.this.af, this);
             }
 
         };
@@ -111,27 +113,29 @@ public class AbilityFactory_CounterMagic {
      * getSpellCounter.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final SpellAbility getSpellCounter(final AbilityFactory AF) {
-        final SpellAbility spCounter = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public final SpellAbility getSpellCounter(final AbilityFactory abilityFactory) {
+        final SpellAbility spCounter = new Spell(abilityFactory.getHostCard(),
+                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
             public String getStackDescription() {
-                return counterStackDescription(af, this);
+                return AbilityFactory_CounterMagic.this.counterStackDescription(AbilityFactory_CounterMagic.this.af,
+                        this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return counterCanPlayAI(af, this);
+                return AbilityFactory_CounterMagic.this.counterCanPlayAI(AbilityFactory_CounterMagic.this.af, this);
             }
 
             @Override
             public void resolve() {
-                counterResolve(af, this);
+                AbilityFactory_CounterMagic.this.counterResolve(AbilityFactory_CounterMagic.this.af, this);
             }
 
         };
@@ -144,37 +148,40 @@ public class AbilityFactory_CounterMagic {
      * getDrawbackCounter.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final SpellAbility getDrawbackCounter(final AbilityFactory AF) {
-        final SpellAbility dbCounter = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public final SpellAbility getDrawbackCounter(final AbilityFactory abilityFactory) {
+        final SpellAbility dbCounter = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
             public String getStackDescription() {
-                return counterStackDescription(af, this);
+                return AbilityFactory_CounterMagic.this.counterStackDescription(AbilityFactory_CounterMagic.this.af,
+                        this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return counterCanPlayAI(af, this);
+                return AbilityFactory_CounterMagic.this.counterCanPlayAI(AbilityFactory_CounterMagic.this.af, this);
             }
 
             @Override
             public void resolve() {
-                counterResolve(af, this);
+                AbilityFactory_CounterMagic.this.counterResolve(AbilityFactory_CounterMagic.this.af, this);
             }
 
             @Override
-            public boolean chkAI_Drawback() {
-                return counterDoTriggerAI(af, this, true);
+            public boolean chkAIDrawback() {
+                return AbilityFactory_CounterMagic.this.counterDoTriggerAI(AbilityFactory_CounterMagic.this.af, this,
+                        true);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return counterDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_CounterMagic.this.counterDoTriggerAI(AbilityFactory_CounterMagic.this.af, this,
+                        mandatory);
             }
 
         };
@@ -194,7 +201,7 @@ public class AbilityFactory_CounterMagic {
      */
     private boolean counterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         boolean toReturn = true;
-        Cost abCost = af.getAbCost();
+        final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
         if (AllZone.getStack().size() < 1) {
             return false;
@@ -210,10 +217,10 @@ public class AbilityFactory_CounterMagic {
             }
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
 
-            SpellAbility topSA = AllZone.getStack().peekAbility();
+            final SpellAbility topSA = AllZone.getStack().peekAbility();
             if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -226,16 +233,16 @@ public class AbilityFactory_CounterMagic {
             }
         }
 
-        if (unlessCost != null) {
+        if (this.unlessCost != null) {
             // Is this Usable Mana Sources? Or Total Available Mana?
-            int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
+            final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
             int toPay = 0;
             boolean setPayX = false;
-            if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+            if (this.unlessCost.equals("X") && source.getSVar(this.unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
                 toPay = ComputerUtil.determineLeftoverMana(sa);
             } else {
-                toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
+                toPay = AbilityFactory.calculateAmount(source, this.unlessCost, sa);
             }
 
             if (toPay == 0) {
@@ -245,7 +252,7 @@ public class AbilityFactory_CounterMagic {
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of
                 // the time
-                if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4) {
+                if (!sa.getPayCosts().isReusuableResource() || (MyRandom.random.nextFloat() < .4)) {
                     return false;
                 }
             }
@@ -262,9 +269,9 @@ public class AbilityFactory_CounterMagic {
 
         // But really it should be more picky about how it counters things
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            toReturn &= subAb.chkAI_Drawback();
+            toReturn &= subAb.chkAIDrawback();
         }
 
         return toReturn;
@@ -289,9 +296,9 @@ public class AbilityFactory_CounterMagic {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
-            SpellAbility topSA = AllZone.getStack().peekAbility();
+            final SpellAbility topSA = AllZone.getStack().peekAbility();
             if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -303,17 +310,17 @@ public class AbilityFactory_CounterMagic {
                 return false;
             }
 
-            Card source = sa.getSourceCard();
-            if (unlessCost != null) {
+            final Card source = sa.getSourceCard();
+            if (this.unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
-                int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
+                final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
                 int toPay = 0;
                 boolean setPayX = false;
-                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                if (this.unlessCost.equals("X") && source.getSVar(this.unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtil.determineLeftoverMana(sa);
                 } else {
-                    toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
+                    toPay = AbilityFactory.calculateAmount(source, this.unlessCost, sa);
                 }
 
                 if (toPay == 0) {
@@ -323,7 +330,7 @@ public class AbilityFactory_CounterMagic {
                 if (toPay <= usableManaSources) {
                     // If this is a reusable Resource, feel free to play it most
                     // of the time
-                    if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4) {
+                    if (!sa.getPayCosts().isReusuableResource() || (MyRandom.random.nextFloat() < .4)) {
                         return false;
                     }
                 }
@@ -341,9 +348,9 @@ public class AbilityFactory_CounterMagic {
 
         // But really it should be more picky about how it counters things
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            toReturn &= subAb.chkAI_Drawback();
+            toReturn &= subAb.chkAIDrawback();
         }
 
         return toReturn;
@@ -365,45 +372,45 @@ public class AbilityFactory_CounterMagic {
         // still on the stack
         ArrayList<SpellAbility> sas;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
-            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
 
-        if (params.containsKey("ForgetOtherTargets")) {
-            if (params.get("ForgetOtherTargets").equals("True")) {
+        if (this.params.containsKey("ForgetOtherTargets")) {
+            if (this.params.get("ForgetOtherTargets").equals("True")) {
                 af.getHostCard().clearRemembered();
             }
         }
 
         for (final SpellAbility tgtSA : sas) {
-            Card tgtSACard = tgtSA.getSourceCard();
+            final Card tgtSACard = tgtSA.getSourceCard();
 
             if (tgtSA.isSpell() && tgtSACard.keywordsContain("CARDNAME can't be countered.")) {
                 continue;
             }
 
-            SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si);
+            this.removeFromStack(tgtSA, sa, si);
 
             // Destroy Permanent may be able to be turned into a SubAbility
-            if (tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
+            if (tgtSA.isAbility() && this.params.containsKey("DestroyPermanent")) {
                 AllZone.getGameAction().destroy(tgtSACard);
             }
 
-            if (params.containsKey("RememberTargets")) {
-                if (params.get("RememberTargets").equals("True")) {
+            if (this.params.containsKey("RememberTargets")) {
+                if (this.params.get("RememberTargets").equals("True")) {
                     af.getHostCard().addRemembered(tgtSACard);
                 }
             }
         }
-    }// end counterResolve
+    } // end counterResolve
 
     /**
      * <p>
@@ -418,7 +425,7 @@ public class AbilityFactory_CounterMagic {
      */
     private String counterStackDescription(final AbilityFactory af, final SpellAbility sa) {
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -428,11 +435,11 @@ public class AbilityFactory_CounterMagic {
 
         ArrayList<SpellAbility> sas;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
-            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
 
         sb.append("countering");
@@ -447,19 +454,19 @@ public class AbilityFactory_CounterMagic {
             }
         }
 
-        if (isAbility && params.containsKey("DestroyPermanent")) {
+        if (isAbility && this.params.containsKey("DestroyPermanent")) {
             sb.append(" and destroy it");
         }
 
         sb.append(".");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();
-    }// end counterStackDescription
+    } // end counterStackDescription
 
     /**
      * <p>
@@ -474,23 +481,25 @@ public class AbilityFactory_CounterMagic {
      *            a {@link forge.card.spellability.SpellAbility_StackInstance}
      *            object.
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbility_StackInstance si) {
+    private void removeFromStack(final SpellAbility tgtSA,
+            final SpellAbility srcSA, final SpellAbility_StackInstance si)
+    {
         AllZone.getStack().remove(si);
 
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
-        } else if (destination.equals("Graveyard")) {
+        } else if (this.destination.equals("Graveyard")) {
             AllZone.getGameAction().moveToGraveyard(tgtSA.getSourceCard());
-        } else if (destination.equals("Exile")) {
+        } else if (this.destination.equals("Exile")) {
             AllZone.getGameAction().exile(tgtSA.getSourceCard());
-        } else if (destination.equals("TopOfLibrary")) {
+        } else if (this.destination.equals("TopOfLibrary")) {
             AllZone.getGameAction().moveToLibrary(tgtSA.getSourceCard());
-        } else if (destination.equals("Hand")) {
+        } else if (this.destination.equals("Hand")) {
             AllZone.getGameAction().moveToHand(tgtSA.getSourceCard());
-        } else if (destination.equals("BottomOfLibrary")) {
+        } else if (this.destination.equals("BottomOfLibrary")) {
             AllZone.getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
-        } else if (destination.equals("ShuffleIntoLibrary")) {
+        } else if (this.destination.equals("ShuffleIntoLibrary")) {
             AllZone.getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             tgtSA.getSourceCard().getController().shuffle();
         } else {
@@ -499,8 +508,8 @@ public class AbilityFactory_CounterMagic {
         }
 
         if (!tgtSA.isAbility()) {
-            System.out.println("Send countered spell to " + destination);
+            System.out.println("Send countered spell to " + this.destination);
         }
     }
 
-}// end class AbilityFactory_CounterMagic
+} // end class AbilityFactory_CounterMagic

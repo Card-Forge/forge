@@ -38,23 +38,24 @@ public class AbilityFactory_Attach {
     /**
      * Creates the spell attach.
      * 
-     * @param AF
+     * @param abilityFactory
      *            the aF
      * @return the spell ability
      */
-    public static SpellAbility createSpellAttach(final AbilityFactory AF) {
+    public static SpellAbility createSpellAttach(final AbilityFactory abilityFactory) {
         // There are two types of Spell Attachments: Auras and
         // Instants/Sorceries
         // Auras generally target what that card will attach to
         // I/S generally target the Attacher and the Attachee
         SpellAbility spAttach = null;
-        if (AF.getHostCard().isAura()) {
+        if (abilityFactory.getHostCard().isAura()) {
             // The 4th parameter is to resolve an issue with SetDescription in
             // default Spell_Permanent constructor
-            spAttach = new Spell_Permanent(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt(), false) {
+            spAttach = new Spell_Permanent(abilityFactory.getHostCard(),
+                    abilityFactory.getAbCost(), abilityFactory.getAbTgt(), false) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
-                final AbilityFactory af = AF;
+                private final AbilityFactory af = abilityFactory;
 
                 @Override
                 public String getStackDescription() {
@@ -81,10 +82,10 @@ public class AbilityFactory_Attach {
             // that use it
             // And the Targeting system can't really handle them at this time
             // (11/7/1)
-            spAttach = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+            spAttach = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
-                final AbilityFactory af = AF;
+                private final AbilityFactory af = abilityFactory;
 
                 @Override
                 public String getStackDescription() {
@@ -110,11 +111,11 @@ public class AbilityFactory_Attach {
     /**
      * Creates the ability attach.
      * 
-     * @param AF
+     * @param abilityFactory
      *            the aF
      * @return the spell ability
      */
-    public static SpellAbility createAbilityAttach(final AbilityFactory AF) {
+    public static SpellAbility createAbilityAttach(final AbilityFactory abilityFactory) {
         // placeholder for Equip and other similar cards
         return null;
     }
@@ -123,11 +124,11 @@ public class AbilityFactory_Attach {
     /**
      * Creates the drawback attach.
      * 
-     * @param AF
+     * @param abilityFactory
      *            the aF
      * @return the spell ability
      */
-    public static SpellAbility createDrawbackAttach(final AbilityFactory AF) {
+    public static SpellAbility createDrawbackAttach(final AbilityFactory abilityFactory) {
         // placeholder for DBs that might attach
         return null;
     }
@@ -167,8 +168,9 @@ public class AbilityFactory_Attach {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
-        for (Object o : targets)
+        for (Object o : targets) {
             sb.append(o).append(" ");
+        }
 
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -465,8 +467,9 @@ public class AbilityFactory_Attach {
 
                 String kws = params.get("AddKeyword");
                 if (kws != null) {
-                    for (String kw : kws.split(" & "))
+                    for (String kw : kws.split(" & ")) {
                         keywords.add(kw);
+                    }
                 }
             }
         }
@@ -499,11 +502,11 @@ public class AbilityFactory_Attach {
                     // keywords
                     @Override
                     public boolean addCard(final Card c) {
-                        for (String kw : finalKWs)
+                        for (String kw : finalKWs) {
                             if (c.hasKeyword(kw)) {
                                 return false;
                             }
-
+                        }
                         return true;
                     }
                 });
@@ -597,8 +600,9 @@ public class AbilityFactory_Attach {
 
                 String kws = params.get("AddKeyword");
                 if (kws != null) {
-                    for (String kw : kws.split(" & "))
+                    for (String kw : kws.split(" & ")) {
                         keywords.add(kw);
+                    }
                 }
             }
         }

@@ -165,7 +165,7 @@ public class AbilityFactory_Mana {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -868,7 +868,7 @@ public class AbilityFactory_Mana {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return drainManaPlayDrawbackAI(af, this);
             }
 
@@ -966,7 +966,7 @@ public class AbilityFactory_Mana {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -1046,7 +1046,7 @@ public class AbilityFactory_Mana {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

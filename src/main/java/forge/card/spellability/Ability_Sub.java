@@ -28,7 +28,7 @@ public abstract class Ability_Sub extends SpellAbility implements java.io.Serial
      */
     public Ability_Sub(final Card sourceCard, final Target tgt) {
         super(SpellAbility.Ability, sourceCard);
-        setTarget(tgt);
+        this.setTarget(tgt);
     }
 
     /** {@inheritDoc} */
@@ -45,9 +45,10 @@ public abstract class Ability_Sub extends SpellAbility implements java.io.Serial
      * 
      * @return a boolean.
      */
-    public abstract boolean chkAI_Drawback();
+    public abstract boolean chkAIDrawback();
 
     /** {@inheritDoc} */
+    @Override
     public abstract boolean doTrigger(boolean mandatory);
 
     /**
@@ -70,6 +71,6 @@ public abstract class Ability_Sub extends SpellAbility implements java.io.Serial
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getParent() {
-        return parent;
+        return this.parent;
     }
 }

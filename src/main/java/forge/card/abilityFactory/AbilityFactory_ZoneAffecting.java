@@ -132,7 +132,7 @@ public class AbilityFactory_ZoneAffecting {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return drawTargetAI(af, this, false, false);
             }
 
@@ -299,7 +299,7 @@ public class AbilityFactory_ZoneAffecting {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
     }
@@ -626,7 +626,7 @@ public class AbilityFactory_ZoneAffecting {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return millDrawback(af, this);
             }
 
@@ -860,7 +860,7 @@ public class AbilityFactory_ZoneAffecting {
         // check SubAbilities DoTrigger?
         Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
-            return abSub.chkAI_Drawback();
+            return abSub.chkAIDrawback();
         }
 
         return true;
@@ -1051,7 +1051,7 @@ public class AbilityFactory_ZoneAffecting {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return discardCheckDrawbackAI(af, this);
             }
 
@@ -1424,7 +1424,7 @@ public class AbilityFactory_ZoneAffecting {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
     }// discardCanPlayAI()
@@ -1602,7 +1602,7 @@ public class AbilityFactory_ZoneAffecting {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return shuffleTargetAI(af, this, false, false);
             }
 

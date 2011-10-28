@@ -126,7 +126,7 @@ public class AbilityFactory_Destroy {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return false;
             }
 
@@ -175,7 +175,7 @@ public class AbilityFactory_Destroy {
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
             if (!noRegen) {
-                // TODO: filter out things that could regenerate in response?
+                // TODO filter out things that could regenerate in response?
                 // might be tougher?
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
@@ -257,7 +257,7 @@ public class AbilityFactory_Destroy {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .6667) && chance);
@@ -304,7 +304,7 @@ public class AbilityFactory_Destroy {
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
             if (!noRegen) {
-                // TODO: filter out things that could regenerate in response?
+                // TODO filter out things that could regenerate in response?
                 // might be tougher?
                 preferred = preferred.filter(new CardListFilter() {
                     public boolean addCard(final Card c) {
@@ -313,8 +313,9 @@ public class AbilityFactory_Destroy {
                 });
             }
 
-            for (Card c : preferred)
+            for (Card c : preferred) {
                 list.remove(c);
+            }
 
             while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (preferred.size() == 0) {
@@ -527,8 +528,8 @@ public class AbilityFactory_Destroy {
         final SpellAbility abDestroyAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1376444173137861437L;
 
-            final HashMap<String, String> params = af.getMapParams();
-            final boolean noRegen = params.containsKey("NoRegen");
+            private final HashMap<String, String> params = af.getMapParams();
+            private final boolean noRegen = params.containsKey("NoRegen");
 
             @Override
             public String getStackDescription() {
@@ -567,8 +568,8 @@ public class AbilityFactory_Destroy {
         final SpellAbility spDestroyAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -3712659336576469102L;
 
-            final HashMap<String, String> params = af.getMapParams();
-            final boolean noRegen = params.containsKey("NoRegen");
+            private final HashMap<String, String> params = af.getMapParams();
+            private final boolean noRegen = params.containsKey("NoRegen");
 
             @Override
             public String getStackDescription() {
@@ -606,8 +607,8 @@ public class AbilityFactory_Destroy {
         final SpellAbility dbDestroyAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -242160421677518351L;
 
-            final HashMap<String, String> params = af.getMapParams();
-            final boolean noRegen = params.containsKey("NoRegen");
+            private final HashMap<String, String> params = af.getMapParams();
+            private final boolean noRegen = params.containsKey("NoRegen");
 
             @Override
             public String getStackDescription() {
@@ -624,7 +625,7 @@ public class AbilityFactory_Destroy {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -651,7 +652,9 @@ public class AbilityFactory_Destroy {
      *            a boolean.
      * @return a {@link java.lang.String} object.
      */
-    private static String destroyAllStackDescription(final AbilityFactory af, final SpellAbility sa, final boolean noRegen) {
+    private static String destroyAllStackDescription(final AbilityFactory af,
+            final SpellAbility sa, final boolean noRegen)
+    {
 
         StringBuilder sb = new StringBuilder();
         String name = af.getHostCard().getName();
@@ -706,17 +709,17 @@ public class AbilityFactory_Destroy {
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
-        String Valid = "";
+        String valid = "";
 
         if (params.containsKey("ValidCards")) {
-            Valid = params.get("ValidCards");
+            valid = params.get("ValidCards");
         }
 
-        if (Valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
-            Valid = Valid.replace("X", Integer.toString(xPay));
+            valid = valid.replace("X", Integer.toString(xPay));
         }
 
         CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
@@ -730,8 +733,8 @@ public class AbilityFactory_Destroy {
             computerlist.clear();
         }
 
-        humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
-        computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
+        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
+        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
 
         humanlist = humanlist.getNotKeyword("Indestructible");
         computerlist = computerlist.getNotKeyword("Indestructible");
@@ -754,7 +757,7 @@ public class AbilityFactory_Destroy {
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
-        }// only lands involved
+        } // only lands involved
         else if (humanlist.getNotType("Land").size() == 0 && computerlist.getNotType("Land").size() == 0) {
             if (CardFactoryUtil.evaluatePermanentList(computerlist) + 1 >= CardFactoryUtil
                     .evaluatePermanentList(humanlist)) {
@@ -769,7 +772,7 @@ public class AbilityFactory_Destroy {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .9667) && chance);
@@ -798,17 +801,17 @@ public class AbilityFactory_Destroy {
             targetPlayer = tgt.getTargetPlayers().get(0);
         }
 
-        String Valid = "";
+        String valid = "";
 
         if (params.containsKey("ValidCards")) {
-            Valid = params.get("ValidCards");
+            valid = params.get("ValidCards");
         }
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
         // to use the X variable
         // We really need a better solution to this
-        if (Valid.contains("X")) {
-            Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
+        if (valid.contains("X")) {
+            valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -817,7 +820,7 @@ public class AbilityFactory_Destroy {
             list = list.getController(targetPlayer);
         }
 
-        list = AbilityFactory.filterListByType(list, Valid, sa);
+        list = AbilityFactory.filterListByType(list, valid, sa);
 
         boolean remDestroyed = params.containsKey("RememberDestroyed");
         if (remDestroyed) {
@@ -832,10 +835,11 @@ public class AbilityFactory_Destroy {
             }
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (AllZone.getGameAction().destroy(list.get(i)) && remDestroyed)
+                if (AllZone.getGameAction().destroy(list.get(i)) && remDestroyed) {
                     card.addRemembered(list.get(i));
+                }
             }
         }
     }
 
-}// end class AbilityFactory_Destroy
+} // end class AbilityFactory_Destroy

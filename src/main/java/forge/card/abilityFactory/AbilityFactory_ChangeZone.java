@@ -138,7 +138,7 @@ public final class AbilityFactory_ChangeZone {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return changeZonePlayDrawbackAI(af, this);
             }
 
@@ -274,7 +274,8 @@ public final class AbilityFactory_ChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeZoneTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean changeZoneTriggerAI(final AbilityFactory af,
+            final SpellAbility sa, final boolean mandatory) {
         HashMap<String, String> params = af.getMapParams();
         String origin = params.get("Origin");
 
@@ -432,7 +433,7 @@ public final class AbilityFactory_ChangeZone {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -477,7 +478,8 @@ public final class AbilityFactory_ChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeHiddenTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean changeHiddenTriggerAI(final AbilityFactory af,
+            final SpellAbility sa, final boolean mandatory) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
@@ -1202,7 +1204,8 @@ public final class AbilityFactory_ChangeZone {
                 }
 
                 // only use blink or bounce effects
-                if (!(destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
+                if (!(destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger")
+                        || subAPI.equals("ChangeZone")))
                         && !destination.equals(Zone.Hand)) {
                     return false;
                 }
@@ -1222,7 +1225,7 @@ public final class AbilityFactory_ChangeZone {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < pct) && chance);
@@ -1298,7 +1301,8 @@ public final class AbilityFactory_ChangeZone {
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
             // if it's blink or bounce, try to save my about to die stuff
-            if ((destination.equals(Zone.Hand) || (destination.equals(Zone.Exile) && (subAPI.equals("DelayedTrigger") || (subAPI
+            if ((destination.equals(Zone.Hand) || (destination.equals(Zone.Exile)
+                    && (subAPI.equals("DelayedTrigger") || (subAPI
                     .equals("ChangeZone") && subAffected.equals("Remembered")))))
                     && tgt.getMinTargets(sa.getSourceCard(), sa) <= 1) {
 
@@ -1338,8 +1342,7 @@ public final class AbilityFactory_ChangeZone {
                     aiPermanents = aiPermanents.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            if (c.getNumberOfCounters() > 0)
-                             {
+                            if (c.getNumberOfCounters() > 0) {
                                 return false; // don't blink something with
                             }
                                               // counters TODO check good and
@@ -1371,7 +1374,8 @@ public final class AbilityFactory_ChangeZone {
         // blink human targets only during combat
         if (origin.equals(Zone.Battlefield)
                 && destination.equals(Zone.Exile)
-                && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
+                && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone")
+                        && subAffected.equals("Remembered")))
                 && !(AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || sa.isAbility())) {
             return false;
         }
@@ -1909,7 +1913,7 @@ public final class AbilityFactory_ChangeZone {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return changeZoneAllPlayDrawbackAI(af, this);
             }
 
@@ -2054,7 +2058,7 @@ public final class AbilityFactory_ChangeZone {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAI_Drawback();
+            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .8 || sa.isTrigger()) && chance);

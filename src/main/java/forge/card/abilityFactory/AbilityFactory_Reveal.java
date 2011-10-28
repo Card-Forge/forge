@@ -139,7 +139,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -259,7 +259,7 @@ public final class AbilityFactory_Reveal {
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
-                return randomReturn && abSub.chkAI_Drawback();
+                return randomReturn && abSub.chkAIDrawback();
             }
         }
 
@@ -671,7 +671,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -809,7 +809,7 @@ public final class AbilityFactory_Reveal {
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
-                return randomReturn && abSub.chkAI_Drawback();
+                return randomReturn && abSub.chkAIDrawback();
             }
         }
 
@@ -1032,7 +1032,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return revealHandTargetAI(af, this, false, false);
             }
 
@@ -1145,7 +1145,7 @@ public final class AbilityFactory_Reveal {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
     }
@@ -1365,7 +1365,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return scryTargetAI(af, this);
             }
 
@@ -1534,7 +1534,7 @@ public final class AbilityFactory_Reveal {
         if (af.hasSubAbility()) {
             Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
-                return randomReturn && abSub.chkAI_Drawback();
+                return randomReturn && abSub.chkAIDrawback();
             }
         }
         return randomReturn;
@@ -1646,7 +1646,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return false;
             }
 
@@ -1949,7 +1949,7 @@ public final class AbilityFactory_Reveal {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 // reuse code from RevealHand
                 return revealHandTargetAI(af, this, false, false);
             }
@@ -2068,7 +2068,7 @@ public final class AbilityFactory_Reveal {
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
-            randomReturn &= subAb.chkAI_Drawback();
+            randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
     }

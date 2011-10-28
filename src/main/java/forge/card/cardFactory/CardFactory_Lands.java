@@ -99,11 +99,11 @@ class CardFactory_Lands {
                             tapCard();
                         }
 
-                    }// if
+                    } // if
                     else {
                         tapCard();
                     }
-                }// execute()
+                } // execute()
 
                 private void tapCard() {
                     // it enters the battlefield this way, and should not fire
@@ -111,7 +111,7 @@ class CardFactory_Lands {
                     card.setTapped(true);
                 }
             });
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Dark Depths")) {
@@ -174,7 +174,11 @@ class CardFactory_Lands {
                     AllZone.getGameAction().sacrifice(card);
                 }
             };
-            // ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
+            // ability.setDescription("Dark Depths enters the battlefield with
+            //ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.
+            //\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it.
+            //If you do, put an indestructible legendary 20/20 black Avatar creature token
+            //with flying named Marit Lage onto the battlefield.");
             ability.setDescription("3: remove an Ice Counter.");
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - remove an ice counter.");
@@ -183,7 +187,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             sacrifice.setStackDescription("Sacrifice " + card.getName());
             card.addSpellAbility(sacrifice);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Novijen, Heart of Progress")) {
@@ -201,7 +205,7 @@ class CardFactory_Lands {
             Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 1416258136308898492L;
 
-                CardList inPlay = new CardList();
+                private CardList inPlay = new CardList();
 
                 @Override
                 public boolean canPlayAI() {
@@ -241,7 +245,7 @@ class CardFactory_Lands {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = -194247993330560188L;
 
-                final Player player = card.getController();
+                private final Player player = card.getController();
 
                 public void execute() {
                     if (player.isHuman()) {
@@ -271,8 +275,8 @@ class CardFactory_Lands {
                                         stop();
                                     }
                                 }
-                            }// selectCard()
-                        };// Input
+                            } // selectCard()
+                        }; // Input
                         if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.untapped)
                                 .size() < 2)) {
                             AllZone.getGameAction().sacrifice(card);
@@ -288,7 +292,7 @@ class CardFactory_Lands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
@@ -310,7 +314,7 @@ class CardFactory_Lands {
 
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 6175830918425915833L;
-                final Player player = card.getController();
+                private final Player player = card.getController();
 
                 public void execute() {
                     final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(type[0], player, card);
@@ -349,15 +353,15 @@ class CardFactory_Lands {
                                     AllZone.getGameAction().sacrifice(c);
                                     stop();
                                 }
-                            }// selectCard()
-                        };// Input
+                            } // selectCard()
+                        }; // Input
                         AllZone.getInputControl().setInput(target);
                     }
                 }
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Sheltered Valley")) {
@@ -379,13 +383,13 @@ class CardFactory_Lands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Scorched Ruins")) {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 6175830918425915833L;
-                final Player player = card.getController();
+                private final Player player = card.getController();
 
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
@@ -438,15 +442,15 @@ class CardFactory_Lands {
                                         stop();
                                     }
                                 }
-                            }// selectCard()
-                        };// Input
+                            } // selectCard()
+                        }; // Input
                         AllZone.getInputControl().setInput(target);
                     }
                 }
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         // Lorwyn Dual Lands, and a couple Morningtide...
@@ -526,14 +530,14 @@ class CardFactory_Lands {
                             stop();
                         }
                     });
-                }// execute()
+                } // execute()
 
                 private void revealCard(final Card c) {
                     JOptionPane.showMessageDialog(null, c.getController() + " reveals " + c.getName(), card.getName(),
                             JOptionPane.PLAIN_MESSAGE);
                 }
             });
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START ************ START **************************
         else if (cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef")
@@ -634,7 +638,8 @@ class CardFactory_Lands {
 
                     num[0] = Integer.parseInt(answer);
 
-                    String splitNum = (String) (GuiUtils.getChoiceOptional("Number of " + primary + " to add", choices));
+                    String splitNum = (String) (GuiUtils.getChoiceOptional(
+                            "Number of " + primary + " to add", choices));
                     if (splitNum == null) {
                         stop();
                         return;
@@ -654,7 +659,7 @@ class CardFactory_Lands {
             addMana.setAfterPayMana(runtime);
             card.addSpellAbility(addMana);
             card.addSpellAbility(abMana);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera")
@@ -701,15 +706,15 @@ class CardFactory_Lands {
                                     AllZone.getGameAction().moveToHand(c);
                                     stop();
                                 }
-                            }// selectCard()
-                        };// Input
+                            } // selectCard()
+                        }; // Input
                         AllZone.getInputControl().setInput(target);
                     }
                 }
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Coral Atoll") || cardName.equals("Dormant Volcano") || cardName.equals("Everglades")
@@ -762,13 +767,14 @@ class CardFactory_Lands {
                                     AllZone.getGameAction().moveToHand(c);
                                     stop();
                                 }
-                            }// selectCard()
-                        };// Input
+                            } // selectCard()
+                        }; // Input
                         AllZone.getInputControl().setInput(target);
                     }
                 }
             };
-            sacOrNo.setStackDescription("When CARDNAME enters the battlefield, sacrifice it unless you return an untapped "
+            sacOrNo.setStackDescription("When CARDNAME enters the battlefield, "
+            + "sacrifice it unless you return an untapped "
                     + type[0] + " you control to its owner's hand.");
 
             final Command comesIntoPlay = new Command() {
@@ -780,9 +786,9 @@ class CardFactory_Lands {
             };
 
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }// *************** END ************ END **************************
+        } // *************** END ************ END **************************
 
         return card;
     }
 
-}// end class CardFactory_Lands
+} // end class CardFactory_Lands

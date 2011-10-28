@@ -606,7 +606,7 @@ public class ComputerUtil {
 
                 // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAI_Drawback()) {
+                    if (!m.getSubAbility().chkAIDrawback()) {
                         continue;
                     }
                 }
@@ -801,7 +801,7 @@ public class ComputerUtil {
 
                 // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAI_Drawback()) {
+                    if (!m.getSubAbility().chkAIDrawback()) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good
@@ -844,7 +844,7 @@ public class ComputerUtil {
 
                     // don't use abilities with dangerous drawbacks
                     if (m.getSubAbility() != null) {
-                        if (!m.getSubAbility().chkAI_Drawback()) {
+                        if (!m.getSubAbility().chkAIDrawback()) {
                             continue;
                         }
                         needsLimitedResources = true; // TODO: check for good

@@ -143,7 +143,7 @@ public final class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -379,7 +379,7 @@ public final class AbilityFactory_EndGameCondition {
             }
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 

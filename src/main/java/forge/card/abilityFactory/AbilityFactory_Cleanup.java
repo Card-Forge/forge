@@ -37,7 +37,7 @@ public final class AbilityFactory_Cleanup {
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override
-            public boolean chkAI_Drawback() {
+            public boolean chkAIDrawback() {
                 return true;
             }
 
@@ -48,7 +48,7 @@ public final class AbilityFactory_Cleanup {
 
             @Override
             public void resolve() {
-                doResolve(af, this);
+                AbilityFactory_Cleanup.doResolve(af, this);
             }
         };
 
@@ -66,7 +66,7 @@ public final class AbilityFactory_Cleanup {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (params.containsKey("ClearRemembered")) {
             sa.getSourceCard().clearRemembered();
