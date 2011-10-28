@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | SubAbility$ ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
 A:AB$ Token | Cost$ 5 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ Creature,ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ C 2 2 Volraths Laboratory | SpellDescription$ Put a 2/2 creature token of the chosen color and type onto the battlefield.
-SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_laboratory.jpg
