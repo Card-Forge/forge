@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_darigaaz.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/138.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/112.jpg
+Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nBreath of Darigaaz deals 1 damage to each creature without flying and each player. If Breath of Darigaaz was kicked, it deals 4 damage to each creature without flying and each player instead.
 End
