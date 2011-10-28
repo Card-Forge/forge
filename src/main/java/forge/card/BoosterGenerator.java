@@ -115,8 +115,7 @@ public class BoosterGenerator {
         numSpecials = bs.getSpecial();
         numDoubleFaced = bs.getDoubleFaced();
 
-        Predicate<CardPrinted> filter = Predicate.and(CardPrinted.Predicates.printedInSets(cardSet.getCode()),
-                CardPrinted.Predicates.Presets.nonAlternate);
+        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
         List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
         for (CardPrinted c : cardsInThisSet) {
@@ -269,6 +268,9 @@ public class BoosterGenerator {
     }
 
     private void addToRarity(final CardPrinted c) {
+        if(c.isAlternate()) {
+            return;
+        }
         if (c.isDoubleFaced() && numDoubleFaced > 0) {
             doubleFaced.add(c);
         } else {
