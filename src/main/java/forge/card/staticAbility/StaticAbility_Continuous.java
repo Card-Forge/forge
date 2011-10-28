@@ -268,8 +268,7 @@ public class StaticAbility_Continuous {
             if (addTriggers != null) {
                 for (String trigger : addTriggers) {
                     Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
-                    actualTrigger.setTemporary(true);
-                    affectedCard.addTrigger(actualTrigger);
+                    affectedCard.addTrigger(actualTrigger).setTemporary(true);
                 }
             }
 
