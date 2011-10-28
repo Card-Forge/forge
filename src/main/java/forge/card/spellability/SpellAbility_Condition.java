@@ -121,9 +121,9 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
         // basically PresentCompare for life totals:
         if (params.containsKey("ConditionLifeTotal")) {
-            lifeTotal = params.get("ConditionLifeTotal");
+            setLifeTotal(params.get("ConditionLifeTotal"));
             if (params.containsKey("ConditionLifeAmount")) {
-                lifeAmount = params.get("ConditionLifeAmount");
+                setLifeAmount(params.get("ConditionLifeAmount"));
             }
         }
 
@@ -159,27 +159,27 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
 
-        if (hellbent) {
+        if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
             }
         }
-        if (threshold) {
+        if (isThreshold()) {
             if (!activator.hasThreshold()) {
                 return false;
             }
         }
-        if (metalcraft) {
+        if (isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
                 return false;
             }
         }
 
-        if (bSorcerySpeed && !Phase.canCastSorcery(activator)) {
+        if (isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
             return false;
         }
 
-        if (bPlayerTurn && !AllZone.getPhase().isPlayerTurn(activator)) {
+        if (isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
@@ -187,14 +187,14 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             return false;
         }
 
-        if (activationLimit != -1 && numberTurnActivations >= activationLimit) {
+        if (getActivationLimit() != -1 && getNumberTurnActivations() >= getActivationLimit()) {
             return false;
         }
 
-        if (phases.size() > 0) {
+        if (getPhases().size() > 0) {
             boolean isPhase = false;
             String currPhase = AllZone.getPhase().getPhase();
-            for (String s : phases) {
+            for (String s : getPhases()) {
                 if (s.equals(currPhase)) {
                     isPhase = true;
                     break;
@@ -243,7 +243,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
-            String rightString = presentCompare.substring(2);
+            String rightString = getPresentCompare().substring(2);
             try { // If this is an Integer, just parse it
                 right = Integer.parseInt(rightString);
             } catch (NumberFormatException e) { // Otherwise, grab it from the
@@ -253,29 +253,29 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
 
             int left = list.size();
 
-            if (!AllZoneUtil.compare(left, presentCompare, right)) {
+            if (!AllZoneUtil.compare(left, getPresentCompare(), right)) {
                 return false;
             }
         }
 
-        if (lifeTotal != null) {
+        if (getLifeTotal() != null) {
             int life = 1;
-            if (lifeTotal.equals("You")) {
+            if (getLifeTotal().equals("You")) {
                 life = activator.getLife();
             }
-            if (lifeTotal.equals("Opponent")) {
+            if (getLifeTotal().equals("Opponent")) {
                 life = activator.getOpponent().getLife();
             }
 
             int right = 1;
-            String rightString = lifeAmount.substring(2);
+            String rightString = getLifeAmount().substring(2);
             if (rightString.equals("X")) {
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
             } else {
-                right = Integer.parseInt(lifeAmount.substring(2));
+                right = Integer.parseInt(getLifeAmount().substring(2));
             }
 
-            if (!AllZoneUtil.compare(life, lifeAmount, right)) {
+            if (!AllZoneUtil.compare(life, getLifeAmount(), right)) {
                 return false;
             }
         }

@@ -33,10 +33,10 @@ public class SpellAbility_Variables {
     protected Constant.Zone zone = Constant.Zone.Battlefield;
 
     /** The phases. */
-    protected ArrayList<String> phases = new ArrayList<String>();
+    private ArrayList<String> phases = new ArrayList<String>();
 
     /** The b sorcery speed. */
-    protected boolean bSorcerySpeed = false;
+    private boolean sorcerySpeed = false;
 
     /** The b any player. */
     protected boolean bAnyPlayer = false;
@@ -45,37 +45,37 @@ public class SpellAbility_Variables {
     protected boolean bOpponentTurn = false;
 
     /** The b player turn. */
-    protected boolean bPlayerTurn = false;
+    private boolean playerTurn = false;
 
     /** The activation limit. */
-    protected int activationLimit = -1;
+    private int activationLimit = -1;
 
     /** The number turn activations. */
-    protected int numberTurnActivations = 0;
+    private int numberTurnActivations = 0;
 
     /** The activation number sacrifice. */
-    protected int activationNumberSacrifice = -1;
+    private int activationNumberSacrifice = -1;
 
     /** The n cards in hand. */
     protected int nCardsInHand = -1;
 
     /** The threshold. */
-    protected boolean threshold = false;
+    private boolean threshold = false;
 
     /** The metalcraft. */
-    protected boolean metalcraft = false;
+    private boolean metalcraft = false;
 
     /** The hellbent. */
-    protected boolean hellbent = false;
+    private boolean hellbent = false;
 
     /** The prowl. */
-    protected ArrayList<String> prowl = null;
+    private ArrayList<String> prowl = null;
 
     /** The s is present. */
     protected String sIsPresent = null;
 
     /** The present compare. */
-    protected String presentCompare = "GE1"; // Default Compare to Greater or
+    private String presentCompare = "GE1"; // Default Compare to Greater or
                                              // Equal to 1
 
     /** The present defined. */
@@ -94,16 +94,16 @@ public class SpellAbility_Variables {
     protected String svarOperand = "1";
 
     /** The life total. */
-    protected String lifeTotal = null;
+    private String lifeTotal = null;
 
     /** The life amount. */
-    protected String lifeAmount = "GE1";
+    private String lifeAmount = "GE1";
 
     /** The mana spent. */
     protected String manaSpent = "";
 
     /** The pw ability. */
-    protected boolean pwAbility = false;
+    private boolean pwAbility = false;
 
     /** The all m12 empires. */
     protected boolean allM12Empires = false;
@@ -212,7 +212,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setSorcerySpeed(final boolean bSpeed) {
-        bSorcerySpeed = bSpeed;
+        sorcerySpeed = bSpeed;
     }
 
     /**
@@ -222,8 +222,8 @@ public class SpellAbility_Variables {
      * 
      * @return a boolean.
      */
-    public final boolean getSorcerySpeed() {
-        return bSorcerySpeed;
+    public final boolean isSorcerySpeed() {
+        return sorcerySpeed;
     }
 
     /**
@@ -258,7 +258,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setPlayerTurn(final boolean bTurn) {
-        bPlayerTurn = bTurn;
+        playerTurn = bTurn;
     }
 
     /**
@@ -269,7 +269,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean getPlayerTurn() {
-        return bPlayerTurn;
+        return isPlayerTurn();
     }
 
     /**
@@ -501,7 +501,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setPlaneswalker(final boolean bPlaneswalker) {
-        pwAbility = bPlaneswalker;
+        setPwAbility(bPlaneswalker);
     }
 
     /**
@@ -512,7 +512,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean getPlaneswalker() {
-        return pwAbility;
+        return isPwAbility();
     }
 
     // Checking the values of SVars (Mostly for Traps)
@@ -550,6 +550,141 @@ public class SpellAbility_Variables {
      */
     public final void setSvarOperand(final String operand) {
         svarOperand = operand;
+    }
+
+    /**
+     * Gets the activation limit.
+     *
+     * @return the activationLimit
+     */
+    public int getActivationLimit() {
+        return activationLimit;
+    }
+
+    /**
+     * Checks if is threshold.
+     *
+     * @return the threshold
+     */
+    public final boolean isThreshold() {
+        return threshold;
+    }
+
+    /**
+     * Checks if is metalcraft.
+     *
+     * @return the metalcraft
+     */
+    public final boolean isMetalcraft() {
+        return metalcraft;
+    }
+
+    /**
+     * Checks if is hellbent.
+     *
+     * @return the hellbent
+     */
+    public final boolean isHellbent() {
+        return hellbent;
+    }
+
+    /**
+     * Checks if is pw ability.
+     *
+     * @return the pwAbility
+     */
+    public final boolean isPwAbility() {
+        return pwAbility;
+    }
+
+    /**
+     * Sets the pw ability.
+     *
+     * @param pwAbility the new pw ability
+     */
+    public final void setPwAbility(final boolean pwAbility) {
+        this.pwAbility = pwAbility; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * Checks if is player turn.
+     *
+     * @return the playerTurn
+     */
+    public boolean isPlayerTurn() {
+        return playerTurn;
+    }
+
+    /**
+     * Gets the prowl.
+     *
+     * @return the prowl
+     */
+    public ArrayList<String> getProwl() {
+        return prowl;
+    }
+
+    /**
+     * Gets the present compare.
+     *
+     * @return the presentCompare
+     */
+    public String getPresentCompare() {
+        return presentCompare;
+    }
+
+    /**
+     * Gets the life total.
+     *
+     * @return the lifeTotal
+     */
+    public final String getLifeTotal() {
+        return lifeTotal;
+    }
+
+    /**
+     * Sets the life total.
+     *
+     * @param lifeTotal the lifeTotal to set
+     */
+    public final void setLifeTotal(final String lifeTotal) {
+        this.lifeTotal = lifeTotal; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the life amount.
+     *
+     * @return the lifeAmount
+     */
+    public final String getLifeAmount() {
+        return lifeAmount;
+    }
+
+    /**
+     * Sets the life amount.
+     *
+     * @param lifeAmount the lifeAmount to set
+     */
+    public final void setLifeAmount(final String lifeAmount) {
+        this.lifeAmount = lifeAmount; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the phases.
+     *
+     * @return the phases
+     */
+    public final ArrayList<String> getPhases() {
+        return phases;
+    }
+
+    /**
+     * Sets the phases.
+     *
+     * @param phases the new phases
+     */
+    public final void setPhases(final ArrayList<String> phases) {
+        this.phases = phases; // TODO Add 0 to parameter's name.
     }
 
 } // end class SpellAbility_Variables

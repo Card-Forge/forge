@@ -1326,7 +1326,7 @@ public class AbilityFactory {
         if (sa.isSpell()) {
             return sa.getSourceCard().isSorcery();
         } else if (sa.isAbility()) {
-            return sa.getRestrictions().getSorcerySpeed();
+            return sa.getRestrictions().isSorcerySpeed();
         }
 
         return false;

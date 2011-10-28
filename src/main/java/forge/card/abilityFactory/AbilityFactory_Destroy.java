@@ -653,8 +653,7 @@ public class AbilityFactory_Destroy {
      * @return a {@link java.lang.String} object.
      */
     private static String destroyAllStackDescription(final AbilityFactory af,
-            final SpellAbility sa, final boolean noRegen)
-    {
+            final SpellAbility sa, final boolean noRegen) {
 
         StringBuilder sb = new StringBuilder();
         String name = af.getHostCard().getName();
