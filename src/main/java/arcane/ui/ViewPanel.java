@@ -5,8 +5,10 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 /**
- * <p>ViewPanel class.</p>
- *
+ * <p>
+ * ViewPanel class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -15,19 +17,22 @@ public class ViewPanel extends JPanel {
     private static final long serialVersionUID = 7016597023142963068L;
 
     /**
-     * <p>doLayout.</p>
-     *
+     * <p>
+     * doLayout.
+     * </p>
+     * 
      * @since 1.0.15
      */
+    @Override
     public final void doLayout() {
-        if (getComponentCount() == 0) {
+        if (this.getComponentCount() == 0) {
             return;
         }
-        CardPanel panel = (CardPanel) getComponent(0);
-        int viewWidth = getWidth();
-        int viewHeight = getHeight();
-        int srcWidth = viewWidth;
-        int srcHeight = Math.round(viewWidth * CardPanel.ASPECT_RATIO);
+        final CardPanel panel = (CardPanel) this.getComponent(0);
+        final int viewWidth = this.getWidth();
+        final int viewHeight = this.getHeight();
+        final int srcWidth = viewWidth;
+        final int srcHeight = Math.round(viewWidth * CardPanel.ASPECT_RATIO);
         int targetWidth = Math.round(viewHeight * (srcWidth / (float) srcHeight));
         int targetHeight;
         if (targetWidth > viewWidth) {
@@ -36,21 +41,24 @@ public class ViewPanel extends JPanel {
         } else {
             targetHeight = viewHeight;
         }
-        int x = viewWidth / 2 - targetWidth / 2;
-        int y = viewHeight / 2 - targetHeight / 2;
+        final int x = (viewWidth / 2) - (targetWidth / 2);
+        final int y = (viewHeight / 2) - (targetHeight / 2);
         panel.setCardBounds(x, y, targetWidth, targetHeight);
     }
 
     /**
-     * <p>setCardPanel.</p>
-     *
-     * @param panel a {@link arcane.ui.CardPanel} object.
+     * <p>
+     * setCardPanel.
+     * </p>
+     * 
+     * @param panel
+     *            a {@link arcane.ui.CardPanel} object.
      */
     public final void setCardPanel(final CardPanel panel) {
-        //CardPanel newPanel = new CardPanel(panel.gameCard);
-        //newPanel.setImage(panel);
-        removeAll();
-        add(panel, BorderLayout.CENTER);
+        // CardPanel newPanel = new CardPanel(panel.gameCard);
+        // newPanel.setImage(panel);
+        this.removeAll();
+        this.add(panel, BorderLayout.CENTER);
         panel.revalidate();
         panel.repaint();
     }

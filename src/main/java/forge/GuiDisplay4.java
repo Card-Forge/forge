@@ -540,9 +540,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 if (c != null) {
 
                     if (c.isTapped()
-                            && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
+                            && (inputControl.input instanceof Input_PayManaCost
+                                    || inputControl.input instanceof Input_PayManaCost_Ability)) {
                         arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
-                        for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
+                        for (arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped()) {
                                 break;
                             }
@@ -553,7 +554,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                             && (inputControl.input instanceof Input_Attack)) {
                         arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
-                        for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
+                        for (arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
                                 break;
                             }
@@ -775,12 +776,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
-                for (arcane.ui.CardPanel cpa : p.cardPanels) {
-                    tmp.add(cpa.gameCard);
+                for (arcane.ui.CardPanel cpa : p.getCardPanels()) {
+                    tmp.add(cpa.getGameCard());
                 }
                 diff = new ArrayList<Card>(tmp);
                 diff.removeAll(Arrays.asList(c));
-                if (diff.size() == p.cardPanels.size()) {
+                if (diff.size() == p.getCardPanels().size()) {
                     p.clear();
                 } else {
                     for (Card card : diff) {

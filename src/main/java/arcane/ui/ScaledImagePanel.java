@@ -9,8 +9,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- * <p>ScaledImagePanel class.</p>
- *
+ * <p>
+ * ScaledImagePanel class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
@@ -21,11 +23,11 @@ public class ScaledImagePanel extends JPanel {
     /**
      * 
      */
-    public volatile Image srcImage;
+    private volatile Image srcImage;
     /**
      * 
      */
-    public volatile Image srcImageBlurred;
+    private volatile Image srcImageBlurred;
 
     private ScalingType scalingType = ScalingType.bilinear;
     private boolean scaleLarger;
@@ -33,92 +35,116 @@ public class ScaledImagePanel extends JPanel {
     private boolean blur;
 
     /**
-     * <p>Constructor for ScaledImagePanel.</p>
+     * <p>
+     * Constructor for ScaledImagePanel.
+     * </p>
      */
     public ScaledImagePanel() {
         super(false);
-        setOpaque(false);
+        this.setOpaque(false);
     }
 
     /**
-     * <p>setImage.</p>
-     *
-     * @param srcImage a {@link java.awt.Image} object.
-     * @param srcImageBlurred a {@link java.awt.Image} object.
-     *
+     * <p>
+     * setImage.
+     * </p>
+     * 
+     * @param srcImage
+     *            a {@link java.awt.Image} object.
+     * @param srcImageBlurred
+     *            a {@link java.awt.Image} object.
+     * 
      */
-    public final void setImage(final Image srcImage, Image srcImageBlurred) {
-        this.srcImage = srcImage;
-        this.srcImageBlurred = srcImageBlurred;
+    public final void setImage(final Image srcImage, final Image srcImageBlurred) {
+        this.setSrcImage(srcImage);
+        this.setSrcImageBlurred(srcImageBlurred);
     }
 
     /**
-     * <p>clearImage.</p>
+     * <p>
+     * clearImage.
+     * </p>
      */
     public final void clearImage() {
-        srcImage = null;
-        srcImageBlurred = null;
-        repaint();
+        this.setSrcImage(null);
+        this.setSrcImageBlurred(null);
+        this.repaint();
     }
 
     /**
-     * <p>setScalingMultiPassType.</p>
-     *
-     * @param multiPassType a {@link arcane.ui.ScaledImagePanel.MultipassType} object.
+     * <p>
+     * setScalingMultiPassType.
+     * </p>
+     * 
+     * @param multiPassType
+     *            a {@link arcane.ui.ScaledImagePanel.MultipassType} object.
      */
     public final void setScalingMultiPassType(final MultipassType multiPassType) {
         this.multiPassType = multiPassType;
     }
 
     /**
-     * <p>Setter for the field <code>scalingType</code>.</p>
-     *
-     * @param scalingType a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
+     * <p>
+     * Setter for the field <code>scalingType</code>.
+     * </p>
+     * 
+     * @param scalingType
+     *            a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
      */
     public final void setScalingType(final ScalingType scalingType) {
         this.scalingType = scalingType;
     }
 
     /**
-     * <p>setScalingBlur.</p>
-     *
-     * @param blur a boolean.
+     * <p>
+     * setScalingBlur.
+     * </p>
+     * 
+     * @param blur
+     *            a boolean.
      */
     public final void setScalingBlur(final boolean blur) {
         this.blur = blur;
     }
 
     /**
-     * <p>Setter for the field <code>scaleLarger</code>.</p>
-     *
-     * @param scaleLarger a boolean.
+     * <p>
+     * Setter for the field <code>scaleLarger</code>.
+     * </p>
+     * 
+     * @param scaleLarger
+     *            a boolean.
      */
     public final void setScaleLarger(final boolean scaleLarger) {
         this.scaleLarger = scaleLarger;
     }
 
     /**
-     * <p>hasImage.</p>
-     *
+     * <p>
+     * hasImage.
+     * </p>
+     * 
      * @return a boolean.
      */
     public final boolean hasImage() {
-        return srcImage != null;
+        return this.getSrcImage() != null;
     }
 
     /**
-     * <p>getScalingInfo.</p>
-     *
+     * <p>
+     * getScalingInfo.
+     * </p>
+     * 
      * @return a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
      */
     private ScalingInfo getScalingInfo() {
-        int panelWidth = getWidth();
-        int panelHeight = getHeight();
-        int srcWidth = srcImage.getWidth(null);
-        int srcHeight = srcImage.getHeight(null);
+        final int panelWidth = this.getWidth();
+        final int panelHeight = this.getHeight();
+        final int srcWidth = this.getSrcImage().getWidth(null);
+        final int srcHeight = this.getSrcImage().getHeight(null);
         int targetWidth = srcWidth;
         int targetHeight = srcHeight;
-        if (scaleLarger || srcWidth > panelWidth || srcHeight > panelHeight) {
+        if (this.scaleLarger || (srcWidth > panelWidth) || (srcHeight > panelHeight)) {
             targetWidth = Math.round(panelHeight * (srcWidth / (float) srcHeight));
             if (targetWidth > panelWidth) {
                 targetHeight = Math.round(panelWidth * (srcHeight / (float) srcWidth));
@@ -127,65 +153,76 @@ public class ScaledImagePanel extends JPanel {
                 targetHeight = panelHeight;
             }
         }
-        ScalingInfo info = new ScalingInfo();
+        final ScalingInfo info = new ScalingInfo();
         info.targetWidth = targetWidth;
         info.targetHeight = targetHeight;
         info.srcWidth = srcWidth;
         info.srcHeight = srcHeight;
-        info.x = panelWidth / 2 - targetWidth / 2;
-        info.y = panelHeight / 2 - targetHeight / 2;
+        info.x = (panelWidth / 2) - (targetWidth / 2);
+        info.y = (panelHeight / 2) - (targetHeight / 2);
         return info;
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void paint(final Graphics g) {
-        if (srcImage == null) {
+        if (this.getSrcImage() == null) {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) g.create();
-        ScalingInfo info = getScalingInfo();
+        final Graphics2D g2 = (Graphics2D) g.create();
+        final ScalingInfo info = this.getScalingInfo();
 
-        switch (scalingType) {
-            case nearestNeighbor:
-                scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-                break;
-            case bilinear:
-                scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-                break;
-            case bicubic:
-                scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                break;
-            case areaAveraging:
-                scaleWithGetScaledInstance(g2, info, Image.SCALE_AREA_AVERAGING);
-                break;
-            case replicate:
-                scaleWithGetScaledInstance(g2, info, Image.SCALE_REPLICATE);
-                break;
+        switch (this.scalingType) {
+        case nearestNeighbor:
+            this.scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+            break;
+        case bilinear:
+            this.scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            break;
+        case bicubic:
+            this.scaleWithDrawImage(g2, info, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            break;
+        case areaAveraging:
+            this.scaleWithGetScaledInstance(g2, info, Image.SCALE_AREA_AVERAGING);
+            break;
+        case replicate:
+            this.scaleWithGetScaledInstance(g2, info, Image.SCALE_REPLICATE);
+            break;
         default:
             break;
         }
     }
 
     /**
-     * <p>scaleWithGetScaledInstance.</p>
-     *
-     * @param g2 a {@link java.awt.Graphics2D} object.
-     * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
-     * @param hints a int.
+     * <p>
+     * scaleWithGetScaledInstance.
+     * </p>
+     * 
+     * @param g2
+     *            a {@link java.awt.Graphics2D} object.
+     * @param info
+     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     * @param hints
+     *            a int.
      */
     private void scaleWithGetScaledInstance(final Graphics2D g2, final ScalingInfo info, final int hints) {
-        Image srcImage = getSourceImage(info);
-        Image scaledImage = srcImage.getScaledInstance(info.targetWidth, info.targetHeight, hints);
+        final Image srcImage = this.getSourceImage(info);
+        final Image scaledImage = srcImage.getScaledInstance(info.targetWidth, info.targetHeight, hints);
         g2.drawImage(scaledImage, info.x, info.y, null);
     }
 
     /**
-     * <p>scaleWithDrawImage.</p>
-     *
-     * @param g2 a {@link java.awt.Graphics2D} object.
-     * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
-     * @param hint a {@link java.lang.Object} object.
+     * <p>
+     * scaleWithDrawImage.
+     * </p>
+     * 
+     * @param g2
+     *            a {@link java.awt.Graphics2D} object.
+     * @param info
+     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     * @param hint
+     *            a {@link java.lang.Object} object.
      */
     private void scaleWithDrawImage(final Graphics2D g2, final ScalingInfo info, final Object hint) {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
@@ -198,30 +235,29 @@ public class ScaledImagePanel extends JPanel {
             tempDestHeight = info.targetHeight;
         }
 
-        Image srcImage = getSourceImage(info);
+        final Image srcImage = this.getSourceImage(info);
 
         // If not doing multipass or multipass only needs a single pass,
         // just scale it once directly to the panel surface.
-        if (multiPassType == MultipassType.none
-                || (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight))
-        {
+        if ((this.multiPassType == MultipassType.none)
+                || ((tempDestWidth == info.targetWidth) && (tempDestHeight == info.targetHeight))) {
             g2.drawImage(srcImage, info.x, info.y, info.targetWidth, info.targetHeight, null);
             return;
         }
 
-        BufferedImage tempImage = new BufferedImage(tempDestWidth, tempDestHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2temp = tempImage.createGraphics();
-        switch (multiPassType) {
-            case nearestNeighbor:
-                g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                        RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-                break;
-            case bilinear:
-                g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-                break;
-            case bicubic:
-                g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                break;
+        final BufferedImage tempImage = new BufferedImage(tempDestWidth, tempDestHeight, BufferedImage.TYPE_INT_RGB);
+        final Graphics2D g2temp = tempImage.createGraphics();
+        switch (this.multiPassType) {
+        case nearestNeighbor:
+            g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+            break;
+        case bilinear:
+            g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            break;
+        case bicubic:
+            g2temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            break;
         default:
             break;
         }
@@ -245,7 +281,7 @@ public class ScaledImagePanel extends JPanel {
                 }
             }
 
-            if (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight) {
+            if ((tempDestWidth == info.targetWidth) && (tempDestHeight == info.targetHeight)) {
                 break;
             }
 
@@ -257,87 +293,117 @@ public class ScaledImagePanel extends JPanel {
         g2temp.dispose();
         // Render last pass from temp to panel surface.
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
-        g2.drawImage(tempImage, info.x,
-                info.y,
-                info.x + info.targetWidth,
-                info.y + info.targetHeight, 0, 0, tempSrcWidth,
-                tempSrcHeight, null);
+        g2.drawImage(tempImage, info.x, info.y, info.x + info.targetWidth, info.y + info.targetHeight, 0, 0,
+                tempSrcWidth, tempSrcHeight, null);
     }
 
     /**
-     * <p>getSourceImage.</p>
-     *
-     * @param info a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
+     * <p>
+     * getSourceImage.
+     * </p>
+     * 
+     * @param info
+     *            a {@link arcane.ui.ScaledImagePanel.ScalingInfo} object.
      * @return a {@link java.awt.Image} object.
      */
     private Image getSourceImage(final ScalingInfo info) {
-        if (!blur || srcImageBlurred == null) {
-            return srcImage;
+        if (!this.blur || (this.getSrcImageBlurred() == null)) {
+            return this.getSrcImage();
         }
-        if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) {
-            return srcImage;
+        if (((info.srcWidth / 2) < info.targetWidth) || ((info.srcHeight / 2) < info.targetHeight)) {
+            return this.getSrcImage();
         }
-        return srcImageBlurred;
+        return this.getSrcImageBlurred();
+    }
+
+    /**
+     * Gets the src image.
+     * 
+     * @return the srcImage
+     */
+    public Image getSrcImage() {
+        return this.srcImage;
+    }
+
+    /**
+     * Sets the src image.
+     * 
+     * @param srcImage
+     *            the srcImage to set
+     */
+    public void setSrcImage(final Image srcImage) {
+        this.srcImage = srcImage; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the src image blurred.
+     * 
+     * @return the srcImageBlurred
+     */
+    public Image getSrcImageBlurred() {
+        return this.srcImageBlurred;
+    }
+
+    /**
+     * Sets the src image blurred.
+     * 
+     * @param srcImageBlurred
+     *            the srcImageBlurred to set
+     */
+    public void setSrcImageBlurred(final Image srcImageBlurred) {
+        this.srcImageBlurred = srcImageBlurred; // TODO: Add 0 to parameter's
+                                                // name.
     }
 
     private static class ScalingInfo {
-        public int targetWidth;
-        public int targetHeight;
-        public int srcWidth;
-        public int srcHeight;
-        public int x;
-        public int y;
+        private int targetWidth;
+        private int targetHeight;
+        private int srcWidth;
+        private int srcHeight;
+        private int x;
+        private int y;
     }
 
     /**
      * 
      * MultipassType.
-     *
+     * 
      */
     public static enum MultipassType {
-        /**
-         * 
-         */
+
+        /** The none. */
         none,
-        /**
-         * 
-         */
+
+        /** The nearest neighbor. */
         nearestNeighbor,
-        /**
-         * 
-         */
+
+        /** The bilinear. */
         bilinear,
-        /**
-         * 
-         */
+
+        /** The bicubic. */
         bicubic
     }
 
     /**
      * 
      * ScalingType.
-     *
+     * 
      */
     public static enum ScalingType {
-        /**
-         * 
-         */
+
+        /** The nearest neighbor. */
         nearestNeighbor,
-        /**
-         * 
-         */
+
+        /** The replicate. */
         replicate,
-        /**
-         * 
-         */
+
+        /** The bilinear. */
         bilinear,
-        /**
-         * 
-         */
+
+        /** The bicubic. */
         bicubic,
-        /**
-         * 
-         */
+
+        /** The area averaging. */
         areaAveraging
     }
 }

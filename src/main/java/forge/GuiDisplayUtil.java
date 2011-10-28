@@ -1137,12 +1137,12 @@ public final class GuiDisplayUtil implements NewConstants {
     public static void setupPlayZone(final PlayArea p, final Card[] c) {
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
-        for (arcane.ui.CardPanel cpa : p.cardPanels) {
-            tmp.add(cpa.gameCard);
+        for (arcane.ui.CardPanel cpa : p.getCardPanels()) {
+            tmp.add(cpa.getGameCard());
         }
         diff = new ArrayList<Card>(tmp);
         diff.removeAll(Arrays.asList(c));
-        if (diff.size() == p.cardPanels.size()) {
+        if (diff.size() == p.getCardPanels().size()) {
             p.clear();
         } else {
             for (Card card : diff) {
@@ -1161,19 +1161,19 @@ public final class GuiDisplayUtil implements NewConstants {
         for (Card card : c) {
             toPanel = p.getCardPanel(card.getUniqueNumber());
             if (card.isTapped()) {
-                toPanel.tapped = true;
-                toPanel.tappedAngle = arcane.ui.CardPanel.TAPPED_ANGLE;
+                toPanel.setTapped(true);
+                toPanel.setTappedAngle(arcane.ui.CardPanel.TAPPED_ANGLE);
             } else {
-                toPanel.tapped = false;
-                toPanel.tappedAngle = 0;
+                toPanel.setTapped(false);
+                toPanel.setTappedAngle(0);
             }
-            toPanel.attachedPanels.clear();
+            toPanel.getAttachedPanels().clear();
             if (card.isEnchanted()) {
                 ArrayList<Card> enchants = card.getEnchantedBy();
                 for (Card e : enchants) {
                     arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
                     if (cardE != null) {
-                        toPanel.attachedPanels.add(cardE);
+                        toPanel.getAttachedPanels().add(cardE);
                     }
                 }
             }
@@ -1183,20 +1183,20 @@ public final class GuiDisplayUtil implements NewConstants {
                 for (Card e : enchants) {
                     arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
                     if (cardE != null) {
-                        toPanel.attachedPanels.add(cardE);
+                        toPanel.getAttachedPanels().add(cardE);
                     }
                 }
             }
 
             if (card.isEnchantingCard()) {
-                toPanel.attachedToPanel = p.getCardPanel(card.getEnchantingCard().getUniqueNumber());
+                toPanel.setAttachedToPanel(p.getCardPanel(card.getEnchantingCard().getUniqueNumber()));
             } else if (card.isEquipping()) {
-                toPanel.attachedToPanel = p.getCardPanel(card.getEquipping().get(0).getUniqueNumber());
+                toPanel.setAttachedToPanel(p.getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
             } else {
-                toPanel.attachedToPanel = null;
+                toPanel.setAttachedToPanel(null);
             }
 
-            toPanel.setCard(toPanel.gameCard);
+            toPanel.setCard(toPanel.getGameCard());
         }
         p.invalidate();
         p.repaint();

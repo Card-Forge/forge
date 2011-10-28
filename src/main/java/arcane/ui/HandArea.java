@@ -32,33 +32,41 @@ public class HandArea extends CardArea {
     public HandArea(final JScrollPane scrollPane, final Frame frame) {
         super(scrollPane);
 
-        setDragEnabled(true);
-        setVertical(true);
+        this.setDragEnabled(true);
+        this.setVertical(true);
 
-        addCardPanelMouseListener(new CardPanelMouseListener() {
+        this.addCardPanelMouseListener(new CardPanelMouseListener() {
+            @Override
             public void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
             }
 
+            @Override
             public void mouseOver(final CardPanel panel, final MouseEvent evt) {
             }
 
+            @Override
             public void mouseOut(final CardPanel panel, final MouseEvent evt) {
             }
 
+            @Override
             public void mouseMiddleClicked(final CardPanel panel, final MouseEvent evt) {
             }
 
+            @Override
             public void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
 
             }
 
+            @Override
             public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
                     final MouseEvent evt) {
             }
 
+            @Override
             public void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
             }
 
+            @Override
             public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
             }
         });

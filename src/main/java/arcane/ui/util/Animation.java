@@ -179,19 +179,19 @@ public abstract class Animation {
     public static void tapCardToggle(final CardPanel panel) {
         new Animation(200) {
             protected void start() {
-                panel.tapped = !panel.tapped;
+                panel.setTapped(!panel.isTapped());
             }
 
             protected void update(final float percentage) {
-                panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
-                if (!panel.tapped) {
-                    panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
+                panel.setTappedAngle(CardPanel.TAPPED_ANGLE * percentage);
+                if (!panel.isTapped()) {
+                    panel.setTappedAngle(CardPanel.TAPPED_ANGLE - panel.getTappedAngle());
                 }
                 panel.repaint();
             }
 
             protected void end() {
-                panel.tappedAngle = panel.tapped ? CardPanel.TAPPED_ANGLE : 0;
+                panel.setTappedAngle(panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
             }
         };
     }
@@ -347,7 +347,7 @@ public abstract class Animation {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
                                     // placeholder.setImage(animationPanel);
-                                    placeholder.setCard(placeholder.gameCard);
+                                    placeholder.setCard(placeholder.getGameCard());
                                 }
                                 animationPanel.setVisible(false);
                                 animationPanel.repaint();
@@ -376,7 +376,7 @@ public abstract class Animation {
                         if (placeholder != null) {
                             placeholder.setDisplayEnabled(true);
                             // placeholder.setImage(imagePanel);
-                            placeholder.setCard(placeholder.gameCard);
+                            placeholder.setCard(placeholder.getGameCard());
                         }
                     }
                 });
@@ -426,7 +426,7 @@ public abstract class Animation {
                 currentX = Math.min(currentX, layeredPane.getWidth() - currentWidth);
                 int currentY = Math.max(0, centerY - Math.round(currentHeight / 2f));
                 currentY = Math.min(currentY, layeredPane.getHeight() - currentHeight);
-                animationPanel.tappedAngle = overPanel.tappedAngle * percentage;
+                animationPanel.setTappedAngle(overPanel.getTappedAngle() * percentage);
                 animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
             }
 
@@ -498,7 +498,7 @@ public abstract class Animation {
         }
         final long thisDelayedTime = delayedTime;
 
-        final CardPanel animationPanel = new CardPanel(overPanel.gameCard);
+        final CardPanel animationPanel = new CardPanel(overPanel.getGameCard());
         animationPanel.setImage(overPanel);
 
         new Animation(200, delay) {
@@ -518,7 +518,7 @@ public abstract class Animation {
                     animationPanel.setCardBounds(startPos.x, startPos.y, startWidth, startHeight);
                 }
                 // clientFrame.clearArrows();
-                animationPanel.tappedAngle = overPanel.tappedAngle;
+                animationPanel.setTappedAngle(overPanel.getTappedAngle());
                 try {
                     Util.invokeAndWait(new Runnable() {
                         public void run() {
@@ -547,7 +547,7 @@ public abstract class Animation {
                 currentX = Math.min(currentX, layeredPane.getWidth() - currentWidth);
                 int currentY = Math.max(0, centerY - Math.round(currentHeight / 2f));
                 currentY = Math.min(currentY, layeredPane.getHeight() - currentHeight);
-                animationPanel.tappedAngle = overPanel.tappedAngle * (1 - percentage);
+                animationPanel.setTappedAngle(overPanel.getTappedAngle() * (1 - percentage));
                 animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
             }
         };

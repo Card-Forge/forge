@@ -54,7 +54,7 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Constant <code>dragAnimationPanel</code>.
      */
-    public static CardPanel dragAnimationPanel;
+    private static CardPanel dragAnimationPanel;
 
     /** Constant <code>ROUNDED_CORNER_SIZE=0.1f</code>. */
     private static final float ROUNDED_CORNER_SIZE = 0.1f;
@@ -70,41 +70,41 @@ public class CardPanel extends JPanel implements CardContainer {
      * Constant
      * <code>rotCenterToTopCorner=1.0295630140987000315797369464196f</code>.
      */
-    private static final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
+    private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
     /**
      * Constant
      * <code>rotCenterToBottomCorner=0.7071067811865475244008443621048f</code>.
      */
-    private static final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
+    private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
     /**
      * 
      */
-    public Card gameCard;
+    private Card gameCard;
     /**
      * 
      */
-    public CardPanel attachedToPanel;
+    private CardPanel attachedToPanel;
     /**
      * 
      */
-    public List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
+    private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
     /**
      * 
      */
-    public boolean tapped;
+    private boolean tapped;
     /**
      * 
      */
-    public double tappedAngle = 0;
+    private double tappedAngle = 0;
     /**
      * 
      */
-    public ScaledImagePanel imagePanel;
+    private final ScaledImagePanel imagePanel;
 
-    private GlowText titleText;
-    private GlowText ptText;
-    private List<CardPanel> imageLoadListeners = new ArrayList<CardPanel>(2);
+    private final GlowText titleText;
+    private final GlowText ptText;
+    private final List<CardPanel> imageLoadListeners = new ArrayList<CardPanel>(2);
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
@@ -120,44 +120,44 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardPanel(final Card newGameCard) {
-        this.gameCard = newGameCard;
+        this.setGameCard(newGameCard);
 
-        setBackground(Color.black);
-        setOpaque(false);
+        this.setBackground(Color.black);
+        this.setOpaque(false);
 
-        titleText = new GlowText();
-        titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
-        titleText.setForeground(Color.white);
-        titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-        titleText.setWrap(true);
-        add(titleText);
+        this.titleText = new GlowText();
+        this.titleText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        this.titleText.setForeground(Color.white);
+        this.titleText.setGlow(Color.black, CardPanel.TEXT_GLOW_SIZE, CardPanel.TEXT_GLOW_INTENSITY);
+        this.titleText.setWrap(true);
+        this.add(this.titleText);
 
-        ptText = new GlowText();
-        ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
-        ptText.setForeground(Color.white);
-        ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-        add(ptText);
+        this.ptText = new GlowText();
+        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        this.ptText.setForeground(Color.white);
+        this.ptText.setGlow(Color.black, CardPanel.TEXT_GLOW_SIZE, CardPanel.TEXT_GLOW_INTENSITY);
+        this.add(this.ptText);
 
-        imagePanel = new ScaledImagePanel();
-        add(imagePanel);
-        imagePanel.setScaleLarger(true);
-        imagePanel.setScalingType(ScalingType.nearestNeighbor);
-        imagePanel.setScalingBlur(true);
-        imagePanel.setScalingMultiPassType(MultipassType.none);
+        this.imagePanel = new ScaledImagePanel();
+        this.add(this.imagePanel);
+        this.imagePanel.setScaleLarger(true);
+        this.imagePanel.setScalingType(ScalingType.nearestNeighbor);
+        this.imagePanel.setScalingBlur(true);
+        this.imagePanel.setScalingMultiPassType(MultipassType.none);
 
-        addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent e) {
-                setCard(gameCard);
+                CardPanel.this.setCard(CardPanel.this.getGameCard());
             }
 
             @Override
             public void componentResized(final ComponentEvent e) {
-                setCard(gameCard);
+                CardPanel.this.setCard(CardPanel.this.getGameCard());
             }
         });
 
-        setCard(newGameCard);
+        this.setCard(newGameCard);
     }
 
     /**
@@ -173,16 +173,16 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link java.awt.Image} object.
      */
     private void setImage(final Image srcImage, final Image srcImageBlurred) {
-        synchronized (imagePanel) {
-            imagePanel.setImage(srcImage, srcImageBlurred);
-            repaint();
-            for (CardPanel cardPanel : imageLoadListeners) {
+        synchronized (this.imagePanel) {
+            this.imagePanel.setImage(srcImage, srcImageBlurred);
+            this.repaint();
+            for (final CardPanel cardPanel : this.imageLoadListeners) {
                 cardPanel.setImage(srcImage, srcImageBlurred);
                 cardPanel.repaint();
             }
-            imageLoadListeners.clear();
+            this.imageLoadListeners.clear();
         }
-        doLayout();
+        this.doLayout();
     }
 
     /**
@@ -196,7 +196,7 @@ public class CardPanel extends JPanel implements CardContainer {
     public final void setImage(final CardPanel panel) {
         synchronized (panel.imagePanel) {
             if (panel.imagePanel.hasImage()) {
-                setImage(panel.imagePanel.srcImage, panel.imagePanel.srcImageBlurred);
+                this.setImage(panel.imagePanel.getSrcImage(), panel.imagePanel.getSrcImageBlurred());
             } else {
                 panel.imageLoadListeners.add(this);
             }
@@ -212,7 +212,7 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link arcane.ui.ScaledImagePanel.ScalingType} object.
      */
     public final void setScalingType(final ScalingType scalingType) {
-        imagePanel.setScalingType(scalingType);
+        this.imagePanel.setScalingType(scalingType);
     }
 
     /**
@@ -235,7 +235,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a boolean.
      */
     public final boolean isDisplayEnabled() {
-        return displayEnabled;
+        return this.displayEnabled;
     }
 
     /**
@@ -260,7 +260,7 @@ public class CardPanel extends JPanel implements CardContainer {
      */
     public final void setSelected(final boolean isSelected) {
         this.isSelected = isSelected;
-        repaint();
+        this.repaint();
     }
 
     /**
@@ -276,49 +276,56 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void paint(final Graphics g) {
-        if (!displayEnabled) {
+        if (!this.displayEnabled) {
             return;
         }
-        if (!isValid()) {
+        if (!this.isValid()) {
             super.validate();
         }
         Graphics2D g2d = (Graphics2D) g;
-        if (tappedAngle > 0) {
+        if (this.getTappedAngle() > 0) {
             g2d = (Graphics2D) g2d.create();
-            float edgeOffset = cardWidth / 2f;
-            g2d.rotate(tappedAngle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
+            final float edgeOffset = this.cardWidth / 2f;
+            g2d.rotate(this.getTappedAngle(), this.cardXOffset + edgeOffset, (this.cardYOffset + this.cardHeight)
+                    - edgeOffset);
         }
         super.paint(g2d);
     }
 
     /** {@inheritDoc} */
+    @Override
     protected final void paintComponent(final Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // + White borders for Core sets Unlimited - 9th +
-        int cornerSize = Math.max(4, Math.round(cardWidth * ROUNDED_CORNER_SIZE));
+        final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
-        if (this.gameCard != null) {
-            if ((!this.gameCard.getImageFilename().equals("none")) && (!this.gameCard.getName().equals("Morph"))) {
-                if ((this.gameCard.getCurSetCode().equals("2ED")) || (this.gameCard.getCurSetCode().equals("3ED"))
-                        || (this.gameCard.getCurSetCode().equals("4ED"))
-                        || (this.gameCard.getCurSetCode().equals("5ED"))
-                        || (this.gameCard.getCurSetCode().equals("6ED"))
-                        || (this.gameCard.getCurSetCode().equals("7ED"))
-                        || (this.gameCard.getCurSetCode().equals("8ED"))
-                        || (this.gameCard.getCurSetCode().equals("9ED"))
-                        || (this.gameCard.getCurSetCode().equals("CHR"))
-                        || (this.gameCard.getCurSetCode().equals("S99"))
-                        || (this.gameCard.getCurSetCode().equals("PTK"))
-                        || (this.gameCard.getCurSetCode().equals("S00"))) {
-                    if (!isSelected) {
+        if (this.getGameCard() != null) {
+            if ((!this.getGameCard().getImageFilename().equals("none"))
+                    && (!this.getGameCard().getName().equals("Morph"))) {
+                if ((this.getGameCard().getCurSetCode().equals("2ED"))
+                        || (this.getGameCard().getCurSetCode().equals("3ED"))
+                        || (this.getGameCard().getCurSetCode().equals("4ED"))
+                        || (this.getGameCard().getCurSetCode().equals("5ED"))
+                        || (this.getGameCard().getCurSetCode().equals("6ED"))
+                        || (this.getGameCard().getCurSetCode().equals("7ED"))
+                        || (this.getGameCard().getCurSetCode().equals("8ED"))
+                        || (this.getGameCard().getCurSetCode().equals("9ED"))
+                        || (this.getGameCard().getCurSetCode().equals("CHR"))
+                        || (this.getGameCard().getCurSetCode().equals("S99"))
+                        || (this.getGameCard().getCurSetCode().equals("PTK"))
+                        || (this.getGameCard().getCurSetCode().equals("S00"))) {
+                    if (!this.isSelected) {
                         g2d.setColor(Color.black);
-                        int offset = tapped ? 1 : 0;
-                        for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++) {
-                            g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1,
-                                    cardHeight + i * 2 - 1, cornerSize, cornerSize);
+                        final int offset = this.isTapped() ? 1 : 0;
+                        for (int i = 1, n = Math.max(1, Math.round(this.cardWidth
+                                * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
+                            g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
+                                    (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize,
+                                    cornerSize);
                         }
                     }
                     g2d.setColor(Color.white);
@@ -329,88 +336,92 @@ public class CardPanel extends JPanel implements CardContainer {
         }
         // - White borders for Core sets Unlimited - 9th -
 
-        g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
-        if (isSelected) {
+        g2d.fillRoundRect(this.cardXOffset, this.cardYOffset, this.cardWidth, this.cardHeight, cornerSize, cornerSize);
+        if (this.isSelected) {
             g2d.setColor(Color.green);
-            int offset = tapped ? 1 : 0;
-            for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++) {
-                g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1, cardHeight + i * 2
-                        - 1, cornerSize, cornerSize);
+            final int offset = this.isTapped() ? 1 : 0;
+            for (int i = 1, n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
+                g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
+                        (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
             }
         }
     }
 
     /** {@inheritDoc} */
+    @Override
     protected final void paintChildren(final Graphics g) {
         super.paintChildren(g);
 
-        boolean canDrawOverCard = showCastingCost && !isAnimationPanel;
+        final boolean canDrawOverCard = this.showCastingCost && !this.isAnimationPanel;
 
         if (!canDrawOverCard) {
             return;
         }
 
-        int width = ManaSymbols.getWidth(gameCard.getManaCost());
-        if (cardWidth < 200) {
-            ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset
-                    + cardHeight / 2);
+        int width = ManaSymbols.getWidth(this.getGameCard().getManaCost());
+        if (this.cardWidth < 200) {
+            ManaSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
+                    - (width / 2), this.cardYOffset + (this.cardHeight / 2));
         }
 
-        int counters = getCard().getNumberOfCounters();
+        final int counters = this.getCard().getNumberOfCounters();
 
         if (counters == 1) {
-            ManaSymbols.drawSymbol("counters1", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters1", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+                    - (this.cardHeight / 3) - 40);
         } else if (counters == 2) {
-            ManaSymbols.drawSymbol("counters2", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters2", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+                    - (this.cardHeight / 3) - 40);
         } else if (counters == 3) {
-            ManaSymbols.drawSymbol("counters3", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3) - 40);
+            ManaSymbols.drawSymbol("counters3", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+                    - (this.cardHeight / 3) - 40);
         } else if (counters > 3) {
-            ManaSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, cardYOffset + cardHeight - (cardHeight / 3)
-                    - 40);
+            ManaSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+                    - (this.cardHeight / 3) - 40);
         }
 
         // int yOff = (cardHeight/4) + 2;
-        if (getCard().isAttacking()) {
-            ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight
-                    - (cardHeight / 8) - 16);
-        } else if (getCard().isBlocking()) {
-            ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight
-                    - (cardHeight / 8) - 16);
+        if (this.getCard().isAttacking()) {
+            ManaSymbols.drawSymbol("attack", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
+                    (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
+        } else if (this.getCard().isBlocking()) {
+            ManaSymbols.drawSymbol("defend", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
+                    (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) {
-            ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight
-                    - (cardHeight / 8) - 16);
+        if (this.getCard().isCreature() && this.getCard().hasSickness() && AllZoneUtil.isCardInPlay(this.getCard())) {
+            ManaSymbols.drawSymbol("summonsick", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
+                    (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (getCard().isPhasedOut()) {
-            ManaSymbols.drawSymbol("phasing", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight
-                    - (cardHeight / 8) - 16);
+        if (this.getCard().isPhasedOut()) {
+            ManaSymbols.drawSymbol("phasing", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
+                    (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (getCard() != null) {
-            if (this.gameCard.getFoil() > 0) {
-                String fl = String.format("foil%02d", getCard().getFoil());
-                int z = Math.round(cardWidth * BLACK_BORDER_SIZE);
-                ManaSymbols.draw(g, fl, cardXOffset + z, cardYOffset + z, cardWidth - (2 * z), cardHeight - (2 * z));
+        if (this.getCard() != null) {
+            if (this.getGameCard().getFoil() > 0) {
+                final String fl = String.format("foil%02d", this.getCard().getFoil());
+                final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
+                ManaSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
+                        this.cardHeight - (2 * z));
             }
 
-            if (getCard().getName().equals("Mana Pool") && !isAnimationPanel) {
+            if (this.getCard().getName().equals("Mana Pool") && !this.isAnimationPanel) {
 
                 if (AllZone.getHumanPlayer().getManaPool() != null) {
-                    String s = AllZone.getHumanPlayer().getManaPool().getManaList();
+                    final String s = AllZone.getHumanPlayer().getManaPool().getManaList();
                     if (!s.equals("|||||||||||")) {
 
-                        String[] mList = s.split("\\|", 12);
+                        final String[] mList = s.split("\\|", 12);
 
                         int n = 0;
                         for (int i = 0; i < 2; i++) {
                             for (int j = 0; j < 6; j++) {
                                 if (!mList[n].equals("")) {
                                     width = ManaSymbols.getWidth(mList[n]);
-                                    ManaSymbols.draw(g, mList[n],
-                                            cardXOffset + ((i + 1) * (cardWidth / 3)) - width / 2, cardYOffset
-                                                    + ((j + 1) * (cardHeight / 7)));
+                                    ManaSymbols.draw(g, mList[n], (this.cardXOffset + ((i + 1) * (this.cardWidth / 3)))
+                                            - (width / 2), this.cardYOffset + ((j + 1) * (this.cardHeight / 7)));
                                 }
 
                                 n++;
@@ -429,30 +440,33 @@ public class CardPanel extends JPanel implements CardContainer {
      * 
      * @since 1.0.15
      */
+    @Override
     public final void doLayout() {
-        int borderSize = Math.round(cardWidth * BLACK_BORDER_SIZE);
-        imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
-        imagePanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+        final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        this.imagePanel.setLocation(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
+        this.imagePanel.setSize(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
 
-        int fontHeight = Math.round(cardHeight * (27f / 680));
-        boolean showText = !imagePanel.hasImage() || (!isAnimationPanel && fontHeight < 12);
-        titleText.setVisible(showText);
-        ptText.setVisible(showText);
+        final int fontHeight = Math.round(this.cardHeight * (27f / 680));
+        final boolean showText = !this.imagePanel.hasImage() || (!this.isAnimationPanel && (fontHeight < 12));
+        this.titleText.setVisible(showText);
+        this.ptText.setVisible(showText);
 
-        int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680));
-        titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight);
+        final int titleX = Math.round(this.cardWidth * (20f / 480));
+        final int titleY = Math.round(this.cardHeight * (9f / 680));
+        this.titleText.setBounds(this.cardXOffset + titleX, this.cardYOffset + titleY, this.cardWidth - titleX,
+                this.cardHeight);
 
-        Dimension ptSize = ptText.getPreferredSize();
-        ptText.setSize(ptSize.width, ptSize.height);
-        int ptX = Math.round(cardWidth * (420f / 480)) - ptSize.width / 2;
-        int ptY = Math.round(cardHeight * (675f / 680)) - ptSize.height;
-        ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+        final Dimension ptSize = this.ptText.getPreferredSize();
+        this.ptText.setSize(ptSize.width, ptSize.height);
+        final int ptX = Math.round(this.cardWidth * (420f / 480)) - (ptSize.width / 2);
+        final int ptY = Math.round(this.cardHeight * (675f / 680)) - ptSize.height;
+        this.ptText.setLocation((this.cardXOffset + ptX) - (CardPanel.TEXT_GLOW_SIZE / 2), (this.cardYOffset + ptY)
+                - (CardPanel.TEXT_GLOW_SIZE / 2));
 
-        if (isAnimationPanel || cardWidth < 200) {
-            imagePanel.setScalingType(ScalingType.nearestNeighbor);
+        if (this.isAnimationPanel || (this.cardWidth < 200)) {
+            this.imagePanel.setScalingType(ScalingType.nearestNeighbor);
         } else {
-            imagePanel.setScalingType(ScalingType.bilinear);
+            this.imagePanel.setScalingType(ScalingType.bilinear);
         }
     }
 
@@ -463,8 +477,9 @@ public class CardPanel extends JPanel implements CardContainer {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        return gameCard.getName();
+        return this.getGameCard().getName();
     }
 
     /**
@@ -482,19 +497,19 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a int.
      */
     public final void setCardBounds(final int x, final int y, int width, int height) {
-        cardWidth = width;
-        cardHeight = height;
-        int rotCenterX = Math.round(width / 2f);
-        int rotCenterY = height - rotCenterX;
-        int rotCenterToTopCorner = Math.round(width * CardPanel.rotCenterToTopCorner);
-        int rotCenterToBottomCorner = Math.round(width * CardPanel.rotCenterToBottomCorner);
-        int xOffset = rotCenterX - rotCenterToBottomCorner;
-        int yOffset = rotCenterY - rotCenterToTopCorner;
-        cardXOffset = -xOffset;
-        cardYOffset = -yOffset;
+        this.cardWidth = width;
+        this.cardHeight = height;
+        final int rotCenterX = Math.round(width / 2f);
+        final int rotCenterY = height - rotCenterX;
+        final int rotCenterToTopCorner = Math.round(width * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+        final int rotCenterToBottomCorner = Math.round(width * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
+        final int xOffset = rotCenterX - rotCenterToBottomCorner;
+        final int yOffset = rotCenterY - rotCenterToTopCorner;
+        this.cardXOffset = -xOffset;
+        this.cardYOffset = -yOffset;
         width = -xOffset + rotCenterX + rotCenterToTopCorner;
         height = -yOffset + rotCenterY + rotCenterToBottomCorner;
-        setBounds(x + xOffset, y + yOffset, width, height);
+        this.setBounds(x + xOffset, y + yOffset, width, height);
     }
 
     /**
@@ -502,13 +517,14 @@ public class CardPanel extends JPanel implements CardContainer {
      * repaint.
      * </p>
      */
+    @Override
     public final void repaint() {
-        Rectangle b = getBounds();
-        JRootPane rootPane = SwingUtilities.getRootPane(this);
+        final Rectangle b = this.getBounds();
+        final JRootPane rootPane = SwingUtilities.getRootPane(this);
         if (rootPane == null) {
             return;
         }
-        Point p = SwingUtilities.convertPoint(getParent(), b.x, b.y, rootPane);
+        final Point p = SwingUtilities.convertPoint(this.getParent(), b.x, b.y, rootPane);
         rootPane.repaint(p.x, p.y, b.width, b.height);
     }
 
@@ -520,7 +536,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a int.
      */
     public final int getCardX() {
-        return getX() + cardXOffset;
+        return this.getX() + this.cardXOffset;
     }
 
     /**
@@ -531,7 +547,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a int.
      */
     public final int getCardY() {
-        return getY() + cardYOffset;
+        return this.getY() + this.cardYOffset;
     }
 
     /**
@@ -542,7 +558,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a int.
      */
     public final int getCardWidth() {
-        return cardWidth;
+        return this.cardWidth;
     }
 
     /**
@@ -553,7 +569,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a int.
      */
     public final int getCardHeight() {
-        return cardHeight;
+        return this.cardHeight;
     }
 
     /**
@@ -564,9 +580,9 @@ public class CardPanel extends JPanel implements CardContainer {
      * @return a {@link java.awt.Point} object.
      */
     public final Point getCardLocation() {
-        Point p = getLocation();
-        p.x += cardXOffset;
-        p.y += cardYOffset;
+        final Point p = this.getLocation();
+        p.x += this.cardXOffset;
+        p.y += this.cardYOffset;
         return p;
     }
 
@@ -579,27 +595,27 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
-        if (card == null || !Singletons.getModel().getPreferences().cardOverlay) {
+        if ((card == null) || !Singletons.getModel().getPreferences().cardOverlay) {
             return;
         }
 
         if (card.isFaceDown()) {
-            titleText.setText("");
-            showCastingCost = false;
+            this.titleText.setText("");
+            this.showCastingCost = false;
         } else {
-            titleText.setText(card.getName());
-            showCastingCost = true;
+            this.titleText.setText(card.getName());
+            this.showCastingCost = true;
         }
 
         if (card.isCreature() && card.isPlaneswalker()) {
-            ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " ("
+            this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " ("
                     + String.valueOf(card.getCounters(Counters.LOYALTY)) + ")");
         } else if (card.isCreature()) {
-            ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
+            this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
         } else if (card.isPlaneswalker()) {
-            ptText.setText(String.valueOf(card.getCounters(Counters.LOYALTY)));
+            this.ptText.setText(String.valueOf(card.getCounters(Counters.LOYALTY)));
         } else {
-            ptText.setText("");
+            this.ptText.setText("");
         }
     }
 
@@ -610,26 +626,146 @@ public class CardPanel extends JPanel implements CardContainer {
      * 
      * @return a {@link forge.Card} object.
      */
+    @Override
     public final Card getCard() {
-        return gameCard;
+        return this.getGameCard();
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void setCard(final Card card) {
-        if (gameCard != null && gameCard.equals(card) && isAnimationPanel && imagePanel.hasImage()) {
+        if ((this.getGameCard() != null) && this.getGameCard().equals(card) && this.isAnimationPanel
+                && this.imagePanel.hasImage()) {
             return;
         }
-        this.gameCard = card;
-        if (!isShowing()) {
+        this.setGameCard(card);
+        if (!this.isShowing()) {
             return;
         }
-        Insets i = getInsets();
-        Image image = card == null ? null : ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight()
-                - i.top - i.bottom);
-        if (gameCard != null && Singletons.getModel().getPreferences().cardOverlay) {
-            setText(gameCard);
+        final Insets i = this.getInsets();
+        final Image image = card == null ? null : ImageCache.getImage(card, this.getWidth() - i.left - i.right,
+                this.getHeight() - i.top - i.bottom);
+        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().cardOverlay) {
+            this.setText(this.getGameCard());
         }
 
-        setImage(image, image);
+        this.setImage(image, image);
+    }
+
+    /**
+     * Gets the game card.
+     * 
+     * @return the gameCard
+     */
+    public final Card getGameCard() {
+        return this.gameCard;
+    }
+
+    /**
+     * Sets the game card.
+     * 
+     * @param gameCard
+     *            the gameCard to set
+     */
+    public final void setGameCard(final Card gameCard) {
+        this.gameCard = gameCard; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the drag animation panel.
+     * 
+     * @return the dragAnimationPanel
+     */
+    public static CardPanel getDragAnimationPanel() {
+        return CardPanel.dragAnimationPanel;
+    }
+
+    /**
+     * Sets the drag animation panel.
+     * 
+     * @param dragAnimationPanel
+     *            the dragAnimationPanel to set
+     */
+    public static void setDragAnimationPanel(final CardPanel dragAnimationPanel) {
+        CardPanel.dragAnimationPanel = dragAnimationPanel; // TODO: Add 0 to
+                                                           // parameter's name.
+    }
+
+    /**
+     * Gets the attached to panel.
+     * 
+     * @return the attachedToPanel
+     */
+    public final CardPanel getAttachedToPanel() {
+        return this.attachedToPanel;
+    }
+
+    /**
+     * Sets the attached to panel.
+     * 
+     * @param attachedToPanel
+     *            the attachedToPanel to set
+     */
+    public final void setAttachedToPanel(final CardPanel attachedToPanel) {
+        this.attachedToPanel = attachedToPanel; // TODO: Add 0 to parameter's
+                                                // name.
+    }
+
+    /**
+     * Gets the attached panels.
+     * 
+     * @return the attachedPanels
+     */
+    public final List<CardPanel> getAttachedPanels() {
+        return this.attachedPanels;
+    }
+
+    /**
+     * Sets the attached panels.
+     * 
+     * @param attachedPanels
+     *            the attachedPanels to set
+     */
+    public final void setAttachedPanels(final List<CardPanel> attachedPanels) {
+        this.attachedPanels = attachedPanels; // TODO: Add 0 to parameter's
+                                              // name.
+    }
+
+    /**
+     * Checks if is tapped.
+     * 
+     * @return the tapped
+     */
+    public final boolean isTapped() {
+        return this.tapped;
+    }
+
+    /**
+     * Sets the tapped.
+     * 
+     * @param tapped
+     *            the tapped to set
+     */
+    public final void setTapped(final boolean tapped) {
+        this.tapped = tapped; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the tapped angle.
+     * 
+     * @return the tappedAngle
+     */
+    public final double getTappedAngle() {
+        return this.tappedAngle;
+    }
+
+    /**
+     * Sets the tapped angle.
+     * 
+     * @param tappedAngle
+     *            the tappedAngle to set
+     */
+    public final void setTappedAngle(final double tappedAngle) {
+        this.tappedAngle = tappedAngle; // TODO: Add 0 to parameter's name.
     }
 }

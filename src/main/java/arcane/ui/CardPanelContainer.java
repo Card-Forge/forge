@@ -34,21 +34,25 @@ public abstract class CardPanelContainer extends JPanel {
     /**
      * 
      */
-    public List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+    private List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     /**
      * 
      */
-    protected JScrollPane scrollPane;
+    private JScrollPane scrollPane;
     /**
      * 
      */
-    protected int cardWidthMin = 50, cardWidthMax = Constant.Runtime.width[0];
-    /**
-     * 
-     */
-    protected CardPanel mouseOverPanel, mouseDownPanel, mouseDragPanel;
+    private int cardWidthMin = 50;
 
-    private List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
+    private int cardWidthMax = Constant.Runtime.width[0];
+    /**
+     * 
+     */
+    private CardPanel mouseOverPanel;
+    private CardPanel mouseDownPanel;
+    private CardPanel mouseDragPanel;
+
+    private final List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
@@ -65,94 +69,101 @@ public abstract class CardPanelContainer extends JPanel {
     public CardPanelContainer(final JScrollPane scrollPane) {
         this.scrollPane = scrollPane;
 
-        setOpaque(true);
+        this.setOpaque(true);
 
-        addMouseMotionListener(new MouseMotionListener() {
+        this.addMouseMotionListener(new MouseMotionListener() {
+            @Override
             public void mouseDragged(final MouseEvent evt) {
-                if (!dragEnabled) {
-                    mouseOutPanel(evt);
+                if (!CardPanelContainer.this.dragEnabled) {
+                    CardPanelContainer.this.mouseOutPanel(evt);
                     return;
                 }
-                if (mouseDragPanel != null) {
-                    CardPanelContainer.this.mouseDragged(mouseDragPanel, mouseDragOffsetX, mouseDragOffsetY, evt);
+                if (CardPanelContainer.this.getMouseDragPanel() != null) {
+                    CardPanelContainer.this.mouseDragged(CardPanelContainer.this.getMouseDragPanel(),
+                            CardPanelContainer.this.mouseDragOffsetX, CardPanelContainer.this.mouseDragOffsetY, evt);
                     return;
                 }
-                int x = evt.getX();
-                int y = evt.getY();
-                CardPanel panel = getCardPanel(x, y);
+                final int x = evt.getX();
+                final int y = evt.getY();
+                final CardPanel panel = CardPanelContainer.this.getCardPanel(x, y);
                 if (panel == null) {
                     return;
                 }
-                if (panel != mouseDownPanel) {
+                if (panel != CardPanelContainer.this.mouseDownPanel) {
                     return;
                 }
-                if (intialMouseDragX == -1) {
-                    intialMouseDragX = x;
-                    intialMouseDragY = y;
+                if (CardPanelContainer.this.intialMouseDragX == -1) {
+                    CardPanelContainer.this.intialMouseDragX = x;
+                    CardPanelContainer.this.intialMouseDragY = y;
                     return;
                 }
-                if (Math.abs(x - intialMouseDragX) < DRAG_SMUDGE && Math.abs(y - intialMouseDragY) < DRAG_SMUDGE) {
+                if ((Math.abs(x - CardPanelContainer.this.intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
+                        && (Math.abs(y - CardPanelContainer.this.intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
                     return;
                 }
-                mouseDownPanel = null;
-                mouseDragPanel = panel;
-                mouseDragOffsetX = panel.getX() - intialMouseDragX;
-                mouseDragOffsetY = panel.getY() - intialMouseDragY;
-                CardPanelContainer.this.mouseDragStart(mouseDragPanel, evt);
+                CardPanelContainer.this.mouseDownPanel = null;
+                CardPanelContainer.this.setMouseDragPanel(panel);
+                CardPanelContainer.this.mouseDragOffsetX = panel.getX() - CardPanelContainer.this.intialMouseDragX;
+                CardPanelContainer.this.mouseDragOffsetY = panel.getY() - CardPanelContainer.this.intialMouseDragY;
+                CardPanelContainer.this.mouseDragStart(CardPanelContainer.this.getMouseDragPanel(), evt);
             }
 
+            @Override
             public void mouseMoved(final MouseEvent evt) {
-                CardPanel panel = getCardPanel(evt.getX(), evt.getY());
-                if (mouseOverPanel != null && mouseOverPanel != panel) {
+                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+                if ((CardPanelContainer.this.mouseOverPanel != null)
+                        && (CardPanelContainer.this.mouseOverPanel != panel)) {
                     CardPanelContainer.this.mouseOutPanel(evt);
                 }
                 if (panel == null) {
                     return;
                 }
-                mouseOverPanel = panel;
-                mouseOverPanel.setSelected(true);
+                CardPanelContainer.this.mouseOverPanel = panel;
+                CardPanelContainer.this.mouseOverPanel.setSelected(true);
                 CardPanelContainer.this.mouseOver(panel, evt);
             }
         });
 
-        addMouseListener(new MouseAdapter() {
-            private boolean[] buttonsDown = new boolean[4];
+        this.addMouseListener(new MouseAdapter() {
+            private final boolean[] buttonsDown = new boolean[4];
 
+            @Override
             public void mousePressed(final MouseEvent evt) {
-                int button = evt.getButton();
-                if (button < 1 || button > 3) {
+                final int button = evt.getButton();
+                if ((button < 1) || (button > 3)) {
                     return;
                 }
-                buttonsDown[button] = true;
-                mouseDownPanel = getCardPanel(evt.getX(), evt.getY());
+                this.buttonsDown[button] = true;
+                CardPanelContainer.this.mouseDownPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
             }
 
+            @Override
             public void mouseReleased(final MouseEvent evt) {
-                int button = evt.getButton();
-                if (button < 1 || button > 3) {
+                final int button = evt.getButton();
+                if ((button < 1) || (button > 3)) {
                     return;
                 }
 
-                if (dragEnabled) {
-                    intialMouseDragX = -1;
-                    if (mouseDragPanel != null) {
-                        CardPanel panel = mouseDragPanel;
-                        mouseDragPanel = null;
+                if (CardPanelContainer.this.dragEnabled) {
+                    CardPanelContainer.this.intialMouseDragX = -1;
+                    if (CardPanelContainer.this.getMouseDragPanel() != null) {
+                        final CardPanel panel = CardPanelContainer.this.getMouseDragPanel();
+                        CardPanelContainer.this.setMouseDragPanel(null);
                         CardPanelContainer.this.mouseDragEnd(panel, evt);
                     }
                 }
 
-                if (!buttonsDown[button]) {
+                if (!this.buttonsDown[button]) {
                     return;
                 }
-                buttonsDown[button] = false;
+                this.buttonsDown[button] = false;
 
-                CardPanel panel = getCardPanel(evt.getX(), evt.getY());
-                if (panel != null && mouseDownPanel == panel) {
+                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+                if ((panel != null) && (CardPanelContainer.this.mouseDownPanel == panel)) {
                     int downCount = 0;
-                    for (int i = 1; i < buttonsDown.length; i++) {
-                        if (buttonsDown[i]) {
-                            buttonsDown[i] = false;
+                    for (int i = 1; i < this.buttonsDown.length; i++) {
+                        if (this.buttonsDown[i]) {
+                            this.buttonsDown[i] = false;
                             downCount++;
                         }
                     }
@@ -168,10 +179,12 @@ public abstract class CardPanelContainer extends JPanel {
                 }
             }
 
+            @Override
             public void mouseExited(final MouseEvent evt) {
-                mouseOutPanel(evt);
+                CardPanelContainer.this.mouseOutPanel(evt);
             }
 
+            @Override
             public void mouseEntered(final MouseEvent e) {
             }
         });
@@ -186,12 +199,12 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     private void mouseOutPanel(final MouseEvent evt) {
-        if (mouseOverPanel == null) {
+        if (this.mouseOverPanel == null) {
             return;
         }
-        mouseOverPanel.setSelected(false);
-        mouseOut(mouseOverPanel, evt);
-        mouseOverPanel = null;
+        this.mouseOverPanel.setSelected(false);
+        this.mouseOut(this.mouseOverPanel, evt);
+        this.mouseOverPanel = null;
     }
 
     /*
@@ -220,13 +233,13 @@ public abstract class CardPanelContainer extends JPanel {
     public final CardPanel addCard(final Card card) {
         final CardPanel placeholder = new CardPanel(card);
         placeholder.setDisplayEnabled(false);
-        cardPanels.add(placeholder);
-        add(placeholder);
-        doLayout();
+        this.getCardPanels().add(placeholder);
+        this.add(placeholder);
+        this.doLayout();
         // int y = Math.min(placeholder.getHeight(),
         // scrollPane.getVisibleRect().height);
-        scrollRectToVisible(new Rectangle(placeholder.getCardX(), placeholder.getCardY(), placeholder.getCardWidth(),
-                placeholder.getCardHeight()));
+        this.scrollRectToVisible(new Rectangle(placeholder.getCardX(), placeholder.getCardY(), placeholder
+                .getCardWidth(), placeholder.getCardHeight()));
         return placeholder;
     }
 
@@ -240,8 +253,8 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a {@link arcane.ui.CardPanel} object.
      */
     public final CardPanel getCardPanel(final int gameCardID) {
-        for (CardPanel panel : cardPanels) {
-            if (panel.gameCard.getUniqueNumber() == gameCardID) {
+        for (final CardPanel panel : this.getCardPanels()) {
+            if (panel.getGameCard().getUniqueNumber() == gameCardID) {
                 return panel;
             }
         }
@@ -258,19 +271,20 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public final void removeCardPanel(final CardPanel fromPanel) {
         UI.invokeAndWait(new Runnable() {
+            @Override
             public void run() {
-                if (mouseDragPanel != null) {
-                    CardPanel.dragAnimationPanel.setVisible(false);
-                    CardPanel.dragAnimationPanel.repaint();
-                    cardPanels.remove(CardPanel.dragAnimationPanel);
-                    remove(CardPanel.dragAnimationPanel);
-                    mouseDragPanel = null;
+                if (CardPanelContainer.this.getMouseDragPanel() != null) {
+                    CardPanel.getDragAnimationPanel().setVisible(false);
+                    CardPanel.getDragAnimationPanel().repaint();
+                    CardPanelContainer.this.getCardPanels().remove(CardPanel.getDragAnimationPanel());
+                    CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
+                    CardPanelContainer.this.setMouseDragPanel(null);
                 }
-                mouseOverPanel = null;
-                cardPanels.remove(fromPanel);
-                remove(fromPanel);
-                invalidate();
-                repaint();
+                CardPanelContainer.this.mouseOverPanel = null;
+                CardPanelContainer.this.getCardPanels().remove(fromPanel);
+                CardPanelContainer.this.remove(fromPanel);
+                CardPanelContainer.this.invalidate();
+                CardPanelContainer.this.repaint();
             }
         });
     }
@@ -282,13 +296,14 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public final void clear() {
         UI.invokeAndWait(new Runnable() {
+            @Override
             public void run() {
-                cardPanels.clear();
-                removeAll();
-                setPreferredSize(new Dimension(0, 0));
-                invalidate();
-                getParent().validate();
-                repaint();
+                CardPanelContainer.this.getCardPanels().clear();
+                CardPanelContainer.this.removeAll();
+                CardPanelContainer.this.setPreferredSize(new Dimension(0, 0));
+                CardPanelContainer.this.invalidate();
+                CardPanelContainer.this.getParent().validate();
+                CardPanelContainer.this.repaint();
             }
         });
     }
@@ -301,7 +316,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a {@link javax.swing.JScrollPane} object.
      */
     public final JScrollPane getScrollPane() {
-        return scrollPane;
+        return this.scrollPane;
     }
 
     /**
@@ -312,7 +327,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a int.
      */
     public final int getCardWidthMin() {
-        return cardWidthMin;
+        return this.cardWidthMin;
     }
 
     /**
@@ -323,7 +338,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @param cardWidthMin
      *            a int.
      */
-    public final void setCardWidthMin(int cardWidthMin) {
+    public final void setCardWidthMin(final int cardWidthMin) {
         this.cardWidthMin = cardWidthMin;
     }
 
@@ -335,7 +350,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a int.
      */
     public final int getCardWidthMax() {
-        return cardWidthMax;
+        return this.cardWidthMax;
     }
 
     /**
@@ -346,7 +361,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @param cardWidthMax
      *            a int.
      */
-    public final void setCardWidthMax(int cardWidthMax) {
+    public final void setCardWidthMax(final int cardWidthMax) {
         this.cardWidthMax = cardWidthMax;
     }
 
@@ -358,7 +373,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a boolean.
      */
     public final boolean isDragEnabled() {
-        return dragEnabled;
+        return this.dragEnabled;
     }
 
     /**
@@ -369,7 +384,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @param dragEnabled
      *            a boolean.
      */
-    public final void setDragEnabled(boolean dragEnabled) {
+    public final void setDragEnabled(final boolean dragEnabled) {
         this.dragEnabled = dragEnabled;
     }
 
@@ -382,7 +397,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link arcane.ui.util.CardPanelMouseListener} object.
      */
     public final void addCardPanelMouseListener(final CardPanelMouseListener listener) {
-        listeners.add(listener);
+        this.listeners.add(listener);
     }
 
     /**
@@ -396,7 +411,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
+        for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseLeftClicked(panel, evt);
         }
     }
@@ -412,7 +427,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
+        for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseRightClicked(panel, evt);
         }
     }
@@ -428,7 +443,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public final void mouseMiddleClicked(final CardPanel panel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
+        for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseMiddleClicked(panel, evt);
         }
     }
@@ -444,7 +459,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
+        for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseDragEnd(dragPanel, evt);
         }
     }
@@ -465,8 +480,8 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public void mouseDragged(final CardPanel dragPanel, final int dragOffsetX, final int dragOffsetY,
             final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
-            listener.mouseDragged(mouseDragPanel, mouseDragOffsetX, mouseDragOffsetY, evt);
+        for (final CardPanelMouseListener listener : this.listeners) {
+            listener.mouseDragged(this.getMouseDragPanel(), this.mouseDragOffsetX, this.mouseDragOffsetY, evt);
         }
     }
 
@@ -481,8 +496,8 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
-            listener.mouseDragStart(mouseDragPanel, evt);
+        for (final CardPanelMouseListener listener : this.listeners) {
+            listener.mouseDragStart(this.getMouseDragPanel(), evt);
         }
     }
 
@@ -497,8 +512,8 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public final void mouseOut(final CardPanel panel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
-            listener.mouseOut(mouseOverPanel, evt);
+        for (final CardPanelMouseListener listener : this.listeners) {
+            listener.mouseOut(this.mouseOverPanel, evt);
         }
     }
 
@@ -513,7 +528,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link java.awt.event.MouseEvent} object.
      */
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
-        for (CardPanelMouseListener listener : listeners) {
+        for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }
     }
@@ -526,8 +541,8 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a {@link forge.Card} object.
      */
     public final Card getCardFromMouseOverPanel() {
-        if (mouseOverPanel != null) {
-            return mouseOverPanel.gameCard;
+        if (this.mouseOverPanel != null) {
+            return this.mouseOverPanel.getGameCard();
         } else {
             return null;
         }
@@ -541,7 +556,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @return a int.
      */
     public final int getZoneID() {
-        return zoneID;
+        return this.zoneID;
     }
 
     /**
@@ -552,7 +567,46 @@ public abstract class CardPanelContainer extends JPanel {
      * @param zoneID
      *            a int.
      */
-    public void setZoneID(final int zoneID) {
+    public final void setZoneID(final int zoneID) {
         this.zoneID = zoneID;
+    }
+
+    /**
+     * Gets the card panels.
+     * 
+     * @return the cardPanels
+     */
+    public final List<CardPanel> getCardPanels() {
+        return this.cardPanels;
+    }
+
+    /**
+     * Sets the card panels.
+     * 
+     * @param cardPanels
+     *            the cardPanels to set
+     */
+    public final void setCardPanels(final List<CardPanel> cardPanels) {
+        this.cardPanels = cardPanels; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the mouse drag panel.
+     * 
+     * @return the mouseDragPanel
+     */
+    public CardPanel getMouseDragPanel() {
+        return this.mouseDragPanel;
+    }
+
+    /**
+     * Sets the mouse drag panel.
+     * 
+     * @param mouseDragPanel
+     *            the mouseDragPanel to set
+     */
+    public void setMouseDragPanel(final CardPanel mouseDragPanel) {
+        this.mouseDragPanel = mouseDragPanel; // TODO: Add 0 to parameter's
+                                              // name.
     }
 }
