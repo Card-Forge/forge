@@ -8990,6 +8990,7 @@ res/cardsfolder/v/volition_reins.txt svneol=native#text/plain
 res/cardsfolder/v/volrath_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/v/volraths_dungeon.txt svneol=native#text/plain
 res/cardsfolder/v/volraths_gardens.txt svneol=native#text/plain
+res/cardsfolder/v/volraths_laboratory.txt -text
 res/cardsfolder/v/volraths_stronghold.txt svneol=native#text/plain
 res/cardsfolder/v/volt_charge.txt svneol=native#text/plain
 res/cardsfolder/v/voltaic_construct.txt svneol=native#text/plain

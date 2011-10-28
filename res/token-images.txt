@@ -49,6 +49,7 @@ c_1_1_wasp.jpg                         http://www.cardforge.org/fpics/tokens/c_1
 c_2_2_assembly_worker.jpg              http://www.cardforge.org/fpics/tokens/c_2_2_assembly_worker.jpg
 c_2_2_pincher.jpg                      http://www.cardforge.org/fpics/tokens/c_2_2_pincher.jpg
 c_2_2_spawn.jpg                        http://www.cardforge.org/fpics/tokens/c_2_2_spawn.jpg
+c_2_2_volraths_laboratory.jpg          http://www.cardforge.org/fpics/tokens/c_2_2_volraths_laboratory.jpg
 c_2_2_wirefly.jpg                      http://www.cardforge.org/fpics/tokens/c_2_2_wirefly.jpg
 c_3_3_golem.jpg                        http://www.cardforge.org/fpics/tokens/c_3_3_golem.jpg
 c_3_3_wurm_deathtouch.jpg              http://www.cardforge.org/fpics/tokens/c_3_3_wurm_deathtouch.jpg
@@ -182,7 +183,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //c_1_1_tetravite.jpg                    http://www.cardforge.org/fpics/tokens/c_1_1_tetravite.jpg                    [ATQ/4ED] Tetravus
 # //c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg                       [5DN] Helm of Kaldra
 # //c_6_12_construct.jpg                   http://www.cardforge.org/fpics/tokens/c_6_12_construct.jpg                   [WWK] Stone Idol Trap
-# //c_x_x_volraths_laboratory.jpg          http://www.cardforge.org/fpics/tokens/c_x_x_volraths_laboratory.jpg          [STH] Volrath's Laboratory
 # //g_0_1_sheep.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_sheep.jpg                        [VIS/TSB] Ovinomancer
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg                        [EXO] Keeper of the Beasts
