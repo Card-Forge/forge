@@ -19,7 +19,7 @@ import com.esotericsoftware.minlog.Log;
  */
 public class ManaSymbols {
     /** Constant <code>manaImages</code>. */
-    private static final Map<String, Image> manaImages = new HashMap<String, Image>();
+    private static final Map<String, Image> MANA_IMAGES = new HashMap<String, Image>();
     /** Constant <code>replaceSymbolsPattern</code>. */
     private static Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
@@ -35,7 +35,7 @@ public class ManaSymbols {
                 "defend", "summonsick", "phasing", "counters1", "counters2", "counters3", "countersMulti", "foil01",
                 "foil02", "foil03", "foil04", "foil05", "foil06", "foil07", "foil08", "foil09", "foil10" };
         for (String symbol : symbols) {
-            manaImages.put(symbol, UI.getImageIcon("res/images/symbols-13/" + symbol + ".png").getImage());
+            MANA_IMAGES.put(symbol, UI.getImageIcon("res/images/symbols-13/" + symbol + ".png").getImage());
         }
     }
 
@@ -61,7 +61,7 @@ public class ManaSymbols {
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
-            Image image = manaImages.get(symbol);
+            Image image = MANA_IMAGES.get(symbol);
             if (image == null) {
                 Log.info("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
                 continue;
@@ -90,7 +90,7 @@ public class ManaSymbols {
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
-            Image image = manaImages.get(symbol);
+            Image image = MANA_IMAGES.get(symbol);
             if (image == null) {
                 Log.info("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
@@ -115,7 +115,7 @@ public class ManaSymbols {
      *            a int.
      */
     public static void drawAttack(final Graphics g, final int x, final int y) {
-        Image image = manaImages.get("attack");
+        Image image = MANA_IMAGES.get("attack");
         g.drawImage(image, x, y, null);
     }
 
@@ -134,7 +134,7 @@ public class ManaSymbols {
      *            a int.
      */
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
-        Image image = manaImages.get(imageName);
+        Image image = MANA_IMAGES.get(imageName);
         g.drawImage(image, x, y, null);
     }
 

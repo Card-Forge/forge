@@ -226,8 +226,7 @@ public abstract class Animation {
      */
     public static void moveCardToPlay(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
-            final JLayeredPane layeredPane, final int speed)
-    {
+            final JLayeredPane layeredPane, final int speed) {
         UI.invokeLater(new Runnable() {
             public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
@@ -484,12 +483,10 @@ public abstract class Animation {
 
         long delayedTime;
         synchronized (enlargeLock) {
-            if (enlargedCardPanel == overPanel)
-             {
+            if (enlargedCardPanel == overPanel) {
                 return; // Already showing this card enlarged.
             }
-            if (delay > 0 && delayedCardPanel == overPanel)
-             {
+            if (delay > 0 && delayedCardPanel == overPanel) {
                 return; // Already delayed this card.
             }
             delayedCardPanel = overPanel;
