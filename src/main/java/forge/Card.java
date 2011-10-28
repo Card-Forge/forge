@@ -47,7 +47,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean isDoubleFaced = false;
     private boolean isFlip = false;
 
-    private CardCharacteristics getCharacteristics() {
+    public CardCharacteristics getCharacteristics() {
         return characteristics[currentCharacteristic];
     }
 

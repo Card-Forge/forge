@@ -4351,9 +4351,9 @@ public class CardFactoryUtil {
         To.setBaseLoyalty(From.getBaseLoyalty());
         To.setBaseAttackString(From.getBaseAttackString());
         To.setBaseDefenseString(From.getBaseDefenseString());
-        To.setIntrinsicKeyword(From.getKeyword());
+        To.setIntrinsicKeyword(From.getIntrinsicKeyword());
         To.setName(From.getName());
-        To.setType(From.getType());
+        To.setType(From.getCharacteristics().getType());
         To.setText(From.getSpellText());
         To.setManaCost(From.getManaCost());
         To.setColor(From.getColor());
