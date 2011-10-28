@@ -447,8 +447,10 @@ public class ManaPool extends Card {
                     choice = manaChoices.get(0);
                     return choice;
                 }
-
-                int numColorless = Integer.parseInt(manaStr);
+                
+                int numColorless = 0;
+                if(manaStr.matches("[0-9][0-9]?"))
+                    numColorless = Integer.parseInt(manaStr);
                 if (numColorless >= totalMana) {
                     choice = manaChoices.get(0);
                     return choice;
