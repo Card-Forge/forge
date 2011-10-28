@@ -478,21 +478,21 @@ public class ManaCost {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final String toString() {
+    public final String toString(boolean addX){
+		// Boolean addX used to add Xs into the returned value
         StringBuilder sb = new StringBuilder();
         ArrayList<Object> list = new ArrayList<Object>(manaPart);
         // need to reverse everything since the colored mana is stored first
         Collections.reverse(list);
 
-        for (int i = 0; i < getXcounter(); i++) {
-            sb.append(" ").append("X");
+        if (addX) {
+            for (int i = 0; i < getXcounter(); i++) {
+                sb.append("X").append(" ");
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
-            sb.append(" ");
-            sb.append(list.get(i).toString());
+            sb.append(list.get(i).toString()).append(" ");
         }
 
         String str = sb.toString().trim();
@@ -502,6 +502,12 @@ public class ManaCost {
         }
 
         return str;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final String toString() {
+        return toString(true);
     }
 
     /**

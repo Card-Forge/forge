@@ -355,7 +355,10 @@ public class Cost {
                 CostMana costMana = (CostMana) part;
 
                 String mana = getTotalMana();
-                costMana.setAdjustedMana(AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana)).toString());
+                
+                ManaCost changedCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana));
+                
+                costMana.setAdjustedMana(changedCost.toString(false));
             }
         }
     }
