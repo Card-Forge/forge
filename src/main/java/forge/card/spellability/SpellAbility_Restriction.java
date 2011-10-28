@@ -176,13 +176,13 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
         }
 
         PlayerZone cardZone = AllZone.getZoneOf(c);
-        if (!cardZone.is(zone)) {
+        if (!cardZone.is(getZone())) {
             // If Card is not in the default activating zone, do some additional
             // checks
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield)) {
                 return false;
-            } else if (!c.hasStartOfKeyword("May be played") || !zone.equals(Zone.Hand)) {
+            } else if (!c.hasStartOfKeyword("May be played") || !getZone().equals(Zone.Hand)) {
                 return false;
             }
         }
@@ -201,11 +201,11 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             return false;
         }
 
-        if (bOpponentTurn && AllZone.getPhase().isPlayerTurn(activator)) {
+        if (isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (!bAnyPlayer && !activator.equals(c.getController())) {
+        if (!isAnyPlayer() && !activator.equals(c.getController())) {
             return false;
         }
 
@@ -228,8 +228,8 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
         }
 
-        if (nCardsInHand != -1) {
-            if (activator.getCardsIn(Zone.Hand).size() != nCardsInHand) {
+        if (getCardsInHand() != -1) {
+            if (activator.getCardsIn(Zone.Hand).size() != getCardsInHand()) {
                 return false;
             }
         }
@@ -261,10 +261,10 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
                 return false;
             }
         }
-        if (sIsPresent != null) {
-            CardList list = AllZoneUtil.getCardsIn(presentZone);
+        if (getIsPresent() != null) {
+            CardList list = AllZoneUtil.getCardsIn(getPresentZone());
 
-            list = list.getValidCards(sIsPresent.split(","), activator, c);
+            list = list.getValidCards(getIsPresent().split(","), activator, c);
 
             int right = 1;
             String rightString = getPresentCompare().substring(2);
@@ -318,11 +318,11 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
         }
 
-        if (svarToCheck != null) {
-            int svarValue = AbilityFactory.calculateAmount(c, svarToCheck, sa);
-            int operandValue = AbilityFactory.calculateAmount(c, svarOperand, sa);
+        if (getsVarToCheck() != null) {
+            int svarValue = AbilityFactory.calculateAmount(c, getsVarToCheck(), sa);
+            int operandValue = AbilityFactory.calculateAmount(c, getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, svarOperator, operandValue)) {
+            if (!AllZoneUtil.compare(svarValue, getsVarOperator(), operandValue)) {
                 return false;
             }
 

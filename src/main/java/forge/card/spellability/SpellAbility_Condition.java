@@ -183,7 +183,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             return false;
         }
 
-        if (bOpponentTurn && AllZone.getPhase().isPlayerTurn(activator)) {
+        if (isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
@@ -206,7 +206,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             }
         }
 
-        if (allM12Empires) {
+        if (isAllM12Empires()) {
             Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
@@ -215,7 +215,7 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 return false;
             }
         }
-        if (notAllM12Empires) {
+        if (isNotAllM12Empires()) {
             Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
@@ -225,22 +225,22 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             }
         }
 
-        if (nCardsInHand != -1) {
+        if (getCardsInHand() != -1) {
             // Can handle Library of Alexandria, or Hellbent
-            if (activator.getCardsIn(Zone.Hand).size() != nCardsInHand) {
+            if (activator.getCardsIn(Zone.Hand).size() != getCardsInHand()) {
                 return false;
             }
         }
 
-        if (sIsPresent != null) {
+        if (getIsPresent() != null) {
             CardList list = new CardList();
-            if (presentDefined != null) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), presentDefined, sa).toArray());
+            if (getPresentDefined() != null) {
+                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), getPresentDefined(), sa).toArray());
             } else {
                 list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             }
 
-            list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = list.getValidCards(getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
             String rightString = getPresentCompare().substring(2);
@@ -280,17 +280,17 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             }
         }
 
-        if (null != manaSpent) {
-            if (!sa.getSourceCard().getColorsPaid().contains(manaSpent)) {
+        if (null != getManaSpent()) {
+            if (!sa.getSourceCard().getColorsPaid().contains(getManaSpent())) {
                 return false;
             }
         }
 
-        if (svarToCheck != null) {
-            int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarToCheck, sa);
-            int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), svarOperand, sa);
+        if (getsVarToCheck() != null) {
+            int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), getsVarToCheck(), sa);
+            int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, svarOperator, operandValue)) {
+            if (!AllZoneUtil.compare(svarValue, getsVarOperator(), operandValue)) {
                 return false;
             }
 

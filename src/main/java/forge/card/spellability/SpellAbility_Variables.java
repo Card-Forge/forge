@@ -30,7 +30,7 @@ public class SpellAbility_Variables {
 
     // default values for Sorcery speed abilities
     /** The zone. */
-    protected Constant.Zone zone = Constant.Zone.Battlefield;
+    private Constant.Zone zone = Constant.Zone.Battlefield;
 
     /** The phases. */
     private ArrayList<String> phases = new ArrayList<String>();
@@ -39,10 +39,10 @@ public class SpellAbility_Variables {
     private boolean sorcerySpeed = false;
 
     /** The b any player. */
-    protected boolean bAnyPlayer = false;
+    private boolean anyPlayer = false;
 
     /** The b opponent turn. */
-    protected boolean bOpponentTurn = false;
+    private boolean opponentTurn = false;
 
     /** The b player turn. */
     private boolean playerTurn = false;
@@ -57,7 +57,7 @@ public class SpellAbility_Variables {
     private int activationNumberSacrifice = -1;
 
     /** The n cards in hand. */
-    protected int nCardsInHand = -1;
+    private int cardsInHand = -1;
 
     /** The threshold. */
     private boolean threshold = false;
@@ -72,26 +72,26 @@ public class SpellAbility_Variables {
     private ArrayList<String> prowl = null;
 
     /** The s is present. */
-    protected String sIsPresent = null;
+    private String isPresent = null;
 
     /** The present compare. */
     private String presentCompare = "GE1"; // Default Compare to Greater or
-                                             // Equal to 1
+                                           // Equal to 1
 
     /** The present defined. */
-    protected String presentDefined = null;
+    private String presentDefined = null;
 
     /** The present zone. */
-    protected Constant.Zone presentZone = Constant.Zone.Battlefield;
+    private Constant.Zone presentZone = Constant.Zone.Battlefield;
 
     /** The svar to check. */
-    protected String svarToCheck = null;
+    private String sVarToCheck = null;
 
     /** The svar operator. */
-    protected String svarOperator = "GE";
+    private String sVarOperator = "GE";
 
     /** The svar operand. */
-    protected String svarOperand = "1";
+    private String sVarOperand = "1";
 
     /** The life total. */
     private String lifeTotal = null;
@@ -100,16 +100,16 @@ public class SpellAbility_Variables {
     private String lifeAmount = "GE1";
 
     /** The mana spent. */
-    protected String manaSpent = "";
+    private String manaSpent = "";
 
     /** The pw ability. */
     private boolean pwAbility = false;
 
     /** The all m12 empires. */
-    protected boolean allM12Empires = false;
+    private boolean allM12Empires = false;
 
     /** The not all m12 empires. */
-    protected boolean notAllM12Empires = false;
+    private boolean notAllM12Empires = false;
 
     /**
      * <p>
@@ -120,7 +120,7 @@ public class SpellAbility_Variables {
      *            a boolean
      */
     public final void setNotAllM12Empires(final boolean b) {
-        notAllM12Empires = b;
+        this.notAllM12Empires = b;
     }
 
     /**
@@ -131,7 +131,7 @@ public class SpellAbility_Variables {
      * @return a boolean
      */
     public final boolean getNotAllM12Empires() {
-        return notAllM12Empires;
+        return this.isNotAllM12Empires();
     }
 
     /**
@@ -143,7 +143,7 @@ public class SpellAbility_Variables {
      *            a boolean
      */
     public final void setAllM12Empires(final boolean b) {
-        allM12Empires = b;
+        this.allM12Empires = b;
     }
 
     /**
@@ -154,7 +154,7 @@ public class SpellAbility_Variables {
      * @return a boolean
      */
     public final boolean getAllM12Empires() {
-        return allM12Empires;
+        return this.isAllM12Empires();
     }
 
     /**
@@ -166,7 +166,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setManaSpent(final String s) {
-        manaSpent = s;
+        this.manaSpent = s;
     }
 
     /**
@@ -177,7 +177,7 @@ public class SpellAbility_Variables {
      * @return a {@link java.lang.String} object.
      */
     public final String getManaSpent() {
-        return manaSpent;
+        return this.manaSpent;
     }
 
     /**
@@ -200,7 +200,7 @@ public class SpellAbility_Variables {
      * @return a {@link java.lang.String} object.
      */
     public final Constant.Zone getZone() {
-        return zone;
+        return this.zone;
     }
 
     /**
@@ -212,7 +212,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setSorcerySpeed(final boolean bSpeed) {
-        sorcerySpeed = bSpeed;
+        this.sorcerySpeed = bSpeed;
     }
 
     /**
@@ -223,7 +223,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean isSorcerySpeed() {
-        return sorcerySpeed;
+        return this.sorcerySpeed;
     }
 
     /**
@@ -235,18 +235,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setAnyPlayer(final boolean anyPlayer) {
-        bAnyPlayer = anyPlayer;
-    }
-
-    /**
-     * <p>
-     * getAnyPlayer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getAnyPlayer() {
-        return bAnyPlayer;
+        this.anyPlayer = anyPlayer;
     }
 
     /**
@@ -258,7 +247,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setPlayerTurn(final boolean bTurn) {
-        playerTurn = bTurn;
+        this.playerTurn = bTurn;
     }
 
     /**
@@ -269,7 +258,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean getPlayerTurn() {
-        return isPlayerTurn();
+        return this.isPlayerTurn();
     }
 
     /**
@@ -281,7 +270,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setOpponentTurn(final boolean bTurn) {
-        bOpponentTurn = bTurn;
+        this.opponentTurn = bTurn;
     }
 
     /**
@@ -292,7 +281,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean getOpponentTurn() {
-        return bOpponentTurn;
+        return this.isOpponentTurn();
     }
 
     /**
@@ -304,7 +293,7 @@ public class SpellAbility_Variables {
      *            a int.
      */
     public final void setActivationLimit(final int limit) {
-        activationLimit = limit;
+        this.activationLimit = limit;
     }
 
     /**
@@ -313,7 +302,7 @@ public class SpellAbility_Variables {
      * </p>
      */
     public final void abilityActivated() {
-        numberTurnActivations++;
+        this.numberTurnActivations++;
     }
 
     /**
@@ -324,7 +313,7 @@ public class SpellAbility_Variables {
      * @return a int.
      */
     public final int getNumberTurnActivations() {
-        return numberTurnActivations;
+        return this.numberTurnActivations;
     }
 
     /**
@@ -333,7 +322,7 @@ public class SpellAbility_Variables {
      * </p>
      */
     public final void resetTurnActivations() {
-        numberTurnActivations = 0;
+        this.numberTurnActivations = 0;
     }
 
     /**
@@ -345,7 +334,7 @@ public class SpellAbility_Variables {
      *            a int.
      */
     public final void setActivationNumberSacrifice(final int num) {
-        activationNumberSacrifice = num;
+        this.activationNumberSacrifice = num;
     }
 
     /**
@@ -356,7 +345,7 @@ public class SpellAbility_Variables {
      * @return a int.
      */
     public final int getActivationNumberSacrifice() {
-        return activationNumberSacrifice;
+        return this.activationNumberSacrifice;
     }
 
     /**
@@ -368,8 +357,8 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setPhases(final String phasesString) {
-        for (String s : phasesString.split(",")) {
-            phases.add(s);
+        for (final String s : phasesString.split(",")) {
+            this.phases.add(s);
         }
     }
 
@@ -382,7 +371,7 @@ public class SpellAbility_Variables {
      *            a int.
      */
     public final void setActivateCardsInHand(final int cards) {
-        nCardsInHand = cards;
+        this.setCardsInHand(cards);
     }
 
     // specific named conditions
@@ -395,7 +384,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setHellbent(final boolean bHellbent) {
-        hellbent = bHellbent;
+        this.hellbent = bHellbent;
     }
 
     /**
@@ -407,7 +396,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setThreshold(final boolean bThreshold) {
-        threshold = bThreshold;
+        this.threshold = bThreshold;
     }
 
     /**
@@ -419,7 +408,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setMetalcraft(final boolean bMetalcraft) {
-        metalcraft = bMetalcraft;
+        this.metalcraft = bMetalcraft;
     }
 
     /**
@@ -431,7 +420,7 @@ public class SpellAbility_Variables {
      *            the new prowl
      */
     public final void setProwl(final ArrayList<String> types) {
-        prowl = types;
+        this.prowl = types;
     }
 
     // IsPresent for Valid battlefield stuff
@@ -445,7 +434,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setIsPresent(final String present) {
-        sIsPresent = present;
+        this.isPresent = present;
     }
 
     /**
@@ -457,7 +446,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setPresentCompare(final String compare) {
-        presentCompare = compare;
+        this.presentCompare = compare;
     }
 
     /**
@@ -466,7 +455,7 @@ public class SpellAbility_Variables {
      * @return the present zone
      */
     public final Constant.Zone getPresentZone() {
-        return presentZone;
+        return this.presentZone;
     }
 
     /**
@@ -488,7 +477,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setPresentDefined(final String defined) {
-        presentDefined = defined;
+        this.presentDefined = defined;
     }
 
     // used to define as a Planeswalker ability
@@ -501,7 +490,7 @@ public class SpellAbility_Variables {
      *            a boolean.
      */
     public final void setPlaneswalker(final boolean bPlaneswalker) {
-        setPwAbility(bPlaneswalker);
+        this.setPwAbility(bPlaneswalker);
     }
 
     /**
@@ -512,7 +501,7 @@ public class SpellAbility_Variables {
      * @return a boolean.
      */
     public final boolean getPlaneswalker() {
-        return isPwAbility();
+        return this.isPwAbility();
     }
 
     // Checking the values of SVars (Mostly for Traps)
@@ -525,7 +514,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setSvarToCheck(final String sVar) {
-        svarToCheck = sVar;
+        this.setsVarToCheck(sVar);
     }
 
     /**
@@ -537,7 +526,7 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setSvarOperator(final String operator) {
-        svarOperator = operator;
+        this.setsVarOperator(operator);
     }
 
     /**
@@ -549,58 +538,59 @@ public class SpellAbility_Variables {
      *            a {@link java.lang.String} object.
      */
     public final void setSvarOperand(final String operand) {
-        svarOperand = operand;
+        this.setsVarOperand(operand);
     }
 
     /**
      * Gets the activation limit.
-     *
+     * 
      * @return the activationLimit
      */
-    public int getActivationLimit() {
-        return activationLimit;
+    public final int getActivationLimit() {
+        return this.activationLimit;
     }
 
     /**
      * Checks if is threshold.
-     *
+     * 
      * @return the threshold
      */
     public final boolean isThreshold() {
-        return threshold;
+        return this.threshold;
     }
 
     /**
      * Checks if is metalcraft.
-     *
+     * 
      * @return the metalcraft
      */
     public final boolean isMetalcraft() {
-        return metalcraft;
+        return this.metalcraft;
     }
 
     /**
      * Checks if is hellbent.
-     *
+     * 
      * @return the hellbent
      */
     public final boolean isHellbent() {
-        return hellbent;
+        return this.hellbent;
     }
 
     /**
      * Checks if is pw ability.
-     *
+     * 
      * @return the pwAbility
      */
     public final boolean isPwAbility() {
-        return pwAbility;
+        return this.pwAbility;
     }
 
     /**
      * Sets the pw ability.
-     *
-     * @param pwAbility the new pw ability
+     * 
+     * @param pwAbility
+     *            the new pw ability
      */
     public final void setPwAbility(final boolean pwAbility) {
         this.pwAbility = pwAbility; // TODO Add 0 to parameter's name.
@@ -608,44 +598,45 @@ public class SpellAbility_Variables {
 
     /**
      * Checks if is player turn.
-     *
+     * 
      * @return the playerTurn
      */
-    public boolean isPlayerTurn() {
-        return playerTurn;
+    public final boolean isPlayerTurn() {
+        return this.playerTurn;
     }
 
     /**
      * Gets the prowl.
-     *
+     * 
      * @return the prowl
      */
-    public ArrayList<String> getProwl() {
-        return prowl;
+    public final ArrayList<String> getProwl() {
+        return this.prowl;
     }
 
     /**
      * Gets the present compare.
-     *
+     * 
      * @return the presentCompare
      */
-    public String getPresentCompare() {
-        return presentCompare;
+    public final String getPresentCompare() {
+        return this.presentCompare;
     }
 
     /**
      * Gets the life total.
-     *
+     * 
      * @return the lifeTotal
      */
     public final String getLifeTotal() {
-        return lifeTotal;
+        return this.lifeTotal;
     }
 
     /**
      * Sets the life total.
-     *
-     * @param lifeTotal the lifeTotal to set
+     * 
+     * @param lifeTotal
+     *            the lifeTotal to set
      */
     public final void setLifeTotal(final String lifeTotal) {
         this.lifeTotal = lifeTotal; // TODO Add 0 to parameter's name.
@@ -653,17 +644,18 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the life amount.
-     *
+     * 
      * @return the lifeAmount
      */
     public final String getLifeAmount() {
-        return lifeAmount;
+        return this.lifeAmount;
     }
 
     /**
      * Sets the life amount.
-     *
-     * @param lifeAmount the lifeAmount to set
+     * 
+     * @param lifeAmount
+     *            the lifeAmount to set
      */
     public final void setLifeAmount(final String lifeAmount) {
         this.lifeAmount = lifeAmount; // TODO Add 0 to parameter's name.
@@ -671,20 +663,147 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the phases.
-     *
+     * 
      * @return the phases
      */
     public final ArrayList<String> getPhases() {
-        return phases;
+        return this.phases;
     }
 
     /**
      * Sets the phases.
-     *
-     * @param phases the new phases
+     * 
+     * @param phases
+     *            the new phases
      */
     public final void setPhases(final ArrayList<String> phases) {
         this.phases = phases; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the present defined.
+     *
+     * @return the presentDefined
+     */
+    public final String getPresentDefined() {
+        return this.presentDefined;
+    }
+
+    /**
+     * Checks if is all m12 empires.
+     *
+     * @return the allM12Empires
+     */
+    public final boolean isAllM12Empires() {
+        return this.allM12Empires;
+    }
+
+    /**
+     * Checks if is not all m12 empires.
+     *
+     * @return the notAllM12Empires
+     */
+    public final boolean isNotAllM12Empires() {
+        return this.notAllM12Empires;
+    }
+
+    /**
+     * Gets the s var operand.
+     *
+     * @return the sVarOperand
+     */
+    public final String getsVarOperand() {
+        return this.sVarOperand;
+    }
+
+    /**
+     * Sets the s var operand.
+     *
+     * @param sVarOperand the sVarOperand to set
+     */
+    public final void setsVarOperand(final String sVarOperand) {
+        this.sVarOperand = sVarOperand; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the s var to check.
+     *
+     * @return the sVarToCheck
+     */
+    public final String getsVarToCheck() {
+        return this.sVarToCheck;
+    }
+
+    /**
+     * Sets the s var to check.
+     *
+     * @param sVarToCheck the sVarToCheck to set
+     */
+    public final void setsVarToCheck(final String sVarToCheck) {
+        this.sVarToCheck = sVarToCheck;
+    }
+
+    /**
+     * Gets the s var operator.
+     *
+     * @return the sVarOperator
+     */
+    public final String getsVarOperator() {
+        return this.sVarOperator;
+    }
+
+    /**
+     * Sets the s var operator.
+     *
+     * @param sVarOperator the sVarOperator to set
+     */
+    public final void setsVarOperator(final String sVarOperator) {
+        this.sVarOperator = sVarOperator; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Checks if is opponent turn.
+     *
+     * @return the opponentTurn
+     */
+    public final boolean isOpponentTurn() {
+        return this.opponentTurn;
+    }
+
+    /**
+     * Gets the cards in hand.
+     *
+     * @return the cardsInHand
+     */
+    public final int getCardsInHand() {
+        return this.cardsInHand;
+    }
+
+    /**
+     * Sets the cards in hand.
+     *
+     * @param cardsInHand the cardsInHand to set
+     */
+    public final void setCardsInHand(final int cardsInHand) {
+        this.cardsInHand = cardsInHand; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the checks if is present.
+     *
+     * @return the isPresent
+     */
+    public final String getIsPresent() {
+        return this.isPresent;
+    }
+
+    /**
+     * Checks if is any player.
+     *
+     * @return the anyPlayer
+     */
+    public final boolean isAnyPlayer() {
+        return anyPlayer;
     }
 
 } // end class SpellAbility_Variables

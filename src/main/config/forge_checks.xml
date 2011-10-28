@@ -185,7 +185,7 @@
         <!-- MY FAVOURITE -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField"/>
+        <!-- <module name="HiddenField"/> -->
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MagicNumber"/>
@@ -206,8 +206,8 @@
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
-        <module name="FinalParameters"/>
-        <module name="TodoComment"/>
+        <!--  <module name="FinalParameters"/> -->
+        <!-- <module name="TodoComment"/> -->
         <module name="UpperEll"/>
 
     </module>

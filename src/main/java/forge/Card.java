@@ -821,7 +821,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean canAnyPlayerActivate() {
         for (SpellAbility s : getCharacteristics().getSpellAbility()) {
-            if (s.getRestrictions().getAnyPlayer()) {
+            if (s.getRestrictions().isAnyPlayer()) {
                 return true;
             }
         }
