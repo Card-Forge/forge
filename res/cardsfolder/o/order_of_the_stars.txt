@@ -1,0 +1,14 @@
+Name:Order of the Stars
+ManaCost:W
+Types:Creature Human Cleric
+Text:no text
+PT:0/1
+K:Defender
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_stars.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/13.jpg
+Oracle:Defender (This creature can't attack.)\nAs Order of the Stars enters the battlefield, choose a color.\nOrder of the Stars has protection from the chosen color.
+End
