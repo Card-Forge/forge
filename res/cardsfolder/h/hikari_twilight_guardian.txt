@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hikari_twilight_guardian.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/12.jpg
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
 End
