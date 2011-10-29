@@ -2555,27 +2555,42 @@ public class CardFactory_Creatures {
         // *************** START *********** START **************************
         else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine")) {
-            String theCost = "0";
+            final String theCost;
             if (cardName.equals("Duct Crawler")) {
                 theCost = "1 R";
             } else if (cardName.equals("Shrewd Hatchling")) {
                 theCost = "UR";
-            } else if (cardName.equals("Spin Engine")) {
+            } else { // if (cardName.equals("Spin Engine")) {
                 theCost = "R";
-            }
+            }            
+            
+            SpellAbility finalAb = new Ability_Activated(card, new Cost(theCost,cardName,true), new Target(card,"Select target creature.","Creature")) {
+                private static final long serialVersionUID = 2391351140880148283L;
+                
+                @Override
+                public void resolve() {
+                    StringBuilder keywordBuilder = new StringBuilder("HIDDEN CARDNAME can't block ");
+                    keywordBuilder.append(this.getSourceCard().toString());
 
-            StringBuilder keywordBuilder = new StringBuilder("HIDDEN CARDNAME can't block ");
-            keywordBuilder.append(card.getName()).append(" (").append(card.getUniqueNumber()).append(")");
+                    AbilityFactory createAb = new AbilityFactory();
+                    StringBuilder abilityBuilder = new StringBuilder("AB$Pump | Cost$ ");
+                    abilityBuilder.append(theCost);
+                    abilityBuilder.append(" | Tgt$ TgtC | IsCurse$ True | KW$ ");
+                    abilityBuilder.append(keywordBuilder.toString());
+                    abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
+                    SpellAbility myAb = createAb.getAbility(abilityBuilder.toString(), card);
 
-            AbilityFactory createAb = new AbilityFactory();
-            StringBuilder abilityBuilder = new StringBuilder("AB$Pump | Cost$ ");
-            abilityBuilder.append(theCost);
-            abilityBuilder.append(" | Tgt$ TgtC | IsCurse$ True | KW$ ");
-            abilityBuilder.append(keywordBuilder.toString());
-            abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
-            SpellAbility myAb = createAb.getAbility(abilityBuilder.toString(), card);
+                    myAb.getTarget().setTargetChoices(chosenTarget.getTargetChoices());
+                    myAb.resolve();
+                }
+                
+                @Override
+                public String getStackDescription() {
+                    return getSourceCard().toString() + " - Target creature can't block " + getSourceCard().getName() +" this turn.";
+                }
+            };
 
-            card.addSpellAbility(myAb);
+            card.addSpellAbility(finalAb);
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
