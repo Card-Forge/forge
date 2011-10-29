@@ -1223,93 +1223,6 @@ public final class GameActionUtil {
         } // execute()
     };
 
-    /** Constant <code>Koth_Emblem</code>. */
-    public static Command Koth_Emblem = new Command() {
-
-        private static final long serialVersionUID = -3233715310427996429L;
-        CardList gloriousAnthemList = new CardList();
-
-        public void execute() {
-            CardList list = gloriousAnthemList;
-            Card crd;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                crd = list.get(i);
-                SpellAbility[] sas = crd.getSpellAbility();
-                for (int j = 0; j < sas.length; j++) {
-                    if (sas[j].isKothThirdAbility()) {
-                        crd.removeSpellAbility(sas[j]);
-                    }
-                }
-            }
-
-            CardList emblem = AllZoneUtil.getCardsIn(Zone.Battlefield);
-            emblem = emblem.filter(new CardListFilter() {
-                public boolean addCard(final Card c) {
-                    return c.isEmblem()
-                            && c.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
-                }
-            });
-
-            for (int i = 0; i < emblem.size(); i++) {
-                CardList mountains = emblem.get(i).getController().getCardsIn(Zone.Battlefield);
-                mountains = mountains.filter(new CardListFilter() {
-                    public boolean addCard(final Card crd) {
-                        return crd.isType("Mountain");
-                    }
-                });
-
-                for (int j = 0; j < mountains.size(); j++) {
-                    final Card c = mountains.get(j);
-                    boolean hasAbility = false;
-                    SpellAbility[] sas = c.getSpellAbility();
-                    for (SpellAbility sa : sas) {
-                        if (sa.isKothThirdAbility()) {
-                            hasAbility = true;
-                        }
-                    }
-
-                    if (!hasAbility) {
-                        Cost abCost = new Cost("T", c.getName(), true);
-                        Target target = new Target(c, "TgtCP");
-                        final Ability_Activated ability = new Ability_Activated(c, abCost, target) {
-                            private static final long serialVersionUID = -7560349014757367722L;
-
-                            public void chooseTargetAI() {
-                                CardList list = CardFactoryUtil.AI_getHumanCreature(1, c, true);
-                                list.shuffle();
-
-                                if (list.isEmpty() || AllZone.getHumanPlayer().getLife() < 5) {
-                                    setTargetPlayer(AllZone.getHumanPlayer());
-                                } else {
-                                    setTargetCard(list.get(0));
-                                }
-                            }
-
-                            public void resolve() {
-                                if (getTargetCard() != null) {
-                                    if (AllZoneUtil.isCardInPlay(getTargetCard())
-                                            && CardFactoryUtil.canTarget(c, getTargetCard())) {
-                                        getTargetCard().addDamage(1, c);
-                                    }
-                                } else {
-                                    getTargetPlayer().addDamage(1, c);
-                                }
-                            } // resolve()
-                        }; // SpellAbility
-                        ability.setKothThirdAbility(true);
-                        ability.setDescription(abCost + "This land deals 1 damage to target creature or player.");
-
-                        c.addSpellAbility(ability);
-
-                        gloriousAnthemList.add(c);
-                    }
-                }
-            }
-
-        }
-    };
-
     // Special Conditions
     /**
      * <p>
@@ -2010,7 +1923,6 @@ public final class GameActionUtil {
         commands.put("Elspeth_Emblem", Elspeth_Emblem);
         commands.put("Homarid", Homarid);
 
-        commands.put("Koth_Emblem", Koth_Emblem);
         commands.put("Liu_Bei", Liu_Bei);
 
         commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);

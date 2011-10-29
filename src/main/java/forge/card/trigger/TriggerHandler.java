@@ -712,11 +712,6 @@ public class TriggerHandler {
             }
 
             @Override
-            public boolean isKothThirdAbility() {
-                return sa[0].isKothThirdAbility();
-            }
-
-            @Override
             public boolean isMultiKicker() {
                 return sa[0].isMultiKicker();
             }
@@ -835,11 +830,6 @@ public class TriggerHandler {
             @Override
             public void setKickerAbility(final boolean kab) {
                 sa[0].setKickerAbility(kab);
-            }
-
-            @Override
-            public void setKothThirdAbility(final boolean kothThirdAbility) {
-                sa[0].setKothThirdAbility(kothThirdAbility);
             }
 
             @Override

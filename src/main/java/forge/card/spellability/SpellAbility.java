@@ -68,7 +68,6 @@ public abstract class SpellAbility {
     private boolean replicate = false;
     private boolean xCost = false;
     private boolean kickerAbility = false;
-    private boolean kothThirdAbility = false;
     private boolean cycling = false;
     private boolean isCharm = false;
     private boolean isDelve = false;
@@ -1400,29 +1399,6 @@ public abstract class SpellAbility {
             System.err.println(e);
         }
         return clone;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>kothThirdAbility</code>.
-     * </p>
-     * 
-     * @param kothThirdAbility
-     *            a boolean.
-     */
-    public void setKothThirdAbility(final boolean kothThirdAbility) {
-        this.kothThirdAbility = kothThirdAbility;
-    }
-
-    /**
-     * <p>
-     * isKothThirdAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isKothThirdAbility() {
-        return kothThirdAbility;
     }
 
     /**
