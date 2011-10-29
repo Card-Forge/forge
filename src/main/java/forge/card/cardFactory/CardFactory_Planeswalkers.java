@@ -57,6 +57,7 @@ public class CardFactory_Planeswalkers {
                     card.getBaseLoyalty()));
         }
 
+        /*
         // *************** START *********** START **************************
         if (cardName.equals("Elspeth, Knight-Errant")) {
             // computer only plays ability 1 and 3, put 1/1 Soldier in play and
@@ -216,6 +217,8 @@ public class CardFactory_Planeswalkers {
         }
         // *************** END ************ END **************************
 
+*/
+        
         // *************** START *********** START **************************
         else if (cardName.equals("Ajani Goldmane")) {
             // computer only plays ability 1 and 3, gain life and put X/X token
