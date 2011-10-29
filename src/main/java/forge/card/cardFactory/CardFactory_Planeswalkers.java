@@ -218,7 +218,7 @@ public class CardFactory_Planeswalkers {
 */
         
         // *************** START *********** START **************************
-        else if (cardName.equals("Ajani Goldmane")) {
+        if (cardName.equals("Ajani Goldmane")) {
             // computer only plays ability 1 and 3, gain life and put X/X token
             // onto battlefield
             final int[] turn = new int[1];
