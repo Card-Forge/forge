@@ -1,0 +1,13 @@
+Name:Devouring Rage
+ManaCost:4 R
+Types:Instant Arcane
+Text:no text
+A:SP$ Pump | Cost$ 4 R Sac<X/Spirit> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ Z | SpellDescription$ Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn.
+SVar:Z:SVar$Y/Thrice
+SVar:Y:Sacrificed$Amount.Plus.1
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_rage.jpg
+End

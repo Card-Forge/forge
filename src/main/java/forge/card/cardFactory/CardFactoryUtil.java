@@ -3509,6 +3509,8 @@ public class CardFactoryUtil {
             return num - secondaryNum;
         } else if (s[0].contains("Twice")) {
             return num * 2;
+        } else if (s[0].contains("Thrice")) {
+            return num * 3;
         } else if (s[0].contains("HalfUp")) {
             return (int) (Math.ceil(num / 2.0));
         } else if (s[0].contains("HalfDown")) {
