@@ -6,10 +6,12 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.MyRandom;
 import forge.Player;
+import forge.Constant.Zone;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -191,6 +193,20 @@ public class AbilityFactory_Effect {
      */
     public static boolean effectCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         Random r = MyRandom.random;
+        HashMap<String, String> params = af.getMapParams();
+
+        String stackable = params.get("Stackable");
+
+        if (stackable != null && stackable.equals("False")) {
+            String name = params.get("Name");
+            if (name == null) {
+                name = sa.getSourceCard().getName() + "'s Effect";
+            }
+            CardList list = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield, name);
+            if (list.size() != 0) {
+                return false;
+            }
+        }
 
         Target tgt = sa.getTarget();
         if (tgt != null) {
