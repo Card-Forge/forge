@@ -569,7 +569,13 @@ public final class AbilityFactory_Choose {
      */
     private static boolean chooseColorCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
-        return AbilityFactory_Choose.chooseColorTriggerAI(af, sa, false);
+        boolean chance = true;
+        
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.chkAIDrawback();
+        }
+        return chance;
     }
 
     /**
@@ -588,18 +594,6 @@ public final class AbilityFactory_Choose {
     private static boolean chooseColorTriggerAI(final AbilityFactory af,
             final SpellAbility sa, final boolean mandatory) {
         return false;
-        /*
-         * if (!ComputerUtil.canPayCost(sa)) { return false; }
-         * 
-         * Target tgt = sa.getTarget();
-         * 
-         * if (sa.getTarget() != null) { tgt.resetTargets();
-         * sa.getTarget().addTarget(AllZone.getComputerPlayer()); } else {
-         * ArrayList<Player> tgtPlayers =
-         * AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-         * af.getMapParams().get("Defined"), sa); for (Player p : tgtPlayers) {
-         * if (p.isHuman() && !mandatory) { return false; } } } return true;
-         */
     }
 
     /**

@@ -1355,9 +1355,6 @@ public class AbilityFactory_ZoneAffecting {
         boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() > 0;
 
         if (tgt != null) {
-            if (!humanHasHand) {
-                return false;
-            }
             discardTargetAI(af, sa);
         } else {
             // TODO: Add appropriate restrictions
@@ -1442,6 +1439,8 @@ public class AbilityFactory_ZoneAffecting {
      */
     private static boolean discardTargetAI(final AbilityFactory af, final SpellAbility sa) {
         Target tgt = af.getAbTgt();
+        if(AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() < 1)
+            return false;
         if (tgt != null) {
             if (AllZone.getHumanPlayer().canTarget(sa)) {
                 tgt.addTarget(AllZone.getHumanPlayer());
@@ -1499,7 +1498,7 @@ public class AbilityFactory_ZoneAffecting {
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         Target tgt = af.getAbTgt();
         if (tgt != null) {
-            discardTargetAI(af, subAb);
+            return discardTargetAI(af, subAb);
         }
         // TODO: check for some extra things
         return true;
