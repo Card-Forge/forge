@@ -193,10 +193,6 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             out.addRemembered(o);
         }
 
-        out.clearTriggersNew();
-        for (Trigger trigger : in.getTriggers()) {
-            out.moveTrigger(trigger);
-        }
         return out;
 
     }

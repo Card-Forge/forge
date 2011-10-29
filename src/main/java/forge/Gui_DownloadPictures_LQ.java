@@ -46,9 +46,6 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
 
         String base = ForgeProps.getFile(IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
-            if (c.getName().equals("Gatstaf Shepherd")) {
-                System.out.println("Heyo!");
-            }
             cList.addAll(createDLObjects(c, base));
             if (c.hasAlternateState()) {
                 c.changeState();

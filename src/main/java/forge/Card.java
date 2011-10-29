@@ -565,9 +565,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setTriggers(final ArrayList<Trigger> trigs) {
         ArrayList<Trigger> copyList = new ArrayList<Trigger>();
         for (Trigger t : trigs) {
-            Trigger newtrig = t.getCopy();
-            newtrig.setHostCard(this);
-            copyList.add(newtrig);
+            if(t.getIsIntrinsic()) {
+                Trigger newtrig = t.getCopy();
+                newtrig.setHostCard(this);
+                copyList.add(newtrig);
+            }
         }
 
         getCharacteristics().setTriggers(copyList);
