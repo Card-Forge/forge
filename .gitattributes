@@ -2561,6 +2561,7 @@ res/cardsfolder/e/expendable_troops.txt svneol=native#text/plain
 res/cardsfolder/e/exploding_borders.txt svneol=native#text/plain
 res/cardsfolder/e/exploration.txt svneol=native#text/plain
 res/cardsfolder/e/explore.txt svneol=native#text/plain
+res/cardsfolder/e/explorers_scope.txt -text
 res/cardsfolder/e/explosive_growth.txt svneol=native#text/plain
 res/cardsfolder/e/explosive_revelation.txt svneol=native#text/plain
 res/cardsfolder/e/explosive_vegetation.txt svneol=native#text/plain
