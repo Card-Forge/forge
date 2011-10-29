@@ -404,7 +404,7 @@ public class CardFactory_Planeswalkers {
         }
         // *************** END ************ END **************************
 
-*/
+
         // *************** START *********** START **************************
         else if (cardName.equals("Chandra Nalaar")) {
             // computer only plays ability 1 and 3, discard and return creature
@@ -655,7 +655,7 @@ public class CardFactory_Planeswalkers {
             return card;
         }
         // *************** END ************ END **************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Tezzeret the Seeker")) {
             final int[] turn = new int[1];

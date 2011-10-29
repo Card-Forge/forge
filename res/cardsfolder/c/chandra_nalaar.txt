@@ -3,6 +3,10 @@ ManaCost:3 R R
 Types:Planeswalker Chandra
 Text:no text
 Loyalty:6
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | Planeswalker$ True | SpellDescription$ CARDNAME deals 1 damage to target player.
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ ChosenX | Planeswalker$ True | SpellDescription$ CARDNAME deals X damage to target creature.
+A:AB$ DamageAll | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 10 | ValidCards$ Creature | ValidPlayers$ Targeted | NumDmg$ 10 | Planeswalker$ True | Ultimate$ True | ValidDescription$ target player and each creature he or she controls. | SpellDescription$ CARDNAME deals 10 damage to target player and each creature he or she controls.
+SVar:X:XChoice
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/127.jpg
