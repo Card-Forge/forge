@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 K:Vigilance
-T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ Whenever another creature you control dies, you may transform CARDNAME.
+T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ Whenever another creature you control dies, you may transform CARDNAME.
 SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 AlternateMode:DoubleFaced
