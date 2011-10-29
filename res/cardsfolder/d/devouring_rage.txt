@@ -10,4 +10,5 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_rage.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/164.jpg
 End
