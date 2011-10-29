@@ -5,7 +5,7 @@ Text:no text
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Soldier | TokenColors$ White | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | Planeswalker$ True | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | Planeswalker$ True | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Name$ Elspeth, Knight-Errant emblem | StaticAbilities$ STIndestructible | Keywords$ Indestructible | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Name$ Elspeth, Knight-Errant emblem | StaticAbilities$ STIndestructible | Keywords$ Indestructible | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
 SVar:STIndestructible:Mode$ Continuous | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible
 SVar:Indestructible:Artifacts, creatures, enchantments, and lands you control are indestructible.
 SVar:Rarity:Mythic
