@@ -1297,6 +1297,7 @@ public class CardFactory_Planeswalkers {
             return card;
         } // *************** END ************ END **************************
 
+        /*
         // *************** START *********** START **************************
         else if (cardName.equals("Koth of the Hammer")) {
             // computer only plays ability 1 and 3, put 1/1 Soldier in play and
@@ -1529,6 +1530,7 @@ public class CardFactory_Planeswalkers {
             return card;
         }
         // *************** END ************ END **************************
+        */
 
         return card;
     }
