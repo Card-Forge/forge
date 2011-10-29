@@ -220,7 +220,7 @@ public final class GameActionUtil {
                 } else {
                     activateRipple = true;
                 }
-                if (activateRipple == true) {
+                if (activateRipple) {
                     final Ability ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
@@ -744,7 +744,8 @@ public final class GameActionUtil {
                     && a.get(i)
                             .toString()
                             .startsWith(
-                                    "Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
+                                    "Whenever a creature dealt damage by CARDNAME "
+                            + "this turn is put into a graveyard, put")) {
                 final Card thisCard = c;
                 final String kw = a.get(i).toString();
                 Ability ability2 = new Ability(c, "0") {
@@ -1165,7 +1166,8 @@ public final class GameActionUtil {
                         "Creature", "Elemental" }, 2, 2, new String[] { "Trample" });
 
                 for (Card c : cl) {
-                    c.setText("Whenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.");
+                    c.setText("Whenever Spawnwrithe deals combat damage to a player, "
+                + "put a token that's a copy of Spawnwrithe onto the battlefield.");
                     c.setCopiedToken(true);
                 }
             }
@@ -1202,7 +1204,8 @@ public final class GameActionUtil {
             emblem = emblem.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
                     return c.isEmblem()
-                            && c.hasKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+                            && c.hasKeyword("Artifacts, creatures, enchantments, "
+                    + "and lands you control are indestructible.");
                 }
             });
 
@@ -1580,8 +1583,8 @@ public final class GameActionUtil {
     private static Command Alpha_Status = new Command() {
         private static final long serialVersionUID = -3213793711304934358L;
 
-        CardList previouslyPumped = new CardList();
-        ArrayList<Integer> previouslyPumpedValue = new ArrayList<Integer>();
+        private CardList previouslyPumped = new CardList();
+        private ArrayList<Integer> previouslyPumpedValue = new ArrayList<Integer>();
 
         @Override
         public void execute() {
@@ -1629,7 +1632,7 @@ public final class GameActionUtil {
     };
 
     /** stores the Command. */
-    public static Command Umbra_Stalker = new Command() {
+    private static Command umbraStalker = new Command() {
         private static final long serialVersionUID = -3500747003228938898L;
 
         public void execute() {
@@ -1646,7 +1649,7 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>Ajani_Avatar_Token</code>. */
-    public static Command Ajani_Avatar_Token = new Command() {
+    private static Command ajaniAvatarToken = new Command() {
         private static final long serialVersionUID = 3027329837165436727L;
 
         public void execute() {
@@ -1667,7 +1670,7 @@ public final class GameActionUtil {
     }; // Ajani Avatar
 
     /** Constant <code>Old_Man_of_the_Sea</code>. */
-    public static Command Old_Man_of_the_Sea = new Command() {
+    private static Command oldManOfTheSea = new Command() {
         private static final long serialVersionUID = 8076177362922156784L;
 
         public void execute() {
@@ -1686,7 +1689,7 @@ public final class GameActionUtil {
     }; // Old Man of the Sea
 
     /** Constant <code>Homarid</code>. */
-    public static Command Homarid = new Command() {
+    private static Command homarid = new Command() {
         private static final long serialVersionUID = 7156319758035295773L;
 
         public void execute() {
@@ -1702,7 +1705,7 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>Liu_Bei</code>. */
-    public static Command Liu_Bei = new Command() {
+    private static Command liuBei = new Command() {
 
         private static final long serialVersionUID = 4235093010715735727L;
 
@@ -1748,7 +1751,8 @@ public final class GameActionUtil {
             list = list.filter(new CardListFilter() {
                 public boolean addCard(final Card c) {
                     return c.getName().equals("Wolf")
-                            && c.hasKeyword("This creature gets +1/+1 for each card named Sound the Call in each graveyard.");
+                            && c.hasKeyword("This creature gets +1/+1 for each card "
+                    + "named Sound the Call in each graveyard.");
                 }
             });
 
@@ -1768,7 +1772,7 @@ public final class GameActionUtil {
     }; // Sound_the_Call_Wolf
 
     /** Constant <code>Tarmogoyf</code>. */
-    public static Command Tarmogoyf = new Command() {
+    private static Command tarmogoyf = new Command() {
         private static final long serialVersionUID = 5895665460018262987L;
 
         public void execute() {
@@ -1868,7 +1872,8 @@ public final class GameActionUtil {
 
                 for (int i = 0; i < creature.size(); i++) {
                     c = creature.get(i);
-                    if (((c.getAbilityText().trim().equals("") || c.isFaceDown()) && c.getUnhiddenKeyword().size() == 0)) {
+                    if (((c.getAbilityText().trim().equals("")
+                            || c.isFaceDown()) && c.getUnhiddenKeyword().size() == 0)) {
                         c.addSemiPermanentAttackBoost(2);
                         c.addSemiPermanentDefenseBoost(2);
 
@@ -1914,22 +1919,22 @@ public final class GameActionUtil {
     static {
         // Please add cards in alphabetical order so they are easier to find
 
-        commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
+        commands.put("Ajani_Avatar_Token", ajaniAvatarToken);
         commands.put("Alpha_Status", Alpha_Status);
         commands.put("Coat_of_Arms", Coat_of_Arms);
         commands.put("Elspeth_Emblem", Elspeth_Emblem);
-        commands.put("Homarid", Homarid);
+        commands.put("Homarid", homarid);
 
-        commands.put("Liu_Bei", Liu_Bei);
+        commands.put("Liu_Bei", liuBei);
 
         commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 
-        commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
+        commands.put("Old_Man_of_the_Sea", oldManOfTheSea);
 
         commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-        commands.put("Tarmogoyf", Tarmogoyf);
+        commands.put("Tarmogoyf", tarmogoyf);
 
-        commands.put("Umbra_Stalker", Umbra_Stalker);
+        commands.put("Umbra_Stalker", umbraStalker);
 
         // /The commands above are in alphabetical order by cardname.
     }

@@ -6426,7 +6426,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
-            if (!equippedBy.contains(source) && !enchantedBy.contains(source)) {
+            if (!equippedBy.contains(source) && !getEnchantedBy().contains(source)) {
                 return false;
             }
         } else if (property.startsWith("Attached")) {
@@ -6434,11 +6434,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
-            if (!enchantedBy.contains(source)) {
+            if (!getEnchantedBy().contains(source)) {
                 return false;
             }
         } else if (property.startsWith("NotEnchantedBy")) {
-            if (enchantedBy.contains(source)) {
+            if (getEnchantedBy().contains(source)) {
                 return false;
             }
         } else if (property.startsWith("Enchanted")) {

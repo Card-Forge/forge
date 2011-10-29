@@ -344,10 +344,10 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // getCards(false) to get Phased Out cards
         Card[] c;
         if (!filter) {
-            c = new Card[cards.size()];
-            cards.toArray(c);
+            c = new Card[getCardList().size()];
+            getCardList().toArray(c);
         } else {
-            Iterator<Card> itr = cards.iterator();
+            Iterator<Card> itr = getCardList().iterator();
             ArrayList<Card> list = new ArrayList<Card>();
             while (itr.hasNext()) {
                 Card crd = itr.next();

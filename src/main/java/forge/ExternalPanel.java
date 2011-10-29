@@ -56,7 +56,8 @@ public class ExternalPanel extends JPanel {
      */
     public ExternalPanel(final Component child, final String side) {
         super(new BorderLayout());
-        add(this.child = child);
+        this.child = child;
+        add(this.child);
         JButton b = new JButton();
         b.setPreferredSize(new Dimension(6, 6));
         b.setToolTipText("Click to move component into an extra Window");

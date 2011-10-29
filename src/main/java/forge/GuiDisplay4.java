@@ -110,22 +110,22 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private GuiInput inputControl;
 
     /** The stat font. */
-    Font statFont = new Font("Dialog", Font.PLAIN, 12);
+    private Font statFont = new Font("Dialog", Font.PLAIN, 12);
 
     /** The life font. */
-    Font lifeFont = new Font("Dialog", Font.PLAIN, 40);
+    private Font lifeFont = new Font("Dialog", Font.PLAIN, 40);
     // Font checkboxFont = new Font("Dialog", Font.PLAIN, 9);
 
     /** Constant <code>greenColor</code>. */
-    public static Color greenColor = new Color(0, 164, 0);
+    private static Color greenColor = new Color(0, 164, 0);
 
-    private Action HUMAN_GRAVEYARD_ACTION;
-    private Action HUMAN_REMOVED_ACTION;
-    private Action HUMAN_FLASHBACK_ACTION;
-    private Action COMPUTER_GRAVEYARD_ACTION;
-    private Action COMPUTER_REMOVED_ACTION;
-    private Action CONCEDE_ACTION;
-    private Action HUMAN_DECKLIST_ACTION;
+    private Action humanGraveyardAction;
+    private Action humanRemovedACtion;
+    private Action humanFlashbackAction;
+    private Action computerGraveyardAction;
+    private Action computerRemovedAction;
+    private Action concedeAction;
+    private Action humanDecklistAction;
     // public Card cCardHQ;
 
     // private CardList multiBlockers = new CardList();
@@ -177,9 +177,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * </p>
      */
     private void setupActions() {
-        HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_GRAVEYARD);
-        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile), HUMAN_REMOVED);
-        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_FLASHBACK) {
+        humanGraveyardAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_GRAVEYARD);
+        humanRemovedACtion = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile), HUMAN_REMOVED);
+        humanFlashbackAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_FLASHBACK) {
 
             private static final long serialVersionUID = 8120331222693706164L;
 
@@ -194,12 +194,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 AllZone.getGameAction().playCard(c);
             }
         };
-        COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Graveyard),
+        computerGraveyardAction = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Graveyard),
                 COMPUTER_GRAVEYARD);
-        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Exile), COMPUTER_REMOVED);
-        CONCEDE_ACTION = new ConcedeAction();
+        computerRemovedAction = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Exile), COMPUTER_REMOVED);
+        concedeAction = new ConcedeAction();
 
-        HUMAN_DECKLIST_ACTION = new DeckListAction(HUMAN_DECKLIST);
+        humanDecklistAction = new DeckListAction(HUMAN_DECKLIST);
     }
 
     /**
@@ -212,9 +212,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         triggerMenu = new TriggerReactionMenu();
 
         // Game Menu Creation
-        Object[] obj = { HUMAN_DECKLIST_ACTION, HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION,
-                COMPUTER_GRAVEYARD_ACTION, COMPUTER_REMOVED_ACTION, new JSeparator(), playsoundCheckboxForMenu,
-                new JSeparator(), ErrorViewer.ALL_THREADS_ACTION, CONCEDE_ACTION };
+        Object[] obj = { humanDecklistAction, humanGraveyardAction, humanRemovedACtion, humanFlashbackAction,
+                computerGraveyardAction, computerRemovedAction, new JSeparator(), playsoundCheckboxForMenu,
+                new JSeparator(), ErrorViewer.ALL_THREADS_ACTION, concedeAction };
 
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
         for (Object o : obj) {
@@ -254,7 +254,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), COMPUTER_HAND.BASE);
             Action viewAILibrary = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Library),
                     COMPUTER_LIBRARY.BASE);
-            Action viewHumanLibrary = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HUMAN_LIBRARY.BASE);
+            Action viewHumanLibrary
+            = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HUMAN_LIBRARY.BASE);
             ForgeAction generateMana = new ForgeAction(MANAGEN) {
                 private static final long serialVersionUID = 7171104690016706405L;
 
@@ -1189,8 +1190,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             oppHandLabel.setFont(statFont);
         }
 
-        JButton oppGraveButton = new JButton(COMPUTER_GRAVEYARD_ACTION);
-        oppGraveButton.setText((String) COMPUTER_GRAVEYARD_ACTION.getValue("buttonText"));
+        JButton oppGraveButton = new JButton(computerGraveyardAction);
+        oppGraveButton.setText((String) computerGraveyardAction.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
@@ -1200,8 +1201,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(oppGraveButton, BorderLayout.EAST);
 
-        JButton oppRemovedButton = new JButton(COMPUTER_REMOVED_ACTION);
-        oppRemovedButton.setText((String) COMPUTER_REMOVED_ACTION.getValue("buttonText"));
+        JButton oppRemovedButton = new JButton(computerRemovedAction);
+        oppRemovedButton.setText((String) computerRemovedAction.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
@@ -1290,16 +1291,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         // JLabel playerGraveLabel = new JLabel("Grave:",
         // SwingConstants.TRAILING);
-        JButton playerGraveButton = new JButton(HUMAN_GRAVEYARD_ACTION);
-        playerGraveButton.setText((String) HUMAN_GRAVEYARD_ACTION.getValue("buttonText"));
+        JButton playerGraveButton = new JButton(humanGraveyardAction);
+        playerGraveButton.setText((String) humanGraveyardAction.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
             playerGraveButton.setFont(statFont);
         }
 
-        JButton playerFlashBackButton = new JButton(HUMAN_FLASHBACK_ACTION);
-        playerFlashBackButton.setText((String) HUMAN_FLASHBACK_ACTION.getValue("buttonText"));
+        JButton playerFlashBackButton = new JButton(humanFlashbackAction);
+        playerFlashBackButton.setText((String) humanFlashbackAction.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
@@ -1312,8 +1313,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         JPanel playerFBPanel = new JPanel(new BorderLayout());
         playerFBPanel.add(playerFlashBackButton, BorderLayout.EAST);
 
-        JButton playerRemovedButton = new JButton(HUMAN_REMOVED_ACTION);
-        playerRemovedButton.setText((String) HUMAN_REMOVED_ACTION.getValue("buttonText"));
+        JButton playerRemovedButton = new JButton(humanRemovedACtion);
+        playerRemovedButton.setText((String) humanRemovedACtion.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
@@ -1510,42 +1511,42 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     }
 
     /** Constant <code>playsoundCheckboxForMenu</code>. */
-    public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
+    private static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
 
     // Phases
     /** Constant <code>cbAIUpkeep</code>. */
-    public static JCheckBoxMenuItem cbAIUpkeep = new JCheckBoxMenuItem("Upkeep", true);
+    private static JCheckBoxMenuItem cbAIUpkeep = new JCheckBoxMenuItem("Upkeep", true);
 
     /** Constant <code>cbAIDraw</code>. */
-    public static JCheckBoxMenuItem cbAIDraw = new JCheckBoxMenuItem("Draw", true);
+    private static JCheckBoxMenuItem cbAIDraw = new JCheckBoxMenuItem("Draw", true);
 
     /** Constant <code>cbAIEndOfTurn</code>. */
-    public static JCheckBoxMenuItem cbAIEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
+    private static JCheckBoxMenuItem cbAIEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
 
     /** Constant <code>cbAIBeginCombat</code>. */
-    public static JCheckBoxMenuItem cbAIBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
+    private static JCheckBoxMenuItem cbAIBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
 
     /** Constant <code>cbAIEndCombat</code>. */
-    public static JCheckBoxMenuItem cbAIEndCombat = new JCheckBoxMenuItem("End Combat", true);
+    private static JCheckBoxMenuItem cbAIEndCombat = new JCheckBoxMenuItem("End Combat", true);
 
     /** Constant <code>cbHumanUpkeep</code>. */
-    public static JCheckBoxMenuItem cbHumanUpkeep = new JCheckBoxMenuItem("Upkeep", true);
+    private static JCheckBoxMenuItem cbHumanUpkeep = new JCheckBoxMenuItem("Upkeep", true);
     /** Constant <code>cbHumanDraw</code>. */
-    public static JCheckBoxMenuItem cbHumanDraw = new JCheckBoxMenuItem("Draw", true);
+    private static JCheckBoxMenuItem cbHumanDraw = new JCheckBoxMenuItem("Draw", true);
     /** Constant <code>cbHumanEndOfTurn</code>. */
-    public static JCheckBoxMenuItem cbHumanEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
+    private static JCheckBoxMenuItem cbHumanEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
     /** Constant <code>cbHumanBeginCombat</code>. */
-    public static JCheckBoxMenuItem cbHumanBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
+    private static JCheckBoxMenuItem cbHumanBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
 
     /** Constant <code>cbHumanEndCombat</code>. */
-    public static JCheckBoxMenuItem cbHumanEndCombat = new JCheckBoxMenuItem("End Combat", true);
+    private static JCheckBoxMenuItem cbHumanEndCombat = new JCheckBoxMenuItem("End Combat", true);
 
     // ********** End of Phase stuff in Display ******************
 
     // ****** Developer Mode *******
 
     /** Constant <code>canLoseByDecking</code>. */
-    public static JCheckBoxMenuItem canLoseByDecking = new JCheckBoxMenuItem("Lose by Decking", true);
+    private static JCheckBoxMenuItem canLoseByDecking = new JCheckBoxMenuItem("Lose by Decking", true);
 
     // *****************************
 

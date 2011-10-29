@@ -23,11 +23,11 @@ import forge.gui.game.CardPanel;
  */
 
 /**
- * very hacky
+ * very hacky.
  * 
  */
 class Gui_MultipleBlockers4 extends JFrame {
-    /** Constant <code>serialVersionUID=7622818310877381045L</code> */
+    /** Constant <code>serialVersionUID=7622818310877381045L</code>. */
     private static final long serialVersionUID = 7622818310877381045L;
 
     private int assignDamage;
@@ -57,10 +57,11 @@ class Gui_MultipleBlockers4 extends JFrame {
      * @param display
      *            a {@link forge.CardContainer} object.
      */
-    Gui_MultipleBlockers4(final Card attacker, final CardList creatureList, final int damage, final CardContainer display) {
+    Gui_MultipleBlockers4(final Card attacker, final CardList creatureList,
+            final int damage, final CardContainer display) {
         this();
         assignDamage = damage;
-        updateDamageLabel();// update user message about assigning damage
+        updateDamageLabel(); // update user message about assigning damage
         guiDisplay = display;
         att = attacker;
         blockers = creatureList;
@@ -120,13 +121,13 @@ class Gui_MultipleBlockers4 extends JFrame {
         creaturePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                creaturePanel_mousePressed(e);
+                creaturePanelMousePressed(e);
             }
         });
         creaturePanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent e) {
-                creaturePanel_mouseMoved(e);
+                creaturePanelMouseMoved(e);
             }
         });
         mainPanel.add(jPanel3, null);
@@ -144,7 +145,7 @@ class Gui_MultipleBlockers4 extends JFrame {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    void okButton_actionPerformed(final ActionEvent e) {
+    void okButtonActionPerformed(final ActionEvent e) {
         dispose();
     }
 
@@ -156,7 +157,7 @@ class Gui_MultipleBlockers4 extends JFrame {
      * @param e
      *            a {@link java.awt.event.MouseEvent} object.
      */
-    void creaturePanel_mousePressed(final MouseEvent e) {
+    void creaturePanelMousePressed(final MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if (o instanceof CardPanel) {
 
@@ -198,7 +199,7 @@ class Gui_MultipleBlockers4 extends JFrame {
         }
         // reduce damage, show new user message, exit if necessary
 
-    }// creaturePanel_mousePressed()
+    } // creaturePanel_mousePressed()
 
     /**
      * <p>
@@ -217,7 +218,7 @@ class Gui_MultipleBlockers4 extends JFrame {
      * @param e
      *            a {@link java.awt.event.MouseEvent} object.
      */
-    void creaturePanel_mouseMoved(final MouseEvent e) {
+    void creaturePanelMouseMoved(final MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if (o instanceof CardPanel) {
             CardContainer cardPanel = (CardContainer) o;

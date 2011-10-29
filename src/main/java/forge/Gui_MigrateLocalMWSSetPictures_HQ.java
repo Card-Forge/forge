@@ -1,9 +1,5 @@
 package forge;
 
-import static java.lang.Integer.parseInt;
-import static javax.swing.JOptionPane.DEFAULT_OPTION;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
-
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -41,6 +37,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.properties.NewConstants.LANG.Gui_DownloadPictures;
 
 //import java.io.BufferedReader;
 //import java.io.FileReader;
@@ -55,29 +52,29 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel implements Runnable, NewConstants,
-        NewConstants.LANG.Gui_DownloadPictures {
+public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel implements Runnable,
+        NewConstants, NewConstants.LANG.Gui_DownloadPictures {
 
     /** Constant <code>serialVersionUID=-7890794857949935256L</code>. */
     private static final long serialVersionUID = -7890794857949935256L;
 
     /** Constant <code>types</code>. */
-    public static final Proxy.Type[] types = Proxy.Type.values();
+    public static final Proxy.Type[] TYPES = Proxy.Type.values();
 
     // proxy
     private int type;
-    private JTextField addr, port;
+    private final JTextField addr, port;
 
     // progress
-    private mCard[] cards;
+    private final MCard[] cards;
     private int card;
     private boolean cancel;
-    private JProgressBar bar;
+    private final JProgressBar bar;
 
-    private JOptionPane dlg;
-    private JButton close;
+    private final JOptionPane dlg;
+    private final JButton close;
 
-    private long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
     private long lTime = System.currentTimeMillis();
 
@@ -92,23 +89,23 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         int aTime = 0;
         int nz = 10;
 
-        if (tptr > 9) {
-            tptr = 0;
+        if (this.tptr > 9) {
+            this.tptr = 0;
         }
 
-        times[tptr] = System.currentTimeMillis() - lTime;
-        lTime = System.currentTimeMillis();
+        this.times[this.tptr] = System.currentTimeMillis() - this.lTime;
+        this.lTime = System.currentTimeMillis();
 
         int tTime = 0;
         for (int i = 0; i < 10; i++) {
-            tTime += times[i];
-            if (times[i] == 0) {
+            tTime += this.times[i];
+            if (this.times[i] == 0) {
                 nz--;
             }
         }
         aTime = tTime / nz;
 
-        tptr++;
+        this.tptr++;
 
         return aTime;
     }
@@ -120,23 +117,24 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * 
      * @param c
      *            an array of
-     *            {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.mCard} objects.
+     *            {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.MCard} objects.
      */
-    private Gui_MigrateLocalMWSSetPictures_HQ(final mCard[] c) {
+    private Gui_MigrateLocalMWSSetPictures_HQ(final MCard[] c) {
         this.cards = c;
-        addr = new JTextField(ForgeProps.getLocalized(PROXY_ADDRESS));
-        port = new JTextField(ForgeProps.getLocalized(PROXY_PORT));
-        bar = new JProgressBar(this);
+        this.addr = new JTextField(ForgeProps.getLocalized(Gui_DownloadPictures.PROXY_ADDRESS));
+        this.port = new JTextField(ForgeProps.getLocalized(Gui_DownloadPictures.PROXY_PORT));
+        this.bar = new JProgressBar(this);
 
-        JPanel p0 = new JPanel();
+        final JPanel p0 = new JPanel();
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
 
         // Proxy Choice
-        ButtonGroup bg = new ButtonGroup();
-        String[] labels = { ForgeProps.getLocalized(NO_PROXY), ForgeProps.getLocalized(HTTP_PROXY),
-                ForgeProps.getLocalized(SOCKS_PROXY) };
-        for (int i = 0; i < types.length; i++) {
-            JRadioButton rb = new JRadioButton(labels[i]);
+        final ButtonGroup bg = new ButtonGroup();
+        final String[] labels = { ForgeProps.getLocalized(Gui_DownloadPictures.NO_PROXY),
+                ForgeProps.getLocalized(Gui_DownloadPictures.HTTP_PROXY),
+                ForgeProps.getLocalized(Gui_DownloadPictures.SOCKS_PROXY) };
+        for (int i = 0; i < Gui_MigrateLocalMWSSetPictures_HQ.TYPES.length; i++) {
+            final JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
             bg.add(rb);
             p0.add(rb);
@@ -146,8 +144,8 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         }
 
         // Proxy config
-        p0.add(addr);
-        p0.add(port);
+        p0.add(this.addr);
+        p0.add(this.port);
         // JTextField[] tfs = {addr, port};
         // String[] labels = {"Address", "Port"};
         // for(int i = 0; i < labels.length; i++) {
@@ -161,6 +159,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         final JButton b = new JButton("Start copying");
         b.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 new Thread(Gui_MigrateLocalMWSSetPictures_HQ.this).start();
                 b.setEnabled(false);
@@ -171,19 +170,21 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         p0.add(Box.createVerticalStrut(5));
 
         // Progress
-        p0.add(bar);
-        bar.setStringPainted(true);
+        p0.add(this.bar);
+        this.bar.setStringPainted(true);
         // bar.setString(ForgeProps.getLocalized(BAR_BEFORE_START));
-        bar.setString(card + "/" + cards.length);
+        this.bar.setString(this.card + "/" + this.cards.length);
         // bar.setString(String.format(ForgeProps.getLocalized(card ==
         // cards.length? BAR_CLOSE:BAR_WAIT), this.card, cards.length));
-        Dimension d = bar.getPreferredSize();
+        final Dimension d = this.bar.getPreferredSize();
         d.width = 300;
-        bar.setPreferredSize(d);
+        this.bar.setPreferredSize(d);
 
         // JOptionPane
-        Object[] options = { b, close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL)) };
-        dlg = new JOptionPane(p0, DEFAULT_OPTION, PLAIN_MESSAGE, null, options, options[1]);
+        this.close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL));
+        final Object[] options = { b, this.close };
+        this.dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     }
 
     /** {@inheritDoc} */
@@ -195,7 +196,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
     /** {@inheritDoc} */
     @Override
     public int getValue() {
-        return card;
+        return this.card;
     }
 
     /** {@inheritDoc} */
@@ -207,7 +208,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
     /** {@inheritDoc} */
     @Override
     public int getMaximum() {
-        return cards == null ? 0 : cards.length;
+        return this.cards == null ? 0 : this.cards.length;
     }
 
     /**
@@ -221,24 +222,40 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
     private void update(final int card) {
         this.card = card;
 
+        /**
+         * 
+         * TODO: Write javadoc for this type.
+         * 
+         */
         final class Worker implements Runnable {
-            private int card;
+            private final int card;
 
+            /**
+             * 
+             * TODO: Write javadoc for Constructor.
+             * 
+             * @param card
+             *            int
+             */
             Worker(final int card) {
                 this.card = card;
             }
 
+            /**
+             * 
+             */
+            @Override
             public void run() {
-                fireStateChanged();
+                Gui_MigrateLocalMWSSetPictures_HQ.this.fireStateChanged();
 
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
 
-                int a = getAverageTimePerCard();
+                final int a = Gui_MigrateLocalMWSSetPictures_HQ.this.getAverageTimePerCard();
 
-                if (card != cards.length) {
-                    sb.append(card + "/" + cards.length + " - ");
+                if (this.card != Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length) {
+                    sb.append(this.card + "/" + Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length + " - ");
 
-                    long t2Go = (cards.length - card) * a;
+                    long t2Go = (Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length - this.card) * a;
 
                     boolean secOnly = true;
                     if (t2Go > 3600000) {
@@ -257,14 +274,15 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                         sb.append(String.format("0:%02d remaining.", t2Go / 1000));
                     }
                 } else {
-                    sb.append(String.format(ForgeProps.getLocalized(BAR_CLOSE), card, cards.length));
+                    sb.append(String.format(ForgeProps.getLocalized(Gui_DownloadPictures.BAR_CLOSE), this.card,
+                            Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length));
                 }
 
-                bar.setString(sb.toString());
+                Gui_MigrateLocalMWSSetPictures_HQ.this.bar.setString(sb.toString());
                 // bar.setString(String.format(ForgeProps.getLocalized(card ==
                 // cards.length? BAR_CLOSE:BAR_WAIT), card,
                 // cards.length));
-                System.out.println(card + "/" + cards.length + " - " + a);
+                System.out.println(this.card + "/" + Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length + " - " + a);
             }
         }
         EventQueue.invokeLater(new Worker(card));
@@ -280,8 +298,9 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * @return a {@link javax.swing.JDialog} object.
      */
     public JDialog getDlg(final JFrame frame) {
-        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(TITLE));
-        close.addActionListener(new ActionListener() {
+        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(Gui_DownloadPictures.TITLE));
+        this.close.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 dlg.setVisible(false);
             }
@@ -306,23 +325,25 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * run.
      * </p>
      */
+    @Override
     public void run() {
         BufferedInputStream in;
         BufferedOutputStream out;
 
-        File base = ForgeProps.getFile(IMAGE_BASE);
+        File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
 
         // Random r = MyRandom.random;
 
         Proxy p = null;
-        if (type == 0) {
+        if (this.type == 0) {
             p = Proxy.NO_PROXY;
         } else {
             try {
-                p = new Proxy(types[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
-            } catch (Exception ex) {
-                ErrorViewer
-                        .showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(), port.getText());
+                p = new Proxy(Gui_MigrateLocalMWSSetPictures_HQ.TYPES[this.type], new InetSocketAddress(
+                        this.addr.getText(), Integer.parseInt(this.port.getText())));
+            } catch (final Exception ex) {
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), this.addr.getText(),
+                        this.port.getText());
                 // throw new
                 // RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
                 return;
@@ -330,29 +351,29 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         }
 
         if (p != null) {
-            byte[] buf = new byte[1024];
+            final byte[] buf = new byte[1024];
             int len;
             System.out.println("basedir: " + base);
-            for (update(0); card < cards.length && !cancel; update(card + 1)) {
+            for (this.update(0); (this.card < this.cards.length) && !this.cancel; this.update(this.card + 1)) {
                 try {
-                    String url = cards[card].url;
+                    final String url = this.cards[this.card].url;
                     String cName;
-                    if (cards[card].name.substring(0, 3).equals("[T]")) {
-                        base = ForgeProps.getFile(IMAGE_TOKEN);
-                        cName = cards[card].name.substring(3, cards[card].name.length());
+                    if (this.cards[this.card].name.substring(0, 3).equals("[T]")) {
+                        base = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
+                        cName = this.cards[this.card].name.substring(3, this.cards[this.card].name.length());
                     } else {
-                        base = ForgeProps.getFile(IMAGE_BASE);
-                        cName = cards[card].name;
+                        base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+                        cName = this.cards[this.card].name;
                     }
 
-                    File f = new File(base, cName);
+                    final File f = new File(base, cName);
 
                     // test for folder existence
-                    File test = new File(base, cards[card].folder);
+                    final File test = new File(base, this.cards[this.card].folder);
                     if (!test.exists()) {
                         // create folder
                         if (!test.mkdir()) {
-                            System.out.println("Can't create folder" + cards[card].folder);
+                            System.out.println("Can't create folder" + this.cards[this.card].folder);
                         }
                     }
 
@@ -360,15 +381,15 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                         // in = new BufferedInputStream(new
                         // URL(url).openConnection(p).getInputStream());
 
-                        File src = new File(url);
-                        InputStream in2 = new FileInputStream(src);
+                        final File src = new File(url);
+                        final InputStream in2 = new FileInputStream(src);
 
                         in = new BufferedInputStream(in2);
                         out = new BufferedOutputStream(new FileOutputStream(f));
 
                         while ((len = in.read(buf)) != -1) {
                             // user cancelled
-                            if (cancel) {
+                            if (this.cancel) {
                                 in.close();
                                 out.flush();
                                 out.close();
@@ -377,23 +398,23 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                                 f.delete();
 
                                 return;
-                            }// if - cancel
+                            } // if - cancel
 
                             out.write(buf, 0, len);
-                        }// while - read and write file
+                        } // while - read and write file
 
                         in.close();
                         out.flush();
                         out.close();
-                    } catch (MalformedURLException mURLe) {
+                    } catch (final MalformedURLException mURLe) {
                         // System.out.println("Error - possibly missing URL for: "+cards[card].name);
                         // Log.error("LQ Pictures",
                         // "Malformed URL for: "+cards[card].name, mURLe);
                     }
-                } catch (FileNotFoundException fnfe) {
-                    System.out.println("Error - the HQ picture for " + cards[card].name + " could not be found. ["
-                            + cards[card].url + "] - " + fnfe.getMessage());
-                } catch (Exception ex) {
+                } catch (final FileNotFoundException fnfe) {
+                    System.out.println("Error - the HQ picture for " + this.cards[this.card].name
+                            + " could not be found. [" + this.cards[this.card].url + "] - " + fnfe.getMessage());
+                } catch (final Exception ex) {
                     Log.error("HQ Pictures", "Error copying pictures", ex);
                 }
 
@@ -401,13 +422,13 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
 
                 try {
                     Thread.sleep(1);
-                } catch (InterruptedException e) {
+                } catch (final InterruptedException e) {
                     Log.error("HQ Set Pictures", "Sleep Error", e);
                 }
-            }// for
+            } // for
         }
-        close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
-    }// run
+        this.close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
+    } // run
 
     /**
      * <p>
@@ -418,49 +439,49 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      *            a {@link javax.swing.JFrame} object.
      */
     public static void startDownload(final JFrame frame) {
-        final mCard[] card = getNeededCards();
+        final MCard[] card = Gui_MigrateLocalMWSSetPictures_HQ.getNeededCards();
 
         if (card.length == 0) {
-            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(NO_MORE));
+            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(Gui_DownloadPictures.NO_MORE));
             return;
         }
 
-        Gui_MigrateLocalMWSSetPictures_HQ download = new Gui_MigrateLocalMWSSetPictures_HQ(card);
-        JDialog dlg = download.getDlg(frame);
+        final Gui_MigrateLocalMWSSetPictures_HQ download = new Gui_MigrateLocalMWSSetPictures_HQ(card);
+        final JDialog dlg = download.getDlg(frame);
         dlg.setVisible(true);
         dlg.dispose();
         download.setCancel(true);
-    }// startDownload()
+    } // startDownload()
 
     /**
      * <p>
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.mCard}
+     * @return an array of {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.MCard}
      *         objects.
      */
-    private static mCard[] getNeededCards() {
+    private static MCard[] getNeededCards() {
         // read all card names and urls
         // mCard[] cardPlay = readFile(CARD_PICTURES);
         // mCard[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
 
-        ArrayList<mCard> CList = new ArrayList<mCard>();
+        final ArrayList<MCard> cList = new ArrayList<MCard>();
 
         // File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-        String URLBase = "C:\\MTGForge\\HQPICS\\";
+        final String urlBase = "C:\\MTGForge\\HQPICS\\";
         String imgFN = "";
 
-        for (Card c : AllZone.getCardFactory()) {
+        for (final Card c : AllZone.getCardFactory()) {
             // String url = c.getSVar("Picture");
             // String[] URLs = url.split("\\\\");
 
-            ArrayList<SetInfo> cSetInfo = c.getSets();
+            final ArrayList<SetInfo> cSetInfo = c.getSets();
             if (cSetInfo.size() > 0) {
                 for (int j = 0; j < cSetInfo.size(); j++) {
                     c.setCurSetCode(cSetInfo.get(j).Code);
-                    String SC3 = c.getCurSetCode();
-                    String SC2 = SetUtils.getCode2ByCode(c.getCurSetCode());
+                    final String setCode3 = c.getCurSetCode();
+                    final String setCode2 = SetUtils.getCode2ByCode(c.getCurSetCode());
 
                     int n = 0;
                     if (cSetInfo.get(j).PicCount > 0) {
@@ -471,13 +492,13 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
 
                             imgFN = CardUtil.buildFilename(c);
 
-                            if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2))) {
+                            if (imgFN.equals("none") || (!imgFN.contains(setCode3) && !imgFN.contains(setCode2))) {
                                 imgFN += k + ".jpg";
-                                String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + k + ".full.jpg";
+                                final String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + k + ".full.jpg";
                                 // CList.add(new mCard(SC3 + "/" + fn, URLBase +
                                 // SC2 + "/" + Base64Coder.encodeString(fn,
                                 // true), SC3));
-                                CList.add(new mCard(SC3 + "\\" + imgFN, URLBase + SC2 + "\\" + fn, SC3));
+                                cList.add(new MCard(setCode3 + "\\" + imgFN, urlBase + setCode2 + "\\" + fn, setCode3));
                             }
                         }
                     } else {
@@ -485,17 +506,18 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
 
                         imgFN = CardUtil.buildFilename(c);
 
-                        if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2))) {
+                        if (imgFN.equals("none") || (!imgFN.contains(setCode3) && !imgFN.contains(setCode2))) {
                             // imgFN += ".jpg";
 
-                            String newFileName = GuiDisplayUtil.cleanString(c.getName()) + ".jpg";
+                            final String newFileName = GuiDisplayUtil.cleanString(c.getName()) + ".jpg";
 
-                            String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
+                            final String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
                             // fn = fn.replace(" ", "%20%");
                             // CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2
                             // + "/" + Base64Coder.encodeString(fn, true),
                             // SC3));
-                            CList.add(new mCard(SC3 + "\\" + newFileName, URLBase + SC2 + "\\" + fn, SC3));
+                            cList.add(new MCard(setCode3 + "\\"
+                            + newFileName, urlBase + setCode2 + "\\" + fn, setCode3));
 
                         }
 
@@ -517,14 +539,14 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
          * if(!file.exists()) CList.add(cardTokenLQ[i]); }
          */
         // return all card names and urls that are needed
-        mCard[] out = new mCard[CList.size()];
-        CList.toArray(out);
+        final MCard[] out = new MCard[cList.size()];
+        cList.toArray(out);
 
-        for (int i = 0; i < out.length; i++) {
-            System.out.println(out[i].name + " " + out[i].url);
+        for (final MCard element : out) {
+            System.out.println(element.name + " " + element.url);
         }
         return out;
-    }// getNeededCards()
+    } // getNeededCards()
 
     /*
      * private static mCard[] readFile(String ABC) { try { FileReader zrc = new
@@ -547,30 +569,31 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      */
 
     private class ProxyHandler implements ChangeListener {
-        private int type;
+        private final int type;
 
         public ProxyHandler(final int type) {
             this.type = type;
         }
 
+        @Override
         public void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
-                Gui_MigrateLocalMWSSetPictures_HQ.this.type = type;
-                addr.setEnabled(type != 0);
-                port.setEnabled(type != 0);
+                Gui_MigrateLocalMWSSetPictures_HQ.this.type = this.type;
+                Gui_MigrateLocalMWSSetPictures_HQ.this.addr.setEnabled(this.type != 0);
+                Gui_MigrateLocalMWSSetPictures_HQ.this.port.setEnabled(this.type != 0);
             }
         }
     }
 
-    private static class mCard {
-        public final String name;
-        public final String url;
-        public final String folder;
+    private static class MCard {
+        private final String name;
+        private final String url;
+        private final String folder;
 
-        mCard(final String cardName, final String cardURL, final String cardFolder) {
-            name = cardName;
-            url = cardURL;
-            folder = cardFolder;
+        MCard(final String cardName, final String cardURL, final String cardFolder) {
+            this.name = cardName;
+            this.url = cardURL;
+            this.folder = cardFolder;
         }
-    }// mCard
+    } // mCard
 }

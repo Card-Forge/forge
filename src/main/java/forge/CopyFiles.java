@@ -25,68 +25,68 @@ import forge.properties.NewConstants;
  */
 public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstants {
 
-    private List<File> FileList;
+    private final List<File> fileList;
 
     /** The j lb. */
-    JLabel jLb;
+    private final JLabel jLabel;
 
     /** The j b. */
-    JProgressBar jB;
+    private JProgressBar jProgressBar;
 
     /** The j check. */
-    JCheckBox jCheck;
+    private final JCheckBox jCheck;
 
     /** The j source. */
-    JButton jSource;
+    private final JButton jSource;
 
     /** The count. */
-    int count;
+    private int count;
 
     /**
      * <p>
      * Constructor for CopyFiles.
      * </p>
      * 
-     * @param FileList
+     * @param fileList
      *            a {@link java.util.List} object.
      * @param jLabelTotalFiles
      *            a {@link javax.swing.JLabel} object.
-     * @param Jbar
+     * @param jProgressBar
      *            a {@link javax.swing.JProgressBar} object.
      * @param jCheckBox
      *            a {@link javax.swing.JCheckBox} object.
      * @param jButtonSource
      *            a {@link javax.swing.JButton} object.
      */
-    public CopyFiles(final List<File> FileList, final JLabel jLabelTotalFiles, final JProgressBar Jbar, final JCheckBox jCheckBox,
-            final JButton jButtonSource) {
-        this.FileList = FileList;
-        jLb = jLabelTotalFiles;
-        jB = Jbar;
-        jCheck = jCheckBox;
-        jSource = jButtonSource;
+    public CopyFiles(final List<File> fileList, final JLabel jLabelTotalFiles, JProgressBar jProgressBar,
+            final JCheckBox jCheckBox, final JButton jButtonSource) {
+        this.fileList = fileList;
+        this.jLabel = jLabelTotalFiles;
+        this.jProgressBar = jProgressBar;
+        this.jCheck = jCheckBox;
+        this.jSource = jButtonSource;
     }
 
     /** {@inheritDoc} */
     @Override
     protected final Void doInBackground() {
-        for (int i = 0; i < this.FileList.size(); i++) {
-            publish();
+        for (int i = 0; i < this.fileList.size(); i++) {
+            this.publish();
             String cName, name, source;
-            name = this.FileList.get(i).getName();
-            source = this.FileList.get(i).getAbsolutePath();
+            name = this.fileList.get(i).getName();
+            source = this.fileList.get(i).getAbsolutePath();
             cName = name.substring(0, name.length() - 8);
             cName = GuiDisplayUtil.cleanString(cName) + ".jpg";
-            File sourceFile = new File(source);
-            File base = ForgeProps.getFile(IMAGE_BASE);
-            File reciever = new File(base, cName);
+            final File sourceFile = new File(source);
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+            final File reciever = new File(base, cName);
             reciever.delete();
 
             try {
                 reciever.createNewFile();
-                FileOutputStream fos = new FileOutputStream(reciever);
-                FileInputStream fis = new FileInputStream(sourceFile);
-                byte[] buff = new byte[32 * 1024];
+                final FileOutputStream fos = new FileOutputStream(reciever);
+                final FileInputStream fis = new FileInputStream(sourceFile);
+                final byte[] buff = new byte[32 * 1024];
                 int length;
                 while (fis.available() > 0) {
                     length = fis.read(buff);
@@ -97,10 +97,10 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
                 fos.flush();
                 fis.close();
                 fos.close();
-                count = i * 100 / this.FileList.size() + 1;
-                setProgress(count);
+                this.count = ((i * 100) / this.fileList.size()) + 1;
+                this.setProgress(this.count);
 
-            } catch (IOException e1) {
+            } catch (final IOException e1) {
                 e1.printStackTrace();
             }
 
@@ -112,10 +112,10 @@ public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstant
     /** {@inheritDoc} */
     @Override
     protected final void done() {
-        jLb.setText("All files were copied successfully.");
-        jB.setIndeterminate(false);
-        jCheck.setEnabled(true);
-        jSource.setEnabled(true);
+        this.jLabel.setText("All files were copied successfully.");
+        this.jProgressBar.setIndeterminate(false);
+        this.jCheck.setEnabled(true);
+        this.jSource.setEnabled(true);
 
     }
 

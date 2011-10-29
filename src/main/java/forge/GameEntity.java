@@ -17,7 +17,7 @@ public abstract class GameEntity extends MyObservable {
     private int preventNextDamage = 0;
 
     /** The enchanted by. */
-    protected ArrayList<Card> enchantedBy = new ArrayList<Card>();
+    private ArrayList<Card> enchantedBy = new ArrayList<Card>();
 
     /**
      * <p>
@@ -288,7 +288,7 @@ public abstract class GameEntity extends MyObservable {
     /**
      * Checks if is valid.
      * 
-     * @param Restrictions
+     * @param restrictions
      *            the restrictions
      * @param sourceController
      *            the source controller
@@ -296,20 +296,21 @@ public abstract class GameEntity extends MyObservable {
      *            the source
      * @return true, if is valid
      */
-    public boolean isValid(final String Restrictions[], final Player sourceController, final Card source) {
+    public boolean isValid(final String[] restrictions, final Player sourceController, final Card source) {
 
-        for (int i = 0; i < Restrictions.length; i++) {
-            if (isValid(Restrictions[i], sourceController, source))
+        for (int i = 0; i < restrictions.length; i++) {
+            if (isValid(restrictions[i], sourceController, source)) {
                 return true;
+            }
         }
         return false;
 
-    }// isValid
+    } // isValid
 
     /**
      * Checks if is valid.
      * 
-     * @param Restriction
+     * @param restriction
      *            the restriction
      * @param sourceController
      *            the source controller
@@ -317,14 +318,14 @@ public abstract class GameEntity extends MyObservable {
      *            the source
      * @return true, if is valid
      */
-    public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
+    public boolean isValid(final String restriction, final Player sourceController, final Card source) {
         return false;
     }
 
     /**
      * Checks for property.
      * 
-     * @param Property
+     * @param property
      *            the property
      * @param sourceController
      *            the source controller
@@ -332,7 +333,7 @@ public abstract class GameEntity extends MyObservable {
      *            the source
      * @return true, if successful
      */
-    public boolean hasProperty(String Property, final Player sourceController, final Card source) {
+    public boolean hasProperty(String property, final Player sourceController, final Card source) {
         return false;
     }
 

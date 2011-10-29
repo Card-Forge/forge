@@ -36,7 +36,7 @@ import forge.properties.NewConstants;
  * @version $Id$
  */
 public class GUI_ImportPicture extends JDialog implements NewConstants {
-    /** Constant <code>serialVersionUID=-4191539152208389089L</code> */
+    /** Constant <code>serialVersionUID=-4191539152208389089L</code>. */
     private static final long serialVersionUID = -4191539152208389089L;
     private JPanel jContentPane = null;
     private JLabel jLabel = null;
@@ -48,12 +48,12 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     private JButton jButtonStart = null;
 
     /** The frame. */
-    GUI_ImportPicture frame;
+    private GUI_ImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
 
     /** The j label total files. */
-    public JLabel jLabelTotalFiles = null;
+    private JLabel jLabelTotalFiles = null;
     private List<File> listFiles;
     private ArrayList<File> fileCopyList;
     private long freeSpaceM;
@@ -76,7 +76,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes this
+     * This method initializes this.
      */
     private void initialize() {
         Dimension screen = getToolkit().getScreenSize();
@@ -95,7 +95,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jContentPane
+     * This method initializes jContentPane.
      * 
      * @return javax.swing.JPanel
      */
@@ -146,7 +146,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jButtonSource
+     * This method initializes jButtonSource.
      * 
      * @return javax.swing.JButton
      */
@@ -230,7 +230,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jPanel
+     * This method initializes jPanel.
      * 
      * @return javax.swing.JPanel
      */
@@ -251,7 +251,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jCheckBox
+     * This method initializes jCheckBox.
      * 
      * @return javax.swing.JCheckBox
      */
@@ -316,7 +316,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jButtonStart
+     * This method initializes jButtonStart.
      * 
      * @return javax.swing.JButton
      */
@@ -370,7 +370,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     }
 
     /**
-     * This method initializes jProgressBar
+     * This method initializes jProgressBar.
      * 
      * @return javax.swing.JProgressBar
      */

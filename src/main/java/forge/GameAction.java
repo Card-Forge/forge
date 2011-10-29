@@ -183,8 +183,7 @@ public class GameAction {
         // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (!zone.is(Constant.Zone.Battlefield)
                 && !(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
-                        .is(Constant.Zone.Library)))
-        {
+                        .is(Constant.Zone.Library))) {
             copied.clearCounters();
         }
 
@@ -211,8 +210,7 @@ public class GameAction {
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
-                && !zone.is(Constant.Zone.Exile))
-        {
+                && !zone.is(Constant.Zone.Exile)) {
             PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
             c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
             + "exile it instead of putting it anywhere else.");
@@ -351,8 +349,7 @@ public class GameAction {
 
         for (Card card : opponentsBoard) {
             if (card.hasKeyword("If a card would be put into an opponent's "
-        + "graveyard from anywhere, exile it instead."))
-            {
+        + "graveyard from anywhere, exile it instead.")) {
                 return moveTo(exile, c);
             }
         }

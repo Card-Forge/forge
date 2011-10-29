@@ -148,7 +148,8 @@ public class EndOfTurn implements java.io.Serializable {
                     AllZone.getStack().addSimultaneousStackEntry(sac);
 
                 } else {
-                    c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+                    c.removeExtrinsicKeyword("At the beginning of the next end step, "
+                + "destroy CARDNAME if it attacked this turn.");
                 }
             }
             if (c.hasKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
@@ -162,7 +163,8 @@ public class EndOfTurn implements java.io.Serializable {
                             // new CardList(vale), vale.getController(),
                             // vale.getController().getOpponent());
 
-                            vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+                            vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME "
+                            + "at the beginning of the next end step.");
                         }
                     }
                 };

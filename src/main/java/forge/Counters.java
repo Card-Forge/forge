@@ -301,7 +301,7 @@ public enum Counters {
      * </p>
      */
     private Counters() {
-        this.name = name().substring(0, 1).toUpperCase() + name().substring(1).toLowerCase();
+        this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
     }
 
     /**
@@ -324,7 +324,7 @@ public enum Counters {
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -337,7 +337,7 @@ public enum Counters {
      * @return a {@link forge.Counters} object.
      */
     public static Counters getType(final String name) {
-        String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
+        final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
         return Enum.valueOf(Counters.class, replacedName);
     }
 }

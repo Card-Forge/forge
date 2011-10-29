@@ -46,7 +46,7 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
 
         String base = ForgeProps.getFile(IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
-            if(c.getName().equals("Gatstaf Shepherd")) {
+            if (c.getName().equals("Gatstaf Shepherd")) {
                 System.out.println("Heyo!");
             }
             cList.addAll(createDLObjects(c, base));
@@ -89,14 +89,14 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
         ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
         String url = c.getSVar("Picture");
-        String[] URLs = url.split("\\\\");
+        String[] urls = url.split("\\\\");
 
         String iName = GuiDisplayUtil.cleanString(c.getImageName());
-        ret.add(new DownloadObject(iName + ".jpg", URLs[0], base));
+        ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
 
-        if (URLs.length > 1) {
-            for (int j = 1; j < URLs.length; j++) {
-                ret.add(new DownloadObject(iName + j + ".jpg", URLs[j], base));
+        if (urls.length > 1) {
+            for (int j = 1; j < urls.length; j++) {
+                ret.add(new DownloadObject(iName + j + ".jpg", urls[j], base));
             }
         }
 

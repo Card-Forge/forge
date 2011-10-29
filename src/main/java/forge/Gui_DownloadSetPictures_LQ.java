@@ -49,25 +49,24 @@ public class Gui_DownloadSetPictures_LQ extends GuiDownloader {
         ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
         File base = ForgeProps.getFile(IMAGE_BASE);
-        String URLBase = "http://cardforge.org/fpics/";
+        String urlBase = "http://cardforge.org/fpics/";
         for (CardPrinted c : CardDb.instance().getAllCards()) {
-            String SC3 = c.getSet();
-            if (StringUtils.isBlank(SC3) || "???".equals(SC3))
-             {
+            String setCode3 = c.getSet();
+            if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }
 
-            CardSet thisSet = SetUtils.getSetByCode(SC3);
-            String SC2 = thisSet.getCode2();
+            CardSet thisSet = SetUtils.getSetByCode(setCode3);
+            String setCode2 = thisSet.getCode2();
 
             String imgFN = CardUtil.buildFilename(c);
-            boolean foundSetImage = imgFN.contains(SC3) || imgFN.contains(SC2);
+            boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
 
             if (!foundSetImage) {
-                int artsCnt = c.getCard().getSetInfo(SC3).getCopiesCount();
+                int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
                 String fn = CardUtil.buildIdealFilename(c.getName(), c.getArtIndex(), artsCnt);
-                cList.add(new DownloadObject(fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), base
-                        .getPath() + File.separator + SC3));
+                cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true), base
+                        .getPath() + File.separator + setCode3));
             }
         }
 
