@@ -99,7 +99,7 @@ public class CardFilter {
         if (name == "black") {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.Black)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.BLACK)) {
                     listFilter.add(cardName);
                 }
 
@@ -109,7 +109,7 @@ public class CardFilter {
         if (name == "blue") {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.Blue)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.BLUE)) {
                     listFilter.add(cardName);
                 }
 
@@ -119,7 +119,7 @@ public class CardFilter {
         if (name == "green") {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.Green)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.GREEN)) {
                     listFilter.add(cardName);
                 }
 
@@ -129,7 +129,7 @@ public class CardFilter {
         if (name == "red") {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.Red)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.RED)) {
                     listFilter.add(cardName);
                 }
 
@@ -139,7 +139,7 @@ public class CardFilter {
         if (name == "white") {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.White)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.WHITE)) {
                     listFilter.add(cardName);
                 }
 
@@ -149,7 +149,7 @@ public class CardFilter {
         if (name.equals("colorless")) {
             for (int i = 0; i < all.size(); i++) {
                 cardName = all.getCard(i);
-                if (!CardUtil.getColors(cardName).contains(Constant.Color.Colorless)) {
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.COLORLESS)) {
                     listFilter.add(cardName);
                 }
 

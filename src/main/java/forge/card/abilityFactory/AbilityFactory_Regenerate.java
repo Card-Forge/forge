@@ -253,7 +253,7 @@ public class AbilityFactory_Regenerate {
                     }
                 }
             } else {
-                if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+                if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
 
                     for (Card c : list) {
@@ -297,7 +297,7 @@ public class AbilityFactory_Regenerate {
                     chance = true;
                 }
             } else {
-                if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+                if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     CardList combatants = targetables.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
@@ -389,7 +389,7 @@ public class AbilityFactory_Regenerate {
         if (compTargetables.size() > 0) {
             CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
-            if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+            if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (Card c : combatants) {
                     if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -670,7 +670,7 @@ public class AbilityFactory_Regenerate {
             // i control
         } else {
 
-            if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+            if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 CardList combatants = list.getType("Creature");
 
                 for (Card c : combatants) {

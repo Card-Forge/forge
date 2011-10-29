@@ -1312,7 +1312,7 @@ public class GameAction {
         // friendliness
         CardFactoryInterface c = AllZone.getCardFactory();
         Card.resetUniqueNumber();
-        boolean canRandomFoil = Constant.Runtime.RndCFoil[0]
+        boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         Random generator = MyRandom.random;
         for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {

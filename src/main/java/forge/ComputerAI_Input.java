@@ -81,15 +81,15 @@ public class ComputerAI_Input extends Input {
             computer.main1();
         } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             computer.beginCombat();
-        } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
             computer.declareAttackers();
-        } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             computer.declareAttackersAfter();
-        } else if (phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             computer.declareBlockersAfter();
-        } else if (phase.equals(Constant.Phase.Combat_End)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_END)) {
             computer.endOfCombat();
-        } else if (phase.equals(Constant.Phase.Main2)) {
+        } else if (phase.equals(Constant.Phase.MAIN2)) {
             Log.debug("Computer main2");
             computer.main2();
         } else {

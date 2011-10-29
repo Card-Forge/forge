@@ -53,7 +53,7 @@ public class BoosterDraftAI {
         //in_choose should ONLY be on the RIGHT side of any equal sign
         //only 1 card should be removed from in_choose
 
-        if (Constant.Runtime.DevMode[0])
+        if (Constant.Runtime.DEV_MODE[0])
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
 
         CardList wouldPick = new CardList();
@@ -78,7 +78,7 @@ public class BoosterDraftAI {
             if (creatures.size() > 0) {
                 pickedCard = creatures.get(creatures.size() - 1);
                 playerColors.get(player).Color1 = pickedCard.getColor().get(0).toStringArray().get(0);
-                if (Constant.Runtime.DevMode[0])
+                if (Constant.Runtime.DEV_MODE[0])
                     System.out.println("Player[" + player + "] Color1: " + playerColors.get(player).Color1);
 
                 playerColors.get(player).Mana1 = playerColors.get(player).ColorToMana(playerColors.get(player).Color1);
@@ -86,7 +86,7 @@ public class BoosterDraftAI {
                 //if the first pick has more than one color add the second as second color to draft
                 if (pickedCard.getColor().get(0).toStringArray().size() > 1) {
                     playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(1);
-                    if (Constant.Runtime.DevMode[0])
+                    if (Constant.Runtime.DEV_MODE[0])
                         System.out.println("Player[" + player + "] Color2: " + playerColors.get(player).Color2);
 
                     playerColors.get(player).Mana2 = playerColors.get(player).ColorToMana(playerColors.get(player).Color2);
@@ -103,7 +103,7 @@ public class BoosterDraftAI {
             if (creatures.size() > 0) {
                 pickedCard = creatures.get(creatures.size() - 1);
                 playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(0);
-                if (Constant.Runtime.DevMode[0])
+                if (Constant.Runtime.DEV_MODE[0])
                     System.out.println("Player[" + player + "] Color2: " + playerColors.get(player).Color2);
 
                 playerColors.get(player).Mana2 = playerColors.get(player).ColorToMana(playerColors.get(player).Color2);
@@ -211,7 +211,7 @@ public class BoosterDraftAI {
             chooseFrom.remove(pickedCard);
             deck[player].add(pickedCard);
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("Player[" + player + "] picked " + pickedCard.getName() + " (" + pickedCard.getManaCost() + ") " + pickedCard.getType().toString() + "\n");
         }
 
@@ -280,7 +280,7 @@ public class BoosterDraftAI {
         for (int i = 0; i < deck.length; i++) {
             //addLand(deck[i], deckColor[i]);
             //out[i] = getDeck(deck[i]);
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("Deck[" + i + "]");
 
             out[i] = buildDeck(deck[i], playerColors.get(i));
@@ -325,7 +325,7 @@ public class BoosterDraftAI {
             nCreatures--;
             AIPlayables.remove(c);
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
 
             i++;
@@ -341,7 +341,7 @@ public class BoosterDraftAI {
 
             otherCreatures = AIPlayables.getType("Creature");
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("AddCreature: " + c.getName() + " (" + c.getManaCost() + ")");
         }
 
@@ -358,7 +358,7 @@ public class BoosterDraftAI {
 
             others = AIPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("Others[" + ii++ + "]:" + c.getName() + " (" + c.getManaCost() + ")");
         }
 
@@ -377,7 +377,7 @@ public class BoosterDraftAI {
 
             z = AIPlayables.getNotType("Land");
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("NonLands[" + ii++ + "]:" + c.getName() + "(" + c.getManaCost() + ")");
         }
 
@@ -391,7 +391,7 @@ public class BoosterDraftAI {
 
             lands = AIPlayables.getType("Land");
 
-            if (Constant.Runtime.DevMode[0])
+            if (Constant.Runtime.DEV_MODE[0])
                 System.out.println("Land:" + c.getName());
         }
 
@@ -439,7 +439,7 @@ public class BoosterDraftAI {
                     float p = (float) ClrCnts[i].Count / (float) totalColor;
                     int nLand = (int) ((float) landsNeeded * p) + 1;
                     //tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
-                    if (Constant.Runtime.DevMode[0])
+                    if (Constant.Runtime.DEV_MODE[0])
                         System.out.println("Basics[" + ClrCnts[i].Color + "]:" + nLand);
 
                     // just to prevent a null exception by the deck size fixing code
@@ -461,7 +461,7 @@ public class BoosterDraftAI {
                     outList.add(c);
                     landsNeeded--;
 
-                    if (Constant.Runtime.DevMode[0])
+                    if (Constant.Runtime.DEV_MODE[0])
                         System.out.println("AddBasics: " + c.getName());
                 }
                 if (++n > 4)
@@ -565,11 +565,11 @@ public class BoosterDraftAI {
         }
 
         //initilize color map
-        colorToLand.put(Constant.Color.Black, "Swamp");
-        colorToLand.put(Constant.Color.Blue, "Island");
-        colorToLand.put(Constant.Color.Green, "Forest");
-        colorToLand.put(Constant.Color.Red, "Mountain");
-        colorToLand.put(Constant.Color.White, "Plains");
+        colorToLand.put(Constant.Color.BLACK, "Swamp");
+        colorToLand.put(Constant.Color.BLUE, "Island");
+        colorToLand.put(Constant.Color.GREEN, "Forest");
+        colorToLand.put(Constant.Color.RED, "Mountain");
+        colorToLand.put(Constant.Color.WHITE, "Plains");
 
         //initilize deck array and playerColors list
         for (int i = 0; i < deck.length; i++) {
@@ -584,15 +584,15 @@ public class BoosterDraftAI {
 
     //all 10 two color combinations
     private String[][] deckColorChoices = {
-        {Constant.Color.Black, Constant.Color.Blue}, {Constant.Color.Black, Constant.Color.Green},
-        {Constant.Color.Black, Constant.Color.Red}, {Constant.Color.Black, Constant.Color.White},
+        {Constant.Color.BLACK, Constant.Color.BLUE}, {Constant.Color.BLACK, Constant.Color.GREEN},
+        {Constant.Color.BLACK, Constant.Color.RED}, {Constant.Color.BLACK, Constant.Color.WHITE},
 
-        {Constant.Color.Blue, Constant.Color.Green}, {Constant.Color.Blue, Constant.Color.Red},
-        {Constant.Color.Blue, Constant.Color.White},
+        {Constant.Color.BLUE, Constant.Color.GREEN}, {Constant.Color.BLUE, Constant.Color.RED},
+        {Constant.Color.BLUE, Constant.Color.WHITE},
 
-        {Constant.Color.Green, Constant.Color.Red}, {Constant.Color.Green, Constant.Color.White},
+        {Constant.Color.GREEN, Constant.Color.RED}, {Constant.Color.GREEN, Constant.Color.WHITE},
 
-        {Constant.Color.Red, Constant.Color.White}
+        {Constant.Color.RED, Constant.Color.WHITE}
     };
 
     private Comparator<Card> bestCreature = new Comparator<Card>() {

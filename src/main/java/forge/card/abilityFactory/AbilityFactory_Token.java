@@ -261,7 +261,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         }
 
         // Don't generate tokens without haste before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2)
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
                 && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste) {
             return false;
         }

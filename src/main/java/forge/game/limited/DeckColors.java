@@ -46,8 +46,8 @@ class DeckColors {
     public String ColorToMana(String color) {
         String Mana[] = {"W", "U", "B", "R", "G"};
 
-        for (int i = 0; i < Constant.Color.onlyColors.length; i++) {
-            if (Constant.Color.onlyColors[i].equals(color))
+        for (int i = 0; i < Constant.Color.ONLY_COLORS.length; i++) {
+            if (Constant.Color.ONLY_COLORS[i].equals(color))
                 return Mana[i];
         }
 

@@ -249,10 +249,10 @@ public class ImageCache implements NewConstants {
     private static boolean isExpectedSize(final String key, final BufferedImage image) {
         if (key.endsWith(NORMAL)) {
             // normal
-            return image.getWidth() == Constant.Runtime.width[0] && image.getHeight() == Constant.Runtime.height[0];
+            return image.getWidth() == Constant.Runtime.WIDTH[0] && image.getHeight() == Constant.Runtime.HEIGHT[0];
         } else if (key.endsWith(TAPPED)) {
             // tapped
-            return image.getWidth() == Constant.Runtime.height[0] && image.getHeight() == Constant.Runtime.width[0];
+            return image.getWidth() == Constant.Runtime.HEIGHT[0] && image.getHeight() == Constant.Runtime.WIDTH[0];
         } else {
             // original & full is never wrong
             return true;
@@ -285,8 +285,8 @@ public class ImageCache implements NewConstants {
     private static BufferedImage getNormalSizeImage(final BufferedImage original) {
         int srcWidth = original.getWidth();
         int srcHeight = original.getHeight();
-        int tgtWidth = Constant.Runtime.width[0];
-        int tgtHeight = Constant.Runtime.height[0];
+        int tgtWidth = Constant.Runtime.WIDTH[0];
+        int tgtHeight = Constant.Runtime.HEIGHT[0];
 
         if (srcWidth == tgtWidth && srcHeight == tgtHeight) {
             return original;
@@ -328,8 +328,8 @@ public class ImageCache implements NewConstants {
          * int srcWidth = original.getWidth(); int srcHeight =
          * original.getHeight();
          */
-        int tgtWidth = Constant.Runtime.width[0];
-        int tgtHeight = Constant.Runtime.height[0];
+        int tgtWidth = Constant.Runtime.WIDTH[0];
+        int tgtHeight = Constant.Runtime.HEIGHT[0];
 
         AffineTransform at = new AffineTransform();
         // at.scale((double) tgtWidth / srcWidth, (double) tgtHeight /

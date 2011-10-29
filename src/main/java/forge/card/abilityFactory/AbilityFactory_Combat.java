@@ -189,7 +189,7 @@ public final class AbilityFactory_Combat {
         if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
         }
-        if (!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+        if (!AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -229,9 +229,9 @@ public final class AbilityFactory_Combat {
         // AI should only activate this during Human's turn
         boolean chance;
         if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage);
+            chance = AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = AllZone.getPhase().isAfter(Constant.Phase.Combat_Damage);
+            chance = AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DAMAGE);
         }
 
         final Ability_Sub subAb = sa.getSubAbility();
@@ -263,9 +263,9 @@ public final class AbilityFactory_Combat {
 
         boolean chance;
         if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage);
+            chance = AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = AllZone.getPhase().isAfter(Constant.Phase.Combat_Damage);
+            chance = AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DAMAGE);
         }
 
         // check SubAbilities DoTrigger?
@@ -912,7 +912,7 @@ public final class AbilityFactory_Combat {
         }
 
         // only use on creatures that can attack
-        if (!AllZone.getPhase().isBefore(Constant.Phase.Main2)) {
+        if (!AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
             return false;
         }
 

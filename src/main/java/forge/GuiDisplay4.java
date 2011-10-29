@@ -246,9 +246,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         // Dev Mode Creation
         JMenu devMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.DEV.TITLE));
 
-        devMenu.setEnabled(Constant.Runtime.DevMode[0]);
+        devMenu.setEnabled(Constant.Runtime.DEV_MODE[0]);
 
-        if (Constant.Runtime.DevMode[0]) {
+        if (Constant.Runtime.DEV_MODE[0]) {
             canLoseByDecking.setSelected(Constant.Runtime.MILL[0]);
 
             Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), COMPUTER_HAND.BASE);
@@ -675,8 +675,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         if (AllZone.getQuestData() != null) {
             File base = ForgeProps.getFile(IMAGE_ICON);
             String iconName = "";
-            if (Constant.Quest.oppIconName[0] != null) {
-                iconName = Constant.Quest.oppIconName[0];
+            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                iconName = Constant.Quest.OPP_ICON_NAME[0];
                 File file = new File(base, iconName);
                 ImageIcon icon = new ImageIcon(file.toString());
                 oppIconLabel.setIcon(icon);
@@ -1427,7 +1427,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     /** {@inheritDoc} */
     public final boolean stopAtPhase(final Player turn, final String phase) {
         if (turn.isComputer()) {
-            if (phase.equals(Constant.Phase.End_Of_Turn)) {
+            if (phase.equals(Constant.Phase.END_OF_TURN)) {
                 return cbAIEndOfTurn.isSelected();
             } else if (phase.equals(Constant.Phase.UPKEEP)) {
                 return cbAIUpkeep.isSelected();
@@ -1435,11 +1435,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 return cbAIDraw.isSelected();
             } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return cbAIBeginCombat.isSelected();
-            } else if (phase.equals(Constant.Phase.Combat_End)) {
+            } else if (phase.equals(Constant.Phase.COMBAT_END)) {
                 return cbAIEndCombat.isSelected();
             }
         } else {
-            if (phase.equals(Constant.Phase.End_Of_Turn)) {
+            if (phase.equals(Constant.Phase.END_OF_TURN)) {
                 return cbHumanEndOfTurn.isSelected();
             } else if (phase.equals(Constant.Phase.UPKEEP)) {
                 return cbHumanUpkeep.isSelected();
@@ -1447,7 +1447,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 return cbHumanDraw.isSelected();
             } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return cbHumanBeginCombat.isSelected();
-            } else if (phase.equals(Constant.Phase.Combat_End)) {
+            } else if (phase.equals(Constant.Phase.COMBAT_END)) {
                 return cbHumanEndCombat.isSelected();
             }
         }

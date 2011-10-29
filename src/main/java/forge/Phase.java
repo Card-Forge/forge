@@ -240,11 +240,11 @@ public class Phase extends MyObservable implements java.io.Serializable {
 
     /** The phase order. */
     String[] phaseOrder = { Constant.Phase.UNTAP, Constant.Phase.UPKEEP, Constant.Phase.DRAW, Constant.Phase.MAIN1,
-            Constant.Phase.COMBAT_BEGIN, Constant.Phase.Combat_Declare_Attackers,
-            Constant.Phase.Combat_Declare_Attackers_InstantAbility, Constant.Phase.Combat_Declare_Blockers,
-            Constant.Phase.Combat_Declare_Blockers_InstantAbility, Constant.Phase.Combat_FirstStrikeDamage,
-            Constant.Phase.Combat_Damage, Constant.Phase.Combat_End, Constant.Phase.Main2, Constant.Phase.End_Of_Turn,
-            Constant.Phase.Cleanup };
+            Constant.Phase.COMBAT_BEGIN, Constant.Phase.COMBAT_DECLARE_ATTACKERS,
+            Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY, Constant.Phase.COMBAT_DECLARE_BLOCKERS,
+            Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY, Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE,
+            Constant.Phase.COMBAT_DAMAGE, Constant.Phase.COMBAT_END, Constant.Phase.MAIN2, Constant.Phase.END_OF_TURN,
+            Constant.Phase.CLEANUP };
 
     /**
      * <p>
@@ -307,7 +307,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
             PhaseUtil.handleDraw();
         } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             PhaseUtil.verifyCombat();
-        } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             if (inCombat()) {
                 PhaseUtil.handleDeclareAttackers();
             } else {
@@ -316,13 +316,13 @@ public class Phase extends MyObservable implements java.io.Serializable {
         }
 
         // we can skip AfterBlockers and AfterAttackers if necessary
-        else if (phase.equals(Constant.Phase.Combat_Declare_Blockers)) {
+        else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             if (inCombat()) {
                 PhaseUtil.verifyCombat();
             } else {
                 AllZone.getPhase().setNeedToNextPhase(true);
             }
-        } else if (phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // After declare blockers are finished being declared mark them
             // blocked and trigger blocking things
             if (!inCombat()) {
@@ -330,7 +330,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
             } else {
                 PhaseUtil.handleDeclareBlockers();
             }
-        } else if (phase.equals(Constant.Phase.Combat_FirstStrikeDamage)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             if (!inCombat()) {
                 AllZone.getPhase().setNeedToNextPhase(true);
             } else {
@@ -348,7 +348,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
                     CombatUtil.showCombat();
                 }
             }
-        } else if (phase.equals(Constant.Phase.Combat_Damage)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
             if (!inCombat()) {
                 AllZone.getPhase().setNeedToNextPhase(true);
             } else {
@@ -363,13 +363,13 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 AllZone.getGameAction().checkStateEffects();
                 CombatUtil.showCombat();
             }
-        } else if (phase.equals(Constant.Phase.Combat_End)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_END)) {
             // End Combat always happens
             AllZone.getEndOfCombat().executeUntil();
             AllZone.getEndOfCombat().executeAt();
-        } else if (phase.equals(Constant.Phase.End_Of_Turn)) {
+        } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
             AllZone.getEndOfTurn().executeAt();
-        } else if (phase.equals(Constant.Phase.Cleanup)) {
+        } else if (phase.equals(Constant.Phase.CLEANUP)) {
             AllZone.getPhase().getPlayerTurn().setAssignedDamage(0);
 
             // Reset Damage received map
@@ -447,32 +447,32 @@ public class Phase extends MyObservable implements java.io.Serializable {
             AllZone.getComputerPlayer().getManaPool().clearPool();
         }
 
-        if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
+        if (getPhase().equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
             AllZone.getStack().unfreezeStack();
             nCombatsThisTurn++;
         } else if (getPhase().equals(Constant.Phase.UNTAP)) {
             nCombatsThisTurn = 0;
         }
 
-        if (getPhase().equals(Constant.Phase.Combat_End)) {
+        if (getPhase().equals(Constant.Phase.COMBAT_END)) {
             AllZone.getCombat().reset();
             AllZone.getDisplay().showCombat("");
             resetAttackedThisCombat(getPlayerTurn());
             this.bCombat = false;
         }
 
-        if (phaseOrder[phaseIndex].equals(Constant.Phase.Cleanup)) {
+        if (phaseOrder[phaseIndex].equals(Constant.Phase.CLEANUP)) {
             bPreventCombatDamageThisTurn = false;
             if (!bRepeat) {
                 AllZone.getPhase().setPlayerTurn(handleNextTurn());
             }
         }
 
-        if (is(Constant.Phase.Combat_Declare_Blockers)) {
+        if (is(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             AllZone.getStack().unfreezeStack();
         }
 
-        if (is(Constant.Phase.Combat_End) && extraCombats > 0) {
+        if (is(Constant.Phase.COMBAT_END) && extraCombats > 0) {
             // TODO: ExtraCombat needs to be changed for other spell/abilities
             // that give extra combat
             // can do it like ExtraTurn stack ExtraPhases
@@ -485,7 +485,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
             AllZone.getCombat().reset();
             AllZone.getCombat().setAttackingPlayer(player);
             AllZone.getCombat().setDefendingPlayer(opp);
-            phaseIndex = findIndex(Constant.Phase.Combat_Declare_Attackers);
+            phaseIndex = findIndex(Constant.Phase.COMBAT_DECLARE_ATTACKERS);
         } else {
             if (!bRepeat) { // for when Cleanup needs to repeat itself
                 phaseIndex++;
@@ -873,7 +873,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      */
     public static boolean canCastSorcery(final Player player) {
         return AllZone.getPhase().isPlayerTurn(player)
-                && (AllZone.getPhase().getPhase().equals(Constant.Phase.Main2) || AllZone.getPhase().getPhase()
+                && (AllZone.getPhase().getPhase().equals(Constant.Phase.MAIN2) || AllZone.getPhase().getPhase()
                         .equals(Constant.Phase.MAIN1)) && AllZone.getStack().size() == 0;
     }
 

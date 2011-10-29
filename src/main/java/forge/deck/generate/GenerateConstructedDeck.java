@@ -43,11 +43,11 @@ public class GenerateConstructedDeck {
      * </p>
      */
     private void setupMap() {
-        map.put(Constant.Color.Black, "Swamp");
-        map.put(Constant.Color.Blue, "Island");
-        map.put(Constant.Color.Green, "Forest");
-        map.put(Constant.Color.Red, "Mountain");
-        map.put(Constant.Color.White, "Plains");
+        map.put(Constant.Color.BLACK, "Swamp");
+        map.put(Constant.Color.BLUE, "Island");
+        map.put(Constant.Color.GREEN, "Forest");
+        map.put(Constant.Color.RED, "Mountain");
+        map.put(Constant.Color.WHITE, "Plains");
     }
 
     /**
@@ -147,12 +147,12 @@ public class GenerateConstructedDeck {
         int b;
 
         do {
-            a = CardUtil.getRandomIndex(Constant.Color.onlyColors);
-            b = CardUtil.getRandomIndex(Constant.Color.onlyColors);
+            a = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
+            b = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
         } while (a == b); // do not want to get the same color twice
 
-        color1 = Constant.Color.onlyColors[a];
-        color2 = Constant.Color.onlyColors[b];
+        color1 = Constant.Color.ONLY_COLORS[a];
+        color2 = Constant.Color.ONLY_COLORS[b];
 
         CardList out = new CardList();
         out.addAll(CardListUtil.getColor(in, color1));
@@ -163,7 +163,7 @@ public class GenerateConstructedDeck {
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // weird like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
                         && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });

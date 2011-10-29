@@ -176,7 +176,7 @@ public final class TableWithCards {
         StringBuffer show = new StringBuffer();
         show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ")
                 .append(land);
-        String[] color = Constant.Color.onlyColors;
+        String[] color = Constant.Color.ONLY_COLORS;
         List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.colors;
         for (int i = 0; i < color.length; ++i) {
             show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, deck.fnToCard)));

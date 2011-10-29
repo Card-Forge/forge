@@ -184,11 +184,11 @@ public final class CardUtil {
      */
     public static String getShortColor(final String longColor) {
         Map<String, String> map = new HashMap<String, String>();
-        map.put(Constant.Color.Black.toString(), "B");
-        map.put(Constant.Color.Blue.toString(), "U");
-        map.put(Constant.Color.Green.toString(), "G");
-        map.put(Constant.Color.Red.toString(), "R");
-        map.put(Constant.Color.White.toString(), "W");
+        map.put(Constant.Color.BLACK.toString(), "B");
+        map.put(Constant.Color.BLUE.toString(), "U");
+        map.put(Constant.Color.GREEN.toString(), "G");
+        map.put(Constant.Color.RED.toString(), "R");
+        map.put(Constant.Color.WHITE.toString(), "W");
 
         Object o = map.get(longColor);
         if (o == null) {
@@ -245,19 +245,19 @@ public final class CardUtil {
             case ' ':
                 break;
             case 'G':
-                colors.add(Constant.Color.Green);
+                colors.add(Constant.Color.GREEN);
                 break;
             case 'W':
-                colors.add(Constant.Color.White);
+                colors.add(Constant.Color.WHITE);
                 break;
             case 'B':
-                colors.add(Constant.Color.Black);
+                colors.add(Constant.Color.BLACK);
                 break;
             case 'U':
-                colors.add(Constant.Color.Blue);
+                colors.add(Constant.Color.BLUE);
                 break;
             case 'R':
-                colors.add(Constant.Color.Red);
+                colors.add(Constant.Color.RED);
                 break;
             default:
                 break;
@@ -265,7 +265,7 @@ public final class CardUtil {
         }
         for (String kw : c.getKeyword()) {
             if (kw.startsWith(c.getName() + " is ") || kw.startsWith("CARDNAME is ")) {
-                for (String color : Constant.Color.Colors) {
+                for (String color : Constant.Color.COLORS) {
                     if (kw.endsWith(color + ".")) {
                         colors.add(color);
                     }

@@ -92,17 +92,17 @@ public final class GuiDisplayUtil implements NewConstants {
             color = Color.gray;
         } else if (list.size() > 1) {
             color = Color.orange;
-        } else if (list.get(0).equals(Constant.Color.Black)) {
+        } else if (list.get(0).equals(Constant.Color.BLACK)) {
             color = Color.black;
-        } else if (list.get(0).equals(Constant.Color.Green)) {
+        } else if (list.get(0).equals(Constant.Color.GREEN)) {
             color = new Color(0, 220, 39);
-        } else if (list.get(0).equals(Constant.Color.White)) {
+        } else if (list.get(0).equals(Constant.Color.WHITE)) {
             color = Color.white;
-        } else if (list.get(0).equals(Constant.Color.Red)) {
+        } else if (list.get(0).equals(Constant.Color.RED)) {
             color = Color.red;
-        } else if (list.get(0).equals(Constant.Color.Blue)) {
+        } else if (list.get(0).equals(Constant.Color.BLUE)) {
             color = Color.blue;
-        } else if (list.get(0).equals(Constant.Color.Colorless)) {
+        } else if (list.get(0).equals(Constant.Color.COLORLESS)) {
             color = Color.gray;
         } else {
             color = new Color(200, 0, 230); // If your card has a violet border,
@@ -354,11 +354,11 @@ public final class GuiDisplayUtil implements NewConstants {
 
             ArrayList<Card> manaPools = getManaPools(list);
             ArrayList<Card> enchantedLands = getEnchantedLands(list);
-            ArrayList<Card> basicBlues = getBasics(list, Constant.Color.Blue);
-            ArrayList<Card> basicReds = getBasics(list, Constant.Color.Red);
-            ArrayList<Card> basicBlacks = getBasics(list, Constant.Color.Black);
-            ArrayList<Card> basicGreens = getBasics(list, Constant.Color.Green);
-            ArrayList<Card> basicWhites = getBasics(list, Constant.Color.White);
+            ArrayList<Card> basicBlues = getBasics(list, Constant.Color.BLUE);
+            ArrayList<Card> basicReds = getBasics(list, Constant.Color.RED);
+            ArrayList<Card> basicBlacks = getBasics(list, Constant.Color.BLACK);
+            ArrayList<Card> basicGreens = getBasics(list, Constant.Color.GREEN);
+            ArrayList<Card> basicWhites = getBasics(list, Constant.Color.WHITE);
             ArrayList<Card> badlands = getNonBasicLand(list, "Badlands");
             ArrayList<Card> bayou = getNonBasicLand(list, "Bayou");
             ArrayList<Card> plateau = getNonBasicLand(list, "Plateau");
@@ -414,7 +414,7 @@ public final class GuiDisplayUtil implements NewConstants {
 
             int x = marginX;
 
-            int cardOffset = Constant.Runtime.stackOffset[0];
+            int cardOffset = Constant.Runtime.STACK_OFFSET[0];
 
             String color = "";
             ArrayList<JPanel> cards = new ArrayList<JPanel>();
@@ -447,7 +447,7 @@ public final class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                 }
 
-                if (!startANewStack && atInStack == Constant.Runtime.stackSize[0]) {
+                if (!startANewStack && atInStack == Constant.Runtime.STACK_SIZE[0]) {
                     startANewStack = true;
                 }
 
@@ -617,7 +617,7 @@ public final class GuiDisplayUtil implements NewConstants {
 
             int x = marginX;
 
-            int cardOffset = Constant.Runtime.stackOffset[0];
+            int cardOffset = Constant.Runtime.STACK_OFFSET[0];
 
             String color = "";
             ArrayList<JPanel> cards = new ArrayList<JPanel>();
@@ -649,7 +649,7 @@ public final class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                 }
 
-                if (!startANewStack && atInStack == Constant.Runtime.stackSize[0]) {
+                if (!startANewStack && atInStack == Constant.Runtime.STACK_SIZE[0]) {
                     startANewStack = true;
                 }
 
@@ -979,26 +979,26 @@ public final class GuiDisplayUtil implements NewConstants {
             }
 
             else if (name.equals("Swamp") || name.equals("Bog")) {
-                if (color == Constant.Color.Black) {
+                if (color == Constant.Color.BLACK) {
                     ret.add(c);
                 }
             } else if (name.equals("Forest") || name.equals("Grass")) {
-                if (color == Constant.Color.Green) {
+                if (color == Constant.Color.GREEN) {
                     ret.add(c);
                 }
 
             } else if (name.equals("Plains") || name.equals("White Sand")) {
-                if (color == Constant.Color.White) {
+                if (color == Constant.Color.WHITE) {
                     ret.add(c);
                 }
 
             } else if (name.equals("Mountain") || name.equals("Rock")) {
-                if (color == Constant.Color.Red) {
+                if (color == Constant.Color.RED) {
                     ret.add(c);
                 }
 
             } else if (name.equals("Island") || name.equals("Underwater")) {
-                if (color == Constant.Color.Blue) {
+                if (color == Constant.Color.BLUE) {
                     ret.add(c);
                 }
             }

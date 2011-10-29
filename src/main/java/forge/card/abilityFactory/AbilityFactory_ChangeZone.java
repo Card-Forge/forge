@@ -424,7 +424,7 @@ public final class AbilityFactory_ChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
                 && !destination.equals("Battlefield") && !destination.equals("Hand")) {
             return false;
         }
@@ -1326,7 +1326,7 @@ public final class AbilityFactory_ChangeZone {
                     }
                 }
                 // Save combatants
-                else if (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+                else if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     CardList combatants = aiPermanents.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
@@ -1376,7 +1376,7 @@ public final class AbilityFactory_ChangeZone {
                 && destination.equals(Zone.Exile)
                 && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone")
                         && subAffected.equals("Remembered")))
-                && !(AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || sa.isAbility())) {
+                && !(AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa.isAbility())) {
             return false;
         }
 

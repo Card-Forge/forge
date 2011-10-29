@@ -6810,7 +6810,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlack() {
-        return CardUtil.getColors(this).contains(Constant.Color.Black);
+        return CardUtil.getColors(this).contains(Constant.Color.BLACK);
     }
 
     /**
@@ -6821,7 +6821,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlue() {
-        return CardUtil.getColors(this).contains(Constant.Color.Blue);
+        return CardUtil.getColors(this).contains(Constant.Color.BLUE);
     }
 
     /**
@@ -6832,7 +6832,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isRed() {
-        return CardUtil.getColors(this).contains(Constant.Color.Red);
+        return CardUtil.getColors(this).contains(Constant.Color.RED);
     }
 
     /**
@@ -6843,7 +6843,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isGreen() {
-        return CardUtil.getColors(this).contains(Constant.Color.Green);
+        return CardUtil.getColors(this).contains(Constant.Color.GREEN);
     }
 
     /**
@@ -6854,7 +6854,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isWhite() {
-        return CardUtil.getColors(this).contains(Constant.Color.White);
+        return CardUtil.getColors(this).contains(Constant.Color.WHITE);
     }
 
     /**
@@ -6865,7 +6865,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isColorless() {
-        return CardUtil.getColors(this).contains(Constant.Color.Colorless);
+        return CardUtil.getColors(this).contains(Constant.Color.COLORLESS);
     }
 
     /**

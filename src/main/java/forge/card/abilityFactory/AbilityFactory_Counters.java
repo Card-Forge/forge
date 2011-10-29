@@ -362,7 +362,7 @@ public class AbilityFactory_Counters {
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }

@@ -129,7 +129,7 @@ public class HttpUtil {
         } catch (IOException e) {
             return;
         }
-        if (Constant.Runtime.DevMode[0]) {
+        if (Constant.Runtime.DEV_MODE[0]) {
             System.out.println(response.toString());
         }
     }

@@ -339,7 +339,7 @@ public final class AbilityFactory_Debuff {
     private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
             final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 

@@ -54,7 +54,7 @@ public class ComputerAI_General implements Computer {
         ComputerUtil.chooseLandsToPlay();
 
         if (AllZone.getStack().size() == 0) {
-            playCards(Constant.Phase.Main2);
+            playCards(Constant.Phase.MAIN2);
         } else {
             stackResponse();
         }
@@ -188,7 +188,7 @@ public class ComputerAI_General implements Computer {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
                         && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
-                                .isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility))) {
+                                .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
                     return false;
                 }
                 return true;
@@ -236,7 +236,7 @@ public class ComputerAI_General implements Computer {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
                         && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
-                                .isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility))) {
+                                .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
                     return false;
                 }
                 return true;
@@ -472,7 +472,7 @@ public class ComputerAI_General implements Computer {
             sas = getOtherPhases();
 
             boolean pass = (sas.length == 0)
-                    || AllZone.getPhase().is(Constant.Phase.End_Of_Turn, AllZone.getComputerPlayer());
+                    || AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
                 pass = ComputerUtil.playCards(sas);
             }

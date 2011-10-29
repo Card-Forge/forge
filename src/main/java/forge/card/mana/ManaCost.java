@@ -384,7 +384,7 @@ public class ManaCost {
         }
 
         choice.reduce(mana);
-        if (!mana.equals(Constant.Color.Colorless)) {
+        if (!mana.equals(Constant.Color.COLORLESS)) {
             if (sunburstMap.containsKey(mana)) {
                 sunburstMap.put(mana, sunburstMap.get(mana) + 1);
             } else {
@@ -428,7 +428,7 @@ public class ManaCost {
         }
 
         choice.reduce(mana);
-        if (!mana.isColor(Constant.Color.Colorless)) {
+        if (!mana.isColor(Constant.Color.COLORLESS)) {
             if (sunburstMap.containsKey(mana.getColor())) {
                 sunburstMap.put(mana.getColor(), sunburstMap.get(mana.getColor()) + 1);
             } else {

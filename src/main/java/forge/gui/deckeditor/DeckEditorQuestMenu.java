@@ -514,7 +514,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
         deckMenu.add(save);
         deckMenu.add(copy);
 
-        if (Constant.Runtime.DevMode[0]) {
+        if (Constant.Runtime.DEV_MODE[0]) {
             deckMenu.addSeparator();
             deckMenu.add(addCard);
         }

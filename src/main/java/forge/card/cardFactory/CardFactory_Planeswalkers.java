@@ -686,7 +686,7 @@ public class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlayAI() {
                     return (card.getCounters(Counters.LOYALTY) <= 6)
-                            && AllZone.getPhase().getPhase().equals(Constant.Phase.Main2);
+                            && AllZone.getPhase().getPhase().equals(Constant.Phase.MAIN2);
                 }
 
                 @Override

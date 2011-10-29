@@ -280,7 +280,7 @@ public final class BoosterDraft_1 implements BoosterDraft {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c + " - booster pack = " + thisBooster);
         }
 
-        if (Constant.Runtime.UpldDrft[0]) {
+        if (Constant.Runtime.UPLOAD_DRAFT[0]) {
             for (int i = 0; i < thisBooster.size(); i++) {
                 CardPrinted cc = thisBooster.get(i);
                 String cnBk = cc.getName() + "|" + cc.getSet();
@@ -306,9 +306,9 @@ public final class BoosterDraft_1 implements BoosterDraft {
         currentBoosterPick++;
     } //setChoice()
 
-    /** This will upload drafting picks to cardforge HQ */
+    /** This will upload drafting picks to cardforge HQ. */
     public void finishedDrafting() {
-        if (Constant.Runtime.UpldDrft[0]) {
+        if (Constant.Runtime.UPLOAD_DRAFT[0]) {
             if (draftPicks.size() > 1) {
                 ArrayList<String> outDraftData = new ArrayList<String>();
 
@@ -321,7 +321,8 @@ public final class BoosterDraft_1 implements BoosterDraft {
                 FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
 
                 HttpUtil poster = new HttpUtil();
-                poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt=" + draftFormat, "res/draft/tmpDraftData.txt");
+                poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt="
+                + draftFormat, "res/draft/tmpDraftData.txt");
             }
         }
     }

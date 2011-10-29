@@ -564,11 +564,11 @@ public abstract class Player extends GameEntity {
 
         // specific cards
         if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
-            if (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
-                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Blue).size() > 0
-                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Green).size() > 0
-                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Red).size() > 0
-                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.White).size() > 0) {
+            if (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.BLACK).size() > 0
+                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.BLUE).size() > 0
+                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.GREEN).size() > 0
+                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.RED).size() > 0
+                    && AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.WHITE).size() > 0) {
                 return 0;
             }
         }
@@ -1107,7 +1107,7 @@ public abstract class Player extends GameEntity {
             AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
         }
         // lose:
-        else if (!Constant.Runtime.DevMode[0] || AllZone.getDisplay().canLoseByDecking()) {
+        else if (!Constant.Runtime.DEV_MODE[0] || AllZone.getDisplay().canLoseByDecking()) {
             // if devMode is off, or canLoseByDecking is Enabled, run Lose
             // Condition
             if (!cantLose()) {

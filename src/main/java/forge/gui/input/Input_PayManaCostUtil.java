@@ -56,7 +56,7 @@ public class Input_PayManaCostUtil {
         boolean choice = true;
         boolean skipExpress = false;
 
-        for (String color : Constant.Color.ManaColors) {
+        for (String color : Constant.Color.MANA_COLORS) {
             if (manaCost.isNeeded(color)) {
                 cneeded.append(getShortColorString(color));
             }
@@ -208,17 +208,17 @@ public class Input_PayManaCostUtil {
      */
     public static String getLongColorString(final String color) {
         Map<String, String> m = new HashMap<String, String>();
-        m.put("G", Constant.Color.Green);
-        m.put("R", Constant.Color.Red);
-        m.put("U", Constant.Color.Blue);
-        m.put("B", Constant.Color.Black);
-        m.put("W", Constant.Color.White);
-        m.put("S", Constant.Color.Snow);
+        m.put("G", Constant.Color.GREEN);
+        m.put("R", Constant.Color.RED);
+        m.put("U", Constant.Color.BLUE);
+        m.put("B", Constant.Color.BLACK);
+        m.put("W", Constant.Color.WHITE);
+        m.put("S", Constant.Color.SNOW);
 
         Object o = m.get(color);
 
         if (o == null) {
-            o = Constant.Color.Colorless;
+            o = Constant.Color.COLORLESS;
         }
 
         return o.toString();
@@ -235,13 +235,13 @@ public class Input_PayManaCostUtil {
      */
     public static String getShortColorString(final String color) {
         Map<String, String> m = new HashMap<String, String>();
-        m.put(Constant.Color.Green, "G");
-        m.put(Constant.Color.Red, "R");
-        m.put(Constant.Color.Blue, "U");
-        m.put(Constant.Color.Black, "B");
-        m.put(Constant.Color.White, "W");
-        m.put(Constant.Color.Colorless, "1");
-        m.put(Constant.Color.Snow, "S");
+        m.put(Constant.Color.GREEN, "G");
+        m.put(Constant.Color.RED, "R");
+        m.put(Constant.Color.BLUE, "U");
+        m.put(Constant.Color.BLACK, "B");
+        m.put(Constant.Color.WHITE, "W");
+        m.put(Constant.Color.COLORLESS, "1");
+        m.put(Constant.Color.SNOW, "S");
 
         Object o = m.get(color);
 

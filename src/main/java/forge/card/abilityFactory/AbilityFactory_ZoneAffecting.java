@@ -270,7 +270,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -285,7 +285,7 @@ public class AbilityFactory_ZoneAffecting {
          {
             chance = .667; // 66.7% chance for sorcery speed
         }
-        if ((AllZone.getPhase().is(Constant.Phase.End_Of_Turn) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
                 AllZone.getComputerPlayer())))
          {
             chance = .9; // 90% for end of opponents turn
@@ -744,7 +744,7 @@ public class AbilityFactory_ZoneAffecting {
         Random r = MyRandom.random;
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -760,7 +760,7 @@ public class AbilityFactory_ZoneAffecting {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((AllZone.getPhase().is(Constant.Phase.End_Of_Turn) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
                 AllZone.getComputerPlayer())))
          {
             chance = .9; // 90% for end of opponents turn
@@ -1391,7 +1391,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -1407,7 +1407,7 @@ public class AbilityFactory_ZoneAffecting {
             chance = .75; // 75% chance for sorcery speed
         }
 
-        if ((AllZone.getPhase().is(Constant.Phase.End_Of_Turn) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
                 AllZone.getComputerPlayer())))
          {
             chance = .9; // 90% for end of opponents turn

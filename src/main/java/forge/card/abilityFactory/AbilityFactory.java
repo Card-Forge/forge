@@ -1288,11 +1288,11 @@ public class AbilityFactory {
             return false;
         }
 
-        if (sa.getRestrictions().getPlaneswalker() && AllZone.getPhase().is(Constant.Phase.Main2)) {
+        if (sa.getRestrictions().getPlaneswalker() && AllZone.getPhase().is(Constant.Phase.MAIN2)) {
             return true;
         }
 
-        return (AllZone.getPhase().is(Constant.Phase.End_Of_Turn) && AllZone.getPhase().isNextTurn(
+        return (AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
                 AllZone.getComputerPlayer()));
     }
 
@@ -1309,7 +1309,7 @@ public class AbilityFactory {
     public static boolean waitForBlocking(final SpellAbility sa) {
 
         return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (AllZone.getPhase().isBefore(
-                Constant.Phase.Combat_Declare_Blockers_InstantAbility) || AllZone.getPhase().isNextTurn(
+                Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || AllZone.getPhase().isNextTurn(
                 AllZone.getHumanPlayer())));
     }
 

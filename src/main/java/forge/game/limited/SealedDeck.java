@@ -191,7 +191,7 @@ public class SealedDeck {
             colorChooserList.add(creatures.get(i));
 
         int colorCounts[] = {0, 0, 0, 0, 0};
-        String colors[] = Constant.Color.onlyColors;
+        String colors[] = Constant.Color.ONLY_COLORS;
         for (int i = 0; i < colors.length; i++)
             colorCounts[i] = colorChooserList.getColor(colors[i]).size();
 
@@ -345,7 +345,7 @@ public class SealedDeck {
                         float p = (float) ClrCnts[i].Count / (float) totalColor;
                         int nLand = (int) ((float) landsNeeded * p) + 1;
                         //tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
-                        if (Constant.Runtime.DevMode[0])
+                        if (Constant.Runtime.DEV_MODE[0])
                             System.out.println("Basics[" + ClrCnts[i].Color + "]:" + nLand);
 
                         for (int j = 0; j <= nLand; j++) {
@@ -364,7 +364,7 @@ public class SealedDeck {
                         deck.add(c);
                         landsNeeded--;
 
-                        if (Constant.Runtime.DevMode[0])
+                        if (Constant.Runtime.DEV_MODE[0])
                             System.out.println("AddBasics: " + c.getName());
                     }
                     if (++n > 4)
@@ -406,7 +406,7 @@ public class SealedDeck {
             String Mana[] = {"W", "U", "B", "R", "G"};
             String Clrs[] = {"white", "blue", "black", "red", "green"};
 
-            for (int i = 0; i < Constant.Color.onlyColors.length; i++) {
+            for (int i = 0; i < Constant.Color.ONLY_COLORS.length; i++) {
                 if (Clrs[i].equals(color))
                     return Mana[i];
             }

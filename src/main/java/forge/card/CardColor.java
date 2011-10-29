@@ -249,17 +249,17 @@ public final class CardColor implements Comparable<CardColor> {
         }
         switch (myColor) {
         case 0:
-            return Constant.Color.Colorless;
+            return Constant.Color.COLORLESS;
         case WHITE:
-            return Constant.Color.White;
+            return Constant.Color.WHITE;
         case BLUE:
-            return Constant.Color.Blue;
+            return Constant.Color.BLUE;
         case BLACK:
-            return Constant.Color.Black;
+            return Constant.Color.BLACK;
         case RED:
-            return Constant.Color.Red;
+            return Constant.Color.RED;
         case GREEN:
-            return Constant.Color.Green;
+            return Constant.Color.GREEN;
         default:
             return "multi";
         }

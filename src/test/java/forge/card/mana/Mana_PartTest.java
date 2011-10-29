@@ -481,11 +481,11 @@ public class Mana_PartTest {
 
             Card c = new Card();
 
-            p.addMana(new Mana(Constant.Color.Black, 1, c));
-            p.addMana(new Mana(Constant.Color.Red, 1, c));
-            p.addMana(new Mana(Constant.Color.Green, 1, c));
-            p.addMana(new Mana(Constant.Color.White, 1, c));
-            p.addMana(new Mana(Constant.Color.Blue, 1, c));
+            p.addMana(new Mana(Constant.Color.BLACK, 1, c));
+            p.addMana(new Mana(Constant.Color.RED, 1, c));
+            p.addMana(new Mana(Constant.Color.GREEN, 1, c));
+            p.addMana(new Mana(Constant.Color.WHITE, 1, c));
+            p.addMana(new Mana(Constant.Color.BLUE, 1, c));
 
             check(46.1, p.isPaid(), p);
         }

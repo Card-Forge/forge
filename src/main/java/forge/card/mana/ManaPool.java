@@ -56,13 +56,13 @@ public class ManaPool extends Card {
         addIntrinsicKeyword("Indestructible");
         setImmutable(true);
         clearPool();
-        map.put(Constant.Color.White, 0);
-        map.put(Constant.Color.Blue, 1);
-        map.put(Constant.Color.Black, 2);
-        map.put(Constant.Color.Red, 3);
-        map.put(Constant.Color.Green, 4);
-        map.put(Constant.Color.Colorless, 5);
-        map.put(Constant.Color.Snow, 6);
+        map.put(Constant.Color.WHITE, 0);
+        map.put(Constant.Color.BLUE, 1);
+        map.put(Constant.Color.BLACK, 2);
+        map.put(Constant.Color.RED, 3);
+        map.put(Constant.Color.GREEN, 4);
+        map.put(Constant.Color.COLORLESS, 5);
+        map.put(Constant.Color.SNOW, 6);
     }
 
     /**
@@ -77,8 +77,8 @@ public class ManaPool extends Card {
 
         int[] normalMana = { 0, 0, 0, 0, 0, 0 };
         int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-        String[] manaStrings = { Constant.Color.White, Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
-                Constant.Color.Green, Constant.Color.Colorless };
+        String[] manaStrings = { Constant.Color.WHITE, Constant.Color.BLUE, Constant.Color.BLACK, Constant.Color.RED,
+                Constant.Color.GREEN, Constant.Color.COLORLESS };
 
         for (Mana m : pool) {
             if (m.isSnow()) {
@@ -130,8 +130,8 @@ public class ManaPool extends Card {
 
         int[] normalMana = { 0, 0, 0, 0, 0, 0 };
         int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-        String[] manaStrings = { Constant.Color.White, Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
-                Constant.Color.Green, Constant.Color.Colorless };
+        String[] manaStrings = { Constant.Color.WHITE, Constant.Color.BLUE, Constant.Color.BLACK, Constant.Color.RED,
+                Constant.Color.GREEN, Constant.Color.COLORLESS };
 
         for (Mana m : pool) {
             if (m.isSnow()) {
@@ -255,7 +255,7 @@ public class ManaPool extends Card {
         if (pool.equals(floatingMana)) {
             floatingTotals[map.get(mana.getColor())] += mana.getAmount();
             if (mana.isSnow()) {
-                floatingTotals[map.get(Constant.Color.Snow)] += mana.getAmount();
+                floatingTotals[map.get(Constant.Color.SNOW)] += mana.getAmount();
             }
         }
     }
@@ -300,7 +300,7 @@ public class ManaPool extends Card {
 
         for (String c : manaArr) {
             String longStr = Input_PayManaCostUtil.getLongColorString(c);
-            if (longStr.equals(Constant.Color.Colorless)) {
+            if (longStr.equals(Constant.Color.COLORLESS)) {
                 genericTotal += Integer.parseInt(c);
             } else if (color.equals("")) {
                 color = longStr;
@@ -319,7 +319,7 @@ public class ManaPool extends Card {
             manaList.add(new Mana(color, total, card));
         }
         if (genericTotal > 0) {
-            manaList.add(new Mana(Constant.Color.Colorless, genericTotal, card));
+            manaList.add(new Mana(Constant.Color.COLORLESS, genericTotal, card));
         }
 
         return manaList;
@@ -339,7 +339,7 @@ public class ManaPool extends Card {
             // Omnath in play, clear all non-green mana
             int i = 0;
             while (i < floatingMana.size()) {
-                if (floatingMana.get(i).isColor(Constant.Color.Green)) {
+                if (floatingMana.get(i).isColor(Constant.Color.GREEN)) {
                     i++;
                     continue;
                 }
@@ -366,7 +366,7 @@ public class ManaPool extends Card {
         boolean wantSnow = false;
         for (int i = 0; i < colors.length; i++) {
             colors[i] = Input_PayManaCostUtil.getLongColorString(colors[i]);
-            if (colors[i].equals(Constant.Color.Snow)) {
+            if (colors[i].equals(Constant.Color.SNOW)) {
                 wantSnow = true;
             }
         }
@@ -384,10 +384,10 @@ public class ManaPool extends Card {
             } else if (wantSnow && mana.isSnow()) {
                 if (choice == null) {
                     choice = mana;
-                } else if (choice.isColor(Constant.Color.Colorless)) {
+                } else if (choice.isColor(Constant.Color.COLORLESS)) {
                     // do nothing Snow Colorless should be used first to pay for
                     // Snow mana
-                } else if (mana.isColor(Constant.Color.Colorless)) {
+                } else if (mana.isColor(Constant.Color.COLORLESS)) {
                     // give preference to Colorless Snow mana over Colored snow
                     // mana
                     choice = mana;
@@ -396,8 +396,8 @@ public class ManaPool extends Card {
                     // pay Snow costs
                     choice = mana;
                 }
-            } else if (colors[0].equals(Constant.Color.Colorless)) { // colorless
-                if (choice == null && mana.isColor(Constant.Color.Colorless)) {
+            } else if (colors[0].equals(Constant.Color.COLORLESS)) { // colorless
+                if (choice == null && mana.isColor(Constant.Color.COLORLESS)) {
                     choice = mana; // Colorless fits the bill nicely
                 } else if (choice == null) {
                     manaChoices.add(mana);
@@ -412,14 +412,14 @@ public class ManaPool extends Card {
             return choice;
         }
 
-        if (colors[0].equals(Constant.Color.Colorless)) {
+        if (colors[0].equals(Constant.Color.COLORLESS)) {
             if (manaChoices.size() == 1) {
                 choice = manaChoices.get(0);
             } else if (manaChoices.size() > 1) {
                 int[] normalMana = { 0, 0, 0, 0, 0, 0 };
                 int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-                String[] manaStrings = { Constant.Color.White, Constant.Color.Blue, Constant.Color.Black,
-                        Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless };
+                String[] manaStrings = { Constant.Color.WHITE, Constant.Color.BLUE, Constant.Color.BLACK,
+                        Constant.Color.RED, Constant.Color.GREEN, Constant.Color.COLORLESS };
 
                 // loop through manaChoices adding
                 for (Mana m : manaChoices) {
@@ -575,7 +575,7 @@ public class ManaPool extends Card {
             if (pool.equals(floatingMana)) {
                 floatingTotals[map.get(choice.getColor())] -= choice.getAmount();
                 if (choice.isSnow()) {
-                    floatingTotals[map.get(Constant.Color.Snow)] -= choice.getAmount();
+                    floatingTotals[map.get(Constant.Color.SNOW)] -= choice.getAmount();
                 }
             }
         }

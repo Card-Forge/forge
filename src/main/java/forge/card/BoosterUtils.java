@@ -254,7 +254,7 @@ public final class BoosterUtils {
         List<CardPrinted> out = new ArrayList<CardPrinted>();
         Collections.shuffle(in, MyRandom.random);
 
-        for (int i = 0; i < Constant.Color.Colors.length; i++) {
+        for (int i = 0; i < Constant.Color.COLORS.length; i++) {
             CardPrinted check = findCardOfColor(in, i);
             if (check != null) {
                 out.add(check);

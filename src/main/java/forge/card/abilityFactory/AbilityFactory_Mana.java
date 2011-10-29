@@ -556,14 +556,14 @@ public class AbilityFactory_Mana {
             colors = hasProperty(maxChoices, cards, colors);
         } else if (reflectProperty.equals("Produced")) {
             String producedColors = (String) abMana.getTriggeringObject("Produced");
-            for (String col : Constant.Color.onlyColors) {
+            for (String col : Constant.Color.ONLY_COLORS) {
                 String s = Input_PayManaCostUtil.getShortColorString(col);
                 if (producedColors.contains(s) && !colors.contains(col)) {
                     colors.add(col);
                 }
             }
-            if (maxChoices == 6 && producedColors.contains("1") && !colors.contains(Constant.Color.Colorless)) {
-                colors.add(Constant.Color.Colorless);
+            if (maxChoices == 6 && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
+                colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
             ArrayList<Ability_Mana> abilities = new ArrayList<Ability_Mana>();
@@ -623,7 +623,7 @@ public class AbilityFactory_Mana {
         for (Card c : cards) {
             // For each card, go through all the colors and if the card is that
             // color, add
-            for (String col : Constant.Color.onlyColors) {
+            for (String col : Constant.Color.ONLY_COLORS) {
                 if (c.isColor(col) && !colors.contains(col)) {
                     colors.add(col);
                     if (colors.size() == maxChoices) {
@@ -649,15 +649,15 @@ public class AbilityFactory_Mana {
      * @return a {@link java.util.ArrayList} object.
      */
     private static ArrayList<String> canProduce(final int maxChoices, final Ability_Mana ab, final ArrayList<String> colors) {
-        for (String col : Constant.Color.onlyColors) {
+        for (String col : Constant.Color.ONLY_COLORS) {
             String s = Input_PayManaCostUtil.getShortColorString(col);
             if (ab.canProduce(s) && !colors.contains(col)) {
                 colors.add(col);
             }
         }
 
-        if (maxChoices == 6 && ab.canProduce("1") && !colors.contains(Constant.Color.Colorless)) {
-            colors.add(Constant.Color.Colorless);
+        if (maxChoices == 6 && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
+            colors.add(Constant.Color.COLORLESS);
         }
 
         return colors;

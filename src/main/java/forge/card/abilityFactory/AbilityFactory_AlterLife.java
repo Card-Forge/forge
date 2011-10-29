@@ -272,7 +272,7 @@ public class AbilityFactory_AlterLife {
         }
 
         // Don't use lifegain before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -637,7 +637,7 @@ public class AbilityFactory_AlterLife {
         }
 
         // Don't use loselife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases") && !priority) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases") && !priority) {
             return false;
         }
 
@@ -1071,7 +1071,7 @@ public class AbilityFactory_AlterLife {
         }
 
         // Don't use poison before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -1289,7 +1289,7 @@ public class AbilityFactory_AlterLife {
         }
 
         // Don't use setLife before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 

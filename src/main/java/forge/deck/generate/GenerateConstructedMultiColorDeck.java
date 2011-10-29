@@ -48,11 +48,11 @@ public class GenerateConstructedMultiColorDeck {
      * </p>
      */
     private void setupBasicLandMap() {
-        map.put(Constant.Color.Black, "Swamp");
-        map.put(Constant.Color.Blue, "Island");
-        map.put(Constant.Color.Green, "Forest");
-        map.put(Constant.Color.Red, "Mountain");
-        map.put(Constant.Color.White, "Plains");
+        map.put(Constant.Color.BLACK, "Swamp");
+        map.put(Constant.Color.BLUE, "Island");
+        map.put(Constant.Color.GREEN, "Forest");
+        map.put(Constant.Color.RED, "Mountain");
+        map.put(Constant.Color.WHITE, "Plains");
     }
 
     /**
@@ -61,26 +61,26 @@ public class GenerateConstructedMultiColorDeck {
      * </p>
      */
     private void setupMultiMap() {
-        multiMap.put(Constant.Color.Black + Constant.Color.Blue, new String[] { "Underground Sea", "Watery Grave" });
-        multiMap.put(Constant.Color.Black + Constant.Color.Green, new String[] { "Bayou", "Overgrown Tomb" });
-        multiMap.put(Constant.Color.Black + Constant.Color.Red, new String[] { "Badlands", "Blood Crypt" });
-        multiMap.put(Constant.Color.Black + Constant.Color.White, new String[] { "Scrubland", "Godless Shrine" });
-        multiMap.put(Constant.Color.Blue + Constant.Color.Black, new String[] { "Underground Sea", "Watery Grave" });
-        multiMap.put(Constant.Color.Blue + Constant.Color.Green, new String[] { "Tropical Island", "Breeding Pool" });
-        multiMap.put(Constant.Color.Blue + Constant.Color.Red, new String[] { "Volcanic Island", "Steam Vents" });
-        multiMap.put(Constant.Color.Blue + Constant.Color.White, new String[] { "Tundra", "Hallowed Fountain" });
-        multiMap.put(Constant.Color.Green + Constant.Color.Black, new String[] { "Bayou", "Overgrown Tomb" });
-        multiMap.put(Constant.Color.Green + Constant.Color.Blue, new String[] { "Tropical Island", "Breeding Pool" });
-        multiMap.put(Constant.Color.Green + Constant.Color.Red, new String[] { "Taiga", "Stomping Ground" });
-        multiMap.put(Constant.Color.Green + Constant.Color.White, new String[] { "Savannah", "Temple Garden" });
-        multiMap.put(Constant.Color.Red + Constant.Color.Black, new String[] { "Badlands", "Blood Crypt" });
-        multiMap.put(Constant.Color.Red + Constant.Color.Blue, new String[] { "Volcanic Island", "Steam Vents" });
-        multiMap.put(Constant.Color.Red + Constant.Color.Green, new String[] { "Taiga", "Stomping Ground" });
-        multiMap.put(Constant.Color.Red + Constant.Color.White, new String[] { "Plateau", "Sacred Foundry" });
-        multiMap.put(Constant.Color.White + Constant.Color.Black, new String[] { "Scrubland", "Godless Shrine" });
-        multiMap.put(Constant.Color.White + Constant.Color.Blue, new String[] { "Tundra", "Hallowed Fountain" });
-        multiMap.put(Constant.Color.White + Constant.Color.Green, new String[] { "Savannah", "Temple Garden" });
-        multiMap.put(Constant.Color.White + Constant.Color.Red, new String[] { "Plateau", "Sacred Foundry" });
+        multiMap.put(Constant.Color.BLACK + Constant.Color.BLUE, new String[] { "Underground Sea", "Watery Grave" });
+        multiMap.put(Constant.Color.BLACK + Constant.Color.GREEN, new String[] { "Bayou", "Overgrown Tomb" });
+        multiMap.put(Constant.Color.BLACK + Constant.Color.RED, new String[] { "Badlands", "Blood Crypt" });
+        multiMap.put(Constant.Color.BLACK + Constant.Color.WHITE, new String[] { "Scrubland", "Godless Shrine" });
+        multiMap.put(Constant.Color.BLUE + Constant.Color.BLACK, new String[] { "Underground Sea", "Watery Grave" });
+        multiMap.put(Constant.Color.BLUE + Constant.Color.GREEN, new String[] { "Tropical Island", "Breeding Pool" });
+        multiMap.put(Constant.Color.BLUE + Constant.Color.RED, new String[] { "Volcanic Island", "Steam Vents" });
+        multiMap.put(Constant.Color.BLUE + Constant.Color.WHITE, new String[] { "Tundra", "Hallowed Fountain" });
+        multiMap.put(Constant.Color.GREEN + Constant.Color.BLACK, new String[] { "Bayou", "Overgrown Tomb" });
+        multiMap.put(Constant.Color.GREEN + Constant.Color.BLUE, new String[] { "Tropical Island", "Breeding Pool" });
+        multiMap.put(Constant.Color.GREEN + Constant.Color.RED, new String[] { "Taiga", "Stomping Ground" });
+        multiMap.put(Constant.Color.GREEN + Constant.Color.WHITE, new String[] { "Savannah", "Temple Garden" });
+        multiMap.put(Constant.Color.RED + Constant.Color.BLACK, new String[] { "Badlands", "Blood Crypt" });
+        multiMap.put(Constant.Color.RED + Constant.Color.BLUE, new String[] { "Volcanic Island", "Steam Vents" });
+        multiMap.put(Constant.Color.RED + Constant.Color.GREEN, new String[] { "Taiga", "Stomping Ground" });
+        multiMap.put(Constant.Color.RED + Constant.Color.WHITE, new String[] { "Plateau", "Sacred Foundry" });
+        multiMap.put(Constant.Color.WHITE + Constant.Color.BLACK, new String[] { "Scrubland", "Godless Shrine" });
+        multiMap.put(Constant.Color.WHITE + Constant.Color.BLUE, new String[] { "Tundra", "Hallowed Fountain" });
+        multiMap.put(Constant.Color.WHITE + Constant.Color.GREEN, new String[] { "Savannah", "Temple Garden" });
+        multiMap.put(Constant.Color.WHITE + Constant.Color.RED, new String[] { "Plateau", "Sacred Foundry" });
     }
 
     /**
@@ -312,16 +312,16 @@ public class GenerateConstructedMultiColorDeck {
         int b;
         int c;
 
-        a = CardUtil.getRandomIndex(Constant.Color.onlyColors);
+        a = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
         do {
-            b = CardUtil.getRandomIndex(Constant.Color.onlyColors);
-            c = CardUtil.getRandomIndex(Constant.Color.onlyColors);
+            b = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
+            c = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
         } while (a == b || a == c || b == c); // do not want to get the same
                                              // color thrice
 
-        color1 = Constant.Color.onlyColors[a];
-        color2 = Constant.Color.onlyColors[b];
-        color3 = Constant.Color.onlyColors[c];
+        color1 = Constant.Color.ONLY_COLORS[a];
+        color2 = Constant.Color.ONLY_COLORS[b];
+        color3 = Constant.Color.ONLY_COLORS[c];
 
         CardList out = new CardList();
         out.addAll(CardListUtil.getColor(in, color1));
@@ -333,7 +333,7 @@ public class GenerateConstructedMultiColorDeck {
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
                         && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });
@@ -364,11 +364,11 @@ public class GenerateConstructedMultiColorDeck {
      */
     private CardList get5Colors(final CardList in) {
 
-        color1 = Constant.Color.Black;
-        color2 = Constant.Color.Blue;
-        color3 = Constant.Color.Green;
-        color4 = Constant.Color.Red;
-        color5 = Constant.Color.White;
+        color1 = Constant.Color.BLACK;
+        color2 = Constant.Color.BLUE;
+        color3 = Constant.Color.GREEN;
+        color4 = Constant.Color.RED;
+        color5 = Constant.Color.WHITE;
 
         CardList out = new CardList();
         /*
@@ -385,7 +385,7 @@ public class GenerateConstructedMultiColorDeck {
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
-                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.Colorless)
+                return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
                         && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
             }
         });

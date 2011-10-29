@@ -181,20 +181,20 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         AllZone.setQuestData(null);
 
-        if (Constant.Runtime.width[0] == 0) {
-            Constant.Runtime.width[0] = 300;
+        if (Constant.Runtime.WIDTH[0] == 0) {
+            Constant.Runtime.WIDTH[0] = 300;
         }
 
-        if (Constant.Runtime.height[0] == 0) {
-            Constant.Runtime.height[0] = 98;
+        if (Constant.Runtime.HEIGHT[0] == 0) {
+            Constant.Runtime.HEIGHT[0] = 98;
         }
 
-        if (Constant.Runtime.stackSize[0] == 0) {
-            Constant.Runtime.stackSize[0] = 4;
+        if (Constant.Runtime.STACK_SIZE[0] == 0) {
+            Constant.Runtime.STACK_SIZE[0] = 4;
         }
 
-        if (Constant.Runtime.stackOffset[0] == 0) {
-            Constant.Runtime.stackOffset[0] = 10;
+        if (Constant.Runtime.STACK_OFFSET[0] == 0) {
+            Constant.Runtime.STACK_OFFSET[0] = 10;
         }
 
         try {
@@ -533,8 +533,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         devModeCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DEV_MODE));
         devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
-                Singletons.getModel().getPreferences().developerMode = Constant.Runtime.DevMode[0];
+                Constant.Runtime.DEV_MODE[0] = devModeCheckBox.isSelected();
+                Singletons.getModel().getPreferences().developerMode = Constant.Runtime.DEV_MODE[0];
             }
         });
 
@@ -545,8 +545,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         upldDrftCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.UpldDrft[0] = upldDrftCheckBox.isSelected();
-                Singletons.getModel().getPreferences().uploadDraftAI = Constant.Runtime.UpldDrft[0];
+                Constant.Runtime.UPLOAD_DRAFT[0] = upldDrftCheckBox.isSelected();
+                Singletons.getModel().getPreferences().uploadDraftAI = Constant.Runtime.UPLOAD_DRAFT[0];
             }
         });
 
@@ -554,8 +554,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         foilRandomCheckBox.setToolTipText("Approximately 1:20 cards will appear with foiling effects applied.");
         foilRandomCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.RndCFoil[0] = foilRandomCheckBox.isSelected();
-                Singletons.getModel().getPreferences().randCFoil = Constant.Runtime.RndCFoil[0];
+                Constant.Runtime.RANDOM_FOIL[0] = foilRandomCheckBox.isSelected();
+                Singletons.getModel().getPreferences().randCFoil = Constant.Runtime.RANDOM_FOIL[0];
             }
         });
 
@@ -1323,8 +1323,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
-            Constant.Runtime.width[0] = widths[index];
-            Constant.Runtime.height[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
+            Constant.Runtime.WIDTH[0] = widths[index];
+            Constant.Runtime.HEIGHT[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
         }
 
         /**
@@ -1342,8 +1342,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 }
                 index++;
             }
-            Constant.Runtime.width[0] = widths[index];
-            Constant.Runtime.height[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
+            Constant.Runtime.WIDTH[0] = widths[index];
+            Constant.Runtime.HEIGHT[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
         }
     }
 
@@ -1402,7 +1402,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().maxStackSize = values[index];
-            Constant.Runtime.stackSize[0] = values[index];
+            Constant.Runtime.STACK_SIZE[0] = values[index];
         }
 
         /**
@@ -1413,7 +1413,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         public static void setVal(final int val) {
             Singletons.getModel().getPreferences().maxStackSize = val;
-            Constant.Runtime.stackSize[0] = val;
+            Constant.Runtime.STACK_SIZE[0] = val;
         }
     }
 
@@ -1469,7 +1469,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         public static void set(final int index) {
             Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
-            Constant.Runtime.stackOffset[0] = offsets[index];
+            Constant.Runtime.STACK_OFFSET[0] = offsets[index];
         }
 
         /**
@@ -1487,7 +1487,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 }
                 index++;
             }
-            Constant.Runtime.stackOffset[0] = offsets[index];
+            Constant.Runtime.STACK_OFFSET[0] = offsets[index];
         }
     }
 
@@ -1626,10 +1626,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             // preferences.newGui = newGuiCheckBox.isSelected();
             preferences.stackAiLand = smoothLandCheckBox.isSelected();
             preferences.millingLossCondition = Constant.Runtime.MILL[0];
-            preferences.developerMode = Constant.Runtime.DevMode[0];
+            preferences.developerMode = Constant.Runtime.DEV_MODE[0];
             preferences.cardOverlay = cardOverlay.isSelected();
             preferences.scaleLargerThanOriginal = ImageCache.scaleLargerThanOriginal;
-            preferences.uploadDraftAI = Constant.Runtime.UpldDrft[0];
+            preferences.uploadDraftAI = Constant.Runtime.UPLOAD_DRAFT[0];
             preferences.save();
         } catch (Exception ex) {
             int result = JOptionPane.showConfirmDialog(this,

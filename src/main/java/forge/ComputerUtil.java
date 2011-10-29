@@ -712,23 +712,23 @@ public class ComputerUtil {
             return colors;
         }
 
-        if (!colors.contains(Constant.Color.Black) && m.isBasic() && m.mana().equals("B")) {
-            colors.add(Constant.Color.Black);
+        if (!colors.contains(Constant.Color.BLACK) && m.isBasic() && m.mana().equals("B")) {
+            colors.add(Constant.Color.BLACK);
         }
-        if (!colors.contains(Constant.Color.White) && m.isBasic() && m.mana().equals("W")) {
-            colors.add(Constant.Color.White);
+        if (!colors.contains(Constant.Color.WHITE) && m.isBasic() && m.mana().equals("W")) {
+            colors.add(Constant.Color.WHITE);
         }
-        if (!colors.contains(Constant.Color.Green) && m.isBasic() && m.mana().equals("G")) {
-            colors.add(Constant.Color.Green);
+        if (!colors.contains(Constant.Color.GREEN) && m.isBasic() && m.mana().equals("G")) {
+            colors.add(Constant.Color.GREEN);
         }
-        if (!colors.contains(Constant.Color.Red) && m.isBasic() && m.mana().equals("R")) {
-            colors.add(Constant.Color.Red);
+        if (!colors.contains(Constant.Color.RED) && m.isBasic() && m.mana().equals("R")) {
+            colors.add(Constant.Color.RED);
         }
-        if (!colors.contains(Constant.Color.Blue) && m.isBasic() && m.mana().equals("U")) {
-            colors.add(Constant.Color.Blue);
+        if (!colors.contains(Constant.Color.BLUE) && m.isBasic() && m.mana().equals("U")) {
+            colors.add(Constant.Color.BLUE);
         }
-        if (!colors.contains(Constant.Color.Colorless) && m.isBasic() && m.mana().equals("1")) {
-            colors.add(Constant.Color.Colorless);
+        if (!colors.contains(Constant.Color.COLORLESS) && m.isBasic() && m.mana().equals("1")) {
+            colors.add(Constant.Color.COLORLESS);
         }
 
         return colors;

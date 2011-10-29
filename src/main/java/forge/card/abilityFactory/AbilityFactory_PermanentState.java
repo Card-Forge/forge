@@ -780,7 +780,7 @@ public class AbilityFactory_PermanentState {
 
         if (turn.isHuman()) {
             // Tap things down if it's Human's turn
-        } else if (phase.inCombat() && phase.isBefore(Constant.Phase.Combat_Declare_Blockers)) {
+        } else if (phase.inCombat() && phase.isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             // TODO Tap creatures down if in combat
         } else {
             // Generally don't want to tap things during AI turn outside of

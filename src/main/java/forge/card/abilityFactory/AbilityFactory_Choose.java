@@ -630,10 +630,10 @@ public final class AbilityFactory_Choose {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (params.containsKey("OrColors")) {
                         final List<String> o = GuiUtils.getChoices("Choose a color or colors",
-                                Constant.Color.onlyColors);
+                                Constant.Color.ONLY_COLORS);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else {
-                        final Object o = GuiUtils.getChoice("Choose a color", Constant.Color.onlyColors);
+                        final Object o = GuiUtils.getChoice("Choose a color", Constant.Color.ONLY_COLORS);
                         if (null == o) {
                             return;
                         }
@@ -671,7 +671,7 @@ public final class AbilityFactory_Choose {
                         }
                     }
                     if (chosen.equals("")) {
-                        chosen = Constant.Color.Green;
+                        chosen = Constant.Color.GREEN;
                     }
                     GuiUtils.getChoice("Computer picked: ", chosen);
                     final ArrayList<String> colorTemp = new ArrayList<String>();

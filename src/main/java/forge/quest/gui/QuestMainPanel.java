@@ -505,7 +505,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     final void refresh() {
         AllZone.getQuestData().saveData();
 
-        devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
+        devModeCheckBox.setSelected(Constant.Runtime.DEV_MODE[0]);
         smoothLandCheckBox.setSelected(Constant.Runtime.SMOOTH[0]);
 
         creditsLabel.setText(" " + questData.getCredits());
@@ -730,10 +730,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.HUMAN_DECK[0] = humanDeck;
         moveDeckToTop(humanDeckName);
 
-        Constant.Quest.oppIconName[0] = getEventIconFilename();
+        Constant.Quest.OPP_ICON_NAME[0] = getEventIconFilename();
 
         // Dev Mode occurs before Display
-        Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
+        Constant.Runtime.DEV_MODE[0] = devModeCheckBox.isSelected();
 
         // DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards
         // are added

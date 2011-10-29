@@ -70,7 +70,7 @@ public class QuestPetPlant extends QuestPetAbstract {
 
                 @Override
                 public boolean canPlayAI() {
-                    return AllZone.getPhase().getPhase().equals(Constant.Phase.Main2);
+                    return AllZone.getPhase().getPhase().equals(Constant.Phase.MAIN2);
                 }
 
                 @Override

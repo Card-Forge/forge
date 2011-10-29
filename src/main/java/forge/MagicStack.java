@@ -373,7 +373,7 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (AllZone.getPhase().is(Constant.Phase.Cleanup)) { // If something
+        if (AllZone.getPhase().is(Constant.Phase.CLEANUP)) { // If something
                                                              // triggers during
                                                              // Cleanup, need to
                                                              // repeat

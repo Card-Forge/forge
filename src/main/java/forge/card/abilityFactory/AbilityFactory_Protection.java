@@ -155,7 +155,7 @@ public final class AbilityFactory_Protection {
     }
 
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        ArrayList<String> onlyColors = new ArrayList<String>(Arrays.asList(Constant.Color.onlyColors));
+        ArrayList<String> onlyColors = new ArrayList<String>(Arrays.asList(Constant.Color.ONLY_COLORS));
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {
@@ -214,7 +214,7 @@ public final class AbilityFactory_Protection {
 
                 // will the creature attack (only relevant for sorcery speed)?
                 if (CardFactoryUtil.AI_doesCreatureAttack(c)
-                        && AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Attackers)
+                        && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     return true;
                 }
@@ -228,7 +228,7 @@ public final class AbilityFactory_Protection {
                 }
 
                 // is the creature in blocked and the blocker would survive
-                if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers)
+                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
                     return true;
@@ -279,7 +279,7 @@ public final class AbilityFactory_Protection {
         }
 
         // Phase Restrictions
-        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage)) {
+        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -326,7 +326,7 @@ public final class AbilityFactory_Protection {
      * @return a boolean.
      */
     private static boolean protectTgtAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
+        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -353,11 +353,11 @@ public final class AbilityFactory_Protection {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if (sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
-                if (AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Attackers)
+                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (AllZone.getPhase().isBefore(Constant.Phase.Combat_Declare_Blockers)
+                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
@@ -783,7 +783,7 @@ public final class AbilityFactory_Protection {
 
             // Replace AnyColor with the 5 colors
             if (choices.contains("AnyColor")) {
-                gains.addAll(Arrays.asList(Constant.Color.onlyColors));
+                gains.addAll(Arrays.asList(Constant.Color.ONLY_COLORS));
                 choices = choices.replaceAll("AnyColor,?", "");
             }
             // Add any remaining choices

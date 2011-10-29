@@ -47,7 +47,7 @@ public class Mana {
      * @return a {@link java.lang.String} object.
      */
     public final String toString() {
-        if (color.equals(Constant.Color.Colorless)) {
+        if (color.equals(Constant.Color.COLORLESS)) {
             return Integer.toString(amount);
         }
 
@@ -71,7 +71,7 @@ public class Mana {
      */
     public final String toDescriptiveString() {
         // this will be used for advanced choice box
-        if (color.equals(Constant.Color.Colorless)) {
+        if (color.equals(Constant.Color.COLORLESS)) {
             return Integer.toString(amount);
         }
 
@@ -139,7 +139,7 @@ public class Mana {
      * @return a int.
      */
     public final int getColorlessAmount() {
-        return color.equals(Constant.Color.Colorless) ? amount : 0;
+        return color.equals(Constant.Color.COLORLESS) ? amount : 0;
     }
 
     /**

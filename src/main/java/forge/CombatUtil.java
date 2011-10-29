@@ -713,7 +713,7 @@ public class CombatUtil {
         }
 
         if (c.hasKeyword("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-            temp = list.getColor(Constant.Color.Blue);
+            temp = list.getColor(Constant.Color.BLUE);
             if (temp.isEmpty()) {
                 return false;
             }
@@ -2018,8 +2018,8 @@ public class CombatUtil {
 
         String phase = AllZone.getPhase().getPhase();
 
-        if (phase.equals(Constant.Phase.Combat_Declare_Attackers)
-                || phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
+        if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                || phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             if (!cost.equals("0")) {
                 final Ability ability = new Ability(c, cost) {
                     @Override

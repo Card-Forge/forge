@@ -88,15 +88,15 @@ public enum Color {
      */
     public static Color convertFromString(final String s) {
 
-        if (s.equals(Constant.Color.White)) {
+        if (s.equals(Constant.Color.WHITE)) {
             return Color.White;
-        } else if (s.equals(Constant.Color.Green)) {
+        } else if (s.equals(Constant.Color.GREEN)) {
             return Color.Green;
-        } else if (s.equals(Constant.Color.Red)) {
+        } else if (s.equals(Constant.Color.RED)) {
             return Color.Red;
-        } else if (s.equals(Constant.Color.Black)) {
+        } else if (s.equals(Constant.Color.BLACK)) {
             return Color.Black;
-        } else if (s.equals(Constant.Color.Blue)) {
+        } else if (s.equals(Constant.Color.BLUE)) {
             return Color.Blue;
         }
 
@@ -148,17 +148,17 @@ public enum Color {
      */
     public String toString() {
         if (this.equals(Color.White)) {
-            return Constant.Color.White;
+            return Constant.Color.WHITE;
         } else if (this.equals(Color.Green)) {
-            return Constant.Color.Green;
+            return Constant.Color.GREEN;
         } else if (this.equals(Color.Red)) {
-            return Constant.Color.Red;
+            return Constant.Color.RED;
         } else if (this.equals(Color.Black)) {
-            return Constant.Color.Black;
+            return Constant.Color.BLACK;
         } else if (this.equals(Color.Blue)) {
-            return Constant.Color.Blue;
+            return Constant.Color.BLUE;
         } else {
-            return Constant.Color.Colorless;
+            return Constant.Color.COLORLESS;
         }
     }
 }

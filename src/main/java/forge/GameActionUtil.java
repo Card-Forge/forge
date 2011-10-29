@@ -576,7 +576,7 @@ public final class GameActionUtil {
             public void resolve() {
                 String color = "";
 
-                Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
+                Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.ONLY_COLORS);
                 color = Input_PayManaCostUtil.getShortColorString((String) o);
 
                 Ability_Mana abMana = new Ability_Mana(c, "0", color) {

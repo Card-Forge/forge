@@ -812,7 +812,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                     if (card.getController().isHuman()) {
-                        String[] colors = Constant.Color.onlyColors;
+                        String[] colors = Constant.Color.ONLY_COLORS;
 
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color[0] = (String) o;
@@ -824,11 +824,11 @@ public class CardFactory_Creatures {
                         list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
                         list.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
 
-                        color[0] = Constant.Color.White;
+                        color[0] = Constant.Color.WHITE;
                         int max = list.getKeywordsContain(color[0]).size();
 
-                        String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red,
-                                Constant.Color.Green };
+                        String[] colors = { Constant.Color.BLUE, Constant.Color.BLACK, Constant.Color.RED,
+                                Constant.Color.GREEN };
                         for (String c : colors) {
                             int cmp = list.getKeywordsContain(c).size();
                             if (cmp > max) {

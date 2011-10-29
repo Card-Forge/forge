@@ -53,74 +53,74 @@ public class RunTest {
             //********* test ManaCost
             ManaCost manaCost = new ManaCost("G");
             check("21", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("22", manaCost.isPaid());
 
             manaCost = new ManaCost("7");
             check("23", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Black);
+            manaCost.payMana(Constant.Color.BLACK);
             check("24", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("25", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Colorless);
+            manaCost.payMana(Constant.Color.COLORLESS);
             check("26", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("27", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Red);
+            manaCost.payMana(Constant.Color.RED);
             check("28", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.White);
+            manaCost.payMana(Constant.Color.WHITE);
             check("29", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.White);
+            manaCost.payMana(Constant.Color.WHITE);
             check("30", manaCost.isPaid());
 
             manaCost = new ManaCost("2 W W G G B B U U R R");
             check("31", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.White);
+            manaCost.payMana(Constant.Color.WHITE);
             check("32", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.White);
+            manaCost.payMana(Constant.Color.WHITE);
             check("32.1", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Black);
+            manaCost.payMana(Constant.Color.BLACK);
             check("33", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Black);
+            manaCost.payMana(Constant.Color.BLACK);
             check("34", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("35", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("36", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("37", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("38", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Red);
+            manaCost.payMana(Constant.Color.RED);
             check("39", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Red);
+            manaCost.payMana(Constant.Color.RED);
             check("40", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Red);
+            manaCost.payMana(Constant.Color.RED);
             check("41", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("42", manaCost.isPaid());
 
             manaCost = new ManaCost("G G");
             check("43", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("44", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Green);
+            manaCost.payMana(Constant.Color.GREEN);
             check("45", manaCost.isPaid());
 
             manaCost = new ManaCost("1 U B");
             check("45", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Black);
+            manaCost.payMana(Constant.Color.BLACK);
             check("46", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("47", !manaCost.isPaid());
-            manaCost.payMana(Constant.Color.Blue);
+            manaCost.payMana(Constant.Color.BLUE);
             check("48", manaCost.isPaid());
 
             //********* test CardUtil.getColors()
             c = new Card();
             c.setManaCost("G");
             ArrayList<String> color = CardUtil.getColors(c);
-            check("49", color.contains(Constant.Color.Green));
+            check("49", color.contains(Constant.Color.GREEN));
             check("50", color.size() == 1);
 
             c = new Card();
@@ -129,38 +129,38 @@ public class RunTest {
             Set<String> set = new HashSet<String>(color);
             System.out.println("color: " + color);
             check("51", set.size() == 5);
-            check("52", color.contains(Constant.Color.Black));
-            check("53", color.contains(Constant.Color.Blue));
-            check("54", color.contains(Constant.Color.Green));
-            check("55", color.contains(Constant.Color.Red));
-            check("56", color.contains(Constant.Color.White));
+            check("52", color.contains(Constant.Color.BLACK));
+            check("53", color.contains(Constant.Color.BLUE));
+            check("54", color.contains(Constant.Color.GREEN));
+            check("55", color.contains(Constant.Color.RED));
+            check("56", color.contains(Constant.Color.WHITE));
 
             c = new Card();
             c.setManaCost("2");
             color = CardUtil.getColors(c);
             check("57", color.size() == 1);
-            check("58", color.contains(Constant.Color.Colorless));
+            check("58", color.contains(Constant.Color.COLORLESS));
 
             c = new Card();
             color = CardUtil.getColors(c);
             check("59", color.size() == 1);
-            check("60", color.contains(Constant.Color.Colorless));
+            check("60", color.contains(Constant.Color.COLORLESS));
 
             c = new Card();
             c.setManaCost("");
             color = CardUtil.getColors(c);
             check("61", color.size() == 1);
-            check("62", color.contains(Constant.Color.Colorless));
+            check("62", color.contains(Constant.Color.COLORLESS));
 
             c = cf.getCard("Bayou", null);
             color = CardUtil.getColors(c);
             check("63", color.size() == 1);
-            check("64", color.contains(Constant.Color.Colorless));
+            check("64", color.contains(Constant.Color.COLORLESS));
 
             c = cf.getCard("Elvish Warrior", null);
             color = CardUtil.getColors(c);
             check("65", color.size() == 1);
-            check("66", color.contains(Constant.Color.Green));
+            check("66", color.contains(Constant.Color.GREEN));
 
             c = new Card();
             c.setManaCost("11 W W B B U U R R G G");
@@ -172,7 +172,7 @@ public class RunTest {
             c.setManaCost("11");
             color = CardUtil.getColors(c);
             check("68", color.size() == 1);
-            check("69", color.contains(Constant.Color.Colorless));
+            check("69", color.contains(Constant.Color.COLORLESS));
 
             check("70", c.isCreature());
             check("71", !c.isArtifact());
@@ -210,8 +210,8 @@ public class RunTest {
             check("97", c.isUntapped());
 
             //test Input_PayManaCostUtil
-            check("98", Input_PayManaCostUtil.getLongColorString("G").equals(Constant.Color.Green));
-            check("99", Input_PayManaCostUtil.getLongColorString("1").equals(Constant.Color.Colorless));
+            check("98", Input_PayManaCostUtil.getLongColorString("G").equals(Constant.Color.GREEN));
+            check("99", Input_PayManaCostUtil.getLongColorString("1").equals(Constant.Color.COLORLESS));
 
             /*
            check("101", Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green, new ManaCost("5")) == true);

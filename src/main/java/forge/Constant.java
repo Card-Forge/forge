@@ -40,31 +40,31 @@ public interface Constant {
         public static final boolean[] MILL = new boolean[1];
 
         /** The Constant DevMode. */
-        public static final boolean[] DevMode = new boolean[1]; // one for
+        public static final boolean[] DEV_MODE = new boolean[1]; // one for
                                                                 // normal mode
                                                                 // one for quest
                                                                 // mode
 
         /** The Constant NetConn. */
-        public static final boolean[] NetConn = new boolean[1];
+        public static final boolean[] NET_CONN = new boolean[1];
 
         /** The Constant UpldDrft. */
-        public static final boolean[] UpldDrft = new boolean[1];
+        public static final boolean[] UPLOAD_DRAFT = new boolean[1];
 
         /** The Constant RndCFoil. */
-        public static final boolean[] RndCFoil = new boolean[1];
+        public static final boolean[] RANDOM_FOIL = new boolean[1];
 
         /** The Constant width. */
-        public static final int[] width = { 300 };
+        public static final int[] WIDTH = { 300 };
 
         /** The Constant height. */
-        public static final int[] height = new int[1];
+        public static final int[] HEIGHT = new int[1];
 
         /** The Constant stackSize. */
-        public static final int[] stackSize = new int[1];
+        public static final int[] STACK_SIZE = new int[1];
 
         /** The Constant stackOffset. */
-        public static final int[] stackOffset = new int[1];
+        public static final int[] STACK_OFFSET = new int[1];
 
         /**
          * @return the gameType
@@ -128,34 +128,34 @@ public interface Constant {
         String COMBAT_BEGIN = "BeginCombat";
 
         /** The Constant Combat_Declare_Attackers. */
-        String Combat_Declare_Attackers = "Declare Attackers";
+        String COMBAT_DECLARE_ATTACKERS = "Declare Attackers";
 
         /** The Constant Combat_Declare_Attackers_InstantAbility. */
-        String Combat_Declare_Attackers_InstantAbility = "Declare Attackers - Play Instants and Abilities";
+        String COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY = "Declare Attackers - Play Instants and Abilities";
 
         /** The Constant Combat_Declare_Blockers. */
-        String Combat_Declare_Blockers = "Declare Blockers";
+        String COMBAT_DECLARE_BLOCKERS = "Declare Blockers";
 
         /** The Constant Combat_Declare_Blockers_InstantAbility. */
-        String Combat_Declare_Blockers_InstantAbility = "Declare Blockers - Play Instants and Abilities";
+        String COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY = "Declare Blockers - Play Instants and Abilities";
 
         /** The Constant Combat_Damage. */
-        String Combat_Damage = "Combat Damage";
+        String COMBAT_DAMAGE = "Combat Damage";
 
         /** The Constant Combat_FirstStrikeDamage. */
-        String Combat_FirstStrikeDamage = "First Strike Damage";
+        String COMBAT_FIRST_STRIKE_DAMAGE = "First Strike Damage";
 
         /** The Constant Combat_End. */
-        String Combat_End = "EndCombat";
+        String COMBAT_END = "EndCombat";
 
         /** The Constant Main2. */
-        String Main2 = "Main2";
+        String MAIN2 = "Main2";
 
         /** The Constant End_Of_Turn. */
-        String End_Of_Turn = "End of Turn";
+        String END_OF_TURN = "End of Turn";
 
         /** The Constant Cleanup. */
-        String Cleanup = "Cleanup";
+        String CLEANUP = "Cleanup";
     }
 
     /**
@@ -229,37 +229,37 @@ public interface Constant {
     public interface Color {
 
         /** The Black. */
-        String Black = "black";
+        String BLACK = "black";
 
         /** The Blue. */
-        String Blue = "blue";
+        String BLUE = "blue";
 
         /** The Green. */
-        String Green = "green";
+        String GREEN = "green";
 
         /** The Red. */
-        String Red = "red";
+        String RED = "red";
 
         /** The White. */
-        String White = "white";
+        String WHITE = "white";
 
         /** The Colorless. */
-        String Colorless = "colorless";
+        String COLORLESS = "colorless";
         // color order "wubrg"
         /** The Colors. */
-        String[] Colors = { White, Blue, Black, Red, Green, Colorless };
+        String[] COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
 
         /** The only colors. */
-        String[] onlyColors = { White, Blue, Black, Red, Green };
+        String[] ONLY_COLORS = { WHITE, BLUE, BLACK, RED, GREEN };
 
         /** The Snow. */
-        String Snow = "snow";
+        String SNOW = "snow";
 
         /** The Mana colors. */
-        String[] ManaColors = { White, Blue, Black, Red, Green, Colorless, Snow };
+        String[] MANA_COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS, SNOW };
 
         /** The loaded. */
-        boolean[] loaded = { false };
+        boolean[] LOADED = { false };
         // public static final Constant_StringHashMap[] LandColor = new
         // Constant_StringHashMap[1];
 
@@ -284,13 +284,13 @@ public interface Constant {
         CardList[] COMPUTER_LIST = new CardList[1];
 
         /** The human life. */
-        int[] humanLife = new int[1];
+        int[] HUMAN_LIFE = new int[1];
 
         /** The computer life. */
         int[] COMPUTER_LIFE = new int[1];
 
         /** The opp icon name. */
-        String[] oppIconName = new String[1];
+        String[] OPP_ICON_NAME = new String[1];
     }
 
     /**

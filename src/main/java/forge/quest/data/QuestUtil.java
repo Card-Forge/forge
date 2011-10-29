@@ -169,19 +169,19 @@ public class QuestUtil {
         // Determine color ("random" defaults to null color)
         String col = null;
         if (temp[1].equalsIgnoreCase("black")) {
-            col = Constant.Color.Black;
+            col = Constant.Color.BLACK;
         } else if (temp[1].equalsIgnoreCase("blue")) {
-            col = Constant.Color.Blue;
+            col = Constant.Color.BLUE;
         } else if (temp[1].equalsIgnoreCase("colorless")) {
-            col = Constant.Color.Colorless;
+            col = Constant.Color.COLORLESS;
         } else if (temp[1].equalsIgnoreCase("green")) {
-            col = Constant.Color.Green;
+            col = Constant.Color.GREEN;
         } else if (temp[1].equalsIgnoreCase("multicolor")) {
             col = "Multicolor"; // Note: No constant color for this??
         } else if (temp[1].equalsIgnoreCase("red")) {
-            col = Constant.Color.Red;
+            col = Constant.Color.RED;
         } else if (temp[1].equalsIgnoreCase("white")) {
-            col = Constant.Color.White;
+            col = Constant.Color.WHITE;
         }
 
         return BoosterUtils.generateCards(qty, rar, col);

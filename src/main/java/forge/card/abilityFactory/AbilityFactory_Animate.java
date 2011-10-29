@@ -309,13 +309,13 @@ public final class AbilityFactory_Animate {
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || AllZone.getCombat()
+        if ((!AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || AllZone.getCombat()
                 .getAttackers().length == 0) && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (AllZone.getPhase().is(Constant.Phase.Main2) && !params.containsKey("Permanent")) {
+        if (AllZone.getPhase().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
             return false;
         }
 

@@ -1128,7 +1128,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlayAI() {
 
-                if (AllZone.getPhase().isBefore(Constant.Phase.Main2)) {
+                if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
                     return false;
                 }
 
@@ -1454,7 +1454,7 @@ public class CardFactoryUtil {
                     public boolean addCard(final Card c) {
                         return c.isCreature()
                                 && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone.getPhase()
-                                        .is(Constant.Phase.Main2))) && CardFactoryUtil.canTarget(sourceCard, c)
+                                        .is(Constant.Phase.MAIN2))) && CardFactoryUtil.canTarget(sourceCard, c)
                                 && (((c.getNetDefense() + tough) > 0) || sourceCard.getName().equals("Skullclamp"));
                     }
                 });
@@ -3213,7 +3213,7 @@ public class CardFactoryUtil {
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
             final String cPhase = AllZone.getPhase().getPhase();
-            if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.Main2))
+            if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.MAIN2))
                     && AllZone.getPhase().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {

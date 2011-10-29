@@ -137,7 +137,7 @@ class CardFactory_Lands {
                 @Override
                 public boolean canPlayAI() {
                     String phase = AllZone.getPhase().getPhase();
-                    return phase.equals(Constant.Phase.Main2) && super.canPlayAI();
+                    return phase.equals(Constant.Phase.MAIN2) && super.canPlayAI();
                 }
 
                 @Override

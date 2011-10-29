@@ -600,7 +600,7 @@ public class Combat {
                     getList(a).remove(c);
                     // TODO if Declare Blockers and Declare Blockers (Abilities)
                     // merge this logic needs to be tweaked
-                    if (getBlockers(a).size() == 0 && AllZone.getPhase().is(Constant.Phase.Combat_Declare_Blockers)) {
+                    if (getBlockers(a).size() == 0 && AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
                         blocked.remove(a);
                     }
                 }
@@ -837,7 +837,7 @@ public class Combat {
         // This function handles both Regular and First Strike combat assignment
         Player player = AllZone.getCombat().getDefendingPlayer();
 
-        boolean bFirstStrike = AllZone.getPhase().is(Constant.Phase.Combat_FirstStrikeDamage);
+        boolean bFirstStrike = AllZone.getPhase().is(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE);
 
         HashMap<Card, Integer> defMap = AllZone.getCombat().getDefendingDamageMap();
 

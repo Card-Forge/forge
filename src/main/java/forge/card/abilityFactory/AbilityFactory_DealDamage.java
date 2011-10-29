@@ -319,7 +319,7 @@ public class AbilityFactory_DealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            if (AllZone.getPhase().is(Constant.Phase.End_Of_Turn, AllZone.getHumanPlayer())) {
+            if (AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer())) {
                 return true;
             } else {
                 return false;
@@ -398,7 +398,7 @@ public class AbilityFactory_DealDamage {
 
         if (AF.isSpell()) {
             // If this is a spell, cast it instead of discarding
-            if ((AllZone.getPhase().is(Constant.Phase.End_Of_Turn) || AllZone.getPhase().is(Constant.Phase.Main2))
+            if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) || AllZone.getPhase().is(Constant.Phase.MAIN2))
                     && AllZone.getPhase().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }

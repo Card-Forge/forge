@@ -1022,7 +1022,7 @@ public class Gui_HomeScreen {
         } else if (o.toString().equals(decks.get(2))) {
             ArrayList<String> colors = new ArrayList<String>();
             colors.add("Random");
-            for (String c : Constant.Color.onlyColors) {
+            for (String c : Constant.Color.ONLY_COLORS) {
                 colors.add(c);
             }
 
@@ -1063,7 +1063,7 @@ public class Gui_HomeScreen {
         } else if (o.toString().equals(decks.get(3))) {
             ArrayList<String> colors = new ArrayList<String>();
             colors.add("Random");
-            for (String c : Constant.Color.onlyColors) {
+            for (String c : Constant.Color.ONLY_COLORS) {
                 colors.add(c);
             }
 
@@ -1361,8 +1361,8 @@ public class Gui_HomeScreen {
                 }
 
                 Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
-                Constant.Runtime.width[0] = widths[index];
-                Constant.Runtime.height[0] = heights[index];
+                Constant.Runtime.WIDTH[0] = widths[index];
+                Constant.Runtime.HEIGHT[0] = heights[index];
 
             } catch (Exception ex) {
                 ErrorViewer.showError(ex);
@@ -1382,7 +1382,7 @@ public class Gui_HomeScreen {
                     return;
                 }
                 Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
-                Constant.Runtime.stackOffset[0] = offsets[index];
+                Constant.Runtime.STACK_OFFSET[0] = offsets[index];
 
             } catch (Exception ex) {
                 ErrorViewer.showError(ex);
