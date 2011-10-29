@@ -430,7 +430,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     public final void nextPhase() {
         // experimental, add executeCardStateEffects() here:
         for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            Command com = GameActionUtil.commands.get(effect);
+            Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
 

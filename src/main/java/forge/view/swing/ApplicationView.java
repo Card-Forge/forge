@@ -101,7 +101,7 @@ public class ApplicationView implements FView {
             OldGuiNewGame.cardOverlay.setSelected(preferences.cardOverlay);
 
             // FindBugs doesn't like the next line.
-            ImageCache.scaleLargerThanOriginal = preferences.scaleLargerThanOriginal;
+            ImageCache.setScaleLargerThanOriginal(preferences.scaleLargerThanOriginal);
 
             OldGuiNewGame.cardScale.setSelected(preferences.scaleLargerThanOriginal);
             CardStackOffsetAction.set(preferences.stackOffset);

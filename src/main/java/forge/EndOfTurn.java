@@ -67,8 +67,8 @@ public class EndOfTurn implements java.io.Serializable {
         // Pyrohemia and Pestilence
         CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
-        GameActionUtil.endOfTurn_Wall_Of_Reverence();
-        GameActionUtil.endOfTurn_Lighthouse_Chronologist();
+        GameActionUtil.endOfTurnWallOfReverence();
+        GameActionUtil.endOfTurnLighthouseChronologist();
 
         // reset mustAttackEntity for me
         AllZone.getPhase().getPlayerTurn().setMustAttackEntity(null);

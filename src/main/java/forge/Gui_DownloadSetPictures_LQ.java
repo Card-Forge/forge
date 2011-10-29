@@ -74,7 +74,7 @@ public class Gui_DownloadSetPictures_LQ extends GuiDownloader {
         File file;
         File filebase = ForgeProps.getFile(IMAGE_TOKEN);
         for (int i = 0; i < cardTokenLQ.length; i++) {
-            file = new File(filebase, cardTokenLQ[i].name);
+            file = new File(filebase, cardTokenLQ[i].getName());
             if (!file.exists()) {
                 cList.add(cardTokenLQ[i]);
             }

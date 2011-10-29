@@ -840,7 +840,7 @@ public class GameAction {
 
             // card state effects like Glorious Anthem
             for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.commands.get(effect);
+                Command com = GameActionUtil.getCommands().get(effect);
                 com.execute();
             }
 
@@ -946,7 +946,7 @@ public class GameAction {
         destroyLegendaryCreatures();
         destroyPlaneswalkers();
 
-        GameActionUtil.stLandManaAbilities.execute();
+        GameActionUtil.getStLandManaAbilities().execute();
 
         if (!refreeze) {
             AllZone.getStack().unfreezeStack();

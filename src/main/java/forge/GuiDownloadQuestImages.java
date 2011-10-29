@@ -49,7 +49,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
         File file;
         File dir = ForgeProps.getFile(QUEST.OPPONENT_DIR);
         for (int i = 0; i < questOpponents.length; i++) {
-            file = new File(dir, questOpponents[i].name.replace("%20", " "));
+            file = new File(dir, questOpponents[i].getName().replace("%20", " "));
             if (!file.exists()) {
                 urls.add(questOpponents[i]);
             }
@@ -57,7 +57,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
 
         dir = ForgeProps.getFile(PICS_BOOSTER);
         for (int i = 0; i < boosterImages.length; i++) {
-            file = new File(dir, boosterImages[i].name.replace("%20", " "));
+            file = new File(dir, boosterImages[i].getName().replace("%20", " "));
             if (!file.exists()) {
                 urls.add(boosterImages[i]);
             }
@@ -65,7 +65,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
 
         dir = ForgeProps.getFile(IMAGE_ICON);
         for (int i = 0; i < petIcons.length; i++) {
-            file = new File(dir, petIcons[i].name.replace("%20", " "));
+            file = new File(dir, petIcons[i].getName().replace("%20", " "));
             if (!file.exists()) {
                 urls.add(petIcons[i]);
             }
@@ -73,7 +73,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
 
         dir = ForgeProps.getFile(IMAGE_TOKEN);
         for (int i = 0; i < questPets.length; i++) {
-            file = new File(dir, questPets[i].name.replace("%20", " "));
+            file = new File(dir, questPets[i].getName().replace("%20", " "));
             if (!file.exists()) {
                 urls.add(questPets[i]);
             }

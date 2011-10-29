@@ -43,7 +43,7 @@ import forge.properties.NewConstants;
  */
 public class ImageCache implements NewConstants {
     /** Constant <code>imageCache</code>. */
-    private static final Map<String, BufferedImage> imageCache;
+    private static final Map<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
     private static final Pattern FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
     /** Constant <code>TOKEN="#Token"</code> */
@@ -54,10 +54,10 @@ public class ImageCache implements NewConstants {
     private static final String TOKEN = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
 
     /** Constant <code>scaleLargerThanOriginal=true</code>. */
-    public static boolean scaleLargerThanOriginal = true;
+    private static boolean scaleLargerThanOriginal = true;
 
     static {
-        imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+        IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
             public BufferedImage apply(String key) {
                 try {
                     // DEBUG
@@ -71,18 +71,18 @@ public class ImageCache implements NewConstants {
                     if (key.endsWith(NORMAL)) {
                         // normal
                         key = key.substring(0, key.length() - NORMAL.length());
-                        return getNormalSizeImage(imageCache.get(key));
+                        return getNormalSizeImage(IMAGE_CACHE.get(key));
                     } else if (key.endsWith(TAPPED)) {
                         // tapped
                         key = key.substring(0, key.length() - TAPPED.length());
-                        return getTappedSizeImage(imageCache.get(key));
+                        return getTappedSizeImage(IMAGE_CACHE.get(key));
                     }
                     Matcher m = FULL_SIZE.matcher(key);
 
                     if (m.matches()) {
                         // full size
                         key = m.group(1);
-                        return getFullSizeImage(imageCache.get(key), parseDouble(m.group(2)));
+                        return getFullSizeImage(IMAGE_CACHE.get(key), parseDouble(m.group(2)));
                     } else {
                         // original
                         File path;
@@ -156,7 +156,7 @@ public class ImageCache implements NewConstants {
         double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if (scale > 1 && !scaleLargerThanOriginal) {
+        if (scale > 1 && !isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
@@ -184,7 +184,7 @@ public class ImageCache implements NewConstants {
         double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if (scale > 1 && !scaleLargerThanOriginal) {
+        if (scale > 1 && !isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
@@ -206,7 +206,7 @@ public class ImageCache implements NewConstants {
     }
 
     /**
-     * Returns the Image corresponding to the key
+     * Returns the Image corresponding to the key.
      * 
      * @param key
      *            a {@link java.lang.String} object.
@@ -214,12 +214,12 @@ public class ImageCache implements NewConstants {
      */
     private static BufferedImage getImage(final String key) {
         try {
-            BufferedImage image = imageCache.get(key);
+            BufferedImage image = IMAGE_CACHE.get(key);
             // if an image is still cached and it was not the expected size,
             // drop it
             if (!isExpectedSize(key, image)) {
-                imageCache.remove(key);
-                image = imageCache.get(key);
+                IMAGE_CACHE.remove(key);
+                image = IMAGE_CACHE.get(key);
             }
             return image;
         } catch (NullPointerException ex) {
@@ -276,7 +276,7 @@ public class ImageCache implements NewConstants {
     }
 
     /**
-     * Returns an image scaled to the size given in {@link Constant.Runtime}
+     * Returns an image scaled to the size given in {@link Constant.Runtime}.
      * 
      * @param original
      *            a {@link java.awt.image.BufferedImage} object.
@@ -317,7 +317,7 @@ public class ImageCache implements NewConstants {
 
     /**
      * Returns an image scaled to the size given in {@link Constant.Runtime},
-     * but rotated
+     * but rotated.
      * 
      * @param original
      *            a {@link java.awt.image.BufferedImage} object.
@@ -361,7 +361,7 @@ public class ImageCache implements NewConstants {
 
     /**
      * Returns an image scaled to the size appropriate for the card picture
-     * panel
+     * panel.
      * 
      * @param original
      *            a {@link java.awt.image.BufferedImage} object.
@@ -398,6 +398,20 @@ public class ImageCache implements NewConstants {
      * </p>
      */
     public static void clear() {
-        imageCache.clear();
+        IMAGE_CACHE.clear();
+    }
+
+    /**
+     * @return the scaleLargerThanOriginal
+     */
+    public static boolean isScaleLargerThanOriginal() {
+        return scaleLargerThanOriginal;
+    }
+
+    /**
+     * @param scaleLargerThanOriginal the scaleLargerThanOriginal to set
+     */
+    public static void setScaleLargerThanOriginal(boolean scaleLargerThanOriginal) {
+        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO: Add 0 to parameter's name.
     }
 }

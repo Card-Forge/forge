@@ -277,7 +277,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             for (String effect : effects) {
                 tempEffect = effect;
                 AllZone.getStaticEffects().removeStateBasedEffect(effect);
-                Command comm = GameActionUtil.commands.get(tempEffect); // this
+                Command comm = GameActionUtil.getCommands().get(tempEffect); // this
                                                                         // is to
                                                                         // make
                                                                         // sure
@@ -290,7 +290,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         }
 
         for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            Command com = GameActionUtil.commands.get(effect);
+            Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
 

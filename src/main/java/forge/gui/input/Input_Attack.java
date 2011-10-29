@@ -48,8 +48,7 @@ public class Input_Attack extends Input {
             for (int i = 0; i < possibleAttackers.size(); i++) {
                 Card c = possibleAttackers.get(i);
                 if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, AllZone.getCombat())
-                        && !c.isAttacking())
-                {
+                        && !c.isAttacking()) {
                     AllZone.getCombat().addAttacker(c);
                 }
             }
@@ -79,8 +78,7 @@ public class Input_Attack extends Input {
         }
 
         if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
-                && CombatUtil.canAttack(card, AllZone.getCombat()))
-        {
+                && CombatUtil.canAttack(card, AllZone.getCombat())) {
 
             // TODO add the propaganda code here and remove it in
             // Phase.nextPhase()
@@ -100,7 +98,7 @@ public class Input_Attack extends Input {
 
             // for Castle Raptors, since it gets a bonus if untapped
             for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.commands.get(effect);
+                Command com = GameActionUtil.getCommands().get(effect);
                 com.execute();
             }
 

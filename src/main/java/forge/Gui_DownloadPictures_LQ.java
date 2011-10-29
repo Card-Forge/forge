@@ -63,7 +63,7 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
         DownloadObject[] cardPlay = cList.toArray(a);
         // check to see which cards we already have
         for (int i = 0; i < cardPlay.length; i++) {
-            file = new File(base, cardPlay[i].name);
+            file = new File(base, cardPlay[i].getName());
             if (!file.exists()) {
                 list.add(cardPlay[i]);
             }
@@ -72,7 +72,7 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
         // add missing tokens to the list of things to download
         File filebase = ForgeProps.getFile(IMAGE_TOKEN);
         for (int i = 0; i < cardTokenLQ.length; i++) {
-            file = new File(filebase, cardTokenLQ[i].name);
+            file = new File(filebase, cardTokenLQ[i].getName());
             if (!file.exists()) {
                 list.add(cardTokenLQ[i]);
             }

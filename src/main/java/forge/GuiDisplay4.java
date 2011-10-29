@@ -541,8 +541,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 if (c != null) {
 
                     if (c.isTapped()
-                            && (inputControl.input instanceof Input_PayManaCost
-                                    || inputControl.input instanceof Input_PayManaCost_Ability)) {
+                            && (inputControl.getInput() instanceof Input_PayManaCost
+                                    || inputControl.getInput() instanceof Input_PayManaCost_Ability)) {
                         arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
                         for (arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped()) {
@@ -553,7 +553,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
                     CardList att = new CardList(AllZone.getCombat().getAttackers());
                     if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
-                            && (inputControl.input instanceof Input_Attack)) {
+                            && (inputControl.getInput() instanceof Input_Attack)) {
                         arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
                         for (arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
                             if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
@@ -563,15 +563,15 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     }
 
                     if (e.isMetaDown()) {
-                        if (att.contains(c) && (inputControl.input instanceof Input_Attack)
+                        if (att.contains(c) && (inputControl.getInput() instanceof Input_Attack)
                                 && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
                             c.untap();
                             AllZone.getCombat().removeFromCombat(c);
-                        } else if (inputControl.input instanceof Input_Block) {
+                        } else if (inputControl.getInput() instanceof Input_Block) {
                             if (c.getController().isHuman()) {
                                 AllZone.getCombat().removeFromCombat(c);
                             }
-                            ((Input_Block) inputControl.input).removeFromAllBlocking(c);
+                            ((Input_Block) inputControl.getInput()).removeFromAllBlocking(c);
                         }
                     } else {
                         inputControl.selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Battlefield));

@@ -16,7 +16,7 @@ import forge.gui.input.Input;
 public class GuiInput extends MyObservable implements Observer {
 
     /** The input. */
-    Input input;
+    private Input input;
 
     /**
      * <p>
@@ -56,7 +56,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void showMessage() {
-        input.showMessage();
+        getInput().showMessage();
     }
 
     /**
@@ -65,7 +65,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void selectButtonOK() {
-        input.selectButtonOK();
+        getInput().selectButtonOK();
     }
 
     /**
@@ -74,7 +74,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void selectButtonCancel() {
-        input.selectButtonCancel();
+        getInput().selectButtonCancel();
     }
 
     /**
@@ -86,7 +86,7 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.Player} object.
      */
     public final void selectPlayer(final Player player) {
-        input.selectPlayer(player);
+        getInput().selectPlayer(player);
     }
 
     /**
@@ -100,12 +100,19 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
-        input.selectCard(card, zone);
+        getInput().selectCard(card, zone);
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return input.toString();
+        return getInput().toString();
+    }
+
+    /**
+     * @return the input
+     */
+    public Input getInput() {
+        return input;
     }
 }

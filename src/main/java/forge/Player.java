@@ -2196,12 +2196,12 @@ public abstract class Player extends GameEntity {
 
         int ret = 7;
         for (int i = 0; i < handSizeOperations.size(); i++) {
-            if (handSizeOperations.get(i).Mode.equals("=")) {
-                ret = handSizeOperations.get(i).Amount;
-            } else if (handSizeOperations.get(i).Mode.equals("+") && ret >= 0) {
-                ret = ret + handSizeOperations.get(i).Amount;
-            } else if (handSizeOperations.get(i).Mode.equals("-") && ret >= 0) {
-                ret = ret - handSizeOperations.get(i).Amount;
+            if (handSizeOperations.get(i).getMode().equals("=")) {
+                ret = handSizeOperations.get(i).getAmount();
+            } else if (handSizeOperations.get(i).getMode().equals("+") && ret >= 0) {
+                ret = ret + handSizeOperations.get(i).getAmount();
+            } else if (handSizeOperations.get(i).getMode().equals("-") && ret >= 0) {
+                ret = ret - handSizeOperations.get(i).getAmount();
                 if (ret < 0) {
                     ret = 0;
                 }
@@ -2225,7 +2225,7 @@ public abstract class Player extends GameEntity {
         while (changes > 0) {
             changes = 0;
             for (int i = 1; i < handSizeOperations.size(); i++) {
-                if (handSizeOperations.get(i).hsTimeStamp < handSizeOperations.get(i - 1).hsTimeStamp) {
+                if (handSizeOperations.get(i).getHsTimeStamp() < handSizeOperations.get(i - 1).getHsTimeStamp()) {
                     HandSizeOp tmp = handSizeOperations.get(i);
                     handSizeOperations.set(i, handSizeOperations.get(i - 1));
                     handSizeOperations.set(i - 1, tmp);
@@ -2257,7 +2257,7 @@ public abstract class Player extends GameEntity {
      */
     public final void removeHandSizeOperation(final int timestamp) {
         for (int i = 0; i < handSizeOperations.size(); i++) {
-            if (handSizeOperations.get(i).hsTimeStamp == timestamp) {
+            if (handSizeOperations.get(i).getHsTimeStamp() == timestamp) {
                 handSizeOperations.remove(i);
                 break;
             }

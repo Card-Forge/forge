@@ -284,7 +284,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         cardScale.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                ImageCache.scaleLargerThanOriginal = cardScale.isSelected();
+                ImageCache.setScaleLargerThanOriginal(cardScale.isSelected());
             }
         });
 
@@ -1628,7 +1628,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             preferences.millingLossCondition = Constant.Runtime.MILL[0];
             preferences.developerMode = Constant.Runtime.DEV_MODE[0];
             preferences.cardOverlay = cardOverlay.isSelected();
-            preferences.scaleLargerThanOriginal = ImageCache.scaleLargerThanOriginal;
+            preferences.scaleLargerThanOriginal = ImageCache.isScaleLargerThanOriginal();
             preferences.uploadDraftAI = Constant.Runtime.UPLOAD_DRAFT[0];
             preferences.save();
         } catch (Exception ex) {

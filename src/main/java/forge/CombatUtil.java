@@ -2186,7 +2186,7 @@ public class CombatUtil {
                         // we have to have cards like glorious anthem take
                         // effect immediately:
                         for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                            Command com = GameActionUtil.commands.get(effect);
+                            Command com = GameActionUtil.getCommands().get(effect);
                             com.execute();
                         }
 

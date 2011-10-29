@@ -21,7 +21,7 @@ import java.net.URL;
  */
 public class HttpUtil {
 
-    private static final String Boundary = "--7d021a37605f0";
+    private static final String BOUNDARY = "--7d021a37605f0";
 
     /**
      * <p>
@@ -52,7 +52,7 @@ public class HttpUtil {
         theUrlConnection.setUseCaches(false);
         theUrlConnection.setChunkedStreamingMode(1024);
 
-        theUrlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + Boundary);
+        theUrlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 
         DataOutputStream httpOut = null;
         try {
@@ -62,7 +62,7 @@ public class HttpUtil {
         }
 
         File f = new File(file);
-        String str = "--" + Boundary + "\r\n" + "Content-Disposition: form-data;name=\"data\"; filename=\""
+        String str = "--" + BOUNDARY + "\r\n" + "Content-Disposition: form-data;name=\"data\"; filename=\""
                 + f.getName() + "\"\r\n" + "Content-Type: text/plain\r\n\r\n";
 
         try {
@@ -92,7 +92,7 @@ public class HttpUtil {
             return;
         }
         try {
-            httpOut.write(("--" + Boundary + "--\r\n").getBytes());
+            httpOut.write(("--" + BOUNDARY + "--\r\n").getBytes());
         } catch (IOException e) {
             return;
         }

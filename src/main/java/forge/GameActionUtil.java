@@ -45,8 +45,8 @@ public final class GameActionUtil {
         // (called in MagicStack.java)
         Card c = sa.getSourceCard();
 
-        playCard_Cascade(c);
-        playCard_Ripple(c);
+        playCardCascade(c);
+        playCardRipple(c);
     }
 
     /**
@@ -57,7 +57,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public static void playCard_Cascade(final Card c) {
+    public static void playCardCascade(final Card c) {
         Command cascade = new Command() {
             private static final long serialVersionUID = -845154812215847505L;
 
@@ -174,7 +174,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public static void playCard_Ripple(final Card c) {
+    public static void playCardRipple(final Card c) {
         Command ripple = new Command() {
             private static final long serialVersionUID = -845154812215847505L;
 
@@ -323,7 +323,7 @@ public final class GameActionUtil {
      * endOfTurn_Wall_Of_Reverence.
      * </p>
      */
-    public static void endOfTurn_Wall_Of_Reverence() {
+    public static void endOfTurnWallOfReverence() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList list = player.getCardsIn(Zone.Battlefield, "Wall of Reverence");
 
@@ -371,7 +371,7 @@ public final class GameActionUtil {
      * endOfTurn_Lighthouse_Chronologist.
      * </p>
      */
-    public static void endOfTurn_Lighthouse_Chronologist() {
+    public static void endOfTurnLighthouseChronologist() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final Player opponent = player.getOpponent();
         CardList list = opponent.getCardsIn(Zone.Battlefield);
@@ -534,7 +534,7 @@ public final class GameActionUtil {
      */
     public static void executeLandfallEffects(final Card c) {
         if (c.getName().equals("Lotus Cobra")) {
-            landfall_Lotus_Cobra(c);
+            landfallLotusCobra(c);
         }
     }
 
@@ -570,7 +570,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void landfall_Lotus_Cobra(final Card c) {
+    private static void landfallLotusCobra(final Card c) {
         Ability ability = new Ability(c, "0") {
             @Override
             public void resolve() {
@@ -825,7 +825,7 @@ public final class GameActionUtil {
         }
 
         if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) {
-            playerCombatDamage_Whirling_Dervish(c);
+            playerCombatDamageWhirlingDervish(c);
         }
 
         if (player.isPlayer(AllZone.getHumanPlayer())) {
@@ -917,18 +917,18 @@ public final class GameActionUtil {
 
         if (CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0 && c.getNetAttack() > 0) {
             for (int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
-                playerCombatDamage_lose_halflife_up(c);
+                playerCombatDamageLoseHalfLifeUp(c);
             }
         }
 
         if (c.getName().equals("Scalpelexis")) {
-            playerCombatDamage_Scalpelexis(c);
+            playerCombatDamageScalpelexis(c);
         } else if (c.getName().equals("Spawnwrithe")) {
-            playerCombatDamage_Spawnwrithe(c);
+            playerCombatDamageSpawnwrithe(c);
         } else if (c.getName().equals("Treva, the Renewer")) {
-            playerCombatDamage_Treva(c);
+            playerCombatDamageTreva(c);
         } else if (c.isEnchantedBy("Celestial Mantle")) {
-            execute_Celestial_Mantle(c);
+            executeCelestialMantle(c);
         }
 
     } // executeCombatDamageToPlayerEffects
@@ -941,7 +941,7 @@ public final class GameActionUtil {
      * @param enchanted
      *            a {@link forge.Card} object.
      */
-    private static void execute_Celestial_Mantle(final Card enchanted) {
+    private static void executeCelestialMantle(final Card enchanted) {
         ArrayList<Card> auras = enchanted.getEnchantedBy();
         for (final Card aura : auras) {
             if (aura.getName().equals("Celestial Mantle")) {
@@ -968,7 +968,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Treva(final Card c) {
+    private static void playerCombatDamageTreva(final Card c) {
         SpellAbility[] sa = c.getSpellAbility();
         if (c.getController().isHuman()) {
             AllZone.getGameAction().playSpellAbility(sa[1]);
@@ -986,7 +986,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Whirling_Dervish(final Card c) {
+    private static void playerCombatDamageWhirlingDervish(final Card c) {
         final int power = c.getNetAttack();
         final Card card = c;
 
@@ -1023,7 +1023,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_lose_halflife_up(final Card c) {
+    private static void playerCombatDamageLoseHalfLifeUp(final Card c) {
         final Player player = c.getController();
         final Player opponent = player.getOpponent();
         final Card fCard = c;
@@ -1075,7 +1075,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Scalpelexis(final Card c) {
+    private static void playerCombatDamageScalpelexis(final Card c) {
         final Player player = c.getController();
         final Player opponent = player.getOpponent();
 
@@ -1155,7 +1155,7 @@ public final class GameActionUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    private static void playerCombatDamage_Spawnwrithe(final Card c) {
+    private static void playerCombatDamageSpawnwrithe(final Card c) {
         final Player player = c.getController();
         final Card crd = c;
 
@@ -1182,10 +1182,10 @@ public final class GameActionUtil {
     }
 
     /** Constant <code>Elspeth_Emblem</code>. */
-    public static Command Elspeth_Emblem = new Command() {
+    private static Command elspethEmblem = new Command() {
 
         private static final long serialVersionUID = 7414127991531889390L;
-        CardList gloriousAnthemList = new CardList();
+        private CardList gloriousAnthemList = new CardList();
 
         public void execute() {
             String keyword = "Indestructible";
@@ -1449,7 +1449,7 @@ public final class GameActionUtil {
     }
 
     /** Constant <code>stLandManaAbilities</code>. */
-    public static Command stLandManaAbilities = new Command() {
+    private static Command stLandManaAbilities = new Command() {
         private static final long serialVersionUID = 8005448956536998277L;
 
         public void execute() {
@@ -1529,10 +1529,10 @@ public final class GameActionUtil {
     }; // stLandManaAbilities
 
     /** Constant <code>Coat_of_Arms</code>. */
-    public static Command Coat_of_Arms = new Command() {
+    private static Command coatOfArms = new Command() {
         private static final long serialVersionUID = 583505612126735693L;
 
-        CardList gloriousAnthemList = new CardList();
+        private CardList gloriousAnthemList = new CardList();
 
         public void execute() {
             CardList list = gloriousAnthemList;
@@ -1580,7 +1580,7 @@ public final class GameActionUtil {
         } // execute
     }; // Coat of Arms
 
-    private static Command Alpha_Status = new Command() {
+    private static Command alphaStatus = new Command() {
         private static final long serialVersionUID = -3213793711304934358L;
 
         private CardList previouslyPumped = new CardList();
@@ -1743,7 +1743,7 @@ public final class GameActionUtil {
     }; // Liu_Bei
 
     /** Constant <code>Sound_the_Call_Wolf</code>. */
-    public static Command Sound_the_Call_Wolf = new Command() {
+    private static Command soundTheCallWolf = new Command() {
         private static final long serialVersionUID = 4614281706799537283L;
 
         public void execute() {
@@ -1848,9 +1848,9 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>Muraganda_Petroglyphs</code>. */
-    public static Command Muraganda_Petroglyphs = new Command() {
+    private static Command muragandaPetroglyphs = new Command() {
         private static final long serialVersionUID = -6715848091817213517L;
-        CardList gloriousAnthemList = new CardList();
+        private CardList gloriousAnthemList = new CardList();
 
         public void execute() {
             CardList list = gloriousAnthemList;
@@ -1914,27 +1914,27 @@ public final class GameActionUtil {
     }
 
     /** Constant <code>commands</code>. */
-    public static HashMap<String, Command> commands = new HashMap<String, Command>();
+    private static HashMap<String, Command> commands = new HashMap<String, Command>();
 
     static {
         // Please add cards in alphabetical order so they are easier to find
 
-        commands.put("Ajani_Avatar_Token", ajaniAvatarToken);
-        commands.put("Alpha_Status", Alpha_Status);
-        commands.put("Coat_of_Arms", Coat_of_Arms);
-        commands.put("Elspeth_Emblem", Elspeth_Emblem);
-        commands.put("Homarid", homarid);
+        getCommands().put("Ajani_Avatar_Token", ajaniAvatarToken);
+        getCommands().put("Alpha_Status", alphaStatus);
+        getCommands().put("Coat_of_Arms", coatOfArms);
+        getCommands().put("Elspeth_Emblem", elspethEmblem);
+        getCommands().put("Homarid", homarid);
 
-        commands.put("Liu_Bei", liuBei);
+        getCommands().put("Liu_Bei", liuBei);
 
-        commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
+        getCommands().put("Muraganda_Petroglyphs", muragandaPetroglyphs);
 
-        commands.put("Old_Man_of_the_Sea", oldManOfTheSea);
+        getCommands().put("Old_Man_of_the_Sea", oldManOfTheSea);
 
-        commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-        commands.put("Tarmogoyf", tarmogoyf);
+        getCommands().put("Sound_the_Call_Wolf", soundTheCallWolf);
+        getCommands().put("Tarmogoyf", tarmogoyf);
 
-        commands.put("Umbra_Stalker", umbraStalker);
+        getCommands().put("Umbra_Stalker", umbraStalker);
 
         // /The commands above are in alphabetical order by cardname.
     }
@@ -1962,6 +1962,34 @@ public final class GameActionUtil {
 
         // empty mana pool
         p.getManaPool().clearPool();
+    }
+
+    /**
+     * @return the commands
+     */
+    public static HashMap<String, Command> getCommands() {
+        return commands;
+    }
+
+    /**
+     * @param commands the commands to set
+     */
+    public static void setCommands(HashMap<String, Command> commands) {
+        GameActionUtil.commands = commands; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the stLandManaAbilities
+     */
+    public static Command getStLandManaAbilities() {
+        return stLandManaAbilities;
+    }
+
+    /**
+     * @param stLandManaAbilities the stLandManaAbilities to set
+     */
+    public static void setStLandManaAbilities(Command stLandManaAbilities) {
+        GameActionUtil.stLandManaAbilities = stLandManaAbilities; // TODO: Add 0 to parameter's name.
     }
 
 } // end class GameActionUtil

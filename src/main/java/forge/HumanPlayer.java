@@ -152,6 +152,9 @@ public class HumanPlayer extends Player {
      * 
      * @see forge.Player#discard_Chains_of_Mephistopheles()
      */
+    /**
+     * 
+     */
     protected final void discardChainsOfMephistopheles() {
         AllZone.getInputControl().setInput(PlayerUtil.input_chainsDiscard(), true);
     }
@@ -220,4 +223,4 @@ public class HumanPlayer extends Player {
         }
     }
 
-}// end HumanPlayer class
+} // end HumanPlayer class

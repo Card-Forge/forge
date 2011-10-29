@@ -44,7 +44,7 @@ public class Input_Block extends Input {
     public final void showMessage() {
         // for Castle Raptors, since it gets a bonus if untapped
         for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            Command com = GameActionUtil.commands.get(effect);
+            Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
 

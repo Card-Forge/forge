@@ -59,42 +59,42 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private static final long serialVersionUID = -8596808503046590349L;
 
     /** Constant <code>types</code>. */
-    public static final Proxy.Type[] types = Proxy.Type.values();
+    public static final Proxy.Type[] TYPES = Proxy.Type.values();
 
     // proxy
     /** The type. */
-    protected int type;
+    private int type;
 
     /** The port. */
-    protected JTextField addr, port;
+    private JTextField addr, port;
 
     // progress
     /** The cards. */
-    protected DownloadObject[] cards;
+    private DownloadObject[] cards;
 
     /** The card. */
-    protected int card;
+    private int card;
 
     /** The cancel. */
-    protected boolean cancel;
+    private boolean cancel;
 
     /** The bar. */
-    protected JProgressBar bar;
+    private JProgressBar bar;
 
     /** The dlg. */
-    protected JOptionPane dlg;
+    private JOptionPane dlg;
 
     /** The close. */
-    protected JButton close;
+    private JButton close;
 
     /** The times. */
-    protected long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     /** The tptr. */
-    protected int tptr = 0;
+    private int tptr = 0;
 
     /** The l time. */
-    protected long lTime = System.currentTimeMillis();
+    private long lTime = System.currentTimeMillis();
 
     /**
      * <p>
@@ -156,7 +156,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         ButtonGroup bg = new ButtonGroup();
         String[] labels = { ForgeProps.getLocalized(NO_PROXY), ForgeProps.getLocalized(HTTP_PROXY),
                 ForgeProps.getLocalized(SOCKS_PROXY) };
-        for (int i = 0; i < types.length; i++) {
+        for (int i = 0; i < TYPES.length; i++) {
             JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
             bg.add(rb);
@@ -194,7 +194,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         bar.setPreferredSize(d);
 
         // JOptionPane
-        Object[] options = { b, close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL)) };
+        close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL));
+        Object[] options = { b, close };
         dlg = new JOptionPane(p0, DEFAULT_OPTION, PLAIN_MESSAGE, null, options, options[1]);
 
         JDialog jdlg = getDlg(frame);
@@ -238,13 +239,26 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private void update(final int card) {
         this.card = card;
 
+        /**
+         * 
+         * TODO: Write javadoc for this type.
+         *
+         */
         final class Worker implements Runnable {
             private int card;
 
+            /**
+             * 
+             * TODO: Write javadoc for Constructor.
+             * @param card int
+             */
             Worker(final int card) {
                 this.card = card;
             }
 
+            /**
+             * 
+             */
             public void run() {
                 fireStateChanged();
 
@@ -331,7 +345,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             p = Proxy.NO_PROXY;
         } else {
             try {
-                p = new Proxy(types[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
+                p = new Proxy(TYPES[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
             } catch (Exception ex) {
                 ErrorViewer
                         .showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(), port.getText());
@@ -346,7 +360,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 try {
                     String url = cards[card].url;
                     String cName;
-                    cName = cards[card].name;
+                    cName = cards[card].getName();
                     cName = cName.replace("%20", " ");
 
                     File base = new File(cards[card].dir);
@@ -375,10 +389,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                                 f.delete();
 
                                 return;
-                            }// if - cancel
+                            } // if - cancel
 
                             out.write(buf, 0, len);
-                        }// while - read and write file
+                        } // while - read and write file
 
                         in.close();
                         out.flush();
@@ -386,10 +400,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     } catch (ConnectException ce) {
                         System.out.println("Connection refused for url: " + url);
                     } catch (MalformedURLException mURLe) {
-                        System.out.println("Error - possibly missing URL for: " + cards[card].name);
+                        System.out.println("Error - possibly missing URL for: " + cards[card].getName());
                     }
                 } catch (FileNotFoundException fnfe) {
-                    System.out.println("Error - the LQ picture for " + cards[card].name
+                    System.out.println("Error - the LQ picture for " + cards[card].getName()
                             + " could not be found on the server. [" + cards[card].url + "] - " + fnfe.getMessage());
                 } catch (Exception ex) {
                     Log.error("LQ Pictures", "Error downloading pictures", ex);
@@ -401,10 +415,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 } catch (InterruptedException e) {
                     Log.error("GuiDownloader", "Sleep Error", e);
                 }
-            }// for
+            } // for
         }
         close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
-    }// run
+    } // run
 
     /**
      * <p>
@@ -458,7 +472,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             ErrorViewer.showError(ex, "GuiDownloader: readFile() error");
             throw new RuntimeException("GuiDownloader : readFile() error");
         }
-    }// readFile()
+    } // readFile()
 
     /**
      * <p>
@@ -510,7 +524,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             ErrorViewer.showError(ex, "GuiDownloader: readFile() error");
             throw new RuntimeException("GuiDownloader : readFile() error");
         }
-    }// readFile()
+    } // readFile()
 
     /**
      * The Class ProxyHandler.
@@ -534,6 +548,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
          * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.
          * ChangeEvent)
          */
+        /**
+         * @param e ChangeEvent
+         */
         public final void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
                 GuiDownloader.this.type = type;
@@ -549,13 +566,13 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     protected static class DownloadObject {
 
         /** The name. */
-        public final String name;
+        private final String name;
 
         /** The url. */
-        public final String url;
+        private final String url;
 
         /** The dir. */
-        public final String dir;
+        private final String dir;
 
         /**
          * Instantiates a new download object.
@@ -573,5 +590,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             dir = dirIn;
             // System.out.println("Created download object: "+name+" "+url+" "+dir);
         }
-    }// DownloadObject
+
+        /**
+         * @return the name
+         */
+        public String getName() {
+            return name;
+        }
+    } // DownloadObject
 }
