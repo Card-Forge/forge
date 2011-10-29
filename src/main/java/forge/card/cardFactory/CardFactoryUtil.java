@@ -2599,7 +2599,7 @@ public class CardFactoryUtil {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
                     final String[] characteristics = characteristic.split(",");
-                    if (card.isValid(characteristics, card.getController(), card)) {
+                    if (card.isValid(characteristics, target.getController(), target)) {
                         return true;
                     }
                 }
