@@ -62,7 +62,8 @@ public class ComputerUtil_Attack2 {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtil_Attack2(final CardList possibleAttackers, final CardList possibleBlockers, final int blockerLife) {
+    public ComputerUtil_Attack2(final CardList possibleAttackers,
+            final CardList possibleBlockers, final int blockerLife) {
         humanList = new CardList(possibleBlockers.toArray());
         humanList = humanList.getType("Creature");
 
@@ -253,7 +254,8 @@ public class ComputerUtil_Attack2 {
                     // bonus TWICE
                     humanBaseAttack = humanBaseAttack + humanExaltedBonus;
                 }
-                int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
+                int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many",
+                        AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
                         : humanBaseAttack;
                 if ((AllZone.getComputerPlayer().getLife() - 3) <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
@@ -453,7 +455,7 @@ public class ComputerUtil_Attack2 {
         // find the potential counter attacking damage compared to AI life total
         double aiLifeToPlayerDamageRatio = 1000000;
         if (candidateCounterAttackDamage > 0) {
-            aiLifeToPlayerDamageRatio = (double) AllZone.getComputerPlayer().life / candidateCounterAttackDamage;
+            aiLifeToPlayerDamageRatio = (double) AllZone.getComputerPlayer().getLife() / candidateCounterAttackDamage;
         }
 
         // get the potential damage and strength of the AI forces
@@ -476,7 +478,7 @@ public class ComputerUtil_Attack2 {
         // find the potential damage ratio the AI can cause
         double playerLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            playerLifeToDamageRatio = (double) AllZone.getHumanPlayer().life / candidateUnblockedDamage;
+            playerLifeToDamageRatio = (double) AllZone.getHumanPlayer().getLife() / candidateUnblockedDamage;
         }
 
         /*
@@ -511,7 +513,7 @@ public class ComputerUtil_Attack2 {
         // get list of attackers ordered from low power to high
         CardListUtil.sortAttackLowFirst(attackers);
         // get player life total
-        int playerLife = AllZone.getHumanPlayer().life;
+        int playerLife = AllZone.getHumanPlayer().getLife();
         // get the list of attackers up to the first blocked one
         CardList attritionalAttackers = new CardList();
         for (int x = 0; x < attackers.size() - playerForces; x++) {
@@ -564,9 +566,9 @@ public class ComputerUtil_Attack2 {
             }
         }
         if (unblockableDamage > 0) {
-            turnsUntilDeathByUnblockable = AllZone.getHumanPlayer().life / unblockableDamage;
+            turnsUntilDeathByUnblockable = AllZone.getHumanPlayer().getLife() / unblockableDamage;
         }
-        if (unblockableDamage > AllZone.getHumanPlayer().life) {
+        if (unblockableDamage > AllZone.getHumanPlayer().getLife()) {
             doUnblockableAttack = true;
         }
         // *****************
@@ -581,7 +583,8 @@ public class ComputerUtil_Attack2 {
                                                       // <= 1 && ratioDiff >= 1
                                                       // && outNumber > 0) ||
             aiAggression = 5; // attack at all costs
-        } else if ((playerLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)) {
+        } else if ((playerLifeToDamageRatio < 2 && ratioDiff >= 0)
+                || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)) {
             aiAggression = 3; // attack expecting to kill creatures or damage
                               // player.
         } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1) {
@@ -613,7 +616,8 @@ public class ComputerUtil_Attack2 {
         if (combat.getAttackers().length == 0
                 && (countExaltedBonus(AllZone.getComputerPlayer()) >= 3
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2 || (AllZone
+                        || AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield,
+                                "Battlegrace Angel").size() >= 2 || (AllZone
                         .getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
                         && AllZone.getPhase().isFirstCombat()) && !bAssault) {
             int biggest = 0;

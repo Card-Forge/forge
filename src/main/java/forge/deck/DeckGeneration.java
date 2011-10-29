@@ -66,9 +66,9 @@ public abstract class DeckGeneration {
         }
 
         if (playerType.equals(PlayerType.HUMAN)) {
-            Constant.Runtime.HumanDeck[0] = d;
+            Constant.Runtime.HUMAN_DECK[0] = d;
         } else if (playerType.equals(PlayerType.COMPUTER)) {
-            Constant.Runtime.ComputerDeck[0] = d;
+            Constant.Runtime.COMPUTER_DECK[0] = d;
         }
     }
 

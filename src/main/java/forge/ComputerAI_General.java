@@ -39,7 +39,7 @@ public class ComputerAI_General implements Computer {
         ComputerUtil.chooseLandsToPlay();
 
         if (AllZone.getStack().size() == 0) {
-            playCards(Constant.Phase.Main1);
+            playCards(Constant.Phase.MAIN1);
         } else {
             stackResponse();
         }
@@ -69,7 +69,7 @@ public class ComputerAI_General implements Computer {
      *            a {@link java.lang.String} object.
      */
     private void playCards(final String phase) {
-        SpellAbility[] sp = phase.equals(Constant.Phase.Main1) ? getMain1() : getMain2();
+        SpellAbility[] sp = phase.equals(Constant.Phase.MAIN1) ? getMain1() : getMain2();
 
         boolean nextPhase = ComputerUtil.playCards(sp);
 
@@ -146,7 +146,8 @@ public class ComputerAI_General implements Computer {
                                 creatures2.add(creatures.get(i));
                             }
                         }
-                        if (creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size() > 1
+                        if (creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl",
+                                vengevines.get(0)).size() > 1
                                 && c.isCreature() && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
                             return true;
                         }
@@ -367,7 +368,7 @@ public class ComputerAI_General implements Computer {
      * begin_combat.
      * </p>
      */
-    public final void begin_combat() {
+    public final void beginCombat() {
         stackResponse();
     }
 
@@ -376,7 +377,7 @@ public class ComputerAI_General implements Computer {
      * declare_attackers.
      * </p>
      */
-    public final void declare_attackers() {
+    public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
 
         AllZone.setCombat(ComputerUtil.getAttackers());
@@ -403,7 +404,7 @@ public class ComputerAI_General implements Computer {
      * declare_attackers_after.
      * </p>
      */
-    public final void declare_attackers_after() {
+    public final void declareAttackersAfter() {
         stackResponse();
     }
 
@@ -412,7 +413,7 @@ public class ComputerAI_General implements Computer {
      * declare_blockers.
      * </p>
      */
-    public final void declare_blockers() {
+    public final void declareBlockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
         AllZone.setCombat(ComputerUtil_Block2.getBlockers(AllZone.getCombat(), blockers));
@@ -427,7 +428,7 @@ public class ComputerAI_General implements Computer {
      * declare_blockers_after.
      * </p>
      */
-    public final void declare_blockers_after() {
+    public final void declareBlockersAfter() {
         stackResponse();
     }
 
@@ -436,7 +437,7 @@ public class ComputerAI_General implements Computer {
      * end_of_combat.
      * </p>
      */
-    public final void end_of_combat() {
+    public final void endOfCombat() {
         stackResponse();
     }
 
@@ -446,7 +447,7 @@ public class ComputerAI_General implements Computer {
      * end_of_turn.
      * </p>
      */
-    public final void end_of_turn() {
+    public final void endOfTurn() {
         stackResponse();
     }
 
@@ -455,7 +456,7 @@ public class ComputerAI_General implements Computer {
      * stack_not_empty.
      * </p>
      */
-    public final void stack_not_empty() {
+    public final void stackNotEmpty() {
         stackResponse();
     }
 

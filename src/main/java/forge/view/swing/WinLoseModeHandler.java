@@ -70,7 +70,7 @@ public class WinLoseModeHandler {
      * 
      */
     public void startNextRound() {
-        AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
+        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 
     /**

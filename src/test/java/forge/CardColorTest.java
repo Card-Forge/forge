@@ -16,7 +16,7 @@ public class CardColorTest {
     @Test(groups = {"UnitTest", "fast"}, timeOut = 1000)
     public void CardColorTest1() {
         ManaCost mc = new ManaCost("R W U");
-        EnumSet<Color> col = Color.ConvertManaCostToColor(mc);
+        EnumSet<Color> col = Color.convertManaCostToColor(mc);
         System.out.println(col.toString());
     }
 }

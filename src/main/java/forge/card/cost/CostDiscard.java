@@ -126,8 +126,9 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         Player activator = ability.getActivatingPlayer();
-        for (Card c : list)
+        for (Card c : list) {
             activator.discard(c, ability);
+        }
     }
 
     /*
@@ -247,7 +248,7 @@ public class CostDiscard extends CostPartWithList {
             if (type.equals("Random")) {
                 list = CardListUtil.getRandomSubList(hand, c);
             } else {
-                list = ComputerUtil.AI_discardNumType(c, type.split(";"), ability);
+                list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
             }
         }
         return list != null;
@@ -350,5 +351,5 @@ public class CostDiscard extends CostPartWithList {
         };
 
         return target;
-    }// input_discard()
+    } // input_discard()
 }

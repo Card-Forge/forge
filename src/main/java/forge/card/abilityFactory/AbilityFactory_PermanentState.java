@@ -349,7 +349,7 @@ public class AbilityFactory_PermanentState {
         untapList = untapList.getTargetableCards(source);
         untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
 
-        untapList = untapList.filter(CardListFilter.tapped);
+        untapList = untapList.filter(CardListFilter.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
         String[] tappablePermanents = { "Creature", "Land", "Artifact" };
@@ -431,7 +431,7 @@ public class AbilityFactory_PermanentState {
         }
 
         // try to just tap already tapped things
-        tapList = list.filter(CardListFilter.untapped);
+        tapList = list.filter(CardListFilter.UNTAPPED);
 
         if (untapTargetList(source, tgt, af, sa, mandatory, tapList)) {
             return true;
@@ -578,7 +578,7 @@ public class AbilityFactory_PermanentState {
             } else {
                 CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 list = list.getType(valid);
-                list = list.filter(CardListFilter.tapped);
+                list = list.filter(CardListFilter.TAPPED);
 
                 int count = 0;
                 while (list.size() != 0 && count < num) {
@@ -910,7 +910,7 @@ public class AbilityFactory_PermanentState {
     private static boolean tapPrefTargeting(final Card source, final Target tgt, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         CardList tapList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        tapList = tapList.filter(CardListFilter.untapped);
+        tapList = tapList.filter(CardListFilter.UNTAPPED);
         tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
@@ -997,7 +997,7 @@ public class AbilityFactory_PermanentState {
         }
 
         // try to just tap already tapped things
-        tapList = list.filter(CardListFilter.tapped);
+        tapList = list.filter(CardListFilter.TAPPED);
 
         if (tapTargetList(af, sa, tapList, mandatory)) {
             return true;
@@ -1503,7 +1503,7 @@ public class AbilityFactory_PermanentState {
         Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
 
-        if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin)) {
+        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -1523,7 +1523,7 @@ public class AbilityFactory_PermanentState {
         }
 
         validTappables = validTappables.getValidCards(valid, source.getController(), source);
-        validTappables = validTappables.filter(CardListFilter.untapped);
+        validTappables = validTappables.filter(CardListFilter.UNTAPPED);
 
         Random r = MyRandom.random;
         boolean rr = false;
@@ -1563,7 +1563,7 @@ public class AbilityFactory_PermanentState {
     private static CardList getTapAllTargets(final String valid, final Card source) {
         CardList tmpList = AllZoneUtil.getCardsIn(Zone.Battlefield);
         tmpList = tmpList.getValidCards(valid, source.getController(), source);
-        tmpList = tmpList.filter(CardListFilter.untapped);
+        tmpList = tmpList.filter(CardListFilter.UNTAPPED);
         return tmpList;
     }
 

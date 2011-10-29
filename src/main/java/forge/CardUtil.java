@@ -411,7 +411,8 @@ public final class CardUtil {
             return c.getEquipping().get(0);
             // else if(relation.startsWith("target ")) return c.getTargetCard();
         } else {
-            throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
+            throw new IllegalArgumentException("Error at CardUtil.getRelative: "
+        + relation + "is not a valid relation");
         }
     }
 
@@ -439,7 +440,7 @@ public final class CardUtil {
         ArrayList<String> types = new ArrayList<String>();
 
         // types.addAll(getCardTypes());
-        types.addAll(Constant.CardTypes.cardTypes[0].list);
+        types.addAll(Constant.CardTypes.CARD_TYPES[0].getList());
 
         // not currently used by Forge
         types.add("Plane");
@@ -468,7 +469,7 @@ public final class CardUtil {
         // types.add("Sorcery");
         // types.add("Tribal");
 
-        types.addAll(Constant.CardTypes.cardTypes[0].list);
+        types.addAll(Constant.CardTypes.CARD_TYPES[0].getList());
 
         return types;
     }
@@ -484,7 +485,7 @@ public final class CardUtil {
     public static ArrayList<String> getBasicTypes() {
         ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.basicTypes[0].list);
+        types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
 
         return types;
     }
@@ -497,8 +498,8 @@ public final class CardUtil {
     public static ArrayList<String> getLandTypes() {
         ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.basicTypes[0].list);
-        types.addAll(Constant.CardTypes.landTypes[0].list);
+        types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
+        types.addAll(Constant.CardTypes.LAND_TYPES[0].getList());
 
         return types;
     }
@@ -514,7 +515,7 @@ public final class CardUtil {
     public static ArrayList<String> getCreatureTypes() {
         ArrayList<String> types = new ArrayList<String>();
 
-        types.addAll(Constant.CardTypes.creatureTypes[0].list);
+        types.addAll(Constant.CardTypes.CREATURE_TYPES[0].getList());
 
         return types;
     }
@@ -530,7 +531,7 @@ public final class CardUtil {
      */
 
     public static boolean isASuperType(final String cardType) {
-        return (Constant.CardTypes.superTypes[0].list.contains(cardType));
+        return (Constant.CardTypes.SUPER_TYPES[0].getList().contains(cardType));
     }
 
     /**
@@ -556,7 +557,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isACreatureType(final String cardType) {
-        return (Constant.CardTypes.creatureTypes[0].list.contains(cardType));
+        return (Constant.CardTypes.CREATURE_TYPES[0].getList().contains(cardType));
     }
 
     /**
@@ -569,7 +570,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isALandType(final String cardType) {
-        return (Constant.CardTypes.landTypes[0].list.contains(cardType));
+        return (Constant.CardTypes.LAND_TYPES[0].getList().contains(cardType));
     }
 
     /**
@@ -580,7 +581,7 @@ public final class CardUtil {
      * @return true, if is a planeswalker type
      */
     public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.CardTypes.walkerTypes[0].list.contains(cardType));
+        return (Constant.CardTypes.WALKER_TYPES[0].getList().contains(cardType));
     }
 
     /**
@@ -593,7 +594,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isABasicLandType(final String cardType) {
-        return (Constant.CardTypes.basicTypes[0].list.contains(cardType));
+        return (Constant.CardTypes.BASIC_TYPES[0].getList().contains(cardType));
     }
 
     // this function checks, if duplicates of a keyword are not necessary (like
@@ -608,7 +609,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isNonStackingKeyword(final String keyword) {
-        return Constant.Keywords.NonStackingList[0].list.contains(keyword);
+        return Constant.Keywords.NON_STACKING_LIST[0].getList().contains(keyword);
     }
 
     /**

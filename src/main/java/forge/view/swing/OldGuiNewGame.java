@@ -203,15 +203,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             ErrorViewer.showError(ex);
         }
 
-        if (Constant.Runtime.gameType.equals(GameType.Constructed)) {
+        if (Constant.Runtime.getGameType().equals(GameType.Constructed)) {
             singleRadioButton.setSelected(true);
             updateDeckComboBoxes();
         }
-        if (Constant.Runtime.gameType.equals(GameType.Sealed)) {
+        if (Constant.Runtime.getGameType().equals(GameType.Sealed)) {
             sealedRadioButton.setSelected(true);
             updateDeckComboBoxes();
         }
-        if (Constant.Runtime.gameType.equals(GameType.Draft)) {
+        if (Constant.Runtime.getGameType().equals(GameType.Draft)) {
             draftRadioButton.setSelected(true);
             draftRadioButtonActionPerformed(null);
         }
@@ -389,9 +389,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             deck.addSideboard(sDeck);
 
-            for (int i = 0; i < Constant.Color.BasicLands.length; i++) {
+            for (int i = 0; i < Constant.Color.BASIC_LANDS.length; i++) {
                 for (int j = 0; j < 18; j++) {
-                    deck.addSideboard(Constant.Color.BasicLands[i] + "|" + sd.LandSetCode[0]);
+                    deck.addSideboard(Constant.Color.BASIC_LANDS[i] + "|" + sd.LandSetCode[0]);
                 }
             }
 
@@ -402,8 +402,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
 
-            Constant.Runtime.HumanDeck[0] = deck;
-            Constant.Runtime.gameType = GameType.Sealed;
+            Constant.Runtime.HUMAN_DECK[0] = deck;
+            Constant.Runtime.setGameType(GameType.Sealed);
 
             // Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
             Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList()); // AI
@@ -419,7 +419,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             deckEditorButtonActionPerformed(GameType.Sealed, deck);
 
-            Constant.Runtime.ComputerDeck[0] = aiDeck;
+            Constant.Runtime.COMPUTER_DECK[0] = aiDeck;
         } else {
             new OldGuiNewGame();
         }
@@ -757,10 +757,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 Deck[] deck = deckManager.getDraftDeck(human);
                 int index = Integer.parseInt(computer);
 
-                Constant.Runtime.HumanDeck[0] = deck[0];
-                Constant.Runtime.ComputerDeck[0] = deck[index];
+                Constant.Runtime.HUMAN_DECK[0] = deck[0];
+                Constant.Runtime.COMPUTER_DECK[0] = deck[index];
 
-                if (Constant.Runtime.ComputerDeck[0] == null) {
+                if (Constant.Runtime.COMPUTER_DECK[0] == null) {
                     throw new IllegalStateException("OldGuiNewGame : startButton() error - computer deck is null");
                 }
             } // else - load old draft
@@ -773,16 +773,16 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
                 return;
             } else {
-                Constant.Runtime.HumanDeck[0] = deckManager.getDeck(human);
+                Constant.Runtime.HUMAN_DECK[0] = deckManager.getDeck(human);
 
             }
 
             if (!computer.equals("New Sealed")) {
-                Constant.Runtime.ComputerDeck[0] = deckManager.getDeck(computer);
+                Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(computer);
             }
         } else {
             // non-draft decks
-            GameType format = Constant.Runtime.gameType;
+            GameType format = Constant.Runtime.getGameType();
             // boolean sealed = GameType.Sealed.equals(format);
             boolean constructed = GameType.Constructed.equals(format);
 
@@ -796,13 +796,13 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // else if(sealed)
                 // Constant.Runtime.HumanDeck[0] = generateSealedDeck();
             } else if (humanRandom) {
-                Constant.Runtime.HumanDeck[0] = getRandomDeck(getDecks(format));
+                Constant.Runtime.HUMAN_DECK[0] = getRandomDeck(getDecks(format));
 
                 JOptionPane.showMessageDialog(null,
-                        String.format("You are using deck: %s", Constant.Runtime.HumanDeck[0].getName()), "Deck Name",
+                        String.format("You are using deck: %s", Constant.Runtime.HUMAN_DECK[0].getName()), "Deck Name",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.HumanDeck[0] = deckManager.getDeck(human);
+                Constant.Runtime.HUMAN_DECK[0] = deckManager.getDeck(human);
             }
 
             assert computer != null;
@@ -817,13 +817,13 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                   // else if(sealed)
                   // Constant.Runtime.ComputerDeck[0] = generateSealedDeck();
             } else if (computerRandom) {
-                Constant.Runtime.ComputerDeck[0] = getRandomDeck(getDecks(format));
+                Constant.Runtime.COMPUTER_DECK[0] = getRandomDeck(getDecks(format));
 
                 JOptionPane.showMessageDialog(null,
-                        String.format("The computer is using deck: %s", Constant.Runtime.ComputerDeck[0].getName()),
+                        String.format("The computer is using deck: %s", Constant.Runtime.COMPUTER_DECK[0].getName()),
                         "Deck Name", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.ComputerDeck[0] = deckManager.getDeck(computer);
+                Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(computer);
             }
         } // else
 
@@ -835,9 +835,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         AllZone.setDisplay(new GuiDisplay4());
         // else AllZone.setDisplay(new GuiDisplay3());
 
-        Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
+        Constant.Runtime.SMOOTH[0] = smoothLandCheckBox.isSelected();
 
-        AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
+        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         AllZone.getDisplay().setVisible(true);
 
         dispose();
@@ -852,7 +852,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void singleRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.gameType = GameType.Constructed;
+        Constant.Runtime.setGameType(GameType.Constructed);
         updateDeckComboBoxes();
     }
 
@@ -865,7 +865,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void sealedRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.gameType = GameType.Sealed;
+        Constant.Runtime.setGameType(GameType.Sealed);
         updateDeckComboBoxes();
     }
 
@@ -879,7 +879,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         computerComboBox.removeAllItems();
 
         allDecks = getDecks();
-        switch (Constant.Runtime.gameType) {
+        switch (Constant.Runtime.getGameType()) {
         case Sealed:
             humanComboBox.addItem("New Sealed");
             computerComboBox.addItem("New Sealed");
@@ -965,7 +965,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            the e
      */
     final void draftRadioButtonActionPerformed(final ActionEvent e) {
-        Constant.Runtime.gameType = GameType.Draft;
+        Constant.Runtime.setGameType(GameType.Draft);
         updateDeckComboBoxes();
     }
 
@@ -1625,7 +1625,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             preferences.lafFonts = useLAFFonts.isSelected();
             // preferences.newGui = newGuiCheckBox.isSelected();
             preferences.stackAiLand = smoothLandCheckBox.isSelected();
-            preferences.millingLossCondition = Constant.Runtime.Mill[0];
+            preferences.millingLossCondition = Constant.Runtime.MILL[0];
             preferences.developerMode = Constant.Runtime.DevMode[0];
             preferences.cardOverlay = cardOverlay.isSelected();
             preferences.scaleLargerThanOriginal = ImageCache.scaleLargerThanOriginal;
@@ -1681,64 +1681,64 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * Load dynamic gamedata.
      */
     public static void loadDynamicGamedata() {
-        if (!Constant.CardTypes.loaded[0]) {
+        if (!Constant.CardTypes.LOADED[0]) {
             ArrayList<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
 
             ArrayList<String> tList = null;
 
-            Constant.CardTypes.cardTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.superTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.basicTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.landTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.creatureTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.instantTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.sorceryTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.enchantmentTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.artifactTypes[0] = new Constant_StringArrayList();
-            Constant.CardTypes.walkerTypes[0] = new Constant_StringArrayList();
+            Constant.CardTypes.CARD_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.SUPER_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.BASIC_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.LAND_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.CREATURE_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.INSTANT_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.SORCERY_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.ARTIFACT_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.WALKER_TYPES[0] = new Constant_StringArrayList();
 
             if (typeListFile.size() > 0) {
                 for (int i = 0; i < typeListFile.size(); i++) {
                     String s = typeListFile.get(i);
 
                     if (s.equals("[CardTypes]")) {
-                        tList = Constant.CardTypes.cardTypes[0].list;
+                        tList = Constant.CardTypes.CARD_TYPES[0].getList();
                     }
 
                     else if (s.equals("[SuperTypes]")) {
-                        tList = Constant.CardTypes.superTypes[0].list;
+                        tList = Constant.CardTypes.SUPER_TYPES[0].getList();
                     }
 
                     else if (s.equals("[BasicTypes]")) {
-                        tList = Constant.CardTypes.basicTypes[0].list;
+                        tList = Constant.CardTypes.BASIC_TYPES[0].getList();
                     }
 
                     else if (s.equals("[LandTypes]")) {
-                        tList = Constant.CardTypes.landTypes[0].list;
+                        tList = Constant.CardTypes.LAND_TYPES[0].getList();
                     }
 
                     else if (s.equals("[CreatureTypes]")) {
-                        tList = Constant.CardTypes.creatureTypes[0].list;
+                        tList = Constant.CardTypes.CREATURE_TYPES[0].getList();
                     }
 
                     else if (s.equals("[InstantTypes]")) {
-                        tList = Constant.CardTypes.instantTypes[0].list;
+                        tList = Constant.CardTypes.INSTANT_TYPES[0].getList();
                     }
 
                     else if (s.equals("[SorceryTypes]")) {
-                        tList = Constant.CardTypes.sorceryTypes[0].list;
+                        tList = Constant.CardTypes.SORCERY_TYPES[0].getList();
                     }
 
                     else if (s.equals("[EnchantmentTypes]")) {
-                        tList = Constant.CardTypes.enchantmentTypes[0].list;
+                        tList = Constant.CardTypes.ENCHANTMENT_TYPES[0].getList();
                     }
 
                     else if (s.equals("[ArtifactTypes]")) {
-                        tList = Constant.CardTypes.artifactTypes[0].list;
+                        tList = Constant.CardTypes.ARTIFACT_TYPES[0].getList();
                     }
 
                     else if (s.equals("[WalkerTypes]")) {
-                        tList = Constant.CardTypes.walkerTypes[0].list;
+                        tList = Constant.CardTypes.WALKER_TYPES[0].getList();
                     }
 
                     else if (s.length() > 1) {
@@ -1746,7 +1746,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                     }
                 }
             }
-            Constant.CardTypes.loaded[0] = true;
+            Constant.CardTypes.LOADED[0] = true;
             /*
              * if (Constant.Runtime.DevMode[0]) {
              * System.out.println(Constant.CardTypes.cardTypes[0].list);
@@ -1762,20 +1762,20 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
              */
         }
 
-        if (!Constant.Keywords.loaded[0]) {
+        if (!Constant.Keywords.LOADED[0]) {
             ArrayList<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
 
-            Constant.Keywords.NonStackingList[0] = new Constant_StringArrayList();
+            Constant.Keywords.NON_STACKING_LIST[0] = new Constant_StringArrayList();
 
             if (nskwListFile.size() > 1) {
                 for (int i = 0; i < nskwListFile.size(); i++) {
                     String s = nskwListFile.get(i);
                     if (s.length() > 1) {
-                        Constant.Keywords.NonStackingList[0].list.add(s);
+                        Constant.Keywords.NON_STACKING_LIST[0].getList().add(s);
                     }
                 }
             }
-            Constant.Keywords.loaded[0] = true;
+            Constant.Keywords.LOADED[0] = true;
             /*
              * if (Constant.Runtime.DevMode[0]) {
              * System.out.println(Constant.Keywords.NonStackingList[0].list); }

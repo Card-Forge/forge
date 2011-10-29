@@ -265,7 +265,7 @@ public class AbilityFactory_Token extends AbilityFactory {
                 && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste) {
             return false;
         }
-        if ((AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin) || AllZone.getPhase().isPlayerTurn(
+        if ((AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhase().isPlayerTurn(
                 AllZone.getHumanPlayer()))
                 && oneShot) {
             return false;

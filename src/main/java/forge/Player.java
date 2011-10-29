@@ -30,67 +30,67 @@ import forge.game.GameLossReason;
 public abstract class Player extends GameEntity {
 
     /** The poison counters. */
-    protected int poisonCounters;
+    private int poisonCounters;
 
     /** The life. */
-    protected int life;
+    private int life;
 
     /** The assigned damage. */
-    protected int assignedDamage;
+    private int assignedDamage;
 
     /** The num power surge lands. */
-    protected int numPowerSurgeLands;
+    private int numPowerSurgeLands;
 
     /** The alt win. */
-    protected boolean altWin = false;
+    private boolean altWin = false;
 
     /** The alt win source name. */
-    protected String altWinSourceName;
+    private String altWinSourceName;
 
     /** The alt lose. */
-    protected boolean altLose = false;
+    private boolean altLose = false;
 
     /** The loss state. */
-    protected GameLossReason lossState = GameLossReason.DidNotLoseYet;
+    private GameLossReason lossState = GameLossReason.DidNotLoseYet;
 
     /** The lose condition spell. */
-    protected String loseConditionSpell;
+    private String loseConditionSpell;
 
     /** The n turns. */
-    protected int nTurns = 0;
+    private int nTurns = 0;
 
     /** The skip next untap. */
-    protected boolean skipNextUntap = false;
+    private boolean skipNextUntap = false;
 
     /** The prowl. */
-    protected ArrayList<String> prowl = new ArrayList<String>();
+    private ArrayList<String> prowl = new ArrayList<String>();
 
     /** The max lands to play. */
-    protected int maxLandsToPlay = 1;
+    private int maxLandsToPlay = 1;
 
     /** The num lands played. */
-    protected int numLandsPlayed = 0;
+    private int numLandsPlayed = 0;
 
     /** The last drawn card. */
-    protected Card lastDrawnCard;
+    private Card lastDrawnCard;
 
     /** The num drawn this turn. */
-    protected int numDrawnThisTurn = 0;
+    private int numDrawnThisTurn = 0;
 
     /** The slowtrip list. */
-    protected CardList slowtripList = new CardList();
+    private CardList slowtripList = new CardList();
 
     /** The keywords. */
-    protected ArrayList<String> keywords = new ArrayList<String>();
+    private ArrayList<String> keywords = new ArrayList<String>();
 
     /** The mana pool. */
-    protected ManaPool manaPool = null;
+    private ManaPool manaPool = null;
 
     /** The must attack entity. */
-    protected Object mustAttackEntity = null;
+    private Object mustAttackEntity = null;
 
     /** The zones. */
-    Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
+    private Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
 
     /** The Constant ALL_ZONES. */
     public static final List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield,
@@ -473,8 +473,9 @@ public abstract class Player extends GameEntity {
 
             if (isCombat) {
                 ArrayList<String> types = source.getType();
-                for (String type : types)
+                for (String type : types) {
                     source.getController().addProwlType(type);
+                }
             }
 
             // Run triggers
@@ -906,6 +907,10 @@ public abstract class Player extends GameEntity {
      * 
      * @see forge.GameEntity#hasKeyword(java.lang.String)
      */
+    /**
+     * @param keyword String
+     * @return boolean
+     */
     public final boolean hasKeyword(final String keyword) {
         return this.keywords.contains(keyword);
     }
@@ -1061,7 +1066,7 @@ public abstract class Player extends GameEntity {
             if (!firstFromDraw && AllZoneUtil.isCardInPlay("Chains of Mephistopheles")) {
                 if (!this.getZone(Zone.Hand).isEmpty()) {
                     if (isHuman()) {
-                        discard_Chains_of_Mephistopheles();
+                        discardChainsOfMephistopheles();
                     } else { // Computer
                         discard(1, null, false);
                         // true causes this code not to be run again
@@ -1225,7 +1230,7 @@ public abstract class Player extends GameEntity {
             }
         }
         return dredge;
-    }// hasDredge()
+    } // hasDredge()
 
     /**
      * <p>
@@ -1246,7 +1251,7 @@ public abstract class Player extends GameEntity {
         }
 
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
-    }// getDredgeNumber()
+    } // getDredgeNumber()
 
     /**
      * <p>
@@ -1277,7 +1282,7 @@ public abstract class Player extends GameEntity {
     /**
      * Discard_ chains_of_ mephistopheles.
      */
-    protected abstract void discard_Chains_of_Mephistopheles();
+    protected abstract void discardChainsOfMephistopheles();
 
     /**
      * <p>
@@ -1348,19 +1353,24 @@ public abstract class Player extends GameEntity {
                         sa.getSourceCard().getController().loseLife(5, c);
                     }
                 };
-                ability.setStackDescription(c.getName() + " - " + sa.getSourceCard().getController() + " loses 5 life.");
+                ability.setStackDescription(c.getName() + " - "
+                + sa.getSourceCard().getController() + " loses 5 life.");
                 AllZone.getStack().add(ability);
             }
         }
 
         AllZone.getGameAction().discard_madness(c);
 
-        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
-                .hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))
+        if ((c.hasKeyword("If a spell or ability an opponent controls causes "
+        + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
+        || c.hasKeyword("If a spell or ability an opponent controls causes "
+        + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
+                + "counters on it instead of putting it into your graveyard."))
                 && null != sa && !c.getController().equals(sa.getSourceCard().getController())) {
             AllZone.getGameAction().discard_PutIntoPlayInstead(c);
         } else if (c
-                .hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
+                .hasKeyword("If a spell or ability an opponent controls "
+        + "causes you to discard CARDNAME, return it to your hand.")) {
         } else {
             AllZone.getGameAction().moveToGraveyard(c);
         }
@@ -1376,7 +1386,7 @@ public abstract class Player extends GameEntity {
         runParams.put("Cause", cause);
         AllZone.getTriggerHandler().runTrigger("Discarded", runParams);
 
-    }// end doDiscard
+    } // end doDiscard
 
     /**
      * <p>
@@ -1558,7 +1568,7 @@ public abstract class Player extends GameEntity {
         runParams.put("Player", this);
         AllZone.getTriggerHandler().runTrigger("Shuffled", runParams);
 
-    }// shuffle
+    } // shuffle
      // //////////////////////////////
 
     // //////////////////////////////
@@ -1569,10 +1579,10 @@ public abstract class Player extends GameEntity {
      * 
      * @param topN
      *            a {@link forge.CardList} object.
-     * @param N
+     * @param n
      *            a int.
      */
-    protected abstract void doScry(CardList topN, int N);
+    protected abstract void doScry(CardList topN, int n);
 
     /**
      * <p>
@@ -2129,9 +2139,9 @@ public abstract class Player extends GameEntity {
      * @see forge.GameEntity#isValid(java.lang.String, forge.Player, forge.Card)
      */
     @Override
-    public final boolean isValid(final String Restriction, final Player sourceController, final Card source) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
 
-        String[] incR = Restriction.split("\\.");
+        String[] incR = restriction.split("\\.");
 
         if (!incR[0].equals("Player") && !(incR[0].equals("Opponent") && !this.equals(sourceController))
                 && !(incR[0].equals("You") && this.equals(sourceController))) {
@@ -2142,7 +2152,7 @@ public abstract class Player extends GameEntity {
             final String excR = incR[1];
             String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
-                if (hasProperty(exR[j], sourceController, source) == false) {
+                if (!hasProperty(exR[j], sourceController, source)) {
                     return false;
                 }
             }
@@ -2158,13 +2168,13 @@ public abstract class Player extends GameEntity {
      * forge.Card)
      */
     @Override
-    public final boolean hasProperty(final String Property, final Player sourceController, final Card source) {
+    public final boolean hasProperty(final String property, final Player sourceController, final Card source) {
 
-        if (Property.equals("You")) {
+        if (property.equals("You")) {
             if (!this.equals(sourceController)) {
                 return false;
             }
-        } else if (Property.equals("Opponent")) {
+        } else if (property.equals("Opponent")) {
             if (this.equals(sourceController)) {
                 return false;
             }
@@ -2263,8 +2273,8 @@ public abstract class Player extends GameEntity {
         handSizeOperations.clear();
     }
 
-    /** Constant <code>NextHandSizeStamp=0</code> */
-    private static int NextHandSizeStamp = 0;
+    /** Constant <code>NextHandSizeStamp=0</code>. */
+    private static int nextHandSizeStamp = 0;
 
     /**
      * <p>
@@ -2274,7 +2284,7 @@ public abstract class Player extends GameEntity {
      * @return a int.
      */
     public static int getHandSizeStamp() {
-        return NextHandSizeStamp++;
+        return nextHandSizeStamp++;
     }
 
     /**

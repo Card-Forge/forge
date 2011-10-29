@@ -239,8 +239,8 @@ public class Phase extends MyObservable implements java.io.Serializable {
     }
 
     /** The phase order. */
-    String[] phaseOrder = { Constant.Phase.Untap, Constant.Phase.Upkeep, Constant.Phase.Draw, Constant.Phase.Main1,
-            Constant.Phase.Combat_Begin, Constant.Phase.Combat_Declare_Attackers,
+    String[] phaseOrder = { Constant.Phase.UNTAP, Constant.Phase.UPKEEP, Constant.Phase.DRAW, Constant.Phase.MAIN1,
+            Constant.Phase.COMBAT_BEGIN, Constant.Phase.Combat_Declare_Attackers,
             Constant.Phase.Combat_Declare_Attackers_InstantAbility, Constant.Phase.Combat_Declare_Blockers,
             Constant.Phase.Combat_Declare_Blockers_InstantAbility, Constant.Phase.Combat_FirstStrikeDamage,
             Constant.Phase.Combat_Damage, Constant.Phase.Combat_End, Constant.Phase.Main2, Constant.Phase.End_Of_Turn,
@@ -299,13 +299,13 @@ public class Phase extends MyObservable implements java.io.Serializable {
         AllZone.getPhase().setSkipPhase(true);
         AllZone.getGameAction().checkStateEffects();
 
-        if (phase.equals(Constant.Phase.Untap)) {
+        if (phase.equals(Constant.Phase.UNTAP)) {
             PhaseUtil.handleUntap();
-        } else if (phase.equals(Constant.Phase.Upkeep)) {
+        } else if (phase.equals(Constant.Phase.UPKEEP)) {
             PhaseUtil.handleUpkeep();
-        } else if (phase.equals(Constant.Phase.Draw)) {
+        } else if (phase.equals(Constant.Phase.DRAW)) {
             PhaseUtil.handleDraw();
-        } else if (phase.equals(Constant.Phase.Combat_Begin)) {
+        } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             PhaseUtil.verifyCombat();
         } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
             if (inCombat()) {
@@ -407,7 +407,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
         // This line fixes Combat Damage triggers not going off when they should
         AllZone.getStack().unfreezeStack();
 
-        if (!phase.equals(Constant.Phase.Untap)) {
+        if (!phase.equals(Constant.Phase.UNTAP)) {
             // during untap
             resetPriority();
         }
@@ -450,7 +450,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
             AllZone.getStack().unfreezeStack();
             nCombatsThisTurn++;
-        } else if (getPhase().equals(Constant.Phase.Untap)) {
+        } else if (getPhase().equals(Constant.Phase.UNTAP)) {
             nCombatsThisTurn = 0;
         }
 
@@ -497,7 +497,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
-        if (getPhase().equals(Constant.Phase.Untap)) {
+        if (getPhase().equals(Constant.Phase.UNTAP)) {
             turn++;
         }
 
@@ -874,7 +874,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     public static boolean canCastSorcery(final Player player) {
         return AllZone.getPhase().isPlayerTurn(player)
                 && (AllZone.getPhase().getPhase().equals(Constant.Phase.Main2) || AllZone.getPhase().getPhase()
-                        .equals(Constant.Phase.Main1)) && AllZone.getStack().size() == 0;
+                        .equals(Constant.Phase.MAIN1)) && AllZone.getStack().size() == 0;
     }
 
     /**

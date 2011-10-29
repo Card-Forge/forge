@@ -160,7 +160,8 @@ public class CombatUtil {
 
             if (attacker.hasKeyword("Islandwalk")) {
                 temp = blkCL.getType("Island");
-                if (!AllZoneUtil.isCardInPlay("Undertow") && !AllZoneUtil.isCardInPlay("Gosta Dirk") && !temp.isEmpty()) {
+                if (!AllZoneUtil.isCardInPlay("Undertow")
+                        && !AllZoneUtil.isCardInPlay("Gosta Dirk") && !temp.isEmpty()) {
                     return false;
                 }
             }
@@ -312,7 +313,8 @@ public class CombatUtil {
             }
 
             // "CARDNAME blocks each turn if able."
-            if (!combat.getAllBlockers().contains(blocker) && blocker.hasKeyword("CARDNAME blocks each turn if able.")) {
+            if (!combat.getAllBlockers().contains(blocker)
+                    && blocker.hasKeyword("CARDNAME blocks each turn if able.")) {
                 for (Card attacker : attackers) {
                     if (canBlock(attacker, blocker, combat)) {
                         return false;
@@ -433,9 +435,9 @@ public class CombatUtil {
             for (String kw : blocker.getKeyword()) {
                 if (kw.startsWith("CARDNAME can't block ")) {
                     String unblockableCard = kw.substring(21);
-                    int ID = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1,
+                    int id = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1,
                             unblockableCard.length() - 1));
-                    if (attacker.getUniqueNumber() == ID) {
+                    if (attacker.getUniqueNumber() == id) {
                         return false;
                     }
                 }
@@ -463,18 +465,20 @@ public class CombatUtil {
         }
         if (blocker.getNetAttack() > attacker.getNetAttack()
                 && blocker
-                        .hasKeyword("CARDNAME can't be blocked by creatures with power greater than CARDNAME's power.")) {
+                        .hasKeyword("CARDNAME can't be blocked by creatures "
+                + "with power greater than CARDNAME's power.")) {
             return false;
         }
         if (blocker.getNetAttack() >= attacker.getNetDefense()
                 && blocker
-                        .hasKeyword("CARDNAME can't be blocked by creatures with power equal to or greater than CARDNAME's toughness.")) {
+                        .hasKeyword("CARDNAME can't be blocked by creatures with "
+                + "power equal to or greater than CARDNAME's toughness.")) {
             return false;
         }
 
         if (attacker.hasStartOfKeyword("CantBeBlockedBy")) {
-            int KeywordPosition = attacker.getKeywordPosition("CantBeBlockedBy");
-            String parse = attacker.getKeyword().get(KeywordPosition).toString();
+            int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy");
+            String parse = attacker.getKeyword().get(keywordPosition).toString();
             String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (blocker.isValid(restrictions, attacker.getController(), attacker)) {
@@ -483,8 +487,8 @@ public class CombatUtil {
         }
 
         if (blocker.hasStartOfKeyword("CantBlock")) {
-            int KeywordPosition = blocker.getKeywordPosition("CantBlock");
-            String parse = blocker.getKeyword().get(KeywordPosition).toString();
+            int keywordPosition = blocker.getKeywordPosition("CantBlock");
+            String parse = blocker.getKeyword().get(keywordPosition).toString();
             String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (attacker.isValid(restrictions, blocker.getController(), blocker)) {
@@ -572,7 +576,8 @@ public class CombatUtil {
      */
     public static boolean canAttack(final Card c, final Combat combat) {
 
-        if (combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Crawlspace", c.getController().getOpponent())) {
+        if (combat.getAttackers().length > 1
+                && AllZoneUtil.isCardInPlay("Crawlspace", c.getController().getOpponent())) {
             return false;
         }
 
@@ -654,7 +659,8 @@ public class CombatUtil {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(final Card ct) {
                             return ((ct.isUntapped() && ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14]
-                                    .contains("greater")) || (ct.isUntapped() && ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14]
+                                    .contains("greater"))
+                                    || (ct.isUntapped() && ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14]
                                     .contains("less")));
                         }
                     });
@@ -1088,7 +1094,8 @@ public class CombatUtil {
             }
 
         } // flanking
-        if (attacker.hasKeyword("Indestructible") && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
+        if (attacker.hasKeyword("Indestructible") && !(defender.hasKeyword("Wither")
+                || defender.hasKeyword("Infect"))) {
             return 0;
         }
 
@@ -1346,8 +1353,8 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory AF = new AbilityFactory();
-            HashMap<String, String> abilityParams = AF.getMapParams(ability, source);
+            AbilityFactory abilityFactory = new AbilityFactory();
+            HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1417,8 +1424,8 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory AF = new AbilityFactory();
-            HashMap<String, String> abilityParams = AF.getMapParams(ability, source);
+            AbilityFactory abilityFactory = new AbilityFactory();
+            HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1497,8 +1504,8 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory AF = new AbilityFactory();
-            HashMap<String, String> abilityParams = AF.getMapParams(ability, source);
+            AbilityFactory abilityFactory = new AbilityFactory();
+            HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1580,8 +1587,8 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            AbilityFactory AF = new AbilityFactory();
-            HashMap<String, String> abilityParams = AF.getMapParams(ability, source);
+            AbilityFactory abilityFactory = new AbilityFactory();
+            HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1589,7 +1596,8 @@ public class CombatUtil {
             // DealDamage triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
-                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                if (!abilityParams.containsKey("Defined")
+                        || !abilityParams.get("Defined").equals("TriggeredAttacker")) {
                     continue;
                 }
                 int damage = 0;
@@ -2212,7 +2220,7 @@ public class CombatUtil {
         } else if (c.getName().equals("Spectral Force")) {
             Player opp = c.getController().getOpponent();
             CardList list = opp.getCardsIn(Zone.Battlefield);
-            list = list.filter(CardListFilter.black);
+            list = list.filter(CardListFilter.BLACK);
             if (list.size() == 0) {
                 c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
             }
@@ -2547,25 +2555,25 @@ public class CombatUtil {
                             }
                         });
                         Player player = attacker.getController();
-                        Card Enchantment = null;
+                        Card enchantment = null;
                         if (player.isHuman()) {
-                            Card[] Target = new Card[enchantments.size()];
+                            Card[] target = new Card[enchantments.size()];
                             for (int j = 0; j < enchantments.size(); j++) {
                                 Card crd = enchantments.get(j);
-                                Target[j] = crd;
+                                target[j] = crd;
                             }
                             Object check = GuiUtils.getChoiceOptional("Select enchantment to enchant exalted creature",
-                                    Target);
+                                    target);
                             if (check != null) {
-                                Enchantment = ((Card) check);
+                                enchantment = ((Card) check);
                             }
                         } else {
-                            Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments, attacker, false);
+                            enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments, attacker, false);
                         }
-                        if (Enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
-                            GameAction.changeZone(AllZone.getZoneOf(Enchantment),
-                                    Enchantment.getOwner().getZone(Constant.Zone.Battlefield), Enchantment);
-                            Enchantment.enchantEntity(attacker);
+                        if (enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
+                            GameAction.changeZone(AllZone.getZoneOf(enchantment),
+                                    enchantment.getOwner().getZone(Constant.Zone.Battlefield), enchantment);
+                            enchantment.enchantEntity(attacker);
                         }
                         attacker.getController().shuffle();
                     } // resolve

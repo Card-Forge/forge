@@ -422,7 +422,7 @@ class CardFactory_Auras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return AllZoneUtil.getCardsIn(Zone.Graveyard).filter(CardListFilter.creatures);
+                    return AllZoneUtil.getCardsIn(Zone.Graveyard).filter(CardListFilter.CREATURES);
                 }
 
                 public boolean canPlay() {

@@ -46,7 +46,7 @@ public class Input_PayManaCost_Ability extends Input {
      *            a {@link forge.Command} object.
      */
     public Input_PayManaCost_Ability(final String manaCost, final Command paid) {
-        this(manaCost, paid, Command.Blank);
+        this(manaCost, paid, Command.BLANK);
     }
 
     /**

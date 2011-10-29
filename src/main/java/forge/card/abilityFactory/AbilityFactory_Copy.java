@@ -214,7 +214,7 @@ public final class AbilityFactory_Copy {
         // TODO - I'm sure someone can do this AI better
 
         HashMap<String, String> params = af.getMapParams();
-        if (params.containsKey("AtEOT") && !AllZone.getPhase().is(Constant.Phase.Main1)) {
+        if (params.containsKey("AtEOT") && !AllZone.getPhase().is(Constant.Phase.MAIN1)) {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
@@ -276,7 +276,7 @@ public final class AbilityFactory_Copy {
                 }
 
                 Card choice;
-                if (list.filter(CardListFilter.creatures).size() > 0) {
+                if (list.filter(CardListFilter.CREATURES).size() > 0) {
                     choice = CardFactoryUtil.AI_getBestCreature(list);
                 } else {
                     choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, source, true);

@@ -73,7 +73,7 @@ public class FModel {
                                              // PM
         }
 
-        Constant.Runtime.Mill[0] = preferences.millingLossCondition;
+        Constant.Runtime.MILL[0] = preferences.millingLossCondition;
         Constant.Runtime.DevMode[0] = preferences.developerMode;
         Constant.Runtime.UpldDrft[0] = preferences.uploadDraftAI;
         Constant.Runtime.RndCFoil[0] = preferences.randCFoil;

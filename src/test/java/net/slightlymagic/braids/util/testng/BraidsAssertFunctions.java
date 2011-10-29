@@ -23,8 +23,7 @@ public final class BraidsAssertFunctions {
      */
     public static void assertThrowsException(
             @SuppressWarnings("rawtypes") final Class exnClass,
-            final ClumsyRunnable withScissors)
-    {
+            final ClumsyRunnable withScissors) {
         try {
             withScissors.run();
         }

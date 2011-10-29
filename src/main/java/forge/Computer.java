@@ -21,28 +21,28 @@ public interface Computer {
      * begin_combat.
      * </p>
      */
-    void begin_combat();
+    void beginCombat();
 
     /**
      * <p>
      * declare_attackers.
      * </p>
      */
-    void declare_attackers();
+    void declareAttackers();
 
     /**
      * <p>
      * declare_attackers_after.
      * </p>
      */
-    void declare_attackers_after(); // can play Instants and Abilities
+    void declareAttackersAfter(); // can play Instants and Abilities
 
     /**
      * <p>
      * declare_blockers.
      * </p>
      */
-    void declare_blockers(); // this is called after when the Human or Computer
+    void declareBlockers(); // this is called after when the Human or Computer
                              // blocks
 
     /**
@@ -50,14 +50,14 @@ public interface Computer {
      * declare_blockers_after.
      * </p>
      */
-    void declare_blockers_after(); // can play Instants and Abilities
+    void declareBlockersAfter(); // can play Instants and Abilities
 
     /**
      * <p>
      * end_of_combat.
      * </p>
      */
-    void end_of_combat();
+    void endOfCombat();
 
     /**
      * <p>
@@ -71,13 +71,13 @@ public interface Computer {
      * end_of_turn.
      * </p>
      */
-    void end_of_turn();// end of Human's turn
+    void endOfTurn(); // end of Human's turn
 
     /**
      * <p>
      * stack_not_empty.
      * </p>
      */
-    void stack_not_empty();
+    void stackNotEmpty();
 
 }

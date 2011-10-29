@@ -81,7 +81,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
      */
     @Override
     public final void startNextRound() {
-        if (Constant.Quest.fantasyQuest[0]) {
+        if (Constant.Quest.FANTASY_QUEST[0]) {
             int extraLife = 0;
 
             if (model.qEvent.getEventType().equals("challenge")) {
@@ -99,7 +99,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
                 computerLife = ((QuestChallenge) model.qEvent).getAILife();
             }
 
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList,
+            AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0], humanList,
                     computerList, humanLife, computerLife, model.qEvent);
         } else {
             super.startNextRound();

@@ -23,7 +23,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are tapped.
      */
-    CardListFilter tapped = new CardListFilter() {
+    CardListFilter TAPPED = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isTapped();
         }
@@ -32,7 +32,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are untapped.
      */
-    CardListFilter untapped = new CardListFilter() {
+    CardListFilter UNTAPPED = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isUntapped();
         }
@@ -41,7 +41,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all creatures.
      */
-    CardListFilter creatures = new CardListFilter() {
+    CardListFilter CREATURES = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isCreature();
         }
@@ -50,7 +50,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all enchantments.
      */
-    CardListFilter enchantments = new CardListFilter() {
+    CardListFilter ENCHANTMENTS = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isEnchantment();
         }
@@ -59,7 +59,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all equipment.
      */
-    CardListFilter equipment = new CardListFilter() {
+    CardListFilter EQUIPMENT = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isEquipment();
         }
@@ -68,7 +68,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all unenchanted cards in a list.
      */
-    CardListFilter unenchanted = new CardListFilter() {
+    CardListFilter UNENCHANTED = new CardListFilter() {
         public boolean addCard(final Card c) {
             return !c.isEnchanted();
         }
@@ -77,7 +77,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all enchanted cards in a list.
      */
-    CardListFilter enchanted = new CardListFilter() {
+    CardListFilter ENCHANTED = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isEnchanted();
         }
@@ -86,7 +86,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all nontoken cards.
      */
-    CardListFilter nonToken = new CardListFilter() {
+    CardListFilter NON_TOKEN = new CardListFilter() {
         public boolean addCard(final Card c) {
             return !c.isToken();
         }
@@ -95,7 +95,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all token cards.
      */
-    CardListFilter token = new CardListFilter() {
+    CardListFilter TOKEN = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isToken();
         }
@@ -104,7 +104,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all nonbasic lands.
      */
-    CardListFilter nonBasicLand = new CardListFilter() {
+    CardListFilter NON_BASIC_LAND = new CardListFilter() {
         public boolean addCard(final Card c) {
             return !c.isBasicLand();
         }
@@ -113,7 +113,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all basicLands.
      */
-    CardListFilter basicLands = new CardListFilter() {
+    CardListFilter BASIC_LANDS = new CardListFilter() {
         public boolean addCard(final Card c) {
             // the isBasicLand() check here may be sufficient...
             return c.isLand() && c.isBasicLand();
@@ -123,7 +123,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all artifacts.
      */
-    CardListFilter artifacts = new CardListFilter() {
+    CardListFilter ARTIFACTS = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isArtifact();
         }
@@ -132,7 +132,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all nonartifacts.
      */
-    CardListFilter nonartifacts = new CardListFilter() {
+    CardListFilter NON_ARTIFACTS = new CardListFilter() {
         public boolean addCard(final Card c) {
             return !c.isArtifact();
         }
@@ -141,7 +141,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all lands.
      */
-    CardListFilter lands = new CardListFilter() {
+    CardListFilter LANDS = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isLand();
         }
@@ -150,7 +150,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all nonlands.
      */
-    CardListFilter nonlands = new CardListFilter() {
+    CardListFilter NON_LANDS = new CardListFilter() {
         public boolean addCard(final Card c) {
             return !c.isLand();
         }
@@ -159,7 +159,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are black.
      */
-    CardListFilter black = new CardListFilter() {
+    CardListFilter BLACK = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isBlack();
         }
@@ -168,7 +168,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are blue.
      */
-    CardListFilter blue = new CardListFilter() {
+    CardListFilter BLUE = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isBlue();
         }
@@ -177,7 +177,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are green.
      */
-    CardListFilter green = new CardListFilter() {
+    CardListFilter GREEN = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isGreen();
         }
@@ -186,7 +186,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are red.
      */
-    CardListFilter red = new CardListFilter() {
+    CardListFilter RED = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isRed();
         }
@@ -195,7 +195,7 @@ public interface CardListFilter {
     /**
      * a CardListFilter to get all cards that are white.
      */
-    CardListFilter white = new CardListFilter() {
+    CardListFilter WHITE = new CardListFilter() {
         public boolean addCard(final Card c) {
             return c.isWhite();
         }

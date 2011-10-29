@@ -2004,7 +2004,7 @@ public final class AbilityFactory_ChangeZone {
             }
 
             // Don't cast during main1?
-            if (AllZone.getPhase().is(Constant.Phase.Main1, AllZone.getComputerPlayer())) {
+            if (AllZone.getPhase().is(Constant.Phase.MAIN1, AllZone.getComputerPlayer())) {
                 return false;
             }
         } else if (origin.equals(Zone.Graveyard)) {

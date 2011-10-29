@@ -286,7 +286,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      */
     private Deck getPlayersDeck() {
         Deck deck = new Deck(GameType.Draft);
-        Constant.Runtime.HumanDeck[0] = deck;
+        Constant.Runtime.HUMAN_DECK[0] = deck;
 
         // add sideboard to deck
         ItemPoolView<CardPrinted> list = ItemPool.createFrom(bottom.getCards(), CardPrinted.class);

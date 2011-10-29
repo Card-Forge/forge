@@ -65,7 +65,7 @@ public class PhaseUtil {
 
         AllZone.getGameAction().resetActivationsPerTurn();
 
-        CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.untapped);
+        CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap
@@ -217,7 +217,7 @@ public class PhaseUtil {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 // search for lands the computer has and only untap 1
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
-                landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                landList = landList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -247,7 +247,7 @@ public class PhaseUtil {
                     }// selectCard()
                 };// Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                landList = landList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                landList = landList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -261,8 +261,8 @@ public class PhaseUtil {
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList artList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                artList = artList.filter(CardListFilter.artifacts);
-                artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                artList = artList.filter(CardListFilter.ARTIFACTS);
+                artList = artList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -293,8 +293,8 @@ public class PhaseUtil {
                     }// selectCard()
                 };// Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                artList = artList.filter(CardListFilter.artifacts);
-                artList = artList.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                artList = artList.filter(CardListFilter.ARTIFACTS);
+                artList = artList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -308,7 +308,7 @@ public class PhaseUtil {
         if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                creatures = creatures.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -339,7 +339,7 @@ public class PhaseUtil {
                     }// selectCard()
                 };// Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                creatures = creatures.filter(CardListFilter.tapped).filter(new CardListFilter() {
+                creatures = creatures.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return canUntap(c);
@@ -617,8 +617,8 @@ public class PhaseUtil {
      */
     public static boolean isBeforeAttackersAreDeclared() {
         String phase = AllZone.getPhase().getPhase();
-        return phase.equals(Constant.Phase.Untap) || phase.equals(Constant.Phase.Upkeep)
-                || phase.equals(Constant.Phase.Draw) || phase.equals(Constant.Phase.Main1)
-                || phase.equals(Constant.Phase.Combat_Begin);
+        return phase.equals(Constant.Phase.UNTAP) || phase.equals(Constant.Phase.UPKEEP)
+                || phase.equals(Constant.Phase.DRAW) || phase.equals(Constant.Phase.MAIN1)
+                || phase.equals(Constant.Phase.COMBAT_BEGIN);
     }
 }

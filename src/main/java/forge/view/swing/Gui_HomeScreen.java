@@ -802,10 +802,10 @@ public class Gui_HomeScreen {
                 Deck rDeck = chooseRandomDeck();
 
                 if (rDeck != null) {
-                    String msg = String.format("You are using deck: %s.", Constant.Runtime.HumanDeck[0].getName());
+                    String msg = String.format("You are using deck: %s.", Constant.Runtime.HUMAN_DECK[0].getName());
                     JOptionPane.showMessageDialog(null, msg, "Random Deck Name", JOptionPane.INFORMATION_MESSAGE);
 
-                    Constant.Runtime.HumanDeck[0] = rDeck;
+                    Constant.Runtime.HUMAN_DECK[0] = rDeck;
                 } else {
                     JOptionPane.showMessageDialog(null, "No decks available.", "Random Deck Name",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -813,7 +813,7 @@ public class Gui_HomeScreen {
                 }
 
             } else {
-                Constant.Runtime.HumanDeck[0] = deckManager.getDeck(HumanDeckSelected);
+                Constant.Runtime.HUMAN_DECK[0] = deckManager.getDeck(HumanDeckSelected);
             }
 
             if (AIDeckSelected.equals("Generate Deck")) {
@@ -824,10 +824,10 @@ public class Gui_HomeScreen {
 
                 if (rDeck != null) {
                     String msg = String.format("The computer is using deck: %s.",
-                            Constant.Runtime.ComputerDeck[0].getName());
+                            Constant.Runtime.COMPUTER_DECK[0].getName());
                     JOptionPane.showMessageDialog(null, msg, "Random Deck Name", JOptionPane.INFORMATION_MESSAGE);
 
-                    Constant.Runtime.ComputerDeck[0] = rDeck;
+                    Constant.Runtime.COMPUTER_DECK[0] = rDeck;
                 } else {
                     JOptionPane.showMessageDialog(null, "No decks available.", "Random Deck Name",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -835,7 +835,7 @@ public class Gui_HomeScreen {
                 }
 
             } else {
-                Constant.Runtime.ComputerDeck[0] = deckManager.getDeck(AIDeckSelected);
+                Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(AIDeckSelected);
             }
 
         } else if (GameTypeSelected.equals(GameType.Sealed)) {
@@ -848,8 +848,8 @@ public class Gui_HomeScreen {
 
             } else {
                 if (!HumanDeckSelected.equals("") && !AIDeckSelected.equals("")) {
-                    Constant.Runtime.HumanDeck[0] = deckManager.getDeck(HumanDeckSelected);
-                    Constant.Runtime.ComputerDeck[0] = deckManager.getDeck(AIDeckSelected);
+                    Constant.Runtime.HUMAN_DECK[0] = deckManager.getDeck(HumanDeckSelected);
+                    Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(AIDeckSelected);
                 }
             }
         } else if (GameTypeSelected.equals(GameType.Draft)) {
@@ -861,13 +861,13 @@ public class Gui_HomeScreen {
                 return false;
             } else {
                 if (!HumanDeckSelected.equals("") && !AIDeckSelected.equals("")) {
-                    Constant.Runtime.HumanDeck[0] = deckManager.getDraftDeck(HumanDeckSelected)[0];
+                    Constant.Runtime.HUMAN_DECK[0] = deckManager.getDraftDeck(HumanDeckSelected)[0];
 
                     String[] aiDeck = AIDeckSelected.split(" - ");
                     int AIDeckNum = Integer.parseInt(aiDeck[1]);
                     String AIDeckName = aiDeck[0];
 
-                    Constant.Runtime.ComputerDeck[0] = deckManager.getDraftDeck(AIDeckName)[AIDeckNum];
+                    Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDraftDeck(AIDeckName)[AIDeckNum];
                 }
             }
         }
@@ -933,9 +933,9 @@ public class Gui_HomeScreen {
 
             deck.addSideboard(sDeck);
 
-            for (int i = 0; i < Constant.Color.BasicLands.length; i++) {
+            for (int i = 0; i < Constant.Color.BASIC_LANDS.length; i++) {
                 for (int j = 0; j < 18; j++) {
-                    deck.addSideboard(Constant.Color.BasicLands[i] + "|" + sd.LandSetCode[0]);
+                    deck.addSideboard(Constant.Color.BASIC_LANDS[i] + "|" + sd.LandSetCode[0]);
                 }
             }
 
@@ -946,7 +946,7 @@ public class Gui_HomeScreen {
             deck.setPlayerType(PlayerType.HUMAN);
 
             HumanDeckSelected = sDeckName;
-            Constant.Runtime.HumanDeck[0] = deck;
+            Constant.Runtime.HUMAN_DECK[0] = deck;
             AIDeckSelected = "AI_" + sDeckName;
 
             // Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
@@ -960,7 +960,7 @@ public class Gui_HomeScreen {
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
             DeckManager.writeDeck(aiDeck, DeckManager.makeFileName(aiDeck));
-            Constant.Runtime.ComputerDeck[0] = aiDeck;
+            Constant.Runtime.COMPUTER_DECK[0] = aiDeck;
 
             showDecks();
 
@@ -1274,11 +1274,11 @@ public class Gui_HomeScreen {
             }
 
             AllZone.setDisplay(new GuiDisplay4());
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
+            AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             AllZone.getDisplay().setVisible(true);
         }
 
-        Constant.Runtime.gameType = GameTypeSelected;
+        Constant.Runtime.setGameType(GameTypeSelected);
 
         gHS.dispose();
     }

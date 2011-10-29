@@ -249,7 +249,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         devMenu.setEnabled(Constant.Runtime.DevMode[0]);
 
         if (Constant.Runtime.DevMode[0]) {
-            canLoseByDecking.setSelected(Constant.Runtime.Mill[0]);
+            canLoseByDecking.setSelected(Constant.Runtime.MILL[0]);
 
             Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), COMPUTER_HAND.BASE);
             Action viewAILibrary = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Library),
@@ -1429,11 +1429,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         if (turn.isComputer()) {
             if (phase.equals(Constant.Phase.End_Of_Turn)) {
                 return cbAIEndOfTurn.isSelected();
-            } else if (phase.equals(Constant.Phase.Upkeep)) {
+            } else if (phase.equals(Constant.Phase.UPKEEP)) {
                 return cbAIUpkeep.isSelected();
-            } else if (phase.equals(Constant.Phase.Draw)) {
+            } else if (phase.equals(Constant.Phase.DRAW)) {
                 return cbAIDraw.isSelected();
-            } else if (phase.equals(Constant.Phase.Combat_Begin)) {
+            } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return cbAIBeginCombat.isSelected();
             } else if (phase.equals(Constant.Phase.Combat_End)) {
                 return cbAIEndCombat.isSelected();
@@ -1441,11 +1441,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         } else {
             if (phase.equals(Constant.Phase.End_Of_Turn)) {
                 return cbHumanEndOfTurn.isSelected();
-            } else if (phase.equals(Constant.Phase.Upkeep)) {
+            } else if (phase.equals(Constant.Phase.UPKEEP)) {
                 return cbHumanUpkeep.isSelected();
-            } else if (phase.equals(Constant.Phase.Draw)) {
+            } else if (phase.equals(Constant.Phase.DRAW)) {
                 return cbHumanDraw.isSelected();
-            } else if (phase.equals(Constant.Phase.Combat_Begin)) {
+            } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return cbHumanBeginCombat.isSelected();
             } else if (phase.equals(Constant.Phase.Combat_End)) {
                 return cbHumanEndCombat.isSelected();
@@ -1489,7 +1489,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * @return a boolean.
      */
     public final boolean savePrefs() {
-        Constant.Runtime.Mill[0] = canLoseByDecking.isSelected();
+        Constant.Runtime.MILL[0] = canLoseByDecking.isSelected();
         ForgePreferences fp = Singletons.getModel().getPreferences();
 
         fp.bAIUpkeep = cbAIUpkeep.isSelected();
@@ -1662,16 +1662,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         private static final long serialVersionUID = 9874492387239847L;
 
         public void actionPerformed(final ActionEvent e) {
-            if (Constant.Runtime.HumanDeck[0].countMain() > 1) {
+            if (Constant.Runtime.HUMAN_DECK[0].countMain() > 1) {
                 HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
 
-                for (Entry<CardPrinted, Integer> s : Constant.Runtime.HumanDeck[0].getMain()) {
+                for (Entry<CardPrinted, Integer> s : Constant.Runtime.HUMAN_DECK[0].getMain()) {
                     deckMap.put(s.getKey().getName(), s.getValue());
                 }
 
                 String nl = System.getProperty("line.separator");
                 StringBuilder deckList = new StringBuilder();
-                String dName = Constant.Runtime.HumanDeck[0].getName();
+                String dName = Constant.Runtime.HUMAN_DECK[0].getName();
 
                 if (dName == null) {
                     dName = "";

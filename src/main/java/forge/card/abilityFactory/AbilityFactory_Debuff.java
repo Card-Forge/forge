@@ -271,7 +271,7 @@ public final class AbilityFactory_Debuff {
         SpellAbility_Restriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_Begin)) {
+        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -733,7 +733,7 @@ public final class AbilityFactory_Debuff {
         });
 
         // don't use DebuffAll after Combat_Begin until AI is improved
-        if (AllZone.getPhase().isAfter(Constant.Phase.Combat_Begin)) {
+        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 

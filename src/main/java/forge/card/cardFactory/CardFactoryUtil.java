@@ -968,7 +968,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                if (AllZone.getPhase().isAfter(Constant.Phase.Main1)
+                if (AllZone.getPhase().isAfter(Constant.Phase.MAIN1)
                         || AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
                     return false;
                 }
@@ -1812,7 +1812,7 @@ public class CardFactoryUtil {
      */
     public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message,
             final boolean targeted, final boolean free) {
-        return CardFactoryUtil.input_targetSpecific(spell, choices, message, Command.Blank, targeted, free);
+        return CardFactoryUtil.input_targetSpecific(spell, choices, message, Command.BLANK, targeted, free);
     }
 
     // CardList choices are the only cards the user can successful select
@@ -3213,7 +3213,7 @@ public class CardFactoryUtil {
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
             final String cPhase = AllZone.getPhase().getPhase();
-            if ((cPhase.equals(Constant.Phase.Main1) || cPhase.equals(Constant.Phase.Main2))
+            if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.Main2))
                     && AllZone.getPhase().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
@@ -3411,32 +3411,32 @@ public class CardFactoryUtil {
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
         if (sq[0].contains("Untapped")) {
-            someCards = someCards.filter(CardListFilter.untapped);
+            someCards = someCards.filter(CardListFilter.UNTAPPED);
         }
 
         if (sq[0].contains("Tapped")) {
-            someCards = someCards.filter(CardListFilter.tapped);
+            someCards = someCards.filter(CardListFilter.TAPPED);
         }
 
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
         if (sq[0].contains("White")) {
-            someCards = someCards.filter(CardListFilter.white);
+            someCards = someCards.filter(CardListFilter.WHITE);
         }
 
         if (sq[0].contains("Blue")) {
-            someCards = someCards.filter(CardListFilter.blue);
+            someCards = someCards.filter(CardListFilter.BLUE);
         }
 
         if (sq[0].contains("Black")) {
-            someCards = someCards.filter(CardListFilter.black);
+            someCards = someCards.filter(CardListFilter.BLACK);
         }
 
         if (sq[0].contains("Red")) {
-            someCards = someCards.filter(CardListFilter.red);
+            someCards = someCards.filter(CardListFilter.RED);
         }
 
         if (sq[0].contains("Green")) {
-            someCards = someCards.filter(CardListFilter.green);
+            someCards = someCards.filter(CardListFilter.GREEN);
         }
 
         if (sq[0].contains("Multicolor")) {

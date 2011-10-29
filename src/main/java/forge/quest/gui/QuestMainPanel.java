@@ -506,7 +506,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         AllZone.getQuestData().saveData();
 
         devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
-        smoothLandCheckBox.setSelected(Constant.Runtime.Smooth[0]);
+        smoothLandCheckBox.setSelected(Constant.Runtime.SMOOTH[0]);
 
         creditsLabel.setText(" " + questData.getCredits());
         statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
@@ -727,7 +727,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         Deck humanDeck = questData.getDeck(humanDeckName);
 
-        Constant.Runtime.HumanDeck[0] = humanDeck;
+        Constant.Runtime.HUMAN_DECK[0] = humanDeck;
         moveDeckToTop(humanDeckName);
 
         Constant.Quest.oppIconName[0] = getEventIconFilename();
@@ -743,7 +743,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         // AllZone.setDisplay(new GuiDisplay3());
         // }
 
-        Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
+        Constant.Runtime.SMOOTH[0] = smoothLandCheckBox.isSelected();
 
         AllZone.getMatchState().reset();
         if (isShowingChallenges) {
@@ -768,7 +768,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
      */
     final void setupDuel(final Deck humanDeck) {
         Deck computer = selectedOpponent.getEvent().getEventDeck();
-        Constant.Runtime.ComputerDeck[0] = computer;
+        Constant.Runtime.COMPUTER_DECK[0] = computer;
 
         QuestDuel selectedDuel = (QuestDuel) selectedOpponent.getEvent();
         AllZone.setQuestEvent(selectedDuel);
@@ -789,7 +789,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         QuestChallenge selectedChallenge = (QuestChallenge) selectedOpponent.getEvent();
 
         Deck computer = selectedOpponent.getEvent().getEventDeck();
-        Constant.Runtime.ComputerDeck[0] = computer;
+        Constant.Runtime.COMPUTER_DECK[0] = computer;
 
         AllZone.setQuestEvent(selectedChallenge);
 

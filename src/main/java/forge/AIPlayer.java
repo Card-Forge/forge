@@ -149,7 +149,7 @@ public class AIPlayer extends Player {
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = getCardsIn(Zone.Hand).size();
         max = Math.min(max, num);
-        CardList discarded = ComputerUtil.AI_discardNumType(max, null, sa);
+        CardList discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
             doDiscard(discarded.get(i), sa);
         }
@@ -293,7 +293,7 @@ public class AIPlayer extends Player {
      * @see forge.Player#discard_Chains_of_Mephistopheles()
      */
     @Override
-    protected final void discard_Chains_of_Mephistopheles() {
+    protected final void discardChainsOfMephistopheles() {
         discard(null);
         drawCard();
     }

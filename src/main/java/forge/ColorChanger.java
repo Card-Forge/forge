@@ -26,7 +26,8 @@ public class ColorChanger {
      *            a boolean.
      * @return a long.
      */
-    public final long addColorChanges(final String s, final Card c, final boolean addToColors, final boolean bIncrease) {
+    public final long addColorChanges(final String s, final Card c,
+            final boolean addToColors, final boolean bIncrease) {
         if (bIncrease) {
             Card_Color.increaseTimestamp();
         }

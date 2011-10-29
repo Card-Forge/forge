@@ -90,9 +90,9 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
         Deck deck = null;
 
         // open deck that the player used if QuestData has it
-        if (Constant.Runtime.HumanDeck[0] != null
-                && questData.getDeckNames().contains(Constant.Runtime.HumanDeck[0].getName())) {
-            deck = questData.getDeck(Constant.Runtime.HumanDeck[0].getName());
+        if (Constant.Runtime.HUMAN_DECK[0] != null
+                && questData.getDeckNames().contains(Constant.Runtime.HUMAN_DECK[0].getName())) {
+            deck = questData.getDeck(Constant.Runtime.HUMAN_DECK[0].getName());
         } else {
             deck = new Deck(GameType.Sealed);
             deck.setName("");

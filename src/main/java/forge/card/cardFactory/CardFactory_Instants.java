@@ -915,7 +915,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final CardList ens = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.enchantments);
+                    final CardList ens = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.ENCHANTMENTS);
                     final CardList toReturn = ens.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {

@@ -60,7 +60,7 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListTextFilter(final CardList all, final String name) {
+    public final CardList cardListTextFilter(final CardList all, final String name) {
         Card cardName;
         String s;
         s = "";
@@ -92,15 +92,15 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListColorFilter(final CardList all, final String name) {
-        Card CardName = new Card();
+    public final CardList cardListColorFilter(final CardList all, final String name) {
+        Card cardName = new Card();
         CardList listFilter = new CardList();
 
         if (name == "black") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.Black)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.Black)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -108,9 +108,9 @@ public class CardFilter {
 
         if (name == "blue") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.Blue)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.Blue)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -118,9 +118,9 @@ public class CardFilter {
 
         if (name == "green") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.Green)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.Green)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -128,9 +128,9 @@ public class CardFilter {
 
         if (name == "red") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.Red)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.Red)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -138,9 +138,9 @@ public class CardFilter {
 
         if (name == "white") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.White)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.White)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -148,9 +148,9 @@ public class CardFilter {
 
         if (name.equals("colorless")) {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardUtil.getColors(CardName).contains(Constant.Color.Colorless)) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!CardUtil.getColors(cardName).contains(Constant.Color.Colorless)) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -172,15 +172,15 @@ public class CardFilter {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList CardListTypeFilter(final CardList all, final String name) {
-        Card CardName = new Card();
+    public final CardList cardListTypeFilter(final CardList all, final String name) {
+        Card cardName = new Card();
         CardList listFilter = new CardList();
 
         if (name == "artifact") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isArtifact()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isArtifact()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -188,9 +188,9 @@ public class CardFilter {
 
         if (name == "creature") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isCreature()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isCreature()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -198,9 +198,9 @@ public class CardFilter {
 
         if (name == "enchantment") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isEnchantment()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isEnchantment()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -208,9 +208,9 @@ public class CardFilter {
 
         if (name == "instant") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isInstant()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isInstant()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -218,9 +218,9 @@ public class CardFilter {
 
         if (name == "land") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isLand()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isLand()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -228,9 +228,9 @@ public class CardFilter {
 
         if (name == "planeswalker") {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isPlaneswalker()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isPlaneswalker()) {
+                    listFilter.add(cardName);
                 }
 
             }
@@ -238,9 +238,9 @@ public class CardFilter {
 
         if (name.equals("sorcery")) {
             for (int i = 0; i < all.size(); i++) {
-                CardName = all.getCard(i);
-                if (!CardName.isSorcery()) {
-                    listFilter.add(CardName);
+                cardName = all.getCard(i);
+                if (!cardName.isSorcery()) {
+                    listFilter.add(cardName);
                 }
 
             }

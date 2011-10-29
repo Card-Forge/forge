@@ -83,7 +83,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay() {
         CardList creats = getCardsIn(Zone.Battlefield);
-        return creats.filter(CardListFilter.creatures);
+        return creats.filter(CardListFilter.CREATURES);
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class AllZoneUtil {
      */
     public static CardList getCreaturesInPlay(final Player player) {
         CardList creats = player.getCardsIn(Zone.Battlefield);
-        return creats.filter(CardListFilter.creatures);
+        return creats.filter(CardListFilter.CREATURES);
     }
 
     // /////////////// Lands
@@ -108,7 +108,7 @@ public abstract class AllZoneUtil {
      * @return a CardList containing all lands the given player has in play
      */
     public static CardList getPlayerLandsInPlay(final Player player) {
-        return player.getCardsIn(Zone.Battlefield).filter(CardListFilter.lands);
+        return player.getCardsIn(Zone.Battlefield).filter(CardListFilter.LANDS);
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        return getCardsIn(Zone.Battlefield).filter(CardListFilter.lands);
+        return getCardsIn(Zone.Battlefield).filter(CardListFilter.LANDS);
     }
 
     // =============================================================================

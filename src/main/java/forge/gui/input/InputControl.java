@@ -201,7 +201,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         } else if (phase.equals(Constant.Phase.Combat_Declare_Blockers)) {
             model.getGameState().getStack().freezeStack();
             if (playerTurn.isHuman()) {
-                aiInput.getComputer().declare_blockers();
+                aiInput.getComputer().declareBlockers();
                 return null;
             } else {
                 if (model.getGameState().getCombat().getAttackers().length == 0) {
@@ -238,7 +238,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         } else if (playerTurn.isComputer()) {
             return aiInput;
         } else {
-            aiInput.getComputer().stack_not_empty();
+            aiInput.getComputer().stackNotEmpty();
             return null;
         }
     }// getInput()

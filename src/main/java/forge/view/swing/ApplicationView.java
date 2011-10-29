@@ -145,7 +145,7 @@ public class ApplicationView implements FView {
             try {
                 ManaSymbols.loadImages();
 
-                Constant.Runtime.gameType = GameType.Constructed;
+                Constant.Runtime.setGameType(GameType.Constructed);
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids
                                                             // on 8/7/11 1:07
                                                             // PM: this isn't a

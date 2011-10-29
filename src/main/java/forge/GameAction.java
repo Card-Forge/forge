@@ -1284,7 +1284,7 @@ public class GameAction {
             AllZone.getComputerPlayer().getZone(Zone.Battlefield).add(c);
             c.setSickness(true);
         }
-        Constant.Quest.fantasyQuest[0] = true;
+        Constant.Quest.FANTASY_QUEST[0] = true;
     }
 
     private boolean Start_Cut = false;
@@ -1302,7 +1302,7 @@ public class GameAction {
     public final void newGame(final Deck humanDeck, final Deck computerDeck) {
         // AllZone.getComputer() = new ComputerAI_Input(new
         // ComputerAI_General());
-        Constant.Quest.fantasyQuest[0] = false;
+        Constant.Quest.FANTASY_QUEST[0] = false;
 
         AllZone.newGameCleanup();
         canShowWinLose = true;
@@ -1313,7 +1313,7 @@ public class GameAction {
         CardFactoryInterface c = AllZone.getCardFactory();
         Card.resetUniqueNumber();
         boolean canRandomFoil = Constant.Runtime.RndCFoil[0]
-                && Constant.Runtime.gameType.equals(GameType.Constructed);
+                && Constant.Runtime.getGameType().equals(GameType.Constructed);
         Random generator = MyRandom.random;
         for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             CardPrinted cardPrinted = stackOfCards.getKey();
@@ -1403,7 +1403,7 @@ public class GameAction {
         }
 
         // do this instead of shuffling Computer's deck
-        boolean smoothLand = Constant.Runtime.Smooth[0];
+        boolean smoothLand = Constant.Runtime.SMOOTH[0];
 
         if (smoothLand) {
             Card[] c1 = smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
@@ -1640,9 +1640,9 @@ public class GameAction {
     public final void seeWhoPlaysFirst() {
 
         CardList HLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-        HLibrary = HLibrary.filter(CardListFilter.nonlands);
+        HLibrary = HLibrary.filter(CardListFilter.NON_LANDS);
         CardList CLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
-        CLibrary = CLibrary.filter(CardListFilter.nonlands);
+        CLibrary = CLibrary.filter(CardListFilter.NON_LANDS);
 
         boolean Starter_Determined = false;
         int Cut_Count = 0;
@@ -2452,7 +2452,7 @@ public class GameAction {
         if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell()) {
             Player player = AllZone.getPhase().getPlayerTurn();
             CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
-            playerCreature = playerCreature.filter(CardListFilter.green);
+            playerCreature = playerCreature.filter(CardListFilter.GREEN);
             String manaC = manaCost + " ";
             if (playerCreature.size() > 0) {
                 for (int i = 0; i < playerCreature.size(); i++) {

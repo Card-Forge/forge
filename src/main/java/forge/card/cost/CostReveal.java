@@ -42,7 +42,8 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability,
+            final Card source, final Player activator, final Cost cost) {
         CardList handList = activator.getCardsIn(Zone.Hand);
         String type = getType();
         Integer amount = convertAmount();
@@ -94,7 +95,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            list = ComputerUtil.AI_discardNumType(c, type.split(";"), ability);
+            list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
         }
         return list != null;
     }
@@ -141,7 +142,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            CostUtil.setInput(input_revealCost(type, handList, payment, this, ability, c));
+            CostUtil.setInput(inputRevealCost(type, handList, payment, this, ability, c));
             return false;
         }
         addListToHash(ability, "Revealed");
@@ -209,12 +210,12 @@ public class CostReveal extends CostPartWithList {
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_revealCost(final String discType, final CardList handList, final Cost_Payment payment,
+    public static Input inputRevealCost(final String discType, final CardList handList, final Cost_Payment payment,
             final CostReveal part, final SpellAbility sa, final int nNeeded) {
         Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
 
-            int nReveal = 0;
+            private int nReveal = 0;
 
             @Override
             public void showMessage() {
@@ -283,6 +284,6 @@ public class CostReveal extends CostPartWithList {
         };
 
         return target;
-    }// input_discard()
+    } // input_discard()
 
 }

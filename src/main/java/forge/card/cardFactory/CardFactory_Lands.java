@@ -209,7 +209,7 @@ class CardFactory_Lands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!(AllZone.getPhase().getPhase().equals(Constant.Phase.Main1) && AllZone.getPhase()
+                    if (!(AllZone.getPhase().getPhase().equals(Constant.Phase.MAIN1) && AllZone.getPhase()
                             .getPlayerTurn().isComputer())) {
                         return false;
                     }
@@ -277,7 +277,7 @@ class CardFactory_Lands {
                                 }
                             } // selectCard()
                         }; // Input
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.untapped)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
                                 .size() < 2)) {
                             AllZone.getGameAction().sacrifice(card);
                             return;
@@ -322,7 +322,7 @@ class CardFactory_Lands {
                     if (player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land.toArray());
-                            tappedLand = tappedLand.filter(CardListFilter.tapped);
+                            tappedLand = tappedLand.filter(CardListFilter.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
                             if (tappedLand.size() > 0) {
@@ -393,7 +393,7 @@ class CardFactory_Lands {
 
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    plains = plains.filter(CardListFilter.untapped);
+                    plains = plains.filter(CardListFilter.UNTAPPED);
 
                     if (player.isComputer()) {
                         if (plains.size() > 1) {
@@ -412,7 +412,7 @@ class CardFactory_Lands {
                         }
                     } else { // this is the human resolution
                         final int[] paid = { 0 };
-                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.untapped)
+                        if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer()).filter(CardListFilter.UNTAPPED)
                                 .size() < 2)) {
                             AllZone.getGameAction().sacrifice(card);
                             return;
@@ -676,7 +676,7 @@ class CardFactory_Lands {
                     if (player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land.toArray());
-                            tappedLand = tappedLand.filter(CardListFilter.tapped);
+                            tappedLand = tappedLand.filter(CardListFilter.TAPPED);
                             if (tappedLand.size() > 0) {
                                 AllZone.getGameAction().moveToHand(CardFactoryUtil.getWorstLand(tappedLand));
                             } else {

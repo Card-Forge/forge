@@ -201,7 +201,7 @@ public class Upkeep implements java.io.Serializable {
             final Card c = list.get(i);
             if (c.getIntrinsicKeyword().contains("(Echo unpaid)")) {
 
-                final Command paidCommand = Command.Blank;
+                final Command paidCommand = Command.BLANK;
 
                 final Command unpaidCommand = new Command() {
                     private static final long serialVersionUID = -7354791599039157375L;
@@ -325,7 +325,7 @@ public class Upkeep implements java.io.Serializable {
                         }
                     };
 
-                    final Command paidCommand = Command.Blank;
+                    final Command paidCommand = Command.BLANK;
 
                     final Ability aiPaid = upkeepAIPayment(c, upkeepCost);
 
@@ -381,7 +381,7 @@ public class Upkeep implements java.io.Serializable {
                         }
                     };
 
-                    final Command paidCommand = Command.Blank;
+                    final Command paidCommand = Command.BLANK;
 
                     final Ability aiPaid = upkeepAIPayment(c, upkeepCost);
 
@@ -422,7 +422,7 @@ public class Upkeep implements java.io.Serializable {
                         }
                     };
 
-                    final Command paidCommand = Command.Blank;
+                    final Command paidCommand = Command.BLANK;
 
                     final Ability aiPaid = upkeepAIPayment(c, upkeepCost);
 
@@ -564,7 +564,7 @@ public class Upkeep implements java.io.Serializable {
      * @return a {@link forge.CardList} object.
      */
     private static CardList abyss_getTargets(final Player player, final Card card) {
-        CardList creats = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.nonartifacts);
+        CardList creats = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.NON_ARTIFACTS);
         creats = creats.getTargetableCards(card);
         return creats;
     }
@@ -588,7 +588,7 @@ public class Upkeep implements java.io.Serializable {
             final Ability sacrificeArtifact = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    CardList artifacts = player.getCardsIn(Zone.Battlefield).filter(CardListFilter.artifacts);
+                    CardList artifacts = player.getCardsIn(Zone.Battlefield).filter(CardListFilter.ARTIFACTS);
 
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(new Input() {
@@ -836,7 +836,7 @@ public class Upkeep implements java.io.Serializable {
                                 StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
-                                        Command.Blank, Command.Blank);
+                                        Command.BLANK, Command.BLANK);
                             }
                         } // end resolve()
                     }; // end pay ability
@@ -2347,8 +2347,8 @@ public class Upkeep implements java.io.Serializable {
                 public void resolve() {
                     int gain = 0;
                     CardList play = player.getCardsIn(Zone.Battlefield);
-                    CardList black = play.filter(CardListFilter.black);
-                    CardList red = play.filter(CardListFilter.red);
+                    CardList black = play.filter(CardListFilter.BLACK);
+                    CardList red = play.filter(CardListFilter.RED);
                     if (black.size() > 0 && red.size() > 0) {
                         gain = 4;
                     } else if (black.size() > 0 || red.size() > 0) {
@@ -2384,8 +2384,8 @@ public class Upkeep implements java.io.Serializable {
                 public void resolve() {
                     int draw = 0;
                     CardList play = player.getCardsIn(Zone.Battlefield);
-                    CardList green = play.filter(CardListFilter.green);
-                    CardList red = play.filter(CardListFilter.red);
+                    CardList green = play.filter(CardListFilter.GREEN);
+                    CardList red = play.filter(CardListFilter.RED);
 
                     if (green.size() > 0 && red.size() > 0) {
                         draw = 2;

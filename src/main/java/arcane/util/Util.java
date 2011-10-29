@@ -27,15 +27,15 @@ public class Util {
      * Constant.
      * <code>isMac=System.getProperty("os.name").toLowerCase().indexOf("mac") != -1</code>.
      */
-    public static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
+    public static final boolean IS_MAC = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
     /**
      * Constant.
      * <code>isWindows=System.getProperty("os.name").toLowerCase().indexOf("windows") == -1</code>
      */
-    public static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
+    public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
 
     /** Constant <code>threadPool</code>. */
-    public static ThreadPoolExecutor threadPool;
+    private static ThreadPoolExecutor threadPool;
     /** Constant <code>threadCount</code>. */
     private static int threadCount;
 
@@ -88,8 +88,7 @@ public class Util {
      */
     private static void broadcast(final DatagramSocket socket,
             final byte[] data, final int port, final Enumeration<NetworkInterface> ifaces)
-            throws IOException
-            {
+            throws IOException {
         for (NetworkInterface iface : Collections.list(ifaces)) {
             for (InetAddress address : Collections.list(iface.getInetAddresses())) {
                 if (!address.isSiteLocalAddress()) {

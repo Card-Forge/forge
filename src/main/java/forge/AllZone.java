@@ -40,7 +40,7 @@ public final class AllZone implements NewConstants {
     }
 
     /** Global <code>SKIN</code>. */
-    private static FSkin SKIN = null;
+    private static FSkin skin = null;
 
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
@@ -582,7 +582,7 @@ public final class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static FSkin getSkin() {
-        return SKIN;
+        return skin;
     }
 
     /**
@@ -596,6 +596,6 @@ public final class AllZone implements NewConstants {
      * @since 1.0.15
      */
     public static void setSkin(final FSkin fs) {
-        SKIN = fs;
+        skin = fs;
     }
 } // AllZone

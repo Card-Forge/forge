@@ -49,7 +49,7 @@ public enum Color {
      * 
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> Colorless() {
+    public static EnumSet<Color> colorless() {
         EnumSet<Color> colors = EnumSet.of(Color.Colorless);
         return colors;
     }
@@ -63,11 +63,11 @@ public enum Color {
      *            an array of {@link java.lang.String} objects.
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> ConvertStringsToColor(final String[] s) {
+    public static EnumSet<Color> convertStringsToColor(final String[] s) {
         EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
         for (int i = 0; i < s.length; i++) {
-            colors.add(ConvertFromString(s[i]));
+            colors.add(convertFromString(s[i]));
         }
 
         if (colors.size() > 1) {
@@ -86,7 +86,7 @@ public enum Color {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.Color} object.
      */
-    public static Color ConvertFromString(final String s) {
+    public static Color convertFromString(final String s) {
 
         if (s.equals(Constant.Color.White)) {
             return Color.White;
@@ -113,7 +113,7 @@ public enum Color {
      *            a {@link forge.card.mana.ManaCost} object.
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> ConvertManaCostToColor(final ManaCost m) {
+    public static EnumSet<Color> convertManaCostToColor(final ManaCost m) {
         EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
         if (m.isColor("W")) {

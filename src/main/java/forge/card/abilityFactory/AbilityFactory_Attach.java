@@ -847,7 +847,7 @@ public class AbilityFactory_Attach {
         }
 
         if (AbilityFactory.isSorcerySpeed(sa)) {
-            if (AllZone.getPhase().is(Constant.Phase.Main1)) {
+            if (AllZone.getPhase().is(Constant.Phase.MAIN1)) {
                 chance = r.nextFloat() <= .75;
             } else {
                 // Don't Attach Sorcery Speed stuff after Main1

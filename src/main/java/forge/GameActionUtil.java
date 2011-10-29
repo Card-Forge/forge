@@ -803,7 +803,7 @@ public final class GameActionUtil {
                     public void resolve() {
                         for (int i = 0; i < damage; i++) {
                             CardList nonTokens = player.getCardsIn(Zone.Battlefield);
-                            nonTokens = nonTokens.filter(CardListFilter.nonToken);
+                            nonTokens = nonTokens.filter(CardListFilter.NON_TOKEN);
                             if (nonTokens.size() == 0) {
                                 player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
                             } else {
@@ -1471,7 +1471,7 @@ public final class GameActionUtil {
             produces.put("Swamp", "B");
 
             CardList lands = AllZoneUtil.getCardsInGame();
-            lands = lands.filter(CardListFilter.lands);
+            lands = lands.filter(CardListFilter.LANDS);
 
             // remove all abilities granted by this Command
             for (Card land : lands) {

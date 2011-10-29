@@ -39,7 +39,7 @@ public final class Base64Coder {
      * Constant.
      * <code>systemLineSeparator="System.getProperty(line.separator)"</code>
      */
-    private static final String systemLineSeparator = System.getProperty("line.separator");
+    private static final String SYSTEM_LINE_SEPARATOR = System.getProperty("line.separator");
 
     // Mapping table from 6-bit nibbles to Base64 characters.
     /** Constant <code>map1=new char[64]</code>. */
@@ -116,7 +116,7 @@ public final class Base64Coder {
      * @return A String containing the Base64 encoded data, broken into lines.
      */
     public static String encodeLines(final byte[] in) {
-        return encodeLines(in, 0, in.length, 76, systemLineSeparator);
+        return encodeLines(in, 0, in.length, 76, SYSTEM_LINE_SEPARATOR);
     }
 
     /**
@@ -136,7 +136,8 @@ public final class Base64Coder {
      *            The line separator to be used to separate the output lines.
      * @return A String containing the Base64 encoded data, broken into lines.
      */
-    public static String encodeLines(final byte[] in, final int iOff, final int iLen, final int lineLen, final String lineSeparator) {
+    public static String encodeLines(final byte[] in, final int iOff,
+            final int iLen, final int lineLen, final String lineSeparator) {
         int blockLen = (lineLen * 3) / 4;
         if (blockLen <= 0) {
             throw new IllegalArgumentException();

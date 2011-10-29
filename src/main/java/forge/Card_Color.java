@@ -76,7 +76,7 @@ public class Card_Color {
      */
     Card_Color(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
         additional = addToColors;
-        col = Color.ConvertManaCostToColor(mc);
+        col = Color.convertManaCostToColor(mc);
         effectingCard = c;
         if (baseColor) {
             stamp = 0;
@@ -94,7 +94,7 @@ public class Card_Color {
      *            a {@link forge.Card} object.
      */
     public Card_Color(final Card c) {
-        col = Color.Colorless();
+        col = Color.colorless();
         additional = false;
         stamp = 0;
         effectingCard = c;
@@ -110,7 +110,7 @@ public class Card_Color {
      * @return a boolean.
      */
     final boolean addToCardColor(final String s) {
-        Color c = Color.ConvertFromString(s);
+        Color c = Color.convertFromString(s);
         if (!col.contains(c)) {
             col.add(c);
             return true;

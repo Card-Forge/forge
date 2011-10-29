@@ -301,7 +301,7 @@ public final class AbilityFactory_Animate {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!AllZone.getPhase().is(Constant.Phase.Combat_Begin)
+        if (!AllZone.getPhase().is(Constant.Phase.COMBAT_BEGIN)
                 && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;

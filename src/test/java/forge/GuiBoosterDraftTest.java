@@ -22,8 +22,8 @@ public class GuiBoosterDraftTest {
      */
     @Test(groups = {"UnitTest", "fast"})
     public void GuiBoosterDraftTest1() {
-        Constant.Runtime.gameType = GameType.Draft;
-        Constant.Runtime.HumanDeck[0] = new Deck(GameType.Sealed);
+        Constant.Runtime.setGameType(GameType.Draft);
+        Constant.Runtime.HUMAN_DECK[0] = new Deck(GameType.Sealed);
 
         DeckEditorDraft g = new DeckEditorDraft();
         g.showGui(new BoosterDraft_1(CardPoolLimitation.Full));

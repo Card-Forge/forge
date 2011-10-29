@@ -103,7 +103,7 @@ public class CostTapType extends CostPartWithList {
         if (cost.getTap()) {
             typeList.remove(source);
         }
-        typeList = typeList.filter(CardListFilter.untapped);
+        typeList = typeList.filter(CardListFilter.UNTAPPED);
 
         Integer amount = convertAmount();
         if (typeList.size() == 0 || (amount != null && typeList.size() < amount)) {
@@ -136,7 +136,7 @@ public class CostTapType extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-        typeList = typeList.filter(CardListFilter.untapped);
+        typeList = typeList.filter(CardListFilter.UNTAPPED);
         String amount = getAmount();
         Integer c = convertAmount();
         if (c == null) {

@@ -9,6 +9,6 @@ import java.util.Map;
 public class Constant_StringHashMap {
 
     /** The map. */
-    public Map<String, String> map = new HashMap<String, String>();
+    private Map<String, String> map = new HashMap<String, String>();
 
 }

@@ -38,7 +38,7 @@ public class ComputerAI_Input extends Input {
      * </p>
      */
     public final void stackNotEmpty() {
-        computer.stack_not_empty();
+        computer.stackNotEmpty();
     }
 
     /** {@inheritDoc} */
@@ -75,25 +75,25 @@ public class ComputerAI_Input extends Input {
         final String phase = AllZone.getPhase().getPhase();
 
         if (AllZone.getStack().size() > 0) {
-            computer.stack_not_empty();
-        } else if (phase.equals(Constant.Phase.Main1)) {
+            computer.stackNotEmpty();
+        } else if (phase.equals(Constant.Phase.MAIN1)) {
             Log.debug("Computer main1");
             computer.main1();
-        } else if (phase.equals(Constant.Phase.Combat_Begin)) {
-            computer.begin_combat();
+        } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
+            computer.beginCombat();
         } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
-            computer.declare_attackers();
+            computer.declareAttackers();
         } else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
-            computer.declare_attackers_after();
+            computer.declareAttackersAfter();
         } else if (phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) {
-            computer.declare_blockers_after();
+            computer.declareBlockersAfter();
         } else if (phase.equals(Constant.Phase.Combat_End)) {
-            computer.end_of_combat();
+            computer.endOfCombat();
         } else if (phase.equals(Constant.Phase.Main2)) {
             Log.debug("Computer main2");
             computer.main2();
         } else {
-            computer.stack_not_empty();
+            computer.stackNotEmpty();
         }
 
     } // think

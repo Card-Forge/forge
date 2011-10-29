@@ -101,8 +101,8 @@ public abstract class SpellAbility {
 
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 
-    private Command cancelCommand = Command.Blank;
-    private Command beforePayManaAI = Command.Blank;
+    private Command cancelCommand = Command.BLANK;
+    private Command beforePayManaAI = Command.BLANK;
 
     private CommandArgs randomTarget = new CommandArgs() {
 
