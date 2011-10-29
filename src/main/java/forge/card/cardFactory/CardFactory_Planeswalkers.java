@@ -215,7 +215,7 @@ public class CardFactory_Planeswalkers {
         }
         // *************** END ************ END **************************
 
-*/
+
         
         // *************** START *********** START **************************
         if (cardName.equals("Ajani Goldmane")) {
@@ -404,6 +404,7 @@ public class CardFactory_Planeswalkers {
         }
         // *************** END ************ END **************************
 
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Chandra Nalaar")) {
             // computer only plays ability 1 and 3, discard and return creature
