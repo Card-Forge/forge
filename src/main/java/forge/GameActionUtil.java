@@ -509,11 +509,11 @@ public final class GameActionUtil {
         String choice = "";
         String[] choices = { "heads", "tails" };
 
-        boolean flip = MyRandom.random.nextBoolean();
+        boolean flip = MyRandom.getRandom().nextBoolean();
         if (caller.isHuman()) {
             choice = (String) GuiUtils.getChoice(source.getName() + " - Call coin flip", choices);
         } else {
-            choice = choices[MyRandom.random.nextInt(2)];
+            choice = choices[MyRandom.getRandom().nextInt(2)];
         }
 
         boolean winFlip = flip == choice.equals("heads");

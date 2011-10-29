@@ -155,7 +155,7 @@ public class GenerateThemeDeck {
         String tmpDeck = "";
 
         // begin assigning cards to the deck
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         for (int i = 0; i < groups.size(); i++) {
             Grp g = groups.get(i);

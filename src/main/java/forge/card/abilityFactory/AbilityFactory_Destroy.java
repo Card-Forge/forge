@@ -157,7 +157,7 @@ public class AbilityFactory_Destroy {
     private static boolean destroyCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -704,7 +704,7 @@ public class AbilityFactory_Destroy {
     private static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();

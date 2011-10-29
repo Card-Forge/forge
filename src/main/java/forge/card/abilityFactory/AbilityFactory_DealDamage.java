@@ -327,7 +327,7 @@ public class AbilityFactory_DealDamage {
         }
 
         if (AF.isAbility()) {
-            Random r = MyRandom.random; // prevent run-away activations
+            Random r = MyRandom.getRandom(); // prevent run-away activations
             if (r.nextFloat() <= Math.pow(.6667, saMe.getActivationsThisTurn())) {
                 rr = true;
             }
@@ -948,7 +948,7 @@ public class AbilityFactory_DealDamage {
     private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();

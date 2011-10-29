@@ -25,7 +25,7 @@ public class ComputerUtil_Attack2 {
     private CardList playerCreatures;
     private int blockerLife;
 
-    private Random random = MyRandom.random;
+    private Random random = MyRandom.getRandom();
     private final int randomInt = random.nextInt();
 
     private CardList humanList; // holds human player creatures
@@ -358,7 +358,7 @@ public class ComputerUtil_Attack2 {
 
         // Randomly determine who EVERYONE is attacking
         // would be better to determine more individually
-        int n = MyRandom.random.nextInt(defs.size());
+        int n = MyRandom.getRandom().nextInt(defs.size());
 
         Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
         if (null != entity) {

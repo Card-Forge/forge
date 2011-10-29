@@ -549,7 +549,7 @@ public final class QuestData {
      * This method should be called whenever the opponents should change.
      */
     public void randomizeOpponents() {
-        randomSeed = MyRandom.random.nextLong();
+        randomSeed = MyRandom.getRandom().nextLong();
     }
 
     // SERIALIZATION - related things

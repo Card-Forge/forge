@@ -333,7 +333,7 @@ public class BoosterDraftAI {
 
         CardList otherCreatures = AIPlayables.getType("Creature");
         while (nCreatures > 1 && otherCreatures.size() > 1) {
-            Card c = otherCreatures.get(MyRandom.random.nextInt(otherCreatures.size() - 1));
+            Card c = otherCreatures.get(MyRandom.getRandom().nextInt(otherCreatures.size() - 1));
             outList.add(c);
             cardsNeeded--;
             nCreatures--;
@@ -349,7 +349,7 @@ public class BoosterDraftAI {
 
         int ii = 0;
         while (cardsNeeded > 0 && others.size() > 1) {
-            Card c = others.get(MyRandom.random.nextInt(others.size() - 1));
+            Card c = others.get(MyRandom.getRandom().nextInt(others.size() - 1));
 
             //out.addMain(c.getName());
             outList.add(c);
@@ -368,7 +368,7 @@ public class BoosterDraftAI {
 
             //if (z.size() < 1)
             //	throw new RuntimeException("BoosterDraftAI : buildDeck() error, deck does not have enough non-lands");
-            Card c = z.get(MyRandom.random.nextInt(z.size() - 1));
+            Card c = z.get(MyRandom.getRandom().nextInt(z.size() - 1));
 
             //out.addMain(c.getName());
             outList.add(c);
@@ -470,13 +470,13 @@ public class BoosterDraftAI {
         }
 
         while (outList.size() > 40) {
-            Card c = outList.get(MyRandom.random.nextInt(outList.size() - 1));
+            Card c = outList.get(MyRandom.getRandom().nextInt(outList.size() - 1));
             outList.remove(c);
             AIPlayables.add(c);
         }
 
         while (outList.size() < 40) {
-            Card c = AIPlayables.get(MyRandom.random.nextInt(AIPlayables.size() - 1));
+            Card c = AIPlayables.get(MyRandom.getRandom().nextInt(AIPlayables.size() - 1));
             outList.add(c);
             AIPlayables.remove(c);
         }
@@ -542,7 +542,7 @@ public class BoosterDraftAI {
      */
     private int[] getDeckColors() {
         int[] out = new int[nDecks];
-        int start = MyRandom.random.nextInt(10);
+        int start = MyRandom.getRandom().nextInt(10);
 
         for (int i = 0; i < out.length; i++) {
             //% to get an index between 0 and deckColorChoices.length

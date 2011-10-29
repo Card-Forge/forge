@@ -30,7 +30,7 @@ import forge.properties.NewConstants;
  */
 public final class CardUtil {
     /** Constant <code>RANDOM</code>. */
-    public static final Random RANDOM = MyRandom.random;
+    public static final Random RANDOM = MyRandom.getRandom();
 
     /**
      * Do not instantiate.

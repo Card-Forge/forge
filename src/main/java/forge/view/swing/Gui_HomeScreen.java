@@ -1006,7 +1006,7 @@ public class Gui_HomeScreen {
 
             String stDeck;
             if (t.toString().equals("Random")) {
-                Random r = MyRandom.random;
+                Random r = MyRandom.getRandom();
                 stDeck = tNames.get(r.nextInt(tNames.size() - 1) + 1);
             } else {
                 stDeck = t.toString();
@@ -1034,7 +1034,7 @@ public class Gui_HomeScreen {
                 c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
 
                 if (c1.equals("Random")) {
-                    c1 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                    c1 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 }
 
                 colors.remove(c1);
@@ -1042,14 +1042,14 @@ public class Gui_HomeScreen {
                 c2 = GuiUtils.getChoice("Select second color.", colors.toArray()).toString();
 
                 if (c2.equals("Random")) {
-                    c2 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                    c2 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 }
             } else {
                 // if (p.equals("C"))
                 pt = PlayerType.COMPUTER;
-                c1 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                c1 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 colors.remove(c1);
-                c2 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                c2 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
             }
             Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
             CardList d = gen.get2ColorDeck(60, pt);
@@ -1077,7 +1077,7 @@ public class Gui_HomeScreen {
                 c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
 
                 if (c1.equals("Random")) {
-                    c1 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                    c1 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 }
 
                 colors.remove(c1);
@@ -1085,25 +1085,25 @@ public class Gui_HomeScreen {
                 c2 = GuiUtils.getChoice("Select second color.", colors.toArray()).toString();
 
                 if (c2.equals("Random")) {
-                    c2 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                    c2 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 }
 
                 colors.remove(c2);
 
                 c3 = GuiUtils.getChoice("Select third color.", colors.toArray()).toString();
                 if (c3.equals("Random")) {
-                    c3 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                    c3 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 }
 
             } else {
                 // if (p.equals("C"))
                 pt = PlayerType.COMPUTER;
 
-                c1 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                c1 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 colors.remove(c1);
-                c2 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                c2 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
                 colors.remove(c2);
-                c3 = colors.get(MyRandom.random.nextInt(colors.size() - 1) + 1);
+                c3 = colors.get(MyRandom.getRandom().nextInt(colors.size() - 1) + 1);
             }
             Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
             CardList d = gen.get3ColorDeck(60, pt);
@@ -1130,7 +1130,7 @@ public class Gui_HomeScreen {
         }
 
         if (subDecks.size() > 0) {
-            int n = MyRandom.random.nextInt(subDecks.size());
+            int n = MyRandom.getRandom().nextInt(subDecks.size());
             ret = subDecks.get(n);
 
         } else {

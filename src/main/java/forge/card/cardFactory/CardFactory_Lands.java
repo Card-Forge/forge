@@ -75,7 +75,7 @@ class CardFactory_Lands {
                     boolean pay = false;
 
                     if (AllZone.getComputerPlayer().getLife() > 9) {
-                        pay = MyRandom.random.nextBoolean();
+                        pay = MyRandom.getRandom().nextBoolean();
                     }
 
                     if (pay) {

@@ -233,7 +233,7 @@ public class SealedDeck {
 
         CardList splashCreatures = AIPlayables.getType("Creature").getColor(dcAI.Splash);
         while (nCreatures > 1 && splashCreatures.size() > 1) {
-            Card c = splashCreatures.get(MyRandom.random.nextInt(splashCreatures.size() - 1));
+            Card c = splashCreatures.get(MyRandom.getRandom().nextInt(splashCreatures.size() - 1));
 
             deck.add(c);
             aiCardpool.remove(c);
@@ -256,7 +256,7 @@ public class SealedDeck {
         spells.addAll(AIPlayables.getType("Enchantment").getOnly2Colors(dcAI.Color1, dcAI.Color2));
 
         while (cardsNeeded > 0 && spells.size() > 1) {
-            Card c = spells.get(MyRandom.random.nextInt(spells.size() - 1));
+            Card c = spells.get(MyRandom.getRandom().nextInt(spells.size() - 1));
             deck.add(c);
             spells.remove(c);
             AIPlayables.remove(c);
@@ -268,7 +268,7 @@ public class SealedDeck {
         splashSpells.addAll(AIPlayables.getType("Sorcery").getColor(dcAI.Splash));
 
         while (cardsNeeded > 0 && splashSpells.size() > 1) {
-            Card c = splashSpells.get(MyRandom.random.nextInt(splashSpells.size() - 1));
+            Card c = splashSpells.get(MyRandom.getRandom().nextInt(splashSpells.size() - 1));
             deck.add(c);
             splashSpells.remove(c);
             AIPlayables.remove(c);

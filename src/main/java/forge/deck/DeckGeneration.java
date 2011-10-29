@@ -141,7 +141,7 @@ public abstract class DeckGeneration {
 
         String stDeck;
         if (o.toString().equals("Random")) {
-            Random r = MyRandom.random;
+            Random r = MyRandom.getRandom();
             stDeck = tNames.get(r.nextInt(tNames.size() - 1) + 1);
         } else {
             stDeck = o.toString();
@@ -167,7 +167,7 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generate2ColorDeck(final PlayerType p) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         ArrayList<String> colors = new ArrayList<String>();
         colors.add("Random");
@@ -222,7 +222,7 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generate3ColorDeck(final PlayerType p) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         ArrayList<String> colors = new ArrayList<String>();
         colors.add("Random");

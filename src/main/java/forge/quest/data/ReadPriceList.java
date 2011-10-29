@@ -61,7 +61,7 @@ public class ReadPriceList implements NewConstants {
     private HashMap<String, Integer> readFile(final File file) {
         BufferedReader in;
         HashMap<String, Integer> map = new HashMap<String, Integer>();
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         try {
 
             in = new BufferedReader(new FileReader(file));

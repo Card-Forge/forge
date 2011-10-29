@@ -1000,8 +1000,8 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JList getJList1() {
         List<CardPrinted> rList = deck.toFlatList();
 
-        Collections.shuffle(rList, MyRandom.random);
-        Collections.shuffle(rList, MyRandom.random);
+        Collections.shuffle(rList, MyRandom.getRandom());
+        Collections.shuffle(rList, MyRandom.getRandom());
 
         ListModel jList1Model;
         if (jListFirstHand == null) {

@@ -1311,7 +1311,7 @@ public class GameAction {
         Card.resetUniqueNumber();
         boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
-        Random generator = MyRandom.random;
+        Random generator = MyRandom.getRandom();
         for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -1331,7 +1331,7 @@ public class GameAction {
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    int iFoil = MyRandom.random.nextInt(9) + 1;
+                    int iFoil = MyRandom.getRandom().nextInt(9) + 1;
                     card.setFoil(iFoil);
                 }
 
@@ -1361,7 +1361,7 @@ public class GameAction {
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    int iFoil = MyRandom.random.nextInt(9) + 1;
+                    int iFoil = MyRandom.getRandom().nextInt(9) + 1;
                     card.setFoil(iFoil);
                 }
 
@@ -1601,7 +1601,7 @@ public class GameAction {
                 ForgeProps.getLocalized(GAMEACTION_TEXT.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
-        int Flip = MyRandom.random.nextInt(2);
+        int Flip = MyRandom.getRandom().nextInt(2);
         String Human_Flip = " ";
         String Computer_Flip = " ";
         // JOptionPane.showMessageDialog(null, q, "",
@@ -1650,7 +1650,7 @@ public class GameAction {
             }
 
             if (HLibrary.size() > 0) {
-                setHumanCut(HLibrary.get(MyRandom.random.nextInt(HLibrary.size())));
+                setHumanCut(HLibrary.get(MyRandom.getRandom().nextInt(HLibrary.size())));
             } else {
                 computerStartsGame();
                 JOptionPane
@@ -1661,7 +1661,7 @@ public class GameAction {
             }
 
             if (CLibrary.size() > 0) {
-                setComputerCut(CLibrary.get(MyRandom.random.nextInt(CLibrary.size())));
+                setComputerCut(CLibrary.get(MyRandom.getRandom().nextInt(CLibrary.size())));
             } else {
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_MANA_COST)
                         + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "",
@@ -1696,7 +1696,7 @@ public class GameAction {
                 sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.EQUAL_CONVERTED_MANA) + "\r\n");
                 if (i == Cut_CountMax - 1) {
                     sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.RESOLVE_STARTER));
-                    if (MyRandom.random.nextInt(2) == 1) {
+                    if (MyRandom.getRandom().nextInt(2) == 1) {
                         JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN),
                                 "", JOptionPane.INFORMATION_MESSAGE);
                     } else {

@@ -704,7 +704,7 @@ public final class AbilityFactory_Debuff {
      */
     private static boolean debuffAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         String valid = "";
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
         Card hostCard = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();

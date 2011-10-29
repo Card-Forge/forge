@@ -192,7 +192,7 @@ public class AbilityFactory_Effect {
      * @return a boolean.
      */
     public static boolean effectCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         HashMap<String, String> params = af.getMapParams();
 
         String stackable = params.get("Stackable");

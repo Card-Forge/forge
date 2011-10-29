@@ -708,7 +708,7 @@ public class AbilityFactory_Sacrifice {
     public static boolean sacrificeAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();

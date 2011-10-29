@@ -28,10 +28,10 @@ public abstract class Move {
     public abstract int getScore();
 
     /** The best move. */
-    public Move bestMove = null;
+    private Move bestMove = null;
 
     /** The best score. */
-    public int bestScore = Integer.MIN_VALUE;
+    private int bestScore = Integer.MIN_VALUE;
 
     /**
      * <p>

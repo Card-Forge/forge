@@ -7756,7 +7756,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return;
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         SetInfo si = getCharacteristics().getSets().get(r.nextInt(getCharacteristics().getSets().size()));
 
         curSetCode = si.Code;

@@ -222,7 +222,7 @@ public final class AbilityFactory_Copy {
                 chance = .667; // 66.7% chance for sorcery speed (since it will
                                // never activate EOT)
             }
-            Random r = MyRandom.random;
+            Random r = MyRandom.getRandom();
             if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
                 return copyPermanentTriggerAI(af, sa, false);
             } else {

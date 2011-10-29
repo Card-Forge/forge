@@ -338,7 +338,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         BufferedInputStream in;
         BufferedOutputStream out;
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         Proxy p = null;
         if (type == 0) {

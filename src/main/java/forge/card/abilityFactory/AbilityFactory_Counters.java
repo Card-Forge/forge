@@ -240,7 +240,7 @@ public class AbilityFactory_Counters {
         // based on
         // what the expected targets could be
         HashMap<String, String> params = af.getMapParams();
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -873,7 +873,7 @@ public class AbilityFactory_Counters {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         // Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -1598,7 +1598,7 @@ public class AbilityFactory_Counters {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         HashMap<String, String> params = af.getMapParams();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -2144,7 +2144,7 @@ public class AbilityFactory_Counters {
         // based on what
         // the expected targets could be
         HashMap<String, String> params = af.getMapParams();
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         String amountStr = params.get("CounterNum");
 
         // TODO handle proper calculation of X values based on Cost

@@ -253,7 +253,7 @@ public class CardFactory_Creatures {
                     if (card.getController().isHuman()) {
                         choice = GuiUtils.getChoice("Choose one", choices);
                     } else {
-                        choice = choices[MyRandom.random.nextInt(3)];
+                        choice = choices[MyRandom.getRandom().nextInt(3)];
                     }
 
                     if (choice.equals("2/2 with flying")) {

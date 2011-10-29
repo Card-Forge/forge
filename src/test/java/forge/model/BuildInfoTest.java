@@ -133,8 +133,7 @@ public class BuildInfoTest {
      */
     private File makeTmpJarWithManifest(final String fileNamePrefix, final String fileNameSuffix,
             final String[] nameValuePairs)
-                    throws IOException
-    {
+                    throws IOException {
         if (nameValuePairs.length % 2 != 0) {
             throw new IllegalArgumentException("nameValuePairs must contain an even number of elements.");
         }

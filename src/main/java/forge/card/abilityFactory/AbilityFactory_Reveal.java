@@ -225,7 +225,7 @@ public final class AbilityFactory_Reveal {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         Target tgt = sa.getTarget();
@@ -785,7 +785,7 @@ public final class AbilityFactory_Reveal {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         Target tgt = sa.getTarget();
@@ -1136,7 +1136,7 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
@@ -1524,7 +1524,7 @@ public final class AbilityFactory_Reveal {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
@@ -2059,7 +2059,7 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {

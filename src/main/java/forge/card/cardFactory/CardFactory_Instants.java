@@ -508,7 +508,7 @@ public class CardFactory_Instants {
                     }
 
                     // comp randomly selects one of the three cards
-                    final Card choice = selectedCards.get(MyRandom.random.nextInt(2));
+                    final Card choice = selectedCards.get(MyRandom.getRandom().nextInt(2));
 
                     selectedCards.remove(choice);
                     AllZone.getGameAction().moveToHand(choice);

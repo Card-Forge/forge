@@ -61,7 +61,7 @@ import forge.gui.input.Input_PayManaCostUtil;
  * @version $Id$
  */
 public class CardFactoryUtil {
-    private static Random random = MyRandom.random;
+    private static Random random = MyRandom.getRandom();
 
     /**
      * <p>
@@ -215,7 +215,7 @@ public class CardFactoryUtil {
         if (nbLand.size() > 0) {
             // TODO - Rank non basics?
 
-            final Random r = MyRandom.random;
+            final Random r = MyRandom.getRandom();
             return nbLand.get(r.nextInt(nbLand.size()));
         }
 
@@ -247,7 +247,7 @@ public class CardFactoryUtil {
             }
         }
 
-        final Random r = MyRandom.random;
+        final Random r = MyRandom.getRandom();
         return bLand.get(r.nextInt(bLand.size())); // random tapped land of
                                                    // least represented type
     }

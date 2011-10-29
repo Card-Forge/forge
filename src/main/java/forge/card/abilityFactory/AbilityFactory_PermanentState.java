@@ -222,7 +222,7 @@ public class AbilityFactory_PermanentState {
             return false;
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         if (tgt == null) {
@@ -772,7 +772,7 @@ public class AbilityFactory_PermanentState {
         Target tgt = af.getAbTgt();
         Card source = sa.getSourceCard();
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         Phase phase = AllZone.getPhase();
@@ -1525,7 +1525,7 @@ public class AbilityFactory_PermanentState {
         validTappables = validTappables.getValidCards(valid, source.getController(), source);
         validTappables = validTappables.filter(CardListFilter.UNTAPPED);
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean rr = false;
         if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
             rr = true;
@@ -1630,7 +1630,7 @@ public class AbilityFactory_PermanentState {
 
         CardList validTappables = getTapAllTargets(valid, source);
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean rr = false;
         if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
             rr = true;
@@ -1849,7 +1849,7 @@ public class AbilityFactory_PermanentState {
         Target tgt = af.getAbTgt();
         Card source = sa.getSourceCard();
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {
@@ -2179,7 +2179,7 @@ public class AbilityFactory_PermanentState {
         Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         ArrayList<Card> tgtCards;

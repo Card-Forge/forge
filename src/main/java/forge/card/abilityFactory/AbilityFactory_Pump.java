@@ -491,12 +491,12 @@ public class AbilityFactory_Pump {
                     } else if (card.hasSickness() ^ Keywords.contains("Haste")) {
                         return false;
                     } else if (hostCard.equals(card)) {
-                        Random r = MyRandom.random;
+                        Random r = MyRandom.getRandom();
                         if (r.nextFloat() <= Math.pow(.6667, activations)) {
                             return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
                         }
                     } else {
-                        Random r = MyRandom.random;
+                        Random r = MyRandom.getRandom();
                         return (r.nextFloat() <= Math.pow(.6667, activations));
                     }
                 }
@@ -1061,7 +1061,7 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpAllCanPlayAI(final SpellAbility sa) {
         String valid = "";
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
         params = AF.getMapParams();
         final int defense = getNumDefense(sa);

@@ -118,7 +118,7 @@ public class AIPlayer extends Player {
      */
     public final boolean dredge() {
         CardList dredgers = getDredge();
-        Random random = MyRandom.random;
+        Random random = MyRandom.getRandom();
 
         // use dredge if there are more than one of them in your graveyard
         if (dredgers.size() > 1 || (dredgers.size() == 1 && random.nextBoolean())) {
@@ -186,7 +186,7 @@ public class AIPlayer extends Player {
             } else if (libPos.equalsIgnoreCase("Bottom")) {
                 position = -1;
             } else {
-                Random r = MyRandom.random;
+                Random r = MyRandom.getRandom();
                 if (r.nextBoolean()) {
                     position = 0;
                 } else {
@@ -263,7 +263,7 @@ public class AIPlayer extends Player {
         num = topN.size();
         // put the rest on top in random order
         for (int i = 0; i < num; i++) {
-            Random rndm = MyRandom.random;
+            Random rndm = MyRandom.getRandom();
             int r = rndm.nextInt(topN.size());
             Card c = topN.get(r);
             AllZone.getGameAction().moveToLibrary(c);

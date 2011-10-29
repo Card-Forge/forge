@@ -139,7 +139,7 @@ public class BoosterGenerator {
         int index = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
             if (index >= listSize) {
-                Collections.shuffle(source, MyRandom.random);
+                Collections.shuffle(source, MyRandom.getRandom());
                 index = 0;
             }
             result.add(source.get(index));
@@ -166,18 +166,18 @@ public class BoosterGenerator {
         int indexRares = Integer.MAX_VALUE;
         int indexMythics = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
-            int rollD8 = MyRandom.random.nextInt(8);
+            int rollD8 = MyRandom.getRandom().nextInt(8);
             boolean takeMythic = mythicsSize > 0 && rollD8 < 1;
             if (takeMythic) {
                 if (indexRares >= raresSize) {
-                    Collections.shuffle(mythics, MyRandom.random);
+                    Collections.shuffle(mythics, MyRandom.getRandom());
                     indexMythics = 0;
                 }
                 result.add(mythics.get(indexMythics));
                 indexMythics++;
             } else {
                 if (indexRares >= raresSize) {
-                    Collections.shuffle(rares, MyRandom.random);
+                    Collections.shuffle(rares, MyRandom.getRandom());
                     indexRares = 0;
                 }
                 result.add(rares.get(indexRares));

@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class MyRandom {
     /** Constant <code>random</code>. */
-    public static Random random = new Random();
+    private static Random random = new Random();
 
     /**
      * <p>
@@ -26,6 +26,20 @@ public class MyRandom {
      * @return a boolean.
      */
     public static boolean percentTrue(final int percent) {
-        return percent > random.nextInt(100);
+        return percent > getRandom().nextInt(100);
+    }
+
+    /**
+     * @return the random
+     */
+    public static Random getRandom() {
+        return random;
+    }
+
+    /**
+     * @param random the random to set
+     */
+    public static void setRandom(Random random) {
+        MyRandom.random = random; // TODO: Add 0 to parameter's name.
     }
 }

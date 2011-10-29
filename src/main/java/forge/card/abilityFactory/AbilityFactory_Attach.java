@@ -812,7 +812,7 @@ public class AbilityFactory_Attach {
      * @return true, if successful
      */
     public static boolean attachCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Map<String, String> params = af.getMapParams();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();

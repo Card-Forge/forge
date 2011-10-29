@@ -280,7 +280,7 @@ public final class QuestUtilCards {
             q.shopList.addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0, 0));
 
             // add some boosters
-            int rollD100 = MyRandom.random.nextInt(100);
+            int rollD100 = MyRandom.getRandom().nextInt(100);
             Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2
                     : filterNotExt);
             q.shopList.addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.fnFromSet));

@@ -234,7 +234,7 @@ public class AbilityFactory_AlterLife {
      * @return a boolean.
      */
     public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         HashMap<String, String> params = af.getMapParams();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -596,7 +596,7 @@ public class AbilityFactory_AlterLife {
      * @return a boolean.
      */
     public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
@@ -1276,7 +1276,7 @@ public class AbilityFactory_AlterLife {
      * @return a boolean.
      */
     private static boolean setLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         int life = AllZone.getComputerPlayer().getLife();
@@ -1630,7 +1630,7 @@ public class AbilityFactory_AlterLife {
      * @return a boolean.
      */
     private static boolean exchangeLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         int life = AllZone.getComputerPlayer().getLife();
         int hLife = AllZone.getHumanPlayer().getLife();
 

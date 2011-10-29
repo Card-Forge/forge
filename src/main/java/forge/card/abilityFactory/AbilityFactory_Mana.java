@@ -947,7 +947,7 @@ public class AbilityFactory_Mana {
         Target tgt = af.getAbTgt();
         Card source = sa.getSourceCard();
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {

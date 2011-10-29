@@ -47,7 +47,7 @@ public class Generate3ColorDeck {
      *            a {@link java.lang.String} object.
      */
     public Generate3ColorDeck(final String Clr1, final String Clr2, final String Clr3) {
-        r = MyRandom.random;
+        r = MyRandom.getRandom();
 
         cardCounts = new HashMap<String, Integer>();
 

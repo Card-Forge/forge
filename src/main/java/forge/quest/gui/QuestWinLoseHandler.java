@@ -510,7 +510,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
     private boolean getLuckyCoinResult() {
         boolean hasCoin = model.qData.getInventory().getItemLevel("Lucky Coin") >= 1;
 
-        return MyRandom.random.nextFloat() <= (hasCoin ? 0.65f : 0.5f);
+        return MyRandom.getRandom().nextFloat() <= (hasCoin ? 0.65f : 0.5f);
     }
 
     /**

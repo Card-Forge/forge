@@ -721,7 +721,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     final Deck getRandomDeck(final Deck[] d) {
         // get a random number between 0 and d.length
         // int i = (int) (Math.random() * d.length);
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         return d[r.nextInt(d.length)];
     }

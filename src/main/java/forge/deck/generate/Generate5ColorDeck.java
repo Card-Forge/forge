@@ -61,7 +61,7 @@ public class Generate5ColorDeck {
      */
     public Generate5ColorDeck(final String clr1, final String clr2, final String clr3, final String clr4,
             final String clr5) {
-        r = MyRandom.random;
+        r = MyRandom.getRandom();
 
         cardCounts = new HashMap<String, Integer>();
 

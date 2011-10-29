@@ -379,7 +379,7 @@ public final class AbilityFactory_ChangeZone {
             }
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
@@ -1147,7 +1147,7 @@ public final class AbilityFactory_ChangeZone {
 
         float pct = origin.equals(Zone.Battlefield) ? .8f : .667f;
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -1962,7 +1962,7 @@ public final class AbilityFactory_ChangeZone {
 
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 

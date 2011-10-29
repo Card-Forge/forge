@@ -71,7 +71,7 @@ public final class BoosterUtils {
         Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare);
         boolean haveMythics = filterMythics.any(cardpool);
         for (int iSlot = 0; haveMythics && iSlot < numRare; iSlot++) {
-            if (MyRandom.random.nextInt(7) < 1) { // a bit higher chance to get
+            if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to get
                                                   // a mythic
                 nRares--;
                 nMythics++;
@@ -252,7 +252,7 @@ public final class BoosterUtils {
      */
     public static List<CardPrinted> getVariety(final List<CardPrinted> in) {
         List<CardPrinted> out = new ArrayList<CardPrinted>();
-        Collections.shuffle(in, MyRandom.random);
+        Collections.shuffle(in, MyRandom.getRandom());
 
         for (int i = 0; i < Constant.Color.COLORS.length; i++) {
             CardPrinted check = findCardOfColor(in, i);

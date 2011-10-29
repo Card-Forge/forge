@@ -290,7 +290,7 @@ public class AbilityFactory_ZoneAffecting {
          {
             chance = .9; // 90% for end of opponents turn
         }
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
@@ -741,7 +741,7 @@ public class AbilityFactory_ZoneAffecting {
             return false;
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
         if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
@@ -1413,7 +1413,7 @@ public class AbilityFactory_ZoneAffecting {
             chance = .9; // 90% for end of opponents turn
         }
 
-        Random r = MyRandom.random;
+        Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {

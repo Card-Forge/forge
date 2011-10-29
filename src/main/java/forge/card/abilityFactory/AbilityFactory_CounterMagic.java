@@ -252,7 +252,7 @@ public class AbilityFactory_CounterMagic {
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of
                 // the time
-                if (!sa.getPayCosts().isReusuableResource() || (MyRandom.random.nextFloat() < .4)) {
+                if (!sa.getPayCosts().isReusuableResource() || (MyRandom.getRandom().nextFloat() < .4)) {
                     return false;
                 }
             }
@@ -330,7 +330,7 @@ public class AbilityFactory_CounterMagic {
                 if (toPay <= usableManaSources) {
                     // If this is a reusable Resource, feel free to play it most
                     // of the time
-                    if (!sa.getPayCosts().isReusuableResource() || (MyRandom.random.nextFloat() < .4)) {
+                    if (!sa.getPayCosts().isReusuableResource() || (MyRandom.getRandom().nextFloat() < .4)) {
                         return false;
                     }
                 }

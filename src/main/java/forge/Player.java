@@ -1539,7 +1539,7 @@ public abstract class Player extends GameEntity {
 
         ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
         // overdone but wanted to make sure it was really random
-        Random random = MyRandom.random;
+        Random random = MyRandom.getRandom();
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
