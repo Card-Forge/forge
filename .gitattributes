@@ -2440,6 +2440,7 @@ res/cardsfolder/e/enemy_of_the_guildpact.txt svneol=native#text/plain
 res/cardsfolder/e/energizer.txt svneol=native#text/plain
 res/cardsfolder/e/energy_arc.txt svneol=native#text/plain
 res/cardsfolder/e/energy_bolt.txt svneol=native#text/plain
+res/cardsfolder/e/energy_chamber.txt -text
 res/cardsfolder/e/energy_field.txt svneol=native#text/plain
 res/cardsfolder/e/energy_flux.txt svneol=native#text/plain
 res/cardsfolder/e/energy_storm.txt svneol=native#text/plain
