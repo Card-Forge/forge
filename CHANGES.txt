@@ -262,6 +262,41 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed continuous static abilities granting temporary triggers (the new trigger getCopy function doesn't copy the temporary status).
+- updated token download list.
+- Also added TokenImage$ to Riptide Replicator to call correct image.
+- Removed extraneous SVar from script
+- updated token download links
+- Updated BuffedBy on Spirit Mirror
+- Fixed Triggers not being checked when their host is on the stack.
+- Hopefully fixed the bug with X costs and the mana pool.
+- Fixing X Mana bug when paying from the Mana Pool
+- checkstyle
+- Removed the BuffedBy SVar of Spirit Mirror.
+- Fixed copyCharacteristics turning all keywords into intrinsic keywords and modified types into printed types.
+- checkstyle and refactoring
+- checkstyle and refactoring
+- refactoring
+- checkstyle
+- Converted Koth of the Hammer to script.
+- Remove remainder of hardcoded Koth Emblem code
+- Adding Stackable Flag for Effects that don't Stack if there are more than one.
+- Converted Elspeth, Knight Errant to script.
+- Added the Stackable$ False to Elspeth, Knight Errant
+- clean up a few java warnings
+- fixing CF_Planeswalkers main if-else if block
+- Converted Ajani Goldmane to script
+- checkstyle and refactor
+- checkstyle and refactor
+- refactor
+- checkstyle and refactor
+- Fixed Thraben Sentry trigger.
+- Only intrinsic triggers are now copied.
+- Removed som debug output.
+- Fixed Duct Crawler, Shrewd Hatchling & Spin Engine.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -363,6 +398,14 @@ Breath of Darigaaz
 Canopy Surge
 Ludevic's Test Subject / Ludevic's Abomination
 Bloodline Keeper / Lord of Lineage
+Volrath's Laboratory
+Spirit Mirror
+Village Ironsmith / Ironfang
+Aven Windreader
+Skyshroud Ranger
+Devouring Rage
+Hanabi Blast
+Hikari, Twilight Guardian
 
 
 end
