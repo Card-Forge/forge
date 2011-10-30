@@ -1,0 +1,10 @@
+Name:Prismatic Lace
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ ChooseColor | Cost$ 1 U | Defined$ You | OrColors$ True | SubAbility$ Animate | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn.
+SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_lace.jpg
+End
