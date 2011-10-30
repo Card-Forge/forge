@@ -131,12 +131,12 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             setManaSpent(params.get("ConditionManaSpent"));
         }
 
-        if (params.containsKey("CheckSVar")) {
-            setSvarToCheck(params.get("CheckSVar"));
+        if (params.containsKey("ConditionCheckSVar")) {
+            setSvarToCheck(params.get("ConditionCheckSVar"));
         }
-        if (params.containsKey("SVarCompare")) {
-            setSvarOperator(params.get("SVarCompare").substring(0, 2));
-            setSvarOperand(params.get("SVarCompare").substring(2));
+        if (params.containsKey("ConditionSVarCompare")) {
+            setSvarOperator(params.get("ConditionSVarCompare").substring(0, 2));
+            setSvarOperand(params.get("ConditionSVarCompare").substring(2));
         }
 
     } // setConditions

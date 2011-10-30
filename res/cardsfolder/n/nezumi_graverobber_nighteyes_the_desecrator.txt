@@ -4,7 +4,7 @@ Types:Creature Rat Rogue
 Text:no text
 PT:2/1
 A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.YouDontCtrl | SubAbility$ DBFlip | SpellDescription$ Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip CARDNAME.
-SVar:DBFlip:DB$ChangeState | Defined$ Self | CheckSVar$ X | SVarCompare$ EQ0
+SVar:DBFlip:DB$ChangeState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:X:Count$InOppYard
 SVar:Rarity:Uncommon
 AlternateMode:Flip
