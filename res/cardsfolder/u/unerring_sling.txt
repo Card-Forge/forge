@@ -7,4 +7,6 @@ SVar:X:Tapped$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unerring_sling.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/287.jpg
+Oracle:{3}, {T}, Tap an untapped creature you control: Unerring Sling deals damage equal to the tapped creature's power to target attacking or blocking creature with flying.
 End
