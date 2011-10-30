@@ -3,11 +3,11 @@ ManaCost:4 B R
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step. You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ HIDDEN Haste | Triggers$ TrigBounce | sVars$ TrigReturn | SubAbility$ DBChangeZone
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Triggers$ TrigBounce | sVars$ TrigReturn | SubAbility$ DBChangeZone
 SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | OptionalDecider$ You | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBAnimate2
-SVar:DBAnimate2:DB$ Animate | Defined$ Remembered | Keywords$ HIDDEN Haste | Triggers$ TrigSacrifice | sVars$ TrigSac
+SVar:DBAnimate2:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ TrigSacrifice | sVars$ TrigSac
 SVar:TrigSacrifice:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the next end step, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

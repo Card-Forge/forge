@@ -494,6 +494,11 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
+        
+        final ArrayList<String> hiddenKeywords = new ArrayList<String>();
+        if (params.containsKey("HiddenKeywords")) {
+            hiddenKeywords.addAll(Arrays.asList(params.get("HiddenKeywords").split(" & ")));
+        }
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             String k = keywords.get(i);
@@ -551,7 +556,7 @@ public final class AbilityFactory_Animate {
         for (final Card c : tgts) {
 
             final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords,
-                    timestamp);
+                    hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -619,7 +624,7 @@ public final class AbilityFactory_Animate {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 public void execute() {
-                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp, givesStAbs,
+                    doUnanimate(c, af, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, colorTimestamp, givesStAbs,
                             removedAbilities, timestamp);
 
                     // give back suppressed triggers
@@ -666,7 +671,7 @@ public final class AbilityFactory_Animate {
      */
     private static long doAnimate(final Card c, final AbilityFactory af, final int power, final int toughness,
             final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
-            final ArrayList<String> keywords, final long timestamp) {
+            final ArrayList<String> keywords, final ArrayList<String> hiddenKeywords, final long timestamp) {
         HashMap<String, String> params = af.getMapParams();
 
         boolean removeSuperTypes = false;
@@ -713,18 +718,11 @@ public final class AbilityFactory_Animate {
             c.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                     removeCreatureTypes, timestamp);
         }
-
-        for (String k : keywords) {
-            if (k.startsWith("HIDDEN")) {
-                c.addExtrinsicKeyword(k);
-            }
-            // this maybe should just blindly add since multiple instances of a
-            // keyword sometimes have effects
-            // practically, this shouldn't matter though, and will display more
-            // cleanly
-            else if (!c.getIntrinsicKeyword().contains(k) || CardUtil.isStackingKeyword(k)) {
-                c.addIntrinsicKeyword(k);
-            }
+        
+        c.addChangedCardKeywords(keywords, null, params.containsKey("RemoveAllAbilities"), timestamp);
+        
+        for (String k : hiddenKeywords) {
+            c.addExtrinsicKeyword(k);
         }
 
         long colorTimestamp = c.addColor(colors, c, !params.containsKey("OverwriteColors"), true);
@@ -756,12 +754,14 @@ public final class AbilityFactory_Animate {
      *            a long.
      */
     private static void doUnanimate(final Card c, final AbilityFactory af, final String colorDesc,
-            final ArrayList<String> originalKeywords, final ArrayList<SpellAbility> addedAbilities,
+            final ArrayList<String> addedKeywords, final ArrayList<SpellAbility> addedAbilities,
             final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
             final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
         HashMap<String, String> params = af.getMapParams();
 
         c.removeNewPT(timestamp);
+        
+        c.removeChangedCardKeywords(timestamp);
 
         // remove all static abilities
         if (givesStAbs) {
@@ -775,13 +775,8 @@ public final class AbilityFactory_Animate {
 
         c.removeColor(colorDesc, c, !params.containsKey("OverwriteColors"), colorTimestamp);
 
-        for (String k : originalKeywords) {
-            if (k.startsWith("HIDDEN")) {
-                c.removeExtrinsicKeyword(k);
-            }
-            // TODO - may want to look at saving off intrinsic and extrinsic
-            // separately and add back that way
-            c.removeIntrinsicKeyword(k);
+        for (String k : addedKeywords) {
+            c.removeExtrinsicKeyword(k);
         }
 
         for (SpellAbility sa : addedAbilities) {
@@ -1074,6 +1069,11 @@ public final class AbilityFactory_Animate {
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
+        
+        final ArrayList<String> hiddenKeywords = new ArrayList<String>();
+        if (params.containsKey("HiddenKeywords")) {
+            hiddenKeywords.addAll(Arrays.asList(params.get("HiddenKeywords").split(" & ")));
+        }
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             String k = keywords.get(i);
@@ -1141,7 +1141,7 @@ public final class AbilityFactory_Animate {
         for (final Card c : list) {
 
             final long colorTimestamp = doAnimate(c, af, power, toughness, types, removeTypes, finalDesc, keywords,
-                    timestamp);
+                    hiddenKeywords, timestamp);
 
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
@@ -1188,7 +1188,7 @@ public final class AbilityFactory_Animate {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 public void execute() {
-                    doUnanimate(c, af, finalDesc, keywords, addedAbilities, addedTriggers, colorTimestamp, false,
+                    doUnanimate(c, af, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, colorTimestamp, false,
                             removedAbilities, timestamp);
                 }
             };

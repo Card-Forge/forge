@@ -3,9 +3,6 @@ ManaCost:W U B R G
 Types:Legendary Enchantment Aura
 Text:no text
 K:Enchant land
-# This doesn't work because I think abilities are added before CardFactory is processed, which clears this ability.  Same problem as Caribou Range.
-# Interestingly enough, the trigger works
-# The note above may now be out of date as this card has been converted to AF_Attach.
 A:SP$ Attach | Cost$ W U B R G | ValidTgts$ Land | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 8 | Toughness$ 12 | Types$ Creature,Legendary,Spirit | Keywords$ Trample | SpellDescription$ Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted land is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
