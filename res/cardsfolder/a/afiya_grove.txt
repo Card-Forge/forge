@@ -1,0 +1,13 @@
+Name:Afiya Grove
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+K:etbCounter:P1P1:3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of your upkeep, move a +1/+1 counter from CARDNAME onto target creature. 
+SVar:TrigMoveCounter:AB$ MoveCounter | Cost$ 0 | Source$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_EQ0_P1P1 | Execute$ TrigSac | TriggerDescription$ When CARDNAME has no +1/+1 counters on it, sacrifice it. 
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/afiya_grove.jpg
+End
