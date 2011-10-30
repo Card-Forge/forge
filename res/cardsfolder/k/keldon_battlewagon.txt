@@ -10,7 +10,7 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigS
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
 SVar:X:Tapped$CardPower
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_battlewagon.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/139.jpg
