@@ -297,6 +297,20 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Made Fiend Hunter's trigger optional.
+- Little improvements in the AI part of AF Discard (triggers and drawbacks).
+- Enabled the AI of AF ChooseColor for spells (strictly dependent on the subabilities).
+- Converted Chandra Nalaar to script
+- Changing CheckSVar as a Condition to ConditionCheckSVar for clarity
+- Fixed Nezumi Shortfang being non-functional
+- Fixed Shimmering Mirage.
+- Added support for targeting to AF UntapAll.
+- checkstyle and refactoring
+- checkstyle and refactoring
+- Moved hasProtectionFrom to the card class.
+- Cleanup in checkStateEffects.
+- Added Protection keywords to players.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -406,6 +420,17 @@ Skyshroud Ranger
 Devouring Rage
 Hanabi Blast
 Hikari, Twilight Guardian
+Explorer's Scope
+Distorting Lens
+Cauldron Dance
+Voice of All
+Addle
+Crosis, the Purger
+Order of the Stars
+Energy Chamber
+Soratami Seer
+Junkyo Bell
+Early Harvest
 
 
 end
