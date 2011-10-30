@@ -1,0 +1,10 @@
+Name:Burning Palm Efreet
+ManaCost:2 R R
+Types:Creature Efreet
+Text:no text
+PT:2/2
+A:AB$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 2 | SubAbility$ DBDebuff | SpellDescription$ CARDNAME deals 2 damage to target creature with flying and that creature loses flying until end of turn.
+SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_palm_efreet.jpg
+End
