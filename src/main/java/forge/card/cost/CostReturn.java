@@ -242,12 +242,12 @@ public class CostReturn extends CostPartWithList {
 
             public void done() {
                 stop();
+                part.addListToHash(sa, "Returned");
                 payment.paidCost(part);
             }
 
             public void cancel() {
                 stop();
-                part.addListToHash(sa, "Returned");
                 payment.cancelCost();
             }
         };
