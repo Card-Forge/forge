@@ -175,3 +175,6 @@ http://www.cardforge.org/fpics/questAvatars/Wally.jpg
 http://www.cardforge.org/fpics/questAvatars/White%20Knight.jpg
 http://www.cardforge.org/fpics/questAvatars/Wilma%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Wolverine.jpg
+http://www.cardforge.org/fpics/questAvatars/Wonder%20Woman.jpg
+http://www.cardforge.org/fpics/questAvatars/Wyatt%20Earp.jpg
+http://www.cardforge.org/fpics/questAvatars/Zombie%20Attack.jpg
