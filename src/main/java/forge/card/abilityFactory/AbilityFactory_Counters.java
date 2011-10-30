@@ -2102,10 +2102,12 @@ public class AbilityFactory_Counters {
             source = srcCards.get(0);
         }
 
-        ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        Card dest = null;
-        if (destCards.size() > 0) {
-            dest = destCards.get(0);
+        ArrayList<Card> tgtCards;
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
@@ -2116,7 +2118,7 @@ public class AbilityFactory_Counters {
             sb.append("s");
         }
         sb.append(" from ");
-        sb.append(source).append(" to ").append(dest);
+        sb.append(source).append(" to ").append(tgtCards.get(0));
 
         sb.append(".");
 
@@ -2258,20 +2260,24 @@ public class AbilityFactory_Counters {
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-
-        ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        Card dest = null;
-        if (destCards.size() > 0) {
-            dest = destCards.get(0);
+        
+        ArrayList<Card> tgtCards;
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         }
 
-        if (null != source && null != dest) {
-            if (source.getCounters(cType) >= amount) {
-                if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
-                        && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
-                                .equals("M1M1"))) {
-                    dest.addCounter(cType, amount);
-                    source.subtractCounter(cType, amount);
+        for (Card dest : tgtCards) {
+            if (null != source && null != dest) {
+                if (source.getCounters(cType) >= amount) {
+                    if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
+                            && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
+                                    .equals("M1M1"))) {
+                        dest.addCounter(cType, amount);
+                        source.subtractCounter(cType, amount);
+                    }
                 }
             }
         }
