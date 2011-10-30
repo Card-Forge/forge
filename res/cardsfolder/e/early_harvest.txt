@@ -1,0 +1,14 @@
+Name:Early Harvest
+ManaCost:1 G G
+Types:Instant
+Text:no text
+A:SP$ UntapAll | Cost$ 1 G G | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land.Basic | SpellDescription$ Target player untaps all basic lands he or she controls.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/early_harvest.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/222.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/111.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/235.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/237.jpg
+Oracle:Target player untaps all basic lands he or she controls.
+End

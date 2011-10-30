@@ -1251,12 +1251,27 @@ public class AbilityFactory_PermanentState {
         Card card = sa.getSourceCard();
 
         String valid = "";
+        CardList list = null;
+
+        ArrayList<Player> tgtPlayers = null;
 
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else if (params.containsKey("Defined")) {
+            // use it
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        if (tgtPlayers == null || tgtPlayers.isEmpty()) {
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        } else {
+            list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
+        }
         list = list.getValidCards(valid.split(","), card.getController(), card);
 
         for (int i = 0; i < list.size(); i++) {
