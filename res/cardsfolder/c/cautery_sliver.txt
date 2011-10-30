@@ -1,0 +1,13 @@
+Name:Cautery Sliver
+ManaCost:r W
+Types:Creature Sliver
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "1, Sacrifice this permanent: This permanent deals 1 damage to target creature or player."
+SVar:Damage:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | Tgt$TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Prevent | Description$ All Slivers have "1, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn."
+SVar:Prevent:AB$ PreventDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.Sliver,Player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn.
+SVar:BuffedBy:Sliver
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cautery_sliver.jpg
+End
