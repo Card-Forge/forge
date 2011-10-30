@@ -2530,83 +2530,8 @@ public class CardFactoryUtil {
         if (target == null) {
             return false;
         }
-
-        if (target.isImmutable()) {
-            return true;
-        }
-
-        if (target.getKeyword() != null) {
-            final ArrayList<String> list = target.getKeyword();
-
-            String kw = "";
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
-
-                if (kw.equals("Protection from white") && card.isWhite() && !card.getName().contains("White Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from blue") && card.isBlue() && !card.getName().contains("Blue Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from black") && card.isBlack() && !card.getName().contains("Black Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from red") && card.isRed() && !card.getName().contains("Red Ward")) {
-                    return true;
-                }
-                if (kw.equals("Protection from green") && card.isGreen() && !card.getName().contains("Green Ward")) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from creatures") && card.isCreature()) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from artifacts") && card.isArtifact()) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from enchantments") && card.isEnchantment()
-                        && !card.getName().contains("Tattoo Ward")) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from everything")) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from colored spells")
-                        && (card.isInstant() || card.isSorcery() || card.isAura()) && CardFactoryUtil.isColored(card)) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from Dragons") && card.isType("Dragon")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Demons") && card.isType("Demon")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Goblins") && card.isType("Goblin")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Clerics") && card.isType("Cleric")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Gorgons") && card.isType("Gorgon")) {
-                    return true;
-                }
-
-                if (kw.startsWith("Protection:")) { // uses isValid
-                    final String characteristic = kw.split(":")[1];
-                    final String[] characteristics = characteristic.split(",");
-                    if (card.isValid(characteristics, target.getController(), target)) {
-                        return true;
-                    }
-                }
-
-            }
-        }
-        return false;
+        
+        return target.hasProtectionFrom(card);
     }
 
     /**

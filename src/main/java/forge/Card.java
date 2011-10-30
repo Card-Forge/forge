@@ -8007,5 +8007,88 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
         getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
     }
+    
+    public final boolean hasProtectionFrom(Card source) {
+        if (source == null) {
+            return false;
+        }
+
+        if (isImmutable()) {
+            return true;
+        }
+
+        if (getKeyword() != null) {
+            final ArrayList<String> list = getKeyword();
+
+            String kw = "";
+            for (int i = 0; i < list.size(); i++) {
+                kw = list.get(i);
+
+                if (kw.equals("Protection from white") && source.isWhite() && !source.getName().contains("White Ward")) {
+                    return true;
+                }
+                if (kw.equals("Protection from blue") && source.isBlue() && !source.getName().contains("Blue Ward")) {
+                    return true;
+                }
+                if (kw.equals("Protection from black") && source.isBlack() && !source.getName().contains("Black Ward")) {
+                    return true;
+                }
+                if (kw.equals("Protection from red") && source.isRed() && !source.getName().contains("Red Ward")) {
+                    return true;
+                }
+                if (kw.equals("Protection from green") && source.isGreen() && !source.getName().contains("Green Ward")) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from creatures") && source.isCreature()) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from artifacts") && source.isArtifact()) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from enchantments") && source.isEnchantment()
+                        && !source.getName().contains("Tattoo Ward")) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from everything")) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from colored spells")
+                        && (source.isInstant() || source.isSorcery() || source.isAura()) && CardFactoryUtil.isColored(source)) {
+                    return true;
+                }
+
+                if (kw.equals("Protection from Dragons") && source.isType("Dragon")) {
+                    return true;
+                }
+                if (kw.equals("Protection from Demons") && source.isType("Demon")) {
+                    return true;
+                }
+                if (kw.equals("Protection from Goblins") && source.isType("Goblin")) {
+                    return true;
+                }
+                if (kw.equals("Protection from Clerics") && source.isType("Cleric")) {
+                    return true;
+                }
+                if (kw.equals("Protection from Gorgons") && source.isType("Gorgon")) {
+                    return true;
+                }
+
+                if (kw.startsWith("Protection:")) { // uses isValid
+                    final String characteristic = kw.split(":")[1];
+                    final String[] characteristics = characteristic.split(",");
+                    if (source.isValid(characteristics, getController(), this)) {
+                        return true;
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
 
 } // end Card class
