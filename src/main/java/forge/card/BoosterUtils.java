@@ -39,13 +39,13 @@ public final class BoosterUtils {
      */
     public static List<CardPrinted> getQuestStarterDeck(final Predicate<CardPrinted> filter, final int numCommon,
             final int numUncommon, final int numRare) {
-        ArrayList<CardPrinted> cards = new ArrayList<CardPrinted>();
+        final ArrayList<CardPrinted> cards = new ArrayList<CardPrinted>();
 
         // Each color should have around the same amount of monocolored cards
         // There should be 3 Colorless cards for every 4 cards in a single color
         // There should be 1 Multicolor card for every 4 cards in a single color
 
-        List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
         colorFilters.add(CardRules.Predicates.Presets.isMulticolor);
 
         for (int i = 0; i < 4; i++) {
@@ -60,28 +60,29 @@ public final class BoosterUtils {
             colorFilters.add(CardRules.Predicates.Presets.isGreen);
         }
 
-        Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
+        final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
-        cards.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isCommon), numCommon, colorFilters));
-        cards.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isUncommon), numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare);
-        boolean haveMythics = filterMythics.any(cardpool);
-        for (int iSlot = 0; haveMythics && iSlot < numRare; iSlot++) {
-            if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to get
-                                                  // a mythic
+        final Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare);
+        final boolean haveMythics = filterMythics.any(cardpool);
+        for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
+            if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to
+                                                       // get
+                // a mythic
                 nRares--;
                 nMythics++;
             }
         }
 
-        cards.addAll(generateDefinetlyColouredCards(cardpool,
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
                 Predicate.and(filter, CardPrinted.Predicates.Presets.isRare), nRares, colorFilters));
         if (nMythics > 0) {
-            cards.addAll(generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
+            cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
         }
         return cards;
     }
@@ -102,9 +103,9 @@ public final class BoosterUtils {
     private static ArrayList<CardPrinted> generateDefinetlyColouredCards(final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter, final int cntNeeded, final List<Predicate<CardRules>> allowedColors) {
         // If color is null, use colorOrder progression to grab cards
-        ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
+        final ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
 
-        int size = allowedColors == null ? 0 : allowedColors.size();
+        final int size = allowedColors == null ? 0 : allowedColors.size();
         Collections.shuffle(allowedColors);
 
         int cntMade = 0, iAttempt = 0;
@@ -113,7 +114,7 @@ public final class BoosterUtils {
         int allowedMisses = (2 + size + 2) * cntNeeded; // lol, 2+2 is not magic
                                                         // constant!
 
-        while (cntMade < cntNeeded && allowedMisses > 0) {
+        while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
             CardPrinted card = null;
 
             if (size > 0) {
@@ -128,7 +129,7 @@ public final class BoosterUtils {
                 card = filter.random(source);
             }
 
-            if (card != null && !result.contains(card)) {
+            if ((card != null) && !result.contains(card)) {
                 result.add(card);
                 cntMade++;
             } else {
@@ -153,8 +154,8 @@ public final class BoosterUtils {
      * @return the list
      */
     public static List<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
-        Predicate<CardPrinted> whatYouWant = getPredicateForConditions(rarity, color);
-        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+        final Predicate<CardPrinted> whatYouWant = BoosterUtils.getPredicateForConditions(rarity, color);
+        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
 
     /**
@@ -170,25 +171,26 @@ public final class BoosterUtils {
      *            the color
      * @return the list
      */
-    public static List<CardPrinted> generateCards(final Predicate<CardPrinted> filter, final int num, final CardRarity rarity,
-            final String color) {
-        Predicate<CardPrinted> whatYouWant = Predicate.and(filter, getPredicateForConditions(rarity, color));
-        return generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
+    public static List<CardPrinted> generateCards(final Predicate<CardPrinted> filter, final int num,
+            final CardRarity rarity, final String color) {
+        final Predicate<CardPrinted> whatYouWant = Predicate.and(filter,
+                BoosterUtils.getPredicateForConditions(rarity, color));
+        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
     }
 
     private static List<CardPrinted> generateDistinctCards(final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter, final int cntNeeded) {
-        ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
+        final ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
         int cntMade = 0;
 
         // This will prevent endless loop @ wh
         int allowedMisses = (2 + 2) * cntNeeded; // lol, 2+2 is not magic
                                                  // constant!
 
-        while (cntMade < cntNeeded && allowedMisses > 0) {
-            CardPrinted card = filter.random(source);
+        while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
+            final CardPrinted card = filter.random(source);
 
-            if (card != null && !result.contains(card)) {
+            if ((card != null) && !result.contains(card)) {
                 result.add(card);
                 cntMade++;
             } else {
@@ -219,7 +221,7 @@ public final class BoosterUtils {
         if (StringUtils.isBlank(color)) {
             colorFilter = Predicate.getTrue(CardRules.class);
         } else {
-            String col = color.toLowerCase();
+            final String col = color.toLowerCase();
             if (col.startsWith("wh")) {
                 colorFilter = CardRules.Predicates.Presets.isWhite;
             } else if (col.startsWith("bla")) {
@@ -251,18 +253,18 @@ public final class BoosterUtils {
      * @return the variety
      */
     public static List<CardPrinted> getVariety(final List<CardPrinted> in) {
-        List<CardPrinted> out = new ArrayList<CardPrinted>();
+        final List<CardPrinted> out = new ArrayList<CardPrinted>();
         Collections.shuffle(in, MyRandom.getRandom());
 
         for (int i = 0; i < Constant.Color.COLORS.length; i++) {
-            CardPrinted check = findCardOfColor(in, i);
+            final CardPrinted check = BoosterUtils.findCardOfColor(in, i);
             if (check != null) {
                 out.add(check);
             }
         }
 
         return out;
-    }// getVariety()
+    } // getVariety()
 
     /**
      * Find card of color.
@@ -274,7 +276,7 @@ public final class BoosterUtils {
      * @return the card printed
      */
     public static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
-        Predicate<CardRules> filter = CardRules.Predicates.Presets.colors.get(color);
+        final Predicate<CardRules> filter = CardRules.Predicates.Presets.colors.get(color);
         if (null == filter) {
             return null;
         }

@@ -31,10 +31,10 @@ public class CardCharacteristics {
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
-    private String ImageFilename = "";
+    private String imageFilename = "";
     private String imageName = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
-    private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
+    private ArrayList<SetInfo> sets = new ArrayList<SetInfo>();
 
     /**
      * Gets the name.
@@ -300,7 +300,7 @@ public class CardCharacteristics {
      * @return the imageFilename
      */
     public final String getImageFilename() {
-        return ImageFilename;
+        return imageFilename;
     }
 
     /**
@@ -310,7 +310,7 @@ public class CardCharacteristics {
      *            the imageFilename to set
      */
     public final void setImageFilename(final String imageFilename0) {
-        ImageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
+        imageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
     }
 
     /**
@@ -339,7 +339,7 @@ public class CardCharacteristics {
      * @return the sets
      */
     public final ArrayList<SetInfo> getSets() {
-        return Sets;
+        return sets;
     }
 
     /**
@@ -349,7 +349,7 @@ public class CardCharacteristics {
      *            the sets to set
      */
     public final void setSets(final ArrayList<SetInfo> sets0) {
-        Sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
+        sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
                                               // name.
     }
 

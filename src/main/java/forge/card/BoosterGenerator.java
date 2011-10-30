@@ -26,7 +26,8 @@ public class BoosterGenerator {
 
     // Function to open a booster as it is.
     /** The Constant IDENTITY_PICK. */
-    public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+    public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK
+    = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
         @Override
         public List<CardPrinted> apply(final BoosterGenerator arg1) {
             return arg1.getBoosterPack();
@@ -43,7 +44,7 @@ public class BoosterGenerator {
      * @return the simple picker
      */
     public static Closure1<List<CardPrinted>, BoosterGenerator> getSimplePicker(final BoosterGenerator source) {
-        return new Closure1<List<CardPrinted>, BoosterGenerator>(IDENTITY_PICK, source);
+        return new Closure1<List<CardPrinted>, BoosterGenerator>(BoosterGenerator.IDENTITY_PICK, source);
     }
 
     // These lists are to hold cards grouped by rarity in advance.
@@ -59,7 +60,7 @@ public class BoosterGenerator {
     // private List<CardPrinted> commonCreatures;
     // private List<CardPrinted> commonNonCreatures;
 
-    private static final List<CardPrinted> emptyList = Collections.unmodifiableList(new ArrayList<CardPrinted>(0));
+    private static final List<CardPrinted> EMPTY_LIST = Collections.unmodifiableList(new ArrayList<CardPrinted>(0));
 
     // Modern boosters contain 10 commons, 3 uncommmons, 1 rare/mythic
     // They also contain 1 land and 1 token/rules, but we don't pick them now.
@@ -78,8 +79,8 @@ public class BoosterGenerator {
      *            the cards
      */
     public BoosterGenerator(final Iterable<CardPrinted> cards) {
-        for (CardPrinted c : cards) {
-            addToRarity(c);
+        for (final CardPrinted c : cards) {
+            this.addToRarity(c);
         }
     }
 
@@ -90,8 +91,8 @@ public class BoosterGenerator {
      *            the d pool
      */
     public BoosterGenerator(final Deck dPool) {
-        for (Entry<CardPrinted, Integer> e : dPool.getMain()) {
-            addToRarity(e.getKey());
+        for (final Entry<CardPrinted, Integer> e : dPool.getMain()) {
+            this.addToRarity(e.getKey());
         }
     }
 
@@ -107,34 +108,35 @@ public class BoosterGenerator {
         if (!cardSet.canGenerateBooster()) {
             throw new InvalidParameterException("BoosterGenerator: Set " + cardSet + " cannot generate boosters!");
         }
-        CardSet.BoosterData bs = cardSet.getBoosterData();
+        final CardSet.BoosterData bs = cardSet.getBoosterData();
 
-        numCommons = bs.getCommon();
-        numUncommons = bs.getUncommon();
-        numRareSlots = bs.getRare();
-        numSpecials = bs.getSpecial();
-        numDoubleFaced = bs.getDoubleFaced();
+        this.numCommons = bs.getCommon();
+        this.numUncommons = bs.getUncommon();
+        this.numRareSlots = bs.getRare();
+        this.numSpecials = bs.getSpecial();
+        this.numDoubleFaced = bs.getDoubleFaced();
 
-        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
-        List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
+        final Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
+        final List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
-        for (CardPrinted c : cardsInThisSet) {
-            addToRarity(c);
+        for (final CardPrinted c : cardsInThisSet) {
+            this.addToRarity(c);
             // System.out.println(c);
         }
         // System.out.println("done");
     }
 
     private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count) {
-        return pickRandomCards(source, count, false);
+        return this.pickRandomCards(source, count, false);
     }
 
-    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count, boolean singleton) {
+    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source,
+            final int count, final boolean singleton) {
         int listSize = source == null ? 0 : source.size();
-        if (count <= 0 || listSize == 0) {
-            return emptyList;
+        if ((count <= 0) || (listSize == 0)) {
+            return BoosterGenerator.EMPTY_LIST;
         }
-        List<CardPrinted> result = new ArrayList<CardPrinted>(count);
+        final List<CardPrinted> result = new ArrayList<CardPrinted>(count);
 
         int index = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
@@ -154,20 +156,21 @@ public class BoosterGenerator {
         return result;
     }
 
-    private List<CardPrinted> pickRandomRaresOrMythics(final List<CardPrinted> rares, final List<CardPrinted> mythics, final int count) {
-        int raresSize = rares == null ? 0 : rares.size();
-        int mythicsSize = mythics == null ? 0 : mythics.size();
-        if (count <= 0 || raresSize == 0) {
-            return emptyList;
+    private List<CardPrinted> pickRandomRaresOrMythics(final List<CardPrinted> rares, final List<CardPrinted> mythics,
+            final int count) {
+        final int raresSize = rares == null ? 0 : rares.size();
+        final int mythicsSize = mythics == null ? 0 : mythics.size();
+        if ((count <= 0) || (raresSize == 0)) {
+            return BoosterGenerator.EMPTY_LIST;
         }
 
-        List<CardPrinted> result = new ArrayList<CardPrinted>(count);
+        final List<CardPrinted> result = new ArrayList<CardPrinted>(count);
 
         int indexRares = Integer.MAX_VALUE;
         int indexMythics = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
-            int rollD8 = MyRandom.getRandom().nextInt(8);
-            boolean takeMythic = mythicsSize > 0 && rollD8 < 1;
+            final int rollD8 = MyRandom.getRandom().nextInt(8);
+            final boolean takeMythic = (mythicsSize > 0) && (rollD8 < 1);
             if (takeMythic) {
                 if (indexRares >= raresSize) {
                     Collections.shuffle(mythics, MyRandom.getRandom());
@@ -187,24 +190,29 @@ public class BoosterGenerator {
         return result;
     }
 
-
     /**
      * Gets the booster pack.
      * 
      * @return the booster pack
      */
     public final List<CardPrinted> getBoosterPack() {
-        return getBoosterPack(numCommons, numUncommons, numRareSlots, 0, 0, numSpecials, numDoubleFaced, 0, 0);
+        return this.getBoosterPack(this.numCommons, this.numUncommons, this.numRareSlots, 0, 0, this.numSpecials,
+                this.numDoubleFaced, 0, 0);
     }
 
-    public final List<CardPrinted> getSingletonBoosterPack( final int nAnyCard) {
-        List<CardPrinted> temp = new ArrayList<CardPrinted>();
+    /**
+     * Gets the singleton booster pack.
+     *
+     * @param nAnyCard the n any card
+     * @return the singleton booster pack
+     */
+    public final List<CardPrinted> getSingletonBoosterPack(final int nAnyCard) {
+        final List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
-        temp.addAll(pickRandomCards(allButLands, nAnyCard, true));
+        temp.addAll(this.pickRandomCards(this.allButLands, nAnyCard, true));
 
         return temp;
     }
-
 
     /**
      * So many parameters are needed for custom limited cardpools,.
@@ -233,9 +241,9 @@ public class BoosterGenerator {
             final int nRares, final int nMythics, final int nSpecs, final int nDoubls, final int nAnyCard,
             final int nLands) {
 
-        List<CardPrinted> temp = new ArrayList<CardPrinted>();
+        final List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
-        temp.addAll(pickRandomCards(commons, nCom));
+        temp.addAll(this.pickRandomCards(this.commons, nCom));
         /*
          * if( nComCreat > 0 || nComNonCr > 0) { if
          * (commonNonCreatures.isEmpty()) {
@@ -245,50 +253,50 @@ public class BoosterGenerator {
          * temp.addAll(pickRandomCards(commonNonCreatures, nComNonCr)); }
          */
 
-        temp.addAll(pickRandomCards(uncommons, nUnc));
+        temp.addAll(this.pickRandomCards(this.uncommons, nUnc));
 
         if (nRareSlots > 0) {
-            temp.addAll(pickRandomRaresOrMythics(rares, mythics, nRareSlots));
+            temp.addAll(this.pickRandomRaresOrMythics(this.rares, this.mythics, nRareSlots));
         }
-        if (nRares > 0 || nMythics > 0) {
-            temp.addAll(pickRandomCards(rares, nRares));
-            temp.addAll(pickRandomCards(mythics, nMythics));
+        if ((nRares > 0) || (nMythics > 0)) {
+            temp.addAll(this.pickRandomCards(this.rares, nRares));
+            temp.addAll(this.pickRandomCards(this.mythics, nMythics));
         }
         if (nDoubls > 0) {
-            temp.addAll(pickRandomCards(doubleFaced, nDoubls));
+            temp.addAll(this.pickRandomCards(this.doubleFaced, nDoubls));
         }
 
-        temp.addAll(pickRandomCards(specials, nSpecs));
+        temp.addAll(this.pickRandomCards(this.specials, nSpecs));
 
-        temp.addAll(pickRandomCards(allButLands, nAnyCard));
+        temp.addAll(this.pickRandomCards(this.allButLands, nAnyCard));
 
-        temp.addAll(pickRandomCards(basicLands, nLands));
+        temp.addAll(this.pickRandomCards(this.basicLands, nLands));
 
         return temp;
     }
 
     private void addToRarity(final CardPrinted c) {
-        if(c.isAlternate()) {
+        if (c.isAlternate()) {
             return;
         }
-        if (c.isDoubleFaced() && numDoubleFaced > 0) {
-            doubleFaced.add(c);
+        if (c.isDoubleFaced() && (this.numDoubleFaced > 0)) {
+            this.doubleFaced.add(c);
         } else {
             switch (c.getRarity()) {
             case Common:
-                commons.add(c);
+                this.commons.add(c);
                 break;
             case Uncommon:
-                uncommons.add(c);
+                this.uncommons.add(c);
                 break;
             case Rare:
-                rares.add(c);
+                this.rares.add(c);
                 break;
             case MythicRare:
-                mythics.add(c);
+                this.mythics.add(c);
                 break;
             case Special:
-                specials.add(c);
+                this.specials.add(c);
                 break;
             default:
                 break;
@@ -296,9 +304,9 @@ public class BoosterGenerator {
         }
 
         if (c.getCard().getType().isBasicLand()) {
-            basicLands.add(c);
+            this.basicLands.add(c);
         } else {
-            allButLands.add(c);
+            this.allButLands.add(c);
         }
     }
 

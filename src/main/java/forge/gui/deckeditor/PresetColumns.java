@@ -23,7 +23,7 @@ public abstract class PresetColumns {
     }
 
     private static CardColor toColor(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : CardColor.nullColor;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : CardColor.getNullColor();
     }
 
     private static String toPTL(final InventoryItem i) {
