@@ -2943,7 +2943,21 @@ public class CardFactoryUtil {
                     n++;
                 }
             }
+            System.out.println("N is equal to" +n);
+            return CardFactoryUtil.doXMath(n, m, c);
+        }
+        
+        // Count$OpponentDom
+        if (sq[0].contains("OpponentDom")) {
+            someCards.addAll(cardController.getOpponent().getCardsIn(Zone.Battlefield));
+            final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
+            for (int i = 0; i < basic.length; i++) {
+                if (!someCards.getType(basic[i]).isEmpty()) {
+                    n++;
+                }
+            }
+            System.out.println("Opp N is equal to" +n);
             return CardFactoryUtil.doXMath(n, m, c);
         }
 
