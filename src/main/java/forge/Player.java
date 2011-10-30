@@ -532,6 +532,10 @@ public abstract class Player extends GameEntity {
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
             return damage;
         }
+        
+        if (hasProtectionFrom(source)) {
+            return 0;
+        }
 
         int restDamage = damage;
 
@@ -924,11 +928,51 @@ public abstract class Player extends GameEntity {
      */
     @Override
     public final boolean canTarget(final SpellAbility sa) {
-        if (hasKeyword("Shroud") || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))) {
+        if (hasKeyword("Shroud") 
+                || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
+                || hasProtectionFrom(sa.getSourceCard())) {
             return false;
         }
 
         return true;
+    }
+    
+    @Override
+    public boolean hasProtectionFrom(Card source) {
+        if (getKeywords() != null) {
+            final ArrayList<String> list = getKeywords();
+
+            String kw = "";
+            for (int i = 0; i < list.size(); i++) {
+                kw = list.get(i);
+
+                if (kw.equals("Protection from white") && source.isWhite()) {
+                    return true;
+                }
+                if (kw.equals("Protection from blue") && source.isBlue()) {
+                    return true;
+                }
+                if (kw.equals("Protection from black") && source.isBlack()) {
+                    return true;
+                }
+                if (kw.equals("Protection from red") && source.isRed()) {
+                    return true;
+                }
+                if (kw.equals("Protection from green") && source.isGreen()) {
+                    return true;
+                }
+
+                if (kw.startsWith("Protection:")) { // uses isValid
+                    final String characteristic = kw.split(":")[1];
+                    final String[] characteristics = characteristic.split(",");
+                    if (source.isValid(characteristics, this, null)) {
+                        return true;
+                    }
+                }
+
+            }
+        }
+        return false;
     }
 
     /**

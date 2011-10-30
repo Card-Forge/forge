@@ -408,6 +408,10 @@ public abstract class GameEntity extends MyObservable {
             enchantedBy.get(i).unEnchantEntity(this);
         }
     }
+    
+    public boolean hasProtectionFrom(Card source) {
+        return false;
+    }
 
     // //////////////////////////////
     //

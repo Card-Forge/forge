@@ -771,7 +771,7 @@ public class CardList implements Iterable<Card> {
     public final CardList getUnprotectedCards(final Card source) {
         return this.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
-                return !CardFactoryUtil.hasProtectionFrom(source, c);
+                return !c.hasProtectionFrom(source);
             }
         });
     }

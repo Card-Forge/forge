@@ -905,7 +905,8 @@ public class GameAction {
                         if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().isPlayer(pl)) {
                             invalid = true;
                         } else {
-                            // TODO Check Player Protection once it's added.
+                            if(pl.hasProtectionFrom(c))
+                                invalid = true;
                         }
                         if (invalid) {
                             c.unEnchantEntity(pl);

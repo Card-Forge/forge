@@ -7354,7 +7354,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int restDamage = damageIn;
 
-        if (CardFactoryUtil.hasProtectionFrom(source, this)) {
+        if (hasProtectionFrom(source)) {
             return 0;
         }
 
@@ -8008,7 +8008,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
     }
     
-    public final boolean hasProtectionFrom(Card source) {
+    @Override
+    public boolean hasProtectionFrom(Card source) {
         if (source == null) {
             return false;
         }
