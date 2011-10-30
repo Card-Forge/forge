@@ -4781,6 +4781,7 @@ res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
 res/cardsfolder/m/macetail_hystrodon.txt svneol=native#text/plain
 res/cardsfolder/m/machinate.txt svneol=native#text/plain
 res/cardsfolder/m/mad_auntie.txt svneol=native#text/plain
+res/cardsfolder/m/madblind_mountain.txt -text
 res/cardsfolder/m/maddening_wind.txt svneol=native#text/plain
 res/cardsfolder/m/madrush_cyclops.txt svneol=native#text/plain
 res/cardsfolder/m/maelstrom_djinn.txt svneol=native#text/plain
@@ -5331,6 +5332,7 @@ res/cardsfolder/m/myr_galvanizer.txt svneol=native#text/plain
 res/cardsfolder/m/myr_incubator.txt svneol=native#text/plain
 res/cardsfolder/m/myr_landshaper.txt svneol=native#text/plain
 res/cardsfolder/m/myr_matrix.txt svneol=native#text/plain
+res/cardsfolder/m/myr_mindservant.txt -text
 res/cardsfolder/m/myr_moonvessel.txt svneol=native#text/plain
 res/cardsfolder/m/myr_propagator.txt svneol=native#text/plain
 res/cardsfolder/m/myr_quadropod.txt svneol=native#text/plain
