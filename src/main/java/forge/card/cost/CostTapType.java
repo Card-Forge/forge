@@ -253,8 +253,8 @@ public class CostTapType extends CostPartWithList {
 
             public void done() {
                 stop();
-                payment.paidCost(tapType);
                 tapType.addListToHash(sa, "Tapped");
+                payment.paidCost(tapType);
             }
         };
 
