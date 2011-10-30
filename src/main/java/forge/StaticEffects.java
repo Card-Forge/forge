@@ -25,7 +25,7 @@ public class StaticEffects {
     /**
      * staticEffects.
      */
-    public ArrayList<StaticEffect> staticEffects;
+    private ArrayList<StaticEffect> staticEffects;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
@@ -114,8 +114,9 @@ public class StaticEffects {
 
             // add keywords
             if (addKeywords != null) {
-                for (String keyword : addKeywords)
+                for (String keyword : addKeywords) {
                     p.removeKeyword(keyword);
+                }
             }
         }
 

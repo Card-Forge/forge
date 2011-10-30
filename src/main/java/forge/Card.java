@@ -565,7 +565,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setTriggers(final ArrayList<Trigger> trigs) {
         ArrayList<Trigger> copyList = new ArrayList<Trigger>();
         for (Trigger t : trigs) {
-            if(t.getIsIntrinsic()) {
+            if (t.getIsIntrinsic()) {
                 Trigger newtrig = t.getCopy();
                 newtrig.setHostCard(this);
                 copyList.add(newtrig);
@@ -7761,7 +7761,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         Random r = MyRandom.getRandom();
         SetInfo si = getCharacteristics().getSets().get(r.nextInt(getCharacteristics().getSets().size()));
 
-        curSetCode = si.Code;
+        curSetCode = si.getCode();
     }
 
     /**
@@ -7797,8 +7797,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final String getCurSetRarity() {
         for (int i = 0; i < getCharacteristics().getSets().size(); i++) {
-            if (getCharacteristics().getSets().get(i).Code.equals(curSetCode)) {
-                return getCharacteristics().getSets().get(i).Rarity;
+            if (getCharacteristics().getSets().get(i).getCode().equals(curSetCode)) {
+                return getCharacteristics().getSets().get(i).getRarity();
             }
         }
 
@@ -7814,8 +7814,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final String getCurSetURL() {
         for (int i = 0; i < getCharacteristics().getSets().size(); i++) {
-            if (getCharacteristics().getSets().get(i).Code.equals(curSetCode)) {
-                return getCharacteristics().getSets().get(i).URL;
+            if (getCharacteristics().getSets().get(i).getCode().equals(curSetCode)) {
+                return getCharacteristics().getSets().get(i).getUrl();
             }
         }
 

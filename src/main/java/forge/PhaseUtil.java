@@ -58,8 +58,9 @@ public class PhaseUtil {
         // Sickness on first turn
         if (turn.getTurn() > 0) {
             CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
-            for (Card c : list)
+            for (Card c : list) {
                 c.setSickness(false);
+            }
         }
         turn.incrementTurn();
 
@@ -206,12 +207,12 @@ public class PhaseUtil {
 
         // opponent untapping during your untap phase
         CardList opp = player.getOpponent().getCardsIn(Zone.Battlefield);
-        for (Card oppCard : opp)
-            if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step."))
-             {
+        for (Card oppCard : opp) {
+            if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step.")) {
                 oppCard.untap();
         // end opponent untapping during your untap phase
             }
+        }
 
         if (canOnlyUntapOneLand()) {
             if (AllZone.getPhase().getPlayerTurn().isComputer()) {
@@ -244,8 +245,8 @@ public class PhaseUtil {
                             c.untap();
                             stop();
                         }
-                    }// selectCard()
-                };// Input
+                    } // selectCard()
+                }; // Input
                 CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                 landList = landList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
@@ -290,8 +291,8 @@ public class PhaseUtil {
                             c.untap();
                             stop();
                         }
-                    }// selectCard()
-                };// Input
+                    } // selectCard()
+                }; // Input
                 CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
                 artList = artList.filter(CardListFilter.ARTIFACTS);
                 artList = artList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
@@ -336,8 +337,8 @@ public class PhaseUtil {
                             c.untap();
                             stop();
                         }
-                    }// selectCard()
-                };// Input
+                    } // selectCard()
+                }; // Input
                 CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                 creatures = creatures.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
                     @Override
@@ -357,7 +358,7 @@ public class PhaseUtil {
             c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
             c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
         }
-    }// end doUntap
+    } // end doUntap
 
     /**
      * <p>
@@ -378,9 +379,9 @@ public class PhaseUtil {
         CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (Card ca : allp) {
             if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
-                int KeywordPosition = ca
+                int keywordPosition = ca
                         .getKeywordPosition("Permanents don't untap during their controllers' untap steps");
-                String parse = ca.getKeyword().get(KeywordPosition).toString();
+                String parse = ca.getKeyword().get(keywordPosition).toString();
                 String[] k = parse.split(":");
                 final String[] restrictions = k[1].split(",");
                 final Card card = ca;
@@ -551,8 +552,7 @@ public class PhaseUtil {
             CardList exalted = attackingPlayer.getCardsIn(Zone.Battlefield);
             exalted = exalted.getKeyword("Exalted");
 
-            if (exalted.size() > 0)
-             {
+            if (exalted.size() > 0) {
                 CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
             // Make sure exalted effects get applied only once per combat
             }
@@ -564,8 +564,9 @@ public class PhaseUtil {
         runParams.put("AttackingPlayer", AllZone.getCombat().getAttackingPlayer());
         AllZone.getTriggerHandler().runTrigger("AttackersDeclared", runParams);
 
-        for (Card c : list)
+        for (Card c : list) {
             CombatUtil.checkDeclareAttackers(c);
+        }
         AllZone.getStack().unfreezeStack();
     }
 
@@ -597,8 +598,9 @@ public class PhaseUtil {
 
         for (Card a : attList) {
             CardList blockList = AllZone.getCombat().getBlockers(a);
-            for (Card b : blockList)
+            for (Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
+            }
         }
 
         AllZone.getStack().unfreezeStack();

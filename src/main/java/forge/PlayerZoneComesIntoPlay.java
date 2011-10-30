@@ -50,7 +50,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         final Player player = c.getController();
 
         if (trigger
-                && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
+                && ((CardFactoryUtil.oppHasKismet(c.getController())
+                        && (c.isLand() || c.isCreature() || c.isArtifact()))
                         || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c
                                 .isCreature())
                         || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact())) || (AllZoneUtil

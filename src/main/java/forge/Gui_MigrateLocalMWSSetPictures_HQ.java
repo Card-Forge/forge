@@ -479,13 +479,13 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
             final ArrayList<SetInfo> cSetInfo = c.getSets();
             if (cSetInfo.size() > 0) {
                 for (int j = 0; j < cSetInfo.size(); j++) {
-                    c.setCurSetCode(cSetInfo.get(j).Code);
+                    c.setCurSetCode(cSetInfo.get(j).getCode());
                     final String setCode3 = c.getCurSetCode();
                     final String setCode2 = SetUtils.getCode2ByCode(c.getCurSetCode());
 
                     int n = 0;
-                    if (cSetInfo.get(j).PicCount > 0) {
-                        n = cSetInfo.get(j).PicCount;
+                    if (cSetInfo.get(j).getPicCount() > 0) {
+                        n = cSetInfo.get(j).getPicCount();
 
                         for (int k = 1; k <= n; k++) {
                             c.setRandomPicture(k);

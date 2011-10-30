@@ -659,11 +659,11 @@ public final class CardUtil {
         Predicate<SetInfo> findSetInfo = new Predicate<SetInfo>() {
             @Override
             public boolean isTrue(final SetInfo subject) {
-                return subject.Code.equals(set);
+                return subject.getCode().equals(set);
             }
         };
         SetInfo neededSet = findSetInfo.first(card.getSets());
-        int cntPictures = neededSet == null ? 1 : neededSet.PicCount;
+        int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
         return buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 

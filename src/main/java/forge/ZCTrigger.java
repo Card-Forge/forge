@@ -24,10 +24,10 @@ public enum ZCTrigger {
     ENTERGRAVE("is put into a graveyard from anywhere", "any > grave");
 
     /** The rule text. */
-    public String ruleText;
+    private String ruleText;
 
     /** The trigger zones. */
-    public String[] triggerZones;
+    private String[] triggerZones;
 
     /**
      * <p>
@@ -56,7 +56,8 @@ public enum ZCTrigger {
      * @return a boolean.
      */
     public boolean triggerOn(final String sourceZone, final String destintationZone) {
-        return ((triggerZones[0].equals("any") || triggerZones[0].equals(sourceZone)) && (triggerZones[1].equals("any") || triggerZones[0]
+        return ((triggerZones[0].equals("any") || triggerZones[0].equals(sourceZone))
+                && (triggerZones[1].equals("any") || triggerZones[0]
                 .equals(sourceZone)));
     }
 

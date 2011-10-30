@@ -15,7 +15,7 @@ public class PhaseTest {
     @Test(groups = {"UnitTest", "fast"}, timeOut = 5000, enabled = false)
     public void PhaseTest1() {
         Phase phase = new Phase();
-        for (int i = 0; i < phase.phaseOrder.length; i++) {
+        for (int i = 0; i < phase.getPhaseOrder().length; i++) {
             System.out.println(phase.getPlayerTurn() + " " + phase.getPhase());
             phase.nextPhase();
         }

@@ -660,7 +660,7 @@ public class DeckManager {
             for (Card card : d.getMain().toForgeCardList().toArray()) {
                 // System.out.println(card.getSets().get(card.getSets().size() -
                 // 1).URL);
-                list.add(card.getSets().get(card.getSets().size() - 1).URL);
+                list.add(card.getSets().get(card.getSets().size() - 1).getUrl());
             }
             /*
              * List<String> nameList = new ArrayList<String>(); for (Card card :
