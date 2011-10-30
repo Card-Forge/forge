@@ -264,7 +264,7 @@ public class Upkeep implements java.io.Serializable {
                     player.drawCard();
                 }
             };
-            slowtrip.setStackDescription(card.getName() + " - Draw a card");
+            slowtrip.setStackDescription(card + " - Draw a card.");
 
             AllZone.getStack().addSimultaneousStackEntry(slowtrip);
 
