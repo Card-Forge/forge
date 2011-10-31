@@ -5770,6 +5770,7 @@ res/cardsfolder/o/overgrown_battlement.txt svneol=native#text/plain
 res/cardsfolder/o/overgrown_estate.txt svneol=native#text/plain
 res/cardsfolder/o/overgrown_tomb.txt svneol=native#text/plain
 res/cardsfolder/o/overgrowth.txt svneol=native#text/plain
+res/cardsfolder/o/overload.txt -text svneol=unset#text/plain
 res/cardsfolder/o/override.txt svneol=native#text/plain
 res/cardsfolder/o/overrule.txt svneol=native#text/plain
 res/cardsfolder/o/overrun.txt svneol=native#text/plain

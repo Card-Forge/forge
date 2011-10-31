@@ -1,0 +1,9 @@
+Name:Overload
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact.cmcLE2 | TgtPrompt$ Select target artifact with converted mana cost 2 or less | SpellDescription$ Destroy target artifact if its converted mana cost is 2 or less.
+A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact.cmcLE5 | TgtPrompt$ Select target artifact with converted mana cost 5 or less | SpellDescription$ Kicker 2 (You may pay an additional 2 as you cast this spell.) If CARDNAME was kicked, destroy that artifact if its converted mana cost is 5 or less instead.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overload.jpg
+End
