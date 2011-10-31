@@ -2257,7 +2257,7 @@ public class CombatUtil {
 
         } // Witch-Maw Nephilim
 
-        else if (c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
+        /*else if (c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
             System.out.println("Preeminent Captain Attacks");
 
             CardList soldiers = c.getController().getCardsIn(Zone.Hand);
@@ -2288,7 +2288,7 @@ public class CombatUtil {
                 }
 
             } // if (creatures.size() > 0)
-        } // Preeminent Captain
+        }*/ // Preeminent Captain
 
         else if (c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
             Player player = c.getController();

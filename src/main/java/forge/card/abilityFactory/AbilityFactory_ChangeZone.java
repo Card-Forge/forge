@@ -834,6 +834,10 @@ public final class AbilityFactory_ChangeZone {
                     if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
                     }
+                    
+                    if (params.containsKey("Attacking")) {
+                        AllZone.getCombat().addAttacker(c);
+                    }
 
                     movedCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
                 } else {
@@ -986,6 +990,10 @@ public final class AbilityFactory_ChangeZone {
                 }
                 if (params.containsKey("GainControl")) {
                     c.addController(af.getHostCard());
+                }
+                
+                if (params.containsKey("Attacking")) {
+                    AllZone.getCombat().addAttacker(c);
                 }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
