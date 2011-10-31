@@ -18,7 +18,7 @@ import forge.gui.input.Input;
  */
 public class CostPutCounter extends CostPartWithList {
     // Put Counter doesn't really have a "Valid" portion of the cost
-    private Counters counter;
+    private final Counters counter;
     private int lastPaidAmount = 0;
 
     /**
@@ -27,7 +27,7 @@ public class CostPutCounter extends CostPartWithList {
      * @return the counter
      */
     public final Counters getCounter() {
-        return counter;
+        return this.counter;
     }
 
     /**
@@ -37,7 +37,7 @@ public class CostPutCounter extends CostPartWithList {
      *            the new last paid amount
      */
     public final void setLastPaidAmount(final int paidAmount) {
-        lastPaidAmount = paidAmount;
+        this.lastPaidAmount = paidAmount;
     }
 
     /**
@@ -53,12 +53,12 @@ public class CostPutCounter extends CostPartWithList {
      *            the description
      */
     public CostPutCounter(final String amount, final Counters cntr, final String type, final String description) {
-        isReusable = true;
-        this.amount = amount;
+        this.setReusable(true);
+        this.setAmount(amount);
         this.counter = cntr;
 
-        this.type = type;
-        this.typeDescription = description;
+        this.setType(type);
+        this.setTypeDescription(description);
     }
 
     /*
@@ -68,19 +68,19 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        if (counter.getName().equals("Loyalty")) {
-            sb.append("+").append(amount);
+        final StringBuilder sb = new StringBuilder();
+        if (this.counter.getName().equals("Loyalty")) {
+            sb.append("+").append(this.getAmount());
         } else {
             sb.append("Put ");
-            Integer i = convertAmount();
-            sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName() + " counter"));
+            final Integer i = this.convertAmount();
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), this.counter.getName() + " counter"));
 
             sb.append(" on ");
-            if (getThis()) {
-                sb.append(type);
+            if (this.getThis()) {
+                sb.append(this.getType());
             } else {
-                String desc = typeDescription == null ? type : typeDescription;
+                final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
                 sb.append(desc);
             }
         }
@@ -94,8 +94,8 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (Card c : list) {
-            c.subtractCounter(counter, lastPaidAmount);
+        for (final Card c : this.list) {
+            c.subtractCounter(this.counter, this.lastPaidAmount);
         }
     }
 
@@ -108,17 +108,18 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        if (getThis()) {
+        if (this.getThis()) {
             if (source.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 return false;
             }
-            if (source.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counter.equals(Counters.M1M1)) {
+            if (source.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.")
+                    && this.counter.equals(Counters.M1M1)) {
                 return false;
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(getType().split(";"), activator,
-                    source);
+            final CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(this.getType().split(";"),
+                    activator, source);
 
             if (typeList.size() == 0) {
                 return false;
@@ -136,17 +137,17 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, amount, ability);
+            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (getThis()) {
-            source.addCounterFromNonEffect(getCounter(), c);
+        if (this.getThis()) {
+            source.addCounterFromNonEffect(this.getCounter(), c);
         } else {
             // Put counter on chosen card
-            for (Card card : list) {
-                card.addCounterFromNonEffect(getCounter(), 1);
+            for (final Card card : this.list) {
+                card.addCounterFromNonEffect(this.getCounter(), 1);
             }
         }
     }
@@ -160,18 +161,18 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, amount, ability);
+            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (getThis()) {
-            source.addCounterFromNonEffect(getCounter(), c);
+        if (this.getThis()) {
+            source.addCounterFromNonEffect(this.getCounter(), c);
             payment.setPaidManaPart(this, true);
-            addToList(source);
+            this.addToList(source);
             return true;
         } else {
-            CostUtil.setInput(putCounterType(ability, getType(), payment, this, c));
+            CostUtil.setInput(CostPutCounter.putCounterType(ability, this.getType(), payment, this, c));
             return false;
         }
     }
@@ -185,27 +186,27 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        resetList();
-        if (getThis()) {
-            addToList(source);
+        this.resetList();
+        if (this.getThis()) {
+            this.addToList(source);
             return true;
         } else {
-            Player activator = ability.getActivatingPlayer();
-            Integer c = convertAmount();
+            final Player activator = ability.getActivatingPlayer();
+            Integer c = this.convertAmount();
             if (c == null) {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(getType().split(";"), activator,
-                    source);
+            final CardList typeList = activator.getCardsIn(Zone.Battlefield).getValidCards(this.getType().split(";"),
+                    activator, source);
 
             Card card = null;
-            if (type.equals("Creature.YouCtrl")) {
+            if (this.getType().equals("Creature.YouCtrl")) {
                 card = CardFactoryUtil.getWorstCreatureAI(typeList);
             } else {
                 card = CardFactoryUtil.getWorstPermanentAI(typeList, false, false, false, false);
             }
-            addToList(card);
+            this.addToList(card);
         }
         return true;
     }
@@ -229,19 +230,19 @@ public class CostPutCounter extends CostPartWithList {
      */
     public static Input putCounterType(final SpellAbility sa, final String type, final Cost_Payment payment,
             final CostPutCounter costPutCounter, final int nNeeded) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
             private int nPut = 0;
 
             @Override
             public void showMessage() {
-                if (nNeeded == 0 || nNeeded == nPut) {
-                    done();
+                if ((nNeeded == 0) || (nNeeded == this.nPut)) {
+                    this.done();
                 }
 
-                StringBuilder msg = new StringBuilder("Put ");
-                int nLeft = nNeeded - nPut;
+                final StringBuilder msg = new StringBuilder("Put ");
+                final int nLeft = nNeeded - this.nPut;
                 msg.append(nLeft).append(" ");
                 msg.append(costPutCounter.getCounter()).append(" on ");
 
@@ -250,39 +251,40 @@ public class CostPutCounter extends CostPartWithList {
                     msg.append("s");
                 }
 
-                typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
-                typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
+                this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
+                        sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
             @Override
             public void selectButtonCancel() {
-                cancel();
+                this.cancel();
             }
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (typeList.contains(card)) {
-                    nPut++;
+                if (this.typeList.contains(card)) {
+                    this.nPut++;
                     costPutCounter.addToList(card);
                     card.addCounterFromNonEffect(costPutCounter.getCounter(), 1);
 
-                    if (nNeeded == nPut) {
-                        done();
+                    if (nNeeded == this.nPut) {
+                        this.done();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
 
             public void done() {
-                stop();
+                this.stop();
                 payment.paidCost(costPutCounter);
             }
 
             public void cancel() {
-                stop();
+                this.stop();
                 costPutCounter.addListToHash(sa, "CounterPut");
                 payment.cancelCost();
             }

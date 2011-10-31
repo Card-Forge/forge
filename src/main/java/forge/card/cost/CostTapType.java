@@ -31,7 +31,7 @@ public class CostTapType extends CostPartWithList {
      */
     public CostTapType(final String amount, final String type, final String description) {
         super(amount, type, description);
-        isReusable = true;
+        this.setReusable(true);
     }
 
     /**
@@ -40,7 +40,7 @@ public class CostTapType extends CostPartWithList {
      * @return the description
      */
     public final String getDescription() {
-        return typeDescription == null ? type : typeDescription;
+        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
     }
 
     /*
@@ -50,13 +50,13 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Tap ");
 
-        Integer i = convertAmount();
-        String desc = getDescription();
+        final Integer i = this.convertAmount();
+        final String desc = this.getDescription();
 
-        sb.append(Cost.convertAmountTypeToWords(i, amount, "untapped " + desc));
+        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
 
         sb.append(" you control");
 
@@ -70,7 +70,7 @@ public class CostTapType extends CostPartWithList {
      *            the c
      */
     public final void addToTappedList(final Card c) {
-        list.add(c);
+        this.list.add(c);
     }
 
     /*
@@ -80,11 +80,11 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (Card c : list) {
+        for (final Card c : this.list) {
             c.untap();
         }
 
-        list.clear();
+        this.list.clear();
     }
 
     /*
@@ -98,15 +98,15 @@ public class CostTapType extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList typeList = activator.getCardsIn(Zone.Battlefield);
 
-        typeList = typeList.getValidCards(getType().split(";"), activator, source);
+        typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
 
         if (cost.getTap()) {
             typeList.remove(source);
         }
         typeList = typeList.filter(CardListFilter.UNTAPPED);
 
-        Integer amount = convertAmount();
-        if (typeList.size() == 0 || (amount != null && typeList.size() < amount)) {
+        final Integer amount = this.convertAmount();
+        if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
             return false;
         }
 
@@ -121,8 +121,9 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (Card c : list)
+        for (final Card c : this.list) {
             c.tap();
+        }
     }
 
     /*
@@ -135,12 +136,13 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(Zone.Battlefield);
-        typeList = typeList.getValidCards(getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
+                ability.getSourceCard());
         typeList = typeList.filter(CardListFilter.UNTAPPED);
-        String amount = getAmount();
-        Integer c = convertAmount();
+        final String amount = this.getAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, typeList.size());
@@ -149,7 +151,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
 
-        CostUtil.setInput(CostTapType.input_tapXCost(this, typeList, ability, payment, c));
+        CostUtil.setInput(CostTapType.inputTapXCost(this, typeList, ability, payment, c));
         return false;
     }
 
@@ -162,15 +164,15 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        boolean tap = payment.getCost().getTap();
-        Integer c = convertAmount();
+        final boolean tap = payment.getCost().getTap();
+        final Integer c = this.convertAmount();
         if (c == null) {
             // Determine Amount
         }
 
-        list = ComputerUtil.chooseTapType(getType(), source, tap, c);
+        this.list = ComputerUtil.chooseTapType(this.getType(), source, tap, c);
 
-        if (list == null) {
+        if (this.list == null) {
             System.out.println("Couldn't find a valid card to tap for: " + source.getName());
             return false;
         }
@@ -197,24 +199,24 @@ public class CostTapType extends CostPartWithList {
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_tapXCost(final CostTapType tapType, final CardList cardList, final SpellAbility sa,
+    public static Input inputTapXCost(final CostTapType tapType, final CardList cardList, final SpellAbility sa,
             final Cost_Payment payment, final int nCards) {
-        Input target = new Input() {
+        final Input target = new Input() {
 
             private static final long serialVersionUID = 6438988130447851042L;
-            int nTapped = 0;
+            private int nTapped = 0;
 
             @Override
             public void showMessage() {
                 if (nCards == 0) {
-                    done();
+                    this.done();
                 }
 
                 if (cardList.size() == 0) {
-                    stop();
+                    this.stop();
                 }
 
-                int left = nCards - nTapped;
+                final int left = nCards - this.nTapped;
                 AllZone.getDisplay()
                         .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
                 ButtonUtil.enableOnlyCancel();
@@ -222,7 +224,7 @@ public class CostTapType extends CostPartWithList {
 
             @Override
             public void selectButtonCancel() {
-                cancel();
+                this.cancel();
             }
 
             @Override
@@ -233,31 +235,31 @@ public class CostTapType extends CostPartWithList {
                     tapType.addToList(card);
                     cardList.remove(card);
 
-                    nTapped++;
+                    this.nTapped++;
 
-                    if (nTapped == nCards) {
-                        done();
+                    if (this.nTapped == nCards) {
+                        this.done();
                     } else if (cardList.size() == 0) {
                         // happen
-                        cancel();
+                        this.cancel();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
 
             public void cancel() {
-                stop();
+                this.stop();
                 payment.cancelCost();
             }
 
             public void done() {
-                stop();
+                this.stop();
                 tapType.addListToHash(sa, "Tapped");
                 payment.paidCost(tapType);
             }
         };
 
         return target;
-    }// input_tapXCost()
+    } // input_tapXCost()
 }

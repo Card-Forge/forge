@@ -19,7 +19,7 @@ public class CostGainLife extends CostPart {
      * @return the last paid amount
      */
     public final int getLastPaidAmount() {
-        return lastPaidAmount;
+        return this.lastPaidAmount;
     }
 
     /**
@@ -29,7 +29,7 @@ public class CostGainLife extends CostPart {
      *            the new last paid amount
      */
     public final void setLastPaidAmount(final int paidAmount) {
-        lastPaidAmount = paidAmount;
+        this.lastPaidAmount = paidAmount;
     }
 
     /**
@@ -39,7 +39,7 @@ public class CostGainLife extends CostPart {
      *            the amount
      */
     public CostGainLife(final String amount) {
-        this.amount = amount;
+        this.setAmount(amount);
     }
 
     /*
@@ -49,8 +49,8 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Have each other player gain ").append(amount).append(" Life");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Have each other player gain ").append(this.getAmount()).append(" Life");
         return sb.toString();
     }
 
@@ -73,8 +73,8 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        Integer amount = convertAmount();
-        if (amount != null && !activator.getOpponent().canGainLife()) {
+        final Integer amount = this.convertAmount();
+        if ((amount != null) && !activator.getOpponent().canGainLife()) {
             return false;
         }
 
@@ -89,7 +89,7 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        AllZone.getHumanPlayer().gainLife(getLastPaidAmount(), null);
+        AllZone.getHumanPlayer().gainLife(this.getLastPaidAmount(), null);
     }
 
     /*
@@ -101,13 +101,13 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String amount = getAmount();
-        Player activator = ability.getActivatingPlayer();
-        int life = activator.getLife();
+        final String amount = this.getAmount();
+        final Player activator = ability.getActivatingPlayer();
+        final int life = activator.getLife();
 
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, life);
@@ -116,12 +116,12 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Have each other player gain ").append(c).append(" Life?");
 
         if (GameActionUtil.showYesNoDialog(source, sb.toString()) && activator.getOpponent().canGainLife()) {
             activator.getOpponent().gainLife(c, null);
-            setLastPaidAmount(c);
+            this.setLastPaidAmount(c);
             payment.setPaidManaPart(this, true);
         } else {
             payment.setCancel(true);
@@ -140,22 +140,22 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Player activator = ability.getActivatingPlayer();
+        final Player activator = ability.getActivatingPlayer();
 
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
                 return false;
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
         }
         if (!activator.getOpponent().canGainLife()) {
             return false;
         }
-        setLastPaidAmount(c);
+        this.setLastPaidAmount(c);
         return true;
     }
 }

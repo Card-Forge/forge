@@ -13,8 +13,8 @@ public class CostUntap extends CostPart {
      * Instantiates a new cost untap.
      */
     public CostUntap() {
-        isReusable = true;
-        isUndoable = true;
+        this.setReusable(true);
+        this.setUndoable(true);
     }
 
     /*

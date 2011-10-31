@@ -41,29 +41,29 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Discard ");
 
-        Integer i = convertAmount();
+        final Integer i = this.convertAmount();
 
-        if (getThis()) {
-            sb.append(type);
-        } else if (type.equals("Hand")) {
+        if (this.getThis()) {
+            sb.append(this.getType());
+        } else if (this.getType().equals("Hand")) {
             sb.append("your hand");
-        } else if (type.equals("LastDrawn")) {
+        } else if (this.getType().equals("LastDrawn")) {
             sb.append("last drawn card");
         } else {
-            StringBuilder desc = new StringBuilder();
+            final StringBuilder desc = new StringBuilder();
 
-            if (type.equals("Card") || type.equals("Random")) {
+            if (this.getType().equals("Card") || this.getType().equals("Random")) {
                 desc.append("Card");
             } else {
-                desc.append(typeDescription == null ? type : typeDescription).append(" card");
+                desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(" card");
             }
 
-            sb.append(Cost.convertAmountTypeToWords(i, amount, desc.toString()));
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
 
-            if (type.equals("Random")) {
+            if (this.getType().equals("Random")) {
                 sb.append(" at random");
             }
         }
@@ -92,23 +92,23 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList handList = activator.getCardsIn(Zone.Hand);
-        String type = getType();
-        Integer amount = convertAmount();
+        final String type = this.getType();
+        final Integer amount = this.convertAmount();
 
-        if (getThis()) {
+        if (this.getThis()) {
             if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand)) {
                 return false;
             }
         } else if (type.equals("Hand")) {
             // this will always work
         } else if (type.equals("LastDrawn")) {
-            Card c = activator.getLastDrawnCard();
+            final Card c = activator.getLastDrawnCard();
             return handList.contains(c);
         } else {
             if (!type.equals("Random")) {
                 handList = handList.getValidCards(type.split(";"), activator, source);
             }
-            if (amount != null && amount > handList.size()) {
+            if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
                 return false;
             }
@@ -125,8 +125,8 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Player activator = ability.getActivatingPlayer();
-        for (Card c : list) {
+        final Player activator = ability.getActivatingPlayer();
+        for (final Card c : this.getList()) {
             activator.discard(c, ability);
         }
     }
@@ -140,37 +140,37 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Player activator = ability.getActivatingPlayer();
+        final Player activator = ability.getActivatingPlayer();
         CardList handList = activator.getCardsIn(Zone.Hand);
-        String discType = getType();
-        String amount = getAmount();
-        resetList();
+        final String discType = this.getType();
+        final String amount = this.getAmount();
+        this.resetList();
 
-        if (getThis()) {
+        if (this.getThis()) {
             if (!handList.contains(source)) {
                 return false;
             }
             activator.discard(source, ability);
             payment.setPaidManaPart(this, true);
-            addToList(source);
+            this.addToList(source);
         } else if (discType.equals("Hand")) {
-            list = handList;
+            this.list = handList;
             activator.discardHand(ability);
             payment.setPaidManaPart(this, true);
         } else if (discType.equals("LastDrawn")) {
-            Card lastDrawn = activator.getLastDrawnCard();
-            addToList(lastDrawn);
+            final Card lastDrawn = activator.getLastDrawnCard();
+            this.addToList(lastDrawn);
             if (!handList.contains(lastDrawn)) {
                 return false;
             }
             activator.discard(lastDrawn, ability);
             payment.setPaidManaPart(this, true);
         } else {
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
 
             if (discType.equals("Random")) {
                 if (c == null) {
-                    String sVar = source.getSVar(amount);
+                    final String sVar = source.getSVar(amount);
                     // Generalize this
                     if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, handList.size());
@@ -179,14 +179,14 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                list = activator.discardRandom(c, ability);
+                this.list = activator.discardRandom(c, ability);
                 payment.setPaidManaPart(this, true);
             } else {
-                String[] validType = discType.split(";");
+                final String[] validType = discType.split(";");
                 handList = handList.getValidCards(validType, activator, ability.getSourceCard());
 
                 if (c == null) {
-                    String sVar = source.getSVar(amount);
+                    final String sVar = source.getSVar(amount);
                     // Generalize this
                     if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, handList.size());
@@ -195,11 +195,11 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                CostUtil.setInput(CostDiscard.input_discardCost(discType, handList, ability, payment, this, c));
+                CostUtil.setInput(CostDiscard.inputDiscardCost(discType, handList, ability, payment, this, c));
                 return false;
             }
         }
-        addListToHash(ability, "Discarded");
+        this.addListToHash(ability, "Discarded");
         return true;
     }
 
@@ -212,46 +212,46 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String type = getType();
-        Player activator = ability.getActivatingPlayer();
-        CardList hand = activator.getCardsIn(Zone.Hand);
-        resetList();
+        final String type = this.getType();
+        final Player activator = ability.getActivatingPlayer();
+        final CardList hand = activator.getCardsIn(Zone.Hand);
+        this.resetList();
         if (type.equals("LastDrawn")) {
             if (!hand.contains(activator.getLastDrawnCard())) {
                 return false;
             }
-            addToList(activator.getLastDrawnCard());
+            this.addToList(activator.getLastDrawnCard());
         }
 
-        else if (getThis()) {
+        else if (this.getThis()) {
             if (!hand.contains(source)) {
                 return false;
             }
 
-            addToList(source);
+            this.addToList(source);
         }
 
         else if (type.equals("Hand")) {
-            list.addAll(hand);
+            this.list.addAll(hand);
         }
 
         else {
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
             if (c == null) {
-                String sVar = source.getSVar(amount);
+                final String sVar = source.getSVar(this.getAmount());
                 if (sVar.equals("XChoice")) {
                     return false;
                 }
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
             if (type.equals("Random")) {
-                list = CardListUtil.getRandomSubList(hand, c);
+                this.list = CardListUtil.getRandomSubList(hand, c);
             } else {
-                list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
+                this.list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
             }
         }
-        return list != null;
+        return this.list != null;
     }
 
     // Inputs
@@ -276,34 +276,34 @@ public class CostDiscard extends CostPartWithList {
      * 
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_discardCost(final String discType, final CardList handList, final SpellAbility sa,
+    public static Input inputDiscardCost(final String discType, final CardList handList, final SpellAbility sa,
             final Cost_Payment payment, final CostDiscard part, final int nNeeded) {
         final SpellAbility sp = sa;
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
 
-            int nDiscard = 0;
+            private int nDiscard = 0;
 
             @Override
             public void showMessage() {
                 if (nNeeded == 0) {
-                    done();
+                    this.done();
                 }
 
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                    stop();
+                    this.stop();
                 }
-                StringBuilder type = new StringBuilder("");
+                final StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
                 }
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Select a ");
                 sb.append(part.getDescriptiveType());
                 sb.append(" to discard.");
                 if (nNeeded > 1) {
                     sb.append(" You have ");
-                    sb.append(nNeeded - nDiscard);
+                    sb.append(nNeeded - this.nDiscard);
                     sb.append(" remaining.");
                 }
                 AllZone.getDisplay().showMessage(sb.toString());
@@ -312,7 +312,7 @@ public class CostDiscard extends CostPartWithList {
 
             @Override
             public void selectButtonCancel() {
-                cancel();
+                this.cancel();
             }
 
             @Override
@@ -322,29 +322,29 @@ public class CostDiscard extends CostPartWithList {
                     card.getController().discard(card, sp);
                     part.addToList(card);
                     handList.remove(card);
-                    nDiscard++;
+                    this.nDiscard++;
 
                     // in case no more cards in hand
-                    if (nDiscard == nNeeded) {
-                        done();
+                    if (this.nDiscard == nNeeded) {
+                        this.done();
                     } else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                         // really
-                                                                                      // shouldn't
-                                                                                      // happen
-                        cancel();
+                        // shouldn't
+                        // happen
+                        this.cancel();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
 
             public void cancel() {
-                stop();
+                this.stop();
                 payment.cancelCost();
             }
 
             public void done() {
-                stop();
+                this.stop();
                 part.addListToHash(sp, "Discarded");
                 payment.paidCost(part);
             }

@@ -27,7 +27,7 @@ public class CostMill extends CostPartWithList {
      *            the amount
      */
     public CostMill(final String amount) {
-        this.amount = amount;
+        this.setAmount(amount);
     }
 
     /*
@@ -39,17 +39,17 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        PlayerZone zone = activator.getZone(Constant.Zone.Library);
+        final PlayerZone zone = activator.getZone(Constant.Zone.Library);
 
-        Integer i = convertAmount();
+        Integer i = this.convertAmount();
 
         if (i == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(this.getAmount());
             if (sVar.equals("XChoice")) {
                 return true;
             }
 
-            i = AbilityFactory.calculateAmount(source, amount, ability);
+            i = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
         return i < zone.size();
@@ -64,22 +64,22 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        resetList();
+        this.resetList();
 
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
                 return false;
             }
 
-            c = AbilityFactory.calculateAmount(source, amount, ability);
+            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
+        this.list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
 
-        if (list == null || list.size() < c) {
+        if ((this.list == null) || (this.list.size() < c)) {
             return false;
         }
 
@@ -94,8 +94,9 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (Card c : list)
+        for (final Card c : this.list) {
             AllZone.getGameAction().moveToGraveyard(c);
+        }
     }
 
     /*
@@ -107,40 +108,40 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String amount = getAmount();
-        Integer c = convertAmount();
-        Player activator = ability.getActivatingPlayer();
+        final String amount = this.getAmount();
+        Integer c = this.convertAmount();
+        final Player activator = ability.getActivatingPlayer();
 
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, list.size());
+                c = CostUtil.chooseXValue(source, this.list.size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        CardList list = activator.getCardsIn(Zone.Library, c);
+        final CardList list = activator.getCardsIn(Zone.Library, c);
 
-        if (list == null || list.size() > c) {
+        if ((list == null) || (list.size() > c)) {
             // I don't believe this is possible
             payment.cancelCost();
             return false;
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Mill ").append(c).append(" cards from your library?");
 
-        boolean doMill = GameActionUtil.showYesNoDialog(source, sb.toString());
+        final boolean doMill = GameActionUtil.showYesNoDialog(source, sb.toString());
         if (doMill) {
-            resetList();
-            Iterator<Card> itr = list.iterator();
+            this.resetList();
+            final Iterator<Card> itr = list.iterator();
             while (itr.hasNext()) {
-                Card card = (Card) itr.next();
-                addToList(card);
+                final Card card = itr.next();
+                this.addToList(card);
                 AllZone.getGameAction().moveToGraveyard(card);
             }
-            addListToHash(ability, "Milled");
+            this.addListToHash(ability, "Milled");
             payment.paidCost(this);
             return false;
         } else {
@@ -156,18 +157,18 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        Integer i = convertAmount();
+        final StringBuilder sb = new StringBuilder();
+        final Integer i = this.convertAmount();
         sb.append("Put the top ");
 
         if (i != null) {
             sb.append(i);
         } else {
-            sb.append(amount);
+            sb.append(this.getAmount());
         }
 
         sb.append(" card");
-        if (i == null || i > 1) {
+        if ((i == null) || (i > 1)) {
             sb.append("s");
         }
         sb.append(" from the top of your library into your graveyard");

@@ -13,8 +13,8 @@ public class CostTap extends CostPart {
      * Instantiates a new cost tap.
      */
     public CostTap() {
-        isReusable = true;
-        isUndoable = true;
+        this.setReusable(true);
+        this.setUndoable(true);
     }
 
     /*

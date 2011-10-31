@@ -10,25 +10,25 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPart {
 
     /** The is reusable. */
-    protected boolean isReusable = false;
+    private boolean isReusable = false;
 
     /** The is undoable. */
-    protected boolean isUndoable = false;
+    private boolean isUndoable = false;
 
     /** The optional. */
-    protected boolean optional = false;
+    private boolean optional = false;
 
     /** The optional type. */
-    protected String optionalType = null;
+    private String optionalType = null;
 
     /** The amount. */
-    protected String amount = "1";
+    private String amount = "1";
 
     /** The type. */
-    protected String type = "Card";
+    private String type = "Card";
 
     /** The type description. */
-    protected String typeDescription = null;
+    private String typeDescription = null;
 
     /**
      * Instantiates a new cost part.
@@ -47,9 +47,9 @@ public abstract class CostPart {
      *            the description
      */
     public CostPart(final String amount, final String type, final String description) {
-        this.amount = amount;
-        this.type = type;
-        this.typeDescription = description;
+        this.setAmount(amount);
+        this.setType(type);
+        this.setTypeDescription(description);
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class CostPart {
      * @return the amount
      */
     public final String getAmount() {
-        return amount;
+        return this.amount;
     }
 
     /**
@@ -67,7 +67,7 @@ public abstract class CostPart {
      * @return the type
      */
     public final String getType() {
-        return type;
+        return this.type;
     }
 
     /**
@@ -76,7 +76,7 @@ public abstract class CostPart {
      * @return the this
      */
     public final boolean getThis() {
-        return type.equals("CARDNAME");
+        return this.getType().equals("CARDNAME");
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class CostPart {
      * @return the type description
      */
     public final String getTypeDescription() {
-        return typeDescription;
+        return this.typeDescription;
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class CostPart {
      * @return the descriptive type
      */
     public final String getDescriptiveType() {
-        return typeDescription == null ? type : typeDescription;
+        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class CostPart {
      * @return true, if is reusable
      */
     public final boolean isReusable() {
-        return isReusable;
+        return this.isReusable;
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract class CostPart {
      * @return true, if is undoable
      */
     public final boolean isUndoable() {
-        return isUndoable;
+        return this.isUndoable;
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class CostPart {
      * @return the optional type
      */
     public final String getOptionalType() {
-        return optionalType;
+        return this.optionalType;
     }
 
     /**
@@ -142,8 +142,8 @@ public abstract class CostPart {
     public final Integer convertAmount() {
         Integer i = null;
         try {
-            i = Integer.parseInt(amount);
-        } catch (NumberFormatException e) {
+            i = Integer.parseInt(this.getAmount());
+        } catch (final NumberFormatException e) {
         }
         return i;
     }
@@ -206,6 +206,7 @@ public abstract class CostPart {
      * 
      * @see java.lang.Object#toString()
      */
+    @Override
     public abstract String toString();
 
     /**
@@ -215,4 +216,39 @@ public abstract class CostPart {
      *            the source
      */
     public abstract void refund(Card source);
+
+    /**
+     * @param isReusable the isReusable to set
+     */
+    public void setReusable(boolean isReusable) {
+        this.isReusable = isReusable; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(String amount) {
+        this.amount = amount; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param typeDescription the typeDescription to set
+     */
+    public void setTypeDescription(String typeDescription) {
+        this.typeDescription = typeDescription; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param isUndoable the isUndoable to set
+     */
+    public void setUndoable(boolean isUndoable) {
+        this.isUndoable = isUndoable; // TODO: Add 0 to parameter's name.
+    }
 }

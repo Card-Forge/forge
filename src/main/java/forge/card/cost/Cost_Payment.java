@@ -24,7 +24,7 @@ public class Cost_Payment {
     private Card card = null;
     private SpellAbility_Requirements req = null;
     private boolean bCancel = false;
-    private Map<CostPart, Boolean> paidCostParts = new HashMap<CostPart, Boolean>();
+    private final Map<CostPart, Boolean> paidCostParts = new HashMap<CostPart, Boolean>();
 
     /**
      * <p>
@@ -34,7 +34,7 @@ public class Cost_Payment {
      * @return a {@link forge.card.cost.Cost} object.
      */
     public final Cost getCost() {
-        return cost;
+        return this.cost;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Cost_Payment {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbility() {
-        return ability;
+        return this.ability;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Cost_Payment {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        return card;
+        return this.card;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Cost_Payment {
      *            object.
      */
     public final void setRequirements(final SpellAbility_Requirements reqs) {
-        req = reqs;
+        this.req = reqs;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Cost_Payment {
      * @return the requirements
      */
     public final SpellAbility_Requirements getRequirements() {
-        return req;
+        return this.req;
     }
 
     /**
@@ -90,7 +90,7 @@ public class Cost_Payment {
      *            a boolean.
      */
     public final void setCancel(final boolean cancel) {
-        bCancel = cancel;
+        this.bCancel = cancel;
     }
 
     /**
@@ -101,7 +101,7 @@ public class Cost_Payment {
      * @return a boolean.
      */
     public final boolean isCanceled() {
-        return bCancel;
+        return this.bCancel;
     }
 
     /**
@@ -117,10 +117,10 @@ public class Cost_Payment {
     public Cost_Payment(final Cost cost, final SpellAbility abil) {
         this.cost = cost;
         this.ability = abil;
-        card = abil.getSourceCard();
+        this.card = abil.getSourceCard();
 
-        for (CostPart part : cost.getCostParts()) {
-            paidCostParts.put(part, false);
+        for (final CostPart part : cost.getCostParts()) {
+            this.paidCostParts.put(part, false);
         }
     }
 
@@ -147,7 +147,7 @@ public class Cost_Payment {
             activator = card.getController();
         }
 
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (!part.canPay(ability, card, activator, cost)) {
                 return false;
             }
@@ -165,7 +165,7 @@ public class Cost_Payment {
      *            the b paid
      */
     public final void setPaidManaPart(final CostPart part, final boolean bPaid) {
-        paidCostParts.put(part, bPaid);
+        this.paidCostParts.put(part, bPaid);
     }
 
     /**
@@ -175,16 +175,16 @@ public class Cost_Payment {
      *            the part
      */
     public final void paidCost(final CostPart part) {
-        setPaidManaPart(part, true);
-        payCost();
+        this.setPaidManaPart(part, true);
+        this.payCost();
     }
 
     /**
      * Cancel cost.
      */
     public final void cancelCost() {
-        setCancel(true);
-        req.finishPaying();
+        this.setCancel(true);
+        this.req.finishPaying();
     }
 
     /**
@@ -196,24 +196,24 @@ public class Cost_Payment {
      */
     public final boolean payCost() {
         // Nothing actually ever checks this return value, is it needed?
-        if (bCancel) {
-            req.finishPaying();
+        if (this.bCancel) {
+            this.req.finishPaying();
             return false;
         }
 
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : this.cost.getCostParts()) {
             // This portion of the cost is already paid for, keep moving
-            if (paidCostParts.get(part)) {
+            if (this.paidCostParts.get(part)) {
                 continue;
             }
 
-            if (!part.payHuman(ability, card, this)) {
+            if (!part.payHuman(this.ability, this.card, this)) {
                 return false;
             }
         }
 
-        resetUndoList();
-        req.finishPaying();
+        this.resetUndoList();
+        this.req.finishPaying();
         return true;
     }
 
@@ -225,8 +225,8 @@ public class Cost_Payment {
      * @return a boolean.
      */
     public final boolean isAllPaid() {
-        for (CostPart part : paidCostParts.keySet()) {
-            if (!paidCostParts.get(part)) {
+        for (final CostPart part : this.paidCostParts.keySet()) {
+            if (!this.paidCostParts.get(part)) {
                 return false;
             }
         }
@@ -240,7 +240,7 @@ public class Cost_Payment {
      * </p>
      */
     public final void resetUndoList() {
-        for (CostPart part : paidCostParts.keySet()) {
+        for (final CostPart part : this.paidCostParts.keySet()) {
             if (part instanceof CostPartWithList) {
                 ((CostPartWithList) part).resetList();
             }
@@ -253,14 +253,14 @@ public class Cost_Payment {
      * </p>
      */
     public final void cancelPayment() {
-        for (CostPart part : paidCostParts.keySet()) {
-            if (paidCostParts.get(part) && part.isUndoable()) {
-                part.refund(card);
+        for (final CostPart part : this.paidCostParts.keySet()) {
+            if (this.paidCostParts.get(part) && part.isUndoable()) {
+                part.refund(this.card);
             }
         }
 
         // Move this to CostMana
-        AllZone.getHumanPlayer().getManaPool().unpaid(ability, false);
+        AllZone.getHumanPlayer().getManaPool().unpaid(this.ability, false);
     }
 
     /**
@@ -275,21 +275,21 @@ public class Cost_Payment {
 
         // Just in case it wasn't set, but honestly it shouldn't have gotten
         // here without being set
-        Player activator = AllZone.getComputerPlayer();
-        ability.setActivatingPlayer(activator);
+        final Player activator = AllZone.getComputerPlayer();
+        this.ability.setActivatingPlayer(activator);
 
-        Card source = ability.getSourceCard();
-        ArrayList<CostPart> parts = cost.getCostParts();
+        final Card source = this.ability.getSourceCard();
+        final ArrayList<CostPart> parts = this.cost.getCostParts();
 
         // Set all of the decisions before attempting to pay anything
-        for (CostPart part : parts) {
-            if (!part.decideAIPayment(ability, source, this)) {
+        for (final CostPart part : parts) {
+            if (!part.decideAIPayment(this.ability, source, this)) {
                 return false;
             }
         }
 
-        for (CostPart part : parts) {
-            part.payAI(ability, ability.getSourceCard(), this);
+        for (final CostPart part : parts) {
+            part.payAI(this.ability, this.ability.getSourceCard(), this);
         }
         return true;
     }
@@ -300,6 +300,6 @@ public class Cost_Payment {
      * </p>
      */
     public final void changeCost() {
-        cost.changeCost(ability);
+        this.cost.changeCost(this.ability);
     }
 }

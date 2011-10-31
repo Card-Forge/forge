@@ -18,8 +18,8 @@ import forge.gui.input.Input;
  */
 public class CostUtil {
     private static Random r = new Random();
-    private static double P1P1Percent = .25;
-    private static double OtherPercent = .9;
+    private static double p1p1Percent = .25;
+    private static double otherPercent = .9;
 
     /**
      * Check sacrifice cost.
@@ -31,11 +31,11 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkSacrificeCost(final Cost cost, final Card source) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
-                CostSacrifice sac = (CostSacrifice) part;
+                final CostSacrifice sac = (CostSacrifice) part;
 
-                String type = sac.getType();
+                final String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
                     continue;
@@ -61,9 +61,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkCreatureSacrificeCost(final Cost cost, final Card source) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
-                CostSacrifice sac = (CostSacrifice) part;
+                final CostSacrifice sac = (CostSacrifice) part;
                 if (sac.getThis() && source.isCreature()) {
                     return false;
                 }
@@ -84,10 +84,10 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkLifeCost(final Cost cost, final Card source, final int remainingLife) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
-                CostPayLife payLife = (CostPayLife) part;
-                if (AllZone.getComputerPlayer().getLife() - payLife.convertAmount() < remainingLife) {
+                final CostPayLife payLife = (CostPayLife) part;
+                if ((AllZone.getComputerPlayer().getLife() - payLife.convertAmount()) < remainingLife) {
                     return false;
                 }
             }
@@ -105,11 +105,11 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkDiscardCost(final Cost cost, final Card source) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
-                CostDiscard disc = (CostDiscard) part;
+                final CostDiscard disc = (CostDiscard) part;
 
-                String type = disc.getType();
+                final String type = disc.getType();
                 CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
@@ -130,19 +130,19 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
-                CostRemoveCounter remCounter = (CostRemoveCounter) part;
+                final CostRemoveCounter remCounter = (CostRemoveCounter) part;
 
                 // A card has a 25% chance per counter to be able to pass
                 // through here
                 // 4+ counters will always pass. 0 counters will never
-                Counters type = remCounter.getCounter();
-                double percent = type.name().equals("P1P1") ? P1P1Percent : OtherPercent;
-                int currentNum = source.getCounters(type);
+                final Counters type = remCounter.getCounter();
+                final double percent = type.name().equals("P1P1") ? CostUtil.p1p1Percent : CostUtil.otherPercent;
+                final int currentNum = source.getCounters(type);
 
-                double chance = percent * (currentNum / part.convertAmount());
-                if (chance <= r.nextFloat()) {
+                final double chance = percent * (currentNum / part.convertAmount());
+                if (chance <= CostUtil.r.nextFloat()) {
                     return false;
                 }
             }
@@ -161,10 +161,10 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean checkAddM1M1CounterCost(final Cost cost, final Card source) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPutCounter) {
-                CostPutCounter addCounter = (CostPutCounter) part;
-                Counters type = addCounter.getCounter();
+                final CostPutCounter addCounter = (CostPutCounter) part;
+                final Counters type = addCounter.getCounter();
 
                 if (type.equals(Counters.M1M1)) {
                     return false;
@@ -183,9 +183,9 @@ public class CostUtil {
      * @return true, if successful
      */
     public static boolean hasDiscardHandCost(final Cost cost) {
-        for (CostPart part : cost.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
-                CostDiscard disc = (CostDiscard) part;
+                final CostDiscard disc = (CostDiscard) part;
                 if (disc.getType().equals("Hand")) {
                     return true;
                 }
@@ -207,11 +207,12 @@ public class CostUtil {
      *            the max choice
      * @return the integer
      */
-    public static Integer determineAmount(final CostPart part, final Card source, final SpellAbility ability, final int maxChoice) {
-        String amount = part.getAmount();
+    public static Integer determineAmount(final CostPart part, final Card source, final SpellAbility ability,
+            final int maxChoice) {
+        final String amount = part.getAmount();
         Integer c = part.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, maxChoice);
@@ -232,17 +233,17 @@ public class CostUtil {
      * @return the int
      */
     public static int chooseXValue(final Card card, final int maxValue) {
-        String chosen = card.getSVar("ChosenX");
+        final String chosen = card.getSVar("ChosenX");
         if (chosen.length() > 0) {
             return AbilityFactory.calculateAmount(card, "ChosenX", null);
         }
 
-        Integer[] choiceArray = new Integer[maxValue + 1];
+        final Integer[] choiceArray = new Integer[maxValue + 1];
         for (int i = 0; i < choiceArray.length; i++) {
             choiceArray[i] = i;
         }
-        Object o = GuiUtils.getChoice(card.toString() + " - Choose a Value for X", choiceArray);
-        int chosenX = (Integer) o;
+        final Object o = GuiUtils.getChoice(card.toString() + " - Choose a Value for X", choiceArray);
+        final int chosenX = (Integer) o;
         card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
 
         return chosenX;

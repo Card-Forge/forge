@@ -42,19 +42,18 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability,
-            final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         CardList handList = activator.getCardsIn(Zone.Hand);
-        String type = getType();
-        Integer amount = convertAmount();
+        final String type = this.getType();
+        final Integer amount = this.convertAmount();
 
-        if (getThis()) {
+        if (this.getThis()) {
             if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand)) {
                 return false;
             }
         } else {
             handList = handList.getValidCards(type.split(";"), activator, source);
-            if (amount != null && amount > handList.size()) {
+            if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
                 return false;
             }
@@ -72,32 +71,32 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String type = getType();
-        Player activator = ability.getActivatingPlayer();
+        final String type = this.getType();
+        final Player activator = ability.getActivatingPlayer();
         CardList hand = activator.getCardsIn(Zone.Hand);
-        resetList();
+        this.resetList();
 
-        if (getThis()) {
+        if (this.getThis()) {
             if (!hand.contains(source)) {
                 return false;
             }
 
-            list.add(source);
+            this.list.add(source);
         } else {
             hand = hand.getValidCards(type.split(";"), activator, source);
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
             if (c == null) {
-                String sVar = source.getSVar(amount);
+                final String sVar = source.getSVar(this.getAmount());
                 if (sVar.equals("XChoice")) {
                     c = hand.size();
                 } else {
-                    c = AbilityFactory.calculateAmount(source, amount, ability);
+                    c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
                 }
             }
 
-            list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
+            this.list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
         }
-        return list != null;
+        return this.list != null;
     }
 
     /*
@@ -108,7 +107,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        GuiUtils.getChoiceOptional("Revealed cards:", list.toArray());
+        GuiUtils.getChoiceOptional("Revealed cards:", this.list.toArray());
     }
 
     /*
@@ -120,21 +119,21 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Player activator = ability.getActivatingPlayer();
-        String amount = getAmount();
-        resetList();
+        final Player activator = ability.getActivatingPlayer();
+        final String amount = this.getAmount();
+        this.resetList();
 
-        if (getThis()) {
-            addToList(source);
+        if (this.getThis()) {
+            this.addToList(source);
             payment.setPaidManaPart(this, true);
         } else {
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
 
             CardList handList = activator.getCardsIn(Zone.Hand);
-            handList = handList.getValidCards(type.split(";"), activator, ability.getSourceCard());
+            handList = handList.getValidCards(this.getType().split(";"), activator, ability.getSourceCard());
 
             if (c == null) {
-                String sVar = source.getSVar(amount);
+                final String sVar = source.getSVar(amount);
                 if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, handList.size());
                 } else {
@@ -142,10 +141,10 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            CostUtil.setInput(inputRevealCost(type, handList, payment, this, ability, c));
+            CostUtil.setInput(CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, c));
             return false;
         }
-        addListToHash(ability, "Revealed");
+        this.addListToHash(ability, "Revealed");
         return true;
     }
 
@@ -156,23 +155,23 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Reveal ");
 
-        Integer i = convertAmount();
+        final Integer i = this.convertAmount();
 
-        if (getThis()) {
-            sb.append(type);
+        if (this.getThis()) {
+            sb.append(this.getType());
         } else {
-            StringBuilder desc = new StringBuilder();
+            final StringBuilder desc = new StringBuilder();
 
-            if (type.equals("Card")) {
+            if (this.getType().equals("Card")) {
                 desc.append("Card");
             } else {
-                desc.append(typeDescription == null ? type : typeDescription).append(" card");
+                desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(" card");
             }
 
-            sb.append(Cost.convertAmountTypeToWords(i, amount, desc.toString()));
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
         }
         sb.append(" from your hand");
 
@@ -212,7 +211,7 @@ public class CostReveal extends CostPartWithList {
      */
     public static Input inputRevealCost(final String discType, final CardList handList, final Cost_Payment payment,
             final CostReveal part, final SpellAbility sa, final int nNeeded) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
 
             private int nReveal = 0;
@@ -220,23 +219,23 @@ public class CostReveal extends CostPartWithList {
             @Override
             public void showMessage() {
                 if (nNeeded == 0) {
-                    done();
+                    this.done();
                 }
 
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() < nNeeded) {
-                    stop();
+                    this.stop();
                 }
-                StringBuilder type = new StringBuilder("");
+                final StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
                 }
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Select a ");
                 sb.append(part.getDescriptiveType());
                 sb.append(" to reveal.");
                 if (nNeeded > 1) {
                     sb.append(" You have ");
-                    sb.append(nNeeded - nReveal);
+                    sb.append(nNeeded - this.nReveal);
                     sb.append(" remaining.");
                 }
                 AllZone.getDisplay().showMessage(sb.toString());
@@ -245,7 +244,7 @@ public class CostReveal extends CostPartWithList {
 
             @Override
             public void selectButtonCancel() {
-                cancel();
+                this.cancel();
             }
 
             @Override
@@ -254,29 +253,29 @@ public class CostReveal extends CostPartWithList {
                     // send in CardList for Typing
                     handList.remove(card);
                     part.addToList(card);
-                    nReveal++;
+                    this.nReveal++;
 
                     // in case no more cards in hand
-                    if (nReveal == nNeeded) {
-                        done();
+                    if (this.nReveal == nNeeded) {
+                        this.done();
                     } else if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                         // really
-                                                                                      // shouldn't
-                                                                                      // happen
-                        cancel();
+                        // shouldn't
+                        // happen
+                        this.cancel();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
 
             public void cancel() {
-                stop();
+                this.stop();
                 payment.cancelCost();
             }
 
             public void done() {
-                stop();
+                this.stop();
                 // "Inform" AI of the revealed cards
                 part.addListToHash(sa, "Revealed");
                 payment.paidCost(part);

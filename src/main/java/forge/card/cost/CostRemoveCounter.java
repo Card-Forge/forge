@@ -17,7 +17,7 @@ public class CostRemoveCounter extends CostPart {
     // Counter is tough),
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
-    private Counters counter;
+    private final Counters counter;
     private int lastPaidAmount = 0;
 
     /**
@@ -26,7 +26,7 @@ public class CostRemoveCounter extends CostPart {
      * @return the counter
      */
     public final Counters getCounter() {
-        return counter;
+        return this.counter;
     }
 
     /**
@@ -36,7 +36,7 @@ public class CostRemoveCounter extends CostPart {
      *            the new last paid amount
      */
     public final void setLastPaidAmount(final int paidAmount) {
-        lastPaidAmount = paidAmount;
+        this.lastPaidAmount = paidAmount;
     }
 
     /**
@@ -53,7 +53,7 @@ public class CostRemoveCounter extends CostPart {
      */
     public CostRemoveCounter(final String amount, final Counters counter, final String type, final String description) {
         super(amount, type, description);
-        isReusable = true;
+        this.setReusable(true);
 
         this.counter = counter;
     }
@@ -65,19 +65,19 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        if (counter.getName().equals("Loyalty")) {
-            sb.append("-").append(amount);
+        final StringBuilder sb = new StringBuilder();
+        if (this.counter.getName().equals("Loyalty")) {
+            sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");
-            Integer i = convertAmount();
-            sb.append(Cost.convertAmountTypeToWords(i, amount, counter.getName() + " counter"));
+            final Integer i = this.convertAmount();
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), this.counter.getName() + " counter"));
 
-            if (amount.equals("All")) {
+            if (this.getAmount().equals("All")) {
                 sb.append("s");
             }
 
-            sb.append(" from ").append(typeDescription == null ? type : typeDescription);
+            sb.append(" from ").append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription());
         }
         return sb.toString();
     }
@@ -89,7 +89,7 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final void refund(final Card source) {
-        source.addCounterFromNonEffect(counter, lastPaidAmount);
+        source.addCounterFromNonEffect(this.counter, this.lastPaidAmount);
     }
 
     /*
@@ -101,10 +101,10 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        Counters c = getCounter();
+        final Counters c = this.getCounter();
 
-        Integer amount = convertAmount();
-        if (amount != null && source.getCounters(c) - amount < 0) {
+        final Integer amount = this.convertAmount();
+        if ((amount != null) && ((source.getCounters(c) - amount) < 0)) {
             return false;
         }
 
@@ -119,11 +119,11 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, amount, ability);
+            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
-        source.subtractCounter(getCounter(), c);
+        source.subtractCounter(this.getCounter(), c);
     }
 
     /*
@@ -135,16 +135,16 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String amount = getAmount();
-        Counters type = getCounter();
-        Integer c = convertAmount();
-        int maxCounters = source.getCounters(type);
+        final String amount = this.getAmount();
+        final Counters type = this.getCounter();
+        Integer c = this.convertAmount();
+        final int maxCounters = source.getCounters(type);
 
         if (amount.equals("All")) {
             c = maxCounters;
         } else {
             if (c == null) {
-                String sVar = source.getSVar(amount);
+                final String sVar = source.getSVar(amount);
                 // Generalize this
                 if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, maxCounters);
@@ -157,7 +157,7 @@ public class CostRemoveCounter extends CostPart {
         if (maxCounters >= c) {
             source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
             source.subtractCounter(type, c);
-            setLastPaidAmount(c);
+            this.setLastPaidAmount(c);
             payment.setPaidManaPart(this, true);
         } else {
             payment.setCancel(true);
@@ -176,17 +176,17 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        Integer c = convertAmount();
+        Integer c = this.convertAmount();
         if (c == null) {
-            String sVar = source.getSVar(amount);
+            final String sVar = source.getSVar(this.getAmount());
             if (sVar.equals("XChoice")) {
                 return false;
             }
 
-            c = AbilityFactory.calculateAmount(source, amount, ability);
+            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
-        if (c > source.getCounters(getCounter())) {
-            System.out.println("Not enough " + getCounter() + " on " + source.getName());
+        if (c > source.getCounters(this.getCounter())) {
+            System.out.println("Not enough " + this.getCounter() + " on " + source.getName());
             return false;
         }
         return true;

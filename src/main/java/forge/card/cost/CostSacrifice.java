@@ -41,19 +41,19 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Sacrifice ");
 
-        Integer i = convertAmount();
+        final Integer i = this.convertAmount();
 
-        if (getThis()) {
-            sb.append(type);
+        if (this.getThis()) {
+            sb.append(this.getType());
         } else {
-            String desc = typeDescription == null ? type : typeDescription;
+            final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
             if (i != null) {
                 sb.append(Cost.convertIntAndTypeToWords(i, desc));
             } else {
-                sb.append(Cost.convertAmountTypeToWords(amount, desc));
+                sb.append(Cost.convertAmountTypeToWords(this.getAmount(), desc));
             }
         }
         return sb.toString();
@@ -80,13 +80,13 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         // You can always sac all
-        if (!getThis()) {
+        if (!this.getThis()) {
             CardList typeList = activator.getCardsIn(Zone.Battlefield);
-            typeList = typeList.getValidCards(getType().split(";"), activator, source);
+            typeList = typeList.getValidCards(this.getType().split(";"), activator, source);
 
-            Integer amount = convertAmount();
+            final Integer amount = this.convertAmount();
 
-            if (amount != null && typeList.size() < amount) {
+            if ((amount != null) && (typeList.size() < amount)) {
                 return false;
             }
 
@@ -108,8 +108,9 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (Card c : list)
+        for (final Card c : this.list) {
             AllZone.getGameAction().sacrifice(c);
+        }
     }
 
     /*
@@ -121,23 +122,23 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        String amount = getAmount();
-        String type = getType();
-        Player activator = ability.getActivatingPlayer();
+        final String amount = this.getAmount();
+        final String type = this.getType();
+        final Player activator = ability.getActivatingPlayer();
         CardList list = activator.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(type.split(";"), activator, source);
 
-        if (getThis()) {
+        if (this.getThis()) {
             CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
         } else if (amount.equals("All")) {
             this.list = list;
             CostSacrifice.sacrificeAll(ability, payment, this, list);
-            addListToHash(ability, "Sacrificed");
+            this.addListToHash(ability, "Sacrificed");
             return true;
         } else {
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
             if (c == null) {
-                String sVar = source.getSVar(amount);
+                final String sVar = source.getSVar(amount);
                 // Generalize this
                 if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, list.size());
@@ -161,26 +162,26 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        resetList();
-        Player activator = ability.getActivatingPlayer();
-        if (getThis()) {
-            list.add(source);
-        } else if (amount.equals("All")) {
+        this.resetList();
+        final Player activator = ability.getActivatingPlayer();
+        if (this.getThis()) {
+            this.list.add(source);
+        } else if (this.getAmount().equals("All")) {
             CardList typeList = activator.getCardsIn(Zone.Battlefield);
-            typeList = typeList.getValidCards(type.split(","), activator, source);
+            typeList = typeList.getValidCards(this.getType().split(","), activator, source);
             // Does the AI want to use Sacrifice All?
             return false;
         } else {
-            Integer c = convertAmount();
+            Integer c = this.convertAmount();
             if (c == null) {
-                if (source.getSVar(amount).equals("XChoice")) {
+                if (source.getSVar(this.getAmount()).equals("XChoice")) {
                     return false;
                 }
 
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
-            list = ComputerUtil.chooseSacrificeType(type, source, ability.getTargetCard(), c);
-            if (list == null) {
+            this.list = ComputerUtil.chooseSacrificeType(this.getType(), source, ability.getTargetCard(), c);
+            if (this.list == null) {
                 return false;
             }
         }
@@ -203,9 +204,10 @@ public class CostSacrifice extends CostPartWithList {
      * @param typeList
      *            TODO
      */
-    public static void sacrificeAll(final SpellAbility sa, final Cost_Payment payment, final CostPart part, final CardList typeList) {
+    public static void sacrificeAll(final SpellAbility sa, final Cost_Payment payment, final CostPart part,
+            final CardList typeList) {
         // TODO Ask First
-        for (Card card : typeList) {
+        for (final Card card : typeList) {
             payment.getAbility().addCostToHashList(card, "Sacrificed");
             AllZone.getGameAction().sacrifice(card);
         }
@@ -232,18 +234,18 @@ public class CostSacrifice extends CostPartWithList {
      */
     public static Input sacrificeFromList(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part,
             final CardList typeList, final int nNeeded) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private int nSacrifices = 0;
 
             @Override
             public void showMessage() {
                 if (nNeeded == 0) {
-                    done();
+                    this.done();
                 }
 
-                StringBuilder msg = new StringBuilder("Sacrifice ");
-                int nLeft = nNeeded - nSacrifices;
+                final StringBuilder msg = new StringBuilder("Sacrifice ");
+                final int nLeft = nNeeded - this.nSacrifices;
                 msg.append(nLeft).append(" ");
                 msg.append(part.getDescriptiveType());
                 if (nLeft > 1) {
@@ -256,43 +258,43 @@ public class CostSacrifice extends CostPartWithList {
 
             @Override
             public void selectButtonCancel() {
-                cancel();
+                this.cancel();
             }
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (typeList.contains(card)) {
-                    nSacrifices++;
+                    this.nSacrifices++;
                     part.addToList(card);
                     AllZone.getGameAction().sacrifice(card);
                     typeList.remove(card);
                     // in case nothing else to sacrifice
-                    if (nSacrifices == nNeeded) {
-                        done();
+                    if (this.nSacrifices == nNeeded) {
+                        this.done();
                     } else if (typeList.size() == 0) {
                         // happen
-                        cancel();
+                        this.cancel();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
 
             public void done() {
-                stop();
+                this.stop();
                 part.addListToHash(sa, "Sacrificed");
                 payment.paidCost(part);
             }
 
             public void cancel() {
-                stop();
+                this.stop();
 
                 payment.cancelCost();
             }
         };
 
         return target;
-    }// sacrificeType()
+    } // sacrificeType()
 
     /**
      * <p>
@@ -308,28 +310,28 @@ public class CostSacrifice extends CostPartWithList {
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
 
             @Override
             public void showMessage() {
-                Card card = sa.getSourceCard();
+                final Card card = sa.getSourceCard();
                 if (card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
-                    StringBuilder sb = new StringBuilder();
+                    final StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Sacrifice?");
-                    Object[] possibleValues = { "Yes", "No" };
-                    Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
+                    final Object[] possibleValues = { "Yes", "No" };
+                    final Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
                             possibleValues[0]);
                     if (choice.equals(0)) {
                         part.addToList(card);
                         part.addListToHash(sa, "Sacrificed");
                         AllZone.getGameAction().sacrifice(card);
-                        stop();
+                        this.stop();
                         payment.paidCost(part);
                     } else {
-                        stop();
+                        this.stop();
                         payment.cancelCost();
                     }
                 }
@@ -337,5 +339,5 @@ public class CostSacrifice extends CostPartWithList {
         };
 
         return target;
-    }// input_sacrifice()
+    } // input_sacrifice()
 }

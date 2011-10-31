@@ -18,7 +18,7 @@ public abstract class CostPartWithList extends CostPart {
      * @return the list
      */
     public final CardList getList() {
-        return list;
+        return this.list;
     }
 
     /**
@@ -28,14 +28,14 @@ public abstract class CostPartWithList extends CostPart {
      *            the new list
      */
     public final void setList(final CardList setList) {
-        list = setList;
+        this.list = setList;
     }
 
     /**
      * Reset list.
      */
     public final void resetList() {
-        list = new CardList();
+        this.list = new CardList();
     }
 
     /**
@@ -45,10 +45,10 @@ public abstract class CostPartWithList extends CostPart {
      *            the c
      */
     public final void addToList(final Card c) {
-        if (list == null) {
-            resetList();
+        if (this.list == null) {
+            this.resetList();
         }
-        list.add(c);
+        this.list.add(c);
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class CostPartWithList extends CostPart {
      *            the hash
      */
     public final void addListToHash(final SpellAbility sa, final String hash) {
-        for (Card card : list) {
+        for (final Card card : this.list) {
             sa.addCostToHashList(card, hash);
         }
     }
@@ -83,6 +83,6 @@ public abstract class CostPartWithList extends CostPart {
      */
     public CostPartWithList(final String amount, final String type, final String description) {
         super(amount, type, description);
-        resetList();
+        this.resetList();
     }
 }
