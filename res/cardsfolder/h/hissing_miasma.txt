@@ -2,7 +2,7 @@ Name:Hissing Miasma
 ManaCost:1 B B
 Types:Enchantment
 Text:no text
-T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you, its controller loses 1 life.
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you, its controller loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1 | SpellDescription$ Whenever a creature attacks you, its controller loses 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_miasma.jpg

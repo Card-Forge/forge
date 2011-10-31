@@ -2096,6 +2096,7 @@ public class CombatUtil {
         CardList otherAttackers = new CardList(AllZone.getCombat().getAttackers());
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
+        runParams.put("Attacked", AllZone.getCombat().getDefenderByAttacker(c));
         AllZone.getTriggerHandler().runTrigger("Attacks", runParams);
 
         // Annihilator:
