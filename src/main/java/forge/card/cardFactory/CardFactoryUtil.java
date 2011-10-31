@@ -3129,6 +3129,10 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardManaCost")) {
             return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
         }
+        // Count$CardNumColors
+        if (sq[0].contains("CardNumColors")) {
+            return CardFactoryUtil.doXMath(CardUtil.getColors(c).size(), m, c);
+        }
         // Count$ChosenNumber
         if (sq[0].contains("ChosenNumber")) {
             return CardFactoryUtil.doXMath(c.getChosenNumber(), m, c);
