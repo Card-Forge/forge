@@ -21,10 +21,10 @@ public class StaticAbility {
     private HashMap<String, String> mapParams = new HashMap<String, String>();
 
     /** The temporarily suppressed. */
-    protected boolean temporarilySuppressed = false;
+    private boolean temporarilySuppressed = false;
 
     /** The suppressed. */
-    protected boolean suppressed = false;
+    private boolean suppressed = false;
 
     /**
      * <p>
@@ -34,7 +34,7 @@ public class StaticAbility {
      * @return a {@link forge.Card} object.
      */
     public final Card getHostCard() {
-        return hostCard;
+        return this.hostCard;
     }
 
     /**
@@ -45,7 +45,7 @@ public class StaticAbility {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String> getMapParams() {
-        return mapParams;
+        return this.mapParams;
     }
 
     // *******************************************************
@@ -62,14 +62,14 @@ public class StaticAbility {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {
-        HashMap<String, String> mapParameters = new HashMap<String, String>();
+        final HashMap<String, String> mapParameters = new HashMap<String, String>();
 
         if (!(abString.length() > 0)) {
             throw new RuntimeException("StaticEffectFactory : getAbility -- abString too short in "
                     + hostCard.getName() + ": [" + abString + "]");
         }
 
-        String[] a = abString.split("\\|");
+        final String[] a = abString.split("\\|");
 
         for (int aCnt = 0; aCnt < a.length; aCnt++) {
             a[aCnt] = a[aCnt].trim();
@@ -79,17 +79,17 @@ public class StaticAbility {
             throw new RuntimeException("StaticEffectFactory : getAbility -- a[] too short in " + hostCard.getName());
         }
 
-        for (int i = 0; i < a.length; i++) {
-            String[] aa = a[i].split("\\$");
+        for (final String element : a) {
+            final String[] aa = element.split("\\$");
 
             for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
                 aa[aaCnt] = aa[aaCnt].trim();
             }
 
             if (aa.length != 2) {
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("StaticEffectFactory Parsing Error: Split length of ");
-                sb.append(a[i]).append(" in ").append(hostCard.getName()).append(" is not 2.");
+                sb.append(element).append(" in ").append(hostCard.getName()).append(" is not 2.");
                 throw new RuntimeException(sb.toString());
             }
 
@@ -108,46 +108,41 @@ public class StaticAbility {
      */
     public final int getLayer() {
 
-        if (!mapParams.get("Mode").equals("Continuous")) {
+        if (!this.mapParams.get("Mode").equals("Continuous")) {
             return 0;
         }
 
-        if (mapParams.containsKey("AddType") || mapParams.containsKey("RemoveType")
-                || mapParams.containsKey("RemoveCardType") || mapParams.containsKey("RemoveSubType")
-                || mapParams.containsKey("RemoveSuperType")) {
+        if (this.mapParams.containsKey("AddType") || this.mapParams.containsKey("RemoveType")
+                || this.mapParams.containsKey("RemoveCardType") || this.mapParams.containsKey("RemoveSubType")
+                || this.mapParams.containsKey("RemoveSuperType")) {
             return 4;
         }
 
-        if (mapParams.containsKey("AddColor") || mapParams.containsKey("RemoveColor")
-                || mapParams.containsKey("SetColor")) {
+        if (this.mapParams.containsKey("AddColor") || this.mapParams.containsKey("RemoveColor")
+                || this.mapParams.containsKey("SetColor")) {
             return 5;
         }
 
-        if (mapParams.containsKey("RemoveAllAbilities"))
-         {
+        if (this.mapParams.containsKey("RemoveAllAbilities")) {
             return 6; // Layer 6
         }
 
-        if (mapParams.containsKey("AddKeyword") || mapParams.containsKey("AddAbility")
-                || mapParams.containsKey("AddTrigger") || mapParams.containsKey("RemoveTriggers")
-                || mapParams.containsKey("RemoveKeyword"))
-         {
+        if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
+                || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
+                || this.mapParams.containsKey("RemoveKeyword")) {
             return 7; // Layer 6 (dependent)
         }
 
-        if (mapParams.containsKey("CharacteristicDefining"))
-         {
+        if (this.mapParams.containsKey("CharacteristicDefining")) {
             return 8; // Layer 7a
         }
 
-        if (mapParams.containsKey("AddPower") || mapParams.containsKey("AddToughness")
-                || mapParams.containsKey("SetPower") || mapParams.containsKey("SetToughness"))
-         {
+        if (this.mapParams.containsKey("AddPower") || this.mapParams.containsKey("AddToughness")
+                || this.mapParams.containsKey("SetPower") || this.mapParams.containsKey("SetToughness")) {
             return 9; // This is the collection of 7b and 7c
         }
 
-        if (mapParams.containsKey("AddHiddenKeyword"))
-         {
+        if (this.mapParams.containsKey("AddHiddenKeyword")) {
             return 10; // rules change
         }
 
@@ -163,9 +158,10 @@ public class StaticAbility {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        if (mapParams.containsKey("Description") && !isSuppressed()) {
-            return mapParams.get("Description").replace("CARDNAME", hostCard.getName());
+        if (this.mapParams.containsKey("Description") && !this.isSuppressed()) {
+            return this.mapParams.get("Description").replace("CARDNAME", this.hostCard.getName());
         } else {
             return "";
         }
@@ -181,8 +177,8 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        mapParams = getMapParams(params, host);
-        hostCard = host;
+        this.mapParams = this.getMapParams(params, host);
+        this.hostCard = host;
     }
 
     /**
@@ -194,11 +190,11 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final HashMap<String, String> params, final Card host) {
-        mapParams = new HashMap<String, String>();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            mapParams.put(entry.getKey(), entry.getValue());
+        this.mapParams = new HashMap<String, String>();
+        for (final Map.Entry<String, String> entry : params.entrySet()) {
+            this.mapParams.put(entry.getKey(), entry.getValue());
         }
-        hostCard = host;
+        this.hostCard = host;
     }
 
     // apply the ability if it has the right mode
@@ -211,11 +207,11 @@ public class StaticAbility {
     public final void applyAbility(final String mode) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!mapParams.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return;
         }
 
-        if (isSuppressed() || !checkConditions()) {
+        if (this.isSuppressed() || !this.checkConditions()) {
             return;
         }
 
@@ -240,15 +236,15 @@ public class StaticAbility {
      *            the b
      * @return the int
      */
-    public final int applyAbility(final String mode, final Card source,
-            final GameEntity target, final int in, final boolean b) {
+    public final int applyAbility(final String mode, final Card source, final GameEntity target, final int in,
+            final boolean b) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!mapParams.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return in;
         }
 
-        if (isSuppressed() || !checkConditions()) {
+        if (this.isSuppressed() || !this.checkConditions()) {
             return in;
         }
 
@@ -274,11 +270,11 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final Player activator) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!mapParams.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return false;
         }
 
-        if (isSuppressed() || !checkConditions()) {
+        if (this.isSuppressed() || !this.checkConditions()) {
             return false;
         }
 
@@ -299,42 +295,42 @@ public class StaticAbility {
      * @return true, if successful
      */
     public final boolean checkConditions() {
-        Player controller = hostCard.getController();
+        final Player controller = this.hostCard.getController();
 
         Zone effectZone = Zone.Battlefield; // default
 
-        if (mapParams.containsKey("EffectZone")) {
-            effectZone = Zone.smartValueOf(mapParams.get("EffectZone"));
+        if (this.mapParams.containsKey("EffectZone")) {
+            effectZone = Zone.smartValueOf(this.mapParams.get("EffectZone"));
         }
 
-        if (effectZone != null
-                && (!AllZone.getZoneOf(hostCard).getZoneType().equals(effectZone) || hostCard.isPhasedOut())) {
+        if ((effectZone != null)
+                && (!AllZone.getZoneOf(this.hostCard).getZoneType().equals(effectZone) || this.hostCard.isPhasedOut())) {
             return false;
         }
 
-        if (mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
+        if (this.mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
             return false;
         }
 
-        if (mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
+        if (this.mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
             return false;
         }
 
-        if (mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
+        if (this.mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
             return false;
         }
 
-        if (mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
+        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
+        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
 
-        if (mapParams.containsKey("TopCardOfLibraryIs")) {
-            Card topCard = controller.getCardsIn(Zone.Library).get(0);
-            if (!topCard.isValid(mapParams.get("TopCardOfLibraryIs").split(","), controller, hostCard)) {
+        if (this.mapParams.containsKey("TopCardOfLibraryIs")) {
+            final Card topCard = controller.getCardsIn(Zone.Library).get(0);
+            if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
                 return false;
             }
         }
@@ -350,15 +346,15 @@ public class StaticAbility {
          * }
          */
 
-        if (mapParams.containsKey("CheckSVar")) {
-            int sVar = AbilityFactory.calculateAmount(hostCard, mapParams.get("CheckSVar"), null);
+        if (this.mapParams.containsKey("CheckSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), null);
             String comparator = "GE1";
-            if (mapParams.containsKey("SVarCompare")) {
-                comparator = mapParams.get("SVarCompare");
+            if (this.mapParams.containsKey("SVarCompare")) {
+                comparator = this.mapParams.get("SVarCompare");
             }
-            String svarOperator = comparator.substring(0, 2);
-            String svarOperand = comparator.substring(2);
-            int operandValue = AbilityFactory.calculateAmount(hostCard, svarOperand, null);
+            final String svarOperator = comparator.substring(0, 2);
+            final String svarOperand = comparator.substring(2);
+            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
             if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -374,7 +370,7 @@ public class StaticAbility {
      *            the new temporarily suppressed
      */
     public final void setTemporarilySuppressed(final boolean supp) {
-        temporarilySuppressed = supp;
+        this.temporarilySuppressed = supp;
     }
 
     /**
@@ -383,7 +379,7 @@ public class StaticAbility {
      * @return true, if is suppressed
      */
     public final boolean isSuppressed() {
-        return (suppressed || temporarilySuppressed);
+        return (this.suppressed || this.temporarilySuppressed);
     }
 
 } // end class StaticEffectFactory

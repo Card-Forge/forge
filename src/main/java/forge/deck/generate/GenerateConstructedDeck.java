@@ -26,7 +26,7 @@ public class GenerateConstructedDeck {
     private String color1;
     private String color2;
 
-    private Map<String, String> map = new HashMap<String, String>();
+    private final Map<String, String> map = new HashMap<String, String>();
 
     /**
      * <p>
@@ -34,7 +34,7 @@ public class GenerateConstructedDeck {
      * </p>
      */
     public GenerateConstructedDeck() {
-        setupMap();
+        this.setupMap();
     }
 
     /**
@@ -43,11 +43,11 @@ public class GenerateConstructedDeck {
      * </p>
      */
     private void setupMap() {
-        map.put(Constant.Color.BLACK, "Swamp");
-        map.put(Constant.Color.BLUE, "Island");
-        map.put(Constant.Color.GREEN, "Forest");
-        map.put(Constant.Color.RED, "Mountain");
-        map.put(Constant.Color.WHITE, "Plains");
+        this.map.put(Constant.Color.BLACK, "Swamp");
+        this.map.put(Constant.Color.BLUE, "Island");
+        this.map.put(Constant.Color.GREEN, "Forest");
+        this.map.put(Constant.Color.RED, "Mountain");
+        this.map.put(Constant.Color.WHITE, "Plains");
     }
 
     /**
@@ -63,12 +63,12 @@ public class GenerateConstructedDeck {
         int check;
 
         do {
-            deck = get2ColorDeck();
+            deck = this.get2ColorDeck();
             check = deck.getType("Creature").size();
 
-        } while (check < 16 || 24 < check);
+        } while ((check < 16) || (24 < check));
 
-        addLand(deck);
+        this.addLand(deck);
 
         if (deck.size() != 60) {
             throw new RuntimeException(
@@ -90,10 +90,10 @@ public class GenerateConstructedDeck {
     private void addLand(final CardList list) {
         Card land;
         for (int i = 0; i < 13; i++) {
-            land = AllZone.getCardFactory().getCard(map.get(color1).toString(), AllZone.getComputerPlayer());
+            land = AllZone.getCardFactory().getCard(this.map.get(this.color1).toString(), AllZone.getComputerPlayer());
             list.add(land);
 
-            land = AllZone.getCardFactory().getCard(map.get(color2).toString(), AllZone.getComputerPlayer());
+            land = AllZone.getCardFactory().getCard(this.map.get(this.color2).toString(), AllZone.getComputerPlayer());
             list.add(land);
         }
     } // addLand()
@@ -109,7 +109,7 @@ public class GenerateConstructedDeck {
      *         never null
      */
     private CardList getCards() {
-        return filterBadCards(AllZone.getCardFactory());
+        return this.filterBadCards(AllZone.getCardFactory());
     } // getCards()
 
     /**
@@ -120,14 +120,14 @@ public class GenerateConstructedDeck {
      * @return a {@link forge.CardList} object.
      */
     private CardList get2ColorDeck() {
-        CardList deck = get2Colors(getCards());
+        final CardList deck = this.get2Colors(this.getCards());
 
-        CardList out = new CardList();
+        final CardList out = new CardList();
         deck.shuffle();
 
         // trim deck size down to 34 cards, presumes 26 land, for a total of 60
         // cards
-        for (int i = 0; i < 34 && i < deck.size(); i++) {
+        for (int i = 0; (i < 34) && (i < deck.size()); i++) {
             out.add(deck.get(i));
         }
         return out;
@@ -151,15 +151,16 @@ public class GenerateConstructedDeck {
             b = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
         } while (a == b); // do not want to get the same color twice
 
-        color1 = Constant.Color.ONLY_COLORS[a];
-        color2 = Constant.Color.ONLY_COLORS[b];
+        this.color1 = Constant.Color.ONLY_COLORS[a];
+        this.color2 = Constant.Color.ONLY_COLORS[b];
 
         CardList out = new CardList();
-        out.addAll(CardListUtil.getColor(in, color1));
-        out.addAll(CardListUtil.getColor(in, color2));
+        out.addAll(CardListUtil.getColor(in, this.color1));
+        out.addAll(CardListUtil.getColor(in, this.color2));
         out.shuffle();
 
-        CardList artifact = in.filter(new CardListFilter() {
+        final CardList artifact = in.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // weird like Sarcomite Myr which is a colored artifact
@@ -170,8 +171,9 @@ public class GenerateConstructedDeck {
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
+                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -179,7 +181,7 @@ public class GenerateConstructedDeck {
             }
         });
 
-        out = filterBadCards(out);
+        out = this.filterBadCards(out);
         return out;
     }
 
@@ -197,19 +199,22 @@ public class GenerateConstructedDeck {
 
         final ArrayList<Card> goodLand = new ArrayList<Card>();
 
-        CardList out = CardFilter.filter(sequence, new CardListFilter() {
+        final CardList out = CardFilter.filter(sequence, new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                ArrayList<String> list = CardUtil.getColors(c);
+                final ArrayList<String> list = CardUtil.getColors(c);
                 if (list.size() == 2) {
-                    if (!(list.contains(color1) && list.contains(color2))) {
+                    if (!(list.contains(GenerateConstructedDeck.this.color1) && list
+                            .contains(GenerateConstructedDeck.this.color2))) {
                         return false;
                     }
                 }
-                return CardUtil.getColors(c).size() <= 2 // only dual colored
-                                                         // gold cards
+                return ((CardUtil.getColors(c).size() <= 2 // only dual colored
+                        )
+                        // gold cards
                         && !c.isLand() // no land
-                        && !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True")
-                        // OR very important
+                        && !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True"))
+                // OR very important
                         || goodLand.contains(c.getName());
             }
         });

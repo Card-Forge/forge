@@ -1,8 +1,5 @@
 package forge.deck;
 
-import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -53,6 +50,7 @@ import freemarker.template.TemplateException;
 public class DeckManager {
     /** Constant <code>BDKFileFilter</code>. */
     private static FilenameFilter bdkFileFilter = new FilenameFilter() {
+        @Override
         public boolean accept(final File dir, final String name) {
             return name.endsWith(".bdk");
         }
@@ -60,6 +58,7 @@ public class DeckManager {
 
     /** Constant <code>DCKFileFilter</code>. */
     public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
+        @Override
         public boolean accept(final File dir, final String name) {
             return name.endsWith(".dck");
         }
@@ -125,9 +124,9 @@ public class DeckManager {
                 }
                 this.deckMap = new HashMap<String, Deck>();
                 this.draftMap = new HashMap<String, Deck[]>();
-                readAllDecks();
+                this.readAllDecks();
             }
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
@@ -143,7 +142,7 @@ public class DeckManager {
      * @return a boolean.
      */
     public final boolean isUnique(final String deckName) {
-        return !deckMap.containsKey(deckName);
+        return !this.deckMap.containsKey(deckName);
     }
 
     /**
@@ -156,7 +155,7 @@ public class DeckManager {
      * @return a boolean.
      */
     public final boolean isUniqueDraft(final String deckName) {
-        return !draftMap.keySet().contains(deckName);
+        return !this.draftMap.keySet().contains(deckName);
     }
 
     /**
@@ -169,7 +168,7 @@ public class DeckManager {
      * @return a {@link forge.deck.Deck} object.
      */
     public final Deck getDeck(final String deckName) {
-        return deckMap.get(deckName);
+        return this.deckMap.get(deckName);
     }
 
     /**
@@ -185,7 +184,7 @@ public class DeckManager {
             throw new RuntimeException("DeckManager : addDeck() error, deck type is Draft");
         }
 
-        deckMap.put(deck.getName(), deck);
+        this.deckMap.put(deck.getName(), deck);
     }
 
     /**
@@ -197,7 +196,7 @@ public class DeckManager {
      *            a {@link java.lang.String} object.
      */
     public final void deleteDeck(final String deckName) {
-        deckMap.remove(deckName);
+        this.deckMap.remove(deckName);
     }
 
     /**
@@ -210,11 +209,11 @@ public class DeckManager {
      * @return an array of {@link forge.deck.Deck} objects.
      */
     public final Deck[] getDraftDeck(final String deckName) {
-        if (!draftMap.containsKey(deckName)) {
+        if (!this.draftMap.containsKey(deckName)) {
             throw new RuntimeException("DeckManager : getDraftDeck() error, deck name not found - " + deckName);
         }
 
-        return draftMap.get(deckName);
+        return this.draftMap.get(deckName);
     }
 
     /**
@@ -226,9 +225,9 @@ public class DeckManager {
      *            an array of {@link forge.deck.Deck} objects.
      */
     public final void addDraftDeck(final Deck[] deck) {
-        checkDraftDeck(deck);
+        this.checkDraftDeck(deck);
 
-        draftMap.put(deck[0].toString(), deck);
+        this.draftMap.put(deck[0].toString(), deck);
     }
 
     /**
@@ -240,13 +239,13 @@ public class DeckManager {
      *            a {@link java.lang.String} object.
      */
     public final void deleteDraftDeck(final String deckName) {
-        if (!draftMap.containsKey(deckName)) {
+        if (!this.draftMap.containsKey(deckName)) {
             throw new RuntimeException("DeckManager : deleteDraftDeck() error, deck name not found - " + deckName);
         }
 
-        draftMap.remove(deckName);
+        this.draftMap.remove(deckName);
         // delete from disk as well
-        File f = makeFileName(deckName, GameType.Draft);
+        final File f = DeckManager.makeFileName(deckName, GameType.Draft);
         f.delete();
     }
 
@@ -259,7 +258,7 @@ public class DeckManager {
      *            an array of {@link forge.deck.Deck} objects.
      */
     private void checkDraftDeck(final Deck[] deck) {
-        if (deck == null || deck.length != 8 || deck[0].getName().equals("")
+        if ((deck == null) || (deck.length != 8) || deck[0].getName().equals("")
                 || (!deck[0].getDeckType().equals(GameType.Draft))) {
             throw new RuntimeException("DeckManager : checkDraftDeck() error, invalid deck");
         }
@@ -272,7 +271,7 @@ public class DeckManager {
      * @return a Collection<Deck>
      */
     public final Collection<Deck> getDecks() {
-        return deckMap.values();
+        return this.deckMap.values();
     }
 
     /**
@@ -282,7 +281,7 @@ public class DeckManager {
      * @return a Map<String, Deck[]>
      */
     public final Map<String, Deck[]> getDraftDecks() {
-        return new HashMap<String, Deck[]>(draftMap);
+        return new HashMap<String, Deck[]>(this.draftMap);
     }
 
     /**
@@ -294,15 +293,15 @@ public class DeckManager {
      * @return a ArrayList<String>
      */
     public final ArrayList<String> getDeckNames(final GameType deckType) {
-        ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<String>();
 
         // only get decks according to the OldGuiNewGame screen option
         if (deckType.equals(GameType.Draft)) {
-            for (String s : getDraftDecks().keySet()) {
+            for (final String s : this.getDraftDecks().keySet()) {
                 list.add(s);
             }
         } else {
-            for (Deck deck : getDecks()) {
+            for (final Deck deck : this.getDecks()) {
                 if (deckType.equals(deck.getDeckType())) {
                     list.add(deck.toString());
                 }
@@ -319,19 +318,20 @@ public class DeckManager {
      * </p>
      */
     public final void readAllDecks() {
-        deckMap.clear();
-        draftMap.clear();
+        this.deckMap.clear();
+        this.draftMap.clear();
 
         File[] files;
 
-        List<String> decksThatFailedToLoad = new ArrayList<String>();
-        files = deckDir.listFiles(DCK_FILE_FILTER);
-        for (File file : files) {
+        final List<String> decksThatFailedToLoad = new ArrayList<String>();
+        files = this.deckDir.listFiles(DeckManager.DCK_FILE_FILTER);
+        for (final File file : files) {
             try {
-                Deck newDeck = readDeck(file);
-                deckMap.put(newDeck.getName(), newDeck);
-            } catch (NoSuchElementException ex) {
-                String message = String.format("%s failed to load because ---- %s", file.getName(), ex.getMessage());
+                final Deck newDeck = DeckManager.readDeck(file);
+                this.deckMap.put(newDeck.getName(), newDeck);
+            } catch (final NoSuchElementException ex) {
+                final String message = String.format("%s failed to load because ---- %s", file.getName(),
+                        ex.getMessage());
                 decksThatFailedToLoad.add(message);
             }
         }
@@ -342,13 +342,13 @@ public class DeckManager {
                     "Some of your decks were not loaded.", JOptionPane.WARNING_MESSAGE);
         }
 
-        files = deckDir.listFiles(bdkFileFilter);
-        for (File file : files) {
-            Deck[] d = new Deck[8];
+        files = this.deckDir.listFiles(DeckManager.bdkFileFilter);
+        for (final File file : files) {
+            final Deck[] d = new Deck[8];
 
             boolean gotError = false;
             for (int i = 0; i < d.length; i++) {
-                d[i] = readDeck(new File(file, i + ".dck"));
+                d[i] = DeckManager.readDeck(new File(file, i + ".dck"));
                 if (d[i] == null) {
                     gotError = true;
                     break;
@@ -356,7 +356,7 @@ public class DeckManager {
             }
 
             if (!gotError) {
-                draftMap.put(d[0].getName(), d);
+                this.draftMap.put(d[0].getName(), d);
             }
         }
     }
@@ -372,28 +372,28 @@ public class DeckManager {
      */
     public static Deck readDeck(final File deckFile) {
 
-        List<String> lines = FileUtil.readFile(deckFile);
+        final List<String> lines = FileUtil.readFile(deckFile);
         if (lines.isEmpty()) {
             return null;
         }
 
-        Deck d = new Deck();
+        final Deck d = new Deck();
 
-        String firstLine = lines.get(0);
+        final String firstLine = lines.get(0);
         if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
-            readDeckOldMetadata(lines.iterator(), d);
+            DeckManager.readDeckOldMetadata(lines.iterator(), d);
         } else {
-            readDeckMetadata(findSection(lines, "metadata"), d);
+            DeckManager.readDeckMetadata(DeckManager.findSection(lines, "metadata"), d);
         }
-        d.setMain(readCardList(findSection(lines, "main")));
-        d.setSideboard(readCardList(findSection(lines, "sideboard")));
+        d.setMain(DeckManager.readCardList(DeckManager.findSection(lines, "main")));
+        d.setSideboard(DeckManager.readCardList(DeckManager.findSection(lines, "sideboard")));
 
         return d;
     }
 
     private static Iterator<String> findSection(final Iterable<String> lines, final String sectionName) {
-        Iterator<String> lineIterator = lines.iterator();
-        String toSearch = String.format("[%s]", sectionName);
+        final Iterator<String> lineIterator = lines.iterator();
+        final String toSearch = String.format("[%s]", sectionName);
         while (lineIterator.hasNext()) {
             if (toSearch.equalsIgnoreCase(lineIterator.next())) {
                 break;
@@ -405,32 +405,32 @@ public class DeckManager {
 
     private static void readDeckMetadata(final Iterator<String> lineIterator, final Deck d) {
         while (lineIterator.hasNext()) {
-            String line = lineIterator.next();
+            final String line = lineIterator.next();
             if (line.startsWith("[")) {
                 break;
             }
 
-            String[] linedata = line.split("=", 2);
-            String field = linedata[0].toLowerCase();
+            final String[] linedata = line.split("=", 2);
+            final String field = linedata[0].toLowerCase();
             String value = "";
 
             if (linedata.length > 1) {
                 value = linedata[1];
             }
 
-            if (NAME.equalsIgnoreCase(field)) {
+            if (DeckManager.NAME.equalsIgnoreCase(field)) {
                 d.setName(value);
 
-            } else if (COMMENT.equalsIgnoreCase(field)) {
+            } else if (DeckManager.COMMENT.equalsIgnoreCase(field)) {
                 d.setComment(value);
 
-            } else if (DECK_TYPE.equalsIgnoreCase(field)) {
+            } else if (DeckManager.DECK_TYPE.equalsIgnoreCase(field)) {
                 d.setDeckType(GameType.smartValueOf(value));
 
-            } else if (CSTM_POOL.equalsIgnoreCase(field)) {
+            } else if (DeckManager.CSTM_POOL.equalsIgnoreCase(field)) {
                 d.setCustomPool(value.equalsIgnoreCase("true"));
 
-            } else if (PLAYER.equalsIgnoreCase(field)) {
+            } else if (DeckManager.PLAYER.equalsIgnoreCase(field)) {
                 if ("human".equalsIgnoreCase(value)) {
                     d.setPlayerType(PlayerType.HUMAN);
 
@@ -454,11 +454,11 @@ public class DeckManager {
 
         String line;
         // readDeck name
-        String name = iterator.next();
+        final String name = iterator.next();
 
         // readDeck comments
         String comment = null;
-        while (iterator.hasNext() && (line = iterator.next()) != null && !line.equals("[general]")) {
+        while (iterator.hasNext() && ((line = iterator.next()) != null) && !line.equals("[general]")) {
             if (comment == null) {
                 comment = line;
             } else {
@@ -468,7 +468,7 @@ public class DeckManager {
 
         // readDeck deck type
 
-        GameType deckType = iterator.hasNext() ? GameType.smartValueOf(iterator.next()) : GameType.Constructed;
+        final GameType deckType = iterator.hasNext() ? GameType.smartValueOf(iterator.next()) : GameType.Constructed;
 
         d.setName(name);
         d.setComment(comment);
@@ -477,24 +477,24 @@ public class DeckManager {
 
     // Precondition: iterator should point at the first line of cards list
     private static List<String> readCardList(final Iterator<String> lineIterator) {
-        List<String> result = new ArrayList<String>();
-        Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
+        final List<String> result = new ArrayList<String>();
+        final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 
         while (lineIterator.hasNext()) {
-            String line = lineIterator.next();
+            final String line = lineIterator.next();
             if (line.startsWith("[")) {
                 break;
             } // there comes another section
 
-            Matcher m = p.matcher(line.trim());
+            final Matcher m = p.matcher(line.trim());
             m.matches();
-            String sCnt = m.group(2);
-            String cardName = m.group(3);
+            final String sCnt = m.group(2);
+            final String cardName = m.group(3);
             if (StringUtils.isBlank(cardName)) {
                 continue;
             }
 
-            int count = sCnt == null ? 1 : parseInt(sCnt);
+            final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
             for (int i = 0; i < count; i++) {
                 result.add(cardName);
             }
@@ -517,10 +517,10 @@ public class DeckManager {
      * @return a String
      */
     public static String cleanDeckName(final String in) {
-        char[] c = in.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < c.length && i < 20; i++) {
-            if (Character.isLetterOrDigit(c[i]) || c[i] == '-') {
+        final char[] c = in.toCharArray();
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; (i < c.length) && (i < 20); i++) {
+            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-')) {
                 sb.append(c[i]);
             }
         }
@@ -538,11 +538,11 @@ public class DeckManager {
      * @return a File
      */
     public static File makeFileName(final String deckName, final GameType deckType) {
-        File path = ForgeProps.getFile(NewConstants.NEW_DECKS);
+        final File path = ForgeProps.getFile(NewConstants.NEW_DECKS);
         if (deckType == GameType.Draft) {
-            return new File(path, deriveFileName(deckName) + ".bdk");
+            return new File(path, DeckManager.deriveFileName(deckName) + ".bdk");
         } else {
-            return new File(path, deriveFileName(deckName) + ".dck");
+            return new File(path, DeckManager.deriveFileName(deckName) + ".dck");
         }
     }
 
@@ -555,7 +555,7 @@ public class DeckManager {
      * @return a File
      */
     public static File makeFileName(final Deck deck) {
-        return makeFileName(deck.getName(), deck.getDeckType());
+        return DeckManager.makeFileName(deck.getName(), deck.getDeckType());
     }
 
     /**
@@ -567,15 +567,15 @@ public class DeckManager {
      */
     public static void writeDraftDecks(final Deck[] drafts) {
         try {
-            File f = makeFileName(drafts[0]);
+            final File f = DeckManager.makeFileName(drafts[0]);
             f.mkdir();
             for (int i = 0; i < drafts.length; i++) {
-                BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
-                writeDeck(drafts[i], out);
+                final BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
+                DeckManager.writeDeck(drafts[i], out);
                 out.close();
             }
 
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
@@ -594,27 +594,27 @@ public class DeckManager {
      *             if any.
      */
     private static void writeDeck(final Deck d, final BufferedWriter out) throws IOException {
-        out.write(format("[metadata]%n"));
+        out.write(String.format("[metadata]%n"));
 
-        out.write(format("%s=%s%n", NAME, d.getName().replaceAll("\n", "")));
-        out.write(format("%s=%s%n", DECK_TYPE, d.getDeckType()));
+        out.write(String.format("%s=%s%n", DeckManager.NAME, d.getName().replaceAll("\n", "")));
+        out.write(String.format("%s=%s%n", DeckManager.DECK_TYPE, d.getDeckType()));
         // these are optional
         if (d.getComment() != null) {
-            out.write(format("%s=%s%n", COMMENT, d.getComment().replaceAll("\n", "")));
+            out.write(String.format("%s=%s%n", DeckManager.COMMENT, d.getComment().replaceAll("\n", "")));
         }
         if (d.getPlayerType() != null) {
-            out.write(format("%s=%s%n", PLAYER, d.getPlayerType()));
+            out.write(String.format("%s=%s%n", DeckManager.PLAYER, d.getPlayerType()));
         }
 
         if (d.isCustomPool()) {
-            out.write(format("%s=%s%n", CSTM_POOL, "true"));
+            out.write(String.format("%s=%s%n", DeckManager.CSTM_POOL, "true"));
         }
 
-        out.write(format("%s%n", "[main]"));
-        writeCardPool(d.getMain(), out);
+        out.write(String.format("%s%n", "[main]"));
+        DeckManager.writeCardPool(d.getMain(), out);
 
-        out.write(format("%s%n", "[sideboard]"));
-        writeCardPool(d.getSideboard(), out);
+        out.write(String.format("%s%n", "[sideboard]"));
+        DeckManager.writeCardPool(d.getSideboard(), out);
     }
 
     /**
@@ -631,12 +631,12 @@ public class DeckManager {
      */
     private static void writeDeckHtml(final Deck d, final BufferedWriter out) throws IOException {
         Template temp = null;
-        int cardBorder = 0;
-        int height = 319;
-        int width = 222;
+        final int cardBorder = 0;
+        final int height = 319;
+        final int width = 222;
 
         /* Create and adjust the configuration */
-        Configuration cfg = new Configuration();
+        final Configuration cfg = new Configuration();
         try {
             cfg.setClassForTemplateLoading(d.getClass(), "/");
             cfg.setObjectWrapper(new DefaultObjectWrapper());
@@ -654,10 +654,10 @@ public class DeckManager {
             temp = cfg.getTemplate("proxy-template.ftl");
 
             /* Create a data-model */
-            Map<String, Object> root = new HashMap<String, Object>();
+            final Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
-            List<String> list = new ArrayList<String>();
-            for (Card card : d.getMain().toForgeCardList().toArray()) {
+            final List<String> list = new ArrayList<String>();
+            for (final Card card : d.getMain().toForgeCardList().toArray()) {
                 // System.out.println(card.getSets().get(card.getSets().size() -
                 // 1).URL);
                 list.add(card.getSets().get(card.getSets().size() - 1).getUrl());
@@ -669,8 +669,8 @@ public class DeckManager {
              * 1).URL); nameList.add(card.getName()); }
              */
 
-            TreeMap<String, Integer> map = new TreeMap<String, Integer>();
-            for (Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
+            final TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+            for (final Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
                 map.put(entry.getKey().getName(), entry.getValue());
                 // System.out.println(entry.getValue() + " " +
                 // entry.getKey().getName());
@@ -688,24 +688,24 @@ public class DeckManager {
             // StringWriter sw = new StringWriter();
             temp.process(root, out);
             out.flush();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.out.println(e.toString());
-        } catch (TemplateException e) {
+        } catch (final TemplateException e) {
             System.out.println(e.toString());
         }
     }
 
     private static void writeCardPool(final ItemPoolView<CardPrinted> pool, final BufferedWriter out)
             throws IOException {
-        List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
+        final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.byNameThenSet);
-        for (Entry<CardPrinted, Integer> e : main2sort) {
-            CardPrinted card = e.getKey();
-            boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
+        for (final Entry<CardPrinted, Integer> e : main2sort) {
+            final CardPrinted card = e.getKey();
+            final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
             if (hasBadSetInfo) {
-                out.write(format("%d %s%n", e.getValue(), card.getName()));
+                out.write(String.format("%d %s%n", e.getValue(), card.getName()));
             } else {
-                out.write(format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
+                out.write(String.format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
             }
         }
     }
@@ -722,10 +722,10 @@ public class DeckManager {
      */
     public static void writeDeck(final Deck d, final File f) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            writeDeck(d, writer);
+            final BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+            DeckManager.writeDeck(d, writer);
             writer.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -743,10 +743,10 @@ public class DeckManager {
      */
     public static void writeDeckHtml(final Deck d, final File f) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            writeDeckHtml(d, writer);
+            final BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+            DeckManager.writeDeckHtml(d, writer);
             writer.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(e);
         }
     }

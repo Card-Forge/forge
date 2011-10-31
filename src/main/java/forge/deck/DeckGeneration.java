@@ -35,7 +35,7 @@ public abstract class DeckGeneration {
         // TODO jendave to refactor deck generation
         Deck d = null;
 
-        ArrayList<String> decks = new ArrayList<String>();
+        final ArrayList<String> decks = new ArrayList<String>();
         decks.add("2-Color Deck");
         decks.add("3-Color Deck");
         decks.add("5-Color Deck");
@@ -44,25 +44,25 @@ public abstract class DeckGeneration {
         decks.add("5-Color Deck (original)");
         decks.add("Semi-Random Theme Deck");
 
-        String playerName = playerType.equals(PlayerType.HUMAN) ? "Human" : "Computer";
-        String prompt = String.format("Generate %s Deck", playerName);
+        final String playerName = playerType.equals(PlayerType.HUMAN) ? "Human" : "Computer";
+        final String prompt = String.format("Generate %s Deck", playerName);
 
-        Object o = GuiUtils.getChoice(prompt, decks.toArray());
+        final Object o = GuiUtils.getChoice(prompt, decks.toArray());
 
         if (o.toString().equals(decks.get(0))) {
-            d = generate2ColorDeck(playerType);
+            d = DeckGeneration.generate2ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(1))) {
-            d = generate3ColorDeck(playerType);
+            d = DeckGeneration.generate3ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(2))) {
-            d = generate5ColorDeck(playerType);
+            d = DeckGeneration.generate5ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(3))) {
-            d = generateConstructedDeck();
+            d = DeckGeneration.generateConstructedDeck();
         } else if (o.toString().equals(decks.get(4))) {
-            d = generateConstructed3ColorDeck();
+            d = DeckGeneration.generateConstructed3ColorDeck();
         } else if (o.toString().equals(decks.get(5))) {
-            d = generateConstructed5ColorDeck();
+            d = DeckGeneration.generateConstructed5ColorDeck();
         } else if (o.toString().equals(decks.get(6))) {
-            d = generateConstructedThemeDeck();
+            d = DeckGeneration.generateConstructedThemeDeck();
         }
 
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -80,9 +80,9 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructedDeck() {
-        GenerateConstructedDeck gen = new GenerateConstructedDeck();
-        CardList name = gen.generateDeck();
-        Deck deck = new Deck(GameType.Constructed);
+        final GenerateConstructedDeck gen = new GenerateConstructedDeck();
+        final CardList name = gen.generateDeck();
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -98,9 +98,9 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructed3ColorDeck() {
-        GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
-        CardList name = gen.generate3ColorDeck();
-        Deck deck = new Deck(GameType.Constructed);
+        final GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
+        final CardList name = gen.generate3ColorDeck();
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -116,9 +116,9 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructed5ColorDeck() {
-        GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
-        CardList name = gen.generate5ColorDeck();
-        Deck deck = new Deck(GameType.Constructed);
+        final GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
+        final CardList name = gen.generate5ColorDeck();
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < 60; i++) {
             deck.addMain(name.get(i).getName());
@@ -134,21 +134,21 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generateConstructedThemeDeck() {
-        GenerateThemeDeck gen = new GenerateThemeDeck();
-        ArrayList<String> tNames = gen.getThemeNames();
+        final GenerateThemeDeck gen = new GenerateThemeDeck();
+        final ArrayList<String> tNames = gen.getThemeNames();
         tNames.add(0, "Random");
-        Object o = GuiUtils.getChoice("Select a theme.", tNames.toArray());
+        final Object o = GuiUtils.getChoice("Select a theme.", tNames.toArray());
 
         String stDeck;
         if (o.toString().equals("Random")) {
-            Random r = MyRandom.getRandom();
+            final Random r = MyRandom.getRandom();
             stDeck = tNames.get(r.nextInt(tNames.size() - 1) + 1);
         } else {
             stDeck = o.toString();
         }
 
-        CardList td = gen.getThemeDeck(stDeck, 60);
-        Deck deck = new Deck(GameType.Constructed);
+        final CardList td = gen.getThemeDeck(stDeck, 60);
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < td.size(); i++) {
             deck.addMain(td.get(i).getName());
@@ -167,9 +167,9 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generate2ColorDeck(final PlayerType p) {
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
 
-        ArrayList<String> colors = new ArrayList<String>();
+        final ArrayList<String> colors = new ArrayList<String>();
         colors.add("Random");
         colors.add("white");
         colors.add("blue");
@@ -199,10 +199,10 @@ public abstract class DeckGeneration {
             colors.remove(c1);
             c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
-        Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
-        CardList d = gen.get2ColorDeck(60, p);
+        final Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
+        final CardList d = gen.get2ColorDeck(60, p);
 
-        Deck deck = new Deck(GameType.Constructed);
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());
@@ -222,9 +222,9 @@ public abstract class DeckGeneration {
      * @return a {@link forge.deck.Deck} object.
      */
     private static Deck generate3ColorDeck(final PlayerType p) {
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
 
-        ArrayList<String> colors = new ArrayList<String>();
+        final ArrayList<String> colors = new ArrayList<String>();
         colors.add("Random");
         colors.add("white");
         colors.add("blue");
@@ -265,10 +265,10 @@ public abstract class DeckGeneration {
             colors.remove(c2);
             c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
-        Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
-        CardList d = gen.get3ColorDeck(60, p);
+        final Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
+        final CardList d = gen.get3ColorDeck(60, p);
 
-        Deck deck = new Deck(GameType.Constructed);
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());
@@ -298,10 +298,10 @@ public abstract class DeckGeneration {
         // colors.add("red");
         // colors.add("green");
 
-        Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
-        CardList d = gen.get5ColorDeck(60, p);
+        final Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
+        final CardList d = gen.get5ColorDeck(60, p);
 
-        Deck deck = new Deck(GameType.Constructed);
+        final Deck deck = new Deck(GameType.Constructed);
 
         for (int i = 0; i < d.size(); i++) {
             deck.addMain(d.get(i).getName());

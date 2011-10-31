@@ -26,11 +26,10 @@ public class StaticAbility_PreventDamage {
      *            the is combat
      * @return the int
      */
-    public static int applyPreventDamageAbility(final StaticAbility stAb,
-            final Card source, final GameEntity target, final int damage,
-            final boolean isCombat) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
+    public static int applyPreventDamageAbility(final StaticAbility stAb, final Card source, final GameEntity target,
+            final int damage, final boolean isCombat) {
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
         int restDamage = damage;
 
         if (params.containsKey("Source")
@@ -51,7 +50,7 @@ public class StaticAbility_PreventDamage {
             return restDamage;
         }
 
-        if (params.containsKey("MaxDamage") && Integer.parseInt(params.get("MaxDamage")) < damage) {
+        if (params.containsKey("MaxDamage") && (Integer.parseInt(params.get("MaxDamage")) < damage)) {
             return restDamage;
         }
 

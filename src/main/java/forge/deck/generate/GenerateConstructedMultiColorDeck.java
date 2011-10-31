@@ -29,8 +29,8 @@ public class GenerateConstructedMultiColorDeck {
     private String color4;
     private String color5;
 
-    private Map<String, String> map = new HashMap<String, String>();
-    private Map<String, String[]> multiMap = new HashMap<String, String[]>();
+    private final Map<String, String> map = new HashMap<String, String>();
+    private final Map<String, String[]> multiMap = new HashMap<String, String[]>();
 
     /**
      * <p>
@@ -38,8 +38,8 @@ public class GenerateConstructedMultiColorDeck {
      * </p>
      */
     public GenerateConstructedMultiColorDeck() {
-        setupBasicLandMap();
-        setupMultiMap();
+        this.setupBasicLandMap();
+        this.setupMultiMap();
     }
 
     /**
@@ -48,11 +48,11 @@ public class GenerateConstructedMultiColorDeck {
      * </p>
      */
     private void setupBasicLandMap() {
-        map.put(Constant.Color.BLACK, "Swamp");
-        map.put(Constant.Color.BLUE, "Island");
-        map.put(Constant.Color.GREEN, "Forest");
-        map.put(Constant.Color.RED, "Mountain");
-        map.put(Constant.Color.WHITE, "Plains");
+        this.map.put(Constant.Color.BLACK, "Swamp");
+        this.map.put(Constant.Color.BLUE, "Island");
+        this.map.put(Constant.Color.GREEN, "Forest");
+        this.map.put(Constant.Color.RED, "Mountain");
+        this.map.put(Constant.Color.WHITE, "Plains");
     }
 
     /**
@@ -61,26 +61,30 @@ public class GenerateConstructedMultiColorDeck {
      * </p>
      */
     private void setupMultiMap() {
-        multiMap.put(Constant.Color.BLACK + Constant.Color.BLUE, new String[] { "Underground Sea", "Watery Grave" });
-        multiMap.put(Constant.Color.BLACK + Constant.Color.GREEN, new String[] { "Bayou", "Overgrown Tomb" });
-        multiMap.put(Constant.Color.BLACK + Constant.Color.RED, new String[] { "Badlands", "Blood Crypt" });
-        multiMap.put(Constant.Color.BLACK + Constant.Color.WHITE, new String[] { "Scrubland", "Godless Shrine" });
-        multiMap.put(Constant.Color.BLUE + Constant.Color.BLACK, new String[] { "Underground Sea", "Watery Grave" });
-        multiMap.put(Constant.Color.BLUE + Constant.Color.GREEN, new String[] { "Tropical Island", "Breeding Pool" });
-        multiMap.put(Constant.Color.BLUE + Constant.Color.RED, new String[] { "Volcanic Island", "Steam Vents" });
-        multiMap.put(Constant.Color.BLUE + Constant.Color.WHITE, new String[] { "Tundra", "Hallowed Fountain" });
-        multiMap.put(Constant.Color.GREEN + Constant.Color.BLACK, new String[] { "Bayou", "Overgrown Tomb" });
-        multiMap.put(Constant.Color.GREEN + Constant.Color.BLUE, new String[] { "Tropical Island", "Breeding Pool" });
-        multiMap.put(Constant.Color.GREEN + Constant.Color.RED, new String[] { "Taiga", "Stomping Ground" });
-        multiMap.put(Constant.Color.GREEN + Constant.Color.WHITE, new String[] { "Savannah", "Temple Garden" });
-        multiMap.put(Constant.Color.RED + Constant.Color.BLACK, new String[] { "Badlands", "Blood Crypt" });
-        multiMap.put(Constant.Color.RED + Constant.Color.BLUE, new String[] { "Volcanic Island", "Steam Vents" });
-        multiMap.put(Constant.Color.RED + Constant.Color.GREEN, new String[] { "Taiga", "Stomping Ground" });
-        multiMap.put(Constant.Color.RED + Constant.Color.WHITE, new String[] { "Plateau", "Sacred Foundry" });
-        multiMap.put(Constant.Color.WHITE + Constant.Color.BLACK, new String[] { "Scrubland", "Godless Shrine" });
-        multiMap.put(Constant.Color.WHITE + Constant.Color.BLUE, new String[] { "Tundra", "Hallowed Fountain" });
-        multiMap.put(Constant.Color.WHITE + Constant.Color.GREEN, new String[] { "Savannah", "Temple Garden" });
-        multiMap.put(Constant.Color.WHITE + Constant.Color.RED, new String[] { "Plateau", "Sacred Foundry" });
+        this.multiMap.put(Constant.Color.BLACK + Constant.Color.BLUE,
+                new String[] { "Underground Sea", "Watery Grave" });
+        this.multiMap.put(Constant.Color.BLACK + Constant.Color.GREEN, new String[] { "Bayou", "Overgrown Tomb" });
+        this.multiMap.put(Constant.Color.BLACK + Constant.Color.RED, new String[] { "Badlands", "Blood Crypt" });
+        this.multiMap.put(Constant.Color.BLACK + Constant.Color.WHITE, new String[] { "Scrubland", "Godless Shrine" });
+        this.multiMap.put(Constant.Color.BLUE + Constant.Color.BLACK,
+                new String[] { "Underground Sea", "Watery Grave" });
+        this.multiMap.put(Constant.Color.BLUE + Constant.Color.GREEN,
+                new String[] { "Tropical Island", "Breeding Pool" });
+        this.multiMap.put(Constant.Color.BLUE + Constant.Color.RED, new String[] { "Volcanic Island", "Steam Vents" });
+        this.multiMap.put(Constant.Color.BLUE + Constant.Color.WHITE, new String[] { "Tundra", "Hallowed Fountain" });
+        this.multiMap.put(Constant.Color.GREEN + Constant.Color.BLACK, new String[] { "Bayou", "Overgrown Tomb" });
+        this.multiMap.put(Constant.Color.GREEN + Constant.Color.BLUE,
+                new String[] { "Tropical Island", "Breeding Pool" });
+        this.multiMap.put(Constant.Color.GREEN + Constant.Color.RED, new String[] { "Taiga", "Stomping Ground" });
+        this.multiMap.put(Constant.Color.GREEN + Constant.Color.WHITE, new String[] { "Savannah", "Temple Garden" });
+        this.multiMap.put(Constant.Color.RED + Constant.Color.BLACK, new String[] { "Badlands", "Blood Crypt" });
+        this.multiMap.put(Constant.Color.RED + Constant.Color.BLUE, new String[] { "Volcanic Island", "Steam Vents" });
+        this.multiMap.put(Constant.Color.RED + Constant.Color.GREEN, new String[] { "Taiga", "Stomping Ground" });
+        this.multiMap.put(Constant.Color.RED + Constant.Color.WHITE, new String[] { "Plateau", "Sacred Foundry" });
+        this.multiMap.put(Constant.Color.WHITE + Constant.Color.BLACK, new String[] { "Scrubland", "Godless Shrine" });
+        this.multiMap.put(Constant.Color.WHITE + Constant.Color.BLUE, new String[] { "Tundra", "Hallowed Fountain" });
+        this.multiMap.put(Constant.Color.WHITE + Constant.Color.GREEN, new String[] { "Savannah", "Temple Garden" });
+        this.multiMap.put(Constant.Color.WHITE + Constant.Color.RED, new String[] { "Plateau", "Sacred Foundry" });
     }
 
     /**
@@ -96,12 +100,12 @@ public class GenerateConstructedMultiColorDeck {
         int check;
 
         do {
-            deck = get3ColorDeck();
+            deck = this.get3ColorDeck();
             check = deck.getType("Creature").size();
 
-        } while (check < 16 || 24 < check);
+        } while ((check < 16) || (24 < check));
 
-        addLand(deck, 3);
+        this.addLand(deck, 3);
 
         if (deck.size() != 60) {
             throw new RuntimeException(
@@ -122,9 +126,9 @@ public class GenerateConstructedMultiColorDeck {
     public final CardList generate5ColorDeck() {
         CardList deck;
 
-        deck = get5ColorDeck();
+        deck = this.get5ColorDeck();
 
-        addLand(deck, 5);
+        this.addLand(deck, 5);
 
         if (deck.size() != 60) {
             throw new RuntimeException(
@@ -147,92 +151,116 @@ public class GenerateConstructedMultiColorDeck {
      */
     private void addLand(final CardList list, final int colors) {
         if (colors == 3) {
-            int numberBasic = 2;
+            final int numberBasic = 2;
             Card land;
             for (int i = 0; i < numberBasic; i++) {
 
-                land = AllZone.getCardFactory().getCard(map.get(color1).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color1).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color2).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color2).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color3).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color3).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
             }
 
-            int numberDual = 4;
+            final int numberDual = 4;
             for (int i = 0; i < numberDual; i++) {
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color2)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color2)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color3)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color3)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color2 + color3)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color2 + this.color3)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
             }
             for (int i = 0; i < 2; i++) {
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color2)[1], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color2)[1],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color3)[1], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color3)[1],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color2 + color3)[1], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color2 + this.color3)[1],
+                        AllZone.getComputerPlayer());
                 list.add(land);
             }
         } else if (colors == 5) {
-            int numberBasic = 1;
+            final int numberBasic = 1;
             Card land;
             for (int i = 0; i < numberBasic; i++) {
 
-                land = AllZone.getCardFactory().getCard(map.get(color1).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color1).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color2).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color2).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color3).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color3).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color4).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color4).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(map.get(color5).toString(), AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.map.get(this.color5).toString(),
+                        AllZone.getComputerPlayer());
                 list.add(land);
             }
 
-            int numberDual = 2;
+            final int numberDual = 2;
             for (int i = 0; i < numberDual; i++) {
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color2)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color2)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color3)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color3)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color4)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color4)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color1 + color5)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color1 + this.color5)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color2 + color3)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color2 + this.color3)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color2 + color4)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color2 + this.color4)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color2 + color5)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color2 + this.color5)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color3 + color4)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color3 + this.color4)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color3 + color5)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color3 + this.color5)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
 
-                land = AllZone.getCardFactory().getCard(multiMap.get(color4 + color5)[0], AllZone.getComputerPlayer());
+                land = AllZone.getCardFactory().getCard(this.multiMap.get(this.color4 + this.color5)[0],
+                        AllZone.getComputerPlayer());
                 list.add(land);
             }
 
@@ -251,7 +279,7 @@ public class GenerateConstructedMultiColorDeck {
      *         empty, but never null
      */
     private CardList getCards(final int colors) {
-        return filterBadCards(AllZone.getCardFactory(), colors);
+        return this.filterBadCards(AllZone.getCardFactory(), colors);
     } // getCards()
 
     /**
@@ -262,14 +290,14 @@ public class GenerateConstructedMultiColorDeck {
      * @return a {@link forge.CardList} object.
      */
     private CardList get3ColorDeck() {
-        CardList deck = get3Colors(getCards(3));
+        final CardList deck = this.get3Colors(this.getCards(3));
 
-        CardList out = new CardList();
+        final CardList out = new CardList();
         deck.shuffle();
 
         // trim deck size down to 36 cards, presumes 24 land, for a total of 60
         // cards
-        for (int i = 0; i < 36 && i < deck.size(); i++) {
+        for (int i = 0; (i < 36) && (i < deck.size()); i++) {
             out.add(deck.get(i));
         }
 
@@ -284,14 +312,14 @@ public class GenerateConstructedMultiColorDeck {
      * @return a {@link forge.CardList} object.
      */
     private CardList get5ColorDeck() {
-        CardList deck = get5Colors(getCards(5));
+        final CardList deck = this.get5Colors(this.getCards(5));
 
-        CardList out = new CardList();
+        final CardList out = new CardList();
         deck.shuffle();
 
         // trim deck size down to 36 cards, presumes 24 land, for a total of 60
         // cards
-        for (int i = 0; i < 36 && i < deck.size(); i++) {
+        for (int i = 0; (i < 36) && (i < deck.size()); i++) {
             out.add(deck.get(i));
         }
 
@@ -316,20 +344,22 @@ public class GenerateConstructedMultiColorDeck {
         do {
             b = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
             c = CardUtil.getRandomIndex(Constant.Color.ONLY_COLORS);
-        } while (a == b || a == c || b == c); // do not want to get the same
-                                             // color thrice
+        } while ((a == b) || (a == c) || (b == c)); // do not want to get the
+                                                    // same
+        // color thrice
 
-        color1 = Constant.Color.ONLY_COLORS[a];
-        color2 = Constant.Color.ONLY_COLORS[b];
-        color3 = Constant.Color.ONLY_COLORS[c];
+        this.color1 = Constant.Color.ONLY_COLORS[a];
+        this.color2 = Constant.Color.ONLY_COLORS[b];
+        this.color3 = Constant.Color.ONLY_COLORS[c];
 
         CardList out = new CardList();
-        out.addAll(CardListUtil.getColor(in, color1));
-        out.addAll(CardListUtil.getColor(in, color2));
-        out.addAll(CardListUtil.getColor(in, color3));
+        out.addAll(CardListUtil.getColor(in, this.color1));
+        out.addAll(CardListUtil.getColor(in, this.color2));
+        out.addAll(CardListUtil.getColor(in, this.color3));
         out.shuffle();
 
-        CardList artifact = in.filter(new CardListFilter() {
+        final CardList artifact = in.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
@@ -340,8 +370,9 @@ public class GenerateConstructedMultiColorDeck {
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
+                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -349,7 +380,7 @@ public class GenerateConstructedMultiColorDeck {
             }
         });
 
-        out = filterBadCards(out, 3);
+        out = this.filterBadCards(out, 3);
         return out;
     }
 
@@ -364,11 +395,11 @@ public class GenerateConstructedMultiColorDeck {
      */
     private CardList get5Colors(final CardList in) {
 
-        color1 = Constant.Color.BLACK;
-        color2 = Constant.Color.BLUE;
-        color3 = Constant.Color.GREEN;
-        color4 = Constant.Color.RED;
-        color5 = Constant.Color.WHITE;
+        this.color1 = Constant.Color.BLACK;
+        this.color2 = Constant.Color.BLUE;
+        this.color3 = Constant.Color.GREEN;
+        this.color4 = Constant.Color.RED;
+        this.color5 = Constant.Color.WHITE;
 
         CardList out = new CardList();
         /*
@@ -381,7 +412,8 @@ public class GenerateConstructedMultiColorDeck {
         out.addAll(CardListUtil.getGoldCards(in));
         out.shuffle();
 
-        CardList artifact = in.filter(new CardListFilter() {
+        final CardList artifact = in.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
@@ -392,8 +424,9 @@ public class GenerateConstructedMultiColorDeck {
         out.addAll(artifact);
 
         out = out.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                if (c.isCreature() && c.getNetAttack() <= 1 && Singletons.getModel().getPreferences().deckGenRmvSmall) {
+                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().deckGenRmvSmall) {
                     return false;
                 }
 
@@ -401,7 +434,7 @@ public class GenerateConstructedMultiColorDeck {
             }
         });
 
-        out = filterBadCards(out, 3);
+        out = this.filterBadCards(out, 3);
         return out;
     }
 
@@ -429,37 +462,44 @@ public class GenerateConstructedMultiColorDeck {
         if (colors == 3) {
 
             out = CardFilter.filter(sequence, new CardListFilter() {
+                @Override
                 public boolean addCard(final Card c) {
-                    ArrayList<String> list = CardUtil.getColors(c);
+                    final ArrayList<String> list = CardUtil.getColors(c);
 
                     if (list.size() == 3) {
-                        if (!list.contains(color1) || !list.contains(color2) || !list.contains(color3)) {
+                        if (!list.contains(GenerateConstructedMultiColorDeck.this.color1)
+                                || !list.contains(GenerateConstructedMultiColorDeck.this.color2)
+                                || !list.contains(GenerateConstructedMultiColorDeck.this.color3)) {
                             return false;
                         }
                     } else if (list.size() == 2) {
-                        if (!(list.contains(color1) && list.contains(color2))
-                                && !(list.contains(color1) && list.contains(color3))
-                                && !(list.contains(color2) && list.contains(color3))) {
+                        if (!(list.contains(GenerateConstructedMultiColorDeck.this.color1) && list
+                                .contains(GenerateConstructedMultiColorDeck.this.color2))
+                                && !(list.contains(GenerateConstructedMultiColorDeck.this.color1) && list
+                                        .contains(GenerateConstructedMultiColorDeck.this.color3))
+                                && !(list.contains(GenerateConstructedMultiColorDeck.this.color2) && list
+                                        .contains(GenerateConstructedMultiColorDeck.this.color3))) {
                             return false;
                         }
                     }
 
-                    return CardUtil.getColors(c).size() <= 3 && !c.isLand() && // no
-                                                                               // land
-                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True") ||
-                            // OR very important
+                    return ((CardUtil.getColors(c).size() <= 3) && !c.isLand() && // no
+                                                                                  // land
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True")) ||
+                    // OR very important
                             goodLand.contains(c.getName());
                 }
             });
         } else if (colors == 5) {
             out = CardFilter.filter(sequence, new CardListFilter() {
+                @Override
                 public boolean addCard(final Card c) {
-                    return CardUtil.getColors(c).size() >= 2 && // only get
-                                                                // multicolored
-                                                                // cards
+                    return ((CardUtil.getColors(c).size() >= 2) && // only get
+                                                                   // multicolored
+                                                                   // cards
                             !c.isLand() && // no land
-                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True") ||
-                            // OR very important
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True")) ||
+                    // OR very important
                             goodLand.contains(c.getName());
                 }
             });

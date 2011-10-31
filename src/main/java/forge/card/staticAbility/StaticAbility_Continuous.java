@@ -31,12 +31,12 @@ public class StaticAbility_Continuous {
      *            a StaticAbility
      */
     public static void applyContinuousAbility(final StaticAbility stAb) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
 
-        StaticEffect se = new StaticEffect();
-        CardList affectedCards = getAffectedCards(stAb);
-        ArrayList<Player> affectedPlayers = getAffectedPlayers(stAb);
+        final StaticEffect se = new StaticEffect();
+        final CardList affectedCards = StaticAbility_Continuous.getAffectedCards(stAb);
+        final ArrayList<Player> affectedPlayers = StaticAbility_Continuous.getAffectedPlayers(stAb);
 
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
@@ -118,7 +118,7 @@ public class StaticAbility_Continuous {
         }
 
         if (params.containsKey("AddAbility")) {
-            String[] sVars = params.get("AddAbility").split(" & ");
+            final String[] sVars = params.get("AddAbility").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
                 sVars[i] = hostCard.getSVar(sVars[i]);
             }
@@ -132,7 +132,7 @@ public class StaticAbility_Continuous {
         if (params.containsKey("AddType")) {
             addTypes = params.get("AddType").split(" & ");
             if (addTypes[0].equals("ChosenType")) {
-                String chosenType = hostCard.getChosenType();
+                final String chosenType = hostCard.getChosenType();
                 addTypes[0] = chosenType;
                 se.setChosenType(chosenType);
             }
@@ -141,7 +141,7 @@ public class StaticAbility_Continuous {
         if (params.containsKey("RemoveType")) {
             removeTypes = params.get("RemoveType").split(" & ");
             if (removeTypes[0].equals("ChosenType")) {
-                String chosenType = hostCard.getChosenType();
+                final String chosenType = hostCard.getChosenType();
                 removeTypes[0] = chosenType;
                 se.setChosenType(chosenType);
             }
@@ -175,7 +175,7 @@ public class StaticAbility_Continuous {
         }
 
         if (params.containsKey("AddTrigger")) {
-            String[] sVars = params.get("AddTrigger").split(" & ");
+            final String[] sVars = params.get("AddTrigger").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
                 sVars[i] = hostCard.getSVar(sVars[i]);
             }
@@ -183,11 +183,11 @@ public class StaticAbility_Continuous {
         }
 
         // modify players
-        for (Player p : affectedPlayers) {
+        for (final Player p : affectedPlayers) {
 
             // add keywords
             if (addKeywords != null) {
-                for (String keyword : addKeywords) {
+                for (final String keyword : addKeywords) {
                     p.addKeyword(keyword);
                 }
             }
@@ -195,7 +195,7 @@ public class StaticAbility_Continuous {
 
         // start modifying the cards
         for (int i = 0; i < affectedCards.size(); i++) {
-            Card affectedCard = affectedCards.get(i);
+            final Card affectedCard = affectedCards.get(i);
 
             // set P/T
             if (params.containsKey("CharacteristicDefining")) {
@@ -206,7 +206,7 @@ public class StaticAbility_Continuous {
                     affectedCard.setBaseDefense(setToughness);
                 }
             } else // non CharacteristicDefining
-            if (setPower != -1 || setToughness != -1) {
+            if ((setPower != -1) || (setToughness != -1)) {
                 if (setP.startsWith("AffectedX")) {
                     setPower = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setP));
                 }
@@ -221,24 +221,24 @@ public class StaticAbility_Continuous {
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus);
 
             // add keywords
-            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
+            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
                 affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities,
                         hostCard.getTimestamp());
             }
 
             // add HIDDEN keywords
             if (addHiddenKeywords != null) {
-                for (String k : addHiddenKeywords) {
+                for (final String k : addHiddenKeywords) {
                     affectedCard.addExtrinsicKeyword(k);
                 }
             }
 
             // add abilities
             if (addAbilities != null) {
-                for (String abilty : addAbilities) {
+                for (final String abilty : addAbilities) {
                     if (abilty.startsWith("AB")) { // grant the ability
-                        AbilityFactory af = new AbilityFactory();
-                        SpellAbility sa = af.getAbility(abilty, affectedCard);
+                        final AbilityFactory af = new AbilityFactory();
+                        final SpellAbility sa = af.getAbility(abilty, affectedCard);
                         sa.setType("Temporary");
                         affectedCard.addSpellAbility(sa);
                     }
@@ -247,47 +247,47 @@ public class StaticAbility_Continuous {
 
             // add SVars
             if (addSVars != null) {
-                for (String sVar : addSVars) {
+                for (final String sVar : addSVars) {
                     affectedCard.setSVar(sVar, hostCard.getSVar(sVar));
                 }
             }
 
             // add Types
-            if (addTypes != null || removeTypes != null) {
+            if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
                         removeSubTypes, removeCreatureTypes, hostCard.getTimestamp());
             }
 
             // add colors
             if (addColors != null) {
-                long t = affectedCard.addColor(addColors, affectedCard, !se.isOverwriteColors(), true);
+                final long t = affectedCard.addColor(addColors, affectedCard, !se.isOverwriteColors(), true);
                 se.addTimestamp(affectedCard, t);
             }
 
             // add triggers
             if (addTriggers != null) {
-                for (String trigger : addTriggers) {
-                    Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                for (final String trigger : addTriggers) {
+                    final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
                 }
             }
 
             // remove triggers
             if (params.containsKey("RemoveTriggers") || removeAllAbilities) {
-                ArrayList<Trigger> triggers = affectedCard.getTriggers();
-                for (Trigger trigger : triggers) {
+                final ArrayList<Trigger> triggers = affectedCard.getTriggers();
+                for (final Trigger trigger : triggers) {
                     trigger.setTemporarilySuppressed(true);
                 }
             }
 
             // remove activated and static abilities
             if (removeAllAbilities) {
-                ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
-                for (SpellAbility ab : abilities) {
+                final ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
+                for (final SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(true);
                 }
-                ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
-                for (StaticAbility stA : staticAbilities) {
+                final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
+                for (final StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(true);
                 }
             }
@@ -295,19 +295,19 @@ public class StaticAbility_Continuous {
     }
 
     private static ArrayList<Player> getAffectedPlayers(final StaticAbility stAb) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
-        Player controller = hostCard.getController();
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
+        final Player controller = hostCard.getController();
 
-        ArrayList<Player> players = new ArrayList<Player>();
+        final ArrayList<Player> players = new ArrayList<Player>();
 
         if (!params.containsKey("Affected")) {
             return players;
         }
 
-        String[] strngs = params.get("Affected").split(",");
+        final String[] strngs = params.get("Affected").split(",");
 
-        for (String str : strngs) {
+        for (final String str : strngs) {
             if (str.equals("Player") || str.equals("You")) {
                 players.add(controller);
             }
@@ -321,9 +321,9 @@ public class StaticAbility_Continuous {
     }
 
     private static CardList getAffectedCards(final StaticAbility stAb) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
-        Player controller = hostCard.getController();
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
+        final Player controller = hostCard.getController();
 
         if (params.containsKey("CharacteristicDefining")) {
             return new CardList(hostCard); // will always be the card itself

@@ -43,9 +43,9 @@ public class GenerateThemeDeck {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getThemeNames() {
-        ArrayList<String> ltNames = new ArrayList<String>();
+        final ArrayList<String> ltNames = new ArrayList<String>();
 
-        File file = new File("res/quest/themes/");
+        final File file = new File("res/quest/themes/");
 
         if (!file.exists()) {
             throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- file not found -- filename is "
@@ -57,10 +57,10 @@ public class GenerateThemeDeck {
                     + file.getAbsolutePath());
         }
 
-        String[] fileList = file.list();
-        for (int i = 0; i < fileList.length; i++) {
-            if (fileList[i].endsWith(".thm")) {
-                ltNames.add(fileList[i].substring(0, fileList[i].indexOf(".thm")));
+        final String[] fileList = file.list();
+        for (final String element : fileList) {
+            if (element.endsWith(".thm")) {
+                ltNames.add(element.substring(0, element.indexOf(".thm")));
             }
         }
 
@@ -79,55 +79,55 @@ public class GenerateThemeDeck {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getThemeDeck(final String themeName, final int size) {
-        CardList tDeck = new CardList();
+        final CardList tDeck = new CardList();
 
-        ArrayList<Grp> groups = new ArrayList<Grp>();
+        final ArrayList<Grp> groups = new ArrayList<Grp>();
 
-        Map<String, Integer> cardCounts = new HashMap<String, Integer>();
+        final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
 
         String s = "";
         int bLandPercentage = 0;
         boolean testing = false;
 
         // read theme file
-        String tFileName = "res/quest/themes/" + themeName + ".thm";
-        File tFile = new File(tFileName);
+        final String tFileName = "res/quest/themes/" + themeName + ".thm";
+        final File tFile = new File(tFileName);
         if (!tFile.exists()) {
             throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file not found -- filename is "
                     + tFile.getAbsolutePath());
         }
 
         try {
-            in = new BufferedReader(new FileReader(tFile));
-        } catch (Exception ex) {
+            this.in = new BufferedReader(new FileReader(tFile));
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
             throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
                     + tFile.getPath());
         }
 
-        s = readLine();
+        s = this.readLine();
         while (!s.equals("End")) {
             if (s.startsWith("[Group")) {
-                Grp g = new Grp();
+                final Grp g = new Grp();
 
-                String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
-                for (int i = 0; i < ss.length; i++) {
-                    if (ss[i].startsWith("Percentage")) {
-                        String p = ss[i].substring("Percentage".length() + 1);
+                final String[] ss = s.replaceAll("[\\[\\]]", "").split(" ");
+                for (final String element : ss) {
+                    if (element.startsWith("Percentage")) {
+                        final String p = element.substring("Percentage".length() + 1);
                         g.Percentage = Integer.parseInt(p);
                     }
-                    if (ss[i].startsWith("MaxCnt")) {
-                        String m = ss[i].substring("MaxCnt".length() + 1);
+                    if (element.startsWith("MaxCnt")) {
+                        final String m = element.substring("MaxCnt".length() + 1);
                         g.MaxCnt = Integer.parseInt(m);
                     }
                 }
 
-                s = readLine();
+                s = this.readLine();
                 while (!s.equals("[/Group]")) {
                     g.Cardnames.add(s);
                     cardCounts.put(s, 0);
 
-                    s = readLine();
+                    s = this.readLine();
                 }
 
                 groups.add(g);
@@ -141,12 +141,12 @@ public class GenerateThemeDeck {
                 testing = true;
             }
 
-            s = readLine();
+            s = this.readLine();
         }
 
         try {
-            in.close();
-        } catch (IOException ex) {
+            this.in.close();
+        } catch (final IOException ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", tFile.getAbsolutePath());
             throw new RuntimeException("GenerateThemeDeck : getThemeDeck -- file exception -- filename is "
                     + tFile.getPath());
@@ -155,22 +155,23 @@ public class GenerateThemeDeck {
         String tmpDeck = "";
 
         // begin assigning cards to the deck
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
 
         for (int i = 0; i < groups.size(); i++) {
-            Grp g = groups.get(i);
-            float p = (float) ((float) g.Percentage * .01);
-            int grpCnt = (int) (p * (float) size);
-            int cnSize = g.Cardnames.size();
+            final Grp g = groups.get(i);
+            final float p = (float) (g.Percentage * .01);
+            final int grpCnt = (int) (p * size);
+            final int cnSize = g.Cardnames.size();
             tmpDeck += "Group" + i + ":" + grpCnt + "\n";
 
             for (int j = 0; j < grpCnt; j++) {
                 s = g.Cardnames.get(r.nextInt(cnSize));
 
                 int lc = 0;
-                while (cardCounts.get(s) >= g.MaxCnt || lc > size) // don't keep
-                                                                   // looping
-                                                                   // forever
+                while ((cardCounts.get(s) >= g.MaxCnt) || (lc > size)) // don't
+                                                                       // keep
+                // looping
+                // forever
                 {
                     s = g.Cardnames.get(r.nextInt(cnSize));
                     lc++;
@@ -180,7 +181,7 @@ public class GenerateThemeDeck {
                             + tFile.getAbsolutePath());
                 }
 
-                int n = cardCounts.get(s);
+                final int n = cardCounts.get(s);
                 tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
                 cardCounts.put(s, n + 1);
                 tmpDeck += s + "\n";
@@ -190,8 +191,8 @@ public class GenerateThemeDeck {
 
         int numBLands = 0;
         if (bLandPercentage > 0) { // if theme explicitly defines this
-            float p = (float) ((float) bLandPercentage * .01);
-            numBLands = (int) (p * (float) size);
+            final float p = (float) (bLandPercentage * .01);
+            numBLands = (int) (p * size);
         } else { // otherwise, just fill in the rest of the deck with basic
                  // lands
             numBLands = size - tDeck.size();
@@ -202,16 +203,16 @@ public class GenerateThemeDeck {
         if (numBLands > 0) // attempt to optimize basic land counts according to
                            // color representation
         {
-            CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+            final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
             // count each instance of a color in mana costs
             // TODO count hybrid mana differently?
             for (int i = 0; i < tDeck.size(); i++) {
-                String mc = tDeck.get(i).getManaCost();
+                final String mc = tDeck.get(i).getManaCost();
 
                 for (int j = 0; j < mc.length(); j++) {
-                    char c = mc.charAt(j);
+                    final char c = mc.charAt(j);
 
                     if (c == 'W') {
                         clrCnts[0].Count++;
@@ -238,8 +239,8 @@ public class GenerateThemeDeck {
             for (int i = 0; i < 5; i++) {
                 if (clrCnts[i].Count > 0) { // calculate number of lands for
                                             // each color
-                    float p = (float) clrCnts[i].Count / (float) totalColor;
-                    int nLand = (int) ((float) numBLands * p);
+                    final float p = (float) clrCnts[i].Count / (float) totalColor;
+                    final int nLand = (int) (numBLands * p);
                     tmpDeck += "numLand-" + clrCnts[i].Color + ":" + nLand + "\n";
 
                     cardCounts.put(clrCnts[i].Color, 2);
@@ -252,7 +253,7 @@ public class GenerateThemeDeck {
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
 
         if (tDeck.size() < size) {
-            int diff = size - tDeck.size();
+            final int diff = size - tDeck.size();
 
             for (int i = 0; i < diff; i++) {
                 s = tDeck.get(r.nextInt(tDeck.size())).getName();
@@ -261,13 +262,13 @@ public class GenerateThemeDeck {
                     s = tDeck.get(r.nextInt(tDeck.size())).getName();
                 }
 
-                int n = cardCounts.get(s);
+                final int n = cardCounts.get(s);
                 tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getComputerPlayer()));
                 cardCounts.put(s, n + 1);
                 tmpDeck += "Added:" + s + "\n";
             }
         } else if (tDeck.size() > size) {
-            int diff = tDeck.size() - size;
+            final int diff = tDeck.size() - size;
 
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
@@ -299,12 +300,12 @@ public class GenerateThemeDeck {
     private String readLine() {
         // makes the checked exception, into an unchecked runtime exception
         try {
-            String s = in.readLine();
+            String s = this.in.readLine();
             if (s != null) {
                 s = s.trim();
             }
             return s;
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("GenerateThemeDeck : readLine error");
         }
@@ -332,8 +333,8 @@ public class GenerateThemeDeck {
          *            the cnt
          */
         public CCnt(final String clr, final int cnt) {
-            Color = clr;
-            Count = cnt;
+            this.Color = clr;
+            this.Count = cnt;
         }
     }
 

@@ -22,7 +22,7 @@ public class GenerateDeckUtil {
      */
     public static ArrayList<String> getDualLandList(final String colors) {
 
-        ArrayList<String> dLands = new ArrayList<String>();
+        final ArrayList<String> dLands = new ArrayList<String>();
 
         if (colors.length() > 3) {
             dLands.add("Rupture Spire");

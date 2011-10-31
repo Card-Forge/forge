@@ -47,8 +47,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * </p>
      */
     public Deck() {
-        main = new ItemPool<CardPrinted>(CardPrinted.class);
-        sideboard = new ItemPool<CardPrinted>(CardPrinted.class);
+        this.main = new ItemPool<CardPrinted>(CardPrinted.class);
+        this.sideboard = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
     /**
@@ -61,7 +61,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public Deck(final GameType type) {
         this();
-        setDeckType(type);
+        this.setDeckType(type);
     }
 
     /**
@@ -72,7 +72,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.util.List} object.
      */
     public ItemPoolView<CardPrinted> getMain() {
-        return main.getView();
+        return this.main.getView();
     }
 
     /**
@@ -83,7 +83,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.util.List} object.
      */
     public ItemPoolView<CardPrinted> getSideboard() {
-        return sideboard.getView();
+        return this.sideboard.getView();
     }
 
     /**
@@ -94,7 +94,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public GameType getDeckType() {
-        return deckType;
+        return this.deckType;
     }
 
     // can only call this method ONCE
@@ -123,7 +123,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            a {@link java.lang.String} object.
      */
     public void setName(final String s) {
-        name = s;
+        this.name = s;
     }
 
     /**
@@ -134,7 +134,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -157,7 +157,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
     /**
@@ -169,7 +169,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            a {@link java.lang.String} object.
      */
     public void addMain(final String cardName) {
-        addMain(CardDb.instance().getCard(cardName));
+        this.addMain(CardDb.instance().getCard(cardName));
     }
 
     /**
@@ -179,7 +179,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the card
      */
     public void addMain(final CardPrinted card) {
-        main.add(card);
+        this.main.add(card);
     }
 
     /**
@@ -191,7 +191,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the amount
      */
     public void addMain(final CardPrinted card, final int amount) {
-        main.add(card, amount);
+        this.main.add(card, amount);
     }
 
     /**
@@ -201,7 +201,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the list
      */
     public void addMain(final ItemPoolView<CardPrinted> list) {
-        main.addAll(list);
+        this.main.addAll(list);
     }
 
     /**
@@ -211,7 +211,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the new main
      */
     public void setMain(final Iterable<String> cards) {
-        main = new ItemPool<CardPrinted>(cards, CardPrinted.class);
+        this.main = new ItemPool<CardPrinted>(cards, CardPrinted.class);
     }
 
     /**
@@ -221,7 +221,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the card
      */
     public void removeMain(final CardPrinted card) {
-        main.remove(card);
+        this.main.remove(card);
     }
 
     /**
@@ -233,7 +233,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the amount
      */
     public void removeMain(final CardPrinted card, final int amount) {
-        main.remove(card, amount);
+        this.main.remove(card, amount);
     }
 
     /**
@@ -242,7 +242,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return the int
      */
     public int countMain() {
-        return main.countAll();
+        return this.main.countAll();
     }
 
     /**
@@ -254,7 +254,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            a {@link java.lang.String} object.
      */
     public void addSideboard(final String cardName) {
-        addSideboard(CardDb.instance().getCard(cardName));
+        this.addSideboard(CardDb.instance().getCard(cardName));
     }
 
     /**
@@ -264,7 +264,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the card
      */
     public void addSideboard(final CardPrinted card) {
-        sideboard.add(card);
+        this.sideboard.add(card);
     }
 
     /**
@@ -276,7 +276,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the amount
      */
     public void addSideboard(final CardPrinted card, final int amount) {
-        sideboard.add(card, amount);
+        this.sideboard.add(card, amount);
     }
 
     /**
@@ -286,7 +286,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the cards
      */
     public void addSideboard(final ItemPoolView<CardPrinted> cards) {
-        sideboard.addAll(cards);
+        this.sideboard.addAll(cards);
     }
 
     /**
@@ -296,7 +296,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the new sideboard
      */
     public void setSideboard(final Iterable<String> cards) {
-        sideboard = new ItemPool<CardPrinted>(cards, CardPrinted.class);
+        this.sideboard = new ItemPool<CardPrinted>(cards, CardPrinted.class);
     }
 
     /**
@@ -307,7 +307,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a int.
      */
     public int countSideboard() {
-        return sideboard.countAll();
+        return this.sideboard.countAll();
     }
 
     /**
@@ -317,10 +317,10 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * 
      * @param card
      *            the card
-     *
+     * 
      */
     public void removeFromSideboard(final CardPrinted card) {
-        sideboard.remove(card);
+        this.sideboard.remove(card);
     }
 
     /**
@@ -331,7 +331,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isDraft() {
-        return getDeckType().equals(GameType.Draft);
+        return this.getDeckType().equals(GameType.Draft);
     }
 
     /**
@@ -342,7 +342,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isSealed() {
-        return getDeckType().equals(GameType.Sealed);
+        return this.getDeckType().equals(GameType.Sealed);
     }
 
     /**
@@ -353,7 +353,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return a boolean.
      */
     public boolean isRegular() {
-        return getDeckType().equals(GameType.Constructed);
+        return this.getDeckType().equals(GameType.Constructed);
     }
 
     /**
@@ -363,14 +363,15 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * 
      * @return a int.
      */
+    @Override
     public int hashCode() {
-        return getName().hashCode();
+        return this.getName().hashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return getName();
+        return this.getName();
     }
 
     /**
@@ -382,15 +383,17 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            a {@link forge.deck.Deck} object.
      * @return a int.
      */
+    @Override
     public int compareTo(final Deck d) {
-        return getName().compareTo(d.getName());
+        return this.getName().compareTo(d.getName());
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean equals(final Object o) {
         if (o instanceof Deck) {
-            Deck d = (Deck) o;
-            return getName().equals(d.getName());
+            final Deck d = (Deck) o;
+            return this.getName().equals(d.getName());
         }
         return false;
     }
@@ -399,14 +402,14 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * Clear sideboard.
      */
     public void clearSideboard() {
-        sideboard.clear();
+        this.sideboard.clear();
     }
 
     /**
      * Clear main.
      */
     public void clearMain() {
-        main.clear();
+        this.main.clear();
 
     }
 
@@ -416,7 +419,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return the player type
      */
     public PlayerType getPlayerType() {
-        return playerType;
+        return this.playerType;
     }
 
     /**
@@ -435,7 +438,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @return true, if is custom pool
      */
     public boolean isCustomPool() {
-        return customPool;
+        return this.customPool;
     }
 
     /**
@@ -445,6 +448,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
      *            the new custom pool
      */
     public void setCustomPool(final boolean cp) {
-        customPool = cp;
+        this.customPool = cp;
     }
 }

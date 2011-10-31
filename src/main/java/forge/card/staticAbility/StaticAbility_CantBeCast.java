@@ -23,20 +23,20 @@ public class StaticAbility_CantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeCastAbility(final StaticAbility stAb, final Card card, final Player activator) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return false;
         }
 
-        if (params.containsKey("Caster") && activator != null
+        if (params.containsKey("Caster") && (activator != null)
                 && !activator.isValid(params.get("Caster"), hostCard.getController(), hostCard)) {
             return false;
         }
 
-        if (params.containsKey("OnlySorcerySpeed") && activator != null && Phase.canCastSorcery(activator)) {
+        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && Phase.canCastSorcery(activator)) {
             return false;
         }
 
@@ -54,17 +54,16 @@ public class StaticAbility_CantBeCast {
      *            the activator
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb,
-            final Card card, final Player activator) {
-        HashMap<String, String> params = stAb.getMapParams();
-        Card hostCard = stAb.getHostCard();
+    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card, final Player activator) {
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return false;
         }
 
-        if (params.containsKey("Activator") && activator != null
+        if (params.containsKey("Activator") && (activator != null)
                 && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
             return false;
         }
