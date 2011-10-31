@@ -63,21 +63,22 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digStackDescription(af, this);
+                return AbilityFactory_Reveal.digStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return digCanPlayAI(af, this);
+                return AbilityFactory_Reveal.digCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                digResolve(af, this);
+                AbilityFactory_Reveal.digResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return digTriggerAI(af, this, mandatory);
+                return AbilityFactory_Reveal.digTriggerAI(af, this, mandatory);
             }
 
         };
@@ -99,16 +100,17 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digStackDescription(af, this);
+                return AbilityFactory_Reveal.digStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return digCanPlayAI(af, this);
+                return AbilityFactory_Reveal.digCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                digResolve(af, this);
+                AbilityFactory_Reveal.digResolve(af, this);
             }
 
         };
@@ -130,12 +132,12 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digStackDescription(af, this);
+                return AbilityFactory_Reveal.digStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                digResolve(af, this);
+                AbilityFactory_Reveal.digResolve(af, this);
             }
 
             @Override
@@ -145,7 +147,7 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return digTriggerAI(af, this, mandatory);
+                return AbilityFactory_Reveal.digTriggerAI(af, this, mandatory);
             }
 
         };
@@ -164,10 +166,10 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String digStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        StringBuilder sb = new StringBuilder();
-        int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -177,7 +179,7 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -193,13 +195,13 @@ public final class AbilityFactory_Reveal {
         if (tgtPlayers.contains(host.getController())) {
             sb.append("his or her ");
         } else {
-            for (Player p : tgtPlayers) {
+            for (final Player p : tgtPlayers) {
                 sb.append(p).append("'s ");
             }
         }
         sb.append("library.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -219,16 +221,16 @@ public final class AbilityFactory_Reveal {
      * @return a boolean.
      */
     private static boolean digCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         double chance = .4; // 40 percent chance with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         Player libraryOwner = AllZone.getComputerPlayer();
 
         if (sa.getTarget() != null) {
@@ -257,7 +259,7 @@ public final class AbilityFactory_Reveal {
         }
 
         if (af.hasSubAbility()) {
-            Ability_Sub abSub = sa.getSubAbility();
+            final Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -284,7 +286,7 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
@@ -305,28 +307,28 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void digResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
-        Player player = sa.getActivatingPlayer();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final Player player = sa.getActivatingPlayer();
         int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
-        Zone destZone1 = params.containsKey("DestinationZone") ? Zone.smartValueOf(params.get("DestinationZone"))
+        final Zone destZone1 = params.containsKey("DestinationZone") ? Zone.smartValueOf(params.get("DestinationZone"))
                 : Zone.Hand;
-        Zone destZone2 = params.containsKey("DestinationZone2") ? Zone.smartValueOf(params.get("DestinationZone2"))
-                : Zone.Library;
+        final Zone destZone2 = params.containsKey("DestinationZone2") ? Zone.smartValueOf(params
+                .get("DestinationZone2")) : Zone.Library;
 
-        int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition"))
-                : -1;
+        final int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params
+                .get("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
-        boolean mitosis = params.containsKey("Mitosis");
+        final boolean mitosis = params.containsKey("Mitosis");
         String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
-        boolean anyNumber = params.containsKey("AnyNumber");
+        final boolean anyNumber = params.containsKey("AnyNumber");
 
-        int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer
-                .parseInt(params.get("LibraryPosition2")) : -1;
-        boolean optional = params.containsKey("Optional");
-        boolean noMove = params.containsKey("NoMove");
+        final int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params
+                .get("LibraryPosition2")) : -1;
+        final boolean optional = params.containsKey("Optional");
+        final boolean noMove = params.containsKey("NoMove");
         boolean changeAll = false;
-        ArrayList<String> keywords = new ArrayList<String>();
+        final ArrayList<String> keywords = new ArrayList<String>();
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
@@ -341,20 +343,20 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
 
-                CardList top = new CardList();
+                final CardList top = new CardList();
                 CardList valid = new CardList();
-                CardList rest = new CardList();
-                PlayerZone library = p.getZone(Constant.Zone.Library);
+                final CardList rest = new CardList();
+                final PlayerZone library = p.getZone(Constant.Zone.Library);
 
                 numToDig = Math.min(numToDig, library.size());
                 for (int i = 0; i < numToDig; i++) {
@@ -362,7 +364,7 @@ public final class AbilityFactory_Reveal {
                 }
 
                 if (top.size() > 0) {
-                    Card dummy = new Card();
+                    final Card dummy = new Card();
                     dummy.setName("[No valid cards]");
 
                     if (params.containsKey("Reveal")) {
@@ -370,8 +372,8 @@ public final class AbilityFactory_Reveal {
                         // AllZone.getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
                     } else if (params.containsKey("RevealValid")) {
-                        String revealValid = params.get("RevealValid");
-                        CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
+                        final String revealValid = params.get("RevealValid");
+                        final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
                         if (!toReveal.isEmpty()) {
                             GuiUtils.getChoice("Revealing cards from library", toReveal.toArray());
                         }
@@ -384,8 +386,8 @@ public final class AbilityFactory_Reveal {
 
                     if (!noMove) {
                         if (mitosis) {
-                            valid = sharesNameWithCardOnBattlefield(top);
-                            for (Card c : top) {
+                            valid = AbilityFactory_Reveal.sharesNameWithCardOnBattlefield(top);
+                            for (final Card c : top) {
                                 if (!valid.contains(c)) {
                                     rest.add(c);
                                 }
@@ -395,7 +397,7 @@ public final class AbilityFactory_Reveal {
                                 changeValid = changeValid.replace("ChosenType", host.getChosenType());
                             }
                             valid = top.getValidCards(changeValid.split(","), host.getController(), host);
-                            for (Card c : top) {
+                            for (final Card c : top) {
                                 if (!valid.contains(c)) {
                                     rest.add(c);
                                 }
@@ -408,11 +410,11 @@ public final class AbilityFactory_Reveal {
                         }
 
                         if (changeAll) {
-                            for (Card c : valid) {
+                            for (final Card c : valid) {
                                 if (c.equals(dummy)) {
                                     continue;
                                 }
-                                PlayerZone zone = c.getOwner().getZone(destZone1);
+                                final PlayerZone zone = c.getOwner().getZone(destZone1);
                                 if (zone.is(Zone.Library)) {
                                     AllZone.getGameAction().moveToLibrary(c, libraryPosition);
                                 } else {
@@ -428,14 +430,14 @@ public final class AbilityFactory_Reveal {
                         } else {
                             int j = 0;
                             if (player.isHuman()) {
-                                while (j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
+                                while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                                     // let user get choice
                                     Card chosen = null;
                                     String prompt = "Choose a card to put into the ";
-                                    if (destZone1.equals(Zone.Library) && libraryPosition == -1) {
+                                    if (destZone1.equals(Zone.Library) && (libraryPosition == -1)) {
                                         prompt = "Put the rest on the bottom of the ";
                                     }
-                                    if (destZone1.equals(Zone.Library) && libraryPosition == 0) {
+                                    if (destZone1.equals(Zone.Library) && (libraryPosition == 0)) {
                                         prompt = "Put the rest on top of the ";
                                     }
                                     if (anyNumber || optional) {
@@ -443,18 +445,18 @@ public final class AbilityFactory_Reveal {
                                     } else {
                                         chosen = GuiUtils.getChoice(prompt + destZone1, valid.toArray());
                                     }
-                                    if (chosen == null || chosen.getName().equals("[No valid cards]")) {
+                                    if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
                                         break;
                                     }
                                     valid.remove(chosen);
-                                    PlayerZone zone = chosen.getOwner().getZone(destZone1);
+                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
                                     if (zone.is(Zone.Library)) {
                                         // System.out.println("Moving to lib position: "+libraryPosition);
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
-                                        Card c = AllZone.getGameAction().moveTo(zone, chosen);
+                                        final Card c = AllZone.getGameAction().moveTo(zone, chosen);
                                         if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
-                                            for (String kw : keywords) {
+                                            for (final String kw : keywords) {
                                                 c.addExtrinsicKeyword(kw);
                                             }
                                             if (params.containsKey("Tapped")) {
@@ -473,17 +475,17 @@ public final class AbilityFactory_Reveal {
                                     changeNum = valid.size(); // always take all
                                 }
                                 for (j = 0; j < changeNum; j++) {
-                                    Card chosen = valid.get(0);
+                                    final Card chosen = valid.get(0);
                                     if (chosen.equals(dummy)) {
                                         break;
                                     }
-                                    PlayerZone zone = chosen.getOwner().getZone(destZone1);
+                                    final PlayerZone zone = chosen.getOwner().getZone(destZone1);
                                     if (zone.is(Zone.Library)) {
                                         AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
-                                        Card c = AllZone.getGameAction().moveTo(zone, chosen);
+                                        final Card c = AllZone.getGameAction().moveTo(zone, chosen);
                                         if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
-                                            for (String kw : keywords) {
+                                            for (final String kw : keywords) {
                                                 chosen.addExtrinsicKeyword(kw);
                                             }
                                             if (params.containsKey("Tapped")) {
@@ -535,10 +537,10 @@ public final class AbilityFactory_Reveal {
                             // just move them randomly
                             for (int i = 0; i < rest.size(); i++) {
                                 Card c = rest.get(i);
-                                PlayerZone toZone = c.getOwner().getZone(destZone2);
+                                final PlayerZone toZone = c.getOwner().getZone(destZone2);
                                 c = AllZone.getGameAction().moveTo(toZone, c);
                                 if (destZone2.equals(Zone.Battlefield) && !keywords.isEmpty()) {
-                                    for (String kw : keywords) {
+                                    for (final String kw : keywords) {
                                         c.addExtrinsicKeyword(kw);
                                     }
                                 }
@@ -563,10 +565,10 @@ public final class AbilityFactory_Reveal {
      * @return a {@link forge.CardList} object.
      */
     private static CardList sharesNameWithCardOnBattlefield(final CardList list) {
-        CardList toReturn = new CardList();
-        CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        for (Card c : list) {
-            for (Card p : play) {
+        final CardList toReturn = new CardList();
+        final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (final Card c : list) {
+            for (final Card p : play) {
                 if (p.getName().equals(c.getName())) {
                     toReturn.add(c);
                 }
@@ -595,21 +597,22 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digUntilStackDescription(af, this);
+                return AbilityFactory_Reveal.digUntilStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return digUntilCanPlayAI(af, this);
+                return AbilityFactory_Reveal.digUntilCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                digUntilResolve(af, this);
+                AbilityFactory_Reveal.digUntilResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return digUntilTriggerAI(af, this, mandatory);
+                return AbilityFactory_Reveal.digUntilTriggerAI(af, this, mandatory);
             }
 
         };
@@ -631,16 +634,17 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digUntilStackDescription(af, this);
+                return AbilityFactory_Reveal.digUntilStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return digUntilCanPlayAI(af, this);
+                return AbilityFactory_Reveal.digUntilCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                digUntilResolve(af, this);
+                AbilityFactory_Reveal.digUntilResolve(af, this);
             }
 
         };
@@ -662,12 +666,12 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return digUntilStackDescription(af, this);
+                return AbilityFactory_Reveal.digUntilStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                digUntilResolve(af, this);
+                AbilityFactory_Reveal.digUntilResolve(af, this);
             }
 
             @Override
@@ -677,7 +681,7 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return digUntilTriggerAI(af, this, mandatory);
+                return AbilityFactory_Reveal.digUntilTriggerAI(af, this, mandatory);
             }
 
         };
@@ -696,9 +700,9 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String digUntilStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = sa.getSourceCard();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = sa.getSourceCard();
+        final StringBuilder sb = new StringBuilder();
 
         String desc = "Card";
         if (params.containsKey("ValidDescription")) {
@@ -718,14 +722,14 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player pl : tgtPlayers) {
+        for (final Player pl : tgtPlayers) {
             sb.append(pl).append(" ");
         }
 
@@ -736,8 +740,8 @@ public final class AbilityFactory_Reveal {
         }
         sb.append(". Put ");
 
-        String found = params.get("FoundDestination");
-        String revealed = params.get("RevealedDestination");
+        final String found = params.get("FoundDestination");
+        final String revealed = params.get("RevealedDestination");
         if (found != null) {
 
             sb.append(untilAmount > 1 ? "those cards" : "that card");
@@ -759,7 +763,7 @@ public final class AbilityFactory_Reveal {
             }
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -785,10 +789,10 @@ public final class AbilityFactory_Reveal {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        final Random r = MyRandom.getRandom();
+        final boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         Player libraryOwner = AllZone.getComputerPlayer();
 
         if (sa.getTarget() != null) {
@@ -807,7 +811,7 @@ public final class AbilityFactory_Reveal {
         }
 
         if (af.hasSubAbility()) {
-            Ability_Sub abSub = sa.getSubAbility();
+            final Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -834,7 +838,7 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
@@ -855,8 +859,8 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void digUntilResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = sa.getSourceCard();
 
         String type = "Card";
         if (params.containsKey("Valid")) {
@@ -873,33 +877,33 @@ public final class AbilityFactory_Reveal {
             maxRevealed = AbilityFactory.calculateAmount(host, params.get("MaxRevealed"), sa);
         }
 
-        boolean remember = params.containsKey("RememberFound");
+        final boolean remember = params.containsKey("RememberFound");
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(host, params.get("Defined"), sa);
         }
 
-        Zone foundDest = Zone.smartValueOf(params.get("FoundDestination"));
-        int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa);
-        Zone revealedDest = Zone.smartValueOf(params.get("RevealedDestination"));
-        int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
+        final Zone foundDest = Zone.smartValueOf(params.get("FoundDestination"));
+        final int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa);
+        final Zone revealedDest = Zone.smartValueOf(params.get("RevealedDestination"));
+        final int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
-                CardList found = new CardList();
-                CardList revealed = new CardList();
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
+                final CardList found = new CardList();
+                final CardList revealed = new CardList();
 
-                PlayerZone library = p.getZone(Constant.Zone.Library);
+                final PlayerZone library = p.getZone(Constant.Zone.Library);
 
-                int maxToDig = maxRevealed != null ? maxRevealed : library.size();
+                final int maxToDig = maxRevealed != null ? maxRevealed : library.size();
 
                 for (int i = 0; i < maxToDig; i++) {
-                    Card c = library.get(i);
+                    final Card c = library.get(i);
                     revealed.add(c);
                     if (c.isValid(type, sa.getActivatingPlayer(), host)) {
                         found.add(c);
@@ -916,17 +920,17 @@ public final class AbilityFactory_Reveal {
 
                 // TODO Allow Human to choose the order
                 if (foundDest != null) {
-                    Iterator<Card> itr = found.iterator();
+                    final Iterator<Card> itr = found.iterator();
                     while (itr.hasNext()) {
-                        Card c = itr.next();
+                        final Card c = itr.next();
                         AllZone.getGameAction().moveTo(foundDest, c, foundLibPos);
                         revealed.remove(c);
                     }
                 }
 
-                Iterator<Card> itr = revealed.iterator();
+                final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
-                    Card c = itr.next();
+                    final Card c = itr.next();
                     AllZone.getGameAction().moveTo(revealedDest, c, revealedLibPos);
                 }
             } // end foreach player
@@ -952,22 +956,22 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return revealHandStackDescription(af, this);
+                return AbilityFactory_Reveal.revealHandStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return revealHandCanPlayAI(af, this);
+                return AbilityFactory_Reveal.revealHandCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                revealHandResolve(af, this);
+                AbilityFactory_Reveal.revealHandResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return revealHandTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.revealHandTrigger(af, this, mandatory);
             }
 
         };
@@ -989,17 +993,17 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return revealHandStackDescription(af, this);
+                return AbilityFactory_Reveal.revealHandStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return revealHandCanPlayAI(af, this);
+                return AbilityFactory_Reveal.revealHandCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                revealHandResolve(af, this);
+                AbilityFactory_Reveal.revealHandResolve(af, this);
             }
 
         };
@@ -1023,22 +1027,22 @@ public final class AbilityFactory_Reveal {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return revealHandStackDescription(af, this);
+                return AbilityFactory_Reveal.revealHandStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                revealHandResolve(af, this);
+                AbilityFactory_Reveal.revealHandResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return revealHandTargetAI(af, this, false, false);
+                return AbilityFactory_Reveal.revealHandTargetAI(af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return revealHandTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.revealHandTrigger(af, this, mandatory);
             }
 
         };
@@ -1057,8 +1061,8 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String revealHandStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -1068,7 +1072,7 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1078,7 +1082,7 @@ public final class AbilityFactory_Reveal {
         sb.append(sa.getActivatingPlayer()).append(" looks at ");
 
         if (tgtPlayers.size() > 0) {
-            for (Player p : tgtPlayers) {
+            for (final Player p : tgtPlayers) {
                 sb.append(p.toString()).append("'s ");
             }
         } else {
@@ -1086,7 +1090,7 @@ public final class AbilityFactory_Reveal {
         }
         sb.append("hand.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1107,8 +1111,8 @@ public final class AbilityFactory_Reveal {
      */
     private static boolean revealHandCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        Cost abCost = sa.getPayCosts();
-        Card source = sa.getSourceCard();
+        final Cost abCost = sa.getPayCosts();
+        final Card source = sa.getSourceCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -1130,20 +1134,20 @@ public final class AbilityFactory_Reveal {
 
         }
 
-        boolean bFlag = revealHandTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactory_Reveal.revealHandTargetAI(af, sa, true, false);
 
         if (!bFlag) {
             return false;
         }
 
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1167,17 +1171,17 @@ public final class AbilityFactory_Reveal {
      */
     private static boolean revealHandTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
             final boolean mandatory) {
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
 
-        int humanHandSize = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
+        final int humanHandSize = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
 
         if (tgt != null) {
             // ability is targeted
             tgt.resetTargets();
 
-            boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
 
-            if (!canTgtHuman || humanHandSize == 0) {
+            if (!canTgtHuman || (humanHandSize == 0)) {
                 return false;
             } else {
                 tgt.addTarget(AllZone.getHumanPlayer());
@@ -1207,12 +1211,12 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        if (!revealHandTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactory_Reveal.revealHandTargetAI(af, sa, false, mandatory)) {
             return false;
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1231,26 +1235,26 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
-                CardList hand = p.getCardsIn(Zone.Hand);
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
+                final CardList hand = p.getCardsIn(Zone.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
                         GuiUtils.getChoice(p + "'s hand", hand.toArray());
                     } else {
-                        StringBuilder sb = new StringBuilder();
+                        final StringBuilder sb = new StringBuilder();
                         sb.append(p).append("'s hand is empty!");
                         javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), p + "'s hand",
                                 JOptionPane.INFORMATION_MESSAGE);
@@ -1260,7 +1264,7 @@ public final class AbilityFactory_Reveal {
                     // cards...)
                 }
                 if (params.containsKey("RememberRevealed")) {
-                    for (Card c : hand) {
+                    for (final Card c : hand) {
                         host.addRemembered(c);
                     }
                 }
@@ -1287,21 +1291,22 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return scryStackDescription(af, this);
+                return AbilityFactory_Reveal.scryStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return scryCanPlayAI(af, this);
+                return AbilityFactory_Reveal.scryCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                scryResolve(af, this);
+                AbilityFactory_Reveal.scryResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return scryTriggerAI(af, this);
+                return AbilityFactory_Reveal.scryTriggerAI(af, this);
             }
 
         };
@@ -1323,16 +1328,17 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return scryStackDescription(af, this);
+                return AbilityFactory_Reveal.scryStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return scryCanPlayAI(af, this);
+                return AbilityFactory_Reveal.scryCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                scryResolve(af, this);
+                AbilityFactory_Reveal.scryResolve(af, this);
             }
 
         };
@@ -1356,22 +1362,22 @@ public final class AbilityFactory_Reveal {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return scryStackDescription(af, this);
+                return AbilityFactory_Reveal.scryStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                scryResolve(af, this);
+                AbilityFactory_Reveal.scryResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return scryTargetAI(af, this);
+                return AbilityFactory_Reveal.scryTargetAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return scryTriggerAI(af, this);
+                return AbilityFactory_Reveal.scryTriggerAI(af, this);
             }
 
         };
@@ -1389,7 +1395,7 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void scryResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
         int num = 1;
         if (params.containsKey("ScryNum")) {
@@ -1398,15 +1404,15 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 p.scry(num);
             }
         }
@@ -1424,7 +1430,7 @@ public final class AbilityFactory_Reveal {
      * @return a boolean.
      */
     private static boolean scryTargetAI(final AbilityFactory af, final SpellAbility sa) {
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
 
         if (tgt != null) { // It doesn't appear that Scry ever targets
             // ability is targeted
@@ -1452,7 +1458,7 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        return scryTargetAI(af, sa);
+        return AbilityFactory_Reveal.scryTargetAI(af, sa);
     } // scryTargetAI()
 
     /**
@@ -1467,8 +1473,8 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String scryStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -1478,14 +1484,14 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");
         }
 
@@ -1496,7 +1502,7 @@ public final class AbilityFactory_Reveal {
 
         sb.append("scrys (").append(num).append(").");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1524,7 +1530,7 @@ public final class AbilityFactory_Reveal {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
@@ -1532,7 +1538,7 @@ public final class AbilityFactory_Reveal {
         }
 
         if (af.hasSubAbility()) {
-            Ability_Sub abSub = sa.getSubAbility();
+            final Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -1559,7 +1565,7 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return rearrangeTopOfLibraryStackDescription(af, this);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryStackDescription(af, this);
             }
 
             @Override
@@ -1569,12 +1575,12 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
             }
 
             @Override
             public void resolve() {
-                rearrangeTopOfLibraryResolve(af, this);
+                AbilityFactory_Reveal.rearrangeTopOfLibraryResolve(af, this);
             }
 
         };
@@ -1597,7 +1603,7 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return rearrangeTopOfLibraryStackDescription(af, this);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryStackDescription(af, this);
             }
 
             @Override
@@ -1607,12 +1613,12 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
             }
 
             @Override
             public void resolve() {
-                rearrangeTopOfLibraryResolve(af, this);
+                AbilityFactory_Reveal.rearrangeTopOfLibraryResolve(af, this);
             }
 
         };
@@ -1637,12 +1643,12 @@ public final class AbilityFactory_Reveal {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return rearrangeTopOfLibraryStackDescription(af, this);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                rearrangeTopOfLibraryResolve(af, this);
+                AbilityFactory_Reveal.rearrangeTopOfLibraryResolve(af, this);
             }
 
             @Override
@@ -1652,7 +1658,7 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
             }
 
         };
@@ -1671,13 +1677,13 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         int numCards = 0;
         ArrayList<Player> tgtPlayers;
         boolean shuffle = false;
 
-        Target tgt = af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined")) {
+        final Target tgt = af.getAbTgt();
+        if ((tgt != null) && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
@@ -1686,7 +1692,7 @@ public final class AbilityFactory_Reveal {
         numCards = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumCards"), sa);
         shuffle = params.containsKey("MayShuffle");
 
-        StringBuilder ret = new StringBuilder();
+        final StringBuilder ret = new StringBuilder();
         if (!(sa instanceof Ability_Sub)) {
             ret.append(af.getHostCard().getName());
             ret.append(" - ");
@@ -1694,7 +1700,7 @@ public final class AbilityFactory_Reveal {
         ret.append("Look at the top ");
         ret.append(numCards);
         ret.append(" cards of ");
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             ret.append(p.getName());
             ret.append("s");
             ret.append(" & ");
@@ -1733,13 +1739,13 @@ public final class AbilityFactory_Reveal {
     private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
 
         if (tgt != null) {
             // ability is targeted
             tgt.resetTargets();
 
-            boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
 
             if (!canTgtHuman) {
                 return false;
@@ -1750,7 +1756,7 @@ public final class AbilityFactory_Reveal {
             // if it's just defined, no big deal
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1769,14 +1775,14 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void rearrangeTopOfLibraryResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         int numCards = 0;
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
         boolean shuffle = false;
 
         if (sa.getActivatingPlayer().isHuman()) {
-            Target tgt = af.getAbTgt();
-            if (tgt != null && !params.containsKey("Defined")) {
+            final Target tgt = af.getAbTgt();
+            if ((tgt != null) && !params.containsKey("Defined")) {
                 tgtPlayers = tgt.getTargetPlayers();
             } else {
                 tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
@@ -1785,9 +1791,9 @@ public final class AbilityFactory_Reveal {
             numCards = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumCards"), sa);
             shuffle = params.containsKey("MayShuffle");
 
-            for (Player p : tgtPlayers) {
-                if (tgt == null || p.canTarget(sa)) {
-                    rearrangeTopOfLibrary(af.getHostCard(), p, numCards, shuffle);
+            for (final Player p : tgtPlayers) {
+                if ((tgt == null) || p.canTarget(sa)) {
+                    AbilityFactory_Reveal.rearrangeTopOfLibrary(af.getHostCard(), p, numCards, shuffle);
                 }
             }
         }
@@ -1808,13 +1814,13 @@ public final class AbilityFactory_Reveal {
      */
     private static void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards,
             final boolean mayshuffle) {
-        PlayerZone lib = player.getZone(Constant.Zone.Library);
+        final PlayerZone lib = player.getZone(Constant.Zone.Library);
         int maxCards = lib.size();
         maxCards = Math.min(maxCards, numCards);
         if (maxCards == 0) {
             return;
         }
-        CardList topCards = new CardList();
+        final CardList topCards = new CardList();
         // show top n cards:
         for (int j = 0; j < maxCards; j++) {
             topCards.add(lib.get(j));
@@ -1834,12 +1840,12 @@ public final class AbilityFactory_Reveal {
             default:
                 suffix = "th";
             }
-            String title = "Put " + i + suffix + " from the top: ";
-            Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
+            final String title = "Put " + i + suffix + " from the top: ";
+            final Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
             if (o == null) {
                 break;
             }
-            Card c1 = (Card) o;
+            final Card c1 = (Card) o;
             topCards.remove(c1);
             AllZone.getGameAction().moveToLibrary(c1, i - 1);
         }
@@ -1869,22 +1875,22 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return revealStackDescription(af, this);
+                return AbilityFactory_Reveal.revealStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return revealCanPlayAI(af, this);
+                return AbilityFactory_Reveal.revealCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                revealResolve(af, this);
+                AbilityFactory_Reveal.revealResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return revealTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.revealTrigger(af, this, mandatory);
             }
 
         };
@@ -1906,17 +1912,17 @@ public final class AbilityFactory_Reveal {
 
             @Override
             public String getStackDescription() {
-                return revealStackDescription(af, this);
+                return AbilityFactory_Reveal.revealStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return revealCanPlayAI(af, this);
+                return AbilityFactory_Reveal.revealCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                revealResolve(af, this);
+                AbilityFactory_Reveal.revealResolve(af, this);
             }
 
         };
@@ -1940,23 +1946,23 @@ public final class AbilityFactory_Reveal {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return revealStackDescription(af, this);
+                return AbilityFactory_Reveal.revealStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                revealResolve(af, this);
+                AbilityFactory_Reveal.revealResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
                 // reuse code from RevealHand
-                return revealHandTargetAI(af, this, false, false);
+                return AbilityFactory_Reveal.revealHandTargetAI(af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return revealTrigger(af, this, mandatory);
+                return AbilityFactory_Reveal.revealTrigger(af, this, mandatory);
             }
 
         };
@@ -1975,8 +1981,8 @@ public final class AbilityFactory_Reveal {
      * @return a {@link java.lang.String} object.
      */
     private static String revealStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -1986,7 +1992,7 @@ public final class AbilityFactory_Reveal {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -2008,7 +2014,7 @@ public final class AbilityFactory_Reveal {
             sb.append("Error - no target players for RevealHand. ");
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -2029,8 +2035,8 @@ public final class AbilityFactory_Reveal {
      */
     private static boolean revealCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        Cost abCost = sa.getPayCosts();
-        Card source = sa.getSourceCard();
+        final Cost abCost = sa.getPayCosts();
+        final Card source = sa.getSourceCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -2053,20 +2059,20 @@ public final class AbilityFactory_Reveal {
         }
 
         // we can reuse this function here...
-        boolean bFlag = revealHandTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactory_Reveal.revealHandTargetAI(af, sa, true, false);
 
         if (!bFlag) {
             return false;
         }
 
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -2091,12 +2097,12 @@ public final class AbilityFactory_Reveal {
             return false;
         }
 
-        if (!revealHandTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactory_Reveal.revealHandTargetAI(af, sa, false, mandatory)) {
             return false;
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -2115,23 +2121,23 @@ public final class AbilityFactory_Reveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void revealResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
-                CardList handChoices = p.getCardsIn(Zone.Hand);
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
+                final CardList handChoices = p.getCardsIn(Zone.Hand);
                 if (handChoices.size() > 0) {
-                    CardList revealed = new CardList();
+                    final CardList revealed = new CardList();
                     if (params.containsKey("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices.toArray()));
                         GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
@@ -2140,11 +2146,11 @@ public final class AbilityFactory_Reveal {
                         if (params.containsKey("RevealValid")) {
                             valid = valid.getValidCards(params.get("RevealValid"), p, host);
                         }
-                        revealed.addAll(getRevealedList(host, sa, valid));
+                        revealed.addAll(AbilityFactory_Reveal.getRevealedList(host, sa, valid));
                     }
 
                     if (params.containsKey("RememberRevealed")) {
-                        for (Card rem : revealed) {
+                        for (final Card rem : revealed) {
                             host.addRemembered(rem);
                         }
                     }

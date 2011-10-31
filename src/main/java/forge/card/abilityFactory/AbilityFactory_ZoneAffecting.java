@@ -54,22 +54,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return drawStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.drawStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return drawCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.drawCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                drawResolve(af, this);
+                AbilityFactory_ZoneAffecting.drawResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return drawTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.drawTrigger(af, this, mandatory);
             }
 
         };
@@ -91,17 +91,17 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return drawStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.drawStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return drawCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.drawCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                drawResolve(af, this);
+                AbilityFactory_ZoneAffecting.drawResolve(af, this);
             }
 
         };
@@ -123,22 +123,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return drawStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.drawStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                drawResolve(af, this);
+                AbilityFactory_ZoneAffecting.drawResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return drawTargetAI(af, this, false, false);
+                return AbilityFactory_ZoneAffecting.drawTargetAI(af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return drawTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.drawTrigger(af, this, mandatory);
             }
 
         };
@@ -157,8 +157,8 @@ public class AbilityFactory_ZoneAffecting {
      * @return a {@link java.lang.String} object.
      */
     private static String drawStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -166,14 +166,14 @@ public class AbilityFactory_ZoneAffecting {
             sb.append(" ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -181,7 +181,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         if (tgtPlayers.size() > 0) {
-            Iterator<Player> it = tgtPlayers.iterator();
+            final Iterator<Player> it = tgtPlayers.iterator();
             while (it.hasNext()) {
                 sb.append(it.next().toString());
                 if (it.hasNext()) {
@@ -210,7 +210,7 @@ public class AbilityFactory_ZoneAffecting {
             sb.append(".");
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -230,11 +230,11 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean drawCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Target tgt = sa.getTarget();
-        Card source = sa.getSourceCard();
-        Cost abCost = sa.getPayCosts();
+        final Target tgt = sa.getTarget();
+        final Card source = sa.getSourceCard();
+        final Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -256,15 +256,15 @@ public class AbilityFactory_ZoneAffecting {
 
         }
 
-        boolean bFlag = drawTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactory_ZoneAffecting.drawTargetAI(af, sa, true, false);
 
         if (!bFlag) {
             return false;
         }
 
         if (tgt != null) {
-            ArrayList<Player> players = tgt.getTargetPlayers();
-            if (players.size() > 0 && players.get(0).isHuman()) {
+            final ArrayList<Player> players = tgt.getTargetPlayers();
+            if ((players.size() > 0) && players.get(0).isHuman()) {
                 return true;
             }
         }
@@ -281,23 +281,21 @@ public class AbilityFactory_ZoneAffecting {
 
         double chance = .4; // 40 percent chance of drawing with instant speed
                             // stuff
-        if (AbilityFactory.isSorcerySpeed(sa))
-         {
+        if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
         if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
-                AllZone.getComputerPlayer())))
-         {
+                AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -319,15 +317,16 @@ public class AbilityFactory_ZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean drawTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA, final boolean mandatory) {
-        Target tgt = af.getAbTgt();
-        HashMap<String, String> params = af.getMapParams();
-        Card source = sa.getSourceCard();
+    private static boolean drawTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
+            final boolean mandatory) {
+        final Target tgt = af.getAbTgt();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card source = sa.getSourceCard();
 
-        int computerHandSize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size();
-        int humanLibrarySize = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size();
-        int computerLibrarySize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Library).size();
-        int computerMaxHandSize = AllZone.getComputerPlayer().getMaxHandSize();
+        final int computerHandSize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size();
+        final int humanLibrarySize = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size();
+        final int computerLibrarySize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Library).size();
+        final int computerMaxHandSize = AllZone.getComputerPlayer().getMaxHandSize();
 
         int numCards = 1;
         if (params.containsKey("NumCards")) {
@@ -335,8 +334,8 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         boolean xPaid = false;
-        String num = params.get("NumCards");
-        if (num != null && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+        final String num = params.get("NumCards");
+        if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (sa instanceof Ability_Sub) {
                 numCards = Integer.parseInt(source.getSVar("PayX"));
@@ -355,15 +354,15 @@ public class AbilityFactory_ZoneAffecting {
             // ability is targeted
             tgt.resetTargets();
 
-            boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
-            boolean canTgtComp = AllZone.getComputerPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
+            final boolean canTgtComp = AllZone.getComputerPlayer().canTarget(sa);
             boolean tgtHuman = false;
 
             if (!canTgtHuman && !canTgtComp) {
                 return false;
             }
 
-            if (canTgtHuman && !AllZone.getHumanPlayer().cantLose() && numCards >= humanLibrarySize) {
+            if (canTgtHuman && !AllZone.getHumanPlayer().cantLose() && (numCards >= humanLibrarySize)) {
                 // Deck the Human? DO IT!
                 tgt.addTarget(AllZone.getHumanPlayer());
                 return true;
@@ -382,14 +381,15 @@ public class AbilityFactory_ZoneAffecting {
                 }
             }
 
-            if (computerHandSize + numCards > computerMaxHandSize && AllZone.getPhase().getPlayerTurn().isComputer()) {
+            if (((computerHandSize + numCards) > computerMaxHandSize)
+                    && AllZone.getPhase().getPlayerTurn().isComputer()) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
                 } else {
                     // Don't draw too many cards and then risk discarding cards
                     // at EOT
-                    if (!(params.containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory) {
+                    if (!(params.containsKey("NextUpkeep") || (sa instanceof Ability_Sub)) && !mandatory) {
                         return false;
                     }
                 }
@@ -415,16 +415,17 @@ public class AbilityFactory_ZoneAffecting {
                 }
             }
 
-            if (computerHandSize + numCards > computerMaxHandSize && AllZone.getPhase().getPlayerTurn().isComputer()) {
+            if (((computerHandSize + numCards) > computerMaxHandSize)
+                    && AllZone.getPhase().getPlayerTurn().isComputer()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                if (!(params.containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory) {
+                if (!(params.containsKey("NextUpkeep") || (sa instanceof Ability_Sub)) && !mandatory) {
                     return false;
                 }
             }
         }
         return true;
-    }// drawTargetAI()
+    } // drawTargetAI()
 
     /**
      * <p>
@@ -444,12 +445,12 @@ public class AbilityFactory_ZoneAffecting {
             return false;
         }
 
-        if (!drawTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactory_ZoneAffecting.drawTargetAI(af, sa, false, mandatory)) {
             return false;
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -468,9 +469,9 @@ public class AbilityFactory_ZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void drawResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         int numCards = 1;
         if (params.containsKey("NumCards")) {
             numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
@@ -478,18 +479,18 @@ public class AbilityFactory_ZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
         }
 
-        boolean optional = params.containsKey("OptionalDecider");
-        boolean slowDraw = params.containsKey("NextUpkeep");
+        final boolean optional = params.containsKey("OptionalDecider");
+        final boolean slowDraw = params.containsKey("NextUpkeep");
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 if (optional) {
                     if (p.isComputer()) {
                         if (numCards >= p.getCardsIn(Zone.Library).size()) {
@@ -497,7 +498,7 @@ public class AbilityFactory_ZoneAffecting {
                             continue;
                         }
                     } else {
-                        StringBuilder sb = new StringBuilder();
+                        final StringBuilder sb = new StringBuilder();
                         sb.append("Do you want to draw ").append(numCards).append(" cards(s)");
 
                         if (slowDraw) {
@@ -513,12 +514,13 @@ public class AbilityFactory_ZoneAffecting {
                 }
 
                 if (slowDraw) {
-                    for (int i = 0; i < numCards; i++)
+                    for (int i = 0; i < numCards; i++) {
                         p.addSlowtripList(source);
+                    }
                 } else {
-                    CardList drawn = p.drawCards(numCards);
+                    final CardList drawn = p.drawCards(numCards);
                     if (params.containsKey("RememberDrawn")) {
-                        for (Card c : drawn) {
+                        for (final Card c : drawn) {
                             source.addRemembered(c);
                         }
                     }
@@ -527,7 +529,7 @@ public class AbilityFactory_ZoneAffecting {
 
             }
         }
-    }// drawResolve()
+    } // drawResolve()
 
     // **********************************************************************
     // ******************************* MILL *********************************
@@ -548,22 +550,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return millStackDescription(this, af);
+                return AbilityFactory_ZoneAffecting.millStackDescription(this, af);
             }
 
             @Override
             public boolean canPlayAI() {
-                return millCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.millCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                millResolve(af, this);
+                AbilityFactory_ZoneAffecting.millResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return millTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.millTrigger(af, this, mandatory);
             }
 
         };
@@ -585,17 +587,17 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return millStackDescription(this, af);
+                return AbilityFactory_ZoneAffecting.millStackDescription(this, af);
             }
 
             @Override
             public boolean canPlayAI() {
-                return millCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.millCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                millResolve(af, this);
+                AbilityFactory_ZoneAffecting.millResolve(af, this);
             }
 
         };
@@ -617,22 +619,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return millStackDescription(this, af);
+                return AbilityFactory_ZoneAffecting.millStackDescription(this, af);
             }
 
             @Override
             public void resolve() {
-                millResolve(af, this);
+                AbilityFactory_ZoneAffecting.millResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return millDrawback(af, this);
+                return AbilityFactory_ZoneAffecting.millDrawback(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return millTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.millTrigger(af, this, mandatory);
             }
 
         };
@@ -651,13 +653,13 @@ public class AbilityFactory_ZoneAffecting {
      * @return a {@link java.lang.String} object.
      */
     private static String millStackDescription(final SpellAbility sa, final AbilityFactory af) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
-        int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -670,17 +672,17 @@ public class AbilityFactory_ZoneAffecting {
             sb.append(" ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");
         }
 
-        Zone dest = Zone.smartValueOf(params.get("Destination"));
-        if (dest == null || dest.equals(Zone.Graveyard)) {
+        final Zone dest = Zone.smartValueOf(params.get("Destination"));
+        if ((dest == null) || dest.equals(Zone.Graveyard)) {
             sb.append("mills ");
         } else if (dest.equals(Zone.Exile)) {
             sb.append("exiles ");
@@ -692,7 +694,7 @@ public class AbilityFactory_ZoneAffecting {
         }
         sb.append(" from the top of his or her library.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -712,10 +714,10 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean millCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Card source = sa.getSourceCard();
-        Cost abCost = af.getAbCost();
+        final Card source = sa.getSourceCard();
+        final Cost abCost = af.getAbCost();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -737,11 +739,11 @@ public class AbilityFactory_ZoneAffecting {
 
         }
 
-        if (!millTargetAI(af, sa, false)) {
+        if (!AbilityFactory_ZoneAffecting.millTargetAI(af, sa, false)) {
             return false;
         }
 
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
         if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
@@ -755,30 +757,28 @@ public class AbilityFactory_ZoneAffecting {
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff
-        if (AbilityFactory.isSorcerySpeed(sa))
-         {
+        if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
         if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
-                AllZone.getComputerPlayer())))
-         {
+                AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
 
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(sa))
-         {
+        if (AbilityFactory.playReusable(sa)) {
             randomReturn = true;
-        // some other variables here, like deck size, and phase and other fun
-        // stuff
+            // some other variables here, like deck size, and phase and other
+            // fun
+            // stuff
         }
 
         if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa),
-                    AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size());
+            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+                    .getCardsIn(Constant.Zone.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
 
@@ -799,8 +799,8 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean millTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        Target tgt = af.getAbTgt();
-        HashMap<String, String> params = af.getMapParams();
+        final Target tgt = af.getAbTgt();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (tgt != null) {
             tgt.resetTargets();
@@ -812,9 +812,9 @@ public class AbilityFactory_ZoneAffecting {
                 return false;
             }
 
-            int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+            final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
-            CardList pLibrary = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library);
+            final CardList pLibrary = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library);
 
             if (pLibrary.size() == 0) { // deck already empty, no need to mill
                 if (!mandatory) {
@@ -853,12 +853,12 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean millDrawback(final AbilityFactory af, final SpellAbility sa) {
-        if (!millTargetAI(af, sa, true)) {
+        if (!AbilityFactory_ZoneAffecting.millTargetAI(af, sa, true)) {
             return false;
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.chkAIDrawback();
         }
@@ -871,22 +871,22 @@ public class AbilityFactory_ZoneAffecting {
             return false;
         }
 
-        if (!millTargetAI(af, sa, mandatory)) {
+        if (!AbilityFactory_ZoneAffecting.millTargetAI(af, sa, mandatory)) {
             return false;
         }
 
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa),
-                    AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size());
+            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+                    .getCardsIn(Constant.Zone.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -905,13 +905,13 @@ public class AbilityFactory_ZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void millResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card source = sa.getSourceCard();
-        int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        final HashMap<String, String> params = af.getMapParams();
+        final Card source = sa.getSourceCard();
+        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -923,12 +923,13 @@ public class AbilityFactory_ZoneAffecting {
             destination = Constant.Zone.Graveyard;
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
-                CardList milled = p.mill(numCards, destination);
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
+                final CardList milled = p.mill(numCards, destination);
                 if (params.containsKey("RememberMilled")) {
-                    for (Card c : milled)
+                    for (final Card c : milled) {
                         source.addRemembered(c);
+                    }
                 }
             }
         }
@@ -973,22 +974,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return discardStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.discardStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return discardCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.discardCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                discardResolve(af, this);
+                AbilityFactory_ZoneAffecting.discardResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return discardTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.discardTrigger(af, this, mandatory);
             }
 
         };
@@ -1010,17 +1011,17 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return discardStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.discardStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return discardCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.discardCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                discardResolve(af, this);
+                AbilityFactory_ZoneAffecting.discardResolve(af, this);
             }
 
         };
@@ -1042,22 +1043,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return discardStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.discardStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                discardResolve(af, this);
+                AbilityFactory_ZoneAffecting.discardResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return discardCheckDrawbackAI(af, this);
+                return AbilityFactory_ZoneAffecting.discardCheckDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return discardTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.discardTrigger(af, this, mandatory);
             }
 
         };
@@ -1075,28 +1076,28 @@ public class AbilityFactory_ZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void discardResolve(final AbilityFactory af, final SpellAbility sa) {
-        Card source = sa.getSourceCard();
-        HashMap<String, String> params = af.getMapParams();
+        final Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
 
-        String mode = params.get("Mode");
+        final String mode = params.get("Mode");
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        CardList discarded = new CardList();
+        final CardList discarded = new CardList();
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 if (mode.equals("Hand")) {
-                    CardList list = p.discardHand(sa);
+                    final CardList list = p.discardHand(sa);
                     if (params.containsKey("RememberDiscarded")) {
-                        for (Card c : list) {
+                        for (final Card c : list) {
                             source.addRemembered(c);
                         }
                     }
@@ -1109,7 +1110,7 @@ public class AbilityFactory_ZoneAffecting {
                 }
 
                 if (mode.equals("Random")) {
-                    String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
+                    final String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
                     discarded.addAll(p.discardRandom(numCards, sa, valid));
                 } else if (mode.equals("TgtChoose")) {
                     if (params.containsKey("UnlessType")) {
@@ -1119,7 +1120,7 @@ public class AbilityFactory_ZoneAffecting {
                     }
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
-                    CardList dPHand = p.getCardsIn(Zone.Hand);
+                    final CardList dPHand = p.getCardsIn(Zone.Hand);
 
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
@@ -1136,24 +1137,24 @@ public class AbilityFactory_ZoneAffecting {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
                     }
 
-                    CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
+                    final CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
 
                     // Reveal cards that will be discarded?
-                    for (Card c : dPChHand) {
+                    for (final Card c : dPChHand) {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
-                    CardList dPHand = p.getCardsIn(Zone.Hand);
+                    final CardList dPHand = p.getCardsIn(Zone.Hand);
                     if (dPHand.size() != 0) {
                         CardList dPChHand = new CardList(dPHand.toArray());
 
                         if (params.containsKey("DiscardValid")) { // Restrict
                                                                   // card
                                                                   // choices
-                            String[] dValid = params.get("DiscardValid").split(",");
+                            final String[] dValid = params.get("DiscardValid").split(",");
                             dPChHand = dPHand.getValidCards(dValid, source.getController(), source);
                         }
                         Player chooser = null;
@@ -1167,11 +1168,11 @@ public class AbilityFactory_ZoneAffecting {
                             // AI
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
-                                    CardList dChoices = new CardList();
+                                    final CardList dChoices = new CardList();
                                     if (params.containsKey("DiscardValid")) {
-                                        String dValid = params.get("DiscardValid");
+                                        final String dValid = params.get("DiscardValid");
                                         if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
-                                            Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
+                                            final Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
                                             if (c != null) {
                                                 dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
                                             }
@@ -1184,10 +1185,10 @@ public class AbilityFactory_ZoneAffecting {
                                     CardListUtil.sortCMC(dPChHand);
                                     dChoices.add(dPChHand.get(0));
 
-                                    Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
+                                    final Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
                                     dPChHand.remove(dC);
 
-                                    CardList dCs = new CardList();
+                                    final CardList dCs = new CardList();
                                     dCs.add(dC);
                                     GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
                                     discarded.add(dC);
@@ -1202,7 +1203,8 @@ public class AbilityFactory_ZoneAffecting {
 
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
-                                    Card dC = GuiUtils.getChoice("Choose a card to be discarded", dPChHand.toArray());
+                                    final Card dC = GuiUtils.getChoice("Choose a card to be discarded",
+                                            dPChHand.toArray());
 
                                     dPChHand.remove(dC);
                                     discarded.add(dC);
@@ -1218,7 +1220,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         if (params.containsKey("RememberDiscarded")) {
-            for (Card c : discarded) {
+            for (final Card c : discarded) {
                 source.addRemembered(c);
             }
         }
@@ -1237,13 +1239,13 @@ public class AbilityFactory_ZoneAffecting {
      * @return a {@link java.lang.String} object.
      */
     private static String discardStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        String mode = params.get("Mode");
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final String mode = params.get("Mode");
+        final StringBuilder sb = new StringBuilder();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1256,15 +1258,16 @@ public class AbilityFactory_ZoneAffecting {
             sb.append(" ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
         if (tgtPlayers.size() > 0) {
 
-            for (Player p : tgtPlayers)
+            for (final Player p : tgtPlayers) {
                 sb.append(p.toString()).append(" ");
+            }
 
             if (mode.equals("RevealYouChoose")) {
                 sb.append("reveals his or her hand.").append("  You choose (");
@@ -1306,13 +1309,13 @@ public class AbilityFactory_ZoneAffecting {
             }
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();
-    }// discardStackDescription()
+    } // discardStackDescription()
 
     /**
      * <p>
@@ -1326,11 +1329,11 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean discardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Target tgt = sa.getTarget();
-        Card source = sa.getSourceCard();
-        Cost abCost = sa.getPayCosts();
+        final Target tgt = sa.getTarget();
+        final Card source = sa.getSourceCard();
+        final Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -1352,13 +1355,14 @@ public class AbilityFactory_ZoneAffecting {
 
         }
 
-        boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() > 0;
+        final boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() > 0;
 
         if (tgt != null) {
-            discardTargetAI(af, sa);
+            AbilityFactory_ZoneAffecting.discardTargetAI(af, sa);
         } else {
             // TODO: Add appropriate restrictions
-            ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                    params.get("Defined"), sa);
 
             if (players.size() == 1) {
                 if (players.get(0).isComputer()) {
@@ -1381,7 +1385,7 @@ public class AbilityFactory_ZoneAffecting {
         if (!params.get("Mode").equals("Hand") && !params.get("Mode").equals("RevealDiscardAll")) {
             if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+                final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
                         .getCardsIn(Constant.Zone.Hand).size());
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             }
@@ -1399,18 +1403,16 @@ public class AbilityFactory_ZoneAffecting {
 
         double chance = .5; // 50 percent chance of discarding with instant
                             // speed stuff
-        if (AbilityFactory.isSorcerySpeed(sa))
-         {
+        if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .75; // 75% chance for sorcery speed
         }
 
         if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
-                AllZone.getComputerPlayer())))
-         {
+                AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
 
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (AbilityFactory.playReusable(sa)) {
@@ -1419,12 +1421,12 @@ public class AbilityFactory_ZoneAffecting {
 
         // some other variables here, like handsize vs. maxHandSize
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
-    }// discardCanPlayAI()
+    } // discardCanPlayAI()
 
     /**
      * <p>
@@ -1438,9 +1440,10 @@ public class AbilityFactory_ZoneAffecting {
      * @return a boolean.
      */
     private static boolean discardTargetAI(final AbilityFactory af, final SpellAbility sa) {
-        Target tgt = af.getAbTgt();
-        if(AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() < 1)
+        final Target tgt = af.getAbTgt();
+        if (AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() < 1) {
             return false;
+        }
         if (tgt != null) {
             if (AllZone.getHumanPlayer().canTarget(sa)) {
                 tgt.addTarget(AllZone.getHumanPlayer());
@@ -1448,7 +1451,7 @@ public class AbilityFactory_ZoneAffecting {
             }
         }
         return false;
-    }// discardTargetAI()
+    } // discardTargetAI()
 
     /**
      * <p>
@@ -1468,9 +1471,9 @@ public class AbilityFactory_ZoneAffecting {
             return false;
         }
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
-            if (!discardTargetAI(af, sa)) {
+            if (!AbilityFactory_ZoneAffecting.discardTargetAI(af, sa)) {
                 if (mandatory && AllZone.getComputerPlayer().canTarget(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                 } else {
@@ -1480,7 +1483,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         return true;
-    }// discardTrigger()
+    } // discardTrigger()
 
     /**
      * <p>
@@ -1496,13 +1499,13 @@ public class AbilityFactory_ZoneAffecting {
     private static boolean discardCheckDrawbackAI(final AbilityFactory af, final Ability_Sub subAb) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
-            return discardTargetAI(af, subAb);
+            return AbilityFactory_ZoneAffecting.discardTargetAI(af, subAb);
         }
         // TODO: check for some extra things
         return true;
-    }// discardCheckDrawbackAI()
+    } // discardCheckDrawbackAI()
 
     // **********************************************************************
     // ******************************* Shuffle ******************************
@@ -1523,22 +1526,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return shuffleStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.shuffleStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return shuffleCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.shuffleCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                shuffleResolve(af, this);
+                AbilityFactory_ZoneAffecting.shuffleResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return shuffleTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.shuffleTrigger(af, this, mandatory);
             }
 
         };
@@ -1560,17 +1563,17 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return shuffleStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.shuffleStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return shuffleCanPlayAI(af, this);
+                return AbilityFactory_ZoneAffecting.shuffleCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                shuffleResolve(af, this);
+                AbilityFactory_ZoneAffecting.shuffleResolve(af, this);
             }
 
         };
@@ -1592,22 +1595,22 @@ public class AbilityFactory_ZoneAffecting {
 
             @Override
             public String getStackDescription() {
-                return shuffleStackDescription(af, this);
+                return AbilityFactory_ZoneAffecting.shuffleStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                shuffleResolve(af, this);
+                AbilityFactory_ZoneAffecting.shuffleResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return shuffleTargetAI(af, this, false, false);
+                return AbilityFactory_ZoneAffecting.shuffleTargetAI(af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return shuffleTrigger(af, this, mandatory);
+                return AbilityFactory_ZoneAffecting.shuffleTrigger(af, this, mandatory);
             }
 
         };
@@ -1626,8 +1629,8 @@ public class AbilityFactory_ZoneAffecting {
      * @return a {@link java.lang.String} object.
      */
     private static String shuffleStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -1635,14 +1638,14 @@ public class AbilityFactory_ZoneAffecting {
             sb.append(" ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1650,7 +1653,7 @@ public class AbilityFactory_ZoneAffecting {
         }
 
         if (tgtPlayers.size() > 0) {
-            Iterator<Player> it = tgtPlayers.iterator();
+            final Iterator<Player> it = tgtPlayers.iterator();
             while (it.hasNext()) {
                 sb.append(it.next().getName());
                 if (it.hasNext()) {
@@ -1668,7 +1671,7 @@ public class AbilityFactory_ZoneAffecting {
         }
         sb.append(".");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1722,9 +1725,10 @@ public class AbilityFactory_ZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean shuffleTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA, final boolean mandatory) {
+    private static boolean shuffleTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
+            final boolean mandatory) {
         return false;
-    }// shuffleTargetAI()
+    } // shuffleTargetAI()
 
     /**
      * <p>
@@ -1744,12 +1748,12 @@ public class AbilityFactory_ZoneAffecting {
             return false;
         }
 
-        if (!shuffleTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactory_ZoneAffecting.shuffleTargetAI(af, sa, false, mandatory)) {
             return false;
         }
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1768,21 +1772,21 @@ public class AbilityFactory_ZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void shuffleResolve(final AbilityFactory af, final SpellAbility sa) {
-        Card host = af.getHostCard();
-        HashMap<String, String> params = af.getMapParams();
-        boolean optional = params.containsKey("Optional");
+        final Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final boolean optional = params.containsKey("Optional");
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 if (optional && sa.getActivatingPlayer().isHuman()
                         && !GameActionUtil.showYesNoDialog(host, "Have " + p + " shuffle?")) {
                 } else {
@@ -1792,4 +1796,4 @@ public class AbilityFactory_ZoneAffecting {
         }
     }
 
-}// end class AbilityFactory_ZoneAffecting
+} // end class AbilityFactory_ZoneAffecting

@@ -32,17 +32,17 @@ import forge.card.trigger.TriggerHandler;
  * @version $Id$
  */
 public class AbilityFactory_Token extends AbilityFactory {
-    private AbilityFactory AF = null;
+    private AbilityFactory abilityFactory = null;
 
-    private String tokenAmount;
-    private String tokenName;
-    private String[] tokenTypes;
+    private final String tokenAmount;
+    private final String tokenName;
+    private final String[] tokenTypes;
     private String tokenOwner;
-    private String[] tokenColors;
-    private String[] tokenKeywords;
-    private String tokenPower;
-    private String tokenToughness;
-    private String tokenImage;
+    private final String[] tokenColors;
+    private final String[] tokenKeywords;
+    private final String tokenPower;
+    private final String tokenToughness;
+    private final String tokenImage;
     private String[] tokenAbilities;
     private String[] tokenTriggers;
     private String[] tokenSVars;
@@ -59,9 +59,9 @@ public class AbilityFactory_Token extends AbilityFactory {
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_Token(final AbilityFactory af) {
-        AF = af;
+        this.abilityFactory = af;
 
-        HashMap<String, String> mapParams = af.getMapParams();
+        final HashMap<String, String> mapParams = af.getMapParams();
         String image;
         String[] keywords;
 
@@ -79,49 +79,49 @@ public class AbilityFactory_Token extends AbilityFactory {
         }
 
         if (mapParams.containsKey("TokenTapped")) {
-            tokenTapped = mapParams.get("TokenTapped").equals("True");
+            this.tokenTapped = mapParams.get("TokenTapped").equals("True");
         } else {
-            tokenTapped = false;
+            this.tokenTapped = false;
         }
         if (mapParams.containsKey("TokenAttacking")) {
-            tokenAttacking = mapParams.get("TokenAttacking").equals("True");
+            this.tokenAttacking = mapParams.get("TokenAttacking").equals("True");
         } else {
-            tokenAttacking = false;
+            this.tokenAttacking = false;
         }
 
         if (mapParams.containsKey("TokenAbilities")) {
-            tokenAbilities = mapParams.get("TokenAbilities").split(",");
+            this.tokenAbilities = mapParams.get("TokenAbilities").split(",");
         } else {
-            tokenAbilities = null;
+            this.tokenAbilities = null;
         }
         if (mapParams.containsKey("TokenTriggers")) {
-            tokenTriggers = mapParams.get("TokenTriggers").split(",");
+            this.tokenTriggers = mapParams.get("TokenTriggers").split(",");
         } else {
-            tokenTriggers = null;
+            this.tokenTriggers = null;
         }
         if (mapParams.containsKey("TokenSVars")) {
-            tokenSVars = mapParams.get("TokenSVars").split(",");
+            this.tokenSVars = mapParams.get("TokenSVars").split(",");
         } else {
-            tokenSVars = null;
+            this.tokenSVars = null;
         }
         if (mapParams.containsKey("TokenStaticAbilities")) {
-            tokenStaticAbilities = mapParams.get("TokenStaticAbilities").split(",");
+            this.tokenStaticAbilities = mapParams.get("TokenStaticAbilities").split(",");
         } else {
-            tokenStaticAbilities = null;
+            this.tokenStaticAbilities = null;
         }
 
-        tokenAmount = mapParams.get("TokenAmount");
-        tokenPower = mapParams.get("TokenPower");
-        tokenToughness = mapParams.get("TokenToughness");
-        tokenName = mapParams.get("TokenName");
-        tokenTypes = mapParams.get("TokenTypes").split(",");
-        tokenColors = mapParams.get("TokenColors").split(",");
-        tokenKeywords = keywords;
-        tokenImage = image;
+        this.tokenAmount = mapParams.get("TokenAmount");
+        this.tokenPower = mapParams.get("TokenPower");
+        this.tokenToughness = mapParams.get("TokenToughness");
+        this.tokenName = mapParams.get("TokenName");
+        this.tokenTypes = mapParams.get("TokenTypes").split(",");
+        this.tokenColors = mapParams.get("TokenColors").split(",");
+        this.tokenKeywords = keywords;
+        this.tokenImage = image;
         if (mapParams.containsKey("TokenOwner")) {
-            tokenOwner = mapParams.get("TokenOwner");
+            this.tokenOwner = mapParams.get("TokenOwner");
         } else {
-            tokenOwner = "You";
+            this.tokenOwner = "You";
         }
     }
 
@@ -134,27 +134,28 @@ public class AbilityFactory_Token extends AbilityFactory {
      */
     public final SpellAbility getAbility() {
 
-        final SpellAbility abToken = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abToken = new Ability_Activated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8460074843405764620L;
 
             @Override
             public boolean canPlayAI() {
-                return tokenCanPlayAI(this);
+                return AbilityFactory_Token.this.tokenCanPlayAI(this);
             }
 
             @Override
             public void resolve() {
-                doResolve(this);
+                AbilityFactory_Token.this.doResolve(this);
             }
 
             @Override
             public String getStackDescription() {
-                return doStackDescription(this);
+                return AbilityFactory_Token.this.doStackDescription(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return tokenDoTriggerAI(this, mandatory);
+                return AbilityFactory_Token.this.tokenDoTriggerAI(this, mandatory);
             }
         };
 
@@ -169,22 +170,22 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpell() {
-        final SpellAbility spToken = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility spToken = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -8041427947613029670L;
 
             @Override
             public boolean canPlayAI() {
-                return tokenCanPlayAI(this);
+                return AbilityFactory_Token.this.tokenCanPlayAI(this);
             }
 
             @Override
             public void resolve() {
-                doResolve(this);
+                AbilityFactory_Token.this.doResolve(this);
             }
 
             @Override
             public String getStackDescription() {
-                return doStackDescription(this);
+                return AbilityFactory_Token.this.doStackDescription(this);
             }
         };
 
@@ -199,7 +200,7 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawback() {
-        final SpellAbility dbDealDamage = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+        final SpellAbility dbDealDamage = new Ability_Sub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -209,17 +210,17 @@ public class AbilityFactory_Token extends AbilityFactory {
 
             @Override
             public String getStackDescription() {
-                return doStackDescription(this);
+                return AbilityFactory_Token.this.doStackDescription(this);
             }
 
             @Override
             public void resolve() {
-                doResolve(this);
+                AbilityFactory_Token.this.doResolve(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return tokenDoTriggerAI(this, mandatory);
+                return AbilityFactory_Token.this.tokenDoTriggerAI(this, mandatory);
             }
 
         }; // Spell
@@ -237,12 +238,12 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @return a boolean.
      */
     private boolean tokenCanPlayAI(final SpellAbility sa) {
-        Cost cost = sa.getPayCosts();
+        final Cost cost = sa.getPayCosts();
 
-        for (String type : tokenTypes) {
+        for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, tokenName).size() > 0) {
+                if (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, this.tokenName).size() > 0) {
                     return false;
                 }
             }
@@ -250,7 +251,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 
         boolean haste = false;
         boolean oneShot = false;
-        for (String kw : tokenKeywords) {
+        for (final String kw : this.tokenKeywords) {
             if (kw.equals("Haste")) {
                 haste = true;
             }
@@ -280,11 +281,11 @@ public class AbilityFactory_Token extends AbilityFactory {
         // return true;
 
         // prevent run-away activations - first time will always return true
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         final Card source = sa.getSourceCard();
-        boolean chance = r.nextFloat() <= Math.pow(.9, sa.getActivationsThisTurn());
+        final boolean chance = r.nextFloat() <= Math.pow(.9, sa.getActivationsThisTurn());
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
@@ -312,13 +313,13 @@ public class AbilityFactory_Token extends AbilityFactory {
             }
         }
 
-        if (tokenAmount.equals("X")) {
-            if (source.getSVar(tokenAmount).equals("Count$xPaid")) {
+        if (this.tokenAmount.equals("X")) {
+            if (source.getSVar(this.tokenAmount).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(xPay));
             }
-            if (AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa) <= 0) {
+            if (AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa) <= 0) {
                 return false;
             }
         }
@@ -328,10 +329,10 @@ public class AbilityFactory_Token extends AbilityFactory {
         }
 
         if (sa.isAbility()) {
-            return (r.nextFloat() < .9 && chance);
+            return ((r.nextFloat() < .9) && chance);
         }
 
-        return (r.nextFloat() < .6667 && chance);
+        return ((r.nextFloat() < .6667) && chance);
     }
 
     /**
@@ -363,15 +364,15 @@ public class AbilityFactory_Token extends AbilityFactory {
      * @return a {@link java.lang.String} object.
      */
     private String doStackDescription(final SpellAbility sa) {
-        Card host = AF.getHostCard();
+        final Card host = this.abilityFactory.getHostCard();
 
-        int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
-        int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
-        int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
+        final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
+        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenToughness, sa);
+        final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
 
-        String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
+        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -386,7 +387,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         }
         sb.append(" onto the battlefield");
 
-        if (tokenOwner.equals("Opponent")) {
+        if (this.tokenOwner.equals("Opponent")) {
             sb.append(" under your opponent's control.");
         } else {
             sb.append(".");
@@ -408,12 +409,12 @@ public class AbilityFactory_Token extends AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void doResolve(final SpellAbility sa) {
-        Card host = AF.getHostCard();
+        final Card host = this.abilityFactory.getHostCard();
         String imageName = "";
         Player controller;
         String cost = "";
         // Construct colors
-        String[] substitutedColors = Arrays.copyOf(tokenColors, tokenColors.length);
+        final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
                 // this currently only supports 1 chosen color
@@ -421,7 +422,7 @@ public class AbilityFactory_Token extends AbilityFactory {
             }
         }
         String colorDesc = "";
-        for (String col : substitutedColors) {
+        for (final String col : substitutedColors) {
             if (col.equalsIgnoreCase("White")) {
                 colorDesc += "W";
             } else if (col.equalsIgnoreCase("Blue")) {
@@ -436,61 +437,62 @@ public class AbilityFactory_Token extends AbilityFactory {
                 colorDesc = "C";
             }
         }
-        if (tokenImage.equals("")) {
+        if (this.tokenImage.equals("")) {
 
-            imageName += colorDesc + " " + tokenPower + " " + tokenToughness + " " + tokenName;
+            imageName += colorDesc + " " + this.tokenPower + " " + this.tokenToughness + " " + this.tokenName;
         } else {
-            imageName = tokenImage;
+            imageName = this.tokenImage;
         }
         // System.out.println("AF_Token imageName = " + imageName);
 
-        for (char c : colorDesc.toCharArray()) {
+        for (final char c : colorDesc.toCharArray()) {
             cost += c + ' ';
         }
 
         cost = colorDesc.replace('C', '1').trim();
 
-        controller = AbilityFactory.getDefinedPlayers(AF.getHostCard(), tokenOwner, sa).get(0);
+        controller = AbilityFactory.getDefinedPlayers(this.abilityFactory.getHostCard(), this.tokenOwner, sa).get(0);
 
-        int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
-        int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
-        int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
+        final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
+        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenToughness, sa);
+        final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
 
-        String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
+        final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
         for (int i = 0; i < substitutedTypes.length; i++) {
             if (substitutedTypes[i].equals("ChosenType")) {
                 substitutedTypes[i] = host.getChosenType();
             }
         }
-        String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
+        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        String remember = AF.getMapParams().get("RememberTokens");
+        final String remember = this.abilityFactory.getMapParams().get("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
-            CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost, substitutedTypes,
-                    finalPower, finalToughness, tokenKeywords);
+            final CardList tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
+                    substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
 
             // Grant abilities
-            if (tokenAbilities != null) {
-                AbilityFactory af = new AbilityFactory();
-                for (String s : tokenAbilities) {
-                    String actualAbility = AF.getHostCard().getSVar(s);
-                    for (Card c : tokens) {
-                        SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+            if (this.tokenAbilities != null) {
+                final AbilityFactory af = new AbilityFactory();
+                for (final String s : this.tokenAbilities) {
+                    final String actualAbility = this.abilityFactory.getHostCard().getSVar(s);
+                    for (final Card c : tokens) {
+                        final SpellAbility grantedAbility = af.getAbility(actualAbility, c);
                         c.addSpellAbility(grantedAbility);
                     }
                 }
             }
 
             // Grant triggers
-            if (tokenTriggers != null) {
+            if (this.tokenTriggers != null) {
 
-                for (String s : tokenTriggers) {
-                    String actualTrigger = AF.getHostCard().getSVar(s);
+                for (final String s : this.tokenTriggers) {
+                    final String actualTrigger = this.abilityFactory.getHostCard().getSVar(s);
 
                     for (final Card c : tokens) {
 
-                        Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                        String ability = AF.getHostCard().getSVar(parsedTrigger.getMapParams().get("Execute"));
+                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                        final String ability = this.abilityFactory.getHostCard().getSVar(
+                                parsedTrigger.getMapParams().get("Execute"));
                         parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
                         c.addTrigger(parsedTrigger);
                     }
@@ -498,34 +500,34 @@ public class AbilityFactory_Token extends AbilityFactory {
             }
 
             // Grant SVars
-            if (tokenSVars != null) {
-                for (String s : tokenSVars) {
-                    String actualSVar = AF.getHostCard().getSVar(s);
-                    for (Card c : tokens) {
+            if (this.tokenSVars != null) {
+                for (final String s : this.tokenSVars) {
+                    final String actualSVar = this.abilityFactory.getHostCard().getSVar(s);
+                    for (final Card c : tokens) {
                         c.setSVar(s, actualSVar);
                     }
                 }
             }
 
             // Grant static abilities
-            if (tokenStaticAbilities != null) {
-                for (String s : tokenStaticAbilities) {
-                    String actualAbility = AF.getHostCard().getSVar(s);
-                    for (Card c : tokens) {
+            if (this.tokenStaticAbilities != null) {
+                for (final String s : this.tokenStaticAbilities) {
+                    final String actualAbility = this.abilityFactory.getHostCard().getSVar(s);
+                    for (final Card c : tokens) {
                         c.addStaticAbility(actualAbility);
                     }
                 }
             }
 
-            for (Card c : tokens) {
-                if (tokenTapped) {
+            for (final Card c : tokens) {
+                if (this.tokenTapped) {
                     c.tap();
                 }
-                if (tokenAttacking) {
+                if (this.tokenAttacking) {
                     AllZone.getCombat().addAttacker(c);
                 }
                 if (remember != null) {
-                    AF.getHostCard().addRemembered(c);
+                    this.abilityFactory.getHostCard().addRemembered(c);
                 }
             }
         }

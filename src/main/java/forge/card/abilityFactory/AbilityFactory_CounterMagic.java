@@ -77,8 +77,8 @@ public class AbilityFactory_CounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility abCounter = new Ability_Activated(abilityFactory.getHostCard(),
-                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility abCounter = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -3895990436431818899L;
 
             @Override
@@ -118,8 +118,8 @@ public class AbilityFactory_CounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility spCounter = new Spell(abilityFactory.getHostCard(),
-                abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility spCounter = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
@@ -481,9 +481,7 @@ public class AbilityFactory_CounterMagic {
      *            a {@link forge.card.spellability.SpellAbility_StackInstance}
      *            object.
      */
-    private void removeFromStack(final SpellAbility tgtSA,
-            final SpellAbility srcSA, final SpellAbility_StackInstance si)
-    {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbility_StackInstance si) {
         AllZone.getStack().remove(si);
 
         if (tgtSA.isAbility()) {

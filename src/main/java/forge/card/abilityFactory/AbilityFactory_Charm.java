@@ -39,22 +39,22 @@ public final class AbilityFactory_Charm {
 
             @Override
             public boolean canPlayAI() {
-                return charmCanPlayAI(af, this);
+                return AbilityFactory_Charm.charmCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                charmResolve(af, this);
+                AbilityFactory_Charm.charmResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return charmStackDescription(af, this);
+                return AbilityFactory_Charm.charmStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return charmCanPlayAI(af, this);
+                return AbilityFactory_Charm.charmCanPlayAI(af, this);
             }
         }; // Ability_Activated
 
@@ -76,17 +76,17 @@ public final class AbilityFactory_Charm {
 
             @Override
             public boolean canPlayAI() {
-                return charmCanPlayAI(af, this);
+                return AbilityFactory_Charm.charmCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                charmResolve(af, this);
+                AbilityFactory_Charm.charmResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return charmStackDescription(af, this);
+                return AbilityFactory_Charm.charmStackDescription(af, this);
             }
         };
 
@@ -94,7 +94,7 @@ public final class AbilityFactory_Charm {
     }
 
     private static String charmStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -106,7 +106,7 @@ public final class AbilityFactory_Charm {
         // nothing stack specific for Charm
 
         // begin standard post
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -134,7 +134,7 @@ public final class AbilityFactory_Charm {
     public static void setupCharmSAs(final SpellAbility sa) {
         // make Charm choices
         if (sa.isCharm()) {
-            ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
+            final ArrayList<SpellAbility> choices = new ArrayList<SpellAbility>();
             choices.addAll(sa.getCharmChoices());
             for (int i = 0; i < choices.size(); i++) {
                 if (!sa.canPlay()) {
@@ -151,7 +151,7 @@ public final class AbilityFactory_Charm {
                 if (null == o) {
                     break;
                 }
-                Ability_Sub chosen = (Ability_Sub) o;
+                final Ability_Sub chosen = (Ability_Sub) o;
                 sa.addCharmChoice(chosen);
                 choices.remove(chosen);
 

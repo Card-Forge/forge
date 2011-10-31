@@ -51,22 +51,22 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public boolean canPlayAI() {
-                return sacrificeCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                sacrificeResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return sacrificeDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return sacrificeTriggerAI(af, this, mandatory);
+                return AbilityFactory_Sacrifice.sacrificeTriggerAI(af, this, mandatory);
             }
         };
         return abSacrifice;
@@ -87,17 +87,17 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public boolean canPlayAI() {
-                return sacrificeCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                sacrificeResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return sacrificeDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeDescription(af, this);
             }
         };
         return spSacrifice;
@@ -118,22 +118,22 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public void resolve() {
-                sacrificeResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return sacrificePlayDrawbackAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificePlayDrawbackAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return sacrificeDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return sacrificeTriggerAI(af, this, mandatory);
+                return AbilityFactory_Sacrifice.sacrificeTriggerAI(af, this, mandatory);
             }
         };
         return dbSacrifice;
@@ -151,8 +151,8 @@ public class AbilityFactory_Sacrifice {
      * @return a {@link java.lang.String} object.
      */
     public static String sacrificeDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -160,12 +160,12 @@ public class AbilityFactory_Sacrifice {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         ArrayList<Player> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetPlayers();
@@ -180,16 +180,17 @@ public class AbilityFactory_Sacrifice {
 
         String num = params.get("Amount");
         num = (num == null) ? "1" : num;
-        int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
         if (valid.equals("Self")) {
             sb.append("Sacrifice ").append(sa.getSourceCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
-            Card toSac = sa.getSourceCard().getEnchantingCard();
+            final Card toSac = sa.getSourceCard().getEnchantingCard();
             sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
         } else {
-            for (Player p : tgts)
+            for (final Player p : tgts) {
                 sb.append(p.getName()).append(" ");
+            }
 
             String msg = params.get("SacMessage");
             if (msg == null) {
@@ -199,7 +200,7 @@ public class AbilityFactory_Sacrifice {
             sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -220,17 +221,17 @@ public class AbilityFactory_Sacrifice {
      */
     public static boolean sacrificeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
 
-        HashMap<String, String> params = af.getMapParams();
-        boolean chance = sacrificeTgtAI(af, sa);
+        final HashMap<String, String> params = af.getMapParams();
+        boolean chance = AbilityFactory_Sacrifice.sacrificeTgtAI(af, sa);
 
         // Some additional checks based on what is being sacrificed, and who is
         // sacrificing
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
-            String valid = params.get("SacValid");
+            final String valid = params.get("SacValid");
             String num = params.get("Amount");
             num = (num == null) ? "1" : num;
-            int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
+            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
             CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
             list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -239,14 +240,15 @@ public class AbilityFactory_Sacrifice {
                 return false;
             }
 
-            Card source = sa.getSourceCard();
+            final Card source = sa.getSourceCard();
             if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                int xPay = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
+                final int xPay = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
                 source.setSVar("PayX", Integer.toString(xPay));
             }
 
-            int half = amount / 2 + amount % 2; // Half of amount rounded up
+            final int half = (amount / 2) + (amount % 2); // Half of amount
+                                                          // rounded up
 
             // If the Human has at least half rounded up of the amount to be
             // sacrificed, cast the spell
@@ -255,7 +257,7 @@ public class AbilityFactory_Sacrifice {
             }
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -276,11 +278,11 @@ public class AbilityFactory_Sacrifice {
      */
     public static boolean sacrificePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
-        boolean chance = sacrificeTgtAI(af, sa);
+        boolean chance = AbilityFactory_Sacrifice.sacrificeTgtAI(af, sa);
 
         // TODO: restrict the subAbility a bit
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -307,7 +309,7 @@ public class AbilityFactory_Sacrifice {
         }
 
         // AI should only activate this during Human's turn
-        boolean chance = sacrificeTgtAI(af, sa);
+        boolean chance = AbilityFactory_Sacrifice.sacrificeTgtAI(af, sa);
 
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something
@@ -316,7 +318,7 @@ public class AbilityFactory_Sacrifice {
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -337,9 +339,9 @@ public class AbilityFactory_Sacrifice {
      */
     public static boolean sacrificeTgtAI(final AbilityFactory af, final SpellAbility sa) {
 
-        HashMap<String, String> params = af.getMapParams();
-        Card card = sa.getSourceCard();
-        Target tgt = af.getAbTgt();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
+        final Target tgt = af.getAbTgt();
 
         if (tgt != null) {
             tgt.resetTargets();
@@ -349,7 +351,7 @@ public class AbilityFactory_Sacrifice {
                 return false;
             }
         } else {
-            String defined = params.get("Defined");
+            final String defined = params.get("Defined");
             if (defined == null) {
                 // Self Sacrifice.
             } else if (defined.equals("Each")) {
@@ -358,11 +360,11 @@ public class AbilityFactory_Sacrifice {
                 // Only cast it if AI doesn't have the full amount of Valid
                 // TODO: Cast if the type is favorable: my "worst" valid is
                 // worse than his "worst" valid
-                String valid = params.get("SacValid");
-                String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+                final String valid = params.get("SacValid");
+                final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
                 int amount = AbilityFactory.calculateAmount(card, num, sa);
 
-                Card source = sa.getSourceCard();
+                final Card source = sa.getSourceCard();
                 if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
                     amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
@@ -399,14 +401,14 @@ public class AbilityFactory_Sacrifice {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void sacrificeResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card card = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
-        String num = params.containsKey("Amount") ? params.get("Amount") : "1";
-        int amount = AbilityFactory.calculateAmount(card, num, sa);
+        final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final int amount = AbilityFactory.calculateAmount(card, num, sa);
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         ArrayList<Player> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetPlayers();
@@ -426,7 +428,7 @@ public class AbilityFactory_Sacrifice {
 
         msg = "Sacrifice a " + msg;
 
-        boolean remSacrificed = params.containsKey("RememberSacrificed");
+        final boolean remSacrificed = params.containsKey("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
         }
@@ -441,7 +443,7 @@ public class AbilityFactory_Sacrifice {
         }
         // TODO - maybe this can be done smarter...
         else if (valid.equals("Card.AttachedBy")) {
-            Card toSac = card.getEnchantingCard();
+            final Card toSac = card.getEnchantingCard();
             if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
                 AllZone.getGameAction().sacrifice(toSac);
                 if (remSacrificed) {
@@ -449,7 +451,7 @@ public class AbilityFactory_Sacrifice {
                 }
             }
         } else if (valid.equals("TriggeredCard")) {
-            Card equipee = (Card) sa.getTriggeringObject("Card");
+            final Card equipee = (Card) sa.getTriggeringObject("Card");
             if (tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
                 AllZone.getGameAction().sacrifice(equipee);
                 if (remSacrificed) {
@@ -458,7 +460,7 @@ public class AbilityFactory_Sacrifice {
             }
         } else {
             CardList sacList = null;
-            for (Player p : tgts) {
+            for (final Player p : tgts) {
 
                 // TODO - Can only add cards computer sacrificed to remembered
                 // list because
@@ -471,14 +473,14 @@ public class AbilityFactory_Sacrifice {
                 // then actually sacrifice the cards in this resolve method.
                 // (ArsenalNut 09/20/2011)
                 if (p.isComputer()) {
-                    sacList = sacrificeAI(p, amount, valid, sa);
+                    sacList = AbilityFactory_Sacrifice.sacrificeAI(p, amount, valid, sa);
                     if (remSacrificed) {
                         for (int i = 0; i < sacList.size(); i++) {
                             card.addRemembered(sacList.get(i));
                         }
                     }
                 } else {
-                    sacrificeHuman(p, amount, valid, sa, msg);
+                    AbilityFactory_Sacrifice.sacrificeHuman(p, amount, valid, sa, msg);
                 }
             }
 
@@ -504,7 +506,7 @@ public class AbilityFactory_Sacrifice {
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-        CardList sacList = ComputerUtil.sacrificePermanents(amount, list);
+        final CardList sacList = ComputerUtil.sacrificePermanents(amount, list);
 
         return sacList;
     }
@@ -525,7 +527,8 @@ public class AbilityFactory_Sacrifice {
      * @param message
      *            a {@link java.lang.String} object.
      */
-    private static void sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa, final String message) {
+    private static void sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
+            final String message) {
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -554,22 +557,22 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public boolean canPlayAI() {
-                return sacrificeAllCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                sacrificeAllResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeAllResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return sacrificeAllStackDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return sacrificeAllCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllCanPlayAI(af, this);
             }
         };
         return abSacrifice;
@@ -591,17 +594,17 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public boolean canPlayAI() {
-                return sacrificeAllCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                sacrificeAllResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeAllResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return sacrificeAllStackDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllStackDescription(af, this);
             }
         };
         return spSacrifice;
@@ -623,7 +626,7 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public void resolve() {
-                sacrificeAllResolve(af, this);
+                AbilityFactory_Sacrifice.sacrificeAllResolve(af, this);
             }
 
             @Override
@@ -633,12 +636,12 @@ public class AbilityFactory_Sacrifice {
 
             @Override
             public String getStackDescription() {
-                return sacrificeAllStackDescription(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return sacrificeAllCanPlayAI(af, this);
+                return AbilityFactory_Sacrifice.sacrificeAllCanPlayAI(af, this);
             }
         };
         return dbSacrifice;
@@ -659,9 +662,9 @@ public class AbilityFactory_Sacrifice {
     public static String sacrificeAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
 
-        StringBuilder sb = new StringBuilder();
-        Card host = af.getHostCard();
-        HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -669,7 +672,7 @@ public class AbilityFactory_Sacrifice {
             sb.append(host).append(" - ");
         }
 
-        String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
@@ -685,7 +688,7 @@ public class AbilityFactory_Sacrifice {
 
         sb.append("Sacrifice permanents.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -708,28 +711,28 @@ public class AbilityFactory_Sacrifice {
     public static boolean sacrificeAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        Random r = MyRandom.getRandom();
-        Cost abCost = sa.getPayCosts();
+        final Random r = MyRandom.getRandom();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
-        String Valid = "";
+        String valid = "";
 
         if (params.containsKey("ValidCards")) {
-            Valid = params.get("ValidCards");
+            valid = params.get("ValidCards");
         }
 
-        if (Valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
-            Valid = Valid.replace("X", Integer.toString(xPay));
+            valid = valid.replace("X", Integer.toString(xPay));
         }
 
         CardList humanlist = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         CardList computerlist = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
-        humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
-        computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
+        humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
+        computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for some costs
@@ -743,25 +746,25 @@ public class AbilityFactory_Sacrifice {
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-            if (CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil
+        if ((humanlist.getNotType("Creature").size() == 0) && (computerlist.getNotType("Creature").size() == 0)) {
+            if ((CardFactoryUtil.evaluateCreatureList(computerlist) + 200) >= CardFactoryUtil
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
-        }// only lands involved
-        else if (humanlist.getNotType("Land").size() == 0 && computerlist.getNotType("Land").size() == 0) {
-            if (CardFactoryUtil.evaluatePermanentList(computerlist) + 1 >= CardFactoryUtil
+        } // only lands involved
+        else if ((humanlist.getNotType("Land").size() == 0) && (computerlist.getNotType("Land").size() == 0)) {
+            if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 1) >= CardFactoryUtil
                     .evaluatePermanentList(humanlist)) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human
           // permanents are more valuable
-        else if (CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil
+        else if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 3) >= CardFactoryUtil
                 .evaluatePermanentList(humanlist)) {
             return false;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -781,36 +784,37 @@ public class AbilityFactory_Sacrifice {
      * @since 1.0.15
      */
     public static void sacrificeAllResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Card card = sa.getSourceCard();
+        final Card card = sa.getSourceCard();
 
-        String Valid = "";
+        String valid = "";
 
         if (params.containsKey("ValidCards")) {
-            Valid = params.get("ValidCards");
+            valid = params.get("ValidCards");
         }
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
         // to use the X variable
         // We really need a better solution to this
-        if (Valid.contains("X")) {
-            Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
+        if (valid.contains("X")) {
+            valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
-        boolean remSacrificed = params.containsKey("RememberSacrificed");
+        final boolean remSacrificed = params.containsKey("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
         }
 
-        list = list.getValidCards(Valid.split(","), card.getController(), card);
+        list = list.getValidCards(valid.split(","), card.getController(), card);
 
         for (int i = 0; i < list.size(); i++) {
-            if (AllZone.getGameAction().sacrifice(list.get(i)) && remSacrificed)
+            if (AllZone.getGameAction().sacrifice(list.get(i)) && remSacrificed) {
                 card.addRemembered(list.get(i));
+            }
         }
     }
 
-}// end class AbilityFactory_Sacrifice
+} // end class AbilityFactory_Sacrifice

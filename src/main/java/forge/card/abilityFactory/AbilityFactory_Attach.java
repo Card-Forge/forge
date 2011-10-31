@@ -51,8 +51,8 @@ public class AbilityFactory_Attach {
         if (abilityFactory.getHostCard().isAura()) {
             // The 4th parameter is to resolve an issue with SetDescription in
             // default Spell_Permanent constructor
-            spAttach = new Spell_Permanent(abilityFactory.getHostCard(),
-                    abilityFactory.getAbCost(), abilityFactory.getAbTgt(), false) {
+            spAttach = new Spell_Permanent(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                    abilityFactory.getAbTgt(), false) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
                 private final AbilityFactory af = abilityFactory;
@@ -61,20 +61,21 @@ public class AbilityFactory_Attach {
                 public String getStackDescription() {
                     // when getStackDesc is called, just build exactly what is
                     // happening
-                    return attachStackDescription(af, this);
+                    return AbilityFactory_Attach.attachStackDescription(this.af, this);
                 }
 
+                @Override
                 public boolean canPlayAI() {
-                    return attachCanPlayAI(af, this);
+                    return AbilityFactory_Attach.attachCanPlayAI(this.af, this);
                 }
 
                 @Override
                 public void resolve() {
                     // The Spell_Permanent (Auras) version of this AF needs to
                     // move the card into play before Attaching
-                    Card c = AllZone.getGameAction().moveToPlay(getSourceCard());
+                    final Card c = AllZone.getGameAction().moveToPlay(this.getSourceCard());
                     this.setSourceCard(c);
-                    attachResolve(af, this);
+                    AbilityFactory_Attach.attachResolve(this.af, this);
                 }
             };
         } else {
@@ -91,16 +92,17 @@ public class AbilityFactory_Attach {
                 public String getStackDescription() {
                     // when getStackDesc is called, just build exactly what is
                     // happening
-                    return attachStackDescription(af, this);
+                    return AbilityFactory_Attach.attachStackDescription(this.af, this);
                 }
 
+                @Override
                 public boolean canPlayAI() {
-                    return attachCanPlayAI(af, this);
+                    return AbilityFactory_Attach.attachCanPlayAI(this.af, this);
                 }
 
                 @Override
                 public void resolve() {
-                    attachResolve(af, this);
+                    AbilityFactory_Attach.attachResolve(this.af, this);
                 }
             };
         }
@@ -143,7 +145,7 @@ public class AbilityFactory_Attach {
      * @return the string
      */
     public static String attachStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -151,7 +153,7 @@ public class AbilityFactory_Attach {
             sb.append(" ");
         }
 
-        String conditionDesc = af.getMapParams().get("ConditionDescription");
+        final String conditionDesc = af.getMapParams().get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
@@ -161,18 +163,18 @@ public class AbilityFactory_Attach {
         ArrayList<Object> targets;
 
         // Should never allow more than one Attachment per card
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             targets = tgt.getTargets();
         } else {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
-        for (Object o : targets) {
+        for (final Object o : targets) {
             sb.append(o).append(" ");
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -199,9 +201,9 @@ public class AbilityFactory_Attach {
             final Map<String, String> params, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
-            o = attachToPlayerAIPreferences(af, sa, mandatory);
+            o = AbilityFactory_Attach.attachToPlayerAIPreferences(af, sa, mandatory);
         } else {
-            o = attachToCardAIPreferences(af, sa, params, mandatory);
+            o = AbilityFactory_Attach.attachToCardAIPreferences(af, sa, params, mandatory);
         }
 
         if (o == null) {
@@ -227,8 +229,8 @@ public class AbilityFactory_Attach {
      */
     public static Card attachToCardAIPreferences(final AbilityFactory af, final SpellAbility sa,
             final Map<String, String> params, final boolean mandatory) {
-        Target tgt = sa.getTarget();
-        Card attachSource = sa.getSourceCard();
+        final Target tgt = sa.getTarget();
+        final Card attachSource = sa.getSourceCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card
 
@@ -249,9 +251,9 @@ public class AbilityFactory_Attach {
             return null;
         }
 
-        Card c = attachGeneralAI(sa, list, mandatory, attachSource, params.get("AILogic"));
+        Card c = AbilityFactory_Attach.attachGeneralAI(sa, list, mandatory, attachSource, params.get("AILogic"));
 
-        if (c == null && mandatory) {
+        if ((c == null) && mandatory) {
             list.shuffle();
             c = list.get(0);
         }
@@ -276,29 +278,29 @@ public class AbilityFactory_Attach {
      */
     public static Card attachGeneralAI(final SpellAbility sa, final CardList list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = "Pump".equals(logic) ? AllZone.getComputerPlayer() : AllZone.getHumanPlayer();
+        final Player prefPlayer = "Pump".equals(logic) ? AllZone.getComputerPlayer() : AllZone.getHumanPlayer();
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
-        CardList prefList = list.getController(prefPlayer);
+        final CardList prefList = list.getController(prefPlayer);
 
         // If there are no preferred cards, and not mandatory bail out
         if (prefList.size() == 0) {
-            return chooseUnpreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseUnpreferred(mandatory, list);
         }
 
         // Preferred list has at least one card in it to make to the actual
         // Logic
         Card c = null;
         if ("GainControl".equals(logic)) {
-            c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactory_Attach.attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
-            c = attachAICursePreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactory_Attach.attachAICursePreference(sa, prefList, mandatory, attachSource);
         } else if ("Pump".equals(logic)) {
-            c = attachAIPumpPreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactory_Attach.attachAIPumpPreference(sa, prefList, mandatory, attachSource);
         } else if ("ChangeType".equals(logic)) {
-            c = attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactory_Attach.attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
         } else if ("KeepTapped".equals(logic)) {
-            c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactory_Attach.attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
         }
 
         return c;
@@ -354,8 +356,8 @@ public class AbilityFactory_Attach {
 
         // TODO If Not Mandatory, make sure the card is "good enough"
         if (c.isCreature()) {
-            int eval = CardFactoryUtil.evaluateCreature(c);
-            if (eval < 160 && (eval < 130 || AllZone.getComputerPlayer().getLife() > 5)) {
+            final int eval = CardFactoryUtil.evaluateCreature(c);
+            if ((eval < 160) && ((eval < 130) || (AllZone.getComputerPlayer().getLife() > 5))) {
                 return null;
             }
         }
@@ -389,15 +391,15 @@ public class AbilityFactory_Attach {
 
         }
 
-        Card c = CardFactoryUtil.AI_getBest(list);
+        final Card c = CardFactoryUtil.AI_getBest(list);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return AbilityFactory_Attach.acceptableChoice(c, mandatory);
     }
 
     /**
@@ -427,7 +429,7 @@ public class AbilityFactory_Attach {
             magnetList = list.getEquipMagnets();
         }
 
-        if (magnetList != null && !magnetList.isEmpty()) {
+        if ((magnetList != null) && !magnetList.isEmpty()) {
             // Always choose something from the Magnet List.
             // Probably want to "weight" the list by amount of Enchantments and
             // choose the "lightest"
@@ -444,17 +446,17 @@ public class AbilityFactory_Attach {
 
         int totToughness = 0;
         int totPower = 0;
-        ArrayList<String> keywords = new ArrayList<String>();
+        final ArrayList<String> keywords = new ArrayList<String>();
         boolean grantingAbilities = false;
 
-        for (StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            Map<String, String> params = stAbility.getMapParams();
+        for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
+            final Map<String, String> params = stAbility.getMapParams();
 
             if (!params.get("Mode").equals("Continuous")) {
                 continue;
             }
 
-            String affected = params.get("Affected");
+            final String affected = params.get("Affected");
 
             if (affected == null) {
                 continue;
@@ -465,9 +467,9 @@ public class AbilityFactory_Attach {
 
                 grantingAbilities |= params.containsKey("AddAbility");
 
-                String kws = params.get("AddKeyword");
+                final String kws = params.get("AddKeyword");
                 if (kws != null) {
-                    for (String kw : kws.split(" & ")) {
+                    for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
                     }
                 }
@@ -486,11 +488,11 @@ public class AbilityFactory_Attach {
             });
         }
 
-        else if (totToughness == 0 && totPower == 0) {
+        else if ((totToughness == 0) && (totPower == 0)) {
             // Just granting Keywords don't assign stacking Keywords
-            Iterator<String> it = keywords.iterator();
+            final Iterator<String> it = keywords.iterator();
             while (it.hasNext()) {
-                String key = it.next();
+                final String key = it.next();
                 if (CardUtil.isStackingKeyword(key)) {
                     it.remove();
                 }
@@ -502,7 +504,7 @@ public class AbilityFactory_Attach {
                     // keywords
                     @Override
                     public boolean addCard(final Card c) {
-                        for (String kw : finalKWs) {
+                        for (final String kw : finalKWs) {
                             if (c.hasKeyword(kw)) {
                                 return false;
                             }
@@ -542,10 +544,10 @@ public class AbilityFactory_Attach {
         }
 
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return AbilityFactory_Attach.acceptableChoice(c, mandatory);
     }
 
     /**
@@ -576,17 +578,17 @@ public class AbilityFactory_Attach {
 
         int totToughness = 0;
         // int totPower = 0;
-        ArrayList<String> keywords = new ArrayList<String>();
+        final ArrayList<String> keywords = new ArrayList<String>();
         // boolean grantingAbilities = false;
 
-        for (StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            Map<String, String> params = stAbility.getMapParams();
+        for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
+            final Map<String, String> params = stAbility.getMapParams();
 
             if (!params.get("Mode").equals("Continuous")) {
                 continue;
             }
 
-            String affected = params.get("Affected");
+            final String affected = params.get("Affected");
 
             if (affected == null) {
                 continue;
@@ -598,9 +600,9 @@ public class AbilityFactory_Attach {
 
                 // grantingAbilities |= params.containsKey("AddAbility");
 
-                String kws = params.get("AddKeyword");
+                final String kws = params.get("AddKeyword");
                 if (kws != null) {
-                    for (String kw : kws.split(" & ")) {
+                    for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
                     }
                 }
@@ -614,7 +616,7 @@ public class AbilityFactory_Attach {
             prefList = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    if (!c.hasKeyword("Indestructible") && c.getLethalDamage() <= Math.abs(tgh)) {
+                    if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
                         return true;
                     }
 
@@ -623,7 +625,7 @@ public class AbilityFactory_Attach {
             });
         }
         Card c = null;
-        if (prefList == null || prefList.size() == 0) {
+        if ((prefList == null) || (prefList.size() == 0)) {
             prefList = new CardList(list);
         } else {
             c = CardFactoryUtil.AI_getBest(prefList);
@@ -649,10 +651,10 @@ public class AbilityFactory_Attach {
         c = CardFactoryUtil.AI_getBest(prefList);
 
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return AbilityFactory_Attach.acceptableChoice(c, mandatory);
     }
 
     /**
@@ -674,17 +676,17 @@ public class AbilityFactory_Attach {
 
         String type = "";
 
-        for (StaticAbility stAb : attachSource.getStaticAbilities()) {
-            HashMap<String, String> params = stAb.getMapParams();
+        for (final StaticAbility stAb : attachSource.getStaticAbilities()) {
+            final HashMap<String, String> params = stAb.getMapParams();
             if (params.get("Mode").equals("Continuous") && params.containsKey("AddType")) {
                 type = params.get("AddType");
             }
         }
 
         list = list.getNotType(type); // Filter out Basic Lands that have the
-                                     // same type as the changing type
+                                      // same type as the changing type
 
-        Card c = CardFactoryUtil.AI_getBest(list);
+        final Card c = CardFactoryUtil.AI_getBest(list);
 
         // TODO Port over some of the existing code, but rewrite most of it.
         // Ultimately, these spells need to be used to reduce mana base of a
@@ -693,10 +695,10 @@ public class AbilityFactory_Attach {
         // cast on
 
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return AbilityFactory_Attach.acceptableChoice(c, mandatory);
     }
 
     /**
@@ -715,7 +717,7 @@ public class AbilityFactory_Attach {
     public static Card attachAIKeepTappedPreference(final SpellAbility sa, final CardList list,
             final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        CardList prefList = list.filter(new CardListFilter() {
+        final CardList prefList = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 // Don't do Untapped Vigilance cards
@@ -727,13 +729,13 @@ public class AbilityFactory_Attach {
                     return true;
                 }
 
-                ArrayList<Card> auras = c.getEnchantedBy();
-                Iterator<Card> itr = auras.iterator();
+                final ArrayList<Card> auras = c.getEnchantedBy();
+                final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
-                    Card aura = (Card) itr.next();
-                    AbilityFactory af = aura.getSpellPermanent().getAbilityFactory();
-                    if (af != null && af.getAPI().equals("Attach")) {
-                        Map<String, String> params = af.getMapParams();
+                    final Card aura = itr.next();
+                    final AbilityFactory af = aura.getSpellPermanent().getAbilityFactory();
+                    if ((af != null) && af.getAPI().equals("Attach")) {
+                        final Map<String, String> params = af.getMapParams();
                         if ("KeepTapped".equals(params.get("AILogic"))) {
                             // Don't attach multiple KeepTapped Auras to one
                             // card
@@ -746,13 +748,13 @@ public class AbilityFactory_Attach {
             }
         });
 
-        Card c = CardFactoryUtil.AI_getBest(prefList);
+        final Card c = CardFactoryUtil.AI_getBest(prefList);
 
         if (c == null) {
-            return chooseLessPreferred(mandatory, list);
+            return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return AbilityFactory_Attach.acceptableChoice(c, mandatory);
     }
 
     /**
@@ -768,7 +770,7 @@ public class AbilityFactory_Attach {
      */
     public static Player attachToPlayerAIPreferences(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         Player p;
         if (tgt.canOnlyTgtOpponent()) {
             // If can Only Target Opponent, do so.
@@ -812,9 +814,9 @@ public class AbilityFactory_Attach {
      * @return true, if successful
      */
     public static boolean attachCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Random r = MyRandom.getRandom();
-        Map<String, String> params = af.getMapParams();
-        Cost abCost = sa.getPayCosts();
+        final Random r = MyRandom.getRandom();
+        final Map<String, String> params = af.getMapParams();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
 
         if (abCost != null) {
@@ -826,10 +828,10 @@ public class AbilityFactory_Attach {
         boolean chance = r.nextFloat() <= .6667;
 
         // Attach spells always have a target
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (!attachPreference(af, sa, params, tgt, false)) {
+            if (!AbilityFactory_Attach.attachPreference(af, sa, params, tgt, false)) {
                 return false;
             }
         }
@@ -837,7 +839,7 @@ public class AbilityFactory_Attach {
         if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa);
 
             if (xPay == 0) {
                 return false;
@@ -882,7 +884,7 @@ public class AbilityFactory_Attach {
         // Now are Valid Targets better than my targets?
 
         // check SubAbilities DoTrigger?
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -899,12 +901,12 @@ public class AbilityFactory_Attach {
      *            the sa
      */
     public static void attachResolve(final AbilityFactory af, final SpellAbility sa) {
-        Map<String, String> params = af.getMapParams();
-        Card card = sa.getSourceCard();
+        final Map<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
 
         ArrayList<Object> targets;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             targets = tgt.getTargets();
             // TODO Remove invalid targets (although more likely this will just
@@ -914,8 +916,8 @@ public class AbilityFactory_Attach {
         }
 
         // If Cast Targets will be checked on the Stack
-        for (Object o : targets) {
-            handleAttachment(card, o, af);
+        for (final Object o : targets) {
+            AbilityFactory_Attach.handleAttachment(card, o, af);
         }
     }
 
@@ -932,15 +934,15 @@ public class AbilityFactory_Attach {
     public static void handleAttachment(final Card card, final Object o, final AbilityFactory af) {
 
         if (o instanceof Card) {
-            Card c = (Card) o;
+            final Card c = (Card) o;
             if (card.isAura()) {
                 // Most Auras can enchant permanents, a few can Enchant cards in
                 // graveyards
                 // Spellweaver Volute, Dance of the Dead, Animate Dead
                 // Although honestly, I'm not sure if the three of those could
                 // handle being scripted
-                boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
-                handleAura(card, c, gainControl);
+                final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
+                AbilityFactory_Attach.handleAura(card, c, gainControl);
             } else if (card.isEquipment()) {
                 card.equipCard(c);
                 // else if (card.isFortification())
@@ -950,9 +952,9 @@ public class AbilityFactory_Attach {
             // Currently, a few cards can enchant players
             // Psychic Possession, Paradox Haze, Wheel of Sun and Moon, New
             // Curse cards
-            Player p = (Player) o;
+            final Player p = (Player) o;
             if (card.isAura()) {
-                handleAura(card, p, false);
+                AbilityFactory_Attach.handleAura(card, p, false);
             }
         }
     }
@@ -971,7 +973,7 @@ public class AbilityFactory_Attach {
         if (card.isEnchanting()) {
             // If this Card is already Enchanting something
             // Need to unenchant it, then clear out the commands
-            GameEntity oldEnchanted = card.getEnchanting();
+            final GameEntity oldEnchanted = card.getEnchanting();
             card.removeEnchanting(oldEnchanted);
             card.clearEnchantCommand();
             card.clearUnEnchantCommand();
@@ -988,11 +990,12 @@ public class AbilityFactory_Attach {
                 pl[0] = (Player) tgt;
             }
 
-            Command onEnchant = new Command() {
+            final Command onEnchant = new Command() {
                 private static final long serialVersionUID = -2519887209491512000L;
 
+                @Override
                 public void execute() {
-                    Card crd = card.getEnchantingCard();
+                    final Card crd = card.getEnchantingCard();
                     if (crd == null) {
                         return;
                     }
@@ -1004,11 +1007,12 @@ public class AbilityFactory_Attach {
                 } // execute()
             }; // Command
 
-            Command onUnEnchant = new Command() {
+            final Command onUnEnchant = new Command() {
                 private static final long serialVersionUID = 3426441132121179288L;
 
+                @Override
                 public void execute() {
-                    Card crd = card.getEnchantingCard();
+                    final Card crd = card.getEnchantingCard();
                     if (crd == null) {
                         return;
                     }
@@ -1020,12 +1024,13 @@ public class AbilityFactory_Attach {
                 } // execute()
             }; // Command
 
-            Command onChangesControl = new Command() {
+            final Command onChangesControl = new Command() {
                 /** automatically generated serialVersionUID. */
                 private static final long serialVersionUID = -65903786170234039L;
 
+                @Override
                 public void execute() {
-                    Card crd = card.getEnchantingCard();
+                    final Card crd = card.getEnchantingCard();
                     if (crd == null) {
                         return;
                     }
@@ -1041,11 +1046,12 @@ public class AbilityFactory_Attach {
             card.addChangeControllerCommand(onChangesControl);
         }
 
-        Command onLeavesPlay = new Command() {
+        final Command onLeavesPlay = new Command() {
             private static final long serialVersionUID = -639204333673364477L;
 
+            @Override
             public void execute() {
-                GameEntity entity = card.getEnchanting();
+                final GameEntity entity = card.getEnchanting();
                 if (entity == null) {
                     return;
                 }
@@ -1068,9 +1074,9 @@ public class AbilityFactory_Attach {
     public static SpellAbility getAttachSpellAbility(final Card source) {
         SpellAbility aura = null;
         AbilityFactory af = null;
-        for (SpellAbility sa : source.getSpells()) {
+        for (final SpellAbility sa : source.getSpells()) {
             af = sa.getAbilityFactory();
-            if (af != null && af.getAPI().equals("Attach")) {
+            if ((af != null) && af.getAPI().equals("Attach")) {
                 aura = sa;
                 break;
             }
@@ -1088,18 +1094,18 @@ public class AbilityFactory_Attach {
     public static boolean attachAuraOnIndirectEnterBattlefield(final Card source) {
         // When an Aura ETB without being cast you can choose a valid card to
         // attach it to
-        SpellAbility aura = getAttachSpellAbility(source);
+        final SpellAbility aura = AbilityFactory_Attach.getAttachSpellAbility(source);
 
         if (aura == null) {
             return false;
         }
 
-        AbilityFactory af = aura.getAbilityFactory();
-        Target tgt = aura.getTarget();
+        final AbilityFactory af = aura.getAbilityFactory();
+        final Target tgt = aura.getTarget();
 
         if (source.getController().isHuman()) {
             if (tgt.canTgtPlayer()) {
-                ArrayList<Player> players = new ArrayList<Player>();
+                final ArrayList<Player> players = new ArrayList<Player>();
 
                 // TODO Once Player's are gaining Protection we need to add a
                 // check here
@@ -1109,7 +1115,7 @@ public class AbilityFactory_Attach {
                     players.add(AllZone.getHumanPlayer());
                 }
 
-                Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());
+                final Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());
                 if (o instanceof Player) {
                     source.enchantEntity((Player) o);
                     return true;
@@ -1118,7 +1124,7 @@ public class AbilityFactory_Attach {
                 CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
                 list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
-                Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
+                final Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
                 if (o instanceof Card) {
                     source.enchantEntity((Card) o);
                     return true;
@@ -1127,7 +1133,7 @@ public class AbilityFactory_Attach {
         }
 
         else if (AbilityFactory_Attach.attachPreference(af, aura, af.getMapParams(), tgt, true)) {
-            Object o = aura.getTarget().getTargets().get(0);
+            final Object o = aura.getTarget().getTargets().get(0);
             if (o instanceof Card) {
                 source.enchantEntity((Card) o);
                 return true;

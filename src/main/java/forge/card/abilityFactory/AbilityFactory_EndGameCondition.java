@@ -49,21 +49,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return winsGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.winsGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return winsGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.winsGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                winsGameResolve(af, this);
+                AbilityFactory_EndGameCondition.winsGameResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return winsGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_EndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -87,21 +88,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return winsGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.winsGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
                 // if X depends on abCost, the AI needs to choose which card he
                 // would sacrifice first
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return winsGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.winsGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                winsGameResolve(af, this);
+                AbilityFactory_EndGameCondition.winsGameResolve(af, this);
             }
 
         };
@@ -125,21 +127,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return winsGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.winsGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
                 // if X depends on abCost, the AI needs to choose which card he
                 // would sacrifice first
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return winsGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.winsGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                winsGameResolve(af, this);
+                AbilityFactory_EndGameCondition.winsGameResolve(af, this);
             }
 
             @Override
@@ -149,7 +152,7 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return winsGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_EndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -168,7 +171,7 @@ public final class AbilityFactory_EndGameCondition {
      * @return a {@link java.lang.String} object.
      */
     public static String winsGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -179,7 +182,7 @@ public final class AbilityFactory_EndGameCondition {
         // Let the spell description also be the stack description
         sb.append(sa.getDescription());
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -233,7 +236,7 @@ public final class AbilityFactory_EndGameCondition {
 
         // WinGame abilities usually don't have subAbilities but for
         // consistency...
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -253,11 +256,11 @@ public final class AbilityFactory_EndGameCondition {
      */
     public static void winsGameResolve(final AbilityFactory af, final SpellAbility sa) {
 
-        Card card = af.getHostCard();
+        final Card card = af.getHostCard();
 
-        ArrayList<Player> players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
+        final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
 
-        for (Player p : players) {
+        for (final Player p : players) {
             p.altWinBySpellEffect(card.getName());
         }
     }
@@ -285,21 +288,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return losesGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.losesGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
-                return losesGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.losesGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                losesGameResolve(af, this);
+                AbilityFactory_EndGameCondition.losesGameResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return losesGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_EndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -323,21 +327,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return losesGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.losesGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
                 // if X depends on abCost, the AI needs to choose which card he
                 // would sacrifice first
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return losesGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.losesGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                losesGameResolve(af, this);
+                AbilityFactory_EndGameCondition.losesGameResolve(af, this);
             }
 
         };
@@ -361,21 +366,22 @@ public final class AbilityFactory_EndGameCondition {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return losesGameStackDescription(af, this);
+                return AbilityFactory_EndGameCondition.losesGameStackDescription(af, this);
             }
 
+            @Override
             public boolean canPlayAI() {
                 // if X depends on abCost, the AI needs to choose which card he
                 // would sacrifice first
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return losesGameCanPlayAI(af, this);
+                return AbilityFactory_EndGameCondition.losesGameCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                losesGameResolve(af, this);
+                AbilityFactory_EndGameCondition.losesGameResolve(af, this);
             }
 
             @Override
@@ -385,7 +391,7 @@ public final class AbilityFactory_EndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return losesGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_EndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -404,8 +410,8 @@ public final class AbilityFactory_EndGameCondition {
      * @return a {@link java.lang.String} object.
      */
     public static String losesGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        Card source = sa.getSourceCard();
+        final StringBuilder sb = new StringBuilder();
+        final Card source = sa.getSourceCard();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(source.getName()).append(" - ");
@@ -413,7 +419,7 @@ public final class AbilityFactory_EndGameCondition {
             sb.append(" ");
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         ArrayList<Player> players = null;
         if (sa.getTarget() != null) {
             players = tgt.getTargetPlayers();
@@ -421,13 +427,13 @@ public final class AbilityFactory_EndGameCondition {
             players = AbilityFactory.getDefinedPlayers(source, af.getMapParams().get("Defined"), sa);
         }
 
-        for (Player p : players) {
+        for (final Player p : players) {
             sb.append(p.getName()).append(" ");
         }
 
         sb.append("loses the game.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -454,7 +460,7 @@ public final class AbilityFactory_EndGameCondition {
         // Only one SA Lose the Game card right now, which is Door to
         // Nothingness
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             tgt.addTarget(AllZone.getHumanPlayer());
@@ -492,7 +498,7 @@ public final class AbilityFactory_EndGameCondition {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             tgt.addTarget(AllZone.getHumanPlayer());
@@ -500,7 +506,7 @@ public final class AbilityFactory_EndGameCondition {
 
         // WinGame abilities usually don't have subAbilities but for
         // consistency...
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -520,9 +526,9 @@ public final class AbilityFactory_EndGameCondition {
      */
     public static void losesGameResolve(final AbilityFactory af, final SpellAbility sa) {
 
-        Card card = af.getHostCard();
+        final Card card = af.getHostCard();
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         ArrayList<Player> players = null;
         if (sa.getTarget() != null) {
             players = tgt.getTargetPlayers();
@@ -530,7 +536,7 @@ public final class AbilityFactory_EndGameCondition {
             players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
         }
 
-        for (Player p : players) {
+        for (final Player p : players) {
             p.loseConditionMet(GameLossReason.SpellEffect, card.getName());
         }
     }

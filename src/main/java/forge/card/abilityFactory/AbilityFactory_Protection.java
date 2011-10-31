@@ -52,22 +52,22 @@ public final class AbilityFactory_Protection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellProtection(final AbilityFactory af) {
-        SpellAbility spProtect = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility spProtect = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4678736312735724916L;
 
             @Override
             public boolean canPlayAI() {
-                return protectCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectStackDescription(af, this);
+                return AbilityFactory_Protection.protectStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectResolve(af, this);
+                AbilityFactory_Protection.protectResolve(af, this);
             } // resolve
         }; // SpellAbility
 
@@ -89,22 +89,22 @@ public final class AbilityFactory_Protection {
 
             @Override
             public boolean canPlayAI() {
-                return protectCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectStackDescription(af, this);
+                return AbilityFactory_Protection.protectStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectResolve(af, this);
+                AbilityFactory_Protection.protectResolve(af, this);
             } // resolve()
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return protectTriggerAI(af, this, mandatory);
+                return AbilityFactory_Protection.protectTriggerAI(af, this, mandatory);
             }
 
         }; // SpellAbility
@@ -122,32 +122,32 @@ public final class AbilityFactory_Protection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProtection(final AbilityFactory af) {
-        SpellAbility dbProtect = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbProtect = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 8342800124705819366L;
 
             @Override
             public boolean canPlayAI() {
-                return protectCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectStackDescription(af, this);
+                return AbilityFactory_Protection.protectStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectResolve(af, this);
+                AbilityFactory_Protection.protectResolve(af, this);
             } // resolve
 
             @Override
             public boolean chkAIDrawback() {
-                return protectDrawbackAI(af, this);
+                return AbilityFactory_Protection.protectDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return protectTriggerAI(af, this, mandatory);
+                return AbilityFactory_Protection.protectTriggerAI(af, this, mandatory);
             }
         }; // SpellAbility
 
@@ -155,22 +155,22 @@ public final class AbilityFactory_Protection {
     }
 
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        ArrayList<String> onlyColors = new ArrayList<String>(Arrays.asList(Constant.Color.ONLY_COLORS));
+        final ArrayList<String> onlyColors = new ArrayList<String>(Arrays.asList(Constant.Color.ONLY_COLORS));
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {
             return false;
         }
 
-        String protection = "Protection from " + color;
+        final String protection = "Protection from " + color;
 
         return card.hasKeyword(protection);
     }
 
     private static boolean hasProtectionFromAny(final Card card, final ArrayList<String> colors) {
         boolean protect = false;
-        for (String color : colors) {
-            protect |= hasProtectionFrom(card, color);
+        for (final String color : colors) {
+            protect |= AbilityFactory_Protection.hasProtectionFrom(card, color);
         }
         return protect;
     }
@@ -181,8 +181,8 @@ public final class AbilityFactory_Protection {
             return false;
         }
 
-        for (String color : colors) {
-            protect &= hasProtectionFrom(card, color);
+        for (final String color : colors) {
+            protect &= AbilityFactory_Protection.hasProtectionFrom(card, color);
         }
         return protect;
     }
@@ -198,17 +198,18 @@ public final class AbilityFactory_Protection {
      */
     private static CardList getProtectCreatures(final AbilityFactory af, final SpellAbility sa) {
         final Card hostCard = af.getHostCard();
-        final ArrayList<String> gains = getProtectionList(hostCard, af.getMapParams());
+        final ArrayList<String> gains = AbilityFactory_Protection.getProtectionList(hostCard, af.getMapParams());
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 if (!CardFactoryUtil.canTarget(hostCard, c)) {
                     return false;
                 }
 
                 // Don't add duplicate protections
-                if (hasProtectionFromAll(c, gains)) {
+                if (AbilityFactory_Protection.hasProtectionFromAll(c, gains)) {
                     return false;
                 }
 
@@ -252,14 +253,14 @@ public final class AbilityFactory_Protection {
      * @return a boolean.
      */
     private static boolean protectCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card hostCard = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card hostCard = af.getHostCard();
         // if there is no target and host card isn't in play, don't activate
-        if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard)) {
+        if ((af.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
             return false;
         }
 
-        Cost cost = sa.getPayCosts();
+        final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
         if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
@@ -279,7 +280,7 @@ public final class AbilityFactory_Protection {
         }
 
         // Phase Restrictions
-        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -291,8 +292,8 @@ public final class AbilityFactory_Protection {
             return false;
         }
 
-        if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
-            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;
@@ -306,7 +307,7 @@ public final class AbilityFactory_Protection {
              * }
              */
         } else {
-            return protectTgtAI(af, sa, false);
+            return AbilityFactory_Protection.protectTgtAI(af, sa, false);
         }
 
         return false;
@@ -330,11 +331,11 @@ public final class AbilityFactory_Protection {
             return false;
         }
 
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         tgt.resetTargets();
-        CardList list = getProtectCreatures(af, sa);
+        CardList list = AbilityFactory_Protection.getProtectCreatures(af, sa);
 
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -352,7 +353,7 @@ public final class AbilityFactory_Protection {
         if (AllZone.getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if (sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+            if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
                 if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
@@ -365,7 +366,7 @@ public final class AbilityFactory_Protection {
         }
 
         if (list.isEmpty()) {
-            return mandatory && protectMandatoryTarget(af, sa, mandatory);
+            return mandatory && AbilityFactory_Protection.protectMandatoryTarget(af, sa, mandatory);
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -373,9 +374,9 @@ public final class AbilityFactory_Protection {
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if (tgt.getNumTargeted() < tgt.getMinTargets(source, sa) || tgt.getNumTargeted() == 0) {
+                if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return protectMandatoryTarget(af, sa, mandatory);
+                        return AbilityFactory_Protection.protectMandatoryTarget(af, sa, mandatory);
                     }
 
                     tgt.resetTargets();
@@ -413,7 +414,7 @@ public final class AbilityFactory_Protection {
         final Card host = af.getHostCard();
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -422,24 +423,28 @@ public final class AbilityFactory_Protection {
         }
 
         // Remove anything that's already been targeted
-        for (Card c : tgt.getTargetCards()) {
+        for (final Card c : tgt.getTargetCards()) {
             list.remove(c);
         }
 
         CardList pref = list.getController(AllZone.getComputerPlayer());
         pref = pref.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                return !hasProtectionFromAll(c, getProtectionList(host, params));
+                return !AbilityFactory_Protection.hasProtectionFromAll(c,
+                        AbilityFactory_Protection.getProtectionList(host, params));
             }
         });
-        CardList pref2 = list.getController(AllZone.getComputerPlayer());
+        final CardList pref2 = list.getController(AllZone.getComputerPlayer());
         pref = pref.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                return !hasProtectionFromAny(c, getProtectionList(host, params));
+                return !AbilityFactory_Protection.hasProtectionFromAny(c,
+                        AbilityFactory_Protection.getProtectionList(host, params));
             }
         });
-        CardList forced = list.getController(AllZone.getHumanPlayer());
-        Card source = sa.getSourceCard();
+        final CardList forced = list.getController(AllZone.getHumanPlayer());
+        final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
@@ -523,7 +528,7 @@ public final class AbilityFactory_Protection {
                 return true;
             }
         } else {
-            return protectTgtAI(af, sa, mandatory);
+            return AbilityFactory_Protection.protectTgtAI(af, sa, mandatory);
         }
 
         return true;
@@ -541,14 +546,14 @@ public final class AbilityFactory_Protection {
      * @return a boolean.
      */
     private static boolean protectDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        Card host = af.getHostCard();
+        final Card host = af.getHostCard();
 
-        if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
+        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
             if (host.isCreature()) {
                 // TODO
             }
         } else {
-            return protectTgtAI(af, sa, false);
+            return AbilityFactory_Protection.protectTgtAI(af, sa, false);
         }
 
         return true;
@@ -566,17 +571,17 @@ public final class AbilityFactory_Protection {
      * @return a {@link java.lang.String} object.
      */
     private static String protectStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
-        final ArrayList<String> gains = getProtectionList(host, params);
-        boolean choose = (params.containsKey("Choices")) ? true : false;
-        String joiner = choose ? "or" : "and";
+        final ArrayList<String> gains = AbilityFactory_Protection.getProtectionList(host, params);
+        final boolean choose = (params.containsKey("Choices")) ? true : false;
+        final String joiner = choose ? "or" : "and";
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         ArrayList<Card> tgtCards;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -591,9 +596,9 @@ public final class AbilityFactory_Protection {
                 sb.append(host).append(" - ");
             }
 
-            Iterator<Card> it = tgtCards.iterator();
+            final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
-                Card tgtC = it.next();
+                final Card tgtC = it.next();
                 if (tgtC.isFaceDown()) {
                     sb.append("Morph");
                 } else {
@@ -605,7 +610,7 @@ public final class AbilityFactory_Protection {
                 }
             }
 
-            if (af.getMapParams().containsKey("Radiance") && sa.getTarget() != null) {
+            if (af.getMapParams().containsKey("Radiance") && (sa.getTarget() != null)) {
                 sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
                         .append(" that shares a color with ");
                 if (tgtCards.size() > 1) {
@@ -630,7 +635,7 @@ public final class AbilityFactory_Protection {
                     sb.append(", ");
                 }
 
-                if (i == gains.size() - 1) {
+                if (i == (gains.size() - 1)) {
                     sb.append(joiner).append(" ");
                 }
 
@@ -644,7 +649,7 @@ public final class AbilityFactory_Protection {
             sb.append(".");
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -663,24 +668,24 @@ public final class AbilityFactory_Protection {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void protectResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
 
-        boolean isChoice = params.get("Gains").contains("Choice");
-        ArrayList<String> choices = getProtectionList(host, params);
+        final boolean isChoice = params.get("Gains").contains("Choice");
+        final ArrayList<String> choices = AbilityFactory_Protection.getProtectionList(host, params);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
+                final Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
 
                 if (null == o) {
                     return;
                 }
-                String choice = (String) o;
+                final String choice = (String) o;
                 gains.add(choice);
             } else {
                 // TODO - needs improvement
-                String choice = choices.get(0);
+                final String choice = choices.get(0);
                 gains.add(choice);
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
@@ -689,21 +694,22 @@ public final class AbilityFactory_Protection {
         }
 
         ArrayList<Card> tgtCards;
-        ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        Target tgt = af.getAbTgt();
+        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         }
 
-        if (params.containsKey("Radiance") && tgt != null) {
-            for (Card c : CardUtil.getRadiance(af.getHostCard(), tgtCards.get(0), params.get("ValidTgts").split(","))) {
+        if (params.containsKey("Radiance") && (tgt != null)) {
+            for (final Card c : CardUtil.getRadiance(af.getHostCard(), tgtCards.get(0),
+                    params.get("ValidTgts").split(","))) {
                 untargetedCards.add(c);
             }
         }
 
-        int size = tgtCards.size();
+        final int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
 
@@ -713,11 +719,11 @@ public final class AbilityFactory_Protection {
             }
 
             // if this is a target, make sure we can still target now
-            if (tgt != null && !CardFactoryUtil.canTarget(host, tgtC)) {
+            if ((tgt != null) && !CardFactoryUtil.canTarget(host, tgtC)) {
                 continue;
             }
 
-            for (String gain : gains) {
+            for (final String gain : gains) {
                 tgtC.addExtrinsicKeyword("Protection from " + gain);
             }
 
@@ -726,9 +732,10 @@ public final class AbilityFactory_Protection {
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 7682700789217703789L;
 
+                    @Override
                     public void execute() {
                         if (AllZoneUtil.isCardInPlay(tgtC)) {
-                            for (String gain : gains) {
+                            for (final String gain : gains) {
                                 tgtC.removeExtrinsicKeyword("Protection from " + gain);
                             }
                         }
@@ -748,7 +755,7 @@ public final class AbilityFactory_Protection {
                 continue;
             }
 
-            for (String gain : gains) {
+            for (final String gain : gains) {
                 unTgtC.addExtrinsicKeyword("Protection from " + gain);
             }
 
@@ -757,9 +764,10 @@ public final class AbilityFactory_Protection {
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 7682700789217703789L;
 
+                    @Override
                     public void execute() {
                         if (AllZoneUtil.isCardInPlay(unTgtC)) {
-                            for (String gain : gains) {
+                            for (final String gain : gains) {
                                 unTgtC.removeExtrinsicKeyword("Protection from " + gain);
                             }
                         }
@@ -777,7 +785,7 @@ public final class AbilityFactory_Protection {
     private static ArrayList<String> getProtectionList(final Card host, final HashMap<String, String> params) {
         final ArrayList<String> gains = new ArrayList<String>();
 
-        String gainStr = params.get("Gains");
+        final String gainStr = params.get("Gains");
         if (gainStr.equals("Choice")) {
             String choices = params.get("Choices");
 
@@ -809,22 +817,22 @@ public final class AbilityFactory_Protection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellProtectionAll(final AbilityFactory af) {
-        SpellAbility spProtectAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility spProtectAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 7205636088393235571L;
 
             @Override
             public boolean canPlayAI() {
-                return protectAllCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectAllCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectAllStackDescription(af, this);
+                return AbilityFactory_Protection.protectAllStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectAllResolve(af, this);
+                AbilityFactory_Protection.protectAllResolve(af, this);
             } // resolve
         }; // SpellAbility
 
@@ -846,22 +854,22 @@ public final class AbilityFactory_Protection {
 
             @Override
             public boolean canPlayAI() {
-                return protectAllCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectAllCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectAllStackDescription(af, this);
+                return AbilityFactory_Protection.protectAllStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectAllResolve(af, this);
+                AbilityFactory_Protection.protectAllResolve(af, this);
             } // resolve()
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return protectAllTriggerAI(af, this, mandatory);
+                return AbilityFactory_Protection.protectAllTriggerAI(af, this, mandatory);
             }
 
         }; // SpellAbility
@@ -879,32 +887,32 @@ public final class AbilityFactory_Protection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProtectionAll(final AbilityFactory af) {
-        SpellAbility dbProtectAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbProtectAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 5096939345199247701L;
 
             @Override
             public boolean canPlayAI() {
-                return protectAllCanPlayAI(af, this);
+                return AbilityFactory_Protection.protectAllCanPlayAI(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return protectAllStackDescription(af, this);
+                return AbilityFactory_Protection.protectAllStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                protectAllResolve(af, this);
+                AbilityFactory_Protection.protectAllResolve(af, this);
             } // resolve
 
             @Override
             public boolean chkAIDrawback() {
-                return protectAllDrawbackAI(af, this);
+                return AbilityFactory_Protection.protectAllDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return protectAllTriggerAI(af, this, mandatory);
+                return AbilityFactory_Protection.protectAllTriggerAI(af, this, mandatory);
             }
         }; // SpellAbility
 
@@ -923,13 +931,13 @@ public final class AbilityFactory_Protection {
      * @return a boolean.
      */
     private static boolean protectAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        Card hostCard = af.getHostCard();
+        final Card hostCard = af.getHostCard();
         // if there is no target and host card isn't in play, don't activate
-        if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard)) {
+        if ((af.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
             return false;
         }
 
-        Cost cost = sa.getPayCosts();
+        final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
         if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
@@ -984,7 +992,7 @@ public final class AbilityFactory_Protection {
      * @return a boolean.
      */
     private static boolean protectAllDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        return protectAllTriggerAI(af, sa, false);
+        return AbilityFactory_Protection.protectAllTriggerAI(af, sa, false);
     } // protectAllDrawbackAI()
 
     /**
@@ -999,13 +1007,13 @@ public final class AbilityFactory_Protection {
      * @return a {@link java.lang.String} object.
      */
     private static String protectAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         ArrayList<Card> tgtCards;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -1031,7 +1039,7 @@ public final class AbilityFactory_Protection {
             }
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1050,30 +1058,30 @@ public final class AbilityFactory_Protection {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void protectAllResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
 
-        boolean isChoice = params.get("Gains").contains("Choice");
-        ArrayList<String> choices = getProtectionList(host, params);
+        final boolean isChoice = params.get("Gains").contains("Choice");
+        final ArrayList<String> choices = AbilityFactory_Protection.getProtectionList(host, params);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
+                final Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
 
                 if (null == o) {
                     return;
                 }
-                String choice = (String) o;
+                final String choice = (String) o;
                 gains.add(choice);
             } else {
                 // TODO - needs improvement
-                String choice = choices.get(0);
+                final String choice = choices.get(0);
                 gains.add(choice);
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
         } else {
             if (params.get("Gains").equals("ChosenColor")) {
-                for (String color : host.getChosenColor()) {
+                for (final String color : host.getChosenColor()) {
                     gains.add(color.toLowerCase());
                 }
             } else {
@@ -1081,13 +1089,13 @@ public final class AbilityFactory_Protection {
             }
         }
 
-        String valid = params.get("ValidCards");
+        final String valid = params.get("ValidCards");
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid, sa.getActivatingPlayer(), host);
 
         for (final Card tgtC : list) {
             if (AllZoneUtil.isCardInPlay(tgtC)) {
-                for (String gain : gains) {
+                for (final String gain : gains) {
                     tgtC.addExtrinsicKeyword("Protection from " + gain);
                 }
 
@@ -1096,9 +1104,10 @@ public final class AbilityFactory_Protection {
                     final Command untilEOT = new Command() {
                         private static final long serialVersionUID = -6573962672873853565L;
 
+                        @Override
                         public void execute() {
                             if (AllZoneUtil.isCardInPlay(tgtC)) {
-                                for (String gain : gains) {
+                                for (final String gain : gains) {
                                     tgtC.removeExtrinsicKeyword("Protection from " + gain);
                                 }
                             }

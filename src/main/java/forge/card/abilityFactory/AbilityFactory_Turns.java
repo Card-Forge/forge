@@ -41,22 +41,22 @@ public class AbilityFactory_Turns {
 
             @Override
             public String getStackDescription() {
-                return addTurnStackDescription(af, this);
+                return AbilityFactory_Turns.addTurnStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return addTurnCanPlayAI(af, this);
+                return AbilityFactory_Turns.addTurnCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                addTurnResolve(af, this);
+                AbilityFactory_Turns.addTurnResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return addTurnTriggerAI(af, this, mandatory);
+                return AbilityFactory_Turns.addTurnTriggerAI(af, this, mandatory);
             }
 
         };
@@ -78,17 +78,17 @@ public class AbilityFactory_Turns {
 
             @Override
             public String getStackDescription() {
-                return addTurnStackDescription(af, this);
+                return AbilityFactory_Turns.addTurnStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return addTurnCanPlayAI(af, this);
+                return AbilityFactory_Turns.addTurnCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                addTurnResolve(af, this);
+                AbilityFactory_Turns.addTurnResolve(af, this);
             }
 
         };
@@ -110,12 +110,12 @@ public class AbilityFactory_Turns {
 
             @Override
             public String getStackDescription() {
-                return addTurnStackDescription(af, this);
+                return AbilityFactory_Turns.addTurnStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                addTurnResolve(af, this);
+                AbilityFactory_Turns.addTurnResolve(af, this);
             }
 
             @Override
@@ -125,7 +125,7 @@ public class AbilityFactory_Turns {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return addTurnTriggerAI(af, this, mandatory);
+                return AbilityFactory_Turns.addTurnTriggerAI(af, this, mandatory);
             }
 
         };
@@ -144,9 +144,9 @@ public class AbilityFactory_Turns {
      * @return a {@link java.lang.String} object.
      */
     private static String addTurnStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
-        int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+        final int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -156,14 +156,14 @@ public class AbilityFactory_Turns {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player player : tgtPlayers) {
+        for (final Player player : tgtPlayers) {
             sb.append(player).append(" ");
         }
 
@@ -179,7 +179,7 @@ public class AbilityFactory_Turns {
         }
         sb.append(" after this one.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -199,7 +199,7 @@ public class AbilityFactory_Turns {
      * @return a boolean.
      */
     private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return addTurnTriggerAI(af, sa, false);
+        return AbilityFactory_Turns.addTurnTriggerAI(af, sa, false);
     }
 
     /**
@@ -217,17 +217,17 @@ public class AbilityFactory_Turns {
      */
     private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getComputerPlayer());
         } else {
-            ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"),
-                    sa);
-            for (Player p : tgtPlayers) {
+            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                    params.get("Defined"), sa);
+            for (final Player p : tgtPlayers) {
                 if (p.isHuman() && !mandatory) {
                     return false;
                 }
@@ -249,20 +249,20 @@ public class AbilityFactory_Turns {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void addTurnResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
+        final HashMap<String, String> params = af.getMapParams();
+        final int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     AllZone.getPhase().addExtraTurn(p);
                 }

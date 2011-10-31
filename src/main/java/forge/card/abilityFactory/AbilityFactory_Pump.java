@@ -37,12 +37,12 @@ import forge.card.spellability.Target;
  */
 public class AbilityFactory_Pump {
 
-    private final ArrayList<String> Keywords = new ArrayList<String>();
+    private final ArrayList<String> keywords = new ArrayList<String>();
 
     private String numAttack;
     private String numDefense;
 
-    private AbilityFactory AF = null;
+    private AbilityFactory abilityFactory = null;
     private HashMap<String, String> params = null;
     private Card hostCard = null;
 
@@ -55,33 +55,33 @@ public class AbilityFactory_Pump {
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_Pump(final AbilityFactory newAF) {
-        AF = newAF;
+        this.abilityFactory = newAF;
 
-        params = AF.getMapParams();
+        this.params = this.abilityFactory.getMapParams();
 
-        hostCard = AF.getHostCard();
+        this.hostCard = this.abilityFactory.getHostCard();
 
-        numAttack = (params.containsKey("NumAtt")) ? params.get("NumAtt") : "0";
-        numDefense = (params.containsKey("NumDef")) ? params.get("NumDef") : "0";
+        this.numAttack = (this.params.containsKey("NumAtt")) ? this.params.get("NumAtt") : "0";
+        this.numDefense = (this.params.containsKey("NumDef")) ? this.params.get("NumDef") : "0";
 
         // Start with + sign now optional
-        if (numAttack.startsWith("+")) {
-            numAttack = numAttack.substring(1);
+        if (this.numAttack.startsWith("+")) {
+            this.numAttack = this.numAttack.substring(1);
         }
-        if (numDefense.startsWith("+")) {
-            numDefense = numDefense.substring(1);
+        if (this.numDefense.startsWith("+")) {
+            this.numDefense = this.numDefense.substring(1);
         }
 
-        if (params.containsKey("KW")) {
-            String tmp = params.get("KW");
-            String[] kk = tmp.split(" & ");
+        if (this.params.containsKey("KW")) {
+            final String tmp = this.params.get("KW");
+            final String[] kk = tmp.split(" & ");
 
-            Keywords.clear();
-            for (int i = 0; i < kk.length; i++) {
-                Keywords.add(kk[i]);
+            this.keywords.clear();
+            for (final String element : kk) {
+                this.keywords.add(element);
             }
         } else {
-            Keywords.add("none");
+            this.keywords.add("none");
         }
     }
 
@@ -93,24 +93,24 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellPump() {
-        SpellAbility spPump = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility spPump = new Spell(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
 
             @Override
             public boolean canPlayAI() {
-                return pumpPlayAI(this);
+                return AbilityFactory_Pump.this.pumpPlayAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return pumpStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                pumpResolve(this);
-            }// resolve
-        };// SpellAbility
+                AbilityFactory_Pump.this.pumpResolve(this);
+            } // resolve
+        }; // SpellAbility
 
         return spPump;
     }
@@ -123,30 +123,30 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPump() {
-        final SpellAbility abPump = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abPump = new Ability_Activated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1118592153328758083L;
 
             @Override
             public boolean canPlayAI() {
-                return pumpPlayAI(this);
+                return AbilityFactory_Pump.this.pumpPlayAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return pumpStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                pumpResolve(this);
-            }// resolve()
+                AbilityFactory_Pump.this.pumpResolve(this);
+            } // resolve()
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return pumpTriggerAI(AF, this, mandatory);
+                return AbilityFactory_Pump.this.pumpTriggerAI(AbilityFactory_Pump.this.abilityFactory, this, mandatory);
             }
 
-        };// SpellAbility
+        }; // SpellAbility
 
         return abPump;
     }
@@ -159,34 +159,34 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPump() {
-        SpellAbility dbPump = new Ability_Sub(hostCard, AF.getAbTgt()) {
+        final SpellAbility dbPump = new Ability_Sub(this.hostCard, this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
 
             @Override
             public boolean canPlayAI() {
-                return pumpPlayAI(this);
+                return AbilityFactory_Pump.this.pumpPlayAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return pumpStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                pumpResolve(this);
-            }// resolve
+                AbilityFactory_Pump.this.pumpResolve(this);
+            } // resolve
 
             @Override
             public boolean chkAIDrawback() {
-                return pumpDrawbackAI(this);
+                return AbilityFactory_Pump.this.pumpDrawbackAI(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return pumpTriggerAI(AF, this, mandatory);
+                return AbilityFactory_Pump.this.pumpTriggerAI(AbilityFactory_Pump.this.abilityFactory, this, mandatory);
             }
-        };// SpellAbility
+        }; // SpellAbility
 
         return dbPump;
     }
@@ -201,7 +201,7 @@ public class AbilityFactory_Pump {
      * @return a int.
      */
     private int getNumAttack(final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(hostCard, numAttack, sa);
+        return AbilityFactory.calculateAmount(this.hostCard, this.numAttack, sa);
     }
 
     /**
@@ -214,7 +214,7 @@ public class AbilityFactory_Pump {
      * @return a int.
      */
     private int getNumDefense(final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(hostCard, numDefense, sa);
+        return AbilityFactory.calculateAmount(this.hostCard, this.numDefense, sa);
     }
 
     /**
@@ -230,30 +230,31 @@ public class AbilityFactory_Pump {
      */
     private CardList getPumpCreatures(final int defense, final int attack) {
 
-        final boolean kHaste = Keywords.contains("Haste");
-        final boolean evasive = (Keywords.contains("Flying") || Keywords.contains("Horsemanship")
-                || Keywords.contains("HIDDEN Unblockable") || Keywords.contains("Fear") || Keywords
+        final boolean kHaste = this.keywords.contains("Haste");
+        final boolean evasive = (this.keywords.contains("Flying") || this.keywords.contains("Horsemanship")
+                || this.keywords.contains("HIDDEN Unblockable") || this.keywords.contains("Fear") || this.keywords
                 .contains("Intimidate"));
-        final boolean kSize = !Keywords.get(0).equals("none");
-        String[] KWpump = { "none" };
-        if (!Keywords.get(0).equals("none")) {
-            KWpump = Keywords.toArray(new String[Keywords.size()]);
+        final boolean kSize = !this.keywords.get(0).equals("none");
+        String[] kwPump = { "none" };
+        if (!this.keywords.get(0).equals("none")) {
+            kwPump = this.keywords.toArray(new String[this.keywords.size()]);
         }
-        final String[] KWs = KWpump;
+        final String[] keywords = kwPump;
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                if (!CardFactoryUtil.canTarget(hostCard, c)) {
+                if (!CardFactoryUtil.canTarget(AbilityFactory_Pump.this.hostCard, c)) {
                     return false;
                 }
 
-                if (c.getNetDefense() + defense <= 0) {
+                if ((c.getNetDefense() + defense) <= 0) {
                     return false;
                 }
 
                 // Don't add duplicate keywords
-                boolean hKW = c.hasAnyKeyword(KWs);
+                final boolean hKW = c.hasAnyKeyword(keywords);
                 if (kSize && hKW) {
                     return false;
                 }
@@ -268,7 +269,7 @@ public class AbilityFactory_Pump {
                 // give evasive keywords to creatures that can attack
                 if (evasive && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && CombatUtil.canAttack(c)
                         && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && c.getNetCombatDamage() > 0) {
+                        && (c.getNetCombatDamage() > 0)) {
                     return true;
                 }
 
@@ -289,14 +290,14 @@ public class AbilityFactory_Pump {
 
                 // is the creature unblocked and the spell will pump its power?
                 if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && attack > 0) {
+                        && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
                     return true;
                 }
 
                 // is the creature blocked and the blocker would survive
                 if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
-                        && AllZone.getCombat().getBlockers(c) != null
+                        && (AllZone.getCombat().getBlockers(c) != null)
                         && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
                     return true;
                 }
@@ -315,7 +316,7 @@ public class AbilityFactory_Pump {
             }
         });
         return list;
-    }// getPumpCreatures()
+    } // getPumpCreatures()
 
     /**
      * <p>
@@ -332,38 +333,39 @@ public class AbilityFactory_Pump {
      */
     private CardList getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.getTargetableCards(hostCard);
+        list = list.getTargetableCards(this.hostCard);
 
-        if (defense < 0 && !list.isEmpty()) { // with spells that give -X/-X,
-                                              // compi will try to destroy a
-                                              // creature
+        if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
+                                                // compi will try to destroy a
+                                                // creature
             list = list.filter(new CardListFilter() {
+                @Override
                 public boolean addCard(final Card c) {
-                    if (c.getNetDefense() <= -defense)
-                     {
+                    if (c.getNetDefense() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
-                    return (c.getKillDamage() <= -defense && !c.hasKeyword("Indestructible"));
+                    return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
         else if (!list.isEmpty()) {
-            String[] KWpump = { "none" };
-            if (!Keywords.get(0).equals("none")) {
-                KWpump = Keywords.toArray(new String[Keywords.size()]);
+            String[] kwPump = { "none" };
+            if (!this.keywords.get(0).equals("none")) {
+                kwPump = this.keywords.toArray(new String[this.keywords.size()]);
             }
-            final String[] KWs = KWpump;
-            final boolean addsKeywords = Keywords.size() > 0;
+            final String[] keywords = kwPump;
+            final boolean addsKeywords = this.keywords.size() > 0;
 
             if (addsKeywords) {
-                if (!containsCombatRelevantKeyword(Keywords) && AllZone.getPhase().isBefore(Constant.Phase.MAIN2))
-                 {
+                if (!this.containsCombatRelevantKeyword(this.keywords)
+                        && AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
                     list.clear(); // this keyword is not combat relevenat
                 }
 
                 list = list.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
-                        return !c.hasAnyKeyword(KWs); // don't add duplicate
+                        return !c.hasAnyKeyword(keywords); // don't add duplicate
                                                       // negative keywords
                     }
                 });
@@ -371,11 +373,11 @@ public class AbilityFactory_Pump {
         }
 
         return list;
-    }// getCurseCreatures()
+    } // getCurseCreatures()
 
     private boolean containsCombatRelevantKeyword(final ArrayList<String> keywords) {
         boolean flag = false;
-        for (String keyword : keywords) {
+        for (final String keyword : keywords) {
             // since most keywords are combat relevant check for those that are
             // not
             if (!keyword.equals("HIDDEN This card doesn't untap during your next untap step.")) {
@@ -396,35 +398,35 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpPlayAI(final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
-        if (AF.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard)) {
+        if ((this.abilityFactory.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(this.hostCard)) {
             return false;
         }
 
-        Cost cost = sa.getPayCosts();
+        final Cost cost = sa.getPayCosts();
 
-        if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
+        if (!CostUtil.checkLifeCost(cost, this.hostCard, 4)) {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(cost, hostCard)) {
+        if (!CostUtil.checkDiscardCost(cost, this.hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkCreatureSacrificeCost(cost, hostCard)) {
+        if (!CostUtil.checkCreatureSacrificeCost(cost, this.hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(cost, hostCard)) {
+        if (!CostUtil.checkRemoveCounterCost(cost, this.hostCard)) {
             return false;
         }
 
-        SpellAbility_Restriction restrict = sa.getRestrictions();
+        final SpellAbility_Restriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if (AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!AF.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
+            if (!this.abilityFactory.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
                 return false;
             }
         } else if (AllZone.getStack().size() > 0) {
@@ -435,46 +437,47 @@ public class AbilityFactory_Pump {
             return false;
         }
 
-        int activations = restrict.getNumberTurnActivations();
-        int sacActivations = restrict.getActivationNumberSacrifice();
+        final int activations = restrict.getNumberTurnActivations();
+        final int sacActivations = restrict.getActivationNumberSacrifice();
         // don't risk sacrificing a creature just to pump it
-        if (sacActivations != -1 && activations >= (sacActivations - 1)) {
+        if ((sacActivations != -1) && (activations >= (sacActivations - 1))) {
             return false;
         }
 
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         if (source.getSVar("X").equals("Count$xPaid")) {
             source.setSVar("PayX", "");
         }
 
         int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
-            defense = getNumDefense(sa);
+            defense = this.getNumDefense(sa);
         }
 
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            String toPay = source.getSVar("PayX");
+            final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = getNumAttack(sa);
+            attack = this.getNumAttack(sa);
         }
 
-        if (AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-            ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if ((this.abilityFactory.getAbTgt() == null) || !this.abilityFactory.getAbTgt().doesTarget()) {
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    this.params.get("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;
@@ -482,31 +485,31 @@ public class AbilityFactory_Pump {
 
             // when this happens we need to expand AI to consider if its ok for
             // everything?
-            for (Card card : cards) {
+            for (final Card card : cards) {
                 // TODO: if AI doesn't control Card and Pump is a Curse, than
                 // maybe use?
-                if ((card.getNetDefense() + defense > 0) && (!card.hasAnyKeyword(Keywords))) {
-                    if (card.hasSickness() && Keywords.contains("Haste")) {
+                if (((card.getNetDefense() + defense) > 0) && (!card.hasAnyKeyword(this.keywords))) {
+                    if (card.hasSickness() && this.keywords.contains("Haste")) {
                         return true;
-                    } else if (card.hasSickness() ^ Keywords.contains("Haste")) {
+                    } else if (card.hasSickness() ^ this.keywords.contains("Haste")) {
                         return false;
-                    } else if (hostCard.equals(card)) {
-                        Random r = MyRandom.getRandom();
+                    } else if (this.hostCard.equals(card)) {
+                        final Random r = MyRandom.getRandom();
                         if (r.nextFloat() <= Math.pow(.6667, activations)) {
                             return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
                         }
                     } else {
-                        Random r = MyRandom.getRandom();
+                        final Random r = MyRandom.getRandom();
                         return (r.nextFloat() <= Math.pow(.6667, activations));
                     }
                 }
             }
         } else {
-            return pumpTgtAI(sa, defense, attack, false);
+            return this.pumpTgtAI(sa, defense, attack, false);
         }
 
         return false;
-    }// pumpPlayAI()
+    } // pumpPlayAI()
 
     /**
      * <p>
@@ -525,17 +528,17 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !(AF.isCurse() && (defense < 0 || !containsCombatRelevantKeyword(Keywords)))) {
+                && !(this.abilityFactory.isCurse() && ((defense < 0) || !this.containsCombatRelevantKeyword(this.keywords)))) {
             return false;
         }
 
-        Target tgt = AF.getAbTgt();
+        final Target tgt = this.abilityFactory.getAbTgt();
         tgt.resetTargets();
         CardList list;
-        if (AF.isCurse()) {
-            list = getCurseCreatures(sa, defense, attack);
+        if (this.abilityFactory.isCurse()) {
+            list = this.getCurseCreatures(sa, defense, attack);
         } else {
-            list = getPumpCreatures(defense, attack);
+            list = this.getPumpCreatures(defense, attack);
         }
 
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -543,7 +546,7 @@ public class AbilityFactory_Pump {
         if (AllZone.getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if (sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+            if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
                 if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
@@ -556,7 +559,7 @@ public class AbilityFactory_Pump {
         }
 
         if (list.isEmpty()) {
-            return mandatory && pumpMandatoryTarget(AF, sa, mandatory);
+            return mandatory && this.pumpMandatoryTarget(this.abilityFactory, sa, mandatory);
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
@@ -564,9 +567,9 @@ public class AbilityFactory_Pump {
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0) {
+                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return pumpMandatoryTarget(AF, sa, mandatory);
+                        return this.pumpMandatoryTarget(this.abilityFactory, sa, mandatory);
                     }
 
                     tgt.resetTargets();
@@ -583,7 +586,7 @@ public class AbilityFactory_Pump {
         }
 
         return true;
-    }// pumpTgtAI()
+    } // pumpTgtAI()
 
     /**
      * <p>
@@ -600,7 +603,7 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
@@ -609,12 +612,13 @@ public class AbilityFactory_Pump {
         }
 
         // Remove anything that's already been targeted
-        for (Card c : tgt.getTargetCards())
+        for (final Card c : tgt.getTargetCards()) {
             list.remove(c);
+        }
 
         CardList pref;
         CardList forced;
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
 
         if (af.isCurse()) {
             pref = list.getController(AllZone.getHumanPlayer());
@@ -664,7 +668,7 @@ public class AbilityFactory_Pump {
         }
 
         return true;
-    }// pumpMandatoryTarget()
+    } // pumpMandatoryTarget()
 
     /**
      * <p>
@@ -684,32 +688,32 @@ public class AbilityFactory_Pump {
             return false;
         }
 
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
 
         int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
-            defense = getNumDefense(sa);
+            defense = this.getNumDefense(sa);
         }
 
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            String toPay = source.getSVar("PayX");
+            final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = getNumAttack(sa);
+            attack = this.getNumAttack(sa);
         }
 
         if (sa.getTarget() == null) {
@@ -717,11 +721,11 @@ public class AbilityFactory_Pump {
                 return true;
             }
         } else {
-            return pumpTgtAI(sa, defense, attack, mandatory);
+            return this.pumpTgtAI(sa, defense, attack, mandatory);
         }
 
         return true;
-    }// pumpTriggerAI
+    } // pumpTriggerAI
 
     /**
      * <p>
@@ -733,37 +737,37 @@ public class AbilityFactory_Pump {
      * @return a boolean.
      */
     private boolean pumpDrawbackAI(final SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
         } else {
-            defense = getNumDefense(sa);
+            defense = this.getNumDefense(sa);
         }
 
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (this.numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             attack = Integer.parseInt(source.getSVar("PayX"));
         } else {
-            attack = getNumAttack(sa);
+            attack = this.getNumAttack(sa);
         }
 
-        if (AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-            if (hostCard.isCreature()) {
-                if (!hostCard.hasKeyword("Indestructible")
-                        && hostCard.getNetDefense() + defense <= hostCard.getDamage()) {
+        if ((this.abilityFactory.getAbTgt() == null) || !this.abilityFactory.getAbTgt().doesTarget()) {
+            if (this.hostCard.isCreature()) {
+                if (!this.hostCard.hasKeyword("Indestructible")
+                        && ((this.hostCard.getNetDefense() + defense) <= this.hostCard.getDamage())) {
                     return false;
                 }
-                if (hostCard.getNetDefense() + defense <= 0) {
+                if ((this.hostCard.getNetDefense() + defense) <= 0) {
                     return false;
                 }
             }
         } else {
-            return pumpTgtAI(sa, defense, attack, false);
+            return this.pumpTgtAI(sa, defense, attack, false);
         }
 
         return true;
-    }// pumpDrawbackAI()
+    } // pumpDrawbackAI()
 
     /**
      * <p>
@@ -779,15 +783,15 @@ public class AbilityFactory_Pump {
     private String pumpStackDescription(final AbilityFactory af, final SpellAbility sa) {
         // when damageStackDescription is called, just build exactly what is
         // happening
-        StringBuilder sb = new StringBuilder();
-        String name = af.getHostCard().getName();
+        final StringBuilder sb = new StringBuilder();
+        final String name = af.getHostCard().getName();
 
         ArrayList<Card> tgtCards;
-        Target tgt = AF.getAbTgt();
+        final Target tgt = this.abilityFactory.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
 
         if (tgtCards.size() > 0) {
@@ -798,8 +802,9 @@ public class AbilityFactory_Pump {
                 sb.append(name).append(" - ");
             }
 
-            for (Card c : tgtCards)
+            for (final Card c : tgtCards) {
                 sb.append(c.getName()).append(" ");
+            }
 
             if (af.getMapParams().containsKey("Radiance")) {
                 sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
@@ -811,11 +816,11 @@ public class AbilityFactory_Pump {
                 }
             }
 
-            final int atk = getNumAttack(sa);
-            final int def = getNumDefense(sa);
+            final int atk = this.getNumAttack(sa);
+            final int def = this.getNumDefense(sa);
 
             sb.append("gains ");
-            if (atk != 0 || def != 0) {
+            if ((atk != 0) || (def != 0)) {
                 if (atk >= 0) {
                     sb.append("+");
                 }
@@ -828,24 +833,24 @@ public class AbilityFactory_Pump {
                 sb.append(" ");
             }
 
-            for (int i = 0; i < Keywords.size(); i++) {
-                if (!Keywords.get(i).equals("none")) {
-                    sb.append(Keywords.get(i)).append(" ");
+            for (int i = 0; i < this.keywords.size(); i++) {
+                if (!this.keywords.get(i).equals("none")) {
+                    sb.append(this.keywords.get(i)).append(" ");
                 }
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!this.params.containsKey("Permanent")) {
                 sb.append("until end of turn.");
             }
         }
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();
-    }// pumpStackDescription()
+    } // pumpStackDescription()
 
     /**
      * <p>
@@ -857,23 +862,25 @@ public class AbilityFactory_Pump {
      */
     private void pumpResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
-        ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        Target tgt = AF.getAbTgt();
+        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final Target tgt = this.abilityFactory.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
 
-        if (params.containsKey("Radiance")) {
-            for (Card c : CardUtil.getRadiance(hostCard, tgtCards.get(0), params.get("ValidTgts").split(","))) {
+        if (this.params.containsKey("Radiance")) {
+            for (final Card c : CardUtil.getRadiance(this.hostCard, tgtCards.get(0), this.params.get("ValidTgts")
+                    .split(","))) {
                 untargetedCards.add(c);
             }
         }
 
-        Zone pumpZone = params.containsKey("PumpZone") ? Zone.smartValueOf(params.get("PumpZone")) : Zone.Battlefield;
+        final Zone pumpZone = this.params.containsKey("PumpZone") ? Zone.smartValueOf(this.params.get("PumpZone"))
+                : Zone.Battlefield;
 
-        int size = tgtCards.size();
+        final int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
 
@@ -883,11 +890,11 @@ public class AbilityFactory_Pump {
             }
 
             // if pump is a target, make sure we can still target now
-            if (tgt != null && !CardFactoryUtil.canTarget(AF.getHostCard(), tgtC)) {
+            if ((tgt != null) && !CardFactoryUtil.canTarget(this.abilityFactory.getHostCard(), tgtC)) {
                 continue;
             }
 
-            applyPump(sa, tgtC);
+            this.applyPump(sa, tgtC);
         }
 
         for (int i = 0; i < untargetedCards.size(); i++) {
@@ -897,37 +904,38 @@ public class AbilityFactory_Pump {
                 continue;
             }
 
-            applyPump(sa, tgtC);
+            this.applyPump(sa, tgtC);
         }
-    }// pumpResolve()
+    } // pumpResolve()
 
     private void applyPump(final SpellAbility sa, final Card applyTo) {
-        final int a = getNumAttack(sa);
-        final int d = getNumDefense(sa);
+        final int a = this.getNumAttack(sa);
+        final int d = this.getNumDefense(sa);
 
         applyTo.addTempAttackBoost(a);
         applyTo.addTempDefenseBoost(d);
 
-        for (int i = 0; i < Keywords.size(); i++) {
-            if (!Keywords.get(i).equals("none")) {
-                applyTo.addExtrinsicKeyword(Keywords.get(i));
+        for (int i = 0; i < this.keywords.size(); i++) {
+            if (!this.keywords.get(i).equals("none")) {
+                applyTo.addExtrinsicKeyword(this.keywords.get(i));
             }
         }
 
-        if (!params.containsKey("Permanent")) {
+        if (!this.params.containsKey("Permanent")) {
             // If not Permanent, remove Pumped at EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -42244224L;
 
+                @Override
                 public void execute() {
                     if (AllZoneUtil.isCardInPlay(applyTo)) {
                         applyTo.addTempAttackBoost(-1 * a);
                         applyTo.addTempDefenseBoost(-1 * d);
 
-                        if (Keywords.size() > 0) {
-                            for (int i = 0; i < Keywords.size(); i++) {
-                                if (!Keywords.get(i).equals("none")) {
-                                    applyTo.removeExtrinsicKeyword(Keywords.get(i));
+                        if (AbilityFactory_Pump.this.keywords.size() > 0) {
+                            for (int i = 0; i < AbilityFactory_Pump.this.keywords.size(); i++) {
+                                if (!AbilityFactory_Pump.this.keywords.get(i).equals("none")) {
+                                    applyTo.removeExtrinsicKeyword(AbilityFactory_Pump.this.keywords.get(i));
                                 }
                             }
                         }
@@ -935,9 +943,9 @@ public class AbilityFactory_Pump {
                     }
                 }
             };
-            if (params.containsKey("UntilEndOfCombat")) {
+            if (this.params.containsKey("UntilEndOfCombat")) {
                 AllZone.getEndOfCombat().addUntil(untilEOT);
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
+            } else if (this.params.containsKey("UntilYourNextUpkeep")) {
                 AllZone.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
@@ -959,30 +967,30 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPumpAll() {
-        final SpellAbility abPumpAll = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility abPumpAll = new Ability_Activated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -8299417521903307630L;
 
             @Override
             public boolean canPlayAI() {
-                return pumpAllCanPlayAI(this);
+                return AbilityFactory_Pump.this.pumpAllCanPlayAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return pumpAllStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpAllStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                pumpAllResolve(this);
-            }// resolve()
+                AbilityFactory_Pump.this.pumpAllResolve(this);
+            } // resolve()
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return pumpAllTriggerAI(AF, this, mandatory);
+                return AbilityFactory_Pump.this.pumpAllTriggerAI(AbilityFactory_Pump.this.abilityFactory, this, mandatory);
             }
 
-        };// SpellAbility
+        }; // SpellAbility
 
         return abPumpAll;
     }
@@ -995,22 +1003,24 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellPumpAll() {
-        SpellAbility spPumpAll = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility spPumpAll = new Spell(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4055467978660824703L;
 
+            @Override
             public boolean canPlayAI() {
-                return pumpAllCanPlayAI(this);
+                return AbilityFactory_Pump.this.pumpAllCanPlayAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return pumpAllStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpAllStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
+            @Override
             public void resolve() {
-                pumpAllResolve(this);
-            }// resolve
-        };// SpellAbility
+                AbilityFactory_Pump.this.pumpAllResolve(this);
+            } // resolve
+        }; // SpellAbility
 
         return spPumpAll;
     }
@@ -1023,29 +1033,29 @@ public class AbilityFactory_Pump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPumpAll() {
-        SpellAbility dbPumpAll = new Ability_Sub(hostCard, AF.getAbTgt()) {
+        final SpellAbility dbPumpAll = new Ability_Sub(this.hostCard, this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6411531984691660342L;
 
             @Override
             public String getStackDescription() {
-                return pumpAllStackDescription(AF, this);
+                return AbilityFactory_Pump.this.pumpAllStackDescription(AbilityFactory_Pump.this.abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                pumpAllResolve(this);
-            }// resolve
+                AbilityFactory_Pump.this.pumpAllResolve(this);
+            } // resolve
 
             @Override
             public boolean chkAIDrawback() {
-                return pumpAllChkDrawbackAI(this);
+                return AbilityFactory_Pump.this.pumpAllChkDrawbackAI(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return pumpAllTriggerAI(AF, this, mandatory);
+                return AbilityFactory_Pump.this.pumpAllTriggerAI(AbilityFactory_Pump.this.abilityFactory, this, mandatory);
             }
-        };// SpellAbility
+        }; // SpellAbility
 
         return dbPumpAll;
     }
@@ -1061,74 +1071,75 @@ public class AbilityFactory_Pump {
      */
     private boolean pumpAllCanPlayAI(final SpellAbility sa) {
         String valid = "";
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
-        params = AF.getMapParams();
-        final int defense = getNumDefense(sa);
+        this.params = this.abilityFactory.getMapParams();
+        final int defense = this.getNumDefense(sa);
 
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
-                                                                                        // prevent
-                                                                                        // runaway
-                                                                                        // activations
+        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
+        // prevent
+        // runaway
+        // activations
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (this.params.containsKey("ValidCards")) {
+            valid = this.params.get("ValidCards");
         }
 
         CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-        comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
+        comp = comp.getValidCards(valid, this.hostCard.getController(), this.hostCard);
         CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        human = human.getValidCards(valid, hostCard.getController(), hostCard);
+        human = human.getValidCards(valid, this.hostCard.getController(), this.hostCard);
 
         // only count creatures that can attack
         human = human.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                return CombatUtil.canAttack(c) && !AF.isCurse();
+                return CombatUtil.canAttack(c) && !AbilityFactory_Pump.this.abilityFactory.isCurse();
             }
         });
 
-        if (AF.isCurse()) {
+        if (this.abilityFactory.isCurse()) {
             if (defense < 0) { // try to destroy creatures
                 comp = comp.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
-                        if (c.getNetDefense() <= -defense)
-                         {
+                        if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return (c.getKillDamage() <= -defense && !c.hasKeyword("Indestructible"));
+                        return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
                     }
                 }); // leaves all creatures that will be destroyed
                 human = human.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
-                        if (c.getNetDefense() <= -defense)
-                         {
+                        if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return (c.getKillDamage() <= -defense && !c.hasKeyword("Indestructible"));
+                        return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
                     }
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
-            if (CardFactoryUtil.evaluateCreatureList(comp) + 200 >= CardFactoryUtil.evaluateCreatureList(human)) {
+            if ((CardFactoryUtil.evaluateCreatureList(comp) + 200) >= CardFactoryUtil.evaluateCreatureList(human)) {
                 return false;
             }
 
             return chance;
-        }// end Curse
+        } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
         if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 
-        if (comp.size() <= human.size() || comp.size() <= 1) {
+        if ((comp.size() <= human.size()) || (comp.size() <= 1)) {
             return false;
         }
 
         return (r.nextFloat() < .6667) && chance;
-    }// pumpAllCanPlayAI()
+    } // pumpAllCanPlayAI()
 
     /**
      * <p>
@@ -1139,35 +1150,35 @@ public class AbilityFactory_Pump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void pumpAllResolve(final SpellAbility sa) {
-        AbilityFactory af = sa.getAbilityFactory();
+        final AbilityFactory af = sa.getAbilityFactory();
         CardList list;
         ArrayList<Player> tgtPlayers = null;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        } else if (params.containsKey("Defined")) {
+        } else if (this.params.containsKey("Defined")) {
             // use it
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
 
-        if (tgtPlayers == null || tgtPlayers.isEmpty()) {
+        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         } else {
             list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
         }
 
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (this.params.containsKey("ValidCards")) {
+            valid = this.params.get("ValidCards");
         }
 
         list = AbilityFactory.filterListByType(list, valid, sa);
 
-        final int a = getNumAttack(sa);
-        final int d = getNumDefense(sa);
+        final int a = this.getNumAttack(sa);
+        final int d = this.getNumDefense(sa);
 
-        for (Card c : list) {
+        for (final Card c : list) {
             final Card tgtC = c;
 
             // only pump things in play
@@ -1178,26 +1189,27 @@ public class AbilityFactory_Pump {
             tgtC.addTempAttackBoost(a);
             tgtC.addTempDefenseBoost(d);
 
-            for (int i = 0; i < Keywords.size(); i++) {
-                if (!Keywords.get(i).equals("none")) {
-                    tgtC.addExtrinsicKeyword(Keywords.get(i));
+            for (int i = 0; i < this.keywords.size(); i++) {
+                if (!this.keywords.get(i).equals("none")) {
+                    tgtC.addExtrinsicKeyword(this.keywords.get(i));
                 }
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!this.params.containsKey("Permanent")) {
                 // If not Permanent, remove Pumped at EOT
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 5415795460189457660L;
 
+                    @Override
                     public void execute() {
                         if (AllZoneUtil.isCardInPlay(tgtC)) {
                             tgtC.addTempAttackBoost(-1 * a);
                             tgtC.addTempDefenseBoost(-1 * d);
 
-                            if (Keywords.size() > 0) {
-                                for (int i = 0; i < Keywords.size(); i++) {
-                                    if (!Keywords.get(i).equals("none")) {
-                                        tgtC.removeExtrinsicKeyword(Keywords.get(i));
+                            if (AbilityFactory_Pump.this.keywords.size() > 0) {
+                                for (int i = 0; i < AbilityFactory_Pump.this.keywords.size(); i++) {
+                                    if (!AbilityFactory_Pump.this.keywords.get(i).equals("none")) {
+                                        tgtC.removeExtrinsicKeyword(AbilityFactory_Pump.this.keywords.get(i));
                                     }
                                 }
                             }
@@ -1208,7 +1220,7 @@ public class AbilityFactory_Pump {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }
-    }// pumpAllResolve()
+    } // pumpAllResolve()
 
     /**
      * <p>
@@ -1259,13 +1271,13 @@ public class AbilityFactory_Pump {
      * @return a {@link java.lang.String} object.
      */
     private String pumpAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         String desc = "";
-        if (params.containsKey("SpellDescription")) {
-            desc = params.get("SpellDescription");
-        } else if (params.containsKey("PumpAllDescription")) {
-            desc = params.get("PumpAllDescription");
+        if (this.params.containsKey("SpellDescription")) {
+            desc = this.params.get("SpellDescription");
+        } else if (this.params.containsKey("PumpAllDescription")) {
+            desc = this.params.get("PumpAllDescription");
         }
 
         if (!(sa instanceof Ability_Sub)) {
@@ -1275,12 +1287,12 @@ public class AbilityFactory_Pump {
         }
         sb.append(desc);
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();
-    }// pumpAllStackDescription()
+    } // pumpAllStackDescription()
 
-}// end class AbilityFactory_Pump
+} // end class AbilityFactory_Pump

@@ -57,25 +57,25 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean canPlayAI() {
-                return regenerateCanPlayAI(af, this);
+                return AbilityFactory_Regenerate.regenerateCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateResolve(af, this);
+                AbilityFactory_Regenerate.regenerateResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return regenerateStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return doTriggerAI(af, this, mandatory);
+                return AbilityFactory_Regenerate.doTriggerAI(af, this, mandatory);
             }
 
-        };// Ability_Activated
+        }; // Ability_Activated
 
         return abRegenerate;
     }
@@ -96,17 +96,17 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean canPlayAI() {
-                return regenerateCanPlayAI(af, this);
+                return AbilityFactory_Regenerate.regenerateCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateResolve(af, this);
+                AbilityFactory_Regenerate.regenerateResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return regenerateStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateStackDescription(af, this);
             }
 
         }; // Spell
@@ -129,12 +129,12 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public String getStackDescription() {
-                return regenerateStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateResolve(af, this);
+                AbilityFactory_Regenerate.regenerateResolve(af, this);
             }
 
             @Override
@@ -144,7 +144,7 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return doTriggerAI(af, this, mandatory);
+                return AbilityFactory_Regenerate.doTriggerAI(af, this, mandatory);
             }
 
         };
@@ -164,11 +164,11 @@ public class AbilityFactory_Regenerate {
      */
     private static String regenerateStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
-        Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
 
         ArrayList<Card> tgtCards;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -183,9 +183,9 @@ public class AbilityFactory_Regenerate {
             }
 
             sb.append("Regenerate ");
-            Iterator<Card> it = tgtCards.iterator();
+            final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
-                Card tgtC = it.next();
+                final Card tgtC = it.next();
                 if (tgtC.isFaceDown()) {
                     sb.append("Morph");
                 } else {
@@ -199,7 +199,7 @@ public class AbilityFactory_Regenerate {
         }
         sb.append(".");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -222,7 +222,7 @@ public class AbilityFactory_Regenerate {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         boolean chance = false;
-        Cost abCost = af.getAbCost();
+        final Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkLifeCost(abCost, hostCard, 4)) {
@@ -238,16 +238,16 @@ public class AbilityFactory_Regenerate {
             }
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+            final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
             if (AllZone.getStack().size() > 0) {
-                ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
-                for (Card c : list) {
+                for (final Card c : list) {
                     if (objects.contains(c)) {
                         chance = true;
                     }
@@ -256,7 +256,7 @@ public class AbilityFactory_Regenerate {
                 if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
 
-                    for (Card c : list) {
+                    for (final Card c : list) {
                         if (c.getShield() == 0) {
                             flag |= CombatUtil.combatantWouldBeDestroyed(c);
                         }
@@ -281,12 +281,12 @@ public class AbilityFactory_Regenerate {
             if (AllZone.getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
-                ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
 
-                CardList threatenedTargets = new CardList();
+                final CardList threatenedTargets = new CardList();
 
-                for (Card c : targetables) {
-                    if (objects.contains(c) && c.getShield() == 0) {
+                for (final Card c : targetables) {
+                    if (objects.contains(c) && (c.getShield() == 0)) {
                         threatenedTargets.add(c);
                     }
                 }
@@ -298,11 +298,11 @@ public class AbilityFactory_Regenerate {
                 }
             } else {
                 if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                    CardList combatants = targetables.getType("Creature");
+                    final CardList combatants = targetables.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
-                    for (Card c : combatants) {
-                        if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
+                    for (final Card c : combatants) {
+                        if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
                             tgt.addTarget(c);
                             chance = true;
                             break;
@@ -312,13 +312,13 @@ public class AbilityFactory_Regenerate {
             }
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
 
         return chance;
-    }// regenerateCanPlayAI
+    } // regenerateCanPlayAI
 
     /**
      * <p>
@@ -340,15 +340,15 @@ public class AbilityFactory_Regenerate {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt == null) {
             // If there's no target on the trigger, just say yes.
             chance = true;
         } else {
-            chance = regenMandatoryTarget(af, sa, mandatory);
+            chance = AbilityFactory_Regenerate.regenMandatoryTarget(af, sa, mandatory);
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -371,27 +371,27 @@ public class AbilityFactory_Regenerate {
      */
     private static boolean regenMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = af.getHostCard();
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
+        final CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
             return false;
         }
 
-        if (!mandatory && compTargetables.size() == 0) {
+        if (!mandatory && (compTargetables.size() == 0)) {
             return false;
         }
 
         if (compTargetables.size() > 0) {
-            CardList combatants = compTargetables.getType("Creature");
+            final CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
             if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                for (Card c : combatants) {
-                    if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
+                for (final Card c : combatants) {
+                    if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         return true;
                     }
@@ -403,7 +403,7 @@ public class AbilityFactory_Regenerate {
 
             // choose my best X without regen
             if (compTargetables.getNotType("Creature").size() == 0) {
-                for (Card c : combatants) {
+                for (final Card c : combatants) {
                     if (c.getShield() == 0) {
                         tgt.addTarget(c);
                         return true;
@@ -413,7 +413,7 @@ public class AbilityFactory_Regenerate {
                 return true;
             } else {
                 CardListUtil.sortByMostExpensive(compTargetables);
-                for (Card c : compTargetables) {
+                for (final Card c : compTargetables) {
                     if (c.getShield() == 0) {
                         tgt.addTarget(c);
                         return true;
@@ -439,11 +439,11 @@ public class AbilityFactory_Regenerate {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void regenerateResolve(final AbilityFactory af, final SpellAbility sa) {
-        Card hostCard = af.getHostCard();
+        final Card hostCard = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
 
         ArrayList<Card> tgtCards;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -454,17 +454,18 @@ public class AbilityFactory_Regenerate {
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 1922050611313909200L;
 
+                @Override
                 public void execute() {
                     tgtC.resetShield();
                 }
             };
 
-            if (AllZoneUtil.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(hostCard, tgtC))) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || CardFactoryUtil.canTarget(hostCard, tgtC))) {
                 tgtC.addShield();
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }
-    }// regenerateResolve
+    } // regenerateResolve
 
     // **************************************************************
     // ********************* RegenerateAll *************************
@@ -486,25 +487,25 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean canPlayAI() {
-                return regenerateAllCanPlayAI(af, this);
+                return AbilityFactory_Regenerate.regenerateAllCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateAllResolve(af, this);
+                AbilityFactory_Regenerate.regenerateAllResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return regenerateAllStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateAllStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return regenerateAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Regenerate.regenerateAllDoTriggerAI(af, this, mandatory);
             }
 
-        };// Ability_Activated
+        }; // Ability_Activated
 
         return abRegenerateAll;
     }
@@ -525,17 +526,17 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean canPlayAI() {
-                return regenerateAllCanPlayAI(af, this);
+                return AbilityFactory_Regenerate.regenerateAllCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateAllResolve(af, this);
+                AbilityFactory_Regenerate.regenerateAllResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return regenerateAllStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateAllStackDescription(af, this);
             }
 
         }; // Spell
@@ -558,12 +559,12 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public String getStackDescription() {
-                return regenerateAllStackDescription(af, this);
+                return AbilityFactory_Regenerate.regenerateAllStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                regenerateAllResolve(af, this);
+                AbilityFactory_Regenerate.regenerateAllResolve(af, this);
             }
 
             @Override
@@ -573,7 +574,7 @@ public class AbilityFactory_Regenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return regenerateAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactory_Regenerate.regenerateAllDoTriggerAI(af, this, mandatory);
             }
 
         };
@@ -593,8 +594,8 @@ public class AbilityFactory_Regenerate {
      */
     private static String regenerateAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
-        Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -611,7 +612,7 @@ public class AbilityFactory_Regenerate {
 
         sb.append(desc);
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -634,7 +635,7 @@ public class AbilityFactory_Regenerate {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         boolean chance = false;
-        Cost abCost = af.getAbCost();
+        final Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkSacrificeCost(abCost, hostCard)) {
@@ -671,10 +672,10 @@ public class AbilityFactory_Regenerate {
         } else {
 
             if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                CardList combatants = list.getType("Creature");
+                final CardList combatants = list.getType("Creature");
 
-                for (Card c : combatants) {
-                    if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
+                for (final Card c : combatants) {
+                    if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
                         numSaved++;
                     }
                 }
@@ -685,7 +686,7 @@ public class AbilityFactory_Regenerate {
             chance = true;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -706,14 +707,15 @@ public class AbilityFactory_Regenerate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         boolean chance = true;
 
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -732,7 +734,7 @@ public class AbilityFactory_Regenerate {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void regenerateAllResolve(final AbilityFactory af, final SpellAbility sa) {
-        Card hostCard = af.getHostCard();
+        final Card hostCard = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
         String valid = "";
 
@@ -747,6 +749,7 @@ public class AbilityFactory_Regenerate {
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 259368227093961103L;
 
+                @Override
                 public void execute() {
                     c.resetShield();
                 }
@@ -757,6 +760,6 @@ public class AbilityFactory_Regenerate {
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }
         }
-    }// regenerateAllResolve
+    } // regenerateAllResolve
 
-}// end class AbilityFactory_Regenerate
+} // end class AbilityFactory_Regenerate

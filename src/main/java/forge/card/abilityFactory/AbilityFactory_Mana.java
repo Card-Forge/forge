@@ -40,25 +40,26 @@ public class AbilityFactory_Mana {
      * createAbilityMana.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param produced
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityMana(final AbilityFactory AF, final String produced) {
-        final Ability_Mana abMana = new Ability_Mana(AF.getHostCard(), AF.getAbCost(), produced) {
+    public static SpellAbility createAbilityMana(final AbilityFactory abilityFactory, final String produced) {
+        final Ability_Mana abMana = new Ability_Mana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced) {
             private static final long serialVersionUID = -1933592438783630254L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
+            @Override
             public boolean canPlayAI() {
-                return manaCanPlayAI(af);
+                return AbilityFactory_Mana.manaCanPlayAI(this.af);
             }
 
             @Override
             public void resolve() {
-                manaResolve(this, af, this);
+                AbilityFactory_Mana.manaResolve(this, this.af, this);
             }
 
             @Override
@@ -76,21 +77,21 @@ public class AbilityFactory_Mana {
      * createSpellMana.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param produced
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellMana(final AbilityFactory AF, final String produced) {
-        final SpellAbility spMana = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    public static SpellAbility createSpellMana(final AbilityFactory abilityFactory, final String produced) {
+        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            Cost tmp = new Cost("0", AF.getHostCard().getName(), false);
-            Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced) {
+            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private Ability_Mana tmpMana = new Ability_Mana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -101,20 +102,21 @@ public class AbilityFactory_Mana {
 
             };
 
+            @Override
             public boolean canPlayAI() {
-                return manaCanPlayAI(af);
+                return AbilityFactory_Mana.manaCanPlayAI(this.af);
             }
 
             @Override
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return manaStackDescription(tmpMana, af, this);
+                return AbilityFactory_Mana.manaStackDescription(this.tmpMana, this.af, this);
             }
 
             @Override
             public void resolve() {
-                manaResolve(tmpMana, af, this);
+                AbilityFactory_Mana.manaResolve(this.tmpMana, this.af, this);
             }
 
         };
@@ -127,21 +129,21 @@ public class AbilityFactory_Mana {
      * createDrawbackMana.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param produced
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability_Sub} object.
      */
-    public static Ability_Sub createDrawbackMana(final AbilityFactory AF, final String produced) {
-        final Ability_Sub dbMana = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+    public static Ability_Sub createDrawbackMana(final AbilityFactory abilityFactory, final String produced) {
+        final Ability_Sub dbMana = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            Cost tmp = new Cost("0", AF.getHostCard().getName(), false);
-            Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced) {
+            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private Ability_Mana tmpMana = new Ability_Mana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -156,12 +158,12 @@ public class AbilityFactory_Mana {
             public String getStackDescription() {
                 // when getStackDesc is called, just build exactly what is
                 // happening
-                return manaStackDescription(tmpMana, af, this);
+                return AbilityFactory_Mana.manaStackDescription(this.tmpMana, this.af, this);
             }
 
             @Override
             public void resolve() {
-                manaResolve(tmpMana, af, this);
+                AbilityFactory_Mana.manaResolve(this.tmpMana, this.af, this);
             }
 
             @Override
@@ -207,7 +209,7 @@ public class AbilityFactory_Mana {
      * @return a {@link java.lang.String} object.
      */
     public static String manaStackDescription(final Ability_Mana abMana, final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -215,7 +217,7 @@ public class AbilityFactory_Mana {
             sb.append(af.getHostCard()).append(" - ");
         }
 
-        sb.append("Add ").append(generatedMana(abMana, af, sa)).append(" to your mana pool.");
+        sb.append("Add ").append(AbilityFactory_Mana.generatedMana(abMana, af, sa)).append(" to your mana pool.");
 
         if (abMana.getSubAbility() != null) {
             sb.append(abMana.getSubAbility().getStackDescription());
@@ -240,20 +242,21 @@ public class AbilityFactory_Mana {
         // Spells are not undoable
         abMana.setUndoable(af.isAbility() && abMana.isUndoable());
 
-        HashMap<String, String> params = af.getMapParams();
-        Card card = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = af.getHostCard();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        for (Player player : tgtPlayers)
-            abMana.produceMana(generatedMana(abMana, af, sa), player);
+        for (final Player player : tgtPlayers) {
+            abMana.produceMana(AbilityFactory_Mana.generatedMana(abMana, af, sa), player);
+        }
 
         // convert these to SubAbilities when appropriate
         if (params.containsKey("Stuck")) {
@@ -261,16 +264,16 @@ public class AbilityFactory_Mana {
             card.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
 
-        String deplete = params.get("Deplete");
+        final String deplete = params.get("Deplete");
         if (deplete != null) {
-            int num = card.getCounters(Counters.getType(deplete));
+            final int num = card.getCounters(Counters.getType(deplete));
             if (num == 0) {
                 abMana.setUndoable(false);
                 AllZone.getGameAction().sacrifice(card);
             }
         }
 
-        doDrawback(af, abMana, card);
+        AbilityFactory_Mana.doDrawback(af, abMana, card);
     }
 
     /**
@@ -288,8 +291,8 @@ public class AbilityFactory_Mana {
      */
     private static String generatedMana(final Ability_Mana abMana, final AbilityFactory af, final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
-        HashMap<String, String> params = af.getMapParams();
-        Card card = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
         int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
                 params.get("Amount"), sa) : 1;
 
@@ -305,7 +308,7 @@ public class AbilityFactory_Mana {
             // ALWAYS be Base
             int bonus = 0;
             if (params.get("Bonus").equals("UrzaLands")) {
-                if (hasUrzaLands(abMana.getActivatingPlayer())) {
+                if (AbilityFactory_Mana.hasUrzaLands(abMana.getActivatingPlayer())) {
                     bonus = Integer.parseInt(params.get("BonusProduced"));
                 }
             }
@@ -314,23 +317,23 @@ public class AbilityFactory_Mana {
         }
 
         try {
-            if (params.get("Amount") != null && amount != Integer.parseInt(params.get("Amount"))) {
+            if ((params.get("Amount") != null) && (amount != Integer.parseInt(params.get("Amount")))) {
                 abMana.setUndoable(false);
             }
-        } catch (NumberFormatException n) {
+        } catch (final NumberFormatException n) {
             abMana.setUndoable(false);
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
         } else {
             try {
                 // if baseMana is an integer(colorless), just multiply amount
                 // and baseMana
-                int base = Integer.parseInt(baseMana);
+                final int base = Integer.parseInt(baseMana);
                 sb.append(base * amount);
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 for (int i = 0; i < amount; i++) {
                     if (i != 0) {
                         sb.append(" ");
@@ -348,25 +351,26 @@ public class AbilityFactory_Mana {
      * createAbilityManaReflected.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param produced
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createAbilityManaReflected(final AbilityFactory AF, final String produced) {
-        final Ability_Mana abMana = new Ability_Mana(AF.getHostCard(), AF.getAbCost(), produced) {
+    public static SpellAbility createAbilityManaReflected(final AbilityFactory abilityFactory, final String produced) {
+        final Ability_Mana abMana = new Ability_Mana(abilityFactory.getHostCard(), abilityFactory.getAbCost(), produced) {
             private static final long serialVersionUID = -1933592438783630254L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
 
+            @Override
             public boolean canPlayAI() {
-                return manaReflectedCanPlayAI(af);
+                return AbilityFactory_Mana.manaReflectedCanPlayAI(this.af);
             }
 
             @Override
             public void resolve() {
-                manaReflectedResolve(this, af);
+                AbilityFactory_Mana.manaReflectedResolve(this, this.af);
             }
 
             @Override
@@ -385,23 +389,23 @@ public class AbilityFactory_Mana {
      * createSpellManaReflected.
      * </p>
      * 
-     * @param AF
+     * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param produced
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility createSpellManaReflected(final AbilityFactory AF, final String produced) {
+    public static SpellAbility createSpellManaReflected(final AbilityFactory abilityFactory, final String produced) {
         // No Spell has Reflected Mana, but might as well put it in for the
         // future
-        final SpellAbility spMana = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
-            final AbilityFactory af = AF;
+            private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            Cost tmp = new Cost("0", AF.getHostCard().getName(), false);
-            Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced) {
+            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private Ability_Mana tmpMana = new Ability_Mana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -416,13 +420,14 @@ public class AbilityFactory_Mana {
 
             // tmpMana.setReflectedMana(true);
 
+            @Override
             public boolean canPlayAI() {
-                return manaReflectedCanPlayAI(af);
+                return AbilityFactory_Mana.manaReflectedCanPlayAI(this.af);
             }
 
             @Override
             public void resolve() {
-                manaReflectedResolve(tmpMana, af);
+                AbilityFactory_Mana.manaReflectedResolve(this.tmpMana, this.af);
             }
 
         };
@@ -455,24 +460,25 @@ public class AbilityFactory_Mana {
      */
     public static void manaReflectedResolve(final Ability_Mana abMana, final AbilityFactory af) {
         // Spells are not undoable
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         abMana.setUndoable(af.isAbility() && abMana.isUndoable());
 
-        Card card = af.getHostCard();
+        final Card card = af.getHostCard();
 
-        ArrayList<String> colors = reflectableMana(abMana, af, new ArrayList<String>(), new ArrayList<Card>());
+        final ArrayList<String> colors = AbilityFactory_Mana.reflectableMana(abMana, af, new ArrayList<String>(),
+                new ArrayList<Card>());
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(abMana.getSourceCard(), params.get("Defined"), abMana);
         }
 
-        for (Player player : tgtPlayers) {
-            String generated = generatedReflectedMana(abMana, af, colors, player);
+        for (final Player player : tgtPlayers) {
+            final String generated = AbilityFactory_Mana.generatedReflectedMana(abMana, af, colors, player);
 
             if (abMana.getCanceled()) {
                 abMana.undo();
@@ -482,7 +488,7 @@ public class AbilityFactory_Mana {
             abMana.produceMana(generated, player);
         }
 
-        doDrawback(af, abMana, card);
+        AbilityFactory_Mana.doDrawback(af, abMana, card);
     }
 
     // add Colors and
@@ -501,28 +507,29 @@ public class AbilityFactory_Mana {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<String> reflectableMana(final Ability_Mana abMana, final AbilityFactory af, ArrayList<String> colors,
-            final ArrayList<Card> parents) {
+    public static ArrayList<String> reflectableMana(final Ability_Mana abMana, final AbilityFactory af,
+            ArrayList<String> colors, final ArrayList<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
-        HashMap<String, String> params = af.getMapParams();
-        Card card = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = af.getHostCard();
 
         if (!parents.contains(card)) {
             parents.add(card);
         }
 
-        String colorOrType = params.get("ColorOrType"); // currently Color or
-                                                        // Type, Type is colors
-                                                        // + colorless
-        String validCard = params.get("Valid");
-        String reflectProperty = params.get("ReflectProperty"); // Produce
-                                                                // (Reflecting
-                                                                // Pool) or Is
-                                                                // (Meteor
-                                                                // Crater)
+        final String colorOrType = params.get("ColorOrType"); // currently Color
+                                                              // or
+        // Type, Type is colors
+        // + colorless
+        final String validCard = params.get("Valid");
+        final String reflectProperty = params.get("ReflectProperty"); // Produce
+        // (Reflecting
+        // Pool) or Is
+        // (Meteor
+        // Crater)
 
         int maxChoices = 5; // Color is the default colorOrType
         if (colorOrType.equals("Type")) {
@@ -534,48 +541,49 @@ public class AbilityFactory_Mana {
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
             cards = new CardList();
-            for (Card c : AbilityFactory
-                    .getDefinedCards(card, validCard.replace("Defined.", ""), (SpellAbility) abMana))
+            for (final Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana)) {
                 cards.add(c);
+            }
         } else {
             cards = AllZoneUtil.getCardsIn(Zone.Battlefield).getValidCards(validCard, abMana.getActivatingPlayer(),
                     card);
         }
 
         // remove anything cards that is already in parents
-        for (Card p : parents)
+        for (final Card p : parents) {
             if (cards.contains(p)) {
                 cards.remove(p);
             }
+        }
 
-        if (cards.size() == 0 && !reflectProperty.equals("Produced")) {
+        if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
             return colors;
         }
 
         if (reflectProperty.equals("Is")) { // Meteor Crater
-            colors = hasProperty(maxChoices, cards, colors);
+            colors = AbilityFactory_Mana.hasProperty(maxChoices, cards, colors);
         } else if (reflectProperty.equals("Produced")) {
-            String producedColors = (String) abMana.getTriggeringObject("Produced");
-            for (String col : Constant.Color.ONLY_COLORS) {
-                String s = Input_PayManaCostUtil.getShortColorString(col);
+            final String producedColors = (String) abMana.getTriggeringObject("Produced");
+            for (final String col : Constant.Color.ONLY_COLORS) {
+                final String s = Input_PayManaCostUtil.getShortColorString(col);
                 if (producedColors.contains(s) && !colors.contains(col)) {
                     colors.add(col);
                 }
             }
-            if (maxChoices == 6 && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
+            if ((maxChoices == 6) && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
                 colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            ArrayList<Ability_Mana> abilities = new ArrayList<Ability_Mana>();
-            for (Card c : cards) {
+            final ArrayList<Ability_Mana> abilities = new ArrayList<Ability_Mana>();
+            for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }
             // currently reflected mana will ignore other reflected mana
             // abilities
 
-            ArrayList<Ability_Mana> reflectAbilities = new ArrayList<Ability_Mana>();
+            final ArrayList<Ability_Mana> reflectAbilities = new ArrayList<Ability_Mana>();
 
-            for (Ability_Mana ab : abilities) {
+            for (final Ability_Mana ab : abilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
@@ -588,18 +596,18 @@ public class AbilityFactory_Mana {
                     }
                     continue;
                 }
-                colors = canProduce(maxChoices, ab, colors);
+                colors = AbilityFactory_Mana.canProduce(maxChoices, ab, colors);
                 if (!parents.contains(ab.getSourceCard())) {
                     parents.add(ab.getSourceCard());
                 }
             }
 
-            for (Ability_Mana ab : reflectAbilities) {
+            for (final Ability_Mana ab : reflectAbilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
 
-                colors = reflectableMana(ab, ab.getAbilityFactory(), colors, parents);
+                colors = AbilityFactory_Mana.reflectableMana(ab, ab.getAbilityFactory(), colors, parents);
             }
         }
 
@@ -619,11 +627,12 @@ public class AbilityFactory_Mana {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> hasProperty(final int maxChoices, final CardList cards, final ArrayList<String> colors) {
-        for (Card c : cards) {
+    private static ArrayList<String> hasProperty(final int maxChoices, final CardList cards,
+            final ArrayList<String> colors) {
+        for (final Card c : cards) {
             // For each card, go through all the colors and if the card is that
             // color, add
-            for (String col : Constant.Color.ONLY_COLORS) {
+            for (final String col : Constant.Color.ONLY_COLORS) {
                 if (c.isColor(col) && !colors.contains(col)) {
                     colors.add(col);
                     if (colors.size() == maxChoices) {
@@ -648,15 +657,16 @@ public class AbilityFactory_Mana {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> canProduce(final int maxChoices, final Ability_Mana ab, final ArrayList<String> colors) {
-        for (String col : Constant.Color.ONLY_COLORS) {
-            String s = Input_PayManaCostUtil.getShortColorString(col);
+    private static ArrayList<String> canProduce(final int maxChoices, final Ability_Mana ab,
+            final ArrayList<String> colors) {
+        for (final String col : Constant.Color.ONLY_COLORS) {
+            final String s = Input_PayManaCostUtil.getShortColorString(col);
             if (ab.canProduce(s) && !colors.contains(col)) {
                 colors.add(col);
             }
         }
 
-        if (maxChoices == 6 && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
+        if ((maxChoices == 6) && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
             colors.add(Constant.Color.COLORLESS);
         }
 
@@ -678,11 +688,11 @@ public class AbilityFactory_Mana {
      *            a {@link forge.Player} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String generatedReflectedMana(final Ability_Mana abMana, final AbilityFactory af, final ArrayList<String> colors,
-            final Player player) {
+    private static String generatedReflectedMana(final Ability_Mana abMana, final AbilityFactory af,
+            final ArrayList<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
-        HashMap<String, String> params = af.getMapParams();
-        int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
+        final HashMap<String, String> params = af.getMapParams();
+        final int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
                 params.get("Amount"), abMana) : 1;
 
         String baseMana = "";
@@ -693,7 +703,7 @@ public class AbilityFactory_Mana {
             baseMana = Input_PayManaCostUtil.getShortColorString(colors.get(0));
         } else {
             if (player.isHuman()) {
-                Object o = GuiUtils.getChoiceOptional("Select Mana to Produce", colors.toArray());
+                final Object o = GuiUtils.getChoiceOptional("Select Mana to Produce", colors.toArray());
                 if (o == null) {
                     // User hit cancel
                     abMana.setCanceled(true);
@@ -707,16 +717,16 @@ public class AbilityFactory_Mana {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
         } else {
             try {
                 // if baseMana is an integer(colorless), just multiply amount
                 // and baseMana
-                int base = Integer.parseInt(baseMana);
+                final int base = Integer.parseInt(baseMana);
                 sb.append(base * amount);
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 for (int i = 0; i < amount; i++) {
                     if (i != 0) {
                         sb.append(" ");
@@ -747,7 +757,7 @@ public class AbilityFactory_Mana {
         // if mana production has any type of SubAbility, undoable=false
         if (af.hasSubAbility()) {
             abMana.setUndoable(false);
-            Ability_Sub abSub = abMana.getSubAbility();
+            final Ability_Sub abSub = abMana.getSubAbility();
             AbilityFactory.resolve(abSub, false);
         }
     }
@@ -762,7 +772,7 @@ public class AbilityFactory_Mana {
      * @return a boolean.
      */
     private static boolean hasUrzaLands(final Player p) {
-        CardList landsControlled = p.getCardsIn(Zone.Battlefield);
+        final CardList landsControlled = p.getCardsIn(Zone.Battlefield);
 
         return (landsControlled.containsName("Urza's Mine") && landsControlled.containsName("Urza's Tower") && landsControlled
                 .containsName("Urza's Power Plant"));
@@ -788,22 +798,22 @@ public class AbilityFactory_Mana {
 
             @Override
             public String getStackDescription() {
-                return drainManaStackDescription(af, this);
+                return AbilityFactory_Mana.drainManaStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return drainManaCanPlayAI(af, this);
+                return AbilityFactory_Mana.drainManaCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                drainManaResolve(af, this);
+                AbilityFactory_Mana.drainManaResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return drainManaTrigger(af, this, mandatory);
+                return AbilityFactory_Mana.drainManaTrigger(af, this, mandatory);
             }
 
         };
@@ -826,17 +836,17 @@ public class AbilityFactory_Mana {
 
             @Override
             public String getStackDescription() {
-                return drainManaStackDescription(af, this);
+                return AbilityFactory_Mana.drainManaStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return drainManaCanPlayAI(af, this);
+                return AbilityFactory_Mana.drainManaCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                drainManaResolve(af, this);
+                AbilityFactory_Mana.drainManaResolve(af, this);
             }
 
         };
@@ -859,22 +869,22 @@ public class AbilityFactory_Mana {
 
             @Override
             public String getStackDescription() {
-                return drainManaStackDescription(af, this);
+                return AbilityFactory_Mana.drainManaStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                drainManaResolve(af, this);
+                AbilityFactory_Mana.drainManaResolve(af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return drainManaPlayDrawbackAI(af, this);
+                return AbilityFactory_Mana.drainManaPlayDrawbackAI(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return drainManaTrigger(af, this, mandatory);
+                return AbilityFactory_Mana.drainManaTrigger(af, this, mandatory);
             }
 
         };
@@ -893,9 +903,9 @@ public class AbilityFactory_Mana {
      * @return a {@link java.lang.String} object.
      */
     private static String drainManaStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (sa instanceof Ability_Sub) {
             sb.append(" ");
@@ -904,14 +914,14 @@ public class AbilityFactory_Mana {
         }
 
         ArrayList<Player> tgtPlayers;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        Iterator<Player> it = tgtPlayers.iterator();
+        final Iterator<Player> it = tgtPlayers.iterator();
         while (it.hasNext()) {
             sb.append(it.next());
             if (it.hasNext()) {
@@ -921,7 +931,7 @@ public class AbilityFactory_Mana {
 
         sb.append(" empties his or her mana pool.");
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -943,18 +953,18 @@ public class AbilityFactory_Mana {
     private static boolean drainManaCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
-        HashMap<String, String> params = af.getMapParams();
-        Target tgt = af.getAbTgt();
-        Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Target tgt = af.getAbTgt();
+        final Card source = sa.getSourceCard();
 
-        Random r = MyRandom.getRandom();
+        final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
             if (!defined.contains(AllZone.getHumanPlayer())) {
                 return false;
@@ -964,7 +974,7 @@ public class AbilityFactory_Mana {
             tgt.addTarget(AllZone.getHumanPlayer());
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -990,15 +1000,15 @@ public class AbilityFactory_Mana {
             return false;
         }
 
-        HashMap<String, String> params = af.getMapParams();
-        Target tgt = sa.getTarget();
-        Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Target tgt = sa.getTarget();
+        final Card source = sa.getSourceCard();
 
         if (null == tgt) {
             if (mandatory) {
                 return true;
             } else {
-                ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+                final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
                 if (!defined.contains(AllZone.getHumanPlayer())) {
                     return false;
@@ -1027,14 +1037,14 @@ public class AbilityFactory_Mana {
      */
     private static boolean drainManaPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        HashMap<String, String> params = af.getMapParams();
-        Target tgt = af.getAbTgt();
-        Card source = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Target tgt = af.getAbTgt();
+        final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
 
         if (tgt == null) {
-            ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
             if (defined.contains(AllZone.getComputerPlayer())) {
                 return false;
@@ -1044,7 +1054,7 @@ public class AbilityFactory_Mana {
             tgt.addTarget(AllZone.getHumanPlayer());
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1063,22 +1073,22 @@ public class AbilityFactory_Mana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void drainManaResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card card = sa.getSourceCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
 
         ArrayList<Player> tgtPlayers;
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(card, params.get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canTarget(sa)) {
                 p.getManaPool().clearPool();
             }
         }
     }
 
-}// end class AbilityFactory_Mana
+} // end class AbilityFactory_Mana

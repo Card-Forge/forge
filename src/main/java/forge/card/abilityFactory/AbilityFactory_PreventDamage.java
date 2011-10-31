@@ -53,25 +53,25 @@ public class AbilityFactory_PreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return preventDamageCanPlayAI(af, this);
+                return AbilityFactory_PreventDamage.preventDamageCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                preventDamageResolve(af, this);
+                AbilityFactory_PreventDamage.preventDamageResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return preventDamageStackDescription(af, this);
+                return AbilityFactory_PreventDamage.preventDamageStackDescription(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return doPreventDamageTriggerAI(af, this, mandatory);
+                return AbilityFactory_PreventDamage.doPreventDamageTriggerAI(af, this, mandatory);
             }
 
-        };// Ability_Activated
+        }; // Ability_Activated
 
         return abRegenerate;
     }
@@ -92,17 +92,17 @@ public class AbilityFactory_PreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return preventDamageCanPlayAI(af, this);
+                return AbilityFactory_PreventDamage.preventDamageCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                preventDamageResolve(af, this);
+                AbilityFactory_PreventDamage.preventDamageResolve(af, this);
             }
 
             @Override
             public String getStackDescription() {
-                return preventDamageStackDescription(af, this);
+                return AbilityFactory_PreventDamage.preventDamageStackDescription(af, this);
             }
 
         }; // Spell
@@ -125,12 +125,12 @@ public class AbilityFactory_PreventDamage {
 
             @Override
             public String getStackDescription() {
-                return preventDamageStackDescription(af, this);
+                return AbilityFactory_PreventDamage.preventDamageStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                preventDamageResolve(af, this);
+                AbilityFactory_PreventDamage.preventDamageResolve(af, this);
             }
 
             @Override
@@ -140,7 +140,7 @@ public class AbilityFactory_PreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return doPreventDamageTriggerAI(af, this, mandatory);
+                return AbilityFactory_PreventDamage.doPreventDamageTriggerAI(af, this, mandatory);
             }
 
         };
@@ -160,8 +160,8 @@ public class AbilityFactory_PreventDamage {
      */
     private static String preventDamageStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
-        Card host = af.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
 
         ArrayList<Object> tgts;
         if (sa.getTarget() == null) {
@@ -184,9 +184,9 @@ public class AbilityFactory_PreventDamage {
                 sb.append(" ");
             }
 
-            Object o = tgts.get(i);
+            final Object o = tgts.get(i);
             if (o instanceof Card) {
-                Card tgtC = (Card) o;
+                final Card tgtC = (Card) o;
                 if (tgtC.isFaceDown()) {
                     sb.append("Morph");
                 } else {
@@ -197,7 +197,7 @@ public class AbilityFactory_PreventDamage {
             }
         }
 
-        if (af.getMapParams().containsKey("Radiance") && sa.getTarget() != null) {
+        if (af.getMapParams().containsKey("Radiance") && (sa.getTarget() != null)) {
             sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
                     .append(" that shares a color with ");
             if (tgts.size() > 1) {
@@ -208,7 +208,7 @@ public class AbilityFactory_PreventDamage {
         }
         sb.append(" this turn.");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -232,7 +232,7 @@ public class AbilityFactory_PreventDamage {
         final Card hostCard = af.getHostCard();
         boolean chance = false;
 
-        Cost cost = sa.getPayCosts();
+        final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
         if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
@@ -251,16 +251,17 @@ public class AbilityFactory_PreventDamage {
             return false;
         }
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(),
+                    params.get("Defined"), sa);
 
             // react to threats on the stack
             if (AllZone.getStack().size() > 0) {
-                ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(af);
-                for (Object o : objects) {
+                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(af);
+                for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;
                     }
@@ -268,12 +269,12 @@ public class AbilityFactory_PreventDamage {
             } else {
                 if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
-                    for (Object o : objects) {
+                    for (final Object o : objects) {
                         if (o instanceof Card) {
-                            Card c = (Card) o;
+                            final Card c = (Card) o;
                             flag |= CombatUtil.combatantWouldBeDestroyed(c);
                         } else if (o instanceof Player) {
-                            Player p = (Player) o;
+                            final Player p = (Player) o;
                             flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(AllZone.getCombat()) && sa
                                     .isAbility()) || CombatUtil.lifeInDanger(AllZone.getCombat())));
                         }
@@ -292,18 +293,19 @@ public class AbilityFactory_PreventDamage {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i
             // control
-            ArrayList<Object> objects = new ArrayList<Object>();// AbilityFactory.predictThreatenedObjects(af);
+            final ArrayList<Object> objects = new ArrayList<Object>();
+            // AbilityFactory.predictThreatenedObjects(af);
 
             if (objects.contains(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
 
-            CardList threatenedTargets = new CardList();
+            final CardList threatenedTargets = new CardList();
             // filter AIs battlefield by what I can target
             CardList targetables = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
 
-            for (Card c : targetables) {
+            for (final Card c : targetables) {
                 if (objects.contains(c)) {
                     threatenedTargets.add(c);
                 }
@@ -329,10 +331,10 @@ public class AbilityFactory_PreventDamage {
                 if (targetables.size() == 0) {
                     return false;
                 }
-                CardList combatants = targetables.getType("Creature");
+                final CardList combatants = targetables.getType("Creature");
                 CardListUtil.sortByEvaluateCreature(combatants);
 
-                for (Card c : combatants) {
+                for (final Card c : combatants) {
                     if (CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         chance = true;
@@ -342,7 +344,7 @@ public class AbilityFactory_PreventDamage {
             }
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -363,22 +365,23 @@ public class AbilityFactory_PreventDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean doPreventDamageTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean doPreventDamageTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         boolean chance = false;
 
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
 
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         if (tgt == null) {
             // If there's no target on the trigger, just say yes.
             chance = true;
         } else {
-            chance = preventDamageMandatoryTarget(af, sa, mandatory);
+            chance = AbilityFactory_PreventDamage.preventDamageMandatoryTarget(af, sa, mandatory);
         }
 
-        Ability_Sub subAb = sa.getSubAbility();
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -399,28 +402,29 @@ public class AbilityFactory_PreventDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean preventDamageMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean preventDamageMandatoryTarget(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         final Card hostCard = af.getHostCard();
-        Target tgt = sa.getTarget();
+        final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         CardList targetables = AllZoneUtil.getCardsIn(Zone.Battlefield);
         targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
+        final CardList compTargetables = targetables.getController(AllZone.getComputerPlayer());
 
         if (targetables.size() == 0) {
             return false;
         }
 
-        if (!mandatory && compTargetables.size() == 0) {
+        if (!mandatory && (compTargetables.size() == 0)) {
             return false;
         }
 
         if (compTargetables.size() > 0) {
-            CardList combatants = compTargetables.getType("Creature");
+            final CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
             if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                for (Card c : combatants) {
+                for (final Card c : combatants) {
                     if (CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         return true;
@@ -451,17 +455,17 @@ public class AbilityFactory_PreventDamage {
      */
     private static void preventDamageResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
+        final int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
 
         ArrayList<Object> tgts;
-        ArrayList<Card> untargetedCards = new ArrayList<Card>();
+        final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         if (sa.getTarget() == null) {
             tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }
 
-        if (params.containsKey("Radiance") && sa.getTarget() != null) {
+        if (params.containsKey("Radiance") && (sa.getTarget() != null)) {
             Card origin = null;
             for (int i = 0; i < tgts.size(); i++) {
                 if (tgts.get(i) instanceof Card) {
@@ -469,35 +473,35 @@ public class AbilityFactory_PreventDamage {
                     break;
                 }
             }
-            if (origin != null) // Can't radiate from a player
-            {
-                for (Card c : CardUtil.getRadiance(af.getHostCard(), origin, params.get("ValidTgts").split(","))) {
+            if (origin != null) {
+             // Can't radiate from a player
+                for (final Card c : CardUtil.getRadiance(af.getHostCard(), origin, params.get("ValidTgts").split(","))) {
                     untargetedCards.add(c);
                 }
             }
         }
 
-        boolean targeted = (af.getAbTgt() != null);
+        final boolean targeted = (af.getAbTgt() != null);
 
-        for (Object o : tgts) {
+        for (final Object o : tgts) {
             if (o instanceof Card) {
-                Card c = (Card) o;
+                final Card c = (Card) o;
                 if (AllZoneUtil.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(af.getHostCard(), c))) {
                     c.addPreventNextDamage(numDam);
                 }
 
             } else if (o instanceof Player) {
-                Player p = (Player) o;
+                final Player p = (Player) o;
                 if (!targeted || p.canTarget(sa)) {
                     p.addPreventNextDamage(numDam);
                 }
             }
         }
 
-        for (Card c : untargetedCards) {
+        for (final Card c : untargetedCards) {
             if (AllZoneUtil.isCardInPlay(c)) {
                 c.addPreventNextDamage(numDam);
             }
         }
-    }// doResolve
+    } // doResolve
 }

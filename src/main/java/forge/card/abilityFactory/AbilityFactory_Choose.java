@@ -222,8 +222,7 @@ public final class AbilityFactory_Choose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseTypeTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
@@ -570,8 +569,8 @@ public final class AbilityFactory_Choose {
     private static boolean chooseColorCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
         boolean chance = true;
-        
-        Ability_Sub subAb = sa.getSubAbility();
+
+        final Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -591,8 +590,7 @@ public final class AbilityFactory_Choose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseColorTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean chooseColorTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
     }
 
@@ -860,8 +858,7 @@ public final class AbilityFactory_Choose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseNumberTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean chooseNumberTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
     }
 
@@ -1110,8 +1107,7 @@ public final class AbilityFactory_Choose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean choosePlayerTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean choosePlayerTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         return false;
     }
 

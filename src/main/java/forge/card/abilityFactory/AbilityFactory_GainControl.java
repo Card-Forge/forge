@@ -27,16 +27,16 @@ import forge.card.spellability.Target;
 
 //GainControl specific params:
 //  LoseControl - the lose control conditions (as a comma separated list)
-//			-Untap - source card becomes untapped
-//			-LoseControl - you lose control of source card
-//			-LeavesPlay - source card leaves the battlefield
-//			-PowerGT - (not implemented yet for Old Man of the Sea)
-//	AddKWs	- Keywords to add to the controlled card
-//              (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
+//  -Untap - source card becomes untapped
+//  -LoseControl - you lose control of source card
+//  -LeavesPlay - source card leaves the battlefield
+//  -PowerGT - (not implemented yet for Old Man of the Sea)
+//  AddKWs - Keywords to add to the controlled card
+//            (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
-//	Untap	- set to True if target card should untap when control is taken
-//	DestroyTgt - actions upon which the tgt should be destroyed.  same list as LoseControl
-//	NoRegen - set if destroyed creature can't be regenerated.  used only with DestroyTgt
+//  Untap - set to True if target card should untap when control is taken
+//  DestroyTgt - actions upon which the tgt should be destroyed.  same list as LoseControl
+//  NoRegen - set if destroyed creature can't be regenerated.  used only with DestroyTgt
 
 /**
  * <p>
@@ -69,26 +69,26 @@ public class AbilityFactory_GainControl {
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory_GainControl(final AbilityFactory newAF) {
-        af = newAF;
-        params = af.getMapParams();
-        hostCard = af.getHostCard();
-        if (params.containsKey("LoseControl")) {
-            lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
+        this.af = newAF;
+        this.params = this.af.getMapParams();
+        this.hostCard = this.af.getHostCard();
+        if (this.params.containsKey("LoseControl")) {
+            this.lose = new ArrayList<String>(Arrays.asList(this.params.get("LoseControl").split(",")));
         }
-        if (params.containsKey("Untap")) {
-            bUntap = true;
+        if (this.params.containsKey("Untap")) {
+            this.bUntap = true;
         }
-        if (params.containsKey("TapOnLose")) {
-            bTapOnLose = true;
+        if (this.params.containsKey("TapOnLose")) {
+            this.bTapOnLose = true;
         }
-        if (params.containsKey("AddKWs")) {
-            kws = new ArrayList<String>(Arrays.asList(params.get("AddKWs").split(" & ")));
+        if (this.params.containsKey("AddKWs")) {
+            this.kws = new ArrayList<String>(Arrays.asList(this.params.get("AddKWs").split(" & ")));
         }
-        if (params.containsKey("DestroyTgt")) {
-            destroyOn = new ArrayList<String>(Arrays.asList(params.get("DestroyTgt").split(",")));
+        if (this.params.containsKey("DestroyTgt")) {
+            this.destroyOn = new ArrayList<String>(Arrays.asList(this.params.get("DestroyTgt").split(",")));
         }
-        if (params.containsKey("NoRegen")) {
-            bNoRegen = true;
+        if (this.params.containsKey("NoRegen")) {
+            this.bNoRegen = true;
         }
     }
 
@@ -101,22 +101,22 @@ public class AbilityFactory_GainControl {
      * @since 1.0.15
      */
     public final SpellAbility getSpellGainControl() {
-        SpellAbility spControl = new Spell(hostCard, af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility spControl = new Spell(this.hostCard, this.af.getAbCost(), this.af.getAbTgt()) {
             private static final long serialVersionUID = 3125489644424832311L;
 
             @Override
             public boolean canPlayAI() {
-                return gainControlTgtAI(this);
+                return AbilityFactory_GainControl.this.gainControlTgtAI(this);
             }
 
             @Override
             public void resolve() {
-                gainControlResolve(this);
+                AbilityFactory_GainControl.this.gainControlResolve(this);
             } // resolve
 
             @Override
             public String getStackDescription() {
-                return gainControlStackDescription(this);
+                return AbilityFactory_GainControl.this.gainControlStackDescription(this);
             }
         }; // SpellAbility
 
@@ -133,27 +133,27 @@ public class AbilityFactory_GainControl {
      */
     public final SpellAbility getAbilityGainControl() {
 
-        final SpellAbility abControl = new Ability_Activated(hostCard, af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abControl = new Ability_Activated(this.hostCard, this.af.getAbCost(), this.af.getAbTgt()) {
             private static final long serialVersionUID = -4384705198674678831L;
 
             @Override
             public boolean canPlayAI() {
-                return gainControlTgtAI(this);
+                return AbilityFactory_GainControl.this.gainControlTgtAI(this);
             }
 
             @Override
             public void resolve() {
-                gainControlResolve(this);
+                AbilityFactory_GainControl.this.gainControlResolve(this);
             }
 
             @Override
             public String getStackDescription() {
-                return gainControlStackDescription(this);
+                return AbilityFactory_GainControl.this.gainControlStackDescription(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return gainControlTgtAI(this);
+                return AbilityFactory_GainControl.this.gainControlTgtAI(this);
             }
         }; // Ability_Activated
 
@@ -169,32 +169,32 @@ public class AbilityFactory_GainControl {
      * @since 1.0.15
      */
     public final SpellAbility getDrawbackGainControl() {
-        SpellAbility dbControl = new Ability_Sub(hostCard, af.getAbTgt()) {
+        final SpellAbility dbControl = new Ability_Sub(this.hostCard, this.af.getAbTgt()) {
             private static final long serialVersionUID = -5577742598032345880L;
 
             @Override
             public boolean canPlayAI() {
-                return gainControlTgtAI(this);
+                return AbilityFactory_GainControl.this.gainControlTgtAI(this);
             }
 
             @Override
             public String getStackDescription() {
-                return gainControlStackDescription(this);
+                return AbilityFactory_GainControl.this.gainControlStackDescription(this);
             }
 
             @Override
             public void resolve() {
-                gainControlResolve(this);
+                AbilityFactory_GainControl.this.gainControlResolve(this);
             } // resolve
 
             @Override
             public boolean chkAIDrawback() {
-                return gainControlDrawbackAI(this);
+                return AbilityFactory_GainControl.this.gainControlDrawbackAI(this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return gainControlTriggerAI(this, mandatory);
+                return AbilityFactory_GainControl.this.gainControlTriggerAI(this, mandatory);
             }
         }; // SpellAbility
 
@@ -211,7 +211,7 @@ public class AbilityFactory_GainControl {
      * @return a {@link java.lang.String} object.
      */
     private String gainControlStackDescription(final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -221,22 +221,22 @@ public class AbilityFactory_GainControl {
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = this.af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                params.get("NewController"), sa);
+        final ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                this.params.get("NewController"), sa);
         if (newController.size() == 0) {
             newController.add(sa.getActivatingPlayer());
         }
 
         sb.append(newController).append(" gains control of ");
 
-        for (Card c : tgtCards) {
+        for (final Card c : tgtCards) {
             sb.append(" ");
             if (c.isFaceDown()) {
                 sb.append("Morph");
@@ -246,7 +246,7 @@ public class AbilityFactory_GainControl {
         }
         sb.append(".");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -269,7 +269,7 @@ public class AbilityFactory_GainControl {
         boolean hasEnchantment = false;
         boolean hasLand = false;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = this.af.getAbTgt();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
@@ -277,13 +277,15 @@ public class AbilityFactory_GainControl {
         }
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
+        list = list.getValidCards(tgt.getValidTgts(), this.hostCard.getController(), this.hostCard);
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && CardFactoryUtil.canTarget(hostCard, c);
+                final Map<String, String> vars = c.getSVars();
+                return !vars.containsKey("RemAIDeck")
+                        && CardFactoryUtil.canTarget(AbilityFactory_GainControl.this.hostCard, c);
             }
         });
 
@@ -293,13 +295,14 @@ public class AbilityFactory_GainControl {
 
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
-        if (lose != null && lose.contains("EOT") && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+        if ((this.lose != null) && this.lose.contains("EOT")
+                && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
-            for (Card c : list) {
+            for (final Card c : list) {
                 if (c.isCreature()) {
                     hasCreature = true;
                 }
@@ -315,7 +318,7 @@ public class AbilityFactory_GainControl {
             }
 
             if (list.isEmpty()) {
-                if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0) {
+                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
                     tgt.resetTargets();
                     return false;
                 } else {
@@ -359,48 +362,48 @@ public class AbilityFactory_GainControl {
      */
     private void gainControlResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
-        boolean self = params.containsKey("Defined") && params.get("Defined").equals("Self");
+        final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = this.af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
         // tgtCards.add(hostCard);
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                params.get("NewController"), sa);
+        final ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                this.params.get("NewController"), sa);
         if (newController.size() == 0) {
             newController.add(sa.getActivatingPlayer());
         }
 
-        int size = tgtCards.size();
+        final int size = tgtCards.size();
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
             final Player originalController = tgtC.getController();
 
-            movedCards[j] = tgtC;
+            this.movedCards[j] = tgtC;
             if (!self) {
-                hostCard.addGainControlTarget(tgtC);
+                this.hostCard.addGainControlTarget(tgtC);
             }
 
-            if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(this.hostCard, tgtC)) {
 
-                if (params.containsKey("NewController")) {
+                if (this.params.containsKey("NewController")) {
                     tgtC.addController(newController.get(0));
                 } else {
-                    tgtC.addController(hostCard);
+                    tgtC.addController(this.hostCard);
                 }
                 // AllZone.getGameAction().changeController(new CardList(tgtC),
                 // tgtC.getController(), newController.get(0));
 
-                if (bUntap) {
+                if (this.bUntap) {
                     tgtC.untap();
                 }
 
-                if (null != kws) {
-                    for (String kw : kws) {
+                if (null != this.kws) {
+                    for (final String kw : this.kws) {
                         tgtC.addExtrinsicKeyword(kw);
                     }
                 }
@@ -408,37 +411,37 @@ public class AbilityFactory_GainControl {
 
             // end copied
 
-            if (lose != null) {
-                if (lose.contains("LeavesPlay")) {
-                    hostCard.addLeavesPlayCommand(getLoseControlCommand(j, originalController));
+            if (this.lose != null) {
+                if (this.lose.contains("LeavesPlay")) {
+                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(j, originalController));
                 }
-                if (lose.contains("Untap")) {
-                    hostCard.addUntapCommand(getLoseControlCommand(j, originalController));
+                if (this.lose.contains("Untap")) {
+                    this.hostCard.addUntapCommand(this.getLoseControlCommand(j, originalController));
                 }
-                if (lose.contains("LoseControl")) {
-                    hostCard.addChangeControllerCommand(getLoseControlCommand(j, originalController));
+                if (this.lose.contains("LoseControl")) {
+                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(j, originalController));
                 }
-                if (lose.contains("EOT")) {
-                    AllZone.getEndOfTurn().addAt(getLoseControlCommand(j, originalController));
+                if (this.lose.contains("EOT")) {
+                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(j, originalController));
                 }
             }
 
-            if (destroyOn != null) {
-                if (destroyOn.contains("LeavesPlay")) {
-                    hostCard.addLeavesPlayCommand(getDestroyCommand(j));
+            if (this.destroyOn != null) {
+                if (this.destroyOn.contains("LeavesPlay")) {
+                    this.hostCard.addLeavesPlayCommand(this.getDestroyCommand(j));
                 }
-                if (destroyOn.contains("Untap")) {
-                    hostCard.addUntapCommand(getDestroyCommand(j));
+                if (this.destroyOn.contains("Untap")) {
+                    this.hostCard.addUntapCommand(this.getDestroyCommand(j));
                 }
-                if (destroyOn.contains("LoseControl")) {
-                    hostCard.addChangeControllerCommand(getDestroyCommand(j));
+                if (this.destroyOn.contains("LoseControl")) {
+                    this.hostCard.addChangeControllerCommand(this.getDestroyCommand(j));
                 }
             }
 
             // for Old Man of the Sea - 0 is hardcoded since it only allows 1
             // target
-            hostCard.clearGainControlReleaseCommands();
-            hostCard.addGainControlReleaseCommand(getLoseControlCommand(0, originalController));
+            this.hostCard.clearGainControlReleaseCommands();
+            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(0, originalController));
 
         } // end foreach target
     }
@@ -464,7 +467,7 @@ public class AbilityFactory_GainControl {
                 return true;
             }
         } else {
-            return gainControlTgtAI(sa);
+            return this.gainControlTgtAI(sa);
         }
 
         return true;
@@ -480,10 +483,10 @@ public class AbilityFactory_GainControl {
      * @return a boolean.
      */
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
-        if (af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
+        if ((this.af.getAbTgt() == null) || !this.af.getAbTgt().doesTarget()) {
             // all is good
         } else {
-            return gainControlTgtAI(sa);
+            return this.gainControlTgtAI(sa);
         }
 
         return true;
@@ -502,21 +505,24 @@ public class AbilityFactory_GainControl {
         final Command destroy = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
+            @Override
             public void execute() {
-                final Card c = movedCards[i];
-                Ability ability = new Ability(hostCard, "0") {
+                final Card c = AbilityFactory_GainControl.this.movedCards[i];
+                final Ability ability = new Ability(AbilityFactory_GainControl.this.hostCard, "0") {
+                    @Override
                     public void resolve() {
 
-                        if (bNoRegen) {
+                        if (AbilityFactory_GainControl.this.bNoRegen) {
                             AllZone.getGameAction().destroyNoRegeneration(c);
                         } else {
                             AllZone.getGameAction().destroy(c);
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
-                sb.append(hostCard).append(" - destroy ").append(c.getName()).append(".");
-                if (bNoRegen) {
+                final StringBuilder sb = new StringBuilder();
+                sb.append(AbilityFactory_GainControl.this.hostCard).append(" - destroy ").append(c.getName())
+                        .append(".");
+                if (AbilityFactory_GainControl.this.bNoRegen) {
                     sb.append("  It can't be regenerated.");
                 }
                 ability.setStackDescription(sb.toString());
@@ -540,12 +546,14 @@ public class AbilityFactory_GainControl {
      * @return a {@link forge.Command} object.
      */
     private Command getLoseControlCommand(final int i, final Player originalController) {
-        final Card c = movedCards[i];
+        final Card c = this.movedCards[i];
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
+            @Override
             public void execute() {
-                doLoseControl(c, hostCard, bTapOnLose, kws);
+                AbilityFactory_GainControl.doLoseControl(c, AbilityFactory_GainControl.this.hostCard,
+                        AbilityFactory_GainControl.this.bTapOnLose, AbilityFactory_GainControl.this.kws);
             } // execute()
         };
 
@@ -567,7 +575,7 @@ public class AbilityFactory_GainControl {
             }
 
             if (null != addedKeywords) {
-                for (String kw : addedKeywords) {
+                for (final String kw : addedKeywords) {
                     c.removeExtrinsicKeyword(kw);
                 }
             }

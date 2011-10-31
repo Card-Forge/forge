@@ -59,22 +59,22 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copyPermanentStackDescription(af, this);
+                return AbilityFactory_Copy.copyPermanentStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return copyPermanentCanPlayAI(af, this);
+                return AbilityFactory_Copy.copyPermanentCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                copyPermanentResolve(af, this);
+                AbilityFactory_Copy.copyPermanentResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return copyPermanentTriggerAI(af, this, mandatory);
+                return AbilityFactory_Copy.copyPermanentTriggerAI(af, this, mandatory);
             }
 
         };
@@ -96,17 +96,17 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copyPermanentStackDescription(af, this);
+                return AbilityFactory_Copy.copyPermanentStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return copyPermanentCanPlayAI(af, this);
+                return AbilityFactory_Copy.copyPermanentCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                copyPermanentResolve(af, this);
+                AbilityFactory_Copy.copyPermanentResolve(af, this);
             }
 
         };
@@ -128,12 +128,12 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copyPermanentStackDescription(af, this);
+                return AbilityFactory_Copy.copyPermanentStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                copyPermanentResolve(af, this);
+                AbilityFactory_Copy.copyPermanentResolve(af, this);
             }
 
             @Override
@@ -143,7 +143,7 @@ public final class AbilityFactory_Copy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return copyPermanentTriggerAI(af, this, mandatory);
+                return AbilityFactory_Copy.copyPermanentTriggerAI(af, this, mandatory);
             }
 
         };
@@ -162,8 +162,8 @@ public final class AbilityFactory_Copy {
      * @return a {@link java.lang.String} object.
      */
     private static String copyPermanentStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -173,7 +173,7 @@ public final class AbilityFactory_Copy {
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -181,7 +181,7 @@ public final class AbilityFactory_Copy {
         }
 
         sb.append("Copy ");
-        Iterator<Card> it = tgtCards.iterator();
+        final Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
             sb.append(it.next());
             if (it.hasNext()) {
@@ -190,7 +190,7 @@ public final class AbilityFactory_Copy {
         }
         sb.append(".");
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -213,7 +213,7 @@ public final class AbilityFactory_Copy {
         // Card source = sa.getSourceCard();
         // TODO - I'm sure someone can do this AI better
 
-        HashMap<String, String> params = af.getMapParams();
+        final HashMap<String, String> params = af.getMapParams();
         if (params.containsKey("AtEOT") && !AllZone.getPhase().is(Constant.Phase.MAIN1)) {
             return false;
         } else {
@@ -222,9 +222,9 @@ public final class AbilityFactory_Copy {
                 chance = .667; // 66.7% chance for sorcery speed (since it will
                                // never activate EOT)
             }
-            Random r = MyRandom.getRandom();
+            final Random r = MyRandom.getRandom();
             if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
-                return copyPermanentTriggerAI(af, sa, false);
+                return AbilityFactory_Copy.copyPermanentTriggerAI(af, sa, false);
             } else {
                 return false;
             }
@@ -247,7 +247,7 @@ public final class AbilityFactory_Copy {
     private static boolean copyPermanentTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         // HashMap<String,String> params = af.getMapParams();
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
 
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
@@ -256,7 +256,7 @@ public final class AbilityFactory_Copy {
         // ////
         // Targeting
 
-        Target abTgt = sa.getTarget();
+        final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
             CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -265,8 +265,8 @@ public final class AbilityFactory_Copy {
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0) {
+                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (abTgt.getNumTargeted() == 0)) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -283,8 +283,8 @@ public final class AbilityFactory_Copy {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
-                            || abTgt.getNumTargeted() == 0) {
+                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (abTgt.getNumTargeted() == 0)) {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -302,7 +302,7 @@ public final class AbilityFactory_Copy {
         // end Targeting
 
         if (af.hasSubAbility()) {
-            Ability_Sub abSub = sa.getSubAbility();
+            final Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return abSub.chkAIDrawback();
             }
@@ -322,17 +322,17 @@ public final class AbilityFactory_Copy {
      */
     private static void copyPermanentResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        Card hostCard = af.getHostCard();
-        ArrayList<String> keywords = new ArrayList<String>();
+        final Card hostCard = af.getHostCard();
+        final ArrayList<String> keywords = new ArrayList<String>();
         if (params.containsKey("Keywords")) {
             keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
         }
-        int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
+        final int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
                 params.get("NumCopies"), sa) : 1;
 
         ArrayList<Card> tgtCards;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -341,8 +341,8 @@ public final class AbilityFactory_Copy {
 
         hostCard.clearClones();
 
-        for (Card c : tgtCards) {
-            if (tgt == null || CardFactoryUtil.canTarget(hostCard, c)) {
+        for (final Card c : tgtCards) {
+            if ((tgt == null) || CardFactoryUtil.canTarget(hostCard, c)) {
 
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
@@ -353,7 +353,7 @@ public final class AbilityFactory_Copy {
                 // start copied Kiki code
                 int multiplier = AllZoneUtil.getTokenDoublersMagnitude(hostCard.getController());
                 multiplier *= numCopies;
-                Card[] crds = new Card[multiplier];
+                final Card[] crds = new Card[multiplier];
 
                 for (int i = 0; i < multiplier; i++) {
                     // TODO Use central copy methods
@@ -387,7 +387,7 @@ public final class AbilityFactory_Copy {
                     }
 
                     // add keywords from params
-                    for (String kw : keywords) {
+                    for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
                     }
 
@@ -457,9 +457,10 @@ public final class AbilityFactory_Copy {
                         }
                     };
 
-                    Command atEOT = new Command() {
+                    final Command atEOT = new Command() {
                         private static final long serialVersionUID = -4184510100801568140L;
 
+                        @Override
                         public void execute() {
                             sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
                             AllZone.getStack().addSimultaneousStackEntry(sac);
@@ -495,22 +496,22 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copySpellStackDescription(af, this);
+                return AbilityFactory_Copy.copySpellStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return copySpellCanPlayAI(af, this);
+                return AbilityFactory_Copy.copySpellCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                copySpellResolve(af, this);
+                AbilityFactory_Copy.copySpellResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return copySpellTriggerAI(af, this, mandatory);
+                return AbilityFactory_Copy.copySpellTriggerAI(af, this, mandatory);
             }
 
         };
@@ -532,17 +533,17 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copySpellStackDescription(af, this);
+                return AbilityFactory_Copy.copySpellStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return copySpellCanPlayAI(af, this);
+                return AbilityFactory_Copy.copySpellCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                copySpellResolve(af, this);
+                AbilityFactory_Copy.copySpellResolve(af, this);
             }
 
         };
@@ -564,12 +565,12 @@ public final class AbilityFactory_Copy {
 
             @Override
             public String getStackDescription() {
-                return copySpellStackDescription(af, this);
+                return AbilityFactory_Copy.copySpellStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                copySpellResolve(af, this);
+                AbilityFactory_Copy.copySpellResolve(af, this);
             }
 
             @Override
@@ -579,7 +580,7 @@ public final class AbilityFactory_Copy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return copySpellTriggerAI(af, this, mandatory);
+                return AbilityFactory_Copy.copySpellTriggerAI(af, this, mandatory);
             }
 
         };
@@ -598,8 +599,8 @@ public final class AbilityFactory_Copy {
      * @return a {@link java.lang.String} object.
      */
     private static String copySpellStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -609,7 +610,7 @@ public final class AbilityFactory_Copy {
 
         ArrayList<SpellAbility> tgtSpells;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
         } else {
@@ -618,7 +619,7 @@ public final class AbilityFactory_Copy {
 
         sb.append("Copy ");
         // TODO Someone fix this Description when Copying Charms
-        Iterator<SpellAbility> it = tgtSpells.iterator();
+        final Iterator<SpellAbility> it = tgtSpells.iterator();
         while (it.hasNext()) {
             sb.append(it.next().getSourceCard());
             if (it.hasNext()) {
@@ -635,7 +636,7 @@ public final class AbilityFactory_Copy {
         sb.append(".");
         // TODO probably add an optional "You may choose new targets..."
 
-        Ability_Sub abSub = sa.getSubAbility();
+        final Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -672,10 +673,10 @@ public final class AbilityFactory_Copy {
      * @return a boolean.
      */
     private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        boolean randomReturn = false;
+        final boolean randomReturn = false;
 
         if (af.hasSubAbility()) {
-            Ability_Sub abSub = sa.getSubAbility();
+            final Ability_Sub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -695,7 +696,7 @@ public final class AbilityFactory_Copy {
      */
     private static void copySpellResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        Card card = af.getHostCard();
+        final Card card = af.getHostCard();
 
         int amount = 1;
         if (params.containsKey("Amount")) {
@@ -704,7 +705,7 @@ public final class AbilityFactory_Copy {
 
         ArrayList<SpellAbility> tgtSpells;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
         } else {
@@ -725,7 +726,7 @@ public final class AbilityFactory_Copy {
         }
 
         chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
-        if (tgt == null || CardFactoryUtil.canTarget(card, chosenSA.getSourceCard())) {
+        if ((tgt == null) || CardFactoryUtil.canTarget(card, chosenSA.getSourceCard())) {
             for (int i = 0; i < amount; i++) {
                 AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }

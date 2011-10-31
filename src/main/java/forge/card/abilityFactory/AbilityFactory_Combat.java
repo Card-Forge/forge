@@ -466,8 +466,7 @@ public final class AbilityFactory_Combat {
         return chance;
     }
 
-    private static boolean mustAttackDoTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean mustAttackDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
@@ -900,8 +899,7 @@ public final class AbilityFactory_Combat {
         return chance;
     }
 
-    private static boolean mustBlockDoTriggerAI(final AbilityFactory af,
-            final SpellAbility sa, final boolean mandatory) {
+    private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
