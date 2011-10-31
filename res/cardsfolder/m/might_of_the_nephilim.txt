@@ -7,4 +7,6 @@ SVar:X:Targeted$CardNumColors/Times.2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_of_the_nephilim.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/88.jpg
+Oracle:Target creature gets +2/+2 until end of turn for each of its colors.
 End

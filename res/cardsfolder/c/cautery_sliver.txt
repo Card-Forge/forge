@@ -10,4 +10,6 @@ SVar:Prevent:AB$ PreventDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.S
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cautery_sliver.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/154.jpg
+Oracle:All Slivers have "{1}, Sacrifice this permanent: This permanent deals 1 damage to target creature or player."\nAll Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn."
 End

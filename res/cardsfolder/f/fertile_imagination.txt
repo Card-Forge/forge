@@ -10,4 +10,6 @@ SVar:Y:Remembered$Valid Card.ChosenType
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertile_imagination.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/84.jpg
+Oracle:Choose a card type. Target opponent reveals his or her hand. Put two 1/1 green Saproling creature tokens onto the battlefield for each card of the chosen type revealed this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
 End

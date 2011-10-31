@@ -7,4 +7,6 @@ SVar:X:Count$ThisTurnCast Creature.YouDontCtrl
 A:SP$ ChangeZone | Cost$ 2 G G | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | SpellDescription$ You may put a green creature card from your hand onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lure_of_prey.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/125.jpg
+Oracle:Cast Lure of Prey only if an opponent cast a creature spell this turn.\nYou may put a green creature card from your hand onto the battlefield.
 End
