@@ -5740,6 +5740,7 @@ res/cardsfolder/o/origin_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/o/orim_samite_healer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_prayer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_thunder.txt svneol=native#text/plain
+res/cardsfolder/o/orims_touch.txt -text svneol=unset#text/plain
 res/cardsfolder/o/ornithopter.txt svneol=native#text/plain
 res/cardsfolder/o/orochi_eggwatcher_shidako_broodmistress.txt -text
 res/cardsfolder/o/orochi_hatchery.txt svneol=native#text/plain
