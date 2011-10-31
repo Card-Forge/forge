@@ -1,0 +1,13 @@
+Name:Metathran Aerostat
+ManaCost:2 U U
+Types:Creature Metathran
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ ChangeZone | Cost$ X U | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return CARDNAME to its owner's hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ Cleanup
+SVar:X:Count$xPaid
+SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_aerostat.jpg
+End
