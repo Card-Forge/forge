@@ -351,7 +351,8 @@ public class Target_Selection {
                     return;
                 }
 
-                if ((tgt.canTgtPlayer() || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer()
+                if (((tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent()) 
+                        || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer()
                         .getOpponent()))) && player.canTarget(sa)) {
                     tgt.addTarget(player);
                     this.done();
