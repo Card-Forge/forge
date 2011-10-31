@@ -4692,6 +4692,7 @@ res/cardsfolder/l/llanowar_sentinel.txt svneol=native#text/plain
 res/cardsfolder/l/llanowar_vanguard.txt -text
 res/cardsfolder/l/llanowar_wastes.txt svneol=native#text/plain
 res/cardsfolder/l/llawan_cephalid_empress.txt -text
+res/cardsfolder/l/loafing_giant.txt -text svneol=unset#text/plain
 res/cardsfolder/l/loam_dweller.txt svneol=native#text/plain
 res/cardsfolder/l/loam_lion.txt svneol=native#text/plain
 res/cardsfolder/l/loamdragger_giant.txt svneol=native#text/plain
