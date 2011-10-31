@@ -9,7 +9,7 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_tower.jpg
 Oracle:{T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/330.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/449.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/102.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/102.jpg|4
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/329.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/83.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/83.jpg|4
 End
