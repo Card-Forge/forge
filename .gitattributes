@@ -6161,6 +6161,7 @@ res/cardsfolder/p/pristine_angel.txt svneol=native#text/plain
 res/cardsfolder/p/pristine_talisman.txt svneol=native#text/plain
 res/cardsfolder/p/privileged_position.txt svneol=native#text/plain
 res/cardsfolder/p/prized_unicorn.txt svneol=native#text/plain
+res/cardsfolder/p/probe.txt -text svneol=unset#text/plain
 res/cardsfolder/p/proclamation_of_rebirth.txt svneol=native#text/plain
 res/cardsfolder/p/prodigal_pyromancer.txt svneol=native#text/plain
 res/cardsfolder/p/prodigal_sorcerer.txt svneol=native#text/plain
