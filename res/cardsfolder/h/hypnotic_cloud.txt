@@ -1,0 +1,9 @@
+Name:Hypnotic Cloud
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 1 B | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Target player discards a card. 
+A:SP$ Discard | Cost$ 5 B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Kicker 4 (You may pay an additional 4 as you cast this spell.) If CARDNAME was kicked, that player discards three cards instead.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_cloud.jpg
+End

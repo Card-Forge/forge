@@ -3884,6 +3884,7 @@ res/cardsfolder/h/hymn_of_rebirth.txt svneol=native#text/plain
 res/cardsfolder/h/hymn_to_tourach.txt svneol=native#text/plain
 res/cardsfolder/h/hyperion_blacksmith.txt svneol=native#text/plain
 res/cardsfolder/h/hypervolt_grasp.txt svneol=native#text/plain
+res/cardsfolder/h/hypnotic_cloud.txt -text svneol=unset#text/plain
 res/cardsfolder/h/hypnotic_specter.txt svneol=native#text/plain
 res/cardsfolder/h/hypochondria.txt svneol=native#text/plain
 res/cardsfolder/h/hysterical_blindness.txt -text
