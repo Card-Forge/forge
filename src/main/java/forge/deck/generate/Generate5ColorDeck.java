@@ -335,9 +335,9 @@ public class Generate5ColorDeck {
 
         numLands -= nDLands;
 
-        if (numLands > 0) // attempt to optimize basic land counts according to
-                          // color representation
-        {
+        if (numLands > 0) {
+         // attempt to optimize basic land counts according to
+            // color representation
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 

@@ -114,17 +114,17 @@ public class GenerateThemeDeck {
                 for (final String element : ss) {
                     if (element.startsWith("Percentage")) {
                         final String p = element.substring("Percentage".length() + 1);
-                        g.Percentage = Integer.parseInt(p);
+                        g.percentage = Integer.parseInt(p);
                     }
                     if (element.startsWith("MaxCnt")) {
                         final String m = element.substring("MaxCnt".length() + 1);
-                        g.MaxCnt = Integer.parseInt(m);
+                        g.maxCnt = Integer.parseInt(m);
                     }
                 }
 
                 s = this.readLine();
                 while (!s.equals("[/Group]")) {
-                    g.Cardnames.add(s);
+                    g.cardnames.add(s);
                     cardCounts.put(s, 0);
 
                     s = this.readLine();
@@ -159,21 +159,19 @@ public class GenerateThemeDeck {
 
         for (int i = 0; i < groups.size(); i++) {
             final Grp g = groups.get(i);
-            final float p = (float) (g.Percentage * .01);
+            final float p = (float) (g.percentage * .01);
             final int grpCnt = (int) (p * size);
-            final int cnSize = g.Cardnames.size();
+            final int cnSize = g.cardnames.size();
             tmpDeck += "Group" + i + ":" + grpCnt + "\n";
 
             for (int j = 0; j < grpCnt; j++) {
-                s = g.Cardnames.get(r.nextInt(cnSize));
+                s = g.cardnames.get(r.nextInt(cnSize));
 
                 int lc = 0;
-                while ((cardCounts.get(s) >= g.MaxCnt) || (lc > size)) // don't
-                                                                       // keep
-                // looping
-                // forever
-                {
-                    s = g.Cardnames.get(r.nextInt(cnSize));
+                while ((cardCounts.get(s) >= g.maxCnt) || (lc > size)) {
+                 // looping
+                    // forever
+                    s = g.cardnames.get(r.nextInt(cnSize));
                     lc++;
                 }
                 if (lc > size) {
@@ -200,9 +198,9 @@ public class GenerateThemeDeck {
 
         tmpDeck += "numBLands:" + numBLands + "\n";
 
-        if (numBLands > 0) // attempt to optimize basic land counts according to
-                           // color representation
-        {
+        if (numBLands > 0) {
+         // attempt to optimize basic land counts according to
+            // color representation
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
@@ -215,37 +213,37 @@ public class GenerateThemeDeck {
                     final char c = mc.charAt(j);
 
                     if (c == 'W') {
-                        clrCnts[0].Count++;
+                        clrCnts[0].count++;
                     } else if (c == 'U') {
-                        clrCnts[1].Count++;
+                        clrCnts[1].count++;
                     } else if (c == 'B') {
-                        clrCnts[2].Count++;
+                        clrCnts[2].count++;
                     } else if (c == 'R') {
-                        clrCnts[3].Count++;
+                        clrCnts[3].count++;
                     } else if (c == 'G') {
-                        clrCnts[4].Count++;
+                        clrCnts[4].count++;
                     }
                 }
             }
 
             int totalColor = 0;
             for (int i = 0; i < 5; i++) {
-                totalColor += clrCnts[i].Count;
-                tmpDeck += clrCnts[i].Color + ":" + clrCnts[i].Count + "\n";
+                totalColor += clrCnts[i].count;
+                tmpDeck += clrCnts[i].color + ":" + clrCnts[i].count + "\n";
             }
 
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (clrCnts[i].Count > 0) { // calculate number of lands for
+                if (clrCnts[i].count > 0) { // calculate number of lands for
                                             // each color
-                    final float p = (float) clrCnts[i].Count / (float) totalColor;
+                    final float p = (float) clrCnts[i].count / (float) totalColor;
                     final int nLand = (int) (numBLands * p);
-                    tmpDeck += "numLand-" + clrCnts[i].Color + ":" + nLand + "\n";
+                    tmpDeck += "numLand-" + clrCnts[i].color + ":" + nLand + "\n";
 
-                    cardCounts.put(clrCnts[i].Color, 2);
+                    cardCounts.put(clrCnts[i].color, 2);
                     for (int j = 0; j < nLand; j++) {
-                        tDeck.add(AllZone.getCardFactory().getCard(clrCnts[i].Color, AllZone.getComputerPlayer()));
+                        tDeck.add(AllZone.getCardFactory().getCard(clrCnts[i].color, AllZone.getComputerPlayer()));
                     }
                 }
             }
@@ -319,10 +317,10 @@ public class GenerateThemeDeck {
     class CCnt {
 
         /** The Color. */
-        public String Color;
+        private String color;
 
         /** The Count. */
-        public int Count;
+        private int count;
 
         /**
          * Instantiates a new c cnt.
@@ -333,8 +331,8 @@ public class GenerateThemeDeck {
          *            the cnt
          */
         public CCnt(final String clr, final int cnt) {
-            this.Color = clr;
-            this.Count = cnt;
+            this.color = clr;
+            this.count = cnt;
         }
     }
 
@@ -346,12 +344,12 @@ public class GenerateThemeDeck {
     class Grp {
 
         /** The Cardnames. */
-        public ArrayList<String> Cardnames = new ArrayList<String>();
+        private ArrayList<String> cardnames = new ArrayList<String>();
 
         /** The Max cnt. */
-        public int MaxCnt;
+        private int maxCnt;
 
         /** The Percentage. */
-        public int Percentage;
+        private int percentage;
     }
 }

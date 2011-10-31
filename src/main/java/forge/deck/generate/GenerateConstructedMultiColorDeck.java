@@ -485,9 +485,8 @@ public class GenerateConstructedMultiColorDeck {
 
                     return ((CardUtil.getColors(c).size() <= 3) && !c.isLand() && // no
                                                                                   // land
-                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True")) ||
-                    // OR very important
-                            goodLand.contains(c.getName());
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True"))
+                            || goodLand.contains(c.getName());        // OR very important
                 }
             });
         } else if (colors == 5) {
@@ -498,9 +497,8 @@ public class GenerateConstructedMultiColorDeck {
                                                                    // multicolored
                                                                    // cards
                             !c.isLand() && // no land
-                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True")) ||
-                    // OR very important
-                            goodLand.contains(c.getName());
+                            !c.getSVar("RemRandomDeck").equals("True") && !c.getSVar("RemAIDeck").equals("True"))
+                            || goodLand.contains(c.getName());                     // OR very important
                 }
             });
 

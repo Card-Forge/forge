@@ -22,6 +22,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
@@ -53,24 +54,24 @@ public class BugzReporter extends JDialog {
     private ForgePreferences prefs = null;
 
     private final JPanel contentPanel = new JPanel();
-    private JTextField txtUserName;
-    private JPasswordField txtPassword = new JPasswordField();
-    private JComboBox cboCategory = new JComboBox();
-    private JTextField txtSummary;
-    private JTextArea txtDescription = new JTextArea();
-    private JTextArea txtErrorDump = new JTextArea();
-    private JComboBox cboVersion = new JComboBox();
-    private JComboBox cboSeverity = new JComboBox();
+    private final JTextField txtUserName;
+    private final JPasswordField txtPassword = new JPasswordField();
+    private final JComboBox cboCategory = new JComboBox();
+    private final JTextField txtSummary;
+    private final JTextArea txtDescription = new JTextArea();
+    private final JTextArea txtErrorDump = new JTextArea();
+    private final JComboBox cboVersion = new JComboBox();
+    private final JComboBox cboSeverity = new JComboBox();
 
     /** The chk report anonymously. */
-    final JCheckBox chkReportAnonymously = new JCheckBox("Report Anonymously");
-    private JTextField txtSVN;
-    private JLabel lblAddInfo = new JLabel();
-    private JTextArea txtSteps = new JTextArea();
+    private final JCheckBox chkReportAnonymously = new JCheckBox("Report Anonymously");
+    private final JTextField txtSVN;
+    private final JLabel lblAddInfo = new JLabel();
+    private final JTextArea txtSteps = new JTextArea();
 
     private static BugzReporter dialog = null;
 
-    private IMCAttribute[] Severities;
+    private IMCAttribute[] severities;
 
     /**
      * Launch the application.
@@ -80,7 +81,7 @@ public class BugzReporter extends JDialog {
      */
     public static void main(final String[] args) {
         // try {
-        dialog.setVisible(true);
+        BugzReporter.dialog.setVisible(true);
         // } catch (Exception e) {
         // System.out.println("Exception - main - " + e.getMessage());
         // }
@@ -93,24 +94,24 @@ public class BugzReporter extends JDialog {
      *            the new dump text
      */
     public final void setDumpText(final String dump) {
-        txtErrorDump.setText(dump);
-        lblAddInfo.setText("Crash Report");
-        cboCategory.setSelectedItem("New Crash Report");
+        this.txtErrorDump.setText(dump);
+        this.lblAddInfo.setText("Crash Report");
+        this.cboCategory.setSelectedItem("New Crash Report");
     }
 
     /**
      * Create the dialog.
      */
     public BugzReporter() {
-        dialog = this;
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        BugzReporter.dialog = this;
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setResizable(false);
 
         // Init Logger for Axis, which is used by Mantis Library
-        org.apache.log4j.ConsoleAppender appCON = new org.apache.log4j.ConsoleAppender(
+        final org.apache.log4j.ConsoleAppender appCON = new org.apache.log4j.ConsoleAppender(
                 new org.apache.log4j.SimpleLayout(), "System.out");
 
-        org.apache.log4j.Logger logAxis = Logger.getLogger("org.apache.axis");
+        final org.apache.log4j.Logger logAxis = Logger.getLogger("org.apache.axis");
         logAxis.addAppender(appCON);
         logAxis.setLevel(org.apache.log4j.Level.ERROR);
         // Init Logger
@@ -123,234 +124,237 @@ public class BugzReporter extends JDialog {
         try {
             mCS = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"), "ForgeGUI",
                     "vi2ccTbfBUu^");
-        } catch (MalformedURLException e1) {
+        } catch (final MalformedURLException e1) {
             System.out.println("MalFormedURLException");
-        } catch (MCException e1) {
+        } catch (final MCException e1) {
             System.out.println("MCException - new MCSession");
         }
 
         String[] cats = {};
         try {
             cats = mCS.getCategories(1);
-        } catch (MCException e1) {
+        } catch (final MCException e1) {
             System.out.println("MCException - getCategories - " + e1.getMessage());
         }
 
         try {
-            Severities = mCS.getEnum(Enumeration.SEVERITIES);
-        } catch (MCException e1) {
+            this.severities = mCS.getEnum(Enumeration.SEVERITIES);
+        } catch (final MCException e1) {
             System.out.println("MCException - getEnum - " + e1.getMessage());
         }
 
         IProjectVersion[] vers = {};
         try {
             vers = mCS.getVersions(1);
-        } catch (MCException e1) {
+        } catch (final MCException e1) {
             System.out.println("MCException - getVersions - " + e1.getMessage());
         }
 
-        BuildInfo bi = Singletons.getModel().getBuildInfo();
+        final BuildInfo bi = Singletons.getModel().getBuildInfo();
 
-        setTitle("Report Issue");
-        setBounds(100, 100, 442, 575);
-        getContentPane().setLayout(new BorderLayout());
-        contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        getContentPane().add(contentPanel, BorderLayout.CENTER);
-        contentPanel.setLayout(null);
-        JLabel lblMantisUsername = new JLabel("Username");
+        this.setTitle("Report Issue");
+        this.setBounds(100, 100, 442, 575);
+        this.getContentPane().setLayout(new BorderLayout());
+        this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.getContentPane().add(this.contentPanel, BorderLayout.CENTER);
+        this.contentPanel.setLayout(null);
+        final JLabel lblMantisUsername = new JLabel("Username");
         lblMantisUsername.setHorizontalAlignment(SwingConstants.RIGHT);
         lblMantisUsername.setBounds(10, 16, 75, 14);
-        contentPanel.add(lblMantisUsername);
-        txtUserName = new JTextField("ForgeGUI");
-        txtUserName.setBounds(90, 13, 185, 21);
-        txtUserName.setFont(new Font("Dialog", Font.PLAIN, 11));
-        contentPanel.add(txtUserName);
-        txtUserName.setColumns(4);
+        this.contentPanel.add(lblMantisUsername);
+        this.txtUserName = new JTextField("ForgeGUI");
+        this.txtUserName.setBounds(90, 13, 185, 21);
+        this.txtUserName.setFont(new Font("Dialog", Font.PLAIN, 11));
+        this.contentPanel.add(this.txtUserName);
+        this.txtUserName.setColumns(4);
         try {
-            prefs = new ForgePreferences("forge.preferences");
-            if (!prefs.BugzName.equals("")) {
-                txtUserName.setText(prefs.BugzName);
-                txtPassword.setText(prefs.BugzPwd);
-                chkReportAnonymously.setSelected(false);
+            this.prefs = new ForgePreferences("forge.preferences");
+            if (!this.prefs.BugzName.equals("")) {
+                this.txtUserName.setText(this.prefs.BugzName);
+                this.txtPassword.setText(this.prefs.BugzPwd);
+                this.chkReportAnonymously.setSelected(false);
             } else {
-                chkReportAnonymously.setSelected(true);
+                this.chkReportAnonymously.setSelected(true);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
 
         }
-        chkReportAnonymously.setBounds(284, 11, 139, 25);
-        chkReportAnonymously.setFont(new Font("Dialog", Font.PLAIN, 12));
-        chkReportAnonymously.setHorizontalAlignment(SwingConstants.CENTER);
-        chkReportAnonymously.addActionListener(new java.awt.event.ActionListener() {
+        this.chkReportAnonymously.setBounds(284, 11, 139, 25);
+        this.chkReportAnonymously.setFont(new Font("Dialog", Font.PLAIN, 12));
+        this.chkReportAnonymously.setHorizontalAlignment(SwingConstants.CENTER);
+        this.chkReportAnonymously.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                if (chkReportAnonymously.isSelected()) {
-                    txtUserName.setText("ForgeGUI");
-                    txtPassword.setText("vi2ccTbfBUu^");
+                if (BugzReporter.this.chkReportAnonymously.isSelected()) {
+                    BugzReporter.this.txtUserName.setText("ForgeGUI");
+                    BugzReporter.this.txtPassword.setText("vi2ccTbfBUu^");
                 } else {
-                    if (!prefs.BugzName.equals("")) {
-                        txtUserName.setText(prefs.BugzName);
-                        txtPassword.setText(prefs.BugzPwd);
+                    if (!BugzReporter.this.prefs.BugzName.equals("")) {
+                        BugzReporter.this.txtUserName.setText(BugzReporter.this.prefs.BugzName);
+                        BugzReporter.this.txtPassword.setText(BugzReporter.this.prefs.BugzPwd);
                     }
                 }
             }
         });
-        contentPanel.add(chkReportAnonymously);
-        JLabel lblMantisPassword = new JLabel("Password");
+        this.contentPanel.add(this.chkReportAnonymously);
+        final JLabel lblMantisPassword = new JLabel("Password");
         lblMantisPassword.setHorizontalAlignment(SwingConstants.RIGHT);
         lblMantisPassword.setBounds(10, 45, 75, 14);
-        contentPanel.add(lblMantisPassword);
-        txtPassword.setBounds(90, 42, 185, 21);
-        txtPassword.setFont(new Font("Dialog", Font.PLAIN, 11));
-        contentPanel.add(txtPassword);
-        JSeparator separator = new JSeparator();
+        this.contentPanel.add(lblMantisPassword);
+        this.txtPassword.setBounds(90, 42, 185, 21);
+        this.txtPassword.setFont(new Font("Dialog", Font.PLAIN, 11));
+        this.contentPanel.add(this.txtPassword);
+        final JSeparator separator = new JSeparator();
         separator.setBounds(10, 69, 417, 2);
-        contentPanel.add(separator);
-        JLabel lblCategory = new JLabel("Category");
+        this.contentPanel.add(separator);
+        final JLabel lblCategory = new JLabel("Category");
         lblCategory.setBounds(10, 81, 75, 14);
         lblCategory.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
-        contentPanel.add(lblCategory);
-        cboCategory.setBounds(90, 77, 223, 22);
-        cboCategory.setFont(new Font("Dialog", Font.BOLD, 10));
+        this.contentPanel.add(lblCategory);
+        this.cboCategory.setBounds(90, 77, 223, 22);
+        this.cboCategory.setFont(new Font("Dialog", Font.BOLD, 10));
         if (cats.length > 0) {
-            for (int i = 0; i < cats.length; i++) {
-                cboCategory.addItem(cats[i]);
+            for (final String cat : cats) {
+                this.cboCategory.addItem(cat);
             }
         }
-        cboCategory.setSelectedItem("General Bug Report");
-        contentPanel.add(cboCategory);
-        JLabel lblSummary = new JLabel("Summary");
+        this.cboCategory.setSelectedItem("General Bug Report");
+        this.contentPanel.add(this.cboCategory);
+        final JLabel lblSummary = new JLabel("Summary");
         lblSummary.setBounds(10, 108, 75, 14);
         lblSummary.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblSummary.setHorizontalAlignment(SwingConstants.RIGHT);
-        contentPanel.add(lblSummary);
-        txtSummary = new JTextField();
-        txtSummary.setBounds(90, 105, 337, 21);
-        txtSummary.setFont(new Font("Dialog", Font.PLAIN, 11));
-        contentPanel.add(txtSummary);
-        txtSummary.setColumns(10);
-        JLabel lblDescription = new JLabel("Description");
+        this.contentPanel.add(lblSummary);
+        this.txtSummary = new JTextField();
+        this.txtSummary.setBounds(90, 105, 337, 21);
+        this.txtSummary.setFont(new Font("Dialog", Font.PLAIN, 11));
+        this.contentPanel.add(this.txtSummary);
+        this.txtSummary.setColumns(10);
+        final JLabel lblDescription = new JLabel("Description");
         lblDescription.setBounds(10, 182, 75, 21);
         lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
-        contentPanel.add(lblDescription);
-        JScrollPane scrollPane = new JScrollPane();
+        this.contentPanel.add(lblDescription);
+        final JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(90, 132, 337, 120);
-        contentPanel.add(scrollPane);
-        txtDescription.setFont(new Font("Dialog", Font.PLAIN, 10));
-        scrollPane.setViewportView(txtDescription);
-        txtDescription.setBorder(null);
-        txtDescription.setWrapStyleWord(true);
-        txtDescription.setLineWrap(true);
-        txtDescription.setRows(8);
-        lblAddInfo.setText("<html><p align=\"right\">Additional<br>Information</p></html>");
-        lblAddInfo.setBounds(10, 294, 75, 40);
-        lblAddInfo.setFont(new Font("Dialog", Font.PLAIN, 12));
-        lblAddInfo.setHorizontalAlignment(SwingConstants.RIGHT);
-        contentPanel.add(lblAddInfo);
-        JScrollPane scrollPane3 = new JScrollPane();
+        this.contentPanel.add(scrollPane);
+        this.txtDescription.setFont(new Font("Dialog", Font.PLAIN, 10));
+        scrollPane.setViewportView(this.txtDescription);
+        this.txtDescription.setBorder(null);
+        this.txtDescription.setWrapStyleWord(true);
+        this.txtDescription.setLineWrap(true);
+        this.txtDescription.setRows(8);
+        this.lblAddInfo.setText("<html><p align=\"right\">Additional<br>Information</p></html>");
+        this.lblAddInfo.setBounds(10, 294, 75, 40);
+        this.lblAddInfo.setFont(new Font("Dialog", Font.PLAIN, 12));
+        this.lblAddInfo.setHorizontalAlignment(SwingConstants.RIGHT);
+        this.contentPanel.add(this.lblAddInfo);
+        final JScrollPane scrollPane3 = new JScrollPane();
         scrollPane3.setBounds(90, 254, 337, 120);
-        contentPanel.add(scrollPane3);
-        txtErrorDump.setFont(new Font("Monospaced", Font.PLAIN, 10));
-        scrollPane.setViewportView(txtErrorDump);
-        txtErrorDump.setAutoscrolls(false);
-        txtErrorDump.setMaximumSize(new Dimension(2147483647, 300));
-        txtErrorDump.setBorder(null);
-        txtErrorDump.setLineWrap(true);
-        txtErrorDump.setWrapStyleWord(true);
-        txtErrorDump.setRows(8);
-        JLabel lblVersion = new JLabel("Version");
+        this.contentPanel.add(scrollPane3);
+        this.txtErrorDump.setFont(new Font("Monospaced", Font.PLAIN, 10));
+        scrollPane.setViewportView(this.txtErrorDump);
+        this.txtErrorDump.setAutoscrolls(false);
+        this.txtErrorDump.setMaximumSize(new Dimension(2147483647, 300));
+        this.txtErrorDump.setBorder(null);
+        this.txtErrorDump.setLineWrap(true);
+        this.txtErrorDump.setWrapStyleWord(true);
+        this.txtErrorDump.setRows(8);
+        final JLabel lblVersion = new JLabel("Version");
         lblVersion.setHorizontalAlignment(SwingConstants.RIGHT);
         lblVersion.setBounds(20, 468, 65, 16);
         lblVersion.setFont(new Font("Dialog", Font.PLAIN, 12));
-        contentPanel.add(lblVersion);
-        cboVersion.setBounds(90, 465, 160, 22);
-        cboVersion.setFont(new Font("Dialog", Font.BOLD, 10));
-        cboVersion.addItem("");
+        this.contentPanel.add(lblVersion);
+        this.cboVersion.setBounds(90, 465, 160, 22);
+        this.cboVersion.setFont(new Font("Dialog", Font.BOLD, 10));
+        this.cboVersion.addItem("");
         if (vers.length > 0) {
-            for (int i = 0; i < vers.length; i++) {
-                cboVersion.addItem(vers[i].getName());
+            for (final IProjectVersion ver : vers) {
+                this.cboVersion.addItem(ver.getName());
                 // System.out.println(vers[i].getName());
             }
         }
-        cboVersion.setSelectedIndex(0);
-        String curVer = bi.getVersion();
-        String[] ss = curVer.split("-");
-        String rx = "^" + ss[0].replaceAll("\\.", "\\\\.") + ".*";
+        this.cboVersion.setSelectedIndex(0);
+        final String curVer = bi.getVersion();
+        final String[] ss = curVer.split("-");
+        final String rx = "^" + ss[0].replaceAll("\\.", "\\\\.") + ".*";
         System.out.println(ss[0] + " -> " + rx);
         if (curVer.equals("SVN")) {
-            cboVersion.setSelectedItem("SVN");
+            this.cboVersion.setSelectedItem("SVN");
         } else {
-            for (int i = 0; i < vers.length; i++) {
-                System.out.println(vers[i].getName());
-                if (vers[i].getName().matches(rx)) {
+            for (final IProjectVersion ver : vers) {
+                System.out.println(ver.getName());
+                if (ver.getName().matches(rx)) {
                     System.out.println("match");
-                    cboVersion.setSelectedItem(vers[i].getName());
+                    this.cboVersion.setSelectedItem(ver.getName());
                 }
             }
         }
-        contentPanel.add(cboVersion);
-        JLabel lblRev = new JLabel("SVN rev.");
+        this.contentPanel.add(this.cboVersion);
+        final JLabel lblRev = new JLabel("SVN rev.");
         lblRev.setBounds(247, 468, 66, 16);
         lblRev.setHorizontalAlignment(SwingConstants.RIGHT);
         lblRev.setFont(new Font("Dialog", Font.PLAIN, 12));
-        contentPanel.add(lblRev);
-        txtSVN = new JTextField();
-        String curRev = bi.getBuildID();
+        this.contentPanel.add(lblRev);
+        this.txtSVN = new JTextField();
+        final String curRev = bi.getBuildID();
         if (curRev != null) {
             if (!curRev.equals("null")) {
-                txtSVN.setText(curRev);
+                this.txtSVN.setText(curRev);
             }
         }
-        txtSVN.setBounds(318, 465, 109, 21);
-        txtSVN.setFont(new Font("Dialog", Font.PLAIN, 11));
-        txtSVN.setColumns(10);
-        contentPanel.add(txtSVN);
-        JLabel lblSeverity = new JLabel("Severity");
+        this.txtSVN.setBounds(318, 465, 109, 21);
+        this.txtSVN.setFont(new Font("Dialog", Font.PLAIN, 11));
+        this.txtSVN.setColumns(10);
+        this.contentPanel.add(this.txtSVN);
+        final JLabel lblSeverity = new JLabel("Severity");
         lblSeverity.setBounds(10, 496, 75, 16);
         lblSeverity.setFont(new Font("Dialog", Font.PLAIN, 12));
         lblSeverity.setHorizontalAlignment(SwingConstants.RIGHT);
-        contentPanel.add(lblSeverity);
-        cboSeverity.setBounds(90, 493, 160, 22);
-        cboSeverity.setFont(new Font("Dialog", Font.BOLD, 10));
-        cboSeverity.addItem("");
-        if (Severities.length > 0) {
-            for (int i = 0; i < Severities.length; i++) {
-                cboSeverity.addItem(Severities[i].getName());
+        this.contentPanel.add(lblSeverity);
+        this.cboSeverity.setBounds(90, 493, 160, 22);
+        this.cboSeverity.setFont(new Font("Dialog", Font.BOLD, 10));
+        this.cboSeverity.addItem("");
+        if (this.severities.length > 0) {
+            for (final IMCAttribute severitie : this.severities) {
+                this.cboSeverity.addItem(severitie.getName());
             }
         }
-        contentPanel.add(cboSeverity);
-        JScrollPane scrollPane2 = new JScrollPane();
+        this.contentPanel.add(this.cboSeverity);
+        final JScrollPane scrollPane2 = new JScrollPane();
         scrollPane2.setBounds(90, 380, 337, 80);
-        contentPanel.add(scrollPane2);
-        txtSteps.setWrapStyleWord(true);
-        txtSteps.setRows(5);
-        txtSteps.setMaximumSize(new Dimension(2147483647, 300));
-        txtSteps.setLineWrap(true);
-        txtSteps.setFont(new Font("Monospaced", Font.PLAIN, 10));
-        txtSteps.setAutoscrolls(false);
-        scrollPane.setViewportView(txtSteps);
-        JLabel lblSteps = new JLabel();
+        this.contentPanel.add(scrollPane2);
+        this.txtSteps.setWrapStyleWord(true);
+        this.txtSteps.setRows(5);
+        this.txtSteps.setMaximumSize(new Dimension(2147483647, 300));
+        this.txtSteps.setLineWrap(true);
+        this.txtSteps.setFont(new Font("Monospaced", Font.PLAIN, 10));
+        this.txtSteps.setAutoscrolls(false);
+        scrollPane.setViewportView(this.txtSteps);
+        final JLabel lblSteps = new JLabel();
         lblSteps.setText("<html><p align=\"right\">Steps to<br>Reproduce</p></html>");
         lblSteps.setHorizontalAlignment(SwingConstants.RIGHT);
         lblSteps.setFont(new Font("Dialog", Font.PLAIN, 12));
         lblSteps.setBounds(10, 400, 75, 40);
-        contentPanel.add(lblSteps);
-        JPanel buttonPane = new JPanel();
+        this.contentPanel.add(lblSteps);
+        final JPanel buttonPane = new JPanel();
         buttonPane.setOpaque(false);
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        getContentPane().add(buttonPane, BorderLayout.SOUTH);
-        JButton cmdReport = new JButton("Report");
+        this.getContentPane().add(buttonPane, BorderLayout.SOUTH);
+        final JButton cmdReport = new JButton("Report");
         cmdReport.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent arg0) {
-                doReport();
+                BugzReporter.this.doReport();
             }
         });
         buttonPane.add(cmdReport);
-        JButton cmdCancel = new JButton("Cancel");
+        final JButton cmdCancel = new JButton("Cancel");
         cmdCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent arg0) {
-                dialog.dispose();
+                BugzReporter.dialog.dispose();
             }
         });
         buttonPane.add(cmdCancel);
@@ -359,26 +363,26 @@ public class BugzReporter extends JDialog {
     private void doReport() {
         Report: {
 
-            if (txtSummary.getText().length() < 4) {
+            if (this.txtSummary.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, "Summary field must be provided", "Bug Report",
                         JOptionPane.ERROR_MESSAGE);
                 break Report;
             }
 
-            if (txtDescription.getText().length() < 10) {
+            if (this.txtDescription.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "Description field must be provided", "Bug Report",
                         JOptionPane.ERROR_MESSAGE);
                 break Report;
             }
 
             MCSession rep = null;
-            if (!chkReportAnonymously.isSelected()) {
+            if (!this.chkReportAnonymously.isSelected()) {
                 try {
                     rep = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"),
-                            txtUserName.getText(), String.valueOf(txtPassword.getPassword()));
-                } catch (MalformedURLException e) {
+                            this.txtUserName.getText(), String.valueOf(this.txtPassword.getPassword()));
+                } catch (final MalformedURLException e) {
                     System.out.println("MalFormedURLException");
-                } catch (MCException e) {
+                } catch (final MCException e) {
                     System.out.println("MCException - new MCSession - " + e.getMessage());
                     JOptionPane.showMessageDialog(null, "MCException - new MCSession - " + e.getMessage(),
                             "Bug Report", JOptionPane.INFORMATION_MESSAGE);
@@ -388,9 +392,9 @@ public class BugzReporter extends JDialog {
                 try {
                     rep = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"), "ForgeGUI",
                             "vi2ccTbfBUu^");
-                } catch (MalformedURLException e) {
+                } catch (final MalformedURLException e) {
                     System.out.println("MalformedURLException");
-                } catch (MCException e) {
+                } catch (final MCException e) {
                     System.out.println("MCException - new MCSession - " + e.getMessage());
                     JOptionPane.showMessageDialog(null, "MCException - new MCSession - " + e.getMessage(),
                             "Bug Report", JOptionPane.INFORMATION_MESSAGE);
@@ -401,52 +405,52 @@ public class BugzReporter extends JDialog {
             IIssue iBug = null;
             try {
                 iBug = rep.newIssue(1);
-            } catch (MCException e) {
+            } catch (final MCException e) {
                 System.out.println("MCException - newIssue - " + e.getMessage());
                 JOptionPane.showMessageDialog(null, "MCException - newIssue - " + e.getMessage(), "Bug Report",
                         JOptionPane.INFORMATION_MESSAGE);
                 break Report;
             }
 
-            iBug.setCategory(cboCategory.getSelectedItem().toString());
-            iBug.setSummary(txtSummary.getText());
-            iBug.setDescription(txtDescription.getText());
-            iBug.setAdditionalInformation(txtErrorDump.getText());
-            iBug.setVersion(cboVersion.getSelectedItem().toString());
+            iBug.setCategory(this.cboCategory.getSelectedItem().toString());
+            iBug.setSummary(this.txtSummary.getText());
+            iBug.setDescription(this.txtDescription.getText());
+            iBug.setAdditionalInformation(this.txtErrorDump.getText());
+            iBug.setVersion(this.cboVersion.getSelectedItem().toString());
 
-            for (int i = 0; i < Severities.length; i++) {
-                if (cboSeverity.getSelectedItem().toString().equals(Severities[i].getName())) {
-                    iBug.setSeverity(Severities[i]);
+            for (final IMCAttribute severitie : this.severities) {
+                if (this.cboSeverity.getSelectedItem().toString().equals(severitie.getName())) {
+                    iBug.setSeverity(severitie);
                 }
             }
 
-            iBug.setStepsToReproduce(txtSteps.getText());
+            iBug.setStepsToReproduce(this.txtSteps.getText());
 
-            ICustomFieldValue[] icfv = {new CustomFieldValue(new MCAttribute(1, "Detected at SVN Rev"),
-                    txtSVN.getText())};
+            final ICustomFieldValue[] icfv = { new CustomFieldValue(new MCAttribute(1, "Detected at SVN Rev"),
+                    this.txtSVN.getText()) };
             iBug.setCustomFields(icfv);
 
-            DefaultSubmitter ds = new DefaultSubmitter(false);
+            final DefaultSubmitter ds = new DefaultSubmitter(false);
             try {
                 ds.submitIssue(rep, iBug);
-            } catch (MCException e1) {
+            } catch (final MCException e1) {
                 System.out.println("MCException - submit Issue - " + e1.getMessage());
                 JOptionPane.showMessageDialog(null, "MCException - submit Issue - " + e1.getMessage(), "Bug Report",
                         JOptionPane.INFORMATION_MESSAGE);
                 break Report;
             }
 
-            prefs.BugzName = txtUserName.getText();
-            prefs.BugzPwd = String.valueOf(txtPassword.getPassword());
+            this.prefs.BugzName = this.txtUserName.getText();
+            this.prefs.BugzPwd = String.valueOf(this.txtPassword.getPassword());
             try {
-                prefs.save();
-            } catch (Exception e) {
+                this.prefs.save();
+            } catch (final Exception e) {
                 System.out.println("Exception - save preferences - " + e.getMessage());
             }
 
             JOptionPane.showMessageDialog(null, "This Issue Has Been Reported, Thank You.", "Bug Report",
                     JOptionPane.INFORMATION_MESSAGE);
-            dialog.dispose();
+            BugzReporter.dialog.dispose();
         } // Report:
 
     }

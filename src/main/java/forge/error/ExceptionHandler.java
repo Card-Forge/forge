@@ -34,6 +34,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void uncaughtException(final Thread t, final Throwable ex) {
         ErrorViewer.showError(ex);
     }

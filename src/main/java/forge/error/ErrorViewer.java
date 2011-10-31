@@ -1,15 +1,9 @@
 package forge.error;
 
-import static forge.properties.ForgeProps.getLocalized;
-import static forge.properties.ForgeProps.getProperty;
-import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
-import static java.awt.event.KeyEvent.VK_B;
-import static java.awt.event.KeyEvent.VK_S;
-import static javax.swing.JOptionPane.DEFAULT_OPTION;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
+import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 /**
@@ -64,7 +59,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      *            a {@link java.lang.Throwable} object.
      */
     public static void showError(final Throwable ex) {
-        showError(ex, null);
+        ErrorViewer.showError(ex, null);
     }
 
     /**
@@ -82,7 +77,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         if (ex == null) {
             return;
         }
-        showError(ex, String.format(format, args));
+        ErrorViewer.showError(ex, String.format(format, args));
     }
 
     /**
@@ -99,10 +94,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         }
 
         final StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        printError(pw, ex, message);
+        final PrintWriter pw = new PrintWriter(sw);
+        ErrorViewer.printError(pw, ex, message);
 
-        showDialog(sw.toString());
+        ErrorViewer.showDialog(sw.toString());
     }
 
     /**
@@ -114,7 +109,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      *            a {@link java.lang.Object} object.
      */
     public static void showError(final String format, final Object... args) {
-        showError(String.format(format, args));
+        ErrorViewer.showError(String.format(format, args));
     }
 
     /**
@@ -124,7 +119,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      *            a {@link java.lang.String} object.
      */
     public static void showError(final String message) {
-        showError(new Exception(), message);
+        ErrorViewer.showError(new Exception(), message);
     }
 
     /**
@@ -136,7 +131,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      *            a {@link java.lang.Object} object.
      */
     public static void showErrorAllThreads(final String format, final Object... args) {
-        showErrorAllThreads(String.format(format, args));
+        ErrorViewer.showErrorAllThreads(String.format(format, args));
     }
 
     /**
@@ -147,10 +142,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      */
     public static void showErrorAllThreads(final String message) {
         final StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        printError(pw, message);
+        final PrintWriter pw = new PrintWriter(sw);
+        ErrorViewer.printError(pw, message);
 
-        showDialog(sw.toString());
+        ErrorViewer.showDialog(sw.toString());
     }
 
     /**
@@ -162,7 +157,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
      *            a {@link java.lang.String} object.
      */
     private static void showDialog(final String fullMessage) {
-        JTextArea area = new JTextArea(fullMessage, 40, 90);
+        final JTextArea area = new JTextArea(fullMessage, 40, 90);
         area.setFont(new Font("Monospaced", Font.PLAIN, 10));
         area.setEditable(false);
         area.setLineWrap(true);
@@ -170,15 +165,15 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
         // Button is not modified, String gets the automatic listener to hide
         // the dialog
-        Object[] options = {new JButton(new BugzAction(area)), new JButton(new SaveAction(area)),
-                getLocalized(BUTTON_CLOSE), new JButton(new ExitAction())};
+        final Object[] options = { new JButton(new BugzAction(area)), new JButton(new SaveAction(area)),
+                ForgeProps.getLocalized(ErrorViewer.BUTTON_CLOSE), new JButton(new ExitAction()) };
 
-        JOptionPane pane = new JOptionPane(new JScrollPane(area), ERROR_MESSAGE, DEFAULT_OPTION, null, options,
-                options[1]);
-        dlg = pane.createDialog(null, getLocalized(TITLE));
-        dlg.setResizable(true);
-        dlg.setVisible(true);
-        dlg.dispose();
+        final JOptionPane pane = new JOptionPane(new JScrollPane(area), JOptionPane.ERROR_MESSAGE,
+                JOptionPane.DEFAULT_OPTION, null, options, options[1]);
+        ErrorViewer.dlg = pane.createDialog(null, ForgeProps.getLocalized(ErrorViewer.TITLE));
+        ErrorViewer.dlg.setResizable(true);
+        ErrorViewer.dlg.setVisible(true);
+        ErrorViewer.dlg.dispose();
     }
 
     /**
@@ -197,10 +192,12 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         }
         ex.printStackTrace();
 
-        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL),
+        pw.printf(ForgeProps.getLocalized(ErrorViewer.MESSAGE),
+                ForgeProps.getProperty(NewConstants.HOW_TO_REPORT_BUGS_URL),
                 message != null ? message : ex.getMessage(), Singletons.getModel().getBuildInfo().toPrettyString(),
-                System.getProperty(NAME_OS), System.getProperty(VERSION_OS), System.getProperty(ARCHITECTURE_OS),
-                System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
+                System.getProperty(ErrorViewer.NAME_OS), System.getProperty(ErrorViewer.VERSION_OS),
+                System.getProperty(ErrorViewer.ARCHITECTURE_OS), System.getProperty(ErrorViewer.VERSION_JAVA),
+                System.getProperty(ErrorViewer.VENDOR_JAVA));
         ex.printStackTrace(pw);
     }
 
@@ -216,14 +213,16 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static void printError(final PrintWriter pw, final String message) {
         System.err.println(message);
 
-        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL), message, Singletons.getModel()
-                .getBuildInfo().toPrettyString(), System.getProperty(NAME_OS), System.getProperty(VERSION_OS),
-                System.getProperty(ARCHITECTURE_OS), System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
-        Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
-        for (Entry<Thread, StackTraceElement[]> e : traces.entrySet()) {
+        pw.printf(ForgeProps.getLocalized(ErrorViewer.MESSAGE),
+                ForgeProps.getProperty(NewConstants.HOW_TO_REPORT_BUGS_URL), message, Singletons.getModel()
+                        .getBuildInfo().toPrettyString(), System.getProperty(ErrorViewer.NAME_OS),
+                System.getProperty(ErrorViewer.VERSION_OS), System.getProperty(ErrorViewer.ARCHITECTURE_OS),
+                System.getProperty(ErrorViewer.VERSION_JAVA), System.getProperty(ErrorViewer.VENDOR_JAVA));
+        final Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
+        for (final Entry<Thread, StackTraceElement[]> e : traces.entrySet()) {
             pw.println();
             pw.printf("%s (%s):%n", e.getKey().getName(), e.getKey().getId());
-            for (StackTraceElement el : e.getValue()) {
+            for (final StackTraceElement el : e.getValue()) {
                 pw.println(el);
             }
         }
@@ -235,37 +234,38 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
         private static JFileChooser c;
 
-        private JTextArea area;
+        private final JTextArea area;
 
         public SaveAction(final JTextArea areaParam) {
-            super(getLocalized(BUTTON_SAVE));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(VK_S, CTRL_DOWN_MASK));
+            super(ForgeProps.getLocalized(ErrorViewer.BUTTON_SAVE));
+            this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
             this.area = areaParam;
         }
 
+        @Override
         public void actionPerformed(final ActionEvent e) {
-            if (c == null) {
-                c = new JFileChooser();
+            if (SaveAction.c == null) {
+                SaveAction.c = new JFileChooser();
             }
 
             File f;
             for (int i = 0;; i++) {
-                String name = String.format("%TF-%02d.txt", System.currentTimeMillis(), i);
+                final String name = String.format("%TF-%02d.txt", System.currentTimeMillis(), i);
                 f = new File(name);
                 if (!f.exists()) {
                     break;
                 }
             }
-            c.setSelectedFile(f);
-            c.showSaveDialog(null);
-            f = c.getSelectedFile();
+            SaveAction.c.setSelectedFile(f);
+            SaveAction.c.showSaveDialog(null);
+            f = SaveAction.c.getSelectedFile();
 
             try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                bw.write(area.getText());
+                final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                bw.write(this.area.getText());
                 bw.close();
-            } catch (IOException ex) {
-                showError(ex, getLocalized(ERRORS.SAVE_MESSAGE));
+            } catch (final IOException ex) {
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.SAVE_MESSAGE));
             }
         }
     }
@@ -274,19 +274,20 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
         private static final long serialVersionUID = 914634661273525959L;
 
-        private JTextArea area;
+        private final JTextArea area;
 
         public BugzAction(final JTextArea neoArea) {
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(VK_B, CTRL_DOWN_MASK));
-            putValue(NAME, "Report Bug");
+            this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK));
+            this.putValue(Action.NAME, "Report Bug");
             this.area = neoArea;
         }
 
+        @Override
         public void actionPerformed(final ActionEvent e) {
-            BugzReporter br = new BugzReporter();
-            br.setDumpText(area.getText());
+            final BugzReporter br = new BugzReporter();
+            br.setDumpText(this.area.getText());
             br.setVisible(true);
-            dlg.dispose();
+            ErrorViewer.dlg.dispose();
         }
     }
 
@@ -295,9 +296,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         private static final long serialVersionUID = 276202595758381626L;
 
         public ExitAction() {
-            super(getLocalized(BUTTON_EXIT));
+            super(ForgeProps.getLocalized(ErrorViewer.BUTTON_EXIT));
         }
 
+        @Override
         public void actionPerformed(final ActionEvent e) {
             System.exit(0);
         }
@@ -308,11 +310,12 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         private static final long serialVersionUID = 5638147106706803363L;
 
         public ShowAllThreadsAction() {
-            super(getLocalized(SHOW_ERROR));
+            super(ForgeProps.getLocalized(ErrorViewer.SHOW_ERROR));
         }
 
+        @Override
         public void actionPerformed(final ActionEvent e) {
-            showErrorAllThreads(getLocalized(ERRORS.SHOW_MESSAGE));
+            ErrorViewer.showErrorAllThreads(ForgeProps.getLocalized(ERRORS.SHOW_MESSAGE));
         }
     }
 }
