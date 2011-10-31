@@ -682,7 +682,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the present defined.
-     *
+     * 
      * @return the presentDefined
      */
     public final String getPresentDefined() {
@@ -691,7 +691,7 @@ public class SpellAbility_Variables {
 
     /**
      * Checks if is all m12 empires.
-     *
+     * 
      * @return the allM12Empires
      */
     public final boolean isAllM12Empires() {
@@ -700,7 +700,7 @@ public class SpellAbility_Variables {
 
     /**
      * Checks if is not all m12 empires.
-     *
+     * 
      * @return the notAllM12Empires
      */
     public final boolean isNotAllM12Empires() {
@@ -709,7 +709,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the s var operand.
-     *
+     * 
      * @return the sVarOperand
      */
     public final String getsVarOperand() {
@@ -718,8 +718,9 @@ public class SpellAbility_Variables {
 
     /**
      * Sets the s var operand.
-     *
-     * @param sVarOperand the sVarOperand to set
+     * 
+     * @param sVarOperand
+     *            the sVarOperand to set
      */
     public final void setsVarOperand(final String sVarOperand) {
         this.sVarOperand = sVarOperand; // TODO Add 0 to parameter's name.
@@ -727,7 +728,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the s var to check.
-     *
+     * 
      * @return the sVarToCheck
      */
     public final String getsVarToCheck() {
@@ -736,8 +737,9 @@ public class SpellAbility_Variables {
 
     /**
      * Sets the s var to check.
-     *
-     * @param sVarToCheck the sVarToCheck to set
+     * 
+     * @param sVarToCheck
+     *            the sVarToCheck to set
      */
     public final void setsVarToCheck(final String sVarToCheck) {
         this.sVarToCheck = sVarToCheck;
@@ -745,7 +747,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the s var operator.
-     *
+     * 
      * @return the sVarOperator
      */
     public final String getsVarOperator() {
@@ -754,8 +756,9 @@ public class SpellAbility_Variables {
 
     /**
      * Sets the s var operator.
-     *
-     * @param sVarOperator the sVarOperator to set
+     * 
+     * @param sVarOperator
+     *            the sVarOperator to set
      */
     public final void setsVarOperator(final String sVarOperator) {
         this.sVarOperator = sVarOperator; // TODO: Add 0 to parameter's name.
@@ -763,7 +766,7 @@ public class SpellAbility_Variables {
 
     /**
      * Checks if is opponent turn.
-     *
+     * 
      * @return the opponentTurn
      */
     public final boolean isOpponentTurn() {
@@ -772,7 +775,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the cards in hand.
-     *
+     * 
      * @return the cardsInHand
      */
     public final int getCardsInHand() {
@@ -781,8 +784,9 @@ public class SpellAbility_Variables {
 
     /**
      * Sets the cards in hand.
-     *
-     * @param cardsInHand the cardsInHand to set
+     * 
+     * @param cardsInHand
+     *            the cardsInHand to set
      */
     public final void setCardsInHand(final int cardsInHand) {
         this.cardsInHand = cardsInHand; // TODO: Add 0 to parameter's name.
@@ -790,7 +794,7 @@ public class SpellAbility_Variables {
 
     /**
      * Gets the checks if is present.
-     *
+     * 
      * @return the isPresent
      */
     public final String getIsPresent() {
@@ -799,11 +803,11 @@ public class SpellAbility_Variables {
 
     /**
      * Checks if is any player.
-     *
+     * 
      * @return the anyPlayer
      */
     public final boolean isAnyPlayer() {
-        return anyPlayer;
+        return this.anyPlayer;
     }
 
 } // end class SpellAbility_Variables

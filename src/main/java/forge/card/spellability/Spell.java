@@ -37,11 +37,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            a {@link forge.Card} object.
      */
     public Spell(final Card sourceCard) {
-        super(SpellAbility.Spell, sourceCard);
+        super(SpellAbility.getSpell(), sourceCard);
 
-        setManaCost(sourceCard.getManaCost());
-        setStackDescription(sourceCard.getSpellText());
-        getRestrictions().setZone(Constant.Zone.Hand);
+        this.setManaCost(sourceCard.getManaCost());
+        this.setStackDescription(sourceCard.getSpellText());
+        this.getRestrictions().setZone(Constant.Zone.Hand);
     }
 
     /**
@@ -57,14 +57,14 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            a {@link forge.card.spellability.Target} object.
      */
     public Spell(final Card sourceCard, final Cost abCost, final Target abTgt) {
-        super(SpellAbility.Spell, sourceCard);
+        super(SpellAbility.getSpell(), sourceCard);
 
-        setManaCost(sourceCard.getManaCost());
+        this.setManaCost(sourceCard.getManaCost());
 
-        setPayCosts(abCost);
-        setTarget(abTgt);
-        setStackDescription(sourceCard.getSpellText());
-        getRestrictions().setZone(Constant.Zone.Hand);
+        this.setPayCosts(abCost);
+        this.setTarget(abTgt);
+        this.setStackDescription(sourceCard.getSpellText());
+        this.getRestrictions().setZone(Constant.Zone.Hand);
     }
 
     /** {@inheritDoc} */
@@ -74,16 +74,16 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        Card card = getSourceCard();
+        final Card card = this.getSourceCard();
 
-        Player activator = getActivatingPlayer();
+        final Player activator = this.getActivatingPlayer();
 
         // CantBeCast static abilities
-        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         allp.add(card);
-        for (Card ca : allp) {
-            ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (StaticAbility stAb : staticAbilities) {
+        for (final Card ca : allp) {
+            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeCast", card, activator)) {
                     return false;
                 }
@@ -94,8 +94,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (payCosts != null) {
-            if (!Cost_Payment.canPayAdditionalCosts(payCosts, this)) {
+        if (this.getPayCosts() != null) {
+            if (!Cost_Payment.canPayAdditionalCosts(this.getPayCosts(), this)) {
                 return false;
             }
         }
@@ -110,9 +110,9 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlayAI() {
-        Card card = getSourceCard();
+        final Card card = this.getSourceCard();
         if (card.getSVar("NeedsToPlay").length() > 0) {
-            String needsToPlay = card.getSVar("NeedsToPlay");
+            final String needsToPlay = card.getSVar("NeedsToPlay");
             CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
             list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
@@ -135,7 +135,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     public final Object clone() {
         try {
             return super.clone();
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Spell : clone() error, " + ex);
         }

@@ -47,32 +47,32 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
      */
     public final void setConditions(final HashMap<String, String> params) {
         if (params.containsKey("Condition")) {
-            String value = params.get("Condition");
+            final String value = params.get("Condition");
             if (value.equals("Threshold")) {
-                setThreshold(true);
+                this.setThreshold(true);
             }
             if (value.equals("Metalcraft")) {
-                setMetalcraft(true);
+                this.setMetalcraft(true);
             }
             if (value.equals("Hellbent")) {
-                setHellbent(true);
+                this.setHellbent(true);
             }
         }
 
         if (params.containsKey("ConditionZone")) {
-            setZone(Zone.smartValueOf(params.get("ContitionZone")));
+            this.setZone(Zone.smartValueOf(params.get("ContitionZone")));
         }
 
         if (params.containsKey("ConditionSorcerySpeed")) {
-            setSorcerySpeed(true);
+            this.setSorcerySpeed(true);
         }
 
         if (params.containsKey("ConditionPlayerTurn")) {
-            setPlayerTurn(true);
+            this.setPlayerTurn(true);
         }
 
         if (params.containsKey("ConditionOpponentTurn")) {
-            setOpponentTurn(true);
+            this.setOpponentTurn(true);
         }
 
         if (params.containsKey("ConditionPhases")) {
@@ -84,59 +84,59 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 // Draw-> (After Upkeep)
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
-                String[] split = phases.split("->", 2);
+                final String[] split = phases.split("->", 2);
                 phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
             }
 
-            setPhases(phases);
+            this.setPhases(phases);
         }
 
         if (params.containsKey("ConditionAllM12Empires")) {
-            setAllM12Empires(true);
+            this.setAllM12Empires(true);
         }
         if (params.containsKey("ConditionNotAllM12Empires")) {
-            setNotAllM12Empires(true);
+            this.setNotAllM12Empires(true);
         }
 
         if (params.containsKey("ConditionCardsInHand")) {
-            setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
+            this.setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
         }
 
         // Condition version of IsPresent stuff
         if (params.containsKey("ConditionPresent")) {
-            setIsPresent(params.get("ConditionPresent"));
+            this.setIsPresent(params.get("ConditionPresent"));
             if (params.containsKey("ConditionCompare")) {
-                setPresentCompare(params.get("ConditionCompare"));
+                this.setPresentCompare(params.get("ConditionCompare"));
             }
         }
 
         if (params.containsKey("ConditionDefined")) {
-            setPresentDefined(params.get("ConditionDefined"));
+            this.setPresentDefined(params.get("ConditionDefined"));
         }
 
         if (params.containsKey("ConditionNotPresent")) {
-            setIsPresent(params.get("ConditionNotPresent"));
-            setPresentCompare("EQ0");
+            this.setIsPresent(params.get("ConditionNotPresent"));
+            this.setPresentCompare("EQ0");
         }
 
         // basically PresentCompare for life totals:
         if (params.containsKey("ConditionLifeTotal")) {
-            setLifeTotal(params.get("ConditionLifeTotal"));
+            this.setLifeTotal(params.get("ConditionLifeTotal"));
             if (params.containsKey("ConditionLifeAmount")) {
-                setLifeAmount(params.get("ConditionLifeAmount"));
+                this.setLifeAmount(params.get("ConditionLifeAmount"));
             }
         }
 
         if (params.containsKey("ConditionManaSpent")) {
-            setManaSpent(params.get("ConditionManaSpent"));
+            this.setManaSpent(params.get("ConditionManaSpent"));
         }
 
         if (params.containsKey("ConditionCheckSVar")) {
-            setSvarToCheck(params.get("ConditionCheckSVar"));
+            this.setSvarToCheck(params.get("ConditionCheckSVar"));
         }
         if (params.containsKey("ConditionSVarCompare")) {
-            setSvarOperator(params.get("ConditionSVarCompare").substring(0, 2));
-            setSvarOperand(params.get("ConditionSVarCompare").substring(2));
+            this.setSvarOperator(params.get("ConditionSVarCompare").substring(0, 2));
+            this.setSvarOperand(params.get("ConditionSVarCompare").substring(2));
         }
 
     } // setConditions
@@ -159,42 +159,42 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
 
-        if (isHellbent()) {
+        if (this.isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
             }
         }
-        if (isThreshold()) {
+        if (this.isThreshold()) {
             if (!activator.hasThreshold()) {
                 return false;
             }
         }
-        if (isMetalcraft()) {
+        if (this.isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
                 return false;
             }
         }
 
-        if (isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
+        if (this.isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
             return false;
         }
 
-        if (isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (getActivationLimit() != -1 && getNumberTurnActivations() >= getActivationLimit()) {
+        if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
             return false;
         }
 
-        if (getPhases().size() > 0) {
+        if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            String currPhase = AllZone.getPhase().getPhase();
-            for (String s : getPhases()) {
+            final String currPhase = AllZone.getPhase().getPhase();
+            for (final String s : this.getPhases()) {
                 if (s.equals(currPhase)) {
                     isPhase = true;
                     break;
@@ -206,8 +206,8 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             }
         }
 
-        if (isAllM12Empires()) {
-            Player p = sa.getSourceCard().getController();
+        if (this.isAllM12Empires()) {
+            final Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
@@ -215,8 +215,8 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
                 return false;
             }
         }
-        if (isNotAllM12Empires()) {
-            Player p = sa.getSourceCard().getController();
+        if (this.isNotAllM12Empires()) {
+            final Player p = sa.getSourceCard().getController();
             boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
             has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
@@ -225,72 +225,73 @@ public class SpellAbility_Condition extends SpellAbility_Variables {
             }
         }
 
-        if (getCardsInHand() != -1) {
+        if (this.getCardsInHand() != -1) {
             // Can handle Library of Alexandria, or Hellbent
-            if (activator.getCardsIn(Zone.Hand).size() != getCardsInHand()) {
+            if (activator.getCardsIn(Zone.Hand).size() != this.getCardsInHand()) {
                 return false;
             }
         }
 
-        if (getIsPresent() != null) {
+        if (this.getIsPresent() != null) {
             CardList list = new CardList();
-            if (getPresentDefined() != null) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), getPresentDefined(), sa).toArray());
+            if (this.getPresentDefined() != null) {
+                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa).toArray());
             } else {
                 list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             }
 
-            list = list.getValidCards(getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = list.getValidCards(this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             int right;
-            String rightString = getPresentCompare().substring(2);
+            final String rightString = this.getPresentCompare().substring(2);
             try { // If this is an Integer, just parse it
                 right = Integer.parseInt(rightString);
-            } catch (NumberFormatException e) { // Otherwise, grab it from the
-                                                // SVar
+            } catch (final NumberFormatException e) { // Otherwise, grab it from
+                                                      // the
+                // SVar
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
             }
 
-            int left = list.size();
+            final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, getPresentCompare(), right)) {
+            if (!AllZoneUtil.compare(left, this.getPresentCompare(), right)) {
                 return false;
             }
         }
 
-        if (getLifeTotal() != null) {
+        if (this.getLifeTotal() != null) {
             int life = 1;
-            if (getLifeTotal().equals("You")) {
+            if (this.getLifeTotal().equals("You")) {
                 life = activator.getLife();
             }
-            if (getLifeTotal().equals("Opponent")) {
+            if (this.getLifeTotal().equals("Opponent")) {
                 life = activator.getOpponent().getLife();
             }
 
             int right = 1;
-            String rightString = getLifeAmount().substring(2);
+            final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
             } else {
-                right = Integer.parseInt(getLifeAmount().substring(2));
+                right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
 
-            if (!AllZoneUtil.compare(life, getLifeAmount(), right)) {
+            if (!AllZoneUtil.compare(life, this.getLifeAmount(), right)) {
                 return false;
             }
         }
 
-        if (null != getManaSpent()) {
-            if (!sa.getSourceCard().getColorsPaid().contains(getManaSpent())) {
+        if (null != this.getManaSpent()) {
+            if (!sa.getSourceCard().getColorsPaid().contains(this.getManaSpent())) {
                 return false;
             }
         }
 
-        if (getsVarToCheck() != null) {
-            int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), getsVarToCheck(), sa);
-            int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), getsVarOperand(), sa);
+        if (this.getsVarToCheck() != null) {
+            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
+            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, getsVarOperator(), operandValue)) {
+            if (!AllZoneUtil.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
 

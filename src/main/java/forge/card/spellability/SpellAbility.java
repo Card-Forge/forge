@@ -27,13 +27,13 @@ import forge.gui.input.Input;
 public abstract class SpellAbility {
 
     /** The choices_made. */
-    public Object[] choices_made; // open ended Casting choice storage
+    private Object[] choicesMade; // open ended Casting choice storage
     // choices for constructor isPermanent argument
     /** Constant <code>Spell=0</code>. */
-    public static final int Spell = 0;
+    private static final int SPELL = 0;
 
     /** Constant <code>Ability=1</code>. */
-    public static final int Ability = 1;
+    private static final int ABILITY = 1;
 
     private String description = "";
     private Player targetPlayer = null;
@@ -74,7 +74,7 @@ public abstract class SpellAbility {
 
     private int charmNumber;
     private int minCharmNumber;
-    private ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
+    private final ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
     // private ArrayList<SpellAbility> charmChoicesMade = new
     // ArrayList<SpellAbility>();
 
@@ -83,10 +83,10 @@ public abstract class SpellAbility {
     private Input afterPayMana;
 
     /** The pay costs. */
-    protected Cost payCosts = null;
+    private Cost payCosts = null;
 
     /** The chosen target. */
-    protected Target chosenTarget = null;
+    private Target chosenTarget = null;
 
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
     private SpellAbility_Condition conditions = new SpellAbility_Condition();
@@ -94,8 +94,8 @@ public abstract class SpellAbility {
 
     private AbilityFactory abilityFactory = null;
 
-    private ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
+    private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
+    private final ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
 
     private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
 
@@ -108,6 +108,7 @@ public abstract class SpellAbility {
 
         private static final long serialVersionUID = 1795025064923737374L;
 
+        @Override
         public void execute(final Object o) {
         }
     };
@@ -119,20 +120,20 @@ public abstract class SpellAbility {
      * 
      * @param spellOrAbility
      *            a int.
-     * @param i_sourceCard
+     * @param iSourceCard
      *            a {@link forge.Card} object.
      */
-    public SpellAbility(final int spellOrAbility, final Card i_sourceCard) {
-        if (spellOrAbility == Spell) {
-            spell = true;
-        } else if (spellOrAbility == Ability) {
-            spell = false;
+    public SpellAbility(final int spellOrAbility, final Card iSourceCard) {
+        if (spellOrAbility == SpellAbility.getSpell()) {
+            this.spell = true;
+        } else if (spellOrAbility == SpellAbility.getAbility()) {
+            this.spell = false;
         } else {
             throw new RuntimeException("SpellAbility : constructor error, invalid spellOrAbility argument = "
                     + spellOrAbility);
         }
 
-        sourceCard = i_sourceCard;
+        this.sourceCard = iSourceCard;
     }
 
     // Spell, and Ability, and other Ability objects override this method
@@ -165,7 +166,7 @@ public abstract class SpellAbility {
      * @return true, if successful
      */
     public final boolean canPlayAndAfford() {
-        return canPlay() && canAfford();
+        return this.canPlay() && this.canAfford();
     }
 
     // all Spell's and Abilities must override this method
@@ -207,7 +208,7 @@ public abstract class SpellAbility {
      * </p>
      */
     public void chooseTargetAI() {
-        randomTarget.execute(this);
+        this.randomTarget.execute(this);
     }
 
     /**
@@ -219,7 +220,7 @@ public abstract class SpellAbility {
      *            a {@link forge.CommandArgs} object.
      */
     public void setChooseTargetAI(final CommandArgs c) {
-        randomTarget = c;
+        this.randomTarget = c;
     }
 
     /**
@@ -230,7 +231,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.CommandArgs} object.
      */
     public CommandArgs getChooseTargetAI() {
-        return randomTarget;
+        return this.randomTarget;
     }
 
     /**
@@ -241,7 +242,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getManaCost() {
-        return manaCost;
+        return this.manaCost;
     }
 
     /**
@@ -253,7 +254,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setManaCost(final String cost) {
-        manaCost = cost;
+        this.manaCost = cost;
     }
 
     /**
@@ -264,7 +265,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getAdditionalManaCost() {
-        return additionalManaCost;
+        return this.additionalManaCost;
     }
 
     /**
@@ -276,7 +277,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setAdditionalManaCost(final String cost) {
-        additionalManaCost = cost;
+        this.additionalManaCost = cost;
     }
 
     /**
@@ -287,7 +288,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getMultiKickerManaCost() {
-        return multiKickerManaCost;
+        return this.multiKickerManaCost;
     }
 
     /**
@@ -299,7 +300,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setMultiKickerManaCost(final String cost) {
-        multiKickerManaCost = cost;
+        this.multiKickerManaCost = cost;
     }
 
     /**
@@ -310,7 +311,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getReplicateManaCost() {
-        return replicateManaCost;
+        return this.replicateManaCost;
     }
 
     /**
@@ -322,7 +323,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setReplicateManaCost(final String cost) {
-        replicateManaCost = cost;
+        this.replicateManaCost = cost;
     }
 
     /**
@@ -333,7 +334,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getXManaCost() {
-        return xManaCost;
+        return this.xManaCost;
     }
 
     /**
@@ -345,7 +346,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setXManaCost(final String cost) {
-        xManaCost = cost;
+        this.xManaCost = cost;
     }
 
     /**
@@ -356,7 +357,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.Player} object.
      */
     public Player getActivatingPlayer() {
-        return activatingPlayer;
+        return this.activatingPlayer;
     }
 
     /**
@@ -369,9 +370,9 @@ public abstract class SpellAbility {
      */
     public void setActivatingPlayer(final Player player) {
         // trickle down activating player
-        activatingPlayer = player;
-        if (subAbility != null) {
-            subAbility.setActivatingPlayer(player);
+        this.activatingPlayer = player;
+        if (this.subAbility != null) {
+            this.subAbility.setActivatingPlayer(player);
         }
     }
 
@@ -383,7 +384,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isSpell() {
-        return spell;
+        return this.spell;
     }
 
     /**
@@ -394,7 +395,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isAbility() {
-        return !isSpell();
+        return !this.isSpell();
     }
 
     /**
@@ -405,7 +406,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isTapAbility() {
-        return tapAbility;
+        return this.tapAbility;
     }
 
     /**
@@ -416,7 +417,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isUntapAbility() {
-        return untapAbility;
+        return this.untapAbility;
     }
 
     /**
@@ -425,8 +426,8 @@ public abstract class SpellAbility {
      * </p>
      */
     public void makeUntapAbility() {
-        untapAbility = true;
-        tapAbility = false;
+        this.untapAbility = true;
+        this.tapAbility = false;
     }
 
     /**
@@ -438,7 +439,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public void setIsBuyBackAbility(final boolean b) {
-        buyBackAbility = b;
+        this.buyBackAbility = b;
     }
 
     /**
@@ -449,7 +450,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isBuyBackAbility() {
-        return buyBackAbility;
+        return this.buyBackAbility;
     }
 
     /**
@@ -461,7 +462,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public void setIsMultiKicker(final boolean b) {
-        multiKicker = b;
+        this.multiKicker = b;
     }
 
     /**
@@ -472,7 +473,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isMultiKicker() {
-        return multiKicker;
+        return this.multiKicker;
     }
 
     /**
@@ -484,7 +485,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public void setIsReplicate(final boolean b) {
-        replicate = b;
+        this.replicate = b;
     }
 
     /**
@@ -495,7 +496,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isReplicate() {
-        return replicate;
+        return this.replicate;
     }
 
     /**
@@ -507,7 +508,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public void setIsXCost(final boolean b) {
-        xCost = b;
+        this.xCost = b;
     }
 
     /**
@@ -518,7 +519,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isXCost() {
-        return xCost;
+        return this.xCost;
     }
 
     /**
@@ -530,7 +531,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public void setIsCycling(final boolean b) {
-        cycling = b;
+        this.cycling = b;
     }
 
     /**
@@ -540,8 +541,8 @@ public abstract class SpellAbility {
      * 
      * @return a boolean.
      */
-    public  boolean isCycling() {
-        return cycling;
+    public boolean isCycling() {
+        return this.cycling;
     }
 
     /**
@@ -552,8 +553,8 @@ public abstract class SpellAbility {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public  void setSourceCard(final Card c) {
-        sourceCard = c;
+    public void setSourceCard(final Card c) {
+        this.sourceCard = c;
     }
 
     /**
@@ -564,7 +565,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.Card} object.
      */
     public Card getSourceCard() {
-        return sourceCard;
+        return this.sourceCard;
     }
 
     /**
@@ -575,7 +576,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.Command} object.
      */
     public Command getBeforePayManaAI() {
-        return beforePayManaAI;
+        return this.beforePayManaAI;
     }
 
     /**
@@ -587,7 +588,7 @@ public abstract class SpellAbility {
      *            a {@link forge.Command} object.
      */
     public void setBeforePayManaAI(final Command c) {
-        beforePayManaAI = c;
+        this.beforePayManaAI = c;
     }
 
     // begin - Input methods
@@ -599,7 +600,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getBeforePayMana() {
-        return beforePayMana;
+        return this.beforePayMana;
     }
 
     /**
@@ -611,7 +612,7 @@ public abstract class SpellAbility {
      *            a {@link forge.gui.input.Input} object.
      */
     public void setBeforePayMana(final Input in) {
-        beforePayMana = in;
+        this.beforePayMana = in;
     }
 
     /**
@@ -622,7 +623,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getAfterPayMana() {
-        return afterPayMana;
+        return this.afterPayMana;
     }
 
     /**
@@ -634,7 +635,7 @@ public abstract class SpellAbility {
      *            a {@link forge.gui.input.Input} object.
      */
     public void setAfterPayMana(final Input in) {
-        afterPayMana = in;
+        this.afterPayMana = in;
     }
 
     /**
@@ -645,7 +646,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.card.cost.Cost} object.
      */
     public Cost getPayCosts() {
-        return payCosts;
+        return this.payCosts;
     }
 
     /**
@@ -657,7 +658,7 @@ public abstract class SpellAbility {
      *            a {@link forge.card.cost.Cost} object.
      */
     public void setPayCosts(final Cost abCost) {
-        payCosts = abCost;
+        this.payCosts = abCost;
     }
 
     /**
@@ -668,7 +669,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.card.spellability.Target} object.
      */
     public Target getTarget() {
-        return chosenTarget;
+        return this.getChosenTarget();
     }
 
     /**
@@ -680,7 +681,7 @@ public abstract class SpellAbility {
      *            a {@link forge.card.spellability.Target} object.
      */
     public void setTarget(final Target tgt) {
-        chosenTarget = tgt;
+        this.setChosenTarget(tgt);
     }
 
     /**
@@ -693,7 +694,7 @@ public abstract class SpellAbility {
      *            object.
      */
     public void setRestrictions(final SpellAbility_Restriction restrict) {
-        restrictions = restrict;
+        this.restrictions = restrict;
     }
 
     /**
@@ -705,7 +706,7 @@ public abstract class SpellAbility {
      *         object.
      */
     public SpellAbility_Restriction getRestrictions() {
-        return restrictions;
+        return this.restrictions;
     }
 
     /**
@@ -716,7 +717,7 @@ public abstract class SpellAbility {
      * @return the activations this turn
      */
     public int getActivationsThisTurn() {
-        return restrictions.getNumberTurnActivations();
+        return this.restrictions.getNumberTurnActivations();
     }
 
     /**
@@ -730,7 +731,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public void setConditions(final SpellAbility_Condition condition) {
-        conditions = condition;
+        this.conditions = condition;
     }
 
     /**
@@ -742,7 +743,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public SpellAbility_Condition getConditions() {
-        return conditions;
+        return this.conditions;
     }
 
     /**
@@ -754,7 +755,7 @@ public abstract class SpellAbility {
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public void setAbilityFactory(final AbilityFactory af) {
-        abilityFactory = af;
+        this.abilityFactory = af;
     }
 
     /**
@@ -765,7 +766,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.card.abilityFactory.AbilityFactory} object.
      */
     public AbilityFactory getAbilityFactory() {
-        return abilityFactory;
+        return this.abilityFactory;
     }
 
     /**
@@ -776,7 +777,7 @@ public abstract class SpellAbility {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<Mana> getPayingMana() {
-        return payingMana;
+        return this.payingMana;
     }
 
     /**
@@ -787,7 +788,7 @@ public abstract class SpellAbility {
      * @return a {@link java.util.ArrayList} object.
      */
     public ArrayList<Ability_Mana> getPayingManaAbilities() {
-        return paidAbilities;
+        return this.paidAbilities;
     }
 
     // Combined PaidLists
@@ -800,7 +801,7 @@ public abstract class SpellAbility {
      *            a {@link java.util.HashMap} object.
      */
     public void setPaidHash(final HashMap<String, CardList> hash) {
-        paidLists = hash;
+        this.paidLists = hash;
     }
 
     /**
@@ -811,7 +812,7 @@ public abstract class SpellAbility {
      * @return a {@link java.util.HashMap} object.
      */
     public HashMap<String, CardList> getPaidHash() {
-        return paidLists;
+        return this.paidLists;
     }
 
     // Paid List are for things ca
@@ -826,7 +827,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setPaidList(final CardList list, final String str) {
-        paidLists.put(str, list);
+        this.paidLists.put(str, list);
     }
 
     /**
@@ -839,7 +840,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.CardList} object.
      */
     public CardList getPaidList(final String str) {
-        return paidLists.get(str);
+        return this.paidLists.get(str);
     }
 
     /**
@@ -853,11 +854,11 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void addCostToHashList(final Card c, final String str) {
-        if (!paidLists.containsKey(str)) {
-            paidLists.put(str, new CardList());
+        if (!this.paidLists.containsKey(str)) {
+            this.paidLists.put(str, new CardList());
         }
 
-        paidLists.get(str).add(c);
+        this.paidLists.get(str).add(c);
     }
 
     /**
@@ -866,7 +867,7 @@ public abstract class SpellAbility {
      * </p>
      */
     public void resetPaidHash() {
-        paidLists = new HashMap<String, CardList>();
+        this.paidLists = new HashMap<String, CardList>();
     }
 
     /**
@@ -878,7 +879,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public HashMap<String, Object> getTriggeringObjects() {
-        return triggeringObjects;
+        return this.triggeringObjects;
     }
 
     /**
@@ -920,7 +921,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public Object getTriggeringObject(final String type) {
-        return triggeringObjects.get(type);
+        return this.triggeringObjects.get(type);
     }
 
     /**
@@ -934,7 +935,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public boolean hasTriggeringObject(final String type) {
-        return triggeringObjects.containsKey(type);
+        return this.triggeringObjects.containsKey(type);
     }
 
     /**
@@ -945,7 +946,7 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public void resetTriggeringObjects() {
-        triggeringObjects = new HashMap<String, Object>();
+        this.triggeringObjects = new HashMap<String, Object>();
     }
 
     /**
@@ -954,19 +955,19 @@ public abstract class SpellAbility {
      * </p>
      */
     public void resetOnceResolved() {
-        resetPaidHash();
+        this.resetPaidHash();
 
-        if (chosenTarget != null) {
-            chosenTarget.resetTargets();
+        if (this.getChosenTarget() != null) {
+            this.getChosenTarget().resetTargets();
         }
 
-        resetTriggeringObjects();
+        this.resetTriggeringObjects();
 
         // Clear SVars
-        for (String store : Card.getStorableSVars()) {
-            String value = sourceCard.getSVar(store);
+        for (final String store : Card.getStorableSVars()) {
+            final String value = this.sourceCard.getSVar(store);
             if (value.length() > 0) {
-                sourceCard.setSVar(store, "");
+                this.sourceCard.setSVar(store, "");
             }
         }
     }
@@ -979,7 +980,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.gui.input.Input} object.
      */
     public Input getAfterResolve() {
-        return afterResolve;
+        return this.afterResolve;
     }
 
     /**
@@ -991,7 +992,7 @@ public abstract class SpellAbility {
      *            a {@link forge.gui.input.Input} object.
      */
     public void setAfterResolve(final Input in) {
-        afterResolve = in;
+        this.afterResolve = in;
     }
 
     /**
@@ -1003,9 +1004,9 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setStackDescription(final String s) {
-        stackDescription = s;
-        if (description == "" && sourceCard.getText().equals("")) {
-            description = s;
+        this.stackDescription = s;
+        if ((this.description == "") && this.sourceCard.getText().equals("")) {
+            this.description = s;
         }
     }
 
@@ -1017,11 +1018,11 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getStackDescription() {
-        if (stackDescription.equals(getSourceCard().getText().trim())) {
-            return getSourceCard().getName() + " - " + getSourceCard().getText();
+        if (this.stackDescription.equals(this.getSourceCard().getText().trim())) {
+            return this.getSourceCard().getName() + " - " + this.getSourceCard().getText();
         }
 
-        return stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
+        return this.stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
     }
 
     /**
@@ -1032,7 +1033,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isIntrinsic() {
-        return type.equals("Intrinsic");
+        return this.type.equals("Intrinsic");
     }
 
     /**
@@ -1043,7 +1044,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isExtrinsic() {
-        return type.equals("Extrinsic");
+        return this.type.equals("Extrinsic");
     }
 
     /**
@@ -1051,12 +1052,12 @@ public abstract class SpellAbility {
      * Setter for the field <code>type</code>.
      * </p>
      * 
+     * Extrinsic or Intrinsic:
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public void setType(final String s) // Extrinsic or Intrinsic:
-    {
-        type = s;
+    public void setType(final String s) {
+        this.type = s;
     }
 
     /**
@@ -1066,9 +1067,9 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public String getType() // Extrinsic or Intrinsic:
-    {
-        return type;
+    public String getType() {
+     // Extrinsic or Intrinsic:
+        return this.type;
     }
 
     // setDescription() includes mana cost and everything like
@@ -1082,7 +1083,7 @@ public abstract class SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public void setDescription(final String s) {
-        description = s;
+        this.description = s;
     }
 
     /**
@@ -1093,18 +1094,18 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
 
-        if (isSuppressed()) {
+        if (this.isSuppressed()) {
             return "";
         }
 
-        return toUnsuppressedString();
+        return this.toUnsuppressedString();
     }
 
     /**
@@ -1114,7 +1115,7 @@ public abstract class SpellAbility {
      */
     public String toUnsuppressedString() {
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         SpellAbility node = this;
 
         while (node != null) {
@@ -1162,11 +1163,11 @@ public abstract class SpellAbility {
      * 
      * @return a {@link forge.Card} object.
      */
-    public  Card getTargetCard() {
-        if (targetCard == null) {
-            Target tgt = this.getTarget();
+    public Card getTargetCard() {
+        if (this.targetCard == null) {
+            final Target tgt = this.getTarget();
             if (tgt != null) {
-                ArrayList<Card> list = tgt.getTargetCards();
+                final ArrayList<Card> list = tgt.getTargetCards();
 
                 if (!list.isEmpty()) {
                     return list.get(0);
@@ -1175,7 +1176,7 @@ public abstract class SpellAbility {
             return null;
         }
 
-        return targetCard;
+        return this.targetCard;
     }
 
     /**
@@ -1188,25 +1189,26 @@ public abstract class SpellAbility {
      */
     public void setTargetCard(final Card card) {
         if (card == null) {
-            System.out.println(getSourceCard() + " - SpellAbility.setTargetCard() called with null for target card.");
+            System.out.println(this.getSourceCard()
+                    + " - SpellAbility.setTargetCard() called with null for target card.");
             return;
         }
 
-        Target tgt = this.getTarget();
+        final Target tgt = this.getTarget();
         if (tgt != null) {
             tgt.addTarget(card);
         } else {
-            targetPlayer = null; // reset setTargetPlayer()
-            targetCard = card;
+            this.targetPlayer = null; // reset setTargetPlayer()
+            this.targetCard = card;
         }
         String desc = "";
         if (null != card) {
             if (!card.isFaceDown()) {
-                desc = getSourceCard().getName() + " - targeting " + card;
+                desc = this.getSourceCard().getName() + " - targeting " + card;
             } else {
-                desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+                desc = this.getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
             }
-            setStackDescription(desc);
+            this.setStackDescription(desc);
         }
     }
 
@@ -1218,7 +1220,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.CardList} object.
      */
     public CardList getTargetList() {
-        return targetList;
+        return this.targetList;
     }
 
     /**
@@ -1236,22 +1238,22 @@ public abstract class SpellAbility {
         // not result in other bugs. :)
         // targetPlayer = null;//reset setTargetPlayer()
 
-        targetList = list;
-        StringBuilder sb = new StringBuilder();
-        sb.append(getSourceCard().getName()).append(" - targeting ");
-        for (int i = 0; i < targetList.size(); i++) {
+        this.targetList = list;
+        final StringBuilder sb = new StringBuilder();
+        sb.append(this.getSourceCard().getName()).append(" - targeting ");
+        for (int i = 0; i < this.targetList.size(); i++) {
 
-            if (!targetList.get(i).isFaceDown()) {
-                sb.append(targetList.get(i));
+            if (!this.targetList.get(i).isFaceDown()) {
+                sb.append(this.targetList.get(i));
             } else {
-                sb.append("Morph(").append(targetList.get(i).getUniqueNumber()).append(")");
+                sb.append("Morph(").append(this.targetList.get(i).getUniqueNumber()).append(")");
             }
 
-            if (i < targetList.size() - 1) {
+            if (i < (this.targetList.size() - 1)) {
                 sb.append(", ");
             }
         }
-        setStackDescription(sb.toString());
+        this.setStackDescription(sb.toString());
     }
 
     /**
@@ -1263,19 +1265,19 @@ public abstract class SpellAbility {
      *            a {@link forge.Player} object.
      */
     public void setTargetPlayer(final Player p) {
-        if (p == null || (!(p.isHuman() || p.isComputer()))) {
+        if ((p == null) || (!(p.isHuman() || p.isComputer()))) {
             throw new RuntimeException("SpellAbility : setTargetPlayer() error, argument is " + p + " source card is "
-                    + getSourceCard());
+                    + this.getSourceCard());
         }
 
-        Target tgt = this.getTarget();
+        final Target tgt = this.getTarget();
         if (tgt != null) {
             tgt.addTarget(p);
         } else {
-            targetCard = null; // reset setTargetCard()
-            targetPlayer = p;
+            this.targetCard = null; // reset setTargetCard()
+            this.targetPlayer = p;
         }
-        setStackDescription(getSourceCard().getName() + " - targeting " + p);
+        this.setStackDescription(this.getSourceCard().getName() + " - targeting " + p);
     }
 
     /**
@@ -1286,10 +1288,10 @@ public abstract class SpellAbility {
      * @return a {@link forge.Player} object.
      */
     public Player getTargetPlayer() {
-        if (targetPlayer == null) {
-            Target tgt = this.getTarget();
+        if (this.targetPlayer == null) {
+            final Target tgt = this.getTarget();
             if (tgt != null) {
-                ArrayList<Player> list = tgt.getTargetPlayers();
+                final ArrayList<Player> list = tgt.getTargetPlayers();
 
                 if (!list.isEmpty()) {
                     return list.get(0);
@@ -1297,7 +1299,7 @@ public abstract class SpellAbility {
             }
             return null;
         }
-        return targetPlayer;
+        return this.targetPlayer;
     }
 
     /**
@@ -1308,7 +1310,7 @@ public abstract class SpellAbility {
      * @return a {@link forge.Command} object.
      */
     public Command getCancelCommand() {
-        return cancelCommand;
+        return this.cancelCommand;
     }
 
     /**
@@ -1343,7 +1345,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isFlashBackAbility() {
-        return flashBackAbility;
+        return this.flashBackAbility;
     }
 
     /**
@@ -1366,7 +1368,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isKickerAbility() {
-        return kickerAbility;
+        return this.kickerAbility;
     }
 
     // Only used by Ability_Reflected_Mana, because the user has an option to
@@ -1395,7 +1397,7 @@ public abstract class SpellAbility {
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) this.clone();
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
         return clone;
@@ -1421,7 +1423,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public boolean isTrigger() {
-        return trigger;
+        return this.trigger;
     }
 
     /**
@@ -1448,11 +1450,11 @@ public abstract class SpellAbility {
      * setSourceTrigger.
      * </p>
      * 
-     * @param ID
+     * @param id
      *            a int.
      */
-    public void setSourceTrigger(final int ID) {
-        sourceTrigger = ID;
+    public void setSourceTrigger(final int id) {
+        this.sourceTrigger = id;
     }
 
     /**
@@ -1463,7 +1465,7 @@ public abstract class SpellAbility {
      * @return a int.
      */
     public int getSourceTrigger() {
-        return sourceTrigger;
+        return this.sourceTrigger;
     }
 
     /**
@@ -1486,7 +1488,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public final boolean isMandatory() {
-        return mandatory;
+        return this.mandatory;
     }
 
     /**
@@ -1499,7 +1501,7 @@ public abstract class SpellAbility {
      */
     public final SpellAbility getRootSpellAbility() {
         if (this instanceof Ability_Sub) {
-            SpellAbility parent = ((Ability_Sub) this).getParent();
+            final SpellAbility parent = ((Ability_Sub) this).getParent();
             if (parent != null) {
                 return parent.getRootSpellAbility();
             }
@@ -1517,9 +1519,9 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public final ArrayList<Target_Choices> getAllTargetChoices() {
-        ArrayList<Target_Choices> res = new ArrayList<Target_Choices>();
+        final ArrayList<Target_Choices> res = new ArrayList<Target_Choices>();
 
-        SpellAbility sa = getRootSpellAbility();
+        SpellAbility sa = this.getRootSpellAbility();
         if (sa.getTarget() != null) {
             res.add(sa.getTarget().getTargetChoices());
         }
@@ -1554,7 +1556,7 @@ public abstract class SpellAbility {
      *            the new temporarily suppressed
      */
     public final void setTemporarilySuppressed(final boolean supp) {
-        temporarilySuppressed = supp;
+        this.temporarilySuppressed = supp;
     }
 
     /**
@@ -1563,7 +1565,7 @@ public abstract class SpellAbility {
      * @return true, if is suppressed
      */
     public final boolean isSuppressed() {
-        return (temporarilySuppressed);
+        return (this.temporarilySuppressed);
     }
 
     /**
@@ -1575,7 +1577,7 @@ public abstract class SpellAbility {
      *            a boolean.
      */
     public final void setIsCharm(final boolean b) {
-        isCharm = b;
+        this.isCharm = b;
     }
 
     /**
@@ -1586,7 +1588,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public final boolean isCharm() {
-        return isCharm;
+        return this.isCharm;
     }
 
     /**
@@ -1598,7 +1600,7 @@ public abstract class SpellAbility {
      *            an int
      */
     public final void setCharmNumber(final int i) {
-        charmNumber = i;
+        this.charmNumber = i;
     }
 
     /**
@@ -1609,7 +1611,7 @@ public abstract class SpellAbility {
      * @return an int
      */
     public final int getCharmNumber() {
-        return charmNumber;
+        return this.charmNumber;
     }
 
     /**
@@ -1622,7 +1624,7 @@ public abstract class SpellAbility {
      * @since 1.1.6
      */
     public final void setMinCharmNumber(final int i) {
-        minCharmNumber = i;
+        this.minCharmNumber = i;
     }
 
     /**
@@ -1634,7 +1636,7 @@ public abstract class SpellAbility {
      * @since 1.1.6
      */
     public final int getMinCharmNumber() {
-        return minCharmNumber;
+        return this.minCharmNumber;
     }
 
     /**
@@ -1647,7 +1649,7 @@ public abstract class SpellAbility {
      * @since 1.1.6
      */
     public final void addCharmChoice(final SpellAbility sa) {
-        charmChoices.add(sa);
+        this.charmChoices.add(sa);
     }
 
     /**
@@ -1659,7 +1661,7 @@ public abstract class SpellAbility {
      * @since 1.1.6
      */
     public final ArrayList<SpellAbility> getCharmChoices() {
-        return charmChoices;
+        return this.charmChoices;
     }
 
     /**
@@ -1668,7 +1670,7 @@ public abstract class SpellAbility {
      * @return the isDelve
      */
     public final boolean getIsDelve() {
-        return isDelve;
+        return this.isDelve;
     }
 
     /**
@@ -1679,6 +1681,34 @@ public abstract class SpellAbility {
      */
     public final void setIsDelve(final boolean isDelve0) {
         this.isDelve = isDelve0; // TODO Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the ability
+     */
+    public static int getAbility() {
+        return ABILITY;
+    }
+
+    /**
+     * @return the spell
+     */
+    public static int getSpell() {
+        return SPELL;
+    }
+
+    /**
+     * @return the chosenTarget
+     */
+    public Target getChosenTarget() {
+        return chosenTarget;
+    }
+
+    /**
+     * @param chosenTarget the chosenTarget to set
+     */
+    public void setChosenTarget(Target chosenTarget) {
+        this.chosenTarget = chosenTarget; // TODO: Add 0 to parameter's name.
     }
 
 }

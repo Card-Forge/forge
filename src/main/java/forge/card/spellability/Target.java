@@ -36,7 +36,7 @@ public class Target {
      * @return a {@link forge.card.spellability.Target_Choices} object.
      */
     public final Target_Choices getTargetChoices() {
-        return choice;
+        return this.choice;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Target {
      *            a {@link forge.card.spellability.Target_Choices} object.
      */
     public final void setTargetChoices(final Target_Choices tc) {
-        choice = tc;
+        this.choice = tc;
     }
 
     private boolean bMandatory = false;
@@ -61,7 +61,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean getMandatory() {
-        return bMandatory;
+        return this.bMandatory;
     }
 
     /**
@@ -73,11 +73,11 @@ public class Target {
      *            a boolean.
      */
     public final void setMandatory(final boolean m) {
-        bMandatory = m;
+        this.bMandatory = m;
     }
 
     private boolean tgtValid = false;
-    private String[] ValidTgts;
+    private String[] validTgts;
     private String vtSelection = "";
 
     /**
@@ -88,7 +88,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean doesTarget() {
-        return tgtValid;
+        return this.tgtValid;
     }
 
     /**
@@ -99,7 +99,7 @@ public class Target {
      * @return an array of {@link java.lang.String} objects.
      */
     public final String[] getValidTgts() {
-        return ValidTgts;
+        return this.validTgts;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getVTSelection() {
-        return vtSelection;
+        return this.vtSelection;
     }
 
     private String minTargets;
@@ -128,7 +128,7 @@ public class Target {
      * @return a int.
      */
     public final int getMinTargets(final Card c, final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(c, minTargets, sa);
+        return AbilityFactory.calculateAmount(c, this.minTargets, sa);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Target {
      * @return a int.
      */
     public final int getMaxTargets(final Card c, final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(c, maxTargets, sa);
+        return AbilityFactory.calculateAmount(c, this.maxTargets, sa);
     }
 
     /**
@@ -158,7 +158,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
-        return choice != null && getMaxTargets(c, sa) == choice.getNumTargeted();
+        return (this.choice != null) && (this.getMaxTargets(c, sa) == this.choice.getNumTargeted());
     }
 
     /**
@@ -173,10 +173,10 @@ public class Target {
      * @return a boolean.
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
-        if (getMinTargets(c, sa) == 0) {
+        if (this.getMinTargets(c, sa) == 0) {
             return true;
         }
-        return choice != null && getMinTargets(c, sa) <= choice.getNumTargeted();
+        return (this.choice != null) && (this.getMinTargets(c, sa) <= this.choice.getNumTargeted());
     }
 
     private List<Constant.Zone> tgtZone = Arrays.asList(Constant.Zone.Battlefield);
@@ -190,7 +190,7 @@ public class Target {
      *            a {@link java.lang.String} object.
      */
     public final void setZone(final Constant.Zone tZone) {
-        tgtZone = Arrays.asList(tZone);
+        this.tgtZone = Arrays.asList(tZone);
     }
 
     /**
@@ -200,7 +200,7 @@ public class Target {
      *            the new zone
      */
     public final void setZone(final List<Constant.Zone> tZone) {
-        tgtZone = tZone;
+        this.tgtZone = tZone;
     }
 
     /**
@@ -211,7 +211,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final List<Constant.Zone> getZone() {
-        return tgtZone;
+        return this.tgtZone;
     }
 
     // Used for Counters. Currently, Spell,Activated,Triggered can be
@@ -227,7 +227,7 @@ public class Target {
      *            a {@link java.lang.String} object.
      */
     public final void setTargetSpellAbilityType(final String tgtSAType) {
-        targetSpellAbilityType = tgtSAType;
+        this.targetSpellAbilityType = tgtSAType;
     }
 
     /**
@@ -238,7 +238,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getTargetSpellAbilityType() {
-        return targetSpellAbilityType;
+        return this.targetSpellAbilityType;
     }
 
     // Used for Counters. The target SA of this SA must be targeting a Valid X
@@ -253,7 +253,7 @@ public class Target {
      *            a {@link java.lang.String} object.
      */
     public final void setSAValidTargeting(final String saValidTgting) {
-        saValidTargeting = saValidTgting;
+        this.saValidTargeting = saValidTgting;
     }
 
     /**
@@ -264,7 +264,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getSAValidTargeting() {
-        return saValidTargeting;
+        return this.saValidTargeting;
     }
 
     // Leaving old structure behind for compatibility.
@@ -278,20 +278,20 @@ public class Target {
      * @return a boolean.
      */
     public final boolean addTarget(final Object o) {
-        if (choice == null) {
-            choice = new Target_Choices();
+        if (this.choice == null) {
+            this.choice = new Target_Choices();
         }
 
         if (o instanceof Card) {
-            return choice.addTarget((Card) o);
+            return this.choice.addTarget((Card) o);
         }
 
         if (o instanceof Player) {
-            return choice.addTarget((Player) o);
+            return this.choice.addTarget((Player) o);
         }
 
         if (o instanceof SpellAbility) {
-            return choice.addTarget((SpellAbility) o);
+            return this.choice.addTarget((SpellAbility) o);
         }
 
         return false;
@@ -305,11 +305,11 @@ public class Target {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Card> getTargetCards() {
-        if (choice == null) {
+        if (this.choice == null) {
             return new ArrayList<Card>();
         }
 
-        return choice.getTargetCards();
+        return this.choice.getTargetCards();
     }
 
     /**
@@ -320,11 +320,11 @@ public class Target {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Player> getTargetPlayers() {
-        if (choice == null) {
+        if (this.choice == null) {
             return new ArrayList<Player>();
         }
 
-        return choice.getTargetPlayers();
+        return this.choice.getTargetPlayers();
     }
 
     /**
@@ -335,11 +335,11 @@ public class Target {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SpellAbility> getTargetSAs() {
-        if (choice == null) {
+        if (this.choice == null) {
             return new ArrayList<SpellAbility>();
         }
 
-        return choice.getTargetSAs();
+        return this.choice.getTargetSAs();
     }
 
     /**
@@ -350,11 +350,11 @@ public class Target {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Object> getTargets() {
-        if (choice == null) {
+        if (this.choice == null) {
             return new ArrayList<Object>();
         }
 
-        return choice.getTargets();
+        return this.choice.getTargets();
     }
 
     /**
@@ -365,10 +365,10 @@ public class Target {
      * @return a int.
      */
     public final int getNumTargeted() {
-        if (choice == null) {
+        if (this.choice == null) {
             return 0;
         }
-        return choice.getNumTargeted();
+        return this.choice.getNumTargeted();
     }
 
     /**
@@ -377,7 +377,7 @@ public class Target {
      * </p>
      */
     public final void resetTargets() {
-        choice = null;
+        this.choice = null;
     }
 
     /**
@@ -413,8 +413,8 @@ public class Target {
         // C = Creature P=Player/Planeswalker
         // CP = All three
 
-        tgtValid = true;
-        srcCard = src;
+        this.tgtValid = true;
+        this.srcCard = src;
 
         if (parse.contains("Tgt")) {
             parse = parse.replace("Tgt", "");
@@ -422,7 +422,7 @@ public class Target {
 
         String valid;
         String prompt;
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (parse.equals("CP")) {
             valid = "Creature,Planeswalker.YouDontCtrl,Player";
@@ -442,11 +442,11 @@ public class Target {
             sb.append(src + " - ");
         }
         sb.append(prompt);
-        vtSelection = sb.toString();
-        ValidTgts = valid.split(",");
+        this.vtSelection = sb.toString();
+        this.validTgts = valid.split(",");
 
-        minTargets = min;
-        maxTargets = max;
+        this.minTargets = min;
+        this.maxTargets = max;
     }
 
     /**
@@ -498,13 +498,13 @@ public class Target {
      *            a {@link java.lang.String} object.
      */
     public Target(final Card src, final String select, final String[] valid, final String min, final String max) {
-        srcCard = src;
-        tgtValid = true;
-        vtSelection = select;
-        ValidTgts = valid;
+        this.srcCard = src;
+        this.tgtValid = true;
+        this.vtSelection = select;
+        this.validTgts = valid;
 
-        minTargets = min;
-        maxTargets = max;
+        this.minTargets = min;
+        this.maxTargets = max;
     }
 
     /**
@@ -515,15 +515,15 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getTargetedString() {
-        ArrayList<Object> tgts = getTargets();
-        StringBuilder sb = new StringBuilder("");
-        for (Object o : tgts) {
+        final ArrayList<Object> tgts = this.getTargets();
+        final StringBuilder sb = new StringBuilder("");
+        for (final Object o : tgts) {
             if (o instanceof Player) {
-                Player p = (Player) o;
+                final Player p = (Player) o;
                 sb.append(p.getName());
             }
             if (o instanceof Card) {
-                Card c = (Card) o;
+                final Card c = (Card) o;
                 sb.append(c);
             }
             sb.append(" ");
@@ -542,7 +542,7 @@ public class Target {
     public final boolean canOnlyTgtOpponent() {
         boolean player = false;
         boolean opponent = false;
-        for (String s : ValidTgts) {
+        for (final String s : this.validTgts) {
             if (s.equals("Opponent")) {
                 opponent = true;
             } else if (s.equals("Player")) {
@@ -560,7 +560,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean canTgtPlayer() {
-        for (String s : ValidTgts) {
+        for (final String s : this.validTgts) {
             if (s.equals("Player") || s.equals("Opponent")) {
                 return true;
             }
@@ -577,7 +577,7 @@ public class Target {
      */
 
     public final boolean canTgtPermanent() {
-        for (String s : ValidTgts) {
+        for (final String s : this.validTgts) {
             if (s.contains("Permanent")) {
                 return true;
             }
@@ -591,7 +591,7 @@ public class Target {
      * @return true, if successful
      */
     public final boolean canTgtCreature() {
-        for (String s : ValidTgts) {
+        for (final String s : this.validTgts) {
             if (s.contains("Creature") && !s.contains("nonCreature")) {
                 return true;
             }
@@ -607,7 +607,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean canTgtCreatureAndPlayer() {
-        return canTgtPlayer() && canTgtCreature();
+        return this.canTgtPlayer() && this.canTgtCreature();
     }
 
     /**
@@ -621,13 +621,13 @@ public class Target {
      * @return a boolean.
      */
     public final boolean hasCandidates(final boolean isTargeted) {
-        if (canTgtPlayer()) {
+        if (this.canTgtPlayer()) {
             return true;
         }
 
-        for (Card c : AllZoneUtil.getCardsIn(tgtZone)) {
-            if (c.isValid(ValidTgts, srcCard.getController(), srcCard)
-                    && (!isTargeted || CardFactoryUtil.canTarget(srcCard, c))) {
+        for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
+            if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
+                    && (!isTargeted || CardFactoryUtil.canTarget(this.srcCard, c))) {
                 return true;
             }
         }
@@ -641,7 +641,7 @@ public class Target {
      * @return true, if is unique targets
      */
     public final boolean isUniqueTargets() {
-        return uniqueTargets;
+        return this.uniqueTargets;
     }
 
     /**

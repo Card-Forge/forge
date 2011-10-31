@@ -104,7 +104,7 @@ public class Input_PayManaCost_Ability extends Input {
     public Input_PayManaCost_Ability(final String m, final String manaCost_2,
             final Command paidCommand_2, final Command unpaidCommand_2,
             final boolean showOKButton) {
-        fakeAbility = new SpellAbility(SpellAbility.Ability, null) {
+        fakeAbility = new SpellAbility(SpellAbility.getAbility(), null) {
             @Override
             public void resolve() {
             }

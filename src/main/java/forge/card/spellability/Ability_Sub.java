@@ -27,7 +27,7 @@ public abstract class Ability_Sub extends SpellAbility implements java.io.Serial
      *            a {@link forge.card.spellability.Target} object.
      */
     public Ability_Sub(final Card sourceCard, final Target tgt) {
-        super(SpellAbility.Ability, sourceCard);
+        super(SpellAbility.getAbility(), sourceCard);
         this.setTarget(tgt);
     }
 

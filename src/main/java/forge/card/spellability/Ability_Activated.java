@@ -52,11 +52,11 @@ public abstract class Ability_Activated extends SpellAbility implements java.io.
      *            a {@link forge.card.spellability.Target} object.
      */
     public Ability_Activated(final Card sourceCard, final Cost abCost, final Target tgt) {
-        super(SpellAbility.Ability, sourceCard);
-        setManaCost(abCost.getTotalMana());
-        setPayCosts(abCost);
-        if (tgt != null && tgt.doesTarget()) {
-            setTarget(tgt);
+        super(SpellAbility.getAbility(), sourceCard);
+        this.setManaCost(abCost.getTotalMana());
+        this.setPayCosts(abCost);
+        if ((tgt != null) && tgt.doesTarget()) {
+            this.setTarget(tgt);
         }
     }
 
@@ -67,26 +67,27 @@ public abstract class Ability_Activated extends SpellAbility implements java.io.
             return false;
         }
 
-        final Card c = getSourceCard();
-        if (c.isFaceDown() && isIntrinsic()) { // Intrinsic abilities can't be
-                                               // activated by face down cards
+        final Card c = this.getSourceCard();
+        if (c.isFaceDown() && this.isIntrinsic()) { // Intrinsic abilities can't
+                                                    // be
+            // activated by face down cards
             return false;
         }
 
-        Player activator = getActivatingPlayer();
+        final Player activator = this.getActivatingPlayer();
 
         // CantBeActivated static abilities
-        CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        for (Card ca : allp) {
-            ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (StaticAbility stAb : staticAbilities) {
+        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (final Card ca : allp) {
+            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeActivated", c, activator)) {
                     return false;
                 }
             }
         }
 
-        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || isSuppressed()) {
+        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
             return false;
         }
 
@@ -94,19 +95,20 @@ public abstract class Ability_Activated extends SpellAbility implements java.io.
         pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
         pithing = pithing.getName("Pithing Needle");
         pithing = pithing.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card crd) {
                 return crd.getSVar("PithingTarget").equals(c.getName());
             }
         });
 
-        if (pithing.size() != 0 && !(this instanceof Ability_Mana)) {
+        if ((pithing.size() != 0) && !(this instanceof Ability_Mana)) {
             return false;
         }
 
-        if (!(getRestrictions().canPlay(c, this))) {
+        if (!(this.getRestrictions().canPlay(c, this))) {
             return false;
         }
 
-        return Cost_Payment.canPayAdditionalCosts(payCosts, this);
+        return Cost_Payment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
 }

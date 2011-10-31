@@ -2638,7 +2638,7 @@ public class CardFactory_Creatures {
                     abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
                     final SpellAbility myAb = createAb.getAbility(abilityBuilder.toString(), card);
 
-                    myAb.getTarget().setTargetChoices(this.chosenTarget.getTargetChoices());
+                    myAb.getTarget().setTargetChoices(this.getChosenTarget().getTargetChoices());
                     myAb.resolve();
                 }
 

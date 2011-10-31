@@ -41,94 +41,99 @@ public class Spell_Permanent extends Spell {
 
         @Override
         public void showMessage() {
-            CardList choice = (CardList) championGetCreature.execute();
+            final CardList choice = (CardList) Spell_Permanent.this.championGetCreature.execute();
 
-            stopSetNext(CardFactoryUtil.inputTargetChampionSac(getSourceCard(), championAbilityComes, choice,
-                    "Select another " + championValidDesc + " you control to exile", false, false));
+            this.stopSetNext(CardFactoryUtil.inputTargetChampionSac(Spell_Permanent.this.getSourceCard(),
+                    Spell_Permanent.this.championAbilityComes, choice, "Select another "
+                            + Spell_Permanent.this.championValidDesc + " you control to exile", false, false));
             ButtonUtil.disableAll(); // target this card means: sacrifice this
                                      // card
         }
     };
 
     private final CommandReturn championGetCreature = new CommandReturn() {
+        @Override
         public Object execute() {
-            CardList cards = getSourceCard().getController().getCardsIn(Zone.Battlefield);
-            return cards.getValidCards(championValid, getSourceCard().getController(), getSourceCard());
+            final CardList cards = Spell_Permanent.this.getSourceCard().getController().getCardsIn(Zone.Battlefield);
+            return cards.getValidCards(Spell_Permanent.this.championValid, Spell_Permanent.this.getSourceCard()
+                    .getController(), Spell_Permanent.this.getSourceCard());
         }
     }; // CommandReturn
 
     /** The champion ability comes. */
-    private final SpellAbility championAbilityComes = new Ability(getSourceCard(), "0") {
+    private final SpellAbility championAbilityComes = new Ability(this.getSourceCard(), "0") {
         @Override
         public void resolve() {
 
-            Card source = getSourceCard();
-            Player controller = source.getController();
+            final Card source = this.getSourceCard();
+            final Player controller = source.getController();
 
-            CardList creature = (CardList) championGetCreature.execute();
+            final CardList creature = (CardList) Spell_Permanent.this.championGetCreature.execute();
             if (creature.size() == 0) {
                 AllZone.getGameAction().sacrifice(source);
                 return;
             } else if (controller.isHuman()) {
-                AllZone.getInputControl().setInput(championInputComes);
+                AllZone.getInputControl().setInput(Spell_Permanent.this.championInputComes);
             } else { // Computer
                 CardList computer = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                computer = computer.getValidCards(championValid, controller, source);
+                computer = computer.getValidCards(Spell_Permanent.this.championValid, controller, source);
                 computer.remove(source);
 
                 computer.shuffle();
                 if (computer.size() != 0) {
-                    Card c = computer.get(0);
+                    final Card c = computer.get(0);
                     source.setChampionedCard(c);
                     if (AllZoneUtil.isCardInPlay(c)) {
                         AllZone.getGameAction().exile(c);
                     }
 
                     // Run triggers
-                    HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
                     AllZone.getTriggerHandler().runTrigger("Championed", runParams);
                 } else {
-                    AllZone.getGameAction().sacrifice(getSourceCard());
+                    AllZone.getGameAction().sacrifice(this.getSourceCard());
                 }
             } // computer
         } // resolve()
     };
 
     /** The champion command comes. */
-    private Command championCommandComes = new Command() {
+    private final Command championCommandComes = new Command() {
 
         private static final long serialVersionUID = -3580408066322945328L;
 
+        @Override
         public void execute() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(getSourceCard()).append(
+            final StringBuilder sb = new StringBuilder();
+            sb.append(Spell_Permanent.this.getSourceCard()).append(
                     " - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
-            championAbilityComes.setStackDescription(sb.toString());
-            AllZone.getStack().addSimultaneousStackEntry(championAbilityComes);
+            Spell_Permanent.this.championAbilityComes.setStackDescription(sb.toString());
+            AllZone.getStack().addSimultaneousStackEntry(Spell_Permanent.this.championAbilityComes);
         } // execute()
     }; // championCommandComes
 
     /** The champion command leaves play. */
-    private Command championCommandLeavesPlay = new Command() {
+    private final Command championCommandLeavesPlay = new Command() {
 
         private static final long serialVersionUID = -5903638227914705191L;
 
+        @Override
         public void execute() {
 
-            SpellAbility ability = new Ability(getSourceCard(), "0") {
+            final SpellAbility ability = new Ability(Spell_Permanent.this.getSourceCard(), "0") {
                 @Override
                 public void resolve() {
-                    Card c = getSourceCard().getChampionedCard();
-                    if (c != null && !c.isToken() && AllZoneUtil.isCardExiled(c)) {
+                    final Card c = this.getSourceCard().getChampionedCard();
+                    if ((c != null) && !c.isToken() && AllZoneUtil.isCardExiled(c)) {
                         AllZone.getGameAction().moveToPlay(c);
                     }
                 } // resolve()
             }; // SpellAbility
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(getSourceCard()).append(
+            final StringBuilder sb = new StringBuilder();
+            sb.append(Spell_Permanent.this.getSourceCard()).append(
                     " - When CARDNAME leaves the battlefield, exiled card returns to the battlefield.");
             ability.setStackDescription(sb.toString());
 
@@ -184,36 +189,36 @@ public class Spell_Permanent extends Spell {
         super(sourceCard, cost, tgt);
 
         if (CardFactoryUtil.hasKeyword(sourceCard, "Champion") != -1) {
-            int n = CardFactoryUtil.hasKeyword(sourceCard, "Champion");
+            final int n = CardFactoryUtil.hasKeyword(sourceCard, "Champion");
 
-            String toParse = sourceCard.getKeyword().get(n).toString();
-            String[] parsed = toParse.split(":");
-            willChampion = true;
-            championValid = parsed[1];
+            final String toParse = sourceCard.getKeyword().get(n).toString();
+            final String[] parsed = toParse.split(":");
+            this.willChampion = true;
+            this.championValid = parsed[1];
             if (parsed.length > 2) {
-                championValidDesc = parsed[2];
+                this.championValidDesc = parsed[2];
             } else {
-                championValidDesc = championValid;
+                this.championValidDesc = this.championValid;
             }
         }
 
         if (sourceCard.isCreature()) {
 
-            StringBuilder sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder();
             sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
             sb.append(" / ").append(sourceCard.getNetDefense());
-            setStackDescription(sb.toString());
+            this.setStackDescription(sb.toString());
         } else {
-            setStackDescription(sourceCard.getName());
+            this.setStackDescription(sourceCard.getName());
         }
 
         if (setDesc) {
-            setDescription(getStackDescription());
+            this.setDescription(this.getStackDescription());
         }
 
-        if (willChampion) {
-            sourceCard.addComesIntoPlayCommand(championCommandComes);
-            sourceCard.addLeavesPlayCommand(championCommandLeavesPlay);
+        if (this.willChampion) {
+            sourceCard.addComesIntoPlayCommand(this.championCommandComes);
+            sourceCard.addLeavesPlayCommand(this.championCommandLeavesPlay);
         }
 
     } // Spell_Permanent()
@@ -221,12 +226,12 @@ public class Spell_Permanent extends Spell {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        Card source = getSourceCard();
+        final Card source = this.getSourceCard();
 
-        Player turn = AllZone.getPhase().getPlayerTurn();
+        final Player turn = AllZone.getPhase().getPlayerTurn();
 
         if (source.getName().equals("Serra Avenger")) {
-            if (turn.equals(source.getController()) && turn.getTurn() <= 3) {
+            if (turn.equals(source.getController()) && (turn.getTurn() <= 3)) {
                 return false;
             }
         }
@@ -239,11 +244,11 @@ public class Spell_Permanent extends Spell {
     @Override
     public boolean canPlayAI() {
 
-        Card card = getSourceCard();
+        final Card card = this.getSourceCard();
 
         // check on legendary
         if (card.isType("Legendary")) {
-            CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
             if (list.containsName(card.getName())) {
                 return false;
             }
@@ -253,8 +258,8 @@ public class Spell_Permanent extends Spell {
             list = list.getType("Planeswalker");
 
             for (int i = 0; i < list.size(); i++) {
-                String subtype = card.getType().get(card.getType().size() - 1);
-                CardList cl = list.getType(subtype);
+                final String subtype = card.getType().get(card.getType().size() - 1);
+                final CardList cl = list.getType(subtype);
 
                 if (cl.size() > 0) {
                     return false;
@@ -269,24 +274,24 @@ public class Spell_Permanent extends Spell {
             }
         }
 
-        if (card.isCreature() && card.getNetDefense() <= 0 && !card.hasStartOfKeyword("etbCounter")
+        if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
                 && !card.getText().contains("Modular")) {
             return false;
         }
 
-        if (willChampion) {
-            Object o = championGetCreature.execute();
+        if (this.willChampion) {
+            final Object o = this.championGetCreature.execute();
             if (o == null) {
                 return false;
             }
 
-            CardList cl = (CardList) championGetCreature.execute();
-            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(getSourceCard()).is(Constant.Zone.Hand)) {
+            final CardList cl = (CardList) this.championGetCreature.execute();
+            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand)) {
                 return false;
             }
         }
 
-        if (!checkETBEffects(card, this, null)) {
+        if (!Spell_Permanent.checkETBEffects(card, this, null)) {
             return false;
         }
 
@@ -308,11 +313,11 @@ public class Spell_Permanent extends Spell {
      */
     public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
         // Trigger play improvements
-        ArrayList<Trigger> triggers = card.getTriggers();
-        for (Trigger tr : triggers) {
+        final ArrayList<Trigger> triggers = card.getTriggers();
+        for (final Trigger tr : triggers) {
             // These triggers all care for ETB effects
 
-            HashMap<String, String> params = tr.getMapParams();
+            final HashMap<String, String> params = tr.getMapParams();
             if (!params.get("Mode").equals("ChangesZone")) {
                 continue;
             }
@@ -335,14 +340,14 @@ public class Spell_Permanent extends Spell {
             }
 
             // Maybe better considerations
-            AbilityFactory af = new AbilityFactory();
-            String execute = params.get("Execute");
+            final AbilityFactory af = new AbilityFactory();
+            final String execute = params.get("Execute");
             if (execute == null) {
                 continue;
             }
-            SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
+            final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if (api != null && !af.getAPI().equals(api)) {
+            if ((api != null) && !af.getAPI().equals(api)) {
                 continue;
             }
 
@@ -355,7 +360,7 @@ public class Spell_Permanent extends Spell {
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an
             // Ability_Sub.
-            if (exSA instanceof Ability_Sub && !exSA.doTrigger(false)) {
+            if ((exSA instanceof Ability_Sub) && !exSA.doTrigger(false)) {
                 // AI would not run this trigger if given the chance
 
                 // if trigger is mandatory, return false
@@ -373,7 +378,7 @@ public class Spell_Permanent extends Spell {
     /** {@inheritDoc} */
     @Override
     public void resolve() {
-        Card c = getSourceCard();
+        final Card c = this.getSourceCard();
         AllZone.getGameAction().moveToPlay(c);
     }
 }

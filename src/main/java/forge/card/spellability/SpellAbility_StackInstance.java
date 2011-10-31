@@ -36,9 +36,6 @@ public class SpellAbility_StackInstance {
     /** The activating player. */
     private Player activatingPlayer = null;
 
-    /** The activated from. */
-    private String activatedFrom = null;
-
     /** The stack description. */
     private String stackDescription = null;
 
@@ -60,7 +57,7 @@ public class SpellAbility_StackInstance {
     // Triggers
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 
-    private HashMap<String, String> storedSVars = new HashMap<String, String>();
+    private final HashMap<String, String> storedSVars = new HashMap<String, String>();
 
     /**
      * <p>
@@ -72,41 +69,41 @@ public class SpellAbility_StackInstance {
      */
     public SpellAbility_StackInstance(final SpellAbility sa) {
         // Base SA info
-        ability = sa;
-        stackDescription = ability.getStackDescription();
-        activatingPlayer = sa.getActivatingPlayer();
+        this.ability = sa;
+        this.stackDescription = this.ability.getStackDescription();
+        this.activatingPlayer = sa.getActivatingPlayer();
 
         // Payment info
-        paidHash = ability.getPaidHash();
-        ability.resetPaidHash();
+        this.paidHash = this.ability.getPaidHash();
+        this.ability.resetPaidHash();
 
         // TODO getXManaCostPaid should be on the SA, not the Card
-        xManaPaid = sa.getSourceCard().getXManaCostPaid();
+        this.xManaPaid = sa.getSourceCard().getXManaCostPaid();
 
         // Triggering info
-        triggeringObjects = sa.getTriggeringObjects();
+        this.triggeringObjects = sa.getTriggeringObjects();
 
-        Ability_Sub subAb = ability.getSubAbility();
+        final Ability_Sub subAb = this.ability.getSubAbility();
         if (subAb != null) {
-            subInstace = new SpellAbility_StackInstance(subAb);
+            this.subInstace = new SpellAbility_StackInstance(subAb);
         }
 
         // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
         // because otherwise AF_DealDamage SubAbilities that use Defined$
         // Targeted breaks (since it's parents target is reset)
-        Target target = sa.getTarget();
+        final Target target = sa.getTarget();
         if (target != null) {
-            tc = target.getTargetChoices();
-            ability.getTarget().resetTargets();
+            this.tc = target.getTargetChoices();
+            this.ability.getTarget().resetTargets();
         }
 
-        Card source = ability.getSourceCard();
+        final Card source = this.ability.getSourceCard();
 
         // Store SVars and Clear
-        for (String store : Card.getStorableSVars()) {
-            String value = source.getSVar(store);
+        for (final String store : Card.getStorableSVars()) {
+            final String value = source.getSVar(store);
             if (value.length() > 0) {
-                storedSVars.put(store, value);
+                this.storedSVars.put(store, value);
                 source.setSVar(store, "");
             }
         }
@@ -120,34 +117,34 @@ public class SpellAbility_StackInstance {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellAbility() {
-        if (ability.getTarget() != null) {
-            ability.getTarget().resetTargets();
-            ability.getTarget().setTargetChoices(tc);
+        if (this.ability.getTarget() != null) {
+            this.ability.getTarget().resetTargets();
+            this.ability.getTarget().setTargetChoices(this.tc);
         }
-        ability.setActivatingPlayer(activatingPlayer);
+        this.ability.setActivatingPlayer(this.activatingPlayer);
 
         // Saved sub-SA needs to be reset on the way out
         if (this.subInstace != null) {
-            ability.setSubAbility((Ability_Sub) this.subInstace.getSpellAbility());
+            this.ability.setSubAbility((Ability_Sub) this.subInstace.getSpellAbility());
         }
 
         // Set Cost specific things here
-        ability.setPaidHash(paidHash);
-        ability.getSourceCard().setXManaCostPaid(xManaPaid);
+        this.ability.setPaidHash(this.paidHash);
+        this.ability.getSourceCard().setXManaCostPaid(this.xManaPaid);
 
         // Triggered
-        ability.setAllTriggeringObjects(triggeringObjects);
+        this.ability.setAllTriggeringObjects(this.triggeringObjects);
 
         // Add SVars back in
-        Card source = ability.getSourceCard();
-        for (String store : storedSVars.keySet()) {
-            String value = storedSVars.get(store);
+        final Card source = this.ability.getSourceCard();
+        for (final String store : this.storedSVars.keySet()) {
+            final String value = this.storedSVars.get(store);
             if (value.length() > 0) {
                 source.setSVar(store, value);
             }
         }
 
-        return ability;
+        return this.ability;
     }
 
     // A bit of SA shared abilities to restrict conflicts
@@ -159,7 +156,7 @@ public class SpellAbility_StackInstance {
      * @return a {@link java.lang.String} object.
      */
     public final String getStackDescription() {
-        return stackDescription;
+        return this.stackDescription;
     }
 
     /**
@@ -170,7 +167,7 @@ public class SpellAbility_StackInstance {
      * @return a {@link forge.Card} object.
      */
     public final Card getSourceCard() {
-        return ability.getSourceCard();
+        return this.ability.getSourceCard();
     }
 
     /**
@@ -181,7 +178,7 @@ public class SpellAbility_StackInstance {
      * @return a {@link forge.Player} object.
      */
     public final Player getActivatingPlayer() {
-        return activatingPlayer;
+        return this.activatingPlayer;
     }
 
     /**
@@ -192,7 +189,7 @@ public class SpellAbility_StackInstance {
      * @return a boolean.
      */
     public final boolean isSpell() {
-        return ability.isSpell();
+        return this.ability.isSpell();
     }
 
     /**
@@ -203,7 +200,7 @@ public class SpellAbility_StackInstance {
      * @return a boolean.
      */
     public final boolean isAbility() {
-        return ability.isAbility();
+        return this.ability.isAbility();
     }
 
     /**
@@ -214,7 +211,7 @@ public class SpellAbility_StackInstance {
      * @return a boolean.
      */
     public final boolean isTrigger() {
-        return ability.isTrigger();
+        return this.ability.isTrigger();
     }
 
     /**
@@ -227,7 +224,7 @@ public class SpellAbility_StackInstance {
      * @return a boolean.
      */
     public final boolean isStateTrigger(final int id) {
-        return ability.getSourceTrigger() == id;
+        return this.ability.getSourceTrigger() == id;
     }
 
     /**
@@ -236,6 +233,6 @@ public class SpellAbility_StackInstance {
      * @return true, if is optional trigger
      */
     public final boolean isOptionalTrigger() {
-        return ability.isOptionalTrigger();
+        return this.ability.isOptionalTrigger();
     }
 }

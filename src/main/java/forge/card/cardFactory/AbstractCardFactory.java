@@ -94,7 +94,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
      *            a {@link java.io.File} object.
      */
     protected AbstractCardFactory(final File file) {
-        final SpellAbility spell = new SpellAbility(SpellAbility.Spell, this.blankCard) {
+        final SpellAbility spell = new SpellAbility(SpellAbility.getSpell(), this.blankCard) {
             // neither computer nor human play can play this card
             @Override
             public boolean canPlay() {

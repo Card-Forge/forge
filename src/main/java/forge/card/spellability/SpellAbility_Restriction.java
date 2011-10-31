@@ -51,56 +51,56 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
      */
     public final void setRestrictions(final HashMap<String, String> params) {
         if (params.containsKey("Activation")) {
-            String value = params.get("Activation");
+            final String value = params.get("Activation");
             if (value.equals("Threshold")) {
-                setThreshold(true);
+                this.setThreshold(true);
             }
             if (value.equals("Metalcraft")) {
-                setMetalcraft(true);
+                this.setMetalcraft(true);
             }
             if (value.equals("Hellbent")) {
-                setHellbent(true);
+                this.setHellbent(true);
             }
             if (value.startsWith("Prowl")) {
-                ArrayList<String> prowlTypes = new ArrayList<String>();
+                final ArrayList<String> prowlTypes = new ArrayList<String>();
                 prowlTypes.add("Rogue");
                 if (value.split("Prowl").length > 1) {
                     prowlTypes.add(value.split("Prowl")[1]);
                 }
-                setProwl(prowlTypes);
+                this.setProwl(prowlTypes);
             }
         }
 
         if (params.containsKey("ActivationZone")) {
-            setZone(Zone.smartValueOf(params.get("ActivationZone")));
+            this.setZone(Zone.smartValueOf(params.get("ActivationZone")));
         }
 
         if (params.containsKey("Flashback")) {
-            setZone(Zone.Graveyard);
+            this.setZone(Zone.Graveyard);
         }
 
         if (params.containsKey("SorcerySpeed")) {
-            setSorcerySpeed(true);
+            this.setSorcerySpeed(true);
         }
 
         if (params.containsKey("PlayerTurn")) {
-            setPlayerTurn(true);
+            this.setPlayerTurn(true);
         }
 
         if (params.containsKey("OpponentTurn")) {
-            setOpponentTurn(true);
+            this.setOpponentTurn(true);
         }
 
         if (params.containsKey("AnyPlayer")) {
-            setAnyPlayer(true);
+            this.setAnyPlayer(true);
         }
 
         if (params.containsKey("ActivationLimit")) {
-            setActivationLimit(Integer.parseInt(params.get("ActivationLimit")));
+            this.setActivationLimit(Integer.parseInt(params.get("ActivationLimit")));
         }
 
         if (params.containsKey("ActivationNumberSacrifice")) {
-            setActivationNumberSacrifice(Integer.parseInt(params.get("ActivationNumberSacrifice")));
+            this.setActivationNumberSacrifice(Integer.parseInt(params.get("ActivationNumberSacrifice")));
         }
 
         if (params.containsKey("ActivationPhases")) {
@@ -112,50 +112,50 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
                 // Draw-> (After Upkeep)
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
-                String[] split = phases.split("->", 2);
+                final String[] split = phases.split("->", 2);
                 phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
             }
 
-            setPhases(phases);
+            this.setPhases(phases);
         }
 
         if (params.containsKey("ActivationCardsInHand")) {
-            setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
+            this.setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
         }
 
         if (params.containsKey("Planeswalker")) {
-            setPlaneswalker(true);
+            this.setPlaneswalker(true);
         }
 
         if (params.containsKey("IsPresent")) {
-            setIsPresent(params.get("IsPresent"));
+            this.setIsPresent(params.get("IsPresent"));
             if (params.containsKey("PresentCompare")) {
-                setPresentCompare(params.get("PresentCompare"));
+                this.setPresentCompare(params.get("PresentCompare"));
             }
             if (params.containsKey("PresentZone")) {
-                setPresentZone(Zone.smartValueOf(params.get("PresentZone")));
+                this.setPresentZone(Zone.smartValueOf(params.get("PresentZone")));
             }
         }
 
         if (params.containsKey("IsNotPresent")) {
-            setIsPresent(params.get("IsNotPresent"));
-            setPresentCompare("EQ0");
+            this.setIsPresent(params.get("IsNotPresent"));
+            this.setPresentCompare("EQ0");
         }
 
         // basically PresentCompare for life totals:
         if (params.containsKey("ActivationLifeTotal")) {
-            setLifeTotal(params.get("ActivationLifeTotal"));
+            this.setLifeTotal(params.get("ActivationLifeTotal"));
             if (params.containsKey("ActivationLifeAmount")) {
-                setLifeAmount(params.get("ActivationLifeAmount"));
+                this.setLifeAmount(params.get("ActivationLifeAmount"));
             }
         }
 
         if (params.containsKey("CheckSVar")) {
-            setSvarToCheck(params.get("CheckSVar"));
+            this.setSvarToCheck(params.get("CheckSVar"));
         }
         if (params.containsKey("SVarCompare")) {
-            setSvarOperator(params.get("SVarCompare").substring(0, 2));
-            setSvarOperand(params.get("SVarCompare").substring(2));
+            this.setSvarOperator(params.get("SVarCompare").substring(0, 2));
+            this.setSvarOperand(params.get("SVarCompare").substring(2));
         }
     } // end setRestrictions()
 
@@ -175,14 +175,14 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             return false;
         }
 
-        PlayerZone cardZone = AllZone.getZoneOf(c);
-        if (!cardZone.is(getZone())) {
+        final PlayerZone cardZone = AllZone.getZoneOf(c);
+        if (!cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional
             // checks
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield)) {
                 return false;
-            } else if (!c.hasStartOfKeyword("May be played") || !getZone().equals(Zone.Hand)) {
+            } else if (!c.hasStartOfKeyword("May be played") || !this.getZone().equals(Zone.Hand)) {
                 return false;
             }
         }
@@ -193,30 +193,30 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbility_Restriction.canPlay()");
         }
 
-        if (isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
+        if (this.isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
             return false;
         }
 
-        if (isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (!isAnyPlayer() && !activator.equals(c.getController())) {
+        if (!this.isAnyPlayer() && !activator.equals(c.getController())) {
             return false;
         }
 
-        if (getActivationLimit() != -1 && getNumberTurnActivations() >= getActivationLimit()) {
+        if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
             return false;
         }
 
-        if (getPhases().size() > 0) {
+        if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            String currPhase = AllZone.getPhase().getPhase();
-            for (String s : getPhases()) {
+            final String currPhase = AllZone.getPhase().getPhase();
+            for (final String s : this.getPhases()) {
                 if (s.equals(currPhase)) {
                     isPhase = true;
                     break;
@@ -228,31 +228,31 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             }
         }
 
-        if (getCardsInHand() != -1) {
-            if (activator.getCardsIn(Zone.Hand).size() != getCardsInHand()) {
+        if (this.getCardsInHand() != -1) {
+            if (activator.getCardsIn(Zone.Hand).size() != this.getCardsInHand()) {
                 return false;
             }
         }
-        if (isHellbent()) {
+        if (this.isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
             }
         }
-        if (isThreshold()) {
+        if (this.isThreshold()) {
             if (!activator.hasThreshold()) {
                 return false;
             }
         }
-        if (isMetalcraft()) {
+        if (this.isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
                 return false;
             }
         }
-        if (getProwl() != null) {
+        if (this.getProwl() != null) {
             // only true if the activating player has damaged the opponent with
             // one of the specified types
             boolean prowlFlag = false;
-            for (String type : getProwl()) {
+            for (final String type : this.getProwl()) {
                 if (activator.hasProwl(type)) {
                     prowlFlag = true;
                 }
@@ -261,68 +261,68 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
                 return false;
             }
         }
-        if (getIsPresent() != null) {
-            CardList list = AllZoneUtil.getCardsIn(getPresentZone());
+        if (this.getIsPresent() != null) {
+            CardList list = AllZoneUtil.getCardsIn(this.getPresentZone());
 
-            list = list.getValidCards(getIsPresent().split(","), activator, c);
+            list = list.getValidCards(this.getIsPresent().split(","), activator, c);
 
             int right = 1;
-            String rightString = getPresentCompare().substring(2);
+            final String rightString = this.getPresentCompare().substring(2);
             if (rightString.equals("X")) {
                 right = CardFactoryUtil.xCount(c, c.getSVar("X"));
             } else {
-                right = Integer.parseInt(getPresentCompare().substring(2));
+                right = Integer.parseInt(this.getPresentCompare().substring(2));
             }
-            int left = list.size();
+            final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, getPresentCompare(), right)) {
+            if (!AllZoneUtil.compare(left, this.getPresentCompare(), right)) {
                 return false;
             }
         }
 
-        if (getLifeTotal() != null) {
+        if (this.getLifeTotal() != null) {
             int life = 1;
-            if (getLifeTotal().equals("You")) {
+            if (this.getLifeTotal().equals("You")) {
                 life = activator.getLife();
             }
-            if (getLifeTotal().equals("Opponent")) {
+            if (this.getLifeTotal().equals("Opponent")) {
                 life = activator.getOpponent().getLife();
             }
 
             int right = 1;
-            String rightString = getLifeAmount().substring(2);
+            final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
             } else {
-                right = Integer.parseInt(getLifeAmount().substring(2));
+                right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
 
-            if (!AllZoneUtil.compare(life, getLifeAmount(), right)) {
+            if (!AllZoneUtil.compare(life, this.getLifeAmount(), right)) {
                 return false;
             }
         }
 
-        if (isPwAbility()) {
+        if (this.isPwAbility()) {
             // Planeswalker abilities can only be activated as Sorceries
             if (!Phase.canCastSorcery(activator)) {
                 return false;
             }
 
-            for (SpellAbility pwAbs : c.getAllSpellAbilities()) {
+            for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker
                 // restriction set to confirm they haven't been activated
-                SpellAbility_Restriction restrict = pwAbs.getRestrictions();
-                if (restrict.getPlaneswalker() && restrict.getNumberTurnActivations() > 0) {
+                final SpellAbility_Restriction restrict = pwAbs.getRestrictions();
+                if (restrict.getPlaneswalker() && (restrict.getNumberTurnActivations() > 0)) {
                     return false;
                 }
             }
         }
 
-        if (getsVarToCheck() != null) {
-            int svarValue = AbilityFactory.calculateAmount(c, getsVarToCheck(), sa);
-            int operandValue = AbilityFactory.calculateAmount(c, getsVarOperand(), sa);
+        if (this.getsVarToCheck() != null) {
+            final int svarValue = AbilityFactory.calculateAmount(c, this.getsVarToCheck(), sa);
+            final int operandValue = AbilityFactory.calculateAmount(c, this.getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, getsVarOperator(), operandValue)) {
+            if (!AllZoneUtil.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
 

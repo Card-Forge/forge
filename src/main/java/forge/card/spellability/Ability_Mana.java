@@ -100,8 +100,8 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
     public Ability_Mana(final Card sourceCard, final Cost cost, final String produced, final int num) {
         super(sourceCard, cost, null);
 
-        origProduced = produced;
-        amount = num;
+        this.origProduced = produced;
+        this.amount = num;
     }
 
     /** {@inheritDoc} */
@@ -113,7 +113,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
     /** {@inheritDoc} */
     @Override
     public void resolve() {
-        produceMana();
+        this.produceMana();
     }
 
     /**
@@ -122,25 +122,25 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * </p>
      */
     public final void produceMana() {
-        StringBuilder sb = new StringBuilder();
-        if (amount == 0) {
+        final StringBuilder sb = new StringBuilder();
+        if (this.amount == 0) {
             sb.append("0");
         } else {
             try {
                 // if baseMana is an integer(colorless), just multiply amount
                 // and baseMana
-                int base = Integer.parseInt(origProduced);
-                sb.append(base * amount);
-            } catch (NumberFormatException e) {
-                for (int i = 0; i < amount; i++) {
+                final int base = Integer.parseInt(this.origProduced);
+                sb.append(base * this.amount);
+            } catch (final NumberFormatException e) {
+                for (int i = 0; i < this.amount; i++) {
                     if (i != 0) {
                         sb.append(" ");
                     }
-                    sb.append(origProduced);
+                    sb.append(this.origProduced);
                 }
             }
         }
-        produceMana(sb.toString(), this.getSourceCard().getController());
+        this.produceMana(sb.toString(), this.getSourceCard().getController());
     }
 
     /**
@@ -155,7 +155,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      */
     public final void produceMana(final String produced, final Player player) {
         final Card source = this.getSourceCard();
-        ManaPool manaPool = player.getManaPool();
+        final ManaPool manaPool = player.getManaPool();
         // change this, once ManaPool moves to the Player
         // this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced,
         // getSourceCard());
@@ -175,7 +175,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
         }
 
         // Run triggers
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
 
         runParams.put("Card", source);
         runParams.put("Player", player);
@@ -193,7 +193,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
-        return origProduced;
+        return this.origProduced;
     }
 
     /**
@@ -205,7 +205,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      *            a {@link java.lang.String} object.
      */
     public final void setMana(final String s) {
-        origProduced = s;
+        this.origProduced = s;
     }
 
     /**
@@ -217,7 +217,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      *            a boolean.
      */
     public final void setReflectedMana(final boolean bReflect) {
-        reflected = bReflect;
+        this.reflected = bReflect;
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean isSacrifice() {
-        return payCosts.getSacCost();
+        return this.getPayCosts().getSacCost();
     }
 
     /**
@@ -250,7 +250,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean isReflectedMana() {
-        return reflected;
+        return this.reflected;
     }
 
     /**
@@ -263,7 +263,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean canProduce(final String s) {
-        return origProduced.contains(s);
+        return this.origProduced.contains(s);
     }
 
     /**
@@ -274,11 +274,11 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (origProduced.length() != 1) {
+        if (this.origProduced.length() != 1) {
             return false;
         }
 
-        if (amount > 1) {
+        if (this.amount > 1) {
             return false;
         }
 
@@ -293,7 +293,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean isUndoable() {
-        return undoable && getPayCosts().isUndoable() && AllZoneUtil.isCardInPlay(getSourceCard());
+        return this.undoable && this.getPayCosts().isUndoable() && AllZoneUtil.isCardInPlay(this.getSourceCard());
     }
 
     /**
@@ -305,7 +305,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      *            a boolean.
      */
     public final void setUndoable(final boolean bUndo) {
-        undoable = bUndo;
+        this.undoable = bUndo;
     }
 
     /**
@@ -317,7 +317,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      *            a boolean.
      */
     public final void setCanceled(final boolean bCancel) {
-        canceled = bCancel;
+        this.canceled = bCancel;
     }
 
     /**
@@ -328,7 +328,7 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public final boolean getCanceled() {
-        return canceled;
+        return this.canceled;
     }
 
     /**
@@ -337,8 +337,8 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
      * </p>
      */
     public final void undo() {
-        if (isUndoable()) {
-            getPayCosts().refundPaidCost(getSourceCard());
+        if (this.isUndoable()) {
+            this.getPayCosts().refundPaidCost(this.getSourceCard());
         }
     }
 
@@ -346,13 +346,13 @@ public abstract class Ability_Mana extends Ability_Activated implements java.io.
     @Override
     public final boolean equals(final Object o) {
         // Mana abilities with same Descriptions are "equal"
-        if (o == null || !(o instanceof Ability_Mana)) {
+        if ((o == null) || !(o instanceof Ability_Mana)) {
             return false;
         }
 
-        Ability_Mana abm = (Ability_Mana) o;
+        final Ability_Mana abm = (Ability_Mana) o;
 
-        if (abm.getType() != getType()) {
+        if (abm.getType() != this.getType()) {
             return false;
         }
 

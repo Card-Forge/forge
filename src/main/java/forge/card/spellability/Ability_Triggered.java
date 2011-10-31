@@ -30,24 +30,25 @@ public class Ability_Triggered extends Ability implements Command {
 
     /**
      * Gets the trigger.
-     *
+     * 
      * @return the trigger
      */
     public final ZCTrigger getTrigger() {
-        return trigger;
+        return this.trigger;
     }
 
     /**
      * Sets the trigger.
-     *
-     * @param trigger the new trigger
+     * 
+     * @param trigger
+     *            the new trigger
      */
     public final void setTrigger(final ZCTrigger trigger) {
-    this.trigger = trigger;
+        this.trigger = trigger;
     }
 
     /** The todo. */
-    private Command todo;
+    private final Command todo;
 
     /**
      * <p>
@@ -63,15 +64,15 @@ public class Ability_Triggered extends Ability implements Command {
      */
     public Ability_Triggered(final Card sourceCard, final Command sourceCommand, final ZCTrigger situation) {
         super(sourceCard, "0");
-        setTrigger(true);
-        todo = sourceCommand;
-        trigger = situation;
-        if (todo instanceof Ability_Triggered) {
-            setStackDescription(((SpellAbility) todo).getStackDescription());
-            restrictions = ((Ability_Triggered) todo).restrictions;
+        this.setTrigger(true);
+        this.todo = sourceCommand;
+        this.trigger = situation;
+        if (this.todo instanceof Ability_Triggered) {
+            this.setStackDescription(((SpellAbility) this.todo).getStackDescription());
+            this.restrictions = ((Ability_Triggered) this.todo).restrictions;
         } else {
-            setStackDescription("Triggered ability: " + sourceCard + " " + situation);
-            restrictions = new String[] {"named " + sourceCard.getName()};
+            this.setStackDescription("Triggered ability: " + sourceCard + " " + situation);
+            this.restrictions = new String[] { "named " + sourceCard.getName() };
         }
     }
 
@@ -90,7 +91,7 @@ public class Ability_Triggered extends Ability implements Command {
     /** {@inheritDoc} */
     @Override
     public final void resolve() {
-        todo.execute();
+        this.todo.execute();
     }
 
     /**
@@ -98,8 +99,9 @@ public class Ability_Triggered extends Ability implements Command {
      * execute.
      * </p>
      */
+    @Override
     public final void execute() {
-        resolve();
+        this.resolve();
     }
 
     /**
@@ -112,7 +114,7 @@ public class Ability_Triggered extends Ability implements Command {
      * @return a boolean.
      */
     public final boolean triggerFor(final Card c) {
-        return !(new CardList(c)).getValidCards(restrictions, c.getController(), c).isEmpty();
+        return !(new CardList(c)).getValidCards(this.restrictions, c.getController(), c).isEmpty();
     }
 
     /**
@@ -127,19 +129,20 @@ public class Ability_Triggered extends Ability implements Command {
      * @return a boolean.
      */
     public final boolean triggerOnZoneChange(final String sourceZone, final String destinationZone) {
-        return trigger.triggerOn(sourceZone, destinationZone);
+        return this.trigger.triggerOn(sourceZone, destinationZone);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object o) // TODO triggers affecting other cards
-    {
+    public final boolean equals(final Object o) {
+     // TODO triggers affecting other
+        // cards
         if (!(o instanceof Ability_Triggered)) {
             return false;
         }
-        Ability_Triggered tmp = (Ability_Triggered) o;
-        return tmp.getSourceCard().equals(getSourceCard()) && tmp.trigger.equals(trigger) && tmp.todo.equals(todo)
-                && Arrays.equals(tmp.restrictions, restrictions);
+        final Ability_Triggered tmp = (Ability_Triggered) o;
+        return tmp.getSourceCard().equals(this.getSourceCard()) && tmp.trigger.equals(this.trigger)
+                && tmp.todo.equals(this.todo) && Arrays.equals(tmp.restrictions, this.restrictions);
     }
 
     /**
@@ -150,6 +153,7 @@ public class Ability_Triggered extends Ability implements Command {
      * @return a boolean.
      */
     public final boolean isBasic() {
-        return restrictions.length == 1 && restrictions[0].equals("named " + getSourceCard().getName());
+        return (this.restrictions.length == 1)
+                && this.restrictions[0].equals("named " + this.getSourceCard().getName());
     }
 }

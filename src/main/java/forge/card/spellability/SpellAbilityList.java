@@ -13,7 +13,7 @@ import forge.ComputerUtil;
  * @version $Id$
  */
 public class SpellAbilityList {
-    private ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
+    private final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
 
     /**
      * <p>
@@ -32,7 +32,7 @@ public class SpellAbilityList {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbilityList(final SpellAbility s) {
-        add(s);
+        this.add(s);
     }
 
     /**
@@ -45,8 +45,8 @@ public class SpellAbilityList {
      *            objects.
      */
     public SpellAbilityList(final SpellAbility[] s) {
-        for (int i = 0; i < s.length; i++) {
-            add(s[i]);
+        for (final SpellAbility element : s) {
+            this.add(element);
         }
     }
 
@@ -59,7 +59,7 @@ public class SpellAbilityList {
      *            a int.
      */
     public final void remove(final int n) {
-        list.remove(n);
+        this.list.remove(n);
     }
 
     /**
@@ -71,7 +71,7 @@ public class SpellAbilityList {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility s) {
-        list.add(s);
+        this.list.add(s);
     }
 
     /**
@@ -82,7 +82,7 @@ public class SpellAbilityList {
      * @return a int.
      */
     public final int size() {
-        return list.size();
+        return this.list.size();
     }
 
     /**
@@ -95,7 +95,7 @@ public class SpellAbilityList {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility get(final int n) {
-        return list.get(n);
+        return this.list.get(n);
     }
 
     /**
@@ -108,7 +108,7 @@ public class SpellAbilityList {
      */
     public final void addAll(final SpellAbilityList s) {
         for (int i = 0; i < s.size(); i++) {
-            add(s.get(i));
+            this.add(s.get(i));
         }
     }
 
@@ -119,24 +119,24 @@ public class SpellAbilityList {
      * </p>
      */
     public final void execute() {
-        for (int i = 0; i < size(); i++) {
-            if (!ComputerUtil.canPayCost(get(i))) {
+        for (int i = 0; i < this.size(); i++) {
+            if (!ComputerUtil.canPayCost(this.get(i))) {
                 throw new RuntimeException("SpellAbilityList : execute() error, cannot pay for the spell "
-                        + get(i).getSourceCard() + " - " + get(i).getStackDescription());
+                        + this.get(i).getSourceCard() + " - " + this.get(i).getStackDescription());
             }
 
-            ComputerUtil.playNoStack(get(i));
+            ComputerUtil.playNoStack(this.get(i));
         }
     } // execute()
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
-            sb.append(get(i).getSourceCard().toString());
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.size(); i++) {
+            sb.append(this.get(i).getSourceCard().toString());
             sb.append(" - ");
-            sb.append(get(i).getStackDescription());
+            sb.append(this.get(i).getStackDescription());
             sb.append("\r\n");
         }
         return sb.toString();
@@ -148,6 +148,6 @@ public class SpellAbilityList {
         if (o == null) {
             return false;
         }
-        return toString().equals(o.toString());
+        return this.toString().equals(o.toString());
     }
 }
