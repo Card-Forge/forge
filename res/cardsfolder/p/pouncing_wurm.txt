@@ -1,0 +1,13 @@
+Name:Pouncing Wurm
+ManaCost:3 G
+Types:Creature Wurm
+Text:no text
+PT:3/3
+K:Kicker:2 G
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.
+SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Haste
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mitotic_slime.jpg
+End
