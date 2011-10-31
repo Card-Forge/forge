@@ -30,13 +30,13 @@ public class Mana {
      *            a {@link forge.Card} object.
      */
     public Mana(final String col, final int amt, final Card source) {
-        color = col;
-        amount = amt;
+        this.color = col;
+        this.amount = amt;
         if (source == null) {
             return;
         }
 
-        sourceCard = source;
+        this.sourceCard = source;
     }
 
     /**
@@ -46,17 +46,18 @@ public class Mana {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        if (color.equals(Constant.Color.COLORLESS)) {
-            return Integer.toString(amount);
+        if (this.color.equals(Constant.Color.COLORLESS)) {
+            return Integer.toString(this.amount);
         }
 
         String manaString = "";
-        StringBuilder sbMana = new StringBuilder();
+        final StringBuilder sbMana = new StringBuilder();
 
-        manaString = Input_PayManaCostUtil.getShortColorString(color);
+        manaString = Input_PayManaCostUtil.getShortColorString(this.color);
 
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < this.amount; i++) {
             sbMana.append(manaString);
         }
         return sbMana.toString();
@@ -71,25 +72,25 @@ public class Mana {
      */
     public final String toDescriptiveString() {
         // this will be used for advanced choice box
-        if (color.equals(Constant.Color.COLORLESS)) {
-            return Integer.toString(amount);
+        if (this.color.equals(Constant.Color.COLORLESS)) {
+            return Integer.toString(this.amount);
         }
 
         String manaString = "";
-        StringBuilder sbMana = new StringBuilder();
+        final StringBuilder sbMana = new StringBuilder();
 
-        manaString = Input_PayManaCostUtil.getShortColorString(color);
+        manaString = Input_PayManaCostUtil.getShortColorString(this.color);
 
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < this.amount; i++) {
             sbMana.append(manaString);
         }
 
-        if (isSnow()) {
+        if (this.isSnow()) {
             sbMana.append("(S)");
         }
 
         sbMana.append(" From ");
-        sbMana.append(sourceCard.getName());
+        sbMana.append(this.sourceCard.getName());
 
         return sbMana.toString();
     }
@@ -102,7 +103,7 @@ public class Mana {
      * @return an array of {@link forge.card.mana.Mana} objects.
      */
     public final Mana[] toSingleArray() {
-        Mana[] normalize = new Mana[amount];
+        final Mana[] normalize = new Mana[this.amount];
         for (int i = 0; i < normalize.length; i++) {
             normalize[i] = new Mana(this.color, 1, this.sourceCard);
         }
@@ -117,7 +118,7 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean isSnow() {
-        return sourceCard.isSnow();
+        return this.sourceCard.isSnow();
     }
 
     /**
@@ -128,7 +129,7 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean fromBasicLand() {
-        return sourceCard.isBasicLand();
+        return this.sourceCard.isBasicLand();
     } // for Imperiosaur
 
     /**
@@ -139,7 +140,7 @@ public class Mana {
      * @return a int.
      */
     public final int getColorlessAmount() {
-        return color.equals(Constant.Color.COLORLESS) ? amount : 0;
+        return this.color.equals(Constant.Color.COLORLESS) ? this.amount : 0;
     }
 
     /**
@@ -150,7 +151,7 @@ public class Mana {
      * @return a int.
      */
     public final int getAmount() {
-        return amount;
+        return this.amount;
     }
 
     /**
@@ -163,7 +164,7 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean isColor(final String col) {
-        return color.equals(col);
+        return this.color.equals(col);
     }
 
     /**
@@ -176,10 +177,11 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean isColor(final String[] colors) {
-        for (String col : colors)
-            if (color.equals(col)) {
+        for (final String col : colors) {
+            if (this.color.equals(col)) {
                 return true;
             }
+        }
 
         return false;
     }
@@ -192,7 +194,7 @@ public class Mana {
      * @return a {@link java.lang.String} object.
      */
     public final String getColor() {
-        return color;
+        return this.color;
     }
 
     /**
@@ -203,7 +205,7 @@ public class Mana {
      * @return a {@link forge.Card} object.
      */
     public final Card getSourceCard() {
-        return sourceCard;
+        return this.sourceCard;
     }
 
     /**
@@ -216,7 +218,7 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean fromSourceCard(final Card c) {
-        return sourceCard.equals(c);
+        return this.sourceCard.equals(c);
     }
 
     /**
@@ -225,6 +227,6 @@ public class Mana {
      * </p>
      */
     public final void decrementAmount() {
-        amount--;
+        this.amount--;
     }
 }

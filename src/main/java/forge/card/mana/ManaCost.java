@@ -19,11 +19,11 @@ import forge.gui.input.Input_PayManaCostUtil;
 public class ManaCost {
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
-    private ArrayList<Object> manaPart;
-    private HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
+    private final ArrayList<Object> manaPart;
+    private final HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
     private int xcounter = 0;
-    private ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
-    private ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
+    private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
+    private final ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
 
     // manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     // or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -48,9 +48,9 @@ public class ManaCost {
             } else {
                 manaCost = manaCost.replaceFirst("X ", "");
             }
-            setXcounter(getXcounter() + 1);
+            this.setXcounter(this.getXcounter() + 1);
         }
-        manaPart = split(manaCost);
+        this.manaPart = this.split(manaCost);
     }
 
     /**
@@ -61,8 +61,8 @@ public class ManaCost {
      * @return a int.
      */
     public final int getSunburst() {
-        int ret = sunburstMap.size();
-        sunburstMap.clear();
+        final int ret = this.sunburstMap.size();
+        this.sunburstMap.clear();
         return ret;
     }
 
@@ -75,7 +75,7 @@ public class ManaCost {
      */
     public final String getColorsPaid() {
         String s = "";
-        for (String key : sunburstMap.keySet()) {
+        for (final String key : this.sunburstMap.keySet()) {
             if (key.equalsIgnoreCase("black") || key.equalsIgnoreCase("B")) {
                 s += "B";
             }
@@ -103,10 +103,10 @@ public class ManaCost {
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<Mana_PartPhyrexian> getUnpaidPhyrexianMana() {
-        ArrayList<Mana_PartPhyrexian> res = new ArrayList<Mana_PartPhyrexian>();
-        for (Object o : manaPart) {
+        final ArrayList<Mana_PartPhyrexian> res = new ArrayList<Mana_PartPhyrexian>();
+        for (final Object o : this.manaPart) {
             if (o instanceof Mana_PartPhyrexian) {
-                Mana_PartPhyrexian phy = (Mana_PartPhyrexian) o;
+                final Mana_PartPhyrexian phy = (Mana_PartPhyrexian) o;
 
                 if (!phy.isPaid()) {
                     res.add(phy);
@@ -125,7 +125,7 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean containsPhyrexianMana() {
-        for (Object o : manaPart) {
+        for (final Object o : this.manaPart) {
             if (o instanceof Mana_PartPhyrexian) {
                 return true;
             }
@@ -142,10 +142,10 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean payPhyrexian() {
-        ArrayList<Mana_PartPhyrexian> Phy = getUnpaidPhyrexianMana();
+        final ArrayList<Mana_PartPhyrexian> phy = this.getUnpaidPhyrexianMana();
 
-        if (Phy.size() > 0) {
-            Phy.get(0).payLife();
+        if (phy.size() > 0) {
+            phy.get(0).payLife();
 
             return true;
         }
@@ -165,7 +165,7 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean isColor(final String color) {
-        for (Object s : manaPart) {
+        for (final Object s : this.manaPart) {
             if (s.toString().contains(color)) {
                 return true;
             }
@@ -185,10 +185,10 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean isNeeded(String mana) {
-        if (manaNeededToAvoidNegativeEffect.size() != 0) {
-            for (String s : manaNeededToAvoidNegativeEffect) {
+        if (this.manaNeededToAvoidNegativeEffect.size() != 0) {
+            for (final String s : this.manaNeededToAvoidNegativeEffect) {
                 if ((s.equalsIgnoreCase(mana) || s.substring(0, 1).equalsIgnoreCase(mana))
-                        && !manaPaidToAvoidNegativeEffect.contains(mana)) {
+                        && !this.manaPaidToAvoidNegativeEffect.contains(mana)) {
                     return true;
                 }
             }
@@ -197,8 +197,8 @@ public class ManaCost {
             mana = Input_PayManaCostUtil.getShortColorString(mana);
         }
         Mana_Part m;
-        for (int i = 0; i < manaPart.size(); i++) {
-            m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            m = (Mana_Part) this.manaPart.get(i);
             if (m.isNeeded(mana)) {
                 return true;
             }
@@ -217,12 +217,12 @@ public class ManaCost {
      */
     public final boolean isNeeded(final Mana mana) {
         Mana_Part m;
-        for (int i = 0; i < manaPart.size(); i++) {
-            m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            m = (Mana_Part) this.manaPart.get(i);
             if (m.isNeeded(mana)) {
                 return true;
             }
-            if (m instanceof Mana_PartSnow && mana.isSnow()) {
+            if ((m instanceof Mana_PartSnow) && mana.isSnow()) {
                 return true;
             }
         }
@@ -238,14 +238,14 @@ public class ManaCost {
      */
     public final boolean isPaid() {
         Mana_Part m;
-        for (int i = 0; i < manaPart.size(); i++) {
-            m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            m = (Mana_Part) this.manaPart.get(i);
             if (!m.isPaid()) {
                 return false;
             }
         }
         return true;
-    }// isPaid()
+    } // isPaid()
 
     /**
      * <p>
@@ -257,7 +257,7 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean payMana(final Mana mana) {
-        return addMana(mana);
+        return this.addMana(mana);
     }
 
     /**
@@ -270,11 +270,11 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean payMana(String color) {
-        if (manaNeededToAvoidNegativeEffect.contains(color) && !manaPaidToAvoidNegativeEffect.contains(color)) {
-            manaPaidToAvoidNegativeEffect.add(color);
+        if (this.manaNeededToAvoidNegativeEffect.contains(color) && !this.manaPaidToAvoidNegativeEffect.contains(color)) {
+            this.manaPaidToAvoidNegativeEffect.add(color);
         }
         color = Input_PayManaCostUtil.getShortColorString(color);
-        return addMana(color);
+        return this.addMana(color);
     }
 
     /**
@@ -291,14 +291,14 @@ public class ManaCost {
         }
 
         Mana_Part m;
-        for (int i = 0; i < manaPart.size(); i++) {
-            m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            m = (Mana_Part) this.manaPart.get(i);
             if (m instanceof Mana_PartColorless) {
                 ((Mana_PartColorless) m).addToManaNeeded(manaToAdd);
                 return;
             }
         }
-        manaPart.add(new Mana_PartColorless(manaToAdd));
+        this.manaPart.add(new Mana_PartColorless(manaToAdd));
     }
 
     /**
@@ -317,16 +317,16 @@ public class ManaCost {
         }
 
         Mana_Part m;
-        for (int i = 0; i < manaPart.size(); i++) {
-            m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            m = (Mana_Part) this.manaPart.get(i);
             if (m instanceof Mana_PartColorless) {
-                int remainingColorless = ((Mana_PartColorless) m).getManaNeeded() - manaToSubtract;
+                final int remainingColorless = ((Mana_PartColorless) m).getManaNeeded() - manaToSubtract;
                 if (remainingColorless <= 0) {
-                    manaPart.remove(m);
+                    this.manaPart.remove(m);
                     break;
                 } else {
-                    manaPart.remove(m);
-                    manaPart.add(new Mana_PartColorless(remainingColorless));
+                    this.manaPart.remove(m);
+                    this.manaPart.add(new Mana_PartColorless(remainingColorless));
                 }
             }
         }
@@ -342,7 +342,7 @@ public class ManaCost {
      * @return an int.
      */
     public final int getColorlessManaAmount() {
-        for (Object m : manaPart) {
+        for (final Object m : this.manaPart) {
             if (m instanceof Mana_PartColorless) {
                 return ((Mana_PartColorless) m).getManaNeeded();
             }
@@ -360,14 +360,14 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean addMana(final String mana) {
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
         Mana_Part choice = null;
 
-        for (int i = 0; i < manaPart.size(); i++) {
-            Mana_Part m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            final Mana_Part m = (Mana_Part) this.manaPart.get(i);
             if (m.isNeeded(mana)) {
                 // if m is a better to pay than choice
                 if (choice == null) {
@@ -378,17 +378,17 @@ public class ManaCost {
                     choice = m;
                 }
             }
-        }// for
+        } // for
         if (choice == null) {
             return false;
         }
 
         choice.reduce(mana);
         if (!mana.equals(Constant.Color.COLORLESS)) {
-            if (sunburstMap.containsKey(mana)) {
-                sunburstMap.put(mana, sunburstMap.get(mana) + 1);
+            if (this.sunburstMap.containsKey(mana)) {
+                this.sunburstMap.put(mana, this.sunburstMap.get(mana) + 1);
             } else {
-                sunburstMap.put(mana, 1);
+                this.sunburstMap.put(mana, 1);
             }
         }
         return true;
@@ -404,14 +404,14 @@ public class ManaCost {
      * @return a boolean.
      */
     public final boolean addMana(final Mana mana) {
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
         Mana_Part choice = null;
 
-        for (int i = 0; i < manaPart.size(); i++) {
-            Mana_Part m = (Mana_Part) manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            final Mana_Part m = (Mana_Part) this.manaPart.get(i);
             if (m.isNeeded(mana)) {
                 // if m is a better to pay than choice
                 if (choice == null) {
@@ -422,17 +422,17 @@ public class ManaCost {
                     choice = m;
                 }
             }
-        }// for
+        } // for
         if (choice == null) {
             return false;
         }
 
         choice.reduce(mana);
         if (!mana.isColor(Constant.Color.COLORLESS)) {
-            if (sunburstMap.containsKey(mana.getColor())) {
-                sunburstMap.put(mana.getColor(), sunburstMap.get(mana.getColor()) + 1);
+            if (this.sunburstMap.containsKey(mana.getColor())) {
+                this.sunburstMap.put(mana.getColor(), this.sunburstMap.get(mana.getColor()) + 1);
             } else {
-                sunburstMap.put(mana.getColor(), 1);
+                this.sunburstMap.put(mana.getColor(), 1);
             }
         }
         return true;
@@ -447,21 +447,21 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      */
     public final void combineManaCost(final String extra) {
-        ArrayList<Object> extraParts = split(extra);
+        final ArrayList<Object> extraParts = this.split(extra);
 
         Mana_PartColorless part = null;
-        for (int i = 0; i < manaPart.size(); i++) {
-            Object o = manaPart.get(i);
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            final Object o = this.manaPart.get(i);
             if (o instanceof Mana_PartColorless) {
                 part = (Mana_PartColorless) o;
             }
         }
         if (part != null) {
-            manaPart.remove(part);
+            this.manaPart.remove(part);
         }
 
         while (extraParts.size() > 0) {
-            Object o = extraParts.get(0);
+            final Object o = extraParts.get(0);
             if (o instanceof Mana_PartColorless) {
                 if (part == null) {
                     part = (Mana_PartColorless) o;
@@ -469,24 +469,30 @@ public class ManaCost {
                     part.addToManaNeeded(((Mana_PartColorless) o).getManaNeeded());
                 }
             } else {
-                manaPart.add(o);
+                this.manaPart.add(o);
             }
             extraParts.remove(o);
         }
         if (part != null) {
-            manaPart.add(part);
+            this.manaPart.add(part);
         }
     }
 
-    public final String toString(boolean addX){
-		// Boolean addX used to add Xs into the returned value
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Object> list = new ArrayList<Object>(manaPart);
+    /**
+     * To string.
+     *
+     * @param addX the add x
+     * @return the string
+     */
+    public final String toString(final boolean addX) {
+        // Boolean addX used to add Xs into the returned value
+        final StringBuilder sb = new StringBuilder();
+        final ArrayList<Object> list = new ArrayList<Object>(this.manaPart);
         // need to reverse everything since the colored mana is stored first
         Collections.reverse(list);
 
         if (addX) {
-            for (int i = 0; i < getXcounter(); i++) {
+            for (int i = 0; i < this.getXcounter(); i++) {
                 sb.append("X").append(" ");
             }
         }
@@ -495,7 +501,7 @@ public class ManaCost {
             sb.append(list.get(i).toString()).append(" ");
         }
 
-        String str = sb.toString().trim();
+        final String str = sb.toString().trim();
 
         if (str.equals("")) {
             return "0";
@@ -507,7 +513,7 @@ public class ManaCost {
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return toString(true);
+        return this.toString(true);
     }
 
     /**
@@ -519,7 +525,7 @@ public class ManaCost {
      */
     public final int getConvertedManaCost() {
         int cmc = 0;
-        for (Object s : manaPart) {
+        for (final Object s : this.manaPart) {
             cmc += ((Mana_Part) s).getConvertedManaCost();
         }
         return cmc;
@@ -535,14 +541,14 @@ public class ManaCost {
      */
     public final double getWeightedManaCost() {
         double cmc = 0;
-        for (Object s : manaPart) {
+        for (final Object s : this.manaPart) {
             cmc += ((Mana_Part) s).getConvertedManaCost();
             if (s instanceof Mana_PartColor) {
                 cmc += 0.0001;
             }
         }
 
-        cmc += 0.00001 * getXcounter();
+        cmc += 0.00001 * this.getXcounter();
         return cmc;
     }
 
@@ -556,10 +562,10 @@ public class ManaCost {
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<Object> split(final String cost) {
-        ArrayList<Object> list = new ArrayList<Object>();
+        final ArrayList<Object> list = new ArrayList<Object>();
 
         // handles costs like "3", "G", "GW", "10", "S"
-        if (cost.length() == 1 || cost.length() == 2) {
+        if ((cost.length() == 1) || (cost.length() == 2)) {
             if (Character.isDigit(cost.charAt(0))) {
                 list.add(new Mana_PartColorless(cost));
             } else if (cost.charAt(0) == 'S') {
@@ -569,13 +575,13 @@ public class ManaCost {
             } else {
                 list.add(new Mana_PartColor(cost));
             }
-        } else// handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
-        {
+        } else {
+         // handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
             // all costs that have a length greater than 2 have a space
-            StringTokenizer tok = new StringTokenizer(cost);
+            final StringTokenizer tok = new StringTokenizer(cost);
 
             while (tok.hasMoreTokens()) {
-                list.add(getManaPart(tok.nextToken()));
+                list.add(this.getManaPart(tok.nextToken()));
             }
 
             // ManaPartColorless needs to be added AFTER the colored mana
@@ -593,10 +599,10 @@ public class ManaCost {
                 list.remove(0);
                 list.add(o);
             }
-        }// else
+        } // else
 
         return list;
-    }// split()
+    } // split()
 
     /**
      * <p>
@@ -641,7 +647,7 @@ public class ManaCost {
      * @return a int.
      */
     public final int getXcounter() {
-        return xcounter;
+        return this.xcounter;
     }
 
     /**
@@ -653,9 +659,9 @@ public class ManaCost {
      */
     public final void removeColorlessMana() {
 
-        for (int i = 0; i < manaPart.size(); i++) {
-            if (manaPart.get(i) instanceof Mana_PartColorless) {
-                manaPart.remove(manaPart.get(i));
+        for (int i = 0; i < this.manaPart.size(); i++) {
+            if (this.manaPart.get(i) instanceof Mana_PartColorless) {
+                this.manaPart.remove(this.manaPart.get(i));
             }
         }
     }
@@ -667,8 +673,8 @@ public class ManaCost {
      *            the new mana needed to avoid negative effect
      */
     public final void setManaNeededToAvoidNegativeEffect(final String[] manaCol) {
-        for (String s : manaCol) {
-            manaNeededToAvoidNegativeEffect.add(s);
+        for (final String s : manaCol) {
+            this.manaNeededToAvoidNegativeEffect.add(s);
         }
     }
 
@@ -678,6 +684,6 @@ public class ManaCost {
      * @return the mana needed to avoid negative effect
      */
     public final ArrayList<String> getManaNeededToAvoidNegativeEffect() {
-        return manaNeededToAvoidNegativeEffect;
+        return this.manaNeededToAvoidNegativeEffect;
     }
 }

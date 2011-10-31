@@ -9,8 +9,8 @@ package forge.card.mana;
  * @version $Id$
  */
 public class Mana_PartPhyrexian extends Mana_Part {
-    private Mana_PartColor wrappedColor;
-    private String color;
+    private final Mana_PartColor wrappedColor;
+    private final String color;
 
     /**
      * <p>
@@ -21,11 +21,12 @@ public class Mana_PartPhyrexian extends Mana_Part {
      *            a {@link java.lang.String} object.
      */
     public Mana_PartPhyrexian(final String manaCostToPay) {
-        wrappedColor = new Mana_PartColor(manaCostToPay.substring(1));
-        color = manaCostToPay.substring(1);
+        this.wrappedColor = new Mana_PartColor(manaCostToPay.substring(1));
+        this.color = manaCostToPay.substring(1);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final boolean isEasierToPay(final Mana_Part part) {
         return true;
     }
@@ -37,8 +38,9 @@ public class Mana_PartPhyrexian extends Mana_Part {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        return wrappedColor.toString().equals("") ? "" : "P" + wrappedColor.toString();
+        return this.wrappedColor.toString().equals("") ? "" : "P" + this.wrappedColor.toString();
     }
 
     /**
@@ -48,8 +50,9 @@ public class Mana_PartPhyrexian extends Mana_Part {
      * 
      * @return a boolean.
      */
+    @Override
     public final boolean isPaid() {
-        return wrappedColor.isPaid();
+        return this.wrappedColor.isPaid();
     }
 
     /**
@@ -63,13 +66,15 @@ public class Mana_PartPhyrexian extends Mana_Part {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
+    @Override
     public final boolean isColor(final String mana) {
-        return wrappedColor.isColor(mana);
+        return this.wrappedColor.isColor(mana);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final boolean isColor(final Mana mana) {
-        return wrappedColor.isColor(mana);
+        return this.wrappedColor.isColor(mana);
     }
 
     /**
@@ -81,18 +86,21 @@ public class Mana_PartPhyrexian extends Mana_Part {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
+    @Override
     public final boolean isNeeded(final String mana) {
-        return wrappedColor.isNeeded(mana);
+        return this.wrappedColor.isNeeded(mana);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final boolean isNeeded(final Mana mana) {
-        return wrappedColor.isNeeded(mana);
+        return this.wrappedColor.isNeeded(mana);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void reduce(final String mana) {
-        wrappedColor.reduce(mana);
+        this.wrappedColor.reduce(mana);
     }
 
     /**
@@ -105,8 +113,9 @@ public class Mana_PartPhyrexian extends Mana_Part {
      * @param mana
      *            a {@link forge.card.mana.Mana} object.
      */
+    @Override
     public final void reduce(final Mana mana) {
-        wrappedColor.reduce(mana);
+        this.wrappedColor.reduce(mana);
     }
 
     /**
@@ -116,8 +125,9 @@ public class Mana_PartPhyrexian extends Mana_Part {
      * 
      * @return a int.
      */
+    @Override
     public final int getConvertedManaCost() {
-        return wrappedColor.getConvertedManaCost();
+        return this.wrappedColor.getConvertedManaCost();
     }
 
     /**
@@ -126,6 +136,6 @@ public class Mana_PartPhyrexian extends Mana_Part {
      * </p>
      */
     public final void payLife() {
-        wrappedColor.reduce(color);
+        this.wrappedColor.reduce(this.color);
     }
 }

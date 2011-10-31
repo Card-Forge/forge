@@ -30,7 +30,7 @@ public class Mana_PartSplit extends Mana_Part {
             throw new RuntimeException("Mana_PartSplit : constructor() error, bad mana cost parameter - " + manaCost);
         }
 
-        originalCost = manaCost;
+        this.originalCost = manaCost;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Mana_PartSplit extends Mana_Part {
      * @return a boolean.
      */
     private boolean isFirstTime() {
-        return manaPart == null;
+        return this.manaPart == null;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Mana_PartSplit extends Mana_Part {
      */
     private void setup(final String manaToPay) {
         // get R out of "2/R"
-        String color = originalCost.substring(2, 3);
+        final String color = this.originalCost.substring(2, 3);
 
         // is manaToPay the one color we want or do we
         // treat it like colorless?
@@ -62,67 +62,68 @@ public class Mana_PartSplit extends Mana_Part {
         // or R? if W use Mana_PartColorless, if R use Mana_PartColor
         // does manaToPay contain color?
         if (0 <= manaToPay.indexOf(color)) {
-            manaPart = new Mana_PartColor(color);
+            this.manaPart = new Mana_PartColor(color);
         } else {
             // get 2 out of "2/R"
-            manaPart = new Mana_PartColorless(originalCost.substring(0, 1));
+            this.manaPart = new Mana_PartColorless(this.originalCost.substring(0, 1));
         }
-    }// setup()
+    } // setup()
 
     /** {@inheritDoc} */
     @Override
     public final void reduce(final String mana) {
-        if (isFirstTime()) {
-            setup(mana);
+        if (this.isFirstTime()) {
+            this.setup(mana);
         }
 
-        manaPart.reduce(mana);
+        this.manaPart.reduce(mana);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void reduce(final Mana mana) {
-        if (isFirstTime()) {
-            setup(Input_PayManaCostUtil.getShortColorString(mana.getColor()));
+        if (this.isFirstTime()) {
+            this.setup(Input_PayManaCostUtil.getShortColorString(mana.getColor()));
         }
 
-        manaPart.reduce(mana);
+        this.manaPart.reduce(mana);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isNeeded(final String mana) {
-        if (isFirstTime()) {
+        if (this.isFirstTime()) {
             // always true because any mana can pay the colorless part of 2/G
             return true;
         }
 
-        return manaPart.isNeeded(mana);
-    }// isNeeded()
+        return this.manaPart.isNeeded(mana);
+    } // isNeeded()
 
     /** {@inheritDoc} */
+    @Override
     public final boolean isNeeded(final Mana mana) {
-        if (isFirstTime()) {
+        if (this.isFirstTime()) {
             // always true because any mana can pay the colorless part of 2/G
             return true;
         }
 
-        return manaPart.isNeeded(mana);
+        return this.manaPart.isNeeded(mana);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isColor(final String mana) {
         // ManaPart method
-        String mp = toString();
+        final String mp = this.toString();
         return mp.indexOf(mana) != -1;
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isColor(final Mana mana) {
-        String color = Input_PayManaCostUtil.getShortColorString(mana.getColor());
-        String mp = toString();
+        final String color = Input_PayManaCostUtil.getShortColorString(mana.getColor());
+        final String mp = this.toString();
         return mp.indexOf(color) != -1;
     }
 
@@ -132,30 +133,30 @@ public class Mana_PartSplit extends Mana_Part {
         if (mp instanceof Mana_PartColorless) {
             return false;
         }
-        if (!isFirstTime()) {
+        if (!this.isFirstTime()) {
             return true;
         }
-        return toString().length() >= mp.toString().length();
+        return this.toString().length() >= mp.toString().length();
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        if (isFirstTime()) {
-            return originalCost;
+        if (this.isFirstTime()) {
+            return this.originalCost;
         }
 
-        return manaPart.toString();
+        return this.manaPart.toString();
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isPaid() {
-        if (isFirstTime()) {
+        if (this.isFirstTime()) {
             return false;
         }
 
-        return manaPart.isPaid();
+        return this.manaPart.isPaid();
     }
 
     /** {@inheritDoc} */
@@ -163,6 +164,6 @@ public class Mana_PartSplit extends Mana_Part {
     public final int getConvertedManaCost() {
         // grab the colorless portion of the split cost (usually 2, but possibly
         // more later)
-        return Integer.parseInt(originalCost.substring(0, 1));
+        return Integer.parseInt(this.originalCost.substring(0, 1));
     }
 }

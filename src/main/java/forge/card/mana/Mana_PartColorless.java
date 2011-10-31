@@ -22,7 +22,7 @@ public class Mana_PartColorless extends Mana_Part {
      *            a int.
      */
     public final void addToManaNeeded(final int additional) {
-        manaNeeded += additional;
+        this.manaNeeded += additional;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Mana_PartColorless extends Mana_Part {
      * @return a int.
      */
     public final int getManaNeeded() {
-        return manaNeeded;
+        return this.manaNeeded;
     }
 
     // String manaCostToPay is like "1", "4", but NO COLOR
@@ -47,8 +47,8 @@ public class Mana_PartColorless extends Mana_Part {
      */
     public Mana_PartColorless(final String manaCostToPay) {
         try {
-            manaNeeded = Integer.parseInt(manaCostToPay);
-        } catch (NumberFormatException ex) {
+            this.manaNeeded = Integer.parseInt(manaCostToPay);
+        } catch (final NumberFormatException ex) {
             ErrorViewer.showError(ex, "mana cost is not a number - %s", manaCostToPay);
             throw new RuntimeException(String.format("mana cost is not a number - %s", manaCostToPay), ex);
         }
@@ -63,26 +63,26 @@ public class Mana_PartColorless extends Mana_Part {
      *            a int.
      */
     public Mana_PartColorless(final int manaCostToPay) {
-        manaNeeded = manaCostToPay;
+        this.manaNeeded = manaCostToPay;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        if (isPaid()) {
+        if (this.isPaid()) {
             return "";
         }
 
-        return String.valueOf(manaNeeded);
+        return String.valueOf(this.manaNeeded);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isNeeded(final String mana) {
         // ManaPart method
-        checkSingleMana(mana);
+        Mana_Part.checkSingleMana(mana);
 
-        return 0 < manaNeeded;
+        return 0 < this.manaNeeded;
     }
 
     /** {@inheritDoc} */
@@ -93,7 +93,7 @@ public class Mana_PartColorless extends Mana_Part {
             throw new RuntimeException("Mana_PartColorless received Mana type with amount > 1");
         }
 
-        return 0 < manaNeeded;
+        return 0 < this.manaNeeded;
     }
 
     /** {@inheritDoc} */
@@ -119,35 +119,35 @@ public class Mana_PartColorless extends Mana_Part {
     @Override
     public final void reduce(final String mana) {
         // if mana is needed, then this mana cost is all paid up
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("Mana_PartColorless : reduce() error, argument mana not needed, mana - " + mana
-                    + ", toString() - " + toString());
+                    + ", toString() - " + this.toString());
         }
 
-        manaNeeded--;
+        this.manaNeeded--;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void reduce(final Mana mana) {
         // if mana is needed, then this mana cost is all paid up
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("Mana_PartColorless : reduce() error, argument mana not needed, mana - " + mana
-                    + ", toString() - " + toString());
+                    + ", toString() - " + this.toString());
         }
 
-        manaNeeded--;
+        this.manaNeeded--;
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isPaid() {
-        return manaNeeded == 0;
+        return this.manaNeeded == 0;
     }
 
     /** {@inheritDoc} */
     @Override
     public final int getConvertedManaCost() {
-        return manaNeeded;
+        return this.manaNeeded;
     }
 }

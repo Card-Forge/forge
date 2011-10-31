@@ -15,12 +15,13 @@ public class Mana_PartSnow extends Mana_Part {
     /** {@inheritDoc} */
     @Override
     public final boolean isNeeded(final String mana) {
-        return !isPaid && mana.equals("S");
+        return !this.isPaid && mana.equals("S");
     }
 
     /** {@inheritDoc} */
+    @Override
     public final boolean isNeeded(final Mana mana) {
-        return !isPaid && mana.isSnow();
+        return !this.isPaid && mana.isSnow();
     }
 
     /** {@inheritDoc} */
@@ -39,7 +40,7 @@ public class Mana_PartSnow extends Mana_Part {
     /** {@inheritDoc} */
     @Override
     public final boolean isPaid() {
-        return isPaid;
+        return this.isPaid;
     }
 
     /** {@inheritDoc} */
@@ -48,7 +49,7 @@ public class Mana_PartSnow extends Mana_Part {
         if (mp instanceof Mana_PartColorless) {
             return false;
         }
-        return toString().length() >= mp.toString().length();
+        return this.toString().length() >= mp.toString().length();
     }
 
     /** {@inheritDoc} */
@@ -57,7 +58,7 @@ public class Mana_PartSnow extends Mana_Part {
         if (!mana.equals("S")) {
             throw new RuntimeException("Mana_PartSnow: reduce() error, " + mana + " is not snow mana");
         }
-        isPaid = true;
+        this.isPaid = true;
     }
 
     /** {@inheritDoc} */
@@ -66,13 +67,13 @@ public class Mana_PartSnow extends Mana_Part {
         if (!mana.isSnow()) {
             throw new RuntimeException("Mana_PartSnow: reduce() error, " + mana + " is not snow mana");
         }
-        isPaid = true;
+        this.isPaid = true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return (isPaid ? "" : "S");
+        return (this.isPaid ? "" : "S");
     }
 
     /** {@inheritDoc} */

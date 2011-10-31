@@ -25,54 +25,52 @@ public class Mana_PartColor extends Mana_Part {
      *            a {@link java.lang.String} object.
      */
     public Mana_PartColor(final String manaCostToPay) {
-        char[] c = manaCostToPay.toCharArray();
+        final char[] c = manaCostToPay.toCharArray();
         for (int i = 0; i < c.length; i++) {
-            if (i == 0 && c[i] == ' ') {
-                ;
-            } else {
-                checkSingleMana("" + c[i]);
+            if ((i != 0) || (c[i] != ' ')) {
+                Mana_Part.checkSingleMana("" + c[i]);
             }
         }
 
-        manaCost = manaCostToPay;
+        this.manaCost = manaCostToPay;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return manaCost;
+        return this.manaCost;
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isNeeded(final String mana) {
         // ManaPart method
-        checkSingleMana(mana);
+        Mana_Part.checkSingleMana(mana);
 
-        return !isPaid() && isColor(mana);
+        return !this.isPaid() && this.isColor(mana);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isNeeded(final Mana mana) {
-        return (!isPaid() && isColor(mana));
+        return (!this.isPaid() && this.isColor(mana));
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isColor(final String mana) {
         // ManaPart method
-        checkSingleMana(mana);
+        Mana_Part.checkSingleMana(mana);
 
-        return manaCost.indexOf(mana) != -1;
+        return this.manaCost.indexOf(mana) != -1;
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isColor(final Mana mana) {
-        String color = Input_PayManaCostUtil.getShortColorString(mana.getColor());
+        final String color = Input_PayManaCostUtil.getShortColorString(mana.getColor());
 
-        return manaCost.indexOf(color) != -1;
+        return this.manaCost.indexOf(color) != -1;
     }
 
     /** {@inheritDoc} */
@@ -81,37 +79,37 @@ public class Mana_PartColor extends Mana_Part {
         if (mp instanceof Mana_PartColorless) {
             return false;
         }
-        return toString().length() >= mp.toString().length();
+        return this.toString().length() >= mp.toString().length();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void reduce(final String mana) {
         // if mana is needed, then this mana cost is all paid up
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("Mana_PartColor : reduce() error, argument mana not needed, mana - " + mana
-                    + ", toString() - " + toString());
+                    + ", toString() - " + this.toString());
         }
 
-        manaCost = "";
+        this.manaCost = "";
     }
 
     /** {@inheritDoc} */
     @Override
     public final void reduce(final Mana mana) {
         // if mana is needed, then this mana cost is all paid up
-        if (!isNeeded(mana)) {
+        if (!this.isNeeded(mana)) {
             throw new RuntimeException("Mana_PartColor : reduce() error, argument mana not needed, mana - " + mana
-                    + ", toString() - " + toString());
+                    + ", toString() - " + this.toString());
         }
 
-        manaCost = "";
+        this.manaCost = "";
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean isPaid() {
-        return manaCost.length() == 0;
+        return this.manaCost.length() == 0;
     }
 
     /** {@inheritDoc} */
