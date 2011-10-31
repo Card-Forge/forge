@@ -5,7 +5,7 @@ Text:no text
 A:SP$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Prismatic Strands Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that sources of the color of your choice would deal this turn.
 SVar:STPrevent:Mode$ PreventDamage | Target$ Creature,Player | Source$ Card.ChosenColor | Description$ Prevent all damage that sources of the chosen color would deal this turn.
-A:SP$ ChooseColor | Cost$ tapXType<1/Creature.YouCtrl+White+untapped> | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBEffect | Flashback$ True | CostDesc$ Flashback - Tap an untapped white creature you control. | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+A:SP$ ChooseColor | Cost$ tapXType<1/Creature.White> | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBEffect | Flashback$ True | CostDesc$ Flashback - Tap an untapped white creature you control. | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_strands.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/18.jpg

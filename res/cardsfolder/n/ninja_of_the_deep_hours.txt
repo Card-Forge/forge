@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Human Ninja
 Text:no text
 PT:2/2
-A:AB$ ChangeZone | Cost$ 1 U Return<1/Creature.attacking+unblocked+YouCtrl> | CostDesc$ Ninjutsu 1 U | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (1 U, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
+A:AB$ ChangeZone | Cost$ 1 U Return<1/Creature.attacking+unblocked> | CostDesc$ Ninjutsu 1 U | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (1 U, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDraw | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
