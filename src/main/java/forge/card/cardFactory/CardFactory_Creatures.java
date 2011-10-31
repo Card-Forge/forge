@@ -2206,7 +2206,8 @@ public class CardFactory_Creatures {
         else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
                 || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
                 || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
-                || cardName.equals("Body Double")) {
+                || cardName.equals("Body Double")
+                || cardName.equals("Evil Twin")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
             final Card[] cloned = new Card[1];
@@ -2322,6 +2323,13 @@ public class CardFactory_Creatures {
                             cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),
                                     card, true));
                             cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
+                        }
+                        
+                        if(cardName.equals("Evil Twin")) {
+                            AbilityFactory AF = new AbilityFactory();
+                            SpellAbility destroySameName = AF.getAbility("AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | TgtPrompt$ Select target creature with the same name. | SpellDescription$ Destroy target creature with the same name as this creature.", cloned[0]);
+                            
+                            cloned[0].addSpellAbility(destroySameName);
                         }
 
                         AllZone.getGameAction().moveToPlayFromHand(cloned[0]);
