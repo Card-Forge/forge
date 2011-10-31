@@ -60,6 +60,7 @@ def initSets():
 	allSets['The Dark'] = 'DRK'
 	allSets['Fallen Empires'] = 'FEM'
 	allSets['Homelands'] = 'HML'
+	allSets['Chronicles'] = 'CHR'
 
 	# Ice Age
 	allSets['Ice Age'] = 'ICE'

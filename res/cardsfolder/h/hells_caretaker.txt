@@ -7,7 +7,8 @@ A:AB$ ChangeZone | Cost$ T Sac<1/Creature> | TgtPrompt$ Choose target creature c
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hells_caretaker.jpg
+Oracle:{T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
+SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/7.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/137.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/19.jpg
-Oracle:{T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
 End

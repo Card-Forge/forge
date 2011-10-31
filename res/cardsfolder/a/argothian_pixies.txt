@@ -7,6 +7,7 @@ K:PreventAllDamageBy Artifact.Creature
 K:CantBeBlockedBy Artifact.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/59.jpg
 Oracle:Argothian Pixies can't be blocked by artifact creatures.\nPrevent all damage that would be dealt to Argothian Pixies by artifact creatures.
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/29.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/59.jpg
 End

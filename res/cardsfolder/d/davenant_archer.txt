@@ -6,8 +6,9 @@ PT:1/2
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/davenant_archer.jpg
+Oracle:{T}: D'Avenant Archer deals 1 damage to target attacking or blocking creature.
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/299.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/61.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/15.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/176.jpg
-Oracle:{T}: D'Avenant Archer deals 1 damage to target attacking or blocking creature.
 End

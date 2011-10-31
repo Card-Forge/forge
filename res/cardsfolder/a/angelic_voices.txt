@@ -7,6 +7,7 @@ SVar:X:Count$Valid Creature.nonWhite+nonArtifact+YouCtrl
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_voices.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/173.jpg
 Oracle:Creatures you control get +1/+1 as long as you control no nonartifact, nonwhite creatures.
+SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/59.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/173.jpg
 End

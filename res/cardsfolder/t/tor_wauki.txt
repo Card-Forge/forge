@@ -7,6 +7,7 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | T
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tor_wauki.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/305.jpg
 Oracle:{T}: Tor Wauki deals 2 damage to target attacking or blocking creature.
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/123.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/305.jpg
 End

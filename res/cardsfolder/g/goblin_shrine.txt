@@ -13,6 +13,7 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shrine.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/67.jpg
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.\nWhen Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/67.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/50.jpg
 End

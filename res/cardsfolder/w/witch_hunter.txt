@@ -7,7 +7,8 @@ A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | Tgt$ TgtP | SpellDescription$ CARDNAME 
 A:AB$ ChangeZone | Cost$ 1 W W T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_hunter.jpg
+Oracle:{T}: Witch Hunter deals 1 damage to target player.\n{1}{W}{W}, {T}: Return target creature an opponent controls to its owner's hand.
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/92.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/17.jpg
-Oracle:{T}: Witch Hunter deals 1 damage to target player.\n{1}{W}{W}, {T}: Return target creature an opponent controls to its owner's hand.
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/70.jpg
 End

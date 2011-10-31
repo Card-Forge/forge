@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockingSource,Creature.blockedBySource | NoRegen$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abu_jafar.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/55.jpg
 Oracle:When Abu Ja'far dies, destroy all creatures blocking or blocked by it. They can't be regenerated.
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/57.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/55.jpg
 End

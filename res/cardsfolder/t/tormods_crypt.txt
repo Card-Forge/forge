@@ -6,7 +6,8 @@ A:AB$ ChangeZoneAll | Cost$ T Exile<1/CARDNAME> | Origin$ Graveyard | Destinatio
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormods_crypt.jpg
+Oracle:{T}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/109.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/115.jpg
-Oracle:{T}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/89.jpg
 End

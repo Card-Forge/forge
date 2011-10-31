@@ -5,8 +5,9 @@ Text:Discard X cards, then return a card from your graveyard to your hand for ea
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recall.jpg
+Oracle:Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/115.jpg
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/24.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/92.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/70.jpg
-Oracle:Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
 End

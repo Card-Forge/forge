@@ -7,6 +7,7 @@ K:Mountainwalk
 K:Protection from white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/156.jpg
 Oracle:Mountainwalk, protection from white
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/53.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/156.jpg
 End

@@ -7,6 +7,7 @@ SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_seeker.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/119.jpg
 Oracle:Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/42.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/119.jpg
 End

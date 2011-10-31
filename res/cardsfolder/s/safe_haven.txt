@@ -8,7 +8,8 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | O
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safe_haven.jpg
+Oracle:{2}, {T}: Exile target creature you control.\nAt the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/115.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/121.jpg
-Oracle:{2}, {T}: Exile target creature you control.\nAt the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.
+SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/93.jpg
 End

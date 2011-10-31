@@ -6,8 +6,9 @@ A:AB$ ChangeZoneAll | Cost$ T Exile<1/CARDNAME> | ChangeType$ Card.YouOwn | Orig
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feldons_cane.jpg
+Oracle:{T}, Exile Feldon's Cane: Shuffle your graveyard into your library.
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/368.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/77.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/109.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/15.jpg
-Oracle:{T}, Exile Feldon's Cane: Shuffle your graveyard into your library.
 End

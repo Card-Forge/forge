@@ -6,6 +6,7 @@ PT:2/2
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ 2 | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature this turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kei_takahashi.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/278.jpg
 Oracle:{T}: Prevent the next 2 damage that would be dealt to target creature this turn.
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/113.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/278.jpg
 End

@@ -8,6 +8,7 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/active_volcano.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/130.jpg
 Oracle:Choose one - Destroy target blue permanent; or return target Island to its owner's hand.
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/43.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/130.jpg
 End

@@ -6,8 +6,9 @@ PT:1/1
 A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_folk.jpg
+Oracle:{G}, {T}, Sacrifice Scavenger Folk: Destroy target artifact.
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/185.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/50.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/41.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/267.jpg
-Oracle:{G}, {T}, Sacrifice Scavenger Folk: Destroy target artifact.
 End

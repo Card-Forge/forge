@@ -6,6 +6,7 @@ A:SP$ Pump | Cost$ W | KW$ HIDDEN Prevent all damage that would be dealt to CARD
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indestructible_aura.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/190.jpg
 Oracle:Prevent all damage that would be dealt to target creature this turn.
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/63.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/190.jpg
 End

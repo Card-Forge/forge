@@ -8,6 +8,7 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Dwarf.YouCtrl | PresentC
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblins_of_the_flarg.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/69.jpg
 Oracle:Mountainwalk\nWhen you control a Dwarf, sacrifice Goblins of the Flarg.
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/69.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/51.jpg
 End

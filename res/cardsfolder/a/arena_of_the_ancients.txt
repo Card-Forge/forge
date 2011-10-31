@@ -8,6 +8,7 @@ SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.Legendary
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/215.jpg
 Oracle:Legendary creatures don't untap during their controllers' untap steps.\nWhen Arena of the Ancients enters the battlefield, tap all legendary creatures.
+SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/71.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/215.jpg
 End
