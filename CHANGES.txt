@@ -311,6 +311,25 @@ Fixes/Features:
 - Cleanup in checkStateEffects.
 - Added Protection keywords to players.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- fix CostTapType not correctly setting the paidHash (fixes Keldon Battlewagon)
+- fix potential bug in CostReturn not setting paidHash correctly (is not used at this time I don't think...)
+- AF Animate will no longer give intrinsic keywords.
+- The parameter "RemoveAllAbilities" will now also remove keywords.
+- AF_MoveCounter now accepts Card targeting for a destination
+- add a couple missing Quest Opponent Icons to the download file
+- fix LQ pic url for Cauldron Dance
+- fix cost of Cautery Sliver
+- Fixed the pic URL for Soratami Seer.
+- add an xCount for counting the number of colors a card has
+- checkstyle and refactor
+- checkstyle
+- checkstyle
+- Ran scripts and updated and fixed some card texts (Prismatic Boon still needs fixing).
+- Added Chronicles to the setInfo script.
+- Updated the card text files with Chronicles set info.
+- Fixed Chancellor of the Forge's opening hand token not having haste.
+- Fixed Rarity not being displayed in-game.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -431,6 +450,28 @@ Energy Chamber
 Soratami Seer
 Junkyo Bell
 Early Harvest
+Swirling Spriggan
+Madblind Mountain
+Myr Mindservant
+Unerring Sling
+Afiya Grove
+Kinscaer Harpoonist
+Sapphire Charm
+Ivory Charm
+Burning Palm Efreet
+Prismatic Lace
+Prismatic Boon
+Kukemssa Serpent
+Lure of Prey
+Collapsing Borders
+Barreling Attack
+Cautery Sliver
+Circle of Affliction
+Ovinize
+Pouncing Wurm
+Utopia Sprawl
+Might of the Nephilim
+Fertile Imagination
 
 
 end
