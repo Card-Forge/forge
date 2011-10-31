@@ -10,7 +10,7 @@ SVar:Rarity:Common
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_ironsmith.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/168a.jpg
-Oracle:First Strike\nAt the beginning of each upkeep, if no spells were cast last turn, Village Ironsmith.
+Oracle:First Strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Village Ironsmith.
 
 ALTERNATE
 
