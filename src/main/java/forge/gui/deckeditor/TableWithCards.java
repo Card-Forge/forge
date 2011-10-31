@@ -170,14 +170,14 @@ public final class TableWithCards {
      */
     public static String getStats(final ItemPoolView<InventoryItem> deck) {
         int total = deck.countAll();
-        int creature = CardRules.Predicates.Presets.isCreature.aggregate(deck, deck.fnToCard, deck.fnToCount);
-        int land = CardRules.Predicates.Presets.isLand.aggregate(deck, deck.fnToCard, deck.fnToCount);
+        int creature = CardRules.Predicates.Presets.IS_CREATURE.aggregate(deck, deck.fnToCard, deck.fnToCount);
+        int land = CardRules.Predicates.Presets.IS_LAND.aggregate(deck, deck.fnToCard, deck.fnToCount);
 
         StringBuffer show = new StringBuffer();
         show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ")
                 .append(land);
         String[] color = Constant.Color.ONLY_COLORS;
-        List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.colors;
+        List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.COLORS;
         for (int i = 0; i < color.length; ++i) {
             show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, deck.fnToCard)));
         }
@@ -347,7 +347,7 @@ public final class TableWithCards {
         } else if (useFilter) {
             model.addCards(filter.select(pool, pool.fnToPrinted));
         } else if (wantUnique) {
-            model.addCards(CardRules.Predicates.Presets.constantTrue.uniqueByLast(pool, pool.fnToCardName,
+            model.addCards(CardRules.Predicates.Presets.CONSTANT_TRUE.uniqueByLast(pool, pool.fnToCardName,
                     pool.fnToCard));
         }
 

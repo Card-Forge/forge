@@ -66,7 +66,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         }
 
         for (CardManaCostShard s : shards) {
-            ManaSymbols.drawSymbol(s.imageKey, g, (int) xpos, 1);
+            ManaSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
             xpos += offset;
         }
     }

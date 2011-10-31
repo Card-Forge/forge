@@ -46,18 +46,18 @@ public final class BoosterUtils {
         // There should be 1 Multicolor card for every 4 cards in a single color
 
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
-        colorFilters.add(CardRules.Predicates.Presets.isMulticolor);
+        colorFilters.add(CardRules.Predicates.Presets.IS_MULTICOLOR);
 
         for (int i = 0; i < 4; i++) {
             if (i != 2) {
-                colorFilters.add(CardRules.Predicates.Presets.isColorless);
+                colorFilters.add(CardRules.Predicates.Presets.IS_COLORLESS);
             }
 
-            colorFilters.add(CardRules.Predicates.Presets.isWhite);
-            colorFilters.add(CardRules.Predicates.Presets.isRed);
-            colorFilters.add(CardRules.Predicates.Presets.isBlue);
-            colorFilters.add(CardRules.Predicates.Presets.isBlack);
-            colorFilters.add(CardRules.Predicates.Presets.isGreen);
+            colorFilters.add(CardRules.Predicates.Presets.IS_WHITE);
+            colorFilters.add(CardRules.Predicates.Presets.IS_RED);
+            colorFilters.add(CardRules.Predicates.Presets.IS_BLUE);
+            colorFilters.add(CardRules.Predicates.Presets.IS_BLACK);
+            colorFilters.add(CardRules.Predicates.Presets.IS_GREEN);
         }
 
         final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
@@ -223,19 +223,19 @@ public final class BoosterUtils {
         } else {
             final String col = color.toLowerCase();
             if (col.startsWith("wh")) {
-                colorFilter = CardRules.Predicates.Presets.isWhite;
+                colorFilter = CardRules.Predicates.Presets.IS_WHITE;
             } else if (col.startsWith("bla")) {
-                colorFilter = CardRules.Predicates.Presets.isBlack;
+                colorFilter = CardRules.Predicates.Presets.IS_BLACK;
             } else if (col.startsWith("blu")) {
-                colorFilter = CardRules.Predicates.Presets.isBlue;
+                colorFilter = CardRules.Predicates.Presets.IS_BLUE;
             } else if (col.startsWith("re")) {
-                colorFilter = CardRules.Predicates.Presets.isRed;
+                colorFilter = CardRules.Predicates.Presets.IS_RED;
             } else if (col.startsWith("col")) {
-                colorFilter = CardRules.Predicates.Presets.isColorless;
+                colorFilter = CardRules.Predicates.Presets.IS_COLORLESS;
             } else if (col.startsWith("gre")) {
-                colorFilter = CardRules.Predicates.Presets.isGreen;
+                colorFilter = CardRules.Predicates.Presets.IS_GREEN;
             } else if (col.startsWith("mul")) {
-                colorFilter = CardRules.Predicates.Presets.isMulticolor;
+                colorFilter = CardRules.Predicates.Presets.IS_MULTICOLOR;
             } else {
                 colorFilter = Predicate.getTrue(CardRules.class);
             }
@@ -276,7 +276,7 @@ public final class BoosterUtils {
      * @return the card printed
      */
     public static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
-        final Predicate<CardRules> filter = CardRules.Predicates.Presets.colors.get(color);
+        final Predicate<CardRules> filter = CardRules.Predicates.Presets.COLORS.get(color);
         if (null == filter) {
             return null;
         }

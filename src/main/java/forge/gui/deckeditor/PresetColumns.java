@@ -19,7 +19,7 @@ import forge.item.InventoryItemFromSet;
 public abstract class PresetColumns {
 
     private static CardManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.empty;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.EMPTY;
     }
 
     private static CardColor toColor(final InventoryItem i) {
@@ -36,7 +36,7 @@ public abstract class PresetColumns {
 
     private static CardSet toSetCmp(final InventoryItem i) {
         return i instanceof InventoryItemFromSet ? SetUtils.getSetByCode(((InventoryItemFromSet) i).getSet())
-                : CardSet.unknown;
+                : CardSet.UNKNOWN;
     }
 
     private static String toSetStr(final InventoryItem i) {
@@ -53,7 +53,7 @@ public abstract class PresetColumns {
 
     /** The Constant fnQtyCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnQtyCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_QTY_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getValue();
@@ -61,7 +61,7 @@ public abstract class PresetColumns {
     };
 
     /** The Constant fnQtyGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnQtyGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_QTY_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return from.getValue();
@@ -70,7 +70,7 @@ public abstract class PresetColumns {
 
     /** The Constant fnNameCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnNameCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_NAME_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getName();
@@ -78,7 +78,7 @@ public abstract class PresetColumns {
     };
 
     /** The Constant fnNameGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnNameGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_NAME_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getName();
@@ -87,41 +87,41 @@ public abstract class PresetColumns {
 
     /** The Constant fnCostCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnCostCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_COST_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toManaCost(from.getKey());
+            return PresetColumns.toManaCost(from.getKey());
         }
     };
 
     /** The Constant fnCostGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnCostGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_COST_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toManaCost(from.getKey());
+            return PresetColumns.toManaCost(from.getKey());
         }
     };
 
     /** The Constant fnColorCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnColorCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_COLOR_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toColor(from.getKey());
+            return PresetColumns.toColor(from.getKey());
         }
     };
 
     /** The Constant fnColorGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnColorGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_COLOR_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toColor(from.getKey());
+            return PresetColumns.toColor(from.getKey());
         }
     };
 
     /** The Constant fnTypeCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnTypeCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_TYPE_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getType();
@@ -129,7 +129,7 @@ public abstract class PresetColumns {
     };
 
     /** The Constant fnTypeGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnTypeGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_TYPE_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return from.getKey().getType();
@@ -138,69 +138,69 @@ public abstract class PresetColumns {
 
     /** The Constant fnStatsCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnStatsCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_STATS_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toPTL(from.getKey());
+            return PresetColumns.toPTL(from.getKey());
         }
     };
 
     /** The Constant fnStatsGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnStatsGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_STATS_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toPTL(from.getKey());
+            return PresetColumns.toPTL(from.getKey());
         }
     };
 
     /** The Constant fnRarityCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnRarityCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_RARITY_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toRarity(from.getKey());
+            return PresetColumns.toRarity(from.getKey());
         }
     };
 
     /** The Constant fnRarityGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnRarityGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_RARITY_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toRarity(from.getKey());
+            return PresetColumns.toRarity(from.getKey());
         }
     };
 
     /** The Constant fnSetCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnSetCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_SET_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toSetCmp(from.getKey());
+            return PresetColumns.toSetCmp(from.getKey());
         }
     };
 
     /** The Constant fnSetGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnSetGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_SET_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toSetStr(from.getKey());
+            return PresetColumns.toSetStr(from.getKey());
         }
     };
 
     /** The Constant fnAiStatusCompare. */
     @SuppressWarnings("rawtypes")
-    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnAiStatusCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Comparable, Entry<InventoryItem, Integer>> FN_AI_STATUS_COMPARE = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return toAiCmp(from.getKey());
+            return PresetColumns.toAiCmp(from.getKey());
         }
     };
 
     /** The Constant fnAiStatusGet. */
-    public static final Lambda1<Object, Entry<InventoryItem, Integer>> fnAiStatusGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_AI_STATUS_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return toAiStr(from.getKey());
+            return PresetColumns.toAiStr(from.getKey());
         }
     };
 }

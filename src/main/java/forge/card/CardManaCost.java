@@ -23,7 +23,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     private Float compareWeight = null;
 
     /** The Constant empty. */
-    public static final CardManaCost empty = new CardManaCost();
+    public static final CardManaCost EMPTY = new CardManaCost();
 
     // pass mana cost parser here
     private CardManaCost() {
@@ -89,7 +89,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     public int getCMC() {
         int sum = 0;
         for (CardManaCostShard s : shards) {
-            sum += s.cmc;
+            sum += s.getCmc();
         }
         return sum + genericCost;
     }
@@ -157,7 +157,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         if (compareWeight == null) {
             float weight = genericCost;
             for (CardManaCostShard s : shards) {
-                weight += s.cmpc;
+                weight += s.getCmpc();
             }
             if (hasNoCost) {
                 weight = -1; // for those who doesn't even have a 0 sign on card

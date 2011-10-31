@@ -180,19 +180,19 @@ public class CardRatings {
      * 
      * @param cardName
      *            the card name
-     * @param Rating
+     * @param rating
      *            the rating
      */
-    public final void putFullRating(final String cardName, final int Rating) {
+    public final void putFullRating(final String cardName, final int rating) {
         if (fullRatings.containsKey(cardName)) {
             int r = fullRatings.get(cardName);
-            int nr = (r + Rating) / 2;
+            int nr = (r + rating) / 2;
             fullRatings.put(cardName, nr);
         } else {
-            fullRatings.put(cardName, Rating);
+            fullRatings.put(cardName, rating);
         }
 
-        tempRatings.add("Full:" + cardName + ":" + Rating);
+        tempRatings.add("Full:" + cardName + ":" + rating);
     }
 
     /**
@@ -202,20 +202,20 @@ public class CardRatings {
      *            the card name
      * @param setCode
      *            the set code
-     * @param Rating
+     * @param rating
      *            the rating
      */
-    public final void putBlockRating(final String cardName, final String setCode, final int Rating) {
+    public final void putBlockRating(final String cardName, final String setCode, final int rating) {
         String cNsC = cardName + "|" + setCode;
         if (blockRatings.containsKey(cNsC)) {
             int r = blockRatings.get(cNsC);
-            int nr = (r + Rating) / 2;
+            int nr = (r + rating) / 2;
             blockRatings.put(cNsC, nr);
         } else {
-            blockRatings.put(cNsC, Rating);
+            blockRatings.put(cNsC, rating);
         }
 
-        tempRatings.add("Block:" + cNsC + ":" + Rating);
+        tempRatings.add("Block:" + cNsC + ":" + rating);
     }
 
     /**
@@ -225,20 +225,20 @@ public class CardRatings {
      *            the card name
      * @param custName
      *            the cust name
-     * @param Rating
+     * @param rating
      *            the rating
      */
-    public final void putCustomRating(final String cardName, final String custName, final int Rating) {
+    public final void putCustomRating(final String cardName, final String custName, final int rating) {
         String cNcN = cardName + "|" + custName;
         if (customRatings.containsKey(cNcN)) {
             int r = customRatings.get(cNcN);
-            int nr = (r + Rating) / 2;
+            int nr = (r + rating) / 2;
             customRatings.put(cNcN, nr);
         } else {
-            customRatings.put(cNcN, Rating);
+            customRatings.put(cNcN, rating);
         }
 
-        tempRatings.add("Custom:" + cNcN + ":" + Rating);
+        tempRatings.add("Custom:" + cNcN + ":" + rating);
     }
 
     /**

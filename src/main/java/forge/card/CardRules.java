@@ -328,7 +328,7 @@ public final class CardRules {
     public abstract static class Predicates {
 
         /** The Constant isKeptInAiDecks. */
-        public static final Predicate<CardRules> isKeptInAiDecks = new Predicate<CardRules>() {
+        public static final Predicate<CardRules> IS_KEPT_IN_AI_DECKS = new Predicate<CardRules>() {
             @Override
             public boolean isTrue(final CardRules card) {
                 return !card.isRemovedFromAIDecks;
@@ -336,7 +336,7 @@ public final class CardRules {
         };
 
         /** The Constant isKeptInRandomDecks. */
-        public static final Predicate<CardRules> isKeptInRandomDecks = new Predicate<CardRules>() {
+        public static final Predicate<CardRules> IS_KEPT_IN_RANDOM_DECKS = new Predicate<CardRules>() {
             @Override
             public boolean isTrue(final CardRules card) {
                 return !card.isRemovedFromRandomDecks;
@@ -738,16 +738,16 @@ public final class CardRules {
         public static class Presets {
 
             /** The Constant isCreature. */
-            public static final Predicate<CardRules> isCreature = coreType(true, CardCoreType.Creature);
+            public static final Predicate<CardRules> IS_CREATURE = coreType(true, CardCoreType.Creature);
 
             /** The Constant isArtifact. */
-            public static final Predicate<CardRules> isArtifact = coreType(true, CardCoreType.Artifact);
+            public static final Predicate<CardRules> IS_ARTIFACT = coreType(true, CardCoreType.Artifact);
 
             /** The Constant isLand. */
-            public static final Predicate<CardRules> isLand = coreType(true, CardCoreType.Land);
+            public static final Predicate<CardRules> IS_LAND = coreType(true, CardCoreType.Land);
 
             /** The Constant isBasicLand. */
-            public static final Predicate<CardRules> isBasicLand = new Predicate<CardRules>() {
+            public static final Predicate<CardRules> IS_BASIC_LAND = new Predicate<CardRules>() {
                 @Override
                 public boolean isTrue(final CardRules subject) {
                     return subject.getType().isBasicLand();
@@ -755,78 +755,78 @@ public final class CardRules {
             };
 
             /** The Constant isPlaneswalker. */
-            public static final Predicate<CardRules> isPlaneswalker = coreType(true, CardCoreType.Planeswalker);
+            public static final Predicate<CardRules> IS_PLANESWALKER = coreType(true, CardCoreType.Planeswalker);
 
             /** The Constant isInstant. */
-            public static final Predicate<CardRules> isInstant = coreType(true, CardCoreType.Instant);
+            public static final Predicate<CardRules> IS_INSTANT = coreType(true, CardCoreType.Instant);
 
             /** The Constant isSorcery. */
-            public static final Predicate<CardRules> isSorcery = coreType(true, CardCoreType.Sorcery);
+            public static final Predicate<CardRules> IS_SORCERY = coreType(true, CardCoreType.Sorcery);
 
             /** The Constant isEnchantment. */
-            public static final Predicate<CardRules> isEnchantment = coreType(true, CardCoreType.Enchantment);
+            public static final Predicate<CardRules> IS_ENCHANTMENT = coreType(true, CardCoreType.Enchantment);
 
             /** The Constant isNonLand. */
-            public static final Predicate<CardRules> isNonLand = coreType(false, CardCoreType.Land);
+            public static final Predicate<CardRules> IS_NON_LAND = coreType(false, CardCoreType.Land);
 
             /** The Constant isNonCreatureSpell. */
-            public static final Predicate<CardRules> isNonCreatureSpell = Predicate.compose(isCreature,
-                    PredicatesOp.NOR, isLand);
+            public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(IS_CREATURE,
+                    PredicatesOp.NOR, IS_LAND);
 
             /** The Constant isWhite. */
-            public static final Predicate<CardRules> isWhite = isColor(CardColor.WHITE);
+            public static final Predicate<CardRules> IS_WHITE = isColor(CardColor.WHITE);
 
             /** The Constant isBlue. */
-            public static final Predicate<CardRules> isBlue = isColor(CardColor.BLUE);
+            public static final Predicate<CardRules> IS_BLUE = isColor(CardColor.BLUE);
 
             /** The Constant isBlack. */
-            public static final Predicate<CardRules> isBlack = isColor(CardColor.BLACK);
+            public static final Predicate<CardRules> IS_BLACK = isColor(CardColor.BLACK);
 
             /** The Constant isRed. */
-            public static final Predicate<CardRules> isRed = isColor(CardColor.RED);
+            public static final Predicate<CardRules> IS_RED = isColor(CardColor.RED);
 
             /** The Constant isGreen. */
-            public static final Predicate<CardRules> isGreen = isColor(CardColor.GREEN);
+            public static final Predicate<CardRules> IS_GREEN = isColor(CardColor.GREEN);
 
             /** The Constant isColorless. */
-            public static final Predicate<CardRules> isColorless = hasCntColors((byte) 0);
+            public static final Predicate<CardRules> IS_COLORLESS = hasCntColors((byte) 0);
 
             /** The Constant isMulticolor. */
-            public static final Predicate<CardRules> isMulticolor = hasAtLeastCntColors((byte) 2);
+            public static final Predicate<CardRules> IS_MULTICOLOR = hasAtLeastCntColors((byte) 2);
 
             /** The Constant colors. */
-            public static final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
+            public static final List<Predicate<CardRules>> COLORS = new ArrayList<Predicate<CardRules>>();
             static {
-                colors.add(isWhite);
-                colors.add(isBlue);
-                colors.add(isBlack);
-                colors.add(isRed);
-                colors.add(isGreen);
-                colors.add(isColorless);
+                COLORS.add(IS_WHITE);
+                COLORS.add(IS_BLUE);
+                COLORS.add(IS_BLACK);
+                COLORS.add(IS_RED);
+                COLORS.add(IS_GREEN);
+                COLORS.add(IS_COLORLESS);
             }
 
             /** The Constant constantTrue. */
-            public static final Predicate<CardRules> constantTrue = Predicate.getTrue(CardRules.class);
+            public static final Predicate<CardRules> CONSTANT_TRUE = Predicate.getTrue(CardRules.class);
 
             // Think twice before using these, since rarity is a prop of printed
             // card.
             /** The Constant isInLatestSetCommon. */
-            public static final Predicate<CardRules> isInLatestSetCommon = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_COMMON = rarityInCardsLatestSet(true,
                     CardRarity.Common);
 
             /** The Constant isInLatestSetUncommon. */
-            public static final Predicate<CardRules> isInLatestSetUncommon = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_UNCOMMON = rarityInCardsLatestSet(true,
                     CardRarity.Uncommon);
 
             /** The Constant isInLatestSetRare. */
-            public static final Predicate<CardRules> isInLatestSetRare = rarityInCardsLatestSet(true, CardRarity.Rare);
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_RARE = rarityInCardsLatestSet(true, CardRarity.Rare);
 
             /** The Constant isInLatestSetMythicRare. */
-            public static final Predicate<CardRules> isInLatestSetMythicRare = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_MYTHIC_RARE = rarityInCardsLatestSet(true,
                     CardRarity.MythicRare);
 
             /** The Constant isInLatestSetSpecial. */
-            public static final Predicate<CardRules> isInLatestSetSpecial = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = rarityInCardsLatestSet(true,
                     CardRarity.Special);
         }
     }

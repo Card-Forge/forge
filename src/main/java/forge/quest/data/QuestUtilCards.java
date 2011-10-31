@@ -267,12 +267,12 @@ public final class QuestUtilCards {
         int winPacks = q.getWin() / 10;
         int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-        final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.setsInExt;
-        final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.canMakeBooster,
-                CardSet.Predicates.Presets.setsInT2);
-        final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.canMakeBooster,
-                Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.setsInT2)));
-        final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.canMakeBooster,
+        final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
+        final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+                CardSet.Predicates.Presets.SETS_IN_STANDARD);
+        final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+                Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
+        final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
                 Predicate.not(filterExt));
 
         q.shopList.clear();

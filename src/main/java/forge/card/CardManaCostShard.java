@@ -8,14 +8,14 @@ public class CardManaCostShard {
     private final int shard;
 
     /** The cmc. */
-    public final int cmc;
+    private final int cmc;
 
     /** The cmpc. */
-    public final float cmpc;
+    private final float cmpc;
     private final String stringValue;
 
     /** The image key. */
-    public final String imageKey;
+    private final String imageKey;
 
     /**
      * Instantiates a new card mana cost shard.
@@ -169,7 +169,7 @@ public class CardManaCostShard {
     /** The Constant G2. */
     public static final CardManaCostShard G2 = new CardManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
 
-    private static final CardManaCostShard[] allPossible = new CardManaCostShard[] { X, WHITE, BLUE, BLACK, RED, GREEN,
+    private static final CardManaCostShard[] ALL_POSSIBLE = new CardManaCostShard[] { X, WHITE, BLUE, BLACK, RED, GREEN,
             PW, PU, PB, PR, PG, WU, WB, WR, WG, UB, UR, UG, BR, BG, RG, W2, U2, B2, R2, G2 };
 
     private int getCMC() {
@@ -250,9 +250,9 @@ public class CardManaCostShard {
      * @return the card mana cost shard
      */
     public static CardManaCostShard valueOf(final int atoms) {
-        for (int i = 0; i < allPossible.length; i++) {
-            if (allPossible[i].shard == atoms) {
-                return allPossible[i];
+        for (int i = 0; i < ALL_POSSIBLE.length; i++) {
+            if (ALL_POSSIBLE[i].shard == atoms) {
+                return ALL_POSSIBLE[i];
             }
         }
         throw new RuntimeException(String.format("Not fount: mana shard with profile = %x", atoms));
@@ -266,5 +266,26 @@ public class CardManaCostShard {
     @Override
     public final String toString() {
         return stringValue;
+    }
+
+    /**
+     * @return the cmc
+     */
+    public int getCmc() {
+        return cmc;
+    }
+
+    /**
+     * @return the cmpc
+     */
+    public float getCmpc() {
+        return cmpc;
+    }
+
+    /**
+     * @return the imageKey
+     */
+    public String getImageKey() {
+        return imageKey;
     }
 }

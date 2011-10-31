@@ -203,22 +203,22 @@ public class DeckEditorQuestMenu extends JMenuBar {
         // creatures
 
         sb.append(String.format("%d Creatures%n-------------%n",
-                CardRules.Predicates.Presets.isCreature.aggregate(all, all.fnToCard, all.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isCreature.select(all, all.fnToCard)) {
+                CardRules.Predicates.Presets.IS_CREATURE.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_CREATURE.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
         // spells
         sb.append(String.format("%d Spells%n----------%n",
-                CardRules.Predicates.Presets.isNonCreatureSpell.aggregate(all, all.fnToCard, all.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isNonCreatureSpell.select(all, all.fnToCard)) {
+                CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
         // lands
         sb.append(String.format("%d Land%n--------%n",
-                CardRules.Predicates.Presets.isLand.aggregate(all, all.fnToCard, all.fnToCount)));
-        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.isLand.select(all, all.fnToCard)) {
+                CardRules.Predicates.Presets.IS_LAND.aggregate(all, all.fnToCard, all.fnToCount)));
+        for (Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_LAND.select(all, all.fnToCard)) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 

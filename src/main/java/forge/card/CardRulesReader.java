@@ -33,12 +33,12 @@ public class CardRulesReader {
      * Reset.
      */
     public final void reset() {
-        characteristics = new CardRuleCharacteristics[] { new CardRuleCharacteristics(), null };
-        curCharacteristics = 0;
-        removedFromAIDecks = false;
-        removedFromRandomDecks = false;
-        isDoubleFacedCard = false;
-        isFlipCard = false;
+        this.characteristics = new CardRuleCharacteristics[] { new CardRuleCharacteristics(), null };
+        this.curCharacteristics = 0;
+        this.removedFromAIDecks = false;
+        this.removedFromRandomDecks = false;
+        this.isDoubleFacedCard = false;
+        this.isFlipCard = false;
     }
 
     /**
@@ -47,12 +47,12 @@ public class CardRulesReader {
      * @return the card
      */
     public final CardRules[] getCard() {
-        CardRules[] ret = new CardRules[] {
-                new CardRules(characteristics[0], isDoubleFacedCard, false, removedFromRandomDecks, removedFromAIDecks),
-                null };
-        if (characteristics[1] != null) {
-            ret[1] = new CardRules(characteristics[1], isDoubleFacedCard, true, removedFromRandomDecks,
-                    removedFromAIDecks);
+        final CardRules[] ret = new CardRules[] {
+                new CardRules(this.characteristics[0], this.isDoubleFacedCard, false, this.removedFromRandomDecks,
+                        this.removedFromAIDecks), null };
+        if (this.characteristics[1] != null) {
+            ret[1] = new CardRules(this.characteristics[1], this.isDoubleFacedCard, true, this.removedFromRandomDecks,
+                    this.removedFromAIDecks);
         }
 
         return ret;
@@ -66,43 +66,48 @@ public class CardRulesReader {
      */
     public final void parseLine(final String line) {
         if (line.startsWith("Name:")) {
-            characteristics[curCharacteristics].setCardName(getValueAfterKey(line, "Name:"));
-            if (characteristics[curCharacteristics].getCardName() == null
-                    || characteristics[curCharacteristics].getCardName().isEmpty()) {
+            this.characteristics[this.curCharacteristics].setCardName(CardRulesReader.getValueAfterKey(line, "Name:"));
+            if ((this.characteristics[this.curCharacteristics].getCardName() == null)
+                    || this.characteristics[this.curCharacteristics].getCardName().isEmpty()) {
                 throw new RuntimeException("Card name is empty");
             }
 
         } else if (line.startsWith("ManaCost:")) {
-            String sCost = getValueAfterKey(line, "ManaCost:");
-            characteristics[curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.empty
+            final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
+            this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.EMPTY
                     : new CardManaCost(new ParserCardnameTxtManaCost(sCost)));
 
         } else if (line.startsWith("Types:")) {
-            characteristics[curCharacteristics].setCardType(CardType.parse(getValueAfterKey(line, "Types:")));
+            this.characteristics[this.curCharacteristics].setCardType(CardType.parse(CardRulesReader.getValueAfterKey(
+                    line, "Types:")));
 
         } else if (line.startsWith("Oracle:")) {
-            characteristics[curCharacteristics].setCardRules(getValueAfterKey(line, "Oracle:").split("\\n"));
+            this.characteristics[this.curCharacteristics].setCardRules(CardRulesReader
+                    .getValueAfterKey(line, "Oracle:").split("\\n"));
 
         } else if (line.startsWith("PT:")) {
-            characteristics[curCharacteristics].setPtLine(getValueAfterKey(line, "PT:"));
+            this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "PT:"));
         } else if (line.startsWith("Loyalty:")) {
-            characteristics[curCharacteristics].setPtLine(getValueAfterKey(line, "Loyalty:"));
+            this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "Loyalty:"));
 
         } else if (line.startsWith("SVar:RemAIDeck:")) {
-            removedFromAIDecks = "True".equalsIgnoreCase(getValueAfterKey(line, "SVar:RemAIDeck:"));
+            this.removedFromAIDecks = "True"
+                    .equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "SVar:RemAIDeck:"));
 
         } else if (line.startsWith("SVar:RemRandomDeck:")) {
-            removedFromRandomDecks = "True".equalsIgnoreCase(getValueAfterKey(line, "SVar:RemRandomDeck:"));
+            this.removedFromRandomDecks = "True".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+                    "SVar:RemRandomDeck:"));
 
         } else if (line.startsWith("SetInfo:")) {
-            parseSetInfoLine(line, characteristics[curCharacteristics].getSetsData());
+            CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
 
         } else if (line.startsWith("AlternateMode:")) {
-            isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(getValueAfterKey(line, "AlternateMode:"));
-            isFlipCard = "Flip".equalsIgnoreCase(getValueAfterKey(line, "AlternateMode:"));
+            this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+                    "AlternateMode:"));
+            this.isFlipCard = "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
         } else if (line.equals("ALTERNATE")) {
-            characteristics[1] = new CardRuleCharacteristics();
-            curCharacteristics = 1;
+            this.characteristics[1] = new CardRuleCharacteristics();
+            this.curCharacteristics = 1;
         }
 
     }
@@ -143,7 +148,7 @@ public class CardRulesReader {
         if (pieces.length > numPicIx) {
             try {
                 numIllustrations = Integer.parseInt(pieces[numPicIx]);
-            } catch (NumberFormatException nfe) {
+            } catch (final NumberFormatException nfe) {
                 throw new RuntimeException("Fourth item of SetInfo is not an integer in <<" + value + ">>");
             }
 
@@ -169,7 +174,7 @@ public class CardRulesReader {
             throw new RuntimeException("Unrecognized rarity string <<" + txtRarity + ">>");
         }
 
-        CardInSet cardInSet = new CardInSet(rarity, numIllustrations);
+        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations);
 
         setsData.put(setCode, cardInSet);
     }
@@ -206,8 +211,8 @@ public class CardRulesReader {
         public ParserCardnameTxtManaCost(final String cost) {
             this.cost = cost.split(" ");
             // System.out.println(cost);
-            nextToken = 0;
-            colorlessCost = 0;
+            this.nextToken = 0;
+            this.colorlessCost = 0;
         }
 
         /*
@@ -215,11 +220,12 @@ public class CardRulesReader {
          * 
          * @see forge.card.CardManaCost.ManaParser#getTotalColorlessCost()
          */
+        @Override
         public final int getTotalColorlessCost() {
-            if (hasNext()) {
+            if (this.hasNext()) {
                 throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
             }
-            return colorlessCost;
+            return this.colorlessCost;
         }
 
         /*
@@ -229,7 +235,7 @@ public class CardRulesReader {
          */
         @Override
         public final boolean hasNext() {
-            return nextToken < cost.length;
+            return this.nextToken < this.cost.length;
         }
 
         /*
@@ -240,10 +246,10 @@ public class CardRulesReader {
         @Override
         public final CardManaCostShard next() {
 
-            String unparsed = cost[nextToken++];
+            final String unparsed = this.cost[this.nextToken++];
             // System.out.println(unparsed);
             if (StringUtils.isNumeric(unparsed)) {
-                colorlessCost += Integer.parseInt(unparsed);
+                this.colorlessCost += Integer.parseInt(unparsed);
                 return null;
             }
 

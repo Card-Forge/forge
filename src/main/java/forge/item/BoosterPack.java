@@ -82,7 +82,7 @@ public class BoosterPack implements InventoryItemFromSet {
 
     private CardPrinted getRandomBasicLand(final CardSet set) {
         return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
-                CardRules.Predicates.Presets.isBasicLand, CardPrinted.fnGetRules).random(
+                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.fnGetRules).random(
                 CardDb.instance().getAllCards());
     }
 

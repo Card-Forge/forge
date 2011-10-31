@@ -115,49 +115,49 @@ class FilterCheckBoxes {
     public final Predicate<CardPrinted> buildFilter() {
         List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
         if (white.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isWhite);
+            colors.add(CardRules.Predicates.Presets.IS_WHITE);
         }
         if (blue.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isBlue);
+            colors.add(CardRules.Predicates.Presets.IS_BLUE);
         }
         if (black.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isBlack);
+            colors.add(CardRules.Predicates.Presets.IS_BLACK);
         }
         if (red.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isRed);
+            colors.add(CardRules.Predicates.Presets.IS_RED);
         }
         if (green.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isGreen);
+            colors.add(CardRules.Predicates.Presets.IS_GREEN);
         }
         if (colorless.isSelected()) {
-            colors.add(CardRules.Predicates.Presets.isColorless);
+            colors.add(CardRules.Predicates.Presets.IS_COLORLESS);
         }
-        Predicate<CardRules> filterByColor = colors.size() == 6 ? CardRules.Predicates.Presets.constantTrue : Predicate
+        Predicate<CardRules> filterByColor = colors.size() == 6 ? CardRules.Predicates.Presets.CONSTANT_TRUE : Predicate
                 .or(colors);
 
         List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
         if (land.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isLand);
+            types.add(CardRules.Predicates.Presets.IS_LAND);
         }
         if (creature.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isCreature);
+            types.add(CardRules.Predicates.Presets.IS_CREATURE);
         }
         if (sorcery.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isSorcery);
+            types.add(CardRules.Predicates.Presets.IS_SORCERY);
         }
         if (instant.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isInstant);
+            types.add(CardRules.Predicates.Presets.IS_INSTANT);
         }
         if (planeswalker.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isPlaneswalker);
+            types.add(CardRules.Predicates.Presets.IS_PLANESWALKER);
         }
         if (artifact.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isArtifact);
+            types.add(CardRules.Predicates.Presets.IS_ARTIFACT);
         }
         if (enchantment.isSelected()) {
-            types.add(CardRules.Predicates.Presets.isEnchantment);
+            types.add(CardRules.Predicates.Presets.IS_ENCHANTMENT);
         }
-        Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.constantTrue : Predicate
+        Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.CONSTANT_TRUE : Predicate
                 .or(types);
 
         return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.fnGetRules);

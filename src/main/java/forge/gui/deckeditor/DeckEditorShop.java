@@ -42,7 +42,7 @@ import forge.quest.data.ReadPriceList;
  */
 public final class DeckEditorShop extends DeckEditorBase {
 
-    /** Constant <code>serialVersionUID=3988857075791576483L</code> */
+    /** Constant <code>serialVersionUID=3988857075791576483L</code>. */
     private static final long serialVersionUID = 3988857075791576483L;
 
     private JButton buyButton = new JButton();
@@ -139,19 +139,19 @@ public final class DeckEditorShop extends DeckEditorBase {
      */
     private void setup() {
         List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
-        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.fnNameCompare,
-                PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare,
-                PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare,
-                PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare,
-                PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 30, PresetColumns.fnRarityCompare,
-                PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE, PresetColumns.FN_QTY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.FN_NAME_COMPARE,
+                PresetColumns.FN_NAME_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.FN_COST_COMPARE, PresetColumns.FN_COST_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.FN_COLOR_COMPARE,
+                PresetColumns.FN_COLOR_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.FN_TYPE_COMPARE,
+                PresetColumns.FN_TYPE_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.FN_STATS_COMPARE,
+                PresetColumns.FN_STATS_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 30, PresetColumns.FN_RARITY_COMPARE,
+                PresetColumns.FN_RARITY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.FN_SET_COMPARE, PresetColumns.FN_SET_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
@@ -213,13 +213,13 @@ public final class DeckEditorShop extends DeckEditorBase {
         sellButton.setText("Sell Card");
         sellButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                sellButton_actionPerformed(e);
+                sellButtonActionPerformed(e);
             }
         });
         buyButton.setText("Buy Card");
         buyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                buyButton_actionPerformed(e);
+                buyButtonActionPerformed(e);
             }
         });
 
@@ -281,7 +281,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         return 1337;
     }
 
-    private void buyButton_actionPerformed(final ActionEvent e) {
+    private void buyButtonActionPerformed(final ActionEvent e) {
         InventoryItem item = top.getSelectedCard();
         if (item == null) {
             return;
@@ -325,7 +325,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         return Predicate.getTrue(InventoryItem.class);
     }
 
-    private void sellButton_actionPerformed(final ActionEvent e) {
+    private void sellButtonActionPerformed(final ActionEvent e) {
         InventoryItem item = bottom.getSelectedCard();
         if (item == null || !(item instanceof CardPrinted)) {
             return;

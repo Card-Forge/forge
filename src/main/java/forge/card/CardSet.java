@@ -59,7 +59,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     }
 
     /** The Constant unknown. */
-    public static final CardSet unknown = new CardSet(-1, "Undefined", "???", "??");
+    public static final CardSet UNKNOWN = new CardSet(-1, "Undefined", "???", "??");
 
     /**
      * Gets the name.
@@ -116,7 +116,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     }
 
     /** The Constant fnGetName. */
-    public static final Lambda1<String, CardSet> fnGetName = new Lambda1<String, CardSet>() {
+    public static final Lambda1<String, CardSet> FN_GET_NAME = new Lambda1<String, CardSet>() {
         @Override
         public String apply(final CardSet arg1) {
             return arg1.name;
@@ -124,7 +124,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     };
 
     /** The Constant fn1. */
-    public static final Lambda1<CardSet, CardSet> fn1 = new Lambda1<CardSet, CardSet>() {
+    public static final Lambda1<CardSet, CardSet> FN1 = new Lambda1<CardSet, CardSet>() {
         @Override
         public CardSet apply(final CardSet arg1) {
             return arg1;
@@ -319,7 +319,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     public abstract static class Predicates {
 
         /** The Constant canMakeBooster. */
-        public static final Predicate<CardSet> canMakeBooster = new CanMakeBooster();
+        public static final Predicate<CardSet> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
         /**
          * Checks if is legal in format.
@@ -356,13 +356,13 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         public abstract static class Presets {
 
             /** The Constant setsInT2. */
-            public static final Predicate<CardSet> setsInT2 = isLegalInFormat(SetUtils.getStandard());
+            public static final Predicate<CardSet> SETS_IN_STANDARD = isLegalInFormat(SetUtils.getStandard());
 
             /** The Constant setsInExt. */
-            public static final Predicate<CardSet> setsInExt = isLegalInFormat(SetUtils.getExtended());
+            public static final Predicate<CardSet> SETS_IN_EXT = isLegalInFormat(SetUtils.getExtended());
 
             /** The Constant setsInModern. */
-            public static final Predicate<CardSet> setsInModern = isLegalInFormat(SetUtils.getModern());
+            public static final Predicate<CardSet> SET_IN_MODERN = isLegalInFormat(SetUtils.getModern());
         }
     }
 }

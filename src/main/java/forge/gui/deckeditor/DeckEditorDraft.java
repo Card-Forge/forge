@@ -144,21 +144,21 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         // setupMenu();
 
         List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
-        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.fnQtyCompare, PresetColumns.fnQtyGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.fnNameCompare,
-                PresetColumns.fnNameGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.fnCostCompare, PresetColumns.fnCostGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.fnColorCompare,
-                PresetColumns.fnColorGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.fnTypeCompare,
-                PresetColumns.fnTypeGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.fnStatsCompare,
-                PresetColumns.fnStatsGet));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.fnRarityCompare,
-                PresetColumns.fnRarityGet));
-        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.fnSetCompare, PresetColumns.fnSetGet));
-        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.fnAiStatusCompare,
-                PresetColumns.fnAiStatusGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE, PresetColumns.FN_QTY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.FN_NAME_COMPARE,
+                PresetColumns.FN_NAME_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.FN_COST_COMPARE, PresetColumns.FN_COST_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.FN_COLOR_COMPARE,
+                PresetColumns.FN_COLOR_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.FN_TYPE_COMPARE,
+                PresetColumns.FN_TYPE_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.FN_STATS_COMPARE,
+                PresetColumns.FN_STATS_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 35, PresetColumns.FN_RARITY_COMPARE,
+                PresetColumns.FN_RARITY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.FN_SET_COMPARE, PresetColumns.FN_SET_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.FN_AI_STATUS_COMPARE,
+                PresetColumns.FN_AI_STATUS_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         top.setup(columns, cardView);

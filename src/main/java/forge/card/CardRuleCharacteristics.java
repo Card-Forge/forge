@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class CardRuleCharacteristics {
     private String cardName = null;
     private CardType cardType = null;
-    private CardManaCost manaCost = CardManaCost.empty;
+    private CardManaCost manaCost = CardManaCost.EMPTY;
     private CardColor color = null;
     private String ptLine = null;
     private String[] cardRules = null;
