@@ -16,4 +16,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_war_riders.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/122.jpg
+Oracle:Cumulative upkeep-Put a 1/1 red Survivor creature token onto the battlefield under an opponent's control. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nTrample; rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)
 End

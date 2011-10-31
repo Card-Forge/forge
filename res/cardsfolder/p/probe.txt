@@ -10,4 +10,6 @@ SVar:DBDiscard3:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target playe
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/probe.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/66.jpg
+Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw three cards, then discard two cards.\nIf Probe was kicked, target player discards two cards.
 End

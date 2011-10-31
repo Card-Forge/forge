@@ -10,4 +10,5 @@ SVar:X:TriggeredCard$CardCounters.AGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jotun_owl_keeper.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/9.jpg
+Oracle:Cumulative upkeep {W} or {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Jotun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
 End
