@@ -173,6 +173,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
     public final Card copyCard(final Card in) {
         final Card out = this.getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
+        out.setCurSetCode(in.getCurSetCode());
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
