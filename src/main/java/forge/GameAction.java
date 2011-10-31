@@ -2013,7 +2013,7 @@ public class GameAction {
                             }
                         }
                         if (chosen == null) {
-                            chosen = CardFactoryUtil.AI_getWorstCreature(grave);
+                            chosen = CardFactoryUtil.getWorstCreatureAI(grave);
                         }
 
                         if (chosen == null) {

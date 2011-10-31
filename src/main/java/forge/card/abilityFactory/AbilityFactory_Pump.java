@@ -274,7 +274,7 @@ public class AbilityFactory_Pump {
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
-                if (CardFactoryUtil.AI_doesCreatureAttack(c)
+                if (CardFactoryUtil.doesCreatureAttackAI(c)
                         && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     return true;
@@ -496,7 +496,7 @@ public class AbilityFactory_Pump {
                     } else if (this.hostCard.equals(card)) {
                         final Random r = MyRandom.getRandom();
                         if (r.nextFloat() <= Math.pow(.6667, activations)) {
-                            return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
+                            return CardFactoryUtil.doesCreatureAttackAI(card) && !sa.getPayCosts().getTap();
                         }
                     } else {
                         final Random r = MyRandom.getRandom();
@@ -580,7 +580,7 @@ public class AbilityFactory_Pump {
                 }
             }
 
-            t = CardFactoryUtil.AI_getBestCreature(list);
+            t = CardFactoryUtil.getBestCreatureAI(list);
             tgt.addTarget(t);
             list.remove(t);
         }
@@ -635,9 +635,9 @@ public class AbilityFactory_Pump {
 
             Card c;
             if (pref.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getBestCreature(pref);
+                c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.AI_getMostExpensivePermanent(pref, source, true);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, source, true);
             }
 
             pref.remove(c);
@@ -652,9 +652,9 @@ public class AbilityFactory_Pump {
 
             Card c;
             if (forced.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getWorstCreature(forced);
+                c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.AI_getCheapestPermanent(forced, source, true);
+                c = CardFactoryUtil.getCheapestPermanentAI(forced, source, true);
             }
 
             forced.remove(c);

@@ -459,7 +459,7 @@ public class AbilityFactory_DealDamage {
 
         Card targetCard;
         if (pl.isHuman() && (killables.size() > 0)) {
-            targetCard = CardFactoryUtil.AI_getBestCreature(killables);
+            targetCard = CardFactoryUtil.getBestCreatureAI(killables);
 
             return targetCard;
         }
@@ -470,9 +470,9 @@ public class AbilityFactory_DealDamage {
 
         if (hPlay.size() > 0) {
             if (pl.isHuman()) {
-                targetCard = CardFactoryUtil.AI_getBestCreature(hPlay);
+                targetCard = CardFactoryUtil.getBestCreatureAI(hPlay);
             } else {
-                targetCard = CardFactoryUtil.AI_getWorstCreature(hPlay);
+                targetCard = CardFactoryUtil.getWorstCreatureAI(hPlay);
             }
 
             return targetCard;

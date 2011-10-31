@@ -328,15 +328,15 @@ public class AbilityFactory_GainControl {
             }
 
             if (hasCreature) {
-                t = CardFactoryUtil.AI_getBestCreature(list);
+                t = CardFactoryUtil.getBestCreatureAI(list);
             } else if (hasArtifact) {
-                t = CardFactoryUtil.AI_getBestArtifact(list);
+                t = CardFactoryUtil.getBestArtifactAI(list);
             } else if (hasLand) {
-                t = CardFactoryUtil.AI_getBestLand(list);
+                t = CardFactoryUtil.getBestLandAI(list);
             } else if (hasEnchantment) {
-                t = CardFactoryUtil.AI_getBestEnchantment(list, sa.getSourceCard(), true);
+                t = CardFactoryUtil.getBestEnchantmentAI(list, sa.getSourceCard(), true);
             } else {
-                t = CardFactoryUtil.AI_getMostExpensivePermanent(list, sa.getSourceCard(), true);
+                t = CardFactoryUtil.getMostExpensivePermanentAI(list, sa.getSourceCard(), true);
             }
 
             tgt.addTarget(t);

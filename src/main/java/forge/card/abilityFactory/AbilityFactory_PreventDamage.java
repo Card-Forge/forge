@@ -313,7 +313,7 @@ public class AbilityFactory_PreventDamage {
 
             if (!threatenedTargets.isEmpty()) {
                 // Choose "best" of the remaining to save
-                tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
+                tgt.addTarget(CardFactoryUtil.getBestCreatureAI(threatenedTargets));
                 chance = true;
             }
 
@@ -439,7 +439,7 @@ public class AbilityFactory_PreventDamage {
             return true;
         }
 
-        tgt.addTarget(CardFactoryUtil.AI_getCheapestPermanent(targetables, hostCard, true));
+        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, hostCard, true));
         return true;
     }
 

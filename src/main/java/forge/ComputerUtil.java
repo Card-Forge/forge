@@ -1490,7 +1490,7 @@ public class ComputerUtil {
 
             Card c;
             if (list.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getWorstCreature(list);
+                c = CardFactoryUtil.getWorstCreatureAI(list);
             } else if (list.getNotType("Land").size() == 0) {
                 c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
             } else {

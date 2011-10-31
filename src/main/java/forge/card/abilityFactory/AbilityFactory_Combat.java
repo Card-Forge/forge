@@ -954,11 +954,11 @@ public final class AbilityFactory_Combat {
                 }
             });
             if (!list.isEmpty()) {
-                final Card blocker = CardFactoryUtil.AI_getBestCreature(list);
+                final Card blocker = CardFactoryUtil.getBestCreatureAI(list);
                 if (blocker == null) {
                     return false;
                 }
-                abTgt.addTarget(CardFactoryUtil.AI_getBestCreature(list));
+                abTgt.addTarget(CardFactoryUtil.getBestCreatureAI(list));
                 chance = true; // TODO change this to true, once the human input
                                // takes mustblocks into account
             }

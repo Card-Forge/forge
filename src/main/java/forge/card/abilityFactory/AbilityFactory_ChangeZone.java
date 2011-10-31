@@ -942,19 +942,19 @@ public final class AbilityFactory_ChangeZone {
             } else if (AbilityFactory_ChangeZone.areAllBasics(type)) {
                 c = AbilityFactory_ChangeZone.basicManaFixing(fetchList, type);
             } else if (fetchList.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getBestCreature(fetchList); // if only
+                c = CardFactoryUtil.getBestCreatureAI(fetchList); // if only
                                                                    // creatures
                                                                    // take the
                                                                    // best
             } else if (Zone.Battlefield.equals(destination) || Zone.Graveyard.equals(destination)) {
-                c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, af.getHostCard(), false);
             } else if (Zone.Exile.equals(destination)) {
                 // Exiling your own stuff, if Exiling opponents stuff choose
                 // best
                 if (destZone.getPlayer().isHuman()) {
-                    c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
+                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, af.getHostCard(), false);
                 } else {
-                    c = CardFactoryUtil.AI_getCheapestPermanent(fetchList, af.getHostCard(), false);
+                    c = CardFactoryUtil.getCheapestPermanentAI(fetchList, af.getHostCard(), false);
                 }
             } else {
                 // Don't fetch another tutor with the same name
@@ -1318,7 +1318,7 @@ public final class AbilityFactory_ChangeZone {
 
                     if (!threatenedTargets.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(CardFactoryUtil.AI_getBestCreature(threatenedTargets));
+                        tgt.addTarget(CardFactoryUtil.getBestCreatureAI(threatenedTargets));
                         return true;
                     }
                 }
@@ -1357,7 +1357,7 @@ public final class AbilityFactory_ChangeZone {
                     });
                     if (!aiPermanents.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(CardFactoryUtil.AI_getBest(aiPermanents));
+                        tgt.addTarget(CardFactoryUtil.getBestAI(aiPermanents));
                         return true;
                     }
                 }
@@ -1400,15 +1400,15 @@ public final class AbilityFactory_ChangeZone {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                final Card mostExpensive = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+                final Card mostExpensive = CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false);
                 if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
                         if (destination.equals(Zone.Exile)) {
                             // If Exiling things, don't give bonus to Tokens
-                            choice = CardFactoryUtil.AI_getBestCreature(list);
+                            choice = CardFactoryUtil.getBestCreatureAI(list);
                         } else {
-                            choice = CardFactoryUtil.AI_getBestCreatureToBounce(list);
+                            choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
                         }
                     } else {
                         choice = mostExpensive;
@@ -1495,12 +1495,12 @@ public final class AbilityFactory_ChangeZone {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature()
+                if (CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false).isCreature()
                         && (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield))) {
                     // if a creature is most expensive take the best
-                    choice = CardFactoryUtil.AI_getBestCreatureToBounce(list);
+                    choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
                 } else if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
-                    choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false);
                 } else {
                     // TODO AI needs more improvement to it's retrieval (reuse
                     // some code from spReturn here)

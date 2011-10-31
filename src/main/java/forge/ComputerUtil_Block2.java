@@ -316,9 +316,9 @@ public class ComputerUtil_Block2 {
                 // destroyed
                 killingBlockers = getKillingBlockers(attacker, safeBlockers, combat);
                 if (killingBlockers.size() > 0) {
-                    blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
+                    blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
                 } else {
-                    blocker = CardFactoryUtil.AI_getWorstCreature(safeBlockers);
+                    blocker = CardFactoryUtil.getWorstCreatureAI(safeBlockers);
                     getBlockedButUnkilled().add(attacker);
                 }
             } // no safe blockers
@@ -327,7 +327,7 @@ public class ComputerUtil_Block2 {
                 if (killingBlockers.size() > 0) {
                     // 3.Blockers that can destroy the attacker and are worth
                     // less
-                    Card worst = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
+                    Card worst = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
 
                     if (CardFactoryUtil.evaluateCreature(worst) + getDiff() < CardFactoryUtil
                             .evaluateCreature(attacker)) {
@@ -428,7 +428,7 @@ public class ComputerUtil_Block2 {
                 return combat;
             }
 
-            Card leader = CardFactoryUtil.AI_getBestCreature(usableBlockers);
+            Card leader = CardFactoryUtil.getBestCreatureAI(usableBlockers);
             blockGang.add(leader);
             usableBlockers.remove(leader);
             absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
@@ -485,7 +485,7 @@ public class ComputerUtil_Block2 {
             killingBlockers = getKillingBlockers(attacker, getPossibleBlockers(attacker, getBlockersLeft(), combat),
                     combat);
             if (killingBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
-                Card blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
+                Card blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
                 getBlockersLeft().remove(blocker);
@@ -513,7 +513,7 @@ public class ComputerUtil_Block2 {
         for (Card attacker : getAttackersLeft()) {
             chumpBlockers = getPossibleBlockers(attacker, getBlockersLeft(), combat);
             if (chumpBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
-                Card blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
+                Card blocker = CardFactoryUtil.getWorstCreatureAI(chumpBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
                 getBlockedButUnkilled().add(attacker);

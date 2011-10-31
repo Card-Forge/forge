@@ -43,7 +43,7 @@ public class Spell_Permanent extends Spell {
         public void showMessage() {
             CardList choice = (CardList) championGetCreature.execute();
 
-            stopSetNext(CardFactoryUtil.input_targetChampionSac(getSourceCard(), championAbilityComes, choice,
+            stopSetNext(CardFactoryUtil.inputTargetChampionSac(getSourceCard(), championAbilityComes, choice,
                     "Select another " + championValidDesc + " you control to exile", false, false));
             ButtonUtil.disableAll(); // target this card means: sacrifice this
                                      // card

@@ -533,7 +533,7 @@ public class AbilityFactory_Counters {
 
                 else {
                     if (type.equals("M1M1")) {
-                        choice = CardFactoryUtil.AI_getWorstCreature(list);
+                        choice = CardFactoryUtil.getWorstCreatureAI(list);
                     } else {
                         choice = CardFactoryUtil.getRandomCard(list);
                     }
@@ -545,7 +545,7 @@ public class AbilityFactory_Counters {
 
                 else {
                     if (type.equals("P1P1")) {
-                        choice = CardFactoryUtil.AI_getWorstCreature(list);
+                        choice = CardFactoryUtil.getWorstCreatureAI(list);
                     } else {
                         choice = CardFactoryUtil.getRandomCard(list);
                     }
@@ -589,9 +589,9 @@ public class AbilityFactory_Counters {
                 }
             });
             if (killable.size() > 0) {
-                choice = CardFactoryUtil.AI_getBestCreature(killable);
+                choice = CardFactoryUtil.getBestCreatureAI(killable);
             } else {
-                choice = CardFactoryUtil.AI_getBestCreature(list);
+                choice = CardFactoryUtil.getBestCreatureAI(list);
             }
         } else {
             // improve random choice here
@@ -614,7 +614,7 @@ public class AbilityFactory_Counters {
     private static Card chooseBoonTarget(final CardList list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
-            choice = CardFactoryUtil.AI_getBestCreature(list);
+            choice = CardFactoryUtil.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
             final CardList boon = list.filter(new CardListFilter() {
                 @Override
@@ -622,7 +622,7 @@ public class AbilityFactory_Counters {
                     return c.getCounters(Counters.DIVINITY) == 0;
                 }
             });
-            choice = CardFactoryUtil.AI_getMostExpensivePermanent(boon, null, false);
+            choice = CardFactoryUtil.getMostExpensivePermanentAI(boon, null, false);
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand

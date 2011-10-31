@@ -377,7 +377,7 @@ public final class AbilityFactory_Debuff {
                 }
             }
 
-            t = CardFactoryUtil.AI_getBestCreature(list);
+            t = CardFactoryUtil.getBestCreatureAI(list);
             tgt.addTarget(t);
             list.remove(t);
         }
@@ -456,9 +456,9 @@ public final class AbilityFactory_Debuff {
 
             Card c;
             if (pref.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getBestCreature(pref);
+                c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.AI_getMostExpensivePermanent(pref, source, true);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, source, true);
             }
 
             pref.remove(c);
@@ -475,9 +475,9 @@ public final class AbilityFactory_Debuff {
             // keyword
             Card c;
             if (forced.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.AI_getWorstCreature(forced);
+                c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.AI_getCheapestPermanent(forced, source, true);
+                c = CardFactoryUtil.getCheapestPermanentAI(forced, source, true);
             }
 
             forced.remove(c);

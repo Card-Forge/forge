@@ -277,9 +277,9 @@ public final class AbilityFactory_Copy {
 
                 Card choice;
                 if (list.filter(CardListFilter.CREATURES).size() > 0) {
-                    choice = CardFactoryUtil.AI_getBestCreature(list);
+                    choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
-                    choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, source, true);
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, source, true);
                 }
 
                 if (choice == null) { // can't find anything left

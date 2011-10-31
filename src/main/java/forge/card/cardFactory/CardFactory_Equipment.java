@@ -164,7 +164,7 @@ class CardFactory_Equipment {
                 } // execute()
             }; // Command
 
-            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
+            equip.setBeforePayMana(CardFactoryUtil.inputEquipCreature(equip));
             equip.getRestrictions().setSorcerySpeed(true);
 
             equip.setDescription("Equip: 0");
@@ -215,7 +215,7 @@ class CardFactory_Equipment {
                 // not changed
                 @Override
                 public void chooseTargetAI() {
-                    final Card target = CardFactoryUtil.AI_getBestCreature(this.getCreature());
+                    final Card target = CardFactoryUtil.getBestCreatureAI(this.getCreature());
                     this.setTargetCard(target);
                 }
 
@@ -225,7 +225,7 @@ class CardFactory_Equipment {
                     list = list.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return CardFactoryUtil.AI_doesCreatureAttack(c) && CardFactoryUtil.canTarget(card, c)
+                            return CardFactoryUtil.doesCreatureAttackAI(c) && CardFactoryUtil.canTarget(card, c)
                                     && (!c.hasKeyword("Defender"));
                         }
                     });
@@ -273,7 +273,7 @@ class CardFactory_Equipment {
                 } // execute()
             }; // Command
 
-            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
+            equip.setBeforePayMana(CardFactoryUtil.inputEquipCreature(equip));
 
             equip.setDescription("Equip: 4");
             card.addSpellAbility(equip);
@@ -330,8 +330,7 @@ class CardFactory_Equipment {
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()
-                            && CardFactoryUtil.canTarget(card, c))
-                    {
+                            && CardFactoryUtil.canTarget(card, c)) {
                         card.equipCard(c);
                         this.stop();
                     }
@@ -413,9 +412,9 @@ class CardFactory_Equipment {
                     }
                 }
 
-                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, power, tough, extrinsicKeywords, abCost));
-                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, power, tough, extrinsicKeywords, abCost));
-                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, power, tough, extrinsicKeywords, abCost));
+                card.addSpellAbility(CardFactoryUtil.eqPumpEquip(card, power, tough, extrinsicKeywords, abCost));
+                card.addEquipCommand(CardFactoryUtil.eqPumpOnEquip(card, power, tough, extrinsicKeywords, abCost));
+                card.addUnEquipCommand(CardFactoryUtil.eqPumpUnEquip(card, power, tough, extrinsicKeywords, abCost));
 
             }
         } // eqPump (was VanillaEquipment)

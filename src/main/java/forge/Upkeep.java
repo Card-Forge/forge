@@ -537,7 +537,7 @@ public class Upkeep implements java.io.Serializable {
                         if (indestruct.size() > 0) {
                             AllZone.getGameAction().destroyNoRegeneration(indestruct.get(0));
                         } else {
-                            final Card target = CardFactoryUtil.AI_getWorstCreature(targets);
+                            final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
@@ -625,7 +625,7 @@ public class Upkeep implements java.io.Serializable {
                             } // selectCard()
                         }); // Input
                     } else { // computer
-                        final Card target = CardFactoryUtil.AI_getCheapestPermanent(artifacts, c, false);
+                        final Card target = CardFactoryUtil.getCheapestPermanentAI(artifacts, c, false);
                         if (null == target) {
                             this.tapAndDamage(player);
                         } else {
@@ -683,7 +683,7 @@ public class Upkeep implements java.io.Serializable {
                                 PlayerUtil.input_sacrificePermanent(creatures, c.getName()
                                         + " - Select a creature to sacrifice."));
                     } else { // computer
-                        final Card target = CardFactoryUtil.AI_getWorstCreature(creatures);
+                        final Card target = CardFactoryUtil.getWorstCreatureAI(creatures);
                         AllZone.getGameAction().sacrifice(target);
                     }
                 } // resolve
@@ -748,7 +748,7 @@ public class Upkeep implements java.io.Serializable {
                         final int power = creatures.get(0).getNetAttack();
                         if (player.isHuman()) {
                             AllZone.getInputControl().setInput(
-                                    CardFactoryUtil.input_destroyNoRegeneration(this.getLowestPowerList(creatures),
+                                    CardFactoryUtil.inputDestroyNoRegeneration(this.getLowestPowerList(creatures),
                                             "Select creature with power: " + power + " to sacrifice."));
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
@@ -827,7 +827,7 @@ public class Upkeep implements java.io.Serializable {
                                             + " - Select a land to sacrifice."));
                         }
                     } else {
-                        final Card target = CardFactoryUtil.AI_getBestLand(playerLand);
+                        final Card target = CardFactoryUtil.getBestLandAI(playerLand);
 
                         AllZone.getGameAction().sacrifice(target);
                     }
@@ -2587,7 +2587,7 @@ public class Upkeep implements java.io.Serializable {
 
                     for (int i = 0; i < num; i++) {
                         if (player.isComputer()) {
-                            final Card toTap = CardFactoryUtil.AI_getWorstPermanent(list, false, false, false, false);
+                            final Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
                             if (null != toTap) {
                                 toTap.tap();
                                 list.remove(toTap);

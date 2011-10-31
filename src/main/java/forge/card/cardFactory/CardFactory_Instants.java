@@ -273,7 +273,7 @@ public class CardFactory_Instants {
 
                 CardList getCreature() {
                     final CardList out = new CardList();
-                    final CardList list = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", card, true);
                     list.shuffle();
 
                     for (int i = 0; i < list.size(); i++) {
@@ -284,9 +284,9 @@ public class CardFactory_Instants {
 
                     // in case human player only has a few creatures in play,
                     // target anything
-                    if (out.isEmpty() && (0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size())
-                            && (3 > CardFactoryUtil.AI_getHumanCreature(card, true).size())) {
-                        out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true));
+                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, card, true).size())
+                            && (3 > CardFactoryUtil.getHumanCreatureAI(card, true).size())) {
+                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, card, true));
                         CardListUtil.sortFlying(out);
                     }
                     return out;
@@ -365,7 +365,7 @@ public class CardFactory_Instants {
                 }
 
             };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            spell.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
 
             card.addSpellAbility(spell);
 
@@ -379,14 +379,14 @@ public class CardFactory_Instants {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    final CardList human = CardFactoryUtil.getHumanCreatureAI(card, true);
                     return (4 < AllZone.getPhase().getTurn()) && (0 < human.size());
                 }
 
                 @Override
                 public void chooseTargetAI() {
-                    final CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    this.setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
+                    final CardList human = CardFactoryUtil.getHumanCreatureAI(card, true);
+                    this.setTargetCard(CardFactoryUtil.getBestCreatureAI(human));
                 }
 
                 @Override
@@ -441,8 +441,7 @@ public class CardFactory_Instants {
 
                 @Override
                 public void selectCard(final Card card, final PlayerZone zone) {
-                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield)
-                            && CardFactoryUtil.canTarget(spell, card)) {
+                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(spell, card)) {
                         spell.setTargetCard(card);
                         if (this.isFree()) {
                             this.setFree(false);
@@ -523,21 +522,21 @@ public class CardFactory_Instants {
                     final CardList selectedCards = new CardList();
 
                     // pick best creature
-                    Card c = CardFactoryUtil.AI_getBestCreature(list);
+                    Card c = CardFactoryUtil.getBestCreatureAI(list);
                     if (c == null) {
                         c = list.get(0);
                     }
                     list.remove(c);
                     selectedCards.add(c);
 
-                    c = CardFactoryUtil.AI_getBestCreature(list);
+                    c = CardFactoryUtil.getBestCreatureAI(list);
                     if (c == null) {
                         c = list.get(0);
                     }
                     list.remove(c);
                     selectedCards.add(c);
 
-                    c = CardFactoryUtil.AI_getBestCreature(list);
+                    c = CardFactoryUtil.getBestCreatureAI(list);
                     if (c == null) {
                         c = list.get(0);
                     }
@@ -867,8 +866,8 @@ public class CardFactory_Instants {
         else if (cardName.equals("Telling Time")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2626878556107707854L;
-                private String[] prompt = new String[] { "Put a card into your hand", "Put a card on top of library",
-                        "Put a card on bottom of library" };
+                private final String[] prompt = new String[] { "Put a card into your hand",
+                        "Put a card on top of library", "Put a card on bottom of library" };
 
                 @Override
                 public boolean canPlayAI() {
@@ -958,7 +957,7 @@ public class CardFactory_Instants {
             final Cost abCost = new Cost("1 R", cardName, false);
             final SpellAbility spell = new Spell(card, abCost, new Target(card, "TgtC")) {
                 private static final long serialVersionUID = -3069135027502686218L;
-                private int damage = 3;
+                private final int damage = 3;
 
                 @Override
                 public void chooseTargetAI() {
@@ -972,10 +971,10 @@ public class CardFactory_Instants {
                     });
                     final CardList infect = creatures.getKeyword("Infect");
                     if (infect.size() > 0) {
-                        final Card c = CardFactoryUtil.AI_getBestCreature(infect);
+                        final Card c = CardFactoryUtil.getBestCreatureAI(infect);
                         this.setTargetCard(c);
                     } else {
-                        final Card c = CardFactoryUtil.AI_getBestCreature(creatures);
+                        final Card c = CardFactoryUtil.getBestCreatureAI(creatures);
                         this.setTargetCard(c);
                     }
 
@@ -1102,7 +1101,7 @@ public class CardFactory_Instants {
             };
             spell.setSubAbility(sub);
             spell.setDescription("Target creature you control deals damage "
-            + "equal to its power to target creature with flying.");
+                    + "equal to its power to target creature with flying.");
             spell.setStackDescription(card
                     + " - Creature you control deals damage equal to its power to creature with flying.");
 

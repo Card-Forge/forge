@@ -12,6 +12,7 @@ import forge.card.CardRules;
 import forge.error.ErrorViewer;
 import forge.item.CardDb;
 import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -56,16 +57,16 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         super(file);
 
         try {
-            readCards(file);
+            this.readCards(file);
 
             // initialize CardList allCards
-            Iterator<String> it = getMap().keySet().iterator();
+            final Iterator<String> it = this.getMap().keySet().iterator();
             Card c;
             while (it.hasNext()) {
-                c = getCard(it.next().toString(), AllZone.getHumanPlayer());
-                getAllCards().add(c);
+                c = this.getCard(it.next().toString(), AllZone.getHumanPlayer());
+                this.getAllCards().add(c);
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
     } // constructor
@@ -79,10 +80,11 @@ public class PreloadingCardFactory extends AbstractCardFactory {
      *            a {@link java.io.File} object.
      */
     protected final void readCards(final File file) {
-        getMap().clear();
+        this.getMap().clear();
 
-        List<CardRules> listCardRules = new ArrayList<CardRules>();
-        CardReader read = new CardReader(ForgeProps.getFile(CARDSFOLDER), getMap(), listCardRules);
+        final List<CardRules> listCardRules = new ArrayList<CardRules>();
+        final CardReader read = new CardReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), this.getMap(),
+                listCardRules);
 
         // this fills in our map of card names to Card instances.
         read.run();

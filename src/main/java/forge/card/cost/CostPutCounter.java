@@ -201,9 +201,9 @@ public class CostPutCounter extends CostPartWithList {
 
             Card card = null;
             if (type.equals("Creature.YouCtrl")) {
-                card = CardFactoryUtil.AI_getWorstCreature(typeList);
+                card = CardFactoryUtil.getWorstCreatureAI(typeList);
             } else {
-                card = CardFactoryUtil.AI_getWorstPermanent(typeList, false, false, false, false);
+                card = CardFactoryUtil.getWorstPermanentAI(typeList, false, false, false, false);
             }
             addToList(card);
         }

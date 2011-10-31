@@ -275,7 +275,7 @@ public class AIPlayer extends Player {
     public final void sacrificePermanent(final String prompt, final CardList choices) {
         if (choices.size() > 0) {
             // TODO - this could probably use better AI
-            Card c = CardFactoryUtil.AI_getWorstPermanent(choices, false, false, false, false);
+            Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);
             AllZone.getGameAction().sacrificeDestroy(c);
         }
     }

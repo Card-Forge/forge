@@ -2198,7 +2198,7 @@ public class CombatUtil {
                         }
                     });
                     if (enchantments.size() > 0) {
-                        Card card = CardFactoryUtil.AI_getBestEnchantment(enchantments, c, false);
+                        Card card = CardFactoryUtil.getBestEnchantmentAI(enchantments, c, false);
                         AllZone.getGameAction().moveToPlay(card);
                         c.getController().shuffle();
                     }
@@ -2277,7 +2277,7 @@ public class CombatUtil {
                         card.setCreatureAttackedThisCombat(true);
                     }
                 } else if (c.getController().isComputer()) {
-                    Card card = CardFactoryUtil.AI_getBestCreature(soldiers);
+                    Card card = CardFactoryUtil.getBestCreatureAI(soldiers);
                     if (card != null) {
                         AllZone.getGameAction().moveToPlay(card);
 
@@ -2568,7 +2568,7 @@ public class CombatUtil {
                                 enchantment = ((Card) check);
                             }
                         } else {
-                            enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments, attacker, false);
+                            enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, attacker, false);
                         }
                         if (enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZoneOf(enchantment),

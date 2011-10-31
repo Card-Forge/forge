@@ -320,7 +320,7 @@ public class AbilityFactory_Attach {
             return null;
         }
 
-        return CardFactoryUtil.AI_getWorstPermanent(list, true, true, true, false);
+        return CardFactoryUtil.getWorstPermanentAI(list, true, true, true, false);
     }
 
     /**
@@ -337,7 +337,7 @@ public class AbilityFactory_Attach {
             return null;
         }
 
-        return CardFactoryUtil.AI_getBest(list);
+        return CardFactoryUtil.getBestAI(list);
     }
 
     /**
@@ -391,7 +391,7 @@ public class AbilityFactory_Attach {
 
         }
 
-        final Card c = CardFactoryUtil.AI_getBest(list);
+        final Card c = CardFactoryUtil.getBestAI(list);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -441,7 +441,7 @@ public class AbilityFactory_Attach {
                 }
             });
 
-            return CardFactoryUtil.AI_getBest(magnetList);
+            return CardFactoryUtil.getBestAI(magnetList);
         }
 
         int totToughness = 0;
@@ -536,11 +536,11 @@ public class AbilityFactory_Attach {
                     return !c.isCreature() || CombatUtil.canAttack(c);
                 }
             });
-            c = CardFactoryUtil.AI_getBest(prefList);
+            c = CardFactoryUtil.getBestAI(prefList);
         } else {
             // If we grant abilities, we may want to put it on something Weak?
             // Possibly more defensive?
-            c = CardFactoryUtil.AI_getWorstPermanent(prefList, false, false, false, false);
+            c = CardFactoryUtil.getWorstPermanentAI(prefList, false, false, false, false);
         }
 
         if (c == null) {
@@ -628,7 +628,7 @@ public class AbilityFactory_Attach {
         if ((prefList == null) || (prefList.size() == 0)) {
             prefList = new CardList(list);
         } else {
-            c = CardFactoryUtil.AI_getBest(prefList);
+            c = CardFactoryUtil.getBestAI(prefList);
             if (c != null) {
                 return c;
             }
@@ -648,7 +648,7 @@ public class AbilityFactory_Attach {
             }
         }
 
-        c = CardFactoryUtil.AI_getBest(prefList);
+        c = CardFactoryUtil.getBestAI(prefList);
 
         if (c == null) {
             return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);
@@ -686,7 +686,7 @@ public class AbilityFactory_Attach {
         list = list.getNotType(type); // Filter out Basic Lands that have the
                                       // same type as the changing type
 
-        final Card c = CardFactoryUtil.AI_getBest(list);
+        final Card c = CardFactoryUtil.getBestAI(list);
 
         // TODO Port over some of the existing code, but rewrite most of it.
         // Ultimately, these spells need to be used to reduce mana base of a
@@ -748,7 +748,7 @@ public class AbilityFactory_Attach {
             }
         });
 
-        final Card c = CardFactoryUtil.AI_getBest(prefList);
+        final Card c = CardFactoryUtil.getBestAI(prefList);
 
         if (c == null) {
             return AbilityFactory_Attach.chooseLessPreferred(mandatory, list);

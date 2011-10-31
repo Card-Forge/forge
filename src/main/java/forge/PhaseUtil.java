@@ -270,7 +270,7 @@ public class PhaseUtil {
                     }
                 });
                 if (artList.size() > 0) {
-                    CardFactoryUtil.AI_getBestArtifact(artList).untap();
+                    CardFactoryUtil.getBestArtifactAI(artList).untap();
                 }
             } else {
                 Input target = new Input() {

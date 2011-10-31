@@ -56,606 +56,462 @@ public class CardFactory_Planeswalkers {
         }
 
         /*
-        // *************** START *********** START **************************
-        if (cardName.equals("Elspeth, Knight-Errant")) {
-            // computer only plays ability 1 and 3, put 1/1 Soldier in play and
-            // make everything indestructible
-            final int[] turn = new int[1];
-            turn[0] = -1;
-
-            // ability2: target creature gets +3/+3 and flying until EOT
-            final Target target2 = new Target(card, "TgtC");
-            final Cost cost2 = new Cost("AddCounter<1/LOYALTY>", cardName, true);
-            final SpellAbility ability2 = new Ability_Activated(card, cost2, target2) {
-                private static final long serialVersionUID = 6624768423224398603L;
-
-                @Override
-                public void resolve() {
-                    turn[0] = AllZone.getPhase().getTurn();
-                    final Card c = this.getTargetCard();
-
-                    final Command eot = new Command() {
-                        private static final long serialVersionUID = 94488363210770877L;
-
-                        @Override
-                        public void execute() {
-                            if (AllZoneUtil.isCardInPlay(c)) {
-                                c.addTempAttackBoost(-3);
-                                c.addTempDefenseBoost(-3);
-                                c.removeExtrinsicKeyword("Flying");
-                            }
-                        } // execute()
-                    }; // Command
-                    if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addTempAttackBoost(3);
-                        c.addTempDefenseBoost(3);
-                        c.addExtrinsicKeyword("Flying");
-
-                        AllZone.getEndOfTurn().addUntil(eot);
-                    }
-                } // resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public boolean canPlay() {
-
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-
-                } // canPlay()
-            }; // SpellAbility ability2
-
-            // ability3
-            final Cost cost3 = new Cost("SubCounter<8/LOYALTY>", cardName, true);
-            final SpellAbility ability3 = new Ability_Activated(card, cost3, null) {
-                private static final long serialVersionUID = -830373718591602944L;
-
-                @Override
-                public void resolve() {
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    final Card emblem = new Card();
-                    // should we even name this permanent?
-                    // emblem.setName("Elspeth Emblem");
-                    emblem.addIntrinsicKeyword("Indestructible");
-                    emblem.addIntrinsicKeyword("Shroud");
-                    emblem.addIntrinsicKeyword("Artifacts, creatures, enchantments, "
-                            + "and lands you control are indestructible.");
-                    emblem.setImmutable(true);
-                    emblem.addType("Emblem");
-                    emblem.addController(card.getController());
-                    emblem.setOwner(card.getController());
-
-                    AllZone.getGameAction().moveToPlay(emblem);
-
-                    // AllZone.getGameAction().checkStateEffects();
-                    AllZone.getStaticEffects().rePopulateStateBasedList();
-                    for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                        final Command com = GameActionUtil.commands.get(effect);
-                        com.execute();
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (8 <= card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    list = list.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.isEmblem()
-                                    && c.hasKeyword("Artifacts, creatures, enchantments, "
-                                            + "and lands you control are indestructible.");
-                        }
-                    });
-                    return (list.size() == 0) && (card.getCounters(Counters.LOYALTY) > 8);
-                }
-            };
-
-            // ability 1: create white 1/1 token
-            final Cost cost1 = new Cost("AddCounter<1/LOYALTY>", cardName, true);
-            final SpellAbility ability1 = new Ability_Activated(card, cost1, null) {
-                private static final long serialVersionUID = -6766888113766637596L;
-
-                @Override
-                public void resolve() {
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
-                            "Creature", "Soldier" }, 1, 1, new String[] { "" });
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    if (ability3.canPlay() && ability3.canPlayAI()) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-            }; // SpellAbility ability1
-
-            ability1.setDescription("+1: Put a 1/1 white Soldier creature token onto the battlefield.");
-            ability1.setStackDescription(card + " - put a 1/1 white Soldier creature token onto the battlefield.");
-            card.addSpellAbility(ability1);
-
-            ability2.setDescription("+1: Target creature gets +3/+3 and gains flying until end of turn.");
-            ability2.setStackDescription(card + " - creature gets +3/+3 and gains flying until EOT.");
-
-            card.addSpellAbility(ability2);
-
-            ability3.setDescription("-8: You get an emblem with \"Artifacts, "
-                    + "creatures, enchantments, and lands you control are indestructible.\"");
-            ability3.setStackDescription(card + " - You get an emblem with \"Artifacts, creatures, enchantments, "
-                    + "and lands you control are indestructible.\"");
-            card.addSpellAbility(ability3);
-
-            card.setSVars(card.getSVars());
-            card.setSets(card.getSets());
-
-            return card;
-        }
-        // *************** END ************ END **************************
-
-
-        
-        // *************** START *********** START **************************
-        if (cardName.equals("Ajani Goldmane")) {
-            // computer only plays ability 1 and 3, gain life and put X/X token
-            // onto battlefield
-            final int[] turn = new int[1];
-            turn[0] = -1;
-
-            // ability2: Put a +1/+1 counter on each creature you control. Those
-            // creatures gain vigilance until end of turn.
-            final SpellAbility ability2 = new Ability(card, "0") {
-                private final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = -5436621445704076988L;
-
-                    @Override
-                    public void execute() {
-                        final Player player = card.getController();
-                        final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-
-                        for (int i = 0; i < creatures.size(); i++) {
-                            final Card card = creatures.get(i);
-                            card.removeExtrinsicKeyword("Vigilance");
-                        }
-                    }
-                };
-
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 1);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    final Player player = card.getController();
-                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-
-                    for (int i = 0; i < creatures.size(); i++) {
-                        final Card card = creatures.get(i);
-                        card.addCounter(Counters.P1P1, 1);
-                        card.addExtrinsicKeyword("Vigilance");
-                    }
-
-                    AllZone.getEndOfTurn().addUntil(this.untilEOT);
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public boolean canPlay() {
-
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-
-                } // canPlay()
-            }; // SpellAbility ability2
-
-            ability2.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = 6373573398967821630L;
-                private int check = -1;
-
-                @Override
-                public void showMessage() {
-                    if (this.check != AllZone.getPhase().getTurn()) {
-                        this.check = AllZone.getPhase().getTurn();
-                        turn[0] = AllZone.getPhase().getTurn();
-                        AllZone.getStack().add(ability2);
-                    }
-                    this.stop();
-                } // showMessage()
-            });
-
-            // ability3
-            final SpellAbility ability3 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 6);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    // Create token
-                    final int n = card.getController().getLife();
-                    CardFactoryUtil.makeToken("Avatar", "W N N Avatar", card.getController(), "W", new String[] {
-                            "Creature", "Avatar" }, n, n,
-                            new String[] { "This creature's power and toughness are each equal to your life total" });
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (6 <= card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-
-                @Override
-                public boolean canPlayAI() {
-                    // may be it's better to put only if you have less than 5
-                    // life
-                    return true;
-                }
-            };
-            ability3.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = 7530960428366291386L;
-
-                private int check = -1;
-
-                @Override
-                public void showMessage() {
-                    if (this.check != AllZone.getPhase().getTurn()) {
-                        this.check = AllZone.getPhase().getTurn();
-                        turn[0] = AllZone.getPhase().getTurn();
-                        AllZone.getStack().add(ability3);
-                    }
-                    this.stop();
-                } // showMessage()
-            });
-
-            // ability 1: gain 2 life
-            final SpellAbility ability1 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 1);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    card.getController().gainLife(2, card);
-                    Log.debug("Ajani Goldmane", "current phase: " + AllZone.getPhase().getPhase());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    if (ability3.canPlay() && ability3.canPlayAI()) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-            }; // SpellAbility ability1
-
-            ability1.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -7969603493514210825L;
-
-                private int check = -1;
-
-                @Override
-                public void showMessage() {
-                    if (this.check != AllZone.getPhase().getTurn()) {
-                        this.check = AllZone.getPhase().getTurn();
-                        turn[0] = AllZone.getPhase().getTurn();
-                        AllZone.getStack().add(ability1);
-                    }
-                    this.stop();
-                } // showMessage()
-            });
-
-            ability1.setDescription("+1: You gain 2 life.");
-            final StringBuilder stack1 = new StringBuilder();
-            stack1.append("Ajani Goldmane - ").append(card.getController()).append(" gains 2 life");
-            ability1.setStackDescription(stack1.toString());
-            // ability1.setStackDescription("Ajani Goldmane - " +
-            // card.getController() + " gains 2 life");
-            card.addSpellAbility(ability1);
-
-            ability2.setDescription("-1: Put a +1/+1 counter on each creature you control. "
-            + " Those creatures gain vigilance until end of turn.");
-            ability2.setStackDescription("Ajani Goldmane - Put a +1/+1 counter on each "
-            + "creature you control. They get vigilance.");
-            card.addSpellAbility(ability2);
-
-            ability3.setDescription("-6: Put a white Avatar creature token onto the battlefield. "
-            + "It has \"This creature's power and toughness are each equal to your life total.\"");
-            ability3.setStackDescription("Ajani Goldmane - Put a X/X white Avatar creature "
-            + "token onto the battlefield.");
-            card.addSpellAbility(ability3);
-
-            card.setSVars(card.getSVars());
-            card.setSets(card.getSets());
-
-            return card;
-        }
-        // *************** END ************ END **************************
-
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Chandra Nalaar")) {
-            // computer only plays ability 1 and 3, discard and return creature
-            // from graveyard to play
-            final int[] turn = new int[1];
-            turn[0] = -1;
-
-            // ability 1
-            final SpellAbility ability1 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 1);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    if (this.getTargetCard() != null) {
-                        if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
-                            final Card c = this.getTargetCard();
-                            c.addDamage(1, card);
-                        }
-                    } else {
-                        this.getTargetPlayer().addDamage(1, card);
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    for (int i = 0; i < AllZone.getStack().size(); i++) {
-                        if (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
-                            return false;
-                        }
-                    }
-
-                    return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
-                    this.setStackDescription("Chandra Nalaar - deals 1 damage to " + AllZone.getHumanPlayer());
-                    return card.getCounters(Counters.LOYALTY) < 8;
-                }
-            }; // SpellAbility ability1
-
-            final Input target1 = new Input() {
-                private static final long serialVersionUID = 5263705146686766284L;
-
-                @Override
-                public void showMessage() {
-                    AllZone.getDisplay().showMessage("Select target Player or Planeswalker");
-                    ButtonUtil.enableOnlyCancel();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    this.stop();
-                }
-
-                @Override
-                public void selectCard(final Card card, final PlayerZone zone) {
-                    if (card.isPlaneswalker() && zone.is(Constant.Zone.Battlefield)
-                            && CardFactoryUtil.canTarget(card, card)) {
-                        ability1.setTargetCard(card);
-                        // stopSetNext(new Input_PayManaCost(ability1));
-                        AllZone.getStack().add(ability1);
-                        this.stop();
-                    }
-                } // selectCard()
-
-                @Override
-                public void selectPlayer(final Player player) {
-                    ability1.setTargetPlayer(player);
-                    // stopSetNext(new Input_PayManaCost(ability1));
-                    AllZone.getStack().add(ability1);
-                    this.stop();
-                }
-            };
-            ability1.setBeforePayMana(target1);
-            ability1.setDescription("+1: Chandra Nalaar deals 1 damage to target player.");
-            card.addSpellAbility(ability1);
-            // end ability1
-
-            // ability 2
-            final int[] damage2 = new int[1];
-
-            final SpellAbility ability2 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    card.subtractCounter(Counters.LOYALTY, damage2[0]);
-                    this.getTargetCard().addDamage(damage2[0], card);
-
-                    damage2[0] = 0;
-                } // resolve()
-
-                @Override
-                public boolean canPlay() {
-                    for (int i = 0; i < AllZone.getStack().size(); i++) {
-                        if (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
-                            return false;
-                        }
-                    }
-
-                    return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            }; // SpellAbility ability2
-
-            final Input target2 = new Input() {
-                private static final long serialVersionUID = -2160464080456452897L;
-
-                @Override
-                public void showMessage() {
-                    AllZone.getDisplay().showMessage("Select target creature");
-                    ButtonUtil.enableOnlyCancel();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    this.stop();
-                }
-
-                @Override
-                public void selectCard(final Card c, final PlayerZone zone) {
-                    if (!CardFactoryUtil.canTarget(card, c)) {
-                        AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if (c.isCreature()) {
-                        turn[0] = AllZone.getPhase().getTurn();
-
-                        damage2[0] = this.getDamage();
-
-                        ability2.setTargetCard(c);
-                        ability2.setStackDescription("Chandra Nalaar - deals damage to " + c);
-
-                        AllZone.getStack().add(ability2);
-                        this.stop();
-                    }
-                } // selectCard()
-
-                int getDamage() {
-                    final int size = card.getCounters(Counters.LOYALTY);
-                    final Object[] choice = new Object[size];
-
-                    for (int i = 0; i < choice.length; i++) {
-                        choice[i] = Integer.valueOf(i + 1);
-                    }
-
-                    final Integer damage = (Integer) GuiUtils.getChoice("Select X", choice);
-                    return damage.intValue();
-                }
-            }; // Input target
-            ability2.setBeforePayMana(target2);
-            ability2.setDescription("-X: Chandra Nalaar deals X damage to target creature.");
-            card.addSpellAbility(ability2);
-            // end ability2
-
-            // ability 3
-            final SpellAbility ability3 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 8);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    this.getTargetPlayer().addDamage(10, card);
-
-                    final CardList list = AllZoneUtil.getCreaturesInPlay(this.getTargetPlayer());
-
-                    for (int i = 0; i < list.size(); i++) {
-                        list.get(i).addDamage(10, card);
-                    }
-                } // resolve()
-
-                @Override
-                public boolean canPlay() {
-                    for (int i = 0; i < AllZone.getStack().size(); i++) {
-                        if (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
-                            return false;
-                        }
-                    }
-
-                    return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && (7 < card.getCounters(Counters.LOYALTY))
-                            && Phase.canCastSorcery(card.getController());
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Chandra Nalaar - deals 10 damage to ").append(AllZone.getHumanPlayer());
-                    sb.append(" and each creature he or she controls.");
-                    this.setStackDescription(sb.toString());
-                    // setStackDescription("Chandra Nalaar - deals 10 damage to "
-                    // + AllZone.getHumanPlayer()
-                    // + " and each creature he or she controls.");
-                    return true;
-                }
-            }; // SpellAbility ability3
-
-            final Input target3 = new Input() {
-                private static final long serialVersionUID = -3014450919506364666L;
-
-                @Override
-                public void showMessage() {
-                    AllZone.getDisplay().showMessage("Select target player");
-                    ButtonUtil.enableOnlyCancel();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    this.stop();
-                }
-
-                @Override
-                public void selectPlayer(final Player player) {
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    ability3.setTargetPlayer(player);
-
-                    final StringBuilder stack3 = new StringBuilder();
-                    stack3.append("Chandra Nalaar - deals 10 damage to ").append(player);
-                    stack3.append(" and each creature he or she controls.");
-                    ability3.setStackDescription(stack3.toString());
-                    // ability3.setStackDescription("Chandra Nalaar - deals 10 damage to "
-                    // + player
-                    // + " and each creature he or she controls.");
-
-                    AllZone.getStack().add(ability3);
-                    this.stop();
-                }
-            }; // Input target
-            ability3.setBeforePayMana(target3);
-            ability3.setDescription("-8: Chandra Nalaar deals 10 damage to target "
-            + "player and each creature he or she controls.");
-            card.addSpellAbility(ability3);
-            // end ability3
-
-            card.setSVars(card.getSVars());
-            card.setSets(card.getSets());
-
-            return card;
-        }
-        // *************** END ************ END **************************
-*/
+         * // *************** START *********** START **************************
+         * if (cardName.equals("Elspeth, Knight-Errant")) { // computer only
+         * plays ability 1 and 3, put 1/1 Soldier in play and // make everything
+         * indestructible final int[] turn = new int[1]; turn[0] = -1;
+         * 
+         * // ability2: target creature gets +3/+3 and flying until EOT final
+         * Target target2 = new Target(card, "TgtC"); final Cost cost2 = new
+         * Cost("AddCounter<1/LOYALTY>", cardName, true); final SpellAbility
+         * ability2 = new Ability_Activated(card, cost2, target2) { private
+         * static final long serialVersionUID = 6624768423224398603L;
+         * 
+         * @Override public void resolve() { turn[0] =
+         * AllZone.getPhase().getTurn(); final Card c = this.getTargetCard();
+         * 
+         * final Command eot = new Command() { private static final long
+         * serialVersionUID = 94488363210770877L;
+         * 
+         * @Override public void execute() { if (AllZoneUtil.isCardInPlay(c)) {
+         * c.addTempAttackBoost(-3); c.addTempDefenseBoost(-3);
+         * c.removeExtrinsicKeyword("Flying"); } } // execute() }; // Command if
+         * (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+         * c.addTempAttackBoost(3); c.addTempDefenseBoost(3);
+         * c.addExtrinsicKeyword("Flying");
+         * 
+         * AllZone.getEndOfTurn().addUntil(eot); } } // resolve()
+         * 
+         * @Override public boolean canPlayAI() { return false; }
+         * 
+         * @Override public boolean canPlay() {
+         * 
+         * return (0 < card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController());
+         * 
+         * } // canPlay() }; // SpellAbility ability2
+         * 
+         * // ability3 final Cost cost3 = new Cost("SubCounter<8/LOYALTY>",
+         * cardName, true); final SpellAbility ability3 = new
+         * Ability_Activated(card, cost3, null) { private static final long
+         * serialVersionUID = -830373718591602944L;
+         * 
+         * @Override public void resolve() { turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * final Card emblem = new Card(); // should we even name this
+         * permanent? // emblem.setName("Elspeth Emblem");
+         * emblem.addIntrinsicKeyword("Indestructible");
+         * emblem.addIntrinsicKeyword("Shroud");
+         * emblem.addIntrinsicKeyword("Artifacts, creatures, enchantments, " +
+         * "and lands you control are indestructible.");
+         * emblem.setImmutable(true); emblem.addType("Emblem");
+         * emblem.addController(card.getController());
+         * emblem.setOwner(card.getController());
+         * 
+         * AllZone.getGameAction().moveToPlay(emblem);
+         * 
+         * // AllZone.getGameAction().checkStateEffects();
+         * AllZone.getStaticEffects().rePopulateStateBasedList(); for (final
+         * String effect :
+         * AllZone.getStaticEffects().getStateBasedMap().keySet()) { final
+         * Command com = GameActionUtil.commands.get(effect); com.execute(); } }
+         * 
+         * @Override public boolean canPlay() { return (8 <=
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay()
+         * 
+         * @Override public boolean canPlayAI() { CardList list =
+         * AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield); list =
+         * list.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card c) { return c.isEmblem()
+         * && c.hasKeyword("Artifacts, creatures, enchantments, " +
+         * "and lands you control are indestructible."); } }); return
+         * (list.size() == 0) && (card.getCounters(Counters.LOYALTY) > 8); } };
+         * 
+         * // ability 1: create white 1/1 token final Cost cost1 = new
+         * Cost("AddCounter<1/LOYALTY>", cardName, true); final SpellAbility
+         * ability1 = new Ability_Activated(card, cost1, null) { private static
+         * final long serialVersionUID = -6766888113766637596L;
+         * 
+         * @Override public void resolve() { turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier",
+         * card.getController(), "W", new String[] { "Creature", "Soldier" }, 1,
+         * 1, new String[] { "" }); }
+         * 
+         * @Override public boolean canPlayAI() { if (ability3.canPlay() &&
+         * ability3.canPlayAI()) { return false; } else { return true; } }
+         * 
+         * @Override public boolean canPlay() { return (0 <
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay() }; //
+         * SpellAbility ability1
+         * 
+         * ability1.setDescription(
+         * "+1: Put a 1/1 white Soldier creature token onto the battlefield.");
+         * ability1.setStackDescription(card +
+         * " - put a 1/1 white Soldier creature token onto the battlefield.");
+         * card.addSpellAbility(ability1);
+         * 
+         * ability2.setDescription(
+         * "+1: Target creature gets +3/+3 and gains flying until end of turn."
+         * ); ability2.setStackDescription(card +
+         * " - creature gets +3/+3 and gains flying until EOT.");
+         * 
+         * card.addSpellAbility(ability2);
+         * 
+         * ability3.setDescription("-8: You get an emblem with \"Artifacts, " +
+         * "creatures, enchantments, and lands you control are indestructible.\""
+         * ); ability3.setStackDescription(card +
+         * " - You get an emblem with \"Artifacts, creatures, enchantments, " +
+         * "and lands you control are indestructible.\"");
+         * card.addSpellAbility(ability3);
+         * 
+         * card.setSVars(card.getSVars()); card.setSets(card.getSets());
+         * 
+         * return card; } // *************** END ************ END
+         * **************************
+         * 
+         * 
+         * 
+         * // *************** START *********** START **************************
+         * if (cardName.equals("Ajani Goldmane")) { // computer only plays
+         * ability 1 and 3, gain life and put X/X token // onto battlefield
+         * final int[] turn = new int[1]; turn[0] = -1;
+         * 
+         * // ability2: Put a +1/+1 counter on each creature you control. Those
+         * // creatures gain vigilance until end of turn. final SpellAbility
+         * ability2 = new Ability(card, "0") { private final Command untilEOT =
+         * new Command() { private static final long serialVersionUID =
+         * -5436621445704076988L;
+         * 
+         * @Override public void execute() { final Player player =
+         * card.getController(); final CardList creatures =
+         * AllZoneUtil.getCreaturesInPlay(player);
+         * 
+         * for (int i = 0; i < creatures.size(); i++) { final Card card =
+         * creatures.get(i); card.removeExtrinsicKeyword("Vigilance"); } } };
+         * 
+         * @Override public void resolve() {
+         * card.subtractCounter(Counters.LOYALTY, 1); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * final Player player = card.getController(); final CardList creatures
+         * = AllZoneUtil.getCreaturesInPlay(player);
+         * 
+         * for (int i = 0; i < creatures.size(); i++) { final Card card =
+         * creatures.get(i); card.addCounter(Counters.P1P1, 1);
+         * card.addExtrinsicKeyword("Vigilance"); }
+         * 
+         * AllZone.getEndOfTurn().addUntil(this.untilEOT); }
+         * 
+         * @Override public boolean canPlayAI() { return false; }
+         * 
+         * @Override public boolean canPlay() {
+         * 
+         * return (0 < card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController());
+         * 
+         * } // canPlay() }; // SpellAbility ability2
+         * 
+         * ability2.setBeforePayMana(new Input() { private static final long
+         * serialVersionUID = 6373573398967821630L; private int check = -1;
+         * 
+         * @Override public void showMessage() { if (this.check !=
+         * AllZone.getPhase().getTurn()) { this.check =
+         * AllZone.getPhase().getTurn(); turn[0] = AllZone.getPhase().getTurn();
+         * AllZone.getStack().add(ability2); } this.stop(); } // showMessage()
+         * });
+         * 
+         * // ability3 final SpellAbility ability3 = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.subtractCounter(Counters.LOYALTY, 6); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * // Create token final int n = card.getController().getLife();
+         * CardFactoryUtil.makeToken("Avatar", "W N N Avatar",
+         * card.getController(), "W", new String[] { "Creature", "Avatar" }, n,
+         * n, new String[] {
+         * "This creature's power and toughness are each equal to your life total"
+         * }); }
+         * 
+         * @Override public boolean canPlay() { return (6 <=
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay()
+         * 
+         * @Override public boolean canPlayAI() { // may be it's better to put
+         * only if you have less than 5 // life return true; } };
+         * ability3.setBeforePayMana(new Input() { private static final long
+         * serialVersionUID = 7530960428366291386L;
+         * 
+         * private int check = -1;
+         * 
+         * @Override public void showMessage() { if (this.check !=
+         * AllZone.getPhase().getTurn()) { this.check =
+         * AllZone.getPhase().getTurn(); turn[0] = AllZone.getPhase().getTurn();
+         * AllZone.getStack().add(ability3); } this.stop(); } // showMessage()
+         * });
+         * 
+         * // ability 1: gain 2 life final SpellAbility ability1 = new
+         * Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.addCounterFromNonEffect(Counters.LOYALTY, 1); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * card.getController().gainLife(2, card); Log.debug("Ajani Goldmane",
+         * "current phase: " + AllZone.getPhase().getPhase()); }
+         * 
+         * @Override public boolean canPlayAI() { if (ability3.canPlay() &&
+         * ability3.canPlayAI()) { return false; } else { return true; } }
+         * 
+         * @Override public boolean canPlay() { return (0 <
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay() }; //
+         * SpellAbility ability1
+         * 
+         * ability1.setBeforePayMana(new Input() { private static final long
+         * serialVersionUID = -7969603493514210825L;
+         * 
+         * private int check = -1;
+         * 
+         * @Override public void showMessage() { if (this.check !=
+         * AllZone.getPhase().getTurn()) { this.check =
+         * AllZone.getPhase().getTurn(); turn[0] = AllZone.getPhase().getTurn();
+         * AllZone.getStack().add(ability1); } this.stop(); } // showMessage()
+         * });
+         * 
+         * ability1.setDescription("+1: You gain 2 life."); final StringBuilder
+         * stack1 = new StringBuilder();
+         * stack1.append("Ajani Goldmane - ").append
+         * (card.getController()).append(" gains 2 life");
+         * ability1.setStackDescription(stack1.toString()); //
+         * ability1.setStackDescription("Ajani Goldmane - " + //
+         * card.getController() + " gains 2 life");
+         * card.addSpellAbility(ability1);
+         * 
+         * ability2.setDescription(
+         * "-1: Put a +1/+1 counter on each creature you control. " +
+         * " Those creatures gain vigilance until end of turn.");
+         * ability2.setStackDescription
+         * ("Ajani Goldmane - Put a +1/+1 counter on each " +
+         * "creature you control. They get vigilance.");
+         * card.addSpellAbility(ability2);
+         * 
+         * ability3.setDescription(
+         * "-6: Put a white Avatar creature token onto the battlefield. " +
+         * "It has \"This creature's power and toughness are each equal to your life total.\""
+         * ); ability3.setStackDescription(
+         * "Ajani Goldmane - Put a X/X white Avatar creature " +
+         * "token onto the battlefield."); card.addSpellAbility(ability3);
+         * 
+         * card.setSVars(card.getSVars()); card.setSets(card.getSets());
+         * 
+         * return card; } // *************** END ************ END
+         * **************************
+         * 
+         * 
+         * // *************** START *********** START **************************
+         * else if (cardName.equals("Chandra Nalaar")) { // computer only plays
+         * ability 1 and 3, discard and return creature // from graveyard to
+         * play final int[] turn = new int[1]; turn[0] = -1;
+         * 
+         * // ability 1 final SpellAbility ability1 = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.addCounterFromNonEffect(Counters.LOYALTY, 1); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * if (this.getTargetCard() != null) { if
+         * (AllZoneUtil.isCardInPlay(this.getTargetCard()) &&
+         * CardFactoryUtil.canTarget(card, this.getTargetCard())) { final Card c
+         * = this.getTargetCard(); c.addDamage(1, card); } } else {
+         * this.getTargetPlayer().addDamage(1, card); } }
+         * 
+         * @Override public boolean canPlay() { for (int i = 0; i <
+         * AllZone.getStack().size(); i++) { if
+         * (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
+         * return false; } }
+         * 
+         * return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) &&
+         * (turn[0] != AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); }
+         * 
+         * @Override public boolean canPlayAI() {
+         * this.setTargetPlayer(AllZone.getHumanPlayer());
+         * this.setStackDescription("Chandra Nalaar - deals 1 damage to " +
+         * AllZone.getHumanPlayer()); return card.getCounters(Counters.LOYALTY)
+         * < 8; } }; // SpellAbility ability1
+         * 
+         * final Input target1 = new Input() { private static final long
+         * serialVersionUID = 5263705146686766284L;
+         * 
+         * @Override public void showMessage() {
+         * AllZone.getDisplay().showMessage
+         * ("Select target Player or Planeswalker");
+         * ButtonUtil.enableOnlyCancel(); }
+         * 
+         * @Override public void selectButtonCancel() { this.stop(); }
+         * 
+         * @Override public void selectCard(final Card card, final PlayerZone
+         * zone) { if (card.isPlaneswalker() &&
+         * zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card,
+         * card)) { ability1.setTargetCard(card); // stopSetNext(new
+         * Input_PayManaCost(ability1)); AllZone.getStack().add(ability1);
+         * this.stop(); } } // selectCard()
+         * 
+         * @Override public void selectPlayer(final Player player) {
+         * ability1.setTargetPlayer(player); // stopSetNext(new
+         * Input_PayManaCost(ability1)); AllZone.getStack().add(ability1);
+         * this.stop(); } }; ability1.setBeforePayMana(target1);
+         * ability1.setDescription
+         * ("+1: Chandra Nalaar deals 1 damage to target player.");
+         * card.addSpellAbility(ability1); // end ability1
+         * 
+         * // ability 2 final int[] damage2 = new int[1];
+         * 
+         * final SpellAbility ability2 = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() { turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * card.subtractCounter(Counters.LOYALTY, damage2[0]);
+         * this.getTargetCard().addDamage(damage2[0], card);
+         * 
+         * damage2[0] = 0; } // resolve()
+         * 
+         * @Override public boolean canPlay() { for (int i = 0; i <
+         * AllZone.getStack().size(); i++) { if
+         * (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
+         * return false; } }
+         * 
+         * return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) &&
+         * (turn[0] != AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); }
+         * 
+         * @Override public boolean canPlayAI() { return false; } }; //
+         * SpellAbility ability2
+         * 
+         * final Input target2 = new Input() { private static final long
+         * serialVersionUID = -2160464080456452897L;
+         * 
+         * @Override public void showMessage() {
+         * AllZone.getDisplay().showMessage("Select target creature");
+         * ButtonUtil.enableOnlyCancel(); }
+         * 
+         * @Override public void selectButtonCancel() { this.stop(); }
+         * 
+         * @Override public void selectCard(final Card c, final PlayerZone zone)
+         * { if (!CardFactoryUtil.canTarget(card, c)) {
+         * AllZone.getDisplay().showMessage
+         * ("Cannot target this card (Shroud? Protection?)."); } else if
+         * (c.isCreature()) { turn[0] = AllZone.getPhase().getTurn();
+         * 
+         * damage2[0] = this.getDamage();
+         * 
+         * ability2.setTargetCard(c);
+         * ability2.setStackDescription("Chandra Nalaar - deals damage to " +
+         * c);
+         * 
+         * AllZone.getStack().add(ability2); this.stop(); } } // selectCard()
+         * 
+         * int getDamage() { final int size =
+         * card.getCounters(Counters.LOYALTY); final Object[] choice = new
+         * Object[size];
+         * 
+         * for (int i = 0; i < choice.length; i++) { choice[i] =
+         * Integer.valueOf(i + 1); }
+         * 
+         * final Integer damage = (Integer) GuiUtils.getChoice("Select X",
+         * choice); return damage.intValue(); } }; // Input target
+         * ability2.setBeforePayMana(target2); ability2.setDescription(
+         * "-X: Chandra Nalaar deals X damage to target creature.");
+         * card.addSpellAbility(ability2); // end ability2
+         * 
+         * // ability 3 final SpellAbility ability3 = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.subtractCounter(Counters.LOYALTY, 8); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * this.getTargetPlayer().addDamage(10, card);
+         * 
+         * final CardList list =
+         * AllZoneUtil.getCreaturesInPlay(this.getTargetPlayer());
+         * 
+         * for (int i = 0; i < list.size(); i++) { list.get(i).addDamage(10,
+         * card); } } // resolve()
+         * 
+         * @Override public boolean canPlay() { for (int i = 0; i <
+         * AllZone.getStack().size(); i++) { if
+         * (AllZone.getStack().peekInstance(i).getSourceCard().equals(card)) {
+         * return false; } }
+         * 
+         * return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) &&
+         * (turn[0] != AllZone.getPhase().getTurn()) && (7 <
+         * card.getCounters(Counters.LOYALTY)) &&
+         * Phase.canCastSorcery(card.getController()); }
+         * 
+         * @Override public boolean canPlayAI() {
+         * this.setTargetPlayer(AllZone.getHumanPlayer()); final StringBuilder
+         * sb = new StringBuilder();
+         * sb.append("Chandra Nalaar - deals 10 damage to "
+         * ).append(AllZone.getHumanPlayer());
+         * sb.append(" and each creature he or she controls.");
+         * this.setStackDescription(sb.toString()); //
+         * setStackDescription("Chandra Nalaar - deals 10 damage to " // +
+         * AllZone.getHumanPlayer() // +
+         * " and each creature he or she controls."); return true; } }; //
+         * SpellAbility ability3
+         * 
+         * final Input target3 = new Input() { private static final long
+         * serialVersionUID = -3014450919506364666L;
+         * 
+         * @Override public void showMessage() {
+         * AllZone.getDisplay().showMessage("Select target player");
+         * ButtonUtil.enableOnlyCancel(); }
+         * 
+         * @Override public void selectButtonCancel() { this.stop(); }
+         * 
+         * @Override public void selectPlayer(final Player player) { turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * ability3.setTargetPlayer(player);
+         * 
+         * final StringBuilder stack3 = new StringBuilder();
+         * stack3.append("Chandra Nalaar - deals 10 damage to ").append(player);
+         * stack3.append(" and each creature he or she controls.");
+         * ability3.setStackDescription(stack3.toString()); //
+         * ability3.setStackDescription("Chandra Nalaar - deals 10 damage to "
+         * // + player // + " and each creature he or she controls.");
+         * 
+         * AllZone.getStack().add(ability3); this.stop(); } }; // Input target
+         * ability3.setBeforePayMana(target3);
+         * ability3.setDescription("-8: Chandra Nalaar deals 10 damage to target "
+         * + "player and each creature he or she controls.");
+         * card.addSpellAbility(ability3); // end ability3
+         * 
+         * card.setSVars(card.getSVars()); card.setSets(card.getSets());
+         * 
+         * return card; } // *************** END ************ END
+         * **************************
+         */
         // *************** START *********** START **************************
         else if (cardName.equals("Tezzeret the Seeker")) {
             final int[] turn = new int[1];
@@ -793,11 +649,11 @@ public class CardFactory_Planeswalkers {
                 }
             }; // SpellAbility ability2
             ability2.setDescription("-X: Search your library for an artifact card with "
-            + "converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
+                    + "converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
             final StringBuilder stack2 = new StringBuilder();
             stack2.append(card.getName());
             stack2.append(" - Search your library for an artifact card with converted "
-            + "mana cost X or less and put it onto the battlefield. Then shuffle your library.");
+                    + "mana cost X or less and put it onto the battlefield. Then shuffle your library.");
             ability2.setStackDescription(stack2.toString());
             card.addSpellAbility(ability2);
 
@@ -967,14 +823,14 @@ public class CardFactory_Planeswalkers {
                 } // canPlay()
             };
             ability1.setDescription("+2: Look at the top card of target player's library. "
-            + "You may put that card on the bottom of that player's library.");
+                    + "You may put that card on the bottom of that player's library.");
             final StringBuilder stack1 = new StringBuilder();
-            stack1.append(card.getName())
-                    .append(" - Look at the top card of target player's library. "
-            + "You may put that card on the bottom of that player's library.");
+            stack1.append(card.getName()).append(
+                    " - Look at the top card of target player's library. "
+                            + "You may put that card on the bottom of that player's library.");
             ability1.setStackDescription(stack1.toString());
 
-            ability1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            ability1.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
             card.addSpellAbility(ability1);
 
             final Ability ability2 = new Ability(card, "0") {
@@ -1027,7 +883,7 @@ public class CardFactory_Planeswalkers {
                 } // canPlay()
             };
             ability2.setDescription("0: Draw three cards, then put two cards from your "
-            + "hand on top of your library in any order.");
+                    + "hand on top of your library in any order.");
             final StringBuilder stack2 = new StringBuilder();
             stack2.append(card.getName()).append(
                     " - Draw three cards, then put two cards from your hand on top of your library in any order.");
@@ -1109,13 +965,13 @@ public class CardFactory_Planeswalkers {
                 }
             };
             ability4.setDescription("-12: Exile all cards from target player's library, then that "
-            + "player shuffles his or her hand into his or her library.");
+                    + "player shuffles his or her hand into his or her library.");
             final StringBuilder stack4 = new StringBuilder();
-            stack4.append(card.getName())
-                    .append(" - Exile all cards from target player's library, then that player "
-            + "shuffles his or her hand into his or her library.");
+            stack4.append(card.getName()).append(
+                    " - Exile all cards from target player's library, then that player "
+                            + "shuffles his or her hand into his or her library.");
             ability4.setStackDescription(stack4.toString());
-            ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            ability4.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
             card.addSpellAbility(ability4);
 
             card.setSVars(card.getSVars());
@@ -1177,7 +1033,7 @@ public class CardFactory_Planeswalkers {
                 } // canPlay()
             };
             ability1.setDescription("0: Reveal the top card of your library and put it "
-            + "into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.");
+                    + "into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.");
             final StringBuilder stack1 = new StringBuilder();
             stack1.append(card.getName()).append(" - Reveal top card and do damage.");
             ability1.setStackDescription(stack1.toString());
@@ -1229,11 +1085,11 @@ public class CardFactory_Planeswalkers {
                             return !(c.isToken() && c.isType("Dragon"));
                         }
                     });
-                    this.setTargetCard(CardFactoryUtil.AI_getCheapestCreature(cards, card, true));
+                    this.setTargetCard(CardFactoryUtil.getCheapestCreatureAI(cards, card, true));
                     Log.debug(
                             "Sarkhan the Mad",
                             "Sarkhan the Mad caused sacrifice of: "
-                                    + CardFactoryUtil.AI_getCheapestCreature(cards, card, true));
+                                    + CardFactoryUtil.getCheapestCreatureAI(cards, card, true));
                 }
 
                 @Override
@@ -1244,7 +1100,7 @@ public class CardFactory_Planeswalkers {
                 } // canPlay()
             };
             ability2.setDescription("-2: Target creature's controller sacrifices it, "
-            + "then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
+                    + "then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
 
             // ability3
             /*
@@ -1287,7 +1143,7 @@ public class CardFactory_Planeswalkers {
                 } // canPlay()
             };
             ability3.setDescription("-4: Each Dragon creature you control "
-            + "deals damage equal to its power to target player.");
+                    + "deals damage equal to its power to target player.");
 
             card.addSpellAbility(ability1);
             card.addSpellAbility(ability2);
@@ -1300,239 +1156,192 @@ public class CardFactory_Planeswalkers {
         } // *************** END ************ END **************************
 
         /*
-        // *************** START *********** START **************************
-        else if (cardName.equals("Koth of the Hammer")) {
-            // computer only plays ability 1 and 3, put 1/1 Soldier in play and
-            // make everything indestructible
-            final int[] turn = new int[1];
-            turn[0] = -1;
-
-            // ability2: add R for each mountain
-            final SpellAbility ability2 = new Ability(card, "0") {
-
-                @Override
-                public void resolve() {
-
-                    card.subtractCounter(Counters.LOYALTY, 2);
-
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                    list = list.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card crd) {
-                            return crd.isType("Mountain");
-                        }
-                    });
-
-                    final Ability_Mana abMana = new Ability_Mana(card, "0", "R", list.size()) {
-                        private static final long serialVersionUID = -2182129023960978132L;
-                    };
-                    abMana.setUndoable(false);
-                    abMana.produceMana();
-
-                } // resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public boolean canPlay() {
-
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-
-                } // canPlay()
-            }; // SpellAbility ability2
-
-            // ability3
-            final SpellAbility ability3 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 5);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    final Card emblem = new Card();
-
-                    emblem.addIntrinsicKeyword("Indestructible");
-                    emblem.addIntrinsicKeyword("Shroud");
-                    emblem.addIntrinsicKeyword("Mountains you control have 'tap: This land deals "
-                    + "1 damage to target creature or player.'");
-                    emblem.setImmutable(true);
-                    emblem.addType("Emblem");
-                    emblem.addController(card.getController());
-                    emblem.setOwner(card.getOwner());
-
-                    // TODO Emblems live in the command zone
-                    AllZone.getGameAction().moveToPlay(emblem);
-
-                    // AllZone.getGameAction().checkStateEffects();
-                    AllZone.getStaticEffects().rePopulateStateBasedList();
-                    for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                        final Command com = GameActionUtil.commands.get(effect);
-                        com.execute();
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (5 <= card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    list = list.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.isEmblem()
-                                    && c.hasKeyword("Mountains you control have 'tap: This land "
-                            + "deals 1 damage to target creature or player.'");
-                        }
-                    });
-                    return (list.size() == 0) && (card.getCounters(Counters.LOYALTY) > 5);
-                }
-            };
-            ability3.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -2054686425541429389L;
-
-                private int check = -1;
-
-                @Override
-                public void showMessage() {
-                    if (this.check != AllZone.getPhase().getTurn()) {
-                        this.check = AllZone.getPhase().getTurn();
-                        turn[0] = AllZone.getPhase().getTurn();
-                        AllZone.getStack().add(ability3);
-                    }
-                    this.stop();
-                } // showMessage()
-            });
-
-            // ability 1: make 4/4 out of mountain
-            final SpellAbility ability1 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 1);
-                    turn[0] = AllZone.getPhase().getTurn();
-
-                    final Card[] card = new Card[1];
-                    card[0] = this.getTargetCard();
-
-                    final int[] oldAttack = new int[1];
-                    final int[] oldDefense = new int[1];
-
-                    oldAttack[0] = card[0].getBaseAttack();
-                    oldDefense[0] = card[0].getBaseDefense();
-
-                    if (card[0].isType("Mountain")) {
-                        card[0].untap();
-
-                        card[0].setBaseAttack(4);
-                        card[0].setBaseDefense(4);
-                        card[0].addType("Creature");
-                        card[0].addType("Elemental");
-
-                        // EOT
-                        final Command untilEOT = new Command() {
-
-                            private static final long serialVersionUID = 6426615528873039915L;
-
-                            @Override
-                            public void execute() {
-                                card[0].setBaseAttack(oldAttack[0]);
-                                card[0].setBaseDefense(oldDefense[0]);
-
-                                card[0].removeType("Creature");
-                                card[0].removeType("Elemental");
-                            }
-                        };
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
-                    }
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    list = list.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card crd) {
-                            return crd.isEmblem()
-                                    && crd.hasKeyword("Mountains you control have 'tap: "
-                            + "This land deals 1 damage to target creature or player.'");
-                        }
-                    });
-
-                    CardList mountains = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    mountains = mountains.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card crd) {
-                            return crd.isType("Mountain") && CardFactoryUtil.canTarget(card, crd);
-                        }
-                    });
-                    CardListUtil.sortByTapped(mountains);
-
-                    if (mountains.size() == 0) {
-                        return false;
-                    }
-
-                    if (ability3.canPlay() && ability3.canPlayAI() && (list.size() == 0)) {
-                        return false;
-                    } else {
-                        this.setTargetCard(mountains.get(0));
-                        return true;
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (0 < card.getCounters(Counters.LOYALTY))
-                            && AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
-                } // canPlay()
-            }; // SpellAbility ability1
-
-            final Input runtime = new Input() {
-                private static final long serialVersionUID = -7823269301012427007L;
-
-                @Override
-                public void showMessage() {
-                    final CardList lands = card.getController().getCardsIn(Zone.Battlefield).getType("Mountain");
-
-                    this.stopSetNext(CardFactoryUtil.input_targetSpecific(ability1, lands, "Select target Mountain",
-                            true, false));
-                } // showMessage()
-            }; // Input
-
-            ability1.setBeforePayMana(runtime);
-
-            ability1.setDescription("+1: Untap target Mountain. It becomes a 4/4 red "
-            + "Elemental creature until end of turn. It's still a land.");
-            // ability1.setStackDescription("");
-            card.addSpellAbility(ability1);
-
-            ability2.setDescription("-2: Add R to your mana pool for each Mountain you control.");
-            ability2.setStackDescription("Koth of the Hammer - Add R to your mana pool for each Mountain you control.");
-            card.addSpellAbility(ability2);
-
-            ability3.setDescription("-5: You get an emblem with \"Mountains you control "
-            + "have 'tap: This land deals 1 damage to target creature or player.'\"");
-            ability3.setStackDescription("Koth of the Hammer - You get an emblem with \"Mountains "
-            + "you control have 'tap: This land deals 1 damage to target creature or player.'\"");
-            card.addSpellAbility(ability3);
-
-            card.setSVars(card.getSVars());
-            card.setSets(card.getSets());
-
-            return card;
-        }
-        // *************** END ************ END **************************
-        */
+         * // *************** START *********** START **************************
+         * else if (cardName.equals("Koth of the Hammer")) { // computer only
+         * plays ability 1 and 3, put 1/1 Soldier in play and // make everything
+         * indestructible final int[] turn = new int[1]; turn[0] = -1;
+         * 
+         * // ability2: add R for each mountain final SpellAbility ability2 =
+         * new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * 
+         * card.subtractCounter(Counters.LOYALTY, 2);
+         * 
+         * turn[0] = AllZone.getPhase().getTurn();
+         * 
+         * CardList list =
+         * AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield); list =
+         * list.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card crd) { return
+         * crd.isType("Mountain"); } });
+         * 
+         * final Ability_Mana abMana = new Ability_Mana(card, "0", "R",
+         * list.size()) { private static final long serialVersionUID =
+         * -2182129023960978132L; }; abMana.setUndoable(false);
+         * abMana.produceMana();
+         * 
+         * } // resolve()
+         * 
+         * @Override public boolean canPlayAI() { return false; }
+         * 
+         * @Override public boolean canPlay() {
+         * 
+         * return (0 < card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController());
+         * 
+         * } // canPlay() }; // SpellAbility ability2
+         * 
+         * // ability3 final SpellAbility ability3 = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.subtractCounter(Counters.LOYALTY, 5); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * final Card emblem = new Card();
+         * 
+         * emblem.addIntrinsicKeyword("Indestructible");
+         * emblem.addIntrinsicKeyword("Shroud"); emblem.addIntrinsicKeyword(
+         * "Mountains you control have 'tap: This land deals " +
+         * "1 damage to target creature or player.'");
+         * emblem.setImmutable(true); emblem.addType("Emblem");
+         * emblem.addController(card.getController());
+         * emblem.setOwner(card.getOwner());
+         * 
+         * // TODO Emblems live in the command zone
+         * AllZone.getGameAction().moveToPlay(emblem);
+         * 
+         * // AllZone.getGameAction().checkStateEffects();
+         * AllZone.getStaticEffects().rePopulateStateBasedList(); for (final
+         * String effect :
+         * AllZone.getStaticEffects().getStateBasedMap().keySet()) { final
+         * Command com = GameActionUtil.commands.get(effect); com.execute(); } }
+         * 
+         * @Override public boolean canPlay() { return (5 <=
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay()
+         * 
+         * @Override public boolean canPlayAI() { CardList list =
+         * AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield); list =
+         * list.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card c) { return c.isEmblem()
+         * && c.hasKeyword("Mountains you control have 'tap: This land " +
+         * "deals 1 damage to target creature or player.'"); } }); return
+         * (list.size() == 0) && (card.getCounters(Counters.LOYALTY) > 5); } };
+         * ability3.setBeforePayMana(new Input() { private static final long
+         * serialVersionUID = -2054686425541429389L;
+         * 
+         * private int check = -1;
+         * 
+         * @Override public void showMessage() { if (this.check !=
+         * AllZone.getPhase().getTurn()) { this.check =
+         * AllZone.getPhase().getTurn(); turn[0] = AllZone.getPhase().getTurn();
+         * AllZone.getStack().add(ability3); } this.stop(); } // showMessage()
+         * });
+         * 
+         * // ability 1: make 4/4 out of mountain final SpellAbility ability1 =
+         * new Ability(card, "0") {
+         * 
+         * @Override public void resolve() {
+         * card.addCounterFromNonEffect(Counters.LOYALTY, 1); turn[0] =
+         * AllZone.getPhase().getTurn();
+         * 
+         * final Card[] card = new Card[1]; card[0] = this.getTargetCard();
+         * 
+         * final int[] oldAttack = new int[1]; final int[] oldDefense = new
+         * int[1];
+         * 
+         * oldAttack[0] = card[0].getBaseAttack(); oldDefense[0] =
+         * card[0].getBaseDefense();
+         * 
+         * if (card[0].isType("Mountain")) { card[0].untap();
+         * 
+         * card[0].setBaseAttack(4); card[0].setBaseDefense(4);
+         * card[0].addType("Creature"); card[0].addType("Elemental");
+         * 
+         * // EOT final Command untilEOT = new Command() {
+         * 
+         * private static final long serialVersionUID = 6426615528873039915L;
+         * 
+         * @Override public void execute() {
+         * card[0].setBaseAttack(oldAttack[0]);
+         * card[0].setBaseDefense(oldDefense[0]);
+         * 
+         * card[0].removeType("Creature"); card[0].removeType("Elemental"); } };
+         * AllZone.getEndOfTurn().addUntil(untilEOT); } }
+         * 
+         * @Override public boolean canPlayAI() { CardList list =
+         * AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield); list =
+         * list.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card crd) { return
+         * crd.isEmblem() && crd.hasKeyword("Mountains you control have 'tap: "
+         * + "This land deals 1 damage to target creature or player.'"); } });
+         * 
+         * CardList mountains =
+         * AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield); mountains =
+         * mountains.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card crd) { return
+         * crd.isType("Mountain") && CardFactoryUtil.canTarget(card, crd); } });
+         * CardListUtil.sortByTapped(mountains);
+         * 
+         * if (mountains.size() == 0) { return false; }
+         * 
+         * if (ability3.canPlay() && ability3.canPlayAI() && (list.size() == 0))
+         * { return false; } else { this.setTargetCard(mountains.get(0)); return
+         * true; } }
+         * 
+         * @Override public boolean canPlay() { return (0 <
+         * card.getCounters(Counters.LOYALTY)) &&
+         * AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && (turn[0] !=
+         * AllZone.getPhase().getTurn()) &&
+         * Phase.canCastSorcery(card.getController()); } // canPlay() }; //
+         * SpellAbility ability1
+         * 
+         * final Input runtime = new Input() { private static final long
+         * serialVersionUID = -7823269301012427007L;
+         * 
+         * @Override public void showMessage() { final CardList lands =
+         * card.getController
+         * ().getCardsIn(Zone.Battlefield).getType("Mountain");
+         * 
+         * this.stopSetNext(CardFactoryUtil.input_targetSpecific(ability1,
+         * lands, "Select target Mountain", true, false)); } // showMessage() };
+         * // Input
+         * 
+         * ability1.setBeforePayMana(runtime);
+         * 
+         * ability1.setDescription(
+         * "+1: Untap target Mountain. It becomes a 4/4 red " +
+         * "Elemental creature until end of turn. It's still a land."); //
+         * ability1.setStackDescription(""); card.addSpellAbility(ability1);
+         * 
+         * ability2.setDescription(
+         * "-2: Add R to your mana pool for each Mountain you control.");
+         * ability2.setStackDescription(
+         * "Koth of the Hammer - Add R to your mana pool for each Mountain you control."
+         * ); card.addSpellAbility(ability2);
+         * 
+         * ability3.setDescription(
+         * "-5: You get an emblem with \"Mountains you control " +
+         * "have 'tap: This land deals 1 damage to target creature or player.'\""
+         * ); ability3.setStackDescription(
+         * "Koth of the Hammer - You get an emblem with \"Mountains " +
+         * "you control have 'tap: This land deals 1 damage to target creature or player.'\""
+         * ); card.addSpellAbility(ability3);
+         * 
+         * card.setSVars(card.getSVars()); card.setSets(card.getSets());
+         * 
+         * return card; } // *************** END ************ END
+         * **************************
+         */
 
         return card;
     }

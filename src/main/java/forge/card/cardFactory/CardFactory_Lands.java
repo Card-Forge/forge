@@ -63,11 +63,12 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 7352127748114888255L;
 
+                @Override
                 public void execute() {
                     if (card.getController().isHuman()) {
-                        humanExecute();
+                        this.humanExecute();
                     } else {
-                        computerExecute();
+                        this.computerExecute();
                     }
                 }
 
@@ -81,27 +82,27 @@ class CardFactory_Lands {
                     if (pay) {
                         AllZone.getComputerPlayer().loseLife(2, card);
                     } else {
-                        tapCard();
+                        this.tapCard();
                     }
                 }
 
                 public void humanExecute() {
-                    int life = card.getController().getLife();
+                    final int life = card.getController().getLife();
                     if (2 < life) {
 
-                        StringBuilder question = new StringBuilder();
+                        final StringBuilder question = new StringBuilder();
                         question.append("Pay 2 life? If you don't, ").append(card.getName());
                         question.append(" enters the battlefield tapped.");
 
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
                             AllZone.getHumanPlayer().loseLife(2, card);
                         } else {
-                            tapCard();
+                            this.tapCard();
                         }
 
                     } // if
                     else {
-                        tapCard();
+                        this.tapCard();
                     }
                 } // execute()
 
@@ -127,7 +128,7 @@ class CardFactory_Lands {
                         }
                     }
 
-                    if (card.getCounters(Counters.ICE) > 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay()) {
+                    if ((card.getCounters(Counters.ICE) > 0) && AllZoneUtil.isCardInPlay(card) && super.canPlay()) {
                         return true;
                     } else {
                         return false;
@@ -136,7 +137,7 @@ class CardFactory_Lands {
 
                 @Override
                 public boolean canPlayAI() {
-                    String phase = AllZone.getPhase().getPhase();
+                    final String phase = AllZone.getPhase().getPhase();
                     return phase.equals(Constant.Phase.MAIN2) && super.canPlayAI();
                 }
 
@@ -156,12 +157,12 @@ class CardFactory_Lands {
                 // TODO - this should probably be a state effect
                 @Override
                 public boolean canPlay() {
-                    return card.getCounters(Counters.ICE) == 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay();
+                    return (card.getCounters(Counters.ICE) == 0) && AllZoneUtil.isCardInPlay(card) && super.canPlay();
                 }
 
                 @Override
                 public boolean canPlayAI() {
-                    return canPlay() && super.canPlayAI();
+                    return this.canPlay() && super.canPlayAI();
                 }
 
                 @Override
@@ -175,12 +176,14 @@ class CardFactory_Lands {
                 }
             };
             // ability.setDescription("Dark Depths enters the battlefield with
-            //ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.
-            //\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it.
-            //If you do, put an indestructible legendary 20/20 black Avatar creature token
-            //with flying named Marit Lage onto the battlefield.");
+            // ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark
+            // Depths.
+            // \r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it.
+            // If you do, put an indestructible legendary 20/20 black Avatar
+            // creature token
+            // with flying named Marit Lage onto the battlefield.");
             ability.setDescription("3: remove an Ice Counter.");
-            StringBuilder sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - remove an ice counter.");
             ability.setStackDescription(sb.toString());
 
@@ -195,17 +198,18 @@ class CardFactory_Lands {
 
             final CardListFilter targets = new CardListFilter() {
 
+                @Override
                 public boolean addCard(final Card c) {
                     return AllZoneUtil.isCardInPlay(c) && c.isCreature()
-                            && c.getTurnInZone() == AllZone.getPhase().getTurn();
+                            && (c.getTurnInZone() == AllZone.getPhase().getTurn());
                 }
             };
 
-            Cost abCost = new Cost("G U T", cardName, true);
-            Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+            final Cost abCost = new Cost("G U T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 1416258136308898492L;
 
-                private CardList inPlay = new CardList();
+                private final CardList inPlay = new CardList();
 
                 @Override
                 public boolean canPlayAI() {
@@ -213,16 +217,16 @@ class CardFactory_Lands {
                             .getPlayerTurn().isComputer())) {
                         return false;
                     }
-                    inPlay.clear();
-                    inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
-                    return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
+                    this.inPlay.clear();
+                    this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
+                    return (this.inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
 
                 @Override
                 public void resolve() {
-                    inPlay.clear();
-                    inPlay.addAll(AllZoneUtil.getCardsIn(Zone.Battlefield));
-                    for (Card targ : inPlay.filter(targets)) {
+                    this.inPlay.clear();
+                    this.inPlay.addAll(AllZoneUtil.getCardsIn(Zone.Battlefield));
+                    for (final Card targ : this.inPlay.filter(targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
                 }
@@ -247,23 +251,27 @@ class CardFactory_Lands {
 
                 private final Player player = card.getController();
 
+                @Override
                 public void execute() {
-                    if (player.isHuman()) {
+                    if (this.player.isHuman()) {
                         final int[] paid = { 0 };
 
-                        Input target = new Input() {
+                        final Input target = new Input() {
                             private static final long serialVersionUID = -7835834281866473546L;
 
+                            @Override
                             public void showMessage() {
                                 AllZone.getDisplay().showMessage(cardName + " - Select an untapped land to sacrifice");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
+                            @Override
                             public void selectButtonCancel() {
                                 AllZone.getGameAction().sacrifice(card);
-                                stop();
+                                this.stop();
                             }
 
+                            @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
                                     AllZone.getGameAction().sacrifice(c);
@@ -272,7 +280,7 @@ class CardFactory_Lands {
                                         AllZone.getDisplay().showMessage(
                                                 cardName + " - Select an untapped land to sacrifice");
                                     } else {
-                                        stop();
+                                        this.stop();
                                     }
                                 }
                             } // selectCard()
@@ -316,10 +324,12 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 6175830918425915833L;
                 private final Player player = card.getController();
 
+                @Override
                 public void execute() {
-                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(type[0], player, card);
+                    final CardList land = this.player.getCardsIn(Zone.Battlefield).getValidCards(type[0], this.player,
+                            card);
 
-                    if (player.isComputer()) {
+                    if (this.player.isComputer()) {
                         if (land.size() > 0) {
                             CardList tappedLand = new CardList(land.toArray());
                             tappedLand = tappedLand.filter(CardListFilter.TAPPED);
@@ -334,24 +344,27 @@ class CardFactory_Lands {
                             AllZone.getGameAction().sacrifice(card);
                         }
                     } else { // this is the human resolution
-                        Input target = new Input() {
+                        final Input target = new Input() {
                             private static final long serialVersionUID = 6653677835621129465L;
 
+                            @Override
                             public void showMessage() {
                                 AllZone.getDisplay().showMessage(
                                         cardName + " - Select one " + type[0] + " to sacrifice");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
+                            @Override
                             public void selectButtonCancel() {
                                 AllZone.getGameAction().sacrifice(card);
-                                stop();
+                                this.stop();
                             }
 
+                            @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(Zone.Battlefield) && land.contains(c)) {
                                     AllZone.getGameAction().sacrifice(c);
-                                    stop();
+                                    this.stop();
                                 }
                             } // selectCard()
                         }; // Input
@@ -369,13 +382,14 @@ class CardFactory_Lands {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 685604326470832887L;
 
+                @Override
                 public void execute() {
                     final Player player = card.getController();
-                    CardList land = player.getCardsIn(Zone.Battlefield, "Sheltered Valley");
+                    final CardList land = player.getCardsIn(Zone.Battlefield, "Sheltered Valley");
                     land.remove(card);
 
                     if (land.size() > 0) {
-                        for (Card c : land) {
+                        for (final Card c : land) {
                             AllZone.getGameAction().sacrifice(c);
                         }
                     }
@@ -391,15 +405,16 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 6175830918425915833L;
                 private final Player player = card.getController();
 
+                @Override
                 public void execute() {
                     CardList plains = AllZoneUtil.getPlayerLandsInPlay(card.getController());
                     plains = plains.filter(CardListFilter.UNTAPPED);
 
-                    if (player.isComputer()) {
+                    if (this.player.isComputer()) {
                         if (plains.size() > 1) {
                             CardList tappedPlains = new CardList(plains.toArray());
                             tappedPlains = tappedPlains.getType("Basic");
-                            for (Card c : tappedPlains) {
+                            for (final Card c : tappedPlains) {
                                 AllZone.getGameAction().sacrifice(c);
                             }
                             for (int i = 0; i < tappedPlains.size(); i++) {
@@ -417,20 +432,23 @@ class CardFactory_Lands {
                             AllZone.getGameAction().sacrifice(card);
                             return;
                         }
-                        Input target = new Input() {
+                        final Input target = new Input() {
                             private static final long serialVersionUID = 6653677835621129465L;
 
+                            @Override
                             public void showMessage() {
                                 AllZone.getDisplay().showMessage(
                                         "Scorched Ruins - Select an untapped land to sacrifice");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
+                            @Override
                             public void selectButtonCancel() {
                                 AllZone.getGameAction().sacrifice(card);
-                                stop();
+                                this.stop();
                             }
 
+                            @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
                                     AllZone.getGameAction().sacrifice(c);
@@ -439,7 +457,7 @@ class CardFactory_Lands {
                                         AllZone.getDisplay().showMessage(
                                                 "Scorched Ruins - Select an untapped land to sacrifice");
                                     } else {
-                                        stop();
+                                        this.stop();
                                     }
                                 }
                             } // selectCard()
@@ -487,11 +505,12 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = -5646344170306812481L;
 
+                @Override
                 public void execute() {
                     if (card.getController().isHuman()) {
-                        humanExecute();
+                        this.humanExecute();
                     } else {
-                        computerExecute();
+                        this.computerExecute();
                     }
                 }
 
@@ -499,7 +518,7 @@ class CardFactory_Lands {
                     CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
                     hand = hand.getType(type);
                     if (hand.size() > 0) {
-                        revealCard(hand.get(0));
+                        this.revealCard(hand.get(0));
                     } else {
                         card.tap();
                     }
@@ -520,14 +539,14 @@ class CardFactory_Lands {
                             if (zone.is(Constant.Zone.Hand) && c.isType(type)) {
                                 JOptionPane.showMessageDialog(null, "Revealed card: " + c.getName(), card.getName(),
                                         JOptionPane.PLAIN_MESSAGE);
-                                stop();
+                                this.stop();
                             }
                         }
 
                         @Override
                         public void selectButtonCancel() {
                             card.tap();
-                            stop();
+                            this.stop();
                         }
                     });
                 } // execute()
@@ -576,7 +595,7 @@ class CardFactory_Lands {
             final String primary = pTemp;
             final String secondary = sTemp;
 
-            StringBuilder description = new StringBuilder();
+            final StringBuilder description = new StringBuilder();
             description.append("1, Remove X storage counters from ").append(cardName);
             description.append(": Add X mana in any combination of ").append(primary);
             description.append(" and/or ").append(secondary).append(" to your mana pool.");
@@ -594,15 +613,13 @@ class CardFactory_Lands {
             abMana.setUndoable(false);
 
             final Ability addMana = new Ability(card, "1", description.toString()) {
-                private static final long serialVersionUID = 7177960799748450242L;
-
                 // @Override
                 public String mana() {
-                    StringBuilder mana = new StringBuilder();
+                    final StringBuilder mana = new StringBuilder();
                     for (int i = 0; i < split[0]; i++) {
                         mana.append(primary).append(" ");
                     }
-                    for (int j = 0; j < num[0] - split[0]; j++) {
+                    for (int j = 0; j < (num[0] - split[0]); j++) {
                         mana.append(secondary).append(" ");
                     }
                     return mana.toString().trim();
@@ -616,43 +633,42 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     abMana.setUndoable(false);
-                    abMana.produceMana(mana(), card.getController());
+                    abMana.produceMana(this.mana(), card.getController());
                 }
             };
 
-            Input runtime = new Input() {
+            final Input runtime = new Input() {
                 private static final long serialVersionUID = -8808673510875540608L;
 
                 @Override
                 public void showMessage() {
                     num[0] = card.getCounters(Counters.STORAGE);
-                    String[] choices = new String[num[0] + 1];
+                    final String[] choices = new String[num[0] + 1];
                     for (int j = 0; j <= num[0]; j++) {
                         choices[j] = "" + j;
                     }
-                    String answer = (String) (GuiUtils.getChoiceOptional("Storage counters to remove", choices));
+                    final String answer = (GuiUtils.getChoiceOptional("Storage counters to remove", choices));
                     if (answer == null) {
-                        stop();
+                        this.stop();
                         return;
                     }
 
                     num[0] = Integer.parseInt(answer);
 
-                    String splitNum = (String) (GuiUtils.getChoiceOptional(
-                            "Number of " + primary + " to add", choices));
+                    final String splitNum = (GuiUtils.getChoiceOptional("Number of " + primary + " to add", choices));
                     if (splitNum == null) {
-                        stop();
+                        this.stop();
                         return;
                     }
 
                     split[0] = Integer.parseInt(splitNum);
-                    if (num[0] > 0 || split[0] > 0) {
+                    if ((num[0] > 0) || (split[0] > 0)) {
                         card.subtractCounter(Counters.STORAGE, num[0]);
-                        stop();
+                        this.stop();
                         AllZone.getStack().add(addMana);
                         return;
                     }
-                    stop();
+                    this.stop();
                 }
             };
             addMana.setDescription(description.toString());
@@ -668,6 +684,7 @@ class CardFactory_Lands {
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 7813334062721799674L;
 
+                @Override
                 public void execute() {
                     final Player player = card.getController();
                     CardList land = AllZoneUtil.getPlayerLandsInPlay(player);
@@ -686,25 +703,28 @@ class CardFactory_Lands {
                             AllZone.getGameAction().sacrifice(card);
                         }
                     } else { // this is the human resolution
-                        Input target = new Input() {
+                        final Input target = new Input() {
                             private static final long serialVersionUID = 7944127258985401036L;
 
+                            @Override
                             public void showMessage() {
                                 AllZone.getDisplay().showMessage(
                                         cardName + " - Select one non-Lair land to return to your hand");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
+                            @Override
                             public void selectButtonCancel() {
                                 AllZone.getGameAction().sacrifice(card);
-                                stop();
+                                this.stop();
                             }
 
+                            @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (c.isLand() && zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer())
                                         && !c.isType("Lair")) {
                                     AllZone.getGameAction().moveToHand(c);
-                                    stop();
+                                    this.stop();
                                 }
                             } // selectCard()
                         }; // Input
@@ -742,30 +762,33 @@ class CardFactory_Lands {
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {
-                            Card c = CardFactoryUtil.getWorstLand(land);
+                            final Card c = CardFactoryUtil.getWorstLand(land);
                             AllZone.getGameAction().moveToHand(c);
                         } else {
                             AllZone.getGameAction().sacrifice(card);
                         }
                     } else { // this is the human resolution
-                        Input target = new Input() {
+                        final Input target = new Input() {
                             private static final long serialVersionUID = -7886610643693087790L;
 
+                            @Override
                             public void showMessage() {
                                 AllZone.getDisplay().showMessage(
                                         card + " - Select one untapped " + type[0] + " to return");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
+                            @Override
                             public void selectButtonCancel() {
                                 AllZone.getGameAction().sacrifice(card);
-                                stop();
+                                this.stop();
                             }
 
+                            @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (zone.is(Constant.Zone.Battlefield) && land.contains(c)) {
                                     AllZone.getGameAction().moveToHand(c);
-                                    stop();
+                                    this.stop();
                                 }
                             } // selectCard()
                         }; // Input
@@ -774,12 +797,12 @@ class CardFactory_Lands {
                 }
             };
             sacOrNo.setStackDescription("When CARDNAME enters the battlefield, "
-            + "sacrifice it unless you return an untapped "
-                    + type[0] + " you control to its owner's hand.");
+                    + "sacrifice it unless you return an untapped " + type[0] + " you control to its owner's hand.");
 
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = -5777499632266148456L;
 
+                @Override
                 public void execute() {
                     AllZone.getStack().addSimultaneousStackEntry(sacOrNo);
                 }

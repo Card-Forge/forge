@@ -375,14 +375,14 @@ public class AbilityFactory_PermanentState {
             }
 
             if (untapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.AI_getBestCreature(untapList); // if
+                choice = CardFactoryUtil.getBestCreatureAI(untapList); // if
                                                                         // only
                                                                         // creatures
                                                                         // take
                                                                         // the
                                                                         // best
             } else {
-                choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(untapList, af.getHostCard(), false);
             }
 
             if (choice == null) { // can't find anything left
@@ -495,13 +495,13 @@ public class AbilityFactory_PermanentState {
             }
 
             if (tapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.AI_getBestCreature(tapList); // if only
+                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
                                                                       // creatures
                                                                       // take
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
             }
 
             if (choice == null) { // can't find anything left
@@ -579,7 +579,7 @@ public class AbilityFactory_PermanentState {
 
         for (final Player p : definedPlayers) {
             if (p.isHuman()) {
-                AllZone.getInputControl().setInput(CardFactoryUtil.input_UntapUpToNType(num, valid));
+                AllZone.getInputControl().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
             } else {
                 CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 list = list.getType(valid);
@@ -589,7 +589,7 @@ public class AbilityFactory_PermanentState {
                 while ((list.size() != 0) && (count < num)) {
                     for (int i = 0; (i < list.size()) && (count < num); i++) {
 
-                        final Card c = CardFactoryUtil.AI_getBestLand(list);
+                        final Card c = CardFactoryUtil.getBestLandAI(list);
                         c.untap();
                         list.remove(c);
                         count++;
@@ -944,13 +944,13 @@ public class AbilityFactory_PermanentState {
             }
 
             if (tapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.AI_getBestCreature(tapList); // if only
+                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
                                                                       // creatures
                                                                       // take
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
             }
 
             if (choice == null) { // can't find anything left
@@ -1064,13 +1064,13 @@ public class AbilityFactory_PermanentState {
             }
 
             if (tapList.getNotType("Creature").size() == 0) {
-                choice = CardFactoryUtil.AI_getBestCreature(tapList); // if only
+                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
                                                                       // creatures
                                                                       // take
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
             }
 
             if (choice == null) { // can't find anything left

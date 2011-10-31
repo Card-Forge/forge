@@ -1078,7 +1078,6 @@ public class AbilityFactory_ZoneAffecting {
     private static void discardResolve(final AbilityFactory af, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
-
         final String mode = params.get("Mode");
 
         ArrayList<Player> tgtPlayers;
@@ -1138,7 +1137,6 @@ public class AbilityFactory_ZoneAffecting {
                     }
 
                     final CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
-
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
@@ -1172,9 +1170,9 @@ public class AbilityFactory_ZoneAffecting {
                                     if (params.containsKey("DiscardValid")) {
                                         final String dValid = params.get("DiscardValid");
                                         if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
-                                            final Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
+                                            final Card c = CardFactoryUtil.getBestCreatureAI(dPChHand);
                                             if (c != null) {
-                                                dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
+                                                dChoices.add(CardFactoryUtil.getBestCreatureAI(dPChHand));
                                             }
                                         }
                                     }
