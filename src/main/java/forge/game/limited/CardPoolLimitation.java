@@ -1,11 +1,15 @@
 package forge.game.limited;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public enum CardPoolLimitation {
+
+    /** The Full. */
     Full,
-    Block,
-    Custom
+ /** The Block. */
+ Block,
+ /** The Custom. */
+ Custom
 }

@@ -1,47 +1,91 @@
 package forge.game;
 
 /**
- * 
- * @author Max
+ * The Class GamePlayerRating.
  *
+ * @author Max
  */
 public class GamePlayerRating {
-    boolean hasWonTheCoin;
 
-    protected int turnsMade = 0;
-    protected int openingHandSize = 7;
-    protected int timesMulliganed = 0;
+    /** The has won the coin. */
+    private boolean hasWonTheCoin;
 
-    protected GameLossReason lossReason = GameLossReason.DidNotLoseYet;
-    protected String lossSpellName;
+    /** The turns made. */
+    private int turnsMade = 0;
 
+    /** The opening hand size. */
+    private int openingHandSize = 7;
+
+    /** The times mulliganed. */
+    private int timesMulliganed = 0;
+
+    /** The loss reason. */
+    private GameLossReason lossReason = GameLossReason.DidNotLoseYet;
+
+    /** The loss spell name. */
+    private String lossSpellName;
+
+    /**
+     * Gets the loss reason.
+     *
+     * @return the loss reason
+     */
     public final GameLossReason getLossReason() {
-        return lossReason;
-    }
-    
-    public void setLossReason(GameLossReason loseCondition, String spellName) {
-        lossReason = loseCondition;
-        lossSpellName = spellName;
-    }
-    public String getLossSpellName() { 
-        return lossSpellName;
+        return this.lossReason;
     }
 
+    /**
+     * Sets the loss reason.
+     *
+     * @param loseCondition the lose condition
+     * @param spellName the spell name
+     */
+    public void setLossReason(final GameLossReason loseCondition, final String spellName) {
+        this.lossReason = loseCondition;
+        this.lossSpellName = spellName;
+    }
+
+    /**
+     * Gets the loss spell name.
+     *
+     * @return the loss spell name
+     */
+    public String getLossSpellName() {
+        return this.lossSpellName;
+    }
+
+    /**
+     * Gets the opening hand size.
+     *
+     * @return the opening hand size
+     */
     public final int getOpeningHandSize() {
-        return openingHandSize;
+        return this.openingHandSize;
     }
 
+    /**
+     * Notify has mulliganed.
+     */
     public final void notifyHasMulliganed() {
-        timesMulliganed++;
+        this.timesMulliganed++;
     }
 
+    /**
+     * Gets the mulligan count.
+     *
+     * @return the mulligan count
+     */
     public final int getMulliganCount() {
-        return timesMulliganed;
+        return this.timesMulliganed;
     }
 
+    /**
+     * Notify opening hand size.
+     *
+     * @param newHand the new hand
+     */
     public final void notifyOpeningHandSize(final int newHand) {
-        openingHandSize = newHand;
+        this.openingHandSize = newHand;
     }
-
 
 }

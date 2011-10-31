@@ -292,7 +292,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         ItemPoolView<CardPrinted> list = ItemPool.createFrom(bottom.getCards(), CardPrinted.class);
         deck.addSideboard(list);
 
-        String landSet = BoosterDraft.LandSetCode[0];
+        String landSet = BoosterDraft.LAND_SET_CODE[0];
         final int LANDS_COUNT = 20;
         deck.addSideboard(CardDb.instance().getCard("Forest", landSet), LANDS_COUNT);
         deck.addSideboard(CardDb.instance().getCard("Mountain", landSet), LANDS_COUNT);

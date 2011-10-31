@@ -1,5 +1,19 @@
 package forge.game.limited;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
+
+import javax.swing.JOptionPane;
+
+import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Closure1;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
@@ -18,156 +32,154 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
-
-import javax.swing.JOptionPane;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Closure1;
-
 /**
  * 
  * TODO Write javadoc for this type.
- *
+ * 
  */
 public final class BoosterDraft_1 implements BoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
-    private static final int nPlayers = 8;
+    private static final int N_PLAYERS = 8;
 
     private int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
-    private List<List<CardPrinted>> pack; //size 8
-    
-    public Map<String,Float> draftPicks = new TreeMap<String,Float>();
-    private CardPoolLimitation draftFormat;
+    private List<List<CardPrinted>> pack; // size 8
 
-    private ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
+    /** The draft picks. */
+    private Map<String, Float> draftPicks = new TreeMap<String, Float>();
+    private final CardPoolLimitation draftFormat;
+
+    private final ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
 
     /**
-     * <p>Constructor for BoosterDraft_1.</p>
-     *
-     * @param draftType a {@link java.lang.String} object.
+     * <p>
+     * Constructor for BoosterDraft_1.
+     * </p>
+     * 
+     * @param draftType
+     *            a {@link java.lang.String} object.
      */
-    public BoosterDraft_1(CardPoolLimitation draftType) {
-        draftAI.bd = this;
-        draftFormat = draftType;
+    public BoosterDraft_1(final CardPoolLimitation draftType) {
+        this.draftAI.setBd(this);
+        this.draftFormat = draftType;
 
         switch (draftType) {
-            case Full:    // Draft from all cards in Forge
-                BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
-                Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpFull);
-                for (int i = 0; i < 3; i++) {
-                    packs.add(picker);
+        case Full: // Draft from all cards in Forge
+            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
+            final Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpFull);
+            for (int i = 0; i < 3; i++) {
+                this.packs.add(picker);
+            }
+
+            BoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getSet();
+            break;
+
+        case Block: // Draft from cards by block or set
+            final List<CardBlock> blocks = SetUtils.getBlocks();
+
+            final Object o = GuiUtils.getChoice("Choose Block", blocks.toArray());
+            final CardBlock block = (CardBlock) o;
+
+            final CardSet[] cardSets = block.getSets();
+            final String[] sets = new String[cardSets.length];
+            for (int k = cardSets.length - 1; k >= 0; --k) {
+                sets[k] = cardSets[k].getCode();
+            }
+
+            final int nPacks = block.getCntBoostersDraft();
+
+            final ArrayList<String> setCombos = new ArrayList<String>();
+            if (sets.length >= 2) {
+                setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+            }
+            if (sets.length >= 3) {
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
+                setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
+            }
+
+            if (sets.length > 1) {
+                final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
+                final String[] pp = p.toString().split("/");
+                for (int i = 0; i < nPacks; i++) {
+                    final BoosterGenerator bpMulti = new BoosterGenerator(SetUtils.getSetByCode(pp[i]));
+                    this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
-    
-                LandSetCode[0] = CardDb.instance().getCard("Plains").getSet();
-                break;
-    
-            case Block:   // Draft from cards by block or set
-                List<CardBlock> blocks = SetUtils.getBlocks();
-    
-                Object o = GuiUtils.getChoice("Choose Block", blocks.toArray());
-                CardBlock block = (CardBlock) o;
-    
-                CardSet[] cardSets = block.getSets();  
-                String[] sets = new String[cardSets.length];
-                for (int k = cardSets.length - 1; k >= 0 ; --k) { sets[k] = cardSets[k].getCode();} 
-    
-                int nPacks = block.getCntBoostersDraft();
-    
-                ArrayList<String> setCombos = new ArrayList<String>();
-                if (sets.length >= 2) {
-                    setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
-                    setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
-                    setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
-                    setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+
+            } else {
+                final BoosterGenerator bpOne = new BoosterGenerator(SetUtils.getSetByCode(sets[0]));
+                final Closure1<List<CardPrinted>, BoosterGenerator> pick1 = BoosterGenerator.getSimplePicker(bpOne);
+                for (int i = 0; i < nPacks; i++) {
+                    this.packs.add(pick1);
                 }
-                if (sets.length >= 3) {
-                    setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
-                    setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
-                    setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
-                    setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
-                }
-    
-    
-                if (sets.length > 1) {
-                    Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
-                    String[] pp = p.toString().split("/");
-                    for (int i = 0; i < nPacks; i++) {
-                        BoosterGenerator bpMulti = new BoosterGenerator(SetUtils.getSetByCode(pp[i]));
-                        packs.add(BoosterGenerator.getSimplePicker(bpMulti));
-                    }
-    
-                } else {
-                    BoosterGenerator bpOne = new BoosterGenerator(SetUtils.getSetByCode(sets[0]));
-                    Closure1<List<CardPrinted>, BoosterGenerator> pick1 = BoosterGenerator.getSimplePicker(bpOne);
-                    for (int i = 0; i < nPacks; i++) { packs.add(pick1); }
-                }
-    
-                LandSetCode[0] = block.getLandSet().getCode();
-                break;
-                
-           case Custom:
-                List<CustomLimited> myDrafts = loadCustomDrafts("res/draft/", ".draft");
-                
-                if (myDrafts.size() < 1) {
-                    JOptionPane.showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Draft", myDrafts.toArray());
-                    setupCustomDraft(draft);
-                }
-                break;
-            default: 
-                throw new NoSuchElementException("Draft for mode " + draftType + " has not been set up!");
+            }
+
+            BoosterDraft.LAND_SET_CODE[0] = block.getLandSet().getCode();
+            break;
+
+        case Custom:
+            final List<CustomLimited> myDrafts = this.loadCustomDrafts("res/draft/", ".draft");
+
+            if (myDrafts.size() < 1) {
+                JOptionPane
+                        .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                final CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Draft",
+                        myDrafts.toArray());
+                this.setupCustomDraft(draft);
+            }
+            break;
+        default:
+            throw new NoSuchElementException("Draft for mode " + draftType + " has not been set up!");
         }
 
-        pack = get8BoosterPack();
+        this.pack = this.get8BoosterPack();
     }
 
-    private void setupCustomDraft(final CustomLimited draft)
-    {
-        DeckManager dio = AllZone.getDeckManager();
-        Deck dPool = dio.getDeck(draft.DeckFile);
+    private void setupCustomDraft(final CustomLimited draft) {
+        final DeckManager dio = AllZone.getDeckManager();
+        final Deck dPool = dio.getDeck(draft.DeckFile);
         if (dPool == null) {
             throw new RuntimeException("BoosterGenerator : deck not found - " + draft.DeckFile);
         }
 
-        BoosterGenerator bpCustom = new BoosterGenerator(dPool);
-        Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
-            @Override public List<CardPrinted> apply(BoosterGenerator pack) {
-                if ( draft.IgnoreRarity ) {
+        final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
+        final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+            @Override
+            public List<CardPrinted> apply(final BoosterGenerator pack) {
+                if (draft.IgnoreRarity) {
                     if (!draft.Singleton) {
-	                    return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
+                        return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
                     } else {
                         return pack.getSingletonBoosterPack(draft.NumCards);
                     }
                 }
-                return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics, draft.NumSpecials, 0, 0, 0);
+                return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics,
+                        draft.NumSpecials, 0, 0, 0);
             }
         };
 
-        Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(fnPick, bpCustom);
-        for (int i = 0; i < draft.NumPacks; i++) { packs.add(picker); }
+        final Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(
+                fnPick, bpCustom);
+        for (int i = 0; i < draft.NumPacks; i++) {
+            this.packs.add(picker);
+        }
 
-        LandSetCode[0] = draft.LandSetCode;
+        BoosterDraft.LAND_SET_CODE[0] = draft.LandSetCode;
     }
-    
-    /** Looks for res/draft/*.draft files, reads them, returns a list */
-    private List<CustomLimited> loadCustomDrafts(String lookupFolder, String fileExtension)
-    {
+
+    /** Looks for res/draft/*.draft files, reads them, returns a list. */
+    private List<CustomLimited> loadCustomDrafts(final String lookupFolder, final String fileExtension) {
         String[] dList;
-        ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
+        final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
         // get list of custom draft files
-        File dFolder = new File(lookupFolder);
+        final File dFolder = new File(lookupFolder);
         if (!dFolder.exists()) {
             throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
         }
@@ -178,151 +190,172 @@ public final class BoosterDraft_1 implements BoosterDraft {
 
         dList = dFolder.list();
 
-        for (int i = 0; i < dList.length; i++) {
-            if (dList[i].endsWith(fileExtension)) {
-                List<String> dfData = FileUtil.readFile(lookupFolder + dList[i]);
+        for (final String element : dList) {
+            if (element.endsWith(fileExtension)) {
+                final List<String> dfData = FileUtil.readFile(lookupFolder + element);
                 customs.add(CustomLimited.parse(dfData));
             }
         }
         return customs;
     }
-    
-    
+
     /**
-     * <p>nextChoice.</p>
-     *
+     * <p>
+     * nextChoice.
+     * </p>
+     * 
      * @return a {@link forge.CardList} object.
      */
+    @Override
     public ItemPoolView<CardPrinted> nextChoice() {
-        if (pack.get(getCurrentBoosterIndex()).size() == 0) {
-            pack = get8BoosterPack();
+        if (this.pack.get(this.getCurrentBoosterIndex()).size() == 0) {
+            this.pack = this.get8BoosterPack();
         }
 
-        computerChoose();
-        return ItemPool.createFrom(pack.get(getCurrentBoosterIndex()), CardPrinted.class);
+        this.computerChoose();
+        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), CardPrinted.class);
     }
 
     /**
-     * <p>get8BoosterPack.</p>
-     *
+     * <p>
+     * get8BoosterPack.
+     * </p>
+     * 
      * @return an array of {@link forge.CardList} objects.
      */
     public List<List<CardPrinted>> get8BoosterPack() {
-        if (nextBoosterGroup >= packs.size()) { return null; }
+        if (this.nextBoosterGroup >= this.packs.size()) {
+            return null;
+        }
 
-        List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
-        for (int i = 0; i < 8; i++) { list.add(packs.get(nextBoosterGroup).apply()); }
-        
-        nextBoosterGroup++;
-        currentBoosterSize = list.get(0).size();
-        currentBoosterPick = 0;
+        final List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
+        for (int i = 0; i < 8; i++) {
+            list.add(this.packs.get(this.nextBoosterGroup).apply());
+        }
+
+        this.nextBoosterGroup++;
+        this.currentBoosterSize = list.get(0).size();
+        this.currentBoosterPick = 0;
         return list;
     }
 
-    //size 7, all the computers decks
+    // size 7, all the computers decks
 
     /**
-     * <p>getDecks.</p>
-     *
+     * <p>
+     * getDecks.
+     * </p>
+     * 
      * @return an array of {@link forge.deck.Deck} objects.
      */
+    @Override
     public Deck[] getDecks() {
-        return draftAI.getDecks();
+        return this.draftAI.getDecks();
     }
 
     private void computerChoose() {
 
-        int iHumansBooster = getCurrentBoosterIndex();
+        final int iHumansBooster = this.getCurrentBoosterIndex();
         int iPlayer = 0;
-        for (int i = 0; i < pack.size(); i++) {
-            if (iHumansBooster == i) { continue; } // don't touch player's booster
+        for (int i = 0; i < this.pack.size(); i++) {
+            if (iHumansBooster == i) {
+                continue;
+            } // don't touch player's booster
 
-            CardList forAi = new CardList();
-            List<CardPrinted> booster = pack.get(i);
-            for (CardPrinted cr : booster) {
+            final CardList forAi = new CardList();
+            final List<CardPrinted> booster = this.pack.get(i);
+            for (final CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());
             }
-            // TODO: Please write this drafting code to work without heavy card objects
-            Card aiPick = draftAI.choose(forAi, iPlayer++);
-            String pickedName = aiPick.getName();
+            // TODO: Please write this drafting code to work without heavy card
+            // objects
+            final Card aiPick = this.draftAI.choose(forAi, iPlayer++);
+            final String pickedName = aiPick.getName();
 
             for (int pick = booster.size() - 1; pick >= 0; pick--) {
-                CardPrinted cp = booster.get(pick);
+                final CardPrinted cp = booster.get(pick);
                 if (cp.getName().equalsIgnoreCase(pickedName)) {
                     booster.remove(pick);
                     break;
                 }
             }
         }
-    } //computerChoose()
+    } // computerChoose()
 
     private int getCurrentBoosterIndex() {
-        return currentBoosterPick % nPlayers;
+        return this.currentBoosterPick % BoosterDraft_1.N_PLAYERS;
     }
 
     /**
-     * <p>hasNextChoice.</p>
-     *
+     * <p>
+     * hasNextChoice.
+     * </p>
+     * 
      * @return a boolean.
      */
+    @Override
     public boolean hasNextChoice() {
-        boolean isLastGroup = nextBoosterGroup >= packs.size();
-        boolean isBoosterDepleted = currentBoosterPick >= currentBoosterSize; 
-        boolean noMoreCards = isLastGroup && isBoosterDepleted; 
+        final boolean isLastGroup = this.nextBoosterGroup >= this.packs.size();
+        final boolean isBoosterDepleted = this.currentBoosterPick >= this.currentBoosterSize;
+        final boolean noMoreCards = isLastGroup && isBoosterDepleted;
         return !noMoreCards;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setChoice(final CardPrinted c) {
-        List<CardPrinted> thisBooster = pack.get(getCurrentBoosterIndex());
+        final List<CardPrinted> thisBooster = this.pack.get(this.getCurrentBoosterIndex());
 
         if (!thisBooster.contains(c)) {
-            throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c + " - booster pack = " + thisBooster);
+            throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
+                    + " - booster pack = " + thisBooster);
         }
 
         if (Constant.Runtime.UPLOAD_DRAFT[0]) {
             for (int i = 0; i < thisBooster.size(); i++) {
-                CardPrinted cc = thisBooster.get(i);
-                String cnBk = cc.getName() + "|" + cc.getSet();
+                final CardPrinted cc = thisBooster.get(i);
+                final String cnBk = cc.getName() + "|" + cc.getSet();
 
                 float pickValue = 0;
                 if (cc.equals(c)) {
-                    pickValue = thisBooster.size() * (1f - ((float) currentBoosterPick / currentBoosterSize) * 2f);
+                    pickValue = thisBooster.size()
+                            * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
                 } else {
                     pickValue = 0;
                 }
 
-                if (!draftPicks.containsKey(cnBk)) {
-                    draftPicks.put(cnBk, pickValue);
+                if (!this.draftPicks.containsKey(cnBk)) {
+                    this.draftPicks.put(cnBk, pickValue);
                 } else {
-                    float curValue = draftPicks.get(cnBk);
-                    float newValue = (curValue + pickValue) / 2;
-                    draftPicks.put(cnBk, newValue);
+                    final float curValue = this.draftPicks.get(cnBk);
+                    final float newValue = (curValue + pickValue) / 2;
+                    this.draftPicks.put(cnBk, newValue);
                 }
             }
         }
 
         thisBooster.remove(c);
-        currentBoosterPick++;
-    } //setChoice()
+        this.currentBoosterPick++;
+    } // setChoice()
 
     /** This will upload drafting picks to cardforge HQ. */
+    @Override
     public void finishedDrafting() {
         if (Constant.Runtime.UPLOAD_DRAFT[0]) {
-            if (draftPicks.size() > 1) {
-                ArrayList<String> outDraftData = new ArrayList<String>();
+            if (this.draftPicks.size() > 1) {
+                final ArrayList<String> outDraftData = new ArrayList<String>();
 
-                String[] keys = draftPicks.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+                final String[] keys = this.draftPicks.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
 
-                for (int i = 0; i < keys.length; i++) {
-                    outDraftData.add(keys[i] + "|" + draftPicks.get(keys[i]));
+                for (final String key : keys) {
+                    outDraftData.add(key + "|" + this.draftPicks.get(key));
                 }
 
                 FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
 
-                HttpUtil poster = new HttpUtil();
-                poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt="
-                + draftFormat, "res/draft/tmpDraftData.txt");
+                final HttpUtil poster = new HttpUtil();
+                poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt=" + this.draftFormat,
+                        "res/draft/tmpDraftData.txt");
             }
         }
     }
