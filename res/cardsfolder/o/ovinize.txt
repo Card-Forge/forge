@@ -1,0 +1,9 @@
+Name:Ovinize
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ovinize.jpg
+End
