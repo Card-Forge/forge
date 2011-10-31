@@ -1,5 +1,5 @@
 Name:Cautery Sliver
-ManaCost:r W
+ManaCost:R W
 Types:Creature Sliver
 Text:no text
 PT:2/2
