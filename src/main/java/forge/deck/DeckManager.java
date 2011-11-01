@@ -698,7 +698,7 @@ public class DeckManager {
     private static void writeCardPool(final ItemPoolView<CardPrinted> pool, final BufferedWriter out)
             throws IOException {
         final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
-        Collections.sort(main2sort, TableSorter.byNameThenSet);
+        Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
         for (final Entry<CardPrinted, Integer> e : main2sort) {
             final CardPrinted card = e.getKey();
             final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());

@@ -24,21 +24,21 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     private static final long serialVersionUID = -401223933343539977L;
 
     /** The filter boxes. */
-    protected FilterCheckBoxes filterBoxes;
+    private FilterCheckBoxes filterBoxes;
     // set this to false when resetting filter from code (like
     // "clearFiltersPressed"), reset when done.
     /** The is filters change firing update. */
-    protected boolean isFiltersChangeFiringUpdate = true;
+    private boolean isFiltersChangeFiringUpdate = true;
 
     /** The card view. */
-    protected CardPanelBase cardView;
+    private CardPanelBase cardView;
 
     // CardPools and Table data for top and bottom lists
     /** The top. */
-    protected TableWithCards top;
+    private TableWithCards topTableWithCards;
 
     /** The bottom. */
-    protected TableWithCards bottom;
+    private TableWithCards bottomTableWithCards;
 
     private GameType gameType;
 
@@ -47,8 +47,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getGameType()
      */
+    @Override
     public final GameType getGameType() {
-        return gameType;
+        return this.gameType;
     }
 
     // top shows available card pool
@@ -61,7 +62,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @return the top table model
      */
     public final TableWithCards getTopTableModel() {
-        return top;
+        return this.getTopTableWithCards();
     }
 
     /*
@@ -69,8 +70,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getTop()
      */
+    @Override
     public final ItemPoolView<InventoryItem> getTop() {
-        return top.getCards();
+        return this.getTopTableWithCards().getCards();
     }
 
     // bottom shows player's choice - be it deck or draft
@@ -79,8 +81,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getBottom()
      */
+    @Override
     public final ItemPoolView<InventoryItem> getBottom() {
-        return bottom.getCards();
+        return this.getBottomTableWithCards().getCards();
     }
 
     // THIS IS HERE FOR OVERLOADING!!!1
@@ -99,14 +102,15 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @param e
      *            the e
      */
-    final void analysisButton_actionPerformed(final ActionEvent e) {
-        ItemPoolView<CardPrinted> deck = ItemPool.createFrom(bottom.getCards(), CardPrinted.class);
+    final void analysisButtonActionPerformed(final ActionEvent e) {
+        final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(this.getBottomTableWithCards().getCards(),
+                CardPrinted.class);
         if (deck.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
-            DeckEditorBase g = DeckEditorBase.this;
-            DeckAnalysis dAnalysis = new DeckAnalysis(g, deck);
+            final DeckEditorBase g = DeckEditorBase.this;
+            final DeckAnalysis dAnalysis = new DeckAnalysis(g, deck);
             dAnalysis.setVisible(true);
             g.setEnabled(false);
         }
@@ -119,7 +123,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      *            the gametype
      */
     public DeckEditorBase(final GameType gametype) {
-        gameType = gametype;
+        this.gameType = gametype;
     }
 
     /*
@@ -128,11 +132,12 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @see forge.gui.deckeditor.DeckDisplay#setDeck(forge.item.ItemPoolView,
      * forge.item.ItemPoolView, forge.game.GameType)
      */
+    @Override
     public void setDeck(final ItemPoolView<CardPrinted> topParam, final ItemPoolView<CardPrinted> bottomParam,
             final GameType gt) {
-        gameType = gt;
-        top.setDeck(topParam);
-        bottom.setDeck(bottomParam);
+        this.gameType = gt;
+        this.getTopTableWithCards().setDeck(topParam);
+        this.getBottomTableWithCards().setDeck(bottomParam);
     }
 
     /*
@@ -141,25 +146,27 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @see forge.gui.deckeditor.DeckDisplay#setItems(forge.item.ItemPoolView,
      * forge.item.ItemPoolView, forge.game.GameType)
      */
+    @Override
     public final <T extends InventoryItem> void setItems(final ItemPoolView<T> topParam,
             final ItemPoolView<T> bottomParam, final GameType gt) {
-        gameType = gt;
-        top.setDeck(topParam);
-        bottom.setDeck(bottomParam);
+        this.gameType = gt;
+        this.getTopTableWithCards().setDeck(topParam);
+        this.getBottomTableWithCards().setDeck(bottomParam);
     }
 
     /**
      * Update display.
      */
     public final void updateDisplay() {
-        top.setFilter(buildFilter());
+        this.getTopTableWithCards().setFilter(this.buildFilter());
     }
 
     /** The item listener updates display. */
-    protected ItemListener itemListenerUpdatesDisplay = new ItemListener() {
+    private ItemListener itemListenerUpdatesDisplay = new ItemListener() {
+        @Override
         public void itemStateChanged(final ItemEvent e) {
-            if (isFiltersChangeFiringUpdate) {
-                updateDisplay();
+            if (DeckEditorBase.this.isFiltersChangeFiringUpdate()) {
+                DeckEditorBase.this.updateDisplay();
             }
         }
     };
@@ -170,8 +177,8 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      */
     protected class OnChangeTextUpdateDisplay implements DocumentListener {
         private void onChange() {
-            if (isFiltersChangeFiringUpdate) {
-                updateDisplay();
+            if (DeckEditorBase.this.isFiltersChangeFiringUpdate()) {
+                DeckEditorBase.this.updateDisplay();
             }
         }
 
@@ -184,7 +191,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
          */
         @Override
         public final void insertUpdate(final DocumentEvent e) {
-            onChange();
+            this.onChange();
         }
 
         /*
@@ -196,7 +203,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
          */
         @Override
         public final void removeUpdate(final DocumentEvent e) {
-            onChange();
+            this.onChange();
         }
 
         /*
@@ -216,15 +223,116 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getDeck()
      */
+    @Override
     public final Deck getDeck() {
-        Deck deck = new Deck(gameType);
-        deck.addMain(ItemPool.createFrom(getBottom(), CardPrinted.class));
+        final Deck deck = new Deck(this.gameType);
+        deck.addMain(ItemPool.createFrom(this.getBottom(), CardPrinted.class));
 
         // if sealed or draft, move "top" to sideboard
-        if (gameType.isLimited() && gameType != GameType.Quest) {
-            deck.addSideboard(ItemPool.createFrom(getTop(), CardPrinted.class));
+        if (this.gameType.isLimited() && (this.gameType != GameType.Quest)) {
+            deck.addSideboard(ItemPool.createFrom(this.getTop(), CardPrinted.class));
         }
         return deck;
-    }// getDeck()
+    } // getDeck()
+
+    /**
+     * @return the itemListenerUpdatesDisplay
+     */
+    public ItemListener getItemListenerUpdatesDisplay() {
+        return itemListenerUpdatesDisplay;
+    }
+
+    /**
+     * @param itemListenerUpdatesDisplay
+     *            the itemListenerUpdatesDisplay to set
+     */
+    public void setItemListenerUpdatesDisplay(ItemListener itemListenerUpdatesDisplay) {
+        this.itemListenerUpdatesDisplay = itemListenerUpdatesDisplay; // TODO:
+                                                                      // Add 0
+                                                                      // to
+                                                                      // parameter's
+                                                                      // name.
+    }
+
+    /**
+     * @return the isFiltersChangeFiringUpdate
+     */
+    public boolean isFiltersChangeFiringUpdate() {
+        return isFiltersChangeFiringUpdate;
+    }
+
+    /**
+     * @param isFiltersChangeFiringUpdate
+     *            the isFiltersChangeFiringUpdate to set
+     */
+    public void setFiltersChangeFiringUpdate(boolean isFiltersChangeFiringUpdate) {
+        this.isFiltersChangeFiringUpdate = isFiltersChangeFiringUpdate; // TODO:
+                                                                        // Add 0
+                                                                        // to
+                                                                        // parameter's
+                                                                        // name.
+    }
+
+    /**
+     * @return the cardView
+     */
+    public CardPanelBase getCardView() {
+        return cardView;
+    }
+
+    /**
+     * @param cardView
+     *            the cardView to set
+     */
+    public void setCardView(CardPanelBase cardView) {
+        this.cardView = cardView; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the filterBoxes
+     */
+    public FilterCheckBoxes getFilterBoxes() {
+        return filterBoxes;
+    }
+
+    /**
+     * @param filterBoxes
+     *            the filterBoxes to set
+     */
+    public void setFilterBoxes(FilterCheckBoxes filterBoxes) {
+        this.filterBoxes = filterBoxes; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the bottomTableWithCards
+     */
+    public TableWithCards getBottomTableWithCards() {
+        return bottomTableWithCards;
+    }
+
+    /**
+     * @param bottomTableWithCards
+     *            the bottomTableWithCards to set
+     */
+    public void setBottomTableWithCards(TableWithCards bottomTableWithCards) {
+        this.bottomTableWithCards = bottomTableWithCards; // TODO: Add 0 to
+                                                          // parameter's name.
+    }
+
+    /**
+     * @return the topTableWithCards
+     */
+    public TableWithCards getTopTableWithCards() {
+        return topTableWithCards;
+    }
+
+    /**
+     * @param topTableWithCards
+     *            the topTableWithCards to set
+     */
+    public void setTopTableWithCards(TableWithCards topTableWithCards) {
+        this.topTableWithCards = topTableWithCards; // TODO: Add 0 to
+                                                    // parameter's name.
+    }
 
 }

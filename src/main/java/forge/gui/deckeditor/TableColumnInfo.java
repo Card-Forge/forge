@@ -20,24 +20,24 @@ public class TableColumnInfo<T> {
     private final String name;
 
     /** The min width. */
-    public int minWidth;
+    private int minWidth;
 
     /** The max width. */
-    public int maxWidth;
+    private int maxWidth;
 
     /** The nominal width. */
-    public int nominalWidth;
+    private int nominalWidth;
 
     /** The is min max applied. */
-    public boolean isMinMaxApplied = true;
+    private boolean isMinMaxApplied = true;
 
     /** The fn sort. */
-    public final Lambda1<Comparable, Entry<T, Integer>> fnSort; // this will be
+    private final Lambda1<Comparable, Entry<T, Integer>> fnSort; // this will be
                                                                 // used for
                                                                 // sorting
 
     /** The fn display. */
-    public final Lambda1<Object, Entry<T, Integer>> fnDisplay; // this is used
+    private final Lambda1<Object, Entry<T, Integer>> fnDisplay; // this is used
                                                                // to display
 
     private TableCellRenderer cellRenderer = null;
@@ -48,7 +48,7 @@ public class TableColumnInfo<T> {
      * @return the name
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -63,8 +63,8 @@ public class TableColumnInfo<T> {
      */
     public TableColumnInfo(final String colName, final Lambda1<Comparable, Entry<T, Integer>> fieldSort,
             final Lambda1<Object, Entry<T, Integer>> fieldDisplay) {
-        fnSort = fieldSort;
-        fnDisplay = fieldDisplay;
+        this.fnSort = fieldSort;
+        this.fnDisplay = fieldDisplay;
         this.name = colName;
     }
 
@@ -84,9 +84,9 @@ public class TableColumnInfo<T> {
             final Lambda1<Comparable, Entry<T, Integer>> fieldSort,
             final Lambda1<Object, Entry<T, Integer>> fieldDisplay) {
         this(colName, fieldSort, fieldDisplay);
-        this.maxWidth = width;
-        this.minWidth = width;
-        this.nominalWidth = width;
+        this.setMaxWidth(width);
+        this.setMinWidth(width);
+        this.setNominalWidth(width);
     }
 
     /**
@@ -109,9 +109,9 @@ public class TableColumnInfo<T> {
             final Lambda1<Comparable, Entry<T, Integer>> fieldSort,
             final Lambda1<Object, Entry<T, Integer>> fieldDisplay) {
         this(colName, fieldSort, fieldDisplay);
-        this.maxWidth = wMax;
-        this.minWidth = wMin;
-        this.nominalWidth = width;
+        this.setMaxWidth(wMax);
+        this.setMinWidth(wMin);
+        this.setNominalWidth(width);
     }
 
     /**
@@ -121,7 +121,7 @@ public class TableColumnInfo<T> {
      *            the new cell renderer
      */
     public final void setCellRenderer(final TableCellRenderer renderer) {
-        cellRenderer = renderer;
+        this.cellRenderer = renderer;
     }
 
     /**
@@ -130,6 +130,76 @@ public class TableColumnInfo<T> {
      * @return the cell renderer
      */
     public final TableCellRenderer getCellRenderer() {
-        return cellRenderer;
+        return this.cellRenderer;
+    }
+
+    /**
+     * @return the minWidth
+     */
+    public int getMinWidth() {
+        return minWidth;
+    }
+
+    /**
+     * @param minWidth the minWidth to set
+     */
+    public void setMinWidth(int minWidth) {
+        this.minWidth = minWidth; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the maxWidth
+     */
+    public int getMaxWidth() {
+        return maxWidth;
+    }
+
+    /**
+     * @param maxWidth the maxWidth to set
+     */
+    public void setMaxWidth(int maxWidth) {
+        this.maxWidth = maxWidth; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the nominalWidth
+     */
+    public int getNominalWidth() {
+        return nominalWidth;
+    }
+
+    /**
+     * @param nominalWidth the nominalWidth to set
+     */
+    public void setNominalWidth(int nominalWidth) {
+        this.nominalWidth = nominalWidth; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the isMinMaxApplied
+     */
+    public boolean isMinMaxApplied() {
+        return isMinMaxApplied;
+    }
+
+    /**
+     * @param isMinMaxApplied the isMinMaxApplied to set
+     */
+    public void setMinMaxApplied(boolean isMinMaxApplied) {
+        this.isMinMaxApplied = isMinMaxApplied; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the fnSort
+     */
+    public Lambda1<Comparable, Entry<T, Integer>> getFnSort() {
+        return fnSort;
+    }
+
+    /**
+     * @return the fnDisplay
+     */
+    public Lambda1<Object, Entry<T, Integer>> getFnDisplay() {
+        return fnDisplay;
     }
 }

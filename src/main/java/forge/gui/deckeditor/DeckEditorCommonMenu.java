@@ -49,14 +49,14 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
     /** Constant <code>previousDirectory</code>. */
     private static File previousDirectory = null;
 
-    private DeckManager deckManager;
+    private final DeckManager deckManager;
 
     private boolean isDeckSaved = true;
 
     private String currentDeckName;
-    private DeckDisplay deckDisplay;
+    private final DeckDisplay deckDisplay;
 
-    private Command exitCommand;
+    private final Command exitCommand;
 
     /**
      * 
@@ -70,16 +70,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      *            a Command
      */
     public DeckEditorCommonMenu(final DeckDisplay inDisplay, final DeckManager dckManager, final Command exit) {
-        deckDisplay = inDisplay;
-        exitCommand = exit;
-        deckManager = dckManager;
+        this.deckDisplay = inDisplay;
+        this.exitCommand = exit;
+        this.deckManager = dckManager;
 
         // this is added just to make save() and saveAs() work ok
         // when first started up, just a silly patch
-        setDeckData("", true);
+        this.setDeckData("", true);
 
-        setupMenu();
-        setupSortMenu();
+        this.setupMenu();
+        this.setupSortMenu();
     }
 
     /**
@@ -88,14 +88,14 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * </p>
      */
     private void setupSortMenu() {
-        JMenuItem name = new JMenuItem("Card Name");
-        JMenuItem cost = new JMenuItem("Cost");
-        JMenuItem color = new JMenuItem("Color");
-        JMenuItem type = new JMenuItem("Type");
-        JMenuItem stats = new JMenuItem("Power/Toughness");
-        JMenuItem rarity = new JMenuItem("Rarity");
+        final JMenuItem name = new JMenuItem("Card Name");
+        final JMenuItem cost = new JMenuItem("Cost");
+        final JMenuItem color = new JMenuItem("Color");
+        final JMenuItem type = new JMenuItem("Type");
+        final JMenuItem stats = new JMenuItem("Power/Toughness");
+        final JMenuItem rarity = new JMenuItem("Rarity");
 
-        JMenu menu = new JMenu("Sort By");
+        final JMenu menu = new JMenu("Sort By");
         menu.add(name);
         menu.add(cost);
         menu.add(color);
@@ -106,8 +106,9 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         this.add(menu);
 
         name.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(1, true);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(1, true);
             }
         });
 
@@ -115,33 +116,40 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         // private String column[] = {"Qty", "Name", "Cost", "Color", "Type",
         // "Stats", "Rarity"};
         cost.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(3).sort(2);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(4).sort(3).sort(2);
             }
         });
 
         color.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(4).sort(2).sort(3);
             }
         });
 
         type.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(2).sort(3).sort(4);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(2).sort(3).sort(4);
             }
         });
 
         stats.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(4).sort(2).sort(3).sort(5);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(4).sort(2).sort(3)
+                        .sort(5);
             }
         });
 
         rarity.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 // sort by cost, type, color, rarity
-                ((DeckEditorCommon) deckDisplay).getTopTableModel().sort(2).sort(4).sort(3).sort(6);
+                ((DeckEditorCommon) DeckEditorCommonMenu.this.deckDisplay).getTopTableModel().sort(2).sort(4).sort(3)
+                        .sort(6);
             }
         });
     } // setupSortMenu()
@@ -153,27 +161,28 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      *            a boolean
      */
     public void newConstructed(final boolean careAboutOldDeck) {
-        if (careAboutOldDeck && !canLeaveCurrentDeck()) {
+        if (careAboutOldDeck && !this.canLeaveCurrentDeck()) {
             return;
         }
 
-        setDeckData("", true);
+        this.setDeckData("", true);
 
-        deckDisplay.setDeck(null, null, GameType.Constructed);
+        this.deckDisplay.setDeck(null, null, GameType.Constructed);
     }
 
     private void newRandomConstructed() {
-        if (!canLeaveCurrentDeck()) {
+        if (!this.canLeaveCurrentDeck()) {
             return;
         }
 
-        setDeckData("", false);
+        this.setDeckData("", false);
 
         // The only remaining reference to global variable!
-        CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(15 * 5));
+        final CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(
+                15 * 5));
 
-        ItemPool<CardPrinted> cpRandom = new ItemPool<CardPrinted>(CardPrinted.class);
-        for (Card c : random) {
+        final ItemPool<CardPrinted> cpRandom = new ItemPool<CardPrinted>(CardPrinted.class);
+        for (final Card c : random) {
             cpRandom.add(CardDb.instance().getCard(c));
         }
         cpRandom.add(CardDb.instance().getCard("Forest"));
@@ -183,62 +192,62 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         cpRandom.add(CardDb.instance().getCard("Mountain"));
         cpRandom.add(CardDb.instance().getCard("Terramorphic Expanse"));
 
-        deckDisplay.setDeck(cpRandom, null, GameType.Constructed);
+        this.deckDisplay.setDeck(cpRandom, null, GameType.Constructed);
     }
 
     private void newGenerateConstructed() {
-        if (!canLeaveCurrentDeck()) {
+        if (!this.canLeaveCurrentDeck()) {
             return;
         }
 
-        setDeckData("", false);
+        this.setDeckData("", false);
 
-        GenerateConstructedDeck gen = new GenerateConstructedDeck();
+        final GenerateConstructedDeck gen = new GenerateConstructedDeck();
 
-        ItemPool<CardPrinted> generated = new ItemPool<CardPrinted>(CardPrinted.class);
-        for (Card c : gen.generateDeck()) {
+        final ItemPool<CardPrinted> generated = new ItemPool<CardPrinted>(CardPrinted.class);
+        for (final Card c : gen.generateDeck()) {
             generated.add(CardDb.instance().getCard(c));
         }
-        deckDisplay.setDeck(null, generated, GameType.Constructed);
+        this.deckDisplay.setDeck(null, generated, GameType.Constructed);
     }
 
     private File getImportFilename() {
-        JFileChooser chooser = new JFileChooser(previousDirectory);
+        final JFileChooser chooser = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
 
         chooser.addChoosableFileFilter(DeckManager.DCK_FILTER);
-        int returnVal = chooser.showOpenDialog(null);
+        final int returnVal = chooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            previousDirectory = file.getParentFile();
+            final File file = chooser.getSelectedFile();
+            DeckEditorCommonMenu.previousDirectory = file.getParentFile();
             return file;
         }
         return null;
     } // openFileDialog()
 
     private void importDeck() {
-        File file = getImportFilename();
+        final File file = this.getImportFilename();
 
         if (file == null) {
         } else if (file.getName().endsWith(".dck")) {
             try {
-                FileChannel srcChannel = new FileInputStream(file).getChannel();
-                File dst = new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath(), file.getName());
+                final FileChannel srcChannel = new FileInputStream(file).getChannel();
+                final File dst = new File(ForgeProps.getFile(NewConstants.NEW_DECKS).getAbsolutePath(), file.getName());
                 if (!dst.createNewFile()) {
                     JOptionPane.showMessageDialog(null, "Cannot import deck " + file.getName()
                             + ", a deck currently has that name.");
                     return;
                 }
-                FileChannel dstChannel = new FileOutputStream(dst).getChannel();
+                final FileChannel dstChannel = new FileOutputStream(dst).getChannel();
                 dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
                 srcChannel.close();
                 dstChannel.close();
 
-                Deck newDeck = DeckManager.readDeck(file);
-                deckManager.addDeck(newDeck);
-                showDeck(newDeck, newDeck.getDeckType());
+                final Deck newDeck = DeckManager.readDeck(file);
+                this.deckManager.addDeck(newDeck);
+                this.showDeck(newDeck, newDeck.getDeckType());
 
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
                 throw new RuntimeException("Gui_DeckEditor_Menu : importDeck() error, " + ex);
             }
@@ -252,31 +261,31 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * </p>
      */
     private void exportDeck() {
-        File filename = getExportFilename();
+        final File filename = this.getExportFilename();
         if (filename == null) {
             return;
         }
 
-        Deck deck = getDeck();
+        final Deck deck = this.getDeck();
         try {
             DeckManager.writeDeck(deck, filename);
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error, " + ex);
         }
     }
 
     private File getExportFilename() {
-        JFileChooser save = new JFileChooser(previousDirectory);
+        final JFileChooser save = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.setFileFilter(DeckManager.DCK_FILTER);
 
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File file = save.getSelectedFile();
-            String check = file.getAbsolutePath();
+            final File file = save.getSelectedFile();
+            final String check = file.getAbsolutePath();
 
-            previousDirectory = file.getParentFile();
+            DeckEditorCommonMenu.previousDirectory = file.getParentFile();
 
             return check.endsWith(".dck") ? file : new File(check + ".dck");
         }
@@ -289,31 +298,31 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * </p>
      */
     private void generateProxies() {
-        File filename = getProxiesFilename();
+        final File filename = this.getProxiesFilename();
         if (filename == null) {
             return;
         }
 
-        Deck deck = getDeck();
+        final Deck deck = this.getDeck();
         try {
             DeckManager.writeDeckHtml(deck, filename);
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : printProxies() error, " + ex);
         }
     }
 
     private File getProxiesFilename() {
-        JFileChooser save = new JFileChooser(previousDirectory);
+        final JFileChooser save = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
         save.setDialogTitle("Proxy HTML Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.setFileFilter(DeckManager.HTML_FILTER);
 
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File file = save.getSelectedFile();
-            String check = file.getAbsolutePath();
+            final File file = save.getSelectedFile();
+            final String check = file.getAbsolutePath();
 
-            previousDirectory = file.getParentFile();
+            DeckEditorCommonMenu.previousDirectory = file.getParentFile();
 
             return check.endsWith(".html") ? file : new File(check + ".html");
         }
@@ -321,18 +330,19 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
     }
 
     private void openDeck(final GameType gameType) {
-        if (!canLeaveCurrentDeck()) {
+        if (!this.canLeaveCurrentDeck()) {
             return;
         }
 
-        String name = getUserInputOpenDeck(gameType);
+        final String name = this.getUserInputOpenDeck(gameType);
 
         if (StringUtils.isBlank(name)) {
             return;
         }
 
-        Deck deck = gameType == GameType.Draft ? deckManager.getDraftDeck(name)[0] : deckManager.getDeck(name);
-        showDeck(deck, gameType);
+        final Deck deck = gameType == GameType.Draft ? this.deckManager.getDraftDeck(name)[0] : this.deckManager
+                .getDeck(name);
+        this.showDeck(deck, gameType);
     }
 
     /**
@@ -345,83 +355,83 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      *            a GameType
      */
     public void showDeck(final Deck deck, final GameType gameType) {
-        setDeckData(deck.getName(), true);
+        this.setDeckData(deck.getName(), true);
         if (gameType.isLimited()) {
-            deckDisplay.setDeck(deck.getSideboard(), deck.getMain(), gameType);
+            this.deckDisplay.setDeck(deck.getSideboard(), deck.getMain(), gameType);
         } else {
-            deckDisplay.setDeck(null, deck.getMain(), gameType);
+            this.deckDisplay.setDeck(null, deck.getMain(), gameType);
         }
     }
 
     private void save() {
 
-        if (currentDeckName.equals("")) {
-            saveAs();
+        if (this.currentDeckName.equals("")) {
+            this.saveAs();
             return;
         }
 
-        Deck deck = getDeck();
-        if (deckDisplay.getGameType().equals(GameType.Draft)) {
-            setDeckData(currentDeckName, true);
+        final Deck deck = this.getDeck();
+        if (this.deckDisplay.getGameType().equals(GameType.Draft)) {
+            this.setDeckData(this.currentDeckName, true);
             // write booster deck
-            Deck[] all = deckManager.getDraftDeck(currentDeckName);
+            final Deck[] all = this.deckManager.getDraftDeck(this.currentDeckName);
             all[0] = deck;
-            deckManager.addDraftDeck(all);
+            this.deckManager.addDraftDeck(all);
             DeckManager.writeDraftDecks(all);
         } else { // constructed or sealed
-            setDeckData(currentDeckName, true);
-            deckManager.addDeck(deck);
+            this.setDeckData(this.currentDeckName, true);
+            this.deckManager.addDeck(deck);
             DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
         }
-        isDeckSaved = true;
+        this.isDeckSaved = true;
     }
 
     private void saveAs() {
-        String name = getDeckNameFromDialog();
+        final String name = this.getDeckNameFromDialog();
 
         if (name.equals("")) {
             return;
         }
-        setDeckData(name, true);
+        this.setDeckData(name, true);
 
-        Deck deck = getDeck();
-        if (deckDisplay.getGameType().equals(GameType.Draft)) {
+        final Deck deck = this.getDeck();
+        if (this.deckDisplay.getGameType().equals(GameType.Draft)) {
             // MUST copy array
-            Deck[] read = deckManager.getDraftDeck(currentDeckName);
-            Deck[] all = new Deck[read.length];
+            final Deck[] read = this.deckManager.getDraftDeck(this.currentDeckName);
+            final Deck[] all = new Deck[read.length];
 
             System.arraycopy(read, 0, all, 0, read.length);
 
             all[0] = deck;
-            deckManager.addDraftDeck(all);
+            this.deckManager.addDraftDeck(all);
             DeckManager.writeDraftDecks(all);
         } else { // constructed and sealed
-            deckManager.addDeck(deck);
+            this.deckManager.addDeck(deck);
             DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
         }
-        isDeckSaved = true;
+        this.isDeckSaved = true;
     }
 
     private void delete() {
-        if (StringUtils.isBlank(currentDeckName)) {
+        if (StringUtils.isBlank(this.currentDeckName)) {
             return;
         }
 
-        int n = JOptionPane.showConfirmDialog(null, "Do you want to delete this deck " + currentDeckName + " ?",
-                "Delete", JOptionPane.YES_NO_OPTION);
+        final int n = JOptionPane.showConfirmDialog(null, "Do you want to delete this deck " + this.currentDeckName
+                + " ?", "Delete", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.NO_OPTION) {
             return;
         }
 
-        if (deckDisplay.getGameType().equals(GameType.Draft)) {
-            deckManager.deleteDraftDeck(currentDeckName);
+        if (this.deckDisplay.getGameType().equals(GameType.Draft)) {
+            this.deckManager.deleteDraftDeck(this.currentDeckName);
         } else {
-            deckManager.deleteDeck(currentDeckName);
+            this.deckManager.deleteDeck(this.currentDeckName);
         }
 
-        setDeckData("", true);
-        deckDisplay.setDeck(null, null, deckDisplay.getGameType());
+        this.setDeckData("", true);
+        this.deckDisplay.setDeck(null, null, this.deckDisplay.getGameType());
     }
 
     /**
@@ -429,20 +439,20 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * close window.
      */
     public void close() {
-        if (!canLeaveCurrentDeck()) {
+        if (!this.canLeaveCurrentDeck()) {
             return;
         }
-        exitCommand.execute();
+        this.exitCommand.execute();
     }
 
     private boolean canLeaveCurrentDeck() {
-        if (isSaved()) {
+        if (this.isSaved()) {
             return true;
         }
-        String message = String.format("Do you wish to save changes you made to your current deck '%s'?",
-                currentDeckName);
-        int choice = JOptionPane
-                .showConfirmDialog((Component) deckDisplay, message, "You have unsaved changes in your deck",
+        final String message = String.format("Do you wish to save changes you made to your current deck '%s'?",
+                this.currentDeckName);
+        final int choice = JOptionPane
+                .showConfirmDialog((Component) this.deckDisplay, message, "You have unsaved changes in your deck",
                         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (JOptionPane.CANCEL_OPTION == choice) {
             return false;
@@ -451,23 +461,23 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
             return true;
         }
 
-        Deck deck = getDeck();
-        deck.setName(currentDeckName);
+        final Deck deck = this.getDeck();
+        deck.setName(this.currentDeckName);
         DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
         return true;
     }
 
     private Deck getDeck() {
-        Deck deck = deckDisplay.getDeck();
-        deck.setName(currentDeckName);
+        final Deck deck = this.deckDisplay.getDeck();
+        deck.setName(this.currentDeckName);
         return deck;
     }
 
     private void setDeckData(final String deckName, final boolean inDeckSaved) {
-        currentDeckName = deckName;
-        isDeckSaved = inDeckSaved;
+        this.currentDeckName = deckName;
+        this.isDeckSaved = inDeckSaved;
 
-        deckDisplay.setTitle("Deck Editor : " + currentDeckName);
+        this.deckDisplay.setTitle("Deck Editor : " + this.currentDeckName);
     }
 
     /**
@@ -477,7 +487,7 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * @return a String
      */
     public String getDeckName() {
-        return currentDeckName;
+        return this.currentDeckName;
     }
 
     /**
@@ -487,7 +497,7 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * @return a boolean
      */
     public boolean isSaved() {
-        return isDeckSaved;
+        return this.isDeckSaved;
     }
 
     /**
@@ -498,33 +508,34 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * @return a {@link java.lang.String} object.
      */
     private String getDeckNameFromDialog() {
-        Object o = JOptionPane.showInputDialog(null, "Save As", "Deck Name", JOptionPane.OK_CANCEL_OPTION);
+        final Object o = JOptionPane.showInputDialog(null, "Save As", "Deck Name", JOptionPane.OK_CANCEL_OPTION);
 
         if (o == null) {
             return "";
         }
 
-        String deckName = DeckManager.cleanDeckName(o.toString());
-        boolean isDraft = deckDisplay.getGameType() == GameType.Draft;
-        boolean isUniqueName = isDraft ? deckManager.isUniqueDraft(deckName) : deckManager.isUnique(deckName);
-        boolean isGoodName = isUniqueName && StringUtils.isNotBlank(deckName);
+        final String deckName = DeckManager.cleanDeckName(o.toString());
+        final boolean isDraft = this.deckDisplay.getGameType() == GameType.Draft;
+        final boolean isUniqueName = isDraft ? this.deckManager.isUniqueDraft(deckName) : this.deckManager
+                .isUnique(deckName);
+        final boolean isGoodName = isUniqueName && StringUtils.isNotBlank(deckName);
 
         if (isGoodName) {
             return deckName;
         }
 
         JOptionPane.showMessageDialog(null, "Please pick another deck name, another deck currently has that name.");
-        return getDeckNameFromDialog();
+        return this.getDeckNameFromDialog();
     }
 
     private String getUserInputOpenDeck(final GameType deckType) {
-        ArrayList<String> choices = deckManager.getDeckNames(deckType);
+        final ArrayList<String> choices = this.deckManager.getDeckNames(deckType);
         if (choices.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No decks found", "Open Deck", JOptionPane.PLAIN_MESSAGE);
             return null;
         }
 
-        Object o = GuiUtils.getChoiceOptional("Open Deck", choices.toArray());
+        final Object o = GuiUtils.getChoiceOptional("Open Deck", choices.toArray());
         return o == null ? null : o.toString();
     }
 
@@ -535,35 +546,35 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
      * Notify of a Deck Change.
      */
     public void notifyDeckChange() {
-        isDeckSaved = false;
+        this.isDeckSaved = false;
     }
 
     private void setupMenu() {
-        JMenuItem newConstructed = new JMenuItem("New Deck - Constructed");
+        final JMenuItem newConstructed = new JMenuItem("New Deck - Constructed");
 
         // JMenuItem newSealed = new JMenuItem("New Deck - Sealed");
         // JMenuItem newDraft = new JMenuItem("New Deck - Draft");
 
-        JMenuItem newRandomConstructed = new JMenuItem("New Deck - Generate Random Constructed Cardpool");
-        JMenuItem newGenerateConstructed = new JMenuItem("New Deck - Generate Constructed Deck");
+        final JMenuItem newRandomConstructed = new JMenuItem("New Deck - Generate Random Constructed Cardpool");
+        final JMenuItem newGenerateConstructed = new JMenuItem("New Deck - Generate Constructed Deck");
 
-        JMenuItem importDeck = new JMenuItem("Import Deck...");
-        JMenuItem exportDeck = new JMenuItem("Export Deck...");
+        final JMenuItem importDeck = new JMenuItem("Import Deck...");
+        final JMenuItem exportDeck = new JMenuItem("Export Deck...");
         // JMenuItem downloadDeck = new JMenuItem("Download Deck");
 
-        JMenuItem openConstructed = new JMenuItem("Open Deck - Constructed...");
-        JMenuItem openSealed = new JMenuItem("Open Deck - Sealed");
-        JMenuItem openDraft = new JMenuItem("Open Deck - Draft");
+        final JMenuItem openConstructed = new JMenuItem("Open Deck - Constructed...");
+        final JMenuItem openSealed = new JMenuItem("Open Deck - Sealed");
+        final JMenuItem openDraft = new JMenuItem("Open Deck - Draft");
 
         // newDraftItem = newDraft;
         // newDraftItem.setEnabled(false);
 
-        JMenuItem save = new JMenuItem("Save");
-        JMenuItem saveAs = new JMenuItem("Save As...");
-        JMenuItem delete = new JMenuItem("Delete");
-        JMenuItem close = new JMenuItem("Close");
+        final JMenuItem save = new JMenuItem("Save");
+        final JMenuItem saveAs = new JMenuItem("Save As...");
+        final JMenuItem delete = new JMenuItem("Delete");
+        final JMenuItem close = new JMenuItem("Close");
 
-        JMenu fileMenu = new JMenu("Deck Actions");
+        final JMenu fileMenu = new JMenu("Deck Actions");
         fileMenu.add(newConstructed);
 
         // fileMenu.add(newSealed);
@@ -578,18 +589,20 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         fileMenu.add(importDeck);
         fileMenu.add(exportDeck);
 
-        JMenuItem generateProxies = new JMenuItem("Generate Proxies...");
+        final JMenuItem generateProxies = new JMenuItem("Generate Proxies...");
         fileMenu.add(generateProxies);
 
         generateProxies.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            generateProxies();
+                            DeckEditorCommonMenu.this.generateProxies();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : generateProxies() error - " + ex);
                 }
@@ -613,14 +626,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
 
         // add listeners
         exportDeck.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            exportDeck();
+                            DeckEditorCommonMenu.this.exportDeck();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error - " + ex);
                 }
@@ -628,14 +643,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         importDeck.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            importDeck();
+                            DeckEditorCommonMenu.this.importDeck();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : importDeck() error - " + ex);
                 }
@@ -652,14 +669,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
          * ex); } } });
          */
         newConstructed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            newConstructed(true);
+                            DeckEditorCommonMenu.this.newConstructed(true);
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : newConstructed() error - " + ex);
                 }
@@ -667,14 +686,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         newRandomConstructed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            newRandomConstructed();
+                            DeckEditorCommonMenu.this.newRandomConstructed();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : newRandomConstructed() error - " + ex);
                 }
@@ -682,14 +703,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         newGenerateConstructed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            newGenerateConstructed();
+                            DeckEditorCommonMenu.this.newGenerateConstructed();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : newRandomConstructed() error - " + ex);
                 }
@@ -697,14 +720,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         openConstructed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            openDeck(GameType.Constructed);
+                            DeckEditorCommonMenu.this.openDeck(GameType.Constructed);
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : openConstructed() error - " + ex);
                 }
@@ -712,14 +737,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         openSealed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            openDeck(GameType.Sealed);
+                            DeckEditorCommonMenu.this.openDeck(GameType.Sealed);
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : openSealed() error - " + ex);
                 }
@@ -727,14 +754,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         openDraft.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            openDeck(GameType.Draft);
+                            DeckEditorCommonMenu.this.openDeck(GameType.Draft);
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : openDraft() error - " + ex);
                 }
@@ -742,14 +771,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         save.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            save();
+                            DeckEditorCommonMenu.this.save();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : save() error - " + ex);
                 }
@@ -757,14 +788,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         saveAs.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            saveAs();
+                            DeckEditorCommonMenu.this.saveAs();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : saveAs() error - " + ex);
                 }
@@ -772,14 +805,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         delete.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            delete();
+                            DeckEditorCommonMenu.this.delete();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : delete() error - " + ex);
                 }
@@ -787,14 +822,16 @@ public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants
         });
 
         close.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent ev) {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
-                            close();
+                            DeckEditorCommonMenu.this.close();
                         }
                     });
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ErrorViewer.showError(ex);
                     throw new RuntimeException("Gui_DeckEditor_Menu : close() error - " + ex);
                 }

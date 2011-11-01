@@ -29,7 +29,7 @@ public class CardPanelHeavy extends CardPanelBase {
 
     private static final long serialVersionUID = -7134546689397508597L;
 
-    private JButton changeStateButton = new JButton();
+    private final JButton changeStateButton = new JButton();
 
     /*
      * Removed Oct 25 2011 - Hellfish private JButton changePictureButton = new
@@ -38,33 +38,34 @@ public class CardPanelHeavy extends CardPanelBase {
 
     // Controls to show card details
     /** The detail. */
-    protected CardDetailPanel detail = new CardDetailPanel(null);
+    private CardDetailPanel detail = new CardDetailPanel(null);
 
     /** The picture. */
-    protected CardPanel picture = new CardPanel(null);
+    private CardPanel picture = new CardPanel(null);
 
     /** The picture view panel. */
-    protected ViewPanel pictureViewPanel = new ViewPanel();
+    private ViewPanel pictureViewPanel = new ViewPanel();
 
     // fake card to allow picture changes
     /** The c card hq. */
-    public Card cCardHQ;
+    private Card cCardHQ;
 
     /** Constant <code>previousDirectory</code>. */
-    protected static File previousDirectory = null;
+    private static File previousDirectory = null;
 
     /**
      * Instantiates a new card panel heavy.
      */
     public CardPanelHeavy() {
-        changeStateButton.setVisible(false);
-        changeStateButton.addActionListener(new java.awt.event.ActionListener() {
+        this.changeStateButton.setVisible(false);
+        this.changeStateButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                changeStateButton_actionPerformed(e);
+                CardPanelHeavy.this.changeStateButtonActionPerformed(e);
             }
         });
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
+            this.changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
         }
 
         /*
@@ -86,17 +87,17 @@ public class CardPanelHeavy extends CardPanelBase {
          * removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
          */
 
-        pictureViewPanel.setCardPanel(picture);
+        this.pictureViewPanel.setCardPanel(this.picture);
 
         this.setLayout(new MigLayout("fill, ins 0"));
-        this.add(detail, "w 239, h 323, grow, flowy, wrap");
+        this.add(this.detail, "w 239, h 323, grow, flowy, wrap");
         /*
          * Removed Oct 25 2011 - Hellfish this.add(changeStateButton,
          * "align 50% 0%, split 3, flowx"); this.add(changePictureButton,
          * "align 50% 0%"); this.add(removePictureButton, "align 50% 0%, wrap");
          */
-        this.add(changeStateButton, "align 50% 0%, flowx, wrap");
-        this.add(pictureViewPanel, "wmin 239, hmin 323, grow");
+        this.add(this.changeStateButton, "align 50% 0%, flowx, wrap");
+        this.add(this.pictureViewPanel, "wmin 239, hmin 323, grow");
     }
 
     /*
@@ -105,10 +106,11 @@ public class CardPanelHeavy extends CardPanelBase {
      * @see
      * forge.gui.deckeditor.CardPanelBase#showCard(forge.item.InventoryItem)
      */
+    @Override
     public final void showCard(final InventoryItem card) {
-        Card card2 = card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null;
-        detail.setCard(card2);
-        setCard(card2);
+        final Card card2 = card instanceof CardPrinted ? ((CardPrinted) card).toForgeCard() : null;
+        this.detail.setCard(card2);
+        this.setCard(card2);
     }
 
     /**
@@ -118,22 +120,22 @@ public class CardPanelHeavy extends CardPanelBase {
      *            the new card
      */
     public final void setCard(final Card c) {
-        if (picture.getCard() != null) {
-            if (picture.getCard().isInAlternateState()) {
-                picture.getCard().changeState();
+        if (this.picture.getCard() != null) {
+            if (this.picture.getCard().isInAlternateState()) {
+                this.picture.getCard().changeState();
             }
         }
-        picture.setCard(c);
+        this.picture.setCard(c);
 
         if (c.hasAlternateState()) {
-            changeStateButton.setVisible(true);
+            this.changeStateButton.setVisible(true);
             if (c.isFlip()) {
-                changeStateButton.setText("Flip");
+                this.changeStateButton.setText("Flip");
             } else {
-                changeStateButton.setText("Transform");
+                this.changeStateButton.setText("Transform");
             }
         } else {
-            changeStateButton.setVisible(false);
+            this.changeStateButton.setVisible(false);
         }
     }
 
@@ -145,12 +147,12 @@ public class CardPanelHeavy extends CardPanelBase {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void changeStateButton_actionPerformed(final ActionEvent e) {
-        Card cur = picture.getCard();
+    final void changeStateButtonActionPerformed(final ActionEvent e) {
+        final Card cur = this.picture.getCard();
         cur.changeState();
 
-        picture.setCard(cur);
-        detail.setCard(cur);
+        this.picture.setCard(cur);
+        this.detail.setCard(cur);
     }
 
     /**
@@ -161,23 +163,23 @@ public class CardPanelHeavy extends CardPanelBase {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void changePictureButton_actionPerformed(final ActionEvent e) {
-        if (cCardHQ != null) {
-            File file = getImportFilename();
+    private void changePictureButtonActionPerformed(final ActionEvent e) {
+        if (this.cCardHQ != null) {
+            final File file = this.getImportFilename();
             if (file != null) {
-                String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName()) + ".jpg";
-                File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-                File f = new File(base, fileName);
+                final String fileName = GuiDisplayUtil.cleanString(this.cCardHQ.getName()) + ".jpg";
+                final File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+                final File f = new File(base, fileName);
                 f.delete();
 
                 try {
                     org.apache.commons.io.FileUtils.copyFile(file, f);
-                } catch (IOException e1) {
+                } catch (final IOException e1) {
                     // TODO Auto-generated catch block ignores the exception,
                     // but sends it to System.err and probably forge.log.
                     e1.printStackTrace();
                 }
-                setCard(cCardHQ);
+                this.setCard(this.cCardHQ);
             }
         }
     }
@@ -190,16 +192,16 @@ public class CardPanelHeavy extends CardPanelBase {
      * @return a {@link java.io.File} object.
      */
     private File getImportFilename() {
-        JFileChooser chooser = new JFileChooser(previousDirectory);
-        ImagePreviewPanel preview = new ImagePreviewPanel();
+        final JFileChooser chooser = new JFileChooser(CardPanelHeavy.previousDirectory);
+        final ImagePreviewPanel preview = new ImagePreviewPanel();
         chooser.setAccessory(preview);
         chooser.addPropertyChangeListener(preview);
-        chooser.addChoosableFileFilter(dckFilter);
-        int returnVal = chooser.showOpenDialog(null);
+        chooser.addChoosableFileFilter(this.dckFilter);
+        final int returnVal = chooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            previousDirectory = file.getParentFile();
+            final File file = chooser.getSelectedFile();
+            CardPanelHeavy.previousDirectory = file.getParentFile();
             return file;
         }
 
@@ -208,7 +210,7 @@ public class CardPanelHeavy extends CardPanelBase {
     }
 
     /** The dck filter. */
-    protected FileFilter dckFilter = new FileFilter() {
+    private FileFilter dckFilter = new FileFilter() {
 
         @Override
         public boolean accept(final File f) {
@@ -231,20 +233,20 @@ public class CardPanelHeavy extends CardPanelBase {
      * @param e
      *            the e
      */
-    final void removePictureButton_actionPerformed(final ActionEvent e) {
-        if (cCardHQ != null) {
-            String options[] = { "Yes", "No" };
-            int value = JOptionPane.showOptionDialog(null, "Do you want delete " + cCardHQ.getName() + " picture?",
-                    "Delete picture", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
-                    options[1]);
+    final void removePictureButtonActionPerformed(final ActionEvent e) {
+        if (this.cCardHQ != null) {
+            final String[] options = { "Yes", "No" };
+            final int value = JOptionPane.showOptionDialog(null, "Do you want delete " + this.cCardHQ.getName()
+                    + " picture?", "Delete picture", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    options, options[1]);
             if (value == 0) {
-                String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName()) + ".jpg";
-                File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-                File f = new File(base, fileName);
+                final String fileName = GuiDisplayUtil.cleanString(this.cCardHQ.getName()) + ".jpg";
+                final File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+                final File f = new File(base, fileName);
                 f.delete();
-                JOptionPane.showMessageDialog(null, "Picture " + cCardHQ.getName() + " deleted.", "Delete picture",
-                        JOptionPane.INFORMATION_MESSAGE);
-                setCard(cCardHQ);
+                JOptionPane.showMessageDialog(null, "Picture " + this.cCardHQ.getName() + " deleted.",
+                        "Delete picture", JOptionPane.INFORMATION_MESSAGE);
+                this.setCard(this.cCardHQ);
             }
         }
     }
@@ -255,7 +257,7 @@ public class CardPanelHeavy extends CardPanelBase {
      * @return the card
      */
     public final Card getCard() {
-        return detail.getCard();
+        return this.detail.getCard();
     }
 
 }

@@ -45,21 +45,21 @@ public final class DeckEditorShop extends DeckEditorBase {
     /** Constant <code>serialVersionUID=3988857075791576483L</code>. */
     private static final long serialVersionUID = 3988857075791576483L;
 
-    private JButton buyButton = new JButton();
-    private JButton sellButton = new JButton();
+    private final JButton buyButton = new JButton();
+    private final JButton sellButton = new JButton();
 
-    private JLabel creditsLabel = new JLabel();
-    private JLabel jLabel1 = new JLabel();
-    private JLabel sellPercentageLabel = new JLabel();
+    private final JLabel creditsLabel = new JLabel();
+    private final JLabel jLabel1 = new JLabel();
+    private final JLabel sellPercentageLabel = new JLabel();
 
     private double multiplier;
 
-    private QuestData questData;
+    private final QuestData questData;
     // private CardPoolView newCardsList;
 
     // get pricelist:
-    private ReadPriceList r = new ReadPriceList();
-    private Map<String, Integer> mapPrices = r.getPriceList();
+    private final ReadPriceList r = new ReadPriceList();
+    private final Map<String, Integer> mapPrices = this.r.getPriceList();
     private Map<CardPrinted, Integer> decksUsingMyCards;
 
     /**
@@ -72,6 +72,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         final Command exit = new Command() {
             private static final long serialVersionUID = -7428793574300520612L;
 
+            @Override
             public void execute() {
                 DeckEditorShop.this.dispose();
                 exitCommand.execute();
@@ -86,46 +87,46 @@ public final class DeckEditorShop extends DeckEditorBase {
             }
         });
 
-        setup();
+        this.setup();
 
-        decksUsingMyCards = countDecksForEachCard();
+        this.decksUsingMyCards = this.countDecksForEachCard();
 
-        multiplier = questData.getCards().getSellMutliplier();
+        this.multiplier = this.questData.getCards().getSellMutliplier();
 
-        ItemPoolView<InventoryItem> forSale = questData.getCards().getShopList();
+        ItemPoolView<InventoryItem> forSale = this.questData.getCards().getShopList();
         if (forSale.isEmpty()) {
-            questData.getCards().generateCardsInShop();
-            forSale = questData.getCards().getShopList();
+            this.questData.getCards().generateCardsInShop();
+            forSale = this.questData.getCards().getShopList();
         }
-        ItemPoolView<InventoryItem> owned = questData.getCards().getCardpool().getView();
+        final ItemPoolView<InventoryItem> owned = this.questData.getCards().getCardpool().getView();
         // newCardsList = questData.getCards().getNewCards();
 
-        setItems(forSale, owned, GameType.Quest);
+        this.setItems(forSale, owned, GameType.Quest);
 
-        double multiPercent = multiplier * 100;
-        NumberFormat formatter = new DecimalFormat("#0.00");
+        final double multiPercent = this.multiplier * 100;
+        final NumberFormat formatter = new DecimalFormat("#0.00");
         String maxSellingPrice = "";
-        int maxSellPrice = questData.getCards().getSellPriceLimit();
+        final int maxSellPrice = this.questData.getCards().getSellPriceLimit();
 
         if (maxSellPrice < Integer.MAX_VALUE) {
             maxSellingPrice = String.format("Max selling price: %d", maxSellPrice);
         }
-        sellPercentageLabel.setText("<html>(You can sell cards at " + formatter.format(multiPercent)
+        this.sellPercentageLabel.setText("<html>(You can sell cards at " + formatter.format(multiPercent)
                 + "% of their value)<br>" + maxSellingPrice + "</html>");
 
-        top.sort(1, true);
-        bottom.sort(1, true);
+        this.getTopTableWithCards().sort(1, true);
+        this.getBottomTableWithCards().sort(1, true);
     } // show(Command)
 
     // fills number of decks using each card
     private Map<CardPrinted, Integer> countDecksForEachCard() {
-        Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
-        for (String deckName : questData.getDeckNames()) {
-            Deck deck = questData.getDeck(deckName);
-            for (Entry<CardPrinted, Integer> e : deck.getMain()) {
-                CardPrinted card = e.getKey();
-                Integer iValue = result.get(card);
-                int cntDecks = iValue == null ? 1 : 1 + iValue.intValue();
+        final Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
+        for (final String deckName : this.questData.getDeckNames()) {
+            final Deck deck = this.questData.getDeck(deckName);
+            for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
+                final CardPrinted card = e.getKey();
+                final Integer iValue = result.get(card);
+                final int cntDecks = iValue == null ? 1 : 1 + iValue.intValue();
                 result.put(card, Integer.valueOf(cntDecks));
             }
         }
@@ -138,11 +139,13 @@ public final class DeckEditorShop extends DeckEditorBase {
      * </p>
      */
     private void setup() {
-        List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
-        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE, PresetColumns.FN_QTY_GET));
+        final List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE,
+                PresetColumns.FN_QTY_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.FN_NAME_COMPARE,
                 PresetColumns.FN_NAME_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.FN_COST_COMPARE, PresetColumns.FN_COST_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.FN_COST_COMPARE,
+                PresetColumns.FN_COST_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Color", 50, PresetColumns.FN_COLOR_COMPARE,
                 PresetColumns.FN_COLOR_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.FN_TYPE_COMPARE,
@@ -151,18 +154,19 @@ public final class DeckEditorShop extends DeckEditorBase {
                 PresetColumns.FN_STATS_GET));
         columns.add(new TableColumnInfo<InventoryItem>("R", 30, PresetColumns.FN_RARITY_COMPARE,
                 PresetColumns.FN_RARITY_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.FN_SET_COMPARE, PresetColumns.FN_SET_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.FN_SET_COMPARE,
+                PresetColumns.FN_SET_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
-        List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
-        columns.add(new TableColumnInfo<InventoryItem>("Price", 36, fnPriceCompare, fnPriceGet));
-        top.setup(columns, cardView);
+        final List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
+        columns.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceGet));
+        this.getTopTableWithCards().setup(columns, this.getCardView());
 
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, fnDeckCompare, fnDeckGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, questData.getCards().fnNewCompare, questData
-                .getCards().fnNewGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 36, fnPriceCompare, fnPriceSellGet));
-        bottom.setup(columnsBelow, cardView);
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, this.fnDeckCompare, this.fnDeckGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, this.questData.getCards().fnNewCompare,
+                this.questData.getCards().fnNewGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceSellGet));
+        this.getBottomTableWithCards().setup(columnsBelow, this.getCardView());
 
         this.setSize(1024, 768);
         GuiUtils.centerFrame(this);
@@ -179,14 +183,14 @@ public final class DeckEditorShop extends DeckEditorBase {
      */
     public DeckEditorShop(final QuestData qd) {
         super(GameType.Quest);
-        questData = qd;
+        this.questData = qd;
         try {
-            filterBoxes = null;
-            top = new TableWithCards("Cards for sale", false);
-            bottom = new TableWithCards("Owned Cards", false);
-            cardView = new CardPanelLite();
-            jbInit();
-        } catch (Exception ex) {
+            this.setFilterBoxes(null);
+            this.setTopTableWithCards(new TableWithCards("Cards for sale", false));
+            this.setBottomTableWithCards(new TableWithCards("Owned Cards", false));
+            this.setCardView(new CardPanelLite());
+            this.jbInit();
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
     }
@@ -202,64 +206,66 @@ public final class DeckEditorShop extends DeckEditorBase {
     private void jbInit() throws Exception {
 
         this.setLayout(null);
-        top.getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
-        bottom.getTableDecorated().setBounds(new Rectangle(19, 458, 726, 276));
+        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
+        this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 276));
 
-        sellButton.setBounds(new Rectangle(180, 403, 146, 49));
+        this.sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
+            this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
-        sellButton.setText("Sell Card");
-        sellButton.addActionListener(new java.awt.event.ActionListener() {
+        this.sellButton.setText("Sell Card");
+        this.sellButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                sellButtonActionPerformed(e);
+                DeckEditorShop.this.sellButtonActionPerformed(e);
             }
         });
-        buyButton.setText("Buy Card");
-        buyButton.addActionListener(new java.awt.event.ActionListener() {
+        this.buyButton.setText("Buy Card");
+        this.buyButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                buyButtonActionPerformed(e);
+                DeckEditorShop.this.buyButtonActionPerformed(e);
             }
         });
 
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
+            this.buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
-        buyButton.setBounds(new Rectangle(23, 403, 146, 49));
+        this.buyButton.setBounds(new Rectangle(23, 403, 146, 49));
 
-        cardView.setBounds(new Rectangle(765, 23, 239, 710));
+        this.getCardView().setBounds(new Rectangle(765, 23, 239, 710));
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Card Shop");
 
-        creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
-        creditsLabel.setText("Total credits: " + questData.getCredits());
+        this.creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
+        this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         }
-        sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
-        sellPercentageLabel.setText("(Sell percentage: " + multiplier + ")");
+        this.sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
+        this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         }
-        jLabel1.setText("Click on the column name (like name or color) to sort the cards");
-        jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
+        this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");
+        this.jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
 
-        this.getContentPane().add(cardView, null);
-        this.getContentPane().add(top.getTableDecorated(), null);
-        this.getContentPane().add(bottom.getTableDecorated(), null);
-        this.getContentPane().add(creditsLabel, null);
-        this.getContentPane().add(buyButton, null);
-        this.getContentPane().add(sellButton, null);
-        this.getContentPane().add(sellPercentageLabel, null);
-        this.getContentPane().add(jLabel1, null);
+        this.getContentPane().add(this.getCardView(), null);
+        this.getContentPane().add(this.getTopTableWithCards().getTableDecorated(), null);
+        this.getContentPane().add(this.getBottomTableWithCards().getTableDecorated(), null);
+        this.getContentPane().add(this.creditsLabel, null);
+        this.getContentPane().add(this.buyButton, null);
+        this.getContentPane().add(this.sellButton, null);
+        this.getContentPane().add(this.sellPercentageLabel, null);
+        this.getContentPane().add(this.jLabel1, null);
     }
 
     // TODO: move to cardshop
     private Integer getCardValue(final InventoryItem card) {
-        if (mapPrices.containsKey(card.getName())) {
-            return mapPrices.get(card.getName());
+        if (this.mapPrices.containsKey(card.getName())) {
+            return this.mapPrices.get(card.getName());
         } else if (card instanceof CardPrinted) {
             switch (((CardPrinted) card).getRarity()) {
             case BasicLand:
@@ -282,34 +288,34 @@ public final class DeckEditorShop extends DeckEditorBase {
     }
 
     private void buyButtonActionPerformed(final ActionEvent e) {
-        InventoryItem item = top.getSelectedCard();
+        final InventoryItem item = this.getTopTableWithCards().getSelectedCard();
         if (item == null) {
             return;
         }
 
-        int value = getCardValue(item);
+        final int value = this.getCardValue(item);
 
-        if (value <= questData.getCredits()) {
+        if (value <= this.questData.getCredits()) {
             if (item instanceof CardPrinted) {
-                CardPrinted card = (CardPrinted) item;
-                bottom.addCard(card);
-                top.removeCard(card);
+                final CardPrinted card = (CardPrinted) item;
+                this.getBottomTableWithCards().addCard(card);
+                this.getTopTableWithCards().removeCard(card);
 
-                questData.getCards().buyCard(card, value);
+                this.questData.getCards().buyCard(card, value);
             } else if (item instanceof BoosterPack) {
-                top.removeCard(item);
-                BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
-                questData.getCards().buyBooster(booster, value);
-                List<CardPrinted> newCards = booster.getCards();
-                for (CardPrinted card : newCards) {
-                    bottom.addCard(card);
+                this.getTopTableWithCards().removeCard(item);
+                final BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
+                this.questData.getCards().buyBooster(booster, value);
+                final List<CardPrinted> newCards = booster.getCards();
+                for (final CardPrinted card : newCards) {
+                    this.getBottomTableWithCards().addCard(card);
                 }
-                CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:",
-                        newCards);
+                final CardListViewer c = new CardListViewer(booster.getName(),
+                        "You have found the following cards inside:", newCards);
                 c.show();
             }
 
-            creditsLabel.setText("Total credits: " + questData.getCredits());
+            this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         } else {
             JOptionPane.showMessageDialog(null, "Not enough credits!");
         }
@@ -326,38 +332,39 @@ public final class DeckEditorShop extends DeckEditorBase {
     }
 
     private void sellButtonActionPerformed(final ActionEvent e) {
-        InventoryItem item = bottom.getSelectedCard();
-        if (item == null || !(item instanceof CardPrinted)) {
+        final InventoryItem item = this.getBottomTableWithCards().getSelectedCard();
+        if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
-        CardPrinted card = (CardPrinted) item;
-        bottom.removeCard(card);
-        top.addCard(card);
+        final CardPrinted card = (CardPrinted) item;
+        this.getBottomTableWithCards().removeCard(card);
+        this.getTopTableWithCards().addCard(card);
 
-        int price = Math.min((int) (multiplier * getCardValue(card)), questData.getCards().getSellPriceLimit());
-        questData.getCards().sellCard(card, price);
+        final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
+                .getSellPriceLimit());
+        this.questData.getCards().sellCard(card, price);
 
-        creditsLabel.setText("Total credits: " + questData.getCredits());
+        this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
     }
 
     @SuppressWarnings("rawtypes")
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnPriceCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return getCardValue(from.getKey());
+            return DeckEditorShop.this.getCardValue(from.getKey());
         }
     };
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return getCardValue(from.getKey());
+            return DeckEditorShop.this.getCardValue(from.getKey());
         }
     };
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnPriceSellGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return (int) (multiplier * getCardValue(from.getKey()));
+            return (int) (DeckEditorShop.this.multiplier * DeckEditorShop.this.getCardValue(from.getKey()));
         }
     };
 
@@ -365,14 +372,14 @@ public final class DeckEditorShop extends DeckEditorBase {
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            Integer iValue = decksUsingMyCards.get(from.getKey());
+            final Integer iValue = DeckEditorShop.this.decksUsingMyCards.get(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            Integer iValue = decksUsingMyCards.get(from.getKey());
+            final Integer iValue = DeckEditorShop.this.decksUsingMyCards.get(from.getKey());
             return iValue == null ? "" : iValue.toString();
         }
     };

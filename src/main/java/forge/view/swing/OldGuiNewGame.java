@@ -702,7 +702,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         editor.show(exit);
 
         if (deck != null) {
-            editor.customMenu.showDeck(deck, gt);
+            editor.getCustomMenu().showDeck(deck, gt);
         }
 
         this.setVisible(false);

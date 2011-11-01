@@ -19,9 +19,9 @@ import forge.item.CardPrinted;
 @SuppressWarnings("unchecked")
 // Comparable needs <type>
 public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
-    private boolean ascending;
+    private final boolean ascending;
     @SuppressWarnings("rawtypes")
-    private Lambda1<Comparable, Entry<T, Integer>> field;
+    private final Lambda1<Comparable, Entry<T, Integer>> field;
 
     /**
      * <p>
@@ -30,18 +30,18 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
      * 
      * @param field
      *            the field
-     * @param in_ascending
+     * @param inAscending
      *            a boolean.
      */
     @SuppressWarnings("rawtypes")
-    public TableSorter(final Lambda1<Comparable, Entry<T, Integer>> field, final boolean in_ascending) {
+    public TableSorter(final Lambda1<Comparable, Entry<T, Integer>> field, final boolean inAscending) {
         this.field = field;
-        ascending = in_ascending;
+        this.ascending = inAscending;
     }
 
     /** The Constant byNameThenSet. */
     @SuppressWarnings("rawtypes")
-    public static final TableSorter<CardPrinted> byNameThenSet = new TableSorter<CardPrinted>(
+    public static final TableSorter<CardPrinted> BY_NAME_THEN_SET = new TableSorter<CardPrinted>(
             new Lambda1<Comparable, Entry<CardPrinted, Integer>>() {
                 @Override
                 public Comparable apply(final Entry<CardPrinted, Integer> from) {
@@ -57,10 +57,10 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     @SuppressWarnings("rawtypes")
     @Override
     public final int compare(final Entry<T, Integer> arg0, final Entry<T, Integer> arg1) {
-        Comparable obj1 = field.apply(arg0);
-        Comparable obj2 = field.apply(arg1);
+        final Comparable obj1 = this.field.apply(arg0);
+        final Comparable obj2 = this.field.apply(arg1);
         // System.out.println(String.format("%s vs %s _______ %s vs %s", arg0,
         // arg1, obj1, obj2));
-        return ascending ? obj1.compareTo(obj2) : obj2.compareTo(obj1);
+        return this.ascending ? obj1.compareTo(obj2) : obj2.compareTo(obj1);
     }
 }

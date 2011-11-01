@@ -37,17 +37,18 @@ import forge.item.CardPrinted;
 public class DeckImport extends JDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
-    private JTextArea txtInput = new JTextArea();
-    private static final String stylesheet = "<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 1px; padding: 0; font-weight: normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px;} "
+    private final JTextArea txtInput = new JTextArea();
+    private static final String STYLESHEET = "<style>"
+            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 1px; padding: 0; font-weight: "
+            + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px;} "
             +
             // "h1 {border-bottom: solid 1px black; color: blue; font-size: 12px; margin: 3px 0 9px 0; } "
             // +
             ".comment {color: #666666;} " + ".knowncard {color: #009900;} " + ".unknowncard {color: #990000;} "
             + ".section {padding: 3px 10px; margin: 3px 0; font-weight: 700; background-color: #DDDDDD; } "
             + "</style>";
-    private static final String htmlWelcomeText = "<html>"
-            + stylesheet
+    private static final String HTML_WELCOME_TEXT = "<html>"
+            + DeckImport.STYLESHEET
             + "<h3>You'll see recognized cards here</h3>"
             + "<div class='section'>Legend</div>"
             + "<ul>"
@@ -57,16 +58,16 @@ public class DeckImport extends JDialog {
             + "<div class='comment'>Submit feedback to Max mtg on slightlymagic.net forum</div>"
             + "<div class='comment'>Post bug-reports to http://cardforge.org/bugz/</div>" + "</html>";
 
-    private JEditorPane htmlOutput = new JEditorPane("text/html", htmlWelcomeText);
-    private JScrollPane scrollInput = new JScrollPane(txtInput);
-    private JScrollPane scrollOutput = new JScrollPane(htmlOutput);
-    private JLabel summaryMain = new JLabel("Imported deck summary will appear here");
-    private JLabel summarySide = new JLabel("This is second line");
-    private JButton cmdAccept = new JButton("Import Deck");
-    private JButton cmdCancel = new JButton("Cancel");
+    private final JEditorPane htmlOutput = new JEditorPane("text/html", DeckImport.HTML_WELCOME_TEXT);
+    private final JScrollPane scrollInput = new JScrollPane(this.txtInput);
+    private final JScrollPane scrollOutput = new JScrollPane(this.htmlOutput);
+    private final JLabel summaryMain = new JLabel("Imported deck summary will appear here");
+    private final JLabel summarySide = new JLabel("This is second line");
+    private final JButton cmdAccept = new JButton("Import Deck");
+    private final JButton cmdCancel = new JButton("Cancel");
 
     /** The tokens. */
-    List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
+    private List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 
     private final DeckEditorBase host;
 
@@ -77,131 +78,132 @@ public class DeckImport extends JDialog {
      *            the g
      */
     public DeckImport(final DeckEditorBase g) {
-        host = g;
+        this.host = g;
 
-        int wWidth = 600;
-        int wHeight = 600;
+        final int wWidth = 600;
+        final int wHeight = 600;
 
-        setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
-        setSize(wWidth, wHeight);
+        this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
+        this.setSize(wWidth, wHeight);
         GuiUtils.centerFrame(this);
-        setResizable(false);
-        setTitle("Deck Import (wip)");
+        this.setResizable(false);
+        this.setTitle("Deck Import (wip)");
 
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            Font fButtons = new java.awt.Font("Dialog", 0, 13);
-            cmdAccept.setFont(fButtons);
-            cmdCancel.setFont(fButtons);
+            final Font fButtons = new java.awt.Font("Dialog", 0, 13);
+            this.cmdAccept.setFont(fButtons);
+            this.cmdCancel.setFont(fButtons);
 
-            txtInput.setFont(fButtons);
+            this.txtInput.setFont(fButtons);
             // htmlOutput.setFont(fButtons);
         }
 
-        htmlOutput.setEditable(false);
+        this.htmlOutput.setEditable(false);
 
-        scrollInput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist"));
-        scrollOutput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(),
+        this.scrollInput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist"));
+        this.scrollOutput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(),
                 "Expect the recognized lines to appear"));
-        scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-        scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
+        this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
+        this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        getContentPane().setLayout(new MigLayout("fill"));
-        getContentPane().add(scrollInput, "cell 0 0, w 50%, sy 4, growy, pushy");
-        getContentPane().add(scrollOutput, "cell 1 0, w 50%, growy, pushy");
+        this.getContentPane().setLayout(new MigLayout("fill"));
+        this.getContentPane().add(this.scrollInput, "cell 0 0, w 50%, sy 4, growy, pushy");
+        this.getContentPane().add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
 
-        getContentPane().add(summaryMain, "cell 1 1, label");
-        getContentPane().add(summarySide, "cell 1 2, label");
+        this.getContentPane().add(this.summaryMain, "cell 1 1, label");
+        this.getContentPane().add(this.summarySide, "cell 1 2, label");
 
-        getContentPane().add(cmdAccept, "cell 1 3, split 2, w 100, align c");
-        getContentPane().add(cmdCancel, "w 100");
+        this.getContentPane().add(this.cmdAccept, "cell 1 3, split 2, w 100, align c");
+        this.getContentPane().add(this.cmdCancel, "w 100");
 
-        cmdCancel.addActionListener(new ActionListener() {
+        this.cmdCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
+                DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
 
-        cmdAccept.addActionListener(new ActionListener() {
+        this.cmdAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
-                int answer = JOptionPane.showConfirmDialog(DeckImport.this, warning, "Replacing old deck",
+                final String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
+                final int answer = JOptionPane.showConfirmDialog(DeckImport.this, warning, "Replacing old deck",
                         JOptionPane.YES_NO_OPTION);
                 if (JOptionPane.NO_OPTION == answer) {
                     return;
                 }
-                Deck toSet = buildDeck();
-                host.setDeck(null, toSet.getMain(), toSet.getDeckType());
-                processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
+                final Deck toSet = DeckImport.this.buildDeck();
+                DeckImport.this.host.setDeck(null, toSet.getMain(), toSet.getDeckType());
+                DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
 
-        txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
-        cmdAccept.setEnabled(false);
+        this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
+        this.cmdAccept.setEnabled(false);
     }
 
     private void readInput() {
-        tokens.clear();
-        ElementIterator it = new ElementIterator(txtInput.getDocument().getDefaultRootElement());
+        this.tokens.clear();
+        final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
         Element e;
         while ((e = it.next()) != null) {
             if (!e.isLeaf()) {
                 continue;
             }
-            int rangeStart = e.getStartOffset();
-            int rangeEnd = e.getEndOffset();
+            final int rangeStart = e.getStartOffset();
+            final int rangeEnd = e.getEndOffset();
             try {
-                String line = txtInput.getText(rangeStart, rangeEnd - rangeStart);
-                tokens.add(DeckRecognizer.recognizeLine(line));
-            } catch (BadLocationException ex) {
+                final String line = this.txtInput.getText(rangeStart, rangeEnd - rangeStart);
+                this.tokens.add(DeckRecognizer.recognizeLine(line));
+            } catch (final BadLocationException ex) {
             }
         }
     }
 
     private void displayTokens() {
-        StringBuilder sbOut = new StringBuilder("<html>");
-        sbOut.append(stylesheet);
-        for (DeckRecognizer.Token t : tokens) {
-            sbOut.append(makeHtmlViewOfToken(t));
+        final StringBuilder sbOut = new StringBuilder("<html>");
+        sbOut.append(DeckImport.STYLESHEET);
+        for (final DeckRecognizer.Token t : this.tokens) {
+            sbOut.append(this.makeHtmlViewOfToken(t));
         }
         sbOut.append("</html>");
-        htmlOutput.setText(sbOut.toString());
+        this.htmlOutput.setText(sbOut.toString());
     }
 
     private void updateSummaries() {
-        int[] cardsOk = new int[2];
-        int[] cardsUnknown = new int[2];
+        final int[] cardsOk = new int[2];
+        final int[] cardsUnknown = new int[2];
         int idx = 0;
-        for (DeckRecognizer.Token t : tokens) {
+        for (final DeckRecognizer.Token t : this.tokens) {
             if (t.getType() == TokenType.KnownCard) {
                 cardsOk[idx] += t.getNumber();
             }
             if (t.getType() == TokenType.UnknownCard) {
                 cardsUnknown[idx] += t.getNumber();
             }
-            if (t.getType() == TokenType.SectionName && t.getText().toLowerCase().contains("side")) {
+            if ((t.getType() == TokenType.SectionName) && t.getText().toLowerCase().contains("side")) {
                 idx = 1;
             }
         }
-        summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
-        summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1],
+        this.summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0],
+                cardsUnknown[0]));
+        this.summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1],
                 cardsUnknown[1]));
-        cmdAccept.setEnabled(cardsOk[0] > 0);
+        this.cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 
     private Deck buildDeck() {
-        Deck result = new Deck(GameType.Constructed);
+        final Deck result = new Deck(GameType.Constructed);
         boolean isMain = true;
-        for (DeckRecognizer.Token t : tokens) {
-            DeckRecognizer.TokenType type = t.getType();
-            if (type == DeckRecognizer.TokenType.SectionName && t.getText().toLowerCase().contains("side")) {
+        for (final DeckRecognizer.Token t : this.tokens) {
+            final DeckRecognizer.TokenType type = t.getType();
+            if ((type == DeckRecognizer.TokenType.SectionName) && t.getText().toLowerCase().contains("side")) {
                 isMain = false;
             }
             if (type != DeckRecognizer.TokenType.KnownCard) {
                 continue;
             }
-            CardPrinted crd = t.getCard();
+            final CardPrinted crd = t.getCard();
             if (crd.isAlternate()) {
                 continue;
             }
@@ -219,9 +221,9 @@ public class DeckImport extends JDialog {
      */
     protected class OnChangeTextUpdate implements DocumentListener {
         private void onChange() {
-            readInput();
-            displayTokens();
-            updateSummaries();
+            DeckImport.this.readInput();
+            DeckImport.this.displayTokens();
+            DeckImport.this.updateSummaries();
         }
 
         /*
@@ -233,7 +235,7 @@ public class DeckImport extends JDialog {
          */
         @Override
         public final void insertUpdate(final DocumentEvent e) {
-            onChange();
+            this.onChange();
         }
 
         /*
@@ -245,7 +247,7 @@ public class DeckImport extends JDialog {
          */
         @Override
         public final void removeUpdate(final DocumentEvent e) {
-            onChange();
+            this.onChange();
         }
 
         /*

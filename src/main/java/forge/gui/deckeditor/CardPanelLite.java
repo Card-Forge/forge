@@ -23,29 +23,30 @@ public class CardPanelLite extends CardPanelBase {
 
     // Controls to show card details
     /** The detail. */
-    protected CardDetailPanel detail = new CardDetailPanel(null);
-    private CardPicturePanel picture = new CardPicturePanel(null);
-    private JButton bChangeState = new JButton();
+    private CardDetailPanel detail = new CardDetailPanel(null);
+    private final CardPicturePanel picture = new CardPicturePanel(null);
+    private final JButton bChangeState = new JButton();
 
     /**
      * 
      * Constructor.
      */
     public CardPanelLite() {
-        bChangeState.setVisible(false);
-        bChangeState.addActionListener(new ActionListener() {
+        this.bChangeState.setVisible(false);
+        this.bChangeState.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                bChangeState_actionPerformed(e);
+                CardPanelLite.this.bChangeStateActionPerformed(e);
             }
         });
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
+            this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
         }
 
         this.setLayout(new MigLayout("fill, ins 0"));
-        this.add(detail, "w 239, h 303, grow, flowy, wrap");
-        this.add(bChangeState, "align 50% 0%, wrap");
-        this.add(picture, "wmin 239, hmin 323, grow");
+        this.add(this.detail, "w 239, h 303, grow, flowy, wrap");
+        this.add(this.bChangeState, "align 50% 0%, wrap");
+        this.add(this.picture, "wmin 239, hmin 323, grow");
     }
 
     /**
@@ -55,20 +56,21 @@ public class CardPanelLite extends CardPanelBase {
      * @param card
      *            an InventoryItem
      */
+    @Override
     public final void showCard(final InventoryItem card) {
-        picture.setCard(card);
-        boolean isCard = card != null && card instanceof CardPrinted;
-        detail.setVisible(isCard);
+        this.picture.setCard(card);
+        final boolean isCard = (card != null) && (card instanceof CardPrinted);
+        this.detail.setVisible(isCard);
         if (isCard) {
-            Card toSet = ((CardPrinted) card).toForgeCard();
+            final Card toSet = ((CardPrinted) card).toForgeCard();
 
-            detail.setCard(toSet);
+            this.detail.setCard(toSet);
             if (toSet.hasAlternateState()) {
-                bChangeState.setVisible(true);
+                this.bChangeState.setVisible(true);
                 if (toSet.isFlip()) {
-                    bChangeState.setText("Flip");
+                    this.bChangeState.setText("Flip");
                 } else {
-                    bChangeState.setText("Transform");
+                    this.bChangeState.setText("Transform");
                 }
             }
         }
@@ -81,15 +83,15 @@ public class CardPanelLite extends CardPanelBase {
      *            the new card
      */
     public final void setCard(final Card c) {
-        picture.setCard(c);
+        this.picture.setCard(c);
         if (c != null) {
-            detail.setCard(c);
+            this.detail.setCard(c);
             if (c.hasAlternateState()) {
-                bChangeState.setVisible(true);
+                this.bChangeState.setVisible(true);
                 if (c.isFlip()) {
-                    bChangeState.setText("Flip");
+                    this.bChangeState.setText("Flip");
                 } else {
-                    bChangeState.setText("Transform");
+                    this.bChangeState.setText("Transform");
                 }
             }
         }
@@ -102,15 +104,15 @@ public class CardPanelLite extends CardPanelBase {
      * @return Card
      */
     public final Card getCard() {
-        return detail.getCard();
+        return this.detail.getCard();
     }
 
-    private void bChangeState_actionPerformed(final ActionEvent e) {
-        Card cur = detail.getCard();
+    private void bChangeStateActionPerformed(final ActionEvent e) {
+        final Card cur = this.detail.getCard();
         if (cur != null) {
             cur.changeState();
 
-            setCard(cur);
+            this.setCard(cur);
         }
     }
 

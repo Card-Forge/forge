@@ -39,23 +39,23 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
     private final class SortOrders {
         private class Order {
-            public final int sortColumn;
-            public boolean isSortAsc = true;
+            private final int sortColumn;
+            private boolean isSortAsc = true;
 
             public Order(final int col) {
-                sortColumn = col;
+                this.sortColumn = col;
             }
         };
 
-        private final int MAX_DEPTH = 3;
-        private List<Order> orders = new ArrayList<Order>(3);
+        private final int maxDepth = 3;
+        private final List<Order> orders = new ArrayList<Order>(3);
         private TableSorterCascade<T> sorter = null;
         private boolean isSorterReady = false;
 
         private int indexOfColumn(final int column) {
-            int posColumn = orders.size() - 1;
+            int posColumn = this.orders.size() - 1;
             for (; posColumn >= 0; posColumn--) {
-                if (orders.get(posColumn) != null && orders.get(posColumn).sortColumn == column) {
+                if ((this.orders.get(posColumn) != null) && (this.orders.get(posColumn).sortColumn == column)) {
                     break;
                 }
             }
@@ -64,47 +64,48 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
         // index of column to sort by, desired direction
         public void add(final int column, final boolean wantAsc) {
-            add(column);
-            orders.get(0).isSortAsc = wantAsc;
-            isSorterReady = false;
+            this.add(column);
+            this.orders.get(0).isSortAsc = wantAsc;
+            this.isSorterReady = false;
         }
 
         // puts desired direction on top, set "asc"; if already was on top,
         // inverts direction;
         public void add(final int column) {
-            int posColumn = indexOfColumn(column);
+            final int posColumn = this.indexOfColumn(column);
             switch (posColumn) {
             case -1: // no such column here - let's add then
-                orders.add(0, new Order(column));
+                this.orders.add(0, new Order(column));
                 break;
             case 0: // found at top-level, should invert
-                orders.get(0).isSortAsc ^= true; // invert
+                this.orders.get(0).isSortAsc ^= true; // invert
                 break;
             default: // found somewhere, move down others, set this one onto
                      // top;
-                orders.remove(posColumn);
-                orders.add(0, new Order(column));
+                this.orders.remove(posColumn);
+                this.orders.add(0, new Order(column));
                 break;
             }
-            if (orders.size() > MAX_DEPTH) {
-                orders.remove(MAX_DEPTH);
+            if (this.orders.size() > this.maxDepth) {
+                this.orders.remove(this.maxDepth);
             }
-            isSorterReady = false;
+            this.isSorterReady = false;
         }
 
         public TableSorterCascade<T> getSorter() {
-            if (!isSorterReady) {
-                List<TableSorter<T>> oneColSorters = new ArrayList<TableSorter<T>>(MAX_DEPTH);
-                for (Order order : orders) {
-                    oneColSorters.add(new TableSorter<T>(columns.get(order.sortColumn).fnSort, order.isSortAsc));
+            if (!this.isSorterReady) {
+                final List<TableSorter<T>> oneColSorters = new ArrayList<TableSorter<T>>(this.maxDepth);
+                for (final Order order : this.orders) {
+                    oneColSorters.add(new TableSorter<T>(TableModel.this.columns.get(order.sortColumn).getFnSort(),
+                            order.isSortAsc));
                 }
-                sorter = new TableSorterCascade<T>(oneColSorters);
+                this.sorter = new TableSorterCascade<T>(oneColSorters);
             }
-            return sorter;
+            return this.sorter;
         }
     }
 
-    private ItemPool<T> data;
+    private final ItemPool<T> data;
     private final CardPanelBase cardDisplay;
     private final List<TableColumnInfo<T>> columns;
     private final SortOrders sortOrders = new SortOrders();
@@ -120,10 +121,10 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the cls
      */
     public TableModel(final CardPanelBase cd, final List<TableColumnInfo<T>> columnsToShow, final Class<T> cls) {
-        data = new ItemPool<T>(cls);
-        cardDisplay = cd;
-        columns = columnsToShow;
-        columns.get(4).isMinMaxApplied = false;
+        this.data = new ItemPool<T>(cls);
+        this.cardDisplay = cd;
+        this.columns = columnsToShow;
+        this.columns.get(4).setMinMaxApplied(false);
     }
 
     /**
@@ -136,12 +137,12 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         TableColumn tableColumn = null;
         for (int i = 0; i < table.getColumnCount(); i++) {
             tableColumn = table.getColumnModel().getColumn(i);
-            TableColumnInfo<T> colInfo = columns.get(i);
+            final TableColumnInfo<T> colInfo = this.columns.get(i);
 
-            tableColumn.setPreferredWidth(colInfo.nominalWidth);
-            if (colInfo.isMinMaxApplied) {
-                tableColumn.setMinWidth(colInfo.minWidth);
-                tableColumn.setMaxWidth(colInfo.maxWidth);
+            tableColumn.setPreferredWidth(colInfo.getNominalWidth());
+            if (colInfo.isMinMaxApplied()) {
+                tableColumn.setMinWidth(colInfo.getMinWidth());
+                tableColumn.setMaxWidth(colInfo.getMaxWidth());
             }
         }
     }
@@ -150,7 +151,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * Clear.
      */
     public void clear() {
-        data.clear();
+        this.data.clear();
     }
 
     /**
@@ -159,7 +160,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * @return the cards
      */
     public ItemPoolView<T> getCards() {
-        return data.getView();
+        return this.data.getView();
     }
 
     /**
@@ -171,10 +172,10 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            a {@link forge.Card} object.
      */
     public void removeCard(final T c) {
-        boolean wasThere = data.count(c) > 0;
+        final boolean wasThere = this.data.count(c) > 0;
         if (wasThere) {
-            data.remove(c);
-            fireTableDataChanged();
+            this.data.remove(c);
+            this.fireTableDataChanged();
         }
     }
 
@@ -185,8 +186,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the c
      */
     public void addCard(final T c) {
-        data.add(c);
-        fireTableDataChanged();
+        this.data.add(c);
+        this.fireTableDataChanged();
     }
 
     /**
@@ -198,8 +199,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the count
      */
     public void addCard(final T c, final int count) {
-        data.add(c, count);
-        fireTableDataChanged();
+        this.data.add(c, count);
+        this.fireTableDataChanged();
     }
 
     /**
@@ -209,8 +210,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the e
      */
     public void addCard(final Entry<T, Integer> e) {
-        data.add(e.getKey(), e.getValue());
-        fireTableDataChanged();
+        this.data.add(e.getKey(), e.getValue());
+        this.fireTableDataChanged();
     }
 
     /**
@@ -220,8 +221,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the c
      */
     public void addCards(final Iterable<Entry<T, Integer>> c) {
-        data.addAll(c);
-        fireTableDataChanged();
+        this.data.addAll(c);
+        this.fireTableDataChanged();
     }
 
     /**
@@ -231,8 +232,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the c
      */
     public void addAllCards(final Iterable<T> c) {
-        data.addAllCards(c);
-        fireTableDataChanged();
+        this.data.addAllCards(c);
+        this.fireTableDataChanged();
     }
 
     /**
@@ -243,8 +244,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * @return the entry
      */
     public Entry<T, Integer> rowToCard(final int row) {
-        List<Entry<T, Integer>> model = data.getOrderedList();
-        return row >= 0 && row < model.size() ? model.get(row) : null;
+        final List<Entry<T, Integer>> model = this.data.getOrderedList();
+        return (row >= 0) && (row < model.size()) ? model.get(row) : null;
     }
 
     /*
@@ -253,10 +254,13 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * @see javax.swing.table.TableModel#getRowCount()
      */
     /**
+     * Gets the row count.
+     *
      * @return int
      */
+    @Override
     public int getRowCount() {
-        return data.countDistinct();
+        return this.data.countDistinct();
     }
 
     /*
@@ -265,36 +269,40 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * @see javax.swing.table.TableModel#getColumnCount()
      */
     /**
+     * Gets the column count.
+     *
      * @return int
      */
+    @Override
     public int getColumnCount() {
-        return columns.size();
+        return this.columns.size();
     }
 
     /** {@inheritDoc} */
     @Override
     public String getColumnName(final int n) {
-        return columns.get(n).getName();
+        return this.columns.get(n).getName();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object getValueAt(final int row, final int column) {
-        return columns.get(column).fnDisplay.apply(rowToCard(row));
+        return this.columns.get(column).getFnDisplay().apply(this.rowToCard(row));
     }
 
     /**
      * The listener interface for receiving column events. The class that is
      * interested in processing a column event implements this interface, and
      * the object created with that class is registered with a component using
-     * the component's addColumnListener method. When
-     * the column event occurs, that object's appropriate
-     * method is invoked.
-     * 
+     * the component's addColumnListener method. When the column event occurs,
+     * that object's appropriate method is invoked.
+     *
+     * @see ColumnEvent
      */
     class ColumnListener extends MouseAdapter {
 
         /** The table. */
-        protected JTable table;
+        private JTable table;
 
         /**
          * Instantiates a new column listener.
@@ -303,7 +311,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
          *            the t
          */
         public ColumnListener(final JTable t) {
-            table = t;
+            this.table = t;
         }
 
         /*
@@ -313,29 +321,32 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
          * java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
          */
         /**
+         * Mouse clicked.
+         *
          * @param e MouseEvent
          */
+        @Override
         public void mouseClicked(final MouseEvent e) {
-            TableColumnModel colModel = table.getColumnModel();
-            int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
-            int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
+            final TableColumnModel colModel = this.table.getColumnModel();
+            final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
+            final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
 
             if (modelIndex < 0) {
                 return;
             }
 
             // This will invert if needed
-            sortOrders.add(modelIndex);
+            TableModel.this.sortOrders.add(modelIndex);
 
-            for (int i = 0; i < columns.size(); i++) {
-                TableColumn column = colModel.getColumn(i);
-                column.setHeaderValue(getColumnName(column.getModelIndex()));
+            for (int i = 0; i < TableModel.this.columns.size(); i++) {
+                final TableColumn column = colModel.getColumn(i);
+                column.setHeaderValue(TableModel.this.getColumnName(column.getModelIndex()));
             }
-            table.getTableHeader().repaint();
+            this.table.getTableHeader().repaint();
 
-            resort();
-            table.tableChanged(new TableModelEvent(TableModel.this));
-            table.repaint();
+            TableModel.this.resort();
+            this.table.tableChanged(new TableModelEvent(TableModel.this));
+            this.table.repaint();
         }
     }
 
@@ -346,10 +357,10 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the table
      */
     public void showSelectedCard(final JTable table) {
-        int row = table.getSelectedRow();
+        final int row = table.getSelectedRow();
         if (row != -1) {
-            T cp = rowToCard(row).getKey();
-            cardDisplay.showCard(cp);
+            final T cp = this.rowToCard(row).getKey();
+            this.cardDisplay.showCard(cp);
         }
     }
 
@@ -367,7 +378,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
-                showSelectedCard(table);
+                TableModel.this.showSelectedCard(table);
             }
         });
         table.addFocusListener(new FocusListener() {
@@ -378,7 +389,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
             @Override
             public void focusGained(final FocusEvent e) {
-                showSelectedCard(table);
+                TableModel.this.showSelectedCard(table);
             }
         });
 
@@ -390,7 +401,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * Resort.
      */
     public void resort() {
-        Collections.sort(data.getOrderedList(), sortOrders.getSorter());
+        Collections.sort(this.data.getOrderedList(), this.sortOrders.getSorter());
     }
 
     /**
@@ -402,8 +413,8 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      *            the is asc
      */
     public void sort(final int iCol, final boolean isAsc) {
-        sortOrders.add(iCol, isAsc);
-        resort();
+        this.sortOrders.add(iCol, isAsc);
+        this.resort();
     }
 
 } // CardTableModel

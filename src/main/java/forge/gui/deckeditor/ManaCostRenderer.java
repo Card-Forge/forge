@@ -27,10 +27,10 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
      * (javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
     @Override
-    public final Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
-            final boolean hasFocus, final int row, final int column) {
+    public final Component getTableCellRendererComponent(final JTable table, final Object value,
+            final boolean isSelected, final boolean hasFocus, final int row, final int column) {
         this.value = (CardManaCost) value;
-        setToolTipText(this.value.toString());
+        this.setToolTipText(this.value.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
 
@@ -49,23 +49,23 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
 
         float xpos = padding;
 
-        int genericManaCost = value.getGenericCost();
-        boolean hasGeneric = genericManaCost > 0 || value.isPureGeneric();
-        List<CardManaCostShard> shards = value.getShards();
+        final int genericManaCost = this.value.getGenericCost();
+        final boolean hasGeneric = (genericManaCost > 0) || this.value.isPureGeneric();
+        final List<CardManaCostShard> shards = this.value.getShards();
 
-        int cellWidth = getWidth();
-        int cntGlyphs = hasGeneric ? shards.size() + 1 : shards.size();
-        float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1f) : elemtWidth
-                + elemtGap;
-        float offset = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
+        final int cellWidth = this.getWidth();
+        final int cntGlyphs = hasGeneric ? shards.size() + 1 : shards.size();
+        final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1f)
+                : elemtWidth + elemtGap;
+        final float offset = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
         if (hasGeneric) {
-            String sGeneric = Integer.toString(genericManaCost);
+            final String sGeneric = Integer.toString(genericManaCost);
             ManaSymbols.drawSymbol(sGeneric, g, (int) xpos, 1);
             xpos += offset;
         }
 
-        for (CardManaCostShard s : shards) {
+        for (final CardManaCostShard s : shards) {
             ManaSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
             xpos += offset;
         }

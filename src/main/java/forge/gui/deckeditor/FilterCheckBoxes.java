@@ -18,50 +18,50 @@ import forge.item.CardPrinted;
 class FilterCheckBoxes {
 
     /** The white. */
-    public final JCheckBox white;
+    private final JCheckBox white;
 
     /** The blue. */
-    public final JCheckBox blue;
+    private final JCheckBox blue;
 
     /** The black. */
-    public final JCheckBox black;
+    private final JCheckBox black;
 
     /** The red. */
-    public final JCheckBox red;
+    private final JCheckBox red;
 
     /** The green. */
-    public final JCheckBox green;
+    private final JCheckBox green;
 
     /** The colorless. */
-    public final JCheckBox colorless;
+    private final JCheckBox colorless;
 
     /** The land. */
-    public final JCheckBox land;
+    private final JCheckBox land;
 
     /** The creature. */
-    public final JCheckBox creature;
+    private final JCheckBox creature;
 
     /** The sorcery. */
-    public final JCheckBox sorcery;
+    private final JCheckBox sorcery;
 
     /** The instant. */
-    public final JCheckBox instant;
+    private final JCheckBox instant;
 
     /** The planeswalker. */
-    public final JCheckBox planeswalker;
+    private final JCheckBox planeswalker;
 
     /** The artifact. */
-    public final JCheckBox artifact;
+    private final JCheckBox artifact;
 
     /** The enchantment. */
-    public final JCheckBox enchantment;
+    private final JCheckBox enchantment;
 
     // Very handy for classes using mass operations on an array of checkboxes
     /** The all colors. */
-    public final List<JCheckBox> allColors;
+    private final List<JCheckBox> allColors;
 
     /** The all types. */
-    public final List<JCheckBox> allTypes;
+    private final List<JCheckBox> allTypes;
 
     /**
      * Instantiates a new filter check boxes.
@@ -71,40 +71,41 @@ class FilterCheckBoxes {
      */
     public FilterCheckBoxes(final boolean useGraphicalBoxes) {
         if (useGraphicalBoxes) {
-            white = new CheckBoxWithIcon("white", "White");
-            blue = new CheckBoxWithIcon("blue", "Blue");
-            black = new CheckBoxWithIcon("black", "Black");
-            red = new CheckBoxWithIcon("red", "Red");
-            green = new CheckBoxWithIcon("green", "Green");
-            colorless = new CheckBoxWithIcon("colorless", "Colorless");
+            this.white = new CheckBoxWithIcon("white", "White");
+            this.blue = new CheckBoxWithIcon("blue", "Blue");
+            this.black = new CheckBoxWithIcon("black", "Black");
+            this.red = new CheckBoxWithIcon("red", "Red");
+            this.green = new CheckBoxWithIcon("green", "Green");
+            this.colorless = new CheckBoxWithIcon("colorless", "Colorless");
 
-            land = new CheckBoxWithIcon("land", "Land");
-            creature = new CheckBoxWithIcon("creature", "Creature");
-            sorcery = new CheckBoxWithIcon("sorcery", "Sorcery");
-            instant = new CheckBoxWithIcon("instant", "Instant");
-            planeswalker = new CheckBoxWithIcon("planeswalker", "Planeswalker");
-            artifact = new CheckBoxWithIcon("artifact", "Artifact");
-            enchantment = new CheckBoxWithIcon("enchant", "Enchantment");
+            this.land = new CheckBoxWithIcon("land", "Land");
+            this.creature = new CheckBoxWithIcon("creature", "Creature");
+            this.sorcery = new CheckBoxWithIcon("sorcery", "Sorcery");
+            this.instant = new CheckBoxWithIcon("instant", "Instant");
+            this.planeswalker = new CheckBoxWithIcon("planeswalker", "Planeswalker");
+            this.artifact = new CheckBoxWithIcon("artifact", "Artifact");
+            this.enchantment = new CheckBoxWithIcon("enchant", "Enchantment");
         } else {
-            white = new JCheckBox("W", true);
-            blue = new JCheckBox("U", true);
-            black = new JCheckBox("B", true);
-            red = new JCheckBox("R", true);
-            green = new JCheckBox("G", true);
-            colorless = new JCheckBox("C", true);
+            this.white = new JCheckBox("W", true);
+            this.blue = new JCheckBox("U", true);
+            this.black = new JCheckBox("B", true);
+            this.red = new JCheckBox("R", true);
+            this.green = new JCheckBox("G", true);
+            this.colorless = new JCheckBox("C", true);
 
-            land = new JCheckBox("Land", true);
-            creature = new JCheckBox("Creature", true);
-            sorcery = new JCheckBox("Sorcery", true);
-            instant = new JCheckBox("Instant", true);
-            planeswalker = new JCheckBox("Planeswalker", true);
-            artifact = new JCheckBox("Artifact", true);
-            enchantment = new JCheckBox("Enchant", true);
+            this.land = new JCheckBox("Land", true);
+            this.creature = new JCheckBox("Creature", true);
+            this.sorcery = new JCheckBox("Sorcery", true);
+            this.instant = new JCheckBox("Instant", true);
+            this.planeswalker = new JCheckBox("Planeswalker", true);
+            this.artifact = new JCheckBox("Artifact", true);
+            this.enchantment = new JCheckBox("Enchant", true);
         }
 
-        allColors = Arrays.asList(new JCheckBox[] { white, blue, black, red, green, colorless });
-        allTypes = Arrays.asList(new JCheckBox[] { land, creature, sorcery, instant, planeswalker, artifact,
-                enchantment });
+        this.allColors = Arrays.asList(new JCheckBox[] { this.getWhite(), this.getBlue(), this.getBlack(), this.getRed(), this.getGreen(),
+                this.getColorless() });
+        this.allTypes = Arrays.asList(new JCheckBox[] { this.getLand(), this.getCreature(), this.getSorcery(), this.getInstant(),
+                this.getPlaneswalker(), this.getArtifact(), this.getEnchantment() });
     }
 
     /**
@@ -113,54 +114,159 @@ class FilterCheckBoxes {
      * @return the predicate
      */
     public final Predicate<CardPrinted> buildFilter() {
-        List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
-        if (white.isSelected()) {
+        final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
+        if (this.getWhite().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_WHITE);
         }
-        if (blue.isSelected()) {
+        if (this.getBlue().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_BLUE);
         }
-        if (black.isSelected()) {
+        if (this.getBlack().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_BLACK);
         }
-        if (red.isSelected()) {
+        if (this.getRed().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_RED);
         }
-        if (green.isSelected()) {
+        if (this.getGreen().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_GREEN);
         }
-        if (colorless.isSelected()) {
+        if (this.getColorless().isSelected()) {
             colors.add(CardRules.Predicates.Presets.IS_COLORLESS);
         }
-        Predicate<CardRules> filterByColor = colors.size() == 6 ? CardRules.Predicates.Presets.CONSTANT_TRUE : Predicate
-                .or(colors);
+        final Predicate<CardRules> filterByColor = colors.size() == 6 ? CardRules.Predicates.Presets.CONSTANT_TRUE
+                : Predicate.or(colors);
 
-        List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
-        if (land.isSelected()) {
+        final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
+        if (this.getLand().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_LAND);
         }
-        if (creature.isSelected()) {
+        if (this.getCreature().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_CREATURE);
         }
-        if (sorcery.isSelected()) {
+        if (this.getSorcery().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_SORCERY);
         }
-        if (instant.isSelected()) {
+        if (this.getInstant().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_INSTANT);
         }
-        if (planeswalker.isSelected()) {
+        if (this.getPlaneswalker().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_PLANESWALKER);
         }
-        if (artifact.isSelected()) {
+        if (this.getArtifact().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_ARTIFACT);
         }
-        if (enchantment.isSelected()) {
+        if (this.getEnchantment().isSelected()) {
             types.add(CardRules.Predicates.Presets.IS_ENCHANTMENT);
         }
-        Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.CONSTANT_TRUE : Predicate
-                .or(types);
+        final Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.CONSTANT_TRUE
+                : Predicate.or(types);
 
         return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.fnGetRules);
+    }
+
+    /**
+     * @return the allTypes
+     */
+    public List<JCheckBox> getAllTypes() {
+        return allTypes;
+    }
+
+    /**
+     * @return the white
+     */
+    public JCheckBox getWhite() {
+        return white;
+    }
+
+    /**
+     * @return the blue
+     */
+    public JCheckBox getBlue() {
+        return blue;
+    }
+
+    /**
+     * @return the black
+     */
+    public JCheckBox getBlack() {
+        return black;
+    }
+
+    /**
+     * @return the red
+     */
+    public JCheckBox getRed() {
+        return red;
+    }
+
+    /**
+     * @return the colorless
+     */
+    public JCheckBox getColorless() {
+        return colorless;
+    }
+
+    /**
+     * @return the green
+     */
+    public JCheckBox getGreen() {
+        return green;
+    }
+
+    /**
+     * @return the land
+     */
+    public JCheckBox getLand() {
+        return land;
+    }
+
+    /**
+     * @return the allColors
+     */
+    public List<JCheckBox> getAllColors() {
+        return allColors;
+    }
+
+    /**
+     * @return the creature
+     */
+    public JCheckBox getCreature() {
+        return creature;
+    }
+
+    /**
+     * @return the sorcery
+     */
+    public JCheckBox getSorcery() {
+        return sorcery;
+    }
+
+    /**
+     * @return the instant
+     */
+    public JCheckBox getInstant() {
+        return instant;
+    }
+
+    /**
+     * @return the planeswalker
+     */
+    public JCheckBox getPlaneswalker() {
+        return planeswalker;
+    }
+
+    /**
+     * @return the artifact
+     */
+    public JCheckBox getArtifact() {
+        return artifact;
+    }
+
+    /**
+     * @return the enchantment
+     */
+    public JCheckBox getEnchantment() {
+        return enchantment;
     }
 
 }

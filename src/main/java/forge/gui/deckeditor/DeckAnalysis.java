@@ -95,14 +95,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JSeparator jSeparator1;
     private JLabel jLabel2;
     private JButton jButtonOk;
-    private JFrame jF;
+    private final JFrame jF;
     // private ButtonGroup buttonGroup1;
 
     /** The filter card list. */
-    public CardList filterCardList;
+    private CardList filterCardList;
 
     /** The deck. */
-    public ItemPoolView<CardPrinted> deck;
+    private ItemPoolView<CardPrinted> deck;
 
     /**
      * <p>
@@ -116,10 +116,10 @@ public class DeckAnalysis extends javax.swing.JDialog {
      */
     public DeckAnalysis(final JFrame g, final ItemPoolView<CardPrinted> deckView) {
         super(g);
-        deck = deckView;
+        this.deck = deckView;
 
-        jF = g;
-        initGUI();
+        this.jF = g;
+        this.initGUI();
     }
 
     /**
@@ -130,25 +130,25 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private void initGUI() {
         try {
 
-            getContentPane().setLayout(null);
-            setVisible(true);
-            int wWidth = 600;
-            int wHeight = 600;
+            this.getContentPane().setLayout(null);
+            this.setVisible(true);
+            final int wWidth = 600;
+            final int wHeight = 600;
             this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
 
-            Dimension screen = getToolkit().getScreenSize();
-            int x = (screen.width - wWidth) / 2;
-            int y = (screen.height - wHeight) / 2;
+            final Dimension screen = this.getToolkit().getScreenSize();
+            final int x = (screen.width - wWidth) / 2;
+            final int y = (screen.height - wHeight) / 2;
             this.setBounds(x, y, wWidth, wHeight);
             this.setResizable(false);
             this.setTitle("Deck Analysis");
-            pack();
+            this.pack();
             // this.setIconImage(null);
 
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(final WindowEvent arg0) {
-                    jF.setEnabled(true);
+                    DeckAnalysis.this.jF.setEnabled(true);
                 }
 
                 @Override
@@ -183,9 +183,9 @@ public class DeckAnalysis extends javax.swing.JDialog {
                     mSixMore = 0;
                     tManaCost = 0;
 
-                    for (Entry<CardPrinted, Integer> e : deck) {
+                    for (final Entry<CardPrinted, Integer> e : DeckAnalysis.this.deck) {
                         c = e.getKey().getCard();
-                        int cnt = e.getValue();
+                        final int cnt = e.getValue();
 
                         if (c.getColor().isMulticolor()) {
                             cMulticolor = cMulticolor + cnt;
@@ -215,7 +215,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
                         }
 
                         // count card types
-                        CardType cType = c.getType();
+                        final CardType cType = c.getType();
                         if (cType.isArtifact()) {
                             cArtifact = cArtifact + cnt;
                         }
@@ -238,7 +238,7 @@ public class DeckAnalysis extends javax.swing.JDialog {
                             cSorcery = cSorcery + cnt;
                         }
 
-                        int cmc = c.getManaCost().getCMC();
+                        final int cmc = c.getManaCost().getCMC();
                         if (cmc == 0) {
                             mZero = mZero + cnt;
                         } else if (cmc == 1) {
@@ -255,126 +255,130 @@ public class DeckAnalysis extends javax.swing.JDialog {
                             mSixMore = mSixMore + 1;
                         }
 
-                        tManaCost = tManaCost + cmc * cnt;
+                        tManaCost = tManaCost + (cmc * cnt);
                     }
-                    int total = deck.countAll();
+                    final int total = DeckAnalysis.this.deck.countAll();
                     BigDecimal aManaCost = new BigDecimal(tManaCost / total);
                     aManaCost = aManaCost.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-                    jLabelTotal.setText("Information about deck (total cards: " + total + "):");
-                    jLabelManaCost.setText("Mana cost (ACC:" + aManaCost + ")");
-                    Color cr = new Color(100, 100, 100);
+                    DeckAnalysis.this.jLabelTotal.setText("Information about deck (total cards: " + total + "):");
+                    DeckAnalysis.this.jLabelManaCost.setText("Mana cost (ACC:" + aManaCost + ")");
+                    final Color cr = new Color(100, 100, 100);
 
                     if (cBlack == 0) {
-                        jLabelBlack.setForeground(cr);
+                        DeckAnalysis.this.jLabelBlack.setForeground(cr);
                     }
-                    jLabelBlack.setText(formatStat("Black", cBlack, total));
+                    DeckAnalysis.this.jLabelBlack.setText(DeckAnalysis.this.formatStat("Black", cBlack, total));
                     if (cBlue == 0) {
-                        jLabelBlue.setForeground(cr);
+                        DeckAnalysis.this.jLabelBlue.setForeground(cr);
                     }
-                    jLabelBlue.setText(formatStat("Blue", cBlue, total));
+                    DeckAnalysis.this.jLabelBlue.setText(DeckAnalysis.this.formatStat("Blue", cBlue, total));
                     if (cGreen == 0) {
-                        jLabelGreen.setForeground(cr);
+                        DeckAnalysis.this.jLabelGreen.setForeground(cr);
                     }
-                    jLabelGreen.setText(formatStat("Green", cGreen, total));
+                    DeckAnalysis.this.jLabelGreen.setText(DeckAnalysis.this.formatStat("Green", cGreen, total));
                     if (cRed == 0) {
-                        jLabelRed.setForeground(cr);
+                        DeckAnalysis.this.jLabelRed.setForeground(cr);
                     }
-                    jLabelRed.setText(formatStat("Red", cRed, total));
+                    DeckAnalysis.this.jLabelRed.setText(DeckAnalysis.this.formatStat("Red", cRed, total));
                     if (cWhite == 0) {
-                        jLabelWhite.setForeground(cr);
+                        DeckAnalysis.this.jLabelWhite.setForeground(cr);
                     }
-                    jLabelWhite.setText(formatStat("White", cWhite, total));
+                    DeckAnalysis.this.jLabelWhite.setText(DeckAnalysis.this.formatStat("White", cWhite, total));
                     if (cMulticolor == 0) {
-                        jLabelMultiColor.setForeground(cr);
+                        DeckAnalysis.this.jLabelMultiColor.setForeground(cr);
                     }
-                    jLabelMultiColor.setText(formatStat("Multicolor", cMulticolor, total));
+                    DeckAnalysis.this.jLabelMultiColor.setText(DeckAnalysis.this.formatStat("Multicolor", cMulticolor,
+                            total));
                     if (cColorless == 0) {
-                        jLabelColorless.setForeground(cr);
+                        DeckAnalysis.this.jLabelColorless.setForeground(cr);
                     }
-                    jLabelColorless.setText(formatStat("Colorless", cColorless, total));
+                    DeckAnalysis.this.jLabelColorless.setText(DeckAnalysis.this.formatStat("Colorless", cColorless,
+                            total));
 
                     if (cLand == 0) {
-                        jLabelLand.setForeground(cr);
+                        DeckAnalysis.this.jLabelLand.setForeground(cr);
                     }
-                    jLabelLand.setText(formatStat("Land", cLand, total));
+                    DeckAnalysis.this.jLabelLand.setText(DeckAnalysis.this.formatStat("Land", cLand, total));
                     if (cArtifact == 0) {
-                        jLabelArtifact.setForeground(cr);
+                        DeckAnalysis.this.jLabelArtifact.setForeground(cr);
                     }
-                    jLabelArtifact.setText(formatStat("Artifact", cArtifact, total));
+                    DeckAnalysis.this.jLabelArtifact.setText(DeckAnalysis.this.formatStat("Artifact", cArtifact, total));
                     if (cCreature == 0) {
-                        jLabelCreature.setForeground(cr);
+                        DeckAnalysis.this.jLabelCreature.setForeground(cr);
                     }
-                    jLabelCreature.setText(formatStat("Creature", cCreature, total));
+                    DeckAnalysis.this.jLabelCreature.setText(DeckAnalysis.this.formatStat("Creature", cCreature, total));
                     if (cEnchant == 0) {
-                        jLabelEnchant.setForeground(cr);
+                        DeckAnalysis.this.jLabelEnchant.setForeground(cr);
                     }
-                    jLabelEnchant.setText(formatStat("Enchant", cEnchant, total));
+                    DeckAnalysis.this.jLabelEnchant.setText(DeckAnalysis.this.formatStat("Enchant", cEnchant, total));
                     if (cInstant == 0) {
-                        jLabelInstant.setForeground(cr);
+                        DeckAnalysis.this.jLabelInstant.setForeground(cr);
                     }
-                    jLabelInstant.setText(formatStat("Instant", cInstant, total));
+                    DeckAnalysis.this.jLabelInstant.setText(DeckAnalysis.this.formatStat("Instant", cInstant, total));
                     if (cLandType == 0) {
-                        jLabelLandType.setForeground(cr);
+                        DeckAnalysis.this.jLabelLandType.setForeground(cr);
                     }
-                    jLabelLandType.setText(formatStat("Land", cLandType, total));
+                    DeckAnalysis.this.jLabelLandType.setText(DeckAnalysis.this.formatStat("Land", cLandType, total));
                     if (cPlaneswalker == 0) {
-                        jLabelPlaneswalker.setForeground(cr);
+                        DeckAnalysis.this.jLabelPlaneswalker.setForeground(cr);
                     }
-                    jLabelPlaneswalker.setText(formatStat("Planeswalker", cPlaneswalker, total));
+                    DeckAnalysis.this.jLabelPlaneswalker.setText(DeckAnalysis.this.formatStat("Planeswalker",
+                            cPlaneswalker, total));
 
                     if (cSorcery == 0) {
-                        jLabelSorcery.setForeground(cr);
+                        DeckAnalysis.this.jLabelSorcery.setForeground(cr);
                     }
-                    jLabelSorcery.setText(formatStat("Sorcery", cSorcery, total));
+                    DeckAnalysis.this.jLabelSorcery.setText(DeckAnalysis.this.formatStat("Sorcery", cSorcery, total));
                     if (mZero == 0) {
-                        jLabelZeroMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelZeroMana.setForeground(cr);
                     }
-                    jLabelZeroMana.setText(formatStat("Zero mana", mZero, total));
+                    DeckAnalysis.this.jLabelZeroMana.setText(DeckAnalysis.this.formatStat("Zero mana", mZero, total));
                     if (mOne == 0) {
-                        jLabelOneMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelOneMana.setForeground(cr);
                     }
-                    jLabelOneMana.setText(formatStat("One mana", mOne, total));
+                    DeckAnalysis.this.jLabelOneMana.setText(DeckAnalysis.this.formatStat("One mana", mOne, total));
                     if (mTwo == 0) {
-                        jLabelTwoMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelTwoMana.setForeground(cr);
                     }
-                    jLabelTwoMana.setText(formatStat("Two mana", mTwo, total));
+                    DeckAnalysis.this.jLabelTwoMana.setText(DeckAnalysis.this.formatStat("Two mana", mTwo, total));
                     if (mThree == 0) {
-                        jLabelThreeMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelThreeMana.setForeground(cr);
                     }
-                    jLabelThreeMana.setText(formatStat("Three mana", mThree, total));
+                    DeckAnalysis.this.jLabelThreeMana.setText(DeckAnalysis.this.formatStat("Three mana", mThree, total));
                     if (mFour == 0) {
-                        jLabelFourMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelFourMana.setForeground(cr);
                     }
-                    jLabelFourMana.setText(formatStat("Four mana", mFour, total));
+                    DeckAnalysis.this.jLabelFourMana.setText(DeckAnalysis.this.formatStat("Four mana", mFour, total));
                     if (mFive == 0) {
-                        jLabelFiveMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelFiveMana.setForeground(cr);
                     }
-                    jLabelFiveMana.setText(formatStat("Five mana", mFive, total));
+                    DeckAnalysis.this.jLabelFiveMana.setText(DeckAnalysis.this.formatStat("Five mana", mFive, total));
                     if (mSixMore == 0) {
-                        jLabelSixMana.setForeground(cr);
+                        DeckAnalysis.this.jLabelSixMana.setForeground(cr);
                     }
-                    jLabelSixMana.setText(formatStat("Six and more", mSixMore, total));
+                    DeckAnalysis.this.jLabelSixMana.setText(DeckAnalysis.this.formatStat("Six and more", mSixMore,
+                            total));
                 }
             });
 
-            getContentPane().add(getJButton1());
-            getContentPane().add(getJLabel1xx());
-            getContentPane().add(getJButtonOk());
-            getContentPane().add(getJPanel1());
-            getContentPane().add(getJPanel2());
-            getContentPane().add(getJPanel3());
-            getContentPane().add(getJPanel4());
-            getContentPane().add(getJPanel5());
-            getContentPane().add(getJLabel1xxxxx());
+            this.getContentPane().add(this.getJButton1());
+            this.getContentPane().add(this.getJLabel1xx());
+            this.getContentPane().add(this.getJButtonOk());
+            this.getContentPane().add(this.getJPanel1());
+            this.getContentPane().add(this.getJPanel2());
+            this.getContentPane().add(this.getJPanel3());
+            this.getContentPane().add(this.getJPanel4());
+            this.getContentPane().add(this.getJPanel5());
+            this.getContentPane().add(this.getJLabel1xxxxx());
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
     private String formatStat(final String statName, final int value, final int deckSize) {
-        return String.format("%s: %d (%f%%)", statName, value, 100f * value / deckSize);
+        return String.format("%s: %d (%f%%)", statName, value, (100f * value) / deckSize);
     }
 
     /**
@@ -385,25 +389,25 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel getJPanel1() {
-        if (jPanel1 == null) {
-            jPanel1 = new JPanel();
+        if (this.jPanel1 == null) {
+            this.jPanel1 = new JPanel();
 
-            jPanel1.setLayout(null);
-            jPanel1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel1.setBackground(new java.awt.Color(192, 192, 192));
-            jPanel1.setBounds(5, 35, 137, 203);
-            jPanel1.add(getJLabel1());
-            jPanel1.add(getJSeparator1());
-            jPanel1.add(getJLabel2());
-            jPanel1.add(getJLabel3());
-            jPanel1.add(getJLabel4());
-            jPanel1.add(getJLabel5());
-            jPanel1.add(getJLabel6());
-            jPanel1.add(getJLabel7());
-            jPanel1.add(getJLabel8());
-            jPanel1.add(getJLabel1x());
+            this.jPanel1.setLayout(null);
+            this.jPanel1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel1.setBackground(new java.awt.Color(192, 192, 192));
+            this.jPanel1.setBounds(5, 35, 137, 203);
+            this.jPanel1.add(this.getJLabel1());
+            this.jPanel1.add(this.getJSeparator1());
+            this.jPanel1.add(this.getJLabel2());
+            this.jPanel1.add(this.getJLabel3());
+            this.jPanel1.add(this.getJLabel4());
+            this.jPanel1.add(this.getJLabel5());
+            this.jPanel1.add(this.getJLabel6());
+            this.jPanel1.add(this.getJLabel7());
+            this.jPanel1.add(this.getJLabel8());
+            this.jPanel1.add(this.getJLabel1x());
         }
-        return jPanel1;
+        return this.jPanel1;
     }
 
     /**
@@ -414,16 +418,16 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel2() {
-        if (jLabel2 == null) {
-            jLabel2 = new JLabel();
-            jLabel2.setText("Color");
-            jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-            jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14));
-            jLabel2.setPreferredSize(new java.awt.Dimension(152, 39));
-            jLabel2.setLayout(null);
-            jLabel2.setBounds(2, -3, 135, 26);
+        if (this.jLabel2 == null) {
+            this.jLabel2 = new JLabel();
+            this.jLabel2.setText("Color");
+            this.jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+            this.jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            this.jLabel2.setPreferredSize(new java.awt.Dimension(152, 39));
+            this.jLabel2.setLayout(null);
+            this.jLabel2.setBounds(2, -3, 135, 26);
         }
-        return jLabel2;
+        return this.jLabel2;
     }
 
     /**
@@ -434,13 +438,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JSeparator} object.
      */
     private JSeparator getJSeparator1() {
-        if (jSeparator1 == null) {
-            jSeparator1 = new JSeparator();
-            jSeparator1.setPreferredSize(new java.awt.Dimension(117, 6));
-            jSeparator1.setLayout(null);
-            jSeparator1.setBounds(1, 20, 136, 5);
+        if (this.jSeparator1 == null) {
+            this.jSeparator1 = new JSeparator();
+            this.jSeparator1.setPreferredSize(new java.awt.Dimension(117, 6));
+            this.jSeparator1.setLayout(null);
+            this.jSeparator1.setBounds(1, 20, 136, 5);
         }
-        return jSeparator1;
+        return this.jSeparator1;
     }
 
     /**
@@ -451,20 +455,20 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JButton} object.
      */
     private JButton getJButtonOk() {
-        if (jButtonOk == null) {
-            jButtonOk = new JButton();
-            jButtonOk.setLayout(null);
-            jButtonOk.setText("OK");
-            jButtonOk.setBounds(206, 536, 168, 31);
-            jButtonOk.addMouseListener(new MouseInputAdapter() {
+        if (this.jButtonOk == null) {
+            this.jButtonOk = new JButton();
+            this.jButtonOk.setLayout(null);
+            this.jButtonOk.setText("OK");
+            this.jButtonOk.setBounds(206, 536, 168, 31);
+            this.jButtonOk.addMouseListener(new MouseInputAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {
-                    jF.setEnabled(true);
-                    dispose();
+                    DeckAnalysis.this.jF.setEnabled(true);
+                    DeckAnalysis.this.dispose();
                 }
             });
         }
-        return jButtonOk;
+        return this.jButtonOk;
     }
 
     /**
@@ -475,14 +479,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1() {
-        if (jLabelBlack == null) {
-            jLabelBlack = new JLabel();
-            jLabelBlack.setText("Black:");
-            jLabelBlack.setPreferredSize(new java.awt.Dimension(105, 12));
-            jLabelBlack.setLayout(null);
-            jLabelBlack.setBounds(10, 28, 127, 13);
+        if (this.jLabelBlack == null) {
+            this.jLabelBlack = new JLabel();
+            this.jLabelBlack.setText("Black:");
+            this.jLabelBlack.setPreferredSize(new java.awt.Dimension(105, 12));
+            this.jLabelBlack.setLayout(null);
+            this.jLabelBlack.setBounds(10, 28, 127, 13);
         }
-        return jLabelBlack;
+        return this.jLabelBlack;
     }
 
     /**
@@ -493,13 +497,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel3() {
-        if (jLabelBlue == null) {
-            jLabelBlue = new JLabel();
-            jLabelBlue.setText("Blue:");
-            jLabelBlue.setLayout(null);
-            jLabelBlue.setBounds(10, 50, 127, 13);
+        if (this.jLabelBlue == null) {
+            this.jLabelBlue = new JLabel();
+            this.jLabelBlue.setText("Blue:");
+            this.jLabelBlue.setLayout(null);
+            this.jLabelBlue.setBounds(10, 50, 127, 13);
         }
-        return jLabelBlue;
+        return this.jLabelBlue;
     }
 
     /**
@@ -510,13 +514,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel4() {
-        if (jLabelGreen == null) {
-            jLabelGreen = new JLabel();
-            jLabelGreen.setText("Green:");
-            jLabelGreen.setLayout(null);
-            jLabelGreen.setBounds(10, 72, 127, 13);
+        if (this.jLabelGreen == null) {
+            this.jLabelGreen = new JLabel();
+            this.jLabelGreen.setText("Green:");
+            this.jLabelGreen.setLayout(null);
+            this.jLabelGreen.setBounds(10, 72, 127, 13);
         }
-        return jLabelGreen;
+        return this.jLabelGreen;
     }
 
     /**
@@ -527,13 +531,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel5() {
-        if (jLabelRed == null) {
-            jLabelRed = new JLabel();
-            jLabelRed.setText("Red:");
-            jLabelRed.setLayout(null);
-            jLabelRed.setBounds(10, 94, 127, 14);
+        if (this.jLabelRed == null) {
+            this.jLabelRed = new JLabel();
+            this.jLabelRed.setText("Red:");
+            this.jLabelRed.setLayout(null);
+            this.jLabelRed.setBounds(10, 94, 127, 14);
         }
-        return jLabelRed;
+        return this.jLabelRed;
     }
 
     /**
@@ -544,13 +548,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel6() {
-        if (jLabelWhite == null) {
-            jLabelWhite = new JLabel();
-            jLabelWhite.setText("White:");
-            jLabelWhite.setLayout(null);
-            jLabelWhite.setBounds(10, 116, 127, 13);
+        if (this.jLabelWhite == null) {
+            this.jLabelWhite = new JLabel();
+            this.jLabelWhite.setText("White:");
+            this.jLabelWhite.setLayout(null);
+            this.jLabelWhite.setBounds(10, 116, 127, 13);
         }
-        return jLabelWhite;
+        return this.jLabelWhite;
     }
 
     /**
@@ -561,13 +565,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel7() {
-        if (jLabelMultiColor == null) {
-            jLabelMultiColor = new JLabel();
-            jLabelMultiColor.setText("Multicolor:");
-            jLabelMultiColor.setLayout(null);
-            jLabelMultiColor.setBounds(10, 138, 127, 12);
+        if (this.jLabelMultiColor == null) {
+            this.jLabelMultiColor = new JLabel();
+            this.jLabelMultiColor.setText("Multicolor:");
+            this.jLabelMultiColor.setLayout(null);
+            this.jLabelMultiColor.setBounds(10, 138, 127, 12);
         }
-        return jLabelMultiColor;
+        return this.jLabelMultiColor;
     }
 
     /**
@@ -578,13 +582,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel8() {
-        if (jLabelColorless == null) {
-            jLabelColorless = new JLabel();
-            jLabelColorless.setText("Colorless:");
-            jLabelColorless.setLayout(null);
-            jLabelColorless.setBounds(10, 160, 128, 11);
+        if (this.jLabelColorless == null) {
+            this.jLabelColorless = new JLabel();
+            this.jLabelColorless.setText("Colorless:");
+            this.jLabelColorless.setLayout(null);
+            this.jLabelColorless.setBounds(10, 160, 128, 11);
         }
-        return jLabelColorless;
+        return this.jLabelColorless;
     }
 
     /**
@@ -595,13 +599,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1x() {
-        if (jLabelLand == null) {
-            jLabelLand = new JLabel();
-            jLabelLand.setText("Land: ");
-            jLabelLand.setLayout(null);
-            jLabelLand.setBounds(10, 182, 129, 10);
+        if (this.jLabelLand == null) {
+            this.jLabelLand = new JLabel();
+            this.jLabelLand.setText("Land: ");
+            this.jLabelLand.setLayout(null);
+            this.jLabelLand.setBounds(10, 182, 129, 10);
         }
-        return jLabelLand;
+        return this.jLabelLand;
     }
 
     /**
@@ -612,13 +616,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1xx() {
-        if (jLabelTotal == null) {
-            jLabelTotal = new JLabel();
-            jLabelTotal.setText("Information about deck:");
-            jLabelTotal.setLayout(null);
-            jLabelTotal.setBounds(5, 0, 454, 35);
+        if (this.jLabelTotal == null) {
+            this.jLabelTotal = new JLabel();
+            this.jLabelTotal.setText("Information about deck:");
+            this.jLabelTotal.setLayout(null);
+            this.jLabelTotal.setBounds(5, 0, 454, 35);
         }
-        return jLabelTotal;
+        return this.jLabelTotal;
     }
 
     /**
@@ -629,24 +633,24 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel getJPanel2() {
-        if (jPanel2 == null) {
-            jPanel2 = new JPanel();
+        if (this.jPanel2 == null) {
+            this.jPanel2 = new JPanel();
 
-            jPanel2.setBackground(new java.awt.Color(192, 192, 192));
-            jPanel2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel2.setLayout(null);
-            jPanel2.setBounds(153, 35, 137, 203);
-            jPanel2.add(getJLabel1xxx());
-            jPanel2.add(getJSeparator2());
-            jPanel2.add(getJLabel3x());
-            jPanel2.add(getJLabel4x());
-            jPanel2.add(getJLabel5x());
-            jPanel2.add(getJLabel6x());
-            jPanel2.add(getJLabel7x());
-            jPanel2.add(getJLabel8x());
-            jPanel2.add(getJLabel10());
+            this.jPanel2.setBackground(new java.awt.Color(192, 192, 192));
+            this.jPanel2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel2.setLayout(null);
+            this.jPanel2.setBounds(153, 35, 137, 203);
+            this.jPanel2.add(this.getJLabel1xxx());
+            this.jPanel2.add(this.getJSeparator2());
+            this.jPanel2.add(this.getJLabel3x());
+            this.jPanel2.add(this.getJLabel4x());
+            this.jPanel2.add(this.getJLabel5x());
+            this.jPanel2.add(this.getJLabel6x());
+            this.jPanel2.add(this.getJLabel7x());
+            this.jPanel2.add(this.getJLabel8x());
+            this.jPanel2.add(this.getJLabel10());
         }
-        return jPanel2;
+        return this.jPanel2;
     }
 
     /**
@@ -657,14 +661,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1xxx() {
-        if (jLabelArtifact == null) {
-            jLabelArtifact = new JLabel();
-            jLabelArtifact.setText("Artifact:");
-            jLabelArtifact.setPreferredSize(new java.awt.Dimension(105, 12));
-            jLabelArtifact.setLayout(null);
-            jLabelArtifact.setBounds(10, 28, 127, 13);
+        if (this.jLabelArtifact == null) {
+            this.jLabelArtifact = new JLabel();
+            this.jLabelArtifact.setText("Artifact:");
+            this.jLabelArtifact.setPreferredSize(new java.awt.Dimension(105, 12));
+            this.jLabelArtifact.setLayout(null);
+            this.jLabelArtifact.setBounds(10, 28, 127, 13);
         }
-        return jLabelArtifact;
+        return this.jLabelArtifact;
     }
 
     /**
@@ -675,13 +679,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JSeparator} object.
      */
     private JSeparator getJSeparator2() {
-        if (jSeparator2 == null) {
-            jSeparator2 = new JSeparator();
-            jSeparator2.setPreferredSize(new java.awt.Dimension(117, 6));
-            jSeparator2.setLayout(null);
-            jSeparator2.setBounds(1, 20, 136, 5);
+        if (this.jSeparator2 == null) {
+            this.jSeparator2 = new JSeparator();
+            this.jSeparator2.setPreferredSize(new java.awt.Dimension(117, 6));
+            this.jSeparator2.setLayout(null);
+            this.jSeparator2.setBounds(1, 20, 136, 5);
         }
-        return jSeparator2;
+        return this.jSeparator2;
     }
 
     /**
@@ -692,16 +696,16 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel3x() {
-        if (jLabel3 == null) {
-            jLabel3 = new JLabel();
-            jLabel3.setText("Type");
-            jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
-            jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14));
-            jLabel3.setPreferredSize(new java.awt.Dimension(152, 39));
-            jLabel3.setLayout(null);
-            jLabel3.setBounds(2, -3, 135, 26);
+        if (this.jLabel3 == null) {
+            this.jLabel3 = new JLabel();
+            this.jLabel3.setText("Type");
+            this.jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+            this.jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            this.jLabel3.setPreferredSize(new java.awt.Dimension(152, 39));
+            this.jLabel3.setLayout(null);
+            this.jLabel3.setBounds(2, -3, 135, 26);
         }
-        return jLabel3;
+        return this.jLabel3;
     }
 
     /**
@@ -712,13 +716,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel4x() {
-        if (jLabelCreature == null) {
-            jLabelCreature = new JLabel();
-            jLabelCreature.setText("Creature:");
-            jLabelCreature.setLayout(null);
-            jLabelCreature.setBounds(10, 53, 127, 13);
+        if (this.jLabelCreature == null) {
+            this.jLabelCreature = new JLabel();
+            this.jLabelCreature.setText("Creature:");
+            this.jLabelCreature.setLayout(null);
+            this.jLabelCreature.setBounds(10, 53, 127, 13);
         }
-        return jLabelCreature;
+        return this.jLabelCreature;
     }
 
     /**
@@ -729,13 +733,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel5x() {
-        if (jLabelEnchant == null) {
-            jLabelEnchant = new JLabel();
-            jLabelEnchant.setText("Enchant:");
-            jLabelEnchant.setLayout(null);
-            jLabelEnchant.setBounds(10, 79, 127, 13);
+        if (this.jLabelEnchant == null) {
+            this.jLabelEnchant = new JLabel();
+            this.jLabelEnchant.setText("Enchant:");
+            this.jLabelEnchant.setLayout(null);
+            this.jLabelEnchant.setBounds(10, 79, 127, 13);
         }
-        return jLabelEnchant;
+        return this.jLabelEnchant;
     }
 
     /**
@@ -746,13 +750,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel6x() {
-        if (jLabelInstant == null) {
-            jLabelInstant = new JLabel();
-            jLabelInstant.setText("Instant:");
-            jLabelInstant.setLayout(null);
-            jLabelInstant.setBounds(10, 105, 127, 14);
+        if (this.jLabelInstant == null) {
+            this.jLabelInstant = new JLabel();
+            this.jLabelInstant.setText("Instant:");
+            this.jLabelInstant.setLayout(null);
+            this.jLabelInstant.setBounds(10, 105, 127, 14);
         }
-        return jLabelInstant;
+        return this.jLabelInstant;
     }
 
     /**
@@ -763,13 +767,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel7x() {
-        if (jLabelLandType == null) {
-            jLabelLandType = new JLabel();
-            jLabelLandType.setText("Land:");
-            jLabelLandType.setLayout(null);
-            jLabelLandType.setBounds(10, 130, 127, 13);
+        if (this.jLabelLandType == null) {
+            this.jLabelLandType = new JLabel();
+            this.jLabelLandType.setText("Land:");
+            this.jLabelLandType.setLayout(null);
+            this.jLabelLandType.setBounds(10, 130, 127, 13);
         }
-        return jLabelLandType;
+        return this.jLabelLandType;
     }
 
     /**
@@ -780,13 +784,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel8x() {
-        if (jLabelPlaneswalker == null) {
-            jLabelPlaneswalker = new JLabel();
-            jLabelPlaneswalker.setText("Planeswalker:");
-            jLabelPlaneswalker.setLayout(null);
-            jLabelPlaneswalker.setBounds(10, 156, 127, 13);
+        if (this.jLabelPlaneswalker == null) {
+            this.jLabelPlaneswalker = new JLabel();
+            this.jLabelPlaneswalker.setText("Planeswalker:");
+            this.jLabelPlaneswalker.setLayout(null);
+            this.jLabelPlaneswalker.setBounds(10, 156, 127, 13);
         }
-        return jLabelPlaneswalker;
+        return this.jLabelPlaneswalker;
     }
 
     /**
@@ -797,13 +801,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel10() {
-        if (jLabelSorcery == null) {
-            jLabelSorcery = new JLabel();
-            jLabelSorcery.setText("Sorcery:");
-            jLabelSorcery.setLayout(null);
-            jLabelSorcery.setBounds(10, 182, 127, 11);
+        if (this.jLabelSorcery == null) {
+            this.jLabelSorcery = new JLabel();
+            this.jLabelSorcery.setText("Sorcery:");
+            this.jLabelSorcery.setLayout(null);
+            this.jLabelSorcery.setBounds(10, 182, 127, 11);
         }
-        return jLabelSorcery;
+        return this.jLabelSorcery;
     }
 
     /**
@@ -814,23 +818,23 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel getJPanel3() {
-        if (jPanel3 == null) {
-            jPanel3 = new JPanel();
-            jPanel3.setBackground(new java.awt.Color(192, 192, 192));
-            jPanel3.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel3.setLayout(null);
-            jPanel3.setBounds(302, 35, 137, 203);
-            jPanel3.add(getJLabel1xxxx());
-            jPanel3.add(getJSeparator3());
-            jPanel3.add(getJLabel4xx());
-            jPanel3.add(getJLabel5xx());
-            jPanel3.add(getJLabel6xx());
-            jPanel3.add(getJLabel7xx());
-            jPanel3.add(getJLabel8xx());
-            jPanel3.add(getJLabel9());
-            jPanel3.add(getJLabel10x());
+        if (this.jPanel3 == null) {
+            this.jPanel3 = new JPanel();
+            this.jPanel3.setBackground(new java.awt.Color(192, 192, 192));
+            this.jPanel3.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel3.setLayout(null);
+            this.jPanel3.setBounds(302, 35, 137, 203);
+            this.jPanel3.add(this.getJLabel1xxxx());
+            this.jPanel3.add(this.getJSeparator3());
+            this.jPanel3.add(this.getJLabel4xx());
+            this.jPanel3.add(this.getJLabel5xx());
+            this.jPanel3.add(this.getJLabel6xx());
+            this.jPanel3.add(this.getJLabel7xx());
+            this.jPanel3.add(this.getJLabel8xx());
+            this.jPanel3.add(this.getJLabel9());
+            this.jPanel3.add(this.getJLabel10x());
         }
-        return jPanel3;
+        return this.jPanel3;
     }
 
     /**
@@ -841,14 +845,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1xxxx() {
-        if (jLabelZeroMana == null) {
-            jLabelZeroMana = new JLabel();
-            jLabelZeroMana.setText("Zero mana:");
-            jLabelZeroMana.setPreferredSize(new java.awt.Dimension(105, 12));
-            jLabelZeroMana.setLayout(null);
-            jLabelZeroMana.setBounds(10, 28, 127, 13);
+        if (this.jLabelZeroMana == null) {
+            this.jLabelZeroMana = new JLabel();
+            this.jLabelZeroMana.setText("Zero mana:");
+            this.jLabelZeroMana.setPreferredSize(new java.awt.Dimension(105, 12));
+            this.jLabelZeroMana.setLayout(null);
+            this.jLabelZeroMana.setBounds(10, 28, 127, 13);
         }
-        return jLabelZeroMana;
+        return this.jLabelZeroMana;
     }
 
     /**
@@ -859,13 +863,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JSeparator} object.
      */
     private JSeparator getJSeparator3() {
-        if (jSeparator3 == null) {
-            jSeparator3 = new JSeparator();
-            jSeparator3.setPreferredSize(new java.awt.Dimension(117, 6));
-            jSeparator3.setLayout(null);
-            jSeparator3.setBounds(1, 20, 136, 5);
+        if (this.jSeparator3 == null) {
+            this.jSeparator3 = new JSeparator();
+            this.jSeparator3.setPreferredSize(new java.awt.Dimension(117, 6));
+            this.jSeparator3.setLayout(null);
+            this.jSeparator3.setBounds(1, 20, 136, 5);
         }
-        return jSeparator3;
+        return this.jSeparator3;
     }
 
     /**
@@ -876,16 +880,16 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel4xx() {
-        if (jLabelManaCost == null) {
-            jLabelManaCost = new JLabel();
-            jLabelManaCost.setText("Mana cost");
-            jLabelManaCost.setHorizontalAlignment(SwingConstants.CENTER);
-            jLabelManaCost.setFont(new java.awt.Font("Segoe UI", 0, 14));
-            jLabelManaCost.setPreferredSize(new java.awt.Dimension(152, 39));
-            jLabelManaCost.setLayout(null);
-            jLabelManaCost.setBounds(2, -3, 135, 26);
+        if (this.jLabelManaCost == null) {
+            this.jLabelManaCost = new JLabel();
+            this.jLabelManaCost.setText("Mana cost");
+            this.jLabelManaCost.setHorizontalAlignment(SwingConstants.CENTER);
+            this.jLabelManaCost.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            this.jLabelManaCost.setPreferredSize(new java.awt.Dimension(152, 39));
+            this.jLabelManaCost.setLayout(null);
+            this.jLabelManaCost.setBounds(2, -3, 135, 26);
         }
-        return jLabelManaCost;
+        return this.jLabelManaCost;
     }
 
     /**
@@ -896,13 +900,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel5xx() {
-        if (jLabelOneMana == null) {
-            jLabelOneMana = new JLabel();
-            jLabelOneMana.setText("One mana:");
-            jLabelOneMana.setLayout(null);
-            jLabelOneMana.setBounds(10, 53, 127, 13);
+        if (this.jLabelOneMana == null) {
+            this.jLabelOneMana = new JLabel();
+            this.jLabelOneMana.setText("One mana:");
+            this.jLabelOneMana.setLayout(null);
+            this.jLabelOneMana.setBounds(10, 53, 127, 13);
         }
-        return jLabelOneMana;
+        return this.jLabelOneMana;
     }
 
     /**
@@ -913,13 +917,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel6xx() {
-        if (jLabelTwoMana == null) {
-            jLabelTwoMana = new JLabel();
-            jLabelTwoMana.setText("Two mana:");
-            jLabelTwoMana.setLayout(null);
-            jLabelTwoMana.setBounds(10, 79, 127, 13);
+        if (this.jLabelTwoMana == null) {
+            this.jLabelTwoMana = new JLabel();
+            this.jLabelTwoMana.setText("Two mana:");
+            this.jLabelTwoMana.setLayout(null);
+            this.jLabelTwoMana.setBounds(10, 79, 127, 13);
         }
-        return jLabelTwoMana;
+        return this.jLabelTwoMana;
     }
 
     /**
@@ -930,13 +934,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel7xx() {
-        if (jLabelThreeMana == null) {
-            jLabelThreeMana = new JLabel();
-            jLabelThreeMana.setText("Three mana:");
-            jLabelThreeMana.setLayout(null);
-            jLabelThreeMana.setBounds(10, 105, 127, 14);
+        if (this.jLabelThreeMana == null) {
+            this.jLabelThreeMana = new JLabel();
+            this.jLabelThreeMana.setText("Three mana:");
+            this.jLabelThreeMana.setLayout(null);
+            this.jLabelThreeMana.setBounds(10, 105, 127, 14);
         }
-        return jLabelThreeMana;
+        return this.jLabelThreeMana;
     }
 
     /**
@@ -947,13 +951,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel8xx() {
-        if (jLabelFourMana == null) {
-            jLabelFourMana = new JLabel();
-            jLabelFourMana.setText("Four mana:");
-            jLabelFourMana.setLayout(null);
-            jLabelFourMana.setBounds(10, 130, 127, 13);
+        if (this.jLabelFourMana == null) {
+            this.jLabelFourMana = new JLabel();
+            this.jLabelFourMana.setText("Four mana:");
+            this.jLabelFourMana.setLayout(null);
+            this.jLabelFourMana.setBounds(10, 130, 127, 13);
         }
-        return jLabelFourMana;
+        return this.jLabelFourMana;
     }
 
     /**
@@ -964,13 +968,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel9() {
-        if (jLabelFiveMana == null) {
-            jLabelFiveMana = new JLabel();
-            jLabelFiveMana.setText("Five mana:");
-            jLabelFiveMana.setLayout(null);
-            jLabelFiveMana.setBounds(10, 156, 127, 13);
+        if (this.jLabelFiveMana == null) {
+            this.jLabelFiveMana = new JLabel();
+            this.jLabelFiveMana.setText("Five mana:");
+            this.jLabelFiveMana.setLayout(null);
+            this.jLabelFiveMana.setBounds(10, 156, 127, 13);
         }
-        return jLabelFiveMana;
+        return this.jLabelFiveMana;
     }
 
     /**
@@ -981,13 +985,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel10x() {
-        if (jLabelSixMana == null) {
-            jLabelSixMana = new JLabel();
-            jLabelSixMana.setText("Six and more:");
-            jLabelSixMana.setLayout(null);
-            jLabelSixMana.setBounds(10, 182, 127, 11);
+        if (this.jLabelSixMana == null) {
+            this.jLabelSixMana = new JLabel();
+            this.jLabelSixMana.setText("Six and more:");
+            this.jLabelSixMana.setLayout(null);
+            this.jLabelSixMana.setBounds(10, 182, 127, 11);
         }
-        return jLabelSixMana;
+        return this.jLabelSixMana;
     }
 
     /**
@@ -998,34 +1002,34 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JList} object.
      */
     private JList getJList1() {
-        List<CardPrinted> rList = deck.toFlatList();
+        final List<CardPrinted> rList = this.deck.toFlatList();
 
         Collections.shuffle(rList, MyRandom.getRandom());
         Collections.shuffle(rList, MyRandom.getRandom());
 
         ListModel jList1Model;
-        if (jListFirstHand == null) {
-            jListFirstHand = new JList();
+        if (this.jListFirstHand == null) {
+            this.jListFirstHand = new JList();
         }
 
         if (rList.size() >= 40) {
-            jList1Model = new DefaultComboBoxModel(new String[] {rList.get(0).getName(), rList.get(1).getName(),
+            jList1Model = new DefaultComboBoxModel(new String[] { rList.get(0).getName(), rList.get(1).getName(),
                     rList.get(2).getName(), rList.get(3).getName(), rList.get(4).getName(), rList.get(5).getName(),
-                    rList.get(6).getName()});
+                    rList.get(6).getName() });
 
         } else {
-            jList1Model = new DefaultComboBoxModel(new String[] {"Few cards."});
+            jList1Model = new DefaultComboBoxModel(new String[] { "Few cards." });
         }
 
-        jListFirstHand.setModel(jList1Model);
-        jListFirstHand.setLayout(null);
-        jListFirstHand.setBackground(new java.awt.Color(192, 192, 192));
-        jListFirstHand.setSelectionBackground(new java.awt.Color(192, 192, 192));
-        jListFirstHand.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jListFirstHand.setFixedCellHeight(24);
-        jListFirstHand.setBounds(2, 21, 133, 167);
+        this.jListFirstHand.setModel(jList1Model);
+        this.jListFirstHand.setLayout(null);
+        this.jListFirstHand.setBackground(new java.awt.Color(192, 192, 192));
+        this.jListFirstHand.setSelectionBackground(new java.awt.Color(192, 192, 192));
+        this.jListFirstHand.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        this.jListFirstHand.setFixedCellHeight(24);
+        this.jListFirstHand.setBounds(2, 21, 133, 167);
 
-        return jListFirstHand;
+        return this.jListFirstHand;
     }
 
     /**
@@ -1036,29 +1040,29 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel getJPanel4() {
-        if (jPanel4 == null) {
-            jPanel4 = new JPanel();
-            jPanel4.setBackground(new java.awt.Color(192, 192, 192));
-            jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel4.setLayout(null);
-            jPanel4.setBounds(451, 35, 137, 202);
-            jPanel4.add(getJSeparator4());
-            jPanel4.add(getJLabel4xxx());
-            jPanel4.add(getJList1());
-            jPanel4.add(getJButton1());
+        if (this.jPanel4 == null) {
+            this.jPanel4 = new JPanel();
+            this.jPanel4.setBackground(new java.awt.Color(192, 192, 192));
+            this.jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel4.setLayout(null);
+            this.jPanel4.setBounds(451, 35, 137, 202);
+            this.jPanel4.add(this.getJSeparator4());
+            this.jPanel4.add(this.getJLabel4xxx());
+            this.jPanel4.add(this.getJList1());
+            this.jPanel4.add(this.getJButton1());
         } else {
-            jPanel4.removeAll();
-            MigLayout jPanel4Layout = new MigLayout();
-            jPanel4.setBackground(new java.awt.Color(192, 192, 192));
-            jPanel4.setPreferredSize(new java.awt.Dimension(139, 201));
-            jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel4.setLayout(jPanel4Layout);
-            jPanel4.add(getJSeparator4());
-            jPanel4.add(getJLabel4xxx());
-            jPanel4.add(getJList1());
-            jPanel4.add(getJButton1());
+            this.jPanel4.removeAll();
+            final MigLayout jPanel4Layout = new MigLayout();
+            this.jPanel4.setBackground(new java.awt.Color(192, 192, 192));
+            this.jPanel4.setPreferredSize(new java.awt.Dimension(139, 201));
+            this.jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel4.setLayout(jPanel4Layout);
+            this.jPanel4.add(this.getJSeparator4());
+            this.jPanel4.add(this.getJLabel4xxx());
+            this.jPanel4.add(this.getJList1());
+            this.jPanel4.add(this.getJButton1());
         }
-        return jPanel4;
+        return this.jPanel4;
 
     }
 
@@ -1070,13 +1074,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JSeparator} object.
      */
     private JSeparator getJSeparator4() {
-        if (jSeparator4 == null) {
-            jSeparator4 = new JSeparator();
-            jSeparator4.setPreferredSize(new java.awt.Dimension(138, 8));
-            jSeparator4.setLayout(null);
-            jSeparator4.setBounds(0, 19, 137, 7);
+        if (this.jSeparator4 == null) {
+            this.jSeparator4 = new JSeparator();
+            this.jSeparator4.setPreferredSize(new java.awt.Dimension(138, 8));
+            this.jSeparator4.setLayout(null);
+            this.jSeparator4.setBounds(0, 19, 137, 7);
         }
-        return jSeparator4;
+        return this.jSeparator4;
     }
 
     /**
@@ -1087,16 +1091,16 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel4xxx() {
-        if (jLabel4 == null) {
-            jLabel4 = new JLabel();
-            jLabel4.setText("Random start hand");
-            jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
-            jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14));
-            jLabel4.setPreferredSize(new java.awt.Dimension(136, 24));
-            jLabel4.setLayout(null);
-            jLabel4.setBounds(2, 0, 135, 20);
+        if (this.jLabel4 == null) {
+            this.jLabel4 = new JLabel();
+            this.jLabel4.setText("Random start hand");
+            this.jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
+            this.jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            this.jLabel4.setPreferredSize(new java.awt.Dimension(136, 24));
+            this.jLabel4.setLayout(null);
+            this.jLabel4.setBounds(2, 0, 135, 20);
         }
-        return jLabel4;
+        return this.jLabel4;
     }
 
     /**
@@ -1108,25 +1112,26 @@ public class DeckAnalysis extends javax.swing.JDialog {
      */
     private JButton getJButton1() {
 
-        if (jButtonRegenerate == null) {
-            if (deck.countAll() >= 40) {
-                jButtonRegenerate = new JButton();
-                jButtonRegenerate.setLayout(null);
-                jButtonRegenerate.setText("Regenerate hand");
-                jButtonRegenerate.setPreferredSize(new java.awt.Dimension(139, 21));
-                jButtonRegenerate.setBounds(2, 189, 133, 13);
-                jButtonRegenerate.addActionListener(new java.awt.event.ActionListener() {
+        if (this.jButtonRegenerate == null) {
+            if (this.deck.countAll() >= 40) {
+                this.jButtonRegenerate = new JButton();
+                this.jButtonRegenerate.setLayout(null);
+                this.jButtonRegenerate.setText("Regenerate hand");
+                this.jButtonRegenerate.setPreferredSize(new java.awt.Dimension(139, 21));
+                this.jButtonRegenerate.setBounds(2, 189, 133, 13);
+                this.jButtonRegenerate.addActionListener(new java.awt.event.ActionListener() {
+                    @Override
                     public void actionPerformed(final ActionEvent e) {
-                        jButtonRegenerate_actionPerformed(e);
+                        DeckAnalysis.this.jButtonRegenerateActionPerformed(e);
                     }
                 });
             } else {
-                jButtonRegenerate = new JButton();
-                jButtonRegenerate.setBounds(2, 189, 133, 13);
-                jButtonRegenerate.setVisible(false);
+                this.jButtonRegenerate = new JButton();
+                this.jButtonRegenerate.setBounds(2, 189, 133, 13);
+                this.jButtonRegenerate.setVisible(false);
             }
         }
-        return jButtonRegenerate;
+        return this.jButtonRegenerate;
     }
 
     /**
@@ -1137,18 +1142,18 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void jButtonRegenerate_actionPerformed(final ActionEvent e) {
-        getContentPane().removeAll();
-        getContentPane().add(getJPanel5());
-        getContentPane().add(getJLabel1xx());
-        getContentPane().add(getJButtonOk());
-        getContentPane().add(getJPanel1());
-        getContentPane().add(getJPanel2());
-        getContentPane().add(getJPanel3());
-        getContentPane().add(getJPanel4());
-        getContentPane().add(getJPanel5());
-        getContentPane().add(getJLabel1xxxxx());
-        getContentPane().repaint();
+    final void jButtonRegenerateActionPerformed(final ActionEvent e) {
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.getJPanel5());
+        this.getContentPane().add(this.getJLabel1xx());
+        this.getContentPane().add(this.getJButtonOk());
+        this.getContentPane().add(this.getJPanel1());
+        this.getContentPane().add(this.getJPanel2());
+        this.getContentPane().add(this.getJPanel3());
+        this.getContentPane().add(this.getJPanel4());
+        this.getContentPane().add(this.getJPanel5());
+        this.getContentPane().add(this.getJLabel1xxxxx());
+        this.getContentPane().repaint();
 
     }
 
@@ -1160,14 +1165,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JPanel} object.
      */
     private JPanel getJPanel5() {
-        if (jPanel5 == null) {
-            jPanel5 = new JPanel();
-            jPanel5.setLayout(null);
-            jPanel5.setBounds(5, 262, 583, 270);
-            jPanel5.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            jPanel5.add(getJScrollPane1());
+        if (this.jPanel5 == null) {
+            this.jPanel5 = new JPanel();
+            this.jPanel5.setLayout(null);
+            this.jPanel5.setBounds(5, 262, 583, 270);
+            this.jPanel5.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            this.jPanel5.add(this.getJScrollPane1());
         }
-        return jPanel5;
+        return this.jPanel5;
     }
 
     /**
@@ -1178,14 +1183,14 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JTable} object.
      */
     private JTable getJTable1() {
-        if (jTable1 == null) {
-            DefaultTableModel dm = new DefaultTableModel();
-            dm.setDataVector(new Object[][] { {} }, new Object[] {"Card", "Qty", "1st", "2nd", "3rd", "4th", "5th",
-                    "6th", "7th"});
+        if (this.jTable1 == null) {
+            final DefaultTableModel dm = new DefaultTableModel();
+            dm.setDataVector(new Object[][] { {} }, new Object[] { "Card", "Qty", "1st", "2nd", "3rd", "4th", "5th",
+                    "6th", "7th" });
 
-            jTable1 = new JTable(dm);
-            List<CardPrinted> rList = deck.toFlatList();
-            String[] cardsName = new String[rList.size()];
+            this.jTable1 = new JTable(dm);
+            final List<CardPrinted> rList = this.deck.toFlatList();
+            final String[] cardsName = new String[rList.size()];
             int cCount;
             float fCount;
             float firstTurnF, secondTurnF, thirdTurnF, fourthTurnF, fivethTurnF, sixthTurnF, seventhTurnF;
@@ -1194,114 +1199,114 @@ public class DeckAnalysis extends javax.swing.JDialog {
                 cardsName[i] = rList.get(i).getName();
             }
             Arrays.sort(cardsName);
-            jTable1.setValueAt("Few cards.", 0, 0);
+            this.jTable1.setValueAt("Few cards.", 0, 0);
 
             if (rList.size() >= 40) {
-                jTable1.setValueAt(cardsName[0], 0, 0);
+                this.jTable1.setValueAt(cardsName[0], 0, 0);
                 cCount = 1;
                 for (int i = 1; i < cardsName.length; i++) {
                     if (cardsName[i].equals(cardsName[i - 1])) {
                         cCount = cCount + 1;
 
                     } else {
-                        dm.addRow(new Object[][] {{}});
-                        jTable1.setValueAt(cardsName[i], dm.getRowCount() - 1, 0);
-                        jTable1.setValueAt(cCount, dm.getRowCount() - 2, 1);
+                        dm.addRow(new Object[][] { {} });
+                        this.jTable1.setValueAt(cardsName[i], dm.getRowCount() - 1, 0);
+                        this.jTable1.setValueAt(cCount, dm.getRowCount() - 2, 1);
                         fCount = cCount;
 
                         firstTurnF = fCount / rList.size();
                         BigDecimal firstTurn = new BigDecimal(firstTurnF * 100);
                         firstTurn = firstTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount() - 2, 2);
+                        this.jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount() - 2, 2);
 
-                        secondTurnF = (1 - firstTurnF) * fCount / (rList.size() - 1) + firstTurnF;
+                        secondTurnF = (((1 - firstTurnF) * fCount) / (rList.size() - 1)) + firstTurnF;
                         BigDecimal secondTurn = new BigDecimal(secondTurnF * 100);
                         secondTurn = secondTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount() - 2, 3);
+                        this.jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount() - 2, 3);
 
-                        thirdTurnF = (1 - secondTurnF) * fCount / (rList.size() - 2) + secondTurnF;
+                        thirdTurnF = (((1 - secondTurnF) * fCount) / (rList.size() - 2)) + secondTurnF;
                         BigDecimal thirdTurn = new BigDecimal(thirdTurnF * 100);
                         thirdTurn = thirdTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount() - 2, 4);
+                        this.jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount() - 2, 4);
 
-                        fourthTurnF = (1 - thirdTurnF) * fCount / (rList.size() - 3) + thirdTurnF;
+                        fourthTurnF = (((1 - thirdTurnF) * fCount) / (rList.size() - 3)) + thirdTurnF;
                         BigDecimal fourthTurn = new BigDecimal(fourthTurnF * 100);
                         fourthTurn = fourthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount() - 2, 5);
+                        this.jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount() - 2, 5);
 
-                        fivethTurnF = (1 - fourthTurnF) * fCount / (rList.size() - 4) + fourthTurnF;
+                        fivethTurnF = (((1 - fourthTurnF) * fCount) / (rList.size() - 4)) + fourthTurnF;
                         BigDecimal fivethTurn = new BigDecimal(fivethTurnF * 100);
                         fivethTurn = fivethTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount() - 2, 6);
+                        this.jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount() - 2, 6);
 
-                        sixthTurnF = (1 - fivethTurnF) * fCount / (rList.size() - 5) + fivethTurnF;
+                        sixthTurnF = (((1 - fivethTurnF) * fCount) / (rList.size() - 5)) + fivethTurnF;
                         BigDecimal sixthTurn = new BigDecimal(sixthTurnF * 100);
                         sixthTurn = sixthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount() - 2, 7);
+                        this.jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount() - 2, 7);
 
-                        seventhTurnF = (1 - sixthTurnF) * fCount / (rList.size() - 6) + sixthTurnF;
+                        seventhTurnF = (((1 - sixthTurnF) * fCount) / (rList.size() - 6)) + sixthTurnF;
                         BigDecimal seventhTurn = new BigDecimal(seventhTurnF * 100);
                         seventhTurn = seventhTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount() - 2, 8);
+                        this.jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount() - 2, 8);
 
                         cCount = 1;
                     }
-                    if (i == cardsName.length - 1) {
-                        jTable1.setValueAt(cCount, dm.getRowCount() - 1, 1);
+                    if (i == (cardsName.length - 1)) {
+                        this.jTable1.setValueAt(cCount, dm.getRowCount() - 1, 1);
                         fCount = cCount;
 
                         firstTurnF = fCount / rList.size();
                         BigDecimal firstTurn = new BigDecimal(firstTurnF * 100);
                         firstTurn = firstTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount() - 1, 2);
+                        this.jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount() - 1, 2);
 
-                        secondTurnF = (1 - firstTurnF) * fCount / (rList.size() - 1) + firstTurnF;
+                        secondTurnF = (((1 - firstTurnF) * fCount) / (rList.size() - 1)) + firstTurnF;
                         BigDecimal secondTurn = new BigDecimal(secondTurnF * 100);
                         secondTurn = secondTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount() - 1, 3);
+                        this.jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount() - 1, 3);
 
-                        thirdTurnF = (1 - secondTurnF) * fCount / (rList.size() - 2) + secondTurnF;
+                        thirdTurnF = (((1 - secondTurnF) * fCount) / (rList.size() - 2)) + secondTurnF;
                         BigDecimal thirdTurn = new BigDecimal(thirdTurnF * 100);
                         thirdTurn = thirdTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount() - 1, 4);
+                        this.jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount() - 1, 4);
 
-                        fourthTurnF = (1 - thirdTurnF) * fCount / (rList.size() - 3) + thirdTurnF;
+                        fourthTurnF = (((1 - thirdTurnF) * fCount) / (rList.size() - 3)) + thirdTurnF;
                         BigDecimal fourthTurn = new BigDecimal(fourthTurnF * 100);
                         fourthTurn = fourthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount() - 1, 5);
+                        this.jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount() - 1, 5);
 
-                        fivethTurnF = (1 - fourthTurnF) * fCount / (rList.size() - 4) + fourthTurnF;
+                        fivethTurnF = (((1 - fourthTurnF) * fCount) / (rList.size() - 4)) + fourthTurnF;
                         BigDecimal fivethTurn = new BigDecimal(fivethTurnF * 100);
                         fivethTurn = fivethTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount() - 1, 6);
+                        this.jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount() - 1, 6);
 
-                        sixthTurnF = (1 - fivethTurnF) * fCount / (rList.size() - 5) + fivethTurnF;
+                        sixthTurnF = (((1 - fivethTurnF) * fCount) / (rList.size() - 5)) + fivethTurnF;
                         BigDecimal sixthTurn = new BigDecimal(sixthTurnF * 100);
                         sixthTurn = sixthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount() - 1, 7);
+                        this.jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount() - 1, 7);
 
-                        seventhTurnF = (1 - sixthTurnF) * fCount / (rList.size() - 6) + sixthTurnF;
+                        seventhTurnF = (((1 - sixthTurnF) * fCount) / (rList.size() - 6)) + sixthTurnF;
                         BigDecimal seventhTurn = new BigDecimal(seventhTurnF * 100);
                         seventhTurn = seventhTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
-                        jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount() - 1, 8);
+                        this.jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount() - 1, 8);
 
                     }
 
                 }
             }
 
-            jTable1.getColumn("Qty").setMaxWidth(50);
-            jTable1.getColumn("1st").setMaxWidth(50);
-            jTable1.getColumn("2nd").setMaxWidth(50);
-            jTable1.getColumn("3rd").setMaxWidth(50);
-            jTable1.getColumn("4th").setMaxWidth(50);
-            jTable1.getColumn("5th").setMaxWidth(50);
-            jTable1.getColumn("6th").setMaxWidth(50);
-            jTable1.getColumn("7th").setMaxWidth(50);
-            jTable1.setRowHeight(18);
-            jTable1.setPreferredSize(new java.awt.Dimension(576, 18 * dm.getRowCount() + 3));
+            this.jTable1.getColumn("Qty").setMaxWidth(50);
+            this.jTable1.getColumn("1st").setMaxWidth(50);
+            this.jTable1.getColumn("2nd").setMaxWidth(50);
+            this.jTable1.getColumn("3rd").setMaxWidth(50);
+            this.jTable1.getColumn("4th").setMaxWidth(50);
+            this.jTable1.getColumn("5th").setMaxWidth(50);
+            this.jTable1.getColumn("6th").setMaxWidth(50);
+            this.jTable1.getColumn("7th").setMaxWidth(50);
+            this.jTable1.setRowHeight(18);
+            this.jTable1.setPreferredSize(new java.awt.Dimension(576, (18 * dm.getRowCount()) + 3));
         }
-        return jTable1;
+        return this.jTable1;
     }
 
     /**
@@ -1312,13 +1317,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JScrollPane} object.
      */
     private JScrollPane getJScrollPane1() {
-        if (jScrollPane1 == null) {
-            jScrollPane1 = new JScrollPane();
-            jScrollPane1.setBounds(2, 2, 582, 268);
-            jScrollPane1.setSize(580, 268);
-            jScrollPane1.setViewportView(getJTable1());
+        if (this.jScrollPane1 == null) {
+            this.jScrollPane1 = new JScrollPane();
+            this.jScrollPane1.setBounds(2, 2, 582, 268);
+            this.jScrollPane1.setSize(580, 268);
+            this.jScrollPane1.setViewportView(this.getJTable1());
         }
-        return jScrollPane1;
+        return this.jScrollPane1;
     }
 
     /**
@@ -1329,13 +1334,13 @@ public class DeckAnalysis extends javax.swing.JDialog {
      * @return a {@link javax.swing.JLabel} object.
      */
     private JLabel getJLabel1xxxxx() {
-        if (jLabel1 == null) {
-            jLabel1 = new JLabel();
-            jLabel1.setText("Draw Probabilities:");
-            jLabel1.setLayout(null);
-            jLabel1.setBounds(7, 237, 447, 25);
+        if (this.jLabel1 == null) {
+            this.jLabel1 = new JLabel();
+            this.jLabel1.setText("Draw Probabilities:");
+            this.jLabel1.setLayout(null);
+            this.jLabel1.setBounds(7, 237, 447, 25);
         }
-        return jLabel1;
+        return this.jLabel1;
     }
 
 }
