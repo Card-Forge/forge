@@ -319,7 +319,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @param key
      *            a {@link java.lang.String} object.
-     * @return a {@link treeProperties.TreeProperties} object.
+     * @return a {@link tree.properties.TreeProperties} object.
      */
     public final TreeProperties getChildProperties(final String key) {
         return (TreeProperties) getProperty(key, "--" + CHILD, true);

@@ -1,3 +1,3 @@
-/** Forge Card Game */
+/** Forge Card Game. */
 package forge.game.limited;
 

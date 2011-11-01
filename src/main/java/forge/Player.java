@@ -532,7 +532,7 @@ public abstract class Player extends GameEntity {
         if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
             return damage;
         }
-        
+
         if (hasProtectionFrom(source)) {
             return 0;
         }
@@ -912,7 +912,8 @@ public abstract class Player extends GameEntity {
      * @see forge.GameEntity#hasKeyword(java.lang.String)
      */
     /**
-     * @param keyword String
+     * @param keyword
+     *            String
      * @return boolean
      */
     public final boolean hasKeyword(final String keyword) {
@@ -928,15 +929,14 @@ public abstract class Player extends GameEntity {
      */
     @Override
     public final boolean canTarget(final SpellAbility sa) {
-        if (hasKeyword("Shroud") 
-                || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
+        if (hasKeyword("Shroud") || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
                 || hasProtectionFrom(sa.getSourceCard())) {
             return false;
         }
 
         return true;
     }
-    
+
     @Override
     public boolean hasProtectionFrom(Card source) {
         if (getKeywords() != null) {
@@ -1397,8 +1397,7 @@ public abstract class Player extends GameEntity {
                         sa.getSourceCard().getController().loseLife(5, c);
                     }
                 };
-                ability.setStackDescription(c.getName() + " - "
-                + sa.getSourceCard().getController() + " loses 5 life.");
+                ability.setStackDescription(c.getName() + " - " + sa.getSourceCard().getController() + " loses 5 life.");
                 AllZone.getStack().add(ability);
             }
         }
@@ -1406,15 +1405,14 @@ public abstract class Player extends GameEntity {
         AllZone.getGameAction().discard_madness(c);
 
         if ((c.hasKeyword("If a spell or ability an opponent controls causes "
-        + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
-        || c.hasKeyword("If a spell or ability an opponent controls causes "
-        + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
-                + "counters on it instead of putting it into your graveyard."))
+                + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
+                .hasKeyword("If a spell or ability an opponent controls causes "
+                        + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
+                        + "counters on it instead of putting it into your graveyard."))
                 && null != sa && !c.getController().equals(sa.getSourceCard().getController())) {
             AllZone.getGameAction().discard_PutIntoPlayInstead(c);
-        } else if (c
-                .hasKeyword("If a spell or ability an opponent controls "
-        + "causes you to discard CARDNAME, return it to your hand.")) {
+        } else if (c.hasKeyword("If a spell or ability an opponent controls "
+                + "causes you to discard CARDNAME, return it to your hand.")) {
         } else {
             AllZone.getGameAction().moveToGraveyard(c);
         }
@@ -1613,7 +1611,7 @@ public abstract class Player extends GameEntity {
         AllZone.getTriggerHandler().runTrigger("Shuffled", runParams);
 
     } // shuffle
-     // //////////////////////////////
+      // //////////////////////////////
 
     // //////////////////////////////
     /**

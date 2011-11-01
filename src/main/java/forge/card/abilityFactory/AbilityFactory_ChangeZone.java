@@ -834,7 +834,7 @@ public final class AbilityFactory_ChangeZone {
                     if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
                     }
-                    
+
                     if (params.containsKey("Attacking")) {
                         AllZone.getCombat().addAttacker(c);
                     }
@@ -947,9 +947,9 @@ public final class AbilityFactory_ChangeZone {
                 c = AbilityFactory_ChangeZone.basicManaFixing(fetchList, type);
             } else if (fetchList.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(fetchList); // if only
-                                                                   // creatures
-                                                                   // take the
-                                                                   // best
+                                                                  // creatures
+                                                                  // take the
+                                                                  // best
             } else if (Zone.Battlefield.equals(destination) || Zone.Graveyard.equals(destination)) {
                 c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, af.getHostCard(), false);
             } else if (Zone.Exile.equals(destination)) {
@@ -991,7 +991,7 @@ public final class AbilityFactory_ChangeZone {
                 if (params.containsKey("GainControl")) {
                     c.addController(af.getHostCard());
                 }
-                
+
                 if (params.containsKey("Attacking")) {
                     AllZone.getCombat().addAttacker(c);
                 }
@@ -1386,9 +1386,10 @@ public final class AbilityFactory_ChangeZone {
 
         // Exile and bounce opponents stuff
         if (destination.equals(Zone.Exile) || origin.equals(Zone.Battlefield)) {
-            
-            //don't rush bouncing stuff when not going to attack
-            if(AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
+
+            // don't rush bouncing stuff when not going to attack
+            if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
+                    && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
             }

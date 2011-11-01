@@ -408,7 +408,13 @@ public abstract class GameEntity extends MyObservable {
             enchantedBy.get(i).unEnchantEntity(this);
         }
     }
-    
+
+    /**
+     * 
+     * hasProtectionFrom.
+     * @param source Card
+     * @return boolean
+     */
     public boolean hasProtectionFrom(Card source) {
         return false;
     }

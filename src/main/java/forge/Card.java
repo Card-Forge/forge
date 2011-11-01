@@ -49,7 +49,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the characteristics.
-     *
+     * 
      * @return the characteristics
      */
     public CardCharacteristics getCharacteristics() {
@@ -4491,8 +4491,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 + getCounters(Counters.P1P2)
                 + getCounters(Counters.P1P0)
                 - getCounters(Counters.M1M1)
-                + (2 * getCounters(Counters.P2P2) - (2 * getCounters(Counters.M2M1))
-                        - (2 * getCounters(Counters.M2M2)) - getCounters(Counters.M1M0));
+                + (2 * getCounters(Counters.P2P2) - (2 * getCounters(Counters.M2M1)) - (2 * getCounters(Counters.M2M2)) - getCounters(Counters.M1M0));
         return total;
     }
 
@@ -6253,8 +6252,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         cardType = toMixedCase(cardType);
 
         if (typeContains(cardType)
-                || ((isCreature() || isTribal()) && CardUtil.isACreatureType(cardType)
-                        && typeContains("AllCreatureTypes"))) {
+                || ((isCreature() || isTribal()) && CardUtil.isACreatureType(cardType) && typeContains("AllCreatureTypes"))) {
             return true;
         }
         return false;
@@ -7463,7 +7461,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.hasKeyword("If damage would be dealt to CARDNAME, "
-        + "prevent that damage. Remove a +1/+1 counter from CARDNAME.")) {
+                + "prevent that damage. Remove a +1/+1 counter from CARDNAME.")) {
             restDamage = 0;
             this.subtractCounter(Counters.P1P1, 1);
         }
@@ -8007,7 +8005,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
         getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
     }
-    
+
     @Override
     public boolean hasProtectionFrom(Card source) {
         if (source == null) {
@@ -8059,7 +8057,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
 
                 if (kw.equals("Protection from colored spells")
-                        && (source.isInstant() || source.isSorcery() || source.isAura()) && CardFactoryUtil.isColored(source)) {
+                        && (source.isInstant() || source.isSorcery() || source.isAura())
+                        && CardFactoryUtil.isColored(source)) {
                     return true;
                 }
 
@@ -8091,7 +8090,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
-    
+
+    /**
+     * 
+     * is In Zone.
+     * @param zone Constant.Zone
+     * @return boolean
+     */
     public boolean isInZone(final Constant.Zone zone) {
         return AllZone.isCardInZone(this, zone);
     }

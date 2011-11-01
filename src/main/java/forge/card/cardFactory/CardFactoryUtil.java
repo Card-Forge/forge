@@ -2957,12 +2957,12 @@ public class CardFactoryUtil {
             }
             return CardFactoryUtil.doXMath(n, m, c);
         }
-        
-        //Count$ColoredCreatures *a DOMAIN for creatures*
+
+        // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
             someCards.addAll(cardController.getCardsIn(Zone.Battlefield));
             someCards = someCards.filter(CardListFilter.CREATURES);
-            
+
             final String[] colors = { "green", "white", "red", "blue", "black" };
 
             for (int i = 0; i < colors.length; i++) {

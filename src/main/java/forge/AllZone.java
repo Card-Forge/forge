@@ -495,7 +495,17 @@ public final class AllZone implements NewConstants {
 
         return null;
     }
-    
+
+    /**
+     * 
+     * isCardInZone.
+     * 
+     * @param c
+     *            Card
+     * @param zone
+     *            Constant.Zone
+     * @return boolean
+     */
     public static boolean isCardInZone(final Card c, Constant.Zone zone) {
         final FGameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
@@ -506,9 +516,11 @@ public final class AllZone implements NewConstants {
             return true;
         }
 
-        else for (Player p : gameState.getPlayers()) {
-            if(p.getZone(zone).contains(c)) {
-                return true;
+        else {
+            for (Player p : gameState.getPlayers()) {
+                if (p.getZone(zone).contains(c)) {
+                    return true;
+                }
             }
         }
 

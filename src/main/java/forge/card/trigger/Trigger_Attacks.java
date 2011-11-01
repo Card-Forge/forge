@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardList;
-import forge.Player;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -44,11 +43,13 @@ public class Trigger_Attacks extends Trigger {
                 return false;
             }
         }
-        
-        if (mapParams.containsKey("Attacked")) {            
-            if (mapParams.get("Attacked").equals("Player") && StringUtils.isNumeric(runParams2.get("Attacked").toString()) 
-                    && Integer.parseInt(runParams2.get("Attacked").toString()) > 0)
+
+        if (mapParams.containsKey("Attacked")) {
+            if (mapParams.get("Attacked").equals("Player")
+                    && StringUtils.isNumeric(runParams2.get("Attacked").toString())
+                    && Integer.parseInt(runParams2.get("Attacked").toString()) > 0) {
                 return false;
+            }
         }
 
         if (mapParams.containsKey("Alone")) {

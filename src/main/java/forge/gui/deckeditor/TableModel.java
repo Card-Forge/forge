@@ -297,7 +297,6 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * the component's addColumnListener method. When the column event occurs,
      * that object's appropriate method is invoked.
      *
-     * @see ColumnEvent
      */
     class ColumnListener extends MouseAdapter {
 

@@ -932,11 +932,11 @@ public class TriggerHandler {
             // //////////////////////////////////////
             @Override
             public void resolve() {
-                if (!(regtrig instanceof Trigger_Always)) // State triggers
-                                                          // don't do the whole
-                                                          // "Intervening If"
-                                                          // thing.
-                {
+                if (!(regtrig instanceof Trigger_Always)) {
+                 // State triggers
+                    // don't do the whole
+                    // "Intervening If"
+                    // thing.
                     if (!regtrig.requirementsCheck()) {
                         return;
                     }
