@@ -115,7 +115,7 @@ public class GameAction {
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering
         // Battlefield
-        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) {
+        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Stack)) {
             lastKnownInfo = c;
             copied = c;
         } else {
