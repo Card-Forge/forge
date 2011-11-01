@@ -54,12 +54,12 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_discardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
+    public static Input inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
         final SpellAbility sp = sa;
         Input target = new Input() {
             private static final long serialVersionUID = 8822292413831640944L;
 
-            int n = 0;
+            private int n = 0;
 
             @Override
             public void showMessage() {
@@ -110,12 +110,12 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_discard(final int nCards, final SpellAbility sa) {
+    public static Input inputDiscard(final int nCards, final SpellAbility sa) {
         final SpellAbility sp = sa;
         Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
 
-            int n = 0;
+            private int n = 0;
 
             @Override
             public void showMessage() {
@@ -155,7 +155,7 @@ public final class PlayerUtil {
      * 
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_chainsDiscard() {
+    public static Input inputChainsDiscard() {
         Input target = new Input() {
             private static final long serialVersionUID = 2856894846224546303L;
 
@@ -198,8 +198,8 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_sacrificePermanent(final CardList choices, final String message) {
-        return input_sacrificePermanentsFromList(1, choices, message);
+    public static Input inputSacrificePermanent(final CardList choices, final String message) {
+        return inputSacrificePermanentsFromList(1, choices, message);
     } // input_sacrifice()
 
     /**
@@ -212,10 +212,10 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_sacrificePermanents(final int nCards) {
+    public static Input inputSacrificePermanents(final int nCards) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list.remove("Mana Pool"); // is this needed?
-        return input_sacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
+        return inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
     /**
@@ -230,12 +230,12 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_sacrificePermanents(final int nCards, final String type) {
+    public static Input inputSacrificePermanents(final int nCards, final String type) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list.remove("Mana Pool"); // is this needed?
 
         list = list.getType(type);
-        return input_sacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
+        return inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
     } // input_sacrificePermanents()
 
     /**
@@ -252,10 +252,10 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_sacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
+    public static Input inputSacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
         Input target = new Input() {
             private static final long serialVersionUID = 1981791992623774490L;
-            int n = 0;
+            private int n = 0;
 
             @Override
             public void showMessage() {
@@ -294,21 +294,21 @@ public final class PlayerUtil {
      * input_putFromHandToLibrary.
      * </p>
      * 
-     * @param TopOrBottom
+     * @param topOrBottom
      *            a {@link java.lang.String} object.
      * @param num
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      * @since 1.0.15
      */
-    public static Input input_putFromHandToLibrary(final String TopOrBottom, final int num) {
+    public static Input inputPutFromHandToLibrary(final String topOrBottom, final int num) {
         Input target = new Input() {
             private static final long serialVersionUID = 5178077952030689103L;
-            public int n = 0;
+            private int n = 0;
 
             @Override
             public void showMessage() {
-                AllZone.getDisplay().showMessage("Select a card to put on the " + TopOrBottom + " of your library.");
+                AllZone.getDisplay().showMessage("Select a card to put on the " + topOrBottom + " of your library.");
                 ButtonUtil.disableAll();
 
                 if (n == num || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
@@ -325,7 +325,7 @@ public final class PlayerUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(Constant.Zone.Hand)) {
                     int position = 0;
-                    if (TopOrBottom.equalsIgnoreCase("bottom")) {
+                    if (topOrBottom.equalsIgnoreCase("bottom")) {
                         position = -1;
                     }
 

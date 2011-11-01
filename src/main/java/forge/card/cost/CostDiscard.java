@@ -154,7 +154,7 @@ public class CostDiscard extends CostPartWithList {
             payment.setPaidManaPart(this, true);
             this.addToList(source);
         } else if (discType.equals("Hand")) {
-            this.list = handList;
+            this.setList(handList);
             activator.discardHand(ability);
             payment.setPaidManaPart(this, true);
         } else if (discType.equals("LastDrawn")) {
@@ -179,7 +179,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                this.list = activator.discardRandom(c, ability);
+                this.setList(activator.discardRandom(c, ability));
                 payment.setPaidManaPart(this, true);
             } else {
                 final String[] validType = discType.split(";");
@@ -232,7 +232,7 @@ public class CostDiscard extends CostPartWithList {
         }
 
         else if (type.equals("Hand")) {
-            this.list.addAll(hand);
+            this.getList().addAll(hand);
         }
 
         else {
@@ -246,12 +246,12 @@ public class CostDiscard extends CostPartWithList {
             }
 
             if (type.equals("Random")) {
-                this.list = CardListUtil.getRandomSubList(hand, c);
+                this.setList(CardListUtil.getRandomSubList(hand, c));
             } else {
-                this.list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
+                this.setList(ComputerUtil.discardNumTypeAI(c, type.split(";"), ability));
             }
         }
-        return this.list != null;
+        return this.getList() != null;
     }
 
     // Inputs

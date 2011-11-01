@@ -29,8 +29,8 @@ public class Trigger_LandPlayed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public Trigger_LandPlayed(final String n,
-            final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public Trigger_LandPlayed(final String n, final HashMap<String, String> params, final Card host,
+            final boolean intrinsic) {
         super(n, params, host, intrinsic);
     }
 
@@ -53,11 +53,12 @@ public class Trigger_LandPlayed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_LandPlayed(name, mapParams, hostCard, isIntrinsic);
-        copy.setID(ID);
+        final Trigger copy = new Trigger_LandPlayed(this.getName(), this.getMapParams(), this.getHostCard(),
+                this.isIntrinsic());
+        copy.setID(this.getId());
 
-        if (this.overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
 
         return copy;
@@ -66,14 +67,15 @@ public class Trigger_LandPlayed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", runParams.get("Card"));
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }

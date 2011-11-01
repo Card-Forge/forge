@@ -34,28 +34,29 @@ public class Trigger_ChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("Origin")) {
-            if (!mapParams.get("Origin").equals("Any")) {
-                if (mapParams.get("Origin") == null) {
+        if (this.getMapParams().containsKey("Origin")) {
+            if (!this.getMapParams().get("Origin").equals("Any")) {
+                if (this.getMapParams().get("Origin") == null) {
                     return false;
                 }
-                if (!mapParams.get("Origin").equals((String) runParams2.get("Origin"))) {
-                    return false;
-                }
-            }
-        }
-
-        if (mapParams.containsKey("Destination")) {
-            if (!mapParams.get("Destination").equals("Any")) {
-                if (!mapParams.get("Destination").equals((String) runParams2.get("Destination"))) {
+                if (!this.getMapParams().get("Origin").equals(runParams2.get("Origin"))) {
                     return false;
                 }
             }
         }
 
-        if (mapParams.containsKey("ValidCard")) {
-            Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+        if (this.getMapParams().containsKey("Destination")) {
+            if (!this.getMapParams().get("Destination").equals("Any")) {
+                if (!this.getMapParams().get("Destination").equals(runParams2.get("Destination"))) {
+                    return false;
+                }
+            }
+        }
+
+        if (this.getMapParams().containsKey("ValidCard")) {
+            final Card moved = (Card) runParams2.get("Card");
+            if (!moved.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -66,12 +67,12 @@ public class Trigger_ChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_ChangesZone(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_ChangesZone(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -79,6 +80,6 @@ public class Trigger_ChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", runParams.get("Card"));
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 }

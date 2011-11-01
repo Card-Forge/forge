@@ -70,7 +70,7 @@ public class CostTapType extends CostPartWithList {
      *            the c
      */
     public final void addToTappedList(final Card c) {
-        this.list.add(c);
+        this.getList().add(c);
     }
 
     /*
@@ -80,11 +80,11 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             c.untap();
         }
 
-        this.list.clear();
+        this.getList().clear();
     }
 
     /*
@@ -121,7 +121,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             c.tap();
         }
     }
@@ -170,9 +170,9 @@ public class CostTapType extends CostPartWithList {
             // Determine Amount
         }
 
-        this.list = ComputerUtil.chooseTapType(this.getType(), source, tap, c);
+        this.setList(ComputerUtil.chooseTapType(this.getType(), source, tap, c));
 
-        if (this.list == null) {
+        if (this.getList() == null) {
             System.out.println("Couldn't find a valid card to tap for: " + source.getName());
             return false;
         }

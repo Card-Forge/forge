@@ -422,7 +422,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             this.plantBox.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent actionEvent) {
-                    QuestMainPanel.this.questData.getPetManager().usePlant = QuestMainPanel.this.plantBox.isSelected();
+                    QuestMainPanel.this.questData.getPetManager().setUsePlant(QuestMainPanel.this.plantBox.isSelected());
                 }
             });
 

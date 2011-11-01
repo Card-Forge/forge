@@ -35,39 +35,40 @@ public class Trigger_DamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        Card src = (Card) runParams2.get("DamageSource");
-        Object tgt = runParams2.get("DamageTarget");
+        final Card src = (Card) runParams2.get("DamageSource");
+        final Object tgt = runParams2.get("DamageTarget");
 
-        if (mapParams.containsKey("ValidSource")) {
-            if (!src.isValid(mapParams.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
+        if (this.getMapParams().containsKey("ValidSource")) {
+            if (!src.isValid(this.getMapParams().get("ValidSource").split(","), this.getHostCard().getController(),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, mapParams.get("ValidTarget").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidTarget")) {
+            if (!this.matchesValid(tgt, this.getMapParams().get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("CombatDamage")) {
-            if (mapParams.get("CombatDamage").equals("True")) {
+        if (this.getMapParams().containsKey("CombatDamage")) {
+            if (this.getMapParams().get("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams2.get("IsCombatDamage"))) {
                     return false;
                 }
-            } else if (mapParams.get("CombatDamage").equals("False")) {
+            } else if (this.getMapParams().get("CombatDamage").equals("False")) {
                 if (((Boolean) runParams2.get("IsCombatDamage"))) {
                     return false;
                 }
             }
         }
 
-        if (mapParams.containsKey("DamageAmount")) {
-            String fullParam = mapParams.get("DamageAmount");
+        if (this.getMapParams().containsKey("DamageAmount")) {
+            final String fullParam = this.getMapParams().get("DamageAmount");
 
-            String operator = fullParam.substring(0, 2);
-            int operand = Integer.parseInt(fullParam.substring(2));
-            int actualAmount = (Integer) runParams2.get("DamageAmount");
+            final String operator = fullParam.substring(0, 2);
+            final int operand = Integer.parseInt(fullParam.substring(2));
+            final int actualAmount = (Integer) runParams2.get("DamageAmount");
 
             if (!AllZoneUtil.compare(actualAmount, operator, operand)) {
                 return false;
@@ -85,12 +86,12 @@ public class Trigger_DamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_DamageDone(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_DamageDone(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -98,8 +99,8 @@ public class Trigger_DamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Source", runParams.get("DamageSource"));
-        sa.setTriggeringObject("Target", runParams.get("DamageTarget"));
-        sa.setTriggeringObject("DamageAmount", runParams.get("DamageAmount"));
+        sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
+        sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
+        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
     }
 }

@@ -136,7 +136,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
-        AllZone.getInputControl().setInput(PlayerUtil.input_discard(num, sa), duringResolution);
+        AllZone.getInputControl().setInput(PlayerUtil.inputDiscard(num, sa), duringResolution);
 
         // why is CardList returned?
         return new CardList();
@@ -144,7 +144,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        AllZone.getInputControl().setInput(PlayerUtil.input_discardNumUnless(num, uType, sa));
+        AllZone.getInputControl().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
     }
 
     /*
@@ -156,7 +156,7 @@ public class HumanPlayer extends Player {
      * 
      */
     protected final void discardChainsOfMephistopheles() {
-        AllZone.getInputControl().setInput(PlayerUtil.input_chainsDiscard(), true);
+        AllZone.getInputControl().setInput(PlayerUtil.inputChainsDiscard(), true);
     }
 
     /** {@inheritDoc} */
@@ -173,7 +173,7 @@ public class HumanPlayer extends Player {
                     new Object[] { "top", "bottom" });
             libPos = o.toString();
         }
-        AllZone.getInputControl().setInput(PlayerUtil.input_putFromHandToLibrary(libPos, numToLibrary));
+        AllZone.getInputControl().setInput(PlayerUtil.inputPutFromHandToLibrary(libPos, numToLibrary));
     }
 
     /** {@inheritDoc} */
@@ -205,7 +205,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     public final void sacrificePermanent(final String prompt, final CardList choices) {
-        Input in = PlayerUtil.input_sacrificePermanent(choices, prompt);
+        Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
         AllZone.getInputControl().setInput(in);
     }
 

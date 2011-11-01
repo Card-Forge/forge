@@ -41,12 +41,12 @@ public class Trigger_Always extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Always(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Always(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }

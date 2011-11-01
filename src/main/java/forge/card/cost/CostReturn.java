@@ -110,7 +110,7 @@ public class CostReturn extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             AllZone.getGameAction().moveToHand(c);
         }
     }
@@ -156,15 +156,15 @@ public class CostReturn extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         this.resetList();
         if (this.getThis()) {
-            this.list.add(source);
+            this.getList().add(source);
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            this.list = ComputerUtil.chooseReturnType(this.getType(), source, ability.getTargetCard(), c);
-            if (this.list == null) {
+            this.setList(ComputerUtil.chooseReturnType(this.getType(), source, ability.getTargetCard(), c));
+            if (this.getList() == null) {
                 return false;
             }
         }

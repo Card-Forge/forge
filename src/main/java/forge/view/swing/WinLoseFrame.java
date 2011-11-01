@@ -40,22 +40,22 @@ public class WinLoseFrame extends JFrame {
     private final WinLoseModeHandler modeHandler;
 
     /** The btn continue. */
-    public FButton btnContinue;
+    private FButton btnContinue;
 
     /** The btn quit. */
-    public FButton btnQuit;
+    private FButton btnQuit;
 
     /** The btn restart. */
-    public FButton btnRestart;
+    private FButton btnRestart;
 
     /** The lbl title. */
-    public JLabel lblTitle;
+    private JLabel lblTitle;
 
     /** The lbl stats. */
-    public JLabel lblStats;
+    private JLabel lblStats;
 
     /** The pnl custom. */
-    public JPanel pnlCustom;
+    private JPanel pnlCustom;
 
     /**
      * <p>
@@ -94,15 +94,15 @@ public class WinLoseFrame extends JFrame {
 
         // Footer should be at least 150 to keep buttons in-pane on Mac OS X
         // it needs to be > 175 now that skinning is used
-        final int HEAD_HEIGHT = 150;
-        final int FOOT_HEIGHT = 182;
-        final int FRAME_WIDTH_SMALL = 300;
-        final int FRAME_WIDTH_BIG = 600;
+        final int headHeight = 150;
+        final int footHeight = 182;
+        final int frameWidthSmall = 300;
+        final int frameWidthBig = 600;
 
         // Head panel
         final JPanel pnlHead = new JPanel(new MigLayout("wrap, fill"));
         pnlHead.setOpaque(false);
-        contentPanel.add(pnlHead, "width " + FRAME_WIDTH_SMALL + "!, align center");
+        contentPanel.add(pnlHead, "width " + frameWidthSmall + "!, align center");
 
         this.lblTitle = new JLabel("WinLoseFrame > lblTitle is broken.");
         this.lblTitle.setForeground(Color.white);
@@ -120,44 +120,44 @@ public class WinLoseFrame extends JFrame {
         // Custom display panel in center; populated later by mode handler.
         final JScrollPane scroller = new JScrollPane();
         scroller.getVerticalScrollBar().setUnitIncrement(16);
-        this.pnlCustom = new JPanel(new MigLayout("wrap, fillx"));
-        this.pnlCustom.setBackground(new Color(111, 87, 59));
-        this.pnlCustom.setForeground(Color.white);
+        this.setPnlCustom(new JPanel(new MigLayout("wrap, fillx")));
+        this.getPnlCustom().setBackground(new Color(111, 87, 59));
+        this.getPnlCustom().setForeground(Color.white);
         contentPanel.add(scroller, "w 96%!, align center, gapleft 2%");
-        scroller.getViewport().add(this.pnlCustom);
+        scroller.getViewport().add(this.getPnlCustom());
 
         // Foot panel
         final JPanel pnlFoot = new JPanel(new MigLayout("wrap, fill, hidemode 3"));
         pnlFoot.setOpaque(false);
-        contentPanel.add(pnlFoot, "width " + FRAME_WIDTH_SMALL + "!, align center");
+        contentPanel.add(pnlFoot, "width " + frameWidthSmall + "!, align center");
 
-        this.btnContinue = new FButton("Continue");
-        this.btnRestart = new FButton("Restart");
-        this.btnQuit = new FButton("Quit");
+        this.setBtnContinue(new FButton("Continue"));
+        this.setBtnRestart(new FButton("Restart"));
+        this.setBtnQuit(new FButton("Quit"));
 
-        pnlFoot.add(this.btnContinue, "h 36:36, w 200!, gap 0 0 5 5, align center");
-        pnlFoot.add(this.btnRestart, "h 36:36, w 200!, gap 0 0 5 5, align center");
-        pnlFoot.add(this.btnQuit, "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.getBtnContinue(), "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.getBtnRestart(), "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.getBtnQuit(), "h 36:36, w 200!, gap 0 0 5 5, align center");
 
         // Button actions
-        this.btnQuit.addActionListener(new java.awt.event.ActionListener() {
+        this.getBtnQuit().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                WinLoseFrame.this.btnQuit_actionPerformed(e);
+                WinLoseFrame.this.btnQuitActionPerformed(e);
             }
         });
 
-        this.btnContinue.addActionListener(new java.awt.event.ActionListener() {
+        this.getBtnContinue().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                WinLoseFrame.this.btnContinue_actionPerformed(e);
+                WinLoseFrame.this.btnContinueActionPerformed(e);
             }
         });
 
-        this.btnRestart.addActionListener(new java.awt.event.ActionListener() {
+        this.getBtnRestart().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                WinLoseFrame.this.btnRestart_actionPerformed(e);
+                WinLoseFrame.this.btnRestartActionPerformed(e);
             }
         });
 
@@ -165,8 +165,8 @@ public class WinLoseFrame extends JFrame {
         Phase.setGameBegins(0);
 
         if (this.matchState.isMatchOver()) {
-            this.btnContinue.setEnabled(false);
-            this.btnQuit.grabFocus();
+            this.getBtnContinue().setEnabled(false);
+            this.getBtnQuit().grabFocus();
         }
 
         // Show Wins and Loses
@@ -196,14 +196,14 @@ public class WinLoseFrame extends JFrame {
 
         if (hasContents) {
             bounds.height = screen.height - 150;
-            scroller.setPreferredSize(new Dimension(FRAME_WIDTH_BIG, screen.height - HEAD_HEIGHT - FOOT_HEIGHT));
-            bounds.width = FRAME_WIDTH_BIG;
-            bounds.x = (screen.width - FRAME_WIDTH_BIG) / 2;
+            scroller.setPreferredSize(new Dimension(frameWidthBig, screen.height - headHeight - footHeight));
+            bounds.width = frameWidthBig;
+            bounds.x = (screen.width - frameWidthBig) / 2;
             bounds.y = (screen.height - bounds.height) / 2;
         } else {
-            bounds.height = HEAD_HEIGHT + FOOT_HEIGHT;
-            bounds.width = FRAME_WIDTH_SMALL;
-            bounds.x = (screen.width - FRAME_WIDTH_SMALL) / 2;
+            bounds.height = headHeight + footHeight;
+            bounds.width = frameWidthSmall;
+            bounds.x = (screen.width - frameWidthSmall) / 2;
             bounds.y = (screen.height - bounds.height) / 2;
         }
 
@@ -222,7 +222,7 @@ public class WinLoseFrame extends JFrame {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void btnContinue_actionPerformed(final ActionEvent e) {
+    final void btnContinueActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
         AllZone.getDisplay().setVisible(true);
         this.modeHandler.startNextRound();
@@ -236,7 +236,7 @@ public class WinLoseFrame extends JFrame {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void btnRestart_actionPerformed(final ActionEvent e) {
+    final void btnRestartActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
         AllZone.getDisplay().setVisible(true);
         this.matchState.reset();
@@ -251,7 +251,7 @@ public class WinLoseFrame extends JFrame {
      * @param e
      *            a {@link java.awt.event.ActionEvent} object.
      */
-    final void btnQuit_actionPerformed(final ActionEvent e) {
+    final void btnQuitActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
         this.matchState.reset();
         this.modeHandler.actionOnQuit();
@@ -277,6 +277,62 @@ public class WinLoseFrame extends JFrame {
         frame.setEnabled(true);
         this.dispose();
         return frame;
+    }
+
+    /**
+     * @return the btnContinue
+     */
+    public FButton getBtnContinue() {
+        return btnContinue;
+    }
+
+    /**
+     * @param btnContinue the btnContinue to set
+     */
+    public void setBtnContinue(FButton btnContinue) {
+        this.btnContinue = btnContinue; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the btnRestart
+     */
+    public FButton getBtnRestart() {
+        return btnRestart;
+    }
+
+    /**
+     * @param btnRestart the btnRestart to set
+     */
+    public void setBtnRestart(FButton btnRestart) {
+        this.btnRestart = btnRestart; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the btnQuit
+     */
+    public FButton getBtnQuit() {
+        return btnQuit;
+    }
+
+    /**
+     * @param btnQuit the btnQuit to set
+     */
+    public void setBtnQuit(FButton btnQuit) {
+        this.btnQuit = btnQuit; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the pnlCustom
+     */
+    public JPanel getPnlCustom() {
+        return pnlCustom;
+    }
+
+    /**
+     * @param pnlCustom the pnlCustom to set
+     */
+    public void setPnlCustom(JPanel pnlCustom) {
+        this.pnlCustom = pnlCustom; // TODO: Add 0 to parameter's name.
     }
 
     private class WinLoseBorder extends AbstractBorder {

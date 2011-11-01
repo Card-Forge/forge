@@ -96,16 +96,16 @@ public class ApplicationView implements FView {
 
             final ForgePreferences preferences = model.getPreferences();
 
-            OldGuiNewGame.useLAFFonts.setSelected(preferences.isLafFonts());
+            OldGuiNewGame.getUseLAFFonts().setSelected(preferences.isLafFonts());
             // newGuiCheckBox.setSelected(preferences.newGui);
-            OldGuiNewGame.smoothLandCheckBox.setSelected(preferences.isStackAiLand());
+            OldGuiNewGame.getSmoothLandCheckBox().setSelected(preferences.isStackAiLand());
             OldGuiNewGame.devModeCheckBox.setSelected(preferences.isDeveloperMode());
-            OldGuiNewGame.cardOverlay.setSelected(preferences.isCardOverlay());
+            OldGuiNewGame.getCardOverlay().setSelected(preferences.isCardOverlay());
 
             // FindBugs doesn't like the next line.
             ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
 
-            OldGuiNewGame.cardScale.setSelected(preferences.isScaleLargerThanOriginal());
+            OldGuiNewGame.getCardScale().setSelected(preferences.isScaleLargerThanOriginal());
             CardStackOffsetAction.set(preferences.getStackOffset());
             CardStackAction.setVal(preferences.getMaxStackSize());
             CardSizesAction.set(preferences.getCardSize());

@@ -77,9 +77,9 @@ public class CostMill extends CostPartWithList {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        this.list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
+        this.setList(AllZone.getComputerPlayer().getCardsIn(Zone.Library, c));
 
-        if ((this.list == null) || (this.list.size() < c)) {
+        if ((this.getList() == null) || (this.getList().size() < c)) {
             return false;
         }
 
@@ -94,7 +94,7 @@ public class CostMill extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             AllZone.getGameAction().moveToGraveyard(c);
         }
     }
@@ -116,7 +116,7 @@ public class CostMill extends CostPartWithList {
             final String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, this.list.size());
+                c = CostUtil.chooseXValue(source, this.getList().size());
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }

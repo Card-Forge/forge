@@ -117,18 +117,18 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
      */
     @Override
     public final boolean populateCustomPanel() {
-        this.getView().btnRestart.setVisible(false);
+        this.getView().getBtnRestart().setVisible(false);
         this.model.qData.getCards().resetNewList();
 
         if (!this.model.qMatchState.isMatchOver()) {
-            this.getView().btnQuit.setText("Quit (15 Credits)");
+            this.getView().getBtnQuit().setText("Quit (15 Credits)");
             return false;
         } else {
-            this.getView().btnContinue.setVisible(false);
+            this.getView().getBtnContinue().setVisible(false);
             if (this.wonMatch) {
-                this.getView().btnQuit.setText("Great!");
+                this.getView().getBtnQuit().setText("Great!");
             } else {
-                this.getView().btnQuit.setText("OK");
+                this.getView().getBtnQuit().setText("OK");
             }
         }
 
@@ -371,8 +371,8 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!");
-        this.getView().pnlCustom.add(this.lblTemp2, "align center, width 95%!, gaptop 10");
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!");
+        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, gaptop 10");
     }
 
     /**
@@ -392,9 +392,9 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
                 + ", gapbottom 10");
-        this.getView().pnlCustom.add(cv, "align center, width 95%!");
+        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
     /**
@@ -411,9 +411,9 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
                 + ", gapbottom 10");
-        this.getView().pnlCustom.add(cv, "align center, width 95%!");
+        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
     /**
@@ -436,9 +436,9 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
                 + ", gapbottom 10");
-        this.getView().pnlCustom.add(cv, "align center, width 95%!");
+        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
     /**
@@ -478,12 +478,12 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer);
-        this.getView().pnlCustom.add(this.lblTemp2, "align center, width 95%!, height 80!, gapbottom 10");
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer);
+        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, height 80!, gapbottom 10");
 
         if (cardsWon != null) {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-            this.getView().pnlCustom.add(cv, "align center, width 95%!");
+            this.getView().getPnlCustom().add(cv, "align center, width 95%!");
             this.model.qData.getCards().addAllCards(cardsWon);
         }
     }
@@ -500,8 +500,8 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().pnlCustom.add(this.lblTemp1, "align center, width 95%!");
-        this.getView().pnlCustom.add(this.lblTemp2, "align center, width 95%!, height 80!");
+        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!");
+        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, height 80!");
     }
 
     /**

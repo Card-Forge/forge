@@ -36,14 +36,14 @@ public abstract class Trigger {
      * </p>
      */
     public static void resetIDs() {
-        nextID = 50000;
+        Trigger.nextID = 50000;
     }
 
     /** The ID. */
-    protected int ID = nextID++;
+    private int id = Trigger.nextID++;
 
     /** The name. */
-    protected String name;
+    private String name;
 
     /**
      * <p>
@@ -53,7 +53,7 @@ public abstract class Trigger {
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class Trigger {
      *            a {@link java.lang.String} object.
      */
     public final void setName(final String n) {
-        name = n;
+        this.name = n;
     }
 
     /**
@@ -77,11 +77,11 @@ public abstract class Trigger {
      *            a int.
      */
     public final void setID(final int id) {
-        ID = id;
+        this.id = id;
     }
 
     /** The map params. */
-    protected HashMap<String, String> mapParams = new HashMap<String, String>();
+    private HashMap<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -91,60 +91,23 @@ public abstract class Trigger {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String> getMapParams() {
-        return mapParams;
+        return this.mapParams;
+    }
+
+    /**
+     * Sets the map params.
+     *
+     * @param mapParams the mapParams to set
+     */
+    public final void setMapParams(final HashMap<String, String> mapParams) {
+        this.mapParams = mapParams; // TODO: Add 0 to parameter's name.
     }
 
     /** The run params. */
-    protected Map<String, Object> runParams;
-
-    /**
-     * <p>
-     * Setter for the field <code>runParams</code>.
-     * </p>
-     * 
-     * @param runParams2
-     *            a {@link java.util.Map} object.
-     */
-    public final void setRunParams(final Map<String, Object> runParams2) {
-        runParams = runParams2;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>runParams</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.Map} object.
-     */
-    public final Map<String, Object> getRunParams() {
-        return runParams;
-    }
+    private Map<String, Object> runParams;
 
     /** The overriding ability. */
-    protected SpellAbility overridingAbility = null;
-
-    /**
-     * <p>
-     * Getter for the field <code>overridingAbility</code>.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final SpellAbility getOverridingAbility() {
-        return overridingAbility;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>overridingAbility</code>.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void setOverridingAbility(final SpellAbility sa) {
-        overridingAbility = sa;
-    }
+    private SpellAbility overridingAbility = null;
 
     private HashMap<String, Object> storedTriggeredObjects = null;
 
@@ -170,11 +133,11 @@ public abstract class Trigger {
      * @since 1.0.15
      */
     public final HashMap<String, Object> getStoredTriggeredObjects() {
-        return storedTriggeredObjects;
+        return this.storedTriggeredObjects;
     }
 
     /** The host card. */
-    protected Card hostCard;
+    private Card hostCard;
 
     /**
      * <p>
@@ -184,7 +147,7 @@ public abstract class Trigger {
      * @return a {@link forge.Card} object.
      */
     public final Card getHostCard() {
-        return hostCard;
+        return this.hostCard;
     }
 
     /**
@@ -196,11 +159,11 @@ public abstract class Trigger {
      *            a {@link forge.Card} object.
      */
     public final void setHostCard(final Card c) {
-        hostCard = c;
+        this.hostCard = c;
     }
 
     /** The is intrinsic. */
-    protected boolean isIntrinsic;
+    private boolean isIntrinsic;
 
     /**
      * Gets the checks if is intrinsic.
@@ -208,7 +171,7 @@ public abstract class Trigger {
      * @return the checks if is intrinsic
      */
     public final boolean getIsIntrinsic() {
-        return isIntrinsic;
+        return this.isIntrinsic();
     }
 
     /**
@@ -218,7 +181,7 @@ public abstract class Trigger {
      *            the new checks if is intrinsic
      */
     public final void setIsIntrinsic(final boolean b) {
-        isIntrinsic = b;
+        this.setIntrinsic(b);
     }
 
     /**
@@ -236,14 +199,14 @@ public abstract class Trigger {
      *            the intrinsic
      */
     public Trigger(final String n, final HashMap<String, String> params, final Card host, final boolean intrinsic) {
-        name = n;
-        mapParams = new HashMap<String, String>();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            mapParams.put(entry.getKey(), entry.getValue());
+        this.name = n;
+        this.setRunParams(new HashMap<String, Object>());
+        for (final Map.Entry<String, String> entry : params.entrySet()) {
+            this.getMapParams().put(entry.getKey(), entry.getValue());
         }
-        hostCard = host;
+        this.setHostCard(host);
 
-        isIntrinsic = intrinsic;
+        this.setIntrinsic(intrinsic);
     }
 
     /**
@@ -259,13 +222,13 @@ public abstract class Trigger {
      *            the intrinsic
      */
     public Trigger(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
-        mapParams = new HashMap<String, String>();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            mapParams.put(entry.getKey(), entry.getValue());
+        this.setRunParams(new HashMap<String, Object>());
+        for (final Map.Entry<String, String> entry : params.entrySet()) {
+            this.getMapParams().put(entry.getKey(), entry.getValue());
         }
-        hostCard = host;
+        this.setHostCard(host);
 
-        isIntrinsic = intrinsic;
+        this.setIntrinsic(intrinsic);
     }
 
     /**
@@ -275,9 +238,10 @@ public abstract class Trigger {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        if (mapParams.containsKey("TriggerDescription") && !isSuppressed()) {
-            return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
+        if (this.getMapParams().containsKey("TriggerDescription") && !this.isSuppressed()) {
+            return this.getMapParams().get("TriggerDescription").replace("CARDNAME", this.getHostCard().getName());
         } else {
             return "";
         }
@@ -291,16 +255,16 @@ public abstract class Trigger {
      * @return a boolean.
      */
     public final boolean zonesCheck() {
-        if (mapParams.containsKey("TriggerZones")) {
-            List<Zone> triggerZones = new ArrayList<Zone>();
-            PlayerZone zone = AllZone.getZoneOf(hostCard);
-            for (String s : mapParams.get("TriggerZones").split(",")) {
+        if (this.getMapParams().containsKey("TriggerZones")) {
+            final List<Zone> triggerZones = new ArrayList<Zone>();
+            final PlayerZone zone = AllZone.getZoneOf(this.getHostCard());
+            for (final String s : this.getMapParams().get("TriggerZones").split(",")) {
                 triggerZones.add(Zone.smartValueOf(s));
             }
             if (zone == null) {
                 return false;
             }
-            if (!triggerZones.contains(zone.getZoneType()) || hostCard.isPhasedOut()) {
+            if (!triggerZones.contains(zone.getZoneType()) || this.getHostCard().isPhasedOut()) {
                 return false;
             }
         }
@@ -316,8 +280,8 @@ public abstract class Trigger {
      * @return a boolean.
      */
     public final boolean phasesCheck() {
-        if (mapParams.containsKey("TriggerPhases")) {
-            String phases = mapParams.get("TriggerPhases");
+        if (this.getMapParams().containsKey("TriggerPhases")) {
+            String phases = this.getMapParams().get("TriggerPhases");
 
             if (phases.contains("->")) {
                 // If phases lists a Range, split and Build Activate String
@@ -325,11 +289,11 @@ public abstract class Trigger {
                 // Draw-> (After Upkeep)
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
-                String[] split = phases.split("->", 2);
+                final String[] split = phases.split("->", 2);
                 phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
             }
-            ArrayList<String> triggerPhases = new ArrayList<String>();
-            for (String s : phases.split(",")) {
+            final ArrayList<String> triggerPhases = new ArrayList<String>();
+            for (final String s : phases.split(",")) {
                 triggerPhases.add(s);
             }
             if (!triggerPhases.contains(AllZone.getPhase().getPhase())) {
@@ -337,14 +301,14 @@ public abstract class Trigger {
             }
         }
 
-        if (mapParams.containsKey("PlayerTurn")) {
-            if (!AllZone.getPhase().isPlayerTurn(hostCard.getController())) {
+        if (this.getMapParams().containsKey("PlayerTurn")) {
+            if (!AllZone.getPhase().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("OpponentTurn")) {
-            if (AllZone.getPhase().isPlayerTurn(hostCard.getController())) {
+        if (this.getMapParams().containsKey("OpponentTurn")) {
+            if (AllZone.getPhase().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
@@ -360,59 +324,62 @@ public abstract class Trigger {
      * @return a boolean.
      */
     public final boolean requirementsCheck() {
-        if (mapParams.containsKey("Metalcraft")) {
-            if (mapParams.get("Metalcraft").equals("True") && !hostCard.getController().hasMetalcraft()) {
+        if (this.getMapParams().containsKey("Metalcraft")) {
+            if (this.getMapParams().get("Metalcraft").equals("True")
+                    && !this.getHostCard().getController().hasMetalcraft()) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("Threshold")) {
-            if (mapParams.get("Threshold").equals("True") && !hostCard.getController().hasThreshold()) {
+        if (this.getMapParams().containsKey("Threshold")) {
+            if (this.getMapParams().get("Threshold").equals("True")
+                    && !this.getHostCard().getController().hasThreshold()) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("Hellbent")) {
-            if (mapParams.get("Hellbent").equals("True") && !hostCard.getController().hasHellbent()) {
+        if (this.getMapParams().containsKey("Hellbent")) {
+            if (this.getMapParams().get("Hellbent").equals("True") && !this.getHostCard().getController().hasHellbent()) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("PlayersPoisoned")) {
-            if (mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0) {
+        if (this.getMapParams().containsKey("PlayersPoisoned")) {
+            if (this.getMapParams().get("PlayersPoisoned").equals("You")
+                    && (this.getHostCard().getController().getPoisonCounters() == 0)) {
                 return false;
-            } else if (mapParams.get("PlayersPoisoned").equals("Opponent")
-                    && hostCard.getController().getOpponent().getPoisonCounters() == 0) {
+            } else if (this.getMapParams().get("PlayersPoisoned").equals("Opponent")
+                    && (this.getHostCard().getController().getOpponent().getPoisonCounters() == 0)) {
                 return false;
-            } else if (mapParams.get("PlayersPoisoned").equals("Each")
-                    && !(hostCard.getController().getPoisonCounters() != 0 && hostCard.getController()
-                            .getPoisonCounters() != 0)) {
+            } else if (this.getMapParams().get("PlayersPoisoned").equals("Each")
+                    && !((this.getHostCard().getController().getPoisonCounters() != 0) && (this.getHostCard()
+                            .getController().getPoisonCounters() != 0))) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("LifeTotal")) {
-            String player = mapParams.get("LifeTotal");
+        if (this.getMapParams().containsKey("LifeTotal")) {
+            final String player = this.getMapParams().get("LifeTotal");
             String lifeCompare = "GE1";
             int life = 1;
 
             if (player.equals("You")) {
-                life = hostCard.getController().getLife();
+                life = this.getHostCard().getController().getLife();
             }
             if (player.equals("Opponent")) {
-                life = hostCard.getController().getOpponent().getLife();
+                life = this.getHostCard().getController().getOpponent().getLife();
             }
 
-            if (mapParams.containsKey("LifeAmount")) {
-                lifeCompare = mapParams.get("LifeAmount");
+            if (this.getMapParams().containsKey("LifeAmount")) {
+                lifeCompare = this.getMapParams().get("LifeAmount");
             }
 
             int right = 1;
-            String rightString = lifeCompare.substring(2);
+            final String rightString = lifeCompare.substring(2);
             try {
                 right = Integer.parseInt(rightString);
-            } catch (NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(rightString));
+            } catch (final NumberFormatException nfe) {
+                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
             }
 
             if (!AllZoneUtil.compare(life, lifeCompare, right)) {
@@ -421,38 +388,38 @@ public abstract class Trigger {
 
         }
 
-        if (mapParams.containsKey("IsPresent")) {
-            String sIsPresent = mapParams.get("IsPresent");
+        if (this.getMapParams().containsKey("IsPresent")) {
+            final String sIsPresent = this.getMapParams().get("IsPresent");
             String presentCompare = "GE1";
             Zone presentZone = Zone.Battlefield;
             String presentPlayer = "Any";
-            if (mapParams.containsKey("PresentCompare")) {
-                presentCompare = mapParams.get("PresentCompare");
+            if (this.getMapParams().containsKey("PresentCompare")) {
+                presentCompare = this.getMapParams().get("PresentCompare");
             }
-            if (mapParams.containsKey("PresentZone")) {
-                presentZone = Zone.smartValueOf(mapParams.get("PresentZone"));
+            if (this.getMapParams().containsKey("PresentZone")) {
+                presentZone = Zone.smartValueOf(this.getMapParams().get("PresentZone"));
             }
-            if (mapParams.containsKey("PresentPlayer")) {
-                presentPlayer = mapParams.get("PresentPlayer");
+            if (this.getMapParams().containsKey("PresentPlayer")) {
+                presentPlayer = this.getMapParams().get("PresentPlayer");
             }
             CardList list = new CardList();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(hostCard.getController().getCardsIn(presentZone));
+                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(hostCard.getController().getOpponent().getCardsIn(presentZone));
+                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
             }
 
-            list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+            list = list.getValidCards(sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
 
             int right = 1;
-            String rightString = presentCompare.substring(2);
+            final String rightString = presentCompare.substring(2);
             if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
             } else {
                 right = Integer.parseInt(presentCompare.substring(2));
             }
-            int left = list.size();
+            final int left = list.size();
 
             if (!AllZoneUtil.compare(left, presentCompare, right)) {
                 return false;
@@ -460,38 +427,38 @@ public abstract class Trigger {
 
         }
 
-        if (mapParams.containsKey("IsPresent2")) {
-            String sIsPresent = mapParams.get("IsPresent2");
+        if (this.getMapParams().containsKey("IsPresent2")) {
+            final String sIsPresent = this.getMapParams().get("IsPresent2");
             String presentCompare = "GE1";
             Zone presentZone = Zone.Battlefield;
             String presentPlayer = "Any";
-            if (mapParams.containsKey("PresentCompare2")) {
-                presentCompare = mapParams.get("PresentCompare2");
+            if (this.getMapParams().containsKey("PresentCompare2")) {
+                presentCompare = this.getMapParams().get("PresentCompare2");
             }
-            if (mapParams.containsKey("PresentZone2")) {
-                presentZone = Zone.smartValueOf(mapParams.get("PresentZone2"));
+            if (this.getMapParams().containsKey("PresentZone2")) {
+                presentZone = Zone.smartValueOf(this.getMapParams().get("PresentZone2"));
             }
-            if (mapParams.containsKey("PresentPlayer2")) {
-                presentPlayer = mapParams.get("PresentPlayer2");
+            if (this.getMapParams().containsKey("PresentPlayer2")) {
+                presentPlayer = this.getMapParams().get("PresentPlayer2");
             }
             CardList list = new CardList();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(hostCard.getController().getCardsIn(presentZone));
+                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(hostCard.getController().getOpponent().getCardsIn(presentZone));
+                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
             }
 
-            list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+            list = list.getValidCards(sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
 
             int right = 1;
-            String rightString = presentCompare.substring(2);
+            final String rightString = presentCompare.substring(2);
             if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
             } else {
                 right = Integer.parseInt(presentCompare.substring(2));
             }
-            int left = list.size();
+            final int left = list.size();
 
             if (!AllZoneUtil.compare(left, presentCompare, right)) {
                 return false;
@@ -499,43 +466,44 @@ public abstract class Trigger {
 
         }
 
-        if (mapParams.containsKey("CheckSVar")) {
-            int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), mapParams.get("CheckSVar"),
-                    null);
+        if (this.getMapParams().containsKey("CheckSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(this.getHostCard()), this
+                    .getMapParams().get("CheckSVar"), null);
             String comparator = "GE1";
-            if (mapParams.containsKey("SVarCompare")) {
-                comparator = mapParams.get("SVarCompare");
+            if (this.getMapParams().containsKey("SVarCompare")) {
+                comparator = this.getMapParams().get("SVarCompare");
             }
-            String svarOperator = comparator.substring(0, 2);
-            String svarOperand = comparator.substring(2);
-            int operandValue = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(hostCard), svarOperand, null);
+            final String svarOperator = comparator.substring(0, 2);
+            final String svarOperand = comparator.substring(2);
+            final int operandValue = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(this.getHostCard()),
+                    svarOperand, null);
             if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ManaSpent")) {
-            if (!hostCard.getColorsPaid().contains(mapParams.get("ManaSpent"))) {
+        if (this.getMapParams().containsKey("ManaSpent")) {
+            if (!this.getHostCard().getColorsPaid().contains(this.getMapParams().get("ManaSpent"))) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ManaNotSpent")) {
-            if (hostCard.getColorsPaid().contains(mapParams.get("ManaNotSpent"))) {
+        if (this.getMapParams().containsKey("ManaNotSpent")) {
+            if (this.getHostCard().getColorsPaid().contains(this.getMapParams().get("ManaNotSpent"))) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("WerewolfTransformCondition")) {
-            if (CardUtil.getLastTurnCast("Card", hostCard).size() > 0) {
+        if (this.getMapParams().containsKey("WerewolfTransformCondition")) {
+            if (CardUtil.getLastTurnCast("Card", this.getHostCard()).size() > 0) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("WerewolfUntransformCondition")) {
-            CardList you = CardUtil.getLastTurnCast("Card.YouCtrl", hostCard);
-            CardList opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", hostCard);
-            if (!(you.size() > 1 || opp.size() > 1)) {
+        if (this.getMapParams().containsKey("WerewolfUntransformCondition")) {
+            final CardList you = CardUtil.getLastTurnCast("Card.YouCtrl", this.getHostCard());
+            final CardList opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
+            if (!((you.size() > 1) || (opp.size() > 1))) {
                 return false;
             }
         }
@@ -558,12 +526,12 @@ public abstract class Trigger {
      */
     public final boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
         if (o instanceof Card) {
-            Card c = (Card) o;
+            final Card c = (Card) o;
             return c.isValid(valids, srcCard.getController(), srcCard);
         }
 
         if (o instanceof Player) {
-            for (String v : valids) {
+            for (final String v : valids) {
                 if (v.equalsIgnoreCase("Player") || v.equalsIgnoreCase("Each")) {
                     return true;
                 }
@@ -595,8 +563,8 @@ public abstract class Trigger {
      * @return a boolean.
      */
     public final boolean isSecondary() {
-        if (mapParams.containsKey("Secondary")) {
-            if (mapParams.get("Secondary").equals("True")) {
+        if (this.getMapParams().containsKey("Secondary")) {
+            if (this.getMapParams().get("Secondary").equals("True")) {
                 return true;
             }
         }
@@ -610,7 +578,7 @@ public abstract class Trigger {
             return false;
         }
 
-        return this.ID == ((Trigger) o).ID;
+        return this.getId() == ((Trigger) o).getId();
     }
 
     /**
@@ -644,7 +612,7 @@ public abstract class Trigger {
     public abstract void setTriggeringObjects(SpellAbility sa);
 
     /** The temporary. */
-    protected boolean temporary = false;
+    private boolean temporary = false;
 
     /**
      * Sets the temporary.
@@ -653,7 +621,7 @@ public abstract class Trigger {
      *            the new temporary
      */
     public final void setTemporary(final boolean temp) {
-        temporary = temp;
+        this.temporary = temp;
     }
 
     /**
@@ -662,14 +630,14 @@ public abstract class Trigger {
      * @return true, if is temporary
      */
     public final boolean isTemporary() {
-        return temporary;
+        return this.temporary;
     }
 
     /** The suppressed. */
-    protected boolean suppressed = false;
+    private boolean suppressed = false;
 
     /** The temporarily suppressed. */
-    protected boolean temporarilySuppressed = false;
+    private boolean temporarilySuppressed = false;
 
     /**
      * Sets the suppressed.
@@ -678,7 +646,7 @@ public abstract class Trigger {
      *            the new suppressed
      */
     public final void setSuppressed(final boolean supp) {
-        suppressed = supp;
+        this.suppressed = supp;
     }
 
     /**
@@ -688,7 +656,7 @@ public abstract class Trigger {
      *            the new temporarily suppressed
      */
     public final void setTemporarilySuppressed(final boolean supp) {
-        temporarilySuppressed = supp;
+        this.temporarilySuppressed = supp;
     }
 
     /**
@@ -697,6 +665,79 @@ public abstract class Trigger {
      * @return true, if is suppressed
      */
     public final boolean isSuppressed() {
-        return (suppressed || temporarilySuppressed);
+        return (this.suppressed || this.temporarilySuppressed);
+    }
+
+    /**
+     * Checks if is intrinsic.
+     *
+     * @return the isIntrinsic
+     */
+    public boolean isIntrinsic() {
+        return this.isIntrinsic;
+    }
+
+    /**
+     * Sets the intrinsic.
+     *
+     * @param isIntrinsic the isIntrinsic to set
+     */
+    public void setIntrinsic(final boolean isIntrinsic) {
+        this.isIntrinsic = isIntrinsic; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the run params.
+     *
+     * @return the runParams
+     */
+    public Map<String, Object> getRunParams() {
+        return this.runParams;
+    }
+
+    /**
+     * Sets the run params.
+     *
+     * @param runParams the runParams to set
+     */
+    public void setRunParams(final Map<String, Object> runParams) {
+        this.runParams = runParams; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * Gets the overriding ability.
+     *
+     * @return the overridingAbility
+     */
+    public SpellAbility getOverridingAbility() {
+        return this.overridingAbility;
+    }
+
+    /**
+     * Sets the overriding ability.
+     *
+     * @param overridingAbility the overridingAbility to set
+     */
+    public void setOverridingAbility(final SpellAbility overridingAbility) {
+        this.overridingAbility = overridingAbility; // TODO: Add 0 to
+                                                    // parameter's name.
+    }
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the id to set
+     */
+    public void setId(final int id) {
+        this.id = id; // TODO: Add 0 to parameter's name.
     }
 }

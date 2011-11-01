@@ -1424,7 +1424,7 @@ public class CardFactory_Sorceries {
                         }
                     } else if (humLand.size() > compLand.size()) {
                         final int diff = humLand.size() - compLand.size();
-                        AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanents(diff, "Land"));
+                        AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(diff, "Land"));
                     }
 
                     // Hand
@@ -1451,7 +1451,7 @@ public class CardFactory_Sorceries {
                         }
                     } else if (humCreats.size() > compCreats.size()) {
                         final int diff = humCreats.size() - compCreats.size();
-                        AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanents(diff, "Creature"));
+                        AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(diff, "Creature"));
                     }
                 }
 

@@ -34,8 +34,9 @@ public class Trigger_Shuffled extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidPlayer")) {
+            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -46,12 +47,12 @@ public class Trigger_Shuffled extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Shuffled(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Shuffled(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -59,6 +60,6 @@ public class Trigger_Shuffled extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Player", runParams.get("Player"));
+        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
 }

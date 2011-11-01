@@ -34,23 +34,26 @@ public class Trigger_Discarded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidPlayer")) {
+            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidCause")) {
+        if (this.getMapParams().containsKey("ValidCause")) {
             if (runParams2.get("Cause") == null) {
                 return false;
             }
-            if (!matchesValid(runParams2.get("Cause"), mapParams.get("ValidCause").split(","), hostCard)) {
+            if (!this.matchesValid(runParams2.get("Cause"), this.getMapParams().get("ValidCause").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -60,12 +63,12 @@ public class Trigger_Discarded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Discarded(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Discarded(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -73,6 +76,6 @@ public class Trigger_Discarded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", runParams.get("Card"));
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 }

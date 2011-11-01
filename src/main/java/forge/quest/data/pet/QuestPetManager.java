@@ -19,16 +19,16 @@ import java.util.TreeSet;
 public class QuestPetManager {
 
     /** The pets. */
-    public Map<String, QuestPetAbstract> pets = new HashMap<String, QuestPetAbstract>();
+    private Map<String, QuestPetAbstract> pets = new HashMap<String, QuestPetAbstract>();
 
     /** The selected pet. */
-    public QuestPetAbstract selectedPet;
+    private QuestPetAbstract selectedPet;
 
     /** The plant. */
-    public QuestPetAbstract plant;
+    private QuestPetAbstract plant;
 
     /** The use plant. */
-    public boolean usePlant;
+    private boolean usePlant;
 
     /**
      * <p>
@@ -146,7 +146,7 @@ public class QuestPetManager {
      * @return a boolean.
      */
     public final boolean shouldPlantBeUsed() {
-        return this.usePlant;
+        return this.isUsePlant();
     }
 
     /**
@@ -224,5 +224,19 @@ public class QuestPetManager {
             }
         }
         return this;
+    }
+
+    /**
+     * @return the usePlant
+     */
+    public boolean isUsePlant() {
+        return usePlant;
+    }
+
+    /**
+     * @param usePlant the usePlant to set
+     */
+    public void setUsePlant(boolean usePlant) {
+        this.usePlant = usePlant; // TODO: Add 0 to parameter's name.
     }
 }

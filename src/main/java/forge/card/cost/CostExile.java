@@ -147,7 +147,7 @@ public class CostExile extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             AllZone.getGameAction().exile(c);
         }
     }
@@ -198,7 +198,7 @@ public class CostExile extends CostPartWithList {
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
         this.resetList();
         if (this.getThis()) {
-            this.list.add(source);
+            this.getList().add(source);
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
@@ -212,12 +212,12 @@ public class CostExile extends CostPartWithList {
             }
 
             if (this.from.equals(Constant.Zone.Library)) {
-                this.list = AllZone.getComputerPlayer().getCardsIn(Zone.Library, c);
+                this.setList(AllZone.getComputerPlayer().getCardsIn(Zone.Library, c));
             } else {
-                this.list = ComputerUtil.chooseExileFrom(this.getFrom(), this.getType(), source,
-                        ability.getTargetCard(), c);
+                this.setList(ComputerUtil.chooseExileFrom(this.getFrom(), this.getType(), source,
+                        ability.getTargetCard(), c));
             }
-            if ((this.list == null) || (this.list.size() < c)) {
+            if ((this.getList() == null) || (this.getList().size() < c)) {
                 return false;
             }
         }

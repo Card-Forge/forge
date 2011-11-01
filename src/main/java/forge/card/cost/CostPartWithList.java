@@ -10,7 +10,7 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPartWithList extends CostPart {
 
     /** The list. */
-    protected CardList list = null;
+    private CardList list = null;
 
     /**
      * Gets the list.
@@ -35,7 +35,7 @@ public abstract class CostPartWithList extends CostPart {
      * Reset list.
      */
     public final void resetList() {
-        this.list = new CardList();
+        this.setList(new CardList());
     }
 
     /**
@@ -45,10 +45,10 @@ public abstract class CostPartWithList extends CostPart {
      *            the c
      */
     public final void addToList(final Card c) {
-        if (this.list == null) {
+        if (this.getList() == null) {
             this.resetList();
         }
-        this.list.add(c);
+        this.getList().add(c);
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class CostPartWithList extends CostPart {
      *            the hash
      */
     public final void addListToHash(final SpellAbility sa, final String hash) {
-        for (final Card card : this.list) {
+        for (final Card card : this.getList()) {
             sa.addCostToHashList(card, hash);
         }
     }

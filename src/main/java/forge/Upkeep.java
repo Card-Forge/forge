@@ -680,7 +680,7 @@ public class Upkeep implements java.io.Serializable {
                     creatures.remove(c);
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(
-                                PlayerUtil.input_sacrificePermanent(creatures, c.getName()
+                                PlayerUtil.inputSacrificePermanent(creatures, c.getName()
                                         + " - Select a creature to sacrifice."));
                     } else { // computer
                         final Card target = CardFactoryUtil.getWorstCreatureAI(creatures);
@@ -823,7 +823,7 @@ public class Upkeep implements java.io.Serializable {
                     if (c.getController().isComputer()) {
                         if (playerLand.size() > 0) {
                             AllZone.getInputControl().setInput(
-                                    PlayerUtil.input_sacrificePermanent(playerLand, c.getName()
+                                    PlayerUtil.inputSacrificePermanent(playerLand, c.getName()
                                             + " - Select a land to sacrifice."));
                         }
                     } else {

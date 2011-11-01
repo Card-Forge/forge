@@ -85,7 +85,7 @@ public class BoosterDraftAI {
             }
         });
 
-        if (this.playerColors.get(player).Color1.equals("none") && this.playerColors.get(player).Color2.equals("none")) {
+        if (this.playerColors.get(player).getColor1().equals("none") && this.playerColors.get(player).getColor2().equals("none")) {
             //
             final CardList creatures = aiPlayables.getType("Creature").getColored();
             creatures.sort(this.bestCreature);
@@ -95,30 +95,30 @@ public class BoosterDraftAI {
 
             if (creatures.size() > 0) {
                 pickedCard = creatures.get(creatures.size() - 1);
-                this.playerColors.get(player).Color1 = pickedCard.getColor().get(0).toStringArray().get(0);
+                this.playerColors.get(player).setColor1(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).Color1);
+                    System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
                 }
 
-                this.playerColors.get(player).Mana1 = this.playerColors.get(player).ColorToMana(
-                        this.playerColors.get(player).Color1);
+                this.playerColors.get(player).setMana1(this.playerColors.get(player).colorToMana(
+                        this.playerColors.get(player).getColor1()));
 
                 // if the first pick has more than one color add the second as
                 // second color to draft
                 if (pickedCard.getColor().get(0).toStringArray().size() > 1) {
-                    this.playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(1);
+                    this.playerColors.get(player).setColor2(pickedCard.getColor().get(0).toStringArray().get(1));
                     if (Constant.Runtime.DEV_MODE[0]) {
-                        System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).Color2);
+                        System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                     }
 
-                    this.playerColors.get(player).Mana2 = this.playerColors.get(player).ColorToMana(
-                            this.playerColors.get(player).Color2);
+                    this.playerColors.get(player).setMana2(this.playerColors.get(player).colorToMana(
+                            this.playerColors.get(player).getColor2()));
                 }
 
                 hasPicked = true;
             }
-        } else if (!this.playerColors.get(player).Color1.equals("none")
-                && this.playerColors.get(player).Color2.equals("none")) {
+        } else if (!this.playerColors.get(player).getColor1().equals("none")
+                && this.playerColors.get(player).getColor2().equals("none")) {
             final CardList creatures = aiPlayables.getType("Creature").getColored();
             creatures.sort(this.bestCreature);
             // for (int i=0; i<creatures.size(); i++)
@@ -127,21 +127,21 @@ public class BoosterDraftAI {
 
             if (creatures.size() > 0) {
                 pickedCard = creatures.get(creatures.size() - 1);
-                this.playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(0);
+                this.playerColors.get(player).setColor2(pickedCard.getColor().get(0).toStringArray().get(0));
                 if (Constant.Runtime.DEV_MODE[0]) {
-                    System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).Color2);
+                    System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                 }
 
-                this.playerColors.get(player).Mana2 = this.playerColors.get(player).ColorToMana(
-                        this.playerColors.get(player).Color2);
+                this.playerColors.get(player).setMana2(this.playerColors.get(player).colorToMana(
+                        this.playerColors.get(player).getColor2()));
                 hasPicked = true;
             }
         } else {
             CardList typeList;
             CardList colorList;
 
-            colorList = aiPlayables.getOnly2Colors(this.playerColors.get(player).Color1,
-                    this.playerColors.get(player).Color2);
+            colorList = aiPlayables.getOnly2Colors(this.playerColors.get(player).getColor1(),
+                    this.playerColors.get(player).getColor2());
 
             if (colorList.size() > 0) {
                 typeList = colorList.getType("Creature");
@@ -211,8 +211,8 @@ public class BoosterDraftAI {
                     for (int i = 0; i < typeList.size(); i++) {
                         final ArrayList<Ability_Mana> maList = typeList.get(i).getManaAbility();
                         for (int j = 0; j < maList.size(); j++) {
-                            if (maList.get(j).canProduce(this.playerColors.get(player).Mana1)
-                                    || maList.get(j).canProduce(this.playerColors.get(player).Mana2)) {
+                            if (maList.get(j).canProduce(this.playerColors.get(player).getMana1())
+                                    || maList.get(j).canProduce(this.playerColors.get(player).getMana2())) {
                                 wouldPick.add(typeList.get(i));
                             }
                         }
@@ -356,7 +356,7 @@ public class BoosterDraftAI {
             dList.remove(aiPlayables.get(i));
         }
 
-        final CardList creatures = aiPlayables.getType("Creature").getOnly2Colors(pClrs.Color1, pClrs.Color2);
+        final CardList creatures = aiPlayables.getType("Creature").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
         int nCreatures = 15;
 
@@ -395,7 +395,7 @@ public class BoosterDraftAI {
         }
 
         CardList others = aiPlayables.getNotType("Creature").getNotType("Land")
-                .getOnly2Colors(pClrs.Color1, pClrs.Color2);
+                .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
         int ii = 0;
         while ((cardsNeeded > 0) && (others.size() > 1)) {
@@ -406,7 +406,7 @@ public class BoosterDraftAI {
             cardsNeeded--;
             aiPlayables.remove(c);
 
-            others = aiPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
+            others = aiPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("Others[" + ii++ + "]:" + c.getName() + " (" + c.getManaCost() + ")");

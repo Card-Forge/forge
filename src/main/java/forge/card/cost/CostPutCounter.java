@@ -94,7 +94,7 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             c.subtractCounter(this.counter, this.lastPaidAmount);
         }
     }
@@ -146,7 +146,7 @@ public class CostPutCounter extends CostPartWithList {
             source.addCounterFromNonEffect(this.getCounter(), c);
         } else {
             // Put counter on chosen card
-            for (final Card card : this.list) {
+            for (final Card card : this.getList()) {
                 card.addCounterFromNonEffect(this.getCounter(), 1);
             }
         }

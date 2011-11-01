@@ -127,7 +127,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     /** Constant <code>newGuiCheckBox</code>. */
     // private static JCheckBox newGuiCheckBox = new JCheckBox("", true);
     /** Constant <code>smoothLandCheckBox</code>. */
-    static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
+    private static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
     /** Constant <code>devModeCheckBox</code>. */
     static JCheckBox devModeCheckBox = new JCheckBox("", true);
 
@@ -147,12 +147,12 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     public static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MenuBar.Options.Generate.REMOVE_ARTIFACTS));
     /** Constant <code>useLAFFonts</code>. */
-    public static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(MenuBar.Options.FONT));
+    private static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(MenuBar.Options.FONT));
     /** Constant <code>cardOverlay</code>. */
-    public static JCheckBoxMenuItem cardOverlay = new JCheckBoxMenuItem(
+    private static JCheckBoxMenuItem cardOverlay = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MenuBar.Options.CARD_OVERLAY));
     /** Constant <code>cardScale</code>. */
-    public static JCheckBoxMenuItem cardScale = new JCheckBoxMenuItem(
+    private static JCheckBoxMenuItem cardScale = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MenuBar.Options.CARD_SCALE));
     private final JButton questButton = new JButton();
 
@@ -281,15 +281,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         final JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(Options.TITLE));
         optionsMenu.add(generatedDeck);
 
-        optionsMenu.add(OldGuiNewGame.useLAFFonts);
+        optionsMenu.add(OldGuiNewGame.getUseLAFFonts());
         optionsMenu.addSeparator();
-        optionsMenu.add(OldGuiNewGame.cardOverlay);
-        optionsMenu.add(OldGuiNewGame.cardScale);
+        optionsMenu.add(OldGuiNewGame.getCardOverlay());
+        optionsMenu.add(OldGuiNewGame.getCardScale());
 
-        OldGuiNewGame.cardScale.addActionListener(new ActionListener() {
+        OldGuiNewGame.getCardScale().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                ImageCache.setScaleLargerThanOriginal(OldGuiNewGame.cardScale.isSelected());
+                ImageCache.setScaleLargerThanOriginal(OldGuiNewGame.getCardScale().isSelected());
             }
         });
 
@@ -537,7 +537,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         this.jPanel3.setLayout(new MigLayout("align center"));
 
         // newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
-        OldGuiNewGame.smoothLandCheckBox.setText(ForgeProps.getLocalized(NewGameText.AI_LAND));
+        OldGuiNewGame.getSmoothLandCheckBox().setText(ForgeProps.getLocalized(NewGameText.AI_LAND));
 
         OldGuiNewGame.devModeCheckBox.setText(ForgeProps.getLocalized(NewGameText.DEV_MODE));
         OldGuiNewGame.devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +619,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         this.getContentPane().add(this.jPanel3, "span 2, grow");
 
         // jPanel3.add(newGuiCheckBox, "wrap");
-        this.jPanel3.add(OldGuiNewGame.smoothLandCheckBox, "wrap");
+        this.jPanel3.add(OldGuiNewGame.getSmoothLandCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.devModeCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.upldDrftCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.foilRandomCheckBox, "wrap");
@@ -852,7 +852,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         AllZone.setDisplay(new GuiDisplay4());
         // else AllZone.setDisplay(new GuiDisplay3());
 
-        Constant.Runtime.SMOOTH[0] = OldGuiNewGame.smoothLandCheckBox.isSelected();
+        Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
 
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         AllZone.getDisplay().setVisible(true);
@@ -1626,7 +1626,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         public final void actionPerformed(final ActionEvent e) {
             final JTextArea area = new JTextArea(12, 25);
 
-            if (OldGuiNewGame.useLAFFonts.isSelected()) {
+            if (OldGuiNewGame.getUseLAFFonts().isSelected()) {
                 final Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
                 area.setFont(f);
             }
@@ -1692,12 +1692,12 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         try {
             final ForgePreferences preferences = Singletons.getModel().getPreferences();
             preferences.setLaf(UIManager.getLookAndFeel().getClass().getName());
-            preferences.setLafFonts(OldGuiNewGame.useLAFFonts.isSelected());
+            preferences.setLafFonts(OldGuiNewGame.getUseLAFFonts().isSelected());
             // preferences.newGui = newGuiCheckBox.isSelected();
-            preferences.setStackAiLand(OldGuiNewGame.smoothLandCheckBox.isSelected());
+            preferences.setStackAiLand(OldGuiNewGame.getSmoothLandCheckBox().isSelected());
             preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
             preferences.setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
-            preferences.setCardOverlay(OldGuiNewGame.cardOverlay.isSelected());
+            preferences.setCardOverlay(OldGuiNewGame.getCardOverlay().isSelected());
             preferences.setScaleLargerThanOriginal(ImageCache.isScaleLargerThanOriginal());
             preferences.setUploadDraftAI(Constant.Runtime.UPLOAD_DRAFT[0]);
             preferences.save();
@@ -1864,6 +1864,62 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
          * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
          */
+    }
+
+    /**
+     * @return the cardOverlay
+     */
+    public static JCheckBoxMenuItem getCardOverlay() {
+        return cardOverlay;
+    }
+
+    /**
+     * @param cardOverlay the cardOverlay to set
+     */
+    public static void setCardOverlay(JCheckBoxMenuItem cardOverlay) {
+        OldGuiNewGame.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the cardScale
+     */
+    public static JCheckBoxMenuItem getCardScale() {
+        return cardScale;
+    }
+
+    /**
+     * @param cardScale the cardScale to set
+     */
+    public static void setCardScale(JCheckBoxMenuItem cardScale) {
+        OldGuiNewGame.cardScale = cardScale; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the useLAFFonts
+     */
+    public static JCheckBoxMenuItem getUseLAFFonts() {
+        return useLAFFonts;
+    }
+
+    /**
+     * @param useLAFFonts the useLAFFonts to set
+     */
+    public static void setUseLAFFonts(JCheckBoxMenuItem useLAFFonts) {
+        OldGuiNewGame.useLAFFonts = useLAFFonts; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the smoothLandCheckBox
+     */
+    static JCheckBox getSmoothLandCheckBox() {
+        return smoothLandCheckBox;
+    }
+
+    /**
+     * @param smoothLandCheckBox the smoothLandCheckBox to set
+     */
+    static void setSmoothLandCheckBox(JCheckBox smoothLandCheckBox) {
+        OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox; // TODO: Add 0 to parameter's name.
     }
 
 }

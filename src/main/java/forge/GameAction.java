@@ -65,16 +65,16 @@ public class GameAction {
      * </p>
      */
     public final void resetActivationsPerTurn() {
-        CardList all = AllZoneUtil.getCardsInGame();
+        final CardList all = AllZoneUtil.getCardsInGame();
 
         // Reset Activations per Turn
-        for (Card card : all) {
-            for (SpellAbility sa : card.getSpellAbility()) {
+        for (final Card card : all) {
+            for (final SpellAbility sa : card.getSpellAbility()) {
                 sa.getRestrictions().resetTurnActivations();
             }
             if (card.hasAlternateState()) {
                 card.changeState();
-                for (SpellAbility sa : card.getSpellAbility()) {
+                for (final SpellAbility sa : card.getSpellAbility()) {
                     sa.getRestrictions().resetTurnActivations();
                 }
                 card.changeState();
@@ -96,13 +96,13 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public static Card changeZone(final PlayerZone prev, final PlayerZone zone, final Card c) {
-        if (prev == null && !c.isToken()) {
+        if ((prev == null) && !c.isToken()) {
             zone.add(c);
             return c;
         }
 
         boolean suppress;
-        if (prev == null && !c.isToken()) {
+        if ((prev == null) && !c.isToken()) {
             suppress = true;
         } else if (c.isToken()) {
             suppress = false;
@@ -130,12 +130,12 @@ public class GameAction {
             // Stack->Battlefield
             // these probably can be moved back to SubtractCounters
             if (c.wasSuspendCast()) {
-                copied = addSuspendTriggers(c);
+                copied = GameAction.addSuspendTriggers(c);
             }
             copied.setUnearthed(c.isUnearthed()); // this might be unnecessary
         }
 
-        for (Trigger trigger : c.getTriggers()) {
+        for (final Trigger trigger : c.getTriggers()) {
             trigger.setHostCard(copied);
         }
 
@@ -158,7 +158,7 @@ public class GameAction {
             prev.remove(c);
         }
 
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
         if (prev != null) {
             runParams.put("Origin", prev.getZoneType().name());
@@ -206,22 +206,22 @@ public class GameAction {
     public final Card moveTo(final PlayerZone zone, Card c) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
-        PlayerZone prev = AllZone.getZoneOf(c);
+        final PlayerZone prev = AllZone.getZoneOf(c);
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
                 && !zone.is(Constant.Zone.Exile)) {
-            PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
+            final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
             c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
-            + "exile it instead of putting it anywhere else.");
-            return moveTo(removed, c);
+                    + "exile it instead of putting it anywhere else.");
+            return this.moveTo(removed, c);
         }
 
         // Card lastKnownInfo = c;
 
-        c = changeZone(prev, zone, c);
+        c = GameAction.changeZone(prev, zone, c);
 
-        if (c.isAura() && zone.is(Constant.Zone.Battlefield) && (prev == null || !prev.is(Constant.Zone.Stack))) {
+        if (c.isAura() && zone.is(Constant.Zone.Battlefield) && ((prev == null) || !prev.is(Constant.Zone.Stack))) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
             AbilityFactory_Attach.attachAuraOnIndirectEnterBattlefield(c);
@@ -242,10 +242,10 @@ public class GameAction {
     public final Card moveToPlayFromHand(Card c) {
         // handles the case for Clone, etc where prev was null
 
-        PlayerZone hand = c.getOwner().getZone(Constant.Zone.Hand);
-        PlayerZone play = c.getController().getZone(Constant.Zone.Battlefield);
+        final PlayerZone hand = c.getOwner().getZone(Constant.Zone.Hand);
+        final PlayerZone play = c.getController().getZone(Constant.Zone.Battlefield);
 
-        c = changeZone(hand, play, c);
+        c = GameAction.changeZone(hand, play, c);
 
         return c;
     }
@@ -289,10 +289,10 @@ public class GameAction {
      */
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
-        PlayerZone oldBattlefield = AllZone.getZoneOf(c);
-        PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
+        final PlayerZone oldBattlefield = AllZone.getZoneOf(c);
+        final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
-        if (oldBattlefield == null || newBattlefield == null) {
+        if ((oldBattlefield == null) || (newBattlefield == null)) {
             return;
         }
 
@@ -300,7 +300,7 @@ public class GameAction {
         ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(false);
         ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(false);
 
-        int tiz = c.getTurnInZone();
+        final int tiz = c.getTurnInZone();
 
         oldBattlefield.remove(c);
         newBattlefield.add(c);
@@ -322,8 +322,8 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToStack(final Card c) {
-        PlayerZone stack = AllZone.getStackZone();
-        return moveTo(stack, c);
+        final PlayerZone stack = AllZone.getStackZone();
+        return this.moveTo(stack, c);
     }
 
     /**
@@ -344,24 +344,24 @@ public class GameAction {
         final CardList opponentsBoard = owner.getOpponent().getCardsIn(Constant.Zone.Battlefield);
 
         if (c.getName().equals("Nissa's Chosen") && origZone.is(Constant.Zone.Battlefield)) {
-            return moveToLibrary(c, -1);
+            return this.moveToLibrary(c, -1);
         }
 
-        for (Card card : opponentsBoard) {
+        for (final Card card : opponentsBoard) {
             if (card.hasKeyword("If a card would be put into an opponent's "
-        + "graveyard from anywhere, exile it instead.")) {
-                return moveTo(exile, c);
+                    + "graveyard from anywhere, exile it instead.")) {
+                return this.moveTo(exile, c);
             }
         }
 
-        for (Card card : ownerBoard) {
+        for (final Card card : ownerBoard) {
             if (card.hasKeyword("If a card would be put into your graveyard from anywhere, exile it instead.")) {
-                return moveTo(exile, c);
+                return this.moveTo(exile, c);
             }
         }
 
         if (c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
-            return moveTo(exile, c);
+            return this.moveTo(exile, c);
         }
 
         if (c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
@@ -369,13 +369,13 @@ public class GameAction {
         }
 
         // must put card in OWNER's graveyard not controller's
-        c = moveTo(grave, c);
+        c = this.moveTo(grave, c);
 
         // Recover keyword
         if (c.isCreature() && origZone.is(Constant.Zone.Battlefield)) {
             for (final Card recoverable : c.getOwner().getCardsIn(Zone.Graveyard)) {
                 if (recoverable.hasStartOfKeyword("Recover")) {
-                    SpellAbility abRecover = new Ability(recoverable, "0") {
+                    final SpellAbility abRecover = new Ability(recoverable, "0") {
                         @Override
                         public void resolve() {
                             AllZone.getGameAction().moveToHand(recoverable);
@@ -383,16 +383,17 @@ public class GameAction {
 
                         @Override
                         public String getStackDescription() {
-                            StringBuilder sd = new StringBuilder(recoverable.getName());
+                            final StringBuilder sd = new StringBuilder(recoverable.getName());
                             sd.append(" - Recover.");
 
                             return sd.toString();
                         }
                     };
 
-                    Command notPaid = new Command() {
+                    final Command notPaid = new Command() {
                         private static final long serialVersionUID = 5812397026869965462L;
 
+                        @Override
                         public void execute() {
                             AllZone.getGameAction().exile(recoverable);
                         }
@@ -401,12 +402,12 @@ public class GameAction {
                     abRecover.setCancelCommand(notPaid);
                     abRecover.setTrigger(true);
 
-                    String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
+                    final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
                             .split(":")[1];
-                    Cost abCost = new Cost(recoverCost, recoverable.getName(), false);
+                    final Cost abCost = new Cost(recoverCost, recoverable.getName(), false);
                     abRecover.setPayCosts(abCost);
 
-                    StringBuilder question = new StringBuilder("Recover ");
+                    final StringBuilder question = new StringBuilder("Recover ");
                     question.append(recoverable.getName());
                     question.append("(");
                     question.append(recoverable.getUniqueNumber());
@@ -450,8 +451,8 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToHand(final Card c) {
-        PlayerZone hand = c.getOwner().getZone(Constant.Zone.Hand);
-        return moveTo(hand, c);
+        final PlayerZone hand = c.getOwner().getZone(Constant.Zone.Hand);
+        return this.moveTo(hand, c);
     }
 
     /**
@@ -464,8 +465,8 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToPlay(final Card c) {
-        PlayerZone play = c.getOwner().getZone(Constant.Zone.Battlefield);
-        return moveTo(play, c);
+        final PlayerZone play = c.getOwner().getZone(Constant.Zone.Battlefield);
+        return this.moveTo(play, c);
     }
 
     /**
@@ -481,8 +482,8 @@ public class GameAction {
      */
     public final Card moveToPlay(final Card c, final Player p) {
         // move to a specific player's Battlefield
-        PlayerZone play = p.getZone(Constant.Zone.Battlefield);
-        return moveTo(play, c);
+        final PlayerZone play = p.getZone(Constant.Zone.Battlefield);
+        return this.moveTo(play, c);
     }
 
     /**
@@ -495,7 +496,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToBottomOfLibrary(final Card c) {
-        return moveToLibrary(c, -1);
+        return this.moveToLibrary(c, -1);
     }
 
     /**
@@ -508,7 +509,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToLibrary(final Card c) {
-        return moveToLibrary(c, 0);
+        return this.moveToLibrary(c, 0);
     }
 
     /**
@@ -523,14 +524,14 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToLibrary(Card c, int libPosition) {
-        PlayerZone p = AllZone.getZoneOf(c);
-        PlayerZone library = c.getOwner().getZone(Constant.Zone.Library);
+        final PlayerZone p = AllZone.getZoneOf(c);
+        final PlayerZone library = c.getOwner().getZone(Constant.Zone.Library);
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
-            PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
+            final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
             c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
-            + "exile it instead of putting it anywhere else.");
-            return moveTo(removed, c);
+                    + "exile it instead of putting it anywhere else.");
+            return this.moveTo(removed, c);
         }
 
         if (p != null) {
@@ -541,13 +542,13 @@ public class GameAction {
             return c;
         }
 
-        if (p != null && p.is(Constant.Zone.Battlefield)) {
+        if ((p != null) && p.is(Constant.Zone.Battlefield)) {
             c = AllZone.getCardFactory().copyCard(c);
         }
 
         c.clearCounters(); // remove all counters
 
-        if (libPosition == -1 || libPosition > library.size()) {
+        if ((libPosition == -1) || (libPosition > library.size())) {
             libPosition = library.size();
         }
 
@@ -569,7 +570,7 @@ public class GameAction {
             return c;
         }
 
-        PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
+        final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
 
         return AllZone.getGameAction().moveTo(removed, c);
     }
@@ -584,7 +585,7 @@ public class GameAction {
      * @return the card
      */
     public final Card moveTo(final Zone name, final Card c) {
-        return moveTo(name, c, 0);
+        return this.moveTo(name, c, 0);
     }
 
     /**
@@ -603,17 +604,17 @@ public class GameAction {
     public final Card moveTo(final Zone name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         if (name.equals(Constant.Zone.Hand)) {
-            return moveToHand(c);
+            return this.moveToHand(c);
         } else if (name.equals(Constant.Zone.Library)) {
-            return moveToLibrary(c, libPosition);
+            return this.moveToLibrary(c, libPosition);
         } else if (name.equals(Constant.Zone.Battlefield)) {
-            return moveToPlay(c);
+            return this.moveToPlay(c);
         } else if (name.equals(Constant.Zone.Graveyard)) {
-            return moveToGraveyard(c);
+            return this.moveToGraveyard(c);
         } else if (name.equals(Constant.Zone.Exile)) {
-            return exile(c);
+            return this.exile(c);
         } else {
-            return moveToStack(c);
+            return this.moveToStack(c);
         }
     }
 
@@ -626,7 +627,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void discard_PutIntoPlayInstead(final Card c) {
-        moveToPlay(c);
+        this.moveToPlay(c);
 
         if (c.getName().equals("Dodecapod")) {
             c.setCounter(Counters.P1P1, 2, false);
@@ -652,12 +653,12 @@ public class GameAction {
         final Ability cast = new Ability(madness, madness.getMadnessCost()) {
             @Override
             public void resolve() {
-                playCardNoCost(madness);
+                GameAction.this.playCardNoCost(madness);
                 System.out.println("Madness cost paid");
             }
         };
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append(madness.getName()).append(" - Cast via Madness");
         cast.setStackDescription(sb.toString());
 
@@ -681,7 +682,7 @@ public class GameAction {
             }
         };
 
-        StringBuilder sbAct = new StringBuilder();
+        final StringBuilder sbAct = new StringBuilder();
         sbAct.append(madness.getName()).append(" - Discarded. Pay Madness Cost?");
         activate.setStackDescription(sbAct.toString());
 
@@ -697,11 +698,11 @@ public class GameAction {
      */
     public final boolean checkEndGameSate() {
         // Win / Lose
-        GameSummary game = AllZone.getGameInfo();
+        final GameSummary game = AllZone.getGameInfo();
         boolean humanWins = false;
         boolean computerWins = false;
-        Player computer = AllZone.getComputerPlayer();
-        Player human = AllZone.getHumanPlayer();
+        final Player computer = AllZone.getComputerPlayer();
+        final Player human = AllZone.getHumanPlayer();
 
         if (human.hasWon() || computer.hasLost()) { // Winning Conditions can be
                                                     // worth more than losing
@@ -732,7 +733,7 @@ public class GameAction {
             }
         }
 
-        boolean isGameDone = humanWins || computerWins;
+        final boolean isGameDone = humanWins || computerWins;
         if (isGameDone) {
             game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(),
                     computer.getLossConditionSource());
@@ -749,7 +750,7 @@ public class GameAction {
      * </p>
      */
     public final void checkStateEffects() {
-        checkStateEffects(false);
+        this.checkStateEffects(false);
     }
 
     /**
@@ -769,15 +770,15 @@ public class GameAction {
             return;
         }
 
-        boolean refreeze = AllZone.getStack().isFrozen();
+        final boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
-        JFrame frame = (JFrame) AllZone.getDisplay();
+        final JFrame frame = (JFrame) AllZone.getDisplay();
         if (!frame.isDisplayable()) {
             return;
         }
 
-        if (canShowWinLose && checkEndGameSate()) {
+        if (this.canShowWinLose && this.checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
             frame.setEnabled(false);
             // frame.dispose();
@@ -798,7 +799,7 @@ public class GameAction {
 
             // gwl.setAlwaysOnTop(true);
             gwl.toFront();
-            canShowWinLose = false;
+            this.canShowWinLose = false;
             return;
         }
 
@@ -812,10 +813,10 @@ public class GameAction {
             AllZone.getStaticEffects().clearStaticEffects();
 
             // search for cards with static abilities
-            CardList allCards = AllZoneUtil.getCardsInGame();
-            CardList cardsWithStAbs = new CardList();
-            for (Card card : allCards) {
-                ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            final CardList allCards = AllZoneUtil.getCardsInGame();
+            final CardList cardsWithStAbs = new CardList();
+            for (final Card card : allCards) {
+                final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
                 if (!staticAbilities.isEmpty() && !card.isFaceDown()) {
                     cardsWithStAbs.add(card);
                 }
@@ -825,9 +826,9 @@ public class GameAction {
 
             // apply continuous effects
             for (int layer = 4; layer < 11; layer++) {
-                for (Card card : cardsWithStAbs) {
-                    ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-                    for (StaticAbility stAb : staticAbilities) {
+                for (final Card card : cardsWithStAbs) {
+                    final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+                    for (final StaticAbility stAb : staticAbilities) {
                         if (stAb.getLayer() == layer) {
                             stAb.applyAbility("Continuous");
                         }
@@ -835,26 +836,26 @@ public class GameAction {
                 }
             }
 
-            HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
             AllZone.getTriggerHandler().runTrigger("Always", runParams);
 
             // card state effects like Glorious Anthem
-            for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.getCommands().get(effect);
+            for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
+                final Command com = GameActionUtil.getCommands().get(effect);
                 com.execute();
             }
 
-            CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+            final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;
 
-            Iterator<Card> it = list.iterator();
+            final Iterator<Card> it = list.iterator();
 
             while (it.hasNext()) {
                 c = it.next();
 
                 if (c.isEquipped()) {
-                    CardList equipments = new CardList(c.getEquippedBy());
-                    for (Card equipment : equipments) {
+                    final CardList equipments = new CardList(c.getEquippedBy());
+                    for (final Card equipment : equipments) {
                         if (!AllZoneUtil.isCardInPlay(equipment)) {
                             equipment.unEquipCard(c);
                             checkAgain = true;
@@ -863,7 +864,7 @@ public class GameAction {
                 } // if isEquipped()
 
                 if (c.isEquipping()) {
-                    Card equippedCreature = c.getEquipping().get(0);
+                    final Card equippedCreature = c.getEquipping().get(0);
                     if (!AllZoneUtil.isCardInPlay(equippedCreature)) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
@@ -879,38 +880,37 @@ public class GameAction {
 
                 if (c.isAura()) {
                     // Check if Card Aura is attached to is a legal target
-                    GameEntity entity = c.getEnchanting();
-                    SpellAbility sa = c.getSpellPermanent();
+                    final GameEntity entity = c.getEnchanting();
+                    final SpellAbility sa = c.getSpellPermanent();
                     Target tgt = null;
                     if (sa != null) {
                         tgt = sa.getTarget();
                     }
 
                     if (entity instanceof Card) {
-                        Card perm = (Card) entity;
+                        final Card perm = (Card) entity;
                         // I think the Keyword checks might be superfluous with
                         // the isValid check
-                        if (!AllZoneUtil.isCardInPlay(perm)
-                                || perm.hasProtectionFrom(c)
-                                || (tgt != null && !perm.isValid(tgt.getValidTgts(), c.getController(), c)))
-                        {
+                        if (!AllZoneUtil.isCardInPlay(perm) || perm.hasProtectionFrom(c)
+                                || ((tgt != null) && !perm.isValid(tgt.getValidTgts(), c.getController(), c))) {
                             c.unEnchantEntity(perm);
-                            moveToGraveyard(c);
+                            this.moveToGraveyard(c);
                             checkAgain = true;
                         }
                     } else {
-                        Player pl = (Player) entity;
+                        final Player pl = (Player) entity;
                         boolean invalid = false;
 
                         if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().isPlayer(pl)) {
                             invalid = true;
                         } else {
-                            if(pl.hasProtectionFrom(c))
+                            if (pl.hasProtectionFrom(c)) {
                                 invalid = true;
+                            }
                         }
                         if (invalid) {
                             c.unEnchantEntity(pl);
-                            moveToGraveyard(c);
+                            this.moveToGraveyard(c);
                             checkAgain = true;
                         }
                     }
@@ -918,8 +918,8 @@ public class GameAction {
                 } // if isAura
 
                 if (c.isCreature()) {
-                    if (c.getNetDefense() <= c.getDamage() && !c.hasKeyword("Indestructible")) {
-                        destroy(c);
+                    if ((c.getNetDefense() <= c.getDamage()) && !c.hasKeyword("Indestructible")) {
+                        this.destroy(c);
                         // this is untested with instants and abilities but
                         // required for First Strike combat phase
                         AllZone.getCombat().removeFromCombat(c);
@@ -927,7 +927,7 @@ public class GameAction {
                     } else if (c.getNetDefense() <= 0) {
                         // TODO This shouldn't be a destroy, and should happen
                         // before the damage check probably
-                        destroy(c);
+                        this.destroy(c);
                         AllZone.getCombat().removeFromCombat(c);
                         checkAgain = true;
                     }
@@ -941,8 +941,8 @@ public class GameAction {
 
         } // for q=0;q<2
 
-        destroyLegendaryCreatures();
-        destroyPlaneswalkers();
+        this.destroyLegendaryCreatures();
+        this.destroyPlaneswalkers();
 
         GameActionUtil.getStLandManaAbilities().execute();
 
@@ -958,7 +958,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Planeswalker");
+        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Planeswalker");
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -968,16 +968,16 @@ public class GameAction {
                 AllZone.getGameAction().moveToGraveyard(c);
             }
 
-            ArrayList<String> types = c.getType();
-            for (String type : types) {
+            final ArrayList<String> types = c.getType();
+            for (final String type : types) {
                 if (!CardUtil.isAPlaneswalkerType(type)) {
                     continue;
                 }
 
-                CardList cl = list.getType(type);
+                final CardList cl = list.getType(type);
 
                 if (cl.size() > 1) {
-                    for (Card crd : cl) {
+                    for (final Card crd : cl) {
                         AllZone.getGameAction().moveToGraveyard(crd);
                     }
                 }
@@ -991,12 +991,13 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        CardList a = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Legendary");
+        final CardList a = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("Legendary");
 
         while (!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             CardList b = AllZoneUtil.getCardsIn(Zone.Battlefield, a.get(0).getName());
             b = b.getType("Legendary");
             b = b.filter(new CardListFilter() {
+                @Override
                 public boolean addCard(final Card c) {
                     return !c.isFaceDown();
                 }
@@ -1024,10 +1025,10 @@ public class GameAction {
             System.out.println("Trying to sacrifice mana pool...");
             return false;
         }
-        sacrificeDestroy(c);
+        this.sacrificeDestroy(c);
 
         // Run triggers
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
         AllZone.getTriggerHandler().runTrigger("Sacrificed", runParams);
 
@@ -1051,6 +1052,7 @@ public class GameAction {
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy().toArray());
             list = list.filter(new CardListFilter() {
+                @Override
                 public boolean addCard(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
@@ -1070,15 +1072,16 @@ public class GameAction {
                 }
 
                 final Card card = c;
-                Ability_Static ability = new Ability_Static(crd, "0") {
+                final Ability_Static ability = new Ability_Static(crd, "0") {
+                    @Override
                     public void resolve() {
-                        destroy(crd);
+                        GameAction.this.destroy(crd);
                         card.setDamage(0);
 
                     }
                 };
 
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append(crd).append(" - Totem armor: destroy this aura.");
                 ability.setStackDescription(sb.toString());
 
@@ -1087,7 +1090,7 @@ public class GameAction {
             }
         } // totem armor
 
-        return sacrificeDestroy(c);
+        return this.sacrificeDestroy(c);
     }
 
     /**
@@ -1102,9 +1105,10 @@ public class GameAction {
     public static Card addSuspendTriggers(final Card c) {
         c.setSVar("HasteFromSuspend", "True");
 
-        Command intoPlay = new Command() {
+        final Command intoPlay = new Command() {
             private static final long serialVersionUID = -4514610171270596654L;
 
+            @Override
             public void execute() {
                 if (AllZoneUtil.isCardInPlay(c) && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
@@ -1114,9 +1118,10 @@ public class GameAction {
 
         c.addComesIntoPlayCommand(intoPlay);
 
-        Command loseControl = new Command() {
+        final Command loseControl = new Command() {
             private static final long serialVersionUID = -4514610171270596654L;
 
+            @Override
             public void execute() {
                 if (c.getSVar("HasteFromSuspend").equals("True")) {
                     c.setSVar("HasteFromSuspend", "False");
@@ -1144,21 +1149,21 @@ public class GameAction {
             return false;
         }
 
-        Player owner = c.getOwner();
+        final Player owner = c.getOwner();
         if (!(owner.isComputer() || owner.isHuman())) {
             throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         }
 
-        boolean persist = (c.hasKeyword("Persist") && c.getCounters(Counters.M1M1) == 0) && !c.isToken();
+        final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(Counters.M1M1) == 0)) && !c.isToken();
 
-        Card newCard = moveToGraveyard(c);
+        final Card newCard = this.moveToGraveyard(c);
 
         // Destroy needs to be called with Last Known Information
         c.destroy();
 
         // System.out.println("Card " + c.getName() +
         // " is getting sent to GY, and this turn it got damaged by: ");
-        for (Card crd : c.getReceivedDamageFromThisTurn().keySet()) {
+        for (final Card crd : c.getReceivedDamageFromThisTurn().keySet()) {
             if (c.getReceivedDamageFromThisTurn().get(crd) > 0) {
                 // System.out.println(crd.getName() );
                 GameActionUtil.executeVampiricEffects(crd);
@@ -1167,13 +1172,13 @@ public class GameAction {
 
         if (persist) {
             final Card persistCard = newCard;
-            Ability persistAb = new Ability(persistCard, "0") {
+            final Ability persistAb = new Ability(persistCard, "0") {
 
                 @Override
                 public void resolve() {
                     if (AllZone.getZoneOf(persistCard).is(Constant.Zone.Graveyard)) {
-                        PlayerZone ownerPlay = persistCard.getOwner().getZone(Constant.Zone.Battlefield);
-                        Card card = moveTo(ownerPlay, persistCard);
+                        final PlayerZone ownerPlay = persistCard.getOwner().getZone(Constant.Zone.Battlefield);
+                        final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
                         AllZone.getGameAction().checkStateEffects(true);
                         card.addCounter(Counters.M1M1, 1);
                     }
@@ -1196,12 +1201,11 @@ public class GameAction {
      */
     public final boolean destroy(final Card c) {
         if (!AllZoneUtil.isCardInPlay(c)
-                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0)))
-        {
+                || (c.hasKeyword("Indestructible") && (!c.isCreature() || (c.getNetDefense() > 0)))) {
             return false;
         }
 
-        if (c.canBeShielded() && c.getShield() > 0) {
+        if (c.canBeShielded() && (c.getShield() > 0)) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
@@ -1212,6 +1216,7 @@ public class GameAction {
         if (c.isEnchanted()) {
             CardList list = new CardList(c.getEnchantedBy().toArray());
             list = list.filter(new CardListFilter() {
+                @Override
                 public boolean addCard(final Card crd) {
                     return crd.hasKeyword("Totem armor");
                 }
@@ -1231,13 +1236,13 @@ public class GameAction {
                 }
 
                 c.setDamage(0);
-                destroy(crd);
+                this.destroy(crd);
                 System.out.println("Totem armor destroyed instead of original card");
                 return false;
             }
         } // totem armor
 
-        return sacrificeDestroy(c);
+        return this.sacrificeDestroy(c);
     }
 
     /**
@@ -1268,13 +1273,13 @@ public class GameAction {
         AllZone.getComputerPlayer().setLife(computerLife, null);
         AllZone.getHumanPlayer().setLife(humanLife, null);
 
-        for (Card c : human) {
+        for (final Card c : human) {
 
             AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(c);
             c.setSickness(true);
         }
 
-        for (Card c : computer) {
+        for (final Card c : computer) {
 
             AllZone.getComputerPlayer().getZone(Zone.Battlefield).add(c);
             c.setSickness(true);
@@ -1300,27 +1305,27 @@ public class GameAction {
         Constant.Quest.FANTASY_QUEST[0] = false;
 
         AllZone.newGameCleanup();
-        canShowWinLose = true;
+        this.canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
 
         // friendliness
-        CardFactoryInterface c = AllZone.getCardFactory();
+        final CardFactoryInterface c = AllZone.getCardFactory();
         Card.resetUniqueNumber();
-        boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
+        final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
-        Random generator = MyRandom.getRandom();
-        for (Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
-            CardPrinted cardPrinted = stackOfCards.getKey();
+        final Random generator = MyRandom.getRandom();
+        for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
+            final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
                 if (cardPrinted.isAlternate()) {
                     continue;
                 }
-                Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
+                final Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
                 card.setCurSetCode(cardPrinted.getSet());
 
-                int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
                 }
@@ -1329,7 +1334,7 @@ public class GameAction {
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    int iFoil = MyRandom.getRandom().nextInt(9) + 1;
+                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
                     card.setFoil(iFoil);
                 }
 
@@ -1342,15 +1347,15 @@ public class GameAction {
                 }
             }
         }
-        ArrayList<String> RAICards = new ArrayList<String>();
-        for (Entry<CardPrinted, Integer> stackOfCards : computerDeck.getMain()) {
-            CardPrinted cardPrinted = stackOfCards.getKey();
+        final ArrayList<String> RAICards = new ArrayList<String>();
+        for (final Entry<CardPrinted, Integer> stackOfCards : computerDeck.getMain()) {
+            final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
+                final Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
                 card.setCurSetCode(cardPrinted.getSet());
 
-                int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
                 }
@@ -1359,7 +1364,7 @@ public class GameAction {
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    int iFoil = MyRandom.getRandom().nextInt(9) + 1;
+                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
                     card.setFoil(iFoil);
                 }
 
@@ -1370,7 +1375,7 @@ public class GameAction {
                     // get card picture so that it is in the image cache
                     // ImageCache.getImage(card);
                 }
-                
+
                 if (card.hasAlternateState()) {
                     card.changeState();
                     card.setImageFilename(CardUtil.buildFilename(card));
@@ -1379,7 +1384,7 @@ public class GameAction {
             }
         }
         if (RAICards.size() > 0) {
-            StringBuilder sb = new StringBuilder(
+            final StringBuilder sb = new StringBuilder(
                     "AI deck contains the following cards that it can't play or may be buggy:\n");
             for (int i = 0; i < RAICards.size(); i++) {
                 sb.append(RAICards.get(i));
@@ -1398,10 +1403,11 @@ public class GameAction {
         }
 
         // do this instead of shuffling Computer's deck
-        boolean smoothLand = Constant.Runtime.SMOOTH[0];
+        final boolean smoothLand = Constant.Runtime.SMOOTH[0];
 
         if (smoothLand) {
-            Card[] c1 = smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
+            final Card[] c1 = this.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library)
+                    .toArray());
             AllZone.getComputerPlayer().getZone(Zone.Library).setCards(c1);
         } else {
             // WTF? (it was so before refactor)
@@ -1414,14 +1420,14 @@ public class GameAction {
         if (AllZone.getMatchState().getGamesPlayedCount() == 0) {
             // New code to determine who goes first. Delete this if it doesn't
             // work properly
-            if (isStartCut()) {
-                seeWhoPlaysFirst();
+            if (this.isStartCut()) {
+                this.seeWhoPlaysFirst();
             } else {
-                seeWhoPlaysFirst_CoinToss();
+                this.seeWhoPlaysFirst_CoinToss();
             }
         } else if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
-            computerStartsGame();
+            this.computerStartsGame();
         }
 
         for (int i = 0; i < 7; i++) {
@@ -1431,7 +1437,7 @@ public class GameAction {
 
         // TODO ManaPool should be moved to Player and be represented in the
         // player panel
-        ManaPool mp = AllZone.getHumanPlayer().getManaPool();
+        final ManaPool mp = AllZone.getHumanPlayer().getManaPool();
         mp.setImageFilename("mana_pool");
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(mp);
 
@@ -1452,7 +1458,7 @@ public class GameAction {
      * @return an array of {@link forge.Card} objects.
      */
     final Card[] smoothComputerManaCurve(final Card[] in) {
-        CardList library = new CardList(in);
+        final CardList library = new CardList(in);
         library.shuffle();
 
         // remove all land, keep non-basicland in there, shuffled
@@ -1465,7 +1471,7 @@ public class GameAction {
 
         // non-basic lands are removed, because the computer doesn't seem to
         // effectively use them very well
-        land = threadLand(land);
+        land = this.threadLand(land);
 
         try {
             // mana weave, total of 7 land
@@ -1479,7 +1485,7 @@ public class GameAction {
 
             library.add(12, land.get(5));
             library.add(15, land.get(6));
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             System.err.println("Error: cannot smooth mana curve, not enough land");
             return in;
         }
@@ -1516,22 +1522,22 @@ public class GameAction {
         // "Plains"}; //unused
 
         // Thread stuff with as large a spread of colors as possible:
-        String[] allLand = {"Bayou", "Volcanic Island", "Savannah", "Badlands", "Tundra", "Taiga", "Underground Sea",
-                "Plateau", "Tropical Island", "Scrubland", "Overgrown Tomb", "Steam Vents", "Temple Garden",
-                "Blood Crypt", "Hallowed Fountain", "Stomping Ground", "Watery Grave", "Sacred Foundry",
-                "Breeding Pool", "Godless Shrine", "Pendelhaven", "Flagstones of Trokair", "Forest", "Swamp",
-                "Mountain", "Island", "Plains", "Tree of Tales", "Vault of Whispers", "Great Furnace",
+        final String[] allLand = { "Bayou", "Volcanic Island", "Savannah", "Badlands", "Tundra", "Taiga",
+                "Underground Sea", "Plateau", "Tropical Island", "Scrubland", "Overgrown Tomb", "Steam Vents",
+                "Temple Garden", "Blood Crypt", "Hallowed Fountain", "Stomping Ground", "Watery Grave",
+                "Sacred Foundry", "Breeding Pool", "Godless Shrine", "Pendelhaven", "Flagstones of Trokair", "Forest",
+                "Swamp", "Mountain", "Island", "Plains", "Tree of Tales", "Vault of Whispers", "Great Furnace",
                 "Seat of the Synod", "Ancient Den", "Treetop Village", "Ghitu Encampment", "Faerie Conclave",
                 "Forbidding Watchtower", "Savage Lands", "Arcane Sanctum", "Jungle Shrine", "Crumbling Necropolis",
                 "Seaside Citadel", "Elfhame Palace", "Coastal Tower", "Salt Marsh", "Kher Keep",
-                "Library of Alexandria", "Dryad Arbor"};
+                "Library of Alexandria", "Dryad Arbor" };
 
-        ArrayList<CardList> land = new ArrayList<CardList>();
+        final ArrayList<CardList> land = new ArrayList<CardList>();
 
         // get different CardList of all Forest, Swamps, etc...
         CardList check;
-        for (int i = 0; i < allLand.length; i++) {
-            check = in.getName(allLand[i]);
+        for (final String element : allLand) {
+            check = in.getName(element);
 
             if (!check.isEmpty()) {
                 land.add(check);
@@ -1545,7 +1551,7 @@ public class GameAction {
 
         // thread all separate CardList's of land together to get something like
         // Mountain, Plains, Island, Mountain, Plains, Island
-        CardList out = new CardList();
+        final CardList out = new CardList();
 
         int i = 0;
         while (!land.isEmpty()) {
@@ -1580,7 +1586,7 @@ public class GameAction {
     @SuppressWarnings("unused")
     // getDifferentLand
     private int getDifferentLand(final CardList list, final String land) {
-        int out = 0;
+        final int out = 0;
 
         return out;
     }
@@ -1593,13 +1599,13 @@ public class GameAction {
      * </p>
      */
     public final void seeWhoPlaysFirst_CoinToss() {
-        Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
+        final Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
                 ForgeProps.getLocalized(GameActionText.TAILS) };
-        Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
+        final Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
                 ForgeProps.getLocalized(GameActionText.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
-        int Flip = MyRandom.getRandom().nextInt(2);
+        final int Flip = MyRandom.getRandom().nextInt(2);
         String Human_Flip = " ";
         String Computer_Flip = " ";
         // JOptionPane.showMessageDialog(null, q, "",
@@ -1612,12 +1618,12 @@ public class GameAction {
             Computer_Flip = ForgeProps.getLocalized(GameActionText.HEADS);
         }
 
-        if ((Flip == 0 && q.equals(0)) || (Flip == 1 && q.equals(1))) {
+        if (((Flip == 0) && q.equals(0)) || ((Flip == 1) && q.equals(1))) {
             JOptionPane.showMessageDialog(null,
                     Human_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
-            computerStartsGame();
+            this.computerStartsGame();
             JOptionPane.showMessageDialog(null,
                     Computer_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -1639,31 +1645,28 @@ public class GameAction {
         CardList CLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
         CLibrary = CLibrary.filter(CardListFilter.NON_LANDS);
 
-        boolean Starter_Determined = false;
+        final boolean Starter_Determined = false;
         int Cut_Count = 0;
-        int Cut_CountMax = 20;
+        final int Cut_CountMax = 20;
         for (int i = 0; i < Cut_CountMax; i++) {
             if (Starter_Determined) {
                 break;
             }
 
             if (HLibrary.size() > 0) {
-                setHumanCut(HLibrary.get(MyRandom.getRandom().nextInt(HLibrary.size())));
+                this.setHumanCut(HLibrary.get(MyRandom.getRandom().nextInt(HLibrary.size())));
             } else {
-                computerStartsGame();
-                JOptionPane
-                        .showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
-                                + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
-                                JOptionPane.INFORMATION_MESSAGE);
+                this.computerStartsGame();
+                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
+                        + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
             if (CLibrary.size() > 0) {
-                setComputerCut(CLibrary.get(MyRandom.getRandom().nextInt(CLibrary.size())));
+                this.setComputerCut(CLibrary.get(MyRandom.getRandom().nextInt(CLibrary.size())));
             } else {
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST)
-                        + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
-                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST) + "\r\n"
+                        + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
@@ -1673,32 +1676,32 @@ public class GameAction {
             AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
                     AllZone.getGameAction().getComputerCut());
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(ForgeProps.getLocalized(GameActionText.HUMAN_CUT) + getHumanCut().getName() + " ("
-                    + getHumanCut().getManaCost() + ")" + "\r\n");
-            sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + getComputerCut().getName() + " ("
-                    + getComputerCut().getManaCost() + ")" + "\r\n");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(ForgeProps.getLocalized(GameActionText.HUMAN_CUT) + this.getHumanCut().getName() + " ("
+                    + this.getHumanCut().getManaCost() + ")" + "\r\n");
+            sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + this.getComputerCut().getName() + " ("
+                    + this.getComputerCut().getManaCost() + ")" + "\r\n");
             sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
-            if (CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) > CardUtil
-                    .getConvertedManaCost(getHumanCut().getManaCost())) {
-                computerStartsGame();
+            if (CardUtil.getConvertedManaCost(this.getComputerCut().getManaCost()) > CardUtil.getConvertedManaCost(this
+                    .getHumanCut().getManaCost())) {
+                this.computerStartsGame();
                 JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
-            } else if (CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) < CardUtil
-                    .getConvertedManaCost(getHumanCut().getManaCost())) {
+            } else if (CardUtil.getConvertedManaCost(this.getComputerCut().getManaCost()) < CardUtil
+                    .getConvertedManaCost(this.getHumanCut().getManaCost())) {
                 JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
             } else {
                 sb.append(ForgeProps.getLocalized(GameActionText.EQUAL_CONVERTED_MANA) + "\r\n");
-                if (i == Cut_CountMax - 1) {
+                if (i == (Cut_CountMax - 1)) {
                     sb.append(ForgeProps.getLocalized(GameActionText.RESOLVE_STARTER));
                     if (MyRandom.getRandom().nextInt(2) == 1) {
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN),
-                                "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
+                                JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        computerStartsGame();
+                        this.computerStartsGame();
                         JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN),
                                 "", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -1718,7 +1721,7 @@ public class GameAction {
      * </p>
      */
     public final void computerStartsGame() {
-        Player computer = AllZone.getComputerPlayer();
+        final Player computer = AllZone.getComputerPlayer();
         AllZone.getPhase().setPlayerTurn(computer);
         AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
@@ -1737,10 +1740,10 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean isAttacheeByMindsDesire(final Card c) {
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
-            Card[] cc = list.getCard(i).getAttachedCardsByMindsDesire();
+            final Card[] cc = list.getCard(i).getAttachedCardsByMindsDesire();
             if (Arrays.binarySearch(cc, c) >= 0) {
                 return true;
             }
@@ -1760,20 +1763,20 @@ public class GameAction {
      */
     public final boolean playCard(final Card c) {
         // this can only be called by the Human
-        HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
-        ArrayList<String> choices = new ArrayList<String>();
-        Player human = AllZone.getHumanPlayer();
+        final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        final SpellAbility[] abilities = this.canPlaySpellAbility(c.getSpellAbility());
+        final ArrayList<String> choices = new ArrayList<String>();
+        final Player human = AllZone.getHumanPlayer();
 
         if (c.isLand() && human.canPlayLand()) {
-            PlayerZone zone = AllZone.getZoneOf(c);
+            final PlayerZone zone = AllZone.getZoneOf(c);
 
-            if (zone.is(Zone.Hand) || (!zone.is(Zone.Battlefield)) && c.hasStartOfKeyword("May be played")) {
+            if (zone.is(Zone.Hand) || ((!zone.is(Zone.Battlefield)) && c.hasStartOfKeyword("May be played"))) {
                 choices.add("Play land");
             }
         }
 
-        for (SpellAbility sa : abilities) {
+        for (final SpellAbility sa : abilities) {
             // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
             if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
@@ -1800,9 +1803,9 @@ public class GameAction {
             return true;
         }
 
-        SpellAbility ability = map.get(choice);
+        final SpellAbility ability = map.get(choice);
         if (ability != null) {
-            playSpellAbility(ability);
+            this.playSpellAbility(ability);
             return true;
         }
         return false;
@@ -1817,7 +1820,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void playCardNoCost(final Card c) {
-        ArrayList<SpellAbility> choices = c.getBasicSpells();
+        final ArrayList<SpellAbility> choices = c.getBasicSpells();
         SpellAbility sa;
 
         // TODO add Buyback, Kicker, ... , spells here
@@ -1838,7 +1841,7 @@ public class GameAction {
         if (sa.getActivatingPlayer() == null) {
             sa.setActivatingPlayer(AllZone.getHumanPlayer());
         }
-        playSpellAbilityForFree(sa);
+        this.playSpellAbilityForFree(sa);
     }
 
     /**
@@ -1851,15 +1854,15 @@ public class GameAction {
      */
     public final void playSpellAbilityForFree(final SpellAbility sa) {
         if (sa.getPayCosts() != null) {
-            Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
-            Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
+            final Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
 
-            SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
             req.setFree(true);
             req.fillRequirements();
         } else if (sa.getBeforePayMana() == null) {
             if (sa.isSpell()) {
-                Card c = sa.getSourceCard();
+                final Card c = sa.getSourceCard();
                 if (!c.isCopiedSpell()) {
                     sa.setSourceCard(AllZone.getGameAction().moveToStack(c));
                 }
@@ -1870,9 +1873,10 @@ public class GameAction {
             }
 
             if (sa.isKickerAbility()) {
-                Command paid1 = new Command() {
+                final Command paid1 = new Command() {
                     private static final long serialVersionUID = -6531785460264284794L;
 
+                    @Override
                     public void execute() {
                         AllZone.getStack().add(sa);
                     }
@@ -1912,9 +1916,9 @@ public class GameAction {
      */
     public final ManaCost getSpellCostChange(final SpellAbility sa, final ManaCost originalCost) {
         // Beached
-        Card originalCard = sa.getSourceCard();
-        Player controller = originalCard.getController();
-        SpellAbility spell = sa;
+        final Card originalCard = sa.getSourceCard();
+        final Player controller = originalCard.getController();
+        final SpellAbility spell = sa;
         String mana = originalCost.toString();
         ManaCost manaCost = new ManaCost(mana);
         if (sa.isXCost() && !originalCard.isCopiedSpell()) {
@@ -1927,53 +1931,54 @@ public class GameAction {
 
         if (spell.isSpell()) {
             if (originalCard.getName().equals("Avatar of Woe")) {
-                Player player = AllZone.getPhase().getPlayerTurn();
-                Player opponent = player.getOpponent();
-                CardList PlayerCreatureList = player.getCardsIn(Zone.Graveyard);
-                PlayerCreatureList = PlayerCreatureList.getType("Creature");
-                CardList OpponentCreatureList = opponent.getCardsIn(Zone.Graveyard);
-                OpponentCreatureList = OpponentCreatureList.getType("Creature");
-                if ((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
+                final Player player = AllZone.getPhase().getPlayerTurn();
+                final Player opponent = player.getOpponent();
+                CardList playerCreatureList = player.getCardsIn(Zone.Graveyard);
+                playerCreatureList = playerCreatureList.getType("Creature");
+                CardList opponentCreatureList = opponent.getCardsIn(Zone.Graveyard);
+                opponentCreatureList = opponentCreatureList.getType("Creature");
+                if ((playerCreatureList.size() + opponentCreatureList.size()) >= 10) {
                     manaCost = new ManaCost("B B");
                 } // Avatar of Woe
             } else if (originalCard.getName().equals("Avatar of Will")) {
-                Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
-                CardList opponentHandList = opponent.getCardsIn(Zone.Hand);
+                final Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
+                final CardList opponentHandList = opponent.getCardsIn(Zone.Hand);
                 if (opponentHandList.size() == 0) {
                     manaCost = new ManaCost("U U");
                 } // Avatar of Will
             } else if (originalCard.getName().equals("Avatar of Fury")) {
-                Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
-                CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
+                final Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
+                final CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
                 if (opponentLand.size() >= 7) {
                     manaCost = new ManaCost("R R");
                 } // Avatar of Fury
             } else if (originalCard.getName().equals("Avatar of Might")) {
-                Player player = AllZone.getPhase().getPlayerTurn();
-                Player opponent = player.getOpponent();
-                CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
-                CardList opponentCreature = AllZoneUtil.getCreaturesInPlay(opponent);
-                if (opponentCreature.size() - playerCreature.size() >= 4) {
+                final Player player = AllZone.getPhase().getPlayerTurn();
+                final Player opponent = player.getOpponent();
+                final CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
+                final CardList opponentCreature = AllZoneUtil.getCreaturesInPlay(opponent);
+                if ((opponentCreature.size() - playerCreature.size()) >= 4) {
                     manaCost = new ManaCost("G G");
                 } // Avatar of Might
             } else if (spell.getIsDelve()) {
-                int cardsInGrave = originalCard.getController().getCardsIn(Zone.Graveyard).size();
-                ArrayList<Integer> choiceList = new ArrayList<Integer>();
+                final int cardsInGrave = originalCard.getController().getCardsIn(Zone.Graveyard).size();
+                final ArrayList<Integer> choiceList = new ArrayList<Integer>();
                 for (int i = 0; i <= cardsInGrave; i++) {
                     choiceList.add(i);
                 }
 
                 if (originalCard.getController().isHuman()) {
 
-                    int chosenAmount = (Integer) GuiUtils.getChoice("Exile how many cards?", choiceList.toArray());
+                    final int chosenAmount = (Integer) GuiUtils
+                            .getChoice("Exile how many cards?", choiceList.toArray());
                     System.out.println("Delve for " + chosenAmount);
-                    CardList choices = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
-                    CardList chosen = new CardList();
+                    final CardList choices = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
+                    final CardList chosen = new CardList();
                     for (int i = 0; i < chosenAmount; i++) {
-                        Card nowChosen = (Card) GuiUtils.getChoiceOptional("Exile which card?", choices.toArray());
+                        final Card nowChosen = GuiUtils.getChoiceOptional("Exile which card?", choices.toArray());
 
                         if (nowChosen == null) {
-                         // User canceled,abort delving.
+                            // User canceled,abort delving.
                             chosen.clear();
                             break;
                         }
@@ -1982,8 +1987,8 @@ public class GameAction {
                         chosen.add(nowChosen);
                     }
 
-                    for (Card c : chosen) {
-                        exile(c);
+                    for (final Card c : chosen) {
+                        this.exile(c);
                     }
 
                     manaCost = new ManaCost(originalCost.toString());
@@ -1991,7 +1996,7 @@ public class GameAction {
                 } else {
                     // AI
                     int numToExile = 0;
-                    int colorlessCost = originalCost.getColorlessManaAmount();
+                    final int colorlessCost = originalCost.getColorlessManaAmount();
 
                     if (cardsInGrave <= colorlessCost) {
                         numToExile = cardsInGrave;
@@ -2000,13 +2005,15 @@ public class GameAction {
                     }
 
                     for (int i = 0; i < numToExile; i++) {
-                        CardList grave = new CardList(AllZone.getComputerPlayer().getZone(Zone.Graveyard).getCards());
+                        final CardList grave = new CardList(AllZone.getComputerPlayer().getZone(Zone.Graveyard)
+                                .getCards());
                         Card chosen = null;
-                        for (Card c : grave) { // Exile noncreatures first in
-                                               // case we can revive. Might
-                                               // wanna do some additional
-                                               // checking here for Flashback
-                                               // and the like.
+                        for (final Card c : grave) { // Exile noncreatures first
+                                                     // in
+                            // case we can revive. Might
+                            // wanna do some additional
+                            // checking here for Flashback
+                            // and the like.
                             if (!c.isCreature()) {
                                 chosen = c;
                                 break;
@@ -2021,15 +2028,16 @@ public class GameAction {
                             chosen = grave.get(0);
                         }
 
-                        exile(chosen);
+                        this.exile(chosen);
                     }
                 }
             }
         } // isSpell
 
         // Get Cost Reduction
-        CardList Cards_In_Play = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+        CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        cardsInPlay = cardsInPlay.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 if (c.getKeyword().toString().contains("CostChange")) {
                     return true;
@@ -2037,32 +2045,32 @@ public class GameAction {
                 return false;
             }
         });
-        Cards_In_Play.add(originalCard);
-        CardList Player_Play = controller.getCardsIn(Zone.Battlefield);
-        CardList Player_Hand = controller.getCardsIn(Zone.Hand);
-        int XBonus = 0;
-        int Max = 25;
+        cardsInPlay.add(originalCard);
+        final CardList playerPlay = controller.getCardsIn(Zone.Battlefield);
+        final CardList playerHand = controller.getCardsIn(Zone.Hand);
+        int xBonus = 0;
+        final int max = 25;
         if (sa.isMultiKicker()) {
-            CostCutting_GetMultiMickerManaCostPaid_Colored = "";
+            this.CostCutting_GetMultiMickerManaCostPaid_Colored = "";
         }
 
         if (mana.toString().length() == 0) {
             mana = "0";
         }
-        for (int i = 0; i < Cards_In_Play.size(); i++) {
-            Card card = Cards_In_Play.get(i);
-            ArrayList<String> a = card.getKeyword();
-            int CostKeywords = 0;
-            int[] CostKeyword_Number = new int[a.size()];
+        for (int i = 0; i < cardsInPlay.size(); i++) {
+            final Card card = cardsInPlay.get(i);
+            final ArrayList<String> a = card.getKeyword();
+            int costKeywords = 0;
+            final int[] costKeywordNumber = new int[a.size()];
             for (int x = 0; x < a.size(); x++) {
                 if (a.get(x).toString().startsWith("CostChange")) {
-                    CostKeyword_Number[CostKeywords] = x;
-                    CostKeywords = CostKeywords + 1;
+                    costKeywordNumber[costKeywords] = x;
+                    costKeywords = costKeywords + 1;
                 }
             }
-            for (int CKeywords = 0; CKeywords < CostKeywords; CKeywords++) {
-                String parse = card.getKeyword().get(CostKeyword_Number[CKeywords]).toString();
-                String[] k = parse.split(":");
+            for (int cKeywords = 0; cKeywords < costKeywords; cKeywords++) {
+                final String parse = card.getKeyword().get(costKeywordNumber[cKeywords]).toString();
+                final String[] k = parse.split(":");
                 if (card.equals(originalCard)) {
                     if (!k[4].equals("Self")) {
                         k[2] = "Owned";
@@ -2074,16 +2082,16 @@ public class GameAction {
                 if (k[2].equals("More")) {
                     if (k[7].equals("OnlyOneBonus")) { // Only Works for Color
                                                        // and Type
-                        for (int string_no = 5; string_no < 7; string_no++) {
-                            String spilt = k[string_no];
-                            String[] color_spilt = spilt.split("/");
+                        for (int stringNo = 5; stringNo < 7; stringNo++) {
+                            final String spilt = k[stringNo];
+                            final String[] colorSpilt = spilt.split("/");
 
-                            for (int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
-                                k[string_no] = color_spilt[cs_num];
-                                if (string_no == 5 && CardUtil.getColors(originalCard).contains(k[5])) {
+                            for (final String element : colorSpilt) {
+                                k[stringNo] = element;
+                                if ((stringNo == 5) && CardUtil.getColors(originalCard).contains(k[5])) {
                                     break;
                                 }
-                                if (string_no == 6 && (originalCard.isType(k[6]))) {
+                                if ((stringNo == 6) && (originalCard.isType(k[6]))) {
                                     break;
                                 }
                             }
@@ -2091,19 +2099,19 @@ public class GameAction {
                     }
                     if (k[7].contains("All Conditions")) { // Only Works for
                                                            // Color and Type
-                        for (int string_no = 5; string_no < 7; string_no++) {
-                            String spilt = k[string_no];
-                            String[] color_spilt = spilt.split("/");
-                            for (int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
-                                k[string_no] = color_spilt[cs_num];
-                                if (string_no == 5) {
+                        for (int stringNo = 5; stringNo < 7; stringNo++) {
+                            final String spilt = k[stringNo];
+                            final String[] colorSpilt = spilt.split("/");
+                            for (final String element : colorSpilt) {
+                                k[stringNo] = element;
+                                if (stringNo == 5) {
                                     if (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")) {
                                     } else {
                                         k[5] = "Nullified";
                                         break;
                                     }
                                 }
-                                if (string_no == 6) {
+                                if (stringNo == 6) {
                                     if (originalCard.isType(k[6]) || k[6].equals("All")) {
                                     } else {
                                         k[6] = "Nullified";
@@ -2119,12 +2127,11 @@ public class GameAction {
                             k[6] = "All";
                         }
                     }
-                    if ((k[1].equals("Player") && card.getController().equals(controller)
-                            || (k[1].equals("Opponent")
-                                    && card.getController().equals(controller.getOpponent())) || k[1]
+                    if (((k[1].equals("Player") && card.getController().equals(controller))
+                            || (k[1].equals("Opponent") && card.getController().equals(controller.getOpponent())) || k[1]
                                 .equals("All"))
-                            && ((k[4].equals("Spell") && sa.isSpell() == true)
-                                    || (k[4].equals("Ability") && sa.isAbility() == true)
+                            && ((k[4].equals("Spell") && (sa.isSpell()))
+                                    || (k[4].equals("Ability") && (sa.isAbility()))
                                     || (k[4].startsWith("Ability_Cycling") && sa.isCycling())
                                     || (k[4].equals("Self") && originalCard.equals(card))
                                     || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4]
@@ -2133,17 +2140,17 @@ public class GameAction {
                             && ((originalCard.isType(k[6]))
                                     || (!(originalCard.isType(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {
                         if (k[7].contains("CardIsTapped")) {
-                            if (card.isTapped() == false) {
+                            if (!card.isTapped()) {
                                 k[3] = "0";
                             }
                         }
                         if (k[7].contains("TargetInPlay")) {
-                            if (!Player_Play.contains(originalCard)) {
+                            if (!playerPlay.contains(originalCard)) {
                                 k[3] = "0";
                             }
                         }
                         if (k[7].contains("TargetInHand")) {
-                            if (!Player_Hand.contains(originalCard)) {
+                            if (!playerHand.contains(originalCard)) {
                                 k[3] = "0";
                             }
                         }
@@ -2158,30 +2165,30 @@ public class GameAction {
                             }
                         }
                         if (k[7].contains("Affinity")) {
-                            String spilt = k[7];
-                            String[] color_spilt = spilt.split("/");
+                            final String spilt = k[7];
+                            final String[] color_spilt = spilt.split("/");
                             k[7] = color_spilt[1];
-                            CardList PlayerList = controller.getCardsIn(Zone.Battlefield);
-                            PlayerList = PlayerList.getType(k[7]);
-                            k[3] = String.valueOf(PlayerList.size());
+                            CardList playerList = controller.getCardsIn(Zone.Battlefield);
+                            playerList = playerList.getType(k[7]);
+                            k[3] = String.valueOf(playerList.size());
                         }
-                        String[] Numbers = new String[Max];
+                        final String[] numbers = new String[max];
                         if ("X".equals(k[3])) {
-                            for (int no = 0; no < Max; no++) {
-                                Numbers[no] = String.valueOf(no);
+                            for (int no = 0; no < max; no++) {
+                                numbers[no] = String.valueOf(no);
                             }
-                            String Number_ManaCost = " ";
+                            String numberManaCost = " ";
                             if (mana.toString().length() == 1) {
-                                Number_ManaCost = mana.toString().substring(0, 1);
+                                numberManaCost = mana.toString().substring(0, 1);
                             } else if (mana.toString().length() == 0) {
-                                Number_ManaCost = "0"; // Should Never Occur
+                                numberManaCost = "0"; // Should Never Occur
                             } else {
-                                Number_ManaCost = mana.toString().substring(0, 2);
+                                numberManaCost = mana.toString().substring(0, 2);
                             }
-                            Number_ManaCost = Number_ManaCost.trim();
-                            for (int check = 0; check < Max; check++) {
-                                if (Number_ManaCost.equals(Numbers[check])) {
-                                    int xValue = CardFactoryUtil.xCount(card, card.getSVar("X"));
+                            numberManaCost = numberManaCost.trim();
+                            for (int check = 0; check < max; check++) {
+                                if (numberManaCost.equals(numbers[check])) {
+                                    final int xValue = CardFactoryUtil.xCount(card, card.getSVar("X"));
                                     // if((spell.isXCost()) ||
                                     // (spell.isMultiKicker()) && (check -
                                     // Integer.valueOf(k[3])) < 0) XBonus =
@@ -2194,8 +2201,8 @@ public class GameAction {
                                 manaCost = new ManaCost(mana);
                             }
                         } else if (!"WUGRB".contains(k[3])) {
-                            for (int no = 0; no < Max; no++) {
-                                Numbers[no] = String.valueOf(no);
+                            for (int no = 0; no < max; no++) {
+                                numbers[no] = String.valueOf(no);
                             }
                             String Number_ManaCost = " ";
                             if (mana.toString().length() == 1) {
@@ -2207,8 +2214,8 @@ public class GameAction {
                             }
                             Number_ManaCost = Number_ManaCost.trim();
 
-                            for (int check = 0; check < Max; check++) {
-                                if (Number_ManaCost.equals(Numbers[check])) {
+                            for (int check = 0; check < max; check++) {
+                                if (Number_ManaCost.equals(numbers[check])) {
                                     mana = mana.replaceFirst(String.valueOf(check),
                                             String.valueOf(check + Integer.valueOf(k[3])));
                                 }
@@ -2236,20 +2243,20 @@ public class GameAction {
 
         if (mana.equals("0") && spell.isAbility()) {
         } else {
-            for (int i = 0; i < Cards_In_Play.size(); i++) {
-                Card card = Cards_In_Play.get(i);
-                ArrayList<String> a = card.getKeyword();
-                int CostKeywords = 0;
-                int[] CostKeyword_Number = new int[a.size()];
+            for (int i = 0; i < cardsInPlay.size(); i++) {
+                final Card card = cardsInPlay.get(i);
+                final ArrayList<String> a = card.getKeyword();
+                int costKeywords = 0;
+                final int[] costKeyword_Number = new int[a.size()];
                 for (int x = 0; x < a.size(); x++) {
                     if (a.get(x).toString().startsWith("CostChange")) {
-                        CostKeyword_Number[CostKeywords] = x;
-                        CostKeywords = CostKeywords + 1;
+                        costKeyword_Number[costKeywords] = x;
+                        costKeywords = costKeywords + 1;
                     }
                 }
-                for (int CKeywords = 0; CKeywords < CostKeywords; CKeywords++) {
-                    String parse = card.getKeyword().get(CostKeyword_Number[CKeywords]).toString();
-                    String[] k = parse.split(":");
+                for (int cKeywords = 0; cKeywords < costKeywords; cKeywords++) {
+                    final String parse = card.getKeyword().get(costKeyword_Number[cKeywords]).toString();
+                    final String[] k = parse.split(":");
                     if (card.equals(originalCard)) {
                         if (!k[4].equals("Self")) {
                             k[2] = "Owned";
@@ -2261,16 +2268,16 @@ public class GameAction {
                     if (k[2].equals("Less")) {
                         if (k[7].equals("OnlyOneBonus")) { // Only Works for
                                                            // Color and Type
-                            for (int string_no = 5; string_no < 7; string_no++) {
-                                String spilt = k[string_no];
-                                String[] color_spilt = spilt.split("/");
+                            for (int stringNo = 5; stringNo < 7; stringNo++) {
+                                final String spilt = k[stringNo];
+                                final String[] colorSpilt = spilt.split("/");
 
-                                for (int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
-                                    k[string_no] = color_spilt[cs_num];
-                                    if (string_no == 5 && CardUtil.getColors(originalCard).contains(k[5])) {
+                                for (final String element : colorSpilt) {
+                                    k[stringNo] = element;
+                                    if ((stringNo == 5) && CardUtil.getColors(originalCard).contains(k[5])) {
                                         break;
                                     }
-                                    if (string_no == 6 && (originalCard.isType(k[6]))) {
+                                    if ((stringNo == 6) && (originalCard.isType(k[6]))) {
                                         break;
                                     }
                                 }
@@ -2278,19 +2285,19 @@ public class GameAction {
                         }
                         if (k[7].contains("All Conditions")) { // Only Works for
                                                                // Color and Type
-                            for (int string_no = 5; string_no < 7; string_no++) {
-                                String spilt = k[string_no];
-                                String[] color_spilt = spilt.split("/");
-                                for (int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
-                                    k[string_no] = color_spilt[cs_num];
-                                    if (string_no == 5) {
+                            for (int stringNo = 5; stringNo < 7; stringNo++) {
+                                final String spilt = k[stringNo];
+                                final String[] colorSpilt = spilt.split("/");
+                                for (final String element : colorSpilt) {
+                                    k[stringNo] = element;
+                                    if (stringNo == 5) {
                                         if (CardUtil.getColors(originalCard).contains(k[5]) || k[5].equals("All")) {
                                         } else {
                                             k[5] = "Nullified";
                                             break;
                                         }
                                     }
-                                    if (string_no == 6) {
+                                    if (stringNo == 6) {
                                         if (originalCard.isType(k[6]) || k[6].equals("All")) {
                                         } else {
                                             k[6] = "Nullified";
@@ -2306,9 +2313,8 @@ public class GameAction {
                                 k[6] = "All";
                             }
                         }
-                        if ((k[1].equals("Player") && card.getController().equals(controller)
-                                || (k[1].equals("Opponent")
-                                        && card.getController().equals(controller.getOpponent())) || k[1]
+                        if (((k[1].equals("Player") && card.getController().equals(controller))
+                                || (k[1].equals("Opponent") && card.getController().equals(controller.getOpponent())) || k[1]
                                     .equals("All"))
                                 && ((k[4].equals("Spell") && sa.isSpell())
                                         || (k[4].equals("Ability") && sa.isAbility())
@@ -2326,12 +2332,12 @@ public class GameAction {
                                 }
                             }
                             if (k[7].contains("TargetInPlay")) {
-                                if (!Player_Play.contains(originalCard)) {
+                                if (!playerPlay.contains(originalCard)) {
                                     k[3] = "0";
                                 }
                             }
                             if (k[7].contains("TargetInHand")) {
-                                if (!Player_Hand.contains(originalCard)) {
+                                if (!playerHand.contains(originalCard)) {
                                     k[3] = "0";
                                 }
                             }
@@ -2346,15 +2352,15 @@ public class GameAction {
                                 }
                             }
                             if (k[7].contains("Affinity")) {
-                                String spilt = k[7];
-                                String[] color_spilt = spilt.split("/");
-                                k[7] = color_spilt[1];
-                                CardList PlayerList = controller.getCardsIn(Zone.Battlefield);
-                                PlayerList = PlayerList.getType(k[7]);
-                                k[3] = String.valueOf(PlayerList.size());
+                                final String spilt = k[7];
+                                final String[] colorSpilt = spilt.split("/");
+                                k[7] = colorSpilt[1];
+                                CardList playerList = controller.getCardsIn(Zone.Battlefield);
+                                playerList = playerList.getType(k[7]);
+                                k[3] = String.valueOf(playerList.size());
                             }
 
-                            String[] Numbers = new String[Max];
+                            final String[] numbers = new String[max];
                             if (!"WUGRB".contains(k[3])) {
 
                                 int value = 0;
@@ -2364,8 +2370,8 @@ public class GameAction {
                                     value = Integer.valueOf(k[3]);
                                 }
 
-                                for (int no = 0; no < Max; no++) {
-                                    Numbers[no] = String.valueOf(no);
+                                for (int no = 0; no < max; no++) {
+                                    numbers[no] = String.valueOf(no);
                                 }
                                 String Number_ManaCost = " ";
                                 if (mana.toString().length() == 1) {
@@ -2377,12 +2383,12 @@ public class GameAction {
                                 }
                                 Number_ManaCost = Number_ManaCost.trim();
 
-                                for (int check = 0; check < Max; check++) {
-                                    if (Number_ManaCost.equals(Numbers[check])) {
-                                        if ((spell.isXCost()) || (spell.isMultiKicker()) && (check - value) < 0) {
-                                            XBonus = XBonus - check + value;
+                                for (int check = 0; check < max; check++) {
+                                    if (Number_ManaCost.equals(numbers[check])) {
+                                        if ((spell.isXCost()) || ((spell.isMultiKicker()) && ((check - value) < 0))) {
+                                            xBonus = (xBonus - check) + value;
                                         }
-                                        if (check - value < 0) {
+                                        if ((check - value) < 0) {
                                             value = check;
                                         }
                                         mana = mana.replaceFirst(String.valueOf(check), String.valueOf(check - value));
@@ -2402,12 +2408,11 @@ public class GameAction {
                                     // Not Included as X Costs are not in
                                     // Colored Mana
                                     if (sa.isMultiKicker()) {
-                                        CostCutting_GetMultiMickerManaCostPaid_Colored
-                                        = CostCutting_GetMultiMickerManaCostPaid_Colored
+                                        this.CostCutting_GetMultiMickerManaCostPaid_Colored = this.CostCutting_GetMultiMickerManaCostPaid_Colored
                                                 + k[3];
-                                    // JOptionPane.showMessageDialog(null,
-                                    // CostCutting_GetMultiMickerManaCostPaid_Colored,
-                                    // "", JOptionPane.INFORMATION_MESSAGE);
+                                        // JOptionPane.showMessageDialog(null,
+                                        // CostCutting_GetMultiMickerManaCostPaid_Colored,
+                                        // "", JOptionPane.INFORMATION_MESSAGE);
                                     }
                                 } else {
                                     mana = mana.replaceFirst(k[3], "");
@@ -2420,7 +2425,7 @@ public class GameAction {
                             }
                         }
                         mana = mana.trim();
-                        if (mana.length() == 0 || mana.equals("0")) {
+                        if ((mana.length() == 0) || mana.equals("0")) {
                             if (sa.isSpell() || sa.isCycling()) {
                                 mana = "0";
                             } else {
@@ -2433,19 +2438,19 @@ public class GameAction {
             }
         }
         if (sa.isXCost()) {
-            for (int XPaid = 0; XPaid < XBonus; XPaid++) {
+            for (int XPaid = 0; XPaid < xBonus; XPaid++) {
                 originalCard.addXManaCostPaid(1);
             }
         }
         if (sa.isMultiKicker()) {
-            CostCutting_GetMultiMickerManaCostPaid = 0;
-            for (int XPaid = 0; XPaid < XBonus; XPaid++) {
-                CostCutting_GetMultiMickerManaCostPaid = CostCutting_GetMultiMickerManaCostPaid + 1;
+            this.CostCutting_GetMultiMickerManaCostPaid = 0;
+            for (int XPaid = 0; XPaid < xBonus; XPaid++) {
+                this.CostCutting_GetMultiMickerManaCostPaid = this.CostCutting_GetMultiMickerManaCostPaid + 1;
             }
         }
 
         if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell()) {
-            Player player = AllZone.getPhase().getPlayerTurn();
+            final Player player = AllZone.getPhase().getPlayerTurn();
             CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
             playerCreature = playerCreature.filter(CardListFilter.GREEN);
             String manaC = manaCost + " ";
@@ -2479,15 +2484,15 @@ public class GameAction {
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;
         SpellAbility ability = sa;
-        while (ability != null && !newAbility) {
-            Target tgt = ability.getTarget();
+        while ((ability != null) && !newAbility) {
+            final Target tgt = ability.getTarget();
 
             newAbility |= tgt != null;
             ability = ability.getSubAbility();
         }
 
         if (newAbility) {
-            Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
+            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
             Cost_Payment payment = null;
             if (sa.getPayCosts() == null) {
                 payment = new Cost_Payment(new Cost("0", sa.getSourceCard().getName(), sa.isAbility()), sa);
@@ -2499,7 +2504,7 @@ public class GameAction {
                 payment.changeCost();
             }
 
-            SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
             req.fillRequirements();
         } else {
             ManaCost manaCost = new ManaCost(sa.getManaCost());
@@ -2507,11 +2512,11 @@ public class GameAction {
                 manaCost = new ManaCost("0");
             } else {
 
-                manaCost = getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
+                manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
             }
-            if (manaCost.isPaid() && sa.getBeforePayMana() == null) {
+            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
                 if (sa.getAfterPayMana() == null) {
-                    Card source = sa.getSourceCard();
+                    final Card source = sa.getSourceCard();
                     if (sa.isSpell() && !source.isCopiedSpell()) {
                         sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
                     }
@@ -2549,14 +2554,14 @@ public class GameAction {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
         if (sa.getPayCosts() != null) {
-            Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
-            Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
+            final Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
 
             if (!sa.isTrigger()) {
                 payment.changeCost();
             }
 
-            SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
             req.setSkipStack(true);
             req.fillRequirements(skipTargeting);
         } else {
@@ -2565,9 +2570,9 @@ public class GameAction {
                 manaCost = new ManaCost("0");
             } else {
 
-                manaCost = getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
+                manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
             }
-            if (manaCost.isPaid() && sa.getBeforePayMana() == null) {
+            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
                 if (sa.getAfterPayMana() == null) {
                     AbilityFactory.resolve(sa, false);
                     if (sa.isTapAbility() && !sa.wasCancelled()) {
@@ -2599,16 +2604,16 @@ public class GameAction {
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     public final SpellAbility[] canPlaySpellAbility(final SpellAbility[] sa) {
-        ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
 
-        for (int i = 0; i < sa.length; i++) {
-            sa[i].setActivatingPlayer(AllZone.getHumanPlayer());
-            if (sa[i].canPlay()) {
-                list.add(sa[i]);
+        for (final SpellAbility element : sa) {
+            element.setActivatingPlayer(AllZone.getHumanPlayer());
+            if (element.canPlay()) {
+                list.add(element);
             }
         }
 
-        SpellAbility[] array = new SpellAbility[list.size()];
+        final SpellAbility[] array = new SpellAbility[list.size()];
         list.toArray(array);
         return array;
     } // canPlaySpellAbility()
@@ -2622,7 +2627,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void setComputerCut(final Card computerCut) {
-        ComputerCut = computerCut;
+        this.ComputerCut = computerCut;
     }
 
     /**
@@ -2633,7 +2638,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card getComputerCut() {
-        return ComputerCut;
+        return this.ComputerCut;
     }
 
     /**
@@ -2645,7 +2650,7 @@ public class GameAction {
      *            a boolean.
      */
     public final void setStartCut(final boolean startCutIn) {
-        Start_Cut = startCutIn;
+        this.Start_Cut = startCutIn;
     }
 
     /**
@@ -2656,7 +2661,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean isStartCut() {
-        return Start_Cut;
+        return this.Start_Cut;
     }
 
     /**
@@ -2668,7 +2673,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void setHumanCut(final Card humanCut) {
-        HumanCut = humanCut;
+        this.HumanCut = humanCut;
     }
 
     /**
@@ -2679,6 +2684,6 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card getHumanCut() {
-        return HumanCut;
+        return this.HumanCut;
     }
 }

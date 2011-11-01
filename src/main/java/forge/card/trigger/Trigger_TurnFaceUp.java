@@ -34,8 +34,9 @@ public class Trigger_TurnFaceUp extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -46,12 +47,12 @@ public class Trigger_TurnFaceUp extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_TurnFaceUp(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_TurnFaceUp(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -59,6 +60,6 @@ public class Trigger_TurnFaceUp extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", runParams.get("Card"));
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 }

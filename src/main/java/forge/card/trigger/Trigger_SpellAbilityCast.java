@@ -38,62 +38,66 @@ public class Trigger_SpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        SpellAbility SA = (SpellAbility) runParams2.get("CastSA");
-        Card cast = SA.getSourceCard();
-        SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(SA);
+        final SpellAbility spellAbility = (SpellAbility) runParams2.get("CastSA");
+        final Card cast = spellAbility.getSourceCard();
+        final SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(spellAbility);
 
-        if (mapParams.get("Mode").equals("SpellCast")) {
-            if (!SA.isSpell()) {
+        if (this.getMapParams().get("Mode").equals("SpellCast")) {
+            if (!spellAbility.isSpell()) {
                 return false;
             }
-        } else if (mapParams.get("Mode").equals("AbilityCast")) {
-            if (!SA.isAbility()) {
+        } else if (this.getMapParams().get("Mode").equals("AbilityCast")) {
+            if (!spellAbility.isAbility()) {
                 return false;
             }
-        } else if (mapParams.get("Mode").equals("SpellAbilityCast")) {
+        } else if (this.getMapParams().get("Mode").equals("SpellAbilityCast")) {
             // Empty block for readability.
         }
 
-        if (mapParams.containsKey("ActivatedOnly")) {
-            if (SA.isTrigger()) {
+        if (this.getMapParams().containsKey("ActivatedOnly")) {
+            if (spellAbility.isTrigger()) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidControllingPlayer")) {
-            if (!matchesValid(cast.getController(), mapParams.get("ValidControllingPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidControllingPlayer")) {
+            if (!this.matchesValid(cast.getController(), this.getMapParams().get("ValidControllingPlayer").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidActivatingPlayer")) {
-            if (!matchesValid(si.getActivatingPlayer(), mapParams.get("ValidActivatingPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidActivatingPlayer")) {
+            if (!this.matchesValid(si.getActivatingPlayer(), this.getMapParams().get("ValidActivatingPlayer")
+                    .split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(cast, mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(cast, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("TargetsValid")) {
-            SpellAbility sa = si.getSpellAbility();
+        if (this.getMapParams().containsKey("TargetsValid")) {
+            final SpellAbility sa = si.getSpellAbility();
             if (sa.getTarget() == null) {
                 if (sa.getTargetCard() == null) {
                     if (sa.getTargetList() == null) {
                         if (sa.getTargetPlayer() == null) {
                             return false;
                         } else {
-                            if (!matchesValid(sa.getTargetPlayer(), mapParams.get("TargetsValid").split(","), hostCard)) {
+                            if (!this.matchesValid(sa.getTargetPlayer(),
+                                    this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
                                 return false;
                             }
                         }
                     } else {
                         boolean validTgtFound = false;
-                        for (Card tgt : sa.getTargetList()) {
-                            if (matchesValid(tgt, mapParams.get("TargetsValid").split(","), hostCard)) {
+                        for (final Card tgt : sa.getTargetList()) {
+                            if (this.matchesValid(tgt, this.getMapParams().get("TargetsValid").split(","),
+                                    this.getHostCard())) {
                                 validTgtFound = true;
                                 break;
                             }
@@ -103,22 +107,24 @@ public class Trigger_SpellAbilityCast extends Trigger {
                         }
                     }
                 } else {
-                    if (!matchesValid(sa.getTargetCard(), mapParams.get("TargetsValid").split(","), hostCard)) {
+                    if (!this.matchesValid(sa.getTargetCard(), this.getMapParams().get("TargetsValid").split(","),
+                            this.getHostCard())) {
                         return false;
                     }
                 }
             } else {
                 if (sa.getTarget().doesTarget()) {
                     boolean validTgtFound = false;
-                    for (Card tgt : sa.getTarget().getTargetCards()) {
-                        if (tgt.isValid(mapParams.get("TargetsValid").split(","), hostCard.getController(), hostCard)) {
+                    for (final Card tgt : sa.getTarget().getTargetCards()) {
+                        if (tgt.isValid(this.getMapParams().get("TargetsValid").split(","), this.getHostCard()
+                                .getController(), this.getHostCard())) {
                             validTgtFound = true;
                             break;
                         }
                     }
 
-                    for (Player p : sa.getTarget().getTargetPlayers()) {
-                        if (matchesValid(p, mapParams.get("TargetsValid").split(","), hostCard)) {
+                    for (final Player p : sa.getTarget().getTargetPlayers()) {
+                        if (this.matchesValid(p, this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
                             validTgtFound = true;
                             break;
                         }
@@ -133,8 +139,8 @@ public class Trigger_SpellAbilityCast extends Trigger {
             }
         }
 
-        if (mapParams.containsKey("NonTapCost")) {
-            Cost cost = (Cost) (runParams2.get("Cost"));
+        if (this.getMapParams().containsKey("NonTapCost")) {
+            final Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.getTap()) {
                 return false;
             }
@@ -146,12 +152,12 @@ public class Trigger_SpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_SpellAbilityCast(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_SpellAbilityCast(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -159,9 +165,9 @@ public class Trigger_SpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", ((SpellAbility) runParams.get("CastSA")).getSourceCard());
-        sa.setTriggeringObject("SpellAbility", runParams.get("CastSA"));
-        sa.setTriggeringObject("Player", runParams.get("Player"));
-        sa.setTriggeringObject("Activator", runParams.get("Activator"));
+        sa.setTriggeringObject("Card", ((SpellAbility) this.getRunParams().get("CastSA")).getSourceCard());
+        sa.setTriggeringObject("SpellAbility", this.getRunParams().get("CastSA"));
+        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObject("Activator", this.getRunParams().get("Activator"));
     }
 }

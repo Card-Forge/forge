@@ -36,26 +36,27 @@ public class Trigger_BecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (mapParams.containsKey("SourceType")) {
-            SpellAbility sa = (SpellAbility) runParams2.get("SourceSA");
-            if (mapParams.get("SourceType").equalsIgnoreCase("spell")) {
+        if (this.getMapParams().containsKey("SourceType")) {
+            final SpellAbility sa = (SpellAbility) runParams2.get("SourceSA");
+            if (this.getMapParams().get("SourceType").equalsIgnoreCase("spell")) {
                 if (!sa.isSpell()) {
                     return false;
                 }
-            } else if (mapParams.get("SourceType").equalsIgnoreCase("ability")) {
+            } else if (this.getMapParams().get("SourceType").equalsIgnoreCase("ability")) {
                 if (!sa.isAbility()) {
                     return false;
                 }
             }
         }
-        if (mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), mapParams.get("ValidSource")
-                    .split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidSource")) {
+            if (!this.matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.getMapParams()
+                    .get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(runParams2.get("Target"), mapParams.get("ValidTarget").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidTarget")) {
+            if (!this.matchesValid(runParams2.get("Target"), this.getMapParams().get("ValidTarget").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -66,12 +67,12 @@ public class Trigger_BecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_BecomesTarget(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_BecomesTarget(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -79,8 +80,8 @@ public class Trigger_BecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("SourceSA", runParams.get("SourceSA"));
-        sa.setTriggeringObject("Source", ((SpellAbility) runParams.get("SourceSA")).getSourceCard());
-        sa.setTriggeringObject("Target", runParams.get("Target"));
+        sa.setTriggeringObject("SourceSA", this.getRunParams().get("SourceSA"));
+        sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getSourceCard());
+        sa.setTriggeringObject("Target", this.getRunParams().get("Target"));
     }
 }

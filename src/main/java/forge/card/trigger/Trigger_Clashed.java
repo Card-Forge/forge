@@ -34,14 +34,15 @@ public class Trigger_Clashed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidPlayer")) {
+            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("Won")) {
-            if (!mapParams.get("Won").equals(runParams2.get("Won"))) {
+        if (this.getMapParams().containsKey("Won")) {
+            if (!this.getMapParams().get("Won").equals(runParams2.get("Won"))) {
                 return false;
             }
         }
@@ -52,12 +53,12 @@ public class Trigger_Clashed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Clashed(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Clashed(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }

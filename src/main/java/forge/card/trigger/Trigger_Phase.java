@@ -34,10 +34,10 @@ public class Trigger_Phase extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (mapParams.containsKey("Phase")) {
-            if (mapParams.get("Phase").contains(",")) {
+        if (this.getMapParams().containsKey("Phase")) {
+            if (this.getMapParams().get("Phase").contains(",")) {
                 boolean found = false;
-                for (String s : mapParams.get("Phase").split(",")) {
+                for (final String s : this.getMapParams().get("Phase").split(",")) {
                     if (s.equals(runParams2.get("Phase"))) {
                         found = true;
                         break;
@@ -48,13 +48,14 @@ public class Trigger_Phase extends Trigger {
                     return false;
                 }
             } else {
-                if (!mapParams.get("Phase").equals(runParams2.get("Phase"))) {
+                if (!this.getMapParams().get("Phase").equals(runParams2.get("Phase"))) {
                     return false;
                 }
             }
         }
-        if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidPlayer")) {
+            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -64,12 +65,12 @@ public class Trigger_Phase extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Phase(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Phase(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -77,6 +78,6 @@ public class Trigger_Phase extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Player", runParams.get("Player"));
+        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
 }

@@ -38,26 +38,27 @@ public class Trigger_Attacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("Attacked")) {
-            if (mapParams.get("Attacked").equals("Player")
+        if (this.getMapParams().containsKey("Attacked")) {
+            if (this.getMapParams().get("Attacked").equals("Player")
                     && StringUtils.isNumeric(runParams2.get("Attacked").toString())
-                    && Integer.parseInt(runParams2.get("Attacked").toString()) > 0) {
+                    && (Integer.parseInt(runParams2.get("Attacked").toString()) > 0)) {
                 return false;
             }
         }
 
-        if (mapParams.containsKey("Alone")) {
-            CardList otherAttackers = (CardList) runParams2.get("OtherAttackers");
+        if (this.getMapParams().containsKey("Alone")) {
+            final CardList otherAttackers = (CardList) runParams2.get("OtherAttackers");
             if (otherAttackers == null) {
                 return false;
             }
-            if (mapParams.get("Alone").equals("True")) {
+            if (this.getMapParams().get("Alone").equals("True")) {
                 if (otherAttackers.size() != 0) {
                     return false;
                 }
@@ -74,12 +75,12 @@ public class Trigger_Attacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Attacks(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Attacks(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -87,6 +88,6 @@ public class Trigger_Attacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", runParams.get("Attacker"));
+        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
     }
 }

@@ -34,10 +34,11 @@ public class Trigger_Untaps extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        Card untapper = (Card) runParams2.get("Card");
+        final Card untapper = (Card) runParams2.get("Card");
 
-        if (mapParams.containsKey("ValidCard")) {
-            if (!untapper.isValid(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!untapper.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -48,12 +49,12 @@ public class Trigger_Untaps extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_Untaps(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_Untaps(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -61,7 +62,7 @@ public class Trigger_Untaps extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", runParams.get("Card"));
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 
 }

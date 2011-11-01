@@ -534,7 +534,7 @@ public class AbilityFactory_Sacrifice {
 
         // TODO: Wait for Input to finish before moving on with the rest of
         // Resolution
-        AllZone.getInputControl().setInput(PlayerUtil.input_sacrificePermanentsFromList(amount, list, message), true);
+        AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanentsFromList(amount, list, message), true);
     }
 
     // **************************************************************

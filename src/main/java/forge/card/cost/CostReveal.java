@@ -81,7 +81,7 @@ public class CostReveal extends CostPartWithList {
                 return false;
             }
 
-            this.list.add(source);
+            this.getList().add(source);
         } else {
             hand = hand.getValidCards(type.split(";"), activator, source);
             Integer c = this.convertAmount();
@@ -94,9 +94,9 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            this.list = ComputerUtil.discardNumTypeAI(c, type.split(";"), ability);
+            this.setList(ComputerUtil.discardNumTypeAI(c, type.split(";"), ability));
         }
-        return this.list != null;
+        return this.getList() != null;
     }
 
     /*
@@ -107,7 +107,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        GuiUtils.getChoiceOptional("Revealed cards:", this.list.toArray());
+        GuiUtils.getChoiceOptional("Revealed cards:", this.getList().toArray());
     }
 
     /*

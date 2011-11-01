@@ -108,7 +108,7 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
-        for (final Card c : this.list) {
+        for (final Card c : this.getList()) {
             AllZone.getGameAction().sacrifice(c);
         }
     }
@@ -131,7 +131,7 @@ public class CostSacrifice extends CostPartWithList {
         if (this.getThis()) {
             CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
         } else if (amount.equals("All")) {
-            this.list = list;
+            this.setList(list);
             CostSacrifice.sacrificeAll(ability, payment, this, list);
             this.addListToHash(ability, "Sacrificed");
             return true;
@@ -165,7 +165,7 @@ public class CostSacrifice extends CostPartWithList {
         this.resetList();
         final Player activator = ability.getActivatingPlayer();
         if (this.getThis()) {
-            this.list.add(source);
+            this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
             CardList typeList = activator.getCardsIn(Zone.Battlefield);
             typeList = typeList.getValidCards(this.getType().split(","), activator, source);
@@ -180,8 +180,8 @@ public class CostSacrifice extends CostPartWithList {
 
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
-            this.list = ComputerUtil.chooseSacrificeType(this.getType(), source, ability.getTargetCard(), c);
-            if (this.list == null) {
+            this.setList(ComputerUtil.chooseSacrificeType(this.getType(), source, ability.getTargetCard(), c));
+            if (this.getList() == null) {
                 return false;
             }
         }

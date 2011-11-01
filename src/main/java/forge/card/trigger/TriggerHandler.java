@@ -36,19 +36,19 @@ import forge.gui.input.Input;
  */
 public class TriggerHandler {
 
-    private ArrayList<String> suppressedModes = new ArrayList<String>();
+    private final ArrayList<String> suppressedModes = new ArrayList<String>();
 
-    private ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
+    private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
 
     /**
      * Clean up temporary triggers.
      */
     public final void cleanUpTemporaryTriggers() {
-        CardList absolutelyAllCards = new CardList();
+        final CardList absolutelyAllCards = new CardList();
         absolutelyAllCards.addAll(AllZone.getHumanPlayer().getAllCards());
         absolutelyAllCards.addAll(AllZone.getComputerPlayer().getAllCards());
 
-        for (Card c : absolutelyAllCards) {
+        for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {
                     c.getTriggers().remove(i);
@@ -56,7 +56,7 @@ public class TriggerHandler {
                 }
             }
         }
-        for (Card c : absolutelyAllCards) {
+        for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 c.getTriggers().get(i).setTemporarilySuppressed(false);
             }
@@ -73,7 +73,7 @@ public class TriggerHandler {
      *            a {@link forge.card.trigger.Trigger} object.
      */
     public final void registerDelayedTrigger(final Trigger trig) {
-        delayedTriggers.add(trig);
+        this.delayedTriggers.add(trig);
     }
 
     /**
@@ -85,7 +85,7 @@ public class TriggerHandler {
      *            a {@link java.lang.String} object.
      */
     public final void suppressMode(final String mode) {
-        suppressedModes.add(mode);
+        this.suppressedModes.add(mode);
     }
 
     /**
@@ -97,7 +97,7 @@ public class TriggerHandler {
      *            a {@link java.lang.String} object.
      */
     public final void clearSuppression(final String mode) {
-        suppressedModes.remove(mode);
+        this.suppressedModes.remove(mode);
     }
 
     /**
@@ -117,7 +117,7 @@ public class TriggerHandler {
      */
     public static Trigger parseTrigger(final String name, final String trigParse, final Card host,
             final boolean intrinsic) {
-        Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
+        final Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
         ret.setName(name);
         return ret;
     }
@@ -136,8 +136,8 @@ public class TriggerHandler {
      * @return a {@link forge.card.trigger.Trigger} object.
      */
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
-        HashMap<String, String> mapParams = parseParams(trigParse);
-        return parseTrigger(mapParams, host, intrinsic);
+        final HashMap<String, String> mapParams = TriggerHandler.parseParams(trigParse);
+        return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
     }
 
     /**
@@ -153,11 +153,10 @@ public class TriggerHandler {
      *            a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(final HashMap<String, String> mapParams,
-            final Card host, final boolean intrinsic) {
+    public static Trigger parseTrigger(final HashMap<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-        String mode = mapParams.get("Mode");
+        final String mode = mapParams.get("Mode");
         if (mode.equals("AbilityCast")) {
             ret = new Trigger_SpellAbilityCast(mapParams, host, intrinsic);
         } else if (mode.equals("Always")) {
@@ -231,26 +230,26 @@ public class TriggerHandler {
      * @return a {@link java.util.HashMap} object.
      */
     private static HashMap<String, String> parseParams(final String trigParse) {
-        HashMap<String, String> mapParams = new HashMap<String, String>();
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
 
         if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");
         }
 
-        String[] params = trigParse.split("\\|");
+        final String[] params = trigParse.split("\\|");
 
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].trim();
         }
 
-        for (String param : params) {
-            String[] splitParam = param.split("\\$");
+        for (final String param : params) {
+            final String[] splitParam = param.split("\\$");
             for (int i = 0; i < splitParam.length; i++) {
                 splitParam[i] = splitParam[i].trim();
             }
 
             if (splitParam.length != 2) {
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("TriggerFactory Parsing Error in registerTrigger() : Split length of ");
                 sb.append(param).append(" is not 2.");
                 throw new RuntimeException(sb.toString());
@@ -273,31 +272,31 @@ public class TriggerHandler {
      *            a {@link java.util.Map} object.
      */
     public final void runTrigger(final String mode, final Map<String, Object> runParams) {
-        if (suppressedModes.contains(mode)) {
+        if (this.suppressedModes.contains(mode)) {
             return;
         }
 
-        Player playerAP = AllZone.getPhase().getPlayerTurn();
+        final Player playerAP = AllZone.getPhase().getPlayerTurn();
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
-        ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(delayedTriggers);
+        final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
         CardList allCards;
 
         // AP
         allCards = playerAP.getAllCards();
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
-        for (Card c : allCards) {
-            for (Trigger t : c.getTriggers()) {
-                runSingleTrigger(t, mode, runParams);
+        for (final Card c : allCards) {
+            for (final Trigger t : c.getTriggers()) {
+                this.runSingleTrigger(t, mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
-            Trigger deltrig = delayedTriggersWorkingCopy.get(i);
+            final Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP)) {
-                if (runSingleTrigger(deltrig, mode, runParams)) {
+                if (this.runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggersWorkingCopy.remove(deltrig);
-                    delayedTriggers.remove(deltrig);
+                    this.delayedTriggers.remove(deltrig);
                     i--;
                 }
             }
@@ -306,17 +305,17 @@ public class TriggerHandler {
         // NAP
         allCards = playerAP.getOpponent().getAllCards();
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
-        for (Card c : allCards) {
-            for (Trigger t : c.getTriggers()) {
-                runSingleTrigger(t, mode, runParams);
+        for (final Card c : allCards) {
+            for (final Trigger t : c.getTriggers()) {
+                this.runSingleTrigger(t, mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
-            Trigger deltrig = delayedTriggersWorkingCopy.get(i);
+            final Trigger deltrig = delayedTriggersWorkingCopy.get(i);
             if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
-                if (runSingleTrigger(deltrig, mode, runParams)) {
+                if (this.runSingleTrigger(deltrig, mode, runParams)) {
                     delayedTriggersWorkingCopy.remove(deltrig);
-                    delayedTriggers.remove(deltrig);
+                    this.delayedTriggers.remove(deltrig);
                     i--;
                 }
             }
@@ -339,8 +338,7 @@ public class TriggerHandler {
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    private boolean runSingleTrigger(final Trigger regtrig,
-            final String mode, final Map<String, Object> runParams) {
+    private boolean runSingleTrigger(final Trigger regtrig, final String mode, final Map<String, Object> runParams) {
         final Map<String, String> params = regtrig.getMapParams();
 
         if (!params.get("Mode").equals(mode)) {
@@ -359,7 +357,7 @@ public class TriggerHandler {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof Trigger_Always) {
-            if (AllZone.getStack().hasStateTrigger(regtrig.ID)) {
+            if (AllZone.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                               // don't trigger again.
             }
@@ -372,21 +370,19 @@ public class TriggerHandler {
         }
 
         // Torpor Orb check
-        CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
+        final CardList torporOrbs = AllZoneUtil.getCardsIn(Zone.Battlefield, "Torpor Orb");
 
         if (torporOrbs.size() != 0) {
             if (params.containsKey("Destination")) {
                 if ((params.get("Destination").equals("Battlefield") || params.get("Destination").equals("Any"))
                         && mode.equals("ChangesZone")
-                        && ((params.get("ValidCard").contains("Creature"))
-                                || (params.get("ValidCard").contains("Self") && regtrig
+                        && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig
                                 .getHostCard().isCreature()))) {
                     return false;
                 }
             } else {
                 if (mode.equals("ChangesZone")
-                        && ((params.get("ValidCard").contains("Creature"))
-                                || (params.get("ValidCard").contains("Self") && regtrig
+                        && ((params.get("ValidCard").contains("Creature")) || (params.get("ValidCard").contains("Self") && regtrig
                                 .getHostCard().isCreature()))) {
                     return false;
                 }
@@ -403,13 +399,13 @@ public class TriggerHandler {
 
         // All tests passed, execute ability.
         if (regtrig instanceof Trigger_TapsForMana) {
-            Ability_Mana abMana = (Ability_Mana) runParams.get("Ability_Mana");
+            final Ability_Mana abMana = (Ability_Mana) runParams.get("Ability_Mana");
             if (null != abMana) {
                 abMana.setUndoable(false);
             }
         }
 
-        AbilityFactory abilityFactory = new AbilityFactory();
+        final AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
         Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
@@ -431,7 +427,7 @@ public class TriggerHandler {
             }
         }
         sa[0].setTrigger(true);
-        sa[0].setSourceTrigger(regtrig.ID);
+        sa[0].setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa[0]);
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa[0].setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
@@ -453,7 +449,7 @@ public class TriggerHandler {
 
             SpellAbility ability = sa[0];
             while (ability != null) {
-                Target tgt = ability.getTarget();
+                final Target tgt = ability.getTarget();
 
                 if (tgt != null) {
                     tgt.setMandatory(true);
@@ -628,10 +624,10 @@ public class TriggerHandler {
 
             @Override
             public String getStackDescription() {
-                StringBuilder sb = new StringBuilder(regtrig.toString());
-                if (getTarget() != null) {
+                final StringBuilder sb = new StringBuilder(regtrig.toString());
+                if (this.getTarget() != null) {
                     sb.append(" (Targeting ");
-                    for (Object o : getTarget().getTargets()) {
+                    for (final Object o : this.getTarget().getTargets()) {
                         sb.append(o.toString());
                         sb.append(", ");
                     }
@@ -908,8 +904,8 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setSourceTrigger(final int ID) {
-                sa[0].setSourceTrigger(ID);
+            public void setSourceTrigger(final int id) {
+                sa[0].setSourceTrigger(id);
             }
 
             @Override
@@ -933,7 +929,7 @@ public class TriggerHandler {
             @Override
             public void resolve() {
                 if (!(regtrig instanceof Trigger_Always)) {
-                 // State triggers
+                    // State triggers
                     // don't do the whole
                     // "Intervening If"
                     // thing.
@@ -944,12 +940,12 @@ public class TriggerHandler {
 
                 if (decider[0] != null) {
                     if (decider[0].isHuman()) {
-                        if (triggersAlwaysAccept.contains(getSourceTrigger())) {
+                        if (TriggerHandler.this.triggersAlwaysAccept.contains(this.getSourceTrigger())) {
                             // No need to do anything.
-                        } else if (triggersAlwaysDecline.contains(getSourceTrigger())) {
+                        } else if (TriggerHandler.this.triggersAlwaysDecline.contains(this.getSourceTrigger())) {
                             return;
                         } else {
-                            StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+                            final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
                             buildQuestion.append(regtrig.getHostCard().getName()).append("(")
                                     .append(regtrig.getHostCard().getUniqueNumber()).append(")?");
                             buildQuestion.append("\r\n(");
@@ -982,11 +978,11 @@ public class TriggerHandler {
 
                 // Add eventual delayed trigger.
                 if (params.containsKey("DelayedTrigger")) {
-                    String sVarName = params.get("DelayedTrigger");
-                    Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(sVarName),
+                    final String sVarName = params.get("DelayedTrigger");
+                    final Trigger deltrig = TriggerHandler.parseTrigger(regtrig.getHostCard().getSVar(sVarName),
                             regtrig.getHostCard(), true);
                     deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
-                    registerDelayedTrigger(deltrig);
+                    TriggerHandler.this.registerDelayedTrigger(deltrig);
                 }
             }
         };
@@ -1021,12 +1017,12 @@ public class TriggerHandler {
      *            the new always accept trigger
      */
     public final void setAlwaysAcceptTrigger(final int trigID) {
-        if (triggersAlwaysDecline.contains(trigID)) {
-            triggersAlwaysDecline.remove((Object) trigID);
+        if (this.triggersAlwaysDecline.contains(trigID)) {
+            this.triggersAlwaysDecline.remove((Object) trigID);
         }
 
-        if (!triggersAlwaysAccept.contains(trigID)) {
-            triggersAlwaysAccept.add(trigID);
+        if (!this.triggersAlwaysAccept.contains(trigID)) {
+            this.triggersAlwaysAccept.add(trigID);
         }
     }
 
@@ -1037,12 +1033,12 @@ public class TriggerHandler {
      *            the new always decline trigger
      */
     public final void setAlwaysDeclineTrigger(final int trigID) {
-        if (triggersAlwaysAccept.contains(trigID)) {
-            triggersAlwaysAccept.remove((Object) trigID);
+        if (this.triggersAlwaysAccept.contains(trigID)) {
+            this.triggersAlwaysAccept.remove((Object) trigID);
         }
 
-        if (!triggersAlwaysDecline.contains(trigID)) {
-            triggersAlwaysDecline.add(trigID);
+        if (!this.triggersAlwaysDecline.contains(trigID)) {
+            this.triggersAlwaysDecline.add(trigID);
         }
     }
 
@@ -1053,8 +1049,8 @@ public class TriggerHandler {
      *            the new always ask trigger
      */
     public final void setAlwaysAskTrigger(final int trigID) {
-        triggersAlwaysAccept.remove((Object) trigID);
-        triggersAlwaysDecline.remove((Object) trigID);
+        this.triggersAlwaysAccept.remove((Object) trigID);
+        this.triggersAlwaysDecline.remove((Object) trigID);
     }
 
     /**
@@ -1065,7 +1061,7 @@ public class TriggerHandler {
      * @return true, if is always accepted
      */
     public final boolean isAlwaysAccepted(final int trigID) {
-        return triggersAlwaysAccept.contains(trigID);
+        return this.triggersAlwaysAccept.contains(trigID);
     }
 
     /**
@@ -1076,14 +1072,14 @@ public class TriggerHandler {
      * @return true, if is always declined
      */
     public final boolean isAlwaysDeclined(final int trigID) {
-        return triggersAlwaysDecline.contains(trigID);
+        return this.triggersAlwaysDecline.contains(trigID);
     }
 
     /**
      * Clear trigger settings.
      */
     public final void clearTriggerSettings() {
-        triggersAlwaysAccept.clear();
-        triggersAlwaysDecline.clear();
+        this.triggersAlwaysAccept.clear();
+        this.triggersAlwaysDecline.clear();
     }
 }

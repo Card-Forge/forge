@@ -35,13 +35,15 @@ public class Trigger_AttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidCard")) {
+            if (!this.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
-        if (mapParams.containsKey("ValidBlocker")) {
-            if (!matchesValid(runParams2.get("Blocker"), mapParams.get("ValidBlocker").split(","), hostCard)) {
+        if (this.getMapParams().containsKey("ValidBlocker")) {
+            if (!this.matchesValid(runParams2.get("Blocker"), this.getMapParams().get("ValidBlocker").split(","),
+                    this.getHostCard())) {
                 return false;
             }
         }
@@ -52,12 +54,12 @@ public class Trigger_AttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        Trigger copy = new Trigger_AttackerBlocked(mapParams, hostCard, isIntrinsic);
-        if (overridingAbility != null) {
-            copy.setOverridingAbility(overridingAbility);
+        final Trigger copy = new Trigger_AttackerBlocked(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
         }
-        copy.setName(name);
-        copy.setID(ID);
+        copy.setName(this.getName());
+        copy.setID(this.getId());
 
         return copy;
     }
@@ -65,8 +67,8 @@ public class Trigger_AttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", runParams.get("Attacker"));
-        sa.setTriggeringObject("Blocker", runParams.get("Blocker"));
-        sa.setTriggeringObject("NumBlockers", runParams.get("NumBlockers"));
+        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
+        sa.setTriggeringObject("NumBlockers", this.getRunParams().get("NumBlockers"));
     }
 }
