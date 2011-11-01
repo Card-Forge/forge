@@ -330,6 +330,29 @@ Fixes/Features:
 - Fixed Chancellor of the Forge's opening hand token not having haste.
 - Fixed Rarity not being displayed in-game.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed and tested Prismatic Boon.
+- Fixing multiple printings of Urza Lands
+- Little fix to Myr Battlesphere
+- Little fix to Marrow Chomper
+- checkstyle
+- checkstyle
+- checkstyle and refactor
+- checkstyle
+- Removed some unnecessary properties from costs.
+- Converted Preeminent Captain to script.
+- Little additional text
+- checkstyle
+- checkstyle and refactor
+- Added the optional parameter "Attacked" to the "Attacks" trigger. If set to player it won't trigger when a planeswalker is attacked.
+- Fixed being able to target yourself with "ValidTgts$ Opponent".
+- Added the quest challenge 26 "Quest for Ula's Temple".
+- Fixed oracle text of Village Ironsmith.
+- checkstyle
+- Fixed Mogg Conscripts.
+- The source card of a spell will now be updated to be the card on the stack (and not point to a card that is no longer in any zone).
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -472,6 +495,20 @@ Pouncing Wurm
 Utopia Sprawl
 Might of the Nephilim
 Fertile Imagination
+Evil Twin
+Ulvenwald Mystics / Ulvenwald Primordials
+Jotun Owl Keeper
+Varchild's War-Riders
+Hypnotic Cloud
+Loafing Giant
+Metathran Aerostat
+Orim's Touch
+Grief Tyrrant
+Overload
+Probe
+Kaalia of the Vast
+Tariel, Reckoner of Souls
+Pure Reflection
 
 
 end
