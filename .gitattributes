@@ -6887,6 +6887,7 @@ res/cardsfolder/s/savage_firecat.txt svneol=native#text/plain
 res/cardsfolder/s/savage_gorilla.txt svneol=native#text/plain
 res/cardsfolder/s/savage_hunger.txt svneol=native#text/plain
 res/cardsfolder/s/savage_lands.txt svneol=native#text/plain
+res/cardsfolder/s/savage_offensive.txt -text svneol=unset#text/plain
 res/cardsfolder/s/savage_silhouette.txt svneol=native#text/plain
 res/cardsfolder/s/savage_thallid.txt svneol=native#text/plain
 res/cardsfolder/s/savage_twister.txt svneol=native#text/plain

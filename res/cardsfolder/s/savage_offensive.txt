@@ -1,0 +1,9 @@
+Name:Savage Offensive
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | KW$ First strike | SpellDescription$ Creatures you control gain first strike until end of turn.
+A:SP$ PumpAll | Cost$ 1 R G | ValidCards$ Creature.YouCtrl | KW$ First strike | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Kicker G (You may pay an additional G as you cast this spell.) If CARDNAME was kicked, they get +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_offensive.jpg
+End
