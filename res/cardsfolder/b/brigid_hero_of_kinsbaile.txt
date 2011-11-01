@@ -1,0 +1,12 @@
+Name:Brigid, Hero of Kinsbaile
+ManaCost:2 W W
+Types:Legendary Creature Kithkin Archer
+Text:no text
+PT:2/3
+K:First Strike
+A:AB$ DamageAll | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2 | ValidCards$ Creature.attacking,Creature.blocking | ValidDescription$ each attacking or blocking creature target player controls. | SpellDescription$ CARDNAME deals 2 damage to each attacking or blocking creature target player controls.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brigid_hero_of_kinsbaile.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/6.jpg
+Oracle:First strike\n{T}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
+End
