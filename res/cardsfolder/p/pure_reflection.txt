@@ -8,4 +8,5 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenPower$ X | TokenToughness$ X | To
 SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pure_reflection.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/27.jpg
 End
