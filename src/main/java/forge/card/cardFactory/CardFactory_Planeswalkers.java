@@ -513,7 +513,7 @@ public class CardFactory_Planeswalkers {
          * **************************
          */
         // *************** START *********** START **************************
-        else if (cardName.equals("Tezzeret the Seeker")) {
+        if (cardName.equals("Tezzeret the Seeker")) {
             final int[] turn = new int[1];
             turn[0] = -1;
 
