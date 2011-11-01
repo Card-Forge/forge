@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 public class FRoundedPanel extends JPanel {
 
     /** The corners. */
-    public boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
+    private boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
 
     private Color shadowColor = new Color(150, 150, 150, 150);
     private Color borderColor = Color.black;
@@ -52,7 +52,7 @@ public class FRoundedPanel extends JPanel {
      * @param lm
      *            the lm
      */
-    public FRoundedPanel(LayoutManager lm) {
+    public FRoundedPanel(final LayoutManager lm) {
         this();
         this.setLayout(lm);
     }
@@ -67,45 +67,46 @@ public class FRoundedPanel extends JPanel {
      * @param g
      *            the g
      */
-    protected void paintComponent(Graphics g) {
+    @Override
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        int w = getWidth();
-        int h = getHeight();
-        int so = shadowOffset;
-        int r = cornerRadius;
+        final int w = this.getWidth();
+        final int h = this.getHeight();
+        int so = this.shadowOffset;
+        final int r = this.cornerRadius;
 
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        if (showShadow) {
+        if (this.showShadow) {
             // Mid, left, right rectangles: shadow
-            g2d.setColor(shadowColor);
-            g2d.fillRect(r + so, so, w - 2 * r - so, h - so);
-            g2d.fillRect(so, r + so, r, h - 2 * r - so);
-            g2d.fillRect(w - r, r + so, r, h - 2 * r - so);
+            g2d.setColor(this.shadowColor);
+            g2d.fillRect(r + so, so, w - (2 * r) - so, h - so);
+            g2d.fillRect(so, r + so, r, h - (2 * r) - so);
+            g2d.fillRect(w - r, r + so, r, h - (2 * r) - so);
 
             // Corners: shadow
             // NW
-            if (corners[0]) {
+            if (this.corners[0]) {
                 g2d.fillArc(so, so, 2 * r, 2 * r, 90, 90);
             } else {
                 g2d.fillRect(so, so, r, r);
             }
             // SW
-            if (corners[1]) {
-                g2d.fillArc(so, h - 2 * r, 2 * r, 2 * r, 180, 90);
+            if (this.corners[1]) {
+                g2d.fillArc(so, h - (2 * r), 2 * r, 2 * r, 180, 90);
             } else {
                 g2d.fillRect(so, h - r, r, r);
             }
             // SE
-            if (corners[2]) {
-                g2d.fillArc(w - 2 * r, h - 2 * r, 2 * r, 2 * r, 270, 90);
+            if (this.corners[2]) {
+                g2d.fillArc(w - (2 * r), h - (2 * r), 2 * r, 2 * r, 270, 90);
             } else {
                 g2d.fillRect(w - r, h - r, r, r);
             }
             // NE
-            if (corners[3]) {
-                g2d.fillArc(w - 2 * r, so, 2 * r, 2 * r, 0, 90);
+            if (this.corners[3]) {
+                g2d.fillArc(w - (2 * r), so, 2 * r, 2 * r, 0, 90);
             } else {
                 g2d.fillRect(w - r, so, r, r);
             }
@@ -116,33 +117,33 @@ public class FRoundedPanel extends JPanel {
         }
 
         // Mid, left, right rectangles: content
-        g2d.setColor(getBackground());
-        g2d.fillRect(r, 0, w - 2 * r - so, h - so);
-        g2d.fillRect(0, r, r, h - 2 * r - so);
-        g2d.fillRect(w - r - so, r, r, h - 2 * r - so);
+        g2d.setColor(this.getBackground());
+        g2d.fillRect(r, 0, w - (2 * r) - so, h - so);
+        g2d.fillRect(0, r, r, h - (2 * r) - so);
+        g2d.fillRect(w - r - so, r, r, h - (2 * r) - so);
 
         // Corners: content
         // NW
-        if (corners[0]) {
+        if (this.corners[0]) {
             g2d.fillArc(0, 0, 2 * r, 2 * r, 90, 90);
         } else {
             g2d.fillRect(0, 0, r, r);
         }
         // SW
-        if (corners[1]) {
-            g2d.fillArc(0, h - 2 * r - so, 2 * r, 2 * r, 180, 90);
+        if (this.corners[1]) {
+            g2d.fillArc(0, h - (2 * r) - so, 2 * r, 2 * r, 180, 90);
         } else {
             g2d.fillRect(0, h - r - so, r, r);
         }
         // SE
-        if (corners[2]) {
-            g2d.fillArc(w - 2 * r - so, h - 2 * r - so, 2 * r, 2 * r, 270, 90);
+        if (this.corners[2]) {
+            g2d.fillArc(w - (2 * r) - so, h - (2 * r) - so, 2 * r, 2 * r, 270, 90);
         } else {
             g2d.fillRect(w - r - so, h - r - so, r, r);
         }
         // NE
-        if (corners[3]) {
-            g2d.fillArc(w - 2 * r - so, 0, 2 * r, 2 * r, 0, 90);
+        if (this.corners[3]) {
+            g2d.fillArc(w - (2 * r) - so, 0, 2 * r, 2 * r, 0, 90);
         } else {
             g2d.fillRect(w - r - so, 0, r, r);
         }
@@ -156,29 +157,29 @@ public class FRoundedPanel extends JPanel {
 
         // Corners: border
         // NW
-        if (corners[0]) {
+        if (this.corners[0]) {
             g2d.drawArc(0, 0, 2 * r, 2 * r, 90, 90);
         } else {
             g2d.drawLine(0, 0, r, 0);
             g2d.drawLine(0, 0, 0, r);
         }
         // SW
-        if (corners[1]) {
-            g2d.drawArc(0, h - 2 * r - so, 2 * r, 2 * r - 1, 180, 90);
+        if (this.corners[1]) {
+            g2d.drawArc(0, h - (2 * r) - so, 2 * r, (2 * r) - 1, 180, 90);
         } else {
             g2d.drawLine(0, h - so - 1, 0, h - r - so - 1);
             g2d.drawLine(0, h - so - 1, r, h - so - 1);
         }
         // SE
-        if (corners[2]) {
-            g2d.drawArc(w - 2 * r - so, h - 2 * r - so, 2 * r - 1, 2 * r - 1, 270, 90);
+        if (this.corners[2]) {
+            g2d.drawArc(w - (2 * r) - so, h - (2 * r) - so, (2 * r) - 1, (2 * r) - 1, 270, 90);
         } else {
             g2d.drawLine(w - so - 1, h - so - 1, w - so - 1, h - r - so);
             g2d.drawLine(w - so - 1, h - so - 1, w - r - so, h - so - 1);
         }
         // NE
-        if (corners[3]) {
-            g2d.drawArc(w - 2 * r - so, 0, 2 * r - 1, 2 * r - 1, 0, 90);
+        if (this.corners[3]) {
+            g2d.drawArc(w - (2 * r) - so, 0, (2 * r) - 1, (2 * r) - 1, 0, 90);
         } else {
             g2d.drawLine(w - so - 1, 0, w - so - r, 0);
             g2d.drawLine(w - so - 1, 0, w - so - 1, r);
@@ -194,7 +195,7 @@ public class FRoundedPanel extends JPanel {
      * @param c
      *            the new shadow color
      */
-    public void setShadowColor(Color c) {
+    public void setShadowColor(final Color c) {
         this.shadowColor = c;
     }
 
@@ -207,7 +208,7 @@ public class FRoundedPanel extends JPanel {
      * @param c
      *            the new border color
      */
-    public void setBorderColor(Color c) {
+    public void setBorderColor(final Color c) {
         this.borderColor = c;
     }
 
@@ -254,12 +255,12 @@ public class FRoundedPanel extends JPanel {
      * @param vals
      *            the new corners
      */
-    public void setCorners(boolean vals[]) {
+    public void setCorners(final boolean[] vals) {
         if (vals.length != 4) {
             throw new IllegalArgumentException("FRoundedPanel > setCorners requires an array of booleans of length 4.");
         }
 
-        corners = vals;
+        this.corners = vals;
     }
 
     /**
@@ -268,7 +269,7 @@ public class FRoundedPanel extends JPanel {
      * @param b
      *            the new show shadow
      */
-    public void setShowShadow(boolean b) {
-        showShadow = b;
+    public void setShowShadow(final boolean b) {
+        this.showShadow = b;
     }
 }

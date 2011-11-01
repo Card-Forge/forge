@@ -22,11 +22,13 @@ import forge.AllZone;
 public class FButton extends JButton {
 
     /** The img r. */
-    protected Image imgL, imgM, imgR;
+    private Image imgL;
+    private Image imgM;
+    private Image imgR;
     private int w, h = 0;
     private boolean allImagesPresent = false;
-    private FSkin skin;
-    private AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
+    private final FSkin skin;
+    private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
 
     /**
      * Instantiates a new f button.
@@ -34,45 +36,48 @@ public class FButton extends JButton {
      * @param msg
      *            the msg
      */
-    public FButton(String msg) {
+    public FButton(final String msg) {
         super(msg);
         this.skin = AllZone.getSkin();
         this.setOpaque(false);
-        this.setForeground(skin.txt1a);
+        this.setForeground(this.skin.getTxt1a());
         this.setBackground(Color.red);
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
-        this.setFont(skin.font1.deriveFont(Font.BOLD, 15));
-        this.imgL = skin.btnLup.getImage();
-        this.imgM = skin.btnMup.getImage();
-        this.imgR = skin.btnRup.getImage();
+        this.setFont(this.skin.getFont1().deriveFont(Font.BOLD, 15));
+        this.imgL = this.skin.getBtnLup().getImage();
+        this.imgM = this.skin.getBtnMup().getImage();
+        this.imgR = this.skin.getBtnRup().getImage();
 
-        if (this.imgL != null && this.imgM != null && this.imgR != null) {
-            allImagesPresent = true;
+        if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
+            this.allImagesPresent = true;
         }
 
         this.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                if (isEnabled()) {
-                    imgL = skin.btnLover.getImage();
-                    imgM = skin.btnMover.getImage();
-                    imgR = skin.btnRover.getImage();
+            @Override
+            public void mouseEntered(final java.awt.event.MouseEvent evt) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getBtnLover().getImage();
+                    FButton.this.imgM = FButton.this.skin.getBtnMover().getImage();
+                    FButton.this.imgR = FButton.this.skin.getBtnRover().getImage();
                 }
             }
 
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (isEnabled()) {
-                    imgL = skin.btnLup.getImage();
-                    imgM = skin.btnMup.getImage();
-                    imgR = skin.btnRup.getImage();
+            @Override
+            public void mouseExited(final java.awt.event.MouseEvent evt) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getBtnLup().getImage();
+                    FButton.this.imgM = FButton.this.skin.getBtnMup().getImage();
+                    FButton.this.imgR = FButton.this.skin.getBtnRup().getImage();
                 }
             }
 
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                if (isEnabled()) {
-                    imgL = skin.btnLdown.getImage();
-                    imgM = skin.btnMdown.getImage();
-                    imgR = skin.btnRdown.getImage();
+            @Override
+            public void mousePressed(final java.awt.event.MouseEvent evt) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getBtnLdown().getImage();
+                    FButton.this.imgM = FButton.this.skin.getBtnMdown().getImage();
+                    FButton.this.imgR = FButton.this.skin.getBtnRdown().getImage();
                 }
             }
         });
@@ -83,27 +88,28 @@ public class FButton extends JButton {
      * 
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
-    protected void paintComponent(Graphics g) {
-        if (!allImagesPresent) {
+    @Override
+    protected void paintComponent(final Graphics g) {
+        if (!this.allImagesPresent) {
             return;
         }
 
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
-        if (!isEnabled()) {
-            g2d.setComposite(disabledComposite);
+        if (!this.isEnabled()) {
+            g2d.setComposite(this.disabledComposite);
         }
 
-        w = this.getWidth();
-        h = this.getHeight();
+        this.w = this.getWidth();
+        this.h = this.getHeight();
 
-        g2d.drawImage(imgL, 0, 0, h, h, null);
-        g2d.drawImage(imgM, h, 0, w - 2 * h, h, null);
-        g2d.drawImage(imgR, w - h, 0, h, h, null);
+        g2d.drawImage(this.imgL, 0, 0, this.h, this.h, null);
+        g2d.drawImage(this.imgM, this.h, 0, this.w - (2 * this.h), this.h, null);
+        g2d.drawImage(this.imgR, this.w - this.h, 0, this.h, this.h, null);
 
         super.paintComponent(g);
     }

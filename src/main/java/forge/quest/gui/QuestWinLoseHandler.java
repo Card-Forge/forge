@@ -365,7 +365,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
 
         lblTemp2 = new JLabel(sb.toString());
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setIcon(icoTemp);
         lblTemp2.setIconTextGap(50);
@@ -467,7 +467,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) model.qEvent).getTitle() + "\"");
 
         lblTemp2 = new JLabel(sb.toString());
-        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         lblTemp2.setIconTextGap(50);
@@ -489,7 +489,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         lblTemp1 = new TitleLabel("Gameplay Results");
 
         lblTemp2 = new JLabel("You lose! You have lost 15 credits.");
-        lblTemp2.setFont(AllZone.getSkin().font2.deriveFont(Font.PLAIN, 14));
+        lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
         lblTemp2.setForeground(Color.white);
         lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         lblTemp2.setIconTextGap(50);
@@ -578,7 +578,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(AllZone.getSkin().font2.deriveFont(Font.ITALIC, 16));
+            this.setFont(AllZone.getSkin().getFont2().deriveFont(Font.ITALIC, 16));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

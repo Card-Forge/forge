@@ -69,7 +69,7 @@ public class SplashFrame extends JFrame {
         setUndecorated(true);
 
         // Set preferred JFrame properties.
-        final ImageIcon bgIcon = skin.splash;
+        final ImageIcon bgIcon = skin.getSplash();
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 
@@ -127,8 +127,8 @@ public class SplashFrame extends JFrame {
         contentPane.getActionMap().put("escAction", new closeAction());
 
         // Set UI to color splash bar fill with theme colors
-        UIManager.put("ProgressBar.foreground", skin.bg1b); // Filled
-        UIManager.put("ProgressBar.selectionForeground", skin.txt1a); // Filled
+        UIManager.put("ProgressBar.foreground", skin.getBg1b()); // Filled
+        UIManager.put("ProgressBar.selectionForeground", skin.getTxt1a()); // Filled
 
         // Instantiate model and view and tie together.
         monitorModel = new SplashProgressModel();

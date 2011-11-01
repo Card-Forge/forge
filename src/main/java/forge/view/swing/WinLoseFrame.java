@@ -88,7 +88,7 @@ public class WinLoseFrame extends JFrame {
 
         // Place all content in FPanel
         FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
-        contentPanel.setBGImg(AllZone.getSkin().texture1);
+        contentPanel.setBGImg(AllZone.getSkin().getTexture1());
         contentPanel.setBorder(new WinLoseBorder());
         getContentPane().add(contentPanel);
 
@@ -107,12 +107,12 @@ public class WinLoseFrame extends JFrame {
         lblTitle = new JLabel("WinLoseFrame > lblTitle is broken.");
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(AllZone.getSkin().font1.deriveFont(Font.PLAIN, 26));
+        lblTitle.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
 
         lblStats = new JLabel("WinLoseFrame > lblStats is broken.");
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(AllZone.getSkin().font1.deriveFont(Font.PLAIN, 26));
+        lblStats.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
 
         pnlHead.add(lblTitle, "growx");
         pnlHead.add(lblStats, "growx");
@@ -204,7 +204,7 @@ public class WinLoseFrame extends JFrame {
             bounds.y = (screen.height - bounds.height) / 2;
         }
 
-        this.setBackground(AllZone.getSkin().bg1a);
+        this.setBackground(AllZone.getSkin().getBg1a());
         this.setBounds(bounds);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setUndecorated(true);
@@ -279,9 +279,9 @@ public class WinLoseFrame extends JFrame {
     private class WinLoseBorder extends AbstractBorder {
         public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
                 final int height) {
-            g.setColor(AllZone.getSkin().txt1a);
+            g.setColor(AllZone.getSkin().getTxt1a());
             g.drawRect(x + 1, y + 1, width - 3, height - 3);
-            g.setColor(AllZone.getSkin().bg1a);
+            g.setColor(AllZone.getSkin().getBg1a());
             g.drawRect(x + 3, y + 3, width - 7, height - 7);
         }
     }
