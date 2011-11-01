@@ -1386,6 +1386,12 @@ public final class AbilityFactory_ChangeZone {
 
         // Exile and bounce opponents stuff
         if (destination.equals(Zone.Exile) || origin.equals(Zone.Battlefield)) {
+            
+            //don't rush bouncing stuff when not going to attack
+            if(AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
+                    && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
+                return false;
+            }
             list = list.getController(AllZone.getHumanPlayer());
         }
 
