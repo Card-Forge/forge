@@ -25,10 +25,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input input;
 
     /** Constant <code>n=0</code>. */
-    static int n = 0;
-    private Stack<Input> inputStack = new Stack<Input>();
-    private Stack<Input> resolvingStack = new Stack<Input>();
-    private LinkedList<Input> resolvingQueue = new LinkedList<Input>();
+    private static int n = 0;
+    private final Stack<Input> inputStack = new Stack<Input>();
+    private final Stack<Input> resolvingStack = new Stack<Input>();
+    private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();
 
     private final FModel model;
     private ComputerAI_Input aiInput; // initialized at runtime to be the latest
@@ -41,7 +41,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            the f model
      */
     public InputControl(final FModel fModel) {
-        model = fModel;
+        this.model = fModel;
     }
 
     /**
@@ -53,12 +53,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a {@link forge.gui.input.Input} object.
      */
     public final void setInput(final Input in) {
-        if (model.getGameState().getStack().getResolving() || !(input == null || input instanceof Input_PassPriority)) {
-            inputStack.add(in);
+        if (this.model.getGameState().getStack().getResolving()
+                || !((this.input == null) || (this.input instanceof Input_PassPriority))) {
+            this.inputStack.add(in);
         } else {
-            input = in;
+            this.input = in;
         }
-        updateObservers();
+        this.updateObservers();
     }
 
     /**
@@ -74,13 +75,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     public final void setInput(final Input in, final boolean bAddToResolving) {
         // Make this
         if (!bAddToResolving) {
-            setInput(in);
+            this.setInput(in);
             return;
         }
 
-        Input old = input;
-        resolvingStack.add(old);
-        changeInput(in);
+        final Input old = this.input;
+        this.resolvingStack.add(old);
+        this.changeInput(in);
     }
 
     /**
@@ -92,8 +93,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a {@link forge.gui.input.Input} object.
      */
     private void changeInput(final Input in) {
-        input = in;
-        updateObservers();
+        this.input = in;
+        this.updateObservers();
     }
 
     /**
@@ -104,7 +105,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.gui.input.Input} object.
      */
     public final Input getInput() {
-        return input;
+        return this.input;
     }
 
     /**
@@ -113,9 +114,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void clearInput() {
-        input = null;
-        resolvingQueue.clear();
-        inputStack.clear();
+        this.input = null;
+        this.resolvingQueue.clear();
+        this.inputStack.clear();
     }
 
     /**
@@ -124,8 +125,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void resetInput() {
-        input = null;
-        updateObservers();
+        this.input = null;
+        this.updateObservers();
     }
 
     /**
@@ -137,9 +138,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a boolean.
      */
     public final void resetInput(final boolean update) {
-        input = null;
+        this.input = null;
         if (update) {
-            updateObservers();
+            this.updateObservers();
         }
     }
 
@@ -151,62 +152,62 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.gui.input.Input} object.
      */
     public final Input updateInput() {
-        final String phase = model.getGameState().getPhase().getPhase();
-        final Player playerTurn = model.getGameState().getPhase().getPlayerTurn();
-        final Player priority = model.getGameState().getPhase().getPriorityPlayer();
+        final String phase = this.model.getGameState().getPhase().getPhase();
+        final Player playerTurn = this.model.getGameState().getPhase().getPlayerTurn();
+        final Player priority = this.model.getGameState().getPhase().getPriorityPlayer();
 
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
-        if (resolvingStack.size() > 0) {
-            if (input != null) {
-                return input;
+        if (this.resolvingStack.size() > 0) {
+            if (this.input != null) {
+                return this.input;
             }
 
             // if an SA is resolving, only change input for something that is
             // part of the resolving SA
-            changeInput(resolvingStack.pop());
-            return input;
+            this.changeInput(this.resolvingStack.pop());
+            return this.input;
         }
 
-        if (model.getGameState().getStack().getResolving()) {
+        if (this.model.getGameState().getStack().getResolving()) {
             return null;
         }
 
-        if (input != null) {
-            return input;
-        } else if (inputStack.size() > 0) { // incoming input to Control
-            changeInput(inputStack.pop());
-            return input;
+        if (this.input != null) {
+            return this.input;
+        } else if (this.inputStack.size() > 0) { // incoming input to Control
+            this.changeInput(this.inputStack.pop());
+            return this.input;
         }
 
-        if (Phase.getGameBegins() != 0 && model.getGameState().getPhase().doPhaseEffects()) {
+        if ((Phase.getGameBegins() != 0) && this.model.getGameState().getPhase().doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
-            model.getGameState().getPhase().handleBeginPhase();
-            return updateInput();
+            this.model.getGameState().getPhase().handleBeginPhase();
+            return this.updateInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (model.getGameState().getPhase().isNeedToNextPhase()) {
+        if (this.model.getGameState().getPhase().isNeedToNextPhase()) {
             return null;
         }
 
         // Special Inputs needed for the following phases:
         if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
-            model.getGameState().getStack().freezeStack();
+            this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman()) {
                 return new Input_Attack();
             }
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
-            model.getGameState().getStack().freezeStack();
+            this.model.getGameState().getStack().freezeStack();
             if (playerTurn.isHuman()) {
-                aiInput.getComputer().declareBlockers();
+                this.aiInput.getComputer().declareBlockers();
                 return null;
             } else {
-                if (model.getGameState().getCombat().getAttackers().length == 0) {
+                if (this.model.getGameState().getCombat().getAttackers().length == 0) {
                     // no active attackers, skip the Blocking phase
-                    model.getGameState().getPhase().setNeedToNextPhase(true);
+                    this.model.getGameState().getPhase().setNeedToNextPhase(true);
                     return null;
                 } else {
                     return new Input_Block();
@@ -214,9 +215,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             }
         } else if (phase.equals(Constant.Phase.CLEANUP)) {
             // discard
-            if (model.getGameState().getStack().size() == 0) {
+            if (this.model.getGameState().getStack().size() == 0) {
                 // resolve things
-                                                             // like Madness
+                // like Madness
                 return new Input_Cleanup();
             }
         }
@@ -226,22 +227,22 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // priority
 
         if (priority.isHuman()) {
-            boolean skip = model.getGameState().getPhase().doSkipPhase();
-            model.getGameState().getPhase().setSkipPhase(false);
-            if (model.getGameState().getStack().size() == 0
+            final boolean skip = this.model.getGameState().getPhase().doSkipPhase();
+            this.model.getGameState().getPhase().setSkipPhase(false);
+            if ((this.model.getGameState().getStack().size() == 0)
                     && !forge.AllZone.getDisplay().stopAtPhase(playerTurn, phase) && skip) {
-                model.getGameState().getPhase().passPriority();
+                this.model.getGameState().getPhase().passPriority();
                 return null;
             } else {
                 return new Input_PassPriority();
             }
         } else if (playerTurn.isComputer()) {
-            return aiInput;
+            return this.aiInput;
         } else {
-            aiInput.getComputer().stackNotEmpty();
+            this.aiInput.getComputer().stackNotEmpty();
             return null;
         }
-    }// getInput()
+    } // getInput()
 
     /**
      * Sets the computer.
@@ -250,6 +251,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            the new computer
      */
     public final void setComputer(final ComputerAI_Input computerAI_Input) {
-        aiInput = computerAI_Input;
+        this.aiInput = computerAI_Input;
     }
-}// InputControl
+} // InputControl

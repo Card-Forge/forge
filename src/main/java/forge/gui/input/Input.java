@@ -78,7 +78,7 @@ public abstract class Input implements java.io.Serializable {
      * stop.
      * </p>
      */
-    final public void stop() {
+    public final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
         AllZone.getInputControl().resetInput();
 
@@ -98,8 +98,8 @@ public abstract class Input implements java.io.Serializable {
      * @param in
      *            a {@link forge.gui.input.Input} object.
      */
-    final public void stopSetNext(Input in) {
-        stop();
+    public final void stopSetNext(final Input in) {
+        this.stop();
         AllZone.getInputControl().setInput(in);
     }
 
@@ -107,7 +107,7 @@ public abstract class Input implements java.io.Serializable {
     @Override
     public String toString() {
         return "blank";
-    }// returns the Input name like "EmptyStack"
+    } // returns the Input name like "EmptyStack"
 
     /**
      * <p>
@@ -117,7 +117,7 @@ public abstract class Input implements java.io.Serializable {
      * @param isFree
      *            a boolean.
      */
-    public void setFree(boolean isFree) {
+    public void setFree(final boolean isFree) {
         this.isFree = isFree;
     }
 
@@ -129,6 +129,6 @@ public abstract class Input implements java.io.Serializable {
      * @return a boolean.
      */
     public boolean isFree() {
-        return isFree;
+        return this.isFree;
     }
 }

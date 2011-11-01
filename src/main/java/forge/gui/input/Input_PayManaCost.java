@@ -31,7 +31,7 @@ public class Input_PayManaCost extends Input {
     private final Card originalCard;
 
     /** The mana cost. */
-    public ManaCost manaCost;
+    private ManaCost manaCost;
 
     private final SpellAbility spell;
 
@@ -50,25 +50,25 @@ public class Input_PayManaCost extends Input {
      *            a boolean.
      */
     public Input_PayManaCost(final SpellAbility sa, final boolean noStack) {
-        skipStack = noStack;
-        originalManaCost = sa.getManaCost(); // Change
-        originalCard = sa.getSourceCard();
+        this.skipStack = noStack;
+        this.originalManaCost = sa.getManaCost(); // Change
+        this.originalCard = sa.getSourceCard();
 
-        spell = sa;
+        this.spell = sa;
 
         if (Phase.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (spell.getAfterPayMana() != null) {
-                    stopSetNext(spell.getAfterPayMana());
+                if (this.spell.getAfterPayMana() != null) {
+                    this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
-                    manaCost = new ManaCost("0");
-                    AllZone.getStack().add(spell);
+                    this.manaCost = new ManaCost("0");
+                    AllZone.getStack().add(this.spell);
                 }
             } else {
-                manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(originalManaCost));
+                this.manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
             }
         } else {
-            manaCost = new ManaCost(sa.getManaCost());
+            this.manaCost = new ManaCost(sa.getManaCost());
         }
     }
 
@@ -81,24 +81,24 @@ public class Input_PayManaCost extends Input {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public Input_PayManaCost(final SpellAbility sa) {
-        originalManaCost = sa.getManaCost(); // Change
-        originalCard = sa.getSourceCard();
+        this.originalManaCost = sa.getManaCost(); // Change
+        this.originalCard = sa.getSourceCard();
 
-        spell = sa;
+        this.spell = sa;
 
         if (Phase.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (spell.getAfterPayMana() != null) {
-                    stopSetNext(spell.getAfterPayMana());
+                if (this.spell.getAfterPayMana() != null) {
+                    this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
-                    manaCost = new ManaCost("0");
-                    AllZone.getStack().add(spell);
+                    this.manaCost = new ManaCost("0");
+                    AllZone.getStack().add(this.spell);
                 }
             } else {
-                manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(originalManaCost));
+                this.manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
             }
         } else {
-            manaCost = new ManaCost(sa.getManaCost());
+            this.manaCost = new ManaCost(sa.getManaCost());
         }
     }
 
@@ -108,8 +108,8 @@ public class Input_PayManaCost extends Input {
      * </p>
      */
     private void resetManaCost() {
-        manaCost = new ManaCost(originalManaCost);
-        phyLifeToLose = 0;
+        this.manaCost = new ManaCost(this.originalManaCost);
+        this.phyLifeToLose = 0;
     }
 
     /** {@inheritDoc} */
@@ -120,22 +120,22 @@ public class Input_PayManaCost extends Input {
         // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the
         // Sea, ....
 
-        if (originalCard.equals(card) && spell.isTapAbility()) {
+        if (this.originalCard.equals(card) && this.spell.isTapAbility()) {
             // I'm not sure if this actually prevents anything that wouldn't be
             // handled by canPlay below
             return;
         }
 
-        manaCost = Input_PayManaCostUtil.activateManaAbility(spell, card, manaCost);
+        this.manaCost = Input_PayManaCostUtil.activateManaAbility(this.spell, card, this.manaCost);
 
         // only show message if this is the active input
         if (AllZone.getInputControl().getInput() == this) {
-            showMessage();
+            this.showMessage();
         }
 
-        if (manaCost.isPaid()) {
-            originalCard.setSunburstValue(manaCost.getSunburst());
-            done();
+        if (this.manaCost.isPaid()) {
+            this.originalCard.setSunburstValue(this.manaCost.getSunburst());
+            this.done();
         }
     }
 
@@ -144,11 +144,11 @@ public class Input_PayManaCost extends Input {
     public final void selectPlayer(final Player player) {
 
         if (player.isHuman()) {
-            if (manaCost.payPhyrexian()) {
-                phyLifeToLose += 2;
+            if (this.manaCost.payPhyrexian()) {
+                this.phyLifeToLose += 2;
             }
 
-            showMessage();
+            this.showMessage();
         }
 
     }
@@ -159,40 +159,40 @@ public class Input_PayManaCost extends Input {
      * </p>
      */
     private void done() {
-        if (phyLifeToLose > 0) {
-            AllZone.getHumanPlayer().payLife(phyLifeToLose, originalCard);
+        if (this.phyLifeToLose > 0) {
+            AllZone.getHumanPlayer().payLife(this.phyLifeToLose, this.originalCard);
         }
-        if (spell.getSourceCard().isCopiedSpell()) {
-            if (spell.getAfterPayMana() != null) {
-                stopSetNext(spell.getAfterPayMana());
+        if (this.spell.getSourceCard().isCopiedSpell()) {
+            if (this.spell.getAfterPayMana() != null) {
+                this.stopSetNext(this.spell.getAfterPayMana());
             } else {
                 AllZone.getInputControl().resetInput();
             }
         } else {
-            AllZone.getHumanPlayer().getManaPool().clearPay(spell, false);
-            resetManaCost();
+            AllZone.getHumanPlayer().getManaPool().clearPay(this.spell, false);
+            this.resetManaCost();
 
             // if tap ability, tap card
-            if (spell.isTapAbility()) {
-                originalCard.tap();
+            if (this.spell.isTapAbility()) {
+                this.originalCard.tap();
             }
-            if (spell.isUntapAbility()) {
-                originalCard.untap();
+            if (this.spell.isUntapAbility()) {
+                this.originalCard.untap();
             }
 
             // if this is a spell, move it to the Stack ZOne
 
-            if (spell.isSpell()) {
-                spell.setSourceCard(AllZone.getGameAction().moveToStack(originalCard));
+            if (this.spell.isSpell()) {
+                this.spell.setSourceCard(AllZone.getGameAction().moveToStack(this.originalCard));
             }
 
-            if (spell.getAfterPayMana() != null) {
-                stopSetNext(spell.getAfterPayMana());
+            if (this.spell.getAfterPayMana() != null) {
+                this.stopSetNext(this.spell.getAfterPayMana());
             } else {
-                if (skipStack) {
-                    spell.resolve();
+                if (this.skipStack) {
+                    this.spell.resolve();
                 } else {
-                    AllZone.getStack().add(spell);
+                    AllZone.getStack().add(this.spell);
                 }
                 AllZone.getInputControl().resetInput();
             }
@@ -202,20 +202,20 @@ public class Input_PayManaCost extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().unpaid(spell, true);
+        this.resetManaCost();
+        AllZone.getHumanPlayer().getManaPool().unpaid(this.spell, true);
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // DO
-                                                                             // NOT
-                                                                             // REMOVE
-                                                                             // THIS,
-                                                                             // otherwise
-                                                                             // the
-                                                                             // cards
-                                                                             // don't
-                                                                             // always
-                                                                             // tap
+                                                                              // NOT
+                                                                              // REMOVE
+                                                                              // THIS,
+                                                                              // otherwise
+                                                                              // the
+                                                                              // cards
+                                                                              // don't
+                                                                              // always
+                                                                              // tap
 
-        stop();
+        this.stop();
     }
 
     /** {@inheritDoc} */
@@ -223,21 +223,21 @@ public class Input_PayManaCost extends Input {
     public final void showMessage() {
         ButtonUtil.enableOnlyCancel();
 
-        StringBuilder msg = new StringBuilder("Pay Mana Cost: " + manaCost.toString());
-        if (phyLifeToLose > 0) {
+        final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString());
+        if (this.phyLifeToLose > 0) {
             msg.append(" (");
-            msg.append(phyLifeToLose);
+            msg.append(this.phyLifeToLose);
             msg.append(" life paid for phyrexian mana)");
         }
 
-        if (manaCost.containsPhyrexianMana()) {
+        if (this.manaCost.containsPhyrexianMana()) {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
         AllZone.getDisplay().showMessage(msg.toString());
-        if (manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) {
-            originalCard.setSunburstValue(manaCost.getSunburst());
-            done();
+        if (this.manaCost.isPaid() && !new ManaCost(this.originalManaCost).isPaid()) {
+            this.originalCard.setSunburstValue(this.manaCost.getSunburst());
+            this.done();
         }
 
     }

@@ -51,28 +51,29 @@ public class Input_PayManaCostUtil {
             return ((ManaPool) card).subtractMana(sa, manaCost);
         }
 
-        ArrayList<Ability_Mana> abilities = getManaAbilities(card);
-        StringBuilder cneeded = new StringBuilder();
+        ArrayList<Ability_Mana> abilities = Input_PayManaCostUtil.getManaAbilities(card);
+        final StringBuilder cneeded = new StringBuilder();
         boolean choice = true;
         boolean skipExpress = false;
 
-        for (String color : Constant.Color.MANA_COLORS) {
+        for (final String color : Constant.Color.MANA_COLORS) {
             if (manaCost.isNeeded(color)) {
-                cneeded.append(getShortColorString(color));
+                cneeded.append(Input_PayManaCostUtil.getShortColorString(color));
             }
         }
 
-        Iterator<Ability_Mana> it = abilities.iterator(); // you can't remove
-                                                         // unneeded abilities
-                                                         // inside a
-                                                         // for(am:abilities)
-                                                         // loop :(
+        final Iterator<Ability_Mana> it = abilities.iterator(); // you can't
+                                                                // remove
+        // unneeded abilities
+        // inside a
+        // for(am:abilities)
+        // loop :(
         while (it.hasNext()) {
-            Ability_Mana ma = it.next();
+            final Ability_Mana ma = it.next();
             ma.setActivatingPlayer(AllZone.getHumanPlayer());
             if (!ma.canPlay()) {
                 it.remove();
-            } else if (!canMake(ma, cneeded.toString())) {
+            } else if (!Input_PayManaCostUtil.canMake(ma, cneeded.toString())) {
                 it.remove();
             }
 
@@ -95,21 +96,21 @@ public class Input_PayManaCostUtil {
 
         if (!skipExpress) {
             // express Mana Choice
-            ArrayList<Ability_Mana> colorMatches = new ArrayList<Ability_Mana>();
+            final ArrayList<Ability_Mana> colorMatches = new ArrayList<Ability_Mana>();
 
-            for (Ability_Mana am : abilities) {
+            for (final Ability_Mana am : abilities) {
                 if (am.isReflectedMana()) {
-                    ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am,
+                    final ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am,
                             am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
-                    for (String color : reflectableColors) {
+                    for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
                             // checking if color
                             colorMatches.add(am);
                         }
                     }
                 } else {
-                    String[] m = ManaPool.formatMana(am);
-                    for (String color : m) {
+                    final String[] m = ManaPool.formatMana(am);
+                    for (final String color : m) {
                         if (manaCost.isColor(color)) {
                             // checking if color
                             colorMatches.add(am);
@@ -118,7 +119,7 @@ public class Input_PayManaCostUtil {
                 }
             }
 
-            if (colorMatches.size() == 0 || colorMatches.size() == abilities.size()) {
+            if ((colorMatches.size() == 0) || (colorMatches.size() == abilities.size())) {
                 // can only match colorless just grab the first and move on.
                 choice = false;
             } else if (colorMatches.size() < abilities.size()) {
@@ -128,9 +129,9 @@ public class Input_PayManaCostUtil {
         }
 
         Ability_Mana chosen = abilities.get(0);
-        if (1 < abilities.size() && choice) {
-            HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
-            for (Ability_Mana am : abilities) {
+        if ((1 < abilities.size()) && choice) {
+            final HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
+            for (final Ability_Mana am : abilities) {
                 ability.put(am.toString(), am);
             }
             chosen = (Ability_Mana) GuiUtils.getChoice("Choose mana ability", abilities.toArray());
@@ -180,15 +181,15 @@ public class Input_PayManaCostUtil {
         }
 
         if (am.isReflectedMana()) {
-            ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am, am.getAbilityFactory(),
+            final ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am, am.getAbilityFactory(),
                     new ArrayList<String>(), new ArrayList<Card>());
-            for (String color : reflectableColors) {
-                if (mana.contains(getShortColorString(color))) {
+            for (final String color : reflectableColors) {
+                if (mana.contains(Input_PayManaCostUtil.getShortColorString(color))) {
                     return true;
                 }
             }
         } else {
-            for (String color : ManaPool.formatMana(am)) {
+            for (final String color : ManaPool.formatMana(am)) {
                 if (mana.contains(color)) {
                     return true;
                 }
@@ -207,7 +208,7 @@ public class Input_PayManaCostUtil {
      * @return a {@link java.lang.String} object.
      */
     public static String getLongColorString(final String color) {
-        Map<String, String> m = new HashMap<String, String>();
+        final Map<String, String> m = new HashMap<String, String>();
         m.put("G", Constant.Color.GREEN);
         m.put("R", Constant.Color.RED);
         m.put("U", Constant.Color.BLUE);
@@ -234,7 +235,7 @@ public class Input_PayManaCostUtil {
      * @return a {@link java.lang.String} object.
      */
     public static String getShortColorString(final String color) {
-        Map<String, String> m = new HashMap<String, String>();
+        final Map<String, String> m = new HashMap<String, String>();
         m.put(Constant.Color.GREEN, "G");
         m.put(Constant.Color.RED, "R");
         m.put(Constant.Color.BLUE, "U");
@@ -243,7 +244,7 @@ public class Input_PayManaCostUtil {
         m.put(Constant.Color.COLORLESS, "1");
         m.put(Constant.Color.SNOW, "S");
 
-        Object o = m.get(color);
+        final Object o = m.get(color);
 
         return o.toString();
     }

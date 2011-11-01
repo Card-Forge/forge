@@ -25,14 +25,14 @@ public class Input_PassPriority extends Input implements java.io.Serializable {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
-        String phase = AllZone.getPhase().getPhase();
-        Player player = AllZone.getPhase().getPriorityPlayer();
+        final String phase = AllZone.getPhase().getPhase();
+        final Player player = AllZone.getPhase().getPriorityPlayer();
 
         if (player.isComputer()) {
             System.out.println(phase + ": Computer in passpriority");
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         sb.append("Turn : ").append(AllZone.getPhase().getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(phase).append("\n");
@@ -53,10 +53,10 @@ public class Input_PassPriority extends Input implements java.io.Serializable {
     public final void selectButtonOK() {
         AllZone.getPhase().passPriority();
         GuiDisplayUtil.updateGUI();
-        Input in = AllZone.getInputControl().getInput();
-        if (in == this || in == null) {
+        final Input in = AllZone.getInputControl().getInput();
+        if ((in == this) || (in == null)) {
             AllZone.getInputControl().resetInput();
-        // Clear out PassPriority after clicking button
+            // Clear out PassPriority after clicking button
         }
     }
 

@@ -45,7 +45,7 @@ public class Input_Mulligan extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        end();
+        this.end();
     }
 
     /**
@@ -59,14 +59,14 @@ public class Input_Mulligan extends Input {
      * @return an int
      */
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
-        CardList hand = player.getCardsIn(Zone.Hand);
-        for (Card c : hand) {
+        final CardList hand = player.getCardsIn(Zone.Hand);
+        for (final Card c : hand) {
             AllZone.getGameAction().moveToLibrary(c);
         }
-        for (int i = 0; i < MAGIC_NUMBER_OF_SHUFFLES; i++) {
+        for (int i = 0; i < Input_Mulligan.MAGIC_NUMBER_OF_SHUFFLES; i++) {
             player.shuffle();
         }
-        int newHand = hand.size() - 1;
+        final int newHand = hand.size() - 1;
         for (int i = 0; i < newHand; i++) {
             player.drawCard();
         }
@@ -78,19 +78,19 @@ public class Input_Mulligan extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        Player humanPlayer = AllZone.getHumanPlayer();
-        GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(humanPlayer.getName());
+        final Player humanPlayer = AllZone.getHumanPlayer();
+        final GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(humanPlayer.getName());
 
-        int newHand = doMulligan(humanPlayer, humanRating);
+        final int newHand = this.doMulligan(humanPlayer, humanRating);
 
-        QuestData quest = AllZone.getQuestData();
-        if (quest != null && quest.getInventory().hasItem("Sleight") && humanRating.getMulliganCount() == 1) {
+        final QuestData quest = AllZone.getQuestData();
+        if ((quest != null) && quest.getInventory().hasItem("Sleight") && (humanRating.getMulliganCount() == 1)) {
             AllZone.getHumanPlayer().drawCard();
             humanRating.notifyOpeningHandSize(newHand + 1);
         }
 
         if (newHand == 0) {
-            end();
+            this.end();
         }
     } // selectButtonOK()
 
@@ -101,37 +101,37 @@ public class Input_Mulligan extends Input {
      */
     final void end() {
         // Computer mulligan
-        Player aiPlayer = AllZone.getComputerPlayer();
-        GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(aiPlayer.getName());
+        final Player aiPlayer = AllZone.getComputerPlayer();
+        final GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(aiPlayer.getName());
         boolean aiTakesMulligan = true;
 
         // Computer mulligans if there are no cards with converted mana cost of
         // 0 in its hand
         while (aiTakesMulligan) {
 
-            CardList handList = aiPlayer.getCardsIn(Zone.Hand);
-            boolean hasLittleCmc0Cards = handList.getValidCards("Card.cmcEQ0", aiPlayer, null).size() < 2;
-            aiTakesMulligan = handList.size() > AI_MULLIGAN_THRESHOLD && hasLittleCmc0Cards;
+            final CardList handList = aiPlayer.getCardsIn(Zone.Hand);
+            final boolean hasLittleCmc0Cards = handList.getValidCards("Card.cmcEQ0", aiPlayer, null).size() < 2;
+            aiTakesMulligan = (handList.size() > Input_Mulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
 
             if (aiTakesMulligan) {
-                doMulligan(aiPlayer, aiRating);
+                this.doMulligan(aiPlayer, aiRating);
             }
         }
 
         // Human Leylines & Chancellors
         ButtonUtil.reset();
-        AbilityFactory af = new AbilityFactory();
-        CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
+        final AbilityFactory af = new AbilityFactory();
+        final CardList humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(Zone.Hand);
 
-        for (Card c : humanOpeningHand) {
-            ArrayList<String> kws = c.getKeyword();
+        for (final Card c : humanOpeningHand) {
+            final ArrayList<String> kws = c.getKeyword();
             for (int i = 0; i < kws.size(); i++) {
-                String kw = kws.get(i);
+                final String kw = kws.get(i);
 
                 if (kw.startsWith("MayEffectFromOpeningHand")) {
-                    String effName = kw.split(":")[1];
+                    final String effName = kw.split(":")[1];
 
-                    SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                    final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
                     if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
                         // If we ever let the AI memorize cards in the players
                         // hand, this would be a place to do so.
@@ -147,17 +147,17 @@ public class Input_Mulligan extends Input {
         }
 
         // Computer Leylines & Chancellors
-        CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-        for (Card c : aiOpeningHand) {
+        final CardList aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+        for (final Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
-                ArrayList<String> kws = c.getKeyword();
+                final ArrayList<String> kws = c.getKeyword();
                 for (int i = 0; i < kws.size(); i++) {
-                    String kw = kws.get(i);
+                    final String kw = kws.get(i);
 
                     if (kw.startsWith("MayEffectFromOpeningHand")) {
-                        String effName = kw.split(":")[1];
+                        final String effName = kw.split(":")[1];
 
-                        SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                        final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
 
                         // Is there a better way for the AI to decide this?
                         if (effect.doTrigger(false)) {
@@ -169,8 +169,8 @@ public class Input_Mulligan extends Input {
                 }
             }
             if (c.getName().startsWith("Leyline")
-                    && !(c.getName().startsWith("Leyline of Singularity") && AllZoneUtil.getCardsIn(Zone.Battlefield,
-                            "Leyline of Singularity").size() > 0)) {
+                    && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(Zone.Battlefield,
+                            "Leyline of Singularity").size() > 0))) {
                 AllZone.getGameAction().moveToPlay(c);
                 AllZone.getGameAction().checkStateEffects();
             }
@@ -188,6 +188,6 @@ public class Input_Mulligan extends Input {
         AllZone.getGameAction().checkStateEffects();
         Phase.setGameBegins(1);
         AllZone.getPhase().setNeedToNextPhase(false);
-        stop();
+        this.stop();
     }
 }

@@ -30,12 +30,12 @@ public class Input_Attack extends Input {
 
         ButtonUtil.enableOnlyOK();
 
-        Object o = AllZone.getCombat().nextDefender();
+        final Object o = AllZone.getCombat().nextDefender();
         if (o == null) {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Declare Attackers: Select Creatures to Attack ");
         sb.append(o.toString());
 
@@ -46,7 +46,7 @@ public class Input_Attack extends Input {
             CardList possibleAttackers = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
             possibleAttackers = possibleAttackers.getType("Creature");
             for (int i = 0; i < possibleAttackers.size(); i++) {
-                Card c = possibleAttackers.get(i);
+                final Card c = possibleAttackers.get(i);
                 if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, AllZone.getCombat())
                         && !c.isAttacking()) {
                     AllZone.getCombat().addAttacker(c);
@@ -97,8 +97,8 @@ public class Input_Attack extends Input {
                                                                                   // marked
 
             // for Castle Raptors, since it gets a bonus if untapped
-            for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.getCommands().get(effect);
+            for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
+                final Command com = GameActionUtil.getCommands().get(effect);
                 com.execute();
             }
 

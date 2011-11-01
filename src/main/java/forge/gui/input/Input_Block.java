@@ -25,7 +25,7 @@ public class Input_Block extends Input {
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
-    private ArrayList<Card> allBlocking = new ArrayList<Card>();
+    private final ArrayList<Card> allBlocking = new ArrayList<Card>();
 
     /**
      * <p>
@@ -36,22 +36,22 @@ public class Input_Block extends Input {
      *            a {@link forge.Card} object.
      */
     public final void removeFromAllBlocking(final Card c) {
-        allBlocking.remove(c);
+        this.allBlocking.remove(c);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         // for Castle Raptors, since it gets a bonus if untapped
-        for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            Command com = GameActionUtil.getCommands().get(effect);
+        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
+            final Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
 
         // could add "Reset Blockers" button
         ButtonUtil.enableOnlyOK();
 
-        if (currentAttacker == null) {
+        if (this.currentAttacker == null) {
             /*
              * //Lure CardList attackers = new
              * CardList(AllZone.getCombat().getAttackers()); for(Card
@@ -66,9 +66,11 @@ public class Input_Block extends Input {
 
             AllZone.getDisplay().showMessage("To Block, click on your Opponents attacker first, then your blocker(s)");
         } else {
-            String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName();
-            AllZone.getDisplay().showMessage(
-                    "Select a creature to block " + attackerName + " (" + currentAttacker.getUniqueNumber() + ") ");
+            final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
+            AllZone.getDisplay()
+                    .showMessage(
+                            "Select a creature to block " + attackerName + " ("
+                                    + this.currentAttacker.getUniqueNumber() + ") ");
         }
 
         CombatUtil.showCombat();
@@ -90,14 +92,14 @@ public class Input_Block extends Input {
     public final void selectCard(final Card card, final PlayerZone zone) {
         // is attacking?
         if (CardUtil.toList(AllZone.getCombat().getAttackers()).contains(card)) {
-            currentAttacker = card;
+            this.currentAttacker = card;
         } else if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
-                && CombatUtil.canBlock(currentAttacker, card, AllZone.getCombat())) {
-            if (currentAttacker != null && (!allBlocking.contains(card))) {
-                allBlocking.add(card);
-                AllZone.getCombat().addBlocker(currentAttacker, card);
+                && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())) {
+            if ((this.currentAttacker != null) && (!this.allBlocking.contains(card))) {
+                this.allBlocking.add(card);
+                AllZone.getCombat().addBlocker(this.currentAttacker, card);
             }
         }
-        showMessage();
+        this.showMessage();
     } // selectCard()
 }

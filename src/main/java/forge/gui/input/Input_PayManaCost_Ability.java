@@ -54,16 +54,15 @@ public class Input_PayManaCost_Ability extends Input {
      * Constructor for Input_PayManaCost_Ability.
      * </p>
      * 
-     * @param manaCost_2
+     * @param manaCost2
      *            a {@link java.lang.String} object.
-     * @param paidCommand_2
+     * @param paidCommand2
      *            a {@link forge.Command} object.
-     * @param unpaidCommand_2
+     * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public Input_PayManaCost_Ability(final String manaCost_2,
-            final Command paidCommand_2, final Command unpaidCommand_2) {
-        this("", manaCost_2, paidCommand_2, unpaidCommand_2);
+    public Input_PayManaCost_Ability(final String manaCost2, final Command paidCommand2, final Command unpaidCommand2) {
+        this("", manaCost2, paidCommand2, unpaidCommand2);
     }
 
     /**
@@ -73,16 +72,16 @@ public class Input_PayManaCost_Ability extends Input {
      * 
      * @param m
      *            a {@link java.lang.String} object.
-     * @param manaCost_2
+     * @param manaCost2
      *            a {@link java.lang.String} object.
-     * @param paidCommand_2
+     * @param paidCommand2
      *            a {@link forge.Command} object.
-     * @param unpaidCommand_2
+     * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public Input_PayManaCost_Ability(final String m, final String manaCost_2,
-            final Command paidCommand_2, final Command unpaidCommand_2) {
-        this(m, manaCost_2, paidCommand_2, unpaidCommand_2, false);
+    public Input_PayManaCost_Ability(final String m, final String manaCost2, final Command paidCommand2,
+            final Command unpaidCommand2) {
+        this(m, manaCost2, paidCommand2, unpaidCommand2, false);
     }
 
     /**
@@ -92,19 +91,18 @@ public class Input_PayManaCost_Ability extends Input {
      * 
      * @param m
      *            a {@link java.lang.String} object.
-     * @param manaCost_2
+     * @param manaCost2
      *            a {@link java.lang.String} object.
-     * @param paidCommand_2
+     * @param paidCommand2
      *            a {@link forge.Command} object.
-     * @param unpaidCommand_2
+     * @param unpaidCommand2
      *            a {@link forge.Command} object.
      * @param showOKButton
      *            a boolean.
      */
-    public Input_PayManaCost_Ability(final String m, final String manaCost_2,
-            final Command paidCommand_2, final Command unpaidCommand_2,
-            final boolean showOKButton) {
-        fakeAbility = new SpellAbility(SpellAbility.getAbility(), null) {
+    public Input_PayManaCost_Ability(final String m, final String manaCost2, final Command paidCommand2,
+            final Command unpaidCommand2, final boolean showOKButton) {
+        this.fakeAbility = new SpellAbility(SpellAbility.getAbility(), null) {
             @Override
             public void resolve() {
             }
@@ -114,13 +112,13 @@ public class Input_PayManaCost_Ability extends Input {
                 return false;
             }
         };
-        originalManaCost = manaCost_2;
-        message = m;
+        this.originalManaCost = manaCost2;
+        this.message = m;
 
-        manaCost = new ManaCost(originalManaCost);
-        paidCommand = paidCommand_2;
-        unpaidCommand = unpaidCommand_2;
-        showOnlyOKButton = showOKButton;
+        this.manaCost = new ManaCost(this.originalManaCost);
+        this.paidCommand = paidCommand2;
+        this.unpaidCommand = unpaidCommand2;
+        this.showOnlyOKButton = showOKButton;
     }
 
     /**
@@ -129,40 +127,40 @@ public class Input_PayManaCost_Ability extends Input {
      * </p>
      */
     public final void resetManaCost() {
-        manaCost = new ManaCost(originalManaCost);
+        this.manaCost = new ManaCost(this.originalManaCost);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         // only tap card if the mana is needed
-        manaCost = Input_PayManaCostUtil.activateManaAbility(fakeAbility, card, manaCost);
+        this.manaCost = Input_PayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
 
-        if (manaCost.isPaid()) {
-            resetManaCost();
-            AllZone.getHumanPlayer().getManaPool().clearPay(fakeAbility, false);
-            stop();
-            paidCommand.execute();
+        if (this.manaCost.isPaid()) {
+            this.resetManaCost();
+            AllZone.getHumanPlayer().getManaPool().clearPay(this.fakeAbility, false);
+            this.stop();
+            this.paidCommand.execute();
         } else {
-            showMessage();
+            this.showMessage();
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().unpaid(fakeAbility, true);
-        stop();
-        unpaidCommand.execute();
+        this.resetManaCost();
+        AllZone.getHumanPlayer().getManaPool().unpaid(this.fakeAbility, true);
+        this.stop();
+        this.unpaidCommand.execute();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (showOnlyOKButton) {
-            stop();
-            unpaidCommand.execute();
+        if (this.showOnlyOKButton) {
+            this.stop();
+            this.unpaidCommand.execute();
         }
     }
 
@@ -170,10 +168,10 @@ public class Input_PayManaCost_Ability extends Input {
     @Override
     public final void showMessage() {
         ButtonUtil.enableOnlyCancel();
-        if (showOnlyOKButton) {
+        if (this.showOnlyOKButton) {
             ButtonUtil.enableOnlyOK();
         }
-        AllZone.getDisplay().showMessage(message + "Pay Mana Cost: \r\n" + manaCost.toString());
+        AllZone.getDisplay().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
     }
 
 }
