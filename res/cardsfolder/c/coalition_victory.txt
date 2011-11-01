@@ -7,7 +7,6 @@ SVar:Z:Count$ColoredCreatures
 SVar:Y:Count$Domain
 SVar:X:SVar$Y/Plus.Z
 SVar:RemAIDeck:True
-
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalition_victory.jpg
 End
