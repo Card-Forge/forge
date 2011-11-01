@@ -12,6 +12,7 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -292,13 +293,14 @@ public abstract class Trigger {
     public final boolean zonesCheck() {
         if (mapParams.containsKey("TriggerZones")) {
             List<Zone> triggerZones = new ArrayList<Zone>();
+            PlayerZone zone = AllZone.getZoneOf(hostCard);
             for (String s : mapParams.get("TriggerZones").split(",")) {
                 triggerZones.add(Zone.smartValueOf(s));
             }
-            if (AllZone.getZoneOf(hostCard) == null) {
+            if (zone == null) {
                 return false;
             }
-            if (!triggerZones.contains(AllZone.getZoneOf(hostCard).getZoneType()) || hostCard.isPhasedOut()) {
+            if (!triggerZones.contains(zone.getZoneType()) || hostCard.isPhasedOut()) {
                 return false;
             }
         }

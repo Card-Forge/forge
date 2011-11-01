@@ -48,7 +48,7 @@ public class CostReveal extends CostPartWithList {
         final Integer amount = this.convertAmount();
 
         if (this.getThis()) {
-            if (!AllZone.getZoneOf(source).is(Constant.Zone.Hand)) {
+            if (!source.isInZone(Constant.Zone.Hand)) {
                 return false;
             }
         } else {

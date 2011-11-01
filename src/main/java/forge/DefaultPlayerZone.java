@@ -59,8 +59,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            if (AllZone.getZoneOf(c) != null) {
-                this.cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
+            PlayerZone zone = AllZone.getZoneOf(c);
+            if (zone != null) {
+                this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
                 this.cardsAddedThisTurnSource.add(null);
             }
@@ -117,8 +118,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            if (AllZone.getZoneOf(c) != null) {
-                this.cardsAddedThisTurnSource.add(AllZone.getZoneOf(c).getZoneType());
+            PlayerZone zone = AllZone.getZoneOf(c);
+            if (zone != null) {
+                this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
                 this.cardsAddedThisTurnSource.add(null);
             }

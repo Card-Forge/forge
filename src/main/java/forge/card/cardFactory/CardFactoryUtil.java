@@ -2386,7 +2386,7 @@ public class CardFactoryUtil {
         } else {
             // If an Aura's target is removed before it resolves, the Aura
             // fizzles
-            if (source.isAura() && !AllZone.getZoneOf(target).is(Constant.Zone.Battlefield)) {
+            if (source.isAura() && !target.isInZone(Constant.Zone.Battlefield)) {
                 return false;
             }
         }

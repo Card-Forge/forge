@@ -160,8 +160,8 @@ public class MagicStack extends MyObservable {
         // on the stack zone, move there
         if (ability.isSpell()) {
             final Card source = ability.getSourceCard();
-            if (!source.isCopiedSpell() && !AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
-                //ability.setSourceCard(AllZone.getGameAction().moveToStack(source));
+            if (!source.isCopiedSpell() && !source.isInZone(Constant.Zone.Stack)) {
+                ability.setSourceCard(AllZone.getGameAction().moveToStack(source));
             }
         }
 
@@ -957,7 +957,7 @@ public class MagicStack extends MyObservable {
         // If Spell and still on the Stack then let it goto the graveyard or
         // replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
-                && AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
+                && source.isInZone(Constant.Zone.Stack)) {
             AllZone.getGameAction().moveToGraveyard(source);
         }
     }

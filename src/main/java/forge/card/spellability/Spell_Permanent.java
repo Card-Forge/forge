@@ -286,7 +286,7 @@ public class Spell_Permanent extends Spell {
             }
 
             final CardList cl = (CardList) this.championGetCreature.execute();
-            if ((o == null) || !(cl.size() > 0) || !AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand)) {
+            if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(Constant.Zone.Hand)) {
                 return false;
             }
         }
