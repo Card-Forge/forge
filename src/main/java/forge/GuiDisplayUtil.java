@@ -1122,7 +1122,7 @@ public final class GuiDisplayUtil implements NewConstants {
         for (int i = connectedCards.size() - 1; i > 0; i--) {
             // System.out.println("We should have a stack");
             final CardPanel cp = connectedCards.get(i);
-            cp.connectedCard = connectedCards.get(i - 1);
+            cp.setConnectedCard(connectedCards.get(i - 1));
         }
     }
 

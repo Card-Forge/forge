@@ -53,24 +53,25 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     public CardPicturePanel(final Card c) {
         super(new BorderLayout());
         // add(label = new JLabel(icon = new ImageIcon()));
-        add(panel = new ScaledImagePanel());
-        panel.setScalingBlur(false);
-        panel.setScalingType(ScalingType.bicubic);
-        panel.setScalingMultiPassType(MultipassType.none);
+        this.panel = new ScaledImagePanel();
+        this.add(this.panel);
+        this.panel.setScalingBlur(false);
+        this.panel.setScalingType(ScalingType.bicubic);
+        this.panel.setScalingMultiPassType(MultipassType.none);
 
-        addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent e) {
-                update();
+                CardPicturePanel.this.update();
             }
 
             @Override
             public void componentResized(final ComponentEvent e) {
-                update();
+                CardPicturePanel.this.update();
             }
         });
 
-        setCard(c);
+        this.setCard(c);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      * </p>
      */
     public void update() {
-        setCard(getCard());
+        this.setCard(this.getCard());
     }
 
     /**
@@ -89,40 +90,43 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      *            the new card
      */
     public void setCard(final InventoryItem cp) {
-        card = null;
-        inventoryItem = cp;
-        if (!isShowing()) {
+        this.card = null;
+        this.inventoryItem = cp;
+        if (!this.isShowing()) {
             return;
         }
 
-        setImage();
+        this.setImage();
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setCard(final Card c) {
-        card = c;
-        inventoryItem = null;
-        if (!isShowing()) {
+        this.card = c;
+        this.inventoryItem = null;
+        if (!this.isShowing()) {
             return;
         }
 
-        setImage();
+        this.setImage();
     }
 
     private void setImage() {
-        Insets i = getInsets();
+        final Insets i = this.getInsets();
         Image image = null;
-        if (inventoryItem != null) {
-            image = ImageCache.getImage(inventoryItem, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom);
+        if (this.inventoryItem != null) {
+            image = ImageCache.getImage(this.inventoryItem, this.getWidth() - i.left - i.right, this.getHeight()
+                    - i.top - i.bottom);
         }
-        if (card != null && image == null) {
-            image = ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight() - i.top - i.bottom);
+        if ((this.card != null) && (image == null)) {
+            image = ImageCache.getImage(this.card, this.getWidth() - i.left - i.right, this.getHeight() - i.top
+                    - i.bottom);
         }
 
-        if (image != currentImange) {
-            currentImange = image;
-            panel.setImage(image, null);
-            panel.repaint();
+        if (image != this.currentImange) {
+            this.currentImange = image;
+            this.panel.setImage(image, null);
+            this.panel.repaint();
         }
         // if(image == null) {
         // label.setIcon(null);
@@ -142,10 +146,11 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      * 
      * @return a {@link forge.Card} object.
      */
+    @Override
     public Card getCard() {
-        if (card == null && inventoryItem != null && inventoryItem instanceof CardPrinted) {
-            card = ((CardPrinted) inventoryItem).toForgeCard();
+        if ((this.card == null) && (this.inventoryItem != null) && (this.inventoryItem instanceof CardPrinted)) {
+            this.card = ((CardPrinted) this.inventoryItem).toForgeCard();
         }
-        return card;
+        return this.card;
     }
 }

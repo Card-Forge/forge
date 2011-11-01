@@ -34,7 +34,7 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardPanel(final Card card) {
-        setCard(card);
+        this.setCard(card);
     }
 
     /**
@@ -43,38 +43,39 @@ public class CardPanel extends JPanel implements CardContainer {
      * </p>
      */
     private void addComponents() {
-        Card c = getCard();
-        Image cardImage = ImageCache.getImage(c);
+        final Card c = this.getCard();
+        final Image cardImage = ImageCache.getImage(c);
         if (cardImage == null) {
             // show the card as text
-            setLayout(new GridLayout(0, 1));
+            this.setLayout(new GridLayout(0, 1));
 
-            add(new JLabel(c.isFaceDown() ? "Morph" : c.getName() + "   " + c.getManaCost()));
-            add(new JLabel(GuiDisplayUtil.formatCardType(c)));
+            this.add(new JLabel(c.isFaceDown() ? "Morph" : c.getName() + "   " + c.getManaCost()));
+            this.add(new JLabel(GuiDisplayUtil.formatCardType(c)));
 
-            JLabel tapLabel = new JLabel("Tapped");
+            final JLabel tapLabel = new JLabel("Tapped");
             tapLabel.setBackground(Color.white);
             tapLabel.setOpaque(true);
 
             if (c.isTapped()) {
-                add(tapLabel);
+                this.add(tapLabel);
             }
 
             if (c.isCreature()) {
-                add(new JLabel(c.getNetAttack() + " / " + c.getNetDefense()));
+                this.add(new JLabel(c.getNetAttack() + " / " + c.getNetDefense()));
             }
         } else {
             // show the card image
-            setLayout(new GridLayout(1, 1));
-            add(new JLabel(new ImageIcon(cardImage)));
+            this.setLayout(new GridLayout(1, 1));
+            this.add(new JLabel(new ImageIcon(cardImage)));
         }
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void setCard(final Card card) {
         this.card = card;
-        setBorder(GuiDisplayUtil.getBorder(card));
-        addComponents();
+        this.setBorder(GuiDisplayUtil.getBorder(card));
+        this.addComponents();
     }
 
     /**
@@ -84,12 +85,28 @@ public class CardPanel extends JPanel implements CardContainer {
      * 
      * @return a {@link forge.Card} object.
      */
+    @Override
     public final Card getCard() {
-        return card;
+        return this.card;
+    }
+
+    /**
+     * @return the connectedCard
+     */
+    public CardPanel getConnectedCard() {
+        return connectedCard;
+    }
+
+    /**
+     * @param connectedCard
+     *            the connectedCard to set
+     */
+    public void setConnectedCard(CardPanel connectedCard) {
+        this.connectedCard = connectedCard; // TODO: Add 0 to parameter's name.
     }
 
     // ~
     /** The connected card. */
-    public CardPanel connectedCard;
+    private CardPanel connectedCard;
     // ~
 }

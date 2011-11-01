@@ -39,17 +39,17 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
-    private static Color PURPLE = new Color(14381203);
+    private static Color purple = new Color(14381203);
 
     private Card card;
 
-    private JLabel nameCostLabel;
-    private JLabel typeLabel;
-    private JLabel powerToughnessLabel;
-    private JLabel damageLabel;
-    private JLabel idLabel;
-    private JLabel setInfoLabel;
-    private JTextArea cdArea;
+    private final JLabel nameCostLabel;
+    private final JLabel typeLabel;
+    private final JLabel powerToughnessLabel;
+    private final JLabel damageLabel;
+    private final JLabel idLabel;
+    private final JLabel setInfoLabel;
+    private final JTextArea cdArea;
 
     /**
      * <p>
@@ -60,141 +60,150 @@ public class CardDetailPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardDetailPanel(final Card card) {
-        setLayout(new GridLayout(2, 0, 0, 5));
-        setBorder(new EtchedBorder());
+        this.setLayout(new GridLayout(2, 0, 0, 5));
+        this.setBorder(new EtchedBorder());
 
-        JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
-        cdLabels.add(nameCostLabel = new JLabel());
-        cdLabels.add(typeLabel = new JLabel());
-        cdLabels.add(powerToughnessLabel = new JLabel());
-        cdLabels.add(damageLabel = new JLabel());
+        final JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
+        this.nameCostLabel = new JLabel();
+        this.typeLabel = new JLabel();
+        this.powerToughnessLabel = new JLabel();
+        this.damageLabel = new JLabel();
+        cdLabels.add(this.nameCostLabel);
+        cdLabels.add(this.typeLabel);
+        cdLabels.add(this.powerToughnessLabel);
+        cdLabels.add(this.damageLabel);
 
-        JPanel IDR = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        final JPanel idr = new JPanel(new GridBagLayout());
+        final GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.HORIZONTAL;
 
         c.gridwidth = 2;
         c.weightx = 1.0;
-        IDR.add(idLabel = new JLabel(), c);
+        this.idLabel = new JLabel();
+        idr.add(this.idLabel, c);
 
         c.gridwidth = 1;
         c.weightx = 0.3;
-        IDR.add(setInfoLabel = new JLabel(), c);
+        this.setInfoLabel = new JLabel();
+        idr.add(this.setInfoLabel, c);
 
-        cdLabels.add(IDR);
+        cdLabels.add(idr);
 
-        add(cdLabels);
-        nameCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        typeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        powerToughnessLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(cdLabels);
+        this.nameCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.typeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.powerToughnessLabel.setHorizontalAlignment(SwingConstants.CENTER);
         // cdLabel7.setSize(100, cdLabel7.getHeight());
 
-        setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        add(new JScrollPane(cdArea = new JTextArea(4, 12)));
-        cdArea.setLineWrap(true);
-        cdArea.setWrapStyleWord(true);
+        this.cdArea = new JTextArea(4, 12);
+        this.add(new JScrollPane(this.cdArea));
+        this.cdArea.setLineWrap(true);
+        this.cdArea.setWrapStyleWord(true);
 
         if (!Singletons.getModel().getPreferences().lafFonts) {
-            nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            damageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.damageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
 
             java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
             f = f.deriveFont(java.awt.Font.BOLD);
-            setInfoLabel.setFont(f);
+            this.setInfoLabel.setFont(f);
 
-            cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
+            this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
         }
 
-        setCard(card);
+        this.setCard(card);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void setCard(final Card card) {
-        nameCostLabel.setText("");
-        typeLabel.setText("");
-        powerToughnessLabel.setText("");
-        damageLabel.setText("");
-        idLabel.setText("");
-        setInfoLabel.setText("");
-        setInfoLabel.setOpaque(false);
-        setInfoLabel.setBorder(null);
-        cdArea.setText("");
-        setBorder(GuiDisplayUtil.getBorder(card));
+        this.nameCostLabel.setText("");
+        this.typeLabel.setText("");
+        this.powerToughnessLabel.setText("");
+        this.damageLabel.setText("");
+        this.idLabel.setText("");
+        this.setInfoLabel.setText("");
+        this.setInfoLabel.setOpaque(false);
+        this.setInfoLabel.setBorder(null);
+        this.cdArea.setText("");
+        this.setBorder(GuiDisplayUtil.getBorder(card));
 
         this.card = card;
         if (card == null) {
             return;
         }
 
-        boolean faceDown = card.isFaceDown() && card.getController() != AllZone.getHumanPlayer();
+        final boolean faceDown = card.isFaceDown() && (card.getController() != AllZone.getHumanPlayer());
         if (!faceDown) {
             if (card.getManaCost().equals("") || card.isLand()) {
-                nameCostLabel.setText(card.getName());
+                this.nameCostLabel.setText(card.getName());
             } else {
-                nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
+                this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
             }
         } else {
-            nameCostLabel.setText("Morph");
+            this.nameCostLabel.setText("Morph");
         }
 
         if (!faceDown) {
-            typeLabel.setText(GuiDisplayUtil.formatCardType(card));
+            this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
         } else {
-            typeLabel.setText("Creature");
+            this.typeLabel.setText("Creature");
         }
 
         if (card.isCreature()) {
-            powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
-            damageLabel.setText("Damage: " + card.getDamage() + " Assigned Damage: " + card.getTotalAssignedDamage());
+            this.powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
+            this.damageLabel.setText("Damage: " + card.getDamage() + " Assigned Damage: "
+                    + card.getTotalAssignedDamage());
         }
         if (card.isPlaneswalker()) {
-            damageLabel.setText("Assigned Damage: " + card.getTotalAssignedDamage());
+            this.damageLabel.setText("Assigned Damage: " + card.getTotalAssignedDamage());
         }
 
-        idLabel.setText("Card ID  " + card.getUniqueNumber());
+        this.idLabel.setText("Card ID  " + card.getUniqueNumber());
 
         // rarity and set of a face down card should not be visible to the
         // opponent
         if (!card.isFaceDown() || card.getController().isHuman()) {
-            setInfoLabel.setText(card.getCurSetCode());
+            this.setInfoLabel.setText(card.getCurSetCode());
         }
 
-        if (!setInfoLabel.getText().equals("")) {
-            setInfoLabel.setOpaque(true);
-            String csr = card.getCurSetRarity();
+        if (!this.setInfoLabel.getText().equals("")) {
+            this.setInfoLabel.setOpaque(true);
+            final String csr = card.getCurSetRarity();
             if (csr.equals("Common") || csr.equals("Land")) {
-                setInfoLabel.setBackground(Color.BLACK);
-                setInfoLabel.setForeground(Color.WHITE);
-                setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                this.setInfoLabel.setBackground(Color.BLACK);
+                this.setInfoLabel.setForeground(Color.WHITE);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             } else if (csr.equals("Uncommon")) {
-                setInfoLabel.setBackground(Color.LIGHT_GRAY);
-                setInfoLabel.setForeground(Color.BLACK);
-                setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                this.setInfoLabel.setBackground(Color.LIGHT_GRAY);
+                this.setInfoLabel.setForeground(Color.BLACK);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             } else if (csr.equals("Rare")) {
-                setInfoLabel.setBackground(Color.YELLOW);
-                setInfoLabel.setForeground(Color.BLACK);
-                setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                this.setInfoLabel.setBackground(Color.YELLOW);
+                this.setInfoLabel.setForeground(Color.BLACK);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             } else if (csr.equals("Mythic")) {
-                setInfoLabel.setBackground(Color.RED);
-                setInfoLabel.setForeground(Color.BLACK);
-                setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                this.setInfoLabel.setBackground(Color.RED);
+                this.setInfoLabel.setForeground(Color.BLACK);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             } else if (csr.equals("Special")) {
                 // "Timeshifted" or other Special Rarity Cards
-                setInfoLabel.setBackground(PURPLE);
-                setInfoLabel.setForeground(Color.BLACK);
-                setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                this.setInfoLabel.setBackground(CardDetailPanel.purple);
+                this.setInfoLabel.setForeground(Color.BLACK);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             }
             // cdLabel7.setText(card.getCurSetCode());
         }
 
         // fill the card text
 
-        StringBuilder area = new StringBuilder();
+        final StringBuilder area = new StringBuilder();
 
         // Token
         if (card.isToken()) {
@@ -231,8 +240,8 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // counter text
-        Counters[] counters = Counters.values();
-        for (Counters counter : counters) {
+        final Counters[] counters = Counters.values();
+        for (final Counters counter : counters) {
             if (card.getCounters(counter) != 0) {
                 if (area.length() != 0) {
                     area.append("\n");
@@ -243,7 +252,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // Regeneration Shields
-        int regenShields = card.getShield();
+        final int regenShields = card.getShield();
         if (regenShields > 0) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -252,7 +261,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // Damage Prevention
-        int preventNextDamage = card.getPreventNextDamage();
+        final int preventNextDamage = card.getPreventNextDamage();
         if (preventNextDamage > 0) {
             area.append("\n");
             area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
@@ -260,7 +269,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // top revealed
-        if (card.hasKeyword("Play with the top card of your library revealed.") && card.getController() != null
+        if (card.hasKeyword("Play with the top card of your library revealed.") && (card.getController() != null)
                 && !card.getController().getZone(Zone.Library).isEmpty()) {
             area.append("\r\nTop card: ");
             area.append(card.getController().getCardsIn(Zone.Library, 1));
@@ -312,7 +321,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 area.append("\n");
             }
             area.append("=Equipped by ");
-            for (Iterator<Card> it = card.getEquippedBy().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = card.getEquippedBy().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
@@ -322,7 +331,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // enchanting
-        GameEntity entity = card.getEnchanting();
+        final GameEntity entity = card.getEnchanting();
         if (entity != null) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -330,7 +339,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("*Enchanting ");
 
             if (entity instanceof Card) {
-                Card c = (Card) entity;
+                final Card c = (Card) entity;
                 if (c.isFaceDown() && c.getController().isComputer()) {
                     area.append("Morph (");
                     area.append(card.getUniqueNumber());
@@ -350,7 +359,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 area.append("\n");
             }
             area.append("*Enchanted by ");
-            for (Iterator<Card> it = card.getEnchantedBy().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = card.getEnchantedBy().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
@@ -365,7 +374,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 area.append("\n");
             }
             area.append("+Controlling: ");
-            for (Iterator<Card> it = card.getGainControlTargets().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = card.getGainControlTargets().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
@@ -390,7 +399,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 area.append("\n");
             }
             area.append("^Imprinting: ");
-            for (Iterator<Card> it = card.getImprinted().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = card.getImprinted().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
@@ -419,16 +428,16 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            Card[] cards = card.getAttachedCardsByMindsDesire();
+            final Card[] cards = card.getAttachedCardsByMindsDesire();
             area.append("=Attached: ");
-            for (Card c : cards) {
+            for (final Card c : cards) {
                 area.append(c.getName());
                 area.append(" ");
             }
             area.append("=");
         }
 
-        cdArea.setText(area.toString());
+        this.cdArea.setText(area.toString());
     }
 
     /**
@@ -438,7 +447,8 @@ public class CardDetailPanel extends JPanel implements CardContainer {
      * 
      * @return a {@link forge.Card} object.
      */
+    @Override
     public final Card getCard() {
-        return card;
+        return this.card;
     }
 }
