@@ -7706,6 +7706,7 @@ res/cardsfolder/s/spiketail_drakeling.txt svneol=native#text/plain
 res/cardsfolder/s/spiketail_hatchling.txt svneol=native#text/plain
 res/cardsfolder/s/spin_engine.txt svneol=native#text/plain
 res/cardsfolder/s/spin_into_myth.txt svneol=native#text/plain
+res/cardsfolder/s/spinal_embrace.txt -text svneol=unset#text/plain
 res/cardsfolder/s/spinal_graft.txt svneol=native#text/plain
 res/cardsfolder/s/spinal_villain.txt svneol=native#text/plain
 res/cardsfolder/s/spincrusher.txt svneol=native#text/plain
