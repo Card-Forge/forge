@@ -50,13 +50,13 @@ public class QuestUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getComputerStartingCards(final QuestData qd, final QuestEvent qe) {
-        CardList list = new CardList();
+        final CardList list = new CardList();
 
         if (qe.getEventType().equals("challenge")) {
-            List<String> extras = ((QuestChallenge) qe).getAIExtraCards();
+            final List<String> extras = ((QuestChallenge) qe).getAIExtraCards();
 
-            for (String s : extras) {
-                list.add(readExtraCard(s, AllZone.getComputerPlayer()));
+            for (final String s : extras) {
+                list.add(QuestUtil.readExtraCard(s, AllZone.getComputerPlayer()));
             }
         }
 
@@ -74,7 +74,7 @@ public class QuestUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanStartingCards(final QuestData qd) {
-        CardList list = new CardList();
+        final CardList list = new CardList();
 
         if (qd.getPetManager().shouldPetBeUsed()) {
             list.add(qd.getPetManager().getSelectedPet().getPetCard());
@@ -101,13 +101,13 @@ public class QuestUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanStartingCards(final QuestData qd, final QuestEvent qe) {
-        CardList list = getHumanStartingCards(qd);
+        final CardList list = QuestUtil.getHumanStartingCards(qd);
 
         if (qe.getEventType().equals("challenge")) {
-            List<String> extras = ((QuestChallenge) qe).getHumanExtraCards();
+            final List<String> extras = ((QuestChallenge) qe).getHumanExtraCards();
 
-            for (String s : extras) {
-                list.add(readExtraCard(s, AllZone.getHumanPlayer()));
+            for (final String s : extras) {
+                list.add(QuestUtil.readExtraCard(s, AllZone.getHumanPlayer()));
             }
         }
 
@@ -126,8 +126,8 @@ public class QuestUtil {
      * @return token Card
      */
     public static Card createToken(final String s) {
-        String[] properties = s.split(";");
-        Card c = new Card();
+        final String[] properties = s.split(";");
+        final Card c = new Card();
         c.setToken(true);
 
         // c.setManaCost(properties[1]);
@@ -157,9 +157,9 @@ public class QuestUtil {
      * @return CardList
      */
     public static List<CardPrinted> generateCardRewardList(final String s) {
-        String[] temp = s.split(" ");
+        final String[] temp = s.split(" ");
 
-        int qty = Integer.parseInt(temp[0]);
+        final int qty = Integer.parseInt(temp[0]);
         // Determine rarity
         CardRarity rar = CardRarity.Uncommon;
         if (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {

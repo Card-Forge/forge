@@ -24,7 +24,7 @@ public class QuestPreferences implements Serializable {
 
     // Descriptive difficulty names
     /** Constant <code>sDifficulty="{Easy, Normal, Hard, Very Hard}"</code>. */
-    private static String[] sDifficulty = {"Easy", "Normal", "Hard", "Very Hard"};
+    private static String[] sDifficulty = { "Easy", "Normal", "Hard", "Very Hard" };
 
     // Default match wins it takes to gain a booster
     /** Constant <code>winsForBooster={1, 1, 2, 2}</code>. */
@@ -89,7 +89,7 @@ public class QuestPreferences implements Serializable {
 
     static {
         // if quest.prefs exists
-        grabPrefsFromFile();
+        QuestPreferences.grabPrefsFromFile();
     }
 
     /**
@@ -99,67 +99,67 @@ public class QuestPreferences implements Serializable {
      */
     public static void grabPrefsFromFile() {
         try {
-            BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(Quest.PREFS)));
+            final BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(Quest.PREFS)));
             String line = null;
             while ((line = input.readLine()) != null) {
-                if (line.startsWith("#") || line.length() == 0) {
+                if (line.startsWith("#") || (line.length() == 0)) {
                     continue;
                 }
-                String[] split = line.split("=");
+                final String[] split = line.split("=");
 
                 if (split[0].equals("difficultyString")) {
-                    setDifficulty(split[1]);
+                    QuestPreferences.setDifficulty(split[1]);
                 } else if (split[0].equals("winsForBooster")) {
-                    setWinsForBooster(split[1]);
+                    QuestPreferences.setWinsForBooster(split[1]);
                 } else if (split[0].equals("winsForRankIncrease")) {
-                    setWinsForRank(split[1]);
+                    QuestPreferences.setWinsForRank(split[1]);
                 } else if (split[0].equals("winsForMediumAI")) {
-                    setWinsForMediumAI(split[1]);
+                    QuestPreferences.setWinsForMediumAI(split[1]);
                 } else if (split[0].equals("winsForHardAI")) {
-                    setWinsForHardAI(split[1]);
+                    QuestPreferences.setWinsForHardAI(split[1]);
                 } else if (split[0].equals("startingBasicLand")) {
-                    setStartingBasic(split[1]);
+                    QuestPreferences.setStartingBasic(split[1]);
                 } else if (split[0].equals("startingSnowBasicLand")) {
-                    setStartingSnowBasic(split[1]);
+                    QuestPreferences.setStartingSnowBasic(split[1]);
                 } else if (split[0].equals("startingCommons")) {
-                    setStartingCommons(split[1]);
+                    QuestPreferences.setStartingCommons(split[1]);
                 } else if (split[0].equals("startingUncommons")) {
-                    setStartingUncommons(split[1]);
+                    QuestPreferences.setStartingUncommons(split[1]);
                 } else if (split[0].equals("startingRares")) {
-                    setStartingRares(split[1]);
+                    QuestPreferences.setStartingRares(split[1]);
                 } else if (split[0].equals("startingCredits")) {
-                    setStartingCredits(split[1]);
+                    QuestPreferences.setStartingCredits(split[1]);
                 } else if (split[0].equals("boosterPackCommon")) {
-                    setNumCommon(split[1]);
+                    QuestPreferences.setNumCommon(split[1]);
                 } else if (split[0].equals("boosterPackUncommon")) {
-                    setNumUncommon(split[1]);
+                    QuestPreferences.setNumUncommon(split[1]);
                 } else if (split[0].equals("boosterPackRare")) {
-                    setNumRares(split[1]);
+                    QuestPreferences.setNumRares(split[1]);
                 } else if (split[0].equals("matchRewardBase")) {
-                    setMatchRewardBase(split[1]);
+                    QuestPreferences.setMatchRewardBase(split[1]);
                 } else if (split[0].equals("matchRewardTotalWins")) {
-                    setMatchRewardTotalWins(split[1]);
+                    QuestPreferences.setMatchRewardTotalWins(split[1]);
                 } else if (split[0].equals("matchRewardNoLosses")) {
-                    setMatchRewardNoLosses(split[1]);
+                    QuestPreferences.setMatchRewardNoLosses(split[1]);
                 } else if (split[0].equals("matchRewardMilledWinBonus")) {
-                    setMatchRewardMilledWinBonus(split[1]);
+                    QuestPreferences.setMatchRewardMilledWinBonus(split[1]);
                 } else if (split[0].equals("matchRewardPoisonWinBonus")) {
-                    setMatchRewardPoisonWinBonus(split[1]);
+                    QuestPreferences.setMatchRewardPoisonWinBonus(split[1]);
                 } else if (split[0].equals("matchRewardAltWinBonus")) {
-                    setMatchRewardAltWinBonus(split[1]);
+                    QuestPreferences.setMatchRewardAltWinBonus(split[1]);
                 } else if (split[0].equals("matchRewardWinOnFirstTurn")) {
-                    setMatchRewardWinFirst(split[1]);
+                    QuestPreferences.setMatchRewardWinFirst(split[1]);
                 } else if (split[0].equals("matchRewardWinByTurnFive")) {
-                    setMatchRewardWinByFifth(split[1]);
+                    QuestPreferences.setMatchRewardWinByFifth(split[1]);
                 } else if (split[0].equals("matchRewardWinByTurnTen")) {
-                    setMatchRewardWinByTen(split[1]);
+                    QuestPreferences.setMatchRewardWinByTen(split[1]);
                 } else if (split[0].equals("matchRewardWinByTurnFifteen")) {
-                    setMatchRewardWinByFifteen(split[1]);
+                    QuestPreferences.setMatchRewardWinByFifteen(split[1]);
                 } else if (split[0].equals("matchRewardMullToZero")) {
-                    setMatchMullToZero(split[1]);
+                    QuestPreferences.setMatchMullToZero(split[1]);
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Trouble grabbing quest data preferences. Using default values.");
         }
     }
@@ -172,7 +172,7 @@ public class QuestPreferences implements Serializable {
      * @return an array of {@link java.lang.String} objects.
      */
     public static String[] getDifficulty() {
-        return sDifficulty;
+        return QuestPreferences.sDifficulty;
     }
 
     /**
@@ -185,7 +185,7 @@ public class QuestPreferences implements Serializable {
      * @return a {@link java.lang.String} object.
      */
     public static String getDifficulty(final int index) {
-        return sDifficulty[index];
+        return QuestPreferences.sDifficulty[index];
     }
 
     /**
@@ -198,7 +198,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getWinsForBooster(final int index) {
-        return winsForBooster[index];
+        return QuestPreferences.winsForBooster[index];
     }
 
     /**
@@ -211,7 +211,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getWinsForRankIncrease(final int index) {
-        return winsForRankIncrease[index];
+        return QuestPreferences.winsForRankIncrease[index];
     }
 
     /**
@@ -224,7 +224,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getWinsForMediumAI(final int index) {
-        return winsForMediumAI[index];
+        return QuestPreferences.winsForMediumAI[index];
     }
 
     /**
@@ -237,7 +237,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getWinsForHardAI(final int index) {
-        return winsForHardAI[index];
+        return QuestPreferences.winsForHardAI[index];
     }
 
     /**
@@ -250,7 +250,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getWinsForVeryHardAI(final int index) {
-        return winsForVeryHardAI[index];
+        return QuestPreferences.winsForVeryHardAI[index];
     }
 
     /**
@@ -261,7 +261,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingBasic() {
-        return startingBasicLand;
+        return QuestPreferences.startingBasicLand;
     }
 
     /**
@@ -272,7 +272,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingSnowBasic() {
-        return startingSnowBasicLand;
+        return QuestPreferences.startingSnowBasicLand;
     }
 
     /**
@@ -285,7 +285,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingCommons(final int index) {
-        return startingCommons[index];
+        return QuestPreferences.startingCommons[index];
     }
 
     /**
@@ -298,7 +298,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingUncommons(final int index) {
-        return startingUncommons[index];
+        return QuestPreferences.startingUncommons[index];
     }
 
     /**
@@ -311,7 +311,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingRares(final int index) {
-        return startingRares[index];
+        return QuestPreferences.startingRares[index];
     }
 
     /**
@@ -322,7 +322,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getStartingCredits() {
-        return startingCredits;
+        return QuestPreferences.startingCredits;
     }
 
     /**
@@ -333,7 +333,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getNumCommon() {
-        return boosterPackCommon;
+        return QuestPreferences.boosterPackCommon;
     }
 
     /**
@@ -344,7 +344,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getNumUncommon() {
-        return boosterPackUncommon;
+        return QuestPreferences.boosterPackUncommon;
     }
 
     /**
@@ -355,7 +355,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getNumRare() {
-        return boosterPackRare;
+        return QuestPreferences.boosterPackRare;
     }
 
     /**
@@ -366,7 +366,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardBase() {
-        return matchRewardBase;
+        return QuestPreferences.matchRewardBase;
     }
 
     /**
@@ -377,7 +377,7 @@ public class QuestPreferences implements Serializable {
      * @return a double.
      */
     public static double getMatchRewardTotalWins() {
-        return matchRewardTotalWins;
+        return QuestPreferences.matchRewardTotalWins;
     }
 
     /**
@@ -388,7 +388,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardNoLosses() {
-        return matchRewardNoLosses;
+        return QuestPreferences.matchRewardNoLosses;
     }
 
     /**
@@ -399,7 +399,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardPoisonWinBonus() {
-        return matchRewardPoisonWinBonus;
+        return QuestPreferences.matchRewardPoisonWinBonus;
     }
 
     /**
@@ -410,7 +410,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardMilledWinBonus() {
-        return matchRewardMilledWinBonus;
+        return QuestPreferences.matchRewardMilledWinBonus;
     }
 
     /**
@@ -421,7 +421,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardAltWinBonus() {
-        return matchRewardAltWinBonus;
+        return QuestPreferences.matchRewardAltWinBonus;
     }
 
     /**
@@ -432,7 +432,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardWinFirst() {
-        return matchRewardWinOnFirstTurn;
+        return QuestPreferences.matchRewardWinOnFirstTurn;
     }
 
     /**
@@ -443,7 +443,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardWinByFifth() {
-        return matchRewardWinByTurnFive;
+        return QuestPreferences.matchRewardWinByTurnFive;
     }
 
     /**
@@ -454,7 +454,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardWinByTen() {
-        return matchRewardWinByTurnTen;
+        return QuestPreferences.matchRewardWinByTurnTen;
     }
 
     /**
@@ -465,7 +465,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchRewardWinByFifteen() {
-        return matchRewardWinByTurnFifteen;
+        return QuestPreferences.matchRewardWinByTurnFifteen;
     }
 
     /**
@@ -476,7 +476,7 @@ public class QuestPreferences implements Serializable {
      * @return a int.
      */
     public static int getMatchMullToZero() {
-        return matchRewardMullToZero;
+        return QuestPreferences.matchRewardMullToZero;
     }
 
     // setters
@@ -489,7 +489,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setDifficulty(final String diff) {
-        sDifficulty = diff.split(",");
+        QuestPreferences.sDifficulty = diff.split(",");
     }
 
     /**
@@ -501,10 +501,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setWinsForBooster(final String wins) {
-        String[] winsStr = wins.split(",");
+        final String[] winsStr = wins.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            winsForBooster[i] = Integer.parseInt(winsStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.winsForBooster[i] = Integer.parseInt(winsStr[i]);
         }
     }
 
@@ -517,10 +517,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setWinsForRank(final String wins) {
-        String[] winsStr = wins.split(",");
+        final String[] winsStr = wins.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            winsForRankIncrease[i] = Integer.parseInt(winsStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.winsForRankIncrease[i] = Integer.parseInt(winsStr[i]);
         }
     }
 
@@ -533,10 +533,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setWinsForMediumAI(final String wins) {
-        String[] winsStr = wins.split(",");
+        final String[] winsStr = wins.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            winsForMediumAI[i] = Integer.parseInt(winsStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.winsForMediumAI[i] = Integer.parseInt(winsStr[i]);
         }
     }
 
@@ -549,10 +549,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setWinsForHardAI(final String wins) {
-        String[] winsStr = wins.split(",");
+        final String[] winsStr = wins.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            winsForHardAI[i] = Integer.parseInt(winsStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.winsForHardAI[i] = Integer.parseInt(winsStr[i]);
         }
     }
 
@@ -565,7 +565,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingBasic(final String land) {
-        startingBasicLand = Integer.parseInt(land);
+        QuestPreferences.startingBasicLand = Integer.parseInt(land);
     }
 
     /**
@@ -577,7 +577,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingSnowBasic(final String land) {
-        startingSnowBasicLand = Integer.parseInt(land);
+        QuestPreferences.startingSnowBasicLand = Integer.parseInt(land);
     }
 
     /**
@@ -589,10 +589,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingCommons(final String rarity) {
-        String[] splitStr = rarity.split(",");
+        final String[] splitStr = rarity.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            startingCommons[i] = Integer.parseInt(splitStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.startingCommons[i] = Integer.parseInt(splitStr[i]);
         }
     }
 
@@ -605,10 +605,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingUncommons(final String rarity) {
-        String[] splitStr = rarity.split(",");
+        final String[] splitStr = rarity.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            startingUncommons[i] = Integer.parseInt(splitStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.startingUncommons[i] = Integer.parseInt(splitStr[i]);
         }
     }
 
@@ -621,10 +621,10 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingRares(final String rarity) {
-        String[] splitStr = rarity.split(",");
+        final String[] splitStr = rarity.split(",");
 
-        for (int i = 0; i < numDiff; i++) {
-            startingRares[i] = Integer.parseInt(splitStr[i]);
+        for (int i = 0; i < QuestPreferences.numDiff; i++) {
+            QuestPreferences.startingRares[i] = Integer.parseInt(splitStr[i]);
         }
     }
 
@@ -637,7 +637,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setStartingCredits(final String credits) {
-        startingCredits = Integer.parseInt(credits);
+        QuestPreferences.startingCredits = Integer.parseInt(credits);
     }
 
     /**
@@ -649,7 +649,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setNumCommon(final String pack) {
-        boosterPackCommon = Integer.parseInt(pack);
+        QuestPreferences.boosterPackCommon = Integer.parseInt(pack);
     }
 
     /**
@@ -661,7 +661,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setNumUncommon(final String pack) {
-        boosterPackUncommon = Integer.parseInt(pack);
+        QuestPreferences.boosterPackUncommon = Integer.parseInt(pack);
     }
 
     /**
@@ -673,7 +673,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setNumRares(final String pack) {
-        boosterPackRare = Integer.parseInt(pack);
+        QuestPreferences.boosterPackRare = Integer.parseInt(pack);
     }
 
     /**
@@ -685,7 +685,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardBase(final String match) {
-        matchRewardBase = Integer.parseInt(match);
+        QuestPreferences.matchRewardBase = Integer.parseInt(match);
     }
 
     /**
@@ -697,7 +697,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardTotalWins(final String match) {
-        matchRewardTotalWins = Double.parseDouble(match);
+        QuestPreferences.matchRewardTotalWins = Double.parseDouble(match);
     }
 
     /**
@@ -709,7 +709,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardNoLosses(final String match) {
-        matchRewardNoLosses = Integer.parseInt(match);
+        QuestPreferences.matchRewardNoLosses = Integer.parseInt(match);
     }
 
     /**
@@ -721,7 +721,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardPoisonWinBonus(final String match) {
-        matchRewardPoisonWinBonus = Integer.parseInt(match);
+        QuestPreferences.matchRewardPoisonWinBonus = Integer.parseInt(match);
     }
 
     /**
@@ -733,7 +733,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardMilledWinBonus(final String match) {
-        matchRewardMilledWinBonus = Integer.parseInt(match);
+        QuestPreferences.matchRewardMilledWinBonus = Integer.parseInt(match);
     }
 
     /**
@@ -745,7 +745,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardAltWinBonus(final String match) {
-        matchRewardAltWinBonus = Integer.parseInt(match);
+        QuestPreferences.matchRewardAltWinBonus = Integer.parseInt(match);
     }
 
     /**
@@ -757,7 +757,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardWinFirst(final String match) {
-        matchRewardWinOnFirstTurn = Integer.parseInt(match);
+        QuestPreferences.matchRewardWinOnFirstTurn = Integer.parseInt(match);
     }
 
     /**
@@ -769,7 +769,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardWinByFifth(final String match) {
-        matchRewardWinByTurnFive = Integer.parseInt(match);
+        QuestPreferences.matchRewardWinByTurnFive = Integer.parseInt(match);
     }
 
     /**
@@ -781,7 +781,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardWinByTen(final String match) {
-        matchRewardWinByTurnTen = Integer.parseInt(match);
+        QuestPreferences.matchRewardWinByTurnTen = Integer.parseInt(match);
     }
 
     /**
@@ -793,7 +793,7 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchRewardWinByFifteen(final String match) {
-        matchRewardWinByTurnFifteen = Integer.parseInt(match);
+        QuestPreferences.matchRewardWinByTurnFifteen = Integer.parseInt(match);
     }
 
     /**
@@ -805,6 +805,6 @@ public class QuestPreferences implements Serializable {
      *            a {@link java.lang.String} object.
      */
     public static void setMatchMullToZero(final String match) {
-        matchRewardMullToZero = Integer.parseInt(match);
+        QuestPreferences.matchRewardMullToZero = Integer.parseInt(match);
     }
 }

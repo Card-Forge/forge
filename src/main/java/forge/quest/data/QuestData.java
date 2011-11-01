@@ -40,40 +40,40 @@ public final class QuestData {
     // but only when the object is created through the constructor
     // DO NOT RENAME THIS FIELD
     /** The version number. */
-    int versionNumber = CURRENT_VERSION_NUMBER;
+    private int versionNumber = QuestData.CURRENT_VERSION_NUMBER;
 
     /** The rank index. */
-    int rankIndex; // level
+    private int rankIndex; // level
 
     /** The win. */
-    int win; // number of wins
+    private int win; // number of wins
 
     /** The lost. */
-    int lost;
+    private int lost;
 
     /** The credits. */
-    long credits; // this money is good for all modes
+    private long credits; // this money is good for all modes
 
     /** The life. */
-    int life; // for fantasy mode, how much life bought at shop to start game
+    private int life; // for fantasy mode, how much life bought at shop to start game
               // with
     /** The inventory. */
-    QuestInventory inventory = new QuestInventory(); // different gadgets
+    private QuestInventory inventory = new QuestInventory(); // different gadgets
 
     /** The pet manager. */
-    QuestPetManager petManager = new QuestPetManager(); // pets that start match
+    private QuestPetManager petManager = new QuestPetManager(); // pets that start match
                                                         // with you
 
     // Diffuculty - they store both index and title
     /** The diff index. */
-    int diffIndex;
+    private int diffIndex;
 
     /** The difficulty. */
-    String difficulty;
+    private String difficulty;
 
     // Quest mode - there should be an enum :(
     /** The mode. */
-    String mode = "";
+    private String mode = "";
 
     /** The Constant FANTASY. */
     public static final String FANTASY = "Fantasy";
@@ -83,19 +83,19 @@ public final class QuestData {
 
     // Decks collected by player
     /** The my decks. */
-    Map<String, Deck> myDecks = new HashMap<String, Deck>();
+    private Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
     // Cards associated with quest
     /** The card pool. */
-    ItemPool<InventoryItem> cardPool = new ItemPool<InventoryItem>(InventoryItem.class); // player's
+    private ItemPool<InventoryItem> cardPool = new ItemPool<InventoryItem>(InventoryItem.class); // player's
                                                                                          // belonging
     /** The shop list. */
-    ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
+    private ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
     // current
     // shop
     // list
     /** The new card list. */
-    ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
+    private ItemPool<InventoryItem> newCardList = new ItemPool<InventoryItem>(InventoryItem.class); // cards
     // acquired
     // since
     // last
@@ -103,13 +103,13 @@ public final class QuestData {
 
     // Challenge history
     /** The challenges played. */
-    int challengesPlayed = 0;
+    private int challengesPlayed = 0;
 
     /** The available challenges. */
-    List<Integer> availableChallenges = new ArrayList<Integer>();
+    private List<Integer> availableChallenges = new ArrayList<Integer>();
 
     /** The completed challenges. */
-    List<Integer> completedChallenges = new ArrayList<Integer>();
+    private List<Integer> completedChallenges = new ArrayList<Integer>();
 
     // Challenges used to be called quests. During the renaming,
     // files could be corrupted. These fields ensure old files still work.
@@ -117,13 +117,13 @@ public final class QuestData {
     // The old files, if played once, are updated automatically to the new
     // system.
     /** The quests played. */
-    int questsPlayed = -1;
+    private int questsPlayed = -1;
 
     /** The available quests. */
-    List<Integer> availableQuests = null;
+    private List<Integer> availableQuests = null;
 
     /** The completed quests. */
-    List<Integer> completedQuests = null;
+    private List<Integer> completedQuests = null;
 
     // own randomizer seed
     private long randomSeed = 0;
@@ -134,7 +134,7 @@ public final class QuestData {
     private transient QuestUtilCards myCards;
 
     /** The Constant RANK_TITLES. */
-    public static final String[] RANK_TITLES = new String[] {"Level 0 - Confused Wizard", "Level 1 - Mana Mage",
+    public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
             "Level 2 - Death by Megrim", "Level 3 - Shattered the Competition", "Level 4 - Black Knighted",
             "Level 5 - Shockingly Good", "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control",
             "Level 8 - Immobilized by Fear", "Level 9 - Lands = Friends", "Level 10 - Forging new paths",
@@ -151,21 +151,22 @@ public final class QuestData {
      * </p>
      */
     public QuestData() {
-        initTransients();
-        myCards.addBasicLands(cardPool, QuestPreferences.getStartingBasic(), QuestPreferences.getStartingSnowBasic());
-        randomizeOpponents();
+        this.initTransients();
+        this.myCards.addBasicLands(this.getCardPool(), QuestPreferences.getStartingBasic(),
+                QuestPreferences.getStartingSnowBasic());
+        this.randomizeOpponents();
     }
 
     private void initTransients() {
         // These are helper classes that hold no data.
-        myCards = new QuestUtilCards(this);
+        this.myCards = new QuestUtilCards(this);
 
         // to avoid NPE some pools will be created here if they are null
-        if (null == newCardList) {
-            newCardList = new ItemPool<InventoryItem>(InventoryItem.class);
+        if (null == this.getNewCardList()) {
+            this.setNewCardList(new ItemPool<InventoryItem>(InventoryItem.class));
         }
-        if (null == shopList) {
-            shopList = new ItemPool<InventoryItem>(InventoryItem.class);
+        if (null == this.getShopList()) {
+            this.setShopList(new ItemPool<InventoryItem>(InventoryItem.class));
         }
 
     }
@@ -181,16 +182,16 @@ public final class QuestData {
      *            the standard start
      */
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
-        setDifficulty(diff);
+        this.setDifficulty(diff);
 
-        Predicate<CardPrinted> filter = Predicate.and(standardStart ? SetUtils.getStandard().getFilterPrinted()
+        final Predicate<CardPrinted> filter = Predicate.and(standardStart ? SetUtils.getStandard().getFilterPrinted()
                 : CardPrinted.Predicates.Presets.IS_TRUE, CardPrinted.Predicates.Presets.NON_ALTERNATE);
 
-        myCards.setupNewGameCardPool(filter, diff);
-        credits = QuestPreferences.getStartingCredits();
+        this.myCards.setupNewGameCardPool(filter, diff);
+        this.setCredits(QuestPreferences.getStartingCredits());
 
-        mode = m0de;
-        life = mode.equals(FANTASY) ? 15 : 20;
+        this.mode = m0de;
+        this.life = this.mode.equals(QuestData.FANTASY) ? 15 : 20;
     }
 
     // All belongings
@@ -200,7 +201,7 @@ public final class QuestData {
      * @return the inventory
      */
     public QuestInventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     /**
@@ -209,7 +210,7 @@ public final class QuestData {
      * @return the pet manager
      */
     public QuestPetManager getPetManager() {
-        return petManager;
+        return this.petManager;
     }
 
     // Cards - class uses data from here
@@ -219,7 +220,7 @@ public final class QuestData {
      * @return the cards
      */
     public QuestUtilCards getCards() {
-        return myCards;
+        return this.myCards;
     }
 
     // Challenge performance
@@ -231,19 +232,19 @@ public final class QuestData {
     public int getChallengesPlayed() {
         // This should be phased out after a while, when
         // old quest decks have been updated. (changes made 19-9-11)
-        if (questsPlayed != -1) {
-            challengesPlayed = questsPlayed;
-            questsPlayed = -1;
+        if (this.questsPlayed != -1) {
+            this.challengesPlayed = this.questsPlayed;
+            this.questsPlayed = -1;
         }
 
-        return challengesPlayed;
+        return this.challengesPlayed;
     }
 
     /**
      * Adds the challenges played.
      */
     public void addChallengesPlayed() {
-        challengesPlayed++;
+        this.challengesPlayed++;
     }
 
     /**
@@ -254,12 +255,12 @@ public final class QuestData {
     public List<Integer> getAvailableChallenges() {
         // This should be phased out after a while, when
         // old quest decks have been updated. (changes made 19-9-11)
-        if (availableQuests != null) {
-            availableChallenges = availableQuests;
-            availableQuests = null;
+        if (this.availableQuests != null) {
+            this.availableChallenges = this.availableQuests;
+            this.availableQuests = null;
         }
 
-        return availableChallenges != null ? new ArrayList<Integer>(availableChallenges) : null;
+        return this.availableChallenges != null ? new ArrayList<Integer>(this.availableChallenges) : null;
     }
 
     /**
@@ -269,14 +270,14 @@ public final class QuestData {
      *            the new available challenges
      */
     public void setAvailableChallenges(final List<Integer> list) {
-        availableChallenges = list;
+        this.availableChallenges = list;
     }
 
     /**
      * Clear available challenges.
      */
     public void clearAvailableChallenges() {
-        availableChallenges.clear();
+        this.availableChallenges.clear();
     }
 
     /**
@@ -292,12 +293,12 @@ public final class QuestData {
         // old quest decks have been updated. (changes made 19-9-11)
         // Also, poorly named - this should be "getLockedChalleneges" or
         // similar.
-        if (completedQuests != null) {
-            completedChallenges = completedQuests;
-            completedQuests = null;
+        if (this.completedQuests != null) {
+            this.completedChallenges = this.completedQuests;
+            this.completedQuests = null;
         }
 
-        return completedChallenges != null ? new ArrayList<Integer>(completedChallenges) : null;
+        return this.completedChallenges != null ? new ArrayList<Integer>(this.completedChallenges) : null;
     }
 
     /**
@@ -312,7 +313,7 @@ public final class QuestData {
 
     // Poorly named - this should be "setLockedChalleneges" or similar.
     public void addCompletedChallenge(final int i) {
-        completedChallenges.add(i);
+        this.completedChallenges.add(i);
     }
 
     // Wins & Losses
@@ -322,14 +323,14 @@ public final class QuestData {
      * @return the lost
      */
     public int getLost() {
-        return lost;
+        return this.lost;
     }
 
     /**
      * Adds the lost.
      */
     public void addLost() {
-        lost++;
+        this.lost++;
     }
 
     /**
@@ -338,18 +339,18 @@ public final class QuestData {
      * @return the win
      */
     public int getWin() {
-        return win;
+        return this.win;
     }
 
     /**
      * Adds the win.
      */
     public void addWin() { // changes getRank()
-        win++;
+        this.win++;
 
-        int winsToLvlUp = QuestPreferences.getWinsForRankIncrease(diffIndex);
-        if (win % winsToLvlUp == 0) {
-            rankIndex++;
+        final int winsToLvlUp = QuestPreferences.getWinsForRankIncrease(this.diffIndex);
+        if ((this.win % winsToLvlUp) == 0) {
+            this.rankIndex++;
         }
     }
 
@@ -360,7 +361,7 @@ public final class QuestData {
      * @return the life
      */
     public int getLife() {
-        return isFantasy() ? life : 20;
+        return this.isFantasy() ? this.life : 20;
     }
 
     /**
@@ -370,7 +371,7 @@ public final class QuestData {
      *            the n
      */
     public void addLife(final int n) {
-        life += n;
+        this.life += n;
     }
 
     // Credits
@@ -381,7 +382,7 @@ public final class QuestData {
      *            the c
      */
     public void addCredits(final long c) {
-        credits += c;
+        this.setCredits(this.getCredits() + c);
     }
 
     /**
@@ -391,7 +392,7 @@ public final class QuestData {
      *            the c
      */
     public void subtractCredits(final long c) {
-        credits = credits > c ? credits - c : 0;
+        this.setCredits(this.getCredits() > c ? this.getCredits() - c : 0);
     }
 
     /**
@@ -400,7 +401,7 @@ public final class QuestData {
      * @return the credits
      */
     public long getCredits() {
-        return credits;
+        return this.credits;
     }
 
     // Quest mode
@@ -410,7 +411,7 @@ public final class QuestData {
      * @return true, if is fantasy
      */
     public boolean isFantasy() {
-        return mode.equals(FANTASY);
+        return this.mode.equals(QuestData.FANTASY);
     }
 
     /**
@@ -419,7 +420,7 @@ public final class QuestData {
      * @return the mode
      */
     public String getMode() {
-        return mode == null ? "" : mode;
+        return this.mode == null ? "" : this.mode;
     }
 
     // Difficulty
@@ -429,7 +430,7 @@ public final class QuestData {
      * @return the difficulty
      */
     public String getDifficulty() {
-        return difficulty;
+        return this.difficulty;
     }
 
     /**
@@ -438,7 +439,7 @@ public final class QuestData {
      * @return the difficulty index
      */
     public int getDifficultyIndex() {
-        return diffIndex;
+        return this.diffIndex;
     }
 
     /**
@@ -448,18 +449,18 @@ public final class QuestData {
      *            the new difficulty
      */
     public void setDifficulty(final int i) {
-        diffIndex = i;
-        difficulty = QuestPreferences.getDifficulty(i);
+        this.diffIndex = i;
+        this.difficulty = QuestPreferences.getDifficulty(i);
     }
 
     /**
      * Guess difficulty index.
      */
     public void guessDifficultyIndex() {
-        String[] diffStr = QuestPreferences.getDifficulty();
+        final String[] diffStr = QuestPreferences.getDifficulty();
         for (int i = 0; i < diffStr.length; i++) {
-            if (difficulty.equals(diffStr[i])) {
-                diffIndex = i;
+            if (this.difficulty.equals(diffStr[i])) {
+                this.diffIndex = i;
             }
         }
     }
@@ -471,7 +472,7 @@ public final class QuestData {
      * @return the level
      */
     public int getLevel() {
-        return rankIndex;
+        return this.rankIndex;
     }
 
     /**
@@ -480,10 +481,10 @@ public final class QuestData {
      * @return the rank
      */
     public String getRank() {
-        if (rankIndex >= RANK_TITLES.length) {
-            rankIndex = RANK_TITLES.length - 1;
+        if (this.rankIndex >= QuestData.RANK_TITLES.length) {
+            this.rankIndex = QuestData.RANK_TITLES.length - 1;
         }
-        return RANK_TITLES[rankIndex];
+        return QuestData.RANK_TITLES[this.rankIndex];
     }
 
     // decks management
@@ -493,7 +494,7 @@ public final class QuestData {
      * @return the deck names
      */
     public List<String> getDeckNames() {
-        return new ArrayList<String>(myDecks.keySet());
+        return new ArrayList<String>(this.getMyDecks().keySet());
     }
 
     /**
@@ -503,7 +504,7 @@ public final class QuestData {
      *            the deck name
      */
     public void removeDeck(final String deckName) {
-        myDecks.remove(deckName);
+        this.getMyDecks().remove(deckName);
     }
 
     /**
@@ -513,7 +514,7 @@ public final class QuestData {
      *            the d
      */
     public void addDeck(final Deck d) {
-        myDecks.put(d.getName(), d);
+        this.getMyDecks().put(d.getName(), d);
     }
 
     /**
@@ -526,11 +527,11 @@ public final class QuestData {
      * @return a {@link forge.deck.Deck} object.
      */
     public Deck getDeck(final String deckName) {
-        if (!myDecks.containsKey(deckName)) {
+        if (!this.getMyDecks().containsKey(deckName)) {
             ErrorViewer.showError(new Exception(),
                     "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
         }
-        Deck d = myDecks.get(deckName);
+        final Deck d = this.getMyDecks().get(deckName);
         d.clearSideboard();
         return d;
     }
@@ -542,14 +543,14 @@ public final class QuestData {
      * @return the random seed
      */
     public long getRandomSeed() {
-        return randomSeed;
+        return this.randomSeed;
     }
 
     /**
      * This method should be called whenever the opponents should change.
      */
     public void randomizeOpponents() {
-        randomSeed = MyRandom.getRandom().nextLong();
+        this.randomSeed = MyRandom.getRandom().nextLong();
     }
 
     // SERIALIZATION - related things
@@ -561,7 +562,7 @@ public final class QuestData {
      * @return the object
      */
     public Object readResolve() {
-        initTransients();
+        this.initTransients();
         return this;
     }
 
@@ -580,5 +581,89 @@ public final class QuestData {
      */
     public void saveData() {
         QuestDataIO.saveData(this);
+    }
+
+    /**
+     * @return the cardPool
+     */
+    public ItemPool<InventoryItem> getCardPool() {
+        return cardPool;
+    }
+
+    /**
+     * @param cardPool the cardPool to set
+     */
+    public void setCardPool(ItemPool<InventoryItem> cardPool) {
+        this.cardPool = cardPool; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the shopList
+     */
+    public ItemPool<InventoryItem> getShopList() {
+        return shopList;
+    }
+
+    /**
+     * @param shopList the shopList to set
+     */
+    public void setShopList(ItemPool<InventoryItem> shopList) {
+        this.shopList = shopList; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the newCardList
+     */
+    public ItemPool<InventoryItem> getNewCardList() {
+        return newCardList;
+    }
+
+    /**
+     * @param newCardList the newCardList to set
+     */
+    public void setNewCardList(ItemPool<InventoryItem> newCardList) {
+        this.newCardList = newCardList; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the myDecks
+     */
+    public Map<String, Deck> getMyDecks() {
+        return myDecks;
+    }
+
+    /**
+     * @param myDecks the myDecks to set
+     */
+    public void setMyDecks(Map<String, Deck> myDecks) {
+        this.myDecks = myDecks; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param inventory the inventory to set
+     */
+    public void setInventory(QuestInventory inventory) {
+        this.inventory = inventory; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param credits the credits to set
+     */
+    public void setCredits(long credits) {
+        this.credits = credits; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the versionNumber
+     */
+    public int getVersionNumber() {
+        return versionNumber;
+    }
+
+    /**
+     * @param versionNumber the versionNumber to set
+     */
+    public void setVersionNumber(int versionNumber) {
+        this.versionNumber = versionNumber; // TODO: Add 0 to parameter's name.
     }
 }

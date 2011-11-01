@@ -35,7 +35,7 @@ public class ReadPriceList implements NewConstants {
      * </p>
      */
     public ReadPriceList() {
-        setup();
+        this.setup();
     }
 
     /**
@@ -44,8 +44,8 @@ public class ReadPriceList implements NewConstants {
      * </p>
      */
     private void setup() {
-        priceMap = readFile(ForgeProps.getFile(Quest.PRICE));
-        priceMap.putAll(readFile(ForgeProps.getFile(Quest.BOOSTER_PRICE)));
+        this.priceMap = this.readFile(ForgeProps.getFile(Quest.PRICE));
+        this.priceMap.putAll(this.readFile(ForgeProps.getFile(Quest.BOOSTER_PRICE)));
 
     } // setup()
 
@@ -60,19 +60,19 @@ public class ReadPriceList implements NewConstants {
      */
     private HashMap<String, Integer> readFile(final File file) {
         BufferedReader in;
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
-        Random r = MyRandom.getRandom();
+        final HashMap<String, Integer> map = new HashMap<String, Integer>();
+        final Random r = MyRandom.getRandom();
         try {
 
             in = new BufferedReader(new FileReader(file));
             String line = in.readLine();
 
             // stop reading if end of file or blank line is read
-            while (line != null && (line.trim().length() != 0)) {
-                if (!line.startsWith(comment)) {
-                    String[] s = line.split("=");
-                    String name = s[0].trim();
-                    String price = s[1].trim();
+            while ((line != null) && (line.trim().length() != 0)) {
+                if (!line.startsWith(ReadPriceList.comment)) {
+                    final String[] s = line.split("=");
+                    final String name = s[0].trim();
+                    final String price = s[1].trim();
 
                     // System.out.println("Name: " + name + ", Price: " +
                     // price);
@@ -87,29 +87,29 @@ public class ReadPriceList implements NewConstants {
                                     .equals("Snow-Covered Forest"))) {
                             float ff = 0;
                             if (r.nextInt(100) < 90) {
-                                ff = (float) r.nextInt(10) * (float) .01;
+                                ff = r.nextInt(10) * (float) .01;
                             } else {
                                 // +/- 50%
-                                ff = (float) r.nextInt(50) * (float) .01;
+                                ff = r.nextInt(50) * (float) .01;
                             }
 
                             if (r.nextInt(100) < 50) {
-                                val = (int) ((float) val * ((float) 1 - ff));
+                                val = (int) (val * (1 - ff));
                             } else {
                                 // +ff%
-                                val = (int) ((float) val * ((float) 1 + ff));
+                                val = (int) (val * (1 + ff));
                             }
                         }
 
                         map.put(name, val);
-                    } catch (NumberFormatException nfe) {
+                    } catch (final NumberFormatException nfe) {
                         Log.warn("NumberFormatException: " + nfe.getMessage());
                     }
                 }
                 line = in.readLine();
             } // if
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("ReadPriceList : readFile error, " + ex);
         }
@@ -125,6 +125,6 @@ public class ReadPriceList implements NewConstants {
      * @return a {@link java.util.Map} object.
      */
     public final Map<String, Integer> getPriceList() {
-        return priceMap;
+        return this.priceMap;
     }
 }

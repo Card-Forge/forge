@@ -24,7 +24,7 @@ public class QuestMatchState {
     /** The Constant MIN_GAMES_TO_WIN_MATCH. */
     public static final int MIN_GAMES_TO_WIN_MATCH = 2;
 
-    private List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
+    private final List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
 
     // ArrayList<GameSpecialConditions>
 
@@ -35,7 +35,7 @@ public class QuestMatchState {
      *            the completed game
      */
     public final void addGamePlayed(final GameSummary completedGame) {
-        gamesPlayed.add(completedGame);
+        this.gamesPlayed.add(completedGame);
     }
 
     /**
@@ -44,7 +44,7 @@ public class QuestMatchState {
      * @return the games played
      */
     public final GameSummary[] getGamesPlayed() {
-        return gamesPlayed.toArray(new GameSummary[gamesPlayed.size()]);
+        return this.gamesPlayed.toArray(new GameSummary[this.gamesPlayed.size()]);
     }
 
     /**
@@ -53,7 +53,7 @@ public class QuestMatchState {
      * @return the games played count
      */
     public final int getGamesPlayedCount() {
-        return gamesPlayed.size();
+        return this.gamesPlayed.size();
     }
 
     /**
@@ -64,8 +64,8 @@ public class QuestMatchState {
      * @return true, if successful
      */
     public final boolean hasWonLastGame(final String playerName) {
-        int iLastGame = gamesPlayed.size() - 1;
-        return iLastGame >= 0 ? gamesPlayed.get(iLastGame).isWinner(playerName) : false;
+        final int iLastGame = this.gamesPlayed.size() - 1;
+        return iLastGame >= 0 ? this.gamesPlayed.get(iLastGame).isWinner(playerName) : false;
     }
 
     /**
@@ -76,21 +76,21 @@ public class QuestMatchState {
     public final boolean isMatchOver() {
         int totalGames = 0;
 
-        Map<String, Integer> winsCount = new HashMap<String, Integer>();
-        for (GameSummary game : gamesPlayed) {
-            String winner = game.getWinner();
-            Integer boxedWins = winsCount.get(winner);
-            int wins = boxedWins == null ? 0 : boxedWins.intValue();
+        final Map<String, Integer> winsCount = new HashMap<String, Integer>();
+        for (final GameSummary game : this.gamesPlayed) {
+            final String winner = game.getWinner();
+            final Integer boxedWins = winsCount.get(winner);
+            final int wins = boxedWins == null ? 0 : boxedWins.intValue();
             winsCount.put(winner, wins + 1);
             totalGames++;
         }
 
         int maxWins = 0;
-        for (Integer win : winsCount.values()) {
+        for (final Integer win : winsCount.values()) {
             maxWins = Math.max(maxWins, win);
         }
 
-        return maxWins >= MIN_GAMES_TO_WIN_MATCH || totalGames >= GAMES_PER_MATCH;
+        return (maxWins >= QuestMatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= QuestMatchState.GAMES_PER_MATCH);
     }
 
     /**
@@ -100,9 +100,9 @@ public class QuestMatchState {
      *            the name
      * @return the int
      */
-    public final int countGamesWonBy(String name) {
+    public final int countGamesWonBy(final String name) {
         int wins = 0;
-        for (GameSummary game : gamesPlayed) {
+        for (final GameSummary game : this.gamesPlayed) {
             if (game.isWinner(name)) {
                 wins++;
             }
@@ -117,15 +117,15 @@ public class QuestMatchState {
      *            the name
      * @return true, if is match won by
      */
-    public final boolean isMatchWonBy(String name) {
-        return countGamesWonBy(name) >= MIN_GAMES_TO_WIN_MATCH;
+    public final boolean isMatchWonBy(final String name) {
+        return this.countGamesWonBy(name) >= QuestMatchState.MIN_GAMES_TO_WIN_MATCH;
     }
 
     /**
      * Reset.
      */
     public final void reset() {
-        gamesPlayed.clear();
+        this.gamesPlayed.clear();
     }
 
 }

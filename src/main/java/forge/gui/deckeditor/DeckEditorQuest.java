@@ -144,8 +144,8 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
                 PresetColumns.FN_RARITY_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.FN_SET_COMPARE,
                 PresetColumns.FN_SET_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("New", 30, this.questData.getCards().fnNewCompare,
-                this.questData.getCards().fnNewGet));
+        columns.add(new TableColumnInfo<InventoryItem>("New", 30, this.questData.getCards().getFnNewCompare(),
+                this.questData.getCards().getFnNewGet()));
 
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 

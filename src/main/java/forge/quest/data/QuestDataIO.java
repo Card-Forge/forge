@@ -68,35 +68,35 @@ public class QuestDataIO {
             // read file "questData"
             QuestData data = null;
 
-            File xmlSaveFile = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
+            final File xmlSaveFile = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
 
-            GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+            final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
 
-            StringBuilder xml = new StringBuilder();
-            char[] buf = new char[1024];
-            InputStreamReader reader = new InputStreamReader(zin);
+            final StringBuilder xml = new StringBuilder();
+            final char[] buf = new char[1024];
+            final InputStreamReader reader = new InputStreamReader(zin);
             while (reader.ready()) {
-                int len = reader.read(buf);
+                final int len = reader.read(buf);
                 if (len == -1) {
                     break;
                 } // when end of stream was reached
                 xml.append(buf, 0, len);
             }
 
-            IgnoringXStream xStream = new IgnoringXStream();
+            final IgnoringXStream xStream = new IgnoringXStream();
             xStream.registerConverter(new CardPoolToXml());
             xStream.registerConverter(new GameTypeToXml());
             xStream.alias("CardPool", ItemPool.class);
             data = (QuestData) xStream.fromXML(xml.toString());
 
-            if (data.versionNumber != QuestData.CURRENT_VERSION_NUMBER) {
-                updateSaveFile(data, xml.toString());
+            if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
+                QuestDataIO.updateSaveFile(data, xml.toString());
             }
 
             zin.close();
 
             return data;
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
@@ -114,18 +114,18 @@ public class QuestDataIO {
      */
     private static void updateSaveFile(final QuestData newData, final String input) {
         try {
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            InputSource is = new InputSource();
+            final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            final InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(input));
-            Document document = builder.parse(is);
+            final Document document = builder.parse(is);
 
-            switch (newData.versionNumber) {
+            switch (newData.getVersionNumber()) {
             // There should be a fall-through b/w the cases so that each
             // version's changes get applied progressively
             case 0:
                 // First beta release with new file format,
                 // inventory needs to be migrated
-                newData.inventory = new QuestInventory();
+                newData.setInventory(new QuestInventory());
                 NodeList elements = document.getElementsByTagName("estatesLevel");
                 newData.getInventory().setItemLevel("Estates", Integer.parseInt(elements.item(0).getTextContent()));
                 elements = document.getElementsByTagName("luckyCoinLevel");
@@ -134,12 +134,12 @@ public class QuestDataIO {
                 newData.getInventory().setItemLevel("Sleight", Integer.parseInt(elements.item(0).getTextContent()));
                 elements = document.getElementsByTagName("gearLevel");
 
-                int gearLevel = Integer.parseInt(elements.item(0).getTextContent());
+                final int gearLevel = Integer.parseInt(elements.item(0).getTextContent());
                 if (gearLevel >= 1) {
-                    newData.inventory.setItemLevel("Map", 1);
+                    newData.getInventory().setItemLevel("Map", 1);
                 }
                 if (gearLevel == 2) {
-                    newData.inventory.setItemLevel("Zeppelin", 1);
+                    newData.getInventory().setItemLevel("Zeppelin", 1);
                 }
                 // fall-through
             case 1:
@@ -151,9 +151,9 @@ public class QuestDataIO {
             }
 
             // mark the QD as the latest version
-            newData.versionNumber = QuestData.CURRENT_VERSION_NUMBER;
+            newData.setVersionNumber(QuestData.CURRENT_VERSION_NUMBER);
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             forge.error.ErrorViewer.showError(e);
         }
     }
@@ -168,13 +168,13 @@ public class QuestDataIO {
      */
     public static void saveData(final QuestData qd) {
         try {
-            XStream xStream = new XStream();
+            final XStream xStream = new XStream();
             xStream.registerConverter(new CardPoolToXml());
             xStream.alias("CardPool", ItemPool.class);
 
-            File f = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
-            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
-            GZIPOutputStream zout = new GZIPOutputStream(bout);
+            final File f = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
+            final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
+            final GZIPOutputStream zout = new GZIPOutputStream(bout);
             xStream.toXML(qd, zout);
             zout.flush();
             zout.close();
@@ -185,7 +185,7 @@ public class QuestDataIO {
             // boutUnp.flush();
             // boutUnp.close();
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
@@ -197,15 +197,16 @@ public class QuestDataIO {
      * (but are there any fields?)
      */
     private static class IgnoringXStream extends XStream {
-        List<String> ignoredFields = new ArrayList<String>();
+        private List<String> ignoredFields = new ArrayList<String>();
 
         @Override
-        protected MapperWrapper wrapMapper(MapperWrapper next) {
+        protected MapperWrapper wrapMapper(final MapperWrapper next) {
             return new MapperWrapper(next) {
                 @Override
-                public boolean shouldSerializeMember(@SuppressWarnings("rawtypes") Class definedIn, String fieldName) {
+                public boolean shouldSerializeMember(@SuppressWarnings("rawtypes") final Class definedIn,
+                        final String fieldName) {
                     if (definedIn == Object.class) {
-                        ignoredFields.add(fieldName);
+                        IgnoringXStream.this.ignoredFields.add(fieldName);
                         return false;
                     }
                     return super.shouldSerializeMember(definedIn, fieldName);
@@ -217,18 +218,18 @@ public class QuestDataIO {
     private static class GameTypeToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
-        public boolean canConvert(Class clasz) {
+        public boolean canConvert(final Class clasz) {
             return clasz.equals(GameType.class);
         }
 
         @Override
-        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             // not used
         }
 
         @Override
-        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-            String value = reader.getValue();
+        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+            final String value = reader.getValue();
             return GameType.smartValueOf(value);
         }
 
@@ -237,11 +238,11 @@ public class QuestDataIO {
     private static class CardPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
-        public boolean canConvert(Class clasz) {
+        public boolean canConvert(final Class clasz) {
             return clasz.equals(ItemPool.class);
         }
 
-        private void write(CardPrinted cref, Integer count, HierarchicalStreamWriter writer) {
+        private void write(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getSet());
@@ -255,7 +256,7 @@ public class QuestDataIO {
             writer.endNode();
         }
 
-        private void write(BoosterPack booster, Integer count, HierarchicalStreamWriter writer) {
+        private void write(final BoosterPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("booster");
             writer.addAttribute("s", booster.getSet());
             writer.addAttribute("n", count.toString());
@@ -263,16 +264,16 @@ public class QuestDataIO {
         }
 
         @Override
-        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             @SuppressWarnings("unchecked")
-            ItemPool<InventoryItem> pool = (ItemPool<InventoryItem>) source;
-            for (Entry<InventoryItem, Integer> e : pool) {
-                InventoryItem item = e.getKey();
-                Integer count = e.getValue();
+            final ItemPool<InventoryItem> pool = (ItemPool<InventoryItem>) source;
+            for (final Entry<InventoryItem, Integer> e : pool) {
+                final InventoryItem item = e.getKey();
+                final Integer count = e.getValue();
                 if (item instanceof CardPrinted) {
-                    write((CardPrinted) item, count, writer);
+                    this.write((CardPrinted) item, count, writer);
                 } else if (item instanceof BoosterPack) {
-                    write((BoosterPack) item, count, writer);
+                    this.write((BoosterPack) item, count, writer);
                 }
             }
 
@@ -280,19 +281,19 @@ public class QuestDataIO {
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
+            final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
-                String sCnt = reader.getAttribute("n");
-                int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
-                String nodename = reader.getNodeName();
+                final String sCnt = reader.getAttribute("n");
+                final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
+                final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
                     result.add(CardDb.instance().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
-                    result.add(readCardPrinted(reader), cnt);
+                    result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
-                    result.add(readBooster(reader), cnt);
+                    result.add(this.readBooster(reader), cnt);
                 }
                 reader.moveUp();
             }
@@ -300,17 +301,17 @@ public class QuestDataIO {
         }
 
         private BoosterPack readBooster(final HierarchicalStreamReader reader) {
-            String set = reader.getAttribute("s");
+            final String set = reader.getAttribute("s");
             return new BoosterPack(set);
         }
 
         private CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
-            String name = reader.getAttribute("c");
-            String set = reader.getAttribute("s");
-            String sIndex = reader.getAttribute("i");
-            short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
-            boolean foil = "1".equals(reader.getAttribute("foil"));
-            CardPrinted card = CardDb.instance().getCard(name, set, index);
+            final String name = reader.getAttribute("c");
+            final String set = reader.getAttribute("s");
+            final String sIndex = reader.getAttribute("i");
+            final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
+            final boolean foil = "1".equals(reader.getAttribute("foil"));
+            final CardPrinted card = CardDb.instance().getCard(name, set, index);
             return foil ? CardPrinted.makeFoiled(card) : card;
         }
     }

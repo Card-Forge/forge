@@ -163,8 +163,8 @@ public final class DeckEditorShop extends DeckEditorBase {
         this.getTopTableWithCards().setup(columns, this.getCardView());
 
         columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, this.fnDeckCompare, this.fnDeckGet));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, this.questData.getCards().fnNewCompare,
-                this.questData.getCards().fnNewGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, this.questData.getCards().getFnNewCompare(),
+                this.questData.getCards().getFnNewGet()));
         columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceSellGet));
         this.getBottomTableWithCards().setup(columnsBelow, this.getCardView());
 
