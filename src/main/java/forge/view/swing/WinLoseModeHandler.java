@@ -16,7 +16,7 @@ import forge.Constant;
 public class WinLoseModeHandler {
 
     /** The view. */
-    protected WinLoseFrame view;
+    private WinLoseFrame view;
 
     /**
      * <p>
@@ -40,7 +40,7 @@ public class WinLoseModeHandler {
     public void actionOnQuit() {
         if (System.getenv("NG2") != null) {
             if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                String[] argz = {};
+                final String[] argz = {};
                 Gui_HomeScreen.main(argz);
             } else {
                 new OldGuiNewGame();
@@ -97,6 +97,13 @@ public class WinLoseModeHandler {
      *            the new view
      */
     public final void setView(final WinLoseFrame wlh) {
-        view = wlh;
+        this.view = wlh;
+    }
+
+    /**
+     * @return the view
+     */
+    public WinLoseFrame getView() {
+        return view;
     }
 }

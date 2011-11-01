@@ -17,40 +17,40 @@ import forge.item.CardPrinted;
 public class QuestChallenge extends QuestEvent {
     // ID (default -1, should be explicitly set at later time.)
     /** The id. */
-    public int id = -1;
+    private int id = -1;
 
     // Default vals if none provided for this ID
     /** The ai life. */
-    public int aiLife = 25;
+    private int aiLife = 25;
 
     /** The credits reward. */
-    public int creditsReward = 100;
+    private int creditsReward = 100;
 
     /** The card reward. */
-    public String cardReward = "1 colorless rare";
+    private String cardReward = "1 colorless rare";
 
     /** The repeatable. */
-    public boolean repeatable = false;
+    private boolean repeatable = false;
 
     /** The wins reqd. */
-    public int winsReqd = 20;
+    private int winsReqd = 20;
 
     // Other cards used in assignment: starting, and reward.
     /** The human extra cards. */
-    public List<String> humanExtraCards = new ArrayList<String>();
+    private List<String> humanExtraCards = new ArrayList<String>();
 
     /** The ai extra cards. */
-    public List<String> aiExtraCards = new ArrayList<String>();
+    private List<String> aiExtraCards = new ArrayList<String>();
 
     /** The card reward list. */
-    public List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>();
+    private List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>();
 
     /**
      * Instantiates a new quest challenge.
      */
     public QuestChallenge() {
         super();
-        this.eventType = "challenge";
+        this.setEventType("challenge");
     }
 
     /**
@@ -61,7 +61,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Integer}.
      */
     public final int getAILife() {
-        return this.aiLife;
+        return this.getAiLife();
     }
 
     /**
@@ -105,7 +105,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Boolean}.
      */
     public final boolean getRepeatable() {
-        return this.repeatable;
+        return this.isRepeatable();
     }
 
     /**
@@ -128,7 +128,7 @@ public class QuestChallenge extends QuestEvent {
      * @return the aI extra cards
      */
     public final List<String> getAIExtraCards() {
-        return this.aiExtraCards;
+        return this.getAiExtraCards();
     }
 
     /**
@@ -152,5 +152,89 @@ public class QuestChallenge extends QuestEvent {
      */
     public final List<CardPrinted> getCardRewardList() {
         return this.cardRewardList;
+    }
+
+    /**
+     * @return the aiExtraCards
+     */
+    public List<String> getAiExtraCards() {
+        return aiExtraCards;
+    }
+
+    /**
+     * @param aiExtraCards the aiExtraCards to set
+     */
+    public void setAiExtraCards(List<String> aiExtraCards) {
+        this.aiExtraCards = aiExtraCards; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the repeatable
+     */
+    public boolean isRepeatable() {
+        return repeatable;
+    }
+
+    /**
+     * @param repeatable the repeatable to set
+     */
+    public void setRepeatable(boolean repeatable) {
+        this.repeatable = repeatable; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the aiLife
+     */
+    public int getAiLife() {
+        return aiLife;
+    }
+
+    /**
+     * @param aiLife the aiLife to set
+     */
+    public void setAiLife(int aiLife) {
+        this.aiLife = aiLife; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param winsReqd the winsReqd to set
+     */
+    public void setWinsReqd(int winsReqd) {
+        this.winsReqd = winsReqd; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param creditsReward the creditsReward to set
+     */
+    public void setCreditsReward(int creditsReward) {
+        this.creditsReward = creditsReward; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param cardReward the cardReward to set
+     */
+    public void setCardReward(String cardReward) {
+        this.cardReward = cardReward; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param cardRewardList the cardRewardList to set
+     */
+    public void setCardRewardList(List<CardPrinted> cardRewardList) {
+        this.cardRewardList = cardRewardList; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param humanExtraCards the humanExtraCards to set
+     */
+    public void setHumanExtraCards(List<String> humanExtraCards) {
+        this.humanExtraCards = humanExtraCards; // TODO: Add 0 to parameter's name.
     }
 }

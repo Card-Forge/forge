@@ -27,8 +27,8 @@ public class SplashProgressComponent extends JProgressBar {
             throw new IllegalStateException("must be called from within an event dispatch thread");
         }
 
-        setString("");
-        setStringPainted(true);
+        this.setString("");
+        this.setStringPainted(true);
     }
 
     /**
@@ -38,8 +38,9 @@ public class SplashProgressComponent extends JProgressBar {
     public final void updateProgressBar() {
         // Update bar "stripe"
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                stripeUpdate();
+                SplashProgressComponent.this.stripeUpdate();
             }
         });
 
@@ -47,26 +48,26 @@ public class SplashProgressComponent extends JProgressBar {
         // Note: shouldUpdateUI() severely retards motion
         // of the preloader, so is temporarily disabled.
         // if (getCurrentModel().shouldUpdateUI()) {
-        if ((getCurrentModel().getNumPhases() > 1)) {
-            displayUpdate("Phase " + getCurrentModel().getCurrentPhase() + ". "
+        if ((this.getCurrentModel().getNumPhases() > 1)) {
+            this.displayUpdate("Phase " + this.getCurrentModel().getCurrentPhase() + ". "
             // + getUnitsCompletedSoFarThisPhase() + " units processed. "
             // + "Overall: " + getTotalPercentCompleteAsString() +
             // "% complete, "
-                    + "Overall ETA in " + getCurrentModel().getRelativeETAAsString(true) + ".");
+                    + "Overall ETA in " + this.getCurrentModel().getRelativeETAAsString(true) + ".");
         } else {
-            displayUpdate(
+            this.displayUpdate(
             // "Overall: " +
-            getCurrentModel().getUnitsCompletedSoFarThisPhase() + " units processed; "
+            this.getCurrentModel().getUnitsCompletedSoFarThisPhase() + " units processed; "
             // + "(" + getTotalPercentCompleteAsString() + "%); "
-                    + "ETA in " + getCurrentModel().getRelativeETAAsString(true) + ".");
+                    + "ETA in " + this.getCurrentModel().getRelativeETAAsString(true) + ".");
         }
         // getCurrentModel().justUpdatedUI();
         // }
 
-        if (getCurrentModel().getCurrentPhase() == getCurrentModel().getNumPhases()
-                && getCurrentModel().getUnitsCompletedSoFarThisPhase() >= getCurrentModel().getTotalUnitsThisPhase())
-        {
-            displayUpdate("Done! Firing up the GUI...");
+        if ((this.getCurrentModel().getCurrentPhase() == this.getCurrentModel().getNumPhases())
+                && (this.getCurrentModel().getUnitsCompletedSoFarThisPhase() >= this.getCurrentModel()
+                        .getTotalUnitsThisPhase())) {
+            this.displayUpdate("Done! Firing up the GUI...");
         }
     }
 
@@ -79,9 +80,10 @@ public class SplashProgressComponent extends JProgressBar {
      */
     public final void displayUpdate(final String message) {
         final Runnable proc = new Runnable() {
+            @Override
             public void run() {
-                setString(message);
-                getCurrentModel().justUpdatedUI();
+                SplashProgressComponent.this.setString(message);
+                SplashProgressComponent.this.getCurrentModel().justUpdatedUI();
             }
         };
 
@@ -97,10 +99,10 @@ public class SplashProgressComponent extends JProgressBar {
      * 
      */
     public final void stripeUpdate() {
-        completed = getCurrentModel().getUnitsCompletedSoFarThisPhase();
-        total = getCurrentModel().getTotalUnitsThisPhase();
+        this.completed = this.getCurrentModel().getUnitsCompletedSoFarThisPhase();
+        this.total = this.getCurrentModel().getTotalUnitsThisPhase();
 
-        setValue((int) Math.round((int) completed / total * 100));
+        this.setValue((int) Math.round(((int) this.completed / this.total) * 100));
     }
 
     /**
@@ -108,7 +110,7 @@ public class SplashProgressComponent extends JProgressBar {
      * 
      */
     public final void stripeReset() {
-        setValue(0);
+        this.setValue(0);
     }
 
     /**
@@ -118,7 +120,7 @@ public class SplashProgressComponent extends JProgressBar {
      *            the new current model
      */
     public final void setCurrentModel(final BaseProgressMonitor neoModel) {
-        currentModel = neoModel;
+        this.currentModel = neoModel;
     }
 
     /**
@@ -127,6 +129,6 @@ public class SplashProgressComponent extends JProgressBar {
      * @return the current model
      */
     public final BraidsProgressMonitor getCurrentModel() {
-        return currentModel;
+        return this.currentModel;
     }
 }

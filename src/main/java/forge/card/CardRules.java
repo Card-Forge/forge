@@ -566,10 +566,10 @@ public final class CardRules {
                 case NAME:
                     return op(card.getName(), operand);
                 case SUBTYPE:
-                    shouldConatin = operator == StringOp.CONTAINS || operator == StringOp.EQUALS;
+                    shouldConatin = getOperator() == StringOp.CONTAINS || getOperator() == StringOp.EQUALS;
                     return shouldConatin == card.getType().subTypeContains(operand);
                 case RULES:
-                    shouldConatin = operator == StringOp.CONTAINS || operator == StringOp.EQUALS;
+                    shouldConatin = getOperator() == StringOp.CONTAINS || getOperator() == StringOp.EQUALS;
                     return shouldConatin == card.rulesContain(operand);
                 case JOINED_TYPE:
                     return op(card.getType().toString(), operand);

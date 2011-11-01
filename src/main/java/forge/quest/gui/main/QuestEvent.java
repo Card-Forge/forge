@@ -13,25 +13,25 @@ import forge.deck.Deck;
 public class QuestEvent {
     // Default vals if none provided in the event file.
     /** The event deck. */
-    public Deck eventDeck = null;
+    private Deck eventDeck = null;
 
     /** The title. */
-    public String title = "Mystery Event";
+    private String title = "Mystery Event";
 
     /** The description. */
-    public String description = "";
+    private String description = "";
 
     /** The difficulty. */
-    public String difficulty = "Medium";
+    private String difficulty = "Medium";
 
     /** The icon. */
-    public String icon = "Unknown.jpg";
+    private String icon = "Unknown.jpg";
 
     /** The name. */
-    public String name = "Noname";
+    private String name = "Noname";
 
     /** The event type. */
-    public String eventType = null;
+    private String eventType = null;
 
     /**
      * <p>
@@ -108,5 +108,54 @@ public class QuestEvent {
      */
     public final String getName() {
         return this.name;
+    }
+
+    /**
+     * @param eventType the eventType to set
+     */
+    public void setEventType(String eventType) {
+        this.eventType = eventType; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param eventDeck the eventDeck to set
+     */
+    public void setEventDeck(Deck eventDeck) {
+        this.eventDeck = eventDeck; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @param icon the icon to set
+     */
+    public void setIcon(String icon) {
+        this.icon = icon; // TODO: Add 0 to parameter's name.
     }
 }

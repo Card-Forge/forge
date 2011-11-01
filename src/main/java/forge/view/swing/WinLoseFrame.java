@@ -36,8 +36,8 @@ import forge.quest.data.QuestMatchState;
 @SuppressWarnings("serial")
 public class WinLoseFrame extends JFrame {
 
-    private QuestMatchState matchState;
-    private WinLoseModeHandler modeHandler;
+    private final QuestMatchState matchState;
+    private final WinLoseModeHandler modeHandler;
 
     /** The btn continue. */
     public FButton btnContinue;
@@ -76,58 +76,58 @@ public class WinLoseFrame extends JFrame {
      * modes (quest, puzzle, etc.)
      * 
      * @param mh
-     *            {@link forge.view.swing.WinLoseModeHandler}
+     *            the mh {@link forge.view.swing.WinLoseModeHandler}
      */
     public WinLoseFrame(final WinLoseModeHandler mh) {
         super();
 
         // modeHandler handles the unique display for different game modes.
-        modeHandler = mh;
-        modeHandler.setView(this);
-        matchState = AllZone.getMatchState();
+        this.modeHandler = mh;
+        this.modeHandler.setView(this);
+        this.matchState = AllZone.getMatchState();
 
         // Place all content in FPanel
-        FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
+        final FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
         contentPanel.setBGImg(AllZone.getSkin().getTexture1());
         contentPanel.setBorder(new WinLoseBorder());
-        getContentPane().add(contentPanel);
+        this.getContentPane().add(contentPanel);
 
         // Footer should be at least 150 to keep buttons in-pane on Mac OS X
         // it needs to be > 175 now that skinning is used
-        int HEAD_HEIGHT = 150;
-        int FOOT_HEIGHT = 182;
-        int FRAME_WIDTH_SMALL = 300;
-        int FRAME_WIDTH_BIG = 600;
+        final int HEAD_HEIGHT = 150;
+        final int FOOT_HEIGHT = 182;
+        final int FRAME_WIDTH_SMALL = 300;
+        final int FRAME_WIDTH_BIG = 600;
 
         // Head panel
-        JPanel pnlHead = new JPanel(new MigLayout("wrap, fill"));
+        final JPanel pnlHead = new JPanel(new MigLayout("wrap, fill"));
         pnlHead.setOpaque(false);
         contentPanel.add(pnlHead, "width " + FRAME_WIDTH_SMALL + "!, align center");
 
-        lblTitle = new JLabel("WinLoseFrame > lblTitle is broken.");
-        lblTitle.setForeground(Color.white);
-        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
+        this.lblTitle = new JLabel("WinLoseFrame > lblTitle is broken.");
+        this.lblTitle.setForeground(Color.white);
+        this.lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        this.lblTitle.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
 
-        lblStats = new JLabel("WinLoseFrame > lblStats is broken.");
-        lblStats.setForeground(Color.white);
-        lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
+        this.lblStats = new JLabel("WinLoseFrame > lblStats is broken.");
+        this.lblStats.setForeground(Color.white);
+        this.lblStats.setHorizontalAlignment(SwingConstants.CENTER);
+        this.lblStats.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
 
-        pnlHead.add(lblTitle, "growx");
-        pnlHead.add(lblStats, "growx");
+        pnlHead.add(this.lblTitle, "growx");
+        pnlHead.add(this.lblStats, "growx");
 
         // Custom display panel in center; populated later by mode handler.
-        JScrollPane scroller = new JScrollPane();
+        final JScrollPane scroller = new JScrollPane();
         scroller.getVerticalScrollBar().setUnitIncrement(16);
-        pnlCustom = new JPanel(new MigLayout("wrap, fillx"));
-        pnlCustom.setBackground(new Color(111, 87, 59));
-        pnlCustom.setForeground(Color.white);
+        this.pnlCustom = new JPanel(new MigLayout("wrap, fillx"));
+        this.pnlCustom.setBackground(new Color(111, 87, 59));
+        this.pnlCustom.setForeground(Color.white);
         contentPanel.add(scroller, "w 96%!, align center, gapleft 2%");
-        scroller.getViewport().add(pnlCustom);
+        scroller.getViewport().add(this.pnlCustom);
 
         // Foot panel
-        JPanel pnlFoot = new JPanel(new MigLayout("wrap, fill, hidemode 3"));
+        final JPanel pnlFoot = new JPanel(new MigLayout("wrap, fill, hidemode 3"));
         pnlFoot.setOpaque(false);
         contentPanel.add(pnlFoot, "width " + FRAME_WIDTH_SMALL + "!, align center");
 
@@ -135,61 +135,64 @@ public class WinLoseFrame extends JFrame {
         this.btnRestart = new FButton("Restart");
         this.btnQuit = new FButton("Quit");
 
-        pnlFoot.add(btnContinue, "h 36:36, w 200!, gap 0 0 5 5, align center");
-        pnlFoot.add(btnRestart, "h 36:36, w 200!, gap 0 0 5 5, align center");
-        pnlFoot.add(btnQuit, "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.btnContinue, "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.btnRestart, "h 36:36, w 200!, gap 0 0 5 5, align center");
+        pnlFoot.add(this.btnQuit, "h 36:36, w 200!, gap 0 0 5 5, align center");
 
         // Button actions
-        btnQuit.addActionListener(new java.awt.event.ActionListener() {
+        this.btnQuit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                btnQuit_actionPerformed(e);
+                WinLoseFrame.this.btnQuit_actionPerformed(e);
             }
         });
 
-        btnContinue.addActionListener(new java.awt.event.ActionListener() {
+        this.btnContinue.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                btnContinue_actionPerformed(e);
+                WinLoseFrame.this.btnContinue_actionPerformed(e);
             }
         });
 
-        btnRestart.addActionListener(new java.awt.event.ActionListener() {
+        this.btnRestart.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                btnRestart_actionPerformed(e);
+                WinLoseFrame.this.btnRestart_actionPerformed(e);
             }
         });
 
         // End game and set state of "continue" button
         Phase.setGameBegins(0);
 
-        if (matchState.isMatchOver()) {
-            btnContinue.setEnabled(false);
-            btnQuit.grabFocus();
+        if (this.matchState.isMatchOver()) {
+            this.btnContinue.setEnabled(false);
+            this.btnQuit.grabFocus();
         }
 
         // Show Wins and Loses
-        Player human = AllZone.getHumanPlayer();
-        int humanWins = matchState.countGamesWonBy(human.getName());
-        int humanLosses = matchState.getGamesPlayedCount() - humanWins;
+        final Player human = AllZone.getHumanPlayer();
+        final int humanWins = this.matchState.countGamesWonBy(human.getName());
+        final int humanLosses = this.matchState.getGamesPlayedCount() - humanWins;
 
-        lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
+        this.lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
                 + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses);
 
         // Show "You Won" or "You Lost"
-        if (matchState.hasWonLastGame(human.getName())) {
-            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.WIN));
+        if (this.matchState.hasWonLastGame(human.getName())) {
+            this.lblTitle.setText(ForgeProps.getLocalized(WinLoseText.WIN));
         } else {
-            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));
+            this.lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));
         }
 
         // Populate custom panel, if necessary.
-        boolean hasContents = modeHandler.populateCustomPanel();
+        final boolean hasContents = this.modeHandler.populateCustomPanel();
         if (!hasContents) {
             scroller.setVisible(false);
         }
 
         // Size and show frame
-        Dimension screen = this.getToolkit().getScreenSize();
-        Rectangle bounds = this.getBounds();
+        final Dimension screen = this.getToolkit().getScreenSize();
+        final Rectangle bounds = this.getBounds();
 
         if (hasContents) {
             bounds.height = screen.height - 150;
@@ -206,7 +209,7 @@ public class WinLoseFrame extends JFrame {
 
         this.setBackground(AllZone.getSkin().getBg1a());
         this.setBounds(bounds);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(true);
         this.setVisible(true);
     }
@@ -220,9 +223,9 @@ public class WinLoseFrame extends JFrame {
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void btnContinue_actionPerformed(final ActionEvent e) {
-        closeWinLoseFrame();
+        this.closeWinLoseFrame();
         AllZone.getDisplay().setVisible(true);
-        modeHandler.startNextRound();
+        this.modeHandler.startNextRound();
     }
 
     /**
@@ -234,10 +237,10 @@ public class WinLoseFrame extends JFrame {
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void btnRestart_actionPerformed(final ActionEvent e) {
-        closeWinLoseFrame();
+        this.closeWinLoseFrame();
         AllZone.getDisplay().setVisible(true);
-        matchState.reset();
-        modeHandler.startNextRound();
+        this.matchState.reset();
+        this.modeHandler.startNextRound();
     }
 
     /**
@@ -249,9 +252,9 @@ public class WinLoseFrame extends JFrame {
      *            a {@link java.awt.event.ActionEvent} object.
      */
     final void btnQuit_actionPerformed(final ActionEvent e) {
-        closeWinLoseFrame();
-        matchState.reset();
-        modeHandler.actionOnQuit();
+        this.closeWinLoseFrame();
+        this.matchState.reset();
+        this.modeHandler.actionOnQuit();
 
         // clear Image caches, so the program doesn't get slower and slower
         // not needed with soft values - will shrink as needed
@@ -269,7 +272,7 @@ public class WinLoseFrame extends JFrame {
      */
     final JFrame closeWinLoseFrame() {
         // Issue 147 - keep battlefield up following win/loss
-        JFrame frame = (JFrame) AllZone.getDisplay();
+        final JFrame frame = (JFrame) AllZone.getDisplay();
         frame.dispose();
         frame.setEnabled(true);
         this.dispose();
@@ -277,6 +280,7 @@ public class WinLoseFrame extends JFrame {
     }
 
     private class WinLoseBorder extends AbstractBorder {
+        @Override
         public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
                 final int height) {
             g.setColor(AllZone.getSkin().getTxt1a());

@@ -26,13 +26,13 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
     private float[] phaseWeights;
 
     /** The SECOND s_ pe r_ minute. */
-    public final int SECONDS_PER_MINUTE = 60;
+    private final int secondsPerMinute = 60;
 
     /** The SECOND s_ pe r_ hour. */
-    public final int SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE;
+    private final int secondsPerHour = 60 * secondsPerMinute;
 
     /** The SECOND s_ pe r_ day. */
-    public final int SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR;
+    private final int secondsPerDay = 24 * secondsPerHour;
 
     /**
      * Convenience for BaseProgressMonitor(1, 1, 2.0f, null).
@@ -306,20 +306,20 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
         }
 
         String result = "";
-        if (etaSec > SECONDS_PER_DAY) {
-            result += Integer.toString(etaSec / SECONDS_PER_DAY);
+        if (etaSec > secondsPerDay) {
+            result += Integer.toString(etaSec / secondsPerDay);
             result += " da, ";
-            etaSec %= SECONDS_PER_DAY; // Shave off the portion recorded.
+            etaSec %= secondsPerDay; // Shave off the portion recorded.
         }
-        if (result.length() > 0 || etaSec > SECONDS_PER_HOUR) {
-            result += Integer.toString(etaSec / SECONDS_PER_HOUR);
+        if (result.length() > 0 || etaSec > secondsPerHour) {
+            result += Integer.toString(etaSec / secondsPerHour);
             result += " hr, ";
-            etaSec %= SECONDS_PER_HOUR; // Shave off the portion recorded.
+            etaSec %= secondsPerHour; // Shave off the portion recorded.
         }
-        if (result.length() > 0 || etaSec > SECONDS_PER_MINUTE) {
-            result += Integer.toString(etaSec / SECONDS_PER_MINUTE);
+        if (result.length() > 0 || etaSec > secondsPerMinute) {
+            result += Integer.toString(etaSec / secondsPerMinute);
             result += " min, ";
-            etaSec %= SECONDS_PER_MINUTE; // Shave off the portion recorded.
+            etaSec %= secondsPerMinute; // Shave off the portion recorded.
         }
 
         result += Integer.toString(etaSec);

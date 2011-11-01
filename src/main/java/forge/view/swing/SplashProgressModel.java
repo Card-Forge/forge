@@ -29,13 +29,16 @@ public class SplashProgressModel extends BaseProgressMonitor {
      */
 
     /**
+     * Increment units completed this phase.
+     * 
+     * @param numUnits
+     *            long
      * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#incrementUnitsCompletedThisPhase(long)
-     * @param numUnits long
      */
     @Override
     public final void incrementUnitsCompletedThisPhase(final long numUnits) {
         super.incrementUnitsCompletedThisPhase(numUnits);
-        getCurrentView().updateProgressBar();
+        this.getCurrentView().updateProgressBar();
     }
 
     /**
@@ -44,7 +47,7 @@ public class SplashProgressModel extends BaseProgressMonitor {
      * @return the current view
      */
     public final SplashProgressComponent getCurrentView() {
-        return currentView;
+        return this.currentView;
     }
 
     /**
@@ -54,7 +57,7 @@ public class SplashProgressModel extends BaseProgressMonitor {
      *            the new current view
      */
     public final void setCurrentView(final SplashProgressComponent neoView) {
-        currentView = neoView;
+        this.currentView = neoView;
     }
 
 }

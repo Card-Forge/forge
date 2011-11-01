@@ -50,15 +50,17 @@ public class ApplicationView implements FView {
                                                                           // 8/18/11
                                                                           // 11:37
                                                                           // PM
+                    @Override
                     public void run() {
-                        splashFrame = new SplashFrame(skin);
+                        ApplicationView.this.splashFrame = new SplashFrame(skin);
                     }
                 });
 
         SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
                                                     // 8/18/11 11:37 PM
+                    @Override
                     public void run() {
-                        splashFrame.setVisible(true);
+                        ApplicationView.this.splashFrame.setVisible(true);
                     }
                 });
 
@@ -73,10 +75,10 @@ public class ApplicationView implements FView {
     public final BraidsProgressMonitor getCardLoadingProgressMonitor() {
         BraidsProgressMonitor result;
 
-        if (splashFrame == null) {
+        if (this.splashFrame == null) {
             result = null;
         } else {
-            result = splashFrame.getMonitorModel();
+            result = this.splashFrame.getMonitorModel();
         }
 
         return result;
@@ -112,13 +114,14 @@ public class ApplicationView implements FView {
 
             AllZone.setSkin(new FSkin(preferences.getSkin()));
 
-        } catch (Exception exn) {
+        } catch (final Exception exn) {
             Log.error("Error loading preferences: " + exn);
         }
 
         SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11
                                                     // 1:07 PM: this isn't a web
                                                     // app
+                    @Override
                     public void run() {
                         final ForgePreferences finalPreferences = model.getPreferences();
 
@@ -128,7 +131,7 @@ public class ApplicationView implements FView {
                             } else {
                                 UIManager.setLookAndFeel(finalPreferences.getLaf());
                             }
-                        } catch (Exception ex) {
+                        } catch (final Exception ex) {
                             ErrorViewer.showError(ex);
                         }
                     }
@@ -137,11 +140,11 @@ public class ApplicationView implements FView {
         // For the following two blocks, check if user has cancelled
         // SplashFrame.
         // Note: Error thrown sometimes because log file cannot be accessed
-        if (!splashFrame.getSplashHasBeenClosed()) {
+        if (!this.splashFrame.getSplashHasBeenClosed()) {
             AllZone.getCardFactory(); // forces preloading of all cards
         }
 
-        if (!splashFrame.getSplashHasBeenClosed()) {
+        if (!this.splashFrame.getSplashHasBeenClosed()) {
             try {
                 ManaSymbols.loadImages();
 
@@ -150,6 +153,7 @@ public class ApplicationView implements FView {
                                                             // on 8/7/11 1:07
                                                             // PM: this isn't a
                                                             // web app
+                            @Override
                             public void run() {
                                 AllZone.getInputControl().setComputer(new ComputerAI_Input(new ComputerAI_General()));
 
@@ -157,14 +161,14 @@ public class ApplicationView implements FView {
                                 // The second
                                 // is useful for debugging.
 
-                                splashFrame.dispose();
+                                ApplicationView.this.splashFrame.dispose();
                                 // splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                                splashFrame = null;
+                                ApplicationView.this.splashFrame = null;
 
                                 if (System.getenv("NG2") != null) {
                                     if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                                        String[] argz = {};
+                                        final String[] argz = {};
                                         Gui_HomeScreen.main(argz);
                                     } else {
                                         new OldGuiNewGame();
@@ -174,7 +178,7 @@ public class ApplicationView implements FView {
                                 }
                             }
                         });
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
             }
         } // End if(splashHasBeenClosed)

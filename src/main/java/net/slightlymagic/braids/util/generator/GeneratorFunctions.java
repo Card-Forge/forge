@@ -43,8 +43,7 @@ public final class GeneratorFunctions {
     public static <T> long estimateSize(final Generator<T> gen) {
         long result = 0;
         for (@SuppressWarnings("unused")
-        T ignored : YieldUtils.toIterable(gen))
-        {
+        T ignored : YieldUtils.toIterable(gen)) {
             result++;
         }
 
@@ -70,15 +69,14 @@ public final class GeneratorFunctions {
      * @return a generator which produces a subset <= the inputGenerator
      */
     public static <T> Generator<T> filterGenerator(final Lambda1<Boolean, T> predicate,
-            final Generator<T> inputGenerator)
-            {
+            final Generator<T> inputGenerator) {
         Generator<T> result = new Generator<T>() {
 
             @Override
             public void generate(final Yieldable<T> outputYield) {
 
                 Yieldable<T> inputYield = new Yieldable<T>() {
-                    Boolean pResult;
+                    private Boolean pResult;
 
                     @Override
                     public void yield(final T input) {
@@ -171,11 +169,9 @@ public final class GeneratorFunctions {
      *            the generator from which to select a random item
      * @return an item chosen at random from the generator; this may be null, if
      *         the generator contains null items.
-     * @throws NoSuchElementException
      *             if the generator has no contents
      */
-    public static <T> T selectRandom(final Generator<T> generator) throws NoSuchElementException
-    {
+    public static <T> T selectRandom(final Generator<T> generator) {
         /*
          * This algorithm requires some explanation. Each time we encounter a
          * new item from the generator, we determine via random chance if the

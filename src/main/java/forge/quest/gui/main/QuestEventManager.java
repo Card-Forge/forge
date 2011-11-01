@@ -26,22 +26,22 @@ import forge.quest.data.QuestUtil;
 public class QuestEventManager {
 
     /** The easy a iduels. */
-    public List<QuestDuel> easyAIduels = null;
+    private List<QuestDuel> easyAIduels = null;
 
     /** The medium a iduels. */
-    public List<QuestDuel> mediumAIduels = null;
+    private List<QuestDuel> mediumAIduels = null;
 
     /** The hard a iduels. */
-    public List<QuestDuel> hardAIduels = null;
+    private List<QuestDuel> hardAIduels = null;
 
     /** The very hard a iduels. */
-    public List<QuestDuel> veryHardAIduels = null;
+    private List<QuestDuel> veryHardAIduels = null;
 
     /** The all duels. */
-    public List<QuestDuel> allDuels = null;
+    private List<QuestDuel> allDuels = null;
 
     /** The all challenges. */
-    public List<QuestChallenge> allChallenges = null;
+    private List<QuestChallenge> allChallenges = null;
 
     /**
      * <p>
@@ -79,7 +79,7 @@ public class QuestEventManager {
 
             // Assemble metadata (may not be necessary later) and deck object.
             this.assembleEventMetadata(contents, tempEvent);
-            tempEvent.eventDeck = manager.getDeck(tempEvent.getName());
+            tempEvent.setEventDeck(manager.getDeck(tempEvent.getName()));
         } // End for(allFiles)
 
         this.assembleDuelDifficultyLists();
@@ -118,7 +118,7 @@ public class QuestEventManager {
             value = s.substring(eqpos + 1);
 
             if (key.equalsIgnoreCase("Name")) {
-                qd.name = value;
+                qd.setName(value);
             }
         }
     }
@@ -153,18 +153,18 @@ public class QuestEventManager {
             value = s.substring(eqpos + 1).trim();
 
             if (key.equalsIgnoreCase("ID")) {
-                qc.id = Integer.parseInt(value);
+                qc.setId(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Repeat")) {
-                qc.repeatable = Boolean.parseBoolean(value);
+                qc.setRepeatable(Boolean.parseBoolean(value));
             } else if (key.equalsIgnoreCase("AILife")) {
-                qc.aiLife = Integer.parseInt(value);
+                qc.setAiLife(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Wins")) {
-                qc.winsReqd = Integer.parseInt(value);
+                qc.setWinsReqd(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Credit Reward")) {
-                qc.creditsReward = Integer.parseInt(value);
+                qc.setCreditsReward(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Card Reward")) {
-                qc.cardReward = value;
-                qc.cardRewardList = QuestUtil.generateCardRewardList(value);
+                qc.setCardReward(value);
+                qc.setCardRewardList(QuestUtil.generateCardRewardList(value));
             }
             // Human extra card list assembled here.
             else if (key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
@@ -175,7 +175,7 @@ public class QuestEventManager {
                     templist.add(n);
                 }
 
-                qc.humanExtraCards = templist;
+                qc.setHumanExtraCards(templist);
             }
             // AI extra card list assembled here.
             else if (key.equalsIgnoreCase("AIExtras") && !value.equals("")) {
@@ -186,12 +186,12 @@ public class QuestEventManager {
                     templist.add(n);
                 }
 
-                qc.aiExtraCards = templist;
+                qc.setAiExtraCards(templist);
             }
             // Card reward list assembled here.
             else if (key.equalsIgnoreCase("Card Reward")) {
-                qc.cardReward = value;
-                qc.cardRewardList = QuestUtil.generateCardRewardList(value);
+                qc.setCardReward(value);
+                qc.setCardRewardList(QuestUtil.generateCardRewardList(value));
             }
         }
     }
@@ -230,15 +230,15 @@ public class QuestEventManager {
             value = s.substring(eqpos + 1);
 
             if (key.equalsIgnoreCase("Name")) {
-                qe.name = value;
+                qe.setName(value);
             } else if (key.equalsIgnoreCase("Title")) {
-                qe.title = value;
+                qe.setTitle(value);
             } else if (key.equalsIgnoreCase("Difficulty")) {
-                qe.difficulty = value;
+                qe.setDifficulty(value);
             } else if (key.equalsIgnoreCase("Description")) {
-                qe.description = value;
+                qe.setDescription(value);
             } else if (key.equalsIgnoreCase("Icon")) {
-                qe.icon = value;
+                qe.setIcon(value);
             }
         }
     }

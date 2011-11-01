@@ -32,13 +32,13 @@ public class QuestSelectablePanel extends JPanel {
     private static final long serialVersionUID = -1502285997894190742L;
 
     /** The background color. */
-    protected Color backgroundColor;
+    private Color backgroundColor;
     private boolean selected;
     private final QuestEvent event;
     private String iconfilename;
 
     /** The root panel. */
-    public JPanel rootPanel = new JPanel();
+    private JPanel rootPanel = new JPanel();
 
     /**
      * <p>
@@ -51,7 +51,7 @@ public class QuestSelectablePanel extends JPanel {
      */
     public QuestSelectablePanel(final QuestEvent qe) {
         this.event = qe;
-        this.iconfilename = qe.icon;
+        this.iconfilename = qe.getIcon();
         final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
         File file = new File(base, this.iconfilename);
 
@@ -81,9 +81,9 @@ public class QuestSelectablePanel extends JPanel {
         iconPanel.add(iconLabel, BorderLayout.NORTH);
         this.add(iconPanel, BorderLayout.WEST);
 
-        this.rootPanel.setOpaque(false);
-        this.rootPanel.setLayout(new BoxLayout(this.rootPanel, BoxLayout.Y_AXIS));
-        this.add(this.rootPanel, BorderLayout.CENTER);
+        this.getRootPanel().setOpaque(false);
+        this.getRootPanel().setLayout(new BoxLayout(this.getRootPanel(), BoxLayout.Y_AXIS));
+        this.add(this.getRootPanel(), BorderLayout.CENTER);
 
         final JPanel centerTopPanel = new JPanel();
         centerTopPanel.setOpaque(false);
@@ -100,13 +100,13 @@ public class QuestSelectablePanel extends JPanel {
         final JLabel difficultyLabel = new JLabel(qe.getDifficulty());
         difficultyLabel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         centerTopPanel.add(difficultyLabel);
-        this.rootPanel.add(centerTopPanel);
+        this.getRootPanel().add(centerTopPanel);
 
-        GuiUtils.addGap(this.rootPanel);
+        GuiUtils.addGap(this.getRootPanel());
 
         final JLabel descriptionLabel = new JLabel(qe.getDescription());
         descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.rootPanel.add(descriptionLabel);
+        this.getRootPanel().add(descriptionLabel);
 
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
         this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK), new EmptyBorder(5, 5, 5, 5)));
@@ -161,5 +161,19 @@ public class QuestSelectablePanel extends JPanel {
      */
     public final QuestEvent getEvent() {
         return this.event;
+    }
+
+    /**
+     * @return the rootPanel
+     */
+    public JPanel getRootPanel() {
+        return rootPanel;
+    }
+
+    /**
+     * @param rootPanel the rootPanel to set
+     */
+    public void setRootPanel(JPanel rootPanel) {
+        this.rootPanel = rootPanel; // TODO: Add 0 to parameter's name.
     }
 }

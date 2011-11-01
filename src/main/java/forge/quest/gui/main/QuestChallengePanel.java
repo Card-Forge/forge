@@ -28,7 +28,7 @@ public class QuestChallengePanel extends QuestSelectablePanel {
     public QuestChallengePanel(final QuestChallenge q) {
         super(q);
 
-        GuiUtils.addGap(super.rootPanel, 7);
+        GuiUtils.addGap(super.getRootPanel(), 7);
 
         if (q.getRepeatable()) {
             this.repeatabilityLabel = new JLabel("This challenge is repeatable");
@@ -36,7 +36,7 @@ public class QuestChallengePanel extends QuestSelectablePanel {
             this.repeatabilityLabel = new JLabel("This challenge is not repeatable");
         }
 
-        super.rootPanel.add(this.repeatabilityLabel);
+        super.getRootPanel().add(this.repeatabilityLabel);
 
     }
 }

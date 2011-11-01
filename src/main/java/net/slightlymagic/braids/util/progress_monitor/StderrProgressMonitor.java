@@ -51,8 +51,7 @@ public class StderrProgressMonitor extends BaseProgressMonitor {
      *      long, float, float[])
      */
     public StderrProgressMonitor(final int numPhases, final long totalUnitsFirstPhase,
-            final float minUpdateIntervalSec, final float[] phaseWeights)
-    {
+            final float minUpdateIntervalSec, final float[] phaseWeights) {
         super(numPhases, totalUnitsFirstPhase, minUpdateIntervalSec, phaseWeights);
     }
 
@@ -64,6 +63,7 @@ public class StderrProgressMonitor extends BaseProgressMonitor {
      */
 
     /**
+     * @param numUnits long
      * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#BaseProgressMonitor(int)
      */
     @Override

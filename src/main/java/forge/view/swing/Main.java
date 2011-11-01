@@ -31,7 +31,7 @@ public final class Main {
             final FModel model = new FModel(null);
             Singletons.setModel(model);
 
-            FSkin skin = new FSkin(model.getPreferences().getSkin());
+            final FSkin skin = new FSkin(model.getPreferences().getSkin());
             final FView view = new ApplicationView(skin);
             Singletons.setView(view);
 
@@ -47,8 +47,9 @@ public final class Main {
 
             view.setModel(model);
 
-        } catch (Throwable exn) { // NOPMD by Braids on 8/7/11 1:07 PM: must
-                                  // catch all throwables here.
+        } catch (final Throwable exn) { // NOPMD by Braids on 8/7/11 1:07 PM:
+                                        // must
+            // catch all throwables here.
             ErrorViewer.showError(exn);
         }
     }
