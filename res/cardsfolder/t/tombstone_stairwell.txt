@@ -1,0 +1,17 @@
+Name:Tombstone Stairwell
+ManaCost:2 B B
+Types:World Enchantment
+Text:no text
+K:Cumulative upkeep:1 B
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self | Execute$ TrigTokenYou | TriggerDescription$ At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player puts a 2/2 black Zombie creature token with haste named Tombspawn onto the battlefield for each creature card in his or her graveyard.
+SVar:TrigTokenYou:DB$Token | TokenAmount$ X | TokenName$ Tombspawn | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Haste | SubAbility$ TrigTokenOpp | RememberTokens$ True
+SVar:TrigTokenOpp:DB$Token | TokenAmount$ Y | TokenName$ Tombspawn | TokenTypes$ Creature,Zombie | TokenOwner$ Opponent | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Haste | RememberTokens$ True
+SVar:X:Count$TypeInYourYard.Creature
+SVar:Y:Count$TypeInOppYard.Creature
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DestroyRemembered | TriggerDescription$ At the beginning of each end step or when Tombstone Stairwell leaves the battlefield, destroy all tokens put onto the battlefield with Tombstone Stairwell. They can't be regenerated.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | Secondary$ True | TriggerDescription$ At the beginning of each end step or when Tombstone Stairwell leaves the battlefield, destroy all tokens put onto the battlefield with Tombstone Stairwell. They can't be regenerated.
+SVar:DestroyRemembered:DB$DestroyAll | Cost$ 0 | ValidCards$ Creature.IsRemembered | NoRegen$ True | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tombstone_stairwell.jpg
+End
