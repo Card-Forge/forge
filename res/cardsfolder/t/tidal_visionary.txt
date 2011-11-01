@@ -2,7 +2,7 @@ Name:Tidal Visionary
 ManaCost:U
 Types:Creature Merfolk Wizard
 Text:no text
-1/1
+PT:1/1
 A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target creature becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 SVar:RemRandomDeck:True
