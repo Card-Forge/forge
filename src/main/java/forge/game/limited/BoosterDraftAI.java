@@ -636,7 +636,7 @@ public class BoosterDraftAI {
         BoosterDraftAI.colorToLand.put(Constant.Color.RED, "Mountain");
         BoosterDraftAI.colorToLand.put(Constant.Color.WHITE, "Plains");
 
-        // initilize deck array and playerColors list
+        // Initialize deck array and playerColors list
         for (int i = 0; i < this.deck.length; i++) {
             this.deck[i] = new CardList();
             this.playerColors.add(new DeckColors());

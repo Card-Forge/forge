@@ -6,8 +6,22 @@
 
 package forge.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.util.Collections;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractListModel;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -18,91 +32,104 @@ import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.CardPrinted;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.util.List;
-
-import static java.util.Collections.unmodifiableList;
-import static javax.swing.JOptionPane.*;
-
-
 /**
- * A simple class that shows a list of cards in a dialog with preview in its right part. 
- *
+ * A simple class that shows a list of cards in a dialog with preview in its
+ * right part.
+ * 
  * @author Forge
  * @version $Id: ListChooser.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public class CardListViewer {
 
-    //Data and number of choices for the list
-    private List<CardPrinted> list;
+    // Data and number of choices for the list
+    private final List<CardPrinted> list;
 
-    //Decoration
-    private String title;
+    // Decoration
+    private final String title;
 
-    //Flag: was the dialog already shown?
+    // Flag: was the dialog already shown?
     private boolean called;
-    //initialized before; listeners may be added to it
-    private JList jList;
-    private CardDetailPanel detail;
-    private CardPicturePanel picture;
+    // initialized before; listeners may be added to it
+    private final JList jList;
+    private final CardDetailPanel detail;
+    private final CardPicturePanel picture;
 
-    //Temporarily stored for event handlers during show
+    // Temporarily stored for event handlers during show
     private JDialog dialog;
-    private JOptionPane optionPane;
-    private Action ok;
+    private final JOptionPane optionPane;
+    private final Action ok;
 
-    public CardListViewer(String title, List<CardPrinted> list) {
+    /**
+     * Instantiates a new card list viewer.
+     *
+     * @param title the title
+     * @param list the list
+     */
+    public CardListViewer(final String title, final List<CardPrinted> list) {
         this(title, "", list, null);
     }
 
-    public CardListViewer(String title, String message, List<CardPrinted> list) {
+    /**
+     * Instantiates a new card list viewer.
+     *
+     * @param title the title
+     * @param message the message
+     * @param list the list
+     */
+    public CardListViewer(final String title, final String message, final List<CardPrinted> list) {
         this(title, message, list, null);
     }
-    
-    public CardListViewer(String title, String message, List<CardPrinted> list, Icon dialogIcon) {
+
+    /**
+     * Instantiates a new card list viewer.
+     *
+     * @param title the title
+     * @param message the message
+     * @param list the list
+     * @param dialogIcon the dialog icon
+     */
+    public CardListViewer(final String title, final String message, final List<CardPrinted> list, final Icon dialogIcon) {
         this.title = title;
-        this.list = unmodifiableList(list);
-        jList = new JList(new ChooserListModel());
-        detail = new CardDetailPanel(null);
-        picture = new CardPicturePanel(null);
-        ok = new CloseAction(OK_OPTION, "OK");
+        this.list = Collections.unmodifiableList(list);
+        this.jList = new JList(new ChooserListModel());
+        this.detail = new CardDetailPanel(null);
+        this.picture = new CardPicturePanel(null);
+        this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
 
-        Object[] options = new Object[]{new JButton(ok)};
+        final Object[] options = new Object[] { new JButton(this.ok) };
 
-        JPanel threeCols = new JPanel();
-        threeCols.add(new JScrollPane(jList));
-        threeCols.add(picture);
-        threeCols.add(detail);
-        threeCols.setLayout( new java.awt.GridLayout(1, 3, 6, 0) );
-        
-        optionPane = new JOptionPane(new Object[]{message, threeCols}, 
-                INFORMATION_MESSAGE, DEFAULT_OPTION, dialogIcon, options, options[0]);
-        
+        final JPanel threeCols = new JPanel();
+        threeCols.add(new JScrollPane(this.jList));
+        threeCols.add(this.picture);
+        threeCols.add(this.detail);
+        threeCols.setLayout(new java.awt.GridLayout(1, 3, 6, 0));
+
+        this.optionPane = new JOptionPane(new Object[] { message, threeCols }, JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION, dialogIcon, options, options[0]);
+
         // selection is here
-        jList.getSelectionModel().addListSelectionListener(new SelListener());
+        this.jList.getSelectionModel().addListSelectionListener(new SelListener());
     }
-
 
     /**
      * Shows the dialog and returns after the dialog was closed.
-     *
+     * 
      * @return a boolean.
      */
     public synchronized boolean show() {
-        if (called) throw new IllegalStateException("Already shown");
-        jList.setSelectedIndex(0);
-        
-        dialog = optionPane.createDialog(optionPane.getParent(), title);
-        dialog.setSize(720,360);
-        dialog.addWindowFocusListener(new CardListFocuser());
-        dialog.setVisible(true);
-        dialog.toFront();
-        
-        dialog.dispose();
-        called = true;
+        if (this.called) {
+            throw new IllegalStateException("Already shown");
+        }
+        this.jList.setSelectedIndex(0);
+
+        this.dialog = this.optionPane.createDialog(this.optionPane.getParent(), this.title);
+        this.dialog.setSize(720, 360);
+        this.dialog.addWindowFocusListener(new CardListFocuser());
+        this.dialog.setVisible(true);
+        this.dialog.toFront();
+
+        this.dialog.dispose();
+        this.called = true;
         return true;
     }
 
@@ -110,59 +137,70 @@ public class CardListViewer {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
-        public int getSize() { return list.size(); }
-        public Object getElementAt(int index) { return list.get(index); }
+        @Override
+        public int getSize() {
+            return CardListViewer.this.list.size();
+        }
+
+        @Override
+        public Object getElementAt(final int index) {
+            return CardListViewer.this.list.get(index);
+        }
     }
 
     private class CloseAction extends AbstractAction {
 
         private static final long serialVersionUID = -8426767786083886936L;
-        private int value;
+        private final int value;
 
-        public CloseAction(int value, String label) {
+        public CloseAction(final int value, final String label) {
             super(label);
             this.value = value;
         }
 
-
-        public void actionPerformed(ActionEvent e) {
-            optionPane.setValue(value);
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            CardListViewer.this.optionPane.setValue(this.value);
         }
     }
-    
+
     private class CardListFocuser implements WindowFocusListener {
 
         @Override
         public void windowGainedFocus(final WindowEvent e) {
-            jList.grabFocus();
+            CardListViewer.this.jList.grabFocus();
         }
 
         @Override
-        public void windowLostFocus(final WindowEvent e) { } }
-
+        public void windowLostFocus(final WindowEvent e) {
+        }
+    }
 
     private class SelListener implements ListSelectionListener {
         private Card[] cache = null;
-        
+
+        @Override
         public void valueChanged(final ListSelectionEvent e) {
-            int row = jList.getSelectedIndex();
+            final int row = CardListViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
-            if (row >= 0 && row < list.size()) {
-                CardPrinted cp = list.get(row);
-                ensureCacheHas(row, cp);
-                detail.setCard(cache[row]);
-                picture.setCard(cp);
+            if ((row >= 0) && (row < CardListViewer.this.list.size())) {
+                final CardPrinted cp = CardListViewer.this.list.get(row);
+                this.ensureCacheHas(row, cp);
+                CardListViewer.this.detail.setCard(this.cache[row]);
+                CardListViewer.this.picture.setCard(cp);
             }
         }
-        
-        private void ensureCacheHas(int row, CardPrinted cp) {
-            if (cache == null) { cache = new Card[list.size()]; }
-            if (null == cache[row]) {
-                Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
+
+        private void ensureCacheHas(final int row, final CardPrinted cp) {
+            if (this.cache == null) {
+                this.cache = new Card[CardListViewer.this.list.size()];
+            }
+            if (null == this.cache[row]) {
+                final Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
                 card.setCurSetCode(cp.getSet());
                 card.setImageFilename(CardUtil.buildFilename(card));
-                cache[row] = card;
-            }            
+                this.cache[row] = card;
+            }
         }
     }
 

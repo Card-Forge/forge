@@ -391,7 +391,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             for (int i = 0; i < Constant.Color.BASIC_LANDS.length; i++) {
                 for (int j = 0; j < 18; j++) {
-                    deck.addSideboard(Constant.Color.BASIC_LANDS[i] + "|" + sd.LandSetCode[0]);
+                    deck.addSideboard(Constant.Color.BASIC_LANDS[i] + "|" + sd.getLandSetCode()[0]);
                 }
             }
 

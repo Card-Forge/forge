@@ -23,9 +23,10 @@
  */
 package forge.gui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Rectangle;
 
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * A {@link JLabel} with support for multi-line text that wraps when the line
@@ -33,7 +34,7 @@ import java.awt.*;
  * {@link MultiLineLabelUI}, the default UI delegate of this component. The text
  * in the label can be horizontally and vertically aligned, relative to the
  * bounds of the component.
- *
+ * 
  * @author Samuel Sjoberg, http://samuelsjoberg.com
  * @version 1.0.0
  */
@@ -47,12 +48,12 @@ public class MultiLineLabel extends JLabel {
     /**
      * Horizontal text alignment.
      */
-    private int halign = LEFT;
+    private int halign = SwingConstants.LEFT;
 
     /**
      * Vertical text alignment.
      */
-    private int valign = CENTER;
+    private int valign = SwingConstants.CENTER;
 
     /**
      * Cache to save heap allocations.
@@ -64,66 +65,70 @@ public class MultiLineLabel extends JLabel {
      */
     public MultiLineLabel() {
         super();
-        setUI(MultiLineLabelUI.labelUI);
+        this.setUI(MultiLineLabelUI.getLabelUI());
     }
 
     /**
      * Creates a new label with <code>text</code> value.
-     *
-     * @param text the value of the label
+     * 
+     * @param text
+     *            the value of the label
      */
-    public MultiLineLabel(String text) {
+    public MultiLineLabel(final String text) {
         this();
-        setText(text);
+        this.setText(text);
     }
 
     /**
      * {@inheritDoc}
-     *
+     * 
      * @return a {@link java.awt.Rectangle} object.
      */
+    @Override
     public Rectangle getBounds() {
-        if (bounds == null) {
-            bounds = new Rectangle();
+        if (this.bounds == null) {
+            this.bounds = new Rectangle();
         }
-        return super.getBounds(bounds);
+        return super.getBounds(this.bounds);
     }
 
     /**
      * Set the vertical text alignment.
-     *
-     * @param alignment vertical alignment
+     * 
+     * @param alignment
+     *            vertical alignment
      */
-    public void setVerticalTextAlignment(int alignment) {
-        firePropertyChange("verticalTextAlignment", valign, alignment);
-        valign = alignment;
+    public void setVerticalTextAlignment(final int alignment) {
+        this.firePropertyChange("verticalTextAlignment", this.valign, alignment);
+        this.valign = alignment;
     }
 
     /**
      * Set the horizontal text alignment.
-     *
-     * @param alignment horizontal alignment
+     * 
+     * @param alignment
+     *            horizontal alignment
      */
-    public void setHorizontalTextAlignment(int alignment) {
-        firePropertyChange("horizontalTextAlignment", halign, alignment);
-        halign = alignment;
+    public void setHorizontalTextAlignment(final int alignment) {
+        this.firePropertyChange("horizontalTextAlignment", this.halign, alignment);
+        this.halign = alignment;
     }
 
     /**
      * Get the vertical text alignment.
-     *
+     * 
      * @return vertical text alignment
      */
     public int getVerticalTextAlignment() {
-        return valign;
+        return this.valign;
     }
 
     /**
      * Get the horizontal text alignment.
-     *
+     * 
      * @return horizontal text alignment
      */
     public int getHorizontalTextAlignment() {
-        return halign;
+        return this.halign;
     }
 }

@@ -1,19 +1,5 @@
 package forge.gui;
 
-import forge.AllZone;
-import forge.Card;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.slightlymagic.braids.util.UtilFunctions;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,6 +13,19 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import net.slightlymagic.braids.util.UtilFunctions;
+import forge.AllZone;
+import forge.Card;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -52,13 +51,13 @@ public final class GuiUtils {
     public static void setWidthToMax(final Collection<Component> components) {
         int maxWidth = 0;
 
-        for (Component c : components) {
+        for (final Component c : components) {
             if (c.getPreferredSize().getWidth() > maxWidth) {
                 maxWidth = (int) c.getPreferredSize().getWidth();
             }
         }
 
-        for (Component c : components) {
+        for (final Component c : components) {
             c.setMinimumSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
             c.setMaximumSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
             c.setPreferredSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
@@ -117,7 +116,7 @@ public final class GuiUtils {
      *            a int.
      */
     public static void setFontSize(final Component component, final int newSize) {
-        Font oldFont = component.getFont();
+        final Font oldFont = component.getFont();
         component.setFont(oldFont.deriveFont((float) newSize));
     }
 
@@ -131,8 +130,8 @@ public final class GuiUtils {
      * @return a {@link javax.swing.ImageIcon} object.
      */
     public static ImageIcon getIconFromFile(final String filename) {
-        File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        File file = new File(base, filename);
+        final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+        final File file = new File(base, filename);
         if (filename.equals("") || !file.exists()) {
             return null;
         } else {
@@ -145,15 +144,17 @@ public final class GuiUtils {
      * getResizedIcon.
      * </p>
      * 
-     * @param filename String.
-     * @param scale Double.
+     * @param filename
+     *            String.
+     * @param scale
+     *            Double.
      * @return {@link javax.swing.ImageIcon} object
      */
     public static ImageIcon getResizedIcon(final String filename, final double scale) {
-        ImageIcon icon = getIconFromFile(filename);
+        final ImageIcon icon = GuiUtils.getIconFromFile(filename);
 
-        int w = (int) (icon.getIconWidth() * scale);
-        int h = (int) (icon.getIconHeight() * scale);
+        final int w = (int) (icon.getIconWidth() * scale);
+        final int h = (int) (icon.getIconHeight() * scale);
 
         return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
@@ -163,13 +164,15 @@ public final class GuiUtils {
      * getResizedIcon.
      * </p>
      * 
-     * @param icon ImageIcon
-     * @param scale Double
+     * @param icon
+     *            ImageIcon
+     * @param scale
+     *            Double
      * @return {@link javax.swing.ImageIcon} object
      */
     public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
-        int w = (int) (icon.getIconWidth() * scale);
-        int h = (int) (icon.getIconHeight() * scale);
+        final int w = (int) (icon.getIconWidth() * scale);
+        final int h = (int) (icon.getIconHeight() * scale);
 
         return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
@@ -208,54 +211,44 @@ public final class GuiUtils {
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).
-     * 
-     * @see #getChoices(String, int, int, Object...)
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @param <T>
-     *            is automatically inferred.
-     * 
+     *
+     * @param <T> is automatically inferred.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
+     * empty; otherwise, returns the first item in the List returned by
+     * getChoices.
+     * @see #getChoices(String, int, int, Object...)
      */
     public static <T> T getChoiceOptional(final String message, final T... choices) {
-        if (choices == null || choices.length == 0) {
+        if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        List<T> choice = getChoices(message, 0, 1, choices);
+        final List<T> choice = GuiUtils.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)
 
     /**
      * Like getChoiceOptional, but this takes an Iterator instead of a variable
      * number of arguments.
-     * 
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            an Iterator over T objects.
-     * @param <T>
-     *            is automatically inferred.
-     * 
+     *
+     * @param <T> is automatically inferred.
+     * @param message a {@link java.lang.String} object.
+     * @param choices an Iterator over T objects.
      * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
+     * empty; otherwise, returns the first item in the List returned by
+     * getChoices.
      */
     public static <T> T getChoiceOptional(final String message, final Iterator<T> choices) {
-        if (choices == null | !choices.hasNext()) {
+        if ((choices == null) | !choices.hasNext()) {
             return null;
         }
 
         // TODO this is an expensive operation; it would be better to
         // update getChoices to accept an Iterator.
-        T[] choicesArray = UtilFunctions.iteratorToArray(choices);
+        final T[] choicesArray = UtilFunctions.iteratorToArray(choices);
 
-        List<T> choice = getChoices(message, 0, 1, choicesArray);
+        final List<T> choice = GuiUtils.getChoices(message, 0, 1, choicesArray);
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,Iterator<T>)
 
@@ -264,17 +257,14 @@ public final class GuiUtils {
      * <p>
      * getChoice.
      * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @param <T>
-     *            a T object.
+     *
+     * @param <T> a T object.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return a T object.
      */
     public static <T> T getChoice(final String message, final T... choices) {
-        List<T> choice = getChoices(message, 1, 1, choices);
+        final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
     } // getChoice()
@@ -284,17 +274,14 @@ public final class GuiUtils {
      * <p>
      * getChoicesOptional.
      * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @param <T>
-     *            a T object.
+     *
+     * @param <T> a T object.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoicesOptional(final String message, final T... choices) {
-        return getChoices(message, 0, choices.length, choices);
+        return GuiUtils.getChoices(message, 0, choices.length, choices);
     } // getChoice()
 
     // returned Object will never be null
@@ -302,17 +289,14 @@ public final class GuiUtils {
      * <p>
      * getChoices.
      * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @param <T>
-     *            a T object.
+     *
+     * @param <T> a T object.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final T... choices) {
-        return getChoices(message, 1, choices.length, choices);
+        return GuiUtils.getChoices(message, 1, choices.length, choices);
     } // getChoice()
 
     // returned Object will never be null
@@ -320,25 +304,21 @@ public final class GuiUtils {
      * <p>
      * getChoices.
      * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param min
-     *            a int.
-     * @param max
-     *            a int.
-     * @param choices
-     *            a T object.
-     * @param <T>
-     *            a T object.
+     *
+     * @param <T> a T object.
+     * @param message a {@link java.lang.String} object.
+     * @param min a int.
+     * @param max a int.
+     * @param choices a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {
-        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         final JList list = c.getJList();
         list.addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(final ListSelectionEvent ev) {
-                if (list.getSelectedValue() instanceof Card && AllZone.getDisplay() != null) {
+                if ((list.getSelectedValue() instanceof Card) && (AllZone.getDisplay() != null)) {
                     AllZone.getDisplay().setCard((Card) list.getSelectedValue());
                 }
             }
@@ -354,8 +334,8 @@ public final class GuiUtils {
      *            a fully laid-out frame
      */
     public static void centerFrame(final Window frame) {
-        Dimension screen = frame.getToolkit().getScreenSize();
-        Rectangle bounds = frame.getBounds();
+        final Dimension screen = frame.getToolkit().getScreenSize();
+        final Rectangle bounds = frame.getBounds();
         bounds.width = frame.getWidth();
         bounds.height = frame.getHeight();
         bounds.x = (screen.width - bounds.width) / 2;
@@ -367,18 +347,19 @@ public final class GuiUtils {
      * Attempts to create a font from a filename. Concise error reported if
      * exceptions found.
      * 
-     * @param filename String
+     * @param filename
+     *            String
      * @return Font
      */
     public static Font newFont(final String filename) {
-        File file = new File(filename);
+        final File file = new File(filename);
         Font ttf = null;
 
         try {
             ttf = Font.createFont(Font.TRUETYPE_FONT, file);
-        } catch (FontFormatException e) {
+        } catch (final FontFormatException e) {
             System.err.println("GuiUtils > newFont: bad font format \"" + filename + "\"");
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;

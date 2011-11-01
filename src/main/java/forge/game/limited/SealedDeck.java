@@ -42,7 +42,7 @@ public class SealedDeck {
     private final List<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
 
     /** The Land set code. */
-    public String LandSetCode[] = { "" };
+    private String[] landSetCode = { "" };
 
     /**
      * <p>
@@ -61,7 +61,7 @@ public class SealedDeck {
                 this.packs.add(picker);
             }
 
-            this.LandSetCode[0] = CardDb.instance().getCard("Plains").getSet();
+            this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getSet();
         } else if (sealedType.equals("Block")) {
 
             final Object o = GuiUtils.getChoice("Choose Block", SetUtils.getBlocks().toArray());
@@ -102,10 +102,10 @@ public class SealedDeck {
                 }
             }
 
-            this.LandSetCode[0] = block.getLandSet().getCode();
+            this.getLandSetCode()[0] = block.getLandSet().getCode();
 
         } else if (sealedType.equals("Custom")) {
-            String dList[];
+            String[] dList;
             final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
             // get list of custom draft files
@@ -162,7 +162,7 @@ public class SealedDeck {
                     this.packs.add(picker);
                 }
 
-                this.LandSetCode[0] = draft.LandSetCode;
+                this.getLandSetCode()[0] = draft.LandSetCode;
             }
         }
     }
@@ -200,14 +200,14 @@ public class SealedDeck {
         int landsNeeded = 18;
         int nCreatures = 15;
 
-        final CardList AIPlayables = aiCardpool.filter(new CardListFilter() {
+        final CardList aiPlayables = aiCardpool.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 return !(c.getSVar("RemAIDeck").equals("True"));
             }
         });
 
-        CardList creatures = AIPlayables.getType("Creature");
+        CardList creatures = aiPlayables.getType("Creature");
         CardListUtil.sortByEvaluateCreature(creatures);
 
         final CardList colorChooserList = new CardList(); // choose colors based
@@ -217,8 +217,8 @@ public class SealedDeck {
             colorChooserList.add(creatures.get(i));
         }
 
-        final int colorCounts[] = { 0, 0, 0, 0, 0 };
-        final String colors[] = Constant.Color.ONLY_COLORS;
+        final int[] colorCounts = { 0, 0, 0, 0, 0 };
+        final String[] colors = Constant.Color.ONLY_COLORS;
         for (int i = 0; i < colors.length; i++) {
             colorCounts[i] = colorChooserList.getColor(colors[i]).size();
         }
@@ -236,15 +236,15 @@ public class SealedDeck {
         }
 
         final DeckColors dcAI = new DeckColors();
-        dcAI.Color1 = colors[0];
-        dcAI.Color2 = colors[1];
-        dcAI.Splash = colors[2];
-        dcAI.Mana1 = dcAI.ColorToMana(colors[0]);
-        dcAI.Mana2 = dcAI.ColorToMana(colors[1]);
-        dcAI.ManaS = dcAI.ColorToMana(colors[2]);
+        dcAI.color1 = colors[0];
+        dcAI.color2 = colors[1];
+        dcAI.splash = colors[2];
+        dcAI.mana1 = dcAI.colorToMana(colors[0]);
+        dcAI.mana2 = dcAI.colorToMana(colors[1]);
+        dcAI.manaS = dcAI.colorToMana(colors[2]);
 
-        creatures = AIPlayables.getType("Creature").getOnly2Colors(dcAI.Color1, dcAI.Color2);
-        creatures.addAll(AIPlayables.getType("Artifact").getType("Creature"));
+        creatures = aiPlayables.getType("Creature").getOnly2Colors(dcAI.color1, dcAI.color2);
+        creatures.addAll(aiPlayables.getType("Artifact").getType("Creature"));
 
         CardListUtil.sortByEvaluateCreature(creatures);
         int i = 0;
@@ -253,67 +253,67 @@ public class SealedDeck {
 
             deck.add(c);
             aiCardpool.remove(c);
-            AIPlayables.remove(c);
+            aiPlayables.remove(c);
             cardsNeeded--;
             nCreatures--;
             i++;
         }
 
-        final CardList splashCreatures = AIPlayables.getType("Creature").getColor(dcAI.Splash);
+        final CardList splashCreatures = aiPlayables.getType("Creature").getColor(dcAI.splash);
         while ((nCreatures > 1) && (splashCreatures.size() > 1)) {
             final Card c = splashCreatures.get(MyRandom.getRandom().nextInt(splashCreatures.size() - 1));
 
             deck.add(c);
             aiCardpool.remove(c);
-            AIPlayables.remove(c);
+            aiPlayables.remove(c);
             splashCreatures.remove(c);
             cardsNeeded--;
             nCreatures--;
         }
 
-        final CardList walkers = AIPlayables.getType("Planeswalker").getOnly2Colors(dcAI.Color1, dcAI.Color2);
+        final CardList walkers = aiPlayables.getType("Planeswalker").getOnly2Colors(dcAI.color1, dcAI.color2);
         if (walkers.size() > 0) {
             deck.add(walkers.get(0));
-            AIPlayables.remove(walkers.get(0));
+            aiPlayables.remove(walkers.get(0));
             aiCardpool.remove(walkers.get(0));
             cardsNeeded--;
         }
 
-        final CardList spells = AIPlayables.getType("Instant").getOnly2Colors(dcAI.Color1, dcAI.Color2);
-        spells.addAll(AIPlayables.getType("Sorcery").getOnly2Colors(dcAI.Color1, dcAI.Color2));
-        spells.addAll(AIPlayables.getType("Enchantment").getOnly2Colors(dcAI.Color1, dcAI.Color2));
+        final CardList spells = aiPlayables.getType("Instant").getOnly2Colors(dcAI.color1, dcAI.color2);
+        spells.addAll(aiPlayables.getType("Sorcery").getOnly2Colors(dcAI.color1, dcAI.color2));
+        spells.addAll(aiPlayables.getType("Enchantment").getOnly2Colors(dcAI.color1, dcAI.color2));
 
         while ((cardsNeeded > 0) && (spells.size() > 1)) {
             final Card c = spells.get(MyRandom.getRandom().nextInt(spells.size() - 1));
             deck.add(c);
             spells.remove(c);
-            AIPlayables.remove(c);
+            aiPlayables.remove(c);
             aiCardpool.remove(c);
             cardsNeeded--;
         }
 
-        final CardList splashSpells = AIPlayables.getType("Instant").getColor(dcAI.Splash);
-        splashSpells.addAll(AIPlayables.getType("Sorcery").getColor(dcAI.Splash));
+        final CardList splashSpells = aiPlayables.getType("Instant").getColor(dcAI.splash);
+        splashSpells.addAll(aiPlayables.getType("Sorcery").getColor(dcAI.splash));
 
         while ((cardsNeeded > 0) && (splashSpells.size() > 1)) {
             final Card c = splashSpells.get(MyRandom.getRandom().nextInt(splashSpells.size() - 1));
             deck.add(c);
             splashSpells.remove(c);
-            AIPlayables.remove(c);
+            aiPlayables.remove(c);
             aiCardpool.remove(c);
             cardsNeeded--;
         }
 
-        final CardList lands = AIPlayables.getType("Land");
+        final CardList lands = aiPlayables.getType("Land");
         if (lands.size() > 0) {
-            final DeckColors AIdc = dcAI; // just for the filter
+            final DeckColors aiDC = dcAI; // just for the filter
 
             lands.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
                     final ArrayList<Ability_Mana> maList = c.getManaAbility();
                     for (int j = 0; j < maList.size(); j++) {
-                        if (maList.get(j).canProduce(AIdc.Mana1) || maList.get(j).canProduce(AIdc.Mana2)) {
+                        if (maList.get(j).canProduce(aiDC.mana1) || maList.get(j).canProduce(aiDC.mana2)) {
                             return true;
                         }
                     }
@@ -328,16 +328,16 @@ public class SealedDeck {
 
                     deck.add(c);
                     aiCardpool.remove(c);
-                    AIPlayables.remove(c);
+                    aiPlayables.remove(c);
                     landsNeeded--;
 
                 }
             }
 
-            if (landsNeeded > 0) // attempt to optimize basic land counts
-                                 // according to color representation
-            {
-                final CCnt ClrCnts[] = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+            if (landsNeeded > 0) {
+             // attempt to optimize basic land counts
+                // according to color representation
+                final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                         new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
                 // count each card color using mana costs
@@ -350,15 +350,15 @@ public class SealedDeck {
                         final char c = mc.charAt(j);
 
                         if (c == 'W') {
-                            ClrCnts[0].setCount(ClrCnts[0].getCount() + 1);
+                            clrCnts[0].setCount(clrCnts[0].getCount() + 1);
                         } else if (c == 'U') {
-                            ClrCnts[1].setCount(ClrCnts[1].getCount() + 1);
+                            clrCnts[1].setCount(clrCnts[1].getCount() + 1);
                         } else if (c == 'B') {
-                            ClrCnts[2].setCount(ClrCnts[2].getCount() + 1);
+                            clrCnts[2].setCount(clrCnts[2].getCount() + 1);
                         } else if (c == 'R') {
-                            ClrCnts[3].setCount(ClrCnts[3].getCount() + 1);
+                            clrCnts[3].setCount(clrCnts[3].getCount() + 1);
                         } else if (c == 'G') {
-                            ClrCnts[4].setCount(ClrCnts[4].getCount() + 1);
+                            clrCnts[4].setCount(clrCnts[4].getCount() + 1);
                         }
                     }
                 }
@@ -366,25 +366,25 @@ public class SealedDeck {
                 // total of all ClrCnts
                 int totalColor = 0;
                 for (i = 0; i < 5; i++) {
-                    totalColor += ClrCnts[i].getCount();
+                    totalColor += clrCnts[i].getCount();
                 }
 
                 for (i = 0; i < 5; i++) {
-                    if (ClrCnts[i].getCount() > 0) { // calculate number of
+                    if (clrCnts[i].getCount() > 0) { // calculate number of
                                                      // lands for
                         // each color
-                        final float p = (float) ClrCnts[i].getCount() / (float) totalColor;
+                        final float p = (float) clrCnts[i].getCount() / (float) totalColor;
                         final int nLand = (int) (landsNeeded * p) + 1;
                         // tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand
                         // + "\n";
                         if (Constant.Runtime.DEV_MODE[0]) {
-                            System.out.println("Basics[" + ClrCnts[i].getColor() + "]:" + nLand);
+                            System.out.println("Basics[" + clrCnts[i].getColor() + "]:" + nLand);
                         }
 
                         for (int j = 0; j <= nLand; j++) {
-                            final Card c = AllZone.getCardFactory().getCard(ClrCnts[i].getColor(),
+                            final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
                                     AllZone.getComputerPlayer());
-                            c.setCurSetCode(this.LandSetCode[0]);
+                            c.setCurSetCode(this.getLandSetCode()[0]);
                             deck.add(c);
                             landsNeeded--;
                         }
@@ -392,10 +392,10 @@ public class SealedDeck {
                 }
                 int n = 0;
                 while (landsNeeded > 0) {
-                    if (ClrCnts[n].getCount() > 0) {
-                        final Card c = AllZone.getCardFactory().getCard(ClrCnts[n].getColor(),
+                    if (clrCnts[n].getCount() > 0) {
+                        final Card c = AllZone.getCardFactory().getCard(clrCnts[n].getColor(),
                                 AllZone.getComputerPlayer());
-                        c.setCurSetCode(this.LandSetCode[0]);
+                        c.setCurSetCode(this.getLandSetCode()[0]);
                         deck.add(c);
                         landsNeeded--;
 
@@ -424,27 +424,41 @@ public class SealedDeck {
     }
 
     /**
+     * @return the landSetCode
+     */
+    public String[] getLandSetCode() {
+        return landSetCode;
+    }
+
+    /**
+     * @param landSetCode the landSetCode to set
+     */
+    public void setLandSetCode(String[] landSetCode) {
+        this.landSetCode = landSetCode; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
      * The Class DeckColors.
      */
     class DeckColors {
 
         /** The Color1. */
-        public String Color1 = "none";
+        private String color1 = "none";
 
         /** The Color2. */
-        public String Color2 = "none";
+        private String color2 = "none";
 
         /** The Splash. */
-        public String Splash = "none";
+        private String splash = "none";
 
         /** The Mana1. */
-        public String Mana1 = "";
+        private String mana1 = "";
 
         /** The Mana2. */
-        public String Mana2 = "";
+        private String mana2 = "";
 
         /** The Mana s. */
-        public String ManaS = "";
+        private String manaS = "";
 
         /**
          * Instantiates a new deck colors.
@@ -457,8 +471,8 @@ public class SealedDeck {
          *            the sp
          */
         public DeckColors(final String c1, final String c2, final String sp) {
-            this.Color1 = c1;
-            this.Color2 = c2;
+            this.color1 = c1;
+            this.color2 = c2;
             // Splash = sp;
         }
 
@@ -476,13 +490,13 @@ public class SealedDeck {
          *            the color
          * @return the string
          */
-        public String ColorToMana(final String color) {
-            final String Mana[] = { "W", "U", "B", "R", "G" };
-            final String Clrs[] = { "white", "blue", "black", "red", "green" };
+        public String colorToMana(final String color) {
+            final String[] mana = { "W", "U", "B", "R", "G" };
+            final String[] clrs = { "white", "blue", "black", "red", "green" };
 
             for (int i = 0; i < Constant.Color.ONLY_COLORS.length; i++) {
-                if (Clrs[i].equals(color)) {
-                    return Mana[i];
+                if (clrs[i].equals(color)) {
+                    return mana[i];
                 }
             }
 
