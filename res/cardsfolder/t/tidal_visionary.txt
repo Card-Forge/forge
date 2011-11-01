@@ -9,4 +9,6 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_visionary.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/80.jpg
+Oracle:{T}: Target creature becomes the color of your choice until end of turn.
 End

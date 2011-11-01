@@ -2,11 +2,14 @@ Name:Coalition Victory
 ManaCost:3 W U B R G
 Types:Sorcery
 Text:no text
-A:SP$ WinsGame | Cost$ 3 W U B R G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ10 | SpellDescription$ If you have all basic lands and all colored creatures, you win mutha fucker.
+A:SP$ WinsGame | Cost$ 3 W U B R G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ10 | SpellDescription$ You win the game if you control a land of each basic land type and a creature of each color.
 SVar:Z:Count$ColoredCreatures
 SVar:Y:Count$Domain
 SVar:X:SVar$Y/Plus.Z
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalition_victory.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/241.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/91.jpg
+Oracle:You win the game if you control a land of each basic land type and a creature of each color.
 End
