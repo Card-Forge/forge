@@ -1453,6 +1453,7 @@ res/cardsfolder/c/clout_of_the_dominus.txt svneol=native#text/plain
 res/cardsfolder/c/clutch_of_the_undercity.txt svneol=native#text/plain
 res/cardsfolder/c/clutch_of_undeath.txt svneol=native#text/plain
 res/cardsfolder/c/coal_golem.txt svneol=native#text/plain
+res/cardsfolder/c/coalition_victory.txt -text svneol=unset#text/plain
 res/cardsfolder/c/coast_watcher.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_drake.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_hornclaw.txt svneol=native#text/plain
