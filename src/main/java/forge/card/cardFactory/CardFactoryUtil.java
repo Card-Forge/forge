@@ -901,7 +901,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final SpellAbility[] sa = sourceCard.getSpellAbility();
-                AllZone.getGameAction().moveToStack(sourceCard);
+                sa[0].setSourceCard(AllZone.getGameAction().moveToStack(sourceCard));
                 final SpellAbility flash = sa[0];
                 flash.setFlashBackAbility(true);
                 AllZone.getStack().add(flash);

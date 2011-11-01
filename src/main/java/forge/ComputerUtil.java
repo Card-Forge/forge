@@ -104,7 +104,7 @@ public class ComputerUtil {
         Card source = sa.getSourceCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            AllZone.getGameAction().moveToStack(source);
+            sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
         }
 
         Cost cost = sa.getPayCosts();
@@ -241,7 +241,7 @@ public class ComputerUtil {
         Card source = bestSA.getSourceCard();
 
         if (bestSA.isSpell() && !source.isCopiedSpell()) {
-            AllZone.getGameAction().moveToStack(source);
+            bestSA.setSourceCard(AllZone.getGameAction().moveToStack(source));
         }
 
         Cost cost = bestSA.getPayCosts();
@@ -275,7 +275,7 @@ public class ComputerUtil {
         if (canPayCost(sa)) {
             Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                AllZone.getGameAction().moveToStack(source);
+                sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
             }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
@@ -299,7 +299,7 @@ public class ComputerUtil {
 
         Card source = sa.getSourceCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            AllZone.getGameAction().moveToStack(source);
+            sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
         }
 
         AllZone.getStack().add(sa);
@@ -319,7 +319,7 @@ public class ComputerUtil {
         if (canPayCost(sa)) {
             Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                AllZone.getGameAction().moveToStack(source);
+                sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
             }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());

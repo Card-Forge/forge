@@ -161,7 +161,7 @@ public class MagicStack extends MyObservable {
         if (ability.isSpell()) {
             final Card source = ability.getSourceCard();
             if (!source.isCopiedSpell() && !AllZone.getZoneOf(source).is(Constant.Zone.Stack)) {
-                AllZone.getGameAction().moveToStack(source);
+                //ability.setSourceCard(AllZone.getGameAction().moveToStack(source));
             }
         }
 

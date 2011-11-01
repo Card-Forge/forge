@@ -93,7 +93,7 @@ public class SpellAbility_Requirements {
                 final Card c = this.ability.getSourceCard();
 
                 this.fromZone = AllZone.getZoneOf(c);
-                AllZone.getGameAction().moveToStack(c);
+                this.ability.setSourceCard(AllZone.getGameAction().moveToStack(c));
             }
         }
 

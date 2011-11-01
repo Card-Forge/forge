@@ -1861,7 +1861,7 @@ public class GameAction {
             if (sa.isSpell()) {
                 Card c = sa.getSourceCard();
                 if (!c.isCopiedSpell()) {
-                    AllZone.getGameAction().moveToStack(c);
+                    sa.setSourceCard(AllZone.getGameAction().moveToStack(c));
                 }
             }
             boolean x = false;
@@ -2513,7 +2513,7 @@ public class GameAction {
                 if (sa.getAfterPayMana() == null) {
                     Card source = sa.getSourceCard();
                     if (sa.isSpell() && !source.isCopiedSpell()) {
-                        AllZone.getGameAction().moveToStack(source);
+                        sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
                     }
 
                     AllZone.getStack().add(sa);

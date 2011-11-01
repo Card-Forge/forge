@@ -183,7 +183,7 @@ public class Input_PayManaCost extends Input {
             // if this is a spell, move it to the Stack ZOne
 
             if (spell.isSpell()) {
-                AllZone.getGameAction().moveToStack(originalCard);
+                spell.setSourceCard(AllZone.getGameAction().moveToStack(originalCard));
             }
 
             if (spell.getAfterPayMana() != null) {
