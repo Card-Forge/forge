@@ -103,7 +103,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.cdArea.setLineWrap(true);
         this.cdArea.setWrapStyleWord(true);
 
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
             this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
             this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));

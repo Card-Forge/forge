@@ -89,7 +89,7 @@ public class DeckImport extends JDialog {
         this.setResizable(false);
         this.setTitle("Deck Import (wip)");
 
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             final Font fButtons = new java.awt.Font("Dialog", 0, 13);
             this.cmdAccept.setFont(fButtons);
             this.cmdCancel.setFont(fButtons);

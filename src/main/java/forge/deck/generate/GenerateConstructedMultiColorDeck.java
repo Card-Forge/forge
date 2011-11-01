@@ -364,7 +364,7 @@ public class GenerateConstructedMultiColorDeck {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
-                        && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
+                        && !Singletons.getModel().getPreferences().isDeckGenRmvArtifacts();
             }
         });
         out.addAll(artifact);
@@ -372,7 +372,7 @@ public class GenerateConstructedMultiColorDeck {
         out = out.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().deckGenRmvSmall) {
+                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().isDeckGenRmvSmall()) {
                     return false;
                 }
 
@@ -418,7 +418,7 @@ public class GenerateConstructedMultiColorDeck {
                 // is this really a colorless artifact and not something
                 // wierd like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
-                        && !Singletons.getModel().getPreferences().deckGenRmvArtifacts;
+                        && !Singletons.getModel().getPreferences().isDeckGenRmvArtifacts();
             }
         });
         out.addAll(artifact);
@@ -426,7 +426,7 @@ public class GenerateConstructedMultiColorDeck {
         out = out.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().deckGenRmvSmall) {
+                if (c.isCreature() && (c.getNetAttack() <= 1) && Singletons.getModel().getPreferences().isDeckGenRmvSmall()) {
                     return false;
                 }
 

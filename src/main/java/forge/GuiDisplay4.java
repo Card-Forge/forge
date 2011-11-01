@@ -861,7 +861,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private void initComponents() {
         // Preparing the Frame
         setTitle(ForgeProps.getLocalized(Lang.PROGRAM_NAME));
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             setFont(new Font("Times New Roman", 0, 16));
         }
         getContentPane().setLayout(new BorderLayout());
@@ -993,7 +993,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         // adding the individual parts
 
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             initFonts(pane);
         }
 
@@ -1186,7 +1186,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppPCLabel.setForeground(greenColor);
 
         JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(ComputerHand.BUTTON), SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             oppHandLabel.setFont(statFont);
         }
 
@@ -1194,7 +1194,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppGraveButton.setText((String) computerGraveyardAction.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             oppGraveButton.setFont(statFont);
         }
 
@@ -1205,7 +1205,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppRemovedButton.setText((String) computerRemovedAction.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             oppRemovedButton.setFont(statFont);
         }
 
@@ -1280,12 +1280,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerPCLabel.setForeground(greenColor);
 
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HumanLibrary.BUTTON), SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerLibraryLabel.setFont(statFont);
         }
 
         JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HumanHand.TITLE), SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerHandLabel.setFont(statFont);
         }
 
@@ -1295,7 +1295,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerGraveButton.setText((String) humanGraveyardAction.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerGraveButton.setFont(statFont);
         }
 
@@ -1303,7 +1303,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerFlashBackButton.setText((String) humanFlashbackAction.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerFlashBackButton.setFont(statFont);
         }
 
@@ -1317,7 +1317,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerRemovedButton.setText((String) humanRemovedACtion.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerRemovedButton.setFont(statFont);
         }
 
@@ -1465,19 +1465,19 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     public final boolean loadPrefs() {
         ForgePreferences fp = Singletons.getModel().getPreferences();
 
-        cbAIUpkeep.setSelected(fp.bAIUpkeep);
-        cbAIDraw.setSelected(fp.bAIDraw);
-        cbAIEndOfTurn.setSelected(fp.bAIEOT);
-        cbAIBeginCombat.setSelected(fp.bAIBeginCombat);
-        cbAIEndCombat.setSelected(fp.bAIEndCombat);
+        cbAIUpkeep.setSelected(fp.isbAIUpkeep());
+        cbAIDraw.setSelected(fp.isbAIDraw());
+        cbAIEndOfTurn.setSelected(fp.isbAIEOT());
+        cbAIBeginCombat.setSelected(fp.isbAIBeginCombat());
+        cbAIEndCombat.setSelected(fp.isbAIEndCombat());
 
-        cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
-        cbHumanDraw.setSelected(fp.bHumanDraw);
-        cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
-        cbHumanBeginCombat.setSelected(fp.bHumanBeginCombat);
-        cbHumanEndCombat.setSelected(fp.bHumanEndCombat);
+        cbHumanUpkeep.setSelected(fp.isbHumanUpkeep());
+        cbHumanDraw.setSelected(fp.isbHumanDraw());
+        cbHumanEndOfTurn.setSelected(fp.isbHumanEOT());
+        cbHumanBeginCombat.setSelected(fp.isbHumanBeginCombat());
+        cbHumanEndCombat.setSelected(fp.isbHumanEndCombat());
 
-        canLoseByDecking.setSelected(fp.millingLossCondition);
+        canLoseByDecking.setSelected(fp.isMillingLossCondition());
 
         return true;
     }
@@ -1493,19 +1493,19 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         Constant.Runtime.MILL[0] = canLoseByDecking.isSelected();
         ForgePreferences fp = Singletons.getModel().getPreferences();
 
-        fp.bAIUpkeep = cbAIUpkeep.isSelected();
-        fp.bAIDraw = cbAIDraw.isSelected();
-        fp.bAIEOT = cbAIEndOfTurn.isSelected();
-        fp.bAIBeginCombat = cbAIBeginCombat.isSelected();
-        fp.bAIEndCombat = cbAIEndCombat.isSelected();
+        fp.setbAIUpkeep(cbAIUpkeep.isSelected());
+        fp.setbAIDraw(cbAIDraw.isSelected());
+        fp.setbAIEOT(cbAIEndOfTurn.isSelected());
+        fp.setbAIBeginCombat(cbAIBeginCombat.isSelected());
+        fp.setbAIEndCombat(cbAIEndCombat.isSelected());
 
-        fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
-        fp.bHumanDraw = cbHumanDraw.isSelected();
-        fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
-        fp.bHumanBeginCombat = cbHumanBeginCombat.isSelected();
-        fp.bHumanEndCombat = cbHumanEndCombat.isSelected();
+        fp.setbHumanUpkeep(cbHumanUpkeep.isSelected());
+        fp.setbHumanDraw(cbHumanDraw.isSelected());
+        fp.setbHumanEOT(cbHumanEndOfTurn.isSelected());
+        fp.setbHumanBeginCombat(cbHumanBeginCombat.isSelected());
+        fp.setbHumanEndCombat(cbHumanEndCombat.isSelected());
 
-        fp.millingLossCondition = canLoseByDecking.isSelected();
+        fp.setMillingLossCondition(canLoseByDecking.isSelected());
 
         return true;
     }

@@ -595,7 +595,7 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
-        if ((card == null) || !Singletons.getModel().getPreferences().cardOverlay) {
+        if ((card == null) || !Singletons.getModel().getPreferences().isCardOverlay()) {
             return;
         }
 
@@ -645,7 +645,7 @@ public class CardPanel extends JPanel implements CardContainer {
         final Insets i = this.getInsets();
         final Image image = card == null ? null : ImageCache.getImage(card, this.getWidth() - i.left - i.right,
                 this.getHeight() - i.top - i.bottom);
-        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().cardOverlay) {
+        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().isCardOverlay()) {
             this.setText(this.getGameCard());
         }
 

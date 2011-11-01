@@ -94,23 +94,23 @@ public class ApplicationView implements FView {
 
             final ForgePreferences preferences = model.getPreferences();
 
-            OldGuiNewGame.useLAFFonts.setSelected(preferences.lafFonts);
+            OldGuiNewGame.useLAFFonts.setSelected(preferences.isLafFonts());
             // newGuiCheckBox.setSelected(preferences.newGui);
-            OldGuiNewGame.smoothLandCheckBox.setSelected(preferences.stackAiLand);
-            OldGuiNewGame.devModeCheckBox.setSelected(preferences.developerMode);
-            OldGuiNewGame.cardOverlay.setSelected(preferences.cardOverlay);
+            OldGuiNewGame.smoothLandCheckBox.setSelected(preferences.isStackAiLand());
+            OldGuiNewGame.devModeCheckBox.setSelected(preferences.isDeveloperMode());
+            OldGuiNewGame.cardOverlay.setSelected(preferences.isCardOverlay());
 
             // FindBugs doesn't like the next line.
-            ImageCache.setScaleLargerThanOriginal(preferences.scaleLargerThanOriginal);
+            ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
 
-            OldGuiNewGame.cardScale.setSelected(preferences.scaleLargerThanOriginal);
-            CardStackOffsetAction.set(preferences.stackOffset);
-            CardStackAction.setVal(preferences.maxStackSize);
-            CardSizesAction.set(preferences.cardSize);
-            OldGuiNewGame.upldDrftCheckBox.setSelected(preferences.uploadDraftAI);
-            OldGuiNewGame.foilRandomCheckBox.setSelected(preferences.randCFoil);
+            OldGuiNewGame.cardScale.setSelected(preferences.isScaleLargerThanOriginal());
+            CardStackOffsetAction.set(preferences.getStackOffset());
+            CardStackAction.setVal(preferences.getMaxStackSize());
+            CardSizesAction.set(preferences.getCardSize());
+            OldGuiNewGame.upldDrftCheckBox.setSelected(preferences.isUploadDraftAI());
+            OldGuiNewGame.foilRandomCheckBox.setSelected(preferences.isRandCFoil());
 
-            AllZone.setSkin(new FSkin(preferences.skin));
+            AllZone.setSkin(new FSkin(preferences.getSkin()));
 
         } catch (Exception exn) {
             Log.error("Error loading preferences: " + exn);
@@ -123,10 +123,10 @@ public class ApplicationView implements FView {
                         final ForgePreferences finalPreferences = model.getPreferences();
 
                         try {
-                            if ("".equals(finalPreferences.laf)) {
+                            if ("".equals(finalPreferences.getLaf())) {
                                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                             } else {
-                                UIManager.setLookAndFeel(finalPreferences.laf);
+                                UIManager.setLookAndFeel(finalPreferences.getLaf());
                             }
                         } catch (Exception ex) {
                             ErrorViewer.showError(ex);

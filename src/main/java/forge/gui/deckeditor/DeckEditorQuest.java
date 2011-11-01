@@ -197,7 +197,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.removeButton.setText("Remove Card");
@@ -215,7 +215,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
             }
         });
         // addButton.setIcon(downIcon);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.addButton.setBounds(new Rectangle(23, 403, 146, 49));
@@ -227,7 +227,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
                 DeckEditorQuest.this.analysisButtonActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
@@ -245,7 +245,7 @@ public final class DeckEditorQuest extends DeckEditorBase implements NewConstant
 
         final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            if (!Singletons.getModel().getPreferences().lafFonts) {
+            if (!Singletons.getModel().getPreferences().isLafFonts()) {
                 box.setFont(f);
             }
             box.setOpaque(false);

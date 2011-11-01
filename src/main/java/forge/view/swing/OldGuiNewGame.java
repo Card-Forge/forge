@@ -263,14 +263,14 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         generatedDeck.add(removeSmallCreatures);
         removeSmallCreatures.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().deckGenRmvSmall = removeSmallCreatures.isSelected();
+                Singletons.getModel().getPreferences().setDeckGenRmvSmall(removeSmallCreatures.isSelected());
             }
         });
 
         generatedDeck.add(removeArtifacts);
         removeArtifacts.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().deckGenRmvArtifacts = removeArtifacts.isSelected();
+                Singletons.getModel().getPreferences().setDeckGenRmvArtifacts(removeArtifacts.isSelected());
             }
         });
 
@@ -534,7 +534,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.DEV_MODE[0] = devModeCheckBox.isSelected();
-                Singletons.getModel().getPreferences().developerMode = Constant.Runtime.DEV_MODE[0];
+                Singletons.getModel().getPreferences().setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
             }
         });
 
@@ -546,7 +546,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         upldDrftCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.UPLOAD_DRAFT[0] = upldDrftCheckBox.isSelected();
-                Singletons.getModel().getPreferences().uploadDraftAI = Constant.Runtime.UPLOAD_DRAFT[0];
+                Singletons.getModel().getPreferences().setUploadDraftAI(Constant.Runtime.UPLOAD_DRAFT[0]);
             }
         });
 
@@ -555,7 +555,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         foilRandomCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.RANDOM_FOIL[0] = foilRandomCheckBox.isSelected();
-                Singletons.getModel().getPreferences().randCFoil = Constant.Runtime.RANDOM_FOIL[0];
+                Singletons.getModel().getPreferences().setRandCFoil(Constant.Runtime.RANDOM_FOIL[0]);
             }
         });
 
@@ -1058,7 +1058,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                         return;
                     }
                     // UIManager.setLookAndFeel(info[index].getClassName());
-                    Singletons.getModel().getPreferences().laf = LAFMap.get(name);
+                    Singletons.getModel().getPreferences().setLaf(LAFMap.get(name));
                     UIManager.setLookAndFeel(LAFMap.get(name));
 
                     SwingUtilities.updateComponentTreeUI(c);
@@ -1322,7 +1322,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the index
          */
         public static void set(final int index) {
-            Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
+            Singletons.getModel().getPreferences().setCardSize(CardSizeType.valueOf(keys[index].toLowerCase()));
             Constant.Runtime.WIDTH[0] = widths[index];
             Constant.Runtime.HEIGHT[0] = (int) Math.round((widths[index] * (3.5 / 2.5)));
         }
@@ -1334,7 +1334,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the s
          */
         public static void set(final CardSizeType s) {
-            Singletons.getModel().getPreferences().cardSize = s;
+            Singletons.getModel().getPreferences().setCardSize(s);
             int index = 0;
             for (String str : keys) {
                 if (str.toLowerCase().equals(s.toString())) {
@@ -1401,7 +1401,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the index
          */
         public static void set(final int index) {
-            Singletons.getModel().getPreferences().maxStackSize = values[index];
+            Singletons.getModel().getPreferences().setMaxStackSize(values[index]);
             Constant.Runtime.STACK_SIZE[0] = values[index];
         }
 
@@ -1412,7 +1412,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the new val
          */
         public static void setVal(final int val) {
-            Singletons.getModel().getPreferences().maxStackSize = val;
+            Singletons.getModel().getPreferences().setMaxStackSize(val);
             Constant.Runtime.STACK_SIZE[0] = val;
         }
     }
@@ -1468,7 +1468,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the index
          */
         public static void set(final int index) {
-            Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
+            Singletons.getModel().getPreferences().setStackOffset(StackOffsetType.valueOf(keys[index].toLowerCase()));
             Constant.Runtime.STACK_OFFSET[0] = offsets[index];
         }
 
@@ -1479,7 +1479,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the s
          */
         public static void set(final StackOffsetType s) {
-            Singletons.getModel().getPreferences().stackOffset = s;
+            Singletons.getModel().getPreferences().setStackOffset(s);
             int index = 0;
             for (String str : keys) {
                 if (str.toLowerCase().equals(s.toString())) {
@@ -1621,15 +1621,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     public final boolean exit() {
         try {
             ForgePreferences preferences = Singletons.getModel().getPreferences();
-            preferences.laf = UIManager.getLookAndFeel().getClass().getName();
-            preferences.lafFonts = useLAFFonts.isSelected();
+            preferences.setLaf(UIManager.getLookAndFeel().getClass().getName());
+            preferences.setLafFonts(useLAFFonts.isSelected());
             // preferences.newGui = newGuiCheckBox.isSelected();
-            preferences.stackAiLand = smoothLandCheckBox.isSelected();
-            preferences.millingLossCondition = Constant.Runtime.MILL[0];
-            preferences.developerMode = Constant.Runtime.DEV_MODE[0];
-            preferences.cardOverlay = cardOverlay.isSelected();
-            preferences.scaleLargerThanOriginal = ImageCache.isScaleLargerThanOriginal();
-            preferences.uploadDraftAI = Constant.Runtime.UPLOAD_DRAFT[0];
+            preferences.setStackAiLand(smoothLandCheckBox.isSelected());
+            preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
+            preferences.setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
+            preferences.setCardOverlay(cardOverlay.isSelected());
+            preferences.setScaleLargerThanOriginal(ImageCache.isScaleLargerThanOriginal());
+            preferences.setUploadDraftAI(Constant.Runtime.UPLOAD_DRAFT[0]);
             preferences.save();
         } catch (Exception ex) {
             int result = JOptionPane.showConfirmDialog(this,

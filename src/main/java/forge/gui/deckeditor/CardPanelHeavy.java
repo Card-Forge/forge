@@ -64,7 +64,7 @@ public class CardPanelHeavy extends CardPanelBase {
                 CardPanelHeavy.this.changeStateButtonActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
         }
 

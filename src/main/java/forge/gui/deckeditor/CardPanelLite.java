@@ -39,7 +39,7 @@ public class CardPanelLite extends CardPanelBase {
                 CardPanelLite.this.bChangeStateActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
         }
 

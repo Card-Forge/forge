@@ -73,10 +73,10 @@ public class FModel {
                                              // PM
         }
 
-        Constant.Runtime.MILL[0] = this.preferences.millingLossCondition;
-        Constant.Runtime.DEV_MODE[0] = this.preferences.developerMode;
-        Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.uploadDraftAI;
-        Constant.Runtime.RANDOM_FOIL[0] = this.preferences.randCFoil;
+        Constant.Runtime.MILL[0] = this.preferences.isMillingLossCondition();
+        Constant.Runtime.DEV_MODE[0] = this.preferences.isDeveloperMode();
+        Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.isUploadDraftAI();
+        Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
 
         final HttpUtil pinger = new HttpUtil();
         if (pinger.getURL("http://cardforge.org/draftAI/ping.php").equals("pong")) {

@@ -587,28 +587,28 @@ public class Gui_HomeScreen {
         pnlSettingsA.add(lblBasic);
         chkDeveloperMode.setOpaque(false);
         chkDeveloperMode.setBackground(clrScrollBackground);
-        chkDeveloperMode.setSelected(Singletons.getModel().getPreferences().developerMode);
+        chkDeveloperMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
         chkDeveloperMode.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().developerMode = chkDeveloperMode.isSelected();
+                Singletons.getModel().getPreferences().setDeveloperMode(chkDeveloperMode.isSelected());
             }
         });
         pnlSettingsA.add(chkDeveloperMode);
         chkStackAiLand.setOpaque(false);
         chkStackAiLand.setBackground(clrScrollBackground);
-        chkStackAiLand.setSelected(Singletons.getModel().getPreferences().stackAiLand);
+        chkStackAiLand.setSelected(Singletons.getModel().getPreferences().isStackAiLand());
         chkStackAiLand.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().stackAiLand = chkStackAiLand.isSelected();
+                Singletons.getModel().getPreferences().setStackAiLand(chkStackAiLand.isSelected());
             }
         });
         pnlSettingsA.add(chkStackAiLand);
         chkUploadDraftData.setBackground(clrScrollBackground);
         chkUploadDraftData.setOpaque(false);
-        chkUploadDraftData.setSelected(Singletons.getModel().getPreferences().uploadDraftAI);
+        chkUploadDraftData.setSelected(Singletons.getModel().getPreferences().isUploadDraftAI());
         chkUploadDraftData.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().uploadDraftAI = chkUploadDraftData.isSelected();
+                Singletons.getModel().getPreferences().setUploadDraftAI(chkUploadDraftData.isSelected());
             }
         });
         pnlSettingsA.add(chkUploadDraftData);
@@ -617,19 +617,19 @@ public class Gui_HomeScreen {
         pnlSettingsA.add(lblGraphs);
         chkMana.setOpaque(false);
         chkMana.setBackground(clrScrollBackground);
-        chkMana.setSelected(Singletons.getModel().getPreferences().cardOverlay);
+        chkMana.setSelected(Singletons.getModel().getPreferences().isCardOverlay());
         chkMana.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().cardOverlay = chkMana.isSelected();
+                Singletons.getModel().getPreferences().setCardOverlay(chkMana.isSelected());
             }
         });
         pnlSettingsA.add(chkMana);
         chkFoil.setOpaque(false);
         chkFoil.setBackground(clrScrollBackground);
-        chkFoil.setSelected(Singletons.getModel().getPreferences().randCFoil);
+        chkFoil.setSelected(Singletons.getModel().getPreferences().isRandCFoil());
         chkFoil.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().randCFoil = chkFoil.isSelected();
+                Singletons.getModel().getPreferences().setRandCFoil(chkFoil.isSelected());
             }
         });
         pnlSettingsA.add(chkFoil);
@@ -646,10 +646,10 @@ public class Gui_HomeScreen {
         pnlSettingsA.add(cmdLAF);
         chkLAF.setOpaque(false);
         chkLAF.setBackground(clrScrollBackground);
-        chkLAF.setSelected(Singletons.getModel().getPreferences().lafFonts);
+        chkLAF.setSelected(Singletons.getModel().getPreferences().isLafFonts());
         chkLAF.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().lafFonts = chkLAF.isSelected();
+                Singletons.getModel().getPreferences().setLafFonts(chkLAF.isSelected());
             }
         });
         pnlSettingsA.add(chkLAF);
@@ -663,10 +663,10 @@ public class Gui_HomeScreen {
         pnlSettingsA.add(cmdSize);
         chkScale.setOpaque(false);
         chkScale.setBackground(clrScrollBackground);
-        chkScale.setSelected(Singletons.getModel().getPreferences().scaleLargerThanOriginal);
+        chkScale.setSelected(Singletons.getModel().getPreferences().isScaleLargerThanOriginal());
         chkScale.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().scaleLargerThanOriginal = chkScale.isSelected();
+                Singletons.getModel().getPreferences().setScaleLargerThanOriginal(chkScale.isSelected());
             }
         });
         pnlSettingsA.add(chkScale);
@@ -683,19 +683,19 @@ public class Gui_HomeScreen {
         pnlSettingsA.add(lblGenGraphs);
         chkRemoveArtifacts.setOpaque(false);
         chkRemoveArtifacts.setBackground(clrScrollBackground);
-        chkRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().deckGenRmvArtifacts);
+        chkRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvArtifacts());
         chkRemoveArtifacts.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().deckGenRmvArtifacts = chkRemoveArtifacts.isSelected();
+                Singletons.getModel().getPreferences().setDeckGenRmvArtifacts(chkRemoveArtifacts.isSelected());
             }
         });
         pnlSettingsA.add(chkRemoveArtifacts);
         chkRemoveSmall.setOpaque(false);
         chkRemoveSmall.setBackground(clrScrollBackground);
-        chkRemoveSmall.setSelected(Singletons.getModel().getPreferences().deckGenRmvSmall);
+        chkRemoveSmall.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvSmall());
         chkRemoveSmall.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().deckGenRmvSmall = chkRemoveSmall.isSelected();
+                Singletons.getModel().getPreferences().setDeckGenRmvSmall(chkRemoveSmall.isSelected());
             }
         });
         pnlSettingsA.add(chkRemoveSmall);
@@ -1337,7 +1337,7 @@ public class Gui_HomeScreen {
                     return;
                 }
                 // UIManager.setLookAndFeel(info[index].getClassName());
-                Singletons.getModel().getPreferences().laf = LAFMap.get(name);
+                Singletons.getModel().getPreferences().setLaf(LAFMap.get(name));
                 UIManager.setLookAndFeel(LAFMap.get(name));
 
                 // SwingUtilities.updateComponentTreeUI(NG2);
@@ -1360,7 +1360,7 @@ public class Gui_HomeScreen {
                     return;
                 }
 
-                Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
+                Singletons.getModel().getPreferences().setCardSize(CardSizeType.valueOf(keys[index].toLowerCase()));
                 Constant.Runtime.WIDTH[0] = widths[index];
                 Constant.Runtime.HEIGHT[0] = heights[index];
 
@@ -1381,7 +1381,7 @@ public class Gui_HomeScreen {
                 if (index == -1) {
                     return;
                 }
-                Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
+                Singletons.getModel().getPreferences().setStackOffset(StackOffsetType.valueOf(keys[index].toLowerCase()));
                 Constant.Runtime.STACK_OFFSET[0] = offsets[index];
 
             } catch (Exception ex) {

@@ -211,7 +211,7 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         this.sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.sellButton.setText("Sell Card");
@@ -229,7 +229,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             }
         });
 
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.buyButton.setBounds(new Rectangle(23, 403, 146, 49));
@@ -241,12 +241,12 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         this.creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         }
         this.sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
         this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         }
         this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");

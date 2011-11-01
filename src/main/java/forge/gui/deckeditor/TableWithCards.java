@@ -116,7 +116,7 @@ public final class TableWithCards {
         this.jScrollPane.setToolTipText(tableToolTip);
         this.jScrollPane.getViewport().add(this.table, null);
 
-        if (!Singletons.getModel().getPreferences().lafFonts) {
+        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
         }
         this.statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
