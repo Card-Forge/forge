@@ -8091,5 +8091,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
+    
+    public boolean isInZone(final Constant.Zone zone) {
+        return AllZone.isCardInZone(this, zone);
+    }
 
 } // end Card class

@@ -495,6 +495,25 @@ public final class AllZone implements NewConstants {
 
         return null;
     }
+    
+    public static boolean isCardInZone(final Card c, Constant.Zone zone) {
+        final FGameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) {
+            return false;
+        }
+
+        if (zone.equals(Constant.Zone.Stack) && gameState.getStackZone().contains(c)) {
+            return true;
+        }
+
+        else for (Player p : gameState.getPlayers()) {
+            if(p.getZone(zone).contains(c)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * <p>

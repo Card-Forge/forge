@@ -303,8 +303,7 @@ public class StaticAbility {
             effectZone = Zone.smartValueOf(this.mapParams.get("EffectZone"));
         }
 
-        if ((effectZone != null)
-                && (!AllZone.getZoneOf(this.hostCard).getZoneType().equals(effectZone) || this.hostCard.isPhasedOut())) {
+        if ((effectZone != null) && (!this.hostCard.isInZone(effectZone) || this.hostCard.isPhasedOut())) {
             return false;
         }
 
