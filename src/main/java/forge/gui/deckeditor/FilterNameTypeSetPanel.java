@@ -112,12 +112,12 @@ public class FilterNameTypeSetPanel extends JComponent {
 
         if (StringUtils.isNotBlank(this.txtCardType.getText())) {
             rules.add(Predicate.brigde(CardRules.Predicates.joinedType(StringOp.CONTAINS, this.txtCardType.getText()),
-                    CardPrinted.fnGetRules));
+                    CardPrinted.FN_GET_RULES));
         }
 
         if (StringUtils.isNotBlank(this.txtCardRules.getText())) {
             rules.add(Predicate.brigde(CardRules.Predicates.rules(StringOp.CONTAINS, this.txtCardRules.getText()),
-                    CardPrinted.fnGetRules));
+                    CardPrinted.FN_GET_RULES));
         }
 
         if (this.searchSetCombo.getSelectedIndex() != 0) {

@@ -184,7 +184,7 @@ public final class QuestData {
         setDifficulty(diff);
 
         Predicate<CardPrinted> filter = Predicate.and(standardStart ? SetUtils.getStandard().getFilterPrinted()
-                : CardPrinted.Predicates.Presets.isTrue, CardPrinted.Predicates.Presets.nonAlternate);
+                : CardPrinted.Predicates.Presets.IS_TRUE, CardPrinted.Predicates.Presets.NON_ALTERNATE);
 
         myCards.setupNewGameCardPool(filter, diff);
         credits = QuestPreferences.getStartingCredits();

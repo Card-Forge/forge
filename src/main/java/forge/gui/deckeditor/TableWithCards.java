@@ -171,8 +171,8 @@ public final class TableWithCards {
      */
     public static String getStats(final ItemPoolView<InventoryItem> deck) {
         final int total = deck.countAll();
-        final int creature = CardRules.Predicates.Presets.IS_CREATURE.aggregate(deck, deck.fnToCard, deck.fnToCount);
-        final int land = CardRules.Predicates.Presets.IS_LAND.aggregate(deck, deck.fnToCard, deck.fnToCount);
+        final int creature = CardRules.Predicates.Presets.IS_CREATURE.aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+        final int land = CardRules.Predicates.Presets.IS_LAND.aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
 
         final StringBuffer show = new StringBuffer();
         show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ")
@@ -180,7 +180,7 @@ public final class TableWithCards {
         final String[] color = Constant.Color.ONLY_COLORS;
         final List<Predicate<CardRules>> predicates = CardRules.Predicates.Presets.COLORS;
         for (int i = 0; i < color.length; ++i) {
-            show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, deck.fnToCard)));
+            show.append(String.format(", %s - %d", color[i], predicates.get(i).count(deck, deck.getFnToCard())));
         }
 
         return show.toString();
@@ -344,12 +344,12 @@ public final class TableWithCards {
         }
 
         if (useFilter && this.wantUnique) {
-            this.model.addCards(this.filter.uniqueByLast(this.pool, this.pool.fnToCardName, this.pool.fnToPrinted));
+            this.model.addCards(this.filter.uniqueByLast(this.pool, this.pool.getFnToCardName(), this.pool.getFnToPrinted()));
         } else if (useFilter) {
-            this.model.addCards(this.filter.select(this.pool, this.pool.fnToPrinted));
+            this.model.addCards(this.filter.select(this.pool, this.pool.getFnToPrinted()));
         } else if (this.wantUnique) {
             this.model.addCards(CardRules.Predicates.Presets.CONSTANT_TRUE.uniqueByLast(this.pool,
-                    this.pool.fnToCardName, this.pool.fnToCard));
+                    this.pool.getFnToCardName(), this.pool.getFnToCard()));
         }
 
         this.model.resort();

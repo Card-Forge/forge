@@ -113,7 +113,7 @@ public final class QuestUtilCards {
         q.newCardList.add(card);
     }
 
-    private static final Predicate<CardPrinted> rarePredicate = CardPrinted.Predicates.Presets.isRareOrMythic;
+    private static final Predicate<CardPrinted> rarePredicate = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
     /**
      * Adds the random rare.
@@ -283,7 +283,7 @@ public final class QuestUtilCards {
             int rollD100 = MyRandom.getRandom().nextInt(100);
             Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2
                     : filterNotExt);
-            q.shopList.addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.fnFromSet));
+            q.shopList.addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
 
         addBasicLands(q.shopList, 10, 5);

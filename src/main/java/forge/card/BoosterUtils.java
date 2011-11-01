@@ -63,12 +63,12 @@ public final class BoosterUtils {
         final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.isCommon), numCommon, colorFilters));
+                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_COMMON), numCommon, colorFilters));
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.isUncommon), numUncommon, colorFilters));
+                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON), numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.isMythicRare);
+        final Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
         final boolean haveMythics = filterMythics.any(cardpool);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to
@@ -80,7 +80,7 @@ public final class BoosterUtils {
         }
 
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool,
-                Predicate.and(filter, CardPrinted.Predicates.Presets.isRare), nRares, colorFilters));
+                Predicate.and(filter, CardPrinted.Predicates.Presets.IS_RARE), nRares, colorFilters));
         if (nMythics > 0) {
             cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
         }
@@ -120,7 +120,7 @@ public final class BoosterUtils {
             if (size > 0) {
                 final Predicate<CardRules> color2 = allowedColors.get(iAttempt % size);
                 if (color2 != null) {
-                    card = Predicate.and(filter, color2, CardPrinted.fnGetRules).random(source);
+                    card = Predicate.and(filter, color2, CardPrinted.FN_GET_RULES).random(source);
                 }
             }
 
@@ -205,13 +205,13 @@ public final class BoosterUtils {
         Predicate<CardPrinted> rFilter;
         switch (rarity) {
         case Rare:
-            rFilter = CardPrinted.Predicates.Presets.isRareOrMythic;
+            rFilter = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
             break;
         case Common:
-            rFilter = CardPrinted.Predicates.Presets.isCommon;
+            rFilter = CardPrinted.Predicates.Presets.IS_COMMON;
             break;
         case Uncommon:
-            rFilter = CardPrinted.Predicates.Presets.isUncommon;
+            rFilter = CardPrinted.Predicates.Presets.IS_UNCOMMON;
             break;
         default:
             rFilter = Predicate.getTrue(CardPrinted.class);
@@ -240,7 +240,7 @@ public final class BoosterUtils {
                 colorFilter = Predicate.getTrue(CardRules.class);
             }
         }
-        return Predicate.and(rFilter, colorFilter, CardPrinted.fnGetRules);
+        return Predicate.and(rFilter, colorFilter, CardPrinted.FN_GET_RULES);
     }
 
     // return List<CardPrinted> of 5 or 6 cards, one for each color and maybe an
@@ -280,6 +280,6 @@ public final class BoosterUtils {
         if (null == filter) {
             return null;
         }
-        return filter.first(in, CardPrinted.fnGetRules);
+        return filter.first(in, CardPrinted.FN_GET_RULES);
     }
 }

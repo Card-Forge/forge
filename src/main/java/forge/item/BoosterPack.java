@@ -16,7 +16,7 @@ import forge.card.CardSet;
 public class BoosterPack implements InventoryItemFromSet {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<BoosterPack, CardSet> fnFromSet = new Lambda1<BoosterPack, CardSet>() {
+    public static final Lambda1<BoosterPack, CardSet> FN_FROM_SET = new Lambda1<BoosterPack, CardSet>() {
         @Override
         public BoosterPack apply(final CardSet arg1) {
             return new BoosterPack(arg1);
@@ -30,8 +30,9 @@ public class BoosterPack implements InventoryItemFromSet {
 
     /**
      * Instantiates a new booster pack.
-     *
-     * @param set the set
+     * 
+     * @param set
+     *            the set
      */
     public BoosterPack(final String set) {
         this(SetUtils.getSetByCodeOrThrow(set));
@@ -39,103 +40,122 @@ public class BoosterPack implements InventoryItemFromSet {
 
     /**
      * Instantiates a new booster pack.
-     *
-     * @param set the set
+     * 
+     * @param set
+     *            the set
      */
     public BoosterPack(final CardSet set) {
-        cardSet = set;
-        name = cardSet.getName() + " Booster Pack";
+        this.cardSet = set;
+        this.name = this.cardSet.getName() + " Booster Pack";
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getSet()
      */
     /**
+     * Gets the sets the.
+     * 
      * @return String
      */
     @Override
     public final String getSet() {
-        return cardSet.getCode();
+        return this.cardSet.getCode();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getName()
      */
     /**
+     * Gets the name.
+     * 
      * @return String
      */
     @Override
     public final String getName() {
-        return name;
+        return this.name;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getImageFilename()
      */
     /**
+     * Gets the image filename.
+     * 
      * @return String
      */
     @Override
     public final String getImageFilename() {
-        return "booster/" + cardSet.getCode() + ".png";
+        return "booster/" + this.cardSet.getCode() + ".png";
     }
 
     private CardPrinted getRandomBasicLand(final CardSet set) {
         return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
-                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.fnGetRules).random(
+                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES).random(
                 CardDb.instance().getAllCards());
     }
 
     private CardPrinted getLandFromNearestSet() {
-        List<CardSet> sets = SetUtils.getAllSets();
-        int iThisSet = sets.indexOf(cardSet);
+        final List<CardSet> sets = SetUtils.getAllSets();
+        final int iThisSet = sets.indexOf(this.cardSet);
         for (int iSet = iThisSet; iSet < sets.size(); iSet++) {
-            CardPrinted land = getRandomBasicLand(sets.get(iSet));
+            final CardPrinted land = this.getRandomBasicLand(sets.get(iSet));
             if (null != land) {
                 return land;
             }
         }
         // if not found (though that's impossible)
-        return getRandomBasicLand(SetUtils.getSetByCode("M12"));
+        return this.getRandomBasicLand(SetUtils.getSetByCode("M12"));
     }
 
     private void generate() {
-        BoosterGenerator gen = new BoosterGenerator(cardSet);
-        cards = gen.getBoosterPack();
+        final BoosterGenerator gen = new BoosterGenerator(this.cardSet);
+        this.cards = gen.getBoosterPack();
 
-        int cntLands = cardSet.getBoosterData().getLand();
+        final int cntLands = this.cardSet.getBoosterData().getLand();
         if (cntLands > 0) {
-            cards.add(getLandFromNearestSet());
+            this.cards.add(this.getLandFromNearestSet());
         }
     }
 
     /**
      * Gets the cards.
-     *
+     * 
      * @return the cards
      */
     public final List<CardPrinted> getCards() {
-        if (null == cards) {
-            generate();
+        if (null == this.cards) {
+            this.generate();
         }
-        return cards;
+        return this.cards;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
     /**
+     * Hash code.
+     * 
      * @return int
      */
     @Override
     public final int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((cardSet == null) ? 0 : cardSet.hashCode());
+        result = (prime * result) + ((this.cardSet == null) ? 0 : this.cardSet.hashCode());
         return result;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -146,24 +166,28 @@ public class BoosterPack implements InventoryItemFromSet {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
-        BoosterPack other = (BoosterPack) obj;
-        if (cardSet == null) {
+        final BoosterPack other = (BoosterPack) obj;
+        if (this.cardSet == null) {
             if (other.cardSet != null) {
                 return false;
             }
-        } else if (!cardSet.equals(other.cardSet)) {
+        } else if (!this.cardSet.equals(other.cardSet)) {
             return false;
         }
         return true;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItem#getType()
      */
     /**
+     * Gets the type.
+     * 
      * @return String
      */
     @Override
@@ -171,16 +195,20 @@ public class BoosterPack implements InventoryItemFromSet {
         return "Booster Pack";
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#clone()
      */
     /**
+     * Clone.
+     * 
      * @return Object
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(cardSet); // it's ok to share a reference to
-                                         // cardSet which is static anyway
+        return new BoosterPack(this.cardSet); // it's ok to share a reference to
+        // cardSet which is static anyway
     }
 
 }

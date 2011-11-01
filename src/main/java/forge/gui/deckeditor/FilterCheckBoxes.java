@@ -161,7 +161,7 @@ class FilterCheckBoxes {
         final Predicate<CardRules> filterByType = types.size() == 7 ? CardRules.Predicates.Presets.CONSTANT_TRUE
                 : Predicate.or(types);
 
-        return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.fnGetRules);
+        return Predicate.brigde(Predicate.and(filterByColor, filterByType), CardPrinted.FN_GET_RULES);
     }
 
     /**

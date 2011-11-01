@@ -4,7 +4,7 @@ package forge.item;
  * Interface to define a player's inventory may hold. Should include
  * CardPrinted, Booster, Pets, Plants... etc
  */
-public interface InventoryItem /* extends Comparable */{
+public interface InventoryItem {
 
     /**
      * An inventory item has to provide a name.
