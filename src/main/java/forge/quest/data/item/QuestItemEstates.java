@@ -24,7 +24,8 @@ public class QuestItemEstates extends QuestItemAbstract {
     @Override
     public final String getPurchaseDescription() {
         return String.format("Gives a bonus of <b>%d%%</b> to match winnings.<br>"
-                + "Improves sell percentage by <b>%.2f%%</b>.", (10 + getLevel() * 5), (1 + getLevel() * 0.75));
+                + "Improves sell percentage by <b>%.2f%%</b>.", (10 + (this.getLevel() * 5)),
+                (1 + (this.getLevel() * 0.75)));
     }
 
     /** {@inheritDoc} */
@@ -36,9 +37,9 @@ public class QuestItemEstates extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final int getPrice() {
-        if (getLevel() == 0) {
+        if (this.getLevel() == 0) {
             return 500;
-        } else if (getLevel() == 1) {
+        } else if (this.getLevel() == 1) {
             return 750;
         } else {
             return 1000;

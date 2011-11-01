@@ -1,5 +1,22 @@
 package forge.quest.gui.bazaar;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
@@ -8,90 +25,97 @@ import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.ArrayList;
-
 /**
- * <p>QuestBazaarStall class.</p>
- *
+ * <p>
+ * QuestBazaarStall class.
+ * </p>
+ * 
  * @author Forge
  * @version $Id$
  */
 public class QuestBazaarStall extends JPanel implements NewConstants {
-    /** Constant <code>serialVersionUID=-4147745071116906043L</code> */
+    /** Constant <code>serialVersionUID=-4147745071116906043L</code>. */
     private static final long serialVersionUID = -4147745071116906043L;
-    
+
     /** The name. */
-    String name;
-    
+    private final String name;
+
     /** The stall name. */
-    String stallName;
-    
+    private final String stallName;
+
     /** The fluff. */
-    String fluff;
-    
+    private final String fluff;
+
     /** The icon. */
-    ImageIcon icon;
+    private final ImageIcon icon;
 
-
-    private JLabel creditLabel = new JLabel();
-    private JPanel inventoryPanel = new JPanel();
+    private final JLabel creditLabel = new JLabel();
+    private final JPanel inventoryPanel = new JPanel();
 
     /** The quest data. */
-    protected QuestData questData = AllZone.getQuestData();
+    private final QuestData questData = AllZone.getQuestData();
 
     /**
-     * <p>Constructor for QuestBazaarStall.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param stallName a {@link java.lang.String} object.
-     * @param iconName a {@link java.lang.String} object.
-     * @param fluff a {@link java.lang.String} object.
+     * <p>
+     * Constructor for QuestBazaarStall.
+     * </p>
+     * 
+     * @param name
+     *            a {@link java.lang.String} object.
+     * @param stallName
+     *            a {@link java.lang.String} object.
+     * @param iconName
+     *            a {@link java.lang.String} object.
+     * @param fluff
+     *            a {@link java.lang.String} object.
      */
-    protected QuestBazaarStall(String name, String stallName, String iconName, String fluff) {
+    protected QuestBazaarStall(final String name, final String stallName, final String iconName, final String fluff) {
         this.name = name;
         this.fluff = fluff;
         this.icon = GuiUtils.getIconFromFile(iconName);
         this.stallName = stallName;
 
-        initUI();
+        this.initUI();
 
     }
 
     /**
-     * <p>Constructor for QuestBazaarStall.</p>
-     *
-     * @param definition a {@link forge.quest.data.bazaar.QuestStallDefinition} object.
+     * <p>
+     * Constructor for QuestBazaarStall.
+     * </p>
+     * 
+     * @param definition
+     *            a {@link forge.quest.data.bazaar.QuestStallDefinition} object.
      */
-    protected QuestBazaarStall(QuestStallDefinition definition) {
-        this.fluff = definition.fluff;
-        this.icon = GuiUtils.getIconFromFile(definition.iconName);
-        this.stallName = definition.displayName;
-        this.name = definition.name;
-        initUI();
+    protected QuestBazaarStall(final QuestStallDefinition definition) {
+        this.fluff = definition.getFluff();
+        this.icon = GuiUtils.getIconFromFile(definition.getIconName());
+        this.stallName = definition.getDisplayName();
+        this.name = definition.getName();
+        this.initUI();
     }
 
     /**
-     * <p>initUI.</p>
+     * <p>
+     * initUI.
+     * </p>
      */
     private void initUI() {
         this.removeAll();
 
         JLabel stallNameLabel;
 
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
 
-        stallNameLabel = new JLabel(stallName);
+        stallNameLabel = new JLabel(this.stallName);
         stallNameLabel.setFont(new Font("sserif", Font.BOLD, 22));
         stallNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        creditLabel.setText("Credits: " + questData.getCredits());
-        creditLabel.setFont(new Font("sserif", 0, 14));
+        this.creditLabel.setText("Credits: " + this.questData.getCredits());
+        this.creditLabel.setFont(new Font("sserif", 0, 14));
 
-        JTextArea fluffArea = new JTextArea(fluff);
+        final JTextArea fluffArea = new JTextArea(this.fluff);
         fluffArea.setFont(new Font("sserif", Font.ITALIC, 14));
         fluffArea.setLineWrap(true);
         fluffArea.setWrapStyleWord(true);
@@ -99,17 +123,8 @@ public class QuestBazaarStall extends JPanel implements NewConstants {
         fluffArea.setEditable(false);
         fluffArea.setFocusable(false);
         fluffArea.setPreferredSize(new Dimension(fluffArea.getPreferredSize().width, 40));
-        GridBagConstraints constraints = new GridBagConstraints(0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                new Insets(2, 2, 2, 2),
-                0,
-                0);
+        final GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 1, 0, GridBagConstraints.CENTER,
+                GridBagConstraints.NONE, new Insets(2, 2, 2, 2), 0, 0);
         layout.setConstraints(stallNameLabel, constraints);
         this.add(stallNameLabel);
 
@@ -120,8 +135,8 @@ public class QuestBazaarStall extends JPanel implements NewConstants {
         this.add(fluffArea);
 
         constraints.gridy = 2;
-        layout.setConstraints(creditLabel, constraints);
-        this.add(creditLabel);
+        layout.setConstraints(this.creditLabel, constraints);
+        this.add(this.creditLabel);
 
         constraints.gridy = 3;
         constraints.anchor = GridBagConstraints.NORTHWEST;
@@ -130,10 +145,10 @@ public class QuestBazaarStall extends JPanel implements NewConstants {
         constraints.weighty = 1;
         constraints.weightx = GridBagConstraints.REMAINDER;
 
-        populateInventory(populateItems());
+        this.populateInventory(this.populateItems());
 
-        JScrollPane scrollPane = new JScrollPane(inventoryPanel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        final JScrollPane scrollPane = new JScrollPane(this.inventoryPanel);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         layout.setConstraints(scrollPane, constraints);
         this.add(scrollPane);
@@ -142,98 +157,99 @@ public class QuestBazaarStall extends JPanel implements NewConstants {
     }
 
     /**
-     * <p>populateInventory.</p>
-     *
-     * @param stallItems a {@link java.util.List} object.
+     * <p>
+     * populateInventory.
+     * </p>
+     * 
+     * @param stallItems
+     *            a {@link java.util.List} object.
      */
-    private void populateInventory(java.util.List<QuestBazaarItem> stallItems) {
-        inventoryPanel.removeAll();
+    private void populateInventory(final java.util.List<QuestBazaarItem> stallItems) {
+        this.inventoryPanel.removeAll();
 
-        GridBagLayout innerLayout = new GridBagLayout();
-        inventoryPanel.setLayout(innerLayout);
-        GridBagConstraints innerConstraints =
-                new GridBagConstraints(0,
-                        0,
-                        1,
-                        1,
-                        1,
-                        0,
-                        GridBagConstraints.NORTHWEST,
-                        GridBagConstraints.HORIZONTAL,
-                        new Insets(2, 2, 2, 2),
-                        0,
-                        0);
+        final GridBagLayout innerLayout = new GridBagLayout();
+        this.inventoryPanel.setLayout(innerLayout);
+        final GridBagConstraints innerConstraints = new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0);
 
-        JLabel purchaseLabel = new JLabel();
+        final JLabel purchaseLabel = new JLabel();
 
         if (stallItems.size() == 0) {
 
             purchaseLabel.setText("The merchant does not have anything useful for sale");
-            inventoryPanel.add(purchaseLabel);
+            this.inventoryPanel.add(purchaseLabel);
             innerConstraints.gridy++;
         } else {
 
             innerConstraints.insets = new Insets(5, 20, 5, 5);
-            for (QuestBazaarItem item : stallItems) {
-                JPanel itemPanel = item.getItemPanel();
+            for (final QuestBazaarItem item : stallItems) {
+                final JPanel itemPanel = item.getItemPanel();
 
                 innerLayout.setConstraints(itemPanel, innerConstraints);
-                inventoryPanel.add(itemPanel);
+                this.inventoryPanel.add(itemPanel);
                 innerConstraints.gridy++;
             }
         }
         innerConstraints.weighty = 1;
-        JLabel fillLabel = new JLabel();
+        final JLabel fillLabel = new JLabel();
 
         innerLayout.setConstraints(fillLabel, innerConstraints);
-        inventoryPanel.add(fillLabel);
+        this.inventoryPanel.add(fillLabel);
     }
 
     /**
-     * <p>populateItems.</p>
-     *
+     * <p>
+     * populateItems.
+     * </p>
+     * 
      * @return a {@link java.util.List} object.
      */
     protected java.util.List<QuestBazaarItem> populateItems() {
-        java.util.List<QuestBazaarItem> ret = new ArrayList<QuestBazaarItem>();
-        java.util.List<QuestStallPurchasable> purchasables = QuestStallManager.getItems(name);
+        final java.util.List<QuestBazaarItem> ret = new ArrayList<QuestBazaarItem>();
+        final java.util.List<QuestStallPurchasable> purchasables = QuestStallManager.getItems(this.name);
 
-        for (QuestStallPurchasable purchasable : purchasables) {
+        for (final QuestStallPurchasable purchasable : purchasables) {
             ret.add(new QuestBazaarItem(purchasable));
         }
 
         return ret;
     }
 
-
     /**
-     * <p>getStallIcon.</p>
-     *
+     * <p>
+     * getStallIcon.
+     * </p>
+     * 
      * @return a {@link javax.swing.ImageIcon} object.
      */
     public ImageIcon getStallIcon() {
-        return icon;
+        return this.icon;
     }
 
     /**
-     * <p>Getter for the field <code>stallName</code>.</p>
-     *
+     * <p>
+     * Getter for the field <code>stallName</code>.
+     * </p>
+     * 
      * @return a {@link java.lang.String} object.
      */
     public String getStallName() {
-        return stallName;
+        return this.stallName;
     }
 
     /**
-     * <p>updateItems.</p>
+     * <p>
+     * updateItems.
+     * </p>
      */
     public void updateItems() {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                populateInventory(populateItems());
-                creditLabel.setText("Credits: " + questData.getCredits());
-                inventoryPanel.invalidate();
-                inventoryPanel.repaint();
+                QuestBazaarStall.this.populateInventory(QuestBazaarStall.this.populateItems());
+                QuestBazaarStall.this.creditLabel.setText("Credits: " + QuestBazaarStall.this.questData.getCredits());
+                QuestBazaarStall.this.inventoryPanel.invalidate();
+                QuestBazaarStall.this.inventoryPanel.repaint();
             }
         });
     }

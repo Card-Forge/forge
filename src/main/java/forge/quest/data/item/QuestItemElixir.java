@@ -35,9 +35,9 @@ public class QuestItemElixir extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final int getPrice() {
-        if (getLevel() < 5) {
+        if (this.getLevel() < 5) {
             return 250;
-        } else if (getLevel() < 10) {
+        } else if (this.getLevel() < 10) {
             return 500;
         } else {
             return 750;

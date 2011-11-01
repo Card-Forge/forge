@@ -36,9 +36,9 @@ public class QuestPetManager {
      * </p>
      */
     public QuestPetManager() {
-        plant = new QuestPetPlant();
-        for (QuestPetAbstract pet : getAllPets()) {
-            addPet(pet);
+        this.plant = new QuestPetPlant();
+        for (final QuestPetAbstract pet : QuestPetManager.getAllPets()) {
+            this.addPet(pet);
         }
     }
 
@@ -51,7 +51,7 @@ public class QuestPetManager {
      *            a {@link java.lang.String} object.
      */
     public final void setSelectedPet(final String pet) {
-        selectedPet = (pet == null) ? null : getPet(pet);
+        this.selectedPet = (pet == null) ? null : this.getPet(pet);
     }
 
     /**
@@ -62,7 +62,7 @@ public class QuestPetManager {
      * @return a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
     public final QuestPetAbstract getSelectedPet() {
-        return selectedPet;
+        return this.selectedPet;
     }
 
     /**
@@ -73,7 +73,7 @@ public class QuestPetManager {
      * @return a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
     public final QuestPetAbstract getPlant() {
-        return plant;
+        return this.plant;
     }
 
     /**
@@ -82,10 +82,10 @@ public class QuestPetManager {
      * </p>
      */
     public final void addPlantLevel() {
-        if (plant == null) {
-            plant = new QuestPetPlant();
+        if (this.plant == null) {
+            this.plant = new QuestPetPlant();
         } else {
-            plant.incrementLevel();
+            this.plant.incrementLevel();
         }
     }
 
@@ -100,7 +100,7 @@ public class QuestPetManager {
      */
     public final QuestPetAbstract getPet(final String petName) {
 
-        return pets.get(petName);
+        return this.pets.get(petName);
     }
 
     /**
@@ -112,7 +112,7 @@ public class QuestPetManager {
      *            a {@link forge.quest.data.pet.QuestPetAbstract} object.
      */
     public final void addPet(final QuestPetAbstract newPet) {
-        pets.put(newPet.getName(), newPet);
+        this.pets.put(newPet.getName(), newPet);
     }
 
     /**
@@ -123,7 +123,7 @@ public class QuestPetManager {
      * @return a {@link java.util.Set} object.
      */
     public final Set<String> getPetNames() {
-        return pets.keySet();
+        return this.pets.keySet();
     }
 
     /**
@@ -135,7 +135,7 @@ public class QuestPetManager {
      *            a {@link java.lang.String} object.
      */
     public final void addPetLevel(final String s) {
-        pets.get(s).incrementLevel();
+        this.pets.get(s).incrementLevel();
     }
 
     /**
@@ -146,7 +146,7 @@ public class QuestPetManager {
      * @return a boolean.
      */
     public final boolean shouldPlantBeUsed() {
-        return usePlant;
+        return this.usePlant;
     }
 
     /**
@@ -157,7 +157,7 @@ public class QuestPetManager {
      * @return a boolean.
      */
     public final boolean shouldPetBeUsed() {
-        return selectedPet != null;
+        return this.selectedPet != null;
     }
 
     /**
@@ -168,7 +168,7 @@ public class QuestPetManager {
      * @return a {@link java.util.Set} object.
      */
     private static Set<QuestPetAbstract> getAllPets() {
-        SortedSet<QuestPetAbstract> set = new TreeSet<QuestPetAbstract>();
+        final SortedSet<QuestPetAbstract> set = new TreeSet<QuestPetAbstract>();
 
         set.add(new QuestPetBird());
         set.add(new QuestPetCrocodile());
@@ -186,8 +186,8 @@ public class QuestPetManager {
      * @return a {@link java.util.Set} object.
      */
     public final Set<String> getAvailablePetNames() {
-        SortedSet<String> set = new TreeSet<String>();
-        for (Map.Entry<String, QuestPetAbstract> pet : pets.entrySet()) {
+        final SortedSet<String> set = new TreeSet<String>();
+        for (final Map.Entry<String, QuestPetAbstract> pet : this.pets.entrySet()) {
             if (pet.getValue().getLevel() > 0) {
                 set.add(pet.getKey());
             }
@@ -203,8 +203,8 @@ public class QuestPetManager {
      * @return a {@link java.util.Collection} object.
      */
     public final Collection<QuestPetAbstract> getPetsAndPlants() {
-        Set<QuestPetAbstract> petsAndPlants = new HashSet<QuestPetAbstract>(pets.values());
-        petsAndPlants.add(plant);
+        final Set<QuestPetAbstract> petsAndPlants = new HashSet<QuestPetAbstract>(this.pets.values());
+        petsAndPlants.add(this.plant);
 
         return petsAndPlants;
     }
@@ -218,9 +218,9 @@ public class QuestPetManager {
      * @return a {@link java.lang.Object} object.
      */
     private Object readResolve() {
-        for (QuestPetAbstract pet : getAllPets()) {
-            if (!pets.containsKey(pet.getName())) {
-                addPet(pet);
+        for (final QuestPetAbstract pet : QuestPetManager.getAllPets()) {
+            if (!this.pets.containsKey(pet.getName())) {
+                this.addPet(pet);
             }
         }
         return this;

@@ -31,22 +31,22 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
     private static final long serialVersionUID = 1418913010051869222L;
 
     /** Constant <code>stallList</code>. */
-    static List<QuestBazaarStall> stallList = new ArrayList<QuestBazaarStall>();
+    private static List<QuestBazaarStall> stallList = new ArrayList<QuestBazaarStall>();
 
     /** The button panel. */
-    JPanel buttonPanel = new JPanel(new BorderLayout());
+    private final JPanel buttonPanel = new JPanel(new BorderLayout());
 
     /** The button panel main. */
-    JPanel buttonPanelMain = new JPanel();
+    private final JPanel buttonPanelMain = new JPanel();
 
     /** The stall panel. */
-    JPanel stallPanel = new JPanel();
+    private final JPanel stallPanel = new JPanel();
 
     /** The selected stall. */
-    JToggleButton selectedStall = null;
+    private JToggleButton selectedStall = null;
 
     /** The stall layout. */
-    CardLayout stallLayout = new CardLayout();
+    private final CardLayout stallLayout = new CardLayout();
 
     /**
      * <p>
@@ -60,23 +60,24 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         super(mainFrame);
         this.setLayout(new BorderLayout());
 
-        stallList = new ArrayList<QuestBazaarStall>();
+        QuestBazaarPanel.stallList = new ArrayList<QuestBazaarStall>();
 
-        for (String stallName : QuestStallManager.getStallNames()) {
-            stallList.add(new QuestBazaarStall(QuestStallManager.getStall(stallName)));
+        for (final String stallName : QuestStallManager.getStallNames()) {
+            QuestBazaarPanel.stallList.add(new QuestBazaarStall(QuestStallManager.getStall(stallName)));
         }
 
-        buttonPanelMain.setLayout(new GridLayout(stallList.size(), 1));
+        this.buttonPanelMain.setLayout(new GridLayout(QuestBazaarPanel.stallList.size(), 1));
 
-        stallPanel.setLayout(stallLayout);
-        List<JToggleButton> buttonList = new LinkedList<JToggleButton>();
+        this.stallPanel.setLayout(this.stallLayout);
+        final List<JToggleButton> buttonList = new LinkedList<JToggleButton>();
 
         double maxWidth = 0;
         double maxHeight = 0;
 
-        for (QuestBazaarStall stall : stallList) {
-            JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getStallIcon());
+        for (final QuestBazaarStall stall : QuestBazaarPanel.stallList) {
+            final JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getStallIcon());
             stallButton.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
 
                     if (QuestBazaarPanel.this.selectedStall == e.getSource()) {
@@ -93,7 +94,7 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
                 }
             });
 
-            Dimension preferredSize = stallButton.getPreferredSize();
+            final Dimension preferredSize = stallButton.getPreferredSize();
 
             if (preferredSize.getWidth() > maxWidth) {
                 maxWidth = preferredSize.getWidth();
@@ -105,32 +106,33 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
 
             buttonList.add(stallButton);
 
-            buttonPanelMain.add(stallButton);
-            stallPanel.add(stall, stall.getStallName());
+            this.buttonPanelMain.add(stallButton);
+            this.stallPanel.add(stall, stall.getStallName());
         }
 
         buttonList.get(0).setSelected(true);
         this.selectedStall = buttonList.get(0);
 
-        Dimension max = new Dimension((int) maxWidth, (int) maxHeight);
+        final Dimension max = new Dimension((int) maxWidth, (int) maxHeight);
 
-        for (JToggleButton button : buttonList) {
+        for (final JToggleButton button : buttonList) {
             button.setMinimumSize(max);
         }
 
-        buttonPanel.add(buttonPanelMain, BorderLayout.NORTH);
-        JButton quitButton = new JButton("Leave Bazaar");
+        this.buttonPanel.add(this.buttonPanelMain, BorderLayout.NORTH);
+        final JButton quitButton = new JButton("Leave Bazaar");
         quitButton.setSize(max);
         quitButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                QuestBazaarPanel.this.mainFrame.showMainPane();
+                QuestBazaarPanel.this.getMainFrame().showMainPane();
             }
         });
 
-        buttonPanel.add(quitButton, BorderLayout.SOUTH);
+        this.buttonPanel.add(quitButton, BorderLayout.SOUTH);
 
-        this.add(buttonPanel, BorderLayout.WEST);
-        this.add(stallPanel, BorderLayout.CENTER);
+        this.add(this.buttonPanel, BorderLayout.WEST);
+        this.add(this.stallPanel, BorderLayout.CENTER);
 
     }
 
@@ -143,14 +145,14 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
      *            a {@link java.lang.String} object.
      */
     private void showStall(final String source) {
-        stallLayout.show(stallPanel, source);
+        this.stallLayout.show(this.stallPanel, source);
     }
 
     /**
      * Slightly hackish, but should work.
      */
     static void refreshLastInstance() {
-        for (QuestBazaarStall stall : stallList) {
+        for (final QuestBazaarStall stall : QuestBazaarPanel.stallList) {
             stall.updateItems();
         }
     }
@@ -158,6 +160,6 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
     /** {@inheritDoc} */
     @Override
     public final void refreshState() {
-        refreshLastInstance();
+        QuestBazaarPanel.refreshLastInstance();
     }
 }

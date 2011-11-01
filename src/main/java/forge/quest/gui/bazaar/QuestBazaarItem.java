@@ -34,7 +34,7 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
 public class QuestBazaarItem {
 
     /** The item. */
-    QuestStallPurchasable item;
+    private QuestStallPurchasable item;
 
     /**
      * <p>
@@ -54,7 +54,7 @@ public class QuestBazaarItem {
      * item should not be deducted here.
      */
     public final void purchaseItem() {
-        item.onPurchase();
+        this.item.onPurchase();
     }
 
     /**
@@ -65,7 +65,7 @@ public class QuestBazaarItem {
      * @return a {@link javax.swing.JPanel} object.
      */
     protected final JPanel getItemPanel() {
-        ImageIcon icon = GuiUtils.getIconFromFile(item.getImageName());
+        ImageIcon icon = GuiUtils.getIconFromFile(this.item.getImageName());
         if (icon == null) {
             // The original size was only 40 x 40 pixels.
             // Increased the size to give added pixels for more detail.
@@ -73,50 +73,51 @@ public class QuestBazaarItem {
         }
         // The original size was only 40 x 40 pixels.
         // Increased the size to give added pixels for more detail.
-        ImageIcon resizedImage = GuiUtils.getResizedIcon(icon, 80, 80);
+        final ImageIcon resizedImage = GuiUtils.getResizedIcon(icon, 80, 80);
 
-        JLabel iconLabel = new JLabel(resizedImage);
+        final JLabel iconLabel = new JLabel(resizedImage);
         iconLabel.setBorder(new LineBorder(Color.BLACK));
-        JPanel iconPanel = new JPanel(new BorderLayout());
+        final JPanel iconPanel = new JPanel(new BorderLayout());
         iconPanel.add(iconLabel, BorderLayout.NORTH);
 
-        JLabel nameLabel = new JLabel(item.getPurchaseName());
+        final JLabel nameLabel = new JLabel(this.item.getPurchaseName());
         nameLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 
-        JLabel descriptionLabel = new MultiLineLabel("<html>" + item.getPurchaseDescription() + "</html>");
+        final JLabel descriptionLabel = new MultiLineLabel("<html>" + this.item.getPurchaseDescription() + "</html>");
         descriptionLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 
-        JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + item.getPrice() + " credits</html>");
+        final JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + this.item.getPrice() + " credits</html>");
         priceLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 
-        JButton purchaseButton = new JButton("Buy");
+        final JButton purchaseButton = new JButton("Buy");
         purchaseButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                AllZone.getQuestData().subtractCredits(item.getPrice());
-                purchaseItem();
+                AllZone.getQuestData().subtractCredits(QuestBazaarItem.this.item.getPrice());
+                QuestBazaarItem.this.purchaseItem();
                 AllZone.getQuestData().saveData();
                 QuestBazaarPanel.refreshLastInstance();
             }
         });
 
-        if (AllZone.getQuestData().getCredits() < item.getPrice()) {
+        if (AllZone.getQuestData().getCredits() < this.item.getPrice()) {
             purchaseButton.setEnabled(false);
         }
 
-        JPanel itemPanel = new JPanel() {
+        final JPanel itemPanel = new JPanel() {
             private static final long serialVersionUID = -5182857296365949682L;
 
             @Override
             public Dimension getPreferredSize() {
-                Dimension realSize = super.getPreferredSize();
+                final Dimension realSize = super.getPreferredSize();
                 realSize.width = 100;
                 return realSize;
             }
         };
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagLayout layout = new GridBagLayout();
         itemPanel.setLayout(layout);
 
-        GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER,
+        final GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER,
                 GridBagConstraints.NONE, new Insets(2, 2, 2, 2), 0, 0);
 
         constraints.gridheight = GridBagConstraints.REMAINDER;

@@ -15,7 +15,7 @@ public class QuestPetBird extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final Card getPetCard() {
-        Card petCard = new Card();
+        final Card petCard = new Card();
 
         petCard.setName("Bird Pet");
         petCard.addController(AllZone.getHumanPlayer());
@@ -30,19 +30,19 @@ public class QuestPetBird extends QuestPetAbstract {
 
         petCard.addIntrinsicKeyword("Flying");
 
-        if (level == 1) {
+        if (this.getLevel() == 1) {
             petCard.setImageName("W 0 1 Bird Pet");
             petCard.setBaseAttack(0);
             petCard.setBaseDefense(1);
-        } else if (level == 2) {
+        } else if (this.getLevel() == 2) {
             petCard.setImageName("W 1 1 Bird Pet");
             petCard.setBaseAttack(1);
             petCard.setBaseDefense(1);
-        } else if (level == 3) {
+        } else if (this.getLevel() == 3) {
             petCard.setImageName("W 2 1 Bird Pet");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
-        } else if (level == 4) {
+        } else if (this.getLevel() == 4) {
             petCard.setImageName("W 2 1 Bird Pet First Strike");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
@@ -70,22 +70,22 @@ public class QuestPetBird extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final String[] getAllUpgradeDescriptions() {
-        return new String[] {"Purchase Bird", "Improve the attack power of your bird.",
+        return new String[] { "Purchase Bird", "Improve the attack power of your bird.",
                 "Improve the attack power of your bird.", "Give First Strike to your bird.",
-                "You cannot train your bird any further"};
+                "You cannot train your bird any further" };
     }
 
     /** {@inheritDoc} */
     @Override
     public final String[] getAllStats() {
-        return new String[] {"You do not own a bird", "0/1, W, Flying", "1/1, W, Flying", "2/1, W, Flying",
-                "2/1, W, Flying, First Strike"};
+        return new String[] { "You do not own a bird", "0/1, W, Flying", "1/1, W, Flying", "2/1, W, Flying",
+                "2/1, W, Flying, First Strike" };
     }
 
     /** {@inheritDoc} */
     @Override
     public final String[] getAllImageNames() {
-        return new String[] {"", "w_0_1_bird_pet_small.jpg", "w_1_1_bird_pet_small.jpg", "w_2_1_bird_pet_small.jpg",
-                "w_2_1_bird_pet_first_strike_small.jpg"};
+        return new String[] { "", "w_0_1_bird_pet_small.jpg", "w_1_1_bird_pet_small.jpg", "w_2_1_bird_pet_small.jpg",
+                "w_2_1_bird_pet_first_strike_small.jpg" };
     }
 }

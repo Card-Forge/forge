@@ -13,8 +13,8 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
  */
 public abstract class QuestItemAbstract implements QuestStallPurchasable {
     private int level = 0;
-    private String name;
-    private String shopName;
+    private final String name;
+    private final String shopName;
     private int maxLevel = 1;
 
     /**
@@ -56,7 +56,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -64,8 +64,9 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public String getPurchaseName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -75,16 +76,18 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String getStallName() {
-        return shopName;
+        return this.shopName;
     }
 
     /**
      * This method will be invoked when an item is bought in a shop.
      */
+    @Override
     public void onPurchase() {
-        int currentLevel = AllZone.getQuestData().getInventory().getItemLevel(name);
-        AllZone.getQuestData().getInventory().setItemLevel(name, currentLevel + 1);
+        final int currentLevel = AllZone.getQuestData().getInventory().getItemLevel(this.name);
+        AllZone.getQuestData().getInventory().setItemLevel(this.name, currentLevel + 1);
     }
 
     /**
@@ -94,8 +97,9 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a boolean.
      */
+    @Override
     public boolean isAvailableForPurchase() {
-        return AllZone.getQuestData().getInventory().getItemLevel(name) < maxLevel;
+        return AllZone.getQuestData().getInventory().getItemLevel(this.name) < this.maxLevel;
     }
 
     /**
@@ -106,7 +110,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     public final int getLevel() {
-        return level;
+        return this.level;
     }
 
     /**
@@ -129,7 +133,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     public final int getMaxLevel() {
-        return maxLevel;
+        return this.maxLevel;
     }
 
     /**
@@ -140,7 +144,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a boolean.
      */
     public final boolean isLeveledItem() {
-        return maxLevel == 1;
+        return this.maxLevel == 1;
     }
 
     /**
@@ -150,6 +154,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public abstract String getPurchaseDescription();
 
     /**
@@ -159,6 +164,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public abstract String getImageName();
 
     /**
@@ -168,11 +174,13 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * 
      * @return a int.
      */
+    @Override
     public abstract int getPrice();
 
     /** {@inheritDoc} */
+    @Override
     public final int compareTo(final Object o) {
-        QuestStallPurchasable q = (QuestStallPurchasable) o;
+        final QuestStallPurchasable q = (QuestStallPurchasable) o;
         return this.getPurchaseName().compareTo(q.getPurchaseName());
     }
 }

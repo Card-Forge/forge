@@ -2,6 +2,7 @@ package forge.quest.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.io.File;
 
@@ -33,7 +34,7 @@ public class QuestSelectablePanel extends JPanel {
     /** The background color. */
     protected Color backgroundColor;
     private boolean selected;
-    private QuestEvent event;
+    private final QuestEvent event;
     private String iconfilename;
 
     /** The root panel. */
@@ -51,17 +52,17 @@ public class QuestSelectablePanel extends JPanel {
     public QuestSelectablePanel(final QuestEvent qe) {
         this.event = qe;
         this.iconfilename = qe.icon;
-        File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        File file = new File(base, iconfilename);
+        final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+        File file = new File(base, this.iconfilename);
 
         if (!file.exists()) {
             file = new File(base, "Unknown.jpg");
             this.iconfilename = "Unknown.jpg";
         }
 
-        ImageIcon icon = new ImageIcon(file.toString());
+        final ImageIcon icon = new ImageIcon(file.toString());
 
-        this.backgroundColor = getBackground();
+        this.backgroundColor = this.getBackground();
         this.setLayout(new BorderLayout(5, 5));
 
         JLabel iconLabel;
@@ -73,39 +74,39 @@ public class QuestSelectablePanel extends JPanel {
         }
 
         iconLabel.setBorder(new LineBorder(Color.BLACK));
-        iconLabel.setAlignmentY(TOP_ALIGNMENT);
+        iconLabel.setAlignmentY(Component.TOP_ALIGNMENT);
 
-        JPanel iconPanel = new JPanel(new BorderLayout());
+        final JPanel iconPanel = new JPanel(new BorderLayout());
         iconPanel.setOpaque(false);
         iconPanel.add(iconLabel, BorderLayout.NORTH);
         this.add(iconPanel, BorderLayout.WEST);
 
-        rootPanel.setOpaque(false);
-        rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.Y_AXIS));
-        this.add(rootPanel, BorderLayout.CENTER);
+        this.rootPanel.setOpaque(false);
+        this.rootPanel.setLayout(new BoxLayout(this.rootPanel, BoxLayout.Y_AXIS));
+        this.add(this.rootPanel, BorderLayout.CENTER);
 
-        JPanel centerTopPanel = new JPanel();
+        final JPanel centerTopPanel = new JPanel();
         centerTopPanel.setOpaque(false);
-        centerTopPanel.setAlignmentX(LEFT_ALIGNMENT);
+        centerTopPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         centerTopPanel.setLayout(new BoxLayout(centerTopPanel, BoxLayout.X_AXIS));
 
-        JLabel nameLabel = new JLabel(qe.getTitle());
+        final JLabel nameLabel = new JLabel(qe.getTitle());
         GuiUtils.setFontSize(nameLabel, 20);
-        nameLabel.setAlignmentY(BOTTOM_ALIGNMENT);
+        nameLabel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         centerTopPanel.add(nameLabel);
 
         GuiUtils.addExpandingHorizontalSpace(centerTopPanel);
 
-        JLabel difficultyLabel = new JLabel(qe.getDifficulty());
-        difficultyLabel.setAlignmentY(BOTTOM_ALIGNMENT);
+        final JLabel difficultyLabel = new JLabel(qe.getDifficulty());
+        difficultyLabel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         centerTopPanel.add(difficultyLabel);
-        rootPanel.add(centerTopPanel);
+        this.rootPanel.add(centerTopPanel);
 
-        GuiUtils.addGap(rootPanel);
+        GuiUtils.addGap(this.rootPanel);
 
-        JLabel descriptionLabel = new JLabel(qe.getDescription());
-        descriptionLabel.setAlignmentX(LEFT_ALIGNMENT);
-        rootPanel.add(descriptionLabel);
+        final JLabel descriptionLabel = new JLabel(qe.getDescription());
+        descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.rootPanel.add(descriptionLabel);
 
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
         this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK), new EmptyBorder(5, 5, 5, 5)));
@@ -119,7 +120,7 @@ public class QuestSelectablePanel extends JPanel {
      * @return a boolean.
      */
     public final boolean isSelected() {
-        return selected;
+        return this.selected;
     }
 
     /**
@@ -132,9 +133,9 @@ public class QuestSelectablePanel extends JPanel {
      */
     public final void setSelected(final boolean selected) {
         if (selected) {
-            this.setBackground(backgroundColor.darker());
+            this.setBackground(this.backgroundColor.darker());
         } else {
-            this.setBackground(backgroundColor);
+            this.setBackground(this.backgroundColor);
         }
 
         this.selected = selected;

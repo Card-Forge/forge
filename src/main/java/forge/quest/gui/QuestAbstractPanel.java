@@ -15,7 +15,7 @@ public abstract class QuestAbstractPanel extends JPanel {
     private static final long serialVersionUID = -6378675010346615367L;
 
     /** The main frame. */
-    public QuestFrame mainFrame;
+    private QuestFrame mainFrame;
 
     /**
      * <p>
@@ -26,7 +26,7 @@ public abstract class QuestAbstractPanel extends JPanel {
      *            a {@link forge.quest.gui.QuestFrame} object.
      */
     protected QuestAbstractPanel(final QuestFrame mainFrame) {
-        this.mainFrame = mainFrame;
+        this.setMainFrame(mainFrame);
     }
 
     /**
@@ -35,4 +35,18 @@ public abstract class QuestAbstractPanel extends JPanel {
      * </p>
      */
     public abstract void refreshState();
+
+    /**
+     * @return the mainFrame
+     */
+    public QuestFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    /**
+     * @param mainFrame the mainFrame to set
+     */
+    public void setMainFrame(QuestFrame mainFrame) {
+        this.mainFrame = mainFrame; // TODO: Add 0 to parameter's name.
+    }
 }

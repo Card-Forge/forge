@@ -14,7 +14,7 @@ import forge.quest.data.bazaar.QuestStallManager;
 public class QuestItemZeppelin extends QuestItemAbstract {
 
     /** The zeppelin used. */
-    boolean zeppelinUsed = false;
+    private boolean zeppelinUsed = false;
 
     /**
      * <p>
@@ -66,7 +66,7 @@ public class QuestItemZeppelin extends QuestItemAbstract {
      * @return a boolean.
      */
     public final boolean hasBeenUsed() {
-        return zeppelinUsed;
+        return this.zeppelinUsed;
     }
 
     /**

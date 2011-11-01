@@ -41,7 +41,7 @@ public class QuestEvent {
      * @return a {@link java.lang.String}.
      */
     public final String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -52,7 +52,7 @@ public class QuestEvent {
      * @return a {@link java.lang.String}.
      */
     public final String getDifficulty() {
-        return difficulty;
+        return this.difficulty;
     }
 
     /**
@@ -63,7 +63,7 @@ public class QuestEvent {
      * @return a {@link java.lang.String}.
      */
     public final String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -74,7 +74,7 @@ public class QuestEvent {
      * @return {@link forge.deck.Deck}
      */
     public final Deck getEventDeck() {
-        return eventDeck;
+        return this.eventDeck;
     }
 
     /**
@@ -85,7 +85,7 @@ public class QuestEvent {
      * @return {@link forge.deck.Deck}
      */
     public final String getEventType() {
-        return eventType;
+        return this.eventType;
     }
 
     /**
@@ -96,7 +96,7 @@ public class QuestEvent {
      * @return a {@link java.lang.String}.
      */
     public final String getIcon() {
-        return icon;
+        return this.icon;
     }
 
     /**
@@ -107,6 +107,6 @@ public class QuestEvent {
      * @return a {@link java.lang.String}.
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 }

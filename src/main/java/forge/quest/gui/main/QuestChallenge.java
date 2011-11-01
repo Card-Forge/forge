@@ -50,7 +50,7 @@ public class QuestChallenge extends QuestEvent {
      */
     public QuestChallenge() {
         super();
-        eventType = "challenge";
+        this.eventType = "challenge";
     }
 
     /**
@@ -61,7 +61,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Integer}.
      */
     public final int getAILife() {
-        return aiLife;
+        return this.aiLife;
     }
 
     /**
@@ -72,7 +72,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.String}.
      */
     public final String getCardReward() {
-        return cardReward;
+        return this.cardReward;
     }
 
     /**
@@ -83,7 +83,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Integer}.
      */
     public final int getCreditsReward() {
-        return creditsReward;
+        return this.creditsReward;
     }
 
     /**
@@ -94,7 +94,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Integer}.
      */
     public final int getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -105,7 +105,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Boolean}.
      */
     public final boolean getRepeatable() {
-        return repeatable;
+        return this.repeatable;
     }
 
     /**
@@ -116,7 +116,7 @@ public class QuestChallenge extends QuestEvent {
      * @return {@link java.lang.Integer}.
      */
     public final int getWinsReqd() {
-        return winsReqd;
+        return this.winsReqd;
     }
 
     /**
@@ -128,7 +128,7 @@ public class QuestChallenge extends QuestEvent {
      * @return the aI extra cards
      */
     public final List<String> getAIExtraCards() {
-        return aiExtraCards;
+        return this.aiExtraCards;
     }
 
     /**
@@ -140,7 +140,7 @@ public class QuestChallenge extends QuestEvent {
      * @return the human extra cards
      */
     public final List<String> getHumanExtraCards() {
-        return humanExtraCards;
+        return this.humanExtraCards;
     }
 
     /**
@@ -151,6 +151,6 @@ public class QuestChallenge extends QuestEvent {
      * @return the card reward list
      */
     public final List<CardPrinted> getCardRewardList() {
-        return cardRewardList;
+        return this.cardRewardList;
     }
 }

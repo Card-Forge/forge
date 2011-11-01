@@ -14,7 +14,7 @@ public class QuestDuel extends QuestEvent {
      */
     public QuestDuel() {
         super();
-        eventType = "duel";
+        this.eventType = "duel";
     }
 
 }

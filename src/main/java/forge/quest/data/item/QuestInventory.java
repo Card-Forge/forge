@@ -18,7 +18,7 @@ import java.util.TreeSet;
 public class QuestInventory {
 
     /** The inventory. */
-    Map<String, QuestItemAbstract> inventory = new HashMap<String, QuestItemAbstract>();
+    private Map<String, QuestItemAbstract> inventory = new HashMap<String, QuestItemAbstract>();
 
     /**
      * <p>
@@ -26,9 +26,9 @@ public class QuestInventory {
      * </p>
      */
     public QuestInventory() {
-        Set<QuestItemAbstract> allItems = getAllItems();
-        for (QuestItemAbstract item : allItems) {
-            inventory.put(item.getName(), item);
+        final Set<QuestItemAbstract> allItems = QuestInventory.getAllItems();
+        for (final QuestItemAbstract item : allItems) {
+            this.inventory.put(item.getName(), item);
         }
     }
 
@@ -42,7 +42,7 @@ public class QuestInventory {
      * @return a boolean.
      */
     public final boolean hasItem(final String itemName) {
-        return inventory.containsKey(itemName) && inventory.get(itemName).getLevel() > 0;
+        return this.inventory.containsKey(itemName) && (this.inventory.get(itemName).getLevel() > 0);
     }
 
     /**
@@ -54,7 +54,7 @@ public class QuestInventory {
      *            a {@link forge.quest.data.item.QuestItemAbstract} object.
      */
     public final void addItem(final QuestItemAbstract item) {
-        inventory.put(item.getName(), item);
+        this.inventory.put(item.getName(), item);
     }
 
     /**
@@ -67,7 +67,7 @@ public class QuestInventory {
      * @return a int.
      */
     public final int getItemLevel(final String itemName) {
-        QuestItemAbstract item = inventory.get(itemName);
+        final QuestItemAbstract item = this.inventory.get(itemName);
         if (item == null) {
             return 0;
         }
@@ -85,7 +85,7 @@ public class QuestInventory {
      *            a int.
      */
     public final void setItemLevel(final String itemName, final int level) {
-        inventory.get(itemName).setLevel(level);
+        this.inventory.get(itemName).setLevel(level);
     }
 
     /**
@@ -96,7 +96,7 @@ public class QuestInventory {
      * @return a {@link java.util.Set} object.
      */
     private static Set<QuestItemAbstract> getAllItems() {
-        SortedSet<QuestItemAbstract> set = new TreeSet<QuestItemAbstract>();
+        final SortedSet<QuestItemAbstract> set = new TreeSet<QuestItemAbstract>();
 
         set.add(new QuestItemElixir());
         set.add(new QuestItemEstates());
@@ -117,9 +117,9 @@ public class QuestInventory {
      * @return a {@link java.lang.Object} object.
      */
     private Object readResolve() {
-        for (QuestItemAbstract item : getAllItems()) {
-            if (!inventory.containsKey(item.getName())) {
-                inventory.put(item.getName(), item);
+        for (final QuestItemAbstract item : QuestInventory.getAllItems()) {
+            if (!this.inventory.containsKey(item.getName())) {
+                this.inventory.put(item.getName(), item);
             }
         }
         return this;
@@ -133,7 +133,7 @@ public class QuestInventory {
      * @return a {@link java.util.Collection} object.
      */
     public Collection<QuestItemAbstract> getItems() {
-        return inventory.values();
+        return this.inventory.values();
     }
 
     /**
@@ -145,7 +145,7 @@ public class QuestInventory {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.quest.data.item.QuestItemAbstract} object.
      */
-    public QuestItemAbstract getItem(String itemName) {
-        return inventory.get(itemName);
+    public QuestItemAbstract getItem(final String itemName) {
+        return this.inventory.get(itemName);
     }
 }

@@ -20,9 +20,9 @@ import forge.AllZone;
 public class QuestStallManager {
 
     /** Constant <code>stalls</code>. */
-    static Map<String, QuestStallDefinition> stalls;
+    private static Map<String, QuestStallDefinition> stalls;
     /** Constant <code>items</code>. */
-    static Map<String, SortedSet<QuestStallPurchasable>> items;
+    private static Map<String, SortedSet<QuestStallPurchasable>> items;
 
     /**
      * <p>
@@ -30,24 +30,24 @@ public class QuestStallManager {
      * </p>
      */
     public static void buildStalls() {
-        stalls = new HashMap<String, QuestStallDefinition>();
-        stalls.put(ALCHEMIST, new QuestStallDefinition(ALCHEMIST, "Alchemist",
-                "The walls of this alchemist's stall are covered with shelves with potions, oils, "
+        QuestStallManager.stalls = new HashMap<String, QuestStallDefinition>();
+        QuestStallManager.stalls.put(QuestStallManager.ALCHEMIST, new QuestStallDefinition(QuestStallManager.ALCHEMIST,
+                "Alchemist", "The walls of this alchemist's stall are covered with shelves with potions, oils, "
                         + "powders, poultices and elixirs, each meticulously labeled.", "BottlesIconSmall.png"));
-        stalls.put(BANKER, new QuestStallDefinition(BANKER, "Banker",
-                "A large book large enough to be seen from the outside rests on the Banker's desk.",
+        QuestStallManager.stalls.put(QuestStallManager.BANKER, new QuestStallDefinition(QuestStallManager.BANKER,
+                "Banker", "A large book large enough to be seen from the outside rests on the Banker's desk.",
                 "CoinIconSmall.png"));
-        stalls.put(BOOKSTORE, new QuestStallDefinition(BOOKSTORE, "Bookstore",
-                "Tomes of different sizes are stacked in man-high towers.", "BookIconSmall.png"));
-        stalls.put(GEAR, new QuestStallDefinition(GEAR, "Adventuring Gear",
+        QuestStallManager.stalls.put(QuestStallManager.BOOKSTORE, new QuestStallDefinition(QuestStallManager.BOOKSTORE,
+                "Bookstore", "Tomes of different sizes are stacked in man-high towers.", "BookIconSmall.png"));
+        QuestStallManager.stalls.put(QuestStallManager.GEAR, new QuestStallDefinition(QuestStallManager.GEAR,
+                "Adventuring Gear",
                 "This adventurer's market has a tool for every need ... or so the plaque on the wall claims.",
                 "GearIconSmall.png"));
-        stalls.put(NURSERY,
-                new QuestStallDefinition(NURSERY, "Nursery",
-                        "The smells of the one hundred and one different plants forms a unique fragrance.",
-                        "LeafIconSmall.png"));
-        stalls.put(PET_SHOP, new QuestStallDefinition(PET_SHOP, "Pet Shop",
-                "This large stall echoes with a multitude of animal noises.", "FoxIconSmall.png"));
+        QuestStallManager.stalls.put(QuestStallManager.NURSERY, new QuestStallDefinition(QuestStallManager.NURSERY,
+                "Nursery", "The smells of the one hundred and one different plants forms a unique fragrance.",
+                "LeafIconSmall.png"));
+        QuestStallManager.stalls.put(QuestStallManager.PET_SHOP, new QuestStallDefinition(QuestStallManager.PET_SHOP,
+                "Pet Shop", "This large stall echoes with a multitude of animal noises.", "FoxIconSmall.png"));
     }
 
     /**
@@ -58,13 +58,13 @@ public class QuestStallManager {
      * @return a {@link java.util.List} object.
      */
     public static List<String> getStallNames() {
-        List<String> ret = new ArrayList<String>();
-        ret.add(ALCHEMIST);
-        ret.add(BANKER);
-        ret.add(BOOKSTORE);
-        ret.add(GEAR);
-        ret.add(NURSERY);
-        ret.add(PET_SHOP);
+        final List<String> ret = new ArrayList<String>();
+        ret.add(QuestStallManager.ALCHEMIST);
+        ret.add(QuestStallManager.BANKER);
+        ret.add(QuestStallManager.BOOKSTORE);
+        ret.add(QuestStallManager.GEAR);
+        ret.add(QuestStallManager.NURSERY);
+        ret.add(QuestStallManager.PET_SHOP);
         return ret;
     }
 
@@ -78,11 +78,11 @@ public class QuestStallManager {
      * @return a {@link forge.quest.data.bazaar.QuestStallDefinition} object.
      */
     public static QuestStallDefinition getStall(final String stallName) {
-        if (stalls == null) {
-            buildStalls();
+        if (QuestStallManager.stalls == null) {
+            QuestStallManager.buildStalls();
         }
 
-        return stalls.get(stallName);
+        return QuestStallManager.stalls.get(stallName);
     }
 
     /**
@@ -91,19 +91,19 @@ public class QuestStallManager {
      * </p>
      */
     public static void buildItems() {
-        SortedSet<QuestStallPurchasable> itemSet = new TreeSet<QuestStallPurchasable>();
+        final SortedSet<QuestStallPurchasable> itemSet = new TreeSet<QuestStallPurchasable>();
 
         itemSet.addAll(AllZone.getQuestData().getInventory().getItems());
         itemSet.addAll(AllZone.getQuestData().getPetManager().getPetsAndPlants());
 
-        items = new HashMap<String, SortedSet<QuestStallPurchasable>>();
+        QuestStallManager.items = new HashMap<String, SortedSet<QuestStallPurchasable>>();
 
-        for (String stallName : getStallNames()) {
-            items.put(stallName, new TreeSet<QuestStallPurchasable>());
+        for (final String stallName : QuestStallManager.getStallNames()) {
+            QuestStallManager.items.put(stallName, new TreeSet<QuestStallPurchasable>());
         }
 
-        for (QuestStallPurchasable purchasable : itemSet) {
-            items.get(purchasable.getStallName()).add(purchasable);
+        for (final QuestStallPurchasable purchasable : itemSet) {
+            QuestStallManager.items.get(purchasable.getStallName()).add(purchasable);
         }
 
     }
@@ -118,13 +118,13 @@ public class QuestStallManager {
      * @return a {@link java.util.List} object.
      */
     public static List<QuestStallPurchasable> getItems(final String stallName) {
-        if (items == null) {
-            buildItems();
+        if (QuestStallManager.items == null) {
+            QuestStallManager.buildItems();
         }
 
-        List<QuestStallPurchasable> ret = new ArrayList<QuestStallPurchasable>();
+        final List<QuestStallPurchasable> ret = new ArrayList<QuestStallPurchasable>();
 
-        for (QuestStallPurchasable purchasable : items.get(stallName)) {
+        for (final QuestStallPurchasable purchasable : QuestStallManager.items.get(stallName)) {
             if (purchasable.isAvailableForPurchase()) {
                 ret.add(purchasable);
             }

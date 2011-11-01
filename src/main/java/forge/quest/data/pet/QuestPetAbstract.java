@@ -16,11 +16,11 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
 public abstract class QuestPetAbstract implements QuestStallPurchasable {
 
     /** The level. */
-    int level;
-    private int maxLevel;
+    private int level;
+    private final int maxLevel;
     // transient here ?
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     /**
      * <p>
@@ -47,8 +47,9 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a int.
      */
+    @Override
     public final int getPrice() {
-        return getAllUpgradePrices()[level];
+        return this.getAllUpgradePrices()[this.level];
     }
 
     /**
@@ -68,7 +69,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getUpgradeDescription() {
-        return getAllUpgradeDescriptions()[level];
+        return this.getAllUpgradeDescriptions()[this.level];
     }
 
     /**
@@ -87,8 +88,9 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String getImageName() {
-        return getAllImageNames()[level];
+        return this.getAllImageNames()[this.level];
     }
 
     /**
@@ -108,7 +110,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getStats() {
-        return getAllStats()[level];
+        return this.getAllStats()[this.level];
     }
 
     /**
@@ -119,7 +121,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getUpgradedStats() {
-        return getAllStats()[level + 1];
+        return this.getAllStats()[this.level + 1];
     }
 
     /**
@@ -130,7 +132,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     public final int getLevel() {
-        return level;
+        return this.level;
     }
 
     /**
@@ -139,8 +141,8 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * </p>
      */
     public final void incrementLevel() {
-        if (level < maxLevel) {
-            level++;
+        if (this.level < this.maxLevel) {
+            this.level++;
         }
     }
 
@@ -152,7 +154,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     public final int getMaxLevel() {
-        return maxLevel;
+        return this.maxLevel;
     }
 
     /**
@@ -192,9 +194,11 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String getPurchaseDescription() {
-        return "<em>" + getDescription() + "</em><br>" + getUpgradeDescription() + "<br><br><u>Current stats:</u> "
-                + getStats() + "<br><u>Upgraded stats:</u> " + getUpgradedStats();
+        return "<em>" + this.getDescription() + "</em><br>" + this.getUpgradeDescription()
+                + "<br><br><u>Current stats:</u> " + this.getStats() + "<br><u>Upgraded stats:</u> "
+                + this.getUpgradedStats();
 
     }
 
@@ -206,7 +210,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -217,18 +221,19 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return name;
+        return this.name;
     }
 
     /** {@inheritDoc} */
+    @Override
     public final int compareTo(final Object o) {
-        return name.compareTo(o.toString());
+        return this.name.compareTo(o.toString());
     }
 
     /**
@@ -238,8 +243,9 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String getPurchaseName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -249,6 +255,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public String getStallName() {
         return QuestStallManager.PET_SHOP;
     }
@@ -260,8 +267,9 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return a boolean.
      */
+    @Override
     public boolean isAvailableForPurchase() {
-        QuestPetAbstract pet = AllZone.getQuestData().getPetManager().getPet(name);
+        final QuestPetAbstract pet = AllZone.getQuestData().getPetManager().getPet(this.name);
         if (pet == null) {
             return true;
         }
@@ -273,7 +281,8 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * onPurchase.
      * </p>
      */
+    @Override
     public void onPurchase() {
-        AllZone.getQuestData().getPetManager().addPetLevel(name);
+        AllZone.getQuestData().getPetManager().addPetLevel(this.name);
     }
 }

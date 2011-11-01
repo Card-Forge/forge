@@ -57,32 +57,32 @@ public class QuestEventManager {
         List<String> contents;
         QuestEvent tempEvent;
 
-        File file = ForgeProps.getFile(NewConstants.Quest.DECKS);
+        final File file = ForgeProps.getFile(NewConstants.Quest.DECKS);
 
-        DeckManager manager = new DeckManager(file);
+        final DeckManager manager = new DeckManager(file);
 
-        File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
+        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
 
-        for (File f : allFiles) {
+        for (final File f : allFiles) {
             contents = FileUtil.readFile(f);
 
             if (contents.get(0).trim().equals("[quest]")) {
                 tempEvent = new QuestChallenge();
-                assembleChallengeUniquedata(contents, (QuestChallenge) tempEvent);
-                allChallenges.add((QuestChallenge) tempEvent);
+                this.assembleChallengeUniquedata(contents, (QuestChallenge) tempEvent);
+                this.allChallenges.add((QuestChallenge) tempEvent);
             } // End if([quest])
             else {
                 tempEvent = new QuestDuel();
-                assembleDuelUniquedata(contents, (QuestDuel) tempEvent);
-                allDuels.add((QuestDuel) tempEvent);
+                this.assembleDuelUniquedata(contents, (QuestDuel) tempEvent);
+                this.allDuels.add((QuestDuel) tempEvent);
             }
 
             // Assemble metadata (may not be necessary later) and deck object.
-            assembleEventMetadata(contents, tempEvent);
+            this.assembleEventMetadata(contents, tempEvent);
             tempEvent.eventDeck = manager.getDeck(tempEvent.getName());
         } // End for(allFiles)
 
-        assembleDuelDifficultyLists();
+        this.assembleDuelDifficultyLists();
 
     } // End assembleAllEvents()
 
@@ -99,7 +99,7 @@ public class QuestEventManager {
         int eqpos;
         String key, value;
 
-        for (String s : contents) {
+        for (final String s : contents) {
             if (s.equals("[metadata]")) {
                 break;
             }
@@ -137,7 +137,7 @@ public class QuestEventManager {
         String key, value;
 
         // Unique properties
-        for (String s : contents) {
+        for (final String s : contents) {
             if (s.equals("[metadata]")) {
                 break;
             }
@@ -168,10 +168,10 @@ public class QuestEventManager {
             }
             // Human extra card list assembled here.
             else if (key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
-                String[] names = value.split("\\|");
-                List<String> templist = new ArrayList<String>();
+                final String[] names = value.split("\\|");
+                final List<String> templist = new ArrayList<String>();
 
-                for (String n : names) {
+                for (final String n : names) {
                     templist.add(n);
                 }
 
@@ -179,10 +179,10 @@ public class QuestEventManager {
             }
             // AI extra card list assembled here.
             else if (key.equalsIgnoreCase("AIExtras") && !value.equals("")) {
-                String[] names = value.split("\\|");
-                List<String> templist = new ArrayList<String>();
+                final String[] names = value.split("\\|");
+                final List<String> templist = new ArrayList<String>();
 
-                for (String n : names) {
+                for (final String n : names) {
                     templist.add(n);
                 }
 
@@ -274,22 +274,22 @@ public class QuestEventManager {
      * Assemble duel deck difficulty lists
      */
     private void assembleDuelDifficultyLists() {
-        easyAIduels = new ArrayList<QuestDuel>();
-        mediumAIduels = new ArrayList<QuestDuel>();
-        hardAIduels = new ArrayList<QuestDuel>();
-        veryHardAIduels = new ArrayList<QuestDuel>();
+        this.easyAIduels = new ArrayList<QuestDuel>();
+        this.mediumAIduels = new ArrayList<QuestDuel>();
+        this.hardAIduels = new ArrayList<QuestDuel>();
+        this.veryHardAIduels = new ArrayList<QuestDuel>();
         String s;
 
-        for (QuestDuel qd : allDuels) {
+        for (final QuestDuel qd : this.allDuels) {
             s = qd.getDifficulty();
             if (s.equalsIgnoreCase("easy")) {
-                easyAIduels.add(qd);
+                this.easyAIduels.add(qd);
             } else if (s.equalsIgnoreCase("medium")) {
-                mediumAIduels.add(qd);
+                this.mediumAIduels.add(qd);
             } else if (s.equalsIgnoreCase("hard")) {
-                hardAIduels.add(qd);
+                this.hardAIduels.add(qd);
             } else if (s.equalsIgnoreCase("very hard")) {
-                veryHardAIduels.add(qd);
+                this.veryHardAIduels.add(qd);
             }
         }
     }
@@ -309,7 +309,7 @@ public class QuestEventManager {
      * @return a {@link java.lang.String} object.
      */
     private static QuestDuel getDuelOpponentByNumber(final List<QuestDuel> aiDeck, final int n) {
-        List<QuestDuel> deckListCopy = new ArrayList<QuestDuel>(aiDeck);
+        final List<QuestDuel> deckListCopy = new ArrayList<QuestDuel>(aiDeck);
         Collections.shuffle(deckListCopy, new Random(AllZone.getQuestData().getRandomSeed()));
 
         return deckListCopy.get(n);
@@ -326,7 +326,7 @@ public class QuestEventManager {
      * @return
      */
     private QuestChallenge getChallengeEventByNumber(final int n) {
-        for (QuestChallenge qc : allChallenges) {
+        for (final QuestChallenge qc : this.allChallenges) {
             if (qc.getId() == n) {
                 return qc;
             }
@@ -344,37 +344,37 @@ public class QuestEventManager {
      */
     public final List<QuestDuel> generateDuels() {
 
-        int index = AllZone.getQuestData().getDifficultyIndex();
-        List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
+        final int index = AllZone.getQuestData().getDifficultyIndex();
+        final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
 
         if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForMediumAI(index)) {
-            duelOpponents.add(getDuelOpponentByNumber(easyAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(easyAIduels, 1));
-            duelOpponents.add(getDuelOpponentByNumber(easyAIduels, 2));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 2));
         } else if (AllZone.getQuestData().getWin() == QuestPreferences.getWinsForMediumAI(index)) {
-            duelOpponents.add(getDuelOpponentByNumber(easyAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
         } else if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForHardAI(index)) {
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 1));
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 2));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 2));
         }
 
         else if (AllZone.getQuestData().getWin() == QuestPreferences.getWinsForHardAI(index)) {
-            duelOpponents.add(getDuelOpponentByNumber(mediumAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
         }
 
         else if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForVeryHardAI(index)) {
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 2));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 2));
         } else {
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 0));
-            duelOpponents.add(getDuelOpponentByNumber(hardAIduels, 1));
-            duelOpponents.add(getDuelOpponentByNumber(veryHardAIduels, 2));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.veryHardAIduels, 2));
         }
 
         return duelOpponents;
@@ -390,9 +390,9 @@ public class QuestEventManager {
      * @return a {@link java.util.List} object.
      */
     public final List<QuestChallenge> generateChallenges() {
-        forge.quest.data.QuestData questData = AllZone.getQuestData();
+        final forge.quest.data.QuestData questData = AllZone.getQuestData();
 
-        List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
+        final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
 
         int maxChallenges = questData.getWin() / 10;
         if (maxChallenges > 5) {
@@ -400,15 +400,14 @@ public class QuestEventManager {
         }
 
         // Generate IDs as needed.
-        if (questData.getAvailableChallenges() == null || questData.getAvailableChallenges().size() < maxChallenges) {
+        if ((questData.getAvailableChallenges() == null) || (questData.getAvailableChallenges().size() < maxChallenges)) {
 
-            List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
-            List<Integer> availableChallengeIds = new ArrayList<Integer>();
+            final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
+            final List<Integer> availableChallengeIds = new ArrayList<Integer>();
 
-            for (QuestChallenge qc : allChallenges) {
-                if (qc.getWinsReqd() <= questData.getWin()
-                        && !questData.getCompletedChallenges().contains(qc.getId()))
-                {
+            for (final QuestChallenge qc : this.allChallenges) {
+                if ((qc.getWinsReqd() <= questData.getWin())
+                        && !questData.getCompletedChallenges().contains(qc.getId())) {
                     unlockedChallengeIds.add(qc.getId());
                 }
             }
@@ -426,8 +425,8 @@ public class QuestEventManager {
         }
 
         // Finally, pull challenge events from available IDs and return.
-        for (int i : questData.getAvailableChallenges()) {
-            challengeOpponents.add(getChallengeEventByNumber(i));
+        for (final int i : questData.getAvailableChallenges()) {
+            challengeOpponents.add(this.getChallengeEventByNumber(i));
         }
 
         return challengeOpponents;
