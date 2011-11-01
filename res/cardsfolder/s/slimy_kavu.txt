@@ -1,0 +1,10 @@
+Name:Slimy Kavu
+ManaCost:2 R
+Types:Creature Kavu
+Text:no text
+PT:2/2
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True | SpellDescription$ Target land becomes a Swamp until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slimy_kavu.jpg
+End
